@@ -59,7 +59,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "d3d9test", "d3d9test\d3d9te
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D3DVisualizator", "D3DVisualizator\D3DVisualizator.vcproj", "{F564580A-A60A-4149-9416-60BAABFD1005}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Visualizator", "D3DVisualizator\D3DVisualizator.vcproj", "{F564580A-A60A-4149-9416-60BAABFD1005}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -174,7 +174,6 @@ Global
 		{C1938679-4A1C-4A15-9121-1911FD6839B5}.Release.Build.0 = Release|Win32
 		{C1938679-4A1C-4A15-9121-1911FD6839B5}.Test.ActiveCfg = Release|Win32
 		{C1938679-4A1C-4A15-9121-1911FD6839B5}.VisualizationDebug.ActiveCfg = Debug|Win32
-		{C1938679-4A1C-4A15-9121-1911FD6839B5}.VisualizationDebug.Build.0 = Debug|Win32
 		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.Debug.ActiveCfg = Debug|Win32
 		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.DebugGUI.ActiveCfg = Debug|Win32
 		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.FullDebug.ActiveCfg = Debug|Win32

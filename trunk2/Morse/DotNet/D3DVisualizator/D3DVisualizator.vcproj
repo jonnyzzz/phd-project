@@ -2,7 +2,7 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="D3DVisualizator"
+	Name="Visualizator"
 	ProjectGUID="{F564580A-A60A-4149-9416-60BAABFD1005}"
 	Keyword="Win32Proj">
 	<Platforms>
@@ -124,6 +124,15 @@
 				RelativePath=".\DrawableSetIterator.cpp">
 			</File>
 			<File
+				RelativePath=".\GLKernel.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="2"/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -163,6 +172,9 @@
 			</File>
 			<File
 				RelativePath=".\DrawableSetIterator.h">
+			</File>
+			<File
+				RelativePath=".\GLKernel.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
