@@ -53,7 +53,7 @@ STDMETHODIMP CBoxMethodAction::SetProgressBarInfo(IProgressBarInfo* info) {
 
 STDMETHODIMP CBoxMethodAction::CanDo(IResultSet* in, VARIANT_BOOL* out) {
 	*out = (GraphResultUtil::ContainsOnlyType<IGraphResult>(in) && 
-		GraphResultUtil::ContainsMetadataOnly<ISymbolicImageMetadata>(in)) ?TRUE:FALSE;
+		GraphResultUtil::ContainsMetadataOnly<ISymbolicImageMetadata>(in)) ?VARIANT_TRUE:VARIANT_FALSE;
 
 	return S_OK;
 }
@@ -75,7 +75,7 @@ STDMETHODIMP CBoxMethodAction::Do(IResultSet* in, IResultSet** out) {
 	VARIANT_BOOL canDo;
 	CanDo(in, &canDo);
 
-	ATLASSERT(canDo == TRUE);
+	ATLASSERT(canDo == VARIANT_TRUE);
 
 	ProgressBarNotificationAdapter pinfo(info);
 
@@ -88,10 +88,12 @@ STDMETHODIMP CBoxMethodAction::Do(IResultSet* in, IResultSet** out) {
 	HRESULT hr = parameters->UseDerivate(&canDo);
 	ATLASSERT(SUCCEEDED(hr));
 
-	if (canDo == TRUE) {
+	if (canDo == VARIANT_TRUE) {
+		cout<<"Using derivate\n";
 		hr = function->GetSystemFunctionDerivate((void**)&func);
 		ATLASSERT(SUCCEEDED(hr));
 	} else {
+		cout<<"Not using derivate\n";
 		hr = function->GetSystemFunction((void**)&func);
 		ATLASSERT(SUCCEEDED(hr));
 	}

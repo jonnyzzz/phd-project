@@ -32,7 +32,7 @@ namespace guiControls.Grid.Rows
 			{
 				try
 				{
-					double d = Double.Parse(value);
+					double d = Double.Parse(value.Replace('.',','));
 					data[index] = d;
 				} 
 				catch (FormatException)

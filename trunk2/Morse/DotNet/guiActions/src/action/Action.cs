@@ -24,6 +24,17 @@ namespace guiActions.Actions
 		
 		protected abstract ParametersControl GetParametersControlInternal(KernelNode node);
 
+		protected void SetFakeControl(ParametersControl control)
+		{
+			if (cachedParametersControl != null) 
+			{
+				cachedParametersControl.DataSubmitted -= new ParametersSubmitted(DataSubmitted);
+			}
+			cachedParametersControl = control;
+			cachedParametersControl.DataSubmitted += new ParametersSubmitted(DataSubmitted);
+			DataSubmitted(cachedParametersControl.CachedParameters);
+		}
+
 		public ParametersControl GetParametesControl(KernelNode node)
 		{
 			if (cachedParametersControl == null)
@@ -36,6 +47,7 @@ namespace guiActions.Actions
 
 		private void DataSubmitted(IParameters parameters)
 		{
+			if (parameters == null) throw new ActionException("Parameters was NULL");
 			cachedParameters = parameters;
 		}
 	}

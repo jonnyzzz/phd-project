@@ -24,6 +24,10 @@
 		<action name="IMinimalLoopLocalizationAction" isLeaf="true">
 			<constaint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
 		</action>
+		
+		<action name="IIsolatedSetAction" isLeaf="true">
+			<constaint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+		</action>
     </actions>
     
     <names>

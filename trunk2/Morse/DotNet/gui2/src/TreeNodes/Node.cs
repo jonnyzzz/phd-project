@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using gui2.ActionPerformer;
 using gui2.src.TreeNodes;
 using gui2.src.TreeNodes.MenuItems;
+using gui2.TreeNodes.MenuItems;
 using guiActions.Actions;
 using guiActions.src.filter;
 using guiControls.TreeControl;
@@ -44,6 +45,9 @@ namespace gui2.TreeNodes
 			if (group.Contains(this))
 			{
 				return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Create Group", new Click(CreateGroup)));
+			} else if (this.Nodes.Count > 0)
+			{
+				return MergeWithDelimiter(GetMenuItemsActions(), new SelectChildsMenuItem("Select all childs", this));
 			} else
 			{
 				return GetMenuItemsActions();

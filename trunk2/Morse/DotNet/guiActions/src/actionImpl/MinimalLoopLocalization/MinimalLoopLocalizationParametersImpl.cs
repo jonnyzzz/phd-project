@@ -17,7 +17,7 @@ namespace guiActions.actionImpl.MinimalLoopLocalization
 
 		public double GetCoordinate(int id)
 		{
-			throw new NotImplementedException();
+			return coordinates[id];
 		}
 	}
 }

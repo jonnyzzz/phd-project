@@ -3,6 +3,12 @@
 #include "../graph/graph.h"
 #include "../graph/graphUtil.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 
 MinimalLoopFinder::MinimalLoopFinder() {
 	InitHeap();
@@ -12,9 +18,18 @@ MinimalLoopFinder::~MinimalLoopFinder() {
 	DisposeHeap();
 }
 
+
 Graph* MinimalLoopFinder::FindMinimalLoop(Graph* graph, Node* node) {
 	Graph* result = graph->copyCoordinates();
-	
+
+	FindMinimalLoop(graph, node, result);
+
+	return result;
+}
+
+void MinimalLoopFinder::FindMinimalLoop(Graph* graph, Node* node, Graph* result) {
+
+
 	NodeExList list1;
 	NodeExList list2;
 
@@ -34,6 +49,7 @@ Graph* MinimalLoopFinder::FindMinimalLoop(Graph* graph, Node* node) {
 
 		//if there is 1 result -> it's loop
 		if (nodeEx->node == node) {
+			cout<<"Contour result found! \n";
 			while (nodeEx->parent != NULL) {
 				result->browseTo(nodeEx->node);
 				nodeEx = nodeEx->parent;
@@ -41,7 +57,6 @@ Graph* MinimalLoopFinder::FindMinimalLoop(Graph* graph, Node* node) {
 		} else ASSERT(false);
 	}
 
-	return result;
 }
 
 
@@ -92,7 +107,7 @@ MinimalLoopFinder::NodeEx* MinimalLoopFinder::newNodeEx(Node* node, NodeEx* pare
 		InitHeap();
 	}
 
-	NodeEx* nodeEx = new(current++) NodeEx;
+	NodeEx* nodeEx = current++; //!No cunstructor will called!
 	nodeEx->node = node;
 	nodeEx->parent = parent;
 

@@ -52,7 +52,7 @@ STDMETHODIMP CTarjanAction::SetProgressBarInfo(IProgressBarInfo* info) {
 
 STDMETHODIMP CTarjanAction::CanDo(IResultSet* in, VARIANT_BOOL* out) {
 	
-	*out = GraphResultUtil::ContainsOnlyType<IGraphResult>(in)?TRUE:FALSE;
+	*out = GraphResultUtil::ContainsOnlyType<IGraphResult>(in)?VARIANT_TRUE:VARIANT_FALSE;
 
 	return S_OK;
 }
@@ -62,14 +62,23 @@ STDMETHODIMP CTarjanAction::Do(IResultSet* in, IResultSet** out) {
 	VARIANT_BOOL canDo;
 	CanDo(in, &canDo);
 
-	if (canDo != TRUE) return E_INVALIDARG;
+	if (canDo != VARIANT_TRUE) return E_INVALIDARG;
 	
 	HRESULT hr = parameters->NeedEdgeResolve(&canDo);
 	ATLASSERT(SUCCEEDED(hr));
 
-	bool needEdgeResolve = (canDo == TRUE);
+	cout<<"CanDo = "<<canDo<<"\n";
+
+	bool needEdgeResolve = (canDo == VARIANT_TRUE);
 
 	ProgressBarNotificationAdapter pinfo(info);
+
+
+	if (needEdgeResolve) {
+		cout<<"Start with Edge Resolve\n";
+	} else {
+		cout<<"Start without Edge Resolve\n";
+	}
 
 	TarjanProcess ps(needEdgeResolve, &pinfo);
 

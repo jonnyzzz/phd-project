@@ -76,7 +76,9 @@ STDMETHODIMP CMinimalLoopLocalizationAction::Do(IResultSet* input, IResultSet** 
 
 	JDouble* data = new JDouble[dimension];
 	for (int i=0; i<dimension; i++) {
-		parameters->GetCoordinate(i, &data[i]);
+		HRESULT hr = parameters->GetCoordinate(i, &data[i]);
+		ATLASSERT(SUCCEEDED(hr));
+		cout<<"data["<<i<<"] = "<<data[i]<<"\n";
 	}
 	ProgressBarNotificationAdapter pinfo(this->pinfo);
 
@@ -88,6 +90,9 @@ STDMETHODIMP CMinimalLoopLocalizationAction::Do(IResultSet* input, IResultSet** 
 	GraphResultUtil::PerformProcess(&ps, input, false, metadata, output);
 
 	ATLASSERT(*output != NULL);
+
+
+	delete[] data;
 
 	return S_OK;
 }

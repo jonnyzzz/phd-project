@@ -4,6 +4,7 @@ using guiControls.Control;
 
 namespace guiControls.Grid
 {
+	public delegate void ContentChanged();
 	public class ExGrid : System.Windows.Forms.UserControl, ISubmittable
 	{
 		private System.Windows.Forms.DataGrid grid;
@@ -11,6 +12,8 @@ namespace guiControls.Grid
 
 		private IExGridRow[] rows;
 		private int dimension;
+
+		public event ContentChanged DataChanged;
 
 		public ExGrid() : this(0)
 		{
@@ -21,6 +24,7 @@ namespace guiControls.Grid
 			this.rows = rows;
 			this.dimension = dimension;
 			InitializeComponent();
+			grid.ChangeUICues += new System.Windows.Forms.UICuesEventHandler(grid_ChangeUICues);
 			FillGrid();
 		}
 
@@ -163,6 +167,14 @@ namespace guiControls.Grid
 						info[j] = row[j+1].ToString();
 					}
 				}
+			}
+		}
+
+		private void grid_ChangeUICues(object sender, System.Windows.Forms.UICuesEventArgs e)
+		{
+			if (DataChanged != null)
+			{
+				DataChanged();
 			}
 		}
 	}

@@ -2,6 +2,12 @@
 #include ".\minimalloopfinderprocess.h"
 #include "minimalLoopFinder.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 
 MinimalLoopFinderProcess::MinimalLoopFinderProcess(double* coor, int dimension, ProgressBarInfo* pinfo) : AbstractProcess(pinfo)
 {
@@ -9,6 +15,7 @@ MinimalLoopFinderProcess::MinimalLoopFinderProcess(double* coor, int dimension, 
 	this->coord = new JDouble[dimension];
 	this->cell = new JInt[dimension];
 	memcpy(this->coord, coor, sizeof(JDouble)*dimension);
+	graph_result = NULL;
 }
 
 MinimalLoopFinderProcess::~MinimalLoopFinderProcess(void)
@@ -20,7 +27,11 @@ MinimalLoopFinderProcess::~MinimalLoopFinderProcess(void)
 
 
 GraphSet MinimalLoopFinderProcess::results() {
-	return graphSet;
+	if (graph_result != NULL && graph_result->getNumberOfNodes() != 0 ) {
+		return GraphSet(graph_result);
+	} else {
+		return GraphSet();
+	}
 }
 
 
@@ -31,13 +42,17 @@ void MinimalLoopFinderProcess::processNextGraph(Graph* graph) {
 
 	Node* node = graph->findNode(cell);
 
+
+
 	if (node != NULL) {
+		cout<<"Node found in graph\n";
 		MinimalLoopFinder f;
-		Graph* result = f.FindMinimalLoop(graph, node);
-		if (result->getNumberOfNodes() == 0) {
-			delete result;
+		if (graph_result == NULL) {
+			graph_result = f.FindMinimalLoop(graph, node);
 		} else {
-			graphSet.AddGraph( result );
-		}
+			f.FindMinimalLoop(graph, node, graph_result);
+		}		
+	} else {
+		cout<<"Node not found in graph\n";
 	}
 }

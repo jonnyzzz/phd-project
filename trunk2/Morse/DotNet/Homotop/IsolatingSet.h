@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../cellImageBuilders/AbstractProcessExt.h"
+#include <list>
+using namespace std;
 
 
 class IsolatingSetProcess : public AbstractProcessExt
@@ -20,6 +22,6 @@ private:
 	typedef list<Node*> NodeList;
 
 private:
-	void processTaskList(NodeList& lst, Graph* graph);
-	void processNode(Node* node, NodeList& lst, Graph* graph);
+	bool processTaskList(NodeList* lst, Graph* graph);
+	bool processNode(Node* node, NodeList* lst, Graph* graph);
 };

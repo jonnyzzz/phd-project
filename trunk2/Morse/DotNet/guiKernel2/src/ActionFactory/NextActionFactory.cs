@@ -26,6 +26,21 @@ namespace guiKernel2.ActionFactory
 			ActionRef[] infos = FindActionRefs(node);
 			return CreateInstances(infos);
 		}
+
+		public ActionWrapper NextActionByName(KernelNode node, string name)
+		{
+			ActionRef info = this.actionResolver[name] as ActionRef;
+			if (info == null ) throw new ActionException("Action not found");
+
+			if (!info.Constraint.Mathes(node.Results)) throw new ActionException("Action can not be applied here");
+
+			return info.CreateInstance();
+		}
+
+		public ActionWrapper NextActionByName(KernelNode node, Type type)
+		{
+			return NextActionByName(node, type.Name);
+		}
 		
 
 		private ActionRef[] FindActionRefs(KernelNode node)

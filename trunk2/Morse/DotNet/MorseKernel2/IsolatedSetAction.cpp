@@ -62,7 +62,8 @@ STDMETHODIMP CIsolatedSetAction::Do(IResultSet* input, IResultSet** output) {
 
 
 	SmartInterface<IGraphResult> graphResult;
-	parameters->GetStartSet(&graphResult);
+	HRESULT hr = parameters->GetStartSet(&graphResult);
+	ATLASSERT(SUCCEEDED(hr));
 
 	GraphResultGraphIterator it(input);
 	ProgressBarNotificationAdapter pinfo(this->pinfo);

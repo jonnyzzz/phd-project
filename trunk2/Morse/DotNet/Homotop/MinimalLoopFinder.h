@@ -40,5 +40,6 @@ private:
 
 public:
 	Graph* FindMinimalLoop(Graph* graph, Node* node);
+	void FindMinimalLoop(Graph* graph, Node* node, Graph* output);
 
 };

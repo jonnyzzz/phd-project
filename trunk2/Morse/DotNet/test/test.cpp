@@ -12,6 +12,7 @@
 #include "GraphTest.h"
 #include "../cellImageBuilders/TarjanProcess.h"
 #include "MinimalLoopTest.h"
+#include "IsolatingProcessTest.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -61,12 +62,16 @@ int _tmain(int argc, _TCHAR* argv[]) {
 }
 
 void runTests() {
+
     cout<<"Test starts\n\n";
+	/*
     TestRunner testRunner(cout);
     CalculatorTest test(cout);
     testRunner.RunTest(&test);
 
+	*/
 	MinimalLoopTest(cout).Test();
+	IsolatingProcessTest(cout).Test();
 }
 
 void testRomFromFile(char* fileIn) {

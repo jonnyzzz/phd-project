@@ -13,7 +13,7 @@ public:
 	virtual void processNextGraph(Graph* graph);
 
 private:
-	GraphSet graphSet;
+	Graph* graph_result;
 	int dimension;
 	JDouble* coord;
 	JInt* cell;

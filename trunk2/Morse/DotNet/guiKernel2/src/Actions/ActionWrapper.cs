@@ -1,3 +1,4 @@
+using guiKernel2.Node;
 using MorseKernel2;
 
 namespace guiKernel2.Actions
@@ -39,6 +40,12 @@ namespace guiKernel2.Actions
 			get { return true; }
 		}
 		
+		public ResultSet Do(ResultSet input, ProgressBarInfo info)
+		{
+			return ResultSet.FromResultSet(Do(input.ToResultSet, info.GetProgressBarInfo(this)));
+		}
+
+
 		public IResultSet Do(IResultSet input, IProgressBarInfo progressBarInfo)
 		{
 			IParameters parameters = Parameters;

@@ -4,6 +4,14 @@
 #include <list>
 #include <algorithm>
 
+/* new(address_pointer) type does not supported by MFC
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+*/
+
 
 #define DUMPN(x) {cout<<#x" ";dumpNode(x);}
 

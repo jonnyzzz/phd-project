@@ -40,6 +40,7 @@ private:
 	bool hasDerivate;
 
 	JDouble* v0;
+	JDouble* vx0;
 
 protected:
 	void setApproximationCenter();

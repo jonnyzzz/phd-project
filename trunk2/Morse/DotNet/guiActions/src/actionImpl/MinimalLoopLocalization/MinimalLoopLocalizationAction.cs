@@ -18,10 +18,23 @@ namespace guiActions.actionImpl.MinimalLoopLocalization
 		{
 		}
 
+		private MinimalLoopLocalizationParameters parameters = null;
+		public void FakeControl(MinimalLoopLocalizationParameters control)
+		{
+			SetFakeControl(control);
+			parameters = control;
+		}
+
 		protected override ParametersControl GetParametersControlInternal(KernelNode node)
 		{
-			int dimension = ((IMinimalLoopLocalizationAction)Action).GetDimension(node.Results.ToResultSet);
-			return new MinimalLoopLocalizationParameters(dimension);
+			if (parameters == null) 
+			{
+				int dimension = ((IMinimalLoopLocalizationAction)Action).GetDimension(node.Results.ToResultSet);
+				return new MinimalLoopLocalizationParameters(dimension);
+			} else
+			{
+				return parameters;
+			}
 		}
 
 		protected override MorseKernel2.IAction CreateAction()

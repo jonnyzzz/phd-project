@@ -75,7 +75,7 @@ namespace guiActions.ActionImpl
 		{
 			exGrid.SubmitData();
 
-			return new BoxMethodParametersImpl(false, function.IFunction, data.Data );
+			return new BoxMethodParametersImpl(true, function.IFunction, data.Data );
 		}
 
 		public override string BoxCaption

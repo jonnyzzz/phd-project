@@ -154,6 +154,16 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "src\TextFields\CenteredTextBox.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TextFields\CenteredTextBox.resx"
+                    DependentUpon = "CenteredTextBox.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "src\TreeControl\ComputationNode.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

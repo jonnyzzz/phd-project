@@ -34,7 +34,7 @@ namespace guiControls.Grid.Rows
 			{
 				try
 				{
-					double v = Double.Parse(value);
+					double v = Double.Parse(value.Replace('.',','));
 					if (v < 0) throw new ExGridException("Value should be positive at col {0}", index);
 					if (v > 100) throw new ExGridException("Value should be lover than 100 at col {0}", index);
 					

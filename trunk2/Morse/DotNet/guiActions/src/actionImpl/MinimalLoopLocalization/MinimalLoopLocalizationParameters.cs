@@ -1,5 +1,5 @@
-using System;
 using guiActions.Parameters;
+using guiControls.Grid;
 using guiControls.Grid.Rows;
 using MorseKernel2;
 
@@ -10,19 +10,40 @@ namespace guiActions.actionImpl.MinimalLoopLocalization
 	/// </summary>
 	public class MinimalLoopLocalizationParameters : ParametersControl
 	{
-		private readonly int dimension;
 		private guiControls.Grid.ExGrid exGrid;
 		private System.ComponentModel.Container components = null;
 
 		private DoubleCoordinatesRow dataRow;
 
-		public MinimalLoopLocalizationParameters(int dimension)
+		public event ContentChanged DataChanged
 		{
-			this.dimension = dimension;
+			add
+			{
+				exGrid.DataChanged += value;
+			}
+			remove
+			{
+				exGrid.DataChanged -= value;
+			}
+		}
+
+
+		public MinimalLoopLocalizationParameters() : base()
+		{
 			InitializeComponent();
+		}
+
+		public MinimalLoopLocalizationParameters(int dimension) : this()
+		{
+			Initialize(dimension);
+		}
+
+
+		public void Initialize(int dimension)
+		{
 			dataRow = new DoubleCoordinatesRow("Point", dimension);
 
-			exGrid.SetRows(dimension, dataRow);
+			exGrid.SetRows(dimension, dataRow);			
 		}
 
 

@@ -253,6 +253,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\TreeNodes\MenuItems\SelectChildsMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\TreeNodes\MenuItems\TreeMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"

@@ -12,11 +12,13 @@ namespace guiActions.actionImpl.Tarjan
 
 		public TarjanParametersImpl(bool needResolve)
 		{
+			Logger.Logger.LogMessage("Tarjan Parameters [NeedResolve = {0} ]", needResolve);
 			this.needResolve = needResolve;
 		}
 
 		public bool NeedEdgeResolve()
 		{
+			Logger.Logger.LogMessage("Tarjan Parameters Call [NeedResolve = {0} ]", needResolve);
 			return needResolve;
 		}
 	}

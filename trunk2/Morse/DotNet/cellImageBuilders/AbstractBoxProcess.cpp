@@ -24,6 +24,7 @@ AbstractBoxProcess::AbstractBoxProcess(Graph* graph, ISystemFunction* function, 
 	this->dimension2 = dimension*dimension + dimension;
 
 	this->v0 = new JDouble[dimension2];
+	this->vx0 = new JDouble[dimension];
 
 	this->x0 = new JDouble[dimension+1];
 	this->b = new JInt[dimension+1];
@@ -51,6 +52,7 @@ AbstractBoxProcess::~AbstractBoxProcess(void)
 	delete[] eps;
 	delete[] factor;
 	delete[] v0;
+	delete[] vx0;
 }
 
 
@@ -172,8 +174,10 @@ void AbstractBoxProcess::vectorCopy(JDouble* from, JDouble* to) {
 
 void AbstractBoxProcess::setApproximationCenter() {
 	function->evaluate();
-	if (hasDerivate) {		
-		memcpy(output, v0, sizeof(JDouble)*dimension2);
+
+	if (hasDerivate) {	
+		memcpy(vx0, input, sizeof(JDouble)*dimension);
+		memcpy(v0, output, sizeof(JDouble)*dimension2);
 	}
 }
 
@@ -183,7 +187,7 @@ void AbstractBoxProcess::evaluate() {
 		for (int i=0; i<dimension; i++) {
 			JDouble t = v0[i];
 			for (int j=0; j<dimension; j++) {
-				t += v0[dimension + dimension*i + j]*input[j];
+				t += v0[dimension + dimension*i + j]*(input[j]-vx0[j]);
 			}
 			output[i] = t;
 		}
