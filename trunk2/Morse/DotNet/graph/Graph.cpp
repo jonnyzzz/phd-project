@@ -27,7 +27,7 @@ struct Node {
 	Node* next;
 
 	//possible to optimize    
-	char bits;
+	int bits;
 	//tarjans stuff
 	JInt label;  //tarjan markers
 	JInt number; //tarjan markers
@@ -327,6 +327,10 @@ Node* Graph::findNode(const JInt* cell) const{
 	return n;
 }
 
+Node* Graph::findNode(const Node* node) const {
+	return findNode(node->cell);
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 /////// relations
 ///////////////////////////////////////////////////////////////////////////////
@@ -352,6 +356,9 @@ Node* Graph::browseTo(const JInt* cell) {
 	}
 }
 
+Node* Graph::browseTo(const Node* node) {
+	return browseTo(node->cell);
+}
 
 Edge* Graph::browseTo(Node* from, Node* to) {
 	Edge* e = findEdge(from, to);
@@ -793,8 +800,12 @@ void saveGraphAsPoints(FileOutputStream& o, Graph* graph) {
 
 int Graph::registerFlag() {
 	flagCounter++;
-	ASSERT(flagCounter < 8); // bits in char
+	ASSERT(flagCounter < 31); // bits in char
 	return flagCounter;
+}
+
+void Graph::unregisterFlag(int flagID) {
+	
 }
 
 bool Graph::readFlag(Node* node, int flagID) {

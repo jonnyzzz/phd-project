@@ -26,13 +26,3 @@ int ISystemFunction::getDimension() {
 int ISystemFunction::getIteration() {
     return iterations;
 }
-
-
-void ISystemFunction::evaluateAsApproximationCenter() {
-	evaluate();
-}
-
-
-bool ISystemFunction::canApproximate() {
-	return false;
-}

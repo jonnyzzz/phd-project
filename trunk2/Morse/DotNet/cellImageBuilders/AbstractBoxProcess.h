@@ -23,16 +23,27 @@ protected:
 
 
 	void multiplyNode(Node* original, Graph* graph);
-	void processNode( Node* node, Graph* graph_result);
+	void processNode(Node* node, Graph* graph_result);
 
 	void vectorCopy(JDouble* from, JDouble* to);
 
 protected:
 	int dimension;
+	int dimension2;
 
 	ISystemFunction* function;
 	JDouble* input;
 	JDouble* output;
+
+
+private:
+	bool hasDerivate;
+
+	JDouble* v0;
+
+private:
+	void setApproximationCenter();
+	void evaluate();
 
 
 

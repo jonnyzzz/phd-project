@@ -43,7 +43,7 @@ public:
 	bool intersects(const JDouble* min, const JDouble* max) const;
 	bool intersects(const JInt* cell) const;
 
-	bool equals(CoordinateSystem* cs) const;
+	bool equals(const CoordinateSystem* cs) const;
 
 
 protected:

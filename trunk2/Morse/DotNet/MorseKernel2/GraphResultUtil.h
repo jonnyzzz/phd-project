@@ -2,8 +2,10 @@
 #include "ResultSet.h"
 #include "ResultSetIterator.h"
 #include "ResultMetadata.h"
+#include "GraphResult.h"
 #include "SmartInterface.h"
 class AbstractProcess;
+class Graph;
 
 class GraphResultUtil {
 
@@ -21,6 +23,8 @@ public:
 
 public:
 	static void PerformProcess(AbstractProcess* process, IResultSet* input, bool isStrongComponent, IResultMetadata* metadata, IResultSet** output);
+
+	static Graph* GetGraph(IGraphResult* result);
 
 };
 

@@ -16,13 +16,10 @@ public:
 
     virtual void evaluate() = 0;
 
-	virtual void evaluateAsApproximationCenter();
-
 public:
     virtual bool isNative() = 0;
     virtual bool hasFunction() = 0;
-    virtual bool hasDerivative() = 0;
-	virtual bool canApproximate();
+    virtual bool hasDerivative() = 0;	
 
 protected:
     int dimension;

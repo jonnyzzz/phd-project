@@ -1,19 +1,12 @@
 #pragma once
 
-class MeaGraph;
-class Graph;
-struct Node;
-class MeaNode;
-class ProgressBarInfo;
-
-#include "MeaNode.h"
 #include "../cellImageBuilders/AbstractProcessExt.h"
 
 
 class IsolatingSetProcess : public AbstractProcessExt
 {
 public:
-	IsolatingSetProcess(Graph* graphSource, Node* startNode, ProgressBarInfo* info);
+	IsolatingSetProcess(Graph* graphSource, Graph* startGraph, ProgressBarInfo* info);
 	virtual ~IsolatingSetProcess(void);
 
 public:
@@ -21,7 +14,12 @@ public:
 	virtual void start(void);
 
 private:
-	Node* myStartNode;
-	MeaNodeSet runProcess(MeaNode& startNode);
-	void importData(MeaNodeSet from, Graph* into);
+	Graph* startGraph;
+
+private:
+	typedef list<Node*> NodeList;
+
+private:
+	void processTaskList(NodeList& lst, Graph* graph);
+	void processNode(Node* node, NodeList& lst, Graph* graph);
 };

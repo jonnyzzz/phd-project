@@ -81,6 +81,7 @@ private:
 public:
 	Edge* findEdge(const Node* nodeFrom, const Node* nodeTo) const ;
 	Node* findNode(const JInt* cell) const;
+	Node* findNode(const Node* node) const;
 
 //reltions
 private:
@@ -90,6 +91,7 @@ private:
 //content Operations
 public:
 	Node* browseTo(const JInt* cell);
+	Node* browseTo(const Node* node);
 	Edge* browseTo(Node* nodeTo, Node* nodeFrom);
 
 	void addEdges(Node* node, const JDouble* min, const JDouble* max);
@@ -144,7 +146,9 @@ private:
 
 public:
 	//todo: Incapsulate flagID for more safetyness usage
+	//todo: Implement flagReleasing
 	int registerFlag();
+	void unregisterFlag(int flagID);
 	bool readFlag(Node* node, int flagID);
 	void setFlag(Node* node, int flagID, bool value = true);
 

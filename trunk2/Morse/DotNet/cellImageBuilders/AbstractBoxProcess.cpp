@@ -10,7 +10,12 @@ AbstractBoxProcess::AbstractBoxProcess(Graph* graph, ISystemFunction* function, 
 
 	ASSERT(graph_source != NULL);
 
+	this->hasDerivate = function->hasDerivative();
+
 	this->dimension = graph_source->getDimention();
+	this->dimension2 = dimension*dimension + dimension;
+
+	this->v0 = new JDouble[dimension2];
 
 	this->x0 = new JDouble[dimension+1];
 	this->b = new JInt[dimension+1];
@@ -96,16 +101,17 @@ void AbstractBoxProcess::processNode(Node* node, Graph* graph) {
 		input[i] = x0[i] + eps2[i];
 	}
 
-	function->evaluateAsApproximationCenter();
 	vectorCopy(output, value_min);
 	vectorCopy(output, value_max);
+
+	setApproximationCenter();
 
 	while (b[dimension] == 0) {
 		for (int i=0; i<dimension; i++) {
 			input[i] = x0[i] + graph->getEps()[i];
 		}
 
-		function->evaluate();
+		evaluate();
 
 		for (int i=0; i<dimension; i++) {
 			if (output[i] > value_max[i]) {
@@ -133,4 +139,22 @@ void AbstractBoxProcess::processNode(Node* node, Graph* graph) {
 
 void AbstractBoxProcess::vectorCopy(JDouble* from, JDouble* to) {
 	memcpy(to, from, sizeof(JDouble)*dimension);
+}
+
+
+
+void AbstractBoxProcess::setApproximationCenter() {
+	function->evaluate();
+	memcpy(output, v0, sizeof(JDouble)*dimension2);
+}
+
+
+void AbstractBoxProcess::evaluate() {
+	for (int i=0; i<dimension; i++) {
+		JDouble t = v0[i];
+		for (int j=0; j<dimension; j++) {
+			t += v0[dimension + dimension*i + j]*input[j];
+		}
+		output[i] = t;
+	}
 }

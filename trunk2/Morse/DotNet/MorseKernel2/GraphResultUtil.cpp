@@ -71,3 +71,13 @@ void GraphResultUtil::GetMetadata(IResultSet* resultSet, IResultMetadata** data)
 	meta->QueryInterface(data);
 	ATLASSERT(*data != NULL);
 }
+
+
+Graph* GraphResultUtil::GetGraph(IGraphResult* result) {
+	Graph* graph;
+	HRESULT hr;
+	hr = result->GetGraph((void**)&graph);
+	ATLASSERT(SUCCEEDED(hr));
+
+	return graph;
+}

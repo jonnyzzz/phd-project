@@ -138,6 +138,67 @@
 	</References>
 	<Files>
 		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			<File
+				RelativePath=".\AbstractBoxProcess.h">
+			</File>
+			<File
+				RelativePath=".\AbstractGraphCreator.h">
+			</File>
+			<File
+				RelativePath=".\AbstractPointBuilder.h">
+			</File>
+			<File
+				RelativePath=".\AbstractProcess.h">
+			</File>
+			<File
+				RelativePath=".\AbstractProcessExt.h">
+			</File>
+			<File
+				RelativePath=".\GraphSet.h">
+			</File>
+			<File
+				RelativePath=".\MSCreationProcess.h">
+			</File>
+			<File
+				RelativePath=".\MSOverlapedPointBuilder.h">
+			</File>
+			<File
+				RelativePath=".\MSPointBuilder.h">
+			</File>
+			<File
+				RelativePath=".\Processes.h">
+			</File>
+			<File
+				RelativePath=".\ProgressBarInfo.h">
+			</File>
+			<File
+				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.h">
+			</File>
+			<File
+				RelativePath=".\SimpleBoxProcess.h">
+			</File>
+			<File
+				RelativePath=".\SIOverlapedPointBuilder.h">
+			</File>
+			<File
+				RelativePath=".\SIPointBuilder.h">
+			</File>
+			<File
+				RelativePath=".\stdafx.h">
+			</File>
+			<File
+				RelativePath=".\TarjanProcess.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+		</Filter>
+		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
@@ -210,67 +271,6 @@
 			<File
 				RelativePath=".\TarjanProcess.cpp">
 			</File>
-		</Filter>
-		<Filter
-			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
-			<File
-				RelativePath=".\AbstractBoxProcess.h">
-			</File>
-			<File
-				RelativePath=".\AbstractGraphCreator.h">
-			</File>
-			<File
-				RelativePath=".\AbstractPointBuilder.h">
-			</File>
-			<File
-				RelativePath=".\AbstractProcess.h">
-			</File>
-			<File
-				RelativePath=".\AbstractProcessExt.h">
-			</File>
-			<File
-				RelativePath=".\GraphSet.h">
-			</File>
-			<File
-				RelativePath=".\MSCreationProcess.h">
-			</File>
-			<File
-				RelativePath=".\MSOverlapedPointBuilder.h">
-			</File>
-			<File
-				RelativePath=".\MSPointBuilder.h">
-			</File>
-			<File
-				RelativePath=".\Processes.h">
-			</File>
-			<File
-				RelativePath=".\ProgressBarInfo.h">
-			</File>
-			<File
-				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.h">
-			</File>
-			<File
-				RelativePath=".\SimpleBoxProcess.h">
-			</File>
-			<File
-				RelativePath=".\SIOverlapedPointBuilder.h">
-			</File>
-			<File
-				RelativePath=".\SIPointBuilder.h">
-			</File>
-			<File
-				RelativePath=".\stdafx.h">
-			</File>
-			<File
-				RelativePath=".\TarjanProcess.h">
-			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt">

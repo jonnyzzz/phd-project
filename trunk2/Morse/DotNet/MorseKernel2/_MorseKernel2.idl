@@ -473,6 +473,54 @@ interface IWritableKernell : IDispatch {
 interface IKernellImpl : IWritableKernell {
 };
 
+[
+	object,
+	uuid(9FFB9554-2D64-45EE-9F79-B31098FF8512),
+	dual,
+	helpstring("IMinimalLoopLocalizationAction Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\minimallooplocalizationaction.h"
+interface IMinimalLoopLocalizationAction : IAction {
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\minimallooplocalizationaction.h"
+	[id(44)] HRESULT  GetDimension([in] IResultSet *resultSet, [out] int *dimension);
+};
+
+[
+	object,
+	uuid(B90D3C01-F6F8-4D06-8E01-C12C6D51F70A),
+	dual,
+	pointer_default(unique)
+] 
+#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\minimallooplocalizationaction.h"
+interface IMinimalLoopLocalizationParameters : IParameters {
+#line 30 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\minimallooplocalizationaction.h"
+	[id(10)] HRESULT  GetCoordinate([in] int id, [out,retval] double *data);
+};
+
+[
+	object,
+	uuid(787DC58F-CD39-4BE2-9B58-D5B99ADCFC4D),
+	dual,
+	helpstring("IIsolatedSetAction Interface"),
+	pointer_default(unique)
+] 
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\isolatedsetaction.h"
+interface IIsolatedSetAction : IAction {
+};
+
+[
+	object,
+	uuid(01C806AD-6003-4F5B-8405-AE3DD637D854),
+	dual,
+	pointer_default(unique)
+] 
+#line 26 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\isolatedsetaction.h"
+interface IIsolatedSetParameters : IParameters {
+#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\isolatedsetaction.h"
+	[id(22)] HRESULT  GetStartSet([out,retval] IGraphResult **result );
+};
+
 
 [ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}"), helpstring("MorseKernel2 1.0 Type Library") ]
 library MorseKernel2
@@ -632,6 +680,30 @@ library MorseKernel2
 		interface IKernellImpl;
 		interface IWritableKernell;
 		interface IKernell;
+	};
+
+	[
+		version(1.0),
+		uuid(7D81B505-C5D6-4AEF-83EF-CFAF07767898),
+		helpstring("MinimalLoopLocalizationAction Class")
+	] 
+#line 44 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\minimallooplocalizationaction.h"
+	coclass CMinimalLoopLocalizationAction {
+		interface IMinimalLoopLocalizationAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(5345FB53-5138-4D28-A6FC-294DF9D0A1E9),
+		helpstring("IsolatedSetAction Class")
+	] 
+#line 43 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\isolatedsetaction.h"
+	coclass CIsolatedSetAction {
+		interface IIsolatedSetAction;
+		interface IAction;
+		interface IActionBase;
 	};
 
 }

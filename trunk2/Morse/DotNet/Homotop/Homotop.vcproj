@@ -103,19 +103,10 @@
 				RelativePath=".\IsolatingSet.cpp">
 			</File>
 			<File
-				RelativePath=".\MeaGraph.cpp">
+				RelativePath=".\MinimalLoopFinder.cpp">
 			</File>
 			<File
-				RelativePath=".\MeaGraphAlgorithm.cpp">
-			</File>
-			<File
-				RelativePath=".\MeaGraphImpl.cpp">
-			</File>
-			<File
-				RelativePath=".\MeaGraphTestCase.cpp">
-			</File>
-			<File
-				RelativePath=".\MeaNode.cpp">
+				RelativePath=".\MinimalLoopFinderProcess.cpp">
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp">
@@ -141,19 +132,10 @@
 				RelativePath=".\IsolatingSet.h">
 			</File>
 			<File
-				RelativePath=".\MeaGraph.h">
+				RelativePath=".\MinimalLoopFinder.h">
 			</File>
 			<File
-				RelativePath=".\MeaGraphAlgorithm.h">
-			</File>
-			<File
-				RelativePath=".\MeaGraphImpl.h">
-			</File>
-			<File
-				RelativePath=".\MeaGraphTestCase.h">
-			</File>
-			<File
-				RelativePath=".\MeaNode.h">
+				RelativePath=".\MinimalLoopFinderProcess.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">

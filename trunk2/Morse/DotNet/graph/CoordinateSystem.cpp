@@ -133,7 +133,7 @@ bool CoordinateSystem::intersects(const JInt* cell) const{
 
 /////////////////////////////////////////////////////////////////////////////////
 
-bool CoordinateSystem::equals(CoordinateSystem* cs) const {
+bool CoordinateSystem::equals(const CoordinateSystem* cs) const {
    if (cs->dimention != this->dimention) return false;
 
    for (int i=0; i<dimention; i++) {

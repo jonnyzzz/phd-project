@@ -155,6 +155,9 @@
 			ReferencedProjectIdentifier="{213A979A-506A-4295-9350-B86F82C0DBCB}"
 			Name="graph"/>
 		<ProjectReference
+			ReferencedProjectIdentifier="{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}"
+			Name="Homotop"/>
+		<ProjectReference
 			ReferencedProjectIdentifier="{8D190DB8-56C4-4C76-A7F1-5560D53344CC}"
 			Name="SystemFunction"/>
 	</References>
@@ -209,6 +212,9 @@
 				RelativePath=".\GraphResultWrapper.cpp">
 			</File>
 			<File
+				RelativePath=".\IsolatedSetAction.cpp">
+			</File>
+			<File
 				RelativePath=".\Kernell.cpp">
 			</File>
 			<File
@@ -216,6 +222,9 @@
 			</File>
 			<File
 				RelativePath=".\KernellImpl.cpp">
+			</File>
+			<File
+				RelativePath=".\MinimalLoopLocalizationAction.cpp">
 			</File>
 			<File
 				RelativePath=".\MorseKernel2.cpp">
@@ -340,6 +349,9 @@
 				RelativePath=".\GraphResultWrapper.h">
 			</File>
 			<File
+				RelativePath=".\IsolatedSetAction.h">
+			</File>
+			<File
 				RelativePath=".\Kernell.h">
 			</File>
 			<File
@@ -347,6 +359,9 @@
 			</File>
 			<File
 				RelativePath=".\KernellImpl.h">
+			</File>
+			<File
+				RelativePath=".\MinimalLoopLocalizationAction.h">
 			</File>
 			<File
 				RelativePath=".\Parameters.h">
