@@ -184,6 +184,9 @@
 				RelativePath=".\CalculatorTest.cpp">
 			</File>
 			<File
+				RelativePath=".\MorseTest.cpp">
+			</File>
+			<File
 				RelativePath=".\Pefomance.cpp">
 			</File>
 			<File
@@ -223,6 +226,9 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
 				RelativePath=".\CalculatorTest.h">
+			</File>
+			<File
+				RelativePath=".\MorseTest.h">
 			</File>
 			<File
 				RelativePath=".\objects.h">

@@ -149,3 +149,4 @@ private:
 
 Graph*	createGraph(FileInputStream& o);
 void	saveGraph(FileOutputStream& o, Graph* graph);
+void	saveGraphAsPoints(FileOutputStream& o, Graph* graph);

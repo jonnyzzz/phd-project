@@ -12,7 +12,7 @@ class SystemFunctionDerivate :
     public ISystemFunctionDerivate
 {
 public:
-    SystemFunctionDerivate(FunctionFactory* factory, int dimension, int iterations);
+    SystemFunctionDerivate(FunctionFactory* factory, int dimension, int iterations = 1);
 
     virtual ~SystemFunctionDerivate(void);
 

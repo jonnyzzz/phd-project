@@ -12,10 +12,15 @@ static char THIS_FILE[] = __FILE__;
 SegmentProjectiveExtensionMorseFunction::SegmentProjectiveExtensionMorseFunction(ISystemFunctionDerivate* function) :
 IMorseFunction(function)
 {
-    this->output = function->getOutput();
-    this->dimension = function->getFunctionDimension();
+	this->dimension = function->getFunctionDimension();
+
+    this->output = function->getOutput();    
     this->doutput = &this->output[dimension];
+
     this->input = function->getInput();
+	this->vinput = &this->input[dimension];
+
+	cout<<"Dimenstion = "<<dimension<<"\n";
 }
 
 SegmentProjectiveExtensionMorseFunction::~SegmentProjectiveExtensionMorseFunction(void)
@@ -38,14 +43,19 @@ void SegmentProjectiveExtensionMorseFunction::evaluate() {
 
     double norm = 0;
     for (int i=0; i<dimension; i++) {
-        norm += this->input[dimension + i] * this->input[dimension + i];
+        norm += this->vinput[i] * this->vinput[i];
     }
+
     for (int i=0; i<dimension; i++) {
         double tmp = 0;        
         for (int j=0; j<dimension; j++) {
-            tmp += doutput[i*dimension + j] * this->input[dimension + j];
+            tmp += doutput[i*dimension + j] * this->vinput[j];
         }
         evaluation_result += tmp*tmp;
     }
+
+	cout<<"Eval = "<<evaluation_result<<"\n";
+	cout<<"NormV = "<<norm<<"\n";
+
     evaluation_result = log(evaluation_result/norm)/2;
 }

@@ -6,6 +6,7 @@
 #include "STack.h"
 #include "GraphComponents.h"
 #include "FileStream.h"
+#include "GraphUtil.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -725,6 +726,20 @@ void saveGraph(FileOutputStream& o, Graph* graph) {
 	o.stress();
 }
 
+
+void saveGraphAsPoints(FileOutputStream& o, Graph* graph) {
+	GraphNodeEnumerator ne(graph);
+	int dim = graph->getDimention();
+
+    Node* node;
+	while (node = ne.next()) {
+		for (int i=0; i<dim; i++) {
+			JDouble d = graph->toExternal(graph->getCells(node)[i], i) + graph->getEps()[i]/2;
+			o<<d;
+		}
+		o.stress();
+	}
+}
 
 
 //////////////////////////////////////////////////////////////////////

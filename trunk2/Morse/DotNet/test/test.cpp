@@ -8,6 +8,7 @@
 #include "TestRunner.h"
 #include "../cellImagebuilders/SIPointBuilder.h"
 #include "../graph/stack.h"
+#include "MorseTest.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -42,10 +43,15 @@ int _tmain(int argc, _TCHAR* argv[]) {
 
 	s.pop();
 */
-
+/*
 	Pefomance pef;
 	pef.test2();
-	
+*/
+	MorseTest test;
+	test.statr();
+
+
+
 }
 
 void runTests() {

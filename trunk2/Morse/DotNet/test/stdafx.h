@@ -27,6 +27,7 @@
 #include "../graph/typedefs.h"
 #include "../graph/Graph.h"
 #include "../graph/GraphException.h"
+#include "../graph/GraphUtil.h"
 #include "../graph/Function.h"
 #include "../graph/SIComputationProcess.h"
 #include "../graph/Computator.h"
@@ -41,8 +42,15 @@
 #include "../systemfunction/SystemFunction.h"
 #include "../systemfunction/ISystemFunctionDerivate.h"
 #include "../systemfunction/SystemFunctionDerivate.h"
+#include "../systemFunction/IMorseFunction.h"
 #include "../cellImageBuilders/SIPointBuilder.h"
 #include "../cellImageBuilders/MSPointBuilder.h"
+#include "../cellImageBuilders/MSCreationProcess.h"
+#include "../systemFunction/sermentprojectiveextensioninfo.h"
+
+#include "../graph_simplex/romfunction2n.h"
+
+#include "objects.h"
 
 
 #define _USE_MATH_DEFINES

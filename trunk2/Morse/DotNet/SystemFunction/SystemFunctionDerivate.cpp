@@ -111,15 +111,15 @@ void SystemFunctionDerivate::init() {
     SystemNativeFunctions funcs = this->createFunctionDerivate();
     SystemNativeVariables vars = this->createVariables();
 
-    SystemNative* native = new SystemNative(funcs, vars, allocateDoubleArray(vars.size()*3), allocateDoubleArray(funcs.size()*3));
+    SystemNative* native = new SystemNative(funcs, vars, allocateDoubleArray(vars.size()*5), allocateDoubleArray(funcs.size()*5));
 
     computationChain.push_back(native);
 
     for (int i=1; i<iterations; i++) {
-        native = new SystemNative(funcs, vars, computationChain.back()->getOutput(), allocateDoubleArray(funcs.size()*3));
+        native = new SystemNative(funcs, vars, computationChain.back()->getOutput(), allocateDoubleArray(funcs.size()*5));
         computationChain.push_back(native);
     }
-    temp = allocateDoubleArray(this->dimension*3);
+    temp = allocateDoubleArray(this->dimension*5);
 
     for (SystemNativeFunctions::iterator it = funcs.begin(); it != funcs.end(); it++) {
         delete *it;

@@ -35,6 +35,7 @@ int FileInputStream::eof() {
 
 FileOutputStream::FileOutputStream(const char* file) {
   f.open(file);
+ 
 }
 
 FileOutputStream::~FileOutputStream() {
@@ -53,7 +54,7 @@ ostream& FileOutputStream::raw() {
 /////////////////////////////////////////////////////////////////////
 
 FileOutputStream& FileOutputStream::operator <<(const JDouble& v) {
-  f<<"\t"<<v<<"\t";
+  f<<"\t"<<scientific<<v<<"\t";
   return *this;
 }
 

@@ -14,6 +14,7 @@ private:
     double* output;
     double* doutput;
     double* input;
+	double* vinput;
     int dimension;
 
 public:

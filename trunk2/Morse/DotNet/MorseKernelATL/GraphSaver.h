@@ -1,6 +1,7 @@
 #pragma once
 
 class Graph;
+class FileOutputStream;
 
 class GraphSaver
 {
@@ -14,7 +15,5 @@ public:
 
 
 private:
-	bool openFile(CString file, ofstream& o);
-	void AppendGraphToString(Graph* graph, CString& out); 
-
+	void SaveGraph(Graph* graph, FileOutputStream& o);
 };

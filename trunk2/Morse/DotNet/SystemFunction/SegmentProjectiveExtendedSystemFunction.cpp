@@ -52,7 +52,7 @@ void SegmentProjectiveExtendedSystemFunction::evaluate() {
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-double SegmentProjectiveExtendedSystemFunction::Abs(double x) {
+double inline SegmentProjectiveExtendedSystemFunction::Abs(double x) {
     return (x>0)?x:-x;
 }
 
@@ -63,17 +63,20 @@ void SegmentProjectiveExtendedSystemFunction::computeEx(double* v, double* d, do
 
 	//cout<<"real dim = "<<real_dimension<<"\n";
 
-    int max = 0;
+    int amax = 0;
     for (int i=0; i<real_dimension; i++) {
         output[i] = 0;
         for (int j=0; j<real_dimension; j++) {
             output[i] += d[i*real_dimension + j] * v[j];
         }
-        if (Abs(output[max]) < Abs(output[i])) {
-            max = i;
+        if (Abs(output[amax]) < Abs(output[i])) {
+            amax = i;
         }
     }
+
+	//cout<<"max = "<<amax<<"\n";
+
     for (int i=0; i<real_dimension; i++) {
-       output[i] /= output[max];
+       output[i] /= output[amax];
     }
 }
