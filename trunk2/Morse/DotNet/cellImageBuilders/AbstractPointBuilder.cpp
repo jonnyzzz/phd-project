@@ -1,7 +1,5 @@
 #include "StdAfx.h"
 #include ".\abstractpointbuilder.h"
-#include ".\NodeMultiplicator.h"
-#include ".\NodePointEnumerator.h"
 
 
 #ifdef _DEBUG
@@ -151,13 +149,9 @@ void AbstractPointBuilder::buildNodeImage(Node* node) {
 		}
 		*/
 
-		buildImage(graph_result, point);
+		//todo: Extract -> virtual for SIOverlapedPointBuilder.
+		buildImage(graph_result, node);
 
-
-		Node* t = graph_result->browseTo(point);
-		if (t != NULL) {			
-			graph_result->browseTo(node, t);
-		} 
 
 		c[0]++;
 		for (i=0; i<dimension; i++) {
@@ -166,7 +160,5 @@ void AbstractPointBuilder::buildNodeImage(Node* node) {
 				c[i+1]++;
 			}
 		}
-	}
-
-	
+	}	
 }

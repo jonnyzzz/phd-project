@@ -35,18 +35,15 @@ MSPointBuilder::~MSPointBuilder(void)
 }
 
 
-void MSPointBuilder::buildImage(Graph* graph, JInt* answer) {
+void MSPointBuilder::buildImage(Graph* graph, Node* source) {
     function->evaluate();
 
 	for (int i=0; i<function_dimension; i++) {
-		answer[i] = graph->toInternal(output[i], i);
-		
-		//answer[i + function_dimension] = graph->toInternal(output[v_offset+i], i+function_dimension);
+		point[i] = graph->toInternal(output[i], i);
 	}
 	for (int i=function_dimension; i<2*function_dimension; i++) {
-		//cout<<"v["<<i-function_dimension<<"] = "<<output[v_offset + i]<<"\n";
-		answer[i] = graph->toInternal(output[v_offset + i], i);
+		point[i] = graph->toInternal(output[v_offset + i], i);
 	} 
-	//cout<<"\n";
-	//graph->toInternal(output, answer);
+
+	addEdge(graph, source, point);
 }

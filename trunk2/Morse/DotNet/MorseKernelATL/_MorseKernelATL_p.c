@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sat Feb 12 02:36:03 2005
+/* at Tue Feb 15 22:23:15 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -484,6 +484,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 118 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
+	/* Procedure getOverlaping1 */
+
+
 	/* Procedure spaceMin */
 
 /* 120 */	0x33,		/* FC_AUTO_HANDLE */
@@ -501,12 +504,18 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 140 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 142 */	NdrFcShort( 0x0 ),	/* 0 */
 
+	/* Parameter axis */
+
+
 	/* Parameter id */
 
 /* 144 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 146 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 148 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
+
+	/* Parameter percent */
+
 
 	/* Parameter size */
 
@@ -517,10 +526,16 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Return value */
 
+
+	/* Return value */
+
 /* 156 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
 /* 158 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 160 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
+
+	/* Procedure getOverlaping2 */
+
 
 	/* Procedure spaceMax */
 
@@ -539,6 +554,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 182 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 184 */	NdrFcShort( 0x0 ),	/* 0 */
 
+	/* Parameter axis */
+
+
 	/* Parameter id */
 
 /* 186 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
@@ -546,12 +564,18 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 190 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
+	/* Parameter percent */
+
+
 	/* Parameter size */
 
 /* 192 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
 /* 194 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 196 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
+
+	/* Return value */
+
 
 	/* Return value */
 
@@ -3869,7 +3893,9 @@ static const unsigned short ISubdevidePointParams_FormatStringOffsetTable[] =
     (unsigned short) -1,
     408,
     36,
-    444
+    444,
+    120,
+    162
     };
 
 static const MIDL_STUBLESS_PROXY_INFO ISubdevidePointParams_ProxyInfo =
@@ -3893,7 +3919,7 @@ static const MIDL_SERVER_INFO ISubdevidePointParams_ServerInfo =
     0,
     0,
     0};
-CINTERFACE_PROXY_VTABLE(10) _ISubdevidePointParamsProxyVtbl = 
+CINTERFACE_PROXY_VTABLE(12) _ISubdevidePointParamsProxyVtbl = 
 {
     &ISubdevidePointParams_ProxyInfo,
     &IID_ISubdevidePointParams,
@@ -3906,7 +3932,9 @@ CINTERFACE_PROXY_VTABLE(10) _ISubdevidePointParamsProxyVtbl =
     0 /* IDispatch_Invoke_Proxy */ ,
     (void *) (INT_PTR) -1 /* IParams::GetProgressBarNotification */ ,
     (void *) (INT_PTR) -1 /* ISubdevideParams::getCellDevider */ ,
-    (void *) (INT_PTR) -1 /* ISubdevidePointParams::getCellPoints */
+    (void *) (INT_PTR) -1 /* ISubdevidePointParams::getCellPoints */ ,
+    (void *) (INT_PTR) -1 /* ISubdevidePointParams::getOverlaping1 */ ,
+    (void *) (INT_PTR) -1 /* ISubdevidePointParams::getOverlaping2 */
 };
 
 
@@ -3918,6 +3946,8 @@ static const PRPC_STUB_FUNCTION ISubdevidePointParams_table[] =
     STUB_FORWARDING_FUNCTION,
     NdrStubCall2,
     NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
     NdrStubCall2
 };
 
@@ -3925,7 +3955,7 @@ CInterfaceStubVtbl _ISubdevidePointParamsStubVtbl =
 {
     &IID_ISubdevidePointParams,
     &ISubdevidePointParams_ServerInfo,
-    10,
+    12,
     &ISubdevidePointParams_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };

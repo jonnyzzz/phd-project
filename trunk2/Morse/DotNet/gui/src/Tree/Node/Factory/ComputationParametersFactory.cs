@@ -40,7 +40,7 @@ namespace gui.Tree.Node.Factory
 
 		private static int[][] toArrays(ISubdevidePointParams subd, int dimension)
 		{
-			int[][] data = new int[2][];
+			int[][] data = new int[4][];
 			data[0] = new int[dimension];
 			data[1] = new int[dimension];
 			if (subd != null)
@@ -143,7 +143,7 @@ namespace gui.Tree.Node.Factory
 			else
 			{
 				par = ps.Result;
-				return new SubdevididePointParams(par[0], par[1]);
+				return new SubdevididePointParams(par[0], par[1], par[2], par[3]);
 			}
 		}
 
@@ -151,11 +151,15 @@ namespace gui.Tree.Node.Factory
 		{
 			private SubdevideParams factor;
 			private SubdevideParams ks;
+			private int[] overlap1;
+			private int[] overlap2;
 
-			public SubdevididePointParams(int[] factor, int[] ks)
+			public SubdevididePointParams(int[] factor, int[] ks, int[] overlap1, int[] overlap2)
 			{
 				this.factor = new SubdevideParams(factor);
 				this.ks = new SubdevideParams(ks);
+				this.overlap1 = overlap1;
+				this.overlap2 = overlap2;
 			}
 
 			public int getCellDevider(int axis)
@@ -171,6 +175,16 @@ namespace gui.Tree.Node.Factory
 			public int getCellPoints(int axis)
 			{
 				return ks.getCellDevider(axis);
+			}
+
+			public double getOverlaping1(int axis)
+			{
+				return 1.0/overlap1[axis];
+			}
+
+			public double getOverlaping2(int axis)
+			{
+				return 1.0/overlap2[axis];
 			}
 		}
 

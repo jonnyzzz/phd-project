@@ -13,7 +13,7 @@ public:
 	virtual ~MSPointBuilder(void);
 
 protected:
-	virtual void buildImage(Graph* coordinates, JInt* answer);	
+	virtual void buildImage(Graph* coordinates, Node* source);	
 
 private:
     double* output;

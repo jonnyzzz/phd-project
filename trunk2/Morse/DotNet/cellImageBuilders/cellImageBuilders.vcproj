@@ -166,6 +166,9 @@
 				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.cpp">
 			</File>
 			<File
+				RelativePath=".\SIOverlapedPointBuilder.cpp">
+			</File>
+			<File
 				RelativePath=".\SIPointBuilder.cpp">
 			</File>
 			<File
@@ -217,6 +220,9 @@
 			</File>
 			<File
 				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.h">
+			</File>
+			<File
+				RelativePath=".\SIOverlapedPointBuilder.h">
 			</File>
 			<File
 				RelativePath=".\SIPointBuilder.h">

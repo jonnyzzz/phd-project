@@ -18,9 +18,8 @@ public:
 //suxy design, but low implementation cost. Hope it will work quick.
 protected:
 	
-	virtual void buildImage(Graph* coordinates, JInt* answer) = 0; 
+	virtual void buildImage(Graph* graph, Node* source) = 0; 	
 	virtual JDouble* getFunctionX() = 0;
-
 
 private:
 	int* factor;
@@ -47,4 +46,5 @@ private:
 	
 	void buildNodeMultiplication(Node* node); //node from graph
 	void buildNodeImage(Node* node); //node from dest
+
 };

@@ -64,6 +64,8 @@ Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* 
 	emax = new JInt[dimention];
 	point = new JInt[dimention+1];
 	pointT = new JInt[dimention+1];
+	pointB = new JInt[dimention+1];
+	pointV = new JInt[dimention+1];
 }
 
 Graph::~Graph()
@@ -81,6 +83,8 @@ Graph::~Graph()
 	delete[] emax;
 	delete[] point;
 	delete[] pointT;
+	delete[] pointB;
+	delete[] pointV;
 }
 
 
@@ -429,6 +433,41 @@ void Graph::addEdgesModula(Node* node, const JDouble* min, const JDouble* max, i
 }
 
 
+void Graph::addEdgeWithOverlaping(Node* nodeSourse, JDouble* value, JDouble* offset1, JDouble* offset2) {
+	if (!intersects(value, value)) return;
+	
+	for (int i=0; i<dimention; i++) {
+		JDouble tmp;		
+		point[i] = toInternalExt(value[i], i, &tmp);
+		if (tmp + offset1[i] > value[i]) {
+			pointT[i] = -1;
+		} else if (tmp + offset2[i] < value[i]) {
+			pointT[i] = 1;
+		} else {
+			pointT[i] = 0;
+		}
+		pointB[i] = 0;
+	}
+	pointB[dimention] = 0;
+
+	while (pointB[dimention] == 0) {
+		for (int i=0; i<dimention; i++) {
+			pointV[i] = point[i] + pointB[i]*pointT[i];
+		}
+		Node* res = browseTo(pointV);
+		if (res != NULL) {
+			browseTo(nodeSourse, res);
+		}
+
+		pointB[0]++;
+		for (i = 0; i<dimention; i++) {
+			if (pointB[i] > ((pointT[i] != 0)?1:0)) {
+				pointB[i] = 0;
+				pointB[i+1]++;
+			}
+		}
+	}
+}
 
 void Graph::maximize() {
 	this->addEdges(NULL, min, max);

@@ -53,6 +53,11 @@ JInt CoordinateSystem::toInternal(JDouble value, int axis) const{
    return ret;
 }
 
+JInt CoordinateSystem::toInternalExt(JDouble value, int axis, JDouble* minValue) const {
+   JInt ret = (JInt)( *minValue = ((value - min[axis])/eps[axis]));
+   return ret;
+}
+
 void CoordinateSystem::toInternal(JDouble* in, JInt* out) const {
     for (int i=0; i<dimention; i++) {
         *out++ = toInternal(*in++, i);

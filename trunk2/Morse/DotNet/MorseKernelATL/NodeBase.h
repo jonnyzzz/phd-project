@@ -75,6 +75,10 @@ __interface IExtendablePointParams : ISubdevideParams {
 __interface ISubdevidePointParams : ISubdevideParams {
 	[id(13)]
 	HRESULT getCellPoints([in] int axis, [out, retval] int* value);
+	[id(14)]
+	HRESULT getOverlaping1([in] int axis, [out, retval] double* percent);
+	[id(15)]
+	HRESULT getOverlaping2([in] int axis, [out, retval] double* percent);
 };
 
 

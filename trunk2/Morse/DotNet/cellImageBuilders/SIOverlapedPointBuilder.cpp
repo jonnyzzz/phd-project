@@ -1,0 +1,36 @@
+#include "StdAfx.h"
+#include ".\sioverlapedpointbuilder.h"
+#include "../graph/graph.h"
+
+SIOverlapedPointBuilder::SIOverlapedPointBuilder(Graph* graph, int* factor, int* ks, JDouble* poffset1, JDouble* poffset2, ISystemFunction* function, ProgressBarInfo* info)
+: 
+AbstractPointBuilder(graph, factor, ks, info), function(function)
+{
+	offset1 = new JDouble[dimension];
+	offset2 = new JDouble[dimension];
+
+	for (int i=0l; i<dimension; i++) {
+		offset1[i] = graph->getEps()[i]*poffset1[i];
+		offset2[i] = graph->getEps()[i]*(1 - poffset2[i]);
+	}
+	this->output = function->getOutput();
+}
+
+SIOverlapedPointBuilder::~SIOverlapedPointBuilder(void)
+{
+	delete[] offset1;
+	delete[] offset2;
+}
+
+
+JDouble* SIOverlapedPointBuilder::getFunctionX() {
+	return function->getInput();
+}
+
+
+
+void SIOverlapedPointBuilder::buildImage(Graph* graph, Node* source) {
+	function->evaluate();
+
+	graph->addEdgeWithOverlaping(source, output, offset1, offset2);
+}

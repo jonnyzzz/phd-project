@@ -3,6 +3,7 @@
 
 class Function;
 class Graph;
+struct Node;
 class ProgressBarInfo;
 class ISystemFunction;
 
@@ -14,12 +15,16 @@ public:
 	virtual ~SIPointBuilder(void);
 
 protected:
-	virtual void buildImage(Graph* coordinates, JInt* answer); 
+	virtual void buildImage(Graph* coordinates, Node* source); 
 	virtual JDouble* getFunctionX();	
+
+	void addEdge(Graph* graph, Node* source, JInt* to);
 
 protected:
     ISystemFunction* function;
 
     double* input;
     double* output;
+
+	JInt* point;
 };

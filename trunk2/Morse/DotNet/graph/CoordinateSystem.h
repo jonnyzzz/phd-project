@@ -23,6 +23,8 @@ public:
     void toInternal(JDouble* in, JInt* out, int axis_offset, int len) const; 
 	JInt toInternal(JDouble value, int axis) const;
 
+	JInt toInternalExt(JDouble value, int axis, JDouble* minValue) const; 
+
 	JInt toInternalModulo(JDouble value, int axis) const;
 
 	JDouble toExternal(JInt value, int axis) const;

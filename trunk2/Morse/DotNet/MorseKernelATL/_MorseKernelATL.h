@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sat Feb 12 02:36:03 2005
+/* at Tue Feb 15 22:23:15 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -1501,6 +1501,14 @@ EXTERN_C const IID IID_ISubdevidePointParams;
             /* [in] */ int axis,
             /* [retval][out] */ int *value) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE getOverlaping1( 
+            /* [in] */ int axis,
+            /* [retval][out] */ double *percent) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE getOverlaping2( 
+            /* [in] */ int axis,
+            /* [retval][out] */ double *percent) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -1563,6 +1571,16 @@ EXTERN_C const IID IID_ISubdevidePointParams;
             /* [in] */ int axis,
             /* [retval][out] */ int *value);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *getOverlaping1 )( 
+            ISubdevidePointParams * This,
+            /* [in] */ int axis,
+            /* [retval][out] */ double *percent);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *getOverlaping2 )( 
+            ISubdevidePointParams * This,
+            /* [in] */ int axis,
+            /* [retval][out] */ double *percent);
+        
         END_INTERFACE
     } ISubdevidePointParamsVtbl;
 
@@ -1610,6 +1628,12 @@ EXTERN_C const IID IID_ISubdevidePointParams;
 #define ISubdevidePointParams_getCellPoints(This,axis,value)	\
     (This)->lpVtbl -> getCellPoints(This,axis,value)
 
+#define ISubdevidePointParams_getOverlaping1(This,axis,percent)	\
+    (This)->lpVtbl -> getOverlaping1(This,axis,percent)
+
+#define ISubdevidePointParams_getOverlaping2(This,axis,percent)	\
+    (This)->lpVtbl -> getOverlaping2(This,axis,percent)
+
 #endif /* COBJMACROS */
 
 
@@ -1624,6 +1648,32 @@ EXTERN_C const IID IID_ISubdevidePointParams;
 
 
 void __RPC_STUB ISubdevidePointParams_getCellPoints_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISubdevidePointParams_getOverlaping1_Proxy( 
+    ISubdevidePointParams * This,
+    /* [in] */ int axis,
+    /* [retval][out] */ double *percent);
+
+
+void __RPC_STUB ISubdevidePointParams_getOverlaping1_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISubdevidePointParams_getOverlaping2_Proxy( 
+    ISubdevidePointParams * This,
+    /* [in] */ int axis,
+    /* [retval][out] */ double *percent);
+
+
+void __RPC_STUB ISubdevidePointParams_getOverlaping2_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,

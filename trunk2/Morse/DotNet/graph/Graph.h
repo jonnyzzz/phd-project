@@ -93,12 +93,18 @@ public:
 
 	void addEdges(Node* node, const JDouble* min, const JDouble* max);
 	void addEdgesModula(Node* node, const JDouble* min, const JDouble* max, int mod_start);
+
+	//offset1 - left bound of overlap, offset2 - right bound of overlap
+	void addEdgeWithOverlaping(Node* nodeSource, JDouble* value, JDouble* offset1, JDouble* offset2);
+
 	void maximize();
 private:
 	JInt* emin;
 	JInt* emax;
 	JInt* point;
 	JInt* pointT;
+	JInt* pointB;
+	JInt* pointV;
 	JDouble getExtent(int axis);
 	
 
