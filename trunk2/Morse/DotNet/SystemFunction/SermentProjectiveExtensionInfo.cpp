@@ -47,3 +47,8 @@ int SermentProjectiveExtensionInfo::extendedGraphDimension() {
     return 2*function->getFunctionDimension();
 }
 
+
+//only for test project. 
+ISystemFunctionDerivate* SermentProjectiveExtensionInfo::getSystemFunction() {
+	return new SegmentProjectiveExtendedSystemFunction(function);
+}

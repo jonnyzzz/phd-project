@@ -47,6 +47,8 @@
 #include "../cellImageBuilders/MSPointBuilder.h"
 #include "../cellImageBuilders/MSCreationProcess.h"
 #include "../systemFunction/sermentprojectiveextensioninfo.h"
+#include "../cellimagebuilders/SIOverlapedPointBuilder.h"
+#include "../cellimagebuilders/MSOverlapedPointBuilder.h"
 
 #include "../graph_simplex/romfunction2n.h"
 

@@ -9,6 +9,7 @@
 #include "../cellImagebuilders/SIPointBuilder.h"
 #include "../graph/stack.h"
 #include "MorseTest.h"
+#include "GraphTest.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -49,6 +50,10 @@ int _tmain(int argc, _TCHAR* argv[]) {
 */
 	MorseTest test;
 	test.statr();
+
+
+	//GraphTest test;
+	//test.test();
 
 
 

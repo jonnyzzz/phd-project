@@ -439,10 +439,10 @@ void Graph::addEdgeWithOverlaping(Node* nodeSourse, JDouble* value, JDouble* off
 	for (int i=0; i<dimention; i++) {
 		JDouble tmp;		
 		point[i] = toInternalExt(value[i], i, &tmp);
-		if (tmp + offset1[i] > value[i]) {
-			pointT[i] = -1;
-		} else if (tmp + offset2[i] < value[i]) {
+		if (tmp + offset2[i] < value[i]) {
 			pointT[i] = 1;
+		} else if (tmp + offset1[i] > value[i]) {
+			pointT[i] = -1;
 		} else {
 			pointT[i] = 0;
 		}
@@ -457,6 +457,7 @@ void Graph::addEdgeWithOverlaping(Node* nodeSourse, JDouble* value, JDouble* off
 		Node* res = browseTo(pointV);
 		if (res != NULL) {
 			browseTo(nodeSourse, res);
+			
 		}
 
 		pointB[0]++;

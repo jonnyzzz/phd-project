@@ -20,6 +20,9 @@ public:
 	virtual CRom* morse(Graph* graph);
 
     virtual int extendedGraphDimension();
+
+public:
+	ISystemFunctionDerivate* getSystemFunction();
 	/*
     virtual ISystemFunctionDerivate* systemFunction();
     virtual IMorseFunction* morseFunction();

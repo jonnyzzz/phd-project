@@ -19,7 +19,7 @@ protected:
 	virtual void buildImage(Graph* graph, Node* source); 
 	virtual JDouble* getFunctionX();
 
-private:
+protected:
 	JDouble* offset1;
 	JDouble* offset2;
 

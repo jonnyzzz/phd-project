@@ -9,10 +9,13 @@ AbstractPointBuilder(graph, factor, ks, info), function(function)
 	offset1 = new JDouble[dimension];
 	offset2 = new JDouble[dimension];
 
+	cout<<"\n\n\noverlaped :\n";
 	for (int i=0l; i<dimension; i++) {
 		offset1[i] = graph->getEps()[i]*poffset1[i];
 		offset2[i] = graph->getEps()[i]*(1 - poffset2[i]);
+		cout<<offset1[i]<<"\t"<<offset2[i]<<"\t"<<graph->getEps()[i]<<"\n";
 	}
+	cout<<"\n\n\n";
 	this->output = function->getOutput();
 }
 

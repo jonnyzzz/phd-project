@@ -14,9 +14,7 @@ MorseTest::~MorseTest(void)
 
 typedef smartPointer<ISystemFunction> SmartFunction;
 
-
 typedef smartPointer<Graph> SmartGraph;
-typedef smartPointer<SIPointBuilder> SmartSIPointBuilder;
 typedef smartPointer<GraphComponents> SmartComponents;
 typedef smartPointer<ISystemFunctionDerivate> SmartDFunction;
 typedef smartPointer<AbstractProcess> SmartProcess;
@@ -41,12 +39,15 @@ void MorseTest::statr() {
 	SmartGraph graph = new Graph(2, amin, amax, grid);
 	graph->maximize();
 
+	JDouble offset1[] = {0.4, 0.4, 0.4, 0.4};
+	ProgressBarInfo pinfo;
+
 	int factor2[] = {2, 2, 2, 2};
 	int factor[] = {5, 5, 5, 5};
 	int ks[] = {2, 2, 2, 2};
 
 	//SI image step
-	SmartSIPointBuilder sipb = new SIPointBuilder(graph, factor, ks, func);
+	SmartProcess sipb = new SIOverlapedPointBuilder(graph, factor, ks, offset1, offset1, func, &pinfo);
 	sipb->start();
 	sipb->processNextGraph(graph);
 
@@ -56,7 +57,7 @@ void MorseTest::statr() {
 	
 	//Extending
 	SermentProjectiveExtensionInfo info(dfunc);
-	SmartProcess proc = info.graphExtender(cms->getAt(0), factor2, NULL);
+	SmartProcess proc = info.graphExtender(cms->getAt(0), factor2, &pinfo);
 	proc->start();
 	for (int i=0; i<cms->length(); i++) {
 		proc->processNextGraph(cms->getAt(i));
@@ -68,8 +69,8 @@ void MorseTest::statr() {
 	//MS_Step
 	MULTI(
 	{
-		SmartDFunction dfuncEx = info.systemFunction();
-		SmartProcess pb = new MSPointBuilder(cms->getAt(0), factor2, ks, dfuncEx);
+		SmartDFunction dfuncEx = info.getSystemFunction();
+		SmartProcess pb = new MSOverlapedPointBuilder(cms->getAt(0), factor2, ks, offset1, offset1, dfuncEx, &pinfo);
 		pb->start();
 		for (int i=0; i<cms->length(); i++) {
 			pb->processNextGraph(cms->getAt(i));
@@ -79,8 +80,6 @@ void MorseTest::statr() {
 	
 
 	//Morse
-	SmartMFunction mfunc = info.morseFunction();
-
 	MorseResults mresult;
 
 	for (int i=0; i<cms->length(); i++) {
@@ -88,11 +87,13 @@ void MorseTest::statr() {
 
 		MorsePair apair;
 
-		CRomFunction2N rom(mfunc, cms->getAt(i));
-		rom.minimize();
-		cout<<"Minimim = "<<(apair.first = rom.getAnswer())<<"\t";
-		rom.maximize();
-		cout<<"Maximum = "<<(apair.second = rom.getAnswer())<<"\n";
+		CRom* rom = info.morse(cms->getAt(i));
+		rom->minimize();
+		cout<<"Minimim = "<<(apair.first = rom->getAnswer())<<"\t";
+		rom->maximize();
+		cout<<"Maximum = "<<(apair.second = rom->getAnswer())<<"\n";
+
+		delete rom;
 
 		mresult.push_back(apair);
 	}
@@ -101,8 +102,10 @@ void MorseTest::statr() {
 	cout<<"---------------------------------------------------------------------------";
 	cout<<"\n\n\n\n";
 
+	int c = 1;
 	for (MorseResults::iterator it = mresult.begin(); it != mresult.end(); it++) {
 		MorsePair apair = *it;
+		cout<<c++<<"\t";
 		cout<<"Minimim = "<<apair.first<<"\t";
 		cout<<"Maximum = "<<apair.second<<"\n";
 	}

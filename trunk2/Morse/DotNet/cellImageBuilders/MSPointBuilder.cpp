@@ -19,19 +19,12 @@ MSPointBuilder::MSPointBuilder(Graph* graph, int* factor, int* ks, ISystemFuncti
     ASSERT(function->hasDerivative());
     ASSERT(function->hasFunction());
 
-//	cout<<"Function = "<<function->getDimension()<<"\n";
-//	cout<<"Graph = "<<graph->getDimention()<<"\n";
-
 	function_dimension = function->getFunctionDimension();
 	v_offset = function_dimension * function_dimension;
-
-//	cout<<"Function Dimension = "<<function_dimension<<"\n";
-//	cout<<"V_offset = "<<v_offset<<"\n";
 }
 
 MSPointBuilder::~MSPointBuilder(void)
 {
-    //delete SIPointBuilder::function;
 }
 
 

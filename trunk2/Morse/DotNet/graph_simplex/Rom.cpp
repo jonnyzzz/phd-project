@@ -353,11 +353,11 @@ void CRom::minimize() {
 	cout<<"Enter\n";
 	extrema = init();
 	cout<<"Init\n";
-/*
+//*
 #ifdef _DEBUG
 	dumpGraph();
 #endif
-*/
+//*/
 	extrema = minimize(extrema);
 	cout<<"Cost\n";
 	answerValue = contour_cost(extrema);
@@ -424,6 +424,8 @@ public:
 
 int CRom::myAllocator::number = 0;
 
+int dumpCount = 0;
+
 void CRom::dumpGraph() {
 	
 	for (EGraphIterator it = egraph.begin(); it != egraph.end(); it++ ) {
@@ -435,7 +437,9 @@ void CRom::dumpGraph() {
 	ids_subber = t;
 //*
  	ofstream f;
-	f.open("./trashccc.rom");
+	char buffer[255];
+	sprintf(buffer, "./trashccc.%d.rom", dumpCount++);
+	f.open(buffer);
 
 	for (EGraphIterator it = egraph.begin(); it != egraph.end(); it++ ) {
 		f<< ids[it->second].num-t <<" "<<it->second->node_cost<<" ";

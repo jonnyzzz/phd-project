@@ -59,14 +59,14 @@ clock_t testPoint(Gr& graph, Func& function, JInt* factor, JInt* ks) {
 clock_t testTaylor(Gr& graph, Func& function, JInt* factor) {
 	
 	clock_t tt = clock();
-
+/*
 	Computator cm;
 	Gc gc = cm.performSI(graph, function, factor);
 
 	tt = clock() - tt;
 
 	cout<<"result Components: "<<gc->length()<<"\n";
-
+*/
 	return tt;
 }
 
