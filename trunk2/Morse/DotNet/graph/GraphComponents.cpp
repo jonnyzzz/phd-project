@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "GraphComponents.h"
 #include "GraphException.h"
+#include "Graph.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -56,4 +57,10 @@ Graph* GraphComponents::getAt(int i) {
 	return (s==NULL)?NULL:s->graph;
 }
 
+///////////////////////////////////////////////////////
+
+int GraphComponents::getDimension() {
+	if (this->length() == 0) return 0;
+	return this->getAt(0)->getDimention();
+}
 

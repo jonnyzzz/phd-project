@@ -46,10 +46,10 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Collections.ArrayList">
       <Item value="ToArray" priority="0" />
-      <Item value="Remove" priority="0" />
       <Item value="AddRange" priority="0" />
-      <Item value="Contains" priority="2" />
       <Item value="Add" priority="19" />
+      <Item value="Contains" priority="2" />
+      <Item value="Remove" priority="0" />
       <Item value="Count" priority="6" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.ComputationNodeMenuFactory.SubdevideActionMenuItem">
@@ -383,6 +383,18 @@
   </CompletionStatisticsManager>
   <RecentFilesTracker>
     <RecentFilesTracker>
+      <TrackedFile location="e:\Projects\Morse\_net\graph\AdditionalNodeParameters.cpp" offset="62" line="0" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\graph\AdditionalNodeParameters.h" offset="323" line="15" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelVisualizationATL\MorseKernelVisualizationGraph2D.cpp" offset="4535" line="34" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\D3DGraph2D.cpp" offset="5187" line="198" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\D3DGraph2D.h" offset="891" line="30" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSet.cpp" offset="1072" line="59" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSetIterator.cpp" offset="854" line="42" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\Visualization2D.cs" offset="19204" line="468" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSetIterator.h" offset="0" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSet.h" offset="0" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\_net\graph\Function.cpp" offset="2597" line="135" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\graph\Function.h" offset="377" line="0" column="0" />
       <TrackedFile location="E:\Projects\Morse\_net\gui\Visualization3D.cs" offset="29554" line="572" column="0" />
       <TrackedFile location="E:\Projects\Morse\_net\gui\CumputationNodeSubdevidable.cs" offset="713" line="0" column="0" />
       <TrackedFile location="E:\Projects\Morse\_net\gui\ComputatioinTree.cs" offset="3265" line="12" column="0" />
@@ -400,19 +412,7 @@
       <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodeSingular.cs" offset="2399" line="58" column="0" />
       <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodePlural.cs" offset="1492" line="21" column="0" />
       <TrackedFile location="e:\Projects\Morse\_net\cellImageBuilders\AbstractProcess.cpp" offset="503" line="13" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\graph\Function.cpp" offset="1829" line="32" column="0" />
       <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\SymbolicImage.h" offset="897" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\SymbolicImageGroup.h" offset="1920" line="62" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\stdafx.h" offset="197" line="0" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\NodeBase.h" offset="0" line="18" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\ComputationGraphResult.cpp" offset="0" line="33" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\Kernel.cpp" offset="0" line="36" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\ProjectiveBundleGraph.cpp" offset="0" line="78" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\GraphOperationSelector.cs" offset="4801" line="48" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\graph\Graph.h" offset="0" line="98" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\graph\Graph.cpp" offset="12813" line="548" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationForm.cs" offset="32409" line="41" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\SystemAssignment.cs" offset="9786" line="126" column="0" />
     </RecentFilesTracker>
   </RecentFilesTracker>
 </Configuration>

@@ -3,6 +3,8 @@
 #include "stdafx.h"
 #include "MorseKernelVisualizationGraph2D.h"
 #include "../D3DVisualizator/D3DGraph2D.h"
+#include "../graph/GraphComponents.h"
+#include "../D3DVisualizator/DrawableSet.h"
 
 
 // CMorseKernelVisualizationDirect3D
@@ -55,14 +57,17 @@ LRESULT CMorseKernelVisualizationDirectGraph2D::OnPaint(UINT msg, WPARAM wparam,
 	return 0L; 
 }
 
-void CMorseKernelVisualizationDirectGraph2D::DrawBorder2D() {
+void CMorseKernelVisualizationDirectGraph2D::DrawBorder2D() {	
 	PAINTSTRUCT ps;	
 	CAxWindow wnd(m_hWnd);
 	HDC hDC = wnd.BeginPaint(&ps);	
+	/*
 	RECT r;
 	wnd.GetClientRect(&r);
 	Rectangle(hDC, 0,0, r.right, r.bottom);	
+	*/
 	wnd.EndPaint(&ps); 
+
 }
 
 LRESULT CMorseKernelVisualizationDirectGraph2D::OnEnterMove(UINT msg, WPARAM w, LPARAM l, BOOL&) {
@@ -144,7 +149,6 @@ STDMETHODIMP CMorseKernelVisualizationDirectGraph2D::CenterView() {
 
 STDMETHODIMP CMorseKernelVisualizationDirectGraph2D::SetGraph(void ** pgraph) {
 	Graph* graph = *(Graph**) pgraph;
-	GraphColor* color = new GraphColor(); 
 
 	printf("Set Graph: Nodes: %d\n", graph->getNumberOfNodes());
 
@@ -153,9 +157,14 @@ STDMETHODIMP CMorseKernelVisualizationDirectGraph2D::SetGraph(void ** pgraph) {
 		delete m_hD3D;
 	}
 
+	GraphComponents* cms = new GraphComponents();
+	cms->addGraphAsComponent(graph);
+	DrawableSet* set = new DrawableSet(cms);
+
 	m_hD3D = new D3DGraph2D();
 				//HWND hwnd, Graph* graph, GraphColor* color, int dim1, int dim2);
-	HRESULT hr = m_hD3D->Create(m_hWnd, graph, color, 0, 1);
+	//HRESULT hr = m_hD3D->Create(m_hWnd, graph, color, 0, 1);
+	HRESULT hr = m_hD3D->Create(m_hWnd, set);
 	if (FAILED(hr)) {
 		m_hD3D->Dispose();
 		delete m_hD3D;

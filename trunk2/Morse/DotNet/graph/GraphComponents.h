@@ -22,6 +22,8 @@ public:
 	Graph* getAt(int index);
 	int length();
 
+public:
+	int getDimension();
 
 private:
 	struct dataS {

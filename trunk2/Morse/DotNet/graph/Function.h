@@ -13,8 +13,13 @@ public:
 
 public:
 	JDouble* getVariables();
+	
 	JDouble F(int f);
+	void	F(JDouble* value);
+
 	JDouble dF(int f, int x);
+	void	dF(JDouble* f, JDouble** data);
+	void	dF(JDouble** data);
 
 	void t();
 	JDouble tF(int f);

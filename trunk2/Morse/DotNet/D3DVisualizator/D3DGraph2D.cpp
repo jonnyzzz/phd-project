@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include ".\d3dgraph2d.h"
-
+#include ".\DrawableSet.h"
+#include ".\DrawableSetIterator.h"
 
 const DWORD D3DGraph2D::POINTVERTEX::FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE;
 
@@ -8,37 +9,41 @@ float inline D3DGraph2D::Max(float a, float b) {
 	return (a>b)?a:b;
 }
 
+JDouble inline D3DGraph2D::Max(JDouble a, JDouble b) {
+	printf(".");
+	return (a>b)?a:b;
+}
+
+JDouble inline D3DGraph2D::Abs(JDouble x) {
+	return (x>0)? x : -x;
+}
+
+
 D3DGraph2D::D3DGraph2D(void)
 {
 	eye_fov = D3DX_PI/4;
-	graph = NULL;
-	color = NULL;
+	drawableSet = NULL;
 }
 
 D3DGraph2D::~D3DGraph2D(void)
 {
-	if (color != NULL) 
-		delete color;
 }
 
 
 
-HRESULT D3DGraph2D::Create(HWND hwnd, Graph* graph, GraphColor* color, int dim1, int dim2) {
+HRESULT D3DGraph2D::Create(HWND hwnd, DrawableSet* drawableSet) {
 	HRESULT hr;
 	hr = D3DKernel::Create(hwnd);
 	if (FAILED(hr)) return hr;
-	this->graph = graph;
-	this->color = color;
-	this->dim1 = dim1;
-	this->dim2 = dim2;
+
+	this->drawableSet = drawableSet;
+
+	printf("before On Center\n");
+	
+
 	this->OnCenterView();
 
-	hr = this->createAndFillVertexBuffer();
-	if (FAILED(hr)) {
-		D3DKernelException("Failed to create vertex buffer for graph");
-		return hr;
-	}
-
+	printf("S_OK\n");
 
 	return S_OK;
 }
@@ -49,13 +54,20 @@ void D3DGraph2D::OnCenterView() {
 	if (!is_initialized) return;
 
 	zfactor = 1;
-	float cx = (float)(graph->getMax()[dim1] - graph->getMin()[dim1]) /2 ;
-	float cy = (float)(graph->getMax()[dim2] - graph->getMin()[dim2]) /2 ;
+	float c[2];
+	drawableSet->getLength(c);
+
+	//float cx = (float)(graph->getMax()[dim1] - graph->getMin()[dim1]) /2 ;
+	//float cy = (float)(graph->getMax()[dim2] - graph->getMin()[dim2]) /2 ;
+
+	float cx = c[0]/2;
+	float cy = c[1]/2;
 
 	float z = -(((Max(cx, cy)) / tan(eye_fov/2))) * 1.03f;
 
-	eye_pos[0] = (float)(graph->getMax()[dim1] + graph->getMin()[dim1])/2;
-	eye_pos[1] = (float)(graph->getMax()[dim2] + graph->getMin()[dim2])/2;
+	drawableSet->getMidPoint(eye_pos);
+	//eye_pos[0] = (float)(graph->getMax()[dim1] + graph->getMin()[dim1])/2;
+	//eye_pos[1] = (float)(graph->getMax()[dim2] + graph->getMin()[dim2])/2;
 	eye_pos[2] = z;
 
 	printf("view: %f, %f, %f\n", eye_pos[0], eye_pos[1], eye_pos[2]);	
@@ -114,78 +126,26 @@ HRESULT D3DGraph2D::initMatrices() {
 
 /////////////////////////////////////////////////////////////////////////////
 
-HRESULT D3DGraph2D::createAndFillVertexBuffer() {
-	int point_max = d3d_caps.MaxPrimitiveCount / 6;
-	if (point_max > graph->getNumberOfNodes()) {
-		point_max = graph->getNumberOfNodes();
-	}
-	int count = 0;
+void D3DGraph2D::createVertex(DrawableSetIterator* it, JDouble* eps, POINTVERTEX* p) {
+	const float Z = 0;		
+	float x[3];	
+	
+	//printf("Inint\n");
 
-	NodeEnumerator* ne = graph->getNodeRoot();
-	Node* node;
-	POINTVERTEX* pv;
-	LPDIRECT3DVERTEXBUFFER8 vb = NULL;
-	while (node = graph->getNode(ne)) {
-		if (count == 0) {			
-			HRESULT hr;
-			hr = d3d_device->CreateVertexBuffer( point_max *  6	* sizeof(POINTVERTEX), 
-				D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY | D3DUSAGE_POINTS, 
-				POINTVERTEX::FVF, D3DPOOL_DEFAULT, &vb );
-			if (FAILED(hr)) {
-				D3DKernelException("Failed to create VertexBuffer");
-				printf("Parameters Of Creation: number = %d\n", point_max);
-				return hr;
-			}
+	it->coordinate(x);	 //third coordinate is't used there, but needed for function call	
 
-			hr = vb->Lock( 0, point_max * 6* sizeof(POINTVERTEX),
-				(BYTE**) &pv, D3DLOCK_DISCARD );
-			if (FAILED(hr)) {
-				D3DKernelException("Failed to create Lock created VertexBuffer");
-				return hr;
-			}
+	//printf("Coordinate\n");
 
-			D3DKernelException("Vertex Buffer OK");
-		}
-
-		createVertex(node, pv);
-
-		count++;
-
-		if (count >= point_max) {
-			vb->Unlock();
-			RenderList rl;
-			rl.vb = vb;
-			rl.count = count;
-			buffer.push_back(rl);
-			vb = NULL;
-		}    
-	}
-	graph->freeNodeEnumerator(ne);
-	if (vb != NULL) {
-		vb->Unlock();
-		RenderList rl;
-		rl.vb = vb;
-		rl.count = count;
-		buffer.push_back(rl);
-		vb = NULL;
-	}
-
-	return S_OK;
-}
-
-void D3DGraph2D::createVertex(Node* node, POINTVERTEX*& p) {
-	const float Z = 0;	
-	const JInt* cells = (graph)->getCells(node);
-	float x[2];
-	x[0] = (float)graph->toExternal(cells[dim1], dim1);
-	x[1] = (float)graph->toExternal(cells[dim2], dim2);
 	float d[2];
-	d[0] = (float)graph->getEps()[dim1];
-	d[1] = (float)graph->getEps()[dim2];
+	d[0] = (float)eps[0];
+	d[1] = (float)eps[1];
 
-	DWORD color = 0x34453d;//(*this->color)[node];
+	x[0] -= d[0]/2;
+	x[1] -= d[0]/2;
 
-	//printf("c: %d %d \n", cells[0], cells[1]);
+	DWORD color = it->color();
+
+	//printf("Color\n");
 
 	(*p).v = D3DXVECTOR3(x[0], x[1], Z);
 	(*p).color = color;
@@ -208,6 +168,25 @@ void D3DGraph2D::createVertex(Node* node, POINTVERTEX*& p) {
 	p++;
 }
 
+void D3DGraph2D::createEps(JDouble* eps) {
+	RECT r;
+	GetClientRect(d3d_hwnd, &r);
+	JInt screen[2] = {r.right - r.left, r.bottom - r.top};
+	JDouble geps[3];
+	drawableSet->getEps(geps);
+
+	JDouble len = this->Abs(eye_pos[2] / tan(eye_fov)); //length on axis
+
+	printf("Eps: \n");
+    for (int i=0; i<2; i++) {
+		eps[i] = this->Max(geps[i], len/screen[i]*4);//(float)len/screen[i]*4; //
+
+		printf("Eps[%d] = %f\n", i, (double)eps[i]);
+		printf("Gps[%d] = %f\n", i, (double)geps[i]);
+		printf("ZGps[%d] = %f\n", i, (double)(len/(double)screen[i]*4));
+	}
+	printf("\n");
+}
 //////////////////////////////////////////////////////////////////////////////
 
 HRESULT D3DGraph2D::Render() {
@@ -215,40 +194,44 @@ HRESULT D3DGraph2D::Render() {
 }
 
 HRESULT D3DGraph2D::renderPrimitive() {
-	D3DKernelException("Rendering primitive");
-	printf("Number of VertexBuffers = %d\n", buffer.size());
+	D3DKernelException("Rendering primitive");	
 	HRESULT hr;
 
-	for (VertexList::iterator it = buffer.begin(); it != buffer.end(); it++) {
+	DrawableSetIterator* it = drawableSet->iterator();
 
-		D3DKernelException("Something to render found!");
+	POINTVERTEX point[6];
 
-		hr = d3d_device->SetStreamSource( 0, it->vb, sizeof(POINTVERTEX) );
-		if (FAILED(hr)) {
-			D3DKernelException("Unable to set Stream Source");
-			return hr;
-		}
-		hr = d3d_device->SetVertexShader( POINTVERTEX::FVF );
-		if (FAILED(hr)) {
-			D3DKernelException("Unable to set VertexShaderType");
-			return hr;
-		}
+	JDouble eps[2];
 
-		hr = d3d_device->DrawPrimitive( D3DPT_TRIANGLELIST, 0, 2*it->count);
-		if (FAILED(hr)) {
-			D3DKernelException("Failed to DrawPrimitive");
-			return hr;
-		}
+	this->createEps(eps);
 
-		printf("Primitive to render = %d\n", it->count * 2);
+	hr = d3d_device->SetVertexShader(POINTVERTEX::FVF);
+	if (FAILED(hr)) {
+		D3DKernelException("FAILED to set FVF");
 	}
 
+	while (it->next()) {
+		
+		//printf("After first NEXT\n");
+
+		ATLASSERT(it->current() != NULL);
+
+		createVertex(it, eps, point);
+		
+		hr = d3d_device->DrawPrimitiveUP(D3DPT_TRIANGLELIST, 2, point, sizeof(POINTVERTEX)); 
+		if (FAILED(hr)) {
+			D3DKernelException("DrawPrimitiveUP failed!");
+		}		
+	}
+	//printf("BEFORE DELETE\n");
+	delete it;
+	
 	return S_OK;
 }
 
 
 bool D3DGraph2D::getMouseCoordinate(POINTS pt, MousePoint& fpoint) {
-	if (this->graph == NULL) return false;
+	if (drawableSet == NULL) return false;
 
 	RECT obl;
 	GetClientRect(d3d_hwnd, &obl);
@@ -276,7 +259,7 @@ bool D3DGraph2D::getMouseCoordinate(POINTS pt, MousePoint& fpoint) {
 }
 
 Node* D3DGraph2D::getCurrentNode(MousePoint& pt) {
-
+	/*
 	JInt zz[2];
 	zz[dim1] = graph->toInternal(pt.x, dim1);
 	zz[dim2] = graph->toInternal(pt.y, dim2);
@@ -286,7 +269,9 @@ Node* D3DGraph2D::getCurrentNode(MousePoint& pt) {
 		return NULL;
 	}
 
-	return graph->findNode(zz);
+	return drawableSet->findFirstNode(????);
+	*/
+	return NULL;
 }
 
 

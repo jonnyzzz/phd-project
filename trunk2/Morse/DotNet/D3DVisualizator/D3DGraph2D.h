@@ -11,7 +11,8 @@ using namespace stdext;
 #include "d3dkernel.h"
 #include "../graph/graph.h"
 
-typedef hash_map<Node*, DWORD> GraphColor;
+#include "DrawableSet.h"
+
 
 class D3DGraph2D :
 	public D3DKernel
@@ -22,7 +23,7 @@ public:
 
 
 public:
-	HRESULT Create(HWND hwnd, Graph* graph, GraphColor* color, int dim1, int dim2);
+	HRESULT Create(HWND hwnd, DrawableSet* drawableSet);
 	
 	HRESULT Render();
 
@@ -31,25 +32,11 @@ protected:
 	virtual HRESULT initMatrices();
 	virtual HRESULT renderPrimitive();
 
-protected:
-	HRESULT createAndFillVertexBuffer();
-
-	struct RenderList {
-		LPDIRECT3DVERTEXBUFFER8 vb;
-		int count;
-	};
-
-	typedef list< RenderList > VertexList;
-	VertexList buffer;
-	
-
-
 public:
 	void OnCenterView();
 	void OnMove(float dx, float dy, float dz);
 	float getZoomFactor();
 	
-
 private:
 	struct POINTVERTEX
 	{
@@ -63,15 +50,14 @@ private:
 	float eye_fov;
 	float zfactor;
 
-protected:
-	int dim1;
-	int dim2;
-	Graph* graph;
-	GraphColor* color;
-
 private:
 	float Max(float x, float xx);
-		void createVertex(Node* node, POINTVERTEX*& pv);
+	JDouble Max(JDouble x, JDouble y);
+	JDouble Abs(JDouble x);
+	
+	void createVertex(DrawableSetIterator* it, JDouble* eps, POINTVERTEX* p);
+	void createEps(JDouble* eps);
+
 
 
 public: 
@@ -81,4 +67,7 @@ public:
 	};
 	bool getMouseCoordinate(POINTS point, MousePoint& fpoint);
 	Node* getCurrentNode(MousePoint& pt);
+
+private:
+	DrawableSet* drawableSet;
 };

@@ -118,6 +118,12 @@
 				RelativePath=".\DrawableGraph.cpp">
 			</File>
 			<File
+				RelativePath=".\DrawableSet.cpp">
+			</File>
+			<File
+				RelativePath=".\DrawableSetIterator.cpp">
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -151,6 +157,12 @@
 			</File>
 			<File
 				RelativePath=".\DrawableGraph.h">
+			</File>
+			<File
+				RelativePath=".\DrawableSet.h">
+			</File>
+			<File
+				RelativePath=".\DrawableSetIterator.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">

@@ -107,7 +107,7 @@ HRESULT DisplayableCoordinateSystem::CreateVertexBuffer() {
 		pv->v = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		pv->color = axisColor[i];
 		pv++;
-		pv->v = D3DXVECTOR3(x[i][0], x[i][1], x[i][2])*10;
+		pv->v = D3DXVECTOR3(x[i][0], x[i][1], x[i][2])*100;
 		pv->color = axisColor[i];
 		pv++;
 	}

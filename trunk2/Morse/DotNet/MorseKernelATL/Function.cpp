@@ -156,6 +156,8 @@ void CFunction::initializeContent() {
 			}
 		}
 
+		cout<<"Current iteration : "<<iterations<<"\n";
+
 		function = new Function(factory, dimension, iterations);
 
 		created = true;

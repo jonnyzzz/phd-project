@@ -90,6 +90,7 @@ Function::~Function(void)
 
 
 JDouble* Function::getVariables() {
+	cout<<"F: Iterations = "<<iterations<<"\n";
    return variables;
 }
 
@@ -105,21 +106,25 @@ JDouble Function::F(int f) {
 	if (iterations == 1) {
 	   return iF(f);
 	} else {
-		for (int i=0; i<dimension; i++) {
-			gx[i] = variables[i];
-		}
-		for (int it = 0; it<iterations; it++) {
-			iF(ans);
-			for (i=0; i<dimension; i++) {
-				variables[i] = ans[i];
-			}
-		}
-		for (int i=0; i<dimension; i++) {
-			variables[i] = gx[i];		
-		}
-
-		return ans[i];
+		cout<<"!";
+		F(ans);
+		return ans[f];
 	}	
+}
+
+void Function::F(JDouble *value) {
+	for (int i=0; i<dimension; i++) {
+		gx[i] = variables[i];
+	}
+	for (int it = 0; it<iterations; it++) {
+		iF(value);
+		for (i=0; i<dimension; i++) {
+			variables[i] = value[i];
+		}
+	}
+	for (int i=0; i<dimension; i++) {
+		variables[i] = gx[i];		
+	}
 }
 
 void Function::iF(JDouble* value) {
@@ -147,40 +152,69 @@ JDouble Function::dF(int f, int x) {
 	if (iterations == 1) { 
 		return idF(f, x);
 	} else {
-		for (int i=0; i<dimension; i++) {
-			gx[i] = variables[i];
-		}
-		idF(ansD);
-		iF(ans);
-		for (int it=1; it<iterations; it++) {
-            idF(ansDD);
-
-			for (int i=0; i<dimension; i++) {
-				for (int j=0; j<dimension; j++) {
-					ansT[i][j] = 0;
-					for (int k=0; k<dimension; k++) {
-						ansT[i][j] += ansD[i][k]*ansDD[k][j];
-					}
-				}
-			}
-
-			JDouble** tmp = ansT;
-			ansT = ansD;
-			ansD = ansT;
-		}
+		dF(ansD); // carefull, but it works!
 		return ansD[f][x];
 	}
 }
 
+void Function::dF(JDouble* dataF, JDouble** data) {
+	for (int i=0; i<dimension; i++) {
+		gx[i] = variables[i];
+	}
+	idF(ansD);
+	iF(dataF);
+	for (int it=1; it<iterations; it++) {
+		//x = f(x)
+		for (int i=0; i<dimension; i++) {
+			variables[i] = dataF[i];
+		}
+		//df(f(x))		
+		idF(ansDD);
+		iF(dataF);
+
+		//matrix mul
+		for (int i=0; i<dimension; i++) {
+			for (int j=0; j<dimension; j++) {
+				ansT[i][j] = 0;
+				for (int k=0; k<dimension; k++) {
+					ansT[i][j] += ansDD[i][k]*ansD[k][j];
+				}
+			}
+		}
+
+		JDouble** tmp = ansT;
+		ansT = ansD;
+		ansD = tmp;
+	}
+
+	for (int i=0; i<dimension; i++) {
+		for (int j=0; j<dimension; j++) {
+			data[i][j] = ansD[i][j];
+		}
+	}
+}
+
+void Function::dF(JDouble** data) {
+	dF(ans, data);
+}
+
 void Function::t() {
+	/*
    for (int i=0; i<dimension; i++) {
-      f0[i] = nativeF[i]->evaluate();
+      f0[i] = F(i);//nativeF[i]->evaluate();
       x0[i] = variables[i];
 
       for (int j=0; j<dimension; j++) {
-         d0[i][j] = nativeDF[i][j]->evaluate();
+		  //gread inoptimaality!
+         d0[i][j] = dF(i,j);//nativeDF[i][j]->evaluate();
       }
    }
+   */
+
+	for (int i=0; i<dimension; i++) {
+		x0[i] = variables[i];
+	}
+	dF(f0, d0);
 }
          
 JDouble Function::tF(int f) {
