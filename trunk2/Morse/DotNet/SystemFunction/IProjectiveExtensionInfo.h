@@ -22,6 +22,7 @@ public:
 
     virtual AbstractGraphCreator* graphExtender(Graph* graph, int* factor, ProgressBarInfo* info) = 0;
 	virtual AbstractProcess* nextStepProcess(Graph* graph, int* factor, int* ks, ProgressBarInfo* info) = 0;
+	virtual AbstractProcess* nextStepProcess(Graph* graph, int* factor, int* ks, double* offset1, double* offset2, ProgressBarInfo* info) = 0;
 	virtual CRom* morse(Graph* graph) = 0;
 
 	/*

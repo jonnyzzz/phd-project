@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Tue Feb 15 22:23:15 2005
+/* at Fri Feb 18 21:34:20 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -85,6 +85,12 @@ typedef interface IExtendablePointParams IExtendablePointParams;
 #define __ISubdevidePointParams_FWD_DEFINED__
 typedef interface ISubdevidePointParams ISubdevidePointParams;
 #endif 	/* __ISubdevidePointParams_FWD_DEFINED__ */
+
+
+#ifndef __ISubdevidableOverlapedPointParams_FWD_DEFINED__
+#define __ISubdevidableOverlapedPointParams_FWD_DEFINED__
+typedef interface ISubdevidableOverlapedPointParams ISubdevidableOverlapedPointParams;
+#endif 	/* __ISubdevidableOverlapedPointParams_FWD_DEFINED__ */
 
 
 #ifndef __IHomotopParams_FWD_DEFINED__
@@ -1682,6 +1688,158 @@ void __RPC_STUB ISubdevidePointParams_getOverlaping2_Stub(
 
 
 #endif 	/* __ISubdevidePointParams_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISubdevidableOverlapedPointParams_INTERFACE_DEFINED__
+#define __ISubdevidableOverlapedPointParams_INTERFACE_DEFINED__
+
+/* interface ISubdevidableOverlapedPointParams */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISubdevidableOverlapedPointParams;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("5240A861-6177-4AD5-BC6F-449A6E771FAC")
+    ISubdevidableOverlapedPointParams : public ISubdevidePointParams
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ISubdevidableOverlapedPointParamsVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISubdevidableOverlapedPointParams * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISubdevidableOverlapedPointParams * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISubdevidableOverlapedPointParams * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISubdevidableOverlapedPointParams * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISubdevidableOverlapedPointParams * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISubdevidableOverlapedPointParams * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISubdevidableOverlapedPointParams * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetProgressBarNotification )( 
+            ISubdevidableOverlapedPointParams * This,
+            /* [retval][out] */ IProgressBarNotification **notify);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *getCellDevider )( 
+            ISubdevidableOverlapedPointParams * This,
+            /* [in] */ int axis,
+            /* [retval][out] */ int *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *getCellPoints )( 
+            ISubdevidableOverlapedPointParams * This,
+            /* [in] */ int axis,
+            /* [retval][out] */ int *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *getOverlaping1 )( 
+            ISubdevidableOverlapedPointParams * This,
+            /* [in] */ int axis,
+            /* [retval][out] */ double *percent);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *getOverlaping2 )( 
+            ISubdevidableOverlapedPointParams * This,
+            /* [in] */ int axis,
+            /* [retval][out] */ double *percent);
+        
+        END_INTERFACE
+    } ISubdevidableOverlapedPointParamsVtbl;
+
+    interface ISubdevidableOverlapedPointParams
+    {
+        CONST_VTBL struct ISubdevidableOverlapedPointParamsVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISubdevidableOverlapedPointParams_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ISubdevidableOverlapedPointParams_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ISubdevidableOverlapedPointParams_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ISubdevidableOverlapedPointParams_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ISubdevidableOverlapedPointParams_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ISubdevidableOverlapedPointParams_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ISubdevidableOverlapedPointParams_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define ISubdevidableOverlapedPointParams_GetProgressBarNotification(This,notify)	\
+    (This)->lpVtbl -> GetProgressBarNotification(This,notify)
+
+
+#define ISubdevidableOverlapedPointParams_getCellDevider(This,axis,value)	\
+    (This)->lpVtbl -> getCellDevider(This,axis,value)
+
+
+#define ISubdevidableOverlapedPointParams_getCellPoints(This,axis,value)	\
+    (This)->lpVtbl -> getCellPoints(This,axis,value)
+
+#define ISubdevidableOverlapedPointParams_getOverlaping1(This,axis,percent)	\
+    (This)->lpVtbl -> getOverlaping1(This,axis,percent)
+
+#define ISubdevidableOverlapedPointParams_getOverlaping2(This,axis,percent)	\
+    (This)->lpVtbl -> getOverlaping2(This,axis,percent)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISubdevidableOverlapedPointParams_INTERFACE_DEFINED__ */
 
 
 #ifndef __IHomotopParams_INTERFACE_DEFINED__
@@ -4488,6 +4646,9 @@ EXTERN_C const IID IID_IKernel;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE EventNoImplementation( 
             /* [in] */ IKernelNode *nodeParent) = 0;
         
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AllocateGarbage( 
+            /* [in] */ int len) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -4574,6 +4735,10 @@ EXTERN_C const IID IID_IKernel;
             IKernel * This,
             /* [in] */ IKernelNode *nodeParent);
         
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AllocateGarbage )( 
+            IKernel * This,
+            /* [in] */ int len);
+        
         END_INTERFACE
     } IKernelVtbl;
 
@@ -4637,6 +4802,9 @@ EXTERN_C const IID IID_IKernel;
 
 #define IKernel_EventNoImplementation(This,nodeParent)	\
     (This)->lpVtbl -> EventNoImplementation(This,nodeParent)
+
+#define IKernel_AllocateGarbage(This,len)	\
+    (This)->lpVtbl -> AllocateGarbage(This,len)
 
 #endif /* COBJMACROS */
 
@@ -4749,6 +4917,18 @@ void __RPC_STUB IKernel_EventNoChilds_Stub(
 
 
 void __RPC_STUB IKernel_EventNoImplementation_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IKernel_AllocateGarbage_Proxy( 
+    IKernel * This,
+    /* [in] */ int len);
+
+
+void __RPC_STUB IKernel_AllocateGarbage_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,

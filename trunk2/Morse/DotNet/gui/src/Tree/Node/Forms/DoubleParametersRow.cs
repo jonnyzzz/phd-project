@@ -3,15 +3,15 @@ using System;
 namespace gui.Tree.Node.Forms
 {
 	/// <summary>
-	/// Summary description for PercentParameterRowInfo.
+	/// Summary description for DoubleParametersRow.
 	/// </summary>
-	public class PercentParameterRowInfo : IParametersRowInfo
+	public class DoubleParametersRow : IParametersRowInfo
 	{
-		private int dimension;
+		private int dimension; 
+		private string caption;
 		private double[] data;
-		string caption;
 
-		public PercentParameterRowInfo(int dimension, string caption)
+		public DoubleParametersRow(int dimension, string caption)
 		{
 			this.dimension = dimension;
 			this.caption = caption;
@@ -21,11 +21,11 @@ namespace gui.Tree.Node.Forms
 
 		public bool Submit(string inputed, int index)
 		{
-			data[index] = -10;
+			data[index] = 0;
 			try
 			{
 				data[index] = double.Parse(inputed);
-				return data[index] >= 0 && data[index] < 100;
+				return true;
 			} catch (Exception)
 			{
 				return false;
@@ -34,10 +34,7 @@ namespace gui.Tree.Node.Forms
 
 		public string Name
 		{
-			get
-			{
-				return caption;
-			}
+			get { return caption; }
 		}
 
 		public string DefaultValue(int index)
@@ -47,12 +44,8 @@ namespace gui.Tree.Node.Forms
 
 		public int Dimension
 		{
-			get
-			{
-				return dimension;
-			}
+			get { return dimension; }
 		}
-
 
 		public double[] Inputed
 		{

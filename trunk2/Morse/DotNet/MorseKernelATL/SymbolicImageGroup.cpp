@@ -9,6 +9,7 @@
 #include ".\ProjectiveBundleGraph.h"
 #include ".\ComputationGraphResult.h"
 #include ".\ProgressBarNotificationAdapter.h"
+#include "../cellimagebuilders/sioverlapedpointbuilder.h"
 
 CSymbolicImageGroup::CSymbolicImageGroup() {
 	this->kernel = NULL;	
@@ -231,13 +232,26 @@ STDMETHODIMP CSymbolicImageGroup::SubdevidePoint(ISubdevidePointParams* params) 
 
 	JInt* factor = new JInt[dim];
 	JInt* ks = new JInt[dim];
+	JDouble* offset1 = new JDouble[dim];
+	JDouble* offset2 = new JDouble[dim];
 
+	bool hasOffset = false;
 	for (int i=0; i<dim; i++) {
 		params->getCellDevider(i, &factor[i]);
 		params->getCellPoints(i, &ks[i]);
+		params->getOverlaping1(i, &offset1[i]);
+		params->getOverlaping2(i, &offset2[i]);
+
+		if (offset1[i] > 0 || offset2[i] > 0) hasOffset = true;
 	}
 
-	SIPointBuilder* sbp = new SIPointBuilder(cmst->getAt(0), factor, ks, func, pinfo);
+	AbstractPointBuilder* sbp;
+	if (hasOffset) {
+		sbp = new SIOverlapedPointBuilder(cmst->getAt(0), factor, ks, offset1, offset2, func, pinfo);
+	} else {
+		sbp =  new SIPointBuilder(cmst->getAt(0), factor, ks, func, pinfo);
+	}
+
 	sbp->start();
 	for (int i=0; i<cmst->length(); i++) {		
 		sbp->processNextGraph(cmst->getAt(i));
@@ -255,6 +269,8 @@ STDMETHODIMP CSymbolicImageGroup::SubdevidePoint(ISubdevidePointParams* params) 
 	SAFE_RELEASE(function);
 	delete[] factor;
 	delete[] ks;
+	delete[] offset1;
+	delete[] offset2;
 	delete cmst;
 
     kernel->EventNewComputationResult(this, ret);

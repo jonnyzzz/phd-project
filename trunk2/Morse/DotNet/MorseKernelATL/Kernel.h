@@ -63,6 +63,9 @@ __interface IKernel : IKernelPointer
     [id(9)]
         HRESULT EventNoImplementation([in] IKernelNode* nodeParent);       
 
+	[id(10), helpstring("debugging purposes only")]
+		HRESULT AllocateGarbage([in] int len);
+
 }; 
 
 class KernelException;
@@ -120,6 +123,9 @@ public:
     STDMETHOD(EventNewComputationResult)(IKernelNode* parentNode, IComputationResult* nodeCResult);
     STDMETHOD(EventNoChilds)(IKernelNode* nodeParent);
     STDMETHOD(EventNoImplementation)(IKernelNode* nodeParent);
+
+
+	STDMETHOD(AllocateGarbage)(int size);
 };
 
 

@@ -11,6 +11,7 @@
 #include "ComputationGraphResult.h"
 #include "../Homotop/IsolatingSet.h"
 #include "../cellimagebuilders/ProgressBarInfo.h"
+#include "../cellimagebuilders/sioverlapedpointbuilder.h"
 
 // CSymbolicImageGraph
 
@@ -86,9 +87,16 @@ STDMETHODIMP CSymbolicImageGraph::SubdevidePoint(ISubdevidePointParams* params) 
 	int dim = graph->getDimention();
 	JInt* factor = new JInt[dim];
 	JInt* ks = new JInt[dim];
+	JDouble* offset1 = new JDouble[dim];
+	JDouble* offset2 = new JDouble[dim];
+	bool hasOffset = false;
 	for (int i=0; i<dim; i++) {
 		params->getCellDevider(i, &factor[i]);
 		params->getCellPoints(i, &ks[i]);
+		params->getOverlaping1(i, &offset1[i]);
+		params->getOverlaping2(i, &offset2[i]);
+
+		if (offset1[i] > 0 || offset2[i] > 0) hasOffset = true;
 	}
 
 	IFunction* function = NULL;	
@@ -97,7 +105,14 @@ STDMETHODIMP CSymbolicImageGraph::SubdevidePoint(ISubdevidePointParams* params) 
 	SystemFunction* func;
 	function->getSystemFunction((void**)&func);
 
-	SIPointBuilder* pbs = new SIPointBuilder(graph, factor, ks, func, pinfo);
+	AbstractPointBuilder* pbs;
+	if (hasOffset) {
+		cout<<"\n\nUsing Overlaped Point Method\n\n";
+		pbs = new SIOverlapedPointBuilder(graph, factor, ks, offset1, offset2, func, pinfo);
+	} else {
+		cout<<"\n\nUsing default Point Method\n\n";
+		pbs = new SIPointBuilder(graph, factor, ks, func, pinfo);
+	}
 	pbs->start();
 
 	pbs->processNextGraph(graph);
@@ -112,6 +127,8 @@ STDMETHODIMP CSymbolicImageGraph::SubdevidePoint(ISubdevidePointParams* params) 
     
 	delete[] factor;
 	delete[] ks;
+	delete[] offset1;
+	delete[] offset2;
 	SAFE_RELEASE(function);	
 
 	kernel->EventNewComputationResult(this, res);

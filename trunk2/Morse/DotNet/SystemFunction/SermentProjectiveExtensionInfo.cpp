@@ -6,6 +6,7 @@
 #include "segmentprojectiveextensionmorsefunction.h"
 #include "../graph_simplex/romfunction2n.h"
 #include "../cellimagebuilders/mspointbuilder.h"
+#include "../cellimagebuilders/msoverlapedpointbuilder.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -32,6 +33,25 @@ AbstractProcess* SermentProjectiveExtensionInfo::nextStepProcess(Graph* graph, i
 	MSPointBuilder* pb = new MSPointBuilder(graph, factor, ks, systemFunction, info);
 	return pb;
 }
+
+AbstractProcess* SermentProjectiveExtensionInfo::nextStepProcess(Graph* graph, int* factor, int* ks, double* offset1, double* offset2, ProgressBarInfo* info) {
+	bool hasOverlaping = false;
+	for (int i=0; i<graph->getDimention(); i++) {
+		if (offset1[i] > 0 || offset2[i] > 0) {
+			hasOverlaping = true;
+			break;
+		}
+	}
+
+	if (!hasOverlaping) {
+		cout<<"\n\nStandard MSProjectiveExtension\n\n";
+		return nextStepProcess(graph, factor, ks, info);
+	} else {
+		cout<<"\n\nOverlaped MSProjectiveExtension\n\n";
+		return new MSOverlapedPointBuilder(graph, factor, ks, offset1, offset2, systemFunction, info);
+	}
+}
+
 
 AbstractGraphCreator* SermentProjectiveExtensionInfo::graphExtender(Graph* graph, int* factor, ProgressBarInfo* info) {
     return new SegmentProjectiveBundleMSCreationProcess(graph, factor, info);

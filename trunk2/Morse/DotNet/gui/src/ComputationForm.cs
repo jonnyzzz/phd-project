@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
+using gui.Logger;
 using gui.Panels;
 using gui.ProgressBar;
 using gui.Serialization;
@@ -53,6 +55,8 @@ namespace gui.Forms
 		private System.Windows.Forms.MenuItem menuItem2;
 		private gui.ProgressBar.SmartProgressBar smartProgressBar;
 		private System.Windows.Forms.Panel panelProgressBarBorder;
+		private System.Windows.Forms.MenuItem menuItemManagedGarbage;
+		private System.Windows.Forms.MenuItem menuItemNativeGarbage;
 		private IContainer components;
 
 		public void updateProgressBar(int min, int max, int current)
@@ -115,12 +119,14 @@ namespace gui.Forms
 			this.menuItemInternal = new System.Windows.Forms.MenuItem();
 			this.menuItemGC = new System.Windows.Forms.MenuItem();
 			this.menuItemStartGNUPlot = new System.Windows.Forms.MenuItem();
+			this.menuItemManagedGarbage = new System.Windows.Forms.MenuItem();
 			this.menuItemHelp = new System.Windows.Forms.MenuItem();
 			this.menuItemAbout = new System.Windows.Forms.MenuItem();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.panelNodeInfo = new System.Windows.Forms.Panel();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.panelRightDownInternal = new System.Windows.Forms.Panel();
+			this.panelProgressBarBorder = new System.Windows.Forms.Panel();
 			this.smartProgressBar = new gui.ProgressBar.SmartProgressBar();
 			this.label1 = new System.Windows.Forms.Label();
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -130,15 +136,15 @@ namespace gui.Forms
 			this.splitterUD = new System.Windows.Forms.Splitter();
 			this.panelLeft = new System.Windows.Forms.Panel();
 			this.splitterLR = new System.Windows.Forms.Splitter();
-			this.panelProgressBarBorder = new System.Windows.Forms.Panel();
+			this.menuItemNativeGarbage = new System.Windows.Forms.MenuItem();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.panelRightDownInternal.SuspendLayout();
+			this.panelProgressBarBorder.SuspendLayout();
 			this.panelRightDown.SuspendLayout();
 			this.panelRightUp.SuspendLayout();
 			this.panelRight.SuspendLayout();
 			this.panelLeft.SuspendLayout();
-			this.panelProgressBarBorder.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// computatioinTree
@@ -263,7 +269,9 @@ namespace gui.Forms
 			this.menuItemInternal.Index = 2;
 			this.menuItemInternal.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																							 this.menuItemGC,
-																							 this.menuItemStartGNUPlot});
+																							 this.menuItemStartGNUPlot,
+																							 this.menuItemManagedGarbage,
+																							 this.menuItemNativeGarbage});
 			this.menuItemInternal.Text = "Internal";
 			// 
 			// menuItemGC
@@ -278,6 +286,12 @@ namespace gui.Forms
 			this.menuItemStartGNUPlot.Index = 1;
 			this.menuItemStartGNUPlot.Text = "Start GNU plot";
 			this.menuItemStartGNUPlot.Click += new System.EventHandler(this.menuItemStartGNUPlot_Click);
+			// 
+			// menuItemManagedGarbage
+			// 
+			this.menuItemManagedGarbage.Index = 2;
+			this.menuItemManagedGarbage.Text = "Generate Managed Grabage";
+			this.menuItemManagedGarbage.Click += new System.EventHandler(this.menuItemManagedGarbage_Click);
 			// 
 			// menuItemHelp
 			// 
@@ -333,6 +347,15 @@ namespace gui.Forms
 			this.panelRightDownInternal.Name = "panelRightDownInternal";
 			this.panelRightDownInternal.Size = new System.Drawing.Size(360, 72);
 			this.panelRightDownInternal.TabIndex = 2;
+			// 
+			// panelProgressBarBorder
+			// 
+			this.panelProgressBarBorder.Controls.Add(this.smartProgressBar);
+			this.panelProgressBarBorder.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panelProgressBarBorder.Location = new System.Drawing.Point(5, 47);
+			this.panelProgressBarBorder.Name = "panelProgressBarBorder";
+			this.panelProgressBarBorder.Size = new System.Drawing.Size(350, 20);
+			this.panelProgressBarBorder.TabIndex = 3;
 			// 
 			// smartProgressBar
 			// 
@@ -428,14 +451,11 @@ namespace gui.Forms
 			this.splitterLR.TabIndex = 9;
 			this.splitterLR.TabStop = false;
 			// 
-			// panelProgressBarBorder
+			// menuItemNativeGarbage
 			// 
-			this.panelProgressBarBorder.Controls.Add(this.smartProgressBar);
-			this.panelProgressBarBorder.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panelProgressBarBorder.Location = new System.Drawing.Point(5, 47);
-			this.panelProgressBarBorder.Name = "panelProgressBarBorder";
-			this.panelProgressBarBorder.Size = new System.Drawing.Size(350, 20);
-			this.panelProgressBarBorder.TabIndex = 3;
+			this.menuItemNativeGarbage.Index = 3;
+			this.menuItemNativeGarbage.Text = "Alloc native memory";
+			this.menuItemNativeGarbage.Click += new System.EventHandler(this.menuItemNativeGarbage_Click);
 			// 
 			// ComputationForm
 			// 
@@ -451,11 +471,11 @@ namespace gui.Forms
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox2.ResumeLayout(false);
 			this.panelRightDownInternal.ResumeLayout(false);
+			this.panelProgressBarBorder.ResumeLayout(false);
 			this.panelRightDown.ResumeLayout(false);
 			this.panelRightUp.ResumeLayout(false);
 			this.panelRight.ResumeLayout(false);
 			this.panelLeft.ResumeLayout(false);
-			this.panelProgressBarBorder.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -697,6 +717,32 @@ namespace gui.Forms
 		{
 			adapter.OnFinish -= new gui.ProgressBar.ProgressBarNotificationAdapter.OnFinishDelegate(EnableMyControls);
 			this.Enabled = true;
+		}
+
+		private void menuItemManagedGarbage_Click(object sender, System.EventArgs e)
+		{
+			ArrayList garbage = new ArrayList();
+			long len = 0;
+			int dlen = 1024 * 1024;
+			while (true)
+			{
+				garbage.Add(new byte[dlen]);
+				len += dlen;
+				Log.LogMessage(this, "Allocated memory = {0}mb", len/1024/1024);
+			}
+		}
+
+		private void menuItemNativeGarbage_Click(object sender, System.EventArgs e)
+		{
+			long len = 0;
+			int dlen = 1024*1024;
+			while(true) 
+			{
+				Runner.Kernel.AllocateGarbage(dlen);
+				len += dlen;
+
+				Log.LogMessage(this, "Allocated Native memory = {0} mb", len/1024/1024);
+			}
 		}
 	}
 }

@@ -4,7 +4,6 @@
 #include "ProjectiveBundleGroup.h"
 #include "ProjectiveBundleGraph.h"
 
-
 // CProjectiveBundleGroup
 
 CProjectiveBundleGroup::CProjectiveBundleGroup() {
@@ -110,14 +109,18 @@ STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* param
 	int dim = graph->getDimention();
 	JInt* factor = new JInt[dim];
 	JInt* ks = new JInt[dim];
+	JDouble* offset1 = new JDouble[dim];
+	JDouble* offset2 = new JDouble[dim];
 
 	for (int i=0; i<dim; i++) {
 		params->getCellDevider(i, &factor[i]);
 		params->getCellPoints(i, &ks[i]);
+		params->getOverlaping1(i, &offset1[i]);
+		params->getOverlaping2(i, &offset2[i]);
 	}
 
 	IProjectiveExtensionInfo* info = getProjectiveExtensionInfo();
-	AbstractProcess* msb = info->nextStepProcess(graph, factor, ks, pinfo );
+	AbstractProcess* msb = info->nextStepProcess(graph, factor, ks, offset1, offset2, pinfo );
     msb->start();
 
     for (int i=0; i<cms->length(); i++) {
@@ -139,6 +142,8 @@ STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* param
  	
 	delete[] factor;
 	delete[] ks;
+	delete[] offset1;
+	delete[] offset2;		
     delete cms;
 
 	delete pinfo;

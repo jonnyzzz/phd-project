@@ -28,4 +28,4 @@ OpenGL Visualization
 Open API (COM SERVER, Abstract action for IKenelNode) IKernelNode -> SupportedActions
 FIX Morse: Use center of cell to compute value for arc
 Morse lazy arc value (re)computation
-Implement cell extraction algorithm for point method
+FIX Implement cell extraction algorithm for point method in Neighbourhood way

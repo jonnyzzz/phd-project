@@ -15,60 +15,6 @@ namespace gui.Tree.Node.Factory
 		{
 		}
 
-		#region dynamic casters
-
-		private static int[][] toArrays(ISubdevideParams subd, int dimension)
-		{
-			int[][] data = new int[1][];
-			data[0] = new int[dimension];
-			if (subd != null)
-			{
-				for (int i = 0; i < dimension; i++)
-				{
-					data[0][i] = subd.getCellDevider(i);
-				}
-			}
-			else
-			{
-				for (int i = 0; i < dimension; i++)
-				{
-					data[0][i] = 2;
-				}
-			}
-			return data;
-		}
-
-		private static int[][] toArrays(ISubdevidePointParams subd, int dimension)
-		{
-			int[][] data = new int[4][];
-			data[0] = new int[dimension];
-			data[1] = new int[dimension];
-			if (subd != null)
-			{
-				for (int i = 0; i < dimension; i++)
-				{
-					data[0][i] = subd.getCellDevider(i);
-					data[1][i] = subd.getCellPoints(i);
-				}
-			}
-			else
-			{
-				for (int i = 0; i < dimension; i++)
-				{
-					data[0][i] = 2;
-					data[1][i] = 2;
-				}
-			}
-			return data;
-		}
-
-		private static int[][] toArrays(IExtendablePointParams subd, int dimension)
-		{
-			return toArrays(subd as ISubdevideParams, dimension);
-		}
-
-		#endregion
-
 		#region ISubdevideParams...
 
 		public abstract class ParamsImpl : IParams
@@ -82,20 +28,16 @@ namespace gui.Tree.Node.Factory
 		public static ISubdevideParams ParamsSubdevide(IWin32Window owner, IGraph node, ISubdevideParams param)
 		{
 			Log.LogMessage(typeof (ISubdevideParams), "ISubdevideParams invoke");
-
-			NextStepParams ps = new NextStepParams();
 			int dimension = node.graphDimension();
-			int[][] par = toArrays(param, dimension);
 
-			if (ps.ShowDialog(owner, par, dimension) != DialogResult.OK)
+			IntParametersRowInfo factor = new IntParametersRowInfo(dimension, "Cell devisor");
+			ParametersInputForm dialog = new ParametersInputForm(new IParametersRowInfo[] { factor});
+
+			if (dialog.ShowDialog() == DialogResult.OK)
 			{
-				return null;
+				return new SubdevideParams(factor.Inputed);
 			}
-			else
-			{
-				par = ps.Result;
-				return new SubdevideParams(par[0]);
-			}
+			return null;
 		}
 
 		protected class SubdevideParams : ParamsImpl, ISubdevideParams
@@ -132,29 +74,35 @@ namespace gui.Tree.Node.Factory
 
 		public static ISubdevidePointParams ParamsSubdevidePoint(IWin32Window owner, IGraph node, ISubdevidePointParams param)
 		{
-			NextStepParams ps = new NextStepParams();
 			int dimension = node.graphDimension();
-			int[][] par = toArrays(param, dimension);
+			IntParametersRowInfo factor = new IntParametersRowInfo(dimension, "Cell division");
+			IntParametersRowInfo ks = new IntParametersRowInfo(dimension, "Points in cell");
+			PercentParameterRowInfo offset1 = new PercentParameterRowInfo(dimension, "Upper Offset");
+			PercentParameterRowInfo offset2 = new PercentParameterRowInfo(dimension, "Lover Offset");
 
-			if (ps.ShowDialog(owner, par, dimension) != DialogResult.OK)
-			{
-				return null;
+			ParametersInputForm dialog = new ParametersInputForm(new IParametersRowInfo[] {
+					  factor, 
+					  ks,
+					  offset1,
+				      offset2
+				});
+			
+
+			if (dialog.ShowDialog() == DialogResult.OK)
+			{				
+				return new SubdevididePointParams(factor.Inputed, ks.Inputed, offset1.Inputed, offset2.Inputed);
 			}
-			else
-			{
-				par = ps.Result;
-				return new SubdevididePointParams(par[0], par[1], par[2], par[3]);
-			}
+			return null;
 		}
 
 		protected class SubdevididePointParams : ParamsImpl, ISubdevidePointParams
 		{
 			private SubdevideParams factor;
 			private SubdevideParams ks;
-			private int[] overlap1;
-			private int[] overlap2;
+			private double[] overlap1;
+			private double[] overlap2;
 
-			public SubdevididePointParams(int[] factor, int[] ks, int[] overlap1, int[] overlap2)
+			public SubdevididePointParams(int[] factor, int[] ks, double[] overlap1, double[] overlap2)
 			{
 				this.factor = new SubdevideParams(factor);
 				this.ks = new SubdevideParams(ks);
@@ -179,12 +127,12 @@ namespace gui.Tree.Node.Factory
 
 			public double getOverlaping1(int axis)
 			{
-				return 1.0/overlap1[axis];
+				return overlap1[axis]/100;
 			}
 
 			public double getOverlaping2(int axis)
 			{
-				return 1.0/overlap2[axis];
+				return overlap2[axis]/100;
 			}
 		}
 
@@ -194,19 +142,17 @@ namespace gui.Tree.Node.Factory
 
 		public static IExtendablePointParams ParamsExtend(IWin32Window owner, IComputationExtendingResult result, IExtendablePointParams param)
 		{
-			NextStepParams ps = new NextStepParams();
 			int dimension = result.PointMethodProjectiveExtensionDimension();
-			int[][] par = toArrays(param, dimension);
+			IntParametersRowInfo factor = new IntParametersRowInfo(dimension,"Cell division");
+	
+			ParametersInputForm dialog = new ParametersInputForm(new IParametersRowInfo[] { factor});
 
-			if (ps.ShowDialog(owner, par, dimension) != DialogResult.OK)
+
+			if (dialog.ShowDialog() == DialogResult.OK)
 			{
-				return null;
+				return new ExtendableParams(factor.Inputed);
 			}
-			else
-			{
-				par = ps.Result;
-				return new ExtendableParams(par[0]);
-			}
+			return null;
 		}
 
 		protected class ExtendableParams : SubdevideParams, IExtendablePointParams
@@ -242,11 +188,12 @@ namespace gui.Tree.Node.Factory
 
 		public static IHomotopParams getHomotopParams(IWin32Window owner, int dimension)
 		{
-			double[] data = new double[dimension];
-			PointCoordinate pc = new PointCoordinate(data);
-			if (pc.ShowDialog(owner) == DialogResult.OK)
+			DoubleParametersRow data = new DoubleParametersRow(dimension, "Coordinate");
+			ParametersInputForm dialog = new ParametersInputForm(new IParametersRowInfo[] { data});
+
+			if (dialog.ShowDialog() == DialogResult.OK)
 			{
-				return new HomotopParams(pc.Array);
+				return new HomotopParams(data.Inputed);
 			}
 			else
 			{

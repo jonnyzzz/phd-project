@@ -138,3 +138,9 @@ STDMETHODIMP CKernel::EventNoImplementation(IKernelNode* nodeParent) {
     __raise noImplementation(nodeParent);
     return S_OK;
 }
+
+
+STDMETHODIMP CKernel::AllocateGarbage(int size) {
+	new char[size];
+	return S_OK;
+}

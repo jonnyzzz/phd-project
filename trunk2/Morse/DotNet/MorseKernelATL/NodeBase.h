@@ -81,6 +81,16 @@ __interface ISubdevidePointParams : ISubdevideParams {
 	HRESULT getOverlaping2([in] int axis, [out, retval] double* percent);
 };
 
+[
+	object,
+	uuid("5240A861-6177-4AD5-BC6F-449A6E771FAC"),
+	dual,
+	pointer_default(unique)
+]
+__interface ISubdevidableOverlapedPointParams : ISubdevidePointParams {
+
+
+};
 
 [
 	object,

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Tue Feb 15 22:23:15 2005
+/* at Fri Feb 18 21:34:20 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -116,6 +116,13 @@ extern const MIDL_STUB_DESC Object_StubDesc;
 
 extern const MIDL_SERVER_INFO ISubdevidePointParams_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO ISubdevidePointParams_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO ISubdevidableOverlapedPointParams_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO ISubdevidableOverlapedPointParams_ProxyInfo;
 
 
 extern const MIDL_STUB_DESC Object_StubDesc;
@@ -1861,15 +1868,18 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1612 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure get_lowerBound */
+	/* Procedure put_upperLength */
+
+
+	/* Procedure AllocateGarbage */
 
 /* 1614 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 1616 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1620 */	NdrFcShort( 0x9 ),	/* 9 */
+/* 1620 */	NdrFcShort( 0x10 ),	/* 16 */
 /* 1622 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 1624 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1626 */	NdrFcShort( 0x2c ),	/* 44 */
+/* 1624 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 1626 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 1628 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
 /* 1630 */	0x8,		/* 8 */
@@ -1878,12 +1888,18 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1634 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 1636 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter pVal */
+	/* Parameter newVal */
 
-/* 1638 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+
+	/* Parameter len */
+
+/* 1638 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 1640 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 1642 */	0xc,		/* FC_DOUBLE */
+/* 1642 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
+
+	/* Return value */
+
 
 	/* Return value */
 
@@ -1892,15 +1908,15 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1648 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure put_lowerBound */
+	/* Procedure get_lowerBound */
 
 /* 1650 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 1652 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1656 */	NdrFcShort( 0xa ),	/* 10 */
-/* 1658 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 1660 */	NdrFcShort( 0x10 ),	/* 16 */
-/* 1662 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 1656 */	NdrFcShort( 0x9 ),	/* 9 */
+/* 1658 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 1660 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1662 */	NdrFcShort( 0x2c ),	/* 44 */
 /* 1664 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
 /* 1666 */	0x8,		/* 8 */
@@ -1911,7 +1927,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter pVal */
 
-/* 1674 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 1674 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
 /* 1676 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 1678 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
@@ -1919,19 +1935,19 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 	/* Return value */
 
 /* 1680 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 1682 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 1682 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 1684 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure get_upperBound */
+	/* Procedure put_lowerBound */
 
 /* 1686 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 1688 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1692 */	NdrFcShort( 0xb ),	/* 11 */
-/* 1694 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 1696 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1698 */	NdrFcShort( 0x2c ),	/* 44 */
+/* 1692 */	NdrFcShort( 0xa ),	/* 10 */
+/* 1694 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 1696 */	NdrFcShort( 0x10 ),	/* 16 */
+/* 1698 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 1700 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
 /* 1702 */	0x8,		/* 8 */
@@ -1942,7 +1958,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter pVal */
 
-/* 1710 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+/* 1710 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 1712 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 1714 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
@@ -1950,19 +1966,19 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 	/* Return value */
 
 /* 1716 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 1718 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 1718 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 1720 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure put_upperBound */
+	/* Procedure get_upperBound */
 
 /* 1722 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 1724 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1728 */	NdrFcShort( 0xc ),	/* 12 */
-/* 1730 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 1732 */	NdrFcShort( 0x10 ),	/* 16 */
-/* 1734 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 1728 */	NdrFcShort( 0xb ),	/* 11 */
+/* 1730 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 1732 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1734 */	NdrFcShort( 0x2c ),	/* 44 */
 /* 1736 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
 /* 1738 */	0x8,		/* 8 */
@@ -1973,7 +1989,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter pVal */
 
-/* 1746 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 1746 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
 /* 1748 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 1750 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
@@ -1981,18 +1997,18 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 	/* Return value */
 
 /* 1752 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 1754 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 1754 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 1756 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure put_lowerLength */
+	/* Procedure put_upperBound */
 
 /* 1758 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 1760 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1764 */	NdrFcShort( 0xe ),	/* 14 */
-/* 1766 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 1768 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 1764 */	NdrFcShort( 0xc ),	/* 12 */
+/* 1766 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 1768 */	NdrFcShort( 0x10 ),	/* 16 */
 /* 1770 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 1772 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
@@ -2002,29 +2018,29 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1778 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 1780 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter newVal */
+	/* Parameter pVal */
 
 /* 1782 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 1784 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 1786 */	0x8,		/* FC_LONG */
+/* 1786 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
 
 	/* Return value */
 
 /* 1788 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 1790 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 1790 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 1792 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure get_upperLength */
+	/* Procedure put_lowerLength */
 
 /* 1794 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 1796 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1800 */	NdrFcShort( 0xf ),	/* 15 */
+/* 1800 */	NdrFcShort( 0xe ),	/* 14 */
 /* 1802 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 1804 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1806 */	NdrFcShort( 0x24 ),	/* 36 */
+/* 1804 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 1806 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 1808 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
 /* 1810 */	0x8,		/* 8 */
@@ -2033,9 +2049,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1814 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 1816 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter pVal */
+	/* Parameter newVal */
 
-/* 1818 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+/* 1818 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 1820 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 1822 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
@@ -2047,15 +2063,15 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1828 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure put_upperLength */
+	/* Procedure get_upperLength */
 
 /* 1830 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 1832 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1836 */	NdrFcShort( 0x10 ),	/* 16 */
+/* 1836 */	NdrFcShort( 0xf ),	/* 15 */
 /* 1838 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 1840 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 1842 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 1840 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1842 */	NdrFcShort( 0x24 ),	/* 36 */
 /* 1844 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
 /* 1846 */	0x8,		/* 8 */
@@ -2064,9 +2080,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1850 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 1852 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter newVal */
+	/* Parameter pVal */
 
-/* 1854 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 1854 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
 /* 1856 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 1858 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
@@ -3961,6 +3977,87 @@ CInterfaceStubVtbl _ISubdevidePointParamsStubVtbl =
 };
 
 
+/* Object interface: ISubdevidableOverlapedPointParams, ver. 0.0,
+   GUID={0x5240A861,0x6177,0x4AD5,{0xBC,0x6F,0x44,0x9A,0x6E,0x77,0x1F,0xAC}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short ISubdevidableOverlapedPointParams_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    408,
+    36,
+    444,
+    120,
+    162,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO ISubdevidableOverlapedPointParams_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &ISubdevidableOverlapedPointParams_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO ISubdevidableOverlapedPointParams_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &ISubdevidableOverlapedPointParams_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(12) _ISubdevidableOverlapedPointParamsProxyVtbl = 
+{
+    0,
+    &IID_ISubdevidableOverlapedPointParams,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IParams::GetProgressBarNotification */ ,
+    0 /* forced delegation ISubdevideParams::getCellDevider */ ,
+    0 /* forced delegation ISubdevidePointParams::getCellPoints */ ,
+    0 /* forced delegation ISubdevidePointParams::getOverlaping1 */ ,
+    0 /* forced delegation ISubdevidePointParams::getOverlaping2 */
+};
+
+
+static const PRPC_STUB_FUNCTION ISubdevidableOverlapedPointParams_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _ISubdevidableOverlapedPointParamsStubVtbl =
+{
+    &IID_ISubdevidableOverlapedPointParams,
+    &ISubdevidableOverlapedPointParams_ServerInfo,
+    12,
+    &ISubdevidableOverlapedPointParams_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: IHomotopParams, ver. 0.0,
    GUID={0xC15CF4DF,0xC579,0x4A02,{0xA3,0x3E,0xAF,0xB2,0x6A,0xAB,0x2C,0x49}} */
 
@@ -5253,7 +5350,8 @@ static const unsigned short IKernel_FormatStringOffsetTable[] =
     1458,
     1500,
     1542,
-    1578
+    1578,
+    1614
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IKernel_ProxyInfo =
@@ -5277,7 +5375,7 @@ static const MIDL_SERVER_INFO IKernel_ServerInfo =
     0,
     0,
     0};
-CINTERFACE_PROXY_VTABLE(16) _IKernelProxyVtbl = 
+CINTERFACE_PROXY_VTABLE(17) _IKernelProxyVtbl = 
 {
     &IKernel_ProxyInfo,
     &IID_IKernel,
@@ -5296,7 +5394,8 @@ CINTERFACE_PROXY_VTABLE(16) _IKernelProxyVtbl =
     (void *) (INT_PTR) -1 /* IKernel::EventNewNode */ ,
     (void *) (INT_PTR) -1 /* IKernel::EventNewComputationResult */ ,
     (void *) (INT_PTR) -1 /* IKernel::EventNoChilds */ ,
-    (void *) (INT_PTR) -1 /* IKernel::EventNoImplementation */
+    (void *) (INT_PTR) -1 /* IKernel::EventNoImplementation */ ,
+    (void *) (INT_PTR) -1 /* IKernel::AllocateGarbage */
 };
 
 
@@ -5314,6 +5413,7 @@ static const PRPC_STUB_FUNCTION IKernel_table[] =
     NdrStubCall2,
     NdrStubCall2,
     NdrStubCall2,
+    NdrStubCall2,
     NdrStubCall2
 };
 
@@ -5321,7 +5421,7 @@ CInterfaceStubVtbl _IKernelStubVtbl =
 {
     &IID_IKernel,
     &IKernel_ServerInfo,
-    16,
+    17,
     &IKernel_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };
@@ -5422,14 +5522,14 @@ static const unsigned short IMorseSpectrum_FormatStringOffsetTable[] =
     (unsigned short) -1,
     528,
     564,
-    1614,
     1650,
     1686,
     1722,
-    240,
     1758,
+    240,
     1794,
-    1830
+    1830,
+    1614
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IMorseSpectrum_ProxyInfo =
@@ -6264,6 +6364,7 @@ const CInterfaceProxyVtbl * __MorseKernelATL_ProxyVtblList[] =
     ( CInterfaceProxyVtbl *) &_IMorsableProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IExtendableProxyVtbl,
     ( CInterfaceProxyVtbl *) &_ISerializerOutputDataProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_ISubdevidableOverlapedPointParamsProxyVtbl,
     ( CInterfaceProxyVtbl *) &_ISerializerInputDataProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IProjectiveBundleGraphProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IExtendableParamsProxyVtbl,
@@ -6306,6 +6407,7 @@ const CInterfaceStubVtbl * __MorseKernelATL_StubVtblList[] =
     ( CInterfaceStubVtbl *) &_IMorsableStubVtbl,
     ( CInterfaceStubVtbl *) &_IExtendableStubVtbl,
     ( CInterfaceStubVtbl *) &_ISerializerOutputDataStubVtbl,
+    ( CInterfaceStubVtbl *) &_ISubdevidableOverlapedPointParamsStubVtbl,
     ( CInterfaceStubVtbl *) &_ISerializerInputDataStubVtbl,
     ( CInterfaceStubVtbl *) &_IProjectiveBundleGraphStubVtbl,
     ( CInterfaceStubVtbl *) &_IExtendableParamsStubVtbl,
@@ -6348,6 +6450,7 @@ PCInterfaceName const __MorseKernelATL_InterfaceNamesList[] =
     "IMorsable",
     "IExtendable",
     "ISerializerOutputData",
+    "ISubdevidableOverlapedPointParams",
     "ISerializerInputData",
     "IProjectiveBundleGraph",
     "IExtendableParams",
@@ -6415,6 +6518,7 @@ const IID *  __MorseKernelATL_BaseIIDList[] =
     &IID_IDispatch,
     &IID_IDispatch,
     &IID_IDispatch,
+    &IID_IDispatch,
     0
 };
 
@@ -6425,13 +6529,13 @@ int __stdcall __MorseKernelATL_IID_Lookup( const IID * pIID, int * pIndex )
 {
     IID_BS_LOOKUP_SETUP
 
-    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernelATL, 37, 32 )
+    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernelATL, 38, 32 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernelATL, 16 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernelATL, 8 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernelATL, 4 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernelATL, 2 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernelATL, 1 )
-    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernelATL, 37, *pIndex )
+    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernelATL, 38, *pIndex )
     
 }
 
@@ -6442,7 +6546,7 @@ const ExtendedProxyFileInfo _MorseKernelATL_ProxyFileInfo =
     (const PCInterfaceName * ) & __MorseKernelATL_InterfaceNamesList,
     (const IID ** ) & __MorseKernelATL_BaseIIDList,
     & __MorseKernelATL_IID_Lookup, 
-    37,
+    38,
     2,
     0, /* table of [async_uuid] interfaces */
     0, /* Filler1 */

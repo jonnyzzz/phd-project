@@ -117,15 +117,25 @@ interface ISubdevidePointParams : ISubdevideParams {
 
 [
 	object,
+	uuid(5240A861-6177-4AD5-BC6F-449A6E771FAC),
+	dual,
+	pointer_default(unique)
+] 
+#line 90 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+interface ISubdevidableOverlapedPointParams : ISubdevidePointParams {
+};
+
+[
+	object,
 	uuid(C15CF4DF-C579-4A02-A33E-AFB26AAB2C49),
 	dual,
 	pointer_default(unique)
 ] 
-#line 91 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 101 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IHomotopParams : IParams {
-#line 93 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 103 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(10)] HRESULT  getCoordinateAt([in] int axis, [out,retval] double *value);
-#line 95 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 105 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(11)] HRESULT  notifyNodeNotFound([out,retval] VARIANT_BOOL *tryAgain);
 };
 
@@ -135,7 +145,7 @@ interface IHomotopParams : IParams {
 	dual,
 	pointer_default(unique)
 ] 
-#line 105 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 115 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IKernelPointer : IDispatch {
 };
 
@@ -145,11 +155,11 @@ interface IKernelPointer : IDispatch {
 	dual,
 	pointer_default(unique)
 ] 
-#line 116 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 126 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IKernelNode : IDispatch {
-#line 119 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 129 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[propget,id(91),helpstring("property kernel, IKernel")] HRESULT  kernel([out,retval] IKernelPointer **pVal );
-#line 122 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 132 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[propputref,id(91),helpstring("property kernel, IKernel")] HRESULT  kernel([in] IKernelPointer *newVal);
 };
 
@@ -159,13 +169,13 @@ interface IKernelNode : IDispatch {
 	dual,
 	pointer_default(unique)
 ] 
-#line 131 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 141 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IGraph : IKernelNode {
-#line 133 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 143 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(18)] HRESULT  graphDimension([out,retval] int *value);
-#line 135 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 145 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(19)] HRESULT  graphInfo([out,retval] IGraphInfo **info );
-#line 137 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 147 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(17),local,hidden,helpstring("data = GraphComponents*")] HRESULT  acceptChilds([in] void **data );
 };
 
@@ -175,9 +185,9 @@ interface IGraph : IKernelNode {
 	dual,
 	pointer_default(unique)
 ] 
-#line 146 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 156 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface ISubdevidable : IDispatch {
-#line 148 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 158 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(20)] HRESULT  Subdevide([in] ISubdevideParams *params);
 };
 
@@ -187,9 +197,9 @@ interface ISubdevidable : IDispatch {
 	dual,
 	pointer_default(unique)
 ] 
-#line 157 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 167 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface ISubdevidablePoint : IDispatch {
-#line 159 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 169 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(21)] HRESULT  SubdevidePoint([in] ISubdevidePointParams *params);
 };
 
@@ -199,9 +209,9 @@ interface ISubdevidablePoint : IDispatch {
 	dual,
 	pointer_default(unique)
 ] 
-#line 168 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 178 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IExtendable : IDispatch {
-#line 170 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 180 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(22)] HRESULT  Extend();
 };
 
@@ -210,9 +220,9 @@ interface IExtendable : IDispatch {
 	uuid(AF4F6B4B-C82F-49B9-9B01-167D5E38AD69),
 	pointer_default(unique)
 ] 
-#line 178 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 188 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IMorsable : IUnknown {
-#line 180 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 190 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(24)] HRESULT  Morse();
 };
 
@@ -222,9 +232,9 @@ interface IMorsable : IUnknown {
 	dual,
 	pointer_default(unique)
 ] 
-#line 189 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 199 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IExportData : IDispatch {
-#line 191 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 201 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(25)] HRESULT  ExportData([in] BSTR file);
 };
 
@@ -234,9 +244,9 @@ interface IExportData : IDispatch {
 	dual,
 	pointer_default(unique)
 ] 
-#line 200 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 210 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IHomotopFind : IDispatch {
-#line 202 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 212 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(27)] HRESULT  Homotop([in] IHomotopParams *params);
 };
 
@@ -246,7 +256,7 @@ interface IHomotopFind : IDispatch {
 	dual,
 	pointer_default(unique)
 ] 
-#line 214 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 224 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IComputationResult : IDispatch {
 };
 
@@ -256,15 +266,15 @@ interface IComputationResult : IDispatch {
 	dual,
 	pointer_default(unique)
 ] 
-#line 224 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 234 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IComputationGraphResult : IComputationResult {
-#line 226 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 236 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(60),helpstring("Localize strong components. Submits nodes throught events")] HRESULT  StrongComponents();
-#line 228 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 238 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(61),helpstring("Localize strong components and resolve edges")] HRESULT  StrongComponentsEdges();
-#line 230 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 240 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(62),helpstring("Localize loops")] HRESULT  Loops();
-#line 232 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 242 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(63),helpstring("Do nothing")] HRESULT  DoNothing();
 };
 
@@ -274,11 +284,11 @@ interface IComputationGraphResult : IComputationResult {
 	dual,
 	pointer_default(unique)
 ] 
-#line 241 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 251 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IComputationExtendingResult : IComputationResult {
-#line 243 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 253 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(71),helpstring("Create Projective extension for point methods")] HRESULT  PointMethodProjectiveExtension([in] IExtendablePointParams *params);
-#line 245 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 255 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(72),helpstring("Dimesion for new graph")] HRESULT  PointMethodProjectiveExtensionDimension([out,retval] int *dim);
 };
 
@@ -288,9 +298,9 @@ interface IComputationExtendingResult : IComputationResult {
 	dual,
 	pointer_default(unique)
 ] 
-#line 254 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 264 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IComputationMorseResult : IComputationResult {
-#line 256 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 266 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(62),helpstring("should perform SimplexMethod on created graph")] HRESULT  toResult();
 };
 
@@ -300,11 +310,11 @@ interface IComputationMorseResult : IComputationResult {
 	dual,
 	pointer_default(unique)
 ] 
-#line 266 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 276 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 interface IGroupNode : IDispatch {
-#line 268 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 278 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(50)] HRESULT  nodeCount([out,retval] int *val);
-#line 270 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+#line 280 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(51)] HRESULT  getNode([in] int index, [out,retval] IKernelNode **node );
 };
 
@@ -391,6 +401,8 @@ interface IKernel : IKernelPointer {
 	[id(8)] HRESULT  EventNoChilds([in] IKernelNode *nodeParent);
 #line 64 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	[id(9)] HRESULT  EventNoImplementation([in] IKernelNode *nodeParent);
+#line 67 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+	[id(10),helpstring("debugging purposes only")] HRESULT  AllocateGarbage([in] int len);
 };
 
 [
@@ -622,7 +634,7 @@ library MorseKernelATL
 		uuid(4C18DA89-C2C3-480B-8099-149918E4AE43),
 		helpstring("Kernel Class")
 	] 
-#line 82 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 85 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	coclass CKernel {
 		interface IKernel;
 		interface IKernelPointer;
