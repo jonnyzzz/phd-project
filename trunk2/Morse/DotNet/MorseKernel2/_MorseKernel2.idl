@@ -140,6 +140,19 @@ interface IWritableActionAllocator : IDispatch {
 
 [
 	object,
+	uuid(E20C06D8-1C51-455C-B306-33D0635F1E52),
+	dual,
+	helpstring("IActionManagerImpl Interface"),
+	pointer_default(unique)
+] 
+#line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionmanagerimpl.h"
+interface IActionManagerImpl : IActionManager {
+#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionmanagerimpl.h"
+	[id(11)] HRESULT  AddAction([in] IActionBase *action);
+};
+
+[
+	object,
 	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
 	dual,
 	helpstring("IComponentRegistrar Interface"),
@@ -219,6 +232,17 @@ library MorseKernel2
 	coclass CActionAllocator {
 		interface IActionAllocator;
 		interface IWritableActionAllocator;
+	};
+
+	[
+		version(1.0),
+		uuid(860DAF52-F263-4F92-A8BE-673E99A9959F),
+		helpstring("ActionManagerImpl Class")
+	] 
+#line 36 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionmanagerimpl.h"
+	coclass CActionManagerImpl {
+		interface IActionManagerImpl;
+		interface IActionManager;
 	};
 
 	[

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Fri Feb 25 00:08:10 2005
+/* at Fri Feb 25 16:48:03 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -105,6 +105,12 @@ typedef interface IWritableActionAllocator IWritableActionAllocator;
 #endif 	/* __IWritableActionAllocator_FWD_DEFINED__ */
 
 
+#ifndef __IActionManagerImpl_FWD_DEFINED__
+#define __IActionManagerImpl_FWD_DEFINED__
+typedef interface IActionManagerImpl IActionManagerImpl;
+#endif 	/* __IActionManagerImpl_FWD_DEFINED__ */
+
+
 #ifndef __IComponentRegistrar_FWD_DEFINED__
 #define __IComponentRegistrar_FWD_DEFINED__
 typedef interface IComponentRegistrar IComponentRegistrar;
@@ -139,6 +145,18 @@ typedef struct CActionAllocator CActionAllocator;
 #endif /* __cplusplus */
 
 #endif 	/* __CActionAllocator_FWD_DEFINED__ */
+
+
+#ifndef __CActionManagerImpl_FWD_DEFINED__
+#define __CActionManagerImpl_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CActionManagerImpl CActionManagerImpl;
+#else
+typedef struct CActionManagerImpl CActionManagerImpl;
+#endif /* __cplusplus */
+
+#endif 	/* __CActionManagerImpl_FWD_DEFINED__ */
 
 
 #ifndef __CCompReg_FWD_DEFINED__
@@ -1525,6 +1543,154 @@ void __RPC_STUB IWritableActionAllocator_RegisterActionFactory_Stub(
 #endif 	/* __IWritableActionAllocator_INTERFACE_DEFINED__ */
 
 
+#ifndef __IActionManagerImpl_INTERFACE_DEFINED__
+#define __IActionManagerImpl_INTERFACE_DEFINED__
+
+/* interface IActionManagerImpl */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IActionManagerImpl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("E20C06D8-1C51-455C-B306-33D0635F1E52")
+    IActionManagerImpl : public IActionManager
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddAction( 
+            /* [in] */ IActionBase *action) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IActionManagerImplVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IActionManagerImpl * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IActionManagerImpl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IActionManagerImpl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IActionManagerImpl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IActionManagerImpl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IActionManagerImpl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IActionManagerImpl * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLength )( 
+            IActionManagerImpl * This,
+            /* [in] */ int *count);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetAction )( 
+            IActionManagerImpl * This,
+            /* [in] */ int index,
+            /* [retval][out] */ IActionBase **action);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddAction )( 
+            IActionManagerImpl * This,
+            /* [in] */ IActionBase *action);
+        
+        END_INTERFACE
+    } IActionManagerImplVtbl;
+
+    interface IActionManagerImpl
+    {
+        CONST_VTBL struct IActionManagerImplVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IActionManagerImpl_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IActionManagerImpl_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IActionManagerImpl_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IActionManagerImpl_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IActionManagerImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IActionManagerImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IActionManagerImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IActionManagerImpl_GetLength(This,count)	\
+    (This)->lpVtbl -> GetLength(This,count)
+
+#define IActionManagerImpl_GetAction(This,index,action)	\
+    (This)->lpVtbl -> GetAction(This,index,action)
+
+
+#define IActionManagerImpl_AddAction(This,action)	\
+    (This)->lpVtbl -> AddAction(This,action)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IActionManagerImpl_AddAction_Proxy( 
+    IActionManagerImpl * This,
+    /* [in] */ IActionBase *action);
+
+
+void __RPC_STUB IActionManagerImpl_AddAction_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IActionManagerImpl_INTERFACE_DEFINED__ */
+
+
 #ifndef __IComponentRegistrar_INTERFACE_DEFINED__
 #define __IComponentRegistrar_INTERFACE_DEFINED__
 
@@ -2282,6 +2448,14 @@ EXTERN_C const CLSID CLSID_CActionAllocator;
 
 class DECLSPEC_UUID("43EAE42D-D986-4DAB-9D7D-D4B725E77AB0")
 CActionAllocator;
+#endif
+
+EXTERN_C const CLSID CLSID_CActionManagerImpl;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("860DAF52-F263-4F92-A8BE-673E99A9959F")
+CActionManagerImpl;
 #endif
 
 EXTERN_C const CLSID CLSID_CCompReg;

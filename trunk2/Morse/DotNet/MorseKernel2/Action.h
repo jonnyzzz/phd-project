@@ -24,6 +24,6 @@ __interface IAction : IActionBase
 	[id(3)]
 	HRESULT Do([in] IResult* input, [out, retval] IResult** output);
 	[id(4)]
-	HRESULT ProgressBarInfo([in] IProgressBarInfo* pinfo);
+	HRESULT SetProgressBarInfo([in] IProgressBarInfo* pinfo);
 };
 

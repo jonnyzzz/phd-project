@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "ActionAllocator.h"
+#include "ActionManagerImpl.h"
 
 
 // CActionAllocator
@@ -26,12 +27,21 @@ void CActionAllocator::FinalRelease() {
 
 
 STDMETHODIMP CActionAllocator::AllocateActionManager(INode* forNode, IActionManager ** manager) {
-	for (FactoryList::iterator it = factoryList.begin(); it != factoryList.end(); it++) {
-		
+	IActionManagerImpl* actionManager;
+	CActionManagerImpl::CreateInstance(&actionManager);
 
+	for (FactoryList::iterator it = factoryList.begin(); it != factoryList.end(); it++) {
+		IActionFactory* factory = *it;
+		IActionBase* action = NULL;
+		factory->CreateAction(forNode, &action);
+		if (action != NULL) {
+			actionManager->AddAction(action);
+			action->Release();
+		}
 	}
-	*manager = NULL;
-	return E_NOTIMPL;
+	actionManager->QueryInterface(manager);
+	actionManager->Release();	
+	return S_OK;
 }
 
 STDMETHODIMP CActionAllocator::RegisterActionFactory(IActionFactory* action) {

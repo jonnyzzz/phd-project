@@ -19,3 +19,5 @@ __interface IActionManager : IDispatch
 	[id(2)]
 	HRESULT GetAction([in] int index, [out, retval] IActionBase** action);
 };
+
+

@@ -167,6 +167,9 @@
 				RelativePath=".\ActionManager.cpp">
 			</File>
 			<File
+				RelativePath=".\ActionManagerImpl.cpp">
+			</File>
+			<File
 				RelativePath=".\compreg.cpp">
 			</File>
 			<File
@@ -227,6 +230,9 @@
 			</File>
 			<File
 				RelativePath=".\ActionManager.h">
+			</File>
+			<File
+				RelativePath=".\ActionManagerImpl.h">
 			</File>
 			<File
 				RelativePath=".\compreg.h">
