@@ -1,0 +1,26 @@
+Resources -> XML
+GraphNodeEnumerator leak
+Components in color in GNU PLOT
+3D Box in gnu plot
+Document class global integration
+Document dirty flag
+Serialization of Group nodes
+GNUPLOT template -> XML
+GNUPLOT smart template
+GNUPLOT image saver
+GNUPLOT throught pipe
+Morse Spectrum test
+Old-style Proj.Bundle for 2D systems
+Node action history
+Script support
+Progress bar support
+Stop support
+Nodefiltering support
+Optimized fixed pointes construction
+Lazy graph (.NET?)
+NodeParameters class
+TarjanStackOptimization
+Dimension increment doesn't kills imputed system
+Save fail doesn't kills app
+OpenGL Visualization
+Open API (COM SERVER, Abstract action for IKenelNode) IKernelNode -> SupportedActions
