@@ -1,6 +1,13 @@
 #include "StdAfx.h"
 #include ".\simpleboxprocess.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 SimpleBoxProcess::SimpleBoxProcess(Graph* graph, ISystemFunction* function, int* factor, ProgressBarInfo* pinfo)
 : AbstractBoxProcess(graph, function, factor, pinfo)
 {

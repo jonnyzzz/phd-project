@@ -23,10 +23,11 @@ Graph* MinimalLoopFinder::FindMinimalLoop(Graph* graph, Node* node) {
 	graph->setFlag(node, graphUsedFlag, false);
 	list1.push_back(newNodeEx(node, NULL));
 
+	bool b;
 	do {
-		nextStep(list1, list2, node, graph);
+		b = nextStep(list1, list2, node, graph);
 		list1 = list2;
-	} while(list2.size() > 1);
+	} while(b);
 
 	if (list2.size() == 1) {
 		NodeEx* nodeEx = *(list2.begin());
@@ -34,7 +35,7 @@ Graph* MinimalLoopFinder::FindMinimalLoop(Graph* graph, Node* node) {
 		//if there is 1 result -> it's loop
 		if (nodeEx->node == node) {
 			while (nodeEx->parent != NULL) {
-				graph->browseTo(nodeEx->node);
+				result->browseTo(nodeEx->node);
 				nodeEx = nodeEx->parent;
 			}
 		} else ASSERT(false);
@@ -46,7 +47,7 @@ Graph* MinimalLoopFinder::FindMinimalLoop(Graph* graph, Node* node) {
 
 
 //todo: Implement node check for duplicates in lists not using set (can works too slow)
-void MinimalLoopFinder::nextStep(NodeExList& in, NodeExList& out, Node* root, Graph* graph) {
+bool MinimalLoopFinder::nextStep(NodeExList& in, NodeExList& out, Node* root, Graph* graph) {
 	out.clear();	
 	for (NodeExList::iterator it = in.begin(); it != in.end(); it++) {
 		NodeEx* nodeEx = *it;
@@ -61,13 +62,14 @@ void MinimalLoopFinder::nextStep(NodeExList& in, NodeExList& out, Node* root, Gr
 				if (node == root) {
 					out.clear();
 					out.push_back(newNodeEx(node, nodeEx));
-					return;
+					return false;
 				} else {
 					out.push_back(newNodeEx(node, nodeEx));
 				}		
 			}
-		}
+		}		
 	}
+	return true;
 }
 
 

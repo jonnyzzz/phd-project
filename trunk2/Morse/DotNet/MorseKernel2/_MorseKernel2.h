@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Wed Mar 30 00:05:08 2005
+/* at Thu Mar 31 01:26:07 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -189,6 +189,30 @@ typedef interface IDummy IDummy;
 #endif 	/* __IDummy_FWD_DEFINED__ */
 
 
+#ifndef __IIsolatedSetAction_FWD_DEFINED__
+#define __IIsolatedSetAction_FWD_DEFINED__
+typedef interface IIsolatedSetAction IIsolatedSetAction;
+#endif 	/* __IIsolatedSetAction_FWD_DEFINED__ */
+
+
+#ifndef __IIsolatedSetParameters_FWD_DEFINED__
+#define __IIsolatedSetParameters_FWD_DEFINED__
+typedef interface IIsolatedSetParameters IIsolatedSetParameters;
+#endif 	/* __IIsolatedSetParameters_FWD_DEFINED__ */
+
+
+#ifndef __IMinimalLoopLocalizationAction_FWD_DEFINED__
+#define __IMinimalLoopLocalizationAction_FWD_DEFINED__
+typedef interface IMinimalLoopLocalizationAction IMinimalLoopLocalizationAction;
+#endif 	/* __IMinimalLoopLocalizationAction_FWD_DEFINED__ */
+
+
+#ifndef __IMinimalLoopLocalizationParameters_FWD_DEFINED__
+#define __IMinimalLoopLocalizationParameters_FWD_DEFINED__
+typedef interface IMinimalLoopLocalizationParameters IMinimalLoopLocalizationParameters;
+#endif 	/* __IMinimalLoopLocalizationParameters_FWD_DEFINED__ */
+
+
 #ifndef __IDummy1_FWD_DEFINED__
 #define __IDummy1_FWD_DEFINED__
 typedef interface IDummy1 IDummy1;
@@ -241,30 +265,6 @@ typedef interface IWritableKernell IWritableKernell;
 #define __IKernellImpl_FWD_DEFINED__
 typedef interface IKernellImpl IKernellImpl;
 #endif 	/* __IKernellImpl_FWD_DEFINED__ */
-
-
-#ifndef __IMinimalLoopLocalizationAction_FWD_DEFINED__
-#define __IMinimalLoopLocalizationAction_FWD_DEFINED__
-typedef interface IMinimalLoopLocalizationAction IMinimalLoopLocalizationAction;
-#endif 	/* __IMinimalLoopLocalizationAction_FWD_DEFINED__ */
-
-
-#ifndef __IMinimalLoopLocalizationParameters_FWD_DEFINED__
-#define __IMinimalLoopLocalizationParameters_FWD_DEFINED__
-typedef interface IMinimalLoopLocalizationParameters IMinimalLoopLocalizationParameters;
-#endif 	/* __IMinimalLoopLocalizationParameters_FWD_DEFINED__ */
-
-
-#ifndef __IIsolatedSetAction_FWD_DEFINED__
-#define __IIsolatedSetAction_FWD_DEFINED__
-typedef interface IIsolatedSetAction IIsolatedSetAction;
-#endif 	/* __IIsolatedSetAction_FWD_DEFINED__ */
-
-
-#ifndef __IIsolatedSetParameters_FWD_DEFINED__
-#define __IIsolatedSetParameters_FWD_DEFINED__
-typedef interface IIsolatedSetParameters IIsolatedSetParameters;
-#endif 	/* __IIsolatedSetParameters_FWD_DEFINED__ */
 
 
 #ifndef __CBoxMethodAction_FWD_DEFINED__
@@ -351,6 +351,30 @@ typedef struct CDummy CDummy;
 #endif 	/* __CDummy_FWD_DEFINED__ */
 
 
+#ifndef __CIsolatedSetAction_FWD_DEFINED__
+#define __CIsolatedSetAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CIsolatedSetAction CIsolatedSetAction;
+#else
+typedef struct CIsolatedSetAction CIsolatedSetAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CIsolatedSetAction_FWD_DEFINED__ */
+
+
+#ifndef __CMinimalLoopLocalizationAction_FWD_DEFINED__
+#define __CMinimalLoopLocalizationAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CMinimalLoopLocalizationAction CMinimalLoopLocalizationAction;
+#else
+typedef struct CMinimalLoopLocalizationAction CMinimalLoopLocalizationAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CMinimalLoopLocalizationAction_FWD_DEFINED__ */
+
+
 #ifndef __CDummy1_FWD_DEFINED__
 #define __CDummy1_FWD_DEFINED__
 
@@ -409,30 +433,6 @@ typedef struct CKernellImpl CKernellImpl;
 #endif /* __cplusplus */
 
 #endif 	/* __CKernellImpl_FWD_DEFINED__ */
-
-
-#ifndef __CMinimalLoopLocalizationAction_FWD_DEFINED__
-#define __CMinimalLoopLocalizationAction_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CMinimalLoopLocalizationAction CMinimalLoopLocalizationAction;
-#else
-typedef struct CMinimalLoopLocalizationAction CMinimalLoopLocalizationAction;
-#endif /* __cplusplus */
-
-#endif 	/* __CMinimalLoopLocalizationAction_FWD_DEFINED__ */
-
-
-#ifndef __CIsolatedSetAction_FWD_DEFINED__
-#define __CIsolatedSetAction_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CIsolatedSetAction CIsolatedSetAction;
-#else
-typedef struct CIsolatedSetAction CIsolatedSetAction;
-#endif /* __cplusplus */
-
-#endif 	/* __CIsolatedSetAction_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -4390,6 +4390,584 @@ EXTERN_C const IID IID_IDummy;
 #endif 	/* __IDummy_INTERFACE_DEFINED__ */
 
 
+#ifndef __IIsolatedSetAction_INTERFACE_DEFINED__
+#define __IIsolatedSetAction_INTERFACE_DEFINED__
+
+/* interface IIsolatedSetAction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IIsolatedSetAction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("787DC58F-CD39-4BE2-9B58-D5B99ADCFC4D")
+    IIsolatedSetAction : public IAction
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IIsolatedSetActionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IIsolatedSetAction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IIsolatedSetAction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IIsolatedSetAction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IIsolatedSetAction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IIsolatedSetAction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IIsolatedSetAction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IIsolatedSetAction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IIsolatedSetAction * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IIsolatedSetAction * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IIsolatedSetAction * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IIsolatedSetAction * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        END_INTERFACE
+    } IIsolatedSetActionVtbl;
+
+    interface IIsolatedSetAction
+    {
+        CONST_VTBL struct IIsolatedSetActionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IIsolatedSetAction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IIsolatedSetAction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IIsolatedSetAction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IIsolatedSetAction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IIsolatedSetAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IIsolatedSetAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IIsolatedSetAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IIsolatedSetAction_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IIsolatedSetAction_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IIsolatedSetAction_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IIsolatedSetAction_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IIsolatedSetAction_INTERFACE_DEFINED__ */
+
+
+#ifndef __IIsolatedSetParameters_INTERFACE_DEFINED__
+#define __IIsolatedSetParameters_INTERFACE_DEFINED__
+
+/* interface IIsolatedSetParameters */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IIsolatedSetParameters;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("01C806AD-6003-4F5B-8405-AE3DD637D854")
+    IIsolatedSetParameters : public IParameters
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetStartSet( 
+            /* [retval][out] */ IGraphResult **result) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IIsolatedSetParametersVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IIsolatedSetParameters * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IIsolatedSetParameters * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IIsolatedSetParameters * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IIsolatedSetParameters * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IIsolatedSetParameters * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IIsolatedSetParameters * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IIsolatedSetParameters * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetStartSet )( 
+            IIsolatedSetParameters * This,
+            /* [retval][out] */ IGraphResult **result);
+        
+        END_INTERFACE
+    } IIsolatedSetParametersVtbl;
+
+    interface IIsolatedSetParameters
+    {
+        CONST_VTBL struct IIsolatedSetParametersVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IIsolatedSetParameters_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IIsolatedSetParameters_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IIsolatedSetParameters_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IIsolatedSetParameters_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IIsolatedSetParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IIsolatedSetParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IIsolatedSetParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IIsolatedSetParameters_GetStartSet(This,result)	\
+    (This)->lpVtbl -> GetStartSet(This,result)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IIsolatedSetParameters_GetStartSet_Proxy( 
+    IIsolatedSetParameters * This,
+    /* [retval][out] */ IGraphResult **result);
+
+
+void __RPC_STUB IIsolatedSetParameters_GetStartSet_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IIsolatedSetParameters_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMinimalLoopLocalizationAction_INTERFACE_DEFINED__
+#define __IMinimalLoopLocalizationAction_INTERFACE_DEFINED__
+
+/* interface IMinimalLoopLocalizationAction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMinimalLoopLocalizationAction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9FFB9554-2D64-45EE-9F79-B31098FF8512")
+    IMinimalLoopLocalizationAction : public IAction
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimension( 
+            /* [in] */ IResultSet *resultSet,
+            /* [retval][out] */ int *dimension) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMinimalLoopLocalizationActionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMinimalLoopLocalizationAction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMinimalLoopLocalizationAction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMinimalLoopLocalizationAction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMinimalLoopLocalizationAction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMinimalLoopLocalizationAction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMinimalLoopLocalizationAction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMinimalLoopLocalizationAction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IMinimalLoopLocalizationAction * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IMinimalLoopLocalizationAction * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IMinimalLoopLocalizationAction * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IMinimalLoopLocalizationAction * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimension )( 
+            IMinimalLoopLocalizationAction * This,
+            /* [in] */ IResultSet *resultSet,
+            /* [retval][out] */ int *dimension);
+        
+        END_INTERFACE
+    } IMinimalLoopLocalizationActionVtbl;
+
+    interface IMinimalLoopLocalizationAction
+    {
+        CONST_VTBL struct IMinimalLoopLocalizationActionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMinimalLoopLocalizationAction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMinimalLoopLocalizationAction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMinimalLoopLocalizationAction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMinimalLoopLocalizationAction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMinimalLoopLocalizationAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMinimalLoopLocalizationAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMinimalLoopLocalizationAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IMinimalLoopLocalizationAction_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IMinimalLoopLocalizationAction_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IMinimalLoopLocalizationAction_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IMinimalLoopLocalizationAction_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#define IMinimalLoopLocalizationAction_GetDimension(This,resultSet,dimension)	\
+    (This)->lpVtbl -> GetDimension(This,resultSet,dimension)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IMinimalLoopLocalizationAction_GetDimension_Proxy( 
+    IMinimalLoopLocalizationAction * This,
+    /* [in] */ IResultSet *resultSet,
+    /* [retval][out] */ int *dimension);
+
+
+void __RPC_STUB IMinimalLoopLocalizationAction_GetDimension_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IMinimalLoopLocalizationAction_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMinimalLoopLocalizationParameters_INTERFACE_DEFINED__
+#define __IMinimalLoopLocalizationParameters_INTERFACE_DEFINED__
+
+/* interface IMinimalLoopLocalizationParameters */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMinimalLoopLocalizationParameters;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("B90D3C01-F6F8-4D06-8E01-C12C6D51F70A")
+    IMinimalLoopLocalizationParameters : public IParameters
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCoordinate( 
+            /* [in] */ int id,
+            /* [retval][out] */ double *data) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMinimalLoopLocalizationParametersVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMinimalLoopLocalizationParameters * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMinimalLoopLocalizationParameters * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMinimalLoopLocalizationParameters * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMinimalLoopLocalizationParameters * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMinimalLoopLocalizationParameters * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMinimalLoopLocalizationParameters * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMinimalLoopLocalizationParameters * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCoordinate )( 
+            IMinimalLoopLocalizationParameters * This,
+            /* [in] */ int id,
+            /* [retval][out] */ double *data);
+        
+        END_INTERFACE
+    } IMinimalLoopLocalizationParametersVtbl;
+
+    interface IMinimalLoopLocalizationParameters
+    {
+        CONST_VTBL struct IMinimalLoopLocalizationParametersVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMinimalLoopLocalizationParameters_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMinimalLoopLocalizationParameters_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMinimalLoopLocalizationParameters_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMinimalLoopLocalizationParameters_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMinimalLoopLocalizationParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMinimalLoopLocalizationParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMinimalLoopLocalizationParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IMinimalLoopLocalizationParameters_GetCoordinate(This,id,data)	\
+    (This)->lpVtbl -> GetCoordinate(This,id,data)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IMinimalLoopLocalizationParameters_GetCoordinate_Proxy( 
+    IMinimalLoopLocalizationParameters * This,
+    /* [in] */ int id,
+    /* [retval][out] */ double *data);
+
+
+void __RPC_STUB IMinimalLoopLocalizationParameters_GetCoordinate_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IMinimalLoopLocalizationParameters_INTERFACE_DEFINED__ */
+
+
 #ifndef __IDummy1_INTERFACE_DEFINED__
 #define __IDummy1_INTERFACE_DEFINED__
 
@@ -5520,584 +6098,6 @@ EXTERN_C const IID IID_IKernellImpl;
 #endif 	/* __IKernellImpl_INTERFACE_DEFINED__ */
 
 
-#ifndef __IMinimalLoopLocalizationAction_INTERFACE_DEFINED__
-#define __IMinimalLoopLocalizationAction_INTERFACE_DEFINED__
-
-/* interface IMinimalLoopLocalizationAction */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IMinimalLoopLocalizationAction;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("9FFB9554-2D64-45EE-9F79-B31098FF8512")
-    IMinimalLoopLocalizationAction : public IAction
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimension( 
-            /* [in] */ IResultSet *resultSet,
-            /* [out] */ int *dimension) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IMinimalLoopLocalizationActionVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IMinimalLoopLocalizationAction * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IMinimalLoopLocalizationAction * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IMinimalLoopLocalizationAction * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IMinimalLoopLocalizationAction * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IMinimalLoopLocalizationAction * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IMinimalLoopLocalizationAction * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IMinimalLoopLocalizationAction * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
-            IMinimalLoopLocalizationAction * This,
-            /* [in] */ IParameters *parameters);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
-            IMinimalLoopLocalizationAction * This,
-            /* [in] */ IProgressBarInfo *pinfo);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
-            IMinimalLoopLocalizationAction * This,
-            /* [in] */ IResultSet *result,
-            /* [retval][out] */ VARIANT_BOOL *can);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
-            IMinimalLoopLocalizationAction * This,
-            /* [in] */ IResultSet *input,
-            /* [retval][out] */ IResultSet **output);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimension )( 
-            IMinimalLoopLocalizationAction * This,
-            /* [in] */ IResultSet *resultSet,
-            /* [out] */ int *dimension);
-        
-        END_INTERFACE
-    } IMinimalLoopLocalizationActionVtbl;
-
-    interface IMinimalLoopLocalizationAction
-    {
-        CONST_VTBL struct IMinimalLoopLocalizationActionVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IMinimalLoopLocalizationAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IMinimalLoopLocalizationAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IMinimalLoopLocalizationAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IMinimalLoopLocalizationAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IMinimalLoopLocalizationAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IMinimalLoopLocalizationAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IMinimalLoopLocalizationAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-
-#define IMinimalLoopLocalizationAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
-
-#define IMinimalLoopLocalizationAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
-
-#define IMinimalLoopLocalizationAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
-
-#define IMinimalLoopLocalizationAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
-
-
-#define IMinimalLoopLocalizationAction_GetDimension(This,resultSet,dimension)	\
-    (This)->lpVtbl -> GetDimension(This,resultSet,dimension)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMinimalLoopLocalizationAction_GetDimension_Proxy( 
-    IMinimalLoopLocalizationAction * This,
-    /* [in] */ IResultSet *resultSet,
-    /* [out] */ int *dimension);
-
-
-void __RPC_STUB IMinimalLoopLocalizationAction_GetDimension_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IMinimalLoopLocalizationAction_INTERFACE_DEFINED__ */
-
-
-#ifndef __IMinimalLoopLocalizationParameters_INTERFACE_DEFINED__
-#define __IMinimalLoopLocalizationParameters_INTERFACE_DEFINED__
-
-/* interface IMinimalLoopLocalizationParameters */
-/* [unique][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IMinimalLoopLocalizationParameters;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("B90D3C01-F6F8-4D06-8E01-C12C6D51F70A")
-    IMinimalLoopLocalizationParameters : public IParameters
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCoordinate( 
-            /* [in] */ int id,
-            /* [retval][out] */ double *data) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IMinimalLoopLocalizationParametersVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IMinimalLoopLocalizationParameters * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IMinimalLoopLocalizationParameters * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IMinimalLoopLocalizationParameters * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IMinimalLoopLocalizationParameters * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IMinimalLoopLocalizationParameters * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IMinimalLoopLocalizationParameters * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IMinimalLoopLocalizationParameters * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetCoordinate )( 
-            IMinimalLoopLocalizationParameters * This,
-            /* [in] */ int id,
-            /* [retval][out] */ double *data);
-        
-        END_INTERFACE
-    } IMinimalLoopLocalizationParametersVtbl;
-
-    interface IMinimalLoopLocalizationParameters
-    {
-        CONST_VTBL struct IMinimalLoopLocalizationParametersVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IMinimalLoopLocalizationParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IMinimalLoopLocalizationParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IMinimalLoopLocalizationParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IMinimalLoopLocalizationParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IMinimalLoopLocalizationParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IMinimalLoopLocalizationParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IMinimalLoopLocalizationParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-
-#define IMinimalLoopLocalizationParameters_GetCoordinate(This,id,data)	\
-    (This)->lpVtbl -> GetCoordinate(This,id,data)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMinimalLoopLocalizationParameters_GetCoordinate_Proxy( 
-    IMinimalLoopLocalizationParameters * This,
-    /* [in] */ int id,
-    /* [retval][out] */ double *data);
-
-
-void __RPC_STUB IMinimalLoopLocalizationParameters_GetCoordinate_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IMinimalLoopLocalizationParameters_INTERFACE_DEFINED__ */
-
-
-#ifndef __IIsolatedSetAction_INTERFACE_DEFINED__
-#define __IIsolatedSetAction_INTERFACE_DEFINED__
-
-/* interface IIsolatedSetAction */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IIsolatedSetAction;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("787DC58F-CD39-4BE2-9B58-D5B99ADCFC4D")
-    IIsolatedSetAction : public IAction
-    {
-    public:
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IIsolatedSetActionVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IIsolatedSetAction * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IIsolatedSetAction * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IIsolatedSetAction * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IIsolatedSetAction * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IIsolatedSetAction * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IIsolatedSetAction * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IIsolatedSetAction * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
-            IIsolatedSetAction * This,
-            /* [in] */ IParameters *parameters);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
-            IIsolatedSetAction * This,
-            /* [in] */ IProgressBarInfo *pinfo);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
-            IIsolatedSetAction * This,
-            /* [in] */ IResultSet *result,
-            /* [retval][out] */ VARIANT_BOOL *can);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
-            IIsolatedSetAction * This,
-            /* [in] */ IResultSet *input,
-            /* [retval][out] */ IResultSet **output);
-        
-        END_INTERFACE
-    } IIsolatedSetActionVtbl;
-
-    interface IIsolatedSetAction
-    {
-        CONST_VTBL struct IIsolatedSetActionVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IIsolatedSetAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IIsolatedSetAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IIsolatedSetAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IIsolatedSetAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IIsolatedSetAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IIsolatedSetAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IIsolatedSetAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-
-#define IIsolatedSetAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
-
-#define IIsolatedSetAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
-
-#define IIsolatedSetAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
-
-#define IIsolatedSetAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IIsolatedSetAction_INTERFACE_DEFINED__ */
-
-
-#ifndef __IIsolatedSetParameters_INTERFACE_DEFINED__
-#define __IIsolatedSetParameters_INTERFACE_DEFINED__
-
-/* interface IIsolatedSetParameters */
-/* [unique][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IIsolatedSetParameters;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("01C806AD-6003-4F5B-8405-AE3DD637D854")
-    IIsolatedSetParameters : public IParameters
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetStartSet( 
-            /* [retval][out] */ IGraphResult **result) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IIsolatedSetParametersVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IIsolatedSetParameters * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IIsolatedSetParameters * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IIsolatedSetParameters * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IIsolatedSetParameters * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IIsolatedSetParameters * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IIsolatedSetParameters * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IIsolatedSetParameters * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetStartSet )( 
-            IIsolatedSetParameters * This,
-            /* [retval][out] */ IGraphResult **result);
-        
-        END_INTERFACE
-    } IIsolatedSetParametersVtbl;
-
-    interface IIsolatedSetParameters
-    {
-        CONST_VTBL struct IIsolatedSetParametersVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IIsolatedSetParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IIsolatedSetParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IIsolatedSetParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IIsolatedSetParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IIsolatedSetParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IIsolatedSetParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IIsolatedSetParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-
-#define IIsolatedSetParameters_GetStartSet(This,result)	\
-    (This)->lpVtbl -> GetStartSet(This,result)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IIsolatedSetParameters_GetStartSet_Proxy( 
-    IIsolatedSetParameters * This,
-    /* [retval][out] */ IGraphResult **result);
-
-
-void __RPC_STUB IIsolatedSetParameters_GetStartSet_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IIsolatedSetParameters_INTERFACE_DEFINED__ */
-
-
 
 #ifndef __MorseKernel2_LIBRARY_DEFINED__
 #define __MorseKernel2_LIBRARY_DEFINED__
@@ -6164,6 +6164,22 @@ class DECLSPEC_UUID("8C3F6AAB-F725-4C70-A92A-7E4BD2A30C23")
 CDummy;
 #endif
 
+EXTERN_C const CLSID CLSID_CIsolatedSetAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("5345FB53-5138-4D28-A6FC-294DF9D0A1E9")
+CIsolatedSetAction;
+#endif
+
+EXTERN_C const CLSID CLSID_CMinimalLoopLocalizationAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("7D81B505-C5D6-4AEF-83EF-CFAF07767898")
+CMinimalLoopLocalizationAction;
+#endif
+
 EXTERN_C const CLSID CLSID_CDummy1;
 
 #ifdef __cplusplus
@@ -6202,22 +6218,6 @@ EXTERN_C const CLSID CLSID_CKernellImpl;
 
 class DECLSPEC_UUID("96E908D0-29BD-423D-8CA8-9F4343C796A0")
 CKernellImpl;
-#endif
-
-EXTERN_C const CLSID CLSID_CMinimalLoopLocalizationAction;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("7D81B505-C5D6-4AEF-83EF-CFAF07767898")
-CMinimalLoopLocalizationAction;
-#endif
-
-EXTERN_C const CLSID CLSID_CIsolatedSetAction;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("5345FB53-5138-4D28-A6FC-294DF9D0A1E9")
-CIsolatedSetAction;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

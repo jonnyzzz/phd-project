@@ -20,12 +20,18 @@
 			<constraint class="GnuPlotConstraintFactory" />
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 		</action>
+		
+		<action name="IMinimalLoopLocalizationAction" isLeaf="true">
+			<constaint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+		</action>
     </actions>
     
     <names>
 		<action name="IBoxMethodAction" caption="Linear Method" />
 		<action name="IPointMethodAction" caption="Point Method" />
 		<action name="ITarjanAction" caption="Strong Component Localization" />    
+		<action name="GnuPlotVisualizationKernelAction" caption="Visualize" />
+		<action name="IMinimalLoopLocalizationAction" caption="Localiza Minimal Contour" />
     </names>
 
 	<assemblies>	

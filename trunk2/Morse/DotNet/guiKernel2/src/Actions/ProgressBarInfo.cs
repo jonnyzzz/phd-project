@@ -49,7 +49,7 @@ namespace guiKernel2.Actions
 			}
 			public int Length()
 			{
-				return 99999;
+				return 300;
 			}
 
 			public void Next()

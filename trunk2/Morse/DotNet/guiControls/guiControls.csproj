@@ -129,6 +129,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Grid\Rows\DoubleCoordinatesRow.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Grid\Rows\DoublePercent.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

@@ -2,6 +2,13 @@
 #include ".\abstractprocessext.h"
 #include "../graph/graph.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 AbstractProcessExt::AbstractProcessExt(Graph* graph, ProgressBarInfo* info) : \
 graph_source(graph), graph_result(NULL), AbstractProcess(info)
 {

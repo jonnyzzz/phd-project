@@ -32,20 +32,24 @@ namespace gui2.ActionPerformer
 
 		public bool DoActionsWithDialog(IWin32Window owner)
 		{
-			if (Start!= null) Start();
+			try 
+			{
+				if (Start!= null) Start();
 
-			if (parameters.ShowParametersSelectionDialog(owner) != DialogResult.OK) return false;
+				if (parameters.ShowParametersSelectionDialog(owner) != DialogResult.OK)
+					return false;			
 			
-			Performer performer = new Performer(resultSet, parameters.Chain, info );
+				Performer performer = new Performer(resultSet, parameters.Chain, info );
 
-			performer.NewNode += new NewNodeEvent(NewNode);
+				performer.NewNode += new NewNodeEvent(NewNode);
 
-			performer.Do();
+				performer.Do();				
 
-			if (Finish != null) Finish();
-
-			return true;
-
+				return true;
+			} finally
+			{
+				if (Finish != null) Finish();
+			}
 		}
 
 		public event ChainStart Start;

@@ -4,6 +4,8 @@
 #include "resource.h"       // main symbols
 #include "PointMethodAction.h"
 #include "ComputationParameters.h"
+#include "IsolatedSetAction.h"
+#include "MinimalLoopLocalizationAction.h"
 
 
 // IDummy1
@@ -32,7 +34,9 @@ __interface IDummy1 : IDispatch
 ]
 class ATL_NO_VTABLE CDummy1 : 
 	public IDummy1,
-	public IPointMethodParameters
+	public IPointMethodParameters,
+	public IIsolatedSetParameters,
+	public IMinimalLoopLocalizationParameters
 {
 public:
 	CDummy1()
@@ -86,6 +90,22 @@ public:
 	// IComputationParameters Methods
 public:
 	STDMETHOD(GetFunction)(IFunction ** function)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+
+	// IIsolatedSetParameters Methods
+public:
+	STDMETHOD(GetStartSet)(IGraphResult ** result)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+
+	// IMinimalLoopLocalizationParameters Methods
+public:
+	STDMETHOD(GetCoordinate)(int  id, double * data)
 	{
 		// Add your function implementation here.
 		return E_NOTIMPL;

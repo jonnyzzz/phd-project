@@ -147,6 +147,46 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\HomotopAction\HomotopAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\HomotopAction\HomotopParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\HomotopAction\HomotopParameters.resx"
+                    DependentUpon = "HomotopParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\HomotopAction\HomotopParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MinimalLoopLocalization\MinimalLoopLocalizationAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MinimalLoopLocalization\MinimalLoopLocalizationParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MinimalLoopLocalization\MinimalLoopLocalizationParameters.resx"
+                    DependentUpon = "MinimalLoopLocalizationParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\MinimalLoopLocalization\MinimalLoopLocalizationParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\actionImpl\PointMethod\PointMethodAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

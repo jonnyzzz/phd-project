@@ -4,6 +4,13 @@
 #include "../graph/GraphComponents.h"
 #include "../graph/Graph.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 TarjanProcess::TarjanProcess(bool needResolve, ProgressBarInfo* info) : 
 AbstractProcess(info), needResolve(needResolve)
 {
@@ -25,7 +32,6 @@ void TarjanProcess::processNextGraph(Graph* graph) {
 		}
 	}
 
-	
 	this->graphSet.AddGraph(components);	
 }
 

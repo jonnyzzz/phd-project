@@ -2,6 +2,13 @@
 #include ".\sioverlapedpointbuilder.h"
 #include "../graph/graph.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 SIOverlapedPointBuilder::SIOverlapedPointBuilder(Graph* graph, int* factor, int* ks, JDouble* poffset1, JDouble* poffset2, ISystemFunction* function, ProgressBarInfo* info)
 : 
 AbstractPointBuilder(graph, factor, ks, info), function(function)

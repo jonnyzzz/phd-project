@@ -258,7 +258,7 @@ namespace gui2.Forms
 			// 
 			this.menuFunctionShow.Index = 1;
 			this.menuFunctionShow.Text = "Show";
-			this.menuFunctionShow.Click += new System.EventHandler(this.menuItem1_Click);
+			this.menuFunctionShow.Click += new System.EventHandler(this.MenuFunctionShowClick);
 			// 
 			// menuHelp
 			// 
@@ -373,7 +373,7 @@ namespace gui2.Forms
 			Runner.Runner.Instance.Document.UnLock();
 		}
 
-		private void menuItem1_Click(object sender, System.EventArgs e)
+		private void MenuFunctionShowClick(object sender, System.EventArgs e)
 		{
 			if (Runner.Runner.Instance.Document != null)
 			{

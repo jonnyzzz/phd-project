@@ -15,7 +15,7 @@
 __interface IMinimalLoopLocalizationAction : IAction
 {
 	[id(44)]
-	HRESULT GetDimension([in]IResultSet* resultSet, [out]int* dimension);
+	HRESULT GetDimension([in]IResultSet* resultSet, [out, retval]int* dimension);
 };
 
 

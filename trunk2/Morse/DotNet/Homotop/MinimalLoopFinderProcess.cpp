@@ -31,9 +31,13 @@ void MinimalLoopFinderProcess::processNextGraph(Graph* graph) {
 
 	Node* node = graph->findNode(cell);
 
-
 	if (node != NULL) {
 		MinimalLoopFinder f;
-		graphSet.AddGraph( f.FindMinimalLoop(graph, node) );
+		Graph* result = f.FindMinimalLoop(graph, node);
+		if (result->getNumberOfNodes() == 0) {
+			delete result;
+		} else {
+			graphSet.AddGraph( result );
+		}
 	}
 }

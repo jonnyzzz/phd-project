@@ -11,6 +11,7 @@
 #include "MorseTest.h"
 #include "GraphTest.h"
 #include "../cellImageBuilders/TarjanProcess.h"
+#include "MinimalLoopTest.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -25,8 +26,10 @@ void runTests();
 int _tmain(int argc, _TCHAR* argv[]) {
     //testRomFromFile("o:\\aaaa");
 
-	//runTests();
+	runTests();
 
+
+	/*
 	JDouble zmin[] = {-1};
 	JDouble zmax[] = {1};
 	JInt zgrid[] = {100};
@@ -62,6 +65,8 @@ void runTests() {
     TestRunner testRunner(cout);
     CalculatorTest test(cout);
     testRunner.RunTest(&test);
+
+	MinimalLoopTest(cout).Test();
 }
 
 void testRomFromFile(char* fileIn) {

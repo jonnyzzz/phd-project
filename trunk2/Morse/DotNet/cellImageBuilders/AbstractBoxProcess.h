@@ -41,7 +41,7 @@ private:
 
 	JDouble* v0;
 
-private:
+protected:
 	void setApproximationCenter();
 	void evaluate();
 
@@ -49,6 +49,7 @@ private:
 
 private:
 	JDouble* eps2;
+	JDouble* eps;
 	JDouble* x0;
 	JInt* b;
 	JInt* a;

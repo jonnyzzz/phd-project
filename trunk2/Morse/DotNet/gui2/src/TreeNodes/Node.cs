@@ -53,8 +53,15 @@ namespace gui2.TreeNodes
 		private void CreateGroup()
 		{
 			Group group = Group.GetGroup(this);
-			AddNodeChild(group.CreateNode());
-			group.DeCheckAndRemoveAll();
+			Node node = Parent as Node;
+			if (node != null) 
+			{
+				node.AddNodeChild(group.CreateNode());
+				group.DeCheckAndRemoveAll();
+			} else
+			{
+				MessageBox.Show("Unable to add an Group for such a strange case");
+			}
 		}
 
 

@@ -36,7 +36,7 @@ private:
 	void DisposeHeap();
 
 private:
-	void nextStep(NodeExList& in, NodeExList& out, Node* root, Graph* graph);
+	bool nextStep(NodeExList& in, NodeExList& out, Node* root, Graph* graph);
 
 public:
 	Graph* FindMinimalLoop(Graph* graph, Node* node);

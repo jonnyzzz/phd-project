@@ -1,6 +1,13 @@
 #include "StdAfx.h"
 #include ".\segmentprojectivebundlemscreationprocess.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 SegmentProjectiveBundleMSCreationProcess::SegmentProjectiveBundleMSCreationProcess(Graph* graph, int* factor, ProgressBarInfo* info)
 :
     AbstractGraphCreator(graph, factor, info)

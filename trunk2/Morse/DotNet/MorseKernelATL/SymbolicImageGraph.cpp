@@ -345,7 +345,7 @@ STDMETHODIMP CSymbolicImageGraph::Homotop(IHomotopParams* params) {
 
 		return S_OK;
 	} else {
-		
+		/*
 		IsolatingSetProcess* process = new IsolatingSetProcess(graph, node, pinfo);
 		process->start();
 		process->processNextGraph(graph);
@@ -357,6 +357,7 @@ STDMETHODIMP CSymbolicImageGraph::Homotop(IHomotopParams* params) {
 
 		this->acceptChilds((void**)&cms);
 
+		*/
 		return S_OK;
 	}
 
