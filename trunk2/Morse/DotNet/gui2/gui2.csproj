@@ -153,6 +153,21 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Document\DocumentSerializer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Document\FunctionSerializer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Document\XmlUtil.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Forms\ComputationForm.cs"
                     SubType = "Form"
                     BuildAction = "Compile"

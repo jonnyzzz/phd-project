@@ -2,7 +2,11 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
+using System.Xml;
+using gui2.src.Document;
 using guiKernel2;
 using guiKernel2.Document;
 
@@ -266,6 +270,7 @@ namespace gui2.Forms
 			// 
 			this.openFileDialog.DefaultExt = "equation";
 			this.openFileDialog.Filter = "Equation files|*.equation|All files|*.*";
+			this.openFileDialog.Title = "Select equation to open";
 			// 
 			// saveFileDialog
 			// 
@@ -387,10 +392,10 @@ namespace gui2.Forms
 			for (IEnumerator en = table.Rows.GetEnumerator(); en.MoveNext(); )
 			{
 				DataRow row = ((DataRow) en.Current);
-				strings.Add( row[0] + "=" + row[1] + ";");
+				strings.Add( row[0] + "=" + row[1]);
 			}
 
-			strings.Add( DIMENSION + "=" + dimensionUpDown.Value + ";");
+			strings.Add( DIMENSION + "=" + dimensionUpDown.Value);
 
 			table.EndLoadData();
 			return (string[])strings.ToArray(typeof(string));
@@ -424,18 +429,25 @@ namespace gui2.Forms
 			return table;
 		}
 
+		private Function CreateFunction()
+		{
+			try
+			{
+				return new Function(createFunctionSource());
+			} 
+			catch (FunctionExceptions ee)
+			{
+				MessageBox.Show(this, ee.Message, "Error in Function");
+				return null;
+			}
+		}
+
 		private void btnNext_Click(object sender, EventArgs e)
 		{
 			if (!isReadOnly)
 			{
-				try
-				{
-					function = new Function(createFunctionSource());
-					this.DialogResult = DialogResult.OK;
-				} catch (FunctionExceptions ee)
-				{
-					MessageBox.Show(this, ee.Message, "Error in Function");
-				}
+				function = CreateFunction();
+				this.DialogResult = DialogResult.OK;
 			}
 			else
 			{
@@ -462,21 +474,36 @@ namespace gui2.Forms
 
 		private void menuLoad_Click(object sender, EventArgs e)
 		{
-			/*
-			if (openFileDialog.ShowDialog(this) == DialogResult.OK)
+			if (openFileDialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 			{
-				
-			}
-			**/
+				string fileName = openFileDialog.FileName;
+				XmlDocument document = new XmlDocument();
+				document.Load(fileName);
+
+				Function function = FunctionSerializer.LoadFunction(document);
+				setSource(function.Equation);
+			}			
 		}
 
 		private void menuSave_Click(object sender, EventArgs e)
 		{
-			/*
-			if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+			if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) 
 			{
+				string fileName = saveFileDialog.FileName;
+				XmlDocument document = XmlUtil.CreateEmptyDocument();
+
+				guiKernel2.Document.Function function = CreateFunction();
+				if(function != null ) 
+				{
+					XmlNode newNode = FunctionSerializer.SaveFunction(function);
+					XmlUtil.SetRootNode(document, newNode);
+
+					using (TextWriter writer = File.CreateText(fileName))
+					{
+						document.Save(writer);
+					}
+				}
 			}
-			*/
 		}
 
 		private void SystemAssignment_WidthChanged(object sender, EventArgs e)

@@ -16,7 +16,7 @@ namespace gui2.Forms
 		private System.Windows.Forms.Panel panelRight;
 		private guiControls.TreeControl.ComputationTree tree;
 		private System.Windows.Forms.MainMenu mainMenu;
-		private System.Windows.Forms.MenuItem menuItem1;
+		private System.Windows.Forms.MenuItem menuItemInternal;
 		private System.Windows.Forms.MenuItem menuInvestigations;
 		private System.Windows.Forms.MenuItem menuSystem;
 		private System.Windows.Forms.MenuItem menuSystemNew;
@@ -36,6 +36,8 @@ namespace gui2.Forms
 		public ComputationForm()
 		{
 			InitializeComponent();
+
+			menuItemInternal.Visible = Runner.Runner.Instance.IsInternal;
 
 			progressBarInfo = new ProgressBarInfo();
 			progressBarAdapter = new ProgressBarNotificationAdapter(progressBar, progressBarInfo);
@@ -77,7 +79,7 @@ namespace gui2.Forms
 			this.progressBar = new guiControls.Progress.SmartProgressBar();
 			this.splitterLR = new System.Windows.Forms.Splitter();
 			this.mainMenu = new System.Windows.Forms.MainMenu();
-			this.menuItem1 = new System.Windows.Forms.MenuItem();
+			this.menuItemInternal = new System.Windows.Forms.MenuItem();
 			this.menuInvestigations = new System.Windows.Forms.MenuItem();
 			this.menuSystem = new System.Windows.Forms.MenuItem();
 			this.menuSystemNew = new System.Windows.Forms.MenuItem();
@@ -211,13 +213,13 @@ namespace gui2.Forms
 			// mainMenu
 			// 
 			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					 this.menuItem1,
+																					 this.menuItemInternal,
 																					 this.menuInvestigations});
 			// 
 			// menuItem1
 			// 
-			this.menuItem1.Index = 0;
-			this.menuItem1.Text = "Internal";
+			this.menuItemInternal.Index = 0;
+			this.menuItemInternal.Text = "Internal";
 			// 
 			// menuInvestigations
 			// 

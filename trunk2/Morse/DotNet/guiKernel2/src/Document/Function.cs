@@ -14,10 +14,15 @@ namespace guiKernel2.Document
 		{
 			this.equations = equations;	
 			
-			string equation = "";
+			equation = "";
 			foreach (string eq in equations)
 			{
-				equation += eq + "\n";
+				string eqe = eq.Trim();
+				if (!eqe.EndsWith(";"))
+				{
+					eqe += ";";
+				}
+				equation += eqe + "\n";
 			}
 
 			this.function = 
@@ -41,10 +46,16 @@ namespace guiKernel2.Document
 
 		private string[] equations;
 		private IFunction function;
+		private string equation;
 
 		public string[] Equations
 		{
 			get { return equations; }
+		}
+
+		public string Equation
+		{
+			get { return equation; }
 		}
 
 		public IFunction IFunction
