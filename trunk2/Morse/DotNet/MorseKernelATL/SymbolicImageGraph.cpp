@@ -11,6 +11,7 @@
 #include "ComputationGraphResult.h"
 #include "../Homotop/IsolatingSet.h"
 #include "../cellimagebuilders/ProgressBarInfo.h"
+#include "../cellimagebuilders/AbstractProcessExt.h"
 #include "../cellimagebuilders/sioverlapedpointbuilder.h"
 
 // CSymbolicImageGraph
@@ -197,7 +198,7 @@ STDMETHODIMP CSymbolicImageGraph::PointMethodProjectiveExtension(IExtendablePoin
 
     cout<<"Segment info complete \n";
 
-    AbstractProcess* proc = info.graphExtender(graph, factor, pinfo);
+    AbstractProcessExt* proc = (AbstractProcessExt*)info.graphExtender(graph, factor, pinfo);
     proc->start();
     proc->processNextGraph(this->graph);
 

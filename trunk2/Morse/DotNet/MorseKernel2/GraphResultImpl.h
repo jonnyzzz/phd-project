@@ -4,7 +4,6 @@
 #include "resource.h"       // main symbols
 #include "graphResult.h"
 #include "WritableGraphResult.h"
-#include "ResultMerger.h"
 
 
 #include <list>
@@ -25,8 +24,7 @@ class Graph;
 ]
 class ATL_NO_VTABLE CGraphResultImpl :
 	public IWritableGraphResult,
-	public IGraphResult,
-	public IResultMerger
+	public IGraphResult
 
 {
 public:
@@ -37,38 +35,19 @@ public:
 	HRESULT FinalConstruct();
 	void FinalRelease();
 
-	// IResult
-public:
-	STDMETHOD(GetResultMerger)(IResultMerger** merger);
-
 	// IGraphResult Methods
 public:
-	STDMETHOD(GetGraph)(int  index, void ** graph);
-	STDMETHOD(GetCount)(int * count);
+	STDMETHOD(GetGraph)(void ** graph);
 	STDMETHOD(GetGraphInfo)(IGraphInfo ** info);
-	STDMETHOD(GetGraphInfoAt)(int  index, IGraphInfo ** info);
 	STDMETHOD(IsStrongComponent)(VARIANT_BOOL * value);
 	
-
 	// IWritableGraphResult Methods
 public:
-	STDMETHOD(AddGraph)(void** graph, VARIANT_BOOL isStringComponent);
-
-	// IResultMerger
-public:
-	STDMETHOD(AddResult)(IResultBase* result);
-	STDMETHOD(CanAddResult)(IResultBase* result, VARIANT_BOOL* value);
-	STDMETHOD(CreateResult)(IResultBase** result);
-
+	STDMETHOD(SetGraph)(void** graph, VARIANT_BOOL isStringComponent);
 
 private:
-	typedef pair<Graph*, bool> Item;
-	typedef list<Item> Graphs;
+	Graph* graph;
+	bool isStongComponent;
 
-	Graphs graphs;
-
-private:
-	bool GraphAcceptConstraint(Graph* newGraph);
-	bool GraphAcceptConstraint(Graph* graph1, Graph* graph2);
 };
 

@@ -200,6 +200,9 @@
 				RelativePath=".\GraphResultImpl.cpp">
 			</File>
 			<File
+				RelativePath=".\GraphResultUtil.cpp">
+			</File>
+			<File
 				RelativePath=".\GraphResultWrapper.cpp">
 			</File>
 			<File
@@ -230,7 +233,13 @@
 				RelativePath=".\ResultBase.cpp">
 			</File>
 			<File
-				RelativePath=".\ResultMerger.cpp">
+				RelativePath=".\ResultSet.cpp">
+			</File>
+			<File
+				RelativePath=".\ResultSetImpl.cpp">
+			</File>
+			<File
+				RelativePath=".\ResultSetIterator.cpp">
 			</File>
 			<File
 				RelativePath=".\SmartInterface.cpp">
@@ -264,6 +273,9 @@
 			</File>
 			<File
 				RelativePath=".\WritableKernell.cpp">
+			</File>
+			<File
+				RelativePath=".\WritableResultSet.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -310,6 +322,9 @@
 				RelativePath=".\GraphResultImpl.h">
 			</File>
 			<File
+				RelativePath=".\GraphResultUtil.h">
+			</File>
+			<File
 				RelativePath=".\GraphResultWrapper.h">
 			</File>
 			<File
@@ -340,7 +355,13 @@
 				RelativePath=".\ResultBase.h">
 			</File>
 			<File
-				RelativePath=".\ResultMerger.h">
+				RelativePath=".\ResultSet.h">
+			</File>
+			<File
+				RelativePath=".\ResultSetImpl.h">
+			</File>
+			<File
+				RelativePath=".\ResultSetIterator.h">
 			</File>
 			<File
 				RelativePath=".\SmartInterface.h">
@@ -362,6 +383,9 @@
 			</File>
 			<File
 				RelativePath=".\WritableKernell.h">
+			</File>
+			<File
+				RelativePath=".\WritableResultSet.h">
 			</File>
 		</Filter>
 		<Filter

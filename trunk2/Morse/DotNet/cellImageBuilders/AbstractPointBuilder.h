@@ -3,9 +3,9 @@ struct Node;
 class Graph;
 class Function;
 
-#include "AbstractProcess.h"
+#include "AbstractProcessExt.h"
 
-class AbstractPointBuilder : public AbstractProcess
+class AbstractPointBuilder : public AbstractProcessExt
 {
 public:
 	AbstractPointBuilder(Graph* graph, int* factor, int* ks, ProgressBarInfo* info);

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "AbstractProcess.h"
+#include "AbstractProcessExt.h"
 
-class AbstractGraphCreator : public AbstractProcess
+class AbstractGraphCreator : public AbstractProcessExt
 {
 public:
     AbstractGraphCreator(Graph* base, int* factor, ProgressBarInfo* info);

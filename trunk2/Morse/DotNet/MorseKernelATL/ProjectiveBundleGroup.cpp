@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "ProjectiveBundleGroup.h"
 #include "ProjectiveBundleGraph.h"
+#include "../cellimagebuilders/AbstractProcessExt.h"
 
 // CProjectiveBundleGroup
 
@@ -120,7 +121,7 @@ STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* param
 	}
 
 	IProjectiveExtensionInfo* info = getProjectiveExtensionInfo();
-	AbstractProcess* msb = info->nextStepProcess(graph, factor, ks, offset1, offset2, pinfo );
+	AbstractProcessExt* msb = (AbstractProcessExt*)info->nextStepProcess(graph, factor, ks, offset1, offset2, pinfo );
     msb->start();
 
     for (int i=0; i<cms->length(); i++) {

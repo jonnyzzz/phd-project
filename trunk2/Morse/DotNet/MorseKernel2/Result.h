@@ -3,7 +3,6 @@
 #pragma once
 #include "resource.h"       // main symbols
 #include "ResultBase.h"
-#include "ResultMerger.h"
 
 
 // IResult
@@ -15,8 +14,6 @@
 ]
 __interface IResult : IResultBase
 {
-	[id(1)]
-	HRESULT GetResultMerger([out, retval] IResultMerger** merger);
 };
 
 

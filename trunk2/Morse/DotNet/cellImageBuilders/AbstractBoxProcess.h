@@ -1,9 +1,9 @@
 #pragma once
-#include "abstractprocess.h"
+#include "abstractprocessExt.h"
 #include "../systemfunction/systemfunction.h"
 
 class AbstractBoxProcess :
-	public AbstractProcess
+	public AbstractProcessExt
 {
 public:
 	AbstractBoxProcess(Graph* graph, ISystemFunction* function, int* factor, ProgressBarInfo* pinfo);

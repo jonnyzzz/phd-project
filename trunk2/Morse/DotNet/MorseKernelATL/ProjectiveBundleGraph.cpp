@@ -4,6 +4,7 @@
 #include "ProjectiveBundleGraph.h"
 #include "../graph_simplex/romfunction2n.h"
 #include "../systemfunction/IMorseFunction.h"
+#include "../cellimagebuilders/AbstractProcessExt.h"
 
 // CProjectiveBundleGraph
 
@@ -101,7 +102,7 @@ STDMETHODIMP CProjectiveBundleGraph::SubdevidePoint(ISubdevidePointParams* param
 
 	IProjectiveExtensionInfo* info = getProjectiveExtensionInfo();
 
-	AbstractProcess* msb = info->nextStepProcess(graph, factor, ks, offset1, offset2, pinfo);
+	AbstractProcessExt* msb = (AbstractProcessExt*)info->nextStepProcess(graph, factor, ks, offset1, offset2, pinfo);
     msb->start();
 
     msb->processNextGraph(graph);

@@ -2,27 +2,22 @@
 
 #include "ProgressBarInfo.h"
 #include "../graph/graph.h"
+#include "GraphSet.h"
 
 class AbstractProcess 
 {
 public:
-	AbstractProcess(Graph* graph, ProgressBarInfo* info);
+	AbstractProcess(ProgressBarInfo* info);
 	virtual ~AbstractProcess(void);
 
 public:
-	virtual Graph* result();
+	virtual GraphSet results() = 0;
 	virtual void processNextGraph(Graph* graph) = 0;
-	virtual void start(); //needed to do some virtual initizlizations... due to features of c++ implementations^(
+	//needed to do some virtual initizlizations... due to features of c++ implementations^(
+	virtual void start(); 
 
 protected:
-	Graph* graph_source;
-	Graph* graph_result;
 	ProgressBarInfo* info;
-
-	void submitGraphResult(Graph* graph);
-
-protected:
-	JDouble sqr(JDouble x);
 
 private:
 	bool wasInitialized;

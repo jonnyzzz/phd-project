@@ -1,18 +1,22 @@
 #pragma once
 
+#include "resultSet.h"
+#include "resultSetIterator.h"
 #include "graphResult.h"
 #include "writableGraphResult.h"
+#include "writableResultSet.h"
 
 class Graph;
+class GraphSet;
 class AbstractProcess;
 
 class GraphResultGraphIterator {
 public:
-	GraphResultGraphIterator(IGraphResult* result);
+	GraphResultGraphIterator(IResultSet* result);
 	~GraphResultGraphIterator();
 
 public:
-	bool hasNext();
+	bool HasNext();
 	Graph* Current();
 	void Next();
 
@@ -21,28 +25,25 @@ public:
 	operator Graph*();
 
 private:
-	int index;
-	IGraphResult* result;
+	ResultSetIterator<IGraphResult> resultSetIterator;
 };
 
 
 
 class GraphResultGraphList {
 public:
-	GraphResultGraphList(IWritableGraphResult* result);
+	GraphResultGraphList();
 	~GraphResultGraphList();
 
 public:
 	void AddGraph(Graph* graph, bool isComponent);
+	void AddGraphs(GraphSet& graphSet, bool isComponent);
+
+public:
+	IResultSet* GetResultSet();
 
 
 private:
-	IWritableGraphResult* result;
-
-};
-
-class GraphResultUtil {
-public:
-	void PerformProcess(AbstractProcess* process, IGraphResult* input, IWritableGraphResult* output, bool isStrongComponent);
+	IWritableResultSet* resultSet;
 
 };

@@ -13,18 +13,11 @@
 	pointer_default(unique)
 ]
 __interface IGraphResult : IResult
-{
-	
+{	
 	[id(10), local, hidden]
-	HRESULT GetGraph([in]int index, [out] void** graph);
-	
-	[id(11)]
-	HRESULT GetCount([out, retval] int* count);
+	HRESULT GetGraph([out] void** graph);	
 	[id(12)]
 	HRESULT GetGraphInfo([out, retval] IGraphInfo** info);
 	[id(13)]
-	HRESULT GetGraphInfoAt([in] int index, [out, retval] IGraphInfo** info);
-	[id(14)]
-	HRESULT IsStrongComponent([out, retval] VARIANT_BOOL* value);
-	
+	HRESULT IsStrongComponent([out, retval] VARIANT_BOOL* value);	
 };

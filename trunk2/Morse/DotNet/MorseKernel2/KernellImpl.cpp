@@ -57,7 +57,7 @@ STDMETHODIMP CKernellImpl::CreateInitialResult(IResultBase** result) {
 
 		graph->maximize();
 
-		graphResult->AddGraph((void**)&graph, FALSE);
+		graphResult->SetGraph((void**)&graph, FALSE);
 
 		graphResult->QueryInterface(result);
 		ATLASSERT(*result != NULL);

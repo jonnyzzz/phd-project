@@ -57,8 +57,8 @@ public:
 public:
 	STDMETHOD(SetActionParameters)(IParameters* pars);
 	STDMETHOD(SetProgressBarInfo)(IProgressBarInfo* info);
-	STDMETHOD(CanDo)(IResultBase* in, VARIANT_BOOL* out);
-	STDMETHOD(Do)(IResultBase* in, IResultBase** out);
+	STDMETHOD(CanDo)(IResultSet* in, VARIANT_BOOL* out);
+	STDMETHOD(Do)(IResultSet* in, IResultSet** out);
 	
 private:
 	IProgressBarInfo* info;

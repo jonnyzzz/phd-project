@@ -7,9 +7,10 @@ class MeaNode;
 class ProgressBarInfo;
 
 #include "MeaNode.h"
+#include "../cellImageBuilders/AbstractProcessExt.h"
 
 
-class IsolatingSetProcess : public AbstractProcess
+class IsolatingSetProcess : public AbstractProcessExt
 {
 public:
 	IsolatingSetProcess(Graph* graphSource, Node* startNode, ProgressBarInfo* info);

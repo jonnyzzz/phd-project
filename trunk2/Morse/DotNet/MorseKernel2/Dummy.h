@@ -31,9 +31,7 @@ __interface IDummy : IDispatch
 	helpstring("Dummy Class")
 ]
 class ATL_NO_VTABLE CDummy : 
-	public IDummy,
-	public IFunction,
-	public IAction
+	public IDummy
 {
 public:
 	CDummy()
@@ -55,60 +53,5 @@ public:
 public:
 
 
-	// IFunction Methods
-public:
-	STDMETHOD(GetSystemFunction)(void ** function)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(GetSystemFunctionDerivate)(void ** function)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(GetEquations)(BSTR * equations)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(GetDimension)(int * dimenstion)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(GetIterations)(int * iterations)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(CreateGraph)(void ** graph)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-
-	// IAction Methods
-public:
-	STDMETHOD(SetActionParameters)(IParameters * parameters)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(Do)(IResultBase * input, IResultBase ** output)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(SetProgressBarInfo)(IProgressBarInfo * pinfo)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(CanDo)(IResultBase * result, VARIANT_BOOL * can)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
 };
 

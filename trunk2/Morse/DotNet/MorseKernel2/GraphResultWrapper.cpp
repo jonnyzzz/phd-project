@@ -1,45 +1,39 @@
 #include "StdAfx.h"
 #include ".\graphresultwrapper.h"
+#include "resultSetImpl.h"
+#include "graphResultImpl.h"
 #include "../cellimagebuilders/abstractProcess.h"
+#include "../cellImageBuilders/graphSet.h"
 
-GraphResultGraphIterator::GraphResultGraphIterator(IGraphResult* result) {
-	result->QueryInterface(&this->result);
 
-	ATLASSERT(this->result != NULL);
+GraphResultGraphIterator::GraphResultGraphIterator(IResultSet* result) :
+	resultSetIterator(result)	
+{
 	
-	index = 0;
 }
 
 GraphResultGraphIterator::~GraphResultGraphIterator() {
-	result->Release();
 }
 
 
-bool GraphResultGraphIterator::hasNext() {
-	int last;
-	result->GetCount(&last);
-
-	return (index < last);
+bool GraphResultGraphIterator::HasNext() {
+	return resultSetIterator.HasNext();
 }
 
 Graph* GraphResultGraphIterator::Current() {
+	IGraphResult* graphResult = resultSetIterator;
 
-	ATLASSERT(hasNext());
-
-	HRESULT hr;
 	Graph* graph;
-	hr = result->GetGraph(index, (void**)&graph);
+	HRESULT hr = graphResult->GetGraph((void**)&graph);
 
-	ATLASSERT(SUCCEEDED(hr));
 	ATLASSERT(graph != NULL);
+	ATLASSERT(SUCCEEDED(hr));
 
 	return graph;
 }
 
 void GraphResultGraphIterator::Next() {
-	ATLASSERT(hasNext());
-
-	index++;
+	resultSetIterator.Next();
 }
 
 
@@ -53,33 +47,43 @@ GraphResultGraphIterator::operator Graph *() {
 //////////////////////////////////////////////////////////////////////////
 
 
-GraphResultGraphList::GraphResultGraphList(IWritableGraphResult* result) {
-	result->QueryInterface(&this->result);
-	ATLASSERT(this->result != NULL);
+GraphResultGraphList::GraphResultGraphList() {
+	CResultSetImpl::CreateInstance(&resultSet);
+	ATLASSERT(resultSet != NULL);
 }
 
 GraphResultGraphList::~GraphResultGraphList() {
-	result->Release();
+	resultSet->Release();
 }
 
 void GraphResultGraphList::AddGraph(Graph* graph, bool isComponent) {
-	HRESULT hr = result->AddGraph((void**)&graph, isComponent?TRUE:FALSE);
+	IWritableGraphResult* result;
+	CGraphResultImpl::CreateInstance(&result);
 
+	HRESULT hr = result->SetGraph((void**)&graph, isComponent?TRUE:FALSE);
 	ATLASSERT(SUCCEEDED(hr));
 
+	IResultBase* resultBase;
+	result->QueryInterface(&resultBase);
+	ATLASSERT(resultBase != NULL);
+
+	hr = resultSet->AddResult(resultBase);
+	ATLASSERT(SUCCEEDED(hr));
+	result->Release();
+	resultBase->Release();
 }
 
-
-///////////////////////////////////////////////////////////////////////////
-
-
-void GraphResultUtil::PerformProcess(AbstractProcess* process, IGraphResult* input, IWritableGraphResult* output, bool isStrongComponent) {
-	process->start();
-
-	for (GraphResultGraphIterator it(input); it.hasNext(); it.Next()) {
-		process->processNextGraph(it);
+void GraphResultGraphList::AddGraphs(GraphSet& graphSet, bool isComponent) {
+	for (GraphSetIterator it = graphSet.iterator(); it.HasNext(); it.Next()) {
+		AddGraph(it, isComponent);
 	}
+}
 
-	GraphResultGraphList lst(output);
-	lst.AddGraph(process->result(), isStrongComponent);
+IResultSet* GraphResultGraphList::GetResultSet() {
+	IResultSet* result;
+	resultSet->QueryInterface(&result);
+
+	ATLASSERT(result != NULL);
+
+	return result;
 }

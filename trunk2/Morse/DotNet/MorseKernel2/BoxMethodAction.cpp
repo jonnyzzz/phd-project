@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "BoxMethodAction.h"
 #include "GraphResultWrapper.h"
+#include "GraphResultUtil.h"
 #include "GraphResult.h"
 #include "GraphResultImpl.h"
 #include "ProgressBarNotificationAdapter.h"
@@ -49,37 +50,23 @@ STDMETHODIMP CBoxMethodAction::SetProgressBarInfo(IProgressBarInfo* info) {
 }
 
 
-STDMETHODIMP CBoxMethodAction::CanDo(IResultBase* in, VARIANT_BOOL* out) {
-	IGraphResult* result;
-	in->QueryInterface(&result);
-
-	if (result != NULL) {
-		result->Release();
-		*out = TRUE;
-	} else {
-		*out = FALSE;
-	}
+STDMETHODIMP CBoxMethodAction::CanDo(IResultSet* in, VARIANT_BOOL* out) {
+	*out = GraphResultUtil::ContainsOnlyType<IGraphResult>(in)?TRUE:FALSE;
 
 	return S_OK;
 }
 
 
-STDMETHODIMP CBoxMethodAction::Do(IResultBase* in, IResultBase** out) {
+STDMETHODIMP CBoxMethodAction::Do(IResultSet* in, IResultSet** out) {
 	VARIANT_BOOL canDo;
 	CanDo(in, &canDo);
 
 	ATLASSERT(canDo == TRUE);
 
-	IGraphResult* inputResult;
-	in->QueryInterface(&inputResult);
-
-	ATLASSERT(inputResult != NULL);
-
-	ProgressBarNotificationAdapter adapter(info);
+	ProgressBarNotificationAdapter pinfo(info);
 
 	SmartInterface<IFunction> function;
 	parameters->GetFunction(&function);
-
 	ATLASSERT(function != NULL);
 
 	ISystemFunction* func;
@@ -89,37 +76,31 @@ STDMETHODIMP CBoxMethodAction::Do(IResultBase* in, IResultBase** out) {
 
 	if (canDo == TRUE) {
 		hr = function->GetSystemFunctionDerivate((void**)&func);
+		ATLASSERT(SUCCEEDED(hr));
 	} else {
 		hr = function->GetSystemFunction((void**)&func);
+		ATLASSERT(SUCCEEDED(hr));
 	}
-
-	ATLASSERT(SUCCEEDED(hr));
-
+	
 	int dimension;
 	hr = function->GetDimension(&dimension);
 	ATLASSERT(SUCCEEDED(hr));
-	int* factor = new int[dimension];
 
+	int* factor = new int[dimension];
 	for (int i=0; i<dimension; i++) {
 		hr = parameters->GetFactor(i, &factor[i]);
 		ATLASSERT(SUCCEEDED(hr));
 	}
 
-	GraphResultGraphIterator it(inputResult);
+	GraphResultGraphIterator it(in);
 
-	AbstractProcess* process = new SimpleBoxProcess(it, func, factor, &adapter);
-	process->start();
-	IWritableGraphResult* outResult;
-	CGraphResultImpl::CreateInstance(&outResult);
+	SimpleBoxProcess process(it, func, factor, &pinfo);
 
-	GraphResultUtil().PerformProcess(process, inputResult, outResult, false);
-	
-	delete process;
+	GraphResultUtil::PerformProcess(&process, in, false, out);
+	ATLASSERT(*out != NULL);
+
 	delete[] factor;
 	delete func;
-
-	outResult->QueryInterface(out);
-	ATLASSERT(*out != NULL);
 
 	return S_OK;
 }

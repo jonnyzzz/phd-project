@@ -154,6 +154,12 @@
 				RelativePath=".\AbstractProcess.cpp">
 			</File>
 			<File
+				RelativePath=".\AbstractProcessExt.cpp">
+			</File>
+			<File
+				RelativePath=".\GraphSet.cpp">
+			</File>
+			<File
 				RelativePath=".\MSCreationProcess.cpp">
 			</File>
 			<File
@@ -201,6 +207,9 @@
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\TarjanProcess.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -217,6 +226,12 @@
 			</File>
 			<File
 				RelativePath=".\AbstractProcess.h">
+			</File>
+			<File
+				RelativePath=".\AbstractProcessExt.h">
+			</File>
+			<File
+				RelativePath=".\GraphSet.h">
 			</File>
 			<File
 				RelativePath=".\MSCreationProcess.h">
@@ -247,6 +262,9 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
+			</File>
+			<File
+				RelativePath=".\TarjanProcess.h">
 			</File>
 		</Filter>
 		<Filter

@@ -10,6 +10,7 @@
 #include ".\ComputationGraphResult.h"
 #include ".\ProgressBarNotificationAdapter.h"
 #include "../cellimagebuilders/sioverlapedpointbuilder.h"
+#include "../cellimagebuilders/AbstractProcessExt.h"
 
 CSymbolicImageGroup::CSymbolicImageGroup() {
 	this->kernel = NULL;	
@@ -122,7 +123,7 @@ STDMETHODIMP CSymbolicImageGroup::PointMethodProjectiveExtension(IExtendablePoin
 
     SermentProjectiveExtensionInfo info(dfunc);
 
-    AbstractProcess* proc = info.graphExtender(graph, factor, pinfo);
+	AbstractProcessExt* proc = (AbstractProcessExt*)info.graphExtender(graph, factor, pinfo);
     proc->start();
     for (int i=0; i<cms->length(); i++) {
         proc->processNextGraph(cms->getAt(i));

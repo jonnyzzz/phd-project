@@ -3,9 +3,9 @@
 #pragma once
 #include "resource.h"       // main symbols
 #include "actionBase.h"
-#include "resultBase.h"
 #include "Parameters.h"
 #include "ProgressBarInfo.h"
+#include "resultSet.h"
 
 // IAction
 [
@@ -18,11 +18,12 @@ __interface IAction : IActionBase
 {
 	[id(2)]
 	HRESULT SetActionParameters([in] IParameters* parameters);
-	[id(3)]
-	HRESULT Do([in] IResultBase* input, [out, retval] IResultBase** output);
 	[id(4)]
 	HRESULT SetProgressBarInfo([in] IProgressBarInfo* pinfo);
 	[id(5)]
-	HRESULT CanDo([in] IResultBase* result, [out, retval] VARIANT_BOOL* can);
+	HRESULT CanDo([in] IResultSet* result, [out, retval] VARIANT_BOOL* can);
+	[id(3)]
+	HRESULT Do([in] IResultSet* input, [out, retval] IResultSet** output);
+
 };
 

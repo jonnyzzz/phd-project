@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include ".\abstractprocess.h"
+#include "graphSet.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -9,7 +10,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 
-AbstractProcess::AbstractProcess(Graph* graph, ProgressBarInfo* info) : graph_source(graph), graph_result(NULL), info(info)
+AbstractProcess::AbstractProcess(ProgressBarInfo* info) : info(info)
 {
 	wasInitialized = false;
 }
@@ -19,24 +20,9 @@ AbstractProcess::~AbstractProcess(void)
 }
 
 
-Graph* AbstractProcess::result() {
-	ASSERT(graph_result != NULL);
-	//ASSERT(wasInitialized);
-	return graph_result;
-}
-
-
-void AbstractProcess::submitGraphResult(Graph* graph) {
-	ASSERT(graph_result == NULL);
-	//ASSERT(wasInitialized);
-	graph_result = graph;
-}
 
 void AbstractProcess::start() {
 	wasInitialized = true;
 }
 
 
-JDouble AbstractProcess::sqr(JDouble x) {
-	return x*x;
-}

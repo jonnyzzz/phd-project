@@ -14,6 +14,6 @@
 __interface IWritableGraphResult : IDispatch
 {
 	[id(20), local, hidden]
-	HRESULT AddGraph([in]void** graph, [in]VARIANT_BOOL isStrongComponent);
+	HRESULT SetGraph([in]void** graph, [in]VARIANT_BOOL isStrongComponent);
 };
 

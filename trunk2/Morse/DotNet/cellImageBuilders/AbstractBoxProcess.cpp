@@ -3,7 +3,7 @@
 #include "../graph/graphutil.h"
 
 AbstractBoxProcess::AbstractBoxProcess(Graph* graph, ISystemFunction* function, int* factor, ProgressBarInfo* pinfo) : 
-	AbstractProcess(graph, pinfo), function(function), factor(factor)
+	AbstractProcessExt(graph, pinfo), function(function), factor(factor)
 {
 	this->input = function->getInput();
 	this->output = function->getOutput();
