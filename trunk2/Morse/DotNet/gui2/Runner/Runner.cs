@@ -1,7 +1,5 @@
 using System;
-using System.Reflection;
 using System.Windows.Forms;
-using gui2.Document;
 using gui2.Forms;
 using gui2.TreeNodes;
 using guiKernel2.Document;
@@ -24,7 +22,7 @@ namespace gui2.Runner
 		{
 			runner = this;
 			this.commandLine = commandLine;
-			//this.core = Core.Instance;
+			this.core = Core.Instance;
 
 			this.computationForm = new ComputationForm();			
 			
@@ -50,7 +48,7 @@ namespace gui2.Runner
 		{
 			commandLine = null;
 			computationForm = null;
-			//core.Dispose();
+			core.Dispose();
 			core = null;
 			document = null;
 		}

@@ -1,5 +1,6 @@
 using guiKernel2.Container;
 using guiKernel2.Node;
+using guiKernel2.src.Node;
 using MorseKernel2;
 
 namespace guiKernel2.Document
@@ -37,7 +38,7 @@ namespace guiKernel2.Document
 
 		public KernelNode CreateInitialNode()
 		{
-			return new KernelNode(kernell.CreateInitialResult());
+			return new KernelNode(ResultSet.FromResultSet(kernell.CreateInitialResultSet()));
 		}
 	}
 }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using guiKernel2.ActionFactory.ActionInfos;
+using guiKernel2.Container;
 using guiKernel2.Node;
 using MorseKernel2;
 
@@ -12,10 +14,11 @@ namespace guiKernel2.src.Node
 	{
 		private ArrayList results = new ArrayList();
 
-		public ResultSet()
+		protected ResultSet()
 		{
 		}
 
+		#region getters
 		public IResultSet ToResultSet
 		{
 			get
@@ -29,11 +32,11 @@ namespace guiKernel2.src.Node
 			}
 		}
 
-		public IResultBase[] ToResults
+		public IResult[] ToResults
 		{
 			get
 			{
-				return (IResultBase[])results.ToArray(typeof(IResultBase));
+				return (IResult[])results.ToArray(typeof(IResult));
 			}
 		}
 
@@ -42,17 +45,27 @@ namespace guiKernel2.src.Node
 			get
 			{
 				ArrayList nodes = new ArrayList();
-				foreach (IResultBase resultBase in ToResults)
+				IResult[] results = ToResults;
+				if (results.Length > 0 ) 
 				{
-					nodes.Add(new KernelNode(resultBase));
+					foreach (IResult result in results)
+					{
+						nodes.Add(new KernelNode(ResultSet.FromResult(result)));
+					}
+				} else
+				{
+					nodes.Add(new KernelNode(ResultSet.Empty()));
 				}
 				return (KernelNode[])nodes.ToArray(typeof(KernelNode));
 			}
 		}
+		#endregion
+
+		#region protected Add's
 
 		protected void AddResult(IResultBase result)
 		{
-			results.Add(result);
+			results.Add((IResult)result);
 		}
 
 		protected void AddResultRange(IResultBase[] results)
@@ -67,13 +80,9 @@ namespace guiKernel2.src.Node
 				AddResult(set.GetResult(count));
 			}
 		}
+		#endregion
 
-		public static ResultSet FromKernelNode(KernelNode node)
-		{
-			ResultSet resultSet = new ResultSet();
-			resultSet.AddResult(node.Result);
-			return resultSet;
-		}
+		#region static
 
 		public static ResultSet FromResultSet(IResultSet set)
 		{
@@ -81,5 +90,41 @@ namespace guiKernel2.src.Node
 			resultSet.AddResultSet(set);
 			return resultSet;
 		}
+
+		public static ResultSet FromResult(IResultBase result)
+		{
+			ResultSet resultSet = new ResultSet();
+			resultSet.AddResult(result);
+			return resultSet;
+		}
+
+		public static ResultSet Empty()
+		{
+			return new ResultSet();
+		}
+
+		#endregion
+
+
+		public bool Match(string resultInterface, string metadataInterface)
+		{
+			IResult[] results = ToResults;
+			if (results.Length == 0) return false;
+			foreach (IResult result in results)
+			{
+				if (!(Core.ImplemetsType(result, resultInterface) && Core.ImplemetsType(result.GetMetadata(), metadataInterface))) 
+				{
+					return false;
+				} 
+			}
+			return true;
+		}
+
+
+		public override string ToString()
+		{
+			return string.Format("ResultSet [ length = {0} ]", this.results.Count);
+		}
+
 	}
 }

@@ -23,7 +23,7 @@ namespace gui2.TreeNodes
 
 		public override string NodeCaption
 		{
-			get { return string.Format("Sample Node [ {0} ]", kernelNode.Caption); }
+			get { return string.Format("{0}", kernelNode.Caption); }
 		}
 
 		protected override MenuItem[] GetMenuItems()
@@ -58,7 +58,7 @@ namespace gui2.TreeNodes
 		{
 			get
 			{
-				return KernelNode.GetResultSet();
+				return KernelNode.Results;
 			}
 		}
 

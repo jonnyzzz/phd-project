@@ -33,15 +33,15 @@ namespace gui2.ActionPerformer
 			
 			Performer performer = new Performer(resultSet, parameters.Chain, info );
 
-			performer.NewNode +=new NewNodeEvent(NewNode);
+			performer.NewNode += new NewNodeEvent(NewNode);
 
-			performer.ThreadedDo();
+			performer.Do();
 
 			return true;
 
 		}
 
-		private void NewNode(gui2.TreeNodes.Node node)
+		private void NewNode(Node node)
 		{
 			this.node.AddChild(node);			
 		}

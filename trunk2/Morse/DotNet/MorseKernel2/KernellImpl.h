@@ -44,7 +44,7 @@ public:
 
 	//IKernell
 	STDMETHOD(GetFunction)(IFunction** function);
-	STDMETHOD(CreateInitialResult)(IResultBase** result);
+	STDMETHOD(CreateInitialResultSet)(IResultSet** result);
 
 	//IWritableKernell
 	STDMETHOD(SetFunction)(IFunction* function);

@@ -36,12 +36,15 @@ namespace gui2.ActionPerformer
 			inProcess = true;
 			Logger.Logger.LogMessage("Computation Started");
 			ResultSet resultSet = chain.Do(result, progressBarInfo);
+			Logger.Logger.LogMessage("Comutation result set = {0}", resultSet.ToString());
+
 			if (NewNode != null)
 			{
-				foreach (KernelNode kernelNode in resultSet.ToNodes)
+				KernelNode[] nodes = resultSet.ToNodes;
+				foreach (KernelNode kernelNode in nodes)
 				{
 					NewNode(new Node(kernelNode));
-				}	
+				}					
 			}
 			inProcess = false;
 			Logger.Logger.LogMessage("Computation Finished");
@@ -52,14 +55,12 @@ namespace gui2.ActionPerformer
 			get { return inProcess; }
 		}
 
-		public void ThreadedDo()
+		private void ThreadedDo()
 		{
-			Do();
-			return;
-			/*Thread thread = new Thread(new ThreadStart(Do));
+			Thread thread = new Thread(new ThreadStart(Do));
 			thread.Name = "ActionChainPerformer";
 			thread.Priority = ThreadPriority.BelowNormal;
-			thread.Start();*/
+			thread.Start();
 		}
 	}
 }

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Mar 17 21:55:30 2005
+/* at Fri Mar 18 00:32:20 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -43,7 +43,7 @@
 
 #include "_MorseKernel2.h"
 
-#define TYPE_FORMAT_STRING_SIZE   1339                              
+#define TYPE_FORMAT_STRING_SIZE   1321                              
 #define PROC_FORMAT_STRING_SIZE   1447                              
 #define TRANSMIT_AS_TABLE_SIZE    0            
 #define WIRE_MARSHAL_TABLE_SIZE   2            
@@ -1507,7 +1507,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1372 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure CreateInitialResult */
+	/* Procedure CreateInitialResultSet */
 
 /* 1374 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
@@ -1558,7 +1558,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 /* 1434 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
 /* 1436 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 1438 */	NdrFcShort( 0x528 ),	/* Type Offset=1320 */
+/* 1438 */	NdrFcShort( 0x500 ),	/* Type Offset=1280 */
 
 	/* Return value */
 
@@ -2479,31 +2479,17 @@ static const MIDL_TYPE_FORMAT_STRING __MIDL_TypeFormatString =
 /* 1302 */	
 			0x2f,		/* FC_IP */
 			0x5a,		/* FC_CONSTANT_IID */
-/* 1304 */	NdrFcLong( 0x92f4eeef ),	/* -1829441809 */
-/* 1308 */	NdrFcShort( 0x602a ),	/* 24618 */
-/* 1310 */	NdrFcShort( 0x496d ),	/* 18797 */
-/* 1312 */	0x80,		/* 128 */
-			0x67,		/* 103 */
-/* 1314 */	0x51,		/* 81 */
-			0x84,		/* 132 */
-/* 1316 */	0xf4,		/* 244 */
-			0xf1,		/* 241 */
-/* 1318 */	0xd3,		/* 211 */
-			0x7b,		/* 123 */
-/* 1320 */	
-			0x2f,		/* FC_IP */
-			0x5a,		/* FC_CONSTANT_IID */
-/* 1322 */	NdrFcLong( 0x63b946e2 ),	/* 1673086690 */
-/* 1326 */	NdrFcShort( 0x2aee ),	/* 10990 */
-/* 1328 */	NdrFcShort( 0x4034 ),	/* 16436 */
-/* 1330 */	0xba,		/* 186 */
-			0x1c,		/* 28 */
-/* 1332 */	0x1b,		/* 27 */
-			0x4c,		/* 76 */
-/* 1334 */	0xfd,		/* 253 */
-			0x68,		/* 104 */
-/* 1336 */	0xce,		/* 206 */
-			0xc0,		/* 192 */
+/* 1304 */	NdrFcLong( 0x5498e339 ),	/* 1419305785 */
+/* 1308 */	NdrFcShort( 0x8014 ),	/* -32748 */
+/* 1310 */	NdrFcShort( 0x4366 ),	/* 17254 */
+/* 1312 */	0x90,		/* 144 */
+			0x92,		/* 146 */
+/* 1314 */	0x13,		/* 19 */
+			0xeb,		/* 235 */
+/* 1316 */	0x8a,		/* 138 */
+			0xd3,		/* 211 */
+/* 1318 */	0x5e,		/* 94 */
+			0x1d,		/* 29 */
 
 			0x0
         }
@@ -4462,7 +4448,7 @@ CINTERFACE_PROXY_VTABLE(9) _IKernellProxyVtbl =
     0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
     0 /* IDispatch_Invoke_Proxy */ ,
     (void *) (INT_PTR) -1 /* IKernell::GetFunction */ ,
-    (void *) (INT_PTR) -1 /* IKernell::CreateInitialResult */
+    (void *) (INT_PTR) -1 /* IKernell::CreateInitialResultSet */
 };
 
 

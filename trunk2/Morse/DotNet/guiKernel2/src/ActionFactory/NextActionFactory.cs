@@ -33,14 +33,11 @@ namespace guiKernel2.ActionFactory
 			ArrayList result = new ArrayList();
 			foreach (ActionInfo actionInfo in actions)
 			{
-				if ( Core.ImplemetsType(node.Result, actionInfo.ResultType))
+				if (node.Results.Match(actionInfo.ResultTypeName, actionInfo.MetadataTypeName))
 				{
 					Logger.Logger.LogMessage("Candidate Found: {0}", actionInfo);
-					IResultMetadata metadata =  node.Result.GetMetadata();
-					if (Core.ImplemetsType(metadata, actionInfo.MetadataName))
-					{
-						result.Add(actionInfo);
-					}
+
+					result.Add(actionInfo);
 				}
 			}
 			return (ActionInfo[])result.ToArray(typeof(ActionInfo));

@@ -20,19 +20,19 @@ namespace guiKernel2.ActionFactory.ActionInfos
 			this.resultType = resultType;
 		}
 
-		public string MetadataName
+		public string MetadataTypeName
 		{
 			get { return metadataName; }
 		}
 
-		public string ResultType
+		public string ResultTypeName
 		{
 			get { return resultType; }
 		}
 
 		public override string ToString()
 		{
-			return string.Format("ActionInfo: [name = {0}, result = {1}, matadata = {2}, isLeaf = {3}]", ActionName, ResultType, MetadataName, IsLeaf);
+			return string.Format("ActionInfo: [name = {0}, result = {1}, matadata = {2}, isLeaf = {3}]", ActionName, ResultTypeName, MetadataTypeName, IsLeaf);
 		}
 	}
 }

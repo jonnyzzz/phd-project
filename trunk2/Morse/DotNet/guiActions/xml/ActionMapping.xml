@@ -3,10 +3,12 @@
 <mappings>
     <action name="ITarjanAction" resultType="IGraphResult" metadata="IResultMetadata" isLeaf="true" />
 
-	<action name="IBoxMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="false">		
+	<action name="IBoxMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="true">		
+	 <!--
 		<nextActions>		
 			<actionReference name="ITarjanAction" isLeaf="true"/>
 		</nextActions>
+	  -->
 	</action>
 
 	<assemblies>	

@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using guiKernel2.Actions;
 using guiKernel2.Container;
 using guiKernel2.src.Node;
@@ -11,12 +12,11 @@ namespace guiKernel2.Node
 	/// </summary>
 	public class KernelNode
 	{
-		private IResult result;
+		private ResultSet results;
 
-		public KernelNode(IResultBase result)
+		public KernelNode(ResultSet results)
 		{
-			this.result = result as IResult;
-			if (this.result == null) throw new ArgumentException("result Should implement IResult");
+			this.results = results;
 		}
 
 		public ActionWrapper[] GetNextActions()
@@ -30,35 +30,67 @@ namespace guiKernel2.Node
 		}
 
 
-		public IResult Result
+		public ResultSet Results
 		{
 			get
 			{
-				return result;
+				return results;
 			}
 		}
 
-		public ResultSet GetResultSet()
-		{
-			return ResultSet.FromKernelNode(this);
-		}
-
-
+		private string caption = null;
 		public string Caption
 		{
 			get
 			{
+				if (caption == null)
+				{
+					caption = CreateCaption();
+				}
+				return caption;
+			}
+		}
+
+		private string CreateCaption()
+		{
+			IResult[] results = Results.ToResults;
+			StringBuilder builder = new StringBuilder();
+			switch(results.Length)
+			{
+				case 0:
+					builder.Append("Empty Node");
+					break;
+				case 1:
+					builder.Append("Single Node");
+					break;
+				default:
+					builder.Append("Multiple Node");
+					break;
+			}
+
+			builder.Append(" {");
+
+			for (int i = 0; i < results.Length; i++ )
+			{
+				IResult result = results[i];
 				if (result is IGraphResult)
 				{
-					IGraphResult graphResult = (IGraphResult)result;
-					IGraphInfo info = graphResult.GetGraphInfo();
-
-					return string.Format("Graph node: {0} nodes, {1} edges", info.GetNodes(), info.GetEdges());
+					IGraphInfo info = ((IGraphResult)result).GetGraphInfo(); 
+					builder.AppendFormat("Graph [ Nodes = {0}, Edges = {1} ]", info.GetNodes(), info.GetEdges());
 				} else
 				{
-					return "Unknown IResult";
+					builder.Append("Unknown Result");
+				}
+				if (i+1 < results.Length)
+				{
+					builder.Append(", ");
 				}
 			}
+
+			builder.Append(" }");
+
+			return builder.ToString();
+
 		}
 	}
 }

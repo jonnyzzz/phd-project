@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Mar 17 21:55:30 2005
+/* at Fri Mar 18 00:32:20 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -4504,8 +4504,8 @@ EXTERN_C const IID IID_IKernell;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetFunction( 
             /* [retval][out] */ IFunction **function) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateInitialResult( 
-            /* [retval][out] */ IResultBase **result) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateInitialResultSet( 
+            /* [retval][out] */ IResultSet **result) = 0;
         
     };
     
@@ -4559,9 +4559,9 @@ EXTERN_C const IID IID_IKernell;
             IKernell * This,
             /* [retval][out] */ IFunction **function);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateInitialResult )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateInitialResultSet )( 
             IKernell * This,
-            /* [retval][out] */ IResultBase **result);
+            /* [retval][out] */ IResultSet **result);
         
         END_INTERFACE
     } IKernellVtbl;
@@ -4602,8 +4602,8 @@ EXTERN_C const IID IID_IKernell;
 #define IKernell_GetFunction(This,function)	\
     (This)->lpVtbl -> GetFunction(This,function)
 
-#define IKernell_CreateInitialResult(This,result)	\
-    (This)->lpVtbl -> CreateInitialResult(This,result)
+#define IKernell_CreateInitialResultSet(This,result)	\
+    (This)->lpVtbl -> CreateInitialResultSet(This,result)
 
 #endif /* COBJMACROS */
 
@@ -4624,12 +4624,12 @@ void __RPC_STUB IKernell_GetFunction_Stub(
     DWORD *_pdwStubPhase);
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IKernell_CreateInitialResult_Proxy( 
+/* [id] */ HRESULT STDMETHODCALLTYPE IKernell_CreateInitialResultSet_Proxy( 
     IKernell * This,
-    /* [retval][out] */ IResultBase **result);
+    /* [retval][out] */ IResultSet **result);
 
 
-void __RPC_STUB IKernell_CreateInitialResult_Stub(
+void __RPC_STUB IKernell_CreateInitialResultSet_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,

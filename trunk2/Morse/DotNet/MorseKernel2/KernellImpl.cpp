@@ -6,6 +6,7 @@
 #include "GraphResultImpl.h"
 #include "SymbolicImageMetadata.h"
 #include "SmartInterface.h"
+#include "GraphResultWrapper.h"
 
 // CKernellImpl
 
@@ -38,33 +39,25 @@ STDMETHODIMP CKernellImpl::SetFunction(IFunction* function) {
 	return S_OK;
 }
 
-STDMETHODIMP CKernellImpl::CreateInitialResult(IResultBase** result) {
+STDMETHODIMP CKernellImpl::CreateInitialResultSet(IResultSet** result) {
 	
 	ATLASSERT(this->function != NULL);
-
-	SmartInterface<IWritableGraphResult> graphResult;
-	CGraphResultImpl::CreateInstance(&graphResult);
-	ATLASSERT(graphResult != NULL);
-
-	
-	Graph* graph;
-	HRESULT hr = function->CreateGraph((void**)&graph);
-	if (FAILED(hr)) {
-		*result = NULL;
-		return hr;
-	}
-
-	graph->maximize();
-
-	graphResult->SetGraph((void**)&graph, FALSE);
 
 	SmartInterface<ISymbolicImageMetadata> metadata;
 	CSymbolicImageMetadata::CreateInstance(&metadata);
 	ATLASSERT(metadata != NULL);
 
-	graphResult->SetMetadata(metadata);
+	GraphResultGraphList lst(metadata);
 
-	graphResult->QueryInterface(result);
+	Graph* graph;
+	HRESULT hr = function->CreateGraph((void**)&graph);
+	ATLASSERT(SUCCEEDED(hr));
+
+	graph->maximize();
+
+	lst.AddGraph(graph, false);
+
+	lst.GetResultSet(result);
 	ATLASSERT(*result != NULL);
 	
 	return S_OK;

@@ -401,7 +401,7 @@ interface IKernell : IDispatch {
 #line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\kernell.h"
 	[id(3)] HRESULT  GetFunction([out,retval] IFunction **function );
 #line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\kernell.h"
-	[id(4)] HRESULT  CreateInitialResult([out,retval] IResultBase **result );
+	[id(4)] HRESULT  CreateInitialResultSet([out,retval] IResultSet **result );
 };
 
 [

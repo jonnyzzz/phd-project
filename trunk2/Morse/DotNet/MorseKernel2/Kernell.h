@@ -3,7 +3,7 @@
 #pragma once
 #include "resource.h"       // main symbols
 #include "Function.h"
-#include "result.h"
+#include "resultSet.h"
 
 // IKernell
 [
@@ -17,5 +17,5 @@ __interface IKernell : IDispatch
 	[id(3)]
 	HRESULT GetFunction([out, retval] IFunction** function);
 	[id(4)]
-	HRESULT CreateInitialResult([out, retval] IResultBase** result);
+	HRESULT CreateInitialResultSet([out, retval] IResultSet** result);
 };
