@@ -136,13 +136,13 @@ void AbstractPointBuilder::buildNodeImage(Node* node) {
 	for (int i=0; i<dimension; i++) {
 		c[i] = 0;
 		//it's defined before call this function!
-		x0[i] = graph_result->toExternal(point[i],i);
+		x0[i] = graph_result->toExternal(point[i],i) + eps[i]/2;
 	}
 	c[dimension] = 0;
 
 	while (c[dimension] == 0) {
 		for (i=0; i<dimension; i++) {
-			x[i] = x0[i] + eps[i]*( (double)c[i] + 0.5 );
+			x[i] = x0[i] + eps[i]*(double)c[i];
 		}
 
 		//todo -> to abstract for optimization in MS
