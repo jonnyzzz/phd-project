@@ -233,6 +233,9 @@
 				RelativePath=".\ResultBase.cpp">
 			</File>
 			<File
+				RelativePath=".\ResultMetadata.cpp">
+			</File>
+			<File
 				RelativePath=".\ResultSet.cpp">
 			</File>
 			<File
@@ -258,6 +261,9 @@
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\SymbolicImageMetadata.cpp">
 			</File>
 			<File
 				RelativePath=".\TarjanAction.cpp">
@@ -352,6 +358,9 @@
 				RelativePath=".\ResultBase.h">
 			</File>
 			<File
+				RelativePath=".\ResultMetadata.h">
+			</File>
+			<File
 				RelativePath=".\ResultSet.h">
 			</File>
 			<File
@@ -365,6 +374,9 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
+			</File>
+			<File
+				RelativePath=".\SymbolicImageMetadata.h">
 			</File>
 			<File
 				RelativePath=".\TarjanAction.h">

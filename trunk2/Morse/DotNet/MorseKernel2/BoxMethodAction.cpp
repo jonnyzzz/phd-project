@@ -11,6 +11,7 @@
 #include "../systemFunction/isystemFunctionDerivate.h"
 #include "../cellImageBuilders/AbstractProcess.h"
 #include "../cellImageBuilders/SimpleBoxProcess.h"
+#include "SymbolicImageMetadata.h"
 
 
 // CBoxMethodAction
@@ -96,7 +97,10 @@ STDMETHODIMP CBoxMethodAction::Do(IResultSet* in, IResultSet** out) {
 
 	SimpleBoxProcess process(it, func, factor, &pinfo);
 
-	GraphResultUtil::PerformProcess(&process, in, false, out);
+	SmartInterface<IResultMetadata> metadata;
+	CSymbolicImageMetadata::CreateInstance(&metadata);
+
+	GraphResultUtil::PerformProcess(&process, in, false, metadata, out);
 	ATLASSERT(*out != NULL);
 
 	delete[] factor;

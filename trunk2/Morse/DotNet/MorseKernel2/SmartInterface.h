@@ -32,4 +32,8 @@ public:
 	bool operator != ( I* val) const {
 		return this->data != val;
 	}
+
+	operator I* () {
+		return data;
+	}
 };

@@ -16,13 +16,25 @@ CGraphResultImpl::CGraphResultImpl() {
 
 HRESULT CGraphResultImpl::FinalConstruct() {
 	this->graph = NULL;
+	this->metadata = NULL;
 	return S_OK;
 }
 
 
 void CGraphResultImpl::FinalRelease() {
 	SAFE_DELETE(this->graph);
+	SAFE_RELEASE(this->metadata);
 }
+
+
+STDMETHODIMP CGraphResultImpl::GetMetadata(IResultMetadata** out) {
+	ATLASSERT(metadata != NULL);
+	metadata->QueryInterface(out);
+	ATLASSERT(*out != NULL);
+	return S_OK;
+}
+
+
 
 STDMETHODIMP CGraphResultImpl::GetGraph(void** graph) {
 	ATLASSERT(this->graph != NULL);
@@ -63,6 +75,16 @@ STDMETHODIMP CGraphResultImpl::SetGraph(void** graph, VARIANT_BOOL isStrongCompo
 	SAFE_DELETE(this->graph);
 	this->graph = *(Graph**)graph;
 	this->isStongComponent = (isStrongComponent == TRUE)?true:false;
+
+	return S_OK;
+}
+
+STDMETHODIMP CGraphResultImpl::SetMetadata(IResultMetadata* in) {
+	SAFE_RELEASE(metadata);
+
+	in->QueryInterface(&metadata);
+
+	ATLASSERT(metadata != NULL);
 
 	return S_OK;
 }

@@ -35,6 +35,10 @@ public:
 	HRESULT FinalConstruct();
 	void FinalRelease();
 
+	//IResult
+public:
+	STDMETHOD(GetMetadata)(IResultMetadata** out);
+
 	// IGraphResult Methods
 public:
 	STDMETHOD(GetGraph)(void ** graph);
@@ -44,10 +48,11 @@ public:
 	// IWritableGraphResult Methods
 public:
 	STDMETHOD(SetGraph)(void** graph, VARIANT_BOOL isStringComponent);
+	STDMETHOD(SetMetadata)(IResultMetadata* in);
 
 private:
+	IResultMetadata* metadata;
 	Graph* graph;
 	bool isStongComponent;
-
 };
 

@@ -5,6 +5,7 @@
 #include "graphResult.h"
 #include "writableGraphResult.h"
 #include "writableResultSet.h"
+#include "resultMetadata.h"
 
 class Graph;
 class GraphSet;
@@ -32,7 +33,7 @@ private:
 
 class GraphResultGraphList {
 public:
-	GraphResultGraphList();
+	GraphResultGraphList(IResultMetadata* metadata);
 	~GraphResultGraphList();
 
 public:
@@ -45,5 +46,6 @@ public:
 
 private:
 	IWritableResultSet* resultSet;
+	IResultMetadata* metadata;
 
 };

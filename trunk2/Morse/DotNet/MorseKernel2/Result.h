@@ -3,6 +3,7 @@
 #pragma once
 #include "resource.h"       // main symbols
 #include "ResultBase.h"
+#include "ResultMetadata.h"
 
 
 // IResult
@@ -14,6 +15,9 @@
 ]
 __interface IResult : IResultBase
 {
+	[id(1)]
+	HRESULT GetMetadata([out, retval] IResultMetadata** out);
+	
 };
 
 

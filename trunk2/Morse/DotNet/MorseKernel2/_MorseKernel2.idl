@@ -157,13 +157,30 @@ interface IBoxMethodParameters : IComputationParameters {
 
 [
 	object,
+	uuid(A8E4F6FF-93DA-489A-A6C3-22A5884932C9),
+	dual,
+	helpstring("IResultMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\resultmetadata.h"
+interface IResultMetadata : IDispatch {
+#line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\resultmetadata.h"
+	[id(20)] HRESULT  EqualType([in] IResultMetadata *metadata, [out,retval] VARIANT_BOOL *out);
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\resultmetadata.h"
+	[id(21)] HRESULT  Clone([out,retval] IResultMetadata **metadata );
+};
+
+[
+	object,
 	uuid(9B7D45A5-77FD-4E97-8C4A-76D3610CC875),
 	dual,
 	helpstring("IResult Interface"),
 	pointer_default(unique)
 ] 
-#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\result.h"
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\result.h"
 interface IResult : IResultBase {
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\result.h"
+	[id(1)] HRESULT  GetMetadata([out,retval] IResultMetadata **out );
 };
 
 [
@@ -219,6 +236,8 @@ interface IGraphResult : IResult {
 interface IWritableGraphResult : IDispatch {
 #line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablegraphresult.h"
 	[id(20),local,hidden] HRESULT  SetGraph([in] void **graph , [in] VARIANT_BOOL isStrongComponent);
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablegraphresult.h"
+	[id(21)] HRESULT  SetMetadata([in] IResultMetadata *metadata);
 };
 
 [
@@ -232,6 +251,17 @@ interface IWritableGraphResult : IDispatch {
 interface IWritableResultSet : IDispatch {
 #line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writableresultset.h"
 	[id(5)] HRESULT  AddResult([in] IResultBase *result);
+};
+
+[
+	object,
+	uuid(24EEB65B-81FF-42EA-8521-6B3F62665F84),
+	dual,
+	helpstring("ISymbolicImageMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\symbolicimagemetadata.h"
+interface ISymbolicImageMetadata : IResultMetadata {
 };
 
 [
@@ -375,6 +405,17 @@ library MorseKernel2
 		interface IGraphResult;
 		interface IResult;
 		interface IResultBase;
+	};
+
+	[
+		version(1.0),
+		uuid(A5D5EA06-663E-4755-A3E7-A536E83B5AC2),
+		helpstring("SymbolicImageMetadata Class")
+	] 
+#line 31 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\symbolicimagemetadata.h"
+	coclass CSymbolicImageMetadata {
+		interface ISymbolicImageMetadata;
+		interface IResultMetadata;
 	};
 
 	[

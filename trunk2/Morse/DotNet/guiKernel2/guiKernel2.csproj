@@ -87,6 +87,11 @@
                     Lcid = "0"
                     WrapperTool = "tlbimp"
                 />
+                <Reference
+                    Name = "Logger"
+                    Project = "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
@@ -121,7 +126,12 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\ActionImpl\TarjanActionWrapper.cs"
+                    RelPath = "src\ActionFactory\ActionInfos\ActionInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\ActionInfos\ActionRef.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -151,7 +161,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Container\Container.cs"
+                    RelPath = "src\Container\Core.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -174,6 +184,20 @@
                     RelPath = "src\Node\KernelNode.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\xml\XMLParser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\xml\XMLParserException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "xml\ActionMapping.xml"
+                    BuildAction = "EmbeddedResource"
                 />
             </Include>
         </Files>

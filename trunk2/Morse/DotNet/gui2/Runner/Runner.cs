@@ -1,6 +1,8 @@
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using gui2.Forms;
+using guiKernel2.src.Container;
 
 namespace gui2.Runner
 {
@@ -11,6 +13,7 @@ namespace gui2.Runner
 	{
 		private CommandLineParser commandLine;
 		private ComputationForm computationForm;
+		private Core core;
 		private bool isInternal;
 		private Document.Document document = null;
 
@@ -19,7 +22,12 @@ namespace gui2.Runner
 			runner = this;
 			this.commandLine = commandLine;
 			this.computationForm = new ComputationForm();
-			Application.Run(computationForm);
+			this.core = Core.Instance;
+
+			if (!commandLine.hasKey("verbose")) 
+			{
+				Application.Run(computationForm);
+			}
 
 			isInternal = commandLine.hasKey("Internal");
 		}

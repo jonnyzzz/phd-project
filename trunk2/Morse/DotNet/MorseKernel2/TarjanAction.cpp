@@ -10,6 +10,8 @@
 #include "../graph/graph.h"
 #include "../graph/graphComponents.h"
 #include "../cellImageBuilders/TarjanProcess.h"
+#include "SmartInterface.h"
+#include "symbolicImageMetadata.h"
 
 // CTarjanAction
 
@@ -71,7 +73,10 @@ STDMETHODIMP CTarjanAction::Do(IResultSet* in, IResultSet** out) {
 
 	TarjanProcess ps(needEdgeResolve, &pinfo);
 
-	GraphResultUtil::PerformProcess(&ps, in, needEdgeResolve, out);
+	SmartInterface<IResultMetadata> metadata;
+	metadata = GraphResultUtil::GetMetadataCloned(in);
+
+	GraphResultUtil::PerformProcess(&ps, in, needEdgeResolve, metadata, out);
 
 	ATLASSERT(*out != NULL);
 

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Tue Mar 15 18:41:56 2005
+/* at Tue Mar 15 22:42:34 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -105,6 +105,12 @@ typedef interface IBoxMethodParameters IBoxMethodParameters;
 #endif 	/* __IBoxMethodParameters_FWD_DEFINED__ */
 
 
+#ifndef __IResultMetadata_FWD_DEFINED__
+#define __IResultMetadata_FWD_DEFINED__
+typedef interface IResultMetadata IResultMetadata;
+#endif 	/* __IResultMetadata_FWD_DEFINED__ */
+
+
 #ifndef __IResult_FWD_DEFINED__
 #define __IResult_FWD_DEFINED__
 typedef interface IResult IResult;
@@ -133,6 +139,12 @@ typedef interface IWritableGraphResult IWritableGraphResult;
 #define __IWritableResultSet_FWD_DEFINED__
 typedef interface IWritableResultSet IWritableResultSet;
 #endif 	/* __IWritableResultSet_FWD_DEFINED__ */
+
+
+#ifndef __ISymbolicImageMetadata_FWD_DEFINED__
+#define __ISymbolicImageMetadata_FWD_DEFINED__
+typedef interface ISymbolicImageMetadata ISymbolicImageMetadata;
+#endif 	/* __ISymbolicImageMetadata_FWD_DEFINED__ */
 
 
 #ifndef __IComponentRegistrar_FWD_DEFINED__
@@ -205,6 +217,18 @@ typedef struct CGraphResultImpl CGraphResultImpl;
 #endif /* __cplusplus */
 
 #endif 	/* __CGraphResultImpl_FWD_DEFINED__ */
+
+
+#ifndef __CSymbolicImageMetadata_FWD_DEFINED__
+#define __CSymbolicImageMetadata_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CSymbolicImageMetadata CSymbolicImageMetadata;
+#else
+typedef struct CSymbolicImageMetadata CSymbolicImageMetadata;
+#endif /* __cplusplus */
+
+#endif 	/* __CSymbolicImageMetadata_FWD_DEFINED__ */
 
 
 #ifndef __CCompReg_FWD_DEFINED__
@@ -1891,6 +1915,163 @@ void __RPC_STUB IBoxMethodParameters_UseDerivate_Stub(
 #endif 	/* __IBoxMethodParameters_INTERFACE_DEFINED__ */
 
 
+#ifndef __IResultMetadata_INTERFACE_DEFINED__
+#define __IResultMetadata_INTERFACE_DEFINED__
+
+/* interface IResultMetadata */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IResultMetadata;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("A8E4F6FF-93DA-489A-A6C3-22A5884932C9")
+    IResultMetadata : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE EqualType( 
+            /* [in] */ IResultMetadata *metadata,
+            /* [retval][out] */ VARIANT_BOOL *out) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Clone( 
+            /* [retval][out] */ IResultMetadata **metadata) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IResultMetadataVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IResultMetadata * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IResultMetadata * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IResultMetadata * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IResultMetadata * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IResultMetadata * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IResultMetadata * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IResultMetadata * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EqualType )( 
+            IResultMetadata * This,
+            /* [in] */ IResultMetadata *metadata,
+            /* [retval][out] */ VARIANT_BOOL *out);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
+            IResultMetadata * This,
+            /* [retval][out] */ IResultMetadata **metadata);
+        
+        END_INTERFACE
+    } IResultMetadataVtbl;
+
+    interface IResultMetadata
+    {
+        CONST_VTBL struct IResultMetadataVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IResultMetadata_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IResultMetadata_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IResultMetadata_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IResultMetadata_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IResultMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IResultMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IResultMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IResultMetadata_EqualType(This,metadata,out)	\
+    (This)->lpVtbl -> EqualType(This,metadata,out)
+
+#define IResultMetadata_Clone(This,metadata)	\
+    (This)->lpVtbl -> Clone(This,metadata)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IResultMetadata_EqualType_Proxy( 
+    IResultMetadata * This,
+    /* [in] */ IResultMetadata *metadata,
+    /* [retval][out] */ VARIANT_BOOL *out);
+
+
+void __RPC_STUB IResultMetadata_EqualType_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IResultMetadata_Clone_Proxy( 
+    IResultMetadata * This,
+    /* [retval][out] */ IResultMetadata **metadata);
+
+
+void __RPC_STUB IResultMetadata_Clone_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IResultMetadata_INTERFACE_DEFINED__ */
+
+
 #ifndef __IResult_INTERFACE_DEFINED__
 #define __IResult_INTERFACE_DEFINED__
 
@@ -1906,6 +2087,9 @@ EXTERN_C const IID IID_IResult;
     IResult : public IResultBase
     {
     public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetMetadata( 
+            /* [retval][out] */ IResultMetadata **out) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -1954,6 +2138,10 @@ EXTERN_C const IID IID_IResult;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
+            IResult * This,
+            /* [retval][out] */ IResultMetadata **out);
+        
         END_INTERFACE
     } IResultVtbl;
 
@@ -1991,11 +2179,26 @@ EXTERN_C const IID IID_IResult;
 
 
 
+#define IResult_GetMetadata(This,out)	\
+    (This)->lpVtbl -> GetMetadata(This,out)
+
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IResult_GetMetadata_Proxy( 
+    IResult * This,
+    /* [retval][out] */ IResultMetadata **out);
+
+
+void __RPC_STUB IResult_GetMetadata_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
 
 
 
@@ -2350,6 +2553,10 @@ EXTERN_C const IID IID_IGraphResult;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
+            IGraphResult * This,
+            /* [retval][out] */ IResultMetadata **out);
+        
         /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *GetGraph )( 
             IGraphResult * This,
             /* [out] */ void **graph);
@@ -2398,6 +2605,9 @@ EXTERN_C const IID IID_IGraphResult;
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
+
+#define IGraphResult_GetMetadata(This,out)	\
+    (This)->lpVtbl -> GetMetadata(This,out)
 
 
 #define IGraphResult_GetGraph(This,graph)	\
@@ -2475,6 +2685,9 @@ EXTERN_C const IID IID_IWritableGraphResult;
             /* [in] */ void **graph,
             /* [in] */ VARIANT_BOOL isStrongComponent) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetMetadata( 
+            /* [in] */ IResultMetadata *metadata) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -2528,6 +2741,10 @@ EXTERN_C const IID IID_IWritableGraphResult;
             /* [in] */ void **graph,
             /* [in] */ VARIANT_BOOL isStrongComponent);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
+            IWritableGraphResult * This,
+            /* [in] */ IResultMetadata *metadata);
+        
         END_INTERFACE
     } IWritableGraphResultVtbl;
 
@@ -2567,6 +2784,9 @@ EXTERN_C const IID IID_IWritableGraphResult;
 #define IWritableGraphResult_SetGraph(This,graph,isStrongComponent)	\
     (This)->lpVtbl -> SetGraph(This,graph,isStrongComponent)
 
+#define IWritableGraphResult_SetMetadata(This,metadata)	\
+    (This)->lpVtbl -> SetMetadata(This,metadata)
+
 #endif /* COBJMACROS */
 
 
@@ -2581,6 +2801,18 @@ EXTERN_C const IID IID_IWritableGraphResult;
 
 
 void __RPC_STUB IWritableGraphResult_SetGraph_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableGraphResult_SetMetadata_Proxy( 
+    IWritableGraphResult * This,
+    /* [in] */ IResultMetadata *metadata);
+
+
+void __RPC_STUB IWritableGraphResult_SetMetadata_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -2721,6 +2953,132 @@ void __RPC_STUB IWritableResultSet_AddResult_Stub(
 
 
 #endif 	/* __IWritableResultSet_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISymbolicImageMetadata_INTERFACE_DEFINED__
+#define __ISymbolicImageMetadata_INTERFACE_DEFINED__
+
+/* interface ISymbolicImageMetadata */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISymbolicImageMetadata;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("24EEB65B-81FF-42EA-8521-6B3F62665F84")
+    ISymbolicImageMetadata : public IResultMetadata
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ISymbolicImageMetadataVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISymbolicImageMetadata * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISymbolicImageMetadata * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISymbolicImageMetadata * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISymbolicImageMetadata * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISymbolicImageMetadata * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISymbolicImageMetadata * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISymbolicImageMetadata * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EqualType )( 
+            ISymbolicImageMetadata * This,
+            /* [in] */ IResultMetadata *metadata,
+            /* [retval][out] */ VARIANT_BOOL *out);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
+            ISymbolicImageMetadata * This,
+            /* [retval][out] */ IResultMetadata **metadata);
+        
+        END_INTERFACE
+    } ISymbolicImageMetadataVtbl;
+
+    interface ISymbolicImageMetadata
+    {
+        CONST_VTBL struct ISymbolicImageMetadataVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISymbolicImageMetadata_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ISymbolicImageMetadata_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ISymbolicImageMetadata_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ISymbolicImageMetadata_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ISymbolicImageMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ISymbolicImageMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ISymbolicImageMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define ISymbolicImageMetadata_EqualType(This,metadata,out)	\
+    (This)->lpVtbl -> EqualType(This,metadata,out)
+
+#define ISymbolicImageMetadata_Clone(This,metadata)	\
+    (This)->lpVtbl -> Clone(This,metadata)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISymbolicImageMetadata_INTERFACE_DEFINED__ */
 
 
 #ifndef __IComponentRegistrar_INTERFACE_DEFINED__
@@ -3943,6 +4301,14 @@ EXTERN_C const CLSID CLSID_CGraphResultImpl;
 
 class DECLSPEC_UUID("43037E6F-9884-4D5C-BB41-44D582888F9E")
 CGraphResultImpl;
+#endif
+
+EXTERN_C const CLSID CLSID_CSymbolicImageMetadata;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("A5D5EA06-663E-4755-A3E7-A536E83B5AC2")
+CSymbolicImageMetadata;
 #endif
 
 EXTERN_C const CLSID CLSID_CCompReg;

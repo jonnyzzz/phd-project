@@ -4,6 +4,7 @@ using System.Reflection;
 using guiKernel2.ActionFactory;
 using guiKernel2.Actions;
 using guiKernel2.src.ActionFactory;
+using guiKernel2.src.Container;
 using MorseKernel2;
 
 namespace guiKernel2.ActionFactory
@@ -17,8 +18,7 @@ namespace guiKernel2.ActionFactory
 		
 		public ActionWrapperFactory()
 		{
-			//todo: Find can be performed only in that assembly!
-			Assembly[] assemblies = new Assembly[]{Assembly.GetExecutingAssembly()};
+			Assembly[] assemblies = Core.Instance.Assemblies;
 
 			foreach (Assembly assembly in assemblies)
 			{

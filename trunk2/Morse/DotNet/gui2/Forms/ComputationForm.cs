@@ -1,12 +1,5 @@
-using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
 using gui.Forms;
 using gui2.Document;
-using gui2.Log;
-using gui2.TreeNodes;
 
 namespace gui2.Forms
 {
@@ -165,7 +158,7 @@ namespace gui2.Forms
 			if (assignment.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 			{
 				Function function = assignment.Function;
-				Logger.LogMessage(function.ToString());
+				Logger.Logger.LogMessage(function.ToString());
 
 				Runner.Runner.Instance.Document = new Document.Document(function);
 

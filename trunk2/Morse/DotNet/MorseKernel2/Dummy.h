@@ -92,6 +92,9 @@ public:
 
 	// IResult Methods
 public:
+	STDMETHOD(GetMetadata)(IResultMetadata** out) {
+		return E_NOTIMPL;
+	}
 
 	// IResultBase Methods
 public:

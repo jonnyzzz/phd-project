@@ -4,6 +4,7 @@
 #include "KernellImpl.h"
 #include "../Graph/Graph.h"
 #include "GraphResultImpl.h"
+#include "SymbolicImageMetadata.h"
 
 // CKernellImpl
 
@@ -58,6 +59,13 @@ STDMETHODIMP CKernellImpl::CreateInitialResult(IResultBase** result) {
 		graph->maximize();
 
 		graphResult->SetGraph((void**)&graph, FALSE);
+
+		ISymbolicImageMetadata* metadata;
+		CSymbolicImageMetadata::CreateInstance(&metadata);
+		ATLASSERT(metadata != NULL);
+
+		graphResult->SetMetadata(metadata);
+		metadata->Release();
 
 		graphResult->QueryInterface(result);
 		ATLASSERT(*result != NULL);

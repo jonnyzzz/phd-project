@@ -103,6 +103,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gui2", "gui2\gui2.csproj", 
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -507,6 +511,30 @@ Global
 		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.Test.Build.0 = Release|.NET
 		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.VisualizationDebug.Build.0 = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Debug.ActiveCfg = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Debug.Build.0 = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Debug2.ActiveCfg = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Debug2.Build.0 = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Debug2Gui.ActiveCfg = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Debug2Gui.Build.0 = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.DebugAll.ActiveCfg = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.DebugAll.Build.0 = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.DebugGL.ActiveCfg = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.DebugGL.Build.0 = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.DebugGUI.ActiveCfg = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.DebugGUI.Build.0 = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.DebugGui2.ActiveCfg = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.DebugGui2.Build.0 = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.FullDebug.ActiveCfg = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.FullDebug.Build.0 = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.NewDLL.ActiveCfg = Release|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.NewDLL.Build.0 = Release|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Release.ActiveCfg = Release|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Release.Build.0 = Release|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Test.ActiveCfg = Release|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Test.Build.0 = Release|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.VisualizationDebug.ActiveCfg = Debug|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.VisualizationDebug.Build.0 = Debug|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

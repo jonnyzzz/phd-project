@@ -1,4 +1,5 @@
 using System;
+using guiKernel2.src.ActionFactory;
 using MorseKernel2;
 
 namespace guiKernel2.Actions
@@ -28,6 +29,17 @@ namespace guiKernel2.Actions
 				throw new ActionPerformException("CanDo call returned FALSE");
 			}
 			return action.Do(input);
+		}
+
+		public string ActionMappingName
+		{
+			get
+			{
+				ActionMappingAttribute[] attributes = (ActionMappingAttribute[])this.GetType().GetCustomAttributes(typeof(ActionMappingAttribute), true);
+				if (attributes.Length != 1) throw new ActionException("Incorrect Attribute");
+
+				return attributes[0].ActionInterface.Name;
+			}
 		}
 
 	}

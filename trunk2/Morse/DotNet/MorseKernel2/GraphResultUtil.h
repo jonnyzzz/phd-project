@@ -1,6 +1,7 @@
 #pragma once
 #include "ResultSet.h"
 #include "ResultSetIterator.h"
+#include "ResultMetadata.h"
 class AbstractProcess;
 
 class GraphResultUtil {
@@ -10,7 +11,12 @@ public:
 	static bool ContainsOnlyType(IResultSet* resultSet);
 
 public:
-	static void PerformProcess(AbstractProcess* process, IResultSet* input, bool isStrongComponent, IResultSet** output);
+	static bool HasSameMetadataType(IResultSet* resultSet);
+	static IResultMetadata* GetMetadata(IResultSet* resultSet);
+	static IResultMetadata* GetMetadataCloned(IResultSet* resultSet);
+
+public:
+	static void PerformProcess(AbstractProcess* process, IResultSet* input, bool isStrongComponent, IResultMetadata* metadata, IResultSet** output);
 
 };
 

@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Windows.Forms;
-using gui2.Log;
 using guiKernel2.Actions;
 using guiKernel2.src.ActionFactory;
 
@@ -23,14 +20,15 @@ namespace gui2.TreeNodes
 			}
 
 			this.MenuItems.Clear();
-			this.MenuItems.AddRange( MenuItemFactory.CreateMenuItems(NextActionFactory.Instance.NextAction(action, beforeActions)));
+			throw new NotImplementedException("uncomment and fix");
+			//this.MenuItems.AddRange( MenuItemFactory.CreateMenuItems(NextActionFactory.Instance.NextAction(action, beforeActions)));
 		}
 		
 		protected override void EventClick()
 		{
 			if (action.isChainLeaf)
 			{
-				Logger.LogMessage("Event Click");		
+				Logger.Logger.LogMessage("Event Click");		
 			}
 		}
 	}

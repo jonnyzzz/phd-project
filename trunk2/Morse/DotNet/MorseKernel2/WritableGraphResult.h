@@ -2,7 +2,7 @@
 
 #pragma once
 #include "resource.h"       // main symbols
-
+#include "resultMetadata.h"
 
 // IWritableGraphResult
 [
@@ -15,5 +15,7 @@ __interface IWritableGraphResult : IDispatch
 {
 	[id(20), local, hidden]
 	HRESULT SetGraph([in]void** graph, [in]VARIANT_BOOL isStrongComponent);
+	[id(21)]
+	HRESULT SetMetadata([in] IResultMetadata* metadata);
 };
 
