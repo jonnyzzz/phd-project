@@ -28,6 +28,10 @@
 		<action name="IIsolatedSetAction" isLeaf="true">
 			<constaint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
 		</action>
+		
+		<action name="SavePointsKernelAction" isLeaf="true">
+			<constraint class="OneGraphResultConstraintFactory"/>
+		</action>
     </actions>
     
     <names>
@@ -37,6 +41,7 @@
 		<action name="GnuPlotVisualizationKernelAction" caption="Visualize" />
 		<action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search" />
 		<action name="IIsolatedSetAction" caption="Isolating set localization" />
+		<action name="SavePointsKernelAction" caption="Export to file" />
     </names>
 
 	<assemblies>	

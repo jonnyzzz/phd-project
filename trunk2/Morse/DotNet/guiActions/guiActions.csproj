@@ -112,6 +112,11 @@
                     Lcid = "0"
                     WrapperTool = "tlbimp"
                 />
+                <Reference
+                    Name = "guiExternalResource"
+                    Project = "{9705EB3C-990B-485C-8B9F-64477FB0A933}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
@@ -207,6 +212,26 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\SavePoints\SavePointsAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\SavePoints\SavePointsParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\SavePoints\SavePointsParameters.resx"
+                    DependentUpon = "SavePointsParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\SavePoints\SavePointsParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\actionImpl\Tarjan\TarjanAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -237,7 +262,22 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Constraints\OneGraphResultConstraint.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\filter\Filter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelActions\SavePoints\ISavePointsParameters.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelActions\SavePoints\SavePointsKernelAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

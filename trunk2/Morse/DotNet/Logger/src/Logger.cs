@@ -16,5 +16,15 @@ namespace Logger
 		{
 			LogMessage((object)string.Format(template, data));
 		}
+
+		public static void LogException(Exception e)
+		{
+			LogMessage(e.Message + "\n" + e.StackTrace);
+			if (e.InnerException != null)
+			{
+				LogMessage("\n\nInner Exception:");
+				LogException(e.InnerException);
+			}
+		}
 	}
 }

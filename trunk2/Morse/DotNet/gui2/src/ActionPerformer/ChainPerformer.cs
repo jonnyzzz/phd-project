@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Forms;
 using gui2.TreeNodes;
 using guiActions.Actions;
@@ -42,11 +43,18 @@ namespace gui2.ActionPerformer
 				Performer performer = new Performer(resultSet, parameters.Chain, info );
 
 				performer.NewNode += new NewNodeEvent(NewNode);
-
-				performer.Do();				
+				
+				performer.Do();								
 
 				return true;
-			} finally
+			} 
+			catch (Exception e)
+			{
+				MessageBox.Show(owner, "Action performings failed with error " + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Logger.Logger.LogException(e);
+				return false;
+			}
+			finally
 			{
 				if (Finish != null) Finish();
 			}
