@@ -144,7 +144,7 @@ namespace gui.Tree.Node.Factory
 
             private void UnirevsalComputationMenuItem_Click(object sender, EventArgs e)
             {
-                Runner.Instance.performAction(new ThreadStart(ThreadedAction));
+                ThreadedAction();
             }
 
             private void ThreadedAction()

@@ -459,15 +459,22 @@ namespace gui.Forms
 
         private void computatioinTree_MouseMoveNode(ComputationNode anode)
         {
-            IKernelNode node = anode.Node;
-            if (node is IGraph) 
-            {
-                IGraph gnode = (IGraph)node;
-                panelNodeInfo.Controls.Clear();   
-                Control cntrl = new gui.Panels.GraphNodeInfo(gnode.graphInfo());
-                cntrl.Dock = System.Windows.Forms.DockStyle.Fill;
-                panelNodeInfo.Controls.Add(cntrl);
-            }
+			if (anode != null) 
+			{
+				IKernelNode node = anode.Node;
+				if (node is IGraph) 
+				{
+					IGraph gnode = (IGraph)node;
+					panelNodeInfo.Controls.Clear();   
+					Control cntrl = new gui.Panels.GraphNodeInfo(gnode.graphInfo());
+					cntrl.Dock = System.Windows.Forms.DockStyle.Fill;
+					panelNodeInfo.Controls.Add(cntrl);
+				}
+			}
+			else 
+			{
+				panelNodeInfo.Controls.Clear();
+			}
         }
 
         private void menuItemShowSystemFunction_Click(object sender, System.EventArgs e)

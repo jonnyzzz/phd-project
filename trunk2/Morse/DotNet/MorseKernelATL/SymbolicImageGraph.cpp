@@ -10,6 +10,7 @@
 #include "ProjectiveBundleGraph.h"
 #include "allBackProgressBarInfo.h"
 #include "ComputationGraphResult.h"
+#include "../Homotop/IsolatingSet.h"
 
 // CSymbolicImageGraph
 
@@ -308,4 +309,41 @@ STDMETHODIMP CSymbolicImageGraph::putref_kernel(IKernelPointer* newVal)
 STDMETHODIMP CSymbolicImageGraph::ExportData(BSTR file) {
 	return SaveGraphToFile(graph, CString(file));	
 
+}
+
+//////////////////////////////////////////////////////////////////////////////////
+// IHomotopFind
+
+STDMETHODIMP CSymbolicImageGraph::Homotop(IHomotopParams* params) {
+	int dim = graph->getDimention();
+	JInt* array = new JInt[dim];
+	for (int i=0; i<dim; i++) {
+		double d;
+		params->getCoordinateAt(i, &d);
+		array[i] = graph->toInternal(d, i);
+	}
+
+	Node* node = graph->findNode(array);
+
+	if (node == NULL) {
+		VARIANT_BOOL b;
+		params->notifyNodeNotFound(&b);
+		if (b) return Homotop(params);
+
+		return S_OK;
+	} else {
+		
+		IsolatingSetProcess* process = new IsolatingSetProcess(graph, node);
+		process->start();
+		process->processNextGraph(graph);
+
+		Graph* result = process->result();
+		
+		GraphComponents* cms = new GraphComponents();
+		cms->addGraphAsComponent(result);
+
+		this->acceptChilds((void**)&cms);
+
+		return S_OK;
+	}
 }

@@ -228,6 +228,9 @@
 			ReferencedProjectIdentifier="{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}"
 			Name="graph_simplex"/>
 		<ProjectReference
+			ReferencedProjectIdentifier="{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}"
+			Name="Homotop"/>
+		<ProjectReference
 			ReferencedProjectIdentifier="{8D190DB8-56C4-4C76-A7F1-5560D53344CC}"
 			Name="SystemFunction"/>
 	</References>
@@ -246,9 +249,6 @@
 				RelativePath=".\ComputationGraphResult.cpp">
 			</File>
 			<File
-				RelativePath=".\ComputationResultWrapper.cpp">
-			</File>
-			<File
 				RelativePath=".\Dummy.cpp">
 			</File>
 			<File
@@ -265,9 +265,6 @@
 			</File>
 			<File
 				RelativePath=".\KernelException.cpp">
-			</File>
-			<File
-				RelativePath=".\KernelNodeWrapper.cpp">
 			</File>
 			<File
 				RelativePath=".\MorseKernelATL.cpp">
@@ -332,9 +329,6 @@
 				RelativePath=".\ComputationGraphResult.h">
 			</File>
 			<File
-				RelativePath=".\ComputationResultWrapper.h">
-			</File>
-			<File
 				RelativePath=".\Dummy.h">
 			</File>
 			<File
@@ -351,9 +345,6 @@
 			</File>
 			<File
 				RelativePath=".\KernelException.h">
-			</File>
-			<File
-				RelativePath=".\KernelNodeWrapper.h">
 			</File>
 			<File
 				RelativePath=".\MorseSpectrum.h">

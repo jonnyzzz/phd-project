@@ -58,6 +58,20 @@ __interface ISubdevidePointParams : ISubdevideParams {
 	HRESULT getCellPoints([in] int axis, [out, retval] int* value);
 };
 
+
+[
+	object,
+	uuid("3C17C825-1C25-4F2D-8E0B-630953AD9596"),
+	dual,
+	pointer_default(unique)
+]
+__interface IHomotopParams : IDispatch {
+	[id(1)]
+	HRESULT getCoordinateAt([in] int axis, [out, retval] double* value);
+	[id(2)]
+	HRESULT notifyNodeNotFound( [out, retval] VARIANT_BOOL* tryAgain);
+};
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 [
     object,
@@ -130,11 +144,7 @@ __interface ISubdevidablePoint {
 ]
 __interface IExtendable  {
 	[id(22)]
-	HRESULT Extend(/*[in]IExtendableParams * params*/);
-    /*
-	[id(23)]
-	HRESULT NewDimension([out,retval] int* value);
-    */
+	HRESULT Extend();
 };
 
 [
@@ -156,6 +166,17 @@ __interface IMorsable {
 __interface IExportData {
 	[id(25)]
 		HRESULT ExportData([in] BSTR file);
+};
+
+[
+	object,
+	uuid("A395C00D-8306-4AA8-9A9F-EA9E79E74C92"),
+	dual,
+	pointer_default(unique)
+]
+__interface IHomotopFind {
+	[id(27)]
+		HRESULT Homotop([in]IHomotopParams* params);
 };
 
 ///////////////////////////// node result /////////////////////////////
@@ -184,6 +205,8 @@ __interface IComputationGraphResult : IComputationResult {
 		HRESULT StrongComponentsEdges();
 	[id(62), helpstring("Localize loops")]
 		HRESULT Loops();
+	[id(63), helpstring("Do nothing")]
+		HRESULT DoNothing();
 };
 
 [

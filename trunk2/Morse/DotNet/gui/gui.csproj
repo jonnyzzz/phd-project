@@ -445,6 +445,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Tree\Node\Action\HomotopAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Tree\Node\Action\UnableToPerformActionException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -566,6 +571,16 @@
                 <File
                     RelPath = "src\Tree\Node\Forms\NextStepParams.resx"
                     DependentUpon = "NextStepParams.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\PointCoordinate.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\PointCoordinate.resx"
+                    DependentUpon = "PointCoordinate.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File

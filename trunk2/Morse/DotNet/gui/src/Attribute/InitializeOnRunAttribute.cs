@@ -10,8 +10,20 @@ namespace gui.Attributes
     [AttributeUsage(AttributeTargets.Method)]
 	public class InitializeOnRunAttribute : Attribute
 	{        
-		public InitializeOnRunAttribute()
+		public InitializeOnRunAttribute() : this(false)
 		{            
 	    }
+
+		private bool isInternal;
+
+		public InitializeOnRunAttribute(bool isInternal)
+		{
+			this.isInternal = isInternal;
+		}
+
+		public bool IsInternal
+		{
+			get { return isInternal; }
+		}
 	}
 }

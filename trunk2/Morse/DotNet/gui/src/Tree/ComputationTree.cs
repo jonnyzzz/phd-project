@@ -168,8 +168,14 @@ namespace gui.Tree
 						MouseMoveNode(node);
 					}
 				}
+			} else if (treeNode == null)
+			{
+				if (activeNode != null && MouseMoveNode != null)
+				{
+					activeNode = null;
+					MouseMoveNode(null);
+				}
 			}
-
 		}
 		#endregion
 

@@ -24,6 +24,7 @@ namespace gui
 		
 		private ComputationForm computationForm;
 		private CKernel kernel;
+		private bool isInternal = true;
 
 		public static CKernel Kernel 
 		{
@@ -41,7 +42,12 @@ namespace gui
 			}
 		}
 
-		
+		public bool IsInternal
+		{
+			get { return isInternal; }
+		}
+
+
 		[STAThread]
 		static void Main(string[] args) 
 		{	
@@ -155,36 +161,6 @@ namespace gui
         {
             Log.LogMessage(this, "E: Not implemented");
             computationForm.noImplementation(nodeParent);
-        }
-        
-
-        private Thread currentComputator = null;
-        private ThreadStart threadStart = null;
-
-        public void performAction(ThreadStart action)
-        {
-            /*
-            if (currentComputator == null)
-            {
-                this.threadStart = action;
-                currentComputator = new Thread(new ThreadStart(ThreadAction));
-                currentComputator.Name = "Computator";
-                currentComputator.Start();
-            }
-            */
-            action(); 
-        }
-
-        private void ThreadAction()
-        {
-            Log.LogMessage(this, "Thread started");
-            lock(kernel) 
-            {
-                threadStart();
-            }
-            currentComputator = null;
-            threadStart = null;
-            Log.LogMessage(this, "Thread finished");
-        }
+        }                
     }
 }

@@ -112,7 +112,6 @@ namespace gui.Tree.Node.Factory
 		}
 		#endregion
 
-
 		#region ISubdevidablePointParams...
 		public static ISubdevidePointParams ParamsSubdevidePoint(IWin32Window owner, IGraph node, ISubdevidePointParams param)
 		{
@@ -157,35 +156,7 @@ namespace gui.Tree.Node.Factory
 		}
 		#endregion
 
-
-		#region IExtendibleParams...
-        /*
-		public static IExtendableParams ParamsExtend(IWin32Window owner, IExtendable node, IExtendableParams param)
-		{
-			NextStepParams ps = new NextStepParams();
-			int dimension = node.NewDimension();
-			int[][] par = toArrays(param, dimension);
-            	
-			if (ps.ShowDialog(owner, par, dimension) != DialogResult.OK)
-			{
-				return null;
-			} 
-			else 
-			{	
-				par = ps.Result;
-				return new ExtendableParams(par[0]);		
-			}
-		}
-
-		protected class ExtendableParams : SubdevideParams, IExtendableParams
-		{
-			public ExtendableParams(int[] factor) : base(factor) {}
-		}
-        */
-		#endregion
-
-
-        
+		#region IExtendablePointParams
         public static IExtendablePointParams ParamsExtend(IWin32Window owner, IComputationExtendingResult result, IExtendablePointParams param)
         {
             NextStepParams ps = new NextStepParams();
@@ -207,6 +178,42 @@ namespace gui.Tree.Node.Factory
         {
             public ExtendableParams(int[] factor) : base(factor) {}
         }
+		#endregion
 
+
+		private class HomotopParams : IHomotopParams
+		{
+			private double[] data;
+
+			public HomotopParams(double[] array)
+			{
+				this.data = array;
+			
+			}
+
+			public double getCoordinateAt(int axis)
+			{
+				return data[axis];
+			}
+
+			public bool notifyNodeNotFound()
+			{
+				MessageBox.Show("There is no such node in Graph, Unable to continue");
+				return false;
+			}
+		}
+
+		public static IHomotopParams getHomotopParams(IWin32Window owner, int dimension)
+		{
+			double[] data = new double[dimension];
+			PointCoordinate pc = new PointCoordinate(data);
+			if (pc.ShowDialog(owner) == DialogResult.OK)
+			{
+				return new HomotopParams(pc.Array);
+			} else
+			{
+				return null;
+			}
+		}
 	}
 }

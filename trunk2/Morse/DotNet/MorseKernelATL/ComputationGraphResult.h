@@ -54,6 +54,10 @@ public:
 	STDMETHOD( StrongComponents) ();
 	STDMETHOD( StrongComponentsEdges) ();
 	STDMETHOD( Loops) ();
+	STDMETHOD( DoNothing) ();
+
+
 	STDMETHOD( setRootGraph) (void ** graph);
 	STDMETHOD( setGraphNode) (IGraph* graphNode);
+
 };

@@ -41,7 +41,8 @@ class ATL_NO_VTABLE CSymbolicImageGraph :
 	public IExtendable,
 	public IExportData,
     public IComputationExtendingResult,
-	private GraphSaver
+	private GraphSaver,
+	public IHomotopFind
 {
 public:
 	CSymbolicImageGraph();
@@ -90,6 +91,10 @@ public:
     //IComputationExtendingResult
     STDMETHOD(PointMethodProjectiveExtension)(IExtendablePointParams* params);
     STDMETHOD(PointMethodProjectiveExtensionDimension)(int* dim);
+
+public:
+	//IHomotop
+	STDMETHOD(Homotop)(IHomotopParams* params);
 
 
 private:

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sat Jan 22 22:14:25 2005
+/* at Sun Jan 23 03:33:46 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -81,6 +81,12 @@ typedef interface ISubdevidePointParams ISubdevidePointParams;
 #endif 	/* __ISubdevidePointParams_FWD_DEFINED__ */
 
 
+#ifndef __IHomotopParams_FWD_DEFINED__
+#define __IHomotopParams_FWD_DEFINED__
+typedef interface IHomotopParams IHomotopParams;
+#endif 	/* __IHomotopParams_FWD_DEFINED__ */
+
+
 #ifndef __IKernelPointer_FWD_DEFINED__
 #define __IKernelPointer_FWD_DEFINED__
 typedef interface IKernelPointer IKernelPointer;
@@ -127,6 +133,12 @@ typedef interface IMorsable IMorsable;
 #define __IExportData_FWD_DEFINED__
 typedef interface IExportData IExportData;
 #endif 	/* __IExportData_FWD_DEFINED__ */
+
+
+#ifndef __IHomotopFind_FWD_DEFINED__
+#define __IHomotopFind_FWD_DEFINED__
+typedef interface IHomotopFind IHomotopFind;
+#endif 	/* __IHomotopFind_FWD_DEFINED__ */
 
 
 #ifndef __IComputationResult_FWD_DEFINED__
@@ -189,12 +201,6 @@ typedef interface IComputationGraphResultExt IComputationGraphResultExt;
 #endif 	/* __IComputationGraphResultExt_FWD_DEFINED__ */
 
 
-#ifndef __IComputationResultWrapper_FWD_DEFINED__
-#define __IComputationResultWrapper_FWD_DEFINED__
-typedef interface IComputationResultWrapper IComputationResultWrapper;
-#endif 	/* __IComputationResultWrapper_FWD_DEFINED__ */
-
-
 #ifndef __IDummy_FWD_DEFINED__
 #define __IDummy_FWD_DEFINED__
 typedef interface IDummy IDummy;
@@ -241,12 +247,6 @@ typedef interface IProjectiveBundleGraph IProjectiveBundleGraph;
 #define __IProjectiveBundleGroup_FWD_DEFINED__
 typedef interface IProjectiveBundleGroup IProjectiveBundleGroup;
 #endif 	/* __IProjectiveBundleGroup_FWD_DEFINED__ */
-
-
-#ifndef __IKernelNodeWrapper_FWD_DEFINED__
-#define __IKernelNodeWrapper_FWD_DEFINED__
-typedef interface IKernelNodeWrapper IKernelNodeWrapper;
-#endif 	/* __IKernelNodeWrapper_FWD_DEFINED__ */
 
 
 #ifndef __CGraphInfo_FWD_DEFINED__
@@ -313,18 +313,6 @@ typedef struct CComputationGraphResult CComputationGraphResult;
 #endif /* __cplusplus */
 
 #endif 	/* __CComputationGraphResult_FWD_DEFINED__ */
-
-
-#ifndef __CComputationResultWrapper_FWD_DEFINED__
-#define __CComputationResultWrapper_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CComputationResultWrapper CComputationResultWrapper;
-#else
-typedef struct CComputationResultWrapper CComputationResultWrapper;
-#endif /* __cplusplus */
-
-#endif 	/* __CComputationResultWrapper_FWD_DEFINED__ */
 
 
 #ifndef __CDummy_FWD_DEFINED__
@@ -397,18 +385,6 @@ typedef struct CProjectiveBundleGroup CProjectiveBundleGroup;
 #endif /* __cplusplus */
 
 #endif 	/* __CProjectiveBundleGroup_FWD_DEFINED__ */
-
-
-#ifndef __CKernelNodeWrapper_FWD_DEFINED__
-#define __CKernelNodeWrapper_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CKernelNodeWrapper CKernelNodeWrapper;
-#else
-typedef struct CKernelNodeWrapper CKernelNodeWrapper;
-#endif /* __cplusplus */
-
-#endif 	/* __CKernelNodeWrapper_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -1438,6 +1414,163 @@ void __RPC_STUB ISubdevidePointParams_getCellPoints_Stub(
 
 
 #endif 	/* __ISubdevidePointParams_INTERFACE_DEFINED__ */
+
+
+#ifndef __IHomotopParams_INTERFACE_DEFINED__
+#define __IHomotopParams_INTERFACE_DEFINED__
+
+/* interface IHomotopParams */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IHomotopParams;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("3C17C825-1C25-4F2D-8E0B-630953AD9596")
+    IHomotopParams : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE getCoordinateAt( 
+            /* [in] */ int axis,
+            /* [retval][out] */ double *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE notifyNodeNotFound( 
+            /* [retval][out] */ VARIANT_BOOL *tryAgain) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IHomotopParamsVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IHomotopParams * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IHomotopParams * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IHomotopParams * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IHomotopParams * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IHomotopParams * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IHomotopParams * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IHomotopParams * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *getCoordinateAt )( 
+            IHomotopParams * This,
+            /* [in] */ int axis,
+            /* [retval][out] */ double *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *notifyNodeNotFound )( 
+            IHomotopParams * This,
+            /* [retval][out] */ VARIANT_BOOL *tryAgain);
+        
+        END_INTERFACE
+    } IHomotopParamsVtbl;
+
+    interface IHomotopParams
+    {
+        CONST_VTBL struct IHomotopParamsVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IHomotopParams_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IHomotopParams_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IHomotopParams_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IHomotopParams_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IHomotopParams_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IHomotopParams_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IHomotopParams_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IHomotopParams_getCoordinateAt(This,axis,value)	\
+    (This)->lpVtbl -> getCoordinateAt(This,axis,value)
+
+#define IHomotopParams_notifyNodeNotFound(This,tryAgain)	\
+    (This)->lpVtbl -> notifyNodeNotFound(This,tryAgain)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IHomotopParams_getCoordinateAt_Proxy( 
+    IHomotopParams * This,
+    /* [in] */ int axis,
+    /* [retval][out] */ double *value);
+
+
+void __RPC_STUB IHomotopParams_getCoordinateAt_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IHomotopParams_notifyNodeNotFound_Proxy( 
+    IHomotopParams * This,
+    /* [retval][out] */ VARIANT_BOOL *tryAgain);
+
+
+void __RPC_STUB IHomotopParams_notifyNodeNotFound_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IHomotopParams_INTERFACE_DEFINED__ */
 
 
 #ifndef __IKernelPointer_INTERFACE_DEFINED__
@@ -2507,6 +2640,138 @@ void __RPC_STUB IExportData_ExportData_Stub(
 #endif 	/* __IExportData_INTERFACE_DEFINED__ */
 
 
+#ifndef __IHomotopFind_INTERFACE_DEFINED__
+#define __IHomotopFind_INTERFACE_DEFINED__
+
+/* interface IHomotopFind */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IHomotopFind;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("A395C00D-8306-4AA8-9A9F-EA9E79E74C92")
+    IHomotopFind : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Homotop( 
+            /* [in] */ IHomotopParams *params) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IHomotopFindVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IHomotopFind * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IHomotopFind * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IHomotopFind * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IHomotopFind * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IHomotopFind * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IHomotopFind * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IHomotopFind * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Homotop )( 
+            IHomotopFind * This,
+            /* [in] */ IHomotopParams *params);
+        
+        END_INTERFACE
+    } IHomotopFindVtbl;
+
+    interface IHomotopFind
+    {
+        CONST_VTBL struct IHomotopFindVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IHomotopFind_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IHomotopFind_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IHomotopFind_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IHomotopFind_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IHomotopFind_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IHomotopFind_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IHomotopFind_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IHomotopFind_Homotop(This,params)	\
+    (This)->lpVtbl -> Homotop(This,params)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IHomotopFind_Homotop_Proxy( 
+    IHomotopFind * This,
+    /* [in] */ IHomotopParams *params);
+
+
+void __RPC_STUB IHomotopFind_Homotop_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IHomotopFind_INTERFACE_DEFINED__ */
+
+
 #ifndef __IComputationResult_INTERFACE_DEFINED__
 #define __IComputationResult_INTERFACE_DEFINED__
 
@@ -2638,6 +2903,8 @@ EXTERN_C const IID IID_IComputationGraphResult;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Loops( void) = 0;
         
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DoNothing( void) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -2695,6 +2962,9 @@ EXTERN_C const IID IID_IComputationGraphResult;
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Loops )( 
             IComputationGraphResult * This);
         
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DoNothing )( 
+            IComputationGraphResult * This);
+        
         END_INTERFACE
     } IComputationGraphResultVtbl;
 
@@ -2741,6 +3011,9 @@ EXTERN_C const IID IID_IComputationGraphResult;
 #define IComputationGraphResult_Loops(This)	\
     (This)->lpVtbl -> Loops(This)
 
+#define IComputationGraphResult_DoNothing(This)	\
+    (This)->lpVtbl -> DoNothing(This)
+
 #endif /* COBJMACROS */
 
 
@@ -2775,6 +3048,17 @@ void __RPC_STUB IComputationGraphResult_StrongComponentsEdges_Stub(
 
 
 void __RPC_STUB IComputationGraphResult_Loops_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IComputationGraphResult_DoNothing_Proxy( 
+    IComputationGraphResult * This);
+
+
+void __RPC_STUB IComputationGraphResult_DoNothing_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -4252,6 +4536,9 @@ EXTERN_C const IID IID_IComputationGraphResultExt;
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Loops )( 
             IComputationGraphResultExt * This);
         
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DoNothing )( 
+            IComputationGraphResultExt * This);
+        
         /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *setRootGraph )( 
             IComputationGraphResultExt * This,
             /* [in] */ void **graph);
@@ -4306,6 +4593,9 @@ EXTERN_C const IID IID_IComputationGraphResultExt;
 #define IComputationGraphResultExt_Loops(This)	\
     (This)->lpVtbl -> Loops(This)
 
+#define IComputationGraphResultExt_DoNothing(This)	\
+    (This)->lpVtbl -> DoNothing(This)
+
 
 #define IComputationGraphResultExt_setRootGraph(This,graph)	\
     (This)->lpVtbl -> setRootGraph(This,graph)
@@ -4346,160 +4636,6 @@ void __RPC_STUB IComputationGraphResultExt_setGraphNode_Stub(
 
 
 #endif 	/* __IComputationGraphResultExt_INTERFACE_DEFINED__ */
-
-
-#ifndef __IComputationResultWrapper_INTERFACE_DEFINED__
-#define __IComputationResultWrapper_INTERFACE_DEFINED__
-
-/* interface IComputationResultWrapper */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IComputationResultWrapper;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("A1C8B730-B824-4A90-878A-27AB1D493208")
-    IComputationResultWrapper : public IDispatch
-    {
-    public:
-        virtual /* [id][propputref] */ HRESULT STDMETHODCALLTYPE putref_ComputationResult( 
-            /* [in] */ IComputationResult *result) = 0;
-        
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ComputationResult( 
-            /* [retval][out] */ IComputationResult **result) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IComputationResultWrapperVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IComputationResultWrapper * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IComputationResultWrapper * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IComputationResultWrapper * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IComputationResultWrapper * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IComputationResultWrapper * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IComputationResultWrapper * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IComputationResultWrapper * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ComputationResult )( 
-            IComputationResultWrapper * This,
-            /* [in] */ IComputationResult *result);
-        
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ComputationResult )( 
-            IComputationResultWrapper * This,
-            /* [retval][out] */ IComputationResult **result);
-        
-        END_INTERFACE
-    } IComputationResultWrapperVtbl;
-
-    interface IComputationResultWrapper
-    {
-        CONST_VTBL struct IComputationResultWrapperVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IComputationResultWrapper_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IComputationResultWrapper_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IComputationResultWrapper_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IComputationResultWrapper_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IComputationResultWrapper_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IComputationResultWrapper_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IComputationResultWrapper_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IComputationResultWrapper_putref_ComputationResult(This,result)	\
-    (This)->lpVtbl -> putref_ComputationResult(This,result)
-
-#define IComputationResultWrapper_get_ComputationResult(This,result)	\
-    (This)->lpVtbl -> get_ComputationResult(This,result)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id][propputref] */ HRESULT STDMETHODCALLTYPE IComputationResultWrapper_putref_ComputationResult_Proxy( 
-    IComputationResultWrapper * This,
-    /* [in] */ IComputationResult *result);
-
-
-void __RPC_STUB IComputationResultWrapper_putref_ComputationResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id][propget] */ HRESULT STDMETHODCALLTYPE IComputationResultWrapper_get_ComputationResult_Proxy( 
-    IComputationResultWrapper * This,
-    /* [retval][out] */ IComputationResult **result);
-
-
-void __RPC_STUB IComputationResultWrapper_get_ComputationResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IComputationResultWrapper_INTERFACE_DEFINED__ */
 
 
 #ifndef __IDummy_INTERFACE_DEFINED__
@@ -5975,160 +6111,6 @@ void __RPC_STUB IProjectiveBundleGroup_removeNode_Stub(
 #endif 	/* __IProjectiveBundleGroup_INTERFACE_DEFINED__ */
 
 
-#ifndef __IKernelNodeWrapper_INTERFACE_DEFINED__
-#define __IKernelNodeWrapper_INTERFACE_DEFINED__
-
-/* interface IKernelNodeWrapper */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IKernelNodeWrapper;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("571AE1AC-932B-4725-BF87-9291AB21DC54")
-    IKernelNodeWrapper : public IDispatch
-    {
-    public:
-        virtual /* [id][propputref] */ HRESULT STDMETHODCALLTYPE putref_KernelNode( 
-            /* [in] */ IKernelNode *node) = 0;
-        
-        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_KernelNode( 
-            /* [retval][out] */ IKernelNode **node) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IKernelNodeWrapperVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IKernelNodeWrapper * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IKernelNodeWrapper * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IKernelNodeWrapper * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IKernelNodeWrapper * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IKernelNodeWrapper * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IKernelNodeWrapper * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IKernelNodeWrapper * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_KernelNode )( 
-            IKernelNodeWrapper * This,
-            /* [in] */ IKernelNode *node);
-        
-        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_KernelNode )( 
-            IKernelNodeWrapper * This,
-            /* [retval][out] */ IKernelNode **node);
-        
-        END_INTERFACE
-    } IKernelNodeWrapperVtbl;
-
-    interface IKernelNodeWrapper
-    {
-        CONST_VTBL struct IKernelNodeWrapperVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IKernelNodeWrapper_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IKernelNodeWrapper_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IKernelNodeWrapper_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IKernelNodeWrapper_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IKernelNodeWrapper_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IKernelNodeWrapper_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IKernelNodeWrapper_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IKernelNodeWrapper_putref_KernelNode(This,node)	\
-    (This)->lpVtbl -> putref_KernelNode(This,node)
-
-#define IKernelNodeWrapper_get_KernelNode(This,node)	\
-    (This)->lpVtbl -> get_KernelNode(This,node)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id][propputref] */ HRESULT STDMETHODCALLTYPE IKernelNodeWrapper_putref_KernelNode_Proxy( 
-    IKernelNodeWrapper * This,
-    /* [in] */ IKernelNode *node);
-
-
-void __RPC_STUB IKernelNodeWrapper_putref_KernelNode_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id][propget] */ HRESULT STDMETHODCALLTYPE IKernelNodeWrapper_get_KernelNode_Proxy( 
-    IKernelNodeWrapper * This,
-    /* [retval][out] */ IKernelNode **node);
-
-
-void __RPC_STUB IKernelNodeWrapper_get_KernelNode_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IKernelNodeWrapper_INTERFACE_DEFINED__ */
-
-
 
 #ifndef __MorseKernelATL_LIBRARY_DEFINED__
 #define __MorseKernelATL_LIBRARY_DEFINED__
@@ -6285,14 +6267,6 @@ class DECLSPEC_UUID("83FCA237-5E87-49D4-81EE-95BC812422FE")
 CComputationGraphResult;
 #endif
 
-EXTERN_C const CLSID CLSID_CComputationResultWrapper;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("637D25DB-555B-4E11-941F-CE9070E114DA")
-CComputationResultWrapper;
-#endif
-
 EXTERN_C const CLSID CLSID_CDummy;
 
 #ifdef __cplusplus
@@ -6339,14 +6313,6 @@ EXTERN_C const CLSID CLSID_CProjectiveBundleGroup;
 
 class DECLSPEC_UUID("520018A2-475A-4FB5-A780-E1291049BAB5")
 CProjectiveBundleGroup;
-#endif
-
-EXTERN_C const CLSID CLSID_CKernelNodeWrapper;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("DA8FF7C4-8DA4-44C0-8D73-C34485B2E3D6")
-CKernelNodeWrapper;
 #endif
 #endif /* __MorseKernelATL_LIBRARY_DEFINED__ */
 

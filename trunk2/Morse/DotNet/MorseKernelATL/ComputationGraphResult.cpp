@@ -70,3 +70,13 @@ STDMETHODIMP CComputationGraphResult::setGraphNode(IGraph* graphNode) {
 	
 	return S_OK;
 }
+
+
+STDMETHODIMP CComputationGraphResult::DoNothing() {
+	GraphComponents* cms = new GraphComponents();
+	cms->addGraphAsComponent(this->graph);
+
+	node->acceptChilds((void**)&cms);
+
+    return S_OK;
+}
