@@ -52,7 +52,7 @@ STDMETHODIMP CBoxMethodAction::SetProgressBarInfo(IProgressBarInfo* info) {
 
 
 STDMETHODIMP CBoxMethodAction::CanDo(IResultSet* in, VARIANT_BOOL* out) {
-	*out = GraphResultUtil::ContainsOnlyType<IGraphResult>(in)?TRUE:FALSE;
+	*out = (GraphResultUtil::ContainsOnlyType<IGraphResult>(in)&& GraphResultUtil::ContainsMetadataOnly<ISymbolicImageMetadata>(in)) ?TRUE:FALSE;
 
 	return S_OK;
 }

@@ -16,10 +16,8 @@ namespace guiKernel2.ActionFactory
 	{
 		Hashtable mapping = new Hashtable(); //Type -> Type
 		
-		public ActionWrapperFactory()
+		public ActionWrapperFactory(Assembly[] assemblies)
 		{
-			Assembly[] assemblies = Core.Instance.Assemblies;
-
 			foreach (Assembly assembly in assemblies)
 			{
 				foreach (Type type in assembly.GetTypes())
@@ -52,20 +50,6 @@ namespace guiKernel2.ActionFactory
 
 			ConstructorInfo constructor = wrapperType.GetConstructor(new Type[] { typeof(IAction) } );
 			return constructor.Invoke(null, new object[]{action}) as ActionWrapper;
-		}
-
-
-		#region singleton static
-		private static ActionWrapperFactory instance = null;
-
-		public static ActionWrapperFactory GetInstance()
-		{
-			if (instance == null)
-			{
-				instance = new ActionWrapperFactory();
-			}
-			return instance;
-		}
-		#endregion
+		}	
 	}
 }

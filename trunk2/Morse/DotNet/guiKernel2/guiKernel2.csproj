@@ -156,6 +156,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Actions\AttributeHolder.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Actions\IProgressBar.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

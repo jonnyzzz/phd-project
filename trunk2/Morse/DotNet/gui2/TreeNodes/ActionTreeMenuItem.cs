@@ -14,7 +14,7 @@ namespace gui2.TreeNodes
 		{
 			this.action = action;
 
-			if (action.isChainLeaf)
+			if (action.IsChainLeaf)
 			{
 				this.Text = "<>" + this.Text;
 			}
@@ -26,7 +26,7 @@ namespace gui2.TreeNodes
 		
 		protected override void EventClick()
 		{
-			if (action.isChainLeaf)
+			if (action.IsChainLeaf)
 			{
 				Logger.Logger.LogMessage("Event Click");		
 			}

@@ -1,5 +1,6 @@
 using System;
 using guiKernel2.src.ActionFactory;
+using guiKernel2.src.Actions;
 using MorseKernel2;
 
 namespace guiKernel2.Actions
@@ -7,7 +8,7 @@ namespace guiKernel2.Actions
 	/// <summary>
 	/// Summary description for ActionWrapper.
 	/// </summary>
-	public abstract class ActionWrapper
+	public abstract class ActionWrapper : AttributeHolder
 	{
 		private IAction action;
 
@@ -17,12 +18,18 @@ namespace guiKernel2.Actions
 		}
 
 		public abstract string ActionName { get; }
-		public abstract bool isChainLeaf { get; }
+		public abstract bool IsChainLeaf { get; }
 		protected abstract IParameters Parameters{ get; }
 		
 		public IResultSet Do(IResultSet input, IProgressBar progressBar)
 		{
-			action.SetActionParameters(Parameters);
+			IParameters parameters = Parameters;
+			if (parameters.GetType().GetInterface(ActionParametersName) == null)
+			{
+				throw new ActionPerformException("Parameter class does not match meta-defined interface");
+			}
+
+			action.SetActionParameters(parameters);
 			action.SetProgressBarInfo(progressBar.GetProgressBarInfo(this));
 			if (!action.CanDo(input))
 			{
@@ -31,15 +38,27 @@ namespace guiKernel2.Actions
 			return action.Do(input);
 		}
 
+
 		public string ActionMappingName
 		{
 			get
 			{
-				ActionMappingAttribute[] attributes = (ActionMappingAttribute[])this.GetType().GetCustomAttributes(typeof(ActionMappingAttribute), true);
-				if (attributes.Length != 1) throw new ActionException("Incorrect Attribute");
-
-				return attributes[0].ActionInterface.Name;
+				return MyAttribute.ActionInterface.Name;
 			}
+		}
+
+		public string ActionParametersName
+		{
+			get
+			{
+				return MyAttribute.ParametersInterface.Name;
+			}
+		}
+
+
+		public override string ToString()
+		{
+			return string.Format("ActionWrapper class [action = {0}, params = {1}]", ActionMappingName, ActionParametersName);
 		}
 
 	}

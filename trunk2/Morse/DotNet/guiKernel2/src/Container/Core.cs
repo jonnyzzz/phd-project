@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using guiKernel2.ActionFactory;
 using guiKernel2.src.ActionFactory;
 using guiKernel2.xml;
 
@@ -13,11 +14,16 @@ namespace guiKernel2.src.Container
 		public Core()
 		{			
 			instance = this;
+			nextActionFactory = new NextActionFactory();
+
 			XMLParser xmlParser = new XMLParser();
-			this.assemblies = xmlParser.ImplAssemblies;			
+			
+			this.assemblies = xmlParser.ImplAssemblies;
+			actionWrapperFactory = new ActionWrapperFactory(assemblies);
 		}
 
-        private NextActionFactory nextActionFactory = new NextActionFactory();
+        private NextActionFactory nextActionFactory = null;
+		private ActionWrapperFactory actionWrapperFactory = null;
 		private Assembly[] assemblies = null;
 
 		public Assembly[] Assemblies
@@ -33,7 +39,11 @@ namespace guiKernel2.src.Container
 				return nextActionFactory;
 			}
 		}
-		
+
+		public ActionWrapperFactory ActionWrapperFactory
+		{
+			get { return actionWrapperFactory; }
+		}
 
 		private static Core instance = null;
 		public static Core Instance
@@ -42,7 +52,7 @@ namespace guiKernel2.src.Container
 			{
 				if (instance == null)
 				{
-					instance = new Core();
+					new Core();
 				}
 				return instance;
 			}
