@@ -20,7 +20,10 @@ using namespace std;
 __interface IActionAllocator : IDispatch
 {
 	[id(1)]
-	HRESULT AllocateActionManager([in] INode* node, [out, retval] IActionManager** manager);
+	HRESULT AllocateActionManagerForNode([in] INode* node, [out, retval] IActionManager** manager);
+	[id(2)]
+	HRESULT AllocateActionManagerForAction([in] IActionBase* action, [out, retval] IActionManager** manager);
+
 };
 
 //IWritableActionAllocator
@@ -31,7 +34,7 @@ __interface IActionAllocator : IDispatch
 	pointer_default(unique)
 ]
 __interface IWritableActionAllocator : IDispatch {
-	[id(2)]
+	[id(12)]
 	HRESULT RegisterActionFactory([in] IActionFactory* action);
 };
 
@@ -41,7 +44,7 @@ __interface IWritableActionAllocator : IDispatch {
 
 [
 	coclass,
-	threading("apartment"),
+	threading("both"),
 	vi_progid("MorseKernel2.ActionAllocator"),
 	progid("MorseKernel2.ActionAllocator.1"),
 	version(1.0),
@@ -63,7 +66,8 @@ public:
 
 public:
 	
-	STDMETHOD(AllocateActionManager)(INode* forNode, IActionManager** manager);
+	STDMETHOD(AllocateActionManagerForNode)(INode* forNode, IActionManager** manager);
+	STDMETHOD(AllocateActionManagerForAction)(IActionBase* forAction, IActionManager** manager);
 	STDMETHOD(RegisterActionFactory)(IActionFactory* action);
 
 private:

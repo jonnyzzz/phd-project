@@ -112,6 +112,8 @@ interface IAction : IActionBase {
 	[id(3)] HRESULT  Do([in] IResult *input, [out,retval] IResult **output );
 #line 27 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\action.h"
 	[id(4)] HRESULT  SetProgressBarInfo([in] IProgressBarInfo *pinfo);
+#line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\action.h"
+	[id(5)] HRESULT  IsChainLeaf([out,retval] VARIANT_BOOL *result);
 };
 
 [
@@ -139,9 +141,13 @@ interface INode : IDispatch {
 #line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionfactory.h"
 interface IActionFactory : IDispatch {
 #line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionfactory.h"
-	[id(1)] HRESULT  CanCreateAction([in] INode *node, [out,retval] VARIANT_BOOL **result );
+	[id(1)] HRESULT  CanCreateActionFromNode([in] INode *node, [out,retval] VARIANT_BOOL *result);
 #line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionfactory.h"
-	[id(2),helpstring("Try to create action for such node. Returns NULL is it's imposible")] HRESULT  CreateAction([in] INode *node, [out,retval] IActionBase **action );
+	[id(2),helpstring("Try to create action for such node. Returns NULL is it's imposible")] HRESULT  CreateActionFromNode([in] INode *node, [out,retval] IActionBase **action );
+#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionfactory.h"
+	[id(3)] HRESULT  CanCreateActionFromAction([in] IActionBase *action, [out,retval] VARIANT_BOOL *result);
+#line 27 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionfactory.h"
+	[id(4)] HRESULT  CreateActionFromAction([in] IActionBase *action, [out,retval] IActionBase **result );
 };
 
 [
@@ -154,7 +160,9 @@ interface IActionFactory : IDispatch {
 #line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionallocator.h"
 interface IActionAllocator : IDispatch {
 #line 23 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionallocator.h"
-	[id(1)] HRESULT  AllocateActionManager([in] INode *node, [out,retval] IActionManager **manager );
+	[id(1)] HRESULT  AllocateActionManagerForNode([in] INode *node, [out,retval] IActionManager **manager );
+#line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionallocator.h"
+	[id(2)] HRESULT  AllocateActionManagerForAction([in] IActionBase *action, [out,retval] IActionManager **manager );
 };
 
 [
@@ -164,10 +172,10 @@ interface IActionAllocator : IDispatch {
 	helpstring("IActionAllocator Interface"),
 	pointer_default(unique)
 ] 
-#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionallocator.h"
+#line 36 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionallocator.h"
 interface IWritableActionAllocator : IDispatch {
-#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionallocator.h"
-	[id(2)] HRESULT  RegisterActionFactory([in] IActionFactory *action);
+#line 38 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionallocator.h"
+	[id(12)] HRESULT  RegisterActionFactory([in] IActionFactory *action);
 };
 
 [
@@ -296,6 +304,19 @@ interface IGroupNode : IDispatch {
 	[id(15)] HRESULT  CreateNode([out,retval] INode **node );
 };
 
+[
+	object,
+	uuid(F2D78B39-D782-49DE-91B7-771CDA2ED0E0),
+	dual,
+	helpstring("IKernell Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\kernell.h"
+interface IKernell : IDispatch {
+#line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\kernell.h"
+	[id(1)] HRESULT  GetActionAllocator([out,retval] IActionAllocator **allocator );
+};
+
 
 [ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}"), helpstring("MorseKernel2 1.0 Type Library") ]
 library MorseKernel2
@@ -308,7 +329,7 @@ library MorseKernel2
 		uuid(43EAE42D-D986-4DAB-9D7D-D4B725E77AB0),
 		helpstring("ActionAllocator Class")
 	] 
-#line 51 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionallocator.h"
+#line 54 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\actionallocator.h"
 	coclass CActionAllocator {
 		interface IActionAllocator;
 		interface IWritableActionAllocator;
@@ -358,6 +379,17 @@ library MorseKernel2
 		interface IResult;
 		interface IResultBase;
 		interface IResultMerger;
+	};
+
+	[
+		uuid(7458F939-BE83-4246-8AB8-0E26B56D34F3),
+		helpstring("_IKernellEvents Interface")
+	] 
+#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\kernell.h"
+	dispinterface IKernellEvents {
+	properties:
+
+	methods:
 	};
 
 }

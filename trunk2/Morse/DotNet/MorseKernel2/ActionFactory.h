@@ -15,10 +15,16 @@
 __interface IActionFactory : IDispatch
 {
 	[id(1)]
-	HRESULT CanCreateAction([in] INode* node, [out, retval] VARIANT_BOOL** result);
+	HRESULT CanCreateActionFromNode([in] INode* node, [out, retval] VARIANT_BOOL* result);
 
 	[id(2), helpstring("Try to create action for such node. Returns NULL is it's imposible")]
-	HRESULT CreateAction([in] INode* node, [out, retval] IActionBase** action);
+	HRESULT CreateActionFromNode([in] INode* node, [out, retval] IActionBase** action);
+
+	[id(3)]
+	HRESULT CanCreateActionFromAction([in] IActionBase* action, [out, retval] VARIANT_BOOL* result);
+
+	[id(4)]
+	HRESULT CreateActionFromAction([in] IActionBase* action, [out, retval] IActionBase** result);
 };
 
 

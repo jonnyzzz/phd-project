@@ -26,7 +26,7 @@ __interface IWritableActionManager : IDispatch
 
 [
 	coclass,
-	threading("apartment"),
+	threading("both"),
 	vi_progid("MorseKernel2.ActionManagerImpl"),
 	progid("MorseKernel2.ActionManagerImpl.1"),
 	version(1.0),

@@ -91,6 +91,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorseKernel2PS", "MorseKern
 		{FA02656D-A267-4B1F-A956-79236784E5CA} = {FA02656D-A267-4B1F-A956-79236784E5CA}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiKernel2", "guiKernel2\guiKernel2.csproj", "{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -348,6 +352,24 @@ Global
 		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.Release.ActiveCfg = Release|Win32
 		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.Test.ActiveCfg = Release|Win32
 		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.VisualizationDebug.ActiveCfg = Debug|Win32
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Debug.ActiveCfg = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Debug.Build.0 = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Debug2.ActiveCfg = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Debug2.Build.0 = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.DebugGL.ActiveCfg = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.DebugGL.Build.0 = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.DebugGUI.ActiveCfg = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.DebugGUI.Build.0 = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.FullDebug.ActiveCfg = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.FullDebug.Build.0 = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.NewDLL.ActiveCfg = Release|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.NewDLL.Build.0 = Release|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Release.ActiveCfg = Release|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Release.Build.0 = Release|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Test.ActiveCfg = Release|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Test.Build.0 = Release|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.VisualizationDebug.ActiveCfg = Debug|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.VisualizationDebug.Build.0 = Debug|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

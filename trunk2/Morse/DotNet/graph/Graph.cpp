@@ -22,14 +22,13 @@ static char THIS_FILE[] = __FILE__;
 struct Node {
 	JInt* cell;
 	/*bool isLoop; */
-
-	char bits;
-	
+		
 	Edge** edges;
 	Node* next;
 
+	//possible to optimize    
+	char bits;
 	//tarjans stuff
-
 	JInt label;  //tarjan markers
 	JInt number; //tarjan markers
 	EdgeEnumerator* enumerator;  //tarjan hard optimization of edge-list

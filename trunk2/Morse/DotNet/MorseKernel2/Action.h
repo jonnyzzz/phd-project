@@ -25,5 +25,7 @@ __interface IAction : IActionBase
 	HRESULT Do([in] IResult* input, [out, retval] IResult** output);
 	[id(4)]
 	HRESULT SetProgressBarInfo([in] IProgressBarInfo* pinfo);
+	[id(5)]
+	HRESULT IsChainLeaf([out, retval] VARIANT_BOOL* result);
 };
 

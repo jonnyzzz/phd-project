@@ -26,15 +26,39 @@ void CActionAllocator::FinalRelease() {
 
 
 
-STDMETHODIMP CActionAllocator::AllocateActionManager(INode* forNode, IActionManager ** manager) {
+STDMETHODIMP CActionAllocator::AllocateActionManagerForNode(INode* forNode, IActionManager ** manager) {
 	IWritableActionManager* actionManager;
 	CActionManagerImpl::CreateInstance(&actionManager);
 
 	for (FactoryList::iterator it = factoryList.begin(); it != factoryList.end(); it++) {
 		IActionFactory* factory = *it;
-		IActionBase* action = NULL;
-		factory->CreateAction(forNode, &action);
-		if (action != NULL) {
+		VARIANT_BOOL canCreate;
+		factory->CanCreateActionFromNode(forNode, &canCreate);
+		if (canCreate) {
+			IActionBase* action = NULL;
+			factory->CreateActionFromNode(forNode, &action);
+			ATLASSERT(action != NULL);
+			actionManager->AddAction(action);
+			action->Release();
+		}
+	}
+	actionManager->QueryInterface(manager);
+	actionManager->Release();	
+	return S_OK;
+}
+
+STDMETHODIMP CActionAllocator::AllocateActionManagerForAction(IActionBase* forNode, IActionManager ** manager) {
+	IWritableActionManager* actionManager;
+	CActionManagerImpl::CreateInstance(&actionManager);
+
+	for (FactoryList::iterator it = factoryList.begin(); it != factoryList.end(); it++) {
+		IActionFactory* factory = *it;		
+		VARIANT_BOOL canCreate;
+		factory->CanCreateActionFromAction(forNode, &canCreate);
+		if (canCreate) {
+			IActionBase* action = NULL;
+			factory->CreateActionFromAction(forNode, &action);
+			ATLASSERT(action != NULL);
 			actionManager->AddAction(action);
 			action->Release();
 		}
