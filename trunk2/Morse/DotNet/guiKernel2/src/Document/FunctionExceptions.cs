@@ -1,6 +1,6 @@
 using System;
 
-namespace guiKernel2
+namespace guiKernel2.Document
 {
 	/// <summary>
 	/// Summary description for FunctionExceptions.

@@ -1,8 +1,8 @@
 using gui2.ActionPerformer;
 using gui2.TreeNodes;
 using guiActions.Actions;
+using guiKernel2.Actions;
 using guiKernel2.Document;
-using guiKernel2.src.Actions;
 
 namespace gui2.Forms
 {

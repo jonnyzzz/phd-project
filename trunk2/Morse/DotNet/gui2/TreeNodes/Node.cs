@@ -4,7 +4,6 @@ using guiActions.Actions;
 using guiActions.src.filter;
 using guiControls.TreeControl;
 using guiKernel2.Node;
-using guiKernel2.src.Node;
 
 namespace gui2.TreeNodes
 {

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Fri Mar 18 00:32:20 2005
+/* at Sat Mar 19 00:35:26 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -171,6 +171,18 @@ typedef interface ITarjanParameters ITarjanParameters;
 #endif 	/* __ITarjanParameters_FWD_DEFINED__ */
 
 
+#ifndef __IPointMethodAction_FWD_DEFINED__
+#define __IPointMethodAction_FWD_DEFINED__
+typedef interface IPointMethodAction IPointMethodAction;
+#endif 	/* __IPointMethodAction_FWD_DEFINED__ */
+
+
+#ifndef __IPointMethodParameters_FWD_DEFINED__
+#define __IPointMethodParameters_FWD_DEFINED__
+typedef interface IPointMethodParameters IPointMethodParameters;
+#endif 	/* __IPointMethodParameters_FWD_DEFINED__ */
+
+
 #ifndef __IDummy_FWD_DEFINED__
 #define __IDummy_FWD_DEFINED__
 typedef interface IDummy IDummy;
@@ -223,6 +235,12 @@ typedef interface IWritableKernell IWritableKernell;
 #define __IKernellImpl_FWD_DEFINED__
 typedef interface IKernellImpl IKernellImpl;
 #endif 	/* __IKernellImpl_FWD_DEFINED__ */
+
+
+#ifndef __IDummy1_FWD_DEFINED__
+#define __IDummy1_FWD_DEFINED__
+typedef interface IDummy1 IDummy1;
+#endif 	/* __IDummy1_FWD_DEFINED__ */
 
 
 #ifndef __CBoxMethodAction_FWD_DEFINED__
@@ -285,6 +303,18 @@ typedef struct CTarjanAction CTarjanAction;
 #endif 	/* __CTarjanAction_FWD_DEFINED__ */
 
 
+#ifndef __CPointMethodAction_FWD_DEFINED__
+#define __CPointMethodAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CPointMethodAction CPointMethodAction;
+#else
+typedef struct CPointMethodAction CPointMethodAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CPointMethodAction_FWD_DEFINED__ */
+
+
 #ifndef __CDummy_FWD_DEFINED__
 #define __CDummy_FWD_DEFINED__
 
@@ -343,6 +373,18 @@ typedef struct CKernellImpl CKernellImpl;
 #endif /* __cplusplus */
 
 #endif 	/* __CKernellImpl_FWD_DEFINED__ */
+
+
+#ifndef __CDummy1_FWD_DEFINED__
+#define __CDummy1_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CDummy1 CDummy1;
+#else
+typedef struct CDummy1 CDummy1;
+#endif /* __cplusplus */
+
+#endif 	/* __CDummy1_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -3760,6 +3802,392 @@ void __RPC_STUB ITarjanParameters_NeedEdgeResolve_Stub(
 #endif 	/* __ITarjanParameters_INTERFACE_DEFINED__ */
 
 
+#ifndef __IPointMethodAction_INTERFACE_DEFINED__
+#define __IPointMethodAction_INTERFACE_DEFINED__
+
+/* interface IPointMethodAction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IPointMethodAction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("1B1FF1EE-4EB6-4F0A-B6AB-CCBFFA28B9F0")
+    IPointMethodAction : public IAction
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimensionForParameters( 
+            /* [in] */ IResultSet *resultSet,
+            /* [retval][out] */ int *dimension) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IPointMethodActionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IPointMethodAction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IPointMethodAction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IPointMethodAction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IPointMethodAction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IPointMethodAction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IPointMethodAction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IPointMethodAction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IPointMethodAction * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IPointMethodAction * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IPointMethodAction * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IPointMethodAction * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimensionForParameters )( 
+            IPointMethodAction * This,
+            /* [in] */ IResultSet *resultSet,
+            /* [retval][out] */ int *dimension);
+        
+        END_INTERFACE
+    } IPointMethodActionVtbl;
+
+    interface IPointMethodAction
+    {
+        CONST_VTBL struct IPointMethodActionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IPointMethodAction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IPointMethodAction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IPointMethodAction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IPointMethodAction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IPointMethodAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IPointMethodAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IPointMethodAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IPointMethodAction_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IPointMethodAction_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IPointMethodAction_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IPointMethodAction_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#define IPointMethodAction_GetDimensionForParameters(This,resultSet,dimension)	\
+    (This)->lpVtbl -> GetDimensionForParameters(This,resultSet,dimension)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IPointMethodAction_GetDimensionForParameters_Proxy( 
+    IPointMethodAction * This,
+    /* [in] */ IResultSet *resultSet,
+    /* [retval][out] */ int *dimension);
+
+
+void __RPC_STUB IPointMethodAction_GetDimensionForParameters_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IPointMethodAction_INTERFACE_DEFINED__ */
+
+
+#ifndef __IPointMethodParameters_INTERFACE_DEFINED__
+#define __IPointMethodParameters_INTERFACE_DEFINED__
+
+/* interface IPointMethodParameters */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IPointMethodParameters;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("ADCEDDBC-441A-479D-8E7A-706921DA82AC")
+    IPointMethodParameters : public IComputationParameters
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetFactor( 
+            /* [in] */ int index,
+            /* [retval][out] */ int *factor) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetPoints( 
+            /* [in] */ int index,
+            /* [retval][out] */ int *ks) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE UseOffsets( 
+            /* [retval][out] */ VARIANT_BOOL *data) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetOffset( 
+            /* [in] */ int index,
+            /* [out] */ double *offset1,
+            /* [out] */ double *offset2) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IPointMethodParametersVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IPointMethodParameters * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IPointMethodParameters * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IPointMethodParameters * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IPointMethodParameters * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IPointMethodParameters * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IPointMethodParameters * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IPointMethodParameters * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFunction )( 
+            IPointMethodParameters * This,
+            /* [retval][out] */ IFunction **function);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFactor )( 
+            IPointMethodParameters * This,
+            /* [in] */ int index,
+            /* [retval][out] */ int *factor);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetPoints )( 
+            IPointMethodParameters * This,
+            /* [in] */ int index,
+            /* [retval][out] */ int *ks);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *UseOffsets )( 
+            IPointMethodParameters * This,
+            /* [retval][out] */ VARIANT_BOOL *data);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetOffset )( 
+            IPointMethodParameters * This,
+            /* [in] */ int index,
+            /* [out] */ double *offset1,
+            /* [out] */ double *offset2);
+        
+        END_INTERFACE
+    } IPointMethodParametersVtbl;
+
+    interface IPointMethodParameters
+    {
+        CONST_VTBL struct IPointMethodParametersVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IPointMethodParameters_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IPointMethodParameters_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IPointMethodParameters_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IPointMethodParameters_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IPointMethodParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IPointMethodParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IPointMethodParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IPointMethodParameters_GetFunction(This,function)	\
+    (This)->lpVtbl -> GetFunction(This,function)
+
+
+#define IPointMethodParameters_GetFactor(This,index,factor)	\
+    (This)->lpVtbl -> GetFactor(This,index,factor)
+
+#define IPointMethodParameters_GetPoints(This,index,ks)	\
+    (This)->lpVtbl -> GetPoints(This,index,ks)
+
+#define IPointMethodParameters_UseOffsets(This,data)	\
+    (This)->lpVtbl -> UseOffsets(This,data)
+
+#define IPointMethodParameters_GetOffset(This,index,offset1,offset2)	\
+    (This)->lpVtbl -> GetOffset(This,index,offset1,offset2)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IPointMethodParameters_GetFactor_Proxy( 
+    IPointMethodParameters * This,
+    /* [in] */ int index,
+    /* [retval][out] */ int *factor);
+
+
+void __RPC_STUB IPointMethodParameters_GetFactor_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IPointMethodParameters_GetPoints_Proxy( 
+    IPointMethodParameters * This,
+    /* [in] */ int index,
+    /* [retval][out] */ int *ks);
+
+
+void __RPC_STUB IPointMethodParameters_GetPoints_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IPointMethodParameters_UseOffsets_Proxy( 
+    IPointMethodParameters * This,
+    /* [retval][out] */ VARIANT_BOOL *data);
+
+
+void __RPC_STUB IPointMethodParameters_UseOffsets_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IPointMethodParameters_GetOffset_Proxy( 
+    IPointMethodParameters * This,
+    /* [in] */ int index,
+    /* [out] */ double *offset1,
+    /* [out] */ double *offset2);
+
+
+void __RPC_STUB IPointMethodParameters_GetOffset_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IPointMethodParameters_INTERFACE_DEFINED__ */
+
+
 #ifndef __IDummy_INTERFACE_DEFINED__
 #define __IDummy_INTERFACE_DEFINED__
 
@@ -4890,6 +5318,116 @@ EXTERN_C const IID IID_IKernellImpl;
 #endif 	/* __IKernellImpl_INTERFACE_DEFINED__ */
 
 
+#ifndef __IDummy1_INTERFACE_DEFINED__
+#define __IDummy1_INTERFACE_DEFINED__
+
+/* interface IDummy1 */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IDummy1;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("5896F6EB-CFBF-406C-A0FD-EA25367673D0")
+    IDummy1 : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IDummy1Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IDummy1 * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IDummy1 * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IDummy1 * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IDummy1 * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IDummy1 * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IDummy1 * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IDummy1 * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IDummy1Vtbl;
+
+    interface IDummy1
+    {
+        CONST_VTBL struct IDummy1Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IDummy1_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IDummy1_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IDummy1_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IDummy1_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IDummy1_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IDummy1_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IDummy1_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IDummy1_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __MorseKernel2_LIBRARY_DEFINED__
 #define __MorseKernel2_LIBRARY_DEFINED__
@@ -4940,6 +5478,14 @@ class DECLSPEC_UUID("76C75A0A-AC4C-4CA9-8A4E-D8283388C361")
 CTarjanAction;
 #endif
 
+EXTERN_C const CLSID CLSID_CPointMethodAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("A1A0ABCD-1591-4846-88A0-10AF62560C37")
+CPointMethodAction;
+#endif
+
 EXTERN_C const CLSID CLSID_CDummy;
 
 #ifdef __cplusplus
@@ -4978,6 +5524,14 @@ EXTERN_C const CLSID CLSID_CKernellImpl;
 
 class DECLSPEC_UUID("96E908D0-29BD-423D-8CA8-9F4343C796A0")
 CKernellImpl;
+#endif
+
+EXTERN_C const CLSID CLSID_CDummy1;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("62172280-D7A2-46C1-AF3D-E8762035048E")
+CDummy1;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

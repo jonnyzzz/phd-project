@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using guiKernel2.Actions;
 using guiKernel2.Container;
-using guiKernel2.src.Node;
+using guiKernel2.Node;
 using MorseKernel2;
 
 namespace guiKernel2.Node

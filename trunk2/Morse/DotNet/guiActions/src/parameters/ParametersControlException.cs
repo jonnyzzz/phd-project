@@ -1,15 +1,11 @@
-using System;
-using System.IO;
-using System.Reflection;
-using System.Resources;
-using System.Xml;
+using guiControls.Control;
 
 namespace guiActions.src.parameters
 {
 	/// <summary>
 	/// Summary description for ParametersControlException.
 	/// </summary>
-	public class ParametersControlException : Exception
+	public class ParametersControlException : ControlException
 	{
 		public ParametersControlException(string message) : base(message)
 		{
@@ -17,23 +13,6 @@ namespace guiActions.src.parameters
 
 		public ParametersControlException()
 		{
-		}
-
-		public virtual string ErrorDescription
-		{
-			get
-			{
-				return Message;
-			}
-		}
-
-		public virtual string ErrorDescriptionShort
-		{
-			get
-			{
-				return Message;
-			}
-		}
-
+		}	
 	}
 }

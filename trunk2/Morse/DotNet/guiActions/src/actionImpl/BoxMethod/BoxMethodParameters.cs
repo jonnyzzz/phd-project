@@ -1,5 +1,8 @@
 using System;
 using guiActions.Parameters;
+using guiControls.Grid;
+using guiControls.Grid.Rows;
+using guiKernel2.Document;
 using MorseKernel2;
 
 namespace guiActions.ActionImpl
@@ -9,15 +12,19 @@ namespace guiActions.ActionImpl
 	/// </summary>
 	public class BoxMethodParameters : ParametersControl
 	{
-		private readonly int dimension;
-		private readonly IFunction function;
+		private readonly Function function;
+		private guiControls.Grid.ExGrid exGrid;
 		private System.ComponentModel.Container components = null;
 
-		public BoxMethodParameters(int dimension, IFunction function)
+		private IntPlusGridData data;
+
+		public BoxMethodParameters(int dimension, Function function)
 		{
-			this.dimension = dimension;
 			this.function = function;
 			InitializeComponent();
+			
+			data = new IntPlusGridData("Cell Devisor", dimension);
+			exGrid.SetRows(dimension, new IExGridRow[]{data});
 		}
 
 		/// <summary> 
@@ -42,22 +49,33 @@ namespace guiActions.ActionImpl
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.exGrid = new guiControls.Grid.ExGrid();
+			this.SuspendLayout();
+			// 
+			// exGrid1
+			// 
+			this.exGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.exGrid.Location = new System.Drawing.Point(0, 0);
+			this.exGrid.Name = "exGrid";
+			this.exGrid.Size = new System.Drawing.Size(424, 408);
+			this.exGrid.TabIndex = 0;
 			// 
 			// BoxMethodParameters
 			// 
-			this.BackColor = System.Drawing.SystemColors.Desktop;
+			this.BackColor = System.Drawing.SystemColors.Control;
+			this.Controls.Add(this.exGrid);
 			this.Name = "BoxMethodParameters";
 			this.Size = new System.Drawing.Size(424, 408);
+			this.ResumeLayout(false);
 
 		}
 		#endregion
 
 		protected override IParameters SubmitDataInternal()
 		{
-			int[] factor = new int[dimension];
-			for (int i=0; i<dimension; i++) factor[i] = 2;
+			exGrid.SubmitData();
 
-			return new BoxMethodParametersImpl(false, function, factor );
+			return new BoxMethodParametersImpl(false, function.IFunction, data.Data );
 		}
 
 		public override string BoxCaption

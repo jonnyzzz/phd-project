@@ -1,7 +1,5 @@
 using System.Collections;
 using guiKernel2.Node;
-using guiKernel2.src.Actions;
-using guiKernel2.src.Node;
 using MorseKernel2;
 
 namespace guiKernel2.Actions

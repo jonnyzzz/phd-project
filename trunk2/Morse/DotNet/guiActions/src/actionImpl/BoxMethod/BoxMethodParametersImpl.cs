@@ -6,7 +6,7 @@ namespace guiActions.ActionImpl
 	public class BoxMethodParametersImpl : IBoxMethodParameters
 	{
 		private bool useDerivate;
-		private IFunction function;
+		private readonly IFunction function;
 		private int[] factor;
 
 		public IFunction GetFunction()

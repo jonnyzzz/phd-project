@@ -99,37 +99,77 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeControl\ComputationNode.cs"
+                    RelPath = "src\Control\ControlException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeControl\ComputationTree.cs"
+                    RelPath = "src\Control\ISubmittable.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Grid\ExGrid.cs"
                     SubType = "UserControl"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeControl\ComputationTree.resx"
+                    RelPath = "src\Grid\ExGrid.resx"
+                    DependentUpon = "ExGrid.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Grid\ExGridException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Grid\IExGridRow.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Grid\Rows\DoublePercent.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Grid\Rows\IntPlusGridData.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TreeControl\ComputationNode.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TreeControl\ComputationTree.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TreeControl\ComputationTree.resx"
                     DependentUpon = "ComputationTree.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "TreeControl\MenuItems\DelimiterMenuItem.cs"
+                    RelPath = "src\TreeControl\MenuItems\DelimiterMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeControl\MenuItems\DelimiterMenuItem.resx"
+                    RelPath = "src\TreeControl\MenuItems\DelimiterMenuItem.resx"
                     DependentUpon = "DelimiterMenuItem.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "TreeControl\MenuItems\DeselectMenuItem.cs"
+                    RelPath = "src\TreeControl\MenuItems\DeselectMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeControl\MenuItems\NoMenuItem.cs"
+                    RelPath = "src\TreeControl\MenuItems\NoMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
                 />

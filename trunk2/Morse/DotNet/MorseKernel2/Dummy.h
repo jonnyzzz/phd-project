@@ -10,6 +10,7 @@
 #include "BoxMethodAction.h"
 #include "TarjanAction.h"
 #include "ComputationParameters.h"
+#include "PointMethodAction.h"
 
 
 // IDummy
@@ -169,6 +170,24 @@ public:
 	// IComputationParameters Methods
 public:
 	STDMETHOD(GetFunction)(IFunction ** function)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+
+	// IPointMethodParameters Methods
+public:
+	STDMETHOD(GetPoints)(int  index, int * ks)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+	STDMETHOD(UseOffsets)(VARIANT_BOOL * data)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+	STDMETHOD(GetOffset)(int  index, double * offset1, double * offset2)
 	{
 		// Add your function implementation here.
 		return E_NOTIMPL;

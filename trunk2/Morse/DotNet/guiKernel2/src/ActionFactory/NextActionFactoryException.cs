@@ -1,6 +1,6 @@
 using System;
 
-namespace guiKernel2.src.ActionFactory
+namespace guiKernel2.ActionFactory
 {
 	/// <summary>
 	/// Summary description for NextActionFactoryException.

@@ -1,36 +1,36 @@
 <Configuration>
   <RecentFilesTracker>
     <RecentFilesTracker>
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui\src\Tree\Node\Forms\ParametersInputForm.cs" offset="8499" line="62" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Node\ResultSet.cs" offset="2231" line="43" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui2\ActionPerformer\Performer.cs" offset="1101" line="12" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui2\ActionPerformer\ChainPerformer.cs" offset="904" line="5" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Actions\ActionChain.cs" offset="855" line="4" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\KernellImpl.cpp" offset="859" line="19" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Node\KernelNode.cs" offset="1254" line="51" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\xml\ActionMapping.xml" offset="379" line="0" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\xml\ActionMapping.xml" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\BoxMethodAction.cpp" offset="0" line="81" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui2\TreeNodes\Node.cs" offset="515" line="0" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui2\Runner\Runner.cs" offset="1337" line="28" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\src\actionImpl\BoxMethod\BoxMethodAction.cs" offset="656" line="0" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Document\KernelDocument.cs" offset="869" line="0" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\KernellImpl.h" offset="867" line="12" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\Kernell.h" offset="147" line="-1" column="-1" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\ActionFactory\NextActionFactory.cs" offset="1075" line="0" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\ActionFactory\ActionInfos\ActionInfo.cs" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\ResultSetIterator.h" offset="829" line="19" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\stdafx.h" offset="1722" line="13" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\cellImageBuilders\TarjanProcess.cpp" offset="371" line="0" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph\SmartPointer.h" offset="212" line="0" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph\GraphComponents.cpp" offset="580" line="6" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph\Graph.cpp" offset="11751" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\SmartInterface.h" offset="217" line="2" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui2\Forms\ComputationForm.cs" offset="5555" line="44" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\GraphResultImpl.h" offset="711" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\SymbolicImageMetadata.h" offset="680" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\ResultSetImpl.h" offset="749" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\ProgressBarInfo.h" offset="0" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Actions\ProgressBarInfo.cs" offset="993" line="29" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Actions\ActionWrapper.cs" offset="934" line="22" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\src\actionImpl\BoxMethod\BoxMethodAction.cs" offset="747" line="14" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\src\actionImpl\BoxMethod\BoxMethodParametersImpl.cs" offset="188" line="0" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\src\actionImpl\BoxMethod\BoxMethodParameters.cs" offset="2010" line="31" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\src\actionImpl\Tarjan\TarjanAction.cs" offset="790" line="7" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\src\actionImpl\PointMethod\PointMethodAction.cs" offset="972" line="10" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\src\actionImpl\PointMethod\PointMethodParameters.cs" offset="5218" line="51" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\src\parameters\ParametersControl.cs" offset="519" line="9" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\src\actionImpl\Tarjan\TarjanParameters.cs" offset="1723" line="3" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui2\TreeNodes\Node.cs" offset="157" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui2\ActionPerformer\Performer.cs" offset="114" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiControls\src\Control\ISubmittable.cs" offset="193" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiControls\src\Control\ControlException.cs" offset="146" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiControls\src\Grid\ExGrid.cs" offset="0" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiControls\src\Grid\ExGridException.cs" offset="0" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui2\Forms\ParametersSelector.cs" offset="0" line="87" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\src\parameters\ParametersControlException.cs" offset="0" line="0" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Document\FunctionExceptions.cs" offset="162" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Document\Function.cs" offset="196" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Document\KernelDocument.cs" offset="60" line="0" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Actions\ActionChain.cs" offset="69" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Actions\AttributeHolder.cs" offset="212" line="0" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\ActionFactory\NextActionFactoryException.cs" offset="161" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui2\Forms\ComputationForm.cs" offset="0" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui2\ActionPerformer\ChainPerformer.cs" offset="0" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Node\ResultSet.cs" offset="69" line="0" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiKernel2\src\Node\KernelNode.cs" offset="663" line="39" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\guiActions\xml\ActionMapping.xml" offset="356" line="0" column="0" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernel2\PointMethodAction.cpp" offset="2808" line="94" column="0" />
     </RecentFilesTracker>
   </RecentFilesTracker>
   <CompletionStatisticsManager>
@@ -60,10 +60,6 @@
       <Item value="Assert" priority="0" />
       <Item value="LogMessage" priority="8" />
       <Item value="LogException" priority="4" />
-    </ItemStatistics>
-    <ItemStatistics item="Qualified:System.Windows.Forms.ContextMenu">
-      <Item value="Show" priority="1" />
-      <Item value="MenuItems" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Threading.Thread.CurrentContext">
       <Item value="ContextID" priority="0" />
@@ -131,7 +127,8 @@
       <Item value="Action" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:guiKernel2.src.Node.ResultSet">
-      <Item value="ToResults" priority="0" />
+      <Item value="ToResults" priority="1" />
+      <Item value="ToResultSet" priority="0" />
       <Item value="Match" priority="0" />
       <Item value="ToString" priority="0" />
     </ItemStatistics>
@@ -148,6 +145,9 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.src.Tree.Node.ActionAllocator.DynamicTest">
       <Item value="Instance" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Windows.Forms.MouseButtons">
+      <Item value="Right" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.Runner">
       <Item value="Kernel" priority="0" />
@@ -191,7 +191,7 @@
       <Item value="getGraph" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.CheckBox">
-      <Item value="Checked" priority="0" />
+      <Item value="Checked" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.TreeView">
       <Item value="Size" priority="0" />
@@ -226,10 +226,6 @@
     <ItemStatistics item="Qualified:MorseKernelATL.IExtendable">
       <Item value="Extend" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:gui.Resource.GnuPlotScriptGen">
-      <Item value="ToString" priority="0" />
-      <Item value="addFile" priority="0" />
-    </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.StatusBarDrawItemEventArgs">
       <Item value="Panel" priority="0" />
       <Item value="Bounds" priority="0" />
@@ -255,7 +251,7 @@
       <Item value="Graphics" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.String">
-      <Item value="Format" priority="5" />
+      <Item value="Format" priority="6" />
       <Item value="Compare" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Data.DataRowCollection">
@@ -331,6 +327,9 @@
     <ItemStatistics item="Qualified:guiKernel2.Actions.ActionWrapper[]">
       <Item value="Length" priority="2" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.MenuItem[]">
+      <Item value="Length" priority="6" />
+    </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.Tree.Node.ActionAllocator.DynamicActionNodeTest">
       <Item value="Instance" priority="3" />
     </ItemStatistics>
@@ -360,9 +359,6 @@
     <ItemStatistics item="Qualified:MorseKernel2.IParameters">
       <Item value="GetType" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:guiKernel2.Node.KernelNode[]">
-      <Item value="Length" priority="0" />
-    </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Threading.Thread">
       <Item value="CurrentContext" priority="0" />
       <Item value="CurrentThread" priority="3" />
@@ -381,11 +377,6 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.Logger">
       <Item value="Logger" priority="0" />
-    </ItemStatistics>
-    <ItemStatistics item="Qualified:gui2.TreeNodes.Node">
-      <Item value="Results" priority="0" />
-      <Item value="KernelNode" priority="1" />
-      <Item value="GetActionAfer" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:MorseKernel2.IResult[]">
       <Item value="Length" priority="5" />
@@ -439,7 +430,7 @@
       <Item value="MemberType" priority="0" />
       <Item value="ToString" priority="1" />
       <Item value="GetType" priority="8" />
-      <Item value="AddResult" priority="0" />
+      <Item value="Invoke" priority="5" />
       <Item value="getMenuItems" priority="0" />
       <Item value="ToArray" priority="0" />
       <Item value="Serialize" priority="1" />
@@ -447,10 +438,9 @@
       <Item value="ReadToEnd" priority="0" />
       <Item value="ShowDialog" priority="1" />
       <Item value="Deserialize" priority="1" />
-      <Item value="Invoke" priority="5" />
+      <Item value="Equals" priority="1" />
       <Item value="gnuplotTemplate2D" priority="0" />
       <Item value="ParameterType" priority="0" />
-      <Item value="Equals" priority="1" />
       <Item value="LoadKernelNode" priority="0" />
       <Item value="PerformClick" priority="0" />
       <Item value="Array" priority="0" />
@@ -465,6 +455,7 @@
       <Item value="Childs" priority="0" />
       <Item value="GetTypes" priority="2" />
       <Item value="showFromFile" priority="0" />
+      <Item value="AddResult" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:guiKernel2.src.ActionFactory.ActionInfos.ActionInfo[]">
       <Item value="Length" priority="1" />
@@ -474,8 +465,9 @@
       <Item value="GetAssembly" priority="1" />
       <Item value="Load" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:@gui2.Runner.Runner.Instance">
-      <Item value="Document" priority="1" />
+    <ItemStatistics item="Qualified:gui.Resource.GnuPlotScriptGen">
+      <Item value="ToString" priority="0" />
+      <Item value="addFile" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.IO.File">
       <Item value="CreateText" priority="1" />
@@ -558,7 +550,7 @@
       <Item value="SetKernelDocument" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:guiKernel2.Node.KernelNode">
-      <Item value="Results" priority="4" />
+      <Item value="Results" priority="5" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:gui.Tree.Node.ComputationNodePlural">
       <Item value="Length" priority="0" />
@@ -622,10 +614,10 @@
     <ItemStatistics item="Qualified:guiKernel2.src.ActionFactory.ActionInfos.ActionInfo">
       <Item value="ActionRefs" priority="0" />
       <Item value="CreateInstance" priority="0" />
-      <Item value="MetadataName" priority="0" />
-      <Item value="ActionName" priority="1" />
-      <Item value="DumpTree" priority="0" />
       <Item value="ToString" priority="1" />
+      <Item value="MetadataName" priority="0" />
+      <Item value="DumpTree" priority="0" />
+      <Item value="ActionName" priority="1" />
       <Item value="ResultType" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:MorseKernelATL.ISymbolicImageGroup">
@@ -654,18 +646,24 @@
     <ItemStatistics item="Qualified:int">
       <Item value="ToString" priority="0" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Xml.XmlDocument">
+      <Item value="DocumentElement" priority="0" />
+      <Item value="SelectNodes" priority="4" />
+      <Item value="Load" priority="4" />
+      <Item value="GetElementsByTagName" priority="2" />
+    </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Runtime.InteropServices">
       <Item value="RuntimeEnvironment" priority="0" />
       <Item value="ArrayWithOffset" priority="1" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:System.Windows.Forms.MenuItem[]">
-      <Item value="Length" priority="6" />
-    </ItemStatistics>
-    <ItemStatistics item="Qualified:guiKernel2.Document.Function">
-      <Item value="IFunction" priority="1" />
-    </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.src.InitializeStaticAttrubute">
       <Item value="Type" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:guiKernel2.Document.Function">
+      <Item value="IFunction" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Diagnostics">
+      <Item value="Process" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:int[,]">
       <Item value="Length" priority="0" />
@@ -794,6 +792,9 @@
     <ItemStatistics item="Qualified:@System.Windows.Forms.DialogResult">
       <Item value="OK" priority="9" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:@gui2.Runner.Runner.Instance">
+      <Item value="Document" priority="1" />
+    </ItemStatistics>
     <ItemStatistics item="Qualified:System.Drawing.Color">
       <Item value="B" priority="1" />
     </ItemStatistics>
@@ -810,8 +811,21 @@
     <ItemStatistics item="Qualified:gui2.Runner.CommandLineParser">
       <Item value="hasKey" priority="1" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:@System.Windows.Forms.MouseButtons">
-      <Item value="Right" priority="1" />
+    <ItemStatistics item="Qualified:gui.ComputationNode">
+      <Item value="HasSameType" priority="1" />
+      <Item value="Checked" priority="2" />
+      <Item value="MenuItems" priority="1" />
+      <Item value="TreeView" priority="0" />
+      <Item value="newNode" priority="0" />
+      <Item value="CurrentGroup" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.DrawItemEventArgs">
+      <Item value="DrawFocusRectangle" priority="0" />
+      <Item value="DrawBackground" priority="0" />
+      <Item value="State" priority="2" />
+      <Item value="Graphics" priority="0" />
+      <Item value="Font" priority="3" />
+      <Item value="Bounds" priority="4" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Windows">
       <Item value="Forms" priority="2" />
@@ -822,16 +836,15 @@
     <ItemStatistics item="Qualified:MorseKernelATL.CProjectiveBundleGraphClass">
       <Item value="add_newChildMorseSpectrum" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:gui.ComputationNode">
-      <Item value="HasSameType" priority="1" />
-      <Item value="Checked" priority="2" />
+    <ItemStatistics item="Qualified:System.Windows.Forms.ContextMenu">
+      <Item value="Show" priority="1" />
       <Item value="MenuItems" priority="1" />
-      <Item value="TreeView" priority="0" />
-      <Item value="newNode" priority="0" />
-      <Item value="CurrentGroup" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:gui.Tree.Node.ComputationNodeSingular">
       <Item value="Parent" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:guiControls.Grid.Rows.IntPlusGridData">
+      <Item value="Data" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:gui.src.Resources.TemplateProcessor">
       <Item value="subsitute" priority="8" />
@@ -840,6 +853,9 @@
     <ItemStatistics item="Qualified:@System.DateTime.Now">
       <Item value="GetHashCode" priority="0" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:guiControls.Grid.Rows.DoublePercent">
+      <Item value="Data" priority="1" />
+    </ItemStatistics>
     <ItemStatistics item="Qualified:MorseKernelATL.IExportData">
       <Item value="ExportData" priority="1" />
       <Item value="Equals" priority="0" />
@@ -847,9 +863,9 @@
     <ItemStatistics item="Qualified:gui.Tree.Serialization.TreeNodeSerializer">
       <Item value="FromDll" priority="0" />
       <Item value="Childs" priority="0" />
-      <Item value="ID" priority="2" />
-      <Item value="FileName" priority="2" />
       <Item value="AddChild" priority="0" />
+      <Item value="FileName" priority="2" />
+      <Item value="ID" priority="2" />
       <Item value="NextSibling" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:gui.src.Tree.Node.ActionAllocator.IActionFactory">
@@ -857,11 +873,10 @@
       <Item value="Corresponds" priority="0" />
       <Item value="GetType" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:System.Xml.XmlDocument">
-      <Item value="DocumentElement" priority="0" />
-      <Item value="SelectNodes" priority="4" />
-      <Item value="Load" priority="4" />
-      <Item value="GetElementsByTagName" priority="2" />
+    <ItemStatistics item="Qualified:guiControls.Grid.ExGrid">
+      <Item value="Rows" priority="0" />
+      <Item value="SubmitData" priority="2" />
+      <Item value="SetRows" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Windows.Forms.Application.ExecutablePath">
       <Item value="Split" priority="0" />
@@ -933,8 +948,8 @@
     <ItemStatistics item="Qualified:@gui2.Runner.Runner.runner">
       <Item value="Start" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:@System.Diagnostics">
-      <Item value="Process" priority="0" />
+    <ItemStatistics item="Qualified:@gui.src.InitializeStaticAttrubute.Type">
+      <Item value="TreeNodeAction" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Threading.ThreadStart">
       <Item value="BeginInvoke" priority="0" />
@@ -954,8 +969,8 @@
     <ItemStatistics item="Qualified:MorseKernelATL.IKernelNode">
       <Item value="GetType" priority="2" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:@gui.src.InitializeStaticAttrubute.Type">
-      <Item value="TreeNodeAction" priority="0" />
+    <ItemStatistics item="Qualified:guiKernel2.Node.KernelNode[]">
+      <Item value="Length" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Xml.XmlNodeType">
       <Item value="ToString" priority="0" />
@@ -1036,13 +1051,10 @@
     <ItemStatistics item="Qualified:MorseKernelATL.ISubdevidable">
       <Item value="Subdevide" priority="2" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:System.Windows.Forms.DrawItemEventArgs">
-      <Item value="DrawFocusRectangle" priority="0" />
-      <Item value="DrawBackground" priority="0" />
-      <Item value="State" priority="2" />
-      <Item value="Graphics" priority="0" />
-      <Item value="Font" priority="3" />
-      <Item value="Bounds" priority="4" />
+    <ItemStatistics item="Qualified:gui2.TreeNodes.Node">
+      <Item value="Results" priority="0" />
+      <Item value="KernelNode" priority="1" />
+      <Item value="GetActionAfer" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Data.DataColumnCollection">
       <Item value="Add" priority="3" />
@@ -1256,13 +1268,13 @@
     <string />
     <integer />
     <boolean>
-      <setting name="ReSharper.FindMethodDialog.checkBoxFindInheritors">True</setting>
+      <setting name="ReSharper.FindMethodDialog.checkBoxFindUsages">False</setting>
       <setting name="ReSharper.FindMethodDialog.checkBoxSearchLibraries">False</setting>
       <setting name="ReSharper.FindClassDialog.checkBoxSearchLibraries">False</setting>
       <setting name="ReSharper.FindClassDialog.checkBoxFindUsages">False</setting>
       <setting name="ReSharper.FindClassDialog.checkBoxFindInheritors">True</setting>
       <setting name="ReSharper.FindClassDialog.checkBoxFindMemberUsages">False</setting>
-      <setting name="ReSharper.FindMethodDialog.checkBoxFindUsages">False</setting>
+      <setting name="ReSharper.FindMethodDialog.checkBoxFindInheritors">True</setting>
     </boolean>
   </SettingsComponent>
 </Configuration>

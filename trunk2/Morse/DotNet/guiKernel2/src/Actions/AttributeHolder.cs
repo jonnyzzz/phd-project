@@ -2,7 +2,7 @@ using System;
 using guiKernel2.Actions;
 using guiKernel2.ActionFactory;
 
-namespace guiKernel2.src.Actions
+namespace guiKernel2.Actions
 {
 	/// <summary>
 	/// Summary description for AttributeHolder.

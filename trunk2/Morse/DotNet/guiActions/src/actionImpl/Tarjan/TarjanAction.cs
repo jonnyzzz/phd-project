@@ -27,5 +27,10 @@ namespace guiActions.actionImpl.Tarjan
 		{
 			return new CTarjanActionClass();
 		}
+
+		public override string ActionName
+		{
+			get { return "Strong Components Localization"; }
+		}
 	}
 }

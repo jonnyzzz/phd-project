@@ -1,6 +1,5 @@
 using guiKernel2.Container;
 using guiKernel2.Node;
-using guiKernel2.src.Node;
 using MorseKernel2;
 
 namespace guiKernel2.Document

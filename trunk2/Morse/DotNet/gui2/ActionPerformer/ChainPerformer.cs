@@ -1,9 +1,9 @@
 using System.Windows.Forms;
 using gui2.TreeNodes;
 using guiActions.Actions;
-using guiKernel2.src.Actions;
-using guiKernel2.src.Node;
-using ProgressBar = guiKernel2.src.Actions.ProgressBarInfo;
+using guiKernel2.Actions;
+using guiKernel2.Node;
+using ProgressBar = guiKernel2.Actions.ProgressBarInfo;
 
 namespace gui2.ActionPerformer
 {

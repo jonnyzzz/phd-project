@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-using guiKernel2.ActionFactory.ActionInfos;
 using guiKernel2.Container;
 using guiKernel2.Node;
 using MorseKernel2;
 
-namespace guiKernel2.src.Node
+namespace guiKernel2.Node
 {
 	/// <summary>
 	/// Summary description for Results.
@@ -19,16 +18,21 @@ namespace guiKernel2.src.Node
 		}
 
 		#region getters
+		private IResultSet resultSet = null;
 		public IResultSet ToResultSet
 		{
 			get
 			{
-				IWritableResultSet set = new CResultSetImplClass();
-				foreach (IResultBase resultBase in ToResults)
+				if (resultSet == null) 
 				{
-					set.AddResult(resultBase);
+					IWritableResultSet set = new CResultSetImplClass();
+					foreach (IResultBase resultBase in ToResults)
+					{
+						set.AddResult(resultBase);
+					}
+					resultSet = (IResultSet)set;
 				}
-				return (IResultSet)set;
+				return resultSet;
 			}
 		}
 
@@ -63,17 +67,17 @@ namespace guiKernel2.src.Node
 
 		#region protected Add's
 
-		protected void AddResult(IResultBase result)
+		protected internal void AddResult(IResultBase result)
 		{
 			results.Add((IResult)result);
 		}
 
-		protected void AddResultRange(IResultBase[] results)
+		protected internal void AddResultRange(IResultBase[] results)
 		{
 			this.results.AddRange(results);
 		}
 
-		protected void AddResultSet(IResultSet set)
+		protected internal void AddResultSet(IResultSet set)
 		{
 			for (int count = 0; count < set.GetCount(); count++)
 			{

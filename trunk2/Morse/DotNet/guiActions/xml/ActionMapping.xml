@@ -1,15 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 
 <mappings>
-    <action name="ITarjanAction" resultType="IGraphResult" metadata="IResultMetadata" isLeaf="true" />
-
-	<action name="IBoxMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="true">		
-	 <!--
+	<action name="IBoxMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="false">		
 		<nextActions>		
 			<actionReference name="ITarjanAction" isLeaf="true"/>
 		</nextActions>
-	  -->
 	</action>
+	
+	<action name="IPointMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="false">		
+		<nextActions>		
+			<actionReference name="ITarjanAction" isLeaf="true"/>
+		</nextActions>
+	</action>
+
 
 	<assemblies>	
 		<actionAssembly name="guiActions"/>

@@ -182,6 +182,9 @@
 				RelativePath=".\Dummy.cpp">
 			</File>
 			<File
+				RelativePath=".\Dummy1.cpp">
+			</File>
+			<File
 				RelativePath=".\Function.cpp">
 			</File>
 			<File
@@ -219,6 +222,9 @@
 			</File>
 			<File
 				RelativePath=".\Parameters.cpp">
+			</File>
+			<File
+				RelativePath=".\PointMethodAction.cpp">
 			</File>
 			<File
 				RelativePath=".\ProgressBarInfo.cpp">
@@ -307,6 +313,9 @@
 				RelativePath=".\Dummy.h">
 			</File>
 			<File
+				RelativePath=".\Dummy1.h">
+			</File>
+			<File
 				RelativePath=".\Function.h">
 			</File>
 			<File
@@ -341,6 +350,9 @@
 			</File>
 			<File
 				RelativePath=".\Parameters.h">
+			</File>
+			<File
+				RelativePath=".\PointMethodAction.h">
 			</File>
 			<File
 				RelativePath=".\ProgressBarInfo.h">

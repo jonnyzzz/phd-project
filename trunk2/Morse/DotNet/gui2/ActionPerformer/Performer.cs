@@ -3,8 +3,6 @@ using System.Threading;
 using gui2.TreeNodes;
 using guiKernel2.Actions;
 using guiKernel2.Node;
-using guiKernel2.src.Actions;
-using guiKernel2.src.Node;
 
 namespace gui2.ActionPerformer
 {

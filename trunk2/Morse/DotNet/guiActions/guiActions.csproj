@@ -107,6 +107,11 @@
                     Lcid = "0"
                     WrapperTool = "tlbimp"
                 />
+                <Reference
+                    Name = "guiControls"
+                    Project = "{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
@@ -138,6 +143,26 @@
                 />
                 <File
                     RelPath = "src\actionImpl\BoxMethod\BoxMethodParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\PointMethod\PointMethodAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\PointMethod\PointMethodParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\PointMethod\PointMethodParameters.resx"
+                    DependentUpon = "PointMethodParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\PointMethod\PointMethodParametersImpl.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

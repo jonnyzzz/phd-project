@@ -1,6 +1,7 @@
 using System.Windows.Forms;
 using guiActions.Parameters;
 using guiActions.src.parameters;
+using guiControls.Control;
 
 namespace gui2.Forms
 {
@@ -37,6 +38,8 @@ namespace gui2.Forms
 		{
 			this.controls = controls;
 			InitializeComponent();
+			parameterIndex = 0;
+			ShowCurrentParameterControl();
 		}
 
 		private const string Title = "Set Parameters for selected ations {0} of {1}";
@@ -74,17 +77,17 @@ namespace gui2.Forms
 		private void InitializeComponent()
 		{
 			this.panelParameters = new System.Windows.Forms.Panel();
+			this.parameterCaptionBox = new System.Windows.Forms.GroupBox();
+			this.panelParametersContainer = new System.Windows.Forms.Panel();
 			this.panelControl = new System.Windows.Forms.Panel();
 			this.statusBar = new System.Windows.Forms.StatusBar();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonBack = new System.Windows.Forms.Button();
 			this.buttonNext = new System.Windows.Forms.Button();
 			this.splitter = new System.Windows.Forms.Splitter();
-			this.parameterCaptionBox = new System.Windows.Forms.GroupBox();
-			this.panelParametersContainer = new System.Windows.Forms.Panel();
 			this.panelParameters.SuspendLayout();
-			this.panelControl.SuspendLayout();
 			this.parameterCaptionBox.SuspendLayout();
+			this.panelControl.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panelParameters
@@ -94,8 +97,28 @@ namespace gui2.Forms
 			this.panelParameters.DockPadding.All = 10;
 			this.panelParameters.Location = new System.Drawing.Point(0, 0);
 			this.panelParameters.Name = "panelParameters";
-			this.panelParameters.Size = new System.Drawing.Size(736, 382);
+			this.panelParameters.Size = new System.Drawing.Size(416, 382);
 			this.panelParameters.TabIndex = 0;
+			// 
+			// parameterCaptionBox
+			// 
+			this.parameterCaptionBox.Controls.Add(this.panelParametersContainer);
+			this.parameterCaptionBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.parameterCaptionBox.Location = new System.Drawing.Point(10, 10);
+			this.parameterCaptionBox.Name = "parameterCaptionBox";
+			this.parameterCaptionBox.Size = new System.Drawing.Size(396, 362);
+			this.parameterCaptionBox.TabIndex = 0;
+			this.parameterCaptionBox.TabStop = false;
+			this.parameterCaptionBox.Text = "ParametersCaption";
+			// 
+			// panelParametersContainer
+			// 
+			this.panelParametersContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelParametersContainer.DockPadding.All = 10;
+			this.panelParametersContainer.Location = new System.Drawing.Point(3, 16);
+			this.panelParametersContainer.Name = "panelParametersContainer";
+			this.panelParametersContainer.Size = new System.Drawing.Size(390, 343);
+			this.panelParametersContainer.TabIndex = 0;
 			// 
 			// panelControl
 			// 
@@ -106,21 +129,21 @@ namespace gui2.Forms
 			this.panelControl.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.panelControl.Location = new System.Drawing.Point(0, 382);
 			this.panelControl.Name = "panelControl";
-			this.panelControl.Size = new System.Drawing.Size(736, 64);
+			this.panelControl.Size = new System.Drawing.Size(416, 64);
 			this.panelControl.TabIndex = 1;
 			// 
 			// statusBar
 			// 
 			this.statusBar.Location = new System.Drawing.Point(0, 42);
 			this.statusBar.Name = "statusBar";
-			this.statusBar.Size = new System.Drawing.Size(736, 22);
+			this.statusBar.Size = new System.Drawing.Size(416, 22);
 			this.statusBar.TabIndex = 3;
 			// 
 			// buttonCancel
 			// 
 			this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonCancel.Location = new System.Drawing.Point(320, 16);
+			this.buttonCancel.Location = new System.Drawing.Point(160, 16);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(104, 24);
 			this.buttonCancel.TabIndex = 2;
@@ -142,7 +165,7 @@ namespace gui2.Forms
 			// 
 			this.buttonNext.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.buttonNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonNext.Location = new System.Drawing.Point(576, 16);
+			this.buttonNext.Location = new System.Drawing.Point(280, 16);
 			this.buttonNext.Name = "buttonNext";
 			this.buttonNext.Size = new System.Drawing.Size(104, 24);
 			this.buttonNext.TabIndex = 0;
@@ -156,42 +179,22 @@ namespace gui2.Forms
 			this.splitter.Enabled = false;
 			this.splitter.Location = new System.Drawing.Point(0, 379);
 			this.splitter.Name = "splitter";
-			this.splitter.Size = new System.Drawing.Size(736, 3);
+			this.splitter.Size = new System.Drawing.Size(416, 3);
 			this.splitter.TabIndex = 2;
 			this.splitter.TabStop = false;
-			// 
-			// parameterCaptionBox
-			// 
-			this.parameterCaptionBox.Controls.Add(this.panelParametersContainer);
-			this.parameterCaptionBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.parameterCaptionBox.Location = new System.Drawing.Point(10, 10);
-			this.parameterCaptionBox.Name = "parameterCaptionBox";
-			this.parameterCaptionBox.Size = new System.Drawing.Size(716, 362);
-			this.parameterCaptionBox.TabIndex = 0;
-			this.parameterCaptionBox.TabStop = false;
-			this.parameterCaptionBox.Text = "ParametersCaption";
-			// 
-			// panelParametersContainer
-			// 
-			this.panelParametersContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelParametersContainer.DockPadding.All = 10;
-			this.panelParametersContainer.Location = new System.Drawing.Point(3, 16);
-			this.panelParametersContainer.Name = "panelParametersContainer";
-			this.panelParametersContainer.Size = new System.Drawing.Size(710, 343);
-			this.panelParametersContainer.TabIndex = 0;
 			// 
 			// ParametersSelector
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(736, 446);
+			this.ClientSize = new System.Drawing.Size(416, 446);
 			this.Controls.Add(this.splitter);
 			this.Controls.Add(this.panelParameters);
 			this.Controls.Add(this.panelControl);
 			this.Name = "ParametersSelector";
 			this.Text = "ParametersSelector";
 			this.panelParameters.ResumeLayout(false);
-			this.panelControl.ResumeLayout(false);
 			this.parameterCaptionBox.ResumeLayout(false);
+			this.panelControl.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -223,7 +226,7 @@ namespace gui2.Forms
 				} else {
 					DialogResult = System.Windows.Forms.DialogResult.OK;
 				}
-			} catch (ParametersControlException ee)
+			} catch (ControlException ee)
 			{
 				MessageBox.Show(this, ee.ErrorDescription, "Error filling parameters", MessageBoxButtons.OK, MessageBoxIcon.Error );
 			}

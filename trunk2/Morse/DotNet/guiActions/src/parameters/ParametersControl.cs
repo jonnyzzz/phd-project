@@ -1,12 +1,13 @@
 using System;
 using System.Windows.Forms;
+using guiControls.Control;
 using MorseKernel2;
 
 namespace guiActions.Parameters
 {
 	public delegate void ParametersSubmitted(IParameters parameters);
 
-	public class ParametersControl : UserControl
+	public class ParametersControl : UserControl, ISubmittable
 	{
 		//pseudo abstract method
 		protected virtual IParameters SubmitDataInternal()

@@ -320,12 +320,43 @@ interface ITarjanParameters : IParameters {
 
 [
 	object,
+	uuid(1B1FF1EE-4EB6-4F0A-B6AB-CCBFFA28B9F0),
+	dual,
+	helpstring("IPointMethodAction Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+interface IPointMethodAction : IAction {
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	[id(110)] HRESULT  GetDimensionForParameters([in] IResultSet *resultSet, [out,retval] int *dimension);
+};
+
+[
+	object,
+	uuid(ADCEDDBC-441A-479D-8E7A-706921DA82AC),
+	dual,
+	pointer_default(unique)
+] 
+#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+interface IPointMethodParameters : IComputationParameters {
+#line 30 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	[id(11)] HRESULT  GetPoints([in] int index, [out,retval] int *ks);
+#line 34 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	[id(12)] HRESULT  UseOffsets([out,retval] VARIANT_BOOL *data);
+#line 36 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	[id(13)] HRESULT  GetOffset([in] int index, [out] double *offset1, [out] double *offset2);
+};
+
+[
+	object,
 	uuid(0A8C775B-8E19-4642-B2D7-5BBB437B7B97),
 	dual,
 	helpstring("IDummy Interface"),
 	pointer_default(unique)
 ] 
-#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy.h"
+#line 23 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy.h"
 interface IDummy : IDispatch {
 };
 
@@ -427,6 +458,17 @@ interface IWritableKernell : IDispatch {
 interface IKernellImpl : IWritableKernell {
 };
 
+[
+	object,
+	uuid(5896F6EB-CFBF-406C-A0FD-EA25367673D0),
+	dual,
+	helpstring("IDummy1 Interface"),
+	pointer_default(unique)
+] 
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy1.h"
+interface IDummy1 : IDispatch {
+};
+
 
 [ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}"), helpstring("MorseKernel2 1.0 Type Library") ]
 library MorseKernel2
@@ -495,10 +537,22 @@ library MorseKernel2
 
 	[
 		version(1.0),
+		uuid(A1A0ABCD-1591-4846-88A0-10AF62560C37),
+		helpstring("PointMethodAction Class")
+	] 
+#line 51 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	coclass CPointMethodAction {
+		interface IPointMethodAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
 		uuid(8C3F6AAB-F725-4C70-A92A-7E4BD2A30C23),
 		helpstring("Dummy Class")
 	] 
-#line 39 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy.h"
+#line 40 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy.h"
 	coclass CDummy {
 		interface IDummy;
 		interface IAction;
@@ -561,6 +615,19 @@ library MorseKernel2
 		interface IKernellImpl;
 		interface IWritableKernell;
 		interface IKernell;
+	};
+
+	[
+		version(1.0),
+		uuid(62172280-D7A2-46C1-AF3D-E8762035048E),
+		helpstring("Dummy1 Class")
+	] 
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy1.h"
+	coclass CDummy1 {
+		interface IDummy1;
+		interface IPointMethodParameters;
+		interface IComputationParameters;
+		interface IParameters;
 	};
 
 }

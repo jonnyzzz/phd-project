@@ -2,17 +2,8 @@ using System;
 using guiKernel2.Actions;
 using MorseKernel2;
 
-namespace guiKernel2.src.Actions
+namespace guiKernel2.Actions
 {
-	/// <summary>
-	/// Summary description for ProgressBar.
-	/// </summary>
-	/// 
-	public delegate void ProgressBarTick();
-	public delegate void ProgressBarNewTask(string caption);
-	public delegate void ProgressBarNewLength(int length);
-	public delegate void ProgressBarFinish();
-
 	public class ProgressBarInfo 
 	{
 		public event ProgressBarTick Tick;
@@ -53,7 +44,7 @@ namespace guiKernel2.src.Actions
 			}
 			public int Length()
 			{
-				return 1>>16;
+				return 99999;
 			}
 
 			public void Next()
@@ -78,4 +69,17 @@ namespace guiKernel2.src.Actions
 			}
 		}
 	}
+
+	/// <summary>
+	/// Summary description for ProgressBar.
+	/// </summary>
+	/// 
+	public delegate void ProgressBarTick();
+
+	public delegate void ProgressBarFinish();
+
+	public delegate void ProgressBarNewLength(int length);
+
+	public delegate void ProgressBarNewTask(string caption);
 }
+
