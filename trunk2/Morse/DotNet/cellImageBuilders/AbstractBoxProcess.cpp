@@ -70,7 +70,7 @@ void AbstractBoxProcess::start() {
 
 void AbstractBoxProcess::processNextGraph(Graph* graph) {
 
-	int maxCnt = info->Length();
+	int maxCnt = graph->getNumberOfNodes()/info->Length()+1;
 	int cnt = 0;
 
 	cout<<"Processing Next graph nodes: "<<graph->getNumberOfNodes()<<"\n";
