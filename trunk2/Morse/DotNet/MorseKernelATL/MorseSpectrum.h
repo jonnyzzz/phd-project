@@ -3,6 +3,7 @@
 #pragma once
 #include "resource.h"       // main symbols
 #include "NodeBase.h"
+#include "kernel.h"
 
 // IMorseSpectrum
 [
@@ -63,6 +64,8 @@ private:
 	LONG lowerLength;
 	LONG upperLength;
 
+    IKernel* kernel;
+
 public:
 
 	STDMETHOD(get_lowerBound)(DOUBLE* pVal);
@@ -73,5 +76,9 @@ public:
 	STDMETHOD(put_lowerLength)(LONG newVal);
 	STDMETHOD(get_upperLength)(LONG* pVal);
 	STDMETHOD(put_upperLength)(LONG newVal);
+
+public:
+    STDMETHOD(get_kernel)(IKernelPointer** pVal);
+    STDMETHOD(putref_kernel)(IKernelPointer* newVal);
 };
 

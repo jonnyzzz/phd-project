@@ -49,6 +49,16 @@ __interface ISubdevidePointParams : ISubdevideParams {
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[
+    object,
+    uuid("18C498C5-231C-4F6A-A401-3C76F5D9D7A8"),
+    dual,
+    pointer_default(unique)
+]
+__interface IKernelPointer : IDispatch {
+
+};
+
 
 [
 	object,
@@ -57,6 +67,12 @@ __interface ISubdevidePointParams : ISubdevideParams {
 	pointer_default(unique)
 ]
 __interface IKernelNode : IDispatch {
+
+    [propget, id(91), helpstring("property kernel, IKernel")]  
+		HRESULT kernel([out, retval] IKernelPointer** pVal);  
+
+	[propputref, id(91), helpstring("property kernel, IKernel")] 
+        HRESULT kernel([in] IKernelPointer* newVal);  	
 };
 
 [
@@ -132,6 +148,7 @@ __interface IExportData {
 
 ///////////////////////////// node result /////////////////////////////
 
+//todo: Implement interfaces and dynamic methods investigation!
 [
 	object,
 	uuid("EA038030-124F-4F15-ACD4-E0500C5110A3"),
@@ -166,36 +183,6 @@ __interface IComputationGraphResult : IComputationResult {
 __interface IComputationMorseResult : IComputationResult {
 	[id(62), helpstring("Just return result")]
 	HRESULT toResult();
-};
-
-/////////////////////////////////// events /////////////////////////
-[
-	dual,
-	uuid("A05EF93D-10B9-41ED-AF38-BC0193FDFF96"),
-	pointer_default(unique),	
-	helpstring("This is main event to listen. Should be implemented any way")
-]
-__interface AbstractComputationEvent {
-	[id(41)]
-		HRESULT noChilds();
-	[id(42)]
-		HRESULT noImplementation();
-};
-
-[
-	dual,
-	uuid("169609CE-174B-42E4-8883-CB7216088969"),
-	pointer_default(unique)
-]
-__interface AbstractEvent{
-	[id(43)]
-		HRESULT newComputationResult([in] IComputationResult* result);
-	[id(44)]
-		HRESULT newKernelNode([in] IKernelNode* node);
-	[id(45)]
-		HRESULT noImplementation();
-	[id(46)]
-		HRESULT noChilds();
 };
 
 ////////////////////////////// group //////////////////////////

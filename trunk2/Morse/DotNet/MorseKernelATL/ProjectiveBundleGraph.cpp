@@ -47,7 +47,7 @@ STDMETHODIMP CProjectiveBundleGraph::getGraph(void** graph) {
 }
 
 
-STDMETHODIMP CProjectiveBundleGraph::get_kernel(IKernel** pVal)
+STDMETHODIMP CProjectiveBundleGraph::get_kernel(IKernelPointer** pVal)
 {
 	if (kernel != NULL) {
 		kernel->QueryInterface(pVal);
@@ -55,13 +55,13 @@ STDMETHODIMP CProjectiveBundleGraph::get_kernel(IKernel** pVal)
 	return S_OK;
 }
 
-STDMETHODIMP CProjectiveBundleGraph::putref_kernel(IKernel* newVal)
+STDMETHODIMP CProjectiveBundleGraph::putref_kernel(IKernelPointer* newVal)
 {
-	if (newVal != NULL) {
-		SAFE_RELEASE(kernel);
+	SAFE_RELEASE(kernel);
 
-		newVal->QueryInterface(&kernel);
-	}
+	newVal->QueryInterface(&kernel);
+
+    ATLASSERT(kernel != NULL);
 
 	return S_OK;
 }

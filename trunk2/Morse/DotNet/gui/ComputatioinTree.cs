@@ -1,15 +1,12 @@
 using System;
-using System.Collections;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Windows.Forms;
+using MorseKernelATL;
 
 namespace gui
 {
 	public delegate void ContextMenuBeforeOpenEvent(ComputationNode node);
 	public delegate void MouseMoveComponentEvent(ComputationNode node);
-    public delegate void RemoveNodeEvent(ComputationNode node);
 
 	/// <summary>
 	/// Summary description for ComputatioinTree.
@@ -17,8 +14,7 @@ namespace gui
 	public class ComputatioinTree : System.Windows.Forms.UserControl
 	{
 		public event ContextMenuBeforeOpenEvent NodeMenuBeforeOpen;
-		public event MouseMoveComponentEvent MouseMoveNode;
-        public event RemoveNodeEvent RemoveNode;
+		public event MouseMoveComponentEvent MouseMoveNode;        
 
 		private System.Windows.Forms.TreeView tree;
 		/// <summary> 
@@ -106,6 +102,10 @@ namespace gui
 				tree.Nodes.Clear();
 				tree.Nodes.Add(value);
 			}
+            get
+            {
+                return tree.Nodes.GetEnumerator().Current as ComputationNode;
+            }
 		}
 
 		public void DeselectAll()
@@ -177,5 +177,11 @@ namespace gui
 			if (e.Node is ComputationNode)
 				ComputationNode.OnAfterCheckClick(e.Node as ComputationNode);
 		}
+
+
+        public ComputationNode findNodeByKernelNode(IKernelNode node)
+        {
+            return ComputationNode.fromIKernelNode(node);
+        }
 	}
 }

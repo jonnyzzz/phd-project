@@ -17,22 +17,4 @@
 ]
 __interface IProjectiveBundle : IGraph
 {
-	[propget, id(1), helpstring("property kernel")] 
-		HRESULT kernel([out, retval] IKernel** pVal);
-	[propputref, id(1), helpstring("property kernel")] 
-		HRESULT kernel([in] IKernel* newVal);
 };
-
-[
-	dual,
-	uuid("A9EBC232-AB43-43EA-89E6-6710FDD35342"),
-	helpstring("Events for Projective Bundle Class"),
-	pointer_default(unique)
-]
-__interface IProjectiveBundleEvents {
-	[id(36), helpstring("Computation result")]
-		HRESULT newChildProjectiveBundle([in] IProjectiveBundle* pb);
-	[id(37), helpstring("Computation result")]
-		HRESULT newChildMorseSpectrum([in] IMorseSpectrum* ms);
-};
-

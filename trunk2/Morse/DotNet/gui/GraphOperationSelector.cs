@@ -20,7 +20,8 @@ namespace gui
 
 		public GraphOperationSelector()
 		{
-			//
+		    Console.Out.WriteLine("GraphOperationSelector: Creation");
+		    //
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();

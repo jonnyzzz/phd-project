@@ -1,6 +1,7 @@
 // ComputationGraphResult.cpp : Implementation of CComputationGraphResult
 
 #include "stdafx.h"
+#include "kernel.h"
 #include "ComputationGraphResult.h"
 
 
@@ -22,7 +23,7 @@ void CComputationGraphResult::FinalRelease() {
 
 STDMETHODIMP CComputationGraphResult::StrongComponents() {
 	GraphComponents* cms = graph->localazeStrongComponents();
-
+    
 	node->acceptChilds((void**)&cms); //note: cms should be deleted by node object
 	
 	return S_OK;
@@ -45,6 +46,7 @@ STDMETHODIMP CComputationGraphResult::Loops() {
 	cms->addGraphAsComponent(graph->localizeLoops());
 
 	node->acceptChilds((void**)&cms);
+
 	return S_OK;
 }
 
@@ -59,7 +61,8 @@ STDMETHODIMP CComputationGraphResult::setRootGraph(void ** agraph) {
 }
 
 STDMETHODIMP CComputationGraphResult::setGraphNode(IGraph* graphNode) {
-	SAFE_DELETE(this->node);
+	
+    SAFE_RELEASE(this->node);
 
 	graphNode->QueryInterface(&this->node);
 

@@ -34,11 +34,6 @@ void CKernel::FinalRelease() {
 	
 }
 
-
-void CKernel::RaiseInternalExceptionEvent(const KernelException& ex) {
-	__raise InternalException(ex.getMessage().AllocSysString());
-}
-
 void CKernel::print(ostream& o) {	
 	o<<"Kernel:\n";
 
@@ -85,13 +80,7 @@ STDMETHODIMP CKernel::CreateRootSymbolicImage(IKernelNode** pVal) {
 
 	*pVal = (IKernelNode*)im;
 
-#ifdef _DEBUG
-	cout<<"\nvDEBUG\n";
-#else
-	cout<<"\nvRELEASE\n";
-#endif
-	
-	return S_OK;
+    return S_OK;
 }
 
 STDMETHODIMP CKernel::CreateSymbolicImageGroup(IKernelNode **node) {
@@ -119,4 +108,35 @@ STDMETHODIMP CKernel::CreateProjectiveBundleGroup(IKernelNode **node) {
 	*node = group;
 
 	return S_OK;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+///     Events
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+void CKernel::RaiseInternalExceptionEvent(const KernelException& ex) {
+	__raise InternalException(ex.getMessage().AllocSysString());
+}
+
+
+STDMETHODIMP CKernel::EventNewComputationResult(IKernelNode* nodeParent, IComputationResult* result) {
+    cout<<"newComputationResult Event \n";
+    __raise newComputationResult(nodeParent, result);
+    return S_OK;
+}
+
+STDMETHODIMP CKernel::EventNewNode(IKernelNode* nodeParent, IKernelNode* nodeChild) {
+    __raise newKernelNode(nodeParent, nodeChild);
+    return S_OK;
+}
+
+STDMETHODIMP CKernel::EventNoChilds(IKernelNode* nodeParent) {
+   __raise noChilds(nodeParent);
+   return S_OK;
+}
+
+STDMETHODIMP CKernel::EventNoImplementation(IKernelNode* nodeParent) {
+    __raise noImplementation(nodeParent);
+    return S_OK;
 }

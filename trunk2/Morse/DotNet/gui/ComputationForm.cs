@@ -542,8 +542,40 @@ namespace gui
 
 		private void menuItemGC_Click(object sender, System.EventArgs e)
 		{
-			System.GC.Collect(System.GC.MaxGeneration);
-			
+			System.GC.Collect(System.GC.MaxGeneration);			
 		}
+
+        public void OnNewNode(IKernelNode parent, IKernelNode child)
+        {
+            ComputationNode node = computatioinTree.findNodeByKernelNode(parent);
+            Console.Out.WriteLine("Found node: {0}", node.Text);
+            node.newNode(child);            
+        }
+
+        public void OnNewComputationResult(IKernelNode parent, IComputationResult result)
+        {
+            Console.Out.WriteLine("here!");
+            
+            ComputationNode node = computatioinTree.findNodeByKernelNode(parent);
+            
+            Console.Out.WriteLine("Found node: {0}", node.Text);
+      
+            GraphOperationSelector go = new GraphOperationSelector();
+            if (go.ShowModal(null, node, result) == DialogResult.OK)
+            {
+                go.DoSelected();
+            }
+        }
+
+        public void noChilds(IKernelNode node)
+        {
+            MessageBox.Show("No strongs components were found.", "Computation results");
+        }
+
+        public void noImplementation(IKernelNode node) 
+        {
+            MessageBox.Show("No implementation for that action. Sorry,", "Computation results");
+        }
+
 	}
 }

@@ -15,7 +15,7 @@ static char THIS_FILE[] = __FILE__;
 //////////////////////////////////////////////////////////////////////
 
 AbstractPointBuilder::AbstractPointBuilder(Graph* graph,  int* factor, int* ks, ProgressBarInfo* info) :
-dimension(graph->getDimention()), factor(factor), ks(ks), AbstractProcess(graph, info)
+dimension(graph->getDimention()), AbstractProcess(graph, info)
 {
 	 x   = NULL;
 	 x0  = new JDouble[dimension];
@@ -25,9 +25,17 @@ dimension(graph->getDimention()), factor(factor), ks(ks), AbstractProcess(graph,
 
 	 b = new JInt[dimension + 1];
 	 c = new JInt[dimension + 1];
+
 	 tpoint = new JInt[dimension+1];
 	 point = new JInt[dimension+1];
-	 
+
+     this->ks = new int[dimension + 1];
+     this->factor = new int[dimension + 1];
+
+     for (int i=0; i<dimension; i++) {
+         this->factor[i] = factor[i];
+         this->ks[i] = ks[i];
+     }	 
 }
 
 AbstractPointBuilder::~AbstractPointBuilder()
@@ -42,6 +50,9 @@ AbstractPointBuilder::~AbstractPointBuilder()
 
 	delete[] eps;
 	delete[] tpoint;
+
+    delete[] ks;
+    delete[] factor;
 }
 
 

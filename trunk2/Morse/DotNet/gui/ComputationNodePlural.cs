@@ -12,7 +12,7 @@ namespace gui
 	{
 		private ArrayList nodes = new ArrayList();
 		
-		public ComputationNodePlural()
+		public ComputationNodePlural() : base()
 		{
 			
 		}

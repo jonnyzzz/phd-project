@@ -33,7 +33,6 @@ __interface ISymbolicImageGraph : ISymbolicImage
 	version(1.0),
 	uuid("A3AE65EC-004B-4CA9-937B-12565400662C"),
 	helpstring("SymbolicImageGraph Class"),
-	event_source("com")
 ]
 class ATL_NO_VTABLE CSymbolicImageGraph : 
 	public ISymbolicImageGraph,
@@ -52,16 +51,13 @@ public:
 	
 	void FinalRelease(); 
 
-	__event __interface AbstractEvent;
-	__event __interface ISymbolicImageEvents;	
-
 private:
 	Graph* graph;
 	IKernel* kernel;
 
 public:
-	STDMETHOD(get_kernel)(IKernel** pVal);
-	STDMETHOD(putref_kernel)(IKernel* newVal);
+    STDMETHOD(get_kernel)(IKernelPointer** pVal);
+    STDMETHOD(putref_kernel)(IKernelPointer* newVal);
 	
 	STDMETHOD(graphDimension)(int* value);
 	STDMETHOD(graphInfo)(IGraphInfo** info);

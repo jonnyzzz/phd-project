@@ -23,7 +23,7 @@ namespace gui
 
 		public static ComputationNodeDynamicTestResult parseNode(IKernelNode mnode)
 		{
-			if (mnode is IGraph) // a base class for all graph-node
+			if (mnode is IGraph) // a base class for all graph-nodes
 			{
 				return parseNode(mnode as IGraph);
 			}

@@ -34,9 +34,10 @@ STDMETHODIMP CProjectiveBundleGroup::addNode(IProjectiveBundleGraph* graph) {
 	nodeList.push_back(graph);
 
 	if (kernel == NULL) {
-		IKernel* krnl;
+		IKernelPointer* krnl;
 		graph->get_kernel(&krnl);
 		putref_kernel(krnl);
+        krnl->Release();
 	}
 	return S_OK;
 }
@@ -51,22 +52,20 @@ STDMETHODIMP CProjectiveBundleGroup::nodeCount(int *val) {
 	return S_OK;
 }
 
-STDMETHODIMP CProjectiveBundleGroup::get_kernel(IKernel** pVal)
+STDMETHODIMP CProjectiveBundleGroup::get_kernel(IKernelPointer** pVal)
 {
-	if (kernel != NULL) {
-		kernel->QueryInterface(pVal);
-	}
+    ATLASSERT(kernel != NULL);
+	kernel->QueryInterface(pVal);
 	return S_OK;
 }
 
-STDMETHODIMP CProjectiveBundleGroup::putref_kernel(IKernel* newVal)
+STDMETHODIMP CProjectiveBundleGroup::putref_kernel(IKernelPointer* newVal)
 {
-	if (newVal != NULL) {
-		SAFE_RELEASE(kernel);
+	SAFE_RELEASE(kernel);
 
-		newVal->QueryInterface(&kernel);
-	}
+	newVal->QueryInterface(&kernel);
 
+    ATLASSERT(kernel != NULL);
 	return S_OK;
 }
 

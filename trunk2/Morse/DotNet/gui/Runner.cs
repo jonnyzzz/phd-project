@@ -38,17 +38,14 @@ namespace gui
 			new Runner();			
 		}
 
-
-		IKernelEvents_InternalExceptionEventHandler p;
-
 		public Runner()
 		{	
 			instance = this;
-			Application.ApplicationExit +=new EventHandler(OnApplicationExit);
+			Application.ApplicationExit += new EventHandler(OnApplicationExit);
 
 			kernel = new CKernelClass();
 			
-			kernel.InternalException += p = new IKernelEvents_InternalExceptionEventHandler(interalKernellException);
+            registerEvents();			
 
 			computationForm = new ComputationForm();
 
@@ -57,10 +54,31 @@ namespace gui
 			//Application.Run(new Visualization3D(true));
 		}
 
+        private void registerEvents()
+        {
+            Console.Out.WriteLine("Registering global evetns...");
+            kernel.InternalException += new IKernelEvents_InternalExceptionEventHandler(interalKernellException);
+            kernel.newComputationResult += new IKernelEvents_newComputationResultEventHandler(kernel_newComputationResult);
+            kernel.newKernelNode += new IKernelEvents_newKernelNodeEventHandler(kernel_newKernelNode);
+            kernel.noChilds += new IKernelEvents_noChildsEventHandler(kernel_noChilds);
+            kernel.noImplementation += new IKernelEvents_noImplementationEventHandler(kernel_noImplementation);
+        }
+
+        private void unregisterEvents()
+        {
+            Console.Out.WriteLine("Unregistering global events...");
+            kernel.InternalException -= new IKernelEvents_InternalExceptionEventHandler(interalKernellException);
+            kernel.newComputationResult -= new IKernelEvents_newComputationResultEventHandler(kernel_newComputationResult);
+            kernel.newKernelNode -= new IKernelEvents_newKernelNodeEventHandler(kernel_newKernelNode);
+            kernel.noChilds -= new IKernelEvents_noChildsEventHandler(kernel_noChilds);
+            kernel.noImplementation -= new IKernelEvents_noImplementationEventHandler(kernel_noImplementation);                       
+        }
+
+
 		private void OnApplicationExit(object sender, EventArgs e)
 		{
 			instance = null;
-			kernel.InternalException -= p;
+			unregisterEvents();
 		}
 
 
@@ -76,6 +94,27 @@ namespace gui
 		private void interalKernellException(string message)
 		{
 			Console.Out.WriteLine("DLL Exception :" + message);
-		}
-	}
+        }
+
+        private void kernel_newComputationResult(IKernelNode nodeParent, IComputationResult result)
+        {
+            Console.Out.WriteLine("NewComputationResult");
+            computationForm.OnNewComputationResult(nodeParent, result);
+        }
+
+        private void kernel_newKernelNode(IKernelNode nodeParent, IKernelNode node)
+        {
+            computationForm.OnNewNode(nodeParent, node);
+        }
+
+        private void kernel_noChilds(IKernelNode nodeParent)
+        {
+            computationForm.noChilds(nodeParent);
+        }
+
+        private void kernel_noImplementation(IKernelNode nodeParent)
+        {
+            computationForm.noImplementation(nodeParent);
+        }
+    }
 }

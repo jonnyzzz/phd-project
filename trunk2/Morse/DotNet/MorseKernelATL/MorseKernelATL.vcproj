@@ -341,6 +341,9 @@
 				RelativePath=".\NodeBase.h">
 			</File>
 			<File
+				RelativePath=".\NodeBaseEvents.h">
+			</File>
+			<File
 				RelativePath=".\ProjectiveBundle.h">
 			</File>
 			<File

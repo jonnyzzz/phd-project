@@ -40,11 +40,12 @@ void CSymbolicImageGroup::FinalRelease() {
 STDMETHODIMP CSymbolicImageGroup::addNode(ISymbolicImageGraph* im) {
 	im->AddRef();
 	nodeList.push_back(im);
-
-	if (kernel == NULL) {
-		IKernel* krnl;
-		im->get_kernel(&krnl);
-		putref_kernel(krnl);
+   
+	if (kernel == NULL) {		
+        IKernelPointer* ukernel;
+		im->get_kernel(&ukernel);
+		putref_kernel(ukernel);
+        ukernel->Release();
 	}
 	return S_OK;
 }
@@ -60,21 +61,18 @@ STDMETHODIMP CSymbolicImageGroup::nodeCount(int* val) {
 	return S_OK;
 }
 
-STDMETHODIMP CSymbolicImageGroup::get_kernel(IKernel** pVal)
+STDMETHODIMP CSymbolicImageGroup::get_kernel(IKernelPointer** pVal)
 {
-	if (kernel != NULL) {
-		kernel->QueryInterface(pVal);
-	}
+	kernel->QueryInterface(pVal);
 	return S_OK;
 }
 
-STDMETHODIMP CSymbolicImageGroup::putref_kernel(IKernel* newVal)
+STDMETHODIMP CSymbolicImageGroup::putref_kernel(IKernelPointer* newVal)
 {
-	if (newVal != NULL) {
-		SAFE_RELEASE(kernel);
-
-		newVal->QueryInterface(&kernel);
-	}
+	SAFE_RELEASE(kernel);
+	newVal->QueryInterface(&kernel);
+    
+    ATLASSERT(kernel != NULL);
 
 	return S_OK;
 }
@@ -107,7 +105,7 @@ STDMETHODIMP CSymbolicImageGroup::Extend(IExtendableParams* params) {
 	GraphComponents* cmst = createGraphComponents();
 
 	if (cmst->length() == 0) {
-		__raise noChilds();
+        kernel->EventNoChilds(this);		
 		delete cmst;
 		return S_OK;
 	}
@@ -132,8 +130,7 @@ STDMETHODIMP CSymbolicImageGroup::Extend(IExtendableParams* params) {
 	im->putref_kernel(kernel);
 	im->setGraph((void*)result);		
 
-	__raise newChildProjectiveBundle(im);
-	__raise newKernelNode(im);
+    kernel->EventNewNode(this, im);
 	
 	pinfo->finish();
 	delete pinfo;
@@ -154,7 +151,7 @@ STDMETHODIMP CSymbolicImageGroup::Subdevide(ISubdevideParams* params) {
 	GraphComponents* cmst = createGraphComponents();
 
 	if (cmst->length() == 0) {
-		__raise noChilds();
+        kernel->EventNoChilds(this);
 		delete cmst;
 		return S_OK;
 	}
@@ -187,7 +184,7 @@ STDMETHODIMP CSymbolicImageGroup::Subdevide(ISubdevideParams* params) {
 	SAFE_RELEASE(function);
 	delete[] factor;
 
-	__raise newComputationResult(ret);
+    kernel->EventNewComputationResult(this, ret);
 
 	pinfo->finish();
 	delete pinfo;
@@ -209,7 +206,7 @@ STDMETHODIMP CSymbolicImageGroup::SubdevidePoint(ISubdevidePointParams* params) 
 	GraphComponents* cmst = createGraphComponents();
 
 	if (cmst->length() == 0) {
-		__raise noChilds();
+        kernel->EventNoChilds(this);
 		delete cmst;
 		return S_OK;
 	}
@@ -244,7 +241,7 @@ STDMETHODIMP CSymbolicImageGroup::SubdevidePoint(ISubdevidePointParams* params) 
 	delete[] ks;
 	delete cmst;
 
-	__raise newComputationResult(ret);
+    kernel->EventNewComputationResult(this, ret);
 
 	pinfo->finish();
 	delete pinfo;
@@ -267,11 +264,11 @@ STDMETHODIMP CSymbolicImageGroup::acceptChilds(void** data) {
 		Graph* graph = cms->getAt(i);
 		ret->setGraph((void*)graph);	
 
-		__raise newKernelNode(ret);
+        kernel->EventNewNode(this, ret);		
 	}
 
 	if (cms->length() == 0) {
-		__raise noChilds();
+        kernel->EventNoChilds(this);
 	}
 	
 	cout<<cms->length()<<" nodes was added \n";

@@ -32,7 +32,6 @@ __interface IProjectiveBundleGraph : IProjectiveBundle
 	version(1.0),
 	uuid("0FF20A2F-2518-4146-838A-EB5C0B42DD7B"),
 	helpstring("ProjectiveBundleGraph Class"),
-	event_source("com")
 ]
 class ATL_NO_VTABLE CProjectiveBundleGraph : 
 	public IProjectiveBundleGraph,
@@ -51,9 +50,6 @@ public:
 	
 	void FinalRelease();
 	
-	__event __interface AbstractEvent;
-	__event __interface IProjectiveBundleEvents;
-
 private:
 	IKernel* kernel;
 	Graph* graph;
@@ -63,8 +59,8 @@ public:
 	STDMETHOD(setGraph)(void* graph);
 	STDMETHOD(getGraph)(void** graph);
 
-	STDMETHOD(get_kernel)(IKernel** pVal);
-	STDMETHOD(putref_kernel)(IKernel* newVal);
+	STDMETHOD(get_kernel)(IKernelPointer** pVal);
+	STDMETHOD(putref_kernel)(IKernelPointer* newVal);
 
 	STDMETHOD(acceptChilds)(void** data) { return S_OK;}
 

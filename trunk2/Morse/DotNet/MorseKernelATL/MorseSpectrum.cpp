@@ -77,3 +77,23 @@ STDMETHODIMP CMorseSpectrum::put_upperLength(LONG newVal)
 
 	return S_OK;
 }
+
+STDMETHODIMP CMorseSpectrum::get_kernel(IKernelPointer** pVal)
+{
+	kernel->QueryInterface(pVal);
+	
+	ATLASSERT(pVal != NULL);
+
+	return S_OK;
+}
+
+STDMETHODIMP CMorseSpectrum::putref_kernel(IKernelPointer* newVal)
+{
+	SAFE_RELEASE(kernel);
+
+	newVal->QueryInterface(&kernel);
+
+	ATLASSERT(kernel != NULL);
+
+	return S_OK;
+}

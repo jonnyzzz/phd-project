@@ -28,7 +28,6 @@ __interface IComputationGraphResultExt : IComputationGraphResult
 [
 	coclass,
 	threading("apartment"),
-	event_source("com"),
 	vi_progid("MorseKernelATL.ComputationGraphResult"),
 	progid("MorseKernelATL.ComputationGraphResult.1"),
 	version(1.0),
@@ -41,17 +40,11 @@ class ATL_NO_VTABLE CComputationGraphResult :
 public:
 	CComputationGraphResult();
 
-	__event __interface AbstractComputationEvent;
-
-
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
 	HRESULT FinalConstruct();
 	
 	void FinalRelease();
-public:
-
-
 
 private:
 	Graph* graph;
@@ -64,4 +57,3 @@ public:
 	STDMETHOD( setRootGraph) (void ** graph);
 	STDMETHOD( setGraphNode) (IGraph* graphNode);
 };
-

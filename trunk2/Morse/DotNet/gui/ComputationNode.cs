@@ -1,131 +1,161 @@
 using System;
+using System.Collections;
 using MorseKernelATL;
 
 namespace gui
 {
-	/// <summary>
-	/// Summary description for ComputationNode.
-	/// </summary>
-	/// 
+    /// <summary>
+    /// Summary description for ComputationNode.
+    /// </summary>
+    /// 
+    public abstract class ComputationNode : NodeInformation
+    {
+        protected abstract ComputationNodeMenuItem[] getMenuItems();
 
-   public abstract class ComputationNode : NodeInformation
-	{
-		protected abstract ComputationNodeMenuItem[] getMenuItems();
-		
-		ComputationNodePlural currentGroup = null;
-		public virtual ComputationNodePlural CurrentGroup
-		{
-			get
-			{
-				return currentGroup;
-			}
-			set
-			{
-				currentGroup = value;
-			}
-		}
+        ComputationNodePlural currentGroup = null;
 
-		#region Class Members...
-		public ComputationNode() : base() 
-		{
-			this.Checked = false;			            
-		}
+        public virtual ComputationNodePlural CurrentGroup
+        {
+            get { return currentGroup; }
+            set { currentGroup = value; }
+        }
 
-		public ComputationNodeMenuItem[] MenuItems  
-		{
-			get
-			{
-				ComputationNodeMenuItem[] items = getMenuItems();			
-				if (IsSelected)
-				{
-					items = merge(items,
-						new ComputationNodeMenuItem[]
-									{
-										ComputationNodeMenuFactory.DelimeterItem(),
-										ComputationNodeMenuFactory.DeselectItem(this.TreeView)
-									});
-				}
+        #region Class Members...
 
-				if (CurrentGroup != null)
-				{
-					items = merge(items, new ComputationNodeMenuItem[] {
-						ComputationNodeMenuFactory.DelimeterItem()});
-					items = merge(items, 
-						addPrefix(currentGroup.MenuItems, "Group: "));
-				}
+        public ComputationNode() : this(null)
+        {
+        }
 
-				if (items.Length == 0 )
-				{
-					items = new ComputationNodeMenuItem[] {
-							ComputationNodeMenuFactory.Empty()
-						};
-				}
-				return items;
-			}
-		}
+        public ComputationNode(IKernelNode node) : base()
+        {
+            table.Add(node, this);
+            this.node = node;
+            this.Checked = false;
+        }
 
-		protected ComputationNodeMenuItem[] merge(ComputationNodeMenuItem[] a, ComputationNodeMenuItem[] b)
-		{
-			ComputationNodeMenuItem[] c = new ComputationNodeMenuItem[a.Length + b.Length];
-			int cn = 0;
-			for (int i=0; i<a.Length; c[cn++] = a[i++]);
-			cn = a.Length;
-			for (int i=0; i<b.Length; c[cn++] = b[i++]);
-			return c;
-		}
+        private IKernelNode node;
 
-		protected ComputationNodeMenuItem[] addPrefix(ComputationNodeMenuItem[] a, string prefix)
-		{
-			ComputationNodeMenuItem[] ret = new ComputationNodeMenuItem[a.Length];
-			for (int i=0; i<a.Length; i++)
-			{
-				if (a[i].Text == "-")
-				{
-					ret[i] = ComputationNodeMenuFactory.getMenuRenameAdapter(a[i], a[i].Text);
-				} 
-				else 
-				{
-					ret[i] = ComputationNodeMenuFactory.getMenuRenameAdapter(a[i], prefix + a[i].Text);
-				}
-			}
-			return ret;
-		}
-		#endregion
+        public IKernelNode Node
+        {
+            get { return node; }
+        }
 
-		public static ComputationNode createComputationNode(IKernelNode node)
-		{
-			ComputationNode cnode = new ComputationNodeSingular(node);			
-			return cnode;
-		}
+        public virtual void newNode(IKernelNode node)
+        {
+            Nodes.Add(ComputationNode.createComputationNode(node));
+            Expand();
+        }
 
-		public static ComputationNode createComputationNodeForGroup(IKernelNode node, ComputationNode addin)
-		{
-			return new ComputationNodeSingular(node);
-		}
+        public ComputationNodeMenuItem[] MenuItems
+        {
+            get
+            {
+                ComputationNodeMenuItem[] items = getMenuItems();
+                if (IsSelected)
+                {
+                    items = merge(items,
+                                  new ComputationNodeMenuItem[]
+                                      {
+                                          ComputationNodeMenuFactory.DelimeterItem(),
+                                          ComputationNodeMenuFactory.DeselectItem(this.TreeView)
+                                      });
+                }
 
-		public static void OnAfterCheckClick(ComputationNode node)
-		{
-			node.OnAfterCheck();
-		}
+                if (CurrentGroup != null)
+                {
+                    items = merge(items, new ComputationNodeMenuItem[]
+                        {
+                            ComputationNodeMenuFactory.DelimeterItem()
+                        });
+                    items = merge(items,
+                                  addPrefix(currentGroup.MenuItems, "Group: "));
+                }
 
-		private void OnAfterCheck()
-		{
-			Console.Out.WriteLine("Node: {0}\n", this.Checked);
-			if (this.Checked)
-			{
-				if (this.currentGroup == null)
-				{
-					this.CurrentGroup = ComputationNodePlural.getCurrentGroup();
-				}
-				this.CurrentGroup.addNode(this);
-			} 
-			else
-			{
-				if (this.CurrentGroup != null) 
-				{
-					this.CurrentGroup.removeNode(this);
-				}				
-			}						
-		}
-	}
+                if (items.Length == 0)
+                {
+                    items = new ComputationNodeMenuItem[]
+                        {
+                            ComputationNodeMenuFactory.Empty()
+                        };
+                }
+                return items;
+            }
+        }
+
+        protected ComputationNodeMenuItem[] merge(ComputationNodeMenuItem[] a, ComputationNodeMenuItem[] b)
+        {
+            ComputationNodeMenuItem[] c = new ComputationNodeMenuItem[a.Length + b.Length];
+            int cn = 0;
+            for (int i = 0; i < a.Length; c[cn++] = a[i++]) ;
+            cn = a.Length;
+            for (int i = 0; i < b.Length; c[cn++] = b[i++]) ;
+            return c;
+        }
+
+        protected ComputationNodeMenuItem[] addPrefix(ComputationNodeMenuItem[] a, string prefix)
+        {
+            ComputationNodeMenuItem[] ret = new ComputationNodeMenuItem[a.Length];
+            for (int i = 0; i < a.Length; i++)
+            {
+                if (a[i].Text == "-")
+                {
+                    ret[i] = ComputationNodeMenuFactory.getMenuRenameAdapter(a[i], a[i].Text);
+                }
+                else
+                {
+                    ret[i] = ComputationNodeMenuFactory.getMenuRenameAdapter(a[i], prefix + a[i].Text);
+                }
+            }
+            return ret;
+        }
+
+        #endregion
+
+        #region Static Features
+
+        public static ComputationNode createComputationNode(IKernelNode node)
+        {
+            ComputationNode cnode = new ComputationNodeSingular(node);
+            return cnode;
+        }
+
+        public static ComputationNode createComputationNodeForGroup(IKernelNode node, ComputationNode addin)
+        {
+            return new ComputationNodeSingular(node);
+        }
+
+        public static void OnAfterCheckClick(ComputationNode node)
+        {
+            node.OnAfterCheck();
+        }
+
+        private void OnAfterCheck()
+        {
+            Console.Out.WriteLine("Node: {0}\n", this.Checked);
+            if (this.Checked)
+            {
+                if (this.currentGroup == null)
+                {
+                    this.CurrentGroup = ComputationNodePlural.getCurrentGroup();
+                }
+                this.CurrentGroup.addNode(this);
+            }
+            else
+            {
+                if (this.CurrentGroup != null)
+                {
+                    this.CurrentGroup.removeNode(this);
+                }
+            }
+        }
+
+        #endregion
+
+        public static Hashtable table = new Hashtable();
+
+        public static ComputationNode fromIKernelNode(IKernelNode node)
+        {
+            return table[node] as ComputationNode;
+        }
+    }
 }

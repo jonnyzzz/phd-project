@@ -33,8 +33,7 @@ SIComputationProcess::SIComputationProcess(Function* function, Graph* graph, JIn
 	 for (int i=0; i<dimention; i++) {
 		 this->factor[i] = factor[i];
 	 }
-	 
-	 
+	 	 
 	 dest = createGraph();
 }
 

@@ -1,3 +1,4 @@
+
 // SymbolicImageGraph.cpp : Implementation of CSymbolicImageGraph
 
 #include "stdafx.h"
@@ -11,7 +12,6 @@
 #include "ComputationGraphResult.h"
 
 // CSymbolicImageGraph
-
 
 
 CSymbolicImageGraph::CSymbolicImageGraph() {
@@ -65,7 +65,7 @@ STDMETHODIMP CSymbolicImageGraph::Subdevide(ISubdevideParams* params) {
 	res->setRootGraph((void**)&result);
 	res->setGraphNode(this);
 
-    __raise newComputationResult(res);
+    kernel->EventNewComputationResult(this, res);
 
 	delete[] factor;
 	SAFE_RELEASE(function);
@@ -112,8 +112,9 @@ STDMETHODIMP CSymbolicImageGraph::SubdevidePoint(ISubdevidePointParams* params) 
 	delete[] ks;
 	SAFE_RELEASE(function);	
 
-	__raise newComputationResult(res);
+	kernel->EventNewComputationResult(this, res);
 
+    res->Release();
 	pinfo->finish();
 	delete pinfo;
 
@@ -123,7 +124,7 @@ STDMETHODIMP CSymbolicImageGraph::SubdevidePoint(ISubdevidePointParams* params) 
 STDMETHODIMP CSymbolicImageGraph::acceptChilds(void ** data) {
 	GraphComponents *cms = *(GraphComponents**)data;
 
-	cout<<"Accept childs\n";
+	cout<<"\n------>Accept childs\n";
 
 	for (int i=0; i<cms->length(); i++) {
 		ISymbolicImageGraph* ret;
@@ -135,11 +136,11 @@ STDMETHODIMP CSymbolicImageGraph::acceptChilds(void ** data) {
 		Graph* graph = cms->getAt(i);
 		ret->setGraph((void*)graph);	
 
-		__raise newKernelNode(ret);
+        kernel->EventNewNode(this, ret);
 	}
 
 	if (cms->length() == 0) {
-		__raise noChilds();
+        kernel->EventNoChilds(this);        
 	}
 	
 	cout<<cms->length()<<" nodes was added \n";
@@ -186,8 +187,7 @@ STDMETHODIMP CSymbolicImageGraph::Extend(IExtendableParams* params) {
 	im->putref_kernel(kernel);
 	im->setGraph((void*)result);			
 
-	__raise newChildProjectiveBundle(im);
-	__raise newKernelNode(im);
+    kernel->EventNewNode(this, im);
 
 	delete[] factor;
 	pinfo->finish();
@@ -214,25 +214,22 @@ STDMETHODIMP CSymbolicImageGraph::getGraph(void** graph) {
 	return S_OK;
 }
 
-STDMETHODIMP CSymbolicImageGraph::get_kernel(IKernel** pVal)
+STDMETHODIMP CSymbolicImageGraph::get_kernel(IKernelPointer** pVal)
 {
-	if (kernel != NULL) {
-		kernel->QueryInterface(pVal);
-		
-		ATLASSERT(pVal != NULL);
-	}
+	kernel->QueryInterface(pVal);
+	
+	ATLASSERT(pVal != NULL);
+
 	return S_OK;
 }
 
-STDMETHODIMP CSymbolicImageGraph::putref_kernel(IKernel* newVal)
+STDMETHODIMP CSymbolicImageGraph::putref_kernel(IKernelPointer* newVal)
 {
-	if (newVal != NULL) {
-		SAFE_RELEASE(kernel);
+	SAFE_RELEASE(kernel);
 
-		newVal->QueryInterface(&kernel);
+	newVal->QueryInterface(&kernel);
 
-		ATLASSERT(kernel != NULL);
-	}
+	ATLASSERT(kernel != NULL);
 
 	return S_OK;
 }

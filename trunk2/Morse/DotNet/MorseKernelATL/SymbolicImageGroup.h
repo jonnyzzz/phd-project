@@ -36,8 +36,7 @@ __interface ISymbolicImageGroup : ISymbolicImage
 	progid("MorseKernelATL.SymbolicImageGroup.1"),
 	version(1.0),
 	uuid("00414483-2F27-43B5-B7A6-68A9E9674CC9"),
-	helpstring("SymbolicImageGroup Class"),
-	event_source("com")
+	helpstring("SymbolicImageGroup Class")
 ]
 class ATL_NO_VTABLE CSymbolicImageGroup : 
 	public ISymbolicImageGroup,
@@ -58,8 +57,6 @@ public:
 	
 	void FinalRelease(); 
 
-	__event __interface AbstractEvent;
-	__event __interface ISymbolicImageEvents;
 
 private:
 	typedef list<ISymbolicImageGraph*> ISymbolicImageList;
@@ -77,8 +74,8 @@ public:
 	STDMETHOD(removeNode)(ISymbolicImageGraph* im);
 	STDMETHOD(nodeCount)(int* val);
 
-	STDMETHOD(get_kernel)(IKernel** pVal);
-	STDMETHOD(putref_kernel)(IKernel* newVal);	
+    STDMETHOD(get_kernel)(IKernelPointer** pVal);
+    STDMETHOD(putref_kernel)(IKernelPointer* newVal);	
 
 	STDMETHOD(acceptChilds)(void** data);
 
@@ -94,4 +91,3 @@ public:
 	STDMETHOD(ExportData)(BSTR fileName);
 	
 };
-

@@ -39,7 +39,6 @@ __interface IProjectiveBundleGroup : IProjectiveBundle
 	version(1.0),
 	uuid("520018A2-475A-4FB5-A780-E1291049BAB5"),
 	helpstring("ProjectiveBundleGroup Class"),
-	event_source("com")
 ]
 class ATL_NO_VTABLE CProjectiveBundleGroup : 
 	public IProjectiveBundleGroup,
@@ -59,9 +58,6 @@ public:
 	
 	
 	void FinalRelease();
-
-	__event __interface AbstractEvent;
-	__event __interface IProjectiveBundleEvents;
 	
 
 private:
@@ -79,8 +75,8 @@ public:
 	STDMETHOD(removeNode)(IProjectiveBundleGraph* graph);
 	STDMETHOD(nodeCount)(int* val);
 
-	STDMETHOD(get_kernel)(IKernel** pVal);
-	STDMETHOD(putref_kernel)(IKernel* newVal);
+	STDMETHOD(get_kernel)(IKernelPointer** pVal);
+	STDMETHOD(putref_kernel)(IKernelPointer* newVal);
 
 	STDMETHOD(acceptChilds)(void** data) { return S_OK;}
 

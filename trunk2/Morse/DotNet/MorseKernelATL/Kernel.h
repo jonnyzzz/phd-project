@@ -12,13 +12,20 @@
 	uuid("7B44B0BB-0C63-4216-80B1-E228565DF73D"),
 	helpstring("IKernelEvent class")
 ]
-__interface IKernelEvents {
-	
+__interface IKernelEvents {	
 	[id(1), helpstring("Exception handler.")] 
-		HRESULT InternalException([in] BSTR message);
-		 
+		HRESULT InternalException([in] BSTR message);		 
 	[id(3)]
 		HRESULT KernelFunctionChanged([in] IFunction* oldFunction, [in] IFunction* newFunction);
+    [id(43)]
+		HRESULT newComputationResult([in] IKernelNode* nodeParent, [in] IComputationResult* result);
+	[id(44)]
+		HRESULT newKernelNode([in] IKernelNode* nodeParent, [in] IKernelNode* node);
+	[id(45)]
+		HRESULT noImplementation([in] IKernelNode* nodeParent);
+	[id(46)]
+		HRESULT noChilds([in] IKernelNode* nodeParent);
+
 		
 };
 
@@ -30,7 +37,7 @@ __interface IKernelEvents {
 	dual,	helpstring("IKernel Interface"),
 	pointer_default(unique)	
 ]
-__interface IKernel : IDispatch
+__interface IKernel : IKernelPointer
 {
 	[propget, id(2),  helpstring("property Function")]
 		HRESULT Function([out, retval] IFunction** pVal);
@@ -44,6 +51,18 @@ __interface IKernel : IDispatch
 		HRESULT CreateSymbolicImageGroup([out, retval] IKernelNode** node);
 	[id(5)]		
 		HRESULT CreateProjectiveBundleGroup([out, retval] IKernelNode** node);
+
+
+    //events optimization
+
+    [id(6)]
+        HRESULT EventNewNode([in] IKernelNode* nodeParent, [in] IKernelNode* nodeChild); 
+    [id(7)]
+        HRESULT EventNewComputationResult([in] IKernelNode* nodeParent, [in] IComputationResult* nodeCResult);        
+    [id(8)]
+        HRESULT EventNoChilds([in] IKernelNode* nodeParent);
+    [id(9)]
+        HRESULT EventNoImplementation([in] IKernelNode* nodeParent);       
 
 }; 
 
@@ -96,5 +115,11 @@ public:
 
 	STDMETHOD(CreateSymbolicImageGroup)(IKernelNode** node);
 	STDMETHOD(CreateProjectiveBundleGroup)(IKernelNode** node);
+
+public:
+    STDMETHOD(EventNewNode)(IKernelNode* nodeParent, IKernelNode* nodeChild);
+    STDMETHOD(EventNewComputationResult)(IKernelNode* parentNode, IComputationResult* nodeCResult);
+    STDMETHOD(EventNoChilds)(IKernelNode* nodeParent);
+    STDMETHOD(EventNoImplementation)(IKernelNode* nodeParent);
 };
 
