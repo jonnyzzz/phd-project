@@ -1,0 +1,134 @@
+using System;
+using System.Collections;
+using System.Windows.Forms;
+using MorseKernelATL;
+
+namespace gui
+{
+	/// <summary>
+	/// Summary description for ComputationNodePlural.
+	/// </summary>
+	public class ComputationNodePlural : ComputationNode
+	{
+		private ArrayList nodes = new ArrayList();
+		
+		public ComputationNodePlural()
+		{
+			
+		}
+
+		protected override ComputationNodeMenuItem[] getMenuItems()
+		{
+			if (nodes.Count == 0 ) 
+				return new ComputationNodeMenuItem[]{};
+					else return new ComputationNodeMenuItem[] {
+						ComputationNodeMenuFactory.getMenuCreateGroupNode(
+							new ComputationNodeMenuFactory.DoCreateGroupNode(onCreateNode)
+																  ) 
+															  };
+		}		
+
+		private void onCreateNode()
+		{
+			ComputationNodeSingular node = (nodes[0] as ComputationNodeSingular);
+			IKernelNode kernelNode = null;
+			if (node.Node is CSymbolicImageGraph)
+			{
+				CSymbolicImageGroup gr = Runner.Kernel.CreateSymbolicImageGroup() as CSymbolicImageGroup;
+				foreach (ComputationNodeSingular nodeSingular in nodes)
+				{
+					gr.addNode(nodeSingular.Node as CSymbolicImageGraph);
+				}
+				kernelNode = gr;
+			} else if (node.Node is CProjectiveBundleGraph)
+			{
+				CProjectiveBundleGroup gr = Runner.Kernel.CreateProjectiveBundleGroup() as CProjectiveBundleGroup;
+				foreach (ComputationNodeSingular nodeSingular in nodes)
+				{
+					gr.addNode(nodeSingular.Node as CProjectiveBundleGraph);
+				}
+				kernelNode = gr;
+			} else
+			{
+				throw new Exception("Strange!!!state!!!exception!!!");
+			}
+
+            node.Parent.Nodes.Add(ComputationNode.createComputationNode(kernelNode));
+			this.dehighlightChildrens();			
+		}
+		
+		public bool hasGroupableTypes(IKernelNode node)
+		{
+			return (node is CSymbolicImageGraph ||
+				node is CProjectiveBundleGraph);
+		}
+
+		private void showError()
+		{
+			MessageBox.Show("Unable to add node to group", "Group Error");
+		}
+
+		private bool CanAdd(ComputationNodeSingular node) 
+		{
+			foreach (ComputationNodeSingular computationNode in nodes)
+			{
+				if (node.Parent != computationNode.Parent) return false;
+				if (!hasGroupableTypes(node.Node)) return false;
+			}
+
+			return true;
+		}
+
+		public bool addNode(ComputationNode mnode)
+		{			
+			if (!(mnode is ComputationNodeSingular)) return false;
+
+			ComputationNodeSingular node = mnode as ComputationNodeSingular;
+
+			if (!CanAdd(node))
+			{
+				showError();
+				node.Checked = false;
+				return false;
+			}
+			nodes.Add(node);
+			return true;
+		}
+
+		public void removeNode(ComputationNode node)
+		{
+			nodes.Remove(node);
+		}
+
+		public void highlightChildrens()
+		{			
+			foreach (ComputationNode computationNode in nodes)
+			{
+				computationNode.Checked = true;
+			}
+		}
+
+		public void dehighlightChildrens()
+		{
+			object[] objs = nodes.ToArray();
+			foreach (ComputationNode computationNode in objs)
+			{
+				computationNode.Checked = false;
+			}
+		}
+
+
+		#region static functions
+
+		private static ComputationNodePlural group = null;
+		public static ComputationNodePlural getCurrentGroup()
+		{
+			if (group == null)
+			{
+				group = new ComputationNodePlural();
+			}
+			return group;
+		}
+		#endregion
+	}
+}
