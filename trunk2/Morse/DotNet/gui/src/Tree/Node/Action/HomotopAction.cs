@@ -48,13 +48,15 @@ namespace gui.Tree.Node.Action
 
 		private class HomotopActionFactory : IActionFactory
 		{
-			public bool Corresponds(IKernelNode node)
+			public bool Corresponds(ComputationNode anode)
 			{
+				IKernelNode node = anode.Node;
 				return node is IHomotopFind && node is IGraph;
 			}
 
-			public ComputationNodeAction CreateAction(IKernelNode node)
+			public ComputationNodeAction CreateAction(ComputationNode anode)
 			{
+				IKernelNode node = anode.Node;
 				return new HomotopAction((IHomotopFind) node, ((IGraph) node).graphDimension());
 			}
 		}

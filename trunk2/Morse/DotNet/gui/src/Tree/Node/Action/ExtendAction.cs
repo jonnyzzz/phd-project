@@ -42,14 +42,14 @@ namespace gui.Tree.Node.Action
 
 		private class ExtendActionFactory : IActionFactory
 		{
-			public bool Corresponds(IKernelNode node)
+			public bool Corresponds(ComputationNode node)
 			{
-				return node is IExtendable;
+				return node.Node is IExtendable;
 			}
 
-			public ComputationNodeAction CreateAction(IKernelNode node)
+			public ComputationNodeAction CreateAction(ComputationNode node)
 			{
-				return new ExtendAction((IExtendable) node);
+				return new ExtendAction((IExtendable) node.Node);
 			}
 		}
 

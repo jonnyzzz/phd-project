@@ -486,6 +486,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Tree\Node\Action\DeleteNodeAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Tree\Node\Action\ExtendAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

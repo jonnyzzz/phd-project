@@ -49,6 +49,9 @@ namespace gui.Forms
 		public SystemAssignment(bool showOpen)
 		{
 			InitializeComponent();
+
+			menuItemGetSource.Visible = Runner.IsInternal;
+			
 			dimensionUpDown_ValueChanged(this, EventArgs.Empty);
 			isReadOnly = false;
 

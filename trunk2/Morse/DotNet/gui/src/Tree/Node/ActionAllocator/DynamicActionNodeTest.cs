@@ -43,7 +43,7 @@ namespace gui.Tree.Node.ActionAllocator
 			Instance.actionFactoryes.RemoveAll();
 		}
 
-		public ComputationNodeAction[] CreateAction(IKernelNode node)
+		public ComputationNodeAction[] CreateAction(ComputationNode node)
 		{
 			ArrayList al = new ArrayList();
 			foreach (IActionFactory actionFactory in actionFactoryes)
@@ -56,7 +56,7 @@ namespace gui.Tree.Node.ActionAllocator
 
 			Log.LogMessage(this, "Dynamicly allocated {0} actions", al.Count);
 
-			al.AddRange(ComputationNodeDynamicTest.parseNode(node).actions);
+			al.AddRange(ComputationNodeDynamicTest.parseNode(node.Node).actions);
 
 			ComputationNodeAction[] act = new ComputationNodeAction[al.Count];
 			for (int i = 0; i < al.Count; act[i] = (ComputationNodeAction) al[i++]) ;

@@ -187,6 +187,14 @@ namespace gui.Tree
 
 		#endregion
 
+		public ComputationNode Selected
+		{
+			get
+			{
+				return tree.SelectedNode as ComputationNode;
+			}
+		}
+
 		private void tree_AfterCheck(object sender, TreeViewEventArgs e)
 		{
 			if (e.Node is ComputationNode)

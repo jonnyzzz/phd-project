@@ -15,7 +15,7 @@ namespace gui.Tree.Node
 		{
 			//ComputationNodeDynamicTest.ComputationNodeDynamicTestResult res = ComputationNodeDynamicTest.parseNode(node);
 			//this.items = res.items;
-			this.actions = DynamicActionNodeTest.Instance.CreateAction(node);
+			this.actions = DynamicActionNodeTest.Instance.CreateAction(this);
 			this.Text = generateCaption(node);
 		}
 

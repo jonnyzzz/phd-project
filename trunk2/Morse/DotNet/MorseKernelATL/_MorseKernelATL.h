@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Jan 27 20:30:38 2005
+/* at Sun Jan 30 01:29:41 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -249,6 +249,24 @@ typedef interface IProjectiveBundleGroup IProjectiveBundleGroup;
 #endif 	/* __IProjectiveBundleGroup_FWD_DEFINED__ */
 
 
+#ifndef __ISerializerOutputData_FWD_DEFINED__
+#define __ISerializerOutputData_FWD_DEFINED__
+typedef interface ISerializerOutputData ISerializerOutputData;
+#endif 	/* __ISerializerOutputData_FWD_DEFINED__ */
+
+
+#ifndef __ISerializerInputData_FWD_DEFINED__
+#define __ISerializerInputData_FWD_DEFINED__
+typedef interface ISerializerInputData ISerializerInputData;
+#endif 	/* __ISerializerInputData_FWD_DEFINED__ */
+
+
+#ifndef __ISerializer_FWD_DEFINED__
+#define __ISerializer_FWD_DEFINED__
+typedef interface ISerializer ISerializer;
+#endif 	/* __ISerializer_FWD_DEFINED__ */
+
+
 #ifndef __CGraphInfo_FWD_DEFINED__
 #define __CGraphInfo_FWD_DEFINED__
 
@@ -385,6 +403,18 @@ typedef struct CProjectiveBundleGroup CProjectiveBundleGroup;
 #endif /* __cplusplus */
 
 #endif 	/* __CProjectiveBundleGroup_FWD_DEFINED__ */
+
+
+#ifndef __CSerializer_FWD_DEFINED__
+#define __CSerializer_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CSerializer CSerializer;
+#else
+typedef struct CSerializer CSerializer;
+#endif /* __cplusplus */
+
+#endif 	/* __CSerializer_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -6111,6 +6141,430 @@ void __RPC_STUB IProjectiveBundleGroup_removeNode_Stub(
 #endif 	/* __IProjectiveBundleGroup_INTERFACE_DEFINED__ */
 
 
+#ifndef __ISerializerOutputData_INTERFACE_DEFINED__
+#define __ISerializerOutputData_INTERFACE_DEFINED__
+
+/* interface ISerializerOutputData */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISerializerOutputData;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("F42FA761-5767-4C66-8E91-4AC5EC15AE2E")
+    ISerializerOutputData : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE FileName( 
+            /* [retval][out] */ BSTR *fileName) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ISerializerOutputDataVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISerializerOutputData * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISerializerOutputData * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISerializerOutputData * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISerializerOutputData * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISerializerOutputData * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISerializerOutputData * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISerializerOutputData * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *FileName )( 
+            ISerializerOutputData * This,
+            /* [retval][out] */ BSTR *fileName);
+        
+        END_INTERFACE
+    } ISerializerOutputDataVtbl;
+
+    interface ISerializerOutputData
+    {
+        CONST_VTBL struct ISerializerOutputDataVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISerializerOutputData_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ISerializerOutputData_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ISerializerOutputData_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ISerializerOutputData_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ISerializerOutputData_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ISerializerOutputData_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ISerializerOutputData_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define ISerializerOutputData_FileName(This,fileName)	\
+    (This)->lpVtbl -> FileName(This,fileName)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISerializerOutputData_FileName_Proxy( 
+    ISerializerOutputData * This,
+    /* [retval][out] */ BSTR *fileName);
+
+
+void __RPC_STUB ISerializerOutputData_FileName_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __ISerializerOutputData_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISerializerInputData_INTERFACE_DEFINED__
+#define __ISerializerInputData_INTERFACE_DEFINED__
+
+/* interface ISerializerInputData */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISerializerInputData;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("5F688D62-BCE3-4787-95C5-36118686C2D1")
+    ISerializerInputData : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE FileName( 
+            /* [retval][out] */ BSTR *fileName) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ISerializerInputDataVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISerializerInputData * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISerializerInputData * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISerializerInputData * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISerializerInputData * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISerializerInputData * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISerializerInputData * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISerializerInputData * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *FileName )( 
+            ISerializerInputData * This,
+            /* [retval][out] */ BSTR *fileName);
+        
+        END_INTERFACE
+    } ISerializerInputDataVtbl;
+
+    interface ISerializerInputData
+    {
+        CONST_VTBL struct ISerializerInputDataVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISerializerInputData_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ISerializerInputData_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ISerializerInputData_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ISerializerInputData_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ISerializerInputData_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ISerializerInputData_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ISerializerInputData_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define ISerializerInputData_FileName(This,fileName)	\
+    (This)->lpVtbl -> FileName(This,fileName)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISerializerInputData_FileName_Proxy( 
+    ISerializerInputData * This,
+    /* [retval][out] */ BSTR *fileName);
+
+
+void __RPC_STUB ISerializerInputData_FileName_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __ISerializerInputData_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISerializer_INTERFACE_DEFINED__
+#define __ISerializer_INTERFACE_DEFINED__
+
+/* interface ISerializer */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISerializer;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("EEDA2826-2706-49B4-9896-D3454C400754")
+    ISerializer : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadKernelNode( 
+            /* [in] */ ISerializerInputData *data,
+            /* [retval][out] */ IKernelNode **node) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SaveKernelNode( 
+            /* [in] */ ISerializerOutputData *output,
+            /* [in] */ IKernelNode *node) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ISerializerVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISerializer * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISerializer * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISerializer * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISerializer * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISerializer * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISerializer * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISerializer * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *LoadKernelNode )( 
+            ISerializer * This,
+            /* [in] */ ISerializerInputData *data,
+            /* [retval][out] */ IKernelNode **node);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SaveKernelNode )( 
+            ISerializer * This,
+            /* [in] */ ISerializerOutputData *output,
+            /* [in] */ IKernelNode *node);
+        
+        END_INTERFACE
+    } ISerializerVtbl;
+
+    interface ISerializer
+    {
+        CONST_VTBL struct ISerializerVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISerializer_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ISerializer_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ISerializer_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ISerializer_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ISerializer_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ISerializer_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ISerializer_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define ISerializer_LoadKernelNode(This,data,node)	\
+    (This)->lpVtbl -> LoadKernelNode(This,data,node)
+
+#define ISerializer_SaveKernelNode(This,output,node)	\
+    (This)->lpVtbl -> SaveKernelNode(This,output,node)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISerializer_LoadKernelNode_Proxy( 
+    ISerializer * This,
+    /* [in] */ ISerializerInputData *data,
+    /* [retval][out] */ IKernelNode **node);
+
+
+void __RPC_STUB ISerializer_LoadKernelNode_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISerializer_SaveKernelNode_Proxy( 
+    ISerializer * This,
+    /* [in] */ ISerializerOutputData *output,
+    /* [in] */ IKernelNode *node);
+
+
+void __RPC_STUB ISerializer_SaveKernelNode_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __ISerializer_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __MorseKernelATL_LIBRARY_DEFINED__
 #define __MorseKernelATL_LIBRARY_DEFINED__
@@ -6313,6 +6767,14 @@ EXTERN_C const CLSID CLSID_CProjectiveBundleGroup;
 
 class DECLSPEC_UUID("520018A2-475A-4FB5-A780-E1291049BAB5")
 CProjectiveBundleGroup;
+#endif
+
+EXTERN_C const CLSID CLSID_CSerializer;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("3B39CBCB-C514-44FA-9FB3-79A822F13C3C")
+CSerializer;
 #endif
 #endif /* __MorseKernelATL_LIBRARY_DEFINED__ */
 

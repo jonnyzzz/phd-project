@@ -47,15 +47,17 @@ namespace gui.Tree.Node.Action
 
 		private class RegistratorGnuplotViewAction : IActionFactory
 		{
-			public bool Corresponds(IKernelNode node)
+			public bool Corresponds(ComputationNode anode)
 			{
+				IKernelNode node = anode.Node;
 				if (!(node is IExportData && node is IGraph)) return false;
 				int dimension = ((IGraph) node).graphDimension();
 				return dimension == 2 || dimension == 3;
 			}
 
-			public ComputationNodeAction CreateAction(IKernelNode node)
+			public ComputationNodeAction CreateAction(ComputationNode anode)
 			{
+				IKernelNode node = anode.Node;
 				return new GnuplotViewAction((IExportData) node, ((IGraph) node).graphInfo());
 			}
 		}
