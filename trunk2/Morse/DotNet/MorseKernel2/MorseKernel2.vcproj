@@ -146,8 +146,14 @@
 	</Configurations>
 	<References>
 		<ProjectReference
+			ReferencedProjectIdentifier="{A42EF8BC-57CF-4D5A-A423-9B03C034210A}"
+			Name="calculator"/>
+		<ProjectReference
 			ReferencedProjectIdentifier="{213A979A-506A-4295-9350-B86F82C0DBCB}"
 			Name="graph"/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{8D190DB8-56C4-4C76-A7F1-5560D53344CC}"
+			Name="SystemFunction"/>
 	</References>
 	<Files>
 		<Filter
@@ -158,22 +164,16 @@
 				RelativePath=".\Action.cpp">
 			</File>
 			<File
-				RelativePath=".\ActionAllocator.cpp">
-			</File>
-			<File
 				RelativePath=".\ActionBase.cpp">
 			</File>
 			<File
-				RelativePath=".\ActionFactory.cpp">
-			</File>
-			<File
-				RelativePath=".\ActionManager.cpp">
-			</File>
-			<File
-				RelativePath=".\ActionManagerImpl.cpp">
-			</File>
-			<File
 				RelativePath=".\compreg.cpp">
+			</File>
+			<File
+				RelativePath=".\Function.cpp">
+			</File>
+			<File
+				RelativePath=".\FunctionImpl.cpp">
 			</File>
 			<File
 				RelativePath=".\GraphInfo.cpp">
@@ -188,16 +188,16 @@
 				RelativePath=".\GraphResultImpl.cpp">
 			</File>
 			<File
-				RelativePath=".\GroupNode.cpp">
-			</File>
-			<File
 				RelativePath=".\Kernell.cpp">
 			</File>
 			<File
-				RelativePath=".\MorseKernel2.cpp">
+				RelativePath=".\KernellException.cpp">
 			</File>
 			<File
-				RelativePath=".\Node.cpp">
+				RelativePath=".\KernellImpl.cpp">
+			</File>
+			<File
+				RelativePath=".\MorseKernel2.cpp">
 			</File>
 			<File
 				RelativePath=".\Parameters.cpp">
@@ -230,10 +230,16 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\WritableFunction.cpp">
+			</File>
+			<File
 				RelativePath=".\WritableGraphInfo.cpp">
 			</File>
 			<File
 				RelativePath=".\WritableGraphResult.cpp">
+			</File>
+			<File
+				RelativePath=".\WritableKernell.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -244,22 +250,19 @@
 				RelativePath=".\Action.h">
 			</File>
 			<File
-				RelativePath=".\ActionAllocator.h">
-			</File>
-			<File
 				RelativePath=".\ActionBase.h">
 			</File>
 			<File
 				RelativePath=".\ActionFactory.h">
 			</File>
 			<File
-				RelativePath=".\ActionManager.h">
-			</File>
-			<File
-				RelativePath=".\ActionManagerImpl.h">
-			</File>
-			<File
 				RelativePath=".\compreg.h">
+			</File>
+			<File
+				RelativePath=".\Function.h">
+			</File>
+			<File
+				RelativePath=".\FunctionImpl.h">
 			</File>
 			<File
 				RelativePath=".\GraphInfo.h">
@@ -274,13 +277,13 @@
 				RelativePath=".\GraphResultImpl.h">
 			</File>
 			<File
-				RelativePath=".\GroupNode.h">
-			</File>
-			<File
 				RelativePath=".\Kernell.h">
 			</File>
 			<File
-				RelativePath=".\Node.h">
+				RelativePath=".\KernellException.h">
+			</File>
+			<File
+				RelativePath=".\KernellImpl.h">
 			</File>
 			<File
 				RelativePath=".\Parameters.h">
@@ -304,10 +307,16 @@
 				RelativePath=".\stdafx.h">
 			</File>
 			<File
+				RelativePath=".\WritableFunction.h">
+			</File>
+			<File
 				RelativePath=".\WritableGraphInfo.h">
 			</File>
 			<File
 				RelativePath=".\WritableGraphResult.h">
+			</File>
+			<File
+				RelativePath=".\WritableKernell.h">
 			</File>
 		</Filter>
 		<Filter

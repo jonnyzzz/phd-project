@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sat Mar 12 01:22:44 2005
+/* at Sun Mar 13 23:11:53 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -57,24 +57,6 @@ typedef interface IResultBase IResultBase;
 #endif 	/* __IResultBase_FWD_DEFINED__ */
 
 
-#ifndef __IResultMerger_FWD_DEFINED__
-#define __IResultMerger_FWD_DEFINED__
-typedef interface IResultMerger IResultMerger;
-#endif 	/* __IResultMerger_FWD_DEFINED__ */
-
-
-#ifndef __IResult_FWD_DEFINED__
-#define __IResult_FWD_DEFINED__
-typedef interface IResult IResult;
-#endif 	/* __IResult_FWD_DEFINED__ */
-
-
-#ifndef __IActionManager_FWD_DEFINED__
-#define __IActionManager_FWD_DEFINED__
-typedef interface IActionManager IActionManager;
-#endif 	/* __IActionManager_FWD_DEFINED__ */
-
-
 #ifndef __IParameters_FWD_DEFINED__
 #define __IParameters_FWD_DEFINED__
 typedef interface IParameters IParameters;
@@ -93,40 +75,22 @@ typedef interface IAction IAction;
 #endif 	/* __IAction_FWD_DEFINED__ */
 
 
-#ifndef __INode_FWD_DEFINED__
-#define __INode_FWD_DEFINED__
-typedef interface INode INode;
-#endif 	/* __INode_FWD_DEFINED__ */
-
-
-#ifndef __IActionFactory_FWD_DEFINED__
-#define __IActionFactory_FWD_DEFINED__
-typedef interface IActionFactory IActionFactory;
-#endif 	/* __IActionFactory_FWD_DEFINED__ */
-
-
-#ifndef __IActionAllocator_FWD_DEFINED__
-#define __IActionAllocator_FWD_DEFINED__
-typedef interface IActionAllocator IActionAllocator;
-#endif 	/* __IActionAllocator_FWD_DEFINED__ */
-
-
-#ifndef __IWritableActionAllocator_FWD_DEFINED__
-#define __IWritableActionAllocator_FWD_DEFINED__
-typedef interface IWritableActionAllocator IWritableActionAllocator;
-#endif 	/* __IWritableActionAllocator_FWD_DEFINED__ */
-
-
-#ifndef __IWritableActionManager_FWD_DEFINED__
-#define __IWritableActionManager_FWD_DEFINED__
-typedef interface IWritableActionManager IWritableActionManager;
-#endif 	/* __IWritableActionManager_FWD_DEFINED__ */
-
-
 #ifndef __IComponentRegistrar_FWD_DEFINED__
 #define __IComponentRegistrar_FWD_DEFINED__
 typedef interface IComponentRegistrar IComponentRegistrar;
 #endif 	/* __IComponentRegistrar_FWD_DEFINED__ */
+
+
+#ifndef __IFunction_FWD_DEFINED__
+#define __IFunction_FWD_DEFINED__
+typedef interface IFunction IFunction;
+#endif 	/* __IFunction_FWD_DEFINED__ */
+
+
+#ifndef __IWritableFunction_FWD_DEFINED__
+#define __IWritableFunction_FWD_DEFINED__
+typedef interface IWritableFunction IWritableFunction;
+#endif 	/* __IWritableFunction_FWD_DEFINED__ */
 
 
 #ifndef __IGraphInfo_FWD_DEFINED__
@@ -141,6 +105,18 @@ typedef interface IWritableGraphInfo IWritableGraphInfo;
 #endif 	/* __IWritableGraphInfo_FWD_DEFINED__ */
 
 
+#ifndef __IResultMerger_FWD_DEFINED__
+#define __IResultMerger_FWD_DEFINED__
+typedef interface IResultMerger IResultMerger;
+#endif 	/* __IResultMerger_FWD_DEFINED__ */
+
+
+#ifndef __IResult_FWD_DEFINED__
+#define __IResult_FWD_DEFINED__
+typedef interface IResult IResult;
+#endif 	/* __IResult_FWD_DEFINED__ */
+
+
 #ifndef __IGraphResult_FWD_DEFINED__
 #define __IGraphResult_FWD_DEFINED__
 typedef interface IGraphResult IGraphResult;
@@ -153,40 +129,16 @@ typedef interface IWritableGraphResult IWritableGraphResult;
 #endif 	/* __IWritableGraphResult_FWD_DEFINED__ */
 
 
-#ifndef __IGroupNode_FWD_DEFINED__
-#define __IGroupNode_FWD_DEFINED__
-typedef interface IGroupNode IGroupNode;
-#endif 	/* __IGroupNode_FWD_DEFINED__ */
-
-
 #ifndef __IKernell_FWD_DEFINED__
 #define __IKernell_FWD_DEFINED__
 typedef interface IKernell IKernell;
 #endif 	/* __IKernell_FWD_DEFINED__ */
 
 
-#ifndef __CActionAllocator_FWD_DEFINED__
-#define __CActionAllocator_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CActionAllocator CActionAllocator;
-#else
-typedef struct CActionAllocator CActionAllocator;
-#endif /* __cplusplus */
-
-#endif 	/* __CActionAllocator_FWD_DEFINED__ */
-
-
-#ifndef __CActionManagerImpl_FWD_DEFINED__
-#define __CActionManagerImpl_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CActionManagerImpl CActionManagerImpl;
-#else
-typedef struct CActionManagerImpl CActionManagerImpl;
-#endif /* __cplusplus */
-
-#endif 	/* __CActionManagerImpl_FWD_DEFINED__ */
+#ifndef __IWritableKernell_FWD_DEFINED__
+#define __IWritableKernell_FWD_DEFINED__
+typedef interface IWritableKernell IWritableKernell;
+#endif 	/* __IWritableKernell_FWD_DEFINED__ */
 
 
 #ifndef __CCompReg_FWD_DEFINED__
@@ -199,6 +151,18 @@ typedef struct CCompReg CCompReg;
 #endif /* __cplusplus */
 
 #endif 	/* __CCompReg_FWD_DEFINED__ */
+
+
+#ifndef __CFunctionImpl_FWD_DEFINED__
+#define __CFunctionImpl_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CFunctionImpl CFunctionImpl;
+#else
+typedef struct CFunctionImpl CFunctionImpl;
+#endif /* __cplusplus */
+
+#endif 	/* __CFunctionImpl_FWD_DEFINED__ */
 
 
 #ifndef __CGraphInfoImpl_FWD_DEFINED__
@@ -225,10 +189,16 @@ typedef struct CGraphResultImpl CGraphResultImpl;
 #endif 	/* __CGraphResultImpl_FWD_DEFINED__ */
 
 
-#ifndef __IKernellEvents_FWD_DEFINED__
-#define __IKernellEvents_FWD_DEFINED__
-typedef interface IKernellEvents IKernellEvents;
-#endif 	/* __IKernellEvents_FWD_DEFINED__ */
+#ifndef __CKernellImpl_FWD_DEFINED__
+#define __CKernellImpl_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CKernellImpl CKernellImpl;
+#else
+typedef struct CKernellImpl CKernellImpl;
+#endif /* __cplusplus */
+
+#endif 	/* __CKernellImpl_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -465,475 +435,6 @@ EXTERN_C const IID IID_IResultBase;
 #endif 	/* __IResultBase_INTERFACE_DEFINED__ */
 
 
-#ifndef __IResultMerger_INTERFACE_DEFINED__
-#define __IResultMerger_INTERFACE_DEFINED__
-
-/* interface IResultMerger */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IResultMerger;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("4D5B2A01-1CC2-4D56-A8D7-67C730A057ED")
-    IResultMerger : public IDispatch
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddResult( 
-            /* [in] */ IResultBase *result) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CanAddResult( 
-            /* [in] */ IResultBase *result,
-            /* [retval][out] */ VARIANT_BOOL *value) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateResult( 
-            /* [retval][out] */ IResultBase **result) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IResultMergerVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IResultMerger * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IResultMerger * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IResultMerger * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IResultMerger * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IResultMerger * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IResultMerger * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IResultMerger * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddResult )( 
-            IResultMerger * This,
-            /* [in] */ IResultBase *result);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanAddResult )( 
-            IResultMerger * This,
-            /* [in] */ IResultBase *result,
-            /* [retval][out] */ VARIANT_BOOL *value);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateResult )( 
-            IResultMerger * This,
-            /* [retval][out] */ IResultBase **result);
-        
-        END_INTERFACE
-    } IResultMergerVtbl;
-
-    interface IResultMerger
-    {
-        CONST_VTBL struct IResultMergerVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IResultMerger_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IResultMerger_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IResultMerger_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IResultMerger_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IResultMerger_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IResultMerger_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IResultMerger_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IResultMerger_AddResult(This,result)	\
-    (This)->lpVtbl -> AddResult(This,result)
-
-#define IResultMerger_CanAddResult(This,result,value)	\
-    (This)->lpVtbl -> CanAddResult(This,result,value)
-
-#define IResultMerger_CreateResult(This,result)	\
-    (This)->lpVtbl -> CreateResult(This,result)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IResultMerger_AddResult_Proxy( 
-    IResultMerger * This,
-    /* [in] */ IResultBase *result);
-
-
-void __RPC_STUB IResultMerger_AddResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IResultMerger_CanAddResult_Proxy( 
-    IResultMerger * This,
-    /* [in] */ IResultBase *result,
-    /* [retval][out] */ VARIANT_BOOL *value);
-
-
-void __RPC_STUB IResultMerger_CanAddResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IResultMerger_CreateResult_Proxy( 
-    IResultMerger * This,
-    /* [retval][out] */ IResultBase **result);
-
-
-void __RPC_STUB IResultMerger_CreateResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IResultMerger_INTERFACE_DEFINED__ */
-
-
-#ifndef __IResult_INTERFACE_DEFINED__
-#define __IResult_INTERFACE_DEFINED__
-
-/* interface IResult */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IResult;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("9B7D45A5-77FD-4E97-8C4A-76D3610CC875")
-    IResult : public IResultBase
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetResultMerger( 
-            /* [retval][out] */ IResultMerger **merger) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IResultVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IResult * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IResult * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IResult * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IResult * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IResult * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IResult * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IResult * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetResultMerger )( 
-            IResult * This,
-            /* [retval][out] */ IResultMerger **merger);
-        
-        END_INTERFACE
-    } IResultVtbl;
-
-    interface IResult
-    {
-        CONST_VTBL struct IResultVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IResult_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IResult_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IResult_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IResult_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-
-#define IResult_GetResultMerger(This,merger)	\
-    (This)->lpVtbl -> GetResultMerger(This,merger)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IResult_GetResultMerger_Proxy( 
-    IResult * This,
-    /* [retval][out] */ IResultMerger **merger);
-
-
-void __RPC_STUB IResult_GetResultMerger_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IResult_INTERFACE_DEFINED__ */
-
-
-#ifndef __IActionManager_INTERFACE_DEFINED__
-#define __IActionManager_INTERFACE_DEFINED__
-
-/* interface IActionManager */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IActionManager;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("5EB44493-8FF9-486A-8ABD-09B9F232628A")
-    IActionManager : public IDispatch
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [in] */ int *count) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetAction( 
-            /* [in] */ int index,
-            /* [retval][out] */ IActionBase **action) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IActionManagerVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IActionManager * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IActionManager * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IActionManager * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IActionManager * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IActionManager * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IActionManager * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IActionManager * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLength )( 
-            IActionManager * This,
-            /* [in] */ int *count);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetAction )( 
-            IActionManager * This,
-            /* [in] */ int index,
-            /* [retval][out] */ IActionBase **action);
-        
-        END_INTERFACE
-    } IActionManagerVtbl;
-
-    interface IActionManager
-    {
-        CONST_VTBL struct IActionManagerVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IActionManager_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IActionManager_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IActionManager_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IActionManager_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IActionManager_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IActionManager_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IActionManager_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IActionManager_GetLength(This,count)	\
-    (This)->lpVtbl -> GetLength(This,count)
-
-#define IActionManager_GetAction(This,index,action)	\
-    (This)->lpVtbl -> GetAction(This,index,action)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IActionManager_GetLength_Proxy( 
-    IActionManager * This,
-    /* [in] */ int *count);
-
-
-void __RPC_STUB IActionManager_GetLength_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IActionManager_GetAction_Proxy( 
-    IActionManager * This,
-    /* [in] */ int index,
-    /* [retval][out] */ IActionBase **action);
-
-
-void __RPC_STUB IActionManager_GetAction_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IActionManager_INTERFACE_DEFINED__ */
-
-
 #ifndef __IParameters_INTERFACE_DEFINED__
 #define __IParameters_INTERFACE_DEFINED__
 
@@ -1059,6 +560,18 @@ EXTERN_C const IID IID_IProgressBarInfo;
     IProgressBarInfo : public IDispatch
     {
     public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Length( 
+            /* [retval][out] */ int *length) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Next( void) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE NeedStop( 
+            /* [retval][out] */ VARIANT_BOOL *stop) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Start( void) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Finish( void) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -1107,6 +620,23 @@ EXTERN_C const IID IID_IProgressBarInfo;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Length )( 
+            IProgressBarInfo * This,
+            /* [retval][out] */ int *length);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
+            IProgressBarInfo * This);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *NeedStop )( 
+            IProgressBarInfo * This,
+            /* [retval][out] */ VARIANT_BOOL *stop);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Start )( 
+            IProgressBarInfo * This);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Finish )( 
+            IProgressBarInfo * This);
+        
         END_INTERFACE
     } IProgressBarInfoVtbl;
 
@@ -1143,11 +673,83 @@ EXTERN_C const IID IID_IProgressBarInfo;
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
+#define IProgressBarInfo_Length(This,length)	\
+    (This)->lpVtbl -> Length(This,length)
+
+#define IProgressBarInfo_Next(This)	\
+    (This)->lpVtbl -> Next(This)
+
+#define IProgressBarInfo_NeedStop(This,stop)	\
+    (This)->lpVtbl -> NeedStop(This,stop)
+
+#define IProgressBarInfo_Start(This)	\
+    (This)->lpVtbl -> Start(This)
+
+#define IProgressBarInfo_Finish(This)	\
+    (This)->lpVtbl -> Finish(This)
+
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Length_Proxy( 
+    IProgressBarInfo * This,
+    /* [retval][out] */ int *length);
+
+
+void __RPC_STUB IProgressBarInfo_Length_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Next_Proxy( 
+    IProgressBarInfo * This);
+
+
+void __RPC_STUB IProgressBarInfo_Next_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_NeedStop_Proxy( 
+    IProgressBarInfo * This,
+    /* [retval][out] */ VARIANT_BOOL *stop);
+
+
+void __RPC_STUB IProgressBarInfo_NeedStop_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Start_Proxy( 
+    IProgressBarInfo * This);
+
+
+void __RPC_STUB IProgressBarInfo_Start_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Finish_Proxy( 
+    IProgressBarInfo * This);
+
+
+void __RPC_STUB IProgressBarInfo_Finish_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
 
 
 
@@ -1169,21 +771,19 @@ EXTERN_C const IID IID_IAction;
     IAction : public IActionBase
     {
     public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetNextActionManager( 
-            /* [retval][out] */ IActionManager **manager) = 0;
-        
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetActionParameters( 
             /* [in] */ IParameters *parameters) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Do( 
-            /* [in] */ IResult *input,
-            /* [retval][out] */ IResult **output) = 0;
+            /* [in] */ IResultBase *input,
+            /* [retval][out] */ IResultBase **output) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetProgressBarInfo( 
             /* [in] */ IProgressBarInfo *pinfo) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsChainLeaf( 
-            /* [retval][out] */ VARIANT_BOOL *result) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CanDo( 
+            /* [in] */ IResultBase *result,
+            /* [retval][out] */ VARIANT_BOOL *can) = 0;
         
     };
     
@@ -1233,26 +833,23 @@ EXTERN_C const IID IID_IAction;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetNextActionManager )( 
-            IAction * This,
-            /* [retval][out] */ IActionManager **manager);
-        
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
             IAction * This,
             /* [in] */ IParameters *parameters);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
             IAction * This,
-            /* [in] */ IResult *input,
-            /* [retval][out] */ IResult **output);
+            /* [in] */ IResultBase *input,
+            /* [retval][out] */ IResultBase **output);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
             IAction * This,
             /* [in] */ IProgressBarInfo *pinfo);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsChainLeaf )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
             IAction * This,
-            /* [retval][out] */ VARIANT_BOOL *result);
+            /* [in] */ IResultBase *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
         
         END_INTERFACE
     } IActionVtbl;
@@ -1291,9 +888,6 @@ EXTERN_C const IID IID_IAction;
 
 
 
-#define IAction_GetNextActionManager(This,manager)	\
-    (This)->lpVtbl -> GetNextActionManager(This,manager)
-
 #define IAction_SetActionParameters(This,parameters)	\
     (This)->lpVtbl -> SetActionParameters(This,parameters)
 
@@ -1303,26 +897,14 @@ EXTERN_C const IID IID_IAction;
 #define IAction_SetProgressBarInfo(This,pinfo)	\
     (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
 
-#define IAction_IsChainLeaf(This,result)	\
-    (This)->lpVtbl -> IsChainLeaf(This,result)
+#define IAction_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAction_GetNextActionManager_Proxy( 
-    IAction * This,
-    /* [retval][out] */ IActionManager **manager);
-
-
-void __RPC_STUB IAction_GetNextActionManager_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 /* [id] */ HRESULT STDMETHODCALLTYPE IAction_SetActionParameters_Proxy( 
@@ -1339,8 +921,8 @@ void __RPC_STUB IAction_SetActionParameters_Stub(
 
 /* [id] */ HRESULT STDMETHODCALLTYPE IAction_Do_Proxy( 
     IAction * This,
-    /* [in] */ IResult *input,
-    /* [retval][out] */ IResult **output);
+    /* [in] */ IResultBase *input,
+    /* [retval][out] */ IResultBase **output);
 
 
 void __RPC_STUB IAction_Do_Stub(
@@ -1362,12 +944,13 @@ void __RPC_STUB IAction_SetProgressBarInfo_Stub(
     DWORD *_pdwStubPhase);
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IAction_IsChainLeaf_Proxy( 
+/* [id] */ HRESULT STDMETHODCALLTYPE IAction_CanDo_Proxy( 
     IAction * This,
-    /* [retval][out] */ VARIANT_BOOL *result);
+    /* [in] */ IResultBase *result,
+    /* [retval][out] */ VARIANT_BOOL *can);
 
 
-void __RPC_STUB IAction_IsChainLeaf_Stub(
+void __RPC_STUB IAction_CanDo_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -1376,794 +959,6 @@ void __RPC_STUB IAction_IsChainLeaf_Stub(
 
 
 #endif 	/* __IAction_INTERFACE_DEFINED__ */
-
-
-#ifndef __INode_INTERFACE_DEFINED__
-#define __INode_INTERFACE_DEFINED__
-
-/* interface INode */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_INode;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("D3BEDA0D-1771-4493-BB5C-E93384792B2A")
-    INode : public IDispatch
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetActionManager( 
-            /* [retval][out] */ IActionManager **manager) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetResult( 
-            /* [retval][out] */ IResult **result) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct INodeVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            INode * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            INode * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            INode * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            INode * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            INode * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            INode * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            INode * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetActionManager )( 
-            INode * This,
-            /* [retval][out] */ IActionManager **manager);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetResult )( 
-            INode * This,
-            /* [retval][out] */ IResult **result);
-        
-        END_INTERFACE
-    } INodeVtbl;
-
-    interface INode
-    {
-        CONST_VTBL struct INodeVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define INode_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define INode_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define INode_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define INode_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define INode_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define INode_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define INode_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define INode_GetActionManager(This,manager)	\
-    (This)->lpVtbl -> GetActionManager(This,manager)
-
-#define INode_GetResult(This,result)	\
-    (This)->lpVtbl -> GetResult(This,result)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE INode_GetActionManager_Proxy( 
-    INode * This,
-    /* [retval][out] */ IActionManager **manager);
-
-
-void __RPC_STUB INode_GetActionManager_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE INode_GetResult_Proxy( 
-    INode * This,
-    /* [retval][out] */ IResult **result);
-
-
-void __RPC_STUB INode_GetResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __INode_INTERFACE_DEFINED__ */
-
-
-#ifndef __IActionFactory_INTERFACE_DEFINED__
-#define __IActionFactory_INTERFACE_DEFINED__
-
-/* interface IActionFactory */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IActionFactory;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("35F624D3-EB6C-4F79-AB1E-C01795A08C5A")
-    IActionFactory : public IDispatch
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CanCreateActionFromNode( 
-            /* [in] */ INode *node,
-            /* [retval][out] */ VARIANT_BOOL *result) = 0;
-        
-        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateActionFromNode( 
-            /* [in] */ INode *node,
-            /* [retval][out] */ IActionBase **action) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CanCreateActionFromAction( 
-            /* [in] */ IActionBase *action,
-            /* [retval][out] */ VARIANT_BOOL *result) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateActionFromAction( 
-            /* [in] */ IActionBase *action,
-            /* [retval][out] */ IActionBase **result) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IActionFactoryVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IActionFactory * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IActionFactory * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IActionFactory * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IActionFactory * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IActionFactory * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IActionFactory * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IActionFactory * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanCreateActionFromNode )( 
-            IActionFactory * This,
-            /* [in] */ INode *node,
-            /* [retval][out] */ VARIANT_BOOL *result);
-        
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateActionFromNode )( 
-            IActionFactory * This,
-            /* [in] */ INode *node,
-            /* [retval][out] */ IActionBase **action);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanCreateActionFromAction )( 
-            IActionFactory * This,
-            /* [in] */ IActionBase *action,
-            /* [retval][out] */ VARIANT_BOOL *result);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateActionFromAction )( 
-            IActionFactory * This,
-            /* [in] */ IActionBase *action,
-            /* [retval][out] */ IActionBase **result);
-        
-        END_INTERFACE
-    } IActionFactoryVtbl;
-
-    interface IActionFactory
-    {
-        CONST_VTBL struct IActionFactoryVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IActionFactory_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IActionFactory_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IActionFactory_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IActionFactory_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IActionFactory_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IActionFactory_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IActionFactory_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IActionFactory_CanCreateActionFromNode(This,node,result)	\
-    (This)->lpVtbl -> CanCreateActionFromNode(This,node,result)
-
-#define IActionFactory_CreateActionFromNode(This,node,action)	\
-    (This)->lpVtbl -> CreateActionFromNode(This,node,action)
-
-#define IActionFactory_CanCreateActionFromAction(This,action,result)	\
-    (This)->lpVtbl -> CanCreateActionFromAction(This,action,result)
-
-#define IActionFactory_CreateActionFromAction(This,action,result)	\
-    (This)->lpVtbl -> CreateActionFromAction(This,action,result)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IActionFactory_CanCreateActionFromNode_Proxy( 
-    IActionFactory * This,
-    /* [in] */ INode *node,
-    /* [retval][out] */ VARIANT_BOOL *result);
-
-
-void __RPC_STUB IActionFactory_CanCreateActionFromNode_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IActionFactory_CreateActionFromNode_Proxy( 
-    IActionFactory * This,
-    /* [in] */ INode *node,
-    /* [retval][out] */ IActionBase **action);
-
-
-void __RPC_STUB IActionFactory_CreateActionFromNode_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IActionFactory_CanCreateActionFromAction_Proxy( 
-    IActionFactory * This,
-    /* [in] */ IActionBase *action,
-    /* [retval][out] */ VARIANT_BOOL *result);
-
-
-void __RPC_STUB IActionFactory_CanCreateActionFromAction_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IActionFactory_CreateActionFromAction_Proxy( 
-    IActionFactory * This,
-    /* [in] */ IActionBase *action,
-    /* [retval][out] */ IActionBase **result);
-
-
-void __RPC_STUB IActionFactory_CreateActionFromAction_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IActionFactory_INTERFACE_DEFINED__ */
-
-
-#ifndef __IActionAllocator_INTERFACE_DEFINED__
-#define __IActionAllocator_INTERFACE_DEFINED__
-
-/* interface IActionAllocator */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IActionAllocator;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("9D90D301-E998-4229-98C0-27C59690308D")
-    IActionAllocator : public IDispatch
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE AllocateActionManagerForNode( 
-            /* [in] */ INode *node,
-            /* [retval][out] */ IActionManager **manager) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE AllocateActionManagerForAction( 
-            /* [in] */ IActionBase *action,
-            /* [retval][out] */ IActionManager **manager) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IActionAllocatorVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IActionAllocator * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IActionAllocator * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IActionAllocator * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IActionAllocator * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IActionAllocator * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IActionAllocator * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IActionAllocator * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *AllocateActionManagerForNode )( 
-            IActionAllocator * This,
-            /* [in] */ INode *node,
-            /* [retval][out] */ IActionManager **manager);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *AllocateActionManagerForAction )( 
-            IActionAllocator * This,
-            /* [in] */ IActionBase *action,
-            /* [retval][out] */ IActionManager **manager);
-        
-        END_INTERFACE
-    } IActionAllocatorVtbl;
-
-    interface IActionAllocator
-    {
-        CONST_VTBL struct IActionAllocatorVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IActionAllocator_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IActionAllocator_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IActionAllocator_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IActionAllocator_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IActionAllocator_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IActionAllocator_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IActionAllocator_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IActionAllocator_AllocateActionManagerForNode(This,node,manager)	\
-    (This)->lpVtbl -> AllocateActionManagerForNode(This,node,manager)
-
-#define IActionAllocator_AllocateActionManagerForAction(This,action,manager)	\
-    (This)->lpVtbl -> AllocateActionManagerForAction(This,action,manager)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IActionAllocator_AllocateActionManagerForNode_Proxy( 
-    IActionAllocator * This,
-    /* [in] */ INode *node,
-    /* [retval][out] */ IActionManager **manager);
-
-
-void __RPC_STUB IActionAllocator_AllocateActionManagerForNode_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IActionAllocator_AllocateActionManagerForAction_Proxy( 
-    IActionAllocator * This,
-    /* [in] */ IActionBase *action,
-    /* [retval][out] */ IActionManager **manager);
-
-
-void __RPC_STUB IActionAllocator_AllocateActionManagerForAction_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IActionAllocator_INTERFACE_DEFINED__ */
-
-
-#ifndef __IWritableActionAllocator_INTERFACE_DEFINED__
-#define __IWritableActionAllocator_INTERFACE_DEFINED__
-
-/* interface IWritableActionAllocator */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IWritableActionAllocator;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("BC2B7099-B5A6-4D0B-BDE0-DA027E87FF93")
-    IWritableActionAllocator : public IDispatch
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE RegisterActionFactory( 
-            /* [in] */ IActionFactory *action) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IWritableActionAllocatorVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IWritableActionAllocator * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IWritableActionAllocator * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IWritableActionAllocator * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IWritableActionAllocator * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IWritableActionAllocator * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IWritableActionAllocator * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IWritableActionAllocator * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *RegisterActionFactory )( 
-            IWritableActionAllocator * This,
-            /* [in] */ IActionFactory *action);
-        
-        END_INTERFACE
-    } IWritableActionAllocatorVtbl;
-
-    interface IWritableActionAllocator
-    {
-        CONST_VTBL struct IWritableActionAllocatorVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IWritableActionAllocator_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IWritableActionAllocator_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IWritableActionAllocator_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IWritableActionAllocator_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IWritableActionAllocator_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IWritableActionAllocator_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IWritableActionAllocator_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IWritableActionAllocator_RegisterActionFactory(This,action)	\
-    (This)->lpVtbl -> RegisterActionFactory(This,action)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableActionAllocator_RegisterActionFactory_Proxy( 
-    IWritableActionAllocator * This,
-    /* [in] */ IActionFactory *action);
-
-
-void __RPC_STUB IWritableActionAllocator_RegisterActionFactory_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IWritableActionAllocator_INTERFACE_DEFINED__ */
-
-
-#ifndef __IWritableActionManager_INTERFACE_DEFINED__
-#define __IWritableActionManager_INTERFACE_DEFINED__
-
-/* interface IWritableActionManager */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IWritableActionManager;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("E20C06D8-1C51-455C-B306-33D0635F1E52")
-    IWritableActionManager : public IDispatch
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddAction( 
-            /* [in] */ IActionBase *action) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IWritableActionManagerVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IWritableActionManager * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IWritableActionManager * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IWritableActionManager * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IWritableActionManager * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IWritableActionManager * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IWritableActionManager * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IWritableActionManager * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddAction )( 
-            IWritableActionManager * This,
-            /* [in] */ IActionBase *action);
-        
-        END_INTERFACE
-    } IWritableActionManagerVtbl;
-
-    interface IWritableActionManager
-    {
-        CONST_VTBL struct IWritableActionManagerVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IWritableActionManager_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IWritableActionManager_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IWritableActionManager_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IWritableActionManager_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IWritableActionManager_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IWritableActionManager_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IWritableActionManager_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IWritableActionManager_AddAction(This,action)	\
-    (This)->lpVtbl -> AddAction(This,action)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableActionManager_AddAction_Proxy( 
-    IWritableActionManager * This,
-    /* [in] */ IActionBase *action);
-
-
-void __RPC_STUB IWritableActionManager_AddAction_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IWritableActionManager_INTERFACE_DEFINED__ */
 
 
 #ifndef __IComponentRegistrar_INTERFACE_DEFINED__
@@ -2403,6 +1198,402 @@ void __RPC_STUB IComponentRegistrar_UnregisterComponent_Stub(
 
 
 #endif 	/* __IComponentRegistrar_INTERFACE_DEFINED__ */
+
+
+#ifndef __IFunction_INTERFACE_DEFINED__
+#define __IFunction_INTERFACE_DEFINED__
+
+/* interface IFunction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IFunction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("63B946E2-2AEE-4034-BA1C-1B4CFD68CEC0")
+    IFunction : public IDispatch
+    {
+    public:
+        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE GetSystemFunction( 
+            /* [out] */ void **function) = 0;
+        
+        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE GetSystemFunctionDerivate( 
+            /* [out] */ void **function) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetEquations( 
+            /* [retval][out] */ BSTR *equations) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimension( 
+            /* [retval][out] */ int *dimenstion) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetIterations( 
+            /* [retval][out] */ int *iterations) = 0;
+        
+        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE CreateGraph( 
+            /* [out] */ void **graph) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IFunctionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IFunction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IFunction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IFunction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IFunction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IFunction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IFunction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFunction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *GetSystemFunction )( 
+            IFunction * This,
+            /* [out] */ void **function);
+        
+        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *GetSystemFunctionDerivate )( 
+            IFunction * This,
+            /* [out] */ void **function);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetEquations )( 
+            IFunction * This,
+            /* [retval][out] */ BSTR *equations);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimension )( 
+            IFunction * This,
+            /* [retval][out] */ int *dimenstion);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetIterations )( 
+            IFunction * This,
+            /* [retval][out] */ int *iterations);
+        
+        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *CreateGraph )( 
+            IFunction * This,
+            /* [out] */ void **graph);
+        
+        END_INTERFACE
+    } IFunctionVtbl;
+
+    interface IFunction
+    {
+        CONST_VTBL struct IFunctionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFunction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IFunction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IFunction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IFunction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IFunction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IFunction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IFunction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IFunction_GetSystemFunction(This,function)	\
+    (This)->lpVtbl -> GetSystemFunction(This,function)
+
+#define IFunction_GetSystemFunctionDerivate(This,function)	\
+    (This)->lpVtbl -> GetSystemFunctionDerivate(This,function)
+
+#define IFunction_GetEquations(This,equations)	\
+    (This)->lpVtbl -> GetEquations(This,equations)
+
+#define IFunction_GetDimension(This,dimenstion)	\
+    (This)->lpVtbl -> GetDimension(This,dimenstion)
+
+#define IFunction_GetIterations(This,iterations)	\
+    (This)->lpVtbl -> GetIterations(This,iterations)
+
+#define IFunction_CreateGraph(This,graph)	\
+    (This)->lpVtbl -> CreateGraph(This,graph)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IFunction_GetSystemFunction_Proxy( 
+    IFunction * This,
+    /* [out] */ void **function);
+
+
+void __RPC_STUB IFunction_GetSystemFunction_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IFunction_GetSystemFunctionDerivate_Proxy( 
+    IFunction * This,
+    /* [out] */ void **function);
+
+
+void __RPC_STUB IFunction_GetSystemFunctionDerivate_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetEquations_Proxy( 
+    IFunction * This,
+    /* [retval][out] */ BSTR *equations);
+
+
+void __RPC_STUB IFunction_GetEquations_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetDimension_Proxy( 
+    IFunction * This,
+    /* [retval][out] */ int *dimenstion);
+
+
+void __RPC_STUB IFunction_GetDimension_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetIterations_Proxy( 
+    IFunction * This,
+    /* [retval][out] */ int *iterations);
+
+
+void __RPC_STUB IFunction_GetIterations_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IFunction_CreateGraph_Proxy( 
+    IFunction * This,
+    /* [out] */ void **graph);
+
+
+void __RPC_STUB IFunction_CreateGraph_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IFunction_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWritableFunction_INTERFACE_DEFINED__
+#define __IWritableFunction_INTERFACE_DEFINED__
+
+/* interface IWritableFunction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWritableFunction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9B3DA2D8-E279-4552-99F4-13AA066642D5")
+    IWritableFunction : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetEquations( 
+            /* [in] */ BSTR equations) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetLastError( 
+            /* [retval][out] */ BSTR *message) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IWritableFunctionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWritableFunction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWritableFunction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWritableFunction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWritableFunction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWritableFunction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWritableFunction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWritableFunction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetEquations )( 
+            IWritableFunction * This,
+            /* [in] */ BSTR equations);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLastError )( 
+            IWritableFunction * This,
+            /* [retval][out] */ BSTR *message);
+        
+        END_INTERFACE
+    } IWritableFunctionVtbl;
+
+    interface IWritableFunction
+    {
+        CONST_VTBL struct IWritableFunctionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWritableFunction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IWritableFunction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IWritableFunction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IWritableFunction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IWritableFunction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IWritableFunction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IWritableFunction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IWritableFunction_SetEquations(This,equations)	\
+    (This)->lpVtbl -> SetEquations(This,equations)
+
+#define IWritableFunction_GetLastError(This,message)	\
+    (This)->lpVtbl -> GetLastError(This,message)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableFunction_SetEquations_Proxy( 
+    IWritableFunction * This,
+    /* [in] */ BSTR equations);
+
+
+void __RPC_STUB IWritableFunction_SetEquations_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableFunction_GetLastError_Proxy( 
+    IWritableFunction * This,
+    /* [retval][out] */ BSTR *message);
+
+
+void __RPC_STUB IWritableFunction_GetLastError_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IWritableFunction_INTERFACE_DEFINED__ */
 
 
 #ifndef __IGraphInfo_INTERFACE_DEFINED__
@@ -2813,6 +2004,318 @@ void __RPC_STUB IWritableGraphInfo_AddGraph_Stub(
 #endif 	/* __IWritableGraphInfo_INTERFACE_DEFINED__ */
 
 
+#ifndef __IResultMerger_INTERFACE_DEFINED__
+#define __IResultMerger_INTERFACE_DEFINED__
+
+/* interface IResultMerger */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IResultMerger;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("4D5B2A01-1CC2-4D56-A8D7-67C730A057ED")
+    IResultMerger : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddResult( 
+            /* [in] */ IResultBase *result) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CanAddResult( 
+            /* [in] */ IResultBase *result,
+            /* [retval][out] */ VARIANT_BOOL *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateResult( 
+            /* [retval][out] */ IResultBase **result) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IResultMergerVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IResultMerger * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IResultMerger * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IResultMerger * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IResultMerger * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IResultMerger * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IResultMerger * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IResultMerger * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddResult )( 
+            IResultMerger * This,
+            /* [in] */ IResultBase *result);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanAddResult )( 
+            IResultMerger * This,
+            /* [in] */ IResultBase *result,
+            /* [retval][out] */ VARIANT_BOOL *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateResult )( 
+            IResultMerger * This,
+            /* [retval][out] */ IResultBase **result);
+        
+        END_INTERFACE
+    } IResultMergerVtbl;
+
+    interface IResultMerger
+    {
+        CONST_VTBL struct IResultMergerVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IResultMerger_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IResultMerger_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IResultMerger_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IResultMerger_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IResultMerger_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IResultMerger_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IResultMerger_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IResultMerger_AddResult(This,result)	\
+    (This)->lpVtbl -> AddResult(This,result)
+
+#define IResultMerger_CanAddResult(This,result,value)	\
+    (This)->lpVtbl -> CanAddResult(This,result,value)
+
+#define IResultMerger_CreateResult(This,result)	\
+    (This)->lpVtbl -> CreateResult(This,result)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IResultMerger_AddResult_Proxy( 
+    IResultMerger * This,
+    /* [in] */ IResultBase *result);
+
+
+void __RPC_STUB IResultMerger_AddResult_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IResultMerger_CanAddResult_Proxy( 
+    IResultMerger * This,
+    /* [in] */ IResultBase *result,
+    /* [retval][out] */ VARIANT_BOOL *value);
+
+
+void __RPC_STUB IResultMerger_CanAddResult_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IResultMerger_CreateResult_Proxy( 
+    IResultMerger * This,
+    /* [retval][out] */ IResultBase **result);
+
+
+void __RPC_STUB IResultMerger_CreateResult_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IResultMerger_INTERFACE_DEFINED__ */
+
+
+#ifndef __IResult_INTERFACE_DEFINED__
+#define __IResult_INTERFACE_DEFINED__
+
+/* interface IResult */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IResult;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9B7D45A5-77FD-4E97-8C4A-76D3610CC875")
+    IResult : public IResultBase
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetResultMerger( 
+            /* [retval][out] */ IResultMerger **merger) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IResultVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IResult * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IResult * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IResult * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IResult * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IResult * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IResult * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IResult * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetResultMerger )( 
+            IResult * This,
+            /* [retval][out] */ IResultMerger **merger);
+        
+        END_INTERFACE
+    } IResultVtbl;
+
+    interface IResult
+    {
+        CONST_VTBL struct IResultVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IResult_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IResult_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IResult_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IResult_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IResult_GetResultMerger(This,merger)	\
+    (This)->lpVtbl -> GetResultMerger(This,merger)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IResult_GetResultMerger_Proxy( 
+    IResult * This,
+    /* [retval][out] */ IResultMerger **merger);
+
+
+void __RPC_STUB IResult_GetResultMerger_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IResult_INTERFACE_DEFINED__ */
+
+
 #ifndef __IGraphResult_INTERFACE_DEFINED__
 #define __IGraphResult_INTERFACE_DEFINED__
 
@@ -3183,229 +2686,6 @@ void __RPC_STUB IWritableGraphResult_AddGraph_Stub(
 #endif 	/* __IWritableGraphResult_INTERFACE_DEFINED__ */
 
 
-#ifndef __IGroupNode_INTERFACE_DEFINED__
-#define __IGroupNode_INTERFACE_DEFINED__
-
-/* interface IGroupNode */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IGroupNode;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("28EBA211-E2B0-4717-87AA-63A0A5C76CDC")
-    IGroupNode : public IDispatch
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [retval][out] */ int *count) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetNode( 
-            /* [in] */ int index,
-            /* [retval][out] */ INode **node) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CanAddNode( 
-            /* [in] */ INode *node) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddNode( 
-            /* [in] */ INode *node) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateNode( 
-            /* [retval][out] */ INode **node) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IGroupNodeVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IGroupNode * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IGroupNode * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IGroupNode * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IGroupNode * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IGroupNode * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IGroupNode * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IGroupNode * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLength )( 
-            IGroupNode * This,
-            /* [retval][out] */ int *count);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetNode )( 
-            IGroupNode * This,
-            /* [in] */ int index,
-            /* [retval][out] */ INode **node);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanAddNode )( 
-            IGroupNode * This,
-            /* [in] */ INode *node);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddNode )( 
-            IGroupNode * This,
-            /* [in] */ INode *node);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateNode )( 
-            IGroupNode * This,
-            /* [retval][out] */ INode **node);
-        
-        END_INTERFACE
-    } IGroupNodeVtbl;
-
-    interface IGroupNode
-    {
-        CONST_VTBL struct IGroupNodeVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IGroupNode_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IGroupNode_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IGroupNode_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IGroupNode_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IGroupNode_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IGroupNode_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IGroupNode_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IGroupNode_GetLength(This,count)	\
-    (This)->lpVtbl -> GetLength(This,count)
-
-#define IGroupNode_GetNode(This,index,node)	\
-    (This)->lpVtbl -> GetNode(This,index,node)
-
-#define IGroupNode_CanAddNode(This,node)	\
-    (This)->lpVtbl -> CanAddNode(This,node)
-
-#define IGroupNode_AddNode(This,node)	\
-    (This)->lpVtbl -> AddNode(This,node)
-
-#define IGroupNode_CreateNode(This,node)	\
-    (This)->lpVtbl -> CreateNode(This,node)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGroupNode_GetLength_Proxy( 
-    IGroupNode * This,
-    /* [retval][out] */ int *count);
-
-
-void __RPC_STUB IGroupNode_GetLength_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGroupNode_GetNode_Proxy( 
-    IGroupNode * This,
-    /* [in] */ int index,
-    /* [retval][out] */ INode **node);
-
-
-void __RPC_STUB IGroupNode_GetNode_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGroupNode_CanAddNode_Proxy( 
-    IGroupNode * This,
-    /* [in] */ INode *node);
-
-
-void __RPC_STUB IGroupNode_CanAddNode_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGroupNode_AddNode_Proxy( 
-    IGroupNode * This,
-    /* [in] */ INode *node);
-
-
-void __RPC_STUB IGroupNode_AddNode_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGroupNode_CreateNode_Proxy( 
-    IGroupNode * This,
-    /* [retval][out] */ INode **node);
-
-
-void __RPC_STUB IGroupNode_CreateNode_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IGroupNode_INTERFACE_DEFINED__ */
-
-
 #ifndef __IKernell_INTERFACE_DEFINED__
 #define __IKernell_INTERFACE_DEFINED__
 
@@ -3421,8 +2701,11 @@ EXTERN_C const IID IID_IKernell;
     IKernell : public IDispatch
     {
     public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetActionAllocator( 
-            /* [retval][out] */ IActionAllocator **allocator) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetFunction( 
+            /* [retval][out] */ IFunction **function) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateInitialResult( 
+            /* [retval][out] */ IResultBase **result) = 0;
         
     };
     
@@ -3472,9 +2755,13 @@ EXTERN_C const IID IID_IKernell;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetActionAllocator )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFunction )( 
             IKernell * This,
-            /* [retval][out] */ IActionAllocator **allocator);
+            /* [retval][out] */ IFunction **function);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateInitialResult )( 
+            IKernell * This,
+            /* [retval][out] */ IResultBase **result);
         
         END_INTERFACE
     } IKernellVtbl;
@@ -3512,8 +2799,11 @@ EXTERN_C const IID IID_IKernell;
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define IKernell_GetActionAllocator(This,allocator)	\
-    (This)->lpVtbl -> GetActionAllocator(This,allocator)
+#define IKernell_GetFunction(This,function)	\
+    (This)->lpVtbl -> GetFunction(This,function)
+
+#define IKernell_CreateInitialResult(This,result)	\
+    (This)->lpVtbl -> CreateInitialResult(This,result)
 
 #endif /* COBJMACROS */
 
@@ -3522,12 +2812,24 @@ EXTERN_C const IID IID_IKernell;
 
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IKernell_GetActionAllocator_Proxy( 
+/* [id] */ HRESULT STDMETHODCALLTYPE IKernell_GetFunction_Proxy( 
     IKernell * This,
-    /* [retval][out] */ IActionAllocator **allocator);
+    /* [retval][out] */ IFunction **function);
 
 
-void __RPC_STUB IKernell_GetActionAllocator_Stub(
+void __RPC_STUB IKernell_GetFunction_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IKernell_CreateInitialResult_Proxy( 
+    IKernell * This,
+    /* [retval][out] */ IResultBase **result);
+
+
+void __RPC_STUB IKernell_CreateInitialResult_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -3536,6 +2838,138 @@ void __RPC_STUB IKernell_GetActionAllocator_Stub(
 
 
 #endif 	/* __IKernell_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWritableKernell_INTERFACE_DEFINED__
+#define __IWritableKernell_INTERFACE_DEFINED__
+
+/* interface IWritableKernell */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWritableKernell;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("DB255DC6-645A-4D60-A7C6-5D3019C2DBB7")
+    IWritableKernell : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetFunction( 
+            /* [in] */ IFunction *function) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IWritableKernellVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWritableKernell * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWritableKernell * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWritableKernell * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWritableKernell * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWritableKernell * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWritableKernell * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWritableKernell * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetFunction )( 
+            IWritableKernell * This,
+            /* [in] */ IFunction *function);
+        
+        END_INTERFACE
+    } IWritableKernellVtbl;
+
+    interface IWritableKernell
+    {
+        CONST_VTBL struct IWritableKernellVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWritableKernell_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IWritableKernell_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IWritableKernell_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IWritableKernell_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IWritableKernell_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IWritableKernell_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IWritableKernell_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IWritableKernell_SetFunction(This,function)	\
+    (This)->lpVtbl -> SetFunction(This,function)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableKernell_SetFunction_Proxy( 
+    IWritableKernell * This,
+    /* [in] */ IFunction *function);
+
+
+void __RPC_STUB IWritableKernell_SetFunction_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IWritableKernell_INTERFACE_DEFINED__ */
 
 
 
@@ -3548,28 +2982,20 @@ void __RPC_STUB IKernell_GetActionAllocator_Stub(
 
 EXTERN_C const IID LIBID_MorseKernel2;
 
-EXTERN_C const CLSID CLSID_CActionAllocator;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("43EAE42D-D986-4DAB-9D7D-D4B725E77AB0")
-CActionAllocator;
-#endif
-
-EXTERN_C const CLSID CLSID_CActionManagerImpl;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("860DAF52-F263-4F92-A8BE-673E99A9959F")
-CActionManagerImpl;
-#endif
-
 EXTERN_C const CLSID CLSID_CCompReg;
 
 #ifdef __cplusplus
 
 class DECLSPEC_UUID("84035475-16DE-4504-ABF2-5C734E46A96A")
 CCompReg;
+#endif
+
+EXTERN_C const CLSID CLSID_CFunctionImpl;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("FDFB8D0E-74FF-439C-A13B-4A39387B7037")
+CFunctionImpl;
 #endif
 
 EXTERN_C const CLSID CLSID_CGraphInfoImpl;
@@ -3588,111 +3014,13 @@ class DECLSPEC_UUID("43037E6F-9884-4D5C-BB41-44D582888F9E")
 CGraphResultImpl;
 #endif
 
-#ifndef __IKernellEvents_DISPINTERFACE_DEFINED__
-#define __IKernellEvents_DISPINTERFACE_DEFINED__
+EXTERN_C const CLSID CLSID_CKernellImpl;
 
-/* dispinterface IKernellEvents */
-/* [helpstring][uuid] */ 
+#ifdef __cplusplus
 
-
-EXTERN_C const IID DIID_IKernellEvents;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-
-    MIDL_INTERFACE("7458F939-BE83-4246-8AB8-0E26B56D34F3")
-    IKernellEvents : public IDispatch
-    {
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IKernellEventsVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IKernellEvents * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IKernellEvents * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IKernellEvents * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IKernellEvents * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IKernellEvents * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IKernellEvents * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IKernellEvents * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        END_INTERFACE
-    } IKernellEventsVtbl;
-
-    interface IKernellEvents
-    {
-        CONST_VTBL struct IKernellEventsVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IKernellEvents_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IKernellEvents_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IKernellEvents_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IKernellEvents_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IKernellEvents_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IKernellEvents_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IKernellEvents_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-#endif 	/* __IKernellEvents_DISPINTERFACE_DEFINED__ */
-
+class DECLSPEC_UUID("96E908D0-29BD-423D-8CA8-9F4343C796A0")
+CKernellImpl;
+#endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 
 /* Additional Prototypes for ALL interfaces */

@@ -70,7 +70,7 @@ BEGIN
         BLOCK "041904e3"
         BEGIN
             VALUE "CompanyName", "Eugene Petrenko"
-            VALUE "FileDescription", "New ideas MorseKernel Type Library"
+            VALUE "FileDescription", "New Ideas MorseKernel Type Library"
             VALUE "FileVersion", "2.0.0.1"
             VALUE "InternalName", "MorseKernel2.dll"
             VALUE "LegalCopyright", "TODO: (c) Eugene Petrenko.  All rights reserved."

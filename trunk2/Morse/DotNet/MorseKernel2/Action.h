@@ -3,8 +3,7 @@
 #pragma once
 #include "resource.h"       // main symbols
 #include "actionBase.h"
-#include "result.h"
-#include "actionManager.h"
+#include "resultBase.h"
 #include "Parameters.h"
 #include "ProgressBarInfo.h"
 
@@ -17,15 +16,13 @@
 ]
 __interface IAction : IActionBase
 {
-	[id(1)]
-	HRESULT GetNextActionManager([out, retval] IActionManager** manager);
 	[id(2)]
 	HRESULT SetActionParameters([in] IParameters* parameters);
 	[id(3)]
-	HRESULT Do([in] IResult* input, [out, retval] IResult** output);
+	HRESULT Do([in] IResultBase* input, [out, retval] IResultBase** output);
 	[id(4)]
 	HRESULT SetProgressBarInfo([in] IProgressBarInfo* pinfo);
 	[id(5)]
-	HRESULT IsChainLeaf([out, retval] VARIANT_BOOL* result);
+	HRESULT CanDo([in] IResultBase* result, [out, retval] VARIANT_BOOL* can);
 };
 

@@ -43,3 +43,10 @@
 
 
 using namespace ATL;
+
+#include <iostream>
+using namespace std;
+
+#define SAFE_DELETE(x) {if((x)!=NULL) {delete (x); (x)=NULL; }}
+#define SAFE_DELETE_ARR(x) {if((x)!=NULL) {delete[] (x); (x)=NULL; }}
+#define SAFE_RELEASE(x) {if((x)!=NULL) {(x)->Release(); (x)=NULL; }}
