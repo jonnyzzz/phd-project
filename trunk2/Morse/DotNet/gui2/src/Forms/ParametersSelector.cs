@@ -98,6 +98,7 @@ namespace gui2.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(ParametersSelector));
 			this.panelParameters = new System.Windows.Forms.Panel();
 			this.parameterCaptionBox = new System.Windows.Forms.GroupBox();
 			this.panelParametersContainer = new System.Windows.Forms.Panel();
@@ -212,6 +213,7 @@ namespace gui2.Forms
 			this.Controls.Add(this.splitter);
 			this.Controls.Add(this.panelParameters);
 			this.Controls.Add(this.panelControl);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "ParametersSelector";
 			this.Text = "ParametersSelector";
 			this.panelParameters.ResumeLayout(false);

@@ -64,10 +64,13 @@ namespace gui2.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(ComputationForm));
 			this.panelLeft = new System.Windows.Forms.Panel();
 			this.tree = new guiControls.TreeControl.ComputationTree();
 			this.panelRight = new System.Windows.Forms.Panel();
 			this.panelRightUp = new System.Windows.Forms.Panel();
+			this.groupBoxControlInfo = new System.Windows.Forms.GroupBox();
+			this.panelInfo = new System.Windows.Forms.Panel();
 			this.panelRightDown = new System.Windows.Forms.Panel();
 			this.groupBoxProgressBar = new System.Windows.Forms.GroupBox();
 			this.panelProgress = new System.Windows.Forms.Panel();
@@ -78,15 +81,13 @@ namespace gui2.Forms
 			this.menuInvestigations = new System.Windows.Forms.MenuItem();
 			this.menuSystem = new System.Windows.Forms.MenuItem();
 			this.menuSystemNew = new System.Windows.Forms.MenuItem();
-			this.groupBoxControlInfo = new System.Windows.Forms.GroupBox();
-			this.panelInfo = new System.Windows.Forms.Panel();
 			this.panelLeft.SuspendLayout();
 			this.panelRight.SuspendLayout();
 			this.panelRightUp.SuspendLayout();
+			this.groupBoxControlInfo.SuspendLayout();
 			this.panelRightDown.SuspendLayout();
 			this.groupBoxProgressBar.SuspendLayout();
 			this.panelProgress.SuspendLayout();
-			this.groupBoxControlInfo.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panelLeft
@@ -130,6 +131,25 @@ namespace gui2.Forms
 			this.panelRightUp.Name = "panelRightUp";
 			this.panelRightUp.Size = new System.Drawing.Size(294, 517);
 			this.panelRightUp.TabIndex = 0;
+			// 
+			// groupBoxControlInfo
+			// 
+			this.groupBoxControlInfo.Controls.Add(this.panelInfo);
+			this.groupBoxControlInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBoxControlInfo.Location = new System.Drawing.Point(5, 5);
+			this.groupBoxControlInfo.Name = "groupBoxControlInfo";
+			this.groupBoxControlInfo.Size = new System.Drawing.Size(284, 507);
+			this.groupBoxControlInfo.TabIndex = 0;
+			this.groupBoxControlInfo.TabStop = false;
+			this.groupBoxControlInfo.Text = "Info";
+			// 
+			// panelInfo
+			// 
+			this.panelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelInfo.Location = new System.Drawing.Point(3, 16);
+			this.panelInfo.Name = "panelInfo";
+			this.panelInfo.Size = new System.Drawing.Size(278, 488);
+			this.panelInfo.TabIndex = 0;
 			// 
 			// panelRightDown
 			// 
@@ -220,25 +240,6 @@ namespace gui2.Forms
 			this.menuSystemNew.Text = "New";
 			this.menuSystemNew.Click += new System.EventHandler(this.menuSystemNew_Click);
 			// 
-			// groupBoxControlInfo
-			// 
-			this.groupBoxControlInfo.Controls.Add(this.panelInfo);
-			this.groupBoxControlInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupBoxControlInfo.Location = new System.Drawing.Point(5, 5);
-			this.groupBoxControlInfo.Name = "groupBoxControlInfo";
-			this.groupBoxControlInfo.Size = new System.Drawing.Size(284, 507);
-			this.groupBoxControlInfo.TabIndex = 0;
-			this.groupBoxControlInfo.TabStop = false;
-			this.groupBoxControlInfo.Text = "Info";
-			// 
-			// panelInfo
-			// 
-			this.panelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelInfo.Location = new System.Drawing.Point(3, 16);
-			this.panelInfo.Name = "panelInfo";
-			this.panelInfo.Size = new System.Drawing.Size(278, 488);
-			this.panelInfo.TabIndex = 0;
-			// 
 			// ComputationForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -246,16 +247,17 @@ namespace gui2.Forms
 			this.Controls.Add(this.splitterLR);
 			this.Controls.Add(this.panelLeft);
 			this.Controls.Add(this.panelRight);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Menu = this.mainMenu;
 			this.Name = "ComputationForm";
 			this.Text = "ComputationForm";
 			this.panelLeft.ResumeLayout(false);
 			this.panelRight.ResumeLayout(false);
 			this.panelRightUp.ResumeLayout(false);
+			this.groupBoxControlInfo.ResumeLayout(false);
 			this.panelRightDown.ResumeLayout(false);
 			this.groupBoxProgressBar.ResumeLayout(false);
 			this.panelProgress.ResumeLayout(false);
-			this.groupBoxControlInfo.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

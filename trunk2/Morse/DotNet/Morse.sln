@@ -120,6 +120,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiExternalResource", "guiE
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup2", "Setup2\Setup2.vdproj", "{48419D68-757B-4552-A006-A49168533D20}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -620,6 +624,19 @@ Global
 		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Test.Build.0 = Release|.NET
 		{9705EB3C-990B-485C-8B9F-64477FB0A933}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{9705EB3C-990B-485C-8B9F-64477FB0A933}.VisualizationDebug.Build.0 = Debug|.NET
+		{48419D68-757B-4552-A006-A49168533D20}.Debug.ActiveCfg = Debug
+		{48419D68-757B-4552-A006-A49168533D20}.Debug2.ActiveCfg = Debug
+		{48419D68-757B-4552-A006-A49168533D20}.Debug2Gui.ActiveCfg = Debug
+		{48419D68-757B-4552-A006-A49168533D20}.DebugAll.ActiveCfg = Debug
+		{48419D68-757B-4552-A006-A49168533D20}.DebugGL.ActiveCfg = Debug
+		{48419D68-757B-4552-A006-A49168533D20}.DebugGUI.ActiveCfg = Debug
+		{48419D68-757B-4552-A006-A49168533D20}.DebugGui2.ActiveCfg = Debug
+		{48419D68-757B-4552-A006-A49168533D20}.FullDebug.ActiveCfg = Debug
+		{48419D68-757B-4552-A006-A49168533D20}.NewDLL.ActiveCfg = Release
+		{48419D68-757B-4552-A006-A49168533D20}.Release.ActiveCfg = Release
+		{48419D68-757B-4552-A006-A49168533D20}.Release.Build.0 = Release
+		{48419D68-757B-4552-A006-A49168533D20}.Test.ActiveCfg = Release
+		{48419D68-757B-4552-A006-A49168533D20}.VisualizationDebug.ActiveCfg = Debug
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

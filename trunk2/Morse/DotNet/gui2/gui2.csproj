@@ -7,7 +7,7 @@
     >
         <Build>
             <Settings
-                ApplicationIcon = "App.ico"
+                ApplicationIcon = "..\resource\jo.ico"
                 AssemblyKeyContainerName = ""
                 AssemblyName = "gui2"
                 AssemblyOriginatorKeyFile = ""
