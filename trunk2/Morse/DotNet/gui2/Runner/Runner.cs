@@ -1,8 +1,11 @@
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using gui2.Document;
 using gui2.Forms;
-using guiKernel2.src.Container;
+using gui2.TreeNodes;
+using guiKernel2.Document;
+using guiKernel2.Container;
 
 namespace gui2.Runner
 {
@@ -21,15 +24,28 @@ namespace gui2.Runner
 		{
 			runner = this;
 			this.commandLine = commandLine;
-			this.computationForm = new ComputationForm();
 			this.core = Core.Instance;
+
+			this.computationForm = new ComputationForm();			
 
 			if (!commandLine.hasKey("verbose")) 
 			{
 				Application.Run(computationForm);
+			} 
+			else 
+			{
+				if (commandLine.hasKey("testMode"))
+				{
+					TestMode();
+				}
 			}
 
 			isInternal = commandLine.hasKey("Internal");
+		}
+
+		public Core Core
+		{
+			get { return core; }
 		}
 
 		public Document.Document Document
@@ -51,6 +67,12 @@ namespace gui2.Runner
 		public bool IsInternal
 		{
 			get { return isInternal; }
+		}
+
+		public void TestMode()
+		{
+			KernelDocument doc = new KernelDocument(Function.CreateTestFunction());
+			new Node(doc.CreateInitialNode());
 		}
 
 		#region static

@@ -14,6 +14,8 @@
 ]
 __interface IBoxMethodAction : IAction
 {
+	[id(110)]
+	HRESULT GetDimensionForParameters([in] IResultSet* resultSet, [out, retval] int* dimension);
 };
 
 
@@ -53,6 +55,10 @@ public:
 	HRESULT FinalConstruct();
 	
 	void FinalRelease();
+
+	//IBoxMethodParameters
+public:
+	STDMETHOD(GetDimensionForParameters)(IResultSet* resultSet, int* dimension);
 
 public:
 	STDMETHOD(SetActionParameters)(IParameters* pars);

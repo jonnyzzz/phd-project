@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using guiKernel2.ActionFactory.ActionInfos;
 using guiKernel2.Actions;
-using guiKernel2.src.Container;
+using guiKernel2.Container;
 
-namespace guiKernel2.src.ActionFactory.ActionInfos
+namespace guiKernel2.ActionFactory.ActionInfos
 {
 	/// <summary>
 	/// Summary description for ActionInfo.
@@ -33,16 +33,6 @@ namespace guiKernel2.src.ActionFactory.ActionInfos
 		public override string ToString()
 		{
 			return string.Format("ActionInfo: [name = {0}, result = {1}, matadata = {2}, isLeaf = {3}]", ActionName, ResultType, MetadataName, IsLeaf);
-		}
-
-		public override ActionInfo Resolve()
-		{
-			return this;
-		}
-
-		public ActionWrapper CreateInstance()
-		{
-			return Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, IsLeaf);
 		}
 	}
 }

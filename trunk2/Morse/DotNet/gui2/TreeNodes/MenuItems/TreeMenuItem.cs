@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Windows.Forms;
-using guiActions.action;
+using guiActions.Actions;
 using guiKernel2.Actions;
 
 namespace gui2.TreeNodes
@@ -31,9 +31,10 @@ namespace gui2.TreeNodes
 			return Merge(new Action[]{action}, actions );
 		}
 
-		protected Action[] Merge(Action[] actions1, Action[] actions2)
+		protected Action[] Merge(Action[] actions1, params Action[] actions2)
 		{
-			ArrayList arrayList = new ArrayList(actions1);
+			ArrayList arrayList = new ArrayList();
+			arrayList.AddRange(actions1);
 			arrayList.AddRange(actions2);
 			return (Action[])arrayList.ToArray(typeof(Action));
 		}

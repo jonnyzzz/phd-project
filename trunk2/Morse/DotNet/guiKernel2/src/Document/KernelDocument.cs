@@ -1,5 +1,5 @@
-using gui2.Document;
-using guiKernel2.src.Node;
+using guiKernel2.Container;
+using guiKernel2.Node;
 using MorseKernel2;
 
 namespace guiKernel2.Document
@@ -14,6 +14,7 @@ namespace guiKernel2.Document
 
 		public KernelDocument(Function function)
 		{
+			Core.Instance.SetKernelDocument(this);
 			this.function = function.IFunction;
 			CKernellImplClass kernellClass = new CKernellImplClass();
 			IWritableKernell wKernell = kernellClass;

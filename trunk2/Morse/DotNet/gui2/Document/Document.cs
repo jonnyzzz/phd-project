@@ -1,6 +1,6 @@
 using gui2.TreeNodes;
 using guiKernel2.Document;
-using guiKernel2.src.Node;
+using guiKernel2.Node;
 
 namespace gui2.Document
 {

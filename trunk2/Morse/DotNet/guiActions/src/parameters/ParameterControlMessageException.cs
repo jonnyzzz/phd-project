@@ -49,6 +49,16 @@ namespace guiActions.src.parameters
 			get { return base.Message + " -> " + shortMessage; }
 		}
 
+		public override string ErrorDescription
+		{
+			get { return fullMessage; }
+		}
+
+		public override string ErrorDescriptionShort
+		{
+			get { return shortMessage; }
+		}
+
 
 		private class ParametersContorlParserException : ParametersControlException
 		{

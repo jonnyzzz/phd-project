@@ -11,7 +11,7 @@
                     RemoteDebugEnabled = "false"
                     RemoteDebugMachine = ""
                     StartAction = "Project"
-                    StartArguments = "/verbose"
+                    StartArguments = "/fverbose /testMode"
                     StartPage = ""
                     StartProgram = ""
                     StartURL = ""

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Wed Mar 16 13:43:52 2005
+/* at Thu Mar 17 02:49:06 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -1622,6 +1622,10 @@ EXTERN_C const IID IID_IBoxMethodAction;
     IBoxMethodAction : public IAction
     {
     public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimensionForParameters( 
+            /* [in] */ IResultSet *resultSet,
+            /* [retval][out] */ int *dimension) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -1688,6 +1692,11 @@ EXTERN_C const IID IID_IBoxMethodAction;
             /* [in] */ IResultSet *input,
             /* [retval][out] */ IResultSet **output);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimensionForParameters )( 
+            IBoxMethodAction * This,
+            /* [in] */ IResultSet *resultSet,
+            /* [retval][out] */ int *dimension);
+        
         END_INTERFACE
     } IBoxMethodActionVtbl;
 
@@ -1738,11 +1747,27 @@ EXTERN_C const IID IID_IBoxMethodAction;
     (This)->lpVtbl -> Do(This,input,output)
 
 
+#define IBoxMethodAction_GetDimensionForParameters(This,resultSet,dimension)	\
+    (This)->lpVtbl -> GetDimensionForParameters(This,resultSet,dimension)
+
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IBoxMethodAction_GetDimensionForParameters_Proxy( 
+    IBoxMethodAction * This,
+    /* [in] */ IResultSet *resultSet,
+    /* [retval][out] */ int *dimension);
+
+
+void __RPC_STUB IBoxMethodAction_GetDimensionForParameters_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
 
 
 

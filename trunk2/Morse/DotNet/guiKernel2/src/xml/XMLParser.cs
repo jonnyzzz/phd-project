@@ -1,12 +1,10 @@
 using System;
 using System.Collections;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Xml;
 using guiKernel2.ActionFactory.ActionInfos;
-using guiKernel2.src.ActionFactory.ActionInfos;
-using guiKernel2.src.Container;
+using guiKernel2.Container;
 
 namespace guiKernel2.xml
 {
@@ -61,7 +59,7 @@ namespace guiKernel2.xml
 		private XmlDocument[] ParseMappingRef(XmlDocument document)
 		{
 			ArrayList xmlDocuments = new ArrayList();
-			XmlNodeList list = document.SelectNodes("mappings/assembies/mappingsRef");
+			XmlNodeList list = document.SelectNodes("mappings/assemblies/mappingsRef");
 			foreach (XmlNode node in list)
 			{
 				Console.Out.WriteLine("Ref");
@@ -81,16 +79,30 @@ namespace guiKernel2.xml
 		private void ParseActionAssemblies(XmlDocument document)
 		{
 			ArrayList assembliesList = new ArrayList(implAssemblies);
-			XmlNodeList list = document.SelectNodes("mappings/assembies/actionAssembly");
+			XmlNodeList list = document.SelectNodes("mappings/assemblies/actionAssembly");
 			foreach (XmlNode node in list)
 			{
 				string assemblyName = node.Attributes["name"].Value;
 				Assembly assembly = Assembly.Load(assemblyName);
-				assembliesList.Add( assembly);
+				assembliesList.Add( assembly );
 
 				Logger.Logger.LogMessage("Loaded assembly: {0}", assembly.GetName());
 			}
 			this.implAssemblies = (Assembly[])assembliesList.ToArray(typeof(Assembly));
+
+
+			ArrayList assembliesSource = new ArrayList(actionSourceAssemblies);
+			list = document.SelectNodes("mappings/assemblies/actionSource");
+			foreach (XmlNode node in list)
+			{
+				string assemblyName = node.Attributes["assembly"].Value;
+				Assembly assembly = Assembly.Load(assemblyName);
+				assembliesSource.Add(assembly);
+
+				Logger.Logger.LogMessage("Loaded assemby Source: {0}", assembly.GetName());
+			}
+
+			this.actionSourceAssemblies = (Assembly[])assembliesSource.ToArray(typeof(Assembly));
 		}
 
 		private void ParseActionDefs(XmlDocument document)
@@ -148,10 +160,26 @@ namespace guiKernel2.xml
 
 
 		private Assembly[] implAssemblies = new Assembly[0];
+		private Assembly[] actionSourceAssemblies = new Assembly[0];
 
 		public Assembly[] ImplAssemblies
 		{
 			get { return implAssemblies; }
+		}
+
+		public Assembly[] ActionSourceAssemblies
+		{
+			get { return actionSourceAssemblies; }
+		}
+
+		public Assembly[] Assemblies
+		{
+			get
+			{
+				ArrayList list = new ArrayList(ImplAssemblies);
+				list.AddRange(ActionSourceAssemblies);
+				return (Assembly[])list.ToArray(typeof(Assembly));
+			}
 		}
 
 	}

@@ -1,16 +1,16 @@
-using System;
-using guiActions.parameters;
+using guiActions.Parameters;
 using guiKernel2.Actions;
+using guiKernel2.Node;
 using MorseKernel2;
 
-namespace guiActions.action
+namespace guiActions.Actions
 {
 	/// <summary>
 	/// Summary description for Action.
 	/// </summary>
 	public abstract class Action : ActionWrapper
 	{
-		public Action(IAction action, bool isChainLeaf) : base(action, isChainLeaf)
+		public Action(bool isChainLeaf) : base(isChainLeaf)
 		{
 		}
 
@@ -27,19 +27,16 @@ namespace guiActions.action
 		private IParameters cachedParameters = null;
 		private ParametersControl cachedParametersControl = null;
 		
-		protected abstract ParametersControl GetParametersControlInternal();
+		protected abstract ParametersControl GetParametersControlInternal(KernelNode node);
 
-		public ParametersControl ParametesControl
+		public ParametersControl GetParametesControl(KernelNode node)
 		{
-			get
+			if (cachedParametersControl == null)
 			{
-				if (cachedParametersControl == null)
-				{
-					cachedParametersControl = GetParametersControlInternal();
-					cachedParametersControl.DataSubmitted +=new ParametersSubmitted(DataSubmitted);
-				}
-				return cachedParametersControl;				
+				cachedParametersControl = GetParametersControlInternal(node);
+				cachedParametersControl.DataSubmitted += new ParametersSubmitted(DataSubmitted);
 			}
+			return cachedParametersControl;
 		}
 
 		private void DataSubmitted(IParameters parameters)

@@ -1,5 +1,10 @@
 using gui.Forms;
-using gui2.Document;
+using gui2.ActionPerformer;
+using gui2.TreeNodes;
+using guiActions.Actions;
+using guiKernel2.Document;
+using guiKernel2.src.Actions;
+using guiKernel2.src.Node;
 
 namespace gui2.Forms
 {
@@ -164,6 +169,22 @@ namespace gui2.Forms
 
 				tree.Root = Runner.Runner.Instance.Document.RootNode;
 			}
+		}
+
+		private ProgressBarInfo progressBarInfo = new ProgressBarInfo();
+		public ProgressBarInfo ProgressBar 
+		{
+			get
+			{
+				return progressBarInfo;
+			}
+		}
+
+
+		public void AcceptActionChain(Node node, Action[] chain)
+		{
+			ChainPerformer performer = new ChainPerformer(node, chain, ProgressBar);
+			performer.DoActionsWithDialog(this);
 		}
 	}
 }

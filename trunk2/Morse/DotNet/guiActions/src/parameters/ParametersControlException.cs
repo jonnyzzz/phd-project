@@ -18,5 +18,22 @@ namespace guiActions.src.parameters
 		public ParametersControlException()
 		{
 		}
+
+		public virtual string ErrorDescription
+		{
+			get
+			{
+				return Message;
+			}
+		}
+
+		public virtual string ErrorDescriptionShort
+		{
+			get
+			{
+				return Message;
+			}
+		}
+
 	}
 }

@@ -57,6 +57,18 @@ STDMETHODIMP CBoxMethodAction::CanDo(IResultSet* in, VARIANT_BOOL* out) {
 	return S_OK;
 }
 
+STDMETHODIMP CBoxMethodAction::GetDimensionForParameters(IResultSet* resultSet, int* dimension) {
+	VARIANT_BOOL test;
+	CanDo(resultSet, &test);
+
+	if (test = FALSE) return E_INVALIDARG;
+
+	GraphResultGraphIterator it(resultSet);
+	*dimension = it->getDimention();
+
+	return S_OK;
+}
+
 
 STDMETHODIMP CBoxMethodAction::Do(IResultSet* in, IResultSet** out) {
 	VARIANT_BOOL canDo;
@@ -87,9 +99,12 @@ STDMETHODIMP CBoxMethodAction::Do(IResultSet* in, IResultSet** out) {
 	hr = function->GetDimension(&dimension);
 	ATLASSERT(SUCCEEDED(hr));
 
+	cout<<"Dimension = "<<dimension<<"\n";
+
 	int* factor = new int[dimension];
 	for (int i=0; i<dimension; i++) {
 		hr = parameters->GetFactor(i, &factor[i]);
+		cout<<"factor = "<<factor[i]<<"\n";
 		ATLASSERT(SUCCEEDED(hr));
 	}
 

@@ -2,10 +2,9 @@ using System;
 using System.Collections;
 using System.Reflection;
 using guiKernel2.ActionFactory;
+using guiKernel2.ActionFactory.ActionInfos;
 using guiKernel2.Actions;
-using guiKernel2.src.ActionFactory;
-using guiKernel2.src.Container;
-using MorseKernel2;
+using guiKernel2.Container;
 
 namespace guiKernel2.ActionFactory
 {
@@ -36,31 +35,27 @@ namespace guiKernel2.ActionFactory
 		protected void AddActionMapping(ActionMappingAttribute attribute, Type type)
 		{
 			if (mapping.ContainsKey(attribute.ActionInterface)) throw new ActionWrapperFactoryException("ActionWrapper was allready defined");
-			
+			Logger.Logger.LogMessage("Found Action Mapping [interface = {0}, wrapper = {1}", attribute.ActionInterface.Name, type.Name);
 			mapping[attribute.ActionInterface] = type;
 		}
 
+		protected Type GetWrapperType(Type action)
+		{
+			if (!mapping.ContainsKey(action)) throw new ActionWrapperFactoryException("No action Wrapper for " + action.Name);
+			return mapping[action] as Type;
+		}
+
+
 		public ActionWrapper CreateActionWrapper(string actionName, bool isLeaf)
 		{
-			return CreateActionWrapper(Type.GetType(actionName), isLeaf);
-			
+			return CreateActionWrapper(Core.GetType(actionName), isLeaf);			
 		}
 
 		private ActionWrapper CreateActionWrapper(Type actionType, bool isLeaf)
 		{
-			IAction action = actionType.GetConstructor(new Type[]{}).Invoke(null, new object[]{}) as IAction;
-			return CreateActionWrapper(action, actionType, isLeaf);
+			Type wrapperType = GetWrapperType(actionType);
+			ConstructorInfo info = wrapperType.GetConstructor(new Type[]{typeof(bool)});
+			return info.Invoke(new object[]{isLeaf}) as ActionWrapper;			
 		}
-
-
-		private ActionWrapper CreateActionWrapper(IAction action, Type actionType, bool isLeaf)
-		{
-			if (!mapping.ContainsKey(actionType)) throw new ActionWrapperFactoryException("Unable to find action mapping");
-
-			Type wrapperType = mapping[actionType] as Type;
-
-			ConstructorInfo constructor = wrapperType.GetConstructor(new Type[] { typeof(IAction), typeof(bool) } );
-			return constructor.Invoke(null, new object[]{action, isLeaf}) as ActionWrapper;
-		}	
 	}
 }

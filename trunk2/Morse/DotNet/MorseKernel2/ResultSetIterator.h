@@ -29,7 +29,7 @@ public:
 	Result* Current() {
 		Result* result;
 		IResultBase* resultBase;
-		HRESULT hr = resultSet->QueryInterface(&resultBase);
+		HRESULT hr = resultSet->GetResult(index, &resultBase);
 		ATLASSERT(SUCCEEDED(hr));
 		ATLASSERT(resultBase != NULL);
 

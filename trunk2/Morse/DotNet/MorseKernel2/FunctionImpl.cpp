@@ -128,6 +128,13 @@ bool CFunctionImpl::initializeContent() {
 	//todo: FIX Throw memory leaks
 	try {
 		functionFactory = new FunctionFactory((LPCTSTR)this->equations);
+
+		cout<<"\ninputed:\n"<<(LPCTSTR)this->equations<<"\nEnded\n\n";
+
+		functionFactory->print(cout);
+		
+		cout<<"\nEnd of functionSource dump\n\n";
+
 		FunctionNode* node = NULL;
 
 		node = safeGetNode("_dimension", KernelException(KernelException_NoDimention));
@@ -135,6 +142,8 @@ bool CFunctionImpl::initializeContent() {
 			throw KernelException(KernelException_UnableToEvaluateDimension);
 
 		this->dimension = (int)node->evaluate(&FunctionContext());
+
+		cout<<"Internal Function Dimension = "<<dimension<<"\n";
 
 		if (this->dimension <= 0) 
 			throw KernelException(KernelException_NegativeDimention);

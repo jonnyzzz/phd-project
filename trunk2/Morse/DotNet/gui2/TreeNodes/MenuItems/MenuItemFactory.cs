@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Windows.Forms;
-using guiActions.action;
+using guiActions.Actions;
 using guiKernel2.Actions;
 
 namespace gui2.TreeNodes

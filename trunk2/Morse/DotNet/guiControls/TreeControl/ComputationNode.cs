@@ -32,10 +32,19 @@ namespace guiControls.TreeControl
 		{
 			
 		}
+		
 
 		public void Update() 
 		{
 			this.Text = this.NodeCaption;
+		}
+
+		protected void AddNewNode(ComputationNode node)
+		{
+			lock (TreeView)
+			{
+				Nodes.Add(node);
+			}			
 		}
 
 		#region helpers

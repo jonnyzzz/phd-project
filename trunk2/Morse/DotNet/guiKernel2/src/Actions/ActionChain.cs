@@ -1,4 +1,7 @@
 using System.Collections;
+using guiKernel2.Node;
+using guiKernel2.src.Actions;
+using guiKernel2.src.Node;
 using MorseKernel2;
 
 namespace guiKernel2.Actions
@@ -32,22 +35,14 @@ namespace guiKernel2.Actions
 			}
 		}
 
-		public IResultSet Do(IResultSet resultSet, IProgressBar progressBar)
+		public ResultSet Do(ResultSet resultSet, ProgressBarInfo progressBarInfo)
 		{
-			IResultSet tmp = resultSet;
+			IResultSet tmp = resultSet.ToResultSet;
 			foreach (ActionWrapper action in actions)
 			{
-				tmp = action.Do(tmp, progressBar);
+				tmp = action.Do(tmp, progressBarInfo.GetProgressBarInfo(action));
 			}
-			return tmp;
-		}
-
-		public ActionWrapper[] NextActions
-		{
-			get
-			{
-				return new ActionWrapper[0];
-			}
+			return ResultSet.FromResultSet(tmp);
 		}
 	}
 }

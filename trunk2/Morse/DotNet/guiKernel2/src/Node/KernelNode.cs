@@ -1,10 +1,10 @@
 using System;
 using guiKernel2.Actions;
-using guiKernel2.src.ActionFactory;
-using guiKernel2.src.Container;
+using guiKernel2.Container;
+using guiKernel2.src.Node;
 using MorseKernel2;
 
-namespace guiKernel2.src.Node
+namespace guiKernel2.Node
 {
 	/// <summary>
 	/// Summary description for Node.
@@ -16,6 +16,7 @@ namespace guiKernel2.src.Node
 		public KernelNode(IResultBase result)
 		{
 			this.result = result as IResult;
+			if (this.result == null) throw new ArgumentException("result Should implement IResult");
 		}
 
 		public ActionWrapper[] GetNextActions()
@@ -36,6 +37,12 @@ namespace guiKernel2.src.Node
 				return result;
 			}
 		}
+
+		public ResultSet GetResultSet()
+		{
+			return ResultSet.FromKernelNode(this);
+		}
+
 
 		public string Caption
 		{

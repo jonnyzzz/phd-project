@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using guiActions.action;
+using guiActions.Actions;
 using guiKernel2.Actions;
 
 namespace guiActions.src.filter

@@ -1,7 +1,7 @@
 using System;
 using MorseKernel2;
 
-namespace guiActions.src.actionImpl
+namespace guiActions.ActionImpl
 {
 	public class BoxMethodParametersImpl : IBoxMethodParameters
 	{

@@ -1,5 +1,4 @@
-using System;
-using guiKernel2.src.ActionFactory;
+using guiKernel2.Container;
 using guiKernel2.src.Actions;
 using MorseKernel2;
 
@@ -13,11 +12,11 @@ namespace guiKernel2.Actions
 		private IAction action;
 		private readonly bool isChainLeaf;
 
-		public ActionWrapper(IAction action, bool isChainLeaf)
+		public ActionWrapper(bool isChainLeaf)
 		{
-			this.action = action;
 			this.isChainLeaf = isChainLeaf;
-		}
+			this.action = CreateAction();
+		}		
 
 		public bool IsChainLeaf
 		{
@@ -26,17 +25,13 @@ namespace guiKernel2.Actions
 
 		public abstract string ActionName { get; }
 		protected abstract IParameters Parameters{ get; }
+		protected abstract IAction CreateAction();
 		
-		public IResultSet Do(IResultSet input, IProgressBar progressBar)
+		public IResultSet Do(IResultSet input, IProgressBarInfo progressBarInfo)
 		{
 			IParameters parameters = Parameters;
-			if (parameters.GetType().GetInterface(ActionParametersName) == null)
-			{
-				throw new ActionPerformException("Parameter class does not match meta-defined interface");
-			}
-
 			action.SetActionParameters(parameters);
-			action.SetProgressBarInfo(progressBar.GetProgressBarInfo(this));
+			action.SetProgressBarInfo(progressBarInfo);
 			if (!action.CanDo(input))
 			{
 				throw new ActionPerformException("CanDo call returned FALSE");
@@ -61,6 +56,10 @@ namespace guiKernel2.Actions
 			}
 		}
 
+		public IAction Action
+		{
+			get { return action; }
+		}
 
 		public override string ToString()
 		{

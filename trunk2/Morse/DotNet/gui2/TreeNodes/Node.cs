@@ -1,8 +1,10 @@
 using System;
 using System.Windows.Forms;
-using guiActions.action;
+using guiActions.Actions;
 using guiActions.src.filter;
 using guiControls.TreeControl;
+using guiKernel2.ActionFactory;
+using guiKernel2.Node;
 using guiKernel2.src.Node;
 
 namespace gui2.TreeNodes
@@ -15,7 +17,7 @@ namespace gui2.TreeNodes
 		private KernelNode kernelNode;
 		public Node(KernelNode kernelNode) : base()
 		{
-			this.kernelNode = kernelNode;
+			this.kernelNode = kernelNode;			
 			Update();
 		}
 
@@ -43,6 +45,22 @@ namespace gui2.TreeNodes
 		public Action[] GetActionAfer(Action[] chain)
 		{
 			return Filter.FilterActions(kernelNode.GetNextActionsAfter(Filter.ToActionWrapper(chain)));
+		}
+
+		public void AddChild(Node node)
+		{
+			Logger.Logger.LogMessage("Adding Node");
+			
+			this.Nodes.Add(node);
+			this.Expand();
+		}
+
+		public ResultSet ResultSet
+		{
+			get
+			{
+				return KernelNode.GetResultSet();
+			}
 		}
 
 	}

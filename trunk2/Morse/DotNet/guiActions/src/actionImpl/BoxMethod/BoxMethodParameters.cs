@@ -1,20 +1,23 @@
 using System;
-using guiActions.parameters;
+using guiActions.Parameters;
 using MorseKernel2;
 
-namespace guiActions.src.actionImpl
+namespace guiActions.ActionImpl
 {
 	/// <summary>
 	/// Summary description for BoxMethodParameters.
 	/// </summary>
 	public class BoxMethodParameters : ParametersControl
 	{
+		private readonly int dimension;
+		private readonly IFunction function;
 		private System.ComponentModel.Container components = null;
 
-		public BoxMethodParameters()
+		public BoxMethodParameters(int dimension, IFunction function)
 		{
+			this.dimension = dimension;
+			this.function = function;
 			InitializeComponent();
-
 		}
 
 		/// <summary> 
@@ -39,13 +42,27 @@ namespace guiActions.src.actionImpl
 		/// </summary>
 		private void InitializeComponent()
 		{
-			components = new System.ComponentModel.Container();
+			// 
+			// BoxMethodParameters
+			// 
+			this.BackColor = System.Drawing.SystemColors.Desktop;
+			this.Name = "BoxMethodParameters";
+			this.Size = new System.Drawing.Size(424, 408);
+
 		}
 		#endregion
 
 		protected override IParameters SubmitDataInternal()
 		{
-			throw new NotImplementedException();
+			int[] factor = new int[dimension];
+			for (int i=0; i<dimension; i++) factor[i] = 2;
+
+			return new BoxMethodParametersImpl(false, function, factor );
+		}
+
+		public override string BoxCaption
+		{
+			get { return "Box Method"; }
 		}
 	}
 }

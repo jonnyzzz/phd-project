@@ -3,11 +3,11 @@ using System.Collections;
 using System.Text;
 using guiKernel2.ActionFactory.ActionInfos;
 using guiKernel2.Actions;
-using guiKernel2.src.ActionFactory.ActionInfos;
-using guiKernel2.src.Node;
+using guiKernel2.Container;
+using guiKernel2.Node;
 using MorseKernel2;
 
-namespace guiKernel2.src.ActionFactory
+namespace guiKernel2.ActionFactory
 {
 	/// <summary>
 	/// Summary description for NextActionFactory.
@@ -31,14 +31,13 @@ namespace guiKernel2.src.ActionFactory
 		private ActionInfo[] FindActionInfos(KernelNode node)
 		{
 			ArrayList result = new ArrayList();
-			string resultType = node.Result.GetType().Name;
 			foreach (ActionInfo actionInfo in actions)
 			{
-				if (string.Equals(actionInfo.ResultType, resultType))
+				if ( Core.ImplemetsType(node.Result, actionInfo.ResultType))
 				{
 					Logger.Logger.LogMessage("Candidate Found: {0}", actionInfo);
 					IResultMetadata metadata =  node.Result.GetMetadata();
-					if (metadata.GetType().GetInterface(actionInfo.MetadataName) != null)
+					if (Core.ImplemetsType(metadata, actionInfo.MetadataName))
 					{
 						result.Add(actionInfo);
 					}
@@ -47,18 +46,38 @@ namespace guiKernel2.src.ActionFactory
 			return (ActionInfo[])result.ToArray(typeof(ActionInfo));
 		}
 
-		private ActionInfo[] FindActionInfosForPath(KernelNode node, ActionWrapper[] beforeActions)
+		public static void DumpInteraces(object o)
+		{	
+			Type oType = o.GetType();
+			Type resultType = typeof (IResult);
+						
+			Logger.Logger.LogMessage("Is IResult = {0}", o is IResult);
+
+			Logger.Logger.LogMessage("CoreImplemets = {0}", Core.ImplemetsType(o, resultType));
+
+			Logger.Logger.LogMessage("Has interface IResult = {0}", oType.GetInterface("IResult")!= null);
+			
+			Logger.Logger.LogMessage("Supported interfaces of {0}:", oType.FullName);
+			
+			foreach (Type type in oType.GetInterfaces())
+			{
+				Logger.Logger.LogMessage("\t{0}", type.Name);
+			}
+			Logger.Logger.LogMessage("End intrface dump");
+		}
+
+		private ActionRef[] FindActionInfosForPath(KernelNode node, ActionWrapper[] beforeActions)
 		{
 			return FindActionInfosForPath(FindActionInfos(node), beforeActions);			
 		}
 
-		private ActionInfo[] FindActionInfosForPath(ActionInfo[] acceptableActons, ActionWrapper[] selected)
+		private ActionRef[] FindActionInfosForPath(ActionRef[] acceptableActons, ActionWrapper[] selected)
 		{
 			if (selected.Length == 0) return acceptableActons;
 
 			string nextActionName = selected[0].ActionMappingName;
 
-			foreach (ActionInfo actionInfo in acceptableActons)
+			foreach (ActionRef actionInfo in acceptableActons)
 			{
 				if(string.Equals(actionInfo.ActionName, nextActionName))
 				{
@@ -67,28 +86,13 @@ namespace guiKernel2.src.ActionFactory
 					{
 						dec[i-1] = selected[i];
 					}
-					return FindActionInfosForPath(Resolve(actionInfo.ActionRefs), dec);
+					return FindActionInfosForPath(actionInfo.ActionRefs, dec);
 				}	
 			}
 			return new ActionInfo[0];
 		}
 
-		public ActionInfo Resolve(ActionRef reference)
-		{
-			return actionResolver[reference.ActionName] as ActionInfo;
-		}
-
-		public ActionInfo[] Resolve(ActionRef[] references)
-		{
-			ArrayList infos = new ArrayList();
-			foreach (ActionRef actionRef in references)
-			{
-				infos.Add(actionRef.Resolve());
-			}
-			return (ActionInfo[])infos.ToArray(typeof(ActionInfo));
-		}
-
-		public ActionWrapper[] CreateInstances(ActionInfo[] infos)
+		public ActionWrapper[] CreateInstances(ActionRef[] infos)
 		{
 			ActionWrapper[] wrappers = new ActionWrapper[infos.Length];
 			for (int i = 0; i<infos.Length; i++)

@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using System.Text;
-using guiKernel2.src.ActionFactory.ActionInfos;
-using guiKernel2.src.Container;
+using guiKernel2.ActionFactory.ActionInfos;
+using guiKernel2.Actions;
+using guiKernel2.Container;
 
 namespace guiKernel2.ActionFactory.ActionInfos
 {
@@ -19,6 +20,11 @@ namespace guiKernel2.ActionFactory.ActionInfos
 		{
 			this.actionName = actionName;
 			this.isLeaf = isLeaf;
+		}
+
+		public ActionWrapper CreateInstance()
+		{
+			return Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, IsLeaf);
 		}
 
 		public string ActionName
@@ -43,12 +49,6 @@ namespace guiKernel2.ActionFactory.ActionInfos
 				return (ActionRef[])actionRefs.ToArray(typeof(ActionRef));
 			}
 		}
-
-		public virtual ActionInfo Resolve()
-		{
-			return Core.Instance.NextActionFactory.Resolve(this);
-		}
-
 
 		public override string ToString()
 		{

@@ -139,6 +139,8 @@ interface IComputationParameters : IParameters {
 ] 
 #line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
 interface IBoxMethodAction : IAction {
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+	[id(110)] HRESULT  GetDimensionForParameters([in] IResultSet *resultSet, [out,retval] int *dimension);
 };
 
 [
@@ -147,11 +149,11 @@ interface IBoxMethodAction : IAction {
 	dual,
 	pointer_default(unique)
 ] 
-#line 26 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
-interface IBoxMethodParameters : IComputationParameters {
 #line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
-	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+interface IBoxMethodParameters : IComputationParameters {
 #line 30 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
 	[id(11)] HRESULT  UseDerivate([out,retval] VARIANT_BOOL *out);
 };
 
@@ -387,7 +389,7 @@ library MorseKernel2
 		uuid(FDA0C930-C1F5-40C0-A0B6-A978CDA93F50),
 		helpstring("BoxMethodAction Class")
 	] 
-#line 45 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+#line 47 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
 	coclass CBoxMethodAction {
 		interface IBoxMethodAction;
 		interface IAction;

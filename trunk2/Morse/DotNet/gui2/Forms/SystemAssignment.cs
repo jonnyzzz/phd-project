@@ -3,8 +3,9 @@ using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using gui2.Document;
 using gui2.Runner;
+using guiKernel2;
+using guiKernel2.Document;
 
 namespace gui.Forms
 {

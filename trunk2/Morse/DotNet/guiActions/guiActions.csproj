@@ -76,13 +76,8 @@
                 />
                 <Reference
                     Name = "System.XML"
-                    AssemblyName = "System.XML"
+                    AssemblyName = "System.Xml"
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
-                />
-                <Reference
-                    Name = "guiKernel2"
-                    Project = "{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
                     Name = "Logger"
@@ -107,6 +102,11 @@
                     AssemblyName = "System.Drawing"
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
                 />
+                <Reference
+                    Name = "guiKernel2"
+                    Project = "{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
@@ -122,22 +122,42 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\BoxMethodAction.cs"
+                    RelPath = "src\actionImpl\BoxMethod\BoxMethodAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\BoxMethodParameters.cs"
-                    SubType = "Component"
+                    RelPath = "src\actionImpl\BoxMethod\BoxMethodParameters.cs"
+                    SubType = "UserControl"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\BoxMethodParameters.resx"
+                    RelPath = "src\actionImpl\BoxMethod\BoxMethodParameters.resx"
                     DependentUpon = "BoxMethodParameters.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "src\actionImpl\BoxMethodParametersImpl.cs"
+                    RelPath = "src\actionImpl\BoxMethod\BoxMethodParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\Tarjan\TarjanAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\Tarjan\TarjanParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\Tarjan\TarjanParameters.resx"
+                    DependentUpon = "TarjanParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\Tarjan\TarjanParametersImpl.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -153,8 +173,13 @@
                 />
                 <File
                     RelPath = "src\parameters\ParametersControl.cs"
-                    SubType = "Component"
+                    SubType = "UserControl"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\parameters\ParametersControl.resx"
+                    DependentUpon = "ParametersControl.cs"
+                    BuildAction = "EmbeddedResource"
                 />
                 <File
                     RelPath = "src\parameters\ParametersControlException.cs"

@@ -4,7 +4,8 @@
 #include "../cellImageBuilders/GraphSet.h"
 #include "GraphResultWrapper.h"
 #include "SmartInterface.h"
-
+#include <iostream>
+using namespace std;
 
 void GraphResultUtil::PerformProcess(AbstractProcess* process, IResultSet* input, bool isStrongComponent, IResultMetadata* metadata, IResultSet** output) {
 	process->start();
@@ -14,6 +15,8 @@ void GraphResultUtil::PerformProcess(AbstractProcess* process, IResultSet* input
 	}
 
 	GraphSet graphSet = process->results();
+
+	cout<<"GraphSet contents : "<< graphSet.Length()<<"\n";
 
 	GraphResultGraphList list(metadata);
 	list.AddGraphs(graphSet, isStrongComponent);

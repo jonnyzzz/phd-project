@@ -123,6 +123,21 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "ActionPerformer\ActionChainParameters.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ActionPerformer\ChainPerformer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ActionPerformer\Performer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Document\Document.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -135,6 +150,16 @@
                 <File
                     RelPath = "Forms\ComputationForm.resx"
                     DependentUpon = "ComputationForm.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Forms\ParametersSelector.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Forms\ParametersSelector.resx"
+                    DependentUpon = "ParametersSelector.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File

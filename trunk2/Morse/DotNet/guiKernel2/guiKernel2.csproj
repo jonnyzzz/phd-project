@@ -126,6 +126,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\ActionFactory\NextActionFactoryException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\ActionFactory\ActionInfos\ActionInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -161,7 +166,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Actions\IProgressBar.cs"
+                    RelPath = "src\Actions\ProgressBarInfo.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -187,6 +192,11 @@
                 />
                 <File
                     RelPath = "src\Node\KernelNode.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Node\ResultSet.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
