@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using gui.Logger;
 using gui.Tree.Node.Action;
@@ -58,10 +59,23 @@ namespace gui.Tree.Node.ActionAllocator
 
 			al.AddRange(ComputationNodeDynamicTest.parseNode(node.Node).actions);
 
-			ComputationNodeAction[] act = new ComputationNodeAction[al.Count];
-			for (int i = 0; i < al.Count; act[i] = (ComputationNodeAction) al[i++]) ;
+			al.Sort(new ActionFactoryComparer());
 
-			return act;
+			return (ComputationNodeAction[])al.ToArray(typeof(ComputationNodeAction));
 		}
+
+		private class ActionFactoryComparer : IComparer
+		{
+			public int Compare(object x, object y)
+			{
+				ComputationNodeAction a1 = x as ComputationNodeAction;
+				ComputationNodeAction a2 = y as ComputationNodeAction;
+
+				if (a1 == null || a2 == null) return 0;
+
+				return a1.ToString().CompareTo(a2.ToString());
+			}
+		}
+		
 	}
 }

@@ -6,7 +6,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Jan 30 01:30:09 2005
+/* at Sun Jan 30 16:48:02 2005
  */
 /* Compiler settings for _GLVisualization.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)

@@ -70,10 +70,10 @@ namespace gui.Tree.Node
 				{
 					items = merge(items, new ComputationNodeMenuItem[]
 						{
-							//ComputationNodeMenuFactory.DelimeterItem()
+							ComputationNodeMenuFactory.DelimeterItem()
 						});
 					items = merge(items,
-					              addPrefix(currentGroup.MenuItems, "Group: "));
+					              addPrefix(currentGroup.getMenuItems(), "Group: "));
 				}
 
 				if (items.Length == 0)
@@ -173,15 +173,25 @@ namespace gui.Tree.Node
 					this.CurrentGroup.removeNode(this);
 				}
 			}
+
+			if (this.CurrentGroup.Length == 0)
+			{
+				this.CurrentGroup = null;
+			}
 		}
 
 		#endregion
 
-		public static Hashtable table = new Hashtable();
+		private static Hashtable table = new Hashtable();
 
 		public static ComputationNode fromIKernelNode(IKernelNode node)
 		{
 			return table[node] as ComputationNode;
+		}
+
+		public static void ClearGroup()
+		{
+			ComputationNodePlural.getCurrentGroup().dehighlightChildrens();
 		}
 	}
 }

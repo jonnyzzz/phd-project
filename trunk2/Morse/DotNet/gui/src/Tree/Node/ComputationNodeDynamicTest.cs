@@ -40,12 +40,14 @@ namespace gui.Tree.Node
 
 			ComputationNodeAction act = null;
 
+			/*
 			if (mnode is ISubdevidable)
 			{
 				act = new ComputationNodeSubdevidable(mnode as ISubdevidable);
 				arrayActions.Add(act);
 				arrayItems.AddRange(act.getMenuItems());
 			}
+			*/
 
 			if (mnode is ISubdevidablePoint)
 			{

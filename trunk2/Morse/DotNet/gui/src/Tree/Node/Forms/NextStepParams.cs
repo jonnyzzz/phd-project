@@ -231,7 +231,7 @@ namespace gui.Tree.Node.Forms
 			table.Columns.Add(cln);
 			for (int i = 0; i < dimension; i++)
 			{
-				cln = new DataColumn("x" + i, typeof (string));
+				cln = new DataColumn("x" + (i + 1) , typeof (string));
 				table.Columns.Add(cln);
 			}
 

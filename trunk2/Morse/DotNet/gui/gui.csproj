@@ -481,11 +481,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Tree\Node\Action\CumputationNodeSubdevidable.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "src\Tree\Node\Action\DeleteNodeAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -502,6 +497,16 @@
                 />
                 <File
                     RelPath = "src\Tree\Node\Action\HomotopAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\ShowParentsAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\SubdeviceAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

@@ -49,10 +49,12 @@ namespace gui.Forms
 		private System.Windows.Forms.MenuItem menuItemInvestigations;
 		private System.Windows.Forms.MenuItem menuItemInvLoad;
 		private System.Windows.Forms.MenuItem menuItemInvSave;
+		private System.Windows.Forms.MenuItem menuItemDeselectGroup;
 		private IContainer components;
 
 		public void updateProgressBar(int min, int max, int current)
 		{
+			Application.DoEvents();
 			axProgressBar1.Min = min;
 			axProgressBar1.Max = max;
 			axProgressBar1.Value = current;
@@ -110,6 +112,9 @@ namespace gui.Forms
 			this.menuItemStartGNUPlot = new System.Windows.Forms.MenuItem();
 			this.menuItemHelp = new System.Windows.Forms.MenuItem();
 			this.menuItemAbout = new System.Windows.Forms.MenuItem();
+			this.menuItemInvestigations = new System.Windows.Forms.MenuItem();
+			this.menuItemInvLoad = new System.Windows.Forms.MenuItem();
+			this.menuItemInvSave = new System.Windows.Forms.MenuItem();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.panelNodeInfo = new System.Windows.Forms.Panel();
 			this.axProgressBar1 = new AxMSComctlLib.AxProgressBar();
@@ -123,9 +128,7 @@ namespace gui.Forms
 			this.splitterUD = new System.Windows.Forms.Splitter();
 			this.panelLeft = new System.Windows.Forms.Panel();
 			this.splitterLR = new System.Windows.Forms.Splitter();
-			this.menuItemInvestigations = new System.Windows.Forms.MenuItem();
-			this.menuItemInvLoad = new System.Windows.Forms.MenuItem();
-			this.menuItemInvSave = new System.Windows.Forms.MenuItem();
+			this.menuItemDeselectGroup = new System.Windows.Forms.MenuItem();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.axProgressBar1)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -209,7 +212,8 @@ namespace gui.Forms
 			// 
 			this.menuSelection.Index = 1;
 			this.menuSelection.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																						  this.menuDeselectAll});
+																						  this.menuDeselectAll,
+																						  this.menuItemDeselectGroup});
 			this.menuSelection.Text = "Selection";
 			// 
 			// menuDeselectAll
@@ -251,6 +255,25 @@ namespace gui.Forms
 			this.menuItemAbout.Index = 0;
 			this.menuItemAbout.Text = "About";
 			this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
+			// 
+			// menuItemInvestigations
+			// 
+			this.menuItemInvestigations.Index = 4;
+			this.menuItemInvestigations.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																								   this.menuItemInvLoad,
+																								   this.menuItemInvSave});
+			this.menuItemInvestigations.Text = "Investigations";
+			// 
+			// menuItemInvLoad
+			// 
+			this.menuItemInvLoad.Index = 0;
+			this.menuItemInvLoad.Text = "Open";
+			this.menuItemInvLoad.Click += new System.EventHandler(this.menuItemInvLoad_Click);
+			// 
+			// menuItemInvSave
+			// 
+			this.menuItemInvSave.Index = 1;
+			this.menuItemInvSave.Text = "Save";
 			// 
 			// groupBox1
 			// 
@@ -387,24 +410,11 @@ namespace gui.Forms
 			this.splitterLR.TabIndex = 9;
 			this.splitterLR.TabStop = false;
 			// 
-			// menuItemInvestigations
+			// menuItemDeselectGroup
 			// 
-			this.menuItemInvestigations.Index = 4;
-			this.menuItemInvestigations.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																								   this.menuItemInvLoad,
-																								   this.menuItemInvSave});
-			this.menuItemInvestigations.Text = "Investigations";
-			// 
-			// menuItemInvLoad
-			// 
-			this.menuItemInvLoad.Index = 0;
-			this.menuItemInvLoad.Text = "Open";
-			this.menuItemInvLoad.Click += new System.EventHandler(this.menuItemInvLoad_Click);
-			// 
-			// menuItemInvSave
-			// 
-			this.menuItemInvSave.Index = 1;
-			this.menuItemInvSave.Text = "Save";
+			this.menuItemDeselectGroup.Index = 1;
+			this.menuItemDeselectGroup.Text = "Deselect Group";
+			this.menuItemDeselectGroup.Click += new System.EventHandler(this.menuItemDeselectGroup_Click);
 			// 
 			// ComputationForm
 			// 
@@ -475,9 +485,14 @@ namespace gui.Forms
 			GC.Collect(GC.MaxGeneration);
 		}
 
+		public ComputationNode findNodeByKernelNode( IKernelNode node)
+		{
+			return computatioinTree.findNodeByKernelNode(node);
+		}
+
 		public void OnNewNode(IKernelNode parent, IKernelNode child)
 		{
-			ComputationNode node = computatioinTree.findNodeByKernelNode(parent);
+			ComputationNode node = findNodeByKernelNode(parent);
 			Console.Out.WriteLine("Found node: {0}", node.Text);
 			node.newNode(child);
 		}
@@ -587,6 +602,10 @@ namespace gui.Forms
 			}
 		}
 
+		private void menuItemDeselectGroup_Click(object sender, System.EventArgs e)
+		{
+			ComputationNodePlural.getCurrentGroup().dehighlightChildrens();
+		}
 
 		public ComputationNode RootNode
 		{

@@ -243,4 +243,6 @@ __interface IComputationMorseResult : IComputationResult {
 __interface IGroupNode {
 	[id(50)]
 		HRESULT nodeCount([out, retval] int* val);
+	[id(51)]
+		HRESULT getNode([in] int index, [out, retval] IKernelNode** node);
 };

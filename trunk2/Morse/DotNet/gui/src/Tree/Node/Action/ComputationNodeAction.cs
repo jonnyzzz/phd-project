@@ -12,5 +12,13 @@ namespace gui.Tree.Node.Action
 		}
 
 		public abstract ComputationNodeMenuItem[] getMenuItems();
+
+		public override string ToString()
+		{
+			ComputationNodeMenuItem[] itms = getMenuItems();
+			if (itms.Length == 0) return "zzzzzz";
+			
+			return itms[0].Text;
+		}
 	}
 }

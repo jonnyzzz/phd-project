@@ -53,6 +53,14 @@ STDMETHODIMP CProjectiveBundleGroup::nodeCount(int *val) {
 	return S_OK;
 }
 
+STDMETHODIMP CProjectiveBundleGroup::getNode(int index, IKernelNode** node) {
+	ListProjectiveBundleIterator it = nodeList.begin();
+	while (index-- > 0) it++;
+	if (it == nodeList.end()) return E_FAIL;
+	*node = *it;
+	return S_OK;
+}
+
 STDMETHODIMP CProjectiveBundleGroup::get_kernel(IKernelPointer** pVal)
 {
     ATLASSERT(kernel != NULL);

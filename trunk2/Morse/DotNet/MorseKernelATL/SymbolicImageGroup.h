@@ -75,6 +75,7 @@ public:
 	STDMETHOD(addNode)(ISymbolicImageGraph* im);
 	STDMETHOD(removeNode)(ISymbolicImageGraph* im);
 	STDMETHOD(nodeCount)(int* val);
+	STDMETHOD(getNode)(int index, IKernelNode** node);
 
 
     //IKernelNode
@@ -102,5 +103,7 @@ public:
 
     //IExportable
 	STDMETHOD(ExportData)(BSTR fileName);
+
+
 	
 };

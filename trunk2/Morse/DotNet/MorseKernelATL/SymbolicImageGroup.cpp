@@ -59,6 +59,14 @@ STDMETHODIMP CSymbolicImageGroup::nodeCount(int* val) {
 	return S_OK;
 }
 
+STDMETHODIMP CSymbolicImageGroup::getNode(int index, IKernelNode** node) {
+	ISymbolicImageListIterator it = nodeList.begin();
+	while (index-- > 0) it++;
+	if (it == nodeList.end()) return E_FAIL;
+
+	*node = *it;
+	return S_OK;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //IKernelNode

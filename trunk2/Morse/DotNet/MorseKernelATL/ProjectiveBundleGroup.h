@@ -74,6 +74,7 @@ public:
 	STDMETHOD(addNode)(IProjectiveBundleGraph* graph);
 	STDMETHOD(removeNode)(IProjectiveBundleGraph* graph);
 	STDMETHOD(nodeCount)(int* val);
+	STDMETHOD(getNode)(int index, IKernelNode** node);
 
 	STDMETHOD(get_kernel)(IKernelPointer** pVal);
 	STDMETHOD(putref_kernel)(IKernelPointer* newVal);

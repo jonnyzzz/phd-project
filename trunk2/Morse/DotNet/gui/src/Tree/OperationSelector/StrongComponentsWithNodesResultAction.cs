@@ -14,7 +14,7 @@ namespace gui.Tree.OperationSelector
 		public StrongComponentsWithNodesResultAction(IComputationGraphResult result)
 		{
 			this.result = result;
-			this.Text = "Chain Reccurent set with edges";
+			this.Text = "Strong Components with edges";
 		}
 
 		public override void DoAction()

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Jan 30 01:29:41 2005
+/* at Sun Jan 30 16:47:35 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -3402,6 +3402,10 @@ EXTERN_C const IID IID_IGroupNode;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE nodeCount( 
             /* [retval][out] */ int *val) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE getNode( 
+            /* [in] */ int index,
+            /* [retval][out] */ IKernelNode **node) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -3454,6 +3458,11 @@ EXTERN_C const IID IID_IGroupNode;
             IGroupNode * This,
             /* [retval][out] */ int *val);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *getNode )( 
+            IGroupNode * This,
+            /* [in] */ int index,
+            /* [retval][out] */ IKernelNode **node);
+        
         END_INTERFACE
     } IGroupNodeVtbl;
 
@@ -3493,6 +3502,9 @@ EXTERN_C const IID IID_IGroupNode;
 #define IGroupNode_nodeCount(This,val)	\
     (This)->lpVtbl -> nodeCount(This,val)
 
+#define IGroupNode_getNode(This,index,node)	\
+    (This)->lpVtbl -> getNode(This,index,node)
+
 #endif /* COBJMACROS */
 
 
@@ -3506,6 +3518,19 @@ EXTERN_C const IID IID_IGroupNode;
 
 
 void __RPC_STUB IGroupNode_nodeCount_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IGroupNode_getNode_Proxy( 
+    IGroupNode * This,
+    /* [in] */ int index,
+    /* [retval][out] */ IKernelNode **node);
+
+
+void __RPC_STUB IGroupNode_getNode_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -6422,6 +6447,7 @@ EXTERN_C const IID IID_ISerializer;
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadKernelNode( 
             /* [in] */ ISerializerInputData *data,
+            /* [in] */ IKernel *kernel,
             /* [retval][out] */ IKernelNode **node) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SaveKernelNode( 
@@ -6479,6 +6505,7 @@ EXTERN_C const IID IID_ISerializer;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *LoadKernelNode )( 
             ISerializer * This,
             /* [in] */ ISerializerInputData *data,
+            /* [in] */ IKernel *kernel,
             /* [retval][out] */ IKernelNode **node);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SaveKernelNode )( 
@@ -6522,8 +6549,8 @@ EXTERN_C const IID IID_ISerializer;
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define ISerializer_LoadKernelNode(This,data,node)	\
-    (This)->lpVtbl -> LoadKernelNode(This,data,node)
+#define ISerializer_LoadKernelNode(This,data,kernel,node)	\
+    (This)->lpVtbl -> LoadKernelNode(This,data,kernel,node)
 
 #define ISerializer_SaveKernelNode(This,output,node)	\
     (This)->lpVtbl -> SaveKernelNode(This,output,node)
@@ -6538,6 +6565,7 @@ EXTERN_C const IID IID_ISerializer;
 /* [id] */ HRESULT STDMETHODCALLTYPE ISerializer_LoadKernelNode_Proxy( 
     ISerializer * This,
     /* [in] */ ISerializerInputData *data,
+    /* [in] */ IKernel *kernel,
     /* [retval][out] */ IKernelNode **node);
 
 

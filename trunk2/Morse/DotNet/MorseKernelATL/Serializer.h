@@ -45,7 +45,7 @@ __interface ISerializerInputData : IDispatch
 __interface ISerializer : IDispatch
 {
 	[id(1)]
-	HRESULT LoadKernelNode([in] ISerializerInputData* data, [out, retval] IKernelNode** node);
+	HRESULT LoadKernelNode([in] ISerializerInputData* data, [in] IKernel* kernel, [out, retval] IKernelNode** node);
 
 	[id(2)]
 	HRESULT SaveKernelNode([in] ISerializerOutputData* output, [in] IKernelNode* node);
@@ -80,7 +80,7 @@ public:
 
 public:
 
-	STDMETHOD(LoadKernelNode)(ISerializerInputData* data, IKernelNode** node);
+	STDMETHOD(LoadKernelNode)(ISerializerInputData* data, IKernel* kernel, IKernelNode** node);
 	STDMETHOD(SaveKernelNode)(ISerializerOutputData* output, IKernelNode* node);
 
 

@@ -27,7 +27,7 @@ namespace gui.Tree.Node.Action
 				{
 					ComputationNodeMenuFactory.getUniversalMenuItem(
 						new ComputationNodeMenuFactory.UniversalMenuItemClick(onClick),
-						"Show using GnuPlot")
+						"Visualization")
 				};
 		}
 

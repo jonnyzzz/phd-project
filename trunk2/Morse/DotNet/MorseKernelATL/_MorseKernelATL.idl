@@ -280,6 +280,8 @@ interface IComputationMorseResult : IComputationResult {
 interface IGroupNode : IDispatch {
 #line 245 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
 	[id(50)] HRESULT  nodeCount([out,retval] int *val);
+#line 247 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\nodebase.h"
+	[id(51)] HRESULT  getNode([in] int index, [out,retval] IKernelNode **node );
 };
 
 [
@@ -531,7 +533,7 @@ interface ISerializerInputData : IDispatch {
 #line 45 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
 interface ISerializer : IDispatch {
 #line 48 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
-	[id(1)] HRESULT  LoadKernelNode([in] ISerializerInputData *data, [out,retval] IKernelNode **node );
+	[id(1)] HRESULT  LoadKernelNode([in] ISerializerInputData *data, [in] IKernel *kernel, [out,retval] IKernelNode **node );
 #line 51 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
 	[id(2)] HRESULT  SaveKernelNode([in] ISerializerOutputData *output, [in] IKernelNode *node);
 };

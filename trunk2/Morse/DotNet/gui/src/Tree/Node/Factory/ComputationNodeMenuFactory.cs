@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using gui.Logger;
 using gui.Tree.Node.Menu;
 
 namespace gui.Tree.Node.Factory
@@ -68,15 +69,6 @@ namespace gui.Tree.Node.Factory
 		public static ComputationNodeMenuItem DelimeterItem()
 		{
 			return new DelimiterComputationMenuItem();
-		}
-
-		#endregion
-
-		#region class SubdevideActionMenuItem {...} + static getter
-
-		public static ComputationNodeMenuItem SubdevideAction(UniversalMenuItemClick universalMenuItemClick)
-		{
-			return new UniversalComputationMenuItem(universalMenuItemClick, "Subdevide");
 		}
 
 		#endregion
@@ -161,7 +153,14 @@ namespace gui.Tree.Node.Factory
 
 			private void UnirevsalComputationMenuItem_Click(object sender, EventArgs e)
 			{
-				ThreadedAction();
+				try 
+				{
+					ThreadedAction();
+				} catch (Exception ee)
+				{
+					Log.LogException(this, ee, "Unable to perform such action in DLL");
+					MessageBox.Show("Unable to perform Such action");
+				}
 			}
 
 			private void ThreadedAction()

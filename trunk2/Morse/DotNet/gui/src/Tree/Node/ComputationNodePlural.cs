@@ -10,7 +10,7 @@ namespace gui.Tree.Node
 	/// <summary>
 	/// Summary description for ComputationNodePlural.
 	/// </summary>
-	public class ComputationNodePlural : ComputationNode
+	public class ComputationNodePlural
 	{
 		private ArrayList nodes = new ArrayList();
 
@@ -18,7 +18,7 @@ namespace gui.Tree.Node
 		{
 		}
 
-		protected override ComputationNodeMenuItem[] getMenuItems()
+		public ComputationNodeMenuItem[] getMenuItems()
 		{
 			if (nodes.Count == 0)
 				return new ComputationNodeMenuItem[] {};
@@ -28,6 +28,14 @@ namespace gui.Tree.Node
 						new ComputationNodeMenuFactory.UniversalMenuItemClick(onCreateNode)
 						)
 				};
+		}
+
+		public int Length
+		{
+			get
+			{
+				return nodes.Count;
+			}
 		}
 
 		private void onCreateNode()
@@ -57,7 +65,12 @@ namespace gui.Tree.Node
 				throw new Exception("Strange!!!state!!!exception!!!");
 			}
 
-			node.Parent.Nodes.Add(ComputationNode.createComputationNode(kernelNode));
+			TreeNode parent = (node.Parent == null)? node: node.Parent;
+			ComputationNode result = ComputationNode.createComputationNode(kernelNode);
+			parent.Nodes.Add(result);
+
+			result.EnsureVisible();
+
 			this.dehighlightChildrens();
 		}
 

@@ -22,7 +22,7 @@ void CSerializer::FinalRelease() {
 }
 
 
-STDMETHODIMP CSerializer::LoadKernelNode(ISerializerInputData* data, IKernelNode** node) {
+STDMETHODIMP CSerializer::LoadKernelNode(ISerializerInputData* data, IKernel* kernel, IKernelNode** node) {
 	BSTR fileName;
 	data->FileName(&fileName);
 	CString file(fileName);
@@ -42,8 +42,13 @@ STDMETHODIMP CSerializer::LoadKernelNode(ISerializerInputData* data, IKernelNode
 		default:
 			*node = NULL;
 			break;
-	}  
-	return (node == NULL)?E_FAIL:S_OK;
+	} 
+	if (*node != NULL) {
+		(*node)->putref_kernel(kernel);
+		return S_OK;
+	} else {
+		return E_FAIL;
+	}
 }
 
 STDMETHODIMP CSerializer::SaveKernelNode(ISerializerOutputData* data, IKernelNode* anode) {
