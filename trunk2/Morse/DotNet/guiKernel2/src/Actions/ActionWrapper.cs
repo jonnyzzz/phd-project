@@ -11,14 +11,20 @@ namespace guiKernel2.Actions
 	public abstract class ActionWrapper : AttributeHolder
 	{
 		private IAction action;
+		private readonly bool isChainLeaf;
 
-		public ActionWrapper(IAction action)
+		public ActionWrapper(IAction action, bool isChainLeaf)
 		{
 			this.action = action;
+			this.isChainLeaf = isChainLeaf;
+		}
+
+		public bool IsChainLeaf
+		{
+			get { return isChainLeaf; }
 		}
 
 		public abstract string ActionName { get; }
-		public abstract bool IsChainLeaf { get; }
 		protected abstract IParameters Parameters{ get; }
 		
 		public IResultSet Do(IResultSet input, IProgressBar progressBar)

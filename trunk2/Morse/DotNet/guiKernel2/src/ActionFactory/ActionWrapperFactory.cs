@@ -23,7 +23,7 @@ namespace guiKernel2.ActionFactory
 				foreach (Type type in assembly.GetTypes())
 				{
 					ActionMappingAttribute[] attributes = (ActionMappingAttribute[])type.GetCustomAttributes(typeof(ActionMappingAttribute), false);
-					if (attributes.Length != 1) throw new ActionWrapperFactoryException("Too much attributes for one class");
+					if (attributes.Length > 1) throw new ActionWrapperFactoryException("Too much attributes for one class");
 
 					foreach (ActionMappingAttribute attribute in attributes)
 					{
@@ -40,16 +40,27 @@ namespace guiKernel2.ActionFactory
 			mapping[attribute.ActionInterface] = type;
 		}
 
-		public ActionWrapper CreateActionWrapper(IAction action)
+		public ActionWrapper CreateActionWrapper(string actionName, bool isLeaf)
 		{
-			Type actionType = action.GetType();
+			return CreateActionWrapper(Type.GetType(actionName), isLeaf);
+			
+		}
 
+		private ActionWrapper CreateActionWrapper(Type actionType, bool isLeaf)
+		{
+			IAction action = actionType.GetConstructor(new Type[]{}).Invoke(null, new object[]{}) as IAction;
+			return CreateActionWrapper(action, actionType, isLeaf);
+		}
+
+
+		private ActionWrapper CreateActionWrapper(IAction action, Type actionType, bool isLeaf)
+		{
 			if (!mapping.ContainsKey(actionType)) throw new ActionWrapperFactoryException("Unable to find action mapping");
 
 			Type wrapperType = mapping[actionType] as Type;
 
-			ConstructorInfo constructor = wrapperType.GetConstructor(new Type[] { typeof(IAction) } );
-			return constructor.Invoke(null, new object[]{action}) as ActionWrapper;
+			ConstructorInfo constructor = wrapperType.GetConstructor(new Type[] { typeof(IAction), typeof(bool) } );
+			return constructor.Invoke(null, new object[]{action, isLeaf}) as ActionWrapper;
 		}	
 	}
 }

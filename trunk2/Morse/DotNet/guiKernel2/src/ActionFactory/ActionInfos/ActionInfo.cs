@@ -42,7 +42,7 @@ namespace guiKernel2.src.ActionFactory.ActionInfos
 
 		public ActionWrapper CreateInstance()
 		{
-			ACtion
+			return Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, IsLeaf);
 		}
 	}
 }

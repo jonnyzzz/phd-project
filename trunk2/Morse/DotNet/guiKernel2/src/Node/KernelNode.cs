@@ -1,6 +1,7 @@
 using System;
 using guiKernel2.Actions;
 using guiKernel2.src.ActionFactory;
+using guiKernel2.src.Container;
 using MorseKernel2;
 
 namespace guiKernel2.src.Node
@@ -17,13 +18,16 @@ namespace guiKernel2.src.Node
 			this.result = result as IResult;
 		}
 
-		public ActionWrapper[] NextActions
+		public ActionWrapper[] GetNextActions()
 		{
-			get
-			{
-				return NextActionFactory.Instance.NextAction(this);
-			}
+			return Core.Instance.NextActionFactory.NextAction(this);
 		}
+
+		public ActionWrapper[] GetNextActionsAfter(ActionWrapper[] path)
+		{
+			return Core.Instance.NextActionFactory.NextAction(this, path);
+		}
+
 
 		public IResult Result
 		{

@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}"
+        ProjectGuid = "{197A3492-2764-42C8-B23B-BF040623EF7D}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "guiControls"
+                AssemblyName = "guiActions"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Library"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "guiControls"
+                RootNamespace = "guiActions"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -75,9 +75,27 @@
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
                 />
                 <Reference
-                    Name = "System.Drawing"
-                    AssemblyName = "System.Drawing"
-                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                    Name = "System.XML"
+                    AssemblyName = "System.XML"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                />
+                <Reference
+                    Name = "guiKernel2"
+                    Project = "{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Logger"
+                    Project = "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "MorseKernel2"
+                    Guid = "{922445B5-C296-49D0-B69D-45FF70F8CE56}"
+                    VersionMajor = "1"
+                    VersionMinor = "0"
+                    Lcid = "0"
+                    WrapperTool = "tlbimp"
                 />
                 <Reference
                     Name = "System.Windows.Forms"
@@ -85,9 +103,9 @@
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Windows.Forms.dll"
                 />
                 <Reference
-                    Name = "System.XML"
-                    AssemblyName = "System.Xml"
-                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
                 />
             </References>
         </Build>
@@ -99,39 +117,57 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeControl\ComputationNode.cs"
+                    RelPath = "src\action\Action.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeControl\ComputationTree.cs"
-                    SubType = "UserControl"
+                    RelPath = "src\actionImpl\BoxMethodAction.cs"
+                    SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeControl\ComputationTree.resx"
-                    DependentUpon = "ComputationTree.cs"
+                    RelPath = "src\actionImpl\BoxMethodParameters.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\BoxMethodParameters.resx"
+                    DependentUpon = "BoxMethodParameters.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "TreeControl\MenuItems\DelimiterMenuItem.cs"
+                    RelPath = "src\actionImpl\BoxMethodParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\filter\Filter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\parameters\ParameterControlMessageException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\parameters\ParametersControl.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeControl\MenuItems\DelimiterMenuItem.resx"
-                    DependentUpon = "DelimiterMenuItem.cs"
+                    RelPath = "src\parameters\ParametersControlException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "xml\ActionMapping.xml"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "TreeControl\MenuItems\DeselectMenuItem.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "TreeControl\MenuItems\NoMenuItem.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
+                    RelPath = "xml\messages.xml"
+                    BuildAction = "Content"
                 />
             </Include>
         </Files>

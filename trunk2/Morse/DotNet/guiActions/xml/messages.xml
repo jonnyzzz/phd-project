@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+
+<messages>
+	<ISomething>
+		<message name="sample">
+			<short>
+				Message content short
+			</short>
+			<full>
+				Detailed Message
+			</full>			
+		</message>
+	</ITarjanParameters>
+</messages>

@@ -107,6 +107,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csp
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiActions", "guiActions\guiActions.csproj", "{197A3492-2764-42C8-B23B-BF040623EF7D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -535,6 +539,30 @@ Global
 		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Test.Build.0 = Release|.NET
 		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.VisualizationDebug.Build.0 = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Debug.ActiveCfg = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Debug.Build.0 = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Debug2.ActiveCfg = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Debug2.Build.0 = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Debug2Gui.ActiveCfg = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Debug2Gui.Build.0 = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.DebugAll.ActiveCfg = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.DebugAll.Build.0 = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.DebugGL.ActiveCfg = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.DebugGL.Build.0 = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.DebugGUI.ActiveCfg = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.DebugGUI.Build.0 = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.DebugGui2.ActiveCfg = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.DebugGui2.Build.0 = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.FullDebug.ActiveCfg = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.FullDebug.Build.0 = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.NewDLL.ActiveCfg = Release|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.NewDLL.Build.0 = Release|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Release.ActiveCfg = Release|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Release.Build.0 = Release|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Test.ActiveCfg = Release|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Test.Build.0 = Release|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.VisualizationDebug.ActiveCfg = Debug|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.VisualizationDebug.Build.0 = Debug|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

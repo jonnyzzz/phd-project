@@ -104,6 +104,11 @@
                     Project = "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
+                <Reference
+                    Name = "guiActions"
+                    Project = "{197A3492-2764-42C8-B23B-BF040623EF7D}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
@@ -153,22 +158,22 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeNodes\ActionTreeMenuItem.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "TreeNodes\MenuItemFactory.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "TreeNodes\Node.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeNodes\TreeMenuItem.cs"
+                    RelPath = "TreeNodes\MenuItems\ActionTreeMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TreeNodes\MenuItems\MenuItemFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TreeNodes\MenuItems\TreeMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
                 />

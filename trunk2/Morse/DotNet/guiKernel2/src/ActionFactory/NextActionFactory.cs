@@ -14,13 +14,6 @@ namespace guiKernel2.src.ActionFactory
 	/// </summary>
 	public class NextActionFactory
 	{
-		public static NextActionFactory Instance { 
-			get
-			{
-				return Container.Core.Instance.NextActionFactory;
-			}
-		}
-
 		#region resovler
 
 		public ActionWrapper[] NextAction(KernelNode node, ActionWrapper[] beforeActions )
@@ -106,8 +99,6 @@ namespace guiKernel2.src.ActionFactory
 	}
 
 		#endregion
-
-
 		
 		#region mapper
 
@@ -120,7 +111,6 @@ namespace guiKernel2.src.ActionFactory
 		}	
 
 		#endregion
-
 
 		#region toStrings+ debugging
 

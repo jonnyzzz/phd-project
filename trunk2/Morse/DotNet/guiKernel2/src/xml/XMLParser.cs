@@ -44,8 +44,59 @@ namespace guiKernel2.xml
 			XmlDocument document = new XmlDocument();
 			document.Load(GetXMLMapping());
 
-			XmlNodeList list = document.GetElementsByTagName("action");
+			ProcessDocument(document);
+		}
 
+		private void ProcessDocument(XmlDocument document)
+		{
+			ParseActionDefs(document);	
+			ParseActionAssemblies(document);
+			XmlDocument[] references = ParseMappingRef(document);
+			foreach (XmlDocument referenceDocument in references)
+			{
+				ProcessDocument(referenceDocument);
+			}			
+		}
+
+		private XmlDocument[] ParseMappingRef(XmlDocument document)
+		{
+			ArrayList xmlDocuments = new ArrayList();
+			XmlNodeList list = document.SelectNodes("mappings/assembies/mappingsRef");
+			foreach (XmlNode node in list)
+			{
+				Console.Out.WriteLine("Ref");
+
+				string assemblyName = node.Attributes["assembly"].Value;
+				string resourceName = node.Attributes["resource"].Value;
+				Assembly assembly = Assembly.Load(assemblyName);
+				Stream data = assembly.GetManifestResourceStream(resourceName);
+				XmlDocument refDocument = new XmlDocument();
+				refDocument.Load(data);
+				xmlDocuments.Add(refDocument);
+			}
+
+			return (XmlDocument[])xmlDocuments.ToArray(typeof(XmlDocument));
+		}
+
+		private void ParseActionAssemblies(XmlDocument document)
+		{
+			ArrayList assembliesList = new ArrayList(implAssemblies);
+			XmlNodeList list = document.SelectNodes("mappings/assembies/actionAssembly");
+			foreach (XmlNode node in list)
+			{
+				string assemblyName = node.Attributes["name"].Value;
+				Assembly assembly = Assembly.Load(assemblyName);
+				assembliesList.Add( assembly);
+
+				Logger.Logger.LogMessage("Loaded assembly: {0}", assembly.GetName());
+			}
+			this.implAssemblies = (Assembly[])assembliesList.ToArray(typeof(Assembly));
+		}
+
+		private void ParseActionDefs(XmlDocument document)
+		{
+			XmlNodeList list = document.SelectNodes("mappings/action");
+	
 			foreach (XmlNode node in list)
 			{
 				XmlAttributeCollection attributes = node.Attributes;			
@@ -63,18 +114,6 @@ namespace guiKernel2.xml
 
 				Core.Instance.NextActionFactory.RegisterAction(actionInfo);
 			}
-
-			ArrayList assembliesList = new ArrayList();
-			list = document.SelectNodes("mappings/assembies/implAssembly");
-			foreach (XmlNode node in list)
-			{
-				string assemblyName = node.Attributes["name"].Value;
-				Assembly assembly = Assembly.Load(assemblyName);
-				assembliesList.Add( assembly);
-
-				Logger.Logger.LogMessage("Loaded assembly: {0}", assembly.GetName());
-			}
-			this.implAssemblies = (Assembly[])assembliesList.ToArray(typeof(Assembly));
 		}
 
 		private void ParseActionRefs(XmlNode node, ActionRef info)
@@ -108,7 +147,7 @@ namespace guiKernel2.xml
 		}
 
 
-		private Assembly[] implAssemblies = null;
+		private Assembly[] implAssemblies = new Assembly[0];
 
 		public Assembly[] ImplAssemblies
 		{

@@ -1,6 +1,8 @@
 using System;
+using guiActions.action;
 using guiKernel2.Actions;
 using guiKernel2.src.ActionFactory;
+using guiKernel2.src.Container;
 
 namespace gui2.TreeNodes
 {
@@ -10,7 +12,8 @@ namespace gui2.TreeNodes
 	public class ActionTreeMenuItem : TreeMenuItem
 	{
 		private ActionWrapper action;
-		public ActionTreeMenuItem(ActionWrapper action, params ActionWrapper[] beforeActions) : base(action.ActionName)
+
+		public ActionTreeMenuItem(Node node, Action action, params Action[] beforeActions) : base(action.ActionName)
 		{
 			this.action = action;
 
@@ -20,8 +23,13 @@ namespace gui2.TreeNodes
 			}
 
 			this.MenuItems.Clear();
-			throw new NotImplementedException("uncomment and fix");
-			//this.MenuItems.AddRange( MenuItemFactory.CreateMenuItems(NextActionFactory.Instance.NextAction(action, beforeActions)));
+			Action[] actionPath = Merge(action, beforeActions);
+			this.MenuItems.AddRange(
+				MenuItemFactory.CreateMenuItems(
+				node, 
+				node.GetActionAfer(actionPath),
+				actionPath
+				));
 		}
 		
 		protected override void EventClick()
