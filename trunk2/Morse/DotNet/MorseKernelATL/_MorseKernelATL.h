@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Mon Jan 10 00:04:12 2005
+/* at Wed Jan 12 02:34:31 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -67,6 +67,12 @@ typedef interface ISubdevideParams ISubdevideParams;
 #define __IExtendableParams_FWD_DEFINED__
 typedef interface IExtendableParams IExtendableParams;
 #endif 	/* __IExtendableParams_FWD_DEFINED__ */
+
+
+#ifndef __IExtendablePointParams_FWD_DEFINED__
+#define __IExtendablePointParams_FWD_DEFINED__
+typedef interface IExtendablePointParams IExtendablePointParams;
+#endif 	/* __IExtendablePointParams_FWD_DEFINED__ */
 
 
 #ifndef __ISubdevidePointParams_FWD_DEFINED__
@@ -135,6 +141,12 @@ typedef interface IComputationGraphResult IComputationGraphResult;
 #endif 	/* __IComputationGraphResult_FWD_DEFINED__ */
 
 
+#ifndef __IComputationExtendingResult_FWD_DEFINED__
+#define __IComputationExtendingResult_FWD_DEFINED__
+typedef interface IComputationExtendingResult IComputationExtendingResult;
+#endif 	/* __IComputationExtendingResult_FWD_DEFINED__ */
+
+
 #ifndef __IComputationMorseResult_FWD_DEFINED__
 #define __IComputationMorseResult_FWD_DEFINED__
 typedef interface IComputationMorseResult IComputationMorseResult;
@@ -181,12 +193,6 @@ typedef interface IKernel IKernel;
 #define __IComputationGraphResultExt_FWD_DEFINED__
 typedef interface IComputationGraphResultExt IComputationGraphResultExt;
 #endif 	/* __IComputationGraphResultExt_FWD_DEFINED__ */
-
-
-#ifndef __IDummy_FWD_DEFINED__
-#define __IDummy_FWD_DEFINED__
-typedef interface IDummy IDummy;
-#endif 	/* __IDummy_FWD_DEFINED__ */
 
 
 #ifndef __IMorseSpectrum_FWD_DEFINED__
@@ -289,18 +295,6 @@ typedef struct CComputationGraphResult CComputationGraphResult;
 #endif /* __cplusplus */
 
 #endif 	/* __CComputationGraphResult_FWD_DEFINED__ */
-
-
-#ifndef __CDummy_FWD_DEFINED__
-#define __CDummy_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CDummy CDummy;
-#else
-typedef struct CDummy CDummy;
-#endif /* __cplusplus */
-
-#endif 	/* __CDummy_FWD_DEFINED__ */
 
 
 #ifndef __CMorseSpectrum_FWD_DEFINED__
@@ -1109,6 +1103,135 @@ EXTERN_C const IID IID_IExtendableParams;
 #endif 	/* __IExtendableParams_INTERFACE_DEFINED__ */
 
 
+#ifndef __IExtendablePointParams_INTERFACE_DEFINED__
+#define __IExtendablePointParams_INTERFACE_DEFINED__
+
+/* interface IExtendablePointParams */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IExtendablePointParams;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("E389B4B7-E438-4701-8719-5CD37F56D0CD")
+    IExtendablePointParams : public ISubdevideParams
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IExtendablePointParamsVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IExtendablePointParams * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IExtendablePointParams * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IExtendablePointParams * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IExtendablePointParams * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IExtendablePointParams * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IExtendablePointParams * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IExtendablePointParams * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *updateProgressBar )( 
+            IExtendablePointParams * This,
+            /* [in] */ int minValue,
+            /* [in] */ int maxValue,
+            /* [in] */ int currentValue);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *getCellDevider )( 
+            IExtendablePointParams * This,
+            /* [in] */ int axis,
+            /* [retval][out] */ int *value);
+        
+        END_INTERFACE
+    } IExtendablePointParamsVtbl;
+
+    interface IExtendablePointParams
+    {
+        CONST_VTBL struct IExtendablePointParamsVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IExtendablePointParams_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IExtendablePointParams_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IExtendablePointParams_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IExtendablePointParams_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IExtendablePointParams_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IExtendablePointParams_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IExtendablePointParams_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IExtendablePointParams_updateProgressBar(This,minValue,maxValue,currentValue)	\
+    (This)->lpVtbl -> updateProgressBar(This,minValue,maxValue,currentValue)
+
+
+#define IExtendablePointParams_getCellDevider(This,axis,value)	\
+    (This)->lpVtbl -> getCellDevider(This,axis,value)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IExtendablePointParams_INTERFACE_DEFINED__ */
+
+
 #ifndef __ISubdevidePointParams_INTERFACE_DEFINED__
 #define __ISubdevidePointParams_INTERFACE_DEFINED__
 
@@ -1548,7 +1671,7 @@ EXTERN_C const IID IID_IGraph;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE graphInfo( 
             /* [retval][out] */ IGraphInfo **info) = 0;
         
-        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE acceptChilds( 
+        virtual /* [helpstring][hidden][local][id] */ HRESULT STDMETHODCALLTYPE acceptChilds( 
             /* [in] */ void **data) = 0;
         
     };
@@ -1615,7 +1738,7 @@ EXTERN_C const IID IID_IGraph;
             IGraph * This,
             /* [retval][out] */ IGraphInfo **info);
         
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
+        /* [helpstring][hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
             IGraph * This,
             /* [in] */ void **data);
         
@@ -1702,7 +1825,7 @@ void __RPC_STUB IGraph_graphInfo_Stub(
     DWORD *_pdwStubPhase);
 
 
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IGraph_acceptChilds_Proxy( 
+/* [helpstring][hidden][local][id] */ HRESULT STDMETHODCALLTYPE IGraph_acceptChilds_Proxy( 
     IGraph * This,
     /* [in] */ void **data);
 
@@ -1997,11 +2120,7 @@ EXTERN_C const IID IID_IExtendable;
     IExtendable : public IDispatch
     {
     public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Extend( 
-            /* [in] */ IExtendableParams *params) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE NewDimension( 
-            /* [retval][out] */ int *value) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Extend( void) = 0;
         
     };
     
@@ -2052,12 +2171,7 @@ EXTERN_C const IID IID_IExtendable;
             /* [out] */ UINT *puArgErr);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Extend )( 
-            IExtendable * This,
-            /* [in] */ IExtendableParams *params);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *NewDimension )( 
-            IExtendable * This,
-            /* [retval][out] */ int *value);
+            IExtendable * This);
         
         END_INTERFACE
     } IExtendableVtbl;
@@ -2095,11 +2209,8 @@ EXTERN_C const IID IID_IExtendable;
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define IExtendable_Extend(This,params)	\
-    (This)->lpVtbl -> Extend(This,params)
-
-#define IExtendable_NewDimension(This,value)	\
-    (This)->lpVtbl -> NewDimension(This,value)
+#define IExtendable_Extend(This)	\
+    (This)->lpVtbl -> Extend(This)
 
 #endif /* COBJMACROS */
 
@@ -2109,23 +2220,10 @@ EXTERN_C const IID IID_IExtendable;
 
 
 /* [id] */ HRESULT STDMETHODCALLTYPE IExtendable_Extend_Proxy( 
-    IExtendable * This,
-    /* [in] */ IExtendableParams *params);
+    IExtendable * This);
 
 
 void __RPC_STUB IExtendable_Extend_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IExtendable_NewDimension_Proxy( 
-    IExtendable * This,
-    /* [retval][out] */ int *value);
-
-
-void __RPC_STUB IExtendable_NewDimension_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -2631,6 +2729,161 @@ void __RPC_STUB IComputationGraphResult_Loops_Stub(
 
 
 #endif 	/* __IComputationGraphResult_INTERFACE_DEFINED__ */
+
+
+#ifndef __IComputationExtendingResult_INTERFACE_DEFINED__
+#define __IComputationExtendingResult_INTERFACE_DEFINED__
+
+/* interface IComputationExtendingResult */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IComputationExtendingResult;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("76314083-5CCF-4EB5-91F4-0DE79E549340")
+    IComputationExtendingResult : public IComputationResult
+    {
+    public:
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE PointMethodProjectiveExtension( 
+            /* [in] */ IExtendablePointParams *params) = 0;
+        
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE PointMethodProjectiveExtensionDimension( 
+            /* [retval][out] */ int *dim) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IComputationExtendingResultVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IComputationExtendingResult * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IComputationExtendingResult * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IComputationExtendingResult * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IComputationExtendingResult * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IComputationExtendingResult * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IComputationExtendingResult * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IComputationExtendingResult * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PointMethodProjectiveExtension )( 
+            IComputationExtendingResult * This,
+            /* [in] */ IExtendablePointParams *params);
+        
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PointMethodProjectiveExtensionDimension )( 
+            IComputationExtendingResult * This,
+            /* [retval][out] */ int *dim);
+        
+        END_INTERFACE
+    } IComputationExtendingResultVtbl;
+
+    interface IComputationExtendingResult
+    {
+        CONST_VTBL struct IComputationExtendingResultVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IComputationExtendingResult_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IComputationExtendingResult_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IComputationExtendingResult_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IComputationExtendingResult_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IComputationExtendingResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IComputationExtendingResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IComputationExtendingResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IComputationExtendingResult_PointMethodProjectiveExtension(This,params)	\
+    (This)->lpVtbl -> PointMethodProjectiveExtension(This,params)
+
+#define IComputationExtendingResult_PointMethodProjectiveExtensionDimension(This,dim)	\
+    (This)->lpVtbl -> PointMethodProjectiveExtensionDimension(This,dim)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IComputationExtendingResult_PointMethodProjectiveExtension_Proxy( 
+    IComputationExtendingResult * This,
+    /* [in] */ IExtendablePointParams *params);
+
+
+void __RPC_STUB IComputationExtendingResult_PointMethodProjectiveExtension_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IComputationExtendingResult_PointMethodProjectiveExtensionDimension_Proxy( 
+    IComputationExtendingResult * This,
+    /* [retval][out] */ int *dim);
+
+
+void __RPC_STUB IComputationExtendingResult_PointMethodProjectiveExtensionDimension_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IComputationExtendingResult_INTERFACE_DEFINED__ */
 
 
 #ifndef __IComputationMorseResult_INTERFACE_DEFINED__
@@ -3343,9 +3596,6 @@ EXTERN_C const IID IID_IFunction;
         virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE getSystemFunctionDerivate( 
             /* [unique][out] */ void **function) = 0;
         
-        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE getProjectiveExtensionInfo( 
-            /* [unique][out] */ void **pinfo) = 0;
-        
     };
     
 #else 	/* C style interface */
@@ -3418,10 +3668,6 @@ EXTERN_C const IID IID_IFunction;
             IFunction * This,
             /* [unique][out] */ void **function);
         
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *getProjectiveExtensionInfo )( 
-            IFunction * This,
-            /* [unique][out] */ void **pinfo);
-        
         END_INTERFACE
     } IFunctionVtbl;
 
@@ -3475,9 +3721,6 @@ EXTERN_C const IID IID_IFunction;
 
 #define IFunction_getSystemFunctionDerivate(This,function)	\
     (This)->lpVtbl -> getSystemFunctionDerivate(This,function)
-
-#define IFunction_getProjectiveExtensionInfo(This,pinfo)	\
-    (This)->lpVtbl -> getProjectiveExtensionInfo(This,pinfo)
 
 #endif /* COBJMACROS */
 
@@ -3552,18 +3795,6 @@ void __RPC_STUB IFunction_getSystemFunction_Stub(
 
 
 void __RPC_STUB IFunction_getSystemFunctionDerivate_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IFunction_getProjectiveExtensionInfo_Proxy( 
-    IFunction * This,
-    /* [unique][out] */ void **pinfo);
-
-
-void __RPC_STUB IFunction_getProjectiveExtensionInfo_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -4314,116 +4545,6 @@ void __RPC_STUB IComputationGraphResultExt_setGraphNode_Stub(
 #endif 	/* __IComputationGraphResultExt_INTERFACE_DEFINED__ */
 
 
-#ifndef __IDummy_INTERFACE_DEFINED__
-#define __IDummy_INTERFACE_DEFINED__
-
-/* interface IDummy */
-/* [dual][unique][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IDummy;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("ECACE910-6692-4ACC-85C2-3EF448BF2638")
-    IDummy : public IDispatch
-    {
-    public:
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IDummyVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IDummy * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IDummy * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IDummy * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IDummy * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IDummy * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IDummy * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IDummy * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        END_INTERFACE
-    } IDummyVtbl;
-
-    interface IDummy
-    {
-        CONST_VTBL struct IDummyVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IDummy_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IDummy_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IDummy_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IDummy_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IDummy_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IDummy_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IDummy_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IDummy_INTERFACE_DEFINED__ */
-
-
 #ifndef __IMorseSpectrum_INTERFACE_DEFINED__
 #define __IMorseSpectrum_INTERFACE_DEFINED__
 
@@ -4804,7 +4925,7 @@ EXTERN_C const IID IID_IProjectiveBundle;
             IProjectiveBundle * This,
             /* [retval][out] */ IGraphInfo **info);
         
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
+        /* [helpstring][hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
             IProjectiveBundle * This,
             /* [in] */ void **data);
         
@@ -4951,7 +5072,7 @@ EXTERN_C const IID IID_ISymbolicImage;
             ISymbolicImage * This,
             /* [retval][out] */ IGraphInfo **info);
         
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
+        /* [helpstring][hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
             ISymbolicImage * This,
             /* [in] */ void **data);
         
@@ -5104,7 +5225,7 @@ EXTERN_C const IID IID_ISymbolicImageGraph;
             ISymbolicImageGraph * This,
             /* [retval][out] */ IGraphInfo **info);
         
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
+        /* [helpstring][hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
             ISymbolicImageGraph * This,
             /* [in] */ void **data);
         
@@ -5296,7 +5417,7 @@ EXTERN_C const IID IID_ISymbolicImageGroup;
             ISymbolicImageGroup * This,
             /* [retval][out] */ IGraphInfo **info);
         
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
+        /* [helpstring][hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
             ISymbolicImageGroup * This,
             /* [in] */ void **data);
         
@@ -5488,7 +5609,7 @@ EXTERN_C const IID IID_IProjectiveBundleGraph;
             IProjectiveBundleGraph * This,
             /* [retval][out] */ IGraphInfo **info);
         
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
+        /* [helpstring][hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
             IProjectiveBundleGraph * This,
             /* [in] */ void **data);
         
@@ -5680,7 +5801,7 @@ EXTERN_C const IID IID_IProjectiveBundleGroup;
             IProjectiveBundleGroup * This,
             /* [retval][out] */ IGraphInfo **info);
         
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
+        /* [helpstring][hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *acceptChilds )( 
             IProjectiveBundleGroup * This,
             /* [in] */ void **data);
         
@@ -5835,14 +5956,6 @@ EXTERN_C const CLSID CLSID_CComputationGraphResult;
 
 class DECLSPEC_UUID("83FCA237-5E87-49D4-81EE-95BC812422FE")
 CComputationGraphResult;
-#endif
-
-EXTERN_C const CLSID CLSID_CDummy;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("6C167CEC-20C8-45B4-B6C5-E59E15B3D19E")
-CDummy;
 #endif
 
 EXTERN_C const CLSID CLSID_CMorseSpectrum;

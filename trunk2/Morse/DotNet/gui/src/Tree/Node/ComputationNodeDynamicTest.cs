@@ -61,12 +61,14 @@ namespace gui.Tree.Node
 				act = null;
 			}
 
+            /*
 			if (mnode is IExtendable)
 			{
 				act = new ComputationNodeExtendable(mnode as IExtendable);
 				arrayActions.Add(act);
 				arrayItems.AddRange(act.getMenuItems());								
 			}
+            */
 
 			if (act != null)
 			{

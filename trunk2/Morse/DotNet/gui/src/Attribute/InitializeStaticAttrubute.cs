@@ -9,13 +9,9 @@ namespace gui.Attributes
 
 	public class InitializeStaticAttrubute : Attribute
 	{
-        public enum Type : short
-        {
-            TreeNodeAction
-        };      
         private string register;
         
-		public InitializeStaticAttrubute(Type type, string register)
+		public InitializeStaticAttrubute(string register)
 		{            
             this.register = register;
 		}

@@ -58,7 +58,7 @@ namespace gui.Tree.Node.Factory
 			return data;			
 		}
 
-		private static int[][] toArrays(IExtendableParams subd, int dimension)
+		private static int[][] toArrays(IExtendablePointParams subd, int dimension)
 		{
 			return toArrays(subd as ISubdevideParams, dimension);
 		}
@@ -156,6 +156,7 @@ namespace gui.Tree.Node.Factory
 
 
 		#region IExtendibleParams...
+        /*
 		public static IExtendableParams ParamsExtend(IWin32Window owner, IExtendable node, IExtendableParams param)
 		{
 			NextStepParams ps = new NextStepParams();
@@ -177,7 +178,32 @@ namespace gui.Tree.Node.Factory
 		{
 			public ExtendableParams(int[] factor) : base(factor) {}
 		}
+        */
 		#endregion
+
+
+        
+        public static IExtendablePointParams ParamsExtend(IWin32Window owner, IComputationExtendingResult result, IExtendablePointParams param)
+        {
+            NextStepParams ps = new NextStepParams();
+            int dimension = result.PointMethodProjectiveExtensionDimension();
+            int[][] par = toArrays(param, dimension);
+            	
+            if (ps.ShowDialog(owner, par, dimension) != DialogResult.OK)
+            {
+                return null;
+            } 
+            else 
+            {	
+                par = ps.Result;
+                return new ExtendableParams(par[0]);		
+            }
+        }
+
+        protected class ExtendableParams : SubdevideParams, IExtendablePointParams
+        {
+            public ExtendableParams(int[] factor) : base(factor) {}
+        }
 
 	}
 }

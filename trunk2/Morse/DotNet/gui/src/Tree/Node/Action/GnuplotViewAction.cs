@@ -11,7 +11,7 @@ namespace gui.src.Tree.Node.Action
 	/// <summary>
 	/// Summary description for GnuplotViewAction.
 	/// </summary>		
-	[InitializeStaticAttrubute(InitializeStaticAttrubute.Type.TreeNodeAction, "Register")]
+	[InitializeStaticAttrubute("Register")]
 	public class GnuplotViewAction : ComputationNodeAction
 	{
         private IExportData data;
@@ -39,7 +39,7 @@ namespace gui.src.Tree.Node.Action
         #region IActionFactory
         public static void Register()
         {
-            DynamicTest.Instance.registerActionFactory(new RegistratorGnuplotViewAction());         
+            DynamicActionNodeTest.Instance.registerActionFactory(new RegistratorGnuplotViewAction());         
         }              
 
         private class RegistratorGnuplotViewAction : IActionFactory

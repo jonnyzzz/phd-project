@@ -10,8 +10,11 @@ namespace gui.Tree.Node.Action
 	/// <summary>
 	/// Summary description for ComputationNodeExtendable.
 	/// </summary>
+	///     
+    /*
 	public class ComputationNodeExtendable : ComputationNodeAction
 	{		
+        
 		private IExtendable node;
 		private IExtendableParams param = null;
 		public ComputationNodeExtendable(IExtendable node) : base()
@@ -34,6 +37,7 @@ namespace gui.Tree.Node.Action
 				Console.Out.WriteLine("C# OK");
 				node.Extend(param);
 			}
-		}
+		}        
 	}
+    */
 }

@@ -5,7 +5,7 @@
 class AbstractGraphCreator : public AbstractProcess
 {
 public:
-	AbstractGraphCreator(Graph* base, int* factor);
+    AbstractGraphCreator(Graph* base, int* factor, ProgressBarInfo* info);
 	virtual ~AbstractGraphCreator(void);
 
 

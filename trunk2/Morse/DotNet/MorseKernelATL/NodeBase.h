@@ -39,6 +39,16 @@ __interface IExtendableParams : ISubdevideParams {
 
 [
 	object,
+	uuid("E389B4B7-E438-4701-8719-5CD37F56D0CD"),
+	dual,
+	pointer_default(unique)
+]
+__interface IExtendablePointParams : ISubdevideParams {
+};
+
+
+[
+	object,
 	uuid("E6F9519F-6BF8-45E0-ACA2-4E710F23F80C"),
 	dual,
 	pointer_default(unique)
@@ -86,7 +96,7 @@ __interface IGraph : IKernelNode {
 		HRESULT graphDimension([out, retval] int* value);
 	[id(19)]
 		HRESULT graphInfo([out, retval] IGraphInfo** info);
-	[id(17), local, hidden]
+    [id(17), local, hidden, helpstring("data = GraphComponents*")]
 		HRESULT acceptChilds([in] void** data);
 };
 
@@ -120,9 +130,11 @@ __interface ISubdevidablePoint {
 ]
 __interface IExtendable  {
 	[id(22)]
-	HRESULT Extend([in]IExtendableParams * params);
+	HRESULT Extend(/*[in]IExtendableParams * params*/);
+    /*
 	[id(23)]
 	HRESULT NewDimension([out,retval] int* value);
+    */
 };
 
 [
@@ -175,13 +187,26 @@ __interface IComputationGraphResult : IComputationResult {
 };
 
 [
+    object,
+    uuid("76314083-5CCF-4EB5-91F4-0DE79E549340"),
+    dual,
+    pointer_default(unique)
+]
+__interface IComputationExtendingResult : IComputationResult {
+    [id(71), helpstring("Create Projective extension for point methods")]
+        HRESULT PointMethodProjectiveExtension([in]IExtendablePointParams* params);
+    [id(72), helpstring("Dimesion for new graph")]
+        HRESULT PointMethodProjectiveExtensionDimension([out,retval]int* dim);
+};
+
+[
 	object,
 	uuid("6C613BDB-C2CE-47EA-9BA0-9F2B2D259016"),
 	dual,
 	pointer_default(unique)
 ]
 __interface IComputationMorseResult : IComputationResult {
-	[id(62), helpstring("Just return result")]
+	[id(62), helpstring("should perform SimplexMethod on created graph")]
 	HRESULT toResult();
 };
 

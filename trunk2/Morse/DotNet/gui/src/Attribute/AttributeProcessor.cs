@@ -27,6 +27,7 @@ namespace gui.Attributes
                     }
 
                 } catch (Exception e){
+                    Log.LogMessage(typeof(AttributeProcessor), "Type failed to initialize {0}", type.Name);
                     Log.LogException(typeof(AttributeProcessor), e, "Reflection exception in loading Actions");
                 }
                 

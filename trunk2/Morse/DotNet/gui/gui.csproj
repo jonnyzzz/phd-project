@@ -435,6 +435,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Tree\Node\Action\ExtendAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Tree\Node\Action\GnuplotViewAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -466,12 +471,27 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Tree\Node\ActionAllocator\DynamicTest.cs"
+                    RelPath = "src\Tree\Node\ActionAllocator\DynamicActionNodeTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ActionAllocator\DynamicResultTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\Tree\Node\ActionAllocator\IActionFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ActionAllocator\IResultAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ActionAllocator\IResultActionFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -532,21 +552,6 @@
                 <File
                     RelPath = "src\Tree\Node\Factory\CVS\Root"
                     BuildAction = "None"
-                />
-                <File
-                    RelPath = "src\Tree\Node\Forms\GraphOperationSelector.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\Tree\Node\Forms\GraphOperationSelector.en.resx"
-                    DependentUpon = "GraphOperationSelector.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "src\Tree\Node\Forms\GraphOperationSelector.resx"
-                    DependentUpon = "GraphOperationSelector.cs"
-                    BuildAction = "EmbeddedResource"
                 />
                 <File
                     RelPath = "src\Tree\Node\Forms\NextStepParams.cs"
@@ -625,6 +630,41 @@
                 <File
                     RelPath = "src\Tree\Node\Util\CVS\Root"
                     BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\OperationSelector\ExtendPointResultAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\OperationSelector\GraphOperationSelector.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\OperationSelector\GraphOperationSelector.en.resx"
+                    DependentUpon = "GraphOperationSelector.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\OperationSelector\GraphOperationSelector.resx"
+                    DependentUpon = "GraphOperationSelector.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\OperationSelector\LoopsResultAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\OperationSelector\StrongComponentsResultAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\OperationSelector\StrongComponentsWithNodesResultAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\Visualization\CVS\Entries"

@@ -5,7 +5,7 @@ class SegmentProjectiveBundleMSCreationProcess :
     public AbstractGraphCreator
 {
 public:
-    SegmentProjectiveBundleMSCreationProcess(Graph* graph, int* factor);
+    SegmentProjectiveBundleMSCreationProcess(Graph* graph, int* factor, ProgressBarInfo* info);
     virtual ~SegmentProjectiveBundleMSCreationProcess(void);
 
 public:

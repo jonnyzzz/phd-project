@@ -6,6 +6,7 @@ using gui.Attributes;
 using gui.Forms;
 using gui.Logger;
 using gui.Resource;
+using gui.src.Tree.Node.ActionAllocator;
 using MorseKernelATL;
 
 namespace gui
@@ -86,7 +87,7 @@ namespace gui
 
         private void registerEvents()
         {
-            Console.Out.WriteLine("Registering global evetns...");
+            Log.LogMessage(this, "Registering global evetns...");
             kernel.InternalException += new IKernelEvents_InternalExceptionEventHandler(interalKernellException);
             kernel.newComputationResult += new IKernelEvents_newComputationResultEventHandler(kernel_newComputationResult);
             kernel.newKernelNode += new IKernelEvents_newKernelNodeEventHandler(kernel_newKernelNode);
@@ -96,7 +97,7 @@ namespace gui
 
         private void unregisterEvents()
         {
-            Console.Out.WriteLine("Unregistering global events...");
+            Log.LogMessage(this, "Unregistering global events...");
             kernel.InternalException -= new IKernelEvents_InternalExceptionEventHandler(interalKernellException);
             kernel.newComputationResult -= new IKernelEvents_newComputationResultEventHandler(kernel_newComputationResult);
             kernel.newKernelNode -= new IKernelEvents_newKernelNodeEventHandler(kernel_newKernelNode);
@@ -109,6 +110,8 @@ namespace gui
 		{
 			instance = null;
 			unregisterEvents();
+		    DynamicActionNodeTest.Instance.UnRegisterAll();
+            DynamicResultTest.Instance.UnRegisterAll();
 		}
 
 
@@ -123,27 +126,30 @@ namespace gui
 
 		private void interalKernellException(string message)
 		{
-			Console.Out.WriteLine("DLL Exception :" + message);
+			Log.LogMessage(this, "DLL Exception :" + message);
         }
 
         private void kernel_newComputationResult(IKernelNode nodeParent, IComputationResult result)
         {
-            Console.Out.WriteLine("NewComputationResult");
+            Log.LogMessage(this, "NewComputationResult");
             computationForm.OnNewComputationResult(nodeParent, result);
         }
 
         private void kernel_newKernelNode(IKernelNode nodeParent, IKernelNode node)
         {
+            Log.LogMessage(this, "E: New kernell Node");
             computationForm.OnNewNode(nodeParent, node);
         }
 
         private void kernel_noChilds(IKernelNode nodeParent)
         {
+            Log.LogMessage(this, "E: No Childs");
             computationForm.noChilds(nodeParent);
         }
 
         private void kernel_noImplementation(IKernelNode nodeParent)
         {
+            Log.LogMessage(this, "E: Not implemented");
             computationForm.noImplementation(nodeParent);
         }
     }

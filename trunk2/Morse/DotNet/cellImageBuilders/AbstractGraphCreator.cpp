@@ -9,8 +9,8 @@ static char THIS_FILE[] = __FILE__;
 
 
 
-AbstractGraphCreator::AbstractGraphCreator(Graph* graph, int* factor) :
-factor(factor), AbstractProcess(graph)
+AbstractGraphCreator::AbstractGraphCreator(Graph* graph, int* factor, ProgressBarInfo* info) :
+factor(factor), AbstractProcess(graph, info)
 {
 	dimensionOld = graph->getDimention();
 
@@ -30,14 +30,14 @@ AbstractGraphCreator::~AbstractGraphCreator(void)
 
 
 void AbstractGraphCreator::start() {
-    ASSERT(dimensionNew > dimensionOld);
-
 	b = new int[dimensionNew+1];
 	point = new JInt[dimensionNew];
 	tpoint = new JInt[dimensionNew];
 
     this->dimensionNew = this->getNewDimension();
-	this->submitGraphResult(createEmptyGraph(graph_source));
+    this->submitGraphResult(createEmptyGraph(graph_source));
+
+    ASSERT(dimensionNew > dimensionOld);
 }
 
 

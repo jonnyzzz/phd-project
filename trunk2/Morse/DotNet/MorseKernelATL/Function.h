@@ -43,8 +43,10 @@ __interface IFunction : IDispatch
         HRESULT getSystemFunction([out, unique] void** function);
     [id(5), local, hidden]
         HRESULT getSystemFunctionDerivate([out, unique] void** function);
+        /*
     [id(6), local, hidden]
         HRESULT getProjectiveExtensionInfo([out, unique] void **pinfo);
+        */
 };
 
 class Function;

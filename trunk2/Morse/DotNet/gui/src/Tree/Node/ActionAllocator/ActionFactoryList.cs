@@ -42,6 +42,11 @@ namespace gui.src.Tree.Node.ActionAllocator
             return Object.ReferenceEquals(af1, af2);
         }
 
+        public void RemoveAll()
+        {
+            list.Clear();
+        }
+
 
         #region IEnumerable Members
 

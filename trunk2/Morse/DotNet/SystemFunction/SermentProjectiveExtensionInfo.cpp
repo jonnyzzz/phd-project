@@ -2,6 +2,7 @@
 #include ".\sermentprojectiveextensioninfo.h"
 #include ".\SegmentProjectiveExtendedSystemFunction.h"
 #include "../cellimagebuilders/SegmentProjectiveBundleMSCreationProcess.h"
+#include "../cellimagebuilders/ProgressBarInfo.h"
 
 
 
@@ -28,6 +29,6 @@ IMorseFunction* SermentProjectiveExtensionInfo::morseFunction() {
     return NULL;
 }
 
-AbstractGraphCreator* SermentProjectiveExtensionInfo::graphExtender(Graph* graph, int* factor) {
-    return new SegmentProjectiveBundleMSCreationProcess(graph, factor);
+AbstractGraphCreator* SermentProjectiveExtensionInfo::graphExtender(Graph* graph, int* factor, ProgressBarInfo* info) {
+    return new SegmentProjectiveBundleMSCreationProcess(graph, factor, info);
 }

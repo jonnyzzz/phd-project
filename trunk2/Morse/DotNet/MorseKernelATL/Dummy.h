@@ -2,7 +2,7 @@
 
 
 #include "nodebase.h"
-
+/*
 [
     object,
     uuid("ECACE910-6692-4ACC-85C2-3EF448BF2638"),
@@ -42,4 +42,4 @@ public:
 
 
 };
-
+*/

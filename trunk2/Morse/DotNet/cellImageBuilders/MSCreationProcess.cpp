@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 MSCreationProcess::MSCreationProcess(Graph* graph, int* factor) : 
-AbstractGraphCreator(graph, factor)
+AbstractGraphCreator(graph, factor, NULL)
 {
 }
 

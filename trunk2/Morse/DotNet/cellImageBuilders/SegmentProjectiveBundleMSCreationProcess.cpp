@@ -1,9 +1,9 @@
 #include "StdAfx.h"
 #include ".\segmentprojectivebundlemscreationprocess.h"
 
-SegmentProjectiveBundleMSCreationProcess::SegmentProjectiveBundleMSCreationProcess(Graph* graph, int* factor)
+SegmentProjectiveBundleMSCreationProcess::SegmentProjectiveBundleMSCreationProcess(Graph* graph, int* factor, ProgressBarInfo* info)
 :
-    AbstractGraphCreator(graph, factor)
+    AbstractGraphCreator(graph, factor, info)
 {
 }
 

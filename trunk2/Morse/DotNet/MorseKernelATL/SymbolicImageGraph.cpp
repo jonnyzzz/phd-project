@@ -34,6 +34,9 @@ void CSymbolicImageGraph::FinalRelease() {
 }
 
 
+//////////////////////////////////////////////////////////////////////////////////////
+//ISubdevideable
+
 STDMETHODIMP CSymbolicImageGraph::Subdevide(ISubdevideParams* params) {
 
 	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
@@ -76,6 +79,8 @@ STDMETHODIMP CSymbolicImageGraph::Subdevide(ISubdevideParams* params) {
 	return S_OK;
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
+//ISubdevidablePoint
 
 STDMETHODIMP CSymbolicImageGraph::SubdevidePoint(ISubdevidePointParams* params) {
 	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
@@ -121,6 +126,129 @@ STDMETHODIMP CSymbolicImageGraph::SubdevidePoint(ISubdevidePointParams* params) 
 	return S_OK;
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+//IExtendible
+
+
+STDMETHODIMP CSymbolicImageGraph::Extend() {
+    this->AddRef();
+    kernel->EventNewComputationResult(this, this);
+
+    return S_OK;
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+//IComputationExtendingResult
+
+STDMETHODIMP CSymbolicImageGraph::PointMethodProjectiveExtensionDimension(int* value) {
+
+    IFunction* function;
+    kernel->get_Function(&function);
+
+    ISystemFunctionDerivate* dfunc;
+    function->getSystemFunctionDerivate((void**)&dfunc);
+    
+	SermentProjectiveExtensionInfo info(dfunc);
+    
+    *value = info.extendedGraphDimension();
+
+    SAFE_RELEASE(function);
+
+	return S_OK;
+}
+
+STDMETHODIMP CSymbolicImageGraph::PointMethodProjectiveExtension(IExtendablePointParams* params) {
+	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
+	pinfo->start();
+
+	int dim;
+    this->PointMethodProjectiveExtensionDimension(&dim);
+
+    cout<<"Dimension = "<<dim <<"\n";
+
+	
+    cout<<"Dumping factor\n";
+	JInt* factor = new JInt[dim];
+	for (int i = 0; i<dim; i++) {
+		params->getCellDevider(i, &factor[i]);
+        cout<<factor[i]<<", ";
+	}
+    cout<<"\n";
+
+    IFunction* function;
+    kernel->get_Function(&function);
+    ISystemFunctionDerivate* dfunc;
+    function->getSystemFunctionDerivate((void**)&dfunc);
+
+
+    SermentProjectiveExtensionInfo info(dfunc);
+
+    cout<<"Segment info complete \n";
+
+    AbstractProcess* proc = info.graphExtender(graph, factor, pinfo);
+    proc->start();
+    proc->processNextGraph(this->graph);
+
+    Graph* result = proc->result();
+
+    delete proc;
+		
+	IProjectiveBundleGraph* im;
+	CProjectiveBundleGraph::CreateInstance(&im);
+    
+	im->putref_kernel(kernel);
+	im->setGraph((void*)result);			
+
+    cout<<" before Event \n";
+    kernel->EventNewNode(this, im);
+    cout<<" after event \n";
+
+	delete[] factor;
+	pinfo->finish();
+	delete pinfo;
+
+    SAFE_RELEASE(function);
+
+	return S_OK;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//IGraph
+
+STDMETHODIMP CSymbolicImageGraph::setGraph(void* graph) {
+	if (graph != NULL) {
+		SAFE_DELETE(this->graph);
+		this->graph = (Graph*)graph;
+		
+	}
+	
+	return S_OK;
+}
+
+STDMETHODIMP CSymbolicImageGraph::getGraph(void** graph) {
+	if (graph != NULL) {
+		*(Graph**)graph = this->graph;
+	}
+
+	return S_OK;
+}
+
+STDMETHODIMP CSymbolicImageGraph::graphInfo(IGraphInfo** info) {
+	IGraphInfo* inf = NULL;
+	CGraphInfo::CreateInstance(&inf);
+
+	inf->setGraph((void**)(&graph));
+
+	*info = inf;
+
+	return S_OK;
+}
+
+STDMETHODIMP CSymbolicImageGraph::graphDimension(int* value) {
+	*value = graph->getDimention();
+	return S_OK;
+}
+
 STDMETHODIMP CSymbolicImageGraph::acceptChilds(void ** data) {
 	GraphComponents *cms = *(GraphComponents**)data;
 
@@ -150,69 +278,8 @@ STDMETHODIMP CSymbolicImageGraph::acceptChilds(void ** data) {
 	return S_OK;
 }
 
-
-STDMETHODIMP CSymbolicImageGraph::NewDimension(int* value) {
-	int val;
-	this->graphDimension(&val);
-
-	*value = val * 2 - 1;
-	return S_OK;
-}
-
-STDMETHODIMP CSymbolicImageGraph::Extend(IExtendableParams* params) {
-	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
-	pinfo->start();
-
-	int dim;
-	this->NewDimension(&dim);
-	
-	cout<<"Dumping factor :\n";
-
-	JInt* factor = new JInt[dim];
-	for (int i = 0; i<dim; i++) {
-		params->getCellDevider(i, &factor[i]);
-		cout<<"factor[ "<<i<<" ]= "<<factor[i]<<"\n";
-	}
-	cout<<"complemte\n";
-
-	cout<<"Extend : Before Computator OK\n";
-
-	Graph* result = Computator().toMS(graph, factor);
-
-	cout<<"Extend : After Computation OK\n";
-		
-	IProjectiveBundleGraph* im;
-	CProjectiveBundleGraph::CreateInstance(&im);
-	
-	im->putref_kernel(kernel);
-	im->setGraph((void*)result);			
-
-    kernel->EventNewNode(this, im);
-
-	delete[] factor;
-	pinfo->finish();
-	delete pinfo;
-
-	return S_OK;
-}
-
-STDMETHODIMP CSymbolicImageGraph::setGraph(void* graph) {
-	if (graph != NULL) {
-		SAFE_DELETE(this->graph);
-		this->graph = (Graph*)graph;
-		
-	}
-	
-	return S_OK;
-}
-
-STDMETHODIMP CSymbolicImageGraph::getGraph(void** graph) {
-	if (graph != NULL) {
-		*(Graph**)graph = this->graph;
-	}
-
-	return S_OK;
-}
+///////////////////////////////////////////////////////////////////////////////
+//IKernelNode
 
 STDMETHODIMP CSymbolicImageGraph::get_kernel(IKernelPointer** pVal)
 {
@@ -234,22 +301,11 @@ STDMETHODIMP CSymbolicImageGraph::putref_kernel(IKernelPointer* newVal)
 	return S_OK;
 }
 
-STDMETHODIMP CSymbolicImageGraph::graphInfo(IGraphInfo** info) {
-	IGraphInfo* inf = NULL;
-	CGraphInfo::CreateInstance(&inf);
+//////////////////////////////////////////////////////////////////////////////////
+//IExportable
 
-	inf->setGraph((void**)(&graph));
-
-	*info = inf;
-
-	return S_OK;
-}
-
-STDMETHODIMP CSymbolicImageGraph::graphDimension(int* value) {
-	*value = graph->getDimention();
-	return S_OK;
-}
 
 STDMETHODIMP CSymbolicImageGraph::ExportData(BSTR file) {
 	return SaveGraphToFile(graph, CString(file));	
+
 }

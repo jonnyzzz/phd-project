@@ -10,15 +10,15 @@ namespace gui.src.Tree.Node.ActionAllocator
 	/// <summary>
 	/// Summary description for DynamicTest.
 	/// </summary>
-	public class DynamicTest
+	public class DynamicActionNodeTest
 	{
-		protected DynamicTest() {}
-        private static DynamicTest instance = null;
-        public static DynamicTest Instance
+		protected DynamicActionNodeTest() {}
+        private static DynamicActionNodeTest instance = null;
+        public static DynamicActionNodeTest Instance
         {
             get
             {
-                if (instance == null) instance = new DynamicTest();
+                if (instance == null) instance = new DynamicActionNodeTest();
                 return instance;
             }        
         }
@@ -34,6 +34,11 @@ namespace gui.src.Tree.Node.ActionAllocator
         public void unregisterActionFactory(IActionFactory factory)
         {
             actionFactoryes.RemoveAction(factory);
+        }
+
+        public void UnRegisterAll()
+        {
+            Instance.actionFactoryes.RemoveAll();
         }
 
         public ComputationNodeAction[] CreateAction(IKernelNode node)

@@ -1,6 +1,9 @@
 using System;
 using System.Windows.Forms;
+using gui.Logger;
+using gui.src.Tree.Node.ActionAllocator;
 using gui.Tree.Node;
+using gui.Tree.Node.ActionAllocator;
 using MorseKernelATL;
 
 namespace gui.Tree.Node.Forms
@@ -132,33 +135,13 @@ namespace gui.Tree.Node.Forms
 		private delegate void Do();
 		private IComputationResult computationResult = null;
 
-		public DialogResult ShowModal(IWin32Window owner, ComputationNode node, IComputationResult aresult)
+		public DialogResult ShowModal(IWin32Window owner, ComputationNode node, IComputationResult result)
 		{
-			actionListBox.Items.Clear();
-			computationResult = aresult;
-
-			if (aresult is IComputationGraphResult)
-			{
-				actionListBox.Items.Add(new ListNode("Chain-Reccurent set", new Do(doChainReccurentSet)));
-				actionListBox.Items.Add(
-					new ListNode("Nodes of Chain-Reccurent set without edges", new Do(doChaingReccurentNodeSet)));
-				actionListBox.Items.Add(new ListNode("Fixed points set", new Do(doFixedPointSet)));
-			} else
-			{
-				throw new NotImplementedException("No other cases to select next method");
-			}
+		    Log.LogMessage(this, "Select continue for {0}", result.GetType().Name);
+            actionListBox.Items.Clear();
+		    actionListBox.Items.AddRange(DynamicResultTest.Instance.AllocateResutAction(result));		    
 
 			return this.ShowDialog(owner);
-		}
-
-		private void doChaingReccurentNodeSet()
-		{
-			(computationResult as IComputationGraphResult).StrongComponents();
-		}
-
-		private void doChainReccurentSet()
-		{
-			(computationResult as IComputationGraphResult).StrongComponentsEdges();
 		}
 
 		private void doFixedPointSet()
@@ -185,33 +168,11 @@ namespace gui.Tree.Node.Forms
 
 		public void DoSelected()
 		{
-			ListNode node = (actionListBox.SelectedItem as ListNode);
+			IResultAction node = (actionListBox.SelectedItem as IResultAction);
             if (node != null) 
             {
-                node.Do();
+                node.DoAction();
             }
-		}
-
-		private class ListNode
-		{
-			private string message; 
-			private Do doAction;
-
-			public ListNode(string message, Do doAction)
-			{
-				this.message = message;
-				this.doAction = doAction;
-			}
-
-			public override string ToString()
-			{
-				return message;
-			}
-
-			public void Do()
-			{
-				doAction();
-			}
 		}
 	}
 }

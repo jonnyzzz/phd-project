@@ -38,8 +38,9 @@ class ATL_NO_VTABLE CSymbolicImageGraph :
 	public ISymbolicImageGraph,
 	public ISubdevidable,
 	public ISubdevidablePoint,
-//	public IExtendable,
+	public IExtendable,
 	public IExportData,
+    public IComputationExtendingResult,
 	private GraphSaver
 {
 public:
@@ -69,11 +70,27 @@ public:
 
 	STDMETHOD(Subdevide)(ISubdevideParams* params);
 	STDMETHOD(SubdevidePoint)(ISubdevidePointParams* params);
-	STDMETHOD(Extend)(IExtendableParams* params); 
 
+    /*
+public:
+    //IExtendible
+    STDMETHOD(Extend)(IExtendableParams* params); 
 	STDMETHOD(NewDimension)(int* value);
+    */
 
+public:
+    //IExportable
 	STDMETHOD(ExportData)(BSTR file);
+
+public:
+    //IExtendible
+    STDMETHOD(Extend)();
+
+public:
+    //IComputationExtendingResult
+    STDMETHOD(PointMethodProjectiveExtension)(IExtendablePointParams* params);
+    STDMETHOD(PointMethodProjectiveExtensionDimension)(int* dim);
+
 
 private:
 
