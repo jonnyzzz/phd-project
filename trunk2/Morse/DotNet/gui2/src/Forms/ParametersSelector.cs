@@ -215,6 +215,7 @@ namespace gui2.Forms
 			this.Controls.Add(this.panelControl);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "ParametersSelector";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "ParametersSelector";
 			this.panelParameters.ResumeLayout(false);
 			this.parameterCaptionBox.ResumeLayout(false);

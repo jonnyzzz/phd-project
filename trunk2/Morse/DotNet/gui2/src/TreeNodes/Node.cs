@@ -1,9 +1,6 @@
-using System;
 using System.Windows.Forms;
-using gui2.ActionPerformer;
 using gui2.src.TreeNodes;
 using gui2.src.TreeNodes.MenuItems;
-using gui2.TreeNodes.MenuItems;
 using guiActions.Actions;
 using guiActions.src.filter;
 using guiControls.TreeControl;
@@ -47,10 +44,32 @@ namespace gui2.TreeNodes
 				return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Create Group", new Click(CreateGroup)));
 			} else if (this.Nodes.Count > 0)
 			{
-				return MergeWithDelimiter(GetMenuItemsActions(), new SelectChildsMenuItem("Select all childs", this));
+				return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Group all childs", new Click(CreateGroupClick)));
 			} else
 			{
 				return GetMenuItemsActions();
+			}
+		}
+
+
+		private void CreateGroupClick()
+		{
+			Group group = Group.GetGroup(this);
+			group.DeCheckAndRemoveAll();
+
+			Node node = null;
+
+			foreach (TreeNode treeNode in Nodes)
+			{
+				if (treeNode is Node)
+				{
+					node = (Node)treeNode;
+					node.Checked = true;
+				}
+			}
+			if (node != null) 
+			{
+				node.CreateGroup();
 			}
 		}
 
@@ -60,8 +79,10 @@ namespace gui2.TreeNodes
 			Node node = Parent as Node;
 			if (node != null) 
 			{
-				node.AddNodeChild(group.CreateNode());
+				Node groupNode = group.CreateNode();
+				node.AddNodeChild(groupNode);
 				group.DeCheckAndRemoveAll();
+				groupNode.TreeView.SelectedNode = groupNode;
 			} else
 			{
 				MessageBox.Show("Unable to add an Group for such a strange case");
@@ -90,6 +111,7 @@ namespace gui2.TreeNodes
 			
 			this.Nodes.Add(node);
 			this.Expand();
+			node.EnsureVisible();
 		}
 
 		public ResultSet ResultSet
