@@ -3,9 +3,11 @@
 class ProgressBarInfo
 {
 public:
-	virtual ~ProgressBarInfo() {};
+	ProgressBarInfo();
+	virtual ~ProgressBarInfo();
 public:
-	virtual int Length() { return 1<<30;};
-	virtual void Next(int length = 1) {};
-	virtual bool NeedStop() { return false;};
+	virtual int Length();
+	virtual void Next();
+	virtual void Next(int length);
+	virtual bool NeedStop();
 };

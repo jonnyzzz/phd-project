@@ -149,6 +149,9 @@
 			ReferencedProjectIdentifier="{A42EF8BC-57CF-4D5A-A423-9B03C034210A}"
 			Name="calculator"/>
 		<ProjectReference
+			ReferencedProjectIdentifier="{80C14A35-BD13-463C-B296-AF3F5A254439}"
+			Name="cellImageBuilders"/>
+		<ProjectReference
 			ReferencedProjectIdentifier="{213A979A-506A-4295-9350-B86F82C0DBCB}"
 			Name="graph"/>
 		<ProjectReference
@@ -167,7 +170,13 @@
 				RelativePath=".\ActionBase.cpp">
 			</File>
 			<File
+				RelativePath=".\BoxMethodAction.cpp">
+			</File>
+			<File
 				RelativePath=".\compreg.cpp">
+			</File>
+			<File
+				RelativePath=".\ComputationParameters.cpp">
 			</File>
 			<File
 				RelativePath=".\Dummy.cpp">
@@ -191,6 +200,9 @@
 				RelativePath=".\GraphResultImpl.cpp">
 			</File>
 			<File
+				RelativePath=".\GraphResultWrapper.cpp">
+			</File>
+			<File
 				RelativePath=".\Kernell.cpp">
 			</File>
 			<File
@@ -209,6 +221,9 @@
 				RelativePath=".\ProgressBarInfo.cpp">
 			</File>
 			<File
+				RelativePath=".\ProgressBarNotificationAdapter.cpp">
+			</File>
+			<File
 				RelativePath=".\Result.cpp">
 			</File>
 			<File
@@ -216,6 +231,9 @@
 			</File>
 			<File
 				RelativePath=".\ResultMerger.cpp">
+			</File>
+			<File
+				RelativePath=".\SmartInterface.cpp">
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp">
@@ -231,6 +249,9 @@
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\TarjanAction.cpp">
 			</File>
 			<File
 				RelativePath=".\WritableFunction.cpp">
@@ -259,7 +280,13 @@
 				RelativePath=".\ActionFactory.h">
 			</File>
 			<File
+				RelativePath=".\BoxMethodAction.h">
+			</File>
+			<File
 				RelativePath=".\compreg.h">
+			</File>
+			<File
+				RelativePath=".\ComputationParameters.h">
 			</File>
 			<File
 				RelativePath=".\Dummy.h">
@@ -283,6 +310,9 @@
 				RelativePath=".\GraphResultImpl.h">
 			</File>
 			<File
+				RelativePath=".\GraphResultWrapper.h">
+			</File>
+			<File
 				RelativePath=".\Kernell.h">
 			</File>
 			<File
@@ -298,6 +328,9 @@
 				RelativePath=".\ProgressBarInfo.h">
 			</File>
 			<File
+				RelativePath=".\ProgressBarNotificationAdapter.h">
+			</File>
+			<File
 				RelativePath=".\Resource.h">
 			</File>
 			<File
@@ -310,7 +343,13 @@
 				RelativePath=".\ResultMerger.h">
 			</File>
 			<File
+				RelativePath=".\SmartInterface.h">
+			</File>
+			<File
 				RelativePath=".\stdafx.h">
+			</File>
+			<File
+				RelativePath=".\TarjanAction.h">
 			</File>
 			<File
 				RelativePath=".\WritableFunction.h">
