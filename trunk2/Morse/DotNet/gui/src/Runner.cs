@@ -47,7 +47,7 @@ namespace gui
                 Resources.SetBasePath(args[0]);
             } else if (args.Length == 2)
             {
-                Resources.SetBasePath(args[0], args[2]);
+                Resources.SetBasePath(args[0], args[1]);
             } else {
                 try 
                 {

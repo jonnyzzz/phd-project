@@ -4,14 +4,32 @@
 #include "stdafx.h"
 #include "objects.h"
 #include "Pefomance.h"
-
-
+#include "CalculatorTest.h"
+#include "TestRunner.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
+
+
+int _tmain(int argc, _TCHAR* argv[]) {
+    cout<<"Test starts\n\n";
+
+    TestRunner testRunner(cout);
+    CalculatorTest test(cout);
+
+
+    //testRunner.RunTest(&tb);
+    testRunner.RunTest(&test);
+
+
+
+}
+
+
+/*
 
 void dumpGraphComponents(GraphComponents* cms, int number = -1);
 
@@ -132,7 +150,7 @@ void t3d() {
 	cout<<"Morse: "<<r.lower<<"\t"<<r.upper<<"\n";
 
 	
-//*/	
+//*/	/*
 }
 
 
@@ -278,7 +296,7 @@ void perfomance() {
 
 	cout<<i.first<<"\t"<<i.second<<"\n";
 }
-*/
+*//*
 
 int _tmain(int argc, _TCHAR* argv[])
 {

@@ -30,9 +30,13 @@ namespace gui.Tree.Node.Action
 		{
 			SaveFileDialog sfd = new SaveFileDialog();
 			sfd.OverwritePrompt = true;
+            sfd.DefaultExt = "points";
+            sfd.FileName = "points";
+            sfd.Filter = "Point files|*.points|All files|*.*";
+            sfd.Title = "Save Points of selected node";
 			
 			
-			if (sfd.ShowDialog(null) == DialogResult.OK || !sfd.CheckPathExists)
+			if (sfd.ShowDialog(null) == DialogResult.OK )
 			{
 				node.ExportData(sfd.FileName);
 				MessageBox.Show(null, "Data was exported to " + sfd.FileName, "Export");

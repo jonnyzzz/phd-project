@@ -34,6 +34,9 @@
 #include "..\graph\functionMS.h"
 #include "..\graph\FileStream.h"
 #include "..\graph_simplex\RomDebug.h"
+
+#include "../calculator/FunctionContext.h"
+
 #define _USE_MATH_DEFINES
 #include <Math.h>
 #include <map>

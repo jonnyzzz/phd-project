@@ -178,6 +178,9 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
+				RelativePath=".\CalculatorTest.cpp">
+			</File>
+			<File
 				RelativePath=".\Pefomance.cpp">
 			</File>
 			<File
@@ -204,11 +207,20 @@
 			<File
 				RelativePath=".\test.cpp">
 			</File>
+			<File
+				RelativePath=".\TestBase.cpp">
+			</File>
+			<File
+				RelativePath=".\TestRunner.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			<File
+				RelativePath=".\CalculatorTest.h">
+			</File>
 			<File
 				RelativePath=".\objects.h">
 			</File>
@@ -217,6 +229,12 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
+			</File>
+			<File
+				RelativePath=".\TestBase.h">
+			</File>
+			<File
+				RelativePath=".\TestRunner.h">
 			</File>
 		</Filter>
 		<Filter

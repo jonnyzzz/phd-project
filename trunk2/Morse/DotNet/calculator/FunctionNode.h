@@ -39,6 +39,7 @@ public:
 public:
 	virtual double evaluate(FunctionContext* cx) = 0;
 	double evaluate(FunctionContext& cx);
+    double evaluate();
 
 	virtual bool canSimplify(FunctionContext* cx) = 0;
 	virtual FunctionNode* simplify(FunctionContext* cx) = 0;

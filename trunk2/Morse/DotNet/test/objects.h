@@ -23,6 +23,10 @@ public:
 		return p;
 	}
 
+    operator P&() {
+        return *p;
+    }
+
 	smartPointer& operator = (const smartPointer& sp) {
 		this->p = sp.p;
 		sp.p = NULL;
@@ -64,6 +68,10 @@ public:
 		return p;
 	}
 
+    operator GraphComponents&() {
+		return *p;
+	}
+
 	smartPointer& operator = (const smartPointer& sp) {
 		throw -1;		
 	}
@@ -75,3 +83,5 @@ public:
 	}
 
 };
+
+typedef smartPointer<FunctionNode> sFunctionNode;

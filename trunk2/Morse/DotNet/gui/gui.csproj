@@ -272,6 +272,26 @@
                     BuildAction = "None"
                 />
                 <File
+                    RelPath = "src\Panels\GraphNodeInfo.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Panels\GraphNodeInfo.resx"
+                    DependentUpon = "GraphNodeInfo.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Panels\NotedTextField.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Panels\NotedTextField.resx"
+                    DependentUpon = "NotedTextField.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "src\Resources\ResourceLoader.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

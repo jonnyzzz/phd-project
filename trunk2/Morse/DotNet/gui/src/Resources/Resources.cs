@@ -21,12 +21,12 @@ namespace gui.Resource
 
 	    public string Gnuplot_Templates
 	    {
-	        get { return RESOURCE_PATH + GNUPLOT_TEMPLATES; }
+	        get { return Resource_Path + GNUPLOT_TEMPLATES; }
 	    }
 
 	    public string Gnuplot_Exe
 	    {
-	        get { return RESOURCE_PATH + GNUPLOT_EXE; }
+	        get { return Resource_Path + GNUPLOT_EXE; }
 	    }
 
 	    public string Gnuplot_Exe_Params
@@ -41,12 +41,12 @@ namespace gui.Resource
 
 	    public string Gnuplot_Template_2D
 	    {
-	        get { return GNUPLOT_TEMPLATES +  GNUPLOT_TEMPLATE_2D; }
+	        get { return Gnuplot_Templates +  GNUPLOT_TEMPLATE_2D; }
 	    }
 
 	    public string Gnuplot_Template_3D
 	    {
-	        get { return GNUPLOT_TEMPLATES + GNUPLOT_TEMPLATE_3D; }
+	        get { return Gnuplot_Templates + GNUPLOT_TEMPLATE_3D; }
 	    }
         #endregion
 

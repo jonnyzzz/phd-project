@@ -26,15 +26,16 @@ namespace gui.Tree.Node
 
         #region Class Members...
 
-        public ComputationNode() : this(null)
+        public ComputationNode() : base()
         {
+            this.Checked = false;
+            this.node = null;
         }
 
-        public ComputationNode(IKernelNode node) : base()
+        public ComputationNode(IKernelNode node) : this() 
         {
             table.Add(node, this);
             this.node = node;
-            this.Checked = false;
         }
 
         private IKernelNode node;

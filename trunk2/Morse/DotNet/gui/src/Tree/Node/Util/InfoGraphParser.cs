@@ -15,6 +15,12 @@ namespace gui.Tree.Node.Util
 		string gridNum = "";
 		string space = "";
 
+        private string doubleToString(double d)
+        {
+            return d.ToString().Replace(',','.');
+        }
+
+
 		public InfoGraphParser(IGraphInfo info)
 		{
 			this.info = info;
@@ -22,9 +28,9 @@ namespace gui.Tree.Node.Util
 
 			for (int i=0; i<dim; i++) 
 			{
-				gridSize += string.Format("g{0} = {1}; ", i, info.gridSize(i));
-				gridNum += string.Format("s{0} = {1}; ", i, info.gridNumber(i));
-				space += string.Format("[ {0}, {1} ]x", info.spaceMin(i), info.spaceMax(i));
+				gridSize += string.Format("g{0} = {1}; ", i, doubleToString(info.gridSize(i)));
+				gridNum += string.Format("s{0} = {1}; ", i, doubleToString(info.gridNumber(i)));
+				space += string.Format("[ {0}, {1} ]x", doubleToString(info.spaceMin(i)), info.spaceMax(i));
 			}
 			if (space.Length > 0) 
 				space = space.Substring(0, space.LastIndexOf('x'));

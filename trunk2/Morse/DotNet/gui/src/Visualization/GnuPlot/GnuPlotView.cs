@@ -100,6 +100,9 @@ namespace gui.Visualization.GnuPlot
             TemplateProcessor tp = new TemplateProcessor(ResourceLoader.LoadResourceAsText(Resources.Instance.Gnuplot_Template_3D));
             
             tp.subsitute("file", filedata);
+            tp.subsitute("x_offset", (info.gridSize(0)/2).ToString().Replace(',','.'));
+            tp.subsitute("y_offset", (info.gridSize(1)/2).ToString().Replace(',','.'));
+            tp.subsitute("z_offset", (info.gridSize(2)/2).ToString().Replace(',','.'));
 
             string name = AllocateTemporaryFile();
             TextWriter tw = File.CreateText(name);
@@ -112,6 +115,11 @@ namespace gui.Visualization.GnuPlot
         public static GnuPlotView ShowFromFile(IGraphInfo info, IExportData data)
         {
             return new GnuPlotView(data, info);
-        }        
+        }
+
+        public static void Run()
+        {
+            Process.Start(Resources.Instance.Gnuplot_Exe);
+        }
     }
 }

@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include ".\functionnode.h"
+#include ".\FunctionContext.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -25,4 +26,8 @@ bool FunctionNode::isZero(double value) {
 
 double FunctionNode::evaluate(FunctionContext& cx) {
 	return evaluate(&cx);
+}
+
+double FunctionNode::evaluate() {
+    return evaluate(FunctionContext());
 }

@@ -186,8 +186,10 @@ namespace gui.Tree.Node.Forms
 		public void DoSelected()
 		{
 			ListNode node = (actionListBox.SelectedItem as ListNode);
-			if (node != null) 
-				node.Do();
+            if (node != null) 
+            {
+                node.Do();
+            }
 		}
 
 		private class ListNode
