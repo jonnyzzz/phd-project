@@ -23,4 +23,7 @@ protected:
 
 protected:
 	JDouble sqr(JDouble x);
+
+private:
+	bool wasInitialized;
 };

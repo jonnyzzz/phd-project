@@ -30,7 +30,7 @@ namespace gui.Tree.Node.Factory
 			Log.LogMessage(typeof (ISubdevideParams), "ISubdevideParams invoke");
 			int dimension = node.graphDimension();
 
-			IntParametersRowInfo factor = new IntParametersRowInfo(dimension, "Cell devisor");
+			IntParametersRowInfo factor = new IntParametersRowInfo(dimension, "Cell division");
 			ParametersInputForm dialog = new ParametersInputForm(new IParametersRowInfo[] { factor});
 
 			if (dialog.ShowDialog() == DialogResult.OK)

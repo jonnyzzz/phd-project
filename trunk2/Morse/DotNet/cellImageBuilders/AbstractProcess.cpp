@@ -11,7 +11,7 @@ static char THIS_FILE[] = __FILE__;
 
 AbstractProcess::AbstractProcess(Graph* graph, ProgressBarInfo* info) : graph_source(graph), graph_result(NULL), info(info)
 {
-
+	wasInitialized = false;
 }
 
 AbstractProcess::~AbstractProcess(void)
@@ -20,17 +20,20 @@ AbstractProcess::~AbstractProcess(void)
 
 
 Graph* AbstractProcess::result() {
-	VERIFY(graph_result != NULL);
+	ASSERT(graph_result != NULL);
+	ASSERT(wasInitialized);
 	return graph_result;
 }
 
 
 void AbstractProcess::submitGraphResult(Graph* graph) {
-	VERIFY(graph_result == NULL);
+	ASSERT(graph_result == NULL);
+	ASSERT(wasInitialized);
 	graph_result = graph;
 }
 
 void AbstractProcess::start() {
+	wasInitialized = true;
 }
 
 

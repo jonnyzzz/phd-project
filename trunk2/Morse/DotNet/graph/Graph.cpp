@@ -92,6 +92,13 @@ Graph* Graph::copyCoordinates() {
 	return new Graph(dimention, min, max, grid);
 }
 
+Graph* Graph::copyCoordinatesDevided(int* factor) {
+	for (int i=0; i<dimention; i++) {
+		point[i] = grid[i]*factor[i];
+	}
+	return new Graph(dimention, min, max, point);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 ///////  Hash
 ////////////////////////////////////////////////////////////////////////////////

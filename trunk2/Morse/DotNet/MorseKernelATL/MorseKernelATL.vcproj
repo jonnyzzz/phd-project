@@ -406,9 +406,6 @@
 		<File
 			RelativePath=".\ReadMe.txt">
 		</File>
-		<File
-			RelativePath="..\gui\XmlParseException.cs">
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

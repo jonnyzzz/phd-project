@@ -22,6 +22,7 @@ public:
 	virtual ~Graph();
 
 	Graph* copyCoordinates();
+	Graph* copyCoordinatesDevided(int* factor);
 
 //memory routine
 //private:
