@@ -1,4 +1,3 @@
-using System;
 using gui.Attributes;
 using gui.Tree.Node.ActionAllocator;
 using MorseKernelATL;
@@ -10,34 +9,36 @@ namespace gui.Tree.OperationSelector
 	/// </summary>
 	public class LoopsResultAction : ResultAction
 	{
-        IComputationGraphResult result;
+		private IComputationGraphResult result;
+
 		public LoopsResultAction(IComputationGraphResult result)
 		{
 			this.result = result;
-            this.Text = "Localize Loops";
+			this.Text = "Localize Loops";
 		}
 
-	    public override void DoAction()
-	    {
-            result.Loops();
-	    }
-        [InitializeOnRun]
-        public static void Register()
-        {
-            DynamicResultTest.Instance.RegisterAction(new LoopsResultActionFactory());
-        }
+		public override void DoAction()
+		{
+			result.Loops();
+		}
 
-        private class LoopsResultActionFactory : IResultActionFactory
-        {
-            public bool Corresponds(IComputationResult node)
-            {
-                return node is IComputationGraphResult;
-            }
+		[InitializeOnRun]
+		public static void Register()
+		{
+			DynamicResultTest.Instance.RegisterAction(new LoopsResultActionFactory());
+		}
 
-            public ResultAction CreateAction(IComputationResult node)
-            {
-                return new LoopsResultAction((IComputationGraphResult)node);
-            }
-        }
+		private class LoopsResultActionFactory : IResultActionFactory
+		{
+			public bool Corresponds(IComputationResult node)
+			{
+				return node is IComputationGraphResult;
+			}
+
+			public ResultAction CreateAction(IComputationResult node)
+			{
+				return new LoopsResultAction((IComputationGraphResult) node);
+			}
+		}
 	}
 }

@@ -1,6 +1,4 @@
-using System;
 using gui.Attributes;
-using gui.Tree.Node.Action;
 using gui.Tree.Node.ActionAllocator;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
@@ -13,46 +11,47 @@ namespace gui.Tree.Node.Action
 	/// </summary>
 	public class ExtendAction : ComputationNodeAction
 	{
-        private IExtendable node;
+		private IExtendable node;
 
 		public ExtendAction(IExtendable node)
 		{
 			this.node = node;
 		}
 
-	    public override ComputationNodeMenuItem[] getMenuItems()
-	    {
-	        return new ComputationNodeMenuItem[] {
-	            ComputationNodeMenuFactory.getUniversalMenuItem(
-                      new ComputationNodeMenuFactory.UniversalMenuItemClick(Extend), 
-                      "Extend")
-	            };
-	    }
+		public override ComputationNodeMenuItem[] getMenuItems()
+		{
+			return new ComputationNodeMenuItem[]
+				{
+					ComputationNodeMenuFactory.getUniversalMenuItem(
+						new ComputationNodeMenuFactory.UniversalMenuItemClick(Extend),
+						"Extend")
+				};
+		}
 
-        private void Extend()
-        {
-            node.Extend();
-        }
+		private void Extend()
+		{
+			node.Extend();
+		}
 
-        [InitializeOnRun]
-        public static void Register()
-        {
-            DynamicActionNodeTest.Instance.registerActionFactory(new ExtendActionFactory());
-        }
+		[InitializeOnRun]
+		public static void Register()
+		{
+			DynamicActionNodeTest.Instance.registerActionFactory(new ExtendActionFactory());
+		}
 
 
-        private class ExtendActionFactory : IActionFactory
-        {
-            public bool Corresponds(IKernelNode node)
-            {
-                return node is IExtendable;
-            }
+		private class ExtendActionFactory : IActionFactory
+		{
+			public bool Corresponds(IKernelNode node)
+			{
+				return node is IExtendable;
+			}
 
-            public ComputationNodeAction CreateAction(IKernelNode node)
-            {
-                return new ExtendAction((IExtendable)node);
-            }
-        }
+			public ComputationNodeAction CreateAction(IKernelNode node)
+			{
+				return new ExtendAction((IExtendable) node);
+			}
+		}
 
 	}
 }

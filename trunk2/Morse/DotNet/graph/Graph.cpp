@@ -43,7 +43,7 @@ struct Edge {
 Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid) 
 : CoordinateSystem(dimention, min, max, grid)
 {
-	edgeHashMax = 13;
+	edgeHashMax = 7;
 	nodeHashMax = 1861;
     //edgeHashMax = 10000;
 	//nodeHashMax = 10000;

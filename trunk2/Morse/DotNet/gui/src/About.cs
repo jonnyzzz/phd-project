@@ -1,6 +1,4 @@
 using System;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -9,12 +7,12 @@ namespace gui
 	/// <summary>
 	/// Summary description for About.
 	/// </summary>
-	public class About : System.Windows.Forms.Form
+	public class About : Form
 	{
-		private System.Windows.Forms.Label label1;
-		private System.ComponentModel.IContainer components;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Timer timerOpacity;
+		private Label label1;
+		private IContainer components;
+		private Panel panel1;
+		private Timer timerOpacity;
 
 		public string data;
 
@@ -27,37 +25,38 @@ namespace gui
 
 			String offet = new string(' ', 15);
 
-			data = 
-			offet + "Created by: \n " + 
-			offet + "   Euegene Petrenko (evgeni.petrenko@mail.ru),\n " +
-			offet + "   George Osipenko,\n " + 
-			offet + "   Nataly Ampilova,\n " +
-			offet + "   Kate Motkina\n\n\n " + 
-			offet + "Special thanks to: \n " + 
-			offet + "   Joseph V. Romanovsky,\n" +
-			offet + "   And to every one, who was involved \n" +
-			offet + "	In development process \n\n\n" + 
-			offet + "                       2001-2005 ";
+			data =
+				offet + "Created by: \n " +
+					offet + "   Euegene Petrenko (evgeni.petrenko@mail.ru),\n " +
+					offet + "   George Osipenko,\n " +
+					offet + "   Nataly Ampilova,\n " +
+					offet + "   Kate Motkina\n\n\n " +
+					offet + "Special thanks to: \n " +
+					offet + "   Joseph V. Romanovsky,\n" +
+					offet + "   And to every one, who was involved \n" +
+					offet + "	In development process \n\n\n" +
+					offet + "                       2001-2005 ";
 			label1.Text = data;
-			
+
 		}
 
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		protected override void Dispose( bool disposing )
+		protected override void Dispose(bool disposing)
 		{
-			if( disposing )
+			if (disposing)
 			{
-				if(components != null)
+				if (components != null)
 				{
 					components.Dispose();
 				}
 			}
-			base.Dispose( disposing );
+			base.Dispose(disposing);
 		}
 
 		#region Windows Form Designer generated code
+
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
@@ -65,7 +64,7 @@ namespace gui
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(About));
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (About));
 			this.label1 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.timerOpacity = new System.Windows.Forms.Timer(this.components);
@@ -77,7 +76,7 @@ namespace gui
 			this.label1.BackColor = System.Drawing.SystemColors.Info;
 			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.label1.Location = new System.Drawing.Point(0, 0);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(634, 326);
@@ -105,7 +104,7 @@ namespace gui
 			this.ClientSize = new System.Drawing.Size(634, 326);
 			this.Controls.Add(this.panel1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
 			this.Name = "About";
 			this.Opacity = 0.45;
 			this.Text = "About";
@@ -113,8 +112,8 @@ namespace gui
 			this.ResumeLayout(false);
 
 		}
-		#endregion
 
+		#endregion
 
 		private int opacity = 40;
 		private int direction = 1;
@@ -123,14 +122,14 @@ namespace gui
 		private const int opacityMax = 95;
 
 
-		private void timerOpacity_Tick(object sender, System.EventArgs e)
+		private void timerOpacity_Tick(object sender, EventArgs e)
 		{
 			opacity += direction;
 			if (opacity > opacityMax || opacity < opacityMin)
 			{
 				direction = -direction;
-			}			
-			this.Opacity = Math.Sqrt((double)opacity/(opacityDevider));
+			}
+			this.Opacity = Math.Sqrt((double) opacity/(opacityDevider));
 		}
 	}
 }

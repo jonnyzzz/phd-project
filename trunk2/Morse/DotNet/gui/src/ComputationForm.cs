@@ -1,5 +1,9 @@
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
+using AxMSComctlLib;
+using gui.Panels;
+using gui.Tree;
 using gui.Tree.Node;
 using gui.Tree.Node.Forms;
 using gui.Visualization.GnuPlot;
@@ -10,38 +14,38 @@ namespace gui.Forms
 	/// <summary>
 	/// Summary description for ComputationForm.
 	/// </summary>
-	public class ComputationForm : System.Windows.Forms.Form
+	public class ComputationForm : Form
 	{
-		private System.Windows.Forms.MenuItem menuAssign;
-		private System.Windows.Forms.MenuItem menuLoad;
-		private System.Windows.Forms.MainMenu mainMenu;
-		private System.Windows.Forms.MenuItem menuExit;
-		private System.Windows.Forms.MenuItem menuSystem;
-		private System.Windows.Forms.MenuItem menuStatic;
-		private Tree.ComputationTree computatioinTree;
-		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.GroupBox groupBox2;
-		private System.Windows.Forms.MenuItem menuSelection;
-		private System.Windows.Forms.MenuItem menuDeselectAll;
-		private System.Windows.Forms.Label label1;
-		private AxMSComctlLib.AxProgressBar axProgressBar1;
-		private System.Windows.Forms.ImageList imageList1;
-		private System.Windows.Forms.Panel panelRightDownInternal;
-		private System.Windows.Forms.Panel panelRightDown;
-		private System.Windows.Forms.Panel panelRightUp;
-		private System.Windows.Forms.Panel panelRight;
-		private System.Windows.Forms.Panel panelLeft;
-		private System.Windows.Forms.Splitter splitterUD;
-		private System.Windows.Forms.Splitter splitterLR;
-		private System.Windows.Forms.MenuItem menuItemInternal;
-		private System.Windows.Forms.MenuItem menuItemGC;
-        private System.Windows.Forms.MenuItem menuItemStartGNUPlot;
-        private System.Windows.Forms.Panel panelNodeInfo;
-        private System.Windows.Forms.MenuItem menuItemShowSystemFunction;
-		private System.Windows.Forms.MenuItem menuItemSplitter;
-		private System.Windows.Forms.MenuItem menuItemHelp;
-		private System.Windows.Forms.MenuItem menuItemAbout;
-		private System.ComponentModel.IContainer components;
+		private MenuItem menuAssign;
+		private MenuItem menuLoad;
+		private MainMenu mainMenu;
+		private MenuItem menuExit;
+		private MenuItem menuSystem;
+		private MenuItem menuStatic;
+		private ComputationTree computatioinTree;
+		private GroupBox groupBox1;
+		private GroupBox groupBox2;
+		private MenuItem menuSelection;
+		private MenuItem menuDeselectAll;
+		private Label label1;
+		private AxProgressBar axProgressBar1;
+		private ImageList imageList1;
+		private Panel panelRightDownInternal;
+		private Panel panelRightDown;
+		private Panel panelRightUp;
+		private Panel panelRight;
+		private Panel panelLeft;
+		private Splitter splitterUD;
+		private Splitter splitterLR;
+		private MenuItem menuItemInternal;
+		private MenuItem menuItemGC;
+		private MenuItem menuItemStartGNUPlot;
+		private Panel panelNodeInfo;
+		private MenuItem menuItemShowSystemFunction;
+		private MenuItem menuItemSplitter;
+		private MenuItem menuItemHelp;
+		private MenuItem menuItemAbout;
+		private IContainer components;
 
 		public void updateProgressBar(int min, int max, int current)
 		{
@@ -56,26 +60,27 @@ namespace gui.Forms
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
-            this.computatioinTree.MouseMoveNode += new gui.Tree.MouseMoveComponentEvent(computatioinTree_MouseMoveNode);
+			this.computatioinTree.MouseMoveNode += new MouseMoveComponentEvent(computatioinTree_MouseMoveNode);
 			this.menuItemInternal.Visible = Runner.IsInternal;
 		}
 
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		protected override void Dispose( bool disposing )
+		protected override void Dispose(bool disposing)
 		{
-			if( disposing )
+			if (disposing)
 			{
-				if(components != null)
+				if (components != null)
 				{
 					components.Dispose();
 				}
 			}
-			base.Dispose( disposing );
+			base.Dispose(disposing);
 		}
 
 		#region Windows Form Designer generated code
+
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
@@ -83,7 +88,7 @@ namespace gui.Forms
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(ComputationForm));
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (ComputationForm));
 			this.computatioinTree = new gui.Tree.ComputationTree();
 			this.mainMenu = new System.Windows.Forms.MainMenu();
 			this.menuSystem = new System.Windows.Forms.MenuItem();
@@ -114,7 +119,7 @@ namespace gui.Forms
 			this.panelLeft = new System.Windows.Forms.Panel();
 			this.splitterLR = new System.Windows.Forms.Splitter();
 			this.groupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.axProgressBar1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize) (this.axProgressBar1)).BeginInit();
 			this.groupBox2.SuspendLayout();
 			this.panelRightDownInternal.SuspendLayout();
 			this.panelRightDown.SuspendLayout();
@@ -135,22 +140,26 @@ namespace gui.Forms
 			// 
 			// mainMenu
 			// 
-			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					 this.menuSystem,
-																					 this.menuSelection,
-																					 this.menuItemInternal,
-																					 this.menuItemHelp});
+			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[]
+				{
+					this.menuSystem,
+					this.menuSelection,
+					this.menuItemInternal,
+					this.menuItemHelp
+				});
 			// 
 			// menuSystem
 			// 
 			this.menuSystem.Index = 0;
-			this.menuSystem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					   this.menuAssign,
-																					   this.menuLoad,
-																					   this.menuStatic,
-																					   this.menuItemShowSystemFunction,
-																					   this.menuItemSplitter,
-																					   this.menuExit});
+			this.menuSystem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[]
+				{
+					this.menuAssign,
+					this.menuLoad,
+					this.menuStatic,
+					this.menuItemShowSystemFunction,
+					this.menuItemSplitter,
+					this.menuExit
+				});
 			this.menuSystem.Text = "System";
 			// 
 			// menuAssign
@@ -194,8 +203,10 @@ namespace gui.Forms
 			// menuSelection
 			// 
 			this.menuSelection.Index = 1;
-			this.menuSelection.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																						  this.menuDeselectAll});
+			this.menuSelection.MenuItems.AddRange(new System.Windows.Forms.MenuItem[]
+				{
+					this.menuDeselectAll
+				});
 			this.menuSelection.Text = "Selection";
 			// 
 			// menuDeselectAll
@@ -207,9 +218,11 @@ namespace gui.Forms
 			// menuItemInternal
 			// 
 			this.menuItemInternal.Index = 2;
-			this.menuItemInternal.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																							 this.menuItemGC,
-																							 this.menuItemStartGNUPlot});
+			this.menuItemInternal.MenuItems.AddRange(new System.Windows.Forms.MenuItem[]
+				{
+					this.menuItemGC,
+					this.menuItemStartGNUPlot
+				});
 			this.menuItemInternal.Text = "Internal";
 			// 
 			// menuItemGC
@@ -228,8 +241,10 @@ namespace gui.Forms
 			// menuItemHelp
 			// 
 			this.menuItemHelp.Index = 3;
-			this.menuItemHelp.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																						 this.menuItemAbout});
+			this.menuItemHelp.MenuItems.AddRange(new System.Windows.Forms.MenuItem[]
+				{
+					this.menuItemAbout
+				});
 			this.menuItemHelp.Text = "Help";
 			// 
 			// menuItemAbout
@@ -264,7 +279,7 @@ namespace gui.Forms
 			this.axProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.axProgressBar1.Location = new System.Drawing.Point(5, 44);
 			this.axProgressBar1.Name = "axProgressBar1";
-			this.axProgressBar1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axProgressBar1.OcxState")));
+			this.axProgressBar1.OcxState = ((System.Windows.Forms.AxHost.State) (resources.GetObject("axProgressBar1.OcxState")));
 			this.axProgressBar1.RightToLeft = false;
 			this.axProgressBar1.Size = new System.Drawing.Size(350, 23);
 			this.axProgressBar1.TabIndex = 0;
@@ -380,12 +395,12 @@ namespace gui.Forms
 			this.Controls.Add(this.splitterLR);
 			this.Controls.Add(this.panelLeft);
 			this.Controls.Add(this.panelRight);
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
 			this.Menu = this.mainMenu;
 			this.Name = "ComputationForm";
 			this.Text = "Dynamic System Investigation Tool";
 			this.groupBox1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.axProgressBar1)).EndInit();
+			((System.ComponentModel.ISupportInitialize) (this.axProgressBar1)).EndInit();
 			this.groupBox2.ResumeLayout(false);
 			this.panelRightDownInternal.ResumeLayout(false);
 			this.panelRightDown.ResumeLayout(false);
@@ -395,121 +410,133 @@ namespace gui.Forms
 			this.ResumeLayout(false);
 
 		}
+
 		#endregion
 
-		private void menuExit_Click(object sender, System.EventArgs e)
+		private void menuExit_Click(object sender, EventArgs e)
 		{
 			Application.Exit();
 		}
 
 		#region external control functions
+
 		public void asColse()
 		{
 			this.Close();
 		}
+
 		#endregion
 
-		private void menuAssign_Click(object sender, System.EventArgs e)
-		{			
-		    SystemAssignment assign = new SystemAssignment();
-		    showSystemAssignmentDialog(assign);
+		private void menuAssign_Click(object sender, EventArgs e)
+		{
+			SystemAssignment assign = new SystemAssignment();
+			showSystemAssignmentDialog(assign);
 		}
 
-	    private void showSystemAssignmentDialog(SystemAssignment assign)
-	    {
-	        if (assign.ShowDialog(this) == DialogResult.OK)
-	        {
-	            Console.Out.WriteLine("Runner.Kernel.Function = {0}", Runner.Kernel.function == null);
-	            Runner.Kernel.function= assign.getFunction();
+		private void showSystemAssignmentDialog(SystemAssignment assign)
+		{
+			if (assign.ShowDialog(this) == DialogResult.OK)
+			{
+				Console.Out.WriteLine("Runner.Kernel.Function = {0}", Runner.Kernel.function == null);
+				Runner.Kernel.function = assign.getFunction();
 
-	            IKernelNode root = Runner.Kernel.CreateRootSymbolicImage();
-	            computatioinTree.Root = ComputationNode.createComputationNode(root);
+				IKernelNode root = Runner.Kernel.CreateRootSymbolicImage();
+				computatioinTree.Root = ComputationNode.createComputationNode(root);
 
-                this.menuItemShowSystemFunction.Enabled = true;
-	        }
-	    }
+				this.menuItemShowSystemFunction.Enabled = true;
+			}
+		}
 
-	    private void menuDeselectAll_Click(object sender, System.EventArgs e)
+		private void menuDeselectAll_Click(object sender, EventArgs e)
 		{
 			computatioinTree.DeselectAll();
 		}
 
-		private void menuItemGC_Click(object sender, System.EventArgs e)
+		private void menuItemGC_Click(object sender, EventArgs e)
 		{
-			System.GC.Collect(System.GC.MaxGeneration);			
+			GC.Collect(GC.MaxGeneration);
 		}
 
-        public void OnNewNode(IKernelNode parent, IKernelNode child)
-        {
-            ComputationNode node = computatioinTree.findNodeByKernelNode(parent);
-            Console.Out.WriteLine("Found node: {0}", node.Text);
-            node.newNode(child);            
-        }
+		public void OnNewNode(IKernelNode parent, IKernelNode child)
+		{
+			ComputationNode node = computatioinTree.findNodeByKernelNode(parent);
+			Console.Out.WriteLine("Found node: {0}", node.Text);
+			node.newNode(child);
+		}
 
-        public void OnNewComputationResult(IKernelNode parent, IComputationResult result)
-        {
-            Console.Out.WriteLine("here!");
-            
-            ComputationNode node = computatioinTree.findNodeByKernelNode(parent);
-            
-            Console.Out.WriteLine("Found node: {0}", node.Text);
-      
-            GraphOperationSelector go = new GraphOperationSelector();
-            if (go.ShowModal(null, node, result) == DialogResult.OK)
-            {
-                go.DoSelected();
-            }
-        }
+		public void OnNewComputationResult(IKernelNode parent, IComputationResult result)
+		{
+			Console.Out.WriteLine("here!");
 
-        public void noChilds(IKernelNode node)
-        {
-            MessageBox.Show("No strongs components were found.", "Computation results");
-        }
+			ComputationNode node = computatioinTree.findNodeByKernelNode(parent);
 
-        public void noImplementation(IKernelNode node) 
-        {
-            MessageBox.Show("No implementation for that action. Sorry,", "Computation results");
-        }
+			Console.Out.WriteLine("Found node: {0}", node.Text);
 
-        private void menuItemStartGNUPlot_Click(object sender, System.EventArgs e)
-        {
-            GnuPlotView.Run();
-        }
+			GraphOperationSelector go = new GraphOperationSelector();
+			if (go.ShowModal(null, node, result) == DialogResult.OK)
+			{
+				go.DoSelected();
+			}
+		}
 
-        private void computatioinTree_MouseMoveNode(ComputationNode anode)
-        {
-			if (anode != null) 
+		public void noChilds(IKernelNode node)
+		{
+			MessageBox.Show("No strongs components were found.", "Computation results");
+		}
+
+		public void noImplementation(IKernelNode node)
+		{
+			MessageBox.Show("No implementation for that action. Sorry,", "Computation results");
+		}
+
+		private void menuItemStartGNUPlot_Click(object sender, EventArgs e)
+		{
+			GnuPlotView.Run();
+		}
+
+		private void computatioinTree_MouseMoveNode(ComputationNode anode)
+		{
+			if (anode != null)
 			{
 				IKernelNode node = anode.Node;
-				if (node is IGraph) 
+				if (node is IGraph)
 				{
 					IGraph gnode = (IGraph)node;
-					panelNodeInfo.Controls.Clear();   
-					Control cntrl = new gui.Panels.GraphNodeInfo(gnode.graphInfo());
-					cntrl.Dock = System.Windows.Forms.DockStyle.Fill;
-					panelNodeInfo.Controls.Add(cntrl);
+					setInfoPanel( new GraphNodeInfo(gnode.graphInfo()) );					
+				} else if (node is IMorseSpectrum)
+				{
+					IMorseSpectrum mnode = (IMorseSpectrum)node;
+					setInfoPanel( new MorseNodeInfo(mnode));
+					
 				}
 			}
-			else 
+			else
 			{
 				panelNodeInfo.Controls.Clear();
 			}
-        }
+		}
 
-        private void menuItemShowSystemFunction_Click(object sender, System.EventArgs e)
-        {
-            showSystemAssignmentDialog(new SystemAssignment(Runner.Kernel.function.SystemSource));
-        }
+		private void setInfoPanel(Control control)
+		{
+			panelNodeInfo.Controls.Clear();
+			control.Dock = DockStyle.Fill;
+			panelNodeInfo.Controls.Add(control);
+		}
 
-        private void menuLoad_Click(object sender, System.EventArgs e)
-        {
-            showSystemAssignmentDialog(new SystemAssignment(true));            
-        }
+		private void menuItemShowSystemFunction_Click(object sender, EventArgs e)
+		{
+			showSystemAssignmentDialog(new SystemAssignment(Runner.Kernel.function.SystemSource));
+		}
 
-		private void menuItemAbout_Click(object sender, System.EventArgs e)
+		private void menuLoad_Click(object sender, EventArgs e)
+		{
+			showSystemAssignmentDialog(new SystemAssignment(true));
+		}
+
+		private void menuItemAbout_Click(object sender, EventArgs e)
 		{
 			About a = new About();
 			a.ShowDialog(this);
 		}
-    }
+	}
 }

@@ -1,7 +1,7 @@
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using gui.Logger;
-using gui.Tree.Node;
 using gui.Tree.Node.ActionAllocator;
 using MorseKernelATL;
 
@@ -10,21 +10,22 @@ namespace gui.Tree.Node.Forms
 	/// <summary>
 	/// Summary description for GraphOperationSelector.
 	/// </summary>
-	public class GraphOperationSelector : System.Windows.Forms.Form
+	public class GraphOperationSelector : Form
 	{
-		private System.Windows.Forms.ListBox actionListBox;
-		private System.Windows.Forms.Button buttonCancel;
-		private System.Windows.Forms.Button buttonOK;
-		private System.Windows.Forms.GroupBox groupBox1;
+		private ListBox actionListBox;
+		private Button buttonCancel;
+		private Button buttonOK;
+		private GroupBox groupBox1;
+
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.Container components = null;
+		private Container components = null;
 
 		public GraphOperationSelector()
 		{
-		    Console.Out.WriteLine("GraphOperationSelector: Creation");
-		    //
+			Console.Out.WriteLine("GraphOperationSelector: Creation");
+			//
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
@@ -37,26 +38,27 @@ namespace gui.Tree.Node.Forms
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		protected override void Dispose( bool disposing )
+		protected override void Dispose(bool disposing)
 		{
-			if( disposing )
+			if (disposing)
 			{
-				if(components != null)
+				if (components != null)
 				{
 					components.Dispose();
 				}
 			}
-			base.Dispose( disposing );
+			base.Dispose(disposing);
 		}
 
 		#region Windows Form Designer generated code
+
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(GraphOperationSelector));
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (GraphOperationSelector));
 			this.actionListBox = new System.Windows.Forms.ListBox();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.buttonOK = new System.Windows.Forms.Button();
@@ -119,7 +121,7 @@ namespace gui.Tree.Node.Forms
 			this.Controls.Add(this.buttonOK);
 			this.Controls.Add(this.buttonCancel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.Name = "GraphOperationSelector";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -128,17 +130,18 @@ namespace gui.Tree.Node.Forms
 			this.ResumeLayout(false);
 
 		}
+
 		#endregion
 
-
 		private delegate void Do();
+
 		private IComputationResult computationResult = null;
 
 		public DialogResult ShowModal(IWin32Window owner, ComputationNode node, IComputationResult result)
 		{
-		    Log.LogMessage(this, "Select continue for {0}", result.GetType().Name);
-            actionListBox.Items.Clear();
-		    actionListBox.Items.AddRange(DynamicResultTest.Instance.AllocateResutAction(result));		    
+			Log.LogMessage(this, "Select continue for {0}", result.GetType().Name);
+			actionListBox.Items.Clear();
+			actionListBox.Items.AddRange(DynamicResultTest.Instance.AllocateResutAction(result));
 
 			return this.ShowDialog(owner);
 		}
@@ -148,30 +151,30 @@ namespace gui.Tree.Node.Forms
 			(computationResult as IComputationGraphResult).Loops();
 		}
 
-		private void buttonCancel_Click(object sender, System.EventArgs e)
+		private void buttonCancel_Click(object sender, EventArgs e)
 		{
-			DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			DialogResult = DialogResult.Cancel;
 		}
 
-		private void buttonOK_Click(object sender, System.EventArgs e)
+		private void buttonOK_Click(object sender, EventArgs e)
 		{
 			if (actionListBox.SelectedItem == null)
 			{
 				MessageBox.Show("Please select action to continue or cancel");
-			} 
-			else 
+			}
+			else
 			{
-				DialogResult = System.Windows.Forms.DialogResult.OK;
+				DialogResult = DialogResult.OK;
 			}
 		}
 
 		public void DoSelected()
 		{
-		    ResultAction node = (actionListBox.SelectedItem as ResultAction);
-            if (node != null) 
-            {
-                node.DoAction();
-            }
+			ResultAction node = (actionListBox.SelectedItem as ResultAction);
+			if (node != null)
+			{
+				node.DoAction();
+			}
 		}
 	}
 }

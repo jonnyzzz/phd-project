@@ -6,11 +6,10 @@ namespace gui.Tree.Node.Menu
 	/// Summary description for ComputationNodeMenuItem.
 	/// </summary>
 	/// 
-
 	public abstract class ComputationNodeMenuItem : MenuItem
-	{		
+	{
 		public ComputationNodeMenuItem() : base()
-		{	
+		{
 		}
 	}
 }

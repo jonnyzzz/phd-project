@@ -1,17 +1,10 @@
-using System;
-using gui.Tree.Node;
-using gui.Tree.Node.Action;
-using gui.Tree.Node.Factory;
-using gui.Tree.Node.Menu;
-using MorseKernelATL;
-
 namespace gui.Tree.Node.Action
 {
 	/// <summary>
 	/// Summary description for ComputationNodeExtendable.
 	/// </summary>
 	///     
-    /*
+	/*
 	public class ComputationNodeExtendable : ComputationNodeAction
 	{		
         

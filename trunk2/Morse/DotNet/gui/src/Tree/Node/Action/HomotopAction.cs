@@ -13,6 +13,7 @@ namespace gui.Tree.Node.Action
 	{
 		private IHomotopFind node;
 		private int dimenstion;
+
 		public HomotopAction(IHomotopFind node, int dimenstion)
 		{
 			this.node = node;
@@ -21,10 +22,11 @@ namespace gui.Tree.Node.Action
 
 		public override ComputationNodeMenuItem[] getMenuItems()
 		{
-			return new ComputationNodeMenuItem[] {
-				new ComputationNodeMenuFactory.UniversalComputationMenuItem(
-													 new ComputationNodeMenuFactory.UniversalMenuItemClick(Homotop),
-													 "!Experimental! Homotop Paths")
+			return new ComputationNodeMenuItem[]
+				{
+					new ComputationNodeMenuFactory.UniversalComputationMenuItem(
+						new ComputationNodeMenuFactory.UniversalMenuItemClick(Homotop),
+						"!Experimental! Homotop Paths")
 				};
 		}
 
@@ -53,7 +55,7 @@ namespace gui.Tree.Node.Action
 
 			public ComputationNodeAction CreateAction(IKernelNode node)
 			{
-				return new HomotopAction((IHomotopFind)node, ((IGraph)node).graphDimension());
+				return new HomotopAction((IHomotopFind) node, ((IGraph) node).graphDimension());
 			}
 		}
 	}

@@ -1,5 +1,3 @@
-using System;
-
 namespace gui.Tree.Node.ActionAllocator
 {
 	/// <summary>
@@ -7,43 +5,37 @@ namespace gui.Tree.Node.ActionAllocator
 	/// </summary>
 	public abstract class ResultAction
 	{
-        #region features
-        private string text;
-        public string Text
-        {
-            get
-            {
-                return text;
-            }
-            set
-            {
-                text = value;
-            }
-        }
+		#region features
 
-        protected ResultAction( string text)
-        {
-            this.text = text;
-        }
+		private string text;
 
-        protected ResultAction() : this("")
-        {            
-        }
+		public string Text
+		{
+			get { return text; }
+			set { text = value; }
+		}
 
-        public bool isSelected
-        {
-            get
-            {
-                return false;
-            }
-        }
+		protected ResultAction(string text)
+		{
+			this.text = text;
+		}
 
-        public override string ToString()
-        {
-            return Text;
-        }
-        #endregion
+		protected ResultAction() : this("")
+		{
+		}
 
-        public abstract void DoAction();
+		public bool isSelected
+		{
+			get { return false; }
+		}
+
+		public override string ToString()
+		{
+			return Text;
+		}
+
+		#endregion
+
+		public abstract void DoAction();
 	}
 }

@@ -7,7 +7,7 @@ namespace gui.Tree.Node.ActionAllocator
 	/// </summary>
 	public interface IResultActionFactory
 	{
-        bool Corresponds(IComputationResult node );
-	    ResultAction CreateAction(IComputationResult node);
+		bool Corresponds(IComputationResult node);
+		ResultAction CreateAction(IComputationResult node);
 	}
 }

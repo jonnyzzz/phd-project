@@ -1,48 +1,48 @@
 using System;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
+using AxMorseKernelVisualizationATL;
 
 namespace gui.Visualization.JonATL
 {
 	/// <summary>
 	/// Summary description for Visualization.
 	/// </summary>
-	public class Visualization2D : System.Windows.Forms.Form
-	{		
-		private System.Windows.Forms.Button buttonUP;
-		private System.Windows.Forms.Button buttonDown;
-		private System.Windows.Forms.Button buttonOut;
-		private System.Windows.Forms.Button buttonIn;
-		private System.Windows.Forms.Button buttonLeft;
-		private System.Windows.Forms.Button buttonRight;
-		private System.Windows.Forms.Button buttonCenter;
-		private System.Windows.Forms.Label label1;
-		private AxMorseKernelVisualizationATL.AxCMorseKernelVisualizationDirectGraph2D d3d;		
-		private System.Windows.Forms.Button buttonTest;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.StatusBar statusBar1;
-		private System.Windows.Forms.StatusBarPanel statusBarPanel1;
-		private System.Windows.Forms.Panel panelRight;
-		private System.Windows.Forms.Panel panelRightUp;
-		private System.Windows.Forms.Panel panelRightDown;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.Panel panelDown;
-		private System.Windows.Forms.Panel panel4;
-		private System.Windows.Forms.Panel panel5;
-		private System.Windows.Forms.Panel panel6;
-		private System.Windows.Forms.Panel panel7;
-		private System.Windows.Forms.Panel panel8;
-		private System.Windows.Forms.Panel panel9;
-		private System.Windows.Forms.Panel panel10;
-		private System.Windows.Forms.Panel panelD3D;
-		private System.Windows.Forms.Panel panelCenterBorder;
+	public class Visualization2D : Form
+	{
+		private Button buttonUP;
+		private Button buttonDown;
+		private Button buttonOut;
+		private Button buttonIn;
+		private Button buttonLeft;
+		private Button buttonRight;
+		private Button buttonCenter;
+		private Label label1;
+		private AxCMorseKernelVisualizationDirectGraph2D d3d;
+		private Button buttonTest;
+		private Label label2;
+		private StatusBar statusBar1;
+		private StatusBarPanel statusBarPanel1;
+		private Panel panelRight;
+		private Panel panelRightUp;
+		private Panel panelRightDown;
+		private Panel panel1;
+		private Panel panel2;
+		private Panel panelDown;
+		private Panel panel4;
+		private Panel panel5;
+		private Panel panel6;
+		private Panel panel7;
+		private Panel panel8;
+		private Panel panel9;
+		private Panel panel10;
+		private Panel panelD3D;
+		private Panel panelCenterBorder;
+
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.Container components = null;
+		private Container components = null;
 
 		public Visualization2D()
 		{
@@ -50,37 +50,36 @@ namespace gui.Visualization.JonATL
 			// Required for Windows Form Designer support
 			//
 			InitializeComponent();
-			
 
-			d3d.ActiveLoop += new AxMorseKernelVisualizationATL.
-				_IMorseKernelVisualizationDirect3DEvents_ActiveLoopEventHandler(d3d_ActiveLoop);
-			d3d.OnMouseMoveFloat += new AxMorseKernelVisualizationATL.
-				_IMorseKernelVisualizationDirect3DEvents_OnMouseMoveFloatEventHandler(d3d_OnMouseMoveFloat);
+
+			d3d.ActiveLoop += new _IMorseKernelVisualizationDirect3DEvents_ActiveLoopEventHandler(d3d_ActiveLoop);
+			d3d.OnMouseMoveFloat += new _IMorseKernelVisualizationDirect3DEvents_OnMouseMoveFloatEventHandler(d3d_OnMouseMoveFloat);
 		}
 
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		protected override void Dispose( bool disposing )
+		protected override void Dispose(bool disposing)
 		{
-			if( disposing )
+			if (disposing)
 			{
-				if(components != null)
+				if (components != null)
 				{
 					components.Dispose();
 				}
 			}
-			base.Dispose( disposing );
+			base.Dispose(disposing);
 		}
 
 		#region Windows Form Designer generated code
+
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(Visualization2D));
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (Visualization2D));
 			this.buttonUP = new System.Windows.Forms.Button();
 			this.buttonDown = new System.Windows.Forms.Button();
 			this.buttonOut = new System.Windows.Forms.Button();
@@ -109,8 +108,8 @@ namespace gui.Visualization.JonATL
 			this.panel10 = new System.Windows.Forms.Panel();
 			this.panelD3D = new System.Windows.Forms.Panel();
 			this.panelCenterBorder = new System.Windows.Forms.Panel();
-			((System.ComponentModel.ISupportInitialize)(this.d3d)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize) (this.d3d)).BeginInit();
+			((System.ComponentModel.ISupportInitialize) (this.statusBarPanel1)).BeginInit();
 			this.panelRight.SuspendLayout();
 			this.panelRightUp.SuspendLayout();
 			this.panelRightDown.SuspendLayout();
@@ -171,7 +170,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.buttonLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonLeft.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonLeft.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonLeft.Location = new System.Drawing.Point(10, 10);
 			this.buttonLeft.Name = "buttonLeft";
 			this.buttonLeft.Size = new System.Drawing.Size(40, 20);
@@ -183,7 +182,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.buttonRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRight.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonRight.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonRight.Location = new System.Drawing.Point(62, 10);
 			this.buttonRight.Name = "buttonRight";
 			this.buttonRight.Size = new System.Drawing.Size(48, 20);
@@ -195,7 +194,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonCenter.Dock = System.Windows.Forms.DockStyle.Right;
 			this.buttonCenter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonCenter.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonCenter.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonCenter.Location = new System.Drawing.Point(6, 10);
 			this.buttonCenter.Name = "buttonCenter";
 			this.buttonCenter.Size = new System.Drawing.Size(64, 20);
@@ -207,7 +206,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.label1.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.label1.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.label1.Location = new System.Drawing.Point(5, 5);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(366, 16);
@@ -221,7 +220,7 @@ namespace gui.Visualization.JonATL
 			this.d3d.Enabled = true;
 			this.d3d.Location = new System.Drawing.Point(0, 0);
 			this.d3d.Name = "d3d";
-			this.d3d.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("d3d.OcxState")));
+			this.d3d.OcxState = ((System.Windows.Forms.AxHost.State) (resources.GetObject("d3d.OcxState")));
 			this.d3d.Size = new System.Drawing.Size(626, 512);
 			this.d3d.TabIndex = 0;
 			// 
@@ -240,7 +239,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.label2.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.label2.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.label2.Location = new System.Drawing.Point(5, 19);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(366, 16);
@@ -251,8 +250,10 @@ namespace gui.Visualization.JonATL
 			// 
 			this.statusBar1.Location = new System.Drawing.Point(0, 574);
 			this.statusBar1.Name = "statusBar1";
-			this.statusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
-																						  this.statusBarPanel1});
+			this.statusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[]
+				{
+					this.statusBarPanel1
+				});
 			this.statusBar1.ShowPanels = true;
 			this.statusBar1.Size = new System.Drawing.Size(712, 16);
 			this.statusBar1.TabIndex = 11;
@@ -424,12 +425,12 @@ namespace gui.Visualization.JonATL
 			this.Controls.Add(this.panelDown);
 			this.Controls.Add(this.panelRight);
 			this.Controls.Add(this.statusBar1);
-			this.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
+			this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
 			this.Name = "Visualization2D";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			((System.ComponentModel.ISupportInitialize)(this.d3d)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.statusBarPanel1)).EndInit();
+			((System.ComponentModel.ISupportInitialize) (this.d3d)).EndInit();
+			((System.ComponentModel.ISupportInitialize) (this.statusBarPanel1)).EndInit();
 			this.panelRight.ResumeLayout(false);
 			this.panelRightUp.ResumeLayout(false);
 			this.panelRightDown.ResumeLayout(false);
@@ -443,39 +444,40 @@ namespace gui.Visualization.JonATL
 			this.ResumeLayout(false);
 
 		}
+
 		#endregion
 
-		private void button1_Click(object sender, System.EventArgs e)
+		private void button1_Click(object sender, EventArgs e)
 		{
-			d3d.MoveUpAtom();		
+			d3d.MoveUpAtom();
 		}
 
-		private void button2_Click(object sender, System.EventArgs e)
+		private void button2_Click(object sender, EventArgs e)
 		{
 			d3d.MoveDownAtom();
 		}
 
-		private void button4_Click(object sender, System.EventArgs e)
+		private void button4_Click(object sender, EventArgs e)
 		{
 			d3d.ZoomInAtom();
 		}
 
-		private void button3_Click(object sender, System.EventArgs e)
+		private void button3_Click(object sender, EventArgs e)
 		{
 			d3d.ZoomOutAtom();
 		}
 
-		private void button6_Click(object sender, System.EventArgs e)
+		private void button6_Click(object sender, EventArgs e)
 		{
 			d3d.MoveRightAtom();
 		}
 
-		private void button5_Click(object sender, System.EventArgs e)
+		private void button5_Click(object sender, EventArgs e)
 		{
 			d3d.MoveLeftAtom();
 		}
 
-		private void button7_Click(object sender, System.EventArgs e)
+		private void button7_Click(object sender, EventArgs e)
 		{
 			d3d.CenterView();
 		}
@@ -487,21 +489,21 @@ namespace gui.Visualization.JonATL
 			//this.ShowDialog();
 		}
 
-		private void d3d_ActiveLoop(object sender, 
-			AxMorseKernelVisualizationATL._IMorseKernelVisualizationDirect3DEvents_ActiveLoopEvent e)
+		private void d3d_ActiveLoop(object sender,
+		                            _IMorseKernelVisualizationDirect3DEvents_ActiveLoopEvent e)
 		{
 			label1.Text = "Selected Length: " + e.length;
 		}
 
-		private void button8_Click(object sender, System.EventArgs e)
+		private void button8_Click(object sender, EventArgs e)
 		{
 			d3d.SetTestGraph();
 		}
 
-		private void d3d_OnMouseMoveFloat(object sender, 
-			AxMorseKernelVisualizationATL._IMorseKernelVisualizationDirect3DEvents_OnMouseMoveFloatEvent e)
-		{						
-			statusBarPanel1.Text = String.Format("[{0}; {1}; {2}]", e.x1,e.x2,e.x3);
+		private void d3d_OnMouseMoveFloat(object sender,
+		                                  _IMorseKernelVisualizationDirect3DEvents_OnMouseMoveFloatEvent e)
+		{
+			statusBarPanel1.Text = String.Format("[{0}; {1}; {2}]", e.x1, e.x2, e.x3);
 		}
 	}
 }

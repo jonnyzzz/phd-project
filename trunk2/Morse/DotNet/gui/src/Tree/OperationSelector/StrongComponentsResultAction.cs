@@ -1,4 +1,3 @@
-using System;
 using gui.Attributes;
 using gui.Tree.Node.ActionAllocator;
 using MorseKernelATL;
@@ -10,38 +9,38 @@ namespace gui.Tree.OperationSelector
 	/// </summary>
 	public class StrongComponentsResultAction : ResultAction
 	{
-        private IComputationGraphResult result;
+		private IComputationGraphResult result;
 
 		public StrongComponentsResultAction(IComputationGraphResult result)
 		{
-            this.result = result;
-            this.Text = "Strong Components without edges";
-			
+			this.result = result;
+			this.Text = "Strong Components without edges";
+
 		}
 
-	    public override void DoAction()
-	    {
-	        result.StrongComponents();
-	    }
+		public override void DoAction()
+		{
+			result.StrongComponents();
+		}
 
-        [InitializeOnRun]
-        public static void Register()
-        {
-            DynamicResultTest.Instance.RegisterAction(new StrongComponentsResultActionFactory());
-        }
+		[InitializeOnRun]
+		public static void Register()
+		{
+			DynamicResultTest.Instance.RegisterAction(new StrongComponentsResultActionFactory());
+		}
 
-        private class StrongComponentsResultActionFactory : IResultActionFactory
-        {
-            public bool Corresponds(IComputationResult node)
-            {
-                return node is IComputationGraphResult;
-            }
+		private class StrongComponentsResultActionFactory : IResultActionFactory
+		{
+			public bool Corresponds(IComputationResult node)
+			{
+				return node is IComputationGraphResult;
+			}
 
-            public ResultAction CreateAction(IComputationResult node)
-            {
-                return new StrongComponentsResultAction((IComputationGraphResult)node);
-            }
-        }
+			public ResultAction CreateAction(IComputationResult node)
+			{
+				return new StrongComponentsResultAction((IComputationGraphResult) node);
+			}
+		}
 
 
 	}

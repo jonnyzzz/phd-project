@@ -6,6 +6,6 @@ namespace gui.Tree.Node.Action
 	/// Summary description for UnableToPerformActionException.
 	/// </summary>
 	public class UnableToPerformActionException : Exception
-	{		
+	{
 	}
 }

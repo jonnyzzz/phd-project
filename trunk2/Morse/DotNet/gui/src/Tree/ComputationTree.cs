@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using gui.Tree.Node;
@@ -7,32 +8,34 @@ using MorseKernelATL;
 namespace gui.Tree
 {
 	public delegate void ContextMenuBeforeOpenEvent(ComputationNode node);
+
 	public delegate void MouseMoveComponentEvent(ComputationNode node);
 
 	/// <summary>
 	/// Summary description for ComputatioinTree.
 	/// </summary>
-	public class ComputationTree : System.Windows.Forms.UserControl
+	public class ComputationTree : UserControl
 	{
 		public event ContextMenuBeforeOpenEvent NodeMenuBeforeOpen;
-		public event MouseMoveComponentEvent MouseMoveNode;        
+		public event MouseMoveComponentEvent MouseMoveNode;
 
-		private System.Windows.Forms.TreeView tree;
+		private TreeView tree;
+
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.Container components = null;
+		private Container components = null;
 
 		public ComputationTree()
 		{
 			// This call is required by the Windows.Forms Form Designer.
 			InitializeComponent();
 
-			if (!this.DesignMode) 
+			if (!this.DesignMode)
 			{
 				tree.Top = 0;
 				tree.Left = 0;
-			} 
+			}
 			this.Resize += new EventHandler(ComputatioinTree_Resize);
 			tree.MouseDown += new MouseEventHandler(tree_MouseDown);
 			tree.MouseMove += new MouseEventHandler(tree_MouseMove);
@@ -43,19 +46,20 @@ namespace gui.Tree
 		/// <summary> 
 		/// Clean up any resources being used.
 		/// </summary>
-		protected override void Dispose( bool disposing )
+		protected override void Dispose(bool disposing)
 		{
-			if( disposing )
+			if (disposing)
 			{
-				if(components != null)
+				if (components != null)
 				{
 					components.Dispose();
 				}
 			}
-			base.Dispose( disposing );			
+			base.Dispose(disposing);
 		}
 
 		#region Component Designer generated code
+
 		/// <summary> 
 		/// Required method for Designer support - do not modify 
 		/// the contents of this method with the code editor.
@@ -86,27 +90,25 @@ namespace gui.Tree
 			this.ResumeLayout(false);
 
 		}
+
 		#endregion
 
 		private void ComputatioinTree_Resize(object sender, EventArgs e)
 		{
 			tree.Size = this.Size;
 		}
-		
-		/// /////////////////////////////////////////////////////////////////////
-		#region functiononality
 
+		/// /////////////////////////////////////////////////////////////////////
+
+		#region functiononality
 		public ComputationNode Root
-		{			
+		{
 			set
 			{
 				tree.Nodes.Clear();
-                if (value != null) tree.Nodes.Add(value);
+				if (value != null) tree.Nodes.Add(value);
 			}
-            get
-            {
-                return tree.Nodes.GetEnumerator().Current as ComputationNode;
-            }
+			get { return tree.Nodes.GetEnumerator().Current as ComputationNode; }
 		}
 
 		public void DeselectAll()
@@ -127,6 +129,7 @@ namespace gui.Tree
 				DeselectAll(computationNode);
 			}
 		}
+
 		#endregion
 
 		#region context menu ...
@@ -148,10 +151,13 @@ namespace gui.Tree
 				cm.Show(this, new Point(e.X, e.Y));
 			}
 		}
+
 		#endregion
 
 		#region mouse -> node
+
 		private ComputationNode activeNode = null;
+
 		private void tree_MouseMove(object sender, MouseEventArgs e)
 		{
 			TreeNode treeNode = tree.GetNodeAt(e.X, e.Y);
@@ -168,7 +174,8 @@ namespace gui.Tree
 						MouseMoveNode(node);
 					}
 				}
-			} else if (treeNode == null)
+			}
+			else if (treeNode == null)
 			{
 				if (activeNode != null && MouseMoveNode != null)
 				{
@@ -177,6 +184,7 @@ namespace gui.Tree
 				}
 			}
 		}
+
 		#endregion
 
 		private void tree_AfterCheck(object sender, TreeViewEventArgs e)
@@ -186,9 +194,9 @@ namespace gui.Tree
 		}
 
 
-        public ComputationNode findNodeByKernelNode(IKernelNode node)
-        {
-            return ComputationNode.fromIKernelNode(node);
-        }
+		public ComputationNode findNodeByKernelNode(IKernelNode node)
+		{
+			return ComputationNode.fromIKernelNode(node);
+		}
 	}
 }

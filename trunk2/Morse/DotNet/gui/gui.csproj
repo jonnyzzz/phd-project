@@ -177,20 +177,26 @@
                     Lcid = "0"
                     WrapperTool = "aximp"
                 />
+                <Reference
+                    Name = "GLVisualization"
+                    Guid = "{7C814E07-7943-4389-96D9-A9F74F88EB22}"
+                    VersionMajor = "1"
+                    VersionMinor = "0"
+                    Lcid = "0"
+                    WrapperTool = "tlbimp"
+                />
+                <Reference
+                    Name = "AxGLVisualization"
+                    Guid = "{7C814E07-7943-4389-96D9-A9F74F88EB22}"
+                    VersionMajor = "1"
+                    VersionMinor = "0"
+                    Lcid = "0"
+                    WrapperTool = "aximp"
+                />
             </References>
         </Build>
         <Files>
             <Include>
-                <File
-                    RelPath = "About.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "About.resx"
-                    DependentUpon = "About.cs"
-                    BuildAction = "EmbeddedResource"
-                />
                 <File
                     RelPath = "res\jo.ico"
                     BuildAction = "Content"
@@ -198,6 +204,16 @@
                 <File
                     RelPath = "res\SI.ico"
                     BuildAction = "Content"
+                />
+                <File
+                    RelPath = "src\About.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\About.resx"
+                    DependentUpon = "About.cs"
+                    BuildAction = "EmbeddedResource"
                 />
                 <File
                     RelPath = "src\CommandLineParsers.cs"
@@ -222,6 +238,16 @@
                 <File
                     RelPath = "src\ComputationForm.resx"
                     DependentUpon = "ComputationForm.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\GL3DDebug.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\GL3DDebug.resx"
+                    DependentUpon = "GL3DDebug.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
@@ -294,6 +320,16 @@
                 <File
                     RelPath = "src\Panels\GraphNodeInfo.resx"
                     DependentUpon = "GraphNodeInfo.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Panels\MorseNodeInfo.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Panels\MorseNodeInfo.resx"
+                    DependentUpon = "MorseNodeInfo.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File

@@ -1,5 +1,3 @@
-using System;
-using gui.Tree.Node;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
 using MorseKernelATL;
@@ -11,7 +9,8 @@ namespace gui.Tree.Node.Action
 	/// </summary>
 	public class ComputationNodeMorsable : ComputationNodeAction
 	{
-		IMorsable morseNode;
+		private IMorsable morseNode;
+
 		public ComputationNodeMorsable(IMorsable morseNode)
 		{
 			this.morseNode = morseNode;
@@ -19,9 +18,10 @@ namespace gui.Tree.Node.Action
 
 		public override ComputationNodeMenuItem[] getMenuItems()
 		{
-			return new ComputationNodeMenuItem[] {
-			    ComputationNodeMenuFactory.MorseAction( new ComputationNodeMenuFactory.UniversalMenuItemClick(morse))
-			};
+			return new ComputationNodeMenuItem[]
+				{
+					ComputationNodeMenuFactory.MorseAction(new ComputationNodeMenuFactory.UniversalMenuItemClick(morse))
+				};
 		}
 
 		private void morse()

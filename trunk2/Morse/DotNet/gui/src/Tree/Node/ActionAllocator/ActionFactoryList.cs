@@ -9,51 +9,52 @@ namespace gui.Tree.Node.ActionAllocator
 	/// </summary>
 	public class ActionFactoryList : IEnumerable
 	{
-        private ArrayList list;
+		private ArrayList list;
+
 		public ActionFactoryList()
 		{
-            this.list = new ArrayList();
+			this.list = new ArrayList();
 		}
 
-        public void AddActionList(IActionFactory factory)
-        {
-            foreach (IActionFactory actionFactory in list)
-            {
-                if (ActionFactoryEquals(actionFactory, factory)) return;
-            }
-            Log.LogMessage("Action {0} was registered", factory.GetType().Name);
-            list.Add(factory);
-        }
+		public void AddActionList(IActionFactory factory)
+		{
+			foreach (IActionFactory actionFactory in list)
+			{
+				if (ActionFactoryEquals(actionFactory, factory)) return;
+			}
+			Log.LogMessage("Action {0} was registered", factory.GetType().Name);
+			list.Add(factory);
+		}
 
-        public void RemoveAction(IActionFactory factory)
-        {
-            foreach (IActionFactory actionFactory in list)
-            {
-                if (ActionFactoryEquals(actionFactory, factory))
-                { 
-                    //todo: possible will not works as desired
-                    list.Remove(actionFactory);
-                }
-            }
-        }
+		public void RemoveAction(IActionFactory factory)
+		{
+			foreach (IActionFactory actionFactory in list)
+			{
+				if (ActionFactoryEquals(actionFactory, factory))
+				{
+					//todo: possible will not works as desired
+					list.Remove(actionFactory);
+				}
+			}
+		}
 
-        private bool ActionFactoryEquals(IActionFactory af1, IActionFactory af2)
-        {
-            return Object.ReferenceEquals(af1, af2);
-        }
+		private bool ActionFactoryEquals(IActionFactory af1, IActionFactory af2)
+		{
+			return Object.ReferenceEquals(af1, af2);
+		}
 
-        public void RemoveAll()
-        {
-            list.Clear();
-        }
+		public void RemoveAll()
+		{
+			list.Clear();
+		}
 
+		#region IEnumerable Members
 
-        #region IEnumerable Members
+		public IEnumerator GetEnumerator()
+		{
+			return list.GetEnumerator();
+		}
 
-        public IEnumerator GetEnumerator()
-        {            
-            return list.GetEnumerator();
-        }
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -1,64 +1,64 @@
 using System;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
+using AxMorseKernelVisualizationATL;
 
 namespace gui.Visualization.JonATL
 {
 	/// <summary>
 	/// Summary description for Visualization3D.
 	/// </summary>
-	public class Visualization3D : System.Windows.Forms.Form
+	public class Visualization3D : Form
 	{
-		private AxMorseKernelVisualizationATL.AxCMorseKernelVisualizationDirectGraph3D d3d;
-		private System.Windows.Forms.Button buttonXPlus;
-		private System.Windows.Forms.Button buttonXMinus;
-		private System.Windows.Forms.Button buttonYMinus;
-		private System.Windows.Forms.Button buttonYPlus;
-		private System.Windows.Forms.Button buttonZMinus;
-		private System.Windows.Forms.Button buttonZPlus;
-		private System.Windows.Forms.TextBox inputX;
-		private System.Windows.Forms.TextBox inputY;
-		private System.Windows.Forms.TextBox inputZ;
-		private System.Windows.Forms.Button buttonFrom;
-		private System.Windows.Forms.Button buttonTo;
-		private System.Windows.Forms.Button buttonRotate;
-		private System.Windows.Forms.Button buttonCenter;
-		private System.Windows.Forms.Button buttonZoomOut;
-		private System.Windows.Forms.Button buttonZoomIn;
-		private System.Windows.Forms.Button buttonRotateZMinus;
-		private System.Windows.Forms.Button buttonRotateZPlus;
-		private System.Windows.Forms.Button buttonRotateYMinus;
-		private System.Windows.Forms.Button buttonRotateYPlus;
-		private System.Windows.Forms.Button buttonRotateXMunis;
-		private System.Windows.Forms.Button buttonRotateXPlus;
-		private System.Windows.Forms.Panel panel2;
-		private System.Windows.Forms.Panel panelX;
-		private System.Windows.Forms.Panel panel3;
-		private System.Windows.Forms.Panel panelY;
-		private System.Windows.Forms.Panel panel4;
-		private System.Windows.Forms.Panel panelZ;
-		private System.Windows.Forms.Panel panel5;
-		private System.Windows.Forms.Panel panelRight;
-		private System.Windows.Forms.Panel panelRX;
-		private System.Windows.Forms.Panel panel6;
-		private System.Windows.Forms.Panel panelRY;
-		private System.Windows.Forms.Panel panel7;
-		private System.Windows.Forms.Panel panelRZ;
-		private System.Windows.Forms.Panel panel8;
-		private System.Windows.Forms.Panel panelZoom;
-		private System.Windows.Forms.Panel panelDown;
-		private System.Windows.Forms.Panel panel9;
-		private System.Windows.Forms.Panel panel10;
-		private System.Windows.Forms.Panel panel11;
-		private System.Windows.Forms.StatusBar statusBar;
-		private System.Windows.Forms.Panel panelCenter;
-		private System.Windows.Forms.Panel panelCenterBorder;
+		private AxCMorseKernelVisualizationDirectGraph3D d3d;
+		private Button buttonXPlus;
+		private Button buttonXMinus;
+		private Button buttonYMinus;
+		private Button buttonYPlus;
+		private Button buttonZMinus;
+		private Button buttonZPlus;
+		private TextBox inputX;
+		private TextBox inputY;
+		private TextBox inputZ;
+		private Button buttonFrom;
+		private Button buttonTo;
+		private Button buttonRotate;
+		private Button buttonCenter;
+		private Button buttonZoomOut;
+		private Button buttonZoomIn;
+		private Button buttonRotateZMinus;
+		private Button buttonRotateZPlus;
+		private Button buttonRotateYMinus;
+		private Button buttonRotateYPlus;
+		private Button buttonRotateXMunis;
+		private Button buttonRotateXPlus;
+		private Panel panel2;
+		private Panel panelX;
+		private Panel panel3;
+		private Panel panelY;
+		private Panel panel4;
+		private Panel panelZ;
+		private Panel panel5;
+		private Panel panelRight;
+		private Panel panelRX;
+		private Panel panel6;
+		private Panel panelRY;
+		private Panel panel7;
+		private Panel panelRZ;
+		private Panel panel8;
+		private Panel panelZoom;
+		private Panel panelDown;
+		private Panel panel9;
+		private Panel panel10;
+		private Panel panel11;
+		private StatusBar statusBar;
+		private Panel panelCenter;
+		private Panel panelCenterBorder;
+
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.Container components = null;
+		private Container components = null;
 
 		public void ShowMe(IntPtr graph)
 		{
@@ -84,33 +84,34 @@ namespace gui.Visualization.JonATL
 			//
 			// Required for Windows Form Designer support
 			//
-			InitializeComponent();						
+			InitializeComponent();
 		}
-		
+
 
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		protected override void Dispose( bool disposing )
+		protected override void Dispose(bool disposing)
 		{
-			if( disposing )
+			if (disposing)
 			{
-				if(components != null)
+				if (components != null)
 				{
 					components.Dispose();
 				}
 			}
-			base.Dispose( disposing );
+			base.Dispose(disposing);
 		}
 
 		#region Windows Form Designer generated code
+
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(Visualization3D));
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (Visualization3D));
 			this.d3d = new AxMorseKernelVisualizationATL.AxCMorseKernelVisualizationDirectGraph3D();
 			this.buttonXPlus = new System.Windows.Forms.Button();
 			this.buttonXMinus = new System.Windows.Forms.Button();
@@ -155,7 +156,7 @@ namespace gui.Visualization.JonATL
 			this.statusBar = new System.Windows.Forms.StatusBar();
 			this.panelCenter = new System.Windows.Forms.Panel();
 			this.panelCenterBorder = new System.Windows.Forms.Panel();
-			((System.ComponentModel.ISupportInitialize)(this.d3d)).BeginInit();
+			((System.ComponentModel.ISupportInitialize) (this.d3d)).BeginInit();
 			this.panelRight.SuspendLayout();
 			this.panelZoom.SuspendLayout();
 			this.panelRZ.SuspendLayout();
@@ -178,7 +179,7 @@ namespace gui.Visualization.JonATL
 			this.d3d.Enabled = true;
 			this.d3d.Location = new System.Drawing.Point(0, 0);
 			this.d3d.Name = "d3d";
-			this.d3d.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("d3d.OcxState")));
+			this.d3d.OcxState = ((System.Windows.Forms.AxHost.State) (resources.GetObject("d3d.OcxState")));
 			this.d3d.Size = new System.Drawing.Size(634, 520);
 			this.d3d.TabIndex = 0;
 			// 
@@ -186,7 +187,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonXPlus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonXPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonXPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonXPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonXPlus.Location = new System.Drawing.Point(0, 32);
 			this.buttonXPlus.Name = "buttonXPlus";
 			this.buttonXPlus.Size = new System.Drawing.Size(44, 32);
@@ -198,7 +199,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonXMinus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonXMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonXMinus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonXMinus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonXMinus.Location = new System.Drawing.Point(0, 0);
 			this.buttonXMinus.Name = "buttonXMinus";
 			this.buttonXMinus.Size = new System.Drawing.Size(44, 32);
@@ -210,7 +211,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonYMinus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonYMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonYMinus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonYMinus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonYMinus.Location = new System.Drawing.Point(0, 32);
 			this.buttonYMinus.Name = "buttonYMinus";
 			this.buttonYMinus.Size = new System.Drawing.Size(44, 32);
@@ -222,7 +223,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonYPlus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonYPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonYPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonYPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonYPlus.Location = new System.Drawing.Point(0, 0);
 			this.buttonYPlus.Name = "buttonYPlus";
 			this.buttonYPlus.Size = new System.Drawing.Size(44, 32);
@@ -234,7 +235,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonZMinus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonZMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonZMinus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonZMinus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonZMinus.Location = new System.Drawing.Point(0, 32);
 			this.buttonZMinus.Name = "buttonZMinus";
 			this.buttonZMinus.Size = new System.Drawing.Size(44, 32);
@@ -246,7 +247,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonZPlus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonZPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonZPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonZPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonZPlus.Location = new System.Drawing.Point(0, 0);
 			this.buttonZPlus.Name = "buttonZPlus";
 			this.buttonZPlus.Size = new System.Drawing.Size(44, 32);
@@ -284,7 +285,7 @@ namespace gui.Visualization.JonATL
 			// buttonFrom
 			// 
 			this.buttonFrom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonFrom.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonFrom.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonFrom.Location = new System.Drawing.Point(184, 8);
 			this.buttonFrom.Name = "buttonFrom";
 			this.buttonFrom.Size = new System.Drawing.Size(48, 24);
@@ -295,7 +296,7 @@ namespace gui.Visualization.JonATL
 			// buttonTo
 			// 
 			this.buttonTo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonTo.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonTo.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonTo.Location = new System.Drawing.Point(240, 8);
 			this.buttonTo.Name = "buttonTo";
 			this.buttonTo.Size = new System.Drawing.Size(48, 24);
@@ -306,7 +307,7 @@ namespace gui.Visualization.JonATL
 			// buttonRotate
 			// 
 			this.buttonRotate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRotate.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonRotate.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonRotate.Location = new System.Drawing.Point(296, 8);
 			this.buttonRotate.Name = "buttonRotate";
 			this.buttonRotate.Size = new System.Drawing.Size(48, 24);
@@ -318,7 +319,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonCenter.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.buttonCenter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonCenter.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonCenter.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonCenter.Location = new System.Drawing.Point(8, 8);
 			this.buttonCenter.Name = "buttonCenter";
 			this.buttonCenter.Size = new System.Drawing.Size(96, 24);
@@ -330,7 +331,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonZoomOut.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonZoomOut.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonZoomOut.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonZoomOut.Location = new System.Drawing.Point(0, 32);
 			this.buttonZoomOut.Name = "buttonZoomOut";
 			this.buttonZoomOut.Size = new System.Drawing.Size(44, 32);
@@ -342,7 +343,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonZoomIn.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonZoomIn.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonZoomIn.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonZoomIn.Location = new System.Drawing.Point(0, 0);
 			this.buttonZoomIn.Name = "buttonZoomIn";
 			this.buttonZoomIn.Size = new System.Drawing.Size(44, 32);
@@ -354,7 +355,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonRotateZMinus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonRotateZMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRotateZMinus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonRotateZMinus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonRotateZMinus.Location = new System.Drawing.Point(0, 32);
 			this.buttonRotateZMinus.Name = "buttonRotateZMinus";
 			this.buttonRotateZMinus.Size = new System.Drawing.Size(44, 32);
@@ -366,7 +367,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonRotateZPlus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonRotateZPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRotateZPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonRotateZPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonRotateZPlus.Location = new System.Drawing.Point(0, 0);
 			this.buttonRotateZPlus.Name = "buttonRotateZPlus";
 			this.buttonRotateZPlus.Size = new System.Drawing.Size(44, 32);
@@ -378,7 +379,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonRotateYMinus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonRotateYMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRotateYMinus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonRotateYMinus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonRotateYMinus.Location = new System.Drawing.Point(0, 32);
 			this.buttonRotateYMinus.Name = "buttonRotateYMinus";
 			this.buttonRotateYMinus.Size = new System.Drawing.Size(44, 32);
@@ -390,7 +391,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonRotateYPlus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonRotateYPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRotateYPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonRotateYPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonRotateYPlus.Location = new System.Drawing.Point(0, 0);
 			this.buttonRotateYPlus.Name = "buttonRotateYPlus";
 			this.buttonRotateYPlus.Size = new System.Drawing.Size(44, 32);
@@ -402,7 +403,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonRotateXMunis.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonRotateXMunis.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRotateXMunis.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonRotateXMunis.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonRotateXMunis.Location = new System.Drawing.Point(0, 32);
 			this.buttonRotateXMunis.Name = "buttonRotateXMunis";
 			this.buttonRotateXMunis.Size = new System.Drawing.Size(44, 32);
@@ -414,7 +415,7 @@ namespace gui.Visualization.JonATL
 			// 
 			this.buttonRotateXPlus.Dock = System.Windows.Forms.DockStyle.Top;
 			this.buttonRotateXPlus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRotateXPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.buttonRotateXPlus.Font = new System.Drawing.Font("Arial", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.buttonRotateXPlus.Location = new System.Drawing.Point(0, 0);
 			this.buttonRotateXPlus.Name = "buttonRotateXPlus";
 			this.buttonRotateXPlus.Size = new System.Drawing.Size(44, 32);
@@ -649,11 +650,11 @@ namespace gui.Visualization.JonATL
 			this.Controls.Add(this.panelDown);
 			this.Controls.Add(this.panelRight);
 			this.Controls.Add(this.statusBar);
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.Name = "Visualization3D";
 			this.Text = "Visualization3D";
-			((System.ComponentModel.ISupportInitialize)(this.d3d)).EndInit();
+			((System.ComponentModel.ISupportInitialize) (this.d3d)).EndInit();
 			this.panelRight.ResumeLayout(false);
 			this.panelZoom.ResumeLayout(false);
 			this.panelRZ.ResumeLayout(false);
@@ -670,34 +671,35 @@ namespace gui.Visualization.JonATL
 			this.ResumeLayout(false);
 
 		}
+
 		#endregion
 
-		private void button1_Click(object sender, System.EventArgs e)
+		private void button1_Click(object sender, EventArgs e)
 		{
 			d3d.MoveFromEye(-0.3, 0, 0);
 		}
 
-		private void button2_Click(object sender, System.EventArgs e)
+		private void button2_Click(object sender, EventArgs e)
 		{
 			d3d.MoveFromEye(+0.3, 0, 0);
 		}
 
-		private void button3_Click(object sender, System.EventArgs e)
+		private void button3_Click(object sender, EventArgs e)
 		{
 			d3d.MoveFromEye(0, -0.3, 0);
 		}
 
-		private void button4_Click(object sender, System.EventArgs e)
+		private void button4_Click(object sender, EventArgs e)
 		{
 			d3d.MoveFromEye(0, 0.3, 0);
 		}
 
-		private void button5_Click(object sender, System.EventArgs e)
+		private void button5_Click(object sender, EventArgs e)
 		{
-			d3d.MoveFromEye(0, 0, -0.3);			
+			d3d.MoveFromEye(0, 0, -0.3);
 		}
 
-		private void button6_Click(object sender, System.EventArgs e)
+		private void button6_Click(object sender, EventArgs e)
 		{
 			d3d.MoveFromEye(0, 0, 0.3);
 		}
@@ -706,12 +708,13 @@ namespace gui.Visualization.JonATL
 		{
 			float[] ret = new float[3];
 
-			try 
+			try
 			{
 				ret[0] = float.Parse(inputX.Text);
 				ret[1] = float.Parse(inputY.Text);
 				ret[2] = float.Parse(inputZ.Text);
-			} catch (Exception)
+			}
+			catch (Exception)
 			{
 				return null;
 			}
@@ -720,73 +723,73 @@ namespace gui.Visualization.JonATL
 			return ret;
 		}
 
-		private void button7_Click(object sender, System.EventArgs e)
+		private void button7_Click(object sender, EventArgs e)
 		{
 			float[] x = getPoints();
-			if (x == null) return;		
+			if (x == null) return;
 
 			d3d.SetEyeFrom(x[0], x[1], x[2]);
 		}
 
-		private void button8_Click(object sender, System.EventArgs e)
+		private void button8_Click(object sender, EventArgs e)
 		{
 			float[] x = getPoints();
 			if (x == null) return;
 
-			d3d.SetEyeTo(x[0], x[1], x[2]);		
+			d3d.SetEyeTo(x[0], x[1], x[2]);
 		}
 
-		private void button9_Click(object sender, System.EventArgs e)
+		private void button9_Click(object sender, EventArgs e)
 		{
 			float[] x = getPoints();
 			if (x == null) return;
 
-			d3d.Rotate((float)(x[0]*Math.PI/180), (float)(x[1]*Math.PI/180), (float)(x[2]*Math.PI/180));
+			d3d.Rotate((float) (x[0]*Math.PI/180), (float) (x[1]*Math.PI/180), (float) (x[2]*Math.PI/180));
 		}
 
-		private void buttonCenter_Click(object sender, System.EventArgs e)
+		private void buttonCenter_Click(object sender, EventArgs e)
 		{
 			d3d.CenterView();
 		}
 
-		private void buttonZoomIn_Click(object sender, System.EventArgs e)
+		private void buttonZoomIn_Click(object sender, EventArgs e)
 		{
 			d3d.ZoomInAtom();
 		}
 
-		private void buttonZoomOut_Click(object sender, System.EventArgs e)
+		private void buttonZoomOut_Click(object sender, EventArgs e)
 		{
 			d3d.ZoomOutAtom();
 		}
 
-		private void buttonRotateXPlus_Click(object sender, System.EventArgs e)
+		private void buttonRotateXPlus_Click(object sender, EventArgs e)
 		{
-			d3d.Rotate((float)Math.PI/180, 0.0f, 0.0f);
+			d3d.Rotate((float) Math.PI/180, 0.0f, 0.0f);
 		}
 
-		private void buttonRotateXMunis_Click(object sender, System.EventArgs e)
+		private void buttonRotateXMunis_Click(object sender, EventArgs e)
 		{
-			d3d.Rotate((float)-Math.PI/180, 0.0f, 0.0f);
+			d3d.Rotate((float) -Math.PI/180, 0.0f, 0.0f);
 		}
 
-		private void buttonRotateYPlus_Click(object sender, System.EventArgs e)
+		private void buttonRotateYPlus_Click(object sender, EventArgs e)
 		{
-			d3d.Rotate(0.0f, (float)Math.PI/180, 0.0f);
+			d3d.Rotate(0.0f, (float) Math.PI/180, 0.0f);
 		}
 
-		private void buttonRotateYMinus_Click(object sender, System.EventArgs e)
+		private void buttonRotateYMinus_Click(object sender, EventArgs e)
 		{
-			d3d.Rotate(0.0f, (float)-Math.PI/180, 0.0f);
+			d3d.Rotate(0.0f, (float) -Math.PI/180, 0.0f);
 		}
 
-		private void buttonRotateZPlus_Click(object sender, System.EventArgs e)
+		private void buttonRotateZPlus_Click(object sender, EventArgs e)
 		{
-			d3d.Rotate(0.0f, 0.0f, (float)Math.PI/180);
+			d3d.Rotate(0.0f, 0.0f, (float) Math.PI/180);
 		}
 
-		private void buttonRotateZMinus_Click(object sender, System.EventArgs e)
+		private void buttonRotateZMinus_Click(object sender, EventArgs e)
 		{
-			d3d.Rotate(0.0f, 0.0f, (float)-Math.PI/180);
+			d3d.Rotate(0.0f, 0.0f, (float) -Math.PI/180);
 		}
 	}
 }

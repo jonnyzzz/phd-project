@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using gui.Logger;
-using gui.Tree.Node;
 using gui.Tree.Node.Action;
-using gui.Tree.Node.ActionAllocator;
 using MorseKernelATL;
 
 namespace gui.Tree.Node.ActionAllocator
@@ -13,54 +10,58 @@ namespace gui.Tree.Node.ActionAllocator
 	/// </summary>
 	public class DynamicActionNodeTest
 	{
-		protected DynamicActionNodeTest() {}
-        private static DynamicActionNodeTest instance = null;
-        public static DynamicActionNodeTest Instance
-        {
-            get
-            {
-                if (instance == null) instance = new DynamicActionNodeTest();
-                return instance;
-            }        
-        }
+		protected DynamicActionNodeTest()
+		{
+		}
+
+		private static DynamicActionNodeTest instance = null;
+
+		public static DynamicActionNodeTest Instance
+		{
+			get
+			{
+				if (instance == null) instance = new DynamicActionNodeTest();
+				return instance;
+			}
+		}
 
 
-        private ActionFactoryList actionFactoryes = new ActionFactoryList();
+		private ActionFactoryList actionFactoryes = new ActionFactoryList();
 
-        public void registerActionFactory(IActionFactory factory)
-        {                            
-                actionFactoryes.AddActionList(factory);            
-        }
+		public void registerActionFactory(IActionFactory factory)
+		{
+			actionFactoryes.AddActionList(factory);
+		}
 
-        public void unregisterActionFactory(IActionFactory factory)
-        {
-            actionFactoryes.RemoveAction(factory);
-        }
+		public void unregisterActionFactory(IActionFactory factory)
+		{
+			actionFactoryes.RemoveAction(factory);
+		}
 
-        public void UnRegisterAll()
-        {
-            Instance.actionFactoryes.RemoveAll();
-        }
+		public void UnRegisterAll()
+		{
+			Instance.actionFactoryes.RemoveAll();
+		}
 
-        public ComputationNodeAction[] CreateAction(IKernelNode node)
-        {
-            ArrayList al = new ArrayList();
-            foreach (IActionFactory actionFactory in actionFactoryes)
-            {
-                if (actionFactory.Corresponds(node))
-                {
-                    al.Add(actionFactory.CreateAction(node));
-                }
-            }
+		public ComputationNodeAction[] CreateAction(IKernelNode node)
+		{
+			ArrayList al = new ArrayList();
+			foreach (IActionFactory actionFactory in actionFactoryes)
+			{
+				if (actionFactory.Corresponds(node))
+				{
+					al.Add(actionFactory.CreateAction(node));
+				}
+			}
 
-            Log.LogMessage(this, "Dynamicly allocated {0} actions", al.Count);
-            
-            al.AddRange(ComputationNodeDynamicTest.parseNode(node).actions);
+			Log.LogMessage(this, "Dynamicly allocated {0} actions", al.Count);
 
-            ComputationNodeAction[] act = new ComputationNodeAction[al.Count];            
-            for (int i=0; i<al.Count; act[i] = (ComputationNodeAction)al[i++]);
+			al.AddRange(ComputationNodeDynamicTest.parseNode(node).actions);
 
-            return act;
-        }
+			ComputationNodeAction[] act = new ComputationNodeAction[al.Count];
+			for (int i = 0; i < al.Count; act[i] = (ComputationNodeAction) al[i++]) ;
+
+			return act;
+		}
 	}
 }

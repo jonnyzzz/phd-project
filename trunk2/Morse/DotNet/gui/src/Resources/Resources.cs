@@ -1,8 +1,5 @@
-using System;
 using System.IO;
-using System.Xml;
 using gui.Logger;
-using gui.Tree;
 
 namespace gui.Resource
 {
@@ -13,134 +10,142 @@ namespace gui.Resource
 	{
 		public static string VARIABLE_FORMAT = "y{0} = ";
 
-        #region resourses getters
-	    public string Resource_Path
-	    {
-	        get { return RESOURCE_PATH; }
-	    }
+		#region resourses getters
 
-	    public string Gnuplot_Templates
-	    {
-	        get { return Resource_Path + GNUPLOT_TEMPLATES; }
-	    }
+		public string Resource_Path
+		{
+			get { return RESOURCE_PATH; }
+		}
 
-	    public string Gnuplot_Exe
-	    {
-	        get { return Resource_Path + GNUPLOT_EXE; }
-	    }
+		public string Gnuplot_Templates
+		{
+			get { return Resource_Path + GNUPLOT_TEMPLATES; }
+		}
 
-	    public string Gnuplot_Exe_Params
-	    {
-	        get { return GNUPLOT_EXE_PARAMS; }
-	    }
+		public string Gnuplot_Exe
+		{
+			get { return Resource_Path + GNUPLOT_EXE; }
+		}
 
-	    public string Temp_Path
-	    {
-	        get { return TEMP_PATH; }
-	    }
+		public string Gnuplot_Exe_Params
+		{
+			get { return GNUPLOT_EXE_PARAMS; }
+		}
 
-	    public string Gnuplot_Template_2D
-	    {
-	        get { return Gnuplot_Templates +  GNUPLOT_TEMPLATE_2D; }
-	    }
+		public string Temp_Path
+		{
+			get { return TEMP_PATH; }
+		}
 
-	    public string Gnuplot_Template_3D
-	    {
-	        get { return Gnuplot_Templates + GNUPLOT_TEMPLATE_3D; }
-	    }
-        #endregion
+		public string Gnuplot_Template_2D
+		{
+			get { return Gnuplot_Templates + GNUPLOT_TEMPLATE_2D; }
+		}
 
-	    private string RESOURCE_PATH;// = @"e:\projects\morse\DotNetProject\Morse\DotNet\resource\included";        
-        private const string CONFIG_XML = "gui.ini";       
-        
-        private string GNUPLOT_TEMPLATES;// = RESOURCE_PATH + @"\gnuplottemplate";
-        private string GNUPLOT_EXE;// = GNUPLOT_PATH + @"\bin\pgnuplot.exe";
-        private string GNUPLOT_EXE_PARAMS;// = @"-noend {0} -";
-        
-        private string TEMP_PATH = Path.GetTempPath();
-        
-        private string GNUPLOT_TEMPLATE_2D;// = GNUPLOT_TEMPLATES + @"\2d.txt";
-        private string GNUPLOT_TEMPLATE_3D;// = GNUPLOT_TEMPLATES + @"\3d.txt";
+		public string Gnuplot_Template_3D
+		{
+			get { return Gnuplot_Templates + GNUPLOT_TEMPLATE_3D; }
+		}
 
+		#endregion
 
-        protected Resources(string basePath)
-        {
-            RESOURCE_PATH = basePath + "\\";
+		private string RESOURCE_PATH; // = @"e:\projects\morse\DotNetProject\Morse\DotNet\resource\included";        
+		private const string CONFIG_XML = "gui.ini";
 
-            Log.LogMessage(this, "Starting from {0}", RESOURCE_PATH);
+		private string GNUPLOT_TEMPLATES; // = RESOURCE_PATH + @"\gnuplottemplate";
+		private string GNUPLOT_EXE; // = GNUPLOT_PATH + @"\bin\pgnuplot.exe";
+		private string GNUPLOT_EXE_PARAMS; // = @"-noend {0} -";
 
-            string config = RESOURCE_PATH + CONFIG_XML;
+		private string TEMP_PATH = Path.GetTempPath();
 
-            if (!File.Exists(config))
-            {
-                Log.LogException(this, new FileNotFoundException(), "Unable to open config file");
-            }
-            
-            TextReader tr = File.OpenText(config);
-
-            string s;
-            while ((s = tr.ReadLine()) != null)
-            {
-                string[] data = s.Trim().Split('=');
-                if (data.Length != 2) continue;//throw new ArgumentException("File format error!");
-
-                string key = data[0].Trim();
-                string val = data[1].Trim();
-
-                if (key == "gnuplot_template")
-                {
-                    GNUPLOT_TEMPLATES = val;
-                } else if (key == "gnuplot_exe")
-                {
-                    GNUPLOT_EXE = val;
-                } else if (key == "gnuplot_params")
-                {
-                    GNUPLOT_EXE_PARAMS = val;
-                } else if (key == "gnuplot_template_2d")
-                {
-                    GNUPLOT_TEMPLATE_2D = val;
-                } else if (key == "gnuplot_template_3d")
-                {
-                    GNUPLOT_TEMPLATE_3D = val;
-                } else Log.LogMessage(this, "Unexpected key {0}={1} Ignoring", key, val);
-            }                        
-            tr.Close();
-        }
-
-        protected Resources(string basePath, string tempPath) : this(basePath)
-        {
-            this.TEMP_PATH = tempPath;
-        }
+		private string GNUPLOT_TEMPLATE_2D; // = GNUPLOT_TEMPLATES + @"\2d.txt";
+		private string GNUPLOT_TEMPLATE_3D; // = GNUPLOT_TEMPLATES + @"\3d.txt";
 
 
-        #region functiononality
-        public int i=0;
-        public string TempFile()
-        {
-            return TEMP_PATH + "jonny." + (i++).ToString() + ".temporary";//DateTime.UtcNow.Millisecond + "." + DateTime.UtcNow.Second + "." + DateTime.UtcNow.Minute + "." + DateTime.UtcNow.Hour;
-        }
-        #endregion
+		protected Resources(string basePath)
+		{
+			RESOURCE_PATH = basePath + "\\";
 
+			Log.LogMessage(this, "Starting from {0}", RESOURCE_PATH);
 
-        #region static
-        private static Resources instance = null;
+			string config = RESOURCE_PATH + CONFIG_XML;
 
-        public static Resources Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+			if (!File.Exists(config))
+			{
+				Log.LogException(this, new FileNotFoundException(), "Unable to open config file");
+			}
 
-        public static void SetBasePath(string resource_path)
-        {
-            instance = new Resources(resource_path);
-        }
-        public static void SetBasePath(string resource_path, string temporary_path)
-        {
-            instance = new Resources(resource_path, temporary_path);
-        }
-        #endregion
+			TextReader tr = File.OpenText(config);
+
+			string s;
+			while ((s = tr.ReadLine()) != null)
+			{
+				string[] data = s.Trim().Split('=');
+				if (data.Length != 2) continue; //throw new ArgumentException("File format error!");
+
+				string key = data[0].Trim();
+				string val = data[1].Trim();
+
+				if (key == "gnuplot_template")
+				{
+					GNUPLOT_TEMPLATES = val;
+				}
+				else if (key == "gnuplot_exe")
+				{
+					GNUPLOT_EXE = val;
+				}
+				else if (key == "gnuplot_params")
+				{
+					GNUPLOT_EXE_PARAMS = val;
+				}
+				else if (key == "gnuplot_template_2d")
+				{
+					GNUPLOT_TEMPLATE_2D = val;
+				}
+				else if (key == "gnuplot_template_3d")
+				{
+					GNUPLOT_TEMPLATE_3D = val;
+				}
+				else Log.LogMessage(this, "Unexpected key {0}={1} Ignoring", key, val);
+			}
+			tr.Close();
+		}
+
+		protected Resources(string basePath, string tempPath) : this(basePath)
+		{
+			this.TEMP_PATH = tempPath;
+		}
+
+		#region functiononality
+
+		public int i = 0;
+
+		public string TempFile()
+		{
+			return TEMP_PATH + "jonny." + (i++).ToString() + ".temporary"; //DateTime.UtcNow.Millisecond + "." + DateTime.UtcNow.Second + "." + DateTime.UtcNow.Minute + "." + DateTime.UtcNow.Hour;
+		}
+
+		#endregion
+
+		#region static
+
+		private static Resources instance = null;
+
+		public static Resources Instance
+		{
+			get { return instance; }
+		}
+
+		public static void SetBasePath(string resource_path)
+		{
+			instance = new Resources(resource_path);
+		}
+
+		public static void SetBasePath(string resource_path, string temporary_path)
+		{
+			instance = new Resources(resource_path, temporary_path);
+		}
+
+		#endregion
 	}
 }

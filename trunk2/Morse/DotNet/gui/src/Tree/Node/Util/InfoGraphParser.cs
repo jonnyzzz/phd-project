@@ -1,4 +1,3 @@
-using System;
 using MorseKernelATL;
 
 namespace gui.Tree.Node.Util
@@ -8,17 +7,17 @@ namespace gui.Tree.Node.Util
 	/// </summary>
 	public class InfoGraphParser
 	{
-		IGraphInfo info;
-		int dim;
+		private IGraphInfo info;
+		private int dim;
 
-		string gridSize = "";
-		string gridNum = "";
-		string space = "";
+		private string gridSize = "";
+		private string gridNum = "";
+		private string space = "";
 
-        private string doubleToString(double d)
-        {
-            return d.ToString().Replace(',','.');
-        }
+		private string doubleToString(double d)
+		{
+			return d.ToString().Replace(',', '.');
+		}
 
 
 		public InfoGraphParser(IGraphInfo info)
@@ -26,45 +25,39 @@ namespace gui.Tree.Node.Util
 			this.info = info;
 			this.dim = info.dimension();
 
-			for (int i=0; i<dim; i++) 
+			for (int i = 0; i < dim; i++)
 			{
 				gridSize += string.Format("g{0} = {1}; ", i, doubleToString(info.gridSize(i)));
 				gridNum += string.Format("s{0} = {1}; ", i, doubleToString(info.gridNumber(i)));
 				space += string.Format("[ {0}, {1} ]x", doubleToString(info.spaceMin(i)), info.spaceMax(i));
 			}
-			if (space.Length > 0) 
+			if (space.Length > 0)
 				space = space.Substring(0, space.LastIndexOf('x'));
 		}
 
-		public string GridSize() 
+		public string GridSize()
 		{
 			return gridSize;
 		}
 
-		public string GridNum() 
+		public string GridNum()
 		{
 			return gridNum;
 		}
 
-		public string Space() 
+		public string Space()
 		{
 			return space;
-		}		
+		}
 
 		public int Nodes
 		{
-			get{
-				return info.nodes();
-			}
+			get { return info.nodes(); }
 		}
 
 		public int Edges
 		{
-			get
-			{
-				return info.edges();
-				
-			}
+			get { return info.edges(); }
 		}
 	}
 }

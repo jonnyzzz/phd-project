@@ -1,9 +1,9 @@
 using System;
-using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Data;
+using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 using gui.Tree;
 using MorseKernelATL;
@@ -13,140 +13,144 @@ namespace gui.Forms
 	/// <summary>
 	/// Summary description for SystemAssignment.
 	/// </summary>
-	public class SystemAssignment : System.Windows.Forms.Form
+	public class SystemAssignment : Form
 	{
 		private const string DIMENSION = "_dimension";
-        private bool isReadOnly;
+		private bool isReadOnly;
 
 
-		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.NumericUpDown dimensionUpDown;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.DataGrid formulas;
-		private System.Windows.Forms.Button btnNext;
-		private System.Windows.Forms.Button btnCancel;
+		private GroupBox groupBox1;
+		private NumericUpDown dimensionUpDown;
+		private Label label1;
+		private DataGrid formulas;
+		private Button btnNext;
+		private Button btnCancel;
+
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.Container components = null;
-		private System.Windows.Forms.MainMenu mainMenu;
-		private System.Windows.Forms.OpenFileDialog openFileDialog;
-		private System.Windows.Forms.SaveFileDialog saveFileDialog;
-		private System.Windows.Forms.MenuItem menuLoad;
-		private System.Windows.Forms.MenuItem menuSave;
-        private System.Windows.Forms.MenuItem menuItemGetSource;
+		private Container components = null;
+
+		private MainMenu mainMenu;
+		private OpenFileDialog openFileDialog;
+		private SaveFileDialog saveFileDialog;
+		private MenuItem menuLoad;
+		private MenuItem menuSave;
+		private MenuItem menuItemGetSource;
 
 
 		private CFunction function = new CFunctionClass();
 
-		public SystemAssignment() : this(false) 
+		public SystemAssignment() : this(false)
 		{
-            isReadOnly = false;
+			isReadOnly = false;
 		}
 
 		public SystemAssignment(bool showOpen)
 		{
 			InitializeComponent();
 			dimensionUpDown_ValueChanged(this, EventArgs.Empty);
-            isReadOnly = false;
-            
+			isReadOnly = false;
+
 			this.Closed += new EventHandler(onClose);
 			registerEvents();
-			
+
 			redesignGrid();
 
-			if (showOpen) 
+			if (showOpen)
 			{
 				menuLoad_Click(this, EventArgs.Empty);
 			}
-            
+
 		}
 
-        public SystemAssignment(string source) : this()
-        {
-            this.setSource(source);
-            isReadOnly = true;
-        }
+		public SystemAssignment(string source) : this()
+		{
+			this.setSource(source);
+			isReadOnly = true;
+		}
 
 
 		private void registerEvents()
 		{
-            if (!isReadOnly) 
-            {
-                function.FunctionAccepted += new IFunctionEvents_FunctionAcceptedEventHandler(function_FunctionAccepted);
-                function.FunctionWrongInput += new IFunctionEvents_FunctionWrongInputEventHandler(function_FunctionWrongInput);
-            }
+			if (!isReadOnly)
+			{
+				function.FunctionAccepted += new IFunctionEvents_FunctionAcceptedEventHandler(function_FunctionAccepted);
+				function.FunctionWrongInput += new IFunctionEvents_FunctionWrongInputEventHandler(function_FunctionWrongInput);
+			}
 		}
 
 		private void unregisterEvents()
 		{
-            if (!isReadOnly) 
-            {
-                function.FunctionAccepted -= new IFunctionEvents_FunctionAcceptedEventHandler(function_FunctionAccepted);
-                function.FunctionWrongInput -= new IFunctionEvents_FunctionWrongInputEventHandler(function_FunctionWrongInput);			
-            }
+			if (!isReadOnly)
+			{
+				function.FunctionAccepted -= new IFunctionEvents_FunctionAcceptedEventHandler(function_FunctionAccepted);
+				function.FunctionWrongInput -= new IFunctionEvents_FunctionWrongInputEventHandler(function_FunctionWrongInput);
+			}
 		}
 
-		private void onClose( object sender, EventArgs args)
+		private void onClose(object sender, EventArgs args)
 		{
 			unregisterEvents();
 		}
 
 		private void redesignGrid()
-		{	
+		{
 			DataGridTableStyle style = null;
-			if (formulas.TableStyles.Count == 0) 
+			if (formulas.TableStyles.Count == 0)
 			{
-				style = new DataGridTableStyle();			
-				formulas.TableStyles.Add(style);			
-			} else
+				style = new DataGridTableStyle();
+				formulas.TableStyles.Add(style);
+			}
+			else
 			{
 				style = formulas.TableStyles[0];
 			}
-			
+
 			if (!(formulas.DataSource is DataTable)) return;
 
 			DataTable table = formulas.DataSource as DataTable;
-				    
-			int w = (int)(formulas.ClientSize.Width * 0.95);
-            
-			for (int i=0; i<table.Columns.Count-2; i++)
+
+			int w = (int) (formulas.ClientSize.Width*0.95);
+
+			for (int i = 0; i < table.Columns.Count - 2; i++)
 			{
 				w -= style.GridColumnStyles[i].Width;
-				style.GridColumnStyles[i].WidthChanged += new EventHandler(SystemAssignment_WidthChanged);				
+				style.GridColumnStyles[i].WidthChanged += new EventHandler(SystemAssignment_WidthChanged);
 			}
 			style.RowHeaderWidth = 10;
-			style.AllowSorting = false;					
+			style.AllowSorting = false;
 			w -= 100;
 			if (w > 0)
 			{
-				style.GridColumnStyles[table.Columns.Count-1].Width = w;
+				style.GridColumnStyles[table.Columns.Count - 1].Width = w;
 			}
 		}
 
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		protected override void Dispose( bool disposing )
+		protected override void Dispose(bool disposing)
 		{
-			if( disposing )
+			if (disposing)
 			{
-				if(components != null)
+				if (components != null)
 				{
 					components.Dispose();
 				}
 			}
-			base.Dispose( disposing );
+			base.Dispose(disposing);
 		}
 
 		#region Windows Form Designer generated code
+
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(SystemAssignment));
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (SystemAssignment));
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.dimensionUpDown = new System.Windows.Forms.NumericUpDown();
@@ -160,8 +164,8 @@ namespace gui.Forms
 			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.groupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dimensionUpDown)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.formulas)).BeginInit();
+			((System.ComponentModel.ISupportInitialize) (this.dimensionUpDown)).BeginInit();
+			((System.ComponentModel.ISupportInitialize) (this.formulas)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -179,7 +183,7 @@ namespace gui.Forms
 			// 
 			// label1
 			// 
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
 			this.label1.Location = new System.Drawing.Point(32, 24);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(368, 16);
@@ -190,24 +194,30 @@ namespace gui.Forms
 			// dimensionUpDown
 			// 
 			this.dimensionUpDown.Location = new System.Drawing.Point(416, 24);
-			this.dimensionUpDown.Maximum = new System.Decimal(new int[] {
-																			30,
-																			0,
-																			0,
-																			0});
-			this.dimensionUpDown.Minimum = new System.Decimal(new int[] {
-																			1,
-																			0,
-																			0,
-																			0});
+			this.dimensionUpDown.Maximum = new System.Decimal(new int[]
+				{
+					30,
+					0,
+					0,
+					0
+				});
+			this.dimensionUpDown.Minimum = new System.Decimal(new int[]
+				{
+					1,
+					0,
+					0,
+					0
+				});
 			this.dimensionUpDown.Name = "dimensionUpDown";
 			this.dimensionUpDown.Size = new System.Drawing.Size(64, 20);
 			this.dimensionUpDown.TabIndex = 1;
-			this.dimensionUpDown.Value = new System.Decimal(new int[] {
-																		  2,
-																		  0,
-																		  0,
-																		  0});
+			this.dimensionUpDown.Value = new System.Decimal(new int[]
+				{
+					2,
+					0,
+					0,
+					0
+				});
 			this.dimensionUpDown.ValueChanged += new System.EventHandler(this.dimensionUpDown_ValueChanged);
 			// 
 			// formulas
@@ -246,10 +256,12 @@ namespace gui.Forms
 			// 
 			// mainMenu
 			// 
-			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					 this.menuLoad,
-																					 this.menuSave,
-																					 this.menuItemGetSource});
+			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[]
+				{
+					this.menuLoad,
+					this.menuSave,
+					this.menuItemGetSource
+				});
 			// 
 			// menuLoad
 			// 
@@ -290,32 +302,33 @@ namespace gui.Forms
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.btnCancel);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.Menu = this.mainMenu;
 			this.Name = "SystemAssignment";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "System Equation";
 			this.groupBox1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dimensionUpDown)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.formulas)).EndInit();
+			((System.ComponentModel.ISupportInitialize) (this.dimensionUpDown)).EndInit();
+			((System.ComponentModel.ISupportInitialize) (this.formulas)).EndInit();
 			this.ResumeLayout(false);
 
 		}
+
 		#endregion
 
-		private DataTable createDataTable() 
+		private DataTable createDataTable()
 		{
-			DataTable table = new DataTable();	
+			DataTable table = new DataTable();
 			DataColumn cln = new DataColumn("variable");
 			cln.ReadOnly = false;
-			cln.DataType = typeof(string);
+			cln.DataType = typeof (string);
 			table.Columns.Add(cln);
 			cln.DefaultValue = "";
 
 			cln = new DataColumn("expression");
 			cln.ReadOnly = false;
-			cln.DataType = typeof(string);
+			cln.DataType = typeof (string);
 			cln.DefaultValue = "0";
 
 			table.Columns.Add(cln);
@@ -323,41 +336,41 @@ namespace gui.Forms
 			return table;
 		}
 
-		private void dimensionUpDown_ValueChanged(object sender, System.EventArgs e)
+		private void dimensionUpDown_ValueChanged(object sender, EventArgs e)
 		{
 			#region "table initalization"
 
 			DataTable table = createDataTable();
 
 
-			for (int i = 0; i < dimensionUpDown.Value; i++) 
+			for (int i = 0; i < dimensionUpDown.Value; i++)
 			{
 				DataRow row = table.NewRow();
-				row[0] = String.Format("y{0}",i+1);	
+				row[0] = String.Format("y{0}", i + 1);
 				row[1] = "0";
 				table.Rows.Add(row);
 			}
 
-			for (int i = 0; i < dimensionUpDown.Value; i++) 
+			for (int i = 0; i < dimensionUpDown.Value; i++)
 			{
 				DataRow row = table.NewRow();
-				row[0] = String.Format("space_min{0}",i+1);	
+				row[0] = String.Format("space_min{0}", i + 1);
 				row[1] = "-1";
 				table.Rows.Add(row);
 			}
 
-			for (int i = 0; i < dimensionUpDown.Value; i++) 
-			{								
+			for (int i = 0; i < dimensionUpDown.Value; i++)
+			{
 				DataRow row = table.NewRow();
-				row[0] = String.Format("space_max{0}",i+1);				
+				row[0] = String.Format("space_max{0}", i + 1);
 				row[1] = "1";
 				table.Rows.Add(row);
 			}
 
-			for (int i = 0; i < dimensionUpDown.Value; i++) 
-			{								
+			for (int i = 0; i < dimensionUpDown.Value; i++)
+			{
 				DataRow row = table.NewRow();
-				row[0] = String.Format("grid{0}",i+1);				
+				row[0] = String.Format("grid{0}", i + 1);
 				row[1] = "10";
 				table.Rows.Add(row);
 			}
@@ -368,59 +381,60 @@ namespace gui.Forms
 			table.Rows.Add(dataRow);
 
 			#endregion
+
 			formulas.DataSource = table;
 			redesignGrid();
 		}
 
-		private void btnCancel_Click(object sender, System.EventArgs e)
+		private void btnCancel_Click(object sender, EventArgs e)
 		{
 			this.DialogResult = DialogResult.Cancel;
 		}
 
-		private string createFunctionSource() 
+		private string createFunctionSource()
 		{
 			formulas.Refresh();
 			formulas.Update();
 			formulas.Focus();
-			DataTable table = (DataTable)formulas.DataSource;
+			DataTable table = (DataTable) formulas.DataSource;
 
 			table.AcceptChanges();
 			table.BeginLoadData();
-		
+
 			string s = "";
 
-			for (IEnumerator en =  table.Rows.GetEnumerator(); en.MoveNext();) 
+			for (IEnumerator en = table.Rows.GetEnumerator(); en.MoveNext(); )
 			{
-				DataRow row = ((DataRow)en.Current);
-				s+= row[0] + "=" + row[1] + ";\n";
+				DataRow row = ((DataRow) en.Current);
+				s += row[0] + "=" + row[1] + ";\n";
 			}
 
-			s+= DIMENSION + "=" + dimensionUpDown.Value + ";\n";
-			
+			s += DIMENSION + "=" + dimensionUpDown.Value + ";\n";
+
 			//MessageBox.Show(s);
 
 			table.EndLoadData();
 			return s;
 		}
 
-		private DataTable createFunctionTable(string source) 
+		private DataTable createFunctionTable(string source)
 		{
 			DataTable table = createDataTable();
 			string[] ss = source.Split(';');
 
-			for (int i=0; i<ss.Length; i++) 
+			for (int i = 0; i < ss.Length; i++)
 			{
 				string[] st = ss[i].Split('=');
 
 				if (st.Length != 2) continue;
-                st[0] = st[0].Trim();
-                st[1] = st[1].Trim();
+				st[0] = st[0].Trim();
+				st[1] = st[1].Trim();
 
-				if (st[0] == DIMENSION) 
+				if (st[0] == DIMENSION)
 				{
 					dimensionUpDown.Value = (int) Double.Parse(st[1]);
-				} 
-				else 
+				}
+				else
 				{
 					DataRow r = table.NewRow();
 					r[0] = st[0].Trim();
@@ -431,18 +445,19 @@ namespace gui.Forms
 			return table;
 		}
 
-		private void btnNext_Click(object sender, System.EventArgs e)
+		private void btnNext_Click(object sender, EventArgs e)
 		{
-            if (!isReadOnly) 
-            {
-                function.SystemSource = createFunctionSource();
-            } else
-            {
-                if (MessageBox.Show(this, "This dialog is started in readonly mode. Thats unable to save changes.\n Exit dialog?","Readonly Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    this.DialogResult = DialogResult.Cancel;
-                }
-            }
+			if (!isReadOnly)
+			{
+				function.SystemSource = createFunctionSource();
+			}
+			else
+			{
+				if (MessageBox.Show(this, "This dialog is started in readonly mode. Thats unable to save changes.\n Exit dialog?", "Readonly Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+				{
+					this.DialogResult = DialogResult.Cancel;
+				}
+			}
 			//event as response
 		}
 
@@ -456,17 +471,17 @@ namespace gui.Forms
 			MessageBox.Show(this, description);
 		}
 
-		public CFunction getFunction() 
+		public CFunction getFunction()
 		{
 			return function;
 		}
 
 
-        private const string TABLE = "system equation";
+		private const string TABLE = "system equation";
 		private const string XML_FUNCTION = "function";
 		private const string XML_EQUATION = "equation";
 
-		private void loadXML(XmlReader rd) 
+		private void loadXML(XmlReader rd)
 		{
 			//XML:
 			// <function>
@@ -479,19 +494,19 @@ namespace gui.Forms
 			//<function>
 			if (!rd.Read()) throw XmlParseException.UnexpectedEnd();
 			if (rd.NodeType != XmlNodeType.Element || rd.Name != XML_FUNCTION) throw XmlParseException.NodeExpected(XML_FUNCTION);
-			
+
 			string result = "";
-			
-			while(true) 
+
+			while (true)
 			{
 				if (!rd.Read()) throw XmlParseException.UnexpectedEnd();
 				if (rd.NodeType == XmlNodeType.EndElement && rd.Name == XML_FUNCTION) break;
 
-				if (rd.NodeType != XmlNodeType.Element || rd.Name != XML_EQUATION) throw XmlParseException.NodeExpected(XML_EQUATION);			
+				if (rd.NodeType != XmlNodeType.Element || rd.Name != XML_EQUATION) throw XmlParseException.NodeExpected(XML_EQUATION);
 
 				if (!rd.Read()) throw XmlParseException.UnexpectedEnd();
-				
-				if (rd.NodeType == XmlNodeType.Text) 
+
+				if (rd.NodeType == XmlNodeType.Text)
 				{
 					result += rd.Value.Trim() + ";";
 
@@ -503,23 +518,23 @@ namespace gui.Forms
 			//</function>
 			if (rd.NodeType != XmlNodeType.EndElement || rd.Name != XML_FUNCTION) throw XmlParseException.NodeExpected("/" + XML_FUNCTION);
 
-		    setSource(result);
+			setSource(result);
 		}
 
-	    private void setSource(string result)
-	    {
-	        formulas.DataSource = createFunctionTable(result);
-	    }
+		private void setSource(string result)
+		{
+			formulas.DataSource = createFunctionTable(result);
+		}
 
-	    private void writeXML(XmlWriter wr) 
+		private void writeXML(XmlWriter wr)
 		{
 			wr.WriteWhitespace("\n");
-			wr.WriteStartElement(XML_FUNCTION);			
+			wr.WriteStartElement(XML_FUNCTION);
 
 			string s = createFunctionSource();
 			string[] ss = s.Split(';');
 
-			for (int i=0; i<ss.Length; i++) 
+			for (int i = 0; i < ss.Length; i++)
 			{
 				wr.WriteWhitespace("\n\t");
 				wr.WriteStartElement(XML_EQUATION);
@@ -535,20 +550,18 @@ namespace gui.Forms
 		}
 
 
-
-		private void menuLoad_Click(object sender, System.EventArgs e)
+		private void menuLoad_Click(object sender, EventArgs e)
 		{
-			if (openFileDialog.ShowDialog(this) == DialogResult.OK) 
+			if (openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
-				
 				XmlDocument doc = new XmlDocument();
 				doc.Load(openFileDialog.FileName);
-			
-				try 
+
+				try
 				{
-					loadXML(new XmlNodeReader(doc.DocumentElement));			
-				} 
-				catch (XmlParseException ex) 
+					loadXML(new XmlNodeReader(doc.DocumentElement));
+				}
+				catch (XmlParseException ex)
 				{
 					MessageBox.Show(ex.Message, "Error opening file");
 					dimensionUpDown_ValueChanged(this, EventArgs.Empty);
@@ -556,28 +569,28 @@ namespace gui.Forms
 			}
 		}
 
-		private void menuSave_Click(object sender, System.EventArgs e)
+		private void menuSave_Click(object sender, EventArgs e)
 		{
-			if (saveFileDialog.ShowDialog(this) == DialogResult.OK) 
-			{				
-				XmlTextWriter wr = new XmlTextWriter(saveFileDialog.FileName, System.Text.Encoding.GetEncoding(1251));
+			if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
+			{
+				XmlTextWriter wr = new XmlTextWriter(saveFileDialog.FileName, Encoding.GetEncoding(1251));
 				wr.WriteStartDocument(true);
 
 				writeXML(wr);
-	
+
 				wr.WriteEndDocument();
 				wr.Close();
-            }		
+			}
 		}
 
 		private void SystemAssignment_WidthChanged(object sender, EventArgs e)
 		{
-			redesignGrid();	
+			redesignGrid();
 		}
 
-        private void menuItemGetSource_Click(object sender, System.EventArgs e)
-        {
-            Clipboard.SetDataObject(createFunctionSource(), true);
-        }
+		private void menuItemGetSource_Click(object sender, EventArgs e)
+		{
+			Clipboard.SetDataObject(createFunctionSource(), true);
+		}
 	}
 }

@@ -1,5 +1,3 @@
-using System;
-using gui.Tree.Node;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
 using MorseKernelATL;
@@ -11,8 +9,9 @@ namespace gui.Tree.Node.Action
 	/// </summary>
 	public class ComputationNodeSubdevidablePoint : ComputationNodeAction
 	{
-		ISubdevidablePoint node;
-		ISubdevidePointParams param = null;
+		private ISubdevidablePoint node;
+		private ISubdevidePointParams param = null;
+
 		public ComputationNodeSubdevidablePoint(ISubdevidablePoint node) : base()
 		{
 			this.node = node;
@@ -21,17 +20,17 @@ namespace gui.Tree.Node.Action
 
 		public override ComputationNodeMenuItem[] getMenuItems()
 		{
-			return 
+			return
 				new ComputationNodeMenuItem[]
-				{
-					ComputationNodeMenuFactory.SubdevidePointAction(new ComputationNodeMenuFactory.UniversalMenuItemClick(SubdevidePoint))
-				};
+					{
+						ComputationNodeMenuFactory.SubdevidePointAction(new ComputationNodeMenuFactory.UniversalMenuItemClick(SubdevidePoint))
+					};
 		}
 
 		private void SubdevidePoint()
 		{
 			param = ComputationParametersFactory.ParamsSubdevidePoint(null, node as IGraph, param);
-			if (param != null ) 
+			if (param != null)
 			{
 				node.SubdevidePoint(param);
 			}
@@ -39,4 +38,3 @@ namespace gui.Tree.Node.Action
 
 	}
 }
-

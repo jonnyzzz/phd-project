@@ -1,8 +1,6 @@
 using System;
-using System.Data;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace gui.Tree.Node.Forms
@@ -10,19 +8,21 @@ namespace gui.Tree.Node.Forms
 	/// <summary>
 	/// Summary description for PointCoordinate.
 	/// </summary>
-	public class PointCoordinate : System.Windows.Forms.Form
+	public class PointCoordinate : Form
 	{
-		private System.Windows.Forms.GroupBox groupBoxGrid;
-		private System.Windows.Forms.Button buttonOK;
-		private System.Windows.Forms.Button buttonCancel;
-		private System.Windows.Forms.DataGrid dataGrid;
-		private System.Windows.Forms.Panel panelGrid;
+		private GroupBox groupBoxGrid;
+		private Button buttonOK;
+		private Button buttonCancel;
+		private DataGrid dataGrid;
+		private Panel panelGrid;
+
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.Container components = null;
+		private Container components = null;
 
 		private double[] array;
+
 		public PointCoordinate(double[] initArray)
 		{
 			this.array = initArray;
@@ -32,17 +32,18 @@ namespace gui.Tree.Node.Forms
 
 		private DataTable table;
 		private DataRow row;
+
 		private void ShowArray()
 		{
 			table = new DataTable();
-			
-			for (int i=0; i<array.Length; i++)
+
+			for (int i = 0; i < array.Length; i++)
 			{
-				table.Columns.Add(new DataColumn("x" + (i+1), typeof(double)));
+				table.Columns.Add(new DataColumn("x" + (i + 1), typeof (double)));
 			}
 
 			row = table.NewRow();
-			for (int i=0; i<array.Length; i++)
+			for (int i = 0; i < array.Length; i++)
 			{
 				row[i] = array[i];
 			}
@@ -53,40 +54,41 @@ namespace gui.Tree.Node.Forms
 			dw.AllowNew = false;
 			dw.AllowDelete = false;
 
-			dataGrid.DataSource = dw;			
+			dataGrid.DataSource = dw;
 		}
 
 
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		protected override void Dispose( bool disposing )
+		protected override void Dispose(bool disposing)
 		{
-			if( disposing )
+			if (disposing)
 			{
-				if(components != null)
+				if (components != null)
 				{
 					components.Dispose();
 				}
 			}
-			base.Dispose( disposing );
+			base.Dispose(disposing);
 		}
 
 		#region Windows Form Designer generated code
+
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(PointCoordinate));
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (PointCoordinate));
 			this.groupBoxGrid = new System.Windows.Forms.GroupBox();
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.dataGrid = new System.Windows.Forms.DataGrid();
 			this.panelGrid = new System.Windows.Forms.Panel();
 			this.groupBoxGrid.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
+			((System.ComponentModel.ISupportInitialize) (this.dataGrid)).BeginInit();
 			this.panelGrid.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -149,31 +151,29 @@ namespace gui.Tree.Node.Forms
 			this.Controls.Add(this.buttonOK);
 			this.Controls.Add(this.groupBoxGrid);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
 			this.Name = "PointCoordinate";
 			this.Text = "PointCoordinate";
 			this.groupBoxGrid.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
+			((System.ComponentModel.ISupportInitialize) (this.dataGrid)).EndInit();
 			this.panelGrid.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
+
 		#endregion
 
 		public double[] Array
 		{
-			get
-			{
-				return array;
-			}
+			get { return array; }
 		}
 
 
-		private void buttonOK_Click(object sender, System.EventArgs e)
+		private void buttonOK_Click(object sender, EventArgs e)
 		{
-			for (int i=0; i<array.Length; i++)
+			for (int i = 0; i < array.Length; i++)
 			{
-				array[i] = (double)row[i];
+				array[i] = (double) row[i];
 			}
 			this.DialogResult = DialogResult.OK;
 		}

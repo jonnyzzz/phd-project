@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using gui.Tree.Node;
 using gui.Tree.Node.Action;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
@@ -13,7 +12,7 @@ namespace gui.Tree.Node
 	/// </summary>
 	public class ComputationNodeDynamicTest
 	{
-		public class ComputationNodeDynamicTestResult 
+		public class ComputationNodeDynamicTestResult
 		{
 			public ComputationNodeMenuItem[] items;
 			public ComputationNodeAction[] actions;
@@ -31,7 +30,7 @@ namespace gui.Tree.Node
 			{
 				return parseNode(mnode as IGraph);
 			}
-			else return new ComputationNodeDynamicTestResult(new ComputationNodeAction[]{}, new ComputationNodeMenuItem[]{} );
+			else return new ComputationNodeDynamicTestResult(new ComputationNodeAction[] {}, new ComputationNodeMenuItem[] {});
 		}
 
 		public static ComputationNodeDynamicTestResult parseNode(IGraph mnode)
@@ -39,20 +38,20 @@ namespace gui.Tree.Node
 			ArrayList arrayActions = new ArrayList();
 			ArrayList arrayItems = new ArrayList();
 
-		    ComputationNodeAction act = null;
+			ComputationNodeAction act = null;
 
 			if (mnode is ISubdevidable)
 			{
 				act = new ComputationNodeSubdevidable(mnode as ISubdevidable);
 				arrayActions.Add(act);
-				arrayItems.AddRange(act.getMenuItems());				
+				arrayItems.AddRange(act.getMenuItems());
 			}
 
 			if (mnode is ISubdevidablePoint)
 			{
 				act = new ComputationNodeSubdevidablePoint(mnode as ISubdevidablePoint);
 				arrayActions.Add(act);
-				arrayItems.AddRange(act.getMenuItems());								
+				arrayItems.AddRange(act.getMenuItems());
 			}
 
 			if (act != null)
@@ -61,7 +60,7 @@ namespace gui.Tree.Node
 				act = null;
 			}
 
-            /*
+			/*
 			if (mnode is IExtendable)
 			{
 				act = new ComputationNodeExtendable(mnode as IExtendable);
@@ -80,7 +79,7 @@ namespace gui.Tree.Node
 			{
 				act = new ComputationNodeMorsable(mnode as IMorsable);
 				arrayActions.Add(act);
-				arrayItems.AddRange(act.getMenuItems());								
+				arrayItems.AddRange(act.getMenuItems());
 			}
 
 			if (act != null)
@@ -93,16 +92,16 @@ namespace gui.Tree.Node
 			{
 				CSymbolicImageGraph node = mnode as CSymbolicImageGraph;
 				IntPtr graph;
-				node.getGraph( out graph);				
+				node.getGraph(out graph);
 				act = new ComputationNodeVisualizer2D(graph);
-				
-				arrayActions.Add(act);				
-				arrayItems.AddRange(act.getMenuItems());								
+
+				arrayActions.Add(act);
+				arrayItems.AddRange(act.getMenuItems());
 			}
 
 			if (false && mnode.graphDimension() == 3 && mnode is CSymbolicImageGraph)
 			{
-				CSymbolicImageGraph node = mnode  as CSymbolicImageGraph;
+				CSymbolicImageGraph node = mnode as CSymbolicImageGraph;
 				IntPtr graph;
 				node.getGraph(out graph);
 
@@ -117,7 +116,7 @@ namespace gui.Tree.Node
 				arrayItems.Add(ComputationNodeMenuFactory.DelimeterItem());
 				act = null;
 			}
-	
+
 			if (mnode is IExportData)
 			{
 				IExportData node = mnode as IExportData;
@@ -127,15 +126,15 @@ namespace gui.Tree.Node
 			}
 
 
-			ComputationNodeAction[] actions = new ComputationNodeAction[arrayActions.Count];						
+			ComputationNodeAction[] actions = new ComputationNodeAction[arrayActions.Count];
 
-			for (int i=0; i<arrayActions.Count; i++)
+			for (int i = 0; i < arrayActions.Count; i++)
 			{
-				actions[i] = arrayActions[i] as ComputationNodeAction;				
+				actions[i] = arrayActions[i] as ComputationNodeAction;
 			}
 
 			ComputationNodeMenuItem[] items = new ComputationNodeMenuItem[arrayItems.Count];
-			for (int i=0; i<arrayItems.Count; i++)
+			for (int i = 0; i < arrayItems.Count; i++)
 			{
 				items[i] = arrayItems[i] as ComputationNodeMenuItem;
 			}

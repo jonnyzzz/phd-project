@@ -1,5 +1,3 @@
-using System;
-
 namespace gui.Resource
 {
 	/// <summary>
@@ -7,21 +5,21 @@ namespace gui.Resource
 	/// </summary>
 	public class TemplateProcessor
 	{
-        private string template;
+		private string template;
 
 		public TemplateProcessor(string template)
 		{
 			this.template = template;
 		}
 
-        public void subsitute(string key, string value)
-        {
-            template = template.Replace("$" + key + "$", value);
-        }
+		public void subsitute(string key, string value)
+		{
+			template = template.Replace("$" + key + "$", value);
+		}
 
-        public override string ToString()
-        {
-            return template;
-        }
+		public override string ToString()
+		{
+			return template;
+		}
 	}
 }

@@ -1,4 +1,3 @@
-using System;
 using gui.Attributes;
 using gui.Tree.Node.ActionAllocator;
 using gui.Tree.Node.Factory;
@@ -11,39 +10,41 @@ namespace gui.Tree.OperationSelector
 	/// </summary>
 	public class ExtendPointResultAction : ResultAction
 	{
-	    IComputationExtendingResult result;
+		private IComputationExtendingResult result;
+
 		public ExtendPointResultAction(IComputationExtendingResult result)
 		{
 			this.result = result;
-            this.Text = "Projective Extension for Point Methods";
+			this.Text = "Projective Extension for Point Methods";
 		}
 
 
-	    public override void DoAction()
-	    {
-            IExtendablePointParams param = ComputationParametersFactory.ParamsExtend(null, result , null);
-            if (param != null) 
-            {
-                result.PointMethodProjectiveExtension(param);
-            }
-	    }
-        [InitializeOnRun]
-        public static void Register()
-        {
-            DynamicResultTest.Instance.RegisterAction(new ExtendPointResultActionFactory());
-        }
+		public override void DoAction()
+		{
+			IExtendablePointParams param = ComputationParametersFactory.ParamsExtend(null, result, null);
+			if (param != null)
+			{
+				result.PointMethodProjectiveExtension(param);
+			}
+		}
 
-        private class ExtendPointResultActionFactory : IResultActionFactory
-        {
-            public bool Corresponds(IComputationResult node)
-            {
-                return node is IComputationExtendingResult;
-            }
+		[InitializeOnRun]
+		public static void Register()
+		{
+			DynamicResultTest.Instance.RegisterAction(new ExtendPointResultActionFactory());
+		}
 
-            public ResultAction CreateAction(IComputationResult node)
-            {
-                return new ExtendPointResultAction((IComputationExtendingResult)node);
-            }
-        }
+		private class ExtendPointResultActionFactory : IResultActionFactory
+		{
+			public bool Corresponds(IComputationResult node)
+			{
+				return node is IComputationExtendingResult;
+			}
+
+			public ResultAction CreateAction(IComputationResult node)
+			{
+				return new ExtendPointResultAction((IComputationExtendingResult) node);
+			}
+		}
 	}
 }

@@ -6,13 +6,12 @@ namespace gui.Attributes
 	/// Summary description for InitializeStaticAttrubute.
 	/// </summary>
 	/// 
-
-    [AttributeUsage(AttributeTargets.Method)]
+	[AttributeUsage(AttributeTargets.Method)]
 	public class InitializeOnRunAttribute : Attribute
-	{        
+	{
 		public InitializeOnRunAttribute() : this(false)
-		{            
-	    }
+		{
+		}
 
 		private bool isInternal;
 

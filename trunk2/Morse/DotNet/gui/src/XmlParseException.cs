@@ -11,12 +11,12 @@ namespace gui.Tree
 		{
 		}
 
-		public static XmlParseException UnexpectedEnd() 
+		public static XmlParseException UnexpectedEnd()
 		{
 			return new XmlParseException("Unexpected end of xml to parse");
 		}
-		
-		public static XmlParseException NodeExpected(string name) 
+
+		public static XmlParseException NodeExpected(string name)
 		{
 			return new XmlParseException("Node <" + name + "> expected");
 		}

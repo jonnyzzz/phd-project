@@ -1,4 +1,3 @@
-using System;
 using gui.Tree.Node.Action;
 using MorseKernelATL;
 
@@ -9,7 +8,7 @@ namespace gui.Tree.Node.ActionAllocator
 	/// </summary>
 	public interface IActionFactory
 	{
-        bool Corresponds(IKernelNode node );
-        ComputationNodeAction CreateAction(IKernelNode node);
+		bool Corresponds(IKernelNode node);
+		ComputationNodeAction CreateAction(IKernelNode node);
 	}
 }

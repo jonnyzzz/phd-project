@@ -5,30 +5,30 @@ using gui.Visualization.JonATL;
 
 namespace gui.Tree.Node.Action
 {
-    public class ComputationNodeVisualizer3D : ComputationNodeAction
-    {
-        IntPtr graph;
+	public class ComputationNodeVisualizer3D : ComputationNodeAction
+	{
+		private IntPtr graph;
 
-        public ComputationNodeVisualizer3D(IntPtr graph) : base()
-        {
-            this.graph = graph;
-            menus = new ComputationNodeMenuItem[]
-                {
-                    ComputationNodeMenuFactory.VisualizeAction(new ComputationNodeMenuFactory.UniversalMenuItemClick(visualize)),
-                };
-        }
+		public ComputationNodeVisualizer3D(IntPtr graph) : base()
+		{
+			this.graph = graph;
+			menus = new ComputationNodeMenuItem[]
+				{
+					ComputationNodeMenuFactory.VisualizeAction(new ComputationNodeMenuFactory.UniversalMenuItemClick(visualize)),
+				};
+		}
 
-        public override ComputationNodeMenuItem[] getMenuItems()
-        {
-            return menus;
-        }
+		public override ComputationNodeMenuItem[] getMenuItems()
+		{
+			return menus;
+		}
 
-        ComputationNodeMenuItem[] menus;
+		private ComputationNodeMenuItem[] menus;
 
-        public void visualize()
-        {
-            Visualization3D vis = new Visualization3D();
-            vis.ShowMe(graph);
-        }
-    }
+		public void visualize()
+		{
+			Visualization3D vis = new Visualization3D();
+			vis.ShowMe(graph);
+		}
+	}
 }

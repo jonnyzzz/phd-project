@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Windows.Forms;
-using gui.Tree.Node;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
 using MorseKernelATL;
@@ -14,22 +13,22 @@ namespace gui.Tree.Node
 	public class ComputationNodePlural : ComputationNode
 	{
 		private ArrayList nodes = new ArrayList();
-		
+
 		public ComputationNodePlural() : base()
 		{
-			
 		}
 
 		protected override ComputationNodeMenuItem[] getMenuItems()
 		{
-			if (nodes.Count == 0 ) 
-				return new ComputationNodeMenuItem[]{};
-					else return new ComputationNodeMenuItem[] {
-					    ComputationNodeMenuFactory.getMenuCreateGroupNode(
-							new ComputationNodeMenuFactory.UniversalMenuItemClick(onCreateNode)
-																  ) 
-															  };
-		}		
+			if (nodes.Count == 0)
+				return new ComputationNodeMenuItem[] {};
+			else return new ComputationNodeMenuItem[]
+				{
+					ComputationNodeMenuFactory.getMenuCreateGroupNode(
+						new ComputationNodeMenuFactory.UniversalMenuItemClick(onCreateNode)
+						)
+				};
+		}
 
 		private void onCreateNode()
 		{
@@ -43,7 +42,8 @@ namespace gui.Tree.Node
 					gr.addNode(nodeSingular.Node as CSymbolicImageGraph);
 				}
 				kernelNode = gr;
-			} else if (node.Node is CProjectiveBundleGraph)
+			}
+			else if (node.Node is CProjectiveBundleGraph)
 			{
 				CProjectiveBundleGroup gr = Runner.Kernel.CreateProjectiveBundleGroup() as CProjectiveBundleGroup;
 				foreach (ComputationNodeSingular nodeSingular in nodes)
@@ -51,15 +51,16 @@ namespace gui.Tree.Node
 					gr.addNode(nodeSingular.Node as CProjectiveBundleGraph);
 				}
 				kernelNode = gr;
-			} else
+			}
+			else
 			{
 				throw new Exception("Strange!!!state!!!exception!!!");
 			}
 
-            node.Parent.Nodes.Add(ComputationNode.createComputationNode(kernelNode));
-			this.dehighlightChildrens();			
+			node.Parent.Nodes.Add(ComputationNode.createComputationNode(kernelNode));
+			this.dehighlightChildrens();
 		}
-		
+
 		public bool hasGroupableTypes(IKernelNode node)
 		{
 			return (node is CSymbolicImageGraph ||
@@ -71,7 +72,7 @@ namespace gui.Tree.Node
 			MessageBox.Show("Unable to add node to group", "Group Error");
 		}
 
-		private bool CanAdd(ComputationNodeSingular node) 
+		private bool CanAdd(ComputationNodeSingular node)
 		{
 			foreach (ComputationNodeSingular computationNode in nodes)
 			{
@@ -83,7 +84,7 @@ namespace gui.Tree.Node
 		}
 
 		public bool addNode(ComputationNode mnode)
-		{			
+		{
 			if (!(mnode is ComputationNodeSingular)) return false;
 
 			ComputationNodeSingular node = mnode as ComputationNodeSingular;
@@ -104,7 +105,7 @@ namespace gui.Tree.Node
 		}
 
 		public void highlightChildrens()
-		{			
+		{
 			foreach (ComputationNode computationNode in nodes)
 			{
 				computationNode.Checked = true;
@@ -120,10 +121,10 @@ namespace gui.Tree.Node
 			}
 		}
 
-
 		#region static functions
 
 		private static ComputationNodePlural group = null;
+
 		public static ComputationNodePlural getCurrentGroup()
 		{
 			if (group == null)
@@ -132,6 +133,7 @@ namespace gui.Tree.Node
 			}
 			return group;
 		}
+
 		#endregion
 	}
 }

@@ -16,19 +16,21 @@ namespace gui.Tree.Node.Factory
 		}
 
 		#region dynamic casters
+
 		private static int[][] toArrays(ISubdevideParams subd, int dimension)
 		{
 			int[][] data = new int[1][];
 			data[0] = new int[dimension];
-			if (subd != null )
+			if (subd != null)
 			{
-				for (int i=0; i<dimension; i++)
+				for (int i = 0; i < dimension; i++)
 				{
-					data[0][i] = subd.getCellDevider(i);				
+					data[0][i] = subd.getCellDevider(i);
 				}
-			} else
+			}
+			else
 			{
-				for (int i=0; i<dimension; i++)
+				for (int i = 0; i < dimension; i++)
 				{
 					data[0][i] = 2;
 				}
@@ -42,63 +44,68 @@ namespace gui.Tree.Node.Factory
 			data[0] = new int[dimension];
 			data[1] = new int[dimension];
 			if (subd != null)
-			{							
-				for (int i=0; i<dimension; i++)
+			{
+				for (int i = 0; i < dimension; i++)
 				{
 					data[0][i] = subd.getCellDevider(i);
 					data[1][i] = subd.getCellPoints(i);
 				}
-			} else
+			}
+			else
 			{
-				for (int i=0; i<dimension; i++)
+				for (int i = 0; i < dimension; i++)
 				{
 					data[0][i] = 2;
 					data[1][i] = 2;
-				}				
+				}
 			}
-			return data;			
+			return data;
 		}
 
 		private static int[][] toArrays(IExtendablePointParams subd, int dimension)
 		{
 			return toArrays(subd as ISubdevideParams, dimension);
 		}
+
 		#endregion
 
 		#region ISubdevideParams...
+
 		public static ISubdevideParams ParamsSubdevide(IWin32Window owner, IGraph node, ISubdevideParams param)
 		{
-		    Log.LogMessage(typeof(ISubdevideParams), "ISubdevideParams invoke");
+			Log.LogMessage(typeof (ISubdevideParams), "ISubdevideParams invoke");
 
 			NextStepParams ps = new NextStepParams();
 			int dimension = node.graphDimension();
 			int[][] par = toArrays(param, dimension);
-            	
-			if (ps.ShowDialog(owner, par, dimension) != DialogResult.OK) 
+
+			if (ps.ShowDialog(owner, par, dimension) != DialogResult.OK)
 			{
 				return null;
-			} 
-			else 
+			}
+			else
 			{
 				par = ps.Result;
-				return new SubdevideParams(par[0]);			
+				return new SubdevideParams(par[0]);
 			}
 		}
 
 		protected class SubdevideParams : ISubdevideParams
-		{	
-			private int[] devider;		
+		{
+			private int[] devider;
 
 			public SubdevideParams(int[] devider)
 			{
 				this.devider = devider;
 			}
+
 			public int getCellDevider(int axis)
 			{
 				if (axis < devider.Length)
 				{
 					return devider[axis];
-				} else
+				}
+				else
 				{
 					throw new NotImplementedException();
 				}
@@ -110,23 +117,25 @@ namespace gui.Tree.Node.Factory
 			}
 
 		}
+
 		#endregion
 
 		#region ISubdevidablePointParams...
+
 		public static ISubdevidePointParams ParamsSubdevidePoint(IWin32Window owner, IGraph node, ISubdevidePointParams param)
 		{
 			NextStepParams ps = new NextStepParams();
 			int dimension = node.graphDimension();
 			int[][] par = toArrays(param, dimension);
-            	
+
 			if (ps.ShowDialog(owner, par, dimension) != DialogResult.OK)
 			{
 				return null;
-			} 
-			else 
+			}
+			else
 			{
 				par = ps.Result;
-				return new SubdevididePointParams(par[0], par[1]);		
+				return new SubdevididePointParams(par[0], par[1]);
 			}
 		}
 
@@ -134,11 +143,13 @@ namespace gui.Tree.Node.Factory
 		{
 			private SubdevideParams factor;
 			private SubdevideParams ks;
+
 			public SubdevididePointParams(int[] factor, int[] ks)
 			{
 				this.factor = new SubdevideParams(factor);
 				this.ks = new SubdevideParams(ks);
 			}
+
 			public int getCellDevider(int axis)
 			{
 				return factor.getCellDevider(axis);
@@ -154,32 +165,36 @@ namespace gui.Tree.Node.Factory
 				return ks.getCellDevider(axis);
 			}
 		}
+
 		#endregion
 
 		#region IExtendablePointParams
-        public static IExtendablePointParams ParamsExtend(IWin32Window owner, IComputationExtendingResult result, IExtendablePointParams param)
-        {
-            NextStepParams ps = new NextStepParams();
-            int dimension = result.PointMethodProjectiveExtensionDimension();
-            int[][] par = toArrays(param, dimension);
-            	
-            if (ps.ShowDialog(owner, par, dimension) != DialogResult.OK)
-            {
-                return null;
-            } 
-            else 
-            {	
-                par = ps.Result;
-                return new ExtendableParams(par[0]);		
-            }
-        }
 
-        protected class ExtendableParams : SubdevideParams, IExtendablePointParams
-        {
-            public ExtendableParams(int[] factor) : base(factor) {}
-        }
+		public static IExtendablePointParams ParamsExtend(IWin32Window owner, IComputationExtendingResult result, IExtendablePointParams param)
+		{
+			NextStepParams ps = new NextStepParams();
+			int dimension = result.PointMethodProjectiveExtensionDimension();
+			int[][] par = toArrays(param, dimension);
+
+			if (ps.ShowDialog(owner, par, dimension) != DialogResult.OK)
+			{
+				return null;
+			}
+			else
+			{
+				par = ps.Result;
+				return new ExtendableParams(par[0]);
+			}
+		}
+
+		protected class ExtendableParams : SubdevideParams, IExtendablePointParams
+		{
+			public ExtendableParams(int[] factor) : base(factor)
+			{
+			}
+		}
+
 		#endregion
-
 
 		private class HomotopParams : IHomotopParams
 		{
@@ -188,7 +203,7 @@ namespace gui.Tree.Node.Factory
 			public HomotopParams(double[] array)
 			{
 				this.data = array;
-			
+
 			}
 
 			public double getCoordinateAt(int axis)
@@ -210,7 +225,8 @@ namespace gui.Tree.Node.Factory
 			if (pc.ShowDialog(owner) == DialogResult.OK)
 			{
 				return new HomotopParams(pc.Array);
-			} else
+			}
+			else
 			{
 				return null;
 			}

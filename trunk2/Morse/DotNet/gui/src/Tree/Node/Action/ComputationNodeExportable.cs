@@ -1,6 +1,4 @@
 using System.Windows.Forms;
-using gui.Visualization.GnuPlot;
-using gui.Tree.Node.Action;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
 using MorseKernelATL;
@@ -13,12 +11,14 @@ namespace gui.Tree.Node.Action
 	public class ComputationNodeExportable : ComputationNodeAction
 	{
 		private IExportData node;
+
 		public ComputationNodeExportable(IExportData node)
 		{
 			this.node = node;
-			items = new ComputationNodeMenuItem[] {
-			    ComputationNodeMenuFactory.getMenuExportData(new ComputationNodeMenuFactory.UniversalMenuItemClick(OnExportData)),		        
-            };
+			items = new ComputationNodeMenuItem[]
+				{
+					ComputationNodeMenuFactory.getMenuExportData(new ComputationNodeMenuFactory.UniversalMenuItemClick(OnExportData)),
+				};
 		}
 
 		public override ComputationNodeMenuItem[] getMenuItems()
@@ -30,19 +30,19 @@ namespace gui.Tree.Node.Action
 		{
 			SaveFileDialog sfd = new SaveFileDialog();
 			sfd.OverwritePrompt = true;
-            sfd.DefaultExt = "points";
-            sfd.FileName = "points";
-            sfd.Filter = "Point files|*.points|All files|*.*";
-            sfd.Title = "Save Points of selected node";
-			
-			
-			if (sfd.ShowDialog(null) == DialogResult.OK )
+			sfd.DefaultExt = "points";
+			sfd.FileName = "points";
+			sfd.Filter = "Point files|*.points|All files|*.*";
+			sfd.Title = "Save Points of selected node";
+
+
+			if (sfd.ShowDialog(null) == DialogResult.OK)
 			{
 				node.ExportData(sfd.FileName);
 				MessageBox.Show(null, "Data was exported to " + sfd.FileName, "Export");
-			} 
+			}
 		}
 
-	    ComputationNodeMenuItem[] items = new ComputationNodeMenuItem[]{};
+		private ComputationNodeMenuItem[] items = new ComputationNodeMenuItem[] {};
 	}
 }
