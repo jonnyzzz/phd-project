@@ -534,7 +534,7 @@ namespace gui.Forms
 			wr.WriteWhitespace("\n");
 			wr.WriteStartElement(XML_FUNCTION);
 
-			string s = createFunctionSource();
+				string s = createFunctionSource();
 			string[] ss = s.Split(';');
 
 			for (int i = 0; i < ss.Length; i++)

@@ -634,6 +634,16 @@
                     BuildAction = "None"
                 />
                 <File
+                    RelPath = "src\Tree\Node\Forms\IntParametersRowInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\IParametersRowInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Tree\Node\Forms\NextStepParams.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
@@ -647,6 +657,21 @@
                     RelPath = "src\Tree\Node\Forms\NextStepParams.resx"
                     DependentUpon = "NextStepParams.cs"
                     BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\ParametersInputForm.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\ParametersInputForm.resx"
+                    DependentUpon = "ParametersInputForm.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\PercentParameterRowInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\Tree\Node\Forms\PointCoordinate.cs"

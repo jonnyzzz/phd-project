@@ -8,6 +8,7 @@ using gui.Forms;
 using gui.Logger;
 using gui.Resource;
 using gui.Tree.Node.ActionAllocator;
+using gui.Tree.Node.Forms;
 using gui.Visualization.JonATL;
 using MorseKernelATL;
 
@@ -113,7 +114,14 @@ namespace gui
 				else if (param == "TestForm")
 				{
 					Application.Run(new TestForm());
-				} else {
+				} 
+				else if (param == "numbers" ) 
+				{
+					Application.Run(new ParametersInputForm(
+						new IParametersRowInfo[] { new IntParametersRowInfo(3, "hello")})
+					);				
+				} else
+				{
 					Log.LogMessage(typeof (Runner), "Unable to test. Exit");
 					MessageBox.Show("Wrong test parameter. Unable to Continue");
 				}

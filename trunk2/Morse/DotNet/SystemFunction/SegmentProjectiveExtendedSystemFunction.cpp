@@ -41,6 +41,7 @@ int SegmentProjectiveExtendedSystemFunction::getFunctionDimension() {
 }
 
 void SegmentProjectiveExtendedSystemFunction::evaluate() {
+
     function->evaluate();
     computeEx(
         &input[real_dimension], 

@@ -26,7 +26,7 @@ typedef list< MorsePair > MorseResults;
 #define MULTI(x,y) {for(int i=0;i<y;i++){x;}};
 
 void MorseTest::statr() {
-	FunctionFactory fac("y1=3*x1;y2=0.2*x2;");
+	FunctionFactory fac("y1=3*x1;y2=1/3*x2;");
 
 	SmartFunction func = new SystemFunction(&fac, 2);
 	SmartDFunction dfunc = new SystemFunctionDerivate(&fac, 2);

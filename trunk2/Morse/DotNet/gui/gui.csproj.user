@@ -11,7 +11,7 @@
                     RemoteDebugEnabled = "false"
                     RemoteDebugMachine = ""
                     StartAction = "Project"
-                    StartArguments = "/dtest=TestForm /resources=E:\Projects\Morse\DotNetProject\Morse\DotNet\resource\included\ /temporary=o:\ /internal"
+                    StartArguments = "/test=numbers /resources=E:\Projects\Morse\DotNetProject\Morse\DotNet\resource\included\ /temporary=o:\ /internal"
                     StartPage = ""
                     StartProgram = ""
                     StartURL = ""
