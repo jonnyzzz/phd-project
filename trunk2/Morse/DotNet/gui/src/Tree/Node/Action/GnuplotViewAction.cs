@@ -62,14 +62,13 @@ namespace gui.Tree.Node.Action
 				if (kernelNode is IGroupNode)
 				{
 					IGroupNode groupNode = (IGroupNode) kernelNode;
-					ArrayList items = new ArrayList();
+					IExportData[] data = new IExportData[groupNode.nodeCount()];
 					for (int i = 0; i < groupNode.nodeCount(); i++)
 					{
 						IKernelNode knode = groupNode.getNode(i);
 						//We believe that any node of gourp implements IExportData interface!
-						items.Add((IExportData) knode);
+						data[i] = ((IExportData) knode);
 					}
-					IExportData[] data = items.ToArray(typeof (IExportData)) as IExportData[];
 					return new GnuplotViewAction(data, ((IGraph) kernelNode).graphDimension());
 				}
 				else

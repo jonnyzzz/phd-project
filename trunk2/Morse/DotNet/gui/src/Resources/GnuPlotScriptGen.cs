@@ -24,6 +24,8 @@ namespace gui.Resource
 			if (!isFirst)
 				builder.Append(" "  + template.Delimiter + " ");
 
+			isFirst = false;
+
 			TemplateProcessor processor = new TemplateProcessor(" " + template.BodyTemplate + " ");
 			processor.subsitute("file", filename);
 

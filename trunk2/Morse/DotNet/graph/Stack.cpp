@@ -16,10 +16,6 @@ static char THIS_FILE[] = __FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-const int hashMax = 315691; //it probably is prime
-const int hashBytes = 30;
-const int hashLength = hashMax / hashBytes;
-
 Stack::Stack(Graph* graph) : graph(graph)
 {
 	root = NULL;
@@ -73,10 +69,10 @@ bool Stack::containsTest(Node* node) {
 
 bool Stack::contains(Node* node) {
 	if (graph->readFlag(node, flagID)) {
-		ASSERT(containsTest(node));
+		//ASSERT(containsTest(node));
 		return true;
 	} else {
-		ASSERT(!containsTest(node));
+		//ASSERT(!containsTest(node));
 		return false;
 	}
 	//return containsTest(node);

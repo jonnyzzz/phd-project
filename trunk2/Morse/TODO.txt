@@ -1,13 +1,13 @@
 Wrong answer for 0.5 2 linear system. There is no -ln2 answer. only +ln2!!!
 FIX Shouldn't allow to start without resources!
-Resources -> XML
+FIX Resources -> XML
 GraphNodeEnumerator leak
-Components in color in GNU PLOT
+FIX Components in color in GNU PLOT
 3D Box in gnu plot
 Document class global integration
 Document dirty flag
 FIX Serialization of Group nodes
-GNUPLOT template -> XML
+FIX GNUPLOT template -> XML
 GNUPLOT smart template
 GNUPLOT image saver
 GNUPLOT throught pipe
@@ -22,10 +22,13 @@ Optimized fixed pointes construction
 Lazy graph (.NET?)
 NodeParameters class
 FIX TarjanStackOptimization //contains works in O(1)
-Dimension increment doesn't kills imputed system
+Dimension increment doesn't kills inputted system
 Save fail doesn't kills app
 OpenGL Visualization
 Open API (COM SERVER, Abstract action for IKenelNode) IKernelNode -> SupportedActions
 FIX Morse: Use center of cell to compute value for arc
 Morse lazy arc value (re)computation
 FIX Implement cell extraction algorithm for point method in Neighbourhood way
+Graph optimized memory allocation
+Starting computation from node set
+Support for non-standard space (i.e. non rectangular, but with cells)
