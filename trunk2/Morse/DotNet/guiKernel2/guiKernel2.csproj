@@ -111,6 +111,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\ActionFactory\ActionNamingFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\ActionFactory\ActionWrapperFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

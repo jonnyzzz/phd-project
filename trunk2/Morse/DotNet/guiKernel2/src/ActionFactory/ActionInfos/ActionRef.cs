@@ -24,7 +24,8 @@ namespace guiKernel2.ActionFactory.ActionInfos
 
 		public ActionWrapper CreateInstance()
 		{
-			return Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, IsLeaf);
+			string caption = Core.Instance.ActionNamingFactory.FindActionCaption(ActionName);
+			return Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, caption, IsLeaf);
 		}
 
 		public string ActionName

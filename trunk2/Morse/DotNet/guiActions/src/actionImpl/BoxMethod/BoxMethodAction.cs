@@ -14,7 +14,7 @@ namespace guiActions.ActionImpl
 	[ActionMapping(typeof(IBoxMethodAction), typeof(IBoxMethodParameters))]
 	public class BoxMethodAction : Action
 	{
-		public BoxMethodAction(bool isChainLeaf) : base(isChainLeaf)
+		public BoxMethodAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
 		{
 		}
 
@@ -27,11 +27,6 @@ namespace guiActions.ActionImpl
 		protected override IAction CreateAction()
 		{
 			return new CBoxMethodActionClass();
-		}
-
-		public override string ActionName
-		{
-			get { return "Linear Method"; }
 		}
 	}
 }

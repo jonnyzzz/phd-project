@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using guiKernel2.ActionFactory;
 using guiKernel2.Document;
+using guiKernel2.src.ActionFactory;
 using guiKernel2.xml;
 using MorseKernel2;
 
@@ -18,6 +19,7 @@ namespace guiKernel2.Container
 		{			
 			instance = this;
 			nextActionFactory = new NextActionFactory();
+			actionNamingFactory = new ActionNamingFactory();
 
 			XMLParser xmlParser = new XMLParser();
 			
@@ -25,6 +27,7 @@ namespace guiKernel2.Container
 			actionWrapperFactory = new ActionWrapperFactory(assemblies);
 		}
 
+		private ActionNamingFactory actionNamingFactory = null;
         private NextActionFactory nextActionFactory = null;
 		private ActionWrapperFactory actionWrapperFactory = null;
 		private Assembly[] assemblies = null;
@@ -60,6 +63,11 @@ namespace guiKernel2.Container
 			{
 				return nextActionFactory;
 			}
+		}
+
+		public ActionNamingFactory ActionNamingFactory
+		{
+			get { return actionNamingFactory; }
 		}
 
 		public ActionWrapperFactory ActionWrapperFactory

@@ -14,7 +14,7 @@ namespace guiActions.actionImpl.Tarjan
 	[ActionMapping(typeof(ITarjanAction), typeof(ITarjanParameters))]
 	public class TarjanAction : Action
 	{
-		public TarjanAction(bool isChainLeaf) : base(isChainLeaf)
+		public TarjanAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
 		{
 		}
 
@@ -28,9 +28,5 @@ namespace guiActions.actionImpl.Tarjan
 			return new CTarjanActionClass();
 		}
 
-		public override string ActionName
-		{
-			get { return "Strong Components Localization"; }
-		}
 	}
 }

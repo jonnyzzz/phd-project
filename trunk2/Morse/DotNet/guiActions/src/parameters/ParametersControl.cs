@@ -24,6 +24,14 @@ namespace guiActions.Parameters
 			}
 		}
 
+		public virtual bool NeedShowForm
+		{
+			get
+			{
+				return true;
+			}
+		}
+
 		private IParameters cachedParameters = null;
 		
 		public IParameters CachedParameters

@@ -49,6 +49,7 @@ namespace guiKernel2.xml
 		{
 			ParseActionDefs(document);	
 			ParseActionAssemblies(document);
+			ParseActionNames(document);
 			XmlDocument[] references = ParseMappingRef(document);
 			foreach (XmlDocument referenceDocument in references)
 			{
@@ -75,6 +76,17 @@ namespace guiKernel2.xml
 
 			return (XmlDocument[])xmlDocuments.ToArray(typeof(XmlDocument));
 		}
+
+		private void ParseActionNames(XmlDocument document)
+		{
+			XmlNodeList list = document.SelectNodes("mappings/names/action");
+			foreach (XmlNode node in list)
+			{
+				XmlAttributeCollection attributes = node.Attributes;
+				Core.Instance.ActionNamingFactory.AddActionNaming(attributes["name"].Value, attributes["caption"].Value);
+			}
+		}
+
 
 		private void ParseActionAssemblies(XmlDocument document)
 		{
@@ -107,7 +119,7 @@ namespace guiKernel2.xml
 
 		private void ParseActionDefs(XmlDocument document)
 		{
-			XmlNodeList list = document.SelectNodes("mappings/action");
+			XmlNodeList list = document.SelectNodes("mappings/actions/action");
 	
 			foreach (XmlNode node in list)
 			{

@@ -362,6 +362,17 @@ interface IDummy : IDispatch {
 
 [
 	object,
+	uuid(5896F6EB-CFBF-406C-A0FD-EA25367673D0),
+	dual,
+	helpstring("IDummy1 Interface"),
+	pointer_default(unique)
+] 
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy1.h"
+interface IDummy1 : IDispatch {
+};
+
+[
+	object,
 	uuid(9B3DA2D8-E279-4552-99F4-13AA066642D5),
 	dual,
 	helpstring("IWritableFunction Interface"),
@@ -456,17 +467,6 @@ interface IWritableKernell : IDispatch {
 ] 
 #line 14 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\kernellimpl.h"
 interface IKernellImpl : IWritableKernell {
-};
-
-[
-	object,
-	uuid(5896F6EB-CFBF-406C-A0FD-EA25367673D0),
-	dual,
-	helpstring("IDummy1 Interface"),
-	pointer_default(unique)
-] 
-#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy1.h"
-interface IDummy1 : IDispatch {
 };
 
 
@@ -570,6 +570,19 @@ library MorseKernel2
 	};
 
 	[
+		version(1.0),
+		uuid(62172280-D7A2-46C1-AF3D-E8762035048E),
+		helpstring("Dummy1 Class")
+	] 
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy1.h"
+	coclass CDummy1 {
+		interface IDummy1;
+		interface IPointMethodParameters;
+		interface IComputationParameters;
+		interface IParameters;
+	};
+
+	[
 		version(1.1),
 		uuid(FDFB8D0E-74FF-439C-A13B-4A39387B7037),
 		helpstring("FunctionImpl Class")
@@ -615,19 +628,6 @@ library MorseKernel2
 		interface IKernellImpl;
 		interface IWritableKernell;
 		interface IKernell;
-	};
-
-	[
-		version(1.0),
-		uuid(62172280-D7A2-46C1-AF3D-E8762035048E),
-		helpstring("Dummy1 Class")
-	] 
-#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy1.h"
-	coclass CDummy1 {
-		interface IDummy1;
-		interface IPointMethodParameters;
-		interface IComputationParameters;
-		interface IParameters;
 	};
 
 }

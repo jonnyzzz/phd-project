@@ -15,7 +15,7 @@ namespace guiActions.src.actionImpl.PointMethod
 	[ActionMapping(typeof(IPointMethodAction), typeof(IPointMethodParameters))]
 	public class PointMethodAction : Action
 	{
-		public PointMethodAction(bool isChainLeaf) : base(isChainLeaf)
+		public PointMethodAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
 		{
 		}
 
@@ -28,11 +28,6 @@ namespace guiActions.src.actionImpl.PointMethod
 		protected override IAction CreateAction()
 		{
 			return new CPointMethodActionClass();
-		}
-
-		public override string ActionName
-		{
-			get { return "Point Method"; }
 		}
 	}
 }

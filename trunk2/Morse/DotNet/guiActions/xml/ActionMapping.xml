@@ -1,18 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+<?xml version="1.0" encoding="utf-8" ?> 
 
 <mappings>
-	<action name="IBoxMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="false">		
-		<nextActions>		
-			<actionReference name="ITarjanAction" isLeaf="true"/>
-		</nextActions>
-	</action>
+   <actions>
+		<action name="IBoxMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="false">	
+			<nextActions>		
+				<actionReference name="ITarjanAction" isLeaf="true" />
+			</nextActions>		
+		</action>
 	
-	<action name="IPointMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="false">		
-		<nextActions>		
-			<actionReference name="ITarjanAction" isLeaf="true"/>
-		</nextActions>
-	</action>
-
+		<action name="IPointMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="false">		
+			<nextActions>		
+				<actionReference name="ITarjanAction" isLeaf="true"/>
+			</nextActions>
+		</action>
+    </actions>
+    
+    <names>
+		<action name="IBoxMethodAction" caption="Linear Method" />
+		<action name="IPointMethodAction" caption="Point Method" />
+		<action name="ITarjanAction" caption="Strong Component Localization" />    
+    </names>
 
 	<assemblies>	
 		<actionAssembly name="guiActions"/>

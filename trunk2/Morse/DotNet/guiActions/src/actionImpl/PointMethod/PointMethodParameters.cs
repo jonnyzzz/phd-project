@@ -1,9 +1,3 @@
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Windows.Forms;
 using guiActions.Parameters;
 using guiControls.Control;
 using guiControls.Grid.Rows;
@@ -40,6 +34,8 @@ namespace guiActions.src.actionImpl.PointMethod
 			ks = new IntPlusGridData("Points in cell", dimension);
 			offset1 = new DoublePercent("Left Offset", dimension);
 			offset2 = new DoublePercent("Right Offset", dimension);
+
+			UpdateGrid();
 
 		}
 

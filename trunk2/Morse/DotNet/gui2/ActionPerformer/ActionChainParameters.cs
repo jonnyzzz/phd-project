@@ -38,7 +38,7 @@ namespace gui2.ActionPerformer
 		public DialogResult ShowParametersSelectionDialog(IWin32Window owner) 
 		{
 			ParametersSelector selector = new ParametersSelector(GetControls());
-			DialogResult result = selector.ShowDialog(owner);
+			DialogResult result = selector.ShowDialogOptimized(owner);
 			if (result == DialogResult.OK) wasSubmitted = true;
 			return result;
 		}

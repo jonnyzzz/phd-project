@@ -85,11 +85,13 @@ STDMETHODIMP CPointMethodAction::Do(IResultSet* in, IResultSet** out) {
 	ATLASSERT(SUCCEEDED(hr));
 
 	hr = parameters->UseOffsets(&data);
-	bool useOffset = data == TRUE?true:false;
+	bool useOffset = (data == TRUE)?true:false;
 
 	int dimension;
 	hr = function->GetDimension(&dimension);
 	ATLASSERT(SUCCEEDED(hr));
+
+	cout<<"Dimenstion = "<<dimension<<"\n";
 
 	int* factor = new int[dimension];
 	int* ks = new int[dimension];

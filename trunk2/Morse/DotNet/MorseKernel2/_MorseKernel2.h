@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sat Mar 19 00:35:26 2005
+/* at Sun Mar 20 22:22:25 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -189,6 +189,12 @@ typedef interface IDummy IDummy;
 #endif 	/* __IDummy_FWD_DEFINED__ */
 
 
+#ifndef __IDummy1_FWD_DEFINED__
+#define __IDummy1_FWD_DEFINED__
+typedef interface IDummy1 IDummy1;
+#endif 	/* __IDummy1_FWD_DEFINED__ */
+
+
 #ifndef __IWritableFunction_FWD_DEFINED__
 #define __IWritableFunction_FWD_DEFINED__
 typedef interface IWritableFunction IWritableFunction;
@@ -235,12 +241,6 @@ typedef interface IWritableKernell IWritableKernell;
 #define __IKernellImpl_FWD_DEFINED__
 typedef interface IKernellImpl IKernellImpl;
 #endif 	/* __IKernellImpl_FWD_DEFINED__ */
-
-
-#ifndef __IDummy1_FWD_DEFINED__
-#define __IDummy1_FWD_DEFINED__
-typedef interface IDummy1 IDummy1;
-#endif 	/* __IDummy1_FWD_DEFINED__ */
 
 
 #ifndef __CBoxMethodAction_FWD_DEFINED__
@@ -327,6 +327,18 @@ typedef struct CDummy CDummy;
 #endif 	/* __CDummy_FWD_DEFINED__ */
 
 
+#ifndef __CDummy1_FWD_DEFINED__
+#define __CDummy1_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CDummy1 CDummy1;
+#else
+typedef struct CDummy1 CDummy1;
+#endif /* __cplusplus */
+
+#endif 	/* __CDummy1_FWD_DEFINED__ */
+
+
 #ifndef __CFunctionImpl_FWD_DEFINED__
 #define __CFunctionImpl_FWD_DEFINED__
 
@@ -373,18 +385,6 @@ typedef struct CKernellImpl CKernellImpl;
 #endif /* __cplusplus */
 
 #endif 	/* __CKernellImpl_FWD_DEFINED__ */
-
-
-#ifndef __CDummy1_FWD_DEFINED__
-#define __CDummy1_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CDummy1 CDummy1;
-#else
-typedef struct CDummy1 CDummy1;
-#endif /* __cplusplus */
-
-#endif 	/* __CDummy1_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -4298,6 +4298,116 @@ EXTERN_C const IID IID_IDummy;
 #endif 	/* __IDummy_INTERFACE_DEFINED__ */
 
 
+#ifndef __IDummy1_INTERFACE_DEFINED__
+#define __IDummy1_INTERFACE_DEFINED__
+
+/* interface IDummy1 */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IDummy1;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("5896F6EB-CFBF-406C-A0FD-EA25367673D0")
+    IDummy1 : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IDummy1Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IDummy1 * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IDummy1 * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IDummy1 * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IDummy1 * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IDummy1 * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IDummy1 * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IDummy1 * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IDummy1Vtbl;
+
+    interface IDummy1
+    {
+        CONST_VTBL struct IDummy1Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IDummy1_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IDummy1_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IDummy1_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IDummy1_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IDummy1_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IDummy1_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IDummy1_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IDummy1_INTERFACE_DEFINED__ */
+
+
 #ifndef __IWritableFunction_INTERFACE_DEFINED__
 #define __IWritableFunction_INTERFACE_DEFINED__
 
@@ -5318,116 +5428,6 @@ EXTERN_C const IID IID_IKernellImpl;
 #endif 	/* __IKernellImpl_INTERFACE_DEFINED__ */
 
 
-#ifndef __IDummy1_INTERFACE_DEFINED__
-#define __IDummy1_INTERFACE_DEFINED__
-
-/* interface IDummy1 */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IDummy1;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("5896F6EB-CFBF-406C-A0FD-EA25367673D0")
-    IDummy1 : public IDispatch
-    {
-    public:
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IDummy1Vtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IDummy1 * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IDummy1 * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IDummy1 * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IDummy1 * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IDummy1 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IDummy1 * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IDummy1 * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        END_INTERFACE
-    } IDummy1Vtbl;
-
-    interface IDummy1
-    {
-        CONST_VTBL struct IDummy1Vtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IDummy1_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IDummy1_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IDummy1_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IDummy1_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IDummy1_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IDummy1_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IDummy1_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IDummy1_INTERFACE_DEFINED__ */
-
-
 
 #ifndef __MorseKernel2_LIBRARY_DEFINED__
 #define __MorseKernel2_LIBRARY_DEFINED__
@@ -5494,6 +5494,14 @@ class DECLSPEC_UUID("8C3F6AAB-F725-4C70-A92A-7E4BD2A30C23")
 CDummy;
 #endif
 
+EXTERN_C const CLSID CLSID_CDummy1;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("62172280-D7A2-46C1-AF3D-E8762035048E")
+CDummy1;
+#endif
+
 EXTERN_C const CLSID CLSID_CFunctionImpl;
 
 #ifdef __cplusplus
@@ -5524,14 +5532,6 @@ EXTERN_C const CLSID CLSID_CKernellImpl;
 
 class DECLSPEC_UUID("96E908D0-29BD-423D-8CA8-9F4343C796A0")
 CKernellImpl;
-#endif
-
-EXTERN_C const CLSID CLSID_CDummy1;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("62172280-D7A2-46C1-AF3D-E8762035048E")
-CDummy1;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

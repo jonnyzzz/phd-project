@@ -23,11 +23,6 @@ namespace gui2.TreeNodes
 			this.action = action;
 			this.node = node;
 
-			if (action.IsChainLeaf)
-			{
-				this.Text = "<>" + this.Text;
-			}
-
 			this.MenuItems.Clear();
 			actionPath = Merge(beforeActions, action);
 			this.MenuItems.AddRange(
@@ -59,7 +54,7 @@ namespace gui2.TreeNodes
 				} 
 				else 
 				{
-					fontColor = Color.Green;
+					fontColor = Color.Blue;
 				}
 			} else
 			{
@@ -90,7 +85,7 @@ namespace gui2.TreeNodes
 			Font font;
 			if (action.IsChainLeaf)
 			{
-				font = new Font(defaultFont, FontStyle.Bold | FontStyle.Italic);	
+				font = new Font(defaultFont, FontStyle.Bold | FontStyle.Underline);	
 			} else
 			{
 				font = defaultFont;

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Windows.Forms;
 using guiActions.Parameters;
 using guiActions.src.parameters;
@@ -36,10 +37,26 @@ namespace gui2.Forms
 
 		public ParametersSelector(ParametersControl[] controls)
 		{
-			this.controls = controls;
+			this.controls = OptimizeControls(controls);
 			InitializeComponent();
 			parameterIndex = 0;
 			ShowCurrentParameterControl();
+		}
+
+		private ParametersControl[] OptimizeControls(ParametersControl[] controls)
+		{
+			ArrayList list = new ArrayList();
+			foreach (ParametersControl control in controls)
+			{
+				if (!control.NeedShowForm)
+				{
+					control.SubmitData();
+				} else
+				{
+					list.Add(control);
+				}
+			}
+			return (ParametersControl[])list.ToArray(typeof(ParametersControl));
 		}
 
 		private const string Title = "Set Parameters for selected ations {0} of {1}";
@@ -53,6 +70,11 @@ namespace gui2.Forms
 			this.Text = string.Format(Title, parameterIndex+1, controls.Length);
 		}
 
+		public DialogResult ShowDialogOptimized(IWin32Window owner)
+		{
+			if (this.controls.Length == 0) return System.Windows.Forms.DialogResult.OK;
+			return ShowDialog(owner);
+		}
 
 		/// <summary>
 		/// Clean up any resources being used.
@@ -207,7 +229,7 @@ namespace gui2.Forms
 
 		private void buttonBack_Click(object sender, System.EventArgs e)
 		{
-			if (parameterIndex > 1)
+			if (parameterIndex >= 1)
 			{
 				parameterIndex--;
 				ShowCurrentParameterControl();

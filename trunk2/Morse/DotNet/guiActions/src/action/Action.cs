@@ -10,13 +10,8 @@ namespace guiActions.Actions
 	/// </summary>
 	public abstract class Action : ActionWrapper
 	{
-		public Action(bool isChainLeaf) : base(isChainLeaf)
+		public Action(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
 		{
-		}
-
-		public override string ActionName
-		{
-			get { return this.GetType().Name; }
 		}
 
 		protected override MorseKernel2.IParameters Parameters

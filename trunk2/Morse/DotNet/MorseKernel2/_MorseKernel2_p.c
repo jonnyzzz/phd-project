@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sat Mar 19 00:35:26 2005
+/* at Sun Mar 20 22:22:25 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -240,6 +240,13 @@ extern const MIDL_STUBLESS_PROXY_INFO IDummy_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
+extern const MIDL_SERVER_INFO IDummy1_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IDummy1_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
 extern const MIDL_SERVER_INFO IWritableFunction_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IWritableFunction_ProxyInfo;
 
@@ -284,13 +291,6 @@ extern const MIDL_STUB_DESC Object_StubDesc;
 
 extern const MIDL_SERVER_INFO IKernellImpl_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IKernellImpl_ProxyInfo;
-
-
-extern const MIDL_STUB_DESC Object_StubDesc;
-
-
-extern const MIDL_SERVER_INFO IDummy1_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IDummy1_ProxyInfo;
 
 
 extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TABLE_SIZE ];
@@ -4450,6 +4450,72 @@ CInterfaceStubVtbl _IDummyStubVtbl =
 };
 
 
+/* Object interface: IDummy1, ver. 0.0,
+   GUID={0x5896F6EB,0xCFBF,0x406C,{0xA0,0xFD,0xEA,0x25,0x36,0x76,0x73,0xD0}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IDummy1_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IDummy1_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IDummy1_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IDummy1_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IDummy1_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IDummy1ProxyVtbl = 
+{
+    0,
+    &IID_IDummy1,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IDummy1_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IDummy1StubVtbl =
+{
+    &IID_IDummy1,
+    &IDummy1_ServerInfo,
+    7,
+    &IDummy1_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: IWritableFunction, ver. 0.0,
    GUID={0x9B3DA2D8,0xE279,0x4552,{0x99,0xF4,0x13,0xAA,0x06,0x66,0x42,0xD5}} */
 
@@ -4927,72 +4993,6 @@ CInterfaceStubVtbl _IKernellImplStubVtbl =
     &IKernellImpl_ServerInfo,
     8,
     &IKernellImpl_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
-/* Object interface: IDummy1, ver. 0.0,
-   GUID={0x5896F6EB,0xCFBF,0x406C,{0xA0,0xFD,0xEA,0x25,0x36,0x76,0x73,0xD0}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short IDummy1_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    0
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO IDummy1_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &IDummy1_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO IDummy1_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &IDummy1_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(7) _IDummy1ProxyVtbl = 
-{
-    0,
-    &IID_IDummy1,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */
-};
-
-
-static const PRPC_STUB_FUNCTION IDummy1_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION
-};
-
-CInterfaceStubVtbl _IDummy1StubVtbl =
-{
-    &IID_IDummy1,
-    &IDummy1_ServerInfo,
-    7,
-    &IDummy1_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };
 

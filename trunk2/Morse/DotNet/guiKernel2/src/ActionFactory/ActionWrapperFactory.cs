@@ -13,7 +13,7 @@ namespace guiKernel2.ActionFactory
 	/// </summary>
 	public class ActionWrapperFactory
 	{
-		Hashtable mapping = new Hashtable(); //Type -> Type
+		Hashtable mapping = new Hashtable(); //Type -> Typez
 		
 		public ActionWrapperFactory(Assembly[] assemblies)
 		{
@@ -46,16 +46,16 @@ namespace guiKernel2.ActionFactory
 		}
 
 
-		public ActionWrapper CreateActionWrapper(string actionName, bool isLeaf)
+		public ActionWrapper CreateActionWrapper(string actionName, string actionCaption, bool isLeaf)
 		{
-			return CreateActionWrapper(Core.GetType(actionName), isLeaf);			
+			return CreateActionWrapper(Core.GetType(actionName), actionCaption, isLeaf);			
 		}
 
-		private ActionWrapper CreateActionWrapper(Type actionType, bool isLeaf)
+		private ActionWrapper CreateActionWrapper(Type actionType, string actionCaption, bool isLeaf)
 		{
 			Type wrapperType = GetWrapperType(actionType);
-			ConstructorInfo info = wrapperType.GetConstructor(new Type[]{typeof(bool)});
-			return info.Invoke(new object[]{isLeaf}) as ActionWrapper;			
+			ConstructorInfo info = wrapperType.GetConstructor(new Type[]{typeof(string), typeof(bool)});
+			return info.Invoke(new object[]{actionCaption, isLeaf}) as ActionWrapper;			
 		}
 	}
 }
