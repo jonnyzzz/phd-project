@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}"
+        ProjectGuid = "{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}"
     >
         <Build>
             <Settings
-                ApplicationIcon = "App.ico"
+                ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "guiKernel2"
+                AssemblyName = "guiControls"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Library"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "guiKernel2"
+                RootNamespace = "guiControls"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -75,55 +75,42 @@
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
                 />
                 <Reference
-                    Name = "System.XML"
-                    AssemblyName = "System.Xml"
-                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
                 />
                 <Reference
-                    Name = "MorseKernel2"
-                    Guid = "{922445B5-C296-49D0-B69D-45FF70F8CE56}"
-                    VersionMajor = "1"
-                    VersionMinor = "0"
-                    Lcid = "0"
-                    WrapperTool = "tlbimp"
+                    Name = "System.Windows.Forms"
+                    AssemblyName = "System.Windows.Forms"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Windows.Forms.dll"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.XML"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
             </References>
         </Build>
         <Files>
             <Include>
                 <File
-                    RelPath = "App.ico"
-                    BuildAction = "Content"
-                />
-                <File
                     RelPath = "AssemblyInfo.cs"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TreeControl\ComputationNode.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Actions\ActionException.cs"
-                    SubType = "Code"
+                    RelPath = "TreeControl\ComputationTree.cs"
+                    SubType = "UserControl"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Actions\ComputationChain.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\Actions\IProgressBar.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\Document\Document.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\Node\Node.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
+                    RelPath = "TreeControl\ComputationTree.resx"
+                    DependentUpon = "ComputationTree.cs"
+                    BuildAction = "EmbeddedResource"
                 />
             </Include>
         </Files>
