@@ -2,7 +2,8 @@
 
 #include "stdafx.h"
 #include "ProjectiveBundleGraph.h"
-
+#include "../graph_simplex/romfunction2n.h"
+#include "../systemfunction/IMorseFunction.h"
 
 // CProjectiveBundleGraph
 
@@ -128,64 +129,68 @@ STDMETHODIMP CProjectiveBundleGraph::SubdevidePoint(ISubdevidePointParams* param
 	IFunction* function = NULL;
 	kernel->get_Function(&function);
 
-	Function* func = NULL;
-	function->getFunction((void**)&func);
+    ISystemFunctionDerivate* func = NULL;
+	function->getSystemFunctionDerivate((void**)&func);
 
-	GraphComponents* cms = NULL;
-	try {
-		cms = Computator().performMSPoint(graph, func, factor, ks);
-	} catch (GraphException) {
-		//__raise noImplementation();
-		SAFE_RELEASE(function);
-		delete[] factor;
-		delete[] ks;
-		return S_OK;
-	}
+    SermentProjectiveExtensionInfo info(func);
 
-	for (int i=0;i<cms->length(); i++) {
-		IProjectiveBundleGraph* im;
-		CProjectiveBundleGraph::CreateInstance(&im);
+    ISystemFunctionDerivate* dfunc = info.systemFunction();
 
-		im->putref_kernel(kernel);
-		Graph* gr = cms->getAt(i);
-		im->setGraph((void*)gr);
-		//__raise newChildProjectiveBundle(im);
-		//__raise newKernelNode(im);
-	}
+    MSPointBuilder* msb = new MSPointBuilder(this->graph, factor, ks, dfunc);
+    msb->start();
 
-	if (cms->length() == 0) {
-		//__raise noChilds();
-	}
+    msb->processNextGraph(graph);
+
+    Graph* result = msb->result();
+
+    delete msb;
+    delete dfunc;
+
+    IComputationGraphResultExt* cresult;
+    CComputationGraphResult::CreateInstance(&cresult);
+
+    cresult->setRootGraph((void**)&result);
+	cresult->setGraphNode(this);
+
+    kernel->EventNewComputationResult(this, cresult);
+  	
 
 	SAFE_RELEASE(function);
 	delete[] factor;
 	delete[] ks;
-	delete cms;
 
 	return S_OK;
 }
 
 
 STDMETHODIMP CProjectiveBundleGraph::Morse() {
-
 	IMorseSpectrum* ms;
 	CMorseSpectrum::CreateInstance(&ms);
 
 	IFunction* function = NULL;		
 	kernel->get_Function(&function);
 
-	Function* func = NULL;
-	function->getFunction((void**)&func);
+    ISystemFunctionDerivate* func = NULL;
+    function->getSystemFunctionDerivate((void**)&func);
 
-	Computator::MorseResult r = Computator().performMorse(graph, func);
+    SermentProjectiveExtensionInfo info(func);
+    IMorseFunction* mfunc = info.morseFunction();
 
-	ms->put_lowerBound(r.lower);
-	ms->put_upperBound(r.upper);
-	ms->put_lowerLength(r.lowerLength);
-	ms->put_upperLength(r.upperLength);
+    CRomFunction2N rom(mfunc, graph);
 
-	//__raise newChildMorseSpectrum( ms);
-	//__raise newKernelNode(ms);
+    rom.minimize();
+
+    ms->put_lowerBound(rom.getAnswer());	
+    ms->put_lowerLength(rom.getAnswerLength());
+
+    rom.maximize();
+
+    ms->put_upperBound(rom.getAnswer());
+    ms->put_upperLength(rom.getAnswerLength());
+
+    delete mfunc;
+
+    kernel->EventNewNode(this, ms);
 
     SAFE_RELEASE(function);	
 	return S_OK;
@@ -209,4 +214,25 @@ STDMETHODIMP CProjectiveBundleGraph::graphDimension(int* value) {
 
 STDMETHODIMP CProjectiveBundleGraph::ExportData(BSTR fileName) {
 	return SaveGraphToFile(graph, CString(fileName));
+}
+
+
+STDMETHODIMP CProjectiveBundleGraph::acceptChilds(void** graphComponents) {
+    GraphComponents* cms = *(GraphComponents**)graphComponents;
+
+    for (int i=0;i<cms->length(); i++) {
+		IProjectiveBundleGraph* im;
+		CProjectiveBundleGraph::CreateInstance(&im);
+
+		im->putref_kernel(kernel);
+		Graph* gr = cms->getAt(i);
+		im->setGraph((void*)gr);
+        kernel->EventNewNode(this, im);
+	}
+
+	if (cms->length() == 0) {
+        kernel->EventNoChilds(this);
+	}
+
+    return S_OK;
 }

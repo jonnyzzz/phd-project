@@ -23,16 +23,16 @@ void CGraphInfo::FinalRelease() {
 
 void CGraphInfo::initDimension() {
 	dim = gcms->getAt(0)->getDimention();
-	cout<<"dim_b = "<<dim<<"\n";
+//	cout<<"dim_b = "<<dim<<"\n";
 	for (int i=1; i<gcms->length(); i++) {
 		if (gcms->getAt(i)->getDimention() != dim) {
 			dim = -1;
-			cout<<"Break\n";
+//			cout<<"Break\n";
 			break;
 		}		
 	}
 
-	cout<<"dim :"<<dim<<"\n";
+//	cout<<"dim :"<<dim<<"\n";
 }
 
 bool CGraphInfo::verify(LONG dim) {
@@ -121,15 +121,15 @@ STDMETHODIMP CGraphInfo::setGraph(void** graph) {
 }
 
 STDMETHODIMP CGraphInfo::setGraphComponents(void** gcms) {
-	cout<<"StartGC\n";
+//	cout<<"StartGC\n";
 	if (gcms != NULL && *gcms != NULL) {
 		SAFE_DELETE(this->gcms);
 		this->gcms = *(GraphComponents**)gcms;
-		cout<<"initGC\n";
+//		cout<<"initGC\n";
 
-		cout<<"length = "<<this->gcms->length()<<"\n";
+//		cout<<"length = "<<this->gcms->length()<<"\n";
 		initDimension();
 	}
-	cout<<"setGC comlete\n";
+//	cout<<"setGC comlete\n";
 	return S_OK;
 }

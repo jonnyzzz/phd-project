@@ -8,4 +8,7 @@ class IMorseFunction :
 public:
     IMorseFunction(ISystemFunctionDerivate* function);
     virtual ~IMorseFunction(void);
+
+protected:
+    ISystemFunctionDerivate* function;
 };

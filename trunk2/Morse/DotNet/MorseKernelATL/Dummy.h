@@ -2,7 +2,7 @@
 
 
 #include "nodebase.h"
-/*
+
 [
     object,
     uuid("ECACE910-6692-4ACC-85C2-3EF448BF2638"),
@@ -24,7 +24,8 @@ __interface IDummy : IDispatch {
 ]
 class ATL_NO_VTABLE CDummy : 
     public IDummy, 
-    public IExtendable
+    public IExtendableParams,
+    public IMorsable
 {
 public:
 
@@ -36,10 +37,9 @@ public:
 
 	//internal functions and variables
 
-    STDMETHOD(Extend)(IExtendableParams * params) { return S_OK;}
-    STDMETHOD(NewDimension)(int* value) {return S_OK;}
-
-
-
+    STDMETHOD(getCellDevider)(int axis, int* value){ return S_OK;}
+    STDMETHOD(updateProgressBar)(int min, int max, int current) {return S_OK; }
+    
+    STDMETHOD(Morse)() {return S_OK;}
 };
-*/
+

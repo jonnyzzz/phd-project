@@ -30,14 +30,17 @@ AbstractGraphCreator::~AbstractGraphCreator(void)
 
 
 void AbstractGraphCreator::start() {
-	b = new int[dimensionNew+1];
+	this->dimensionNew = this->getNewDimension();
+    ASSERT(dimensionNew > dimensionOld);
+
+    b = new int[dimensionNew+1];
 	point = new JInt[dimensionNew];
 	tpoint = new JInt[dimensionNew];
 
-    this->dimensionNew = this->getNewDimension();
+    
     this->submitGraphResult(createEmptyGraph(graph_source));
 
-    ASSERT(dimensionNew > dimensionOld);
+    
 }
 
 

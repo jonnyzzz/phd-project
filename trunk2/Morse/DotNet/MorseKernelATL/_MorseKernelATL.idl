@@ -378,6 +378,16 @@ interface IComputationGraphResultExt : IComputationGraphResult {
 
 [
 	object,
+	uuid(ECACE910-6692-4ACC-85C2-3EF448BF2638),
+	pointer_default(unique),
+	dual
+] 
+#line 12 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\dummy.h"
+interface IDummy : IDispatch {
+};
+
+[
+	object,
 	uuid(E9A021D4-77A7-458E-BB1F-2F84DF48B982),
 	dual,
 	helpstring("IMorseSpectrum Interface"),
@@ -458,11 +468,11 @@ interface ISymbolicImageGroup : ISymbolicImage {
 	helpstring("IProjectiveBundleGraph Interface"),
 	pointer_default(unique)
 ] 
-#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegraph.h"
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegraph.h"
 interface IProjectiveBundleGraph : IProjectiveBundle {
-#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegraph.h"
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegraph.h"
 	[id(10),local,hidden] HRESULT  setGraph([in] void *graph);
-#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegraph.h"
+#line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegraph.h"
 	[id(11),local,hidden] HRESULT  getGraph([out] void **graph );
 };
 
@@ -545,6 +555,20 @@ library MorseKernelATL
 
 	[
 		version(1.0),
+		uuid(6C167CEC-20C8-45B4-B6C5-E59E15B3D19E),
+		helpstring("Dummy Class")
+	] 
+#line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\dummy.h"
+	coclass CDummy {
+		interface IDummy;
+		interface IExtendableParams;
+		interface ISubdevideParams;
+		interface IParams;
+		interface IMorsable;
+	};
+
+	[
+		version(1.0),
 		uuid(BF5438F7-B6B4-457C-843E-C46539C7A2F7),
 		helpstring("MorseSpectrum Class")
 	] 
@@ -595,13 +619,12 @@ library MorseKernelATL
 		uuid(0FF20A2F-2518-4146-838A-EB5C0B42DD7B),
 		helpstring("ProjectiveBundleGraph Class")
 	] 
-#line 36 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegraph.h"
+#line 37 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegraph.h"
 	coclass CProjectiveBundleGraph {
 		interface IProjectiveBundleGraph;
 		interface IProjectiveBundle;
 		interface IGraph;
 		interface IKernelNode;
-		interface ISubdevidable;
 		interface ISubdevidablePoint;
 		interface IMorsable;
 		interface IExportData;
@@ -618,9 +641,7 @@ library MorseKernelATL
 		interface IProjectiveBundle;
 		interface IGraph;
 		interface IKernelNode;
-		interface ISubdevidable;
 		interface ISubdevidablePoint;
-		interface IMorsable;
 		interface IGroupNode;
 		interface IExportData;
 	};

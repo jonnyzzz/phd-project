@@ -42,9 +42,9 @@ __interface IProjectiveBundleGroup : IProjectiveBundle
 ]
 class ATL_NO_VTABLE CProjectiveBundleGroup : 
 	public IProjectiveBundleGroup,
-	public ISubdevidable,
+//	public ISubdevidable,
 	public ISubdevidablePoint,
-	public IMorsable,
+//	public IMorsable,
 	public IGroupNode,
 	public IExportData,
 	private GraphSaver
@@ -78,7 +78,7 @@ public:
 	STDMETHOD(get_kernel)(IKernelPointer** pVal);
 	STDMETHOD(putref_kernel)(IKernelPointer* newVal);
 
-	STDMETHOD(acceptChilds)(void** data) { return S_OK;}
+	STDMETHOD(acceptChilds)(void** data);
 
 	STDMETHOD(graphInfo)(IGraphInfo** info);
 	STDMETHOD(graphDimension)(int* value);

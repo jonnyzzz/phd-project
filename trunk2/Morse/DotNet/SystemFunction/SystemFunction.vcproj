@@ -115,6 +115,9 @@
 				RelativePath=".\SegmentProjectiveExtendedSystemFunction.cpp">
 			</File>
 			<File
+				RelativePath=".\SegmentProjectiveExtensionMorseFunction.cpp">
+			</File>
+			<File
 				RelativePath=".\SermentProjectiveExtensionInfo.cpp">
 			</File>
 			<File
@@ -157,6 +160,9 @@
 			</File>
 			<File
 				RelativePath=".\SegmentProjectiveExtendedSystemFunction.h">
+			</File>
+			<File
+				RelativePath=".\SegmentProjectiveExtensionMorseFunction.h">
 			</File>
 			<File
 				RelativePath=".\SermentProjectiveExtensionInfo.h">

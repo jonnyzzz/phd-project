@@ -4,6 +4,7 @@
 #include "resource.h"       // main symbols
 #include "ProjectiveBundle.h"
 #include "GraphSaver.h"
+#include "ComputationGraphResult.h"
 
 // IProjectiveBundleGraph
 [
@@ -35,7 +36,7 @@ __interface IProjectiveBundleGraph : IProjectiveBundle
 ]
 class ATL_NO_VTABLE CProjectiveBundleGraph : 
 	public IProjectiveBundleGraph,
-	public ISubdevidable,
+//	public ISubdevidable,
 	public ISubdevidablePoint,
 	public IMorsable,
 	public IExportData,
@@ -55,22 +56,29 @@ private:
 	Graph* graph;
 public:
 
-		
+    //IProjectiveBundleGraph		
 	STDMETHOD(setGraph)(void* graph);
 	STDMETHOD(getGraph)(void** graph);
 
+    //IKernelNode
 	STDMETHOD(get_kernel)(IKernelPointer** pVal);
 	STDMETHOD(putref_kernel)(IKernelPointer* newVal);
 
-	STDMETHOD(acceptChilds)(void** data) { return S_OK;}
-
+    //IGraph
+	STDMETHOD(acceptChilds)(void** data);
 	STDMETHOD(graphInfo)(IGraphInfo** info);
 	STDMETHOD(graphDimension)(int* value);
 
+    //ISubdevidable
 	STDMETHOD(Subdevide)(ISubdevideParams* params);
-	STDMETHOD(SubdevidePoint)(ISubdevidePointParams* params);
-	STDMETHOD(Morse)();
 
+    //ISubdevidablePoint
+	STDMETHOD(SubdevidePoint)(ISubdevidePointParams* params);
+	
+    //IMorsable
+    STDMETHOD(Morse)();
+
+    //IExportable
 	STDMETHOD(ExportData)(BSTR fileNAme);
 };
 

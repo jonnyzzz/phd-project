@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "ProjectiveBundleGroup.h"
+#include "ProjectiveBundleGraph.h"
 
 
 
@@ -139,16 +140,15 @@ STDMETHODIMP CProjectiveBundleGroup::Subdevide(ISubdevideParams* params) {
 
 
 STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* params) {
-	GraphComponents* cmst = createGraphComponents();
-	if (cmst->length() == 0) {
-		//__raise noChilds();
-		delete cmst;
-		return S_OK;
-	}
+    GraphComponents* cms = createGraphComponents();
+    ATLASSERT(cms->length() > 0);
 
-	int dim = cmst->getAt(0)->getDimention();
+    Graph* graph = cms->getAt(0);
+
+	int dim = graph->getDimention();
 	JInt* factor = new JInt[dim];
 	JInt* ks = new JInt[dim];
+
 	for (int i=0; i<dim; i++) {
 		params->getCellDevider(i, &factor[i]);
 		params->getCellPoints(i, &ks[i]);
@@ -157,44 +157,40 @@ STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* param
 	IFunction* function = NULL;
 	kernel->get_Function(&function);
 
-	ATLVERIFY(function != NULL);
+    ISystemFunctionDerivate* func = NULL;
+	function->getSystemFunctionDerivate((void**)&func);
 
-	Function* func;
-	function->getFunction((void**)&func);
+    SermentProjectiveExtensionInfo info(func);
 
-	GraphComponents* cms = NULL;
-	try {
-		cms = Computator().performMSPoint(cmst,func, factor, ks);
-	} catch (GraphException) {
-		//__raise noImplementation();
-		delete[] factor;
-		delete cmst;
-		SAFE_RELEASE(function);
-		return S_OK;
-	}
+    ISystemFunctionDerivate* dfunc = info.systemFunction();
 
-	for (int i = 0; i < cms->length(); i++) {
-		IProjectiveBundleGraph* im;
-		CProjectiveBundleGraph::CreateInstance(&im);
+    MSPointBuilder* msb = new MSPointBuilder(graph, factor, ks, dfunc);
+    msb->start();
 
-		Graph* gr = cms->getAt(i);
-		im->setGraph((void*)gr);
-		im->putref_kernel(kernel);
+    for (int i=0; i<cms->length(); i++) {
+        msb->processNextGraph(cms->getAt(i));
+    }
 
-		//__raise newChildProjectiveBundle(im);
-		//__raise newKernelNode(im);
-	}
+    Graph* result = msb->result();
 
-	if (cms->length() == 0) {
-		//__raise noChilds();
-	}
+    delete msb;
+    delete dfunc;
 
-	delete[] factor;
+    IComputationGraphResultExt* cresult;
+    CComputationGraphResult::CreateInstance(&cresult);
+
+    cresult->setRootGraph((void**)&result);
+	cresult->setGraphNode(this);
+
+    kernel->EventNewComputationResult(this, cresult);
+  	
+
 	SAFE_RELEASE(function);
-	delete cms;
-	delete cmst;
+	delete[] factor;
+	delete[] ks;
+    delete cms;
 
-	return S_OK;
+    return S_OK;
 }
 
 STDMETHODIMP CProjectiveBundleGroup::Morse() {
@@ -256,4 +252,25 @@ STDMETHODIMP CProjectiveBundleGroup::ExportData(BSTR fileName) {
 	HRESULT hr = SaveGraphToFile(cms, CString(fileName));
 	delete cms;
 	return hr;
+}
+
+
+STDMETHODIMP CProjectiveBundleGroup::acceptChilds(void** graphComponents) {
+    GraphComponents* cms = *(GraphComponents**)graphComponents;
+
+    for (int i=0;i<cms->length(); i++) {
+		IProjectiveBundleGraph* im;
+		CProjectiveBundleGraph::CreateInstance(&im);
+
+		im->putref_kernel(kernel);
+		Graph* gr = cms->getAt(i);
+		im->setGraph((void*)gr);
+        kernel->EventNewNode(this, im);
+	}
+
+	if (cms->length() == 0) {
+        kernel->EventNoChilds(this);
+	}
+
+    return S_OK;
 }

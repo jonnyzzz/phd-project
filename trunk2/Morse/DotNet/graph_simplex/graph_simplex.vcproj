@@ -149,6 +149,9 @@
 				RelativePath=".\RomDebug.cpp">
 			</File>
 			<File
+				RelativePath=".\RomFunction2N.cpp">
+			</File>
+			<File
 				RelativePath=".\RomMS2.cpp">
 			</File>
 			<File
@@ -185,6 +188,9 @@
 			</File>
 			<File
 				RelativePath=".\RomDebug.h">
+			</File>
+			<File
+				RelativePath=".\RomFunction2N.h">
 			</File>
 			<File
 				RelativePath=".\RomMS2.h">
