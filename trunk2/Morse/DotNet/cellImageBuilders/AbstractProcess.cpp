@@ -21,14 +21,14 @@ AbstractProcess::~AbstractProcess(void)
 
 Graph* AbstractProcess::result() {
 	ASSERT(graph_result != NULL);
-	ASSERT(wasInitialized);
+	//ASSERT(wasInitialized);
 	return graph_result;
 }
 
 
 void AbstractProcess::submitGraphResult(Graph* graph) {
 	ASSERT(graph_result == NULL);
-	ASSERT(wasInitialized);
+	//ASSERT(wasInitialized);
 	graph_result = graph;
 }
 
