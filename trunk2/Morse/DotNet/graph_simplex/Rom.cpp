@@ -255,7 +255,7 @@ CRom::ContourNode* CRom::init() {
 	//dump();
 
 	ContourNode* root = NULL;
-	double rootZ = 1e100;
+	double rootZ = 1.7E+300;
 	ContourNode* tmp = NULL;
 	for (EGraphIterator it = egraph.begin(); it != egraph.end(); it++) {
 		tmp = it->second;

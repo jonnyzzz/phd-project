@@ -1,5 +1,5 @@
 FIX Wrong answer for 0.5 2 linear system. There is no +ln2 answer. only -ln2!!!
-Shouldn't allow to start without resources!
+FIX Shouldn't allow to start without resources!
 Resources -> XML
 GraphNodeEnumerator leak
 Components in color in GNU PLOT
@@ -21,8 +21,9 @@ Nodefiltering support
 Optimized fixed pointes construction
 Lazy graph (.NET?)
 NodeParameters class
-TarjanStackOptimization
+FIX TarjanStackOptimization //contains works in O(1)
 Dimension increment doesn't kills imputed system
 Save fail doesn't kills app
 OpenGL Visualization
 Open API (COM SERVER, Abstract action for IKenelNode) IKernelNode -> SupportedActions
+FIX Morse: Use center of cell to compute value for arc

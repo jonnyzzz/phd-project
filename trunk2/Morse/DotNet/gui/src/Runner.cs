@@ -91,6 +91,7 @@ namespace gui
 					{
 						Log.LogException(typeof (Runner), ee, "Unable to find any config files");
 						MessageBox.Show("Unable to locate program resource files.", "Run failed");
+						return;
 					}
 				}
 			}

@@ -6,6 +6,8 @@
 #include "Pefomance.h"
 #include "CalculatorTest.h"
 #include "TestRunner.h"
+#include "../cellImagebuilders/SIPointBuilder.h"
+#include "../graph/stack.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -20,8 +22,30 @@ void runTests();
 int _tmain(int argc, _TCHAR* argv[]) {
     //testRomFromFile("o:\\aaaa");
 
-	runTests();
+	//runTests();
+/*
+	JDouble zmin[] = {-1};
+	JDouble zmax[] = {1};
+	JInt zgrid[] = {100};
 
+	Graph* graph = new Graph(1, zmin, zmax, zgrid);
+	graph->maximize();
+
+	Stack s(graph);
+
+	int v = 30;
+	Node* node = graph->browseTo(&v);	
+
+	s.push(node);
+
+	s.contains(node);
+
+	s.pop();
+*/
+
+	Pefomance pef;
+	pef.test2();
+	
 }
 
 void runTests() {
@@ -458,3 +482,18 @@ void dumpGraphComponents(GraphComponents* cms, int num) {
 
    return 0;//**/
  
+/*
+	FunctionFactory factory("y1=1.4-4*x1*x1+0.3*x2;y2=x1;");
+	ISystemFunction* func = new SystemFunction(&factory, 2);
+	JDouble zmin[] ={-1,-1};
+	JDouble zmax[] ={1,1};
+	JInt zgrid[] = {4,4};
+
+	Graph* graph = new Graph(2,zmin, zmax, zgrid );
+	graph->maximize();
+	SIPointBuilder* builder = new SIPointBuilder(graph, zgrid, zgrid, func);
+	builder->start();
+	builder->processNextGraph(graph);
+	Graph* result = builder->result();
+	result->localazeStrongComponents();
+	*/

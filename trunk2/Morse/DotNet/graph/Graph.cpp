@@ -20,16 +20,18 @@ static char THIS_FILE[] = __FILE__;
 
 struct Node {
 	JInt* cell;
-	bool isLoop;
+	/*bool isLoop; */
+
+	char bits;
 	
 	Edge** edges;
 	Node* next;
 
 	//tarjans stuff
 
-	JInt label;
-	JInt number;
-	EdgeEnumerator* enumerator;
+	JInt label;  //tarjan markers
+	JInt number; //tarjan markers
+	EdgeEnumerator* enumerator;  //tarjan hard optimization of edge-list
 
 };
 
@@ -49,6 +51,8 @@ Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* 
 	//nodeHashMax = 10000;
 	numberEdges = 0;
 	numberNodes = 0;
+	flagCounter = 0;
+	isLoopFlagID = registerFlag();
 
 	nodes = new Node*[nodeHashMax];
 	for (int i=0; i<nodeHashMax; i++) {
@@ -90,6 +94,10 @@ const JInt primes[] = {1499, 787, 101, 7, 3191,97, 1499,787 ,101,7,
 					   3191, 97,  1499, 787 ,101,7, 3191,97, 1499,787,
 					   101,7, 3191,97, 1499,787 ,101,7, 3191,97, 
 					   1499,787,  101,7, 3191,97, 1499,787 ,101,7, 
+   					   101,7, 3191,97, 1499,787 ,101,7, 3191,97, 
+					   1499,787,  101,7, 3191,97, 1499,787 ,101,7, 
+					   101,7, 3191,97, 1499,787 ,101,7, 3191,97, 
+					   1499,787,  101,7, 3191,97, 1499,787 ,101,7, 
 					   3191,97, 1499,787, 101,7, 3191,97, 1499,787,
 					   101,7, 3191,97, 101,7, 3191,97, 1499,787 }; //max Dimension is 60
 
@@ -122,7 +130,7 @@ int inline Graph::hash(const Node* /*from*/, const Node* to) const{
 }
 
 int Graph::Hash(const Node* node) const {
-    return hash(node);
+    return _hash(node->cell);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -154,7 +162,8 @@ Node* Graph::newNode(const JInt* cells) {
 	}
 
 	node->next = NULL;
-	node->isLoop = false;
+	//node->isLoop = false;
+	node->bits = 0;
 	node->label = 0;
 	node->number = 0;
 	node->enumerator = NULL;
@@ -273,7 +282,7 @@ Edge* Graph::addEdge( Node* from, Node* to) {
 	int h = hash(e);
 	e->next = from->edges[h];
 	from->edges[h] = e;
-	if (to == from) from->isLoop = true;
+	if (to == from) setLoop(from); //from->isLoop = true;
 	return e;
 }
 
@@ -514,7 +523,7 @@ GraphComponents* Graph::localazeStrongComponents() {
 				case 6:
 					if (v == stack.top()) {
 						stack.pop();
-						if (v->isLoop) {
+						if (isLoop(v)) {
 							tmp = this->copyCoordinates();												
 							tmp->addNode(v->cell);
 							cmps->addGraphAsComponent(tmp);
@@ -577,7 +586,7 @@ Graph* Graph::localizeLoops() {
 	NodeEnumerator* ne = this->getNodeRoot();
 	Node* node;
 	while (node = this->getNode(ne)) {
-		if (node->isLoop) {
+		if (isLoop(node)) {
 			Node* n = ret->browseTo(node->cell);
 			ret->browseTo(n, n);
 		}
@@ -719,3 +728,43 @@ void saveGraph(FileOutputStream& o, Graph* graph) {
 
 
 //////////////////////////////////////////////////////////////////////
+// Flags
+
+int Graph::registerFlag() {
+	flagCounter++;
+	ASSERT(flagCounter < 8); // bits in char
+	return flagCounter;
+}
+
+bool Graph::readFlag(Node* node, int flagID) {
+	int mask = (1<<flagID);
+	return (node->bits & mask) != 0;
+}
+
+void Graph::setFlag(Node* node, int flagID, bool value) {
+	if (value) {
+		int mask = (1<<flagID);
+		node->bits = node->bits | mask;		
+	} else {
+		int mask = ~(1<<flagID);
+		node->bits = node->bits & mask;
+	}
+
+	ASSERT(readFlag(node, flagID) == value); 
+	/*
+	Debugging
+	if( readFlag(node, flagID) != value) {
+		ASSERT(false);
+		setFlag(node, flagID, value);
+	}
+	*/
+}
+
+////////////////////////////////////////////////////////////////////
+bool inline Graph::isLoop(Node* node) {
+	return readFlag(node, isLoopFlagID);
+}
+
+void inline Graph::setLoop(Node* node) {
+	setFlag(node, isLoopFlagID);
+}

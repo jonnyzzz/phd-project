@@ -10,6 +10,7 @@
 #endif // _MSC_VER > 1000
 
 struct Node;
+#include <bitset>
 
 class Stack  
 {
@@ -25,6 +26,9 @@ public:
 	bool contains(Node*);
 
 private:
+	bool containsTest(Node*);
+
+private:
 	struct dataStack {
 		Node* node;
 		dataStack* next;
@@ -32,6 +36,8 @@ private:
 
 	dataStack* root;
     Graph* graph;
+
+	int flagID;
 };
 
 #endif // !defined(AFX_STACK_H__9AD856CD_279E_4297_B688_8C24CAA29BC1__INCLUDED_)

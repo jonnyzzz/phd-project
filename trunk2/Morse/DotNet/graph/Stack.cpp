@@ -16,9 +16,14 @@ static char THIS_FILE[] = __FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-Stack::Stack(Graph*)
+const int hashMax = 315691; //it probably is prime
+const int hashBytes = 30;
+const int hashLength = hashMax / hashBytes;
+
+Stack::Stack(Graph* graph) : graph(graph)
 {
 	root = NULL;
+	this->flagID = graph->registerFlag();
 }
 
 Stack::~Stack()
@@ -38,6 +43,7 @@ void Stack::push(Node* node) {
 	s->next = root;
 	s->node = node;
 	root = s;
+	graph->setFlag(node, flagID, true);
 }
 
 Node* Stack::top() {
@@ -53,12 +59,25 @@ Node* Stack::pop() {
 
 	root = root->next;
 	delete s;
+	graph->setFlag(tmp, flagID, false);
 	return tmp;
 }
 
 
-bool Stack::contains(Node* node) {
+bool Stack::containsTest(Node* node) {
+	
 	dataStack* s = root;
 	while ((s != NULL) && (s->node != node)) s=s->next;
-	return s!=NULL;
+	return (s!=NULL);
+}
+
+bool Stack::contains(Node* node) {
+	if (graph->readFlag(node, flagID)) {
+		ASSERT(containsTest(node));
+		return true;
+	} else {
+		ASSERT(!containsTest(node));
+		return false;
+	}
+	//return containsTest(node);
 }

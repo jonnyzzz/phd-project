@@ -26,7 +26,7 @@ CRomFunction2N::~CRomFunction2N(void)
 
 double CRomFunction2N::cost(Node* node) {
     for (int i=0; i<dimenstion; i++) {
-        input[i] = graph->toExternal(graph->getCells(node)[i], i);
+        input[i] = graph->toExternal(graph->getCells(node)[i], i) + graph->getEps()[i]/2;
     }
     function->evaluate();
     

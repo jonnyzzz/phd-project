@@ -129,6 +129,21 @@ public:
 //Comparison
 public:
 	bool equals(Graph* graph) const; 
+
+//NodeFlags:
+private:
+	int flagCounter;
+	int isLoopFlagID;
+
+public:
+	//todo: Incapsulate flagID for more safetyness usage
+	int registerFlag();
+	bool readFlag(Node* node, int flagID);
+	void setFlag(Node* node, int flagID, bool value = true);
+
+private:
+	bool isLoop(Node* node);
+	void setLoop(Node* node);
 	
 };
 

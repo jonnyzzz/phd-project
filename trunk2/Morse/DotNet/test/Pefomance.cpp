@@ -42,7 +42,7 @@ typedef smartPointer<GraphComponents> Gc;
 typedef smartPointer<Function> Func;
 typedef smartPointer<Graph> Gr;
 
-clock_t testPoint(Gr& graph, Func& function, JInt factor, JInt* ks) {
+clock_t testPoint(Gr& graph, Func& function, JInt* factor, JInt* ks) {
 	
 	clock_t tt = clock();
 /*
@@ -56,17 +56,17 @@ clock_t testPoint(Gr& graph, Func& function, JInt factor, JInt* ks) {
 	return tt;
 }
 
-clock_t testTaylor(Gr& graph, Func& function, JInt factor) {
+clock_t testTaylor(Gr& graph, Func& function, JInt* factor) {
 	
 	clock_t tt = clock();
-/*
+
 	Computator cm;
 	Gc gc = cm.performSI(graph, function, factor);
 
 	tt = clock() - tt;
 
 	cout<<"result Components: "<<gc->length()<<"\n";
-*/
+
 	return tt;
 }
 
@@ -103,7 +103,7 @@ void Pefomance::test() {
 	cout<<"Nodes: "<<t->getNumberOfNodes()<<"\n";
 
 	JInt ks[] = {2,2};
-	JInt factor = 3;
+	JInt factor[] = {3, 3};
 
 	int timePoint = toMilliSeconds( testPoint(graph, function, factor, ks));
 
@@ -116,7 +116,7 @@ void Pefomance::test() {
 	cout<<"\t Point Method:\t"<<timePoint<<"\n";
 	cout<<"\t TaylorMethod:\t"<<timeTaylor<<"\n";
 
-	cout<<"\t Factor :\t"<<factor<<"\n";
+	cout<<"\t Factor :\t"<<factor[0]<<"\n";
 	cout<<"\t ks[] :\t"<<ks[0]<<", "<<ks[1]<<"\n";
 
 	cout<<"Complete!\n";
@@ -149,7 +149,7 @@ void Pefomance::test2() {
 	cout<<"Nodes: "<<t->getNumberOfNodes()<<"\n";
 
 	JInt ks[] = {6,6};
-	JInt factor = 3;
+	JInt factor[] = {9, 9};
 
 	int timePoint = toMilliSeconds( testPoint(graph, function, factor, ks));
 
@@ -162,7 +162,7 @@ void Pefomance::test2() {
 	cout<<"\t Point Method:\t"<<timePoint<<"\n";
 	cout<<"\t TaylorMethod:\t"<<timeTaylor<<"\n";
 
-	cout<<"\t Factor :\t"<<factor<<"\n";
+	cout<<"\t Factor :\t"<<factor[0]<<"\n";
 	cout<<"\t ks[] :\t"<<ks[0]<<", "<<ks[1]<<"\n";
 
 	cout<<"Complete!\n";
