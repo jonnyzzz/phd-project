@@ -32,3 +32,6 @@ FIX Implement cell extraction algorithm for point method in Neighbourhood way
 Graph optimized memory allocation
 Starting computation from node set
 Support for non-standard space (i.e. non rectangular, but with cells)
+Update system equation saving format using XMLSerializer not hand-made hardcoding
+Implemenet graph chahing on HDD not using windows SWAP file
+Implemenet partly loading of computation tree nodes without loading others
