@@ -49,6 +49,7 @@ BEGIN
         MENUITEM "&About ...",                  IDM_ABOUT
     END
     MENUITEM "test",                        32771
+    MENUITEM "CreateWindow",                0
 END
 
 

@@ -99,6 +99,9 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //        In this function, we save the instance handle in a global variable and
 //        create and display the main program window.
 //
+
+#include "../d3dvisualizator/pwindow.h"
+
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    HWND hWnd;
@@ -113,8 +116,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
+
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
+
 
    return TRUE;
 }
@@ -129,6 +134,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY	- post a quit message and return
 //
 //
+
+LRESULT onCreate(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int wmId, wmEvent;
@@ -164,11 +172,31 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+    case WM_CREATE:
+        return onCreate(hWnd, message, wParam, lParam);
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 	return 0;
 }
+
+LRESULT onCreate(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+   LRESULT res = DefWindowProc(hWnd, message, wParam, lParam);
+ 
+   PWindow* window = new PWindow();
+
+   if (!window->Create(hInst, hWnd)) {
+       char buff[200];
+       sprintf(buff, "error code: %d", GetLastError());
+       MessageBox(hWnd, buff, 0, 0);       
+
+       PostMessage(hWnd, WM_CLOSE, 0, 0);
+   } else {
+       MessageBox(hWnd, "Creation compele!", 0, 0);
+   }
+    return res;
+}
+
 
 // Message handler for about box.
 LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)

@@ -104,27 +104,78 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
 				RelativePath=".\D3DGraph2D.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="2"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\D3DGraph3D.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="2"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\D3DKernel.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="2"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\DisplayableCoordinateSystem.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="2"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\DrawableGraph.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="2"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\DrawableSet.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="2"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\DrawableSetIterator.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="2"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\GLKernel.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="2"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\PWindow.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
 					<Tool
@@ -138,7 +189,7 @@
 					Name="Debug|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="2"/>
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32">
@@ -175,6 +226,9 @@
 			</File>
 			<File
 				RelativePath=".\GLKernel.h">
+			</File>
+			<File
+				RelativePath=".\PWindow.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
