@@ -100,3 +100,7 @@ FileOutputStream& FileOutputStream::operator <<(const char* s) {
 
    return *this;
 }
+
+bool FileOutputStream::EnshureOpened() {
+	return f.is_open();
+}

@@ -136,12 +136,37 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\ActionFactory\ActionInfos\ActionInfo.cs"
+                    RelPath = "src\ActionFactory\ActionInfos\ActionRef.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\ActionFactory\ActionInfos\ActionRef.cs"
+                    RelPath = "src\ActionFactory\Constraints\AndConstraint.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\Constraints\DefaultConstraint.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\Constraints\DefaultConstraintFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\Constraints\EmptyConstraint.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\Constraints\IConstraint.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\Constraints\IConstraintFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

@@ -225,6 +225,10 @@ interface IGraphResult : IResult {
 	[id(12)] HRESULT  GetGraphInfo([out,retval] IGraphInfo **info );
 #line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\graphresult.h"
 	[id(13)] HRESULT  IsStrongComponent([out,retval] VARIANT_BOOL *value);
+#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\graphresult.h"
+	[id(14)] HRESULT  SaveText([in] BSTR file);
+#line 26 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\graphresult.h"
+	[id(15)] HRESULT  SaveGraph([in] BSTR file);
 };
 
 [

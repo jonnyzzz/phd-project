@@ -2,16 +2,23 @@
 
 <mappings>
    <actions>
-		<action name="IBoxMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="false">	
+		<action name="IBoxMethodAction" isLeaf="false">	
+			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 			<nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true" />
 			</nextActions>		
 		</action>
 	
-		<action name="IPointMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="false">		
+		<action name="IPointMethodAction" isLeaf="false">		
+			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 			<nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true"/>
 			</nextActions>
+		</action>
+		
+		<action name="GnuPlotVisualizationKernelAction" isLeaf="true">
+			<constraint class="GnuPlotConstraintFactory" />
+			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 		</action>
     </actions>
     
@@ -24,6 +31,7 @@
 	<assemblies>	
 		<actionAssembly name="guiActions"/>
 		<actionSource assembly="interop.MorseKernel2" />
+		<actionSource assembly="guiActions" />
 	</assemblies>
 
 </mappings>

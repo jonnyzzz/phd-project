@@ -23,24 +23,24 @@ namespace guiKernel2.ActionFactory
 
 		public ActionWrapper[] NextAction(KernelNode node)
 		{			
-			ActionInfo[] infos = FindActionInfos(node);
+			ActionRef[] infos = FindActionRefs(node);
 			return CreateInstances(infos);
 		}
 		
 
-		private ActionInfo[] FindActionInfos(KernelNode node)
+		private ActionRef[] FindActionRefs(KernelNode node)
 		{
 			ArrayList result = new ArrayList();
-			foreach (ActionInfo actionInfo in actions)
+			foreach (ActionRef actionInfo in actions)
 			{
-				if (node.Results.Match(actionInfo.ResultTypeName, actionInfo.MetadataTypeName))
+				if ( actionInfo.Constraint.Mathes(node.Results) )
 				{
 					Logger.Logger.LogMessage("Candidate Found: {0}", actionInfo);
 
 					result.Add(actionInfo);
 				}
 			}
-			return (ActionInfo[])result.ToArray(typeof(ActionInfo));
+			return (ActionRef[])result.ToArray(typeof(ActionRef));
 		}
 
 		public static void DumpInteraces(object o)
@@ -65,7 +65,7 @@ namespace guiKernel2.ActionFactory
 
 		private ActionRef[] FindActionInfosForPath(KernelNode node, ActionWrapper[] beforeActions)
 		{
-			return FindActionInfosForPath(FindActionInfos(node), beforeActions);			
+			return FindActionInfosForPath(FindActionRefs(node), beforeActions);			
 		}
 
 		private ActionRef[] FindActionInfosForPath(ActionRef[] acceptableActons, ActionWrapper[] selected)
@@ -86,7 +86,7 @@ namespace guiKernel2.ActionFactory
 					return FindActionInfosForPath(actionInfo.ActionRefs, dec);
 				}	
 			}
-			return new ActionInfo[0];
+			return new ActionRef[0];
 		}
 
 		public ActionWrapper[] CreateInstances(ActionRef[] infos)
@@ -105,7 +105,7 @@ namespace guiKernel2.ActionFactory
 
 		ArrayList actions = new ArrayList();
 		Hashtable actionResolver = new Hashtable();
-		public void RegisterAction(ActionInfo info)
+		public void RegisterAction(ActionRef info)
 		{
 			actions.Add(info);
 			actionResolver[info.ActionName] = info;
@@ -120,9 +120,9 @@ namespace guiKernel2.ActionFactory
 			StringBuilder sb = new StringBuilder();
 			sb.Append("NextActionFactory :\n");
 
-			foreach (ActionInfo actionInfo in actions)
+			foreach (ActionRef actionRef in actions)
 			{
-				sb.AppendFormat("\tRegistered Action : {0} \n", actionInfo.ToString());
+				sb.AppendFormat("\tRegistered Action : {0} \n", actionRef.ToString());
 			}
 
 			return sb.ToString();

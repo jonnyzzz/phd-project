@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Reflection;
 using guiKernel2.ActionFactory;
-using guiKernel2.ActionFactory.ActionInfos;
 using guiKernel2.Actions;
 using guiKernel2.Container;
 

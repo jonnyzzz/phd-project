@@ -1,8 +1,8 @@
-using System;
 using System.Collections;
 using System.Text;
 using guiKernel2.ActionFactory.ActionInfos;
 using guiKernel2.Actions;
+using guiKernel2.Constraints;
 using guiKernel2.Container;
 
 namespace guiKernel2.ActionFactory.ActionInfos
@@ -13,12 +13,14 @@ namespace guiKernel2.ActionFactory.ActionInfos
 	public class ActionRef
 	{
 		private readonly string actionName;
+		private readonly IConstraint constraint;
 		private readonly bool isLeaf;
 		private ArrayList actionRefs = new ArrayList();
 
-		public ActionRef(string actionName, bool isLeaf)
+		public ActionRef(string actionName, IConstraint constraint, bool isLeaf)
 		{
 			this.actionName = actionName;
+			this.constraint = constraint;
 			this.isLeaf = isLeaf;
 		}
 
@@ -26,6 +28,11 @@ namespace guiKernel2.ActionFactory.ActionInfos
 		{
 			string caption = Core.Instance.ActionNamingFactory.FindActionCaption(ActionName);
 			return Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, caption, IsLeaf);
+		}
+
+		public IConstraint Constraint
+		{
+			get { return constraint; }
 		}
 
 		public string ActionName
@@ -53,7 +60,7 @@ namespace guiKernel2.ActionFactory.ActionInfos
 
 		public override string ToString()
 		{
-			return string.Format("ActionRef [name = {0}, isLeaf = {1}]", actionName, isLeaf);
+			return string.Format("ActionRef [name = {0}, constraint = {2},  isLeaf = {1}]", actionName, isLeaf, constraint.ToString());
 		}
 
 		public string DumpTree()

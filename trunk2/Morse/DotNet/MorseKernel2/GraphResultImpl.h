@@ -56,6 +56,9 @@ public:
 	STDMETHOD(GetGraph)(void ** graph);
 	STDMETHOD(GetGraphInfo)(IGraphInfo ** info);
 	STDMETHOD(IsStrongComponent)(VARIANT_BOOL * value);
+
+	STDMETHOD(SaveText)(BSTR file);
+	STDMETHOD(SaveGraph)(BSTR file);
 	
 	// IWritableGraphResult Methods
 public:

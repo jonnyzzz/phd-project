@@ -5,6 +5,7 @@
 #include "GraphInfoImpl.h"
 #include "../graph/graph.h"
 #include "SmartInterface.h"
+#include "../graph/fileStream.h"
 
 // CGraphResultImpl
 
@@ -88,3 +89,28 @@ STDMETHODIMP CGraphResultImpl::SetMetadata(IResultMetadata* in) {
 
 	return S_OK;
 }
+
+
+STDMETHODIMP CGraphResultImpl::SaveText(BSTR file) {
+	CString fileName(file);
+
+	FileOutputStream out(fileName);
+	if (!out.EnshureOpened()) return E_FAIL;
+
+
+	saveGraphAsPoints(out, this->graph);
+
+	return S_OK;
+}
+
+STDMETHODIMP CGraphResultImpl::SaveGraph(BSTR file) {
+	CString fileName(file);
+
+	FileOutputStream out(fileName);
+	if (!out.EnshureOpened()) return E_FAIL;
+
+	saveGraph(out, this->graph);
+
+	return S_OK;
+}
+

@@ -20,4 +20,8 @@ __interface IGraphResult : IResult
 	HRESULT GetGraphInfo([out, retval] IGraphInfo** info);
 	[id(13)]
 	HRESULT IsStrongComponent([out, retval] VARIANT_BOOL* value);	
+	[id(14)]
+	HRESULT SaveText([in] BSTR file);
+	[id(15)]
+	HRESULT SaveGraph([in] BSTR file);
 };

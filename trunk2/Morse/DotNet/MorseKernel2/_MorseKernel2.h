@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Mar 20 22:22:25 2005
+/* at Thu Mar 24 22:50:29 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -2602,6 +2602,12 @@ EXTERN_C const IID IID_IGraphResult;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsStrongComponent( 
             /* [retval][out] */ VARIANT_BOOL *value) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SaveText( 
+            /* [in] */ BSTR file) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SaveGraph( 
+            /* [in] */ BSTR file) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -2666,6 +2672,14 @@ EXTERN_C const IID IID_IGraphResult;
             IGraphResult * This,
             /* [retval][out] */ VARIANT_BOOL *value);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SaveText )( 
+            IGraphResult * This,
+            /* [in] */ BSTR file);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SaveGraph )( 
+            IGraphResult * This,
+            /* [in] */ BSTR file);
+        
         END_INTERFACE
     } IGraphResultVtbl;
 
@@ -2716,6 +2730,12 @@ EXTERN_C const IID IID_IGraphResult;
 #define IGraphResult_IsStrongComponent(This,value)	\
     (This)->lpVtbl -> IsStrongComponent(This,value)
 
+#define IGraphResult_SaveText(This,file)	\
+    (This)->lpVtbl -> SaveText(This,file)
+
+#define IGraphResult_SaveGraph(This,file)	\
+    (This)->lpVtbl -> SaveGraph(This,file)
+
 #endif /* COBJMACROS */
 
 
@@ -2753,6 +2773,30 @@ void __RPC_STUB IGraphResult_GetGraphInfo_Stub(
 
 
 void __RPC_STUB IGraphResult_IsStrongComponent_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphResult_SaveText_Proxy( 
+    IGraphResult * This,
+    /* [in] */ BSTR file);
+
+
+void __RPC_STUB IGraphResult_SaveText_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphResult_SaveGraph_Proxy( 
+    IGraphResult * This,
+    /* [in] */ BSTR file);
+
+
+void __RPC_STUB IGraphResult_SaveGraph_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,

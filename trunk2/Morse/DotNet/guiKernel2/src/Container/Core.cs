@@ -22,8 +22,14 @@ namespace guiKernel2.Container
 			actionNamingFactory = new ActionNamingFactory();
 
 			XMLParser xmlParser = new XMLParser();
-			
+
+			xmlParser.ParseAssemblyReferences();
+
 			this.assemblies = xmlParser.Assemblies;
+
+			xmlParser.ParseActions();
+			
+			
 			actionWrapperFactory = new ActionWrapperFactory(assemblies);
 		}
 

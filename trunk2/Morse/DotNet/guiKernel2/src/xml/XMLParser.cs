@@ -4,6 +4,8 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using guiKernel2.ActionFactory.ActionInfos;
+using guiKernel2.ActionFactory.Constraints;
+using guiKernel2.Constraints;
 using guiKernel2.Container;
 
 namespace guiKernel2.xml
@@ -39,21 +41,41 @@ namespace guiKernel2.xml
 		{
 			Logger.Logger.LogMessage("Hello from Assembly Parser");
 
-			XmlDocument document = new XmlDocument();
-			document.Load(GetXMLMapping());
-
-			ProcessDocument(document);
+			 document = new XmlDocument();
+			document.Load(GetXMLMapping());					
 		}
 
-		private void ProcessDocument(XmlDocument document)
+		public void ParseAssemblyReferences()
 		{
-			ParseActionDefs(document);	
-			ParseActionAssemblies(document);
+			ParseAssemblyReference(document);
+		}
+
+		public void ParseActions()
+		{
+			ParseActions(document);
+		}
+
+		private delegate void Processor(XmlDocument document);
+
+		private void ParseAssemblyReference(XmlDocument document)
+		{
+			ParseActionAssemblies(document);			
+			ProcessDocument(document, new Processor(ParseAssemblyReference));			
+		}
+
+		private void ParseActions(XmlDocument document)
+		{
+			ParseActionDefs(document);				
 			ParseActionNames(document);
+			ProcessDocument(document, new Processor(ParseActions));
+		}
+			
+		private void ProcessDocument(XmlDocument document, Processor processor)
+		{
 			XmlDocument[] references = ParseMappingRef(document);
 			foreach (XmlDocument referenceDocument in references)
 			{
-				ProcessDocument(referenceDocument);
+				processor(referenceDocument);
 			}			
 		}
 
@@ -117,15 +139,48 @@ namespace guiKernel2.xml
 			this.actionSourceAssemblies = (Assembly[])assembliesSource.ToArray(typeof(Assembly));
 		}
 
+		private IConstraint ParseConstraint(XmlNode aNode)
+		{
+			XmlNodeList nodes = aNode.SelectNodes("constraint");
+			if (nodes.Count == 0) return new EmptyConstraint();
+
+			ArrayList constraints = new ArrayList();
+
+			foreach (XmlNode constraintNode in nodes)
+			{
+				
+				string constraintName;
+
+				XmlAttribute attribute = constraintNode.Attributes["class"];
+				if (attribute != null)
+				{
+					constraintName = attribute.Value;
+				} 
+				else
+				{
+					constraintName = "DefaultConstraintFactory";
+				}
+
+				Type constraintType = Core.GetType(constraintName);
+				ConstructorInfo constructor = constraintType.GetConstructor(new Type[]{});
+				IConstraintFactory constraintFactory = (IConstraintFactory)constructor.Invoke(new object[] {});
+				constraints.Add(constraintFactory.CreateConstraint(constraintNode));
+			}
+
+			return new AndConstraint((IConstraint[])constraints.ToArray(typeof(IConstraint)));
+		}
+
+
 		private void ParseActionDefs(XmlDocument document)
 		{
 			XmlNodeList list = document.SelectNodes("mappings/actions/action");
 	
 			foreach (XmlNode node in list)
 			{
-				XmlAttributeCollection attributes = node.Attributes;			
-				
-				ActionInfo actionInfo = new ActionInfo(attributes["name"].Value, attributes["resultType"].Value, attributes["metadata"].Value, bool.Parse(attributes["isLeaf"].Value));
+				XmlAttributeCollection attributes = node.Attributes;
+
+				IConstraint constraint = ParseConstraint(node);
+				ActionRef actionInfo = new ActionRef(attributes["name"].Value, constraint, bool.Parse(attributes["isLeaf"].Value));
 				XmlNodeList refNodeList = node.SelectNodes("nextActions");
 
 				if (refNodeList.Count > 1) throw new XMLParserException("Too much NextAction Tags");
@@ -147,7 +202,8 @@ namespace guiKernel2.xml
 			foreach (XmlNode xmlNode in list)
 			{
 				XmlAttributeCollection attributes = xmlNode.Attributes;
-				ActionRef actionRef = new ActionRef(attributes["name"].Value, bool.Parse(attributes["isLeaf"].Value));
+				IConstraint constraint = ParseConstraint(xmlNode);
+				ActionRef actionRef = new ActionRef(attributes["name"].Value, constraint, bool.Parse(attributes["isLeaf"].Value));
 				ParseActionRefs(xmlNode, actionRef);
 				info.AddActionRef(actionRef);
 			}
@@ -171,8 +227,9 @@ namespace guiKernel2.xml
 		}
 
 
-		private Assembly[] implAssemblies = new Assembly[0];
-		private Assembly[] actionSourceAssemblies = new Assembly[0];
+		private Assembly[] implAssemblies = new Assembly[] {};
+		private Assembly[] actionSourceAssemblies = new Assembly[] {};
+		private XmlDocument document = null;
 
 		public Assembly[] ImplAssemblies
 		{
@@ -188,8 +245,19 @@ namespace guiKernel2.xml
 		{
 			get
 			{
-				ArrayList list = new ArrayList(ImplAssemblies);
-				list.AddRange(ActionSourceAssemblies);
+				ArrayList list = new ArrayList();
+				foreach (Assembly assembly in implAssemblies)
+				{
+					if (!list.Contains(assembly)) list.Add(assembly);
+				}
+				foreach (Assembly assembly in actionSourceAssemblies)
+				{
+					if (!list.Contains(assembly)) list.Add(assembly);
+				}
+				{
+					Assembly assembly = Assembly.GetExecutingAssembly();
+					if (!list.Contains(assembly)) list.Add(assembly);
+				}
 				return (Assembly[])list.ToArray(typeof(Assembly));
 			}
 		}

@@ -45,6 +45,9 @@ public:
 	FileOutputStream& operator <<( const char*);
 
 public:
+	bool EnshureOpened();
+
+public:
 	ostream& raw();
 
 public:
