@@ -80,5 +80,8 @@ public:
 
     //IExportable
 	STDMETHOD(ExportData)(BSTR fileNAme);
+
+private:
+	IProjectiveExtensionInfo* getProjectiveExtensionInfo();
 };
 

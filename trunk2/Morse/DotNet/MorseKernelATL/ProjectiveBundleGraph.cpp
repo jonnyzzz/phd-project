@@ -20,6 +20,20 @@ HRESULT CProjectiveBundleGraph::FinalConstruct() {
 	return S_OK;
 }
 
+IProjectiveExtensionInfo* CProjectiveBundleGraph::getProjectiveExtensionInfo() {
+	IFunction* function;
+	kernel->get_Function(&function);
+	ATLASSERT(function != NULL);
+
+	ISystemFunctionDerivate* dfunc;
+	function->getSystemFunctionDerivate((void**)&dfunc);
+
+	function->Release();
+
+	return new SermentProjectiveExtensionInfo(dfunc);
+}
+
+
 
 void CProjectiveBundleGraph::FinalRelease() {
 	SAFE_RELEASE(kernel);
@@ -126,17 +140,9 @@ STDMETHODIMP CProjectiveBundleGraph::SubdevidePoint(ISubdevidePointParams* param
 		params->getCellPoints(i, &ks[i]);
 	}
 
-	IFunction* function = NULL;
-	kernel->get_Function(&function);
+	IProjectiveExtensionInfo* info = getProjectiveExtensionInfo();
 
-    ISystemFunctionDerivate* func = NULL;
-	function->getSystemFunctionDerivate((void**)&func);
-
-    SermentProjectiveExtensionInfo info(func);
-
-    ISystemFunctionDerivate* dfunc = info.systemFunction();
-
-    MSPointBuilder* msb = new MSPointBuilder(this->graph, factor, ks, dfunc);
+	AbstractProcess* msb = info->nextStepProcess(graph, factor, ks, NULL);
     msb->start();
 
     msb->processNextGraph(graph);
@@ -144,7 +150,7 @@ STDMETHODIMP CProjectiveBundleGraph::SubdevidePoint(ISubdevidePointParams* param
     Graph* result = msb->result();
 
     delete msb;
-    delete dfunc;
+	delete info;
 
     IComputationGraphResultExt* cresult;
     CComputationGraphResult::CreateInstance(&cresult);
@@ -154,8 +160,6 @@ STDMETHODIMP CProjectiveBundleGraph::SubdevidePoint(ISubdevidePointParams* param
 
     kernel->EventNewComputationResult(this, cresult);
   	
-
-	SAFE_RELEASE(function);
 	delete[] factor;
 	delete[] ks;
 
@@ -167,32 +171,23 @@ STDMETHODIMP CProjectiveBundleGraph::Morse() {
 	IMorseSpectrum* ms;
 	CMorseSpectrum::CreateInstance(&ms);
 
-	IFunction* function = NULL;		
-	kernel->get_Function(&function);
+	IProjectiveExtensionInfo* info = getProjectiveExtensionInfo();
 
-    ISystemFunctionDerivate* func = NULL;
-    function->getSystemFunctionDerivate((void**)&func);
+	CRom* rom = info->morse(graph);
 
-    SermentProjectiveExtensionInfo info(func);
-    IMorseFunction* mfunc = info.morseFunction();
+    rom->minimize();
 
-    CRomFunction2N rom(mfunc, graph);
+    ms->put_lowerBound(rom->getAnswer());	
+    ms->put_lowerLength(rom->getAnswerLength());
 
-    rom.minimize();
+    rom->maximize();
 
-    ms->put_lowerBound(rom.getAnswer());	
-    ms->put_lowerLength(rom.getAnswerLength());
+    ms->put_upperBound(rom->getAnswer());
+    ms->put_upperLength(rom->getAnswerLength());
 
-    rom.maximize();
-
-    ms->put_upperBound(rom.getAnswer());
-    ms->put_upperLength(rom.getAnswerLength());
-
-    delete mfunc;
+    delete rom;
 
     kernel->EventNewNode(this, ms);
-
-    SAFE_RELEASE(function);	
 	return S_OK;
 }
 

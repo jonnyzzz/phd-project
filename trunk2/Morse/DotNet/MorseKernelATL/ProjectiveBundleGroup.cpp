@@ -5,7 +5,6 @@
 #include "ProjectiveBundleGraph.h"
 
 
-
 // CProjectiveBundleGroup
 
 CProjectiveBundleGroup::CProjectiveBundleGroup() {
@@ -19,6 +18,18 @@ HRESULT CProjectiveBundleGroup::FinalConstruct() {
 	return S_OK;
 }
 
+IProjectiveExtensionInfo* CProjectiveBundleGroup::getProjectiveExtensionInfo() {
+	IFunction* function;
+	kernel->get_Function(&function);
+	ATLASSERT(function != NULL);
+
+	ISystemFunctionDerivate* dfunc;
+	function->getSystemFunctionDerivate((void**)&dfunc);
+
+	function->Release();
+
+	return new SermentProjectiveExtensionInfo(dfunc);
+}
 
 void CProjectiveBundleGroup::FinalRelease() {
 	SAFE_RELEASE(kernel);
@@ -104,17 +115,8 @@ STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* param
 		params->getCellPoints(i, &ks[i]);
 	}
 
-	IFunction* function = NULL;
-	kernel->get_Function(&function);
-
-    ISystemFunctionDerivate* func = NULL;
-	function->getSystemFunctionDerivate((void**)&func);
-
-    SermentProjectiveExtensionInfo info(func);
-
-    ISystemFunctionDerivate* dfunc = info.systemFunction();
-
-    MSPointBuilder* msb = new MSPointBuilder(graph, factor, ks, dfunc);
+	IProjectiveExtensionInfo* info = getProjectiveExtensionInfo();
+	AbstractProcess* msb = info->nextStepProcess(graph, factor, ks, NULL);
     msb->start();
 
     for (int i=0; i<cms->length(); i++) {
@@ -124,7 +126,7 @@ STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* param
     Graph* result = msb->result();
 
     delete msb;
-    delete dfunc;
+	delete info;
 
     IComputationGraphResultExt* cresult;
     CComputationGraphResult::CreateInstance(&cresult);
@@ -133,9 +135,7 @@ STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* param
 	cresult->setGraphNode(this);
 
     kernel->EventNewComputationResult(this, cresult);
-  	
-
-	SAFE_RELEASE(function);
+ 	
 	delete[] factor;
 	delete[] ks;
     delete cms;

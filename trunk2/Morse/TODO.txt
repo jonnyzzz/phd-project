@@ -1,4 +1,4 @@
-Wrong answer for 0.5 2 linear system. There is no +ln2 answer. only -ln2!!!
+Wrong answer for 0.5 2 linear system. There is no -ln2 answer. only +ln2!!!
 FIX Shouldn't allow to start without resources!
 Resources -> XML
 GraphNodeEnumerator leak

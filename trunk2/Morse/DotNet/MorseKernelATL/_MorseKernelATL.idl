@@ -491,11 +491,11 @@ interface IProjectiveBundleGraph : IProjectiveBundle {
 	helpstring("IProjectiveBundleGroup Interface"),
 	pointer_default(unique)
 ] 
-#line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegroup.h"
+#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegroup.h"
 interface IProjectiveBundleGroup : IProjectiveBundle {
-#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegroup.h"
+#line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegroup.h"
 	[id(10)] HRESULT  addNode([in] IProjectiveBundleGraph *bn);
-#line 27 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegroup.h"
+#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegroup.h"
 	[id(11)] HRESULT  removeNode([in] IProjectiveBundleGraph *img);
 };
 
@@ -713,7 +713,7 @@ library MorseKernelATL
 		uuid(520018A2-475A-4FB5-A780-E1291049BAB5),
 		helpstring("ProjectiveBundleGroup Class")
 	] 
-#line 43 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegroup.h"
+#line 44 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\projectivebundlegroup.h"
 	coclass CProjectiveBundleGroup {
 		interface IProjectiveBundleGroup;
 		interface IProjectiveBundle;

@@ -9,6 +9,7 @@
 #include <list>
 
 #include "GraphSaver.h"
+#include "../systemFunction/IProjectiveExtensionInfo.h"
 
 
 // IProjectiveBundleGroup
@@ -85,5 +86,8 @@ public:
 	STDMETHOD(SubdevidePoint)(ISubdevidePointParams* params);
 
 	STDMETHOD(ExportData)(BSTR fileName);
+
+private:
+	IProjectiveExtensionInfo* getProjectiveExtensionInfo();
 };
 
