@@ -1,0 +1,33 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean />
+  </SettingsComponent>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Qualified:MorseKernelATL.IExportData">
+      <Item value="ExportData" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.SaveFileDialog">
+      <Item value="ShowDialog" priority="0" />
+      <Item value="OverwritePrompt" priority="0" />
+      <Item value="CheckPathExists" priority="0" />
+      <Item value="FileName" priority="1" />
+      <Item value="AddExtension" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@">
+      <Item value="getMenuItems" priority="0" />
+      <Item value="Add" priority="1" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+  <RecentFilesTracker>
+    <RecentFilesTracker>
+      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodeDynamicTest.cs" offset="2687" line="86" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodeSingular.cs" offset="0" line="11" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodeMenuFactory.cs" offset="0" line="15" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodeExporterAction.cs" offset="0" line="4" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodeVisualizer.cs" offset="0" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNode.cs" offset="0" line="28" column="0" />
+    </RecentFilesTracker>
+  </RecentFilesTracker>
+</Configuration>
