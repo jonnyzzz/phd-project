@@ -30,6 +30,9 @@ HRESULT CKernel::FinalConstruct() {
 void CKernel::FinalRelease() {
 	SAFE_RELEASE(this->function);
 
+    for (NodesList::iterator it = nodeList.begin(); it != nodeList.end(); it++) {
+        (*it)->Release();
+    }
 	TRACE_DESTRUCT(CKernel);
 	
 }
@@ -42,17 +45,13 @@ void CKernel::print(ostream& o) {
 
 
 STDMETHODIMP CKernel::get_Function(IFunction** pVal) {
-	if (function != NULL) {
-		function->QueryInterface(pVal);
-		*pVal = function;
-
-		Function* f;
-		function->getFunction((void**)&f);
-		f->print();	
-
-	} else {
-		*pVal = NULL;
-	}
+    if (function == NULL) {
+        *pVal = NULL;
+    } else {
+        function->QueryInterface(pVal);
+        ATLASSERT(*pVal != NULL);
+    }
+	
 	return S_OK;
 }
 
@@ -127,6 +126,7 @@ STDMETHODIMP CKernel::EventNewComputationResult(IKernelNode* nodeParent, IComput
 }
 
 STDMETHODIMP CKernel::EventNewNode(IKernelNode* nodeParent, IKernelNode* nodeChild) {
+    nodeList.push_back(nodeChild);
     __raise newKernelNode(nodeParent, nodeChild);
     return S_OK;
 }

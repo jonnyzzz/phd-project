@@ -5,6 +5,7 @@
 
 #include "Function.h"
 #include "NodeBase.h"
+#include <list>
 
 [
 	object,
@@ -121,5 +122,9 @@ public:
     STDMETHOD(EventNewComputationResult)(IKernelNode* parentNode, IComputationResult* nodeCResult);
     STDMETHOD(EventNoChilds)(IKernelNode* nodeParent);
     STDMETHOD(EventNoImplementation)(IKernelNode* nodeParent);
+
+private:
+    typedef list<IKernelNode*> NodesList;
+    NodesList nodeList;
 };
 

@@ -13,9 +13,9 @@ import "C:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\inclu
 	helpstring("IComponentRegistrar Interface"),
 	pointer_default(unique)
 ] 
-#line 15 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\compreg.h"
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\compreg.h"
 interface IComponentRegistrar : IDispatch {
-#line 17 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\compreg.h"
+#line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\compreg.h"
 	[id(1)] HRESULT  Attach([in] BSTR bstrPath);
 	[id(2)] HRESULT  RegisterAll();
 	[id(3)] HRESULT  UnregisterAll();
@@ -31,25 +31,25 @@ interface IComponentRegistrar : IDispatch {
 	helpstring("IMorseKernelVisualizationDirect3D Interface"),
 	pointer_default(unique)
 ] 
-#line 13 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 13 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 interface IMorseKernelVisualizationDirect3D : IDispatch {
-#line 16 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 	[id(1)] HRESULT  MoveLeftAtom();
-#line 18 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 	[id(2)] HRESULT  MoveRightAtom();
-#line 20 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 	[id(3)] HRESULT  MoveUpAtom();
-#line 22 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 	[id(4)] HRESULT  MoveDownAtom();
-#line 24 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 	[id(5)] HRESULT  ZoomOutAtom();
-#line 26 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 26 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 	[id(6)] HRESULT  ZoomInAtom();
-#line 28 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 	[id(7)] HRESULT  CenterView();
-#line 31 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 31 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 	[id(8),local] HRESULT  SetGraph([in] void **graph );
-#line 34 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 34 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 	[id(9)] HRESULT  SetTestGraph();
 };
 
@@ -60,15 +60,15 @@ interface IMorseKernelVisualizationDirect3D : IDispatch {
 	helpstring("IMorseKernelVisualizationDirectGraph3D Interface"),
 	pointer_default(unique)
 ] 
-#line 18 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
 interface IMorseKernelVisualizationDirectGraph3D : IMorseKernelVisualizationDirect3D {
-#line 21 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
+#line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
 	[id(54)] HRESULT  MoveFromEye([in] DOUBLE x, [in] DOUBLE y, [in] DOUBLE z);
-#line 24 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
+#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
 	[id(55)] HRESULT  SetEyeFrom([in] FLOAT x, [in] FLOAT y, [in] FLOAT z);
-#line 26 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
+#line 26 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
 	[id(56)] HRESULT  SetEyeTo([in] FLOAT x, [in] FLOAT y, [in] FLOAT z);
-#line 28 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
+#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
 	[id(57)] HRESULT  Rotate([in] FLOAT onX, [in] FLOAT onY, [in] FLOAT onZ);
 };
 
@@ -79,7 +79,7 @@ interface IMorseKernelVisualizationDirectGraph3D : IMorseKernelVisualizationDire
 	helpstring("IMorseKernelVisualizationDirectGraph2D Interface"),
 	pointer_default(unique)
 ] 
-#line 15 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationgraph2d.h"
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationgraph2d.h"
 interface IMorseKernelVisualizationDirectGraph2D : IMorseKernelVisualizationDirect3D {
 };
 
@@ -95,7 +95,7 @@ library MorseKernelVisualizationATL
 		uuid(C5F4E1EE-5450-4DED-B0A0-97941189B524),
 		helpstring("ComponentRegistrar Class")
 	] 
-#line 33 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\compreg.h"
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\compreg.h"
 	coclass CCompReg {
 		interface IComponentRegistrar;
 	};
@@ -104,14 +104,14 @@ library MorseKernelVisualizationATL
 		uuid(FE6F9A99-FF69-44D9-89AD-685E6C7303CA),
 		helpstring("_IMorseKernelVisualizationDirect3DEvents Interface")
 	] 
-#line 46 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 46 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 	dispinterface _IMorseKernelVisualizationDirect3DEvents {
 	properties:
 
 	methods:
-#line 48 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 48 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 		[id(1)] HRESULT  ActiveLoop([in] int length);
-#line 51 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
+#line 51 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirect3d.h"
 		[id(2)] HRESULT  OnMouseMoveFloat([in] double x1, [in] double x2, [in] double x3);
 	};
 
@@ -120,7 +120,7 @@ library MorseKernelVisualizationATL
 		uuid(3CF9772B-CC75-4596-A5EC-903D6ABD4983),
 		helpstring("MorseKernelVisualizationDirectGraph3D Class")
 	] 
-#line 44 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
+#line 44 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationdirectgraph3d.h"
 	coclass CMorseKernelVisualizationDirectGraph3D {
 		interface IMorseKernelVisualizationDirectGraph3D;
 		interface IMorseKernelVisualizationDirect3D;
@@ -132,7 +132,7 @@ library MorseKernelVisualizationATL
 		uuid(2BBDCC1B-8356-4536-9C86-0CBABD9158B0),
 		helpstring("MorseKernelVisualizationDirect3D Class")
 	] 
-#line 32 "e:\\projects\\morse\\_net\\morsekernelvisualizationatl\\morsekernelvisualizationgraph2d.h"
+#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelvisualizationatl\\morsekernelvisualizationgraph2d.h"
 	coclass CMorseKernelVisualizationDirectGraph2D {
 		interface IMorseKernelVisualizationDirectGraph2D;
 		interface IMorseKernelVisualizationDirect3D;
