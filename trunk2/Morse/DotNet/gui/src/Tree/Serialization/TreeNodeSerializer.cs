@@ -14,8 +14,17 @@ namespace gui.Tree.Serialization
 		{
 		}
 
+		public static TreeNodeSerializer CreateSerializer(string filename, int id, params TreeNodeSerializer[] childs)
+		{
+			TreeNodeSerializer serializer = new TreeNodeSerializer();
+			serializer.FileName = filename;
+			serializer.ID = id;
+			serializer.Childs = childs;
+			return serializer;
+		}
+
 		private string fileName = "";
-		private bool fromDLL = true;
+		private int id;
 		private ArrayList childs = new ArrayList();		
 
 		[XmlElement("FileName", typeof(string))]
@@ -23,13 +32,6 @@ namespace gui.Tree.Serialization
 		{
 			get { return fileName; }
 			set { fileName = value; }
-		}
-
-		[XmlElement("FromDLL", typeof(bool))]
-		public bool FromDll
-		{
-			get { return fromDLL; }
-			set { fromDLL = value; }
 		}
 
 		[XmlArray("Childs")]
@@ -43,6 +45,13 @@ namespace gui.Tree.Serialization
 		public void AddChild(TreeNodeSerializer node)
 		{
 			childs.Add(node);
+		}
+
+		[XmlElement("refnumber", typeof(int))]
+		public int ID
+		{
+			get { return id; }
+			set { id = value; }
 		}
 	}
 }

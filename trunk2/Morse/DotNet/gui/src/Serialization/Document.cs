@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using gui.Logger;
 using gui.Tree.Node;
 using gui.Tree.Serialization;
+using MorseKernelATL;
 
 namespace gui.Serialization
 {
@@ -39,7 +40,28 @@ namespace gui.Serialization
 
 		public void BuildRootFromComputationNode(ComputationNode root, string filename, string path)
 		{
-			Root = root.toSerializableTree(filename, path);
+			TreeNodeSerializator serializator = new TreeNodeSerializator(path, filename);
+			Root = serializator.SerializeTree(root);
+		}
+
+        public ComputationNode BuildComputationNodeTree(string path)
+        {
+        	TreeNodeDeserializator deserializator = new TreeNodeDeserializator(path);
+			return deserializator.DeSerialize(Root);
+        }
+
+		public CFunction CreateSystemFunction()
+		{
+			CFunction function = new CFunctionClass();
+			function.FunctionWrongInput += new IFunctionEvents_FunctionWrongInputEventHandler(function_FunctionWrongInput);
+			function.SystemSource = SystemSource;
+			function.FunctionWrongInput -= new IFunctionEvents_FunctionWrongInputEventHandler(function_FunctionWrongInput);
+			return function;
+		}
+
+		private void function_FunctionWrongInput(string description)
+		{
+			Log.LogException(this, new Exception("Failed to create SystemFunction"), "Load failed" );
 		}
 
 		private static XmlSerializer CreateSerializer()
@@ -63,5 +85,6 @@ namespace gui.Serialization
 			serializer.Serialize(writer, document);
 		}
 
+		
 	}
 }

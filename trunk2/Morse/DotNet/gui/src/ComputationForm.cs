@@ -2,14 +2,12 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
-using System.Xml;
 using AxMSComctlLib;
 using gui.Panels;
 using gui.Serialization;
 using gui.Tree;
 using gui.Tree.Node;
 using gui.Tree.Node.Forms;
-using gui.Tree.Serialization;
 using gui.Visualization.GnuPlot;
 using MorseKernelATL;
 
@@ -46,13 +44,14 @@ namespace gui.Forms
 		private MenuItem menuItemStartGNUPlot;
 		private Panel panelNodeInfo;
 		private MenuItem menuItemShowSystemFunction;
-		private MenuItem menuItemSplitter;
 		private MenuItem menuItemHelp;
 		private MenuItem menuItemAbout;
 		private System.Windows.Forms.MenuItem menuItemInvestigations;
 		private System.Windows.Forms.MenuItem menuItemInvLoad;
 		private System.Windows.Forms.MenuItem menuItemInvSave;
 		private System.Windows.Forms.MenuItem menuItemDeselectGroup;
+		private System.Windows.Forms.MenuItem menuItem1;
+		private System.Windows.Forms.MenuItem menuItem2;
 		private IContainer components;
 
 		public void updateProgressBar(int min, int max, int current)
@@ -71,7 +70,7 @@ namespace gui.Forms
 			InitializeComponent();
 			this.computatioinTree.MouseMoveNode += new MouseMoveComponentEvent(computatioinTree_MouseMoveNode);
 			this.menuItemInternal.Visible = Runner.IsInternal;
-			this.menuItemInvestigations.Visible = Runner.IsInternal;
+			//this.menuItemInvestigations.Visible = Runner.IsInternal;
 		}
 
 		/// <summary>
@@ -101,13 +100,15 @@ namespace gui.Forms
 			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(ComputationForm));
 			this.computatioinTree = new gui.Tree.ComputationTree();
 			this.mainMenu = new System.Windows.Forms.MainMenu();
+			this.menuItemInvestigations = new System.Windows.Forms.MenuItem();
 			this.menuSystem = new System.Windows.Forms.MenuItem();
 			this.menuAssign = new System.Windows.Forms.MenuItem();
 			this.menuLoad = new System.Windows.Forms.MenuItem();
 			this.menuStatic = new System.Windows.Forms.MenuItem();
 			this.menuItemShowSystemFunction = new System.Windows.Forms.MenuItem();
-			this.menuItemSplitter = new System.Windows.Forms.MenuItem();
 			this.menuExit = new System.Windows.Forms.MenuItem();
+			this.menuItemInvLoad = new System.Windows.Forms.MenuItem();
+			this.menuItemInvSave = new System.Windows.Forms.MenuItem();
 			this.menuSelection = new System.Windows.Forms.MenuItem();
 			this.menuDeselectAll = new System.Windows.Forms.MenuItem();
 			this.menuItemDeselectGroup = new System.Windows.Forms.MenuItem();
@@ -116,9 +117,6 @@ namespace gui.Forms
 			this.menuItemStartGNUPlot = new System.Windows.Forms.MenuItem();
 			this.menuItemHelp = new System.Windows.Forms.MenuItem();
 			this.menuItemAbout = new System.Windows.Forms.MenuItem();
-			this.menuItemInvestigations = new System.Windows.Forms.MenuItem();
-			this.menuItemInvLoad = new System.Windows.Forms.MenuItem();
-			this.menuItemInvSave = new System.Windows.Forms.MenuItem();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.panelNodeInfo = new System.Windows.Forms.Panel();
 			this.axProgressBar1 = new AxMSComctlLib.AxProgressBar();
@@ -132,6 +130,8 @@ namespace gui.Forms
 			this.splitterUD = new System.Windows.Forms.Splitter();
 			this.panelLeft = new System.Windows.Forms.Panel();
 			this.splitterLR = new System.Windows.Forms.Splitter();
+			this.menuItem1 = new System.Windows.Forms.MenuItem();
+			this.menuItem2 = new System.Windows.Forms.MenuItem();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.axProgressBar1)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -156,21 +156,30 @@ namespace gui.Forms
 			// 
 			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																					 this.menuItemInvestigations,
-																					 this.menuSystem,
 																					 this.menuSelection,
 																					 this.menuItemInternal,
 																					 this.menuItemHelp});
 			// 
+			// menuItemInvestigations
+			// 
+			this.menuItemInvestigations.Index = 0;
+			this.menuItemInvestigations.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																								   this.menuSystem,
+																								   this.menuItem2,
+																								   this.menuItemInvLoad,
+																								   this.menuItemInvSave,
+																								   this.menuItem1,
+																								   this.menuExit});
+			this.menuItemInvestigations.Text = "Investigations";
+			// 
 			// menuSystem
 			// 
-			this.menuSystem.Index = 1;
+			this.menuSystem.Index = 0;
 			this.menuSystem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																					   this.menuAssign,
 																					   this.menuLoad,
 																					   this.menuStatic,
-																					   this.menuItemShowSystemFunction,
-																					   this.menuItemSplitter,
-																					   this.menuExit});
+																					   this.menuItemShowSystemFunction});
 			this.menuSystem.Text = "System";
 			// 
 			// menuAssign
@@ -183,7 +192,7 @@ namespace gui.Forms
 			// menuLoad
 			// 
 			this.menuLoad.Index = 1;
-			this.menuLoad.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
+			this.menuLoad.Shortcut = System.Windows.Forms.Shortcut.CtrlShiftO;
 			this.menuLoad.Text = "Open";
 			this.menuLoad.Click += new System.EventHandler(this.menuLoad_Click);
 			// 
@@ -200,20 +209,29 @@ namespace gui.Forms
 			this.menuItemShowSystemFunction.Text = "ShowSystemFunction";
 			this.menuItemShowSystemFunction.Click += new System.EventHandler(this.menuItemShowSystemFunction_Click);
 			// 
-			// menuItemSplitter
-			// 
-			this.menuItemSplitter.Index = 4;
-			this.menuItemSplitter.Text = "-";
-			// 
 			// menuExit
 			// 
 			this.menuExit.Index = 5;
 			this.menuExit.Text = "Exit\tALT+F4";
 			this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
 			// 
+			// menuItemInvLoad
+			// 
+			this.menuItemInvLoad.Index = 2;
+			this.menuItemInvLoad.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
+			this.menuItemInvLoad.Text = "Open";
+			this.menuItemInvLoad.Click += new System.EventHandler(this.menuItemInvLoad_Click);
+			// 
+			// menuItemInvSave
+			// 
+			this.menuItemInvSave.Index = 3;
+			this.menuItemInvSave.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
+			this.menuItemInvSave.Text = "Save";
+			this.menuItemInvSave.Click += new System.EventHandler(this.menuItemInvSave_Click);
+			// 
 			// menuSelection
 			// 
-			this.menuSelection.Index = 2;
+			this.menuSelection.Index = 1;
 			this.menuSelection.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																						  this.menuDeselectAll,
 																						  this.menuItemDeselectGroup});
@@ -233,7 +251,7 @@ namespace gui.Forms
 			// 
 			// menuItemInternal
 			// 
-			this.menuItemInternal.Index = 3;
+			this.menuItemInternal.Index = 2;
 			this.menuItemInternal.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																							 this.menuItemGC,
 																							 this.menuItemStartGNUPlot});
@@ -254,7 +272,7 @@ namespace gui.Forms
 			// 
 			// menuItemHelp
 			// 
-			this.menuItemHelp.Index = 4;
+			this.menuItemHelp.Index = 3;
 			this.menuItemHelp.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																						 this.menuItemAbout});
 			this.menuItemHelp.Text = "Help";
@@ -264,26 +282,6 @@ namespace gui.Forms
 			this.menuItemAbout.Index = 0;
 			this.menuItemAbout.Text = "About";
 			this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
-			// 
-			// menuItemInvestigations
-			// 
-			this.menuItemInvestigations.Index = 0;
-			this.menuItemInvestigations.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																								   this.menuItemInvLoad,
-																								   this.menuItemInvSave});
-			this.menuItemInvestigations.Text = "Investigations";
-			// 
-			// menuItemInvLoad
-			// 
-			this.menuItemInvLoad.Index = 0;
-			this.menuItemInvLoad.Text = "Open";
-			this.menuItemInvLoad.Click += new System.EventHandler(this.menuItemInvLoad_Click);
-			// 
-			// menuItemInvSave
-			// 
-			this.menuItemInvSave.Index = 1;
-			this.menuItemInvSave.Text = "Save";
-			this.menuItemInvSave.Click += new System.EventHandler(this.menuItemInvSave_Click);
 			// 
 			// groupBox1
 			// 
@@ -419,6 +417,16 @@ namespace gui.Forms
 			this.splitterLR.Size = new System.Drawing.Size(8, 491);
 			this.splitterLR.TabIndex = 9;
 			this.splitterLR.TabStop = false;
+			// 
+			// menuItem1
+			// 
+			this.menuItem1.Index = 4;
+			this.menuItem1.Text = "-";
+			// 
+			// menuItem2
+			// 
+			this.menuItem2.Index = 1;
+			this.menuItem2.Text = "-";
 			// 
 			// ComputationForm
 			// 
@@ -609,34 +617,10 @@ namespace gui.Forms
 				Document document = Document.LoadDocument(reader);
 				reader.Close();
 
-				CFunction function = new CFunctionClass();
-				function.SystemSource = document.SystemSource;
-				Runner.Kernel.function = function;                
+				Runner.Kernel.function = document.CreateSystemFunction();
 
-				this.computatioinTree.Root = CreateRoot(document.Root, path);
+				this.computatioinTree.Root = document.BuildComputationNodeTree(path);
 			}
-		}
-
-		private ComputationNode CreateRoot(TreeNodeSerializer root, string path)
-		{
-			ComputationNode rootNode = ComputationNode.FromTreeNodeSerializer(root, path);
-			CreateNodes(rootNode, root, path);
-			return rootNode;
-		}
-
-		private void CreateNodes(ComputationNode parent, TreeNodeSerializer root, string path)
-		{
-			foreach (TreeNodeSerializer nodeSerializer in root.Childs)
-			{
-				ComputationNode np = AddLoadSerializedNode(parent, nodeSerializer, path);
-				CreateNodes(np, nodeSerializer, path);
-			}
-		}
-		private ComputationNode AddLoadSerializedNode(ComputationNode parent, TreeNodeSerializer node, string path)
-		{
-			ComputationNode cnode = ComputationNode.FromTreeNodeSerializer(node, path);
-			parent.Nodes.Add(cnode);			
-			return cnode;
 		}
 
 		private void menuItemDeselectGroup_Click(object sender, System.EventArgs e)

@@ -7,10 +7,12 @@
 
 
 const int SIGRAPH_CODE = 1;
-const int PBGRAPH_CODE = 2;
-const int MORSE_CODE = 3;
+const int SIGROUP_CODE = 2;
+const int PBGRAPH_CODE = 3;
+const int PBGROUP_CODE = 4;
+const int MORSE_CODE = 5;
 
-
+#define TEST_OR_RET(x) {if (x) return S_OK;}
 // CSerializer
 
 HRESULT CSerializer::FinalConstruct() {
@@ -19,6 +21,11 @@ HRESULT CSerializer::FinalConstruct() {
 
 void CSerializer::FinalRelease() {
 
+}
+
+STDMETHODIMP CSerializer::SupportSerialization(IKernelNode* node, VARIANT_BOOL* result) {
+	*result = TRUE;
+	return S_OK;
 }
 
 
@@ -32,13 +39,20 @@ STDMETHODIMP CSerializer::LoadKernelNode(ISerializerInputData* data, IKernel* ke
 
 	switch (code) {
 		case SIGRAPH_CODE:
-			*node = LoadSymbolicImageGraph(fi);
+			*node = LoadGraph<ISymbolicImageGraph, CSymbolicImageGraph>(fi);
+			break;
+		case SIGROUP_CODE:
+			*node = LoadGroup<ISymbolicImageGroup, ISymbolicImageGraph, CSymbolicImageGroup>(fi, data);
 			break;
 		case PBGRAPH_CODE:
-			*node = LoadProjectiveBundleGraph(fi);
+			*node = LoadGraph<IProjectiveBundleGraph, CProjectiveBundleGraph>(fi);
+			break;
+		case PBGROUP_CODE:
+			*node = LoadGroup<IProjectiveBundleGroup, IProjectiveBundleGraph, CProjectiveBundleGroup>(fi, data);
 			break;
 		case MORSE_CODE:
 			*node = LoadMorseSpectrum(fi);
+			break;
 		default:
 			*node = NULL;
 			break;
@@ -57,23 +71,19 @@ STDMETHODIMP CSerializer::SaveKernelNode(ISerializerOutputData* data, IKernelNod
 	CString file(fileName);
 	FileOutputStream fo(file);
 
-	ISymbolicImageGraph* node;
-	anode->QueryInterface(&node);
-	if (node != NULL) {
-		fo<<SIGRAPH_CODE;
-		fo.stress();
-		SaveSymbolicImageGraph(node, fo);
-		node->Release();
+	if (testAndSaveGraph<ISymbolicImageGraph, SIGRAPH_CODE>(anode, fo)) {
 		return S_OK;
 	}
 
-	IProjectiveBundleGraph* pnode;
-	anode->QueryInterface(&pnode);
-	if (pnode != NULL) {
-		fo<< PBGRAPH_CODE;
-		fo.stress();
-		SaveProjectiveBundleGraph(pnode, fo);
-		pnode->Release();	
+	if (testAndSaveGraph<IProjectiveBundleGraph, PBGRAPH_CODE>(anode, fo)) {
+		return S_OK;
+	}
+
+	if (testAndSaveGroup<ISymbolicImageGroup, SIGROUP_CODE>(anode, fo, data)) {
+		return S_OK;
+	}
+
+	if (testAndSaveGroup<IProjectiveBundleGroup, PBGROUP_CODE>(anode, fo, data)) {
 		return S_OK;
 	}
 
@@ -86,7 +96,6 @@ STDMETHODIMP CSerializer::SaveKernelNode(ISerializerOutputData* data, IKernelNod
 		morse->Release();
 		return S_OK;
 	}
-
 	return E_FAIL;
 }
 
@@ -100,11 +109,11 @@ Graph* CSerializer::LoadGraph(FileInputStream& fi) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// ISymbolicImageGraph
+// Graph
 
 
-
-void CSerializer::SaveSymbolicImageGraph(ISymbolicImageGraph* node, FileOutputStream& fo) {
+template <typename IGraph>
+void CSerializer::SaveGraph(IGraph* node, FileOutputStream& fo) {
 
 	Graph* graph;
 	node->getGraph((void**)&graph);
@@ -112,9 +121,12 @@ void CSerializer::SaveSymbolicImageGraph(ISymbolicImageGraph* node, FileOutputSt
 	this->SaveGraph(fo, graph);
 }
 
-IKernelNode* CSerializer::LoadSymbolicImageGraph(FileInputStream& fi) {
-	ISymbolicImageGraph* node;
-	CSymbolicImageGraph::CreateInstance(&node);
+template <typename IGraph, typename CGraph>
+IKernelNode* CSerializer::LoadGraph(FileInputStream& fi) {
+	IGraph* node;
+	CGraph::CreateInstance(&node);
+
+	ATLASSERT(node != NULL);
 	
 	Graph* graph = LoadGraph(fi);
 
@@ -131,31 +143,58 @@ IKernelNode* CSerializer::LoadSymbolicImageGraph(FileInputStream& fi) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////
-// IProjectiveBundleGraph
+// Group
 
+template <typename IGroup>
+void CSerializer::SaveGroup(IGroup* groupnode, FileOutputStream& fo, ISerializerOutputData* data) {
+	IGroupNode* group;
+	groupnode->QueryInterface(&group);
 
-void CSerializer::SaveProjectiveBundleGraph(IProjectiveBundleGraph* node, FileOutputStream& fo) {
-	Graph* graph;
-	node->getGraph((void**)&graph);
-    
-	this->SaveGraph(fo, graph);
+	ATLASSERT(group != NULL);
+
+	int length;
+	group->nodeCount(&length);
+
+	fo<<length;
+	fo.stress();
+
+	for (int i=0; i<length; i++) {
+		IKernelNode* node;
+		group->getNode(i, &node);
+		int id;
+		data->SaveWithID(node, &id);
+
+		fo<<id;
+	}
 }
 
-IKernelNode* CSerializer::LoadProjectiveBundleGraph(FileInputStream& fi) {
-	IProjectiveBundleGraph* node;
-	CProjectiveBundleGraph::CreateInstance(&node);
-	
-	Graph* graph = LoadGraph(fi);
+template <typename IGroup, typename IGraph, typename CGroup>
+IKernelNode* CSerializer::LoadGroup(FileInputStream& fi, ISerializerInputData* data) {
+	int length;
+	fi>>length;
 
-	node->setGraph((void*)graph);
+	IGroup* group;
+	CGroup::CreateInstance(&group);
+
+	ATLASSERT(group != NULL);
+
+	for (int i=0;i<length;i++) {
+		IKernelNode* node;
+		int id;
+		fi>>id;
+		data->LoadByID(id, &node);
+		IGraph* img;
+		node->QueryInterface(&img);
+		ATLASSERT(img != NULL);
+
+		group->addNode(img);
+		img->Release();
+		node->Release();
+	}
 
 	IKernelNode* ret;
-	node->QueryInterface(&ret);
-
-	node->Release();
-
-	ATLASSERT(ret != NULL);
-
+	group->QueryInterface(&ret);
+	group->Release();
 	return ret;
 }
 
@@ -227,3 +266,41 @@ IKernelNode* CSerializer::LoadMorseSpectrum(FileInputStream& fi) {
 }
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+template <typename Node>
+Node* CSerializer::Cast(IKernelNode* node) {
+	Node* anode;
+	node->QueryInterface(&anode);
+	return anode;
+}
+
+template <typename IGraph, int CODE>
+bool CSerializer::testAndSaveGraph(IKernelNode* anode, FileOutputStream& fo) {
+	IGraph* node = Cast<IGraph>(anode);
+	if (node != NULL) {
+		fo<<CODE;
+		fo.stress();
+
+		SaveGraph<IGraph>(node, fo);
+		node->Release();
+		return true;
+	}
+	return false;
+}
+
+template <typename IGroup, int CODE>
+bool CSerializer::testAndSaveGroup(IKernelNode* anode, FileOutputStream& fo, ISerializerOutputData* data) {
+	IGroup* node = Cast<IGroup>(anode);
+	if (node != NULL) {
+		fo<<CODE;
+		fo.stress();
+
+		SaveGroup<IGroup>(node, fo, data);
+
+		node->Release();
+
+		return true;
+	} 
+	return false;
+}

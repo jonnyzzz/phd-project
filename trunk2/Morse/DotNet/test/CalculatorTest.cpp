@@ -3,6 +3,7 @@
 #include "objects.h"
 #include <math.h>
 #include "../calculator/FunctionContext.h"
+#include "../systemfunction/segmentprojectiveextendedsystemfunction.h"
 
 CalculatorTest::CalculatorTest(ostream& o) : TestBase("CalculatorTest", o)
 {
@@ -32,6 +33,8 @@ void CalculatorTest::Test() {
 
     RUN (TestSystemFunctionDerivate);
     RUN (TestSystemFunctionDerivateMultiple);
+
+	RUN ( TestSystemFunctionSegmentPojectiveExtension);
 
    
     Message("Test: Success");
@@ -188,4 +191,32 @@ void CalculatorTest::TestSystemFunctionDerivateMultiple() {
     AssertTrue(output[0] == 0 && output[1] == 0 && output[2] == 1 && output[3] == 1 && output[4] == 0 && output[5] == 0, "TestSystemFunctionDerivateMultiple failed");
 
     delete funciton;
+}
+
+
+void CalculatorTest::TestSystemFunctionSegmentPojectiveExtension() {
+	FunctionFactory factory("y1=x1;y2=x2;");
+	ISystemFunctionDerivate* function = new SystemFunctionDerivate(&factory, 2, 1);
+	ISystemFunctionDerivate* exfunction = new SegmentProjectiveExtendedSystemFunction(function);
+
+	double* input = function->getInput();
+	double* output = function->getOutput();
+
+	input[0] = input[1] = 0;
+	input[2] = input[3] = 1;
+
+	exfunction->evaluate();
+/*
+	cout<<"My Failed\n";
+
+	for (int i=0; i<8; i++) {
+		cout<<i<<" -> "<<output[i]<<"\n";
+	}
+*/
+	AssertTrue(output[0] == 0 && output[1] == 0 && output[2] == 1 && 
+		       output[3] == 0 && output[4] == 0 && output[5] == 1 &&
+			   output[6] == 1 && abs(output[7]- 1) < 1e-8, "SegmentFunction Test failed");
+
+	delete function;
+	delete exfunction;
 }

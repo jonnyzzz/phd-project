@@ -65,7 +65,7 @@ namespace gui.Resource
 
 		private string GNUPLOT_TEMPLATE_2D; // = GNUPLOT_TEMPLATES + @"\2d.txt";
 		private string GNUPLOT_TEMPLATE_3D; // = GNUPLOT_TEMPLATES + @"\3d.txt";
-		private string fileCreateTemplate = "{0}.{1}.{2}.system.data";
+		private string fileCreateTemplate = "{0}.{1}.system.data";
 
 
 		protected Resources(string basePath)

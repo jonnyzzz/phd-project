@@ -353,23 +353,23 @@ void CRom::minimize() {
 	cout<<"Enter\n";
 	extrema = init();
 	cout<<"Init\n";
-
+/*
 #ifdef _DEBUG
 	dumpGraph();
 #endif
-
+*/
 	extrema = minimize(extrema);
 	cout<<"Cost\n";
 	answerValue = contour_cost(extrema);
 	cout<<"Complete";
-
+/*
 #ifdef _DEBUG
 	ofstream f;
 	f.open("./extrema.ids");
 	f<<"Minimum searching:\n";
 	dumpExtremaContour(f, extrema);
 #endif
-
+*/
 }
 
 void CRom::maximize() {
@@ -377,14 +377,14 @@ void CRom::maximize() {
 	factor = -1;	
 	extrema = minimize(init());
 	answerValue = -contour_cost(extrema);
-
+/*
 #ifdef _DEBUG
 	ofstream f;
 	f.open("./extrema.ids", ios_base::out | ios_base::app | ios_base::ate);
 	f<<"\n\nMaximum searching:\n";
 	dumpExtremaContour(f, extrema);
 #endif
-
+*/
 }
 
 double CRom::getAnswer() {

@@ -16,4 +16,6 @@ protected:
 
 private:
     double* output;
+	int function_dimension;
+	int v_offset;
 };

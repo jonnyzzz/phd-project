@@ -18,7 +18,9 @@ void runTests();
 
 
 int _tmain(int argc, _TCHAR* argv[]) {
-    testRomFromFile("o:\\aaaa");
+    //testRomFromFile("o:\\aaaa");
+
+	runTests();
 
 }
 

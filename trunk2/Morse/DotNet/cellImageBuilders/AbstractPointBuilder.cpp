@@ -82,6 +82,8 @@ void AbstractPointBuilder::processNextGraph(Graph* graph) {
 
 	if (!graph_source->equals(graph)) throw "Unable to continue;";
 
+	ASSERT( this->result() != NULL);
+
 	this->graph = graph;
 
 	int step;

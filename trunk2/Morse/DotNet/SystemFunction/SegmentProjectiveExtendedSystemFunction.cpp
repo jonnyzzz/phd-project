@@ -43,7 +43,7 @@ int SegmentProjectiveExtendedSystemFunction::getFunctionDimension() {
 void SegmentProjectiveExtendedSystemFunction::evaluate() {
     function->evaluate();
     computeEx(
-        &input[function_dimension], 
+        &input[real_dimension], 
         &output[real_dimension], 
         &output[function_dimension]
         );
@@ -61,17 +61,19 @@ void SegmentProjectiveExtendedSystemFunction::computeEx(double* v, double* d, do
     //d - differential vector
     //output - vector v
 
+	//cout<<"real dim = "<<real_dimension<<"\n";
+
     int max = 0;
     for (int i=0; i<real_dimension; i++) {
         output[i] = 0;
         for (int j=0; j<real_dimension; j++) {
-            output[i] += d[j*real_dimension + i] * v[j];
+            output[i] += d[i*real_dimension + j] * v[j];
         }
         if (Abs(output[max]) < Abs(output[i])) {
             max = i;
         }
     }
     for (int i=0; i<real_dimension; i++) {
-        output[i] /= output[max];
+       output[i] /= output[max];
     }
 }

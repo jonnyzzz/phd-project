@@ -29,7 +29,6 @@ SystemFunctionDerivate::~SystemFunctionDerivate(void)
 
 
 double* SystemFunctionDerivate::getInput() {
-    cout<<"Getter Call!!!\n";
     return computationChain.front()->getInput();
 }
 

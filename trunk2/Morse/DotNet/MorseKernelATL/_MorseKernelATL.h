@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Wed Feb 02 01:56:56 2005
+/* at Thu Feb 03 02:20:18 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -6184,6 +6184,10 @@ EXTERN_C const IID IID_ISerializerOutputData;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE FileName( 
             /* [retval][out] */ BSTR *fileName) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SaveWithID( 
+            /* [in] */ IKernelNode *node,
+            /* [retval][out] */ int *ID) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -6236,6 +6240,11 @@ EXTERN_C const IID IID_ISerializerOutputData;
             ISerializerOutputData * This,
             /* [retval][out] */ BSTR *fileName);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SaveWithID )( 
+            ISerializerOutputData * This,
+            /* [in] */ IKernelNode *node,
+            /* [retval][out] */ int *ID);
+        
         END_INTERFACE
     } ISerializerOutputDataVtbl;
 
@@ -6275,6 +6284,9 @@ EXTERN_C const IID IID_ISerializerOutputData;
 #define ISerializerOutputData_FileName(This,fileName)	\
     (This)->lpVtbl -> FileName(This,fileName)
 
+#define ISerializerOutputData_SaveWithID(This,node,ID)	\
+    (This)->lpVtbl -> SaveWithID(This,node,ID)
+
 #endif /* COBJMACROS */
 
 
@@ -6288,6 +6300,19 @@ EXTERN_C const IID IID_ISerializerOutputData;
 
 
 void __RPC_STUB ISerializerOutputData_FileName_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISerializerOutputData_SaveWithID_Proxy( 
+    ISerializerOutputData * This,
+    /* [in] */ IKernelNode *node,
+    /* [retval][out] */ int *ID);
+
+
+void __RPC_STUB ISerializerOutputData_SaveWithID_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -6315,6 +6340,10 @@ EXTERN_C const IID IID_ISerializerInputData;
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE FileName( 
             /* [retval][out] */ BSTR *fileName) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE LoadByID( 
+            /* [in] */ int ID,
+            /* [retval][out] */ IKernelNode **node) = 0;
         
     };
     
@@ -6368,6 +6397,11 @@ EXTERN_C const IID IID_ISerializerInputData;
             ISerializerInputData * This,
             /* [retval][out] */ BSTR *fileName);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *LoadByID )( 
+            ISerializerInputData * This,
+            /* [in] */ int ID,
+            /* [retval][out] */ IKernelNode **node);
+        
         END_INTERFACE
     } ISerializerInputDataVtbl;
 
@@ -6407,6 +6441,9 @@ EXTERN_C const IID IID_ISerializerInputData;
 #define ISerializerInputData_FileName(This,fileName)	\
     (This)->lpVtbl -> FileName(This,fileName)
 
+#define ISerializerInputData_LoadByID(This,ID,node)	\
+    (This)->lpVtbl -> LoadByID(This,ID,node)
+
 #endif /* COBJMACROS */
 
 
@@ -6420,6 +6457,19 @@ EXTERN_C const IID IID_ISerializerInputData;
 
 
 void __RPC_STUB ISerializerInputData_FileName_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISerializerInputData_LoadByID_Proxy( 
+    ISerializerInputData * This,
+    /* [in] */ int ID,
+    /* [retval][out] */ IKernelNode **node);
+
+
+void __RPC_STUB ISerializerInputData_LoadByID_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -6453,6 +6503,10 @@ EXTERN_C const IID IID_ISerializer;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SaveKernelNode( 
             /* [in] */ ISerializerOutputData *output,
             /* [in] */ IKernelNode *node) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE SupportSerialization( 
+            /* [in] */ IKernelNode *node,
+            /* [retval][out] */ VARIANT_BOOL *result) = 0;
         
     };
     
@@ -6513,6 +6567,11 @@ EXTERN_C const IID IID_ISerializer;
             /* [in] */ ISerializerOutputData *output,
             /* [in] */ IKernelNode *node);
         
+        HRESULT ( STDMETHODCALLTYPE *SupportSerialization )( 
+            ISerializer * This,
+            /* [in] */ IKernelNode *node,
+            /* [retval][out] */ VARIANT_BOOL *result);
+        
         END_INTERFACE
     } ISerializerVtbl;
 
@@ -6555,6 +6614,9 @@ EXTERN_C const IID IID_ISerializer;
 #define ISerializer_SaveKernelNode(This,output,node)	\
     (This)->lpVtbl -> SaveKernelNode(This,output,node)
 
+#define ISerializer_SupportSerialization(This,node,result)	\
+    (This)->lpVtbl -> SupportSerialization(This,node,result)
+
 #endif /* COBJMACROS */
 
 
@@ -6583,6 +6645,19 @@ void __RPC_STUB ISerializer_LoadKernelNode_Stub(
 
 
 void __RPC_STUB ISerializer_SaveKernelNode_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+HRESULT STDMETHODCALLTYPE ISerializer_SupportSerialization_Proxy( 
+    ISerializer * This,
+    /* [in] */ IKernelNode *node,
+    /* [retval][out] */ VARIANT_BOOL *result);
+
+
+void __RPC_STUB ISerializer_SupportSerialization_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,

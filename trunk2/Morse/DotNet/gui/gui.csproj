@@ -748,7 +748,12 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Tree\Serialization\KernelNodeSerializer.cs"
+                    RelPath = "src\Tree\Serialization\TreeNodeDeserializator.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Serialization\TreeNodeSerializator.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

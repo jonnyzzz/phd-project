@@ -1,4 +1,4 @@
-Wrong answer for 0.5 2 linear system. There is no +ln2 answer. only -ln2!!!
+FIX Wrong answer for 0.5 2 linear system. There is no +ln2 answer. only -ln2!!!
 Shouldn't allow to start without resources!
 Resources -> XML
 GraphNodeEnumerator leak
@@ -6,7 +6,7 @@ Components in color in GNU PLOT
 3D Box in gnu plot
 Document class global integration
 Document dirty flag
-Serialization of Group nodes
+FIX Serialization of Group nodes
 GNUPLOT template -> XML
 GNUPLOT smart template
 GNUPLOT image saver

@@ -505,10 +505,12 @@ interface IProjectiveBundleGroup : IProjectiveBundle {
 	dual,
 	pointer_default(unique)
 ] 
-#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+#line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
 interface ISerializerOutputData : IDispatch {
-#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
 	[id(1)] HRESULT  FileName([out,retval] BSTR *fileName );
+#line 26 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+	[id(2)] HRESULT  SaveWithID([in] IKernelNode *node, [out,retval] int *ID);
 };
 
 [
@@ -517,10 +519,12 @@ interface ISerializerOutputData : IDispatch {
 	dual,
 	pointer_default(unique)
 ] 
-#line 31 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+#line 36 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
 interface ISerializerInputData : IDispatch {
-#line 34 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+#line 39 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
 	[id(1)] HRESULT  FileName([out,retval] BSTR *fileName );
+#line 41 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+	[id(2)] HRESULT  LoadByID([in] int ID, [out,retval] IKernelNode **node );
 };
 
 [
@@ -530,12 +534,14 @@ interface ISerializerInputData : IDispatch {
 	helpstring("ISerializer Interface"),
 	pointer_default(unique)
 ] 
-#line 45 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+#line 52 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
 interface ISerializer : IDispatch {
-#line 48 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+#line 55 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
 	[id(1)] HRESULT  LoadKernelNode([in] ISerializerInputData *data, [in] IKernel *kernel, [out,retval] IKernelNode **node );
-#line 51 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+#line 58 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
 	[id(2)] HRESULT  SaveKernelNode([in] ISerializerOutputData *output, [in] IKernelNode *node);
+#line 60 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+	HRESULT  SupportSerialization([in] IKernelNode *node, [out,retval] VARIANT_BOOL *result);
 };
 
 
@@ -723,7 +729,7 @@ library MorseKernelATL
 		uuid(3B39CBCB-C514-44FA-9FB3-79A822F13C3C),
 		helpstring("Serializer Class")
 	] 
-#line 67 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
+#line 76 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\serializer.h"
 	coclass CSerializer {
 		interface ISerializer;
 	};

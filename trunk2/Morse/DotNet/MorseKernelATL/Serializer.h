@@ -5,6 +5,8 @@
 #include "nodebase.h"
 #include "symbolicImageGraph.h"
 #include "projectivebundlegraph.h"
+#include "symbolicimagegroup.h"
+#include "projectivebundlegroup.h"
 #include "morsespectrum.h"
 #include "../graph/FileStream.h"
 
@@ -20,6 +22,9 @@ __interface ISerializerOutputData : IDispatch
 {
 	[id(1)]
 	HRESULT FileName([out, retval] BSTR* fileName);
+	[id(2)]
+	HRESULT SaveWithID([in] IKernelNode* node, [out, retval] int* ID);
+
 };
 
 [
@@ -32,6 +37,8 @@ __interface ISerializerInputData : IDispatch
 {
 	[id(1)]
 	HRESULT FileName([out, retval] BSTR* fileName);
+	[id(2)]
+	HRESULT LoadByID([in] int ID, [out, retval] IKernelNode** node);
 };
 
 
@@ -49,6 +56,8 @@ __interface ISerializer : IDispatch
 
 	[id(2)]
 	HRESULT SaveKernelNode([in] ISerializerOutputData* output, [in] IKernelNode* node);
+
+	HRESULT SupportSerialization([in] IKernelNode* node, [out, retval] VARIANT_BOOL* result);
 };
 
 
@@ -83,19 +92,42 @@ public:
 	STDMETHOD(LoadKernelNode)(ISerializerInputData* data, IKernel* kernel, IKernelNode** node);
 	STDMETHOD(SaveKernelNode)(ISerializerOutputData* output, IKernelNode* node);
 
+	STDMETHOD(SupportSerialization)(IKernelNode* node, VARIANT_BOOL* result);
+
 
 private:
 
-	void SaveSymbolicImageGraph(ISymbolicImageGraph* graph, FileOutputStream& fo);
-	IKernelNode* LoadSymbolicImageGraph(FileInputStream& fi);
+	template <typename IGraph>
+	void SaveGraph(IGraph* graph, FileOutputStream& fo);
 
-	void SaveProjectiveBundleGraph(IProjectiveBundleGraph* graph, FileOutputStream& fo);
-	IKernelNode* LoadProjectiveBundleGraph(FileInputStream& fi);
+	template <typename IGraph, typename CGraph>
+	IKernelNode* LoadGraph(FileInputStream& fi);
 
+
+	template <typename IGroup>
+	void SaveGroup(IGroup* group, FileOutputStream& fo, ISerializerOutputData* data);
+
+	template <typename IGroup, typename IGraph, typename CGroup>
+	IKernelNode* LoadGroup(FileInputStream& fi, ISerializerInputData* data);
+
+
+private:    
 	void SaveMorseSpectrum(IMorseSpectrum* node, FileOutputStream& fo);
 	IKernelNode* LoadMorseSpectrum(FileInputStream& fi);
 
 	void SaveGraph(FileOutputStream& fo, Graph* graph);
 	Graph* LoadGraph(FileInputStream& fi);
+
+private:
+	template <typename Node>
+	Node* Cast(IKernelNode* node);
+
+	template <typename IGraph, int CODE>
+	bool testAndSaveGroup(IKernelNode* anode, FileOutputStream& fo, ISerializerOutputData* data);
+
+	template <typename IGraph, int CODE>
+	bool testAndSaveGraph(IKernelNode* anode, FileOutputStream& fo);
+
+	
 };
 

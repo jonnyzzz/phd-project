@@ -24,4 +24,6 @@ protected:
     void TestSystemFunctionDerivate();
 
     void TestSystemFunctionDerivateMultiple();
+
+	void TestSystemFunctionSegmentPojectiveExtension();
 };

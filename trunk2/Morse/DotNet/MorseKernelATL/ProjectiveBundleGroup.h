@@ -42,9 +42,7 @@ __interface IProjectiveBundleGroup : IProjectiveBundle
 ]
 class ATL_NO_VTABLE CProjectiveBundleGroup : 
 	public IProjectiveBundleGroup,
-//	public ISubdevidable,
 	public ISubdevidablePoint,
-//	public IMorsable,
 	public IGroupNode,
 	public IExportData,
 	private GraphSaver
@@ -84,9 +82,7 @@ public:
 	STDMETHOD(graphInfo)(IGraphInfo** info);
 	STDMETHOD(graphDimension)(int* value);
 
-	STDMETHOD(Subdevide)(ISubdevideParams* params);
 	STDMETHOD(SubdevidePoint)(ISubdevidePointParams* params);
-	STDMETHOD(Morse)();
 
 	STDMETHOD(ExportData)(BSTR fileName);
 };

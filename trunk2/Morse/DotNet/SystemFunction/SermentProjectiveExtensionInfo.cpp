@@ -15,7 +15,7 @@ static char THIS_FILE[] = __FILE__;
 
 SermentProjectiveExtensionInfo::SermentProjectiveExtensionInfo(ISystemFunctionDerivate* function) :
     IProjectiveExtensionInfo(function)
-{
+{	
 }
 
 SermentProjectiveExtensionInfo::~SermentProjectiveExtensionInfo(void)
