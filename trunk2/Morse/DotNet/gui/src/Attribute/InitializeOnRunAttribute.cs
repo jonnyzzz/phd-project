@@ -16,9 +16,9 @@ namespace gui.Attributes
 
 		private bool isInternal;
 
-		public InitializeOnRunAttribute(bool isInternal)
+		public InitializeOnRunAttribute(bool isInternala)
 		{
-			this.isInternal = isInternal;
+			this.isInternal = isInternala;
 		}
 
 		public bool IsInternal

@@ -24,7 +24,7 @@ namespace gui.Tree.Node.Action
 			return new ComputationNodeMenuItem[] {
 				new ComputationNodeMenuFactory.UniversalComputationMenuItem(
 													 new ComputationNodeMenuFactory.UniversalMenuItemClick(Homotop),
-													 "Homotop Paths")
+													 "!Experimental! Homotop Paths")
 				};
 		}
 
@@ -38,7 +38,7 @@ namespace gui.Tree.Node.Action
 		}
 
 
-		[InitializeOnRun]
+		[InitializeOnRun(true)]
 		public static void Register()
 		{
 			DynamicActionNodeTest.Instance.registerActionFactory(new HomotopActionFactory());

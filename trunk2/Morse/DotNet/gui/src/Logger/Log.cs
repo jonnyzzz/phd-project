@@ -34,7 +34,7 @@ namespace gui.Logger
 
         private static void ShowMessage(Type cls, string message)
         {
-            Console.Out.WriteLine("\n\nLog: Thread={0}, Class={1}, Message = \n\t{2}\n", Thread.CurrentThread.Name, cls.Name, message);
+            Console.Out.WriteLine("Log: Thread={0}, Class={1}, Message = {2}\n", Thread.CurrentThread.Name, cls.Name, message);
         }
 
         #endregion

@@ -182,12 +182,27 @@
         <Files>
             <Include>
                 <File
+                    RelPath = "About.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "About.resx"
+                    DependentUpon = "About.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "res\jo.ico"
                     BuildAction = "Content"
                 />
                 <File
                     RelPath = "res\SI.ico"
                     BuildAction = "Content"
+                />
+                <File
+                    RelPath = "src\CommandLineParsers.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\ComputationForm.cs"

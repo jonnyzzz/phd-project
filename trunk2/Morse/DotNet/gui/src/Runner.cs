@@ -24,7 +24,7 @@ namespace gui
 		
 		private ComputationForm computationForm;
 		private CKernel kernel;
-		private bool isInternal = true;
+		
 
 		public static CKernel Kernel 
 		{
@@ -42,24 +42,45 @@ namespace gui
 			}
 		}
 
-		public bool IsInternal
+		
+		private static bool isInternal = true;
+		public static bool IsInternal
 		{
 			get { return isInternal; }
 		}
+
+		static CommandLineParsers commandLineParsers;
 
 
 		[STAThread]
 		static void Main(string[] args) 
 		{	
+			try 
+			{
+				commandLineParsers = new CommandLineParsers(args);
+			} catch (CommandLineParseException e)
+			{
+				Log.LogException(typeof(Runner), e, "Unable to parse command line");
+				MessageBox.Show(e.Message, "Wrong parameters");
+				return;
+			}
+			isInternal = commandLineParsers.hasKey("internal");
+
             Thread.CurrentThread.Name = "MainThread";
             AttributeProcessor.InitializeStaticAttribute(Assembly.GetExecutingAssembly());
-            if (args.Length == 1) 
-            {
-                Resources.SetBasePath(args[0]);
-            } else if (args.Length == 2)
-            {
-                Resources.SetBasePath(args[0], args[1]);
-            } else {
+
+			#region initResources
+			if (commandLineParsers.hasKey("resources") && commandLineParsers.hasKey("temporary"))
+			{
+				Resources.SetBasePath(
+					commandLineParsers.getValue("resources"), 
+					commandLineParsers.getValue("temporary")
+					);
+			} else if (commandLineParsers.hasKey("resources"))
+			{
+				Resources.SetBasePath(commandLineParsers.getValue("resources"));
+			} else
+			{		
                 try 
                 {
                     Resources.SetBasePath(Application.StartupPath);
@@ -71,19 +92,20 @@ namespace gui
                     } catch (Exception ee)
                     {
                         Log.LogException(typeof(Runner),ee, "Unable to find any config files");
+						MessageBox.Show("Unable to locate program resource files.", "Run failed");
                     }
                 }
             }
+			#endregion
 
             new Runner();
 		}
 
 		public Runner()
 		{	
-
 			instance = this;
-			Application.ApplicationExit += new EventHandler(OnApplicationExit);
 
+			Application.ApplicationExit += new EventHandler(OnApplicationExit);
 			kernel = new CKernelClass();
 			
             registerEvents();			
@@ -95,6 +117,7 @@ namespace gui
 			//Application.Run(new Visualization3D(true));
 		}
 
+		#region events
         private void registerEvents()
         {
             Log.LogMessage(this, "Registering global evetns...");
@@ -114,6 +137,7 @@ namespace gui
             kernel.noChilds -= new IKernelEvents_noChildsEventHandler(kernel_noChilds);
             kernel.noImplementation -= new IKernelEvents_noImplementationEventHandler(kernel_noImplementation);                       
         }
+		#endregion
 
 
 		private void OnApplicationExit(object sender, EventArgs e)
@@ -134,6 +158,7 @@ namespace gui
 			}
 		}
 
+		#region eventHandlers
 		private void interalKernellException(string message)
 		{
 			Log.LogMessage(this, "DLL Exception :" + message);
@@ -161,6 +186,7 @@ namespace gui
         {
             Log.LogMessage(this, "E: Not implemented");
             computationForm.noImplementation(nodeParent);
-        }                
+        }
+		#endregion
     }
 }

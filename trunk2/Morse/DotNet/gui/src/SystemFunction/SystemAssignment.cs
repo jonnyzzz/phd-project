@@ -146,162 +146,162 @@ namespace gui.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(SystemAssignment));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dimensionUpDown = new System.Windows.Forms.NumericUpDown();
-            this.formulas = new System.Windows.Forms.DataGrid();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.mainMenu = new System.Windows.Forms.MainMenu();
-            this.menuLoad = new System.Windows.Forms.MenuItem();
-            this.menuSave = new System.Windows.Forms.MenuItem();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.menuItemGetSource = new System.Windows.Forms.MenuItem();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dimensionUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.formulas)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.dimensionUpDown);
-            this.groupBox1.Controls.Add(this.formulas);
-            this.groupBox1.Location = new System.Drawing.Point(8, 8);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(496, 376);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Descrete system";
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
-            this.label1.Location = new System.Drawing.Point(32, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(368, 16);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Dimension:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dimensionUpDown
-            // 
-            this.dimensionUpDown.Location = new System.Drawing.Point(416, 24);
-            this.dimensionUpDown.Maximum = new System.Decimal(new int[] {
-                                                                            32,
-                                                                            0,
-                                                                            0,
-                                                                            0});
-            this.dimensionUpDown.Minimum = new System.Decimal(new int[] {
-                                                                            2,
-                                                                            0,
-                                                                            0,
-                                                                            0});
-            this.dimensionUpDown.Name = "dimensionUpDown";
-            this.dimensionUpDown.Size = new System.Drawing.Size(64, 20);
-            this.dimensionUpDown.TabIndex = 1;
-            this.dimensionUpDown.Value = new System.Decimal(new int[] {
-                                                                          2,
-                                                                          0,
-                                                                          0,
-                                                                          0});
-            this.dimensionUpDown.ValueChanged += new System.EventHandler(this.dimensionUpDown_ValueChanged);
-            // 
-            // formulas
-            // 
-            this.formulas.AllowNavigation = false;
-            this.formulas.AllowSorting = false;
-            this.formulas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.formulas.DataMember = "";
-            this.formulas.HeaderForeColor = System.Drawing.SystemColors.ControlText;
-            this.formulas.ImeMode = System.Windows.Forms.ImeMode.Katakana;
-            this.formulas.Location = new System.Drawing.Point(16, 56);
-            this.formulas.Name = "formulas";
-            this.formulas.Size = new System.Drawing.Size(464, 296);
-            this.formulas.TabIndex = 0;
-            // 
-            // btnNext
-            // 
-            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Location = new System.Drawing.Point(8, 392);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(128, 24);
-            this.btnNext.TabIndex = 2;
-            this.btnNext.Text = "Next";
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Location = new System.Drawing.Point(376, 392);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(128, 24);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // mainMenu
-            // 
-            this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                                     this.menuLoad,
-                                                                                     this.menuSave,
-                                                                                     this.menuItemGetSource});
-            // 
-            // menuLoad
-            // 
-            this.menuLoad.Index = 0;
-            this.menuLoad.Text = "Load";
-            this.menuLoad.Click += new System.EventHandler(this.menuLoad_Click);
-            // 
-            // menuSave
-            // 
-            this.menuSave.Index = 1;
-            this.menuSave.Text = "Save";
-            this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.DefaultExt = "equation";
-            this.openFileDialog.Filter = "Equation files|*.equation|All files|*.*";
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.DefaultExt = "equation";
-            this.saveFileDialog.FileName = "equation";
-            this.saveFileDialog.Filter = "Equation files|*.equation|All files|*.*";
-            this.saveFileDialog.Title = "Save System Equation";
-            // 
-            // menuItemGetSource
-            // 
-            this.menuItemGetSource.Index = 2;
-            this.menuItemGetSource.Text = "GetSource";
-            this.menuItemGetSource.Click += new System.EventHandler(this.menuItemGetSource_Click);
-            // 
-            // SystemAssignment
-            // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(514, 421);
-            this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnCancel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Menu = this.mainMenu;
-            this.Name = "SystemAssignment";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "System Equation";
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dimensionUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.formulas)).EndInit();
-            this.ResumeLayout(false);
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(SystemAssignment));
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.dimensionUpDown = new System.Windows.Forms.NumericUpDown();
+			this.formulas = new System.Windows.Forms.DataGrid();
+			this.btnNext = new System.Windows.Forms.Button();
+			this.btnCancel = new System.Windows.Forms.Button();
+			this.mainMenu = new System.Windows.Forms.MainMenu();
+			this.menuLoad = new System.Windows.Forms.MenuItem();
+			this.menuSave = new System.Windows.Forms.MenuItem();
+			this.menuItemGetSource = new System.Windows.Forms.MenuItem();
+			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.groupBox1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dimensionUpDown)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.formulas)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+			this.groupBox1.Controls.Add(this.label1);
+			this.groupBox1.Controls.Add(this.dimensionUpDown);
+			this.groupBox1.Controls.Add(this.formulas);
+			this.groupBox1.Location = new System.Drawing.Point(8, 8);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(496, 376);
+			this.groupBox1.TabIndex = 1;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Descrete system";
+			// 
+			// label1
+			// 
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+			this.label1.Location = new System.Drawing.Point(32, 24);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(368, 16);
+			this.label1.TabIndex = 2;
+			this.label1.Text = "Dimension:";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// dimensionUpDown
+			// 
+			this.dimensionUpDown.Location = new System.Drawing.Point(416, 24);
+			this.dimensionUpDown.Maximum = new System.Decimal(new int[] {
+																			30,
+																			0,
+																			0,
+																			0});
+			this.dimensionUpDown.Minimum = new System.Decimal(new int[] {
+																			1,
+																			0,
+																			0,
+																			0});
+			this.dimensionUpDown.Name = "dimensionUpDown";
+			this.dimensionUpDown.Size = new System.Drawing.Size(64, 20);
+			this.dimensionUpDown.TabIndex = 1;
+			this.dimensionUpDown.Value = new System.Decimal(new int[] {
+																		  2,
+																		  0,
+																		  0,
+																		  0});
+			this.dimensionUpDown.ValueChanged += new System.EventHandler(this.dimensionUpDown_ValueChanged);
+			// 
+			// formulas
+			// 
+			this.formulas.AllowNavigation = false;
+			this.formulas.AllowSorting = false;
+			this.formulas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.formulas.DataMember = "";
+			this.formulas.HeaderForeColor = System.Drawing.SystemColors.ControlText;
+			this.formulas.ImeMode = System.Windows.Forms.ImeMode.Katakana;
+			this.formulas.Location = new System.Drawing.Point(16, 56);
+			this.formulas.Name = "formulas";
+			this.formulas.Size = new System.Drawing.Size(464, 296);
+			this.formulas.TabIndex = 0;
+			// 
+			// btnNext
+			// 
+			this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnNext.Location = new System.Drawing.Point(8, 392);
+			this.btnNext.Name = "btnNext";
+			this.btnNext.Size = new System.Drawing.Size(128, 24);
+			this.btnNext.TabIndex = 2;
+			this.btnNext.Text = "Next";
+			this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+			// 
+			// btnCancel
+			// 
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.btnCancel.Location = new System.Drawing.Point(376, 392);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(128, 24);
+			this.btnCancel.TabIndex = 3;
+			this.btnCancel.Text = "Cancel";
+			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+			// 
+			// mainMenu
+			// 
+			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																					 this.menuLoad,
+																					 this.menuSave,
+																					 this.menuItemGetSource});
+			// 
+			// menuLoad
+			// 
+			this.menuLoad.Index = 0;
+			this.menuLoad.Text = "Load";
+			this.menuLoad.Click += new System.EventHandler(this.menuLoad_Click);
+			// 
+			// menuSave
+			// 
+			this.menuSave.Index = 1;
+			this.menuSave.Text = "Save";
+			this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
+			// 
+			// menuItemGetSource
+			// 
+			this.menuItemGetSource.Index = 2;
+			this.menuItemGetSource.Text = "GetSource";
+			this.menuItemGetSource.Click += new System.EventHandler(this.menuItemGetSource_Click);
+			// 
+			// openFileDialog
+			// 
+			this.openFileDialog.DefaultExt = "equation";
+			this.openFileDialog.Filter = "Equation files|*.equation|All files|*.*";
+			// 
+			// saveFileDialog
+			// 
+			this.saveFileDialog.DefaultExt = "equation";
+			this.saveFileDialog.FileName = "equation";
+			this.saveFileDialog.Filter = "Equation files|*.equation|All files|*.*";
+			this.saveFileDialog.Title = "Save System Equation";
+			// 
+			// SystemAssignment
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.CancelButton = this.btnCancel;
+			this.ClientSize = new System.Drawing.Size(514, 421);
+			this.Controls.Add(this.btnNext);
+			this.Controls.Add(this.groupBox1);
+			this.Controls.Add(this.btnCancel);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MaximizeBox = false;
+			this.Menu = this.mainMenu;
+			this.Name = "SystemAssignment";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+			this.Text = "System Equation";
+			this.groupBox1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dimensionUpDown)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.formulas)).EndInit();
+			this.ResumeLayout(false);
 
-        }
+		}
 		#endregion
 
 		private DataTable createDataTable() 

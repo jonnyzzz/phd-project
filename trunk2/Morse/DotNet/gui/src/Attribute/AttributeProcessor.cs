@@ -24,7 +24,7 @@ namespace gui.Attributes
                         if (attrs.Length == 1)
                         {
 							InitializeOnRunAttribute attr = attrs[0];
-							if (!attr.IsInternal || Runner.Instance.IsInternal ) 
+							if (!attr.IsInternal || Runner.IsInternal ) 
 							{
 								method.Invoke(null, null);
 							}

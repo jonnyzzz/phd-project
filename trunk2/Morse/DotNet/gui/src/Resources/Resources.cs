@@ -133,13 +133,13 @@ namespace gui.Resource
             }
         }
 
-        public static void SetBasePath(string path)
+        public static void SetBasePath(string resource_path)
         {
-            instance = new Resources(path);
+            instance = new Resources(resource_path);
         }
-        public static void SetBasePath(string path, string temppath)
+        public static void SetBasePath(string resource_path, string temporary_path)
         {
-            instance = new Resources(path, temppath);
+            instance = new Resources(resource_path, temporary_path);
         }
         #endregion
 	}

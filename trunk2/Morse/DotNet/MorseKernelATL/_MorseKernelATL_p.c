@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Jan 23 03:33:46 2005
+/* at Sun Jan 23 23:38:18 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
