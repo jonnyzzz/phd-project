@@ -27,11 +27,11 @@
                     RemoteDebugEnabled = "false"
                     RemoteDebugMachine = ""
                     StartAction = "Project"
-                    StartArguments = ""
+                    StartArguments = "E:\Projects\Morse\DotNetProject\Morse\DotNet\resource\included\ o:\"
                     StartPage = ""
                     StartProgram = ""
                     StartURL = ""
-                    StartWorkingDirectory = ""
+                    StartWorkingDirectory = "o:\"
                     StartWithIE = "true"
                 />
                 <Config

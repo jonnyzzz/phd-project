@@ -31,3 +31,7 @@ double FunctionNode::evaluate(FunctionContext& cx) {
 double FunctionNode::evaluate() {
     return evaluate(FunctionContext());
 }
+
+FunctionNode* FunctionNode::simplify() {
+    return this->simplify(&FunctionContext());
+}

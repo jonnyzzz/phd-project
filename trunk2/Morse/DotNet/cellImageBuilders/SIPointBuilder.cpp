@@ -8,9 +8,13 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-SIPointBuilder::SIPointBuilder(Graph* graph, int* factor, int* ks, Function* function, ProgressBarInfo* info) :
+SIPointBuilder::SIPointBuilder(Graph* graph, int* factor, int* ks, ISystemFunction* function, ProgressBarInfo* info) :
 AbstractPointBuilder(graph, factor, ks, info), function(function)
 {
+    input = function->getInput();
+    output = function->getOutput();
+
+    ASSERT(function->hasFunction());
 }
 
 SIPointBuilder::~SIPointBuilder(void)
@@ -22,11 +26,10 @@ SIPointBuilder::~SIPointBuilder(void)
 
 
 void SIPointBuilder::buildImage(Graph* graph_result, JInt* point) {
-	for (int i=0; i<dimension; i++) {			
-		point[i] = graph_result->toInternal(function->F(i), i);			
-	}
+    function->evaluate();
+    graph_result->toInternal(this->output, point);
 }
 
 JDouble* SIPointBuilder::getFunctionX() {
-	return function->getVariables();
+    return input;
 }

@@ -42,7 +42,7 @@ class ATL_NO_VTABLE CSymbolicImageGroup :
 	public ISymbolicImageGroup,
 	public ISubdevidable,
 	public ISubdevidablePoint,
-	public IExtendable,
+//	public IExtendable,
 	public IGroupNode,
 	public IExportData,
 	private GraphSaver

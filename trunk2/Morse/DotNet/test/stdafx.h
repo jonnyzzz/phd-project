@@ -37,14 +37,17 @@
 
 #include "../calculator/FunctionContext.h"
 
+#include "../systemfunction/ISystemFunction.h"
+#include "../systemfunction/SystemFunction.h"
+#include "../cellImageBuilders/SIPointBuilder.h"
+#include "../cellImageBuilders/MSPointBuilder.h"
+
+
 #define _USE_MATH_DEFINES
 #include <Math.h>
 #include <map>
 #include <list>
 
-#include "../cellImageBuilders/SIPointBuilder.h"
-#include "../cellImageBuilders/MS3PointBuilder.h"
-#include "../cellImageBuilders/MS2PointBuilder.h"
 using namespace std;
 
 

@@ -53,6 +53,19 @@ JInt CoordinateSystem::toInternal(JDouble value, int axis) const{
    return ret;
 }
 
+void CoordinateSystem::toInternal(JDouble* in, JInt* out) const {
+    for (int i=0; i<dimention; i++) {
+        *out++ = toInternal(*in++, i);
+    }
+}
+
+void CoordinateSystem::toInternal(JDouble* in, JInt* out, int axis_offset, int len) const{
+    for (int i=0; i<len; i++) {
+        *out++ = toInternal(*in++, i + axis_offset);
+    }
+}
+
+
 JInt CoordinateSystem::toInternalModulo(JDouble value, int axis) const {
 	return toInternal(value, axis);
 }

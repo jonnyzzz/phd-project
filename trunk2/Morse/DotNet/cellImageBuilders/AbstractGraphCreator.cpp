@@ -9,27 +9,34 @@ static char THIS_FILE[] = __FILE__;
 
 
 
-AbstractGraphCreator::AbstractGraphCreator(Graph* graph, int dimensionNew, int* factor) :
-dimensionNew(dimensionNew), factor(factor), AbstractProcess(graph)
+AbstractGraphCreator::AbstractGraphCreator(Graph* graph, int* factor) :
+factor(factor), AbstractProcess(graph)
 {
 	dimensionOld = graph->getDimention();
 
-	ASSERT(dimensionNew > dimensionOld);
-
-	b = new int[dimensionNew+1];
-	point = new JInt[dimensionNew];
-	tpoint = new JInt[dimensionNew];
+	b = NULL;
+	point = NULL;
+	tpoint = NULL;
 }
 
 AbstractGraphCreator::~AbstractGraphCreator(void)
 {
-	delete[] b;
-	delete[] point;
-	delete[] tpoint;
+    if (b != NULL) {
+	    delete[] b;
+	    delete[] point;
+	    delete[] tpoint;
+    }
 }
 
 
 void AbstractGraphCreator::start() {
+    ASSERT(dimensionNew > dimensionOld);
+
+	b = new int[dimensionNew+1];
+	point = new JInt[dimensionNew];
+	tpoint = new JInt[dimensionNew];
+
+    this->dimensionNew = this->getNewDimension();
 	this->submitGraphResult(createEmptyGraph(graph_source));
 }
 

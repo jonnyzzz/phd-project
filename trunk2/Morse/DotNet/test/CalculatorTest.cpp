@@ -25,6 +25,11 @@ void CalculatorTest::Test() {
     RUNEX( TestStable(3.235937, 0.247393, 0.692910));
     RUNEX( TestStable(3.235937, 0.247393, 0.686406));
 
+    RUNEX( TestSystemFunctionIteration(1) );
+    RUNEX( TestSystemFunctionIteration(4) );
+    RUNEX( TestSystemFunctionIteration(2) );
+    RUNEX( TestSystemFunctionIteration(20) );
+
    
     Message("Test: Success");
 }
@@ -128,4 +133,22 @@ void CalculatorTest::TestStable(double x, double y, double z) {
     AssertTrue(abs(fac.getEquation("fx")->evaluate(cx) - x) <1e-1, "Stable failed 1");
     AssertTrue(abs(fac.getEquation("fy")->evaluate(cx) - y) <1e-1, "Stable failed 2");
     AssertTrue(abs(fac.getEquation("fz")->evaluate(cx) - z) <1e-1, "Stable failed 3");
+}
+
+void CalculatorTest::TestSystemFunctionIteration(int n) {
+
+    char buff[255];
+    sprintf(buff, "Iteration test for %d iterations", n);
+    this->Message(buff);
+
+    FunctionFactory fac("y1=x1+1;");
+    SystemFunction func(&fac, 1, n);
+
+    func.getInput()[0] = 0;
+    func.evaluate();
+
+    sprintf(buff, "answer = %f", func.getOutput()[0]);
+    this->Message(buff);
+    
+    AssertTrue( func.getOutput()[0] == n, "Itaration failed");
 }

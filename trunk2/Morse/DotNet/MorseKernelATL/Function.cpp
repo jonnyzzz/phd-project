@@ -16,6 +16,9 @@ CFunction::CFunction() {
 	space_min = NULL;
 	function = NULL;
 	factory = NULL;
+    systemFunction = NULL;
+    systemFunctionDerivate = NULL;
+    projectiveExtensionInfo = NULL;
 	created = false;
 }
 
@@ -64,7 +67,11 @@ void CFunction::cleanUP() {
 	SAFE_DELETE_ARR(space_min);
 
 	SAFE_DELETE(factory);
+    SAFE_DELETE(systemFunction);
+    SAFE_DELETE(systemFunctionDerivate);
+    SAFE_DELETE(projectiveExtensionInfo);
 	SAFE_DELETE(function);
+    
 }
 
 
@@ -163,6 +170,9 @@ void CFunction::initializeContent() {
 		cout<<"Current iteration : "<<iterations<<"\n";
 
 		function = new Function(factory, dimension, iterations);
+        systemFunction = new SystemFunction(factory, dimension, iterations);
+        systemFunctionDerivate = new SystemFunctionDerivate(factory, dimension, iterations);
+        projectiveExtensionInfo = new SermentProjectiveExtensionInfo(systemFunctionDerivate);
 
 		created = true;
 
@@ -227,4 +237,17 @@ STDMETHODIMP CFunction::createGraph(void** graph) {
 	return S_OK;
 }
 
+STDMETHODIMP CFunction::getSystemFunction(void** function) {
+    *function = (void*)systemFunction;
+    return S_OK;
+}
 
+STDMETHODIMP CFunction::getSystemFunctionDerivate(void** function) {
+    *function = (void*)systemFunctionDerivate;
+    return S_OK;
+}
+
+STDMETHODIMP CFunction::getProjectiveExtensionInfo(void** info) {
+    *info = (void*) projectiveExtensionInfo;
+    return S_OK;
+}

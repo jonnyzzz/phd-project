@@ -87,7 +87,7 @@ namespace gui.Tree.Node
 				act = null;
 			}
 
-			if (mnode.graphDimension() == 2 && mnode is CSymbolicImageGraph)
+			if (false && mnode.graphDimension() == 2 && mnode is CSymbolicImageGraph)
 			{
 				CSymbolicImageGraph node = mnode as CSymbolicImageGraph;
 				IntPtr graph;
@@ -98,7 +98,7 @@ namespace gui.Tree.Node
 				arrayItems.AddRange(act.getMenuItems());								
 			}
 
-			if (mnode.graphDimension() == 3 && mnode is CSymbolicImageGraph)
+			if (false && mnode.graphDimension() == 3 && mnode is CSymbolicImageGraph)
 			{
 				CSymbolicImageGraph node = mnode  as CSymbolicImageGraph;
 				IntPtr graph;

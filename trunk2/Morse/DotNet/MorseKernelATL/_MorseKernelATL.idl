@@ -255,13 +255,13 @@ interface IComponentRegistrar : IDispatch {
 	uuid(47A8D8C4-8744-4150-A8F9-278AE08C4DA4),
 	dual
 ] 
-#line 11 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
-interface IFunctionEvents : IDispatch {
-#line 13 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
-	[id(1),helpstring("Wrong parametes notify")] HRESULT  FunctionWrongInput([in] BSTR description);
 #line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
-	[id(2)] HRESULT  FunctionChanged([in] BSTR oldFunction, [in] BSTR newFunction);
+interface IFunctionEvents : IDispatch {
 #line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
+	[id(1),helpstring("Wrong parametes notify")] HRESULT  FunctionWrongInput([in] BSTR description);
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
+	[id(2)] HRESULT  FunctionChanged([in] BSTR oldFunction, [in] BSTR newFunction);
+#line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
 	[id(3)] HRESULT  FunctionAccepted();
 };
 
@@ -272,16 +272,22 @@ interface IFunctionEvents : IDispatch {
 	helpstring("IFunction Interface"),
 	pointer_default(unique)
 ] 
-#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
+#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
 interface IFunction : IDispatch {
-#line 31 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
-	[propget,id(1),helpstring("property SystemSource")] HRESULT  SystemSource([out,retval] BSTR *pVal );
-#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
-	[propput,id(1),helpstring("property SystemSource")] HRESULT  SystemSource([in] BSTR newVal);
 #line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
-	[id(2),local,hidden] HRESULT  getFunction([out,unique] void **func );
+	[propget,id(1),helpstring("property SystemSource")] HRESULT  SystemSource([out,retval] BSTR *pVal );
 #line 37 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
+	[propput,id(1),helpstring("property SystemSource")] HRESULT  SystemSource([in] BSTR newVal);
+#line 39 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
+	[id(2),local,hidden] HRESULT  getFunction([out,unique] void **func );
+#line 41 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
 	[id(3),local,hidden] HRESULT  createGraph([out,unique] void **graph );
+#line 43 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
+	[id(4),local,hidden] HRESULT  getSystemFunction([out,unique] void **function );
+#line 45 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
+	[id(5),local,hidden] HRESULT  getSystemFunctionDerivate([out,unique] void **function );
+#line 47 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
+	[id(6),local,hidden] HRESULT  getProjectiveExtensionInfo([out,unique] void **pinfo );
 };
 
 [
@@ -348,6 +354,16 @@ interface IComputationGraphResultExt : IComputationGraphResult {
 	[id(101),local,hidden] HRESULT  setRootGraph([in] void **graph );
 #line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\computationgraphresult.h"
 	[id(102),local,hidden] HRESULT  setGraphNode([in] IGraph *node);
+};
+
+[
+	object,
+	uuid(ECACE910-6692-4ACC-85C2-3EF448BF2638),
+	pointer_default(unique),
+	dual
+] 
+#line 12 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\dummy.h"
+interface IDummy : IDispatch {
 };
 
 [
@@ -487,7 +503,7 @@ library MorseKernelATL
 		uuid(95B0D0F5-D7BD-48D8-B13A-5E5538F334E9),
 		helpstring("Function Class")
 	] 
-#line 56 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
+#line 66 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\function.h"
 	coclass CFunction {
 		interface IFunction;
 		[default, source]	interface IFunctionEvents;
@@ -519,6 +535,17 @@ library MorseKernelATL
 
 	[
 		version(1.0),
+		uuid(6C167CEC-20C8-45B4-B6C5-E59E15B3D19E),
+		helpstring("Dummy Class")
+	] 
+#line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\dummy.h"
+	coclass CDummy {
+		interface IDummy;
+		interface IExtendable;
+	};
+
+	[
+		version(1.0),
 		uuid(BF5438F7-B6B4-457C-843E-C46539C7A2F7),
 		helpstring("MorseSpectrum Class")
 	] 
@@ -541,7 +568,6 @@ library MorseKernelATL
 		interface IKernelNode;
 		interface ISubdevidable;
 		interface ISubdevidablePoint;
-		interface IExtendable;
 		interface IExportData;
 	};
 
@@ -558,7 +584,6 @@ library MorseKernelATL
 		interface IKernelNode;
 		interface ISubdevidable;
 		interface ISubdevidablePoint;
-		interface IExtendable;
 		interface IGroupNode;
 		interface IExportData;
 	};

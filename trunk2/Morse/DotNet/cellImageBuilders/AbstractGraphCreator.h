@@ -5,7 +5,7 @@
 class AbstractGraphCreator : public AbstractProcess
 {
 public:
-	AbstractGraphCreator(Graph* base, int dimensionNew, int* factor);
+	AbstractGraphCreator(Graph* base, int* factor);
 	virtual ~AbstractGraphCreator(void);
 
 
@@ -16,6 +16,7 @@ public:
 protected:
 	virtual JDouble getMin(int i) = 0;
 	virtual JDouble getMax(int i) = 0;
+    virtual int getNewDimension() = 0;
 
 private:
 	int dimensionNew;

@@ -46,6 +46,8 @@ public:
 	virtual FunctionNode* diff(int variableID) = 0;
 	virtual FunctionNode* clone() = 0;
 
+    FunctionNode* simplify();
+
 public:
 	virtual void print(ostream& o, FunctionDictionary* dic) = 0;
 

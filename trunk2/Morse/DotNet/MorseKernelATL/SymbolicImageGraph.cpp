@@ -92,8 +92,8 @@ STDMETHODIMP CSymbolicImageGraph::SubdevidePoint(ISubdevidePointParams* params) 
 	IFunction* function = NULL;	
 	kernel->get_Function(&function);
 
-	Function* func;
-	function->getFunction((void**)&func);
+	SystemFunction* func;
+	function->getSystemFunction((void**)&func);
 
 	SIPointBuilder* pbs = new SIPointBuilder(graph, factor, ks, func, pinfo);
 	pbs->start();

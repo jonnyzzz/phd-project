@@ -81,7 +81,7 @@ HRESULT D3DKernel::createD3DDevice(D3DDEVTYPE type, DWORD behave) {
 	d3dpp.BackBufferCount = 1;	
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dpp.EnableAutoDepthStencil = TRUE;
-	d3dpp.AutoDepthStencilFormat = D3DFMT_D32;
+	d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
 
 	hr = d3d->CreateDevice(
 		  D3DADAPTER_DEFAULT,

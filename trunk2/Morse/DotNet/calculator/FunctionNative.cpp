@@ -44,7 +44,7 @@ FunctionNative::~FunctionNative(void)
 {
    delete dependency;
    delete source;
-   delete procedure;
+   delete[] procedure;
    //if (variables != NULL) delete[] variables;
 }
 
@@ -92,7 +92,7 @@ void FunctionNative::publishCode(uchar* code) {
 
 void FunctionNative::compile() {
 
-   procedure = new uchar[65535];
+   procedure = new uchar[1<<18];
    uchar* code = procedure;
 
    stackUse = 0;

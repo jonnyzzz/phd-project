@@ -9,8 +9,12 @@ public:
 public:
 	virtual void setBounds(int sections = 1, int maxValue = 1000, int minValue = 0 );
 	virtual void next();
+
+    virtual bool nextOrStop(); //if false -> break computation
+
 	virtual int current();
 	virtual int getLengthPart();
+
 	virtual void finish();
 
 protected:

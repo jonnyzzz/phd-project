@@ -65,6 +65,10 @@ typedef long SHANDLE_PTR;
 
 #include "../cellImageBuilders/Processes.h"
 
+#include "../systemfunction/systemfunction.h"
+#include "../systemfunction/systemfunctionderivate.h"
+#include "../systemfunction/sermentprojectiveextensioninfo.h"
+
 #define SAFE_DELETE(x) {if((x)!=NULL) {delete (x); {x=NULL;}}}
 #define SAFE_RELEASE(x) {if((x)!=NULL) {(x)->Release(); {x=NULL;}}}
 

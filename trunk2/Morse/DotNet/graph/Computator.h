@@ -6,6 +6,7 @@ class Function;
 class FunctionMS;
 
 class ProgressBarInfo;
+class ISystemFunction;
 
 class Computator
 {
@@ -27,8 +28,8 @@ public:
 	GraphComponents* performSI(Graph* graph, Function* function, JInt* devider);
 	GraphComponents* performSI(GraphComponents* cms, Function* function, JInt* devider);
 
-	GraphComponents* performSIPoint(Graph* graph, Function* function, JInt* devider, JInt* ks, ProgressBarInfo* info = NULL);
-	GraphComponents* performSIPoint(GraphComponents* graph, Function* function, JInt* devider, JInt* ks, ProgressBarInfo* info = NULL);
+	GraphComponents* performSIPoint(Graph* graph, ISystemFunction* function, JInt* devider, JInt* ks, ProgressBarInfo* info = NULL);
+	GraphComponents* performSIPoint(GraphComponents* graph, ISystemFunction* function, JInt* devider, JInt* ks, ProgressBarInfo* info = NULL);
 
 	Graph* toMS(Graph* graph, JInt* factor);
 	Graph* toMS(GraphComponents* cms, JInt* factor);

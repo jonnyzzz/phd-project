@@ -151,22 +151,19 @@
 				RelativePath=".\AbstractProcess.cpp">
 			</File>
 			<File
-				RelativePath=".\MS2PointBuilder.cpp">
-			</File>
-			<File
-				RelativePath=".\MS3PointBuilder.cpp">
-			</File>
-			<File
 				RelativePath=".\MSCreationProcess.cpp">
 			</File>
 			<File
-				RelativePath=".\MSUniversalPointBuilder.cpp">
+				RelativePath=".\MSPointBuilder.cpp">
 			</File>
 			<File
 				RelativePath=".\Processes.cpp">
 			</File>
 			<File
 				RelativePath=".\ProgressBarInfo.cpp">
+			</File>
+			<File
+				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.cpp">
 			</File>
 			<File
 				RelativePath=".\SIPointBuilder.cpp">
@@ -207,22 +204,19 @@
 				RelativePath=".\AbstractProcess.h">
 			</File>
 			<File
-				RelativePath=".\MS2PointBuilder.h">
-			</File>
-			<File
-				RelativePath=".\MS3PointBuilder.h">
-			</File>
-			<File
 				RelativePath=".\MSCreationProcess.h">
 			</File>
 			<File
-				RelativePath=".\MSUniversalPointBuilder.h">
+				RelativePath=".\MSPointBuilder.h">
 			</File>
 			<File
 				RelativePath=".\Processes.h">
 			</File>
 			<File
 				RelativePath=".\ProgressBarInfo.h">
+			</File>
+			<File
+				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.h">
 			</File>
 			<File
 				RelativePath=".\SIPointBuilder.h">

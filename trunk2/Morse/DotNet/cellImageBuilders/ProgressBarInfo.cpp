@@ -37,3 +37,8 @@ int ProgressBarInfo::getLengthPart() {
 void ProgressBarInfo::finish() {
 	currentValue = maxValue;
 }
+
+bool ProgressBarInfo::nextOrStop() {
+    next();
+    return true;
+}

@@ -3,6 +3,10 @@
 #pragma once
 #include "resource.h"       // main symbols
 
+class SystemFunction;
+class SystemFunctionDerivate;
+class IProjectiveExtensionInfo;
+
 [
 	object,
 	uuid("47A8D8C4-8744-4150-A8F9-278AE08C4DA4"),
@@ -35,6 +39,12 @@ __interface IFunction : IDispatch
 		HRESULT getFunction([out, unique] void ** func);
 	[id(3), local, hidden]
 		HRESULT createGraph([out, unique] void ** graph);
+    [id(4), local, hidden]
+        HRESULT getSystemFunction([out, unique] void** function);
+    [id(5), local, hidden]
+        HRESULT getSystemFunctionDerivate([out, unique] void** function);
+    [id(6), local, hidden]
+        HRESULT getProjectiveExtensionInfo([out, unique] void **pinfo);
 };
 
 class Function;
@@ -77,6 +87,10 @@ private:
 	Function* function;
 	FunctionFactory* factory;
 
+    ISystemFunction* systemFunction;
+    ISystemFunctionDerivate* systemFunctionDerivate;
+    IProjectiveExtensionInfo* projectiveExtensionInfo;
+   
 	CString source;
 
 	bool created;
@@ -100,6 +114,10 @@ public:
 	STDMETHOD(put_SystemSource)(BSTR newVal);
 	STDMETHOD(getFunction)(void** function);
 	STDMETHOD(createGraph)(void** graph);
+
+    STDMETHOD(getSystemFunction)(void** function);
+    STDMETHOD(getSystemFunctionDerivate)(void** function);
+    STDMETHOD(getProjectiveExtensionInfo)(void** pinfo);
 
 };
 

@@ -1,4 +1,5 @@
 #include "StdAfx.h"
+#include "../systemfunction/isystemfunction.h"
 #include ".\computator.h"
 #include ".\Function.h"
 #include ".\Graph.h"
@@ -13,7 +14,6 @@
 #include ".\GraphException.h"
 #include "../cellImageBuilders/SIPointBuilder.h"
 #include "../cellImageBuilders/MSCreationProcess.h"
-#include "../cellImageBuilders/MSUniversalPointBuilder.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -31,7 +31,7 @@ Computator::~Computator(void)
 }
 
 
-GraphComponents* Computator::performSIPoint(Graph* graph, Function* function, JInt* devider, JInt* ks, ProgressBarInfo* info) {
+GraphComponents* Computator::performSIPoint(Graph* graph, ISystemFunction* function, JInt* devider, JInt* ks, ProgressBarInfo* info) {
 	cout<<"Point method!\n";
 
 	info->setBounds();
@@ -50,7 +50,7 @@ GraphComponents* Computator::performSIPoint(Graph* graph, Function* function, JI
 
 	return cm;
 }
-GraphComponents* Computator::performSIPoint(GraphComponents* cms, Function* function, JInt* devider, JInt* ks, ProgressBarInfo* info) {
+GraphComponents* Computator::performSIPoint(GraphComponents* cms, ISystemFunction* function, JInt* devider, JInt* ks, ProgressBarInfo* info) {
 	cout<<"Symbolic Image on Graph Components Points\n";
 
 	if (cms->length() == 0) throw GraphException(GraphException_NoParameters);
@@ -219,6 +219,7 @@ GraphComponents* Computator::performMS(GraphComponents* cms, Function* function,
 
 
 GraphComponents* Computator::performMSPoint(Graph* graph, Function* function, JInt* factor, int* ks) {
+    /*
 	MSUniversalPointBuilder* ub = new MSUniversalPointBuilder(graph, function, factor, ks);
 	ub->start();
 
@@ -232,9 +233,13 @@ GraphComponents* Computator::performMSPoint(Graph* graph, Function* function, JI
 	delete ub;
 
 	return cms;
+    */
+    ASSERT(false);
+    return NULL;
 }
 
 GraphComponents* Computator::performMSPoint(GraphComponents* cms, Function* function, JInt* factor, int* ks) {
+    /*
 	if (cms->length() == 0) throw GraphException(GraphException_NoParameters);
 	
 	MSUniversalPointBuilder* ub = new MSUniversalPointBuilder(cms->getAt(0), function, factor, ks);
@@ -252,6 +257,9 @@ GraphComponents* Computator::performMSPoint(GraphComponents* cms, Function* func
 	delete ub;
 
 	return cmst;    
+    */
+    ASSERT(false);
+    return NULL;
 }
 
 

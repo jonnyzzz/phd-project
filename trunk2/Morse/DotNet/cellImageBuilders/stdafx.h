@@ -28,3 +28,5 @@ using namespace std;
 #include "../graph/graph.h"
 #include "../graph/functionInclude.h"
 #include "../graph/function.h"
+
+#include "../systemfunction/isystemfunction.h"

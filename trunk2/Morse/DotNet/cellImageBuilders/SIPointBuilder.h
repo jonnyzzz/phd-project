@@ -8,7 +8,7 @@ class SIPointBuilder :
 	public AbstractPointBuilder
 {
 public:
-	SIPointBuilder(Graph* graph, int* factor, int* ks, Function* function, ProgressBarInfo* info = NULL);
+	SIPointBuilder(Graph* graph, int* factor, int* ks, ISystemFunction* function, ProgressBarInfo* info = NULL);
 	virtual ~SIPointBuilder(void);
 
 protected:
@@ -16,5 +16,8 @@ protected:
 	virtual JDouble* getFunctionX();	
 
 protected:
-	Function* function;
+    ISystemFunction* function;
+
+    double* input;
+    double* output;
 };

@@ -38,7 +38,7 @@ class ATL_NO_VTABLE CSymbolicImageGraph :
 	public ISymbolicImageGraph,
 	public ISubdevidable,
 	public ISubdevidablePoint,
-	public IExtendable,
+//	public IExtendable,
 	public IExportData,
 	private GraphSaver
 {

@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 MSCreationProcess::MSCreationProcess(Graph* graph, int* factor) : 
-AbstractGraphCreator(graph, newDimension(graph), factor)
+AbstractGraphCreator(graph, factor)
 {
 }
 
@@ -22,8 +22,8 @@ MSCreationProcess::~MSCreationProcess(void)
 }
 
 
-int MSCreationProcess::newDimension(Graph* graph) {
-	return  2 * graph->getDimention()-1;
+int MSCreationProcess::getNewDimension() {
+	return  2 * graph_source->getDimention();
 }
 
 

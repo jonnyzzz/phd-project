@@ -400,8 +400,8 @@ namespace gui.Forms
 	    {
 	        if (assign.ShowDialog(this) == DialogResult.OK)
 	        {
-	            Console.Out.WriteLine("Runner.Kernel.Function = {0}", Runner.Kernel.Function == null);
-	            Runner.Kernel.Function = assign.getFunction();
+	            Console.Out.WriteLine("Runner.Kernel.Function = {0}", Runner.Kernel.function == null);
+	            Runner.Kernel.function= assign.getFunction();
 
 	            IKernelNode root = Runner.Kernel.CreateRootSymbolicImage();
 	            computatioinTree.Root = ComputationNode.createComputationNode(root);
@@ -472,7 +472,7 @@ namespace gui.Forms
 
         private void menuItemShowSystemFunction_Click(object sender, System.EventArgs e)
         {
-            showSystemAssignmentDialog(new SystemAssignment(Runner.Kernel.Function.SystemSource));
+            showSystemAssignmentDialog(new SystemAssignment(Runner.Kernel.function.SystemSource));
         }
 
         private void menuLoad_Click(object sender, System.EventArgs e)

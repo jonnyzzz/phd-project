@@ -200,9 +200,9 @@ STDMETHODIMP CSymbolicImageGroup::SubdevidePoint(ISubdevidePointParams* params) 
 	IFunction* function;
 	kernel->get_Function(&function);
 
-	Function* func;
-	function->getFunction((void**)&func);
-
+    ISystemFunction* func;
+    function->getSystemFunction((void**)&func);
+   
 	GraphComponents* cmst = createGraphComponents();
 
 	if (cmst->length() == 0) {

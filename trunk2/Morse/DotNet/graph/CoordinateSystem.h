@@ -19,8 +19,12 @@ public:
 
 public:
 
+    void toInternal(JDouble* in, JInt* out) const; 
+    void toInternal(JDouble* in, JInt* out, int axis_offset, int len) const; 
 	JInt toInternal(JDouble value, int axis) const;
+
 	JInt toInternalModulo(JDouble value, int axis) const;
+
 	JDouble toExternal(JInt value, int axis) const;
 
 	const JInt* getGrid() const;
