@@ -15,8 +15,38 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0162690393266FEFB03A0B0D7CE2AA9E"
-        "OwnerKey" = "8:_8B319CF29A2411DB58A1FEAED092DACC"
+        "MsmKey" = "8:_001DC7A3B0564C7B8831ABB8F39E85A3"
+        "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_001DC7A3B0564C7B8831ABB8F39E85A3"
+        "OwnerKey" = "8:_E08C302959E61928E03627C824063280"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_001DC7A3B0564C7B8831ABB8F39E85A3"
+        "OwnerKey" = "8:_5DEA884A4F3959E2DF85C5A3930F78D7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_001DC7A3B0564C7B8831ABB8F39E85A3"
+        "OwnerKey" = "8:_9890C1B7EBC4F2054E153238C2D5B4D0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_001DC7A3B0564C7B8831ABB8F39E85A3"
+        "OwnerKey" = "8:_E40C15CCC940DDD45DE553D1FF75E85B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_001DC7A3B0564C7B8831ABB8F39E85A3"
+        "OwnerKey" = "8:_B31C84EE53128736E6588345E5926628"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -27,26 +57,50 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_22DAA1322C4C4FD991E13CFD739B4918"
+        "MsmKey" = "8:_149F79AADD44477399C687C7D73A3B7E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1A2B6E1805184D00A1CAEC18F7D6256B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1C80778BC7F046E084CDA7CE50AC3F87"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_251EBA6513D94E5891A0FE6522EF8BEC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_383000FB042A4F80B040085302C0941F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3E2FFBB7658F8BEE8B4B67FADB8EBA38"
         "OwnerKey" = "8:_BEE2B4F4071B42ED98254227B4302DE3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_22DAA1322C4C4FD991E13CFD739B4918"
+        "MsmKey" = "8:_3E2FFBB7658F8BEE8B4B67FADB8EBA38"
         "OwnerKey" = "8:_EF433BC6C34040458F873286D72A102C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_22DAA1322C4C4FD991E13CFD739B4918"
+        "MsmKey" = "8:_3E2FFBB7658F8BEE8B4B67FADB8EBA38"
         "OwnerKey" = "8:_C9D059725F7C4D77ACDF018FE7621437"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3E0136F2172A44479027489C74A30182"
-        "OwnerKey" = "8:_EF433BC6C34040458F873286D72A102C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,25 +112,19 @@
         "Entry"
         {
         "MsmKey" = "8:_3E937563A6DD5CD85F50ADEFB94E82F6"
-        "OwnerKey" = "8:_A3C7F470091B5D26436A659BCC7726B7"
+        "OwnerKey" = "8:_5DEA884A4F3959E2DF85C5A3930F78D7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_3E937563A6DD5CD85F50ADEFB94E82F6"
-        "OwnerKey" = "8:_E0C4C496FD6915AB6B6F7ECE0A0F8CF6"
+        "OwnerKey" = "8:_9890C1B7EBC4F2054E153238C2D5B4D0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_47E8562FABA242B09345CA953872F33D"
-        "OwnerKey" = "8:_BEE2B4F4071B42ED98254227B4302DE3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_47E8562FABA242B09345CA953872F33D"
-        "OwnerKey" = "8:_C9D059725F7C4D77ACDF018FE7621437"
+        "MsmKey" = "8:_429CF40FBCD5485584FD34B6928445B6"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -93,14 +141,56 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6B9E06E01DF4B1931DD7E8669EDA46C0"
-        "OwnerKey" = "8:_F60E4AA158D6357F8FCEAECCFACE8496"
+        "MsmKey" = "8:_4BA7DAD28AA4435691641A1693A2FE47"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6B9E06E01DF4B1931DD7E8669EDA46C0"
+        "MsmKey" = "8:_4C58FB063F604198994E2EC210A4C240"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_535948C1335F7BC7BBAFDED805E47807"
+        "OwnerKey" = "8:_BEE2B4F4071B42ED98254227B4302DE3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_535948C1335F7BC7BBAFDED805E47807"
+        "OwnerKey" = "8:_EF433BC6C34040458F873286D72A102C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_535948C1335F7BC7BBAFDED805E47807"
+        "OwnerKey" = "8:_C9D059725F7C4D77ACDF018FE7621437"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_54894DF8F3CE47E5A4401A762607FFB5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5DEA884A4F3959E2DF85C5A3930F78D7"
+        "OwnerKey" = "8:_9890C1B7EBC4F2054E153238C2D5B4D0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5DEA884A4F3959E2DF85C5A3930F78D7"
         "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_65E84984379043AF9F3BF66C449BDCBD"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -111,62 +201,98 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8B319CF29A2411DB58A1FEAED092DACC"
+        "MsmKey" = "8:_7A71363BE442441C908855D35B0EF25F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_87D80B2F26153C1D65518BDBE5D12186"
+        "OwnerKey" = "8:_BEE2B4F4071B42ED98254227B4302DE3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_87D80B2F26153C1D65518BDBE5D12186"
+        "OwnerKey" = "8:_EF433BC6C34040458F873286D72A102C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_87D80B2F26153C1D65518BDBE5D12186"
+        "OwnerKey" = "8:_C9D059725F7C4D77ACDF018FE7621437"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8B09A1CC51BF46CCA1B9C29C93147841"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_96D17F077F9C4C7A80DAE961EED4D451"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9890C1B7EBC4F2054E153238C2D5B4D0"
         "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8EBC6D617FC94285BAAA866D024E7B4D"
+        "MsmKey" = "8:_9DC658BB0E174AA98A538B89D3D2901C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A1D869069BE3D5CFBD5C2F9CDF41603A"
+        "OwnerKey" = "8:_E08C302959E61928E03627C824063280"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AC89FBA60F83448598D06CB86156DB7E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AF9132D1AF3245A792F0232D231A3E68"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B24E8311A4934A7E9C27421FDF1984CC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B2E57B0A5C994E519E6AADDFB1516ED3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B31C84EE53128736E6588345E5926628"
         "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8EBC6D617FC94285BAAA866D024E7B4D"
-        "OwnerKey" = "8:_A3C7F470091B5D26436A659BCC7726B7"
+        "MsmKey" = "8:_B418FCFC42FB47D7847ADF3586B154C5"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8EBC6D617FC94285BAAA866D024E7B4D"
-        "OwnerKey" = "8:_E0C4C496FD6915AB6B6F7ECE0A0F8CF6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8EBC6D617FC94285BAAA866D024E7B4D"
-        "OwnerKey" = "8:_8B319CF29A2411DB58A1FEAED092DACC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8EBC6D617FC94285BAAA866D024E7B4D"
-        "OwnerKey" = "8:_6B9E06E01DF4B1931DD7E8669EDA46C0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8EBC6D617FC94285BAAA866D024E7B4D"
-        "OwnerKey" = "8:_F60E4AA158D6357F8FCEAECCFACE8496"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A3C7F470091B5D26436A659BCC7726B7"
-        "OwnerKey" = "8:_E0C4C496FD6915AB6B6F7ECE0A0F8CF6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A3C7F470091B5D26436A659BCC7726B7"
-        "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B3DDBCEB0745C959D2501B05E4AE97C2"
-        "OwnerKey" = "8:_6B9E06E01DF4B1931DD7E8669EDA46C0"
+        "MsmKey" = "8:_BCC5475A277C4B3C9F9E2DA30E432A56"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -183,13 +309,43 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DCC8C284D05F3DFD97D66E4435D600D5"
-        "OwnerKey" = "8:_A3C7F470091B5D26436A659BCC7726B7"
+        "MsmKey" = "8:_D61495BA7EF645BDB76BD6C38F5ED163"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E0C4C496FD6915AB6B6F7ECE0A0F8CF6"
+        "MsmKey" = "8:_D72125C7010641759AE7F7971A6A6D8B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D7CA74040E8A4A93A2EBDA2E96B71670"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DCC8C284D05F3DFD97D66E4435D600D5"
+        "OwnerKey" = "8:_5DEA884A4F3959E2DF85C5A3930F78D7"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E08C302959E61928E03627C824063280"
+        "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E40C15CCC940DDD45DE553D1FF75E85B"
+        "OwnerKey" = "8:_B31C84EE53128736E6588345E5926628"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E40C15CCC940DDD45DE553D1FF75E85B"
         "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -201,8 +357,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F60E4AA158D6357F8FCEAECCFACE8496"
-        "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
+        "MsmKey" = "8:_EF492632CFEC4FCCB438BDDB7C554557"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FAAD1FEEBD9D70E3A5B9407DDEAE4958"
+        "OwnerKey" = "8:_E40C15CCC940DDD45DE553D1FF75E85B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FE415BCFBD074BC9905807153385E9BF"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -286,26 +454,6 @@
         }
         "File"
         {
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_0162690393266FEFB03A0B0D7CE2AA9E"
-            {
-            "SourcePath" = "8:MorseKernelATL.dll"
-            "TargetName" = "8:MorseKernelATL.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:4"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_0D57935B99964246B9EC6A0B6604628C"
             {
             "SourcePath" = "8:..\\resource\\jo.ico"
@@ -324,6 +472,126 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_149F79AADD44477399C687C7D73A3B7E"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gui.ini"
+            "TargetName" = "8:gui.ini"
+            "Tag" = "8:"
+            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_1A2B6E1805184D00A1CAEC18F7D6256B"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplottemplate\\2d.txt"
+            "TargetName" = "8:2d.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_007204CE97E048688B9D94048EB3F0FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_1C80778BC7F046E084CDA7CE50AC3F87"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\Copyright"
+            "TargetName" = "8:Copyright"
+            "Tag" = "8:"
+            "Folder" = "8:_B431CFEB6A7C46C78559F29A9984A4A6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_251EBA6513D94E5891A0FE6522EF8BEC"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\INSTALL"
+            "TargetName" = "8:INSTALL"
+            "Tag" = "8:"
+            "Folder" = "8:_B431CFEB6A7C46C78559F29A9984A4A6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_383000FB042A4F80B040085302C0941F"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\NEWS"
+            "TargetName" = "8:NEWS"
+            "Tag" = "8:"
+            "Folder" = "8:_B431CFEB6A7C46C78559F29A9984A4A6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_3E2FFBB7658F8BEE8B4B67FADB8EBA38"
+            {
+            "SourcePath" = "8:MSVCR71D.dll"
+            "TargetName" = "8:MSVCR71D.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_3E937563A6DD5CD85F50ADEFB94E82F6"
@@ -357,6 +625,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_429CF40FBCD5485584FD34B6928445B6"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\bin\\wgnuplot.GID"
+            "TargetName" = "8:wgnuplot.GID"
+            "Tag" = "8:"
+            "Folder" = "8:_B2F13F90762A4853BC7D251C82AA5AF7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_4B9A9BD32FE3A3B45C0D6C897655B500"
             {
             "SourcePath" = "8:d3d8.dll"
@@ -377,21 +665,50 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_6B9E06E01DF4B1931DD7E8669EDA46C0"
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_4BA7DAD28AA4435691641A1693A2FE47"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Interop.MorseKernelVisualizationATL, Version=1.0.0.0, Culture=neutral"
-                "ScatterAssemblies"
-                {
-                    "_6B9E06E01DF4B1931DD7E8669EDA46C0"
-                    {
-                    "Name" = "8:Interop.MorseKernelVisualizationATL.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Interop.MorseKernelVisualizationATL.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\bin\\wgnuplot.mnu"
+            "TargetName" = "8:wgnuplot.mnu"
+            "Tag" = "8:"
+            "Folder" = "8:_B2F13F90762A4853BC7D251C82AA5AF7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_4C58FB063F604198994E2EC210A4C240"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\pm3d\\pm3dCompress.awk"
+            "TargetName" = "8:pm3dCompress.awk"
+            "Tag" = "8:"
+            "Folder" = "8:_AB73388C3C1249E18C696CAFC8A2266F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_535948C1335F7BC7BBAFDED805E47807"
+            {
+            "SourcePath" = "8:MFC71D.DLL"
+            "TargetName" = "8:MFC71D.DLL"
             "Tag" = "8:"
             "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
             "Condition" = "8:"
@@ -408,23 +725,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_8B319CF29A2411DB58A1FEAED092DACC"
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_54894DF8F3CE47E5A4401A762607FFB5"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Interop.MorseKernelATL, Version=1.0.0.0, Culture=neutral"
-                "ScatterAssemblies"
-                {
-                    "_8B319CF29A2411DB58A1FEAED092DACC"
-                    {
-                    "Name" = "8:Interop.MorseKernelATL.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Interop.MorseKernelATL.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\bin\\pgnuplot.exe"
+            "TargetName" = "8:pgnuplot.exe"
             "Tag" = "8:"
-            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Folder" = "8:_B2F13F90762A4853BC7D251C82AA5AF7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -436,17 +742,17 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_A3C7F470091B5D26436A659BCC7726B7"
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_5DEA884A4F3959E2DF85C5A3930F78D7"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Interop.MSComctlLib, Version=2.0.0.0, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_A3C7F470091B5D26436A659BCC7726B7"
+                    "_5DEA884A4F3959E2DF85C5A3930F78D7"
                     {
                     "Name" = "8:Interop.MSComctlLib.dll"
                     "Attributes" = "3:512"
@@ -470,10 +776,50 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_B3DDBCEB0745C959D2501B05E4AE97C2"
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_65E84984379043AF9F3BF66C449BDCBD"
             {
-            "SourcePath" = "8:MorseKernelVisualizationATL.dll"
-            "TargetName" = "8:MorseKernelVisualizationATL.dll"
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\bin\\gpsavediff"
+            "TargetName" = "8:gpsavediff"
+            "Tag" = "8:"
+            "Folder" = "8:_B2F13F90762A4853BC7D251C82AA5AF7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_7A71363BE442441C908855D35B0EF25F"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\bin\\wgnuplot.hlp"
+            "TargetName" = "8:wgnuplot.hlp"
+            "Tag" = "8:"
+            "Folder" = "8:_B2F13F90762A4853BC7D251C82AA5AF7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_87D80B2F26153C1D65518BDBE5D12186"
+            {
+            "SourcePath" = "8:MSVCP71D.dll"
+            "TargetName" = "8:MSVCP71D.dll"
             "Tag" = "8:"
             "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
             "Condition" = "8:"
@@ -486,16 +832,16 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
-            "Exclude" = "11:TRUE"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_DCC8C284D05F3DFD97D66E4435D600D5"
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_8B09A1CC51BF46CCA1B9C29C93147841"
             {
-            "SourcePath" = "8:mscomctl.ocx"
-            "TargetName" = "8:mscomctl.ocx"
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\pm3d\\pm3dConvertToImage.awk"
+            "TargetName" = "8:pm3dConvertToImage.awk"
             "Tag" = "8:"
-            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Folder" = "8:_AB73388C3C1249E18C696CAFC8A2266F"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -505,19 +851,39 @@
             "Permanent" = "11:FALSE"
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
-            "Register" = "3:4"
+            "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_E0C4C496FD6915AB6B6F7ECE0A0F8CF6"
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_96D17F077F9C4C7A80DAE961EED4D451"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\README"
+            "TargetName" = "8:README"
+            "Tag" = "8:"
+            "Folder" = "8:_8EE5391C08B24A4D980803A13113052F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_9890C1B7EBC4F2054E153238C2D5B4D0"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:AxInterop.MSComctlLib, Version=2.0.0.0, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_E0C4C496FD6915AB6B6F7ECE0A0F8CF6"
+                    "_9890C1B7EBC4F2054E153238C2D5B4D0"
                     {
                     "Name" = "8:AxInterop.MSComctlLib.dll"
                     "Attributes" = "3:512"
@@ -541,14 +907,134 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_F60E4AA158D6357F8FCEAECCFACE8496"
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_9DC658BB0E174AA98A538B89D3D2901C"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\bin\\wgnuplot.exe"
+            "TargetName" = "8:wgnuplot.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_B2F13F90762A4853BC7D251C82AA5AF7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_A1D869069BE3D5CFBD5C2F9CDF41603A"
+            {
+            "SourcePath" = "8:MorseKernelATL.dll"
+            "TargetName" = "8:MorseKernelATL.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_AC89FBA60F83448598D06CB86156DB7E"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\pm3d\\README"
+            "TargetName" = "8:README"
+            "Tag" = "8:"
+            "Folder" = "8:_AB73388C3C1249E18C696CAFC8A2266F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_AF9132D1AF3245A792F0232D231A3E68"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\bin\\gpsavediff.cmd"
+            "TargetName" = "8:gpsavediff.cmd"
+            "Tag" = "8:"
+            "Folder" = "8:_B2F13F90762A4853BC7D251C82AA5AF7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_B24E8311A4934A7E9C27421FDF1984CC"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplottemplate\\3d.txt"
+            "TargetName" = "8:3d.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_007204CE97E048688B9D94048EB3F0FC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_B2E57B0A5C994E519E6AADDFB1516ED3"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\pm3d\\colorpts.awk"
+            "TargetName" = "8:colorpts.awk"
+            "Tag" = "8:"
+            "Folder" = "8:_AB73388C3C1249E18C696CAFC8A2266F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_B31C84EE53128736E6588345E5926628"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:AxInterop.MorseKernelVisualizationATL, Version=1.0.0.0, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_F60E4AA158D6357F8FCEAECCFACE8496"
+                    "_B31C84EE53128736E6588345E5926628"
                     {
                     "Name" = "8:AxInterop.MorseKernelVisualizationATL.dll"
                     "Attributes" = "3:512"
@@ -570,6 +1056,248 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_B418FCFC42FB47D7847ADF3586B154C5"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\README.1ST"
+            "TargetName" = "8:README.1ST"
+            "Tag" = "8:"
+            "Folder" = "8:_B431CFEB6A7C46C78559F29A9984A4A6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_BCC5475A277C4B3C9F9E2DA30E432A56"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\README"
+            "TargetName" = "8:README"
+            "Tag" = "8:"
+            "Folder" = "8:_B431CFEB6A7C46C78559F29A9984A4A6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_D61495BA7EF645BDB76BD6C38F5ED163"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\pm3d\\pts.dat"
+            "TargetName" = "8:pts.dat"
+            "Tag" = "8:"
+            "Folder" = "8:_AB73388C3C1249E18C696CAFC8A2266F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_D72125C7010641759AE7F7971A6A6D8B"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\bin\\wgnuplot_pipes.exe"
+            "TargetName" = "8:wgnuplot_pipes.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_B2F13F90762A4853BC7D251C82AA5AF7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_D7CA74040E8A4A93A2EBDA2E96B71670"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\BUGS"
+            "TargetName" = "8:BUGS"
+            "Tag" = "8:"
+            "Folder" = "8:_B431CFEB6A7C46C78559F29A9984A4A6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_DCC8C284D05F3DFD97D66E4435D600D5"
+            {
+            "SourcePath" = "8:MSCOMCTL.OCX"
+            "TargetName" = "8:mscomctl.ocx"
+            "Tag" = "8:"
+            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_E08C302959E61928E03627C824063280"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Interop.MorseKernelATL, Version=1.0.0.0, Culture=neutral"
+                "ScatterAssemblies"
+                {
+                    "_E08C302959E61928E03627C824063280"
+                    {
+                    "Name" = "8:Interop.MorseKernelATL.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Interop.MorseKernelATL.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_E40C15CCC940DDD45DE553D1FF75E85B"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Interop.MorseKernelVisualizationATL, Version=1.0.0.0, Culture=neutral"
+                "ScatterAssemblies"
+                {
+                    "_E40C15CCC940DDD45DE553D1FF75E85B"
+                    {
+                    "Name" = "8:Interop.MorseKernelVisualizationATL.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Interop.MorseKernelVisualizationATL.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_EF492632CFEC4FCCB438BDDB7C554557"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\README.Windows"
+            "TargetName" = "8:README.Windows"
+            "Tag" = "8:"
+            "Folder" = "8:_B431CFEB6A7C46C78559F29A9984A4A6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_FAAD1FEEBD9D70E3A5B9407DDEAE4958"
+            {
+            "SourcePath" = "8:MorseKernelVisualizationATL.dll"
+            "TargetName" = "8:MorseKernelVisualizationATL.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_FE415BCFBD074BC9905807153385E9BF"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\pm3d\\colorpts-demo.gp"
+            "TargetName" = "8:colorpts-demo.gp"
+            "Tag" = "8:"
+            "Folder" = "8:_AB73388C3C1249E18C696CAFC8A2266F"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -599,6 +1327,61 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
+                    "{F27BD5C5-A65D-4608-96D4-7C5DA1F76302}:_007204CE97E048688B9D94048EB3F0FC"
+                    {
+                    "Name" = "8:gnuplottemplate"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_E3F7B78EBAEE4C819824969283C49BF8"
+                        "Folders"
+                        {
+                        }
+                    }
+                    "{F27BD5C5-A65D-4608-96D4-7C5DA1F76302}:_B431CFEB6A7C46C78559F29A9984A4A6"
+                    {
+                    "Name" = "8:gnuplot"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_46D7CA99E99D4F5A83A5147387CC715A"
+                        "Folders"
+                        {
+                            "{F27BD5C5-A65D-4608-96D4-7C5DA1F76302}:_8EE5391C08B24A4D980803A13113052F"
+                            {
+                            "Name" = "8:contrlib"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_BF265114A4D547C7BA5EEAE297EFAB77"
+                                "Folders"
+                                {
+                                    "{F27BD5C5-A65D-4608-96D4-7C5DA1F76302}:_AB73388C3C1249E18C696CAFC8A2266F"
+                                    {
+                                    "Name" = "8:pm3d"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_9B80E921AE564E40B7D1394D1C9EE900"
+                                        "Folders"
+                                        {
+                                        }
+                                    }
+                                }
+                            }
+                            "{F27BD5C5-A65D-4608-96D4-7C5DA1F76302}:_B2F13F90762A4853BC7D251C82AA5AF7"
+                            {
+                            "Name" = "8:bin"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_C22074B5A28F48DB80603C7F5B48EFF4"
+                                "Folders"
+                                {
+                                }
+                            }
+                        }
+                    }
                 }
             }
             "{78BAF5CE-F2E5-45BE-83BC-DB6AF387E941}:_6B7BB45F70094A7E9F0D946C39DD56BE"
@@ -779,6 +1562,20 @@
             "Folder" = "8:_21BE3AF7609F44ECAA4F52A0D58C4386"
             "WorkingFolder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
             "Icon" = "8:_0D57935B99964246B9EC6A0B6604628C"
+            "Feature" = "8:"
+            }
+            "{478F747B-8505-45D1-9AAE-8C3B645C26E3}:_D55AAFEDEC67484B94A22563ED8CCEE7"
+            {
+            "Name" = "8:GNUPlot"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_9DC658BB0E174AA98A538B89D3D2901C"
+            "Folder" = "8:_21BE3AF7609F44ECAA4F52A0D58C4386"
+            "WorkingFolder" = "8:_B2F13F90762A4853BC7D251C82AA5AF7"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
             "{478F747B-8505-45D1-9AAE-8C3B645C26E3}:_FDA52DE576F3415F85C472CEB08DFB4E"
@@ -1178,49 +1975,7 @@
         }
         "MergeModule"
         {
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_22DAA1322C4C4FD991E13CFD739B4918"
-            {
-            "UseDynamicProperties" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:vc_user_crt71_rtl_x86_---.msm"
-                "Properties"
-                {
-                }
-            "LanguageId" = "3:0"
-            "Exclude" = "11:FALSE"
-            "Folder" = "8:"
-            "Feature" = "8:"
-            "IsolateTo" = "8:"
-            }
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_3E0136F2172A44479027489C74A30182"
-            {
-            "UseDynamicProperties" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:vc_user_mfc71_rtl_x86_---.msm"
-                "Properties"
-                {
-                }
-            "LanguageId" = "3:0"
-            "Exclude" = "11:FALSE"
-            "Folder" = "8:"
-            "Feature" = "8:"
-            "IsolateTo" = "8:"
-            }
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_47E8562FABA242B09345CA953872F33D"
-            {
-            "UseDynamicProperties" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:vc_user_stl71_rtl_x86_---.msm"
-                "Properties"
-                {
-                }
-            "LanguageId" = "3:0"
-            "Exclude" = "11:FALSE"
-            "Folder" = "8:"
-            "Feature" = "8:"
-            "IsolateTo" = "8:"
-            }
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_8EBC6D617FC94285BAAA866D024E7B4D"
+            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_001DC7A3B0564C7B8831ABB8F39E85A3"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
@@ -1239,7 +1994,7 @@
         {
             "{8062640A-2EEE-46E9-AB67-688E9A886E9F}:_6C9BAD16810A4E94AF63D388D952CCE5"
             {
-            "SourcePath" = "8:..\\gui\\obj\\Release\\gui.exe"
+            "SourcePath" = "8:..\\gui\\obj\\Debug\\gui.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
@@ -1267,7 +2022,7 @@
             }
             "{8062640A-2EEE-46E9-AB67-688E9A886E9F}:_BEE2B4F4071B42ED98254227B4302DE3"
             {
-            "SourcePath" = "8:..\\morsekernelatl\\release\\MorseKernelATL.dll"
+            "SourcePath" = "8:..\\MorseKernelATL\\Debug\\MorseKernelATL.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
@@ -1295,7 +2050,7 @@
             }
             "{8062640A-2EEE-46E9-AB67-688E9A886E9F}:_C9D059725F7C4D77ACDF018FE7621437"
             {
-            "SourcePath" = "8:..\\morsekernelvisualizationatl\\release\\MorseKernelVisualizationATL.dll"
+            "SourcePath" = "8:..\\MorseKernelVisualizationATL\\Debug\\MorseKernelVisualizationATL.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
@@ -1323,7 +2078,7 @@
             }
             "{8062640A-2EEE-46E9-AB67-688E9A886E9F}:_EF433BC6C34040458F873286D72A102C"
             {
-            "SourcePath" = "8:..\\d3d9test\\release\\d3d9test.exe"
+            "SourcePath" = "8:..\\d3d9test\\Debug\\d3d9test.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"

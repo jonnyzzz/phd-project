@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Windows.Forms;
+using gui.src.Tree.Node.ActionAllocator;
 using gui.Tree.Node;
+using gui.Tree.Node.Action;
 using gui.Tree.Node.Menu;
 using gui.Tree.Node.Util;
 using MorseKernelATL;
@@ -17,16 +19,18 @@ namespace gui.Tree.Node
 
 		public ComputationNodeSingular(IKernelNode node) : base(node)
 		{					
-			ComputationNodeDynamicTest.ComputationNodeDynamicTestResult res = ComputationNodeDynamicTest.parseNode(node);
-			this.items = res.items;
+			//ComputationNodeDynamicTest.ComputationNodeDynamicTestResult res = ComputationNodeDynamicTest.parseNode(node);
+			//this.items = res.items;
+            this.actions = DynamicTest.Instance.CreateAction(node);
 			this.Text = generateCaption(node);
 		}
 
-		private ComputationNodeMenuItem[] items = new ComputationNodeMenuItem[]{};
+		//private ComputationNodeMenuItem[] items = new ComputationNodeMenuItem[]{};
+        private ComputationNodeAction[] actions;
 
 		protected override ComputationNodeMenuItem[] getMenuItems()
 		{
-			return items;
+			return fromActions(actions);
 		}
 		
 		#region generate Caption methods

@@ -15,7 +15,7 @@
                     StartPage = ""
                     StartProgram = ""
                     StartURL = ""
-                    StartWorkingDirectory = "o:\"
+                    StartWorkingDirectory = "E:\Projects\Morse\DotNetProject\Morse\DotNet\resource\included"
                     StartWithIE = "true"
                 />
                 <Config

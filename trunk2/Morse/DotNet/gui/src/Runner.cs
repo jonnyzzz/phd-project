@@ -1,6 +1,11 @@
 using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
+using gui.Attributes;
 using gui.Forms;
+using gui.Logger;
+using gui.Resource;
 using MorseKernelATL;
 
 namespace gui
@@ -34,13 +39,37 @@ namespace gui
 
 		
 		[STAThread]
-		static void Main() 
-		{		
-			new Runner();			
+		static void Main(string[] args) 
+		{	
+            AttributeProcessor.InitializeStaticAttribute(Assembly.GetExecutingAssembly());
+            if (args.Length == 1) 
+            {
+                Resources.SetBasePath(args[0]);
+            } else if (args.Length == 2)
+            {
+                Resources.SetBasePath(args[0], args[2]);
+            } else {
+                try 
+                {
+                    Resources.SetBasePath(Application.StartupPath);
+                } catch (Exception)
+                {
+                    try
+                    {
+                        Resources.SetBasePath( Directory.GetCurrentDirectory());
+                    } catch (Exception ee)
+                    {
+                        Log.LogException(typeof(Runner),ee, "Unable to find any config files");
+                    }
+                }
+            }
+
+            new Runner();
 		}
 
 		public Runner()
 		{	
+
 			instance = this;
 			Application.ApplicationExit += new EventHandler(OnApplicationExit);
 

@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using gui.Logger;
+using gui.Tree.Node;
 using gui.Tree.Node.Action;
 using MorseKernelATL;
 
@@ -22,16 +24,16 @@ namespace gui.src.Tree.Node.ActionAllocator
         }
 
 
-        private ArrayList actionFactoryes = new ArrayList();
+        private ActionFactoryList actionFactoryes = new ActionFactoryList();
 
         public void registerActionFactory(IActionFactory factory)
-        {
-            actionFactoryes.Add(factory);
+        {                            
+                actionFactoryes.AddActionList(factory);            
         }
 
         public void unregisterActionFactory(IActionFactory factory)
         {
-            actionFactoryes.Remove(factory);
+            actionFactoryes.RemoveAction(factory);
         }
 
         public ComputationNodeAction[] CreateAction(IKernelNode node)
@@ -45,8 +47,12 @@ namespace gui.src.Tree.Node.ActionAllocator
                 }
             }
 
+            Log.LogMessage(this, "Dynamicly allocated {0} actions", al.Count);
+            
+            al.AddRange(ComputationNodeDynamicTest.parseNode(node).actions);
+
             ComputationNodeAction[] act = new ComputationNodeAction[al.Count];            
-            for (int i=0; i<al.Count; act[i++] = (ComputationNodeAction)al[i]);
+            for (int i=0; i<al.Count; act[i] = (ComputationNodeAction)al[i++]);
 
             return act;
         }

@@ -220,19 +220,87 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Logger\Logger.cs"
+                    RelPath = "src\Attribute\AttributeProcessor.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Attribute\InitializeStaticAttrubute.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Logger\Log.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Logger\Logger.resx"
-                    DependentUpon = "Logger.cs"
+                    RelPath = "src\Logger\Log.resx"
+                    DependentUpon = "Log.cs"
                     BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Logger\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Logger\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Logger\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Logger\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Resources\ResourceLoader.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\Resources\Resources.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Resources\TemplateProcessor.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Resources\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Resources\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Resources\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Resources\CVS\Root"
+                    BuildAction = "None"
                 />
                 <File
                     RelPath = "src\SystemFunction\SystemAssignment.cs"
@@ -245,6 +313,22 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "src\SystemFunction\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\SystemFunction\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\SystemFunction\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\SystemFunction\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
                     RelPath = "src\Tree\ComputationTree.cs"
                     SubType = "UserControl"
                     BuildAction = "Compile"
@@ -253,6 +337,22 @@
                     RelPath = "src\Tree\ComputationTree.resx"
                     DependentUpon = "ComputationTree.cs"
                     BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\CVS\Root"
+                    BuildAction = "None"
                 />
                 <File
                     RelPath = "src\Tree\Node\ComputationNode.cs"
@@ -320,6 +420,32 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Tree\Node\Action\UnableToPerformActionException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ActionAllocator\ActionFactoryList.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Tree\Node\ActionAllocator\DynamicTest.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -330,6 +456,38 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Tree\Node\ActionAllocator\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ActionAllocator\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ActionAllocator\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ActionAllocator\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
                     RelPath = "src\Tree\Node\Factory\ComputationNodeMenuFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -338,6 +496,22 @@
                     RelPath = "src\Tree\Node\Factory\ComputationParametersFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Factory\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Factory\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Factory\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Factory\CVS\Root"
+                    BuildAction = "None"
                 />
                 <File
                     RelPath = "src\Tree\Node\Forms\GraphOperationSelector.cs"
@@ -370,6 +544,22 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "src\Tree\Node\Forms\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
                     RelPath = "src\Tree\Node\Menu\ComputationNodeMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
@@ -380,14 +570,74 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "src\Tree\Node\Menu\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Menu\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Menu\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Menu\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
                     RelPath = "src\Tree\Node\Util\InfoGraphParser.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Tree\Node\Util\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Util\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Util\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Util\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Visualization\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Visualization\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Visualization\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
                     RelPath = "src\Visualization\GnuPlot\GnuPlotView.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Visualization\GnuPlot\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Visualization\GnuPlot\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Visualization\GnuPlot\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Visualization\GnuPlot\CVS\Root"
+                    BuildAction = "None"
                 />
                 <File
                     RelPath = "src\Visualization\JonATL\Visualization2D.cs"
@@ -408,6 +658,22 @@
                     RelPath = "src\Visualization\JonATL\Visualization3D.resx"
                     DependentUpon = "Visualization3D.cs"
                     BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Visualization\JonATL\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Visualization\JonATL\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Visualization\JonATL\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\Visualization\JonATL\CVS\Root"
+                    BuildAction = "None"
                 />
             </Include>
         </Files>

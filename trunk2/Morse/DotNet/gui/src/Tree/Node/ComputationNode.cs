@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Windows.Forms;
+using gui.Tree.Node.Action;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
 using MorseKernelATL;
@@ -21,7 +22,7 @@ namespace gui.Tree.Node
         {
             get { return currentGroup; }
             set { currentGroup = value; }
-        }
+        }      
 
         #region Class Members...
 
@@ -59,7 +60,7 @@ namespace gui.Tree.Node
                     items = merge(items,
                                   new ComputationNodeMenuItem[]
                                       {
-                                          ComputationNodeMenuFactory.DelimeterItem(),
+                                          //ComputationNodeMenuFactory.DelimeterItem(),
                                           ComputationNodeMenuFactory.DeselectItem(this.TreeView)
                                       });
                 }
@@ -68,7 +69,7 @@ namespace gui.Tree.Node
                 {
                     items = merge(items, new ComputationNodeMenuItem[]
                         {
-                            ComputationNodeMenuFactory.DelimeterItem()
+                            //ComputationNodeMenuFactory.DelimeterItem()
                         });
                     items = merge(items,
                                   addPrefix(currentGroup.MenuItems, "Group: "));
@@ -110,6 +111,27 @@ namespace gui.Tree.Node
                 }
             }
             return ret;
+        }
+
+
+        protected ComputationNodeMenuItem[] fromActions(IEnumerable actions)
+        {
+            ArrayList nodes = new ArrayList();            
+            ComputationNodeMenuItem[] items;
+            foreach (ComputationNodeAction action in actions)
+            {                      
+                items = action.getMenuItems();
+                if (items.Length > 0)
+                {
+                    nodes.AddRange(items);    
+                    nodes.Add(ComputationNodeMenuFactory.DelimeterItem());
+                }
+                
+            }
+
+            ComputationNodeMenuItem[] itms = new ComputationNodeMenuItem[nodes.Count];
+            for (int i=0; i<nodes.Count; itms[i] = (ComputationNodeMenuItem)nodes[i++]);
+            return itms;
         }
 
         #endregion

@@ -1,6 +1,5 @@
 using System.Windows.Forms;
-using gui.src.Visualization.GnuPlot;
-using gui.Tree.Node;
+using gui.Visualization.GnuPlot;
 using gui.Tree.Node.Action;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
@@ -18,8 +17,7 @@ namespace gui.Tree.Node.Action
 		{
 			this.node = node;
 			items = new ComputationNodeMenuItem[] {
-			    ComputationNodeMenuFactory.getMenuExportData(new ComputationNodeMenuFactory.ExportData(OnExportData)),
-		        ComputationNodeMenuFactory.getUniversalMenuItem(new ComputationNodeMenuFactory.UniversalMenuItem(visualizeGnuPlot), "Visualize; GnuPlot" ),                                                 
+			    ComputationNodeMenuFactory.getMenuExportData(new ComputationNodeMenuFactory.ExportData(OnExportData)),		        
             };
 		}
 
@@ -40,13 +38,6 @@ namespace gui.Tree.Node.Action
 				MessageBox.Show(null, "Data was exported to " + sfd.FileName, "Export");
 			} 
 		}
-
-        private void visualizeGnuPlot()
-        {
-            string name = GnuPlotView.AllocateTemporaryFile();
-            node.ExportData(name);
-            GnuPlotView.ShowFromFile(name);
-        }
 
 	    ComputationNodeMenuItem[] items = new ComputationNodeMenuItem[]{};
 	}

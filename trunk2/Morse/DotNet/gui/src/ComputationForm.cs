@@ -1,7 +1,6 @@
 using System;
 using System.Windows.Forms;
-using gui.src.Visualization.GnuPlot;
-using gui.Tree;
+using gui.Visualization.GnuPlot;
 using gui.Tree.Node;
 using gui.Tree.Node.Forms;
 using MorseKernelATL;
@@ -597,7 +596,6 @@ namespace gui.Forms
 
         private void menuItemStartGNUPlot_Click(object sender, System.EventArgs e)
         {
-            new GnuPlotView().showFromFile("smile");
         }
 
 	}
