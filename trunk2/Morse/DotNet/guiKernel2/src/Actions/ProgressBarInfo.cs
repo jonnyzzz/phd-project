@@ -4,6 +4,11 @@ using MorseKernel2;
 
 namespace guiKernel2.Actions
 {
+	public delegate void ProgressBarTick();
+	public delegate void ProgressBarFinish();
+	public delegate void ProgressBarNewLength(int length);
+	public delegate void ProgressBarNewTask(string caption);
+
 	public class ProgressBarInfo 
 	{
 		public event ProgressBarTick Tick;
@@ -69,17 +74,5 @@ namespace guiKernel2.Actions
 			}
 		}
 	}
-
-	/// <summary>
-	/// Summary description for ProgressBar.
-	/// </summary>
-	/// 
-	public delegate void ProgressBarTick();
-
-	public delegate void ProgressBarFinish();
-
-	public delegate void ProgressBarNewLength(int length);
-
-	public delegate void ProgressBarNewTask(string caption);
 }
 

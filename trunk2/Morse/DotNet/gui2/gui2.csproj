@@ -133,82 +133,87 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ActionPerformer\ActionChainParameters.cs"
+                    RelPath = "src\ActionPerformer\ActionChainParameters.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ActionPerformer\ChainPerformer.cs"
+                    RelPath = "src\ActionPerformer\ChainPerformer.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "ActionPerformer\Performer.cs"
+                    RelPath = "src\ActionPerformer\Performer.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Document\Document.cs"
+                    RelPath = "src\Document\Document.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Forms\ComputationForm.cs"
+                    RelPath = "src\Forms\ComputationForm.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Forms\ComputationForm.resx"
+                    RelPath = "src\Forms\ComputationForm.resx"
                     DependentUpon = "ComputationForm.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "Forms\ParametersSelector.cs"
+                    RelPath = "src\Forms\ParametersSelector.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Forms\ParametersSelector.resx"
+                    RelPath = "src\Forms\ParametersSelector.resx"
                     DependentUpon = "ParametersSelector.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "Forms\SystemAssignment.cs"
+                    RelPath = "src\Forms\SystemAssignment.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Forms\SystemAssignment.resx"
+                    RelPath = "src\Forms\SystemAssignment.resx"
                     DependentUpon = "SystemAssignment.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "Runner\CommandLineParser.cs"
+                    RelPath = "src\ProgressBar\ProgressBarNotificationAdapter.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Runner\Runner.cs"
+                    RelPath = "src\Runner\CommandLineParser.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeNodes\Node.cs"
+                    RelPath = "src\Runner\Runner.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeNodes\MenuItems\ActionTreeMenuItem.cs"
+                    RelPath = "src\TreeNodes\Node.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TreeNodes\MenuItems\ActionTreeMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeNodes\MenuItems\MenuItemFactory.cs"
+                    RelPath = "src\TreeNodes\MenuItems\MenuItemFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "TreeNodes\MenuItems\TreeMenuItem.cs"
+                    RelPath = "src\TreeNodes\MenuItems\TreeMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
                 />

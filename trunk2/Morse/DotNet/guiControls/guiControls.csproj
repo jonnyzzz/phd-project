@@ -139,6 +139,16 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\ProgressBar\SmartProgressBar.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ProgressBar\SmartProgressBar.resx"
+                    DependentUpon = "SmartProgressBar.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "src\TreeControl\ComputationNode.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

@@ -221,6 +221,7 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
+                <Folder RelPath = "src\progressBar\" />
                 <File
                     RelPath = "xml\ActionMapping.xml"
                     BuildAction = "EmbeddedResource"
