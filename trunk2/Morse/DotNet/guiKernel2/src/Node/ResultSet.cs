@@ -127,6 +127,14 @@ namespace guiKernel2.Node
 			return new ResultSet();
 		}
 
+		public static ResultSet Merge(ResultSet resultSet, params IResult[] objs)
+		{
+			ResultSet resultSetRet = new ResultSet();
+			resultSetRet.AddResultRange(resultSet.ToResults);
+			resultSetRet.AddResultRange(objs);
+			return resultSetRet;
+		}
+
 		#endregion
 
 

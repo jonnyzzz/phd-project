@@ -20,6 +20,7 @@ namespace guiActions.actionImpl.HomotopAction
 		private readonly KernelNode node;
 		private bool hasCorrectData = false;
 		private ProgressBarInfo progressBarInfo = new ProgressBarInfo();
+		private System.Windows.Forms.CheckBox checkShowFoundLoop;
 		private volatile IGraphResult graphResult = null;
 
 		protected override IParameters SubmitDataInternal()
@@ -32,7 +33,7 @@ namespace guiActions.actionImpl.HomotopAction
 					throw new ParametersControlException("Please select initial contour to start");
 				}
 			}
-			return new HomotopParametersImpl(graphResult);
+			return new HomotopParametersImpl(graphResult, checkShowFoundLoop.Checked);
 		}
 
 		private System.Windows.Forms.GroupBox groupBoxPointSelection;
@@ -87,11 +88,12 @@ namespace guiActions.actionImpl.HomotopAction
 			this.panelDown = new System.Windows.Forms.Panel();
 			this.groupBoxDown = new System.Windows.Forms.GroupBox();
 			this.panelPreAnswer = new System.Windows.Forms.Panel();
+			this.linkUpdate = new System.Windows.Forms.LinkLabel();
+			this.labelLength = new System.Windows.Forms.Label();
+			this.panelPreAnswerGapRight = new System.Windows.Forms.Panel();
 			this.labelStatic = new System.Windows.Forms.Label();
 			this.panelUpper = new System.Windows.Forms.Panel();
-			this.panelPreAnswerGapRight = new System.Windows.Forms.Panel();
-			this.labelLength = new System.Windows.Forms.Label();
-			this.linkUpdate = new System.Windows.Forms.LinkLabel();
+			this.checkShowFoundLoop = new System.Windows.Forms.CheckBox();
 			this.groupBoxPointSelection.SuspendLayout();
 			this.panelDown.SuspendLayout();
 			this.groupBoxDown.SuspendLayout();
@@ -125,16 +127,17 @@ namespace guiActions.actionImpl.HomotopAction
 			this.panelDown.DockPadding.All = 3;
 			this.panelDown.Location = new System.Drawing.Point(0, 264);
 			this.panelDown.Name = "panelDown";
-			this.panelDown.Size = new System.Drawing.Size(376, 56);
+			this.panelDown.Size = new System.Drawing.Size(376, 80);
 			this.panelDown.TabIndex = 2;
 			// 
 			// groupBoxDown
 			// 
+			this.groupBoxDown.Controls.Add(this.checkShowFoundLoop);
 			this.groupBoxDown.Controls.Add(this.panelPreAnswer);
 			this.groupBoxDown.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.groupBoxDown.Location = new System.Drawing.Point(3, 3);
 			this.groupBoxDown.Name = "groupBoxDown";
-			this.groupBoxDown.Size = new System.Drawing.Size(370, 50);
+			this.groupBoxDown.Size = new System.Drawing.Size(370, 74);
 			this.groupBoxDown.TabIndex = 0;
 			this.groupBoxDown.TabStop = false;
 			this.groupBoxDown.Text = "Selected loop";
@@ -150,6 +153,36 @@ namespace guiActions.actionImpl.HomotopAction
 			this.panelPreAnswer.Name = "panelPreAnswer";
 			this.panelPreAnswer.Size = new System.Drawing.Size(364, 32);
 			this.panelPreAnswer.TabIndex = 3;
+			// 
+			// linkUpdate
+			// 
+			this.linkUpdate.Dock = System.Windows.Forms.DockStyle.Right;
+			this.linkUpdate.Location = new System.Drawing.Point(240, 0);
+			this.linkUpdate.Name = "linkUpdate";
+			this.linkUpdate.Size = new System.Drawing.Size(100, 32);
+			this.linkUpdate.TabIndex = 5;
+			this.linkUpdate.TabStop = true;
+			this.linkUpdate.Text = "Update";
+			this.linkUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.linkUpdate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUpdate_LinkClicked);
+			// 
+			// labelLength
+			// 
+			this.labelLength.Dock = System.Windows.Forms.DockStyle.Left;
+			this.labelLength.Location = new System.Drawing.Point(144, 0);
+			this.labelLength.Name = "labelLength";
+			this.labelLength.Size = new System.Drawing.Size(80, 32);
+			this.labelLength.TabIndex = 4;
+			this.labelLength.Text = "label1";
+			this.labelLength.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// panelPreAnswerGapRight
+			// 
+			this.panelPreAnswerGapRight.Dock = System.Windows.Forms.DockStyle.Right;
+			this.panelPreAnswerGapRight.Location = new System.Drawing.Point(340, 0);
+			this.panelPreAnswerGapRight.Name = "panelPreAnswerGapRight";
+			this.panelPreAnswerGapRight.Size = new System.Drawing.Size(24, 32);
+			this.panelPreAnswerGapRight.TabIndex = 3;
 			// 
 			// labelStatic
 			// 
@@ -171,42 +204,22 @@ namespace guiActions.actionImpl.HomotopAction
 			this.panelUpper.Size = new System.Drawing.Size(376, 264);
 			this.panelUpper.TabIndex = 3;
 			// 
-			// panelPreAnswerGapRight
+			// checkShowFoundLoop
 			// 
-			this.panelPreAnswerGapRight.Dock = System.Windows.Forms.DockStyle.Right;
-			this.panelPreAnswerGapRight.Location = new System.Drawing.Point(340, 0);
-			this.panelPreAnswerGapRight.Name = "panelPreAnswerGapRight";
-			this.panelPreAnswerGapRight.Size = new System.Drawing.Size(24, 32);
-			this.panelPreAnswerGapRight.TabIndex = 3;
-			// 
-			// labelLength
-			// 
-			this.labelLength.Dock = System.Windows.Forms.DockStyle.Left;
-			this.labelLength.Location = new System.Drawing.Point(144, 0);
-			this.labelLength.Name = "labelLength";
-			this.labelLength.Size = new System.Drawing.Size(80, 32);
-			this.labelLength.TabIndex = 4;
-			this.labelLength.Text = "label1";
-			this.labelLength.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// linkUpdate
-			// 
-			this.linkUpdate.Dock = System.Windows.Forms.DockStyle.Right;
-			this.linkUpdate.Location = new System.Drawing.Point(240, 0);
-			this.linkUpdate.Name = "linkUpdate";
-			this.linkUpdate.Size = new System.Drawing.Size(100, 32);
-			this.linkUpdate.TabIndex = 5;
-			this.linkUpdate.TabStop = true;
-			this.linkUpdate.Text = "Update";
-			this.linkUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.linkUpdate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkUpdate_LinkClicked);
+			this.checkShowFoundLoop.Checked = true;
+			this.checkShowFoundLoop.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkShowFoundLoop.Location = new System.Drawing.Point(48, 48);
+			this.checkShowFoundLoop.Name = "checkShowFoundLoop";
+			this.checkShowFoundLoop.Size = new System.Drawing.Size(184, 16);
+			this.checkShowFoundLoop.TabIndex = 4;
+			this.checkShowFoundLoop.Text = "Show Found Loop";
 			// 
 			// HomotopParameters
 			// 
 			this.Controls.Add(this.panelUpper);
 			this.Controls.Add(this.panelDown);
 			this.Name = "HomotopParameters";
-			this.Size = new System.Drawing.Size(376, 320);
+			this.Size = new System.Drawing.Size(376, 344);
 			this.groupBoxPointSelection.ResumeLayout(false);
 			this.panelDown.ResumeLayout(false);
 			this.groupBoxDown.ResumeLayout(false);

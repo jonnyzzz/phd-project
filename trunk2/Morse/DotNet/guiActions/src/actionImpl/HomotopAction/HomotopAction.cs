@@ -27,5 +27,18 @@ namespace guiActions.actionImpl.HomotopAction
 		{
 			return new HomotopParameters(node);
 		}
+
+		protected override ResultSet DoActionInteranl(ResultSet input)
+		{
+			HomotopParametersImpl param = (HomotopParametersImpl) this.Parameters;
+			if (!param.PublishGraph) 
+			{
+				return base.DoActionInteranl(input);
+			} else
+			{
+				ResultSet resultSet = base.DoActionInteranl(input);
+				return ResultSet.Merge(resultSet, param.GetStartSet());
+			}
+		}
 	}
 }

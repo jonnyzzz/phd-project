@@ -9,11 +9,18 @@ namespace guiActions.actionImpl.HomotopAction
 	/// </summary>
 	public class HomotopParametersImpl : IIsolatedSetParameters
 	{
-		IGraphResult result;
+		private IGraphResult result;
+		private bool publishGraph;
 
-		public HomotopParametersImpl(IGraphResult result)
+		public HomotopParametersImpl(IGraphResult result, bool publishGraph)
 		{
 			this.result = result;
+			this.publishGraph = publishGraph;
+		}
+
+		public bool PublishGraph
+		{
+			get { return publishGraph; }
 		}
 
 		public IGraphResult GetStartSet()

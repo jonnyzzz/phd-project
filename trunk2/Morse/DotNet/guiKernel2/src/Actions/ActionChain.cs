@@ -42,13 +42,12 @@ namespace guiKernel2.Actions
 		}
 
 		public ResultSet Do(ResultSet resultSet, ProgressBarInfo progressBarInfo)
-		{
-			IResultSet tmp = resultSet.ToResultSet;
+		{			
 			foreach (ActionWrapper action in actions)
 			{
-				tmp = action.Do(tmp, progressBarInfo.GetProgressBarInfo(action));
+				resultSet = action.Do(resultSet, progressBarInfo);
 			}
-			return ResultSet.FromResultSet(tmp);
+			return resultSet;
 		}
 	}
 }

@@ -40,24 +40,22 @@ namespace guiKernel2.Actions
 			get { return true; }
 		}
 		
-		public ResultSet Do(ResultSet input, ProgressBarInfo info)
-		{
-			return ResultSet.FromResultSet(Do(input.ToResultSet, info.GetProgressBarInfo(this)));
-		}
-
-
-		public IResultSet Do(IResultSet input, IProgressBarInfo progressBarInfo)
+		public ResultSet Do(ResultSet input, ProgressBarInfo progressBarInfo)
 		{
 			IParameters parameters = Parameters;
 			action.SetActionParameters(parameters);
-			action.SetProgressBarInfo(progressBarInfo);
-			if (!action.CanDo(input))
+			action.SetProgressBarInfo(progressBarInfo.GetProgressBarInfo(this));
+			if (!action.CanDo(input.ToResultSet))
 			{
 				throw new ActionPerformException("CanDo call returned FALSE");
 			}
-			return action.Do(input);
+			return DoActionInteranl(input);
 		}
 
+		protected virtual ResultSet DoActionInteranl(ResultSet input)
+		{
+			return ResultSet.FromResultSet(action.Do(input.ToResultSet));
+		}
 
 		public string ActionMappingName
 		{
