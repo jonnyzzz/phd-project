@@ -27,7 +27,6 @@ namespace gui
 			this.items = res.items;
 			this.actions = res.actions;
 			registerEvents(node);
-
 		}
 
 		private ComputationNodeMenuItem[] items = new ComputationNodeMenuItem[]{};
@@ -40,51 +39,96 @@ namespace gui
 		
 		#region registrationEvents...
 
-		private void registerEvents(IKernelNode mnode)
-		{
-			if (mnode is CSymbolicImageGraph)
-			{
-				CSymbolicImageGraph node = mnode as CSymbolicImageGraph;
-				node.noChilds += new AbstractEvent_noChildsEventHandler(noChilds);
-				node.newKernelNode += new AbstractEvent_newKernelNodeEventHandler(newNode);
-				node.noImplementation += new AbstractEvent_noImplementationEventHandler(noImplementation);				
-				node.newComputationResult += new AbstractEvent_newComputationResultEventHandler(newComputationResult);
-				generateCaption(node);	
-			}
-			if (mnode is CSymbolicImageGroup) 
-			{
-				CSymbolicImageGroup node = mnode as CSymbolicImageGroup;
-				node.noChilds += new AbstractEvent_noChildsEventHandler(noChilds);
-				node.newKernelNode += new AbstractEvent_newKernelNodeEventHandler(newNode);
-				node.noImplementation += new AbstractEvent_noImplementationEventHandler(noImplementation);
-				node.newComputationResult += new AbstractEvent_newComputationResultEventHandler(newComputationResult);
-				generateCaption(node);				
-			}
-			if (mnode is CProjectiveBundleGraph)
-			{
-				CProjectiveBundleGraph node = mnode as CProjectiveBundleGraph;
-				node.noChilds += new AbstractEvent_noChildsEventHandler(noChilds);
-				node.newKernelNode += new AbstractEvent_newKernelNodeEventHandler(newNode);
-				node.noImplementation += new AbstractEvent_noImplementationEventHandler(noImplementation);
-				node.newComputationResult += new AbstractEvent_newComputationResultEventHandler(newComputationResult);
-				generateCaption(node);
-			}
-			if (mnode is CProjectiveBundleGroup)
-			{
-				CProjectiveBundleGroup node = mnode as CProjectiveBundleGroup;
-				node.noChilds += new AbstractEvent_noChildsEventHandler(noChilds);
-				node.newKernelNode += new AbstractEvent_newKernelNodeEventHandler(newNode);
-				node.noImplementation += new AbstractEvent_noImplementationEventHandler(noImplementation);
-				node.newComputationResult += new AbstractEvent_newComputationResultEventHandler(newComputationResult);
-				generateCaption(node);
-			}
-			if (mnode is CMorseSpectrum)
-			{
-				CMorseSpectrum node = mnode as CMorseSpectrum;
-				generateCaption(node);				
-			}
+        private void registerEvents(IKernelNode mnode)
+        {
+            if (mnode is CSymbolicImageGraph)
+            {
+                CSymbolicImageGraph node = mnode as CSymbolicImageGraph;
+                node.noChilds += new AbstractEvent_noChildsEventHandler(noChilds);
+                node.newKernelNode += new AbstractEvent_newKernelNodeEventHandler(newNode);
+                node.noImplementation += new AbstractEvent_noImplementationEventHandler(noImplementation);				
+                node.newComputationResult += new AbstractEvent_newComputationResultEventHandler(newComputationResult);
+                generateCaption(node);	
+            }
+            if (mnode is CSymbolicImageGroup) 
+            {
+                CSymbolicImageGroup node = mnode as CSymbolicImageGroup;
+                node.noChilds += new AbstractEvent_noChildsEventHandler(noChilds);
+                node.newKernelNode += new AbstractEvent_newKernelNodeEventHandler(newNode);
+                node.noImplementation += new AbstractEvent_noImplementationEventHandler(noImplementation);
+                node.newComputationResult += new AbstractEvent_newComputationResultEventHandler(newComputationResult);
+                generateCaption(node);				
+            }
+            if (mnode is CProjectiveBundleGraph)
+            {
+                CProjectiveBundleGraph node = mnode as CProjectiveBundleGraph;
+                node.noChilds += new AbstractEvent_noChildsEventHandler(noChilds);
+                node.newKernelNode += new AbstractEvent_newKernelNodeEventHandler(newNode);
+                node.noImplementation += new AbstractEvent_noImplementationEventHandler(noImplementation);
+                node.newComputationResult += new AbstractEvent_newComputationResultEventHandler(newComputationResult);
+                generateCaption(node);
+            }
+            if (mnode is CProjectiveBundleGroup)
+            {
+                CProjectiveBundleGroup node = mnode as CProjectiveBundleGroup;
+                node.noChilds += new AbstractEvent_noChildsEventHandler(noChilds);
+                node.newKernelNode += new AbstractEvent_newKernelNodeEventHandler(newNode);
+                node.noImplementation += new AbstractEvent_noImplementationEventHandler(noImplementation);
+                node.newComputationResult += new AbstractEvent_newComputationResultEventHandler(newComputationResult);
+                generateCaption(node);
+            }
+            if (mnode is CMorseSpectrum)
+            {
+                CMorseSpectrum node = mnode as CMorseSpectrum;
+                generateCaption(node);				
+            }
+        }
 			
-		}
+        private void unregisterEvents(IKernelNode mnode)
+        {
+            if (mnode is CSymbolicImageGraph)
+            {
+                CSymbolicImageGraph node = mnode as CSymbolicImageGraph;
+                node.noChilds -= new AbstractEvent_noChildsEventHandler(noChilds);
+                node.newKernelNode -= new AbstractEvent_newKernelNodeEventHandler(newNode);
+                node.noImplementation -= new AbstractEvent_noImplementationEventHandler(noImplementation);				
+                node.newComputationResult -= new AbstractEvent_newComputationResultEventHandler(newComputationResult);
+                generateCaption(node);	
+            }
+            if (mnode is CSymbolicImageGroup) 
+            {
+                CSymbolicImageGroup node = mnode as CSymbolicImageGroup;
+                node.noChilds -= new AbstractEvent_noChildsEventHandler(noChilds);
+                node.newKernelNode -= new AbstractEvent_newKernelNodeEventHandler(newNode);
+                node.noImplementation -= new AbstractEvent_noImplementationEventHandler(noImplementation);
+                node.newComputationResult -= new AbstractEvent_newComputationResultEventHandler(newComputationResult);
+                generateCaption(node);				
+            }
+            if (mnode is CProjectiveBundleGraph)
+            {
+                CProjectiveBundleGraph node = mnode as CProjectiveBundleGraph;
+                node.noChilds -= new AbstractEvent_noChildsEventHandler(noChilds);
+                node.newKernelNode -= new AbstractEvent_newKernelNodeEventHandler(newNode);
+                node.noImplementation -= new AbstractEvent_noImplementationEventHandler(noImplementation);
+                node.newComputationResult -= new AbstractEvent_newComputationResultEventHandler(newComputationResult);
+                generateCaption(node);
+            }
+            if (mnode is CProjectiveBundleGroup)
+            {
+                CProjectiveBundleGroup node = mnode as CProjectiveBundleGroup;
+                node.noChilds -= new AbstractEvent_noChildsEventHandler(noChilds);
+                node.newKernelNode -= new AbstractEvent_newKernelNodeEventHandler(newNode);
+                node.noImplementation -= new AbstractEvent_noImplementationEventHandler(noImplementation);
+                node.newComputationResult -= new AbstractEvent_newComputationResultEventHandler(newComputationResult);
+                generateCaption(node);
+            }
+            if (mnode is CMorseSpectrum)
+            {
+                CMorseSpectrum node = mnode as CMorseSpectrum;
+                generateCaption(node);				
+            }
+        }
+	
 		#endregion
 
 		#region event hanlers...
@@ -121,7 +165,6 @@ namespace gui
 				result.noChilds += new AbstractComputationEvent_noChildsEventHandler(noChilds);
 				result.noImplementation += new AbstractComputationEvent_noImplementationEventHandler(noImplementation);
 			}
-
 		}
 		#endregion
 	

@@ -9,6 +9,7 @@ namespace gui
 {
 	public delegate void ContextMenuBeforeOpenEvent(ComputationNode node);
 	public delegate void MouseMoveComponentEvent(ComputationNode node);
+    public delegate void RemoveNodeEvent(ComputationNode node);
 
 	/// <summary>
 	/// Summary description for ComputatioinTree.
@@ -17,6 +18,7 @@ namespace gui
 	{
 		public event ContextMenuBeforeOpenEvent NodeMenuBeforeOpen;
 		public event MouseMoveComponentEvent MouseMoveNode;
+        public event RemoveNodeEvent RemoveNode;
 
 		private System.Windows.Forms.TreeView tree;
 		/// <summary> 

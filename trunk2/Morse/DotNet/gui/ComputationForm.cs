@@ -531,7 +531,7 @@ namespace gui
                 Runner.Kernel.Function = assign.getFunction();
 
 				IKernelNode root = Runner.Kernel.CreateRootSymbolicImage();
-				//computatioinTree.Root = ComputationNode.createComputationNode(root);
+				computatioinTree.Root = ComputationNode.createComputationNode(root);
 			}
 		}
 

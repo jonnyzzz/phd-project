@@ -8,8 +8,7 @@ namespace gui
 	/// </summary>
 	/// 
 
-
-	public abstract class ComputationNode : NodeInformation
+   public abstract class ComputationNode : NodeInformation
 	{
 		protected abstract ComputationNodeMenuItem[] getMenuItems();
 		
@@ -29,7 +28,7 @@ namespace gui
 		#region Class Members...
 		public ComputationNode() : base() 
 		{
-			this.Checked = false;			
+			this.Checked = false;			            
 		}
 
 		public ComputationNodeMenuItem[] MenuItems  
@@ -128,9 +127,5 @@ namespace gui
 				}				
 			}						
 		}
-	
-
-
-
 	}
 }

@@ -80,9 +80,8 @@ STDMETHODIMP CKernel::CreateRootSymbolicImage(IKernelNode** pVal) {
 	graph->maximize();
 
 	im->setGraph((void*)graph);
-	im->AddRef();
 
-	im->putref_kernel(this);
+    im->putref_kernel(this);
 
 	*pVal = (IKernelNode*)im;
 
