@@ -9,6 +9,17 @@
 #include <list>
 using namespace std;
 
+[
+	object,
+	dual,
+	uuid("150237B9-7739-4882-87E1-8FE926A96AFF"),
+	pointer_default(unique)
+]
+__interface IGraphResultImpl : IDispatch {
+
+};
+
+
 class Graph;
 
 // CGraphResultImpl
@@ -23,6 +34,7 @@ class Graph;
 	helpstring("GraphResultImpl Class")
 ]
 class ATL_NO_VTABLE CGraphResultImpl :
+	public IGraphResultImpl,
 	public IWritableGraphResult,
 	public IGraphResult
 

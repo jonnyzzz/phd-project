@@ -12,7 +12,7 @@ namespace guiKernel2.Container
 	/// <summary>
 	/// Summary description for Container.
 	/// </summary>
-	public class Core
+	public class Core : IDisposable
 	{
 		public Core()
 		{			
@@ -29,6 +29,14 @@ namespace guiKernel2.Container
 		private ActionWrapperFactory actionWrapperFactory = null;
 		private Assembly[] assemblies = null;
 		private KernelDocument document = null;
+
+		public void Dispose()
+		{
+			nextActionFactory = null;
+			actionWrapperFactory = null;
+			assemblies = null;
+			document = null;
+		}
 
 		public void SetKernelDocument(KernelDocument document)
 		{

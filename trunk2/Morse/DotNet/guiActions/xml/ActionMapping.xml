@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 
 <mappings>
-	<action name="IBoxMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="true">		
+    <action name="ITarjanAction" resultType="IGraphResult" metadata="IResultMetadata" isLeaf="true" />
+
+	<action name="IBoxMethodAction" resultType="IGraphResult" metadata="ISymbolicImageMetadata" isLeaf="false">		
 		<nextActions>		
 			<actionReference name="ITarjanAction" isLeaf="true"/>
 		</nextActions>
@@ -9,6 +11,7 @@
 
 	<assemblies>	
 		<actionAssembly name="guiActions"/>
+		<actionSource assembly="interop.MorseKernel2" />
 	</assemblies>
 
 </mappings>

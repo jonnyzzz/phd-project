@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using guiActions.Actions;
 using guiActions.src.filter;
 using guiControls.TreeControl;
-using guiKernel2.ActionFactory;
 using guiKernel2.Node;
 using guiKernel2.src.Node;
 
@@ -13,7 +12,7 @@ namespace gui2.TreeNodes
 	/// Summary description for Node.
 	/// </summary>
 	public class Node : ComputationNode
-	{
+	{	
 		private KernelNode kernelNode;
 		public Node(KernelNode kernelNode) : base()
 		{

@@ -1,10 +1,8 @@
-using gui.Forms;
 using gui2.ActionPerformer;
 using gui2.TreeNodes;
 using guiActions.Actions;
 using guiKernel2.Document;
 using guiKernel2.src.Actions;
-using guiKernel2.src.Node;
 
 namespace gui2.Forms
 {
@@ -83,7 +81,7 @@ namespace gui2.Forms
 			this.panelLeft.Size = new System.Drawing.Size(552, 609);
 			this.panelLeft.TabIndex = 0;
 			// 
-			// computationTree1
+			// tree
 			// 
 			this.tree.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tree.Location = new System.Drawing.Point(10, 10);
@@ -138,6 +136,7 @@ namespace gui2.Forms
 			// menuSystemNew
 			// 
 			this.menuSystemNew.Index = 0;
+			this.menuSystemNew.Shortcut = System.Windows.Forms.Shortcut.CtrlN;
 			this.menuSystemNew.Text = "New";
 			this.menuSystemNew.Click += new System.EventHandler(this.menuSystemNew_Click);
 			// 
@@ -168,6 +167,7 @@ namespace gui2.Forms
 				Runner.Runner.Instance.Document = new Document.Document(function);
 
 				tree.Root = Runner.Runner.Instance.Document.RootNode;
+
 			}
 		}
 

@@ -9,6 +9,18 @@
 #include <list>
 using namespace std;
 
+
+[	
+	object,
+	dual,
+	uuid("3EB38E81-F41E-44BD-85E3-486CF05FD1B2"),
+	pointer_default(unique)
+]
+__interface IResultSetImpl : IDispatch {
+
+};
+
+
 // CResultSetImpl
 
 [
@@ -21,8 +33,9 @@ using namespace std;
 	helpstring("ResultSetImpl Class")
 ]
 class ATL_NO_VTABLE CResultSetImpl : 
-	public IResultSet,
-	public IWritableResultSet
+	public IResultSetImpl,
+	public IWritableResultSet,
+	public IResultSet
 {
 public:
 	CResultSetImpl();

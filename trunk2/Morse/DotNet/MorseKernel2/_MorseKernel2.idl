@@ -257,6 +257,16 @@ interface IWritableResultSet : IDispatch {
 
 [
 	object,
+	dual,
+	uuid(150237B9-7739-4882-87E1-8FE926A96AFF),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\graphresultimpl.h"
+interface IGraphResultImpl : IDispatch {
+};
+
+[
+	object,
 	uuid(24EEB65B-81FF-42EA-8521-6B3F62665F84),
 	dual,
 	helpstring("ISymbolicImageMetadata Interface"),
@@ -336,6 +346,16 @@ interface IWritableFunction : IDispatch {
 
 [
 	object,
+	dual,
+	uuid(38C4B884-7772-4AA3-B1C0-4BC112FE485F),
+	pointer_default(unique)
+] 
+#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\functionimpl.h"
+interface IFunctionImpl : IDispatch {
+};
+
+[
+	object,
 	uuid(5F89F9F3-AB8D-4129-A752-8A4258A8ECE9),
 	dual,
 	helpstring("IWritableGraphInfo Interface"),
@@ -347,6 +367,26 @@ interface IWritableFunction : IDispatch {
 interface IWritableGraphInfo : IDispatch {
 #line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablegraphinfo.h"
 	[id(12),local,hidden] HRESULT  AddGraph([in] void **graph );
+};
+
+[
+	object,
+	dual,
+	uuid(E8AC201A-48EE-4CC4-A7D3-D075C3016104),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\graphinfoimpl.h"
+interface IGraphInfoImpl : IDispatch {
+};
+
+[
+	object,
+	dual,
+	uuid(3EB38E81-F41E-44BD-85E3-486CF05FD1B2),
+	pointer_default(unique)
+] 
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\resultsetimpl.h"
+interface IResultSetImpl : IDispatch {
 };
 
 [
@@ -377,6 +417,16 @@ interface IWritableKernell : IDispatch {
 	[id(11)] HRESULT  SetFunction([in] IFunction *function);
 };
 
+[
+	object,
+	dual,
+	uuid(0667C597-8C23-4B74-A298-821DB594ED01),
+	pointer_default(unique)
+] 
+#line 14 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\kernellimpl.h"
+interface IKernellImpl : IWritableKernell {
+};
+
 
 [ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}"), helpstring("MorseKernel2 1.0 Type Library") ]
 library MorseKernel2
@@ -401,8 +451,9 @@ library MorseKernel2
 		uuid(43037E6F-9884-4D5C-BB41-44D582888F9E),
 		helpstring("GraphResultImpl Class")
 	] 
-#line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\graphresultimpl.h"
+#line 36 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\graphresultimpl.h"
 	coclass CGraphResultImpl {
+		interface IGraphResultImpl;
 		interface IWritableGraphResult;
 		interface IGraphResult;
 		interface IResult;
@@ -465,14 +516,15 @@ library MorseKernel2
 	};
 
 	[
-		version(1.0),
+		version(1.1),
 		uuid(FDFB8D0E-74FF-439C-A13B-4A39387B7037),
 		helpstring("FunctionImpl Class")
 	] 
-#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\functionimpl.h"
+#line 36 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\functionimpl.h"
 	coclass CFunctionImpl {
-		interface IFunction;
+		interface IFunctionImpl;
 		interface IWritableFunction;
+		interface IFunction;
 	};
 
 	[
@@ -480,8 +532,9 @@ library MorseKernel2
 		uuid(1FCB1E52-C321-4E44-8BA6-83DA8C532365),
 		helpstring("GraphInfoImpvffffl Class")
 	] 
-#line 23 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\graphinfoimpl.h"
+#line 34 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\graphinfoimpl.h"
 	coclass CGraphInfoImpl {
+		interface IGraphInfoImpl;
 		interface IWritableGraphInfo;
 		interface IGraphInfo;
 	};
@@ -491,21 +544,23 @@ library MorseKernel2
 		uuid(5FAAF083-60CC-4A9B-AAC0-4FDB29047B08),
 		helpstring("ResultSetImpl Class")
 	] 
-#line 23 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\resultsetimpl.h"
+#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\resultsetimpl.h"
 	coclass CResultSetImpl {
-		interface IResultSet;
+		interface IResultSetImpl;
 		interface IWritableResultSet;
+		interface IResultSet;
 	};
 
 	[
-		version(1.0),
+		version(1.1),
 		uuid(96E908D0-29BD-423D-8CA8-9F4343C796A0),
 		helpstring("KernellImpl Class")
 	] 
-#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\kernellimpl.h"
+#line 30 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\kernellimpl.h"
 	coclass CKernellImpl {
-		interface IKernell;
+		interface IKernellImpl;
 		interface IWritableKernell;
+		interface IKernell;
 	};
 
 }

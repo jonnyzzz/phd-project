@@ -19,23 +19,14 @@ CFunctionImpl::CFunctionImpl() {
 
 
 HRESULT CFunctionImpl::FinalConstruct() {
-	equations = "";
-	isInitialized = false;
-	functionFactory = NULL;
-	space_min = NULL;
-	space_max = NULL;
-	grid = NULL;
+	Reset();
 
 	return S_OK;
 }
 
 
 void CFunctionImpl::FinalRelease() {
-	SAFE_DELETE( functionFactory);
-
-	SAFE_DELETE_ARR( space_min);
-	SAFE_DELETE_ARR( space_max);
-	SAFE_DELETE_ARR( grid );
+	CleanUp();
 }
 
 
@@ -82,12 +73,15 @@ STDMETHODIMP CFunctionImpl::GetSystemFunctionDerivate(void** function) {
 }
 
 
-STDMETHODIMP CFunctionImpl::SetEquations(BSTR equations) {
+STDMETHODIMP CFunctionImpl::SetEquations(BSTR equations) {	
+	CleanUp();
 	isInitialized = false;
 
 	this->equations = CString(equations);
+	bool b = initializeContent();
 
-	return (initializeContent())?S_OK:E_INVALIDARG;
+
+	return b?S_OK:E_INVALIDARG;
 }
 
 STDMETHODIMP CFunctionImpl::GetLastError(BSTR* message) {
@@ -107,11 +101,27 @@ STDMETHODIMP CFunctionImpl::CreateGraph(void** graph) {
 
 //////////////////////////////////////////////////
 
-void CFunctionImpl::CleanUp() {
-	FinalRelease();
-	FinalConstruct();
+void CFunctionImpl::Reset() {
+	equations = "";
+	lastErrorMessage = "";
+	isInitialized = false;
+	functionFactory = NULL;
+	dimension = 0;
+	iterations = 0;
+	space_min = NULL;
+	space_max = NULL;
+	grid = NULL;
 }
 
+void CFunctionImpl::CleanUp() {
+	SAFE_DELETE( functionFactory);
+
+	SAFE_DELETE_ARR( space_min);
+	SAFE_DELETE_ARR( space_max);
+	SAFE_DELETE_ARR( grid );
+	
+	Reset();
+}
 
 FunctionNode* CFunctionImpl::safeGetNode(const char* name, KernelException fail) {
 	if (functionFactory == NULL) throw KernelException(KernelException_NoFunctionFactory);
@@ -123,10 +133,10 @@ FunctionNode* CFunctionImpl::safeGetNode(const char* name, KernelException fail)
 	}
 }
 
-
 bool CFunctionImpl::initializeContent() {
 	//todo: FIX Throw memory leaks
 	try {
+
 		functionFactory = new FunctionFactory((LPCTSTR)this->equations);
 
 		cout<<"\ninputed:\n"<<(LPCTSTR)this->equations<<"\nEnded\n\n";
@@ -152,7 +162,6 @@ bool CFunctionImpl::initializeContent() {
 
 		this->space_max = new JDouble[dimension];
 		this->space_min = new JDouble[dimension];
-
 		this->grid = new JInt[dimension];
 
 		char buf[255];

@@ -21,7 +21,7 @@ namespace guiActions.ActionImpl
 		protected override ParametersControl GetParametersControlInternal(KernelNode node)
 		{			
 			int dim = ((IBoxMethodAction)Action).GetDimensionForParameters(node.GetResultSet().ToResultSet);
-			return new BoxMethodParameters(dim, Core.Instance.KernelDocument.Function);
+			return new BoxMethodParameters(dim, Core.Instance.KernelDocument.Function.IFunction);
 		}
 
 		protected override IAction CreateAction()

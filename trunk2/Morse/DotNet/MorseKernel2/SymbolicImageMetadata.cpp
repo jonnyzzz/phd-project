@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 #include "SymbolicImageMetadata.h"
-
+#include "SmartInterface.h"
 
 // CSymbolicImageMetadata
 
@@ -22,12 +22,11 @@ void CSymbolicImageMetadata::FinalRelease() {
 
 
 STDMETHODIMP CSymbolicImageMetadata::EqualType(IResultMetadata* metadata, VARIANT_BOOL* out) {
-	ISymbolicImageMetadata* data;
+	SmartInterface<ISymbolicImageMetadata> data;
 	metadata->QueryInterface(&data);
 
 	if (data != NULL) {
 		*out = TRUE;
-		data->Release();
 	} else {
 		*out = FALSE;
 	}

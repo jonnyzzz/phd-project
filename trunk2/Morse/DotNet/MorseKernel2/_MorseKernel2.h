@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Mar 17 02:49:06 2005
+/* at Thu Mar 17 21:55:30 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -141,6 +141,12 @@ typedef interface IWritableResultSet IWritableResultSet;
 #endif 	/* __IWritableResultSet_FWD_DEFINED__ */
 
 
+#ifndef __IGraphResultImpl_FWD_DEFINED__
+#define __IGraphResultImpl_FWD_DEFINED__
+typedef interface IGraphResultImpl IGraphResultImpl;
+#endif 	/* __IGraphResultImpl_FWD_DEFINED__ */
+
+
 #ifndef __ISymbolicImageMetadata_FWD_DEFINED__
 #define __ISymbolicImageMetadata_FWD_DEFINED__
 typedef interface ISymbolicImageMetadata ISymbolicImageMetadata;
@@ -177,10 +183,28 @@ typedef interface IWritableFunction IWritableFunction;
 #endif 	/* __IWritableFunction_FWD_DEFINED__ */
 
 
+#ifndef __IFunctionImpl_FWD_DEFINED__
+#define __IFunctionImpl_FWD_DEFINED__
+typedef interface IFunctionImpl IFunctionImpl;
+#endif 	/* __IFunctionImpl_FWD_DEFINED__ */
+
+
 #ifndef __IWritableGraphInfo_FWD_DEFINED__
 #define __IWritableGraphInfo_FWD_DEFINED__
 typedef interface IWritableGraphInfo IWritableGraphInfo;
 #endif 	/* __IWritableGraphInfo_FWD_DEFINED__ */
+
+
+#ifndef __IGraphInfoImpl_FWD_DEFINED__
+#define __IGraphInfoImpl_FWD_DEFINED__
+typedef interface IGraphInfoImpl IGraphInfoImpl;
+#endif 	/* __IGraphInfoImpl_FWD_DEFINED__ */
+
+
+#ifndef __IResultSetImpl_FWD_DEFINED__
+#define __IResultSetImpl_FWD_DEFINED__
+typedef interface IResultSetImpl IResultSetImpl;
+#endif 	/* __IResultSetImpl_FWD_DEFINED__ */
 
 
 #ifndef __IKernell_FWD_DEFINED__
@@ -193,6 +217,12 @@ typedef interface IKernell IKernell;
 #define __IWritableKernell_FWD_DEFINED__
 typedef interface IWritableKernell IWritableKernell;
 #endif 	/* __IWritableKernell_FWD_DEFINED__ */
+
+
+#ifndef __IKernellImpl_FWD_DEFINED__
+#define __IKernellImpl_FWD_DEFINED__
+typedef interface IKernellImpl IKernellImpl;
+#endif 	/* __IKernellImpl_FWD_DEFINED__ */
 
 
 #ifndef __CBoxMethodAction_FWD_DEFINED__
@@ -2980,6 +3010,116 @@ void __RPC_STUB IWritableResultSet_AddResult_Stub(
 #endif 	/* __IWritableResultSet_INTERFACE_DEFINED__ */
 
 
+#ifndef __IGraphResultImpl_INTERFACE_DEFINED__
+#define __IGraphResultImpl_INTERFACE_DEFINED__
+
+/* interface IGraphResultImpl */
+/* [unique][uuid][dual][object] */ 
+
+
+EXTERN_C const IID IID_IGraphResultImpl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("150237B9-7739-4882-87E1-8FE926A96AFF")
+    IGraphResultImpl : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IGraphResultImplVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IGraphResultImpl * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IGraphResultImpl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IGraphResultImpl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IGraphResultImpl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IGraphResultImpl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IGraphResultImpl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IGraphResultImpl * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IGraphResultImplVtbl;
+
+    interface IGraphResultImpl
+    {
+        CONST_VTBL struct IGraphResultImplVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IGraphResultImpl_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IGraphResultImpl_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IGraphResultImpl_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IGraphResultImpl_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IGraphResultImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IGraphResultImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IGraphResultImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IGraphResultImpl_INTERFACE_DEFINED__ */
+
+
 #ifndef __ISymbolicImageMetadata_INTERFACE_DEFINED__
 #define __ISymbolicImageMetadata_INTERFACE_DEFINED__
 
@@ -3884,6 +4024,116 @@ void __RPC_STUB IWritableFunction_GetLastError_Stub(
 #endif 	/* __IWritableFunction_INTERFACE_DEFINED__ */
 
 
+#ifndef __IFunctionImpl_INTERFACE_DEFINED__
+#define __IFunctionImpl_INTERFACE_DEFINED__
+
+/* interface IFunctionImpl */
+/* [unique][uuid][dual][object] */ 
+
+
+EXTERN_C const IID IID_IFunctionImpl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("38C4B884-7772-4AA3-B1C0-4BC112FE485F")
+    IFunctionImpl : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IFunctionImplVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IFunctionImpl * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IFunctionImpl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IFunctionImpl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IFunctionImpl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IFunctionImpl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IFunctionImpl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IFunctionImpl * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IFunctionImplVtbl;
+
+    interface IFunctionImpl
+    {
+        CONST_VTBL struct IFunctionImplVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IFunctionImpl_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IFunctionImpl_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IFunctionImpl_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IFunctionImpl_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IFunctionImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IFunctionImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IFunctionImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IFunctionImpl_INTERFACE_DEFINED__ */
+
+
 #ifndef __IWritableGraphInfo_INTERFACE_DEFINED__
 #define __IWritableGraphInfo_INTERFACE_DEFINED__
 
@@ -4014,6 +4264,226 @@ void __RPC_STUB IWritableGraphInfo_AddGraph_Stub(
 
 
 #endif 	/* __IWritableGraphInfo_INTERFACE_DEFINED__ */
+
+
+#ifndef __IGraphInfoImpl_INTERFACE_DEFINED__
+#define __IGraphInfoImpl_INTERFACE_DEFINED__
+
+/* interface IGraphInfoImpl */
+/* [unique][uuid][dual][object] */ 
+
+
+EXTERN_C const IID IID_IGraphInfoImpl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("E8AC201A-48EE-4CC4-A7D3-D075C3016104")
+    IGraphInfoImpl : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IGraphInfoImplVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IGraphInfoImpl * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IGraphInfoImpl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IGraphInfoImpl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IGraphInfoImpl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IGraphInfoImpl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IGraphInfoImpl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IGraphInfoImpl * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IGraphInfoImplVtbl;
+
+    interface IGraphInfoImpl
+    {
+        CONST_VTBL struct IGraphInfoImplVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IGraphInfoImpl_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IGraphInfoImpl_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IGraphInfoImpl_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IGraphInfoImpl_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IGraphInfoImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IGraphInfoImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IGraphInfoImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IGraphInfoImpl_INTERFACE_DEFINED__ */
+
+
+#ifndef __IResultSetImpl_INTERFACE_DEFINED__
+#define __IResultSetImpl_INTERFACE_DEFINED__
+
+/* interface IResultSetImpl */
+/* [unique][uuid][dual][object] */ 
+
+
+EXTERN_C const IID IID_IResultSetImpl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("3EB38E81-F41E-44BD-85E3-486CF05FD1B2")
+    IResultSetImpl : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IResultSetImplVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IResultSetImpl * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IResultSetImpl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IResultSetImpl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IResultSetImpl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IResultSetImpl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IResultSetImpl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IResultSetImpl * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IResultSetImplVtbl;
+
+    interface IResultSetImpl
+    {
+        CONST_VTBL struct IResultSetImplVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IResultSetImpl_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IResultSetImpl_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IResultSetImpl_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IResultSetImpl_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IResultSetImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IResultSetImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IResultSetImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IResultSetImpl_INTERFACE_DEFINED__ */
 
 
 #ifndef __IKernell_INTERFACE_DEFINED__
@@ -4300,6 +4770,124 @@ void __RPC_STUB IWritableKernell_SetFunction_Stub(
 
 
 #endif 	/* __IWritableKernell_INTERFACE_DEFINED__ */
+
+
+#ifndef __IKernellImpl_INTERFACE_DEFINED__
+#define __IKernellImpl_INTERFACE_DEFINED__
+
+/* interface IKernellImpl */
+/* [unique][uuid][dual][object] */ 
+
+
+EXTERN_C const IID IID_IKernellImpl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("0667C597-8C23-4B74-A298-821DB594ED01")
+    IKernellImpl : public IWritableKernell
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IKernellImplVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IKernellImpl * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IKernellImpl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IKernellImpl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IKernellImpl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IKernellImpl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IKernellImpl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IKernellImpl * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetFunction )( 
+            IKernellImpl * This,
+            /* [in] */ IFunction *function);
+        
+        END_INTERFACE
+    } IKernellImplVtbl;
+
+    interface IKernellImpl
+    {
+        CONST_VTBL struct IKernellImplVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IKernellImpl_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IKernellImpl_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IKernellImpl_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IKernellImpl_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IKernellImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IKernellImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IKernellImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IKernellImpl_SetFunction(This,function)	\
+    (This)->lpVtbl -> SetFunction(This,function)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IKernellImpl_INTERFACE_DEFINED__ */
 
 
 

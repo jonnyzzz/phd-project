@@ -3,11 +3,10 @@ using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
-using gui2.Runner;
 using guiKernel2;
 using guiKernel2.Document;
 
-namespace gui.Forms
+namespace gui2.Forms
 {
 	/// <summary>
 	/// Summary description for SystemAssignment.
@@ -47,7 +46,7 @@ namespace gui.Forms
 		{
 			InitializeComponent();
 
-			menuItemGetSource.Visible = Runner.Instance.IsInternal;
+			menuItemGetSource.Visible = Runner.Runner.Instance.IsInternal;
 			
 			dimensionUpDown_ValueChanged(this, EventArgs.Empty);
 			isReadOnly = false;

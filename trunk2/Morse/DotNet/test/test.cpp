@@ -10,6 +10,7 @@
 #include "../graph/stack.h"
 #include "MorseTest.h"
 #include "GraphTest.h"
+#include "../cellImageBuilders/TarjanProcess.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -25,7 +26,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
     //testRomFromFile("o:\\aaaa");
 
 	//runTests();
-/*
+
 	JDouble zmin[] = {-1};
 	JDouble zmax[] = {1};
 	JInt zgrid[] = {100};
@@ -33,23 +34,20 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	Graph* graph = new Graph(1, zmin, zmax, zgrid);
 	graph->maximize();
 
-	Stack s(graph);
+	ProgressBarInfo info = ProgressBarInfo();
+	TarjanProcess ps(false, &info );
+	ps.start();
+	ps.processNextGraph(graph);
 
-	int v = 30;
-	Node* node = graph->browseTo(&v);	
 
-	s.push(node);
-
-	s.contains(node);
-
-	s.pop();
-*/
 /*
 	Pefomance pef;
 	pef.test2();
 */
+	/*
 	MorseTest test;
 	test.statr();
+	*/
 
 
 	//GraphTest test;

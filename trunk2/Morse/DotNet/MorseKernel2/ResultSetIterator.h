@@ -1,5 +1,6 @@
 #pragma once
 #include "resultSet.h"
+#include "SmartInterface.h"
 
 
 template <class Result = IResultBase>
@@ -17,7 +18,7 @@ private:
 	}
 
 public:
-	ResultSetIterator(IResultSet* resultSet) {
+	ResultSetIterator(IResultSet* resultSet) {		
 		init(resultSet, 0);
 	}
 	~ResultSetIterator(void) {
@@ -26,17 +27,15 @@ public:
 
 
 public:
-	Result* Current() {
-		Result* result;
-		IResultBase* resultBase;
+	SmartInterface<Result> Current() {
+		SmartInterface<Result> result;
+		SmartInterface<IResultBase> resultBase;
 		HRESULT hr = resultSet->GetResult(index, &resultBase);
 		ATLASSERT(SUCCEEDED(hr));
 		ATLASSERT(resultBase != NULL);
 
 		resultBase->QueryInterface(&result);
 		ATLASSERT(result != NULL);
-
-		resultBase->Release();
 
 		return result;
 	}
@@ -52,11 +51,11 @@ public:
 		index++;
 	}
 
-	operator Result*() {
+	operator SmartInterface<Result>() {
 		return Current();
 	}
 
-	Result* operator->() {
+	SmartInterface<Result> operator->() {
 		return Current();
 	}
 };

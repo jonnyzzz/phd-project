@@ -12,7 +12,7 @@ namespace gui2.Runner
 	/// <summary>
 	/// Summary description for Runner.
 	/// </summary>
-	public class Runner
+	public class Runner : IDisposable
 	{
 		private CommandLineParser commandLine;
 		private ComputationForm computationForm;
@@ -24,10 +24,15 @@ namespace gui2.Runner
 		{
 			runner = this;
 			this.commandLine = commandLine;
-			this.core = Core.Instance;
+			//this.core = Core.Instance;
 
 			this.computationForm = new ComputationForm();			
+			
+			isInternal = commandLine.hasKey("Internal");
+		}
 
+		protected void Start()
+		{
 			if (!commandLine.hasKey("verbose")) 
 			{
 				Application.Run(computationForm);
@@ -38,9 +43,16 @@ namespace gui2.Runner
 				{
 					TestMode();
 				}
-			}
+			}			
+		}
 
-			isInternal = commandLine.hasKey("Internal");
+		public void Dispose()
+		{
+			commandLine = null;
+			computationForm = null;
+			//core.Dispose();
+			core = null;
+			document = null;
 		}
 
 		public Core Core
@@ -76,11 +88,16 @@ namespace gui2.Runner
 		}
 
 		#region static
-		[MTAThread]
+		[STAThread]
 		public static void Main(string[] args)
 		{
 			try {
 				runner = new Runner(new CommandLineParser(args));
+				using (runner)
+				{
+					runner.Start();
+				}
+				runner = null;
 			} catch (CommandLineParseException e)
 			{
 				Console.Out.WriteLine("Wrong Command Line parameters");

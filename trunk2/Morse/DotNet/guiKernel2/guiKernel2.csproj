@@ -80,17 +80,17 @@
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
                 <Reference
+                    Name = "Logger"
+                    Project = "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
                     Name = "MorseKernel2"
                     Guid = "{922445B5-C296-49D0-B69D-45FF70F8CE56}"
                     VersionMajor = "1"
                     VersionMinor = "0"
                     Lcid = "0"
                     WrapperTool = "tlbimp"
-                />
-                <Reference
-                    Name = "Logger"
-                    Project = "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
             </References>
         </Build>

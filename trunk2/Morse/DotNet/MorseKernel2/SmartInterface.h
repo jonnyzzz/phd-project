@@ -1,6 +1,6 @@
 #pragma once
 
-template<class I>
+template<class I = IUnknown>
 class SmartInterface
 {
 private:
@@ -11,9 +11,8 @@ public:
 		this->data = data;	
 	}
 
-	SmartInterface(const SmartInterface<I>& interf) {
-		SAFE_RELEASE(this->data);
-		interf->data->QueryInterface(&this->data);
+	SmartInterface(const SmartInterface<I>& interf) {		
+		interf.data->QueryInterface(&this->data);
 	}
 
 	~SmartInterface(void) {
@@ -33,7 +32,14 @@ public:
 		return this->data != val;
 	}
 
-	operator I* () {
+	operator I*& () {
 		return data;
 	}
+
+	template <class J>
+	SmartInterface<I>& operator = (const SmartInterface<J>& interf) {		
+		SAFE_RELEASE(data);
+		interf.data->QueryInterface(&this->data);
+	}
+
 };

@@ -9,21 +9,28 @@ namespace guiKernel2.Document
 	/// </summary>
 	public class KernelDocument
 	{
-		private IFunction function;
+		private Function function;
 		private IKernell kernell;
 
 		public KernelDocument(Function function)
 		{
 			Core.Instance.SetKernelDocument(this);
-			this.function = function.IFunction;
+
+			this.function = function;
+
+			
 			CKernellImplClass kernellClass = new CKernellImplClass();
-			IWritableKernell wKernell = kernellClass;
-			wKernell.SetFunction(this.function);
-			kernell = kernellClass;
+
+			IWritableKernell wKernell = kernellClass as IWritableKernell;
+
+			wKernell.SetFunction(this.function.IFunction);
+
+			kernell = wKernell as IKernell;
+			
 		}
 
 
-		public IFunction Function
+		public Function Function
 		{
 			get { return function; }
 		}

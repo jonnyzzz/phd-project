@@ -16,8 +16,8 @@ public:
 
 public:
 	static bool HasSameMetadataType(IResultSet* resultSet);
-	static IResultMetadata* GetMetadata(IResultSet* resultSet);
-	static IResultMetadata* GetMetadataCloned(IResultSet* resultSet);
+	static void GetMetadata(IResultSet* resultSet, IResultMetadata** data);
+	static void GetMetadataCloned(IResultSet* resultSet, IResultMetadata** data);
 
 public:
 	static void PerformProcess(AbstractProcess* process, IResultSet* input, bool isStrongComponent, IResultMetadata* metadata, IResultSet** output);
@@ -27,6 +27,7 @@ public:
 
 template <class Result>
 bool GraphResultUtil::ContainsOnlyType(IResultSet* resultSet) {
+	bool inFlag = false;
 	for (ResultSetIterator<IResultBase> it(resultSet); it.HasNext(); it.Next()) {
 		SmartInterface<IResultBase> resultBase = it;
 		SmartInterface<Result> result;
@@ -34,12 +35,14 @@ bool GraphResultUtil::ContainsOnlyType(IResultSet* resultSet) {
 		if (result == NULL) {
 			return false;
 		}
+		inFlag = true;
 	}
-	return true;
+	return inFlag;
 }
 
 template <class Metadata>
 bool GraphResultUtil::ContainsMetadataOnly(IResultSet* resultSet) {
+	bool inFlag = false;
 	for (ResultSetIterator<IResult> it(resultSet); it.HasNext(); it.Next()) {
 		SmartInterface<IResult> result = it;
 		SmartInterface<IResultMetadata> aMetadata;
@@ -50,6 +53,7 @@ bool GraphResultUtil::ContainsMetadataOnly(IResultSet* resultSet) {
 		if (meta == NULL) {
 			return false;
 		}
+		inFlag = true;
 	}
-	return true;
+	return inFlag;
 }

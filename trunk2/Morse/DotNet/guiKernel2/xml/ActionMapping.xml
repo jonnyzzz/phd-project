@@ -2,8 +2,7 @@
 
 <mappings>		
 	<assemblies>		
-		<mappingsRef assembly="guiActions" resource="guiActions.xml.ActionMapping.xml"/>	
-		<actionSource assembly="interop.MorseKernel2" />
+		<mappingsRef assembly="guiActions" resource="guiActions.xml.ActionMapping.xml"/>		
 	</assemblies>
 </mappings>
 

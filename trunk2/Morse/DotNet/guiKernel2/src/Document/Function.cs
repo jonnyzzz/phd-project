@@ -20,12 +20,14 @@ namespace guiKernel2.Document
 				equation += eq + "\n";
 			}
 
-			this.function = createFunction(equation);
+			this.function = 
+				createFunction(equation);
 		}
 
 		private IFunction createFunction(string equations)
 		{
-			IWritableFunction writableFunction = new CFunctionImplClass();
+			CFunctionImplClass functionClass = new CFunctionImplClass();
+			IWritableFunction writableFunction = functionClass as IWritableFunction;
 			try 
 			{
 				writableFunction.SetEquations(equations);
@@ -34,7 +36,7 @@ namespace guiKernel2.Document
 				throw new FunctionExceptions(writableFunction.GetLastError());
 			}
 
-			return (IFunction)writableFunction;
+			return functionClass as IFunction;
 		}
 
 		private string[] equations;

@@ -5,6 +5,7 @@
 #include "../Graph/Graph.h"
 #include "GraphResultImpl.h"
 #include "SymbolicImageMetadata.h"
+#include "SmartInterface.h"
 
 // CKernellImpl
 
@@ -22,14 +23,11 @@ void CKernellImpl::FinalRelease() {
 
 
 STDMETHODIMP CKernellImpl::GetFunction(IFunction** function) {
-	if (this->function == NULL) {
-		*function = NULL;
-		return E_FAIL;
-	} else {
-		this->function->QueryInterface(function);
-		ATLASSERT(*function != NULL);
-		return S_OK;
-	}
+	ATLASSERT(this->function != NULL);
+
+	this->function->QueryInterface(function);
+	ATLASSERT(*function != NULL);
+	return S_OK;
 }
 
 
@@ -41,37 +39,33 @@ STDMETHODIMP CKernellImpl::SetFunction(IFunction* function) {
 }
 
 STDMETHODIMP CKernellImpl::CreateInitialResult(IResultBase** result) {
-	if (function == NULL) {
+	
+	ATLASSERT(this->function != NULL);
+
+	SmartInterface<IWritableGraphResult> graphResult;
+	CGraphResultImpl::CreateInstance(&graphResult);
+	ATLASSERT(graphResult != NULL);
+
+	
+	Graph* graph;
+	HRESULT hr = function->CreateGraph((void**)&graph);
+	if (FAILED(hr)) {
 		*result = NULL;
-		return E_FAIL;
-	} else {
-		IWritableGraphResult* graphResult;
-		CGraphResultImpl::CreateInstance(&graphResult);
-		ATLASSERT(graphResult != NULL);
-
-		Graph* graph;
-		HRESULT hr = function->CreateGraph((void**)&graph);
-		if (FAILED(hr)) {
-			*result = NULL;
-			return hr;
-		}
-
-		graph->maximize();
-
-		graphResult->SetGraph((void**)&graph, FALSE);
-
-		ISymbolicImageMetadata* metadata;
-		CSymbolicImageMetadata::CreateInstance(&metadata);
-		ATLASSERT(metadata != NULL);
-
-		graphResult->SetMetadata(metadata);
-		metadata->Release();
-
-		graphResult->QueryInterface(result);
-		ATLASSERT(*result != NULL);
-
-		graphResult->Release();
-
-		return S_OK;
+		return hr;
 	}
+
+	graph->maximize();
+
+	graphResult->SetGraph((void**)&graph, FALSE);
+
+	SmartInterface<ISymbolicImageMetadata> metadata;
+	CSymbolicImageMetadata::CreateInstance(&metadata);
+	ATLASSERT(metadata != NULL);
+
+	graphResult->SetMetadata(metadata);
+
+	graphResult->QueryInterface(result);
+	ATLASSERT(*result != NULL);
+	
+	return S_OK;
 }

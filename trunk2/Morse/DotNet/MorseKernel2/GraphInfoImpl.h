@@ -9,6 +9,17 @@
 using namespace std;
 class Graph;
 
+[
+	object,
+	dual,
+	uuid("E8AC201A-48EE-4CC4-A7D3-D075C3016104"),
+	pointer_default(unique)
+]
+__interface IGraphInfoImpl : IDispatch {
+
+};
+
+
 // CGraphInfoImpl
 
 [
@@ -21,6 +32,7 @@ class Graph;
 	helpstring("GraphInfoImpvffffl Class")	
 ]
 class ATL_NO_VTABLE CGraphInfoImpl :
+	public IGraphInfoImpl,
 	public IWritableGraphInfo,
 	public IGraphInfo
 {

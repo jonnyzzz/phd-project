@@ -6,6 +6,7 @@
 #include "writableGraphResult.h"
 #include "writableResultSet.h"
 #include "resultMetadata.h"
+#include "smartInterface.h"
 
 class Graph;
 class GraphSet;
@@ -41,11 +42,11 @@ public:
 	void AddGraphs(GraphSet& graphSet, bool isComponent);
 
 public:
-	IResultSet* GetResultSet();
+	void GetResultSet(IResultSet** resultSet);
 
 
 private:
-	IWritableResultSet* resultSet;
-	IResultMetadata* metadata;
+	SmartInterface<IWritableResultSet> resultSet;
+	SmartInterface<IResultMetadata> metadata;
 
 };

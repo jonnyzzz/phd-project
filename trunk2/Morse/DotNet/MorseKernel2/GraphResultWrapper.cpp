@@ -21,7 +21,7 @@ bool GraphResultGraphIterator::HasNext() {
 }
 
 Graph* GraphResultGraphIterator::Current() {
-	IGraphResult* graphResult = resultSetIterator;
+	SmartInterface<IGraphResult> graphResult = resultSetIterator;
 
 	Graph* graph;
 	HRESULT hr = graphResult->GetGraph((void**)&graph);
@@ -50,16 +50,16 @@ GraphResultGraphIterator::operator Graph *() {
 GraphResultGraphList::GraphResultGraphList(IResultMetadata* metadata) {
 	CResultSetImpl::CreateInstance(&resultSet);
 	ATLASSERT(resultSet != NULL);
+
 	metadata->QueryInterface(&this->metadata);
 	ATLASSERT(this->metadata != NULL);
 }
 
 GraphResultGraphList::~GraphResultGraphList() {
-	resultSet->Release();
 }
 
 void GraphResultGraphList::AddGraph(Graph* graph, bool isComponent) {
-	IWritableGraphResult* result;
+	SmartInterface<IWritableGraphResult> result;
 	CGraphResultImpl::CreateInstance(&result);
 
 	HRESULT hr = result->SetGraph((void**)&graph, isComponent?TRUE:FALSE);
@@ -68,14 +68,12 @@ void GraphResultGraphList::AddGraph(Graph* graph, bool isComponent) {
 	hr = result->SetMetadata(metadata);
 	ATLASSERT(SUCCEEDED(hr));
 
-	IResultBase* resultBase;
+	SmartInterface<IResultBase> resultBase;
 	result->QueryInterface(&resultBase);
 	ATLASSERT(resultBase != NULL);
 
 	hr = resultSet->AddResult(resultBase);
 	ATLASSERT(SUCCEEDED(hr));
-	result->Release();
-	resultBase->Release();
 }
 
 void GraphResultGraphList::AddGraphs(GraphSet& graphSet, bool isComponent) {
@@ -84,11 +82,7 @@ void GraphResultGraphList::AddGraphs(GraphSet& graphSet, bool isComponent) {
 	}
 }
 
-IResultSet* GraphResultGraphList::GetResultSet() {
-	IResultSet* result;
-	resultSet->QueryInterface(&result);
-
-	ATLASSERT(result != NULL);
-
-	return result;
+void GraphResultGraphList::GetResultSet(IResultSet** resultSet) {
+	this->resultSet->QueryInterface(resultSet);
+	ATLASSERT(*resultSet != NULL);
 }

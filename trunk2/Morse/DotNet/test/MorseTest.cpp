@@ -17,7 +17,7 @@ typedef smartPointer<ISystemFunction> SmartFunction;
 typedef smartPointer<Graph> SmartGraph;
 typedef smartPointer<GraphComponents> SmartComponents;
 typedef smartPointer<ISystemFunctionDerivate> SmartDFunction;
-typedef smartPointer<AbstractProcess> SmartProcess;
+typedef smartPointer<AbstractProcessExt> SmartProcess;
 typedef smartPointer<IMorseFunction> SmartMFunction;
 
 typedef pair<double, double> MorsePair;

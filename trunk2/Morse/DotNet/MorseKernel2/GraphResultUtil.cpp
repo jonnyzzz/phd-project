@@ -21,7 +21,7 @@ void GraphResultUtil::PerformProcess(AbstractProcess* process, IResultSet* input
 	GraphResultGraphList list(metadata);
 	list.AddGraphs(graphSet, isStrongComponent);
 
-	*output = list.GetResultSet();
+	list.GetResultSet(output);
 }
 
 
@@ -49,22 +49,25 @@ bool GraphResultUtil::HasSameMetadataType(IResultSet* resultSet) {
 
 
 
-IResultMetadata* GraphResultUtil::GetMetadataCloned(IResultSet* resultSet) {
-	SmartInterface<IResultMetadata> data = GetMetadata(resultSet);
-	IResultMetadata* ret;
-	data->Clone(&ret);
-	ATLASSERT(ret != NULL);
-	return ret;
+void GraphResultUtil::GetMetadataCloned(IResultSet* resultSet, IResultMetadata** rdata) {
+	SmartInterface<IResultMetadata> data;
+	GetMetadata(resultSet, &data);
+	
+	ATLASSERT(data != NULL);
+
+	HRESULT hr = data->Clone(rdata);
+	ATLASSERT(SUCCEEDED(hr));
+	ATLASSERT(*rdata != NULL);	
 }
 
-IResultMetadata* GraphResultUtil::GetMetadata(IResultSet* resultSet) {
+void GraphResultUtil::GetMetadata(IResultSet* resultSet, IResultMetadata** data) {
 	ATLASSERT(HasSameMetadataType(resultSet));
 
 	ResultSetIterator<IResult> it(resultSet);
-	IResultMetadata* meta;
+	SmartInterface<IResultMetadata> meta;
 	it->GetMetadata(&meta);
-
 	ATLASSERT(meta != NULL);
 
-	return meta;
+	meta->QueryInterface(data);
+	ATLASSERT(*data != NULL);
 }

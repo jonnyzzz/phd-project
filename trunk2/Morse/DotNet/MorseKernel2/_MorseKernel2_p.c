@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Mar 17 02:49:06 2005
+/* at Thu Mar 17 21:55:30 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -184,6 +184,13 @@ extern const MIDL_STUBLESS_PROXY_INFO IWritableResultSet_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
+extern const MIDL_SERVER_INFO IGraphResultImpl_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IGraphResultImpl_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
 extern const MIDL_SERVER_INFO ISymbolicImageMetadata_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO ISymbolicImageMetadata_ProxyInfo;
 
@@ -226,6 +233,27 @@ extern const MIDL_STUBLESS_PROXY_INFO IWritableFunction_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
+extern const MIDL_SERVER_INFO IFunctionImpl_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IFunctionImpl_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IGraphInfoImpl_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IGraphInfoImpl_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IResultSetImpl_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IResultSetImpl_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
 extern const MIDL_SERVER_INFO IKernell_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IKernell_ProxyInfo;
 
@@ -235,6 +263,13 @@ extern const MIDL_STUB_DESC Object_StubDesc;
 
 extern const MIDL_SERVER_INFO IWritableKernell_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IWritableKernell_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IKernellImpl_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IKernellImpl_ProxyInfo;
 
 
 extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TABLE_SIZE ];
@@ -3674,6 +3709,72 @@ CInterfaceStubVtbl _IWritableResultSetStubVtbl =
 };
 
 
+/* Object interface: IGraphResultImpl, ver. 0.0,
+   GUID={0x150237B9,0x7739,0x4882,{0x87,0xE1,0x8F,0xE9,0x26,0xA9,0x6A,0xFF}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IGraphResultImpl_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IGraphResultImpl_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IGraphResultImpl_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IGraphResultImpl_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IGraphResultImpl_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IGraphResultImplProxyVtbl = 
+{
+    0,
+    &IID_IGraphResultImpl,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IGraphResultImpl_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IGraphResultImplStubVtbl =
+{
+    &IID_IGraphResultImpl,
+    &IGraphResultImpl_ServerInfo,
+    7,
+    &IGraphResultImpl_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: ISymbolicImageMetadata, ver. 0.0,
    GUID={0x24EEB65B,0x81FF,0x42EA,{0x85,0x21,0x6B,0x3F,0x62,0x66,0x5F,0x84}} */
 
@@ -4112,8 +4213,206 @@ CInterfaceStubVtbl _IWritableFunctionStubVtbl =
 };
 
 
+/* Object interface: IFunctionImpl, ver. 0.0,
+   GUID={0x38C4B884,0x7772,0x4AA3,{0xB1,0xC0,0x4B,0xC1,0x12,0xFE,0x48,0x5F}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IFunctionImpl_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IFunctionImpl_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IFunctionImpl_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IFunctionImpl_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IFunctionImpl_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IFunctionImplProxyVtbl = 
+{
+    0,
+    &IID_IFunctionImpl,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IFunctionImpl_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IFunctionImplStubVtbl =
+{
+    &IID_IFunctionImpl,
+    &IFunctionImpl_ServerInfo,
+    7,
+    &IFunctionImpl_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: IWritableGraphInfo, ver. 0.0,
    GUID={0x5F89F9F3,0xAB8D,0x4129,{0xA7,0x52,0x8A,0x42,0x58,0xA8,0xEC,0xE9}} */
+
+
+/* Object interface: IGraphInfoImpl, ver. 0.0,
+   GUID={0xE8AC201A,0x48EE,0x4CC4,{0xA7,0xD3,0xD0,0x75,0xC3,0x01,0x61,0x04}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IGraphInfoImpl_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IGraphInfoImpl_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IGraphInfoImpl_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IGraphInfoImpl_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IGraphInfoImpl_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IGraphInfoImplProxyVtbl = 
+{
+    0,
+    &IID_IGraphInfoImpl,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IGraphInfoImpl_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IGraphInfoImplStubVtbl =
+{
+    &IID_IGraphInfoImpl,
+    &IGraphInfoImpl_ServerInfo,
+    7,
+    &IGraphInfoImpl_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IResultSetImpl, ver. 0.0,
+   GUID={0x3EB38E81,0xF41E,0x44BD,{0x85,0xE3,0x48,0x6C,0xF0,0x5F,0xD1,0xB2}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IResultSetImpl_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IResultSetImpl_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IResultSetImpl_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IResultSetImpl_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IResultSetImpl_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IResultSetImplProxyVtbl = 
+{
+    0,
+    &IID_IResultSetImpl,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IResultSetImpl_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IResultSetImplStubVtbl =
+{
+    &IID_IResultSetImpl,
+    &IResultSetImpl_ServerInfo,
+    7,
+    &IResultSetImpl_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
 
 
 /* Object interface: IKernell, ver. 0.0,
@@ -4254,6 +4553,75 @@ CInterfaceStubVtbl _IWritableKernellStubVtbl =
     CStdStubBuffer_DELEGATING_METHODS
 };
 
+
+/* Object interface: IKernellImpl, ver. 0.0,
+   GUID={0x0667C597,0x8C23,0x4B74,{0xA2,0x98,0x82,0x1D,0xB5,0x94,0xED,0x01}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IKernellImpl_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    1410,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IKernellImpl_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IKernellImpl_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IKernellImpl_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IKernellImpl_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(8) _IKernellImplProxyVtbl = 
+{
+    0,
+    &IID_IKernellImpl,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IWritableKernell::SetFunction */
+};
+
+
+static const PRPC_STUB_FUNCTION IKernellImpl_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IKernellImplStubVtbl =
+{
+    &IID_IKernellImpl,
+    &IKernellImpl_ServerInfo,
+    8,
+    &IKernellImpl_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
 static const MIDL_STUB_DESC Object_StubDesc = 
     {
     0,
@@ -4280,6 +4648,7 @@ static const MIDL_STUB_DESC Object_StubDesc =
 
 const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] = 
 {
+    ( CInterfaceProxyVtbl *) &_IGraphInfoImplProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IBoxMethodActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IKernellProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IResultSetProxyVtbl,
@@ -4289,10 +4658,14 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
     ( CInterfaceProxyVtbl *) &_IGraphInfoProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IGraphResultProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IParametersProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IResultSetImplProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IFunctionImplProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IKernellImplProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IComponentRegistrarProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IResultProxyVtbl,
     ( CInterfaceProxyVtbl *) &_ITarjanActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IWritableResultSetProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IGraphResultImplProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IWritableKernellProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IWritableFunctionProxyVtbl,
@@ -4309,6 +4682,7 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
 
 const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] = 
 {
+    ( CInterfaceStubVtbl *) &_IGraphInfoImplStubVtbl,
     ( CInterfaceStubVtbl *) &_IBoxMethodActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IKernellStubVtbl,
     ( CInterfaceStubVtbl *) &_IResultSetStubVtbl,
@@ -4318,10 +4692,14 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
     ( CInterfaceStubVtbl *) &_IGraphInfoStubVtbl,
     ( CInterfaceStubVtbl *) &_IGraphResultStubVtbl,
     ( CInterfaceStubVtbl *) &_IParametersStubVtbl,
+    ( CInterfaceStubVtbl *) &_IResultSetImplStubVtbl,
+    ( CInterfaceStubVtbl *) &_IFunctionImplStubVtbl,
+    ( CInterfaceStubVtbl *) &_IKernellImplStubVtbl,
     ( CInterfaceStubVtbl *) &_IComponentRegistrarStubVtbl,
     ( CInterfaceStubVtbl *) &_IResultStubVtbl,
     ( CInterfaceStubVtbl *) &_ITarjanActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IWritableResultSetStubVtbl,
+    ( CInterfaceStubVtbl *) &_IGraphResultImplStubVtbl,
     ( CInterfaceStubVtbl *) &_IWritableKernellStubVtbl,
     ( CInterfaceStubVtbl *) &_IActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IWritableFunctionStubVtbl,
@@ -4338,6 +4716,7 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
 
 PCInterfaceName const __MorseKernel2_InterfaceNamesList[] = 
 {
+    "IGraphInfoImpl",
     "IBoxMethodAction",
     "IKernell",
     "IResultSet",
@@ -4347,10 +4726,14 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
     "IGraphInfo",
     "IGraphResult",
     "IParameters",
+    "IResultSetImpl",
+    "IFunctionImpl",
+    "IKernellImpl",
     "IComponentRegistrar",
     "IResult",
     "ITarjanAction",
     "IWritableResultSet",
+    "IGraphResultImpl",
     "IWritableKernell",
     "IAction",
     "IWritableFunction",
@@ -4391,6 +4774,11 @@ const IID *  __MorseKernel2_BaseIIDList[] =
     &IID_IDispatch,
     &IID_IDispatch,
     &IID_IDispatch,
+    &IID_IDispatch,
+    &IID_IDispatch,
+    &IID_IDispatch,
+    &IID_IDispatch,
+    &IID_IDispatch,
     0
 };
 
@@ -4401,12 +4789,12 @@ int __stdcall __MorseKernel2_IID_Lookup( const IID * pIID, int * pIndex )
 {
     IID_BS_LOOKUP_SETUP
 
-    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 24, 16 )
+    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 29, 16 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 8 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 4 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 2 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 1 )
-    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 24, *pIndex )
+    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 29, *pIndex )
     
 }
 
@@ -4417,7 +4805,7 @@ const ExtendedProxyFileInfo _MorseKernel2_ProxyFileInfo =
     (const PCInterfaceName * ) & __MorseKernel2_InterfaceNamesList,
     (const IID ** ) & __MorseKernel2_BaseIIDList,
     & __MorseKernel2_IID_Lookup, 
-    24,
+    29,
     2,
     0, /* table of [async_uuid] interfaces */
     0, /* Filler1 */

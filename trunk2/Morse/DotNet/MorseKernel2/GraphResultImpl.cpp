@@ -4,7 +4,7 @@
 #include "GraphResultImpl.h"
 #include "GraphInfoImpl.h"
 #include "../graph/graph.h"
-
+#include "SmartInterface.h"
 
 // CGraphResultImpl
 
@@ -46,7 +46,7 @@ STDMETHODIMP CGraphResultImpl::GetGraph(void** graph) {
 
 
 STDMETHODIMP CGraphResultImpl::GetGraphInfo(IGraphInfo** info) {
-	IWritableGraphInfo* pinfo;
+	SmartInterface<IWritableGraphInfo> pinfo;
 	CGraphInfoImpl::CreateInstance(&pinfo);
 
 	ATLASSERT(pinfo != NULL);
