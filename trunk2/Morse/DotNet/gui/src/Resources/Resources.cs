@@ -47,6 +47,11 @@ namespace gui.Resource
 			get { return Gnuplot_Templates + GNUPLOT_TEMPLATE_3D; }
 		}
 
+		public string FileCreateTemplate
+		{
+			get { return fileCreateTemplate; }
+		}
+
 		#endregion
 
 		private string RESOURCE_PATH; // = @"e:\projects\morse\DotNetProject\Morse\DotNet\resource\included";        
@@ -60,6 +65,7 @@ namespace gui.Resource
 
 		private string GNUPLOT_TEMPLATE_2D; // = GNUPLOT_TEMPLATES + @"\2d.txt";
 		private string GNUPLOT_TEMPLATE_3D; // = GNUPLOT_TEMPLATES + @"\3d.txt";
+		private string fileCreateTemplate = "{0}.{1}.{2}.system.data";
 
 
 		protected Resources(string basePath)

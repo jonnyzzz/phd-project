@@ -24,7 +24,7 @@ void CMorseSpectrum::FinalRelease() {
 
 STDMETHODIMP CMorseSpectrum::get_lowerBound(DOUBLE* pVal)
 {
-	*pVal = upper;
+	*pVal = lower;
 
 	return S_OK;
 }

@@ -1,12 +1,15 @@
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using AxMSComctlLib;
 using gui.Panels;
+using gui.Serialization;
 using gui.Tree;
 using gui.Tree.Node;
 using gui.Tree.Node.Forms;
+using gui.Tree.Serialization;
 using gui.Visualization.GnuPlot;
 using MorseKernelATL;
 
@@ -107,6 +110,7 @@ namespace gui.Forms
 			this.menuExit = new System.Windows.Forms.MenuItem();
 			this.menuSelection = new System.Windows.Forms.MenuItem();
 			this.menuDeselectAll = new System.Windows.Forms.MenuItem();
+			this.menuItemDeselectGroup = new System.Windows.Forms.MenuItem();
 			this.menuItemInternal = new System.Windows.Forms.MenuItem();
 			this.menuItemGC = new System.Windows.Forms.MenuItem();
 			this.menuItemStartGNUPlot = new System.Windows.Forms.MenuItem();
@@ -128,7 +132,6 @@ namespace gui.Forms
 			this.splitterUD = new System.Windows.Forms.Splitter();
 			this.panelLeft = new System.Windows.Forms.Panel();
 			this.splitterLR = new System.Windows.Forms.Splitter();
-			this.menuItemDeselectGroup = new System.Windows.Forms.MenuItem();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.axProgressBar1)).BeginInit();
 			this.groupBox2.SuspendLayout();
@@ -152,15 +155,15 @@ namespace gui.Forms
 			// mainMenu
 			// 
 			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																					 this.menuItemInvestigations,
 																					 this.menuSystem,
 																					 this.menuSelection,
 																					 this.menuItemInternal,
-																					 this.menuItemHelp,
-																					 this.menuItemInvestigations});
+																					 this.menuItemHelp});
 			// 
 			// menuSystem
 			// 
-			this.menuSystem.Index = 0;
+			this.menuSystem.Index = 1;
 			this.menuSystem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																					   this.menuAssign,
 																					   this.menuLoad,
@@ -210,7 +213,7 @@ namespace gui.Forms
 			// 
 			// menuSelection
 			// 
-			this.menuSelection.Index = 1;
+			this.menuSelection.Index = 2;
 			this.menuSelection.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																						  this.menuDeselectAll,
 																						  this.menuItemDeselectGroup});
@@ -222,9 +225,15 @@ namespace gui.Forms
 			this.menuDeselectAll.Text = "Deselect All";
 			this.menuDeselectAll.Click += new System.EventHandler(this.menuDeselectAll_Click);
 			// 
+			// menuItemDeselectGroup
+			// 
+			this.menuItemDeselectGroup.Index = 1;
+			this.menuItemDeselectGroup.Text = "Deselect Group";
+			this.menuItemDeselectGroup.Click += new System.EventHandler(this.menuItemDeselectGroup_Click);
+			// 
 			// menuItemInternal
 			// 
-			this.menuItemInternal.Index = 2;
+			this.menuItemInternal.Index = 3;
 			this.menuItemInternal.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																							 this.menuItemGC,
 																							 this.menuItemStartGNUPlot});
@@ -245,7 +254,7 @@ namespace gui.Forms
 			// 
 			// menuItemHelp
 			// 
-			this.menuItemHelp.Index = 3;
+			this.menuItemHelp.Index = 4;
 			this.menuItemHelp.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																						 this.menuItemAbout});
 			this.menuItemHelp.Text = "Help";
@@ -258,7 +267,7 @@ namespace gui.Forms
 			// 
 			// menuItemInvestigations
 			// 
-			this.menuItemInvestigations.Index = 4;
+			this.menuItemInvestigations.Index = 0;
 			this.menuItemInvestigations.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																								   this.menuItemInvLoad,
 																								   this.menuItemInvSave});
@@ -274,6 +283,7 @@ namespace gui.Forms
 			// 
 			this.menuItemInvSave.Index = 1;
 			this.menuItemInvSave.Text = "Save";
+			this.menuItemInvSave.Click += new System.EventHandler(this.menuItemInvSave_Click);
 			// 
 			// groupBox1
 			// 
@@ -409,12 +419,6 @@ namespace gui.Forms
 			this.splitterLR.Size = new System.Drawing.Size(8, 491);
 			this.splitterLR.TabIndex = 9;
 			this.splitterLR.TabStop = false;
-			// 
-			// menuItemDeselectGroup
-			// 
-			this.menuItemDeselectGroup.Index = 1;
-			this.menuItemDeselectGroup.Text = "Deselect Group";
-			this.menuItemDeselectGroup.Click += new System.EventHandler(this.menuItemDeselectGroup_Click);
 			// 
 			// ComputationForm
 			// 
@@ -593,18 +597,80 @@ namespace gui.Forms
 
 			if (dialog.ShowDialog(this) == DialogResult.OK)
 			{
-				if (!dialog.CheckFileExists) MessageBox.Show(this, "File not found", "Error");
+				if (!dialog.CheckFileExists)
+				{
+					MessageBox.Show(this, "File not found", "Error");
+					return;
+				}
 				String fileName = dialog.FileName;
+				String path = Path.GetDirectoryName(fileName) + "\\";
+				TextReader reader = File.OpenText(fileName);
 
-				XmlDocument doc = new XmlDocument();
-				
+				Document document = Document.LoadDocument(reader);
+				reader.Close();
 
+				CFunction function = new CFunctionClass();
+				function.SystemSource = document.SystemSource;
+				Runner.Kernel.function = function;                
+
+				this.computatioinTree.Root = CreateRoot(document.Root, path);
 			}
+		}
+
+		private ComputationNode CreateRoot(TreeNodeSerializer root, string path)
+		{
+			ComputationNode rootNode = ComputationNode.FromTreeNodeSerializer(root, path);
+			CreateNodes(rootNode, root, path);
+			return rootNode;
+		}
+
+		private void CreateNodes(ComputationNode parent, TreeNodeSerializer root, string path)
+		{
+			foreach (TreeNodeSerializer nodeSerializer in root.Childs)
+			{
+				ComputationNode np = AddLoadSerializedNode(parent, nodeSerializer, path);
+				CreateNodes(np, nodeSerializer, path);
+			}
+		}
+		private ComputationNode AddLoadSerializedNode(ComputationNode parent, TreeNodeSerializer node, string path)
+		{
+			ComputationNode cnode = ComputationNode.FromTreeNodeSerializer(node, path);
+			parent.Nodes.Add(cnode);			
+			return cnode;
 		}
 
 		private void menuItemDeselectGroup_Click(object sender, System.EventArgs e)
 		{
 			ComputationNodePlural.getCurrentGroup().dehighlightChildrens();
+		}
+
+		private void menuItemInvSave_Click(object sender, System.EventArgs e)
+		{
+			if (this.RootNode == null)
+			{
+				MessageBox.Show(this, "There is no tree to save.");
+				return;
+			}
+
+			SaveFileDialog dialog = new SaveFileDialog();
+			dialog.DefaultExt = "system";
+			dialog.Filter = "Systems (*.system)|*.system|All Files (*.*)|*.*";
+			dialog.OverwritePrompt = true;
+
+			if (dialog.ShowDialog(this) == DialogResult.OK)
+			{				
+				String path = Path.GetDirectoryName(dialog.FileName) + "\\";
+				String fileName = Path.GetFileName(dialog.FileName);
+				
+				Document document = new Document();
+				document.SystemSource = Runner.Kernel.function.SystemSource;
+				document.BuildRootFromComputationNode(this.RootNode, fileName, path);			
+				
+				TextWriter writer = File.CreateText(path + fileName);
+
+				Document.SaveDocument(document, writer);
+				writer.Close();			
+			}		
 		}
 
 		public ComputationNode RootNode

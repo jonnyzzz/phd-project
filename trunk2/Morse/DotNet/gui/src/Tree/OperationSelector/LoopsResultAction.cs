@@ -14,7 +14,7 @@ namespace gui.Tree.OperationSelector
 		public LoopsResultAction(IComputationGraphResult result)
 		{
 			this.result = result;
-			this.Text = "Fixed Points";
+			this.Text = "Localize Fixed Points";
 		}
 
 		public override void DoAction()

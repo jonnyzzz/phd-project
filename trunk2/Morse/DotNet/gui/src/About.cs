@@ -34,7 +34,7 @@ namespace gui
 					offet + "Special thanks to: \n " +
 					offet + "   Joseph V. Romanovsky,\n" +
 					offet + "   And to every one, who was involved \n" +
-					offet + "	In development process \n\n\n" +
+					offet + "	  In the development process \n\n\n" +
 					offet + "                       2001-2005 ";
 			label1.Text = data;
 

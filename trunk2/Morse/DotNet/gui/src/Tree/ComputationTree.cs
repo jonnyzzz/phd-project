@@ -101,14 +101,15 @@ namespace gui.Tree
 		/// /////////////////////////////////////////////////////////////////////
 
 		#region functiononality
+		ComputationNode root = null;
 		public ComputationNode Root
 		{
 			set
 			{
 				tree.Nodes.Clear();
-				if (value != null) tree.Nodes.Add(value);
+				if (value != null) tree.Nodes.Add(root = value);
 			}
-			get { return tree.Nodes.GetEnumerator().Current as ComputationNode; }
+			get { return root; }
 		}
 
 		public void DeselectAll()

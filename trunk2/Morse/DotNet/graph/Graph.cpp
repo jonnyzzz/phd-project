@@ -655,6 +655,10 @@ Graph*	createGraph(FileInputStream& o) {
 	o>>buff;
 	ASSERT(strcmp(buff, GRAPH_CLOSE_TAG) == 0);
 
+	delete[] min;
+	delete[] max;
+	delete[] grid;
+
 	return graph;
 }
 

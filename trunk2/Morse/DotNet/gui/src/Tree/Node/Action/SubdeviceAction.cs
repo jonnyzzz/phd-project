@@ -24,7 +24,7 @@ namespace gui.Tree.Node.Action
 					{
 						ComputationNodeMenuFactory.getUniversalMenuItem(
 						new ComputationNodeMenuFactory.UniversalMenuItemClick(Subdevide),
-						"Subdevide Linear Method")
+						"Subdivide using Linear Method")
 					};
 		}
 

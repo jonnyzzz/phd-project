@@ -14,7 +14,7 @@ namespace gui.Tree.OperationSelector
 		public StrongComponentsResultAction(IComputationGraphResult result)
 		{
 			this.result = result;
-			this.Text = "Strong Components without edges";
+			this.Text = "Localize Strong Components without edges";
 
 		}
 

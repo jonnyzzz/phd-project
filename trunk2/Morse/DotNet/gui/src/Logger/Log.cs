@@ -37,6 +37,19 @@ namespace gui.Logger
 			Console.Out.WriteLine("Log: Thread={0}, Class={1}, Message = {2}\n", Thread.CurrentThread.Name, cls.Name, message);
 		}
 
+		private static void Assert(Type cls, bool @case, string message, params object[] arg)
+		{
+			if (!@case)
+			{
+				Log.LogMessage(cls, "Assertion failed: \n" + message, arg);
+			}
+		}
+
+		public static void Assert(object cls, bool @case, string messsage, params object[] arg)
+		{
+			Assert(cls.GetType(), @case, messsage, arg);
+		}
+
 		#endregion
 
 		/// <summary>

@@ -374,6 +374,11 @@
                     BuildAction = "None"
                 />
                 <File
+                    RelPath = "src\Serialization\Document.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\SystemFunction\SystemAssignment.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
@@ -739,6 +744,16 @@
                 />
                 <File
                     RelPath = "src\Tree\OperationSelector\StrongComponentsWithNodesResultAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Serialization\KernelNodeSerializer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Serialization\TreeNodeSerializer.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

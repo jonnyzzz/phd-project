@@ -77,7 +77,7 @@ namespace gui.Tree.Node.Factory
 
 		public static ComputationNodeMenuItem SubdevidePointAction(UniversalMenuItemClick universal)
 		{
-			return new UniversalComputationMenuItem(universal, "Subdevide Point Method");
+			return new UniversalComputationMenuItem(universal, "Subdivide using Point Method");
 		}
 
 		#endregion

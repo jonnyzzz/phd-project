@@ -1,9 +1,13 @@
 using System;
 using System.Collections;
+using System.IO;
 using System.Windows.Forms;
+using gui.Logger;
+using gui.Resource;
 using gui.Tree.Node.Action;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
+using gui.Tree.Serialization;
 using MorseKernelATL;
 
 namespace gui.Tree.Node
@@ -45,11 +49,46 @@ namespace gui.Tree.Node
 			get { return node; }
 		}
 
-		public virtual void newNode(IKernelNode node)
+		public void newNode(IKernelNode node)
 		{
 			Nodes.Add(ComputationNode.createComputationNode(node));
 			Expand();
 		}
+
+		public TreeNodeSerializer toSerializableTree(string filename, string path)
+		{
+			return toSerializableTree(filename, path, 0, 0);
+		}
+
+		protected string GenerateFileName(string filename, string path, int child, int level)
+		{
+			string file = string.Format(Resources.Instance.FileCreateTemplate, filename, level, child);
+			while (File.Exists(path + file)) file += ".1";
+			return file;
+		}
+
+		
+
+		protected virtual TreeNodeSerializer toSerializableTree(string filename, string path, int child, int level)
+		{
+			string file = GenerateFileName(filename,  path, child, level);
+			if (this.Node != null) 
+			{
+				KernelNodeSerializer.SerializeKernelNode(path + file, this.Node);
+			} else Log.Assert(this, false, "");
+
+			TreeNodeSerializer serializer = new TreeNodeSerializer();
+			serializer.FileName = file;
+			serializer.FromDll = true;
+			
+			foreach (ComputationNode node in Nodes)
+			{
+				serializer.AddChild(node.toSerializableTree(filename, path, child++, level+1));
+			}
+			return serializer;
+		}
+
+		#region Menu
 
 		public ComputationNodeMenuItem[] MenuItems
 		{
@@ -134,7 +173,7 @@ namespace gui.Tree.Node
 			for (int i = 0; i < nodes.Count; itms[i] = (ComputationNodeMenuItem) nodes[i++]) ;
 			return itms;
 		}
-
+		#endregion
 		#endregion
 
 		#region Static Features
@@ -192,6 +231,16 @@ namespace gui.Tree.Node
 		public static void ClearGroup()
 		{
 			ComputationNodePlural.getCurrentGroup().dehighlightChildrens();
+		}
+
+		public static ComputationNode FromTreeNodeSerializer(TreeNodeSerializer serializer, string path)
+		{
+			if (serializer.FromDll)
+			{
+				IKernelNode node = KernelNodeSerializer.DeSerializeKernelNode(path + serializer.FileName);
+				return ComputationNode.createComputationNode(node);				
+			}
+			return null;
 		}
 	}
 }

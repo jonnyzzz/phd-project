@@ -204,7 +204,7 @@ namespace gui.Tree.Node.Forms
 			{
 				return new string[]
 					{
-						"Cell branch", "Points in cell"
+						"Cell division", "Points in cell"
 					};
 			}
 		}
