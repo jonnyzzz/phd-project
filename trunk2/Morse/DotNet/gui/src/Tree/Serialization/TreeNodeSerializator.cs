@@ -73,7 +73,7 @@ namespace gui.Tree.Serialization
 
 		protected string GenerateFileName()
 		{
-			string file = string.Format(Resources.Instance.FileCreateTemplate, filename, id);
+			string file = string.Format(Resource.Resources.Instance.FileCreateTemplate, filename, id);
 			while (File.Exists(path + file)) file += ".1";
 			return file;
 		}

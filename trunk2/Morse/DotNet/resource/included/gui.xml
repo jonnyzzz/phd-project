@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Resources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <GnuplotTemplates>gnuplottemplate\</GnuplotTemplates>
+  <GnuplotExe>gnuplot\bin\pgnuplot.exe</GnuplotExe>
+  <GnuplotParams>-noend {0} -</GnuplotParams>
+  <GnuplotTemplate2D>2d.txt</GnuplotTemplate2D>
+  <GnuplotTemplate3D>3d.txt</GnuplotTemplate3D>
+  <FileCreateTemplate>{0}.{1}.system.data</FileCreateTemplate>
+</Resources>

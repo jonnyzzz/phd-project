@@ -82,6 +82,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLVisualizationPS", "GLVisu
 		{BEB479DF-198F-4F91-B459-BC229AF61BBA} = {BEB479DF-198F-4F91-B459-BC229AF61BBA}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorseKernel2", "MorseKernel2\MorseKernel2.vcproj", "{FA02656D-A267-4B1F-A956-79236784E5CA}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorseKernel2PS", "MorseKernel2\MorseKernel2PS.vcproj", "{F0ECF416-0386-4E77-84B6-CFAD137A098E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FA02656D-A267-4B1F-A956-79236784E5CA} = {FA02656D-A267-4B1F-A956-79236784E5CA}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
@@ -287,6 +296,30 @@ Global
 		{EE5EBA87-6906-4122-8C21-0B79A119DF4A}.Release.ActiveCfg = Release|Win32
 		{EE5EBA87-6906-4122-8C21-0B79A119DF4A}.Test.ActiveCfg = Release|Win32
 		{EE5EBA87-6906-4122-8C21-0B79A119DF4A}.VisualizationDebug.ActiveCfg = Debug|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.Debug.ActiveCfg = Debug|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.Debug.Build.0 = Debug|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.DebugGL.ActiveCfg = Debug|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.DebugGL.Build.0 = Debug|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.DebugGUI.ActiveCfg = Debug|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.DebugGUI.Build.0 = Debug|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.FullDebug.ActiveCfg = Debug|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.FullDebug.Build.0 = Debug|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.NewDLL.ActiveCfg = Release|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.NewDLL.Build.0 = Release|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.Release.ActiveCfg = Release|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.Release.Build.0 = Release|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.Test.ActiveCfg = Release|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.Test.Build.0 = Release|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.VisualizationDebug.ActiveCfg = Debug|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.VisualizationDebug.Build.0 = Debug|Win32
+		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.Debug.ActiveCfg = Debug|Win32
+		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.DebugGL.ActiveCfg = Debug|Win32
+		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.DebugGUI.ActiveCfg = Debug|Win32
+		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.FullDebug.ActiveCfg = Debug|Win32
+		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.NewDLL.ActiveCfg = Release|Win32
+		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.Release.ActiveCfg = Release|Win32
+		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.Test.ActiveCfg = Release|Win32
+		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.VisualizationDebug.ActiveCfg = Debug|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

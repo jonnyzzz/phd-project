@@ -44,6 +44,34 @@ namespace gui
 
 		private static CommandLineParsers commandLineParsers;
 
+		private static bool InitializeResources()
+		{
+			string appResPath;
+			if (commandLineParsers.hasKey("resources"))
+			{
+				appResPath = commandLineParsers.getValue("resources");
+			} else
+			{
+				appResPath = Application.StartupPath;
+			}
+
+			try
+			{
+				Resources.Create(appResPath + @"\");
+			} catch (Exception e)
+			{
+				Log.LogException(typeof(Runner), e, "Unable to load Resource Files" );
+				return false;
+			}
+
+			if (commandLineParsers.hasKey("temporary"))
+			{
+				Resources.Instance.TempPath = commandLineParsers.getValue("temporary") + @"\";
+			}
+
+			return true;
+		}
+
 
 		[STAThread]
 		private static void Main(string[] args)
@@ -58,46 +86,17 @@ namespace gui
 				MessageBox.Show(e.Message, "Wrong parameters");
 				return;
 			}
+
 			isInternal = commandLineParsers.hasKey("internal");
 
 			Thread.CurrentThread.Name = "MainThread";
 			AttributeProcessor.InitializeStaticAttribute(Assembly.GetExecutingAssembly());
 
-			#region initResources
-
-			if (commandLineParsers.hasKey("resources") && commandLineParsers.hasKey("temporary"))
+		
+			if (!InitializeResources())
 			{
-				Resources.SetBasePath(
-					commandLineParsers.getValue("resources"),
-					commandLineParsers.getValue("temporary")
-					);
-			}
-			else if (commandLineParsers.hasKey("resources"))
-			{
-				Resources.SetBasePath(commandLineParsers.getValue("resources"));
-			}
-			else
-			{
-				try
-				{
-					Resources.SetBasePath(Application.StartupPath);
-				}
-				catch (Exception)
-				{
-					try
-					{
-						Resources.SetBasePath(Directory.GetCurrentDirectory());
-					}
-					catch (Exception ee)
-					{
-						Log.LogException(typeof (Runner), ee, "Unable to find any config files");
-						MessageBox.Show("Unable to locate program resource files.", "Run failed");
-						return;
-					}
-				}
-			}
-
-			#endregion
+				MessageBox.Show("Unable To Load Resource Files.");
+			}			
 
 			if (commandLineParsers.hasKey("test"))
 			{

@@ -21,8 +21,8 @@ namespace gui.Visualization.GnuPlot
 		public void showFromFile(string filedata, string filetemplate)
 		{
 			ProcessStartInfo pi = new ProcessStartInfo();
-			pi.FileName = Resources.Instance.Gnuplot_Exe;
-			pi.Arguments = string.Format(Resources.Instance.Gnuplot_Exe_Params, filetemplate, filedata);
+			pi.FileName = Resources.Instance.GnuplotExe;
+			pi.Arguments = string.Format(Resources.Instance.GnuplotParams, filetemplate, filedata);
 			pi.ErrorDialog = true;
 
 			Log.LogMessage(this, "Arguments: {0} ", pi.Arguments);
@@ -49,7 +49,7 @@ namespace gui.Visualization.GnuPlot
 
 		public string AllocateTemporaryFile()
 		{
-			string fname = Resources.Instance.TempFile();
+			string fname = Resources.Instance.TempFile;
 			createdFiles.Add(fname);
 			return fname;
 		}
@@ -80,7 +80,7 @@ namespace gui.Visualization.GnuPlot
 
 		public string createTemplate2D()
 		{
-			TemplateProcessor tp = new TemplateProcessor(ResourceLoader.LoadResourceAsText(Resources.Instance.Gnuplot_Template_2D));
+			TemplateProcessor tp = new TemplateProcessor(ResourceLoader.LoadResourceAsText(Resources.Instance.GnuplotTemplate2D));
 			tp.subsitute("x_min", (info.spaceMin(0) - info.gridSize(0)/2).ToString().Replace(',', '.'));
 			tp.subsitute("x_max", (info.spaceMax(0) + info.gridSize(0)/2).ToString().Replace(',', '.'));
 			tp.subsitute("y_min", (info.spaceMin(1) - info.gridSize(1)/2).ToString().Replace(',', '.'));
@@ -101,7 +101,7 @@ namespace gui.Visualization.GnuPlot
 
 		public string createTemplate3D()
 		{
-			TemplateProcessor tp = new TemplateProcessor(ResourceLoader.LoadResourceAsText(Resources.Instance.Gnuplot_Template_3D));
+			TemplateProcessor tp = new TemplateProcessor(ResourceLoader.LoadResourceAsText(Resources.Instance.GnuplotTemplate3D));
 
 			tp.subsitute("file", filedata);
 			tp.subsitute("x_offset", (info.gridSize(0)/2).ToString().Replace(',', '.'));
@@ -123,7 +123,7 @@ namespace gui.Visualization.GnuPlot
 
 		public static void Run()
 		{
-			Process.Start(Resources.Instance.Gnuplot_Exe);
+			Process.Start(Resources.Instance.GnuplotExe);
 		}
 	}
 }
