@@ -16,7 +16,6 @@ public:
 	GraphNodeEnumerator(Graph* graph) : graph(graph) {
 		ne = graph->getNodeRoot();
 	}
-public:
 	~GraphNodeEnumerator() {
 		graph->freeNodeEnumerator(ne);
 	}
@@ -25,6 +24,10 @@ public:
 	Node* next() {
 		return graph->getNode(ne);
 	}
+
+    operator NodeEnumerator* () {
+        return ne;
+    }
 };
 
 
@@ -36,7 +39,6 @@ public:
 	GraphEdgeEnumerator(Graph* graph, Node* node) : graph(graph) {
 		ee = graph->getEdgeRoot(node);
 	}
-public:
 	~GraphEdgeEnumerator() {
 		graph->freeEdgeEnumerator(ee);
 	}
@@ -50,4 +52,8 @@ public:
 		if (e == NULL) return NULL;
 		return graph->getEdgeTo(e);
 	}
+
+    operator EdgeEnumerator* () {
+        return ee;
+    }
 };

@@ -1,6 +1,13 @@
 #include "StdAfx.h"
 #include ".\systemfunctionderivate.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 SystemFunctionDerivate::SystemFunctionDerivate(FunctionFactory* factory, int dimension, int iterations) :
 ISystemFunctionDerivate(dimension*dimension + dimension, iterations), factory(factory), real_dimension(dimension)  
 {
@@ -114,6 +121,10 @@ void SystemFunctionDerivate::init() {
         computationChain.push_back(native);
     }
     temp = allocateDoubleArray(this->dimension*3);
+
+    for (SystemNativeFunctions::iterator it = funcs.begin(); it != funcs.end(); it++) {
+        delete *it;
+    }
 }
 
 

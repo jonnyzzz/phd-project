@@ -43,8 +43,10 @@ struct Edge {
 Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid) 
 : CoordinateSystem(dimention, min, max, grid)
 {
-	edgeHashMax = 13;
-	nodeHashMax = 1861;
+	//edgeHashMax = 13;
+	//nodeHashMax = 1861;
+    edgeHashMax = 10000;
+	nodeHashMax = 10000;
 	numberEdges = 0;
 	numberNodes = 0;
 
@@ -112,6 +114,10 @@ int inline Graph::hash(const Edge* edge) const {
 
 int inline Graph::hash(const Node* /*from*/, const Node* to) const{
 	return _hash(to->cell)%edgeHashMax;
+}
+
+int Graph::Hash(const Node* node) const {
+    return hash(node);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -446,8 +452,8 @@ GraphComponents* Graph::localazeStrongComponents() {
 	int state = 2;
 	JInt cnt = 10;
 	
-	Stack stack;
-	Stack marsh;
+	Stack stack(this);
+	Stack marsh(this);
 	Graph* tmp;
 	
 	
@@ -527,7 +533,7 @@ GraphComponents* Graph::localazeStrongComponents() {
 	}
 	this->freeNodeEnumerator(enumerator);
 
-	TRACE("Count: %d\n", cnt-10);
+	//TRACE("Count: %d\n", cnt-10);
 	
 	return cmps;
 }

@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include ".\rom.h"
+#include "..\graph\graphUtil.h"
 #include <list>
 #include <algorithm>
 
@@ -94,14 +95,17 @@ bool inline CRom::tree(CRom::ContourNode*& rnode) {
 	//p->next = NULL;
 	ASSERT(rnode->v == 0);
 
+
+
 	while (!m.empty()){
 		ContourNode* node = m.front();	
 		m.pop_front();
 		node->type = M0;
 
-		EdgeEnumerator* ee = graph->getEdgeRoot(node->node);
+        GraphEdgeEnumerator ee(graph, node->node); // = graph->getEdgeRoot(node->node);
 		Edge* e;
 		while (e = graph->getEdge(ee)) {
+
 			ContourNode* to = getContourNodeTo(e);
 			
 			double w = node->v + cost(to) - z;
@@ -141,10 +145,10 @@ bool inline CRom::tree(CRom::ContourNode*& rnode) {
 				}
 			}
 		}
-		graph->freeEdgeEnumerator(ee);		
+		//GraphEdgeEnumerator object create just on stack. graph->freeEdgeEnumerator(ee);		
 	}
 	//p->next = rnode;
-	cout<<"Final:\n";
+    cout<<"Final:\n";
 	//dump();
 	//cout<<"\n";
 	return true; //contour is minimal.
@@ -350,21 +354,21 @@ void CRom::minimize() {
 	extrema = init();
 	cout<<"Init\n";
 
-//#ifdef _DEBUG
+#ifdef _DEBUG
 	dumpGraph();
-//#endif
+#endif
 
 	extrema = minimize(extrema);
 	cout<<"Cost\n";
 	answerValue = contour_cost(extrema);
 	cout<<"Complete";
 
-//#ifdef _DEBUG
+#ifdef _DEBUG
 	ofstream f;
 	f.open("./extrema.ids");
 	f<<"Minimum searching:\n";
 	dumpExtremaContour(f, extrema);
-//#endif
+#endif
 
 }
 
@@ -374,12 +378,12 @@ void CRom::maximize() {
 	extrema = minimize(init());
 	answerValue = -contour_cost(extrema);
 
-//#ifdef _DEBUG
+#ifdef _DEBUG
 	ofstream f;
 	f.open("./extrema.ids", ios_base::out | ios_base::app | ios_base::ate);
 	f<<"\n\nMaximum searching:\n";
 	dumpExtremaContour(f, extrema);
-//#endif
+#endif
 
 }
 
@@ -403,8 +407,6 @@ public:
 	int num;
 	static int number;
 	myAllocator() {
-		number++;
-		num = number;
 	}
 
 	myAllocator(const myAllocator& al) {
@@ -414,6 +416,10 @@ public:
 	myAllocator& operator =(const myAllocator& al) {
 		num = al.num;
 	}
+    void init() {
+   		number++;
+		num = number;
+    }
 };
 
 int CRom::myAllocator::number = 0;
@@ -421,10 +427,10 @@ int CRom::myAllocator::number = 0;
 void CRom::dumpGraph() {
 	
 	for (EGraphIterator it = egraph.begin(); it != egraph.end(); it++ ) {
-		ids[it->second];
+		ids[it->second].init();
 	}
 
-	int t = ids[egraph.begin()->second].num-1;
+	int t = 0;//ids[egraph.begin()->second].num-1;
 
 	ids_subber = t;
 //*

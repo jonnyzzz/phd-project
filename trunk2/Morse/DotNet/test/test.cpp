@@ -13,33 +13,21 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+void testRomFromFile(char* fileIn);
+void runTests();
+
 
 int _tmain(int argc, _TCHAR* argv[]) {
-    cout<<"Test starts\n\n";
+    testRomFromFile("o:\\aaaa");
 
+}
+
+void runTests() {
+    cout<<"Test starts\n\n";
     TestRunner testRunner(cout);
     CalculatorTest test(cout);
-
-
-    //testRunner.RunTest(&tb);
     testRunner.RunTest(&test);
-
-
-
 }
-
-
-/*
-
-void dumpGraphComponents(GraphComponents* cms, int number = -1);
-
-void deleteGraphComponents(GraphComponents* cms) {
-	for (int i=0; i<cms->length(); i++) {
-		delete cms->getAt(i);
-	}
-	delete cms;
-}
-
 
 void testRomFromFile(char* fileIn) {
 	char buff[555];
@@ -67,6 +55,20 @@ void testRomFromFile(char* fileIn) {
 	o.close();
 	delete eg.graph;
 }
+
+/*
+
+void dumpGraphComponents(GraphComponents* cms, int number = -1);
+
+void deleteGraphComponents(GraphComponents* cms) {
+	for (int i=0; i<cms->length(); i++) {
+		delete cms->getAt(i);
+	}
+	delete cms;
+}
+
+
+
 
 
 

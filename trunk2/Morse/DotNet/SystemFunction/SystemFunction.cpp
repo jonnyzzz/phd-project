@@ -1,6 +1,14 @@
 #include "StdAfx.h"
 #include ".\systemfunction.h"
 
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 SystemFunction::SystemFunction(FunctionFactory* factory, int dimension, int iterations) : ISystemFunction(dimension, iterations)
 {
     this->factory = factory;
@@ -95,5 +103,10 @@ void SystemFunction::init() {
         native = new SystemNative(funcs, vars, computationChain.back()->getOutput(), allocateDoubleArray(funcs.size()*3));
         computationChain.push_back(native);
     }
+    
+    for (SystemNativeFunctions::iterator it = funcs.begin(); it != funcs.end(); it++) {
+        delete *it;
+    }
+    
 }
 

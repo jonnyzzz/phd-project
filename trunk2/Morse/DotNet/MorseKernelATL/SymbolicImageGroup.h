@@ -42,7 +42,8 @@ class ATL_NO_VTABLE CSymbolicImageGroup :
 	public ISymbolicImageGroup,
 	public ISubdevidable,
 	public ISubdevidablePoint,
-//	public IExtendable,
+	public IExtendable,
+    public IComputationExtendingResult,
 	public IGroupNode,
 	public IExportData,
 	private GraphSaver
@@ -70,24 +71,36 @@ private:
 
 public:
 
+    //IGroupNode
 	STDMETHOD(addNode)(ISymbolicImageGraph* im);
 	STDMETHOD(removeNode)(ISymbolicImageGraph* im);
 	STDMETHOD(nodeCount)(int* val);
 
+
+    //IKernelNode
     STDMETHOD(get_kernel)(IKernelPointer** pVal);
     STDMETHOD(putref_kernel)(IKernelPointer* newVal);	
 
+    //IGraphNode
 	STDMETHOD(acceptChilds)(void** data);
-
 	STDMETHOD(graphInfo)(IGraphInfo** info);
 	STDMETHOD(graphDimension)(int* val);
 
+    //ISubdevidable
 	STDMETHOD(Subdevide)(ISubdevideParams* params);
+
+    //ISubdevidablePoint
 	STDMETHOD(SubdevidePoint)(ISubdevidePointParams* params);
-	STDMETHOD(Extend)(IExtendableParams* params);
 
-	STDMETHOD(NewDimension)(int* value);	
+    //IExtendable
+	STDMETHOD(Extend)();
 
+    //IComputationExtendingResult
+    STDMETHOD(PointMethodProjectiveExtension)(IExtendablePointParams* params);
+    STDMETHOD(PointMethodProjectiveExtensionDimension)(int* dim);
+
+
+    //IExportable
 	STDMETHOD(ExportData)(BSTR fileName);
 	
 };

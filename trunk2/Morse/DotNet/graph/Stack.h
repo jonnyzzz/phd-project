@@ -14,7 +14,7 @@ struct Node;
 class Stack  
 {
 public:
-	Stack();
+	Stack(Graph* graph);
 	virtual ~Stack();
 
 public:
@@ -31,7 +31,7 @@ private:
 	};
 
 	dataStack* root;
-
+    Graph* graph;
 };
 
 #endif // !defined(AFX_STACK_H__9AD856CD_279E_4297_B688_8C24CAA29BC1__INCLUDED_)

@@ -5,6 +5,12 @@
 #include "../cellimagebuilders/ProgressBarInfo.h"
 #include "segmentprojectiveextensionmorsefunction.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 
 
 SermentProjectiveExtensionInfo::SermentProjectiveExtensionInfo(ISystemFunctionDerivate* function) :

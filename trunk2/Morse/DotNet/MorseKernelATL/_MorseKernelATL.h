@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Jan 13 23:48:20 2005
+/* at Mon Jan 17 00:12:19 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -177,12 +177,6 @@ typedef interface IFunction IFunction;
 #endif 	/* __IFunction_FWD_DEFINED__ */
 
 
-#ifndef __IKernelEvents_FWD_DEFINED__
-#define __IKernelEvents_FWD_DEFINED__
-typedef interface IKernelEvents IKernelEvents;
-#endif 	/* __IKernelEvents_FWD_DEFINED__ */
-
-
 #ifndef __IKernel_FWD_DEFINED__
 #define __IKernel_FWD_DEFINED__
 typedef interface IKernel IKernel;
@@ -193,6 +187,12 @@ typedef interface IKernel IKernel;
 #define __IComputationGraphResultExt_FWD_DEFINED__
 typedef interface IComputationGraphResultExt IComputationGraphResultExt;
 #endif 	/* __IComputationGraphResultExt_FWD_DEFINED__ */
+
+
+#ifndef __IComputationResultWrapper_FWD_DEFINED__
+#define __IComputationResultWrapper_FWD_DEFINED__
+typedef interface IComputationResultWrapper IComputationResultWrapper;
+#endif 	/* __IComputationResultWrapper_FWD_DEFINED__ */
 
 
 #ifndef __IDummy_FWD_DEFINED__
@@ -243,6 +243,12 @@ typedef interface IProjectiveBundleGroup IProjectiveBundleGroup;
 #endif 	/* __IProjectiveBundleGroup_FWD_DEFINED__ */
 
 
+#ifndef __IKernelNodeWrapper_FWD_DEFINED__
+#define __IKernelNodeWrapper_FWD_DEFINED__
+typedef interface IKernelNodeWrapper IKernelNodeWrapper;
+#endif 	/* __IKernelNodeWrapper_FWD_DEFINED__ */
+
+
 #ifndef __CGraphInfo_FWD_DEFINED__
 #define __CGraphInfo_FWD_DEFINED__
 
@@ -279,6 +285,12 @@ typedef struct CFunction CFunction;
 #endif 	/* __CFunction_FWD_DEFINED__ */
 
 
+#ifndef __IKernelEvents_FWD_DEFINED__
+#define __IKernelEvents_FWD_DEFINED__
+typedef interface IKernelEvents IKernelEvents;
+#endif 	/* __IKernelEvents_FWD_DEFINED__ */
+
+
 #ifndef __CKernel_FWD_DEFINED__
 #define __CKernel_FWD_DEFINED__
 
@@ -301,6 +313,18 @@ typedef struct CComputationGraphResult CComputationGraphResult;
 #endif /* __cplusplus */
 
 #endif 	/* __CComputationGraphResult_FWD_DEFINED__ */
+
+
+#ifndef __CComputationResultWrapper_FWD_DEFINED__
+#define __CComputationResultWrapper_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CComputationResultWrapper CComputationResultWrapper;
+#else
+typedef struct CComputationResultWrapper CComputationResultWrapper;
+#endif /* __cplusplus */
+
+#endif 	/* __CComputationResultWrapper_FWD_DEFINED__ */
 
 
 #ifndef __CDummy_FWD_DEFINED__
@@ -373,6 +397,18 @@ typedef struct CProjectiveBundleGroup CProjectiveBundleGroup;
 #endif /* __cplusplus */
 
 #endif 	/* __CProjectiveBundleGroup_FWD_DEFINED__ */
+
+
+#ifndef __CKernelNodeWrapper_FWD_DEFINED__
+#define __CKernelNodeWrapper_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CKernelNodeWrapper CKernelNodeWrapper;
+#else
+typedef struct CKernelNodeWrapper CKernelNodeWrapper;
+#endif /* __cplusplus */
+
+#endif 	/* __CKernelNodeWrapper_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -3823,257 +3859,6 @@ void __RPC_STUB IFunction_getSystemFunctionDerivate_Stub(
 #endif 	/* __IFunction_INTERFACE_DEFINED__ */
 
 
-#ifndef __IKernelEvents_INTERFACE_DEFINED__
-#define __IKernelEvents_INTERFACE_DEFINED__
-
-/* interface IKernelEvents */
-/* [helpstring][uuid][dual][object] */ 
-
-
-EXTERN_C const IID IID_IKernelEvents;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("7B44B0BB-0C63-4216-80B1-E228565DF73D")
-    IKernelEvents : public IDispatch
-    {
-    public:
-        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InternalException( 
-            /* [in] */ BSTR message) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE KernelFunctionChanged( 
-            /* [in] */ IFunction *oldFunction,
-            /* [in] */ IFunction *newFunction) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE newComputationResult( 
-            /* [in] */ IKernelNode *nodeParent,
-            /* [in] */ IComputationResult *result) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE newKernelNode( 
-            /* [in] */ IKernelNode *nodeParent,
-            /* [in] */ IKernelNode *node) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE noImplementation( 
-            /* [in] */ IKernelNode *nodeParent) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE noChilds( 
-            /* [in] */ IKernelNode *nodeParent) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IKernelEventsVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IKernelEvents * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IKernelEvents * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IKernelEvents * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IKernelEvents * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IKernelEvents * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IKernelEvents * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IKernelEvents * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InternalException )( 
-            IKernelEvents * This,
-            /* [in] */ BSTR message);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *KernelFunctionChanged )( 
-            IKernelEvents * This,
-            /* [in] */ IFunction *oldFunction,
-            /* [in] */ IFunction *newFunction);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *newComputationResult )( 
-            IKernelEvents * This,
-            /* [in] */ IKernelNode *nodeParent,
-            /* [in] */ IComputationResult *result);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *newKernelNode )( 
-            IKernelEvents * This,
-            /* [in] */ IKernelNode *nodeParent,
-            /* [in] */ IKernelNode *node);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *noImplementation )( 
-            IKernelEvents * This,
-            /* [in] */ IKernelNode *nodeParent);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *noChilds )( 
-            IKernelEvents * This,
-            /* [in] */ IKernelNode *nodeParent);
-        
-        END_INTERFACE
-    } IKernelEventsVtbl;
-
-    interface IKernelEvents
-    {
-        CONST_VTBL struct IKernelEventsVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IKernelEvents_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IKernelEvents_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IKernelEvents_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IKernelEvents_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IKernelEvents_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IKernelEvents_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IKernelEvents_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IKernelEvents_InternalException(This,message)	\
-    (This)->lpVtbl -> InternalException(This,message)
-
-#define IKernelEvents_KernelFunctionChanged(This,oldFunction,newFunction)	\
-    (This)->lpVtbl -> KernelFunctionChanged(This,oldFunction,newFunction)
-
-#define IKernelEvents_newComputationResult(This,nodeParent,result)	\
-    (This)->lpVtbl -> newComputationResult(This,nodeParent,result)
-
-#define IKernelEvents_newKernelNode(This,nodeParent,node)	\
-    (This)->lpVtbl -> newKernelNode(This,nodeParent,node)
-
-#define IKernelEvents_noImplementation(This,nodeParent)	\
-    (This)->lpVtbl -> noImplementation(This,nodeParent)
-
-#define IKernelEvents_noChilds(This,nodeParent)	\
-    (This)->lpVtbl -> noChilds(This,nodeParent)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IKernelEvents_InternalException_Proxy( 
-    IKernelEvents * This,
-    /* [in] */ BSTR message);
-
-
-void __RPC_STUB IKernelEvents_InternalException_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IKernelEvents_KernelFunctionChanged_Proxy( 
-    IKernelEvents * This,
-    /* [in] */ IFunction *oldFunction,
-    /* [in] */ IFunction *newFunction);
-
-
-void __RPC_STUB IKernelEvents_KernelFunctionChanged_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IKernelEvents_newComputationResult_Proxy( 
-    IKernelEvents * This,
-    /* [in] */ IKernelNode *nodeParent,
-    /* [in] */ IComputationResult *result);
-
-
-void __RPC_STUB IKernelEvents_newComputationResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IKernelEvents_newKernelNode_Proxy( 
-    IKernelEvents * This,
-    /* [in] */ IKernelNode *nodeParent,
-    /* [in] */ IKernelNode *node);
-
-
-void __RPC_STUB IKernelEvents_newKernelNode_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IKernelEvents_noImplementation_Proxy( 
-    IKernelEvents * This,
-    /* [in] */ IKernelNode *nodeParent);
-
-
-void __RPC_STUB IKernelEvents_noImplementation_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IKernelEvents_noChilds_Proxy( 
-    IKernelEvents * This,
-    /* [in] */ IKernelNode *nodeParent);
-
-
-void __RPC_STUB IKernelEvents_noChilds_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IKernelEvents_INTERFACE_DEFINED__ */
-
-
 #ifndef __IKernel_INTERFACE_DEFINED__
 #define __IKernel_INTERFACE_DEFINED__
 
@@ -4561,6 +4346,160 @@ void __RPC_STUB IComputationGraphResultExt_setGraphNode_Stub(
 
 
 #endif 	/* __IComputationGraphResultExt_INTERFACE_DEFINED__ */
+
+
+#ifndef __IComputationResultWrapper_INTERFACE_DEFINED__
+#define __IComputationResultWrapper_INTERFACE_DEFINED__
+
+/* interface IComputationResultWrapper */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IComputationResultWrapper;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("A1C8B730-B824-4A90-878A-27AB1D493208")
+    IComputationResultWrapper : public IDispatch
+    {
+    public:
+        virtual /* [id][propputref] */ HRESULT STDMETHODCALLTYPE putref_ComputationResult( 
+            /* [in] */ IComputationResult *result) = 0;
+        
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_ComputationResult( 
+            /* [retval][out] */ IComputationResult **result) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IComputationResultWrapperVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IComputationResultWrapper * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IComputationResultWrapper * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IComputationResultWrapper * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IComputationResultWrapper * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IComputationResultWrapper * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IComputationResultWrapper * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IComputationResultWrapper * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ComputationResult )( 
+            IComputationResultWrapper * This,
+            /* [in] */ IComputationResult *result);
+        
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ComputationResult )( 
+            IComputationResultWrapper * This,
+            /* [retval][out] */ IComputationResult **result);
+        
+        END_INTERFACE
+    } IComputationResultWrapperVtbl;
+
+    interface IComputationResultWrapper
+    {
+        CONST_VTBL struct IComputationResultWrapperVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IComputationResultWrapper_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IComputationResultWrapper_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IComputationResultWrapper_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IComputationResultWrapper_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IComputationResultWrapper_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IComputationResultWrapper_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IComputationResultWrapper_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IComputationResultWrapper_putref_ComputationResult(This,result)	\
+    (This)->lpVtbl -> putref_ComputationResult(This,result)
+
+#define IComputationResultWrapper_get_ComputationResult(This,result)	\
+    (This)->lpVtbl -> get_ComputationResult(This,result)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id][propputref] */ HRESULT STDMETHODCALLTYPE IComputationResultWrapper_putref_ComputationResult_Proxy( 
+    IComputationResultWrapper * This,
+    /* [in] */ IComputationResult *result);
+
+
+void __RPC_STUB IComputationResultWrapper_putref_ComputationResult_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id][propget] */ HRESULT STDMETHODCALLTYPE IComputationResultWrapper_get_ComputationResult_Proxy( 
+    IComputationResultWrapper * This,
+    /* [retval][out] */ IComputationResult **result);
+
+
+void __RPC_STUB IComputationResultWrapper_get_ComputationResult_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IComputationResultWrapper_INTERFACE_DEFINED__ */
 
 
 #ifndef __IDummy_INTERFACE_DEFINED__
@@ -6036,6 +5975,160 @@ void __RPC_STUB IProjectiveBundleGroup_removeNode_Stub(
 #endif 	/* __IProjectiveBundleGroup_INTERFACE_DEFINED__ */
 
 
+#ifndef __IKernelNodeWrapper_INTERFACE_DEFINED__
+#define __IKernelNodeWrapper_INTERFACE_DEFINED__
+
+/* interface IKernelNodeWrapper */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IKernelNodeWrapper;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("571AE1AC-932B-4725-BF87-9291AB21DC54")
+    IKernelNodeWrapper : public IDispatch
+    {
+    public:
+        virtual /* [id][propputref] */ HRESULT STDMETHODCALLTYPE putref_KernelNode( 
+            /* [in] */ IKernelNode *node) = 0;
+        
+        virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_KernelNode( 
+            /* [retval][out] */ IKernelNode **node) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IKernelNodeWrapperVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IKernelNodeWrapper * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IKernelNodeWrapper * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IKernelNodeWrapper * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IKernelNodeWrapper * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IKernelNodeWrapper * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IKernelNodeWrapper * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IKernelNodeWrapper * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_KernelNode )( 
+            IKernelNodeWrapper * This,
+            /* [in] */ IKernelNode *node);
+        
+        /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_KernelNode )( 
+            IKernelNodeWrapper * This,
+            /* [retval][out] */ IKernelNode **node);
+        
+        END_INTERFACE
+    } IKernelNodeWrapperVtbl;
+
+    interface IKernelNodeWrapper
+    {
+        CONST_VTBL struct IKernelNodeWrapperVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IKernelNodeWrapper_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IKernelNodeWrapper_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IKernelNodeWrapper_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IKernelNodeWrapper_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IKernelNodeWrapper_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IKernelNodeWrapper_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IKernelNodeWrapper_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IKernelNodeWrapper_putref_KernelNode(This,node)	\
+    (This)->lpVtbl -> putref_KernelNode(This,node)
+
+#define IKernelNodeWrapper_get_KernelNode(This,node)	\
+    (This)->lpVtbl -> get_KernelNode(This,node)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id][propputref] */ HRESULT STDMETHODCALLTYPE IKernelNodeWrapper_putref_KernelNode_Proxy( 
+    IKernelNodeWrapper * This,
+    /* [in] */ IKernelNode *node);
+
+
+void __RPC_STUB IKernelNodeWrapper_putref_KernelNode_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id][propget] */ HRESULT STDMETHODCALLTYPE IKernelNodeWrapper_get_KernelNode_Proxy( 
+    IKernelNodeWrapper * This,
+    /* [retval][out] */ IKernelNode **node);
+
+
+void __RPC_STUB IKernelNodeWrapper_get_KernelNode_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IKernelNodeWrapper_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __MorseKernelATL_LIBRARY_DEFINED__
 #define __MorseKernelATL_LIBRARY_DEFINED__
@@ -6070,6 +6163,112 @@ class DECLSPEC_UUID("95B0D0F5-D7BD-48D8-B13A-5E5538F334E9")
 CFunction;
 #endif
 
+#ifndef __IKernelEvents_DISPINTERFACE_DEFINED__
+#define __IKernelEvents_DISPINTERFACE_DEFINED__
+
+/* dispinterface IKernelEvents */
+/* [helpstring][uuid] */ 
+
+
+EXTERN_C const IID DIID_IKernelEvents;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+
+    MIDL_INTERFACE("7B44B0BB-0C63-4216-80B1-E228565DF73D")
+    IKernelEvents : public IDispatch
+    {
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IKernelEventsVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IKernelEvents * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IKernelEvents * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IKernelEvents * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IKernelEvents * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IKernelEvents * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IKernelEvents * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IKernelEvents * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IKernelEventsVtbl;
+
+    interface IKernelEvents
+    {
+        CONST_VTBL struct IKernelEventsVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IKernelEvents_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IKernelEvents_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IKernelEvents_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IKernelEvents_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IKernelEvents_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IKernelEvents_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IKernelEvents_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+#endif 	/* __IKernelEvents_DISPINTERFACE_DEFINED__ */
+
+
 EXTERN_C const CLSID CLSID_CKernel;
 
 #ifdef __cplusplus
@@ -6084,6 +6283,14 @@ EXTERN_C const CLSID CLSID_CComputationGraphResult;
 
 class DECLSPEC_UUID("83FCA237-5E87-49D4-81EE-95BC812422FE")
 CComputationGraphResult;
+#endif
+
+EXTERN_C const CLSID CLSID_CComputationResultWrapper;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("637D25DB-555B-4E11-941F-CE9070E114DA")
+CComputationResultWrapper;
 #endif
 
 EXTERN_C const CLSID CLSID_CDummy;
@@ -6132,6 +6339,14 @@ EXTERN_C const CLSID CLSID_CProjectiveBundleGroup;
 
 class DECLSPEC_UUID("520018A2-475A-4FB5-A780-E1291049BAB5")
 CProjectiveBundleGroup;
+#endif
+
+EXTERN_C const CLSID CLSID_CKernelNodeWrapper;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("DA8FF7C4-8DA4-44C0-8D73-C34485B2E3D6")
+CKernelNodeWrapper;
 #endif
 #endif /* __MorseKernelATL_LIBRARY_DEFINED__ */
 

@@ -43,6 +43,9 @@ private:
 	int hash(const Edge* edge) const;
 	int hash(const Node* from, const Node* to) const;
 
+public:
+    int Hash(const Node* node) const;
+
 // Allocators
 private:	
 	Node* newNode(const JInt* cells);

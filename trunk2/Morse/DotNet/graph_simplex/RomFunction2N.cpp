@@ -2,6 +2,13 @@
 #include ".\romfunction2n.h"
 #include "../systemfunction/imorsefunction.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 CRomFunction2N::CRomFunction2N(IMorseFunction* function, Graph* graph) : CRom(graph)
 {
     this->input = function->getInput();

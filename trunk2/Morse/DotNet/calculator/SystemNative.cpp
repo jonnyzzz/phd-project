@@ -1,6 +1,13 @@
 #include "StdAfx.h"
 #include ".\systemnative.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 SystemNative::SystemNative(SystemNativeFunctions& functions, SystemNativeVariables& variables, double* input, double* output)
 {
     this->input = input;
@@ -21,6 +28,7 @@ SystemNative::~SystemNative(void)
     for(SystemNative::FunctionNatives::iterator it = natives.begin(); it != natives.end(); it++) {
         delete *it;
     }
+
 }
 
 

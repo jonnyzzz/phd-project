@@ -246,6 +246,9 @@
 				RelativePath=".\ComputationGraphResult.cpp">
 			</File>
 			<File
+				RelativePath=".\ComputationResultWrapper.cpp">
+			</File>
+			<File
 				RelativePath=".\Dummy.cpp">
 			</File>
 			<File
@@ -262,6 +265,9 @@
 			</File>
 			<File
 				RelativePath=".\KernelException.cpp">
+			</File>
+			<File
+				RelativePath=".\KernelNodeWrapper.cpp">
 			</File>
 			<File
 				RelativePath=".\MorseKernelATL.cpp">
@@ -326,6 +332,9 @@
 				RelativePath=".\ComputationGraphResult.h">
 			</File>
 			<File
+				RelativePath=".\ComputationResultWrapper.h">
+			</File>
+			<File
 				RelativePath=".\Dummy.h">
 			</File>
 			<File
@@ -342,6 +351,9 @@
 			</File>
 			<File
 				RelativePath=".\KernelException.h">
+			</File>
+			<File
+				RelativePath=".\KernelNodeWrapper.h">
 			</File>
 			<File
 				RelativePath=".\MorseSpectrum.h">

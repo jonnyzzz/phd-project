@@ -66,10 +66,10 @@ void CFunction::cleanUP() {
 	SAFE_DELETE_ARR(space_max);
 	SAFE_DELETE_ARR(space_min);
 
-	SAFE_DELETE(factory);
     SAFE_DELETE(systemFunction);
     SAFE_DELETE(systemFunctionDerivate);
     SAFE_DELETE(projectiveExtensionInfo);
+    SAFE_DELETE(factory);
 	SAFE_DELETE(function);
     
 }

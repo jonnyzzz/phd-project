@@ -11,10 +11,6 @@
 #include ".\ComputationGraphResult.h"
 
 
-
-
-// CSymbolicImageGroup
-
 CSymbolicImageGroup::CSymbolicImageGroup() {
 	this->kernel = NULL;	
 }
@@ -36,6 +32,8 @@ void CSymbolicImageGroup::FinalRelease() {
 	TRACE_DESTRUCT(CSymbolicImageGroup);
 }
 
+
+//IGroupNode
 
 STDMETHODIMP CSymbolicImageGroup::addNode(ISymbolicImageGraph* im) {
 	im->AddRef();
@@ -61,6 +59,10 @@ STDMETHODIMP CSymbolicImageGroup::nodeCount(int* val) {
 	return S_OK;
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////
+//IKernelNode
+
 STDMETHODIMP CSymbolicImageGroup::get_kernel(IKernelPointer** pVal)
 {
 	kernel->QueryInterface(pVal);
@@ -77,65 +79,78 @@ STDMETHODIMP CSymbolicImageGroup::putref_kernel(IKernelPointer* newVal)
 	return S_OK;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////
+//IComputationExtendingResult
 
-GraphComponents* CSymbolicImageGroup::createGraphComponents() {
-	GraphComponents* cms = new GraphComponents();
-
-	for (ISymbolicImageListIterator it = nodeList.begin(); it != nodeList.end(); it++) {
-		Graph* graph;
-		(*it)->getGraph((void**)&graph);
-		cms->addGraphAsComponent(graph);
-	}
-
-	return cms;
-}
-
-STDMETHODIMP CSymbolicImageGroup::NewDimension(int* value) {
+STDMETHODIMP CSymbolicImageGroup::PointMethodProjectiveExtensionDimension(int* value) {
 	int val;
 	this->graphDimension(&val);
-	*value = val*2 -1;
+	*value = val*2;
 	return S_OK;
 }
 
-STDMETHODIMP CSymbolicImageGroup::Extend(IExtendableParams* params) {
+STDMETHODIMP CSymbolicImageGroup::PointMethodProjectiveExtension(IExtendablePointParams* params) {
 
-	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
+  	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
 	pinfo->start();
 
-	GraphComponents* cmst = createGraphComponents();
+	int dim;
+    this->PointMethodProjectiveExtensionDimension(&dim);
 
-	if (cmst->length() == 0) {
-        kernel->EventNoChilds(this);		
-		delete cmst;
-		return S_OK;
-	}
+    GraphComponents* cms = createGraphComponents();    
+    
+    ATLASSERT(cms->length() > 0);
 
-	int dim2;
-	this->NewDimension(&dim2);
-	JInt* factor = new JInt[dim2];
-
-	for (int i=0; i<dim2; i++) {
+    Graph* graph = cms->getAt(0);
+    
+	
+	JInt* factor = new JInt[dim];
+	for (int i = 0; i<dim; i++) {
 		params->getCellDevider(i, &factor[i]);
 	}
 
-	Graph* result = Computator().toMS(cmst, factor);
+    IFunction* function;
+    kernel->get_Function(&function);
+    ISystemFunctionDerivate* dfunc;
+    function->getSystemFunctionDerivate((void**)&dfunc);
 
-	delete cmst;
-	delete[] factor;
-	
+    SermentProjectiveExtensionInfo info(dfunc);
 
+    AbstractProcess* proc = info.graphExtender(graph, factor, pinfo);
+    proc->start();
+    for (int i=0; i<cms->length(); i++) {
+        proc->processNextGraph(cms->getAt(i));
+    }
+
+    Graph* result = proc->result();
+
+    delete proc;
+		
 	IProjectiveBundleGraph* im;
 	CProjectiveBundleGraph::CreateInstance(&im);
-	
+    
 	im->putref_kernel(kernel);
-	im->setGraph((void*)result);		
+	im->setGraph((void*)result);			
 
     kernel->EventNewNode(this, im);
-	
-	pinfo->finish();
-	delete pinfo;
+
+	delete[] factor;
+    delete cms;
+    pinfo->finish();
+    delete pinfo;
+
+    SAFE_RELEASE(function);
+
 	return S_OK;
 }
+
+STDMETHODIMP CSymbolicImageGroup::Extend() {
+    this->AddRef();
+    kernel->EventNewComputationResult(this, this);
+
+    return S_OK;
+}
+
 
 
 STDMETHODIMP CSymbolicImageGroup::Subdevide(ISubdevideParams* params) {
@@ -306,4 +321,19 @@ STDMETHODIMP CSymbolicImageGroup::ExportData(BSTR fileName) {
 	HRESULT hr = SaveGraphToFile(cms, CString(fileName));
 	delete cms;
 	return hr;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+// Internal
+
+GraphComponents* CSymbolicImageGroup::createGraphComponents() {
+	GraphComponents* cms = new GraphComponents();
+
+	for (ISymbolicImageListIterator it = nodeList.begin(); it != nodeList.end(); it++) {
+		Graph* graph;
+		(*it)->getGraph((void**)&graph);
+		cms->addGraphAsComponent(graph);
+	}
+
+	return cms;
 }

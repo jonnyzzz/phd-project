@@ -3,6 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
+#include "Graph.h"
 #include "Stack.h"
 
 #ifdef _DEBUG
@@ -15,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-Stack::Stack()
+Stack::Stack(Graph*)
 {
 	root = NULL;
 }

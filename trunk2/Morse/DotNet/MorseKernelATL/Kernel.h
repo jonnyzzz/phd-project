@@ -8,24 +8,22 @@
 #include <list>
 
 [
-	object,
-	dual,
+	dispinterface,
 	uuid("7B44B0BB-0C63-4216-80B1-E228565DF73D"),
 	helpstring("IKernelEvent class")
 ]
+//, helpstring("Wrapper object will be Released after end of Event call. Hack for GarbageCollection in COM Interop")
 __interface IKernelEvents {	
 	[id(1), helpstring("Exception handler.")] 
-		HRESULT InternalException([in] BSTR message);		 
-	[id(3)]
-		HRESULT KernelFunctionChanged([in] IFunction* oldFunction, [in] IFunction* newFunction);
-    [id(43)]
-		HRESULT newComputationResult([in] IKernelNode* nodeParent, [in] IComputationResult* result);
+		HRESULT InternalException([in] BSTR message);		 	
+    [id(43)] 
+        HRESULT newComputationResult([in] IKernelNode* nodeParent, [in] IComputationResult* result);
 	[id(44)]
-		HRESULT newKernelNode([in] IKernelNode* nodeParent, [in] IKernelNode* node);
+        HRESULT newKernelNode([in] IKernelNode* nodeParent, [in] IKernelNode* node);
 	[id(45)]
-		HRESULT noImplementation([in] IKernelNode* nodeParent);
+        HRESULT noImplementation([in] IKernelNode* nodeParent);
 	[id(46)]
-		HRESULT noChilds([in] IKernelNode* nodeParent);
+        HRESULT noChilds([in] IKernelNode* nodeParent);
 
 		
 };
@@ -122,10 +120,6 @@ public:
     STDMETHOD(EventNewComputationResult)(IKernelNode* parentNode, IComputationResult* nodeCResult);
     STDMETHOD(EventNoChilds)(IKernelNode* nodeParent);
     STDMETHOD(EventNoImplementation)(IKernelNode* nodeParent);
-
-private:
-    typedef list<IKernelNode*> NodesList;
-    NodesList nodeList;
 };
 
 

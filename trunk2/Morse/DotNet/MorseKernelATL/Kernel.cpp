@@ -30,9 +30,6 @@ HRESULT CKernel::FinalConstruct() {
 void CKernel::FinalRelease() {
 	SAFE_RELEASE(this->function);
 
-    for (NodesList::iterator it = nodeList.begin(); it != nodeList.end(); it++) {
-        (*it)->Release();
-    }
 	TRACE_DESTRUCT(CKernel);
 	
 }
@@ -56,10 +53,7 @@ STDMETHODIMP CKernel::get_Function(IFunction** pVal) {
 }
 
 STDMETHODIMP CKernel::putref_Function(IFunction* newVal) {
-	if (function != NULL) {
-		__raise KernelFunctionChanged(function, newVal);			
-		function->Release();
-	}
+    SAFE_RELEASE(this->function);
 	newVal->QueryInterface(&function);
 	return S_OK;
 }
@@ -121,13 +115,17 @@ void CKernel::RaiseInternalExceptionEvent(const KernelException& ex) {
 
 STDMETHODIMP CKernel::EventNewComputationResult(IKernelNode* nodeParent, IComputationResult* result) {
     cout<<"newComputationResult Event \n";
+    
     __raise newComputationResult(nodeParent, result);
+
+    result->Release();
+
     return S_OK;
 }
 
 STDMETHODIMP CKernel::EventNewNode(IKernelNode* nodeParent, IKernelNode* nodeChild) {
-    nodeList.push_back(nodeChild);
     __raise newKernelNode(nodeParent, nodeChild);
+    nodeChild->Release();
     return S_OK;
 }
 

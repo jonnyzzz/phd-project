@@ -312,52 +312,30 @@ interface IFunction : IDispatch {
 
 [
 	object,
-	dual,
-	uuid(7B44B0BB-0C63-4216-80B1-E228565DF73D),
-	helpstring("IKernelEvent class")
-] 
-#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
-interface IKernelEvents : IDispatch {
-#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
-	[id(1),helpstring("Exception handler.")] HRESULT  InternalException([in] BSTR message);
-#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
-	[id(3)] HRESULT  KernelFunctionChanged([in] IFunction *oldFunction, [in] IFunction *newFunction);
-#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
-	[id(43)] HRESULT  newComputationResult([in] IKernelNode *nodeParent, [in] IComputationResult *result);
-#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
-	[id(44)] HRESULT  newKernelNode([in] IKernelNode *nodeParent, [in] IKernelNode *node);
-#line 26 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
-	[id(45)] HRESULT  noImplementation([in] IKernelNode *nodeParent);
-#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
-	[id(46)] HRESULT  noChilds([in] IKernelNode *nodeParent);
-};
-
-[
-	object,
 	uuid(8D366F71-EA60-4812-AFCD-BC5A20297FDD),
 	dual,
 	helpstring("IKernel Interface"),
 	pointer_default(unique)
 ] 
-#line 41 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 39 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 interface IKernel : IKernelPointer {
-#line 44 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 42 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	[propget,id(2),helpstring("property Function")] HRESULT  Function([out,retval] IFunction **pVal );
-#line 46 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 44 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	[propputref,id(2),helpstring("property Function")] HRESULT  Function([in] IFunction *newVal);
-#line 49 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 47 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	[id(3),helpstring("Creates a initial graph node. type should be ISymbolicImage")] HRESULT  CreateRootSymbolicImage([out,retval] IKernelNode **pVal );
-#line 52 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 50 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	[id(4)] HRESULT  CreateSymbolicImageGroup([out,retval] IKernelNode **node );
-#line 54 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 52 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	[id(5)] HRESULT  CreateProjectiveBundleGroup([out,retval] IKernelNode **node );
-#line 60 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 58 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	[id(6)] HRESULT  EventNewNode([in] IKernelNode *nodeParent, [in] IKernelNode *nodeChild);
-#line 62 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 60 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	[id(7)] HRESULT  EventNewComputationResult([in] IKernelNode *nodeParent, [in] IComputationResult *nodeCResult);
-#line 64 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 62 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	[id(8)] HRESULT  EventNoChilds([in] IKernelNode *nodeParent);
-#line 66 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 64 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	[id(9)] HRESULT  EventNoImplementation([in] IKernelNode *nodeParent);
 };
 
@@ -374,6 +352,21 @@ interface IComputationGraphResultExt : IComputationGraphResult {
 	[id(101),local,hidden] HRESULT  setRootGraph([in] void **graph );
 #line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\computationgraphresult.h"
 	[id(102),local,hidden] HRESULT  setGraphNode([in] IGraph *node);
+};
+
+[
+	object,
+	uuid(A1C8B730-B824-4A90-878A-27AB1D493208),
+	dual,
+	helpstring("IComputationResultWrapper Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\computationresultwrapper.h"
+interface IComputationResultWrapper : IDispatch {
+#line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\computationresultwrapper.h"
+	[propputref,id(1)] HRESULT  ComputationResult([in] IComputationResult *result);
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\computationresultwrapper.h"
+	[propget,id(1)] HRESULT  ComputationResult([out,retval] IComputationResult **result );
 };
 
 [
@@ -491,6 +484,21 @@ interface IProjectiveBundleGroup : IProjectiveBundle {
 	[id(11)] HRESULT  removeNode([in] IProjectiveBundleGraph *img);
 };
 
+[
+	object,
+	uuid(571AE1AC-932B-4725-BF87-9291AB21DC54),
+	dual,
+	helpstring("IKernelNodeWrapper Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernelnodewrapper.h"
+interface IKernelNodeWrapper : IDispatch {
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernelnodewrapper.h"
+	[propputref,id(1)] HRESULT  KernelNode([in] IKernelNode *node);
+#line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernelnodewrapper.h"
+	[propget,id(1)] HRESULT  KernelNode([out,retval] IKernelNode **node );
+};
+
 
 [ version(1.0), uuid(13645F55-EF1A-4222-A209-709DC3A6E782), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{58BF9B64-D15E-4C43-9BA5-D579CF30099C}"), helpstring("MorseKernelATL") ]
 library MorseKernelATL
@@ -530,11 +538,32 @@ library MorseKernelATL
 	};
 
 	[
+		uuid(7B44B0BB-0C63-4216-80B1-E228565DF73D),
+		helpstring("IKernelEvent class")
+	] 
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+	dispinterface IKernelEvents {
+	properties:
+
+	methods:
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+		[id(1),helpstring("Exception handler.")] HRESULT  InternalException([in] BSTR message);
+#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+		[id(43)] HRESULT  newComputationResult([in] IKernelNode *nodeParent, [in] IComputationResult *result);
+#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+		[id(44)] HRESULT  newKernelNode([in] IKernelNode *nodeParent, [in] IKernelNode *node);
+#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+		[id(45)] HRESULT  noImplementation([in] IKernelNode *nodeParent);
+#line 26 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+		[id(46)] HRESULT  noChilds([in] IKernelNode *nodeParent);
+	};
+
+	[
 		version(1.0),
 		uuid(4C18DA89-C2C3-480B-8099-149918E4AE43),
 		helpstring("Kernel Class")
 	] 
-#line 84 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
+#line 82 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernel.h"
 	coclass CKernel {
 		interface IKernel;
 		interface IKernelPointer;
@@ -551,6 +580,16 @@ library MorseKernelATL
 		interface IComputationGraphResultExt;
 		interface IComputationGraphResult;
 		interface IComputationResult;
+	};
+
+	[
+		version(1.0),
+		uuid(637D25DB-555B-4E11-941F-CE9070E114DA),
+		helpstring("ComputationResultWrapper Class")
+	] 
+#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\computationresultwrapper.h"
+	coclass CComputationResultWrapper {
+		interface IComputationResultWrapper;
 	};
 
 	[
@@ -610,6 +649,9 @@ library MorseKernelATL
 		interface IKernelNode;
 		interface ISubdevidable;
 		interface ISubdevidablePoint;
+		interface IExtendable;
+		interface IComputationExtendingResult;
+		interface IComputationResult;
 		interface IGroupNode;
 		interface IExportData;
 	};
@@ -644,6 +686,16 @@ library MorseKernelATL
 		interface ISubdevidablePoint;
 		interface IGroupNode;
 		interface IExportData;
+	};
+
+	[
+		version(1.0),
+		uuid(DA8FF7C4-8DA4-44C0-8D73-C34485B2E3D6),
+		helpstring("KernelNodeWrapper Class")
+	] 
+#line 37 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernelatl\\kernelnodewrapper.h"
+	coclass CKernelNodeWrapper {
+		interface IKernelNodeWrapper;
 	};
 
 }
