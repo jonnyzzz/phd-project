@@ -36,7 +36,7 @@ namespace gui2.ActionPerformer
 			ResultSet resultSet = chain.Do(result, progressBarInfo);
 			Logger.Logger.LogMessage("Comutation result set = {0}", resultSet.ToString());
 
-			if (NewNode != null)
+			if (NewNode != null && chain.PublishResults)
 			{
 				KernelNode[] nodes = resultSet.ToNodes;
 				foreach (KernelNode kernelNode in nodes)

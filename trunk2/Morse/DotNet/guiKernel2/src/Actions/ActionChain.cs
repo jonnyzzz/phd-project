@@ -8,8 +8,7 @@ namespace guiKernel2.Actions
 	/// Summary description for ComputationChain.
 	/// </summary>
 	public class ActionChain
-	{
-		
+	{		
 		ArrayList actions = new ArrayList();
 
 		public ActionChain()
@@ -30,6 +29,15 @@ namespace guiKernel2.Actions
 			get
 			{
 				return (ActionWrapper[])actions.ToArray(typeof(ActionWrapper));
+			}
+		}
+
+		public bool PublishResults
+		{
+			get
+			{
+				ActionWrapper[] actions = Actions;
+				return actions[actions.Length-1].PublishResults;
 			}
 		}
 

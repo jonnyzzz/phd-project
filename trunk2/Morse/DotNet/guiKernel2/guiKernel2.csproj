@@ -92,6 +92,11 @@
                     Lcid = "0"
                     WrapperTool = "tlbimp"
                 />
+                <Reference
+                    Name = "guiExternalResource"
+                    Project = "{9705EB3C-990B-485C-8B9F-64477FB0A933}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
             </References>
         </Build>
         <Files>
@@ -142,16 +147,6 @@
                 />
                 <File
                     RelPath = "src\ActionFactory\Constraints\AndConstraint.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\ActionFactory\Constraints\DefaultConstraint.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\ActionFactory\Constraints\DefaultConstraintFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

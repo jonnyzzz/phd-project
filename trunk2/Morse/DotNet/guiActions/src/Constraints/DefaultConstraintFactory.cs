@@ -1,8 +1,8 @@
 using System.Xml;
-using guiKernel2.ActionFactory.Constraints;
+using guiActions.Constraints;
 using guiKernel2.Constraints;
 
-namespace guiKernel2.ActionFactory.Constraints
+namespace guiActions.Constraints
 {
 	/// <summary>
 	/// Summary description for DefaultConstraintFactory.

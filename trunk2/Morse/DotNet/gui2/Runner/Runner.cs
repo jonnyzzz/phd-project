@@ -1,7 +1,9 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 using gui2.Forms;
 using gui2.TreeNodes;
+using guiExternalResource.Core;
 using guiKernel2.Document;
 using guiKernel2.Container;
 
@@ -17,20 +19,43 @@ namespace gui2.Runner
 		private Core core;
 		private bool isInternal;
 		private Document.Document document = null;
+		private ResourceManager resourceManager = null;
 
 		public Runner(CommandLineParser commandLine)
 		{
 			runner = this;
 			this.commandLine = commandLine;
-			this.core = Core.Instance;
-
-			this.computationForm = new ComputationForm();			
-			
 			isInternal = commandLine.hasKey("Internal");
+			this.core = new Core(IsInternal);
+
+			this.computationForm = new ComputationForm();						
+			this.resourceManager = guiExternalResource.Core.ResourceManager.Instance;
+		}
+
+		public ResourceManager ResourceManager
+		{
+			get { return resourceManager; }
 		}
 
 		protected void Start()
 		{
+			if (commandLine.hasKey("resources"))
+			{
+				ResourceManager.SetResourcePath(commandLine.getValue("resources"));	
+			} else
+			{
+				ResourceManager.SetResourcePath(Application.StartupPath + @"\resource\");
+			}
+			if (commandLine.hasKey("temporary"))
+			{
+				ResourceManager.SetTemporaryPath(commandLine.getValue("temporary"));
+			} else
+			{
+				ResourceManager.SetTemporaryPath(Path.GetTempPath()+ "/");
+			}
+			
+			ResourceManager.Start();
+
 			if (!commandLine.hasKey("verbose")) 
 			{
 				Application.Run(computationForm);

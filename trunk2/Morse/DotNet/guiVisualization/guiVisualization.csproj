@@ -3,13 +3,13 @@
         ProjectType = "Local"
         ProductVersion = "7.10.3077"
         SchemaVersion = "2.0"
-        ProjectGuid = "{197A3492-2764-42C8-B23B-BF040623EF7D}"
+        ProjectGuid = "{59CC2327-8B59-485A-8E76-3F34BE358B5B}"
     >
         <Build>
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "guiActions"
+                AssemblyName = "guiVisualization"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Library"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "guiActions"
+                RootNamespace = "guiVisualization"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -76,33 +76,8 @@
                 />
                 <Reference
                     Name = "System.XML"
-                    AssemblyName = "System.Xml"
+                    AssemblyName = "System.XML"
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
-                />
-                <Reference
-                    Name = "Logger"
-                    Project = "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-                <Reference
-                    Name = "System.Windows.Forms"
-                    AssemblyName = "System.Windows.Forms"
-                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Windows.Forms.dll"
-                />
-                <Reference
-                    Name = "System.Drawing"
-                    AssemblyName = "System.Drawing"
-                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
-                />
-                <Reference
-                    Name = "guiKernel2"
-                    Project = "{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
-                />
-                <Reference
-                    Name = "guiControls"
-                    Project = "{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}"
-                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
                     Name = "MorseKernel2"
@@ -111,6 +86,36 @@
                     VersionMinor = "0"
                     Lcid = "0"
                     WrapperTool = "tlbimp"
+                />
+                <Reference
+                    Name = "guiKernel2"
+                    Project = "{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "guiActions"
+                    Project = "{197A3492-2764-42C8-B23B-BF040623EF7D}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "System.Windows.Forms"
+                    AssemblyName = "System.Windows.Forms"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Windows.Forms.dll"
+                />
+                <Reference
+                    Name = "guiControls"
+                    Project = "{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "guiExternalResource"
+                    Project = "{9705EB3C-990B-485C-8B9F-64477FB0A933}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Logger"
+                    Project = "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
             </References>
         </Build>
@@ -122,112 +127,44 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\action\Action.cs"
+                    RelPath = "src\actionImpl\GnuPlot\GnuPlotAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\BoxMethod\BoxMethodAction.cs"
+                    RelPath = "src\actionImpl\GnuPlot\GnuPlotConstraintFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\BoxMethod\BoxMethodParameters.cs"
+                    RelPath = "src\actionImpl\GnuPlot\GnuPlotParameters.cs"
                     SubType = "UserControl"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\BoxMethod\BoxMethodParameters.resx"
-                    DependentUpon = "BoxMethodParameters.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "src\actionImpl\BoxMethod\BoxMethodParametersImpl.cs"
+                    RelPath = "src\KernelAction\GnuPlot\EmptyResultSet.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\PointMethod\PointMethodAction.cs"
+                    RelPath = "src\KernelAction\GnuPlot\GnuPlotScriptGen.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\PointMethod\PointMethodParameters.cs"
-                    SubType = "UserControl"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\actionImpl\PointMethod\PointMethodParameters.resx"
-                    DependentUpon = "PointMethodParameters.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "src\actionImpl\PointMethod\PointMethodParametersImpl.cs"
+                    RelPath = "src\KernelAction\GnuPlot\GnuPlotTemplate.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\Tarjan\TarjanAction.cs"
+                    RelPath = "src\KernelAction\GnuPlot\GnuPlotVisualizationKernelAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\Tarjan\TarjanParameters.cs"
-                    SubType = "UserControl"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\actionImpl\Tarjan\TarjanParameters.resx"
-                    DependentUpon = "TarjanParameters.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "src\actionImpl\Tarjan\TarjanParametersImpl.cs"
+                    RelPath = "src\KernelAction\GnuPlot\IGnuPlotVisualizationKernelParameters.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\Constraints\DefaultConstraint.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\Constraints\DefaultConstraintFactory.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\filter\Filter.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\parameters\ParameterControlMessageException.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\parameters\ParametersControl.cs"
-                    SubType = "UserControl"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\parameters\ParametersControl.resx"
-                    DependentUpon = "ParametersControl.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "src\parameters\ParametersControlException.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "xml\ActionMapping.xml"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "xml\messages.xml"
-                    BuildAction = "Content"
                 />
             </Include>
         </Files>

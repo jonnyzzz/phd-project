@@ -25,9 +25,14 @@ namespace gui2.TreeNodes
 			get { return string.Format("{0}", kernelNode.Caption); }
 		}
 
+		private MenuItem[] cachedMenuItems = null;
 		protected override MenuItem[] GetMenuItems()
 		{
-			return MenuItemFactory.CreateMenuItems(this, Filter.FilterActions(kernelNode.GetNextActions()));
+			if (cachedMenuItems == null) 
+			{
+				cachedMenuItems = MenuItemFactory.CreateMenuItems(this, Filter.FilterActions(kernelNode.GetNextActions()));
+			}
+			return cachedMenuItems;
 		}
 
 		public KernelNode KernelNode

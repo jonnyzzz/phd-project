@@ -1,9 +1,10 @@
 using System.Xml;
+using guiKernel2.Constraints;
 using guiKernel2.Container;
 using guiKernel2.Node;
 using MorseKernel2;
 
-namespace guiKernel2.Constraints
+namespace guiActions.Constraints
 {
 	/// <summary>
 	/// Summary description for DefaultConstraint.

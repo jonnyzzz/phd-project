@@ -33,6 +33,12 @@ namespace guiKernel2.Actions
 		protected abstract IParameters Parameters{ get; }
 		protected abstract IAction CreateAction();
 		
+		
+		public virtual bool PublishResults
+		{
+			get { return true; }
+		}
+		
 		public IResultSet Do(IResultSet input, IProgressBarInfo progressBarInfo)
 		{
 			IParameters parameters = Parameters;

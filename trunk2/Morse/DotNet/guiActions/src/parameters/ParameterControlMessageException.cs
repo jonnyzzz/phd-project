@@ -23,7 +23,7 @@ namespace guiActions.src.parameters
 			XmlDocument document = new XmlDocument();
 			document.Load(stream);
 			XmlNodeList list = document.SelectNodes(
-				string.Format("messages/{0}/message[@name=\"{1}\"", parameterName, ids )
+				string.Format("messages/{0}/message[@name=\"{1}\"]", parameterName, ids )
 				);
 
 			if (list.Count > 1) throw new ParametersContorlParserException("Too much same messages found");

@@ -1,7 +1,7 @@
 using guiKernel2.Constraints;
 using guiKernel2.Node;
 
-namespace guiKernel2.ActionFactory.Constraints
+namespace guiKernel2.Constraints
 {
 	/// <summary>
 	/// Summary description for AndConstraint.

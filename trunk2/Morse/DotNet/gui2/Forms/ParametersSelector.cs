@@ -39,8 +39,7 @@ namespace gui2.Forms
 		{
 			this.controls = OptimizeControls(controls);
 			InitializeComponent();
-			parameterIndex = 0;
-			ShowCurrentParameterControl();
+			parameterIndex = 0;			
 		}
 
 		private ParametersControl[] OptimizeControls(ParametersControl[] controls)
@@ -73,6 +72,7 @@ namespace gui2.Forms
 		public DialogResult ShowDialogOptimized(IWin32Window owner)
 		{
 			if (this.controls.Length == 0) return System.Windows.Forms.DialogResult.OK;
+			ShowCurrentParameterControl();
 			return ShowDialog(owner);
 		}
 

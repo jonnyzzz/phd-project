@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+
+<resources>
+
+  <strings>
+ 	<string key="data">value</string>
+  </strings>	
+  
+  
+  <xmls>
+	<gnuplot>
+		<exe>gnuplot\bin\pgnuplot.exe</exe>
+		<params>-noend {0} -</params>
+		
+		<templates>
+			<template dimension="2">
+				<header>plot</header>
+				<bodyTemplate>'$file$' with dots</bodyTemplate>
+				<delimiter>,</delimiter>
+			</template>
+			<template dimension="3">
+				<header>splot</header>
+				<bodyTemplate>'$file$' with dots</bodyTemplate>
+				<delimiter>,</delimiter>
+			</template>
+		</templates>
+	</gnuplot>  
+  </xmls>
+
+</resources>

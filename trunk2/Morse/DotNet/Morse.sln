@@ -93,6 +93,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorseKernel2PS", "MorseKern
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiKernel2", "guiKernel2\guiKernel2.csproj", "{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}"
 	ProjectSection(ProjectDependencies) = postProject
+		{FA02656D-A267-4B1F-A956-79236784E5CA} = {FA02656D-A267-4B1F-A956-79236784E5CA}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiControls", "guiControls\guiControls.csproj", "{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}"
@@ -108,6 +109,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csp
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiActions", "guiActions\guiActions.csproj", "{197A3492-2764-42C8-B23B-BF040623EF7D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiVisualization", "guiVisualization\guiVisualization.csproj", "{59CC2327-8B59-485A-8E76-3F34BE358B5B}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiExternalResource", "guiExternalResource\guiExternalResource.csproj", "{9705EB3C-990B-485C-8B9F-64477FB0A933}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -563,6 +572,54 @@ Global
 		{197A3492-2764-42C8-B23B-BF040623EF7D}.Test.Build.0 = Release|.NET
 		{197A3492-2764-42C8-B23B-BF040623EF7D}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{197A3492-2764-42C8-B23B-BF040623EF7D}.VisualizationDebug.Build.0 = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Debug.ActiveCfg = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Debug.Build.0 = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Debug2.ActiveCfg = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Debug2.Build.0 = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Debug2Gui.ActiveCfg = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Debug2Gui.Build.0 = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.DebugAll.ActiveCfg = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.DebugAll.Build.0 = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.DebugGL.ActiveCfg = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.DebugGL.Build.0 = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.DebugGUI.ActiveCfg = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.DebugGUI.Build.0 = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.DebugGui2.ActiveCfg = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.DebugGui2.Build.0 = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.FullDebug.ActiveCfg = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.FullDebug.Build.0 = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.NewDLL.ActiveCfg = Release|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.NewDLL.Build.0 = Release|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Release.ActiveCfg = Release|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Release.Build.0 = Release|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Test.ActiveCfg = Release|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Test.Build.0 = Release|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.VisualizationDebug.ActiveCfg = Debug|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.VisualizationDebug.Build.0 = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Debug.ActiveCfg = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Debug.Build.0 = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Debug2.ActiveCfg = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Debug2.Build.0 = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Debug2Gui.ActiveCfg = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Debug2Gui.Build.0 = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.DebugAll.ActiveCfg = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.DebugAll.Build.0 = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.DebugGL.ActiveCfg = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.DebugGL.Build.0 = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.DebugGUI.ActiveCfg = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.DebugGUI.Build.0 = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.DebugGui2.ActiveCfg = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.DebugGui2.Build.0 = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.FullDebug.ActiveCfg = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.FullDebug.Build.0 = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.NewDLL.ActiveCfg = Release|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.NewDLL.Build.0 = Release|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Release.ActiveCfg = Release|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Release.Build.0 = Release|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Test.ActiveCfg = Release|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Test.Build.0 = Release|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.VisualizationDebug.ActiveCfg = Debug|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.VisualizationDebug.Build.0 = Debug|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

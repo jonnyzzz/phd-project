@@ -29,9 +29,9 @@
     </names>
 
 	<assemblies>	
-		<actionAssembly name="guiActions"/>
-		<actionSource assembly="interop.MorseKernel2" />
-		<actionSource assembly="guiActions" />
+		<assembly name="guiActions"/>
+		<assembly name="guiVisualization"/>		
+		<assembly name="interop.MorseKernel2" />
 	</assemblies>
 
 </mappings>

@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using guiExternalResource.Core;
 using guiKernel2.ActionFactory;
 using guiKernel2.Document;
 using guiKernel2.src.ActionFactory;
 using guiKernel2.xml;
-using MorseKernel2;
 
 namespace guiKernel2.Container
 {
@@ -15,9 +14,15 @@ namespace guiKernel2.Container
 	/// </summary>
 	public class Core : IDisposable
 	{
-		public Core()
-		{			
+		private readonly bool isInternal;
+
+		public Core( bool isInternal)
+		{
+			this.isInternal = isInternal;
 			instance = this;
+
+			resourceManager = new ResourceManager(IsInternal);
+
 			nextActionFactory = new NextActionFactory();
 			actionNamingFactory = new ActionNamingFactory();
 
@@ -41,6 +46,7 @@ namespace guiKernel2.Container
 
 		public void Dispose()
 		{
+			if (resourceManager != null) resourceManager.Dispose();
 			nextActionFactory = null;
 			actionWrapperFactory = null;
 			assemblies = null;
@@ -82,18 +88,25 @@ namespace guiKernel2.Container
 		}
 
 		private static Core instance = null;
+		private ResourceManager resourceManager = null;
+
+		public ResourceManager ResourceManager
+		{
+			get { return resourceManager; }
+		}
+
 		public static Core Instance
 		{
 			get
 			{
-				if (instance == null)
-				{
-					new Core();
-				}
 				return instance;
 			}
 		}
 
+		public bool IsInternal
+		{
+			get { return isInternal; }
+		}
 
 		public static Type GetType(string name)
 		{

@@ -4,7 +4,6 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using guiKernel2.ActionFactory.ActionInfos;
-using guiKernel2.ActionFactory.Constraints;
 using guiKernel2.Constraints;
 using guiKernel2.Container;
 
@@ -13,7 +12,7 @@ namespace guiKernel2.xml
 	/// <summary>
 	/// Summary description for XMLParser.
 	/// </summary>
-	public class XMLParser
+	internal class XMLParser
 	{
 		private const string xmlMapping = "guiKernel2.xml.ActionMapping.xml";
 
@@ -59,7 +58,7 @@ namespace guiKernel2.xml
 
 		private void ParseAssemblyReference(XmlDocument document)
 		{
-			ParseActionAssemblies(document);			
+			ParseAssemblies(document);			
 			ProcessDocument(document, new Processor(ParseAssemblyReference));			
 		}
 
@@ -110,33 +109,17 @@ namespace guiKernel2.xml
 		}
 
 
-		private void ParseActionAssemblies(XmlDocument document)
+		private void ParseAssemblies(XmlDocument document)
 		{
-			ArrayList assembliesList = new ArrayList(implAssemblies);
-			XmlNodeList list = document.SelectNodes("mappings/assemblies/actionAssembly");
+			XmlNodeList list = document.SelectNodes("mappings/assemblies/assembly");
 			foreach (XmlNode node in list)
 			{
 				string assemblyName = node.Attributes["name"].Value;
 				Assembly assembly = Assembly.Load(assemblyName);
-				assembliesList.Add( assembly );
+				if(!assemblies.Contains(assembly)) assemblies.Add(assembly);
 
 				Logger.Logger.LogMessage("Loaded assembly: {0}", assembly.GetName());
 			}
-			this.implAssemblies = (Assembly[])assembliesList.ToArray(typeof(Assembly));
-
-
-			ArrayList assembliesSource = new ArrayList(actionSourceAssemblies);
-			list = document.SelectNodes("mappings/assemblies/actionSource");
-			foreach (XmlNode node in list)
-			{
-				string assemblyName = node.Attributes["assembly"].Value;
-				Assembly assembly = Assembly.Load(assemblyName);
-				assembliesSource.Add(assembly);
-
-				Logger.Logger.LogMessage("Loaded assemby Source: {0}", assembly.GetName());
-			}
-
-			this.actionSourceAssemblies = (Assembly[])assembliesSource.ToArray(typeof(Assembly));
 		}
 
 		private IConstraint ParseConstraint(XmlNode aNode)
@@ -227,35 +210,16 @@ namespace guiKernel2.xml
 		}
 
 
-		private Assembly[] implAssemblies = new Assembly[] {};
-		private Assembly[] actionSourceAssemblies = new Assembly[] {};
+		private ArrayList assemblies = new ArrayList();
 		private XmlDocument document = null;
-
-		public Assembly[] ImplAssemblies
-		{
-			get { return implAssemblies; }
-		}
-
-		public Assembly[] ActionSourceAssemblies
-		{
-			get { return actionSourceAssemblies; }
-		}
 
 		public Assembly[] Assemblies
 		{
 			get
 			{
 				ArrayList list = new ArrayList();
-				foreach (Assembly assembly in implAssemblies)
+				foreach (Assembly assembly in assemblies)
 				{
-					if (!list.Contains(assembly)) list.Add(assembly);
-				}
-				foreach (Assembly assembly in actionSourceAssemblies)
-				{
-					if (!list.Contains(assembly)) list.Add(assembly);
-				}
-				{
-					Assembly assembly = Assembly.GetExecutingAssembly();
 					if (!list.Contains(assembly)) list.Add(assembly);
 				}
 				return (Assembly[])list.ToArray(typeof(Assembly));
