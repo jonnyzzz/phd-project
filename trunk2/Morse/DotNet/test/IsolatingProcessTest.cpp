@@ -65,6 +65,23 @@ void IsolatingProcessTest::Test() {
 	to(8, 4);
 
 	testLen(8, st.getGraph());
+
+	reset();
+
+	to(1, 2);
+	to(2, 3);
+	to(3, 4);
+	to(4, 5);
+	to(5, 1);
+
+	to(1, 5);
+	to(2, 1);
+
+	to(5, 6);
+	to(6, 5);
+	to(6, 4);
+
+	testLen(6, st.getGraph());
 	
 }
 

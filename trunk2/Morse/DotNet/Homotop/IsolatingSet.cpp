@@ -29,7 +29,7 @@ void IsolatingSetProcess::processNextGraph(Graph* graph)
 	bool b = false;
 	do {
 
-		cout<<"Start Againyyyyy\n";
+		//cout<<"--->Start Again\n";
 
 		GraphNodeEnumerator ne(graph_result);
 		Node* node;
@@ -37,7 +37,7 @@ void IsolatingSetProcess::processNextGraph(Graph* graph)
 			nodeList.push_back(node);
 		}
 
-		b = processTaskList(&nodeList, graph);
+		b = processTaskList(nodeList, graph);
 
 	} while (b);
     
@@ -57,30 +57,33 @@ void IsolatingSetProcess::start() {
 
 
 //invariant: all added nodes to NodeList should be added to graph!
-bool IsolatingSetProcess::processTaskList(IsolatingSetProcess::NodeList* lst, Graph* graph) {
-	bool b = false;
-	while (!lst->empty()) {
-		Node* node = lst->back();
-		lst->pop_back();
-		
-		b = b || processNode(graph->findNode(node), lst, graph);
-		
-	}
-
+bool IsolatingSetProcess::processTaskList(IsolatingSetProcess::NodeList& lst, Graph* graph) {
+	NodeList l2;
+	bool b = false;	
+	do {
+		while (!lst.empty()) {
+			Node* node = lst.front();
+			lst.pop_front();
+			
+			processNode(graph->findNode(node), lst, l2, graph);
+			b |= !l2.empty();			
+		}	
+		lst = l2;
+		l2.clear();
+	} while (!lst.empty());
+	
 	return b;
 }
 
-
-bool IsolatingSetProcess::processNode(Node* node, IsolatingSetProcess::NodeList* lst, Graph* graph) {
-
+//out is treated as cache. So this proceduce SHOULD not clear it up.
+void IsolatingSetProcess::processNode(Node* node, NodeList& lst, NodeList& out, Graph* graph) {
+	
 	if (node == NULL) {
 		cout<<"Fail!\n";
-		return false;
+		return;
 	}
 
-	cout<<"Start for node "<<graph->getCells(node)[0]<<"\n";
-
-	bool b = false;
+	//cout<<"Start for node "<<graph->getCells(node)[0]<<"\n";
 
 	GraphEdgeEnumerator ee(graph, node);
 	Node* nodeTo;
@@ -96,20 +99,13 @@ bool IsolatingSetProcess::processNode(Node* node, IsolatingSetProcess::NodeList*
 					
 					Node* tmp = graph_result->browseTo(nodeTo);
 
-					lst->push_back(tmp);
-					lst->push_back(tmp);
-					lst->push_back(tmp);
-					lst->push_back(tmp);
-					lst->push_back(tmp);
-					lst->push_back(tmp);
+					out.push_back(tmp);
 					
-					cout<<"Added node "<<graph->getCells(nodeTo)[0]<<"\n";
+					//cout<<"Added node "<<graph->getCells(nodeTo)[0]<<"\n";
 
-					b = true;
 					break;
 				}
 			}
 		}
 	}
-	return b;
 }

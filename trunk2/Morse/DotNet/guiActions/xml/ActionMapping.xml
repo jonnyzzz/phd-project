@@ -35,7 +35,8 @@
 		<action name="IPointMethodAction" caption="Point Method" />
 		<action name="ITarjanAction" caption="Strong Component Localization" />    
 		<action name="GnuPlotVisualizationKernelAction" caption="Visualize" />
-		<action name="IMinimalLoopLocalizationAction" caption="Localiza Minimal Contour" />
+		<action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search" />
+		<action name="IIsolatedSetAction" caption="Isolating set localization" />
     </names>
 
 	<assemblies>	

@@ -22,6 +22,6 @@ private:
 	typedef list<Node*> NodeList;
 
 private:
-	bool processTaskList(NodeList* lst, Graph* graph);
-	bool processNode(Node* node, NodeList* lst, Graph* graph);
+	bool processTaskList(NodeList& lst, Graph* graph);
+	void processNode(Node* node, NodeList& lst, NodeList& out, Graph* graph);
 };
