@@ -107,6 +107,7 @@
 				AdditionalDependencies="comsvcs.lib winmm.lib d3d8.lib d3dx8dt.lib d3dxof.lib dxguid.lib"
 				OutputFile="$(OutDir)/MorseKernelVisualizationATL.dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="..\lib"
 				MergedIDLBaseFileName="_MorseKernelVisualizationATL.idl"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
