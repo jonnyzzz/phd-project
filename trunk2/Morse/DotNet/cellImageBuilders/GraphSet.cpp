@@ -19,6 +19,10 @@ GraphSet::GraphSet(const GraphSet& graphSet) {
 	copyFrom(graphSet);
 }
 
+GraphSet::~GraphSet() {
+
+}
+
 
 int GraphSet::Length() {
 	return (int)graphList.size();

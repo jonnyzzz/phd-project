@@ -15,11 +15,13 @@ CGraphResultImpl::CGraphResultImpl() {
 
 
 HRESULT CGraphResultImpl::FinalConstruct() {
+	this->graph = NULL;
 	return S_OK;
 }
 
 
 void CGraphResultImpl::FinalRelease() {
+	SAFE_DELETE(this->graph);
 }
 
 STDMETHODIMP CGraphResultImpl::GetGraph(void** graph) {

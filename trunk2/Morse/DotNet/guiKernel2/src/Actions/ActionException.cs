@@ -1,6 +1,6 @@
 using System;
 
-namespace guiKernel2.src.Actions
+namespace guiKernel2.Actions
 {
 	/// <summary>
 	/// Summary description for ActionException.

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Tue Mar 15 13:56:41 2005
+/* at Tue Mar 15 18:41:56 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -141,6 +141,18 @@ typedef interface IComponentRegistrar IComponentRegistrar;
 #endif 	/* __IComponentRegistrar_FWD_DEFINED__ */
 
 
+#ifndef __ITarjanAction_FWD_DEFINED__
+#define __ITarjanAction_FWD_DEFINED__
+typedef interface ITarjanAction ITarjanAction;
+#endif 	/* __ITarjanAction_FWD_DEFINED__ */
+
+
+#ifndef __ITarjanParameters_FWD_DEFINED__
+#define __ITarjanParameters_FWD_DEFINED__
+typedef interface ITarjanParameters ITarjanParameters;
+#endif 	/* __ITarjanParameters_FWD_DEFINED__ */
+
+
 #ifndef __IDummy_FWD_DEFINED__
 #define __IDummy_FWD_DEFINED__
 typedef interface IDummy IDummy;
@@ -169,18 +181,6 @@ typedef interface IKernell IKernell;
 #define __IWritableKernell_FWD_DEFINED__
 typedef interface IWritableKernell IWritableKernell;
 #endif 	/* __IWritableKernell_FWD_DEFINED__ */
-
-
-#ifndef __ITarjanAction_FWD_DEFINED__
-#define __ITarjanAction_FWD_DEFINED__
-typedef interface ITarjanAction ITarjanAction;
-#endif 	/* __ITarjanAction_FWD_DEFINED__ */
-
-
-#ifndef __ITarjanParameters_FWD_DEFINED__
-#define __ITarjanParameters_FWD_DEFINED__
-typedef interface ITarjanParameters ITarjanParameters;
-#endif 	/* __ITarjanParameters_FWD_DEFINED__ */
 
 
 #ifndef __CBoxMethodAction_FWD_DEFINED__
@@ -217,6 +217,18 @@ typedef struct CCompReg CCompReg;
 #endif /* __cplusplus */
 
 #endif 	/* __CCompReg_FWD_DEFINED__ */
+
+
+#ifndef __CTarjanAction_FWD_DEFINED__
+#define __CTarjanAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CTarjanAction CTarjanAction;
+#else
+typedef struct CTarjanAction CTarjanAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CTarjanAction_FWD_DEFINED__ */
 
 
 #ifndef __CDummy_FWD_DEFINED__
@@ -277,18 +289,6 @@ typedef struct CKernellImpl CKernellImpl;
 #endif /* __cplusplus */
 
 #endif 	/* __CKernellImpl_FWD_DEFINED__ */
-
-
-#ifndef __CTarjanAction_FWD_DEFINED__
-#define __CTarjanAction_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CTarjanAction CTarjanAction;
-#else
-typedef struct CTarjanAction CTarjanAction;
-#endif /* __cplusplus */
-
-#endif 	/* __CTarjanAction_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -2962,6 +2962,281 @@ void __RPC_STUB IComponentRegistrar_UnregisterComponent_Stub(
 #endif 	/* __IComponentRegistrar_INTERFACE_DEFINED__ */
 
 
+#ifndef __ITarjanAction_INTERFACE_DEFINED__
+#define __ITarjanAction_INTERFACE_DEFINED__
+
+/* interface ITarjanAction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ITarjanAction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("FAFD82A9-346E-4BD7-8316-F16B105A4653")
+    ITarjanAction : public IAction
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ITarjanActionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ITarjanAction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ITarjanAction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ITarjanAction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ITarjanAction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ITarjanAction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ITarjanAction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ITarjanAction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            ITarjanAction * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            ITarjanAction * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            ITarjanAction * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            ITarjanAction * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        END_INTERFACE
+    } ITarjanActionVtbl;
+
+    interface ITarjanAction
+    {
+        CONST_VTBL struct ITarjanActionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ITarjanAction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ITarjanAction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ITarjanAction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ITarjanAction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ITarjanAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ITarjanAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ITarjanAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define ITarjanAction_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define ITarjanAction_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define ITarjanAction_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define ITarjanAction_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ITarjanAction_INTERFACE_DEFINED__ */
+
+
+#ifndef __ITarjanParameters_INTERFACE_DEFINED__
+#define __ITarjanParameters_INTERFACE_DEFINED__
+
+/* interface ITarjanParameters */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ITarjanParameters;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("8DB63B4A-7E18-4328-9335-419C4CE5A4E5")
+    ITarjanParameters : public IParameters
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE NeedEdgeResolve( 
+            /* [retval][out] */ VARIANT_BOOL *result) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ITarjanParametersVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ITarjanParameters * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ITarjanParameters * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ITarjanParameters * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ITarjanParameters * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ITarjanParameters * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ITarjanParameters * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ITarjanParameters * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *NeedEdgeResolve )( 
+            ITarjanParameters * This,
+            /* [retval][out] */ VARIANT_BOOL *result);
+        
+        END_INTERFACE
+    } ITarjanParametersVtbl;
+
+    interface ITarjanParameters
+    {
+        CONST_VTBL struct ITarjanParametersVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ITarjanParameters_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ITarjanParameters_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ITarjanParameters_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ITarjanParameters_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ITarjanParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ITarjanParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ITarjanParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define ITarjanParameters_NeedEdgeResolve(This,result)	\
+    (This)->lpVtbl -> NeedEdgeResolve(This,result)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ITarjanParameters_NeedEdgeResolve_Proxy( 
+    ITarjanParameters * This,
+    /* [retval][out] */ VARIANT_BOOL *result);
+
+
+void __RPC_STUB ITarjanParameters_NeedEdgeResolve_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __ITarjanParameters_INTERFACE_DEFINED__ */
+
+
 #ifndef __IDummy_INTERFACE_DEFINED__
 #define __IDummy_INTERFACE_DEFINED__
 
@@ -3644,281 +3919,6 @@ void __RPC_STUB IWritableKernell_SetFunction_Stub(
 #endif 	/* __IWritableKernell_INTERFACE_DEFINED__ */
 
 
-#ifndef __ITarjanAction_INTERFACE_DEFINED__
-#define __ITarjanAction_INTERFACE_DEFINED__
-
-/* interface ITarjanAction */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_ITarjanAction;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("FAFD82A9-346E-4BD7-8316-F16B105A4653")
-    ITarjanAction : public IAction
-    {
-    public:
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct ITarjanActionVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            ITarjanAction * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            ITarjanAction * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            ITarjanAction * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            ITarjanAction * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            ITarjanAction * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            ITarjanAction * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            ITarjanAction * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
-            ITarjanAction * This,
-            /* [in] */ IParameters *parameters);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
-            ITarjanAction * This,
-            /* [in] */ IProgressBarInfo *pinfo);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
-            ITarjanAction * This,
-            /* [in] */ IResultSet *result,
-            /* [retval][out] */ VARIANT_BOOL *can);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
-            ITarjanAction * This,
-            /* [in] */ IResultSet *input,
-            /* [retval][out] */ IResultSet **output);
-        
-        END_INTERFACE
-    } ITarjanActionVtbl;
-
-    interface ITarjanAction
-    {
-        CONST_VTBL struct ITarjanActionVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define ITarjanAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define ITarjanAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define ITarjanAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define ITarjanAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define ITarjanAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define ITarjanAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define ITarjanAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-
-#define ITarjanAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
-
-#define ITarjanAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
-
-#define ITarjanAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
-
-#define ITarjanAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __ITarjanAction_INTERFACE_DEFINED__ */
-
-
-#ifndef __ITarjanParameters_INTERFACE_DEFINED__
-#define __ITarjanParameters_INTERFACE_DEFINED__
-
-/* interface ITarjanParameters */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_ITarjanParameters;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("8DB63B4A-7E18-4328-9335-419C4CE5A4E5")
-    ITarjanParameters : public IParameters
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE NeedEdgeResolve( 
-            /* [retval][out] */ VARIANT_BOOL *result) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct ITarjanParametersVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            ITarjanParameters * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            ITarjanParameters * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            ITarjanParameters * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            ITarjanParameters * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            ITarjanParameters * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            ITarjanParameters * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            ITarjanParameters * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *NeedEdgeResolve )( 
-            ITarjanParameters * This,
-            /* [retval][out] */ VARIANT_BOOL *result);
-        
-        END_INTERFACE
-    } ITarjanParametersVtbl;
-
-    interface ITarjanParameters
-    {
-        CONST_VTBL struct ITarjanParametersVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define ITarjanParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define ITarjanParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define ITarjanParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define ITarjanParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define ITarjanParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define ITarjanParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define ITarjanParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-
-#define ITarjanParameters_NeedEdgeResolve(This,result)	\
-    (This)->lpVtbl -> NeedEdgeResolve(This,result)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE ITarjanParameters_NeedEdgeResolve_Proxy( 
-    ITarjanParameters * This,
-    /* [retval][out] */ VARIANT_BOOL *result);
-
-
-void __RPC_STUB ITarjanParameters_NeedEdgeResolve_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __ITarjanParameters_INTERFACE_DEFINED__ */
-
-
 
 #ifndef __MorseKernel2_LIBRARY_DEFINED__
 #define __MorseKernel2_LIBRARY_DEFINED__
@@ -3951,6 +3951,14 @@ EXTERN_C const CLSID CLSID_CCompReg;
 
 class DECLSPEC_UUID("84035475-16DE-4504-ABF2-5C734E46A96A")
 CCompReg;
+#endif
+
+EXTERN_C const CLSID CLSID_CTarjanAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("76C75A0A-AC4C-4CA9-8A4E-D8283388C361")
+CTarjanAction;
 #endif
 
 EXTERN_C const CLSID CLSID_CDummy;
@@ -3991,14 +3999,6 @@ EXTERN_C const CLSID CLSID_CKernellImpl;
 
 class DECLSPEC_UUID("96E908D0-29BD-423D-8CA8-9F4343C796A0")
 CKernellImpl;
-#endif
-
-EXTERN_C const CLSID CLSID_CTarjanAction;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("76C75A0A-AC4C-4CA9-8A4E-D8283388C361")
-CTarjanAction;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

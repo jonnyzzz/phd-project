@@ -62,6 +62,8 @@ STDMETHODIMP CKernellImpl::CreateInitialResult(IResultBase** result) {
 		graphResult->QueryInterface(result);
 		ATLASSERT(*result != NULL);
 
+		graphResult->Release();
+
 		return S_OK;
 	}
 }

@@ -13,7 +13,7 @@ using namespace std;
 
 [
 	coclass,
-	threading("free"),
+	threading("both"),
 	vi_progid("MorseKernel2.ResultSetImpl"),
 	progid("MorseKernel2.ResultSetImpl.1"),
 	version(1.0),

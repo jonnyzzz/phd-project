@@ -4,6 +4,12 @@
 
 #pragma once
 
+#ifdef _DEBUG
+//	#define _ATL_DEBUG_INTERFACES
+//	#define _ATL_DEBUG_QI
+#endif
+
+
 #ifndef STRICT
 #define STRICT
 #endif

@@ -161,7 +161,7 @@ bool CFunctionImpl::initializeContent() {
 
 			node = NULL;
 			sprintf(buf, "space_max%d", i+1);
-			node = node = safeGetNode(buf, KernelException(KernelException_NoSpaceMax, i));
+			node = safeGetNode(buf, KernelException(KernelException_NoSpaceMax, i));
 			if (!node->canSimplify(&FunctionContext())) {
 				delete node;
 				throw KernelException(KernelException_UnableToEvaluateSpaceMax, i);
@@ -198,7 +198,7 @@ bool CFunctionImpl::initializeContent() {
 		
 		for (int i=0; i<this->dimension; i++) {
 			node = NULL;
-			sprintf(buf, "f%d", i+1);
+			sprintf(buf, "y%d", i+1);
 			node = safeGetNode(buf, KernelException(KernelException_NoFunctionEquation, i));
 			if (!node->canSimplify(&cx)) {
 				delete node;

@@ -289,9 +289,6 @@
 				RelativePath=".\ActionBase.h">
 			</File>
 			<File
-				RelativePath=".\ActionFactory.h">
-			</File>
-			<File
 				RelativePath=".\BoxMethodAction.h">
 			</File>
 			<File

@@ -86,7 +86,7 @@
                 />
                 <Reference
                     Name = "System.XML"
-                    AssemblyName = "System.XML"
+                    AssemblyName = "System.Xml"
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
             </References>
@@ -95,6 +95,7 @@
             <Include>
                 <File
                     RelPath = "AssemblyInfo.cs"
+                    SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
@@ -111,6 +112,21 @@
                     RelPath = "TreeControl\ComputationTree.resx"
                     DependentUpon = "ComputationTree.cs"
                     BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "TreeControl\MenuItems\DelimiterMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TreeControl\MenuItems\DeselectMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TreeControl\MenuItems\NoMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
                 />
             </Include>
         </Files>

@@ -10,7 +10,7 @@
 
 [
 	coclass,
-	threading("apartment"),
+	threading("both"),
 	vi_progid("MorseKernel2.KernellImpl"),
 	progid("MorseKernel2.KernellImpl.1"),
 	version(1.0),

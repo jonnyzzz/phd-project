@@ -3,6 +3,10 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
+using gui.Forms;
+using gui2.Document;
+using gui2.Log;
+using gui2.TreeNodes;
 
 namespace gui2.Forms
 {
@@ -14,9 +18,12 @@ namespace gui2.Forms
 		private System.Windows.Forms.Panel panelLeft;
 		private System.Windows.Forms.Panel panelRight;
 		private System.Windows.Forms.Splitter splitter1;
-		private guiControls.TreeControl.ComputationTree computationTree1;
+		private guiControls.TreeControl.ComputationTree tree;
 		private System.Windows.Forms.MainMenu mainMenu;
 		private System.Windows.Forms.MenuItem menuItem1;
+		private System.Windows.Forms.MenuItem menuInvestigations;
+		private System.Windows.Forms.MenuItem menuSystem;
+		private System.Windows.Forms.MenuItem menuSystemNew;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -57,17 +64,20 @@ namespace gui2.Forms
 		private void InitializeComponent()
 		{
 			this.panelLeft = new System.Windows.Forms.Panel();
-			this.computationTree1 = new guiControls.TreeControl.ComputationTree();
+			this.tree = new guiControls.TreeControl.ComputationTree();
 			this.panelRight = new System.Windows.Forms.Panel();
 			this.splitter1 = new System.Windows.Forms.Splitter();
 			this.mainMenu = new System.Windows.Forms.MainMenu();
 			this.menuItem1 = new System.Windows.Forms.MenuItem();
+			this.menuInvestigations = new System.Windows.Forms.MenuItem();
+			this.menuSystem = new System.Windows.Forms.MenuItem();
+			this.menuSystemNew = new System.Windows.Forms.MenuItem();
 			this.panelLeft.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panelLeft
 			// 
-			this.panelLeft.Controls.Add(this.computationTree1);
+			this.panelLeft.Controls.Add(this.tree);
 			this.panelLeft.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelLeft.DockPadding.All = 10;
 			this.panelLeft.Location = new System.Drawing.Point(0, 0);
@@ -77,12 +87,12 @@ namespace gui2.Forms
 			// 
 			// computationTree1
 			// 
-			this.computationTree1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.computationTree1.Location = new System.Drawing.Point(10, 10);
-			this.computationTree1.Name = "computationTree1";
-			this.computationTree1.Root = null;
-			this.computationTree1.Size = new System.Drawing.Size(532, 589);
-			this.computationTree1.TabIndex = 0;
+			this.tree.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tree.Location = new System.Drawing.Point(10, 10);
+			this.tree.Name = "tree";
+			this.tree.Root = null;
+			this.tree.Size = new System.Drawing.Size(532, 589);
+			this.tree.TabIndex = 0;
 			// 
 			// panelRight
 			// 
@@ -105,12 +115,33 @@ namespace gui2.Forms
 			// mainMenu
 			// 
 			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					 this.menuItem1});
+																					 this.menuItem1,
+																					 this.menuInvestigations});
 			// 
 			// menuItem1
 			// 
 			this.menuItem1.Index = 0;
 			this.menuItem1.Text = "Internal";
+			// 
+			// menuInvestigations
+			// 
+			this.menuInvestigations.Index = 1;
+			this.menuInvestigations.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																							   this.menuSystem});
+			this.menuInvestigations.Text = "Investigations";
+			// 
+			// menuSystem
+			// 
+			this.menuSystem.Index = 0;
+			this.menuSystem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																					   this.menuSystemNew});
+			this.menuSystem.Text = "System";
+			// 
+			// menuSystemNew
+			// 
+			this.menuSystemNew.Index = 0;
+			this.menuSystemNew.Text = "New";
+			this.menuSystemNew.Click += new System.EventHandler(this.menuSystemNew_Click);
 			// 
 			// ComputationForm
 			// 
@@ -127,5 +158,19 @@ namespace gui2.Forms
 
 		}
 		#endregion
+
+		private void menuSystemNew_Click(object sender, System.EventArgs e)
+		{
+			SystemAssignment assignment = new SystemAssignment();
+			if (assignment.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+			{
+				Function function = assignment.Function;
+				Logger.LogMessage(function.ToString());
+
+				Runner.Runner.Instance.Document = new Document.Document(function);
+
+				tree.Root = Runner.Runner.Instance.Document.RootNode;
+			}
+		}
 	}
 }

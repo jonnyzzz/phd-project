@@ -85,7 +85,10 @@ namespace guiControls.TreeControl
 
 		private void tree_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
 		{
-			OnSelectionChanged(e.Node as ComputationNode);
+			if (OnSelectionChanged != null)
+			{
+				OnSelectionChanged(e.Node as ComputationNode);	
+			}
 		}
 
 		private ComputationNode cachedMouseNode = null;
@@ -95,7 +98,10 @@ namespace guiControls.TreeControl
 			if (node != cachedMouseNode)
 			{
 				cachedMouseNode = node;
-				OnMouseOver(node);
+				if (OnMouseOver != null) 
+				{
+					OnMouseOver(node);
+				}
 			}
 		}
 
@@ -103,12 +109,23 @@ namespace guiControls.TreeControl
 		private void tree_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
 			TreeNode anode = tree.GetNodeAt(e.X, e.Y);
-			if (anode is ComputationNode)
+			if (anode is ComputationNode && e.Button == System.Windows.Forms.MouseButtons.Right)
 			{
 				ComputationNode node = (ComputationNode)anode;
 				contextMenu.MenuItems.Clear();
-				contextMenu.MenuItems.AddRange(node.ContextMenuItems);
+				contextMenu.MenuItems.AddRange(CreateMenuItemsList(node.ContextMenuItems));
 				contextMenu.Show(this, new Point(e.X, e.Y));
+			}
+		}
+
+		private MenuItem[] CreateMenuItemsList(MenuItem[] input)
+		{
+			if (input.Length > 0)
+			{
+				return input;
+			} else
+			{
+				return new MenuItem[]{ new NoMenuItem() };
 			}
 		}
 

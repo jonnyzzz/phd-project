@@ -11,11 +11,23 @@ namespace gui2.Runner
 	{
 		private CommandLineParser commandLine;
 		private ComputationForm computationForm;
+		private bool isInternal;
+		private Document.Document document = null;
+
 		public Runner(CommandLineParser commandLine)
 		{
+			runner = this;
 			this.commandLine = commandLine;
 			this.computationForm = new ComputationForm();
 			Application.Run(computationForm);
+
+			isInternal = commandLine.hasKey("Internal");
+		}
+
+		public Document.Document Document
+		{
+			get { return document; }
+			set { document = value; }
 		}
 
 		public CommandLineParser CommandLine
@@ -26,6 +38,11 @@ namespace gui2.Runner
 		public ComputationForm ComputationForm
 		{
 			get { return computationForm; }
+		}
+
+		public bool IsInternal
+		{
+			get { return isInternal; }
 		}
 
 		#region static

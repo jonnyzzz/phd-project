@@ -101,12 +101,47 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\ActionFactory\ActionMappingAttribute.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\ActionWrapperFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\ActionWrapperFactoryException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\NextActionFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionImpl\TarjanActionWrapper.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Actions\ActionChain.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Actions\ActionException.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Actions\ComputationChain.cs"
+                    RelPath = "src\Actions\ActionPerformException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Actions\ActionWrapper.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -116,12 +151,27 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Document\Document.cs"
+                    RelPath = "src\Container\Container.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Node\Node.cs"
+                    RelPath = "src\Document\Function.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Document\FunctionExceptions.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Document\KernelDocument.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Node\KernelNode.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

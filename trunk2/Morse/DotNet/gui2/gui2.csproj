@@ -76,7 +76,7 @@
                 />
                 <Reference
                     Name = "System.XML"
-                    AssemblyName = "System.XML"
+                    AssemblyName = "System.Xml"
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
                 <Reference
@@ -113,6 +113,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "Document\Document.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Forms\ComputationForm.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
@@ -123,6 +128,21 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "Forms\SystemAssignment.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Forms\SystemAssignment.resx"
+                    DependentUpon = "SystemAssignment.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Log\Logger.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "Runner\CommandLineParser.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -130,6 +150,26 @@
                 <File
                     RelPath = "Runner\Runner.cs"
                     SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TreeNodes\ActionTreeMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TreeNodes\MenuItemFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TreeNodes\Node.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "TreeNodes\TreeMenuItem.cs"
+                    SubType = "Component"
                     BuildAction = "Compile"
                 />
             </Include>

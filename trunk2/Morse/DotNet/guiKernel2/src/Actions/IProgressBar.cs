@@ -1,13 +1,13 @@
 using System;
 using MorseKernel2;
 
-namespace guiKernel2.src.Actions
+namespace guiKernel2.Actions
 {
 	/// <summary>
 	/// Summary description for IProgressBar.
 	/// </summary>
-	public interface IProgressBar : IProgressBarInfo
+	public interface IProgressBar
 	{
-		string ActionDescription { get; set;}
+		IProgressBarInfo GetProgressBarInfo(ActionWrapper actionWrapper);
 	}
 }
