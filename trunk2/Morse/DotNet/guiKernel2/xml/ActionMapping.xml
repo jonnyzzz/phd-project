@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+
+<mappings>
+	<action name="IBoxMethodAction" resultType="IGraphResult" metadata="ISymbolicImage" isLeaf="false">
+		<nextActions>		
+			<actionReference name="ITarjanAction" isLeaf="true">
+			</actionReference>
+		</nextActions>
+	</action>
+		
+	<assembies>
+		<implAssembly name="gui2"/>
+	</assembies>
+	
+</mappings>
+
