@@ -352,6 +352,16 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "src\Resources\GnuPlotScriptGen.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Resources\GnuPlotTemplate.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Resources\ResourceData.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

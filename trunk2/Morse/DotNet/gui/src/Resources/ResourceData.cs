@@ -16,24 +16,16 @@ namespace gui.Resource
 		{
 		}
 
-		[XmlElement("gnuplottemplatepath")]
-		private string gnuplotTemplates = null; // = RESOURCE_PATH + @"\gnuplottemplate";
 		[XmlElement("gnuplotexe")]
 		private string gnuplotExe = null; // = GNUPLOT_PATH + @"\bin\pgnuplot.exe";
 		[XmlElement("gnuplotparams")]		
 		private string gnuplotParams = null; // = @"-noend {0} -";
-		[XmlElement("gnuplottemplate2d")]
-		private string gnuplotTemplate2D = null; // = GNUPLOT_TEMPLATES + @"\2d.txt";
-		[XmlElement("gnuplottemplate3d")]
-		private string gnuplotTemplate3D = null; // = GNUPLOT_TEMPLATES + @"\3d.txt";
+		[XmlElement("gnuplottemplate2d", typeof(GnuPlotTemplate))]
+		private GnuPlotTemplate gnuplotTemplate2D = null; // = GNUPLOT_TEMPLATES + @"\2d.txt";
+		[XmlElement("gnuplottemplate3d", typeof(GnuPlotTemplate))]
+		private GnuPlotTemplate gnuplotTemplate3D = null; // = GNUPLOT_TEMPLATES + @"\3d.txt";
 		[XmlElement("tempfilename")]
 		private string fileCreateTemplate = "{0}.{1}.system.data";
-
-		public string GnuplotTemplates
-		{
-			get { return gnuplotTemplates; }
-			set { gnuplotTemplates = value; }
-		}
 
 		public string GnuplotExe
 		{
@@ -47,13 +39,13 @@ namespace gui.Resource
 			set { gnuplotParams = value; }
 		}
 
-		public string GnuplotTemplate2D
+		public GnuPlotTemplate GnuplotTemplate2D
 		{
 			get { return gnuplotTemplate2D; }
 			set { gnuplotTemplate2D = value; }
 		}
 
-		public string GnuplotTemplate3D
+		public GnuPlotTemplate GnuplotTemplate3D
 		{
 			get { return gnuplotTemplate3D; }
 			set { gnuplotTemplate3D = value; }
@@ -67,7 +59,7 @@ namespace gui.Resource
 
 		private static XmlSerializer CreateSerializer()
 		{
-			return new XmlSerializer(typeof(ResourceData));
+			return new XmlSerializer(typeof(ResourceData), new Type[]{ typeof(GnuPlotTemplate)});
 		}
 
 		public static ResourceData LoadResourceData(string fileName)
@@ -76,6 +68,7 @@ namespace gui.Resource
 			XmlSerializer serializer = CreateSerializer();
 			ResourceData data =  serializer.Deserialize(reader) as ResourceData;
 			reader.Close();
+
 			return data;
 		}
 

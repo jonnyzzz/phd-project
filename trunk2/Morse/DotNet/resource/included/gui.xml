@@ -3,7 +3,15 @@
   <GnuplotTemplates>gnuplottemplate\</GnuplotTemplates>
   <GnuplotExe>gnuplot\bin\pgnuplot.exe</GnuplotExe>
   <GnuplotParams>-noend {0} -</GnuplotParams>
-  <GnuplotTemplate2D>2d.txt</GnuplotTemplate2D>
-  <GnuplotTemplate3D>3d.txt</GnuplotTemplate3D>
+  <GnuplotTemplate2D>
+    <Header>plot</Header>
+    <BodyTemplate>'$file$' with dots</BodyTemplate>
+    <Delimiter>,</Delimiter>
+  </GnuplotTemplate2D>
+  <GnuplotTemplate3D>
+    <Header>splot</Header>
+    <BodyTemplate>'$file$' with dots</BodyTemplate>
+    <Delimiter>,</Delimiter>
+  </GnuplotTemplate3D>
   <FileCreateTemplate>{0}.{1}.system.data</FileCreateTemplate>
 </Resources>

@@ -1,7 +1,5 @@
 using System;
 using System.IO;
-using System.Xml.Serialization;
-using gui.Logger;
 
 namespace gui.Resource
 {
@@ -25,11 +23,6 @@ namespace gui.Resource
 			get { return resourcePath; }
 		}
 		
-		public string GnuplotTemplates
-		{
-			get { return ResourcePath + resourceData.GnuplotTemplates; }
-		}
-		
 		public string GnuplotExe
 		{
 			get { return ResourcePath + resourceData.GnuplotExe; }
@@ -46,14 +39,14 @@ namespace gui.Resource
 			set { tempPath = value; }
 		}
 
-		public string GnuplotTemplate2D
+		public GnuPlotScriptGen GnuplotScript2D
 		{
-			get { return GnuplotTemplates + resourceData.GnuplotTemplate2D; }
+			get { return new GnuPlotScriptGen(resourceData.GnuplotTemplate2D); }
 		}
 
-		public string GnuplotTemplate3D
+		public GnuPlotScriptGen GnuplotScript3D
 		{
-			get { return GnuplotTemplates + resourceData.GnuplotTemplate3D; }
+			get { return new GnuPlotScriptGen(resourceData.GnuplotTemplate3D); }
 		}
 
 		public string FileCreateTemplate

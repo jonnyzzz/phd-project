@@ -18,11 +18,11 @@ namespace gui.Visualization.GnuPlot
 
 		#region runner
 
-		public void showFromFile(string filedata, string filetemplate)
+		public void RunGnuPlot(string filescript)
 		{
 			ProcessStartInfo pi = new ProcessStartInfo();
 			pi.FileName = Resources.Instance.GnuplotExe;
-			pi.Arguments = string.Format(Resources.Instance.GnuplotParams, filetemplate, filedata);
+			pi.Arguments = string.Format(Resources.Instance.GnuplotParams, filescript);
 			pi.ErrorDialog = true;
 
 			Log.LogMessage(this, "Arguments: {0} ", pi.Arguments);
@@ -34,6 +34,7 @@ namespace gui.Visualization.GnuPlot
 
 		private void ps_Exited(object sender, EventArgs e)
 		{
+			Log.LogMessage(this, "GnuPlot execution finished");
 			foreach (string file in createdFiles)
 			{
 				try
@@ -56,69 +57,49 @@ namespace gui.Visualization.GnuPlot
 
 		#endregion
 
-		private IGraphInfo info;
-		private string filedata;
-
-		protected GnuPlotView(IExportData data, IGraphInfo info)
-		{
-			filedata = AllocateTemporaryFile();
-			data.ExportData(filedata);
-
-			this.info = info;
-			switch (info.dimension())
+		protected GnuPlotView(IExportData[] data, int dimension)
+		{					
+			switch (dimension)
 			{
 				case 2:
-					showFromFile(filedata, createTemplate2D());
+					PrepateData(data, Resources.Instance.GnuplotScript2D);
 					break;
 				case 3:
-					showFromFile(filedata, createTemplate3D());
+					PrepateData(data, Resources.Instance.GnuplotScript3D);
 					break;
 				default:
+					Log.LogMessage(this, "Wrong Dimension in GnuPlot View");
 					throw new UnableToPerformActionException();
 			}
 		}
+		
 
-		public string createTemplate2D()
+		public void PrepateData(IExportData[] data, GnuPlotScriptGen gen)
 		{
-			TemplateProcessor tp = new TemplateProcessor(ResourceLoader.LoadResourceAsText(Resources.Instance.GnuplotTemplate2D));
-			tp.subsitute("x_min", (info.spaceMin(0) - info.gridSize(0)/2).ToString().Replace(',', '.'));
-			tp.subsitute("x_max", (info.spaceMax(0) + info.gridSize(0)/2).ToString().Replace(',', '.'));
-			tp.subsitute("y_min", (info.spaceMin(1) - info.gridSize(1)/2).ToString().Replace(',', '.'));
-			tp.subsitute("y_max", (info.spaceMax(1) + info.gridSize(1)/2).ToString().Replace(',', '.'));
-			tp.subsitute("file", filedata);
-			tp.subsitute("x_offset", (info.gridSize(0)/2).ToString().Replace(',', '.'));
-			tp.subsitute("y_offset", (info.gridSize(1)/2).ToString().Replace(',', '.'));
-			tp.subsitute("x_size", (info.gridSize(0)).ToString().Replace(',', '.'));
-			tp.subsitute("y_size", (info.gridSize(0)).ToString().Replace(',', '.'));
+			foreach (IExportData exportData in data)
+			{
+				string filename = AllocateTemporaryFile();
+				exportData.ExportData(filename);
 
-			string name = AllocateTemporaryFile();
-			TextWriter tw = File.CreateText(name);
-			tw.WriteLine(tp.ToString());
-			tw.Flush();
-			tw.Close();
-			return name;
+				gen.addFile(filename);
+			}
+
+			string script = AllocateTemporaryFile();
+			TextWriter writer = File.CreateText(script);
+			writer.WriteLine(gen.ToString());
+			writer.Close();
+
+			RunGnuPlot(script);
 		}
 
-		public string createTemplate3D()
+		public static GnuPlotView Visualize(IExportData data, int dimension)
 		{
-			TemplateProcessor tp = new TemplateProcessor(ResourceLoader.LoadResourceAsText(Resources.Instance.GnuplotTemplate3D));
-
-			tp.subsitute("file", filedata);
-			tp.subsitute("x_offset", (info.gridSize(0)/2).ToString().Replace(',', '.'));
-			tp.subsitute("y_offset", (info.gridSize(1)/2).ToString().Replace(',', '.'));
-			tp.subsitute("z_offset", (info.gridSize(2)/2).ToString().Replace(',', '.'));
-
-			string name = AllocateTemporaryFile();
-			TextWriter tw = File.CreateText(name);
-			tw.WriteLine(tp.ToString());
-			tw.Flush();
-			tw.Close();
-			return name;
+			return new GnuPlotView(new IExportData[]{data}, dimension );
 		}
 
-		public static GnuPlotView ShowFromFile(IGraphInfo info, IExportData data)
+		public static GnuPlotView Visualize(IExportData[] data, int dimension)
 		{
-			return new GnuPlotView(data, info);
+			return new GnuPlotView(data, dimension);
 		}
 
 		public static void Run()

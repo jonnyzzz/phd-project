@@ -15,6 +15,30 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_005D16597ED345CEB292F986648CB579"
+        "OwnerKey" = "8:_BEE2B4F4071B42ED98254227B4302DE3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_005D16597ED345CEB292F986648CB579"
+        "OwnerKey" = "8:_EF433BC6C34040458F873286D72A102C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_005D16597ED345CEB292F986648CB579"
+        "OwnerKey" = "8:_D045370DEE5D46C7BF9AD1461999FA53"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_005D16597ED345CEB292F986648CB579"
+        "OwnerKey" = "8:_C9D059725F7C4D77ACDF018FE7621437"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0D57935B99964246B9EC6A0B6604628C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -23,18 +47,6 @@
         {
         "MsmKey" = "8:_13EBA50CA48296C30D801F8C0710DFD2"
         "OwnerKey" = "8:_D045370DEE5D46C7BF9AD1461999FA53"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_149F79AADD44477399C687C7D73A3B7E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1A2B6E1805184D00A1CAEC18F7D6256B"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,32 +63,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_28543458400540D582D038D56F76DEF0"
+        "MsmKey" = "8:_2C9E35C4627F4031B67D89D295B27DCC"
         "OwnerKey" = "8:_BEE2B4F4071B42ED98254227B4302DE3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_28543458400540D582D038D56F76DEF0"
+        "MsmKey" = "8:_2C9E35C4627F4031B67D89D295B27DCC"
         "OwnerKey" = "8:_EF433BC6C34040458F873286D72A102C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_28543458400540D582D038D56F76DEF0"
-        "OwnerKey" = "8:_D045370DEE5D46C7BF9AD1461999FA53"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_28543458400540D582D038D56F76DEF0"
+        "MsmKey" = "8:_2C9E35C4627F4031B67D89D295B27DCC"
         "OwnerKey" = "8:_C9D059725F7C4D77ACDF018FE7621437"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2CD453D5FCE42A057119002AB6B54247"
-        "OwnerKey" = "8:_D2F8C2BC3699D9513AA7128783E63662"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -87,68 +87,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3E937563A6DD5CD85F50ADEFB94E82F6"
-        "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
+        "MsmKey" = "8:_3C26E55D54EF43BA82E7B397E3168A72"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3E937563A6DD5CD85F50ADEFB94E82F6"
-        "OwnerKey" = "8:_5DEA884A4F3959E2DF85C5A3930F78D7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3E937563A6DD5CD85F50ADEFB94E82F6"
-        "OwnerKey" = "8:_9890C1B7EBC4F2054E153238C2D5B4D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_41F8B59F55FE4998B592BB437764E6B4"
-        "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_41F8B59F55FE4998B592BB437764E6B4"
+        "MsmKey" = "8:_3C50D5116094DA43F76C4FF86861BC5D"
         "OwnerKey" = "8:_E08C302959E61928E03627C824063280"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_41F8B59F55FE4998B592BB437764E6B4"
-        "OwnerKey" = "8:_5DEA884A4F3959E2DF85C5A3930F78D7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_41F8B59F55FE4998B592BB437764E6B4"
-        "OwnerKey" = "8:_9890C1B7EBC4F2054E153238C2D5B4D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_41F8B59F55FE4998B592BB437764E6B4"
-        "OwnerKey" = "8:_E40C15CCC940DDD45DE553D1FF75E85B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_41F8B59F55FE4998B592BB437764E6B4"
-        "OwnerKey" = "8:_B31C84EE53128736E6588345E5926628"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_41F8B59F55FE4998B592BB437764E6B4"
-        "OwnerKey" = "8:_D2F8C2BC3699D9513AA7128783E63662"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_41F8B59F55FE4998B592BB437764E6B4"
-        "OwnerKey" = "8:_7FA4994A1A804ABC86871DF78F3EAC31"
+        "MsmKey" = "8:_3E937563A6DD5CD85F50ADEFB94E82F6"
+        "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -189,18 +141,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5DEA884A4F3959E2DF85C5A3930F78D7"
-        "OwnerKey" = "8:_9890C1B7EBC4F2054E153238C2D5B4D0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5DEA884A4F3959E2DF85C5A3930F78D7"
-        "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_65E84984379043AF9F3BF66C449BDCBD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -215,6 +155,12 @@
         {
         "MsmKey" = "8:_7A71363BE442441C908855D35B0EF25F"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7C43E1F5D89113C395E7312585D422CD"
+        "OwnerKey" = "8:_D2F8C2BC3699D9513AA7128783E63662"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -237,50 +183,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8E7F9D06E6014D61948D37D9B9EFA984"
-        "OwnerKey" = "8:_EF433BC6C34040458F873286D72A102C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_96D17F077F9C4C7A80DAE961EED4D451"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9890C1B7EBC4F2054E153238C2D5B4D0"
-        "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9CE8BC6991484EB1BEBFB351726764BD"
-        "OwnerKey" = "8:_BEE2B4F4071B42ED98254227B4302DE3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9CE8BC6991484EB1BEBFB351726764BD"
-        "OwnerKey" = "8:_EF433BC6C34040458F873286D72A102C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9CE8BC6991484EB1BEBFB351726764BD"
-        "OwnerKey" = "8:_C9D059725F7C4D77ACDF018FE7621437"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_9DC658BB0E174AA98A538B89D3D2901C"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_A1D869069BE3D5CFBD5C2F9CDF41603A"
-        "OwnerKey" = "8:_E08C302959E61928E03627C824063280"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -292,12 +202,6 @@
         "Entry"
         {
         "MsmKey" = "8:_AF9132D1AF3245A792F0232D231A3E68"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B24E8311A4934A7E9C27421FDF1984CC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -375,12 +279,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DCC8C284D05F3DFD97D66E4435D600D5"
-        "OwnerKey" = "8:_5DEA884A4F3959E2DF85C5A3930F78D7"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_E08C302959E61928E03627C824063280"
         "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
         "MsmSig" = "8:_UNDEFINED"
@@ -399,6 +297,42 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_ED0683E2A4DF4222A472B1DFF99F22C2"
+        "OwnerKey" = "8:_6C9BAD16810A4E94AF63D388D952CCE5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ED0683E2A4DF4222A472B1DFF99F22C2"
+        "OwnerKey" = "8:_E08C302959E61928E03627C824063280"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ED0683E2A4DF4222A472B1DFF99F22C2"
+        "OwnerKey" = "8:_E40C15CCC940DDD45DE553D1FF75E85B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ED0683E2A4DF4222A472B1DFF99F22C2"
+        "OwnerKey" = "8:_B31C84EE53128736E6588345E5926628"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ED0683E2A4DF4222A472B1DFF99F22C2"
+        "OwnerKey" = "8:_D2F8C2BC3699D9513AA7128783E63662"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ED0683E2A4DF4222A472B1DFF99F22C2"
+        "OwnerKey" = "8:_7FA4994A1A804ABC86871DF78F3EAC31"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_EF433BC6C34040458F873286D72A102C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -407,6 +341,12 @@
         {
         "MsmKey" = "8:_EF492632CFEC4FCCB438BDDB7C554557"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F0DAD286B85A4B488766B59B06FD00CF"
+        "OwnerKey" = "8:_EF433BC6C34040458F873286D72A102C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -542,46 +482,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_149F79AADD44477399C687C7D73A3B7E"
-            {
-            "SourcePath" = "8:..\\resource\\included\\gui.ini"
-            "TargetName" = "8:gui.ini"
-            "Tag" = "8:"
-            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_1A2B6E1805184D00A1CAEC18F7D6256B"
-            {
-            "SourcePath" = "8:..\\resource\\included\\gnuplottemplate\\2d.txt"
-            "TargetName" = "8:2d.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_007204CE97E048688B9D94048EB3F0FC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_1C80778BC7F046E084CDA7CE50AC3F87"
             {
             "SourcePath" = "8:..\\resource\\included\\gnuplot\\Copyright"
@@ -622,26 +522,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_2CD453D5FCE42A057119002AB6B54247"
-            {
-            "SourcePath" = "8:GLVisualization.dll"
-            "TargetName" = "8:GLVisualization.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_383000FB042A4F80B040085302C0941F"
             {
             "SourcePath" = "8:..\\resource\\included\\gnuplot\\NEWS"
@@ -660,6 +540,46 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_3C26E55D54EF43BA82E7B397E3168A72"
+            {
+            "SourcePath" = "8:..\\resource\\included\\gui.xml"
+            "TargetName" = "8:gui.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_3C50D5116094DA43F76C4FF86861BC5D"
+            {
+            "SourcePath" = "8:MorseKernelATL.dll"
+            "TargetName" = "8:MorseKernelATL.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_3E937563A6DD5CD85F50ADEFB94E82F6"
@@ -793,37 +713,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_5DEA884A4F3959E2DF85C5A3930F78D7"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Interop.MSComctlLib, Version=2.0.0.0, Culture=neutral"
-                "ScatterAssemblies"
-                {
-                    "_5DEA884A4F3959E2DF85C5A3930F78D7"
-                    {
-                    "Name" = "8:Interop.MSComctlLib.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Interop.MSComctlLib.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_65E84984379043AF9F3BF66C449BDCBD"
             {
             "SourcePath" = "8:..\\resource\\included\\gnuplot\\bin\\gpsavediff"
@@ -862,6 +751,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_7C43E1F5D89113C395E7312585D422CD"
+            {
+            "SourcePath" = "8:GLVisualization.dll"
+            "TargetName" = "8:GLVisualization.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_7FA4994A1A804ABC86871DF78F3EAC31"
@@ -955,37 +864,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_9890C1B7EBC4F2054E153238C2D5B4D0"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AxInterop.MSComctlLib, Version=2.0.0.0, Culture=neutral"
-                "ScatterAssemblies"
-                {
-                    "_9890C1B7EBC4F2054E153238C2D5B4D0"
-                    {
-                    "Name" = "8:AxInterop.MSComctlLib.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:AxInterop.MSComctlLib.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_9DC658BB0E174AA98A538B89D3D2901C"
             {
             "SourcePath" = "8:..\\resource\\included\\gnuplot\\bin\\wgnuplot.exe"
@@ -1004,26 +882,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_A1D869069BE3D5CFBD5C2F9CDF41603A"
-            {
-            "SourcePath" = "8:MorseKernelATL.dll"
-            "TargetName" = "8:MorseKernelATL.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_AC89FBA60F83448598D06CB86156DB7E"
@@ -1052,26 +910,6 @@
             "TargetName" = "8:gpsavediff.cmd"
             "Tag" = "8:"
             "Folder" = "8:_B2F13F90762A4853BC7D251C82AA5AF7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_B24E8311A4934A7E9C27421FDF1984CC"
-            {
-            "SourcePath" = "8:..\\resource\\included\\gnuplottemplate\\3d.txt"
-            "TargetName" = "8:3d.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_007204CE97E048688B9D94048EB3F0FC"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1268,26 +1106,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_DCC8C284D05F3DFD97D66E4435D600D5"
-            {
-            "SourcePath" = "8:MSCOMCTL.OCX"
-            "TargetName" = "8:mscomctl.ocx"
-            "Tag" = "8:"
-            "Folder" = "8:_2CD46532F3D94F5CB1E182BBCAFC74E8"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:TRUE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:4"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_E08C302959E61928E03627C824063280"
             {
             "AssemblyRegister" = "3:1"
@@ -1437,17 +1255,6 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
-                    "{F27BD5C5-A65D-4608-96D4-7C5DA1F76302}:_007204CE97E048688B9D94048EB3F0FC"
-                    {
-                    "Name" = "8:gnuplottemplate"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_E3F7B78EBAEE4C819824969283C49BF8"
-                        "Folders"
-                        {
-                        }
-                    }
                     "{F27BD5C5-A65D-4608-96D4-7C5DA1F76302}:_B431CFEB6A7C46C78559F29A9984A4A6"
                     {
                     "Name" = "8:gnuplot"
@@ -2085,7 +1892,7 @@
         }
         "MergeModule"
         {
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_28543458400540D582D038D56F76DEF0"
+            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_005D16597ED345CEB292F986648CB579"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
@@ -2099,7 +1906,21 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_41F8B59F55FE4998B592BB437764E6B4"
+            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_2C9E35C4627F4031B67D89D295B27DCC"
+            {
+            "UseDynamicProperties" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "SourcePath" = "8:vc_user_stl71_rtl_x86_---.msm"
+                "Properties"
+                {
+                }
+            "LanguageId" = "3:0"
+            "Exclude" = "11:FALSE"
+            "Folder" = "8:"
+            "Feature" = "8:"
+            "IsolateTo" = "8:"
+            }
+            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_ED0683E2A4DF4222A472B1DFF99F22C2"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
@@ -2113,25 +1934,11 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_8E7F9D06E6014D61948D37D9B9EFA984"
+            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_F0DAD286B85A4B488766B59B06FD00CF"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
             "SourcePath" = "8:vc_user_mfc71_rtl_x86_---.msm"
-                "Properties"
-                {
-                }
-            "LanguageId" = "3:0"
-            "Exclude" = "11:FALSE"
-            "Folder" = "8:"
-            "Feature" = "8:"
-            "IsolateTo" = "8:"
-            }
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_9CE8BC6991484EB1BEBFB351726764BD"
-            {
-            "UseDynamicProperties" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:vc_user_stl71_rtl_x86_---.msm"
                 "Properties"
                 {
                 }

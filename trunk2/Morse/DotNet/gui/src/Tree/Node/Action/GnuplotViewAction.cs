@@ -1,3 +1,4 @@
+using System.Collections;
 using gui.Attributes;
 using gui.Tree.Node.ActionAllocator;
 using gui.Tree.Node.Factory;
@@ -12,13 +13,13 @@ namespace gui.Tree.Node.Action
 	/// </summary>		
 	public class GnuplotViewAction : ComputationNodeAction
 	{
-		private IExportData data;
-		private IGraphInfo info;
+		private IExportData[] data;
+		private int dimension;
 
-		public GnuplotViewAction(IExportData data, IGraphInfo info)
+		public GnuplotViewAction(IExportData[] data, int dimension)
 		{
 			this.data = data;
-			this.info = info;
+			this.dimension = dimension;
 		}
 
 		public override ComputationNodeMenuItem[] getMenuItems()
@@ -33,7 +34,7 @@ namespace gui.Tree.Node.Action
 
 		private void onClick()
 		{
-			GnuPlotView.ShowFromFile(info, data);
+			GnuPlotView.Visualize(data, dimension);
 
 		}
 
@@ -57,11 +58,27 @@ namespace gui.Tree.Node.Action
 
 			public ComputationNodeAction CreateAction(ComputationNode anode)
 			{
-				IKernelNode node = anode.Node;
-				return new GnuplotViewAction((IExportData) node, ((IGraph) node).graphInfo());
+				IKernelNode kernelNode = anode.Node;
+				if (kernelNode is IGroupNode)
+				{
+					IGroupNode groupNode = (IGroupNode) kernelNode;
+					ArrayList items = new ArrayList();
+					for (int i = 0; i < groupNode.nodeCount(); i++)
+					{
+						IKernelNode knode = groupNode.getNode(i);
+						//We believe that any node of gourp implements IExportData interface!
+						items.Add((IExportData) knode);
+					}
+					IExportData[] data = items.ToArray(typeof (IExportData)) as IExportData[];
+					return new GnuplotViewAction(data, ((IGraph) kernelNode).graphDimension());
+				}
+				else
+				{
+					return new GnuplotViewAction(new IExportData[] {(IExportData) kernelNode}, ((IGraph) kernelNode).graphDimension());
+				}
 			}
 		}
-
-		#endregion
 	}
+
+	#endregion
 }
