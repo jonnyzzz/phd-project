@@ -20,4 +20,8 @@ protected:
     void TestStable(double x, double y, double z);
 
     void TestSystemFunctionIteration(int n);
+
+    void TestSystemFunctionDerivate();
+
+    void TestSystemFunctionDerivateMultiple();
 };

@@ -39,6 +39,8 @@
 
 #include "../systemfunction/ISystemFunction.h"
 #include "../systemfunction/SystemFunction.h"
+#include "../systemfunction/ISystemFunctionDerivate.h"
+#include "../systemfunction/SystemFunctionDerivate.h"
 #include "../cellImageBuilders/SIPointBuilder.h"
 #include "../cellImageBuilders/MSPointBuilder.h"
 

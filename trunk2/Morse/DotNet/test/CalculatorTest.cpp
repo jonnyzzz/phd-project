@@ -30,6 +30,9 @@ void CalculatorTest::Test() {
     RUNEX( TestSystemFunctionIteration(2) );
     RUNEX( TestSystemFunctionIteration(20) );
 
+    RUN (TestSystemFunctionDerivate);
+    RUN (TestSystemFunctionDerivateMultiple);
+
    
     Message("Test: Success");
 }
@@ -151,4 +154,38 @@ void CalculatorTest::TestSystemFunctionIteration(int n) {
     this->Message(buff);
     
     AssertTrue( func.getOutput()[0] == n, "Itaration failed");
+}
+
+
+void CalculatorTest::TestSystemFunctionDerivate() {
+    FunctionFactory factory("y1=x1");
+
+    ISystemFunctionDerivate* function = new SystemFunctionDerivate(&factory, 1, 1);
+
+    double* input = function->getInput();
+    double* output = function->getOutput();
+
+    input[0] = 0;
+
+    function->evaluate();
+
+    AssertTrue(*output == 0 && output[1] == 1, "TestSystemFunctionDerivate 1d failed");
+
+    delete function;
+}
+
+void CalculatorTest::TestSystemFunctionDerivateMultiple() {
+    FunctionFactory factory("y1=x1+x2;y2=0;");
+    ISystemFunctionDerivate* funciton = new SystemFunctionDerivate(&factory, 2, 1);
+
+    double* input = funciton ->getInput();
+    double* output = funciton->getOutput();
+
+    input[0] = input[1] = 0;
+    
+    funciton->evaluate();
+
+    AssertTrue(output[0] == 0 && output[1] == 0 && output[2] == 1 && output[3] == 1 && output[4] == 0 && output[5] == 0, "TestSystemFunctionDerivateMultiple failed");
+
+    delete funciton;
 }

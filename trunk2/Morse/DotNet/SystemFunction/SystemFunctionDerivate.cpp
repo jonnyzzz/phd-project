@@ -33,7 +33,7 @@ double* SystemFunctionDerivate::getOutput() {
 
 void SystemFunctionDerivate::evaluate() {
     computationChain.front()->evaluate();
-    for (SystemFunctionDerivate::ComputationChain::iterator it = computationChain.begin()++;
+    for (SystemFunctionDerivate::ComputationChain::iterator it = ++computationChain.begin();
         it != computationChain.end(); it++) {
             (*it)->evaluate();
             matrixMUL(&(*it)->getOutput()[real_dimension], &(*it)->getInput()[real_dimension]);
@@ -75,7 +75,7 @@ SystemNativeVariables SystemFunctionDerivate::createVariables() {
     SystemNativeVariables vars;
     FunctionDictionary* dic = factory->getFunctionDictionary();
     
-    for (int i=1; i<=dimension; i++) {
+    for (int i=1; i<=real_dimension; i++) {
         sprintf(buff, name, i);        
         vars.push_back(dic->registerVariable(buff));
     };

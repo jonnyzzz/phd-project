@@ -1,36 +1,36 @@
 <Configuration>
   <RecentFilesTracker>
     <RecentFilesTracker>
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph_simplex\RomFunction2N.cpp" offset="700" line="0" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph\FunctionMS.cpp" offset="1004" line="29" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph_simplex\RomMS2.cpp" offset="0" line="-1" column="-1" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui\src\Visualization\GnuPlot\GnuPlotView.cs" offset="1596" line="0" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\SegmentProjectiveExtensionMorseFunction.h" offset="343" line="0" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\SermentProjectiveExtensionInfo.h" offset="487" line="0" column="0" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\test\CalculatorTest.cpp" offset="6179" line="138" column="0" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\SystemFunction.cpp" offset="0" line="-1" column="-1" />
+      <TrackedFile location="c:\program files\microsoft visual studio .net 2003\vc7\include\list" offset="0" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\ISystemFunction.cpp" offset="0" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\ISystemFunctionDerivate.cpp" offset="0" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\SystemFunctionDerivate.cpp" offset="0" line="128" column="0" />
+      <TrackedFile location="C:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\crt\src\newop.cpp" offset="0" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\test\stdafx.h" offset="0" line="10" column="0" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\test\CalculatorTest.h" offset="0" line="0" column="0" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\SegmentProjectiveExtendedSystemFunction.cpp" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\IMorseFunction.cpp" offset="128" line="-1" column="-1" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui\src\Tree\Node\Action\ComputationNodeMorsable.cs" offset="701" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph_simplex\RomFunction2N.cpp" offset="700" line="0" column="0" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph\FunctionMS.cpp" offset="0" line="29" column="0" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph_simplex\RomMS2.cpp" offset="0" line="-1" column="-1" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui\src\Visualization\GnuPlot\GnuPlotView.cs" offset="0" line="0" column="0" />
+      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui\src\Tree\Node\Action\ComputationNodeMorsable.cs" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph\Computator.cpp" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph\Computator.h" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph_simplex\RomFunction2N.h" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph_simplex\Rom.h" offset="0" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\IMorseFunction.cpp" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\ISystemFunction.h" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\IMorseFunction.h" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\SegmentProjectiveExtensionMorseFunction.cpp" offset="0" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\SegmentProjectiveExtensionMorseFunction.h" offset="0" line="0" column="0" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\SermentProjectiveExtensionInfo.cpp" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernelATL\GraphInfo.cpp" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernelATL\ProjectiveBundleGroup.h" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\graph\GraphComponents.h" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernelATL\ProjectiveBundle.h" offset="0" line="-1" column="-1" />
       <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernelATL\ComputationGraphResult.cpp" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernelATL\ProjectiveBundleGroup.cpp" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernelATL\SymbolicImageGraph.cpp" offset="0" line="15" column="0" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\cellImageBuilders\AbstractProcess.h" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\SystemFunction\IProjectiveExtensionInfo.h" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernelATL\ProjectiveBundleGraph.cpp" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\DotNetProject\Morse\DotNet\MorseKernelATL\ProjectiveBundleGraph.h" offset="0" line="-1" column="-1" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui\src\Runner.cs" offset="4468" line="0" column="0" />
-      <TrackedFile location="E:\Projects\Morse\DotNetProject\Morse\DotNet\gui\src\Tree\Node\Factory\ComputationNodeMenuFactory.cs" offset="8201" line="79" column="0" />
     </RecentFilesTracker>
   </RecentFilesTracker>
   <CompletionStatisticsManager>
@@ -43,9 +43,10 @@
       <Item value="Value" priority="0" />
       <Item value="Minimum" priority="1" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:string">
-      <Item value="Trim" priority="0" />
-      <Item value="Replace" priority="0" />
+    <ItemStatistics item="Qualified:gui.src.Tree.Node.ActionAllocator.IActionFactory">
+      <Item value="CreateAction" priority="0" />
+      <Item value="Corresponds" priority="0" />
+      <Item value="GetType" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.Logger.Logger">
       <Item value="Log" priority="3" />
@@ -60,9 +61,6 @@
     <ItemStatistics item="Qualified:int[,]">
       <Item value="Length" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:@gui.src.Tree.Node.Action.GnuplotViewAction">
-      <Item value="Register" priority="0" />
-    </ItemStatistics>
     <ItemStatistics item="Qualified:@System.IO.Directory">
       <Item value="GetCurrentDirectory" priority="0" />
     </ItemStatistics>
@@ -75,6 +73,9 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:MorseKernelATL.ISubdevidable">
       <Item value="Subdevide" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.IO.StreamReader">
+      <Item value="ReadLine" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.TreeViewEventArgs">
       <Item value="Node" priority="1" />
@@ -184,9 +185,6 @@
       <Item value="Clear" priority="0" />
       <Item value="Add" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:System.Windows.Forms.MenuItem">
-      <Item value="Enabled" priority="0" />
-    </ItemStatistics>
     <ItemStatistics item="Qualified:gui.SystemAssignment">
       <Item value="getFunction" priority="0" />
       <Item value="ShowDialog" priority="0" />
@@ -205,8 +203,11 @@
     <ItemStatistics item="Qualified:System.Reflection.MemberTypes">
       <Item value="CompareTo" priority="1" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:@System.Windows.Forms.MouseButtons">
-      <Item value="Right" priority="0" />
+    <ItemStatistics item="Qualified:MorseKernelATL.ISymbolicImageGroup">
+      <Item value="addNode" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:int[][]">
+      <Item value="Length" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.String">
       <Item value="Format" priority="1" />
@@ -311,9 +312,6 @@
       <Item value="AddRange" priority="2" />
       <Item value="GetEnumerator" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:gui.ComputatioinTree">
-      <Item value="Root" priority="1" />
-    </ItemStatistics>
     <ItemStatistics item="Qualified:gui.ComputationNodeMenuItem[]">
       <Item value="Length" priority="2" />
     </ItemStatistics>
@@ -338,9 +336,6 @@
       <Item value="Arguments" priority="1" />
       <Item value="FileName" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:MorseKernelATL.CProjectiveBundleGraph">
-      <Item value="subdevisionPoint" priority="0" />
-    </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Runtime.CompilerServices">
       <Item value="CallConvThiscall" priority="0" />
     </ItemStatistics>
@@ -355,10 +350,10 @@
       <Item value="Add" priority="1" />
       <Item value="Count" priority="1" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:gui.src.Tree.Node.ActionAllocator.IActionFactory">
-      <Item value="CreateAction" priority="0" />
-      <Item value="Corresponds" priority="0" />
-      <Item value="GetType" priority="0" />
+    <ItemStatistics item="Qualified:@gui.NextStepParams">
+      <Item value="showSelector" priority="1" />
+      <Item value="Instance" priority="2" />
+      <Item value="ControlAccessibleObject" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.Panels">
       <Item value="GraphNodeInfo" priority="0" />
@@ -383,6 +378,10 @@
     <ItemStatistics item="Qualified:System.Data.DataColumn">
       <Item value="ReadOnly" priority="1" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:string">
+      <Item value="Trim" priority="0" />
+      <Item value="Replace" priority="0" />
+    </ItemStatistics>
     <ItemStatistics item="Qualified:MorseKernelATL.IFunctionEvents_FunctionAcceptedEventHandler">
       <Item value="Method" priority="0" />
     </ItemStatistics>
@@ -397,8 +396,8 @@
     <ItemStatistics item="Qualified:gui.ComputationNodeSymbolicImage">
       <Item value="subdevidePoint" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:System.IO.StreamReader">
-      <Item value="ReadLine" priority="0" />
+    <ItemStatistics item="Qualified:@gui.src.InitializeStaticAttrubute.Type">
+      <Item value="TreeNodeAction" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.PaintEventArgs">
       <Item value="Graphics" priority="0" />
@@ -409,16 +408,15 @@
     <ItemStatistics item="Qualified:System.ComponentModel.ISite">
       <Item value="DesignMode" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:MorseKernelATL.CMorseSpectrum">
-      <Item value="lowerBound" priority="1" />
-      <Item value="upperBound" priority="1" />
+    <ItemStatistics item="Qualified:System.Windows.Forms.MenuItem">
+      <Item value="Enabled" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:AxMorseKernelVisualizationATL.AxCMorseKernelVisualizationDirectGraph2D">
       <Item value="OnMouseMoveFloat" priority="0" />
       <Item value="SetTestGraph" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:MorseKernelATL.ISymbolicImageGroup">
-      <Item value="addNode" priority="0" />
+    <ItemStatistics item="Qualified:gui.ComputatioinTree">
+      <Item value="Root" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Reflection.BindingFlags">
       <Item value="NonPublic" priority="2" />
@@ -426,10 +424,18 @@
       <Item value="Static" priority="1" />
       <Item value="Public" priority="1" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Xml.XmlDocument">
+      <Item value="DocumentElement" priority="0" />
+      <Item value="Load" priority="0" />
+    </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.DialogResult">
       <Item value="Yes" priority="0" />
       <Item value="Cancel" priority="1" />
       <Item value="OK" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Data.DataRowChangeEventArgs">
+      <Item value="Action" priority="2" />
+      <Item value="Row" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@">
       <Item value="AddRange" priority="0" />
@@ -504,9 +510,6 @@
       <Item value="Application" priority="0" />
       <Item value="Control" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:System.Data.DataViewManager">
-      <Item value="DataViewSettings" priority="0" />
-    </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.Runner.ComputationForm">
       <Item value="updateProgressBar" priority="0" />
       <Item value="Update" priority="0" />
@@ -553,20 +556,18 @@
     <ItemStatistics item="Qualified:@System.IO.File">
       <Item value="OpenText" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:System.Xml.XmlDocument">
-      <Item value="DocumentElement" priority="0" />
-      <Item value="Load" priority="0" />
+    <ItemStatistics item="Qualified:MorseKernelATL.CProjectiveBundleGraph">
+      <Item value="subdevisionPoint" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:@gui.NextStepParams">
-      <Item value="showSelector" priority="1" />
-      <Item value="Instance" priority="2" />
-      <Item value="ControlAccessibleObject" priority="0" />
+    <ItemStatistics item="Qualified:MorseKernelATL.CMorseSpectrum">
+      <Item value="lowerBound" priority="1" />
+      <Item value="upperBound" priority="1" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:@gui.src.InitializeStaticAttrubute.Type">
-      <Item value="TreeNodeAction" priority="0" />
+    <ItemStatistics item="Qualified:System.Data.DataViewManager">
+      <Item value="DataViewSettings" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:int[][]">
-      <Item value="Length" priority="2" />
+    <ItemStatistics item="Qualified:@System.Windows.Forms.MouseButtons">
+      <Item value="Right" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.GridTableStylesCollection">
       <Item value="Add" priority="0" />
@@ -629,9 +630,9 @@
       <Item value="subsitute" priority="8" />
       <Item value="ToString" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:System.Data.DataRowChangeEventArgs">
-      <Item value="Action" priority="2" />
-      <Item value="Row" priority="1" />
+    <ItemStatistics item="Qualified:AxMorseKernelVisualizationATL._IMorseKernelVisualizationDirect3DEvents_OnMouseMoveFloatEvent">
+      <Item value="x2" priority="0" />
+      <Item value="x3" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Runtime">
       <Item value="Remoting" priority="0" />
@@ -667,9 +668,8 @@
     <ItemStatistics item="Qualified:@System.Windows">
       <Item value="Forms" priority="2" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:AxMorseKernelVisualizationATL._IMorseKernelVisualizationDirect3DEvents_OnMouseMoveFloatEvent">
-      <Item value="x2" priority="0" />
-      <Item value="x3" priority="0" />
+    <ItemStatistics item="Qualified:@gui.src.Tree.Node.Action.GnuplotViewAction">
+      <Item value="Register" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.TextBox">
       <Item value="FindForm" priority="0" />
