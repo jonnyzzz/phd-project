@@ -185,6 +185,12 @@
 				RelativePath=".\GraphResult.cpp">
 			</File>
 			<File
+				RelativePath=".\GraphResultImpl.cpp">
+			</File>
+			<File
+				RelativePath=".\GroupNode.cpp">
+			</File>
+			<File
 				RelativePath=".\MorseKernel2.cpp">
 			</File>
 			<File
@@ -198,6 +204,12 @@
 			</File>
 			<File
 				RelativePath=".\Result.cpp">
+			</File>
+			<File
+				RelativePath=".\ResultBase.cpp">
+			</File>
+			<File
+				RelativePath=".\ResultMerger.cpp">
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp">
@@ -259,6 +271,12 @@
 				RelativePath=".\GraphResult.h">
 			</File>
 			<File
+				RelativePath=".\GraphResultImpl.h">
+			</File>
+			<File
+				RelativePath=".\GroupNode.h">
+			</File>
+			<File
 				RelativePath=".\Node.h">
 			</File>
 			<File
@@ -272,6 +290,12 @@
 			</File>
 			<File
 				RelativePath=".\Result.h">
+			</File>
+			<File
+				RelativePath=".\ResultBase.h">
+			</File>
+			<File
+				RelativePath=".\ResultMerger.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">

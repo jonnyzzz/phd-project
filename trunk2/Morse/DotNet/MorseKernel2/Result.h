@@ -2,6 +2,8 @@
 
 #pragma once
 #include "resource.h"       // main symbols
+#include "ResultBase.h"
+#include "ResultMerger.h"
 
 
 // IResult
@@ -11,8 +13,10 @@
 	dual,	helpstring("IResult Interface"),
 	pointer_default(unique)
 ]
-__interface IResult : IDispatch
+__interface IResult : IResultBase
 {
+	[id(1)]
+	HRESULT GetResultMerger([out, retval] IResultMerger** merger);
 };
 
 

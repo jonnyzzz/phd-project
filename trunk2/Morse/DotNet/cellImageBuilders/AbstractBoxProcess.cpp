@@ -2,7 +2,7 @@
 #include ".\abstractboxprocess.h"
 #include "../graph/graphutil.h"
 
-AbstractBoxProcess::AbstractBoxProcess(Graph* graph, SystemFunction* function, int* factor, ProgressBarInfo* pinfo) : 
+AbstractBoxProcess::AbstractBoxProcess(Graph* graph, ISystemFunction* function, int* factor, ProgressBarInfo* pinfo) : 
 	AbstractProcess(graph, pinfo), function(function), factor(factor)
 {
 	this->input = function->getInput();
@@ -19,6 +19,7 @@ AbstractBoxProcess::AbstractBoxProcess(Graph* graph, SystemFunction* function, i
 	this->a = new JInt[dimension+1];
 	this->point = new JInt[dimension];
 	this->pointT = new JInt[dimension];
+	this->eps2 = new JDouble[dimension];
 }
 
 AbstractBoxProcess::~AbstractBoxProcess(void)
@@ -30,11 +31,16 @@ AbstractBoxProcess::~AbstractBoxProcess(void)
 	delete[] a;
 	delete[] point;
 	delete[] pointT;
+	delete[] eps2;
 }
 
 
 void AbstractBoxProcess::start() {
 	AbstractProcess::start();
+
+	for (int i=0; i<dimension; i++) {
+		eps2[i] = graph_source->getEps()[i]/2;
+	}
 
 	submitGraphResult(createGraph());
 }
@@ -87,9 +93,12 @@ void AbstractBoxProcess::processNode(Node* node, Graph* graph) {
 	for (int i=0; i<dimension; i++) {
         b[i] = 0;
 		x0[i] = graph->toExternal(graph->getCells(node)[i], i);
+		input[i] = x0[i] + eps2[i];
 	}
 
-	bool isFirst = true;
+	function->evaluateAsApproximationCenter();
+	vectorCopy(output, value_min);
+	vectorCopy(output, value_max);
 
 	while (b[dimension] == 0) {
 		for (int i=0; i<dimension; i++) {
@@ -98,23 +107,17 @@ void AbstractBoxProcess::processNode(Node* node, Graph* graph) {
 
 		function->evaluate();
 
-		if (isFirst) {
-			vectorCopy(output, value_min);
-			vectorCopy(output, value_max);
-		} else {
-			for (int i=0; i<dimension; i++) {
-				if (output[i] > value_max[i]) {
-					value_max[i] = output[i];
-				}
+		for (int i=0; i<dimension; i++) {
+			if (output[i] > value_max[i]) {
+				value_max[i] = output[i];
+			}
 
-				if (output[i] < value_min[i]) {
-					value_min[i] = output[i];
-				}
+			if (output[i] < value_min[i]) {
+				value_min[i] = output[i];
 			}
 		}
 
 		b[0]++;
-		isFirst = false;
 
 		for (int i=0; i<dimension; i++) {
 			if (b[i] > 1) {

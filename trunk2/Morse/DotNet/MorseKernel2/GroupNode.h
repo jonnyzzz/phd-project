@@ -21,9 +21,12 @@ __interface IGroupNode : IDispatch
 	HRESULT GetNode([in] int index, [out, retval] INode** node);
 
 	[id(13)]
-	HRESULT AddNode([in] INode* node);
+	HRESULT CanAddNode([in] INode* node);
 
 	[id(14)]
+	HRESULT AddNode([in] INode* node);
+
+	[id(15)]
 	HRESULT CreateNode([out, retval] INode** node);
 };
 

@@ -6,7 +6,7 @@ class AbstractBoxProcess :
 	public AbstractProcess
 {
 public:
-	AbstractBoxProcess(Graph* graph, SystemFunction* function, int* factor, ProgressBarInfo* pinfo);
+	AbstractBoxProcess(Graph* graph, ISystemFunction* function, int* factor, ProgressBarInfo* pinfo);
 	virtual ~AbstractBoxProcess(void);
 
 
@@ -30,10 +30,14 @@ protected:
 protected:
 	int dimension;
 
-	SystemFunction* function;
+	ISystemFunction* function;
 	JDouble* input;
 	JDouble* output;
 
+
+
+private:
+	JDouble* eps2;
 	JDouble* x0;
 	JInt* b;
 	JInt* a;
@@ -44,8 +48,4 @@ protected:
 	JDouble* value_max;
 
 	int* factor;
-
-
-private:
-
 };

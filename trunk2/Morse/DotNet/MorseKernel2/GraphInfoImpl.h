@@ -21,7 +21,8 @@ class Graph;
 	helpstring("GraphInfoImpvffffl Class")	
 ]
 class ATL_NO_VTABLE CGraphInfoImpl :
-	public IWritableGraphInfo
+	public IWritableGraphInfo,
+	public IGraphInfo
 {
 public:
 	CGraphInfoImpl();

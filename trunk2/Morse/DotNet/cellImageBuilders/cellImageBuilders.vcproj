@@ -172,6 +172,9 @@
 				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.cpp">
 			</File>
 			<File
+				RelativePath=".\SimpleBoxProcess.cpp">
+			</File>
+			<File
 				RelativePath=".\SIOverlapedPointBuilder.cpp">
 			</File>
 			<File
@@ -232,6 +235,9 @@
 			</File>
 			<File
 				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.h">
+			</File>
+			<File
+				RelativePath=".\SimpleBoxProcess.h">
 			</File>
 			<File
 				RelativePath=".\SIOverlapedPointBuilder.h">

@@ -9,7 +9,7 @@
 	object,
 	uuid("5F89F9F3-AB8D-4129-A752-8A4258A8ECE9"),
 	dual,	helpstring("IWritableGraphInfo Interface"),
-	pointer_default(unique)
+	pointer_default(unique), local, hidden
 ]
 __interface IWritableGraphInfo : IDispatch
 {

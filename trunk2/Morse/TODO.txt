@@ -1,3 +1,5 @@
+Smart Group constraint check in kernel2
+Stop using protected fields in abstract process classes hierarchy. Implement field hiding where suitable.
 Wrong answer for 0.5 2 linear system. There is no -ln2 answer. only +ln2!!!
 FIX Shouldn't allow to start without resources!
 FIX Resources -> XML
