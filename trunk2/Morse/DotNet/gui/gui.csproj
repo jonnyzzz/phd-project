@@ -182,202 +182,198 @@
         <Files>
             <Include>
                 <File
-                    RelPath = "ComputatioinTree.cs"
-                    SubType = "UserControl"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputatioinTree.resx"
-                    DependentUpon = "ComputatioinTree.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "ComputationForm.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationForm.en.resx"
-                    DependentUpon = "ComputationForm.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "ComputationForm.en-AU.resx"
-                    DependentUpon = "ComputationForm.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "ComputationForm.resx"
-                    DependentUpon = "ComputationForm.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "ComputationNode.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodeAction.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodeDynamicTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodeExporterAction.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodeExtendable.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodeMenuFactory.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodeMenuItem.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodeMenuItem.resx"
-                    DependentUpon = "ComputationNodeMenuItem.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "ComputationNodeMorsable.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodePlural.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodeSingular.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodeSubdevidablePoint.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationNodeVisualizer.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ComputationParametersFactory.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "CumputationNodeSubdevidable.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GraphOperationSelector.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "GraphOperationSelector.en.resx"
-                    DependentUpon = "GraphOperationSelector.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "GraphOperationSelector.resx"
-                    DependentUpon = "GraphOperationSelector.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "InfoGraphParser.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "jo.ico"
+                    RelPath = "res\jo.ico"
                     BuildAction = "Content"
                 />
                 <File
-                    RelPath = "NextStepParams.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "NextStepParams.en.resx"
-                    DependentUpon = "NextStepParams.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "NextStepParams.resx"
-                    DependentUpon = "NextStepParams.cs"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "NodeInformation.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Resources.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Runner.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SI.ico"
+                    RelPath = "res\SI.ico"
                     BuildAction = "Content"
                 />
                 <File
-                    RelPath = "SystemAssignment.cs"
+                    RelPath = "src\ComputationForm.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "SystemAssignment.resx"
+                    RelPath = "src\ComputationForm.en.resx"
+                    DependentUpon = "ComputationForm.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\ComputationForm.en-AU.resx"
+                    DependentUpon = "ComputationForm.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\ComputationForm.resx"
+                    DependentUpon = "ComputationForm.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Runner.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\XmlParseException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Resources\Resources.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\SystemFunction\SystemAssignment.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\SystemFunction\SystemAssignment.resx"
                     DependentUpon = "SystemAssignment.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "Visualization2D.cs"
+                    RelPath = "src\Tree\ComputatioinTree.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\ComputatioinTree.resx"
+                    DependentUpon = "ComputatioinTree.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ComputationNode.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ComputationNodeDynamicTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ComputationNodePlural.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ComputationNodeSingular.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\ComputationNodeAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\ComputationNodeExporterAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\ComputationNodeExtendable.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\ComputationNodeMorsable.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\ComputationNodeSubdevidablePoint.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\ComputationNodeVisualizer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\CumputationNodeSubdevidable.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Factory\ComputationNodeMenuFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Factory\ComputationParametersFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\GraphOperationSelector.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Visualization2D.resx"
+                    RelPath = "src\Tree\Node\Forms\GraphOperationSelector.en.resx"
+                    DependentUpon = "GraphOperationSelector.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\GraphOperationSelector.resx"
+                    DependentUpon = "GraphOperationSelector.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\NextStepParams.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\NextStepParams.en.resx"
+                    DependentUpon = "NextStepParams.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Forms\NextStepParams.resx"
+                    DependentUpon = "NextStepParams.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Menu\ComputationNodeMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Menu\ComputationNodeMenuItem.resx"
+                    DependentUpon = "ComputationNodeMenuItem.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Util\InfoGraphParser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <Folder RelPath = "src\Visualization\GnuPlot\" />
+                <File
+                    RelPath = "src\Visualization\JonATL\Visualization2D.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Visualization\JonATL\Visualization2D.resx"
                     DependentUpon = "Visualization2D.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "Visualization3D.cs"
+                    RelPath = "src\Visualization\JonATL\Visualization3D.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "Visualization3D.resx"
+                    RelPath = "src\Visualization\JonATL\Visualization3D.resx"
                     DependentUpon = "Visualization3D.cs"
                     BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "XmlParseException.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
                 />
             </Include>
         </Files>

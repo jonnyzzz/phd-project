@@ -1,7 +1,7 @@
 using System;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node.Util
 {
 	/// <summary>
 	/// Summary description for InfoGraphParser.

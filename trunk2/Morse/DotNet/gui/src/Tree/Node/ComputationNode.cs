@@ -1,15 +1,18 @@
 using System;
 using System.Collections;
+using System.Windows.Forms;
+using gui.Tree.Node.Factory;
+using gui.Tree.Node.Menu;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node
 {
     /// <summary>
     /// Summary description for ComputationNode.
     /// </summary>
     /// 
-    public abstract class ComputationNode : NodeInformation
-    {
+    public abstract class ComputationNode : TreeNode
+    {   
         protected abstract ComputationNodeMenuItem[] getMenuItems();
 
         ComputationNodePlural currentGroup = null;

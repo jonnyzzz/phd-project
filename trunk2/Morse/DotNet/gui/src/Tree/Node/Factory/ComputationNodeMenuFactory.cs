@@ -1,9 +1,10 @@
 using System;
 using System.Resources;
 using System.Windows.Forms;
+using gui.Tree.Node.Menu;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node.Factory
 {
 	/// <summary>
 	/// Summary description for ComputationNodeMenuFactory.

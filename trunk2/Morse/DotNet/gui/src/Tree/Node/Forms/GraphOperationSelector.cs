@@ -1,8 +1,9 @@
 using System;
 using System.Windows.Forms;
+using gui.Tree.Node;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node.Forms
 {
 	/// <summary>
 	/// Summary description for GraphOperationSelector.

@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
+using gui.Tree.Node;
+using gui.Tree.Node.Action;
+using gui.Tree.Node.Factory;
+using gui.Tree.Node.Menu;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node
 {
 	/// <summary>
 	/// Summary description for ComputationNodeDynamicTest.
@@ -35,7 +39,7 @@ namespace gui
 			ArrayList arrayActions = new ArrayList();
 			ArrayList arrayItems = new ArrayList();
 
-			ComputationNodeAction act = null;
+		    ComputationNodeAction act = null;
 
 			if (mnode is ISubdevidable)
 			{

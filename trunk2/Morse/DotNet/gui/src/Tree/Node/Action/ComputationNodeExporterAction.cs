@@ -1,8 +1,11 @@
-using System;
 using System.Windows.Forms;
+using gui.Tree.Node;
+using gui.Tree.Node.Action;
+using gui.Tree.Node.Factory;
+using gui.Tree.Node.Menu;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node.Action
 {
 	/// <summary>
 	/// Summary description for ComputationNodeExporterAction.
@@ -14,7 +17,7 @@ namespace gui
 		{
 			this.node = node;
 			items = new ComputationNodeMenuItem[] {
-				ComputationNodeMenuFactory.getMenuExportData(new ComputationNodeMenuFactory.ExportData(OnExportData))};
+			    ComputationNodeMenuFactory.getMenuExportData(new ComputationNodeMenuFactory.ExportData(OnExportData))};
 		}
 
 		public override ComputationNodeMenuItem[] getMenuItems()
@@ -35,6 +38,6 @@ namespace gui
 			} 
 		}
 
-		ComputationNodeMenuItem[] items = new ComputationNodeMenuItem[]{};
+	    ComputationNodeMenuItem[] items = new ComputationNodeMenuItem[]{};
 	}
 }

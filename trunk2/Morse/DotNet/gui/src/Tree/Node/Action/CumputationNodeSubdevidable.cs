@@ -1,6 +1,9 @@
+using gui.Tree.Node;
+using gui.Tree.Node.Factory;
+using gui.Tree.Node.Menu;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node.Action
 {	
 	public class ComputationNodeSubdevidable : ComputationNodeAction
 	{
@@ -17,7 +20,7 @@ namespace gui
 			return 
 				new ComputationNodeMenuItem[]
 				{
-						ComputationNodeMenuFactory.SubdevideAction(new ComputationNodeMenuFactory.Subdevide(Subdevide))
+				    ComputationNodeMenuFactory.SubdevideAction(new ComputationNodeMenuFactory.Subdevide(Subdevide))
 				};
 		}
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace gui
+namespace gui.Tree
 {
 	/// <summary>
 	/// Summary description for XmlParseException.

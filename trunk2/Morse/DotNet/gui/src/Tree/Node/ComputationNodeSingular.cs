@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Windows.Forms;
+using gui.Tree.Node;
+using gui.Tree.Node.Menu;
+using gui.Tree.Node.Util;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node
 {
 	/// <summary>
 	/// Summary description for ComputationNodeSingular.

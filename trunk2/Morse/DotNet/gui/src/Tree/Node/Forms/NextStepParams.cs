@@ -5,7 +5,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace gui
+namespace gui.Tree.Node.Forms
 {
 	/// <summary>
 	/// Summary description for NextStepParams.

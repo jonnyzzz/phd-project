@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Windows.Forms;
+using gui.Tree.Node;
+using gui.Tree.Node.Factory;
+using gui.Tree.Node.Menu;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node
 {
 	/// <summary>
 	/// Summary description for ComputationNodePlural.
@@ -22,7 +25,7 @@ namespace gui
 			if (nodes.Count == 0 ) 
 				return new ComputationNodeMenuItem[]{};
 					else return new ComputationNodeMenuItem[] {
-						ComputationNodeMenuFactory.getMenuCreateGroupNode(
+					    ComputationNodeMenuFactory.getMenuCreateGroupNode(
 							new ComputationNodeMenuFactory.DoCreateGroupNode(onCreateNode)
 																  ) 
 															  };

@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace gui
+namespace gui.Tree.Node.Menu
 {
 	/// <summary>
 	/// Summary description for ComputationNodeMenuItem.

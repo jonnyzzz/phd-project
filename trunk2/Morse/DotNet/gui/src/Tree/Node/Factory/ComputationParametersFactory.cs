@@ -1,8 +1,9 @@
 using System;
 using System.Windows.Forms;
+using gui.Tree.Node.Forms;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node.Factory
 {
 	/// <summary>
 	/// Summary description for ComputationParametersFactory.

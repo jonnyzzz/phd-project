@@ -1,6 +1,6 @@
 using System;
 
-namespace gui
+namespace gui.Resources
 {
 	/// <summary>
 	/// Summary description for Resources.

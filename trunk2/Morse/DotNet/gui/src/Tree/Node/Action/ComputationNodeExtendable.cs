@@ -1,7 +1,11 @@
 using System;
+using gui.Tree.Node;
+using gui.Tree.Node.Action;
+using gui.Tree.Node.Factory;
+using gui.Tree.Node.Menu;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree.Node.Action
 {
 	/// <summary>
 	/// Summary description for ComputationNodeExtendable.
@@ -18,7 +22,7 @@ namespace gui
 		public override ComputationNodeMenuItem[] getMenuItems()
 		{
 			return new ComputationNodeMenuItem[] {
-					 ComputationNodeMenuFactory.ExtendAction(new ComputationNodeMenuFactory.Extend(Extend))
+			    ComputationNodeMenuFactory.ExtendAction(new ComputationNodeMenuFactory.Extend(Extend))
 				};
 		}
 

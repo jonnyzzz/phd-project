@@ -1,8 +1,11 @@
 using System;
 using System.Windows.Forms;
+using gui.Tree;
+using gui.Tree.Node;
+using gui.Tree.Node.Forms;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Forms
 {
 	/// <summary>
 	/// Summary description for ComputationForm.
@@ -15,7 +18,7 @@ namespace gui
 		private System.Windows.Forms.MenuItem menuExit;
 		private System.Windows.Forms.MenuItem menuSystem;
 		private System.Windows.Forms.MenuItem menuStatic;
-		private gui.ComputatioinTree computatioinTree;
+		private Tree.ComputatioinTree computatioinTree;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.MenuItem menuSelection;
@@ -73,7 +76,7 @@ namespace gui
 		{
 			this.components = new System.ComponentModel.Container();
 			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(ComputationForm));
-			this.computatioinTree = new gui.ComputatioinTree();
+			this.computatioinTree = new Tree.ComputatioinTree();
 			this.mainMenu = new System.Windows.Forms.MainMenu();
 			this.menuSystem = new System.Windows.Forms.MenuItem();
 			this.menuAssign = new System.Windows.Forms.MenuItem();
@@ -524,7 +527,7 @@ namespace gui
 
 		private void menuAssign_Click(object sender, System.EventArgs e)
 		{			
-			SystemAssignment assign = new SystemAssignment();
+		    SystemAssignment assign = new SystemAssignment();
 			if (assign.ShowDialog(this) == DialogResult.OK)
 			{
 				Console.Out.WriteLine("Runner.Kernel.Function = {0}", Runner.Kernel.Function == null);

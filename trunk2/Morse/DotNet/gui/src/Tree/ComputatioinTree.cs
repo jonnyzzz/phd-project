@@ -1,9 +1,10 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using gui.Tree.Node;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Tree
 {
 	public delegate void ContextMenuBeforeOpenEvent(ComputationNode node);
 	public delegate void MouseMoveComponentEvent(ComputationNode node);

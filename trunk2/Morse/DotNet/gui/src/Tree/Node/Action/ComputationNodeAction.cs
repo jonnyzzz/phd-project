@@ -1,6 +1,7 @@
 using System;
+using gui.Tree.Node.Menu;
 
-namespace gui
+namespace gui.Tree.Node.Action
 {
 	/// <summary>
 	/// Summary description for ComputationNodeAction.

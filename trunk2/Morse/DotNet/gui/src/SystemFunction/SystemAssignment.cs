@@ -5,9 +5,10 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
 using System.Xml;
+using gui.Tree;
 using MorseKernelATL;
 
-namespace gui
+namespace gui.Forms
 {
 	/// <summary>
 	/// Summary description for SystemAssignment.

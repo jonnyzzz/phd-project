@@ -4,7 +4,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace gui
+namespace gui.Visualization.JonATL
 {
 	/// <summary>
 	/// Summary description for Visualization.
