@@ -2,8 +2,8 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
-using AxMSComctlLib;
 using gui.Panels;
+using gui.ProgressBar;
 using gui.Serialization;
 using gui.Tree;
 using gui.Tree.Node;
@@ -30,7 +30,6 @@ namespace gui.Forms
 		private MenuItem menuSelection;
 		private MenuItem menuDeselectAll;
 		private Label label1;
-		private AxProgressBar axProgressBar1;
 		private ImageList imageList1;
 		private Panel panelRightDownInternal;
 		private Panel panelRightDown;
@@ -52,14 +51,13 @@ namespace gui.Forms
 		private System.Windows.Forms.MenuItem menuItemDeselectGroup;
 		private System.Windows.Forms.MenuItem menuItem1;
 		private System.Windows.Forms.MenuItem menuItem2;
+		private gui.ProgressBar.SmartProgressBar smartProgressBar;
+		private System.Windows.Forms.Panel panelProgressBarBorder;
 		private IContainer components;
 
 		public void updateProgressBar(int min, int max, int current)
 		{
 			Application.DoEvents();
-			axProgressBar1.Min = min;
-			axProgressBar1.Max = max;
-			axProgressBar1.Value = current;
 		}
 
 		public ComputationForm()
@@ -106,9 +104,11 @@ namespace gui.Forms
 			this.menuLoad = new System.Windows.Forms.MenuItem();
 			this.menuStatic = new System.Windows.Forms.MenuItem();
 			this.menuItemShowSystemFunction = new System.Windows.Forms.MenuItem();
-			this.menuExit = new System.Windows.Forms.MenuItem();
+			this.menuItem2 = new System.Windows.Forms.MenuItem();
 			this.menuItemInvLoad = new System.Windows.Forms.MenuItem();
 			this.menuItemInvSave = new System.Windows.Forms.MenuItem();
+			this.menuItem1 = new System.Windows.Forms.MenuItem();
+			this.menuExit = new System.Windows.Forms.MenuItem();
 			this.menuSelection = new System.Windows.Forms.MenuItem();
 			this.menuDeselectAll = new System.Windows.Forms.MenuItem();
 			this.menuItemDeselectGroup = new System.Windows.Forms.MenuItem();
@@ -119,9 +119,9 @@ namespace gui.Forms
 			this.menuItemAbout = new System.Windows.Forms.MenuItem();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.panelNodeInfo = new System.Windows.Forms.Panel();
-			this.axProgressBar1 = new AxMSComctlLib.AxProgressBar();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.panelRightDownInternal = new System.Windows.Forms.Panel();
+			this.smartProgressBar = new gui.ProgressBar.SmartProgressBar();
 			this.label1 = new System.Windows.Forms.Label();
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
 			this.panelRightDown = new System.Windows.Forms.Panel();
@@ -130,16 +130,15 @@ namespace gui.Forms
 			this.splitterUD = new System.Windows.Forms.Splitter();
 			this.panelLeft = new System.Windows.Forms.Panel();
 			this.splitterLR = new System.Windows.Forms.Splitter();
-			this.menuItem1 = new System.Windows.Forms.MenuItem();
-			this.menuItem2 = new System.Windows.Forms.MenuItem();
+			this.panelProgressBarBorder = new System.Windows.Forms.Panel();
 			this.groupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.axProgressBar1)).BeginInit();
 			this.groupBox2.SuspendLayout();
 			this.panelRightDownInternal.SuspendLayout();
 			this.panelRightDown.SuspendLayout();
 			this.panelRightUp.SuspendLayout();
 			this.panelRight.SuspendLayout();
 			this.panelLeft.SuspendLayout();
+			this.panelProgressBarBorder.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// computatioinTree
@@ -209,11 +208,10 @@ namespace gui.Forms
 			this.menuItemShowSystemFunction.Text = "ShowSystemFunction";
 			this.menuItemShowSystemFunction.Click += new System.EventHandler(this.menuItemShowSystemFunction_Click);
 			// 
-			// menuExit
+			// menuItem2
 			// 
-			this.menuExit.Index = 5;
-			this.menuExit.Text = "Exit\tALT+F4";
-			this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
+			this.menuItem2.Index = 1;
+			this.menuItem2.Text = "-";
 			// 
 			// menuItemInvLoad
 			// 
@@ -228,6 +226,17 @@ namespace gui.Forms
 			this.menuItemInvSave.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
 			this.menuItemInvSave.Text = "Save";
 			this.menuItemInvSave.Click += new System.EventHandler(this.menuItemInvSave_Click);
+			// 
+			// menuItem1
+			// 
+			this.menuItem1.Index = 4;
+			this.menuItem1.Text = "-";
+			// 
+			// menuExit
+			// 
+			this.menuExit.Index = 5;
+			this.menuExit.Text = "Exit\tALT+F4";
+			this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
 			// 
 			// menuSelection
 			// 
@@ -303,17 +312,6 @@ namespace gui.Forms
 			this.panelNodeInfo.Size = new System.Drawing.Size(360, 336);
 			this.panelNodeInfo.TabIndex = 0;
 			// 
-			// axProgressBar1
-			// 
-			this.axProgressBar1.ContainingControl = this;
-			this.axProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.axProgressBar1.Location = new System.Drawing.Point(5, 44);
-			this.axProgressBar1.Name = "axProgressBar1";
-			this.axProgressBar1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axProgressBar1.OcxState")));
-			this.axProgressBar1.RightToLeft = false;
-			this.axProgressBar1.Size = new System.Drawing.Size(350, 23);
-			this.axProgressBar1.TabIndex = 0;
-			// 
 			// groupBox2
 			// 
 			this.groupBox2.Controls.Add(this.panelRightDownInternal);
@@ -327,14 +325,26 @@ namespace gui.Forms
 			// 
 			// panelRightDownInternal
 			// 
+			this.panelRightDownInternal.Controls.Add(this.panelProgressBarBorder);
 			this.panelRightDownInternal.Controls.Add(this.label1);
-			this.panelRightDownInternal.Controls.Add(this.axProgressBar1);
 			this.panelRightDownInternal.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelRightDownInternal.DockPadding.All = 5;
 			this.panelRightDownInternal.Location = new System.Drawing.Point(3, 16);
 			this.panelRightDownInternal.Name = "panelRightDownInternal";
 			this.panelRightDownInternal.Size = new System.Drawing.Size(360, 72);
 			this.panelRightDownInternal.TabIndex = 2;
+			// 
+			// smartProgressBar
+			// 
+			this.smartProgressBar.BackColor = System.Drawing.SystemColors.Control;
+			this.smartProgressBar.Dock = System.Windows.Forms.DockStyle.Top;
+			this.smartProgressBar.Location = new System.Drawing.Point(0, 0);
+			this.smartProgressBar.LowerBound = 0;
+			this.smartProgressBar.Name = "smartProgressBar";
+			this.smartProgressBar.Size = new System.Drawing.Size(350, 16);
+			this.smartProgressBar.TabIndex = 2;
+			this.smartProgressBar.UpperBound = 1000;
+			this.smartProgressBar.Value = 0;
 			// 
 			// label1
 			// 
@@ -418,15 +428,14 @@ namespace gui.Forms
 			this.splitterLR.TabIndex = 9;
 			this.splitterLR.TabStop = false;
 			// 
-			// menuItem1
+			// panelProgressBarBorder
 			// 
-			this.menuItem1.Index = 4;
-			this.menuItem1.Text = "-";
-			// 
-			// menuItem2
-			// 
-			this.menuItem2.Index = 1;
-			this.menuItem2.Text = "-";
+			this.panelProgressBarBorder.Controls.Add(this.smartProgressBar);
+			this.panelProgressBarBorder.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panelProgressBarBorder.Location = new System.Drawing.Point(5, 47);
+			this.panelProgressBarBorder.Name = "panelProgressBarBorder";
+			this.panelProgressBarBorder.Size = new System.Drawing.Size(350, 20);
+			this.panelProgressBarBorder.TabIndex = 3;
 			// 
 			// ComputationForm
 			// 
@@ -440,13 +449,13 @@ namespace gui.Forms
 			this.Name = "ComputationForm";
 			this.Text = "Dynamic System Investigation Tool";
 			this.groupBox1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.axProgressBar1)).EndInit();
 			this.groupBox2.ResumeLayout(false);
 			this.panelRightDownInternal.ResumeLayout(false);
 			this.panelRightDown.ResumeLayout(false);
 			this.panelRightUp.ResumeLayout(false);
 			this.panelRight.ResumeLayout(false);
 			this.panelLeft.ResumeLayout(false);
+			this.panelProgressBarBorder.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -663,6 +672,31 @@ namespace gui.Forms
 			{
 				return this.computatioinTree.Root;
 			}
+		}
+
+		public IProgressBarNotification ProgressBarNotification
+		{
+			get
+			{
+				ProgressBarNotificationAdapter adapter = new ProgressBarNotificationAdapter(this.smartProgressBar);
+				adapter.OnStart += new gui.ProgressBar.ProgressBarNotificationAdapter.OnStartDelegate(DisableMyControls);
+				adapter.OnFinish +=new gui.ProgressBar.ProgressBarNotificationAdapter.OnFinishDelegate(EnableMyControls);
+
+				return adapter;
+			}
+		}
+
+
+		protected void DisableMyControls(ProgressBarNotificationAdapter adapter)
+		{
+			adapter.OnStart -= new gui.ProgressBar.ProgressBarNotificationAdapter.OnStartDelegate(DisableMyControls);
+			this.Enabled = false;
+		}
+
+		protected void EnableMyControls(ProgressBarNotificationAdapter adapter)
+		{
+			adapter.OnFinish -= new gui.ProgressBar.ProgressBarNotificationAdapter.OnFinishDelegate(EnableMyControls);
+			this.Enabled = true;
 		}
 	}
 }

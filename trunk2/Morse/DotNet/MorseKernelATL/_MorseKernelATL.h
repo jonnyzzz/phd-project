@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Feb 10 22:15:49 2005
+/* at Sat Feb 12 02:36:03 2005
  */
 /* Compiler settings for _MorseKernelATL.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -49,6 +49,12 @@
 #define __IGraphInfo_FWD_DEFINED__
 typedef interface IGraphInfo IGraphInfo;
 #endif 	/* __IGraphInfo_FWD_DEFINED__ */
+
+
+#ifndef __IProgressBarNotification_FWD_DEFINED__
+#define __IProgressBarNotification_FWD_DEFINED__
+typedef interface IProgressBarNotification IProgressBarNotification;
+#endif 	/* __IProgressBarNotification_FWD_DEFINED__ */
 
 
 #ifndef __IParams_FWD_DEFINED__
@@ -201,12 +207,6 @@ typedef interface IComputationGraphResultExt IComputationGraphResultExt;
 #endif 	/* __IComputationGraphResultExt_FWD_DEFINED__ */
 
 
-#ifndef __IDummy_FWD_DEFINED__
-#define __IDummy_FWD_DEFINED__
-typedef interface IDummy IDummy;
-#endif 	/* __IDummy_FWD_DEFINED__ */
-
-
 #ifndef __IMorseSpectrum_FWD_DEFINED__
 #define __IMorseSpectrum_FWD_DEFINED__
 typedef interface IMorseSpectrum IMorseSpectrum;
@@ -331,18 +331,6 @@ typedef struct CComputationGraphResult CComputationGraphResult;
 #endif /* __cplusplus */
 
 #endif 	/* __CComputationGraphResult_FWD_DEFINED__ */
-
-
-#ifndef __CDummy_FWD_DEFINED__
-#define __CDummy_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CDummy CDummy;
-#else
-typedef struct CDummy CDummy;
-#endif /* __cplusplus */
-
-#endif 	/* __CDummy_FWD_DEFINED__ */
 
 
 #ifndef __CMorseSpectrum_FWD_DEFINED__
@@ -751,6 +739,220 @@ void __RPC_STUB IGraphInfo_setGraphComponents_Stub(
 #endif 	/* __IGraphInfo_INTERFACE_DEFINED__ */
 
 
+#ifndef __IProgressBarNotification_INTERFACE_DEFINED__
+#define __IProgressBarNotification_INTERFACE_DEFINED__
+
+/* interface IProgressBarNotification */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IProgressBarNotification;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("845738BD-1D8B-42BC-A1EB-FF11F1F22E67")
+    IProgressBarNotification : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Length( 
+            /* [retval][out] */ int *length) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Next( 
+            /* [in] */ int nSteps) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE NeedStop( 
+            /* [retval][out] */ VARIANT_BOOL *stop) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Start( void) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Finish( void) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IProgressBarNotificationVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IProgressBarNotification * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IProgressBarNotification * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IProgressBarNotification * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IProgressBarNotification * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IProgressBarNotification * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IProgressBarNotification * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IProgressBarNotification * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Length )( 
+            IProgressBarNotification * This,
+            /* [retval][out] */ int *length);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
+            IProgressBarNotification * This,
+            /* [in] */ int nSteps);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *NeedStop )( 
+            IProgressBarNotification * This,
+            /* [retval][out] */ VARIANT_BOOL *stop);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Start )( 
+            IProgressBarNotification * This);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Finish )( 
+            IProgressBarNotification * This);
+        
+        END_INTERFACE
+    } IProgressBarNotificationVtbl;
+
+    interface IProgressBarNotification
+    {
+        CONST_VTBL struct IProgressBarNotificationVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IProgressBarNotification_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IProgressBarNotification_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IProgressBarNotification_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IProgressBarNotification_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IProgressBarNotification_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IProgressBarNotification_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IProgressBarNotification_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IProgressBarNotification_Length(This,length)	\
+    (This)->lpVtbl -> Length(This,length)
+
+#define IProgressBarNotification_Next(This,nSteps)	\
+    (This)->lpVtbl -> Next(This,nSteps)
+
+#define IProgressBarNotification_NeedStop(This,stop)	\
+    (This)->lpVtbl -> NeedStop(This,stop)
+
+#define IProgressBarNotification_Start(This)	\
+    (This)->lpVtbl -> Start(This)
+
+#define IProgressBarNotification_Finish(This)	\
+    (This)->lpVtbl -> Finish(This)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarNotification_Length_Proxy( 
+    IProgressBarNotification * This,
+    /* [retval][out] */ int *length);
+
+
+void __RPC_STUB IProgressBarNotification_Length_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarNotification_Next_Proxy( 
+    IProgressBarNotification * This,
+    /* [in] */ int nSteps);
+
+
+void __RPC_STUB IProgressBarNotification_Next_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarNotification_NeedStop_Proxy( 
+    IProgressBarNotification * This,
+    /* [retval][out] */ VARIANT_BOOL *stop);
+
+
+void __RPC_STUB IProgressBarNotification_NeedStop_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarNotification_Start_Proxy( 
+    IProgressBarNotification * This);
+
+
+void __RPC_STUB IProgressBarNotification_Start_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarNotification_Finish_Proxy( 
+    IProgressBarNotification * This);
+
+
+void __RPC_STUB IProgressBarNotification_Finish_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IProgressBarNotification_INTERFACE_DEFINED__ */
+
+
 #ifndef __IParams_INTERFACE_DEFINED__
 #define __IParams_INTERFACE_DEFINED__
 
@@ -766,10 +968,8 @@ EXTERN_C const IID IID_IParams;
     IParams : public IDispatch
     {
     public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE updateProgressBar( 
-            /* [in] */ int minValue,
-            /* [in] */ int maxValue,
-            /* [in] */ int currentValue) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetProgressBarNotification( 
+            /* [retval][out] */ IProgressBarNotification **notify) = 0;
         
     };
     
@@ -819,11 +1019,9 @@ EXTERN_C const IID IID_IParams;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *updateProgressBar )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetProgressBarNotification )( 
             IParams * This,
-            /* [in] */ int minValue,
-            /* [in] */ int maxValue,
-            /* [in] */ int currentValue);
+            /* [retval][out] */ IProgressBarNotification **notify);
         
         END_INTERFACE
     } IParamsVtbl;
@@ -861,8 +1059,8 @@ EXTERN_C const IID IID_IParams;
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define IParams_updateProgressBar(This,minValue,maxValue,currentValue)	\
-    (This)->lpVtbl -> updateProgressBar(This,minValue,maxValue,currentValue)
+#define IParams_GetProgressBarNotification(This,notify)	\
+    (This)->lpVtbl -> GetProgressBarNotification(This,notify)
 
 #endif /* COBJMACROS */
 
@@ -871,14 +1069,12 @@ EXTERN_C const IID IID_IParams;
 
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IParams_updateProgressBar_Proxy( 
+/* [id] */ HRESULT STDMETHODCALLTYPE IParams_GetProgressBarNotification_Proxy( 
     IParams * This,
-    /* [in] */ int minValue,
-    /* [in] */ int maxValue,
-    /* [in] */ int currentValue);
+    /* [retval][out] */ IProgressBarNotification **notify);
 
 
-void __RPC_STUB IParams_updateProgressBar_Stub(
+void __RPC_STUB IParams_GetProgressBarNotification_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -956,11 +1152,9 @@ EXTERN_C const IID IID_ISubdevideParams;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *updateProgressBar )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetProgressBarNotification )( 
             ISubdevideParams * This,
-            /* [in] */ int minValue,
-            /* [in] */ int maxValue,
-            /* [in] */ int currentValue);
+            /* [retval][out] */ IProgressBarNotification **notify);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getCellDevider )( 
             ISubdevideParams * This,
@@ -1003,8 +1197,8 @@ EXTERN_C const IID IID_ISubdevideParams;
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define ISubdevideParams_updateProgressBar(This,minValue,maxValue,currentValue)	\
-    (This)->lpVtbl -> updateProgressBar(This,minValue,maxValue,currentValue)
+#define ISubdevideParams_GetProgressBarNotification(This,notify)	\
+    (This)->lpVtbl -> GetProgressBarNotification(This,notify)
 
 
 #define ISubdevideParams_getCellDevider(This,axis,value)	\
@@ -1097,11 +1291,9 @@ EXTERN_C const IID IID_IExtendableParams;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *updateProgressBar )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetProgressBarNotification )( 
             IExtendableParams * This,
-            /* [in] */ int minValue,
-            /* [in] */ int maxValue,
-            /* [in] */ int currentValue);
+            /* [retval][out] */ IProgressBarNotification **notify);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getCellDevider )( 
             IExtendableParams * This,
@@ -1144,8 +1336,8 @@ EXTERN_C const IID IID_IExtendableParams;
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define IExtendableParams_updateProgressBar(This,minValue,maxValue,currentValue)	\
-    (This)->lpVtbl -> updateProgressBar(This,minValue,maxValue,currentValue)
+#define IExtendableParams_GetProgressBarNotification(This,notify)	\
+    (This)->lpVtbl -> GetProgressBarNotification(This,notify)
 
 
 #define IExtendableParams_getCellDevider(This,axis,value)	\
@@ -1226,11 +1418,9 @@ EXTERN_C const IID IID_IExtendablePointParams;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *updateProgressBar )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetProgressBarNotification )( 
             IExtendablePointParams * This,
-            /* [in] */ int minValue,
-            /* [in] */ int maxValue,
-            /* [in] */ int currentValue);
+            /* [retval][out] */ IProgressBarNotification **notify);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getCellDevider )( 
             IExtendablePointParams * This,
@@ -1273,8 +1463,8 @@ EXTERN_C const IID IID_IExtendablePointParams;
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define IExtendablePointParams_updateProgressBar(This,minValue,maxValue,currentValue)	\
-    (This)->lpVtbl -> updateProgressBar(This,minValue,maxValue,currentValue)
+#define IExtendablePointParams_GetProgressBarNotification(This,notify)	\
+    (This)->lpVtbl -> GetProgressBarNotification(This,notify)
 
 
 #define IExtendablePointParams_getCellDevider(This,axis,value)	\
@@ -1359,11 +1549,9 @@ EXTERN_C const IID IID_ISubdevidePointParams;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *updateProgressBar )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetProgressBarNotification )( 
             ISubdevidePointParams * This,
-            /* [in] */ int minValue,
-            /* [in] */ int maxValue,
-            /* [in] */ int currentValue);
+            /* [retval][out] */ IProgressBarNotification **notify);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getCellDevider )( 
             ISubdevidePointParams * This,
@@ -1411,8 +1599,8 @@ EXTERN_C const IID IID_ISubdevidePointParams;
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define ISubdevidePointParams_updateProgressBar(This,minValue,maxValue,currentValue)	\
-    (This)->lpVtbl -> updateProgressBar(This,minValue,maxValue,currentValue)
+#define ISubdevidePointParams_GetProgressBarNotification(This,notify)	\
+    (This)->lpVtbl -> GetProgressBarNotification(This,notify)
 
 
 #define ISubdevidePointParams_getCellDevider(This,axis,value)	\
@@ -1457,8 +1645,8 @@ EXTERN_C const IID IID_IHomotopParams;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("3C17C825-1C25-4F2D-8E0B-630953AD9596")
-    IHomotopParams : public IDispatch
+    MIDL_INTERFACE("C15CF4DF-C579-4A02-A33E-AFB26AAB2C49")
+    IHomotopParams : public IParams
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE getCoordinateAt( 
@@ -1516,6 +1704,10 @@ EXTERN_C const IID IID_IHomotopParams;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetProgressBarNotification )( 
+            IHomotopParams * This,
+            /* [retval][out] */ IProgressBarNotification **notify);
+        
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *getCoordinateAt )( 
             IHomotopParams * This,
             /* [in] */ int axis,
@@ -1559,6 +1751,10 @@ EXTERN_C const IID IID_IHomotopParams;
 
 #define IHomotopParams_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IHomotopParams_GetProgressBarNotification(This,notify)	\
+    (This)->lpVtbl -> GetProgressBarNotification(This,notify)
 
 
 #define IHomotopParams_getCoordinateAt(This,axis,value)	\
@@ -4693,116 +4889,6 @@ void __RPC_STUB IComputationGraphResultExt_setGraphNode_Stub(
 #endif 	/* __IComputationGraphResultExt_INTERFACE_DEFINED__ */
 
 
-#ifndef __IDummy_INTERFACE_DEFINED__
-#define __IDummy_INTERFACE_DEFINED__
-
-/* interface IDummy */
-/* [dual][unique][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IDummy;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("ECACE910-6692-4ACC-85C2-3EF448BF2638")
-    IDummy : public IDispatch
-    {
-    public:
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IDummyVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IDummy * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IDummy * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IDummy * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IDummy * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IDummy * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IDummy * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IDummy * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        END_INTERFACE
-    } IDummyVtbl;
-
-    interface IDummy
-    {
-        CONST_VTBL struct IDummyVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IDummy_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IDummy_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IDummy_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IDummy_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IDummy_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IDummy_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IDummy_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IDummy_INTERFACE_DEFINED__ */
-
-
 #ifndef __IMorseSpectrum_INTERFACE_DEFINED__
 #define __IMorseSpectrum_INTERFACE_DEFINED__
 
@@ -6822,14 +6908,6 @@ EXTERN_C const CLSID CLSID_CComputationGraphResult;
 
 class DECLSPEC_UUID("83FCA237-5E87-49D4-81EE-95BC812422FE")
 CComputationGraphResult;
-#endif
-
-EXTERN_C const CLSID CLSID_CDummy;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("6C167CEC-20C8-45B4-B6C5-E59E15B3D19E")
-CDummy;
 #endif
 
 EXTERN_C const CLSID CLSID_CMorseSpectrum;

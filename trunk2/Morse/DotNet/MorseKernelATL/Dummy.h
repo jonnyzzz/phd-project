@@ -1,6 +1,6 @@
 #pragma once
 
-
+/*
 #include "nodebase.h"
 
 [
@@ -43,3 +43,4 @@ public:
     STDMETHOD(Morse)() {return S_OK;}
 };
 
+*/

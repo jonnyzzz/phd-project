@@ -8,9 +8,9 @@
 #include "KernelException.h"
 #include "ProjectiveBundle.h"
 #include "ProjectiveBundleGraph.h"
-#include "allBackProgressBarInfo.h"
 #include "ComputationGraphResult.h"
 #include "../Homotop/IsolatingSet.h"
+#include "../cellimagebuilders/ProgressBarInfo.h"
 
 // CSymbolicImageGraph
 
@@ -39,9 +39,7 @@ void CSymbolicImageGraph::FinalRelease() {
 //ISubdevideable
 
 STDMETHODIMP CSymbolicImageGraph::Subdevide(ISubdevideParams* params) {
-
-	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
-	pinfo->start();
+	ProgressBarInfo* pinfo = CreateProgressBarInfo(params);
 
 	int dim = graph->getDimention();
 	JInt* factor = new JInt[dim];
@@ -55,7 +53,7 @@ STDMETHODIMP CSymbolicImageGraph::Subdevide(ISubdevideParams* params) {
 	Function* func;
 	function->getFunction((void**)&func);
 
-	SIComputationProcess* cs = new SIComputationProcess(func, graph, factor);
+	SIComputationProcess* cs = new SIComputationProcess(func, graph, factor, pinfo);
 	
 	cs->nextStep(graph);
 
@@ -74,7 +72,6 @@ STDMETHODIMP CSymbolicImageGraph::Subdevide(ISubdevideParams* params) {
 	delete[] factor;
 	SAFE_RELEASE(function);
 	
-	pinfo->finish();
 	delete pinfo;
 
 	return S_OK;
@@ -84,8 +81,7 @@ STDMETHODIMP CSymbolicImageGraph::Subdevide(ISubdevideParams* params) {
 //ISubdevidablePoint
 
 STDMETHODIMP CSymbolicImageGraph::SubdevidePoint(ISubdevidePointParams* params) {
-	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
-	pinfo->start();
+	ProgressBarInfo* pinfo = CreateProgressBarInfo(params);
 
 	int dim = graph->getDimention();
 	JInt* factor = new JInt[dim];
@@ -121,7 +117,6 @@ STDMETHODIMP CSymbolicImageGraph::SubdevidePoint(ISubdevidePointParams* params) 
 	kernel->EventNewComputationResult(this, res);
 
     res->Release();
-	pinfo->finish();
 	delete pinfo;
 
 	return S_OK;
@@ -159,8 +154,7 @@ STDMETHODIMP CSymbolicImageGraph::PointMethodProjectiveExtensionDimension(int* v
 }
 
 STDMETHODIMP CSymbolicImageGraph::PointMethodProjectiveExtension(IExtendablePointParams* params) {
-	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
-	pinfo->start();
+	ProgressBarInfo* pinfo = CreateProgressBarInfo(params);
 
 	int dim;
     this->PointMethodProjectiveExtensionDimension(&dim);
@@ -205,7 +199,6 @@ STDMETHODIMP CSymbolicImageGraph::PointMethodProjectiveExtension(IExtendablePoin
     cout<<" after event \n";
 
 	delete[] factor;
-	pinfo->finish();
 	delete pinfo;
 
     SAFE_RELEASE(function);
@@ -315,6 +308,8 @@ STDMETHODIMP CSymbolicImageGraph::ExportData(BSTR file) {
 // IHomotopFind
 
 STDMETHODIMP CSymbolicImageGraph::Homotop(IHomotopParams* params) {
+	ProgressBarInfo* pinfo = CreateProgressBarInfo(params);
+
 	int dim = graph->getDimention();
 	JInt* array = new JInt[dim];
 	for (int i=0; i<dim; i++) {
@@ -333,7 +328,7 @@ STDMETHODIMP CSymbolicImageGraph::Homotop(IHomotopParams* params) {
 		return S_OK;
 	} else {
 		
-		IsolatingSetProcess* process = new IsolatingSetProcess(graph, node);
+		IsolatingSetProcess* process = new IsolatingSetProcess(graph, node, pinfo);
 		process->start();
 		process->processNextGraph(graph);
 
@@ -346,4 +341,6 @@ STDMETHODIMP CSymbolicImageGraph::Homotop(IHomotopParams* params) {
 
 		return S_OK;
 	}
+
+	delete pinfo;
 }

@@ -12,8 +12,8 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-MSPointBuilder::MSPointBuilder(Graph* graph, int* factor, int* ks, ISystemFunctionDerivate* function) : 
-	SIPointBuilder(graph, factor, ks, /*new SegmentProjectiveExtendedSystemFunction*/(function))
+MSPointBuilder::MSPointBuilder(Graph* graph, int* factor, int* ks, ISystemFunctionDerivate* function, ProgressBarInfo* info) : 
+	SIPointBuilder(graph, factor, ks, /*new SegmentProjectiveExtendedSystemFunction*/(function), info )
 {
     output = function->getOutput();
     ASSERT(function->hasDerivative());

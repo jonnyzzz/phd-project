@@ -21,7 +21,7 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-
+/*
 Computator::Computator(void)
 {
 }
@@ -33,8 +33,6 @@ Computator::~Computator(void)
 
 GraphComponents* Computator::performSIPoint(Graph* graph, ISystemFunction* function, JInt* devider, JInt* ks, ProgressBarInfo* info) {
 	cout<<"Point method!\n";
-
-	info->setBounds();
 
 	SIPointBuilder* bls = new SIPointBuilder(graph, devider, ks, function, info);
 
@@ -54,8 +52,6 @@ GraphComponents* Computator::performSIPoint(GraphComponents* cms, ISystemFunctio
 	cout<<"Symbolic Image on Graph Components Points\n";
 
 	if (cms->length() == 0) throw GraphException(GraphException_NoParameters);
-
-	info->setBounds(cms->length());
 
 	SIPointBuilder* bls = new SIPointBuilder(cms->getAt(0), devider, ks, function, info);
 	bls->start();
@@ -233,7 +229,7 @@ GraphComponents* Computator::performMSPoint(Graph* graph, Function* function, JI
 	delete ub;
 
 	return cms;
-    */
+    *//*
     ASSERT(false);
     return NULL;
 }
@@ -257,7 +253,7 @@ GraphComponents* Computator::performMSPoint(GraphComponents* cms, Function* func
 	delete ub;
 
 	return cmst;    
-    */
+    *//*
     ASSERT(false);
     return NULL;
 }
@@ -298,3 +294,4 @@ GraphComponents* Computator::strong_edges(Graph* graph) {
 
 
 
+*/

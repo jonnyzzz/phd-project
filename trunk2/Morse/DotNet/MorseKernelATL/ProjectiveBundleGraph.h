@@ -5,6 +5,7 @@
 #include "ProjectiveBundle.h"
 #include "GraphSaver.h"
 #include "ComputationGraphResult.h"
+#include "actionPerformerBase.h"
 
 // IProjectiveBundleGraph
 [
@@ -36,11 +37,11 @@ __interface IProjectiveBundleGraph : IProjectiveBundle
 ]
 class ATL_NO_VTABLE CProjectiveBundleGraph : 
 	public IProjectiveBundleGraph,
-//	public ISubdevidable,
 	public ISubdevidablePoint,
 	public IMorsable,
 	public IExportData,
-	private GraphSaver
+	private GraphSaver,
+	private ActionPerformerBase
 {
 public:
 	CProjectiveBundleGraph();	
@@ -68,9 +69,6 @@ public:
 	STDMETHOD(acceptChilds)(void** data);
 	STDMETHOD(graphInfo)(IGraphInfo** info);
 	STDMETHOD(graphDimension)(int* value);
-
-    //ISubdevidable
-	STDMETHOD(Subdevide)(ISubdevideParams* params);
 
     //ISubdevidablePoint
 	STDMETHOD(SubdevidePoint)(ISubdevidePointParams* params);

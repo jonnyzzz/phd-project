@@ -6,7 +6,7 @@
 class AbstractProcess 
 {
 public:
-	AbstractProcess(Graph* graph, ProgressBarInfo* info = NULL);
+	AbstractProcess(Graph* graph, ProgressBarInfo* info);
 	virtual ~AbstractProcess(void);
 
 public:

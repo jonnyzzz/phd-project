@@ -1,5 +1,5 @@
 #pragma once
-
+/*
 class Graph;
 class GraphComponents;
 class Function;
@@ -52,3 +52,4 @@ private:
 	template <class MSComputationProcess> 
 		GraphComponents* _performMS(GraphComponents* graph, Function* function, JInt* factor);	
 };
+*/

@@ -4,6 +4,25 @@
 #include "resource.h"       // main symbols
 #include "graphinfo.h"
 
+[
+	object,
+	uuid("845738BD-1D8B-42BC-A1EB-FF11F1F22E67"),
+	dual,
+	pointer_default(unique)
+]
+__interface IProgressBarNotification : IDispatch {
+	[id(1)]
+		HRESULT Length([out, retval] int* length);
+	[id(2)]
+		HRESULT Next([in] int nSteps);
+	[id(3)]
+		HRESULT NeedStop([out, retval] VARIANT_BOOL* stop);
+	[id(4)]
+		HRESULT Start();
+	[id(5)]
+		HRESULT Finish();
+};
+
 
 [
 	object,
@@ -13,7 +32,7 @@
 ]
 __interface IParams : IDispatch {
 	[id(1)]
-		HRESULT updateProgressBar([in] int minValue, [in] int maxValue, [in] int currentValue);
+		HRESULT GetProgressBarNotification([out, retval] IProgressBarNotification** notify);
 };
 
 //ISymbolicImageParameters
@@ -24,7 +43,7 @@ __interface IParams : IDispatch {
 	pointer_default(unique)
 ]
 __interface ISubdevideParams : IParams {
-	[id(2)]
+	[id(12)]
 		HRESULT getCellDevider([in] int axis, [out, retval] int* value);	
 };
 
@@ -54,21 +73,21 @@ __interface IExtendablePointParams : ISubdevideParams {
 	pointer_default(unique)
 ]
 __interface ISubdevidePointParams : ISubdevideParams {
-	[id(3)]
+	[id(13)]
 	HRESULT getCellPoints([in] int axis, [out, retval] int* value);
 };
 
 
 [
 	object,
-	uuid("3C17C825-1C25-4F2D-8E0B-630953AD9596"),
+	uuid("C15CF4DF-C579-4A02-A33E-AFB26AAB2C49"),
 	dual,
 	pointer_default(unique)
 ]
-__interface IHomotopParams : IDispatch {
-	[id(1)]
+__interface IHomotopParams : IParams {
+	[id(10)]
 	HRESULT getCoordinateAt([in] int axis, [out, retval] double* value);
-	[id(2)]
+	[id(11)]
 	HRESULT notifyNodeNotFound( [out, retval] VARIANT_BOOL* tryAgain);
 };
 

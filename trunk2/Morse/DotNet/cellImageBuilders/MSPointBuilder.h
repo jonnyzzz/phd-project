@@ -2,13 +2,14 @@
 
 #include "sipointbuilder.h"
 #include "../systemFunction/ISystemFunctionDerivate.h"
+#include "ProgressBarInfo.h"
 
 
 class MSPointBuilder :  public SIPointBuilder
 {
    
 public:
-	MSPointBuilder(Graph* graph, int* factor, int* ks, ISystemFunctionDerivate* function);
+	MSPointBuilder(Graph* graph, int* factor, int* ks, ISystemFunctionDerivate* function, ProgressBarInfo* info);
 	virtual ~MSPointBuilder(void);
 
 protected:

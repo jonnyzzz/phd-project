@@ -30,5 +30,7 @@ private:
 private:
 	Graph* createEmptyGraph(Graph* graph);
 
+
+private:
 	void putNodes(Graph* from, Graph* to, Node* node);
 };

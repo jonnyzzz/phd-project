@@ -110,8 +110,10 @@ namespace gui
 				{
 					Application.Run(new Visualization3D(true));
 				}
-				else
+				else if (param == "TestForm")
 				{
+					Application.Run(new TestForm());
+				} else {
 					Log.LogMessage(typeof (Runner), "Unable to test. Exit");
 					MessageBox.Show("Wrong test parameter. Unable to Continue");
 				}

@@ -3,12 +3,14 @@
 
 class Function;
 class Graph;
+class ProgressBarInfo;
+class ISystemFunction;
 
 class SIPointBuilder :
 	public AbstractPointBuilder
 {
 public:
-	SIPointBuilder(Graph* graph, int* factor, int* ks, ISystemFunction* function, ProgressBarInfo* info = NULL);
+	SIPointBuilder(Graph* graph, int* factor, int* ks, ISystemFunction* function, ProgressBarInfo* info);
 	virtual ~SIPointBuilder(void);
 
 protected:

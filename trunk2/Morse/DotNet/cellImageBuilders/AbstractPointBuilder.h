@@ -8,7 +8,7 @@ class Function;
 class AbstractPointBuilder : public AbstractProcess
 {
 public:
-	AbstractPointBuilder(Graph* graph, int* factor, int* ks, ProgressBarInfo* info = NULL);
+	AbstractPointBuilder(Graph* graph, int* factor, int* ks, ProgressBarInfo* info);
 	virtual ~AbstractPointBuilder();
 
 public:

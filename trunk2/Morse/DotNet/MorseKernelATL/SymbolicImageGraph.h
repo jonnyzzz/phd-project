@@ -4,6 +4,7 @@
 #include "resource.h"       // main symbols
 #include "SymbolicImage.h"
 #include "GraphSaver.h"
+#include "ActionPerformerBase.h"
 
 // ISymbolicImageGraph
 [
@@ -41,8 +42,9 @@ class ATL_NO_VTABLE CSymbolicImageGraph :
 	public IExtendable,
 	public IExportData,
     public IComputationExtendingResult,
+	public IHomotopFind,
 	private GraphSaver,
-	public IHomotopFind
+	private ActionPerformerBase
 {
 public:
 	CSymbolicImageGraph();

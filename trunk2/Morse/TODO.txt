@@ -15,7 +15,7 @@ Morse Spectrum test
 Old-style Proj.Bundle for 2D systems
 Node action history
 Script support
-Progress bar support
+FIX(PARTLY) Progress bar support
 Stop support
 Nodefiltering support
 Optimized fixed pointes construction

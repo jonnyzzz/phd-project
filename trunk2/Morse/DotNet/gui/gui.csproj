@@ -162,22 +162,6 @@
                     WrapperTool = "primary"
                 />
                 <Reference
-                    Name = "MSComctlLib"
-                    Guid = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}"
-                    VersionMajor = "2"
-                    VersionMinor = "0"
-                    Lcid = "0"
-                    WrapperTool = "tlbimp"
-                />
-                <Reference
-                    Name = "AxMSComctlLib"
-                    Guid = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}"
-                    VersionMajor = "2"
-                    VersionMinor = "0"
-                    Lcid = "0"
-                    WrapperTool = "aximp"
-                />
-                <Reference
                     Name = "GLVisualization"
                     Guid = "{7C814E07-7943-4389-96D9-A9F74F88EB22}"
                     VersionMajor = "1"
@@ -254,6 +238,16 @@
                     RelPath = "src\Runner.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TestForm.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TestForm.resx"
+                    DependentUpon = "TestForm.cs"
+                    BuildAction = "EmbeddedResource"
                 />
                 <File
                     RelPath = "src\XmlParseException.cs"
@@ -340,6 +334,21 @@
                 <File
                     RelPath = "src\Panels\NotedTextField.resx"
                     DependentUpon = "NotedTextField.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\ProgressBar\ProgressBarNotificationAdapter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ProgressBar\SmartProgressBar.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ProgressBar\SmartProgressBar.resx"
+                    DependentUpon = "SmartProgressBar.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File

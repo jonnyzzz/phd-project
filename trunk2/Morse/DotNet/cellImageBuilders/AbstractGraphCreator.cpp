@@ -38,9 +38,7 @@ void AbstractGraphCreator::start() {
 	tpoint = new JInt[dimensionNew];
 
     
-    this->submitGraphResult(createEmptyGraph(graph_source));
-
-    
+    this->submitGraphResult(createEmptyGraph(graph_source)); 
 }
 
 
@@ -72,12 +70,22 @@ Graph* AbstractGraphCreator::createEmptyGraph(Graph* graph) {
 
 void AbstractGraphCreator::processNextGraph(Graph* graph) {
 	
-	VERIFY(graph_result != NULL);
+	ASSERT(graph_result != NULL);
+	ASSERT(info != NULL);
+
+	int step = graph->getNumberOfNodes() / info->Length();
+	int c = 0;
 
 	NodeEnumerator* ne = graph->getNodeRoot();
 	Node* node;
 	while (node = graph->getNode(ne)) {
 		putNodes(graph, graph_result, node);
+		c++;
+		if (c > step) {
+			step = graph->getNumberOfNodes() / info->Length();
+			info->Next();
+			c = 0;
+		}
 	}
 	graph->freeNodeEnumerator(ne);
 }

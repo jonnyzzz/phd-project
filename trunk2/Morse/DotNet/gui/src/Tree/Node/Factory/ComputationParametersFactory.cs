@@ -71,6 +71,14 @@ namespace gui.Tree.Node.Factory
 
 		#region ISubdevideParams...
 
+		public abstract class ParamsImpl : IParams
+		{
+			public IProgressBarNotification GetProgressBarNotification()
+			{
+				return Runner.ComputationForm.ProgressBarNotification;
+			}
+		}
+
 		public static ISubdevideParams ParamsSubdevide(IWin32Window owner, IGraph node, ISubdevideParams param)
 		{
 			Log.LogMessage(typeof (ISubdevideParams), "ISubdevideParams invoke");
@@ -90,7 +98,7 @@ namespace gui.Tree.Node.Factory
 			}
 		}
 
-		protected class SubdevideParams : ISubdevideParams
+		protected class SubdevideParams : ParamsImpl, ISubdevideParams
 		{
 			private int[] devider;
 
@@ -139,7 +147,7 @@ namespace gui.Tree.Node.Factory
 			}
 		}
 
-		protected class SubdevididePointParams : ISubdevidePointParams
+		protected class SubdevididePointParams : ParamsImpl, ISubdevidePointParams
 		{
 			private SubdevideParams factor;
 			private SubdevideParams ks;
@@ -196,7 +204,7 @@ namespace gui.Tree.Node.Factory
 
 		#endregion
 
-		private class HomotopParams : IHomotopParams
+		private class HomotopParams : ParamsImpl, IHomotopParams
 		{
 			private double[] data;
 

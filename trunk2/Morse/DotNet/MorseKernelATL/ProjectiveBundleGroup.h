@@ -11,6 +11,8 @@
 #include "GraphSaver.h"
 #include "../systemFunction/IProjectiveExtensionInfo.h"
 
+#include "ActionPerformerBase.h"
+
 
 // IProjectiveBundleGroup
 [
@@ -46,7 +48,8 @@ class ATL_NO_VTABLE CProjectiveBundleGroup :
 	public ISubdevidablePoint,
 	public IGroupNode,
 	public IExportData,
-	private GraphSaver
+	private GraphSaver,
+	private ActionPerformerBase
 {
 public:
 	CProjectiveBundleGroup();

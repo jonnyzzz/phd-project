@@ -7,9 +7,8 @@
 #include ".\KernelException.h"
 #include ".\ProjectiveBundle.h"
 #include ".\ProjectiveBundleGraph.h"
-#include ".\allBackProgressBarInfo.h"
 #include ".\ComputationGraphResult.h"
-
+#include ".\ProgressBarNotificationAdapter.h"
 
 CSymbolicImageGroup::CSymbolicImageGroup() {
 	this->kernel = NULL;	
@@ -98,9 +97,7 @@ STDMETHODIMP CSymbolicImageGroup::PointMethodProjectiveExtensionDimension(int* v
 }
 
 STDMETHODIMP CSymbolicImageGroup::PointMethodProjectiveExtension(IExtendablePointParams* params) {
-
-  	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
-	pinfo->start();
+	ProgressBarInfo* pinfo = CreateProgressBarInfo(params);
 
 	int dim;
     this->PointMethodProjectiveExtensionDimension(&dim);
@@ -144,9 +141,8 @@ STDMETHODIMP CSymbolicImageGroup::PointMethodProjectiveExtension(IExtendablePoin
 
 	delete[] factor;
     delete cms;
-    pinfo->finish();
     delete pinfo;
-
+    
     SAFE_RELEASE(function);
 
 	return S_OK;
@@ -162,8 +158,7 @@ STDMETHODIMP CSymbolicImageGroup::Extend() {
 
 
 STDMETHODIMP CSymbolicImageGroup::Subdevide(ISubdevideParams* params) {
-	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
-	pinfo->start();
+	ProgressBarInfo* pinfo = CreateProgressBarInfo(params);
 
 	IFunction* function;
 	kernel->get_Function(&function);
@@ -187,7 +182,7 @@ STDMETHODIMP CSymbolicImageGroup::Subdevide(ISubdevideParams* params) {
 		params->getCellDevider(i, &factor[i]);
 	}
 
-	SIComputationProcess* cs = new SIComputationProcess(func, cmst->getAt(0), factor);
+	SIComputationProcess* cs = new SIComputationProcess(func, cmst->getAt(0), factor, pinfo);
 
 	for (int i=0; i<cmst->length(); i++) {
 		cs->nextStep(cmst->getAt(i));
@@ -209,7 +204,6 @@ STDMETHODIMP CSymbolicImageGroup::Subdevide(ISubdevideParams* params) {
 
     kernel->EventNewComputationResult(this, ret);
 
-	pinfo->finish();
 	delete pinfo;
 
 	return S_OK;
@@ -217,8 +211,7 @@ STDMETHODIMP CSymbolicImageGroup::Subdevide(ISubdevideParams* params) {
 
 
 STDMETHODIMP CSymbolicImageGroup::SubdevidePoint(ISubdevidePointParams* params) {
-	CallBackProgressBarInfo* pinfo = new CallBackProgressBarInfo(params);
-	pinfo->start();
+	ProgressBarInfo* pinfo = CreateProgressBarInfo(params);
 
 	IFunction* function;
 	kernel->get_Function(&function);
@@ -266,7 +259,6 @@ STDMETHODIMP CSymbolicImageGroup::SubdevidePoint(ISubdevidePointParams* params) 
 
     kernel->EventNewComputationResult(this, ret);
 
-	pinfo->finish();
 	delete pinfo;
 
 	return S_OK;

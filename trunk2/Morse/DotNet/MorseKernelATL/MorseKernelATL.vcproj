@@ -240,7 +240,7 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath=".\allBackProgressBarInfo.cpp">
+				RelativePath=".\ActionPerformerBase.cpp">
 			</File>
 			<File
 				RelativePath=".\compreg.cpp">
@@ -274,6 +274,9 @@
 			</File>
 			<File
 				RelativePath=".\NodeBase.cpp">
+			</File>
+			<File
+				RelativePath=".\ProgressBarNotificationAdapter.cpp">
 			</File>
 			<File
 				RelativePath=".\ProjectiveBundle.cpp">
@@ -323,7 +326,7 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath=".\allBackProgressBarInfo.h">
+				RelativePath=".\ActionPerformerBase.h">
 			</File>
 			<File
 				RelativePath=".\compreg.h">
@@ -357,6 +360,9 @@
 			</File>
 			<File
 				RelativePath=".\NodeBaseEvents.h">
+			</File>
+			<File
+				RelativePath=".\ProgressBarNotificationAdapter.h">
 			</File>
 			<File
 				RelativePath=".\ProjectiveBundle.h">

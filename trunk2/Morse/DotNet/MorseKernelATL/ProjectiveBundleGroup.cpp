@@ -101,6 +101,7 @@ GraphComponents* CProjectiveBundleGroup::createGraphComponents() {
 }
 
 STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* params) {
+	ProgressBarInfo* pinfo = CreateProgressBarInfo(params);
     GraphComponents* cms = createGraphComponents();
     ATLASSERT(cms->length() > 0);
 
@@ -116,7 +117,7 @@ STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* param
 	}
 
 	IProjectiveExtensionInfo* info = getProjectiveExtensionInfo();
-	AbstractProcess* msb = info->nextStepProcess(graph, factor, ks, NULL);
+	AbstractProcess* msb = info->nextStepProcess(graph, factor, ks, pinfo );
     msb->start();
 
     for (int i=0; i<cms->length(); i++) {
@@ -139,6 +140,8 @@ STDMETHODIMP CProjectiveBundleGroup::SubdevidePoint(ISubdevidePointParams* param
 	delete[] factor;
 	delete[] ks;
     delete cms;
+
+	delete pinfo;
 
     return S_OK;
 }

@@ -4,7 +4,7 @@
 #include "meagraphalgorithm.h"
 #include "meagraph.h"
 
-IsolatingSetProcess::IsolatingSetProcess(Graph* graphSource, Node* startNode): AbstractProcess(graphSource)
+IsolatingSetProcess::IsolatingSetProcess(Graph* graphSource, Node* startNode, ProgressBarInfo* info) : AbstractProcess(graphSource, info)
 {
 	myStartNode = startNode;
 }

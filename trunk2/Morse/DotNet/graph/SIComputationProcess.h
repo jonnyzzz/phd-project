@@ -7,11 +7,12 @@
 struct Node;
 class Graph;
 class Function;
+class ProgressBarInfo;
 
 class SIComputationProcess  
 {
 public:
-	SIComputationProcess(Function* function, Graph* graph, JInt* factor);
+	SIComputationProcess(Function* function, Graph* graph, JInt* factor, ProgressBarInfo* info);
 	virtual ~SIComputationProcess();
 
 public:
@@ -41,4 +42,6 @@ protected:
 	Graph* graph;
 
 	Function* function;
+
+	ProgressBarInfo* info;
 };

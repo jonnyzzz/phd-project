@@ -82,55 +82,10 @@ STDMETHODIMP CProjectiveBundleGraph::putref_kernel(IKernelPointer* newVal)
 }
 
 
-STDMETHODIMP CProjectiveBundleGraph::Subdevide(ISubdevideParams* params) {
-	int dim = graph->getDimention();
-	JInt* factor = new JInt[dim];
-
-	for (int i=0; i<dim; i++) {
-		params->getCellDevider(i, &factor[i]);
-	}
-
-	IFunction* function = NULL;
-	kernel->get_Function(&function);
-	
-	ATLVERIFY(function != NULL);
-
-	Function* func = NULL;
-	function->getFunction((void**)&func);
-
-	GraphComponents* cms = NULL;
-	try {
-		cms = Computator().performMS(graph, func, factor);
-	} catch (GraphException) {
-		//__raise noImplementation();
-		SAFE_RELEASE(function);
-		delete[] factor;
-		return S_OK;
-	}
-
-	for (int i=0;i<cms->length(); i++) {
-		IProjectiveBundleGraph* im;
-		CProjectiveBundleGraph::CreateInstance(&im);
-
-		im->putref_kernel(kernel);
-		Graph* gr = cms->getAt(i);
-		im->setGraph((void*)gr);
-		//__raise newChildProjectiveBundle(im);
-		//__raise newKernelNode(im);
-	}
-
-	if (cms->length() == 0) {
-		//__raise noChilds();
-	}
-
-	SAFE_RELEASE(function);
-	delete[] factor;
-	delete cms;
-
-	return S_OK;
-}
 
 STDMETHODIMP CProjectiveBundleGraph::SubdevidePoint(ISubdevidePointParams* params) {
+	ProgressBarInfo* pinfo = CreateProgressBarInfo(params);
+
 	int dim = graph->getDimention();
 	JInt* factor = new JInt[dim];
 	JInt* ks = new JInt[dim];
@@ -142,7 +97,7 @@ STDMETHODIMP CProjectiveBundleGraph::SubdevidePoint(ISubdevidePointParams* param
 
 	IProjectiveExtensionInfo* info = getProjectiveExtensionInfo();
 
-	AbstractProcess* msb = info->nextStepProcess(graph, factor, ks, NULL);
+	AbstractProcess* msb = info->nextStepProcess(graph, factor, ks, pinfo);
     msb->start();
 
     msb->processNextGraph(graph);
@@ -162,6 +117,7 @@ STDMETHODIMP CProjectiveBundleGraph::SubdevidePoint(ISubdevidePointParams* param
   	
 	delete[] factor;
 	delete[] ks;
+	delete pinfo;
 
 	return S_OK;
 }

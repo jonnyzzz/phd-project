@@ -8,6 +8,7 @@
 
 #include "GraphInfo.h"
 #include "GraphSaver.h"
+#include "ActionPerformerBase.h"
 
 // ISymbolicImageGroup
 [
@@ -46,7 +47,8 @@ class ATL_NO_VTABLE CSymbolicImageGroup :
     public IComputationExtendingResult,
 	public IGroupNode,
 	public IExportData,
-	private GraphSaver
+	private GraphSaver,
+	private ActionPerformerBase
 {
 public:
 	CSymbolicImageGroup();

@@ -29,7 +29,7 @@ SermentProjectiveExtensionInfo::~SermentProjectiveExtensionInfo(void)
 }
 
 AbstractProcess* SermentProjectiveExtensionInfo::nextStepProcess(Graph* graph, int* factor, int* ks, ProgressBarInfo* info) {
-	MSPointBuilder* pb = new MSPointBuilder(graph, factor, ks, systemFunction);
+	MSPointBuilder* pb = new MSPointBuilder(graph, factor, ks, systemFunction, info);
 	return pb;
 }
 

@@ -4,6 +4,7 @@ class MeaGraph;
 class Graph;
 struct Node;
 class MeaNode;
+class ProgressBarInfo;
 
 #include "MeaNode.h"
 
@@ -11,7 +12,7 @@ class MeaNode;
 class IsolatingSetProcess : public AbstractProcess
 {
 public:
-	IsolatingSetProcess(Graph* graphSource, Node* startNode);
+	IsolatingSetProcess(Graph* graphSource, Node* startNode, ProgressBarInfo* info);
 	virtual ~IsolatingSetProcess(void);
 
 public:

@@ -83,15 +83,11 @@ void AbstractPointBuilder::processNextGraph(Graph* graph) {
 	if (!graph_source->equals(graph)) throw "Unable to continue;";
 
 	ASSERT( this->result() != NULL);
+	ASSERT( this->info != NULL);
 
 	this->graph = graph;
 
-	int step;
-	if (info != NULL) {
-		step = graph->getNumberOfNodes() / (info->getLengthPart());
-	} else {
-		step = 1<<30;
-	}
+	int step = graph->getNumberOfNodes() / info->Length();
 	int c = 0;
 
 	NodeEnumerator* en = graph->getNodeRoot();
@@ -99,8 +95,9 @@ void AbstractPointBuilder::processNextGraph(Graph* graph) {
 	while (node = graph->getNode(en)) {
 		this->buildNodeMultiplication(node);
 		c++;
-		if (c >= step && info != NULL) {
-			info->next();
+		if ( c >= step ) {
+			info->Next();
+			step = graph->getNumberOfNodes() / info->Length();
 			c = 0;
 		}
 	}

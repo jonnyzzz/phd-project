@@ -6,6 +6,7 @@
 #include "SIComputationProcess.h"
 #include "Graph.h"
 #include "Function.h"
+#include "../cellImagebuilders/ProgressBarInfo.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -17,8 +18,8 @@ static char THIS_FILE[] = __FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-SIComputationProcess::SIComputationProcess(Function* function, Graph* graph, JInt* factor) :
- dimention(graph->getDimention()), graph(graph), factor(factor), function(function)
+SIComputationProcess::SIComputationProcess(Function* function, Graph* graph, JInt* factor, ProgressBarInfo* info) :
+ dimention(graph->getDimention()), graph(graph), factor(factor), function(function), info(info)
 {
 	 x   = function->getVariables();
 	 x0  = new JDouble[dimention];
@@ -63,17 +64,23 @@ Graph* SIComputationProcess::createGraph() {
 
 void SIComputationProcess::nextStep(Graph* graph) {
 
-	if (!graph->equals(this->graph)) {
-		cout<<"Unable to continue;";
-		return;
-	}
-
+	ASSERT(graph->equals(this->graph));
+	ASSERT(info != NULL);
 	this->graph = graph;
+
+	int c = 0;
+	int step = graph->getNumberOfNodes() / info->Length();
 
 	NodeEnumerator* en = graph->getNodeRoot();
 	Node* node;
 	while (node = graph->getNode(en)) {
 		this->buildNodeMultiplication(node);
+		c++;
+		if (c > step) {
+			c = 0;
+			step = graph->getNumberOfNodes() / info->Length();
+			info->Next();
+		}
 	}
 	graph->freeNodeEnumerator(en);
 }
