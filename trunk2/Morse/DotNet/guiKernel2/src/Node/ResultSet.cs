@@ -63,6 +63,16 @@ namespace guiKernel2.Node
 				return (KernelNode[])nodes.ToArray(typeof(KernelNode));
 			}
 		}
+
+
+		public int Count
+		{
+			get
+			{
+				return results.Count;
+			}
+		}
+
 		#endregion
 
 		#region protected Add's
@@ -87,6 +97,16 @@ namespace guiKernel2.Node
 		#endregion
 
 		#region static
+
+		public static ResultSet FromResultSets(params ResultSet[] resultSet)
+		{
+			ResultSet result = new ResultSet();
+			foreach (ResultSet set in resultSet)
+			{
+				result.AddResultRange(set.ToResults);
+			}
+			return result;
+		}
 
 		public static ResultSet FromResultSet(IResultSet set)
 		{

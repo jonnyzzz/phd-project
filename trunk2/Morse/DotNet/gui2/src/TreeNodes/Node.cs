@@ -1,5 +1,8 @@
 using System;
 using System.Windows.Forms;
+using gui2.ActionPerformer;
+using gui2.src.TreeNodes;
+using gui2.src.TreeNodes.MenuItems;
 using guiActions.Actions;
 using guiActions.src.filter;
 using guiControls.TreeControl;
@@ -26,7 +29,7 @@ namespace gui2.TreeNodes
 		}
 
 		private MenuItem[] cachedMenuItems = null;
-		protected override MenuItem[] GetMenuItems()
+		protected MenuItem[] GetMenuItemsActions()
 		{
 			if (cachedMenuItems == null) 
 			{
@@ -34,6 +37,26 @@ namespace gui2.TreeNodes
 			}
 			return cachedMenuItems;
 		}
+
+		protected override MenuItem[] GetMenuItems()
+		{
+			Group group = Group.GetGroup(this);
+			if (group.Contains(this))
+			{
+				return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Create Group", new Click(CreateGroup)));
+			} else
+			{
+				return GetMenuItemsActions();
+			}
+		}
+
+		private void CreateGroup()
+		{
+			Group group = Group.GetGroup(this);
+			AddNodeChild(group.CreateNode());
+			group.DeCheckAndRemoveAll();
+		}
+
 
 		public KernelNode KernelNode
 		{
@@ -50,7 +73,7 @@ namespace gui2.TreeNodes
 			return Filter.FilterActions(kernelNode.GetNextActionsAfter(Filter.ToActionWrapper(chain)));
 		}
 
-		public void AddChild(Node node)
+		public void AddNodeChild(Node node)
 		{
 			Logger.Logger.LogMessage("Adding Node");
 			
@@ -64,6 +87,21 @@ namespace gui2.TreeNodes
 			{
 				return KernelNode.Results;
 			}
+		}
+
+		public void SelectionChanging()
+		{
+			Group group = Group.GetGroup(this);
+			if (this.Checked)
+			{
+				group.RemoveNode(this);				
+			} 
+			else 
+			{
+				group.AddNode(this);
+			}
+
+			
 		}
 
 	}

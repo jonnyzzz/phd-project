@@ -5,6 +5,7 @@ namespace guiControls.TreeControl
 {
 	public delegate void MouseOver(ComputationNode node);
 	public delegate void SelectionChanged(ComputationNode node);
+	public delegate bool BeforeCheckChanged(ComputationNode node);
 
 	/// <summary>
 	/// Summary description for ComputationTree.
@@ -23,8 +24,12 @@ namespace guiControls.TreeControl
 			// This call is required by the Windows.Forms Form Designer.
 			InitializeComponent();
 
-			// TODO: Add any initialization after the InitializeComponent call
+			if (!DesignMode) 
+			{
+				tree.Nodes.Clear();
+			}
 
+			tree.BeforeCheck += new TreeViewCancelEventHandler(BeforeCheck);
 		}
 
 		/// <summary> 
@@ -56,10 +61,14 @@ namespace guiControls.TreeControl
 			// tree
 			// 
 			this.tree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.tree.CheckBoxes = true;
 			this.tree.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tree.ImageIndex = -1;
 			this.tree.Location = new System.Drawing.Point(0, 0);
 			this.tree.Name = "tree";
+			this.tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+																			 new System.Windows.Forms.TreeNode("Node0")});
+			this.tree.PathSeparator = "/";
 			this.tree.SelectedImageIndex = -1;
 			this.tree.Size = new System.Drawing.Size(150, 150);
 			this.tree.TabIndex = 0;
@@ -123,7 +132,8 @@ namespace guiControls.TreeControl
 			if (input.Length > 0)
 			{
 				return input;
-			} else
+			} 
+			else
 			{
 				return new MenuItem[]{ new NoMenuItem() };
 			}
@@ -148,5 +158,22 @@ namespace guiControls.TreeControl
 
 		public event MouseOver OnMouseOver;
 		public event SelectionChanged OnSelectionChanged;
+		public event BeforeCheckChanged OnBeforeCheckChanged;
+
+		private volatile bool insideBeforeCheck = false;
+		private void BeforeCheck(object sender, TreeViewCancelEventArgs e)
+		{
+			if (!insideBeforeCheck) 
+			{
+				insideBeforeCheck = true;
+
+				if (e.Node is ComputationNode && OnBeforeCheckChanged != null)
+				{
+					e.Cancel = OnBeforeCheckChanged(e.Node as ComputationNode);
+				}
+
+				insideBeforeCheck = false;
+			}
+		}
 	}
 }

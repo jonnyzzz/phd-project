@@ -64,9 +64,9 @@ namespace gui2.Forms
 
 		}
 
-		public SystemAssignment(string source) : this()
+		public SystemAssignment(Function function) : this()
 		{
-			this.setSource(source);
+			this.setSource(function.Equation);
 			isReadOnly = true;
 		}
 

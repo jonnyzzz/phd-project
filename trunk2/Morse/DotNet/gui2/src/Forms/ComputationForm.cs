@@ -1,7 +1,10 @@
+using System.Windows.Forms;
 using gui2.ActionPerformer;
 using gui2.Progress;
+using gui2.src.TreeNodes;
 using gui2.TreeNodes;
 using guiActions.Actions;
+using guiControls.TreeControl;
 using guiKernel2.Actions;
 using guiKernel2.Document;
 
@@ -16,7 +19,7 @@ namespace gui2.Forms
 		private System.Windows.Forms.Panel panelRight;
 		private guiControls.TreeControl.ComputationTree tree;
 		private System.Windows.Forms.MainMenu mainMenu;
-		private System.Windows.Forms.MenuItem menuItemInternal;
+		private System.Windows.Forms.MenuItem menuInternal;
 		private System.Windows.Forms.MenuItem menuInvestigations;
 		private System.Windows.Forms.MenuItem menuSystem;
 		private System.Windows.Forms.MenuItem menuSystemNew;
@@ -28,6 +31,9 @@ namespace gui2.Forms
 		private guiControls.Progress.SmartProgressBar progressBar;
 		private System.Windows.Forms.GroupBox groupBoxControlInfo;
 		private System.Windows.Forms.Panel panelInfo;
+		private System.Windows.Forms.MenuItem menuFunctionShow;
+		private System.Windows.Forms.MenuItem menuHelp;
+		private System.Windows.Forms.MenuItem menuHelpAbout;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -37,10 +43,11 @@ namespace gui2.Forms
 		{
 			InitializeComponent();
 
-			menuItemInternal.Visible = Runner.Runner.Instance.IsInternal;
+			menuInternal.Visible = Runner.Runner.Instance.IsInternal;
 
 			progressBarInfo = new ProgressBarInfo();
 			progressBarAdapter = new ProgressBarNotificationAdapter(progressBar, progressBarInfo);
+			tree.OnBeforeCheckChanged += new BeforeCheckChanged(OnBeforeCheckChanged);
 
 		}
 
@@ -79,10 +86,13 @@ namespace gui2.Forms
 			this.progressBar = new guiControls.Progress.SmartProgressBar();
 			this.splitterLR = new System.Windows.Forms.Splitter();
 			this.mainMenu = new System.Windows.Forms.MainMenu();
-			this.menuItemInternal = new System.Windows.Forms.MenuItem();
+			this.menuInternal = new System.Windows.Forms.MenuItem();
 			this.menuInvestigations = new System.Windows.Forms.MenuItem();
 			this.menuSystem = new System.Windows.Forms.MenuItem();
 			this.menuSystemNew = new System.Windows.Forms.MenuItem();
+			this.menuFunctionShow = new System.Windows.Forms.MenuItem();
+			this.menuHelp = new System.Windows.Forms.MenuItem();
+			this.menuHelpAbout = new System.Windows.Forms.MenuItem();
 			this.panelLeft.SuspendLayout();
 			this.panelRight.SuspendLayout();
 			this.panelRightUp.SuspendLayout();
@@ -143,7 +153,7 @@ namespace gui2.Forms
 			this.groupBoxControlInfo.Size = new System.Drawing.Size(284, 507);
 			this.groupBoxControlInfo.TabIndex = 0;
 			this.groupBoxControlInfo.TabStop = false;
-			this.groupBoxControlInfo.Text = "Info";
+			this.groupBoxControlInfo.Text = "Selected Node Information";
 			// 
 			// panelInfo
 			// 
@@ -174,7 +184,7 @@ namespace gui2.Forms
 			this.groupBoxProgressBar.Size = new System.Drawing.Size(284, 67);
 			this.groupBoxProgressBar.TabIndex = 0;
 			this.groupBoxProgressBar.TabStop = false;
-			this.groupBoxProgressBar.Text = "Progress Bar";
+			this.groupBoxProgressBar.Text = "Computation Progress Bar";
 			// 
 			// panelProgress
 			// 
@@ -213,13 +223,14 @@ namespace gui2.Forms
 			// mainMenu
 			// 
 			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					 this.menuItemInternal,
-																					 this.menuInvestigations});
+																					 this.menuInternal,
+																					 this.menuInvestigations,
+																					 this.menuHelp});
 			// 
-			// menuItem1
+			// menuInternal
 			// 
-			this.menuItemInternal.Index = 0;
-			this.menuItemInternal.Text = "Internal";
+			this.menuInternal.Index = 0;
+			this.menuInternal.Text = "Internal";
 			// 
 			// menuInvestigations
 			// 
@@ -232,7 +243,8 @@ namespace gui2.Forms
 			// 
 			this.menuSystem.Index = 0;
 			this.menuSystem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					   this.menuSystemNew});
+																					   this.menuSystemNew,
+																					   this.menuFunctionShow});
 			this.menuSystem.Text = "System";
 			// 
 			// menuSystemNew
@@ -241,6 +253,25 @@ namespace gui2.Forms
 			this.menuSystemNew.Shortcut = System.Windows.Forms.Shortcut.CtrlN;
 			this.menuSystemNew.Text = "New";
 			this.menuSystemNew.Click += new System.EventHandler(this.menuSystemNew_Click);
+			// 
+			// menuFunctionShow
+			// 
+			this.menuFunctionShow.Index = 1;
+			this.menuFunctionShow.Text = "Show";
+			this.menuFunctionShow.Click += new System.EventHandler(this.menuItem1_Click);
+			// 
+			// menuHelp
+			// 
+			this.menuHelp.Index = 2;
+			this.menuHelp.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																					 this.menuHelpAbout});
+			this.menuHelp.Text = "Help";
+			// 
+			// menuHelpAbout
+			// 
+			this.menuHelpAbout.Index = 0;
+			this.menuHelpAbout.Text = "About";
+			this.menuHelpAbout.Click += new System.EventHandler(this.menuHelpAbout_Click);
 			// 
 			// ComputationForm
 			// 
@@ -313,6 +344,25 @@ namespace gui2.Forms
 			tree.Enabled = true;
 		}
 
+
+		public bool OnBeforeCheckChanged(ComputationNode computationNode)
+		{
+			if (computationNode is Node)
+			{
+				Node node = (Node)computationNode;
+				try 
+				{
+					node.SelectionChanging();
+					return false;
+				} catch (GroupException e)
+				{
+					MessageBox.Show(this, e.Message, "Grouping Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+					return true;
+				}
+			}
+			return true;
+		}
+
 		private void performer_Start()
 		{
 			Runner.Runner.Instance.Document.Lock();
@@ -321,6 +371,20 @@ namespace gui2.Forms
 		private void performer_Finish()
 		{
 			Runner.Runner.Instance.Document.UnLock();
+		}
+
+		private void menuItem1_Click(object sender, System.EventArgs e)
+		{
+			if (Runner.Runner.Instance.Document != null)
+			{
+				SystemAssignment assignment = new SystemAssignment(Runner.Runner.Instance.Document.KernelDocument.Function);
+				assignment.ShowDialog(this);
+			}
+		}
+
+		private void menuHelpAbout_Click(object sender, System.EventArgs e)
+		{
+			new About().ShowDialog();
 		}
 	}
 }

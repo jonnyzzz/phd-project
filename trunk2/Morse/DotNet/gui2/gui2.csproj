@@ -168,6 +168,16 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Forms\About.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Forms\About.resx"
+                    DependentUpon = "About.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "src\Forms\ComputationForm.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
@@ -213,12 +223,27 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\TreeNodes\Group.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TreeNodes\GroupException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\TreeNodes\Node.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\TreeNodes\MenuItems\ActionTreeMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TreeNodes\MenuItems\DelegatedMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
                 />
@@ -231,6 +256,11 @@
                     RelPath = "src\TreeNodes\MenuItems\TreeMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TreeNodes\MenuItems\TreeMenuItem.resx"
+                    DependentUpon = "TreeMenuItem.cs"
+                    BuildAction = "EmbeddedResource"
                 />
             </Include>
         </Files>

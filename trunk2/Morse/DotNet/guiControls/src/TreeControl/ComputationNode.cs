@@ -13,7 +13,7 @@ namespace guiControls.TreeControl
 		public abstract string NodeCaption { get; }
 		
 		protected abstract MenuItem[] GetMenuItems();
-
+        
 		public MenuItem[] ContextMenuItems { 
 			get
 			{
@@ -33,13 +33,12 @@ namespace guiControls.TreeControl
 			
 		}
 		
-
 		public void Update() 
 		{
 			this.Text = this.NodeCaption;
 		}
 
-		protected void AddNewNode(ComputationNode node)
+		private void AddNewNode(ComputationNode node)
 		{
 			lock (TreeView)
 			{

@@ -53,7 +53,7 @@ namespace gui2.ActionPerformer
 
 		private void NewNode(Node node)
 		{
-			this.node.AddChild(node);			
+			this.node.AddNodeChild(node);			
 		}
 	}
 }
