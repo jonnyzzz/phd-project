@@ -5,8 +5,9 @@ namespace gui.Tree.Node.ActionAllocator
 	/// <summary>
 	/// Summary description for IComputationAction.
 	/// </summary>
-	public abstract class IResultAction
+	public abstract class ResultAction
 	{
+        #region features
         private string text;
         public string Text
         {
@@ -20,12 +21,12 @@ namespace gui.Tree.Node.ActionAllocator
             }
         }
 
-        protected IResultAction( string text)
+        protected ResultAction( string text)
         {
             this.text = text;
         }
 
-        protected IResultAction() : this("")
+        protected ResultAction() : this("")
         {            
         }
 
@@ -41,8 +42,7 @@ namespace gui.Tree.Node.ActionAllocator
         {
             return Text;
         }
-
-
+        #endregion
 
         public abstract void DoAction();
 	}

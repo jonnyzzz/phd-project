@@ -1,6 +1,6 @@
 using System;
 
-namespace gui.src.Resources
+namespace gui.Resource
 {
 	/// <summary>
 	/// Summary description for TemplateProcessor.

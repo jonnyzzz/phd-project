@@ -24,7 +24,7 @@ namespace gui.Tree.Node.Action
 			return 
 				new ComputationNodeMenuItem[]
 				{
-					ComputationNodeMenuFactory.SubdevidePointAction(new ComputationNodeMenuFactory.SubdevidePoint(SubdevidePoint))
+					ComputationNodeMenuFactory.SubdevidePointAction(new ComputationNodeMenuFactory.UniversalMenuItemClick(SubdevidePoint))
 				};
 		}
 

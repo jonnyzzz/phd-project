@@ -17,7 +17,7 @@ namespace gui.Tree.Node.Action
 		{
 			this.node = node;
 			items = new ComputationNodeMenuItem[] {
-			    ComputationNodeMenuFactory.getMenuExportData(new ComputationNodeMenuFactory.ExportData(OnExportData)),		        
+			    ComputationNodeMenuFactory.getMenuExportData(new ComputationNodeMenuFactory.UniversalMenuItemClick(OnExportData)),		        
             };
 		}
 

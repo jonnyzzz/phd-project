@@ -1,6 +1,5 @@
 using System;
 using gui.Attributes;
-using gui.src.Tree.Node.ActionAllocator;
 using gui.Tree.Node.ActionAllocator;
 using MorseKernelATL;
 
@@ -9,8 +8,7 @@ namespace gui.Tree.OperationSelector
 	/// <summary>
 	/// Summary description for LoopsResultAction.
 	/// </summary>
-	[InitializeStaticAttrubute("Register")]
-	public class LoopsResultAction : IResultAction
+	public class LoopsResultAction : ResultAction
 	{
         IComputationGraphResult result;
 		public LoopsResultAction(IComputationGraphResult result)
@@ -23,7 +21,7 @@ namespace gui.Tree.OperationSelector
 	    {
             result.Loops();
 	    }
-
+        [InitializeOnRun]
         public static void Register()
         {
             DynamicResultTest.Instance.RegisterAction(new LoopsResultActionFactory());
@@ -36,7 +34,7 @@ namespace gui.Tree.OperationSelector
                 return node is IComputationGraphResult;
             }
 
-            public IResultAction CreateAction(IComputationResult node)
+            public ResultAction CreateAction(IComputationResult node)
             {
                 return new LoopsResultAction((IComputationGraphResult)node);
             }

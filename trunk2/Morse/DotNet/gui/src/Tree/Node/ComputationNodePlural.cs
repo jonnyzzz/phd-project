@@ -26,7 +26,7 @@ namespace gui.Tree.Node
 				return new ComputationNodeMenuItem[]{};
 					else return new ComputationNodeMenuItem[] {
 					    ComputationNodeMenuFactory.getMenuCreateGroupNode(
-							new ComputationNodeMenuFactory.DoCreateGroupNode(onCreateNode)
+							new ComputationNodeMenuFactory.UniversalMenuItemClick(onCreateNode)
 																  ) 
 															  };
 		}		

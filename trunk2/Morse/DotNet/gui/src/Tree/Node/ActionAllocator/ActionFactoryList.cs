@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using gui.Logger;
 
-namespace gui.src.Tree.Node.ActionAllocator
+namespace gui.Tree.Node.ActionAllocator
 {
 	/// <summary>
 	/// Summary description for ActionFactoryList.

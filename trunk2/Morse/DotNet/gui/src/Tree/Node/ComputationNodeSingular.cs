@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Windows.Forms;
-using gui.src.Tree.Node.ActionAllocator;
 using gui.Tree.Node;
 using gui.Tree.Node.Action;
+using gui.Tree.Node.ActionAllocator;
 using gui.Tree.Node.Menu;
 using gui.Tree.Node.Util;
 using MorseKernelATL;

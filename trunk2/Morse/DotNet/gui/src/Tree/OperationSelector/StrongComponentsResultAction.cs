@@ -1,6 +1,5 @@
 using System;
 using gui.Attributes;
-using gui.src.Tree.Node.ActionAllocator;
 using gui.Tree.Node.ActionAllocator;
 using MorseKernelATL;
 
@@ -9,8 +8,7 @@ namespace gui.Tree.OperationSelector
 	/// <summary>
 	/// Summary description for StrongComponentsResultAction.
 	/// </summary>
-	[InitializeStaticAttrubute("Register")]
-	public class StrongComponentsResultAction : IResultAction
+	public class StrongComponentsResultAction : ResultAction
 	{
         private IComputationGraphResult result;
 
@@ -26,6 +24,7 @@ namespace gui.Tree.OperationSelector
 	        result.StrongComponents();
 	    }
 
+        [InitializeOnRun]
         public static void Register()
         {
             DynamicResultTest.Instance.RegisterAction(new StrongComponentsResultActionFactory());
@@ -38,7 +37,7 @@ namespace gui.Tree.OperationSelector
                 return node is IComputationGraphResult;
             }
 
-            public IResultAction CreateAction(IComputationResult node)
+            public ResultAction CreateAction(IComputationResult node)
             {
                 return new StrongComponentsResultAction((IComputationGraphResult)node);
             }

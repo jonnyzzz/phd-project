@@ -225,7 +225,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Attribute\InitializeStaticAttrubute.cs"
+                    RelPath = "src\Attribute\InitializeOnRunAttribute.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -486,12 +486,12 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Tree\Node\ActionAllocator\IResultAction.cs"
+                    RelPath = "src\Tree\Node\ActionAllocator\IResultActionFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Tree\Node\ActionAllocator\IResultActionFactory.cs"
+                    RelPath = "src\Tree\Node\ActionAllocator\ResultAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

@@ -1,5 +1,6 @@
 using System;
 using System.Resources;
+using System.Threading;
 using System.Windows.Forms;
 using gui.Tree.Node.Menu;
 using MorseKernelATL;
@@ -66,233 +67,75 @@ namespace gui.Tree.Node.Factory
 		#endregion
 
 		#region class SubdevideActionMenuItem {...} + static getter
-		public delegate void Subdevide();
-		protected class SubdevideActionMenuItem : ComputationNodeMenuItem
-		{				
-			private Subdevide subdevide;
-			public SubdevideActionMenuItem(Subdevide subdevide) : base()
-			{
-				this.subdevide = subdevide;
-				this.Text = "Subdevide";
-				this.Click += new EventHandler(SubdevideActionMenuItem_Click);
-			}
-
-			private void SubdevideActionMenuItem_Click(object sender, EventArgs e)
-			{
-				subdevide();
-			}
-		}
-
-		public static ComputationNodeMenuItem SubdevideAction(Subdevide subdevide)
+		public static ComputationNodeMenuItem SubdevideAction(UniversalMenuItemClick universalMenuItemClick)
 		{
-			return new SubdevideActionMenuItem(subdevide);
+			return new UniversalComputationMenuItem(universalMenuItemClick, "Subdevide");
 		}
 		#endregion
 
 		#region class SubdevidePointActionMenuItem {...} + static getter
-		public delegate void SubdevidePoint();
-		protected class SubdevidePointActionMenuItem : ComputationNodeMenuItem
-		{				
-			private SubdevidePoint subdevide;
-			public SubdevidePointActionMenuItem(SubdevidePoint subdevide) : base()
-			{
-				this.subdevide = subdevide;
-				this.Text = "Subdevide Point Method";
-				this.Click += new EventHandler(SubdevideActionMenuItem_Click);
-			}
-
-			private void SubdevideActionMenuItem_Click(object sender, EventArgs e)
-			{
-				subdevide();
-			}
-		}
-
-		public static ComputationNodeMenuItem SubdevidePointAction(SubdevidePoint subdevide)
+		public static ComputationNodeMenuItem SubdevidePointAction(UniversalMenuItemClick universal)
 		{
-			return new SubdevidePointActionMenuItem(subdevide);
-		}
-		#endregion
-
-
-		#region class ExtendActionMenuItem {...} + static getter
-		public delegate void Extend();
-		protected class ExtendActionMenuItem : ComputationNodeMenuItem
-		{				
-			private Extend subdevide;
-			public ExtendActionMenuItem(Extend subdevide) : base()
-			{
-				this.subdevide = subdevide;
-				this.Text = "Extend Symbolic Image to Projective Bundle";
-				this.Click += new EventHandler(SubdevideActionMenuItem_Click);
-			}
-
-			private void SubdevideActionMenuItem_Click(object sender, EventArgs e)
-			{
-				subdevide();
-			}
-		}
-
-		public static ComputationNodeMenuItem ExtendAction(Extend subdevide)
-		{
-			return new ExtendActionMenuItem(subdevide);
+			return new UniversalComputationMenuItem(universal, "Subdevide Point Method");
 		}
 		#endregion
 
 
 		#region Visualize! + static getter
-		public delegate void Visualize();
-		protected class VisualizeMenuItem : ComputationNodeMenuItem
+		public static ComputationNodeMenuItem VisualizeAction(UniversalMenuItemClick visualization)
 		{
-			private Visualize visualize;
-			public VisualizeMenuItem(Visualize visualize) : base()
-			{
-				this.visualize = visualize;
-				this.Text = "Visualize";
-				this.Click += new EventHandler(VisualizeMenuItem_Click);
-			}
-
-			private void VisualizeMenuItem_Click(object sender, EventArgs e)
-			{
-				visualize();
-			}
-		}
-
-		public static ComputationNodeMenuItem VisualizeAction(Visualize visualization)
-		{
-			return new VisualizeMenuItem(visualization);
+			return new UniversalComputationMenuItem(visualization, "Visualize");
 		}
 
 		#endregion
 
 
 		#region toMorse! + static getter
-		public delegate void Morse();
-		protected class MorseMenuItem : ComputationNodeMenuItem
+		public static ComputationNodeMenuItem MorseAction(UniversalMenuItemClick morse)
 		{
-			private Morse morse;
-			public MorseMenuItem(Morse morse) : base()
-			{
-				this.morse = morse;
-				this.Text = "Estimate Morse";
-				this.Click += new EventHandler(MorseMenuItem_Click);
-			}
-
-			private void MorseMenuItem_Click(object sender, EventArgs e)
-			{
-				morse();
-			}
-		}
-
-		public static ComputationNodeMenuItem MorseAction(Morse morse)
-		{
-			return new MorseMenuItem(morse);
+			return new UniversalComputationMenuItem(morse, "Estimate Morse Spectrum");
 		}
 
 		#endregion
 
 
 		#region rename menu item
-		protected class MenuAdapter : ComputationNodeMenuItem
-		{
-			private ComputationNodeMenuItem item;
-			public MenuAdapter(ComputationNodeMenuItem item, string caption)
-			{
-				this.Text = caption;
-				this.item = item;
-				this.Click +=new EventHandler(MenuAdapter_Click);
-			}
-
-			private void MenuAdapter_Click(object sender, EventArgs e)
-			{
-				item.PerformClick();				
-			}
-		}
-
 		public static ComputationNodeMenuItem getMenuRenameAdapter(ComputationNodeMenuItem item, string name)
 		{
-			return new MenuAdapter(item, name);
+			return new UniversalComputationMenuItem(new UniversalMenuItemClick(item.PerformClick), name);
 		}
 		#endregion
 
 
 		#region ShowChildrens
-		public delegate void DoMenuShowChildrens();
-		protected class MenuShowChildrens : ComputationNodeMenuItem
+		public static ComputationNodeMenuItem getMenuShowChildrens(UniversalMenuItemClick deleg)
 		{
-			private DoMenuShowChildrens deleg;
-			public MenuShowChildrens(DoMenuShowChildrens deleg)
-			{
-				this.Text = "Show childrens";
-				this.deleg = deleg;
-				this.Click +=new EventHandler(MenuAdapter_Click);
-			}
-
-			private void MenuAdapter_Click(object sender, EventArgs e)
-			{
-				deleg();				
-			}
-		}
-
-		public static ComputationNodeMenuItem getMenuShowChildrens(DoMenuShowChildrens deleg)
-		{
-			return new MenuShowChildrens(deleg);
+			return new UniversalComputationMenuItem(deleg, "Show childrens");
 		}
 		#endregion
 
 
 		#region doCreateGroup
-		public delegate void DoCreateGroupNode();
-		private class MenuCreateGroupNode : ComputationNodeMenuItem {
-			private DoCreateGroupNode callBack;
-			public MenuCreateGroupNode(DoCreateGroupNode callBack)
-			{
-				this.callBack = callBack;
-				this.Text = "Create a group";
-				this.Click +=new EventHandler(MenuCreateGroupNode_Click);
-			}
-
-			private void MenuCreateGroupNode_Click(object sender, EventArgs e)
-			{
-				callBack();
-			}
-		}
-
-		public static ComputationNodeMenuItem getMenuCreateGroupNode(DoCreateGroupNode callBack)
+		public static ComputationNodeMenuItem getMenuCreateGroupNode(UniversalMenuItemClick callBack)
 		{
-			return new MenuCreateGroupNode(callBack);
+			return new UniversalComputationMenuItem(callBack, "Create a group");
 		}
 		#endregion
 
 		#region ExportData
-		public delegate void ExportData();
-		private class MenuExportData : ComputationNodeMenuItem
+		public static ComputationNodeMenuItem getMenuExportData(UniversalMenuItemClick exportData)
 		{
-			private ExportData exportData;
-			public MenuExportData(ExportData exportData)
-			{
-				this.exportData = exportData;
-				this.Text = "Export to File";
-				this.Click +=new EventHandler(MenuExportData_Click);
-			}
-
-			private void MenuExportData_Click(object sender, EventArgs e)
-			{
-				exportData();
-			}
-		}
-		public static ComputationNodeMenuItem getMenuExportData(ExportData exportData)
-		{
-			return new MenuExportData(exportData);
+			return new UniversalComputationMenuItem(exportData,  "Export to File");
 		}
 		#endregion
 
 
         #region universal...
-        public delegate void UniversalMenuItem();
-        public class UnirevsalComputationMenuItem : ComputationNodeMenuItem
+        public delegate void UniversalMenuItemClick();
+        public class UniversalComputationMenuItem : ComputationNodeMenuItem
         {
-            private UniversalMenuItem universalMenuItem;
-            public UnirevsalComputationMenuItem(UniversalMenuItem universalMenuItem, String caption)
+            private UniversalMenuItemClick universalMenuItem;
+            public UniversalComputationMenuItem(UniversalMenuItemClick universalMenuItem, String caption)
             {
                 this.universalMenuItem = universalMenuItem;
                 this.Text = caption;
@@ -301,20 +144,22 @@ namespace gui.Tree.Node.Factory
 
             private void UnirevsalComputationMenuItem_Click(object sender, EventArgs e)
             {
+                Runner.Instance.performAction(new ThreadStart(ThreadedAction));
+            }
+
+            private void ThreadedAction()
+            {
                 universalMenuItem();
             }
         }
-        public static ComputationNodeMenuItem getUniversalMenuItem(UniversalMenuItem del, String caption)
+        public static ComputationNodeMenuItem getUniversalMenuItem(UniversalMenuItemClick del, String caption)
         {
-            return new UnirevsalComputationMenuItem(del, caption);
+            return new UniversalComputationMenuItem(del, caption);
         }
         #endregion
 
 		protected ComputationNodeMenuFactory()
 		{
 		}
-
-
-
 	}
 }

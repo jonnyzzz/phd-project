@@ -2,7 +2,7 @@ using System;
 using gui.Tree.Node.Action;
 using MorseKernelATL;
 
-namespace gui.src.Tree.Node.ActionAllocator
+namespace gui.Tree.Node.ActionAllocator
 {
 	/// <summary>
 	/// Summary description for IActionFactory.

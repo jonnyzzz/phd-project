@@ -20,7 +20,7 @@ namespace gui.Tree.Node.Action
 		public override ComputationNodeMenuItem[] getMenuItems()
 		{
 			return new ComputationNodeMenuItem[] {
-			    ComputationNodeMenuFactory.MorseAction( new ComputationNodeMenuFactory.Morse(morse))
+			    ComputationNodeMenuFactory.MorseAction( new ComputationNodeMenuFactory.UniversalMenuItemClick(morse))
 			};
 		}
 

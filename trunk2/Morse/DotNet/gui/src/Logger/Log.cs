@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace gui.Logger
@@ -18,8 +19,8 @@ namespace gui.Logger
             LogMessage(owner.GetType(), args, arg);
         }
         public static void LogMessage(Type type, string args, params object[] arg)
-        {         
-            Console.Out.WriteLine("Log: Class {0}, Message :{1}", type.Name, string.Format(args, arg));
+        {
+            ShowMessage(type, string.Format(args, arg));
         }
 
         public static void LogException(object owner, Exception exception, string message, params object[] arg)
@@ -28,9 +29,13 @@ namespace gui.Logger
         }
         public static void LogException(Type type, Exception exception, string message, params object[] arg)
         {
-            Console.Out.WriteLine("Log: Class{2}, Message {0}, Excteption: {1}", exception.ToString(), string.Format(message, arg), type.Name);
+            ShowMessage(type, string.Format("{0}\n\t{1}\n\t{2}\n", string.Format(message, arg), exception.Message, exception.StackTrace));
         }
 
+        private static void ShowMessage(Type cls, string message)
+        {
+            Console.Out.WriteLine("\n\nLog: Thread={0}, Class={1}, Message = \n\t{2}\n", Thread.CurrentThread.Name, cls.Name, message);
+        }
 
         #endregion
 

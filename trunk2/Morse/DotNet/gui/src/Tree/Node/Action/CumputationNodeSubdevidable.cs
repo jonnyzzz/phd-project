@@ -1,3 +1,4 @@
+using gui.Logger;
 using gui.Tree.Node;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
@@ -7,8 +8,9 @@ namespace gui.Tree.Node.Action
 {	
 	public class ComputationNodeSubdevidable : ComputationNodeAction
 	{
-		ISubdevidable node;
-		ISubdevideParams param = null;
+		volatile ISubdevidable node;
+		volatile ISubdevideParams param = null;
+
 		public ComputationNodeSubdevidable(ISubdevidable node) : base()
 		{
 			this.node = node;
@@ -20,17 +22,22 @@ namespace gui.Tree.Node.Action
 			return 
 				new ComputationNodeMenuItem[]
 				{
-				    ComputationNodeMenuFactory.SubdevideAction(new ComputationNodeMenuFactory.Subdevide(Subdevide))
+				    ComputationNodeMenuFactory.SubdevideAction(new ComputationNodeMenuFactory.UniversalMenuItemClick(Subdevide))
 				};
 		}
 
 		private void Subdevide()
-		{
-			param = ComputationParametersFactory.ParamsSubdevide(null, node as IGraph, param);
-			if (param != null) 
-			{
-				node.Subdevide(param);
-			}
+		{		    
+            lock (node) 
+            {
+                Log.LogMessage(this, "Subdevide invoke");
+            
+                param = ComputationParametersFactory.ParamsSubdevide(null, node as IGraph, param);
+                if (param != null) 
+                {
+                    node.Subdevide(param);
+                }
+            }
 		}
 
 	}

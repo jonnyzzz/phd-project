@@ -1,6 +1,6 @@
 using System;
 
-namespace gui.src.Tree.Node.Action
+namespace gui.Tree.Node.Action
 {
 	/// <summary>
 	/// Summary description for UnableToPerformActionException.

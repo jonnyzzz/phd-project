@@ -1,7 +1,6 @@
 using System;
 using System.Windows.Forms;
 using gui.Logger;
-using gui.src.Tree.Node.ActionAllocator;
 using gui.Tree.Node;
 using gui.Tree.Node.ActionAllocator;
 using MorseKernelATL;
@@ -168,7 +167,7 @@ namespace gui.Tree.Node.Forms
 
 		public void DoSelected()
 		{
-			IResultAction node = (actionListBox.SelectedItem as IResultAction);
+		    ResultAction node = (actionListBox.SelectedItem as ResultAction);
             if (node != null) 
             {
                 node.DoAction();

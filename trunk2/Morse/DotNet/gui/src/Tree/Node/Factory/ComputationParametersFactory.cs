@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using gui.Logger;
 using gui.Tree.Node.Forms;
 using MorseKernelATL;
 
@@ -67,6 +68,8 @@ namespace gui.Tree.Node.Factory
 		#region ISubdevideParams...
 		public static ISubdevideParams ParamsSubdevide(IWin32Window owner, IGraph node, ISubdevideParams param)
 		{
+		    Log.LogMessage(typeof(ISubdevideParams), "ISubdevideParams invoke");
+
 			NextStepParams ps = new NextStepParams();
 			int dimension = node.graphDimension();
 			int[][] par = toArrays(param, dimension);

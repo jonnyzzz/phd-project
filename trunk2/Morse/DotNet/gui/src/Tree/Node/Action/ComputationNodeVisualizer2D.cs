@@ -14,7 +14,7 @@ namespace gui.Tree.Node.Action
             this.graph = graph;
             menus = new ComputationNodeMenuItem[]
                 {
-                    ComputationNodeMenuFactory.VisualizeAction(new ComputationNodeMenuFactory.Visualize(visualize))
+                    ComputationNodeMenuFactory.VisualizeAction(new ComputationNodeMenuFactory.UniversalMenuItemClick(visualize))
                 };
         }
 
@@ -29,7 +29,6 @@ namespace gui.Tree.Node.Action
         {
             Visualization2D vis = new Visualization2D();
             vis.ShowMe(graph);
-
         }
     }
 }

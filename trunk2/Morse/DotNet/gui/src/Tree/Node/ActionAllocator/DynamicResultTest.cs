@@ -4,7 +4,7 @@ using gui.Logger;
 using gui.Tree.Node.ActionAllocator;
 using MorseKernelATL;
 
-namespace gui.src.Tree.Node.ActionAllocator
+namespace gui.Tree.Node.ActionAllocator
 {
 	/// <summary>
 	/// Summary description for DynamicComputationTest.
@@ -44,7 +44,7 @@ namespace gui.src.Tree.Node.ActionAllocator
         }
 
 
-        public IResultAction[] AllocateResutAction(IComputationResult result)
+        public ResultAction[] AllocateResutAction(IComputationResult result)
         {
             ArrayList results = new ArrayList();
             foreach (IResultActionFactory action in actions)
@@ -54,7 +54,7 @@ namespace gui.src.Tree.Node.ActionAllocator
                     results.Add(action.CreateAction(result));
                 }
             }
-            return (IResultAction[])results.ToArray(typeof(IResultAction));
+            return (ResultAction[])results.ToArray(typeof(ResultAction));
         }
 	}
 }

@@ -8,6 +8,6 @@ namespace gui.Tree.Node.ActionAllocator
 	public interface IResultActionFactory
 	{
         bool Corresponds(IComputationResult node );
-	    IResultAction CreateAction(IComputationResult node);
+	    ResultAction CreateAction(IComputationResult node);
 	}
 }

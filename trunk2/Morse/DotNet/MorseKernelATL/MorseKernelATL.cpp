@@ -13,7 +13,9 @@
 		 name = "MorseKernelATL", 
 		 helpstring = "MorseKernelATL",
 		 resource_name = "IDR_MORSEKERNELATL", 
-		 custom = { "a817e7a1-43fa-11d0-9e44-00aa00b6770a", "{58BF9B64-D15E-4C43-9BA5-D579CF30099C}"}) ]
+         custom = { "a817e7a1-43fa-11d0-9e44-00aa00b6770a", "{58BF9B64-D15E-4C43-9BA5-D579CF30099C}"}, 
+         version = "1.1") 
+]
 class CMorseKernelATLModule
 {
 public:

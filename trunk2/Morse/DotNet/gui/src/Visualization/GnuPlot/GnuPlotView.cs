@@ -4,8 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using gui.Logger;
 using gui.Resource;
-using gui.src.Resources;
-using gui.src.Tree.Node.Action;
+using gui.Tree.Node.Action;
 using MorseKernelATL;
 
 namespace gui.Visualization.GnuPlot

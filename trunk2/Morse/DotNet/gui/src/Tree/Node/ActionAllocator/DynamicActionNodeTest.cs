@@ -3,9 +3,10 @@ using System.Collections;
 using gui.Logger;
 using gui.Tree.Node;
 using gui.Tree.Node.Action;
+using gui.Tree.Node.ActionAllocator;
 using MorseKernelATL;
 
-namespace gui.src.Tree.Node.ActionAllocator
+namespace gui.Tree.Node.ActionAllocator
 {
 	/// <summary>
 	/// Summary description for DynamicTest.

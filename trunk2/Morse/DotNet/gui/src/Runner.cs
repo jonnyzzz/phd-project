@@ -2,12 +2,14 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 using gui.Attributes;
 using gui.Forms;
 using gui.Logger;
 using gui.Resource;
-using gui.src.Tree.Node.ActionAllocator;
+using gui.Tree.Node.ActionAllocator;
+using gui.Tree.Node.Factory;
 using MorseKernelATL;
 
 namespace gui
@@ -43,6 +45,7 @@ namespace gui
 		[STAThread]
 		static void Main(string[] args) 
 		{	
+            Thread.CurrentThread.Name = "MainThread";
             AttributeProcessor.InitializeStaticAttribute(Assembly.GetExecutingAssembly());
             if (args.Length == 1) 
             {
@@ -152,6 +155,36 @@ namespace gui
         {
             Log.LogMessage(this, "E: Not implemented");
             computationForm.noImplementation(nodeParent);
+        }
+        
+
+        private Thread currentComputator = null;
+        private ThreadStart threadStart = null;
+
+        public void performAction(ThreadStart action)
+        {
+            /*
+            if (currentComputator == null)
+            {
+                this.threadStart = action;
+                currentComputator = new Thread(new ThreadStart(ThreadAction));
+                currentComputator.Name = "Computator";
+                currentComputator.Start();
+            }
+            */
+            action(); 
+        }
+
+        private void ThreadAction()
+        {
+            Log.LogMessage(this, "Thread started");
+            lock(kernel) 
+            {
+                threadStart();
+            }
+            currentComputator = null;
+            threadStart = null;
+            Log.LogMessage(this, "Thread finished");
         }
     }
 }

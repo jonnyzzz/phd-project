@@ -1,17 +1,16 @@
 using System;
 using gui.Attributes;
-using gui.src.Tree.Node.ActionAllocator;
 using gui.Tree.Node.Action;
+using gui.Tree.Node.ActionAllocator;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
 using MorseKernelATL;
 
-namespace gui.src.Tree.Node.Action
+namespace gui.Tree.Node.Action
 {
 	/// <summary>
 	/// Summary description for Extend.
 	/// </summary>
-	[InitializeStaticAttrubute("Register")]
 	public class ExtendAction : ComputationNodeAction
 	{
         private IExtendable node;
@@ -25,7 +24,7 @@ namespace gui.src.Tree.Node.Action
 	    {
 	        return new ComputationNodeMenuItem[] {
 	            ComputationNodeMenuFactory.getUniversalMenuItem(
-                      new ComputationNodeMenuFactory.UniversalMenuItem(Extend), 
+                      new ComputationNodeMenuFactory.UniversalMenuItemClick(Extend), 
                       "Extend")
 	            };
 	    }
@@ -35,6 +34,7 @@ namespace gui.src.Tree.Node.Action
             node.Extend();
         }
 
+        [InitializeOnRun]
         public static void Register()
         {
             DynamicActionNodeTest.Instance.registerActionFactory(new ExtendActionFactory());

@@ -1,17 +1,16 @@
 using gui.Attributes;
-using gui.src.Tree.Node.ActionAllocator;
+using gui.Tree.Node.ActionAllocator;
 using gui.Visualization.GnuPlot;
 using gui.Tree.Node.Action;
 using gui.Tree.Node.Factory;
 using gui.Tree.Node.Menu;
 using MorseKernelATL;
 
-namespace gui.src.Tree.Node.Action
+namespace gui.Tree.Node.Action
 {
 	/// <summary>
 	/// Summary description for GnuplotViewAction.
 	/// </summary>		
-	[InitializeStaticAttrubute("Register")]
 	public class GnuplotViewAction : ComputationNodeAction
 	{
         private IExportData data;
@@ -26,7 +25,7 @@ namespace gui.src.Tree.Node.Action
 	    {
 	        return new ComputationNodeMenuItem[] {
 	            ComputationNodeMenuFactory.getUniversalMenuItem(
-                                                     new ComputationNodeMenuFactory.UniversalMenuItem(onClick),
+                                                     new ComputationNodeMenuFactory.UniversalMenuItemClick(onClick),
                                                      "Show using GnuPlot")};
         }
 
@@ -37,6 +36,7 @@ namespace gui.src.Tree.Node.Action
         }
         
         #region IActionFactory
+        [InitializeOnRun]
         public static void Register()
         {
             DynamicActionNodeTest.Instance.registerActionFactory(new RegistratorGnuplotViewAction());         

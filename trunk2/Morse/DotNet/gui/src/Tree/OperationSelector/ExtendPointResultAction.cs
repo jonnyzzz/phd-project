@@ -1,17 +1,15 @@
 using System;
 using gui.Attributes;
-using gui.src.Tree.Node.ActionAllocator;
 using gui.Tree.Node.ActionAllocator;
 using gui.Tree.Node.Factory;
 using MorseKernelATL;
 
-namespace gui.src.Tree.OperationSelector
+namespace gui.Tree.OperationSelector
 {
 	/// <summary>
 	/// Summary description for ExtendPointResultAction.
 	/// </summary>
-	[InitializeStaticAttrubute("Register")]
-	public class ExtendPointResultAction : IResultAction
+	public class ExtendPointResultAction : ResultAction
 	{
 	    IComputationExtendingResult result;
 		public ExtendPointResultAction(IComputationExtendingResult result)
@@ -29,7 +27,7 @@ namespace gui.src.Tree.OperationSelector
                 result.PointMethodProjectiveExtension(param);
             }
 	    }
-
+        [InitializeOnRun]
         public static void Register()
         {
             DynamicResultTest.Instance.RegisterAction(new ExtendPointResultActionFactory());
@@ -42,7 +40,7 @@ namespace gui.src.Tree.OperationSelector
                 return node is IComputationExtendingResult;
             }
 
-            public IResultAction CreateAction(IComputationResult node)
+            public ResultAction CreateAction(IComputationResult node)
             {
                 return new ExtendPointResultAction((IComputationExtendingResult)node);
             }
