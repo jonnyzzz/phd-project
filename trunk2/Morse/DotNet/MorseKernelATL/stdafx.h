@@ -6,7 +6,7 @@
 
 
 #ifdef _DEBUG
-//	#define _ATL_DEBUG_INTERFACES
+	#define _ATL_DEBUG_INTERFACES
 //	#define _ATL_DEBUG_QI
 #endif
      
@@ -39,7 +39,10 @@
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS	// some CString constructors will be explicit
 
 // turns off ATL's hiding of some common and often safely ignored warning messages
-//#define _ATL_ALL_WARNINGS
+#define _ATL_ALL_WARNINGS
+
+//fix a bug in platform sdk
+typedef long SHANDLE_PTR;
 
 #include <atlbase.h>
 #include <atlcom.h>
@@ -48,7 +51,7 @@
 #include <atlctl.h>
 #include <atlhost.h>
 
-
+//*
 #include <iostream>
 
 #include "../graph/FunctionInclude.h"
@@ -61,7 +64,6 @@
 #include "../graph/GraphComponents.h"
 
 #include "../cellImageBuilders/Processes.h"
-
 
 #define SAFE_DELETE(x) {if((x)!=NULL) {delete (x); {x=NULL;}}}
 #define SAFE_RELEASE(x) {if((x)!=NULL) {(x)->Release(); {x=NULL;}}}

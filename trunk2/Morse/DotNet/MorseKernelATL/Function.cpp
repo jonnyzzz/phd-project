@@ -27,6 +27,7 @@ HRESULT CFunction::FinalConstruct() {
 
 void CFunction::FinalRelease() {
 	cleanUP();
+	
 
 	TRACE_DESTRUCT(CFunction);
 }
@@ -43,8 +44,10 @@ STDMETHODIMP CFunction::put_SystemSource(BSTR newVal)
 {
 	CString nSource (newVal);
 	
-	if (created) 
+	if (created) {
 		__raise FunctionChanged(source.AllocSysString(), nSource.AllocSysString());
+		return E_FAIL;
+	}
 
 	cleanUP();
 
@@ -141,20 +144,21 @@ void CFunction::initializeContent() {
 			if (!node->canSimplify(&cx)) throw KernelException( KernelException_UnexpectedVariableDependency, i);
 			delete node;
 		}
-		node = NULL;
 
+		node = NULL;
 		int iterations = 1;
 		try {
 			node = factory->getEquation("iteration");
 			if (node->canSimplify(&cx)) {
 				iterations = (int)node->evaluate(&cx);
 				if (iterations < 1) throw KernelException(KernelException_WrongIterations);
-			}
+			}			
 		} catch (FunctionFactoryParseException e) {
 			if (e.getType() != FunctionFactoryParseException_NoSuchEquation) {
 				throw;
 			}
 		}
+		SAFE_DELETE(node);
 
 		cout<<"Current iteration : "<<iterations<<"\n";
 
@@ -162,7 +166,7 @@ void CFunction::initializeContent() {
 
 		created = true;
 
-		cout<<"OK!";
+		cout<<"Creation of fucntion is completed sucessfully";
 
 		__raise FunctionAccepted();
 

@@ -62,13 +62,11 @@ STDMETHODIMP CKernel::get_Function(IFunction** pVal) {
 }
 
 STDMETHODIMP CKernel::putref_Function(IFunction* newVal) {
-	if (newVal != NULL) {
-		if (function != NULL) {
-			__raise KernelFunctionChanged(function, newVal);			
-			function->Release();
-		}
-		newVal->QueryInterface(&function);
+	if (function != NULL) {
+		__raise KernelFunctionChanged(function, newVal);			
+		function->Release();
 	}
+	newVal->QueryInterface(&function);
 	return S_OK;
 }
 

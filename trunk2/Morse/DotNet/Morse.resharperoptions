@@ -1,11 +1,34 @@
 <Configuration>
-  <SettingsComponent>
-    <string />
-    <integer />
-    <boolean>
-      <setting name="ReSharper.FindMethodDialog.checkBoxSearchLibraries">False</setting>
-    </boolean>
-  </SettingsComponent>
+  <RecentFilesTracker>
+    <RecentFilesTracker>
+      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationForm.cs" offset="34366" line="68" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\SystemAssignment.cs" offset="13941" line="427" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\Kernel.cpp" offset="501" line="33" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\stdafx.h" offset="2203" line="48" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\Function.h" offset="0" line="78" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\Function.cpp" offset="0" line="12" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\Runner.cs" offset="1027" line="51" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\stdafx.cpp" offset="204" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelVisualizationATL\stdafx.h" offset="1337" line="0" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSet.h" offset="479" line="3" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\graph\typedefs.h" offset="38" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSet.cpp" offset="859" line="49" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\graph\AdditionalNodeParameters.cpp" offset="62" line="0" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\graph\AdditionalNodeParameters.h" offset="323" line="15" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelVisualizationATL\MorseKernelVisualizationGraph2D.cpp" offset="4535" line="34" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\D3DGraph2D.cpp" offset="5187" line="198" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\D3DGraph2D.h" offset="891" line="30" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSetIterator.cpp" offset="854" line="42" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\Visualization2D.cs" offset="19204" line="468" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSetIterator.h" offset="0" line="-1" column="-1" />
+      <TrackedFile location="e:\Projects\Morse\_net\graph\Function.cpp" offset="2597" line="135" column="0" />
+      <TrackedFile location="e:\Projects\Morse\_net\graph\Function.h" offset="377" line="0" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\Visualization3D.cs" offset="29554" line="572" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\CumputationNodeSubdevidable.cs" offset="713" line="0" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputatioinTree.cs" offset="3265" line="12" column="0" />
+      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationParametersFactory.cs" offset="1440" line="90" column="0" />
+    </RecentFilesTracker>
+  </RecentFilesTracker>
   <CompletionStatisticsManager>
     <ItemStatistics item="Qualified:MorseKernelATL.CComputationGraphResult">
       <Item value="noChilds" priority="0" />
@@ -15,10 +38,6 @@
     <ItemStatistics item="Qualified:System.Windows.Forms.ProgressBar">
       <Item value="Value" priority="0" />
       <Item value="Minimum" priority="1" />
-    </ItemStatistics>
-    <ItemStatistics item="Qualified:MorseKernelATL.IGraphInfo">
-      <Item value="edges" priority="0" />
-      <Item value="nodes" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:int[,]">
       <Item value="Length" priority="0" />
@@ -47,10 +66,10 @@
     <ItemStatistics item="Qualified:System.Collections.ArrayList">
       <Item value="ToArray" priority="0" />
       <Item value="AddRange" priority="0" />
-      <Item value="Add" priority="19" />
-      <Item value="Contains" priority="2" />
-      <Item value="Remove" priority="0" />
       <Item value="Count" priority="6" />
+      <Item value="Contains" priority="2" />
+      <Item value="Add" priority="19" />
+      <Item value="Remove" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.ComputationNodeMenuFactory.SubdevideActionMenuItem">
       <Item value="Subdevide" priority="0" />
@@ -81,11 +100,17 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.StatusBarDrawItemEventArgs">
       <Item value="Panel" priority="0" />
-      <Item value="Graphics" priority="2" />
       <Item value="Bounds" priority="0" />
+      <Item value="Graphics" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:MorseKernelATL.IProjectiveBundleGroup">
       <Item value="addNode" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.DataGridTableStyle">
+      <Item value="GridColumnStyles" priority="7" />
+      <Item value="AllowSorting" priority="0" />
+      <Item value="DataGrid" priority="0" />
+      <Item value="RowHeaderWidth" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:MorseKernelATL.IMorsable">
       <Item value="Morse" priority="0" />
@@ -112,6 +137,16 @@
       <Item value="showKS" priority="0" />
       <Item value="dimension" priority="1" />
       <Item value="ks" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:AxMorseKernelVisualizationATL.AxCMorseKernelVisualizationDirectGraph3D">
+      <Item value="ZoomOutAtom" priority="0" />
+      <Item value="SetGraph" priority="1" />
+      <Item value="CenterView" priority="0" />
+      <Item value="Rotate" priority="1" />
+      <Item value="MoveFromEye" priority="5" />
+      <Item value="SetTestGraph" priority="3" />
+      <Item value="ZoomInAtom" priority="0" />
+      <Item value="SetEyeFrom" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Data.DataRowAction">
       <Item value="ToString" priority="0" />
@@ -176,6 +211,10 @@
     <ItemStatistics item="Qualified:MorseKernelATL.CProjectiveBundleGraphClass">
       <Item value="add_newChildMorseSpectrum" priority="0" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:gui.ComputationNodeMenuItem">
+      <Item value="PerformClick" priority="0" />
+      <Item value="Click" priority="0" />
+    </ItemStatistics>
     <ItemStatistics item="Qualified:System.Data.DataColumnCollection">
       <Item value="Add" priority="1" />
       <Item value="Count" priority="1" />
@@ -198,16 +237,23 @@
     <ItemStatistics item="Qualified:MorseKernelATL.ISubdevideParams">
       <Item value="getCellDevider" priority="0" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.GC">
+      <Item value="Collect" priority="0" />
+      <Item value="MaxGeneration" priority="0" />
+    </ItemStatistics>
     <ItemStatistics item="Qualified:System.Data.DataColumn">
       <Item value="ReadOnly" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:MorseKernelATL.CSymbolicImageGroup">
       <Item value="subdevidePointMethod" priority="1" />
     </ItemStatistics>
+    <ItemStatistics item="Qualified:MorseKernelATL.IFunctionEvents_FunctionAcceptedEventHandler">
+      <Item value="Method" priority="0" />
+    </ItemStatistics>
     <ItemStatistics item="Qualified:AxMSComctlLib.AxProgressBar">
-      <Item value="Min" priority="0" />
       <Item value="Max" priority="0" />
       <Item value="Value" priority="0" />
+      <Item value="Min" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:gui.ComputationNodeSymbolicImage">
       <Item value="subdevidePoint" priority="0" />
@@ -314,19 +360,12 @@
       <Item value="Cancel" priority="0" />
       <Item value="OK" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:gui.Visualization">
-      <Item value="ShowMe" priority="0" />
-      <Item value="Show" priority="0" />
-    </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Windows">
       <Item value="Forms" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@gui.NextStepParams.Instance">
       <Item value="Factor" priority="2" />
       <Item value="Ks" priority="0" />
-    </ItemStatistics>
-    <ItemStatistics item="Qualified:gui.ComputationNodeAction">
-      <Item value="getMenuItems" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:gui.GraphOperationSelector">
       <Item value="AcceptButton" priority="0" />
@@ -340,34 +379,28 @@
     <ItemStatistics item="Qualified:System.Windows.Forms.CheckBox">
       <Item value="Checked" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:System.Data.DataRowChangeEventArgs">
-      <Item value="Action" priority="2" />
-      <Item value="Row" priority="1" />
-    </ItemStatistics>
     <ItemStatistics item="Qualified:gui.ComputationNodeSingular">
       <Item value="nodeType" priority="1" />
       <Item value="BackColor" priority="0" />
       <Item value="Node" priority="3" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:System.Windows.Forms.DataGridTableStyle">
-      <Item value="GridColumnStyles" priority="7" />
-      <Item value="AllowSorting" priority="0" />
-      <Item value="DataGrid" priority="0" />
-      <Item value="RowHeaderWidth" priority="0" />
+    <ItemStatistics item="Qualified:System.Data.DataRowChangeEventArgs">
+      <Item value="Row" priority="1" />
+      <Item value="Action" priority="2" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:gui.ComputationNodeMenuItem">
-      <Item value="PerformClick" priority="0" />
-      <Item value="Click" priority="0" />
+    <ItemStatistics item="Qualified:gui.Visualization">
+      <Item value="ShowMe" priority="0" />
+      <Item value="Show" priority="0" />
     </ItemStatistics>
-    <ItemStatistics item="Qualified:AxMorseKernelVisualizationATL.AxCMorseKernelVisualizationDirectGraph3D">
-      <Item value="ZoomOutAtom" priority="0" />
-      <Item value="ZoomInAtom" priority="0" />
-      <Item value="CenterView" priority="0" />
-      <Item value="Rotate" priority="1" />
-      <Item value="MoveFromEye" priority="5" />
-      <Item value="SetTestGraph" priority="3" />
-      <Item value="SetGraph" priority="1" />
-      <Item value="SetEyeFrom" priority="0" />
+    <ItemStatistics item="Qualified:MorseKernelATL.IGraphInfo">
+      <Item value="edges" priority="0" />
+      <Item value="nodes" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:gui.ComputationNodeAction">
+      <Item value="getMenuItems" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:MorseKernelATL.CFunction">
+      <Item value="FunctionAccepted" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.TextBox">
       <Item value="Text" priority="2" />
@@ -381,38 +414,11 @@
       <Item value="X" priority="2" />
     </ItemStatistics>
   </CompletionStatisticsManager>
-  <RecentFilesTracker>
-    <RecentFilesTracker>
-      <TrackedFile location="e:\Projects\Morse\_net\graph\AdditionalNodeParameters.cpp" offset="62" line="0" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\graph\AdditionalNodeParameters.h" offset="323" line="15" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelVisualizationATL\MorseKernelVisualizationGraph2D.cpp" offset="4535" line="34" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\D3DGraph2D.cpp" offset="5187" line="198" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\D3DGraph2D.h" offset="891" line="30" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSet.cpp" offset="1072" line="59" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSetIterator.cpp" offset="854" line="42" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\Visualization2D.cs" offset="19204" line="468" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSetIterator.h" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\_net\D3DVisualizator\DrawableSet.h" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\_net\graph\Function.cpp" offset="2597" line="135" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\graph\Function.h" offset="377" line="0" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\Visualization3D.cs" offset="29554" line="572" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\CumputationNodeSubdevidable.cs" offset="713" line="0" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputatioinTree.cs" offset="3265" line="12" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationParametersFactory.cs" offset="1440" line="90" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodeSubdevidablePoint.cs" offset="756" line="1" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodeExtendable.cs" offset="808" line="0" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\NextStepParams.cs" offset="11377" line="126" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\cellImageBuilders\AbstractPointBuilder.cpp" offset="1667" line="46" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\cellImageBuilders\SIPointBuilder.cpp" offset="644" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\SymbolicImageGraph.cpp" offset="2229" line="63" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\SymbolicImageGroup.cpp" offset="4792" line="211" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\GraphInfo.cpp" offset="860" line="48" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\allBackProgressBarInfo.cpp" offset="0" line="-1" column="-1" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\allBackProgressBarInfo.h" offset="417" line="0" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodeSingular.cs" offset="2399" line="58" column="0" />
-      <TrackedFile location="E:\Projects\Morse\_net\gui\ComputationNodePlural.cs" offset="1492" line="21" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\cellImageBuilders\AbstractProcess.cpp" offset="503" line="13" column="0" />
-      <TrackedFile location="e:\Projects\Morse\_net\MorseKernelATL\SymbolicImage.h" offset="897" line="-1" column="-1" />
-    </RecentFilesTracker>
-  </RecentFilesTracker>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="ReSharper.FindMethodDialog.checkBoxSearchLibraries">False</setting>
+    </boolean>
+  </SettingsComponent>
 </Configuration>

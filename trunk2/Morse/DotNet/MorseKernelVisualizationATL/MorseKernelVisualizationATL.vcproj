@@ -40,7 +40,7 @@
 				IgnoreImportLibrary="FALSE"
 				OutputFile="$(OutDir)/MorseKernelVisualizationATL.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories=""
+				AdditionalLibraryDirectories="E:\Projects\Morse\_net\lib"
 				IgnoreAllDefaultLibraries="FALSE"
 				IgnoreDefaultLibraryNames=""
 				MergedIDLBaseFileName="_MorseKernelVisualizationATL.idl"

@@ -47,9 +47,9 @@ namespace gui
 			//
 			InitializeComponent();
 			dimensionUpDown_ValueChanged(this, EventArgs.Empty);
-	
-			function.FunctionAccepted += new IFunctionEvents_FunctionAcceptedEventHandler(function_FunctionAccepted);
-			function.FunctionWrongInput += new IFunctionEvents_FunctionWrongInputEventHandler(function_FunctionWrongInput);			
+
+			this.Closed += new EventHandler(onClose);
+			registerEvents();
 			
 			redesignGrid();
 
@@ -57,6 +57,23 @@ namespace gui
 			{
 				menuLoad_Click(this, EventArgs.Empty);
 			}
+		}
+
+		private void registerEvents()
+		{
+			function.FunctionAccepted += new IFunctionEvents_FunctionAcceptedEventHandler(function_FunctionAccepted);
+			function.FunctionWrongInput += new IFunctionEvents_FunctionWrongInputEventHandler(function_FunctionWrongInput);
+		}
+
+		private void unregisterEvents()
+		{
+			function.FunctionAccepted -= new IFunctionEvents_FunctionAcceptedEventHandler(function_FunctionAccepted);
+			function.FunctionWrongInput -= new IFunctionEvents_FunctionWrongInputEventHandler(function_FunctionWrongInput);			
+		}
+
+		private void onClose( object sender, EventArgs args)
+		{
+			unregisterEvents();
 		}
 
 		private void redesignGrid()

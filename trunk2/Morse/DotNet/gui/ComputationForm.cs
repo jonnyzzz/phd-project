@@ -1,7 +1,4 @@
 using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 using MorseKernelATL;
 
@@ -33,6 +30,8 @@ namespace gui
 		private System.Windows.Forms.Panel panelLeft;
 		private System.Windows.Forms.Splitter splitterUD;
 		private System.Windows.Forms.Splitter splitterLR;
+		private System.Windows.Forms.MenuItem menuItemInternal;
+		private System.Windows.Forms.MenuItem menuItemGC;
 		private System.ComponentModel.IContainer components;
 
 		public void updateProgressBar(int min, int max, int current)
@@ -83,6 +82,8 @@ namespace gui
 			this.menuExit = new System.Windows.Forms.MenuItem();
 			this.menuSelection = new System.Windows.Forms.MenuItem();
 			this.menuDeselectAll = new System.Windows.Forms.MenuItem();
+			this.menuItemInternal = new System.Windows.Forms.MenuItem();
+			this.menuItemGC = new System.Windows.Forms.MenuItem();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.axProgressBar1 = new AxMSComctlLib.AxProgressBar();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -129,7 +130,8 @@ namespace gui
 			// 
 			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																					 this.menuSystem,
-																					 this.menuSelection});
+																					 this.menuSelection,
+																					 this.menuItemInternal});
 			this.mainMenu.RightToLeft = ((System.Windows.Forms.RightToLeft)(resources.GetObject("mainMenu.RightToLeft")));
 			// 
 			// menuSystem
@@ -204,6 +206,27 @@ namespace gui
 			this.menuDeselectAll.Text = resources.GetString("menuDeselectAll.Text");
 			this.menuDeselectAll.Visible = ((bool)(resources.GetObject("menuDeselectAll.Visible")));
 			this.menuDeselectAll.Click += new System.EventHandler(this.menuDeselectAll_Click);
+			// 
+			// menuItemInternal
+			// 
+			this.menuItemInternal.Enabled = ((bool)(resources.GetObject("menuItemInternal.Enabled")));
+			this.menuItemInternal.Index = 2;
+			this.menuItemInternal.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																							 this.menuItemGC});
+			this.menuItemInternal.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("menuItemInternal.Shortcut")));
+			this.menuItemInternal.ShowShortcut = ((bool)(resources.GetObject("menuItemInternal.ShowShortcut")));
+			this.menuItemInternal.Text = resources.GetString("menuItemInternal.Text");
+			this.menuItemInternal.Visible = ((bool)(resources.GetObject("menuItemInternal.Visible")));
+			// 
+			// menuItemGC
+			// 
+			this.menuItemGC.Enabled = ((bool)(resources.GetObject("menuItemGC.Enabled")));
+			this.menuItemGC.Index = 0;
+			this.menuItemGC.Shortcut = ((System.Windows.Forms.Shortcut)(resources.GetObject("menuItemGC.Shortcut")));
+			this.menuItemGC.ShowShortcut = ((bool)(resources.GetObject("menuItemGC.ShowShortcut")));
+			this.menuItemGC.Text = resources.GetString("menuItemGC.Text");
+			this.menuItemGC.Visible = ((bool)(resources.GetObject("menuItemGC.Visible")));
+			this.menuItemGC.Click += new System.EventHandler(this.menuItemGC_Click);
 			// 
 			// groupBox1
 			// 
@@ -508,13 +531,19 @@ namespace gui
                 Runner.Kernel.Function = assign.getFunction();
 
 				IKernelNode root = Runner.Kernel.CreateRootSymbolicImage();
-				computatioinTree.Root = ComputationNode.createComputationNode(root);
+				//computatioinTree.Root = ComputationNode.createComputationNode(root);
 			}
 		}
 
 		private void menuDeselectAll_Click(object sender, System.EventArgs e)
 		{
 			computatioinTree.DeselectAll();
+		}
+
+		private void menuItemGC_Click(object sender, System.EventArgs e)
+		{
+			System.GC.Collect(System.GC.MaxGeneration);
+			
 		}
 	}
 }

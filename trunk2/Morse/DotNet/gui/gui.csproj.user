@@ -63,7 +63,7 @@
                     StartPage = ""
                     StartProgram = ""
                     StartURL = ""
-                    StartWorkingDirectory = "g:\"
+                    StartWorkingDirectory = "o:\"
                     StartWithIE = "true"
                 />
             </Settings>
