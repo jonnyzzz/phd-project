@@ -12,7 +12,7 @@ namespace gui.Tree
 	/// <summary>
 	/// Summary description for ComputatioinTree.
 	/// </summary>
-	public class ComputatioinTree : System.Windows.Forms.UserControl
+	public class ComputationTree : System.Windows.Forms.UserControl
 	{
 		public event ContextMenuBeforeOpenEvent NodeMenuBeforeOpen;
 		public event MouseMoveComponentEvent MouseMoveNode;        
@@ -23,7 +23,7 @@ namespace gui.Tree
 		/// </summary>
 		private System.ComponentModel.Container components = null;
 
-		public ComputatioinTree()
+		public ComputationTree()
 		{
 			// This call is required by the Windows.Forms Form Designer.
 			InitializeComponent();
@@ -101,7 +101,7 @@ namespace gui.Tree
 			set
 			{
 				tree.Nodes.Clear();
-				tree.Nodes.Add(value);
+                if (value != null) tree.Nodes.Add(value);
 			}
             get
             {

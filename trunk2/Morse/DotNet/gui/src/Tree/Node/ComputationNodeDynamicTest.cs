@@ -119,7 +119,7 @@ namespace gui.Tree.Node
 			if (mnode is IExportData)
 			{
 				IExportData node = mnode as IExportData;
-				act = new ComputationNodeExporterAction(node);
+				act = new ComputationNodeExportable(node);
 				arrayActions.Add(act);
 				arrayItems.AddRange(act.getMenuItems());
 			}

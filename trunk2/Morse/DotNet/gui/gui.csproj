@@ -220,6 +220,16 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Logger\Logger.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Logger\Logger.resx"
+                    DependentUpon = "Logger.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "src\Resources\Resources.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -235,13 +245,13 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "src\Tree\ComputatioinTree.cs"
+                    RelPath = "src\Tree\ComputationTree.cs"
                     SubType = "UserControl"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Tree\ComputatioinTree.resx"
-                    DependentUpon = "ComputatioinTree.cs"
+                    RelPath = "src\Tree\ComputationTree.resx"
+                    DependentUpon = "ComputationTree.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
@@ -270,7 +280,7 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Tree\Node\Action\ComputationNodeExporterAction.cs"
+                    RelPath = "src\Tree\Node\Action\ComputationNodeExportable.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -290,12 +300,32 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Tree\Node\Action\ComputationNodeVisualizer.cs"
+                    RelPath = "src\Tree\Node\Action\ComputationNodeVisualizer2D.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\ComputationNodeVisualizer3D.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\Tree\Node\Action\CumputationNodeSubdevidable.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\Action\GnuplotViewAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ActionAllocator\DynamicTest.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Tree\Node\ActionAllocator\IActionFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -354,7 +384,11 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
-                <Folder RelPath = "src\Visualization\GnuPlot\" />
+                <File
+                    RelPath = "src\Visualization\GnuPlot\GnuPlotView.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
                 <File
                     RelPath = "src\Visualization\JonATL\Visualization2D.cs"
                     SubType = "Form"

@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using gui.src.Visualization.GnuPlot;
 using gui.Tree.Node;
 using gui.Tree.Node.Action;
 using gui.Tree.Node.Factory;
@@ -10,14 +11,16 @@ namespace gui.Tree.Node.Action
 	/// <summary>
 	/// Summary description for ComputationNodeExporterAction.
 	/// </summary>
-	public class ComputationNodeExporterAction : ComputationNodeAction
+	public class ComputationNodeExportable : ComputationNodeAction
 	{
 		private IExportData node;
-		public ComputationNodeExporterAction(IExportData node)
+		public ComputationNodeExportable(IExportData node)
 		{
 			this.node = node;
 			items = new ComputationNodeMenuItem[] {
-			    ComputationNodeMenuFactory.getMenuExportData(new ComputationNodeMenuFactory.ExportData(OnExportData))};
+			    ComputationNodeMenuFactory.getMenuExportData(new ComputationNodeMenuFactory.ExportData(OnExportData)),
+		        ComputationNodeMenuFactory.getUniversalMenuItem(new ComputationNodeMenuFactory.UniversalMenuItem(visualizeGnuPlot), "Visualize; GnuPlot" ),                                                 
+            };
 		}
 
 		public override ComputationNodeMenuItem[] getMenuItems()
@@ -37,6 +40,13 @@ namespace gui.Tree.Node.Action
 				MessageBox.Show(null, "Data was exported to " + sfd.FileName, "Export");
 			} 
 		}
+
+        private void visualizeGnuPlot()
+        {
+            string name = GnuPlotView.AllocateTemporaryFile();
+            node.ExportData(name);
+            GnuPlotView.ShowFromFile(name);
+        }
 
 	    ComputationNodeMenuItem[] items = new ComputationNodeMenuItem[]{};
 	}

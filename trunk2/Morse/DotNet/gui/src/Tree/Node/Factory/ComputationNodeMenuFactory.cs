@@ -287,6 +287,29 @@ namespace gui.Tree.Node.Factory
 		#endregion
 
 
+        #region universal...
+        public delegate void UniversalMenuItem();
+        public class UnirevsalComputationMenuItem : ComputationNodeMenuItem
+        {
+            private UniversalMenuItem universalMenuItem;
+            public UnirevsalComputationMenuItem(UniversalMenuItem universalMenuItem, String caption)
+            {
+                this.universalMenuItem = universalMenuItem;
+                this.Text = caption;
+                this.Click += new EventHandler(UnirevsalComputationMenuItem_Click);
+            }
+
+            private void UnirevsalComputationMenuItem_Click(object sender, EventArgs e)
+            {
+                universalMenuItem();
+            }
+        }
+        public static ComputationNodeMenuItem getUniversalMenuItem(UniversalMenuItem del, String caption)
+        {
+            return new UnirevsalComputationMenuItem(del, caption);
+        }
+        #endregion
+
 		protected ComputationNodeMenuFactory()
 		{
 		}
