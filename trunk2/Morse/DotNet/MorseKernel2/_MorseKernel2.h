@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Fri Feb 25 16:48:03 2005
+/* at Sun Feb 27 22:40:44 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -105,10 +105,10 @@ typedef interface IWritableActionAllocator IWritableActionAllocator;
 #endif 	/* __IWritableActionAllocator_FWD_DEFINED__ */
 
 
-#ifndef __IActionManagerImpl_FWD_DEFINED__
-#define __IActionManagerImpl_FWD_DEFINED__
-typedef interface IActionManagerImpl IActionManagerImpl;
-#endif 	/* __IActionManagerImpl_FWD_DEFINED__ */
+#ifndef __IWritableActionManager_FWD_DEFINED__
+#define __IWritableActionManager_FWD_DEFINED__
+typedef interface IWritableActionManager IWritableActionManager;
+#endif 	/* __IWritableActionManager_FWD_DEFINED__ */
 
 
 #ifndef __IComponentRegistrar_FWD_DEFINED__
@@ -117,10 +117,16 @@ typedef interface IComponentRegistrar IComponentRegistrar;
 #endif 	/* __IComponentRegistrar_FWD_DEFINED__ */
 
 
-#ifndef __IGroupNode_FWD_DEFINED__
-#define __IGroupNode_FWD_DEFINED__
-typedef interface IGroupNode IGroupNode;
-#endif 	/* __IGroupNode_FWD_DEFINED__ */
+#ifndef __IGraphInfo_FWD_DEFINED__
+#define __IGraphInfo_FWD_DEFINED__
+typedef interface IGraphInfo IGraphInfo;
+#endif 	/* __IGraphInfo_FWD_DEFINED__ */
+
+
+#ifndef __IWritableGraphInfo_FWD_DEFINED__
+#define __IWritableGraphInfo_FWD_DEFINED__
+typedef interface IWritableGraphInfo IWritableGraphInfo;
+#endif 	/* __IWritableGraphInfo_FWD_DEFINED__ */
 
 
 #ifndef __IGraphResult_FWD_DEFINED__
@@ -129,10 +135,10 @@ typedef interface IGraphResult IGraphResult;
 #endif 	/* __IGraphResult_FWD_DEFINED__ */
 
 
-#ifndef __IGraphNode_FWD_DEFINED__
-#define __IGraphNode_FWD_DEFINED__
-typedef interface IGraphNode IGraphNode;
-#endif 	/* __IGraphNode_FWD_DEFINED__ */
+#ifndef __IWritableGraphResult_FWD_DEFINED__
+#define __IWritableGraphResult_FWD_DEFINED__
+typedef interface IWritableGraphResult IWritableGraphResult;
+#endif 	/* __IWritableGraphResult_FWD_DEFINED__ */
 
 
 #ifndef __CActionAllocator_FWD_DEFINED__
@@ -169,6 +175,18 @@ typedef struct CCompReg CCompReg;
 #endif /* __cplusplus */
 
 #endif 	/* __CCompReg_FWD_DEFINED__ */
+
+
+#ifndef __CGraphInfoImpl_FWD_DEFINED__
+#define __CGraphInfoImpl_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CGraphInfoImpl CGraphInfoImpl;
+#else
+typedef struct CGraphInfoImpl CGraphInfoImpl;
+#endif /* __cplusplus */
+
+#endif 	/* __CGraphInfoImpl_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -807,7 +825,7 @@ EXTERN_C const IID IID_IAction;
             /* [in] */ IResult *input,
             /* [retval][out] */ IResult **output) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE ProgressBarInfo( 
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetProgressBarInfo( 
             /* [in] */ IProgressBarInfo *pinfo) = 0;
         
     };
@@ -871,7 +889,7 @@ EXTERN_C const IID IID_IAction;
             /* [in] */ IResult *input,
             /* [retval][out] */ IResult **output);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProgressBarInfo )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
             IAction * This,
             /* [in] */ IProgressBarInfo *pinfo);
         
@@ -921,8 +939,8 @@ EXTERN_C const IID IID_IAction;
 #define IAction_Do(This,input,output)	\
     (This)->lpVtbl -> Do(This,input,output)
 
-#define IAction_ProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> ProgressBarInfo(This,pinfo)
+#define IAction_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
 
 #endif /* COBJMACROS */
 
@@ -968,12 +986,12 @@ void __RPC_STUB IAction_Do_Stub(
     DWORD *_pdwStubPhase);
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IAction_ProgressBarInfo_Proxy( 
+/* [id] */ HRESULT STDMETHODCALLTYPE IAction_SetProgressBarInfo_Proxy( 
     IAction * This,
     /* [in] */ IProgressBarInfo *pinfo);
 
 
-void __RPC_STUB IAction_ProgressBarInfo_Stub(
+void __RPC_STUB IAction_SetProgressBarInfo_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -1001,6 +1019,9 @@ EXTERN_C const IID IID_INode;
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetActionManager( 
             /* [retval][out] */ IActionManager **manager) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetResult( 
+            /* [retval][out] */ IResult **result) = 0;
         
     };
     
@@ -1054,6 +1075,10 @@ EXTERN_C const IID IID_INode;
             INode * This,
             /* [retval][out] */ IActionManager **manager);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetResult )( 
+            INode * This,
+            /* [retval][out] */ IResult **result);
+        
         END_INTERFACE
     } INodeVtbl;
 
@@ -1093,6 +1118,9 @@ EXTERN_C const IID IID_INode;
 #define INode_GetActionManager(This,manager)	\
     (This)->lpVtbl -> GetActionManager(This,manager)
 
+#define INode_GetResult(This,result)	\
+    (This)->lpVtbl -> GetResult(This,result)
+
 #endif /* COBJMACROS */
 
 
@@ -1106,6 +1134,18 @@ EXTERN_C const IID IID_INode;
 
 
 void __RPC_STUB INode_GetActionManager_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE INode_GetResult_Proxy( 
+    INode * This,
+    /* [retval][out] */ IResult **result);
+
+
+void __RPC_STUB INode_GetResult_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -1543,19 +1583,19 @@ void __RPC_STUB IWritableActionAllocator_RegisterActionFactory_Stub(
 #endif 	/* __IWritableActionAllocator_INTERFACE_DEFINED__ */
 
 
-#ifndef __IActionManagerImpl_INTERFACE_DEFINED__
-#define __IActionManagerImpl_INTERFACE_DEFINED__
+#ifndef __IWritableActionManager_INTERFACE_DEFINED__
+#define __IWritableActionManager_INTERFACE_DEFINED__
 
-/* interface IActionManagerImpl */
+/* interface IWritableActionManager */
 /* [unique][helpstring][dual][uuid][object] */ 
 
 
-EXTERN_C const IID IID_IActionManagerImpl;
+EXTERN_C const IID IID_IWritableActionManager;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
     MIDL_INTERFACE("E20C06D8-1C51-455C-B306-33D0635F1E52")
-    IActionManagerImpl : public IActionManager
+    IWritableActionManager : public IDispatch
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddAction( 
@@ -1565,33 +1605,33 @@ EXTERN_C const IID IID_IActionManagerImpl;
     
 #else 	/* C style interface */
 
-    typedef struct IActionManagerImplVtbl
+    typedef struct IWritableActionManagerVtbl
     {
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IActionManagerImpl * This,
+            IWritableActionManager * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IActionManagerImpl * This);
+            IWritableActionManager * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            IActionManagerImpl * This);
+            IWritableActionManager * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IActionManagerImpl * This,
+            IWritableActionManager * This,
             /* [out] */ UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IActionManagerImpl * This,
+            IWritableActionManager * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IActionManagerImpl * This,
+            IWritableActionManager * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [in] */ UINT cNames,
@@ -1599,7 +1639,7 @@ EXTERN_C const IID IID_IActionManagerImpl;
             /* [size_is][out] */ DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IActionManagerImpl * This,
+            IWritableActionManager * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -1609,25 +1649,16 @@ EXTERN_C const IID IID_IActionManagerImpl;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLength )( 
-            IActionManagerImpl * This,
-            /* [in] */ int *count);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetAction )( 
-            IActionManagerImpl * This,
-            /* [in] */ int index,
-            /* [retval][out] */ IActionBase **action);
-        
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddAction )( 
-            IActionManagerImpl * This,
+            IWritableActionManager * This,
             /* [in] */ IActionBase *action);
         
         END_INTERFACE
-    } IActionManagerImplVtbl;
+    } IWritableActionManagerVtbl;
 
-    interface IActionManagerImpl
+    interface IWritableActionManager
     {
-        CONST_VTBL struct IActionManagerImplVtbl *lpVtbl;
+        CONST_VTBL struct IWritableActionManagerVtbl *lpVtbl;
     };
 
     
@@ -1635,37 +1666,30 @@ EXTERN_C const IID IID_IActionManagerImpl;
 #ifdef COBJMACROS
 
 
-#define IActionManagerImpl_QueryInterface(This,riid,ppvObject)	\
+#define IWritableActionManager_QueryInterface(This,riid,ppvObject)	\
     (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
 
-#define IActionManagerImpl_AddRef(This)	\
+#define IWritableActionManager_AddRef(This)	\
     (This)->lpVtbl -> AddRef(This)
 
-#define IActionManagerImpl_Release(This)	\
+#define IWritableActionManager_Release(This)	\
     (This)->lpVtbl -> Release(This)
 
 
-#define IActionManagerImpl_GetTypeInfoCount(This,pctinfo)	\
+#define IWritableActionManager_GetTypeInfoCount(This,pctinfo)	\
     (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
 
-#define IActionManagerImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+#define IWritableActionManager_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
 
-#define IActionManagerImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+#define IWritableActionManager_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
 
-#define IActionManagerImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+#define IWritableActionManager_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define IActionManagerImpl_GetLength(This,count)	\
-    (This)->lpVtbl -> GetLength(This,count)
-
-#define IActionManagerImpl_GetAction(This,index,action)	\
-    (This)->lpVtbl -> GetAction(This,index,action)
-
-
-#define IActionManagerImpl_AddAction(This,action)	\
+#define IWritableActionManager_AddAction(This,action)	\
     (This)->lpVtbl -> AddAction(This,action)
 
 #endif /* COBJMACROS */
@@ -1675,12 +1699,12 @@ EXTERN_C const IID IID_IActionManagerImpl;
 
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IActionManagerImpl_AddAction_Proxy( 
-    IActionManagerImpl * This,
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableActionManager_AddAction_Proxy( 
+    IWritableActionManager * This,
     /* [in] */ IActionBase *action);
 
 
-void __RPC_STUB IActionManagerImpl_AddAction_Stub(
+void __RPC_STUB IWritableActionManager_AddAction_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -1688,7 +1712,7 @@ void __RPC_STUB IActionManagerImpl_AddAction_Stub(
 
 
 
-#endif 	/* __IActionManagerImpl_INTERFACE_DEFINED__ */
+#endif 	/* __IWritableActionManager_INTERFACE_DEFINED__ */
 
 
 #ifndef __IComponentRegistrar_INTERFACE_DEFINED__
@@ -1930,65 +1954,77 @@ void __RPC_STUB IComponentRegistrar_UnregisterComponent_Stub(
 #endif 	/* __IComponentRegistrar_INTERFACE_DEFINED__ */
 
 
-#ifndef __IGroupNode_INTERFACE_DEFINED__
-#define __IGroupNode_INTERFACE_DEFINED__
+#ifndef __IGraphInfo_INTERFACE_DEFINED__
+#define __IGraphInfo_INTERFACE_DEFINED__
 
-/* interface IGroupNode */
+/* interface IGraphInfo */
 /* [unique][helpstring][dual][uuid][object] */ 
 
 
-EXTERN_C const IID IID_IGroupNode;
+EXTERN_C const IID IID_IGraphInfo;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("28EBA211-E2B0-4717-87AA-63A0A5C76CDC")
-    IGroupNode : public IDispatch
+    MIDL_INTERFACE("0641C669-B362-48C9-8B73-D02B6E252A9D")
+    IGraphInfo : public IDispatch
     {
     public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetLength( 
-            /* [retval][out] */ int *count) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetNodes( 
+            /* [retval][out] */ int *value) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetNode( 
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetEdges( 
+            /* [retval][out] */ int *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimension( 
+            /* [retval][out] */ int *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetMinimum( 
             /* [in] */ int index,
-            /* [retval][out] */ INode **node) = 0;
+            /* [retval][out] */ double *value) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE AddNode( 
-            /* [in] */ INode *node) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetMaximum( 
+            /* [in] */ int index,
+            /* [retval][out] */ double *value) = 0;
         
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE CreateNode( 
-            /* [retval][out] */ INode **node) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetGridNumber( 
+            /* [in] */ int index,
+            /* [retval][out] */ int *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetGridSize( 
+            /* [in] */ int index,
+            /* [retval][out] */ double *value) = 0;
         
     };
     
 #else 	/* C style interface */
 
-    typedef struct IGroupNodeVtbl
+    typedef struct IGraphInfoVtbl
     {
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IGroupNode * This,
+            IGraphInfo * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IGroupNode * This);
+            IGraphInfo * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            IGroupNode * This);
+            IGraphInfo * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IGroupNode * This,
+            IGraphInfo * This,
             /* [out] */ UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IGroupNode * This,
+            IGraphInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IGroupNode * This,
+            IGraphInfo * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [in] */ UINT cNames,
@@ -1996,7 +2032,7 @@ EXTERN_C const IID IID_IGroupNode;
             /* [size_is][out] */ DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IGroupNode * This,
+            IGraphInfo * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -2006,29 +2042,44 @@ EXTERN_C const IID IID_IGroupNode;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLength )( 
-            IGroupNode * This,
-            /* [retval][out] */ int *count);
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetNodes )( 
+            IGraphInfo * This,
+            /* [retval][out] */ int *value);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetNode )( 
-            IGroupNode * This,
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetEdges )( 
+            IGraphInfo * This,
+            /* [retval][out] */ int *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimension )( 
+            IGraphInfo * This,
+            /* [retval][out] */ int *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetMinimum )( 
+            IGraphInfo * This,
             /* [in] */ int index,
-            /* [retval][out] */ INode **node);
+            /* [retval][out] */ double *value);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *AddNode )( 
-            IGroupNode * This,
-            /* [in] */ INode *node);
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetMaximum )( 
+            IGraphInfo * This,
+            /* [in] */ int index,
+            /* [retval][out] */ double *value);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateNode )( 
-            IGroupNode * This,
-            /* [retval][out] */ INode **node);
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetGridNumber )( 
+            IGraphInfo * This,
+            /* [in] */ int index,
+            /* [retval][out] */ int *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetGridSize )( 
+            IGraphInfo * This,
+            /* [in] */ int index,
+            /* [retval][out] */ double *value);
         
         END_INTERFACE
-    } IGroupNodeVtbl;
+    } IGraphInfoVtbl;
 
-    interface IGroupNode
+    interface IGraphInfo
     {
-        CONST_VTBL struct IGroupNodeVtbl *lpVtbl;
+        CONST_VTBL struct IGraphInfoVtbl *lpVtbl;
     };
 
     
@@ -2036,40 +2087,49 @@ EXTERN_C const IID IID_IGroupNode;
 #ifdef COBJMACROS
 
 
-#define IGroupNode_QueryInterface(This,riid,ppvObject)	\
+#define IGraphInfo_QueryInterface(This,riid,ppvObject)	\
     (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
 
-#define IGroupNode_AddRef(This)	\
+#define IGraphInfo_AddRef(This)	\
     (This)->lpVtbl -> AddRef(This)
 
-#define IGroupNode_Release(This)	\
+#define IGraphInfo_Release(This)	\
     (This)->lpVtbl -> Release(This)
 
 
-#define IGroupNode_GetTypeInfoCount(This,pctinfo)	\
+#define IGraphInfo_GetTypeInfoCount(This,pctinfo)	\
     (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
 
-#define IGroupNode_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+#define IGraphInfo_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
 
-#define IGroupNode_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+#define IGraphInfo_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
 
-#define IGroupNode_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+#define IGraphInfo_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define IGroupNode_GetLength(This,count)	\
-    (This)->lpVtbl -> GetLength(This,count)
+#define IGraphInfo_GetNodes(This,value)	\
+    (This)->lpVtbl -> GetNodes(This,value)
 
-#define IGroupNode_GetNode(This,index,node)	\
-    (This)->lpVtbl -> GetNode(This,index,node)
+#define IGraphInfo_GetEdges(This,value)	\
+    (This)->lpVtbl -> GetEdges(This,value)
 
-#define IGroupNode_AddNode(This,node)	\
-    (This)->lpVtbl -> AddNode(This,node)
+#define IGraphInfo_GetDimension(This,value)	\
+    (This)->lpVtbl -> GetDimension(This,value)
 
-#define IGroupNode_CreateNode(This,node)	\
-    (This)->lpVtbl -> CreateNode(This,node)
+#define IGraphInfo_GetMinimum(This,index,value)	\
+    (This)->lpVtbl -> GetMinimum(This,index,value)
+
+#define IGraphInfo_GetMaximum(This,index,value)	\
+    (This)->lpVtbl -> GetMaximum(This,index,value)
+
+#define IGraphInfo_GetGridNumber(This,index,value)	\
+    (This)->lpVtbl -> GetGridNumber(This,index,value)
+
+#define IGraphInfo_GetGridSize(This,index,value)	\
+    (This)->lpVtbl -> GetGridSize(This,index,value)
 
 #endif /* COBJMACROS */
 
@@ -2078,49 +2138,88 @@ EXTERN_C const IID IID_IGroupNode;
 
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IGroupNode_GetLength_Proxy( 
-    IGroupNode * This,
-    /* [retval][out] */ int *count);
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetNodes_Proxy( 
+    IGraphInfo * This,
+    /* [retval][out] */ int *value);
 
 
-void __RPC_STUB IGroupNode_GetLength_Stub(
+void __RPC_STUB IGraphInfo_GetNodes_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
     DWORD *_pdwStubPhase);
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IGroupNode_GetNode_Proxy( 
-    IGroupNode * This,
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetEdges_Proxy( 
+    IGraphInfo * This,
+    /* [retval][out] */ int *value);
+
+
+void __RPC_STUB IGraphInfo_GetEdges_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetDimension_Proxy( 
+    IGraphInfo * This,
+    /* [retval][out] */ int *value);
+
+
+void __RPC_STUB IGraphInfo_GetDimension_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetMinimum_Proxy( 
+    IGraphInfo * This,
     /* [in] */ int index,
-    /* [retval][out] */ INode **node);
+    /* [retval][out] */ double *value);
 
 
-void __RPC_STUB IGroupNode_GetNode_Stub(
+void __RPC_STUB IGraphInfo_GetMinimum_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
     DWORD *_pdwStubPhase);
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IGroupNode_AddNode_Proxy( 
-    IGroupNode * This,
-    /* [in] */ INode *node);
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetMaximum_Proxy( 
+    IGraphInfo * This,
+    /* [in] */ int index,
+    /* [retval][out] */ double *value);
 
 
-void __RPC_STUB IGroupNode_AddNode_Stub(
+void __RPC_STUB IGraphInfo_GetMaximum_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
     DWORD *_pdwStubPhase);
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IGroupNode_CreateNode_Proxy( 
-    IGroupNode * This,
-    /* [retval][out] */ INode **node);
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetGridNumber_Proxy( 
+    IGraphInfo * This,
+    /* [in] */ int index,
+    /* [retval][out] */ int *value);
 
 
-void __RPC_STUB IGroupNode_CreateNode_Stub(
+void __RPC_STUB IGraphInfo_GetGridNumber_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetGridSize_Proxy( 
+    IGraphInfo * This,
+    /* [in] */ int index,
+    /* [retval][out] */ double *value);
+
+
+void __RPC_STUB IGraphInfo_GetGridSize_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -2128,7 +2227,139 @@ void __RPC_STUB IGroupNode_CreateNode_Stub(
 
 
 
-#endif 	/* __IGroupNode_INTERFACE_DEFINED__ */
+#endif 	/* __IGraphInfo_INTERFACE_DEFINED__ */
+
+
+#ifndef __IWritableGraphInfo_INTERFACE_DEFINED__
+#define __IWritableGraphInfo_INTERFACE_DEFINED__
+
+/* interface IWritableGraphInfo */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWritableGraphInfo;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("5F89F9F3-AB8D-4129-A752-8A4258A8ECE9")
+    IWritableGraphInfo : public IDispatch
+    {
+    public:
+        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE AddGraph( 
+            /* [in] */ void **graph) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IWritableGraphInfoVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWritableGraphInfo * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWritableGraphInfo * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWritableGraphInfo * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWritableGraphInfo * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWritableGraphInfo * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWritableGraphInfo * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWritableGraphInfo * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *AddGraph )( 
+            IWritableGraphInfo * This,
+            /* [in] */ void **graph);
+        
+        END_INTERFACE
+    } IWritableGraphInfoVtbl;
+
+    interface IWritableGraphInfo
+    {
+        CONST_VTBL struct IWritableGraphInfoVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWritableGraphInfo_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IWritableGraphInfo_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IWritableGraphInfo_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IWritableGraphInfo_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IWritableGraphInfo_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IWritableGraphInfo_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IWritableGraphInfo_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IWritableGraphInfo_AddGraph(This,graph)	\
+    (This)->lpVtbl -> AddGraph(This,graph)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IWritableGraphInfo_AddGraph_Proxy( 
+    IWritableGraphInfo * This,
+    /* [in] */ void **graph);
+
+
+void __RPC_STUB IWritableGraphInfo_AddGraph_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IWritableGraphInfo_INTERFACE_DEFINED__ */
 
 
 #ifndef __IGraphResult_INTERFACE_DEFINED__
@@ -2146,6 +2377,23 @@ EXTERN_C const IID IID_IGraphResult;
     IGraphResult : public IResult
     {
     public:
+        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE GetGraph( 
+            /* [in] */ int index,
+            /* [retval][out] */ void **graph) = 0;
+        
+        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE GetCount( 
+            /* [retval][out] */ int *count) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetGraphInfo( 
+            /* [retval][out] */ IGraphInfo **info) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetGraphInfoAt( 
+            /* [in] */ int index,
+            /* [retval][out] */ IGraphInfo **info) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE IsStrongComponent( 
+            /* [retval][out] */ VARIANT_BOOL *value) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -2194,6 +2442,28 @@ EXTERN_C const IID IID_IGraphResult;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
+        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *GetGraph )( 
+            IGraphResult * This,
+            /* [in] */ int index,
+            /* [retval][out] */ void **graph);
+        
+        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *GetCount )( 
+            IGraphResult * This,
+            /* [retval][out] */ int *count);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetGraphInfo )( 
+            IGraphResult * This,
+            /* [retval][out] */ IGraphInfo **info);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetGraphInfoAt )( 
+            IGraphResult * This,
+            /* [in] */ int index,
+            /* [retval][out] */ IGraphInfo **info);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *IsStrongComponent )( 
+            IGraphResult * This,
+            /* [retval][out] */ VARIANT_BOOL *value);
+        
         END_INTERFACE
     } IGraphResultVtbl;
 
@@ -2231,6 +2501,21 @@ EXTERN_C const IID IID_IGraphResult;
 
 
 
+#define IGraphResult_GetGraph(This,index,graph)	\
+    (This)->lpVtbl -> GetGraph(This,index,graph)
+
+#define IGraphResult_GetCount(This,count)	\
+    (This)->lpVtbl -> GetCount(This,count)
+
+#define IGraphResult_GetGraphInfo(This,info)	\
+    (This)->lpVtbl -> GetGraphInfo(This,info)
+
+#define IGraphResult_GetGraphInfoAt(This,index,info)	\
+    (This)->lpVtbl -> GetGraphInfoAt(This,index,info)
+
+#define IGraphResult_IsStrongComponent(This,value)	\
+    (This)->lpVtbl -> IsStrongComponent(This,value)
+
 #endif /* COBJMACROS */
 
 
@@ -2238,67 +2523,121 @@ EXTERN_C const IID IID_IGraphResult;
 
 
 
+/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IGraphResult_GetGraph_Proxy( 
+    IGraphResult * This,
+    /* [in] */ int index,
+    /* [retval][out] */ void **graph);
+
+
+void __RPC_STUB IGraphResult_GetGraph_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IGraphResult_GetCount_Proxy( 
+    IGraphResult * This,
+    /* [retval][out] */ int *count);
+
+
+void __RPC_STUB IGraphResult_GetCount_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphResult_GetGraphInfo_Proxy( 
+    IGraphResult * This,
+    /* [retval][out] */ IGraphInfo **info);
+
+
+void __RPC_STUB IGraphResult_GetGraphInfo_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphResult_GetGraphInfoAt_Proxy( 
+    IGraphResult * This,
+    /* [in] */ int index,
+    /* [retval][out] */ IGraphInfo **info);
+
+
+void __RPC_STUB IGraphResult_GetGraphInfoAt_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IGraphResult_IsStrongComponent_Proxy( 
+    IGraphResult * This,
+    /* [retval][out] */ VARIANT_BOOL *value);
+
+
+void __RPC_STUB IGraphResult_IsStrongComponent_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
 
 #endif 	/* __IGraphResult_INTERFACE_DEFINED__ */
 
 
-#ifndef __IGraphNode_INTERFACE_DEFINED__
-#define __IGraphNode_INTERFACE_DEFINED__
+#ifndef __IWritableGraphResult_INTERFACE_DEFINED__
+#define __IWritableGraphResult_INTERFACE_DEFINED__
 
-/* interface IGraphNode */
-/* [unique][helpstring][dual][uuid][object] */ 
+/* interface IWritableGraphResult */
+/* [local][hidden][unique][helpstring][dual][uuid][object] */ 
 
 
-EXTERN_C const IID IID_IGraphNode;
+EXTERN_C const IID IID_IWritableGraphResult;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("5CBE5D72-2BA0-4321-BB64-0772D2004C9A")
-    IGraphNode : public INode
+    MIDL_INTERFACE("6ED8D0EA-3E9C-441A-96C6-EEB2AFCBE27D")
+    IWritableGraphResult : public IDispatch
     {
     public:
-        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE GetGraphCount( 
-            /* [retval][out] */ int *count) = 0;
-        
-        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE GetGraph( 
-            /* [in] */ int index,
-            /* [retval][out] */ void **graph) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetAsGraphResult( 
-            /* [in] */ int index,
-            /* [retval][out] */ IGraphResult **result) = 0;
+        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE AddGraph( 
+            /* [in] */ void *graph) = 0;
         
     };
     
 #else 	/* C style interface */
 
-    typedef struct IGraphNodeVtbl
+    typedef struct IWritableGraphResultVtbl
     {
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IGraphNode * This,
+            IWritableGraphResult * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IGraphNode * This);
+            IWritableGraphResult * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            IGraphNode * This);
+            IWritableGraphResult * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IGraphNode * This,
+            IWritableGraphResult * This,
             /* [out] */ UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IGraphNode * This,
+            IWritableGraphResult * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IGraphNode * This,
+            IWritableGraphResult * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [in] */ UINT cNames,
@@ -2306,7 +2645,7 @@ EXTERN_C const IID IID_IGraphNode;
             /* [size_is][out] */ DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IGraphNode * This,
+            IWritableGraphResult * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -2316,30 +2655,16 @@ EXTERN_C const IID IID_IGraphNode;
             /* [out] */ EXCEPINFO *pExcepInfo,
             /* [out] */ UINT *puArgErr);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetActionManager )( 
-            IGraphNode * This,
-            /* [retval][out] */ IActionManager **manager);
-        
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *GetGraphCount )( 
-            IGraphNode * This,
-            /* [retval][out] */ int *count);
-        
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *GetGraph )( 
-            IGraphNode * This,
-            /* [in] */ int index,
-            /* [retval][out] */ void **graph);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetAsGraphResult )( 
-            IGraphNode * This,
-            /* [in] */ int index,
-            /* [retval][out] */ IGraphResult **result);
+        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *AddGraph )( 
+            IWritableGraphResult * This,
+            /* [in] */ void *graph);
         
         END_INTERFACE
-    } IGraphNodeVtbl;
+    } IWritableGraphResultVtbl;
 
-    interface IGraphNode
+    interface IWritableGraphResult
     {
-        CONST_VTBL struct IGraphNodeVtbl *lpVtbl;
+        CONST_VTBL struct IWritableGraphResultVtbl *lpVtbl;
     };
 
     
@@ -2347,41 +2672,31 @@ EXTERN_C const IID IID_IGraphNode;
 #ifdef COBJMACROS
 
 
-#define IGraphNode_QueryInterface(This,riid,ppvObject)	\
+#define IWritableGraphResult_QueryInterface(This,riid,ppvObject)	\
     (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
 
-#define IGraphNode_AddRef(This)	\
+#define IWritableGraphResult_AddRef(This)	\
     (This)->lpVtbl -> AddRef(This)
 
-#define IGraphNode_Release(This)	\
+#define IWritableGraphResult_Release(This)	\
     (This)->lpVtbl -> Release(This)
 
 
-#define IGraphNode_GetTypeInfoCount(This,pctinfo)	\
+#define IWritableGraphResult_GetTypeInfoCount(This,pctinfo)	\
     (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
 
-#define IGraphNode_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+#define IWritableGraphResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
 
-#define IGraphNode_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+#define IWritableGraphResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
 
-#define IGraphNode_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+#define IWritableGraphResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
-#define IGraphNode_GetActionManager(This,manager)	\
-    (This)->lpVtbl -> GetActionManager(This,manager)
-
-
-#define IGraphNode_GetGraphCount(This,count)	\
-    (This)->lpVtbl -> GetGraphCount(This,count)
-
-#define IGraphNode_GetGraph(This,index,graph)	\
-    (This)->lpVtbl -> GetGraph(This,index,graph)
-
-#define IGraphNode_GetAsGraphResult(This,index,result)	\
-    (This)->lpVtbl -> GetAsGraphResult(This,index,result)
+#define IWritableGraphResult_AddGraph(This,graph)	\
+    (This)->lpVtbl -> AddGraph(This,graph)
 
 #endif /* COBJMACROS */
 
@@ -2390,38 +2705,12 @@ EXTERN_C const IID IID_IGraphNode;
 
 
 
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IGraphNode_GetGraphCount_Proxy( 
-    IGraphNode * This,
-    /* [retval][out] */ int *count);
+/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IWritableGraphResult_AddGraph_Proxy( 
+    IWritableGraphResult * This,
+    /* [in] */ void *graph);
 
 
-void __RPC_STUB IGraphNode_GetGraphCount_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IGraphNode_GetGraph_Proxy( 
-    IGraphNode * This,
-    /* [in] */ int index,
-    /* [retval][out] */ void **graph);
-
-
-void __RPC_STUB IGraphNode_GetGraph_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphNode_GetAsGraphResult_Proxy( 
-    IGraphNode * This,
-    /* [in] */ int index,
-    /* [retval][out] */ IGraphResult **result);
-
-
-void __RPC_STUB IGraphNode_GetAsGraphResult_Stub(
+void __RPC_STUB IWritableGraphResult_AddGraph_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -2429,7 +2718,7 @@ void __RPC_STUB IGraphNode_GetAsGraphResult_Stub(
 
 
 
-#endif 	/* __IGraphNode_INTERFACE_DEFINED__ */
+#endif 	/* __IWritableGraphResult_INTERFACE_DEFINED__ */
 
 
 
@@ -2464,6 +2753,14 @@ EXTERN_C const CLSID CLSID_CCompReg;
 
 class DECLSPEC_UUID("84035475-16DE-4504-ABF2-5C734E46A96A")
 CCompReg;
+#endif
+
+EXTERN_C const CLSID CLSID_CGraphInfoImpl;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("1FCB1E52-C321-4E44-8BA6-83DA8C532365")
+CGraphInfoImpl;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

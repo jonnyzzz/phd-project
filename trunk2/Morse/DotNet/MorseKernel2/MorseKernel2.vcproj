@@ -145,6 +145,9 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{213A979A-506A-4295-9350-B86F82C0DBCB}"
+			Name="graph"/>
 	</References>
 	<Files>
 		<Filter
@@ -173,13 +176,13 @@
 				RelativePath=".\compreg.cpp">
 			</File>
 			<File
-				RelativePath=".\GraphNode.cpp">
+				RelativePath=".\GraphInfo.cpp">
+			</File>
+			<File
+				RelativePath=".\GraphInfoImpl.cpp">
 			</File>
 			<File
 				RelativePath=".\GraphResult.cpp">
-			</File>
-			<File
-				RelativePath=".\GroupNode.cpp">
 			</File>
 			<File
 				RelativePath=".\MorseKernel2.cpp">
@@ -211,6 +214,12 @@
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\WritableGraphInfo.cpp">
+			</File>
+			<File
+				RelativePath=".\WritableGraphResult.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -238,13 +247,16 @@
 				RelativePath=".\compreg.h">
 			</File>
 			<File
+				RelativePath=".\GraphInfo.h">
+			</File>
+			<File
+				RelativePath=".\GraphInfoImpl.h">
+			</File>
+			<File
 				RelativePath=".\GraphNode.h">
 			</File>
 			<File
 				RelativePath=".\GraphResult.h">
-			</File>
-			<File
-				RelativePath=".\GroupNode.h">
 			</File>
 			<File
 				RelativePath=".\Node.h">
@@ -263,6 +275,12 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
+			</File>
+			<File
+				RelativePath=".\WritableGraphInfo.h">
+			</File>
+			<File
+				RelativePath=".\WritableGraphResult.h">
 			</File>
 		</Filter>
 		<Filter

@@ -59,7 +59,7 @@ namespace gui.Resource
 		{
 			get 
 			{
-				return TempPath +  string.Format(FileCreateTemplate, (i++), DateTime.Now.GetHashCode());
+				return TempPath +  string.Format(FileCreateTemplate, (i++), Math.Abs(DateTime.Now.GetHashCode())%100);
 			}
 		}
 

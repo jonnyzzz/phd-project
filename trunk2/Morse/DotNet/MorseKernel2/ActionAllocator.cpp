@@ -27,7 +27,7 @@ void CActionAllocator::FinalRelease() {
 
 
 STDMETHODIMP CActionAllocator::AllocateActionManager(INode* forNode, IActionManager ** manager) {
-	IActionManagerImpl* actionManager;
+	IWritableActionManager* actionManager;
 	CActionManagerImpl::CreateInstance(&actionManager);
 
 	for (FactoryList::iterator it = factoryList.begin(); it != factoryList.end(); it++) {

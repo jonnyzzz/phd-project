@@ -3,6 +3,7 @@
 #pragma once
 #include "resource.h"       // main symbols
 #include "ActionManager.h"
+#include "result.h"
 
 // INode
 [
@@ -15,5 +16,7 @@ __interface INode : IDispatch
 {
 	[id(1)]
 	HRESULT GetActionManager([out, retval] IActionManager** manager);
+	[id(2)]
+	HRESULT GetResult([out, retval] IResult** result);
 };
 

@@ -3,6 +3,7 @@
 #pragma once
 #include "resource.h"       // main symbols
 #include "result.h"
+#include "graphInfo.h"
 
 // IGraphResult
 [
@@ -13,4 +14,14 @@
 ]
 __interface IGraphResult : IResult
 {
+	[id(10), local, hidden]
+	HRESULT GetGraph([in]int index, [out, retval] void** graph);
+	[id(11), local, hidden]
+	HRESULT GetCount([out, retval] int* count);
+	[id(12)]
+	HRESULT GetGraphInfo([out, retval] IGraphInfo** info);
+	[id(13)]
+	HRESULT GetGraphInfoAt([in] int index, [out, retval] IGraphInfo** info);
+	[id(14)]
+	HRESULT IsStrongComponent([out, retval] VARIANT_BOOL* value);
 };
