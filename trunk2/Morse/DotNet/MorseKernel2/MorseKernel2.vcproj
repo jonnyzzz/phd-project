@@ -170,6 +170,9 @@
 				RelativePath=".\compreg.cpp">
 			</File>
 			<File
+				RelativePath=".\Dummy.cpp">
+			</File>
+			<File
 				RelativePath=".\Function.cpp">
 			</File>
 			<File
@@ -257,6 +260,9 @@
 			</File>
 			<File
 				RelativePath=".\compreg.h">
+			</File>
+			<File
+				RelativePath=".\Dummy.h">
 			</File>
 			<File
 				RelativePath=".\Function.h">

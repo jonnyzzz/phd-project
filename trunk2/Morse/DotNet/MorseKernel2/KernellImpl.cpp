@@ -48,14 +48,16 @@ STDMETHODIMP CKernellImpl::CreateInitialResult(IResultBase** result) {
 		CGraphResultImpl::CreateInstance(&graphResult);
 		ATLASSERT(graphResult != NULL);
 
-		void* graph;
-		HRESULT hr = function->CreateGraph(&graph);
+		Graph* graph;
+		HRESULT hr = function->CreateGraph((void**)&graph);
 		if (FAILED(hr)) {
 			*result = NULL;
 			return hr;
 		}
 
-		graphResult->AddGraph(&graph, FALSE);
+		graph->maximize();
+
+		graphResult->AddGraph((void**)&graph, FALSE);
 
 		graphResult->QueryInterface(result);
 		ATLASSERT(*result != NULL);

@@ -267,6 +267,17 @@ interface IWritableKernell : IDispatch {
 	[id(11)] HRESULT  SetFunction([in] IFunction *function);
 };
 
+[
+	object,
+	uuid(0A8C775B-8E19-4642-B2D7-5BBB437B7B97),
+	dual,
+	helpstring("IDummy Interface"),
+	pointer_default(unique)
+] 
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy.h"
+interface IDummy : IDispatch {
+};
+
 
 [ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}"), helpstring("MorseKernel2 1.0 Type Library") ]
 library MorseKernel2
@@ -329,6 +340,19 @@ library MorseKernel2
 	coclass CKernellImpl {
 		interface IKernell;
 		interface IWritableKernell;
+	};
+
+	[
+		version(1.0),
+		uuid(8C3F6AAB-F725-4C70-A92A-7E4BD2A30C23),
+		helpstring("Dummy Class")
+	] 
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy.h"
+	coclass CDummy {
+		interface IDummy;
+		interface IFunction;
+		interface IAction;
+		interface IActionBase;
 	};
 
 }

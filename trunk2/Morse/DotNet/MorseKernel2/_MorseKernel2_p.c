@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Mar 13 23:11:53 2005
+/* at Sun Mar 13 23:36:55 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -172,6 +172,13 @@ extern const MIDL_STUB_DESC Object_StubDesc;
 
 extern const MIDL_SERVER_INFO IWritableKernell_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IWritableKernell_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IDummy_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IDummy_ProxyInfo;
 
 
 extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TABLE_SIZE ];
@@ -3329,6 +3336,72 @@ CInterfaceStubVtbl _IWritableKernellStubVtbl =
     CStdStubBuffer_DELEGATING_METHODS
 };
 
+
+/* Object interface: IDummy, ver. 0.0,
+   GUID={0x0A8C775B,0x8E19,0x4642,{0xB2,0xD7,0x5B,0xBB,0x43,0x7B,0x7B,0x97}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IDummy_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IDummy_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IDummy_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IDummy_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IDummy_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IDummyProxyVtbl = 
+{
+    0,
+    &IID_IDummy,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IDummy_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IDummyStubVtbl =
+{
+    &IID_IDummy,
+    &IDummy_ServerInfo,
+    7,
+    &IDummy_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
 static const MIDL_STUB_DESC Object_StubDesc = 
     {
     0,
@@ -3357,6 +3430,7 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
 {
     ( CInterfaceProxyVtbl *) &_IResultMergerProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IKernellProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IDummyProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IGraphInfoProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IGraphResultProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IParametersProxyVtbl,
@@ -3377,6 +3451,7 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
 {
     ( CInterfaceStubVtbl *) &_IResultMergerStubVtbl,
     ( CInterfaceStubVtbl *) &_IKernellStubVtbl,
+    ( CInterfaceStubVtbl *) &_IDummyStubVtbl,
     ( CInterfaceStubVtbl *) &_IGraphInfoStubVtbl,
     ( CInterfaceStubVtbl *) &_IGraphResultStubVtbl,
     ( CInterfaceStubVtbl *) &_IParametersStubVtbl,
@@ -3397,6 +3472,7 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
 {
     "IResultMerger",
     "IKernell",
+    "IDummy",
     "IGraphInfo",
     "IGraphResult",
     "IParameters",
@@ -3430,6 +3506,7 @@ const IID *  __MorseKernel2_BaseIIDList[] =
     &IID_IDispatch,
     &IID_IDispatch,
     &IID_IDispatch,
+    &IID_IDispatch,
     0
 };
 
@@ -3440,11 +3517,11 @@ int __stdcall __MorseKernel2_IID_Lookup( const IID * pIID, int * pIndex )
 {
     IID_BS_LOOKUP_SETUP
 
-    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 15, 8 )
+    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 16, 8 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 4 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 2 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 1 )
-    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 15, *pIndex )
+    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 16, *pIndex )
     
 }
 
@@ -3455,7 +3532,7 @@ const ExtendedProxyFileInfo _MorseKernel2_ProxyFileInfo =
     (const PCInterfaceName * ) & __MorseKernel2_InterfaceNamesList,
     (const IID ** ) & __MorseKernel2_BaseIIDList,
     & __MorseKernel2_IID_Lookup, 
-    15,
+    16,
     2,
     0, /* table of [async_uuid] interfaces */
     0, /* Filler1 */

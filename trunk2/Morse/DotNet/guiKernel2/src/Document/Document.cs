@@ -1,4 +1,5 @@
 using System;
+using MorseKernel2;
 
 namespace guiKernel2.src.Document
 {
@@ -7,11 +8,22 @@ namespace guiKernel2.src.Document
 	/// </summary>
 	public class Document
 	{
-		public Document()
+		private IKernell kernell;
+
+		public Document(IFunction function)
 		{
-			//
-			// TODO: Add constructor logic here
-			//
+			IWritableKernell writableKernell = new CKernellImplClass();
+			writableKernell.SetFunction(function);
+			
+			kernell = (IKernell)writableKernell;
+		}
+
+		public IKernell Kernell
+		{
+			get
+			{
+				return kernell;
+			}
 		}
 	}
 }
