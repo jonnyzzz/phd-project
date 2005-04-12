@@ -1,18 +1,18 @@
-MorseKernel2/guiKernel2: Implement action naming from XML
-Implement default graph process. Implement cell image builder interface and integrate it with process.
+FIX MorseKernel2/guiKernel2: Implement action naming from XML
+EXCLUDED Implement default graph process. Implement cell image builder interface and integrate it with process.
 MorseKernel2/guiKernel2: Implement ActionGroupingStategy
 Smart Group constraint check in kernel2
-Stop using protected fields in abstract process classes hierarchy. Implement field hiding where suitable.
+FIX Stop using protected fields in abstract process classes hierarchy. Implement field hiding where suitable.
 Wrong answer for 0.5 2 linear system. There is no -ln2 answer. only +ln2!!!
 FIX Shouldn't allow to start without resources!
 FIX Resources -> XML
 GraphNodeEnumerator leak
 FIX Components in color in GNU PLOT
-3D Box in gnu plot
-Document class global integration
+IGNORED 3D Box in gnu plot
+FIX Document class global integration
 Document dirty flag
 FIX Serialization of Group nodes
-FIX GNUPLOT template -> XML
+FIX GNUPLOT template -> XML -> Resources
 GNUPLOT smart template
 GNUPLOT image saver
 GNUPLOT throught pipe
@@ -25,18 +25,18 @@ Stop support
 Nodefiltering support
 Optimized fixed pointes construction
 Lazy graph (.NET?)
-NodeParameters class
+FIX-PARTLY-INTERFACE2 NodeParameters class
 FIX TarjanStackOptimization //contains works in O(1)
 Dimension increment doesn't kills inputted system
-Save fail doesn't kills app
+FIX Save fail doesn't kills app
 OpenGL Visualization
-Open API (COM SERVER, Abstract action for IKenelNode) IKernelNode -> SupportedActions
+FIX-.NET Open API (COM SERVER, Abstract action for IKenelNode) IKernelNode -> SupportedActions
 FIX Morse: Use center of cell to compute value for arc
 Morse lazy arc value (re)computation
 FIX Implement cell extraction algorithm for point method in Neighbourhood way
 Graph optimized memory allocation
 Starting computation from node set
 Support for non-standard space (i.e. non rectangular, but with cells)
-Update system equation saving format using XMLSerializer not hand-made hardcoding
+FIX Update system equation saving format using XMLSerializer not hand-made hardcoding
 Implemenet graph chahing on HDD not using windows SWAP file
 Implemenet partly loading of computation tree nodes without loading others

@@ -22,5 +22,12 @@ namespace gui2.src.Document
 			return node;
 		}
 
+		public static XmlNode AppendNode(XmlDocument document, XmlNode node, XmlNode toAppend)
+		{
+			XmlNode anode = document.ImportNode(toAppend, true);
+			node.AppendChild(anode);
+			return node;			
+		}
+
 	}
 }

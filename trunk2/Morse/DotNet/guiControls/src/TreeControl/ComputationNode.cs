@@ -38,13 +38,6 @@ namespace guiControls.TreeControl
 			this.Text = this.NodeCaption;
 		}
 
-		private void AddNewNode(ComputationNode node)
-		{
-			lock (TreeView)
-			{
-				Nodes.Add(node);
-			}			
-		}
 
 		#region helpers
 

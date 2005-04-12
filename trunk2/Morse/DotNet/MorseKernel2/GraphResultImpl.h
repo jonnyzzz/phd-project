@@ -64,6 +64,7 @@ public:
 public:
 	STDMETHOD(SetGraph)(void** graph, VARIANT_BOOL isStringComponent);
 	STDMETHOD(SetMetadata)(IResultMetadata* in);
+	STDMETHOD(SetGraphFromFile)(BSTR file, VARIANT_BOOL isStrongComponent);
 
 private:
 	IResultMetadata* metadata;

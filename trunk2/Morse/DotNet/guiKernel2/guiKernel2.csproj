@@ -226,6 +226,16 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Serialization\KernelNodeSerializer.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Serialization\SerializationException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\xml\XMLParser.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

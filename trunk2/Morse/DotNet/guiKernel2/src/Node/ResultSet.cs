@@ -115,10 +115,10 @@ namespace guiKernel2.Node
 			return resultSet;
 		}
 
-		public static ResultSet FromResult(IResultBase result)
+		public static ResultSet FromResult(params IResultBase[] result)
 		{
 			ResultSet resultSet = new ResultSet();
-			resultSet.AddResult(result);
+			resultSet.AddResultRange(result);
 			return resultSet;
 		}
 

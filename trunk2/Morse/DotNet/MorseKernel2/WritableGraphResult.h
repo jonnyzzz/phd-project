@@ -17,5 +17,8 @@ __interface IWritableGraphResult : IDispatch
 	HRESULT SetGraph([in]void** graph, [in]VARIANT_BOOL isStrongComponent);
 	[id(21)]
 	HRESULT SetMetadata([in] IResultMetadata* metadata);
+
+	[id(22)]
+	HRESULT SetGraphFromFile([in] BSTR file, [in]VARIANT_BOOL isStrongComponent);
 };
 

@@ -28,6 +28,9 @@ public:
 
 	int eof();
 
+public:
+	bool EnshureOpened();
+
 protected:
 	ifstream f;
 };

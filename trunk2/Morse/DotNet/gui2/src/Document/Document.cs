@@ -10,12 +10,18 @@ namespace gui2.Document
 	public class Document
 	{
 		private KernelDocument kernelDocument;
-		private KernelNode rootNode = null;
+		private Node rootNode = null;
 
-		public Document(Function function)
+		public Document(Function function)	
 		{			
 			kernelDocument = new KernelDocument(function);
-			rootNode = kernelDocument.CreateInitialNode();
+			rootNode = new Node(kernelDocument.CreateInitialNode());
+		}
+
+		public Document(Function function, Node root)
+		{
+			kernelDocument = new KernelDocument(function);
+			rootNode = root;			
 		}
 
 		public KernelDocument KernelDocument
@@ -26,7 +32,7 @@ namespace gui2.Document
 
 		public Node RootNode
 		{
-			get { return new Node(rootNode); }			
+			get { return rootNode; }
 		}
 
 

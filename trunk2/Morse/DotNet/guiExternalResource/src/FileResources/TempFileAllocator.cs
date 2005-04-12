@@ -31,15 +31,37 @@ namespace guiExternalResource.src.FileResources
 
 		public string CreateFile()
 		{
-			string file = string.Format("{7}/{0}.{1}.{2}-{3}.{4}.{5}.{6}.{8}.temp", 
+			return CreateFile(ResourceManager.Instance.TemporaryPath);			
+		}
+
+		private string CreateFileName()
+		{
+			return CreateFileName("temp");
+		}
+
+		public string CreateFileName(string ext)
+		{
+			string file = string.Format("{0}.{1}.{2}-{3}.{4}.{5}.{6}.{7}.{8}", 
 				DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, 
 				DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, DateTime.Now.Millisecond, 
-			                            ResourceManager.Instance.TemporaryPath, num++);
+				num++, ext);
+
+			while(File.Exists(file)) file += "_";			
+			
+			return /*ResourceManager.Instance.SimplyfyPath(*/file;			
+		}
+
+		public string  CreateFile(string path)
+		{
+			string file = string.Format("{1}/{0}", 
+				CreateFileName(), 
+				path
+				);
 
 			while(File.Exists(file)) file += "_";
 			files.Add(file);
 			
-			return ResourceManager.Instance.SimplyfyPath(file);
+			return ResourceManager.Instance.SimplyfyPath(file);			
 		}
 
 		public string SaveToTempFile(string data)

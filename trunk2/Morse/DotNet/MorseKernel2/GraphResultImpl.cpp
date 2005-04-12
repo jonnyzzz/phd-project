@@ -114,3 +114,19 @@ STDMETHODIMP CGraphResultImpl::SaveGraph(BSTR file) {
 	return S_OK;
 }
 
+STDMETHODIMP CGraphResultImpl::SetGraphFromFile(BSTR file, VARIANT_BOOL isStrong) {
+	CString filename(file);
+
+	FileInputStream in(filename);
+	if (!in.EnshureOpened()) return E_FAIL;
+
+	Graph* graph = createGraph(in);
+
+	HRESULT hr = SetGraph((void**)&graph, isStrong);
+
+	if (FAILED(hr)) {
+		delete graph;
+	}
+
+	return hr;
+}

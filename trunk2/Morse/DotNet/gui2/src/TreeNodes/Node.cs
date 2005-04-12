@@ -110,8 +110,11 @@ namespace gui2.TreeNodes
 			Logger.Logger.LogMessage("Adding Node");
 			
 			this.Nodes.Add(node);
-			this.Expand();
-			node.EnsureVisible();
+			if (this.TreeView != null) 
+			{
+				this.Expand();
+				node.EnsureVisible();
+			}
 		}
 
 		public ResultSet ResultSet

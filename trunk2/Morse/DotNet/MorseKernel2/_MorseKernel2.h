@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Wed Apr 06 23:37:25 2005
+/* at Tue Apr 12 23:04:37 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -2877,6 +2877,10 @@ EXTERN_C const IID IID_IWritableGraphResult;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetMetadata( 
             /* [in] */ IResultMetadata *metadata) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetGraphFromFile( 
+            /* [in] */ BSTR file,
+            /* [in] */ VARIANT_BOOL isStrongComponent) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -2934,6 +2938,11 @@ EXTERN_C const IID IID_IWritableGraphResult;
             IWritableGraphResult * This,
             /* [in] */ IResultMetadata *metadata);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetGraphFromFile )( 
+            IWritableGraphResult * This,
+            /* [in] */ BSTR file,
+            /* [in] */ VARIANT_BOOL isStrongComponent);
+        
         END_INTERFACE
     } IWritableGraphResultVtbl;
 
@@ -2976,6 +2985,9 @@ EXTERN_C const IID IID_IWritableGraphResult;
 #define IWritableGraphResult_SetMetadata(This,metadata)	\
     (This)->lpVtbl -> SetMetadata(This,metadata)
 
+#define IWritableGraphResult_SetGraphFromFile(This,file,isStrongComponent)	\
+    (This)->lpVtbl -> SetGraphFromFile(This,file,isStrongComponent)
+
 #endif /* COBJMACROS */
 
 
@@ -3002,6 +3014,19 @@ void __RPC_STUB IWritableGraphResult_SetGraph_Stub(
 
 
 void __RPC_STUB IWritableGraphResult_SetMetadata_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableGraphResult_SetGraphFromFile_Proxy( 
+    IWritableGraphResult * This,
+    /* [in] */ BSTR file,
+    /* [in] */ VARIANT_BOOL isStrongComponent);
+
+
+void __RPC_STUB IWritableGraphResult_SetGraphFromFile_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,

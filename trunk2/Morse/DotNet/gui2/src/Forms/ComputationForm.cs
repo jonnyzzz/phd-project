@@ -1,12 +1,16 @@
+using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 using gui2.ActionPerformer;
 using gui2.Progress;
+using gui2.src.Document;
 using gui2.src.TreeNodes;
 using gui2.TreeNodes;
 using guiActions.Actions;
 using guiControls.TreeControl;
 using guiKernel2.Actions;
 using guiKernel2.Document;
+using guiKernel2.Serialization;
 
 namespace gui2.Forms
 {
@@ -34,6 +38,11 @@ namespace gui2.Forms
 		private System.Windows.Forms.MenuItem menuFunctionShow;
 		private System.Windows.Forms.MenuItem menuHelp;
 		private System.Windows.Forms.MenuItem menuHelpAbout;
+		private System.Windows.Forms.MenuItem menuDelimeter;
+		private System.Windows.Forms.MenuItem menuSave;
+		private System.Windows.Forms.SaveFileDialog saveDocumentDialog;
+		private System.Windows.Forms.OpenFileDialog openDocumentDialog;
+		private System.Windows.Forms.MenuItem menuOpenDocument;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -93,6 +102,11 @@ namespace gui2.Forms
 			this.menuFunctionShow = new System.Windows.Forms.MenuItem();
 			this.menuHelp = new System.Windows.Forms.MenuItem();
 			this.menuHelpAbout = new System.Windows.Forms.MenuItem();
+			this.menuDelimeter = new System.Windows.Forms.MenuItem();
+			this.menuSave = new System.Windows.Forms.MenuItem();
+			this.saveDocumentDialog = new System.Windows.Forms.SaveFileDialog();
+			this.openDocumentDialog = new System.Windows.Forms.OpenFileDialog();
+			this.menuOpenDocument = new System.Windows.Forms.MenuItem();
 			this.panelLeft.SuspendLayout();
 			this.panelRight.SuspendLayout();
 			this.panelRightUp.SuspendLayout();
@@ -236,7 +250,10 @@ namespace gui2.Forms
 			// 
 			this.menuInvestigations.Index = 1;
 			this.menuInvestigations.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																							   this.menuSystem});
+																							   this.menuSystem,
+																							   this.menuDelimeter,
+																							   this.menuOpenDocument,
+																							   this.menuSave});
 			this.menuInvestigations.Text = "Investigations";
 			// 
 			// menuSystem
@@ -273,6 +290,36 @@ namespace gui2.Forms
 			this.menuHelpAbout.Text = "About";
 			this.menuHelpAbout.Click += new System.EventHandler(this.menuHelpAbout_Click);
 			// 
+			// menuDelimeter
+			// 
+			this.menuDelimeter.Enabled = false;
+			this.menuDelimeter.Index = 1;
+			this.menuDelimeter.Text = "-";
+			// 
+			// menuSave
+			// 
+			this.menuSave.Index = 3;
+			this.menuSave.Text = "Save";
+			this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
+			// 
+			// saveDocumentDialog
+			// 
+			this.saveDocumentDialog.DefaultExt = "dsif";
+			this.saveDocumentDialog.Filter = "Dynamical System Investigations Files|*.dsif|All files|*.*";
+			this.saveDocumentDialog.Title = "Select file to save project";
+			// 
+			// openDocumentDialog
+			// 
+			this.openDocumentDialog.DefaultExt = "dsif";
+			this.openDocumentDialog.Filter = "Dynamical System Investigations Files|*.dsif|All files|*.*";
+			this.openDocumentDialog.Title = "Select System to open";
+			// 
+			// menuOpenDocument
+			// 
+			this.menuOpenDocument.Index = 2;
+			this.menuOpenDocument.Text = "Open";
+			this.menuOpenDocument.Click += new System.EventHandler(this.menuOpenDocument_Click);
+			// 
 			// ComputationForm
 			// 
 			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -304,12 +351,17 @@ namespace gui2.Forms
 				Function function = assignment.Function;
 				Logger.Logger.LogMessage(function.ToString());
 
-				Runner.Runner.Instance.Document = new Document.Document(function);
-
-				tree.Root = Runner.Runner.Instance.Document.RootNode;
-
+				OpenNewDocument(new Document.Document(function));				
 			}
 		}
+
+		public void OpenNewDocument(Document.Document document)
+		{
+			Runner.Runner.Instance.Document = document;
+			tree.Root = document.RootNode;
+			tree.Root.ExpandAll();
+		}
+
 
 		private ProgressBarInfo progressBarInfo;
 		private ProgressBarNotificationAdapter progressBarAdapter;
@@ -385,6 +437,48 @@ namespace gui2.Forms
 		private void menuHelpAbout_Click(object sender, System.EventArgs e)
 		{
 			new About().ShowDialog();
+		}
+
+		private void menuSave_Click(object sender, System.EventArgs e)
+		{
+			if (Runner.Runner.Instance.Document == null) return;
+
+			if (saveDocumentDialog.ShowDialog( this) == System.Windows.Forms.DialogResult.OK)
+			{
+				try 
+				{
+					string filename = saveDocumentDialog.FileName;
+
+					string pathbase = Path.GetDirectoryName(filename);
+
+					XmlNode xml = DocumentSerializer.SaveDocument(Runner.Runner.Instance.Document, pathbase);
+
+					XmlDocument document = XmlUtil.CreateEmptyDocument();
+					XmlUtil.SetRootNode(document, xml);
+
+					using( TextWriter file = File.CreateText(filename))
+					{
+						document.Save(file);
+					}
+				} catch (SerializationException ee)
+				{
+					MessageBox.Show(this, "Failed to save file: " + ee.Message);
+				}
+			}
+		}
+
+		private void menuOpenDocument_Click(object sender, System.EventArgs e)
+		{
+			if (openDocumentDialog.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+			{
+				string filename = openDocumentDialog.FileName;
+				string pathbase = Path.GetDirectoryName(filename);
+
+				XmlDocument doc = new XmlDocument();
+				doc.Load(filename);
+
+				OpenNewDocument(DocumentSerializer.LoadDocument(doc, pathbase));
+			}
 		}
 	}
 }

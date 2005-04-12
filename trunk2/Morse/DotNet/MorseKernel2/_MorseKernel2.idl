@@ -244,6 +244,8 @@ interface IWritableGraphResult : IDispatch {
 	[id(20),local,hidden] HRESULT  SetGraph([in] void **graph , [in] VARIANT_BOOL isStrongComponent);
 #line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablegraphresult.h"
 	[id(21)] HRESULT  SetMetadata([in] IResultMetadata *metadata);
+#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablegraphresult.h"
+	[id(22)] HRESULT  SetGraphFromFile([in] BSTR file, [in] VARIANT_BOOL isStrongComponent);
 };
 
 [
