@@ -62,7 +62,7 @@ STDMETHODIMP CBoxMethodAction::GetDimensionForParameters(IResultSet* resultSet, 
 	VARIANT_BOOL test;
 	CanDo(resultSet, &test);
 
-	if (test = FALSE) return E_INVALIDARG;
+	if (test = VARIANT_FALSE) return E_INVALIDARG;
 
 	GraphResultGraphIterator it(resultSet);
 	*dimension = it->getDimention();
@@ -80,7 +80,7 @@ STDMETHODIMP CBoxMethodAction::Do(IResultSet* in, IResultSet** out) {
 	ProgressBarNotificationAdapter pinfo(info);
 
 	SmartInterface<IFunction> function;
-	parameters->GetFunction(&function);
+	parameters->GetFunction(function.extract());
 	ATLASSERT(function != NULL);
 
 	ISystemFunction* func;
@@ -116,7 +116,7 @@ STDMETHODIMP CBoxMethodAction::Do(IResultSet* in, IResultSet** out) {
 	SimpleBoxProcess process(it, func, factor, &pinfo);
 
 	SmartInterface<IResultMetadata> metadata;
-	CSymbolicImageMetadata::CreateInstance(&metadata);
+	CSymbolicImageMetadata::CreateInstance(metadata.extract());
 
 	GraphResultUtil::PerformProcess(&process, in, false, metadata, out);
 	ATLASSERT(*out != NULL);

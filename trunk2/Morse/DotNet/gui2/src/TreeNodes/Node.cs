@@ -59,17 +59,25 @@ namespace gui2.TreeNodes
 
 			Node node = null;
 
-			foreach (TreeNode treeNode in Nodes)
+			try
 			{
-				if (treeNode is Node)
+				foreach (TreeNode treeNode in Nodes)
 				{
-					node = (Node)treeNode;
-					node.Checked = true;
+					if (treeNode is Node)
+					{
+						node = (Node) treeNode;
+						node.Checked = true;
+					}
+				}
+				if (node != null)
+				{
+					node.CreateGroup();
 				}
 			}
-			if (node != null) 
+			catch (GroupException e)
 			{
-				node.CreateGroup();
+				MessageBox.Show(Runner.Runner.Instance.ComputationForm, e.Message);
+				group.DeCheckAndRemoveAll();
 			}
 		}
 

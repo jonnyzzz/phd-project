@@ -45,6 +45,7 @@ namespace gui2.src.TreeNodes
 			foreach (Node node in nodes)
 			{
 				if (node.Parent != aNode.Parent) throw new GroupException("Group can only be built from nodes recieved from one result");
+				if (!ResultSet.HasEqualsGraph(node.ResultSet, aNode.ResultSet)) throw new GroupException("Unable to add this node due to uncomparable type");
 			}
 		}
 		

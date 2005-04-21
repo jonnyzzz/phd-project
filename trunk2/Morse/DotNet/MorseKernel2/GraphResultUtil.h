@@ -16,6 +16,8 @@ public:
 	template <class I>
 	static bool ContainsMetadataOnly(IResultSet* resultSet);
 
+	static bool ContainsGraphOnly(IResultSet* resultSet, bool isStrongComponent);
+
 public:
 	static bool HasSameMetadataType(IResultSet* resultSet);
 	static void GetMetadata(IResultSet* resultSet, IResultMetadata** data);
@@ -35,7 +37,7 @@ bool GraphResultUtil::ContainsOnlyType(IResultSet* resultSet) {
 	for (ResultSetIterator<IResultBase> it(resultSet); it.HasNext(); it.Next()) {
 		SmartInterface<IResultBase> resultBase = it;
 		SmartInterface<Result> result;
-		resultBase->QueryInterface(&result);
+		resultBase->QueryInterface(result.extract());
 		if (result == NULL) {
 			return false;
 		}
@@ -50,10 +52,10 @@ bool GraphResultUtil::ContainsMetadataOnly(IResultSet* resultSet) {
 	for (ResultSetIterator<IResult> it(resultSet); it.HasNext(); it.Next()) {
 		SmartInterface<IResult> result = it;
 		SmartInterface<IResultMetadata> aMetadata;
-		result->GetMetadata(&aMetadata);
+		result->GetMetadata(aMetadata.extract());
 		ATLASSERT(aMetadata != NULL);
 		SmartInterface<Metadata> meta;
-		aMetadata->QueryInterface(&meta);
+		aMetadata->QueryInterface(meta.extract());
 		if (meta == NULL) {
 			return false;
 		}

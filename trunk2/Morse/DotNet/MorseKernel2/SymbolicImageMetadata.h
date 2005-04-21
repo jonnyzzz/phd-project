@@ -3,6 +3,7 @@
 #pragma once
 #include "resource.h"       // main symbols
 #include "ResultMetadata.h"
+#include "ResultMetadataBase.h"
 
 // ISymbolicImageMetadata
 [
@@ -29,22 +30,19 @@ __interface ISymbolicImageMetadata : IResultMetadata
 	helpstring("SymbolicImageMetadata Class")
 ]
 class ATL_NO_VTABLE CSymbolicImageMetadata : 
-	public ISymbolicImageMetadata
+	public ISymbolicImageMetadata,
+	private ResultMetadataBase<ISymbolicImageMetadata, CSymbolicImageMetadata>
 {
 public:
 	CSymbolicImageMetadata();
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
+	DECLARE_RESULT_METADATA_DECLARE_BASE()
 
 	HRESULT FinalConstruct();
 	
 	void FinalRelease();
 
-
-	//IResultMetadata
-public:
-	STDMETHOD(EqualType)(IResultMetadata* metadata, VARIANT_BOOL* out);
-	STDMETHOD(Clone)(IResultMetadata** out);
 
 
 

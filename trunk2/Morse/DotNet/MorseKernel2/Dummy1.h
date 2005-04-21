@@ -6,6 +6,9 @@
 #include "ComputationParameters.h"
 #include "IsolatedSetAction.h"
 #include "MinimalLoopLocalizationAction.h"
+#include "SIRomAction.h"
+#include "SpectrumMetadata.h"
+#include "SpectrumResult.h"
 
 
 // IDummy1
@@ -110,5 +113,7 @@ public:
 		// Add your function implementation here.
 		return E_NOTIMPL;
 	}
-};
 
+	// ISIRomActionParameters Methods
+public:
+};

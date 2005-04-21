@@ -30,16 +30,16 @@ bool GraphResultUtil::HasSameMetadataType(IResultSet* resultSet) {
 	ResultSetIterator<IResult> it(resultSet);
 
 	SmartInterface<IResultMetadata> metadata;
-	it->GetMetadata(&metadata);
+	it->GetMetadata(metadata.extract());
 
 	for (it.Next(); it.HasNext(); it.Next()) {
 		SmartInterface<IResultMetadata> tmp;
-		it->GetMetadata(&tmp);
+		it->GetMetadata(tmp.extract());
 
 		VARIANT_BOOL answ;
 		metadata->EqualType(tmp, &answ);
 
-		if (answ == FALSE) {
+		if (answ == VARIANT_FALSE) {
 			return false;
 		} 
 	}
@@ -51,7 +51,7 @@ bool GraphResultUtil::HasSameMetadataType(IResultSet* resultSet) {
 
 void GraphResultUtil::GetMetadataCloned(IResultSet* resultSet, IResultMetadata** rdata) {
 	SmartInterface<IResultMetadata> data;
-	GetMetadata(resultSet, &data);
+	GetMetadata(resultSet, data.extract());
 	
 	ATLASSERT(data != NULL);
 
@@ -65,7 +65,7 @@ void GraphResultUtil::GetMetadata(IResultSet* resultSet, IResultMetadata** data)
 
 	ResultSetIterator<IResult> it(resultSet);
 	SmartInterface<IResultMetadata> meta;
-	it->GetMetadata(&meta);
+	it->GetMetadata(meta.extract());
 	ATLASSERT(meta != NULL);
 
 	meta->QueryInterface(data);
@@ -80,4 +80,24 @@ Graph* GraphResultUtil::GetGraph(IGraphResult* result) {
 	ATLASSERT(SUCCEEDED(hr));
 
 	return graph;
+}
+
+
+bool GraphResultUtil::ContainsGraphOnly(IResultSet* resultSet, bool isStrongComponent) {
+	if (!ContainsOnlyType<IGraphResult>(resultSet)) return false;
+
+	ResultSetIterator<IGraphResult> it(resultSet);
+
+	while (it.HasNext()) {
+		VARIANT_BOOL v;
+		HRESULT hr;
+		hr = it.Current()->IsStrongComponent(&v);
+		ATLASSERT(SUCCEEDED(hr));
+
+		if (v != VARIANT_TRUE) return false;
+
+		it.Next();
+	}
+		
+	return true;
 }

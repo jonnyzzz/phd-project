@@ -48,10 +48,10 @@ GraphResultGraphIterator::operator Graph *() {
 
 
 GraphResultGraphList::GraphResultGraphList(IResultMetadata* metadata) {
-	CResultSetImpl::CreateInstance(&resultSet);
+	CResultSetImpl::CreateInstance(resultSet.extract());
 	ATLASSERT(resultSet != NULL);
 
-	metadata->QueryInterface(&this->metadata);
+	metadata->QueryInterface(this->metadata.extract());
 	ATLASSERT(this->metadata != NULL);
 }
 
@@ -60,16 +60,16 @@ GraphResultGraphList::~GraphResultGraphList() {
 
 void GraphResultGraphList::AddGraph(Graph* graph, bool isComponent) {
 	SmartInterface<IWritableGraphResult> result;
-	CGraphResultImpl::CreateInstance(&result);
+	CGraphResultImpl::CreateInstance(result.extract());
 
-	HRESULT hr = result->SetGraph((void**)&graph, isComponent?TRUE:FALSE);
+	HRESULT hr = result->SetGraph((void**)&graph, isComponent?VARIANT_TRUE:VARIANT_FALSE);
 	ATLASSERT(SUCCEEDED(hr));
 
 	hr = result->SetMetadata(metadata);
 	ATLASSERT(SUCCEEDED(hr));
 
 	SmartInterface<IResultBase> resultBase;
-	result->QueryInterface(&resultBase);
+	result->QueryInterface(resultBase.extract());
 	ATLASSERT(resultBase != NULL);
 
 	hr = resultSet->AddResult(resultBase);

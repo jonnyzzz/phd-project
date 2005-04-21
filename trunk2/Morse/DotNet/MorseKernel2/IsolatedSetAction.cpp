@@ -51,18 +51,18 @@ STDMETHODIMP CIsolatedSetAction::SetProgressBarInfo(IProgressBarInfo* info) {
 }
 
 STDMETHODIMP CIsolatedSetAction::CanDo(IResultSet* resultSet, VARIANT_BOOL* result) {
-	*result = GraphResultUtil::ContainsOnlyType<IGraphResult>(resultSet)?true:false;
+	*result = GraphResultUtil::ContainsOnlyType<IGraphResult>(resultSet)?VARIANT_TRUE:VARIANT_FALSE;
 	return S_OK;	
 }
 
 STDMETHODIMP CIsolatedSetAction::Do(IResultSet* input, IResultSet** output) {
 	VARIANT_BOOL canDo;
 	CanDo(input, &canDo);
-	ATLASSERT(canDo);
+	ATLASSERT(canDo == VARIANT_TRUE);
 
 
 	SmartInterface<IGraphResult> graphResult;
-	HRESULT hr = parameters->GetStartSet(&graphResult);
+	HRESULT hr = parameters->GetStartSet(graphResult.extract());
 	ATLASSERT(SUCCEEDED(hr));
 
 	GraphResultGraphIterator it(input);
@@ -71,7 +71,7 @@ STDMETHODIMP CIsolatedSetAction::Do(IResultSet* input, IResultSet** output) {
 	IsolatingSetProcess ps(it, GraphResultUtil::GetGraph(graphResult), &pinfo);
 
 	SmartInterface<IResultMetadata> metadata;
-	GraphResultUtil::GetMetadataCloned(input, &metadata);
+	GraphResultUtil::GetMetadataCloned(input, metadata.extract());
 
 	GraphResultUtil::PerformProcess(&ps, input, false, metadata, output);
 

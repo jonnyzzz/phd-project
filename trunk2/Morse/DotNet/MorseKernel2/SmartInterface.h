@@ -20,11 +20,13 @@ public:
 	}
 
 public:
-	I* operator ->() {
+	I* operator ->() const{
 		return data;
 	}
 
-	I** operator &() {
+	I** extract() {
+		SAFE_RELEASE(data);
+		data = NULL;
 		return &data;
 	}
 
@@ -32,7 +34,7 @@ public:
 		return this->data != val;
 	}
 
-	operator I*& () {
+	operator I* () const {
 		return data;
 	}
 

@@ -50,14 +50,14 @@ STDMETHODIMP CMinimalLoopLocalizationAction::SetProgressBarInfo(IProgressBarInfo
 }
 
 STDMETHODIMP CMinimalLoopLocalizationAction::CanDo(IResultSet* resultSet, VARIANT_BOOL* result) {
-	*result = GraphResultUtil::ContainsOnlyType<IGraphResult>(resultSet)?true:false;
+	*result = GraphResultUtil::ContainsOnlyType<IGraphResult>(resultSet)?VARIANT_TRUE:VARIANT_FALSE;
 	return S_OK;	
 }
 
 STDMETHODIMP CMinimalLoopLocalizationAction::GetDimension(IResultSet* resultSet, int* result) {
 	VARIANT_BOOL canDo;
 	CanDo(resultSet, &canDo);
-	ATLASSERT(canDo);
+	ATLASSERT(canDo == VARIANT_TRUE);
 
 	GraphResultGraphIterator it (resultSet);
 	*result = it->getDimention();
@@ -69,7 +69,7 @@ STDMETHODIMP CMinimalLoopLocalizationAction::GetDimension(IResultSet* resultSet,
 STDMETHODIMP CMinimalLoopLocalizationAction::Do(IResultSet* input, IResultSet** output) {
 	VARIANT_BOOL canDo;
 	CanDo(input, &canDo);
-	ATLASSERT(canDo);
+	ATLASSERT(canDo == VARIANT_TRUE);
 
 	int dimension;
 	GetDimension(input, &dimension);
@@ -85,7 +85,7 @@ STDMETHODIMP CMinimalLoopLocalizationAction::Do(IResultSet* input, IResultSet** 
 	MinimalLoopFinderProcess ps(data, dimension, &pinfo);
 
 	SmartInterface<IResultMetadata> metadata;
-	GraphResultUtil::GetMetadataCloned(input, &metadata);
+	GraphResultUtil::GetMetadataCloned(input, metadata.extract());
 
 	GraphResultUtil::PerformProcess(&ps, input, false, metadata, output);
 

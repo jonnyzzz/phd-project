@@ -36,7 +36,7 @@ void CPointMethodAction::FinalRelease() {
 STDMETHODIMP CPointMethodAction::GetDimensionForParameters(IResultSet* resultSet, int* dim) {
 	VARIANT_BOOL data;
 	this->CanDo(resultSet, &data);
-	ATLASSERT(data == TRUE);
+	ATLASSERT(data == VARIANT_TRUE);
 
 	GraphResultGraphIterator it(resultSet);
 	*dim = it->getDimention();
@@ -64,7 +64,7 @@ STDMETHODIMP CPointMethodAction::SetProgressBarInfo(IProgressBarInfo* info) {
 
 STDMETHODIMP CPointMethodAction::CanDo(IResultSet* in, VARIANT_BOOL* out) {
 	*out = (GraphResultUtil::ContainsOnlyType<IGraphResult>(in) && 
-		GraphResultUtil::ContainsMetadataOnly<ISymbolicImageMetadata>(in))?TRUE:FALSE;
+		GraphResultUtil::ContainsMetadataOnly<ISymbolicImageMetadata>(in))?VARIANT_TRUE:VARIANT_FALSE;
 	return S_OK;
 }
 
@@ -74,10 +74,10 @@ STDMETHODIMP CPointMethodAction::Do(IResultSet* in, IResultSet** out) {
 	HRESULT hr;
 	CanDo(in, &data);
 
-	ATLASSERT(data == TRUE);
+	ATLASSERT(data == VARIANT_TRUE);
 
 	SmartInterface<IFunction> function;
-	hr = parameters->GetFunction(&function);
+	hr = parameters->GetFunction(function.extract());
 	ATLASSERT(SUCCEEDED(hr) && function != NULL);
 
 	ISystemFunction* func;
@@ -85,7 +85,7 @@ STDMETHODIMP CPointMethodAction::Do(IResultSet* in, IResultSet** out) {
 	ATLASSERT(SUCCEEDED(hr));
 
 	hr = parameters->UseOffsets(&data);
-	bool useOffset = (data == TRUE)?true:false;
+	bool useOffset = (data == VARIANT_TRUE)?true:false;
 
 	int dimension;
 	hr = function->GetDimension(&dimension);
@@ -123,7 +123,7 @@ STDMETHODIMP CPointMethodAction::Do(IResultSet* in, IResultSet** out) {
 
 
 	SmartInterface<ISymbolicImageMetadata> metadata;
-	CSymbolicImageMetadata::CreateInstance(&metadata);
+	CSymbolicImageMetadata::CreateInstance(metadata.extract());
 
 	GraphResultUtil::PerformProcess(process, in, false, metadata, out);
 	ATLASSERT(*out != NULL);

@@ -11,10 +11,10 @@ namespace gui2.src.Document
 	{
 		public static void ZipDocument(XmlNode document)
 		{
-			foreach (XmlNode selectNode in document.SelectNodes("//*[@id='myID']"))
+			/*foreach (XmlNode selectNode in document.SelectNodes("//*[@id='myID']"))
 			{
 				
-			}
+			}*/
 		}
 	}
 }

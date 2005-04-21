@@ -278,7 +278,7 @@ interface IGraphResultImpl : IDispatch {
 	helpstring("ISymbolicImageMetadata Interface"),
 	pointer_default(unique)
 ] 
-#line 14 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\symbolicimagemetadata.h"
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\symbolicimagemetadata.h"
 interface ISymbolicImageMetadata : IResultMetadata {
 };
 
@@ -416,13 +416,76 @@ interface IMinimalLoopLocalizationParameters : IParameters {
 
 [
 	object,
+	uuid(9CF385EA-26DB-4A19-AB20-5E735654D469),
+	dual,
+	helpstring("ISIRomAction Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\siromaction.h"
+interface ISIRomActionParameters : IComputationParameters {
+};
+
+[
+	object,
+	uuid(44DAD8BF-971F-485D-86C5-45FD1F67ACFE),
+	dual,
+	helpstring("ISIRomAction Interface"),
+	pointer_default(unique)
+] 
+#line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\siromaction.h"
+interface ISIRomAction : IAction {
+};
+
+[
+	object,
+	uuid(139E4822-4DF9-44B1-8825-FAD074492505),
+	dual,
+	helpstring("ISpectrumMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\spectrummetadata.h"
+interface ISpectrumMetadata : IResultMetadata {
+};
+
+[
+	object,
+	uuid(2003DF4C-5367-4F11-A29C-447E7E45E5AA),
+	dual,
+	helpstring("ISpectrumResult Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\spectrumresult.h"
+interface ISpectrumResult : IResult {
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\spectrumresult.h"
+	[id(10)] HRESULT  GetLowerBound([out,retval] double *data);
+#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\spectrumresult.h"
+	[id(11)] HRESULT  GetUpperBound([out,retval] double *data);
+#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\spectrumresult.h"
+	[id(12)] HRESULT  GetLowerLength([out,retval] int *data);
+#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\spectrumresult.h"
+	[id(13)] HRESULT  GetUpperLength([out,retval] int *data);
+};
+
+[
+	object,
 	uuid(5896F6EB-CFBF-406C-A0FD-EA25367673D0),
 	dual,
 	helpstring("IDummy1 Interface"),
 	pointer_default(unique)
 ] 
-#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy1.h"
+#line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy1.h"
 interface IDummy1 : IDispatch {
+};
+
+[
+	object,
+	uuid(880BF42F-A1E3-4FA8-87AD-FB8D96F275A0),
+	dual,
+	helpstring("IDummy2 Interface"),
+	pointer_default(unique)
+] 
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy2.h"
+interface IDummy2 : IDispatch {
 };
 
 [
@@ -523,6 +586,27 @@ interface IWritableKernell : IDispatch {
 interface IKernellImpl : IWritableKernell {
 };
 
+[
+	object,
+	uuid(80B6D423-1E6D-4236-B187-FFDEC3A2A139),
+	dual,
+	helpstring("IWritableSpectrum Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+interface IWritableSpectrumResult : IDispatch {
+#line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+	[id(20)] HRESULT  SetLowerBound([in] double data);
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+	[id(21)] HRESULT  SetUpperBound([in] double data);
+#line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+	[id(22)] HRESULT  SetLowerLength([in] int data);
+#line 23 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+	[id(23)] HRESULT  SetUpperLength([in] int data);
+#line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+	[id(24)] HRESULT  SetMetadata([in] IResultMetadata *data);
+};
+
 
 [ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}"), helpstring("MorseKernel2 1.0 Type Library") ]
 library MorseKernel2
@@ -561,7 +645,7 @@ library MorseKernel2
 		uuid(A5D5EA06-663E-4755-A3E7-A536E83B5AC2),
 		helpstring("SymbolicImageMetadata Class")
 	] 
-#line 31 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\symbolicimagemetadata.h"
+#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\symbolicimagemetadata.h"
 	coclass CSymbolicImageMetadata {
 		interface ISymbolicImageMetadata;
 		interface IResultMetadata;
@@ -649,10 +733,33 @@ library MorseKernel2
 
 	[
 		version(1.0),
+		uuid(8C4D17D1-3A75-4E95-8D6F-CF58743A12BD),
+		helpstring("SIRomAction Class")
+	] 
+#line 45 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\siromaction.h"
+	coclass CSIRomAction {
+		interface ISIRomAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(3855504A-AE6E-4601-B6E5-026F7E073D9B),
+		helpstring("SpectrumMetadata Class")
+	] 
+#line 31 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\spectrummetadata.h"
+	coclass CSpectrumMetadata {
+		interface ISpectrumMetadata;
+		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
 		uuid(62172280-D7A2-46C1-AF3D-E8762035048E),
 		helpstring("Dummy1 Class")
 	] 
-#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy1.h"
+#line 38 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy1.h"
 	coclass CDummy1 {
 		interface IDummy1;
 		interface IPointMethodParameters;
@@ -661,6 +768,21 @@ library MorseKernel2
 		interface IIsolatedSetParameters;
 		interface IParameters;
 		interface IMinimalLoopLocalizationParameters;
+		interface IParameters;
+	};
+
+	[
+		version(1.0),
+		uuid(F47CA110-2F50-43F2-BB91-455C9FCE6B96),
+		helpstring("Dummy2 Class")
+	] 
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy2.h"
+	coclass CDummy2 {
+		interface IDummy2;
+		interface ISIRomActionParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IComputationParameters;
 		interface IParameters;
 	};
 
@@ -710,6 +832,19 @@ library MorseKernel2
 		interface IKernellImpl;
 		interface IWritableKernell;
 		interface IKernell;
+	};
+
+	[
+		version(1.0),
+		uuid(45FBC041-D2C1-495D-8CC9-58019691E9CC),
+		helpstring("SpectrumResultImpl Class")
+	] 
+#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\spectrumresultimpl.h"
+	coclass CSpectrumResultImpl {
+		interface ISpectrumResult;
+		interface IResult;
+		interface IResultBase;
+		interface IWritableSpectrumResult;
 	};
 
 }

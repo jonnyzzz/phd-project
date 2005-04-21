@@ -1,6 +1,8 @@
 #pragma once
 
 #include <hash_map>
+#include <map>
+using namespace std;
 using namespace stdext;
 
 class Graph;
@@ -105,3 +107,4 @@ private:
 	void dumpExtremaContour(ostream& o, ContourNode* node);
 
 };
+

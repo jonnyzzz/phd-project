@@ -27,7 +27,7 @@ int ProgressBarNotificationAdapter::Length() {
 bool ProgressBarNotificationAdapter::NeedStop() {
 	VARIANT_BOOL b;
 	this->notification->NeedStop(&b);
-	return (b == TRUE)?true:false;
+	return (b == VARIANT_TRUE)?true:false;
 }
 
 void ProgressBarNotificationAdapter::Next() {

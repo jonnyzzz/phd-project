@@ -28,6 +28,7 @@ public:
 	JInt toInternalModulo(JDouble value, int axis) const;
 
 	JDouble toExternal(JInt value, int axis) const;
+	void toExternal(const JInt* node, JDouble* out) const;
 
 	const JInt* getGrid() const;
 	const JDouble* getMin() const;

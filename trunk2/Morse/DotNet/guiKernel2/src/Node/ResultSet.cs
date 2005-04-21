@@ -153,6 +153,39 @@ namespace guiKernel2.Node
 		}
 
 
+		private static bool HasEqualsNodes(IResult r1, IResult r2)
+		{
+			if (r1 is IGraphResult && r2 is IGraphResult)
+			{
+				IGraphInfo i1 = ((IGraphResult)r1).GetGraphInfo();
+				IGraphInfo i2 = ((IGraphResult)r2).GetGraphInfo();
+
+				if (i1.GetDimension() != i2.GetDimension()) return false;
+
+				for ( int i=0; i<i1.GetDimension(); i++)
+				{
+					if (i1.GetMaximum(i) != i2.GetMaximum(i) ) return false;
+					if (i1.GetMinimum(i) != i2.GetMinimum(i) ) return false;
+					if (i1.GetGridNumber(i) != i2.GetGridNumber(i) ) return false;
+				}
+
+				return true;
+			}
+			return false;
+		}
+
+		public static bool HasEqualsGraph(ResultSet r1, ResultSet r2)
+		{
+			foreach (IResult rr1 in r1.ToResults)
+			{
+				foreach (IResult rr2 in r2.ToResults)
+				{
+					if (!HasEqualsNodes(rr1, rr2)) return false;
+				}
+			}
+			return true;
+		}
+
 		public override string ToString()
 		{
 			return string.Format("ResultSet [ length = {0} ]", this.results.Count);

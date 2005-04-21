@@ -22,11 +22,18 @@
 		</action>
 		
 		<action name="IMinimalLoopLocalizationAction" isLeaf="true">
-			<constaint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+			<constraint class="StrongCompGraphsConstraintFactory" />
 		</action>
 		
 		<action name="IIsolatedSetAction" isLeaf="true">
-			<constaint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+			<constraint class="StrongCompGraphsConstraintFactory" />
+		</action>
+		
+		<action name="ISIRomAction" isLeaf="true">
+			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+			<constraint class="StrongCompGraphsConstraintFactory" />		
 		</action>
 		
 		<action name="SavePointsKernelAction" isLeaf="true">
@@ -42,6 +49,7 @@
 		<action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search" />
 		<action name="IIsolatedSetAction" caption="Isolating set localization" />
 		<action name="SavePointsKernelAction" caption="Export to file" />
+		<action name="ISIRomAction" caption="?----SIROM----?" />
     </names>
 
 	<assemblies>	

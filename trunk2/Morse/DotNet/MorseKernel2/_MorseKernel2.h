@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Tue Apr 12 23:04:37 2005
+/* at Thu Apr 21 22:10:26 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -213,10 +213,40 @@ typedef interface IMinimalLoopLocalizationParameters IMinimalLoopLocalizationPar
 #endif 	/* __IMinimalLoopLocalizationParameters_FWD_DEFINED__ */
 
 
+#ifndef __ISIRomActionParameters_FWD_DEFINED__
+#define __ISIRomActionParameters_FWD_DEFINED__
+typedef interface ISIRomActionParameters ISIRomActionParameters;
+#endif 	/* __ISIRomActionParameters_FWD_DEFINED__ */
+
+
+#ifndef __ISIRomAction_FWD_DEFINED__
+#define __ISIRomAction_FWD_DEFINED__
+typedef interface ISIRomAction ISIRomAction;
+#endif 	/* __ISIRomAction_FWD_DEFINED__ */
+
+
+#ifndef __ISpectrumMetadata_FWD_DEFINED__
+#define __ISpectrumMetadata_FWD_DEFINED__
+typedef interface ISpectrumMetadata ISpectrumMetadata;
+#endif 	/* __ISpectrumMetadata_FWD_DEFINED__ */
+
+
+#ifndef __ISpectrumResult_FWD_DEFINED__
+#define __ISpectrumResult_FWD_DEFINED__
+typedef interface ISpectrumResult ISpectrumResult;
+#endif 	/* __ISpectrumResult_FWD_DEFINED__ */
+
+
 #ifndef __IDummy1_FWD_DEFINED__
 #define __IDummy1_FWD_DEFINED__
 typedef interface IDummy1 IDummy1;
 #endif 	/* __IDummy1_FWD_DEFINED__ */
+
+
+#ifndef __IDummy2_FWD_DEFINED__
+#define __IDummy2_FWD_DEFINED__
+typedef interface IDummy2 IDummy2;
+#endif 	/* __IDummy2_FWD_DEFINED__ */
 
 
 #ifndef __IWritableFunction_FWD_DEFINED__
@@ -265,6 +295,12 @@ typedef interface IWritableKernell IWritableKernell;
 #define __IKernellImpl_FWD_DEFINED__
 typedef interface IKernellImpl IKernellImpl;
 #endif 	/* __IKernellImpl_FWD_DEFINED__ */
+
+
+#ifndef __IWritableSpectrumResult_FWD_DEFINED__
+#define __IWritableSpectrumResult_FWD_DEFINED__
+typedef interface IWritableSpectrumResult IWritableSpectrumResult;
+#endif 	/* __IWritableSpectrumResult_FWD_DEFINED__ */
 
 
 #ifndef __CBoxMethodAction_FWD_DEFINED__
@@ -375,6 +411,30 @@ typedef struct CMinimalLoopLocalizationAction CMinimalLoopLocalizationAction;
 #endif 	/* __CMinimalLoopLocalizationAction_FWD_DEFINED__ */
 
 
+#ifndef __CSIRomAction_FWD_DEFINED__
+#define __CSIRomAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CSIRomAction CSIRomAction;
+#else
+typedef struct CSIRomAction CSIRomAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CSIRomAction_FWD_DEFINED__ */
+
+
+#ifndef __CSpectrumMetadata_FWD_DEFINED__
+#define __CSpectrumMetadata_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CSpectrumMetadata CSpectrumMetadata;
+#else
+typedef struct CSpectrumMetadata CSpectrumMetadata;
+#endif /* __cplusplus */
+
+#endif 	/* __CSpectrumMetadata_FWD_DEFINED__ */
+
+
 #ifndef __CDummy1_FWD_DEFINED__
 #define __CDummy1_FWD_DEFINED__
 
@@ -385,6 +445,18 @@ typedef struct CDummy1 CDummy1;
 #endif /* __cplusplus */
 
 #endif 	/* __CDummy1_FWD_DEFINED__ */
+
+
+#ifndef __CDummy2_FWD_DEFINED__
+#define __CDummy2_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CDummy2 CDummy2;
+#else
+typedef struct CDummy2 CDummy2;
+#endif /* __cplusplus */
+
+#endif 	/* __CDummy2_FWD_DEFINED__ */
 
 
 #ifndef __CFunctionImpl_FWD_DEFINED__
@@ -433,6 +505,18 @@ typedef struct CKernellImpl CKernellImpl;
 #endif /* __cplusplus */
 
 #endif 	/* __CKernellImpl_FWD_DEFINED__ */
+
+
+#ifndef __CSpectrumResultImpl_FWD_DEFINED__
+#define __CSpectrumResultImpl_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CSpectrumResultImpl CSpectrumResultImpl;
+#else
+typedef struct CSpectrumResultImpl CSpectrumResultImpl;
+#endif /* __cplusplus */
+
+#endif 	/* __CSpectrumResultImpl_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -4993,6 +5077,600 @@ void __RPC_STUB IMinimalLoopLocalizationParameters_GetCoordinate_Stub(
 #endif 	/* __IMinimalLoopLocalizationParameters_INTERFACE_DEFINED__ */
 
 
+#ifndef __ISIRomActionParameters_INTERFACE_DEFINED__
+#define __ISIRomActionParameters_INTERFACE_DEFINED__
+
+/* interface ISIRomActionParameters */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISIRomActionParameters;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9CF385EA-26DB-4A19-AB20-5E735654D469")
+    ISIRomActionParameters : public IComputationParameters
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ISIRomActionParametersVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISIRomActionParameters * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISIRomActionParameters * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISIRomActionParameters * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISIRomActionParameters * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISIRomActionParameters * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISIRomActionParameters * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISIRomActionParameters * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFunction )( 
+            ISIRomActionParameters * This,
+            /* [retval][out] */ IFunction **function);
+        
+        END_INTERFACE
+    } ISIRomActionParametersVtbl;
+
+    interface ISIRomActionParameters
+    {
+        CONST_VTBL struct ISIRomActionParametersVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISIRomActionParameters_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ISIRomActionParameters_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ISIRomActionParameters_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ISIRomActionParameters_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ISIRomActionParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ISIRomActionParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ISIRomActionParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define ISIRomActionParameters_GetFunction(This,function)	\
+    (This)->lpVtbl -> GetFunction(This,function)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISIRomActionParameters_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISIRomAction_INTERFACE_DEFINED__
+#define __ISIRomAction_INTERFACE_DEFINED__
+
+/* interface ISIRomAction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISIRomAction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("44DAD8BF-971F-485D-86C5-45FD1F67ACFE")
+    ISIRomAction : public IAction
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ISIRomActionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISIRomAction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISIRomAction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISIRomAction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISIRomAction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISIRomAction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISIRomAction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISIRomAction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            ISIRomAction * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            ISIRomAction * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            ISIRomAction * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            ISIRomAction * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        END_INTERFACE
+    } ISIRomActionVtbl;
+
+    interface ISIRomAction
+    {
+        CONST_VTBL struct ISIRomActionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISIRomAction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ISIRomAction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ISIRomAction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ISIRomAction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ISIRomAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ISIRomAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ISIRomAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define ISIRomAction_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define ISIRomAction_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define ISIRomAction_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define ISIRomAction_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISIRomAction_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISpectrumMetadata_INTERFACE_DEFINED__
+#define __ISpectrumMetadata_INTERFACE_DEFINED__
+
+/* interface ISpectrumMetadata */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISpectrumMetadata;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("139E4822-4DF9-44B1-8825-FAD074492505")
+    ISpectrumMetadata : public IResultMetadata
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ISpectrumMetadataVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISpectrumMetadata * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISpectrumMetadata * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISpectrumMetadata * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISpectrumMetadata * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISpectrumMetadata * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISpectrumMetadata * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISpectrumMetadata * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EqualType )( 
+            ISpectrumMetadata * This,
+            /* [in] */ IResultMetadata *metadata,
+            /* [retval][out] */ VARIANT_BOOL *out);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
+            ISpectrumMetadata * This,
+            /* [retval][out] */ IResultMetadata **metadata);
+        
+        END_INTERFACE
+    } ISpectrumMetadataVtbl;
+
+    interface ISpectrumMetadata
+    {
+        CONST_VTBL struct ISpectrumMetadataVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISpectrumMetadata_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ISpectrumMetadata_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ISpectrumMetadata_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ISpectrumMetadata_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ISpectrumMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ISpectrumMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ISpectrumMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define ISpectrumMetadata_EqualType(This,metadata,out)	\
+    (This)->lpVtbl -> EqualType(This,metadata,out)
+
+#define ISpectrumMetadata_Clone(This,metadata)	\
+    (This)->lpVtbl -> Clone(This,metadata)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ISpectrumMetadata_INTERFACE_DEFINED__ */
+
+
+#ifndef __ISpectrumResult_INTERFACE_DEFINED__
+#define __ISpectrumResult_INTERFACE_DEFINED__
+
+/* interface ISpectrumResult */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ISpectrumResult;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("2003DF4C-5367-4F11-A29C-447E7E45E5AA")
+    ISpectrumResult : public IResult
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetLowerBound( 
+            /* [retval][out] */ double *data) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetUpperBound( 
+            /* [retval][out] */ double *data) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetLowerLength( 
+            /* [retval][out] */ int *data) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetUpperLength( 
+            /* [retval][out] */ int *data) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ISpectrumResultVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ISpectrumResult * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ISpectrumResult * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ISpectrumResult * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ISpectrumResult * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ISpectrumResult * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ISpectrumResult * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ISpectrumResult * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
+            ISpectrumResult * This,
+            /* [retval][out] */ IResultMetadata **out);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLowerBound )( 
+            ISpectrumResult * This,
+            /* [retval][out] */ double *data);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetUpperBound )( 
+            ISpectrumResult * This,
+            /* [retval][out] */ double *data);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLowerLength )( 
+            ISpectrumResult * This,
+            /* [retval][out] */ int *data);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetUpperLength )( 
+            ISpectrumResult * This,
+            /* [retval][out] */ int *data);
+        
+        END_INTERFACE
+    } ISpectrumResultVtbl;
+
+    interface ISpectrumResult
+    {
+        CONST_VTBL struct ISpectrumResultVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ISpectrumResult_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ISpectrumResult_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ISpectrumResult_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ISpectrumResult_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ISpectrumResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ISpectrumResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ISpectrumResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define ISpectrumResult_GetMetadata(This,out)	\
+    (This)->lpVtbl -> GetMetadata(This,out)
+
+
+#define ISpectrumResult_GetLowerBound(This,data)	\
+    (This)->lpVtbl -> GetLowerBound(This,data)
+
+#define ISpectrumResult_GetUpperBound(This,data)	\
+    (This)->lpVtbl -> GetUpperBound(This,data)
+
+#define ISpectrumResult_GetLowerLength(This,data)	\
+    (This)->lpVtbl -> GetLowerLength(This,data)
+
+#define ISpectrumResult_GetUpperLength(This,data)	\
+    (This)->lpVtbl -> GetUpperLength(This,data)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISpectrumResult_GetLowerBound_Proxy( 
+    ISpectrumResult * This,
+    /* [retval][out] */ double *data);
+
+
+void __RPC_STUB ISpectrumResult_GetLowerBound_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISpectrumResult_GetUpperBound_Proxy( 
+    ISpectrumResult * This,
+    /* [retval][out] */ double *data);
+
+
+void __RPC_STUB ISpectrumResult_GetUpperBound_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISpectrumResult_GetLowerLength_Proxy( 
+    ISpectrumResult * This,
+    /* [retval][out] */ int *data);
+
+
+void __RPC_STUB ISpectrumResult_GetLowerLength_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE ISpectrumResult_GetUpperLength_Proxy( 
+    ISpectrumResult * This,
+    /* [retval][out] */ int *data);
+
+
+void __RPC_STUB ISpectrumResult_GetUpperLength_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __ISpectrumResult_INTERFACE_DEFINED__ */
+
+
 #ifndef __IDummy1_INTERFACE_DEFINED__
 #define __IDummy1_INTERFACE_DEFINED__
 
@@ -5101,6 +5779,116 @@ EXTERN_C const IID IID_IDummy1;
 
 
 #endif 	/* __IDummy1_INTERFACE_DEFINED__ */
+
+
+#ifndef __IDummy2_INTERFACE_DEFINED__
+#define __IDummy2_INTERFACE_DEFINED__
+
+/* interface IDummy2 */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IDummy2;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("880BF42F-A1E3-4FA8-87AD-FB8D96F275A0")
+    IDummy2 : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IDummy2Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IDummy2 * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IDummy2 * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IDummy2 * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IDummy2 * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IDummy2 * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IDummy2 * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IDummy2 * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IDummy2Vtbl;
+
+    interface IDummy2
+    {
+        CONST_VTBL struct IDummy2Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IDummy2_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IDummy2_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IDummy2_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IDummy2_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IDummy2_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IDummy2_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IDummy2_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IDummy2_INTERFACE_DEFINED__ */
 
 
 #ifndef __IWritableFunction_INTERFACE_DEFINED__
@@ -6123,6 +6911,226 @@ EXTERN_C const IID IID_IKernellImpl;
 #endif 	/* __IKernellImpl_INTERFACE_DEFINED__ */
 
 
+#ifndef __IWritableSpectrumResult_INTERFACE_DEFINED__
+#define __IWritableSpectrumResult_INTERFACE_DEFINED__
+
+/* interface IWritableSpectrumResult */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IWritableSpectrumResult;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("80B6D423-1E6D-4236-B187-FFDEC3A2A139")
+    IWritableSpectrumResult : public IDispatch
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetLowerBound( 
+            /* [in] */ double data) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetUpperBound( 
+            /* [in] */ double data) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetLowerLength( 
+            /* [in] */ int data) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetUpperLength( 
+            /* [in] */ int data) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetMetadata( 
+            /* [in] */ IResultMetadata *data) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IWritableSpectrumResultVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IWritableSpectrumResult * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IWritableSpectrumResult * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IWritableSpectrumResult * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IWritableSpectrumResult * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IWritableSpectrumResult * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IWritableSpectrumResult * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IWritableSpectrumResult * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetLowerBound )( 
+            IWritableSpectrumResult * This,
+            /* [in] */ double data);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetUpperBound )( 
+            IWritableSpectrumResult * This,
+            /* [in] */ double data);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetLowerLength )( 
+            IWritableSpectrumResult * This,
+            /* [in] */ int data);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetUpperLength )( 
+            IWritableSpectrumResult * This,
+            /* [in] */ int data);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
+            IWritableSpectrumResult * This,
+            /* [in] */ IResultMetadata *data);
+        
+        END_INTERFACE
+    } IWritableSpectrumResultVtbl;
+
+    interface IWritableSpectrumResult
+    {
+        CONST_VTBL struct IWritableSpectrumResultVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IWritableSpectrumResult_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IWritableSpectrumResult_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IWritableSpectrumResult_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IWritableSpectrumResult_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IWritableSpectrumResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IWritableSpectrumResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IWritableSpectrumResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IWritableSpectrumResult_SetLowerBound(This,data)	\
+    (This)->lpVtbl -> SetLowerBound(This,data)
+
+#define IWritableSpectrumResult_SetUpperBound(This,data)	\
+    (This)->lpVtbl -> SetUpperBound(This,data)
+
+#define IWritableSpectrumResult_SetLowerLength(This,data)	\
+    (This)->lpVtbl -> SetLowerLength(This,data)
+
+#define IWritableSpectrumResult_SetUpperLength(This,data)	\
+    (This)->lpVtbl -> SetUpperLength(This,data)
+
+#define IWritableSpectrumResult_SetMetadata(This,data)	\
+    (This)->lpVtbl -> SetMetadata(This,data)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableSpectrumResult_SetLowerBound_Proxy( 
+    IWritableSpectrumResult * This,
+    /* [in] */ double data);
+
+
+void __RPC_STUB IWritableSpectrumResult_SetLowerBound_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableSpectrumResult_SetUpperBound_Proxy( 
+    IWritableSpectrumResult * This,
+    /* [in] */ double data);
+
+
+void __RPC_STUB IWritableSpectrumResult_SetUpperBound_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableSpectrumResult_SetLowerLength_Proxy( 
+    IWritableSpectrumResult * This,
+    /* [in] */ int data);
+
+
+void __RPC_STUB IWritableSpectrumResult_SetLowerLength_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableSpectrumResult_SetUpperLength_Proxy( 
+    IWritableSpectrumResult * This,
+    /* [in] */ int data);
+
+
+void __RPC_STUB IWritableSpectrumResult_SetUpperLength_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IWritableSpectrumResult_SetMetadata_Proxy( 
+    IWritableSpectrumResult * This,
+    /* [in] */ IResultMetadata *data);
+
+
+void __RPC_STUB IWritableSpectrumResult_SetMetadata_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IWritableSpectrumResult_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __MorseKernel2_LIBRARY_DEFINED__
 #define __MorseKernel2_LIBRARY_DEFINED__
@@ -6205,12 +7213,36 @@ class DECLSPEC_UUID("7D81B505-C5D6-4AEF-83EF-CFAF07767898")
 CMinimalLoopLocalizationAction;
 #endif
 
+EXTERN_C const CLSID CLSID_CSIRomAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("8C4D17D1-3A75-4E95-8D6F-CF58743A12BD")
+CSIRomAction;
+#endif
+
+EXTERN_C const CLSID CLSID_CSpectrumMetadata;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("3855504A-AE6E-4601-B6E5-026F7E073D9B")
+CSpectrumMetadata;
+#endif
+
 EXTERN_C const CLSID CLSID_CDummy1;
 
 #ifdef __cplusplus
 
 class DECLSPEC_UUID("62172280-D7A2-46C1-AF3D-E8762035048E")
 CDummy1;
+#endif
+
+EXTERN_C const CLSID CLSID_CDummy2;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("F47CA110-2F50-43F2-BB91-455C9FCE6B96")
+CDummy2;
 #endif
 
 EXTERN_C const CLSID CLSID_CFunctionImpl;
@@ -6243,6 +7275,14 @@ EXTERN_C const CLSID CLSID_CKernellImpl;
 
 class DECLSPEC_UUID("96E908D0-29BD-423D-8CA8-9F4343C796A0")
 CKernellImpl;
+#endif
+
+EXTERN_C const CLSID CLSID_CSpectrumResultImpl;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("45FBC041-D2C1-495D-8CC9-58019691E9CC")
+CSpectrumResultImpl;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

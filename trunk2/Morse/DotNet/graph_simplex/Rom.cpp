@@ -4,6 +4,9 @@
 #include <list>
 #include <algorithm>
 
+using namespace stdext;
+using namespace std;
+
 /* new(address_pointer) type does not supported by MFC
 #ifdef _DEBUG
 #define new DEBUG_NEW

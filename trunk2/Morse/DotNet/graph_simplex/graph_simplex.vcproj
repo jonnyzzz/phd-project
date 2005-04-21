@@ -160,6 +160,9 @@
 				RelativePath=".\RomMS2.cpp">
 			</File>
 			<File
+				RelativePath=".\SIRom.cpp">
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -199,6 +202,9 @@
 			</File>
 			<File
 				RelativePath=".\RomMS2.h">
+			</File>
+			<File
+				RelativePath=".\SIRom.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">

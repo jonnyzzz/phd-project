@@ -30,11 +30,11 @@ public:
 	SmartInterface<Result> Current() {
 		SmartInterface<Result> result;
 		SmartInterface<IResultBase> resultBase;
-		HRESULT hr = resultSet->GetResult(index, &resultBase);
+		HRESULT hr = resultSet->GetResult(index, resultBase.extract());
 		ATLASSERT(SUCCEEDED(hr));
 		ATLASSERT(resultBase != NULL);
 
-		resultBase->QueryInterface(&result);
+		resultBase->QueryInterface(result.extract());
 		ATLASSERT(result != NULL);
 
 		return result;

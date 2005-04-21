@@ -160,6 +160,9 @@
 			ReferencedProjectIdentifier="{213A979A-506A-4295-9350-B86F82C0DBCB}"
 			Name="graph"/>
 		<ProjectReference
+			ReferencedProjectIdentifier="{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}"
+			Name="graph_simplex"/>
+		<ProjectReference
 			ReferencedProjectIdentifier="{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}"
 			Name="Homotop"/>
 		<ProjectReference
@@ -191,6 +194,9 @@
 			</File>
 			<File
 				RelativePath=".\Dummy1.cpp">
+			</File>
+			<File
+				RelativePath=".\Dummy2.cpp">
 			</File>
 			<File
 				RelativePath=".\Function.cpp">
@@ -265,7 +271,22 @@
 				RelativePath=".\ResultSetIterator.cpp">
 			</File>
 			<File
+				RelativePath=".\ResultSetList.cpp">
+			</File>
+			<File
+				RelativePath=".\SIRomAction.cpp">
+			</File>
+			<File
 				RelativePath=".\SmartInterface.cpp">
+			</File>
+			<File
+				RelativePath=".\SpectrumMetadata.cpp">
+			</File>
+			<File
+				RelativePath=".\SpectrumResult.cpp">
+			</File>
+			<File
+				RelativePath=".\SpectrumResultImpl.cpp">
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp">
@@ -303,6 +324,9 @@
 			<File
 				RelativePath=".\WritableResultSet.cpp">
 			</File>
+			<File
+				RelativePath=".\WritableSpectrum.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -313,6 +337,9 @@
 			</File>
 			<File
 				RelativePath=".\ActionBase.h">
+			</File>
+			<File
+				RelativePath=".\ActionBaseImpl.h">
 			</File>
 			<File
 				RelativePath=".\BoxMethodAction.h">
@@ -328,6 +355,9 @@
 			</File>
 			<File
 				RelativePath=".\Dummy1.h">
+			</File>
+			<File
+				RelativePath=".\Dummy2.h">
 			</File>
 			<File
 				RelativePath=".\Function.h">
@@ -393,6 +423,9 @@
 				RelativePath=".\ResultMetadata.h">
 			</File>
 			<File
+				RelativePath=".\ResultMetadataBase.h">
+			</File>
+			<File
 				RelativePath=".\ResultSet.h">
 			</File>
 			<File
@@ -402,7 +435,22 @@
 				RelativePath=".\ResultSetIterator.h">
 			</File>
 			<File
+				RelativePath=".\ResultSetList.h">
+			</File>
+			<File
+				RelativePath=".\SIRomAction.h">
+			</File>
+			<File
 				RelativePath=".\SmartInterface.h">
+			</File>
+			<File
+				RelativePath=".\SpectrumMetadata.h">
+			</File>
+			<File
+				RelativePath=".\SpectrumResult.h">
+			</File>
+			<File
+				RelativePath=".\SpectrumResultImpl.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
@@ -427,6 +475,9 @@
 			</File>
 			<File
 				RelativePath=".\WritableResultSet.h">
+			</File>
+			<File
+				RelativePath=".\WritableSpectrum.h">
 			</File>
 		</Filter>
 		<Filter

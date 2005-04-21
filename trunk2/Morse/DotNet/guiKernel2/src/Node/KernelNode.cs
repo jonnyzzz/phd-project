@@ -77,7 +77,10 @@ namespace guiKernel2.Node
 				{
 					IGraphInfo info = ((IGraphResult)result).GetGraphInfo(); 
 					builder.AppendFormat("Graph [ Nodes = {0}, Edges = {1} ]", info.GetNodes(), info.GetEdges());
-				} else
+				} else if (result is ISpectrumResult) {
+				    ISpectrumResult spectrumResult = (ISpectrumResult)result;
+					builder.AppendFormat("Spectrum [{0}, {1}]", spectrumResult.GetLowerBound(), spectrumResult.GetUpperBound() );
+				}else
 				{
 					builder.Append("Unknown Result");
 				}
@@ -90,7 +93,6 @@ namespace guiKernel2.Node
 			builder.Append(" }");
 
 			return builder.ToString();
-
 		}
 	}
 }

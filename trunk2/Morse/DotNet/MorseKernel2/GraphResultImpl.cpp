@@ -48,7 +48,7 @@ STDMETHODIMP CGraphResultImpl::GetGraph(void** graph) {
 
 STDMETHODIMP CGraphResultImpl::GetGraphInfo(IGraphInfo** info) {
 	SmartInterface<IWritableGraphInfo> pinfo;
-	CGraphInfoImpl::CreateInstance(&pinfo);
+	CGraphInfoImpl::CreateInstance(pinfo.extract());
 
 	ATLASSERT(pinfo != NULL);
 	
@@ -66,7 +66,15 @@ STDMETHODIMP CGraphResultImpl::GetGraphInfo(IGraphInfo** info) {
 
 STDMETHODIMP CGraphResultImpl::IsStrongComponent(VARIANT_BOOL* value) {
 	ATLASSERT(this->graph != NULL);
-	*value = isStongComponent?TRUE:FALSE;
+	*value = isStongComponent?VARIANT_TRUE:VARIANT_FALSE;
+
+	cout<<"\n\nisStrongConpSet: Get ";
+	if (this->isStongComponent) {
+		cout<<"TRUE";
+	} else {
+		cout<<"FALSE";
+	}
+	cout<<" \n\n";
 
 	return S_OK;
 }
@@ -75,7 +83,15 @@ STDMETHODIMP CGraphResultImpl::IsStrongComponent(VARIANT_BOOL* value) {
 STDMETHODIMP CGraphResultImpl::SetGraph(void** graph, VARIANT_BOOL isStrongComponent) {
 	SAFE_DELETE(this->graph);
 	this->graph = *(Graph**)graph;
-	this->isStongComponent = (isStrongComponent == TRUE)?true:false;
+	this->isStongComponent = (isStrongComponent == VARIANT_TRUE)?true:false;
+
+	cout<<"\n\nisStrongConpSet: ";
+	if (this->isStongComponent) {
+		cout<<"TRUE";
+	} else {
+		cout<<"FALSE";
+	}
+	cout<<" \n\n";
 
 	return S_OK;
 }

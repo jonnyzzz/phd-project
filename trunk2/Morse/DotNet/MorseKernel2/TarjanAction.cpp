@@ -83,7 +83,7 @@ STDMETHODIMP CTarjanAction::Do(IResultSet* in, IResultSet** out) {
 	TarjanProcess ps(needEdgeResolve, &pinfo);
 
 	SmartInterface<IResultMetadata> metadata;
-	GraphResultUtil::GetMetadataCloned(in, &metadata);
+	GraphResultUtil::GetMetadataCloned(in, metadata.extract());
 
 	GraphResultUtil::PerformProcess(&ps, in, needEdgeResolve, metadata, out);
 

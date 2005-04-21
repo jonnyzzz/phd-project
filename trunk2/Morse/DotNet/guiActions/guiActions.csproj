@@ -232,6 +232,21 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\SIRom\SIRomAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\SIRom\SIRomActionParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\SIRom\SIRomActionParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\actionImpl\Tarjan\TarjanAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -263,6 +278,11 @@
                 />
                 <File
                     RelPath = "src\Constraints\OneGraphResultConstraint.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Constraints\StrongCompGraphsConstraint.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

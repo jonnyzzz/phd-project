@@ -44,7 +44,7 @@ STDMETHODIMP CKernellImpl::CreateInitialResultSet(IResultSet** result) {
 	ATLASSERT(this->function != NULL);
 
 	SmartInterface<ISymbolicImageMetadata> metadata;
-	CSymbolicImageMetadata::CreateInstance(&metadata);
+	CSymbolicImageMetadata::CreateInstance(metadata.extract());
 	ATLASSERT(metadata != NULL);
 
 	GraphResultGraphList lst(metadata);
