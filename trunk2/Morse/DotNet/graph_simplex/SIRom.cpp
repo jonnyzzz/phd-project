@@ -21,7 +21,11 @@ double SIRom::cost(Node* node) {
 	graph->toExternal(graph->getCells(node), input);
 	function->evaluate();
 
-	return log(exhaussDet());
+	double tmp = (exhaussDet());
+
+	//cout<<"\n\n"<<getAt(0,0)<<"\t"<<getAt(1, 0)<<"\n"<<getAt(0,1)<<"\t"<<getAt(1,1)<<"\nResult="<<tmp<<"\n\n";
+
+	return log(abs(tmp)) * factor;
 }
 
 
@@ -37,25 +41,17 @@ double inline SIRom::Abs(double x) {
 double inline SIRom::exhaussDet() {
 	
 	//gaus method for triangle matrix
-	double mul = 1;
 
-	for (int i=0; i< dimension; i++) {
-		double& diag = getAt(i,i);
-		if ( Abs(diag) < 1e-9) {			
-			return 0;
-		}
-		
-		for (int j=i+1; j<dimension; j++) {
-			getAt(i,j) /= diag;
-		}
-		mul *= diag;
-
-		diag = 1;
-		for (j=i+1; j<dimension; j++) {
-			for (int k=dimension-1; k>=i; k--) {
-				getAt(j,k) -= getAt(j,i)*getAt(i,k);
-			}
-		}
+	
+	if (dimension == 2) {	
+		return getAt(0,0)*getAt(1,1)-getAt(1,0)*getAt(0,1);
+	} else if (dimension == 3) {
+		return  getAt(0,0) * ( getAt(1,1)*getAt(2,2) - getAt(2,1)*getAt(1,2))
+			   -getAt(1,0) * ( getAt(0,1)*getAt(2,2) - getAt(2,1)*getAt(0,2))
+			   +getAt(2,0) * ( getAt(0,1)*getAt(1,2) - getAt(1,1)*getAt(2,0));
+	} else {
+		ASSERT(FALSE);
 	}
-	return mul;
+
+	return 0;
 }

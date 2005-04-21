@@ -3,11 +3,9 @@ using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using gui2.src.Document;
-using guiKernel2;
 using guiKernel2.Document;
 
 namespace gui2.Forms
@@ -447,7 +445,10 @@ namespace gui2.Forms
 			if (!isReadOnly)
 			{
 				function = CreateFunction();
-				this.DialogResult = DialogResult.OK;
+				if (function != null) 
+				{
+					this.DialogResult = DialogResult.OK;
+				}
 			}
 			else
 			{
@@ -480,8 +481,14 @@ namespace gui2.Forms
 				XmlDocument document = new XmlDocument();
 				document.Load(fileName);
 
-				Function function = FunctionSerializer.LoadFunction(document);
-				setSource(function.Equation);
+				try 
+				{
+					Function function = FunctionSerializer.LoadFunction(document);
+					setSource(function.Equation);
+				} catch (FunctionExceptions ee)
+				{
+					MessageBox.Show(this, ee.Message, "Failed to load function", MessageBoxButtons.OK, MessageBoxIcon.Error );
+				}
 			}			
 		}
 
