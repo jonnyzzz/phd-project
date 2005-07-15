@@ -231,6 +231,9 @@
 				RelativePath=".\FunctionTest.cpp">
 			</File>
 			<File
+				RelativePath=".\IntervalValue.cpp">
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -342,6 +345,9 @@
 			</File>
 			<File
 				RelativePath=".\FunctionTest.h">
+			</File>
+			<File
+				RelativePath=".\IntervalValue.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
