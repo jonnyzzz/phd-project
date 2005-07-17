@@ -177,6 +177,9 @@
 				RelativePath=".\GraphUtil.cpp">
 			</File>
 			<File
+				RelativePath=".\MemoryManager.cpp">
+			</File>
+			<File
 				RelativePath=".\MS2ComputationProcess.cpp">
 			</File>
 			<File
@@ -246,6 +249,9 @@
 			</File>
 			<File
 				RelativePath=".\GraphUtil.h">
+			</File>
+			<File
+				RelativePath=".\MemoryManager.h">
 			</File>
 			<File
 				RelativePath=".\MS2ComputationProcess.h">

@@ -1,9 +1,15 @@
 #pragma once
+
 /*
-#include "Graph.h"
+
+This code will fail if number of nodes in graph changed.
+
+*/
 
 #include <hash_map>
 using namespace stdext;
+
+#include "Graph.h"
 
 template <typename Data>
 class AdditionalNodeParameters
@@ -18,6 +24,7 @@ private:
 	Data* it;
 
 	Hash hash;
+	int bufferLen;
 
 public:
 	AdditionalNodeParameters(Graph* graph) : graph(graph) {
@@ -31,10 +38,8 @@ public:
 
 private:
 	Data* allocateData(Node* node) {
-		Data d = it++;
-		d = Data();
-		d.node = node;
-		return &d;
+		Data* d = new(it++) Data();
+		return d;
 	}
 
 public:
@@ -48,4 +53,3 @@ public:
 	};
 
 };
-*/

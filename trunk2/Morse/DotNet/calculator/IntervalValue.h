@@ -1,10 +1,12 @@
 #pragma once
+#include <iostream>
 
 class IntervalValue
 {
 public:
 	IntervalValue(void);
-	IntervalValue(const double& left, const double& right);
+	//IntervalValue(const double& left, const double& right);
+	IntervalValue(double left, double right);
 	IntervalValue(const IntervalValue& value);
 	IntervalValue(const double& value);
 
@@ -25,16 +27,19 @@ public:
 
 	bool operator >= (const IntervalValue& value) const;
 	bool operator == (const IntervalValue& value) const;
-	bool operator <= (const IntervalValue& value) const;
+	bool operator <= (const IntervalValue& value) const;	
 
 private:
 	double left;
 	double right;
 
 private:
-	double min(const double& x, const double& y);
-	double max(const double& x, const double& y);
+	double min(double x, double y) const;
+	double max(double x, double y) const;
 
 private:
 	static const IntervalValue ZERO;
+
+public:
+	void print(std::ostream& stream = std::cout);
 };

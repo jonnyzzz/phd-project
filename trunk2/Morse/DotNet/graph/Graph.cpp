@@ -840,3 +840,11 @@ bool inline Graph::isLoop(Node* node) {
 void inline Graph::setLoop(Node* node) {
 	setFlag(node, isLoopFlagID);
 }
+
+
+Graph* createTestGraph(int num_nodes) {
+	JDouble min = 1;
+	JDouble max = 2;
+	JInt grid = num_nodes;
+	return new Graph(1, &min, &max, &grid);
+}
