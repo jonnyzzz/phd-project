@@ -3,6 +3,8 @@
 #include ".\FunctionNodeConstant.h"
 #include ".\FunctionNodeIfLZ.h"
 #include ".\FunctionNodeSub.h"
+#include ".\FunctionNodeMax.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -79,3 +81,6 @@ FunctionNode* FunctionNodeMax::getRight() {
    return right;
 }
 
+void FunctionNodeMax::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitMax(this);
+}

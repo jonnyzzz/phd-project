@@ -2,6 +2,7 @@
 #include ".\functionnodepower.h"
 #include ".\FunctionNodeConstant.h"
 #include ".\FunctionFactoryParseException.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -92,4 +93,8 @@ FunctionNode* FunctionNodePower::getBase() {
 
 FunctionNode* FunctionNodePower::getExponent() {
    return exponent;
+}
+
+void FunctionNodePower::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitPower(this);
 }

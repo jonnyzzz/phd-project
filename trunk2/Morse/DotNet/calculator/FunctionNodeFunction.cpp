@@ -3,6 +3,7 @@
 #include ".\FunctionContext.h"
 #include ".\FunctionDictionary.h"
 #include ".\FunctionFactoryParseException.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -91,4 +92,8 @@ void FunctionNodeFunction::appendDependency(FunctionNodeDependency* dep) {
 
 FunctionNodeType FunctionNodeFunction::type() {
    return FunctionNodeType_UserFunction;
+}
+
+void FunctionNodeFunction::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitFunction(this);
 }

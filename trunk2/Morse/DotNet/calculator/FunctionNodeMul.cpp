@@ -4,6 +4,7 @@
 #include ".\FunctionContext.h"
 #include ".\FunctionNodeUMinus.h"
 #include ".\FunctionNodeConstant.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -102,4 +103,8 @@ FunctionNode* FunctionNodeMul::getLeft() {
 
 FunctionNode* FunctionNodeMul::getRight() {
    return right;
+}
+
+void FunctionNodeMul::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitMul(this);
 }

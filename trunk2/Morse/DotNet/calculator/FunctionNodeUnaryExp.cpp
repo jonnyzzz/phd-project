@@ -2,6 +2,7 @@
 #include ".\functionnodeunaryexp.h"
 #include ".\FunctionNodeConstant.h"
 #include ".\FunctionNodeMul.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -54,4 +55,8 @@ void FunctionNodeUnaryExp::print(ostream& o, FunctionDictionary* dic) {
    o<<"exp(";
    value->print(o, dic);
    o<<")";
+}
+
+void FunctionNodeUnaryExp::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitExp(this);
 }

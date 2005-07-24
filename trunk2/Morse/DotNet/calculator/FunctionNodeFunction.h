@@ -18,6 +18,7 @@ public:
 
 public:
 	virtual void print(ostream& o, FunctionDictionary* dic);
+	virtual void Accept(FunctionNodeVisitor* visitor);
 
 public:
 	virtual void appendDependency(FunctionNodeDependency* dependency);

@@ -4,6 +4,7 @@
 #include ".\FunctionNodeMul.h"
 #include ".\FunctionNodeUnatySin.h"
 #include ".\FunctionNodeUMinus.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -57,4 +58,8 @@ void FunctionNodeUnaryCos::print(ostream& o, FunctionDictionary* dic) {
    o<<"cos(";
    value->print(o, dic);
    o<<")";
+}
+
+void FunctionNodeUnaryCos::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitCos(this);
 }

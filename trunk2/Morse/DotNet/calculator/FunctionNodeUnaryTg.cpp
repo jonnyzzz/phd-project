@@ -4,6 +4,7 @@
 #include ".\FunctionNodeConstant.h"
 #include ".\FunctionNodeMul.h"
 #include ".\FunctionNodeUnaryCos.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -59,4 +60,8 @@ void FunctionNodeUnaryTg::print(ostream& o, FunctionDictionary* dic) {
    o<<"tg(";
    value->print(o, dic);
    o<<")";
+}
+
+void FunctionNodeUnaryTg::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitTg(this);
 }

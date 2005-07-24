@@ -3,6 +3,7 @@
 #include ".\FunctionNodeConstant.h"
 #include ".\FunctionNodeIfLZ.h"
 #include ".\FunctionNodeSub.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -77,4 +78,8 @@ FunctionNode* FunctionNodeMin::getLeft() {
 
 FunctionNode* FunctionNodeMin::getRight() {
    return right;
+}
+
+void FunctionNodeMin::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitMin(this);
 }

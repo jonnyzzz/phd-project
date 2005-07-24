@@ -3,6 +3,7 @@
 #include ".\FunctionNodeConstant.h"
 #include ".\FunctionContext.h"
 #include ".\FunctionDictionary.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -69,4 +70,8 @@ int FunctionNodeVariable::setVariableID(int newID) {
    int old = variableID;
    variableID = newID;
    return old;
+}
+
+void FunctionNodeVariable::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitVariable(this);
 }

@@ -3,6 +3,7 @@
 #include ".\FunctionNOdeConstant.h"
 #include ".\FunctionNodeMul.h"
 #include ".\FunctionNodeUnaryCos.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -56,4 +57,8 @@ void FunctionNodeUnarySin::print(ostream& o, FunctionDictionary* dic) {
    o<<"sin(";
    value->print(o, dic);
    o<<")";
+}
+
+void FunctionNodeUnarySin::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitSin(this);
 }

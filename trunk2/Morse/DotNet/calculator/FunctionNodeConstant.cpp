@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include ".\functionnodeconstant.h"
+#include ".\functionnodevisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -52,4 +53,10 @@ FunctionNodeType FunctionNodeConstant::type() {
 
 double FunctionNodeConstant::getValue() {
    return value;
+}
+
+/////////////////////////////////////////////////////////////////////
+
+void FunctionNodeConstant::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitConstant(this);
 }

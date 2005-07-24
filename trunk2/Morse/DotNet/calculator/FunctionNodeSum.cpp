@@ -2,6 +2,7 @@
 #include ".\functionnodesum.h"
 #include ".\FunctionContext.h"
 #include ".\FunctionNodeConstant.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -88,4 +89,8 @@ FunctionNode* FunctionNodeSum::getLeft() {
 
 FunctionNode* FunctionNodeSum::getRight() {
    return right;
+}
+
+void FunctionNodeSum::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitSum(this);
 }

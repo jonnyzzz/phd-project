@@ -22,6 +22,8 @@ public:
 	virtual void appendDependency(FunctionNodeDependency* dependency);
 	virtual FunctionNodeType type();
 
+	virtual void Accept(FunctionNodeVisitor* visitor);
+
 public:
 	FunctionNode* getCs();
 	FunctionNode* getTr();

@@ -3,6 +3,7 @@
 #include ".\functionNodeMul.h"
 #include ".\FunctionNodeDiv.h"
 #include ".\FunctionNodeConstant.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -55,4 +56,9 @@ void FunctionNodeUnaryLn::print(ostream& o, FunctionDictionary* dic) {
    o<<"ln(";
    value->print(o, dic);
    o<<")";
+}
+
+
+void FunctionNodeUnaryLn::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitLn(this);
 }

@@ -2,6 +2,7 @@
 #include ".\functionnodeuminus.h"
 #include ".\functionContext.h"
 #include ".\FunctionNodeConstant.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -62,4 +63,8 @@ FunctionNodeType FunctionNodeUMinus::type() {
 
 FunctionNode* FunctionNodeUMinus::getValue() {
    return value;
+}
+
+void FunctionNodeUMinus::Accept(FunctionNodeVisitor* visitor){
+	visitor->VisitUMinus(this);
 }

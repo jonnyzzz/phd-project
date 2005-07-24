@@ -4,6 +4,7 @@
 #include ".\FunctionNodeMul.h"
 #include ".\FunctionNodeConstant.h"
 #include ".\FunctionNodeSum.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -62,4 +63,8 @@ void FunctionNodeUnaryATan::print(ostream& o, FunctionDictionary* dic) {
    o<<"arctg(";
    value->print(o, dic);
    o<<")";
+}
+
+void FunctionNodeUnaryATan::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitATan(this);
 }

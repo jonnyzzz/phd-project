@@ -228,6 +228,9 @@
 				RelativePath=".\FunctionNodeVariable.cpp">
 			</File>
 			<File
+				RelativePath=".\FunctionNodeVisitor.cpp">
+			</File>
+			<File
 				RelativePath=".\FunctionTest.cpp">
 			</File>
 			<File
@@ -342,6 +345,9 @@
 			</File>
 			<File
 				RelativePath=".\FunctionNodeVariable.h">
+			</File>
+			<File
+				RelativePath=".\FunctionNodeVisitor.h">
 			</File>
 			<File
 				RelativePath=".\FunctionTest.h">

@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include ".\functionnodeiflz.h"
 #include ".\FunctionNodeConstant.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -90,4 +91,9 @@ FunctionNode* FunctionNodeIfLZ::getTr() {
 
 FunctionNode* FunctionNodeIfLZ::getFl() {
    return fl;
+}
+
+
+void FunctionNodeIfLZ::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitIfLZ(this);
 }

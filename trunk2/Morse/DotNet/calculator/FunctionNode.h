@@ -5,6 +5,7 @@
 class FunctionContext;
 class FunctionDictionary;
 class FunctionNodeVariable;
+class FunctionNodeVisitor;
 
 enum FunctionNodeType {
 	FunctionNodeType_Sum,
@@ -54,6 +55,9 @@ public:
 public:
 	virtual void appendDependency(FunctionNodeDependency* dependency) = 0;
 	virtual FunctionNodeType type() = 0;	
+
+public:
+	virtual void Accept(FunctionNodeVisitor* visitor) = 0;
 
 protected:
 	bool isZero(double value);

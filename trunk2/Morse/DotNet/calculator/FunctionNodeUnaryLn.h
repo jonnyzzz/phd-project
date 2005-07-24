@@ -16,4 +16,5 @@ public:
 	virtual FunctionNode* clone();
 	virtual FunctionNodeType type();
 	virtual void print(ostream& o, FunctionDictionary* dic);
+	virtual void Accept(FunctionNodeVisitor* visitor);
 };

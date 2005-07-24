@@ -15,6 +15,8 @@ public:
 	virtual FunctionNode* diff(int variableID);
 	virtual FunctionNode* clone();
 
+	virtual void Accept(FunctionNodeVisitor* visitor);
+
 public:
 	virtual void print(ostream& o, FunctionDictionary* dic);
 

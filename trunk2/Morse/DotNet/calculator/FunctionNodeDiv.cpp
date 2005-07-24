@@ -5,6 +5,7 @@
 #include ".\FunctionContext.h"
 #include ".\FunctionNodeConstant.h"
 #include ".\FunctionNodeUMinus.h"
+#include ".\FunctionNodeVisitor.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -100,4 +101,12 @@ FunctionNode* FunctionNodeDiv::getLeft() {
 
 FunctionNode* FunctionNodeDiv::getRight() {
    return right;
+}
+
+
+//////////////////////////////////////////////////////////////
+
+ 
+void FunctionNodeDiv::Accept(FunctionNodeVisitor* visitor) {
+	visitor->VisitDiv(this);
 }
