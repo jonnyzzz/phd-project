@@ -5,21 +5,11 @@
 #include "Function.h"
 #include "WritableFunction.h"
 #include "../graph/typedefs.h"
+#include "../calculator/intervals.h"
 
 class FunctionFactory;
 class KernelException;
 class FunctionNode;
-
-
-[
-	object,
-	dual,
-	uuid("38C4B884-7772-4AA3-B1C0-4BC112FE485F"),
-	pointer_default(unique)
-]
-__interface IFunctionImpl : IDispatch {
-
-};
 
 
 // CFunctionImpl
@@ -34,9 +24,8 @@ __interface IFunctionImpl : IDispatch {
 	helpstring("FunctionImpl Class")
 ]
 class ATL_NO_VTABLE CFunctionImpl : 
-	public IFunctionImpl,
-	public IWritableFunction,
-	public IFunction
+	public IFunction,
+	public IWritableFunction
 {
 public:
 	CFunctionImpl();
@@ -57,6 +46,10 @@ public:
 	STDMETHOD(GetIterations)(int* dim);
 	STDMETHOD(CreateGraph)(void** graph);
 
+	STDMETHOD(GetMinimum)(int id, double* value);
+	STDMETHOD(GetMaximum)(int id, double* value);
+	STDMETHOD(GetLipshitz)(int id, double* value);
+
 	//IWritableFunction
 	STDMETHOD(SetEquations)(BSTR equations);
 	STDMETHOD(GetLastError)(BSTR* message);
@@ -69,6 +62,8 @@ private:
 
 	JDouble* space_min;
 	JDouble* space_max;
+	Interval* scope;
+	JDouble* lipshitz;
 	JInt* grid;
 
 	int dimension;

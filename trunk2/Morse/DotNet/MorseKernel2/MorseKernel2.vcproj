@@ -4,6 +4,7 @@
 	Version="7.10"
 	Name="MorseKernel2"
 	ProjectGUID="{FA02656D-A267-4B1F-A956-79236784E5CA}"
+	RootNamespace="MorseKernel2"
 	Keyword="AtlProj">
 	<Platforms>
 		<Platform
@@ -21,6 +22,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL;_ATL_ATTRIBUTES"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -92,6 +94,7 @@
 				EnableIntrinsicFunctions="TRUE"
 				FavorSizeOrSpeed="1"
 				OptimizeForProcessor="2"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL;_ATL_ATTRIBUTES"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="3"

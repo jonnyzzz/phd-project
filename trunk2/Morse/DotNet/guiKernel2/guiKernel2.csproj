@@ -201,12 +201,22 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Document\EvaluateFunction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Document\Function.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\Document\FunctionExceptions.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Document\IEvaluateFunction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

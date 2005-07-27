@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Jul 24 14:15:28 2005
+/* at Thu Jul 28 02:14:10 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -253,12 +253,6 @@ typedef interface IDummy2 IDummy2;
 #define __IWritableFunction_FWD_DEFINED__
 typedef interface IWritableFunction IWritableFunction;
 #endif 	/* __IWritableFunction_FWD_DEFINED__ */
-
-
-#ifndef __IFunctionImpl_FWD_DEFINED__
-#define __IFunctionImpl_FWD_DEFINED__
-typedef interface IFunctionImpl IFunctionImpl;
-#endif 	/* __IFunctionImpl_FWD_DEFINED__ */
 
 
 #ifndef __IWritableGraphInfo_FWD_DEFINED__
@@ -1457,6 +1451,9 @@ EXTERN_C const IID IID_IFunction;
         virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE GetSystemFunctionDerivate( 
             /* [out] */ void **function) = 0;
         
+        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE CreateGraph( 
+            /* [out] */ void **graph) = 0;
+        
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetEquations( 
             /* [retval][out] */ BSTR *equations) = 0;
         
@@ -1466,8 +1463,17 @@ EXTERN_C const IID IID_IFunction;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetIterations( 
             /* [retval][out] */ int *iterations) = 0;
         
-        virtual /* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE CreateGraph( 
-            /* [out] */ void **graph) = 0;
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetMinimum( 
+            /* [in] */ int id,
+            /* [retval][out] */ double *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetMaximum( 
+            /* [in] */ int id,
+            /* [retval][out] */ double *value) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetLipshitz( 
+            /* [in] */ int id,
+            /* [retval][out] */ double *value) = 0;
         
     };
     
@@ -1525,6 +1531,10 @@ EXTERN_C const IID IID_IFunction;
             IFunction * This,
             /* [out] */ void **function);
         
+        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *CreateGraph )( 
+            IFunction * This,
+            /* [out] */ void **graph);
+        
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetEquations )( 
             IFunction * This,
             /* [retval][out] */ BSTR *equations);
@@ -1537,9 +1547,20 @@ EXTERN_C const IID IID_IFunction;
             IFunction * This,
             /* [retval][out] */ int *iterations);
         
-        /* [hidden][local][id] */ HRESULT ( STDMETHODCALLTYPE *CreateGraph )( 
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetMinimum )( 
             IFunction * This,
-            /* [out] */ void **graph);
+            /* [in] */ int id,
+            /* [retval][out] */ double *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetMaximum )( 
+            IFunction * This,
+            /* [in] */ int id,
+            /* [retval][out] */ double *value);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetLipshitz )( 
+            IFunction * This,
+            /* [in] */ int id,
+            /* [retval][out] */ double *value);
         
         END_INTERFACE
     } IFunctionVtbl;
@@ -1583,6 +1604,9 @@ EXTERN_C const IID IID_IFunction;
 #define IFunction_GetSystemFunctionDerivate(This,function)	\
     (This)->lpVtbl -> GetSystemFunctionDerivate(This,function)
 
+#define IFunction_CreateGraph(This,graph)	\
+    (This)->lpVtbl -> CreateGraph(This,graph)
+
 #define IFunction_GetEquations(This,equations)	\
     (This)->lpVtbl -> GetEquations(This,equations)
 
@@ -1592,8 +1616,14 @@ EXTERN_C const IID IID_IFunction;
 #define IFunction_GetIterations(This,iterations)	\
     (This)->lpVtbl -> GetIterations(This,iterations)
 
-#define IFunction_CreateGraph(This,graph)	\
-    (This)->lpVtbl -> CreateGraph(This,graph)
+#define IFunction_GetMinimum(This,id,value)	\
+    (This)->lpVtbl -> GetMinimum(This,id,value)
+
+#define IFunction_GetMaximum(This,id,value)	\
+    (This)->lpVtbl -> GetMaximum(This,id,value)
+
+#define IFunction_GetLipshitz(This,id,value)	\
+    (This)->lpVtbl -> GetLipshitz(This,id,value)
 
 #endif /* COBJMACROS */
 
@@ -1620,6 +1650,18 @@ void __RPC_STUB IFunction_GetSystemFunction_Stub(
 
 
 void __RPC_STUB IFunction_GetSystemFunctionDerivate_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IFunction_CreateGraph_Proxy( 
+    IFunction * This,
+    /* [out] */ void **graph);
+
+
+void __RPC_STUB IFunction_CreateGraph_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -1662,12 +1704,39 @@ void __RPC_STUB IFunction_GetIterations_Stub(
     DWORD *_pdwStubPhase);
 
 
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IFunction_CreateGraph_Proxy( 
+/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetMinimum_Proxy( 
     IFunction * This,
-    /* [out] */ void **graph);
+    /* [in] */ int id,
+    /* [retval][out] */ double *value);
 
 
-void __RPC_STUB IFunction_CreateGraph_Stub(
+void __RPC_STUB IFunction_GetMinimum_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetMaximum_Proxy( 
+    IFunction * This,
+    /* [in] */ int id,
+    /* [retval][out] */ double *value);
+
+
+void __RPC_STUB IFunction_GetMaximum_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetLipshitz_Proxy( 
+    IFunction * This,
+    /* [in] */ int id,
+    /* [retval][out] */ double *value);
+
+
+void __RPC_STUB IFunction_GetLipshitz_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -6043,116 +6112,6 @@ void __RPC_STUB IWritableFunction_GetLastError_Stub(
 
 
 #endif 	/* __IWritableFunction_INTERFACE_DEFINED__ */
-
-
-#ifndef __IFunctionImpl_INTERFACE_DEFINED__
-#define __IFunctionImpl_INTERFACE_DEFINED__
-
-/* interface IFunctionImpl */
-/* [unique][uuid][dual][object] */ 
-
-
-EXTERN_C const IID IID_IFunctionImpl;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("38C4B884-7772-4AA3-B1C0-4BC112FE485F")
-    IFunctionImpl : public IDispatch
-    {
-    public:
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IFunctionImplVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IFunctionImpl * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IFunctionImpl * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IFunctionImpl * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IFunctionImpl * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IFunctionImpl * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IFunctionImpl * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IFunctionImpl * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        END_INTERFACE
-    } IFunctionImplVtbl;
-
-    interface IFunctionImpl
-    {
-        CONST_VTBL struct IFunctionImplVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IFunctionImpl_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IFunctionImpl_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IFunctionImpl_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IFunctionImpl_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IFunctionImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IFunctionImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IFunctionImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IFunctionImpl_INTERFACE_DEFINED__ */
 
 
 #ifndef __IWritableGraphInfo_INTERFACE_DEFINED__

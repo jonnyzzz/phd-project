@@ -8,6 +8,8 @@
 #include "../graph/graph.h"
 #include "../systemFunction/systemfunction.h"
 #include "../systemFunction/systemFunctionDerivate.h"
+#include "../calculator/IntervalEvaluator.h"
+#include "../calculator/LipsitzFinder.h"
 
 
 
@@ -111,6 +113,8 @@ void CFunctionImpl::Reset() {
 	space_min = NULL;
 	space_max = NULL;
 	grid = NULL;
+	scope = NULL;
+	lipshitz = NULL;
 }
 
 void CFunctionImpl::CleanUp() {
@@ -119,6 +123,8 @@ void CFunctionImpl::CleanUp() {
 	SAFE_DELETE_ARR( space_min);
 	SAFE_DELETE_ARR( space_max);
 	SAFE_DELETE_ARR( grid );
+	SAFE_DELETE_ARR( scope );
+	SAFE_DELETE_ARR( lipshitz );
 	
 	Reset();
 }
@@ -155,14 +161,17 @@ bool CFunctionImpl::initializeContent() {
 
 		cout<<"Internal Function Dimension = "<<dimension<<"\n";
 
-		if (this->dimension <= 0) 
+		if (this->dimension <= 0) { 
 			throw KernelException(KernelException_NegativeDimention);
+		}
 
 		delete node;
 
 		this->space_max = new JDouble[dimension];
 		this->space_min = new JDouble[dimension];
 		this->grid = new JInt[dimension];
+		this->scope = new Interval[dimension];
+		this->lipshitz = new JDouble[dimension];
 
 		char buf[255];
 		for (int i=0; i<dimension;i++) {
@@ -208,10 +217,16 @@ bool CFunctionImpl::initializeContent() {
 
 		//parse function source
 		FunctionContext cx;
+
+		FunctionContext lowerBound;
+		FunctionContext upperBound;
 		
 		for (int i=0; i<this->dimension; i++) {
 			sprintf(buf, "x%d", i+1);
-			cx.addSubstitute(functionFactory->getFunctionDictionary()->lookUp(buf), new FunctionNodeConstant(0));
+			int variableID = functionFactory->getFunctionDictionary()->lookUp(buf);
+			cx.addSubstitute(variableID, new FunctionNodeConstant(0));
+			lowerBound.addSubstitute(variableID, new FunctionNodeConstant(space_min[i]));
+			upperBound.addSubstitute(variableID, new FunctionNodeConstant(space_max[i]));
 		}
 		
 		for (int i=0; i<this->dimension; i++) {
@@ -243,6 +258,23 @@ bool CFunctionImpl::initializeContent() {
 
 		cout<<"Current iteration : "<<iterations<<"\n";
 
+		cout<<"\nExtrama and Lipshitz computations\n";
+
+		for (int i=0; i<dimension; i++) {
+			node = NULL;
+			sprintf(buf, "y%d", i+1);
+			node = safeGetNode(buf, KernelException(KernelException_NoFunctionEquation, i));
+			IntervalEvaluator evaluator(&lowerBound, &upperBound);
+			node->Accept(&evaluator);
+			scope[i] = evaluator.getValue();
+			LipsitzFinder lip(&lowerBound, &upperBound);
+			node->Accept(&lip);
+			lipshitz[i] = lip.getValue();
+			delete node;
+		}
+
+		cout<<"\nExtrema computation finished\n\n";
+
 		isInitialized = true;
 
 		lastErrorMessage = "";
@@ -260,4 +292,35 @@ bool CFunctionImpl::initializeContent() {
 	}
 
 	return false;
+}
+
+
+////////////////////////////////////////////////
+
+STDMETHODIMP CFunctionImpl::GetMinimum(int i, double* value) {
+	if (!isInitialized) return E_FAIL;
+	if (i < 0 || i >= dimension) return E_INVALIDARG;
+
+	*value = scope[i].lower();
+
+	return S_OK;
+}
+
+
+STDMETHODIMP CFunctionImpl::GetMaximum(int i, double* value) {
+	if (!isInitialized) return E_FAIL;
+	if (i < 0 || i >= dimension) return E_INVALIDARG;
+
+	*value = scope[i].upper();
+
+	return S_OK;
+}
+
+STDMETHODIMP CFunctionImpl::GetLipshitz(int i, double* value) {
+	if (!isInitialized) return E_FAIL;
+	if (i < 0 || i >= dimension) return E_INVALIDARG;
+
+	*value = lipshitz[i];
+
+	return S_OK;
 }

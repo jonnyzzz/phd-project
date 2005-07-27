@@ -97,6 +97,13 @@ namespace guiKernel2.Document
 				});
 		}
 
-
+		public IEvaluateFunction EvaluateFunction
+		{
+			get
+			{
+				return new EvaluateFunction(function);
+			}
+		}
+	
 	}
 }

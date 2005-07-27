@@ -30,6 +30,9 @@ public:
 	virtual void VisitConstant(FunctionNodeConstant* node);
 	virtual void VisitFunction(FunctionNodeFunction* node);
 
+public:
+	double getValue();
+
 private:
 	double ret_val;
 	FunctionContext* leftBound;

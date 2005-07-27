@@ -43,9 +43,9 @@ class ATL_NO_VTABLE CDummy :
 	public IResult,
 	public IResultBase,
 	public IResultSet,
-	public IFunction,
 	public IBoxMethodParameters,
-	public ITarjanParameters
+	public ITarjanParameters,
+	public IFunction
 {
 public:
 	CDummy()
@@ -113,38 +113,6 @@ public:
 		return E_NOTIMPL;
 	}
 
-	// IFunction Methods
-public:
-	STDMETHOD(GetSystemFunction)(void ** function)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(GetSystemFunctionDerivate)(void ** function)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(GetEquations)(BSTR * equations)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(GetDimension)(int * dimenstion)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(GetIterations)(int * iterations)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
-	STDMETHOD(CreateGraph)(void ** graph)
-	{
-		// Add your function implementation here.
-		return E_NOTIMPL;
-	}
 
 	// IBoxMethodParameters Methods
 public:
@@ -188,6 +156,54 @@ public:
 		return E_NOTIMPL;
 	}
 	STDMETHOD(GetOffset)(int  index, double * offset1, double * offset2)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+
+	// IFunction Methods
+public:
+	STDMETHOD(GetSystemFunction)(void ** function)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+	STDMETHOD(GetSystemFunctionDerivate)(void ** function)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+	STDMETHOD(CreateGraph)(void ** graph)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+	STDMETHOD(GetEquations)(BSTR * equations)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+	STDMETHOD(GetDimension)(int * dimenstion)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+	STDMETHOD(GetIterations)(int * iterations)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+	STDMETHOD(GetMinimum)(int  id, double * value)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+	STDMETHOD(GetMaximum)(int  id, double * value)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+	STDMETHOD(GetLipshitz)(int  id, double * value)
 	{
 		// Add your function implementation here.
 		return E_NOTIMPL;
