@@ -2,6 +2,7 @@
 
 #include "FunctionNode.h"
 #include "FunctionNative.h"
+#include "Intervals.h"
 
 #include <list>
 typedef list<FunctionNode*> SystemNativeFunctions;

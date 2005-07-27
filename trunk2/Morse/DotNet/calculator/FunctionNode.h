@@ -57,7 +57,7 @@ public:
 	virtual FunctionNodeType type() = 0;	
 
 public:
-	virtual void Accept(FunctionNodeVisitor* visitor) = 0;
+	virtual void Accept(FunctionNodeVisitor* visitor) = 0;	
 
 protected:
 	bool isZero(double value);

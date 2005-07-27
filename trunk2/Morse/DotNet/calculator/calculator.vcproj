@@ -4,6 +4,7 @@
 	Version="7.10"
 	Name="calculator"
 	ProjectGUID="{A42EF8BC-57CF-4D5A-A423-9B03C034210A}"
+	RootNamespace="calculator"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -20,6 +21,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -234,7 +236,13 @@
 				RelativePath=".\FunctionTest.cpp">
 			</File>
 			<File
+				RelativePath=".\IntervalEvaluator.cpp">
+			</File>
+			<File
 				RelativePath=".\IntervalValue.cpp">
+			</File>
+			<File
+				RelativePath=".\LipsitzFinder.cpp">
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp">
@@ -353,7 +361,16 @@
 				RelativePath=".\FunctionTest.h">
 			</File>
 			<File
+				RelativePath=".\IntervalEvaluator.h">
+			</File>
+			<File
+				RelativePath=".\Intervals.h">
+			</File>
+			<File
 				RelativePath=".\IntervalValue.h">
+			</File>
+			<File
+				RelativePath=".\LipsitzFinder.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
