@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using csUnit;
 
 namespace guiTest.Util
 {
@@ -17,6 +18,14 @@ namespace guiTest.Util
 			}
 			strings.Add("iterations=0;_dimension=" + left.Length + ";");
 			return new guiKernel2.Document.Function((string[])strings.ToArray(typeof(string)));
+		}
+
+
+		public static void AssertDoubleEquals(double v1, double v2)
+		{
+			if (Math.Abs(v1-v2) > 1e-8) Assert.Fail(
+											string.Format("<{0}> is not equals to <{1}>", v1, v2)
+										);
 		}
 	}
 }

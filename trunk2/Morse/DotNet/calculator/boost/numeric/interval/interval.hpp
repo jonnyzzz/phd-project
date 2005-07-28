@@ -304,25 +304,16 @@ interval<T, Policies> interval<T, Policies>::whole()
   return interval<T, Policies>(checking::neg_inf(), checking::pos_inf(), true);
 }
 
-//todo:!!!!
 template<class T, class Policies> inline
 const T& interval<T, Policies>::lower() const
 {
-  if (low > up) {
-	return up;
-  } else {
-	return low;
-  }
+    return low;
 }
-//todo:!!!!
+
 template<class T, class Policies> inline
 const T& interval<T, Policies>::upper() const
 {
-  if (low < up) {
-	return up;
-  } else {
-	return low;
-  }
+    return up;
 }
 
 /*

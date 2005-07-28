@@ -1,3 +1,5 @@
+Show interval and Lipshitz info in system input dialog
+Use lipshitsz info for owerlaping point method in SI (as in my courseWork)
 Show unapplyable action, and how-to-apply help info
 Implement groups in menu
 Implement node-additional-info-hash

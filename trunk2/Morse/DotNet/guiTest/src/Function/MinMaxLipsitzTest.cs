@@ -60,9 +60,9 @@ namespace guiTest.Function
 		{
 			IEvaluateFunction evaluateFunction = CreateFunction();
 			
-			Assert.Equals(evaluateFunction.MinimalValue[3], Math.Cos(1));
-			Assert.Equals(evaluateFunction.MaximalValue[3], 1);
-			Assert.Equals(evaluateFunction.LipshitzConstant[3], Math.Sin(1));
+			Util.Util.AssertDoubleEquals(evaluateFunction.MinimalValue[3], Math.Cos(1));
+			Util.Util.AssertDoubleEquals(evaluateFunction.MaximalValue[3], 1);
+			Util.Util.AssertDoubleEquals(evaluateFunction.LipshitzConstant[3], Math.Sin(1));
 		}
 	}
 }
