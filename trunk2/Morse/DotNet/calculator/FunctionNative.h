@@ -82,6 +82,7 @@ private:
 	uchar* compileMul(uchar* code, FunctionNodeMul* mul);
 	uchar* compileDiv(uchar* code, FunctionNodeDiv* div);
 	uchar* compileUMinus(uchar* code, FunctionNodeUMinus* um);
+    uchar* compileIntPower(uchar* code, FunctionNodePower* pw, int power);
 	uchar* compilePower(uchar* code, FunctionNodePower* pw);
 	uchar* compileFunctionNodeUnary(uchar* code, FunctionNodeUnary* unary, void* double2double1);
 	uchar* compileMin(uchar* code, FunctionNodeMin* node);

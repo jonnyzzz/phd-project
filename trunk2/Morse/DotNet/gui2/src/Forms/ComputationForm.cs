@@ -43,6 +43,7 @@ namespace gui2.Forms
 		private System.Windows.Forms.SaveFileDialog saveDocumentDialog;
 		private System.Windows.Forms.OpenFileDialog openDocumentDialog;
 		private System.Windows.Forms.MenuItem menuOpenDocument;
+		private System.Windows.Forms.MenuItem menuSystemAnalisys;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -100,13 +101,14 @@ namespace gui2.Forms
 			this.menuSystem = new System.Windows.Forms.MenuItem();
 			this.menuSystemNew = new System.Windows.Forms.MenuItem();
 			this.menuFunctionShow = new System.Windows.Forms.MenuItem();
+			this.menuDelimeter = new System.Windows.Forms.MenuItem();
+			this.menuOpenDocument = new System.Windows.Forms.MenuItem();
+			this.menuSave = new System.Windows.Forms.MenuItem();
 			this.menuHelp = new System.Windows.Forms.MenuItem();
 			this.menuHelpAbout = new System.Windows.Forms.MenuItem();
-			this.menuDelimeter = new System.Windows.Forms.MenuItem();
-			this.menuSave = new System.Windows.Forms.MenuItem();
 			this.saveDocumentDialog = new System.Windows.Forms.SaveFileDialog();
 			this.openDocumentDialog = new System.Windows.Forms.OpenFileDialog();
-			this.menuOpenDocument = new System.Windows.Forms.MenuItem();
+			this.menuSystemAnalisys = new System.Windows.Forms.MenuItem();
 			this.panelLeft.SuspendLayout();
 			this.panelRight.SuspendLayout();
 			this.panelRightUp.SuspendLayout();
@@ -261,7 +263,8 @@ namespace gui2.Forms
 			this.menuSystem.Index = 0;
 			this.menuSystem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																					   this.menuSystemNew,
-																					   this.menuFunctionShow});
+																					   this.menuFunctionShow,
+																					   this.menuSystemAnalisys});
 			this.menuSystem.Text = "System";
 			// 
 			// menuSystemNew
@@ -277,6 +280,24 @@ namespace gui2.Forms
 			this.menuFunctionShow.Text = "Show";
 			this.menuFunctionShow.Click += new System.EventHandler(this.MenuFunctionShowClick);
 			// 
+			// menuDelimeter
+			// 
+			this.menuDelimeter.Enabled = false;
+			this.menuDelimeter.Index = 1;
+			this.menuDelimeter.Text = "-";
+			// 
+			// menuOpenDocument
+			// 
+			this.menuOpenDocument.Index = 2;
+			this.menuOpenDocument.Text = "Open";
+			this.menuOpenDocument.Click += new System.EventHandler(this.menuOpenDocument_Click);
+			// 
+			// menuSave
+			// 
+			this.menuSave.Index = 3;
+			this.menuSave.Text = "Save";
+			this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
+			// 
 			// menuHelp
 			// 
 			this.menuHelp.Index = 2;
@@ -290,18 +311,6 @@ namespace gui2.Forms
 			this.menuHelpAbout.Text = "About";
 			this.menuHelpAbout.Click += new System.EventHandler(this.menuHelpAbout_Click);
 			// 
-			// menuDelimeter
-			// 
-			this.menuDelimeter.Enabled = false;
-			this.menuDelimeter.Index = 1;
-			this.menuDelimeter.Text = "-";
-			// 
-			// menuSave
-			// 
-			this.menuSave.Index = 3;
-			this.menuSave.Text = "Save";
-			this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
-			// 
 			// saveDocumentDialog
 			// 
 			this.saveDocumentDialog.DefaultExt = "dsif";
@@ -314,11 +323,11 @@ namespace gui2.Forms
 			this.openDocumentDialog.Filter = "Dynamical System Investigations Files|*.dsif|All files|*.*";
 			this.openDocumentDialog.Title = "Select System to open";
 			// 
-			// menuOpenDocument
+			// menuSystemAnalisys
 			// 
-			this.menuOpenDocument.Index = 2;
-			this.menuOpenDocument.Text = "Open";
-			this.menuOpenDocument.Click += new System.EventHandler(this.menuOpenDocument_Click);
+			this.menuSystemAnalisys.Index = 2;
+			this.menuSystemAnalisys.Text = "Analisys";
+			this.menuSystemAnalisys.Click += new System.EventHandler(this.menuSystemAnalisys_Click);
 			// 
 			// ComputationForm
 			// 
@@ -479,6 +488,12 @@ namespace gui2.Forms
 
 				OpenNewDocument(DocumentSerializer.LoadDocument(doc, pathbase));
 			}
+		}
+
+		private void menuSystemAnalisys_Click(object sender, System.EventArgs e)
+		{
+			SystemFunctionAnalisys.ShowAnalisys();
+			
 		}
 	}
 }

@@ -48,6 +48,7 @@ public:
 	virtual FunctionNode* clone() = 0;
 
     FunctionNode* simplify();
+	bool canSimplify();
 
 public:
 	virtual void print(ostream& o, FunctionDictionary* dic) = 0;

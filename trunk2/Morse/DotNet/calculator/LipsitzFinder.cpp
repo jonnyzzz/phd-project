@@ -44,7 +44,7 @@ void LipsitzFinder::VisitATan(FunctionNodeUnaryATan* node){
 	IntervalEvaluator evaluator(leftBound, rightBound);	
 	node->getValue()->Accept(&evaluator);
 	double x2 = square(evaluator.getValue()).upper();
-	this->ret_val  =  this->ret_val / (1 + x2);
+	this->ret_val  =  this->ret_val / abs(1 + x2);
 }
 void LipsitzFinder::VisitCos(FunctionNodeUnaryCos* node){
 	node->getValue()->Accept(this);
@@ -54,10 +54,12 @@ void LipsitzFinder::VisitCos(FunctionNodeUnaryCos* node){
 	IntervalEvaluator evaluator(leftBound, rightBound);	
 	node->getValue()->Accept(&evaluator);
 	double sin_x = abs(sin(evaluator.getValue())).upper();
+
 	cout<<"Debug: MinMax:"<<"[ "<<evaluator.getValue().lower()<<" , "<<evaluator.getValue().upper()<<" ]"<<"\n";
 	Interval ss = sin(evaluator.getValue());
 	cout<<"Debug: Sin:"<<"[ "<<ss.lower()<<" , "<<ss.upper()<<" ]"<<"\n";
 	cout<<"Debug: Sin_x ="<<sin_x<<"\n";
+
 	this->ret_val  =  this->ret_val * sin_x;
 }
 void LipsitzFinder::VisitExp(FunctionNodeUnaryExp* node){
@@ -68,6 +70,7 @@ void LipsitzFinder::VisitExp(FunctionNodeUnaryExp* node){
 	IntervalEvaluator evaluator(leftBound, rightBound);	
 	node->getValue()->Accept(&evaluator);
 	double max_x = abs(evaluator.getValue()).upper();
+
 	this->ret_val  =  this->ret_val * max_x;
 }
 void LipsitzFinder::VisitLn(FunctionNodeUnaryLn* node) {
@@ -104,11 +107,42 @@ void LipsitzFinder::VisitSin(FunctionNodeUnarySin* node) {
 void LipsitzFinder::VisitVariable(FunctionNodeVariable* node){
 	this->ret_val = 1;
 }
+
+bool LipsitzFinder::IsIntegerValue(double x) {
+	return abs(x - (int)x) < 1e-8;
+}
+
 void LipsitzFinder::VisitPower(FunctionNodePower* node) {
 	//a^b = exp(ln(a)b)
-	//(a^b)' = ln(a)b exp(ln(a)b) (ln(a)b)'
+	//(a^b)' = ln(a)b exp(ln(a)b) (ln(a)b)' = ln(a)b exp(ln(a)b) (1/a b a' + ln(a) * b')
+	// a = base
+	// b = exp
 	//todo:
-	ASSERT(false);
+
+	if (node->getExponent()->canSimplify()) {
+		double exp = node->getExponent()->evaluate();
+		
+		IntervalEvaluator evaluator(leftBound, rightBound);
+		node->getBase()->Accept(&evaluator);
+		node->getBase()->Accept(this);
+		this->ret_val = exp * pow(abs(evaluator.getValue()).upper(), (int)exp-1) * this->ret_val;		
+	} else {
+		IntervalEvaluator evaluator(leftBound, rightBound);
+		node->getExponent()->Accept(&evaluator);
+		Interval expI = evaluator.getValue();
+		node->getBase()->Accept(&evaluator);
+		Interval baseI = evaluator.getValue();
+
+		node->getExponent()->Accept(this);
+		double expL = this->ret_val;
+		node->getBase()->Accept(this);
+		double baseL = this->ret_val;
+
+		this->ret_val =    abs(log(baseI)*expI).upper() 
+			             * exp(log(baseI)*expI).upper() 
+						 * ( baseL/abs(baseI).upper() * abs(expI).upper() + abs(log(baseI)).upper() * expL );
+	}
+		
 }
 void LipsitzFinder::VisitMul(FunctionNodeMul* node) {
 	node->getLeft()->Accept(this);
@@ -166,7 +200,7 @@ void LipsitzFinder::VisitDiv(FunctionNodeDiv* node) {
 	node->getRight()->Accept(this);
 	double rightL = this->ret_val;
 
-	this->ret_val = leftL/rightMin - leftMax*rightL/rightMin/rightMin;	
+	this->ret_val = abs(leftL/rightMin + leftMax*rightL/rightMin/rightMin);
 }
 void LipsitzFinder::VisitConstant(FunctionNodeConstant* node){
 	this->ret_val = 0;

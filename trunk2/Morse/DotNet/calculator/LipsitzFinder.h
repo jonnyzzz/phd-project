@@ -33,6 +33,9 @@ public:
 public:
 	double getValue();
 
+private:	
+	bool IsIntegerValue(double x);
+
 private:
 	double ret_val;
 	FunctionContext* leftBound;

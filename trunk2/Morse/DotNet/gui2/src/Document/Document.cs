@@ -1,3 +1,5 @@
+using System;
+using gui2.Forms;
 using gui2.TreeNodes;
 using guiKernel2.Document;
 using guiKernel2.Node;
@@ -7,10 +9,11 @@ namespace gui2.Document
 	/// <summary>
 	/// Summary description for Document.
 	/// </summary>
-	public class Document
+	public class Document : IDisposable
 	{
 		private KernelDocument kernelDocument;
 		private Node rootNode = null;
+		private SystemFunctionAnalisys analisysForm = null;
 
 		public Document(Function function)	
 		{			
@@ -46,5 +49,18 @@ namespace gui2.Document
 			Runner.Runner.Instance.ComputationForm.Unlock();
 		}
 
+		public SystemFunctionAnalisys AnalisysForm
+		{
+			get { return analisysForm; }
+			set { analisysForm = value;}
+		}
+	
+		public void Dispose()
+		{
+			if (analisysForm != null)
+			{
+				analisysForm.Close();
+			}
+		}
 	}
 }

@@ -75,6 +75,7 @@ namespace gui2.Runner
 			computationForm = null;
 			core.Dispose();
 			core = null;
+			document.Dispose();
 			document = null;
 		}
 
@@ -86,7 +87,14 @@ namespace gui2.Runner
 		public Document.Document Document
 		{
 			get { return document; }
-			set { document = value; }
+			set
+			{
+				if (document != null)
+				{
+					document.Dispose();
+				}
+				document = value;
+			}
 		}
 
 		public CommandLineParser CommandLine

@@ -218,6 +218,16 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "src\Forms\SystemFunctionAnalisys.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Forms\SystemFunctionAnalisys.resx"
+                    DependentUpon = "SystemFunctionAnalisys.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "src\ProgressBar\ProgressBarNotificationAdapter.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

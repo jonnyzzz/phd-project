@@ -35,3 +35,7 @@ double FunctionNode::evaluate() {
 FunctionNode* FunctionNode::simplify() {
     return this->simplify(&FunctionContext());
 }
+
+bool FunctionNode::canSimplify() {
+    return this->canSimplify(&FunctionContext());
+}

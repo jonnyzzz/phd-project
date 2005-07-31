@@ -162,10 +162,10 @@ uchar* FunctionNative::compileDoubleDoubleNCall(uchar* code, void* routine, int 
 
    //mov eax, (uint)routine
    *code++ = 0xb8;
-   	#pragma warning(push)
-	#pragma warning (disable : 4311)
+#pragma warning(push)
+#pragma warning (disable : 4311)
    code = compileDWord(code, (uint)routine);
-   	#pragma warning(pop)
+#pragma warning(pop)
 
    //all params from stack, suppose it was double
    //call eax
@@ -391,7 +391,7 @@ uchar* FunctionNative::compileSin(uchar* code, FunctionNodeUnarySin* node) {
 }
 
 
-double inline  mypow(double a, double b) {
+double inline mypow(double a, double b) {
    return pow(a,b);
 }
 
@@ -423,12 +423,40 @@ double inline myiflz(double c, double a, double b) {
    return (c<0)?a:b;
 }
 
+//todo:TBD
+uchar* FunctionNative::compileIntPower(uchar* code, FunctionNodePower* pw, int power) {
+	/*
+	if (power == 0) {		
+		return code;
+	} else if (power % 2 == 0) {
+		//fmul st(0), st
+		*code++ = 0xdc;
+		*code++ = 0xc8;
+		return compileIntPower(code, pw, power/2);
+	} else  {
+		
+		code = compileFunctionNode(code, node->getBase()); 
+
+		//fmul st(1), st(0)
+		*code++ = 0xdc;
+		*code++ = 0xc9;
+		//fld pw->getExponent()->evaluate() -> st(1) any time
+		//fmul
+		return compileIntPower(code, pw, power-1);
+	}
+
+	*/
+
+	ASSERT(false);
+	return NULL;
+}
+
 uchar* FunctionNative::compilePower(uchar* code, FunctionNodePower* node) {
-   code = compileFunctionNode(code, node->getExponent());
-   code = compileFunctionNode(code, node->getBase()); 
+    code = compileFunctionNode(code, node->getExponent());
+	code = compileFunctionNode(code, node->getBase()); 
 
-   code = compileDoubleDoubleNCall(code, &mypow, 2);
-
+	code = compileDoubleDoubleNCall(code, &mypow, 2);
+	
    return code;
 }
 
