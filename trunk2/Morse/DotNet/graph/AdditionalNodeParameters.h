@@ -1,14 +1,12 @@
 #pragma once
 
-/*
-
-This code will fail if number of nodes in graph changed.
-
-*/
+//This is really slow implementation. While it uses std::hash_map without
+//specially defined hash function
 
 #include <hash_map>
 using namespace stdext;
 
+#include "..\graph\MemoryManager.h"
 #include "Graph.h"
 
 template <typename Data>
@@ -20,26 +18,14 @@ private:
 private:
 	Graph* graph;
 
-	Data* buffer;	
-	Data* it;
+	MemoryManager manager;
 
-	Hash hash;
-	int bufferLen;
-
+	Hash hash;	
 public:
-	AdditionalNodeParameters(Graph* graph) : graph(graph) {
-		bufferLen = graph->getNumberOfNodes();
-		it = buffer = new Data[bufferLen];
+	AdditionalNodeParameters(Graph* graph) : graph(graph), manager(sizeof(Data*)*100000) {		
 	}
 
-	virtual ~AdditionalNodeParameters(void) {
-		delete[] buffer;
-	}
-
-private:
-	Data* allocateData(Node* node) {
-		Data* d = new(it++) Data();
-		return d;
+	virtual ~AdditionalNodeParameters(void) {		
 	}
 
 public:
@@ -47,7 +33,7 @@ public:
 	Data* getData(Node* node) {
 		Data*& d = hash[node];
 		if (d == NULL) {
-			d = allocateData(node);
+            d = manager.Allocate<Data>();
 		}
 		return d;
 	};

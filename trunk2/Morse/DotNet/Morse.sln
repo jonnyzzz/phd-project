@@ -84,6 +84,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLVisualizationPS", "GLVisu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorseKernel2", "MorseKernel2\MorseKernel2.vcproj", "{FA02656D-A267-4B1F-A956-79236784E5CA}"
 	ProjectSection(ProjectDependencies) = postProject
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC} = {1A4D2782-04FA-4F8B-82C4-D5588681DCBC}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorseKernel2PS", "MorseKernel2\MorseKernel2PS.vcproj", "{F0ECF416-0386-4E77-84B6-CFAD137A098E}"
@@ -137,6 +138,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorseGraphGeneratorC", "Mor
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiTest", "guiTest\guiTest.csproj", "{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "adaptiveCellImageBuilder", "adaptiveCellImageBuilder\adaptiveCellImageBuilder.vcproj", "{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -808,6 +813,34 @@ Global
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.Test.Build.0 = Release|.NET
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.VisualizationDebug.Build.0 = Debug|.NET
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Debug.ActiveCfg = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Debug.Build.0 = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Debug2.ActiveCfg = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Debug2.Build.0 = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Debug2Gui.ActiveCfg = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Debug2Gui.Build.0 = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.DebugAll.ActiveCfg = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.DebugAll.Build.0 = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.DebugGL.ActiveCfg = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.DebugGL.Build.0 = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.DebugGUI.ActiveCfg = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.DebugGUI.Build.0 = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.DebugGui2.ActiveCfg = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.DebugGui2.Build.0 = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.FullDebug.ActiveCfg = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.FullDebug.Build.0 = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.MorseGen.ActiveCfg = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.MorseGen.Build.0 = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.NewDLL.ActiveCfg = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.NewDLL.Build.0 = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release.ActiveCfg = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release.Build.0 = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release2.ActiveCfg = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release2.Build.0 = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Test.ActiveCfg = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Test.Build.0 = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.VisualizationDebug.ActiveCfg = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.VisualizationDebug.Build.0 = Debug|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
