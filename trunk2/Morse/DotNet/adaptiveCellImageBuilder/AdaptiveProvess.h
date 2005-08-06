@@ -1,6 +1,7 @@
 #pragma once
 #include "..\cellimagebuilders\abstractprocess.h"
 #include "../SystemFunction/ISystemFunction.h"
+#include "PointGraphProcessor.h"
 
 class AdaptiveProvess :
 	public AbstractProcess
@@ -29,4 +30,6 @@ private:
 private:
     JInt* x;
     JInt* b;
+
+    PointGraphProcessor* processor;
 };

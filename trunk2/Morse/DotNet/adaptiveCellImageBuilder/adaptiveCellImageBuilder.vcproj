@@ -116,6 +116,12 @@
 				RelativePath=".\Box.cpp">
 			</File>
 			<File
+				RelativePath=".\PointGraph.cpp">
+			</File>
+			<File
+				RelativePath=".\PointGraphProcessor.cpp">
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -140,6 +146,12 @@
 			</File>
 			<File
 				RelativePath=".\Box.h">
+			</File>
+			<File
+				RelativePath=".\PointGraph.h">
+			</File>
+			<File
+				RelativePath=".\PointGraphProcessor.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">

@@ -9,6 +9,13 @@ public:
 	MemoryManager(int buffer_length);
 	virtual ~MemoryManager(void);
 
+    MemoryManager(const MemoryManager& man) {
+        ASSERT(false);
+    }
+
+    MemoryManager& operator = (const MemoryManager&) {
+        ASSERT(false);
+    }
 
 private:
 	struct Buffer {
@@ -38,7 +45,7 @@ public:
     //Default constructor will be called. No destructor will be called
     template <class C> 
     C* Allocate() {
-        return new(Allocate_void(sizeof(C))) C();
+        return new(Allocate_void(sizeof(C))) C;
     }
 
     template <class C>

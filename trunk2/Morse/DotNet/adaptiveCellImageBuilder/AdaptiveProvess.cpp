@@ -11,11 +11,14 @@ AdaptiveProvess::AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* 
     this->x = new JInt[dimension];
     this->b = new JInt[dimension+1];
     for (int i=0; i<dimension; i++) this->division[i] = division[i];
+
+    processor = new PointGraphProcessor(this->resultGraph, function, dimension);
 }
 
 AdaptiveProvess::~AdaptiveProvess(void)
 {
     delete[] division;
+    delete processor;
 }
 
 
@@ -58,6 +61,5 @@ void AdaptiveProvess::processNode(Graph* graph, Node* node) {
 }
 
 void AdaptiveProvess::processResultNode(Node* node) {
-
-
+    processor->ProcessNode(node);
 }
