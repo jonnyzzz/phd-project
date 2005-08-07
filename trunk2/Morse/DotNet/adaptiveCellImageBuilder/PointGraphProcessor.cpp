@@ -1,17 +1,25 @@
 #include "StdAfx.h"
 #include ".\pointgraphprocessor.h"
 
-PointGraphProcessor::PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension)
-: graph(graph), dimension(dimension), pointGraph(function, dimension)
+PointGraphProcessor::PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double precision)
+: graph(graph), dimension(dimension), pointGraph(function, dimension), precision(precision)
 {
     x = new JDouble[dimension];
     b = new JInt[dimension+1];
+    overlap1 = new JDouble[dimension];
+    overlap2 = new JDouble[dimension];
+    for (int i=0; i<dimension; i++) {
+        overlap1[i] = precision;
+        overlap2[i] = precision;
+    }    
 }
 
 PointGraphProcessor::~PointGraphProcessor(void)
 {
     delete[] x;
     delete[] b;
+    delete[] overlap1;
+    delete[] overlap2;
 }
 
 

@@ -3,6 +3,10 @@
 #include <list>
 using namespace std;
 
+#ifndef ATLASSERT
+#define ATLASSERT(x)
+#endif
+
 class MemoryManager
 {
 public:
@@ -10,11 +14,11 @@ public:
 	virtual ~MemoryManager(void);
 
     MemoryManager(const MemoryManager& man) {
-        ASSERT(false);
+        ATLASSERT(false);
     }
 
     MemoryManager& operator = (const MemoryManager&) {
-        ASSERT(false);
+        ATLASSERT(false);
     }
 
 private:

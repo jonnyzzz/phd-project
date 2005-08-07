@@ -603,6 +603,31 @@ interface IWritableSpectrumResult : IDispatch {
 	[id(24)] HRESULT  SetMetadata([in] IResultMetadata *data);
 };
 
+[
+	object,
+	uuid(6EBF68E3-4686-40C8-9F63-3ABC3504923A),
+	dual,
+	helpstring("IAdaptiveMethodAction Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+interface IAdaptiveMethodAction : IAction {
+};
+
+[
+	object,
+	uuid(554362EE-42C4-48EB-B5C3-8C10273D73B5),
+	dual,
+	pointer_default(unique)
+] 
+#line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+interface IAdaptiveMethodParameters : IComputationParameters {
+#line 27 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+#line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	[id(11)] HRESULT  GetPrecision([out,retval] double *prec);
+};
+
 
 [ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}"), helpstring("MorseKernel2 1.0 Type Library") ]
 library MorseKernel2
@@ -840,6 +865,18 @@ library MorseKernel2
 		interface IResult;
 		interface IResultBase;
 		interface IWritableSpectrumResult;
+	};
+
+	[
+		version(1.0),
+		uuid(92548416-C178-460D-A026-3EADF256E19F),
+		helpstring("AdaptiveMethodAction Class")
+	] 
+#line 44 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	coclass CAdaptiveMethodAction {
+		interface IAdaptiveMethodAction;
+		interface IAction;
+		interface IActionBase;
 	};
 
 }

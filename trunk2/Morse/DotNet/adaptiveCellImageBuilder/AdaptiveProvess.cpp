@@ -2,7 +2,7 @@
 #include ".\adaptiveprovess.h"
 #include "..\graph\graphUtil.h"
 
-AdaptiveProvess::AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* division, ProgressBarInfo* info)
+AdaptiveProvess::AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* division, double precision, ProgressBarInfo* info)
 : AbstractProcess(info), rootGraph(graph), function(function)
 {
     this->dimension = graph->getDimention();
@@ -12,7 +12,7 @@ AdaptiveProvess::AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* 
     this->b = new JInt[dimension+1];
     for (int i=0; i<dimension; i++) this->division[i] = division[i];
 
-    processor = new PointGraphProcessor(this->resultGraph, function, dimension);
+    processor = new PointGraphProcessor(this->resultGraph, function, dimension, precision);
 }
 
 AdaptiveProvess::~AdaptiveProvess(void)

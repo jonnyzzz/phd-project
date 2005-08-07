@@ -154,6 +154,9 @@
 	</Configurations>
 	<References>
 		<ProjectReference
+			ReferencedProjectIdentifier="{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}"
+			Name="adaptiveCellImageBuilder"/>
+		<ProjectReference
 			ReferencedProjectIdentifier="{A42EF8BC-57CF-4D5A-A423-9B03C034210A}"
 			Name="calculator"/>
 		<ProjectReference
@@ -182,6 +185,9 @@
 			</File>
 			<File
 				RelativePath=".\ActionBase.cpp">
+			</File>
+			<File
+				RelativePath=".\AdaptiveMethodAction.cpp">
 			</File>
 			<File
 				RelativePath=".\BoxMethodAction.cpp">
@@ -343,6 +349,9 @@
 			</File>
 			<File
 				RelativePath=".\ActionBaseImpl.h">
+			</File>
+			<File
+				RelativePath=".\AdaptiveMethodAction.h">
 			</File>
 			<File
 				RelativePath=".\BoxMethodAction.h">

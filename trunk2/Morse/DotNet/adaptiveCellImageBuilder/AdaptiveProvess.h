@@ -7,7 +7,7 @@ class AdaptiveProvess :
 	public AbstractProcess
 {
 public:
-    AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* division, ProgressBarInfo* info);
+    AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* division, double precision, ProgressBarInfo* info);
 	virtual ~AdaptiveProvess(void);
 
 public:
