@@ -108,3 +108,37 @@ STDMETHODIMP CAdaptiveMethodAction::Do(IResultSet* in, IResultSet **out) {
 
     return S_OK;
 }
+
+
+STDMETHODIMP CAdaptiveMethodAction::GetRecomendedPrecision(IResultSet* in, double* prec) {
+    VARIANT_BOOL test;
+	CanDo(in, &test);
+
+	if (test = VARIANT_FALSE) return E_INVALIDARG;
+
+	GraphResultGraphIterator it(in);
+
+    Graph* graph = it;
+    double d = graph->getEps()[0];
+    for (int i=1; i<graph->getDimention(); i++) {
+        if (d < graph->getEps()[i]) {
+            d = graph->getEps()[i];
+        }
+    }
+
+    *prec = d/3;
+
+    return S_OK;
+}
+
+STDMETHODIMP CAdaptiveMethodAction::GetDimension(IResultSet* in, int* dim) {
+    VARIANT_BOOL test;
+	CanDo(in, &test);
+
+	if (test = VARIANT_FALSE) return E_INVALIDARG;
+
+	GraphResultGraphIterator it(in);
+	*dim = it->getDimention();
+
+	return S_OK;
+}

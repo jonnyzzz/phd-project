@@ -138,29 +138,31 @@ interface IComputationParameters : IParameters {
 
 [
 	object,
-	uuid(586FAD2F-D9E4-4A30-A925-345C7E1BDC56),
+	uuid(6EBF68E3-4686-40C8-9F63-3ABC3504923A),
 	dual,
-	helpstring("IBoxMethodAction Interface"),
+	helpstring("IAdaptiveMethodAction Interface"),
 	pointer_default(unique)
 ] 
-#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
-interface IBoxMethodAction : IAction {
-#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
-	[id(110)] HRESULT  GetDimensionForParameters([in] IResultSet *resultSet, [out,retval] int *dimension);
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+interface IAdaptiveMethodAction : IAction {
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	[id(110)] HRESULT  GetRecomendedPrecision([in] IResultSet *in, [out,retval] double *prec);
+#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	[id(111)] HRESULT  GetDimension([in] IResultSet *in, [out,retval] int *dim);
 };
 
 [
 	object,
-	uuid(EF3F28E7-DA5A-4294-9C12-656D0B7CB74A),
+	uuid(554362EE-42C4-48EB-B5C3-8C10273D73B5),
 	dual,
 	pointer_default(unique)
 ] 
-#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
-interface IBoxMethodParameters : IComputationParameters {
-#line 30 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+#line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+interface IAdaptiveMethodParameters : IComputationParameters {
+#line 31 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
 	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
-#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
-	[id(11)] HRESULT  UseDerivate([out,retval] VARIANT_BOOL *out);
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	[id(11)] HRESULT  GetPrecision([out,retval] double *prec);
 };
 
 [
@@ -286,6 +288,33 @@ interface IGraphResultImpl : IDispatch {
 ] 
 #line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\symbolicimagemetadata.h"
 interface ISymbolicImageMetadata : IResultMetadata {
+};
+
+[
+	object,
+	uuid(586FAD2F-D9E4-4A30-A925-345C7E1BDC56),
+	dual,
+	helpstring("IBoxMethodAction Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+interface IBoxMethodAction : IAction {
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+	[id(110)] HRESULT  GetDimensionForParameters([in] IResultSet *resultSet, [out,retval] int *dimension);
+};
+
+[
+	object,
+	uuid(EF3F28E7-DA5A-4294-9C12-656D0B7CB74A),
+	dual,
+	pointer_default(unique)
+] 
+#line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+interface IBoxMethodParameters : IComputationParameters {
+#line 30 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+	[id(11)] HRESULT  UseDerivate([out,retval] VARIANT_BOOL *out);
 };
 
 [
@@ -496,6 +525,17 @@ interface IDummy2 : IDispatch {
 
 [
 	object,
+	uuid(506F850B-7CBA-4A7F-A16D-25B3D104F7BE),
+	dual,
+	helpstring("IDummy3 Interface"),
+	pointer_default(unique)
+] 
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy3.h"
+interface IDummy3 : IDispatch {
+};
+
+[
+	object,
 	uuid(9B3DA2D8-E279-4552-99F4-13AA066642D5),
 	dual,
 	helpstring("IWritableFunction Interface"),
@@ -603,31 +643,6 @@ interface IWritableSpectrumResult : IDispatch {
 	[id(24)] HRESULT  SetMetadata([in] IResultMetadata *data);
 };
 
-[
-	object,
-	uuid(6EBF68E3-4686-40C8-9F63-3ABC3504923A),
-	dual,
-	helpstring("IAdaptiveMethodAction Interface"),
-	pointer_default(unique)
-] 
-#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
-interface IAdaptiveMethodAction : IAction {
-};
-
-[
-	object,
-	uuid(554362EE-42C4-48EB-B5C3-8C10273D73B5),
-	dual,
-	pointer_default(unique)
-] 
-#line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
-interface IAdaptiveMethodParameters : IComputationParameters {
-#line 27 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
-	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
-#line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
-	[id(11)] HRESULT  GetPrecision([out,retval] double *prec);
-};
-
 
 [ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}"), helpstring("MorseKernel2 1.0 Type Library") ]
 library MorseKernel2
@@ -637,12 +652,12 @@ library MorseKernel2
 
 	[
 		version(1.0),
-		uuid(FDA0C930-C1F5-40C0-A0B6-A978CDA93F50),
-		helpstring("BoxMethodAction Class")
+		uuid(92548416-C178-460D-A026-3EADF256E19F),
+		helpstring("AdaptiveMethodAction Class")
 	] 
-#line 47 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
-	coclass CBoxMethodAction {
-		interface IBoxMethodAction;
+#line 48 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	coclass CAdaptiveMethodAction {
+		interface IAdaptiveMethodAction;
 		interface IAction;
 		interface IActionBase;
 	};
@@ -670,6 +685,18 @@ library MorseKernel2
 	coclass CSymbolicImageMetadata {
 		interface ISymbolicImageMetadata;
 		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
+		uuid(FDA0C930-C1F5-40C0-A0B6-A978CDA93F50),
+		helpstring("BoxMethodAction Class")
+	] 
+#line 47 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+	coclass CBoxMethodAction {
+		interface IBoxMethodAction;
+		interface IAction;
+		interface IActionBase;
 	};
 
 	[
@@ -808,6 +835,21 @@ library MorseKernel2
 	};
 
 	[
+		version(1.0),
+		uuid(8E730EE1-B837-42E1-BB4E-3D5F9954FEA1),
+		helpstring("Dummy3 Class")
+	] 
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy3.h"
+	coclass CDummy3 {
+		interface IDummy3;
+		interface IAdaptiveMethodParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IComputationParameters;
+		interface IParameters;
+	};
+
+	[
 		version(1.1),
 		uuid(FDFB8D0E-74FF-439C-A13B-4A39387B7037),
 		helpstring("FunctionImpl Class")
@@ -865,18 +907,6 @@ library MorseKernel2
 		interface IResult;
 		interface IResultBase;
 		interface IWritableSpectrumResult;
-	};
-
-	[
-		version(1.0),
-		uuid(92548416-C178-460D-A026-3EADF256E19F),
-		helpstring("AdaptiveMethodAction Class")
-	] 
-#line 44 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
-	coclass CAdaptiveMethodAction {
-		interface IAdaptiveMethodAction;
-		interface IAction;
-		interface IActionBase;
 	};
 
 }

@@ -208,6 +208,9 @@
 				RelativePath=".\Dummy2.cpp">
 			</File>
 			<File
+				RelativePath=".\Dummy3.cpp">
+			</File>
+			<File
 				RelativePath=".\Function.cpp">
 			</File>
 			<File
@@ -370,6 +373,9 @@
 			</File>
 			<File
 				RelativePath=".\Dummy2.h">
+			</File>
+			<File
+				RelativePath=".\Dummy3.h">
 			</File>
 			<File
 				RelativePath=".\Function.h">

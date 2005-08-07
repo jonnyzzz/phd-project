@@ -132,6 +132,26 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\AdaptiveMethod\AdaptiveMethodAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\AdaptiveMethod\AdaptiveMethodParameretsImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\AdaptiveMethod\AdaptiveMethodParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\AdaptiveMethod\AdaptiveMethodParameters.resx"
+                    DependentUpon = "AdaptiveMethodParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "src\actionImpl\BoxMethod\BoxMethodAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

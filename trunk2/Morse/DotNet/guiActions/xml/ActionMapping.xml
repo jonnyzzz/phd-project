@@ -16,6 +16,13 @@
 			</nextActions>
 		</action>
 		
+		<action name="IAdaptiveMethodAction" isLeaf="false">		
+			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+			<nextActions>		
+				<actionReference name="ITarjanAction" isLeaf="true"/>
+			</nextActions>
+		</action>
+		
 		<action name="GnuPlotVisualizationKernelAction" isLeaf="true">
 			<constraint class="GnuPlotConstraintFactory" />
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
@@ -50,6 +57,8 @@
 		<action name="IIsolatedSetAction" caption="Isolating set localization" />
 		<action name="SavePointsKernelAction" caption="Export to file" />
 		<action name="ISIRomAction" caption="?----SIROM----?" />
+		<action name="IAdaptiveMethodAction" caption="Adaptive Method" />
+		
     </names>
 
 	<assemblies>	

@@ -14,6 +14,10 @@
 ]
 __interface IAdaptiveMethodAction : IAction
 {
+    [id(110)]
+    HRESULT GetRecomendedPrecision([in] IResultSet* in,  [out, retval] double* prec);
+    [id(111)]
+    HRESULT GetDimension([in] IResultSet* in, [out, retval] int* dim);
 };
 
 [
@@ -58,6 +62,11 @@ public:
 	STDMETHOD(SetProgressBarInfo)(IProgressBarInfo* info);
 	STDMETHOD(CanDo)(IResultSet* in, VARIANT_BOOL* out);
 	STDMETHOD(Do)(IResultSet* in, IResultSet** out);
+
+public:
+    STDMETHOD(GetRecomendedPrecision)(IResultSet* in, double* prec);
+    STDMETHOD(GetDimension)(IResultSet* in, int* dim);
+
 
 private:
     IProgressBarInfo* info;
