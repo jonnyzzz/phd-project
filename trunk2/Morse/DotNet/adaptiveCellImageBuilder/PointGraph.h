@@ -3,7 +3,7 @@
 #include <list>
 using namespace std;
 #include "../SystemFunction/ISystemFunction.h"
-#include "../graph/MemoryManager.h"
+#include "../graph/ExtendedMenoryManager.h"
 
 class PointGraph
 {
@@ -25,7 +25,9 @@ public:
         bool checked;      
     };
 
-    class PointGraph::Node {
+    class PointGraph::Node : public ExtendedMemoryManager::DisposeHandler {
+    public:
+        virtual ~Node() {};
     public:
         double* points;
         double* valueCache;
@@ -60,9 +62,10 @@ public:
 private:
     ISystemFunction* function;
     int dimension;
-    MemoryManager manager;
+    ExtendedMemoryManager manager;
 
     NodeList nodes;
+    EdgeList edges;
 
     int edge_counter;
     int cheched_counter;
@@ -83,5 +86,9 @@ private:
 
     Edge* AddEdge(Node* newNode, Edge* edge, Node* from);
 
+
+public:
+
+    void Dump(ostream& o);
     
 };

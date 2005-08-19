@@ -1,6 +1,15 @@
 #include "StdAfx.h"
 #include ".\pointgraph.h"
 
+#include <iostream>
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 
 PointGraph::PointGraph(ISystemFunction* function, int dimension):
 function(function), dimension(dimension), 
@@ -20,6 +29,8 @@ PointGraph::~PointGraph(void)
 void PointGraph::Reset() {
     manager.Reset();
     nodes.clear();
+    edges.clear();
+
     edge_counter = 0;
     cheched_counter = 0;
 }
@@ -29,7 +40,7 @@ PointGraph::Edge* PointGraph::createEdge() {
 }
 
 PointGraph::Node* PointGraph::createNode() {
-    return manager.Allocate<Node>();
+    return manager.AllocateDisposable<Node>();
 }
 
 void inline PointGraph::arraycopy(double* to, const double* from) {
@@ -56,6 +67,10 @@ PointGraph::Edge* PointGraph::AddEdge(PointGraph::Node* left, PointGraph::Node* 
     right->edges.push_back(edge);
     
     edge_counter++;
+
+    edges.push_back(edge);
+
+    cout<<"\nAdded edge "<<edge->left->points[0]<<"->"<<edge->right->points[0]<<"";
 
     return edge;
 }
@@ -116,23 +131,28 @@ PointGraph::Node* PointGraph::split(PointGraph::Edge* edge) {
 
     left->edges.remove(edge);
     right->edges.remove(edge);
+    edges.remove(edge);
 
     Node* myNode = AddNodeInternal(myDouble);
 
-    AddEdge(myNode, right);
-    AddEdge(left, myNode);
-
+    /*
     for (EdgeList::iterator it = left->edges.begin(); it != left->edges.end(); ++it) {
         AddEdge(myNode, *it, left);
     }
     for (EdgeList::iterator it = right->edges.begin(); it != right->edges.end(); ++it) {
         AddEdge(myNode, *it, right);
     }
+    */
+
+    AddEdge(myNode, right);
+    AddEdge(left, myNode);
 
     return myNode;
 }
 
 PointGraph::Edge* PointGraph::AddEdge(PointGraph::Node* newNode, PointGraph::Edge* edge, PointGraph::Node* from) {
+    //if (edge->left == newNode || edge->right == newNode) return NULL;
+
     if (edge->left == from) {
         return AddEdge(newNode, edge->right);
     } else {
@@ -152,25 +172,58 @@ PointGraph::Node*  PointGraph::AddNodeWithAllEdges(const double* node) {
 }
 
 
-void PointGraph::Iterate(double precision) {    
-    for (NodeList::iterator it = nodes.begin(); it != nodes.end(); ++it) {
-        EdgeList::iterator iit = (*it)->edges.begin();
-        while (iit != (*it)->edges.end()) {
-            Edge* edge = *iit++;
+void PointGraph::Iterate(double precision) {
 
-            if (edge->checked) continue;
+    while (!edges.empty()) {
+        Edge* edge = edges.front();
+        edges.pop_front();
 
-            double dist = evaluateEdgeLength(edge);
-            if (dist > precision) {
-                split(edge);
-            } else {
-                edge->checked = true;
-                this->cheched_counter++;
-            }
+        cout<<"Processing edge "<<edge->left->points[0]<<"->"<<edge->right->points[0]<<" :";
+        
+        if (edge->checked) continue;
+
+        double dist = evaluateEdgeLength(edge);
+        if (dist >= precision) {
+            cout<<"split";
+            split(edge);
+        } else {
+            cout<<"OK";
+            edge->checked = true;
+            this->cheched_counter++;
         }
+
+        cout<<"\n";
     }
 }
 
 const PointGraph::NodeList& PointGraph::Points() {
     return nodes;
 }
+
+
+void PointGraph::Dump(ostream& o) {
+    o<<"\n\nDumping Point Graph\nNodes = "<<nodes.size()<<"\n";
+
+    int cnt = 0;
+    for (NodeList::iterator it = nodes.begin(); it != nodes.end(); ++it) {
+        cnt++;
+        cout<<"Node["<<cnt<<"]->Edges="<<(*it)->edges.size()<<"\n";
+    }
+    cout<<"\n\n";
+
+    for (NodeList::iterator it = nodes.begin(); it != nodes.end(); ++it) {
+        cout<<"Node "<<(*it)->points[0]<<" -> ";
+        for (EdgeList::iterator itt = (*it)->edges.begin(); itt != (*it)->edges.end(); itt++) {
+            Node* tmp;
+            if ((*itt)->left == *it) {
+                tmp = (*itt)->right;
+            } else {
+                tmp = (*itt)->left;
+            }
+
+            cout<<"Node["<<tmp->points[0]<<"], ";
+        }
+        cout<<"\n";
+    }
+    cout<<"\n";
+}      

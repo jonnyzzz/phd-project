@@ -1,6 +1,13 @@
 #include "StdAfx.h"
 #include ".\memorymanager.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 MemoryManager::MemoryManager(int buffer_length) : buffer_length(buffer_length)
 {
 
@@ -9,10 +16,10 @@ MemoryManager::MemoryManager(int buffer_length) : buffer_length(buffer_length)
 MemoryManager::~MemoryManager(void)
 {
 	for (BuffersList::iterator it = buffers.begin(); it != buffers.end(); it++) {
-		delete it->data;
+		delete[] it->data;
 	}
     for (BuffersList::iterator it = reusable.begin(); it != reusable.end(); it++) {
-		delete it->data;
+		delete[] it->data;
 	}
 }
 
@@ -40,12 +47,16 @@ MemoryManager::Buffer& MemoryManager::PushNewBuffer() {
 }
 
 MemoryManager::Buffer& MemoryManager::CurrentBuffer(size_t size) {
-    Buffer& myBuffer = buffers.front();
+    if (buffers.size() > 0 ) {
+        Buffer& myBuffer = buffers.front();
 
-    if (myBuffer.it + size >= myBuffer.end) {
-        myBuffer = PushNewBuffer();
-    }
-    return myBuffer;
+        if (myBuffer.it + size >= myBuffer.end) {
+            myBuffer = PushNewBuffer();
+        }
+        return myBuffer;
+    } else {
+        return PushNewBuffer();
+    }        
 }
 
 void* MemoryManager::Allocate_void(size_t size) {
@@ -57,8 +68,7 @@ void* MemoryManager::Allocate_void(size_t size) {
 }
 
 
-void MemoryManager::Reset() {
-    reusable.clear();
+void MemoryManager::Reset() {    
     reusable.splice(reusable.begin(), buffers);
     buffers.clear();
 }

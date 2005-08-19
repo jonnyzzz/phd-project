@@ -2,6 +2,13 @@
 #include ".\adaptiveprovess.h"
 #include "..\graph\graphUtil.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 AdaptiveProvess::AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* division, double precision, ProgressBarInfo* info)
 : AbstractProcess(info), rootGraph(graph), function(function)
 {
@@ -10,14 +17,16 @@ AdaptiveProvess::AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* 
     this->division = new int[dimension];
     this->x = new JInt[dimension];
     this->b = new JInt[dimension+1];
-    for (int i=0; i<dimension; i++) this->division[i] = division[i];
 
+    for (int i=0; i<dimension; i++) this->division[i] = division[i];
     processor = new PointGraphProcessor(this->resultGraph, function, dimension, precision);
 }
 
 AdaptiveProvess::~AdaptiveProvess(void)
 {
     delete[] division;
+    delete[] x;
+    delete[] b;
     delete processor;
 }
 
@@ -60,6 +69,6 @@ void AdaptiveProvess::processNode(Graph* graph, Node* node) {
     }
 }
 
-void AdaptiveProvess::processResultNode(Node* node) {
+void AdaptiveProvess::processResultNode(Node* node) {    
     processor->ProcessNode(node);
 }

@@ -4,7 +4,7 @@
 using namespace std;
 
 #ifndef ATLASSERT
-#define ATLASSERT(x)
+#define ATLASSERT(x) { int*p = NULL; *p=10; }
 #endif
 
 class MemoryManager
@@ -46,17 +46,20 @@ private:
 public:
     void* Allocate_void(size_t size);
 
-    //Default constructor will be called. No destructor will be called
+    //constructor will be called. 
+    //!!!! -> No destructor will be called <- !!!!
     template <class C> 
     C* Allocate() {
         return new(Allocate_void(sizeof(C))) C;
+        //return (C*)Allocate_void(sizeof(C));
     }
 
     template <class C>
     C* AllocateArray(int length) {
-        return new(Allocate_void(sizeof(void*)*length)) C[length];
+        return new(Allocate_void(sizeof(C)*length)) C[length];
+        //return (C*)(Allocate_void(sizeof(C)*length));
     }
 
     //Reuse allocated memory. No destructors called for created objects
-    void Reset();
+    void virtual Reset();
 };

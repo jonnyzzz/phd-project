@@ -13,6 +13,7 @@
 #include "../cellImageBuilders/TarjanProcess.h"
 #include "MinimalLoopTest.h"
 #include "IsolatingProcessTest.h"
+#include "PointGraphTest.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -27,7 +28,10 @@ void runTests();
 int _tmain(int argc, _TCHAR* argv[]) {
     //testRomFromFile("o:\\aaaa");
 
-	runTests();
+
+    PointGraphTest("PointGraphTest", cout).Test();
+
+	//runTests();
 
 
 	/*

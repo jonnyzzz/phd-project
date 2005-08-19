@@ -156,6 +156,9 @@
 				RelativePath=".\CoordinateSystem.cpp">
 			</File>
 			<File
+				RelativePath=".\ExtendedMenoryManager.cpp">
+			</File>
+			<File
 				RelativePath=".\FileStream.cpp">
 			</File>
 			<File
@@ -225,6 +228,9 @@
 			</File>
 			<File
 				RelativePath=".\CoordinateSystem.h">
+			</File>
+			<File
+				RelativePath=".\ExtendedMenoryManager.h">
 			</File>
 			<File
 				RelativePath=".\FileStream.h">

@@ -1,6 +1,13 @@
 #include "StdAfx.h"
 #include ".\pointgraphprocessor.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 PointGraphProcessor::PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double precision)
 : graph(graph), dimension(dimension), pointGraph(function, dimension), precision(precision)
 {
@@ -31,7 +38,7 @@ void PointGraphProcessor::ProcessNode(Node* node) {
     while (b[dimension] == 0) {
 
         for (int i=0; i<dimension; i++) {
-            x[i] = graph->toExternal(graph->getCells(node)[i],i) + graph->getEps()[i]*b[i];
+            x[i] = graph->toExternal(graph->getCells(node)[i],i) + (b[i] == 1?graph->getEps()[i]:0);
         }
 
         pointGraph.AddNodeWithAllEdges(x);

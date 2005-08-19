@@ -4,6 +4,8 @@
 #define RUN(x) {Message("start: "#x); {x();} Message("success: "#x);};
 #define RUNEX(x) {Message("start: "#x); {x;} Message("success: "#x);};
 
+#define ASSERTTRUE(x) { this->AssertTrue((x), #x, __LINE__); };
+
 class TestBase
 {
 public:

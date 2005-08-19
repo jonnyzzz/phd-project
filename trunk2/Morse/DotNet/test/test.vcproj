@@ -21,6 +21,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -165,6 +166,9 @@
 	</Configurations>
 	<References>
 		<ProjectReference
+			ReferencedProjectIdentifier="{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}"
+			Name="adaptiveCellImageBuilder"/>
+		<ProjectReference
 			ReferencedProjectIdentifier="{A42EF8BC-57CF-4D5A-A423-9B03C034210A}"
 			Name="calculator"/>
 		<ProjectReference
@@ -205,6 +209,9 @@
 			</File>
 			<File
 				RelativePath=".\Pefomance.cpp">
+			</File>
+			<File
+				RelativePath=".\PointGraphTest.cpp">
 			</File>
 			<File
 				RelativePath=".\SimpleGraphApi.cpp">
@@ -264,6 +271,9 @@
 			</File>
 			<File
 				RelativePath=".\Pefomance.h">
+			</File>
+			<File
+				RelativePath=".\PointGraphTest.h">
 			</File>
 			<File
 				RelativePath=".\SimpleGraphApi.h">

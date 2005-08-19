@@ -86,6 +86,7 @@ STDMETHODIMP CAdaptiveMethodAction::Do(IResultSet* in, IResultSet **out) {
 	ATLASSERT(SUCCEEDED(hr));
 
 	cout<<"Dimension = "<<dimension<<"\n";
+    cout<<"Precision = "<<precision<<"\n";
 
 	int* factor = new int[dimension];
 	for (int i=0; i<dimension; i++) {

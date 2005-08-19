@@ -13,6 +13,8 @@ namespace guiControls.TreeControl
 		public abstract string NodeCaption { get; }
 		
 		protected abstract MenuItem[] GetMenuItems();
+
+        private MenuItem[] cachedMenuItems = null;
         
 		public MenuItem[] ContextMenuItems { 
 			get
@@ -22,7 +24,11 @@ namespace guiControls.TreeControl
 					return MergeWithDelimiter(GetMenuItems(), new DeselectMenuItem(this));
 				} else
 				{
-					return GetMenuItems();
+                    if (cachedMenuItems == null)
+                    {
+                        cachedMenuItems = GetMenuItems();
+                    }
+					return cachedMenuItems;
 				}
 			} 
 		}
