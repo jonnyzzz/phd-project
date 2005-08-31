@@ -75,7 +75,8 @@ namespace gui2.Runner
 			computationForm = null;
 			core.Dispose();
 			core = null;
-			document.Dispose();
+            if (document != null)
+			    document.Dispose();
 			document = null;
 		}
 

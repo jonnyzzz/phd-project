@@ -6,7 +6,7 @@ namespace guiKernel2.ActionFactory
 	/// Summary description for ActionWrapperAttribute.
 	/// </summary>
 	/// 
-	[AttributeUsage(AttributeTargets.Class)]
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 	public class ActionMappingAttribute : Attribute
 	{
 		private Type actionInterface;

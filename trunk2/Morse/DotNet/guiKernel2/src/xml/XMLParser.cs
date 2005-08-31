@@ -161,7 +161,7 @@ namespace guiKernel2.xml
 			foreach (XmlNode node in list)
 			{
 				XmlAttributeCollection attributes = node.Attributes;
-
+                
 				IConstraint constraint = ParseConstraint(node);
 				ActionRef actionInfo = new ActionRef(attributes["name"].Value, constraint, bool.Parse(attributes["isLeaf"].Value));
 				XmlNodeList refNodeList = node.SelectNodes("nextActions");
@@ -174,7 +174,13 @@ namespace guiKernel2.xml
 				
 				Logger.Logger.LogMessage("Built Tree :\n {0}\nEnd", actionInfo.DumpTree());
 
-				Core.Instance.NextActionFactory.RegisterAction(actionInfo);
+                if (attributes["internal"] == null || (attributes["internal"].Value == "true" && Core.Instance.IsInternal))                
+                {
+                    Core.Instance.NextActionFactory.RegisterAction(actionInfo);                    
+                } else
+                {
+                    Logger.Logger.LogMessage("Internal Action. Skiped");
+                }				
 			}
 		}
 
