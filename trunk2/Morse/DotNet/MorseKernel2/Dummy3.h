@@ -4,6 +4,7 @@
 #include "resource.h"       // main symbols
 #include "AdaptiveMethodAction.h"
 #include "ComputationParameters.h"
+#include "MS2DCreationAction.h"
 
 
 // IDummy3
@@ -33,7 +34,8 @@ __interface IDummy3 : IDispatch
 class ATL_NO_VTABLE CDummy3 : 
     public IDummy3,
     public IAdaptiveMethodParameters,
-    public IComputationParameters
+    public IComputationParameters,
+    public IMS2DCreationParameters
 {
 public:
     CDummy3()
@@ -71,6 +73,14 @@ public:
     // IComputationParameters Methods
 public:
     STDMETHOD(GetFunction)(IFunction ** function)
+    {
+        // Add your function implementation here.
+        return E_NOTIMPL;
+    }
+
+    // IMS2DCreationParameters Methods
+public:
+    STDMETHOD(GetFactor)(int * factor)
     {
         // Add your function implementation here.
         return E_NOTIMPL;

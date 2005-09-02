@@ -30,7 +30,7 @@ double CRomFunction2N::cost(Node* node) {
     }
     function->evaluate();
     
-    cout<<"Conted value = "<<*output<<"\n";
+    //cout<<"Conted value = "<<*output<<"\n";
 
     return *output * factor;
 }

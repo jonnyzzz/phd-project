@@ -253,6 +253,15 @@
 				RelativePath=".\MorseKernel2.cpp">
 			</File>
 			<File
+				RelativePath=".\MS2DCreationAction.cpp">
+			</File>
+			<File
+				RelativePath=".\MS2DProcessAction.cpp">
+			</File>
+			<File
+				RelativePath=".\MS2Metadata.cpp">
+			</File>
+			<File
 				RelativePath=".\Parameters.cpp">
 			</File>
 			<File
@@ -415,6 +424,15 @@
 			</File>
 			<File
 				RelativePath=".\MinimalLoopLocalizationAction.h">
+			</File>
+			<File
+				RelativePath=".\MS2DCreationAction.h">
+			</File>
+			<File
+				RelativePath=".\MS2DProcessAction.h">
+			</File>
+			<File
+				RelativePath=".\MS2Metadata.h">
 			</File>
 			<File
 				RelativePath=".\Parameters.h">

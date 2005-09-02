@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Wed Aug 31 11:24:52 2005
+/* at Sat Sep 03 00:23:02 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -44,7 +44,7 @@
 #include "_MorseKernel2.h"
 
 #define TYPE_FORMAT_STRING_SIZE   1361                              
-#define PROC_FORMAT_STRING_SIZE   2155                              
+#define PROC_FORMAT_STRING_SIZE   2227                              
 #define TRANSMIT_AS_TABLE_SIZE    0            
 #define WIRE_MARSHAL_TABLE_SIZE   2            
 
@@ -324,6 +324,20 @@ extern const MIDL_STUBLESS_PROXY_INFO IDummy2_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
+extern const MIDL_SERVER_INFO IMS2DCreationAction_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMS2DCreationAction_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IMS2DCreationParameters_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMS2DCreationParameters_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
 extern const MIDL_SERVER_INFO IDummy3_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IDummy3_ProxyInfo;
 
@@ -373,8 +387,29 @@ extern const MIDL_STUBLESS_PROXY_INFO IKernellImpl_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
+extern const MIDL_SERVER_INFO IMS2Metadata_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMS2Metadata_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
 extern const MIDL_SERVER_INFO IWritableSpectrumResult_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IMS2DProcessAction_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMS2DProcessAction_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IMS2DProcessParameters_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMS2DProcessParameters_ProxyInfo;
 
 
 extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TABLE_SIZE ];
@@ -395,6 +430,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
     {
         0,
         {
+
+	/* Procedure GetFactor */
+
 
 	/* Procedure GetNodes */
 
@@ -419,6 +457,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 20 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 22 */	NdrFcShort( 0x0 ),	/* 0 */
 
+	/* Parameter factor */
+
+
 	/* Parameter value */
 
 
@@ -431,6 +472,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 26 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 28 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
+
+	/* Return value */
+
 
 	/* Return value */
 
@@ -1263,6 +1307,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 904 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
+	/* Procedure GetFactor */
+
+
 	/* Procedure GetEdges */
 
 /* 906 */	0x33,		/* FC_AUTO_HANDLE */
@@ -1280,12 +1327,18 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 926 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 928 */	NdrFcShort( 0x0 ),	/* 0 */
 
+	/* Parameter factor */
+
+
 	/* Parameter value */
 
 /* 930 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
 /* 932 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 934 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
+
+	/* Return value */
+
 
 	/* Return value */
 
@@ -2233,16 +2286,16 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1972 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetLowerBound */
+	/* Procedure GetSIGraphResult */
 
 /* 1974 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 1976 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1980 */	NdrFcShort( 0x7 ),	/* 7 */
-/* 1982 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 1984 */	NdrFcShort( 0x10 ),	/* 16 */
+/* 1980 */	NdrFcShort( 0x9 ),	/* 9 */
+/* 1982 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 1984 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 1986 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 1988 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+/* 1988 */	0x45,		/* Oi2 Flags:  srv must size, has return, has ext, */
 			0x2,		/* 2 */
 /* 1990 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
@@ -2250,30 +2303,29 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1994 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 1996 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter data */
+	/* Parameter out */
 
-/* 1998 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 1998 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
 /* 2000 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2002 */	0xc,		/* FC_DOUBLE */
-			0x0,		/* 0 */
+/* 2002 */	NdrFcShort( 0x50e ),	/* Type Offset=1294 */
 
 	/* Return value */
 
 /* 2004 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2006 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2006 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 2008 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetUpperBound */
+	/* Procedure SetSIGraphResult */
 
 /* 2010 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2012 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2016 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2018 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 2020 */	NdrFcShort( 0x10 ),	/* 16 */
+/* 2016 */	NdrFcShort( 0xa ),	/* 10 */
+/* 2018 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2020 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2022 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2024 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+/* 2024 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
 			0x2,		/* 2 */
 /* 2026 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
@@ -2281,28 +2333,27 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2030 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2032 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter data */
+	/* Parameter in */
 
-/* 2034 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 2034 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
 /* 2036 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2038 */	0xc,		/* FC_DOUBLE */
-			0x0,		/* 0 */
+/* 2038 */	NdrFcShort( 0x512 ),	/* Type Offset=1298 */
 
 	/* Return value */
 
 /* 2040 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2042 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2042 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 2044 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetLowerLength */
+	/* Procedure SetLowerBound */
 
 /* 2046 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2048 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2052 */	NdrFcShort( 0x9 ),	/* 9 */
-/* 2054 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 2056 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2052 */	NdrFcShort( 0x7 ),	/* 7 */
+/* 2054 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 2056 */	NdrFcShort( 0x10 ),	/* 16 */
 /* 2058 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 2060 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
@@ -2316,24 +2367,24 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 /* 2070 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 2072 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2074 */	0x8,		/* FC_LONG */
+/* 2074 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
 
 	/* Return value */
 
 /* 2076 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2078 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2078 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2080 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetUpperLength */
+	/* Procedure SetUpperBound */
 
 /* 2082 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2084 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2088 */	NdrFcShort( 0xa ),	/* 10 */
-/* 2090 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 2092 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2088 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2090 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 2092 */	NdrFcShort( 0x10 ),	/* 16 */
 /* 2094 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 2096 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
@@ -2347,26 +2398,26 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 /* 2106 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 2108 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2110 */	0x8,		/* FC_LONG */
+/* 2110 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
 
 	/* Return value */
 
 /* 2112 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2114 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2114 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2116 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetMetadata */
+	/* Procedure SetLowerLength */
 
 /* 2118 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2120 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2124 */	NdrFcShort( 0xb ),	/* 11 */
+/* 2124 */	NdrFcShort( 0x9 ),	/* 9 */
 /* 2126 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 2128 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2128 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 2130 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2132 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+/* 2132 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
 /* 2134 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
@@ -2376,15 +2427,77 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter data */
 
-/* 2142 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
+/* 2142 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 2144 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2146 */	NdrFcShort( 0x53e ),	/* Type Offset=1342 */
+/* 2146 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
 
 	/* Return value */
 
 /* 2148 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
 /* 2150 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 2152 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure SetUpperLength */
+
+/* 2154 */	0x33,		/* FC_AUTO_HANDLE */
+			0x6c,		/* Old Flags:  object, Oi2 */
+/* 2156 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 2160 */	NdrFcShort( 0xa ),	/* 10 */
+/* 2162 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2164 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2166 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2168 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x2,		/* 2 */
+/* 2170 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 2172 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2174 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2176 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter data */
+
+/* 2178 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 2180 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 2182 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Return value */
+
+/* 2184 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 2186 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2188 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure SetMetadata */
+
+/* 2190 */	0x33,		/* FC_AUTO_HANDLE */
+			0x6c,		/* Old Flags:  object, Oi2 */
+/* 2192 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 2196 */	NdrFcShort( 0xb ),	/* 11 */
+/* 2198 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2200 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2202 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2204 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+			0x2,		/* 2 */
+/* 2206 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 2208 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2210 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2212 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter data */
+
+/* 2214 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
+/* 2216 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 2218 */	NdrFcShort( 0x53e ),	/* Type Offset=1342 */
+
+	/* Return value */
+
+/* 2220 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 2222 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2224 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 			0x0
@@ -6039,6 +6152,140 @@ CInterfaceStubVtbl _IDummy2StubVtbl =
 };
 
 
+/* Object interface: IMS2DCreationAction, ver. 0.0,
+   GUID={0xB56578FA,0x7E2F,0x4EDC,{0xA2,0xF0,0x1B,0x3F,0x91,0x28,0xF2,0x27}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMS2DCreationAction_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMS2DCreationAction_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DCreationAction_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMS2DCreationAction_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DCreationAction_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IMS2DCreationActionProxyVtbl = 
+{
+    0,
+    &IID_IMS2DCreationAction,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IMS2DCreationAction_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IMS2DCreationActionStubVtbl =
+{
+    &IID_IMS2DCreationAction,
+    &IMS2DCreationAction_ServerInfo,
+    7,
+    &IMS2DCreationAction_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IMS2DCreationParameters, ver. 0.0,
+   GUID={0x52E2BF5B,0x0E91,0x4588,{0x8B,0x56,0xD7,0xB4,0x9E,0xF8,0xDE,0x0B}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMS2DCreationParameters_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMS2DCreationParameters_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DCreationParameters_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMS2DCreationParameters_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DCreationParameters_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(8) _IMS2DCreationParametersProxyVtbl = 
+{
+    &IMS2DCreationParameters_ProxyInfo,
+    &IID_IMS2DCreationParameters,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    (void *) (INT_PTR) -1 /* IMS2DCreationParameters::GetFactor */
+};
+
+
+static const PRPC_STUB_FUNCTION IMS2DCreationParameters_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMS2DCreationParametersStubVtbl =
+{
+    &IID_IMS2DCreationParameters,
+    &IMS2DCreationParameters_ServerInfo,
+    8,
+    &IMS2DCreationParameters_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: IDummy3, ver. 0.0,
    GUID={0x506F850B,0x7CBA,0x4A7F,{0xA1,0x6D,0x25,0xB3,0xD1,0x04,0xF7,0xBE}} */
 
@@ -6520,6 +6767,83 @@ CInterfaceStubVtbl _IKernellImplStubVtbl =
 };
 
 
+/* Object interface: IMS2Metadata, ver. 0.0,
+   GUID={0x5E5AEEE1,0xA73F,0x43C7,{0x91,0xA6,0x35,0x24,0x91,0x71,0xD3,0xC4}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMS2Metadata_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    792,
+    834,
+    1974,
+    2010
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMS2Metadata_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMS2Metadata_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMS2Metadata_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMS2Metadata_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(11) _IMS2MetadataProxyVtbl = 
+{
+    &IMS2Metadata_ProxyInfo,
+    &IID_IMS2Metadata,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    (void *) (INT_PTR) -1 /* IResultMetadata::EqualType */ ,
+    (void *) (INT_PTR) -1 /* IResultMetadata::Clone */ ,
+    (void *) (INT_PTR) -1 /* IMS2Metadata::GetSIGraphResult */ ,
+    (void *) (INT_PTR) -1 /* IMS2Metadata::SetSIGraphResult */
+};
+
+
+static const PRPC_STUB_FUNCTION IMS2Metadata_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMS2MetadataStubVtbl =
+{
+    &IID_IMS2Metadata,
+    &IMS2Metadata_ServerInfo,
+    11,
+    &IMS2Metadata_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: IWritableSpectrumResult, ver. 0.0,
    GUID={0x80B6D423,0x1E6D,0x4236,{0xB1,0x87,0xFF,0xDE,0xC3,0xA2,0xA1,0x39}} */
 
@@ -6530,11 +6854,11 @@ static const unsigned short IWritableSpectrumResult_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    1974,
-    2010,
     2046,
     2082,
-    2118
+    2118,
+    2154,
+    2190
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo =
@@ -6599,6 +6923,155 @@ CInterfaceStubVtbl _IWritableSpectrumResultStubVtbl =
     CStdStubBuffer_DELEGATING_METHODS
 };
 
+
+/* Object interface: IMS2DProcessAction, ver. 0.0,
+   GUID={0xF8F384DC,0xFF2E,0x48B5,{0x9F,0xB3,0x95,0x8A,0x82,0x85,0x54,0xC5}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMS2DProcessAction_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    204,
+    240,
+    276,
+    318,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMS2DProcessAction_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DProcessAction_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMS2DProcessAction_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DProcessAction_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(11) _IMS2DProcessActionProxyVtbl = 
+{
+    0,
+    &IID_IMS2DProcessAction,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IAction::SetActionParameters */ ,
+    0 /* forced delegation IAction::SetProgressBarInfo */ ,
+    0 /* forced delegation IAction::CanDo */ ,
+    0 /* forced delegation IAction::Do */
+};
+
+
+static const PRPC_STUB_FUNCTION IMS2DProcessAction_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMS2DProcessActionStubVtbl =
+{
+    &IID_IMS2DProcessAction,
+    &IMS2DProcessAction_ServerInfo,
+    11,
+    &IMS2DProcessAction_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IMS2DProcessParameters, ver. 0.0,
+   GUID={0x9FAD2A0A,0x2208,0x4F26,{0xAB,0xF7,0x01,0xCE,0xFE,0x67,0xB7,0x38}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMS2DProcessParameters_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    594,
+    906
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMS2DProcessParameters_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DProcessParameters_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMS2DProcessParameters_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DProcessParameters_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(9) _IMS2DProcessParametersProxyVtbl = 
+{
+    &IMS2DProcessParameters_ProxyInfo,
+    &IID_IMS2DProcessParameters,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    (void *) (INT_PTR) -1 /* IComputationParameters::GetFunction */ ,
+    (void *) (INT_PTR) -1 /* IMS2DProcessParameters::GetFactor */
+};
+
+
+static const PRPC_STUB_FUNCTION IMS2DProcessParameters_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMS2DProcessParametersStubVtbl =
+{
+    &IID_IMS2DProcessParameters,
+    &IMS2DProcessParameters_ServerInfo,
+    9,
+    &IMS2DProcessParameters_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
 static const MIDL_STUB_DESC Object_StubDesc = 
     {
     0,
@@ -6626,6 +7099,7 @@ static const MIDL_STUB_DESC Object_StubDesc =
 const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] = 
 {
     ( CInterfaceProxyVtbl *) &_IMinimalLoopLocalizationParametersProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IMS2DProcessParametersProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IDummy3ProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IGraphInfoImplProxyVtbl,
     ( CInterfaceProxyVtbl *) &_ISpectrumMetadataProxyVtbl,
@@ -6639,6 +7113,7 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
     ( CInterfaceProxyVtbl *) &_IMinimalLoopLocalizationActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IDummyProxyVtbl,
     ( CInterfaceProxyVtbl *) &_ISymbolicImageMetadataProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IMS2DCreationParametersProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IGraphInfoProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IGraphResultProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IParametersProxyVtbl,
@@ -6656,7 +7131,9 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
     ( CInterfaceProxyVtbl *) &_IWritableKernellProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IWritableFunctionProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IMS2DProcessActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IActionBaseProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IMS2MetadataProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IProgressBarInfoProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IFunctionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IAdaptiveMethodActionProxyVtbl,
@@ -6667,6 +7144,7 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
     ( CInterfaceProxyVtbl *) &_IAdaptiveMethodParametersProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IPointMethodActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IResultBaseProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IMS2DCreationActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IComputationParametersProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IResultMetadataProxyVtbl,
     0
@@ -6675,6 +7153,7 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
 const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] = 
 {
     ( CInterfaceStubVtbl *) &_IMinimalLoopLocalizationParametersStubVtbl,
+    ( CInterfaceStubVtbl *) &_IMS2DProcessParametersStubVtbl,
     ( CInterfaceStubVtbl *) &_IDummy3StubVtbl,
     ( CInterfaceStubVtbl *) &_IGraphInfoImplStubVtbl,
     ( CInterfaceStubVtbl *) &_ISpectrumMetadataStubVtbl,
@@ -6688,6 +7167,7 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
     ( CInterfaceStubVtbl *) &_IMinimalLoopLocalizationActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IDummyStubVtbl,
     ( CInterfaceStubVtbl *) &_ISymbolicImageMetadataStubVtbl,
+    ( CInterfaceStubVtbl *) &_IMS2DCreationParametersStubVtbl,
     ( CInterfaceStubVtbl *) &_IGraphInfoStubVtbl,
     ( CInterfaceStubVtbl *) &_IGraphResultStubVtbl,
     ( CInterfaceStubVtbl *) &_IParametersStubVtbl,
@@ -6705,7 +7185,9 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
     ( CInterfaceStubVtbl *) &_IWritableKernellStubVtbl,
     ( CInterfaceStubVtbl *) &_IActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IWritableFunctionStubVtbl,
+    ( CInterfaceStubVtbl *) &_IMS2DProcessActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IActionBaseStubVtbl,
+    ( CInterfaceStubVtbl *) &_IMS2MetadataStubVtbl,
     ( CInterfaceStubVtbl *) &_IProgressBarInfoStubVtbl,
     ( CInterfaceStubVtbl *) &_IFunctionStubVtbl,
     ( CInterfaceStubVtbl *) &_IAdaptiveMethodActionStubVtbl,
@@ -6716,6 +7198,7 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
     ( CInterfaceStubVtbl *) &_IAdaptiveMethodParametersStubVtbl,
     ( CInterfaceStubVtbl *) &_IPointMethodActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IResultBaseStubVtbl,
+    ( CInterfaceStubVtbl *) &_IMS2DCreationActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IComputationParametersStubVtbl,
     ( CInterfaceStubVtbl *) &_IResultMetadataStubVtbl,
     0
@@ -6724,6 +7207,7 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
 PCInterfaceName const __MorseKernel2_InterfaceNamesList[] = 
 {
     "IMinimalLoopLocalizationParameters",
+    "IMS2DProcessParameters",
     "IDummy3",
     "IGraphInfoImpl",
     "ISpectrumMetadata",
@@ -6737,6 +7221,7 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
     "IMinimalLoopLocalizationAction",
     "IDummy",
     "ISymbolicImageMetadata",
+    "IMS2DCreationParameters",
     "IGraphInfo",
     "IGraphResult",
     "IParameters",
@@ -6754,7 +7239,9 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
     "IWritableKernell",
     "IAction",
     "IWritableFunction",
+    "IMS2DProcessAction",
     "IActionBase",
+    "IMS2Metadata",
     "IProgressBarInfo",
     "IFunction",
     "IAdaptiveMethodAction",
@@ -6765,6 +7252,7 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
     "IAdaptiveMethodParameters",
     "IPointMethodAction",
     "IResultBase",
+    "IMS2DCreationAction",
     "IComputationParameters",
     "IResultMetadata",
     0
@@ -6772,6 +7260,11 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
 
 const IID *  __MorseKernel2_BaseIIDList[] = 
 {
+    &IID_IDispatch,
+    &IID_IDispatch,
+    &IID_IDispatch,
+    &IID_IDispatch,
+    &IID_IDispatch,
     &IID_IDispatch,
     &IID_IDispatch,
     &IID_IDispatch,
@@ -6826,13 +7319,13 @@ int __stdcall __MorseKernel2_IID_Lookup( const IID * pIID, int * pIndex )
 {
     IID_BS_LOOKUP_SETUP
 
-    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 44, 32 )
+    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 49, 32 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 16 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 8 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 4 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 2 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 1 )
-    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 44, *pIndex )
+    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 49, *pIndex )
     
 }
 
@@ -6843,7 +7336,7 @@ const ExtendedProxyFileInfo _MorseKernel2_ProxyFileInfo =
     (const PCInterfaceName * ) & __MorseKernel2_InterfaceNamesList,
     (const IID ** ) & __MorseKernel2_BaseIIDList,
     & __MorseKernel2_IID_Lookup, 
-    44,
+    49,
     2,
     0, /* table of [async_uuid] interfaces */
     0, /* Filler1 */

@@ -23,6 +23,14 @@ public:
 	static void GetMetadata(IResultSet* resultSet, IResultMetadata** data);
 	static void GetMetadataCloned(IResultSet* resultSet, IResultMetadata** data);
 
+    template <class Metadata>
+    static void GetMetadataClonedEx(IResultSet* resultSet, Metadata** out) {
+        SmartInterface<IResultMetadata> data;
+        GetMetadataCloned(resultSet, data.extract());
+        data->QueryInterface(out);
+        ATLASSERT(*out != NULL);
+    }
+
 public:
 	static void PerformProcess(AbstractProcess* process, IResultSet* input, bool isStrongComponent, IResultMetadata* metadata, IResultSet** output);
 

@@ -119,6 +119,12 @@
 				RelativePath=".\ISystemFunctionDerivate.cpp">
 			</File>
 			<File
+				RelativePath=".\MS2DAngleFunction.cpp">
+			</File>
+			<File
+				RelativePath=".\MS2DAngleMorseFunction.cpp">
+			</File>
+			<File
 				RelativePath=".\SegmentProjectiveExtendedSystemFunction.cpp">
 			</File>
 			<File
@@ -164,6 +170,12 @@
 			</File>
 			<File
 				RelativePath=".\ISystemFunctionDerivate.h">
+			</File>
+			<File
+				RelativePath=".\MS2DAngleFunction.h">
+			</File>
+			<File
+				RelativePath=".\MS2DAngleMorseFunction.h">
 			</File>
 			<File
 				RelativePath=".\SegmentProjectiveExtendedSystemFunction.h">

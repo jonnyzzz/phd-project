@@ -168,6 +168,12 @@
 				RelativePath=".\GraphSet.h">
 			</File>
 			<File
+				RelativePath=".\MS2DBoxProcess.h">
+			</File>
+			<File
+				RelativePath=".\MS2DCreationProcess.h">
+			</File>
+			<File
 				RelativePath=".\MSCreationProcess.h">
 			</File>
 			<File
@@ -227,6 +233,12 @@
 			</File>
 			<File
 				RelativePath=".\GraphSet.cpp">
+			</File>
+			<File
+				RelativePath=".\MS2DBoxProcess.cpp">
+			</File>
+			<File
+				RelativePath=".\MS2DCreationProcess.cpp">
 			</File>
 			<File
 				RelativePath=".\MSCreationProcess.cpp">
