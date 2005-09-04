@@ -15,7 +15,7 @@ namespace guiActions.src.Constraints
 		{
 		}
 
-		public bool Mathes(ResultSet resultSet)
+		public bool Match(ResultSet resultSet)
 		{
 			return resultSet.ToResults.Length == 1 && resultSet.ToResults[0] is IGraphResult;
 		}

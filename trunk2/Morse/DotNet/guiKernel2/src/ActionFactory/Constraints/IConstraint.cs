@@ -8,6 +8,6 @@ namespace guiKernel2.Constraints
 	/// </summary>
 	public interface IConstraint
 	{
-		bool Mathes(ResultSet resultSet);		
+		bool Match(ResultSet resultSet);		
 	}
 }

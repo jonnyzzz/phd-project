@@ -25,18 +25,15 @@ namespace gui2.TreeNodes
 		public TreeMenuItem(string caption, bool isLeaf) : base(caption)
 		{
 			this.isLeaf = isLeaf;
-			this.Click +=new EventHandler(TreeMenuItem_Click);
-			this.DrawItem += new DrawItemEventHandler(DrawCustomMenuItem);
-			this.MeasureItem +=new MeasureItemEventHandler(MeasureCustomItem);
 		}
 
-		protected abstract void EventClick();
-		private void TreeMenuItem_Click(object sender, EventArgs e)
-		{
-			EventClick();
-		}
+	    protected override void OnClick(EventArgs e)
+	    {
+	        base.OnClick(e);
+            EventClick();
+	    }
 
-
+	    protected abstract void EventClick();
 
 		protected Action[] Merge(Action action, params Action[] actions)
 		{
@@ -54,8 +51,11 @@ namespace gui2.TreeNodes
 
 		#region Drawing Features
 		private readonly Font defaultFont = new Font("Arial", 8);
-		private void DrawCustomMenuItem(object sender, DrawItemEventArgs e)
-		{
+
+	    protected override void OnDrawItem(DrawItemEventArgs e)
+	    {
+	        base.OnDrawItem(e);
+	    
 			e.DrawBackground();
 			e.DrawFocusRectangle();
 					
@@ -109,12 +109,15 @@ namespace gui2.TreeNodes
 			return font;
 		}
 
-		private void MeasureCustomItem(object sender, MeasureItemEventArgs e)
-		{
-			Size size = e.Graphics.MeasureString(Text,GetFont()).ToSize();
-			e.ItemHeight = size.Height + 5;
-			e.ItemWidth = size.Width + 15;
-		}
+	    protected override void OnMeasureItem(MeasureItemEventArgs e)
+	    {
+	        base.OnMeasureItem(e);
+
+            Size size = e.Graphics.MeasureString(Text,GetFont()).ToSize();
+            e.ItemHeight = size.Height + 5;
+            e.ItemWidth = size.Width + 15;
+	    }
+
 		#endregion
 	}
 }

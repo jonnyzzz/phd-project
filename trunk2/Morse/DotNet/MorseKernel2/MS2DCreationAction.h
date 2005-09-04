@@ -12,7 +12,7 @@
 	dual,	helpstring("IMS2DCreationAction Interface"),
 	pointer_default(unique)
 ]
-__interface IMS2DCreationAction : IDispatch
+__interface IMS2DCreationAction : IAction
 {
 };
 

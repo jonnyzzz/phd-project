@@ -62,7 +62,7 @@ STDMETHODIMP CMS2DProcessAction::Do(IResultSet* in, IResultSet **out) {
 	ATLASSERT(function != NULL);
 
     ISystemFunctionDerivate* func;
-    hr = function->GetSystemFunction((void**)&func);
+    hr = function->GetSystemFunctionDerivate((void**)&func);
 	ATLASSERT(SUCCEEDED(hr));
 	
     SmartInterface<IMS2Metadata> metadata;
@@ -73,8 +73,10 @@ STDMETHODIMP CMS2DProcessAction::Do(IResultSet* in, IResultSet **out) {
     Graph* graph = GraphResultUtil::GetGraph(original);
 
     GraphResultGraphIterator it(in);
-     
-    MS2DBoxProcess process(&MS2DAngleFunction(func), it, graph, factor, &pinfo);
+    
+    MS2DAngleFunction msFucntion(func);
+
+    MS2DBoxProcess process(&msFucntion, it, graph, factor, &pinfo);
     
     GraphResultUtil::PerformProcess(&process, in, false, metadata, out);
     ATLASSERT(*out != NULL);

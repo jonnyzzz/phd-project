@@ -211,6 +211,9 @@
 				RelativePath=".\Dummy3.cpp">
 			</File>
 			<File
+				RelativePath=".\Dummy4.cpp">
+			</File>
+			<File
 				RelativePath=".\Function.cpp">
 			</File>
 			<File
@@ -257,6 +260,9 @@
 			</File>
 			<File
 				RelativePath=".\MS2DProcessAction.cpp">
+			</File>
+			<File
+				RelativePath=".\MS2DRomAction.cpp">
 			</File>
 			<File
 				RelativePath=".\MS2Metadata.cpp">
@@ -387,6 +393,9 @@
 				RelativePath=".\Dummy3.h">
 			</File>
 			<File
+				RelativePath=".\Dummy4.h">
+			</File>
+			<File
 				RelativePath=".\Function.h">
 			</File>
 			<File
@@ -430,6 +439,9 @@
 			</File>
 			<File
 				RelativePath=".\MS2DProcessAction.h">
+			</File>
+			<File
+				RelativePath=".\MS2DRomAction.h">
 			</File>
 			<File
 				RelativePath=".\MS2Metadata.h">

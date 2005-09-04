@@ -27,10 +27,11 @@ namespace gui2.TreeNodes
 			actionPath = Merge(beforeActions, action);
 			this.MenuItems.AddRange(
 				MenuItemFactory.CreateMenuItems(
-				node, 
-				node.GetActionAfer(actionPath),
-				actionPath
-				));
+				    node, 
+				    node.GetActionAfter(actionPath),
+				    actionPath
+				    )
+                );
 
 			this.OwnerDraw = true;
 

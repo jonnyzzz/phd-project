@@ -20,7 +20,7 @@ namespace guiActions.Constraints
 			this.resultType = resultType;
 		}
 
-		public bool Mathes(ResultSet resultSet)
+		public bool Match(ResultSet resultSet)
 		{
 			IResult[] results = resultSet.ToResults;
 			if (results.Length == 0) return false;

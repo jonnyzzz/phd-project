@@ -19,7 +19,7 @@ namespace guiVisualization.actionImpl.GnuPlot
 			return this;
 		}
 
-		public bool Mathes(ResultSet resultSet)
+		public bool Match(ResultSet resultSet)
 		{
 			foreach (IResult result in resultSet.ToResults)
 			{

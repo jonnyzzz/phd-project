@@ -32,7 +32,7 @@ namespace guiKernel2.ActionFactory
 			ActionRef info = this.actionResolver[name] as ActionRef;
 			if (info == null ) throw new ActionException("Action not found");
 
-			if (!info.Constraint.Mathes(node.Results)) throw new ActionException("Action can not be applied here");
+			if (!info.Constraint.Match(node.Results)) throw new ActionException("Action can not be applied here");
 
 			return info.CreateInstance();
 		}
@@ -48,10 +48,9 @@ namespace guiKernel2.ActionFactory
 			ArrayList result = new ArrayList();
 			foreach (ActionRef actionInfo in actions)
 			{
-				if ( actionInfo.Constraint.Mathes(node.Results) )
+				if ( actionInfo.Constraint.Match(node.Results) )
 				{
 					Logger.Logger.LogMessage("Candidate Found: {0}", actionInfo);
-
 					result.Add(actionInfo);
 				}
 			}
@@ -77,6 +76,8 @@ namespace guiKernel2.ActionFactory
 			}
 			Logger.Logger.LogMessage("End intrface dump");
 		}
+
+
 
 		private ActionRef[] FindActionInfosForPath(KernelNode node, ActionWrapper[] beforeActions)
 		{

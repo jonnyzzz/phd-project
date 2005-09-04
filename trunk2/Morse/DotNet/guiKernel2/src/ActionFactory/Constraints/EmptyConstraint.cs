@@ -9,7 +9,7 @@ namespace guiKernel2.Constraints
 		{			
 		}
 
-		public bool Mathes(ResultSet resultSet)
+		public bool Match(ResultSet resultSet)
 		{
 			return true;
 		}

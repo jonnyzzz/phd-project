@@ -16,11 +16,11 @@ namespace guiKernel2.Constraints
 
 		}
 
-		public bool Mathes(ResultSet resultSet)
+		public bool Match(ResultSet resultSet)
 		{
 			foreach (IConstraint constraint in constraints)
 			{
-				if (!constraint.Mathes(resultSet)) return false;
+				if (!constraint.Match(resultSet)) return false;
 			}
 			return true;
 		}

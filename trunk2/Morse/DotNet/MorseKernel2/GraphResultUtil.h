@@ -16,7 +16,7 @@ public:
 	template <class I>
 	static bool ContainsMetadataOnly(IResultSet* resultSet);
 
-	static bool ContainsGraphOnly(IResultSet* resultSet, bool isStrongComponent);
+	static bool ContainsGraphOnly(IResultSet* resultSet, bool isStrongComponent, int dimension = -1);
 
 public:
 	static bool HasSameMetadataType(IResultSet* resultSet);

@@ -77,11 +77,12 @@ void MS2DBoxProcess::multiplyNode(Node* node, Graph* graph) {
 
 
     for (int step = 0; step < factor[2]; step++) {
-        xi[2]++;
-
+        
         Node* resultNode = graph_result->browseTo(xi);
 
         processNode(resultNode, segments);
+
+        xi[2]++;
     }
 
     GraphEdgeEnumerator ee(siGraph, originalGraphNode);

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sat Sep 03 00:23:02 2005
+/* at Mon Sep 05 00:32:54 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -394,13 +394,6 @@ extern const MIDL_STUBLESS_PROXY_INFO IMS2Metadata_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
-extern const MIDL_SERVER_INFO IWritableSpectrumResult_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo;
-
-
-extern const MIDL_STUB_DESC Object_StubDesc;
-
-
 extern const MIDL_SERVER_INFO IMS2DProcessAction_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IMS2DProcessAction_ProxyInfo;
 
@@ -410,6 +403,27 @@ extern const MIDL_STUB_DESC Object_StubDesc;
 
 extern const MIDL_SERVER_INFO IMS2DProcessParameters_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IMS2DProcessParameters_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IWritableSpectrumResult_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IMS2DRomAction_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMS2DRomAction_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IDummy4_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IDummy4_ProxyInfo;
 
 
 extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TABLE_SIZE ];
@@ -6162,6 +6176,10 @@ static const unsigned short IMS2DCreationAction_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
+    204,
+    240,
+    276,
+    318,
     0
     };
 
@@ -6186,7 +6204,7 @@ static const MIDL_SERVER_INFO IMS2DCreationAction_ServerInfo =
     0,
     0,
     0};
-CINTERFACE_PROXY_VTABLE(7) _IMS2DCreationActionProxyVtbl = 
+CINTERFACE_PROXY_VTABLE(11) _IMS2DCreationActionProxyVtbl = 
 {
     0,
     &IID_IMS2DCreationAction,
@@ -6196,7 +6214,11 @@ CINTERFACE_PROXY_VTABLE(7) _IMS2DCreationActionProxyVtbl =
     0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
     0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
     0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IAction::SetActionParameters */ ,
+    0 /* forced delegation IAction::SetProgressBarInfo */ ,
+    0 /* forced delegation IAction::CanDo */ ,
+    0 /* forced delegation IAction::Do */
 };
 
 
@@ -6205,14 +6227,18 @@ static const PRPC_STUB_FUNCTION IMS2DCreationAction_table[] =
     STUB_FORWARDING_FUNCTION,
     STUB_FORWARDING_FUNCTION,
     STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
 };
 
 CInterfaceStubVtbl _IMS2DCreationActionStubVtbl =
 {
     &IID_IMS2DCreationAction,
     &IMS2DCreationAction_ServerInfo,
-    7,
+    11,
     &IMS2DCreationAction_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };
@@ -6844,86 +6870,6 @@ CInterfaceStubVtbl _IMS2MetadataStubVtbl =
 };
 
 
-/* Object interface: IWritableSpectrumResult, ver. 0.0,
-   GUID={0x80B6D423,0x1E6D,0x4236,{0xB1,0x87,0xFF,0xDE,0xC3,0xA2,0xA1,0x39}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short IWritableSpectrumResult_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    2046,
-    2082,
-    2118,
-    2154,
-    2190
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &IWritableSpectrumResult_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO IWritableSpectrumResult_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &IWritableSpectrumResult_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(12) _IWritableSpectrumResultProxyVtbl = 
-{
-    &IWritableSpectrumResult_ProxyInfo,
-    &IID_IWritableSpectrumResult,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */ ,
-    (void *) (INT_PTR) -1 /* IWritableSpectrumResult::SetLowerBound */ ,
-    (void *) (INT_PTR) -1 /* IWritableSpectrumResult::SetUpperBound */ ,
-    (void *) (INT_PTR) -1 /* IWritableSpectrumResult::SetLowerLength */ ,
-    (void *) (INT_PTR) -1 /* IWritableSpectrumResult::SetUpperLength */ ,
-    (void *) (INT_PTR) -1 /* IWritableSpectrumResult::SetMetadata */
-};
-
-
-static const PRPC_STUB_FUNCTION IWritableSpectrumResult_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2
-};
-
-CInterfaceStubVtbl _IWritableSpectrumResultStubVtbl =
-{
-    &IID_IWritableSpectrumResult,
-    &IWritableSpectrumResult_ServerInfo,
-    12,
-    &IWritableSpectrumResult_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
 /* Object interface: IMS2DProcessAction, ver. 0.0,
    GUID={0xF8F384DC,0xFF2E,0x48B5,{0x9F,0xB3,0x95,0x8A,0x82,0x85,0x54,0xC5}} */
 
@@ -7072,6 +7018,230 @@ CInterfaceStubVtbl _IMS2DProcessParametersStubVtbl =
     CStdStubBuffer_DELEGATING_METHODS
 };
 
+
+/* Object interface: IWritableSpectrumResult, ver. 0.0,
+   GUID={0x80B6D423,0x1E6D,0x4236,{0xB1,0x87,0xFF,0xDE,0xC3,0xA2,0xA1,0x39}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IWritableSpectrumResult_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    2046,
+    2082,
+    2118,
+    2154,
+    2190
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IWritableSpectrumResult_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IWritableSpectrumResult_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IWritableSpectrumResult_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(12) _IWritableSpectrumResultProxyVtbl = 
+{
+    &IWritableSpectrumResult_ProxyInfo,
+    &IID_IWritableSpectrumResult,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    (void *) (INT_PTR) -1 /* IWritableSpectrumResult::SetLowerBound */ ,
+    (void *) (INT_PTR) -1 /* IWritableSpectrumResult::SetUpperBound */ ,
+    (void *) (INT_PTR) -1 /* IWritableSpectrumResult::SetLowerLength */ ,
+    (void *) (INT_PTR) -1 /* IWritableSpectrumResult::SetUpperLength */ ,
+    (void *) (INT_PTR) -1 /* IWritableSpectrumResult::SetMetadata */
+};
+
+
+static const PRPC_STUB_FUNCTION IWritableSpectrumResult_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IWritableSpectrumResultStubVtbl =
+{
+    &IID_IWritableSpectrumResult,
+    &IWritableSpectrumResult_ServerInfo,
+    12,
+    &IWritableSpectrumResult_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IMS2DRomAction, ver. 0.0,
+   GUID={0x27633F37,0x3573,0x46D6,{0xB4,0x5D,0x78,0xAE,0x25,0x61,0x6D,0xAD}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMS2DRomAction_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    204,
+    240,
+    276,
+    318,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMS2DRomAction_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DRomAction_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMS2DRomAction_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DRomAction_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(11) _IMS2DRomActionProxyVtbl = 
+{
+    0,
+    &IID_IMS2DRomAction,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IAction::SetActionParameters */ ,
+    0 /* forced delegation IAction::SetProgressBarInfo */ ,
+    0 /* forced delegation IAction::CanDo */ ,
+    0 /* forced delegation IAction::Do */
+};
+
+
+static const PRPC_STUB_FUNCTION IMS2DRomAction_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMS2DRomActionStubVtbl =
+{
+    &IID_IMS2DRomAction,
+    &IMS2DRomAction_ServerInfo,
+    11,
+    &IMS2DRomAction_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IDummy4, ver. 0.0,
+   GUID={0x4D810CEE,0x9913,0x438E,{0x98,0x83,0xBC,0x05,0x53,0x71,0xB1,0x74}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IDummy4_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IDummy4_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IDummy4_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IDummy4_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IDummy4_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IDummy4ProxyVtbl = 
+{
+    0,
+    &IID_IDummy4,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IDummy4_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IDummy4StubVtbl =
+{
+    &IID_IDummy4,
+    &IDummy4_ServerInfo,
+    7,
+    &IDummy4_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
 static const MIDL_STUB_DESC Object_StubDesc = 
     {
     0,
@@ -7106,6 +7276,7 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
     ( CInterfaceProxyVtbl *) &_IWritableSpectrumResultProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IBoxMethodActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IDummy2ProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IMS2DRomActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IKernellProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IResultSetProxyVtbl,
     ( CInterfaceProxyVtbl *) &_ITarjanParametersProxyVtbl,
@@ -7141,6 +7312,7 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
     ( CInterfaceProxyVtbl *) &_ISIRomActionParametersProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IWritableGraphResultProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IDummy1ProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IDummy4ProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IAdaptiveMethodParametersProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IPointMethodActionProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IResultBaseProxyVtbl,
@@ -7160,6 +7332,7 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
     ( CInterfaceStubVtbl *) &_IWritableSpectrumResultStubVtbl,
     ( CInterfaceStubVtbl *) &_IBoxMethodActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IDummy2StubVtbl,
+    ( CInterfaceStubVtbl *) &_IMS2DRomActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IKernellStubVtbl,
     ( CInterfaceStubVtbl *) &_IResultSetStubVtbl,
     ( CInterfaceStubVtbl *) &_ITarjanParametersStubVtbl,
@@ -7195,6 +7368,7 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
     ( CInterfaceStubVtbl *) &_ISIRomActionParametersStubVtbl,
     ( CInterfaceStubVtbl *) &_IWritableGraphResultStubVtbl,
     ( CInterfaceStubVtbl *) &_IDummy1StubVtbl,
+    ( CInterfaceStubVtbl *) &_IDummy4StubVtbl,
     ( CInterfaceStubVtbl *) &_IAdaptiveMethodParametersStubVtbl,
     ( CInterfaceStubVtbl *) &_IPointMethodActionStubVtbl,
     ( CInterfaceStubVtbl *) &_IResultBaseStubVtbl,
@@ -7214,6 +7388,7 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
     "IWritableSpectrumResult",
     "IBoxMethodAction",
     "IDummy2",
+    "IMS2DRomAction",
     "IKernell",
     "IResultSet",
     "ITarjanParameters",
@@ -7249,6 +7424,7 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
     "ISIRomActionParameters",
     "IWritableGraphResult",
     "IDummy1",
+    "IDummy4",
     "IAdaptiveMethodParameters",
     "IPointMethodAction",
     "IResultBase",
@@ -7309,6 +7485,8 @@ const IID *  __MorseKernel2_BaseIIDList[] =
     &IID_IDispatch,
     &IID_IDispatch,
     &IID_IDispatch,
+    &IID_IDispatch,
+    &IID_IDispatch,
     0
 };
 
@@ -7319,13 +7497,13 @@ int __stdcall __MorseKernel2_IID_Lookup( const IID * pIID, int * pIndex )
 {
     IID_BS_LOOKUP_SETUP
 
-    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 49, 32 )
+    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 51, 32 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 16 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 8 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 4 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 2 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 1 )
-    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 49, *pIndex )
+    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 51, *pIndex )
     
 }
 
@@ -7336,7 +7514,7 @@ const ExtendedProxyFileInfo _MorseKernel2_ProxyFileInfo =
     (const PCInterfaceName * ) & __MorseKernel2_InterfaceNamesList,
     (const IID ** ) & __MorseKernel2_BaseIIDList,
     & __MorseKernel2_IID_Lookup, 
-    49,
+    51,
     2,
     0, /* table of [async_uuid] interfaces */
     0, /* Filler1 */

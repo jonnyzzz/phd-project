@@ -132,6 +132,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\ComputationParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\actionImpl\AdaptiveMethod\AdaptiveMethodAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -208,6 +213,56 @@
                 />
                 <File
                     RelPath = "src\actionImpl\MinimalLoopLocalization\MinimalLoopLocalizationParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MS2D\ActionParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MS2D\ActionParameters.resx"
+                    DependentUpon = "ActionParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\MS2D\Create\MS2DCreateAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MS2D\Create\MS2DCreateActionParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MS2D\Create\MS2DCreateActionParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MS2D\Morse\MS2DMorseAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MS2D\Morse\MS2DMorseActionParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MS2D\Next\MS2DMethodAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MS2D\Next\MS2DMethodParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MS2D\Next\MS2DMethodParametersImpl.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -293,6 +348,11 @@
                 />
                 <File
                     RelPath = "src\Constraints\DefaultConstraintFactory.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Constraints\FixedDimensionConstraint.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

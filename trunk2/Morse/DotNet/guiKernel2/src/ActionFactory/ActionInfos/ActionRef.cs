@@ -24,10 +24,16 @@ namespace guiKernel2.ActionFactory.ActionInfos
 			this.isLeaf = isLeaf;
 		}
 
+        private ActionWrapper myCachedActionWrapper = null;
+
 		public ActionWrapper CreateInstance()
 		{
-			string caption = Core.Instance.ActionNamingFactory.FindActionCaption(ActionName);
-			return Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, caption, IsLeaf);
+            if (myCachedActionWrapper == null)
+            {
+                string caption = Core.Instance.ActionNamingFactory.FindActionCaption(ActionName);
+                myCachedActionWrapper = Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, caption, IsLeaf);    
+            }
+            return myCachedActionWrapper;
 		}
 
 		public IConstraint Constraint

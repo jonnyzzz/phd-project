@@ -4,7 +4,7 @@
 MS2DAngleFunction::MS2DAngleFunction(ISystemFunctionDerivate* function)
 : function(function), ISystemFunction(3, 1)
 {
-    VERIFY(function->getDimension() == 2);
+    VERIFY(function->getFunctionDimension() == 2);
     input = function->getInput();
     output = function->getOutput();
 }

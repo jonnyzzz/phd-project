@@ -83,7 +83,7 @@ Graph* GraphResultUtil::GetGraph(IGraphResult* result) {
 }
 
 
-bool GraphResultUtil::ContainsGraphOnly(IResultSet* resultSet, bool isStrongComponent) {
+bool GraphResultUtil::ContainsGraphOnly(IResultSet* resultSet, bool isStrongComponent, int dim) {
 	if (!ContainsOnlyType<IGraphResult>(resultSet)) return false;
 
 	ResultSetIterator<IGraphResult> it(resultSet);
@@ -95,6 +95,11 @@ bool GraphResultUtil::ContainsGraphOnly(IResultSet* resultSet, bool isStrongComp
 		ATLASSERT(SUCCEEDED(hr));
 
 		if (v != VARIANT_TRUE) return false;
+
+        if (dim > 0) {
+            Graph* graph = GetGraph(it.Current());
+            if (graph->getDimention() != dim) return false;
+        }
 
 		it.Next();
 	}

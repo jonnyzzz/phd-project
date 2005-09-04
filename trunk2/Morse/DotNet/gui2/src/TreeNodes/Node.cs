@@ -108,7 +108,7 @@ namespace gui2.TreeNodes
 			return Filter.FilterActions(kernelNode.GetNextActions());
 		}
 
-		public Action[] GetActionAfer(Action[] chain)
+		public Action[] GetActionAfter(Action[] chain)
 		{
 			return Filter.FilterActions(kernelNode.GetNextActionsAfter(Filter.ToActionWrapper(chain)));
 		}

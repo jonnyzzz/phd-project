@@ -15,7 +15,7 @@ namespace guiActions.Constraints
 		{
 		}
 
-		public bool Mathes(ResultSet resultSet)
+		public bool Match(ResultSet resultSet)
 		{
 			foreach (MorseKernel2.IResult result in resultSet.ToResults)
 			{

@@ -12,11 +12,11 @@ namespace guiKernel2.Actions
 		private readonly bool isChainLeaf;
 		private string actionName;
 
-		public ActionWrapper(string actionName, bool isChainLeaf)
+	    public ActionWrapper(string actionName, bool isChainLeaf)
 		{
-			this.actionName = actionName;
 			this.isChainLeaf = isChainLeaf;
-			this.action = CreateAction();
+	        this.actionName = actionName;
+		    this.action = CreateAction();
 		}		
 
 		public bool IsChainLeaf
@@ -31,6 +31,8 @@ namespace guiKernel2.Actions
 				return actionName;
 			}
 		}
+
+
 		protected abstract IParameters Parameters{ get; }
 		protected abstract IAction CreateAction();
 		

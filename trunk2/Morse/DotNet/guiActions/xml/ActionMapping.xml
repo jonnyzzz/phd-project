@@ -46,6 +46,26 @@
 		<action name="SavePointsKernelAction" isLeaf="true">
 			<constraint class="OneGraphResultConstraintFactory"/>
 		</action>
+		
+		<action name="IMS2DCreationAction" isLeaf="true">
+		    <constraint class="OneGraphResultConstraintFactory" />
+		    <constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+		    <constraint class="StrongCompGraphsConstraintFactory" />
+		    <constraint class="FixedDimensionConstraintFactory" dimension="2" />		    
+		</action>
+		
+		<action name="IMS2DProcessAction" isLeaf="true">
+		    <constraint class="DefaultConstraintFactory" metadata="IMS2Metadata" result="IGraphResult" />
+		    <nextActions>		
+				<actionReference name="ITarjanAction" isLeaf="true" />
+			</nextActions>				    
+		</action>
+		
+		<action name="IMS2DRomAction" isLeaf="true">
+		    <constraint class="DefaultConstraintFactory" metadata="IMS2Metadata" result="IGraphResult" />
+		    <constraint class="StrongCompGraphsConstraintFactory" />		
+		</action>
+		
     </actions>
     
     <names>
@@ -58,6 +78,9 @@
 		<action name="SavePointsKernelAction" caption="Export to file" />
 		<action name="ISIRomAction" caption="?----SIROM----?" />
 		<action name="IAdaptiveMethodAction" caption="Adaptive Method" />
+		<action name="IMS2DCreationAction" caption="Create Angle Projective Bundle" />
+		<action name="IMS2DProcessAction" caption="Next Step" />
+		<action name="IMS2DRomAction" caption="Estimate Morse Spectrum" />
 		
     </names>
 

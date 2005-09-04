@@ -531,7 +531,7 @@ interface IDummy2 : IDispatch {
 	pointer_default(unique)
 ] 
 #line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dcreationaction.h"
-interface IMS2DCreationAction : IDispatch {
+interface IMS2DCreationAction : IAction {
 };
 
 [
@@ -662,6 +662,30 @@ interface IMS2Metadata : IResultMetadata {
 
 [
 	object,
+	uuid(F8F384DC-FF2E-48B5-9FB3-958A828554C5),
+	dual,
+	helpstring("IMS2DProcessAction Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+interface IMS2DProcessAction : IAction {
+};
+
+[
+	object,
+	uuid(9FAD2A0A-2208-4F26-ABF7-01CEFE67B738),
+	dual,
+	helpstring("IMS2DProcessAction Interface"),
+	pointer_default(unique)
+] 
+#line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+interface IMS2DProcessParameters : IComputationParameters {
+#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+	[id(14)] HRESULT  GetFactor([out,retval] int *factor);
+};
+
+[
+	object,
 	uuid(80B6D423-1E6D-4236-B187-FFDEC3A2A139),
 	dual,
 	helpstring("IWritableSpectrum Interface"),
@@ -683,26 +707,24 @@ interface IWritableSpectrumResult : IDispatch {
 
 [
 	object,
-	uuid(F8F384DC-FF2E-48B5-9FB3-958A828554C5),
+	uuid(27633F37-3573-46D6-B45D-78AE25616DAD),
 	dual,
-	helpstring("IMS2DProcessAction Interface"),
+	helpstring("IMS2DRomAction Interface"),
 	pointer_default(unique)
 ] 
-#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
-interface IMS2DProcessAction : IAction {
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dromaction.h"
+interface IMS2DRomAction : IAction {
 };
 
 [
 	object,
-	uuid(9FAD2A0A-2208-4F26-ABF7-01CEFE67B738),
+	uuid(4D810CEE-9913-438E-9883-BC055371B174),
 	dual,
-	helpstring("IMS2DProcessAction Interface"),
+	helpstring("IDummy4 Interface"),
 	pointer_default(unique)
 ] 
-#line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
-interface IMS2DProcessParameters : IComputationParameters {
-#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
-	[id(14)] HRESULT  GetFactor([out,retval] int *factor);
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy4.h"
+interface IDummy4 : IDispatch {
 };
 
 
@@ -904,6 +926,8 @@ library MorseKernel2
 #line 43 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dcreationaction.h"
 	coclass CMS2DCreationAction {
 		interface IMS2DCreationAction;
+		interface IAction;
+		interface IActionBase;
 	};
 
 	[
@@ -983,6 +1007,18 @@ library MorseKernel2
 
 	[
 		version(1.0),
+		uuid(A1BF0187-E515-4B73-9F0E-7CB55F74243B),
+		helpstring("MS2DProcessAction Class")
+	] 
+#line 48 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+	coclass CMS2DProcessAction {
+		interface IMS2DProcessAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
 		uuid(45FBC041-D2C1-495D-8CC9-58019691E9CC),
 		helpstring("SpectrumResultImpl Class")
 	] 
@@ -996,14 +1032,29 @@ library MorseKernel2
 
 	[
 		version(1.0),
-		uuid(A1BF0187-E515-4B73-9F0E-7CB55F74243B),
-		helpstring("MS2DProcessAction Class")
+		uuid(8394D313-8E16-4A8D-9ECD-5C42F61601B1),
+		helpstring("MS2DRomAction Class")
 	] 
-#line 48 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
-	coclass CMS2DProcessAction {
-		interface IMS2DProcessAction;
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dromaction.h"
+	coclass CMS2DRomAction {
+		interface IMS2DRomAction;
 		interface IAction;
 		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(365CB059-BEBE-4707-8475-67724C3DF50A),
+		helpstring("Dummy4 Class")
+	] 
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy4.h"
+	coclass CDummy4 {
+		interface IDummy4;
+		interface IMS2DProcessParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IComputationParameters;
+		interface IParameters;
 	};
 
 }
