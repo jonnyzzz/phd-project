@@ -1,3 +1,4 @@
+Metadata checking every where + Metadata hierarcy [MS2Metadata is not a SymbolicImage nor ordinary graph with ordinary computation methods]
 Make unavailable action visible. Show TODO hint
 Refactor Action Mapping code
 DONE Show interval and Lipshitz info in system input dialog
