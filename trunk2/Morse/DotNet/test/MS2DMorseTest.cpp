@@ -88,8 +88,9 @@ void MS2DMorseTest::Test() {
 	sipb->start();
 	sipb->processNextGraph(graph);
 
-	SmartGraph result = sipb->result();
-	SmartComponents cms = result->localazeStrongComponents();
+	SmartGraph aResult = sipb->result();
+	SmartComponents cms = aResult->localazeStrongComponents();
+    GraphSet siGraph(aResult);
 
     cout<<"SI Components:"<<cms->length()<<"\n";
     
@@ -98,7 +99,7 @@ void MS2DMorseTest::Test() {
 	//Extending
     SermentProjectiveExtensionInfo info(dfunc);
     
-	SmartProcess proc = new MS2DCreationProcess(result, msFactor, &pinfo);
+	SmartProcess proc = new MS2DCreationProcess(aResult, msFactor, &pinfo);
 	proc->start();
 	for (int i=0; i<cms->length(); i++) {
 		proc->processNextGraph(cms->getAt(i));
@@ -107,6 +108,9 @@ void MS2DMorseTest::Test() {
 	cms = new GraphComponents();
 	cms->addGraphAsComponent(proc->result());
 
+    //Just to make it work with smarp pointers.
+    SmartGraph result(new Graph(1, amin, amax,grid));
+    
 	//MS_Step
 	MULTI(
 	{
@@ -114,16 +118,16 @@ void MS2DMorseTest::Test() {
 
 
         MS2DAngleFunction jfunc(dfunc);		
-		SmartProcess pb = new MS2DBoxProcess(&jfunc, cms->getAt(0), result, msFactor, &pinfo);
+		SmartProcess pb = new MS2DBoxProcess(&jfunc, cms->getAt(0), siGraph, msFactor, &pinfo);
 		pb->start();
 		for (int i=0; i<cms->length(); i++) {
 			pb->processNextGraph(cms->getAt(i));
 		}
-		cms = (result = pb->result())->localazeStrongComponents();
+        
+		cms = (result = (pb->result()))->localazeStrongComponents();
 
         cout<<"cms Length = "<<cms->length()<<"\n";
-	}, 5);
-	
+ 	}, 5);
 
 	//Morse
 	MorseResults mresult;

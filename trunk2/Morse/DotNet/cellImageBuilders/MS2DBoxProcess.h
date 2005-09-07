@@ -4,6 +4,7 @@
 #include <list>
 using namespace std;
 struct Node;
+#include "../cellImageBuilders/graphSet.h"
 
 
 class MS2DBoxProcess :
@@ -12,7 +13,7 @@ class MS2DBoxProcess :
 public:
 
     //factor is int[3] here. But factor[0] == factor[1] == 1 is asserted
-    MS2DBoxProcess(MS2DAngleFunction* function, Graph* original, Graph* si, int* factor, ProgressBarInfo* info);
+    MS2DBoxProcess(MS2DAngleFunction* function, Graph* original, GraphSet si, int* factor, ProgressBarInfo* info);
     virtual ~MS2DBoxProcess(void);
 
 private:
@@ -33,9 +34,10 @@ public:
 protected:
     void multiplyNode(Node* node, Graph* graph);
     void processNode(Node* resultNode, SegmentList& list);
+    pair<Node*, Graph*> FindSIGraphNode(const JInt* coord);
 
 private:
-    Graph* siGraph;
+    GraphSet siGraph;
     MS2DAngleFunction* function;
     int* factor;
     int dimension;

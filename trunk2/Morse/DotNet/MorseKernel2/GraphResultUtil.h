@@ -6,6 +6,7 @@
 #include "SmartInterface.h"
 class AbstractProcess;
 class Graph;
+#include "../cellImageBuilders/GraphSet.h"
 
 class GraphResultUtil {
 
@@ -35,6 +36,7 @@ public:
 	static void PerformProcess(AbstractProcess* process, IResultSet* input, bool isStrongComponent, IResultMetadata* metadata, IResultSet** output);
 
 	static Graph* GetGraph(IGraphResult* result);
+    static GraphSet GetGraphs(IResultSet* result);
 
 };
 

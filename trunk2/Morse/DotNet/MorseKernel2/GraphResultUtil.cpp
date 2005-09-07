@@ -82,6 +82,14 @@ Graph* GraphResultUtil::GetGraph(IGraphResult* result) {
 	return graph;
 }
 
+GraphSet GraphResultUtil::GetGraphs(IResultSet* result) {
+    GraphSet ret;
+    for (GraphResultGraphIterator it(result); it.HasNext(); it.Next()) {
+        ret.AddGraph(it);
+    }
+    return ret;
+}
+
 
 bool GraphResultUtil::ContainsGraphOnly(IResultSet* resultSet, bool isStrongComponent, int dim) {
 	if (!ContainsOnlyType<IGraphResult>(resultSet)) return false;

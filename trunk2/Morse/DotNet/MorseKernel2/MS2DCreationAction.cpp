@@ -84,11 +84,9 @@ STDMETHODIMP CMS2DCreationAction::Do(IResultSet* in, IResultSet **out) {
     
     MS2DCreationProcess process(it, factor, &pinfo);
     SmartInterface<IMS2Metadata> metadata;
-
-    ResultSetIterator<IGraphResult> graphIt(in);
-     
+    
     CMS2Metadata::CreateInstance(metadata.extract());
-    metadata->SetSIGraphResult(graphIt.Current());
+    metadata->SetSIGraphResult(in);
 
     GraphResultUtil::PerformProcess(&process, in, false, metadata, out);
     ATLASSERT(*out != NULL);

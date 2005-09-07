@@ -551,6 +551,7 @@ Node* Graph::getEdgeTo(Edge* e) const {
 
 
 GraphComponents* Graph::localazeStrongComponents() {
+    
 	GraphComponents* cmps = new GraphComponents();
 	Node* v;
 	Node* w;

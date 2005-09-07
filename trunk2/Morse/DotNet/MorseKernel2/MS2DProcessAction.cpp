@@ -68,9 +68,9 @@ STDMETHODIMP CMS2DProcessAction::Do(IResultSet* in, IResultSet **out) {
     SmartInterface<IMS2Metadata> metadata;
     GraphResultUtil::GetMetadataClonedEx(in, metadata.extract());
 
-    SmartInterface<IGraphResult> original;
-    metadata->GetSIGraphResult(original.extract());
-    Graph* graph = GraphResultUtil::GetGraph(original);
+    SmartInterface<IResultSet> original;
+    metadata->GetSIGraphResult(original.extract());    
+    GraphSet graph = GraphResultUtil::GetGraphs(original);
 
     GraphResultGraphIterator it(in);
     

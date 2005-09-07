@@ -5,6 +5,7 @@
 #include "resultMetadata.h"
 #include "ResultMetadataBase.h"
 #include "GraphResult.h"
+#include "ResultSet.h"
 
 
 // IMS2Metadata
@@ -17,9 +18,9 @@
 __interface IMS2Metadata : IResultMetadata
 {
     [id(10)]
-    HRESULT GetSIGraphResult([out, retval] IGraphResult** out);
+    HRESULT GetSIGraphResult([out, retval] IResultSet** out);
     [id(11)]
-    HRESULT SetSIGraphResult([in] IGraphResult* in);
+    HRESULT SetSIGraphResult([in] IResultSet* in);
 };
 
 
@@ -53,10 +54,10 @@ public:
     STDMETHOD(EqualType)(IResultMetadata* metadata, VARIANT_BOOL* out);
     STDMETHOD(Clone)(IResultMetadata** out);
 
-    STDMETHOD(GetSIGraphResult)(IGraphResult** out);
-    STDMETHOD(SetSIGraphResult)(IGraphResult* in);
+    STDMETHOD(GetSIGraphResult)(IResultSet** out);
+    STDMETHOD(SetSIGraphResult)(IResultSet* in);
 
 private:
-    IGraphResult* graphResult;
+    IResultSet* graphResult;
 };
 

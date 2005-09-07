@@ -2,8 +2,9 @@
 #include ".\ms2dboxprocess.h"
 #include "../graph/graph.h"
 #include "../graph/graphutil.h"
+#include "../graph/graphException.h"
 
-MS2DBoxProcess::MS2DBoxProcess(MS2DAngleFunction* function, Graph* original, Graph* si, int* factor, ProgressBarInfo* info)
+MS2DBoxProcess::MS2DBoxProcess(MS2DAngleFunction* function, Graph* original, GraphSet si, int* factor, ProgressBarInfo* info)
 :AbstractProcessExt(original, info), siGraph(si), function(function)
 {
     this->dimension = original->getDimention();
@@ -58,12 +59,26 @@ void MS2DBoxProcess::processNextGraph(Graph* graph) {
 	}
 }
 
+
+pair<Node*,Graph*> MS2DBoxProcess::FindSIGraphNode(const JInt* coord) {
+    for (GraphSetIterator it = siGraph.iterator(); it.HasNext(); it.Next()) {
+        Node* node = it->findNode(coord);
+        if (node != NULL) 
+            return pair<Node*,Graph*>(node, it);
+    }  
+
+    ASSERT(false);
+    throw GraphException(GraphException_NoSuchResult);
+}
+
 void MS2DBoxProcess::multiplyNode(Node* node, Graph* graph) {
 
     SegmentList segments;
 
     const JInt* coord = graph->getCells(node);
-    Node* originalGraphNode = siGraph->findNode(coord);
+    pair<Node*,Graph*> siGraphNode = FindSIGraphNode(coord);
+    Graph* siGraph = siGraphNode.second;
+    Node* originalGraphNode = siGraphNode.first;
 
     ATLASSERT(originalGraphNode != NULL);
 
@@ -89,6 +104,7 @@ void MS2DBoxProcess::multiplyNode(Node* node, Graph* graph) {
         xi[2]++;
     }
 
+    
     GraphEdgeEnumerator ee(siGraph, originalGraphNode);
     Node* toNode;
     while( (toNode = ee.nextTo()) != NULL) {

@@ -36,14 +36,14 @@ STDMETHODIMP CMS2Metadata::Clone(IResultMetadata **out) {
 }   
 
 
-STDMETHODIMP CMS2Metadata::GetSIGraphResult(IGraphResult** out) {
+STDMETHODIMP CMS2Metadata::GetSIGraphResult(IResultSet** out) {
     graphResult->QueryInterface(out);
     ATLASSERT(*out != NULL);
     return S_OK;
 }
 
 
-STDMETHODIMP CMS2Metadata::SetSIGraphResult(IGraphResult* in) {
+STDMETHODIMP CMS2Metadata::SetSIGraphResult(IResultSet* in) {
     SAFE_RELEASE(graphResult);
     in->QueryInterface(&graphResult);
     ATLASSERT(graphResult != NULL);
