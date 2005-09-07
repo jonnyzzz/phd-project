@@ -559,6 +559,41 @@ interface IDummy3 : IDispatch {
 
 [
 	object,
+	uuid(F8F384DC-FF2E-48B5-9FB3-958A828554C5),
+	dual,
+	helpstring("IMS2DProcessAction Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+interface IMS2DProcessAction : IAction {
+};
+
+[
+	object,
+	uuid(9FAD2A0A-2208-4F26-ABF7-01CEFE67B738),
+	dual,
+	helpstring("IMS2DProcessAction Interface"),
+	pointer_default(unique)
+] 
+#line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+interface IMS2DProcessParameters : IComputationParameters {
+#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+	[id(14)] HRESULT  GetFactor([out,retval] int *factor);
+};
+
+[
+	object,
+	uuid(4D810CEE-9913-438E-9883-BC055371B174),
+	dual,
+	helpstring("IDummy4 Interface"),
+	pointer_default(unique)
+] 
+#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy4.h"
+interface IDummy4 : IDispatch {
+};
+
+[
+	object,
 	uuid(9B3DA2D8-E279-4552-99F4-13AA066642D5),
 	dual,
 	helpstring("IWritableFunction Interface"),
@@ -662,26 +697,13 @@ interface IMS2Metadata : IResultMetadata {
 
 [
 	object,
-	uuid(F8F384DC-FF2E-48B5-9FB3-958A828554C5),
+	uuid(27633F37-3573-46D6-B45D-78AE25616DAD),
 	dual,
-	helpstring("IMS2DProcessAction Interface"),
+	helpstring("IMS2DRomAction Interface"),
 	pointer_default(unique)
 ] 
-#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
-interface IMS2DProcessAction : IAction {
-};
-
-[
-	object,
-	uuid(9FAD2A0A-2208-4F26-ABF7-01CEFE67B738),
-	dual,
-	helpstring("IMS2DProcessAction Interface"),
-	pointer_default(unique)
-] 
-#line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
-interface IMS2DProcessParameters : IComputationParameters {
-#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
-	[id(14)] HRESULT  GetFactor([out,retval] int *factor);
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dromaction.h"
+interface IMS2DRomAction : IAction {
 };
 
 [
@@ -703,28 +725,6 @@ interface IWritableSpectrumResult : IDispatch {
 	[id(23)] HRESULT  SetUpperLength([in] int data);
 #line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
 	[id(24)] HRESULT  SetMetadata([in] IResultMetadata *data);
-};
-
-[
-	object,
-	uuid(27633F37-3573-46D6-B45D-78AE25616DAD),
-	dual,
-	helpstring("IMS2DRomAction Interface"),
-	pointer_default(unique)
-] 
-#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dromaction.h"
-interface IMS2DRomAction : IAction {
-};
-
-[
-	object,
-	uuid(4D810CEE-9913-438E-9883-BC055371B174),
-	dual,
-	helpstring("IDummy4 Interface"),
-	pointer_default(unique)
-] 
-#line 16 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy4.h"
-interface IDummy4 : IDispatch {
 };
 
 
@@ -948,6 +948,33 @@ library MorseKernel2
 	};
 
 	[
+		version(1.0),
+		uuid(A1BF0187-E515-4B73-9F0E-7CB55F74243B),
+		helpstring("MS2DProcessAction Class")
+	] 
+#line 48 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+	coclass CMS2DProcessAction {
+		interface IMS2DProcessAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(365CB059-BEBE-4707-8475-67724C3DF50A),
+		helpstring("Dummy4 Class")
+	] 
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy4.h"
+	coclass CDummy4 {
+		interface IDummy4;
+		interface IMS2DProcessParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IComputationParameters;
+		interface IParameters;
+	};
+
+	[
 		version(1.1),
 		uuid(FDFB8D0E-74FF-439C-A13B-4A39387B7037),
 		helpstring("FunctionImpl Class")
@@ -1007,12 +1034,12 @@ library MorseKernel2
 
 	[
 		version(1.0),
-		uuid(A1BF0187-E515-4B73-9F0E-7CB55F74243B),
-		helpstring("MS2DProcessAction Class")
+		uuid(8394D313-8E16-4A8D-9ECD-5C42F61601B1),
+		helpstring("MS2DRomAction Class")
 	] 
-#line 48 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
-	coclass CMS2DProcessAction {
-		interface IMS2DProcessAction;
+#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dromaction.h"
+	coclass CMS2DRomAction {
+		interface IMS2DRomAction;
 		interface IAction;
 		interface IActionBase;
 	};
@@ -1028,33 +1055,6 @@ library MorseKernel2
 		interface IResult;
 		interface IResultBase;
 		interface IWritableSpectrumResult;
-	};
-
-	[
-		version(1.0),
-		uuid(8394D313-8E16-4A8D-9ECD-5C42F61601B1),
-		helpstring("MS2DRomAction Class")
-	] 
-#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dromaction.h"
-	coclass CMS2DRomAction {
-		interface IMS2DRomAction;
-		interface IAction;
-		interface IActionBase;
-	};
-
-	[
-		version(1.0),
-		uuid(365CB059-BEBE-4707-8475-67724C3DF50A),
-		helpstring("Dummy4 Class")
-	] 
-#line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy4.h"
-	coclass CDummy4 {
-		interface IDummy4;
-		interface IMS2DProcessParameters;
-		interface IComputationParameters;
-		interface IParameters;
-		interface IComputationParameters;
-		interface IParameters;
 	};
 
 }

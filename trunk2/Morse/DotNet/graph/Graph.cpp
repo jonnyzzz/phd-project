@@ -373,8 +373,7 @@ JDouble inline Graph::getExtent(int i) {
 	return this->getEps()[i]/20;
 }
 
-void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max) {
-	
+void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max) {	
 	if (!intersects(min, max)) return;
 	
 	for (int i=0; i<dimention; i++) {
@@ -402,7 +401,37 @@ void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max) {
 	}
 }
 
-
+void Graph::addEdgesPartial(Node* node, int ubound, const JInt* coord, const JDouble* min, const JDouble* max) {
+    
+    if (!intersects(min, max, ubound, dimention)) return;
+	int i;
+    for (i=0; i<ubound; i++) {
+        point[i] = coord[i];
+    }
+	for (i=ubound; i<dimention; i++) {
+		emin[i] = this->toInternal(min[i] - getExtent(i), i);
+		emax[i] = this->toInternal(max[i] + getExtent(i), i);
+		point[i] = emin[i];
+	}
+	
+	point[dimention] = 0;
+	
+	Node* to;
+	while (point[dimention] == 0) {
+		to = browseTo(point);
+		if ((node != NULL) && (to != NULL)) {
+			browseTo(node, to);
+		}
+		
+		point[ubound]++;
+		for (i=ubound;i<dimention;i++) {
+			if (point[i] > emax[i]) {
+				point[i] = emin[i];
+				point[i+1]++;
+			}
+		}
+	}
+}
 
 void Graph::addEdgesModula(Node* node, const JDouble* min, const JDouble* max, int mod_start) {
 	if (!intersects(min, max, mod_start)) return;

@@ -236,6 +236,12 @@
 			</File>
 			<File
 				RelativePath=".\MS2DBoxProcess.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="3"/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\MS2DCreationProcess.cpp">

@@ -95,6 +95,10 @@ public:
 	Edge* browseTo(Node* nodeTo, Node* nodeFrom);
 
 	void addEdges(Node* node, const JDouble* min, const JDouble* max);
+
+    //adds node. in [0, rbound] coordinates coord[i] value will be used
+    void addEdgesPartial(Node* node, int rbound, const JInt* coord, const JDouble* min, const JDouble* max);
+
 	void addEdgesModula(Node* node, const JDouble* min, const JDouble* max, int mod_start);
 
 	//offset1 - left bound of overlap, offset2 - right bound of overlap

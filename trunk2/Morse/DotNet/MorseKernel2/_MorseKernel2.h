@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Mon Sep 05 00:32:54 2005
+/* at Tue Sep 06 23:26:23 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -279,6 +279,24 @@ typedef interface IDummy3 IDummy3;
 #endif 	/* __IDummy3_FWD_DEFINED__ */
 
 
+#ifndef __IMS2DProcessAction_FWD_DEFINED__
+#define __IMS2DProcessAction_FWD_DEFINED__
+typedef interface IMS2DProcessAction IMS2DProcessAction;
+#endif 	/* __IMS2DProcessAction_FWD_DEFINED__ */
+
+
+#ifndef __IMS2DProcessParameters_FWD_DEFINED__
+#define __IMS2DProcessParameters_FWD_DEFINED__
+typedef interface IMS2DProcessParameters IMS2DProcessParameters;
+#endif 	/* __IMS2DProcessParameters_FWD_DEFINED__ */
+
+
+#ifndef __IDummy4_FWD_DEFINED__
+#define __IDummy4_FWD_DEFINED__
+typedef interface IDummy4 IDummy4;
+#endif 	/* __IDummy4_FWD_DEFINED__ */
+
+
 #ifndef __IWritableFunction_FWD_DEFINED__
 #define __IWritableFunction_FWD_DEFINED__
 typedef interface IWritableFunction IWritableFunction;
@@ -327,34 +345,16 @@ typedef interface IMS2Metadata IMS2Metadata;
 #endif 	/* __IMS2Metadata_FWD_DEFINED__ */
 
 
-#ifndef __IMS2DProcessAction_FWD_DEFINED__
-#define __IMS2DProcessAction_FWD_DEFINED__
-typedef interface IMS2DProcessAction IMS2DProcessAction;
-#endif 	/* __IMS2DProcessAction_FWD_DEFINED__ */
-
-
-#ifndef __IMS2DProcessParameters_FWD_DEFINED__
-#define __IMS2DProcessParameters_FWD_DEFINED__
-typedef interface IMS2DProcessParameters IMS2DProcessParameters;
-#endif 	/* __IMS2DProcessParameters_FWD_DEFINED__ */
-
-
-#ifndef __IWritableSpectrumResult_FWD_DEFINED__
-#define __IWritableSpectrumResult_FWD_DEFINED__
-typedef interface IWritableSpectrumResult IWritableSpectrumResult;
-#endif 	/* __IWritableSpectrumResult_FWD_DEFINED__ */
-
-
 #ifndef __IMS2DRomAction_FWD_DEFINED__
 #define __IMS2DRomAction_FWD_DEFINED__
 typedef interface IMS2DRomAction IMS2DRomAction;
 #endif 	/* __IMS2DRomAction_FWD_DEFINED__ */
 
 
-#ifndef __IDummy4_FWD_DEFINED__
-#define __IDummy4_FWD_DEFINED__
-typedef interface IDummy4 IDummy4;
-#endif 	/* __IDummy4_FWD_DEFINED__ */
+#ifndef __IWritableSpectrumResult_FWD_DEFINED__
+#define __IWritableSpectrumResult_FWD_DEFINED__
+typedef interface IWritableSpectrumResult IWritableSpectrumResult;
+#endif 	/* __IWritableSpectrumResult_FWD_DEFINED__ */
 
 
 #ifndef __CAdaptiveMethodAction_FWD_DEFINED__
@@ -549,6 +549,30 @@ typedef struct CDummy3 CDummy3;
 #endif 	/* __CDummy3_FWD_DEFINED__ */
 
 
+#ifndef __CMS2DProcessAction_FWD_DEFINED__
+#define __CMS2DProcessAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CMS2DProcessAction CMS2DProcessAction;
+#else
+typedef struct CMS2DProcessAction CMS2DProcessAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CMS2DProcessAction_FWD_DEFINED__ */
+
+
+#ifndef __CDummy4_FWD_DEFINED__
+#define __CDummy4_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CDummy4 CDummy4;
+#else
+typedef struct CDummy4 CDummy4;
+#endif /* __cplusplus */
+
+#endif 	/* __CDummy4_FWD_DEFINED__ */
+
+
 #ifndef __CFunctionImpl_FWD_DEFINED__
 #define __CFunctionImpl_FWD_DEFINED__
 
@@ -609,30 +633,6 @@ typedef struct CMS2Metadata CMS2Metadata;
 #endif 	/* __CMS2Metadata_FWD_DEFINED__ */
 
 
-#ifndef __CMS2DProcessAction_FWD_DEFINED__
-#define __CMS2DProcessAction_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CMS2DProcessAction CMS2DProcessAction;
-#else
-typedef struct CMS2DProcessAction CMS2DProcessAction;
-#endif /* __cplusplus */
-
-#endif 	/* __CMS2DProcessAction_FWD_DEFINED__ */
-
-
-#ifndef __CSpectrumResultImpl_FWD_DEFINED__
-#define __CSpectrumResultImpl_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CSpectrumResultImpl CSpectrumResultImpl;
-#else
-typedef struct CSpectrumResultImpl CSpectrumResultImpl;
-#endif /* __cplusplus */
-
-#endif 	/* __CSpectrumResultImpl_FWD_DEFINED__ */
-
-
 #ifndef __CMS2DRomAction_FWD_DEFINED__
 #define __CMS2DRomAction_FWD_DEFINED__
 
@@ -645,16 +645,16 @@ typedef struct CMS2DRomAction CMS2DRomAction;
 #endif 	/* __CMS2DRomAction_FWD_DEFINED__ */
 
 
-#ifndef __CDummy4_FWD_DEFINED__
-#define __CDummy4_FWD_DEFINED__
+#ifndef __CSpectrumResultImpl_FWD_DEFINED__
+#define __CSpectrumResultImpl_FWD_DEFINED__
 
 #ifdef __cplusplus
-typedef class CDummy4 CDummy4;
+typedef class CSpectrumResultImpl CSpectrumResultImpl;
 #else
-typedef struct CDummy4 CDummy4;
+typedef struct CSpectrumResultImpl CSpectrumResultImpl;
 #endif /* __cplusplus */
 
-#endif 	/* __CDummy4_FWD_DEFINED__ */
+#endif 	/* __CSpectrumResultImpl_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -6847,6 +6847,399 @@ EXTERN_C const IID IID_IDummy3;
 #endif 	/* __IDummy3_INTERFACE_DEFINED__ */
 
 
+#ifndef __IMS2DProcessAction_INTERFACE_DEFINED__
+#define __IMS2DProcessAction_INTERFACE_DEFINED__
+
+/* interface IMS2DProcessAction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMS2DProcessAction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("F8F384DC-FF2E-48B5-9FB3-958A828554C5")
+    IMS2DProcessAction : public IAction
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMS2DProcessActionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMS2DProcessAction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMS2DProcessAction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMS2DProcessAction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMS2DProcessAction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMS2DProcessAction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMS2DProcessAction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMS2DProcessAction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IMS2DProcessAction * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IMS2DProcessAction * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IMS2DProcessAction * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IMS2DProcessAction * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        END_INTERFACE
+    } IMS2DProcessActionVtbl;
+
+    interface IMS2DProcessAction
+    {
+        CONST_VTBL struct IMS2DProcessActionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMS2DProcessAction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMS2DProcessAction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMS2DProcessAction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMS2DProcessAction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMS2DProcessAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMS2DProcessAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMS2DProcessAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IMS2DProcessAction_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IMS2DProcessAction_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IMS2DProcessAction_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IMS2DProcessAction_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMS2DProcessAction_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMS2DProcessParameters_INTERFACE_DEFINED__
+#define __IMS2DProcessParameters_INTERFACE_DEFINED__
+
+/* interface IMS2DProcessParameters */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMS2DProcessParameters;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9FAD2A0A-2208-4F26-ABF7-01CEFE67B738")
+    IMS2DProcessParameters : public IComputationParameters
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetFactor( 
+            /* [retval][out] */ int *factor) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMS2DProcessParametersVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMS2DProcessParameters * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMS2DProcessParameters * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMS2DProcessParameters * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMS2DProcessParameters * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMS2DProcessParameters * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMS2DProcessParameters * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMS2DProcessParameters * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFunction )( 
+            IMS2DProcessParameters * This,
+            /* [retval][out] */ IFunction **function);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFactor )( 
+            IMS2DProcessParameters * This,
+            /* [retval][out] */ int *factor);
+        
+        END_INTERFACE
+    } IMS2DProcessParametersVtbl;
+
+    interface IMS2DProcessParameters
+    {
+        CONST_VTBL struct IMS2DProcessParametersVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMS2DProcessParameters_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMS2DProcessParameters_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMS2DProcessParameters_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMS2DProcessParameters_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMS2DProcessParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMS2DProcessParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMS2DProcessParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IMS2DProcessParameters_GetFunction(This,function)	\
+    (This)->lpVtbl -> GetFunction(This,function)
+
+
+#define IMS2DProcessParameters_GetFactor(This,factor)	\
+    (This)->lpVtbl -> GetFactor(This,factor)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IMS2DProcessParameters_GetFactor_Proxy( 
+    IMS2DProcessParameters * This,
+    /* [retval][out] */ int *factor);
+
+
+void __RPC_STUB IMS2DProcessParameters_GetFactor_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IMS2DProcessParameters_INTERFACE_DEFINED__ */
+
+
+#ifndef __IDummy4_INTERFACE_DEFINED__
+#define __IDummy4_INTERFACE_DEFINED__
+
+/* interface IDummy4 */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IDummy4;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("4D810CEE-9913-438E-9883-BC055371B174")
+    IDummy4 : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IDummy4Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IDummy4 * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IDummy4 * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IDummy4 * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IDummy4 * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IDummy4 * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IDummy4 * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IDummy4 * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IDummy4Vtbl;
+
+    interface IDummy4
+    {
+        CONST_VTBL struct IDummy4Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IDummy4_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IDummy4_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IDummy4_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IDummy4_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IDummy4_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IDummy4_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IDummy4_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IDummy4_INTERFACE_DEFINED__ */
+
+
 #ifndef __IWritableFunction_INTERFACE_DEFINED__
 #define __IWritableFunction_INTERFACE_DEFINED__
 
@@ -7927,52 +8320,52 @@ void __RPC_STUB IMS2Metadata_SetSIGraphResult_Stub(
 #endif 	/* __IMS2Metadata_INTERFACE_DEFINED__ */
 
 
-#ifndef __IMS2DProcessAction_INTERFACE_DEFINED__
-#define __IMS2DProcessAction_INTERFACE_DEFINED__
+#ifndef __IMS2DRomAction_INTERFACE_DEFINED__
+#define __IMS2DRomAction_INTERFACE_DEFINED__
 
-/* interface IMS2DProcessAction */
+/* interface IMS2DRomAction */
 /* [unique][helpstring][dual][uuid][object] */ 
 
 
-EXTERN_C const IID IID_IMS2DProcessAction;
+EXTERN_C const IID IID_IMS2DRomAction;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("F8F384DC-FF2E-48B5-9FB3-958A828554C5")
-    IMS2DProcessAction : public IAction
+    MIDL_INTERFACE("27633F37-3573-46D6-B45D-78AE25616DAD")
+    IMS2DRomAction : public IAction
     {
     public:
     };
     
 #else 	/* C style interface */
 
-    typedef struct IMS2DProcessActionVtbl
+    typedef struct IMS2DRomActionVtbl
     {
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IMS2DProcessAction * This,
+            IMS2DRomAction * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IMS2DProcessAction * This);
+            IMS2DRomAction * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            IMS2DProcessAction * This);
+            IMS2DRomAction * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IMS2DProcessAction * This,
+            IMS2DRomAction * This,
             /* [out] */ UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IMS2DProcessAction * This,
+            IMS2DRomAction * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IMS2DProcessAction * This,
+            IMS2DRomAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [in] */ UINT cNames,
@@ -7980,7 +8373,7 @@ EXTERN_C const IID IID_IMS2DProcessAction;
             /* [size_is][out] */ DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IMS2DProcessAction * This,
+            IMS2DRomAction * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -7991,29 +8384,29 @@ EXTERN_C const IID IID_IMS2DProcessAction;
             /* [out] */ UINT *puArgErr);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
-            IMS2DProcessAction * This,
+            IMS2DRomAction * This,
             /* [in] */ IParameters *parameters);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
-            IMS2DProcessAction * This,
+            IMS2DRomAction * This,
             /* [in] */ IProgressBarInfo *pinfo);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
-            IMS2DProcessAction * This,
+            IMS2DRomAction * This,
             /* [in] */ IResultSet *result,
             /* [retval][out] */ VARIANT_BOOL *can);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
-            IMS2DProcessAction * This,
+            IMS2DRomAction * This,
             /* [in] */ IResultSet *input,
             /* [retval][out] */ IResultSet **output);
         
         END_INTERFACE
-    } IMS2DProcessActionVtbl;
+    } IMS2DRomActionVtbl;
 
-    interface IMS2DProcessAction
+    interface IMS2DRomAction
     {
-        CONST_VTBL struct IMS2DProcessActionVtbl *lpVtbl;
+        CONST_VTBL struct IMS2DRomActionVtbl *lpVtbl;
     };
 
     
@@ -8021,40 +8414,40 @@ EXTERN_C const IID IID_IMS2DProcessAction;
 #ifdef COBJMACROS
 
 
-#define IMS2DProcessAction_QueryInterface(This,riid,ppvObject)	\
+#define IMS2DRomAction_QueryInterface(This,riid,ppvObject)	\
     (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
 
-#define IMS2DProcessAction_AddRef(This)	\
+#define IMS2DRomAction_AddRef(This)	\
     (This)->lpVtbl -> AddRef(This)
 
-#define IMS2DProcessAction_Release(This)	\
+#define IMS2DRomAction_Release(This)	\
     (This)->lpVtbl -> Release(This)
 
 
-#define IMS2DProcessAction_GetTypeInfoCount(This,pctinfo)	\
+#define IMS2DRomAction_GetTypeInfoCount(This,pctinfo)	\
     (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
 
-#define IMS2DProcessAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+#define IMS2DRomAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
 
-#define IMS2DProcessAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+#define IMS2DRomAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
 
-#define IMS2DProcessAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+#define IMS2DRomAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
 
-#define IMS2DProcessAction_SetActionParameters(This,parameters)	\
+#define IMS2DRomAction_SetActionParameters(This,parameters)	\
     (This)->lpVtbl -> SetActionParameters(This,parameters)
 
-#define IMS2DProcessAction_SetProgressBarInfo(This,pinfo)	\
+#define IMS2DRomAction_SetProgressBarInfo(This,pinfo)	\
     (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
 
-#define IMS2DProcessAction_CanDo(This,result,can)	\
+#define IMS2DRomAction_CanDo(This,result,can)	\
     (This)->lpVtbl -> CanDo(This,result,can)
 
-#define IMS2DProcessAction_Do(This,input,output)	\
+#define IMS2DRomAction_Do(This,input,output)	\
     (This)->lpVtbl -> Do(This,input,output)
 
 
@@ -8066,148 +8459,7 @@ EXTERN_C const IID IID_IMS2DProcessAction;
 
 
 
-#endif 	/* __IMS2DProcessAction_INTERFACE_DEFINED__ */
-
-
-#ifndef __IMS2DProcessParameters_INTERFACE_DEFINED__
-#define __IMS2DProcessParameters_INTERFACE_DEFINED__
-
-/* interface IMS2DProcessParameters */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IMS2DProcessParameters;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("9FAD2A0A-2208-4F26-ABF7-01CEFE67B738")
-    IMS2DProcessParameters : public IComputationParameters
-    {
-    public:
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetFactor( 
-            /* [retval][out] */ int *factor) = 0;
-        
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IMS2DProcessParametersVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IMS2DProcessParameters * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IMS2DProcessParameters * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IMS2DProcessParameters * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IMS2DProcessParameters * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IMS2DProcessParameters * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IMS2DProcessParameters * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IMS2DProcessParameters * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFunction )( 
-            IMS2DProcessParameters * This,
-            /* [retval][out] */ IFunction **function);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFactor )( 
-            IMS2DProcessParameters * This,
-            /* [retval][out] */ int *factor);
-        
-        END_INTERFACE
-    } IMS2DProcessParametersVtbl;
-
-    interface IMS2DProcessParameters
-    {
-        CONST_VTBL struct IMS2DProcessParametersVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IMS2DProcessParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IMS2DProcessParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IMS2DProcessParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IMS2DProcessParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IMS2DProcessParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IMS2DProcessParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IMS2DProcessParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-
-#define IMS2DProcessParameters_GetFunction(This,function)	\
-    (This)->lpVtbl -> GetFunction(This,function)
-
-
-#define IMS2DProcessParameters_GetFactor(This,factor)	\
-    (This)->lpVtbl -> GetFactor(This,factor)
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMS2DProcessParameters_GetFactor_Proxy( 
-    IMS2DProcessParameters * This,
-    /* [retval][out] */ int *factor);
-
-
-void __RPC_STUB IMS2DProcessParameters_GetFactor_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-
-#endif 	/* __IMS2DProcessParameters_INTERFACE_DEFINED__ */
+#endif 	/* __IMS2DRomAction_INTERFACE_DEFINED__ */
 
 
 #ifndef __IWritableSpectrumResult_INTERFACE_DEFINED__
@@ -8430,258 +8682,6 @@ void __RPC_STUB IWritableSpectrumResult_SetMetadata_Stub(
 #endif 	/* __IWritableSpectrumResult_INTERFACE_DEFINED__ */
 
 
-#ifndef __IMS2DRomAction_INTERFACE_DEFINED__
-#define __IMS2DRomAction_INTERFACE_DEFINED__
-
-/* interface IMS2DRomAction */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IMS2DRomAction;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("27633F37-3573-46D6-B45D-78AE25616DAD")
-    IMS2DRomAction : public IAction
-    {
-    public:
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IMS2DRomActionVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IMS2DRomAction * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IMS2DRomAction * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IMS2DRomAction * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IMS2DRomAction * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IMS2DRomAction * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IMS2DRomAction * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IMS2DRomAction * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
-            IMS2DRomAction * This,
-            /* [in] */ IParameters *parameters);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
-            IMS2DRomAction * This,
-            /* [in] */ IProgressBarInfo *pinfo);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
-            IMS2DRomAction * This,
-            /* [in] */ IResultSet *result,
-            /* [retval][out] */ VARIANT_BOOL *can);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
-            IMS2DRomAction * This,
-            /* [in] */ IResultSet *input,
-            /* [retval][out] */ IResultSet **output);
-        
-        END_INTERFACE
-    } IMS2DRomActionVtbl;
-
-    interface IMS2DRomAction
-    {
-        CONST_VTBL struct IMS2DRomActionVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IMS2DRomAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IMS2DRomAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IMS2DRomAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IMS2DRomAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IMS2DRomAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IMS2DRomAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IMS2DRomAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-
-#define IMS2DRomAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
-
-#define IMS2DRomAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
-
-#define IMS2DRomAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
-
-#define IMS2DRomAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IMS2DRomAction_INTERFACE_DEFINED__ */
-
-
-#ifndef __IDummy4_INTERFACE_DEFINED__
-#define __IDummy4_INTERFACE_DEFINED__
-
-/* interface IDummy4 */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IDummy4;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("4D810CEE-9913-438E-9883-BC055371B174")
-    IDummy4 : public IDispatch
-    {
-    public:
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IDummy4Vtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IDummy4 * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IDummy4 * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IDummy4 * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IDummy4 * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IDummy4 * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IDummy4 * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IDummy4 * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        END_INTERFACE
-    } IDummy4Vtbl;
-
-    interface IDummy4
-    {
-        CONST_VTBL struct IDummy4Vtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IDummy4_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IDummy4_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IDummy4_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IDummy4_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IDummy4_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IDummy4_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IDummy4_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IDummy4_INTERFACE_DEFINED__ */
-
-
 
 #ifndef __MorseKernel2_LIBRARY_DEFINED__
 #define __MorseKernel2_LIBRARY_DEFINED__
@@ -8820,6 +8820,22 @@ class DECLSPEC_UUID("8E730EE1-B837-42E1-BB4E-3D5F9954FEA1")
 CDummy3;
 #endif
 
+EXTERN_C const CLSID CLSID_CMS2DProcessAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("A1BF0187-E515-4B73-9F0E-7CB55F74243B")
+CMS2DProcessAction;
+#endif
+
+EXTERN_C const CLSID CLSID_CDummy4;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("365CB059-BEBE-4707-8475-67724C3DF50A")
+CDummy4;
+#endif
+
 EXTERN_C const CLSID CLSID_CFunctionImpl;
 
 #ifdef __cplusplus
@@ -8860,22 +8876,6 @@ class DECLSPEC_UUID("C18A9780-7C3A-4CA7-BD07-C8CE20EE8D6B")
 CMS2Metadata;
 #endif
 
-EXTERN_C const CLSID CLSID_CMS2DProcessAction;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("A1BF0187-E515-4B73-9F0E-7CB55F74243B")
-CMS2DProcessAction;
-#endif
-
-EXTERN_C const CLSID CLSID_CSpectrumResultImpl;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("45FBC041-D2C1-495D-8CC9-58019691E9CC")
-CSpectrumResultImpl;
-#endif
-
 EXTERN_C const CLSID CLSID_CMS2DRomAction;
 
 #ifdef __cplusplus
@@ -8884,12 +8884,12 @@ class DECLSPEC_UUID("8394D313-8E16-4A8D-9ECD-5C42F61601B1")
 CMS2DRomAction;
 #endif
 
-EXTERN_C const CLSID CLSID_CDummy4;
+EXTERN_C const CLSID CLSID_CSpectrumResultImpl;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("365CB059-BEBE-4707-8475-67724C3DF50A")
-CDummy4;
+class DECLSPEC_UUID("45FBC041-D2C1-495D-8CC9-58019691E9CC")
+CSpectrumResultImpl;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

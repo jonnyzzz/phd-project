@@ -208,6 +208,9 @@
 				RelativePath=".\MorseTest.cpp">
 			</File>
 			<File
+				RelativePath=".\MS2DMorseTest.cpp">
+			</File>
+			<File
 				RelativePath=".\Pefomance.cpp">
 			</File>
 			<File
@@ -265,6 +268,9 @@
 			</File>
 			<File
 				RelativePath=".\MorseTest.h">
+			</File>
+			<File
+				RelativePath=".\MS2DMorseTest.h">
 			</File>
 			<File
 				RelativePath=".\objects.h">

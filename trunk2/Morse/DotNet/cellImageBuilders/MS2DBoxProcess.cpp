@@ -63,7 +63,9 @@ void MS2DBoxProcess::multiplyNode(Node* node, Graph* graph) {
     SegmentList segments;
 
     const JInt* coord = graph->getCells(node);
-    Node* originalGraphNode = siGraph->browseTo(coord);
+    Node* originalGraphNode = siGraph->findNode(coord);
+
+    ATLASSERT(originalGraphNode != NULL);
 
     xi[0] = coord[0];
     xi[1] = coord[1];
@@ -80,6 +82,8 @@ void MS2DBoxProcess::multiplyNode(Node* node, Graph* graph) {
         
         Node* resultNode = graph_result->browseTo(xi);
 
+        ATLASSERT(resultNode != NULL);
+
         processNode(resultNode, segments);
 
         xi[2]++;
@@ -88,13 +92,13 @@ void MS2DBoxProcess::multiplyNode(Node* node, Graph* graph) {
     GraphEdgeEnumerator ee(siGraph, originalGraphNode);
     Node* toNode;
     while( (toNode = ee.nextTo()) != NULL) {
-        amin[0] = amax[0] = siGraph->toExternal(siGraph->getCells(toNode)[0],0);
-        amin[1] = amax[1] = siGraph->toExternal(siGraph->getCells(toNode)[1],1);
+        //amin[0] = amax[0] = siGraph->toExternal(siGraph->getCells(toNode)[0],0) + siGraph->getEps()[0]/2;
+        //amin[1] = amax[1] = siGraph->toExternal(siGraph->getCells(toNode)[1],1) + siGraph->getEps()[1]/2;
 
         for (SegmentList::iterator it = segments.begin(); it != segments.end(); it++) {
             amin[2] = it->left;
             amax[2] = it->right;
-            graph_result->addEdges(it->node, amin, amax);
+            graph_result->addEdgesPartial(it->node, 2, siGraph->getCells(toNode), amin, amax);
         }        
     }
 }
@@ -104,17 +108,14 @@ void MS2DBoxProcess::processNode(Node* resultNode, SegmentList& list) {
     double left;
     double center;
     double right;
-
-    double& v = input[2];
-   
-    v = graph_result->toExternal(graph_result->getCells(resultNode)[2],2);
-
+       
+    input[2] = graph_result->toExternal(graph_result->getCells(resultNode)[2],2);
     left = function->evaluateAngle();
 
-    v+= graph_result->getEps()[2]/2;
+    input[2]+= graph_result->getEps()[2]/2;
     center = function->evaluateAngle();
 
-    v+= graph_result->getEps()[2]/2;
+    input[2]+= graph_result->getEps()[2]/2;
     right = function->evaluateAngle();
 
     if (right < left) {
@@ -122,6 +123,8 @@ void MS2DBoxProcess::processNode(Node* resultNode, SegmentList& list) {
         left = right;
         right = t;
     }
+
+    //cout<<"["<<left<<", "<<center<<", "<<right<<"\n";
     
     if (left <= center && center <= right) {
         list.push_back(Segment(resultNode, left, right));        

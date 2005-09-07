@@ -40,9 +40,11 @@ public:
 	JInt reduce(JInt v, JInt i) const;
 
 public:
-	bool intersects(const JDouble* min, const JDouble* max, int u_bound) const;
+	bool intersects(const JDouble* min, const JDouble* max, int lbound, int rbound) const;
+    bool intersects(const JDouble* min, const JDouble* max, int u_bound) const;
 	bool intersects(const JDouble* min, const JDouble* max) const;
 	bool intersects(const JInt* cell) const;
+    
 
 	bool equals(const CoordinateSystem* cs) const;
 

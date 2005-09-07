@@ -14,6 +14,8 @@
 #include "MinimalLoopTest.h"
 #include "IsolatingProcessTest.h"
 #include "PointGraphTest.h"
+#include "ms2dMorseTest.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -29,7 +31,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
     //testRomFromFile("o:\\aaaa");
 
 
-    PointGraphTest("PointGraphTest", cout).Test();
+    //PointGraphTest("PointGraphTest", cout).Test();
+    MS2DMorseTest().Test();
 
 	//runTests();
 

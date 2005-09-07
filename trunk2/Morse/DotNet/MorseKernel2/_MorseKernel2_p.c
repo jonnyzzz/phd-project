@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Mon Sep 05 00:32:54 2005
+/* at Tue Sep 06 23:26:23 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -345,6 +345,27 @@ extern const MIDL_STUBLESS_PROXY_INFO IDummy3_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
+extern const MIDL_SERVER_INFO IMS2DProcessAction_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMS2DProcessAction_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IMS2DProcessParameters_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMS2DProcessParameters_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IDummy4_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IDummy4_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
 extern const MIDL_SERVER_INFO IWritableFunction_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IWritableFunction_ProxyInfo;
 
@@ -394,27 +415,6 @@ extern const MIDL_STUBLESS_PROXY_INFO IMS2Metadata_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
-extern const MIDL_SERVER_INFO IMS2DProcessAction_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IMS2DProcessAction_ProxyInfo;
-
-
-extern const MIDL_STUB_DESC Object_StubDesc;
-
-
-extern const MIDL_SERVER_INFO IMS2DProcessParameters_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IMS2DProcessParameters_ProxyInfo;
-
-
-extern const MIDL_STUB_DESC Object_StubDesc;
-
-
-extern const MIDL_SERVER_INFO IWritableSpectrumResult_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo;
-
-
-extern const MIDL_STUB_DESC Object_StubDesc;
-
-
 extern const MIDL_SERVER_INFO IMS2DRomAction_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IMS2DRomAction_ProxyInfo;
 
@@ -422,8 +422,8 @@ extern const MIDL_STUBLESS_PROXY_INFO IMS2DRomAction_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
-extern const MIDL_SERVER_INFO IDummy4_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IDummy4_ProxyInfo;
+extern const MIDL_SERVER_INFO IWritableSpectrumResult_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo;
 
 
 extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TABLE_SIZE ];
@@ -6378,6 +6378,221 @@ CInterfaceStubVtbl _IDummy3StubVtbl =
 };
 
 
+/* Object interface: IMS2DProcessAction, ver. 0.0,
+   GUID={0xF8F384DC,0xFF2E,0x48B5,{0x9F,0xB3,0x95,0x8A,0x82,0x85,0x54,0xC5}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMS2DProcessAction_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    204,
+    240,
+    276,
+    318,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMS2DProcessAction_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DProcessAction_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMS2DProcessAction_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DProcessAction_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(11) _IMS2DProcessActionProxyVtbl = 
+{
+    0,
+    &IID_IMS2DProcessAction,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IAction::SetActionParameters */ ,
+    0 /* forced delegation IAction::SetProgressBarInfo */ ,
+    0 /* forced delegation IAction::CanDo */ ,
+    0 /* forced delegation IAction::Do */
+};
+
+
+static const PRPC_STUB_FUNCTION IMS2DProcessAction_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMS2DProcessActionStubVtbl =
+{
+    &IID_IMS2DProcessAction,
+    &IMS2DProcessAction_ServerInfo,
+    11,
+    &IMS2DProcessAction_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IMS2DProcessParameters, ver. 0.0,
+   GUID={0x9FAD2A0A,0x2208,0x4F26,{0xAB,0xF7,0x01,0xCE,0xFE,0x67,0xB7,0x38}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMS2DProcessParameters_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    594,
+    906
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMS2DProcessParameters_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DProcessParameters_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMS2DProcessParameters_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMS2DProcessParameters_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(9) _IMS2DProcessParametersProxyVtbl = 
+{
+    &IMS2DProcessParameters_ProxyInfo,
+    &IID_IMS2DProcessParameters,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    (void *) (INT_PTR) -1 /* IComputationParameters::GetFunction */ ,
+    (void *) (INT_PTR) -1 /* IMS2DProcessParameters::GetFactor */
+};
+
+
+static const PRPC_STUB_FUNCTION IMS2DProcessParameters_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMS2DProcessParametersStubVtbl =
+{
+    &IID_IMS2DProcessParameters,
+    &IMS2DProcessParameters_ServerInfo,
+    9,
+    &IMS2DProcessParameters_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IDummy4, ver. 0.0,
+   GUID={0x4D810CEE,0x9913,0x438E,{0x98,0x83,0xBC,0x05,0x53,0x71,0xB1,0x74}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IDummy4_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IDummy4_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IDummy4_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IDummy4_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IDummy4_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IDummy4ProxyVtbl = 
+{
+    0,
+    &IID_IDummy4,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IDummy4_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IDummy4StubVtbl =
+{
+    &IID_IDummy4,
+    &IDummy4_ServerInfo,
+    7,
+    &IDummy4_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: IWritableFunction, ver. 0.0,
    GUID={0x9B3DA2D8,0xE279,0x4552,{0x99,0xF4,0x13,0xAA,0x06,0x66,0x42,0xD5}} */
 
@@ -6870,11 +7085,11 @@ CInterfaceStubVtbl _IMS2MetadataStubVtbl =
 };
 
 
-/* Object interface: IMS2DProcessAction, ver. 0.0,
-   GUID={0xF8F384DC,0xFF2E,0x48B5,{0x9F,0xB3,0x95,0x8A,0x82,0x85,0x54,0xC5}} */
+/* Object interface: IMS2DRomAction, ver. 0.0,
+   GUID={0x27633F37,0x3573,0x46D6,{0xB4,0x5D,0x78,0xAE,0x25,0x61,0x6D,0xAD}} */
 
 #pragma code_seg(".orpc")
-static const unsigned short IMS2DProcessAction_FormatStringOffsetTable[] =
+static const unsigned short IMS2DRomAction_FormatStringOffsetTable[] =
     {
     (unsigned short) -1,
     (unsigned short) -1,
@@ -6887,31 +7102,31 @@ static const unsigned short IMS2DProcessAction_FormatStringOffsetTable[] =
     0
     };
 
-static const MIDL_STUBLESS_PROXY_INFO IMS2DProcessAction_ProxyInfo =
+static const MIDL_STUBLESS_PROXY_INFO IMS2DRomAction_ProxyInfo =
     {
     &Object_StubDesc,
     __MIDL_ProcFormatString.Format,
-    &IMS2DProcessAction_FormatStringOffsetTable[-3],
+    &IMS2DRomAction_FormatStringOffsetTable[-3],
     0,
     0,
     0
     };
 
 
-static const MIDL_SERVER_INFO IMS2DProcessAction_ServerInfo = 
+static const MIDL_SERVER_INFO IMS2DRomAction_ServerInfo = 
     {
     &Object_StubDesc,
     0,
     __MIDL_ProcFormatString.Format,
-    &IMS2DProcessAction_FormatStringOffsetTable[-3],
+    &IMS2DRomAction_FormatStringOffsetTable[-3],
     0,
     0,
     0,
     0};
-CINTERFACE_PROXY_VTABLE(11) _IMS2DProcessActionProxyVtbl = 
+CINTERFACE_PROXY_VTABLE(11) _IMS2DRomActionProxyVtbl = 
 {
     0,
-    &IID_IMS2DProcessAction,
+    &IID_IMS2DRomAction,
     IUnknown_QueryInterface_Proxy,
     IUnknown_AddRef_Proxy,
     IUnknown_Release_Proxy ,
@@ -6926,7 +7141,7 @@ CINTERFACE_PROXY_VTABLE(11) _IMS2DProcessActionProxyVtbl =
 };
 
 
-static const PRPC_STUB_FUNCTION IMS2DProcessAction_table[] =
+static const PRPC_STUB_FUNCTION IMS2DRomAction_table[] =
 {
     STUB_FORWARDING_FUNCTION,
     STUB_FORWARDING_FUNCTION,
@@ -6938,83 +7153,12 @@ static const PRPC_STUB_FUNCTION IMS2DProcessAction_table[] =
     NdrStubCall2
 };
 
-CInterfaceStubVtbl _IMS2DProcessActionStubVtbl =
+CInterfaceStubVtbl _IMS2DRomActionStubVtbl =
 {
-    &IID_IMS2DProcessAction,
-    &IMS2DProcessAction_ServerInfo,
+    &IID_IMS2DRomAction,
+    &IMS2DRomAction_ServerInfo,
     11,
-    &IMS2DProcessAction_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
-/* Object interface: IMS2DProcessParameters, ver. 0.0,
-   GUID={0x9FAD2A0A,0x2208,0x4F26,{0xAB,0xF7,0x01,0xCE,0xFE,0x67,0xB7,0x38}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short IMS2DProcessParameters_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    594,
-    906
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO IMS2DProcessParameters_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &IMS2DProcessParameters_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO IMS2DProcessParameters_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &IMS2DProcessParameters_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(9) _IMS2DProcessParametersProxyVtbl = 
-{
-    &IMS2DProcessParameters_ProxyInfo,
-    &IID_IMS2DProcessParameters,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */ ,
-    (void *) (INT_PTR) -1 /* IComputationParameters::GetFunction */ ,
-    (void *) (INT_PTR) -1 /* IMS2DProcessParameters::GetFactor */
-};
-
-
-static const PRPC_STUB_FUNCTION IMS2DProcessParameters_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    NdrStubCall2,
-    NdrStubCall2
-};
-
-CInterfaceStubVtbl _IMS2DProcessParametersStubVtbl =
-{
-    &IID_IMS2DProcessParameters,
-    &IMS2DProcessParameters_ServerInfo,
-    9,
-    &IMS2DProcessParameters_table[-3],
+    &IMS2DRomAction_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };
 
@@ -7095,150 +7239,6 @@ CInterfaceStubVtbl _IWritableSpectrumResultStubVtbl =
     &IWritableSpectrumResult_ServerInfo,
     12,
     &IWritableSpectrumResult_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
-/* Object interface: IMS2DRomAction, ver. 0.0,
-   GUID={0x27633F37,0x3573,0x46D6,{0xB4,0x5D,0x78,0xAE,0x25,0x61,0x6D,0xAD}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short IMS2DRomAction_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    204,
-    240,
-    276,
-    318,
-    0
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO IMS2DRomAction_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &IMS2DRomAction_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO IMS2DRomAction_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &IMS2DRomAction_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(11) _IMS2DRomActionProxyVtbl = 
-{
-    0,
-    &IID_IMS2DRomAction,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */ ,
-    0 /* forced delegation IAction::SetActionParameters */ ,
-    0 /* forced delegation IAction::SetProgressBarInfo */ ,
-    0 /* forced delegation IAction::CanDo */ ,
-    0 /* forced delegation IAction::Do */
-};
-
-
-static const PRPC_STUB_FUNCTION IMS2DRomAction_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2
-};
-
-CInterfaceStubVtbl _IMS2DRomActionStubVtbl =
-{
-    &IID_IMS2DRomAction,
-    &IMS2DRomAction_ServerInfo,
-    11,
-    &IMS2DRomAction_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
-/* Object interface: IDummy4, ver. 0.0,
-   GUID={0x4D810CEE,0x9913,0x438E,{0x98,0x83,0xBC,0x05,0x53,0x71,0xB1,0x74}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short IDummy4_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    0
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO IDummy4_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &IDummy4_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO IDummy4_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &IDummy4_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(7) _IDummy4ProxyVtbl = 
-{
-    0,
-    &IID_IDummy4,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */
-};
-
-
-static const PRPC_STUB_FUNCTION IDummy4_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION
-};
-
-CInterfaceStubVtbl _IDummy4StubVtbl =
-{
-    &IID_IDummy4,
-    &IDummy4_ServerInfo,
-    7,
-    &IDummy4_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };
 

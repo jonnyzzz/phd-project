@@ -111,9 +111,8 @@ int CoordinateSystem::getDimention() const {
 }
 /////////////////////////////////////////////////////
 
-
-bool CoordinateSystem::intersects(const JDouble* Min, const JDouble* Max, int u_bound) const{
-   for (int i=0;i<u_bound;i++){
+bool CoordinateSystem::intersects(const JDouble* Min, const JDouble* Max, int lbound, int ubound) const {
+   for (int i=lbound;i<ubound;i++){
       if (!
          ( ( (Min[i] <= min[i]) && (min[i] <= Max[i]) ) ||
          (   (Min[i] <= max[i]) && (max[i] <= Max[i]) ) ||
@@ -123,6 +122,11 @@ bool CoordinateSystem::intersects(const JDouble* Min, const JDouble* Max, int u_
    }
    
    return true;
+}
+
+
+bool CoordinateSystem::intersects(const JDouble* Min, const JDouble* Max, int u_bound) const{
+    return intersects(Min, Max, 0, u_bound);
 }
 
 bool CoordinateSystem::intersects(const JDouble* Min, const JDouble* Max) const {
