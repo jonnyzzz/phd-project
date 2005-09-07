@@ -4,6 +4,8 @@
 #pragma once
 
 #include "CoordinateSystem.h"
+#include "MemoryManager.h"
+#include "DeletingMemoryManager.h"
 
 struct Node;
 struct Edge;
@@ -15,7 +17,7 @@ class FileOutputStream;
 
 class GraphComponents;
 
-class Graph : public CoordinateSystem
+class Graph : public CoordinateSystem, private MemoryManager
 {
 public:
 	Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid);
@@ -28,6 +30,9 @@ public:
 //private:
 //	GraphMemoryAllocator* memoryAllocator;
 
+
+public:
+    void MergeWith(Graph* graph);
 
 private:
 	Node** nodes;
@@ -62,6 +67,11 @@ private:
 	JInt numberEdges;
 
 //Enumerations
+
+//private:
+//    DeletingMemoryManager<NodeEnumerator> cachedNodeEnumerators;
+//    DeletingMemoryManager<EdgeEnumerator> cachedEdgeEnumerators;
+
 public:
 	NodeEnumerator* getNodeRoot();
 	EdgeEnumerator* getEdgeRoot(const Node* node);

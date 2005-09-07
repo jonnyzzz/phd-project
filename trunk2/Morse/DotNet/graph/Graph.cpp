@@ -43,7 +43,10 @@ struct Edge {
 
 
 Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid) 
-: CoordinateSystem(dimention, min, max, grid)
+: CoordinateSystem(dimention, min, max, grid),
+    MemoryManager(sizeof(Node)*71861 + sizeof(Edge)*7*3255+sizeof(JInt)*dimention*8858)
+    //,cachedEdgeEnumerators(50), cachedNodeEnumerators(10)
+
 {
 	edgeHashMax = 7;
 	nodeHashMax = 1861;
@@ -54,21 +57,23 @@ Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* 
 	flagCounter = 0;
 	isLoopFlagID = registerFlag();
 
-	nodes = new Node*[nodeHashMax];
+	nodes = AllocateArray<Node*>(nodeHashMax);//new Node*[nodeHashMax];
 	for (int i=0; i<nodeHashMax; i++) {
 		nodes[i] = NULL;
 	}
 
-	emin = new JInt[dimention];
-	emax = new JInt[dimention];
-	point = new JInt[dimention+1];
-	pointT = new JInt[dimention+1];
-	pointB = new JInt[dimention+1];
-	pointV = new JInt[dimention+1];
+    emin = AllocateArray<JInt>(dimention);// new JInt[dimention];
+	emax = AllocateArray<JInt>(dimention);//new JInt[dimention];
+    point = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
+	pointT = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
+	pointB = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
+	pointV = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
 }
 
 Graph::~Graph()
 {
+    //All Allocations now are made using memory manager
+    /*
 	Node* t;
 	for (int i=0;i<nodeHashMax; i++) {
 		while (nodes[i] != NULL) {
@@ -84,6 +89,7 @@ Graph::~Graph()
 	delete[] pointT;
 	delete[] pointB;
 	delete[] pointV;
+    */
 }
 
 
@@ -150,7 +156,7 @@ int Graph::Hash(const Node* node) const {
 
 
 Edge* Graph::newEdge(Node* to) {
-	Edge* e = new Edge;
+	Edge* e = Allocate<Edge>();//new Edge;
 	e->to = to;
 	e->next = NULL;	
 
@@ -160,9 +166,9 @@ Edge* Graph::newEdge(Node* to) {
 }
 
 Node* Graph::newNode(const JInt* cells) {
-	Node* node = new Node;
-	node->cell = new JInt[dimention];
-	node->edges = new Edge*[edgeHashMax];
+	Node* node = Allocate<Node>();//new Node;
+	node->cell = AllocateArray<JInt>(dimention);//new JInt[dimention];
+	node->edges = AllocateArray<Edge*>(edgeHashMax);//new Edge*[edgeHashMax];
 
 	for (int i=0;i<dimention;i++) {
 		node->cell[i] = cells[i];
@@ -190,7 +196,8 @@ Node* Graph::newNode(const JInt* cells) {
 
 
 void Graph::deleteEdge(Edge* edge) {
-	delete edge;
+    //Nothing to delete. We use MemoryManager
+	//delete edge;
 	numberEdges--;
 }
 
@@ -204,10 +211,10 @@ void Graph::deleteNode(Node* node) {
 		}
 	}
 	
-	delete[] node->edges;
-	delete[] node->cell;
+	//delete[] node->edges;
+	//delete[] node->cell;
 	if (node->enumerator != NULL) freeEdgeEnumerator(node->enumerator);
-	delete node;
+	//delete node;
 	numberNodes--;
 }
 
@@ -229,14 +236,14 @@ struct EdgeEnumerator {
 
 
 NodeEnumerator* Graph::getNodeRoot() {
-	NodeEnumerator* e = new NodeEnumerator;
+    NodeEnumerator* e = new NodeEnumerator;//cachedNodeEnumerators.Allocate(); //;
 	e->hash = 0;
 	e->node = nodes[0];
 	return e;
 }
 
 EdgeEnumerator* Graph::getEdgeRoot(const Node* node) {
-	EdgeEnumerator* e = new EdgeEnumerator;
+	EdgeEnumerator* e = new EdgeEnumerator;//cachedEdgeEnumerators.Allocate();// 
 	e->node = node;
 	e->hash = 0;
 	e->edge = node->edges[0];
@@ -275,11 +282,13 @@ Edge* Graph::getEdge(EdgeEnumerator* en) {
 }
 
 void Graph::freeEdgeEnumerator(EdgeEnumerator*&en) {
+    //cachedEdgeEnumerators.DeAllocate(en);
 	delete en;
 	en = NULL;
 }
 
 void Graph::freeNodeEnumerator(NodeEnumerator*&en) {
+    //cachedNodeEnumerators.DeAllocate(en);
 	delete en;
 	en = NULL;
 }
@@ -630,6 +639,14 @@ GraphComponents* Graph::localazeStrongComponents() {
 	}
 	this->freeNodeEnumerator(enumerator);
 
+    GraphNodeEnumerator ee(this);
+    Node* node;
+    while ((node = ee.next()) != NULL) {
+        if (node->enumerator != NULL) {
+            freeEdgeEnumerator(node->enumerator);
+        }
+    }
+
 	//TRACE("Count: %d\n", cnt-10);
 	
 	return cmps;
@@ -877,3 +894,24 @@ Graph* createTestGraph(int num_nodes) {
 	JInt grid = num_nodes;
 	return new Graph(1, &min, &max, &grid);
 }
+
+
+
+////////////////////////////////////////////////////////////////////////
+//   Megre
+///////////////////////////////////////////////////////////////////////
+
+void Graph::MergeWith(Graph* graph) {
+   
+    GraphNodeEnumerator ne(graph);        
+    Node* node;
+    while( (node = ne.next()) != NULL) {
+        Node* rnode = this->browseTo(node);
+
+        GraphEdgeEnumerator ee(graph, node);
+        Node* toNode;
+        while (toNode = ee.nextTo()) {
+            this->browseTo(rnode, graph->browseTo(toNode));
+        }
+    }
+}   

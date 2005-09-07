@@ -88,7 +88,6 @@ STDMETHODIMP CMS2DCreationAction::Do(IResultSet* in, IResultSet **out) {
     ResultSetIterator<IGraphResult> graphIt(in);
      
     CMS2Metadata::CreateInstance(metadata.extract());
-
     metadata->SetSIGraphResult(graphIt.Current());
 
     GraphResultUtil::PerformProcess(&process, in, false, metadata, out);
