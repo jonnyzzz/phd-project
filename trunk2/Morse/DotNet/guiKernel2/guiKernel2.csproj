@@ -131,6 +131,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\ActionFactory\IDisabledAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\ActionFactory\NextActionFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -142,6 +147,11 @@
                 />
                 <File
                     RelPath = "src\ActionFactory\ActionInfos\ActionRef.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\ActionInfos\ActionStateRef.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

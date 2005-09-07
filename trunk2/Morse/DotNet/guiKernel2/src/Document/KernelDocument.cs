@@ -37,7 +37,9 @@ namespace guiKernel2.Document
 
 		public KernelNode CreateInitialNode()
 		{
-			return new KernelNode(ResultSet.FromResultSet(kernell.CreateInitialResultSet()));
+		    KernelNode node = new KernelNode(ResultSet.FromResultSet(kernell.CreateInitialResultSet()));
+            node.GetNextActions();
+		    return node;
 		}
 	}
 }

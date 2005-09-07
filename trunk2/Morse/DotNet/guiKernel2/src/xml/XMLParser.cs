@@ -104,7 +104,12 @@ namespace guiKernel2.xml
 			foreach (XmlNode node in list)
 			{
 				XmlAttributeCollection attributes = node.Attributes;
-				Core.Instance.ActionNamingFactory.AddActionNaming(attributes["name"].Value, attributes["caption"].Value);
+			    XmlNode commentNode = node.SelectSingleNode("text()");
+			    Core.Instance.ActionNamingFactory.AddActionNaming(
+                        attributes["name"].Value, 
+                        attributes["caption"].Value, 
+                        commentNode!=null? commentNode.Value : null
+                    );
 			}
 		}
 

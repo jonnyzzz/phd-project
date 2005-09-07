@@ -50,11 +50,18 @@ namespace guiKernel2.ActionFactory
 			return CreateActionWrapper(Core.GetType(actionName), actionCaption, isLeaf);			
 		}
 
-		private ActionWrapper CreateActionWrapper(Type actionType, string actionCaption, bool isLeaf)
-		{
-			Type wrapperType = GetWrapperType(actionType);
-			ConstructorInfo info = wrapperType.GetConstructor(new Type[]{typeof(string), typeof(bool)});
-			return info.Invoke(new object[]{actionCaption, isLeaf}) as ActionWrapper;			
-		}
+        private ActionWrapper CreateActionWrapper(Type actionType, string actionCaption, bool isLeaf)
+        {
+            Type wrapperType = GetWrapperType(actionType);
+            ConstructorInfo info = wrapperType.GetConstructor(new Type[]{typeof(string), typeof(bool)});
+            return info.Invoke(new object[]{actionCaption, isLeaf}) as ActionWrapper;			
+        }
+        
+	    public ActionWrapper CreateDisabledAction(string caption, string detail)
+	    {
+	        IDisabledAction wrapper = (IDisabledAction) CreateActionWrapper(typeof(IDisabledActionInterface), caption, true);
+            wrapper.SetComment(detail);
+            return (ActionWrapper) wrapper;
+	    }	    
 	}
 }

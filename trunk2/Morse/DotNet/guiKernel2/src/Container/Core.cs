@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 using guiExternalResource.Core;
 using guiKernel2.ActionFactory;
 using guiKernel2.Document;
-using guiKernel2.src.ActionFactory;
 using guiKernel2.xml;
 
 namespace guiKernel2.Container

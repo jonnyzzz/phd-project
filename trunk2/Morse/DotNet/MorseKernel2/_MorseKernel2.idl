@@ -687,12 +687,12 @@ interface IKernellImpl : IWritableKernell {
 	helpstring("IMS2Metadata Interface"),
 	pointer_default(unique)
 ] 
-#line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
 interface IMS2Metadata : IResultMetadata {
-#line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
-	[id(10)] HRESULT  GetSIGraphResult([out,retval] IGraphResult **out );
-#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
-	[id(11)] HRESULT  SetSIGraphResult([in] IGraphResult *in);
+#line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+	[id(10)] HRESULT  GetSIGraphResult([out,retval] IResultSet **out );
+#line 23 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+	[id(11)] HRESULT  SetSIGraphResult([in] IResultSet *in);
 };
 
 [
@@ -1026,7 +1026,7 @@ library MorseKernel2
 		uuid(C18A9780-7C3A-4CA7-BD07-C8CE20EE8D6B),
 		helpstring("MS2Metadata Class")
 	] 
-#line 38 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+#line 39 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
 	coclass CMS2Metadata {
 		interface IMS2Metadata;
 		interface IResultMetadata;

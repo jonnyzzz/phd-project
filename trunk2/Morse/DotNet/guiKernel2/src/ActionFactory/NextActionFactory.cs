@@ -23,7 +23,7 @@ namespace guiKernel2.ActionFactory
 
 		public ActionWrapper[] NextAction(KernelNode node)
 		{			
-			ActionRef[] infos = FindActionRefs(node);
+			ActionStateRef[] infos = FindActionRefs(node);
 			return CreateInstances(infos);
 		}
 
@@ -43,18 +43,20 @@ namespace guiKernel2.ActionFactory
 		}
 		
 
-		private ActionRef[] FindActionRefs(KernelNode node)
+		private ActionStateRef[] FindActionRefs(KernelNode node)
 		{
 			ArrayList result = new ArrayList();
 			foreach (ActionRef actionInfo in actions)
 			{
-				if ( actionInfo.Constraint.Match(node.Results) )
+                bool match = actionInfo.Constraint.Match(node.Results);
+                ActionStateRef state = new ActionStateRef(actionInfo, match);			    
+			    if ( match )
 				{
-					Logger.Logger.LogMessage("Candidate Found: {0}", actionInfo);
-					result.Add(actionInfo);
+					Logger.Logger.LogMessage("Candidate Found: {0}", actionInfo);					
 				}
+                result.Add(state);
 			}
-			return (ActionRef[])result.ToArray(typeof(ActionRef));
+			return (ActionStateRef[])result.ToArray(typeof(ActionStateRef));
 		}
 
 		public static void DumpInteraces(object o)
@@ -79,19 +81,21 @@ namespace guiKernel2.ActionFactory
 
 
 
-		private ActionRef[] FindActionInfosForPath(KernelNode node, ActionWrapper[] beforeActions)
+		private ActionStateRef[] FindActionInfosForPath(KernelNode node, ActionWrapper[] beforeActions)
 		{
 			return FindActionInfosForPath(FindActionRefs(node), beforeActions);			
 		}
 
-		private ActionRef[] FindActionInfosForPath(ActionRef[] acceptableActons, ActionWrapper[] selected)
+		private ActionStateRef[] FindActionInfosForPath(ActionStateRef[] acceptableActons, ActionWrapper[] selected)
 		{
 			if (selected.Length == 0) return acceptableActons;
 
 			string nextActionName = selected[0].ActionMappingName;
 
-			foreach (ActionRef actionInfo in acceptableActons)
+			foreach (ActionStateRef actionStateInfo in acceptableActons)
 			{
+                if (!actionStateInfo.Enabled) continue;
+                ActionRef actionInfo = actionStateInfo.ActionRef;
 				if(string.Equals(actionInfo.ActionName, nextActionName))
 				{
 					ActionWrapper[] dec = new ActionWrapper[selected.Length-1];
@@ -99,13 +103,18 @@ namespace guiKernel2.ActionFactory
 					{
 						dec[i-1] = selected[i];
 					}
-					return FindActionInfosForPath(actionInfo.ActionRefs, dec);
+                    ArrayList refs = new ArrayList();
+                    foreach(ActionRef rf in actionInfo.ActionRefs)
+                    {
+                        refs.Add(new ActionStateRef(rf, true));
+                    }
+					return FindActionInfosForPath((ActionStateRef[])refs.ToArray(typeof(ActionStateRef))/*actionInfo.ActionRefs*/, dec);
 				}	
 			}
-			return new ActionRef[0];
+			return new ActionStateRef[0];
 		}
 
-		public ActionWrapper[] CreateInstances(ActionRef[] infos)
+		public ActionWrapper[] CreateInstances(ActionStateRef[] infos)
 		{
 			ActionWrapper[] wrappers = new ActionWrapper[infos.Length];
 			for (int i = 0; i<infos.Length; i++)

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Tue Sep 06 23:26:23 2005
+/* at Thu Sep 08 00:36:59 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -8166,10 +8166,10 @@ EXTERN_C const IID IID_IMS2Metadata;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetSIGraphResult( 
-            /* [retval][out] */ IGraphResult **out) = 0;
+            /* [retval][out] */ IResultSet **out) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetSIGraphResult( 
-            /* [in] */ IGraphResult *in) = 0;
+            /* [in] */ IResultSet *in) = 0;
         
     };
     
@@ -8230,11 +8230,11 @@ EXTERN_C const IID IID_IMS2Metadata;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetSIGraphResult )( 
             IMS2Metadata * This,
-            /* [retval][out] */ IGraphResult **out);
+            /* [retval][out] */ IResultSet **out);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetSIGraphResult )( 
             IMS2Metadata * This,
-            /* [in] */ IGraphResult *in);
+            /* [in] */ IResultSet *in);
         
         END_INTERFACE
     } IMS2MetadataVtbl;
@@ -8294,7 +8294,7 @@ EXTERN_C const IID IID_IMS2Metadata;
 
 /* [id] */ HRESULT STDMETHODCALLTYPE IMS2Metadata_GetSIGraphResult_Proxy( 
     IMS2Metadata * This,
-    /* [retval][out] */ IGraphResult **out);
+    /* [retval][out] */ IResultSet **out);
 
 
 void __RPC_STUB IMS2Metadata_GetSIGraphResult_Stub(
@@ -8306,7 +8306,7 @@ void __RPC_STUB IMS2Metadata_GetSIGraphResult_Stub(
 
 /* [id] */ HRESULT STDMETHODCALLTYPE IMS2Metadata_SetSIGraphResult_Proxy( 
     IMS2Metadata * This,
-    /* [in] */ IGraphResult *in);
+    /* [in] */ IResultSet *in);
 
 
 void __RPC_STUB IMS2Metadata_SetSIGraphResult_Stub(

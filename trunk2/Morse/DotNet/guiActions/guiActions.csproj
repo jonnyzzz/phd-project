@@ -137,6 +137,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\DisabledAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\actionImpl\AdaptiveMethod\AdaptiveMethodAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

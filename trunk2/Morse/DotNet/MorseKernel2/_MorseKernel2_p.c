@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Tue Sep 06 23:26:23 2005
+/* at Thu Sep 08 00:36:59 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -2321,7 +2321,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 /* 1998 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
 /* 2000 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2002 */	NdrFcShort( 0x50e ),	/* Type Offset=1294 */
+/* 2002 */	NdrFcShort( 0x53a ),	/* Type Offset=1338 */
 
 	/* Return value */
 
@@ -2351,7 +2351,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 /* 2034 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
 /* 2036 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2038 */	NdrFcShort( 0x512 ),	/* Type Offset=1298 */
+/* 2038 */	NdrFcShort( 0x4fc ),	/* Type Offset=1276 */
 
 	/* Return value */
 

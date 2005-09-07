@@ -16,7 +16,7 @@
 			</nextActions>
 		</action>
 		
-		<action name="IAdaptiveMethodAction" isLeaf="false">		
+		<action name="IAdaptiveMethodAction" isLeaf="false" internal="true">		
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 			<nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true"/>
@@ -39,7 +39,7 @@
 		</action>
 		
 		<action name="ISIRomAction" isLeaf="true">
-			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
 			<constraint class="StrongCompGraphsConstraintFactory" />		
 		</action>
 		
@@ -49,7 +49,7 @@
 		
 		<action name="IMS2DCreationAction" isLeaf="true">
 		    <constraint class="OneGraphResultConstraintFactory" />
-		    <constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
 		    <constraint class="StrongCompGraphsConstraintFactory" />
 		    <constraint class="FixedDimensionConstraintFactory" dimension="2" />		    
 		</action>
@@ -73,14 +73,14 @@
 		<action name="IPointMethodAction" caption="Point Method" />
 		<action name="ITarjanAction" caption="Strong Component Localization" />    
 		<action name="GnuPlotVisualizationKernelAction" caption="Visualize" />
-		<action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search" />
-		<action name="IIsolatedSetAction" caption="Isolating set localization" />
+		<action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search" > You need SI with edges </action>
+		<action name="IIsolatedSetAction" caption="Isolating set localization" > You need SI with edges </action>
 		<action name="SavePointsKernelAction" caption="Export to file" />
-		<action name="ISIRomAction" caption="?----SIROM----?" />
+		<action name="ISIRomAction" caption="Morse Spectrum Multiplied" > You need SI with edges </action>
 		<action name="IAdaptiveMethodAction" caption="Adaptive Method" />
-		<action name="IMS2DCreationAction" caption="Create Angle Projective Bundle" />
-		<action name="IMS2DProcessAction" caption="Next Step" />
-		<action name="IMS2DRomAction" caption="Estimate Morse Spectrum" />
+		<action name="IMS2DCreationAction" caption="Create Angle Projective Bundle" >You need plane SI with edges</action>
+		<action name="IMS2DProcessAction" caption="Angle Projective Bundle Step" > You need to use Create Angle Projective Bundle method first </action>
+		<action name="IMS2DRomAction" caption="Estimate Morse Spectrum" > You need Angle Projective Bundle Node with edges </action>
 		
     </names>
 

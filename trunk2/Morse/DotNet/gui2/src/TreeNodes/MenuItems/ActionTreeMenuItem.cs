@@ -47,8 +47,6 @@ namespace gui2.TreeNodes
 				Logger.Logger.LogMessage("Event Click");
 				Runner.Runner.Instance.ComputationForm.AcceptActionChain(node, actionPath);
 			}
-		}
-
-		
+		}		
 	}
 }

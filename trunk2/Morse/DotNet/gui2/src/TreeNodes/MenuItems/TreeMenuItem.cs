@@ -18,13 +18,13 @@ namespace gui2.TreeNodes
 
 
 		public TreeMenuItem(string caption) : this(caption, false)
-		{
-			
+		{			
 		}
 
 		public TreeMenuItem(string caption, bool isLeaf) : base(caption)
 		{
 			this.isLeaf = isLeaf;
+            this.OwnerDraw = true;
 		}
 
 	    protected override void OnClick(EventArgs e)
@@ -55,9 +55,9 @@ namespace gui2.TreeNodes
 	    protected override void OnDrawItem(DrawItemEventArgs e)
 	    {
 	        base.OnDrawItem(e);
-	    
-			e.DrawBackground();
-			e.DrawFocusRectangle();
+
+	        DrawBackGround(e);
+	        e.DrawFocusRectangle();
 					
 			Color fontColor;
 			if (isLeaf)
@@ -95,7 +95,12 @@ namespace gui2.TreeNodes
 			e.Graphics.DrawString(Text, font, brush, bounds, format);			
 		}
 
-		private Font GetFont()
+	    protected virtual void DrawBackGround(DrawItemEventArgs e)
+	    {
+	        e.DrawBackground();
+	    }
+
+	    private Font GetFont()
 		{
 			Font font;
 			if (isLeaf)

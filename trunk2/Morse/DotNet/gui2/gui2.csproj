@@ -263,7 +263,17 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\TreeNodes\MenuItems\CommentMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\TreeNodes\MenuItems\DelegatedMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\TreeNodes\MenuItems\DisabledActionMuniItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"
                 />
