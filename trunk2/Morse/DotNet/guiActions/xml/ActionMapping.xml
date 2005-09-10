@@ -23,6 +23,14 @@
 			</nextActions>
 		</action>
 		
+		<action name="IAdaptiveBoxMethod" isLeaf="false" internal="true">		
+			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+			<nextActions>		
+				<actionReference name="ITarjanAction" isLeaf="true"/>
+			</nextActions>
+		</action>
+
+		
 		<action name="GnuPlotVisualizationKernelAction" isLeaf="true">
 			<constraint class="GnuPlotConstraintFactory" />
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
@@ -78,6 +86,7 @@
 		<action name="SavePointsKernelAction" caption="Export to file" />
 		<action name="ISIRomAction" caption="Morse Spectrum Multiplied" > You need SI with edges </action>
 		<action name="IAdaptiveMethodAction" caption="Adaptive Method" />
+		<action name="IAdaptiveBoxMethod" caption="Adaptive Box Method" />		
 		<action name="IMS2DCreationAction" caption="Create Angle Projective Bundle" >You need plane SI with edges</action>
 		<action name="IMS2DProcessAction" caption="Angle Projective Bundle Step" > You need to use Create Angle Projective Bundle method first </action>
 		<action name="IMS2DRomAction" caption="Estimate Morse Spectrum" > You need Angle Projective Bundle Node with edges </action>

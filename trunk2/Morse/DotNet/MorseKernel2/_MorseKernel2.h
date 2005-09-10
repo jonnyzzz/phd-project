@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Sep 08 00:36:59 2005
+/* at Sun Sep 11 01:47:54 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -93,16 +93,16 @@ typedef interface IComputationParameters IComputationParameters;
 #endif 	/* __IComputationParameters_FWD_DEFINED__ */
 
 
-#ifndef __IAdaptiveMethodAction_FWD_DEFINED__
-#define __IAdaptiveMethodAction_FWD_DEFINED__
-typedef interface IAdaptiveMethodAction IAdaptiveMethodAction;
-#endif 	/* __IAdaptiveMethodAction_FWD_DEFINED__ */
+#ifndef __IAdaptiveBoxMethod_FWD_DEFINED__
+#define __IAdaptiveBoxMethod_FWD_DEFINED__
+typedef interface IAdaptiveBoxMethod IAdaptiveBoxMethod;
+#endif 	/* __IAdaptiveBoxMethod_FWD_DEFINED__ */
 
 
-#ifndef __IAdaptiveMethodParameters_FWD_DEFINED__
-#define __IAdaptiveMethodParameters_FWD_DEFINED__
-typedef interface IAdaptiveMethodParameters IAdaptiveMethodParameters;
-#endif 	/* __IAdaptiveMethodParameters_FWD_DEFINED__ */
+#ifndef __IAdaptiveBoxParameters_FWD_DEFINED__
+#define __IAdaptiveBoxParameters_FWD_DEFINED__
+typedef interface IAdaptiveBoxParameters IAdaptiveBoxParameters;
+#endif 	/* __IAdaptiveBoxParameters_FWD_DEFINED__ */
 
 
 #ifndef __IResultMetadata_FWD_DEFINED__
@@ -151,6 +151,24 @@ typedef interface IGraphResultImpl IGraphResultImpl;
 #define __ISymbolicImageMetadata_FWD_DEFINED__
 typedef interface ISymbolicImageMetadata ISymbolicImageMetadata;
 #endif 	/* __ISymbolicImageMetadata_FWD_DEFINED__ */
+
+
+#ifndef __IResultSetImpl_FWD_DEFINED__
+#define __IResultSetImpl_FWD_DEFINED__
+typedef interface IResultSetImpl IResultSetImpl;
+#endif 	/* __IResultSetImpl_FWD_DEFINED__ */
+
+
+#ifndef __IAdaptiveMethodAction_FWD_DEFINED__
+#define __IAdaptiveMethodAction_FWD_DEFINED__
+typedef interface IAdaptiveMethodAction IAdaptiveMethodAction;
+#endif 	/* __IAdaptiveMethodAction_FWD_DEFINED__ */
+
+
+#ifndef __IAdaptiveMethodParameters_FWD_DEFINED__
+#define __IAdaptiveMethodParameters_FWD_DEFINED__
+typedef interface IAdaptiveMethodParameters IAdaptiveMethodParameters;
+#endif 	/* __IAdaptiveMethodParameters_FWD_DEFINED__ */
 
 
 #ifndef __IBoxMethodAction_FWD_DEFINED__
@@ -315,12 +333,6 @@ typedef interface IGraphInfoImpl IGraphInfoImpl;
 #endif 	/* __IGraphInfoImpl_FWD_DEFINED__ */
 
 
-#ifndef __IResultSetImpl_FWD_DEFINED__
-#define __IResultSetImpl_FWD_DEFINED__
-typedef interface IResultSetImpl IResultSetImpl;
-#endif 	/* __IResultSetImpl_FWD_DEFINED__ */
-
-
 #ifndef __IKernell_FWD_DEFINED__
 #define __IKernell_FWD_DEFINED__
 typedef interface IKernell IKernell;
@@ -357,16 +369,16 @@ typedef interface IWritableSpectrumResult IWritableSpectrumResult;
 #endif 	/* __IWritableSpectrumResult_FWD_DEFINED__ */
 
 
-#ifndef __CAdaptiveMethodAction_FWD_DEFINED__
-#define __CAdaptiveMethodAction_FWD_DEFINED__
+#ifndef __CAdaptiveBoxMethod_FWD_DEFINED__
+#define __CAdaptiveBoxMethod_FWD_DEFINED__
 
 #ifdef __cplusplus
-typedef class CAdaptiveMethodAction CAdaptiveMethodAction;
+typedef class CAdaptiveBoxMethod CAdaptiveBoxMethod;
 #else
-typedef struct CAdaptiveMethodAction CAdaptiveMethodAction;
+typedef struct CAdaptiveBoxMethod CAdaptiveBoxMethod;
 #endif /* __cplusplus */
 
-#endif 	/* __CAdaptiveMethodAction_FWD_DEFINED__ */
+#endif 	/* __CAdaptiveBoxMethod_FWD_DEFINED__ */
 
 
 #ifndef __CGraphResultImpl_FWD_DEFINED__
@@ -391,6 +403,30 @@ typedef struct CSymbolicImageMetadata CSymbolicImageMetadata;
 #endif /* __cplusplus */
 
 #endif 	/* __CSymbolicImageMetadata_FWD_DEFINED__ */
+
+
+#ifndef __CResultSetImpl_FWD_DEFINED__
+#define __CResultSetImpl_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CResultSetImpl CResultSetImpl;
+#else
+typedef struct CResultSetImpl CResultSetImpl;
+#endif /* __cplusplus */
+
+#endif 	/* __CResultSetImpl_FWD_DEFINED__ */
+
+
+#ifndef __CAdaptiveMethodAction_FWD_DEFINED__
+#define __CAdaptiveMethodAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CAdaptiveMethodAction CAdaptiveMethodAction;
+#else
+typedef struct CAdaptiveMethodAction CAdaptiveMethodAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CAdaptiveMethodAction_FWD_DEFINED__ */
 
 
 #ifndef __CBoxMethodAction_FWD_DEFINED__
@@ -595,18 +631,6 @@ typedef struct CGraphInfoImpl CGraphInfoImpl;
 #endif /* __cplusplus */
 
 #endif 	/* __CGraphInfoImpl_FWD_DEFINED__ */
-
-
-#ifndef __CResultSetImpl_FWD_DEFINED__
-#define __CResultSetImpl_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CResultSetImpl CResultSetImpl;
-#else
-typedef struct CResultSetImpl CResultSetImpl;
-#endif /* __cplusplus */
-
-#endif 	/* __CResultSetImpl_FWD_DEFINED__ */
 
 
 #ifndef __CKernellImpl_FWD_DEFINED__
@@ -2024,60 +2048,61 @@ void __RPC_STUB IComputationParameters_GetFunction_Stub(
 #endif 	/* __IComputationParameters_INTERFACE_DEFINED__ */
 
 
-#ifndef __IAdaptiveMethodAction_INTERFACE_DEFINED__
-#define __IAdaptiveMethodAction_INTERFACE_DEFINED__
+#ifndef __IAdaptiveBoxMethod_INTERFACE_DEFINED__
+#define __IAdaptiveBoxMethod_INTERFACE_DEFINED__
 
-/* interface IAdaptiveMethodAction */
+/* interface IAdaptiveBoxMethod */
 /* [unique][helpstring][dual][uuid][object] */ 
 
 
-EXTERN_C const IID IID_IAdaptiveMethodAction;
+EXTERN_C const IID IID_IAdaptiveBoxMethod;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("6EBF68E3-4686-40C8-9F63-3ABC3504923A")
-    IAdaptiveMethodAction : public IAction
+    MIDL_INTERFACE("20B6A0EB-2F40-4AA7-A066-0CC672BF1531")
+    IAdaptiveBoxMethod : public IAction
     {
     public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimensionFromParameters( 
+            /* [in] */ IResultSet *in,
+            /* [retval][out] */ int *demention) = 0;
+        
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetRecomendedPrecision( 
             /* [in] */ IResultSet *in,
+            /* [in] */ int id,
             /* [retval][out] */ double *prec) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimension( 
-            /* [in] */ IResultSet *in,
-            /* [retval][out] */ int *dim) = 0;
         
     };
     
 #else 	/* C style interface */
 
-    typedef struct IAdaptiveMethodActionVtbl
+    typedef struct IAdaptiveBoxMethodVtbl
     {
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IAdaptiveMethodAction * This,
+            IAdaptiveBoxMethod * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IAdaptiveMethodAction * This);
+            IAdaptiveBoxMethod * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            IAdaptiveMethodAction * This);
+            IAdaptiveBoxMethod * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IAdaptiveMethodAction * This,
+            IAdaptiveBoxMethod * This,
             /* [out] */ UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IAdaptiveMethodAction * This,
+            IAdaptiveBoxMethod * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IAdaptiveMethodAction * This,
+            IAdaptiveBoxMethod * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [in] */ UINT cNames,
@@ -2085,7 +2110,7 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
             /* [size_is][out] */ DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IAdaptiveMethodAction * This,
+            IAdaptiveBoxMethod * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -2096,39 +2121,40 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
             /* [out] */ UINT *puArgErr);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
-            IAdaptiveMethodAction * This,
+            IAdaptiveBoxMethod * This,
             /* [in] */ IParameters *parameters);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
-            IAdaptiveMethodAction * This,
+            IAdaptiveBoxMethod * This,
             /* [in] */ IProgressBarInfo *pinfo);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
-            IAdaptiveMethodAction * This,
+            IAdaptiveBoxMethod * This,
             /* [in] */ IResultSet *result,
             /* [retval][out] */ VARIANT_BOOL *can);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
-            IAdaptiveMethodAction * This,
+            IAdaptiveBoxMethod * This,
             /* [in] */ IResultSet *input,
             /* [retval][out] */ IResultSet **output);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetRecomendedPrecision )( 
-            IAdaptiveMethodAction * This,
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimensionFromParameters )( 
+            IAdaptiveBoxMethod * This,
             /* [in] */ IResultSet *in,
+            /* [retval][out] */ int *demention);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetRecomendedPrecision )( 
+            IAdaptiveBoxMethod * This,
+            /* [in] */ IResultSet *in,
+            /* [in] */ int id,
             /* [retval][out] */ double *prec);
         
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimension )( 
-            IAdaptiveMethodAction * This,
-            /* [in] */ IResultSet *in,
-            /* [retval][out] */ int *dim);
-        
         END_INTERFACE
-    } IAdaptiveMethodActionVtbl;
+    } IAdaptiveBoxMethodVtbl;
 
-    interface IAdaptiveMethodAction
+    interface IAdaptiveBoxMethod
     {
-        CONST_VTBL struct IAdaptiveMethodActionVtbl *lpVtbl;
+        CONST_VTBL struct IAdaptiveBoxMethodVtbl *lpVtbl;
     };
 
     
@@ -2136,48 +2162,48 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
 #ifdef COBJMACROS
 
 
-#define IAdaptiveMethodAction_QueryInterface(This,riid,ppvObject)	\
+#define IAdaptiveBoxMethod_QueryInterface(This,riid,ppvObject)	\
     (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
 
-#define IAdaptiveMethodAction_AddRef(This)	\
+#define IAdaptiveBoxMethod_AddRef(This)	\
     (This)->lpVtbl -> AddRef(This)
 
-#define IAdaptiveMethodAction_Release(This)	\
+#define IAdaptiveBoxMethod_Release(This)	\
     (This)->lpVtbl -> Release(This)
 
 
-#define IAdaptiveMethodAction_GetTypeInfoCount(This,pctinfo)	\
+#define IAdaptiveBoxMethod_GetTypeInfoCount(This,pctinfo)	\
     (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
 
-#define IAdaptiveMethodAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+#define IAdaptiveBoxMethod_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
 
-#define IAdaptiveMethodAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+#define IAdaptiveBoxMethod_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
 
-#define IAdaptiveMethodAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+#define IAdaptiveBoxMethod_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
 
-#define IAdaptiveMethodAction_SetActionParameters(This,parameters)	\
+#define IAdaptiveBoxMethod_SetActionParameters(This,parameters)	\
     (This)->lpVtbl -> SetActionParameters(This,parameters)
 
-#define IAdaptiveMethodAction_SetProgressBarInfo(This,pinfo)	\
+#define IAdaptiveBoxMethod_SetProgressBarInfo(This,pinfo)	\
     (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
 
-#define IAdaptiveMethodAction_CanDo(This,result,can)	\
+#define IAdaptiveBoxMethod_CanDo(This,result,can)	\
     (This)->lpVtbl -> CanDo(This,result,can)
 
-#define IAdaptiveMethodAction_Do(This,input,output)	\
+#define IAdaptiveBoxMethod_Do(This,input,output)	\
     (This)->lpVtbl -> Do(This,input,output)
 
 
-#define IAdaptiveMethodAction_GetRecomendedPrecision(This,in,prec)	\
-    (This)->lpVtbl -> GetRecomendedPrecision(This,in,prec)
+#define IAdaptiveBoxMethod_GetDimensionFromParameters(This,in,demention)	\
+    (This)->lpVtbl -> GetDimensionFromParameters(This,in,demention)
 
-#define IAdaptiveMethodAction_GetDimension(This,in,dim)	\
-    (This)->lpVtbl -> GetDimension(This,in,dim)
+#define IAdaptiveBoxMethod_GetRecomendedPrecision(This,in,id,prec)	\
+    (This)->lpVtbl -> GetRecomendedPrecision(This,in,id,prec)
 
 #endif /* COBJMACROS */
 
@@ -2186,26 +2212,27 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
 
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodAction_GetRecomendedPrecision_Proxy( 
-    IAdaptiveMethodAction * This,
+/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveBoxMethod_GetDimensionFromParameters_Proxy( 
+    IAdaptiveBoxMethod * This,
     /* [in] */ IResultSet *in,
+    /* [retval][out] */ int *demention);
+
+
+void __RPC_STUB IAdaptiveBoxMethod_GetDimensionFromParameters_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveBoxMethod_GetRecomendedPrecision_Proxy( 
+    IAdaptiveBoxMethod * This,
+    /* [in] */ IResultSet *in,
+    /* [in] */ int id,
     /* [retval][out] */ double *prec);
 
 
-void __RPC_STUB IAdaptiveMethodAction_GetRecomendedPrecision_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodAction_GetDimension_Proxy( 
-    IAdaptiveMethodAction * This,
-    /* [in] */ IResultSet *in,
-    /* [retval][out] */ int *dim);
-
-
-void __RPC_STUB IAdaptiveMethodAction_GetDimension_Stub(
+void __RPC_STUB IAdaptiveBoxMethod_GetRecomendedPrecision_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -2213,62 +2240,63 @@ void __RPC_STUB IAdaptiveMethodAction_GetDimension_Stub(
 
 
 
-#endif 	/* __IAdaptiveMethodAction_INTERFACE_DEFINED__ */
+#endif 	/* __IAdaptiveBoxMethod_INTERFACE_DEFINED__ */
 
 
-#ifndef __IAdaptiveMethodParameters_INTERFACE_DEFINED__
-#define __IAdaptiveMethodParameters_INTERFACE_DEFINED__
+#ifndef __IAdaptiveBoxParameters_INTERFACE_DEFINED__
+#define __IAdaptiveBoxParameters_INTERFACE_DEFINED__
 
-/* interface IAdaptiveMethodParameters */
-/* [unique][dual][uuid][object] */ 
+/* interface IAdaptiveBoxParameters */
+/* [unique][helpstring][dual][uuid][object] */ 
 
 
-EXTERN_C const IID IID_IAdaptiveMethodParameters;
+EXTERN_C const IID IID_IAdaptiveBoxParameters;
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
     
-    MIDL_INTERFACE("554362EE-42C4-48EB-B5C3-8C10273D73B5")
-    IAdaptiveMethodParameters : public IComputationParameters
+    MIDL_INTERFACE("AF4C5C56-DFE3-4DCE-9A4E-E48943F49F51")
+    IAdaptiveBoxParameters : public IComputationParameters
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetFactor( 
-            /* [in] */ int index,
+            /* [in] */ int id,
             /* [retval][out] */ int *factor) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetPrecision( 
+            /* [in] */ int id,
             /* [retval][out] */ double *prec) = 0;
         
     };
     
 #else 	/* C style interface */
 
-    typedef struct IAdaptiveMethodParametersVtbl
+    typedef struct IAdaptiveBoxParametersVtbl
     {
         BEGIN_INTERFACE
         
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IAdaptiveMethodParameters * This,
+            IAdaptiveBoxParameters * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IAdaptiveMethodParameters * This);
+            IAdaptiveBoxParameters * This);
         
         ULONG ( STDMETHODCALLTYPE *Release )( 
-            IAdaptiveMethodParameters * This);
+            IAdaptiveBoxParameters * This);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IAdaptiveMethodParameters * This,
+            IAdaptiveBoxParameters * This,
             /* [out] */ UINT *pctinfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IAdaptiveMethodParameters * This,
+            IAdaptiveBoxParameters * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IAdaptiveMethodParameters * This,
+            IAdaptiveBoxParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
             /* [in] */ UINT cNames,
@@ -2276,7 +2304,7 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
             /* [size_is][out] */ DISPID *rgDispId);
         
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IAdaptiveMethodParameters * This,
+            IAdaptiveBoxParameters * This,
             /* [in] */ DISPID dispIdMember,
             /* [in] */ REFIID riid,
             /* [in] */ LCID lcid,
@@ -2287,24 +2315,25 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
             /* [out] */ UINT *puArgErr);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFunction )( 
-            IAdaptiveMethodParameters * This,
+            IAdaptiveBoxParameters * This,
             /* [retval][out] */ IFunction **function);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFactor )( 
-            IAdaptiveMethodParameters * This,
-            /* [in] */ int index,
+            IAdaptiveBoxParameters * This,
+            /* [in] */ int id,
             /* [retval][out] */ int *factor);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetPrecision )( 
-            IAdaptiveMethodParameters * This,
+            IAdaptiveBoxParameters * This,
+            /* [in] */ int id,
             /* [retval][out] */ double *prec);
         
         END_INTERFACE
-    } IAdaptiveMethodParametersVtbl;
+    } IAdaptiveBoxParametersVtbl;
 
-    interface IAdaptiveMethodParameters
+    interface IAdaptiveBoxParameters
     {
-        CONST_VTBL struct IAdaptiveMethodParametersVtbl *lpVtbl;
+        CONST_VTBL struct IAdaptiveBoxParametersVtbl *lpVtbl;
     };
 
     
@@ -2312,39 +2341,39 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
 #ifdef COBJMACROS
 
 
-#define IAdaptiveMethodParameters_QueryInterface(This,riid,ppvObject)	\
+#define IAdaptiveBoxParameters_QueryInterface(This,riid,ppvObject)	\
     (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
 
-#define IAdaptiveMethodParameters_AddRef(This)	\
+#define IAdaptiveBoxParameters_AddRef(This)	\
     (This)->lpVtbl -> AddRef(This)
 
-#define IAdaptiveMethodParameters_Release(This)	\
+#define IAdaptiveBoxParameters_Release(This)	\
     (This)->lpVtbl -> Release(This)
 
 
-#define IAdaptiveMethodParameters_GetTypeInfoCount(This,pctinfo)	\
+#define IAdaptiveBoxParameters_GetTypeInfoCount(This,pctinfo)	\
     (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
 
-#define IAdaptiveMethodParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+#define IAdaptiveBoxParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
     (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
 
-#define IAdaptiveMethodParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+#define IAdaptiveBoxParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
     (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
 
-#define IAdaptiveMethodParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+#define IAdaptiveBoxParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
     (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
 
 
 
-#define IAdaptiveMethodParameters_GetFunction(This,function)	\
+#define IAdaptiveBoxParameters_GetFunction(This,function)	\
     (This)->lpVtbl -> GetFunction(This,function)
 
 
-#define IAdaptiveMethodParameters_GetFactor(This,index,factor)	\
-    (This)->lpVtbl -> GetFactor(This,index,factor)
+#define IAdaptiveBoxParameters_GetFactor(This,id,factor)	\
+    (This)->lpVtbl -> GetFactor(This,id,factor)
 
-#define IAdaptiveMethodParameters_GetPrecision(This,prec)	\
-    (This)->lpVtbl -> GetPrecision(This,prec)
+#define IAdaptiveBoxParameters_GetPrecision(This,id,prec)	\
+    (This)->lpVtbl -> GetPrecision(This,id,prec)
 
 #endif /* COBJMACROS */
 
@@ -2353,25 +2382,26 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
 
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodParameters_GetFactor_Proxy( 
-    IAdaptiveMethodParameters * This,
-    /* [in] */ int index,
+/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveBoxParameters_GetFactor_Proxy( 
+    IAdaptiveBoxParameters * This,
+    /* [in] */ int id,
     /* [retval][out] */ int *factor);
 
 
-void __RPC_STUB IAdaptiveMethodParameters_GetFactor_Stub(
+void __RPC_STUB IAdaptiveBoxParameters_GetFactor_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
     DWORD *_pdwStubPhase);
 
 
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodParameters_GetPrecision_Proxy( 
-    IAdaptiveMethodParameters * This,
+/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveBoxParameters_GetPrecision_Proxy( 
+    IAdaptiveBoxParameters * This,
+    /* [in] */ int id,
     /* [retval][out] */ double *prec);
 
 
-void __RPC_STUB IAdaptiveMethodParameters_GetPrecision_Stub(
+void __RPC_STUB IAdaptiveBoxParameters_GetPrecision_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -2379,7 +2409,7 @@ void __RPC_STUB IAdaptiveMethodParameters_GetPrecision_Stub(
 
 
 
-#endif 	/* __IAdaptiveMethodParameters_INTERFACE_DEFINED__ */
+#endif 	/* __IAdaptiveBoxParameters_INTERFACE_DEFINED__ */
 
 
 #ifndef __IResultMetadata_INTERFACE_DEFINED__
@@ -3725,6 +3755,474 @@ EXTERN_C const IID IID_ISymbolicImageMetadata;
 
 
 #endif 	/* __ISymbolicImageMetadata_INTERFACE_DEFINED__ */
+
+
+#ifndef __IResultSetImpl_INTERFACE_DEFINED__
+#define __IResultSetImpl_INTERFACE_DEFINED__
+
+/* interface IResultSetImpl */
+/* [unique][uuid][dual][object] */ 
+
+
+EXTERN_C const IID IID_IResultSetImpl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("3EB38E81-F41E-44BD-85E3-486CF05FD1B2")
+    IResultSetImpl : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IResultSetImplVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IResultSetImpl * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IResultSetImpl * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IResultSetImpl * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IResultSetImpl * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IResultSetImpl * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IResultSetImpl * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IResultSetImpl * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IResultSetImplVtbl;
+
+    interface IResultSetImpl
+    {
+        CONST_VTBL struct IResultSetImplVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IResultSetImpl_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IResultSetImpl_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IResultSetImpl_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IResultSetImpl_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IResultSetImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IResultSetImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IResultSetImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IResultSetImpl_INTERFACE_DEFINED__ */
+
+
+#ifndef __IAdaptiveMethodAction_INTERFACE_DEFINED__
+#define __IAdaptiveMethodAction_INTERFACE_DEFINED__
+
+/* interface IAdaptiveMethodAction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IAdaptiveMethodAction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("6EBF68E3-4686-40C8-9F63-3ABC3504923A")
+    IAdaptiveMethodAction : public IAction
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetRecomendedPrecision( 
+            /* [in] */ IResultSet *in,
+            /* [retval][out] */ double *prec) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimension( 
+            /* [in] */ IResultSet *in,
+            /* [retval][out] */ int *dim) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IAdaptiveMethodActionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IAdaptiveMethodAction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IAdaptiveMethodAction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IAdaptiveMethodAction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IAdaptiveMethodAction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IAdaptiveMethodAction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IAdaptiveMethodAction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IAdaptiveMethodAction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IAdaptiveMethodAction * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IAdaptiveMethodAction * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IAdaptiveMethodAction * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IAdaptiveMethodAction * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetRecomendedPrecision )( 
+            IAdaptiveMethodAction * This,
+            /* [in] */ IResultSet *in,
+            /* [retval][out] */ double *prec);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimension )( 
+            IAdaptiveMethodAction * This,
+            /* [in] */ IResultSet *in,
+            /* [retval][out] */ int *dim);
+        
+        END_INTERFACE
+    } IAdaptiveMethodActionVtbl;
+
+    interface IAdaptiveMethodAction
+    {
+        CONST_VTBL struct IAdaptiveMethodActionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IAdaptiveMethodAction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IAdaptiveMethodAction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IAdaptiveMethodAction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IAdaptiveMethodAction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IAdaptiveMethodAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IAdaptiveMethodAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IAdaptiveMethodAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IAdaptiveMethodAction_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IAdaptiveMethodAction_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IAdaptiveMethodAction_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IAdaptiveMethodAction_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#define IAdaptiveMethodAction_GetRecomendedPrecision(This,in,prec)	\
+    (This)->lpVtbl -> GetRecomendedPrecision(This,in,prec)
+
+#define IAdaptiveMethodAction_GetDimension(This,in,dim)	\
+    (This)->lpVtbl -> GetDimension(This,in,dim)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodAction_GetRecomendedPrecision_Proxy( 
+    IAdaptiveMethodAction * This,
+    /* [in] */ IResultSet *in,
+    /* [retval][out] */ double *prec);
+
+
+void __RPC_STUB IAdaptiveMethodAction_GetRecomendedPrecision_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodAction_GetDimension_Proxy( 
+    IAdaptiveMethodAction * This,
+    /* [in] */ IResultSet *in,
+    /* [retval][out] */ int *dim);
+
+
+void __RPC_STUB IAdaptiveMethodAction_GetDimension_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IAdaptiveMethodAction_INTERFACE_DEFINED__ */
+
+
+#ifndef __IAdaptiveMethodParameters_INTERFACE_DEFINED__
+#define __IAdaptiveMethodParameters_INTERFACE_DEFINED__
+
+/* interface IAdaptiveMethodParameters */
+/* [unique][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IAdaptiveMethodParameters;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("554362EE-42C4-48EB-B5C3-8C10273D73B5")
+    IAdaptiveMethodParameters : public IComputationParameters
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetFactor( 
+            /* [in] */ int index,
+            /* [retval][out] */ int *factor) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetPrecision( 
+            /* [retval][out] */ double *prec) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IAdaptiveMethodParametersVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IAdaptiveMethodParameters * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IAdaptiveMethodParameters * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IAdaptiveMethodParameters * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IAdaptiveMethodParameters * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IAdaptiveMethodParameters * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IAdaptiveMethodParameters * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IAdaptiveMethodParameters * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFunction )( 
+            IAdaptiveMethodParameters * This,
+            /* [retval][out] */ IFunction **function);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFactor )( 
+            IAdaptiveMethodParameters * This,
+            /* [in] */ int index,
+            /* [retval][out] */ int *factor);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetPrecision )( 
+            IAdaptiveMethodParameters * This,
+            /* [retval][out] */ double *prec);
+        
+        END_INTERFACE
+    } IAdaptiveMethodParametersVtbl;
+
+    interface IAdaptiveMethodParameters
+    {
+        CONST_VTBL struct IAdaptiveMethodParametersVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IAdaptiveMethodParameters_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IAdaptiveMethodParameters_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IAdaptiveMethodParameters_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IAdaptiveMethodParameters_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IAdaptiveMethodParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IAdaptiveMethodParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IAdaptiveMethodParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IAdaptiveMethodParameters_GetFunction(This,function)	\
+    (This)->lpVtbl -> GetFunction(This,function)
+
+
+#define IAdaptiveMethodParameters_GetFactor(This,index,factor)	\
+    (This)->lpVtbl -> GetFactor(This,index,factor)
+
+#define IAdaptiveMethodParameters_GetPrecision(This,prec)	\
+    (This)->lpVtbl -> GetPrecision(This,prec)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodParameters_GetFactor_Proxy( 
+    IAdaptiveMethodParameters * This,
+    /* [in] */ int index,
+    /* [retval][out] */ int *factor);
+
+
+void __RPC_STUB IAdaptiveMethodParameters_GetFactor_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodParameters_GetPrecision_Proxy( 
+    IAdaptiveMethodParameters * This,
+    /* [retval][out] */ double *prec);
+
+
+void __RPC_STUB IAdaptiveMethodParameters_GetPrecision_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IAdaptiveMethodParameters_INTERFACE_DEFINED__ */
 
 
 #ifndef __IBoxMethodAction_INTERFACE_DEFINED__
@@ -7636,116 +8134,6 @@ EXTERN_C const IID IID_IGraphInfoImpl;
 #endif 	/* __IGraphInfoImpl_INTERFACE_DEFINED__ */
 
 
-#ifndef __IResultSetImpl_INTERFACE_DEFINED__
-#define __IResultSetImpl_INTERFACE_DEFINED__
-
-/* interface IResultSetImpl */
-/* [unique][uuid][dual][object] */ 
-
-
-EXTERN_C const IID IID_IResultSetImpl;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("3EB38E81-F41E-44BD-85E3-486CF05FD1B2")
-    IResultSetImpl : public IDispatch
-    {
-    public:
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IResultSetImplVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IResultSetImpl * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IResultSetImpl * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IResultSetImpl * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IResultSetImpl * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IResultSetImpl * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IResultSetImpl * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IResultSetImpl * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        END_INTERFACE
-    } IResultSetImplVtbl;
-
-    interface IResultSetImpl
-    {
-        CONST_VTBL struct IResultSetImplVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IResultSetImpl_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IResultSetImpl_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IResultSetImpl_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IResultSetImpl_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IResultSetImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IResultSetImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IResultSetImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IResultSetImpl_INTERFACE_DEFINED__ */
-
-
 #ifndef __IKernell_INTERFACE_DEFINED__
 #define __IKernell_INTERFACE_DEFINED__
 
@@ -8692,12 +9080,12 @@ void __RPC_STUB IWritableSpectrumResult_SetMetadata_Stub(
 
 EXTERN_C const IID LIBID_MorseKernel2;
 
-EXTERN_C const CLSID CLSID_CAdaptiveMethodAction;
+EXTERN_C const CLSID CLSID_CAdaptiveBoxMethod;
 
 #ifdef __cplusplus
 
-class DECLSPEC_UUID("92548416-C178-460D-A026-3EADF256E19F")
-CAdaptiveMethodAction;
+class DECLSPEC_UUID("ACFA6EFC-A4B6-4BE9-A70B-3F74B724D3DD")
+CAdaptiveBoxMethod;
 #endif
 
 EXTERN_C const CLSID CLSID_CGraphResultImpl;
@@ -8714,6 +9102,22 @@ EXTERN_C const CLSID CLSID_CSymbolicImageMetadata;
 
 class DECLSPEC_UUID("A5D5EA06-663E-4755-A3E7-A536E83B5AC2")
 CSymbolicImageMetadata;
+#endif
+
+EXTERN_C const CLSID CLSID_CResultSetImpl;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("5FAAF083-60CC-4A9B-AAC0-4FDB29047B08")
+CResultSetImpl;
+#endif
+
+EXTERN_C const CLSID CLSID_CAdaptiveMethodAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("92548416-C178-460D-A026-3EADF256E19F")
+CAdaptiveMethodAction;
 #endif
 
 EXTERN_C const CLSID CLSID_CBoxMethodAction;
@@ -8850,14 +9254,6 @@ EXTERN_C const CLSID CLSID_CGraphInfoImpl;
 
 class DECLSPEC_UUID("1FCB1E52-C321-4E44-8BA6-83DA8C532365")
 CGraphInfoImpl;
-#endif
-
-EXTERN_C const CLSID CLSID_CResultSetImpl;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("5FAAF083-60CC-4A9B-AAC0-4FDB29047B08")
-CResultSetImpl;
 #endif
 
 EXTERN_C const CLSID CLSID_CKernellImpl;

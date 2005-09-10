@@ -15,6 +15,7 @@
 #include "IsolatingProcessTest.h"
 #include "PointGraphTest.h"
 #include "ms2dMorseTest.h"
+#include "AdaptiveBoxTest.h"
 
 
 #ifdef _DEBUG
@@ -32,7 +33,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
 
 
     //PointGraphTest("PointGraphTest", cout).Test();
-    MS2DMorseTest().Test();
+    //MS2DMorseTest().Test();
+    AdaptiveBoxTest().Test();
 
 	//runTests();
 

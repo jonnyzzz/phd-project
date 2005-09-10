@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 #include ".\adaptiveboxmethod.h"
+#include <iostream>
+using namespace std;
 
 AdaptiveBoxMethod::AdaptiveBoxMethod(ISystemFunction* function, Graph* graph, JInt* division, double* precision, ProgressBarInfo* info)
 : AdaptiveProcessBase(function, graph, division, precision, info), manager(sizeof(JDouble) * graph->getDimention() *1522)
@@ -54,6 +56,8 @@ void AdaptiveBoxMethod::processResultNode(Node* node) {
     processCells(cells, boxes);
 
 
+    //cout<<"Points = "<<boxes.size()<<"\n";
+
     for (BoxList::iterator it = boxes.begin(); it != boxes.end(); it++) {
         resultGraph->addEdgeWithOverlaping(node, it->valueCache, precision, precision);
     }
@@ -90,9 +94,13 @@ void AdaptiveBoxMethod::processCells(CellsList& cells, BoxList& boxes) {
     JDouble* center = createArray();
     JDouble* edge = createArray();
 
+    //int iterations = 0;
+
     while (!cells.empty()) {
         Cell cell = cells.front();
         cells.pop_front();
+
+      //  iterations++;
 
 
         if (check(cell)) {
@@ -147,4 +155,6 @@ void AdaptiveBoxMethod::processCells(CellsList& cells, BoxList& boxes) {
 
         }
     }
+
+    //cout<<"Iterations = "<<iterations<<"\n";
 }

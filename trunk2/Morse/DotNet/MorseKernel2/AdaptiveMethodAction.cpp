@@ -89,15 +89,17 @@ STDMETHODIMP CAdaptiveMethodAction::Do(IResultSet* in, IResultSet **out) {
     cout<<"Precision = "<<precision<<"\n";
 
 	int* factor = new int[dimension];
+    double* prec = new double[dimension];
 	for (int i=0; i<dimension; i++) {
 		hr = parameters->GetFactor(i, &factor[i]);
 		cout<<"factor = "<<factor[i]<<"\n";
 		ATLASSERT(SUCCEEDED(hr));
+        prec[i] = precision;
 	}
 
     GraphResultGraphIterator it(in);
 
-    AdaptiveProvess process(func, it, factor, precision, &pinfo);
+    AdaptiveProvess process(func, it, factor, prec, &pinfo);
     SmartInterface<IResultMetadata> metadata;
     GraphResultUtil::GetMetadataCloned(in, metadata.extract());
 
@@ -105,6 +107,7 @@ STDMETHODIMP CAdaptiveMethodAction::Do(IResultSet* in, IResultSet **out) {
     ATLASSERT(*out != NULL);
 
     delete[] factor;
+    delete[] prec;
     delete func;
 
     return S_OK;

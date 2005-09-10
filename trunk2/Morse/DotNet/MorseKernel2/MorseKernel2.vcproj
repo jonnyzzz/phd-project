@@ -187,6 +187,9 @@
 				RelativePath=".\ActionBase.cpp">
 			</File>
 			<File
+				RelativePath=".\AdaptiveBoxMethod.cpp">
+			</File>
+			<File
 				RelativePath=".\AdaptiveMethodAction.cpp">
 			</File>
 			<File
@@ -367,6 +370,9 @@
 			</File>
 			<File
 				RelativePath=".\ActionBaseImpl.h">
+			</File>
+			<File
+				RelativePath=".\AdaptiveBoxMethod.h">
 			</File>
 			<File
 				RelativePath=".\AdaptiveMethodAction.h">

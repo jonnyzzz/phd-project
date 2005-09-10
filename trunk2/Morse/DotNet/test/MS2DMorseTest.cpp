@@ -26,7 +26,6 @@ MS2DMorseTest::~MS2DMorseTest(void)
 
 
 typedef smartPointer<ISystemFunction> SmartFunction;
-
 typedef smartPointer<Graph> SmartGraph;
 typedef smartPointer<GraphComponents> SmartComponents;
 typedef smartPointer<ISystemFunctionDerivate> SmartDFunction;

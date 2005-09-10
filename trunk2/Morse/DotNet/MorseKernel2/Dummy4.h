@@ -4,6 +4,7 @@
 #include "resource.h"       // main symbols
 #include "MS2DProcessAction.h"
 #include "ComputationParameters.h"
+#include "AdaptiveBoxMethod.h"
 
 
 // IDummy4
@@ -33,7 +34,8 @@ __interface IDummy4 : IDispatch
 class ATL_NO_VTABLE CDummy4 : 
     public IDummy4,
     public IMS2DProcessParameters,
-    public IComputationParameters
+    public IComputationParameters,
+    public IAdaptiveBoxParameters
 {
 public:
     CDummy4()
@@ -66,6 +68,19 @@ public:
     // IComputationParameters Methods
 public:
     STDMETHOD(GetFunction)(IFunction ** function)
+    {
+        // Add your function implementation here.
+        return E_NOTIMPL;
+    }
+
+    // IAdaptiveBoxParameters Methods
+public:
+    STDMETHOD(GetFactor)(int  id, int * factor)
+    {
+        // Add your function implementation here.
+        return E_NOTIMPL;
+    }
+    STDMETHOD(GetPrecision)(int  id, double * prec)
     {
         // Add your function implementation here.
         return E_NOTIMPL;
