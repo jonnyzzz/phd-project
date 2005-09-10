@@ -111,11 +111,17 @@ double PointGraph::distance(double* left, double* right) {
     return cache;
 }
 
-double PointGraph::evaluateEdgeLength(PointGraph::Edge* edge) {
+bool PointGraph::chackEdgeLength(PointGraph::Edge* edge, double* precision) {
     evaluateNodeCache(edge->left);
     evaluateNodeCache(edge->right);
 
-    return distance(edge->left->valueCache, edge->right->valueCache);    
+    for (int i=0; i<dimension; i++) {
+        if (Abs(edge->left->valueCache[i] - edge->right->valueCache[i]) > precision[i]){
+            return false;
+        }
+    }
+    return true;
+    //return distance(edge->left->valueCache, edge->right->valueCache);    
 }
 
 PointGraph::Node* PointGraph::split(PointGraph::Edge* edge) {
@@ -172,7 +178,7 @@ PointGraph::Node*  PointGraph::AddNodeWithAllEdges(const double* node) {
 }
 
 
-void PointGraph::Iterate(double precision) {
+void PointGraph::Iterate(double* precision) {
 
     while (!edges.empty()) {
         Edge* edge = edges.front();
@@ -182,8 +188,8 @@ void PointGraph::Iterate(double precision) {
         
         if (edge->checked) continue;
 
-        double dist = evaluateEdgeLength(edge);
-        if (dist >= precision) {
+        
+        if (!this->chackEdgeLength(edge, precision)) {
             cout<<"split";
             split(edge);
         } else {

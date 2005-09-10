@@ -2,34 +2,18 @@
 #include "..\cellimagebuilders\abstractprocess.h"
 #include "../SystemFunction/ISystemFunction.h"
 #include "PointGraphProcessor.h"
+#include "AdaptiveProcessBase.h"
 
 class AdaptiveProvess :
-	public AbstractProcess
+    public AdaptiveProcessBase
 {
 public:
-    AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* division, double precision, ProgressBarInfo* info);
+    AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* division, double* precision, ProgressBarInfo* info);
 	virtual ~AdaptiveProvess(void);
 
-public:
-    virtual GraphSet results();
-    virtual void processNextGraph(Graph* graph);
-
-
 protected:
-    void processNode(Graph* graph, Node* node);
-    void processResultNode(Node* node);
-    
-private:
-    Graph* rootGraph;
-    Graph* resultGraph;
-
-    int* division;
-    ISystemFunction* function;
-    int dimension;
+    virtual void processResultNode(Node* node);
 
 private:
-    JInt* x;
-    JInt* b;
-
     PointGraphProcessor* processor;
 };

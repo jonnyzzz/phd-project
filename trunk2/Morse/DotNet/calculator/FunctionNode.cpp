@@ -18,7 +18,7 @@ FunctionNode::~FunctionNode(void)
 }
 
 
-const double precision = 1e-17;
+const double precision = 1e-14;
 bool FunctionNode::isZero(double value) {
    return (value < precision && (-value) < precision);
 }

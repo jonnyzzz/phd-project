@@ -218,15 +218,15 @@ bool CFunctionImpl::initializeContent() {
 		//parse function source
 		FunctionContext cx;
 
-		FunctionContext lowerBound;
-		FunctionContext upperBound;
+        FunctionContext* lowerBound = new FunctionContext();
+		FunctionContext* upperBound = new FunctionContext();
 		
 		for (int i=0; i<this->dimension; i++) {
 			sprintf(buf, "x%d", i+1);
 			int variableID = functionFactory->getFunctionDictionary()->lookUp(buf);
 			cx.addSubstitute(variableID, new FunctionNodeConstant(0));
-			lowerBound.addSubstitute(variableID, new FunctionNodeConstant(space_min[i]));
-			upperBound.addSubstitute(variableID, new FunctionNodeConstant(space_max[i]));
+			lowerBound->addSubstitute(variableID, new FunctionNodeConstant(space_min[i]));
+			upperBound->addSubstitute(variableID, new FunctionNodeConstant(space_max[i]));
 		}
 		
 		for (int i=0; i<this->dimension; i++) {
@@ -264,14 +264,16 @@ bool CFunctionImpl::initializeContent() {
 			node = NULL;
 			sprintf(buf, "y%d", i+1);
 			node = safeGetNode(buf, KernelException(KernelException_NoFunctionEquation, i));
-			IntervalEvaluator evaluator(&lowerBound, &upperBound);
+			IntervalEvaluator evaluator(lowerBound, upperBound);
 			node->Accept(&evaluator);
 			scope[i] = evaluator.getValue();
-			LipsitzFinder lip(&lowerBound, &upperBound);
+			LipsitzFinder lip(lowerBound, upperBound);
 			node->Accept(&lip);
 			lipshitz[i] = lip.getValue();
 			delete node;
 		}
+        delete lowerBound;
+        delete upperBound;
 
 		cout<<"\nExtrema computation finished\n\n";
 

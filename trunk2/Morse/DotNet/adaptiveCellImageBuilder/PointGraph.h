@@ -49,11 +49,11 @@ public:
     Node* AddNodeWithAllEdges(const double* node);
 
     void evaluateNodeCache(Node* node);
-    double evaluateEdgeLength(Edge* edge);
+    bool chackEdgeLength(Edge* edge, double* precision);
 
     Node* split(Edge* edge);
 
-    void Iterate(double precision);
+    void Iterate(double* precision);
 
     const NodeList& Points();
 

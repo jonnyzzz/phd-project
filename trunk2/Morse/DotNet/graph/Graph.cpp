@@ -500,7 +500,7 @@ void Graph::addEdgeWithOverlaping(Node* nodeSourse, JDouble* value, JDouble* off
 		pointB[i] = 0;
 	}
 	pointB[dimention] = 0;
-
+   
 	while (pointB[dimention] == 0) {
 		for (int i=0; i<dimention; i++) {
 			pointV[i] = point[i] + pointB[i]*pointT[i];

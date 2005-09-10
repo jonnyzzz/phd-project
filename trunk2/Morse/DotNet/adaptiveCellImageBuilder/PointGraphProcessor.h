@@ -9,7 +9,7 @@ using namespace std;
 class PointGraphProcessor
 {
 public:
-    PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double precision);
+    PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision);
     ~PointGraphProcessor(void);
 
 public:
@@ -25,7 +25,7 @@ private:
     JDouble* x;
     JInt* b;
 
-    double precision;
+    double* precision;
     double* overlap1;
     double* overlap2;
     
