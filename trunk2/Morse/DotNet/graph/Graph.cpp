@@ -207,7 +207,7 @@ Node* Graph::newNode(const JInt* cells) {
 
 void Graph::deleteEdge(Edge* edge) {
     //Nothing to delete. We use MemoryManager
-	//delete edge;
+    delete edge;
 	numberEdges--;
 }
 
@@ -221,10 +221,10 @@ void Graph::deleteNode(Node* node) {
 		}
 	}
 	
-	//delete[] node->edges;
-	//delete[] node->cell;
+	delete[] node->edges;
+	delete[] node->cell;
 	if (node->enumerator != NULL) freeEdgeEnumerator(node->enumerator);
-	//delete node;
+	delete node;
 	numberNodes--;
 }
 
