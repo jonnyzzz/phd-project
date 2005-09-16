@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -472,6 +473,7 @@ namespace gui2.Forms
 				} catch (SerializationException ee)
 				{
 					MessageBox.Show(this, "Failed to save file: " + ee.Message);
+				    Logger.Logger.LogException(ee);
 				}
 			}
 		}

@@ -47,11 +47,14 @@ MemoryManager::Buffer& MemoryManager::PushNewBuffer() {
 }
 
 MemoryManager::Buffer& MemoryManager::CurrentBuffer(size_t size) {
+
+    ATLASSERT(size < buffer_length);
+
     if (buffers.size() > 0 ) {
         Buffer& myBuffer = buffers.front();
 
         if (myBuffer.it + size >= myBuffer.end) {
-            myBuffer = PushNewBuffer();
+            return PushNewBuffer();
         }
         return myBuffer;
     } else {

@@ -57,23 +57,33 @@ Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* 
 	flagCounter = 0;
 	isLoopFlagID = registerFlag();
 
-	nodes = AllocateArray<Node*>(nodeHashMax);//new Node*[nodeHashMax];
+	//nodes = AllocateArray<Node*>(nodeHashMax);//new Node*[nodeHashMax];
+    nodes = new Node*[nodeHashMax];
 	for (int i=0; i<nodeHashMax; i++) {
 		nodes[i] = NULL;
 	}
 
+    emin =  new JInt[dimention];
+	emax =  new JInt[dimention];
+    point = new JInt[dimention+1];
+	pointT = new JInt[dimention+1];
+	pointB = new JInt[dimention+1];
+	pointV = new JInt[dimention+1];
+
+    /*
     emin = AllocateArray<JInt>(dimention);// new JInt[dimention];
 	emax = AllocateArray<JInt>(dimention);//new JInt[dimention];
     point = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
 	pointT = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
 	pointB = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
 	pointV = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
+    */
 }
 
 Graph::~Graph()
 {
     //All Allocations now are made using memory manager
-    /*
+    
 	Node* t;
 	for (int i=0;i<nodeHashMax; i++) {
 		while (nodes[i] != NULL) {
@@ -89,7 +99,7 @@ Graph::~Graph()
 	delete[] pointT;
 	delete[] pointB;
 	delete[] pointV;
-    */
+    
 }
 
 
@@ -156,7 +166,7 @@ int Graph::Hash(const Node* node) const {
 
 
 Edge* Graph::newEdge(Node* to) {
-	Edge* e = Allocate<Edge>();//new Edge;
+	Edge* e = new Edge;//Allocate<Edge>();//
 	e->to = to;
 	e->next = NULL;	
 
@@ -166,9 +176,9 @@ Edge* Graph::newEdge(Node* to) {
 }
 
 Node* Graph::newNode(const JInt* cells) {
-	Node* node = Allocate<Node>();//new Node;
-	node->cell = AllocateArray<JInt>(dimention);//new JInt[dimention];
-	node->edges = AllocateArray<Edge*>(edgeHashMax);//new Edge*[edgeHashMax];
+	Node* node = new Node;
+	node->cell = new JInt[dimention]; //AllocateArray<JInt>(dimention);//
+	node->edges = new Edge*[edgeHashMax]; //AllocateArray<Edge*>(edgeHashMax);//
 
 	for (int i=0;i<dimention;i++) {
 		node->cell[i] = cells[i];

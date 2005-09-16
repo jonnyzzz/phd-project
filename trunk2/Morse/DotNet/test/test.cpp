@@ -16,7 +16,7 @@
 #include "PointGraphTest.h"
 #include "ms2dMorseTest.h"
 #include "AdaptiveBoxTest.h"
-
+#include "MemoryManagerTest.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -34,7 +34,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
 
     //PointGraphTest("PointGraphTest", cout).Test();
     //MS2DMorseTest().Test();
-    AdaptiveBoxTest().Test();
+    //AdaptiveBoxTest().Test();
+    MemoryManagerTest().Test();
 
 	//runTests();
 

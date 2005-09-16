@@ -205,6 +205,9 @@
 				RelativePath=".\IsolatingProcessTest.cpp">
 			</File>
 			<File
+				RelativePath=".\MemoryManagerTest.cpp">
+			</File>
+			<File
 				RelativePath=".\MinimalLoopTest.cpp">
 			</File>
 			<File
@@ -268,6 +271,9 @@
 			</File>
 			<File
 				RelativePath=".\IsolatingProcessTest.h">
+			</File>
+			<File
+				RelativePath=".\MemoryManagerTest.h">
 			</File>
 			<File
 				RelativePath=".\MinimalLoopTest.h">
