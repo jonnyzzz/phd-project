@@ -9,6 +9,7 @@
 
 struct Node;
 struct Edge;
+struct TarjanNode;
 struct NodeEnumerator;
 struct EdgeEnumerator;
 class GraphMemoryAllocator;
@@ -19,28 +20,35 @@ class GraphComponents;
 
 class Graph : public CoordinateSystem, private MemoryManager
 {
+
 public:
-	Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid);
+	Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid, bool tarjanable, int nodeHashMax=13729, int edgeHashMax=7);
+	
 	virtual ~Graph();
 
-	Graph* copyCoordinates();
-	Graph* copyCoordinatesDevided(int* factor);
+	Graph* copyCoordinates(bool tarjanable);
+	Graph* copyCoordinatesDevided(int* factor, bool tarjanable = true);
 
-//memory routine
-//private:
-//	GraphMemoryAllocator* memoryAllocator;
+	Graph* Project(JInt* devidors);
 
-
+protected:
+	Graph* copyCoordinatesForTarjan();
+	
 public:
     void MergeWith(Graph* graph);
 
 private:
 	Node** nodes;
+	bool isTarjanable;
 
 // Hash Routins
 private:
 	int nodeHashMax;
 	int edgeHashMax;
+
+private:
+	static int getNodeHashMax(int nodes);
+	
 
 private:
 	int _hash(const JInt* cells) const;
@@ -98,6 +106,9 @@ private:
 	bool equals(const JInt* c1, const JInt* c2) const; 
 
 
+private:
+	Node* browseToUnsafe(const JInt* cell);
+
 //content Operations
 public:
 	Node* browseTo(const JInt* cell);
@@ -128,6 +139,8 @@ private:
 //Accessor
 public:
 	const JInt* getCells(Node* node) const;
+
+private:
 	JInt  getNodeNumber(Node* node) const;
 	void  setNodeNumber(Node* node, JInt number);
 
@@ -169,7 +182,7 @@ public:
 private:
 	bool isLoop(Node* node);
 	void setLoop(Node* node);
-	
+
 };
 
 Graph*	createGraph(FileInputStream& o);

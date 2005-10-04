@@ -73,7 +73,7 @@ BEGIN
             VALUE "FileDescription", "New Ideas MorseKernel Type Library"
             VALUE "FileVersion", "2.0.0.1"
             VALUE "InternalName", "MorseKernel2.dll"
-            VALUE "LegalCopyright", "TODO: (c) Eugene Petrenko.  All rights reserved."
+            VALUE "LegalCopyright", "(c) Eugene Petrenko.  All rights reserved."
             VALUE "OriginalFilename", "MorseKernel2.dll"
             VALUE "ProductName", "Morse Kernel Type Library for Computations on Symbolic Dynamics"
             VALUE "ProductVersion", "2.0.0.1"

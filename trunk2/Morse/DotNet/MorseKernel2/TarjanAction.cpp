@@ -67,7 +67,7 @@ STDMETHODIMP CTarjanAction::Do(IResultSet* in, IResultSet** out) {
 	HRESULT hr = parameters->NeedEdgeResolve(&canDo);
 	ATLASSERT(SUCCEEDED(hr));
 
-	cout<<"CanDo = "<<canDo<<"\n";
+	cout<<"NeedEdgeResolve = "<<canDo<<"\n";
 
 	bool needEdgeResolve = (canDo == VARIANT_TRUE);
 

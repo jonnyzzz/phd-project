@@ -16,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-Stack::Stack(Graph* graph) : graph(graph)
+Stack::Stack(Graph* graph) : graph(graph), MemoryManager(sizeof(Stack::dataStack)*195232)
 {
 	root = NULL;
 	this->flagID = graph->registerFlag();
@@ -24,51 +24,53 @@ Stack::Stack(Graph* graph) : graph(graph)
 
 Stack::~Stack()
 {
+	/*
 	while (root != NULL) {
 		dataStack* s = root;
 		root = root->next;
 		delete s;
 	}
+	*/
 }
 
 
 ////////////////////////////////////////////////////////////////////////
 
-void Stack::push(Node* node) {
-	dataStack* s = new dataStack;
+void Stack::push(TarjanNode* node) {
+	dataStack* s = Allocate<dataStack>();//new dataStack;
 	s->next = root;
 	s->node = node;
 	root = s;
-	graph->setFlag(node, flagID, true);
+	graph->setFlag((Node*)node, flagID, true);
 }
 
-Node* Stack::top() {
+TarjanNode* Stack::top() {
 	if (root == NULL) return NULL;
 	return root->node;
 }
 
-Node* Stack::pop() {
+TarjanNode* Stack::pop() {
 	if (root == NULL) return NULL;
 
-	Node* tmp = root->node;
+	TarjanNode* tmp = root->node;
 	dataStack* s = root;
 
 	root = root->next;
-	delete s;
-	graph->setFlag(tmp, flagID, false);
+	//delete s;
+	graph->setFlag((Node*)tmp, flagID, false);
 	return tmp;
 }
 
 
-bool Stack::containsTest(Node* node) {
+bool Stack::containsTest(TarjanNode* node) {
 	
 	dataStack* s = root;
 	while ((s != NULL) && (s->node != node)) s=s->next;
 	return (s!=NULL);
 }
 
-bool Stack::contains(Node* node) {
-	if (graph->readFlag(node, flagID)) {
+bool Stack::contains(TarjanNode* node) {
+	if (graph->readFlag((Node*)node, flagID)) {
 		//ASSERT(containsTest(node));
 		return true;
 	} else {

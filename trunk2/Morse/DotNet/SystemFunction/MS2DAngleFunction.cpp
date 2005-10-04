@@ -50,7 +50,7 @@ void MS2DAngleFunction::evaluateFunction() {
 double MS2DAngleFunction::evaluateAngle() {
     double alpha = input[2];
 
-    cout<<"alpha = "<<alpha<<"\n";
+    //cout<<"alpha = "<<alpha<<"\n";
 
     if ( Abs(alpha - M_PI_2) < cE){ //alpha=+-PI/2
         double d01;

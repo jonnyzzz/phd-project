@@ -72,7 +72,7 @@ Graph* AbstractPointBuilder::createGraph() {
 		cout<<"factor = "<<factor[i]<<"\n";
 		cout<<"ks = "<<ks[i]<<"\n";
 	}
-	return new Graph(dimension, graph_source->getMin(), graph_source->getMax(), point);	
+	return new Graph(dimension, graph_source->getMin(), graph_source->getMax(), point, true);	
 }
 
 

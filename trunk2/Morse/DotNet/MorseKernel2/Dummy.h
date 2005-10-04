@@ -11,6 +11,7 @@
 #include "TarjanAction.h"
 #include "ComputationParameters.h"
 #include "PointMethodAction.h"
+#include "ProjectAction.h"
 
 
 // IDummy
@@ -45,7 +46,8 @@ class ATL_NO_VTABLE CDummy :
 	public IResultSet,
 	public IBoxMethodParameters,
 	public ITarjanParameters,
-	public IFunction
+	public IFunction,
+	public IProjectActionParameters
 {
 public:
 	CDummy()
@@ -193,6 +195,11 @@ public:
 		// Add your function implementation here.
 		return E_NOTIMPL;
 	}
+	STDMETHOD(SetIterations)(int iterations)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
 	STDMETHOD(GetMinimum)(int  id, double * value)
 	{
 		// Add your function implementation here.
@@ -204,6 +211,14 @@ public:
 		return E_NOTIMPL;
 	}
 	STDMETHOD(GetLipshitz)(int  id, double * value)
+	{
+		// Add your function implementation here.
+		return E_NOTIMPL;
+	}
+
+	// IProjectActionParameters Methods
+public:
+	STDMETHOD(GetDevisor)(int  index, int * value)
 	{
 		// Add your function implementation here.
 		return E_NOTIMPL;

@@ -23,13 +23,20 @@ namespace guiKernel2.Serialization
 
 			TempFileAllocator allocator = ResourceManager.Instance.TempFileAllocator;
 			
-			if (!node.Results.Match("IGraphResult", "IResultMetadata")) throw new SerializationException("Not implemented");
+			//if (!node.Results.Match("IGraphResult", "IResultMetadata")) throw new SerializationException("Not implemented");
 
 			try 
 			{
-				foreach (IGraphResult result in node.Results.ToResults)
+				foreach (IResult result in node.Results.ToResults)
 				{
-					SaveResult(doc, xmlNode, allocator, result, pathBase);
+					if (result is IGraphResult) 
+					{
+						SaveResult(doc, xmlNode, allocator, (IGraphResult)result, pathBase);
+					} 
+					else if (result is ISpectrumResult) 
+					{
+						SaveResult(doc, xmlNode, allocator, (ISpectrumResult)result, pathBase);
+					}
 				}
 			} catch (Exception e)
 			{
@@ -37,7 +44,7 @@ namespace guiKernel2.Serialization
 			}
 			return baseNode;
 		}
-
+		
 		private static void SaveResult(XmlDocument doc, XmlNode xmlNode, TempFileAllocator allocator, IGraphResult result, String pathBase)
 		{
 			XmlNode myNode = doc.CreateElement("result");
@@ -59,10 +66,34 @@ namespace guiKernel2.Serialization
 			XmlNode myMetadataNode = doc.CreateElement("metadata");
 			myNode.AppendChild(myMetadataNode);
 
-			SaveResultMetadata(result.GetMetadata(), myMetadataNode, doc);
+			SaveResultMetadata(result.GetMetadata(), myMetadataNode, doc, pathBase);
 		}
 
-		private static void SaveResultMetadata(IResultMetadata metadata, XmlNode node, XmlDocument doc)
+		private static XmlAttribute CreateFilledAttribute(XmlDocument doc, string name, string value) 
+		{
+			XmlAttribute attr = doc.CreateAttribute(name);
+			attr.Value = value;
+			return attr;
+		}
+
+
+		private static void SaveResult(XmlDocument doc, XmlNode xmlNode, TempFileAllocator allocator, ISpectrumResult result, String pathBase)
+		 {
+			 XmlNode myNode = doc.CreateElement("spectrum");
+			 xmlNode.AppendChild(myNode);
+				 
+			 xmlNode.Attributes.Append( CreateFilledAttribute(doc, "MinValue", result.GetLowerBound().ToString()));
+			 xmlNode.Attributes.Append( CreateFilledAttribute(doc, "MinLength", result.GetLowerLength().ToString()));
+			 xmlNode.Attributes.Append( CreateFilledAttribute(doc, "MaxValue", result.GetUpperBound().ToString() ));
+			 xmlNode.Attributes.Append( CreateFilledAttribute(doc, "MaxLength", result.GetUpperLength().ToString()));			 
+			 	
+			 XmlNode myMetadataNode = doc.CreateElement("metadata");
+			 myNode.AppendChild(myMetadataNode);
+
+			 SaveResultMetadata(result.GetMetadata(), myMetadataNode, doc, pathBase);
+		 }
+
+		private static void SaveResultMetadata(IResultMetadata metadata, XmlNode node, XmlDocument doc, string pathBase)
 		{
 			if (metadata is ISymbolicImageMetadata)
 			{
@@ -71,7 +102,27 @@ namespace guiKernel2.Serialization
 				attr.Value = "ISymbolicImageMetadata";
 
 				xmlNode.Attributes.Append(attr);			
-			} else
+			} 
+			else if (metadata is IMS2Metadata) 
+			{
+				XmlAttribute attr = doc.CreateAttribute("type");
+				attr.Value = "IMS2Metadata";
+
+				node.Attributes.Append(attr);
+
+				IMS2Metadata ms = (IMS2Metadata)metadata;
+				KernelNode tmpNode = new KernelNode(ResultSet.FromResultSet( ms.GetSIGraphResult()));
+
+				node.AppendChild( SaveKernelNode(tmpNode, doc, pathBase));				
+			} 
+			else if (metadata is ISpectrumMetadata) 
+			{
+				XmlNode xmlNode = node;
+				XmlAttribute attr = doc.CreateAttribute("type");
+				attr.Value = "ISpectrumMetadata";
+
+				xmlNode.Attributes.Append(attr);			
+			} else 
 			{
 				throw new SerializationException("Unable to save Metadata info");
 			}
@@ -98,24 +149,52 @@ namespace guiKernel2.Serialization
 
 		private static IResult LoadResult(XmlNode root, string pathBase)
 		{
-			if (root.Name != "result") throw new SerializationException("result xml tag expected");
+			if (root.Name == "result" ) 
+			{
 
-			String filename = root.Attributes["filename"].Value;
-			bool isStrong = Boolean.Parse(root.Attributes["isStrongComponent"].Value);
-			IResultMetadata metadata = LoadResultMetadata(root.SelectSingleNode("metadata"));
+				String filename = root.Attributes["filename"].Value;
+				bool isStrong = Boolean.Parse(root.Attributes["isStrongComponent"].Value);
+				IResultMetadata metadata = LoadResultMetadata(root.SelectSingleNode("metadata"), pathBase);
 
-			CGraphResultImplClass impl = new CGraphResultImplClass();
-			impl.SetGraphFromFile(ResourceManager.Instance.SimplyfyPath(pathBase + "/" + filename), isStrong);
-			impl.SetMetadata(metadata);
+				CGraphResultImplClass impl = new CGraphResultImplClass();
+				impl.SetGraphFromFile(ResourceManager.Instance.SimplyfyPath(pathBase + "/" + filename), isStrong);
+				impl.SetMetadata(metadata);
 
-			return impl;
+				return impl;
+			} 
+			else if (root.Name == "spectrum") 
+			{
+				IWritableSpectrumResult wsr = new CSpectrumResultImplClass();
+				wsr.SetMetadata(LoadResultMetadata(root.SelectSingleNode("metadata"), pathBase));
+				wsr.SetLowerBound(double.Parse(root.SelectSingleNode("@MinValue").Value));
+				wsr.SetUpperBound(double.Parse(root.SelectSingleNode("@MaxValue").Value));
+
+				wsr.SetLowerLength(int.Parse(root.SelectSingleNode("@MinLength").Value));
+				wsr.SetUpperLength(int.Parse(root.SelectSingleNode("@MaxLength").Value));
+
+                return (IResult)wsr;
+			}
+			throw new SerializationException("Unknown Element to read");
 		}
 
-		private static IResultMetadata LoadResultMetadata(XmlNode metadata)
+		private static IResultMetadata LoadResultMetadata(XmlNode metadata, string pathBase)
 		{
 			if (metadata.Name != "metadata") throw new SerializationException("metadata tag expetced");
-			if (metadata.Attributes["type"].Value != "ISymbolicImageMetadata") throw new SerializationException("type not supported");
-			return new CSymbolicImageMetadataClass();
+
+			switch (metadata.Attributes["type"].Value) 
+			{
+				case "ISymbolicImageMetadata":
+					return new CSymbolicImageMetadataClass();
+				case "ISpectrumMetadata":
+					return new CSpectrumMetadataClass();
+				case "IMS2Metadata":
+					IMS2Metadata meta = new CMS2MetadataClass();
+					KernelNode node = LoadKernelNode(metadata, pathBase);
+					meta.SetSIGraphResult(node.Results.ToResultSet);
+					return meta;
+				default:
+					throw new SerializationException("Unsupported metadata type");
+			}			
 		}	
 
 		#endregion

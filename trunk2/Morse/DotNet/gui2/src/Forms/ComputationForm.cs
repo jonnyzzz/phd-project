@@ -45,6 +45,11 @@ namespace gui2.Forms
 		private System.Windows.Forms.OpenFileDialog openDocumentDialog;
 		private System.Windows.Forms.MenuItem menuOpenDocument;
 		private System.Windows.Forms.MenuItem menuSystemAnalisys;
+		private System.Windows.Forms.MenuItem menuSystemIterations;
+		private System.Windows.Forms.MenuItem menuSystemDelimiter1;
+		private System.Windows.Forms.MenuItem menuSystemDelimiter2;
+		private System.Windows.Forms.MenuItem menuSystemDelimiter3;
+		private System.Windows.Forms.MenuItem menuSystemComment;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -102,6 +107,8 @@ namespace gui2.Forms
 			this.menuSystem = new System.Windows.Forms.MenuItem();
 			this.menuSystemNew = new System.Windows.Forms.MenuItem();
 			this.menuFunctionShow = new System.Windows.Forms.MenuItem();
+			this.menuSystemAnalisys = new System.Windows.Forms.MenuItem();
+			this.menuSystemIterations = new System.Windows.Forms.MenuItem();
 			this.menuDelimeter = new System.Windows.Forms.MenuItem();
 			this.menuOpenDocument = new System.Windows.Forms.MenuItem();
 			this.menuSave = new System.Windows.Forms.MenuItem();
@@ -109,7 +116,10 @@ namespace gui2.Forms
 			this.menuHelpAbout = new System.Windows.Forms.MenuItem();
 			this.saveDocumentDialog = new System.Windows.Forms.SaveFileDialog();
 			this.openDocumentDialog = new System.Windows.Forms.OpenFileDialog();
-			this.menuSystemAnalisys = new System.Windows.Forms.MenuItem();
+			this.menuSystemDelimiter1 = new System.Windows.Forms.MenuItem();
+			this.menuSystemDelimiter2 = new System.Windows.Forms.MenuItem();
+			this.menuSystemDelimiter3 = new System.Windows.Forms.MenuItem();
+			this.menuSystemComment = new System.Windows.Forms.MenuItem();
 			this.panelLeft.SuspendLayout();
 			this.panelRight.SuspendLayout();
 			this.panelRightUp.SuspendLayout();
@@ -264,8 +274,13 @@ namespace gui2.Forms
 			this.menuSystem.Index = 0;
 			this.menuSystem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																					   this.menuSystemNew,
+																					   this.menuSystemDelimiter1,
 																					   this.menuFunctionShow,
-																					   this.menuSystemAnalisys});
+																					   this.menuSystemAnalisys,
+																					   this.menuSystemDelimiter2,
+																					   this.menuSystemIterations,
+																					   this.menuSystemDelimiter3,
+																					   this.menuSystemComment});
 			this.menuSystem.Text = "System";
 			// 
 			// menuSystemNew
@@ -277,9 +292,21 @@ namespace gui2.Forms
 			// 
 			// menuFunctionShow
 			// 
-			this.menuFunctionShow.Index = 1;
+			this.menuFunctionShow.Index = 2;
 			this.menuFunctionShow.Text = "Show";
 			this.menuFunctionShow.Click += new System.EventHandler(this.MenuFunctionShowClick);
+			// 
+			// menuSystemAnalisys
+			// 
+			this.menuSystemAnalisys.Index = 3;
+			this.menuSystemAnalisys.Text = "Analisys";
+			this.menuSystemAnalisys.Click += new System.EventHandler(this.menuSystemAnalisys_Click);
+			// 
+			// menuSystemIterations
+			// 
+			this.menuSystemIterations.Index = 5;
+			this.menuSystemIterations.Text = "Iterations";
+			this.menuSystemIterations.Click += new System.EventHandler(this.menuSystemIterations_Click);
 			// 
 			// menuDelimeter
 			// 
@@ -324,11 +351,26 @@ namespace gui2.Forms
 			this.openDocumentDialog.Filter = "Dynamical System Investigations Files|*.dsif|All files|*.*";
 			this.openDocumentDialog.Title = "Select System to open";
 			// 
-			// menuSystemAnalisys
+			// menuSystemDelimiter1
 			// 
-			this.menuSystemAnalisys.Index = 2;
-			this.menuSystemAnalisys.Text = "Analisys";
-			this.menuSystemAnalisys.Click += new System.EventHandler(this.menuSystemAnalisys_Click);
+			this.menuSystemDelimiter1.Index = 1;
+			this.menuSystemDelimiter1.Text = "-";
+			// 
+			// menuSystemDelimiter2
+			// 
+			this.menuSystemDelimiter2.Index = 4;
+			this.menuSystemDelimiter2.Text = "-";
+			// 
+			// menuSystemDelimiter3
+			// 
+			this.menuSystemDelimiter3.Index = 6;
+			this.menuSystemDelimiter3.Text = "-";
+			// 
+			// menuSystemComment
+			// 
+			this.menuSystemComment.Index = 7;
+			this.menuSystemComment.Text = "Comment";
+			this.menuSystemComment.Click += new System.EventHandler(this.menuSystemComment_Click);
 			// 
 			// ComputationForm
 			// 
@@ -496,6 +538,33 @@ namespace gui2.Forms
 		{
 			SystemFunctionAnalisys.ShowAnalisys();
 			
+		}
+
+		private void menuSystemIterations_Click(object sender, System.EventArgs e)
+		{
+			if (Runner.Runner.Instance.Document != null) 
+			{
+				FunctionIterations its = new FunctionIterations(Runner.Runner.Instance.Document.KernelDocument.Function.Iterations);
+
+				if (its.ShowDialog(this) == DialogResult.OK) 
+				{
+					menuSystemIterations.Checked = true;
+					Runner.Runner.Instance.Document.KernelDocument.Function.Iterations = its.Iterations;
+				}
+			}
+		}
+
+		private void menuSystemComment_Click(object sender, System.EventArgs e)
+		{
+			Document.Document doc = Runner.Runner.Instance.Document;
+			if ( doc != null) 
+			{							
+				UserComment comment = new UserComment(doc.KernelDocument.Title);
+				if (comment.ShowDialog(this) == DialogResult.OK) 
+				{
+					doc.KernelDocument.Title = comment.UserCommentText;
+				}
+			}
 		}
 	}
 }

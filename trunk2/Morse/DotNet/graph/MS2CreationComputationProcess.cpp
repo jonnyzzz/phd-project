@@ -59,7 +59,7 @@ Graph* MS2CreationComputationProcess::createGraph() {
    grid[2] = Factor(2);
    this->dimension = graph->getDimention();
 
-   Graph* gr =  new Graph(newDimension, min, max, grid);
+   Graph* gr =  new Graph(newDimension, min, max, grid, false);
 
    delete[] min;
    delete[] max;

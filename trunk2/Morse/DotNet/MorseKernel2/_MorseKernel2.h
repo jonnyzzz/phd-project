@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sat Sep 17 03:04:58 2005
+/* at Mon Oct 03 21:19:56 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -211,6 +211,18 @@ typedef interface IPointMethodAction IPointMethodAction;
 #define __IPointMethodParameters_FWD_DEFINED__
 typedef interface IPointMethodParameters IPointMethodParameters;
 #endif 	/* __IPointMethodParameters_FWD_DEFINED__ */
+
+
+#ifndef __IProjectAction_FWD_DEFINED__
+#define __IProjectAction_FWD_DEFINED__
+typedef interface IProjectAction IProjectAction;
+#endif 	/* __IProjectAction_FWD_DEFINED__ */
+
+
+#ifndef __IProjectActionParameters_FWD_DEFINED__
+#define __IProjectActionParameters_FWD_DEFINED__
+typedef interface IProjectActionParameters IProjectActionParameters;
+#endif 	/* __IProjectActionParameters_FWD_DEFINED__ */
 
 
 #ifndef __IDummy_FWD_DEFINED__
@@ -475,6 +487,18 @@ typedef struct CPointMethodAction CPointMethodAction;
 #endif /* __cplusplus */
 
 #endif 	/* __CPointMethodAction_FWD_DEFINED__ */
+
+
+#ifndef __CProjectAction_FWD_DEFINED__
+#define __CProjectAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CProjectAction CProjectAction;
+#else
+typedef struct CProjectAction CProjectAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CProjectAction_FWD_DEFINED__ */
 
 
 #ifndef __CDummy_FWD_DEFINED__
@@ -1631,6 +1655,9 @@ EXTERN_C const IID IID_IFunction;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetIterations( 
             /* [retval][out] */ int *iterations) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetIterations( 
+            /* [in] */ int iterations) = 0;
+        
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetMinimum( 
             /* [in] */ int id,
             /* [retval][out] */ double *value) = 0;
@@ -1715,6 +1742,10 @@ EXTERN_C const IID IID_IFunction;
             IFunction * This,
             /* [retval][out] */ int *iterations);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetIterations )( 
+            IFunction * This,
+            /* [in] */ int iterations);
+        
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetMinimum )( 
             IFunction * This,
             /* [in] */ int id,
@@ -1783,6 +1814,9 @@ EXTERN_C const IID IID_IFunction;
 
 #define IFunction_GetIterations(This,iterations)	\
     (This)->lpVtbl -> GetIterations(This,iterations)
+
+#define IFunction_SetIterations(This,iterations)	\
+    (This)->lpVtbl -> SetIterations(This,iterations)
 
 #define IFunction_GetMinimum(This,id,value)	\
     (This)->lpVtbl -> GetMinimum(This,id,value)
@@ -1866,6 +1900,18 @@ void __RPC_STUB IFunction_GetDimension_Stub(
 
 
 void __RPC_STUB IFunction_GetIterations_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_SetIterations_Proxy( 
+    IFunction * This,
+    /* [in] */ int iterations);
+
+
+void __RPC_STUB IFunction_SetIterations_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -5456,6 +5502,309 @@ void __RPC_STUB IPointMethodParameters_GetOffset_Stub(
 
 
 #endif 	/* __IPointMethodParameters_INTERFACE_DEFINED__ */
+
+
+#ifndef __IProjectAction_INTERFACE_DEFINED__
+#define __IProjectAction_INTERFACE_DEFINED__
+
+/* interface IProjectAction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IProjectAction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("DD6571DF-3579-4F30-BB16-482CA0A104A4")
+    IProjectAction : public IAction
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimention( 
+            /* [in] */ IResultSet *set,
+            /* [retval][out] */ int *dim) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IProjectActionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IProjectAction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IProjectAction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IProjectAction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IProjectAction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IProjectAction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IProjectAction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IProjectAction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IProjectAction * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IProjectAction * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IProjectAction * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IProjectAction * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimention )( 
+            IProjectAction * This,
+            /* [in] */ IResultSet *set,
+            /* [retval][out] */ int *dim);
+        
+        END_INTERFACE
+    } IProjectActionVtbl;
+
+    interface IProjectAction
+    {
+        CONST_VTBL struct IProjectActionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IProjectAction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IProjectAction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IProjectAction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IProjectAction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IProjectAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IProjectAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IProjectAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IProjectAction_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IProjectAction_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IProjectAction_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IProjectAction_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#define IProjectAction_GetDimention(This,set,dim)	\
+    (This)->lpVtbl -> GetDimention(This,set,dim)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProjectAction_GetDimention_Proxy( 
+    IProjectAction * This,
+    /* [in] */ IResultSet *set,
+    /* [retval][out] */ int *dim);
+
+
+void __RPC_STUB IProjectAction_GetDimention_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IProjectAction_INTERFACE_DEFINED__ */
+
+
+#ifndef __IProjectActionParameters_INTERFACE_DEFINED__
+#define __IProjectActionParameters_INTERFACE_DEFINED__
+
+/* interface IProjectActionParameters */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IProjectActionParameters;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("840AFB9E-F0B8-4601-8326-C101F192137D")
+    IProjectActionParameters : public IParameters
+    {
+    public:
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDevisor( 
+            /* [in] */ int index,
+            /* [retval][out] */ int *value) = 0;
+        
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IProjectActionParametersVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IProjectActionParameters * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IProjectActionParameters * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IProjectActionParameters * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IProjectActionParameters * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IProjectActionParameters * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IProjectActionParameters * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IProjectActionParameters * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDevisor )( 
+            IProjectActionParameters * This,
+            /* [in] */ int index,
+            /* [retval][out] */ int *value);
+        
+        END_INTERFACE
+    } IProjectActionParametersVtbl;
+
+    interface IProjectActionParameters
+    {
+        CONST_VTBL struct IProjectActionParametersVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IProjectActionParameters_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IProjectActionParameters_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IProjectActionParameters_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IProjectActionParameters_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IProjectActionParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IProjectActionParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IProjectActionParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IProjectActionParameters_GetDevisor(This,index,value)	\
+    (This)->lpVtbl -> GetDevisor(This,index,value)
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProjectActionParameters_GetDevisor_Proxy( 
+    IProjectActionParameters * This,
+    /* [in] */ int index,
+    /* [retval][out] */ int *value);
+
+
+void __RPC_STUB IProjectActionParameters_GetDevisor_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+
+#endif 	/* __IProjectActionParameters_INTERFACE_DEFINED__ */
 
 
 #ifndef __IDummy_INTERFACE_DEFINED__
@@ -9150,6 +9499,14 @@ EXTERN_C const CLSID CLSID_CPointMethodAction;
 
 class DECLSPEC_UUID("A1A0ABCD-1591-4846-88A0-10AF62560C37")
 CPointMethodAction;
+#endif
+
+EXTERN_C const CLSID CLSID_CProjectAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("6BA86546-D41F-4AC5-A63F-71F7A6B61529")
+CProjectAction;
 #endif
 
 EXTERN_C const CLSID CLSID_CDummy;

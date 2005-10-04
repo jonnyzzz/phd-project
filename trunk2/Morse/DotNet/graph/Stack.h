@@ -6,31 +6,32 @@
 #define AFX_STACK_H__9AD856CD_279E_4297_B688_8C24CAA29BC1__INCLUDED_
 
 #if _MSC_VER > 1000
-#pragma once
+#pragma once     
 #endif // _MSC_VER > 1000
 
-struct Node;
-#include <bitset>
+struct TarjanNode;
 
-class Stack  
+#include "MemoryManager.h"
+
+class Stack  : private MemoryManager
 {
 public:
 	Stack(Graph* graph);
 	virtual ~Stack();
 
 public:
-	void push(Node*);
-	Node* pop();
-	Node* top();
+	void push(TarjanNode*);
+	TarjanNode* pop();
+	TarjanNode* top();
 
-	bool contains(Node*);
+	bool contains(TarjanNode*);
 
 private:
-	bool containsTest(Node*);
+	bool containsTest(TarjanNode*);
 
 private:
 	struct dataStack {
-		Node* node;
+		TarjanNode* node;
 		dataStack* next;
 	};
 

@@ -142,12 +142,22 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\GnuPlot\GnuPlotParameters.resx"
+                    DependentUpon = "GnuPlotParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "src\KernelAction\GnuPlot\EmptyResultSet.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\KernelAction\GnuPlot\GnuPlotScriptGen.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot\GnuPlotScriptGenParameters.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

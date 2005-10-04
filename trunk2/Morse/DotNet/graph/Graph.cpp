@@ -14,6 +14,8 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#define MEMORY_MANAGER
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -28,11 +30,14 @@ struct Node {
 
 	//possible to optimize    
 	int bits;
+};
+
+struct TarjanNode : Node {
+	
 	//tarjans stuff
 	JInt label;  //tarjan markers
 	JInt number; //tarjan markers
 	EdgeEnumerator* enumerator;  //tarjan hard optimization of edge-list
-
 };
 
 struct Edge {
@@ -42,14 +47,23 @@ struct Edge {
 };
 
 
-Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid) 
+Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid, bool tarjanable, int nodeHashMax, int edgeHashMax) 
 : CoordinateSystem(dimention, min, max, grid),
-    MemoryManager(sizeof(Node)*71861 + sizeof(Edge)*7*3255+sizeof(JInt)*dimention*8858)
+    MemoryManager(sizeof(TarjanNode)*71861 + sizeof(Edge)*7*3255+sizeof(JInt)*dimention*112062),
+	isTarjanable(tarjanable)
     //,cachedEdgeEnumerators(50), cachedNodeEnumerators(10)
 
-{
-	edgeHashMax = 7;
-	nodeHashMax = 1861;
+{	
+	if (isTarjanable) {
+		cout<<"Using Tarjan Graph"<<"\n";
+	} else {
+		cout<<"Not Using Tarjan Graph\n";
+	}
+	
+	this->edgeHashMax = edgeHashMax;
+	this->nodeHashMax = nodeHashMax;
+
+	cout<<"NodeHash = "<<this->nodeHashMax<<"\nEdgeHash = "<<this->edgeHashMax<<"\n";
     //edgeHashMax = 10000;
 	//nodeHashMax = 10000;
 	numberEdges = 0;
@@ -57,33 +71,39 @@ Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* 
 	flagCounter = 0;
 	isLoopFlagID = registerFlag();
 
-	//nodes = AllocateArray<Node*>(nodeHashMax);//new Node*[nodeHashMax];
+#ifdef MEMORY_MANAGER
+	nodes = AllocateArray<Node*>(nodeHashMax);//new Node*[nodeHashMax];
+#else
     nodes = new Node*[nodeHashMax];
+#endif
+
 	for (int i=0; i<nodeHashMax; i++) {
 		nodes[i] = NULL;
 	}
-
-    emin =  new JInt[dimention];
+#ifdef MEMORY_MANAGER
+	emin = AllocateArray<JInt>(dimention);// new JInt[dimention];
+	emax = AllocateArray<JInt>(dimention);//new JInt[dimention];
+    point = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
+	pointT = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
+	pointB = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
+	pointV = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];    
+#else
+	emin =  new JInt[dimention];
 	emax =  new JInt[dimention];
     point = new JInt[dimention+1];
 	pointT = new JInt[dimention+1];
 	pointB = new JInt[dimention+1];
 	pointV = new JInt[dimention+1];
-
-    /*
-    emin = AllocateArray<JInt>(dimention);// new JInt[dimention];
-	emax = AllocateArray<JInt>(dimention);//new JInt[dimention];
-    point = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
-	pointT = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
-	pointB = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
-	pointV = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
-    */
+#endif
 }
+
+
+
 
 Graph::~Graph()
 {
     //All Allocations now are made using memory manager
-    
+#ifndef MEMORY_MANAGER
 	Node* t;
 	for (int i=0;i<nodeHashMax; i++) {
 		while (nodes[i] != NULL) {
@@ -99,25 +119,32 @@ Graph::~Graph()
 	delete[] pointT;
 	delete[] pointB;
 	delete[] pointV;
-    
+#endif
 }
 
 
-Graph* Graph::copyCoordinates() {
-	return new Graph(dimention, min, max, grid);
+Graph* Graph::copyCoordinates(bool tarjanable) {
+	return new Graph(dimention, min, max, grid, tarjanable, getNodeHashMax(getNumberOfNodes()*4));
 }
 
-Graph* Graph::copyCoordinatesDevided(int* factor) {
+Graph* Graph::copyCoordinatesForTarjan() {
+	return new Graph(dimention, min, max, grid, false, 13729, 1);
+}
+
+Graph* Graph::copyCoordinatesDevided(int* factor, bool tarjanable) {
+	int fact = 1;
 	for (int i=0; i<dimention; i++) {
 		point[i] = grid[i]*factor[i];
+		fact *= factor[i];
 	}
-	return new Graph(dimention, min, max, point);
+	
+	return new Graph(dimention, min, max, point, tarjanable, getNodeHashMax(getNumberOfNodes()*fact));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 ///////  Hash
 ////////////////////////////////////////////////////////////////////////////////
-const JInt primes[] = {1499, 787, 101, 7, 3191,97, 1499,787 ,101,7, 
+const JInt primes[] = { 4733, 1669, 389, 97, 3191,97, 1499,787 ,101,7, 
 					   3191, 97,  1499, 787 ,101,7, 3191,97, 1499,787,
 					   101,7, 3191,97, 1499,787 ,101,7, 3191,97, 
 					   1499,787,  101,7, 3191,97, 1499,787 ,101,7, 
@@ -127,6 +154,16 @@ const JInt primes[] = {1499, 787, 101, 7, 3191,97, 1499,787 ,101,7,
 					   1499,787,  101,7, 3191,97, 1499,787 ,101,7, 
 					   3191,97, 1499,787, 101,7, 3191,97, 1499,787,
 					   101,7, 3191,97, 101,7, 3191,97, 1499,787 }; //max Dimension is 60
+
+int Graph::getNodeHashMax(int nodes) {
+	if (nodes < 100000) {
+		return 13729;
+	} else if (nodes < 500000) {
+		return 49957;
+	} else 
+		return 112061;
+}
+
 
 int inline Graph::_hash(const JInt* cells) const {
 	
@@ -166,7 +203,11 @@ int Graph::Hash(const Node* node) const {
 
 
 Edge* Graph::newEdge(Node* to) {
+#ifdef MEMORY_MANAGER
+	Edge* e = Allocate<Edge>();//
+#else
 	Edge* e = new Edge;//Allocate<Edge>();//
+#endif
 	e->to = to;
 	e->next = NULL;	
 
@@ -176,9 +217,26 @@ Edge* Graph::newEdge(Node* to) {
 }
 
 Node* Graph::newNode(const JInt* cells) {
-	Node* node = new Node;
+	Node* node;
+
+#ifdef MEMORY_MANAGER
+	
+	if (isTarjanable) {
+		node = static_cast<Node*>(Allocate<TarjanNode>());		
+	} else {
+		node = Allocate<Node>();				
+	}
+	node->cell = AllocateArray<JInt>(dimention);//
+	node->edges = AllocateArray<Edge*>(edgeHashMax);//
+#else
+	if (isTarjanable) {
+		node = static_cast<Node*>(new TarjanNode);
+	} else {
+		node = new Node;
+	}
 	node->cell = new JInt[dimention]; //AllocateArray<JInt>(dimention);//
 	node->edges = new Edge*[edgeHashMax]; //AllocateArray<Edge*>(edgeHashMax);//
+#endif
 
 	for (int i=0;i<dimention;i++) {
 		node->cell[i] = cells[i];
@@ -189,11 +247,15 @@ Node* Graph::newNode(const JInt* cells) {
 	}
 
 	node->next = NULL;
-	//node->isLoop = false;
 	node->bits = 0;
-	node->label = 0;
-	node->number = 0;
-	node->enumerator = NULL;
+	//node->isLoop = false;
+	if (isTarjanable) {
+		TarjanNode* nodeEx = (TarjanNode*)node;
+		
+		nodeEx->label = 0;
+		nodeEx->number = 0;
+		nodeEx->enumerator = NULL;
+	}
 
 	numberNodes++;
 
@@ -206,12 +268,14 @@ Node* Graph::newNode(const JInt* cells) {
 
 
 void Graph::deleteEdge(Edge* edge) {
-    //Nothing to delete. We use MemoryManager
+#ifndef MEMORY_MANAGER    //Nothing to delete. We use MemoryManager
     delete edge;
+#endif
 	numberEdges--;
 }
 
 void Graph::deleteNode(Node* node) {
+#ifndef MEMORY_MANAGER
 	Edge* t;
 	for (int i=0; i<edgeHashMax; i++) {
 		while (node->edges[i] != NULL) {
@@ -225,6 +289,7 @@ void Graph::deleteNode(Node* node) {
 	delete[] node->cell;
 	if (node->enumerator != NULL) freeEdgeEnumerator(node->enumerator);
 	delete node;
+#endif
 	numberNodes--;
 }
 
@@ -365,14 +430,18 @@ bool Graph::equals(const JInt* c1, const JInt* c2)const {
 /////// content Operations
 ///////////////////////////////////////////////////////////////////////////////
 
-Node* Graph::browseTo(const JInt* cell) {
-	if (!intersects(cell)) return NULL;
+inline Node* Graph::browseToUnsafe(const JInt* cell) {
 	Node* t = findNode(cell);
 	if (t == NULL) {
 		return addNode(cell);
 	} else {
 		return t;
 	}
+}
+
+Node* Graph::browseTo(const JInt* cell) {
+	if (!intersects(cell)) return NULL;
+	return browseToUnsafe(cell);
 }
 
 Node* Graph::browseTo(const Node* node) {
@@ -437,7 +506,7 @@ void Graph::addEdgesPartial(Node* node, int ubound, const JInt* coord, const JDo
 	
 	Node* to;
 	while (point[dimention] == 0) {
-		to = browseTo(point);
+		to = browseToUnsafe(point);
 		if ((node != NULL) && (to != NULL)) {
 			browseTo(node, to);
 		}
@@ -544,11 +613,11 @@ const JInt* Graph::getCells(Node* node) const {
 }
 
 JInt Graph::getNodeNumber(Node* node) const {
-	return node->number;
+	return ((TarjanNode*)node)->number;
 }
 
 void Graph::setNodeNumber(Node* node, JInt number) {
-	node->number = number;
+	((TarjanNode*)node)->number = number;
 }
 
 Node* Graph::getEdgeTo(Edge* e) const {
@@ -561,10 +630,13 @@ Node* Graph::getEdgeTo(Edge* e) const {
 
 
 GraphComponents* Graph::localazeStrongComponents() {
-    
+    ATLASSERT(isTarjanable);
+
+	cout<<"Localization of strong components\n";
+
 	GraphComponents* cmps = new GraphComponents();
-	Node* v;
-	Node* w;
+	TarjanNode* v;
+	TarjanNode* w;
 	Edge* e;
 	int state = 2;
 	JInt cnt = 10;
@@ -576,7 +648,7 @@ GraphComponents* Graph::localazeStrongComponents() {
 	
 	NodeEnumerator* enumerator = getNodeRoot();
 	
-	while (v = getNode(enumerator)) {
+	while (v = (TarjanNode*) getNode(enumerator)) {
 		if (v->label == 0) {
 			while (state > 1) {
 	///			TRACE("Step : %d\n", state);
@@ -595,8 +667,8 @@ GraphComponents* Graph::localazeStrongComponents() {
 					if (v->enumerator == NULL) v->enumerator = getEdgeRoot(v);
 					e = getEdge(v->enumerator);
 					if (e != NULL) {
-						w = e->to;
-						if (e->to->label == 0) {
+						w = (TarjanNode*)e->to;
+						if (((TarjanNode*)e->to)->label == 0) {
 							v = w;
 							state = 2;
 						} else {
@@ -627,12 +699,12 @@ GraphComponents* Graph::localazeStrongComponents() {
 					if (v == stack.top()) {
 						stack.pop();
 						if (isLoop(v)) {
-							tmp = this->copyCoordinates();												
+							tmp = this->copyCoordinatesForTarjan();												
 							tmp->addNode(v->cell);
 							cmps->addGraphAsComponent(tmp);
 						}
 					} else {
-						tmp = this->copyCoordinates();
+						tmp = this->copyCoordinatesForTarjan();
 						do {
 							w = stack.pop();
 							tmp->addNode(w->cell);
@@ -651,8 +723,8 @@ GraphComponents* Graph::localazeStrongComponents() {
 	this->freeNodeEnumerator(enumerator);
 
     GraphNodeEnumerator ee(this);
-    Node* node;
-    while ((node = ee.next()) != NULL) {
+    TarjanNode* node;
+    while ((node = (TarjanNode*)ee.next()) != NULL) {
         if (node->enumerator != NULL) {
             freeEdgeEnumerator(node->enumerator);
         }
@@ -668,6 +740,8 @@ JInt Graph::tmin(JInt a, JInt b) const{
 }
 
 void Graph::resolveEdges(Graph* root) {
+   ATLASSERT(isTarjanable);
+
    Node* node;
    Node* rootNode;
    NodeEnumerator* en = this->getNodeRoot();
@@ -692,7 +766,9 @@ void Graph::resolveEdges(Graph* root) {
 ///////////////////////////////////////////////////////////////////////////////
 
 Graph* Graph::localizeLoops() {
-	Graph* ret = this->copyCoordinates();
+	ATLASSERT(isTarjanable);
+
+	Graph* ret = this->copyCoordinatesForTarjan();
 
 	NodeEnumerator* ne = this->getNodeRoot();
 	Node* node;
@@ -751,7 +827,7 @@ Graph*	createGraph(FileInputStream& o) {
 		o>>min[i]>>max[i]>>grid[i];
 	}
 
-	Graph* graph = new Graph(dimention, min, max, grid);
+	Graph* graph = new Graph(dimention, min, max, grid, false);
 	Node* node;
 
 	for (int ne = 0; ne < nodes; ne++) {
@@ -856,6 +932,7 @@ void saveGraphAsPoints(FileOutputStream& o, Graph* graph) {
 // Flags
 
 int Graph::registerFlag() {
+	
 	flagCounter++;
 	ASSERT(flagCounter < 31); // bits in char
 	return flagCounter;
@@ -865,18 +942,20 @@ void Graph::unregisterFlag(int flagID) {
 	
 }
 
-bool Graph::readFlag(Node* node, int flagID) {
+bool Graph::readFlag(Node* node, int flagID) {	
+
 	int mask = (1<<flagID);
-	return (node->bits & mask) != 0;
+	return ((node)->bits & mask) != 0;
 }
 
 void Graph::setFlag(Node* node, int flagID, bool value) {
+
 	if (value) {
 		int mask = (1<<flagID);
-		node->bits = node->bits | mask;		
+		(node)->bits = (node)->bits | mask;		
 	} else {
 		int mask = ~(1<<flagID);
-		node->bits = node->bits & mask;
+		(node)->bits = (node)->bits & mask;
 	}
 
 	ASSERT(readFlag(node, flagID) == value); 
@@ -891,10 +970,14 @@ void Graph::setFlag(Node* node, int flagID, bool value) {
 
 ////////////////////////////////////////////////////////////////////
 bool inline Graph::isLoop(Node* node) {
+	ATLASSERT(isTarjanable);
+
 	return readFlag(node, isLoopFlagID);
 }
 
 void inline Graph::setLoop(Node* node) {
+	ATLASSERT(isTarjanable);
+
 	setFlag(node, isLoopFlagID);
 }
 
@@ -903,7 +986,7 @@ Graph* createTestGraph(int num_nodes) {
 	JDouble min = 1;
 	JDouble max = 2;
 	JInt grid = num_nodes;
-	return new Graph(1, &min, &max, &grid);
+	return new Graph(1, &min, &max, &grid, true);
 }
 
 
@@ -926,3 +1009,28 @@ void Graph::MergeWith(Graph* graph) {
         }
     }
 }   
+
+
+///////////////////////////////////////////////////////////////////////////
+
+Graph* Graph::Project(JInt* devidors) {
+	
+	int fct = 1;
+	for (int i=0; i<dimention; i++) {
+		point[i] = this->getGrid()[i]/devidors[i];
+		fct*=point[i];
+	}
+
+	Graph* newGraph = new Graph(dimention, this->getMin(), this->getMax(), point, false, getNodeHashMax(this->getNumberOfNodes()/fct));
+
+	GraphNodeEnumerator ne(this);
+	Node* node;
+	while (node = ne.next()) {
+		for (int i=0; i<dimention; i++) {
+			point[i] = this->getCells(node)[i]/devidors[i];
+		}
+		newGraph->browseToUnsafe(point);
+	}
+
+	return newGraph;
+}

@@ -283,6 +283,9 @@
 				RelativePath=".\ProgressBarNotificationAdapter.cpp">
 			</File>
 			<File
+				RelativePath=".\ProjectAction.cpp">
+			</File>
+			<File
 				RelativePath=".\Result.cpp">
 			</File>
 			<File
@@ -463,6 +466,9 @@
 			</File>
 			<File
 				RelativePath=".\ProgressBarNotificationAdapter.h">
+			</File>
+			<File
+				RelativePath=".\ProjectAction.h">
 			</File>
 			<File
 				RelativePath=".\Resource.h">

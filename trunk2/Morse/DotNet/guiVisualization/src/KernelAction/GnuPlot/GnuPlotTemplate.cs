@@ -8,16 +8,24 @@ namespace guiVisualization.KernelAction.GnuPlot
 	/// 
 	public class GnuPlotTemplate
 	{
+		private string SafeGetText(XmlNode root, string path) 
+		{
+			XmlNode node = root.SelectSingleNode(path);
+			return node == null? null : node.Value;
+		}
+
 		public GnuPlotTemplate(XmlNode node)
 		{
-			header = node.SelectSingleNode("header/text()").Value;
-			bodyTemplate = node.SelectSingleNode("bodyTemplate/text()").Value;
-			delimiter = node.SelectSingleNode("delimiter/text()").Value;
+			header = SafeGetText(node, "header/text()");
+			bodyTemplate = SafeGetText(node, "bodyTemplate/text()");
+			delimiter = SafeGetText(node, "delimiter/text()");
+			footer = SafeGetText(node, "footer/text()");
 		}
 
 		private string header = null;
 		private string bodyTemplate = null;
 		private string delimiter = null;
+		private string footer = null;
 
 		public string Header
 		{
@@ -35,6 +43,11 @@ namespace guiVisualization.KernelAction.GnuPlot
 		{
 			get { return delimiter; }
 			set { delimiter = value; }
+		}
+
+		public string Footer 
+		{
+			get { return footer;}
 		}
 	}
 }

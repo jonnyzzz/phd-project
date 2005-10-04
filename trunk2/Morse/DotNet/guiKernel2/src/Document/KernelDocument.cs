@@ -11,6 +11,7 @@ namespace guiKernel2.Document
 	{
 		private Function function;
 		private IKernell kernell;
+		private string defaultTitle;
 
 		public KernelDocument(Function function)
 		{
@@ -21,14 +22,18 @@ namespace guiKernel2.Document
 			
 			CKernellImplClass kernellClass = new CKernellImplClass();
 
-			IWritableKernell wKernell = kernellClass as IWritableKernell;
+			IWritableKernell wKernell =(IWritableKernell)kernellClass;
 
 			wKernell.SetFunction(this.function.IFunction);
 
-			kernell = wKernell as IKernell;
-			
+			kernell = (IKernell)wKernell;			
 		}
 
+		public string Title 
+		{
+			get { return defaultTitle; }
+			set { defaultTitle = value; }
+		}
 
 		public Function Function
 		{

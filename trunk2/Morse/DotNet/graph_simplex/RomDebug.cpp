@@ -36,7 +36,7 @@ CRomDebug::ExGraph CRomDebug::createFromFile(const char* file) {
 	JDouble max[] = {mx+1};
 	JInt   grid[] = {mx+1};
 
-	Graph* g = new Graph(1, min, max, grid);
+	Graph* g = new Graph(1, min, max, grid, false);
 	e.graph = g;
 
 	for (int i=0; i<mx; i++) {

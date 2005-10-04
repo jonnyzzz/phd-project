@@ -14,16 +14,23 @@ namespace gui2.TreeNodes
 	public class Node : ComputationNode
 	{	
 		private KernelNode kernelNode;
-		public Node(KernelNode kernelNode) : base()
+		private int iterations;
+		
+		public Node(KernelNode kernelNode, int iterations) : base()
 		{
 			this.kernelNode = kernelNode;			
+			this.iterations = iterations;
 			Update();
 		}
 
+		public int Iterations 
+		{
+			get {return iterations;	}
+		}
 
 		public override string NodeCaption
 		{
-			get { return string.Format("{0}", kernelNode.Caption); }
+			get { return string.Format("{0}, iterations={1}", kernelNode.Caption, Iterations); }
 		}
 
 		private MenuItem[] cachedMenuItems = null;

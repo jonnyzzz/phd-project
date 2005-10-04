@@ -115,8 +115,9 @@ namespace gui2.Runner
 
 		public void TestMode()
 		{
-			KernelDocument doc = new KernelDocument(Function.CreateTestFunction());
-			new Node(doc.CreateInitialNode());
+			Function f = Function.CreateTestFunction();
+			KernelDocument doc = new KernelDocument(f);
+			new Node(doc.CreateInitialNode(),f.Iterations);
 		}
 
 		#region static

@@ -189,6 +189,9 @@
 				RelativePath=".\ProgressBarInfo.h">
 			</File>
 			<File
+				RelativePath=".\ProjectionProcess.h">
+			</File>
+			<File
 				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.h">
 			</File>
 			<File
@@ -260,6 +263,9 @@
 			</File>
 			<File
 				RelativePath=".\ProgressBarInfo.cpp">
+			</File>
+			<File
+				RelativePath=".\ProjectionProcess.cpp">
 			</File>
 			<File
 				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.cpp">

@@ -25,6 +25,11 @@ namespace gui2.src.Document
 			XmlNode nodes = doc.CreateElement("nodes");
 			rootNode.AppendChild(nodes);
 
+			XmlNode commentNode = doc.CreateElement("comment");
+			commentNode.InnerText = document.KernelDocument.Title;
+
+			rootNode.AppendChild(commentNode);
+
 			RecursiveSaveNodes(nodes, document.RootNode, doc, pathBase);
 
 			return rootNode;
@@ -50,6 +55,11 @@ namespace gui2.src.Document
 			XmlNode myNode = doc.CreateElement("node");
 			root.AppendChild(myNode);
 
+			XmlAttribute attr = doc.CreateAttribute("iterations");
+			attr.Value = node.Iterations.ToString();
+			
+			myNode.Attributes.Append(attr);
+
 			myNode.AppendChild(KernelNodeSerializer.SaveKernelNode(node.KernelNode, doc, pathBase ));					
 
 			return myNode;
@@ -60,14 +70,22 @@ namespace gui2.src.Document
 		public static gui2.Document.Document LoadDocument(XmlNode root, string pathBase)
 		{
 			XmlNode myNode = root.SelectSingleNode("/document");
-
+			
 			Function function = FunctionSerializer.LoadFunction(myNode);
 
 			XmlNode resultsetNode = myNode.SelectSingleNode("nodes/node");
 
 			Node treeNode = LoadNodeTree(resultsetNode, pathBase);
 
-			return new gui2.Document.Document(function, treeNode);
+			gui2.Document.Document doc = new gui2.Document.Document(function, treeNode);
+
+			XmlNode myCommentText = myNode.SelectSingleNode("comment/text()");
+			if (myCommentText != null)  
+			{
+				doc.KernelDocument.Title = myCommentText.Value;
+			}
+
+			return doc;
 		}
 
 		private static Node LoadNodeTree(XmlNode node, string pathBase)
@@ -84,7 +102,8 @@ namespace gui2.src.Document
 		{
 			KernelNode kernelNode = KernelNodeSerializer.LoadKernelNode(node, pathBase);
 
-			return new Node(kernelNode);
+			XmlNode aNode = node.SelectSingleNode("@iterations");
+			return new Node(kernelNode, (aNode != null)? int.Parse(aNode.Value) : 1);
 		}
 
 	}

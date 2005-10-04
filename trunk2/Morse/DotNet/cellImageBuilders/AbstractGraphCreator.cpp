@@ -59,7 +59,7 @@ Graph* AbstractGraphCreator::createEmptyGraph(Graph* graph) {
 
 	cout<<"t dim: "<<dimensionNew<<"\n";
 
-	Graph* g = new Graph(dimensionNew, smin, smax, point);
+	Graph* g = new Graph(dimensionNew, smin, smax, point, false);
 
 	delete[] smin;
 	delete[] smax;

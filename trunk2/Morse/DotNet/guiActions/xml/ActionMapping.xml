@@ -16,6 +16,10 @@
 			</nextActions>
 		</action>
 		
+		<action name="IProjectAction" isLeaf="true">
+			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />			
+		</action>
+		
 		<action name="IAdaptiveMethodAction" isLeaf="false" internal="true">		
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 			<nextActions>		
@@ -90,7 +94,7 @@
 		<action name="IMS2DCreationAction" caption="Create Angle Projective Bundle" >You need plane SI with edges</action>
 		<action name="IMS2DProcessAction" caption="Angle Projective Bundle Step" > You need to use Create Angle Projective Bundle method first </action>
 		<action name="IMS2DRomAction" caption="Estimate Morse Spectrum" > You need Angle Projective Bundle Node with edges </action>
-		
+		<action name="IProjectAction" caption="Decrease accuracy" />		
     </names>
 
 	<assemblies>	

@@ -68,7 +68,7 @@ Graph* MS2ComputationProcess::createGraph() {
 	for (int i=0; i<dimension; i++) {
 		point[i] = parent->getGrid()[i] * Factor(i);
 	}
-	return new Graph(dimension, parent->getMin(), parent->getMax(), point); 
+	return new Graph(dimension, parent->getMin(), parent->getMax(), point, true); 
 }
 
 JDouble inline MS2ComputationProcess::Abs(JDouble x) {

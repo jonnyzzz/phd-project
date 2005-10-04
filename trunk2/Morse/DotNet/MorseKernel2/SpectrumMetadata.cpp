@@ -1,4 +1,4 @@
-// SpectrumMetadata.cpp : Implementation of CSpectrumMetadata
+ // SpectrumMetadata.cpp : Implementation of CSpectrumMetadata
 
 #include "stdafx.h"
 #include "SpectrumMetadata.h"

@@ -51,6 +51,13 @@ STDMETHODIMP CFunctionImpl::GetIterations(int* its) {
 	return S_OK;
 }
 
+STDMETHODIMP CFunctionImpl::SetIterations(int its) {
+	if (!isInitialized) return E_FAIL;
+	this->iterations = its;
+	return S_OK;
+}
+
+
 
 STDMETHODIMP CFunctionImpl::GetSystemFunction(void** function) {
 	if (!isInitialized) {
@@ -76,6 +83,8 @@ STDMETHODIMP CFunctionImpl::GetSystemFunctionDerivate(void** function) {
 
 
 STDMETHODIMP CFunctionImpl::SetEquations(BSTR equations) {	
+	cout<<"Setting Function in CFunctionImpl\n";
+	
 	CleanUp();
 	isInitialized = false;
 
@@ -92,11 +101,13 @@ STDMETHODIMP CFunctionImpl::GetLastError(BSTR* message) {
 }
 
 STDMETHODIMP CFunctionImpl::CreateGraph(void** graph) {
+	cout<<"Getting Graph From CFunctionImpl\n";
+
 	if (!isInitialized) {
 		*graph = NULL;
 		return E_FAIL;
 	} else {
-		*graph = new Graph(dimension, space_min, space_max, grid);
+		*graph = new Graph(dimension, space_min, space_max, grid, false);
 		return S_OK;
 	}
 }

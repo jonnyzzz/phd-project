@@ -93,16 +93,19 @@ GraphSet GraphResultUtil::GetGraphs(IResultSet* result) {
 
 bool GraphResultUtil::ContainsGraphOnly(IResultSet* resultSet, bool isStrongComponent, int dim) {
 	if (!ContainsOnlyType<IGraphResult>(resultSet)) return false;
+	if (dim <= 0 && !isStrongComponent) return true;
 
 	ResultSetIterator<IGraphResult> it(resultSet);
 
 	while (it.HasNext()) {
 		VARIANT_BOOL v;
 		HRESULT hr;
-		hr = it.Current()->IsStrongComponent(&v);
-		ATLASSERT(SUCCEEDED(hr));
+		if (isStrongComponent) {
+			hr = it.Current()->IsStrongComponent(&v);
+			ATLASSERT(SUCCEEDED(hr));
 
-		if (v != VARIANT_TRUE) return false;
+			if (v != VARIANT_TRUE) return false;
+		}
 
         if (dim > 0) {
             Graph* graph = GetGraph(it.Current());

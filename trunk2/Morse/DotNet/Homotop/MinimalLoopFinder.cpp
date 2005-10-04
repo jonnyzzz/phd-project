@@ -20,7 +20,7 @@ MinimalLoopFinder::~MinimalLoopFinder() {
 
 
 Graph* MinimalLoopFinder::FindMinimalLoop(Graph* graph, Node* node) {
-	Graph* result = graph->copyCoordinates();
+	Graph* result = graph->copyCoordinates(false);
 
 	FindMinimalLoop(graph, node, result);
 

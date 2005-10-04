@@ -58,7 +58,7 @@ Graph* SIComputationProcess::createGraph() {
 	for (int i=0; i<dimention; i++) {
 		point[i] = graph->getGrid()[i]*factor[i];
 	}
-	return new Graph(dimention, graph->getMin(), graph->getMax(), point);	
+	return new Graph(dimention, graph->getMin(), graph->getMax(), point, true);	
 }
 
 

@@ -41,7 +41,7 @@ namespace gui2.ActionPerformer
 				KernelNode[] nodes = resultSet.ToNodes;
 				foreach (KernelNode kernelNode in nodes)
 				{
-					NewNode(new Node(kernelNode));
+					NewNode(new Node(kernelNode, Runner.Runner.Instance.Document.KernelDocument.Function.Iterations));					
 				}					
 			}
 			inProcess = false;

@@ -12,16 +12,29 @@ namespace gui.Resource
 	{
 		private GnuPlotTemplate template;
 		private StringBuilder builder = new StringBuilder();
+		private GnuPlotScriptGenParameters parameters;
 
 		private bool isFirst = true;
 
-		public GnuPlotScriptGen(GnuPlotTemplate template)
+		public GnuPlotScriptGen(GnuPlotTemplate template, GnuPlotScriptGenParameters parameters, string title)
 		{
 			this.template = template;
-			builder.Append(template.Header + " ");
+			TemplateProcessor processor = new TemplateProcessor(" " + template.Header + " ");
+				
+			if (parameters != null) 
+			{
+				processor.subsitute("width", parameters.Width.ToString());
+				processor.subsitute("height", parameters.Height.ToString());
+				processor.subsitute("filename", parameters.FileName);
+			}
+			processor.subsitute("global_title", title);			
+			
+			builder.Append(processor.ToString() + " ");
+
+			this.parameters = parameters;
 		}
 
-		public void addFile(string filename)
+		public void addFile(string filename, string title)
 		{
 			if (!isFirst)
 				builder.Append(" "  + template.Delimiter + " ");
@@ -30,13 +43,26 @@ namespace gui.Resource
 
 			TemplateProcessor processor = new TemplateProcessor(" " + template.BodyTemplate + " ");
 			processor.subsitute("file", filename);
+			processor.subsitute("title", title);			
 
 			builder.Append(processor.ToString());
 		}
 
-		public override string ToString()
+		public string Generate()
 		{
-			return builder.ToString();
+			string extra = "";
+			if (template.Footer != null && parameters != null) 
+			{
+				TemplateProcessor processor = new TemplateProcessor(";" + template.Footer + " ");
+				
+				processor.subsitute("width", parameters.Width.ToString());
+				processor.subsitute("height", parameters.Height.ToString());
+				processor.subsitute("filename", parameters.FileName);
+
+				extra = processor.ToString();
+			}
+
+			return builder.ToString() + extra;
 		}
 	}
 }

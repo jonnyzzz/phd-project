@@ -45,6 +45,7 @@ public:
 	STDMETHOD(GetDimension)(int* dim);
 	STDMETHOD(GetIterations)(int* dim);
 	STDMETHOD(CreateGraph)(void** graph);
+	STDMETHOD(SetIterations)(int iterations);	
 
 	STDMETHOD(GetMinimum)(int id, double* value);
 	STDMETHOD(GetMaximum)(int id, double* value);

@@ -51,7 +51,6 @@ namespace gui.Visualization.JonATL
 			//
 			InitializeComponent();
 
-
 			d3d.ActiveLoop += new _IMorseKernelVisualizationDirect3DEvents_ActiveLoopEventHandler(d3d_ActiveLoop);
 			d3d.OnMouseMoveFloat += new _IMorseKernelVisualizationDirect3DEvents_OnMouseMoveFloatEventHandler(d3d_OnMouseMoveFloat);
 		}
@@ -61,6 +60,9 @@ namespace gui.Visualization.JonATL
 		/// </summary>
 		protected override void Dispose(bool disposing)
 		{
+			d3d.ActiveLoop -= new _IMorseKernelVisualizationDirect3DEvents_ActiveLoopEventHandler(d3d_ActiveLoop);
+			d3d.OnMouseMoveFloat -= new _IMorseKernelVisualizationDirect3DEvents_OnMouseMoveFloatEventHandler(d3d_OnMouseMoveFloat);
+
 			if (disposing)
 			{
 				if (components != null)

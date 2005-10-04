@@ -80,6 +80,11 @@ namespace guiKernel2.Document
 			return builder.ToString();
 		}
 
+		public int Iterations 
+		{
+			get { return function.GetIterations();}
+			set { function.SetIterations(value);}
+		}
 
 		public static Function CreateTestFunction()
 		{

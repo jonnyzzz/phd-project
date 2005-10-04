@@ -50,20 +50,20 @@ namespace guiVisualization.KernelAction
 
 			int dimension = ((IGraphResult)resultSet.ToResults[0]).GetGraphInfo().GetDimension();
 
-			XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot");
+			XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode((parameters.Parameters == null)? "show" : "save");
 
 			string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
-			GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)));
+			GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters, parameters.Title);
 
 			foreach (IResult aResult in resultSet.ToResults)
 			{
 				IGraphResult result = (IGraphResult)aResult;
 				string file = tempFiles.CreateFile();
 				result.SaveText(file);
-				script.addFile(file);
+				script.addFile(file, KernelNode.GetResultCaption(result, true));
 			}
 
-			RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.ToString()), resource);
+			RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), resource);
 
 			return new EmptyResultSet();
 		}

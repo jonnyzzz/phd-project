@@ -47,7 +47,7 @@ void IsolatingSetProcess::processNextGraph(Graph* graph)
 void IsolatingSetProcess::start() {
 	AbstractProcessExt::start();
 
-	submitGraphResult(startGraph->copyCoordinates());
+	submitGraphResult(startGraph->copyCoordinates(false));
 	GraphNodeEnumerator ne(startGraph);
 	Node* node; 
 	while(node = ne.next()) {

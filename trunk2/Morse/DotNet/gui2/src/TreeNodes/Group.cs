@@ -69,7 +69,8 @@ namespace gui2.src.TreeNodes
 
 		public Node CreateNode()
 		{
-			return new Node(new KernelNode(CreateResultSet()));
+			//TODO:!!!
+			return new Node(new KernelNode(CreateResultSet()),((Node)nodes[0]).Iterations);
 		}
 
 		public void DeCheckAndRemoveAll()

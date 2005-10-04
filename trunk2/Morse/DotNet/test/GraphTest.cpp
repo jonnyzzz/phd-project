@@ -29,5 +29,6 @@ void GraphTest::test() {
 	JDouble value[] = {1.5, 1.1, 1.1};
 
 	graph->addEdgeWithOverlaping(node, value, offset1, offset2);
+	
 
 }

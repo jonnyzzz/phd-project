@@ -26,12 +26,14 @@ __interface IFunction : IDispatch
 	HRESULT GetDimension([out, retval] int* dimenstion);
 	[id(6)]
 	HRESULT GetIterations([out, retval] int* iterations);	
-	
 	[id(7)]
-	HRESULT GetMinimum([in] int id, [out, retval] double* value);
+	HRESULT SetIterations([in] int iterations);	
+	
 	[id(8)]
-	HRESULT GetMaximum([in] int id, [out, retval] double* value);
+	HRESULT GetMinimum([in] int id, [out, retval] double* value);
 	[id(9)]
+	HRESULT GetMaximum([in] int id, [out, retval] double* value);
+	[id(10)]
 	HRESULT GetLipshitz([in] int id, [out, retval] double* value);
 };
 

@@ -18,7 +18,7 @@ namespace gui2.Document
 		public Document(Function function)	
 		{			
 			kernelDocument = new KernelDocument(function);
-			rootNode = new Node(kernelDocument.CreateInitialNode());
+			rootNode = new Node(kernelDocument.CreateInitialNode(), function.Iterations);
 		}
 
 		public Document(Function function, Node root)
