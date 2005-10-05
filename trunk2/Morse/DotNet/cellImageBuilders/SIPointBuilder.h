@@ -1,5 +1,5 @@
 #pragma once
-#include "abstractpointbuilder.h"
+#include "AbstractPointBuilder.h"
 
 class Function;
 class Graph;

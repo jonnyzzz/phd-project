@@ -150,9 +150,6 @@
 				RelativePath=".\AdditionalNodeParameters.cpp">
 			</File>
 			<File
-				RelativePath=".\Computator.cpp">
-			</File>
-			<File
 				RelativePath=".\CoordinateSystem.cpp">
 			</File>
 			<File
@@ -160,12 +157,6 @@
 			</File>
 			<File
 				RelativePath=".\FileStream.cpp">
-			</File>
-			<File
-				RelativePath=".\Function.cpp">
-			</File>
-			<File
-				RelativePath=".\FunctionMS.cpp">
 			</File>
 			<File
 				RelativePath=".\Graph.cpp">
@@ -181,15 +172,6 @@
 			</File>
 			<File
 				RelativePath=".\MemoryManager.cpp">
-			</File>
-			<File
-				RelativePath=".\MS2ComputationProcess.cpp">
-			</File>
-			<File
-				RelativePath=".\MS2CreationComputationProcess.cpp">
-			</File>
-			<File
-				RelativePath=".\SIComputationProcess.cpp">
 			</File>
 			<File
 				RelativePath=".\Stack.cpp">
@@ -221,12 +203,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath=".\AdditionalNodeParameters.h">
-			</File>
-			<File
-				RelativePath=".\Computator.h">
-			</File>
-			<File
 				RelativePath=".\CoordinateSystem.h">
 			</File>
 			<File
@@ -245,9 +221,6 @@
 				RelativePath=".\FunctionInclude.h">
 			</File>
 			<File
-				RelativePath=".\FunctionMS.h">
-			</File>
-			<File
 				RelativePath=".\Graph.h">
 			</File>
 			<File
@@ -261,18 +234,6 @@
 			</File>
 			<File
 				RelativePath=".\MemoryManager.h">
-			</File>
-			<File
-				RelativePath=".\MS2ComputationProcess.h">
-			</File>
-			<File
-				RelativePath=".\MS2CreationComputationProcess.h">
-			</File>
-			<File
-				RelativePath=".\SIComputationProcess.h">
-			</File>
-			<File
-				RelativePath=".\SmartPointer.h">
 			</File>
 			<File
 				RelativePath=".\Stack.h">

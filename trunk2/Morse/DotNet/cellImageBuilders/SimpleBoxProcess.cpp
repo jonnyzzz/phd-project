@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\simpleboxprocess.h"
+#include "stdafx.h"
+#include "SimpleBoxProcess.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

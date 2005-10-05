@@ -1,5 +1,5 @@
 #pragma once
-#include "imorsefunction.h"
+#include "IMorseFunction.h"
 #include "ISystemFunctionDerivate.h"
 
 class MS2DAngleMorseFunction :

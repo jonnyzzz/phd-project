@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\memorymanager.h"
+#include "stdafx.h"
+#include "MemoryManager.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

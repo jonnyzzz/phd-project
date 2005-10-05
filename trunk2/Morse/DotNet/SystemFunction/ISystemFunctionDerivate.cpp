@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\isystemfunctionderivate.h"
+#include "stdafx.h"
+#include "ISystemFunctionDerivate.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

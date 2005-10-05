@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\segmentprojectiveextendedsystemfunction.h"
+#include "stdafx.h"
+#include "SegmentProjectiveExtendedSystemFunction.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

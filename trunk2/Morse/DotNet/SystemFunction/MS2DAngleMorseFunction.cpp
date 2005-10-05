@@ -1,5 +1,6 @@
-#include "StdAfx.h"
-#include ".\ms2danglemorsefunction.h"
+#include "stdafx.h"
+#include "MS2DAngleMorseFunction.h"
+#include <math.h>
 
 MS2DAngleMorseFunction::MS2DAngleMorseFunction(ISystemFunctionDerivate* function) : IMorseFunction(function)
 {

@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\sipointbuilder.h"
+#include "stdafx.h"
+#include "SIPointBuilder.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

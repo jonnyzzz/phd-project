@@ -1,6 +1,6 @@
 #pragma once
-#include "imorsefunction.h"
-#include "isystemfunctionderivate.h"
+#include "IMorseFunction.h"
+#include "ISystemFunctionDerivate.h"
 
 class SegmentProjectiveExtensionMorseFunction :
     public IMorseFunction

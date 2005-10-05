@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\abstractpointbuilder.h"
+#include "stdafx.h"
+#include "AbstractPointBuilder.h"
 
 
 #ifdef _DEBUG
@@ -103,7 +103,8 @@ void AbstractPointBuilder::processNextGraph(Graph* graph) {
 }
 
 void AbstractPointBuilder::buildNodeMultiplication(Node* node) {
-	for (int i=0; i<dimension; i++) {
+        int i;
+	for (i=0; i<dimension; i++) {
 		b[i] = 0;
 		tpoint[i] = (graph->getCells(node)[i])*factor[i];
 	}
@@ -130,7 +131,8 @@ void AbstractPointBuilder::buildNodeMultiplication(Node* node) {
 }
 
 void AbstractPointBuilder::buildNodeImage(Node* node) {
-	for (int i=0; i<dimension; i++) {
+        int i;
+	for (i=0; i<dimension; i++) {
 		c[i] = 0;
 		//it's defined before call this function!
 		x0[i] = graph_result->toExternal(point[i],i) + eps[i]/2;

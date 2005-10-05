@@ -1,6 +1,6 @@
-#include "StdAfx.h"
-#include ".\abstractprocess.h"
-#include "graphSet.h"
+#include "stdafx.h"
+#include "AbstractProcess.h"
+#include "GraphSet.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

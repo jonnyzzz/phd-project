@@ -1,5 +1,9 @@
 #pragma once
-#include "isystemfunction.h"
+
+#ifndef _ISYSTEMFUNCTIONDERIVATE_h
+#define _ISYSTEMFUNCTIONDERIVATE_h
+
+#include "ISystemFunction.h"
 
 class ISystemFunctionDerivate :
     public ISystemFunction
@@ -14,3 +18,5 @@ public:
 
      virtual int getFunctionDimension() = 0;
 };
+
+#endif

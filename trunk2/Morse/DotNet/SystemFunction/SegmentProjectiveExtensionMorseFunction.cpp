@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\segmentprojectiveextensionmorsefunction.h"
+#include "stdafx.h"
+#include "SegmentProjectiveExtensionMorseFunction.h"
 #include <math.h>
 
 #ifdef _DEBUG

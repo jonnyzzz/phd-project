@@ -1,6 +1,6 @@
 #pragma once
-#include "isystemfunction.h"
-#include "isystemfunctionderivate.h"
+#include "ISystemFunction.h"
+#include "ISystemFunctionDerivate.h"
 
 class IMorseFunction :
     public ISystemFunction

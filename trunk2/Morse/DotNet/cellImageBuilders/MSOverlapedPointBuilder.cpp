@@ -1,6 +1,6 @@
-#include "StdAfx.h"
-#include ".\msoverlapedpointbuilder.h"
-#include "../systemfunction/isystemfunctionderivate.h"
+#include "stdafx.h"
+#include "MSOverlapedPointBuilder.h"
+#include "../SystemFunction/ISystemFunctionDerivate.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

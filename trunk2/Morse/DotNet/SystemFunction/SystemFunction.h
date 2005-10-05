@@ -1,11 +1,11 @@
 #pragma once
-#include "isystemfunction.h"
+#include "ISystemFunction.h"
 
 #include <list>
 using namespace std;
 
-#include "..\calculator\functionFactory.h"
-#include "..\calculator\systemNative.h"
+#include "../calculator/FunctionFactory.h"
+#include "../calculator/SystemNative.h"
 
 class SystemFunction :
     public ISystemFunction

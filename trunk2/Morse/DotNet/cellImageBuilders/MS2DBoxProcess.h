@@ -1,10 +1,10 @@
 #pragma once
-#include "abstractprocessext.h"
-#include "../systemFunction/MS2DAngleFunction.h" 
+#include "AbstractProcessExt.h"
+#include "../SystemFunction/MS2DAngleFunction.h" 
 #include <list>
 using namespace std;
 struct Node;
-#include "../cellImageBuilders/graphSet.h"
+#include "../cellImageBuilders/GraphSet.h"
 
 
 class MS2DBoxProcess :

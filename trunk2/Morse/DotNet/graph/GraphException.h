@@ -12,7 +12,7 @@ class GraphException
 {
 public:
 	GraphException(GraphExceptionType type);
-	GraphException(GraphException& ex);
+	//GraphException(GraphException& ex);
 	~GraphException(void);
 
 };

@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\ms2dcreationprocess.h"
+#include "stdafx.h"
+#include "MS2DCreationProcess.h"
 
 
 MS2DCreationProcess::MS2DCreationProcess(Graph* graph, int* factor, ProgressBarInfo* info) : 

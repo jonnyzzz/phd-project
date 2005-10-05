@@ -56,7 +56,7 @@ public:
 
     template <class C>
     C* AllocateArray(int length) {
-        return (new(Allocate_void(sizeof(C)*(length+2))) C[length])++;
+        return new (Allocate_void(sizeof(C)*(length))) C[length];
         //return (C*)(Allocate_void(sizeof(C)*length));
     }
 

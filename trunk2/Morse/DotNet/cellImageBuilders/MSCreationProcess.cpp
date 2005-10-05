@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\mscreationprocess.h"
+#include "stdafx.h"
+#include "MSCreationProcess.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 

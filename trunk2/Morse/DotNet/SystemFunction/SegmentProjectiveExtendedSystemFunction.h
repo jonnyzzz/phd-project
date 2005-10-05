@@ -1,5 +1,5 @@
 #pragma once
-#include "isystemfunctionDerivate.h"
+#include "ISystemFunctionDerivate.h"
 
 class SegmentProjectiveExtendedSystemFunction :
     public ISystemFunctionDerivate

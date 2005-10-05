@@ -1,6 +1,6 @@
-#include "StdAfx.h"
-#include ".\sioverlapedpointbuilder.h"
-#include "../graph/graph.h"
+#include "stdafx.h"
+#include "SIOverlapedPointBuilder.h"
+#include "../graph/Graph.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

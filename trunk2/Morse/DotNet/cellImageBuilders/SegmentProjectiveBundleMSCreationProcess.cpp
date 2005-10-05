@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\segmentprojectivebundlemscreationprocess.h"
+#include "stdafx.h"
+#include "SegmentProjectiveBundleMSCreationProcess.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

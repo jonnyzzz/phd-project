@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\buildersexception.h"
+#include "stdafx.h"
+#include "BuildersException.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

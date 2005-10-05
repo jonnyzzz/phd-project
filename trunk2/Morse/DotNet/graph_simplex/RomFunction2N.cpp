@@ -1,6 +1,6 @@
-#include "StdAfx.h"
-#include ".\romfunction2n.h"
-#include "../systemfunction/imorsefunction.h"
+#include "stdafx.h"
+#include "RomFunction2N.h"
+#include "../SystemFunction/IMorseFunction.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

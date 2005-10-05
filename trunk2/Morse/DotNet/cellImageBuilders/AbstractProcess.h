@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ProgressBarInfo.h"
-#include "../graph/graph.h"
+#include "../graph/Graph.h"
 #include "GraphSet.h"
 
 class AbstractProcess 

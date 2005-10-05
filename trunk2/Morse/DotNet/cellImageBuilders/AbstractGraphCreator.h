@@ -34,3 +34,4 @@ private:
 private:
 	void putNodes(Graph* from, Graph* to, Node* node);
 };
+

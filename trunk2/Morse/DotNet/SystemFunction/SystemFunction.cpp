@@ -1,5 +1,13 @@
-#include "StdAfx.h"
-#include ".\systemfunction.h"
+#include "stdafx.h"
+#include "SystemFunction.h"
+
+#include "../calculator/FunctionContext.h"
+#include "../calculator/FunctionDictionary.h"
+#include "../calculator/FunctionNode.h"
+#include "../calculator/FunctionNative.h"
+#include "../calculator/SystemNative.h"
+#include "../calculator/FunctionFactory.h"
+#include "../calculator/FunctionFactoryParseException.h"
 
 
 #ifdef _DEBUG

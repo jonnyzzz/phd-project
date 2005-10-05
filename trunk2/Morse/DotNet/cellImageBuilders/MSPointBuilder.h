@@ -1,7 +1,7 @@
 #pragma once
 
-#include "sipointbuilder.h"
-#include "../systemFunction/ISystemFunctionDerivate.h"
+#include "SIPointBuilder.h"
+#include "../SystemFunction/ISystemFunctionDerivate.h"
 #include "ProgressBarInfo.h"
 
 

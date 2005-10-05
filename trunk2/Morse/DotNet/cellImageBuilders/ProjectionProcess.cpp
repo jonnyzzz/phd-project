@@ -1,6 +1,6 @@
-#include "StdAfx.h"
-#include ".\projectionprocess.h"
-#include "../graph/graph.h"
+#include "stdafx.h"
+#include "ProjectionProcess.h"
+#include "../graph/Graph.h"
 
 ProjectionProcess::ProjectionProcess(JInt* devidors, int dimention, ProgressBarInfo* info) : AbstractProcess(info)
 {

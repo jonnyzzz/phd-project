@@ -1,5 +1,5 @@
 #pragma once
-#include "abstractboxprocess.h"
+#include "AbstractBoxProcess.h"
 
 class SimpleBoxProcess :
 	public AbstractBoxProcess

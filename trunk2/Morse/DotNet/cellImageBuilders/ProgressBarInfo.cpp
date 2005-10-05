@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\progressbarinfo.h"
+#include "stdafx.h"
+#include "ProgressBarInfo.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

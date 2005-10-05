@@ -157,9 +157,6 @@
 				RelativePath=".\RomFunction2N.cpp">
 			</File>
 			<File
-				RelativePath=".\RomMS2.cpp">
-			</File>
-			<File
 				RelativePath=".\SIRom.cpp">
 			</File>
 			<File
@@ -199,9 +196,6 @@
 			</File>
 			<File
 				RelativePath=".\RomFunction2N.h">
-			</File>
-			<File
-				RelativePath=".\RomMS2.h">
 			</File>
 			<File
 				RelativePath=".\SIRom.h">

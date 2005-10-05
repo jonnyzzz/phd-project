@@ -1,5 +1,5 @@
 #pragma once
-#include "iprojectiveextensioninfo.h"
+#include "IProjectiveExtensionInfo.h"
 
 class ProgressBarInfo;
 class SegmentProjectiveExtendedSystemFunction;

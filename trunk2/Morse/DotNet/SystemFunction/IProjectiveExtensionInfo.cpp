@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\iprojectiveextensioninfo.h"
+#include "stdafx.h"
+#include "IProjectiveExtensionInfo.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 #include "stdafx.h"
 #include "Graph.h"
-#include "STack.h"
+#include "Stack.h"
 #include "GraphComponents.h"
 #include "FileStream.h"
 #include "GraphUtil.h"
@@ -242,7 +242,7 @@ Node* Graph::newNode(const JInt* cells) {
 		node->cell[i] = cells[i];
 	}
 	
-	for (i=0;i<edgeHashMax;i++) {
+	for (int i=0;i<edgeHashMax;i++) {
 		node->edges[i] = NULL;
 	}
 
@@ -480,7 +480,7 @@ void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max) {
 		}
 		
 		point[0]++;
-		for (i=0;i<dimention;i++) {
+		for (int i=0;i<dimention;i++) {
 			if (point[i] > emax[i]) {
 				point[i] = emin[i];
 				point[i+1]++;
@@ -548,7 +548,7 @@ void Graph::addEdgesModula(Node* node, const JDouble* min, const JDouble* max, i
 		}
 		
 		point[0]++;
-		for (i=0;i<dimention;i++) {
+		for (int i=0;i<dimention;i++) {
 			if (point[i] > emax[i]) {
 				point[i] = emin[i];
 				point[i+1]++;
@@ -591,7 +591,7 @@ void Graph::addEdgeWithOverlaping(Node* nodeSourse, JDouble* value, JDouble* off
 		}
 
 		pointB[0]++;
-		for (i = 0; i<dimention; i++) {
+		for (int i = 0; i<dimention; i++) {
 			if (pointB[i] > ((pointT[i] != 0)?1:0)) {
 				pointB[i] = 0;
 				pointB[i+1]++;
@@ -831,7 +831,7 @@ Graph*	createGraph(FileInputStream& o) {
 	Node* node;
 
 	for (int ne = 0; ne < nodes; ne++) {
-		for (i=0; i<dimention;i++) {
+		for (int i=0; i<dimention;i++) {
 			o>>grid[i];
 		}
 		node = graph->browseTo(grid);

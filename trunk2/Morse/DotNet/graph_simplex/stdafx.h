@@ -5,27 +5,25 @@
 
 #pragma once
 
+#ifdef WIN32
+	#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
+	#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS	// some CString constructors will be explicit
 
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
-#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS	// some CString constructors will be explicit
+	#ifndef VC_EXTRALEAN
+	#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
+	#endif
 
-#ifndef VC_EXTRALEAN
-#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
+	#include <afx.h>
+	#include <afxwin.h>         // MFC core and standard components
+#else
+	#include "../gcc/gcc.h"
 #endif
-
-#include <afx.h>
-#include <afxwin.h>         // MFC core and standard components
-
 
 #include <iostream>
 
-#include "../graph/FunctionInclude.h"
-
 #include "../graph/typedefs.h"
-#include "../graph/graph.h"
-#include "../graph/Function.h"
+#include "../graph/Graph.h"
 #include "../graph/FileStream.h"
-#include "../graph/FunctionMS.h"
 
 using namespace std;
 

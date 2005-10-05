@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef _GRAPHSET_H
+#define _GRAPHSET_H
+
 class GraphComponents;
 class Graph;
 
@@ -59,3 +62,5 @@ public:
 	operator Graph*();
 
 };
+
+#endif

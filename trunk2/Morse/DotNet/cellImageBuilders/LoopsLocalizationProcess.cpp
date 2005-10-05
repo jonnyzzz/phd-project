@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\loopslocalizationprocess.h"
+#include "stdafx.h"
+#include "LoopsLocalizationProcess.h"
 
 LoopsLocalizationProcess::LoopsLocalizationProcess(ProgressBarInfo* info) : AbstractProcess(info)
 {

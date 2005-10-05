@@ -1,8 +1,8 @@
-#include "StdAfx.h"
-#include ".\ms2dboxprocess.h"
-#include "../graph/graph.h"
-#include "../graph/graphutil.h"
-#include "../graph/graphException.h"
+#include "stdafx.h"
+#include "MS2DBoxProcess.h"
+#include "../graph/Graph.h"
+#include "../graph/GraphUtil.h"
+#include "../graph/GraphException.h"
 
 MS2DBoxProcess::MS2DBoxProcess(MS2DAngleFunction* function, Graph* original, GraphSet si, int* factor, ProgressBarInfo* info)
 :AbstractProcessExt(original, info), siGraph(si), function(function)

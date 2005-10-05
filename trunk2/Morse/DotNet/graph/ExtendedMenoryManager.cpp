@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\extendedmenorymanager.h"
+#include "stdafx.h"
+#include "ExtendedMenoryManager.h"
 
 ExtendedMemoryManager::ExtendedMemoryManager(int size) : MemoryManager(size)
 {

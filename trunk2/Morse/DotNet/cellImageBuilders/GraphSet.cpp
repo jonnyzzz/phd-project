@@ -1,7 +1,7 @@
-#include "StdAfx.h"
-#include ".\graphset.h"
-#include "../graph/graph.h"
-#include "../graph/graphComponents.h"
+#include "stdafx.h"
+#include "GraphSet.h"
+#include "../graph/Graph.h"
+#include "../graph/GraphComponents.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -36,7 +36,8 @@ int GraphSet::Length() {
 }
 
 Graph* GraphSet::operator [](int index) {
-	for (GraphList::iterator it = graphList.begin(); index>0; index--) it++;
+	GraphList::iterator it;
+	for (it = graphList.begin(); index>0; index--) it++;
 
 	ATLASSERT(it != graphList.end());
 

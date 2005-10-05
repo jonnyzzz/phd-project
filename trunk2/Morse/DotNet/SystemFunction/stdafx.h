@@ -5,24 +5,19 @@
 
 #pragma once
 
+#ifdef WIN32
+	#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
+	#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS	// some CString constructors will be explicit
 
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
-#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS	// some CString constructors will be explicit
+	#ifndef VC_EXTRALEAN
+	#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
+	#endif
 
-#ifndef VC_EXTRALEAN
-#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
+	#include <afx.h>
+	#include <afxwin.h>         // MFC core and standard components
+#else
+	#include "../gcc/gcc.h"
 #endif
-
-#include <afx.h>
-#include <afxwin.h>         // MFC core and standard components
 
 #include <iostream>
 using namespace std;
-
-#include "../calculator/functionContext.h"
-#include "../calculator/functionDictionary.h"
-#include "../calculator/functionNode.h"
-#include "../calculator/functionNative.h"
-#include "../calculator/SystemNative.h"
-#include "../calculator/functionFactory.h"
-#include "../calculator/functionFactoryParseException.h"

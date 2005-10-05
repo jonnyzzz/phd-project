@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\abstractgraphcreator.h"
+#include "stdafx.h"
+#include "AbstractGraphCreator.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -30,7 +30,7 @@ AbstractGraphCreator::~AbstractGraphCreator(void)
 
 
 void AbstractGraphCreator::start() {
-	this->dimensionNew = this->getNewDimension();
+    this->dimensionNew = this->getNewDimension();
     ASSERT(dimensionNew > dimensionOld);
 
     b = new int[dimensionNew+1];
@@ -46,7 +46,8 @@ Graph* AbstractGraphCreator::createEmptyGraph(Graph* graph) {
 	JDouble* smin = new JDouble[dimensionNew];
 	JDouble* smax = new JDouble[dimensionNew];
 
-	for (int i=0; i<dimensionOld; i++) {
+        int i;
+	for (i=0; i<dimensionOld; i++) {
 		smin[i] = graph->getMin()[i];
 		smax[i] = graph->getMax()[i];
 		point[i] = graph->getGrid()[i] * factor[i];
@@ -92,7 +93,8 @@ void AbstractGraphCreator::processNextGraph(Graph* graph) {
 
 
 void AbstractGraphCreator::putNodes(Graph* from, Graph* to, Node* node) {
-	for (int i=0; i<dimensionOld; i++) {
+        int i;
+	for (i=0; i<dimensionOld; i++) {
 		b[i] = 0;
 		tpoint[i] = from->getCells(node)[i] * factor[i];
 	}
@@ -103,7 +105,8 @@ void AbstractGraphCreator::putNodes(Graph* from, Graph* to, Node* node) {
 	b[dimensionNew]=0;
 
 	while (b[dimensionNew] == 0) {
-		for (int i=0; i<dimensionOld; i++) {
+    		int i;
+		for (i=0; i<dimensionOld; i++) {
 			point[i] = tpoint[i] + b[i];
 		}
 		for(;i<dimensionNew; i++) {
@@ -112,7 +115,7 @@ void AbstractGraphCreator::putNodes(Graph* from, Graph* to, Node* node) {
 		to->browseTo(point);
 
 		b[0]++;
-		for (int i=0; i<dimensionNew; i++) {
+		for (i=0; i<dimensionNew; i++) {
 			if (b[i] >= factor[i]) {
 				b[i] = 0;
 				b[i+1]++;

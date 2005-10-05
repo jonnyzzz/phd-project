@@ -1,6 +1,6 @@
 #pragma once
 
-#include "abstractgraphcreator.h"
+#include "AbstractGraphCreator.h"
 
 class MS2DCreationProcess : public AbstractGraphCreator
 {

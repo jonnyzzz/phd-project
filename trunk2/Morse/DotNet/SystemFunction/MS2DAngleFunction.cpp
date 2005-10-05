@@ -1,12 +1,13 @@
-#include "StdAfx.h"
-#include ".\ms2danglefunction.h"
-#include "iostream"
+#include "stdafx.h"
+#include "MS2DAngleFunction.h"
+#include <iostream>
 using namespace std;
+#include <math.h>
 
 MS2DAngleFunction::MS2DAngleFunction(ISystemFunctionDerivate* function)
 : function(function), ISystemFunction(3, 1)
 {
-    VERIFY(function->getFunctionDimension() == 2);
+    ASSERT(function->getFunctionDimension() == 2);
     input = function->getInput();
     output = function->getOutput();
 }

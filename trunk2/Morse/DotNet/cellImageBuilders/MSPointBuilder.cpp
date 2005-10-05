@@ -1,7 +1,7 @@
-#include "StdAfx.h"
-#include "../graph/graph.h"
+#include "stdafx.h"
+#include "../graph/Graph.h"
 
-#include ".\mspointbuilder.h"
+#include "MSPointBuilder.h"
 #include "../SystemFunction/SegmentProjectiveExtendedSystemFunction.h"
 
 

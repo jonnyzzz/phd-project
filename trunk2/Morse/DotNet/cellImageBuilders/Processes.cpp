@@ -1,2 +1,2 @@
-#include "StdAfx.h"
-#include ".\processes.h"
+#include "stdafx.h"
+#include "Processes.h"

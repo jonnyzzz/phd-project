@@ -1,6 +1,6 @@
 #pragma once
-#include "abstractprocessExt.h"
-#include "../systemfunction/systemfunction.h"
+#include "AbstractProcessExt.h"
+#include "../SystemFunction/ISystemFunction.h"
 
 class AbstractBoxProcess :
 	public AbstractProcessExt

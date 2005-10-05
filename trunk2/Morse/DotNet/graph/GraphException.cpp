@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\graphexception.h"
+#include "stdafx.h"
+#include "GraphException.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -12,10 +12,13 @@ GraphException::GraphException(GraphExceptionType type)
 {
 }
 
+/*
 GraphException::GraphException(GraphException& ex)
 {
 }
+*/
 
 GraphException::~GraphException() 
 {
 }
+ 

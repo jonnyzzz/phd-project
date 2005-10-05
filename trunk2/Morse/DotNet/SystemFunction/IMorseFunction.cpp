@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\imorsefunction.h"
+#include "stdafx.h"
+#include "IMorseFunction.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

@@ -1,12 +1,12 @@
-#include "StdAfx.h"
-#include ".\sermentprojectiveextensioninfo.h"
-#include ".\SegmentProjectiveExtendedSystemFunction.h"
-#include "../cellimagebuilders/SegmentProjectiveBundleMSCreationProcess.h"
-#include "../cellimagebuilders/ProgressBarInfo.h"
-#include "segmentprojectiveextensionmorsefunction.h"
-#include "../graph_simplex/romfunction2n.h"
-#include "../cellimagebuilders/mspointbuilder.h"
-#include "../cellimagebuilders/msoverlapedpointbuilder.h"
+#include "stdafx.h"
+#include "SermentProjectiveExtensionInfo.h"
+#include "SegmentProjectiveExtendedSystemFunction.h"
+#include "../cellImageBuilders/SegmentProjectiveBundleMSCreationProcess.h"
+#include "../cellImageBuilders/ProgressBarInfo.h"
+#include "SegmentProjectiveExtensionMorseFunction.h"
+#include "../graph_simplex/RomFunction2N.h"
+#include "../cellImageBuilders/MSPointBuilder.h"
+#include "../cellImageBuilders/MSOverlapedPointBuilder.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

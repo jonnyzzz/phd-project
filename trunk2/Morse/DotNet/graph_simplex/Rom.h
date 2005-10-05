@@ -1,9 +1,17 @@
 #pragma once
 
-#include <hash_map>
-#include <map>
-using namespace std;
-using namespace stdext;
+#ifdef WIN32
+	#include <hash_map>
+    #include <map>
+    #include <functional>
+	using namespace std;
+	using namespace stdext;
+#else
+        #include <functional>
+	#include <map>
+	using namespace std;
+#endif
+
 
 class Graph;
 struct Node;
@@ -40,7 +48,11 @@ private:
 		ContourNode();
 	};
 
-	typedef hash_map<Node*, ContourNode*> EGraph;
+#ifdef WIN32
+	typedef hash_map<Node*, ContourNode* > EGraph;
+#else
+	typedef map<Node*, ContourNode* > EGraph;
+#endif
 	typedef EGraph::iterator EGraphIterator;
 
 	ContourNode* nodes;

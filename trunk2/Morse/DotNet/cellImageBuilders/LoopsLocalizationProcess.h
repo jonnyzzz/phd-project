@@ -1,5 +1,5 @@
 #pragma once
-#include "abstractprocess.h"
+#include "AbstractProcess.h"
 
 class LoopsLocalizationProcess :
 	public AbstractProcess

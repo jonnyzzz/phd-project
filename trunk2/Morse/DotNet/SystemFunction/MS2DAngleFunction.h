@@ -1,6 +1,6 @@
 #pragma once
-#include "isystemfunction.h"
-#include "IsystemFunctionDerivate.h"
+#include "ISystemFunction.h"
+#include "ISystemFunctionDerivate.h"
 #include "../graph/typedefs.h"
 
 class MS2DAngleFunction :

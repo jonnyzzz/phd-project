@@ -1,3 +1,4 @@
-#include "StdAfx.h"
-#include ".\graphutil.h"
-#include ".\graph.h"
+#include "stdafx.h"
+#include "GraphUtil.h"
+#include "Graph.h"
+

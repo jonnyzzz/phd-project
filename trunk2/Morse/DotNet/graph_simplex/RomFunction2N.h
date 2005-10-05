@@ -1,6 +1,6 @@
 #pragma once
-#include "rom.h"
-#include "../cellimagebuilders/abstractprocess.h"
+#include "Rom.h"
+#include "../cellImageBuilders/AbstractProcess.h"
 
 class Graph;
 class IMorseFunction;

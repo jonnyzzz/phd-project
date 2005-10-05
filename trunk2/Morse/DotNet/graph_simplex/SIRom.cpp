@@ -1,7 +1,7 @@
-#include "StdAfx.h"
-#include ".\sirom.h"
-#include "../graph/graph.h"
-#include "../systemFunction/isystemfunctionderivate.h"
+#include "stdafx.h"
+#include "SIRom.h"
+#include "../graph/Graph.h"
+#include "../SystemFunction/ISystemFunctionDerivate.h"
 #include <math.h>
 
 SIRom::SIRom(Graph* graph, ISystemFunctionDerivate* function) : graph(graph), function(function), CRom(graph)
@@ -25,7 +25,7 @@ double SIRom::cost(Node* node) {
 
 	//cout<<"\n\n"<<getAt(0,0)<<"\t"<<getAt(1, 0)<<"\n"<<getAt(0,1)<<"\t"<<getAt(1,1)<<"\nResult="<<tmp<<"\n\n";
 
-	return log(abs(tmp)) * factor;
+	return log(Abs(tmp)) * factor;
 }
 
 

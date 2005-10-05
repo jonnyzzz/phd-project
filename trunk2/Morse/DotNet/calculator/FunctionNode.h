@@ -64,3 +64,4 @@ protected:
 	bool isZero(double value);
 
 };
+

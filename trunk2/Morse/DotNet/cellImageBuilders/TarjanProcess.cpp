@@ -1,6 +1,6 @@
-#include "StdAfx.h"
-#include ".\tarjanprocess.h"
-#include "graphSet.h"
+#include "stdafx.h"
+#include "TarjanProcess.h"
+#include "GraphSet.h"
 #include "../graph/GraphComponents.h"
 #include "../graph/Graph.h"
 

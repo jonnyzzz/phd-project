@@ -1,10 +1,10 @@
-#include "StdAfx.h"
-#include ".\rom.h"
-#include "..\graph\graphUtil.h"
+#include "stdafx.h"
+#include "Rom.h"
+#include "../graph/GraphUtil.h"
 #include <list>
 #include <algorithm>
 
-using namespace stdext;
+//using namespace stdext;
 using namespace std;
 
 /* new(address_pointer) type does not supported by MFC
@@ -502,3 +502,4 @@ void CRom::dumpExtremaContour(ostream& o, CRom::ContourNode* node) {
 	} while (t != node);
 */
 }
+
