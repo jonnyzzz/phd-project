@@ -253,6 +253,9 @@
 				RelativePath=".\KernellImpl.cpp">
 			</File>
 			<File
+				RelativePath=".\LoopsLocalizationAction.cpp">
+			</File>
+			<File
 				RelativePath=".\MinimalLoopLocalizationAction.cpp">
 			</File>
 			<File
@@ -439,6 +442,9 @@
 			</File>
 			<File
 				RelativePath=".\KernellImpl.h">
+			</File>
+			<File
+				RelativePath=".\LoopsLocalizationAction.h">
 			</File>
 			<File
 				RelativePath=".\MinimalLoopLocalizationAction.h">

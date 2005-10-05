@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Mon Oct 03 21:19:56 2005
+/* at Wed Oct 05 11:17:29 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -381,6 +381,12 @@ typedef interface IWritableSpectrumResult IWritableSpectrumResult;
 #endif 	/* __IWritableSpectrumResult_FWD_DEFINED__ */
 
 
+#ifndef __ILoopsLocalizationAction_FWD_DEFINED__
+#define __ILoopsLocalizationAction_FWD_DEFINED__
+typedef interface ILoopsLocalizationAction ILoopsLocalizationAction;
+#endif 	/* __ILoopsLocalizationAction_FWD_DEFINED__ */
+
+
 #ifndef __CAdaptiveBoxMethod_FWD_DEFINED__
 #define __CAdaptiveBoxMethod_FWD_DEFINED__
 
@@ -703,6 +709,18 @@ typedef struct CSpectrumResultImpl CSpectrumResultImpl;
 #endif /* __cplusplus */
 
 #endif 	/* __CSpectrumResultImpl_FWD_DEFINED__ */
+
+
+#ifndef __CLoopsLocalizationAction_FWD_DEFINED__
+#define __CLoopsLocalizationAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CLoopsLocalizationAction CLoopsLocalizationAction;
+#else
+typedef struct CLoopsLocalizationAction CLoopsLocalizationAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CLoopsLocalizationAction_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -9419,6 +9437,148 @@ void __RPC_STUB IWritableSpectrumResult_SetMetadata_Stub(
 #endif 	/* __IWritableSpectrumResult_INTERFACE_DEFINED__ */
 
 
+#ifndef __ILoopsLocalizationAction_INTERFACE_DEFINED__
+#define __ILoopsLocalizationAction_INTERFACE_DEFINED__
+
+/* interface ILoopsLocalizationAction */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_ILoopsLocalizationAction;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("7EC2A3FE-E845-4FAC-9E24-8A5101C2E922")
+    ILoopsLocalizationAction : public IAction
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct ILoopsLocalizationActionVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ILoopsLocalizationAction * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ILoopsLocalizationAction * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ILoopsLocalizationAction * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            ILoopsLocalizationAction * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            ILoopsLocalizationAction * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            ILoopsLocalizationAction * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            ILoopsLocalizationAction * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            ILoopsLocalizationAction * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            ILoopsLocalizationAction * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            ILoopsLocalizationAction * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            ILoopsLocalizationAction * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        END_INTERFACE
+    } ILoopsLocalizationActionVtbl;
+
+    interface ILoopsLocalizationAction
+    {
+        CONST_VTBL struct ILoopsLocalizationActionVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ILoopsLocalizationAction_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define ILoopsLocalizationAction_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define ILoopsLocalizationAction_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define ILoopsLocalizationAction_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define ILoopsLocalizationAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define ILoopsLocalizationAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define ILoopsLocalizationAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define ILoopsLocalizationAction_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define ILoopsLocalizationAction_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define ILoopsLocalizationAction_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define ILoopsLocalizationAction_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ILoopsLocalizationAction_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __MorseKernel2_LIBRARY_DEFINED__
 #define __MorseKernel2_LIBRARY_DEFINED__
@@ -9643,6 +9803,14 @@ EXTERN_C const CLSID CLSID_CSpectrumResultImpl;
 
 class DECLSPEC_UUID("45FBC041-D2C1-495D-8CC9-58019691E9CC")
 CSpectrumResultImpl;
+#endif
+
+EXTERN_C const CLSID CLSID_CLoopsLocalizationAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("7D61797D-1EB0-477F-B93D-10B854DC5F53")
+CLoopsLocalizationAction;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

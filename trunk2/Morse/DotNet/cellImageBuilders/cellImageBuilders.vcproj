@@ -168,6 +168,9 @@
 				RelativePath=".\GraphSet.h">
 			</File>
 			<File
+				RelativePath=".\LoopsLocalizationProcess.h">
+			</File>
+			<File
 				RelativePath=".\MS2DBoxProcess.h">
 			</File>
 			<File
@@ -236,6 +239,9 @@
 			</File>
 			<File
 				RelativePath=".\GraphSet.cpp">
+			</File>
+			<File
+				RelativePath=".\LoopsLocalizationProcess.cpp">
 			</File>
 			<File
 				RelativePath=".\MS2DBoxProcess.cpp">
