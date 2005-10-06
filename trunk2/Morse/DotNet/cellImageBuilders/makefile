@@ -1,22 +1,14 @@
 #-----Macros---------------------------------
 
 CXX = gcc
-CXXFLAGS = -x c++ -I .
-OUT = gccbuild
-
+CXXFLAGS = -x c++ -I.
 
 #-----Suffix Rules---------------------------
 # set up C++ suffixes and relationship between .cc and .o files
-
-.SUFFIXES: .cpp
-
-.cpp.o: ->   $(CXX) $(CXXFLAGS) -c $<
-
-.cpp :  ->   $(CXX) $(CXXFLAGS) $< -o $@ -lm $(TLIB) -lg++
-
-#-----File Dependencies----------------------
-
-
+#
+# .SUFFIXES: .cpp
+#
+# %.o: ->   $(CXX) $(CXXFLAGS) -c $<
 
 #-----File Dependencies----------------------
 
@@ -46,9 +38,23 @@ SRC = AbstractBoxProcess.cpp \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
 
-usepix: $(OBJ)  ->   $(CXX) $(CXXFLAGS) -o $@ $(OBJ) -lm $(TLIB) -lg++
+compile: ; $(CXX) $(CXXFLAGS) -c $(SRC)
 
+#%.o : ;  $(CXX) $(CXXFLAGS) -c $*.cpp
+#
+#  $(CXX) $(CXXFLAGS) $% -o $@ -lm $(TLIB) -lg++
+#
+#TASK: $(OBJ)
+#	 $(CXX) $(CXXFLAGS) -o $@ $(OBJ) -lm $(TLIB) -lg++
+#
+#usepix: $(OBJ)  ->   $(CXX) $(CXXFLAGS) -o $@ $(OBJ) -lm $(TLIB) -lg++
+#
 #-----Other stuff----------------------------
-depend:    ->   makedepend $(CXXFLAGS) -Y $(SRC)
+#depend:    ->   makedepend $(CXXFLAGS) -Y $(SRC)
+#
 
-clean: $(OBJ) ->  rm -f $(OBJ)
+ALL: $(OBJ)
+
+clean: $(OBJ) 
+	rm -f $(OBJ)
+

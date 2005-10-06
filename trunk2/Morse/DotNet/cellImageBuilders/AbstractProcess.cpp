@@ -26,3 +26,10 @@ void AbstractProcess::start() {
 }
 
 
+GraphSet AbstractProcess::Apply(AbstractProcess* ps, GraphSet& set) {
+	ps->start();
+	for (GraphSetIterator it = set.iterator(); it.HasNext(); it.Next()) {
+		ps->processNextGraph(it.Current());
+	}
+	return ps->results();	
+}

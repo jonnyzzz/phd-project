@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="7.10"
-	Name="SystemFunction"
-	ProjectGUID="{8D190DB8-56C4-4C76-A7F1-5560D53344CC}"
+	Name="ConsoleTool"
+	ProjectGUID="{AE8E4529-46E6-4738-9365-B009D6AEDB07}"
 	Keyword="Win32Proj">
 	<Platforms>
 		<Platform
@@ -14,14 +14,13 @@
 			Name="Debug|Win32"
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -32,8 +31,13 @@
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/SystemFunction.lib"/>
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)/ConsoleTool.exe"
+				LinkIncremental="2"
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile="$(OutDir)/ConsoleTool.pdb"
+				SubSystem="1"
+				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -48,6 +52,8 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
@@ -57,28 +63,28 @@
 			Name="Release|Win32"
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
-			ConfigurationType="4"
+			ConfigurationType="1"
 			UseOfMFC="2"
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				GlobalOptimizations="TRUE"
-				InlineFunctionExpansion="2"
-				EnableIntrinsicFunctions="TRUE"
-				FavorSizeOrSpeed="1"
-				OptimizeForProcessor="2"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="3"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="FALSE"
+				Detect64BitPortabilityProblems="TRUE"
 				DebugInformationFormat="3"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/SystemFunction.lib"/>
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)/ConsoleTool.exe"
+				LinkIncremental="1"
+				GenerateDebugInformation="TRUE"
+				SubSystem="1"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"/>
 			<Tool
 				Name="VCMIDLTool"/>
 			<Tool
@@ -93,6 +99,8 @@
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
 				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
 			<Tool
 				Name="VCManagedWrapperGeneratorTool"/>
 			<Tool
@@ -107,34 +115,7 @@
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
-				RelativePath=".\IMorseFunction.cpp">
-			</File>
-			<File
-				RelativePath=".\IProjectiveExtensionInfo.cpp">
-			</File>
-			<File
-				RelativePath=".\ISystemFunction.cpp">
-			</File>
-			<File
-				RelativePath=".\ISystemFunctionDerivate.cpp">
-			</File>
-			<File
-				RelativePath=".\IteratatedSystemFunction.cpp">
-			</File>
-			<File
-				RelativePath=".\MS2DAngleFunction.cpp">
-			</File>
-			<File
-				RelativePath=".\MS2DAngleMorseFunction.cpp">
-			</File>
-			<File
-				RelativePath=".\SegmentProjectiveExtendedSystemFunction.cpp">
-			</File>
-			<File
-				RelativePath=".\SegmentProjectiveExtensionMorseFunction.cpp">
-			</File>
-			<File
-				RelativePath=".\SermentProjectiveExtensionInfo.cpp">
+				RelativePath=".\ConsoleTool.cpp">
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp">
@@ -152,10 +133,10 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\SystemFunction.cpp">
+				RelativePath=".\TorstenFunction.cpp">
 			</File>
 			<File
-				RelativePath=".\SystemFunctionDerivate.cpp">
+				RelativePath=".\Util.cpp">
 			</File>
 		</Filter>
 		<Filter
@@ -163,49 +144,28 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
-				RelativePath=".\IMorseFunction.h">
+				RelativePath=".\ConsoleTool.h">
 			</File>
 			<File
-				RelativePath=".\IProjectiveExtensionInfo.h">
-			</File>
-			<File
-				RelativePath=".\ISystemFunction.h">
-			</File>
-			<File
-				RelativePath=".\ISystemFunctionDerivate.h">
-			</File>
-			<File
-				RelativePath=".\IteratatedSystemFunction.h">
-			</File>
-			<File
-				RelativePath=".\MS2DAngleFunction.h">
-			</File>
-			<File
-				RelativePath=".\MS2DAngleMorseFunction.h">
-			</File>
-			<File
-				RelativePath=".\SegmentProjectiveExtendedSystemFunction.h">
-			</File>
-			<File
-				RelativePath=".\SegmentProjectiveExtensionMorseFunction.h">
-			</File>
-			<File
-				RelativePath=".\SermentProjectiveExtensionInfo.h">
+				RelativePath=".\Resource.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">
 			</File>
 			<File
-				RelativePath=".\SystemFunction.h">
+				RelativePath=".\TorstenFunction.h">
 			</File>
 			<File
-				RelativePath=".\SystemFunctionDerivate.h">
+				RelativePath=".\Util.h">
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			<File
+				RelativePath=".\ConsoleTool.rc">
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt">

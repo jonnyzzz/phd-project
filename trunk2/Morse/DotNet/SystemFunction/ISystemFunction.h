@@ -13,7 +13,6 @@ public:
     virtual int getDimension();
     virtual int getIteration();
 
-
     virtual double* getInput() = 0;
     virtual double* getOutput() = 0; //f1, f2, ...
 

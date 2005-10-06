@@ -186,6 +186,9 @@
 				RelativePath=".\MSPointBuilder.h">
 			</File>
 			<File
+				RelativePath=".\onsoleProgressBarInfo.h">
+			</File>
+			<File
 				RelativePath=".\Processes.h">
 			</File>
 			<File

@@ -21,4 +21,9 @@ protected:
 
 private:
 	bool wasInitialized;
+
+public:
+	static GraphSet Apply(AbstractProcess* ps, GraphSet& set);
 };
+
+
