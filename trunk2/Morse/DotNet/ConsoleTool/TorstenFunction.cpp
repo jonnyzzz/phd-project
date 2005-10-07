@@ -50,3 +50,8 @@ Graph* TorstenFactory::CreateGraph() {
 
 	return new Graph(2, _min, _max, _grid, false);
 }
+
+
+void TorstenFactory::Dump() {
+	cout<<"torsten's function with"<<endl<<"beta="<<TorstenFunction::beta<<" m="<<TorstenFunction::m<<" d="<<TorstenFunction::d<<endl<<endl;
+}

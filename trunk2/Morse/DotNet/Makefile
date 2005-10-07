@@ -1,6 +1,3 @@
-CXX = gcc
-CXXFLAGS = -x c++ -I.
-CXXLINK = -o programm
 
 SRC_CELLIMAGEBUILDER = AbstractBoxProcess.cpp \
                 AbstractGraphCreator.cpp \
@@ -63,10 +60,34 @@ SRC = $(addprefix $(DIR_CELLIMAGEBUILDER), $(SRC_CELLIMAGEBUILDER)) \
       $(addprefix $(DIR_SYSTEM_FUNCTION), $(SRC_SYSTEM_FUNCTION)) \
       $(addprefix $(DIR_CONSOLE_TOOL), $(SRC_CONSOLE_TOOL))
 
+DIRS = $(DIR_CONSOLE_TOOL) $(DIR_SYSTEM_FUNCTION) $(DIR_GRAPH_SIMPLEX) $(DIR_GRAPH) $(DIR_CELLIMAGEBUILDER)
+
 OBJ = $(addsuffix .o, $(basename $(SRC)))
 
-all:;  $(CXX) $(CXXFLAGS) -o runny $(SRC)
+# CXX = gcc
+# CXXFLAGS = -x c++ $(addprefix -I,$(DIRS)) -lstdc++ -lstdc
+#
+#
+# task: $(OBJ)
+#      $(CXX) $(CFLAGS) $(LDFLAGS) $(OBJ) -o bin/morse
+#      @echo Make gqthread is complete.
+#
+# clean:; rm -f $(OBJ)
+#CFLAGS  = -D DEBUG -D ENABLE_TRACE -ggdb -Wall -I./include
 
-link:;  $(CXX) $(CXXLINK) -o runny $(OBJ) -lm $(TLIB) -lg++ -o3
 
-clean:; rm -f $(OBJ)
+
+
+CC      = gcc
+CFLAGS = $(addprefix -I,$(DIRS))
+LDFLAGS = -lstdc++ -lm
+OBJECTS = $(OBJ)
+
+.SUFFIXES: .cpp
+.cpp.o: ->   $(CC) $(CFLAGS) -c $<
+.cpp :  ->   $(CC) $(CFLAGS) $< -o $@ -lm $(TLIB) -lg++
+
+
+all:  $(OBJECTS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/morse
+	@echo Make is complete.

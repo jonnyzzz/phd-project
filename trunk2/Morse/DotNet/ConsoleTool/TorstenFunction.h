@@ -28,7 +28,7 @@ private:
 	double* output;
 	bool selfCreated;
 
-private:
+public:
 	static const double beta;
 	static const double d;
 	static const double m;
@@ -43,7 +43,10 @@ public:
 
 	static const int Dim;	
 
-	Graph* CreateGraph();
+	static Graph* CreateGraph();
+	
+	static void Dump();
+
 };
 
 

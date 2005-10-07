@@ -28,8 +28,12 @@ GraphSet Util::LoadGraphSet(char* file) {
 	int cnt;
 	mainFile>>cnt;
 
+
+	cout<<"Found "<<cnt<<" files"<<endl;
+
 	for (int i=0; i<cnt; i++) {
 		sprintf(buff, FILE_MASK, file, i);
+		cout<<"Loading file "<<buff<<endl;
 		FileInputStream fs(buff);
 		mySet.AddGraph( createGraph( fs ));
 	}
