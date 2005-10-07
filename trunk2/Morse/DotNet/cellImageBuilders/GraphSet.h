@@ -42,6 +42,9 @@ private:
 private:
 	void copyFrom(const GraphSet& graphSet);
 	void copyFrom(GraphComponents* cms);
+
+public: 
+	void DeleteGraphs();
 };
 
 

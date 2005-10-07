@@ -24,8 +24,8 @@ void LogisticsMap::evaluate() {
 
 
 Graph* LogisticsMapFactory::CreateGraph() {
-	double _min[] = { 2, 4};
-	double _max[] = {0, 1};
+	double _min[] = { 2, 0};
+	double _max[] = {4, 1};
 	int _grid[] = {10,10};
 
 	Graph* g = new Graph(2, _min, _max, _grid, false);

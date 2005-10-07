@@ -63,6 +63,12 @@ void GraphSet::copyFrom(const GraphSet& graphSet) {
 	}
 }
 
+void GraphSet::DeleteGraphs() {
+	for (GraphList::const_iterator it = graphList.begin(); it != graphList.end(); it++) {
+		delete *it;
+	}
+}
+
 void GraphSet::copyFrom(GraphComponents* cms) {
 	for (int i=0; i<cms->length(); i++) {
 		graphList.push_back(cms->getAt(i));

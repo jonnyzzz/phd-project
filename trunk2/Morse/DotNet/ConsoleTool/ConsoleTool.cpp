@@ -17,11 +17,18 @@
 #include "../graph/MemoryManager.h"
 #include <stdio.h>
 #include "../cellImageBuilders/TarjanProcess.h"
+#include "LogisticsMap.h"
+
+
+#define FACTORY TorstenFactory
+//LogisticsMapFactory
+#define SYSTEM  TorstenFunction
+//LogisticsMap
 
 
 GraphSet Process(GraphSet set) {
-
-	ISystemFunction *func = new TorstenFunction();//IteratatedSystemFunction<TorstenFactory, 5>(); //
+                                //new LogisticsMap();//
+	ISystemFunction *func = new SYSTEM();//IteratatedSystemFunction<TorstenFactory, 5>(); //
 
 	int factor[] = {2,2};
 	ConsoleProgressBarInfo info;
@@ -29,7 +36,17 @@ GraphSet Process(GraphSet set) {
 	AbstractProcess* ps = new SimpleBoxProcess(set[0], func, factor, &info);
 	TarjanProcess* ts = new TarjanProcess(false, &info);
 
-	return AbstractProcess::Apply(ts, AbstractProcess::Apply(ps, set));
+	GraphSet it = AbstractProcess::Apply(ps, set);
+
+	GraphSet res = AbstractProcess::Apply(ts, it);
+
+	delete ps;
+	delete ts;
+	delete func;
+	set.DeleteGraphs();
+	it. DeleteGraphs();
+
+	return res;
 }
 
 
@@ -47,26 +64,22 @@ GraphSet Process(GraphSet set) {
 void die() {
    cout<<"prog -init file    ;create new inital file and exits"<<endl;
    cout<<"prog -iter 5 file out ; open file and do 5 iters"<<endl;
+   cout<<"prog -export file out ; exports file to a list of points"<<endl;
 }
 	
 
 
 int main(int argc, char** argv) {
 	
-	TorstenFactory::Dump();
+	FACTORY::Dump();
 
 	cout<<argc<<endl;
-	
-	
-	if (argc == 3) {
-		if (strcmp(argv[1], "-init") != 0) DIE(-1);
 
-
-		GraphSet set(TorstenFactory::CreateGraph());
+	
+	if ( strcmp(argv[1], "-init") == 0 ) {
+		GraphSet set(FACTORY::CreateGraph());
 		Util::SaveGraphSet(set, argv[2]);
-
-	} else if (argc == 5) {
-	        if (strcmp(argv[1], "-iter") != 0) DIE(-1);
+	} else if ( strcmp(argv[1], "-iter") == 0 ) {
 		int its = 0;
 		sscanf(argv[2],"%d", &its);
 
@@ -85,6 +98,9 @@ int main(int argc, char** argv) {
 		Util::SaveGraphSet(in, output);
 
 		cout<<"Program Ended"<<endl<<endl;
+	} else if (strcmp(argv[1], "-export") == 0) {
+            cout<<"Loading from "<<argv[2]<<endl<<"Saving results to "<<argv[3]<<endl<<endl;
+	    Util::ExportPoints(Util::LoadGraphSet(argv[2]), argv[3]);
 	} else DIE(-1);
 
 	cout<<endl<<endl<<endl;

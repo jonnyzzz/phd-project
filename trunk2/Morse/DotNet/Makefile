@@ -51,7 +51,10 @@ DIR_SYSTEM_FUNCTION = SystemFunction/
 
 SRC_CONSOLE_TOOL = ConsoleTool.cpp \
                    TorstenFunction.cpp \
-                   Util.cpp
+                   Util.cpp \
+                   FunctionBase.cpp \
+		   LogisticsMap.cpp 
+
 DIR_CONSOLE_TOOL = ConsoleTool/
 
 SRC = $(addprefix $(DIR_CELLIMAGEBUILDER), $(SRC_CELLIMAGEBUILDER)) \
@@ -90,7 +93,7 @@ OBJECTS = $(OBJ)
 
 
 all:  $(OBJECTS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/morse
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -O3 -o bin/sib6.5
 	@echo Make is complete.
 
 clean:
