@@ -8,7 +8,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-MemoryManager::MemoryManager(int buffer_length) : buffer_length(buffer_length)
+MemoryManager::MemoryManager(size_t buffer_length) : buffer_length(buffer_length)
 {
 
 }
@@ -31,6 +31,10 @@ MemoryManager::Buffer MemoryManager::CreateBuffer() {
 	Buffer b;
 	//b.data = new char[buffer_length];
 	b.data = (char*)malloc(sizeof(char)*buffer_length);
+	if (b.data == NULL) {
+		cout<<"Memory Allocation Error!";
+		throw -1;
+	}
 	b.it = b.data;
 	b.end = b.data + buffer_length;
 	return b;
@@ -51,7 +55,7 @@ MemoryManager::Buffer& MemoryManager::PushNewBuffer() {
 
 MemoryManager::Buffer& MemoryManager::CurrentBuffer(size_t size) {
 
-    ATLASSERT(size < buffer_length);
+    ATLASSERT(size <= buffer_length);    
 
     if (buffers.size() > 0 ) {
         Buffer& myBuffer = buffers.front();

@@ -119,9 +119,6 @@
 				RelativePath=".\ISystemFunctionDerivate.cpp">
 			</File>
 			<File
-				RelativePath=".\IteratatedSystemFunction.cpp">
-			</File>
-			<File
 				RelativePath=".\MS2DAngleFunction.cpp">
 			</File>
 			<File

@@ -90,7 +90,7 @@ void AbstractBoxProcess::processNextGraph(Graph* graph) {
 }
 
 Graph* AbstractBoxProcess::createGraph() {
-	return graph_source->copyCoordinatesDevided(factor);
+	return graph_source->copyCoordinatesDevided(factor, true);
 }
 
 void AbstractBoxProcess::multiplyNode(Node* node, Graph* graph) {

@@ -3,7 +3,6 @@
 typedef int    JInt;
 typedef double JDouble;
 
-
 //stolen from math.h
 #define M_E        2.71828182845904523536
 #define M_LOG2E    1.44269504088896340736
@@ -18,4 +17,3 @@ typedef double JDouble;
 #define M_2_SQRTPI 1.12837916709551257390
 #define M_SQRT2    1.41421356237309504880
 #define M_SQRT1_2  0.707106781186547524401
-

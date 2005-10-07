@@ -23,7 +23,7 @@ private:
 	bool wasInitialized;
 
 public:
-	static GraphSet Apply(AbstractProcess* ps, GraphSet& set);
+	static GraphSet Apply(AbstractProcess* ps, GraphSet set);
 };
 
 

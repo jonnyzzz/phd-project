@@ -14,6 +14,9 @@
 #include "../graph/FileStream.h"
 #include "../cellImageBuilders/onsoleProgressBarInfo.h"
 #include "Util.h"
+#include "../graph/MemoryManager.h"
+#include <stdio.h>
+#include "../cellImageBuilders/TarjanProcess.h"
 
 
 GraphSet Process(GraphSet set) {
@@ -24,36 +27,68 @@ GraphSet Process(GraphSet set) {
 	ConsoleProgressBarInfo info;
 
 	AbstractProcess* ps = new SimpleBoxProcess(set[0], func, factor, &info);
-	return AbstractProcess::Apply(ps, set);
+	TarjanProcess* ts = new TarjanProcess(false, &info);
+
+	return AbstractProcess::Apply(ts, AbstractProcess::Apply(ps, set));
 }
 
+
+/**
+*  prog -init file    ;create new inital file and exits
+*  prog -iter 5 file out ; open file and do 5 iters
+*
+*
+*
+**/
+
+
+#define DIE(x) {die(); return (x);}
+
+void die() {
+   cout<<"prog -init file    ;create new inital file and exits"<<endl;
+   cout<<"prog -iter 5 file out ; open file and do 5 iters"<<endl;
+}
+	
 
 
 int main(int argc, char** argv) {
-
-	TorstenFactory::Dump(); 	
 	
-	if (argc != 3) {
-		cout<<" file <input> <output>"<<endl;
+	TorstenFactory::Dump();
+
+	cout<<argc<<endl;
+	
+	
+	if (argc == 3) {
+		if (strcmp(argv[1], "-init") != 0) DIE(-1);
+
 
 		GraphSet set(TorstenFactory::CreateGraph());
-		Util::SaveGraphSet(set, "test");
+		Util::SaveGraphSet(set, argv[2]);
 
-		return -1;
-	} 
-	char* input = argv[1];
-	char* output = argv[2];
+	} else if (argc == 5) {
+	        if (strcmp(argv[1], "-iter") != 0) DIE(-1);
+		int its = 0;
+		sscanf(argv[2],"%d", &its);
 
-	cout<<"Loading from "<<input<<endl<<"Saving results to "<<output<<endl<<endl;
+					
+		char* input = argv[3];
+		char* output = argv[4];
+
+		cout<<"Loading from "<<input<<endl<<"Saving results to "<<output<<endl<<endl;
 
 
-	GraphSet in = Util::LoadGraphSet(input);
+		GraphSet in = Util::LoadGraphSet(input);
 
-	return 0;
+		for (int i=0; i<its; i++) 
+			in = Process(in);
 
-	GraphSet result = Process(in);
+		Util::SaveGraphSet(in, output);
 
-	Util::SaveGraphSet(result, output);
+		cout<<"Program Ended"<<endl<<endl;
+	} else DIE(-1);
+
+	cout<<endl<<endl<<endl;
 
 	return 0;
 }
+

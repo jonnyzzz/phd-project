@@ -127,8 +127,9 @@ Graph* Graph::copyCoordinates(bool tarjanable) {
 	return new Graph(dimention, min, max, grid, tarjanable, getNodeHashMax(getNumberOfNodes()*4));
 }
 
+//todo: Add NeedEdgeResolve here from optimal edges hash selection!
 Graph* Graph::copyCoordinatesForTarjan() {
-	return new Graph(dimention, min, max, grid, false, 13729, 1);
+	return new Graph(dimention, min, max, grid, false, getNodeHashMax(getNumberOfNodes()), 1);
 }
 
 Graph* Graph::copyCoordinatesDevided(int* factor, bool tarjanable) {
@@ -970,14 +971,10 @@ void Graph::setFlag(Node* node, int flagID, bool value) {
 
 ////////////////////////////////////////////////////////////////////
 bool inline Graph::isLoop(Node* node) {
-	ATLASSERT(isTarjanable);
-
 	return readFlag(node, isLoopFlagID);
 }
 
 void inline Graph::setLoop(Node* node) {
-	ATLASSERT(isTarjanable);
-
 	setFlag(node, isLoopFlagID);
 }
 

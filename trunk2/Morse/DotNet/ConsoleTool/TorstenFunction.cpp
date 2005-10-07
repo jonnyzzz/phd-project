@@ -38,7 +38,7 @@ void TorstenFunction::evaluate() {
 	double& y = input[1];
 
 	f1=log(beta)+x-exp(y)-log(1+exp(x));
-    f2=log(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
+        f2=log(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
 
 }
 
@@ -48,7 +48,10 @@ Graph* TorstenFactory::CreateGraph() {
 	double _max[] = {15, 10};
 	int _grid[] = {10,10};
 
-	return new Graph(2, _min, _max, _grid, false);
+	Graph* g = new Graph(2, _min, _max, _grid, false);
+	g->maximize();
+
+	return g;
 }
 
 

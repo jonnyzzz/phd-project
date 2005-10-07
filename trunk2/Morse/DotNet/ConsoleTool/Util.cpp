@@ -7,16 +7,33 @@
 
 const char FILE_MASK[] = "%s.%d";
 
-void Util::SaveGraphSet(GraphSet& set, char* file) {
+void Util::SaveGraphSet(GraphSet set, char* file) {
 	char buff[2048];
+
+//	cout<<"file to write: "<< file<<endl;
+
 	FileOutputStream mainFile(file);
 	mainFile<<set.Length();
-	
+
+	if (set.Length() == 0) {
+		cerr<<"Unable to save empty graph set";
+	}
+//	cout<<set.Length()<<endl;
+
+//	Graph* t=set[0];	
+
 	int cnt = 0;
 	for (GraphSetIterator it = set.iterator(); it.HasNext(); it.Next()) {
 		sprintf(buff, FILE_MASK, file, cnt++);
+
+//		cout<<"Saving file "<<buff<<endl;
 		FileOutputStream fs(buff);
-		saveGraph(fs, it.Current());
+//		cout<<"Saving file "<<buff<<endl;
+
+		Graph* gr = it.Current();
+//		cout<<"Saving file "<<buff<<endl;
+//		cout<<gr->getNumberOfNodes()<<" "<<gr->getNumberOfArcs()<<endl;
+		saveGraph(fs, gr);
 	}
 }
 

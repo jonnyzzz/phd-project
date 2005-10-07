@@ -108,6 +108,18 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{80C14A35-BD13-463C-B296-AF3F5A254439}"
+			Name="cellImageBuilders"/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{213A979A-506A-4295-9350-B86F82C0DBCB}"
+			Name="graph"/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}"
+			Name="graph_simplex"/>
+		<ProjectReference
+			ReferencedProjectIdentifier="{8D190DB8-56C4-4C76-A7F1-5560D53344CC}"
+			Name="SystemFunction"/>
 	</References>
 	<Files>
 		<Filter

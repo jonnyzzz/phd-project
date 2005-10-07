@@ -3,21 +3,19 @@
 #include <list>
 using namespace std;
 
-#ifndef ATLASSERT
-#define ATLASSERT(x) { int*p = NULL; *p=10; }
-#endif
-
 class MemoryManager
 {
 public:
-	MemoryManager(int buffer_length);
+	MemoryManager(size_t buffer_length);
 	virtual ~MemoryManager(void);
 
     MemoryManager(const MemoryManager& man) {
+ 	cout<<"Copying constructor"<<endl;
         ATLASSERT(false);
     }
 
     MemoryManager& operator = (const MemoryManager&) {
+        cout<<" operator = "<<endl;
         ATLASSERT(false);
     }
 
@@ -29,7 +27,7 @@ private:
 	};
 
 private:
-	int buffer_length;
+	size_t buffer_length;
 
 private:
 	typedef list<Buffer> BuffersList;

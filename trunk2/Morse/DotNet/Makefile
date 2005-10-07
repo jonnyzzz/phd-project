@@ -73,13 +73,14 @@ OBJ = $(addsuffix .o, $(basename $(SRC)))
 #      @echo Make gqthread is complete.
 #
 # clean:; rm -f $(OBJ)
-#CFLAGS  = -D DEBUG -D ENABLE_TRACE -ggdb -Wall -I./include
+
 
 
 
 
 CC      = gcc
 CFLAGS = $(addprefix -I,$(DIRS))
+CFLAGS  += -D DEBUG -D ENABLE_TRACE -ggdb -Wall
 LDFLAGS = -lstdc++ -lm
 OBJECTS = $(OBJ)
 
@@ -91,3 +92,6 @@ OBJECTS = $(OBJ)
 all:  $(OBJECTS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/morse
 	@echo Make is complete.
+
+clean:
+	rm -f $(OBJECTS)
