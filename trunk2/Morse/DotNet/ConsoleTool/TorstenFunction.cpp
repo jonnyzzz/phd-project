@@ -3,7 +3,7 @@
 #include <math.h>
 #include "../graph/Graph.h"
 
-const double TorstenFunction::beta = 6.5;
+const double TorstenFunction::beta = 6.25;
 const double TorstenFunction::d = 0.5;
 const double TorstenFunction::m = 3.5;
 const int TorstenFactory::Dim = 2;

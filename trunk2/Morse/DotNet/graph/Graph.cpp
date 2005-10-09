@@ -809,16 +809,17 @@ bool Graph::equals(Graph* graph) const {
 const char GRAPH_OPEN_TAG[] = "<Graph>";
 const char GRAPH_CLOSE_TAG[]= "</Graph>";
 
-Graph*	createGraph(FileInputStream& o) {
+Graph*	Graph::createGraph(FileInputStream& o) {
 	char buff[1024];
 	o>>buff;
 	ASSERT(strcmp(buff, GRAPH_OPEN_TAG) == 0);
 
 	int dimention;
 	int nodes;
+	int edges_cnt;
 	int edges;
 
-	o>>dimention>>nodes>>edges;
+	o>>dimention>>nodes>>edges_cnt;
 
 	JInt* grid = new JInt[dimention];
 	JDouble* min = new JDouble[dimention];
@@ -828,14 +829,18 @@ Graph*	createGraph(FileInputStream& o) {
 		o>>min[i]>>max[i]>>grid[i];
 	}
 
-	Graph* graph = new Graph(dimention, min, max, grid, false);
+	Graph* graph = new Graph(dimention, min, max, grid, false, Graph::getNodeHashMax(nodes));
 	Node* node;
 
 	for (int ne = 0; ne < nodes; ne++) {
 		for (int i=0; i<dimention;i++) {
 			o>>grid[i];
 		}
-		node = graph->browseTo(grid);
+		if (edges_cnt != 0)
+			node = graph->browseToUnsafe(grid);
+		} else {
+			node = graph->addNode(grid)
+		}
 
 		ASSERT(node != NULL);
 
@@ -845,7 +850,7 @@ Graph*	createGraph(FileInputStream& o) {
 			for (int j=0; j<dimention; j++) {
 				o>>grid[j];
 			}
-			graph->browseTo (node, graph->browseTo(grid));
+			graph->addEdge(node, graph->browseTo(grid));
 		}
 	}
 
@@ -859,7 +864,7 @@ Graph*	createGraph(FileInputStream& o) {
 	return graph;
 }
 
-void saveGraph(FileOutputStream& o, Graph* graph) {
+void Graph::saveGraph(FileOutputStream& o, Graph* graph) {
 	o.stress();
 	o<<GRAPH_OPEN_TAG;
 	o.stress();
@@ -914,7 +919,7 @@ void saveGraph(FileOutputStream& o, Graph* graph) {
 }
 
 
-void saveGraphAsPoints(FileOutputStream& o, Graph* graph) {
+void Graph::saveGraphAsPoints(FileOutputStream& o, Graph* graph) {
 	GraphNodeEnumerator ne(graph);
 	int dim = graph->getDimention();
 

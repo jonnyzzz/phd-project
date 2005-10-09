@@ -33,3 +33,8 @@ Graph* LogisticsMapFactory::CreateGraph() {
 
 	return g;
 }
+
+
+void LogisticsMapFactory::Dump() {
+	cout<<"Logistics Map"<<endl;
+}

@@ -3,7 +3,9 @@
 #include "../graph/Graph.h"
 #include "../graph/FileStream.h"
 #include <iostream>
+#include <fstream>
 #include <stdio.h>
+using namespace std;
 
 const char FILE_MASK[] = "%s.%d";
 
@@ -33,6 +35,14 @@ void Util::ExportPoints(GraphSet set, char* file) {
 	FileOutputStream mainFile(file);
 	mainFile<<set.Length();
 
+	sprintf(buff, "%s.gnuplot", file);
+	ofstream gp;
+	gp.open(buff);
+
+	gp<<"set terminal png size 1000,1000; set key below; set output '"<<file<<".png'; ";
+
+	gp<<"plot ";
+
 	if (set.Length() == 0) {
 		cerr<<"Unable to save empty graph set";
 	}
@@ -43,7 +53,14 @@ void Util::ExportPoints(GraphSet set, char* file) {
 		FileOutputStream fs(buff);
 		Graph* gr = it.Current();
 		saveGraphAsPoints(fs, gr);
+
+		if (cnt != 1) 
+			gp<<" , ";
+
+		gp<<"'"<<buff<<"' with dots title 'Nodes: "<<gr->getNumberOfNodes()<<"' ";
 	}
+	gp<<";";
+	gp.close();
 }
 
 GraphSet Util::LoadGraphSet(char* file) {

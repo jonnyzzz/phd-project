@@ -93,7 +93,7 @@ OBJECTS = $(OBJ)
 
 
 all:  $(OBJECTS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -O3 -o bin/sib6.5
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -O3 -o bin/exporter
 	@echo Make is complete.
 
 clean:

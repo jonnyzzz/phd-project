@@ -21,9 +21,9 @@
 
 
 #define FACTORY TorstenFactory
-//LogisticsMapFactory
+//#define FACTORY LogisticsMapFactory
 #define SYSTEM  TorstenFunction
-//LogisticsMap
+//#define SYSTEM  LogisticsMap
 
 
 GraphSet Process(GraphSet set) {
@@ -92,8 +92,15 @@ int main(int argc, char** argv) {
 
 		GraphSet in = Util::LoadGraphSet(input);
 
-		for (int i=0; i<its; i++) 
+		for (int i=0; i<its; i++) {
+			cout<<endl<<endl<<"Iteration "<<i+1<<" from "<<its<<endl<<endl;
 			in = Process(in);
+			char buff[2048];
+			sprintf(buff,"%s.temp.%d", output, i);
+
+			Util::SaveGraphSet(in, buff);
+
+		}
 
 		Util::SaveGraphSet(in, output);
 

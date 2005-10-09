@@ -183,10 +183,10 @@ private:
 	bool isLoop(Node* node);
 	void setLoop(Node* node);
 
+public:
+	static Graph*	createGraph(FileInputStream& o);
+	static void	saveGraph(FileOutputStream& o, Graph* graph);
+	static void	saveGraphAsPoints(FileOutputStream& o, Graph* graph);		
 };
-
-Graph*	createGraph(FileInputStream& o);
-void	saveGraph(FileOutputStream& o, Graph* graph);
-void	saveGraphAsPoints(FileOutputStream& o, Graph* graph);
 
 Graph*	createTestGraph(int num_nodes);

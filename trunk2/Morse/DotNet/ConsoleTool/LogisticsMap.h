@@ -32,7 +32,7 @@ public:
 
 	static Graph* CreateGraph();
 	
-	static void Dump() {}
+	static void Dump();
 
 };
 
