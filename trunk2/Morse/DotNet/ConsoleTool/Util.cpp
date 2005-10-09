@@ -39,7 +39,8 @@ void Util::ExportPoints(GraphSet set, char* file) {
 	ofstream gp;
 	gp.open(buff);
 
-	gp<<"set terminal png size 1000,1000; set key below; set output '"<<file<<".png'; ";
+//	gp<<"set terminal png size 1000,1000; set key below; set output '"<<file<<".png'; ";
+	gp<<"set terminal png small color; set key below; set output '"<<file<<".png'; ";
 
 	gp<<"plot ";
 
@@ -57,7 +58,8 @@ void Util::ExportPoints(GraphSet set, char* file) {
 		if (cnt != 1) 
 			gp<<" , ";
 
-		gp<<"'"<<buff<<"' with dots title 'Nodes: "<<gr->getNumberOfNodes()<<"' ";
+//		gp<<"'"<<buff<<"' with dots title 'Nodes: "<<gr->getNumberOfNodes()<<"' ";
+		gp<<"'"<<buff<<"' with dots ";
 	}
 	gp<<";";
 	gp.close();
