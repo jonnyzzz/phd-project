@@ -114,7 +114,7 @@ STDMETHODIMP CGraphResultImpl::SaveText(BSTR file) {
 	if (!out.EnshureOpened()) return E_FAIL;
 
 
-	saveGraphAsPoints(out, this->graph);
+	Graph::saveGraphAsPoints(out, this->graph);
 
 	return S_OK;
 }
@@ -125,7 +125,7 @@ STDMETHODIMP CGraphResultImpl::SaveGraph(BSTR file) {
 	FileOutputStream out(fileName);
 	if (!out.EnshureOpened()) return E_FAIL;
 
-	saveGraph(out, this->graph);
+	Graph::saveGraph(out, this->graph);
 
 	return S_OK;
 }
@@ -136,7 +136,7 @@ STDMETHODIMP CGraphResultImpl::SetGraphFromFile(BSTR file, VARIANT_BOOL isStrong
 	FileInputStream in(filename);
 	if (!in.EnshureOpened()) return E_FAIL;
 
-	Graph* graph = createGraph(in);
+	Graph* graph = Graph::createGraph(in);
 
 	HRESULT hr = SetGraph((void**)&graph, isStrong);
 

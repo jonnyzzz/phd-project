@@ -3,7 +3,6 @@
 #include "stdafx.h"
 #include "FunctionImpl.h"
 #include "kernellexception.h"
-#include "../graph/functionInclude.h"
 #include "../graph/GraphException.h"
 #include "../graph/graph.h"
 #include "../systemFunction/systemfunction.h"
@@ -11,6 +10,13 @@
 #include "../calculator/IntervalEvaluator.h"
 #include "../calculator/LipsitzFinder.h"
 
+#include "../calculator/FunctionContext.h"
+#include "../calculator/FunctionDictionary.h"
+#include "../calculator/FunctionNode.h"
+#include "../calculator/FunctionNative.h"
+#include "../calculator/SystemNative.h"
+#include "../calculator/FunctionFactory.h"
+#include "../calculator/FunctionFactoryParseException.h"
 
 
 // CFunctionImpl

@@ -459,7 +459,7 @@ Edge* Graph::browseTo(Node* from, Node* to) {
 }
 
 JDouble inline Graph::getExtent(int i) {
-	return this->getEps()[i]/20;
+	return this->getEps()[i]/10;
 }
 
 void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max) {	
@@ -754,7 +754,7 @@ void Graph::resolveEdges(Graph* root) {
       while (edge = root->getEdge(ee)) {
          Node* nodeTo = this->findNode(root->getCells(root->getEdgeTo(edge)));
          if (nodeTo != NULL) {
-            this->browseTo(node, nodeTo);
+            this->addEdge(node, nodeTo);
          }
       }
       root->freeEdgeEnumerator(ee);
@@ -836,10 +836,10 @@ Graph*	Graph::createGraph(FileInputStream& o) {
 		for (int i=0; i<dimention;i++) {
 			o>>grid[i];
 		}
-		if (edges_cnt != 0)
+		if (edges_cnt != 0){
 			node = graph->browseToUnsafe(grid);
 		} else {
-			node = graph->addNode(grid)
+			node = graph->addNode(grid);
 		}
 
 		ASSERT(node != NULL);

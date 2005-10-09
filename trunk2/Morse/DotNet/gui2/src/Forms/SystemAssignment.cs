@@ -267,14 +267,14 @@ namespace gui2.Forms
 			// openFileDialog
 			// 
 			this.openFileDialog.DefaultExt = "equation";
-			this.openFileDialog.Filter = "Equation files|*.equation|All files|*.*";
+			this.openFileDialog.Filter = "Equation files(*.equation)|*.equation|All files(*.*)|*.*";
 			this.openFileDialog.Title = "Select equation to open";
 			// 
 			// saveFileDialog
 			// 
 			this.saveFileDialog.DefaultExt = "equation";
 			this.saveFileDialog.FileName = "equation";
-			this.saveFileDialog.Filter = "Equation files|*.equation|All files|*.*";
+			this.saveFileDialog.Filter = "Equation files(*.equation)|*.equation|All files(*.*)|*.*";
 			this.saveFileDialog.Title = "Save System Equation";
 			// 
 			// SystemAssignment

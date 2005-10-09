@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Wed Oct 05 11:17:29 2005
+/* at Sun Oct 09 14:17:03 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -436,6 +436,13 @@ extern const MIDL_STUBLESS_PROXY_INFO IKernellImpl_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
+extern const MIDL_SERVER_INFO ILoopsLocalizationAction_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO ILoopsLocalizationAction_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
 extern const MIDL_SERVER_INFO IMS2Metadata_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IMS2Metadata_ProxyInfo;
 
@@ -452,13 +459,6 @@ extern const MIDL_STUB_DESC Object_StubDesc;
 
 extern const MIDL_SERVER_INFO IWritableSpectrumResult_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo;
-
-
-extern const MIDL_STUB_DESC Object_StubDesc;
-
-
-extern const MIDL_SERVER_INFO ILoopsLocalizationAction_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO ILoopsLocalizationAction_ProxyInfo;
 
 
 extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TABLE_SIZE ];
@@ -7564,6 +7564,84 @@ CInterfaceStubVtbl _IKernellImplStubVtbl =
 };
 
 
+/* Object interface: ILoopsLocalizationAction, ver. 0.0,
+   GUID={0x7EC2A3FE,0xE845,0x4FAC,{0x9E,0x24,0x8A,0x51,0x01,0xC2,0xE9,0x22}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short ILoopsLocalizationAction_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    204,
+    240,
+    276,
+    318,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO ILoopsLocalizationAction_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &ILoopsLocalizationAction_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO ILoopsLocalizationAction_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &ILoopsLocalizationAction_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(11) _ILoopsLocalizationActionProxyVtbl = 
+{
+    0,
+    &IID_ILoopsLocalizationAction,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IAction::SetActionParameters */ ,
+    0 /* forced delegation IAction::SetProgressBarInfo */ ,
+    0 /* forced delegation IAction::CanDo */ ,
+    0 /* forced delegation IAction::Do */
+};
+
+
+static const PRPC_STUB_FUNCTION ILoopsLocalizationAction_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _ILoopsLocalizationActionStubVtbl =
+{
+    &IID_ILoopsLocalizationAction,
+    &ILoopsLocalizationAction_ServerInfo,
+    11,
+    &ILoopsLocalizationAction_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: IMS2Metadata, ver. 0.0,
    GUID={0x5E5AEEE1,0xA73F,0x43C7,{0x91,0xA6,0x35,0x24,0x91,0x71,0xD3,0xC4}} */
 
@@ -7795,84 +7873,6 @@ CInterfaceStubVtbl _IWritableSpectrumResultStubVtbl =
     &IWritableSpectrumResult_ServerInfo,
     12,
     &IWritableSpectrumResult_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
-/* Object interface: ILoopsLocalizationAction, ver. 0.0,
-   GUID={0x7EC2A3FE,0xE845,0x4FAC,{0x9E,0x24,0x8A,0x51,0x01,0xC2,0xE9,0x22}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short ILoopsLocalizationAction_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    204,
-    240,
-    276,
-    318,
-    0
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO ILoopsLocalizationAction_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &ILoopsLocalizationAction_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO ILoopsLocalizationAction_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &ILoopsLocalizationAction_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(11) _ILoopsLocalizationActionProxyVtbl = 
-{
-    0,
-    &IID_ILoopsLocalizationAction,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */ ,
-    0 /* forced delegation IAction::SetActionParameters */ ,
-    0 /* forced delegation IAction::SetProgressBarInfo */ ,
-    0 /* forced delegation IAction::CanDo */ ,
-    0 /* forced delegation IAction::Do */
-};
-
-
-static const PRPC_STUB_FUNCTION ILoopsLocalizationAction_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2
-};
-
-CInterfaceStubVtbl _ILoopsLocalizationActionStubVtbl =
-{
-    &IID_ILoopsLocalizationAction,
-    &ILoopsLocalizationAction_ServerInfo,
-    11,
-    &ILoopsLocalizationAction_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };
 

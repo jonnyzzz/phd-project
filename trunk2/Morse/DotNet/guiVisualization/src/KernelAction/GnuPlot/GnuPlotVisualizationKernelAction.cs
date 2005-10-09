@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Diagnostics;
+using System.IO;
 using System.Xml;
 using gui.Resource;
 using guiExternalResource.Core;
@@ -7,6 +8,7 @@ using guiExternalResource.src.FileResources;
 using guiKernel2.Container;
 using guiKernel2.Node;
 using guiVisualization.KernelAction.GnuPlot;
+using guiVisualization.src.actionImpl.GnuPlot;
 using MorseKernel2;
 
 namespace guiVisualization.KernelAction
@@ -68,6 +70,24 @@ namespace guiVisualization.KernelAction
 			return new EmptyResultSet();
 		}
 
+		private void ShowFromFileList(int dimension, string[] fileset)
+		{
+			TempFileAllocator tempFiles = Core.Instance.ResourceManager.TempFileAllocator;
+
+			XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode((parameters.Parameters == null)? "show" : "save");
+
+			string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
+			GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters, parameters.Title);
+
+			foreach (string file in fileset)
+			{
+				int len;
+				using(TextReader tr = File.OpenText(file)) { len = tr.ReadToEnd().Split('\n').Length; }
+				script.addFile(file, file + " " + len.ToString());
+			}
+			RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), resource);			
+		}
+
 
 		private void RunGnuPlot(string filescript, XmlNode resource)
 		{
@@ -81,5 +101,13 @@ namespace guiVisualization.KernelAction
 			Process.Start(pi);
 		}
 
+
+		public static void ExportFile(string[] files, string output, string title)
+		{			
+			GnuPlotParameters pars = new GnuPlotParameters(output, title);
+			GnuPlotVisualizationKernelAction action = new GnuPlotVisualizationKernelAction();
+			action.SetActionParameters(pars);
+			action.ShowFromFileList(2, files);	
+		}
 	}
 }

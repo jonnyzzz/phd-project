@@ -740,6 +740,17 @@ interface IKernellImpl : IWritableKernell {
 
 [
 	object,
+	uuid(7EC2A3FE-E845-4FAC-9E24-8A5101C2E922),
+	dual,
+	helpstring("ILoopsLocalizationAction Interface"),
+	pointer_default(unique)
+] 
+#line 17 "e:\\morse\\dotnetproject\\dotnet\\morsekernel2\\loopslocalizationaction.h"
+interface ILoopsLocalizationAction : IAction {
+};
+
+[
+	object,
 	uuid(5E5AEEE1-A73F-43C7-91A6-35249171D3C4),
 	dual,
 	helpstring("IMS2Metadata Interface"),
@@ -783,17 +794,6 @@ interface IWritableSpectrumResult : IDispatch {
 	[id(23)] HRESULT  SetUpperLength([in] int data);
 #line 25 "e:\\morse\\dotnetproject\\dotnet\\morsekernel2\\writablespectrum.h"
 	[id(24)] HRESULT  SetMetadata([in] IResultMetadata *data);
-};
-
-[
-	object,
-	uuid(7EC2A3FE-E845-4FAC-9E24-8A5101C2E922),
-	dual,
-	helpstring("ILoopsLocalizationAction Interface"),
-	pointer_default(unique)
-] 
-#line 17 "e:\\morse\\dotnetproject\\dotnet\\morsekernel2\\loopslocalizationaction.h"
-interface ILoopsLocalizationAction : IAction {
 };
 
 
@@ -1121,6 +1121,18 @@ library MorseKernel2
 
 	[
 		version(1.0),
+		uuid(7D61797D-1EB0-477F-B93D-10B854DC5F53),
+		helpstring("LoopsLocalizationAction Class")
+	] 
+#line 34 "e:\\morse\\dotnetproject\\dotnet\\morsekernel2\\loopslocalizationaction.h"
+	coclass CLoopsLocalizationAction {
+		interface ILoopsLocalizationAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
 		uuid(C18A9780-7C3A-4CA7-BD07-C8CE20EE8D6B),
 		helpstring("MS2Metadata Class")
 	] 
@@ -1153,18 +1165,6 @@ library MorseKernel2
 		interface IResult;
 		interface IResultBase;
 		interface IWritableSpectrumResult;
-	};
-
-	[
-		version(1.0),
-		uuid(7D61797D-1EB0-477F-B93D-10B854DC5F53),
-		helpstring("LoopsLocalizationAction Class")
-	] 
-#line 34 "e:\\morse\\dotnetproject\\dotnet\\morsekernel2\\loopslocalizationaction.h"
-	coclass CLoopsLocalizationAction {
-		interface ILoopsLocalizationAction;
-		interface IAction;
-		interface IActionBase;
 	};
 
 }

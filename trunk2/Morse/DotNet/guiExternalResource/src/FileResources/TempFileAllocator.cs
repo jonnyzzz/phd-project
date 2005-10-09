@@ -11,19 +11,25 @@ namespace guiExternalResource.src.FileResources
 	public class TempFileAllocator : IDisposable
 	{
 		private ArrayList files = new ArrayList();
+		private bool keepFiles;
 
-		public TempFileAllocator()
-		{			
-		}
+		public TempFileAllocator(bool keepFiles)
+		{
+			this.keepFiles = keepFiles;
+		}		
 
 		public void Dispose()
 		{
-			foreach (string file in files)
+			if (!keepFiles) 
 			{
-				try
+				foreach (string file in files)
 				{
-					File.Delete(file);
-				} catch (Exception) {}
+					try
+					{
+						File.Delete(file);
+					} 
+					catch (Exception) {}
+				}
 			}
 		}
 

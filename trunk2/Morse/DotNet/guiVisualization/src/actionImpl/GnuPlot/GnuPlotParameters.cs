@@ -15,6 +15,17 @@ namespace guiVisualization.src.actionImpl.GnuPlot
 	public class GnuPlotParameters : ParametersControl, IGnuPlotVisualizationKernelParameters, GnuPlotScriptGenParameters
 	{
 		private string fileNameToSave = null;
+		private string defaultTitle = string.Empty;
+
+		public GnuPlotParameters(string fileNameToSave, string defaultTitle)
+		{
+			this.fileNameToSave = fileNameToSave;
+			this.defaultTitle = defaultTitle==null ? "" : defaultTitle;
+		}
+
+		public GnuPlotParameters()
+		{
+		}
 
 		protected override IParameters SubmitDataInternal()
 		{
@@ -53,16 +64,17 @@ namespace guiVisualization.src.actionImpl.GnuPlot
 		public string FileName { get {return this.fileNameToSave;} }
 
 		int GnuPlotScriptGenParameters.Width { get{return 1000;} }
-		int GnuPlotScriptGenParameters.Height{ get{return 1000;} }	  
+		int GnuPlotScriptGenParameters.Height{ get{return 1000;} }
 
+	
 		public string Title 
 		{
 			get 
 			{
-				if (Core.Instance.KernelDocument.Title != null) 
+				if (Core.Instance.KernelDocument != null && Core.Instance.KernelDocument.Title != null) 
 				{
 					return Core.Instance.KernelDocument.Title;
-				} else return "";
+				} else return defaultTitle;
 			}
 		}
 	}

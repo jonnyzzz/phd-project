@@ -18,7 +18,7 @@ namespace guiExternalResource.Core
 		{
 			this.isInternal = isInternal;
 			instance = this;
-			tempFileAllocator = new TempFileAllocator();
+			tempFileAllocator = new TempFileAllocator(isInternal);
 			fileResources = new FileResources();
 			stringResources = new StringSet();			
 		}

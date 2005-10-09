@@ -106,9 +106,13 @@ namespace gui2.Forms
 			this.menuInvestigations = new System.Windows.Forms.MenuItem();
 			this.menuSystem = new System.Windows.Forms.MenuItem();
 			this.menuSystemNew = new System.Windows.Forms.MenuItem();
+			this.menuSystemDelimiter1 = new System.Windows.Forms.MenuItem();
 			this.menuFunctionShow = new System.Windows.Forms.MenuItem();
 			this.menuSystemAnalisys = new System.Windows.Forms.MenuItem();
+			this.menuSystemDelimiter2 = new System.Windows.Forms.MenuItem();
 			this.menuSystemIterations = new System.Windows.Forms.MenuItem();
+			this.menuSystemDelimiter3 = new System.Windows.Forms.MenuItem();
+			this.menuSystemComment = new System.Windows.Forms.MenuItem();
 			this.menuDelimeter = new System.Windows.Forms.MenuItem();
 			this.menuOpenDocument = new System.Windows.Forms.MenuItem();
 			this.menuSave = new System.Windows.Forms.MenuItem();
@@ -116,10 +120,6 @@ namespace gui2.Forms
 			this.menuHelpAbout = new System.Windows.Forms.MenuItem();
 			this.saveDocumentDialog = new System.Windows.Forms.SaveFileDialog();
 			this.openDocumentDialog = new System.Windows.Forms.OpenFileDialog();
-			this.menuSystemDelimiter1 = new System.Windows.Forms.MenuItem();
-			this.menuSystemDelimiter2 = new System.Windows.Forms.MenuItem();
-			this.menuSystemDelimiter3 = new System.Windows.Forms.MenuItem();
-			this.menuSystemComment = new System.Windows.Forms.MenuItem();
 			this.panelLeft.SuspendLayout();
 			this.panelRight.SuspendLayout();
 			this.panelRightUp.SuspendLayout();
@@ -290,6 +290,11 @@ namespace gui2.Forms
 			this.menuSystemNew.Text = "New";
 			this.menuSystemNew.Click += new System.EventHandler(this.menuSystemNew_Click);
 			// 
+			// menuSystemDelimiter1
+			// 
+			this.menuSystemDelimiter1.Index = 1;
+			this.menuSystemDelimiter1.Text = "-";
+			// 
 			// menuFunctionShow
 			// 
 			this.menuFunctionShow.Index = 2;
@@ -302,11 +307,27 @@ namespace gui2.Forms
 			this.menuSystemAnalisys.Text = "Analisys";
 			this.menuSystemAnalisys.Click += new System.EventHandler(this.menuSystemAnalisys_Click);
 			// 
+			// menuSystemDelimiter2
+			// 
+			this.menuSystemDelimiter2.Index = 4;
+			this.menuSystemDelimiter2.Text = "-";
+			// 
 			// menuSystemIterations
 			// 
 			this.menuSystemIterations.Index = 5;
 			this.menuSystemIterations.Text = "Iterations";
 			this.menuSystemIterations.Click += new System.EventHandler(this.menuSystemIterations_Click);
+			// 
+			// menuSystemDelimiter3
+			// 
+			this.menuSystemDelimiter3.Index = 6;
+			this.menuSystemDelimiter3.Text = "-";
+			// 
+			// menuSystemComment
+			// 
+			this.menuSystemComment.Index = 7;
+			this.menuSystemComment.Text = "Comment";
+			this.menuSystemComment.Click += new System.EventHandler(this.menuSystemComment_Click);
 			// 
 			// menuDelimeter
 			// 
@@ -342,35 +363,14 @@ namespace gui2.Forms
 			// saveDocumentDialog
 			// 
 			this.saveDocumentDialog.DefaultExt = "dsif";
-			this.saveDocumentDialog.Filter = "Dynamical System Investigations Files|*.dsif|All files|*.*";
+			this.saveDocumentDialog.Filter = "Dynamical System Investigations Files(*.dsif)|*.dsif|All files(*.*)|*.*";
 			this.saveDocumentDialog.Title = "Select file to save project";
 			// 
 			// openDocumentDialog
 			// 
 			this.openDocumentDialog.DefaultExt = "dsif";
-			this.openDocumentDialog.Filter = "Dynamical System Investigations Files|*.dsif|All files|*.*";
+			this.openDocumentDialog.Filter = "Dynamical System Investigations Files(*.dsif)|*.dsif|All files(*.*)|*.*";
 			this.openDocumentDialog.Title = "Select System to open";
-			// 
-			// menuSystemDelimiter1
-			// 
-			this.menuSystemDelimiter1.Index = 1;
-			this.menuSystemDelimiter1.Text = "-";
-			// 
-			// menuSystemDelimiter2
-			// 
-			this.menuSystemDelimiter2.Index = 4;
-			this.menuSystemDelimiter2.Text = "-";
-			// 
-			// menuSystemDelimiter3
-			// 
-			this.menuSystemDelimiter3.Index = 6;
-			this.menuSystemDelimiter3.Text = "-";
-			// 
-			// menuSystemComment
-			// 
-			this.menuSystemComment.Index = 7;
-			this.menuSystemComment.Text = "Comment";
-			this.menuSystemComment.Click += new System.EventHandler(this.menuSystemComment_Click);
 			// 
 			// ComputationForm
 			// 

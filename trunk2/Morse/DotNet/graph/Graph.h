@@ -108,7 +108,7 @@ private:
 
 private:
 	Node* browseToUnsafe(const JInt* cell);
-
+	
 //content Operations
 public:
 	Node* browseTo(const JInt* cell);

@@ -127,6 +127,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\GnuPlot\CommandLineFileExporter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\actionImpl\GnuPlot\GnuPlotAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -138,7 +143,7 @@
                 />
                 <File
                     RelPath = "src\actionImpl\GnuPlot\GnuPlotParameters.cs"
-                    SubType = "Code"
+                    SubType = "UserControl"
                     BuildAction = "Compile"
                 />
                 <File

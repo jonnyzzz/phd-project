@@ -24,7 +24,7 @@ void Util::SaveGraphSet(GraphSet set, char* file) {
 		sprintf(buff, FILE_MASK, file, cnt++);
 		FileOutputStream fs(buff);
 		Graph* gr = it.Current();
-		saveGraph(fs, gr);
+		Graph::saveGraph(fs, gr);
 	}
 }
 
@@ -52,7 +52,7 @@ void Util::ExportPoints(GraphSet set, char* file) {
 		sprintf(buff, FILE_MASK, file, cnt++);
 		FileOutputStream fs(buff);
 		Graph* gr = it.Current();
-		saveGraphAsPoints(fs, gr);
+		Graph::saveGraphAsPoints(fs, gr);
 
 		if (cnt != 1) 
 			gp<<" , ";
@@ -78,7 +78,7 @@ GraphSet Util::LoadGraphSet(char* file) {
 		sprintf(buff, FILE_MASK, file, i);
 		cout<<"Loading file "<<buff<<endl;
 		FileInputStream fs(buff);
-		mySet.AddGraph( createGraph( fs ));
+		mySet.AddGraph( Graph::createGraph( fs ));
 	}
 
 	return mySet;

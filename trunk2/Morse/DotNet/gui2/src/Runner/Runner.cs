@@ -6,6 +6,9 @@ using gui2.TreeNodes;
 using guiExternalResource.Core;
 using guiKernel2.Document;
 using guiKernel2.Container;
+using guiVisualization.actionImpl.GnuPlot;
+using guiVisualization.KernelAction;
+using guiVisualization.src.actionImpl.GnuPlot;
 
 namespace gui2.Runner
 {
@@ -60,13 +63,18 @@ namespace gui2.Runner
 			{
 				Application.Run(computationForm);
 			} 
-			else 
+			else if (commandLine.hasKey("testMode"))
 			{
-				if (commandLine.hasKey("testMode"))
-				{
-					TestMode();
-				}
-			}			
+				TestMode();
+			} else if (commandLine.hasKey("export"))
+			{
+				string[] files = commandLine.getValue("files").Split(';');
+				string output = commandLine.getValue("out");
+				string title = commandLine.getValue("title");
+
+				Console.Out.WriteLine("Exporting file please wait...");
+				CommandLineFileExporter.ExportFiles(files, output, title);
+			}
 		}
 
 		public void Dispose()
