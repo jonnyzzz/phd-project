@@ -744,7 +744,7 @@ JInt Graph::tmin(JInt a, JInt b) const{
 }
 
 void Graph::resolveEdges(Graph* root) {
-   ATLASSERT(isTarjanable);
+   ATLASSERT(root->isTarjanable);
 
    Node* node;
    Node* rootNode;

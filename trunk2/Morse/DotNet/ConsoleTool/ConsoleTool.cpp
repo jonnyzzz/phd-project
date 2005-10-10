@@ -2,6 +2,11 @@
 //
 
 #include "stdafx.h"
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 #include "ConsoleTool.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -15,9 +20,11 @@
 #include "../cellImageBuilders/onsoleProgressBarInfo.h"
 #include "Util.h"
 #include "../graph/MemoryManager.h"
-#include <stdio.h>
+#include "../SegmentIterator/SegmentIterator.h"
+
 #include "../cellImageBuilders/TarjanProcess.h"
 #include "LogisticsMap.h"
+
 
 
 #define FACTORY TorstenFactory
@@ -65,6 +72,7 @@ void die() {
    cout<<"prog -init file    ;create new inital file and exits"<<endl;
    cout<<"prog -iter 5 file out ; open file and do 5 iters"<<endl;
    cout<<"prog -export file out ; exports file to a list of points"<<endl;
+   cout<<"prog -line 5 in out ; line iterations"<<endl;
 }
 	
 
@@ -107,8 +115,24 @@ int main(int argc, char** argv) {
 		cout<<"Program Ended"<<endl<<endl;
 	} else if (strcmp(argv[1], "-export") == 0) {
             cout<<"Loading from "<<argv[2]<<endl<<"Saving results to "<<argv[3]<<endl<<endl;
-	    Util::ExportPoints(Util::LoadGraphSet(argv[2]), argv[3]);
-	} else DIE(-1);
+			Util::ExportPoints(Util::LoadGraphSet(argv[2]), argv[3]);
+	} else if (strcmp(argv[1], "-line") == 0) {
+		ISystemFunction *func = new SYSTEM();
+		SegmentIterator it(func);
+		int its = 0;
+		sscanf(argv[2],"%d", &its);
+
+		it.Start(argv[3]);
+
+		double prec[] = {0.001, 0.001};
+
+		for (int i=0; i<its; i++) 
+			it.Iterate(prec);
+
+		it.ExportToFile(argv[4]);
+		
+		delete func;		
+	}else DIE(-1);
 
 	cout<<endl<<endl<<endl;
 

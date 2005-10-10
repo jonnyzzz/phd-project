@@ -15,7 +15,6 @@ public:
 
 
 public:
-
      virtual int getFunctionDimension() = 0;
 };
 
