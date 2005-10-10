@@ -10,18 +10,15 @@ static char THIS_FILE[] = __FILE__;
 
 
 AbstractBoxProcess::AbstractBoxProcess(Graph* graph, ISystemFunction* function, int* factor, ProgressBarInfo* pinfo) : 
-	AbstractProcessExt(graph, pinfo), function(function)
+	AbstractProcessExt(graph, pinfo), function(function), hasDerivate(function->hasDerivative()), 
+	dimension(graph_source->getDimention()),
+	dimension2(graph_source->getDimention()*graph_source->getDimention() + graph_source->getDimention())
 {
 	this->input = function->getInput();
 	this->output = function->getOutput();
 
 	ASSERT(graph_source != NULL);
-
-	this->hasDerivate = function->hasDerivative();
-	
-
-	this->dimension = graph_source->getDimention();
-	this->dimension2 = dimension*dimension + dimension;
+		
 
 	this->v0 = new JDouble[dimension2];
 	this->vx0 = new JDouble[dimension];
@@ -106,9 +103,9 @@ void AbstractBoxProcess::multiplyNode(Node* node, Graph* graph) {
 		}
 
 		Node* newNode = graph_result->browseTo(pointT);
-		if (newNode != NULL) {
+		//if (newNode != NULL) {
 			processNode(newNode, graph_result);
-		}
+		//}
 
 		a[0]++;
 
@@ -121,6 +118,7 @@ void AbstractBoxProcess::multiplyNode(Node* node, Graph* graph) {
 	}
 }
 
+//b, x0, input, output, value_min, value_max
 void AbstractBoxProcess::processNode(Node* node, Graph* graph) {
 
 	b[dimension] = 0;
@@ -137,7 +135,7 @@ void AbstractBoxProcess::processNode(Node* node, Graph* graph) {
 
 	while (b[dimension] == 0) {
 		for (int i=0; i<dimension; i++) {
-			input[i] = x0[i] + ((b[i]==1)?eps[i]:0.0);
+			input[i] = x0[i] + ((b[i]==1)?eps[i]:(JDouble)0.0);
 		}
 
 		evaluate();
@@ -166,7 +164,7 @@ void AbstractBoxProcess::processNode(Node* node, Graph* graph) {
 }
 
 
-void AbstractBoxProcess::vectorCopy(JDouble* from, JDouble* to) {
+void AbstractBoxProcess::vectorCopy(const JDouble* from, JDouble* to) {
 	memcpy(to, from, sizeof(JDouble)*dimension);
 }
 

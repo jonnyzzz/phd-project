@@ -13,9 +13,8 @@ static char THIS_FILE[] = __FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CoordinateSystem::CoordinateSystem(int dimention, const JDouble* min, const JDouble* max, const JInt* grid)
+CoordinateSystem::CoordinateSystem(int dimention, const JDouble* min, const JDouble* max, const JInt* grid) : dimention(dimention)
 {
-   this->dimention = dimention;
    this->min = new JDouble[dimention];
    this->max = new JDouble[dimention];
    this->eps = new JDouble[dimention];

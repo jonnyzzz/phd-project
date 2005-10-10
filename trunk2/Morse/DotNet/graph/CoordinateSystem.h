@@ -50,7 +50,7 @@ public:
 
 
 protected:
-	int dimention;
+	const int dimention;
 
 	JDouble* min;
 	JDouble* max;

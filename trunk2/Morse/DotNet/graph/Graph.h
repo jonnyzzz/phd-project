@@ -39,12 +39,12 @@ public:
 
 private:
 	Node** nodes;
-	bool isTarjanable;
+	const bool isTarjanable;
 
 // Hash Routins
 private:
-	int nodeHashMax;
-	int edgeHashMax;
+	const int nodeHashMax;
+	const int edgeHashMax;
 
 private:
 	static int getNodeHashMax(int nodes);
@@ -108,6 +108,7 @@ private:
 
 private:
 	Node* browseToUnsafe(const JInt* cell);
+
 	
 //content Operations
 public:

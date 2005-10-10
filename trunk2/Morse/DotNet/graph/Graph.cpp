@@ -50,7 +50,7 @@ struct Edge {
 Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid, bool tarjanable, int nodeHashMax, int edgeHashMax) 
 : CoordinateSystem(dimention, min, max, grid),
     MemoryManager(sizeof(TarjanNode)*71861 + sizeof(Edge)*7*3255+sizeof(JInt)*dimention*112062),
-	isTarjanable(tarjanable)
+	isTarjanable(tarjanable), edgeHashMax(edgeHashMax), nodeHashMax(nodeHashMax)
     //,cachedEdgeEnumerators(50), cachedNodeEnumerators(10)
 
 {	
@@ -60,9 +60,6 @@ Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* 
 		cout<<"Not Using Tarjan Graph\n";
 	}
 	
-	this->edgeHashMax = edgeHashMax;
-	this->nodeHashMax = nodeHashMax;
-
 	cout<<"NodeHash = "<<this->nodeHashMax<<"\nEdgeHash = "<<this->edgeHashMax<<"\n";
     //edgeHashMax = 10000;
 	//nodeHashMax = 10000;
@@ -286,10 +283,13 @@ void Graph::deleteNode(Node* node) {
 	}
 	
 	delete[] node->edges;
-	delete[] node->cell;
-	if (node->enumerator != NULL) freeEdgeEnumerator(node->enumerator);
+	delete[] node->cell;	
 	delete node;
 #endif
+
+	if (isTarjanable && ((TarjanNode*)node)->enumerator != NULL) 
+		freeEdgeEnumerator(((TarjanNode*)node)->enumerator);
+
 	numberNodes--;
 }
 
@@ -458,7 +458,7 @@ Edge* Graph::browseTo(Node* from, Node* to) {
 }
 
 JDouble inline Graph::getExtent(int i) {
-	return this->getEps()[i]/10;
+	return this->getEps()[i]/20;
 }
 
 void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max) {	
@@ -466,7 +466,9 @@ void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max) {
 	
 	for (int i=0; i<dimention; i++) {
 		emin[i] = this->toInternal(min[i] - getExtent(i), i);
+		if (emin[i] < 0) emin[i] = 0;
 		emax[i] = this->toInternal(max[i] + getExtent(i), i);
+		if (emax[i] > grid[i]) emax[i] = grid[i];
 		point[i] = emin[i];
 	}
 	

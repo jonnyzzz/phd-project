@@ -25,11 +25,11 @@ protected:
 	void multiplyNode(Node* original, Graph* graph);
 	void processNode(Node* node, Graph* graph_result);
 
-	void vectorCopy(JDouble* from, JDouble* to);
+	void vectorCopy(const JDouble* from, JDouble* to);
 
 protected:
-	int dimension;
-	int dimension2;
+	const int dimension;
+	const int dimension2;
 
 	ISystemFunction* function;
 	JDouble* input;
@@ -37,7 +37,7 @@ protected:
 
 
 private:
-	bool hasDerivate;
+	const bool hasDerivate;
 
 	JDouble* v0;
 	JDouble* vx0;

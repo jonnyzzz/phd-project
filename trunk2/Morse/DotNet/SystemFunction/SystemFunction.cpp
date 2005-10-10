@@ -56,7 +56,7 @@ void SystemFunction::evaluate() {
 ////////////////////////////////////////////////////////////////////////////////////
 
 SystemNativeFunctions SystemFunction::createFunctionsList() {
-    char buff[255];
+    char buff[2048];
     const char name[] = "y%d";
 
     SystemNativeFunctions funcs;
@@ -64,7 +64,7 @@ SystemNativeFunctions SystemFunction::createFunctionsList() {
         sprintf(buff, name, i);
         FunctionNode* node = this->factory->getEquation(buff);
         if (node == NULL) {
-            char b[512];
+            char b[2048];
             sprintf(b, "Expected variable %s", buff);
             throw FunctionFactoryParseException(FunctionFactoryParseException_NoSuchEquation, b);
         }
@@ -75,7 +75,7 @@ SystemNativeFunctions SystemFunction::createFunctionsList() {
 }
 
 SystemNativeVariables SystemFunction::createVariablesList() {
-    char buff[255];
+    char buff[2048];
     const char name[] = "x%d";
 
     SystemNativeVariables vars;
