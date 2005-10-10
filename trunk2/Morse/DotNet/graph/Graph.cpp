@@ -127,7 +127,6 @@ Graph* Graph::copyCoordinates(bool tarjanable) {
 	return new Graph(dimention, min, max, grid, tarjanable, getNodeHashMax(getNumberOfNodes()*4));
 }
 
-//todo: Add NeedEdgeResolve here from optimal edges hash selection!
 Graph* Graph::copyCoordinatesForTarjan() {
 	return new Graph(dimention, min, max, grid, false, getNodeHashMax(getNumberOfNodes()), 1);
 }
@@ -614,10 +613,12 @@ const JInt* Graph::getCells(Node* node) const {
 }
 
 JInt Graph::getNodeNumber(Node* node) const {
+    ATLASSERT(isTarjanable);
 	return ((TarjanNode*)node)->number;
 }
 
 void Graph::setNodeNumber(Node* node, JInt number) {
+    ATLASSERT(isTarjanable);
 	((TarjanNode*)node)->number = number;
 }
 
@@ -951,17 +952,16 @@ void Graph::unregisterFlag(int flagID) {
 bool Graph::readFlag(Node* node, int flagID) {	
 
 	int mask = (1<<flagID);
-	return ((node)->bits & mask) != 0;
+	return (node->bits & mask) != 0;
 }
 
 void Graph::setFlag(Node* node, int flagID, bool value) {
-
 	if (value) {
 		int mask = (1<<flagID);
-		(node)->bits = (node)->bits | mask;		
+		node->bits = node->bits | mask;
 	} else {
 		int mask = ~(1<<flagID);
-		(node)->bits = (node)->bits & mask;
+		node->bits = node->bits & mask;
 	}
 
 	ASSERT(readFlag(node, flagID) == value); 

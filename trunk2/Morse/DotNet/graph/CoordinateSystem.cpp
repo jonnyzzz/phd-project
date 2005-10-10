@@ -54,9 +54,10 @@ void CoordinateSystem::toExternal(const JInt* cell, JDouble* out) const {
 }
 
 JInt CoordinateSystem::toInternal(JDouble value, int axis) const{
+/*
 	if (value >= max[axis]) return grid[axis];
 	if (value < min[axis]) return 0;
-	
+*/
 	JInt ret = (JInt)((value - min[axis])/eps[axis]);
 
     return ret;
