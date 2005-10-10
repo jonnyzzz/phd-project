@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\segmentiterator.h"
+#include "stdafx.h"
+#include "SegmentIterator.h"
 
 SegmentIterator::SegmentIterator(ISystemFunction* function) : 
 	function(function),

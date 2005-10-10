@@ -41,7 +41,7 @@ GraphSet Process(GraphSet set) {
 	ConsoleProgressBarInfo info;
 
 	AbstractProcess* ps = new SimpleBoxProcess(set[0], func, factor, &info);
-	TarjanProcess* ts = new TarjanProcess(false, &info);
+	TarjanProcess* ts = new TarjanProcess(true, &info);
 
 	GraphSet it = AbstractProcess::Apply(ps, set);
 
@@ -83,7 +83,7 @@ int main(int argc, char** argv) {
 
 	cout<<argc<<endl;
 
-	/*
+       
 	if ( strcmp(argv[1], "-init") == 0 ) {
 		GraphSet set(FACTORY::CreateGraph());
 		Util::SaveGraphSet(set, argv[2]);
@@ -116,28 +116,26 @@ int main(int argc, char** argv) {
 	} else if (strcmp(argv[1], "-export") == 0) {
             cout<<"Loading from "<<argv[2]<<endl<<"Saving results to "<<argv[3]<<endl<<endl;
 			Util::ExportPoints(Util::LoadGraphSet(argv[2]), argv[3]);
-	} else if (strcmp(argv[1], "-line") == 0) {*/
+	} else if (strcmp(argv[1], "-line") == 0) {
 		ISystemFunction *func = new SYSTEM();
 		SegmentIterator it(func);
-		//int its = 0;
-		//sscanf(argv[2],"%d", &its);
+		int its = 0;
+		sscanf(argv[2],"%d", &its);
 
-		//it.Start(argv[3]);
-		double one[] = {0,0};
-		double two[] = {0.1, 0.1};
-		it.Start(one, two);
+		it.Start(argv[3]);
 
-		double prec[] = {0.1, 0.1};
-
-		//for (int i=0; i<its; i++) 
-			it.Iterate(prec);
-
-		//it.ExportToFile(argv[4]);
-
-			cout<<"Done!\n";
 		
-		delete func;	/*	
-	}else DIE(-1);*/
+		double prec[] = {0.01, 0.01};
+		for (int i=0; i<its; i++) {
+		  cout<<"Itearte"<<endl;
+		   it.Iterate(prec);
+		}
+
+		it.ExportToFile(argv[4]);
+		cout<<"Done!\n";
+		
+		delete func;
+	}else DIE(-1);
 
 	cout<<endl<<endl<<endl;
 
