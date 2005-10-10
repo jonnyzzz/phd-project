@@ -90,30 +90,22 @@ SegmentIterator::Point SegmentIterator::Middle(const Point& p1, const Point& p2)
 
 void SegmentIterator::Iterate(const double* prec) {
 	PointsList tempList;
-	PointsList backList;
-
+	
 	PointsList::iterator it_prev = points.begin(); 
 	PointsList::iterator it_cur = ++points.begin(); 
 	Point pt = Image(*it_prev);
-	tempList.push_back(pt);
-
+	
 	for (; it_cur != points.end(); it_prev = it_cur++) {
-		backList.clear();
-		backList.push_front(Image(*it_cur));
 		
-		Point npt;
-		while (!backList.empty()) {
-			npt = backList.front();
-			backList.pop_front();
-
-			while (!isClose(pt, npt, prec)) {
-				backList.push_front(npt);
-				npt = Middle(pt, npt);
-			}
-			tempList.push_back(npt);
+		Point npt = Image(*it_cur);
+	
+		if  (!isClose(pt, npt, prec)) {
+			points.insert(it_prev, Middle(*it_prev, *it_cur));
+			it_cur = it_prev;
+			it_cur++;
 		}
-
 		pt = npt;
+		tempList.push_back(npt);			
 	}
 
 	points = tempList;
