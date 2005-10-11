@@ -3,6 +3,8 @@
 #include <math.h>
 #include "../graph/Graph.h"
 
+#define TORSTEN_NOEXP
+
 const double TorstenFunction::beta = 6.25;
 const double TorstenFunction::d = 0.5;
 const double TorstenFunction::m = 3.5;
@@ -36,17 +38,14 @@ void TorstenFunction::evaluate() {
 
 	double& x = input[0];
 	double& y = input[1];
-
-	
+#ifdef TORSTEN_NOEXP
 	f1=log(beta)+x-exp(y)-log(1+exp(x));
         f2=log(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
-
-	
-
-	/*
-	f1 = beta*x*exp(-y)/(1+x);
-	f2 = m*x*(1-exp(-y))+(1-d)*y;
-	*/
+#endif
+#ifdef TORSTEN_EXP
+	f1=log(beta)+x-exp(y)-log(1+exp(x)*exp(-exp(y)));
+	f2=log(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
+#endif
 }
 
 
