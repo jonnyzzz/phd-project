@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _CELLIMAGEBUILDERS_SIPOINTBUILDER_H
+#define _CELLIMAGEBUILDERS_SIPOINTBUILDER_H
+
 #include "AbstractPointBuilder.h"
 
 class Function;
@@ -28,3 +30,5 @@ protected:
 
 	JInt* point;
 };
+
+#endif //_CELLIMAGEBUILDERS_SIPOINTBUILDER_H

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _CELLIMAGEBUILDERS_ABSTRACTPOINTBUILDER_H
+#define _CELLIMAGEBUILDERS_ABSTRACTPOINTBUILDER_H
+
 struct Node;
 class Graph;
 class Function;
@@ -48,3 +50,5 @@ private:
 	void buildNodeImage(Node* node); //node from dest
 
 };
+
+#endif //_CELLIMAGEBUILDERS_ABSTRACTPOINTBUILDER_H

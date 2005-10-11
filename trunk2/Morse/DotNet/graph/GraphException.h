@@ -1,5 +1,3 @@
-#pragma once
-
 
 enum GraphExceptionType {
 	GraphException_NoSuchResult,
@@ -16,3 +14,4 @@ public:
 	~GraphException(void);
 
 };
+

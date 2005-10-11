@@ -16,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-Stack::Stack(Graph* graph) : graph(graph), MemoryManager(sizeof(Stack::dataStack)*195232)
+Stack::Stack(Graph* graph) : MemoryManager(sizeof(Stack::dataStack)*195232), graph(graph)
 {
 	root = NULL;
 	this->flagID = graph->registerFlag();
@@ -53,10 +53,11 @@ TarjanNode* Stack::pop() {
 	if (root == NULL) return NULL;
 
 	TarjanNode* tmp = root->node;
-	dataStack* s = root;
 
+	//dataStack* s = root;
 	root = root->next;
 	//delete s;
+
 	graph->setFlag((Node*)tmp, flagID, false);
 	return tmp;
 }

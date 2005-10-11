@@ -1,5 +1,3 @@
-#pragma once
-
 #include "AbstractProcess.h"
 
 class TarjanProcess : public AbstractProcess

@@ -1,5 +1,3 @@
-#pragma once
-
 #include "MemoryManager.h"
 
 class ExtendedMemoryManager : public MemoryManager

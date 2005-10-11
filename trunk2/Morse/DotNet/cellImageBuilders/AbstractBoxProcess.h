@@ -1,4 +1,4 @@
-#pragma once
+
 #include "AbstractProcessExt.h"
 #include "../SystemFunction/ISystemFunction.h"
 

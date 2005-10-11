@@ -1,4 +1,3 @@
-#pragma once
 #include "AbstractGraphCreator.h"
 
 
@@ -14,3 +13,4 @@ protected:
 	virtual JDouble getMin(int i);
     virtual int getNewDimension();
 };
+

@@ -1,4 +1,3 @@
-#pragma once
 
 enum BuildersExceptionEnum {
 	BuildersException_Wrong_Dimension,

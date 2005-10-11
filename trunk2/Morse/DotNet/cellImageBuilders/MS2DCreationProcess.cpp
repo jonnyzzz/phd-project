@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MS2DCreationProcess.h"
+#include <math.h>
 
 
 MS2DCreationProcess::MS2DCreationProcess(Graph* graph, int* factor, ProgressBarInfo* info) : 

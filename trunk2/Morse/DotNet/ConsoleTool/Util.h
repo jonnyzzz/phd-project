@@ -1,5 +1,3 @@
-#pragma once
-
 #include "../cellImageBuilders/GraphSet.h"
 
 class Graph;

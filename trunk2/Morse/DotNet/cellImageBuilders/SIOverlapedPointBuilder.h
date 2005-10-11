@@ -1,4 +1,3 @@
-#pragma once
 #include "AbstractPointBuilder.h"
 
 class SIOverlapedPointBuilder :

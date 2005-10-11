@@ -1,4 +1,3 @@
-#pragma once
 
 #include "SIPointBuilder.h"
 #include "../SystemFunction/ISystemFunctionDerivate.h"
@@ -20,3 +19,4 @@ private:
 	int function_dimension;
 	int v_offset;
 };
+

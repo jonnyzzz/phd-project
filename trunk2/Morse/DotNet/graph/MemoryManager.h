@@ -1,4 +1,6 @@
-#pragma once
+
+#ifndef _MEMORY_MANAGER_H
+#define _MEMORY_MANAGER_H
 
 #include <list>
 #include <iostream>
@@ -62,3 +64,5 @@ public:
     //Reuse allocated memory. No destructors called for created objects
     void virtual Reset();
 };
+
+#endif //_MEMORY_MANAGER_H

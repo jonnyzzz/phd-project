@@ -1,4 +1,5 @@
-#pragma once
+
+
 #include "AbstractProcessExt.h"
 #include "../SystemFunction/MS2DAngleFunction.h" 
 #include <list>

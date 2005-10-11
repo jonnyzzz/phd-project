@@ -1,4 +1,3 @@
-#pragma once
 #include "AbstractBoxProcess.h"
 
 class SimpleBoxProcess :

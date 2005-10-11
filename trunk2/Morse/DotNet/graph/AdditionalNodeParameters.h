@@ -1,5 +1,3 @@
-#pragma once
-
 //This is really slow implementation. While it uses std::hash_map without
 //specially defined hash function
 

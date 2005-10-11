@@ -1,4 +1,3 @@
-#pragma once
 #include "../SystemFunction/ISystemFunction.h"
 
 class Graph;

@@ -1,7 +1,9 @@
 // Graph.h: interface for the Graph class.
 //
 //////////////////////////////////////////////////////////////////////
-#pragma once
+
+#ifndef GRAPH_GRAPH_H
+#define GRAPH_GRAPH_H
 
 #include "CoordinateSystem.h"
 #include "MemoryManager.h"
@@ -191,3 +193,5 @@ public:
 };
 
 Graph*	createTestGraph(int num_nodes);
+
+#endif //GRAPH_GRAPH_H

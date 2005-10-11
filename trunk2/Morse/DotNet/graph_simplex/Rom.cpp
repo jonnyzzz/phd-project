@@ -426,6 +426,7 @@ public:
 
 	myAllocator& operator =(const myAllocator& al) {
 		num = al.num;
+		return *this;
 	}
     void init() {
    		number++;

@@ -1,4 +1,3 @@
-#pragma once
 #include "ISystemFunction.h"
 
 template<class FunctionFactory, int cnt>

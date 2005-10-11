@@ -5,10 +5,6 @@
 #if !defined(AFX_COORDINATESYSTEM_H__32E37CB5_FFD7_49B8_B907_ED003DD5D264__INCLUDED_)
 #define AFX_COORDINATESYSTEM_H__32E37CB5_FFD7_49B8_B907_ED003DD5D264__INCLUDED_
 
-#if _MSC_VER > 1000
-#pragma once
-#endif // _MSC_VER > 1000
-
 #include "typedefs.h"
 
 class CoordinateSystem  

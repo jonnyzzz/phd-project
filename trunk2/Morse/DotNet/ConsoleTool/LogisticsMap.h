@@ -1,4 +1,3 @@
-#pragma once
 #include "FunctionBase.h"
 
 class Graph;

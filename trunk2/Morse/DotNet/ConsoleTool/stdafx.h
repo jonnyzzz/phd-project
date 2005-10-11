@@ -3,8 +3,6 @@
 // are changed infrequently
 //
 
-#pragma once
-
 
 #ifdef WIN32
 

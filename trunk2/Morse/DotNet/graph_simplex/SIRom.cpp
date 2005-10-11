@@ -4,7 +4,7 @@
 #include "../SystemFunction/ISystemFunctionDerivate.h"
 #include <math.h>
 
-SIRom::SIRom(Graph* graph, ISystemFunctionDerivate* function) : graph(graph), function(function), CRom(graph)
+SIRom::SIRom(Graph* graph, ISystemFunctionDerivate* function) : CRom(graph), graph(graph), function(function)
 {
 	input = function->getInput();
 	output = function->getOutput();

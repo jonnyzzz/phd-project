@@ -3,8 +3,6 @@
 // are changed infrequently
 //
 
-#pragma once
-
 #ifdef WIN32
 	#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 	#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS	// some CString constructors will be explicit
@@ -20,11 +18,9 @@
 #endif
 
 #include <iostream>
+using namespace std;
 
 #include "../graph/typedefs.h"
 #include "../graph/Graph.h"
 #include "../graph/FileStream.h"
 
-using namespace std;
-
-// TODO: reference additional headers your program requires here

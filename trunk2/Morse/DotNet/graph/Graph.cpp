@@ -50,9 +50,7 @@ struct Edge {
 Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid, bool tarjanable, int nodeHashMax, int edgeHashMax) 
 : CoordinateSystem(dimention, min, max, grid),
     MemoryManager(sizeof(TarjanNode)*71861 + sizeof(Edge)*7*3255+sizeof(JInt)*dimention*112062),
-	isTarjanable(tarjanable), edgeHashMax(edgeHashMax), nodeHashMax(nodeHashMax)
-    //,cachedEdgeEnumerators(50), cachedNodeEnumerators(10)
-
+	isTarjanable(tarjanable), nodeHashMax(nodeHashMax), edgeHashMax(edgeHashMax)
 {	
 	if (isTarjanable) {
 		cout<<"Using Tarjan Graph"<<"\n";

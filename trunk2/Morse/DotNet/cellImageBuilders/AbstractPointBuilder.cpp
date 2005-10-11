@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 //////////////////////////////////////////////////////////////////////
 
 AbstractPointBuilder::AbstractPointBuilder(Graph* graph,  int* factor, int* ks, ProgressBarInfo* info) :
-dimension(graph->getDimention()), AbstractProcessExt(graph, info)
+AbstractProcessExt(graph, info), dimension(graph->getDimention())
 {
 	 x   = NULL;
 	 x0  = new JDouble[dimension];

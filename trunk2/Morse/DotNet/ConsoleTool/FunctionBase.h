@@ -1,4 +1,3 @@
-#pragma once
 #include "../SystemFunction/ISystemFunction.h"
 
 class FunctionBase : public ISystemFunction
@@ -19,3 +18,4 @@ protected:
 private:
 	bool selfCreated;
 };
+

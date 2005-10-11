@@ -1,2 +1,2 @@
-#include "StdAfx.h"
-#include "additionalnodeparameters.h"
+#include "stdafx.h"
+#include "AdditionalNodeParameters.h"

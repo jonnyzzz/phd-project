@@ -1,4 +1,6 @@
-#pragma once
+
+#ifndef _CELLIMAGEBUILDERS_ABSTRACTPROCESS_H
+#define _CELLIMAGEBUILDERS_ABSTRACTPROCESS_H
 
 #include "ProgressBarInfo.h"
 #include "../graph/Graph.h"
@@ -27,3 +29,4 @@ public:
 };
 
 
+#endif //_CELLIMAGEBUILDERS_ABSTRACTPROCESS_H

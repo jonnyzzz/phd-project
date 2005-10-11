@@ -1,4 +1,3 @@
-#pragma once
 #include "Rom.h"
 
 class ISystemFunctionDerivate;

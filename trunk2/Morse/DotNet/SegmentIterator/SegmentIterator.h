@@ -1,5 +1,3 @@
-#pragma once
-
 #include <list>
 #include "../graph/MemoryManager.h"
 #include "../SystemFunction/ISystemFunction.h"
@@ -15,6 +13,7 @@ public:
 private:
 	struct Point {
 		double* x;
+		double* imageCache;
 	};
 
 	typedef list<Point> PointsList;
@@ -44,7 +43,7 @@ private:
 
 	Point CreatePoint(const double* data);
 
-	Point Image(const Point& p);
+	Point Image(Point& p);
 
 	bool isClose(const Point& p1, const Point& p2, const double* dist) const;
 

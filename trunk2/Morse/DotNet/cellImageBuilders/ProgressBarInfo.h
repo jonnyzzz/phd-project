@@ -1,4 +1,6 @@
-#pragma once
+
+#ifndef _CELLIMAGEBUILDERS_PROGRASSBARINFO_H
+#define _CELLIMAGEBUILDERS_PROGRASSBARINFO_H
 
 class ProgressBarInfo
 {
@@ -11,3 +13,6 @@ public:
 	virtual void Next(int length);
 	virtual bool NeedStop();
 };
+
+
+#endif //_CELLIMAGEBUILDERS_PROGRASSBARINFO_H

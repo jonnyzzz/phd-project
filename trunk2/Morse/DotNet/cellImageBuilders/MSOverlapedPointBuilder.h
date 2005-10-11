@@ -1,4 +1,3 @@
-#pragma once
 #include "SIOverlapedPointBuilder.h"
 
 
@@ -26,3 +25,4 @@ private:
 	int v_offset;
 	JDouble* value;
 };
+

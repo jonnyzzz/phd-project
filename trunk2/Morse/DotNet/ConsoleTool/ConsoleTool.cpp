@@ -24,6 +24,7 @@ using namespace std;
 
 #include "../cellImageBuilders/TarjanProcess.h"
 #include "LogisticsMap.h"
+#include <math.h>
 
 
 
@@ -122,14 +123,30 @@ int main(int argc, char** argv) {
 		int its = 0;
 		sscanf(argv[2],"%d", &its);
 
+<<<<<<< ConsoleTool.cpp
+		//it.Start(argv[3]);
+		double one[] = {log(5.25),  log(0.001)};
+		double two[] = {log(5.24), log(0.01)};
+		it.Start(one, two);
+=======
 		it.Start(argv[3]);
+>>>>>>> 1.8
 
+<<<<<<< ConsoleTool.cpp
+		double prec[] = {0.1, 0.1};
+
+		for (int i=0; i<30; i++) 
+			it.Iterate(prec);
+
+			it.ExportToFile("W:/Morse/DotNet/bin/out");
+=======
 		
 		double prec[] = {0.01, 0.01};
 		for (int i=0; i<its; i++) {
 		  cout<<"Itearte"<<endl;
 		   it.Iterate(prec);
 		}
+>>>>>>> 1.8
 
 		it.ExportToFile(argv[4]);
 		cout<<"Done!\n";

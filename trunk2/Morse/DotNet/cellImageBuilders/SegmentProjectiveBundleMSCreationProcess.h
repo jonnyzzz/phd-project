@@ -1,4 +1,3 @@
-#pragma once
 #include "AbstractGraphCreator.h"
 
 class SegmentProjectiveBundleMSCreationProcess :

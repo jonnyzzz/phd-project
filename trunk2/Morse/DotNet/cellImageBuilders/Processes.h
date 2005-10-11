@@ -1,5 +1,3 @@
-#pragma once
-
 //now its just a list of includes
 
 #include "AbstractProcess.h"

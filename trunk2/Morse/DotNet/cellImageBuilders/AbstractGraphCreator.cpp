@@ -10,7 +10,7 @@ static char THIS_FILE[] = __FILE__;
 
 
 AbstractGraphCreator::AbstractGraphCreator(Graph* graph, int* factor, ProgressBarInfo* info) :
-factor(factor), AbstractProcessExt(graph, info)
+AbstractProcessExt(graph, info), factor(factor)
 {
 	dimensionOld = graph->getDimention();
 

@@ -1,4 +1,3 @@
-#pragma once
 #include "AbstractProcess.h"
 
 class LoopsLocalizationProcess :

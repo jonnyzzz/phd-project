@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "TorstenFunction.h"
-#include <math.h>
 #include "../graph/Graph.h"
+#include <math.h>
 
 #define TORSTEN_NOEXP
 

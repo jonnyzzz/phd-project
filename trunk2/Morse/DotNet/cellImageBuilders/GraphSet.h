@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _GRAPHSET_H
 #define _GRAPHSET_H
 

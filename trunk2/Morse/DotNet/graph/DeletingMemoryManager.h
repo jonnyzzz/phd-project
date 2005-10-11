@@ -1,5 +1,3 @@
-#pragma once
-
 //store for reusable objects, like structires.
 //no destructor will be called!
 //default constructor is needed!

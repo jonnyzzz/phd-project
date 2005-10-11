@@ -2,8 +2,8 @@
 #include "SegmentIterator.h"
 
 SegmentIterator::SegmentIterator(ISystemFunction* function) : 
-	function(function),
 	MemoryManager(sizeof(double)*function->getDimension()*100000),
+	function(function),
 	dimension(function->getDimension())
 {
 	input = function->getInput();
@@ -28,6 +28,7 @@ double* SegmentIterator::CopyArray(const double* data) {
 SegmentIterator::Point SegmentIterator::CreatePoint(const double* data) {
 	Point pt;
 	pt.x = CopyArray(data);
+	pt.imageCache = NULL;
 	return pt;
 }
 
@@ -35,6 +36,10 @@ void SegmentIterator::Start(double* one, double* two) {
 	points.clear();
 	points.push_back(CreatePoint(one));
 	points.push_back(CreatePoint(two));
+
+	for (PointsList::iterator it=points.begin(); it!=points.end(); it++) {
+		history.push_back(*it);
+	}
 }
 
 void SegmentIterator::Start(const char* file) {
@@ -57,13 +62,27 @@ void SegmentIterator::Start(const char* file) {
 		points.push_back(CreatePoint(x));
 	}
 	i.close();
+
+
+	for (PointsList::iterator it=points.begin(); it!=points.end(); it++) {
+		history.push_back(*it);
+	}
 }
 
 
-SegmentIterator::Point SegmentIterator::Image(const Point& p) {
-	SetInput(p.x);
-	function->evaluate();
-	return CreatePoint(CopyArray(output));
+SegmentIterator::Point SegmentIterator::Image(Point& p) {
+	if (p.imageCache != NULL) {
+		Point pt;
+		pt.x = p.imageCache;
+		pt.imageCache = NULL;
+		return pt;
+	} else {
+		SetInput(p.x);
+		function->evaluate();
+ 		Point pt = CreatePoint(CopyArray(output));
+		p.imageCache = pt.x;
+		return pt;
+	}
 }
 
 bool SegmentIterator::isClose(const Point& p1, const Point& p2, const double* dist) const {
@@ -84,6 +103,7 @@ SegmentIterator::Point SegmentIterator::Middle(const Point& p1, const Point& p2)
 	}
 	Point pt;
 	pt.x = data;
+	pt.imageCache = NULL;
 
 	return pt;
 }

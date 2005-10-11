@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _CELLIMAGEBUILDERS_ABSTRACTPROCESSEXT_H
+#define _CELLIMAGEBUILDERS_ABSTRACTPROCESSEXT_H
+
 #include "AbstractProcess.h"
 
 class AbstractProcessExt :
@@ -24,3 +26,5 @@ protected:
 
 
 };
+
+#endif //#ifndef _CELLIMAGEBUILDERS_ABSTRACTPROCESSEXT_H

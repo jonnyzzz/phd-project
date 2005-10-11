@@ -1,4 +1,3 @@
-#pragma once
 
 #ifdef WIN32
 	#include <hash_map>
@@ -7,8 +6,9 @@
 	using namespace std;
 	using namespace stdext;
 #else
-        #include <functional>
 	#include <map>
+	#include <list>
+        #include <functional>
 	using namespace std;
 #endif
 
