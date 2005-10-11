@@ -1,4 +1,3 @@
-#pragma once
 #include "ISystemFunction.h"
 #include "ISystemFunctionDerivate.h"
 #include "../graph/typedefs.h"

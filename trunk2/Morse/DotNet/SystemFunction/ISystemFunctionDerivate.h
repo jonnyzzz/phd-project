@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _ISYSTEMFUNCTIONDERIVATE_h
 #define _ISYSTEMFUNCTIONDERIVATE_h
 

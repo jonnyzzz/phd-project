@@ -5,7 +5,7 @@ using namespace std;
 #include <math.h>
 
 MS2DAngleFunction::MS2DAngleFunction(ISystemFunctionDerivate* function)
-: function(function), ISystemFunction(3, 1)
+: ISystemFunction(3, 1), function(function)
 {
     ASSERT(function->getFunctionDimension() == 2);
     input = function->getInput();

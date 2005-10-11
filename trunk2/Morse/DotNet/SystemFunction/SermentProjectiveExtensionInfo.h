@@ -1,4 +1,3 @@
-#pragma once
 #include "IProjectiveExtensionInfo.h"
 
 class ProgressBarInfo;

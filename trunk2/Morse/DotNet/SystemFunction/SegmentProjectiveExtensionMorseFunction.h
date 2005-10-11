@@ -1,4 +1,3 @@
-#pragma once
 #include "IMorseFunction.h"
 #include "ISystemFunctionDerivate.h"
 

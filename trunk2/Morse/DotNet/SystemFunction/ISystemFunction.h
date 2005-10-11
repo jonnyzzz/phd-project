@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _ISYSTEMFUNCTION_CPP
 #define _ISYSTEMFUNCTION_CPP
 

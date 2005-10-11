@@ -16,8 +16,8 @@ SegmentProjectiveExtendedSystemFunction::SegmentProjectiveExtendedSystemFunction
     ),
     function(function), 
     real_dimension(function->getFunctionDimension()),
-    output(function->getOutput()),
     input(function->getInput()),
+    output(function->getOutput()),
     function_dimension(function->getDimension())
 {
 
