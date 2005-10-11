@@ -22,6 +22,7 @@ private:
 
 private:
 	PointsList points;
+	PointsList history;
 
 
 public:

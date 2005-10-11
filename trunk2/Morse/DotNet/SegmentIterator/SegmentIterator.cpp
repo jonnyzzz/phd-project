@@ -90,25 +90,32 @@ SegmentIterator::Point SegmentIterator::Middle(const Point& p1, const Point& p2)
 
 void SegmentIterator::Iterate(const double* prec) {
 	PointsList tempList;
-	
+
 	PointsList::iterator it_prev = points.begin(); 
 	PointsList::iterator it_cur = ++points.begin(); 
 	Point pt = Image(*it_prev);
 	
-	for (; it_cur != points.end(); it_prev = it_cur++) {
+	for (; it_cur != points.end(); ) {
 		
 		Point npt = Image(*it_cur);
 	
-		if  (!isClose(pt, npt, prec)) {
-			points.insert(it_prev, Middle(*it_prev, *it_cur));
+		if  (!isClose(pt, npt, prec)) {					
+			points.insert(it_cur, Middle(*it_prev, *it_cur));			
 			it_cur = it_prev;
 			it_cur++;
+			//goto reset;	
+		} else {
+			pt = npt;
+			tempList.push_back(npt);			
+			it_prev = it_cur++;
 		}
-		pt = npt;
-		tempList.push_back(npt);			
 	}
 
 	points = tempList;
+
+	for (PointsList::iterator it=points.begin(); it!=points.end(); it++) {
+		history.push_back(*it);
+	}
 }
 
 
@@ -117,7 +124,7 @@ void SegmentIterator::ExportToFile(const char * file) {
 	ofstream f;
 	f.open(file);
 
-	for (PointsList::iterator it=points.begin(); it!=points.end(); it++) {
+	for (PointsList::iterator it=history.begin(); it!=history.end(); it++) {
 		for (int i=0; i<dimension; i++) {
 			f<<scientific<<it->x[i]<<" ";
 		}

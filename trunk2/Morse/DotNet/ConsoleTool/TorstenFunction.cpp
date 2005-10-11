@@ -37,9 +37,16 @@ void TorstenFunction::evaluate() {
 	double& x = input[0];
 	double& y = input[1];
 
+	
 	f1=log(beta)+x-exp(y)-log(1+exp(x));
         f2=log(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
 
+	
+
+	/*
+	f1 = beta*x*exp(-y)/(1+x);
+	f2 = m*x*(1-exp(-y))+(1-d)*y;
+	*/
 }
 
 
