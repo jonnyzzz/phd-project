@@ -118,7 +118,7 @@ public:
 	Node* browseTo(const Node* node);
 	Edge* browseTo(Node* nodeTo, Node* nodeFrom);
 
-	void addEdges(Node* node, const JDouble* min, const JDouble* max);
+	void addEdges(Node* node, const JDouble* min, const JDouble* max, bool needInverse = false);
 
     //adds node. in [0, rbound] coordinates coord[i] value will be used
     void addEdgesPartial(Node* node, int rbound, const JInt* coord, const JDouble* min, const JDouble* max);
@@ -157,6 +157,13 @@ private:
 // Loops localization
 public:
 	Graph* localizeLoops();
+
+
+// Stable Localization
+private:
+	void stableLocalization_InitNode(Node* node, int flagID);
+public:
+	Graph* stableLocalization();
 
 //Quantitive Info
 public:

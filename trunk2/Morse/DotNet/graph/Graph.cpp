@@ -456,10 +456,10 @@ Edge* Graph::browseTo(Node* from, Node* to) {
 }
 
 JDouble inline Graph::getExtent(int i) {
-	return this->getEps()[i]/20;
+	return this->getEps()[i]/10;
 }
 
-void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max) {	
+void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max, bool needInverse) {	
 	if (!intersects(min, max)) return;
 	
 	for (int i=0; i<dimention; i++) {
@@ -476,7 +476,11 @@ void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max) {
 	while (point[dimention] == 0) {
 		to = browseTo(point);
 		if ((node != NULL) && (to != NULL)) {
-			browseTo(node, to);
+			if (needInverse) {
+				browseTo(to, node);
+			} else {
+				browseTo(node, to);
+			}
 		}
 		
 		point[0]++;
@@ -785,6 +789,70 @@ Graph* Graph::localizeLoops() {
 	return ret;
 }
 
+///////////////////////////////////////////////////////////////////////////////
+/////// Stable Localization
+///////////////////////////////////////////////////////////////////////////////
+
+void Graph::stableLocalization_InitNode(Node* node, int flagID) {
+		if (!readFlag(node, flagID)) {
+			((TarjanNode*)node)->label = 0;
+			setFlag(node, flagID, true);
+		}
+}
+
+
+Graph* Graph::stableLocalization() {
+	ATLASSERT(isTarjanable);
+
+	const int flagID = this->registerFlag();
+
+	
+
+	GraphNodeEnumerator ne(this);
+	TarjanNode* node;
+	while ((node = (TarjanNode*)ne.next()) != NULL) {
+		stableLocalization_InitNode(node, flagID);
+		GraphEdgeEnumerator ee(this, node);
+		TarjanNode* to;
+		while ((to = (TarjanNode*)ee.nextTo()) != NULL) {
+			stableLocalization_InitNode(to, flagID);
+			to->label++;
+		}
+	}
+
+	typedef list<TarjanNode*> TaskList;
+	TaskList tasks;
+	ne = GraphNodeEnumerator(this);
+	while ((node = (TarjanNode*)ne.next()) != NULL) {
+		if (node->label == 0) {
+			tasks.push_back(node);
+		}
+	}
+
+	while (!tasks.empty()) {
+		TarjanNode* node = tasks.front();
+		tasks.pop_front();
+
+		GraphEdgeEnumerator ee(this, node);
+		TarjanNode* to;
+		while ((to = (TarjanNode*)ee.nextTo()) != NULL) {
+			to->label--;
+			if (to->label == 0) {
+				tasks.push_back(to);
+			}
+		}
+	}
+
+	Graph* ret = this->copyCoordinatesForTarjan();
+
+	ne = GraphNodeEnumerator(this);
+	while ((node =(TarjanNode*)ne.next()) != NULL) {
+		if (node->label != 0)
+			ret->browseToUnsafe(getCells(node));
+	}
+
+	return ret;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 /////// Quantitive Info

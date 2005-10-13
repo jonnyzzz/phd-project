@@ -210,6 +210,9 @@
 				RelativePath=".\SIPointBuilder.h">
 			</File>
 			<File
+				RelativePath=".\StableLocalizationProcess.h">
+			</File>
+			<File
 				RelativePath=".\stdafx.h">
 			</File>
 			<File
@@ -287,6 +290,9 @@
 			</File>
 			<File
 				RelativePath=".\SIPointBuilder.cpp">
+			</File>
+			<File
+				RelativePath=".\StableLocalizationProcess.cpp">
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp">
