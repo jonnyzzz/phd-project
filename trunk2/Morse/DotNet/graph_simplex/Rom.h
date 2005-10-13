@@ -101,8 +101,18 @@ private:
 private:
 	void dump();
 
+private:	
+	class myAllocator {
+	public:	
+		int num;
+		static int number;
+		myAllocator();
+		myAllocator(const myAllocator& al);
+		myAllocator& operator =(const myAllocator& al);
+	        void init();
+	};
+
 private:
-	class myAllocator;
 	typedef map<ContourNode*, myAllocator> map_ids;
 	
 	map_ids ids;

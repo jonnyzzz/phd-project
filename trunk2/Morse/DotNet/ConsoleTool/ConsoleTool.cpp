@@ -73,7 +73,7 @@ void die() {
    cout<<"prog -init file    ;create new inital file and exits"<<endl;
    cout<<"prog -iter 5 file out ; open file and do 5 iters"<<endl;
    cout<<"prog -export file out ; exports file to a list of points"<<endl;
-   cout<<"prog -line 5 in out ; line iterations"<<endl;
+   cout<<"prog -line 5 1 in out ; line iterations"<<endl;
 }
 	
 
@@ -117,42 +117,25 @@ int main(int argc, char** argv) {
 	} else if (strcmp(argv[1], "-export") == 0) {
             cout<<"Loading from "<<argv[2]<<endl<<"Saving results to "<<argv[3]<<endl<<endl;
 			Util::ExportPoints(Util::LoadGraphSet(argv[2]), argv[3]);
-	} else if (strcmp(argv[1], "-line") == 0) {
-		ISystemFunction *func = new SYSTEM();
-		SegmentIterator it(func);
+	} else if (strcmp(argv[1], "-line") == 0) {		
 		int its = 0;
 		sscanf(argv[2],"%d", &its);
+		int hist = 1;
+		sscanf(argv[3],"%d", &hist);
 
-<<<<<<< ConsoleTool.cpp
-		//it.Start(argv[3]);
-		double one[] = {log(5.25),  log(0.001)};
-		double two[] = {log(5.24), log(0.01)};
-		it.Start(one, two);
-=======
-		it.Start(argv[3]);
->>>>>>> 1.8
+		ISystemFunction *func = new SYSTEM();
+		SegmentIterator it(func,hist);
 
-<<<<<<< ConsoleTool.cpp
-		double prec[] = {0.1, 0.1};
 
-		for (int i=0; i<30; i++) 
+		it.Start(argv[4]);		
+		double prec[] = {0.05, 0.05};
+
+		for (int i=0; i<its; i++) 
 			it.Iterate(prec);
 
-			it.ExportToFile("W:/Morse/DotNet/bin/out");
-=======
-		
-		double prec[] = {0.01, 0.01};
-		for (int i=0; i<its; i++) {
-		  cout<<"Itearte"<<endl;
-		   it.Iterate(prec);
-		}
->>>>>>> 1.8
-
-		it.ExportToFile(argv[4]);
-		cout<<"Done!\n";
-		
+		it.ExportToFile(argv[5]);		
 		delete func;
-	}else DIE(-1);
+	} else DIE(-1);
 
 	cout<<endl<<endl<<endl;
 

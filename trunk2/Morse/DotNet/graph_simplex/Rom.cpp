@@ -413,26 +413,21 @@ int CRom::getAnswerLength() {
 }
 
 
-class CRom::myAllocator {
-public:	
-	int num;
-	static int number;
-	myAllocator() {
-	}
+CRom::myAllocator::myAllocator() {
+}
 
-	myAllocator(const myAllocator& al) {
-		num = al.num;
-	}
+CRom::myAllocator::myAllocator(const myAllocator& al) {
+	num = al.num;
+}
 
-	myAllocator& operator =(const myAllocator& al) {
-		num = al.num;
-		return *this;
-	}
-    void init() {
-   		number++;
-		num = number;
-    }
-};
+CRom::myAllocator& CRom::myAllocator::operator =(const myAllocator& al) {
+	num = al.num;
+	return *this;
+}
+void CRom::myAllocator::init() {
+ 	number++;
+	num = number;
+}
 
 int CRom::myAllocator::number = 0;
 

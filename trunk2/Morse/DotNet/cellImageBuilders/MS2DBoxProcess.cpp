@@ -49,7 +49,7 @@ void MS2DBoxProcess::processNextGraph(Graph* graph) {
 
 	GraphNodeEnumerator ne(graph);
 	Node* node;
-	while (node = ne.next()) {
+	while ((node = ne.next())!= NULL) {
 		cnt++;
 		multiplyNode(node, graph);
 		if (cnt > maxCnt) {

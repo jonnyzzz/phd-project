@@ -1,17 +1,30 @@
 #include "stdafx.h"
 #include "SegmentIterator.h"
 
-SegmentIterator::SegmentIterator(ISystemFunction* function) : 
+SegmentIterator::SegmentIterator(ISystemFunction* function, int history) : 
 	MemoryManager(sizeof(double)*function->getDimension()*100000),
-	function(function),
-	dimension(function->getDimension())
+	function(function), 
+	dimension(function->getDimension()),
+	history(history),
+	generation(0)
 {
 	input = function->getInput();
 	output = function->getOutput();
+	historyList = new PointsList*[history];
+	for (int i=0; i<history; i++) {
+		historyList[i] = NULL;
+	}
+	pointsList = new PointsList();
+	historyList[generation++] = pointsList;
+	if (generation >= history) generation = 0;
 }
 
 SegmentIterator::~SegmentIterator(void)
-{
+{	
+	for (int i=0; i<history; i++) {
+		delete historyList[i];
+	}
+	delete[] historyList;	
 }
 
 
@@ -33,18 +46,14 @@ SegmentIterator::Point SegmentIterator::CreatePoint(const double* data) {
 }
 
 void SegmentIterator::Start(double* one, double* two) {
-	points.clear();
-	points.push_back(CreatePoint(one));
-	points.push_back(CreatePoint(two));
-
-	for (PointsList::iterator it=points.begin(); it!=points.end(); it++) {
-		history.push_back(*it);
-	}
+	pointsList->clear();
+	pointsList->push_back(CreatePoint(one));
+	pointsList->push_back(CreatePoint(two));	
 }
 
 void SegmentIterator::Start(const char* file) {
 
-	points.clear();
+	pointsList->clear();
 
 	ifstream i;
 	i.open(file);
@@ -59,14 +68,9 @@ void SegmentIterator::Start(const char* file) {
 			i>>(x[c]);
 		}
 
-		points.push_back(CreatePoint(x));
+		pointsList->push_back(CreatePoint(x));
 	}
 	i.close();
-
-
-	for (PointsList::iterator it=points.begin(); it!=points.end(); it++) {
-		history.push_back(*it);
-	}
 }
 
 
@@ -109,33 +113,39 @@ SegmentIterator::Point SegmentIterator::Middle(const Point& p1, const Point& p2)
 }
 
 void SegmentIterator::Iterate(const double* prec) {
-	PointsList tempList;
+	if (generation >= history) generation = 0;
 
-	PointsList::iterator it_prev = points.begin(); 
-	PointsList::iterator it_cur = ++points.begin(); 
+	PointsList* tempList = new PointsList();
+
+	PointsList::iterator it_prev = pointsList->begin(); 
+	PointsList::iterator it_cur = ++pointsList->begin(); 
 	Point pt = Image(*it_prev);
+	tempList->push_back(pt);
 	
-	for (; it_cur != points.end(); ) {
+	while (it_cur != pointsList->end() ) {
 		
 		Point npt = Image(*it_cur);
 	
 		if  (!isClose(pt, npt, prec)) {					
-			points.insert(it_cur, Middle(*it_prev, *it_cur));			
+			pointsList->insert(it_cur, Middle(*it_prev, *it_cur));			
 			it_cur = it_prev;
 			it_cur++;
-			//goto reset;	
 		} else {
 			pt = npt;
-			tempList.push_back(npt);			
+			tempList->push_back(npt);			
 			it_prev = it_cur++;
 		}
 	}
 
-	points = tempList;
-
-	for (PointsList::iterator it=points.begin(); it!=points.end(); it++) {
-		history.push_back(*it);
+	pointsList = tempList;
+	
+	if (historyList[generation] != NULL) {
+		delete historyList[generation];
 	}
+	historyList[generation++] = tempList;
+
+	if (generation >= history) generation = 0;
+
 }
 
 
@@ -144,11 +154,13 @@ void SegmentIterator::ExportToFile(const char * file) {
 	ofstream f;
 	f.open(file);
 
-	for (PointsList::iterator it=history.begin(); it!=history.end(); it++) {
-		for (int i=0; i<dimension; i++) {
-			f<<scientific<<it->x[i]<<" ";
+	for (int g = 0; g<history; g++) {
+		for (PointsList::iterator it=historyList[g]->begin(); it!=historyList[g]->end(); it++) {
+			for (int i=0; i<dimension; i++) {
+				f<<scientific<<it->x[i]<<" ";
+			}
+			f<<endl;
 		}
-		f<<endl;
 	}
 
 	f.close();

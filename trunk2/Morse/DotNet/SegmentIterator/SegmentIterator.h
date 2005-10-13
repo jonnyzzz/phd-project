@@ -6,7 +6,7 @@
 class SegmentIterator : private MemoryManager
 {
 public:
-	SegmentIterator(ISystemFunction* function);
+	SegmentIterator(ISystemFunction* function, int history);
 	virtual ~SegmentIterator(void);
 
 
@@ -20,8 +20,8 @@ private:
 	
 
 private:
-	PointsList points;
-	PointsList history;
+	PointsList* pointsList;
+	PointsList** historyList;
 
 
 public:
@@ -36,6 +36,9 @@ private:
 	double* input;
 	double* output;
 	const int dimension;
+	const int history;
+
+	int generation;
 
 private:
 	void SetInput(double* data);

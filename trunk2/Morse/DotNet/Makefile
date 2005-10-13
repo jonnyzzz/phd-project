@@ -90,10 +90,10 @@ OBJ = $(addsuffix .o, $(basename $(SRC)))
 CC      = gcc
 # CFLAGS = $(addprefix -I,$(DIRS))
 # CPPFLAGS = -p 
-CPPFLAGS  += -D DEBUG -D ENABLE_TRACE -ggdb -Wall
+# CPPFLAGS  += -D DEBUG -D ENABLE_TRACE -ggdb -Wall
 OBJECTS = $(OBJ)
-CPPFLAGS += 
-LDFLAGS += -lg++ -lstdc++ -lm -static
+# CPPFLAGS += 
+LDFLAGS += -lstdc++ -lm
 
 all:  $(OBJECTS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/si6.25
