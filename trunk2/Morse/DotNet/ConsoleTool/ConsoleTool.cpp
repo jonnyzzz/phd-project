@@ -23,15 +23,17 @@ using namespace std;
 #include "../SegmentIterator/SegmentIterator.h"
 
 #include "../cellImageBuilders/TarjanProcess.h"
+#include "../cellImageBuilders/StableLocalizationProcess.h"
+#include "../cellImageBuilders/SIPointBuilder.h"
 #include "LogisticsMap.h"
 #include <math.h>
 
 
 
-#define FACTORY TorstenFactory
-//#define FACTORY LogisticsMapFactory
-#define SYSTEM  TorstenFunction
-//#define SYSTEM  LogisticsMap
+//#define FACTORY TorstenFactory
+#define FACTORY LogisticsMapFactory
+//#define SYSTEM  TorstenFunction
+#define SYSTEM  LogisticsMap
 
 
 GraphSet Process(GraphSet set) {
@@ -39,18 +41,22 @@ GraphSet Process(GraphSet set) {
 	ISystemFunction *func = new SYSTEM();//IteratatedSystemFunction<TorstenFactory, 5>(); //
 
 	int factor[] = {2,2};
+	int ks[] = {4,1};
 	ConsoleProgressBarInfo info;
 
-	AbstractProcess* ps = new SimpleBoxProcess(set[0], func, factor, &info);
+	//AbstractProcess* ps = new SimpleBoxProcess(set[0], func, factor, &info, true);
+	SIPointBuilder* ps = new SIPointBuilder(set[0], factor, ks, func, &info);
 	TarjanProcess* ts = new TarjanProcess(true, &info);
+	//StableLocalizationProcess *ss = new StableLocalizationProcess(&info);
 
 	GraphSet it = AbstractProcess::Apply(ps, set);
-
 	GraphSet res = AbstractProcess::Apply(ts, it);
+	//GraphSet ans = AbstractProcess::Apply(ss, res);
 
 	delete ps;
 	delete ts;
 	delete func;
+	//res.DeleteGraphs();
 	set.DeleteGraphs();
 	it. DeleteGraphs();
 
