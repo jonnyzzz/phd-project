@@ -26,14 +26,17 @@ using namespace std;
 #include "../cellImageBuilders/StableLocalizationProcess.h"
 #include "../cellImageBuilders/SIPointBuilder.h"
 #include "LogisticsMap.h"
+#include "ParametrisedLogisticsMap.h"
 #include <math.h>
 
 
 
 //#define FACTORY TorstenFactory
-#define FACTORY LogisticsMapFactory
+//#define FACTORY LogisticsMapFactory
+#define FACTORY ParametrisedLogisticsMapFactory
 //#define SYSTEM  TorstenFunction
-#define SYSTEM  LogisticsMap
+//#define SYSTEM  LogisticsMap
+#define SYSTEM  ParametrisedLogisticsMap
 
 
 GraphSet Process(GraphSet set) {
@@ -141,7 +144,43 @@ int main(int argc, char** argv) {
 
 		it.ExportToFile(argv[5]);		
 		delete func;
-	} else DIE(-1);
+	} else if ( strcmp(argv[1], "-iter2") == 0 ) {
+		int its = 0;
+		sscanf(argv[2],"%d", &its);
+					
+		char input[2000];// = argv[3];
+		char output[2000];// = argv[4];
+
+		double minM = 2;
+		double maxM = 4;
+		double step = 0.01;
+
+		for (double d=minM; d<maxM; d+= step) {
+			//sprintf(input, "%s.%f", argv[3], argv[4]);
+			sprintf(input, "%s", argv[3]);
+			sprintf(output, "%s.%f", argv[4], d);
+			ParametrisedLogisticsMap::mju = d;
+
+			cout<<"Loading from "<<input<<endl<<"Saving results to "<<output<<endl<<endl;
+
+			GraphSet in = Util::LoadGraphSet(input);
+
+			for (int i=0; i<its; i++) {
+				cout<<endl<<endl<<"Iteration "<<i+1<<" from "<<its<<endl<<endl;
+				in = Process(in);
+				char buff[2048];
+				sprintf(buff,"%s.temp.%d", output, i);
+
+				Util::SaveGraphSet(in, buff);
+
+			}
+
+			Util::SaveGraphSet(in, output);
+
+			
+		}
+		cout<<"Program Ended"<<endl<<endl;
+	}else DIE(-1);
 
 	cout<<endl<<endl<<endl;
 

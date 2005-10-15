@@ -49,7 +49,7 @@ struct Edge {
 
 Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* grid, bool tarjanable, int nodeHashMax, int edgeHashMax) 
 : CoordinateSystem(dimention, min, max, grid),
-    MemoryManager(sizeof(TarjanNode)*71861 + sizeof(Edge)*7*3255+sizeof(JInt)*dimention*112062),
+    MemoryManager(( sizeof(TarjanNode) +  sizeof(Edge)*edgeHashMax + sizeof(JInt)*dimention)*nodeHashMax/4 + sizeof(void*)*nodeHashMax),
 	isTarjanable(tarjanable), nodeHashMax(nodeHashMax), edgeHashMax(edgeHashMax)
 {	
 	if (isTarjanable) {

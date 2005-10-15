@@ -1,3 +1,7 @@
+
+#ifndef _CONSOLE_TOOL_FUNCTIONBASE_H
+#define _CONSOLE_TOOL_FUNCTIONBASE_H
+
 #include "../SystemFunction/ISystemFunction.h"
 
 class FunctionBase : public ISystemFunction
@@ -19,3 +23,4 @@ private:
 	bool selfCreated;
 };
 
+#endif

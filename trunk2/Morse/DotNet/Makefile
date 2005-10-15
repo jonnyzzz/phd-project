@@ -53,7 +53,8 @@ SRC_CONSOLE_TOOL = ConsoleTool.cpp \
                    TorstenFunction.cpp \
                    Util.cpp \
                    FunctionBase.cpp \
-		   LogisticsMap.cpp 
+		   LogisticsMap.cpp \
+                   ParametrisedLogisticsMap.cpp
 
 DIR_CONSOLE_TOOL = ConsoleTool/
 
@@ -92,8 +93,8 @@ CC      = gcc
 # CPPFLAGS = -p 
 # CPPFLAGS  += -D DEBUG -D ENABLE_TRACE -ggdb -Wall
 OBJECTS = $(OBJ)
-# CPPFLAGS += 
-LDFLAGS += -lstdc++ -lm
+CPPFLAGS += -O2
+LDFLAGS +=  -lstdc++ -lm -O2
 
 all:  $(OBJECTS)
 	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/si6.25

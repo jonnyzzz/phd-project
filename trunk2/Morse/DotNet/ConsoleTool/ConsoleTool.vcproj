@@ -139,6 +139,9 @@
 				RelativePath=".\LogisticsMap.cpp">
 			</File>
 			<File
+				RelativePath=".\ParametrisedLogisticsMap.cpp">
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -172,6 +175,9 @@
 			</File>
 			<File
 				RelativePath=".\LogisticsMap.h">
+			</File>
+			<File
+				RelativePath=".\ParametrisedLogisticsMap.h">
 			</File>
 			<File
 				RelativePath=".\Resource.h">

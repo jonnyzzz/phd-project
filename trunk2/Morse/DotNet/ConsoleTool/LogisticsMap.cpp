@@ -18,7 +18,7 @@ LogisticsMap::~LogisticsMap(void)
 }
 
 void LogisticsMap::evaluate() {
-	output[0] = input[0];
+	output[0] = input[0] * 0 + 3.8 ;
 	output[1] = input[0]*input[1]*(1-input[1]);
 }
 
