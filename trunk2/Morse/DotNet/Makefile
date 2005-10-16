@@ -31,7 +31,8 @@ SRC_GRAPH = CoordinateSystem.cpp           \
             GraphException.cpp                    \
             GraphUtil.cpp                          \
             MemoryManager.cpp                         \
-            Stack.cpp                                   
+            Stack.cpp                   \
+            LoopIterator.cpp
 DIR_GRAPH = graph/
 
 SRC_GRAPH_SIMPLEX = Rom.cpp \
