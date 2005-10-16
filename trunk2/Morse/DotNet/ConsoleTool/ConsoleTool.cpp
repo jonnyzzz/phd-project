@@ -175,15 +175,20 @@ int main(int argc, char** argv) {
 				//char buff[2048];
 				//sprintf(buff,"%s.temp.%d", output, i);
 				//Util::SaveGraphSet(in, buff);
+				
 			}
 
-			Util::SaveGraphSet(in, output);
+			cout<<"\nIteration finished. ["<<d<<"]\n";
+
+			//Util::SaveGraphSet(in, output);
 
 			for (GraphSetIterator it = in.iterator(); it.HasNext(); it.Next()) {
 				ParametrisedLogisticsMapFactory::SaveOnlyUnstable(d, it.Current(), points);
 			}
 
 			in.DeleteGraphs();
+
+			cout<<"Iteration passed for fixed mju = "<<d<<endl;
 		}
 		cout<<"Program Ended"<<endl<<endl;
 	}else DIE(-1);

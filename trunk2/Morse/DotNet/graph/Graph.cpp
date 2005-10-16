@@ -52,13 +52,13 @@ Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* 
     MemoryManager(( sizeof(TarjanNode) +  sizeof(Edge)*edgeHashMax + sizeof(JInt)*dimention)*nodeHashMax/4 + sizeof(void*)*nodeHashMax),
 	isTarjanable(tarjanable), nodeHashMax(nodeHashMax), edgeHashMax(edgeHashMax)
 {	
-	if (isTarjanable) {
-		cout<<"Using Tarjan Graph"<<"\n";
-	} else {
-		cout<<"Not Using Tarjan Graph\n";
-	}
+  //	if (isTarjanable) {
+  //		cout<<"Using Tarjan Graph"<<"\n";
+  //	} else {
+  //		cout<<"Not Using Tarjan Graph\n";
+  //	}
 	
-	cout<<"NodeHash = "<<this->nodeHashMax<<"\nEdgeHash = "<<this->edgeHashMax<<"\n";
+	//cout<<"NodeHash = "<<this->nodeHashMax<<"\nEdgeHash = "<<this->edgeHashMax<<"\n";
     //edgeHashMax = 10000;
 	//nodeHashMax = 10000;
 	numberEdges = 0;

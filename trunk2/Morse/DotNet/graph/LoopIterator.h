@@ -26,8 +26,9 @@ public:
 private:
 	bool ReadFlag(Node* node);
 	void SetFlag(Node* node, bool value);
+	void ResetFlags();
 
-	void DFSStep(NodeExList& start, NodeExList& next, NodeLists& lists);
+	void DFSStep(Node* root, NodeExList& start, NodeExList& next, NodeLists& lists);
 
 private:
 	Graph* graph;

@@ -64,7 +64,7 @@ void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph,
 
 	ParametrisedLogisticsMap::mju = mju;
 
-	const double eps = graph->getEps()[0]*2;
+	const double eps = graph->getEps()[0]*4;
 
 	for (LoopIterator::NodeLists::iterator it = lists.begin(); it != lists.end(); it++) {
 		double dfs = 1;
@@ -84,7 +84,7 @@ void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph,
 			dfs *= dfx;
 
 			if (!(Abs(x - fx) < eps)) {
-				cout<<"Computational Error period Found"<<endl;
+				// cout<<"Computational Error period Found"<<endl;
 				isTruePeriod = false;
 				errorCnt++;
 				break;
@@ -102,9 +102,10 @@ void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph,
 				fs.stress();
 			}			
 		}
-		fs.stress();
+		
 	}
 
+	fs.stress();
 	cout<<"Truly loop found: "<<loopsCnt<<" Wrong loops :"<<errorCnt<<endl;
 }
 
