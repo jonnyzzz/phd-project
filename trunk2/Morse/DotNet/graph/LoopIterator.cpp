@@ -3,7 +3,7 @@
 #include "../graph/GraphUtil.h"
 
 LoopIterator::LoopIterator(Graph* graph) : 
-	MemoryManager(sizeof(NodeEx)*graph->getNumberOfNodes()/3), graph(graph), flagID(graph->registerFlag())
+	MemoryManager(sizeof(NodeEx)*(16 + graph->getNumberOfNodes()/3)), graph(graph), flagID(graph->registerFlag())
 {
 }
 

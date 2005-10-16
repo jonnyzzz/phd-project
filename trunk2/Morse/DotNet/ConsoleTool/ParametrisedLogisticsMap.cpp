@@ -59,13 +59,16 @@ void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph,
 	LoopIterator it(graph);
 
 	LoopIterator::NodeLists lists = it.process();
+	int loopsCnt = 0;
+	int errorCnt = 0;
 
 	ParametrisedLogisticsMap::mju = mju;
 
-	const double eps = graph->getEps()[0];
+	const double eps = graph->getEps()[0]*2;
 
 	for (LoopIterator::NodeLists::iterator it = lists.begin(); it != lists.end(); it++) {
 		double dfs = 1;
+		bool isTruePeriod = true;
 		
 		LoopIterator::NodeList::iterator first = it->begin();
 		LoopIterator::NodeList::iterator second = (it->size() == 1) ? it->begin() : ++it->begin();
@@ -80,13 +83,20 @@ void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph,
 
 			dfs *= dfx;
 
-			ASSERT( Abs(x - fx) < eps);
+			if (!(Abs(x - fx) < eps)) {
+				cout<<"Computational Error period Found"<<endl;
+				isTruePeriod = false;
+				errorCnt++;
+				break;
+			}
+
+			loopsCnt++;
 
 			first = second;
 			second++;
 		}
 
-		if (Abs(dfs) > 1 - eps) {
+		if (isTruePeriod && (Abs(dfs) > 1 - eps)) {
 			for (LoopIterator::NodeList::iterator itt = it->begin(); itt != it->end(); itt++) {
 				fs<<mju<<graph->toExternal(graph->getCells(*itt)[0],0);
 				fs.stress();
@@ -94,6 +104,8 @@ void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph,
 		}
 		fs.stress();
 	}
+
+	cout<<"Truly loop found: "<<loopsCnt<<" Wrong loops :"<<errorCnt<<endl;
 }
 
 

@@ -153,15 +153,15 @@ int main(int argc, char** argv) {
 
 		double minM = 2;
 		double maxM = 4;
-		double step = 0.01;
+		double step = 0.005;
 
 		sprintf(output, "%s.p", argv[4]);
 
 		FileOutputStream points(output);
 
 		for (double d=minM; d<maxM; d+= step) {
-			sprintf(input, "%s.%f", argv[3], d);
-			//sprintf(input, "%s", argv[3]);
+			//sprintf(input, "%s.%f", argv[3], d);
+			sprintf(input, "%s", argv[3]);
 			sprintf(output, "%s.%f", argv[4], d);
 			ParametrisedLogisticsMap::mju = d;
 

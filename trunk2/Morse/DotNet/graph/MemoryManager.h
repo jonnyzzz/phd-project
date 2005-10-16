@@ -12,7 +12,7 @@ public:
 	MemoryManager(size_t buffer_length);
 	virtual ~MemoryManager(void);
 
-    MemoryManager(const MemoryManager& man) {
+	MemoryManager(const MemoryManager& man) : buffer_length(0) {
  	cout<<"Copying constructor"<<endl;
         ATLASSERT(false);
     }
@@ -30,7 +30,7 @@ private:
 	};
 
 private:
-	size_t buffer_length;
+	const size_t buffer_length;
 
 private:
 	typedef list<Buffer> BuffersList;
