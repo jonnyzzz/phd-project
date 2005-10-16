@@ -19,7 +19,8 @@ SRC_CELLIMAGEBUILDER = AbstractBoxProcess.cpp \
                 SIPointBuilder.cpp                    \
                 SegmentProjectiveBundleMSCreationProcess.cpp\
                 SimpleBoxProcess.cpp                         \
-                TarjanProcess.cpp                             
+                TarjanProcess.cpp                            \
+                StableLocalizationProcess.cpp
 DIR_CELLIMAGEBUILDER = cellImageBuilders/
 
 SRC_GRAPH = CoordinateSystem.cpp           \

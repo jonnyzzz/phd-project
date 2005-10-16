@@ -1,6 +1,6 @@
 #include "FunctionBase.h"
+#include "../graph/Graph.h"
 
-class Graph;
 
 class ParametrisedLogisticsMap :
 	public FunctionBase
@@ -20,6 +20,7 @@ public:
 
 public: 
 	static double mju;
+	static double derivate(double d);
 };
 
 
@@ -35,5 +36,7 @@ public:
 	
 	static void Dump();
 
+public:
+	static void SaveOnlyUnstable(double mju, Graph* graph, FileOutputStream& fs);
 };
 

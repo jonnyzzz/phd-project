@@ -155,9 +155,13 @@ int main(int argc, char** argv) {
 		double maxM = 4;
 		double step = 0.01;
 
+		sprintf(output, "%s.p", argv[4]);
+
+		FileOutputStream points(output);
+
 		for (double d=minM; d<maxM; d+= step) {
-			//sprintf(input, "%s.%f", argv[3], argv[4]);
-			sprintf(input, "%s", argv[3]);
+			sprintf(input, "%s.%f", argv[3], d);
+			//sprintf(input, "%s", argv[3]);
 			sprintf(output, "%s.%f", argv[4], d);
 			ParametrisedLogisticsMap::mju = d;
 
@@ -168,16 +172,18 @@ int main(int argc, char** argv) {
 			for (int i=0; i<its; i++) {
 				cout<<endl<<endl<<"Iteration "<<i+1<<" from "<<its<<endl<<endl;
 				in = Process(in);
-				char buff[2048];
-				sprintf(buff,"%s.temp.%d", output, i);
-
-				Util::SaveGraphSet(in, buff);
-
+				//char buff[2048];
+				//sprintf(buff,"%s.temp.%d", output, i);
+				//Util::SaveGraphSet(in, buff);
 			}
 
 			Util::SaveGraphSet(in, output);
 
-			
+			for (GraphSetIterator it = in.iterator(); it.HasNext(); it.Next()) {
+				ParametrisedLogisticsMapFactory::SaveOnlyUnstable(d, it.Current(), points);
+			}
+
+			in.DeleteGraphs();
 		}
 		cout<<"Program Ended"<<endl<<endl;
 	}else DIE(-1);

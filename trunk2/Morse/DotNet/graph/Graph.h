@@ -189,8 +189,9 @@ public:
 	bool readFlag(Node* node, int flagID);
 	void setFlag(Node* node, int flagID, bool value = true);
 
-private:
+public:
 	bool isLoop(Node* node);
+private:
 	void setLoop(Node* node);
 
 public:
