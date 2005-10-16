@@ -85,16 +85,27 @@ void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph,
 	GraphNodeEnumerator ne(graph);
 	Node* node;
 	while (node = ne.next()) {
-		if (graph->isLoop(node)) {
+	  //		if (graph->isLoop(node)) {
 			double c = graph->toExternal(graph->getCells(node)[0], 0);
 
-			double d = ParametrisedLogisticsMap::derivate(c);
+			//double d = ParametrisedLogisticsMap::derivate(c);
 
-			if (d < -1 || d > 1) {
+			//if (d < -1 || d > 1)
+			  {
 				fs<<mju<<c;
 				fs.stress();
 			}
-		}
+			//		}
 	}
 
 }
+
+
+
+
+
+
+
+
+
+

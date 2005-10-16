@@ -1,4 +1,3 @@
-#pragma once
 #include "AbstractProcess.h"
 
 class StableLocalizationProcess :
@@ -16,3 +15,21 @@ public:
 private:
 	GraphSet graphSet;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
