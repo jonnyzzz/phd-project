@@ -3,6 +3,7 @@
 #include "../graph/Graph.h"
 #include "../graph/GraphUtil.h"
 #include "../graph/FileStream.h"
+#include "../graph/LoopIterator.h"
 
 #include <list>
 using namespace std;
@@ -26,6 +27,9 @@ void ParametrisedLogisticsMap::evaluate() {
 	output[0] = mju*input[0]*(1-input[0]);
 }
 
+double ParametrisedLogisticsMap::f(double d) {
+	return mju*d*(1-d);
+}
 
 Graph* ParametrisedLogisticsMapFactory::CreateGraph() {
 	double _min[] = { 0};
@@ -47,57 +51,49 @@ void ParametrisedLogisticsMapFactory::Dump() {
 }
 
 
+double inline ParametrisedLogisticsMapFactory::Abs(double d) {
+	return ( d > 0) ? d : -d;
+}
+
 void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph, FileOutputStream& fs) {
-	/*
-	const int flagID = graph->registerFlag();
+	LoopIterator it(graph);
 
-	typedef list<Node*> NodesList;
-	NodeList path;
-	NodeList current;
+	LoopIterator::NodeLists lists = it.process();
 
-	stack.push_back(GraphNodeEnumerator(graph).next());
-
-	for (NodesList::iterator it = path.begin(); it != path.end(); it++) {
-		Node* node = *it;
-		graph->setFlag(node, flagID, true);
-		GraphEdgeEnumerator ee(graph, node);
-		Node* to;
-		while ((to = ee.nextTo()) != NULL) {
-			if (!graph->readFlag(to, flagID)) {
-							
-	
-			}
-		}
-	}
-
-
-	Node* node;
-	while ((node = ne.next())!= NULL) {
-		double point;
-		graph->toExternal(graph->getCells(node)[0], 0);
-
-
-	}
-	*/
-	
 	ParametrisedLogisticsMap::mju = mju;
 
-	GraphNodeEnumerator ne(graph);
-	Node* node;
-	while (node = ne.next()) {
-	  //		if (graph->isLoop(node)) {
-			double c = graph->toExternal(graph->getCells(node)[0], 0);
+	const double eps = graph->getEps()[0];
 
-			//double d = ParametrisedLogisticsMap::derivate(c);
+	for (LoopIterator::NodeLists::iterator it = lists.begin(); it != lists.end(); it++) {
+		double dfs = 1;
+		
+		LoopIterator::NodeList::iterator first = it->begin();
+		LoopIterator::NodeList::iterator second = (it->size() == 1) ? it->begin() : ++it->begin();
 
-			//if (d < -1 || d > 1)
-			  {
-				fs<<mju<<c;
+		double px = graph->toExternal(graph->getCells(*first)[0], 0);
+
+		while (second != it->end()) {
+			double x = graph->toExternal(graph->getCells(*second)[0], 0);
+			double fx = ParametrisedLogisticsMap::f(px);
+			double dfx = ParametrisedLogisticsMap::derivate(x);
+			px = x;
+
+			dfs *= dfx;
+
+			ASSERT( Abs(x - fx) < eps);
+
+			first = second;
+			second++;
+		}
+
+		if (Abs(dfs) > 1 - eps) {
+			for (LoopIterator::NodeList::iterator itt = it->begin(); itt != it->end(); itt++) {
+				fs<<mju<<graph->toExternal(graph->getCells(*itt)[0],0);
 				fs.stress();
-			}
-			//		}
+			}			
+		}
+		fs.stress();
 	}
-
 }
 
 

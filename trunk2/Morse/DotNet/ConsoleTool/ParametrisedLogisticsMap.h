@@ -21,6 +21,7 @@ public:
 public: 
 	static double mju;
 	static double derivate(double d);
+	static double f( double d);
 };
 
 
@@ -38,5 +39,8 @@ public:
 
 public:
 	static void SaveOnlyUnstable(double mju, Graph* graph, FileOutputStream& fs);
+
+private:
+	static double Abs(double d);
 };
 
