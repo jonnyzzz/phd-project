@@ -79,7 +79,7 @@ int toMilliSeconds(clock_t t) {
 
 void Pefomance::test() {
 
-	
+	/*
 	
 	Func function = new Function(
 		  new FunctionFactory("y1=x1*0.5; y2=x2*2; _dimension=2;"),
@@ -119,6 +119,7 @@ void Pefomance::test() {
 	cout<<"\t Factor :\t"<<factor[0]<<"\n";
 	cout<<"\t ks[] :\t"<<ks[0]<<", "<<ks[1]<<"\n";
 
+	*/
 	cout<<"Complete!\n";
 }
 
@@ -126,7 +127,7 @@ void Pefomance::test() {
 
 
 void Pefomance::test2() {
-	
+	/*
 	Func function = new Function(
 		  new FunctionFactory("y1=1 - 1.4*x1*x1-0.3*x2; y2=x1; _dimension=2;"),
 		  2
@@ -166,4 +167,5 @@ void Pefomance::test2() {
 	cout<<"\t ks[] :\t"<<ks[0]<<", "<<ks[1]<<"\n";
 
 	cout<<"Complete!\n";
+	*/
 }

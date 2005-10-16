@@ -1,4 +1,5 @@
-
+#ifndef _CEEIMAGEBUILDERS_ABSTRACTGRAPHCREATOR_H
+#define _CEEIMAGEBUILDERS_ABSTRACTGRAPHCREATOR_H
 
 #include "AbstractProcessExt.h"
 
@@ -34,4 +35,6 @@ private:
 private:
 	void putNodes(Graph* from, Graph* to, Node* node);
 };
+
+#endif //_CEEIMAGEBUILDERS_ABSTRACTGRAPHCREATOR_H
 

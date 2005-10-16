@@ -36,7 +36,7 @@ void MorseTest::statr() {
 	JDouble amax[] = {1, 1};
 
 	
-	SmartGraph graph = new Graph(2, amin, amax, grid);
+	SmartGraph graph = new Graph(2, amin, amax, grid, true);
 	graph->maximize();
 
 	JDouble offset1[] = {0.4, 0.4, 0.4, 0.4};

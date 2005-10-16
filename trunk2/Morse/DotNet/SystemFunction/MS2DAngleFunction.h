@@ -1,3 +1,6 @@
+#ifndef _CELLIMAGEBUILDERS_MS2DANGLEFUNCTION_H
+#define _CELLIMAGEBUILDERS_MS2DANGLEFUNCTION_H
+
 #include "ISystemFunction.h"
 #include "ISystemFunctionDerivate.h"
 #include "../graph/typedefs.h"
@@ -37,3 +40,6 @@ private:
     double Atan(double v);
     double dF(int i, int j);
 };
+
+#endif //_CELLIMAGEBUILDERS_MS2DANGLEFUNCTION_H
+

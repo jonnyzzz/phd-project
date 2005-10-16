@@ -35,7 +35,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
     //PointGraphTest("PointGraphTest", cout).Test();
     //MS2DMorseTest().Test();
     //AdaptiveBoxTest().Test();
-    MemoryManagerTest().Test();
+    //MemoryManagerTest().Test();
 
 	//runTests();
 
@@ -64,8 +64,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	*/
 
 
-	//GraphTest test;
-	//test.test();
+	GraphTest test;
+	test.test();
 
 
 

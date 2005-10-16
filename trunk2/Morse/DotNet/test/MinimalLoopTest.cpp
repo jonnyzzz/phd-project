@@ -33,7 +33,7 @@ void MinimalLoopTest::Test() {
 	JDouble vmax[] = {1,};
 	JInt	grid[] = {1000};
 
-	graph = new Graph(1,vmin, vmax, grid);
+	graph = new Graph(1,vmin, vmax, grid, true);
 
 
 	to(1, 1);

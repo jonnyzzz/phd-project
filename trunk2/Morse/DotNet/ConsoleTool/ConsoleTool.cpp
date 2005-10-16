@@ -47,8 +47,8 @@ GraphSet Process(GraphSet set) {
 	int ks[] = {4,1};
 	ConsoleProgressBarInfo info;
 
-	//AbstractProcess* ps = new SimpleBoxProcess(set[0], func, factor, &info, true);
-	SIPointBuilder* ps = new SIPointBuilder(set[0], factor, ks, func, &info);
+	AbstractProcess* ps = new SimpleBoxProcess(set[0], func, factor, &info);
+	//SIPointBuilder* ps = new SIPointBuilder(set[0], factor, ks, func, &info);
 	TarjanProcess* ts = new TarjanProcess(true, &info);
 	//StableLocalizationProcess *ss = new StableLocalizationProcess(&info);
 

@@ -21,5 +21,9 @@ public:
 	void to(int i1, int i2);
 	void to(Node* n1, Node* n2);
 
+	int extract(Node* node);
+
+public:
+	void Dump();
 
 };

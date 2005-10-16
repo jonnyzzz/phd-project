@@ -4,6 +4,8 @@
 #include <math.h>
 #include "../calculator/FunctionContext.h"
 #include "../systemfunction/segmentprojectiveextendedsystemfunction.h"
+#include "../calculator/FunctionDictionary.h"
+#include "../calculator/FunctionNodeConstant.h"
 
 CalculatorTest::CalculatorTest(ostream& o) : TestBase("CalculatorTest", o)
 {

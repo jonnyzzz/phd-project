@@ -1,3 +1,6 @@
+#ifndef _GRAPH_SIMPLEX_ROM_H
+#define _GRAPH_SIMPLEX_ROM_H
+
 
 #ifdef WIN32
 	#include <hash_map>
@@ -129,4 +132,6 @@ private:
 	void dumpExtremaContour(ostream& o, ContourNode* node);
 
 };
+
+#endif //_GRAPH_SIMPLEX_ROM_H
 

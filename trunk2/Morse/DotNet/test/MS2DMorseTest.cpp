@@ -39,7 +39,7 @@ typedef list< MorsePair > MorseResults;
 
 
 Graph* MergeGraphs(GraphComponents* cms) {    
-    Graph* result = cms->getAt(0)->copyCoordinates();
+    Graph* result = cms->getAt(0)->copyCoordinates(true);
 
     for (int i=0; i<cms->length(); i++) {
         cms->getAt(i)->resolveEdges(result);
@@ -71,7 +71,7 @@ void MS2DMorseTest::Test() {
 	JDouble amax[] = {1, 1};
 
 	
-	SmartGraph graph = new Graph(2, amin, amax, grid);
+	SmartGraph graph = new Graph(2, amin, amax, grid, true);
 	graph->maximize();
 
 	JDouble offset1[] = {0.4, 0.4, 0.4, 0.4};
@@ -108,7 +108,7 @@ void MS2DMorseTest::Test() {
 	cms->addGraphAsComponent(proc->result());
 
     //Just to make it work with smarp pointers.
-    SmartGraph result(new Graph(1, amin, amax,grid));
+    SmartGraph result(new Graph(1, amin, amax,grid, true));
     
 	//MS_Step
 	MULTI(

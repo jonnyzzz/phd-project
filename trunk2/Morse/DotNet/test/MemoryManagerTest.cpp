@@ -27,7 +27,7 @@ void MemoryManagerTest::Test() {
 
     ISet vset;
 
-    cout<<sizeof(int)<<"="<<sizeof(int*)<<"-"<<sizeof(int[0])<<"\n";
+//    cout<<sizeof(int)<<"="<<sizeof(int*)<<"-"<<sizeof(int[0])<<"\n";
 /*
     for(int i=1; i<100100; i++) {
         int* ii = manager.AllocateArray<int>(1);

@@ -1,3 +1,6 @@
+#ifndef _CELLIMAGEBUILDETRS_SIOVERLAPEDPOINTBUILDER_H
+#define _CELLIMAGEBUILDETRS_SIOVERLAPEDPOINTBUILDER_H
+
 #include "AbstractPointBuilder.h"
 
 class SIOverlapedPointBuilder :
@@ -26,3 +29,6 @@ protected:
 
 	ISystemFunction* function;
 };
+
+#endif 
+

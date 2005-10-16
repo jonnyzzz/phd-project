@@ -32,20 +32,8 @@ MemoryManager::Buffer MemoryManager::CreateBuffer() {
 	//b.data = new char[buffer_length];
 	b.data = (char*)malloc(sizeof(char)*buffer_length);
 	if (b.data == NULL) {
-	  int cnt=1000;
-	  for(int cnt=0; cnt<1000; cnt++) {
-	    sleep(1000);
-	    b.data = (char*)malloc(sizeof(char)*buffer_length);
-	    if (b.data != NULL) break;
-	  }
-
-	  if (b.data == NULL) {
-	    buffer_length /= 2;
-	    cout<<"Buffer size was decreaded in two times!\n";
-	    return CreateBuffer();
-	  }
-	  //cout<<"Memory Allocation Error!";
-	  //	throw -1;
+	  cout<<"\n\n\n!!!\n!!!\n!!! Memory Allocation Error!\n!!!\n!!!\n\n\n";
+	  throw -1;
 	}
 	b.it = b.data;
 	b.end = b.data + buffer_length;

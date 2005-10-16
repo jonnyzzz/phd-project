@@ -171,6 +171,9 @@
 				RelativePath=".\GraphUtil.cpp">
 			</File>
 			<File
+				RelativePath=".\LoopIterator.cpp">
+			</File>
+			<File
 				RelativePath=".\MemoryManager.cpp">
 			</File>
 			<File
@@ -231,6 +234,9 @@
 			</File>
 			<File
 				RelativePath=".\GraphUtil.h">
+			</File>
+			<File
+				RelativePath=".\LoopIterator.h">
 			</File>
 			<File
 				RelativePath=".\MemoryManager.h">
