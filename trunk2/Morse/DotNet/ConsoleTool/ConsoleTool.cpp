@@ -151,7 +151,7 @@ int main(int argc, char** argv) {
 		char input[2000];// = argv[3];
 		char output[2000];// = argv[4];
 
-		double minM = 2;
+		double minM = 3.75;
 		double maxM = 4;
 		double step = 0.005;
 

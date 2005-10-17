@@ -12,7 +12,8 @@ public:
 private:
 	struct NodeEx {
 		Node* node;
-		NodeEx* parent;		
+		NodeEx* parent;	
+		int number;
 	};
 
 	typedef list<NodeEx*> NodeExList;
@@ -28,12 +29,13 @@ private:
 	void SetFlag(Node* node, bool value);
 	void ResetFlags();
 
-	void DFSStep(Node* root, NodeExList& start, NodeExList& next, NodeLists& lists);
+	void DFSStep(NodeExList& start, NodeExList& next, NodeLists& lists);
 
 private:
 	Graph* graph;
 
 	const int flagID;
 	const int flagIDLoop;
+	const int maxSearchLength;
 
 };
