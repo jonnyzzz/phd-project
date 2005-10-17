@@ -54,7 +54,7 @@ void ParametrisedLogisticsMapFactory::Dump() {
 double inline ParametrisedLogisticsMapFactory::Abs(double d) {
 	return ( d > 0) ? d : -d;
 }
-
+/*
 void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph, FileOutputStream& fs) {
 	LoopIterator it(graph);
 
@@ -108,12 +108,188 @@ void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph,
 	fs.stress();
 	cout<<"Truly loop found: "<<loopsCnt<<" Wrong loops :"<<errorCnt<<endl;
 }
+*/
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+class UnstableFinder : private MemoryManager {
+
+public:
+	UnstableFinder(Graph* graph, FileOutputStream& fs);
 
 
 
+public:
+
+	struct NodeEx {
+		Node* node;
+		int deep;
+		NodeEx* parent;
+
+		NodeEx(Node* node, NodeEx* parent, int deep) : node(node), parent(parent), deep(deep) {};
+	};
+
+
+	typedef list<NodeEx*> NodeExList;
+	typedef list<Node*> NodeList;
+
+
+	void process();
+
+
+private:
+	const int visitedFlagID;
+	const int decidedFlagID;
+	const int maxDeep;
+	const double eps;
+
+	FileOutputStream& fs;
+
+	Graph* graph;
+
+
+	void DFS(NodeExList& start, NodeExList& stop);
+
+	void CheckLoop(NodeList& loop);
+	
+	double Image(Node* node);
+	double Value(Node* node);
+	double Derivate(Node* node);
+	bool IsClose(NodeEx* node1, Node* node2);
+	double Abs(double x);
+};
+
+
+void UnstableFinder::process() {
+	NodeExList list1;
+	NodeExList list2;
+
+	Node* to = GraphNodeEnumerator(graph).next();
+	NodeEx* node = ALLOCATE(NodeEx, (to, NULL, 0));
+
+	list1.push_front(node);
+
+	while (!list1.empty()) {
+		DFS(list1, list2);
+		DFS(list2, list1);
+	}
+}
 
 
 
+UnstableFinder::UnstableFinder(Graph* graph, FileOutputStream& fs) : 
+	MemoryManager((16 + graph->getNumberOfNodes())*sizeof(NodeEx)), 
+	graph(graph), 
+	visitedFlagID(graph->registerFlag()),
+	decidedFlagID(graph->registerFlag()),
+	maxDeep(graph->getNumberOfNodes()+1),
+	eps(graph->getEps()[0]*4),
+	fs(fs)
+{
+
+}
+
+double UnstableFinder::Abs(double x) {
+	return x>0? x: -x;
+}
+
+bool UnstableFinder::IsClose(NodeEx* nodeEx, Node* node) {
+	return  !(Abs(Image(nodeEx->node) - Value(node)) > eps);
+}
+
+double UnstableFinder::Value(Node* node) {
+	return graph->toExternal(graph->getCells(node)[0],0);
+}
+
+double UnstableFinder::Image(Node* node) {
+	return ParametrisedLogisticsMap::f(Value(node));
+}
+
+double UnstableFinder::Derivate(Node* node) {
+	return ParametrisedLogisticsMap::derivate(Value(node));
+}
+
+
+void UnstableFinder::DFS(NodeExList& start, NodeExList& stop) {
+	cout<<"DFS with "<<start.size()<<endl;
+	stop.clear();
+
+	for (NodeExList::iterator it = start.begin(); it != start.end(); it++) {
+		if ((*it)->deep < maxDeep && !graph->readFlag((*it)->node, decidedFlagID)) {
+			GraphEdgeEnumerator ee(graph, (*it)->node);
+			Node* to;
+			while ((to = ee.nextTo()) != NULL) {
+				bool nCont = true;
+				if (graph->readFlag(to, visitedFlagID)) {
+					NodeList list;
+					NodeEx* cur = *it;
+
+					while (cur != NULL) {
+						list.push_front(cur->node);
+						if (cur->node == to) {
+							CheckLoop(list);
+							break;
+							nCont = false;
+						}
+						cur = cur->parent;
+					}
+				}
+
+				if (nCont) {
+					graph->setFlag(to, visitedFlagID, true);
+					NodeEx* node = ALLOCATE(NodeEx, (to, *it, (*it)->deep+1));
+					stop.push_back(node);
+				}							
+			}
+		}
+	}
+}
+
+void UnstableFinder::CheckLoop(NodeList& loop) {
+	double dfs = 1;
+	bool isTruePeriod = true;
+	
+	NodeList::iterator first = loop.begin();
+	NodeList::iterator second = (loop.size() == 1) ? loop.begin() : ++loop.begin();
+
+	double px = graph->toExternal(graph->getCells(*first)[0], 0);
+
+	while (second != loop.end()) {
+		double x = graph->toExternal(graph->getCells(*second)[0], 0);
+		double fx = ParametrisedLogisticsMap::f(px);
+		double dfx = ParametrisedLogisticsMap::derivate(x);
+		px = x;
+
+		dfs *= dfx;
+
+		if (Abs(x - fx) >= eps) {
+			// cout<<"Computational Error period Found"<<endl;
+			isTruePeriod = false;
+			break;
+		}
+
+		first = second;
+		second++;
+	}
+
+	if (isTruePeriod && (Abs(dfs) > 1 - eps)) {
+		for (NodeList::iterator itt = loop.begin(); itt != loop.end(); itt++) {
+			fs<<ParametrisedLogisticsMap::mju<<graph->toExternal(graph->getCells(*itt)[0],0);
+			graph->setFlag(*itt, decidedFlagID, true);
+			fs.stress();
+		}			
+	}
+}
+
+
+
+void ParametrisedLogisticsMapFactory::SaveOnlyUnstable(double mju, Graph* graph, FileOutputStream& fs) {
+	ParametrisedLogisticsMap::mju = mju;
+	UnstableFinder fi(graph, fs);
+
+	fi.process();	
+}
 
 
 

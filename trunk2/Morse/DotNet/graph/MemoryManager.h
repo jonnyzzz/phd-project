@@ -65,6 +65,6 @@ public:
     void virtual Reset();
 };
 
-#define ALLOCATE(C, x)  (new (Allocate_void<sizeof(C)>()) C x)
+#define ALLOCATE(C, x)  (new (Allocate_void(sizeof(C))) C x)
 
 #endif //_MEMORY_MANAGER_H
