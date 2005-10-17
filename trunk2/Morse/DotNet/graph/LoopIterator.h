@@ -34,5 +34,6 @@ private:
 	Graph* graph;
 
 	const int flagID;
+	const int flagIDLoop;
 
 };

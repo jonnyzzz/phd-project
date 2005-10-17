@@ -3,7 +3,7 @@
 #include "../graph/GraphUtil.h"
 
 LoopIterator::LoopIterator(Graph* graph) : 
-	MemoryManager(sizeof(NodeEx)*(16 + graph->getNumberOfNodes()/3)), graph(graph), flagID(graph->registerFlag())
+	MemoryManager(sizeof(NodeEx)*(16 + graph->getNumberOfNodes()/3)), graph(graph), flagID(graph->registerFlag()), flagIDLoop(graph->registerFlag())
 {
 }
 
@@ -30,7 +30,7 @@ void LoopIterator::ResetFlags() {
 
 void LoopIterator::DFSStep(Node* root, NodeExList& start, NodeExList& next, NodeLists& lists) {	
 	next.clear();
-	cout<<"DFS with "<<start.size()<<endl;
+	//	cout<<"DFS with "<<start.size()<<endl;
 	for (NodeExList::iterator it = start.begin(); it != start.end(); it++) {
 		GraphEdgeEnumerator ee(graph, (*it)->node);
 		Node* to;
@@ -67,6 +67,7 @@ LoopIterator::NodeLists LoopIterator::process() {
 	GraphNodeEnumerator ne (graph);
 	Node* node;
 	while ((node = ne.next()) != NULL) {
+	  cout<<".";
 		exList1.clear();
 		exList2.clear();
 
@@ -77,9 +78,9 @@ LoopIterator::NodeLists LoopIterator::process() {
 		exList1.push_back(ex);
 
 		while (!exList1.empty()) {
-			cout<<".";
+		  //cout<<".";
 			DFSStep(node, exList1, exList2, lists);
-			cout<<".";
+			//cout<<".";
 			DFSStep(node, exList2, exList1, lists);
 		}
 		ResetFlags();
