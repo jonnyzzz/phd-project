@@ -22,6 +22,8 @@ void TestAndDump(SimpleGraphApi& api) {
 	LoopIterator it(api.getGraph());
 	LoopIterator::NodeLists lsts = it.process();
 
+	cout<<"Dump:\n";
+
 	int cnt = 1;
 	for (LoopIterator::NodeLists::iterator it = lsts.begin(); it != lsts.end(); it++) {
 		cout<<"Loop number "<<cnt++<<endl;

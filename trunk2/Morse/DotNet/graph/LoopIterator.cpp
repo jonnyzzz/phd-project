@@ -3,7 +3,7 @@
 #include "../graph/GraphUtil.h"
 
 LoopIterator::LoopIterator(Graph* graph) : 
-	MemoryManager(sizeof(NodeEx)*(16 + graph->getNumberOfNodes()/3)), 
+	ExtendedMemoryManager(sizeof(NodeEx)*(16 + graph->getNumberOfNodes()/3)), 
 	graph(graph), 
 	flagID(graph->registerFlag()), 
 	flagIDLoop(graph->registerFlag()), 
@@ -32,60 +32,89 @@ void LoopIterator::ResetFlags() {
 	}
 }
 
-void LoopIterator::DFSStep(NodeExList& start, NodeExList& next, NodeLists& lists) {
-	next.clear();
-	cout<<"DFS with "<<start.size()<<endl;
-	for (NodeExList::iterator it = start.begin(); it != start.end(); it++) {
-		GraphEdgeEnumerator ee(graph, (*it)->node);
-		Node* to;
-		while ((to = ee.nextTo()) != NULL) {
-			bool contFlag = true;
-
-			if (ReadFlag(to)) {
-				NodeList list;
-				//list.push_back(to);
-
-				NodeEx* tmp = *it;
-				while (tmp != NULL) {
-					list.push_front(tmp->node);
-					if(tmp->node == to) {
-						contFlag = false;
-						lists.push_back(list);
-						break;
-					}
-					tmp = tmp->parent;
-				}
-			}
-			if (contFlag && (*it)->number < maxSearchLength) {
-				SetFlag(to, true);
-				NodeEx* node = Allocate<NodeEx>();
-				node->node = to;
-				node->parent = *it;
-				node->number = (*it)->number + 1;
-				next.push_back(node);			
-			}
-		}
-	}
+bool LoopIterator::ReadVisitedFlag(Node* node) {
+	return graph->readFlag(node, flagIDLoop);
 }
+
+void LoopIterator::SetVisitedFlag(Node* node) {
+	graph->setFlag(node, flagIDLoop, true);
+}
+
 
 
 LoopIterator::NodeLists LoopIterator::process() {
+	Node* node = GraphNodeEnumerator(graph).next();
+	//SetFlag(node, true);
+	NodeEx* init = ALLOCATE_DISPOSABLE(NodeEx, (graph, node, NULL, 0) );
 
-	NodeExList exList1;
-	NodeExList exList2;
-	NodeLists lists;
+	NodeLists list;
 
-	NodeEx* ex = Allocate<NodeEx>();
-	ex->node = GraphNodeEnumerator(graph).next();
-	ex->parent = NULL;
-
-	exList1.push_back(ex);
-
-	while (!exList1.empty()) {
-		DFSStep(exList1, exList2, lists);
-		DFSStep(exList2, exList1, lists);
+	while (init != NULL) {
+		init = DeepSearch(init, list);
 	}
 
-	return lists;
+	return list;
+
 }
+
+
+LoopIterator::NodeEx* LoopIterator::FindNextPath(LoopIterator::NodeEx* node) {
+	if (node == NULL) return NULL;
+
+	if (node->deep >= maxSearchLength) {
+		SetFlag(node->node, false);
+		node = node->parent;
+	}
+
+	Node* ret = NULL;
+	NodeEx* prev = node;
+
+	while (ret == NULL && node != NULL) {
+		ret = node->ee.nextTo();
+		if (ret == NULL) {
+			SetFlag(node->node, false);
+		}
+		prev = node;
+		node = node->parent;		
+	}
+	
+	if (ret != NULL) {	
+		SetFlag(prev->node, true);
+		return ALLOCATE_DISPOSABLE(NodeEx, (graph, ret, prev, prev->deep + 1) );
+	} else {
+		return NULL;
+	}
+}
+
+
+
+LoopIterator::NodeEx* LoopIterator::DeepSearch(LoopIterator::NodeEx* startNode, LoopIterator::NodeLists& lists) {
+	Node* node = startNode->node;
+
+	//cout<<"Node: "<<graph->getCells(node)[0]<<" "<<((ReadFlag(node))? "TRUE":"FALSE")<< "  ";
+	//if (startNode->parent != NULL) {
+	//	cout<< graph->getCells(startNode->parent->node)[0]<<endl;
+	//} else {
+	//	cout<<endl;
+	//}
+
+	if (startNode->deep >= maxSearchLength) return FindNextPath(startNode);	
+	
+	if (ReadFlag(node)) {
+		NodeList list;
+		NodeEx* tmp = startNode->parent;
+		while (tmp != NULL) {
+			list.push_front(tmp->node);
+			if (tmp->node == node) break;
+			tmp = tmp->parent;
+		}
+		lists.push_back(list);
+		return FindNextPath(startNode->parent);
+	} else {
+		return FindNextPath(startNode);
+	}	
+}
+	
+
+
 

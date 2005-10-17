@@ -1,9 +1,10 @@
 #include "../graph/Graph.h"
-#include "../graph/MemoryManager.h"
+#include "../graph/GraphUtil.h"
+#include "../graph/ExtendedMenoryManager.h"
 #include <list>
 using namespace std;
 
-class LoopIterator : private MemoryManager
+class LoopIterator : private ExtendedMemoryManager
 {
 public:
 	LoopIterator(Graph* graph);
@@ -12,8 +13,12 @@ public:
 private:
 	struct NodeEx {
 		Node* node;
-		NodeEx* parent;	
-		int number;
+		NodeEx* parent;			
+		GraphEdgeEnumerator ee;
+		int deep;
+
+		NodeEx(Graph* graph, Node* node, NodeEx* parent, int deep) : node(node), parent(parent), deep(deep), ee(graph,node) {}
+		virtual ~NodeEx() {}
 	};
 
 	typedef list<NodeEx*> NodeExList;
@@ -27,9 +32,17 @@ public:
 private:
 	bool ReadFlag(Node* node);
 	void SetFlag(Node* node, bool value);
+	
 	void ResetFlags();
 
-	void DFSStep(NodeExList& start, NodeExList& next, NodeLists& lists);
+	bool ReadVisitedFlag(Node* node);
+	void SetVisitedFlag(Node* node);
+
+
+	NodeEx* FindNextPath(NodeEx* node);
+
+	/// Returns next Node to check
+	NodeEx* DeepSearch(NodeEx* startNode, NodeLists& list);
 
 private:
 	Graph* graph;

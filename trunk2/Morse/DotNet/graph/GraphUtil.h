@@ -1,3 +1,6 @@
+#ifndef _GRAPH_GRAPHUTIL_H
+#define _GRAPH_GRAPHUTIL_H
+
 #include "Graph.h"
 
 class Graph;
@@ -55,3 +58,5 @@ public:
         return ee;
     }
 };
+
+#endif //_GRAPH_GRAPHUTIL_H

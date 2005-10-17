@@ -30,4 +30,13 @@ public:
             disposeList.push_back(static_cast<DisposeHandler*>(data));
             return data;
         }
+
+		template<class C>
+			void* AllocateDisposableBlock() {
+				void* data = Allocate_void(sizeof(C));
+				disposeList.push_back(static_cast<DisposeHandler*>(data));
+				return data;
+			}
 };
+
+#define ALLOCATE_DISPOSABLE(C, x)  (new (AllocateDisposableBlock<C>()) C x)
