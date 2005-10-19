@@ -51,6 +51,7 @@ public:
 
 public:
 	void stress();
+	void flush();
 
 protected:
 	ofstream f;	

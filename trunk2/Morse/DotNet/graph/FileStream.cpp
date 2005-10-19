@@ -47,6 +47,10 @@ void FileOutputStream::stress() {
   f<<"\n";
 }
 
+void FileOutputStream::flush() {
+	f.flush();
+}
+
 ostream& FileOutputStream::raw() {
 	return f;
 }

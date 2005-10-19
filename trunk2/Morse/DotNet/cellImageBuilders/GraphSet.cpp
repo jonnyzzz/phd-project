@@ -67,6 +67,7 @@ void GraphSet::DeleteGraphs() {
 	for (GraphList::const_iterator it = graphList.begin(); it != graphList.end(); it++) {
 		delete *it;
 	}
+	graphList.clear();
 }
 
 void GraphSet::copyFrom(GraphComponents* cms) {

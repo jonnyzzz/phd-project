@@ -1,10 +1,10 @@
-#include "../SystemFunction/ISystemFunction.h"
+#include "../SystemFunction/ISystemFunctionDerivate.h"
 
 class Graph;
 
 
 class TorstenFunction :
-	public ISystemFunction
+	public ISystemFunctionDerivate
 {
 public:
 	TorstenFunction(void);
@@ -21,6 +21,8 @@ public:
 	virtual bool isNative() {return true;}
 	virtual bool hasFunction() {return true;}
 	virtual bool hasDerivative() {return false;}	
+
+	virtual int getFunctionDimension();
 
 private:
 	double* input;

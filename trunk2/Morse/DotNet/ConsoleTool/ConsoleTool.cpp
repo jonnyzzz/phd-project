@@ -25,6 +25,12 @@ using namespace std;
 #include "../cellImageBuilders/TarjanProcess.h"
 #include "../cellImageBuilders/StableLocalizationProcess.h"
 #include "../cellImageBuilders/SIPointBuilder.h"
+#include "../cellImageBuilders/MS2DBoxProcess.h"
+#include "../cellImageBuilders/MS2DCreationProcess.h"
+#include "../SystemFunction/MS2DAngleFunction.h"
+#include "../systemFunction/MS2DAngleMorseFunction.h"
+#include "../graph_simplex/RomFunction2N.h"
+
 #include "LogisticsMap.h"
 #include "ParametrisedLogisticsMap.h"
 #include <math.h>
@@ -83,6 +89,7 @@ void die() {
    cout<<"prog -iter 5 file out ; open file and do 5 iters"<<endl;
    cout<<"prog -export file out ; exports file to a list of points"<<endl;
    cout<<"prog -line 5 1 in out ; line iterations"<<endl;
+   cout<<"prog -iter_m 5 1 inSI inMS out ; line iterations"<<endl;
 }
 	
 
@@ -105,8 +112,6 @@ int main(int argc, char** argv) {
 		char* output = argv[4];
 
 		cout<<"Loading from "<<input<<endl<<"Saving results to "<<output<<endl<<endl;
-
-
 		GraphSet in = Util::LoadGraphSet(input);
 
 		for (int i=0; i<its; i++) {
@@ -123,9 +128,101 @@ int main(int argc, char** argv) {
 		Util::SaveGraphSet(in, output);
 
 		cout<<"Program Ended"<<endl<<endl;
+	} else if ( strcmp(argv[1], "-iter_m") == 0 ) {
+		int its = 0;
+		sscanf(argv[2],"%d", &its);
+					
+		char* inputSI = argv[3];
+		char* inputMS = argv[4];
+		char* output = argv[5];
+
+		cout<<"Loading from "<<inputMS<<" and "<<inputSI<<" as SI "<<endl<<"Saving results to "<<output<<endl<<endl;
+		GraphSet inSI = Util::LoadGraphSet(inputSI);
+		GraphSet inMS = Util::LoadGraphSet(inputMS);
+
+		TorstenFunction* func = new TorstenFunction();
+		MS2DAngleFunction* funcMS = new MS2DAngleFunction(func);
+		MS2DAngleMorseFunction* funcRom = new MS2DAngleMorseFunction(func);
+		ProgressBarInfo* pinfo = new ConsoleProgressBarInfo();
+
+		for (int i=0; i<its; i++) {
+			cout<<endl<<endl<<"Iteration "<<i+1<<" from "<<its<<endl<<endl;
+			
+			int factor[] = {1,1,2};
+			MS2DBoxProcess* ps = new MS2DBoxProcess(funcMS, inMS[0], inSI, factor, pinfo);
+			GraphSet res = AbstractProcess::Apply(ps, inMS);
+			TarjanProcess* ts = new TarjanProcess(true, pinfo);
+			GraphSet cms = AbstractProcess::Apply(ts, res);
+
+			res.DeleteGraphs();
+			inMS.DeleteGraphs();
+			inMS = cms;
+
+			char buff[2048];
+			sprintf(buff,"tmp/%s.temp.%d", output, i);			
+			Util::SaveGraphSet(inMS, buff);
+		}
+		if (its != 0)
+			Util::SaveGraphSet(inMS, output);
+
+		char buff[2048];
+
+		sprintf(buff, "%s.morse", output);
+		ofstream fo;
+		fo.open(buff);
+
+		cout<<"Computation of Morse Spectrum Started\n";
+
+		for (GraphSetIterator it = inMS.iterator(); it.HasNext(); it.Next()) {
+			CRomFunction2N rom(funcRom, inMS[0]);
+			rom.minimize();
+
+			double lower = rom.getAnswer();
+			int lowerL = rom.getAnswerLength();
+			fo<<rom.getAnswer()<<" "<<rom.getAnswerLength()<<endl;
+			fo.flush();
+
+			rom.maximize();
+
+			double upper = rom.getAnswer();
+			int upperL = rom.getAnswerLength();
+
+			fo<<rom.getAnswer()<<rom.getAnswerLength();
+			fo.flush();
+
+
+			fo<<"Estimated Morse Spectrum for Component of "<<it->getNumberOfNodes()<<":"<<it->getNumberOfArcs()<<" finished with result"<<endl;
+			fo<<"[ "<<scientific<<lower<<" ,   "<<scientific<<upper<<" ]"<<endl<<endl;
+			fo.flush();
+		}
+
+		fo.close();
+
+		delete func;
+		delete funcMS;
+		delete funcRom;
+		delete pinfo;
+		
+		cout<<"Program Ended"<<endl<<endl;
 	} else if (strcmp(argv[1], "-export") == 0) {
             cout<<"Loading from "<<argv[2]<<endl<<"Saving results to "<<argv[3]<<endl<<endl;
 			Util::ExportPoints(Util::LoadGraphSet(argv[2]), argv[3]);
+	}else if (strcmp(argv[1], "-init_m") == 0) {
+		char* input = argv[2];
+		char* output = argv[3];
+
+		GraphSet in = Util::LoadGraphSet(input);
+
+
+		int factor[] = {1,1,10};
+		ProgressBarInfo* pinfo = new ConsoleProgressBarInfo();
+
+		MS2DCreationProcess* ps = new MS2DCreationProcess(in[0], factor, pinfo);
+		GraphSet out = AbstractProcess::Apply(ps, in);
+
+		Util::SaveGraphSet(out, output);
+		delete pinfo;
+		delete ps;            
 	} else if (strcmp(argv[1], "-line") == 0) {		
 		int its = 0;
 		sscanf(argv[2],"%d", &its);
@@ -161,7 +258,7 @@ int main(int argc, char** argv) {
 		FileOutputStream points(output);
 		*/
 		
-		for (double d=minM; d<maxM; d+= step) {
+		for (double d=minM; d<=maxM; d+= step) {
 			//sprintf(input, "%s.%f", argv[3], d);
 			sprintf(input, "%s", argv[3]);
 			sprintf(output, "%s.%f", argv[4], d);
