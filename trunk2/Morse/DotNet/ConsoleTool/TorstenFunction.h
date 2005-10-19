@@ -28,9 +28,9 @@ private:
 	bool selfCreated;
 
 public:
-	static const double beta;
-	static const double d;
-	static const double m;
+	static double beta;
+	static double d;
+	static double m;
 };
 
 

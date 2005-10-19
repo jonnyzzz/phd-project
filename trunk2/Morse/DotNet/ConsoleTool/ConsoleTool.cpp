@@ -31,12 +31,12 @@ using namespace std;
 
 
 
-//#define FACTORY TorstenFactory
+#define FACTORY TorstenFactory
 //#define FACTORY LogisticsMapFactory
-#define FACTORY ParametrisedLogisticsMapFactory
-//#define SYSTEM  TorstenFunction
+//#define FACTORY ParametrisedLogisticsMapFactory
+#define SYSTEM  TorstenFunction
 //#define SYSTEM  LogisticsMap
-#define SYSTEM  ParametrisedLogisticsMap
+//#define SYSTEM  ParametrisedLogisticsMap
 
 
 GraphSet Process(GraphSet set) {
@@ -100,7 +100,6 @@ int main(int argc, char** argv) {
 	} else if ( strcmp(argv[1], "-iter") == 0 ) {
 		int its = 0;
 		sscanf(argv[2],"%d", &its);
-
 					
 		char* input = argv[3];
 		char* output = argv[4];
@@ -116,6 +115,7 @@ int main(int argc, char** argv) {
 			char buff[2048];
 			sprintf(buff,"%s.temp.%d", output, i);
 
+			
 			Util::SaveGraphSet(in, buff);
 
 		}
@@ -151,19 +151,22 @@ int main(int argc, char** argv) {
 		char input[2000];// = argv[3];
 		char output[2000];// = argv[4];
 
-		double minM = 3.75;
-		double maxM = 4;
-		double step = 0.005;
+		double minM = 3;
+		double maxM = 8;
+		double step = 0.5;
 
+		/*
 		sprintf(output, "%s.p", argv[4]);
 
 		FileOutputStream points(output);
-
+		*/
+		
 		for (double d=minM; d<maxM; d+= step) {
 			//sprintf(input, "%s.%f", argv[3], d);
 			sprintf(input, "%s", argv[3]);
 			sprintf(output, "%s.%f", argv[4], d);
-			ParametrisedLogisticsMap::mju = d;
+			//ParametrisedLogisticsMap::mju = d;
+			TorstenFunction::beta = d;
 
 			cout<<"Loading from "<<input<<endl<<"Saving results to "<<output<<endl<<endl;
 
@@ -172,20 +175,25 @@ int main(int argc, char** argv) {
 			for (int i=0; i<its; i++) {
 				cout<<endl<<endl<<"Iteration "<<i+1<<" from "<<its<<endl<<endl;
 				in = Process(in);
-				//char buff[2048];
-				//sprintf(buff,"%s.temp.%d", output, i);
-				//Util::SaveGraphSet(in, buff);
+				char buff[2048];
+				sprintf(buff,"tmp/%s.temp.%d", output, i);
+				Util::SaveGraphSet(in, buff);
 				
 			}
 
 			cout<<"\nIteration finished. ["<<d<<"]\n";
 
-			//Util::SaveGraphSet(in, output);
+		        Util::SaveGraphSet(in, output);
 
+			/*
 			for (GraphSetIterator it = in.iterator(); it.HasNext(); it.Next()) {
 				ParametrisedLogisticsMapFactory::SaveOnlyUnstable(d, it.Current(), points);
 			}
+			*/
 
+			cout<<"Exporting points list to: points/"<<output<<endl;
+			Util::ExportPoints(in, output, "points/");
+			
 			in.DeleteGraphs();
 
 			cout<<"Iteration passed for fixed mju = "<<d<<endl;

@@ -165,14 +165,29 @@ void UnstableFinder::process() {
 	NodeExList list1;
 	NodeExList list2;
 
-	Node* to = GraphNodeEnumerator(graph).next();
-	NodeEx* node = ALLOCATE(NodeEx, (to, NULL, 0));
+	//	typedef list<NodeExLost> TasksList;
+	//TasksList tmp;
 
-	list1.push_front(node);
+	GraphNodeEnumerator ne(graph);
+	Node* to;
+	while ((to = ne.next())!=NULL){
+	    list1.clear();
+	    list2.clear();
+ 	    graph->setFlag(to, visitedFlagID, true);
+	    NodeEx* node = ALLOCATE(NodeEx, (to, NULL, 0));
 
-	while (!list1.empty()) {
-		DFS(list1, list2);
-		DFS(list2, list1);
+	    list1.push_front(node);
+
+	    while (!list1.empty()) {
+		   DFS(list1, list2);
+		   DFS(list2, list1);
+
+		   if (list1.size() > graph->getNumberOfNodes()){
+		     //tmp.push_back(list1)
+			 cout<<"?";
+		       break;
+		   }
+ 	    }
 	}
 }
 
@@ -229,8 +244,8 @@ void UnstableFinder::DFS(NodeExList& start, NodeExList& stop) {
 						list.push_front(cur->node);
 						if (cur->node == to) {
 							CheckLoop(list);
-							break;
 							nCont = false;
+							break;
 						}
 						cur = cur->parent;
 					}
@@ -247,6 +262,7 @@ void UnstableFinder::DFS(NodeExList& start, NodeExList& stop) {
 }
 
 void UnstableFinder::CheckLoop(NodeList& loop) {
+        cout<<"!";
 	double dfs = 1;
 	bool isTruePeriod = true;
 	

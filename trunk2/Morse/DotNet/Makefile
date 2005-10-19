@@ -99,7 +99,7 @@ CPPFLAGS += -O2
 LDFLAGS +=  -lstdc++ -lm -O2
 
 all:  $(OBJECTS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/si6.25
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/sinew
 	@echo Make is complete.
 clean:
 	rm -f $(OBJECTS)

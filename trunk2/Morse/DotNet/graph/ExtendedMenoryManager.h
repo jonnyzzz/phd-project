@@ -40,3 +40,6 @@ public:
 };
 
 #define ALLOCATE_DISPOSABLE(C, x)  (new (AllocateDisposableBlock<C>()) C x)
+
+
+

@@ -3,11 +3,11 @@
 #include "../graph/Graph.h"
 #include <math.h>
 
-#define TORSTEN_NOEXP
+#define TORSTEN_EXP
 
-const double TorstenFunction::beta = 6.25;
-const double TorstenFunction::d = 0.5;
-const double TorstenFunction::m = 3.5;
+double TorstenFunction::beta = 6.25;
+double TorstenFunction::d = 0.5;
+double TorstenFunction::m = 3.5;
 const int TorstenFactory::Dim = 2;
 
 TorstenFunction::TorstenFunction(void) : ISystemFunction(2,1)
