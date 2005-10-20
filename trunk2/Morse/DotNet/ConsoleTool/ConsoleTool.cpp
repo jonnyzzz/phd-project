@@ -116,6 +116,7 @@ int main(int argc, char** argv) {
 
 		TorstenFunction::beta = 3;
 		TorstenFunctionDerivate::beta = 3;
+		TorstenFactory::Dump();
 
 		cout<<"Loading from "<<endl<<"Saving results to "<<output<<endl<<endl;
 
@@ -158,6 +159,7 @@ int main(int argc, char** argv) {
 		cout<<endl<<"Performing MS Stage"<<endl;
 
 		for (int i=0; i<itsMS; i++) {
+		  cout<<endl<<"MS iteration step "<<i+1<<" from "<<itsMS<<" Components : "<<set.Length()<<endl;
 			int factor[] = {1,1,2};
 
 			MS2DSIBoxProcess* ps = new MS2DSIBoxProcess(afunc, set[0], factor, info);
@@ -172,6 +174,7 @@ int main(int argc, char** argv) {
 		}
 
 		cout<<"Computation of Morse Spectrum Started\n";
+		cout<<"We have "<<set.Length()<<" strong components"<<endl;
 
 		char buff[2048];
 		sprintf(buff, "%s.morse", output);
