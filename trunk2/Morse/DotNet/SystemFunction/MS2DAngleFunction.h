@@ -18,13 +18,16 @@ public:
 
     virtual void evaluate();
 
-    void evaluateFunction();
-    double evaluateAngle();
+	void evaluateFunction();
+    double evaluateAngle();	
 
 public:
     virtual bool isNative() { return false;}
     virtual bool hasFunction() { return true;}
     virtual bool hasDerivative() { return false;}
+
+public:
+	ISystemFunctionDerivate* GetInternalFunction();
 
 private:
     ISystemFunctionDerivate* function;

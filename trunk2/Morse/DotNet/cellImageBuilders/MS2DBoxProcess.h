@@ -1,5 +1,3 @@
-
-
 #include "AbstractProcessExt.h"
 #include "../SystemFunction/MS2DAngleFunction.h" 
 #include <list>
@@ -12,7 +10,6 @@ class MS2DBoxProcess :
     public AbstractProcessExt
 {
 public:
-
     //factor is int[3] here. But factor[0] == factor[1] == 1 is asserted
     MS2DBoxProcess(MS2DAngleFunction* function, Graph* original, GraphSet si, int* factor, ProgressBarInfo* info);
     virtual ~MS2DBoxProcess(void);

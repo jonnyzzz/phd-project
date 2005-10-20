@@ -78,3 +78,8 @@ double MS2DAngleFunction::evaluateAngle() {
         }
     }    
 }
+
+
+ISystemFunctionDerivate* MS2DAngleFunction::GetInternalFunction() {
+	return this->function;
+}

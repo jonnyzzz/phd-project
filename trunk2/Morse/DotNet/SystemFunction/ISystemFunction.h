@@ -9,6 +9,7 @@ public:
 
 public:
     virtual int getDimension();
+	virtual int getFunctionDimension();
     virtual int getIteration();
 
     virtual double* getInput() = 0;

@@ -1,3 +1,5 @@
+#ifndef _CELLIMAGEBUILDERS_ABSTRACTBOXPROCESS_H
+#define _CELLIMAGEBUILDERS_ABSTRACTBOXPROCESS_H
 
 #include "AbstractProcessExt.h"
 #include "../SystemFunction/ISystemFunction.h"
@@ -21,7 +23,6 @@ protected:
 protected:
 	Graph* createGraph();
 
-
 	void multiplyNode(Node* original, Graph* graph);
 	void processNode(Node* node, Graph* graph_result);
 
@@ -30,6 +31,7 @@ protected:
 protected:
 	const int dimension;
 	const int dimension2;
+	const int graphDimension;
 
 	ISystemFunction* function;
 	JDouble* input;
@@ -46,6 +48,9 @@ protected:
 	void setApproximationCenter();
 	void evaluate();
 
+protected:
+	const double* getCurrentCenterValue();
+	const double* getCurrentCenterPoint();
 
 
 private:
@@ -62,3 +67,6 @@ private:
 
 	int* factor;
 };
+
+#endif //_CELLIMAGEBUILDERS_ABSTRACTBOXPROCESS_H
+

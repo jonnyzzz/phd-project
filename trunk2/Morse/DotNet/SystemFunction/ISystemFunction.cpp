@@ -23,6 +23,10 @@ int ISystemFunction::getDimension() {
     return dimension;
 }
 
+int ISystemFunction::getFunctionDimension() {
+	return getDimension();
+}
+
 int ISystemFunction::getIteration() {
     return iterations;
 }

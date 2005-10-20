@@ -17,6 +17,7 @@
 #include "ms2dMorseTest.h"
 #include "AdaptiveBoxTest.h"
 #include "MemoryManagerTest.h"
+#include "ms2dsiMorseTest.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -64,9 +65,12 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	*/
 
 
+	/*
 	GraphTest test;
 	test.test();
+	*/
 
+	MS2DSIMorseTest().Test();
 
 
 }

@@ -11,29 +11,32 @@ static char THIS_FILE[] = __FILE__;
 
 AbstractBoxProcess::AbstractBoxProcess(Graph* graph, ISystemFunction* function, int* factor, ProgressBarInfo* pinfo) : 
 	AbstractProcessExt(graph, pinfo), function(function), hasDerivate(function->hasDerivative()), 
-	dimension(graph_source->getDimention()),
-	dimension2(graph_source->getDimention()*graph_source->getDimention() + graph_source->getDimention())
+	dimension(function->getFunctionDimension()),
+	dimension2(function->getFunctionDimension()*function->getFunctionDimension() + function->getFunctionDimension()),
+	graphDimension(graph->getDimention())
 {
 	this->input = function->getInput();
 	this->output = function->getOutput();
 
 	ASSERT(graph_source != NULL);
-		
+	ASSERT(dimension <= graphDimension);
 
+	cout<<"Abstract box process with function dimension "<<dimension<<" and graph dimension "<<graphDimension<<endl;
+		
 	this->v0 = new JDouble[dimension2];
 	this->vx0 = new JDouble[dimension];
 
 	this->x0 = new JDouble[dimension+1];
-	this->b = new JInt[dimension+1];
-	this->value_min = new JDouble[dimension];
-	this->value_max = new JDouble[dimension];
-	this->a = new JInt[dimension+1];
-	this->point = new JInt[dimension+1];
-	this->pointT = new JInt[dimension+1];
-	this->eps2 = new JDouble[dimension];
-	this->eps = new JDouble[dimension];
-	this->factor = new int[dimension];
-	memcpy(this->factor, factor, sizeof(int)*dimension);
+	this->b = new JInt[graphDimension+1];
+	this->value_min = new JDouble[graphDimension];
+	this->value_max = new JDouble[graphDimension];
+	this->a = new JInt[graphDimension+1];
+	this->point = new JInt[graphDimension+1];
+	this->pointT = new JInt[graphDimension+1];
+	this->eps2 = new JDouble[graphDimension];
+	this->eps = new JDouble[graphDimension];
+	this->factor = new int[graphDimension];
+	memcpy(this->factor, factor, sizeof(int)*graphDimension);
 }
 
 AbstractBoxProcess::~AbstractBoxProcess(void)
@@ -59,7 +62,7 @@ void AbstractBoxProcess::start() {
 	submitGraphResult(createGraph());
 
 
-	for (int i=0; i<dimension; i++) {
+	for (int i=0; i<graphDimension; i++) {
 		eps[i] = graph_result->getEps()[i];
 		eps2[i] = eps[i]/2;
 	}
@@ -91,14 +94,14 @@ Graph* AbstractBoxProcess::createGraph() {
 }
 
 void AbstractBoxProcess::multiplyNode(Node* node, Graph* graph) {
-	for (int i=0; i<dimension; i++) {
+	for (int i=0; i<graphDimension; i++) {
 		point[i] = graph->getCells(node)[i]*factor[i];
 		a[i] = 0;
 	}
-	a[dimension] = 0;
+	a[graphDimension] = 0;
 
-	while (a[dimension] == 0 ) {
-		for (int i=0; i<dimension; i++) {
+	while (a[graphDimension] == 0 ) {
+		for (int i=0; i<graphDimension; i++) {
 			pointT[i] = point[i] + a[i];
 		}
 
@@ -109,11 +112,11 @@ void AbstractBoxProcess::multiplyNode(Node* node, Graph* graph) {
 
 		a[0]++;
 
-		for (int i=0; i<dimension; i++) {
+		for (int i=0; i<graphDimension; i++) {
 			if (a[i] >= factor[i]) {
 				a[i] = 0;
 				a[i+1]++;
-			}
+			} else break;
 		}
 	}
 }
@@ -177,6 +180,14 @@ void AbstractBoxProcess::setApproximationCenter() {
 		memcpy(vx0, input, sizeof(JDouble)*dimension);
 		memcpy(v0, output, sizeof(JDouble)*dimension2);
 	}
+}
+
+const double* AbstractBoxProcess::getCurrentCenterPoint() {
+	return vx0;
+}
+
+const double* AbstractBoxProcess::getCurrentCenterValue() {
+	return v0;
 }
 
 

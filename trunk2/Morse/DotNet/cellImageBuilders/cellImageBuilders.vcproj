@@ -177,6 +177,9 @@
 				RelativePath=".\MS2DCreationProcess.h">
 			</File>
 			<File
+				RelativePath=".\MS2DSIBoxProcess.h">
+			</File>
+			<File
 				RelativePath=".\MSCreationProcess.h">
 			</File>
 			<File
@@ -260,6 +263,9 @@
 			</File>
 			<File
 				RelativePath=".\MS2DCreationProcess.cpp">
+			</File>
+			<File
+				RelativePath=".\MS2DSIBoxProcess.cpp">
 			</File>
 			<File
 				RelativePath=".\MSCreationProcess.cpp">
