@@ -28,7 +28,7 @@ using namespace std;
 #include "../cellImageBuilders/MS2DBoxProcess.h"
 #include "../cellImageBuilders/MS2DCreationProcess.h"
 #include "../SystemFunction/MS2DAngleFunction.h"
-#include "../systemFunction/MS2DAngleMorseFunction.h"
+#include "../SystemFunction/MS2DAngleMorseFunction.h"
 #include "../graph_simplex/RomFunction2N.h"
 
 #include "LogisticsMap.h"
@@ -138,8 +138,10 @@ int main(int argc, char** argv) {
 
 		cout<<"Loading from "<<inputMS<<" and "<<inputSI<<" as SI "<<endl<<"Saving results to "<<output<<endl<<endl;
 		GraphSet inSI = Util::LoadGraphSet(inputSI);
-		GraphSet inMS = Util::LoadGraphSet(inputMS);
+		GraphSet inMS = Util::LoadGraphSet(inputMS, false);
 
+		TorstenFunction::beta = 3;
+		
 		TorstenFunction* func = new TorstenFunction();
 		MS2DAngleFunction* funcMS = new MS2DAngleFunction(func);
 		MS2DAngleMorseFunction* funcRom = new MS2DAngleMorseFunction(func);
@@ -214,12 +216,16 @@ int main(int argc, char** argv) {
 		GraphSet in = Util::LoadGraphSet(input);
 
 
-		int factor[] = {1,1,10};
+		int factor[] = {1,1,2};
 		ProgressBarInfo* pinfo = new ConsoleProgressBarInfo();
 
+		cout<<"Applying process of Creation MS"<<endl;
+		
 		MS2DCreationProcess* ps = new MS2DCreationProcess(in[0], factor, pinfo);
 		GraphSet out = AbstractProcess::Apply(ps, in);
 
+		cout<<"Done"<<endl<<"Saving..."<<endl;
+		
 		Util::SaveGraphSet(out, output);
 		delete pinfo;
 		delete ps;            
@@ -249,7 +255,7 @@ int main(int argc, char** argv) {
 		char output[2000];// = argv[4];
 
 		double minM = 3;
-		double maxM = 8;
+		double maxM = 10;
 		double step = 0.5;
 
 		/*

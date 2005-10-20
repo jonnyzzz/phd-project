@@ -195,7 +195,7 @@ private:
 	void setLoop(Node* node);
 
 public:
-	static Graph*	createGraph(FileInputStream& o);
+	static Graph*	createGraph(FileInputStream& o, bool loadEdges = true);
 	static void	saveGraph(FileOutputStream& o, Graph* graph);
 	static void	saveGraphAsPoints(FileOutputStream& o, Graph* graph);		
 };

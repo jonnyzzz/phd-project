@@ -880,7 +880,7 @@ bool Graph::equals(Graph* graph) const {
 const char GRAPH_OPEN_TAG[] = "<Graph>";
 const char GRAPH_CLOSE_TAG[]= "</Graph>";
 
-Graph*	Graph::createGraph(FileInputStream& o) {
+Graph*	Graph::createGraph(FileInputStream& o, bool loadEdges) {
 	char buff[1024];
 	o>>buff;
 	ASSERT(strcmp(buff, GRAPH_OPEN_TAG) == 0);
@@ -921,7 +921,8 @@ Graph*	Graph::createGraph(FileInputStream& o) {
 			for (int j=0; j<dimention; j++) {
 				o>>grid[j];
 			}
-			graph->addEdge(node, graph->browseTo(grid));
+			if (loadEdges)
+			  graph->addEdge(node, graph->browseTo(grid));
 		}
 	}
 

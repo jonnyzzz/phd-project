@@ -53,8 +53,8 @@ void TorstenFunction::evaluate() {
 #ifdef TORSTEN_DERIVATE
 	f1x = 1-exp(x)/(1+exp(x));
 	f1y = -exp(y);
-	f2x = m*exp(x)*(1-exp(-exp(y)))/(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y))
-    f2y = m*exp(x)*exp(y)*exp(-exp(y))+(1-d)*exp(y))/(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
+	f2x = m*exp(x)*(1-exp(-exp(y)))/(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
+        f2y = (m*exp(x)*exp(y)*exp(-exp(y))+(1-d)*exp(y))/(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
 #endif
 #endif
 #ifdef TORSTEN_EXP
@@ -63,8 +63,8 @@ void TorstenFunction::evaluate() {
 #ifdef TORSTEN_DERIVATE
 	f1x = 1-exp(x)*exp(-exp(y))/(1+exp(x)*exp(-exp(y)));
 	f1y = -exp(y)+exp(x)*exp(y)*exp(-exp(y))/(1+exp(x)*exp(-exp(y)));
-	f2x = m*exp(x)*(1-exp(-exp(y)))/(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y))
-    f2y = m*exp(x)*exp(y)*exp(-exp(y))+(1-d)*exp(y))/(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
+	f2x = m*exp(x)*(1-exp(-exp(y)))/(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
+        f2y = (m*exp(x)*exp(y)*exp(-exp(y))+(1-d)*exp(y))/(m*exp(x)*(1-exp(-exp(y)))+(1-d)*exp(y));
 #endif
 #endif
 }

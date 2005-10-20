@@ -74,7 +74,7 @@ void Util::ExportPoints(GraphSet set, const char* file, const char* path) {
 	wp.close();
 }
 
-GraphSet Util::LoadGraphSet(char* file) {
+GraphSet Util::LoadGraphSet(char* file, bool loadEdges) {
 	char buff[2048];
 	GraphSet mySet;
 
@@ -89,7 +89,7 @@ GraphSet Util::LoadGraphSet(char* file) {
 		sprintf(buff, FILE_MASK, file, i);
 		cout<<"Loading file "<<buff<<endl;
 		FileInputStream fs(buff);
-		mySet.AddGraph( Graph::createGraph( fs ));
+		mySet.AddGraph( Graph::createGraph( fs, loadEdges));
 	}
 
 	return mySet;
