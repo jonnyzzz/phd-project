@@ -130,8 +130,8 @@ int main(int argc, char** argv) {
 		
 		char* output = argv[5];
 
-		TorstenFunction::beta = 3;
-		TorstenFunctionDerivate::beta = 3;
+		TorstenFunction::beta = 7;
+		TorstenFunctionDerivate::beta = 7;
 
 		TorstenFactory::Dump();
 
