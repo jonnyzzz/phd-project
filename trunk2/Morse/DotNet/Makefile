@@ -20,7 +20,8 @@ SRC_CELLIMAGEBUILDER = AbstractBoxProcess.cpp \
                 SegmentProjectiveBundleMSCreationProcess.cpp\
                 SimpleBoxProcess.cpp                         \
                 TarjanProcess.cpp                            \
-                StableLocalizationProcess.cpp
+                StableLocalizationProcess.cpp  \
+                MS2DSIBoxProcess.cpp
 DIR_CELLIMAGEBUILDER = cellImageBuilders/
 
 SRC_GRAPH = CoordinateSystem.cpp           \
@@ -99,7 +100,7 @@ CPPFLAGS += -O2
 LDFLAGS +=  -lstdc++ -lm -O2
 
 all:  $(OBJECTS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/msnew
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/mssi
 	@echo Make is complete.
 clean:
 	rm -f $(OBJECTS)
