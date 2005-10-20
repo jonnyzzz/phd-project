@@ -19,7 +19,7 @@ public:
 
 public:
 	virtual int Length() { return 1000; }
-	virtual void Next() { cout<<"."; }
+	virtual void Next() { cout<<"."; cout.flush(); }
 	virtual bool NeedStop() { return false; }
 
 private:

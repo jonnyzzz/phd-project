@@ -4,7 +4,7 @@ class Graph;
 
 
 class TorstenFunction :
-	public ISystemFunctionDerivate
+	public ISystemFunction
 {
 public:
 	TorstenFunction(void);
@@ -34,6 +34,37 @@ public:
 	static double d;
 	static double m;
 };
+
+class TorstenFunctionDerivate : public ISystemFunctionDerivate {
+public:
+	TorstenFunctionDerivate();
+	TorstenFunctionDerivate(double* input, double* output);
+	virtual ~TorstenFunctionDerivate();
+public:
+	virtual double* getInput() { return input;}
+	virtual double* getOutput() {return output;} //f1, f2, ...
+
+    virtual void evaluate();
+
+public:
+	virtual bool isNative() {return true;}
+	virtual bool hasFunction() {return true;}
+	virtual bool hasDerivative() {return false;}	
+
+	virtual int getFunctionDimension();
+
+private:
+	double* input;
+	double* output;
+	bool selfCreated;
+public:
+	static double beta;
+	static double d;
+	static double m;
+
+};
+
+
 
 
 class TorstenFactory {

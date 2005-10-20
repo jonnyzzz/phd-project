@@ -43,6 +43,7 @@ private:
 
 public: 
 	void DeleteGraphs();
+	void Clear();
 };
 
 

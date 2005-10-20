@@ -70,6 +70,10 @@ void GraphSet::DeleteGraphs() {
 	graphList.clear();
 }
 
+void GraphSet::Clear() {
+	graphList.clear();
+}
+
 void GraphSet::copyFrom(GraphComponents* cms) {
 	for (int i=0; i<cms->length(); i++) {
 		graphList.push_back(cms->getAt(i));

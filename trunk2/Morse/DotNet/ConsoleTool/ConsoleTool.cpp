@@ -30,6 +30,7 @@ using namespace std;
 #include "../SystemFunction/MS2DAngleFunction.h"
 #include "../SystemFunction/MS2DAngleMorseFunction.h"
 #include "../graph_simplex/RomFunction2N.h"
+#include "../cellImageBuilders/MS2DSIBoxProcess.h"
 
 #include "LogisticsMap.h"
 #include "ParametrisedLogisticsMap.h"
@@ -90,6 +91,7 @@ void die() {
    cout<<"prog -export file out ; exports file to a list of points"<<endl;
    cout<<"prog -line 5 1 in out ; line iterations"<<endl;
    cout<<"prog -iter_m 5 1 inSI inMS out ; line iterations"<<endl;
+   cout<<"prog -iter_all 5 5 text_out; iterate 5 steps in SI, 5 steps in MS, Morse to out"<<endl;
 }
 	
 
@@ -104,6 +106,105 @@ int main(int argc, char** argv) {
 	if ( strcmp(argv[1], "-init") == 0 ) {
 		GraphSet set(FACTORY::CreateGraph());
 		Util::SaveGraphSet(set, argv[2]);
+	}else if ( strcmp(argv[1], "-iter_all") == 0 ) {
+		int itsSI = 0;
+		int itsMS = 0;
+		sscanf(argv[2],"%d", &itsSI);
+		sscanf(argv[3],"%d", &itsMS);						
+		
+		char* output = argv[4];
+
+		TorstenFunction::beta = 3;
+		TorstenFunctionDerivate::beta = 3;
+
+		cout<<"Loading from "<<endl<<"Saving results to "<<output<<endl<<endl;
+
+		GraphSet set(TorstenFactory::CreateGraph());
+
+		ConsoleProgressBarInfo* info = new ConsoleProgressBarInfo();
+		TorstenFunction* func = new TorstenFunction();
+		TorstenFunctionDerivate* dfunc = new TorstenFunctionDerivate();
+		MS2DAngleFunction* afunc = new MS2DAngleFunction(dfunc);
+		MS2DAngleMorseFunction* mfunc = new MS2DAngleMorseFunction(dfunc);
+
+		for (int i=0; i<itsSI; i++) {
+			cout<<endl<<endl<<"Iteration SI"<<i+1<<" from "<<itsSI<<endl<<endl;
+			
+			int factor[] = {2,2};
+			AbstractProcess* ps = new SimpleBoxProcess(set[0], func, factor, info);
+			TarjanProcess* ts = new TarjanProcess(false, info);
+
+			GraphSet it = AbstractProcess::Apply(ps, set);
+			GraphSet res = AbstractProcess::Apply(ts, it);
+
+			delete ps;
+			delete ts;
+			set.DeleteGraphs();
+			it. DeleteGraphs();
+
+			set = res;
+		}
+
+		cout<<endl<<"SI State Finished"<<endl<<"Extending graph..."<<endl<<endl;
+
+		{
+			int factor[] = {1,1,1};
+			MS2DCreationProcess* ps = new MS2DCreationProcess(set[0], factor, info);
+			GraphSet res = AbstractProcess::Apply(ps, set);
+			set.DeleteGraphs();
+			set = res;
+		}
+
+		cout<<endl<<"Performing MS Stage"<<endl;
+
+		for (int i=0; i<itsMS; i++) {
+			int factor[] = {1,1,2};
+
+			MS2DSIBoxProcess* ps = new MS2DSIBoxProcess(afunc, set[0], factor, info);
+			GraphSet tmp = AbstractProcess::Apply(ps, set);
+			set.DeleteGraphs();
+			set = tmp;
+
+			TarjanProcess* ts = new TarjanProcess(i==(itsMS-1), info);
+			tmp = AbstractProcess::Apply(ts, set);
+			set.DeleteGraphs();
+			set = tmp;
+		}
+
+		cout<<"Computation of Morse Spectrum Started\n";
+
+		char buff[2048];
+		sprintf(buff, "%s.morse", output);
+		ofstream fo;
+		fo.open(buff);
+
+		for (GraphSetIterator it = set.iterator(); it.HasNext(); it.Next()) {
+			CRomFunction2N rom(mfunc, it);
+			rom.minimize();
+
+			double lower = rom.getAnswer();
+			int lowerL = rom.getAnswerLength();
+			fo<<rom.getAnswer()<<" "<<rom.getAnswerLength()<<endl;
+			fo.flush();
+
+			rom.maximize();
+
+			double upper = rom.getAnswer();
+			int upperL = rom.getAnswerLength();
+
+			fo<<rom.getAnswer()<<rom.getAnswerLength();
+			fo.flush();
+
+
+			fo<<"Estimated Morse Spectrum for Component of "<<it->getNumberOfNodes()<<":"<<it->getNumberOfArcs()<<" finished with result"<<endl;
+			fo<<"[ "<<scientific<<lower<<" ,   "<<scientific<<upper<<" ]"<<endl<<endl;
+			fo.flush();
+		}
+
+		fo.close();
+
+
+		cout<<"Program Ended"<<endl<<endl;
 	} else if ( strcmp(argv[1], "-iter") == 0 ) {
 		int its = 0;
 		sscanf(argv[2],"%d", &its);
@@ -141,8 +242,9 @@ int main(int argc, char** argv) {
 		GraphSet inMS = Util::LoadGraphSet(inputMS, false);
 
 		TorstenFunction::beta = 3;
+		TorstenFunctionDerivate::beta = 3;
 		
-		TorstenFunction* func = new TorstenFunction();
+		TorstenFunctionDerivate* func = new TorstenFunctionDerivate();
 		MS2DAngleFunction* funcMS = new MS2DAngleFunction(func);
 		MS2DAngleMorseFunction* funcRom = new MS2DAngleMorseFunction(func);
 		ProgressBarInfo* pinfo = new ConsoleProgressBarInfo();
