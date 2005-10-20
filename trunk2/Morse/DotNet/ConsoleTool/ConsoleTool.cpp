@@ -96,6 +96,20 @@ void die() {
 	
 
 
+void ProcessMS(GraphSet& set, MS2DAngleFunction* afunc, bool needEdge, int* factor, ProgressBarInfo* info) {
+	MS2DSIBoxProcess* ps = new MS2DSIBoxProcess(afunc, set[0], factor, info);
+	GraphSet tmp = AbstractProcess::Apply(ps, set);
+	set.DeleteGraphs();
+	set = tmp;
+
+	TarjanProcess* ts = new TarjanProcess(needEdge, info);
+	tmp = AbstractProcess::Apply(ts, set);
+	set.DeleteGraphs();
+	set = tmp;
+}
+
+
+
 int main(int argc, char** argv) {
 	
 	FACTORY::Dump();
@@ -108,14 +122,17 @@ int main(int argc, char** argv) {
 		Util::SaveGraphSet(set, argv[2]);
 	}else if ( strcmp(argv[1], "-iter_all") == 0 ) {
 		int itsSI = 0;
-		int itsMS = 0;
+		int itsMSOnly = 0;
+		int itsMSSym = 0;
 		sscanf(argv[2],"%d", &itsSI);
-		sscanf(argv[3],"%d", &itsMS);						
+		sscanf(argv[3],"%d", &itsMSOnly);
+		sscanf(argv[4],"%d", &itsMSSym);
 		
-		char* output = argv[4];
+		char* output = argv[5];
 
 		TorstenFunction::beta = 3;
 		TorstenFunctionDerivate::beta = 3;
+
 		TorstenFactory::Dump();
 
 		cout<<"Loading from "<<endl<<"Saving results to "<<output<<endl<<endl;
@@ -156,22 +173,33 @@ int main(int argc, char** argv) {
 			set = res;
 		}
 
-		cout<<endl<<"Performing MS Stage"<<endl;
+		cout<<endl<<"Performing MS Stage Sym"<<endl;
 
-		for (int i=0; i<itsMS; i++) {
-		  cout<<endl<<"MS iteration step "<<i+1<<" from "<<itsMS<<" Components : "<<set.Length()<<endl;
-			int factor[] = {1,1,2};
+		for (int i=0; i<itsMSSym; i++) {
+		    cout<<endl<<"MS Sym iteration step "<<i+1<<" from "<<itsMSSym<<" Components : "<<set.Length()<<endl;
+			{
+				int factor[] = {1,1,2};			
+				ProcessMS(set, afunc, false, factor, info);
+			}
 
-			MS2DSIBoxProcess* ps = new MS2DSIBoxProcess(afunc, set[0], factor, info);
-			GraphSet tmp = AbstractProcess::Apply(ps, set);
-			set.DeleteGraphs();
-			set = tmp;
-
-			TarjanProcess* ts = new TarjanProcess(i==(itsMS-1), info);
-			tmp = AbstractProcess::Apply(ts, set);
-			set.DeleteGraphs();
-			set = tmp;
+			{
+				int factor[] = {1,2,1};			
+				ProcessMS(set, afunc, false, factor, info);
+			}
+			{
+				int factor[] = {2,1,1};			
+				ProcessMS(set, afunc, (i+1 == itsMSSym) && (itsMSOnly == 0) , factor, info);
+			}			
 		}
+
+		cout<<endl<<"Performing MS Stage Only"<<endl;
+
+		for (int i=0; i<itsMSOnly; i++) {
+			cout<<endl<<"MS Only iteration step "<<i+1<<" from "<<itsMSOnly<<" Components : "<<set.Length()<<endl;
+			int factor[] = {1,1,2};
+			ProcessMS(set, afunc, (i+1 == itsMSOnly), factor, info);
+		}
+
 
 		cout<<"Computation of Morse Spectrum Started\n";
 		cout<<"We have "<<set.Length()<<" strong components"<<endl;
