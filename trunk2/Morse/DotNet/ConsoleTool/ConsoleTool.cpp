@@ -140,7 +140,7 @@ int main(int argc, char** argv) {
 		GraphSet set(TorstenFactory::CreateGraph());
 
 		ConsoleProgressBarInfo* info = new ConsoleProgressBarInfo();
-		ISystemFunction* func = new TorstenFunction();
+		ISystemFunction* func = new IteratatedSystemFunction<TorstenFunction>(5);// new TorstenFunction();
 		ISystemFunctionDerivate* dfunc = new TorstenFunctionDerivate();
 		MS2DAngleFunction* afunc = new MS2DAngleFunction(dfunc);
 		MS2DAngleMorseFunction* mfunc = new MS2DAngleMorseFunction(dfunc);
@@ -165,83 +165,149 @@ int main(int argc, char** argv) {
 
 		if (itsMSSym != 0 || itsMSOnly != 0) {
 
-		cout<<endl<<"SI State Finished"<<endl<<"Extending graph..."<<endl<<endl;
+			cout<<endl<<"SI State Finished"<<endl<<"Extending graph..."<<endl<<endl;
 
-		{
-			int factor[] = {1,1,1};
-			MS2DCreationProcess* ps = new MS2DCreationProcess(set[0], factor, info);
-			GraphSet res = AbstractProcess::Apply(ps, set);
-			set.DeleteGraphs();
-			set = res;
-		}
-
-		cout<<endl<<"Performing MS Stage Sym"<<endl;
-
-		for (int i=0; i<itsMSSym; i++) {
-		    cout<<endl<<"MS Sym iteration step "<<i+1<<" from "<<itsMSSym<<" Components : "<<set.Length()<<endl;
 			{
-				int factor[] = {1,1,2};			
-				ProcessMS(set, afunc, false, factor, info);
+				int factor[] = {1,1,1};
+				MS2DCreationProcess* ps = new MS2DCreationProcess(set[0], factor, info);
+				GraphSet res = AbstractProcess::Apply(ps, set);
+				set.DeleteGraphs();
+				set = res;
 			}
 
-			{
-				int factor[] = {1,2,1};			
-				ProcessMS(set, afunc, false, factor, info);
+			cout<<endl<<"Performing MS Stage Sym"<<endl;
+
+			for (int i=0; i<itsMSSym; i++) {
+				cout<<endl<<"MS Sym iteration step "<<i+1<<" from "<<itsMSSym<<" Components : "<<set.Length()<<endl;
+				{
+					int factor[] = {1,1,2};			
+					ProcessMS(set, afunc, false, factor, info);
+				}
+
+				{
+					int factor[] = {1,2,1};			
+					ProcessMS(set, afunc, false, factor, info);
+				}
+				{
+					int factor[] = {2,1,1};			
+					ProcessMS(set, afunc, (i+1 == itsMSSym) && (itsMSOnly == 0) , factor, info);
+				}			
 			}
-			{
-				int factor[] = {2,1,1};			
-				ProcessMS(set, afunc, (i+1 == itsMSSym) && (itsMSOnly == 0) , factor, info);
-			}			
-		}
 
-		cout<<endl<<"Performing MS Stage Only"<<endl;
+			cout<<endl<<"Performing MS Stage Only"<<endl;
 
-		for (int i=0; i<itsMSOnly; i++) {
-			cout<<endl<<"MS Only iteration step "<<i+1<<" from "<<itsMSOnly<<" Components : "<<set.Length()<<endl;
-			int factor[] = {1,1,2};
-			ProcessMS(set, afunc, (i+1 == itsMSOnly), factor, info);
-		}
+			for (int i=0; i<itsMSOnly; i++) {
+				cout<<endl<<"MS Only iteration step "<<i+1<<" from "<<itsMSOnly<<" Components : "<<set.Length()<<endl;
+				int factor[] = {1,1,2};
+				ProcessMS(set, afunc, (i+1 == itsMSOnly), factor, info);
+			}
 
 
-	     
-		
-		cout<<"Computation of Morse Spectrum Started\n";
-		cout<<"We have "<<set.Length()<<" strong components"<<endl;
+		     
+			
+			cout<<"Computation of Morse Spectrum Started\n";
+			cout<<"We have "<<set.Length()<<" strong components"<<endl;
 
-		char buff[2048];
-		sprintf(buff, "%s.morse", output);
-		ofstream fo;
-		fo.open(buff);
+			char buff[2048];
+			sprintf(buff, "%s.morse", output);
+			ofstream fo;
+			fo.open(buff);
 
-		for (GraphSetIterator it = set.iterator(); it.HasNext(); it.Next()) {
-			CRomFunction2N rom(mfunc, it);
-			rom.minimize();
+			for (GraphSetIterator it = set.iterator(); it.HasNext(); it.Next()) {
+				CRomFunction2N rom(mfunc, it);
+				rom.minimize();
 
-			double lower = rom.getAnswer();
-			int lowerL = rom.getAnswerLength();
-			fo<<rom.getAnswer()<<" "<<rom.getAnswerLength()<<endl;
-			fo.flush();
+				double lower = rom.getAnswer();
+				int lowerL = rom.getAnswerLength();
+				fo<<rom.getAnswer()<<" "<<rom.getAnswerLength()<<endl;
+				fo.flush();
 
-			rom.maximize();
+				rom.maximize();
 
-			double upper = rom.getAnswer();
-			int upperL = rom.getAnswerLength();
+				double upper = rom.getAnswer();
+				int upperL = rom.getAnswerLength();
 
-			fo<<rom.getAnswer()<<rom.getAnswerLength();
-			fo.flush();
+				fo<<rom.getAnswer()<<rom.getAnswerLength();
+				fo.flush();
 
 
-			fo<<"Estimated Morse Spectrum for Component of "<<it->getNumberOfNodes()<<":"<<it->getNumberOfArcs()<<" finished with result"<<endl;
-			fo<<"[ "<<scientific<<lower<<" ,   "<<scientific<<upper<<" ]"<<endl<<endl;
-			fo.flush();
-		}
+				fo<<"Estimated Morse Spectrum for Component of "<<it->getNumberOfNodes()<<":"<<it->getNumberOfArcs()<<" finished with result"<<endl;
+				fo<<"[ "<<scientific<<lower<<" ,   "<<scientific<<upper<<" ]"<<endl<<endl;
+				fo.flush();
+			}
 
-		fo.close();
-
+			fo.close();
 		} else {
 		  Util::ExportPoints(set, output);
 		}
 
+		cout<<"Program Ended"<<endl<<endl;
+	}else if ( strcmp(argv[1], "-iter_tst") == 0 ) {
+		int itsSI = 0;		
+		sscanf(argv[2],"%d", &itsSI);		
+		char* output = argv[3];
+
+		TorstenFunction::beta = 3.5;
+		TorstenFunctionDerivate::beta = 3.5;
+
+		TorstenFactory::Dump();
+
+		cout<<"Loading from "<<endl<<"Saving results to "<<output<<endl<<endl;
+
+		GraphSet set(TorstenFactory::CreateGraphEx());
+
+		ConsoleProgressBarInfo* info = new ConsoleProgressBarInfo();
+
+		int fpower = 1;
+		bool isOk = false;
+
+		ofstream fo;
+		char buff[2048];
+		sprintf(buff, "%s.power", output);
+		fo.open(buff);
+
+		do {
+			isOk = true;
+			cout<<"Trying iteration of function : "<<fpower<<endl<<endl;
+			fo<<"try power "<<fpower<<endl;
+			fo.flush();
+
+			ISystemFunction* func = new IteratatedSystemFunction<TorstenFunction>(fpower);// new TorstenFunction();
+			
+
+			for (int i=0; i<itsSI; i++) {
+				cout<<endl<<endl<<"Iteration SI"<<i+1<<" from "<<itsSI<<endl<<endl;
+
+				if (set.Length() == 0) {
+					cout<<"No Strong Component was founded at all. Breaking"<<endl;
+					isOk = false;
+					break;
+				}
+				
+				int factor[] = {2,2};
+				AbstractProcess* ps = new SimpleBoxProcess(set[0], func, factor, info);
+				TarjanProcess* ts = new TarjanProcess(false, info);
+
+				GraphSet it = AbstractProcess::Apply(ps, set);
+				GraphSet res = AbstractProcess::Apply(ts, it);
+
+				delete ps;
+				delete ts;
+				set.DeleteGraphs();
+				it. DeleteGraphs();
+
+				set = res;			
+			}
+
+			fo<<"Result for power "<<fpower<<" is "<<(isOk ? "Success": "Failed") <<endl<<endl;
+			fo.flush();
+
+   			Util::ExportPoints(set, output);
+
+			fpower++;
+		} while (!isOk);
+
+		cout<<"Computation was finished for power "<<fpower<<" with "<<set.Length()<<" components"<<endl;
 
 		cout<<"Program Ended"<<endl<<endl;
 	} else if ( strcmp(argv[1], "-iter") == 0 ) {

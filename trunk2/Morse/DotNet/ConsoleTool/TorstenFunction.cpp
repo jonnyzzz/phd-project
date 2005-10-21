@@ -125,6 +125,18 @@ Graph* TorstenFactory::CreateGraph() {
 	return g;
 }
 
+Graph* TorstenFactory::CreateGraphEx() {
+	double _min[] = { -8, -6};
+	double _max[] = {-6, -4};
+	int _grid[] = {10,10};
+
+	Graph* g = new Graph(2, _min, _max, _grid, false);
+	g->maximize();
+
+	return g;
+}
+
+
 
 void TorstenFactory::Dump() {
 	cout<<"torsten's function with"<<endl<<"beta="<<TorstenFunction::beta<<";"<<TorstenFunctionDerivate::beta<<" m="<<TorstenFunction::m<<" d="<<TorstenFunction::d<<endl<<endl;

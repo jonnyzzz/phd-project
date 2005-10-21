@@ -880,6 +880,23 @@ bool Graph::equals(Graph* graph) const {
 const char GRAPH_OPEN_TAG[] = "<Graph>";
 const char GRAPH_CLOSE_TAG[]= "</Graph>";
 
+
+void Graph::LoadFromPointsList(const char* file) {
+	FileInputStream fo(file);
+
+	JDouble v;
+
+	while (!fo.eof()) {
+		for (int i=0; i<dimention; i++) {
+			fo>>v;
+			point[i] = toInternal(v, i);
+		}
+		this->browseTo(point);
+	}
+}
+
+
+
 Graph*	Graph::createGraph(FileInputStream& o, bool loadEdges) {
 	char buff[1024];
 	o>>buff;

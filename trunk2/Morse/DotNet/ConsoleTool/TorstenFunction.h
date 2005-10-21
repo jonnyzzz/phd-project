@@ -76,6 +76,7 @@ public:
 	static const int Dim;	
 
 	static Graph* CreateGraph();
+	static Graph* CreateGraphEx();
 	
 	static void Dump();
 

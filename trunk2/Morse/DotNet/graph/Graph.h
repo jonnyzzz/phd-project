@@ -43,6 +43,10 @@ private:
 	Node** nodes;
 	const bool isTarjanable;
 
+
+public:
+	void LoadFromPointsList(const char* file);
+
 // Hash Routins
 private:
 	const int nodeHashMax;
@@ -195,7 +199,7 @@ private:
 	void setLoop(Node* node);
 
 public:
-	static Graph*	createGraph(FileInputStream& o, bool loadEdges = true);
+	static Graph* createGraph(FileInputStream& o, bool loadEdges = true);
 	static void	saveGraph(FileOutputStream& o, Graph* graph);
 	static void	saveGraphAsPoints(FileOutputStream& o, Graph* graph);		
 };

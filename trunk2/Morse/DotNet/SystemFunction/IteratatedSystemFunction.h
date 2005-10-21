@@ -1,23 +1,33 @@
 #include "ISystemFunction.h"
 
-template<class Function, int dim, int cnt>
+template<class Function>
 class IteratatedSystemFunction :
 	public ISystemFunction
 {
+
 private:
-	double data[cnt+1][dim*5];
-	ISystemFunction* funcs[cnt];
+	double** data;//[cnt+1][dim*5];
+	Function** funcs;//[cnt];
+	const int cnt;
 
 public:
-	IteratatedSystemFunction() : ISystemFunction(dim, cnt) {
-		for (int i=0; i<cnt;i++) {
-			funcs[i] = FunctionFactory().Create(data[i], data[i+1]);
-		}
+	IteratatedSystemFunction(int cnt) : ISystemFunction(Function().getFunctionDimension(), cnt), cnt(cnt) {
+		ASSERT(Function().hasDerivate() == false);
+		funcs = new Function*[cnt];
+		data = new double*[cnt+1];
+		for (int i=0; i<=cnt;i++) 
+			data[i] = new double[getDimension()*5];
+		for (int i=0; i<cnt;i++)
+			funcs[i] = new Function(data[i], data[i+1]);
 	}
 	virtual ~IteratatedSystemFunction(void) {
 		for (int i=0; i<cnt; i++) {
 			delete funcs[i];
+			delete[] data[i];
 		}
+		delete[] data[cnt];
+		delete[] data;
+		delete[] funcs;
 	}
 
 
