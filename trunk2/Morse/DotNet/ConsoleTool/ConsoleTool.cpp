@@ -320,6 +320,51 @@ int main(int argc, char** argv) {
 		cout<<"Computation was finished for power "<<fpower<<" with "<<set.Length()<<" components"<<endl;
 
 		cout<<"Program Ended"<<endl<<endl;
+	} else if ( strcmp(argv[1], "-iter_pow") == 0 ) {
+		int itsSI = 0;
+		int pow;
+		sscanf(argv[2],"%d", &itsSI);		
+		sscanf(argv[3],"%d", &pow);		
+		char* output = argv[4];
+
+		TorstenFunction::beta = 3.5;
+		TorstenFunctionDerivate::beta = 3.5;
+
+		TorstenFactory::Dump();
+
+		cout<<"Loading from "<<endl<<"Saving results to "<<output<<endl<<endl;
+		
+		ConsoleProgressBarInfo* info = new ConsoleProgressBarInfo();
+
+		GraphSet set;
+		ISystemFunction* func = new IteratatedSystemFunction<TorstenFunction>(pow);// new TorstenFunction();
+		set = GraphSet(TorstenFactory::CreateGraphEx());
+
+		for (int i=0; i<itsSI; i++) {
+			//cout<<endl<<endl<<"Iteration SI"<<i+1<<" from "<<itsSI<<endl<<endl;
+
+			int factor[] = {2,2};
+			AbstractProcess* ps = new SimpleBoxProcess(set[0], func, factor, info);
+			TarjanProcess* ts = new TarjanProcess(false, info);
+
+			GraphSet it = AbstractProcess::Apply(ps, set);
+			GraphSet res = AbstractProcess::Apply(ts, it);
+
+			delete ps;
+			delete ts;
+			set.DeleteGraphs();
+			it. DeleteGraphs();
+
+			set = res;			
+		}
+
+		char buff[2044];
+		sprintf(buff, "%s.points", output);
+		Util::ExportPoints(set, buff);
+
+		cout<<"Computation was finished "<<" with "<<set.Length()<<" components"<<endl;
+
+		cout<<"Program Ended"<<endl<<endl;
 	} else if ( strcmp(argv[1], "-iter") == 0 ) {
 		int its = 0;
 		sscanf(argv[2],"%d", &its);
@@ -344,7 +389,7 @@ int main(int argc, char** argv) {
 		Util::SaveGraphSet(in, output);
 
 		cout<<"Program Ended"<<endl<<endl;
-	} else if ( strcmp(argv[1], "-iter_m") == 0 ) {
+	}else if ( strcmp(argv[1], "-iter_m") == 0 ) {
 		int its = 0;
 		sscanf(argv[2],"%d", &its);
 					
