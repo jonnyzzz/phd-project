@@ -126,8 +126,8 @@ Graph* TorstenFactory::CreateGraph() {
 }
 
 Graph* TorstenFactory::CreateGraphEx() {
-	double _min[] = { -9, -6};
-	double _max[] = {-5, -4};
+	double _min[] = { -35, -15};
+	double _max[] = {-8, -5};
 	int _grid[] = {10,10};
 
 	Graph* g = new Graph(2, _min, _max, _grid, false);

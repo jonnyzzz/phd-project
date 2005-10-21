@@ -250,12 +250,19 @@ int main(int argc, char** argv) {
 		sscanf(argv[2],"%d", &itsSI);
 		char myBuff[2048];
 
-		for (double beta=4; beta<=8; beta += 0.5) {
+		//for (double beta=4; beta<=8; beta += 0.5)
+		  {
 		
+<<<<<<< ConsoleTool.cpp
+		    //sprintf(myBuff, "%s.%f", argv[3], beta);
+		    char* output = argv[3];//myBuff;
+=======
 		sprintf(myBuff, "%s.%f", argv[3], beta);
 		char* output = myBuff;
+>>>>>>> 1.33
 
-	       
+
+		    double beta = 7.5;
 		TorstenFunction::beta = beta;
 		TorstenFunctionDerivate::beta = beta;
 
