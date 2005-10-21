@@ -140,8 +140,8 @@ int main(int argc, char** argv) {
 		GraphSet set(TorstenFactory::CreateGraph());
 
 		ConsoleProgressBarInfo* info = new ConsoleProgressBarInfo();
-		TorstenFunction* func = new TorstenFunction();
-		TorstenFunctionDerivate* dfunc = new TorstenFunctionDerivate();
+		ISystemFunction* func = new TorstenFunction();
+		ISystemFunctionDerivate* dfunc = new TorstenFunctionDerivate();
 		MS2DAngleFunction* afunc = new MS2DAngleFunction(dfunc);
 		MS2DAngleMorseFunction* mfunc = new MS2DAngleMorseFunction(dfunc);
 
