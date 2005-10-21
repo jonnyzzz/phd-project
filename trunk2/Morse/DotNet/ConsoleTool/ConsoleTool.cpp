@@ -244,18 +244,23 @@ int main(int argc, char** argv) {
 		cout<<"Program Ended"<<endl<<endl;
 	}else if ( strcmp(argv[1], "-iter_tst") == 0 ) {
 		int itsSI = 0;		
-		sscanf(argv[2],"%d", &itsSI);		
-		char* output = argv[3];
+		sscanf(argv[2],"%d", &itsSI);
+		char myBuff[2048];
 
-		TorstenFunction::beta = 3.5;
-		TorstenFunctionDerivate::beta = 3.5;
+		for (double beta=4; beta<=8; beta += 0.5) {
+		
+		sprintf(myBuff, "%s.%f", output, beta);
+		char* output = myBuff;
+
+	       
+		TorstenFunction::beta = beta;
+		TorstenFunctionDerivate::beta = beta;
 
 		TorstenFactory::Dump();
 
 		cout<<"Loading from "<<endl<<"Saving results to "<<output<<endl<<endl;
 
-		
-
+	      
 		ConsoleProgressBarInfo* info = new ConsoleProgressBarInfo();
 
 		int fpower = 1;
@@ -319,6 +324,9 @@ int main(int argc, char** argv) {
 
 		cout<<"Computation was finished for power "<<fpower<<" with "<<set.Length()<<" components"<<endl;
 
+		set.DeleteGraph();
+		}
+		
 		cout<<"Program Ended"<<endl<<endl;
 	} else if ( strcmp(argv[1], "-iter_pow") == 0 ) {
 		int itsSI = 0;

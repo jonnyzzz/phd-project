@@ -100,7 +100,7 @@ CPPFLAGS += -O2
 LDFLAGS +=  -lstdc++ -lm -O2
 
 all:  $(OBJECTS)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/mssi35
+	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJECTS) -o bin/mssi4
 	@echo Make is complete.
 clean:
 	rm -f $(OBJECTS)
