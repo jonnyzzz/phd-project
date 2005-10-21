@@ -18,7 +18,7 @@ public:
 	}
 
 public:
-	virtual int Length() { return 1000; }
+	virtual int Length() { return 50; }
 	virtual void Next() { cout<<"."; cout.flush(); }
 	virtual bool NeedStop() { return false; }
 

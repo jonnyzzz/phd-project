@@ -12,7 +12,7 @@ private:
 
 public:
 	IteratatedSystemFunction(int cnt) : ISystemFunction(Function().getFunctionDimension(), cnt), cnt(cnt) {
-		ASSERT(Function().hasDerivate() == false);
+		ASSERT(Function().hasDerivative() == false);
 		funcs = new Function*[cnt];
 		data = new double*[cnt+1];
 		for (int i=0; i<=cnt;i++) 

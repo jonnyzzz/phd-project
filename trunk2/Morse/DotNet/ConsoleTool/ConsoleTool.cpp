@@ -254,7 +254,7 @@ int main(int argc, char** argv) {
 
 		cout<<"Loading from "<<endl<<"Saving results to "<<output<<endl<<endl;
 
-		GraphSet set(TorstenFactory::CreateGraphEx());
+		
 
 		ConsoleProgressBarInfo* info = new ConsoleProgressBarInfo();
 
@@ -266,20 +266,22 @@ int main(int argc, char** argv) {
 		sprintf(buff, "%s.power", output);
 		fo.open(buff);
 
+		GraphSet set;
+		
 		do {
 			isOk = true;
-			cout<<"Trying iteration of function : "<<fpower<<endl<<endl;
-			fo<<"try power "<<fpower<<endl;
+			//cout<<"Trying iteration of function : "<<fpower<<endl<<endl;
+			fo<<"try power "<<fpower<<"....";
 			fo.flush();
 
 			ISystemFunction* func = new IteratatedSystemFunction<TorstenFunction>(fpower);// new TorstenFunction();
-			
+			set = GraphSet(TorstenFactory::CreateGraphEx());
 
 			for (int i=0; i<itsSI; i++) {
-				cout<<endl<<endl<<"Iteration SI"<<i+1<<" from "<<itsSI<<endl<<endl;
+				//cout<<endl<<endl<<"Iteration SI"<<i+1<<" from "<<itsSI<<endl<<endl;
 
 				if (set.Length() == 0) {
-					cout<<"No Strong Component was founded at all. Breaking"<<endl;
+				  //cout<<"No Strong Component was founded at all. Breaking at i="<<i+1<<endl;
 					isOk = false;
 					break;
 				}
@@ -299,12 +301,20 @@ int main(int argc, char** argv) {
 				set = res;			
 			}
 
-			fo<<"Result for power "<<fpower<<" is "<<(isOk ? "Success": "Failed") <<endl<<endl;
+			fo<<"Result for power "<<fpower<<" is "<<(isOk ? "Success": "Failed") <<endl;
 			fo.flush();
 
-   			Util::ExportPoints(set, output);
+			//Util::ExportPoints(set, output);
 
 			fpower++;
+			delete func;
+
+			if (isOk) {
+			  char buff[2044];
+			  sprintf(buff, "%s.points", output);
+			  Util::ExportPoints(set, buff);
+			}
+			set.DeleteGraphs();
 		} while (!isOk);
 
 		cout<<"Computation was finished for power "<<fpower<<" with "<<set.Length()<<" components"<<endl;
