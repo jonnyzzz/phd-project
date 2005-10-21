@@ -130,8 +130,8 @@ int main(int argc, char** argv) {
 		
 		char* output = argv[5];
 
-		TorstenFunction::beta = 7;
-		TorstenFunctionDerivate::beta = 7;
+		TorstenFunction::beta = 3.5;
+		TorstenFunctionDerivate::beta = 3.5;
 
 		TorstenFactory::Dump();
 
@@ -162,6 +162,8 @@ int main(int argc, char** argv) {
 
 			set = res;
 		}
+
+		if (itsMSSym != 0 || itsMSOnly != 0) {
 
 		cout<<endl<<"SI State Finished"<<endl<<"Extending graph..."<<endl<<endl;
 
@@ -201,6 +203,8 @@ int main(int argc, char** argv) {
 		}
 
 
+	     
+		
 		cout<<"Computation of Morse Spectrum Started\n";
 		cout<<"We have "<<set.Length()<<" strong components"<<endl;
 
@@ -233,6 +237,10 @@ int main(int argc, char** argv) {
 		}
 
 		fo.close();
+
+		} else {
+		  Util::ExportPoints(set, output);
+		}
 
 
 		cout<<"Program Ended"<<endl<<endl;
