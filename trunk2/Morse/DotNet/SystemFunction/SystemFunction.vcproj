@@ -175,6 +175,9 @@
 				RelativePath=".\IteratatedSystemFunction.h">
 			</File>
 			<File
+				RelativePath=".\IteratedSystemFunctionDerivate.h">
+			</File>
+			<File
 				RelativePath=".\MS2DAngleFunction.h">
 			</File>
 			<File

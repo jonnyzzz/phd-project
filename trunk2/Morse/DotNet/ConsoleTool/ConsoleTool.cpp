@@ -13,6 +13,7 @@ using namespace std;
 #endif
 
 #include "../SystemFunction/IteratatedSystemFunction.h"
+#include "../SystemFunction/IteratedSystemFunctionDerivate.h"
 #include "TorstenFunction.h"
 #include "../cellImageBuilders/SimpleBoxProcess.h"
 #include "../graph/Graph.h"
@@ -115,6 +116,8 @@ int main(int argc, char** argv) {
 	FACTORY::Dump();
 
 	cout<<argc<<endl;
+
+	ISystemFunctionDerivate* fdfd = new IteratedSystemFunctionDerivate<TorstenFunctionDerivate>(5);
 
        
 	if ( strcmp(argv[1], "-init") == 0 ) {
@@ -249,7 +252,7 @@ int main(int argc, char** argv) {
 
 		for (double beta=4; beta<=8; beta += 0.5) {
 		
-		sprintf(myBuff, "%s.%f", output, beta);
+		sprintf(myBuff, "%s.%f", argv[3], beta);
 		char* output = myBuff;
 
 	       
@@ -324,7 +327,7 @@ int main(int argc, char** argv) {
 
 		cout<<"Computation was finished for power "<<fpower<<" with "<<set.Length()<<" components"<<endl;
 
-		set.DeleteGraph();
+		set.DeleteGraphs();
 		}
 		
 		cout<<"Program Ended"<<endl<<endl;
