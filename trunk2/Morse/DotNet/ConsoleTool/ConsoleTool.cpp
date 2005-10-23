@@ -250,21 +250,23 @@ int main(int argc, char** argv) {
 		sscanf(argv[2],"%d", &itsSI);
 		char myBuff[2048];
 
-		//for (double beta=4; beta<=8; beta += 0.5)
+		char title[2048];
+
+		for (double m=3.2; m<=4; m+=0.2)
+		for (double d=0.4; d<=0.6; d += 0.02)
 		  {
-		
-<<<<<<< ConsoleTool.cpp
-		    //sprintf(myBuff, "%s.%f", argv[3], beta);
-		    char* output = argv[3];//myBuff;
-=======
-		sprintf(myBuff, "%s.%f", argv[3], beta);
+		sprintf(myBuff, "%s.d.%f,m.%f", argv[3], d,m);
 		char* output = myBuff;
->>>>>>> 1.33
 
-
-		    double beta = 7.5;
+		    double beta = 3.5;
 		TorstenFunction::beta = beta;
 		TorstenFunctionDerivate::beta = beta;
+
+		TorstenFunction::d = d;
+		TorstenFunctionDerivate::d = d;
+
+		TorstenFunction::m = m;
+		TorstenFunctionDerivate::m = m;
 
 		TorstenFactory::Dump();
 
@@ -284,6 +286,7 @@ int main(int argc, char** argv) {
 		GraphSet set;
 		
 		do {
+		 
 			isOk = true;
 			//cout<<"Trying iteration of function : "<<fpower<<endl<<endl;
 			fo<<"try power "<<fpower<<"....";
@@ -327,12 +330,15 @@ int main(int argc, char** argv) {
 			if (isOk) {
 			  char buff[2044];
 			  sprintf(buff, "%s.points", output);
-			  Util::ExportPoints(set, buff);
+			  sprintf(title, "period %d, m %f, beta %f, d %f", fpower, m, beta, d);
+			  Util::ExportPoints(set, buff, "", title);
 			}
 			set.DeleteGraphs();
+			if (fpower > 100) break;
 		} while (!isOk);
 
-		cout<<"Computation was finished for power "<<fpower<<" with "<<set.Length()<<" components"<<endl;
+		if (isOk)
+		  cout<<"Computation was finished for power "<<fpower<<" with "<<set.Length()<<" components"<<endl;
 
 		set.DeleteGraphs();
 		}

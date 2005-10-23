@@ -29,7 +29,7 @@ void Util::SaveGraphSet(GraphSet set, char* file) {
 }
 
 
-void Util::ExportPoints(GraphSet set, const char* file, const char* path) {
+void Util::ExportPoints(GraphSet set, const char* file, const char* path, const char* title) {
 	char buff[2048];
 
 	sprintf(buff, "%s%s.gnuplot", path, file);
@@ -41,6 +41,7 @@ void Util::ExportPoints(GraphSet set, const char* file, const char* path) {
 
 	wp<<"set terminal png size 1000,1000; set key below; set output '"<<file<<".png'; ";
 	gp<<"set terminal png small color; set key below; set output '"<<file<<".png'; ";
+	wp<<"set title '"<<title<<"'; ";
 
 	gp<<"plot ";
 	wp<<"plot ";
