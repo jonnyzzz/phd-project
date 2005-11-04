@@ -49,9 +49,7 @@ void PointGraphTest::Test() {
 
   
     MyFunction function;
-
     PointGraph graph((ISystemFunction*)&function, 1);
-
     
     graph.Dump(cout);
 
@@ -66,15 +64,14 @@ void PointGraphTest::Test() {
     ASSERTTRUE(graph.Points().size() == 0);
     
     v=1;
-    graph.AddNodeWithAllEdges(&v);
+    PointGraph::Node* n1 = graph.AddNode(&v);
     v=2;
-    graph.AddNodeWithAllEdges(&v);
-    //v=3;
-    //graph.AddNodeWithAllEdges(&v);
+    PointGraph::Node* n2 = graph.AddNode(&v);
+    graph.AddEdge(n1, n2, NULL);
 
     graph.Dump(cout);
 
-    double prec[] =  {0.4, 0.4, 0.4};
+    double prec[] =  {0.02, 0.6, 0.6};
 
     graph.Iterate(prec);
 

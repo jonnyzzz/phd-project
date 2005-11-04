@@ -116,9 +116,6 @@
 		</Configuration>
 	</Configurations>
 	<References>
-		<ProjectReference
-			ReferencedProjectIdentifier="{F564580A-A60A-4149-9416-60BAABFD1005}"
-			Name="D3DVisualizator"/>
 	</References>
 	<Files>
 		<Filter

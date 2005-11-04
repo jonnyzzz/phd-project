@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Fri Oct 21 14:06:24 2005
+/* at Thu Nov 03 20:51:52 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -115,6 +115,12 @@ typedef interface IResultMetadata IResultMetadata;
 #define __IResult_FWD_DEFINED__
 typedef interface IResult IResult;
 #endif 	/* __IResult_FWD_DEFINED__ */
+
+
+#ifndef __IResultInfo_FWD_DEFINED__
+#define __IResultInfo_FWD_DEFINED__
+typedef interface IResultInfo IResultInfo;
+#endif 	/* __IResultInfo_FWD_DEFINED__ */
 
 
 #ifndef __IGraphInfo_FWD_DEFINED__
@@ -2764,6 +2770,116 @@ void __RPC_STUB IResult_GetMetadata_Stub(
 
 
 #endif 	/* __IResult_INTERFACE_DEFINED__ */
+
+
+#ifndef __IResultInfo_INTERFACE_DEFINED__
+#define __IResultInfo_INTERFACE_DEFINED__
+
+/* interface IResultInfo */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IResultInfo;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("EDD6B3E5-2F48-4232-BCF6-005FC87576BF")
+    IResultInfo : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IResultInfoVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IResultInfo * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IResultInfo * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IResultInfo * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IResultInfo * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IResultInfo * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IResultInfo * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IResultInfo * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IResultInfoVtbl;
+
+    interface IResultInfo
+    {
+        CONST_VTBL struct IResultInfoVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IResultInfo_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IResultInfo_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IResultInfo_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IResultInfo_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IResultInfo_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IResultInfo_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IResultInfo_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IResultInfo_INTERFACE_DEFINED__ */
 
 
 #ifndef __IGraphInfo_INTERFACE_DEFINED__

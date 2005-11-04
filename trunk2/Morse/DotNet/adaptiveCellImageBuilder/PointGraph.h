@@ -18,20 +18,23 @@ public:
     typedef list<Edge*> EdgeList;
     typedef list<Node*> NodeList;
 
-    class PointGraph::Edge {
+    class Edge {
     public:
-        PointGraph::Node* left;
-        PointGraph::Node* right;
-        bool checked;      
+        Node* left;
+        Node* right;
+        bool checked;
+
+        Edge* parent;
+        int order;
     };
 
-    class PointGraph::Node : public ExtendedMemoryManager::DisposeHandler {
+    class Node : public ExtendedMemoryManager::DisposeHandler {
     public:
         virtual ~Node() {};
     public:
         double* points;
         double* valueCache;
-        PointGraph::EdgeList edges;
+        EdgeList edges;
     };
 
 
@@ -44,7 +47,7 @@ private:
 
 
 public:
-    Edge* AddEdge(Node* left, Node* right); //no duplicate checking!
+    Edge* AddEdge(Node* left, Node* right, Edge* parent); //no duplicate checking!
     Node* AddNode(const double* node); //no duplicate checking!
     Node* AddNodeWithAllEdges(const double* node);
 
@@ -85,6 +88,8 @@ private:
     double Abs(double x);
 
     Edge* AddEdge(Node* newNode, Edge* edge, Node* from);
+
+    bool ChechParentness(Edge* edgeR, Edge* edgeM);
 
 
 public:

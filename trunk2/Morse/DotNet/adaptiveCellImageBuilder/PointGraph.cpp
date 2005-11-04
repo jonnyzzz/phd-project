@@ -57,11 +57,13 @@ double* PointGraph::arraycopy(const double* node) {
     return myDouble;
 }
 
-PointGraph::Edge* PointGraph::AddEdge(PointGraph::Node* left, PointGraph::Node* right) {
+PointGraph::Edge* PointGraph::AddEdge(PointGraph::Node* left, PointGraph::Node* right, PointGraph::Edge* parent) {
     Edge* edge = createEdge();
     edge->left = left;
     edge->right = right;
     edge->checked = false;
+    edge->parent = parent;
+    edge->order = (parent != NULL)? parent->order+1 : 0;
 
     left->edges.push_back(edge);
     right->edges.push_back(edge);
@@ -140,29 +142,43 @@ PointGraph::Node* PointGraph::split(PointGraph::Edge* edge) {
     edges.remove(edge);
 
     Node* myNode = AddNodeInternal(myDouble);
-
-    /*
+    
     for (EdgeList::iterator it = left->edges.begin(); it != left->edges.end(); ++it) {
-        AddEdge(myNode, *it, left);
+        if (!ChechParentness((*it)->parent, edge->parent))
+            AddEdge(myNode, *it, left);
     }
     for (EdgeList::iterator it = right->edges.begin(); it != right->edges.end(); ++it) {
-        AddEdge(myNode, *it, right);
+        if (!ChechParentness((*it)->parent, edge->parent))
+            AddEdge(myNode, *it, right);
     }
-    */
 
-    AddEdge(myNode, right);
-    AddEdge(left, myNode);
+    AddEdge(myNode, right, edge);
+    AddEdge(left, myNode, edge);
 
     return myNode;
+}
+
+bool PointGraph::ChechParentness(Edge* edgeR, Edge* edgeM) {
+    while (edgeR != NULL && edgeM != NULL) {
+        if (edgeR == edgeM) return true;
+        
+        if (edgeR->order > edgeM->order) {
+            edgeR = edgeR->parent;
+        } else {
+            edgeM = edgeM->parent;
+        }
+
+    }
+    return false;
 }
 
 PointGraph::Edge* PointGraph::AddEdge(PointGraph::Node* newNode, PointGraph::Edge* edge, PointGraph::Node* from) {
     //if (edge->left == newNode || edge->right == newNode) return NULL;
 
     if (edge->left == from) {
-        return AddEdge(newNode, edge->right);
+        return AddEdge(newNode, edge->right, NULL);
     } else {
-        return AddEdge(newNode, edge->left);
+        return AddEdge(newNode, edge->left, NULL);
     }
 }
 
@@ -171,7 +187,7 @@ PointGraph::Node*  PointGraph::AddNodeWithAllEdges(const double* node) {
 
     for (NodeList::iterator it = nodes.begin(); it != nodes.end(); ++it) {
         if (*it != myNode) {
-            AddEdge(myNode, *it);
+            AddEdge(myNode, *it, NULL);
         }
     }
     return myNode;
@@ -187,7 +203,6 @@ void PointGraph::Iterate(double* precision) {
         cout<<"Processing edge "<<edge->left->points[0]<<"->"<<edge->right->points[0]<<" :";
         
         if (edge->checked) continue;
-
         
         if (!this->chackEdgeLength(edge, precision)) {
             cout<<"split";
@@ -209,14 +224,14 @@ const PointGraph::NodeList& PointGraph::Points() {
 
 void PointGraph::Dump(ostream& o) {
     o<<"\n\nDumping Point Graph\nNodes = "<<nodes.size()<<"\n";
-
+    o<<"Edges counter: \n";
     int cnt = 0;
     for (NodeList::iterator it = nodes.begin(); it != nodes.end(); ++it) {
-        cnt++;
-        cout<<"Node["<<cnt<<"]->Edges="<<(*it)->edges.size()<<"\n";
+        cout<<"Node["<<(*it)->points[0]<<"]->Edges="<<(*it)->edges.size()<<"\n";
     }
     cout<<"\n\n";
 
+    cout<<"Adj matrix :\n";
     for (NodeList::iterator it = nodes.begin(); it != nodes.end(); ++it) {
         cout<<"Node "<<(*it)->points[0]<<" -> ";
         for (EdgeList::iterator itt = (*it)->edges.begin(); itt != (*it)->edges.end(); itt++) {
@@ -231,5 +246,5 @@ void PointGraph::Dump(ostream& o) {
         }
         cout<<"\n";
     }
-    cout<<"\n";
+    cout<<"\n\n";
 }      

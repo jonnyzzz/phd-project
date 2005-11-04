@@ -158,9 +158,6 @@
 	</Configurations>
 	<References>
 		<ProjectReference
-			ReferencedProjectIdentifier="{F564580A-A60A-4149-9416-60BAABFD1005}"
-			Name="D3DVisualizator"/>
-		<ProjectReference
 			ReferencedProjectIdentifier="{213A979A-506A-4295-9350-B86F82C0DBCB}"
 			Name="graph"/>
 	</References>

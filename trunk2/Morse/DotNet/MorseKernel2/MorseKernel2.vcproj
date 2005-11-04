@@ -295,6 +295,9 @@
 				RelativePath=".\ResultBase.cpp">
 			</File>
 			<File
+				RelativePath=".\ResultInfo.cpp">
+			</File>
+			<File
 				RelativePath=".\ResultMetadata.cpp">
 			</File>
 			<File
@@ -484,6 +487,9 @@
 			</File>
 			<File
 				RelativePath=".\ResultBase.h">
+			</File>
+			<File
+				RelativePath=".\ResultInfo.h">
 			</File>
 			<File
 				RelativePath=".\ResultMetadata.h">

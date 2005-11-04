@@ -33,7 +33,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
     //testRomFromFile("o:\\aaaa");
 
 
-    //PointGraphTest("PointGraphTest", cout).Test();
+    PointGraphTest("PointGraphTest", cout).Test();
     //MS2DMorseTest().Test();
     //AdaptiveBoxTest().Test();
     //MemoryManagerTest().Test();
@@ -70,7 +70,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	test.test();
 	*/
 
-	MS2DSIMorseTest().Test();
+	//MS2DSIMorseTest().Test();
 
 
 }

@@ -16,6 +16,7 @@
 #include "SymbolicImageMetadata.h"
 #include "../adaptiveCellImageBuilder/AdaptiveProvess.h"
 #include "../systemFunction/ms2dangleFunction.h"
+#include "../cellImageBuilders/MS2DSIBoxProcess.h"
 
 
 // CMS2DProcessAction

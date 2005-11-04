@@ -143,7 +143,7 @@
                 />
                 <File
                     RelPath = "src\actionImpl\GnuPlot\GnuPlotParameters.cs"
-                    SubType = "UserControl"
+                    SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
