@@ -23,7 +23,9 @@ private:
     int dimension;
 
     JDouble* x;
+    JDouble* x0;
     JInt* b;
+    JInt* a;
 
     double* precision;
     double* overlap1;

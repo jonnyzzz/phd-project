@@ -95,6 +95,7 @@ namespace guiKernel2.ActionFactory
 			foreach (ActionStateRef actionStateInfo in acceptableActons)
 			{
                 if (!actionStateInfo.Enabled) continue;
+
                 ActionRef actionInfo = actionStateInfo.ActionRef;
 				if(string.Equals(actionInfo.ActionName, nextActionName))
 				{

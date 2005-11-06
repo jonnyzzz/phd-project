@@ -11,7 +11,7 @@
                     RemoteDebugEnabled = "false"
                     RemoteDebugMachine = ""
                     StartAction = "Project"
-                    StartArguments = "/resources=E:\Morse\DotNetProject\DotNet\resource\included /temporary=e:\ /Internal"
+                    StartArguments = "/resources=E:\Projects\Morse\DotNetProject\Morse\DotNet\resource\included /temporary=o:\ /Internal"
                     StartPage = ""
                     StartProgram = ""
                     StartURL = ""

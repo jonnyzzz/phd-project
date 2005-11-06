@@ -20,7 +20,7 @@
 			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />			
 		</action>
 		
-		<action name="IAdaptiveMethodAction" isLeaf="false" internal="true">		
+		<action name="IAdaptiveMethodAction" isLeaf="false">		
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 			<nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true"/>

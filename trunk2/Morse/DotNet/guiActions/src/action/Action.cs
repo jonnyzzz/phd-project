@@ -8,7 +8,7 @@ namespace guiActions.Actions
 	/// <summary>
 	/// Summary description for Action.
 	/// </summary>
-	public abstract class Action : ActionWrapper
+	public abstract class Action : ActionWrapper 
 	{
 		public Action(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
 		{
@@ -26,7 +26,7 @@ namespace guiActions.Actions
 
 		protected void SetFakeControl(ParametersControl control)
 		{
-			if (cachedParametersControl != null) 
+//			if (cachedParametersControl != null) 
 			{
 				cachedParametersControl.DataSubmitted -= new ParametersSubmitted(DataSubmitted);
 			}
@@ -37,7 +37,7 @@ namespace guiActions.Actions
 
 		public ParametersControl GetParametesControl(KernelNode node)
 		{
-			if (cachedParametersControl == null)
+//			if (cachedParametersControl == null)
 			{
 				cachedParametersControl = GetParametersControlInternal(node);
 				cachedParametersControl.DataSubmitted += new ParametersSubmitted(DataSubmitted);

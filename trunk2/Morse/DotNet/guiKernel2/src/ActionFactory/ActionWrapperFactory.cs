@@ -41,7 +41,7 @@ namespace guiKernel2.ActionFactory
 		protected Type GetWrapperType(Type action)
 		{
 			if (!mapping.ContainsKey(action)) throw new ActionWrapperFactoryException("No action Wrapper for " + action.Name);
-			return mapping[action] as Type;
+			return (Type) mapping[action];
 		}
 
 

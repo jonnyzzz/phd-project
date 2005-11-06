@@ -72,7 +72,7 @@ PointGraph::Edge* PointGraph::AddEdge(PointGraph::Node* left, PointGraph::Node* 
 
     edges.push_back(edge);
 
-    cout<<"\nAdded edge "<<edge->left->points[0]<<"->"<<edge->right->points[0]<<"";
+    //cout<<"\nAdded edge "<<edge->left->points[0]<<"->"<<edge->right->points[0]<<"";
 
     return edge;
 }
@@ -200,20 +200,20 @@ void PointGraph::Iterate(double* precision) {
         Edge* edge = edges.front();
         edges.pop_front();
 
-        cout<<"Processing edge "<<edge->left->points[0]<<"->"<<edge->right->points[0]<<" :";
+        //cout<<"Processing edge "<<edge->left->points[0]<<"->"<<edge->right->points[0]<<" :";
         
         if (edge->checked) continue;
         
         if (!this->chackEdgeLength(edge, precision)) {
-            cout<<"split";
+            //cout<<"split";
             split(edge);
         } else {
-            cout<<"OK";
+            //cout<<"OK";
             edge->checked = true;
             this->cheched_counter++;
         }
 
-        cout<<"\n";
+        //cout<<"\n";
     }
 }
 
