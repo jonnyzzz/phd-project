@@ -52,25 +52,29 @@ void PointGraphProcessor::ProcessNode(Node* node) {
             x[i] = graph->toExternal(graph->getCells(node)[i],i) + (a[i] == 1?graph->getEps()[i]:0);
         }
 
+        /*
         oldNode = newNode;
         newNode = pointGraph.AddNode(x);
 
         if( oldNode != NULL) {
             pointGraph.AddEdge(oldNode, newNode);
 
+        */
+
         pointGraph.AddNodeWithAllEdges(x);
 
         b[0]++;
-        int i;
-        for (i=0; i<dimension; i++) {
+        int j=0;
+        for (int i=0; i<dimension; i++) {
             if (b[i] > 1) {
                 b[i] = 0;
                 b[i+1]++;
+                j = i;
             } else {
                 break;
             }
         }
-        a[i] = 1 - a[i];
+        a[j] = 1 - a[j];
     }
 
     pointGraph.Iterate(precision);

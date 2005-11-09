@@ -36,7 +36,7 @@ namespace guiKernel2.ActionFactory
 		public string FindActionCaption(string actionName)
 		{
             Data data = (Data) names[actionName];
-            if (data == null) return "ActionCaptionNotDefined: " + actionName;
+            if (data == null) return "ActionCaptionNotDefined: " + actionName;            
 
 			return data.caption;
 		}

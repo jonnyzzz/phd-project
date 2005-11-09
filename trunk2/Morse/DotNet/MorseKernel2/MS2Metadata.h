@@ -6,7 +6,7 @@
 #include "ResultMetadataBase.h"
 #include "GraphResult.h"
 #include "ResultSet.h"
-
+#include "MSMetadata.h"
 
 // IMS2Metadata
 [
@@ -15,7 +15,7 @@
 	dual,	helpstring("IMS2Metadata Interface"),
 	pointer_default(unique)
 ]
-__interface IMS2Metadata : IResultMetadata
+__interface IMS2Metadata : IMSMetadata
 {
     [id(10)]
     HRESULT GetSIGraphResult([out, retval] IResultSet** out);

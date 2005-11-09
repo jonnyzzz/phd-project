@@ -1,7 +1,7 @@
+#pragma once
 #include "SIOverlapedPointBuilder.h"
 
-
-class ISystemFunctionDerivate;
+class SegmentProjectiveExtendedSystemFunction;
 
 class MSOverlapedPointBuilder :
 	public SIOverlapedPointBuilder
@@ -12,7 +12,7 @@ public:
 							int* ks, 
 							JDouble* offset1, 
 							JDouble* offset2, 
-							ISystemFunctionDerivate* function, 
+							SegmentProjectiveExtendedSystemFunction* function, 
 							ProgressBarInfo* info);
 	virtual ~MSOverlapedPointBuilder(void);
 
@@ -23,6 +23,6 @@ protected:
 private:
 	int function_dimension;
 	int v_offset;
-	JDouble* value;
+	JDouble* value;    
 };
 

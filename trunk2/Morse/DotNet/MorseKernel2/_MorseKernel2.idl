@@ -662,12 +662,37 @@ interface IMS2DProcessParameters : IComputationParameters {
 
 [
 	object,
+	uuid(03982D3C-F495-4B48-AD40-9E14C6B34387),
+	dual,
+	helpstring("IMSCreationProcess Interface"),
+	pointer_default(unique)
+] 
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mscreationprocess.h"
+interface IMSCreationProcess : IAction {
+#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mscreationprocess.h"
+	[id(10)] HRESULT  GetDimension([in] IResultSet *set, [out,retval] int *dim);
+};
+
+[
+	object,
+	uuid(FF53DE10-042E-4444-9D72-81FB5120DF2B),
+	dual,
+	pointer_default(unique)
+] 
+#line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mscreationprocess.h"
+interface IMSCreationParameters : IParameters {
+#line 34 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mscreationprocess.h"
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+};
+
+[
+	object,
 	uuid(4D810CEE-9913-438E-9883-BC055371B174),
 	dual,
 	helpstring("IDummy4 Interface"),
 	pointer_default(unique)
 ] 
-#line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy4.h"
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy4.h"
 interface IDummy4 : IDispatch {
 };
 
@@ -762,13 +787,24 @@ interface ILoopsLocalizationAction : IAction {
 
 [
 	object,
+	uuid(9FC179BA-4641-46FF-8F8B-D277C1035964),
+	dual,
+	helpstring("IMSMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msmetadata.h"
+interface IMSMetadata : IResultMetadata {
+};
+
+[
+	object,
 	uuid(5E5AEEE1-A73F-43C7-91A6-35249171D3C4),
 	dual,
 	helpstring("IMS2Metadata Interface"),
 	pointer_default(unique)
 ] 
 #line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
-interface IMS2Metadata : IResultMetadata {
+interface IMS2Metadata : IMSMetadata {
 #line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
 	[id(10)] HRESULT  GetSIGraphResult([out,retval] IResultSet **out );
 #line 23 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
@@ -805,6 +841,28 @@ interface IWritableSpectrumResult : IDispatch {
 	[id(23)] HRESULT  SetUpperLength([in] int data);
 #line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
 	[id(24)] HRESULT  SetMetadata([in] IResultMetadata *data);
+};
+
+[
+	object,
+	uuid(729D2ADA-2C8A-453F-97FB-2A3F6409B117),
+	dual,
+	helpstring("IMS2Metadata Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msmethodaction.h"
+interface IMSMethodAction : IPointMethodAction {
+};
+
+[
+	object,
+	uuid(EC1007B0-EB8F-4234-85D1-31518BBBEE58),
+	dual,
+	helpstring("IMSSegmentMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mssegmentmetadata.h"
+interface IMSSegmentMetadata : IMSMetadata {
 };
 
 
@@ -1079,10 +1137,22 @@ library MorseKernel2
 
 	[
 		version(1.0),
+		uuid(533A73C2-C47D-43CA-9DE4-73E2FA1981B9),
+		helpstring("MSCreationProcess Class")
+	] 
+#line 50 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mscreationprocess.h"
+	coclass CMSCreationProcess {
+		interface IMSCreationProcess;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
 		uuid(365CB059-BEBE-4707-8475-67724C3DF50A),
 		helpstring("Dummy4 Class")
 	] 
-#line 34 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy4.h"
+#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\dummy4.h"
 	coclass CDummy4 {
 		interface IDummy4;
 		interface IMS2DProcessParameters;
@@ -1092,6 +1162,8 @@ library MorseKernel2
 		interface IParameters;
 		interface IAdaptiveBoxParameters;
 		interface IComputationParameters;
+		interface IParameters;
+		interface IMSCreationParameters;
 		interface IParameters;
 	};
 
@@ -1144,12 +1216,24 @@ library MorseKernel2
 
 	[
 		version(1.0),
+		uuid(C6CD341D-6AFD-48E2-8711-643D3ED2377A),
+		helpstring("MSMetadata Class")
+	] 
+#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msmetadata.h"
+	coclass CMSMetadata {
+		interface IMSMetadata;
+		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
 		uuid(C18A9780-7C3A-4CA7-BD07-C8CE20EE8D6B),
 		helpstring("MS2Metadata Class")
 	] 
 #line 39 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
 	coclass CMS2Metadata {
 		interface IMS2Metadata;
+		interface IMSMetadata;
 		interface IResultMetadata;
 	};
 
@@ -1176,6 +1260,31 @@ library MorseKernel2
 		interface IResult;
 		interface IResultBase;
 		interface IWritableSpectrumResult;
+	};
+
+	[
+		version(1.0),
+		uuid(FD0149F7-8FE6-47FB-8BE9-64A16DB8247C),
+		helpstring("MSMethodAction Class")
+	] 
+#line 34 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msmethodaction.h"
+	coclass CMSMethodAction {
+		interface IMSMethodAction;
+		interface IPointMethodAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(2EC18A59-16F4-4532-BCE8-360B777D68AF),
+		helpstring("MSSegmentMetadata Class")
+	] 
+#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mssegmentmetadata.h"
+	coclass CMSSegmentMetadata {
+		interface IMSSegmentMetadata;
+		interface IMSMetadata;
+		interface IResultMetadata;
 	};
 
 }

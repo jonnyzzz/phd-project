@@ -1,14 +1,14 @@
 
 #include "SIPointBuilder.h"
-#include "../SystemFunction/ISystemFunctionDerivate.h"
 #include "ProgressBarInfo.h"
 
+class SegmentProjectiveExtendedSystemFunction;
 
 class MSPointBuilder :  public SIPointBuilder
 {
    
 public:
-	MSPointBuilder(Graph* graph, int* factor, int* ks, ISystemFunctionDerivate* function, ProgressBarInfo* info);
+	MSPointBuilder(Graph* graph, int* factor, int* ks, SegmentProjectiveExtendedSystemFunction* function, ProgressBarInfo* info);
 	virtual ~MSPointBuilder(void);
 
 protected:

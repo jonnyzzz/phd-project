@@ -105,10 +105,11 @@ namespace guiKernel2.xml
 			{
 				XmlAttributeCollection attributes = node.Attributes;
 			    XmlNode commentNode = node.SelectSingleNode("text()");
+			    string caption = attributes["caption"].Value;                
 			    Core.Instance.ActionNamingFactory.AddActionNaming(
                         attributes["name"].Value, 
-                        attributes["caption"].Value, 
-                        commentNode!=null? commentNode.Value : null
+                        caption, 
+                        commentNode != null ? commentNode.Value : null
                     );
 			}
 		}

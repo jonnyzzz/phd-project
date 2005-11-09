@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MSOverlapedPointBuilder.h"
 #include "../SystemFunction/ISystemFunctionDerivate.h"
+#include "../SystemFunction/SegmentProjectiveExtendedSystemFunction.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -14,7 +15,7 @@ MSOverlapedPointBuilder::MSOverlapedPointBuilder(Graph* graph,
 							int* ks, 
 							JDouble* offset1, 
 							JDouble* offset2, 
-							ISystemFunctionDerivate* function, 
+							SegmentProjectiveExtendedSystemFunction* function, 
 							ProgressBarInfo* info) : 
 SIOverlapedPointBuilder(graph, factor, ks, offset1, offset2, function, info)
 {
@@ -27,6 +28,7 @@ SIOverlapedPointBuilder(graph, factor, ks, offset1, offset2, function, info)
 MSOverlapedPointBuilder::~MSOverlapedPointBuilder(void)
 {
 	delete[] value;
+    delete function;
 }
 
 

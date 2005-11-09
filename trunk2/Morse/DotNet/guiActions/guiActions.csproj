@@ -297,6 +297,31 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\MSSegment\Create\MSCreationAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MSSegment\Create\MSCreationControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MSSegment\Create\MSCreationControl.resx"
+                    DependentUpon = "MSCreationControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\MSSegment\Create\MSCreationParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\PointMethod\MSPointMethodAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\actionImpl\PointMethod\PointMethodAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

@@ -5,6 +5,7 @@
 #include "MS2DProcessAction.h"
 #include "ComputationParameters.h"
 #include "AdaptiveBoxMethod.h"
+#include "MSCreationProcess.h"
 
 
 // IDummy4
@@ -35,7 +36,8 @@ class ATL_NO_VTABLE CDummy4 :
     public IDummy4,
     public IMS2DProcessParameters,
     public IComputationParameters,
-    public IAdaptiveBoxParameters
+    public IAdaptiveBoxParameters,
+    public IMSCreationParameters
 {
 public:
     CDummy4()
@@ -85,5 +87,8 @@ public:
         // Add your function implementation here.
         return E_NOTIMPL;
     }
+
+    // IMSCreationParameters Methods
+public:
 };
 

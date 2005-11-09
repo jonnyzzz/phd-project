@@ -274,6 +274,18 @@
 				RelativePath=".\MS2Metadata.cpp">
 			</File>
 			<File
+				RelativePath=".\MSCreationProcess.cpp">
+			</File>
+			<File
+				RelativePath=".\MSMetadata.cpp">
+			</File>
+			<File
+				RelativePath=".\MSMethodAction.cpp">
+			</File>
+			<File
+				RelativePath=".\MSSegmentMetadata.cpp">
+			</File>
+			<File
 				RelativePath=".\Parameters.cpp">
 			</File>
 			<File
@@ -463,6 +475,18 @@
 			</File>
 			<File
 				RelativePath=".\MS2Metadata.h">
+			</File>
+			<File
+				RelativePath=".\MSCreationProcess.h">
+			</File>
+			<File
+				RelativePath=".\MSMetadata.h">
+			</File>
+			<File
+				RelativePath=".\MSMethodAction.h">
+			</File>
+			<File
+				RelativePath=".\MSSegmentMetadata.h">
 			</File>
 			<File
 				RelativePath=".\Parameters.h">
