@@ -67,11 +67,11 @@ void PointGraphTest::Test() {
     PointGraph::Node* n1 = graph.AddNode(&v);
     v=2;
     PointGraph::Node* n2 = graph.AddNode(&v);
-    graph.AddEdge(n1, n2, NULL);
+    graph.AddEdge(n1, n2);
 
     graph.Dump(cout);
 
-    double prec[] =  {0.02, 0.6, 0.6};
+    double prec[] =  {0.00045, 0.6, 0.6};
 
     graph.Iterate(prec);
 

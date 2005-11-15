@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Nov 10 01:45:58 2005
+/* at Sun Nov 13 21:42:28 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -411,16 +411,16 @@ typedef interface IWritableSpectrumResult IWritableSpectrumResult;
 #endif 	/* __IWritableSpectrumResult_FWD_DEFINED__ */
 
 
-#ifndef __IMSMethodAction_FWD_DEFINED__
-#define __IMSMethodAction_FWD_DEFINED__
-typedef interface IMSMethodAction IMSMethodAction;
-#endif 	/* __IMSMethodAction_FWD_DEFINED__ */
-
-
 #ifndef __IMSSegmentMetadata_FWD_DEFINED__
 #define __IMSSegmentMetadata_FWD_DEFINED__
 typedef interface IMSSegmentMetadata IMSSegmentMetadata;
 #endif 	/* __IMSSegmentMetadata_FWD_DEFINED__ */
+
+
+#ifndef __IMSMethodAction_FWD_DEFINED__
+#define __IMSMethodAction_FWD_DEFINED__
+typedef interface IMSMethodAction IMSMethodAction;
+#endif 	/* __IMSMethodAction_FWD_DEFINED__ */
 
 
 #ifndef __CAdaptiveBoxMethod_FWD_DEFINED__
@@ -783,18 +783,6 @@ typedef struct CSpectrumResultImpl CSpectrumResultImpl;
 #endif 	/* __CSpectrumResultImpl_FWD_DEFINED__ */
 
 
-#ifndef __CMSMethodAction_FWD_DEFINED__
-#define __CMSMethodAction_FWD_DEFINED__
-
-#ifdef __cplusplus
-typedef class CMSMethodAction CMSMethodAction;
-#else
-typedef struct CMSMethodAction CMSMethodAction;
-#endif /* __cplusplus */
-
-#endif 	/* __CMSMethodAction_FWD_DEFINED__ */
-
-
 #ifndef __CMSSegmentMetadata_FWD_DEFINED__
 #define __CMSSegmentMetadata_FWD_DEFINED__
 
@@ -805,6 +793,18 @@ typedef struct CMSSegmentMetadata CMSSegmentMetadata;
 #endif /* __cplusplus */
 
 #endif 	/* __CMSSegmentMetadata_FWD_DEFINED__ */
+
+
+#ifndef __CMSMethodAction_FWD_DEFINED__
+#define __CMSMethodAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CMSMethodAction CMSMethodAction;
+#else
+typedef struct CMSMethodAction CMSMethodAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CMSMethodAction_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -10203,6 +10203,133 @@ void __RPC_STUB IWritableSpectrumResult_SetMetadata_Stub(
 #endif 	/* __IWritableSpectrumResult_INTERFACE_DEFINED__ */
 
 
+#ifndef __IMSSegmentMetadata_INTERFACE_DEFINED__
+#define __IMSSegmentMetadata_INTERFACE_DEFINED__
+
+/* interface IMSSegmentMetadata */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMSSegmentMetadata;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("EC1007B0-EB8F-4234-85D1-31518BBBEE58")
+    IMSSegmentMetadata : public IMSMetadata
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMSSegmentMetadataVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMSSegmentMetadata * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMSSegmentMetadata * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMSSegmentMetadata * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMSSegmentMetadata * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMSSegmentMetadata * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMSSegmentMetadata * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMSSegmentMetadata * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EqualType )( 
+            IMSSegmentMetadata * This,
+            /* [in] */ IResultMetadata *metadata,
+            /* [retval][out] */ VARIANT_BOOL *out);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
+            IMSSegmentMetadata * This,
+            /* [retval][out] */ IResultMetadata **metadata);
+        
+        END_INTERFACE
+    } IMSSegmentMetadataVtbl;
+
+    interface IMSSegmentMetadata
+    {
+        CONST_VTBL struct IMSSegmentMetadataVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMSSegmentMetadata_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMSSegmentMetadata_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMSSegmentMetadata_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMSSegmentMetadata_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMSSegmentMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMSSegmentMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMSSegmentMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IMSSegmentMetadata_EqualType(This,metadata,out)	\
+    (This)->lpVtbl -> EqualType(This,metadata,out)
+
+#define IMSSegmentMetadata_Clone(This,metadata)	\
+    (This)->lpVtbl -> Clone(This,metadata)
+
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMSSegmentMetadata_INTERFACE_DEFINED__ */
+
+
 #ifndef __IMSMethodAction_INTERFACE_DEFINED__
 #define __IMSMethodAction_INTERFACE_DEFINED__
 
@@ -10352,133 +10479,6 @@ EXTERN_C const IID IID_IMSMethodAction;
 
 
 #endif 	/* __IMSMethodAction_INTERFACE_DEFINED__ */
-
-
-#ifndef __IMSSegmentMetadata_INTERFACE_DEFINED__
-#define __IMSSegmentMetadata_INTERFACE_DEFINED__
-
-/* interface IMSSegmentMetadata */
-/* [unique][helpstring][dual][uuid][object] */ 
-
-
-EXTERN_C const IID IID_IMSSegmentMetadata;
-
-#if defined(__cplusplus) && !defined(CINTERFACE)
-    
-    MIDL_INTERFACE("EC1007B0-EB8F-4234-85D1-31518BBBEE58")
-    IMSSegmentMetadata : public IMSMetadata
-    {
-    public:
-    };
-    
-#else 	/* C style interface */
-
-    typedef struct IMSSegmentMetadataVtbl
-    {
-        BEGIN_INTERFACE
-        
-        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
-            IMSSegmentMetadata * This,
-            /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
-        
-        ULONG ( STDMETHODCALLTYPE *AddRef )( 
-            IMSSegmentMetadata * This);
-        
-        ULONG ( STDMETHODCALLTYPE *Release )( 
-            IMSSegmentMetadata * This);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
-            IMSSegmentMetadata * This,
-            /* [out] */ UINT *pctinfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
-            IMSSegmentMetadata * This,
-            /* [in] */ UINT iTInfo,
-            /* [in] */ LCID lcid,
-            /* [out] */ ITypeInfo **ppTInfo);
-        
-        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
-            IMSSegmentMetadata * This,
-            /* [in] */ REFIID riid,
-            /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
-            /* [in] */ LCID lcid,
-            /* [size_is][out] */ DISPID *rgDispId);
-        
-        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
-            IMSSegmentMetadata * This,
-            /* [in] */ DISPID dispIdMember,
-            /* [in] */ REFIID riid,
-            /* [in] */ LCID lcid,
-            /* [in] */ WORD wFlags,
-            /* [out][in] */ DISPPARAMS *pDispParams,
-            /* [out] */ VARIANT *pVarResult,
-            /* [out] */ EXCEPINFO *pExcepInfo,
-            /* [out] */ UINT *puArgErr);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EqualType )( 
-            IMSSegmentMetadata * This,
-            /* [in] */ IResultMetadata *metadata,
-            /* [retval][out] */ VARIANT_BOOL *out);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
-            IMSSegmentMetadata * This,
-            /* [retval][out] */ IResultMetadata **metadata);
-        
-        END_INTERFACE
-    } IMSSegmentMetadataVtbl;
-
-    interface IMSSegmentMetadata
-    {
-        CONST_VTBL struct IMSSegmentMetadataVtbl *lpVtbl;
-    };
-
-    
-
-#ifdef COBJMACROS
-
-
-#define IMSSegmentMetadata_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
-
-#define IMSSegmentMetadata_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
-
-#define IMSSegmentMetadata_Release(This)	\
-    (This)->lpVtbl -> Release(This)
-
-
-#define IMSSegmentMetadata_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
-
-#define IMSSegmentMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
-
-#define IMSSegmentMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
-
-#define IMSSegmentMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
-
-
-#define IMSSegmentMetadata_EqualType(This,metadata,out)	\
-    (This)->lpVtbl -> EqualType(This,metadata,out)
-
-#define IMSSegmentMetadata_Clone(This,metadata)	\
-    (This)->lpVtbl -> Clone(This,metadata)
-
-
-
-#endif /* COBJMACROS */
-
-
-#endif 	/* C style interface */
-
-
-
-
-#endif 	/* __IMSSegmentMetadata_INTERFACE_DEFINED__ */
 
 
 
@@ -10731,20 +10731,20 @@ class DECLSPEC_UUID("45FBC041-D2C1-495D-8CC9-58019691E9CC")
 CSpectrumResultImpl;
 #endif
 
-EXTERN_C const CLSID CLSID_CMSMethodAction;
-
-#ifdef __cplusplus
-
-class DECLSPEC_UUID("FD0149F7-8FE6-47FB-8BE9-64A16DB8247C")
-CMSMethodAction;
-#endif
-
 EXTERN_C const CLSID CLSID_CMSSegmentMetadata;
 
 #ifdef __cplusplus
 
 class DECLSPEC_UUID("2EC18A59-16F4-4532-BCE8-360B777D68AF")
 CMSSegmentMetadata;
+#endif
+
+EXTERN_C const CLSID CLSID_CMSMethodAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("FD0149F7-8FE6-47FB-8BE9-64A16DB8247C")
+CMSMethodAction;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

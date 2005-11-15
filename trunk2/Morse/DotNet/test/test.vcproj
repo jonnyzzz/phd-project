@@ -223,6 +223,9 @@
 				RelativePath=".\Pefomance.cpp">
 			</File>
 			<File
+				RelativePath=".\PointGraphBuilderTest.cpp">
+			</File>
+			<File
 				RelativePath=".\PointGraphTest.cpp">
 			</File>
 			<File
@@ -295,6 +298,9 @@
 			</File>
 			<File
 				RelativePath=".\Pefomance.h">
+			</File>
+			<File
+				RelativePath=".\PointGraphBuilderTest.h">
 			</File>
 			<File
 				RelativePath=".\PointGraphTest.h">

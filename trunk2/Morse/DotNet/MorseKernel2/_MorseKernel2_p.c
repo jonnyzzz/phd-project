@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Nov 10 01:45:58 2005
+/* at Sun Nov 13 21:42:28 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -492,15 +492,15 @@ extern const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
-extern const MIDL_SERVER_INFO IMSMethodAction_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IMSMethodAction_ProxyInfo;
+extern const MIDL_SERVER_INFO IMSSegmentMetadata_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMSSegmentMetadata_ProxyInfo;
 
 
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
-extern const MIDL_SERVER_INFO IMSSegmentMetadata_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IMSSegmentMetadata_ProxyInfo;
+extern const MIDL_SERVER_INFO IMSMethodAction_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMSMethodAction_ProxyInfo;
 
 
 extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TABLE_SIZE ];
@@ -8229,6 +8229,78 @@ CInterfaceStubVtbl _IWritableSpectrumResultStubVtbl =
 };
 
 
+/* Object interface: IMSSegmentMetadata, ver. 0.0,
+   GUID={0xEC1007B0,0xEB8F,0x4234,{0x85,0xD1,0x31,0x51,0x8B,0xBB,0xEE,0x58}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMSSegmentMetadata_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    840,
+    882,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMSSegmentMetadata_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMSSegmentMetadata_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMSSegmentMetadata_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMSSegmentMetadata_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(9) _IMSSegmentMetadataProxyVtbl = 
+{
+    0,
+    &IID_IMSSegmentMetadata,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IResultMetadata::EqualType */ ,
+    0 /* forced delegation IResultMetadata::Clone */
+};
+
+
+static const PRPC_STUB_FUNCTION IMSSegmentMetadata_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMSSegmentMetadataStubVtbl =
+{
+    &IID_IMSSegmentMetadata,
+    &IMSSegmentMetadata_ServerInfo,
+    9,
+    &IMSSegmentMetadata_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: IMSMethodAction, ver. 0.0,
    GUID={0x729D2ADA,0x2C8A,0x453F,{0x97,0xFB,0x2A,0x3F,0x64,0x09,0xB1,0x17}} */
 
@@ -8306,78 +8378,6 @@ CInterfaceStubVtbl _IMSMethodActionStubVtbl =
     &IMSMethodAction_ServerInfo,
     12,
     &IMSMethodAction_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
-/* Object interface: IMSSegmentMetadata, ver. 0.0,
-   GUID={0xEC1007B0,0xEB8F,0x4234,{0x85,0xD1,0x31,0x51,0x8B,0xBB,0xEE,0x58}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short IMSSegmentMetadata_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    840,
-    882,
-    0
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO IMSSegmentMetadata_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &IMSSegmentMetadata_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO IMSSegmentMetadata_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &IMSSegmentMetadata_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(9) _IMSSegmentMetadataProxyVtbl = 
-{
-    0,
-    &IID_IMSSegmentMetadata,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */ ,
-    0 /* forced delegation IResultMetadata::EqualType */ ,
-    0 /* forced delegation IResultMetadata::Clone */
-};
-
-
-static const PRPC_STUB_FUNCTION IMSSegmentMetadata_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    NdrStubCall2,
-    NdrStubCall2
-};
-
-CInterfaceStubVtbl _IMSSegmentMetadataStubVtbl =
-{
-    &IID_IMSSegmentMetadata,
-    &IMSSegmentMetadata_ServerInfo,
-    9,
-    &IMSSegmentMetadata_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };
 

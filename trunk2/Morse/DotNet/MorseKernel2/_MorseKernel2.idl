@@ -845,17 +845,6 @@ interface IWritableSpectrumResult : IDispatch {
 
 [
 	object,
-	uuid(729D2ADA-2C8A-453F-97FB-2A3F6409B117),
-	dual,
-	helpstring("IMS2Metadata Interface"),
-	pointer_default(unique)
-] 
-#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msmethodaction.h"
-interface IMSMethodAction : IPointMethodAction {
-};
-
-[
-	object,
 	uuid(EC1007B0-EB8F-4234-85D1-31518BBBEE58),
 	dual,
 	helpstring("IMSSegmentMetadata Interface"),
@@ -863,6 +852,17 @@ interface IMSMethodAction : IPointMethodAction {
 ] 
 #line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mssegmentmetadata.h"
 interface IMSSegmentMetadata : IMSMetadata {
+};
+
+[
+	object,
+	uuid(729D2ADA-2C8A-453F-97FB-2A3F6409B117),
+	dual,
+	helpstring("IMS2Metadata Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msmethodaction.h"
+interface IMSMethodAction : IPointMethodAction {
 };
 
 
@@ -1264,6 +1264,18 @@ library MorseKernel2
 
 	[
 		version(1.0),
+		uuid(2EC18A59-16F4-4532-BCE8-360B777D68AF),
+		helpstring("MSSegmentMetadata Class")
+	] 
+#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mssegmentmetadata.h"
+	coclass CMSSegmentMetadata {
+		interface IMSSegmentMetadata;
+		interface IMSMetadata;
+		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
 		uuid(FD0149F7-8FE6-47FB-8BE9-64A16DB8247C),
 		helpstring("MSMethodAction Class")
 	] 
@@ -1273,18 +1285,6 @@ library MorseKernel2
 		interface IPointMethodAction;
 		interface IAction;
 		interface IActionBase;
-	};
-
-	[
-		version(1.0),
-		uuid(2EC18A59-16F4-4532-BCE8-360B777D68AF),
-		helpstring("MSSegmentMetadata Class")
-	] 
-#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mssegmentmetadata.h"
-	coclass CMSSegmentMetadata {
-		interface IMSSegmentMetadata;
-		interface IMSMetadata;
-		interface IResultMetadata;
 	};
 
 }

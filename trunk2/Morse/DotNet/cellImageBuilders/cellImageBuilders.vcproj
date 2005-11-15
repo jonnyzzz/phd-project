@@ -189,6 +189,9 @@
 				RelativePath=".\MSPointBuilder.h">
 			</File>
 			<File
+				RelativePath=".\MSSegmentBoxProcess.h">
+			</File>
+			<File
 				RelativePath=".\onsoleProgressBarInfo.h">
 			</File>
 			<File
@@ -275,6 +278,9 @@
 			</File>
 			<File
 				RelativePath=".\MSPointBuilder.cpp">
+			</File>
+			<File
+				RelativePath=".\MSSegmentBoxProcess.cpp">
 			</File>
 			<File
 				RelativePath=".\Processes.cpp">

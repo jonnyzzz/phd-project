@@ -1,6 +1,7 @@
 #pragma once
 
 #include <list>
+#include <set>
 using namespace std;
 #include "../SystemFunction/ISystemFunction.h"
 #include "../graph/ExtendedMenoryManager.h"
@@ -16,16 +17,13 @@ public:
     class Node;
     class Edge;
     typedef list<Edge*> EdgeList;
+    typedef set<Node*> NodeSet;
     typedef list<Node*> NodeList;
 
     class Edge {
     public:
         Node* left;
-        Node* right;
-        bool checked;
-
-        Edge* parent;
-        int order;
+        Node* right;        
     };
 
     class Node : public ExtendedMemoryManager::DisposeHandler {
@@ -34,7 +32,7 @@ public:
     public:
         double* points;
         double* valueCache;
-        EdgeList edges;
+        NodeSet edges;
     };
 
 
@@ -44,12 +42,9 @@ private:
     Node* createNode();
     double* createArray();
 
-
-
 public:
-    Edge* AddEdge(Node* left, Node* right, Edge* parent); //no duplicate checking!
+    Edge* AddEdge(Node* left, Node* right); //no duplicate checking!
     Node* AddNode(const double* node); //no duplicate checking!
-    Node* AddNodeWithAllEdges(const double* node);
 
     void evaluateNodeCache(Node* node);
     bool chackEdgeLength(Edge* edge, double* precision);
@@ -70,9 +65,6 @@ private:
     NodeList nodes;
     EdgeList edges;
 
-    int edge_counter;
-    int cheched_counter;
-
 private:
     double* function_input;
     double* function_output;
@@ -80,17 +72,8 @@ private:
 private:
     double* arraycopy(const double* x);
     void arraycopy(double* to, const double* from);
-
-    double distance(double* left, double* right);
-
     Node* AddNodeInternal(double* node);
-
     double Abs(double x);
-
-    Edge* AddEdge(Node* newNode, Edge* edge, Node* from);
-
-    bool ChechParentness(Edge* edgeR, Edge* edgeM);
-
 
 public:
 

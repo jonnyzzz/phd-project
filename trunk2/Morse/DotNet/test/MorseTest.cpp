@@ -69,8 +69,8 @@ void MorseTest::statr() {
 	//MS_Step
 	MULTI(
 	{
-		SmartDFunction dfuncEx = info.getSystemFunction();
-		SmartProcess pb = new MSOverlapedPointBuilder(cms->getAt(0), factor2, ks, offset1, offset1, dfuncEx, &pinfo);
+		SmartDFunction dfuncEx = info.getSystemFunction();        
+		SmartProcess pb = new MSOverlapedPointBuilder(cms->getAt(0), factor2, ks, offset1, offset1, (SegmentProjectiveExtendedSystemFunction*)(dfuncEx.object()), &pinfo);
 		pb->start();
 		for (int i=0; i<cms->length(); i++) {
 			pb->processNextGraph(cms->getAt(i));

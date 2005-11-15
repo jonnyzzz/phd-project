@@ -61,7 +61,7 @@ void PointGraphProcessor::ProcessNode(Node* node) {
 
         */
 
-        pointGraph.AddNodeWithAllEdges(x);
+        //pointGraph.AddNodeWithAllEdges(x);
 
         b[0]++;
         int j=0;

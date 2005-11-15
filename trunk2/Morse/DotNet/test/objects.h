@@ -27,6 +27,10 @@ public:
         return *p;
     }
 
+    P* object() {
+        return p;
+    }
+
 	smartPointer& operator = (const smartPointer& sp) {
 		this->p = sp.p;
 		sp.p = NULL;
