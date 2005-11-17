@@ -487,9 +487,9 @@ uchar* FunctionNative::compileMax(uchar* code, FunctionNodeMax* node) {
 
 
 uchar* FunctionNative::compileIfLZ(uchar* code, FunctionNodeIfLZ* node) {
-   code = compileFunctionNode(code, node->getFl());
-   code = compileFunctionNode(code, node->getTr());
    code = compileFunctionNode(code, node->getCs());
+   code = compileFunctionNode(code, node->getTr());
+   code = compileFunctionNode(code, node->getFl());   
    code = compileDoubleDoubleNCall(code, &myiflz, 3);
 
    return code;

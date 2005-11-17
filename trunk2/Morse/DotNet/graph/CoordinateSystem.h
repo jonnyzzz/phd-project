@@ -39,6 +39,7 @@ public:
 	bool intersects(const JDouble* min, const JDouble* max, int lbound, int rbound) const;
     bool intersects(const JDouble* min, const JDouble* max, int u_bound) const;
 	bool intersects(const JDouble* min, const JDouble* max) const;
+    bool intersects(const JDouble* x) const;
 	bool intersects(const JInt* cell) const;
     
 

@@ -108,10 +108,11 @@ void IntervalEvaluator::VisitIfLZ(FunctionNodeIfLZ* node) {
 	Interval cs = this->ret_value;
 
 	//todo: Incorrect cases for that construction
-	if (cs < 0)
+    if (cs.upper() < 0)
 		node->getTr()->Accept(this);
-	else if (cs >=0) 
+    else /*if (cs.lower() >0) */
 		node->getFl()->Accept(this);
+    
 }
 void IntervalEvaluator::VisitDiv(FunctionNodeDiv* node) {
 	node->getLeft()->Accept(this);

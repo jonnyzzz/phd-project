@@ -1,5 +1,5 @@
-#include "StdAfx.h"
-#include ".\adaptiveboxtest.h"
+#include "stdafx.h"
+#include "AdaptiveBoxTest.h"
 #include <iostream>
 using namespace std;
 #include "objects.h"

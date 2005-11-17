@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Nov 13 21:42:28 2005
+/* at Thu Nov 17 03:38:01 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -4142,6 +4142,7 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetRecomendedPrecision( 
             /* [in] */ IResultSet *in,
+            /* [in] */ int index,
             /* [retval][out] */ double *prec) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetDimension( 
@@ -4217,6 +4218,7 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetRecomendedPrecision )( 
             IAdaptiveMethodAction * This,
             /* [in] */ IResultSet *in,
+            /* [in] */ int index,
             /* [retval][out] */ double *prec);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimension )( 
@@ -4274,8 +4276,8 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
     (This)->lpVtbl -> Do(This,input,output)
 
 
-#define IAdaptiveMethodAction_GetRecomendedPrecision(This,in,prec)	\
-    (This)->lpVtbl -> GetRecomendedPrecision(This,in,prec)
+#define IAdaptiveMethodAction_GetRecomendedPrecision(This,in,index,prec)	\
+    (This)->lpVtbl -> GetRecomendedPrecision(This,in,index,prec)
 
 #define IAdaptiveMethodAction_GetDimension(This,in,dim)	\
     (This)->lpVtbl -> GetDimension(This,in,dim)
@@ -4290,6 +4292,7 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
 /* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodAction_GetRecomendedPrecision_Proxy( 
     IAdaptiveMethodAction * This,
     /* [in] */ IResultSet *in,
+    /* [in] */ int index,
     /* [retval][out] */ double *prec);
 
 
@@ -4337,6 +4340,7 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
             /* [retval][out] */ int *factor) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetPrecision( 
+            /* [in] */ int index,
             /* [retval][out] */ double *prec) = 0;
         
     };
@@ -4398,6 +4402,7 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetPrecision )( 
             IAdaptiveMethodParameters * This,
+            /* [in] */ int index,
             /* [retval][out] */ double *prec);
         
         END_INTERFACE
@@ -4444,8 +4449,8 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
 #define IAdaptiveMethodParameters_GetFactor(This,index,factor)	\
     (This)->lpVtbl -> GetFactor(This,index,factor)
 
-#define IAdaptiveMethodParameters_GetPrecision(This,prec)	\
-    (This)->lpVtbl -> GetPrecision(This,prec)
+#define IAdaptiveMethodParameters_GetPrecision(This,index,prec)	\
+    (This)->lpVtbl -> GetPrecision(This,index,prec)
 
 #endif /* COBJMACROS */
 
@@ -4469,6 +4474,7 @@ void __RPC_STUB IAdaptiveMethodParameters_GetFactor_Stub(
 
 /* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodParameters_GetPrecision_Proxy( 
     IAdaptiveMethodParameters * This,
+    /* [in] */ int index,
     /* [retval][out] */ double *prec);
 
 

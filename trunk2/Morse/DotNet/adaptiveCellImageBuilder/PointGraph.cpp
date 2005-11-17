@@ -97,9 +97,13 @@ double inline PointGraph::Abs(double x) {
 bool PointGraph::chackEdgeLength(PointGraph::Edge* edge, double* precision) {
     evaluateNodeCache(edge->left);
     evaluateNodeCache(edge->right);
+    
+    return !NeedDevideEdge(edge->left->valueCache, edge->right->valueCache, precision);
+}
 
+bool PointGraph::NeedDevideEdge(const double* left, const double* right, const double* precision) {
     for (int i=0; i<dimension; i++) {
-        if (Abs(edge->left->valueCache[i] - edge->right->valueCache[i]) > precision[i]){
+        if (Abs(left[i] - right[i]) > precision[i]){
             return false;
         }
     }
@@ -161,24 +165,37 @@ const PointGraph::NodeList& PointGraph::Points() {
     return nodes;
 }
 
+void PointGraph::DumpNode(PointGraph::Node* node, ostream& o) {
+    for (int i=0; i<dimension; i++) {
+        o<<node->points[i];
+        if (i+1 != dimension)
+            o<<", ";
+    }
+}
 
 void PointGraph::Dump(ostream& o) {
     o<<"\n\nDumping Point Graph\nNodes = "<<nodes.size()<<"\n";
     o<<"Edges counter: \n";
     int cnt = 0;
     for (NodeList::iterator it = nodes.begin(); it != nodes.end(); ++it) {
-        cout<<"Node["<<(*it)->points[0]<<"]->Edges="<<(*it)->edges.size()<<"\n";
+        o<<"Node[";
+        DumpNode((*it),o);
+        o<<"]->Edges="<<(*it)->edges.size()<<"\n";
     }
-    cout<<"\n\n";
+    o<<"\n\n";
 
-    cout<<"Adj matrix :\n";
+    o<<"Adj matrix :\n";
     for (NodeList::iterator it = nodes.begin(); it != nodes.end(); ++it) {
-        cout<<"Node "<<(*it)->points[0]<<" -> ";
+        o<<"Node[";
+        DumpNode((*it), o);
+        o<<"] -> ";
         for (NodeSet::iterator itt = (*it)->edges.begin(); itt != (*it)->edges.end(); itt++) {
             Node* tmp = *itt;            
-            cout<<"Node["<<tmp->points[0]<<"], ";
+            o<<"Node[";
+            DumpNode(tmp, o);
+            o<<"], ";
         }
-        cout<<"\n";
+        o<<"\n";
     }
-    cout<<"\n\n";
+    o<<"\n\n";
 }      

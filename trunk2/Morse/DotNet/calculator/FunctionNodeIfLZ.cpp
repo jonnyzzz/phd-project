@@ -34,7 +34,7 @@ double FunctionNodeIfLZ::evaluate(FunctionContext* cx) {
 }
 
 bool FunctionNodeIfLZ::canSimplify(FunctionContext* cx) {
-   return tr->canSimplify(cx) && fl->canSimplify(cx) && cs->canSimplify(cx);
+   return tr->canSimplify(cx) || fl->canSimplify(cx) || cs->canSimplify(cx);
 }
 
 

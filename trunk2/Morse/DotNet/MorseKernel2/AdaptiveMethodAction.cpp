@@ -72,11 +72,7 @@ STDMETHODIMP CAdaptiveMethodAction::Do(IResultSet* in, IResultSet **out) {
 	ATLASSERT(function != NULL);
 
     HRESULT hr;
-
-    double precision;
-    hr = parameters->GetPrecision(&precision);
-    ATLASSERT(SUCCEEDED(hr));
-
+    
 	ISystemFunction* func;
     hr = function->GetSystemFunction((void**)&func);
 	ATLASSERT(SUCCEEDED(hr));
@@ -84,19 +80,18 @@ STDMETHODIMP CAdaptiveMethodAction::Do(IResultSet* in, IResultSet **out) {
     int dimension;
 	hr = function->GetDimension(&dimension);
 	ATLASSERT(SUCCEEDED(hr));
-
+   
 	cout<<"Dimension = "<<dimension<<"\n";
-    cout<<"Precision = "<<precision<<"\n";
 
 	int* factor = new int[dimension];
     double* prec = new double[dimension];
 	for (int i=0; i<dimension; i++) {
-		hr = parameters->GetFactor(i, &factor[i]);
-		cout<<"factor = "<<factor[i]<<"\n";
+		hr = parameters->GetFactor(i, &factor[i]);		
 		ATLASSERT(SUCCEEDED(hr));
-        prec[i] = precision;
+        hr = parameters->GetPrecision(i, &prec[i]);
+        ATLASSERT(SUCCEEDED(hr));
+        cout<<"factor = "<<factor[i]<<"  prec = "<<prec[i]<<"\n";
 	}
-
     GraphResultGraphIterator it(in);
 
     AdaptiveProvess process(func, it, factor, prec, &pinfo);
@@ -114,19 +109,18 @@ STDMETHODIMP CAdaptiveMethodAction::Do(IResultSet* in, IResultSet **out) {
 }
 
 
-STDMETHODIMP CAdaptiveMethodAction::GetRecomendedPrecision(IResultSet* in, double* prec) {
+STDMETHODIMP CAdaptiveMethodAction::GetRecomendedPrecision(IResultSet* in, int index, double* prec) {
     VARIANT_BOOL test;
 	CanDo(in, &test);
 
 	if (test = VARIANT_FALSE) return E_INVALIDARG;
 
 	GraphResultGraphIterator it(in);
-
-    Graph* graph = it;
-    double d = graph->getEps()[0];
-    for (int i=1; i<graph->getDimention(); i++) {
-        if (d < graph->getEps()[i]) {
-            d = graph->getEps()[i];
+    
+    double d = it->getEps()[index];    
+    for (; it.HasNext(); it.Next()) {
+        if (d < it->getEps()[index]) {
+            d = it->getEps()[index];
         }
     }
 

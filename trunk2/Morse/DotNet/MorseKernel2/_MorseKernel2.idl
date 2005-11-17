@@ -324,7 +324,7 @@ interface IResultSetImpl : IDispatch {
 #line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
 interface IAdaptiveMethodAction : IAction {
 #line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
-	[id(110)] HRESULT  GetRecomendedPrecision([in] IResultSet *in, [out,retval] double *prec);
+	[id(110)] HRESULT  GetRecomendedPrecision([in] IResultSet *in, [in] int index, [out,retval] double *prec);
 #line 20 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
 	[id(111)] HRESULT  GetDimension([in] IResultSet *in, [out,retval] int *dim);
 };
@@ -340,7 +340,7 @@ interface IAdaptiveMethodParameters : IComputationParameters {
 #line 31 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
 	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
 #line 33 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
-	[id(11)] HRESULT  GetPrecision([out,retval] double *prec);
+	[id(11)] HRESULT  GetPrecision([in] int index, [out,retval] double *prec);
 };
 
 [

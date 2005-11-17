@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using System.Data;
 using guiControls.Control;
 
@@ -9,6 +9,8 @@ namespace guiControls.Grid
 	{
 		private System.Windows.Forms.DataGrid grid;
 		private System.ComponentModel.Container components = null;
+        private DataTable currentTable = null;
+        private Hashtable/*<DataRow, IExGridRow>*/ rowToExGrid = null;
 
 		private IExGridRow[] rows;
 		private int dimension;
@@ -42,6 +44,12 @@ namespace guiControls.Grid
 			rows = value;
 			FillGrid();
 		}
+
+        public void ReLoadData()
+        {
+            FillGrid();
+            grid.Update();
+        }
 
 		protected override void Dispose( bool disposing )
 		{
@@ -92,7 +100,7 @@ namespace guiControls.Grid
 			this.grid.SelectionBackColor = System.Drawing.Color.Teal;
 			this.grid.SelectionForeColor = System.Drawing.Color.PaleGreen;
 			this.grid.Size = new System.Drawing.Size(312, 264);
-			this.grid.TabIndex = 0;
+			this.grid.TabIndex = 0;            
 			// 
 			// ExGrid
 			// 
@@ -105,41 +113,43 @@ namespace guiControls.Grid
 		}
 		#endregion
 
-
-
 		private void FillGrid()
 		{
-			DataTable table = new DataTable();
+
+            if (currentTable != null)
+                currentTable.RowChanged -= new DataRowChangeEventHandler(table_RowChanged);
+
+            rowToExGrid = new Hashtable();
+			currentTable = new DataTable();
+            currentTable.RowChanged += new DataRowChangeEventHandler(table_RowChanged);
 
 			DataColumn column = new DataColumn("Parameter", typeof(string));
 			column.ReadOnly = true;
-			table.Columns.Add(column);
+			currentTable.Columns.Add(column);
 
 			for (int i=1; i<=dimension; i++ )
 			{
 				column = new DataColumn("x" + i);
-				table.Columns.Add(column);
+				currentTable.Columns.Add(column);
 			}
 
 
-			for (int i=0; i< rows.Length; i++)
-			{
-				IExGridRow info = rows[i];
-
-				DataRow row = table.NewRow();
+		    foreach (IExGridRow info in rows)
+		    {
+				DataRow row = currentTable.NewRow();                
 				row[0] = info.Caption;
 				for (int j=0; j<dimension; j++)
 				{
 					row[j+1] = info[j];
 				}
-				table.Rows.Add(row);
+				currentTable.Rows.Add(row);
+                rowToExGrid[row] = info;
 			}
 
-			DataView dataView = new DataView(table);
+			DataView dataView = new DataView(currentTable);
 			dataView.AllowNew = false;
 			dataView.AllowDelete = false;
-			
-			
+						
 			grid.AllowSorting = false;
 			grid.AllowNavigation = false;
 			grid.DataSource = dataView;
@@ -171,11 +181,23 @@ namespace guiControls.Grid
 		}
 
 		private void grid_ChangeUICues(object sender, System.Windows.Forms.UICuesEventArgs e)
-		{
+		{		    
 			if (DataChanged != null)
 			{
 				DataChanged();
 			}
-		}
-	}
+        }
+
+        private void table_RowChanged(object sender, DataRowChangeEventArgs e)
+        {            
+            IExGridHandler h = rowToExGrid[e.Row] as IExGridHandler;
+            if (h != null)
+            {
+                if (!h.NeedAcceptRowChanged())
+                {
+                    //e.Row.RejectChanges();
+                }
+            }            
+        }
+    }
 }

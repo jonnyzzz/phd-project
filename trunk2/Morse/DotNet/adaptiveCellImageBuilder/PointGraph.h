@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _ADAPTIVECELLIMAGEBULDERS_POINT_GRAPH_H
+#define _ADAPTIVECELLIMAGEBULDERS_POINT_GRAPH_H
 
 #include <list>
 #include <set>
@@ -13,13 +14,28 @@ public:
     virtual ~PointGraph(void);
 
 public:
-
     class Node;
     class Edge;
     typedef list<Edge*> EdgeList;
     typedef set<Node*> NodeSet;
     typedef list<Node*> NodeList;
 
+
+public:
+    Edge* AddEdge(Node* left, Node* right); //no duplicate checking!
+    Node* AddNode(const double* node); //no duplicate checking!
+    
+    void Iterate(double* precision);
+    const NodeList& Points();
+    void Reset();
+
+protected:
+    const int dimension;
+
+protected:
+    virtual bool NeedDevideEdge(const double* left, const double* right, const double* precision);
+
+public:
     class Edge {
     public:
         Node* left;
@@ -35,31 +51,19 @@ public:
         NodeSet edges;
     };
 
-
-
 private:
     Edge* createEdge();
     Node* createNode();
     double* createArray();
 
-public:
-    Edge* AddEdge(Node* left, Node* right); //no duplicate checking!
-    Node* AddNode(const double* node); //no duplicate checking!
-
+private:
     void evaluateNodeCache(Node* node);
     bool chackEdgeLength(Edge* edge, double* precision);
 
     Node* split(Edge* edge);
-
-    void Iterate(double* precision);
-
-    const NodeList& Points();
-
-    void Reset();
         
 private:
-    ISystemFunction* function;
-    int dimension;
+    ISystemFunction* function;    
     ExtendedMemoryManager manager;
 
     NodeList nodes;
@@ -76,7 +80,9 @@ private:
     double Abs(double x);
 
 public:
-
+    void DumpNode(Node* node, ostream& o);
     void Dump(ostream& o);
     
 };
+
+#endif //_ADAPTIVECELLIMAGEBULDERS_POINT_GRAPH_H

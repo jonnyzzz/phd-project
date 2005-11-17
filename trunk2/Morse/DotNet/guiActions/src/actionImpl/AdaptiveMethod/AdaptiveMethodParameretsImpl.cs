@@ -10,10 +10,10 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
 	public class AdaptiveMethodParameretsImpl : IAdaptiveMethodParameters 
 	{
 	    private int[] factor;
-	    private double precision;
+	    private double[] precision;
 	    private Function function;
 
-	    public AdaptiveMethodParameretsImpl(int[] factor, double precision, Function function)
+	    public AdaptiveMethodParameretsImpl(int[] factor, double[] precision, Function function)
 	    {
 	        this.factor = factor;
 	        this.precision = precision;
@@ -25,9 +25,9 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
 	        return factor[index];
 	    }
 
-	    public double GetPrecision()
+	    public double GetPrecision(int index)
 	    {
-	        return precision;
+	        return precision[index];
 	    }
 
 	    public IFunction GetFunction()

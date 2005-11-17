@@ -71,6 +71,3 @@ double ProjectiveSystemFunctionDerivate::encode(const double* input, double* out
     }
     return v;
 }
-
-
-}

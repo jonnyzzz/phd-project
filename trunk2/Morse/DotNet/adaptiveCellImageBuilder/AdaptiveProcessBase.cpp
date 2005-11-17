@@ -58,7 +58,7 @@ void AdaptiveProcessBase::processNode(Graph* graph, Node* node) {
         }
 
         Node* resultNode = resultGraph->browseTo(x);
-        cout<<"\n\nNode....\n\n";
+        //cout<<"\n\nNode....\n\n";
 
         processResultNode(resultNode);               
         

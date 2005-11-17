@@ -17,6 +17,11 @@ namespace guiControls.Grid.Rows
 	        this.caption = caption;
 	    }
 
+        public void SetValue(int index, double val)
+        {
+            this.data[index] = val;
+        }
+
 	    public string this[int index]
 	    {
 	        get { return data[index].ToString(); }

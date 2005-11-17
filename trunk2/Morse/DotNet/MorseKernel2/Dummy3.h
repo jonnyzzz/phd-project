@@ -64,7 +64,7 @@ public:
         // Add your function implementation here.
         return E_NOTIMPL;
     }
-    STDMETHOD(GetPrecision)(double * prec)
+    STDMETHOD(GetPrecision)(int i, double * prec)
     {
         // Add your function implementation here.
         return E_NOTIMPL;

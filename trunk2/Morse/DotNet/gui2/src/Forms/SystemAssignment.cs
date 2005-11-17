@@ -435,6 +435,7 @@ namespace gui2.Forms
 			} 
 			catch (FunctionExceptions ee)
 			{
+			    Logger.Logger.LogException(ee);
 				MessageBox.Show(this, ee.Message, "Error in Function");
 				return null;
 			}

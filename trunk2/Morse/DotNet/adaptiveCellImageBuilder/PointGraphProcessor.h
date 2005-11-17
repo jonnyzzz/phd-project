@@ -1,10 +1,11 @@
 #pragma once
 
-#include "..\systemFunction\ISystemFunction.h"
+#include "../SystemFunction/ISystemFunction.h"
 #include <list>
 using namespace std;
-#include "pointGraph.h"
-#include "..\graph\graph.h"
+#include "PointGraph.h"
+#include "../graph/Graph.h"
+#include "PointGraphBuilder.h"
 
 class PointGraphProcessor
 {
@@ -18,7 +19,22 @@ public:
     void ProcessNode(Node* node);
 
 private:
-    PointGraph pointGraph;
+    class PointGraphEx : public PointGraph {
+    public:
+        PointGraphEx(Graph* graph, ISystemFunction* function, int dimension);
+        virtual ~PointGraphEx();
+    private:
+        Graph* graph;
+    private:
+        double Abs(double x);
+    protected:
+        virtual bool NeedDevideEdge(const double* left, const double* right, const double* precision);
+    };
+
+
+private:
+    PointGraphEx pointGraph;
+    PointGraphBuilder pointGraphBuilder;
     Graph* graph;
     int dimension;
 

@@ -119,9 +119,6 @@
 				RelativePath=".\AdaptiveProvess.cpp">
 			</File>
 			<File
-				RelativePath=".\Box.cpp">
-			</File>
-			<File
 				RelativePath=".\PointGraph.cpp">
 			</File>
 			<File
@@ -158,9 +155,6 @@
 			</File>
 			<File
 				RelativePath=".\AdaptiveProvess.h">
-			</File>
-			<File
-				RelativePath=".\Box.h">
 			</File>
 			<File
 				RelativePath=".\PointGraph.h">

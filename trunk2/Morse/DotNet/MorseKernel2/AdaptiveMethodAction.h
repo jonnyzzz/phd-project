@@ -15,7 +15,7 @@
 __interface IAdaptiveMethodAction : IAction
 {
     [id(110)]
-    HRESULT GetRecomendedPrecision([in] IResultSet* in,  [out, retval] double* prec);
+    HRESULT GetRecomendedPrecision([in] IResultSet* in, [in] int index, [out, retval] double* prec);
     [id(111)]
     HRESULT GetDimension([in] IResultSet* in, [out, retval] int* dim);
 };
@@ -30,7 +30,7 @@ __interface IAdaptiveMethodParameters : IComputationParameters {
     [id(10)]
     HRESULT GetFactor([in] int index, [out, retval] int* factor);
     [id(11)]
-    HRESULT GetPrecision([out, retval] double* prec);
+    HRESULT GetPrecision([in] int index, [out, retval] double* prec);
 };
 
 
@@ -64,7 +64,7 @@ public:
 	STDMETHOD(Do)(IResultSet* in, IResultSet** out);
 
 public:
-    STDMETHOD(GetRecomendedPrecision)(IResultSet* in, double* prec);
+    STDMETHOD(GetRecomendedPrecision)(IResultSet* in, int index, double* prec);
     STDMETHOD(GetDimension)(IResultSet* in, int* dim);
 
 

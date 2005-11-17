@@ -14,6 +14,7 @@
 #include "MinimalLoopTest.h"
 #include "IsolatingProcessTest.h"
 #include "PointGraphTest.h"
+#include "PointGraphBuilderTest.h"
 #include "ms2dMorseTest.h"
 #include "AdaptiveBoxTest.h"
 #include "MemoryManagerTest.h"
@@ -33,7 +34,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
     //testRomFromFile("o:\\aaaa");
 
 
-    PointGraphTest("PointGraphTest", cout).Test();
+    //PointGraphTest("PointGraphTest", cout).Test();
+    PointGraphBuilderTest().Test();
     //MS2DMorseTest().Test();
     //AdaptiveBoxTest().Test();
     //MemoryManagerTest().Test();

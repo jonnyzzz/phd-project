@@ -10,4 +10,9 @@ namespace guiControls.Grid
 		string this[int index] {get; set;}
 		string Caption{ get; }
 	}
+
+    public interface IExGridHandler
+    {
+        bool NeedAcceptRowChanged();
+    }
 }

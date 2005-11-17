@@ -1,9 +1,8 @@
 #pragma once
-#include "adaptiveprocessbase.h"
+#include "AdaptiveProcessBase.h"
 #include "../graph/memoryManager.h"
 #include <list>
 using namespace std;
-#include "BoxEdge.h"
 
 class AdaptiveBoxMethod :
     public AdaptiveProcessBase

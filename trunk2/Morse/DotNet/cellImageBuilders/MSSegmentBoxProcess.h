@@ -1,3 +1,4 @@
+/*
 #pragma once
 #include "AbstractBoxProcess.h"
 
@@ -24,3 +25,4 @@ private:
     double* inputV;
     double* outputV;
 };
+*/

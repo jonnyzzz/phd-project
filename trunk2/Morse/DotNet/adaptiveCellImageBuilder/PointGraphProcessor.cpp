@@ -9,7 +9,8 @@ static char THIS_FILE[] = __FILE__;
 
 
 PointGraphProcessor::PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision)
-: graph(graph), dimension(dimension), pointGraph(function, dimension)
+: graph(graph), dimension(dimension), pointGraph(graph, function, dimension),
+  pointGraphBuilder(dimension, graph->getEps(), pointGraph)
 {
     x = new JDouble[dimension];
     x0 = new JDouble[dimension];
@@ -40,43 +41,11 @@ PointGraphProcessor::~PointGraphProcessor(void)
 void PointGraphProcessor::ProcessNode(Node* node) {        
     pointGraph.Reset();
 
-    ZeroMemory(b, sizeof(JInt)*(dimension+1));
-    ZeroMemory(a, sizeof(JInt)*(dimension+1));
-
-    PointGraph::Node* oldNode = NULL;
-    PointGraph::Node* newNode = NULL;
-
-    while (b[dimension] == 0) {
-
-        for (int i=0; i<dimension; i++) {
-            x[i] = graph->toExternal(graph->getCells(node)[i],i) + (a[i] == 1?graph->getEps()[i]:0);
-        }
-
-        /*
-        oldNode = newNode;
-        newNode = pointGraph.AddNode(x);
-
-        if( oldNode != NULL) {
-            pointGraph.AddEdge(oldNode, newNode);
-
-        */
-
-        //pointGraph.AddNodeWithAllEdges(x);
-
-        b[0]++;
-        int j=0;
-        for (int i=0; i<dimension; i++) {
-            if (b[i] > 1) {
-                b[i] = 0;
-                b[i+1]++;
-                j = i;
-            } else {
-                break;
-            }
-        }
-        a[j] = 1 - a[j];
-    }
-
+    for (int i=0; i<dimension; i++) {
+        x[i] = graph->toExternal(graph->getCells(node)[i],i);
+    }   
+    pointGraphBuilder.BuildInitialGraph(x);
+    
     pointGraph.Iterate(precision);
 
     const PointGraph::NodeList& list = pointGraph.Points();
@@ -84,4 +53,20 @@ void PointGraphProcessor::ProcessNode(Node* node) {
     for (PointGraph::NodeList::const_iterator it = list.begin(); it != list.end(); ++it) {
         graph->addEdgeWithOverlaping(node, (*it)->valueCache, overlap1, overlap2);
     }
+}
+
+PointGraphProcessor::PointGraphEx::PointGraphEx(Graph* graph, ISystemFunction* function, int dim) : PointGraph(function, dim), graph(graph) {}
+PointGraphProcessor::PointGraphEx::~PointGraphEx() {}
+
+double inline PointGraphProcessor::PointGraphEx::Abs(double x) {
+    return (x>0)?x:-x;
+}
+
+bool PointGraphProcessor::PointGraphEx::NeedDevideEdge(const double* left, const double* right, const double* precision) {
+    if (!graph->intersects(left) || !graph->intersects(right)) 
+        return false;
+    for (int i=0;i<dimension; i++) {
+        if (Abs(left-right) > precision[i]) return false;
+    }
+    return true;
 }

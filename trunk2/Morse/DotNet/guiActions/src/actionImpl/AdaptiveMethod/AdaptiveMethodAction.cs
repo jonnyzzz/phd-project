@@ -1,4 +1,3 @@
-using System;
 using guiActions.Actions;
 using guiActions.Parameters;
 using guiActions.src.actionImpl.AdaptiveMethod;
@@ -24,7 +23,11 @@ namespace guiActions.ActionImpl.AdaptiveMethod
 	    {
 	        IAdaptiveMethodAction action = (IAdaptiveMethodAction)Action;
 	        int dim = action.GetDimension(node.Results.ToResultSet);
-            double precision = action.GetRecomendedPrecision(node.Results.ToResultSet);
+            double[] precision = new double[dim];
+            for (int i=0; i<dim; i++)
+            {
+                precision[i] = action.GetRecomendedPrecision(node.Results.ToResultSet, i);
+            }
             return new AdaptiveMethodParameters(dim, Core.Instance.KernelDocument.Function, precision );
 	    }
 
