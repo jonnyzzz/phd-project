@@ -12,11 +12,13 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
 	    private int[] factor;
 	    private double[] precision;
 	    private Function function;
+	    private int upperLimit;
 
-	    public AdaptiveMethodParameretsImpl(int[] factor, double[] precision, Function function)
+	    public AdaptiveMethodParameretsImpl(int[] factor, double[] precision, int upperLimit, Function function)
 	    {
 	        this.factor = factor;
 	        this.precision = precision;
+	        this.upperLimit = upperLimit;
 	        this.function = function;
 	    }
 
@@ -28,6 +30,11 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
 	    public double GetPrecision(int index)
 	    {
 	        return precision[index];
+	    }
+
+	    public int GetUpperLimit()
+	    {
+	        return upperLimit;
 	    }
 
 	    public IFunction GetFunction()

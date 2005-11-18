@@ -82,6 +82,9 @@ Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* 
 	pointT = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
 	pointB = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];
 	pointV = AllocateArray<JInt>(dimention+1);//new JInt[dimention+1];    
+
+    pointMax = AllocateArray<JDouble>(dimention+1);//new JInt[dimention+1];    
+    pointMin = AllocateArray<JDouble>(dimention+1);//new JInt[dimention+1];    
 #else
 	emin =  new JInt[dimention];
 	emax =  new JInt[dimention];
@@ -89,6 +92,9 @@ Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* 
 	pointT = new JInt[dimention+1];
 	pointB = new JInt[dimention+1];
 	pointV = new JInt[dimention+1];
+
+    pointMin = new JDouble[dimention];
+    pointMax = new JDouble[dimention];
 #endif
 }
 
@@ -114,6 +120,8 @@ Graph::~Graph()
 	delete[] pointT;
 	delete[] pointB;
 	delete[] pointV;
+    delete[] pointMin;
+    delete[] pointMax;
 #endif
 }
 
@@ -458,6 +466,17 @@ Edge* Graph::browseTo(Node* from, Node* to) {
 JDouble inline Graph::getExtent(int i) {
 	return this->getEps()[i]/10;
 }
+
+void Graph::addEdgesRadius(Node* node, const JDouble* center, const JDouble* radius, bool needInverse) {
+
+    for (int i=0; i<dimention; i++) {
+        pointMin[i] = center[i] - radius[i];
+        pointMax[i] = center[i] + radius[i];
+    }
+
+    addEdges(node, pointMin, pointMax, needInverse);
+}
+
 
 void Graph::addEdges(Node* node, const JDouble* min, const JDouble* max, bool needInverse) {	
 	if (!intersects(min, max)) return;

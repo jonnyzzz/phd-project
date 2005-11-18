@@ -13,9 +13,10 @@ static char THIS_FILE[] = __FILE__;
 
 
 
-PointGraph::PointGraph(ISystemFunction* function, int dimension):
+PointGraph::PointGraph(ISystemFunction* function, int dimension, size_t upperLimit):
 function(function), dimension(dimension), 
-manager((2*sizeof(Node)+4*sizeof(double)*dimension+sizeof(Edge))*100)    
+manager((2*sizeof(Node)+4*sizeof(double)*dimension+sizeof(Edge))*100),
+upperLimit(upperLimit)
 {
     function_input = function->getInput();
     function_output = function->getOutput();
@@ -70,7 +71,8 @@ PointGraph::Node* PointGraph::AddNodeInternal(double* node) {
     Node* myNode = createNode();
     myNode->points = node;
     myNode->valueCache = NULL;
-
+    myNode->checkedEdges = 0;
+    
     nodes.push_back(myNode);
 
     return myNode;
@@ -109,6 +111,21 @@ bool PointGraph::NeedDevideEdge(const double* left, const double* right, const d
     }
     return true;
 }
+
+double PointGraph::EdgeLength(const double* left, const double* right) {
+    double length = 0;
+    for (int i=0; i<dimension; i++) {
+        length += Abs(left[i] - right[i]);
+    }
+    return length;
+}
+
+void PointGraph::EdgeLength(const double* left, const double* right, double* lengths) {
+    for (int i=0; i<dimension; i++) {
+        lengths[i] = Abs(left[i] - right[i]);
+    }    
+}
+
 
 PointGraph::Node* PointGraph::split(PointGraph::Edge* edge) {
     Node* left = edge->left;
@@ -149,21 +166,59 @@ PointGraph::Node* PointGraph::split(PointGraph::Edge* edge) {
     return myNode;
 }
 
-void PointGraph::Iterate(double* precision) {
+bool PointGraph::Iterate(double* precision) {
 
     while (!edges.empty()) {
         Edge* edge = edges.front();
         edges.pop_front();
-        
+              
         if (!this->chackEdgeLength(edge, precision)) {
             split(edge);
-        } 
+        } else {
+            edge->left->checkedEdges++;
+            edge->right->checkedEdges++;
+        }
+
+        if (upperLimit != 0 && nodes.size() > upperLimit) {
+            return false;
+        }
     }
+    return true;
 }
 
 const PointGraph::NodeList& PointGraph::Points() {
     return nodes;
 }
+
+
+bool PointGraph::IsCheckedNode(PointGraph::Node* node) {
+    return (node->checkedEdges == edges.size());
+}
+
+double PointGraph::NodeLength(PointGraph::Node* node, double* lengths) {
+    evaluateNodeCache(node);
+    double length;
+    bool isCheck = false;
+    Node* toLength = NULL;
+
+    for (NodeSet::iterator it = node->edges.begin(); it != node->edges.end(); it++) {
+        Node* to = *it;
+        if (!IsCheckedNode(to)) {
+            evaluateNodeCache(to);
+            double len = EdgeLength(node->valueCache, to->valueCache);
+            if (!isCheck || len > length) {
+                isCheck = true;
+                length = len;
+                toLength = to;
+            }
+        }
+    }
+
+    EdgeLength(node->valueCache, toLength->valueCache, lengths);
+
+    return length;
+}
+
 
 void PointGraph::DumpNode(PointGraph::Node* node, ostream& o) {
     for (int i=0; i<dimension; i++) {

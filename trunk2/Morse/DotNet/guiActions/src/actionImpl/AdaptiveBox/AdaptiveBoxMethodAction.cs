@@ -24,10 +24,7 @@ namespace guiActions.actionImpl.AdaptiveBox
 	    {	       
             IAdaptiveBoxMethod action = (IAdaptiveBoxMethod)Action;
 
-	        Console.Out.WriteLine(node.Results);
-
 	        MorseKernel2.IResultSet set = node.Results.ToResultSet;
-
 	        int dim = action.GetDimensionFromParameters(set);
 	        double[] data = new double[dim];
             for (int i=0; i<dim; i++)

@@ -70,6 +70,10 @@ public:
         return E_NOTIMPL;
     }
 
+    STDMETHOD(GetUpperLimit)(int* out) {
+        return E_NOTIMPL;
+    }
+
     // IComputationParameters Methods
 public:
     STDMETHOD(GetFunction)(IFunction ** function)

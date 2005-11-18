@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Thu Nov 17 03:38:01 2005
+/* at Fri Nov 18 01:29:30 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -4343,6 +4343,9 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
             /* [in] */ int index,
             /* [retval][out] */ double *prec) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetUpperLimit( 
+            /* [retval][out] */ int *out) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -4405,6 +4408,10 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
             /* [in] */ int index,
             /* [retval][out] */ double *prec);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetUpperLimit )( 
+            IAdaptiveMethodParameters * This,
+            /* [retval][out] */ int *out);
+        
         END_INTERFACE
     } IAdaptiveMethodParametersVtbl;
 
@@ -4452,6 +4459,9 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
 #define IAdaptiveMethodParameters_GetPrecision(This,index,prec)	\
     (This)->lpVtbl -> GetPrecision(This,index,prec)
 
+#define IAdaptiveMethodParameters_GetUpperLimit(This,out)	\
+    (This)->lpVtbl -> GetUpperLimit(This,out)
+
 #endif /* COBJMACROS */
 
 
@@ -4479,6 +4489,18 @@ void __RPC_STUB IAdaptiveMethodParameters_GetFactor_Stub(
 
 
 void __RPC_STUB IAdaptiveMethodParameters_GetPrecision_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodParameters_GetUpperLimit_Proxy( 
+    IAdaptiveMethodParameters * This,
+    /* [retval][out] */ int *out);
+
+
+void __RPC_STUB IAdaptiveMethodParameters_GetUpperLimit_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,

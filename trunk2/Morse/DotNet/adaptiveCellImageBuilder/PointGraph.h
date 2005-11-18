@@ -10,12 +10,13 @@ using namespace std;
 class PointGraph
 {
 public:
-    PointGraph(ISystemFunction* function, int dimension);
+    PointGraph(ISystemFunction* function, int dimension, size_t upperLimit);
     virtual ~PointGraph(void);
 
 public:
     class Node;
     class Edge;
+    class EdgeComparator;
     typedef list<Edge*> EdgeList;
     typedef set<Node*> NodeSet;
     typedef list<Node*> NodeList;
@@ -25,21 +26,28 @@ public:
     Edge* AddEdge(Node* left, Node* right); //no duplicate checking!
     Node* AddNode(const double* node); //no duplicate checking!
     
-    void Iterate(double* precision);
+    bool Iterate(double* precision);
+    
+    
     const NodeList& Points();
     void Reset();
+
+    bool IsCheckedNode(Node* node);
+    double NodeLength(Node* node, double* lengths);
 
 protected:
     const int dimension;
 
 protected:
-    virtual bool NeedDevideEdge(const double* left, const double* right, const double* precision);
+    virtual bool NeedDevideEdge(const double* left, const double* right, const double* precision);    
+    virtual double EdgeLength(const double* left, const double* right);
+    virtual void EdgeLength(const double* left, const double* right, double* lengths);
 
 public:
     class Edge {
     public:
         Node* left;
-        Node* right;        
+        Node* right;
     };
 
     class Node : public ExtendedMemoryManager::DisposeHandler {
@@ -48,17 +56,19 @@ public:
     public:
         double* points;
         double* valueCache;
-        NodeSet edges;
+        NodeSet edges;        
+
+        size_t checkedEdges;
     };
 
 private:
     Edge* createEdge();
     Node* createNode();
     double* createArray();
-
-private:
-    void evaluateNodeCache(Node* node);
+  
+private:    
     bool chackEdgeLength(Edge* edge, double* precision);
+    void evaluateNodeCache(Node* node);
 
     Node* split(Edge* edge);
         
@@ -66,6 +76,7 @@ private:
     ISystemFunction* function;    
     ExtendedMemoryManager manager;
 
+    const size_t upperLimit;
     NodeList nodes;
     EdgeList edges;
 

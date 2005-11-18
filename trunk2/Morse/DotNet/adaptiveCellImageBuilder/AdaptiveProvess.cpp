@@ -9,10 +9,10 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-AdaptiveProvess::AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* division, double* precision, ProgressBarInfo* info)
+AdaptiveProvess::AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* division, double* precision, size_t upperLimit, ProgressBarInfo* info)
 : AdaptiveProcessBase(function, graph, division, precision, info)
 {     
-    processor = new PointGraphProcessor(this->resultGraph, function, dimension, precision);
+    processor = new PointGraphProcessor(this->resultGraph, function, dimension, precision, upperLimit);
 }
 
 AdaptiveProvess::~AdaptiveProvess(void)

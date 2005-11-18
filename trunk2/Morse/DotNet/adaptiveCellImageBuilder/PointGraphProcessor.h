@@ -10,7 +10,7 @@ using namespace std;
 class PointGraphProcessor
 {
 public:
-    PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision);
+    PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit);
     ~PointGraphProcessor(void);
 
 public:
@@ -19,9 +19,13 @@ public:
     void ProcessNode(Node* node);
 
 private:
+    void AddCheckedNode(Node* graphNode, PointGraph::Node* node);
+    void AddNotCheckedNode(Node* graphNode, PointGraph::Node* node);
+
+private:
     class PointGraphEx : public PointGraph {
     public:
-        PointGraphEx(Graph* graph, ISystemFunction* function, int dimension);
+        PointGraphEx(Graph* graph, ISystemFunction* function, int dimension, size_t upperLimit);
         virtual ~PointGraphEx();
     private:
         Graph* graph;
@@ -40,11 +44,11 @@ private:
 
     JDouble* x;
     JDouble* x0;
+    JDouble* radius;
     JInt* b;
     JInt* a;
 
     double* precision;
     double* overlap1;
-    double* overlap2;
-    
+    double* overlap2;    
 };

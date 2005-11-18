@@ -21,8 +21,8 @@ namespace guiActions.ActionImpl.AdaptiveMethod
 
 	    protected override ParametersControl GetParametersControlInternal(KernelNode node)
 	    {
-	        IAdaptiveMethodAction action = (IAdaptiveMethodAction)Action;
-	        int dim = action.GetDimension(node.Results.ToResultSet);
+            IAdaptiveMethodAction action = (IAdaptiveMethodAction)Action;
+            int dim = action.GetDimension(node.Results.ToResultSet);
             double[] precision = new double[dim];
             for (int i=0; i<dim; i++)
             {

@@ -22,7 +22,7 @@ namespace guiActions.Parameters
 			{
 				throw new NotImplementedException("Implement ParametersCaption in the inheritor class");
 			}
-		}
+		}        
 
 		public virtual bool NeedShowForm
 		{

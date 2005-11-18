@@ -1,7 +1,7 @@
 using System;
 using MorseKernel2;
 
-namespace guiVisualization.KernelAction.GnuPlot
+namespace guiVisualization.KernelAction
 {
 	/// <summary>
 	/// Summary description for EmptyResultSet.

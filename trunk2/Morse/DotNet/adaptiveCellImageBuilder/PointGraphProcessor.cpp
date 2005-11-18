@@ -8,8 +8,8 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-PointGraphProcessor::PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision)
-: graph(graph), dimension(dimension), pointGraph(graph, function, dimension),
+PointGraphProcessor::PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit)
+: graph(graph), dimension(dimension), pointGraph(graph, function, dimension, upperLimit),
   pointGraphBuilder(dimension, graph->getEps(), pointGraph)
 {
     x = new JDouble[dimension];
@@ -24,6 +24,7 @@ PointGraphProcessor::PointGraphProcessor(Graph* graph, ISystemFunction *function
         overlap1[i] = precision[i];
         overlap2[i] = precision[i];
     }    
+    radius = new JDouble[dimension];
 }
 
 PointGraphProcessor::~PointGraphProcessor(void)
@@ -35,6 +36,7 @@ PointGraphProcessor::~PointGraphProcessor(void)
     delete[] overlap1;
     delete[] overlap2;
     delete[] precision;
+    delete[] radius;
 }
 
 
@@ -46,16 +48,37 @@ void PointGraphProcessor::ProcessNode(Node* node) {
     }   
     pointGraphBuilder.BuildInitialGraph(x);
     
-    pointGraph.Iterate(precision);
+    if (pointGraph.Iterate(precision)) {
+        const PointGraph::NodeList& list = pointGraph.Points();        
+        for (PointGraph::NodeList::const_iterator it = list.begin(); it != list.end(); ++it) {
+            AddCheckedNode(node, *it);
+        }
+    } else {
+        const PointGraph::NodeList& list = pointGraph.Points();        
+        for (PointGraph::NodeList::const_iterator it = list.begin(); it != list.end(); ++it) {
+            PointGraph::Node* pnode = *it;
 
-    const PointGraph::NodeList& list = pointGraph.Points();
-    //cout<<"Out arcs: "<<list.size()<<"\n\n";
-    for (PointGraph::NodeList::const_iterator it = list.begin(); it != list.end(); ++it) {
-        graph->addEdgeWithOverlaping(node, (*it)->valueCache, overlap1, overlap2);
+            if (pointGraph.IsCheckedNode(pnode)) {            
+                AddCheckedNode(node, pnode);
+            } else {
+                AddNotCheckedNode(node, pnode);
+            }
+        }
     }
 }
 
-PointGraphProcessor::PointGraphEx::PointGraphEx(Graph* graph, ISystemFunction* function, int dim) : PointGraph(function, dim), graph(graph) {}
+void PointGraphProcessor::AddCheckedNode(Node* graphNode, PointGraph::Node* node) {
+    graph->addEdgeWithOverlaping(graphNode, node->valueCache, overlap1, overlap2);
+}
+
+void PointGraphProcessor::AddNotCheckedNode(Node* graphNode, PointGraph::Node* node) {
+    pointGraph.NodeLength(node, radius);
+
+    graph->addEdgesRadius(graphNode, node->valueCache, radius);
+}
+
+
+PointGraphProcessor::PointGraphEx::PointGraphEx(Graph* graph, ISystemFunction* function, int dim, size_t upperLimit) : PointGraph(function, dim, upperLimit), graph(graph) {}
 PointGraphProcessor::PointGraphEx::~PointGraphEx() {}
 
 double inline PointGraphProcessor::PointGraphEx::Abs(double x) {

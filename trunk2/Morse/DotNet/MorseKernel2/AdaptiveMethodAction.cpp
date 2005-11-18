@@ -92,9 +92,13 @@ STDMETHODIMP CAdaptiveMethodAction::Do(IResultSet* in, IResultSet **out) {
         ATLASSERT(SUCCEEDED(hr));
         cout<<"factor = "<<factor[i]<<"  prec = "<<prec[i]<<"\n";
 	}
+    int upperLimit;
+    hr = parameters->GetUpperLimit(&upperLimit);
+    ATLASSERT(SUCCEEDED(hr));
+
     GraphResultGraphIterator it(in);
 
-    AdaptiveProvess process(func, it, factor, prec, &pinfo);
+    AdaptiveProvess process(func, it, factor, prec, (size_t)upperLimit, &pinfo);
     SmartInterface<IResultMetadata> metadata;
     GraphResultUtil::GetMetadataCloned(in, metadata.extract());
 

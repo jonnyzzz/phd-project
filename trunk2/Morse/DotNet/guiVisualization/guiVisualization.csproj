@@ -117,6 +117,11 @@
                     Project = "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
+                <Reference
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                />
             </References>
         </Build>
         <Files>
@@ -152,7 +157,37 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "src\KernelAction\GnuPlot\EmptyResultSet.cs"
+                    RelPath = "src\actionImpl\GnuPlot2\GnuPlotParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\GnuPlotParameters.resx"
+                    DependentUpon = "GnuPlotParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\Controls\AdditionalSettingsControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\Controls\AdditionalSettingsControl.resx"
+                    DependentUpon = "AdditionalSettingsControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\Controls\ReduceImageSizeControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\Controls\ReduceImageSizeControl.resx"
+                    DependentUpon = "ReduceImageSizeControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\KernelAction\EmptyResultSet.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -181,6 +216,7 @@
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
+                <Folder RelPath = "src\KernelAction\GnuPlot2\" />
             </Include>
         </Files>
     </CSHARP>

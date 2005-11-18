@@ -31,6 +31,8 @@ __interface IAdaptiveMethodParameters : IComputationParameters {
     HRESULT GetFactor([in] int index, [out, retval] int* factor);
     [id(11)]
     HRESULT GetPrecision([in] int index, [out, retval] double* prec);
+    [id(12)]
+    HRESULT GetUpperLimit([out, retval] int* out);
 };
 
 

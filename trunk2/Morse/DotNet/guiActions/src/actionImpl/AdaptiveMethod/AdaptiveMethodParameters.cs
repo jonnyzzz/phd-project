@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Drawing;
-using System.Windows.Forms;
 using guiActions.Parameters;
 using guiControls.Control;
 using guiControls.Grid.Rows;
@@ -24,10 +23,16 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
 
         private IntPlusGridData factor;
         private DoublePrecsion precision;
+        private IntPlusGridData upperLimit;
         private int dimension;
         private Function function;
         private System.Windows.Forms.CheckBox autoSetPrecision;
         private System.Windows.Forms.Button updatePrecision;
+        private System.Windows.Forms.Panel panelDownDown;
+        private System.Windows.Forms.TextBox textUpperLimit;
+        private System.Windows.Forms.CheckBox checkUpperLimit;
+        private System.Windows.Forms.Panel panelDownRightButton;
+        private System.Windows.Forms.Panel panelDownTextBox;
         private double[] precisionValue;
 
 	    public AdaptiveMethodParameters(int dimension, Function function, double[] recomendedPrecision)
@@ -41,9 +46,15 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
             precisionValue = (double[]) new ArrayList( recomendedPrecision).ToArray(typeof(double));
             precision = new DoublePrecsion(recomendedPrecision, "Adaptive Precision");
             factor = new IntPlusGridData("Cell devisor", dimension);            
+            upperLimit = new IntPlusGridData("Upper Limit", 1);
             UpdateGrid();
             OnRefreshPrecision();
 		}
+
+        public void UpdateState(int dimension, Function function, double[] recomendedDimension)
+        {
+            
+        }
 
 		/// <summary> 
 		/// Clean up any resources being used.
@@ -73,9 +84,17 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
             this.panelDownRight = new System.Windows.Forms.Panel();
             this.autoSetPrecision = new System.Windows.Forms.CheckBox();
             this.updatePrecision = new System.Windows.Forms.Button();
+            this.panelDownDown = new System.Windows.Forms.Panel();
+            this.textUpperLimit = new System.Windows.Forms.TextBox();
+            this.checkUpperLimit = new System.Windows.Forms.CheckBox();
+            this.panelDownRightButton = new System.Windows.Forms.Panel();
+            this.panelDownTextBox = new System.Windows.Forms.Panel();
             this.panelUp.SuspendLayout();
             this.panelDown.SuspendLayout();
             this.panelDownRight.SuspendLayout();
+            this.panelDownDown.SuspendLayout();
+            this.panelDownRightButton.SuspendLayout();
+            this.panelDownTextBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // exGrid
@@ -98,20 +117,21 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
             // 
             // panelDown
             // 
+            this.panelDown.Controls.Add(this.panelDownDown);
             this.panelDown.Controls.Add(this.panelDownRight);
             this.panelDown.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelDown.DockPadding.Left = 25;
             this.panelDown.DockPadding.Right = 15;
-            this.panelDown.Location = new System.Drawing.Point(0, 208);
+            this.panelDown.Location = new System.Drawing.Point(0, 168);
             this.panelDown.Name = "panelDown";
-            this.panelDown.Size = new System.Drawing.Size(400, 32);
+            this.panelDown.Size = new System.Drawing.Size(400, 72);
             this.panelDown.TabIndex = 2;
             // 
             // panelDownRight
             // 
             this.panelDownRight.Controls.Add(this.autoSetPrecision);
-            this.panelDownRight.Controls.Add(this.updatePrecision);
-            this.panelDownRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDownRight.Controls.Add(this.panelDownRightButton);
+            this.panelDownRight.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelDownRight.DockPadding.Bottom = 5;
             this.panelDownRight.DockPadding.Right = 5;
             this.panelDownRight.DockPadding.Top = 5;
@@ -125,23 +145,75 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
             this.autoSetPrecision.Checked = true;
             this.autoSetPrecision.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoSetPrecision.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.autoSetPrecision.Location = new System.Drawing.Point(75, 5);
+            this.autoSetPrecision.Location = new System.Drawing.Point(88, 5);
             this.autoSetPrecision.Name = "autoSetPrecision";
-            this.autoSetPrecision.Size = new System.Drawing.Size(280, 22);
+            this.autoSetPrecision.Size = new System.Drawing.Size(267, 22);
             this.autoSetPrecision.TabIndex = 0;
             this.autoSetPrecision.Text = "Auto Update Precision On Submit";
             this.autoSetPrecision.CheckedChanged += new System.EventHandler(this.autoSetPrecision_CheckedChanged);
             // 
             // updatePrecision
             // 
-            this.updatePrecision.Dock = System.Windows.Forms.DockStyle.Left;
+            this.updatePrecision.Dock = System.Windows.Forms.DockStyle.Fill;
             this.updatePrecision.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.updatePrecision.Location = new System.Drawing.Point(0, 5);
+            this.updatePrecision.Location = new System.Drawing.Point(0, 0);
             this.updatePrecision.Name = "updatePrecision";
-            this.updatePrecision.Size = new System.Drawing.Size(75, 22);
+            this.updatePrecision.Size = new System.Drawing.Size(78, 22);
             this.updatePrecision.TabIndex = 1;
             this.updatePrecision.Text = "Update";
             this.updatePrecision.Click += new System.EventHandler(this.updatePrecision_Click);
+            // 
+            // panelDownDown
+            // 
+            this.panelDownDown.Controls.Add(this.panelDownTextBox);
+            this.panelDownDown.Controls.Add(this.checkUpperLimit);
+            this.panelDownDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDownDown.Location = new System.Drawing.Point(25, 32);
+            this.panelDownDown.Name = "panelDownDown";
+            this.panelDownDown.Size = new System.Drawing.Size(360, 40);
+            this.panelDownDown.TabIndex = 3;
+            // 
+            // textUpperLimit
+            // 
+            this.textUpperLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textUpperLimit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textUpperLimit.Enabled = false;
+            this.textUpperLimit.Location = new System.Drawing.Point(10, 10);
+            this.textUpperLimit.Name = "textUpperLimit";
+            this.textUpperLimit.Size = new System.Drawing.Size(236, 20);
+            this.textUpperLimit.TabIndex = 1;
+            this.textUpperLimit.Text = "0";
+            // 
+            // checkUpperLimit
+            // 
+            this.checkUpperLimit.Dock = System.Windows.Forms.DockStyle.Left;
+            this.checkUpperLimit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkUpperLimit.Location = new System.Drawing.Point(0, 0);
+            this.checkUpperLimit.Name = "checkUpperLimit";
+            this.checkUpperLimit.Size = new System.Drawing.Size(104, 40);
+            this.checkUpperLimit.TabIndex = 2;
+            this.checkUpperLimit.Text = "Division Limit";
+            this.checkUpperLimit.CheckedChanged += new System.EventHandler(this.checkUpperLimit_CheckedChanged);
+            // 
+            // panelDownRightButton
+            // 
+            this.panelDownRightButton.Controls.Add(this.updatePrecision);
+            this.panelDownRightButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelDownRightButton.DockPadding.Right = 10;
+            this.panelDownRightButton.Location = new System.Drawing.Point(0, 5);
+            this.panelDownRightButton.Name = "panelDownRightButton";
+            this.panelDownRightButton.Size = new System.Drawing.Size(88, 22);
+            this.panelDownRightButton.TabIndex = 2;
+            // 
+            // panelDownTextBox
+            // 
+            this.panelDownTextBox.Controls.Add(this.textUpperLimit);
+            this.panelDownTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDownTextBox.DockPadding.All = 10;
+            this.panelDownTextBox.Location = new System.Drawing.Point(104, 0);
+            this.panelDownTextBox.Name = "panelDownTextBox";
+            this.panelDownTextBox.Size = new System.Drawing.Size(256, 40);
+            this.panelDownTextBox.TabIndex = 3;
             // 
             // AdaptiveMethodParameters
             // 
@@ -152,6 +224,9 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
             this.panelUp.ResumeLayout(false);
             this.panelDown.ResumeLayout(false);
             this.panelDownRight.ResumeLayout(false);
+            this.panelDownDown.ResumeLayout(false);
+            this.panelDownRightButton.ResumeLayout(false);
+            this.panelDownTextBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -200,8 +275,15 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
 	    {
             if (autoSetPrecision.Checked) 
                 OnRefreshPrecision();
-            exGrid.SubmitData();                        
-	        return new AdaptiveMethodParameretsImpl(factor.Data, precision.Data, function);
+            exGrid.SubmitData();
+            if (checkUpperLimit.Checked)
+            {
+                upperLimit[0] = textUpperLimit.Text;
+                return new AdaptiveMethodParameretsImpl(factor.Data, precision.Data, upperLimit.Data[0], function);
+            } else
+            {
+                return new AdaptiveMethodParameretsImpl(factor.Data, precision.Data, 0, function);
+            }        
 	    }
 
         private void autoSetPrecision_CheckedChanged(object sender, System.EventArgs e)
@@ -230,6 +312,11 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
 	            exGrid.ReLoadData();                
 	        } catch (Exception) {}
 	    }
+
+        private void checkUpperLimit_CheckedChanged(object sender, System.EventArgs e)
+        {
+           textUpperLimit.Enabled = checkUpperLimit.Checked;
+        }
 
 	    public override string BoxCaption
 	    {
