@@ -1,13 +1,12 @@
-using System;
-using MorseKernel2;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.KernelActions.SavePoints
+namespace EugenePetrenko.Gui2.Actions.KernelActions.SavePoints
 {
-	/// <summary>
-	/// Summary description for ISavePointsParameters.
-	/// </summary>
-	public interface ISavePointsParameters : IParameters
-	{
-		string FilePath { get; }
-	}
+    /// <summary>
+    /// Summary description for ISavePointsParameters.
+    /// </summary>
+    public interface ISavePointsParameters : IParameters
+    {
+        string FilePath { get; }
+    }
 }

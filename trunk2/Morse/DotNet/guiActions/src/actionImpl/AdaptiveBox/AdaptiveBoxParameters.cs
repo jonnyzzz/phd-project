@@ -1,40 +1,44 @@
-using System;
-using guiActions.Parameters;
-using guiControls.Grid.Rows;
-using guiKernel2.Document;
-using MorseKernel2;
+using System.Drawing;
+using System.Windows.Forms;
+using EugenePetrenko.Gui2.Actions.Parameters;
+using EugenePetrenko.Gui2.Controls.Grid;
+using EugenePetrenko.Gui2.Controls.Grid.Rows;
+using EugenePetrenko.Gui2.Kernell2.Document;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.actionImpl.AdaptiveBox
+namespace EugenePetrenko.Gui2.Actions.ActionImpl.AdaptiveBox
 {
-	/// <summary>
-	/// Summary description for AdaptiveBoxParameters.
-	/// </summary>
-	public class AdaptiveBoxParameters : ParametersControl
-	{
-	    private readonly Function function;
-	    private guiControls.Grid.ExGrid exGrid;
+    /// <summary>
+    /// Summary description for AdaptiveBoxParameters.
+    /// </summary>
+    public class AdaptiveBoxParameters : ParametersControl
+    {
+        private readonly Function function;
+        private ExGrid exGrid;
 
         private IntPlusGridData factor;
         private DoublePrecsion precision;
-    
-	    public AdaptiveBoxParameters(Function function, int dimention, double[] recomendedPrecision)
-	    {
-	        this.function = function;
-	        factor = new IntPlusGridData("Divisor", dimention);
+
+        public AdaptiveBoxParameters(Function function, int dimention, double[] recomendedPrecision)
+        {
+            this.function = function;
+            factor = new IntPlusGridData("Divisor", dimention);
             precision = new DoublePrecsion(recomendedPrecision, "Precision");
-            
-            exGrid.SetRows(dimention, factor, precision);               
-	    }
+
+            InitializeComponent();
+
+            exGrid.SetRows(dimention, factor, precision);
+        }
 
         private void InitializeComponent()
         {
-            this.exGrid = new guiControls.Grid.ExGrid();
+            this.exGrid = new ExGrid();
             this.SuspendLayout();
             // 
             // exGrid
             // 
-            this.exGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.exGrid.Location = new System.Drawing.Point(0, 0);
+            this.exGrid.Dock = DockStyle.Fill;
+            this.exGrid.Location = new Point(0, 0);
             this.exGrid.Name = "exGrid";
             this.exGrid.TabIndex = 0;
             // 
@@ -46,16 +50,16 @@ namespace guiActions.actionImpl.AdaptiveBox
 
         }
 
-	    protected override IParameters SubmitDataInternal()
-	    {
-	        exGrid.SubmitData();
+        protected override IParameters SubmitDataInternal()
+        {
+            exGrid.SubmitData();
 
             return new AdaptiveBoxParametersImpl(function, factor.Data, precision.Data);
-	    }
+        }
 
-	    public override string BoxCaption
-	    {
-	        get { return "Adaptive Box Parameters"; }
-	    }
-	}
+        public override string BoxCaption
+        {
+            get { return "Adaptive Box Parameters"; }
+        }
+    }
 }

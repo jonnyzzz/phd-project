@@ -9,7 +9,7 @@
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "guiActions"
+                AssemblyName = "EugenePetrenko.Gui2.Actions"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Library"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "guiActions"
+                RootNamespace = "EugenePetrenko.Gui2.Actions"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -110,12 +110,9 @@
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
                 />
                 <Reference
-                    Name = "MorseKernel2"
-                    Guid = "{922445B5-C296-49D0-B69D-45FF70F8CE56}"
-                    VersionMajor = "1"
-                    VersionMinor = "0"
-                    Lcid = "0"
-                    WrapperTool = "tlbimp"
+                    Name = "EugenePetrenko.Gui2.MorseKernel2.Interop"
+                    AssemblyName = "EugenePetrenko.Gui2.MorseKernel2.Interop"
+                    HintPath = "..\MorseKernel2.Interop\EugenePetrenko.Gui2.MorseKernel2.Interop.dll"
                 />
             </References>
         </Build>

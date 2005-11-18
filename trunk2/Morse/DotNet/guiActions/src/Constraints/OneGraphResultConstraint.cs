@@ -1,32 +1,30 @@
-using System;
 using System.Xml;
-using guiKernel2.Constraints;
-using guiKernel2.Node;
-using MorseKernel2;
+using EugenePetrenko.Gui2.Kernell2.Constraints;
+using EugenePetrenko.Gui2.Kernell2.Node;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.src.Constraints
+namespace EugenePetrenko.Gui2.Actions.Constraints
 {
-	/// <summary>
-	/// Summary description for OneGraphResultConstraint.
-	/// </summary>
-	public class OneGraphResultConstraint : IConstraint
-	{
-		public OneGraphResultConstraint()
-		{
-		}
+    public class OneGraphResultConstraintFactory : IConstraintFactory
+    {
+        public IConstraint CreateConstraint(XmlNode constraintNode)
+        {
+            return new OneGraphResultConstraint();
+        }
+    }
 
-		public bool Match(ResultSet resultSet)
-		{
-			return resultSet.ToResults.Length == 1 && resultSet.ToResults[0] is IGraphResult;
-		}
-	}
+    /// <summary>
+    /// Summary description for OneGraphResultConstraint.
+    /// </summary>
+    public class OneGraphResultConstraint : IConstraint
+    {
+        public OneGraphResultConstraint()
+        {
+        }
 
-
-	public class OneGraphResultConstraintFactory : IConstraintFactory
-	{
-		public IConstraint CreateConstraint(XmlNode constraintNode)
-		{
-			return new OneGraphResultConstraint();
-		}
-	}
+        public bool Match(ResultSet resultSet)
+        {
+            return resultSet.ToResults.Length == 1 && resultSet.ToResults[0] is IGraphResult;
+        }
+    }
 }

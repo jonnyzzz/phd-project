@@ -2,7 +2,7 @@
 
 <mappings>		
 	<assemblies>		
-		<mappingsRef assembly="guiActions" resource="guiActions.xml.ActionMapping.xml"/>		
+		<mappingsRef assembly="EugenePetrenko.Gui2.Actions" resource="EugenePetrenko.Gui2.Actions.xml.ActionMapping.xml"/>
 	</assemblies>
 </mappings>
 

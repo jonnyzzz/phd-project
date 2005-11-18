@@ -1,18 +1,18 @@
-using guiControls.Control;
+using EugenePetrenko.Gui2.Controls.Control;
 
-namespace guiActions.src.parameters
+namespace EugenePetrenko.Gui2.Actions.Parameters
 {
-	/// <summary>
-	/// Summary description for ParametersControlException.
-	/// </summary>
-	public class ParametersControlException : ControlException
-	{
-		public ParametersControlException(string message) : base(message)
-		{
-		}
+    /// <summary>
+    /// Summary description for ParametersControlException.
+    /// </summary>
+    public class ParametersControlException : ControlException
+    {
+        public ParametersControlException(string message) : base(message)
+        {
+        }
 
-		public ParametersControlException()
-		{
-		}	
-	}
+        public ParametersControlException()
+        {
+        }
+    }
 }

@@ -1,31 +1,30 @@
-using System;
-using guiActions.Actions;
-using guiActions.Parameters;
-using guiKernel2.ActionFactory;
-using guiKernel2.Node;
-using MorseKernel2;
+using EugenePetrenko.Gui2.Actions.Actions;
+using EugenePetrenko.Gui2.Actions.Parameters;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory;
+using EugenePetrenko.Gui2.Kernell2.Node;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.actionImpl.SIRom
+namespace EugenePetrenko.Gui2.Actions.ActionImpl.SIRom
 {
-	/// <summary>
-	/// Summary description for SIRomAction.
-	/// </summary>
-	/// 
-	[ActionMapping(typeof(ISIRomAction),typeof(ISIRomActionParameters))]
-	public class SIRomAction : Action
-	{
-		public SIRomAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
-		{
-		}
+    /// <summary>
+    /// Summary description for SIRomAction.
+    /// </summary>
+    /// 
+    [ActionMapping(typeof (ISIRomAction), typeof (ISIRomActionParameters))]
+    public class SIRomAction : Action
+    {
+        public SIRomAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
+        {
+        }
 
-		protected override ParametersControl GetParametersControlInternal(KernelNode node)
-		{
-			return new SIRomActionParameters();
-		}
+        protected override ParametersControl GetParametersControlInternal(KernelNode node)
+        {
+            return new SIRomActionParameters();
+        }
 
-		protected override MorseKernel2.IAction CreateAction()
-		{
-			return new CSIRomActionClass();
-		}
-	}
+        protected override IAction CreateAction()
+        {
+            return new CSIRomActionClass();
+        }
+    }
 }

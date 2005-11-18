@@ -111,9 +111,9 @@
     </names>
 
 	<assemblies>	
-		<assembly name="guiActions"/>
-		<assembly name="guiVisualization"/>		
-		<assembly name="interop.MorseKernel2" />
+		<assembly name="EugenePetrenko.Gui2.Actions"/>
+		<assembly name="EugenePetrenko.Gui2.Visualization"/>		
+		<assembly name="EugenePetrenko.Gui2.MorseKernel2.Interop" />
 	</assemblies>
 
 </mappings>

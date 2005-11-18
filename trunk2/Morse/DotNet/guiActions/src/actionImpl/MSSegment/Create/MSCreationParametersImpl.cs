@@ -1,23 +1,22 @@
-using System;
-using MorseKernel2;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.actionImpl.MSSegment.Create
+namespace EugenePetrenko.Gui2.Actions.ActionImpl.MSSegment.Create
 {
-	/// <summary>
-	/// Summary description for MSCreateParameters.
-	/// </summary>
-	public class MSCreationParametersImpl : IMSCreationParameters
-	{
-	    private int[] param;
+    /// <summary>
+    /// Summary description for MSCreateParameters.
+    /// </summary>
+    public class MSCreationParametersImpl : IMSCreationParameters
+    {
+        private int[] param;
 
-	    public MSCreationParametersImpl(int[] param)
-	    {
-	        this.param = param;
-	    }
+        public MSCreationParametersImpl(int[] param)
+        {
+            this.param = param;
+        }
 
-	    public int GetFactor(int index)
-	    {
-	        return param[index];
-	    }
-	}
+        public int GetFactor(int index)
+        {
+            return param[index];
+        }
+    }
 }

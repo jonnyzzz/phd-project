@@ -1,39 +1,38 @@
-using guiActions.Actions;
-using guiActions.Parameters;
-using guiActions.src.actionImpl.AdaptiveMethod;
-using guiKernel2.ActionFactory;
-using guiKernel2.Container;
-using guiKernel2.Node;
-using MorseKernel2;
+using EugenePetrenko.Gui2.Actions.Actions;
+using EugenePetrenko.Gui2.Actions.Parameters;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory;
+using EugenePetrenko.Gui2.Kernell2.Container;
+using EugenePetrenko.Gui2.Kernell2.Node;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.ActionImpl.AdaptiveMethod
+namespace EugenePetrenko.Gui2.Actions.ActionImpl.AdaptiveMethod
 {
-	/// <summary>
-	/// Summary description for AdaptiveMethodAction.
-	/// </summary>
-	/// 
-    [ActionMapping(typeof(IAdaptiveMethodAction), typeof(IAdaptiveMethodParameters))]
-	public class AdaptiveMethodAction : Action
-	{
-	    public AdaptiveMethodAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
-	    {
-	    }
+    /// <summary>
+    /// Summary description for AdaptiveMethodAction.
+    /// </summary>
+    /// 
+    [ActionMapping(typeof (IAdaptiveMethodAction), typeof (IAdaptiveMethodParameters))]
+    public class AdaptiveMethodAction : Action
+    {
+        public AdaptiveMethodAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
+        {
+        }
 
-	    protected override ParametersControl GetParametersControlInternal(KernelNode node)
-	    {
-            IAdaptiveMethodAction action = (IAdaptiveMethodAction)Action;
+        protected override ParametersControl GetParametersControlInternal(KernelNode node)
+        {
+            IAdaptiveMethodAction action = (IAdaptiveMethodAction) Action;
             int dim = action.GetDimension(node.Results.ToResultSet);
             double[] precision = new double[dim];
-            for (int i=0; i<dim; i++)
+            for (int i = 0; i < dim; i++)
             {
                 precision[i] = action.GetRecomendedPrecision(node.Results.ToResultSet, i);
             }
-            return new AdaptiveMethodParameters(dim, Core.Instance.KernelDocument.Function, precision );
-	    }
+            return new AdaptiveMethodParameters(dim, Core.Instance.KernelDocument.Function, precision);
+        }
 
-	    protected override MorseKernel2.IAction CreateAction()
-	    {
-	        return new MorseKernel2.CAdaptiveMethodActionClass();
-	    }
-	}
+        protected override IAction CreateAction()
+        {
+            return new CAdaptiveMethodActionClass();
+        }
+    }
 }

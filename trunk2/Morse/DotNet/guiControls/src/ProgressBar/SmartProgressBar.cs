@@ -1,195 +1,190 @@
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
-namespace guiControls.Progress
+namespace EugenePetrenko.Gui2.Controls.Progress
 {
-	/// <summary>
-	/// Summary description for SmartProgressBar.
-	/// </summary>
-	public class SmartProgressBar : System.Windows.Forms.UserControl
-	{
-		private System.Windows.Forms.Panel panelBorder;
-		private System.Windows.Forms.PictureBox pictureBox;
-		/// <summary> 
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
+    /// <summary>
+    /// Summary description for SmartProgressBar.
+    /// </summary>
+    public class SmartProgressBar : UserControl
+    {
+        private Panel panelBorder;
+        private PictureBox pictureBox;
 
-		public SmartProgressBar()
-		{
-			LowerBound = 0;
-			UpperBound = 10;
-			Value = 5;
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private Container components = null;
 
-			InitializeComponent();
+        public SmartProgressBar()
+        {
+            LowerBound = 0;
+            UpperBound = 10;
+            Value = 5;
 
-			this.SizeChanged +=new EventHandler(SmartProgressBar_SizeChanged);
-		}
+            InitializeComponent();
 
-		/// <summary> 
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+            this.SizeChanged += new EventHandler(SmartProgressBar_SizeChanged);
+        }
 
-		#region Component Designer generated code
-		/// <summary> 
-		/// Required method for Designer support - do not modify 
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(SmartProgressBar));
-			this.pictureBox = new System.Windows.Forms.PictureBox();
-			this.panelBorder = new System.Windows.Forms.Panel();
-			this.panelBorder.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// pictureBox
-			// 
-			this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
-			this.pictureBox.Location = new System.Drawing.Point(80, 32);
-			this.pictureBox.Name = "pictureBox";
-			this.pictureBox.Size = new System.Drawing.Size(8, 56);
-			this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-			this.pictureBox.TabIndex = 0;
-			this.pictureBox.TabStop = false;
-			this.pictureBox.Visible = false;
-			// 
-			// panelBorder
-			// 
-			this.panelBorder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.panelBorder.Controls.Add(this.pictureBox);
-			this.panelBorder.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelBorder.Location = new System.Drawing.Point(0, 0);
-			this.panelBorder.Name = "panelBorder";
-			this.panelBorder.Size = new System.Drawing.Size(336, 152);
-			this.panelBorder.TabIndex = 1;
-			this.panelBorder.Paint += new System.Windows.Forms.PaintEventHandler(this.panelBorder_Paint);
-			// 
-			// SmartProgressBar
-			// 
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.Controls.Add(this.panelBorder);
-			this.Name = "SmartProgressBar";
-			this.Size = new System.Drawing.Size(336, 152);
-			this.panelBorder.ResumeLayout(false);
-			this.ResumeLayout(false);
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		}
-		#endregion
+        #region Component Designer generated code
 
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (SmartProgressBar));
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.panelBorder = new System.Windows.Forms.Panel();
+            this.panelBorder.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.Image = ((System.Drawing.Image) (resources.GetObject("pictureBox.Image")));
+            this.pictureBox.Location = new System.Drawing.Point(80, 32);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(8, 56);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 0;
+            this.pictureBox.TabStop = false;
+            this.pictureBox.Visible = false;
+            // 
+            // panelBorder
+            // 
+            this.panelBorder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBorder.Controls.Add(this.pictureBox);
+            this.panelBorder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelBorder.Location = new System.Drawing.Point(0, 0);
+            this.panelBorder.Name = "panelBorder";
+            this.panelBorder.Size = new System.Drawing.Size(336, 152);
+            this.panelBorder.TabIndex = 1;
+            this.panelBorder.Paint += new System.Windows.Forms.PaintEventHandler(this.panelBorder_Paint);
+            // 
+            // SmartProgressBar
+            // 
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.panelBorder);
+            this.Name = "SmartProgressBar";
+            this.Size = new System.Drawing.Size(336, 152);
+            this.panelBorder.ResumeLayout(false);
+            this.ResumeLayout(false);
 
-		protected int lowerBound;
-		protected int upperBound;
-		protected int value;
+        }
 
-		private Image cacheImage = null;
+        #endregion
 
-		private Image createCache()
-		{
-			if (pictureBox == null || pictureBox.Image == null) return null;
+        protected int lowerBound;
+        protected int upperBound;
+        protected int value;
 
-			Bitmap bitmap = new Bitmap(Width, Height);
-			Graphics graphics = Graphics.FromImage(bitmap);
+        private Image cacheImage = null;
 
-			int w = 0;
+        private Image createCache()
+        {
+            if (pictureBox == null || pictureBox.Image == null) return null;
 
-			while (w <= Width)
-			{
-				graphics.DrawImage(pictureBox.Image, w, 0);
-				w += pictureBox.Width;
-			}
-			return bitmap;
-		}
+            Bitmap bitmap = new Bitmap(Width, Height);
+            Graphics graphics = Graphics.FromImage(bitmap);
 
-		private void panelBorder_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
-		{
-			Graphics graphics = e.Graphics;
-			int width = (this.Width * value / (upperBound - lowerBound)) % (Width+1);
+            int w = 0;
 
-			Rectangle clip = Rectangle.Intersect(e.ClipRectangle, new Rectangle(0,0, width, Height));
-			graphics.SetClip( clip, CombineMode.Intersect);
+            while (w <= Width)
+            {
+                graphics.DrawImage(pictureBox.Image, w, 0);
+                w += pictureBox.Width;
+            }
+            return bitmap;
+        }
 
-			if (cacheImage == null)
-			{
-				cacheImage = createCache();
-			}
+        private void panelBorder_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics graphics = e.Graphics;
+            int width = (this.Width*value/(upperBound - lowerBound))%(Width + 1);
 
-			graphics.DrawImage(cacheImage, 0, 0);
-		}
+            Rectangle clip = Rectangle.Intersect(e.ClipRectangle, new Rectangle(0, 0, width, Height));
+            graphics.SetClip(clip, CombineMode.Intersect);
 
+            if (cacheImage == null)
+            {
+                cacheImage = createCache();
+            }
 
+            graphics.DrawImage(cacheImage, 0, 0);
+        }
 
-		#region progress bar fields
-		public int LowerBound
-		{
-			set
-			{
-				ReCache();				
-				lowerBound = value;
-			}
-			get
-			{
-				return lowerBound;
-			}
-		}
+        #region progress bar fields
 
-		public int UpperBound
-		{
-			set
-			{
-				ReCache();
-				upperBound = value;
-			}
-			get
-			{
-				return upperBound;
-			}
-		}
+        public int LowerBound
+        {
+            set
+            {
+                ReCache();
+                lowerBound = value;
+            }
+            get { return lowerBound; }
+        }
 
-		public int Value
-		{
-			set
-			{
-				RePaint();
-				this.value = value;
-			}
-			get
-			{
-				return value;
-			}
-		}
+        public int UpperBound
+        {
+            set
+            {
+                ReCache();
+                upperBound = value;
+            }
+            get { return upperBound; }
+        }
+
+        public int Value
+        {
+            set
+            {
+                RePaint();
+                this.value = value;
+            }
+            get { return value; }
+        }
 
 
-		private void RePaint()
-		{
-			this.Refresh();
-		}
+        private void RePaint()
+        {
+            this.Refresh();
+        }
 
-		private void ReCache()
-		{
-			cacheImage = createCache();
-			RePaint();
-		}
-		#endregion
+        private void ReCache()
+        {
+            cacheImage = createCache();
+            RePaint();
+        }
 
-		private void SmartProgressBar_SizeChanged(object sender, EventArgs e)
-		{
-			if (sender != this)
-			{
-				this.Height = pictureBox.Image.Height;
-			}
-		}
-	}
+        #endregion
+
+        private void SmartProgressBar_SizeChanged(object sender, EventArgs e)
+        {
+            if (sender != this)
+            {
+                this.Height = pictureBox.Image.Height;
+            }
+        }
+    }
 }

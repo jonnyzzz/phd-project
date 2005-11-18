@@ -1,73 +1,72 @@
-using System;
-using System.Collections;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Windows.Forms;
+using EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2.Controls;
 
-namespace guiVisualization.src.actionImpl.GnuPlot2
+namespace EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2
 {
-	/// <summary>
-	/// Summary description for GnuPlotParameters.
-	/// </summary>
-	public class GnuPlotParameters : System.Windows.Forms.UserControl
-	{
-        private System.Windows.Forms.GroupBox groupOutputFile;
-        private System.Windows.Forms.Panel panelOutputFile;
-        private System.Windows.Forms.Panel panelFileName;
-        private System.Windows.Forms.Label labelFileName;
-        private System.Windows.Forms.Panel panelFileNameButton;
-        private System.Windows.Forms.Button buttonSelectFileName;
-        private System.Windows.Forms.Panel panelFileText;
-        private System.Windows.Forms.TextBox textFileName;
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.Panel panelFileNameGroup;
-        private System.Windows.Forms.TabPage tabSave;
-        private System.Windows.Forms.GroupBox groupBoxSettings;
-        private System.Windows.Forms.Panel panelImageSize;
-        private System.Windows.Forms.Panel panelAdditional;
-        private System.Windows.Forms.TabPage tabShow;
-        private System.Windows.Forms.Panel panelShow;
-        private guiVisualization.actionImpl.GnuPlot2.Controls.ReduceImageSizeControl reduceImageSizeControl;
-        private guiVisualization.src.actionImpl.GnuPlot2.Controls.AdditionalSettingsControl additionalSettingsControl;
-        private guiVisualization.actionImpl.GnuPlot2.Controls.ReduceImageSizeControl reduceImageSizeControl1;
-        private guiVisualization.src.actionImpl.GnuPlot2.Controls.AdditionalSettingsControl additionalSettingsControl1;
-		/// <summary> 
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
+    /// <summary>
+    /// Summary description for GnuPlotParameters.
+    /// </summary>
+    public class GnuPlotParameters : UserControl
+    {
+        private GroupBox groupOutputFile;
+        private Panel panelOutputFile;
+        private Panel panelFileName;
+        private Label labelFileName;
+        private Panel panelFileNameButton;
+        private Button buttonSelectFileName;
+        private Panel panelFileText;
+        private TextBox textFileName;
+        private TabControl tabControl;
+        private Panel panelFileNameGroup;
+        private TabPage tabSave;
+        private GroupBox groupBoxSettings;
+        private Panel panelImageSize;
+        private Panel panelAdditional;
+        private TabPage tabShow;
+        private Panel panelShow;
+        private ReduceImageSizeControl reduceImageSizeControl;
+        private AdditionalSettingsControl additionalSettingsControl;
+        private ReduceImageSizeControl reduceImageSizeControl1;
+        private AdditionalSettingsControl additionalSettingsControl1;
 
-		public GnuPlotParameters()
-		{
-			// This call is required by the Windows.Forms Form Designer.
-			InitializeComponent();
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private Container components = null;
 
-			// TODO: Add any initialization after the InitializeComponent call
+        public GnuPlotParameters()
+        {
+            // This call is required by the Windows.Forms Form Designer.
+            InitializeComponent();
 
-		}
+            // TODO: Add any initialization after the InitializeComponent call
 
-		/// <summary> 
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        }
 
-		#region Component Designer generated code
-		/// <summary> 
-		/// Required method for Designer support - do not modify 
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.groupOutputFile = new System.Windows.Forms.GroupBox();
             this.panelOutputFile = new System.Windows.Forms.Panel();
             this.panelFileName = new System.Windows.Forms.Panel();
@@ -81,13 +80,13 @@ namespace guiVisualization.src.actionImpl.GnuPlot2
             this.panelFileNameGroup = new System.Windows.Forms.Panel();
             this.groupBoxSettings = new System.Windows.Forms.GroupBox();
             this.panelAdditional = new System.Windows.Forms.Panel();
-            this.additionalSettingsControl = new guiVisualization.src.actionImpl.GnuPlot2.Controls.AdditionalSettingsControl();
+            this.additionalSettingsControl = new AdditionalSettingsControl();
             this.panelImageSize = new System.Windows.Forms.Panel();
-            this.reduceImageSizeControl = new guiVisualization.actionImpl.GnuPlot2.Controls.ReduceImageSizeControl();
+            this.reduceImageSizeControl = new Visualization.ActionImpl.GnuPlot2.Controls.ReduceImageSizeControl();
             this.tabShow = new System.Windows.Forms.TabPage();
             this.panelShow = new System.Windows.Forms.Panel();
-            this.additionalSettingsControl1 = new guiVisualization.src.actionImpl.GnuPlot2.Controls.AdditionalSettingsControl();
-            this.reduceImageSizeControl1 = new guiVisualization.actionImpl.GnuPlot2.Controls.ReduceImageSizeControl();
+            this.additionalSettingsControl1 = new AdditionalSettingsControl();
+            this.reduceImageSizeControl1 = new EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2.Controls.ReduceImageSizeControl();
             this.groupOutputFile.SuspendLayout();
             this.panelOutputFile.SuspendLayout();
             this.panelFileName.SuspendLayout();
@@ -329,11 +328,7 @@ namespace guiVisualization.src.actionImpl.GnuPlot2
             this.ResumeLayout(false);
 
         }
-		#endregion
 
-        private void groupBoxImageSize_Enter(object sender, System.EventArgs e)
-        {
-        
-        }
-	}
+        #endregion        
+    }
 }

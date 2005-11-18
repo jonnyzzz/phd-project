@@ -1,21 +1,19 @@
-using System;
-using guiActions.Parameters;
-using MorseKernel2;
-using guiVisualization.KernelAction.GnuPlot;
+using EugenePetrenko.Gui2.MorseKernel2;
+using EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot;
 
-namespace guiVisualization.KernelAction
+namespace EugenePetrenko.Gui2.Visualization.KernelAction
 {
-	/// <summary>
-	/// Summary description for GnuPlotVisualizationKernelParameters.
-	/// </summary>
-	public interface IGnuPlotVisualizationKernelParameters : IParameters
-	{
-		/// <summary>
-		/// Returns null if we need to show
-		/// </summary>
-		GnuPlotScriptGenParameters Parameters { get; }
+    /// <summary>
+    /// Summary description for GnuPlotVisualizationKernelParameters.
+    /// </summary>
+    public interface IGnuPlotVisualizationKernelParameters : IParameters
+    {
+        /// <summary>
+        /// Returns null if we need to show
+        /// </summary>
+        GnuPlotScriptGenParameters Parameters { get; }
 
-		string Title { get; }
-		
-	}
+        string Title { get; }
+
+    }
 }

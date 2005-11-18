@@ -1,114 +1,110 @@
 using System;
 using System.Text;
-using MorseKernel2;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiKernel2.Document
+namespace EugenePetrenko.Gui2.Kernell2.Document
 {
-	/// <summary>
-	/// Summary description for Function.
-	/// </summary>
-	[Serializable]
-	public class Function
-	{
-		public Function(string[] equations)
-		{
-			this.equations = equations;	
-			
-			equation = "";
-			foreach (string eq in equations)
-			{
-				string eqe = eq.Trim();
-				if (!eqe.EndsWith(";"))
-				{
-					eqe += ";";
-				}
-				equation += eqe + "\n";
-			}
+    /// <summary>
+    /// Summary description for Function.
+    /// </summary>
+    [Serializable]
+    public class Function
+    {
+        public Function(string[] equations)
+        {
+            this.equations = equations;
 
-			this.function = 
-				createFunction(equation);
-		}
+            equation = "";
+            foreach (string eq in equations)
+            {
+                string eqe = eq.Trim();
+                if (!eqe.EndsWith(";"))
+                {
+                    eqe += ";";
+                }
+                equation += eqe + "\n";
+            }
 
-		private IFunction createFunction(string equations)
-		{
-			CFunctionImplClass functionClass = new CFunctionImplClass();
-			IWritableFunction writableFunction = functionClass as IWritableFunction;
-			try 
-			{
-				writableFunction.SetEquations(equations);
-			} catch (Exception)
-			{
-				throw new FunctionExceptions(writableFunction.GetLastError());
-			}
+            this.function =
+                createFunction(equation);
+        }
 
-			return functionClass as IFunction;
-		}
+        private IFunction createFunction(string equations)
+        {
+            CFunctionImplClass functionClass = new CFunctionImplClass();
+            IWritableFunction writableFunction = functionClass as IWritableFunction;
+            try
+            {
+                writableFunction.SetEquations(equations);
+            }
+            catch (Exception)
+            {
+                throw new FunctionExceptions(writableFunction.GetLastError());
+            }
 
-		private string[] equations;
-		private IFunction function;
-		private string equation;
+            return functionClass as IFunction;
+        }
 
-		public string[] Equations
-		{
-			get { return equations; }
-		}
+        private string[] equations;
+        private IFunction function;
+        private string equation;
 
-		public string Equation
-		{
-			get { return equation; }
-		}
+        public string[] Equations
+        {
+            get { return equations; }
+        }
 
-		public IFunction IFunction
-		{
-			get
-			{
-				return function;
-			}
-		}
+        public string Equation
+        {
+            get { return equation; }
+        }
 
-		public override string ToString()
-		{
-			StringBuilder builder = new StringBuilder();
-			builder.Append("Function Object\n[");
-			foreach (string equation in equations)
-			{
-				builder.Append("\t");
-				builder.Append(equation);
-				builder.Append("\n");
-			}
-			builder.Append("]\n");
-			return builder.ToString();
-		}
+        public IFunction IFunction
+        {
+            get { return function; }
+        }
 
-		public int Iterations 
-		{
-			get { return function.GetIterations();}
-			set { function.SetIterations(value);}
-		}
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Function Object\n[");
+            foreach (string equation in equations)
+            {
+                builder.Append("\t");
+                builder.Append(equation);
+                builder.Append("\n");
+            }
+            builder.Append("]\n");
+            return builder.ToString();
+        }
 
-		public static Function CreateTestFunction()
-		{
-			return new Function( new string[] {
-												  "_dimension=1;",
-												  "y1 = x1;",
-												  "y2 = x2;",
-				 								  "space_min1 = 0;",
-												  "space_min2 = 0;",				  
-												  "space_max1 = 1;",
-												  "space_max1 = 1;",
-												  "iterations = 1;",
-												  "grid1 = 10;",
-												  "grid2 = 10;"
-				});
-		}
+        public int Iterations
+        {
+            get { return function.GetIterations(); }
+            set { function.SetIterations(value); }
+        }
 
-		public IEvaluateFunction EvaluateFunction
-		{
-			get
-			{
-				return new EvaluateFunction(function);
-			}
-		}
-	
-	}
+        public static Function CreateTestFunction()
+        {
+            return new Function(new string[]
+                {
+                    "_dimension=1;",
+                    "y1 = x1;",
+                    "y2 = x2;",
+                    "space_min1 = 0;",
+                    "space_min2 = 0;",
+                    "space_max1 = 1;",
+                    "space_max1 = 1;",
+                    "iterations = 1;",
+                    "grid1 = 10;",
+                    "grid2 = 10;"
+                });
+        }
+
+        public IEvaluateFunction EvaluateFunction
+        {
+            get { return new EvaluateFunction(function); }
+        }
+
+    }
 }

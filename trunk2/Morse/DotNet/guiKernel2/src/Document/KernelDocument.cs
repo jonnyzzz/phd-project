@@ -1,50 +1,50 @@
-using guiKernel2.Container;
-using guiKernel2.Node;
-using MorseKernel2;
+using EugenePetrenko.Gui2.Kernell2.Container;
+using EugenePetrenko.Gui2.Kernell2.Node;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiKernel2.Document
+namespace EugenePetrenko.Gui2.Kernell2.Document
 {
-	/// <summary>
-	/// Summary description for Document.
-	/// </summary>
-	public class KernelDocument
-	{
-		private Function function;
-		private IKernell kernell;
-		private string defaultTitle;
+    /// <summary>
+    /// Summary description for Document.
+    /// </summary>
+    public class KernelDocument
+    {
+        private Function function;
+        private IKernell kernell;
+        private string defaultTitle;
 
-		public KernelDocument(Function function)
-		{
-			Core.Instance.SetKernelDocument(this);
+        public KernelDocument(Function function)
+        {
+            Core.Instance.SetKernelDocument(this);
 
-			this.function = function;
+            this.function = function;
 
-			
-			CKernellImplClass kernellClass = new CKernellImplClass();
 
-			IWritableKernell wKernell =(IWritableKernell)kernellClass;
+            CKernellImplClass kernellClass = new CKernellImplClass();
 
-			wKernell.SetFunction(this.function.IFunction);
+            IWritableKernell wKernell = kernellClass;
 
-			kernell = (IKernell)wKernell;			
-		}
+            wKernell.SetFunction(this.function.IFunction);
 
-		public string Title 
-		{
-			get { return defaultTitle; }
-			set { defaultTitle = value; }
-		}
+            kernell = (IKernell) wKernell;
+        }
 
-		public Function Function
-		{
-			get { return function; }
-		}
+        public string Title
+        {
+            get { return defaultTitle; }
+            set { defaultTitle = value; }
+        }
 
-		public KernelNode CreateInitialNode()
-		{
-		    KernelNode node = new KernelNode(ResultSet.FromResultSet(kernell.CreateInitialResultSet()));
+        public Function Function
+        {
+            get { return function; }
+        }
+
+        public KernelNode CreateInitialNode()
+        {
+            KernelNode node = new KernelNode(ResultSet.FromResultSet(kernell.CreateInitialResultSet()));
             node.GetNextActions();
-		    return node;
-		}
-	}
+            return node;
+        }
+    }
 }

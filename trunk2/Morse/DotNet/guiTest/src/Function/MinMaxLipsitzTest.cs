@@ -1,8 +1,8 @@
 using System;
 using csUnit;
-using guiKernel2.Document;
+using EugenePetrenko.Gui2.Kernell2.Document;
 
-namespace guiTest.Function 
+namespace EugenePetrenko.Gui2.Test.Function 
 {
 	/// <summary>
 	/// Summary description for TestFixture1.
@@ -12,7 +12,7 @@ namespace guiTest.Function
 	{
 		private IEvaluateFunction CreateFunction()
 		{
-			guiKernel2.Document.Function function = Util.Util.CreateFunction(
+		    EugenePetrenko.Gui2.Kernell2.Document.Function function = Util.Util.CreateFunction(
 				new double[] {0, 0, 0, 0},
 				new double[] {1, 1, 10, 1},
 				new int[]	 {1, 10, 1, 2},

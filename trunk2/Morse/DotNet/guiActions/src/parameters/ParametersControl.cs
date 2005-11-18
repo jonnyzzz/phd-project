@@ -1,59 +1,54 @@
 using System;
 using System.Windows.Forms;
-using guiControls.Control;
-using MorseKernel2;
+using EugenePetrenko.Gui2.Controls.Control;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.Parameters
+namespace EugenePetrenko.Gui2.Actions.Parameters
 {
-	public delegate void ParametersSubmitted(IParameters parameters);
+    public delegate void ParametersSubmitted(IParameters parameters);
 
-	public class ParametersControl : UserControl, ISubmittable
-	{
-		//pseudo abstract method
-		protected virtual IParameters SubmitDataInternal()
-		{
-			throw new NotImplementedException("Implement SubmitData in the inheritor class");
-		}
+    public class ParametersControl : UserControl, ISubmittable
+    {
+        //pseudo abstract method
+        protected virtual IParameters SubmitDataInternal()
+        {
+            throw new NotImplementedException("Implement SubmitData in the inheritor class");
+        }
 
-		//abstract
-		public virtual string BoxCaption
-		{
-			get
-			{
-				throw new NotImplementedException("Implement ParametersCaption in the inheritor class");
-			}
-		}        
+        //abstract
+        public virtual string BoxCaption
+        {
+            get { throw new NotImplementedException("Implement ParametersCaption in the inheritor class"); }
+        }
 
-		public virtual bool NeedShowForm
-		{
-			get
-			{
-				return true;
-			}
-		}
+        public virtual bool NeedShowForm
+        {
+            get { return true; }
+        }
 
-		private IParameters cachedParameters = null;
-		
-		public IParameters CachedParameters
-		{
-			get { return cachedParameters; }
-		}
+        private IParameters cachedParameters = null;
 
-		public void SubmitData()
-		{
-			try
-			{
-				cachedParameters = SubmitDataInternal();
-				if (DataSubmitted != null)
-				{
-					DataSubmitted(CachedParameters);
-				}
-			} catch (Exception e)
-			{
-				throw e;
-			}			
-		}
+        public IParameters CachedParameters
+        {
+            get { return cachedParameters; }
+        }
 
-		public event ParametersSubmitted DataSubmitted;
-	}
+        public void SubmitData()
+        {
+            try
+            {
+                cachedParameters = SubmitDataInternal();
+                if (DataSubmitted != null)
+                {
+                    DataSubmitted(CachedParameters);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public event ParametersSubmitted DataSubmitted;
+    }
 }

@@ -1,113 +1,111 @@
-using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Xml;
-using gui.Resource;
-using guiExternalResource.Core;
-using guiExternalResource.src.FileResources;
-using guiKernel2.Container;
-using guiKernel2.Node;
-using guiVisualization.KernelAction.GnuPlot;
-using guiVisualization.src.actionImpl.GnuPlot;
-using MorseKernel2;
+using EugenePetrenko.Gui2.ExternalResource.Core;
+using EugenePetrenko.Gui2.ExternalResource.FileResources;
+using EugenePetrenko.Gui2.Kernell2.Container;
+using EugenePetrenko.Gui2.Kernell2.Node;
+using EugenePetrenko.Gui2.Logging;
+using EugenePetrenko.Gui2.MorseKernel2;
+using EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot;
+using EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot;
 
-namespace guiVisualization.KernelAction
+namespace EugenePetrenko.Gui2.Visualization.KernelAction
 {
-	/// <summary>
-	/// Summary description for GnuPlotVisualization.
-	/// </summary>
-	public class GnuPlotVisualizationKernelAction : IAction
-	{
-		private IGnuPlotVisualizationKernelParameters parameters = null;
-		private IProgressBarInfo progressBarInfo = null;
+    /// <summary>
+    /// Summary description for GnuPlotVisualization.
+    /// </summary>
+    public class GnuPlotVisualizationKernelAction : IAction
+    {
+        private IGnuPlotVisualizationKernelParameters parameters = null;
 
-		public GnuPlotVisualizationKernelAction()
-		{
-		}
+        public GnuPlotVisualizationKernelAction()
+        {
+        }
 
-		public void SetActionParameters(IParameters parameters)
-		{
-			this.parameters = (IGnuPlotVisualizationKernelParameters)parameters;
-		}
+        public void SetActionParameters(IParameters parameters)
+        {
+            this.parameters = (IGnuPlotVisualizationKernelParameters) parameters;
+        }
 
-		public void SetProgressBarInfo(IProgressBarInfo pinfo)
-		{
-			this.progressBarInfo = pinfo;
-		}
+        public void SetProgressBarInfo(IProgressBarInfo pinfo)
+        {
+        }
 
-		public bool CanDo(IResultSet aResultSet)
-		{
-			ResultSet resultSet = ResultSet.FromResultSet(aResultSet);
-			foreach (IResult result in resultSet.ToResults)
-			{
-				if (!(result is IGraphResult)) return false;
-			}
-			return true;
-		}
+        public bool CanDo(IResultSet aResultSet)
+        {
+            ResultSet resultSet = ResultSet.FromResultSet(aResultSet);
+            foreach (IResult result in resultSet.ToResults)
+            {
+                if (!(result is IGraphResult)) return false;
+            }
+            return true;
+        }
 
-		public IResultSet Do(IResultSet input)
-		{
-			TempFileAllocator tempFiles = Core.Instance.ResourceManager.TempFileAllocator;
-			ResultSet resultSet = ResultSet.FromResultSet(input);
+        public IResultSet Do(IResultSet input)
+        {
+            TempFileAllocator tempFiles = Core.Instance.ResourceManager.TempFileAllocator;
+            ResultSet resultSet = ResultSet.FromResultSet(input);
 
-			int dimension = ((IGraphResult)resultSet.ToResults[0]).GetGraphInfo().GetDimension();
+            int dimension = ((IGraphResult) resultSet.ToResults[0]).GetGraphInfo().GetDimension();
 
-			XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode((parameters.Parameters == null)? "show" : "save");
+            XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode((parameters.Parameters == null) ? "show" : "save");
 
-			string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
-			GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters, parameters.Title);
+            string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
+            GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters, parameters.Title);
 
-			foreach (IResult aResult in resultSet.ToResults)
-			{
-				IGraphResult result = (IGraphResult)aResult;
-				string file = tempFiles.CreateFile();
-				result.SaveText(file);
-				script.addFile(file, KernelNode.GetResultCaption(result, true));
-			}
+            foreach (IResult aResult in resultSet.ToResults)
+            {
+                IGraphResult result = (IGraphResult) aResult;
+                string file = tempFiles.CreateFile();
+                result.SaveText(file);
+                script.addFile(file, KernelNode.GetResultCaption(result, true));
+            }
 
-			RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), resource);
+            RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), resource);
 
-			return new EmptyResultSet();
-		}
+            return new EmptyResultSet();
+        }
 
-		private void ShowFromFileList(int dimension, string[] fileset)
-		{
-			TempFileAllocator tempFiles = Core.Instance.ResourceManager.TempFileAllocator;
+        private void ShowFromFileList(int dimension, string[] fileset)
+        {
+            XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode((parameters.Parameters == null) ? "show" : "save");
 
-			XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode((parameters.Parameters == null)? "show" : "save");
+            string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
+            GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters, parameters.Title);
 
-			string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
-			GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters, parameters.Title);
-
-			foreach (string file in fileset)
-			{
-				int len;
-				using(TextReader tr = File.OpenText(file)) { len = tr.ReadToEnd().Split('\n').Length; }
-				script.addFile(file, file + " " + len.ToString());
-			}
-			RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), resource);			
-		}
-
-
-		private void RunGnuPlot(string filescript, XmlNode resource)
-		{
-			ProcessStartInfo pi = new ProcessStartInfo();
-			pi.FileName = ResourceManager.Instance.AbsolutePathFileName( resource.SelectSingleNode("exe/text()").Value );
-			pi.Arguments = string.Format(resource.SelectSingleNode("params/text()").Value, filescript);
-			pi.ErrorDialog = true;
-
-			Logger.Logger.LogMessage("Arguments: {0} ", pi.Arguments);
-
-			Process.Start(pi);
-		}
+            foreach (string file in fileset)
+            {
+                int len;
+                using (TextReader tr = File.OpenText(file))
+                {
+                    len = tr.ReadToEnd().Split('\n').Length;
+                }
+                script.addFile(file, file + " " + len.ToString());
+            }
+            RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), resource);
+        }
 
 
-		public static void ExportFile(string[] files, string output, string title)
-		{			
-			GnuPlotParameters pars = new GnuPlotParameters(output, title);
-			GnuPlotVisualizationKernelAction action = new GnuPlotVisualizationKernelAction();
-			action.SetActionParameters(pars);
-			action.ShowFromFileList(2, files);	
-		}
-	}
+        private void RunGnuPlot(string filescript, XmlNode resource)
+        {
+            ProcessStartInfo pi = new ProcessStartInfo();
+            pi.FileName = ResourceManager.Instance.AbsolutePathFileName(resource.SelectSingleNode("exe/text()").Value);
+            pi.Arguments = string.Format(resource.SelectSingleNode("params/text()").Value, filescript);
+            pi.ErrorDialog = true;
+
+            Logger.LogMessage("Arguments: {0} ", pi.Arguments);
+
+            Process.Start(pi);
+        }
+
+
+        public static void ExportFile(string[] files, string output, string title)
+        {
+            GnuPlotParameters pars = new GnuPlotParameters(output, title);
+            GnuPlotVisualizationKernelAction action = new GnuPlotVisualizationKernelAction();
+            action.SetActionParameters(pars);
+            action.ShowFromFileList(2, files);
+        }
+    }
 }

@@ -1,14 +1,14 @@
 using System;
 
-namespace guiKernel2.Document
+namespace EugenePetrenko.Gui2.Kernell2.Document
 {
-	/// <summary>
-	/// Summary description for FunctionExceptions.
-	/// </summary>
-	public class FunctionExceptions : Exception
-	{
-		public FunctionExceptions(string message) : base(message)
-		{
-		}
-	}
+    /// <summary>
+    /// Summary description for FunctionExceptions.
+    /// </summary>
+    public class FunctionExceptions : Exception
+    {
+        public FunctionExceptions(string message) : base(message)
+        {
+        }
+    }
 }

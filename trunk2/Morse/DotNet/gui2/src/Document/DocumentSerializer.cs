@@ -1,110 +1,108 @@
 using System;
 using System.Windows.Forms;
 using System.Xml;
-using gui2.TreeNodes;
-using guiKernel2.Document;
-using guiKernel2.Node;
-using guiKernel2.Serialization;
+using EugenePetrenko.Gui2.Application.TreeNodes;
+using EugenePetrenko.Gui2.Kernell2.Document;
+using EugenePetrenko.Gui2.Kernell2.Node;
+using EugenePetrenko.Gui2.Kernell2.Serialization;
 
-namespace gui2.src.Document
+namespace EugenePetrenko.Gui2.Application.Document
 {
-	/// <summary>
-	/// Summary description for DocumentSerializer.
-	/// </summary>
-	public class DocumentSerializer
-	{
-	
-		public static XmlNode SaveDocument(gui2.Document.Document document, String pathBase)
-		{
-			XmlDocument doc = new XmlDocument();
-			XmlNode rootNode = doc.CreateElement("document");
+    /// <summary>
+    /// Summary description for DocumentSerializer.
+    /// </summary>
+    public class DocumentSerializer
+    {
+        public static XmlNode SaveDocument(Document document, String pathBase)
+        {
+            XmlDocument doc = new XmlDocument();
+            XmlNode rootNode = doc.CreateElement("document");
 
-			XmlNode function = FunctionSerializer.SaveFunction(document.KernelDocument.Function);
-			XmlUtil.AppendNode(doc, rootNode, function);			
+            XmlNode function = FunctionSerializer.SaveFunction(document.KernelDocument.Function);
+            XmlUtil.AppendNode(doc, rootNode, function);
 
-			XmlNode nodes = doc.CreateElement("nodes");
-			rootNode.AppendChild(nodes);
+            XmlNode nodes = doc.CreateElement("nodes");
+            rootNode.AppendChild(nodes);
 
-			XmlNode commentNode = doc.CreateElement("comment");
-			commentNode.InnerText = document.KernelDocument.Title;
+            XmlNode commentNode = doc.CreateElement("comment");
+            commentNode.InnerText = document.KernelDocument.Title;
 
-			rootNode.AppendChild(commentNode);
+            rootNode.AppendChild(commentNode);
 
-			RecursiveSaveNodes(nodes, document.RootNode, doc, pathBase);
+            RecursiveSaveNodes(nodes, document.RootNode, doc, pathBase);
 
-			return rootNode;
-		}
+            return rootNode;
+        }
 
-		private static void RecursiveSaveNodes(XmlNode root, Node node, XmlDocument doc, string pathBase)
-		{	
-			if (node == null) return;
+        private static void RecursiveSaveNodes(XmlNode root, Node node, XmlDocument doc, string pathBase)
+        {
+            if (node == null) return;
 
-			XmlNode internalNode = SaveNode(root, node, doc, pathBase);
-			foreach (TreeNode treeNode in node.Nodes)
-			{
-				if (treeNode is Node)
-				{
-					Node myNode = (Node)treeNode;
-					RecursiveSaveNodes(internalNode, myNode, doc, pathBase);
-				}
-			}
-		}
+            XmlNode internalNode = SaveNode(root, node, doc, pathBase);
+            foreach (TreeNode treeNode in node.Nodes)
+            {
+                if (treeNode is Node)
+                {
+                    Node myNode = (Node) treeNode;
+                    RecursiveSaveNodes(internalNode, myNode, doc, pathBase);
+                }
+            }
+        }
 
-		private static XmlNode SaveNode(XmlNode root, Node node, XmlDocument doc, string pathBase)
-		{
-			XmlNode myNode = doc.CreateElement("node");
-			root.AppendChild(myNode);
+        private static XmlNode SaveNode(XmlNode root, Node node, XmlDocument doc, string pathBase)
+        {
+            XmlNode myNode = doc.CreateElement("node");
+            root.AppendChild(myNode);
 
-			XmlAttribute attr = doc.CreateAttribute("iterations");
-			attr.Value = node.Iterations.ToString();
-			
-			myNode.Attributes.Append(attr);
+            XmlAttribute attr = doc.CreateAttribute("iterations");
+            attr.Value = node.Iterations.ToString();
 
-			myNode.AppendChild(KernelNodeSerializer.SaveKernelNode(node.KernelNode, doc, pathBase ));					
+            myNode.Attributes.Append(attr);
 
-			return myNode;
-		}
+            myNode.AppendChild(KernelNodeSerializer.SaveKernelNode(node.KernelNode, doc, pathBase));
 
+            return myNode;
+        }
 
 
-		public static gui2.Document.Document LoadDocument(XmlNode root, string pathBase)
-		{
-			XmlNode myNode = root.SelectSingleNode("/document");
-			
-			Function function = FunctionSerializer.LoadFunction(myNode);
+        public static Document LoadDocument(XmlNode root, string pathBase)
+        {
+            XmlNode myNode = root.SelectSingleNode("/document");
 
-			XmlNode resultsetNode = myNode.SelectSingleNode("nodes/node");
+            Function function = FunctionSerializer.LoadFunction(myNode);
 
-			Node treeNode = LoadNodeTree(resultsetNode, pathBase);
+            XmlNode resultsetNode = myNode.SelectSingleNode("nodes/node");
 
-			gui2.Document.Document doc = new gui2.Document.Document(function, treeNode);
+            Node treeNode = LoadNodeTree(resultsetNode, pathBase);
 
-			XmlNode myCommentText = myNode.SelectSingleNode("comment/text()");
-			if (myCommentText != null)  
-			{
-				doc.KernelDocument.Title = myCommentText.Value;
-			}
+            Document doc = new Document(function, treeNode);
 
-			return doc;
-		}
+            XmlNode myCommentText = myNode.SelectSingleNode("comment/text()");
+            if (myCommentText != null)
+            {
+                doc.KernelDocument.Title = myCommentText.Value;
+            }
 
-		private static Node LoadNodeTree(XmlNode node, string pathBase)
-		{
-			Node treeNode = LoadOnlyNode(node, pathBase);
-			foreach (XmlNode xmlNode in node.SelectNodes("node"))
-			{
-				treeNode.AddNodeChild(LoadNodeTree(xmlNode, pathBase));				
-			}
-			return treeNode;
-		}
+            return doc;
+        }
 
-		private static Node LoadOnlyNode(XmlNode node, string pathBase)
-		{
-			KernelNode kernelNode = KernelNodeSerializer.LoadKernelNode(node, pathBase);
+        private static Node LoadNodeTree(XmlNode node, string pathBase)
+        {
+            Node treeNode = LoadOnlyNode(node, pathBase);
+            foreach (XmlNode xmlNode in node.SelectNodes("node"))
+            {
+                treeNode.AddNodeChild(LoadNodeTree(xmlNode, pathBase));
+            }
+            return treeNode;
+        }
 
-			XmlNode aNode = node.SelectSingleNode("@iterations");
-			return new Node(kernelNode, (aNode != null)? int.Parse(aNode.Value) : 1);
-		}
+        private static Node LoadOnlyNode(XmlNode node, string pathBase)
+        {
+            KernelNode kernelNode = KernelNodeSerializer.LoadKernelNode(node, pathBase);
 
-	}
+            XmlNode aNode = node.SelectSingleNode("@iterations");
+            return new Node(kernelNode, (aNode != null) ? int.Parse(aNode.Value) : 1);
+        }
+
+    }
 }

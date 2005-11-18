@@ -1,34 +1,28 @@
 using System;
 
-namespace guiControls.Control
+namespace EugenePetrenko.Gui2.Controls.Control
 {
-	/// <summary>
-	/// Summary description for ControlException.
-	/// </summary>
-	public class ControlException : Exception
-	{
-		public ControlException(string message) : base(message)
-		{
-		}
+    /// <summary>
+    /// Summary description for ControlException.
+    /// </summary>
+    public class ControlException : Exception
+    {
+        public ControlException(string message) : base(message)
+        {
+        }
 
-		public ControlException()
-		{
-		}
+        public ControlException()
+        {
+        }
 
-		public virtual string ErrorDescription
-		{
-			get
-			{
-				return Message;
-			}
-		}
+        public virtual string ErrorDescription
+        {
+            get { return Message; }
+        }
 
-		public virtual string ErrorDescriptionShort
-		{
-			get
-			{
-				return Message;
-			}
-		}
-	}
+        public virtual string ErrorDescriptionShort
+        {
+            get { return Message; }
+        }
+    }
 }

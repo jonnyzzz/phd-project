@@ -58,7 +58,9 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="Performing registration"
-				CommandLine="regsvr32 /s /c &quot;$(TargetPath)&quot;"/>
+				CommandLine="regsvr32 /s /c &quot;$(TargetPath)&quot;
+&quot;$(FrameworkSDKDir)Bin/tlbImp&quot; $(TargetPath) /out:&quot;$(ProjectDir)/../MorseKernel2.Interop/EugenePetrenko.Gui2.$(TargetName).Interop.dll&quot; /namespace:EugenePetrenko.Gui2.MorseKernel2
+"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool
@@ -130,7 +132,9 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="Performing registration"
-				CommandLine="regsvr32 /s /c &quot;$(TargetPath)&quot;"/>
+				CommandLine="regsvr32 /s /c &quot;$(TargetPath)&quot;
+&quot;$(FrameworkSDKDir)Bin/tlbImp&quot; $(TargetPath) /out:&quot;$(ProjectDir)/../EugenePetrenko.Gui2.MorseKernel2.Interop/$(TargetName).Interop.dll&quot; /namespace:EugenePetrenko.Gui2.MorseKernel2
+"/>
 			<Tool
 				Name="VCPreBuildEventTool"/>
 			<Tool

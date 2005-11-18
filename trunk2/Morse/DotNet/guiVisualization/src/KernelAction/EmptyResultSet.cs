@@ -1,25 +1,24 @@
-using System;
-using MorseKernel2;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiVisualization.KernelAction
+namespace EugenePetrenko.Gui2.Visualization.KernelAction
 {
-	/// <summary>
-	/// Summary description for EmptyResultSet.
-	/// </summary>
-	public class EmptyResultSet : IResultSet
-	{
-		public EmptyResultSet()
-		{
-		}
+    /// <summary>
+    /// Summary description for EmptyResultSet.
+    /// </summary>
+    public class EmptyResultSet : IResultSet
+    {
+        public EmptyResultSet()
+        {
+        }
 
-		public int GetCount()
-		{
-			return 0;
-		}
+        public int GetCount()
+        {
+            return 0;
+        }
 
-		public IResultBase GetResult(int index)
-		{
-			return null;
-		}
-	}
+        public IResultBase GetResult(int index)
+        {
+            return null;
+        }
+    }
 }

@@ -1,24 +1,23 @@
-using System;
-using guiKernel2.Document;
-using MorseKernel2;
+using EugenePetrenko.Gui2.Kernell2.Document;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.actionImpl.MS2D.Next
+namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D.Next
 {
-	/// <summary>
-	/// Summary description for MS2DMethodParameters.
-	/// </summary>
-	public class MS2DMethodParameters : ActionParameters
-	{
-	    private Function function;
+    /// <summary>
+    /// Summary description for MS2DMethodParameters.
+    /// </summary>
+    public class MS2DMethodParameters : ActionParameters
+    {
+        private Function function;
 
-	    public MS2DMethodParameters(Function function)
-	    {
-	        this.function = function;
-	    }
+        public MS2DMethodParameters(Function function)
+        {
+            this.function = function;
+        }
 
-	    protected override IParameters LoadParameters(int factor)
-	    {
-	        return new MS2DMethodParametersImpl(factor, function);
-	    }
-	}
+        protected override IParameters LoadParameters(int factor)
+        {
+            return new MS2DMethodParametersImpl(factor, function);
+        }
+    }
 }

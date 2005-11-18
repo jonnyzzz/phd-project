@@ -1,64 +1,69 @@
 using System;
+using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 
-namespace guiVisualization.src.actionImpl.GnuPlot2.Controls
+namespace EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2.Controls
 {
-	/// <summary>
-	/// Summary description for AdditionalSettingsControl.
-	/// </summary>
-	public class AdditionalSettingsControl : System.Windows.Forms.UserControl
-	{
-        private System.Windows.Forms.GroupBox groupBoxAdditional;
-        private System.Windows.Forms.CheckBox checkBoxDrawBoxes;
-        private System.Windows.Forms.CheckBox checkBoxShowHistory;
-		/// <summary> 
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
+    /// <summary>
+    /// Summary description for AdditionalSettingsControl.
+    /// </summary>
+    public class AdditionalSettingsControl : UserControl
+    {
+        private GroupBox groupBoxAdditional;
+        private CheckBox checkBoxDrawBoxes;
+        private CheckBox checkBoxShowHistory;
 
-		public AdditionalSettingsControl()
-		{
-			// This call is required by the Windows.Forms Form Designer.
-			InitializeComponent();
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private Container components = null;
 
-			// TODO: Add any initialization after the InitializeComponent call
+        public AdditionalSettingsControl()
+        {
+            // This call is required by the Windows.Forms Form Designer.
+            InitializeComponent();
 
-		}
+            // TODO: Add any initialization after the InitializeComponent call
 
-		/// <summary> 
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        }
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
         private bool isInSizeChanged = false;
-	    protected override void OnSizeChanged(EventArgs e)
-	    {
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
             if (!isInSizeChanged)
             {
                 isInSizeChanged = true;
                 this.Size = new Size(Size.Width, this.groupBoxAdditional.Size.Height + this.DockPadding.Bottom + this.DockPadding.Top + 5);
                 base.OnSizeChanged(e);
                 isInSizeChanged = false;
-            }	        
-	    }
+            }
+        }
 
-	    #region Component Designer generated code
-		/// <summary> 
-		/// Required method for Designer support - do not modify 
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.groupBoxAdditional = new System.Windows.Forms.GroupBox();
             this.checkBoxDrawBoxes = new System.Windows.Forms.CheckBox();
             this.checkBoxShowHistory = new System.Windows.Forms.CheckBox();
@@ -106,6 +111,7 @@ namespace guiVisualization.src.actionImpl.GnuPlot2.Controls
             this.ResumeLayout(false);
 
         }
-		#endregion
-	}
+
+        #endregion
+    }
 }

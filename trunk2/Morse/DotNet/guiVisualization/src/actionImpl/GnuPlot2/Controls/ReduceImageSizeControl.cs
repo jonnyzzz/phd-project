@@ -1,68 +1,72 @@
 using System;
+using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 
-namespace guiVisualization.actionImpl.GnuPlot2.Controls
+namespace EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2.Controls
 {
-	/// <summary>
-	/// Summary description for ReduceImageSizeControl.
-	/// </summary>
-	public class ReduceImageSizeControl : System.Windows.Forms.UserControl
-	{
-        private System.Windows.Forms.GroupBox groupBoxImageSize;
-        private System.Windows.Forms.Panel panelReduceBeforeShow;
-        private System.Windows.Forms.CheckBox checkBoxReduceSize;
-        private System.Windows.Forms.Panel panelImageSizeY;
-        private System.Windows.Forms.TextBox textBoxImageSizeY;
-        private System.Windows.Forms.Label labelImageSizeY;
-        private System.Windows.Forms.Panel panelImageSizeX;
-        private System.Windows.Forms.TextBox textBoxImageSizeX;
-        private System.Windows.Forms.Label labelImageSizeX;
+    /// <summary>
+    /// Summary description for ReduceImageSizeControl.
+    /// </summary>
+    public class ReduceImageSizeControl : UserControl
+    {
+        private GroupBox groupBoxImageSize;
+        private Panel panelReduceBeforeShow;
+        private CheckBox checkBoxReduceSize;
+        private Panel panelImageSizeY;
+        private TextBox textBoxImageSizeY;
+        private Label labelImageSizeY;
+        private Panel panelImageSizeX;
+        private TextBox textBoxImageSizeX;
+        private Label labelImageSizeX;
 
         private bool allowImageSizeWithoutReduse;
-		/// <summary> 
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
 
-		public ReduceImageSizeControl()
-		{		
-			InitializeComponent();
-		}
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private Container components = null;
 
-	    public bool AllowImageSizeWithoutReduse
-	    {
-	        get { return allowImageSizeWithoutReduse; }
-	        set { allowImageSizeWithoutReduse = value; }
-	    }
+        public ReduceImageSizeControl()
+        {
+            InitializeComponent();
+        }
+
+        public bool AllowImageSizeWithoutReduse
+        {
+            get { return allowImageSizeWithoutReduse; }
+            set { allowImageSizeWithoutReduse = value; }
+        }
 
         public bool Reduse
         {
-            get { return checkBoxReduceSize.Checked;}
-            set { checkBoxReduceSize.Checked = value;}
+            get { return checkBoxReduceSize.Checked; }
+            set { checkBoxReduceSize.Checked = value; }
         }
 
-	    /// <summary> 
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Component Designer generated code
-		/// <summary> 
-		/// Required method for Designer support - do not modify 
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.groupBoxImageSize = new System.Windows.Forms.GroupBox();
             this.panelReduceBeforeShow = new System.Windows.Forms.Panel();
             this.checkBoxReduceSize = new System.Windows.Forms.CheckBox();
@@ -186,24 +190,26 @@ namespace guiVisualization.actionImpl.GnuPlot2.Controls
             this.ResumeLayout(false);
 
         }
-		#endregion
+
+        #endregion
 
         private bool isInsizeSizeChanged = false;
-	    protected override void OnSizeChanged(EventArgs e)
-	    {
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
             if (!isInsizeSizeChanged)
             {
                 isInsizeSizeChanged = true;
-                Size = new Size(Size.Width,groupBoxImageSize.Size.Height + this.DockPadding.Bottom + this.DockPadding.Top + 5 );
+                Size = new Size(Size.Width, groupBoxImageSize.Size.Height + this.DockPadding.Bottom + this.DockPadding.Top + 5);
                 base.OnSizeChanged(e);
                 isInsizeSizeChanged = false;
-            }	        
-	    }
+            }
+        }
 
-	    private void checkBoxReduceSize_CheckedChanged(object sender, System.EventArgs e)
+        private void checkBoxReduceSize_CheckedChanged(object sender, EventArgs e)
         {
             textBoxImageSizeX.Enabled = AllowImageSizeWithoutReduse || checkBoxReduceSize.Checked;
-            textBoxImageSizeY.Enabled = AllowImageSizeWithoutReduse || checkBoxReduceSize.Checked;            
+            textBoxImageSizeY.Enabled = AllowImageSizeWithoutReduse || checkBoxReduceSize.Checked;
         }
-	}
+    }
 }

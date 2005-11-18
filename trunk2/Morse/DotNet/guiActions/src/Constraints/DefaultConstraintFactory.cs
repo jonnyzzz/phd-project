@@ -1,18 +1,17 @@
 using System.Xml;
-using guiActions.Constraints;
-using guiKernel2.Constraints;
+using EugenePetrenko.Gui2.Kernell2.Constraints;
 
-namespace guiActions.Constraints
+namespace EugenePetrenko.Gui2.Actions.Constraints
 {
-	/// <summary>
-	/// Summary description for DefaultConstraintFactory.
-	/// </summary>
-	public class DefaultConstraintFactory : IConstraintFactory
-	{
-		public IConstraint CreateConstraint(XmlNode constraintNode)
-		{
-			XmlAttributeCollection attributes = constraintNode.Attributes;
-			return new DefaultConstraint(attributes["metadata"].Value, attributes["result"].Value);
-		}
-	}
+    /// <summary>
+    /// Summary description for DefaultConstraintFactory.
+    /// </summary>
+    public class DefaultConstraintFactory : IConstraintFactory
+    {
+        public IConstraint CreateConstraint(XmlNode constraintNode)
+        {
+            XmlAttributeCollection attributes = constraintNode.Attributes;
+            return new DefaultConstraint(attributes["metadata"].Value, attributes["result"].Value);
+        }
+    }
 }

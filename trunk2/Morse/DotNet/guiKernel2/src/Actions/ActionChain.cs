@@ -1,53 +1,50 @@
 using System.Collections;
-using guiKernel2.Node;
-using MorseKernel2;
+using EugenePetrenko.Gui2.Kernell2.Node;
 
-namespace guiKernel2.Actions
+namespace EugenePetrenko.Gui2.Kernell2.Actions
 {
-	/// <summary>
-	/// Summary description for ComputationChain.
-	/// </summary>
-	public class ActionChain
-	{		
-		ArrayList actions = new ArrayList();
+    /// <summary>
+    /// Summary description for ComputationChain.
+    /// </summary>
+    public class ActionChain
+    {
+        private ArrayList actions = new ArrayList();
 
-		public ActionChain()
-		{
-		}
+        public ActionChain()
+        {
+        }
 
-		public void AddAction(ActionWrapper action)
-		{
-			actions.Add(action);
-		}
+        public void AddAction(ActionWrapper action)
+        {
+            actions.Add(action);
+        }
 
-		public void AddActionRange(ActionWrapper[] actions)
-		{
-			this.actions.AddRange(actions);
-		}
+        public void AddActionRange(ActionWrapper[] actions)
+        {
+            this.actions.AddRange(actions);
+        }
 
-		public ActionWrapper[] Actions {
-			get
-			{
-				return (ActionWrapper[])actions.ToArray(typeof(ActionWrapper));
-			}
-		}
+        public ActionWrapper[] Actions
+        {
+            get { return (ActionWrapper[]) actions.ToArray(typeof (ActionWrapper)); }
+        }
 
-		public bool PublishResults
-		{
-			get
-			{
-				ActionWrapper[] actions = Actions;
-				return actions[actions.Length-1].PublishResults;
-			}
-		}
+        public bool PublishResults
+        {
+            get
+            {
+                ActionWrapper[] actions = Actions;
+                return actions[actions.Length - 1].PublishResults;
+            }
+        }
 
-		public ResultSet Do(ResultSet resultSet, ProgressBarInfo progressBarInfo)
-		{			
-			foreach (ActionWrapper action in actions)
-			{
-				resultSet = action.Do(resultSet, progressBarInfo);
-			}
-			return resultSet;
-		}
-	}
+        public ResultSet Do(ResultSet resultSet, ProgressBarInfo progressBarInfo)
+        {
+            foreach (ActionWrapper action in actions)
+            {
+                resultSet = action.Do(resultSet, progressBarInfo);
+            }
+            return resultSet;
+        }
+    }
 }

@@ -1,3 +1,4 @@
+Use ngen utiliry when installing to speed up application perfomance
 Implement MemoryManager to STL Allocator bridge.
 FIX Interval Evaluation in release mode don't works
 FIX Metadata checking every where + Metadata hierarcy [MS2Metadata is not a SymbolicImage nor ordinary graph with ordinary computation methods]

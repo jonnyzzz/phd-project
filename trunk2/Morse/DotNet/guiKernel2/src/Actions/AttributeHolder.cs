@@ -1,31 +1,30 @@
-using System;
-using guiKernel2.Actions;
-using guiKernel2.ActionFactory;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory;
 
-namespace guiKernel2.Actions
+namespace EugenePetrenko.Gui2.Kernell2.Actions
 {
-	/// <summary>
-	/// Summary description for AttributeHolder.
-	/// </summary>
-	public class AttributeHolder
-	{
-		private ActionMappingAttribute myCachedAttribute = null;
-		protected ActionMappingAttribute MyAttribute
-		{
-			get
-			{
-				if (myCachedAttribute == null) 
-				{
-					ActionMappingAttribute[] attributes = (ActionMappingAttribute[])this.GetType().GetCustomAttributes(typeof(ActionMappingAttribute), true);
-					if (attributes.Length != 1) throw new ActionException("Incorrect Attribute");
+    /// <summary>
+    /// Summary description for AttributeHolder.
+    /// </summary>
+    public class AttributeHolder
+    {
+        private ActionMappingAttribute myCachedAttribute = null;
 
-					return myCachedAttribute = attributes[0];
-				} 
-				else
-				{
-					return myCachedAttribute;
-				}
-			}
-		}
-	}
+        protected ActionMappingAttribute MyAttribute
+        {
+            get
+            {
+                if (myCachedAttribute == null)
+                {
+                    ActionMappingAttribute[] attributes = (ActionMappingAttribute[]) this.GetType().GetCustomAttributes(typeof (ActionMappingAttribute), true);
+                    if (attributes.Length != 1) throw new ActionException("Incorrect Attribute");
+
+                    return myCachedAttribute = attributes[0];
+                }
+                else
+                {
+                    return myCachedAttribute;
+                }
+            }
+        }
+    }
 }

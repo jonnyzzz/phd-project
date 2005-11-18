@@ -9,7 +9,7 @@
             <Settings
                 ApplicationIcon = "..\resource\jo.ico"
                 AssemblyKeyContainerName = ""
-                AssemblyName = "gui2"
+                AssemblyName = "EugenePetrenko.Gui2.Application"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Exe"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "gui2"
+                RootNamespace = "EugenePetrenko.Gui2.Application"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >

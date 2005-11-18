@@ -1,14 +1,14 @@
 using System;
 
-namespace guiKernel2.ActionFactory
+namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
 {
-	/// <summary>
-	/// Summary description for NextActionFactoryException.
-	/// </summary>
-	public class NextActionFactoryException : Exception
-	{
-		public NextActionFactoryException(string message) : base(message)
-		{
-		}
-	}
+    /// <summary>
+    /// Summary description for NextActionFactoryException.
+    /// </summary>
+    public class NextActionFactoryException : Exception
+    {
+        public NextActionFactoryException(string message) : base(message)
+        {
+        }
+    }
 }

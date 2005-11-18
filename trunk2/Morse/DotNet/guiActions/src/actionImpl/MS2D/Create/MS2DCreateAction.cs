@@ -1,31 +1,30 @@
-using System;
-using guiActions.Actions;
-using guiActions.Parameters;
-using guiKernel2.ActionFactory;
-using guiKernel2.Node;
-using MorseKernel2;
+using EugenePetrenko.Gui2.Actions.Actions;
+using EugenePetrenko.Gui2.Actions.Parameters;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory;
+using EugenePetrenko.Gui2.Kernell2.Node;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.actionImpl.MS2D.Create
+namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D.Create
 {
-	/// <summary>
-	/// Summary description for MS2DCreateAction.
-	/// </summary>
-	/// 
-    [ActionMapping(typeof(IMS2DCreationAction), typeof(IMS2DCreationParameters))]
-	public class MS2DCreateAction : Action
-	{
-	    public MS2DCreateAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
-	    {
-	    }
+    /// <summary>
+    /// Summary description for MS2DCreateAction.
+    /// </summary>
+    /// 
+    [ActionMapping(typeof (IMS2DCreationAction), typeof (IMS2DCreationParameters))]
+    public class MS2DCreateAction : Action
+    {
+        public MS2DCreateAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
+        {
+        }
 
-	    protected override ParametersControl GetParametersControlInternal(KernelNode node)
-	    {
-	        return new MS2DCreateActionParameters();
-	    }
+        protected override ParametersControl GetParametersControlInternal(KernelNode node)
+        {
+            return new MS2DCreateActionParameters();
+        }
 
-	    protected override MorseKernel2.IAction CreateAction()
-	    {
-	        return new CMS2DCreationActionClass();
-	    }
-	}
+        protected override IAction CreateAction()
+        {
+            return new CMS2DCreationActionClass();
+        }
+    }
 }

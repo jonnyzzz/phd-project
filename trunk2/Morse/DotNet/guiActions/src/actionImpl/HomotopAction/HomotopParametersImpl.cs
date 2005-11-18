@@ -1,31 +1,29 @@
-using System;
-using guiKernel2.Node;
-using MorseKernel2;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.actionImpl.HomotopAction
+namespace EugenePetrenko.Gui2.Actions.ActionImpl.HomotopAction
 {
-	/// <summary>
-	/// Summary description for HomotopParametersImpl.
-	/// </summary>
-	public class HomotopParametersImpl : IIsolatedSetParameters
-	{
-		private IGraphResult result;
-		private bool publishGraph;
+    /// <summary>
+    /// Summary description for HomotopParametersImpl.
+    /// </summary>
+    public class HomotopParametersImpl : IIsolatedSetParameters
+    {
+        private IGraphResult result;
+        private bool publishGraph;
 
-		public HomotopParametersImpl(IGraphResult result, bool publishGraph)
-		{
-			this.result = result;
-			this.publishGraph = publishGraph;
-		}
+        public HomotopParametersImpl(IGraphResult result, bool publishGraph)
+        {
+            this.result = result;
+            this.publishGraph = publishGraph;
+        }
 
-		public bool PublishGraph
-		{
-			get { return publishGraph; }
-		}
+        public bool PublishGraph
+        {
+            get { return publishGraph; }
+        }
 
-		public IGraphResult GetStartSet()
-		{
-			return result;	
-		}
-	}
+        public IGraphResult GetStartSet()
+        {
+            return result;
+        }
+    }
 }

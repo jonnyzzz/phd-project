@@ -1,19 +1,16 @@
-using System;
-using gui2.TreeNodes;
-
-namespace gui2.src.TreeNodes.MenuItems
+namespace EugenePetrenko.Gui2.Application.TreeNodes.MenuItems
 {
-	/// <summary>
-	/// Summary description for CommentMenuItem.
-	/// </summary>
-	public class CommentMenuItem : TreeMenuItem
-	{
-	    public CommentMenuItem(string caption) : base(caption, false)
-	    {
-	    }
+    /// <summary>
+    /// Summary description for CommentMenuItem.
+    /// </summary>
+    public class CommentMenuItem : TreeMenuItem
+    {
+        public CommentMenuItem(string caption) : base(caption, false)
+        {
+        }
 
-	    protected override void EventClick()
-	    {	        
-	    }
-	}
+        protected override void EventClick()
+        {
+        }
+    }
 }

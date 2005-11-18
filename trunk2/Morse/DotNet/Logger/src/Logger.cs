@@ -1,6 +1,6 @@
 using System;
 
-namespace Logger
+namespace EugenePetrenko.Gui2.Logging
 {
 	/// <summary>
 	/// Summary description for Logger.

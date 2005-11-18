@@ -9,7 +9,7 @@
             <Settings
                 ApplicationIcon = ""
                 AssemblyKeyContainerName = ""
-                AssemblyName = "guiVisualization"
+                AssemblyName = "EugenePetrenko.Gui2.Visualization"
                 AssemblyOriginatorKeyFile = ""
                 DefaultClientScript = "JScript"
                 DefaultHTMLPageLayout = "Grid"
@@ -18,7 +18,7 @@
                 OutputType = "Library"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
-                RootNamespace = "guiVisualization"
+                RootNamespace = "EugenePetrenko.Gui2.Visualization"
                 RunPostBuildEvent = "OnBuildSuccess"
                 StartupObject = ""
             >
@@ -80,14 +80,6 @@
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
                 />
                 <Reference
-                    Name = "MorseKernel2"
-                    Guid = "{922445B5-C296-49D0-B69D-45FF70F8CE56}"
-                    VersionMajor = "1"
-                    VersionMinor = "0"
-                    Lcid = "0"
-                    WrapperTool = "tlbimp"
-                />
-                <Reference
                     Name = "guiKernel2"
                     Project = "{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}"
                     Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
@@ -121,6 +113,11 @@
                     Name = "System.Drawing"
                     AssemblyName = "System.Drawing"
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                />
+                <Reference
+                    Name = "EugenePetrenko.Gui2.MorseKernel2.Interop"
+                    AssemblyName = "EugenePetrenko.Gui2.MorseKernel2.Interop"
+                    HintPath = "..\MorseKernel2.Interop\EugenePetrenko.Gui2.MorseKernel2.Interop.dll"
                 />
             </References>
         </Build>

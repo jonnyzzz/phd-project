@@ -1,34 +1,33 @@
-using System;
-using MorseKernel2;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.ActionImpl
+namespace EugenePetrenko.Gui2.Actions.ActionImpl
 {
-	public class BoxMethodParametersImpl : IBoxMethodParameters
-	{
-		private bool useDerivate;
-		private readonly IFunction function;
-		private int[] factor;
+    public class BoxMethodParametersImpl : IBoxMethodParameters
+    {
+        private bool useDerivate;
+        private readonly IFunction function;
+        private int[] factor;
 
-		public IFunction GetFunction()
-		{
-			return function;
-		}
+        public IFunction GetFunction()
+        {
+            return function;
+        }
 
-		public int GetFactor(int index)
-		{
-			return factor[index];
-		}
+        public int GetFactor(int index)
+        {
+            return factor[index];
+        }
 
-		public bool UseDerivate()
-		{
-			return useDerivate;
-		}
+        public bool UseDerivate()
+        {
+            return useDerivate;
+        }
 
-		public BoxMethodParametersImpl(bool useDerivate, IFunction function, int[] factor)
-		{
-			this.useDerivate = useDerivate;
-			this.function = function;
-			this.factor = factor;
-		}
-	}
+        public BoxMethodParametersImpl(bool useDerivate, IFunction function, int[] factor)
+        {
+            this.useDerivate = useDerivate;
+            this.function = function;
+            this.factor = factor;
+        }
+    }
 }

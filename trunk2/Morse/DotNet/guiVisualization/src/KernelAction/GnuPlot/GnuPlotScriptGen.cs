@@ -1,68 +1,66 @@
-using System;
 using System.Text;
-using guiExternalResource.Utils;
-using guiVisualization.KernelAction.GnuPlot;
+using EugenePetrenko.Gui2.ExternalResource.Utils;
 
-namespace gui.Resource
+namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
 {
-	/// <summary>
-	/// Summary description for GnuPlotScriptGen.
-	/// </summary>
-	public class GnuPlotScriptGen
-	{
-		private GnuPlotTemplate template;
-		private StringBuilder builder = new StringBuilder();
-		private GnuPlotScriptGenParameters parameters;
+    /// <summary>
+    /// Summary description for GnuPlotScriptGen.
+    /// </summary>
+    public class GnuPlotScriptGen
+    {
+        private GnuPlotTemplate template;
+        private StringBuilder builder = new StringBuilder();
+        private GnuPlotScriptGenParameters parameters;
 
-		private bool isFirst = true;
+        private bool isFirst = true;
 
-		public GnuPlotScriptGen(GnuPlotTemplate template, GnuPlotScriptGenParameters parameters, string title)
-		{
-			this.template = template;
-			TemplateProcessor processor = new TemplateProcessor(" " + template.Header + " ");
-				
-			if (parameters != null) 
-			{
-				processor.subsitute("width", parameters.Width.ToString());
-				processor.subsitute("height", parameters.Height.ToString());
-				processor.subsitute("filename", parameters.FileName);
-			}
-			processor.subsitute("global_title", title);			
-			
-			builder.Append(processor.ToString() + " ");
+        public GnuPlotScriptGen(GnuPlotTemplate template, GnuPlotScriptGenParameters parameters, string title)
+        {
+            this.template = template;
+            TemplateProcessor processor = new TemplateProcessor(" " + template.Header + " ");
 
-			this.parameters = parameters;
-		}
+            if (parameters != null)
+            {
+                processor.subsitute("width", parameters.Width.ToString());
+                processor.subsitute("height", parameters.Height.ToString());
+                processor.subsitute("filename", parameters.FileName);
+            }
+            processor.subsitute("global_title", title);
 
-		public void addFile(string filename, string title)
-		{
-			if (!isFirst)
-				builder.Append(" "  + template.Delimiter + " ");
+            builder.Append(processor.ToString() + " ");
 
-			isFirst = false;
+            this.parameters = parameters;
+        }
 
-			TemplateProcessor processor = new TemplateProcessor(" " + template.BodyTemplate + " ");
-			processor.subsitute("file", filename);
-			processor.subsitute("title", title);			
+        public void addFile(string filename, string title)
+        {
+            if (!isFirst)
+                builder.Append(" " + template.Delimiter + " ");
 
-			builder.Append(processor.ToString());
-		}
+            isFirst = false;
 
-		public string Generate()
-		{
-			string extra = "";
-			if (template.Footer != null && parameters != null) 
-			{
-				TemplateProcessor processor = new TemplateProcessor(";" + template.Footer + " ");
-				
-				processor.subsitute("width", parameters.Width.ToString());
-				processor.subsitute("height", parameters.Height.ToString());
-				processor.subsitute("filename", parameters.FileName);
+            TemplateProcessor processor = new TemplateProcessor(" " + template.BodyTemplate + " ");
+            processor.subsitute("file", filename);
+            processor.subsitute("title", title);
 
-				extra = processor.ToString();
-			}
+            builder.Append(processor.ToString());
+        }
 
-			return builder.ToString() + extra;
-		}
-	}
+        public string Generate()
+        {
+            string extra = "";
+            if (template.Footer != null && parameters != null)
+            {
+                TemplateProcessor processor = new TemplateProcessor(";" + template.Footer + " ");
+
+                processor.subsitute("width", parameters.Width.ToString());
+                processor.subsitute("height", parameters.Height.ToString());
+                processor.subsitute("filename", parameters.FileName);
+
+                extra = processor.ToString();
+            }
+
+            return builder.ToString() + extra;
+        }
+    }
 }

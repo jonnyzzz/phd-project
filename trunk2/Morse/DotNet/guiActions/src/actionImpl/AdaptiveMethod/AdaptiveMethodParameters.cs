@@ -1,84 +1,87 @@
 using System;
 using System.Collections;
+using System.ComponentModel;
 using System.Drawing;
-using guiActions.Parameters;
-using guiControls.Control;
-using guiControls.Grid.Rows;
-using guiKernel2.Document;
-using MorseKernel2;
+using System.Windows.Forms;
+using EugenePetrenko.Gui2.Actions.Parameters;
+using EugenePetrenko.Gui2.Controls.Control;
+using EugenePetrenko.Gui2.Controls.Grid;
+using EugenePetrenko.Gui2.Controls.Grid.Rows;
+using EugenePetrenko.Gui2.Kernell2.Document;
+using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace guiActions.src.actionImpl.AdaptiveMethod
+namespace EugenePetrenko.Gui2.Actions.ActionImpl.AdaptiveMethod
 {
-	/// <summary>
-	/// Summary description for AdaptiveMethodParameters.
-	/// </summary>
-	public class AdaptiveMethodParameters : ParametersControl
-	{	    
-	    private guiControls.Grid.ExGrid exGrid;
-        private System.Windows.Forms.Panel panelUp;
-        private System.Windows.Forms.Panel panelDown;
-        private System.Windows.Forms.Panel panelDownRight;
+    /// <summary>
+    /// Summary description for AdaptiveMethodParameters.
+    /// </summary>
+    public class AdaptiveMethodParameters : ParametersControl
+    {
+        private ExGrid exGrid;
+        private Panel panelUp;
+        private Panel panelDown;
+        private Panel panelDownRight;
         private Color prevUpdateButtonColor;
-		private System.ComponentModel.Container components = null;
+        private Container components = null;
 
         private IntPlusGridData factor;
         private DoublePrecsion precision;
         private IntPlusGridData upperLimit;
         private int dimension;
         private Function function;
-        private System.Windows.Forms.CheckBox autoSetPrecision;
-        private System.Windows.Forms.Button updatePrecision;
-        private System.Windows.Forms.Panel panelDownDown;
-        private System.Windows.Forms.TextBox textUpperLimit;
-        private System.Windows.Forms.CheckBox checkUpperLimit;
-        private System.Windows.Forms.Panel panelDownRightButton;
-        private System.Windows.Forms.Panel panelDownTextBox;
+        private CheckBox autoSetPrecision;
+        private Button updatePrecision;
+        private Panel panelDownDown;
+        private TextBox textUpperLimit;
+        private CheckBox checkUpperLimit;
+        private Panel panelDownRightButton;
+        private Panel panelDownTextBox;
         private double[] precisionValue;
 
-	    public AdaptiveMethodParameters(int dimension, Function function, double[] recomendedPrecision)
-		{
-		    this.dimension = dimension;
-		    this.function = function;
-		    InitializeComponent();
+        public AdaptiveMethodParameters(int dimension, Function function, double[] recomendedPrecision)
+        {
+            this.dimension = dimension;
+            this.function = function;
+            InitializeComponent();
 
             prevUpdateButtonColor = updatePrecision.BackColor;
 
-            precisionValue = (double[]) new ArrayList( recomendedPrecision).ToArray(typeof(double));
+            precisionValue = (double[]) new ArrayList(recomendedPrecision).ToArray(typeof (double));
             precision = new DoublePrecsion(recomendedPrecision, "Adaptive Precision");
-            factor = new IntPlusGridData("Cell devisor", dimension);            
+            factor = new IntPlusGridData("Cell devisor", dimension);
             upperLimit = new IntPlusGridData("Upper Limit", 1);
             UpdateGrid();
             OnRefreshPrecision();
-		}
+        }
 
         public void UpdateState(int dimension, Function function, double[] recomendedDimension)
         {
-            
         }
 
-		/// <summary> 
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Component Designer generated code
-		/// <summary> 
-		/// Required method for Designer support - do not modify 
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
-            this.exGrid = new guiControls.Grid.ExGrid();
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.exGrid = new Controls.Grid.ExGrid();
             this.panelUp = new System.Windows.Forms.Panel();
             this.panelDown = new System.Windows.Forms.Panel();
             this.panelDownRight = new System.Windows.Forms.Panel();
@@ -230,7 +233,8 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
             this.ResumeLayout(false);
 
         }
-		#endregion
+
+        #endregion
 
         private void UpdateGrid()
         {
@@ -238,18 +242,20 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
             {
                 exGrid.SubmitData();
             }
-            catch (ControlException) { } //ignore fill errors
+            catch (ControlException)
+            {
+            } //ignore fill errors
 
             exGrid.SetRows(
-                    dimension, 
-                    new ExGridRowChangedHandler(new NeedSaveRowChange(OnFactorChanged), factor),
-                    new ExGridRowChangedHandler(new NeedSaveRowChange(OnPrecisionChanged), precision)
-                );            
+                dimension,
+                new ExGridRowChangedHandler(new NeedSaveRowChange(OnFactorChanged), factor),
+                new ExGridRowChangedHandler(new NeedSaveRowChange(OnPrecisionChanged), precision)
+                );
         }
 
-	    private bool OnPrecisionChanged()
-	    {
-	        /*if (autoSetPrecision.Checked)
+        private bool OnPrecisionChanged()
+        {
+            /*if (autoSetPrecision.Checked)
 	        {
 	            DialogResult show = MessageBox.Show(this, "Do you want to override automatic precision value?", "Warning", MessageBoxButtons.YesNo );
                 if (show == DialogResult.Yes)
@@ -262,65 +268,69 @@ namespace guiActions.src.actionImpl.AdaptiveMethod
                 }
 	        }*/
             return true;
-	    }        
+        }
 
-	    private bool OnFactorChanged()
-	    {
+        private bool OnFactorChanged()
+        {
             if (autoSetPrecision.Checked)
                 updatePrecision.BackColor = Color.Maroon;
-	        return true;
-	    }
+            return true;
+        }
 
-	    protected override IParameters SubmitDataInternal()
-	    {
-            if (autoSetPrecision.Checked) 
+        protected override IParameters SubmitDataInternal()
+        {
+            if (autoSetPrecision.Checked)
                 OnRefreshPrecision();
             exGrid.SubmitData();
             if (checkUpperLimit.Checked)
             {
                 upperLimit[0] = textUpperLimit.Text;
                 return new AdaptiveMethodParameretsImpl(factor.Data, precision.Data, upperLimit.Data[0], function);
-            } else
+            }
+            else
             {
                 return new AdaptiveMethodParameretsImpl(factor.Data, precision.Data, 0, function);
-            }        
-	    }
+            }
+        }
 
-        private void autoSetPrecision_CheckedChanged(object sender, System.EventArgs e)
+        private void autoSetPrecision_CheckedChanged(object sender, EventArgs e)
         {
             if (autoSetPrecision.Checked)
             {
                 OnRefreshPrecision();
-            }        
+            }
         }
 
-        private void updatePrecision_Click(object sender, System.EventArgs e)
+        private void updatePrecision_Click(object sender, EventArgs e)
         {
             updatePrecision.BackColor = prevUpdateButtonColor;
             OnRefreshPrecision();
         }
 
-	    private void OnRefreshPrecision()
-	    {
-	        try
-	        {
-	            exGrid.SubmitData();
-	            for (int i=0; i<dimension; i++)
-	            {
-	                precision.SetValue(i, precisionValue[i]/factor.Data[i]);
-	            }
-	            exGrid.ReLoadData();                
-	        } catch (Exception) {}
-	    }
-
-        private void checkUpperLimit_CheckedChanged(object sender, System.EventArgs e)
+        private void OnRefreshPrecision()
         {
-           textUpperLimit.Enabled = checkUpperLimit.Checked;
+            try
+            {
+                exGrid.SubmitData();
+                for (int i = 0; i < dimension; i++)
+                {
+                    precision.SetValue(i, precisionValue[i]/factor.Data[i]);
+                }
+                exGrid.ReLoadData();
+            }
+            catch (Exception)
+            {
+            }
         }
 
-	    public override string BoxCaption
-	    {
-	        get { return "Adaptive Method"; }
-	    }
-	}
+        private void checkUpperLimit_CheckedChanged(object sender, EventArgs e)
+        {
+            textUpperLimit.Enabled = checkUpperLimit.Checked;
+        }
+
+        public override string BoxCaption
+        {
+            get { return "Adaptive Method"; }
+        }
+    }
 }
