@@ -15,15 +15,19 @@
 			<params>-noend {0} -</params>
 			<templates>
 				<template dimension="2">
-						<header>set title "$global_title$"; set key below; plot</header>
+						<header>set title "$global_title$";  set key off; </header> 
+						<history>set key below;</history>
+						<plot>plot</plot>
 						<bodyTemplate>'$file$' title "$title$" with dots</bodyTemplate>
 						<delimiter>,</delimiter>
-					</template>
-					<template dimension="3">
-						<header>set title "$global_title$"; set key below; splot</header>
+				</template>
+				<template dimension="3">
+						<header>set title "$global_title$";  set key off; </header>
+						<history>set key below;</history>
+						<plot> splot</plot>
 						<bodyTemplate>'$file$' title "$title$" with dots</bodyTemplate>
 						<delimiter>,</delimiter>
-					</template>
+				</template>
 			</templates>
 		</show>
 		<save>
@@ -31,9 +35,18 @@
 			<params> {0}</params>
 			<templates>
 				<template dimension="2">
-					<header>set title "$global_title$"; set terminal png size $width$,$height$; set output '$filename$'; set key below; plot</header>
-					<bodyTemplate>'$file$' title "$title$" with dots</bodyTemplate>
-					<delimiter>,</delimiter>				
+					    <header>set title "$global_title$"; set terminal png size $width$,$height$; set output '$filename$'; set key off; </header>
+					    <history>set key below;</history>
+					    <plot>plot</plot>
+					    <bodyTemplate>'$file$' title "$title$" with dots</bodyTemplate>
+  					    <delimiter>,</delimiter>				
+				</template>
+				<template dimension="3">
+						<header>set title "$global_title$"; set terminal png size $width$,$height$; set output '$filename$';  set key off; </header>
+						<history>set key below; </history>
+						<plot>splot</plot>
+						<bodyTemplate>'$file$' title "$title$" with dots</bodyTemplate>
+						<delimiter>,</delimiter>
 				</template>
 			</templates>
 		</save>		

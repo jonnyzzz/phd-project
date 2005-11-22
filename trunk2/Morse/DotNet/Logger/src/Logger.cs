@@ -7,6 +7,12 @@ namespace EugenePetrenko.Gui2.Logging
 	/// </summary>
 	public class Logger
 	{
+        public static void Assert(bool cond, string text)
+        {
+            if (!cond) 
+                throw new ArgumentException("Assert failed: " + text);
+        }
+
 		public static void LogMessage(object o)
 		{
 			Console.Out.WriteLine("Log: {0}", o);

@@ -42,9 +42,12 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
             document.Load(GetXMLMapping());
         }
 
-        public void ParseAssemblyReferences()
+        public Assembly[] ParseAssemblyReferences()
         {
+            assemblies.Clear();
+            assemblies.AddRange(SearchAssemblies);
             ParseAssemblyReference(document);
+            return Assemblies;
         }
 
         public void ParseActions()
@@ -56,7 +59,7 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
 
         private void ParseAssemblyReference(XmlDocument document)
         {
-            ParseAssemblies(document);
+            ParseAssemblies(document);            
             ProcessDocument(document, new Processor(ParseAssemblyReference));
         }
 

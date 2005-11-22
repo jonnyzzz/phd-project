@@ -154,6 +154,37 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "src\actionImpl\GnuPlot\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\AdditionalSettingsControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\AdditionalSettingsControl.resx"
+                    DependentUpon = "AdditionalSettingsControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\GnuPlotAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\actionImpl\GnuPlot2\GnuPlotParameters.cs"
                     SubType = "UserControl"
                     BuildAction = "Compile"
@@ -164,23 +195,38 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "src\actionImpl\GnuPlot2\Controls\AdditionalSettingsControl.cs"
+                    RelPath = "src\actionImpl\GnuPlot2\GnuPlotParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\ReduceImageSizeControl.cs"
                     SubType = "UserControl"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\GnuPlot2\Controls\AdditionalSettingsControl.resx"
-                    DependentUpon = "AdditionalSettingsControl.cs"
+                    RelPath = "src\actionImpl\GnuPlot2\ReduceImageSizeControl.resx"
+                    DependentUpon = "ReduceImageSizeControl.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "src\actionImpl\GnuPlot2\Controls\ReduceImageSizeControl.cs"
+                    RelPath = "src\actionImpl\GnuPlot2\SaveImageControl.cs"
                     SubType = "UserControl"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\actionImpl\GnuPlot2\Controls\ReduceImageSizeControl.resx"
-                    DependentUpon = "ReduceImageSizeControl.cs"
+                    RelPath = "src\actionImpl\GnuPlot2\SaveImageControl.resx"
+                    DependentUpon = "SaveImageControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\ShowImageControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\ShowImageControl.resx"
+                    DependentUpon = "ShowImageControl.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
@@ -190,11 +236,6 @@
                 />
                 <File
                     RelPath = "src\KernelAction\GnuPlot\GnuPlotScriptGen.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\KernelAction\GnuPlot\GnuPlotScriptGenParameters.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -209,11 +250,30 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\KernelAction\GnuPlot\IGnuPlotScriptGenParameters.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\KernelAction\GnuPlot\IGnuPlotVisualizationKernelParameters.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
-                <Folder RelPath = "src\KernelAction\GnuPlot2\" />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot2\GnuPlotAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot2\GnuPlotScriptGen.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot2\IGnuPlotParameters.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
             </Include>
         </Files>
     </CSHARP>

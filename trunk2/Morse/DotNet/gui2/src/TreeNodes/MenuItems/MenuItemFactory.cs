@@ -2,7 +2,7 @@ using System.Collections;
 using System.Windows.Forms;
 using EugenePetrenko.Gui2.Actions.Actions;
 using EugenePetrenko.Gui2.Application.TreeNodes.MenuItems;
-using EugenePetrenko.Gui2.Kernell2.ActionFactory;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionImpl;
 
 namespace EugenePetrenko.Gui2.Application.TreeNodes
 {
@@ -25,9 +25,10 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
                 if (action is IDisabledAction)
                 {
                     menus.Add(new DisabledActionMuniItem((IDisabledAction) action));
-                }
-                else
+                } else if (action is ISeparator)
                 {
+                    menus.Add(new SeparatorMenuItem());
+                } else {
                     menus.Add(new ActionTreeMenuItem(node, action, path));
                 }
             }

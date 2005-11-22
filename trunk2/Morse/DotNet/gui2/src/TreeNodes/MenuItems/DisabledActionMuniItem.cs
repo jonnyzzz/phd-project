@@ -1,6 +1,6 @@
 using System.Drawing;
 using System.Windows.Forms;
-using EugenePetrenko.Gui2.Kernell2.ActionFactory;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionImpl;
 
 namespace EugenePetrenko.Gui2.Application.TreeNodes.MenuItems
 {
@@ -14,8 +14,7 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes.MenuItems
         public DisabledActionMuniItem(IDisabledAction action) : base(action.Caption, false)
         {
             this.comment = action.Comment;
-            this.Enabled = false;
-
+//            this.Enabled = false;
             if (comment != null)
             {
                 this.MenuItems.Add(new CommentMenuItem(comment));

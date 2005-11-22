@@ -28,6 +28,16 @@ namespace EugenePetrenko.Gui2.Actions.Parameters
 
         private IParameters cachedParameters = null;
 
+        private void InitializeComponent()
+        {
+            // 
+            // ParametersControl
+            // 
+            this.Name = "ParametersControl";
+            this.Size = new System.Drawing.Size(360, 288);
+
+        }
+
         public IParameters CachedParameters
         {
             get { return cachedParameters; }

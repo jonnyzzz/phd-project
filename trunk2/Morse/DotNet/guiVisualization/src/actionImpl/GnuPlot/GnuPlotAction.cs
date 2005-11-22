@@ -3,6 +3,7 @@ using EugenePetrenko.Gui2.Actions.Parameters;
 using EugenePetrenko.Gui2.Kernell2.ActionFactory;
 using EugenePetrenko.Gui2.Kernell2.Node;
 using EugenePetrenko.Gui2.MorseKernel2;
+using EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2;
 using EugenePetrenko.Gui2.Visualization.KernelAction;
 
 namespace EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot
@@ -11,7 +12,7 @@ namespace EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot
     /// Summary description for GnuPlotAction.
     /// </summary>
     /// 
-    [ActionMapping(typeof (GnuPlotVisualizationKernelAction), typeof (IGnuPlotVisualizationKernelParameters))]
+    //[ActionMapping(typeof (GnuPlotVisualizationKernelAction), typeof (IGnuPlotVisualizationKernelParameters))]
     public class GnuPlotAction : Action
     {
         public GnuPlotAction(string caption, bool isLeaf) : base(caption, isLeaf)

@@ -10,14 +10,17 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
     {
         private GnuPlotTemplate template;
         private StringBuilder builder = new StringBuilder();
-        private GnuPlotScriptGenParameters parameters;
+        private IGnuPlotScriptGenParameters parameters;
 
         private bool isFirst = true;
 
-        public GnuPlotScriptGen(GnuPlotTemplate template, GnuPlotScriptGenParameters parameters, string title)
+        public GnuPlotScriptGen(GnuPlotTemplate template, IGnuPlotScriptGenParameters parameters)
         {
             this.template = template;
-            TemplateProcessor processor = new TemplateProcessor(" " + template.Header + " ");
+            string header = " " + template.Header + " " +
+                (parameters.ShowHistory ? template.History : " ") + " " + template.Plot;
+
+            TemplateProcessor processor = new TemplateProcessor(header);
 
             if (parameters != null)
             {
@@ -25,14 +28,14 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
                 processor.subsitute("height", parameters.Height.ToString());
                 processor.subsitute("filename", parameters.FileName);
             }
-            processor.subsitute("global_title", title);
+            processor.subsitute("global_title", parameters.PlotTitle);
 
             builder.Append(processor.ToString() + " ");
 
             this.parameters = parameters;
         }
 
-        public void addFile(string filename, string title)
+        public void AddFile(string filename, string title)
         {
             if (!isFirst)
                 builder.Append(" " + template.Delimiter + " ");

@@ -7,13 +7,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
     /// Summary description for GnuPlotVisualizationKernelParameters.
     /// </summary>
     public interface IGnuPlotVisualizationKernelParameters : IParameters
-    {
-        /// <summary>
-        /// Returns null if we need to show
-        /// </summary>
-        GnuPlotScriptGenParameters Parameters { get; }
-
-        string Title { get; }
-
+    {        
+        IGnuPlotScriptGenParameters Parameters { get; }
     }
 }

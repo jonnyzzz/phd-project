@@ -26,15 +26,14 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
             actionNamingFactory = new ActionNamingFactory();
 
             XMLParser xmlParser = new XMLParser();
-
             xmlParser.ParseAssemblyReferences();
 
             this.assemblies = xmlParser.Assemblies;
 
             xmlParser.ParseActions();
-
-
             actionWrapperFactory = new ActionWrapperFactory(assemblies);
+
+            NextActionFactory.CreateActionInstances();
         }
 
         private ActionNamingFactory actionNamingFactory = null;
@@ -140,7 +139,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
             }
             else
             {
-                return o.GetType().GetInterface(t.Name) != null;
+                return o.GetType().IsAssignableFrom(t);
             }
         }
     }

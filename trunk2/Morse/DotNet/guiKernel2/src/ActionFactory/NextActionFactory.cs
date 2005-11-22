@@ -24,62 +24,28 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
 
         public ActionWrapper[] NextAction(KernelNode node)
         {
-            ActionStateRef[] infos = FindActionRefs(node);
-            return CreateInstances(infos);
-        }
-
-        public ActionWrapper NextActionByName(KernelNode node, string name)
-        {
-            ActionRef info = this.actionResolver[name] as ActionRef;
-            if (info == null) throw new ActionException("Action not found");
-
-            if (!info.Constraint.Match(node.Results)) throw new ActionException("Action can not be applied here");
-
-            return info.CreateInstance();
-        }
-
-        public ActionWrapper NextActionByName(KernelNode node, Type type)
-        {
-            return NextActionByName(node, type.Name);
+            return CreateInstances(FindActionRefs(node));
         }
 
 
         private ActionStateRef[] FindActionRefs(KernelNode node)
         {
-            ArrayList result = new ArrayList();
+            return SelectActions(node.Results);
+        }
+
+        private ActionStateRef[] SelectActions(ResultSet results)
+        {
+            ArrayList result = new ArrayList();            
             foreach (ActionRef actionInfo in actions)
-            {
-                bool match = actionInfo.Constraint.Match(node.Results);
+            {                
+                bool match = actionInfo.Constraint.Match(results);
                 ActionStateRef state = new ActionStateRef(actionInfo, match);
-                if (match)
-                {
-                    Logger.LogMessage("Candidate Found: {0}", actionInfo);
-                }
+                if (match) { Logger.LogMessage("Candidate Found: {0}", actionInfo); }
+
                 result.Add(state);
             }
             return (ActionStateRef[]) result.ToArray(typeof (ActionStateRef));
         }
-
-        public static void DumpInteraces(object o)
-        {
-            Type oType = o.GetType();
-            Type resultType = typeof (IResult);
-
-            Logger.LogMessage("Is IResult = {0}", o is IResult);
-
-            Logger.LogMessage("CoreImplemets = {0}", Core.ImplemetsType(o, resultType));
-
-            Logger.LogMessage("Has interface IResult = {0}", oType.GetInterface("IResult") != null);
-
-            Logger.LogMessage("Supported interfaces of {0}:", oType.FullName);
-
-            foreach (Type type in oType.GetInterfaces())
-            {
-                Logger.LogMessage("\t{0}", type.Name);
-            }
-            Logger.LogMessage("End intrface dump");
-        }
-
 
         private ActionStateRef[] FindActionInfosForPath(KernelNode node, ActionWrapper[] beforeActions)
         {
@@ -127,6 +93,35 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
 
         #endregion
 
+        #region Action By Name
+
+        public ActionWrapper NextActionByName(KernelNode node, Type type)
+        {
+            return NextActionByName(node, type.Name);
+        }
+
+        private ActionWrapper NextActionByName(KernelNode node, string name)
+        {
+            ActionRef info = this.actionResolver[name] as ActionRef;
+            if (info == null) throw new ActionException("Action not found");
+
+            if (!info.Constraint.Match(node.Results)) 
+                throw new ActionException("Action can not be applied here");
+
+            return info.CreateInstance();
+        }
+        #endregion
+
+
+        public void CreateActionInstances()
+        {
+            foreach (ActionRef actionRef in actions)
+            {
+                actionRef.CreateInstance();
+            }
+        }
+
+
         #region mapper
 
         private ArrayList actions = new ArrayList();
@@ -154,6 +149,27 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
 
             return sb.ToString();
         }
+
+        public static void DumpInteraces(object o)
+        {
+            Type oType = o.GetType();
+            Type resultType = typeof (IResult);
+
+            Logger.LogMessage("Is IResult = {0}", o is IResult);
+
+            Logger.LogMessage("CoreImplemets = {0}", Core.ImplemetsType(o, resultType));
+
+            Logger.LogMessage("Has interface IResult = {0}", oType.GetInterface("IResult") != null);
+
+            Logger.LogMessage("Supported interfaces of {0}:", oType.FullName);
+
+            foreach (Type type in oType.GetInterfaces())
+            {
+                Logger.LogMessage("\t{0}", type.Name);
+            }
+            Logger.LogMessage("End intrface dump");
+        }
+
 
         #endregion
     }

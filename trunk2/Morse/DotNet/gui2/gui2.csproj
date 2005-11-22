@@ -303,6 +303,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\TreeNodes\MenuItems\SeparatorMenuItem.cs"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\TreeNodes\MenuItems\TreeMenuItem.cs"
                     SubType = "Component"
                     BuildAction = "Compile"

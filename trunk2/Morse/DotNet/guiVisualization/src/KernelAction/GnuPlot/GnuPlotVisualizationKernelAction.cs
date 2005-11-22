@@ -8,6 +8,7 @@ using EugenePetrenko.Gui2.Kernell2.Node;
 using EugenePetrenko.Gui2.Logging;
 using EugenePetrenko.Gui2.MorseKernel2;
 using EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot;
+using EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2;
 using EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot;
 
 namespace EugenePetrenko.Gui2.Visualization.KernelAction
@@ -49,17 +50,17 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
 
             int dimension = ((IGraphResult) resultSet.ToResults[0]).GetGraphInfo().GetDimension();
 
-            XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode((parameters.Parameters == null) ? "show" : "save");
+            XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode(parameters.Parameters.NeedShow ? "show" : "save");
 
             string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
-            GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters, parameters.Title);
+            GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters);
 
             foreach (IResult aResult in resultSet.ToResults)
             {
                 IGraphResult result = (IGraphResult) aResult;
                 string file = tempFiles.CreateFile();
                 result.SaveText(file);
-                script.addFile(file, KernelNode.GetResultCaption(result, true));
+                script.AddFile(file, KernelNode.GetResultCaption(result, true));
             }
 
             RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), resource);
@@ -72,7 +73,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
             XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode((parameters.Parameters == null) ? "show" : "save");
 
             string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
-            GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters, parameters.Title);
+            GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters);
 
             foreach (string file in fileset)
             {
@@ -81,7 +82,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
                 {
                     len = tr.ReadToEnd().Split('\n').Length;
                 }
-                script.addFile(file, file + " " + len.ToString());
+                script.AddFile(file, file + " " + len.ToString());
             }
             RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), resource);
         }
@@ -102,7 +103,8 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
 
         public static void ExportFile(string[] files, string output, string title)
         {
-            GnuPlotParameters pars = new GnuPlotParameters(output, title);
+            //GnuPlotParameters pars = new GnuPlotParameters(output, title);
+            GnuPlotParametersImpl pars = new GnuPlotParametersImpl(output, 1000, 1000, true, true, false, false);
             GnuPlotVisualizationKernelAction action = new GnuPlotVisualizationKernelAction();
             action.SetActionParameters(pars);
             action.ShowFromFileList(2, files);

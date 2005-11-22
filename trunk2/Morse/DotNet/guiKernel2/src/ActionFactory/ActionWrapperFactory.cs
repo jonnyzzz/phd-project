@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Reflection;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionImpl;
 using EugenePetrenko.Gui2.Kernell2.Actions;
 using EugenePetrenko.Gui2.Kernell2.Container;
 using EugenePetrenko.Gui2.Logging;
@@ -62,6 +63,11 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
             IDisabledAction wrapper = (IDisabledAction) CreateActionWrapper(typeof (IDisabledActionInterface), caption, true);
             wrapper.SetComment(detail);
             return (ActionWrapper) wrapper;
+        }
+
+        public ActionWrapper CreateSeparator()
+        {
+            return CreateDisabledAction("--", null);
         }
     }
 }

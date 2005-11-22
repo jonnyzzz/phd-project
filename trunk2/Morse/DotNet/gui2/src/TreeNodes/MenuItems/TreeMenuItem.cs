@@ -14,7 +14,6 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
     {
         private readonly bool isLeaf;
 
-
         public TreeMenuItem(string caption) : this(caption, false)
         {
         }
@@ -52,10 +51,11 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
 
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
-            base.OnDrawItem(e);
+            BaseDrawItem(e);
 
             DrawBackGround(e);
-            e.DrawFocusRectangle();
+            DrawFocusedRectangle(e);
+
 
             Color fontColor;
             if (isLeaf)
@@ -91,6 +91,16 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
             int xOffset = 15;
             Rectangle bounds = new Rectangle(e.Bounds.X + xOffset, e.Bounds.Y, e.Bounds.Width - xOffset, e.Bounds.Height);
             e.Graphics.DrawString(Text, font, brush, bounds, format);
+        }
+
+        protected virtual void BaseDrawItem(DrawItemEventArgs e)
+        {
+            base.OnDrawItem(e);
+        }
+
+        protected virtual void DrawFocusedRectangle(DrawItemEventArgs e)
+        {
+            e.DrawFocusRectangle();
         }
 
         protected virtual void DrawBackGround(DrawItemEventArgs e)

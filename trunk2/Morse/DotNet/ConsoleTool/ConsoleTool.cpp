@@ -39,12 +39,12 @@ using namespace std;
 
 
 
-#define FACTORY TorstenFactory
+//#define FACTORY TorstenFactory
 //#define FACTORY LogisticsMapFactory
-//#define FACTORY ParametrisedLogisticsMapFactory
-#define SYSTEM  TorstenFunction
+#define FACTORY ParametrisedLogisticsMapFactory
+//#define SYSTEM  TorstenFunction
 //#define SYSTEM  LogisticsMap
-//#define SYSTEM  ParametrisedLogisticsMap
+#define SYSTEM  ParametrisedLogisticsMap
 
 
 GraphSet Process(GraphSet set) {
@@ -395,6 +395,8 @@ int main(int argc, char** argv) {
 					
 		char* input = argv[3];
 		char* output = argv[4];
+
+        ParametrisedLogisticsMap::mju = 3.58;
 
 		cout<<"Loading from "<<input<<endl<<"Saving results to "<<output<<endl<<endl;
 		GraphSet in = Util::LoadGraphSet(input);

@@ -9,7 +9,7 @@
 using namespace std;
 
 const int ParametrisedLogisticsMapFactory::Dim = 1;
-double ParametrisedLogisticsMap::mju = 0;
+double ParametrisedLogisticsMap::mju = 3.58;
 
 ParametrisedLogisticsMap::ParametrisedLogisticsMap(void) : FunctionBase(1, 1)
 {

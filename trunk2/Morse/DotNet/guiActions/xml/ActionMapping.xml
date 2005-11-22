@@ -16,10 +16,8 @@
 			</nextActions>
 		</action>
 		
-		<action name="IProjectAction" isLeaf="true">
-			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />			
-		</action>
-		
+		<action name="ISeparatorAction" isLeaf="false"/>
+						
 		<action name="IAdaptiveMethodAction" isLeaf="false">		
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 			<nextActions>		
@@ -34,11 +32,22 @@
 			</nextActions>
 		</action>
 
+        <action name="ISeparatorAction" isLeaf="false"/>
+
+        <action name="IProjectAction" isLeaf="true">
+			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />			
+		</action>
 		
 		<action name="GnuPlotVisualizationKernelAction" isLeaf="true">
 			<constraint class="GnuPlotConstraintFactory" />
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 		</action>
+		
+		<action name="SavePointsKernelAction" isLeaf="true">
+			<constraint class="OneGraphResultConstraintFactory"/>
+		</action>
+		
+		<action name="ISeparatorAction" isLeaf="false"/>
 		
 		<action name="IMinimalLoopLocalizationAction" isLeaf="true">
 			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
@@ -50,15 +59,15 @@
 			<constraint class="StrongCompGraphsConstraintFactory" />
 		</action>
 		
+		<action name="ISeparatorAction" isLeaf="false"/>
+		
 		<action name="ISIRomAction" isLeaf="true">
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
 			<constraint class="StrongCompGraphsConstraintFactory" />		
 		</action>
-		
-		<action name="SavePointsKernelAction" isLeaf="true">
-			<constraint class="OneGraphResultConstraintFactory"/>
-		</action>
-		
+				
+		<action name="ISeparatorAction" isLeaf="false"/>
+				              
 		<action name="IMS2DCreationAction" isLeaf="true">
 		    <constraint class="OneGraphResultConstraintFactory" />
 		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
@@ -78,15 +87,17 @@
 		    <constraint class="StrongCompGraphsConstraintFactory" />		
 		</action>
 		
-		<action name="IMSMethodAction" isLeaf="false">
+		<action name="ISeparatorAction" isLeaf="false"/>
+			
+		<action name="IMSCreationProcess" isLeaf="true" internal="true">
+		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
+		</action>
+		
+		<action name="IMSMethodAction" isLeaf="false" internal="true">
 		    <constraint class="DefaultConstraintFactory" metadata="IMSSegmentMetadata" result="IGraphResult" />
 		    <nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true" />
 			</nextActions>				    
-		</action>
-		
-		<action name="IMSCreationProcess" isLeaf="true">
-		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
 		</action>
 						
     </actions>
@@ -94,19 +105,19 @@
     <names>
 		<action name="IBoxMethodAction" caption="Linear Method" />
 		<action name="IPointMethodAction" caption="Point Method" />
-		<action name="ITarjanAction" caption="Strong Component Localization" />    
-		<action name="GnuPlotVisualizationKernelAction" caption="Visualize" />
+		<action name="ITarjanAction" caption="Strong Component Localization" > You need graph </action>    
+		<action name="GnuPlotVisualizationKernelAction" caption="Visualize" > You need 2D or 3D SI </action>
 		<action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search" > You need SI with edges </action>
 		<action name="IIsolatedSetAction" caption="Isolating set localization" > You need SI with edges </action>
-		<action name="SavePointsKernelAction" caption="Export to file" />
+		<action name="SavePointsKernelAction" caption="Export to file" > You need Graph result </action>
 		<action name="ISIRomAction" caption="Morse Spectrum Multiplied" > You need SI with edges </action>
-		<action name="IAdaptiveMethodAction" caption="Adaptive Method" />
+		<action name="IAdaptiveMethodAction" caption="Adaptive Method"> You need SI </action>
 		<action name="IAdaptiveBoxMethod" caption="Adaptive Box Method" />		
 		<action name="IMS2DCreationAction" caption="Create Angle Projective Bundle" >You need plane SI with edges</action>
 		<action name="IMS2DProcessAction" caption="Angle Projective Bundle Step" > You need to use Create Angle Projective Bundle method first </action>
 		<action name="IMS2DRomAction" caption="Estimate Morse Spectrum" > You need Angle Projective Bundle Node with edges </action>
 		<action name="IProjectAction" caption="Decrease accuracy" />		
-		<action name="IMSMethodAction" caption="Segment Projective Bundle Next Step" />		
+		<action name="IMSMethodAction" caption="Segment Projective Bundle Next Step" > You need Segment Projective Bundle Node </action>
 		<action name="IMSCreationProcess" caption="Create Segment Projective Bundle Next Step" />		
     </names>
 

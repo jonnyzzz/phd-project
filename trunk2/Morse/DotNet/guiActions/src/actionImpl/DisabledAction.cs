@@ -2,15 +2,12 @@ using System;
 using EugenePetrenko.Gui2.Actions.Actions;
 using EugenePetrenko.Gui2.Actions.Parameters;
 using EugenePetrenko.Gui2.Kernell2.ActionFactory;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionImpl;
 using EugenePetrenko.Gui2.Kernell2.Node;
 using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Actions.ActionImpl
-{
-    /// <summary>
-    /// Summary description for DisabledAction.
-    /// </summary>
-    /// 
+{    
     [ActionMapping(typeof (IDisabledActionInterface), typeof (IParameters))]
     public class DisabledAction : Action, IDisabledAction, IDisabledActionInterface
     {
@@ -23,7 +20,6 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl
         public void SetComment(string comment)
         {
             this.comment = comment;
-
         }
 
         public string Comment

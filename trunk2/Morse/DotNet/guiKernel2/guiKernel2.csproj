@@ -94,6 +94,11 @@
                     AssemblyName = "EugenePetrenko.Gui2.MorseKernel2.Interop"
                     HintPath = "..\MorseKernel2.Interop\EugenePetrenko.Gui2.MorseKernel2.Interop.dll"
                 />
+                <Reference
+                    Name = "system.windows.forms"
+                    AssemblyName = "system.windows.forms"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\system.windows.forms.dll"
+                />
             </References>
         </Build>
         <Files>
@@ -128,17 +133,27 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\ActionFactory\IDisabledAction.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "src\ActionFactory\NextActionFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\ActionFactory\NextActionFactoryException.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\ActionImpl\IDisabledAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\ActionImpl\IGroupAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\ActionFactory\ActionImpl\ISeparator.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -204,6 +219,16 @@
                 />
                 <File
                     RelPath = "src\Container\Core.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Container\Core2.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Container\TypeFinder.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

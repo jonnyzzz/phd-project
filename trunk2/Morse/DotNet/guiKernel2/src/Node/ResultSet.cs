@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using EugenePetrenko.Gui2.Kernell2.Container;
 using EugenePetrenko.Gui2.MorseKernel2;
@@ -7,7 +8,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Node
     /// <summary>
     /// Summary description for Results.
     /// </summary>
-    public class ResultSet
+    public class ResultSet : IEnumerable
     {
         private ArrayList results = new ArrayList();
 
@@ -186,5 +187,9 @@ namespace EugenePetrenko.Gui2.Kernell2.Node
             return string.Format("ResultSet [ length = {0} ]", this.results.Count);
         }
 
+        public IEnumerator GetEnumerator()
+        {
+            return this.results.GetEnumerator();
+        }
     }
 }
