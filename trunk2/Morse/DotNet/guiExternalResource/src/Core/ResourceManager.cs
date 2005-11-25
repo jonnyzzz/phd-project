@@ -94,7 +94,7 @@ namespace EugenePetrenko.Gui2.ExternalResource.Core
 
         public string AbsolutePathFileName(string path)
         {
-            return SimplyfyPath(ResourcePath + "/" + path);
+            return SimplyfyPath(Path.Combine(ResourcePath , path));
         }
 
         public string SimplyfyPath(string path)

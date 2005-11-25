@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+
+<methodComparation>
+
+    <caption>Henon Function</caption>
+    <Dimension>2</Dimension>
+    
+    <NumberOfSteps>6</NumberOfSteps>
+    
+	<Subdevision>2,2</Subdevision>
+	<NumberOfPoints>2,2</NumberOfPoints>
+	<OverlapingOffset>0.1,0.1</OverlapingOffset>
+    <AdaptivePrecisionFactor>2,2</AdaptivePrecisionFactor>
+    <LinearUseDerivate>true</LinearUseDerivate>
+    <AdaptiveUpperLimit>0</AdaptiveUpperLimit>
+    <NeedResolveEdges>true</NeedResolveEdges>
+    
+    <function>
+	    <equation>
+		    y1=1-1.4*x1*x1+0.3*x2
+	    </equation>
+	    <equation>
+		    y2=x1
+	    </equation>
+	    <equation>
+		    space_min1=-10
+	    </equation>
+	    <equation>
+		    space_min2=-10
+	    </equation>
+	    <equation>
+		    space_max1=10
+	    </equation>
+	    <equation>
+		    space_max2=10
+	    </equation>
+	    <equation>
+		    grid1=10
+	    </equation>
+	    <equation>
+		    grid2=10
+	    </equation>
+	    <equation>
+		    iteration=1
+	    </equation>
+	    <equation>
+		    _dimension=2
+	    </equation>
+    </function>	        
+</methodComparation>

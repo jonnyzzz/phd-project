@@ -2,7 +2,7 @@ using System.Collections;
 using System.Xml;
 using EugenePetrenko.Gui2.Kernell2.Document;
 
-namespace EugenePetrenko.Gui2.Application.Document
+namespace EugenePetrenko.Gui2.Kernel2.Document
 {
     /// <summary>
     /// Summary description for FunctionSerializer.

@@ -1,3 +1,4 @@
+using System.IO;
 using System.Reflection;
 using System.Xml;
 using EugenePetrenko.Gui2.ExternalResource.Core;
@@ -46,7 +47,8 @@ namespace EugenePetrenko.Gui2.ExternalResource.Xml
         private XmlDocument OpenDocument()
         {
             XmlDocument document = new XmlDocument();
-            document.Load(Assembly.GetExecutingAssembly().GetManifestResourceStream(Resource));
+            using(Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(Resource))
+                document.Load(stream);
             return document;
         }
     }

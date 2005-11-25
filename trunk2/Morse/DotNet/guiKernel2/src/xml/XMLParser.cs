@@ -39,7 +39,8 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
             Logger.LogMessage("Hello from Assembly Parser");
 
             document = new XmlDocument();
-            document.Load(GetXMLMapping());
+            using(Stream mapping = GetXMLMapping())
+                document.Load(mapping);
         }
 
         public Assembly[] ParseAssemblyReferences()
@@ -90,9 +91,9 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
                 string assemblyName = node.Attributes["assembly"].Value;
                 string resourceName = node.Attributes["resource"].Value;
                 Assembly assembly = Assembly.Load(assemblyName);
-                Stream data = assembly.GetManifestResourceStream(resourceName);
                 XmlDocument refDocument = new XmlDocument();
-                refDocument.Load(data);
+                using(Stream data = assembly.GetManifestResourceStream(resourceName))                 
+                    refDocument.Load(data);
                 xmlDocuments.Add(refDocument); 
             }
 

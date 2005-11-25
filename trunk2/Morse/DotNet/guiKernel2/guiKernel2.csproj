@@ -96,7 +96,7 @@
                 />
                 <Reference
                     Name = "system.windows.forms"
-                    AssemblyName = "system.windows.forms"
+                    AssemblyName = "System.Windows.Forms"
                     HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\system.windows.forms.dll"
                 />
             </References>
@@ -109,6 +109,11 @@
                 />
                 <File
                     RelPath = "AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\GraphInfoPresenter.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -244,6 +249,11 @@
                 />
                 <File
                     RelPath = "src\Document\FunctionExceptions.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\Document\FunctionSerializer.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

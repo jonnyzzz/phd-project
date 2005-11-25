@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using EugenePetrenko.Gui2.ExternalResource.Core;
@@ -21,7 +22,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
             instance = this;
 
             resourceManager = new ResourceManager(IsInternal);
-
+            
             nextActionFactory = new NextActionFactory();
             actionNamingFactory = new ActionNamingFactory();
 
@@ -34,6 +35,13 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
             actionWrapperFactory = new ActionWrapperFactory(assemblies);
 
             NextActionFactory.CreateActionInstances();
+        }
+
+        public void ForseResourceManagerStart()
+        {
+            resourceManager.SetResourcePath("");
+            resourceManager.SetTemporaryPath(Path.GetTempPath());
+            resourceManager.Start();
         }
 
         private ActionNamingFactory actionNamingFactory = null;

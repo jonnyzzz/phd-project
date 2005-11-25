@@ -1,13 +1,11 @@
 using System.Diagnostics;
 using System.IO;
-using System.Xml;
 using EugenePetrenko.Gui2.ExternalResource.Core;
 using EugenePetrenko.Gui2.ExternalResource.FileResources;
 using EugenePetrenko.Gui2.Kernell2.Container;
 using EugenePetrenko.Gui2.Kernell2.Node;
 using EugenePetrenko.Gui2.Logging;
 using EugenePetrenko.Gui2.MorseKernel2;
-using EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot;
 using EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2;
 using EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot;
 
@@ -49,11 +47,9 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
             ResultSet resultSet = ResultSet.FromResultSet(input);
 
             int dimension = ((IGraphResult) resultSet.ToResults[0]).GetGraphInfo().GetDimension();
+            GnuPlotTemplate template = GnuPlotTemplate.Create( dimension, !parameters.Parameters.NeedShow );
 
-            XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode(parameters.Parameters.NeedShow ? "show" : "save");
-
-            string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
-            GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters);
+            GnuPlotScriptGen script = new GnuPlotScriptGen(template, parameters.Parameters);
 
             foreach (IResult aResult in resultSet.ToResults)
             {
@@ -63,17 +59,15 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
                 script.AddFile(file, KernelNode.GetResultCaption(result, true));
             }
 
-            RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), resource);
+            RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), template);
 
             return new EmptyResultSet();
         }
 
         private void ShowFromFileList(int dimension, string[] fileset)
         {
-            XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode((parameters.Parameters == null) ? "show" : "save");
-
-            string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
-            GnuPlotScriptGen script = new GnuPlotScriptGen(new GnuPlotTemplate(resource.SelectSingleNode(xpath)), parameters.Parameters);
+            GnuPlotTemplate template = GnuPlotTemplate.Create(dimension, parameters.Parameters.NeedWriteFile);
+            GnuPlotScriptGen script = new GnuPlotScriptGen(template, parameters.Parameters);
 
             foreach (string file in fileset)
             {
@@ -84,15 +78,15 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
                 }
                 script.AddFile(file, file + " " + len.ToString());
             }
-            RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), resource);
+            RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), template);
         }
 
 
-        private void RunGnuPlot(string filescript, XmlNode resource)
+        private void RunGnuPlot(string filescript, GnuPlotTemplate template)
         {
             ProcessStartInfo pi = new ProcessStartInfo();
-            pi.FileName = ResourceManager.Instance.AbsolutePathFileName(resource.SelectSingleNode("exe/text()").Value);
-            pi.Arguments = string.Format(resource.SelectSingleNode("params/text()").Value, filescript);
+            pi.FileName = ResourceManager.Instance.AbsolutePathFileName( template.Exe/*resource.SelectSingleNode("exe/text()").Value*/);
+            pi.Arguments = string.Format(template.Arguments/*resource.SelectSingleNode("params/text()").Value*/, filescript);
             pi.ErrorDialog = true;
 
             Logger.LogMessage("Arguments: {0} ", pi.Arguments);

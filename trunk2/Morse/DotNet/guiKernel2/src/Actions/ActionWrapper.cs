@@ -7,16 +7,27 @@ namespace EugenePetrenko.Gui2.Kernell2.Actions
     /// Summary description for ActionWrapper.
     /// </summary>
     public abstract class ActionWrapper : AttributeHolder
-    {
-        private IAction action;
+    {        
+        private IAction action = null;
         private readonly bool isChainLeaf;
         private string actionName;
 
         public ActionWrapper(string actionName, bool isChainLeaf)
         {
             this.isChainLeaf = isChainLeaf;
-            this.actionName = actionName;
-            this.action = CreateAction();
+            this.actionName = actionName;           
+        }
+
+        private IAction ActionInternal
+        {
+            get
+            {
+                if (action == null)
+                {
+                    action = CreateAction();
+                }
+                return action;
+            }            
         }
 
         public bool IsChainLeaf
@@ -42,9 +53,10 @@ namespace EugenePetrenko.Gui2.Kernell2.Actions
         public ResultSet Do(ResultSet input, ProgressBarInfo progressBarInfo)
         {
             IParameters parameters = Parameters;
-            action.SetActionParameters(parameters);
-            action.SetProgressBarInfo(progressBarInfo.GetProgressBarInfo(this));
-            if (!action.CanDo(input.ToResultSet))
+            IAction actionInternal = ActionInternal;
+            actionInternal.SetActionParameters(parameters);
+            actionInternal.SetProgressBarInfo(progressBarInfo.GetProgressBarInfo(this));
+            if (!actionInternal.CanDo(input.ToResultSet))
             {
                 throw new ActionPerformException("CanDo call returned FALSE");
             }
@@ -53,7 +65,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Actions
 
         protected virtual ResultSet DoActionInteranl(ResultSet input)
         {
-            return ResultSet.FromResultSet(action.Do(input.ToResultSet));
+            return ResultSet.FromResultSet(ActionInternal.Do(input.ToResultSet));
         }
 
         public string ActionMappingName
@@ -68,7 +80,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Actions
 
         public IAction Action
         {
-            get { return action; }
+            get { return ActionInternal; }
         }
 
         public override string ToString()

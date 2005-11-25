@@ -19,7 +19,6 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
 
             this.function = function;
 
-
             CKernellImplClass kernellClass = new CKernellImplClass();
 
             IWritableKernell wKernell = kernellClass;
@@ -42,9 +41,14 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
 
         public KernelNode CreateInitialNode()
         {
-            KernelNode node = new KernelNode(ResultSet.FromResultSet(kernell.CreateInitialResultSet()));
+            KernelNode node = new KernelNode(CreateInitialResultSet());
             node.GetNextActions();
             return node;
+        }
+
+        public ResultSet CreateInitialResultSet()
+        {
+            return ResultSet.FromResultSet(kernell.CreateInitialResultSet());
         }
     }
 }

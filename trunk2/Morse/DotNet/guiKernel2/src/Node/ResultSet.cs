@@ -37,6 +37,14 @@ namespace EugenePetrenko.Gui2.Kernell2.Node
             }
         }
 
+        public IResult this[int index]
+        {
+            get
+            {
+                return (IResult) results[index];
+            }
+        }
+
         public IResult[] ToResults
         {
             get { return (IResult[]) results.ToArray(typeof (IResult)); }

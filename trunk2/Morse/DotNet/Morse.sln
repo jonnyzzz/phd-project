@@ -109,6 +109,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SegmentIterator", "SegmentI
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiMethodComparer", "guiMethodComparer\guiMethodComparer.csproj", "{20E2919B-5CCB-4F8E-B93A-550331C7163E}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		ConsoleToolDebug = ConsoleToolDebug
@@ -744,6 +748,36 @@ Global
 		{72E29203-553F-49EE-9B55-C36EDB280968}.Test.Build.0 = Release|Win32
 		{72E29203-553F-49EE-9B55-C36EDB280968}.VisualizationDebug.ActiveCfg = Debug|Win32
 		{72E29203-553F-49EE-9B55-C36EDB280968}.VisualizationDebug.Build.0 = Debug|Win32
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.ConsoleToolDebug.ActiveCfg = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.ConsoleToolDebug.Build.0 = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Debug.ActiveCfg = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Debug.Build.0 = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Debug2.ActiveCfg = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Debug2.Build.0 = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Debug2Gui.ActiveCfg = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Debug2Gui.Build.0 = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.DebugAll.ActiveCfg = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.DebugAll.Build.0 = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.DebugGL.ActiveCfg = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.DebugGL.Build.0 = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.DebugGUI.ActiveCfg = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.DebugGUI.Build.0 = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.DebugGui2.ActiveCfg = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.DebugGui2.Build.0 = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.FullDebug.ActiveCfg = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.FullDebug.Build.0 = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.MorseGen.ActiveCfg = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.MorseGen.Build.0 = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.NewDLL.ActiveCfg = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.NewDLL.Build.0 = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release.ActiveCfg = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release.Build.0 = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release2.ActiveCfg = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release2.Build.0 = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Test.ActiveCfg = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Test.Build.0 = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.VisualizationDebug.ActiveCfg = Debug|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.VisualizationDebug.Build.0 = Debug|.NET
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

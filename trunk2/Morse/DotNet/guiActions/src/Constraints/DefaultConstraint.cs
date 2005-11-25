@@ -1,3 +1,4 @@
+using System;
 using EugenePetrenko.Gui2.Kernell2.Constraints;
 using EugenePetrenko.Gui2.Kernell2.Container;
 using EugenePetrenko.Gui2.Kernell2.Node;
@@ -12,6 +13,10 @@ namespace EugenePetrenko.Gui2.Actions.Constraints
     {
         private readonly string metadataType;
         private readonly string resultType;
+
+        public DefaultConstraint(Type metadata, Type resultType) : this(metadata.Name, resultType.Name)
+        {
+        }
 
         public DefaultConstraint(string metadataType, string resultType)
         {

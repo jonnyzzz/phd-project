@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using EugenePetrenko.Gui2.Application.Document;
+using EugenePetrenko.Gui2.Kernel2.Document;
 using EugenePetrenko.Gui2.Kernell2.Document;
 using EugenePetrenko.Gui2.Logging;
 

@@ -1,4 +1,5 @@
 using System.Xml;
+using EugenePetrenko.Gui2.ExternalResource.Core;
 
 namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
 {
@@ -14,14 +15,17 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
             return node == null ? null : node.Value;
         }
 
-        public GnuPlotTemplate(XmlNode node)
+        public GnuPlotTemplate(XmlNode generatorNode, XmlNode resource)
         {
-            header = SafeGetText(node, "header/text()");
-            history = SafeGetText(node, "history/text()");
-            plot = SafeGetText(node, "plot/text()");
-            bodyTemplate = SafeGetText(node, "bodyTemplate/text()");
-            delimiter = SafeGetText(node, "delimiter/text()");
-            footer = SafeGetText(node, "footer/text()");
+            header = SafeGetText(generatorNode, "header/text()");
+            history = SafeGetText(generatorNode, "history/text()");
+            plot = SafeGetText(generatorNode, "plot/text()");
+            bodyTemplate = SafeGetText(generatorNode, "bodyTemplate/text()");
+            delimiter = SafeGetText(generatorNode, "delimiter/text()");
+            footer = SafeGetText(generatorNode, "footer/text()");
+            exe = SafeGetText(resource, "exe/text()");
+            arguments = SafeGetText(resource,  "params/text()");
+
         }
 
         private string header = null;
@@ -30,6 +34,19 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
         private string bodyTemplate = null;
         private string delimiter = null;
         private string footer = null;
+
+        private string exe = null;
+        private string arguments = null;
+
+        public string Exe
+        {
+            get { return exe; }
+        }
+
+        public string Arguments
+        {
+            get { return arguments; }
+        }
 
         public string Header
         {
@@ -59,6 +76,13 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
         public string Footer
         {
             get { return footer; }
+        }
+
+        public static GnuPlotTemplate Create(int dimension, bool needSave)
+        {
+            XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode(!needSave ? "show" : "save");
+            string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
+            return new GnuPlotTemplate(resource.SelectSingleNode(xpath), resource);
         }
     }
 }

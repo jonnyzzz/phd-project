@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using System.Xml;
 using EugenePetrenko.Gui2.Application.TreeNodes;
+using EugenePetrenko.Gui2.Kernel2.Document;
 using EugenePetrenko.Gui2.Kernell2.Document;
 using EugenePetrenko.Gui2.Kernell2.Node;
 using EugenePetrenko.Gui2.Kernell2.Serialization;

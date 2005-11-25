@@ -18,9 +18,9 @@ namespace EugenePetrenko.Gui2.Actions.Parameters
         public ParameterControlMessageException(string parameterName, string ids) : base()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            Stream stream = assembly.GetManifestResourceStream(MessagesXML);
             XmlDocument document = new XmlDocument();
-            document.Load(stream);
+            using(Stream stream = assembly.GetManifestResourceStream(MessagesXML))
+                document.Load(stream);
             XmlNodeList list = document.SelectNodes(
                 string.Format("messages/{0}/message[@name=\"{1}\"]", parameterName, ids)
                 );
