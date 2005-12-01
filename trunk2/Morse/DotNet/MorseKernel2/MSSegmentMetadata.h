@@ -25,7 +25,7 @@ __interface IMSSegmentMetadata : IMSMetadata
 
 [
 	coclass,
-	threading("apartment"),
+	threading("both"),
 	vi_progid("MorseKernel2.MSSegmentMetadata"),
 	progid("MorseKernel2.MSSegmentMetadata.1"),
 	version(1.0),

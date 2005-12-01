@@ -22,7 +22,7 @@ __interface ISymbolicImageMetadata : IResultMetadata
 
 [
 	coclass,
-	threading("apartment"),
+	threading("both"),
 	vi_progid("MorseKernel2.SymbolicImageMetadata"),
 	progid("MorseKernel2.SymbolicImageMetadata.1"),
 	version(1.0),

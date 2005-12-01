@@ -44,6 +44,9 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
                 IMethodParameters load = MethodParametersSerializer.Load(param);
                 
                 logWriter.WriteLine("Processing {0}", load.Caption);
+                logWriter.WriteLine("\r\n Parameters Dump:");
+                logWriter.WriteLine(param.OuterXml);
+                logWriter.WriteLine("End\r\n\r\n");
                 
                 string pathAd = Path.Combine(path, load.Caption);
                 if (!Directory.Exists(pathAd))

@@ -624,7 +624,7 @@ interface IMS2DCreationAction : IAction {
 #line 26 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dcreationaction.h"
 interface IMS2DCreationParameters : IParameters {
 #line 28 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dcreationaction.h"
-	[id(10)] HRESULT  GetFactor([out,retval] int *factor);
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
 };
 
 [
@@ -659,7 +659,7 @@ interface IMS2DProcessAction : IAction {
 #line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
 interface IMS2DProcessParameters : IComputationParameters {
 #line 32 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
-	[id(14)] HRESULT  GetFactor([out,retval] int *factor);
+	[id(14)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
 };
 
 [
@@ -805,12 +805,14 @@ interface IMSMetadata : IResultMetadata {
 	helpstring("IMS2Metadata Interface"),
 	pointer_default(unique)
 ] 
-#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
 interface IMS2Metadata : IMSMetadata {
-#line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
 	[id(10)] HRESULT  GetSIGraphResult([out,retval] IResultSet **out );
-#line 23 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+#line 24 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
 	[id(11)] HRESULT  SetSIGraphResult([in] IResultSet *in);
+#line 26 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+	[id(12)] HRESULT  HasSIGraphResult([out,retval] VARIANT_BOOL *out);
 };
 
 [
@@ -865,6 +867,17 @@ interface IMSSegmentMetadata : IMSMetadata {
 ] 
 #line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msmethodaction.h"
 interface IMSMethodAction : IPointMethodAction {
+};
+
+[
+	object,
+	uuid(A5FEE589-2AE6-4F6F-8327-E531D2269F50),
+	dual,
+	helpstring("IMSSegmentRom Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mssegmentrom.h"
+interface IMSSegmentRom : IAction {
 };
 
 
@@ -1232,7 +1245,7 @@ library MorseKernel2
 		uuid(C18A9780-7C3A-4CA7-BD07-C8CE20EE8D6B),
 		helpstring("MS2Metadata Class")
 	] 
-#line 39 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+#line 42 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
 	coclass CMS2Metadata {
 		interface IMS2Metadata;
 		interface IMSMetadata;
@@ -1285,6 +1298,18 @@ library MorseKernel2
 	coclass CMSMethodAction {
 		interface IMSMethodAction;
 		interface IPointMethodAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(91A82ACA-C380-49C9-8A38-BBD68858100B),
+		helpstring("MSSegmentRom Class")
+	] 
+#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mssegmentrom.h"
+	coclass CMSSegmentRom {
+		interface IMSSegmentRom;
 		interface IAction;
 		interface IActionBase;
 	};

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Eugene.Petrenko.Gui2.MethodComparer.Actions;
 using EugenePetrenko.Gui2.Kernell2.Actions;
@@ -44,9 +45,19 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
                 dumper.IterationStarted(i, power);
                 foreach (IDefinedAction action in actions)
                 {
-                    dumper.ActionStarted(action, i, power);
-                    PerformAction(action, ref set);
-                    dumper.ActionFinished(action,i, power);
+                    if (set.Count != 0)
+                    {
+                        dumper.ActionStarted(action, i, power);
+                        PerformAction(action, ref set);
+                        dumper.ActionFinished(action,i, power);
+                        dumper.DumpResultSet(set);
+                    } else
+                    {
+                        dumper.EmptyResultSet();
+                    }
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    GC.Collect();
                 }
                 dumper.IterationFinished(i, power);
             }

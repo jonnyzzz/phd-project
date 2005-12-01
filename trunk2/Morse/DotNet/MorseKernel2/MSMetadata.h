@@ -25,7 +25,7 @@ __interface IMSMetadata : IResultMetadata
 
 [
 	coclass,
-	threading("apartment"),
+	threading("both"),
 	vi_progid("MorseKernel2.MSMetadata"),
 	progid("MorseKernel2.MSMetadata.1"),
 	version(1.0),

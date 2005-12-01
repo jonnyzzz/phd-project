@@ -1,5 +1,6 @@
 using EugenePetrenko.Gui2.Application.TreeNodes;
 using EugenePetrenko.Gui2.Kernell2.Actions;
+using EugenePetrenko.Gui2.Kernell2.Container;
 using EugenePetrenko.Gui2.Kernell2.Node;
 using EugenePetrenko.Gui2.Logging;
 
@@ -30,7 +31,7 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 
         public void Do()
         {
-            inProcess = true;
+            inProcess = true;            
             Logger.LogMessage("Computation Started");
             ResultSet resultSet = chain.Do(result, progressBarInfo);
             Logger.LogMessage("Comutation result set = {0}", resultSet.ToString());

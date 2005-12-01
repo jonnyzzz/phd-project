@@ -1,5 +1,8 @@
 using System;
 using System.Text;
+using EugenePetrenko.Gui2.Kernell2;
+using EugenePetrenko.Gui2.Kernell2.Node;
+using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace Eugene.Petrenko.Gui2.MethodComparer
 {
@@ -33,7 +36,7 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	    public void DoStarted()
 	    {  
             totalTime = new TimeSpan(0);
-            output.WriteLine("\n\nWorking for {0}", id);
+            output.WriteLine("\r\n\r\nWorking for {0}", id);
             computationStartTime = DateTime.Now;
             output.WriteLine("Computations started");
 	    }
@@ -84,12 +87,25 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
             output.WriteLine("Save finished. {0} ms", ms);	        
         }
 
+        public void DumpResultSet(ResultSet set)        
+        {
+            output.WriteLine("Dumping node result: ");
+            GraphInfoPresenter presenter = new GraphInfoPresenter();
+            foreach (IResult resultSet in set)
+            {
+                IGraphResult result = resultSet as IGraphResult;
+                if (result != null)
+                    output.WriteLine(presenter.PresentToHistory(result));
+            }
+            output.WriteLine("Finished\r\n\r\n");
+        }
+
 	    public void DoFinished()
 	    {
             TimeSpan difference = DateTime.Now - computationStartTime;
             double ms = difference.TotalMilliseconds;
             output.WriteLine("Computations finished. {0} ms", ms);
-            output.WriteLine("\n\nFinished work for {0}\n\n\n", id);
+            output.WriteLine("\r\n\r\nFinished work for {0}\r\n\r\n\r\n", id);
 	    }
 
 	    public void Dispose()
@@ -101,7 +117,12 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	    public void WriteLine(string format, params object[] data)
 	    {
 	        logOutput.AppendFormat(format, data);
-	        logOutput.Append('\n');
+	        logOutput.Append("\r\n");
+	    }
+
+	    public void EmptyResultSet()
+	    {
+	        output.WriteLine("Result set is empty");
 	    }
 	}
 }

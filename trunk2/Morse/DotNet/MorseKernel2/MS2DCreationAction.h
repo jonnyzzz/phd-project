@@ -25,7 +25,7 @@ __interface IMS2DCreationAction : IAction
 ]
 __interface IMS2DCreationParameters : IParameters {
 	[id(10)]
-	HRESULT GetFactor([out, retval] int* factor);
+	HRESULT GetFactor([in] int index, [out, retval] int* factor);
 };
 
 
@@ -33,7 +33,7 @@ __interface IMS2DCreationParameters : IParameters {
 
 [
 	coclass,
-	threading("apartment"),
+	threading("both"),
 	vi_progid("MorseKernel2.MS2DCreationAction"),
 	progid("MorseKernel2.MS2DCreationAction.1"),
 	version(1.0),

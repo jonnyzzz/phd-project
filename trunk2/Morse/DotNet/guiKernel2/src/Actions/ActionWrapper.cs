@@ -1,3 +1,4 @@
+using EugenePetrenko.Gui2.Kernell2.Container;
 using EugenePetrenko.Gui2.Kernell2.Node;
 using EugenePetrenko.Gui2.MorseKernel2;
 
@@ -52,6 +53,8 @@ namespace EugenePetrenko.Gui2.Kernell2.Actions
 
         public ResultSet Do(ResultSet input, ProgressBarInfo progressBarInfo)
         {
+            Core.Instance.GC();
+
             IParameters parameters = Parameters;
             IAction actionInternal = ActionInternal;
             actionInternal.SetActionParameters(parameters);
@@ -70,12 +73,12 @@ namespace EugenePetrenko.Gui2.Kernell2.Actions
 
         public string ActionMappingName
         {
-            get { return MyAttribute.ActionInterface.Name; }
+            get { return Attribute.ActionInterface.Name; }
         }
 
         public string ActionParametersName
         {
-            get { return MyAttribute.ParametersInterface.Name; }
+            get { return Attribute.ParametersInterface.Name; }
         }
 
         public IAction Action

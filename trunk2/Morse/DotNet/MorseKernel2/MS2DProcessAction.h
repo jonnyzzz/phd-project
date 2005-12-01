@@ -29,7 +29,7 @@ __interface IMS2DProcessAction : IAction
 __interface IMS2DProcessParameters : IComputationParameters
 {
     [id(14)]
-    HRESULT GetFactor([out, retval] int* factor);
+    HRESULT GetFactor([in] int index, [out, retval] int* factor);
 };
 
 
@@ -38,7 +38,7 @@ __interface IMS2DProcessParameters : IComputationParameters
 
 [
 	coclass,
-	threading("apartment"),
+	threading("both"),
 	vi_progid("MorseKernel2.MS2DProcessAction"),
 	progid("MorseKernel2.MS2DProcessAction.1"),
 	version(1.0),

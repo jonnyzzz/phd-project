@@ -15,7 +15,7 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D.Next
             this.function = function;
         }
 
-        protected override IParameters LoadParameters(int factor)
+        protected override IParameters LoadParameters(int[] factor)
         {
             return new MS2DMethodParametersImpl(factor, function);
         }

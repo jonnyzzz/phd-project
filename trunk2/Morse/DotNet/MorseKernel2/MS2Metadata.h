@@ -7,6 +7,7 @@
 #include "GraphResult.h"
 #include "ResultSet.h"
 #include "MSMetadata.h"
+#include "SmartInterface.h"
 
 // IMS2Metadata
 [
@@ -21,6 +22,8 @@ __interface IMS2Metadata : IMSMetadata
     HRESULT GetSIGraphResult([out, retval] IResultSet** out);
     [id(11)]
     HRESULT SetSIGraphResult([in] IResultSet* in);
+    [id(12)]
+    HRESULT HasSIGraphResult([out, retval] VARIANT_BOOL* out);
 };
 
 
@@ -29,7 +32,7 @@ __interface IMS2Metadata : IMSMetadata
 
 [
 	coclass,
-	threading("apartment"),
+	threading("both"),
 	vi_progid("MorseKernel2.MS2Metadata"),
 	progid("MorseKernel2.MS2Metadata.1"),
 	version(1.0),
@@ -56,8 +59,9 @@ public:
 
     STDMETHOD(GetSIGraphResult)(IResultSet** out);
     STDMETHOD(SetSIGraphResult)(IResultSet* in);
+    STDMETHOD(HasSIGraphResult)(VARIANT_BOOL* out);
 
 private:
-    IResultSet* graphResult;
+    SmartInterface<IResultSet> graphResult;
 };
 

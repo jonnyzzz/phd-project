@@ -44,4 +44,8 @@ public:
 		interf.data->QueryInterface(&this->data);
 	}
 
+    void reset() {
+        SAFE_RELEASE(data);
+        data = NULL;
+    }
 };

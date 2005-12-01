@@ -93,6 +93,7 @@ namespace EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2
             // checkBoxDrawBoxes
             // 
             this.checkBoxDrawBoxes.Dock = System.Windows.Forms.DockStyle.Left;
+            this.checkBoxDrawBoxes.Enabled = false;
             this.checkBoxDrawBoxes.Location = new System.Drawing.Point(96, 16);
             this.checkBoxDrawBoxes.Name = "checkBoxDrawBoxes";
             this.checkBoxDrawBoxes.Size = new System.Drawing.Size(88, 21);

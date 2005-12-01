@@ -24,9 +24,9 @@ int SegmentProjectiveBundleMSCreationProcess::getNewDimension() {
 }
 
 double SegmentProjectiveBundleMSCreationProcess::getMin(int i) {
-    return -2.1;
+    return -1;
 }
 
 double SegmentProjectiveBundleMSCreationProcess::getMax(int i) {
-    return 2.1;
+    return 1;
 }

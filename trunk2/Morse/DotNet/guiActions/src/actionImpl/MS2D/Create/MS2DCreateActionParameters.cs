@@ -7,7 +7,7 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D.Create
     /// </summary>
     public class MS2DCreateActionParameters : ActionParameters
     {
-        protected override IParameters LoadParameters(int factor)
+        protected override IParameters LoadParameters(int[] factor)
         {
             return new MS2DCreateActionParametersImpl(factor);
         }

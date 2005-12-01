@@ -53,9 +53,8 @@ STDMETHODIMP CMS2DCreationAction::SetProgressBarInfo(IProgressBarInfo* info) {
 STDMETHODIMP CMS2DCreationAction::CanDo(IResultSet* in, VARIANT_BOOL* out) {
     int count;
     in->GetCount(&count);       
-     if  (GraphResultUtil::ContainsGraphOnly(in, true) && 
-         GraphResultUtil::ContainsMetadataOnly<ISymbolicImageMetadata>(in)
-         && (count == 1) && (GraphResultGraphIterator(in)->getDimention() == 2)) {
+     if  (GraphResultUtil::ContainsGraphOnly(in, false, 2) && 
+         GraphResultUtil::ContainsMetadataOnly<ISymbolicImageMetadata>(in)) {
              *out = VARIANT_TRUE;
          } else {
              *out = VARIANT_FALSE;
@@ -72,21 +71,22 @@ STDMETHODIMP CMS2DCreationAction::Do(IResultSet* in, IResultSet **out) {
 	ProgressBarNotificationAdapter pinfo(info);
 
     HRESULT hr;
-
-    int factor[3];
-    factor[0] = factor[1] = 1;
-    hr = parameters->GetFactor(&factor[2]);
-    ATLASSERT(SUCCEEDED(hr));
     
-	    
+    int factor[3];
+    for (int i=0; i<3; i++) {    
+        hr = parameters->GetFactor(i, &factor[i]);
+        ATLASSERT(SUCCEEDED(hr));
+    }
+    	    
     GraphResultGraphIterator it(in);
-
     
     MS2DCreationProcess process(it, factor, &pinfo);
     SmartInterface<IMS2Metadata> metadata;
     
     CMS2Metadata::CreateInstance(metadata.extract());
-    metadata->SetSIGraphResult(in);
+    if (factor[0] == 1 && factor[1] == 1 && GraphResultUtil::ContainsGraphOnly(in, true)) {
+        metadata->SetSIGraphResult(in);
+    }
 
     GraphResultUtil::PerformProcess(&process, in, false, metadata, out);
     ATLASSERT(*out != NULL);

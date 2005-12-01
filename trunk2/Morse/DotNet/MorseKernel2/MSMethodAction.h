@@ -24,7 +24,7 @@ __interface IMSMethodAction : IPointMethodAction
 
 [
 	coclass,
-	threading("apartment"),
+	threading("both"),
 	vi_progid("MorseKernel2.MSMethodAction"),
 	progid("MorseKernel2.MSMethodAction.1"),
 	version(1.0),

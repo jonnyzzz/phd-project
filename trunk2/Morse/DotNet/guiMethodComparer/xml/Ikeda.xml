@@ -3,7 +3,7 @@
     <caption>Ikeda</caption>
     <Dimension>2</Dimension>
     
-    <NumberOfSteps>6</NumberOfSteps>
+    <NumberOfSteps>10</NumberOfSteps>
     
 	<Subdevision>2,2</Subdevision>
 	<NumberOfPoints>2,2</NumberOfPoints>

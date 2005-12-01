@@ -25,8 +25,8 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D
             // This call is required by the Windows.Forms Form Designer.
             InitializeComponent();
 
-            data = new IntPlusGridData("Cell Devisor on Angle", 1);
-            exGrid.SetRows(1, new IExGridRow[] {data});
+            data = new IntPlusGridData("Cell Devisor on Angle", 3);
+            exGrid.SetRows(3, data);
         }
 
         /// <summary> 
@@ -79,12 +79,12 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D
             get { return "Angle Method Projective Bundle Initial SI Creation"; }
         }
 
-        protected abstract IParameters LoadParameters(int factor);
+        protected abstract IParameters LoadParameters(int[] factor);
 
         protected override IParameters SubmitDataInternal()
         {
             exGrid.SubmitData();
-            return LoadParameters(data.Data[0]);
+            return LoadParameters(data.Data);
         }
     }
 }

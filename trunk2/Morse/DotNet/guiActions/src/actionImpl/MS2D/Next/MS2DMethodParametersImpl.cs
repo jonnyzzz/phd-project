@@ -8,10 +8,10 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D.Next
     /// </summary>
     public class MS2DMethodParametersImpl : IMS2DProcessParameters
     {
-        private int factor;
+        private int[] factor;
         private Function function;
 
-        public MS2DMethodParametersImpl(int factor, Function function)
+        public MS2DMethodParametersImpl(int[] factor, Function function)
         {
             this.factor = factor;
             this.function = function;
@@ -22,9 +22,9 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D.Next
             return function.IFunction;
         }
 
-        public int GetFactor()
+        public int GetFactor(int index)
         {
-            return factor;
+            return factor[index];
         }
 
 

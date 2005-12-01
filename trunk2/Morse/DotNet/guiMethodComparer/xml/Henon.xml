@@ -5,10 +5,10 @@
     <caption>Henon Function</caption>
     <Dimension>2</Dimension>
     
-    <NumberOfSteps>6</NumberOfSteps>
+    <NumberOfSteps>12</NumberOfSteps>
     
 	<Subdevision>2,2</Subdevision>
-	<NumberOfPoints>2,2</NumberOfPoints>
+	<NumberOfPoints>10,10</NumberOfPoints>
 	<OverlapingOffset>0.1,0.1</OverlapingOffset>
     <AdaptivePrecisionFactor>2,2</AdaptivePrecisionFactor>
     <LinearUseDerivate>true</LinearUseDerivate>

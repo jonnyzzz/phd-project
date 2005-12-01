@@ -155,6 +155,80 @@
 			<Tool
 				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
 		</Configuration>
+		<Configuration
+			Name="Release2MethodComparer|Win32"
+			OutputDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="2"
+			UseOfATL="1"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				GlobalOptimizations="TRUE"
+				InlineFunctionExpansion="2"
+				EnableIntrinsicFunctions="TRUE"
+				FavorSizeOrSpeed="1"
+				OptimizeForProcessor="2"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL;_ATL_ATTRIBUTES"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="3"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="FALSE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				IgnoreImportLibrary="TRUE"
+				AdditionalDependencies=" comsvcs.lib"
+				OutputFile="$(OutDir)/MorseKernel2.dll"
+				LinkIncremental="1"
+				MergedIDLBaseFileName="_MorseKernel2.idl"
+				GenerateDebugInformation="TRUE"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="$(OutDir)/MorseKernel2.lib"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(IntDir)/MorseKernel2.tlb"
+				HeaderFileName="MorseKernel2.h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="MorseKernel2_i.c"
+				ProxyFileName="MorseKernel2_p.c"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				Description="Performing registration"
+				CommandLine="regsvr32 /s /c &quot;$(TargetPath)&quot;
+&quot;$(FrameworkSDKDir)Bin/tlbImp&quot; $(TargetPath) /out:&quot;$(ProjectDir)/../EugenePetrenko.Gui2.MorseKernel2.Interop/$(TargetName).Interop.dll&quot; /namespace:EugenePetrenko.Gui2.MorseKernel2
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1049"
+				AdditionalIncludeDirectories="$(IntDir)"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
 	</Configurations>
 	<References>
 		<ProjectReference
@@ -290,6 +364,9 @@
 				RelativePath=".\MSSegmentMetadata.cpp">
 			</File>
 			<File
+				RelativePath=".\MSSegmentRom.cpp">
+			</File>
+			<File
 				RelativePath=".\Parameters.cpp">
 			</File>
 			<File
@@ -353,6 +430,12 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release2MethodComparer|Win32">
 					<Tool
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="1"/>
@@ -491,6 +574,9 @@
 			</File>
 			<File
 				RelativePath=".\MSSegmentMetadata.h">
+			</File>
+			<File
+				RelativePath=".\MSSegmentRom.h">
 			</File>
 			<File
 				RelativePath=".\Parameters.h">

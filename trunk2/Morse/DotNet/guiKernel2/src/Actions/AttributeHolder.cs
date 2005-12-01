@@ -9,7 +9,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Actions
     {
         private ActionMappingAttribute myCachedAttribute = null;
 
-        protected ActionMappingAttribute MyAttribute
+        protected ActionMappingAttribute Attribute
         {
             get
             {

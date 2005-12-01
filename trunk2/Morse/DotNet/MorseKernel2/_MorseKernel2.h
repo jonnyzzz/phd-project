@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Fri Nov 25 05:45:00 2005
+/* at Fri Dec 02 01:15:12 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -423,6 +423,12 @@ typedef interface IMSMethodAction IMSMethodAction;
 #endif 	/* __IMSMethodAction_FWD_DEFINED__ */
 
 
+#ifndef __IMSSegmentRom_FWD_DEFINED__
+#define __IMSSegmentRom_FWD_DEFINED__
+typedef interface IMSSegmentRom IMSSegmentRom;
+#endif 	/* __IMSSegmentRom_FWD_DEFINED__ */
+
+
 #ifndef __CAdaptiveBoxMethod_FWD_DEFINED__
 #define __CAdaptiveBoxMethod_FWD_DEFINED__
 
@@ -805,6 +811,18 @@ typedef struct CMSMethodAction CMSMethodAction;
 #endif /* __cplusplus */
 
 #endif 	/* __CMSMethodAction_FWD_DEFINED__ */
+
+
+#ifndef __CMSSegmentRom_FWD_DEFINED__
+#define __CMSSegmentRom_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CMSSegmentRom CMSSegmentRom;
+#else
+typedef struct CMSSegmentRom CMSSegmentRom;
+#endif /* __cplusplus */
+
+#endif 	/* __CMSSegmentRom_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -7707,6 +7725,7 @@ EXTERN_C const IID IID_IMS2DCreationParameters;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetFactor( 
+            /* [in] */ int index,
             /* [retval][out] */ int *factor) = 0;
         
     };
@@ -7759,6 +7778,7 @@ EXTERN_C const IID IID_IMS2DCreationParameters;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFactor )( 
             IMS2DCreationParameters * This,
+            /* [in] */ int index,
             /* [retval][out] */ int *factor);
         
         END_INTERFACE
@@ -7798,8 +7818,8 @@ EXTERN_C const IID IID_IMS2DCreationParameters;
 
 
 
-#define IMS2DCreationParameters_GetFactor(This,factor)	\
-    (This)->lpVtbl -> GetFactor(This,factor)
+#define IMS2DCreationParameters_GetFactor(This,index,factor)	\
+    (This)->lpVtbl -> GetFactor(This,index,factor)
 
 #endif /* COBJMACROS */
 
@@ -7810,6 +7830,7 @@ EXTERN_C const IID IID_IMS2DCreationParameters;
 
 /* [id] */ HRESULT STDMETHODCALLTYPE IMS2DCreationParameters_GetFactor_Proxy( 
     IMS2DCreationParameters * This,
+    /* [in] */ int index,
     /* [retval][out] */ int *factor);
 
 
@@ -8092,6 +8113,7 @@ EXTERN_C const IID IID_IMS2DProcessParameters;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetFactor( 
+            /* [in] */ int index,
             /* [retval][out] */ int *factor) = 0;
         
     };
@@ -8148,6 +8170,7 @@ EXTERN_C const IID IID_IMS2DProcessParameters;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetFactor )( 
             IMS2DProcessParameters * This,
+            /* [in] */ int index,
             /* [retval][out] */ int *factor);
         
         END_INTERFACE
@@ -8191,8 +8214,8 @@ EXTERN_C const IID IID_IMS2DProcessParameters;
     (This)->lpVtbl -> GetFunction(This,function)
 
 
-#define IMS2DProcessParameters_GetFactor(This,factor)	\
-    (This)->lpVtbl -> GetFactor(This,factor)
+#define IMS2DProcessParameters_GetFactor(This,index,factor)	\
+    (This)->lpVtbl -> GetFactor(This,index,factor)
 
 #endif /* COBJMACROS */
 
@@ -8203,6 +8226,7 @@ EXTERN_C const IID IID_IMS2DProcessParameters;
 
 /* [id] */ HRESULT STDMETHODCALLTYPE IMS2DProcessParameters_GetFactor_Proxy( 
     IMS2DProcessParameters * This,
+    /* [in] */ int index,
     /* [retval][out] */ int *factor);
 
 
@@ -9719,6 +9743,9 @@ EXTERN_C const IID IID_IMS2Metadata;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE SetSIGraphResult( 
             /* [in] */ IResultSet *in) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE HasSIGraphResult( 
+            /* [retval][out] */ VARIANT_BOOL *out) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -9784,6 +9811,10 @@ EXTERN_C const IID IID_IMS2Metadata;
             IMS2Metadata * This,
             /* [in] */ IResultSet *in);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *HasSIGraphResult )( 
+            IMS2Metadata * This,
+            /* [retval][out] */ VARIANT_BOOL *out);
+        
         END_INTERFACE
     } IMS2MetadataVtbl;
 
@@ -9834,6 +9865,9 @@ EXTERN_C const IID IID_IMS2Metadata;
 #define IMS2Metadata_SetSIGraphResult(This,in)	\
     (This)->lpVtbl -> SetSIGraphResult(This,in)
 
+#define IMS2Metadata_HasSIGraphResult(This,out)	\
+    (This)->lpVtbl -> HasSIGraphResult(This,out)
+
 #endif /* COBJMACROS */
 
 
@@ -9859,6 +9893,18 @@ void __RPC_STUB IMS2Metadata_GetSIGraphResult_Stub(
 
 
 void __RPC_STUB IMS2Metadata_SetSIGraphResult_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IMS2Metadata_HasSIGraphResult_Proxy( 
+    IMS2Metadata * This,
+    /* [retval][out] */ VARIANT_BOOL *out);
+
+
+void __RPC_STUB IMS2Metadata_HasSIGraphResult_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -10509,6 +10555,148 @@ EXTERN_C const IID IID_IMSMethodAction;
 #endif 	/* __IMSMethodAction_INTERFACE_DEFINED__ */
 
 
+#ifndef __IMSSegmentRom_INTERFACE_DEFINED__
+#define __IMSSegmentRom_INTERFACE_DEFINED__
+
+/* interface IMSSegmentRom */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMSSegmentRom;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("A5FEE589-2AE6-4F6F-8327-E531D2269F50")
+    IMSSegmentRom : public IAction
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMSSegmentRomVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMSSegmentRom * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMSSegmentRom * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMSSegmentRom * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMSSegmentRom * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMSSegmentRom * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMSSegmentRom * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMSSegmentRom * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IMSSegmentRom * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IMSSegmentRom * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IMSSegmentRom * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IMSSegmentRom * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        END_INTERFACE
+    } IMSSegmentRomVtbl;
+
+    interface IMSSegmentRom
+    {
+        CONST_VTBL struct IMSSegmentRomVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMSSegmentRom_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMSSegmentRom_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMSSegmentRom_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMSSegmentRom_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMSSegmentRom_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMSSegmentRom_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMSSegmentRom_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IMSSegmentRom_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IMSSegmentRom_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IMSSegmentRom_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IMSSegmentRom_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMSSegmentRom_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __MorseKernel2_LIBRARY_DEFINED__
 #define __MorseKernel2_LIBRARY_DEFINED__
@@ -10773,6 +10961,14 @@ EXTERN_C const CLSID CLSID_CMSMethodAction;
 
 class DECLSPEC_UUID("FD0149F7-8FE6-47FB-8BE9-64A16DB8247C")
 CMSMethodAction;
+#endif
+
+EXTERN_C const CLSID CLSID_CMSSegmentRom;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("91A82ACA-C380-49C9-8A38-BBD68858100B")
+CMSSegmentRom;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

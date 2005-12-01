@@ -43,7 +43,9 @@ STDMETHODIMP CMSCreationProcess::GetDimension(IResultSet* in, int *dim) {
 	ATLASSERT(canDo == VARIANT_TRUE);
 
     GraphResultGraphIterator it(in);
-    return it.Current()->getDimention()*2;
+    *dim = it.Current()->getDimention()*2;
+
+    return S_OK;
 }
 
 STDMETHODIMP CMSCreationProcess::Do(IResultSet* in, IResultSet **out) {
@@ -57,10 +59,14 @@ STDMETHODIMP CMSCreationProcess::Do(IResultSet* in, IResultSet **out) {
     HRESULT hr;
     
     GraphResultGraphIterator it(in);
-    int dim = it->getDimention();
+    int dim; 
+    hr = GetDimension(in, &dim);
+    ATLASSERT(SUCCEEDED(hr));
+
     int* factor = new int[dim];
     for (int i=0; i<dim; i++) {
         hr = parameters->GetFactor(i, &factor[i]);
+        cout<<"factor = "<<factor[i]<<"\n";
         ATLASSERT(SUCCEEDED(hr));
     }  	    
     

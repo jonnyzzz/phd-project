@@ -6,6 +6,7 @@ using EugenePetrenko.Gui2.ExternalResource.Core;
 using EugenePetrenko.Gui2.Kernell2.ActionFactory;
 using EugenePetrenko.Gui2.Kernell2.Document;
 using EugenePetrenko.Gui2.Kernell2.xml;
+using EugenePetrenko.Gui2.Logging;
 
 namespace EugenePetrenko.Gui2.Kernell2.Container
 {
@@ -149,6 +150,15 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
             {
                 return o.GetType().IsAssignableFrom(t);
             }
+        }
+
+        public void GC()
+        {
+            Logger.LogMessage("Cleaning Memory: GC");
+            System.GC.Collect();
+            System.GC.WaitForPendingFinalizers();
+            System.GC.Collect();
+            Logger.LogMessage("Cleaning Memory: GC Finished");
         }
     }
 }

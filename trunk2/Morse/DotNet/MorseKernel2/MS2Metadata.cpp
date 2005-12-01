@@ -7,7 +7,6 @@
 // CMS2Metadata
 
 CMS2Metadata::CMS2Metadata() {
-    graphResult = NULL;
 }
 
 HRESULT CMS2Metadata::FinalConstruct() {
@@ -15,7 +14,6 @@ HRESULT CMS2Metadata::FinalConstruct() {
 }
 
 void CMS2Metadata::FinalRelease() {
-    SAFE_RELEASE(graphResult);
 }
 
 
@@ -30,22 +28,41 @@ STDMETHODIMP CMS2Metadata::Clone(IResultMetadata **out) {
     SmartInterface<IMS2Metadata> myData;
     (*out)->QueryInterface(myData.extract());
 
-    myData->SetSIGraphResult(graphResult);
+    HRESULT hr;
+    VARIANT_BOOL hasSI;
+    hr = HasSIGraphResult(&hasSI);
+    ATLASSERT(SUCCEEDED(hr));
+
+    if (hasSI == VARIANT_TRUE) {
+        myData->SetSIGraphResult(graphResult);
+    }
 
     return S_OK;
 }   
 
 
 STDMETHODIMP CMS2Metadata::GetSIGraphResult(IResultSet** out) {
-    graphResult->QueryInterface(out);
-    ATLASSERT(*out != NULL);
+    if (graphResult == NULL) {
+        *out = NULL;
+    } else {
+        graphResult->QueryInterface(out);
+        ATLASSERT(*out != NULL);
+    }
     return S_OK;
 }
 
 
 STDMETHODIMP CMS2Metadata::SetSIGraphResult(IResultSet* in) {
-    SAFE_RELEASE(graphResult);
-    in->QueryInterface(&graphResult);
-    ATLASSERT(graphResult != NULL);
+    if (in == NULL) {
+        graphResult.reset();
+    } else {
+        in->QueryInterface(graphResult.extract());
+        ATLASSERT(graphResult != NULL);
+    }
+    return S_OK;
+}
+
+STDMETHODIMP CMS2Metadata::HasSIGraphResult(VARIANT_BOOL* out) {
+    *out = graphResult == NULL ? VARIANT_FALSE : VARIANT_TRUE;
     return S_OK;
 }

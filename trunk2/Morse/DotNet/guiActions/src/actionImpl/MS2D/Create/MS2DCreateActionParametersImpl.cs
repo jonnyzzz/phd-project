@@ -1,3 +1,4 @@
+using System;
 using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D.Create
@@ -7,16 +8,16 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D.Create
     /// </summary>
     public class MS2DCreateActionParametersImpl : IMS2DCreationParameters
     {
-        private int factor;
+        private int[] factor;
 
-        public MS2DCreateActionParametersImpl(int factor)
+        public MS2DCreateActionParametersImpl(int[] factor)
         {
             this.factor = factor;
         }
-
-        public int GetFactor()
+        
+        public int GetFactor(int index)
         {
-            return factor;
+            return factor[index];
         }
     }
 }

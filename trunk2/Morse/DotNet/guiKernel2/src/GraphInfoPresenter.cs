@@ -25,4 +25,10 @@ namespace EugenePetrenko.Gui2.Kernell2
             return string.Format("Nodes {0}, Edges {1}", info.GetNodes(), info.GetEdges());
         }
 	}
+
+
+    public class ResultSetPresenter
+    {
+        
+    }
 }

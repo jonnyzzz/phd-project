@@ -81,7 +81,7 @@ STDMETHODIMP CMSMethodAction::Do(IResultSet* in, IResultSet** out) {
 	bool useOffset = (data == VARIANT_TRUE)?true:false;
 
 	int dimension;
-	hr = function->GetDimension(&dimension);
+	hr = GetDimensionForParameters(in, &dimension);
 	ATLASSERT(SUCCEEDED(hr));
 
 	cout<<"Dimenstion = "<<dimension<<"\n";
@@ -108,8 +108,7 @@ STDMETHODIMP CMSMethodAction::Do(IResultSet* in, IResultSet** out) {
 	}
 
 	AbstractProcess* process;
-	if (useOffset) {
-        return E_NOTIMPL;        
+	if (useOffset) {        
 		process = new MSOverlapedPointBuilder(it, factor, ks, off1, off2, projFunc, pinfo);
 	} else {
 		process = new MSPointBuilder(it, factor, ks, projFunc, pinfo);
