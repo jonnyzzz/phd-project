@@ -360,12 +360,6 @@
 						Name="VCCLCompilerTool"
 						UsePrecompiledHeader="1"/>
 				</FileConfiguration>
-				<FileConfiguration
-					Name="Release2MethodComparer|Win32">
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\SymbolicImageMetadata.cpp">

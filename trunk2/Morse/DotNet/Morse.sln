@@ -61,7 +61,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gui2", "gui2\gui2.csproj", 
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiLogger", "Logger\guiLogger.csproj", "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiLogger", "guiLogger\guiLogger.csproj", "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -152,7 +152,7 @@ Global
 		{2A89E5A0-1B6B-4F8E-905D-45D6EE0C4CD7}.NewDLL.ActiveCfg = Debug|Win32
 		{2A89E5A0-1B6B-4F8E-905D-45D6EE0C4CD7}.Release.ActiveCfg = Release|Win32
 		{2A89E5A0-1B6B-4F8E-905D-45D6EE0C4CD7}.Release2.ActiveCfg = Release|Win32
-		{2A89E5A0-1B6B-4F8E-905D-45D6EE0C4CD7}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
+		{2A89E5A0-1B6B-4F8E-905D-45D6EE0C4CD7}.Release2MethodComparer.ActiveCfg = Release|Win32
 		{2A89E5A0-1B6B-4F8E-905D-45D6EE0C4CD7}.Test.ActiveCfg = Debug|Win32
 		{2A89E5A0-1B6B-4F8E-905D-45D6EE0C4CD7}.Test.Build.0 = Debug|Win32
 		{2A89E5A0-1B6B-4F8E-905D-45D6EE0C4CD7}.VisualizationDebug.ActiveCfg = Debug|Win32
@@ -179,8 +179,8 @@ Global
 		{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}.Release.Build.0 = Release|Win32
 		{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}.Release2.ActiveCfg = Release|Win32
 		{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}.Release2.Build.0 = Release|Win32
-		{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
-		{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}.Release2MethodComparer.Build.0 = Release2MethodComparer|Win32
+		{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}.Release2MethodComparer.ActiveCfg = Release|Win32
+		{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}.Release2MethodComparer.Build.0 = Release|Win32
 		{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}.Test.ActiveCfg = Debug|Win32
 		{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}.Test.Build.0 = Debug|Win32
 		{B81AA2E2-D0A9-4ECF-9F96-ED3EDED63D7A}.VisualizationDebug.ActiveCfg = Debug|Win32
@@ -205,8 +205,8 @@ Global
 		{A42EF8BC-57CF-4D5A-A423-9B03C034210A}.Release.Build.0 = Release|Win32
 		{A42EF8BC-57CF-4D5A-A423-9B03C034210A}.Release2.ActiveCfg = Release|Win32
 		{A42EF8BC-57CF-4D5A-A423-9B03C034210A}.Release2.Build.0 = Release|Win32
-		{A42EF8BC-57CF-4D5A-A423-9B03C034210A}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
-		{A42EF8BC-57CF-4D5A-A423-9B03C034210A}.Release2MethodComparer.Build.0 = Release2MethodComparer|Win32
+		{A42EF8BC-57CF-4D5A-A423-9B03C034210A}.Release2MethodComparer.ActiveCfg = Release|Win32
+		{A42EF8BC-57CF-4D5A-A423-9B03C034210A}.Release2MethodComparer.Build.0 = Release|Win32
 		{A42EF8BC-57CF-4D5A-A423-9B03C034210A}.Test.ActiveCfg = Debug|Win32
 		{A42EF8BC-57CF-4D5A-A423-9B03C034210A}.Test.Build.0 = Debug|Win32
 		{A42EF8BC-57CF-4D5A-A423-9B03C034210A}.VisualizationDebug.ActiveCfg = Debug|Win32
@@ -233,8 +233,8 @@ Global
 		{213A979A-506A-4295-9350-B86F82C0DBCB}.Release.Build.0 = Release|Win32
 		{213A979A-506A-4295-9350-B86F82C0DBCB}.Release2.ActiveCfg = Release|Win32
 		{213A979A-506A-4295-9350-B86F82C0DBCB}.Release2.Build.0 = Release|Win32
-		{213A979A-506A-4295-9350-B86F82C0DBCB}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
-		{213A979A-506A-4295-9350-B86F82C0DBCB}.Release2MethodComparer.Build.0 = Release2MethodComparer|Win32
+		{213A979A-506A-4295-9350-B86F82C0DBCB}.Release2MethodComparer.ActiveCfg = Release|Win32
+		{213A979A-506A-4295-9350-B86F82C0DBCB}.Release2MethodComparer.Build.0 = Release|Win32
 		{213A979A-506A-4295-9350-B86F82C0DBCB}.Test.ActiveCfg = Debug|Win32
 		{213A979A-506A-4295-9350-B86F82C0DBCB}.Test.Build.0 = Debug|Win32
 		{213A979A-506A-4295-9350-B86F82C0DBCB}.VisualizationDebug.ActiveCfg = Debug|Win32
@@ -260,8 +260,8 @@ Global
 		{80C14A35-BD13-463C-B296-AF3F5A254439}.Release.Build.0 = Release|Win32
 		{80C14A35-BD13-463C-B296-AF3F5A254439}.Release2.ActiveCfg = Release|Win32
 		{80C14A35-BD13-463C-B296-AF3F5A254439}.Release2.Build.0 = Release|Win32
-		{80C14A35-BD13-463C-B296-AF3F5A254439}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
-		{80C14A35-BD13-463C-B296-AF3F5A254439}.Release2MethodComparer.Build.0 = Release2MethodComparer|Win32
+		{80C14A35-BD13-463C-B296-AF3F5A254439}.Release2MethodComparer.ActiveCfg = Release|Win32
+		{80C14A35-BD13-463C-B296-AF3F5A254439}.Release2MethodComparer.Build.0 = Release|Win32
 		{80C14A35-BD13-463C-B296-AF3F5A254439}.Test.ActiveCfg = Debug|Win32
 		{80C14A35-BD13-463C-B296-AF3F5A254439}.Test.Build.0 = Debug|Win32
 		{80C14A35-BD13-463C-B296-AF3F5A254439}.VisualizationDebug.ActiveCfg = Debug|Win32
@@ -281,7 +281,7 @@ Global
 		{C1938679-4A1C-4A15-9121-1911FD6839B5}.Release.ActiveCfg = Release|Win32
 		{C1938679-4A1C-4A15-9121-1911FD6839B5}.Release.Build.0 = Release|Win32
 		{C1938679-4A1C-4A15-9121-1911FD6839B5}.Release2.ActiveCfg = Release|Win32
-		{C1938679-4A1C-4A15-9121-1911FD6839B5}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
+		{C1938679-4A1C-4A15-9121-1911FD6839B5}.Release2MethodComparer.ActiveCfg = Release|Win32
 		{C1938679-4A1C-4A15-9121-1911FD6839B5}.Test.ActiveCfg = Debug|Win32
 		{C1938679-4A1C-4A15-9121-1911FD6839B5}.VisualizationDebug.ActiveCfg = Debug|Win32
 		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.ConsoleToolDebug.ActiveCfg = Debug|Win32
@@ -297,7 +297,7 @@ Global
 		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.NewDLL.ActiveCfg = Release|Win32
 		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.Release.ActiveCfg = Release|Win32
 		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.Release2.ActiveCfg = Release|Win32
-		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
+		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.Release2MethodComparer.ActiveCfg = Release|Win32
 		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.Test.ActiveCfg = Debug|Win32
 		{C8FD9881-2EB6-4909-94FA-E178B6DA248B}.VisualizationDebug.ActiveCfg = Debug|Win32
 		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.ConsoleToolDebug.ActiveCfg = Debug|Win32
@@ -322,8 +322,8 @@ Global
 		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.Release.Build.0 = Release|Win32
 		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.Release2.ActiveCfg = Release|Win32
 		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.Release2.Build.0 = Release|Win32
-		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
-		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.Release2MethodComparer.Build.0 = Release2MethodComparer|Win32
+		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.Release2MethodComparer.ActiveCfg = Release|Win32
+		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.Release2MethodComparer.Build.0 = Release|Win32
 		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.Test.ActiveCfg = Debug|Win32
 		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.Test.Build.0 = Debug|Win32
 		{8D190DB8-56C4-4C76-A7F1-5560D53344CC}.VisualizationDebug.ActiveCfg = Debug|Win32
@@ -348,8 +348,8 @@ Global
 		{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}.Release.Build.0 = Release|Win32
 		{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}.Release2.ActiveCfg = Release|Win32
 		{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}.Release2.Build.0 = Release|Win32
-		{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
-		{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}.Release2MethodComparer.Build.0 = Release2MethodComparer|Win32
+		{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}.Release2MethodComparer.ActiveCfg = Release|Win32
+		{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}.Release2MethodComparer.Build.0 = Release|Win32
 		{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}.Test.ActiveCfg = Debug|Win32
 		{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}.Test.Build.0 = Debug|Win32
 		{FAC2EC89-DA1B-4E88-A304-B80BB2BE0A51}.VisualizationDebug.ActiveCfg = Debug|Win32
@@ -376,8 +376,8 @@ Global
 		{FA02656D-A267-4B1F-A956-79236784E5CA}.Release.Build.0 = Release|Win32
 		{FA02656D-A267-4B1F-A956-79236784E5CA}.Release2.ActiveCfg = Release|Win32
 		{FA02656D-A267-4B1F-A956-79236784E5CA}.Release2.Build.0 = Release|Win32
-		{FA02656D-A267-4B1F-A956-79236784E5CA}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
-		{FA02656D-A267-4B1F-A956-79236784E5CA}.Release2MethodComparer.Build.0 = Release2MethodComparer|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.Release2MethodComparer.ActiveCfg = Release|Win32
+		{FA02656D-A267-4B1F-A956-79236784E5CA}.Release2MethodComparer.Build.0 = Release|Win32
 		{FA02656D-A267-4B1F-A956-79236784E5CA}.Test.ActiveCfg = Debug|Win32
 		{FA02656D-A267-4B1F-A956-79236784E5CA}.VisualizationDebug.ActiveCfg = Debug|Win32
 		{FA02656D-A267-4B1F-A956-79236784E5CA}.VisualizationDebug.Build.0 = Debug|Win32
@@ -394,7 +394,7 @@ Global
 		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.NewDLL.ActiveCfg = Release|Win32
 		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.Release.ActiveCfg = Release|Win32
 		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.Release2.ActiveCfg = Release|Win32
-		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
+		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.Release2MethodComparer.ActiveCfg = Release|Win32
 		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.Test.ActiveCfg = Debug|Win32
 		{F0ECF416-0386-4E77-84B6-CFAD137A098E}.VisualizationDebug.ActiveCfg = Debug|Win32
 		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.ConsoleToolDebug.ActiveCfg = Debug|.NET
@@ -420,8 +420,8 @@ Global
 		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Release.Build.0 = Release|.NET
 		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Release2.ActiveCfg = Release|.NET
 		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Release2.Build.0 = Release|.NET
-		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
-		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Release2MethodComparer.Build.0 = Release2MethodComparer|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Release2MethodComparer.ActiveCfg = Release|.NET
+		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Release2MethodComparer.Build.0 = Release|.NET
 		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.Test.ActiveCfg = Debug|.NET
 		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}.VisualizationDebug.Build.0 = Debug|.NET
@@ -448,8 +448,8 @@ Global
 		{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}.Release.Build.0 = Release|.NET
 		{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}.Release2.ActiveCfg = Release|.NET
 		{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}.Release2.Build.0 = Release|.NET
-		{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
-		{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}.Release2MethodComparer.Build.0 = Release2MethodComparer|.NET
+		{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}.Release2MethodComparer.ActiveCfg = Release|.NET
+		{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}.Release2MethodComparer.Build.0 = Release|.NET
 		{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}.Test.ActiveCfg = Debug|.NET
 		{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}.VisualizationDebug.Build.0 = Debug|.NET
@@ -476,8 +476,8 @@ Global
 		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.Release.Build.0 = Release|.NET
 		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.Release2.ActiveCfg = Release|.NET
 		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.Release2.Build.0 = Release|.NET
-		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
-		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.Release2MethodComparer.Build.0 = Release2MethodComparer|.NET
+		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.Release2MethodComparer.ActiveCfg = Release|.NET
+		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.Release2MethodComparer.Build.0 = Release|.NET
 		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.Test.ActiveCfg = Debug|.NET
 		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{D23A0918-1DE7-4355-8097-AE5D27FF0ABD}.VisualizationDebug.Build.0 = Debug|.NET
@@ -504,8 +504,8 @@ Global
 		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Release.Build.0 = Release|.NET
 		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Release2.ActiveCfg = Release|.NET
 		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Release2.Build.0 = Release|.NET
-		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
-		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Release2MethodComparer.Build.0 = Release2MethodComparer|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Release2MethodComparer.ActiveCfg = Release|.NET
+		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Release2MethodComparer.Build.0 = Release|.NET
 		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.Test.ActiveCfg = Debug|.NET
 		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}.VisualizationDebug.Build.0 = Debug|.NET
@@ -532,8 +532,8 @@ Global
 		{197A3492-2764-42C8-B23B-BF040623EF7D}.Release.Build.0 = Release|.NET
 		{197A3492-2764-42C8-B23B-BF040623EF7D}.Release2.ActiveCfg = Release|.NET
 		{197A3492-2764-42C8-B23B-BF040623EF7D}.Release2.Build.0 = Release|.NET
-		{197A3492-2764-42C8-B23B-BF040623EF7D}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
-		{197A3492-2764-42C8-B23B-BF040623EF7D}.Release2MethodComparer.Build.0 = Release2MethodComparer|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Release2MethodComparer.ActiveCfg = Release|.NET
+		{197A3492-2764-42C8-B23B-BF040623EF7D}.Release2MethodComparer.Build.0 = Release|.NET
 		{197A3492-2764-42C8-B23B-BF040623EF7D}.Test.ActiveCfg = Debug|.NET
 		{197A3492-2764-42C8-B23B-BF040623EF7D}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{197A3492-2764-42C8-B23B-BF040623EF7D}.VisualizationDebug.Build.0 = Debug|.NET
@@ -560,8 +560,8 @@ Global
 		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Release.Build.0 = Release|.NET
 		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Release2.ActiveCfg = Release|.NET
 		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Release2.Build.0 = Release|.NET
-		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
-		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Release2MethodComparer.Build.0 = Release2MethodComparer|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Release2MethodComparer.ActiveCfg = Release|.NET
+		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Release2MethodComparer.Build.0 = Release|.NET
 		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.Test.ActiveCfg = Debug|.NET
 		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{59CC2327-8B59-485A-8E76-3F34BE358B5B}.VisualizationDebug.Build.0 = Debug|.NET
@@ -588,8 +588,8 @@ Global
 		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Release.Build.0 = Release|.NET
 		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Release2.ActiveCfg = Release|.NET
 		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Release2.Build.0 = Release|.NET
-		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
-		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Release2MethodComparer.Build.0 = Release2MethodComparer|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Release2MethodComparer.ActiveCfg = Release|.NET
+		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Release2MethodComparer.Build.0 = Release|.NET
 		{9705EB3C-990B-485C-8B9F-64477FB0A933}.Test.ActiveCfg = Debug|.NET
 		{9705EB3C-990B-485C-8B9F-64477FB0A933}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{9705EB3C-990B-485C-8B9F-64477FB0A933}.VisualizationDebug.Build.0 = Debug|.NET
@@ -608,7 +608,7 @@ Global
 		{48419D68-757B-4552-A006-A49168533D20}.Release.Build.0 = Release
 		{48419D68-757B-4552-A006-A49168533D20}.Release2.ActiveCfg = Release
 		{48419D68-757B-4552-A006-A49168533D20}.Release2.Build.0 = Release
-		{48419D68-757B-4552-A006-A49168533D20}.Release2MethodComparer.ActiveCfg = Release2MethodComparer
+		{48419D68-757B-4552-A006-A49168533D20}.Release2MethodComparer.ActiveCfg = Release
 		{48419D68-757B-4552-A006-A49168533D20}.Test.ActiveCfg = Debug
 		{48419D68-757B-4552-A006-A49168533D20}.VisualizationDebug.ActiveCfg = Debug
 		{8A8D2235-7462-446D-B513-65DB6C04083B}.ConsoleToolDebug.ActiveCfg = Debug|.NET
@@ -634,8 +634,8 @@ Global
 		{8A8D2235-7462-446D-B513-65DB6C04083B}.Release.Build.0 = Release|.NET
 		{8A8D2235-7462-446D-B513-65DB6C04083B}.Release2.ActiveCfg = Release|.NET
 		{8A8D2235-7462-446D-B513-65DB6C04083B}.Release2.Build.0 = Release|.NET
-		{8A8D2235-7462-446D-B513-65DB6C04083B}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
-		{8A8D2235-7462-446D-B513-65DB6C04083B}.Release2MethodComparer.Build.0 = Release2MethodComparer|.NET
+		{8A8D2235-7462-446D-B513-65DB6C04083B}.Release2MethodComparer.ActiveCfg = Release|.NET
+		{8A8D2235-7462-446D-B513-65DB6C04083B}.Release2MethodComparer.Build.0 = Release|.NET
 		{8A8D2235-7462-446D-B513-65DB6C04083B}.Test.ActiveCfg = Debug|.NET
 		{8A8D2235-7462-446D-B513-65DB6C04083B}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{8A8D2235-7462-446D-B513-65DB6C04083B}.VisualizationDebug.Build.0 = Debug|.NET
@@ -652,7 +652,7 @@ Global
 		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.NewDLL.ActiveCfg = Release|.NET
 		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Release.ActiveCfg = Release|.NET
 		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Release2.ActiveCfg = Release|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
+		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Release2MethodComparer.ActiveCfg = Release|.NET
 		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Test.ActiveCfg = Debug|.NET
 		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.VisualizationDebug.Build.0 = Debug|.NET
@@ -677,7 +677,7 @@ Global
 		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Release.ActiveCfg = Release|Win32
 		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Release.Build.0 = Release|Win32
 		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Release2.ActiveCfg = Release|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
+		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Release2MethodComparer.ActiveCfg = Release|Win32
 		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Test.ActiveCfg = Debug|Win32
 		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.VisualizationDebug.ActiveCfg = Debug|Win32
 		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.VisualizationDebug.Build.0 = Debug|Win32
@@ -703,7 +703,7 @@ Global
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.Release.ActiveCfg = Release|.NET
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.Release.Build.0 = Release|.NET
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.Release2.ActiveCfg = Release|.NET
-		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
+		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.Release2MethodComparer.ActiveCfg = Release|.NET
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.Test.ActiveCfg = Debug|.NET
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.VisualizationDebug.Build.0 = Debug|.NET
@@ -731,8 +731,8 @@ Global
 		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release.Build.0 = Release|Win32
 		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release2.ActiveCfg = Release|Win32
 		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release2.Build.0 = Release|Win32
-		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
-		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release2MethodComparer.Build.0 = Release2MethodComparer|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release2MethodComparer.ActiveCfg = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Release2MethodComparer.Build.0 = Release|Win32
 		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Test.ActiveCfg = Debug|Win32
 		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Test.Build.0 = Debug|Win32
 		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.VisualizationDebug.ActiveCfg = Debug|Win32
@@ -761,7 +761,7 @@ Global
 		{AE8E4529-46E6-4738-9365-B009D6AEDB07}.Release.ActiveCfg = Release|Win32
 		{AE8E4529-46E6-4738-9365-B009D6AEDB07}.Release.Build.0 = Release|Win32
 		{AE8E4529-46E6-4738-9365-B009D6AEDB07}.Release2.ActiveCfg = Release|Win32
-		{AE8E4529-46E6-4738-9365-B009D6AEDB07}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
+		{AE8E4529-46E6-4738-9365-B009D6AEDB07}.Release2MethodComparer.ActiveCfg = Release|Win32
 		{AE8E4529-46E6-4738-9365-B009D6AEDB07}.Test.ActiveCfg = Release|Win32
 		{AE8E4529-46E6-4738-9365-B009D6AEDB07}.VisualizationDebug.ActiveCfg = Debug|Win32
 		{AE8E4529-46E6-4738-9365-B009D6AEDB07}.VisualizationDebug.Build.0 = Debug|Win32
@@ -790,8 +790,8 @@ Global
 		{72E29203-553F-49EE-9B55-C36EDB280968}.Release.Build.0 = Release|Win32
 		{72E29203-553F-49EE-9B55-C36EDB280968}.Release2.ActiveCfg = Release|Win32
 		{72E29203-553F-49EE-9B55-C36EDB280968}.Release2.Build.0 = Release|Win32
-		{72E29203-553F-49EE-9B55-C36EDB280968}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|Win32
-		{72E29203-553F-49EE-9B55-C36EDB280968}.Release2MethodComparer.Build.0 = Release2MethodComparer|Win32
+		{72E29203-553F-49EE-9B55-C36EDB280968}.Release2MethodComparer.ActiveCfg = Release|Win32
+		{72E29203-553F-49EE-9B55-C36EDB280968}.Release2MethodComparer.Build.0 = Release|Win32
 		{72E29203-553F-49EE-9B55-C36EDB280968}.Test.ActiveCfg = Release|Win32
 		{72E29203-553F-49EE-9B55-C36EDB280968}.Test.Build.0 = Release|Win32
 		{72E29203-553F-49EE-9B55-C36EDB280968}.VisualizationDebug.ActiveCfg = Debug|Win32
@@ -822,8 +822,8 @@ Global
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release.Build.0 = Release|.NET
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release2.ActiveCfg = Release|.NET
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release2.Build.0 = Release|.NET
-		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release2MethodComparer.ActiveCfg = Release2MethodComparer|.NET
-		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release2MethodComparer.Build.0 = Release2MethodComparer|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release2MethodComparer.ActiveCfg = Release|.NET
+		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Release2MethodComparer.Build.0 = Release|.NET
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Test.ActiveCfg = Release|.NET
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Test.Build.0 = Release|.NET
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.VisualizationDebug.ActiveCfg = Debug|.NET
