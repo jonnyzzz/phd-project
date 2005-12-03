@@ -1119,7 +1119,7 @@
         {
             "{8062640A-2EEE-46E9-AB67-688E9A886E9F}:_177CC3AF4E13455FBB70479080CAB18E"
             {
-            "SourcePath" = "8:..\\gui2\\obj\\Release\\EugenePetrenko.Gui2.Application.exe"
+            "SourcePath" = "8:..\\gui2\\bin\\Release\\EugenePetrenko.Gui2.Application.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F18DB3B8BE124159AA4BF84DDE5BBB88"
