@@ -2,6 +2,7 @@
 #include "..\cellimagebuilders\abstractprocess.h"
 #include "../SystemFunction/ISystemFunction.h"
 #include "PointGraphProcessor.h"
+#include "PointGraph.h"
 #include "AdaptiveProcessBase.h"
 
 class AdaptiveProvess :
@@ -16,4 +17,5 @@ protected:
 
 private:
     PointGraphProcessor* processor;
+	PointGraph* pointGraph;
 };

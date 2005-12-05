@@ -10,8 +10,8 @@ using namespace std;
 class PointGraphProcessor
 {
 public:
-    PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit);
-    ~PointGraphProcessor(void);
+    PointGraphProcessor(PointGraph* pointGraph, Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit);
+    virtual ~PointGraphProcessor(void);
 
 public:
     typedef list<double*> PointsList;
@@ -23,21 +23,10 @@ private:
     void AddNotCheckedNode(Node* graphNode, PointGraph::Node* node);
 
 private:
-    class PointGraphEx : public PointGraph {
-    public:
-        PointGraphEx(Graph* graph, ISystemFunction* function, int dimension, size_t upperLimit);
-        virtual ~PointGraphEx();
-    private:
-        Graph* graph;
-    private:
-        double Abs(double x);
-    protected:
-        virtual bool NeedDevideEdge(const double* left, const double* right, const double* precision);
-    };
 
 
 private:
-    PointGraphEx pointGraph;
+    PointGraph* pointGraph;    
     PointGraphBuilder pointGraphBuilder;
     Graph* graph;
     int dimension;

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Dec 04 16:05:36 2005
+/* at Mon Dec 05 15:57:07 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -823,6 +823,18 @@ typedef struct CMSSegmentRom CMSSegmentRom;
 #endif /* __cplusplus */
 
 #endif 	/* __CMSSegmentRom_FWD_DEFINED__ */
+
+
+#ifndef __CMSAdaptiveAction_FWD_DEFINED__
+#define __CMSAdaptiveAction_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CMSAdaptiveAction CMSAdaptiveAction;
+#else
+typedef struct CMSAdaptiveAction CMSAdaptiveAction;
+#endif /* __cplusplus */
+
+#endif 	/* __CMSAdaptiveAction_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -10969,6 +10981,14 @@ EXTERN_C const CLSID CLSID_CMSSegmentRom;
 
 class DECLSPEC_UUID("91A82ACA-C380-49C9-8A38-BBD68858100B")
 CMSSegmentRom;
+#endif
+
+EXTERN_C const CLSID CLSID_CMSAdaptiveAction;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("8AB4B68E-C39E-4FD9-8466-1B88F524BD9D")
+CMSAdaptiveAction;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

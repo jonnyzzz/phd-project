@@ -119,6 +119,9 @@
 				RelativePath=".\AdaptiveProvess.cpp">
 			</File>
 			<File
+				RelativePath=".\IntersectingPointGraph.cpp">
+			</File>
+			<File
 				RelativePath=".\PointGraph.cpp">
 			</File>
 			<File
@@ -126,6 +129,12 @@
 			</File>
 			<File
 				RelativePath=".\PointGraphProcessor.cpp">
+			</File>
+			<File
+				RelativePath=".\SegmentAdaptiveProcess.cpp">
+			</File>
+			<File
+				RelativePath=".\SegmentPointGraph.cpp">
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp">
@@ -157,6 +166,9 @@
 				RelativePath=".\AdaptiveProvess.h">
 			</File>
 			<File
+				RelativePath=".\IntersectingPointGraph.h">
+			</File>
+			<File
 				RelativePath=".\PointGraph.h">
 			</File>
 			<File
@@ -164,6 +176,12 @@
 			</File>
 			<File
 				RelativePath=".\PointGraphProcessor.h">
+			</File>
+			<File
+				RelativePath=".\SegmentAdaptiveProcess.h">
+			</File>
+			<File
+				RelativePath=".\SegmentPointGraph.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">

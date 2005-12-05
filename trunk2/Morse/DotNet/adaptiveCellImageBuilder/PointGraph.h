@@ -88,6 +88,7 @@ private:
     double* arraycopy(const double* x);
     void arraycopy(double* to, const double* from);
     Node* AddNodeInternal(double* node);
+protected:
     double Abs(double x);
 
 public:

@@ -8,9 +8,9 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-PointGraphProcessor::PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit)
-: graph(graph), dimension(dimension), pointGraph(graph, function, dimension, upperLimit),
-  pointGraphBuilder(dimension, graph->getEps(), pointGraph)
+PointGraphProcessor::PointGraphProcessor(PointGraph* pointGraph, Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit)
+: graph(graph), dimension(dimension), pointGraph(pointGraph),
+  pointGraphBuilder(dimension, graph->getEps(), *pointGraph)
 {
     x = new JDouble[dimension];
     x0 = new JDouble[dimension];
@@ -41,24 +41,24 @@ PointGraphProcessor::~PointGraphProcessor(void)
 
 
 void PointGraphProcessor::ProcessNode(Node* node) {        
-    pointGraph.Reset();
+    pointGraph->Reset();
 
     for (int i=0; i<dimension; i++) {
         x[i] = graph->toExternal(graph->getCells(node)[i],i);
     }   
     pointGraphBuilder.BuildInitialGraph(x);
     
-    if (pointGraph.Iterate(precision)) {
-        const PointGraph::NodeList& list = pointGraph.Points();        
+    if (pointGraph->Iterate(precision)) {
+        const PointGraph::NodeList& list = pointGraph->Points();        
         for (PointGraph::NodeList::const_iterator it = list.begin(); it != list.end(); ++it) {
             AddCheckedNode(node, *it);
         }
     } else {
-        const PointGraph::NodeList& list = pointGraph.Points();        
+        const PointGraph::NodeList& list = pointGraph->Points();        
         for (PointGraph::NodeList::const_iterator it = list.begin(); it != list.end(); ++it) {
             PointGraph::Node* pnode = *it;
 
-            if (pointGraph.IsCheckedNode(pnode)) {            
+            if (pointGraph->IsCheckedNode(pnode)) {            
                 AddCheckedNode(node, pnode);
             } else {
                 AddNotCheckedNode(node, pnode);
@@ -72,24 +72,7 @@ void PointGraphProcessor::AddCheckedNode(Node* graphNode, PointGraph::Node* node
 }
 
 void PointGraphProcessor::AddNotCheckedNode(Node* graphNode, PointGraph::Node* node) {
-    pointGraph.NodeLength(node, radius);
+    pointGraph->NodeLength(node, radius);
 
     graph->addEdgesRadius(graphNode, node->valueCache, radius);
-}
-
-
-PointGraphProcessor::PointGraphEx::PointGraphEx(Graph* graph, ISystemFunction* function, int dim, size_t upperLimit) : PointGraph(function, dim, upperLimit), graph(graph) {}
-PointGraphProcessor::PointGraphEx::~PointGraphEx() {}
-
-double inline PointGraphProcessor::PointGraphEx::Abs(double x) {
-    return (x>0)?x:-x;
-}
-
-bool PointGraphProcessor::PointGraphEx::NeedDevideEdge(const double* left, const double* right, const double* precision) {
-    if (!graph->intersects(left) || !graph->intersects(right)) 
-        return false;
-    for (int i=0;i<dimension; i++) {
-        if (Abs(left-right) > precision[i]) return false;
-    }
-    return true;
 }

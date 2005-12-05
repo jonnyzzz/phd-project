@@ -6,7 +6,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Dec 04 16:05:36 2005
+/* at Mon Dec 05 15:57:07 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -362,6 +362,9 @@ MIDL_DEFINE_GUID(CLSID, CLSID_CMSMethodAction,0xFD0149F7,0x8FE6,0x47FB,0x8B,0xE9
 
 
 MIDL_DEFINE_GUID(CLSID, CLSID_CMSSegmentRom,0x91A82ACA,0xC380,0x49C9,0x8A,0x38,0xBB,0xD6,0x88,0x58,0x10,0x0B);
+
+
+MIDL_DEFINE_GUID(CLSID, CLSID_CMSAdaptiveAction,0x8AB4B68E,0xC39E,0x4FD9,0x84,0x66,0x1B,0x88,0xF5,0x24,0xBD,0x9D);
 
 #undef MIDL_DEFINE_GUID
 

@@ -278,6 +278,9 @@
 				RelativePath=".\MS2Metadata.cpp">
 			</File>
 			<File
+				RelativePath=".\MSAdaptiveAction.cpp">
+			</File>
+			<File
 				RelativePath=".\MSCreationProcess.cpp">
 			</File>
 			<File
@@ -482,6 +485,9 @@
 			</File>
 			<File
 				RelativePath=".\MS2Metadata.h">
+			</File>
+			<File
+				RelativePath=".\MSAdaptiveAction.h">
 			</File>
 			<File
 				RelativePath=".\MSCreationProcess.h">
