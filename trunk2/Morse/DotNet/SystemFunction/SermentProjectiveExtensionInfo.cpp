@@ -19,7 +19,7 @@ static char THIS_FILE[] = __FILE__;
 SermentProjectiveExtensionInfo::SermentProjectiveExtensionInfo(ISystemFunctionDerivate* function) :
     IProjectiveExtensionInfo(function)
 {	
-	this->systemFunction = new SegmentProjectiveExtendedSystemFunction(function);
+	this->systemFunction = new SegmentProjectiveExtendedSystemFunction(function, function);
 	this->morseFunction = new SegmentProjectiveExtensionMorseFunction(function);
 }
 
@@ -70,5 +70,5 @@ int SermentProjectiveExtensionInfo::extendedGraphDimension() {
 
 //only for test project. 
 ISystemFunctionDerivate* SermentProjectiveExtensionInfo::getSystemFunction() {
-	return new SegmentProjectiveExtendedSystemFunction(function);
+	return new SegmentProjectiveExtendedSystemFunction(function, NULL);
 }

@@ -2,6 +2,13 @@
 #include ".\isolatingprocesstest.h"
 #include "../homotop/isolatingset.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 IsolatingProcessTest::IsolatingProcessTest(ostream& o) : TestBase("Isolating Test", o)
 {
 }

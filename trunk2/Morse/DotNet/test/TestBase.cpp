@@ -1,6 +1,13 @@
 #include "StdAfx.h"
 #include ".\testbase.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 TestBase::TestBase(const char* testName, ostream& o) : o(o)
 {
     strcpy(this->testName, testName);

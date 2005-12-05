@@ -14,11 +14,12 @@ protected:
     virtual double EdgeLength(const double* left, const double* right);
     virtual void EdgeLength(const double* left, const double* right, double* lengths);
 
+	virtual void ComputeMiddle(const double* left, const double* right, double* v);
+
 protected:
 	double ProjDistance(const double* left, const double* right);
 	double ProjDistance(double x, double y);
 
-private:
-	int base_dim;	
+private:	
 	Graph* graph;
 };

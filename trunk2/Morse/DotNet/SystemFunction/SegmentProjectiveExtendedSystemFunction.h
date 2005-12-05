@@ -1,11 +1,13 @@
 #pragma once
 #include "ISystemFunctionDerivate.h"
+#include "segmentprojectiveextendedsystemfunctionbase.h"
 
 class SegmentProjectiveExtendedSystemFunction :
-    public ISystemFunctionDerivate
+    public ISystemFunctionDerivate, 
+	public SegmentProjectiveExtendedSystemFunctionBase
 {
 public:
-    SegmentProjectiveExtendedSystemFunction(ISystemFunctionDerivate* function);
+	SegmentProjectiveExtendedSystemFunction(ISystemFunctionDerivate* function, ISystemFunction* baseFunction);
     virtual ~SegmentProjectiveExtendedSystemFunction(void);
 
 public:
@@ -16,17 +18,23 @@ public:
     virtual int getFunctionDimension();
 
 public:
+	ISystemFunction* GetBaseFunction();	
+	ISystemFunction* GetProjectiveFunction();
+
+	void SetProjectiveCenter();
+
+public:
     virtual bool isNative() { return true; }
     virtual bool hasFunction() { return true; }
     virtual bool hasDerivative() { return true; }
 
 private:
-    ISystemFunction* function;
-    int real_dimension;
+	int real_dimension;
 
-private:
-    void computeEx(double* v, double* d, double* output);
-    double Abs(double x);
+	ISystemFunction* base;
+    ISystemFunctionDerivate* function;
+	ISystemFunction* projective;
+    
 
     double* input;
     double* output;

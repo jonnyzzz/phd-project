@@ -10,10 +10,15 @@
 #include "../systemFunction/MS2DAngleMorseFunction.h"
 
 
-
-
 #include <iostream>
 using namespace std;
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 
 MS2DMorseTest::MS2DMorseTest(void) : TestBase("2DMS Morse Test", std::cout)
 {

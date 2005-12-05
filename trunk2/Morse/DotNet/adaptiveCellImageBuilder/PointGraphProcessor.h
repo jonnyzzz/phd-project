@@ -10,7 +10,7 @@ using namespace std;
 class PointGraphProcessor
 {
 public:
-    PointGraphProcessor(PointGraph* pointGraph, Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit);
+    PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit);
     virtual ~PointGraphProcessor(void);
 
 public:

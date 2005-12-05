@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include ".\pointgraphprocessor.h"
+#include "IntersectingPointGraph.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -8,10 +9,12 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-PointGraphProcessor::PointGraphProcessor(PointGraph* pointGraph, Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit)
-: graph(graph), dimension(dimension), pointGraph(pointGraph),
-  pointGraphBuilder(dimension, graph->getEps(), *pointGraph)
+PointGraphProcessor::PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit)
+: graph(graph), dimension(dimension), pointGraph(new IntersectingPointGraph(graph, function, dimension, upperLimit)),
+  pointGraphBuilder(0, dimension, graph->getEps(), *pointGraph)
 {
+	ATLASSERT(dimension > 0);
+
     x = new JDouble[dimension];
     x0 = new JDouble[dimension];
     b = new JInt[dimension+1];
@@ -37,6 +40,7 @@ PointGraphProcessor::~PointGraphProcessor(void)
     delete[] overlap2;
     delete[] precision;
     delete[] radius;
+	delete[] pointGraph;
 }
 
 

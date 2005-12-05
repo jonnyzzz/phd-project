@@ -272,6 +272,9 @@
 				RelativePath=".\MS2DSIMorseTest.cpp">
 			</File>
 			<File
+				RelativePath=".\MSAdaptiveTest.cpp">
+			</File>
+			<File
 				RelativePath=".\Pefomance.cpp">
 			</File>
 			<File
@@ -350,6 +353,9 @@
 			</File>
 			<File
 				RelativePath=".\MS2DSIMorseTest.h">
+			</File>
+			<File
+				RelativePath=".\MSAdaptiveTest.h">
 			</File>
 			<File
 				RelativePath=".\objects.h">

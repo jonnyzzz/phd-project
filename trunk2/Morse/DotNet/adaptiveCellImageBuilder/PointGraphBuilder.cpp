@@ -2,27 +2,39 @@
 #include "PointGraphBuilder.h"
 #include <math.h>
 
-PointGraphBuilder::PointGraphBuilder(int dimension, const double* eps, PointGraph& graph) :
-dimension(dimension), eps(eps), graph(graph)
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
+PointGraphBuilder::PointGraphBuilder(int ldimension, int udimension, const double* eps, PointGraph& graph) :
+ldimension(ldimension), udimension(udimension), graph(graph), dim(udimension-ldimension)
 {
-    eps2 = new double[dimension];
-    for (int i=0; i<dimension; i++) {
-        eps2[i] = eps[i]/2;
+	ATLASSERT(ldimension >= 0 && ldimension < udimension && dim > 0);
+    this->eps2 = new double[dim];
+	this->eps = new double[dim];
+    for (int i=0; i<dim; i++) {
+		this->eps[i] = eps[ldimension+i];
+        this->eps2[i] = this->eps[i]/2;
     }
 }
 
 PointGraphBuilder::~PointGraphBuilder(void)
 {
+	delete[] eps;
     delete[] eps2;
 }
 
 void PointGraphBuilder::BuildInitialGraph(double* x) {    
-    if (dimension == 1) {
+	x = &x[ldimension];
+    if (dim == 1) {
         PointGraph::Node* n1 = graph.AddNode(x);
-        x[0]+= eps[0];
+		x[0]+= eps[0];
         PointGraph::Node* n2 = graph.AddNode(x);
         graph.AddEdge(n1, n2);
-    } else if (dimension == 2) {
+    } else if (dim == 2) {
         PointGraph::Node* n00 = graph.AddNode(x);
         x[0]+= eps[0];
         PointGraph::Node* n10 = graph.AddNode(x);
@@ -43,7 +55,7 @@ void PointGraphBuilder::BuildInitialGraph(double* x) {
         graph.AddEdge(n10, c);
         graph.AddEdge(n01, c);
         graph.AddEdge(n11, c);
-    } else if (dimension == 3) {
+    } else if (dim == 3) {
         PointGraph::Node* n000 = graph.AddNode(x);
         x[0]+=eps[0];
         PointGraph::Node* n001 = graph.AddNode(x);

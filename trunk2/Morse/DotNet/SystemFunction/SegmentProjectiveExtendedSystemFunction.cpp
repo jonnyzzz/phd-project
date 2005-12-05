@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SegmentProjectiveExtendedSystemFunction.h"
+#include "SegmentPartSystemFunction.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -8,7 +9,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-SegmentProjectiveExtendedSystemFunction::SegmentProjectiveExtendedSystemFunction(ISystemFunctionDerivate* function)
+SegmentProjectiveExtendedSystemFunction::SegmentProjectiveExtendedSystemFunction(ISystemFunctionDerivate* function, ISystemFunction* base)
 :
     ISystemFunctionDerivate(
                   function->getDimension() + function->getFunctionDimension(), 
@@ -18,13 +19,17 @@ SegmentProjectiveExtendedSystemFunction::SegmentProjectiveExtendedSystemFunction
     real_dimension(function->getFunctionDimension()),
     input(function->getInput()),
     output(function->getOutput()),
-    function_dimension(function->getDimension())
+    function_dimension(function->getDimension()),
+	SegmentProjectiveExtendedSystemFunctionBase(function->getFunctionDimension()),
+	base(base),
+	projective(new SegmentPartSystemFunction(function))	
 {
 
 }
 
 SegmentProjectiveExtendedSystemFunction::~SegmentProjectiveExtendedSystemFunction(void)
 {
+	delete projective;
 }
 
 
@@ -41,7 +46,6 @@ int SegmentProjectiveExtendedSystemFunction::getFunctionDimension() {
 }
 
 void SegmentProjectiveExtendedSystemFunction::evaluate() {
-
     function->evaluate();
     computeEx(
         &input[real_dimension], 
@@ -51,33 +55,15 @@ void SegmentProjectiveExtendedSystemFunction::evaluate() {
 }
 
 
-///////////////////////////////////////////////////////////////////////////////////
-
-double inline SegmentProjectiveExtendedSystemFunction::Abs(double x) {
-    return (x>0)?x:-x;
+ISystemFunction* SegmentProjectiveExtendedSystemFunction::GetBaseFunction() {
+	return this->base;
 }
 
-void SegmentProjectiveExtendedSystemFunction::computeEx(double* v, double* d, double* output) {
-    //v - vector v
-    //d - differential vector
-    //output - vector v
 
-	//cout<<"real dim = "<<real_dimension<<"\n";
+void SegmentProjectiveExtendedSystemFunction::SetProjectiveCenter() {
+	function->evaluate();
+}
 
-    int amax = 0;
-    for (int i=0; i<real_dimension; i++) {
-        output[i] = 0;
-        for (int j=0; j<real_dimension; j++) {
-            output[i] += d[i*real_dimension + j] * v[j];
-        }
-        if (Abs(output[amax]) < Abs(output[i])) {
-            amax = i;
-        }
-    }
-
-	//cout<<"max = "<<amax<<"\n";
-
-    for (int i=0; i<real_dimension; i++) {
-       output[i] /= output[amax];
-    }
+ISystemFunction* SegmentProjectiveExtendedSystemFunction::GetProjectiveFunction() {
+	return this->projective;
 }

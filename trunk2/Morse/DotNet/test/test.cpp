@@ -19,6 +19,7 @@
 #include "AdaptiveBoxTest.h"
 #include "MemoryManagerTest.h"
 #include "ms2dsiMorseTest.h"
+#include "msAdaptiveTest.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -34,8 +35,9 @@ int _tmain(int argc, _TCHAR* argv[]) {
     //testRomFromFile("o:\\aaaa");
 
 
+	MSAdaptiveTest().Test();
     //PointGraphTest("PointGraphTest", cout).Test();
-    PointGraphBuilderTest().Test();
+    //PointGraphBuilderTest().Test();
     //MS2DMorseTest().Test();
     //AdaptiveBoxTest().Test();
     //MemoryManagerTest().Test();

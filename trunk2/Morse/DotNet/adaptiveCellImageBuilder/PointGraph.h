@@ -43,6 +43,8 @@ protected:
     virtual double EdgeLength(const double* left, const double* right);
     virtual void EdgeLength(const double* left, const double* right, double* lengths);
 
+	virtual void ComputeMiddle(const double* left, const double* right, double* v);
+
 public:
     class Edge {
     public:

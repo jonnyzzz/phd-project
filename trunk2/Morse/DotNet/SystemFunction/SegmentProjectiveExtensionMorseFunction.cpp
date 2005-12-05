@@ -54,8 +54,8 @@ void SegmentProjectiveExtensionMorseFunction::evaluate() {
         evaluation_result += tmp*tmp;
     }
 
-	cout<<"Eval = "<<evaluation_result<<"\n";
-	cout<<"NormV = "<<norm<<"\n";
+	//cout<<"Eval = "<<evaluation_result<<"\n";
+	//cout<<"NormV = "<<norm<<"\n";
 
-    evaluation_result = log(evaluation_result/norm)/2;
+    evaluation_result = (log(evaluation_result)-log(norm))/2;
 }

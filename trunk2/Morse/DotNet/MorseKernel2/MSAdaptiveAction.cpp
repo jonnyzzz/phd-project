@@ -54,10 +54,14 @@ STDMETHODIMP CMSAdaptiveAction::Do(IResultSet* in, IResultSet **out) {
 
     HRESULT hr;
     
-	ISystemFunctionDerivate* func;
-    hr = function->GetSystemFunctionDerivate((void**)&func);
+	ISystemFunctionDerivate* funcDerivate;
+	ISystemFunction* func;
+    
+	hr = function->GetSystemFunctionDerivate((void**)&funcDerivate);
 	ATLASSERT(SUCCEEDED(hr));
-	SegmentProjectiveExtendedSystemFunction* exFunc = new SegmentProjectiveExtendedSystemFunction(func);
+	hr = function->GetSystemFunction((void**)&func);
+	ATLASSERT(SUCCEEDED(hr));
+	SegmentProjectiveExtendedSystemFunction* exFunc = new SegmentProjectiveExtendedSystemFunction(funcDerivate, func);
 
     int dimension;
 	hr = function->GetDimension(&dimension);
@@ -91,6 +95,7 @@ STDMETHODIMP CMSAdaptiveAction::Do(IResultSet* in, IResultSet **out) {
     delete[] prec;
     delete exFunc;
 	delete func;
+	delete funcDerivate;
 
     return S_OK;
 }

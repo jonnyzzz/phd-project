@@ -137,6 +137,9 @@
 				RelativePath=".\SegmentPointGraph.cpp">
 			</File>
 			<File
+				RelativePath=".\SegmentPointGraphProcessor.cpp">
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -182,6 +185,9 @@
 			</File>
 			<File
 				RelativePath=".\SegmentPointGraph.h">
+			</File>
+			<File
+				RelativePath=".\SegmentPointGraphProcessor.h">
 			</File>
 			<File
 				RelativePath=".\stdafx.h">

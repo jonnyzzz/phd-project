@@ -173,7 +173,13 @@
 				RelativePath=".\ProjectiveSystemFunctionDerivate.cpp">
 			</File>
 			<File
+				RelativePath=".\SegmentPartSystemFunction.cpp">
+			</File>
+			<File
 				RelativePath=".\SegmentProjectiveExtendedSystemFunction.cpp">
+			</File>
+			<File
+				RelativePath=".\SegmentProjectiveExtendedSystemFunctionBase.cpp">
 			</File>
 			<File
 				RelativePath=".\SegmentProjectiveExtensionMorseFunction.cpp">
@@ -241,7 +247,13 @@
 				RelativePath=".\ProjectiveSystemFunctionDerivate.h">
 			</File>
 			<File
+				RelativePath=".\SegmentPartSystemFunction.h">
+			</File>
+			<File
 				RelativePath=".\SegmentProjectiveExtendedSystemFunction.h">
+			</File>
+			<File
+				RelativePath=".\SegmentProjectiveExtendedSystemFunctionBase.h">
 			</File>
 			<File
 				RelativePath=".\SegmentProjectiveExtensionMorseFunction.h">

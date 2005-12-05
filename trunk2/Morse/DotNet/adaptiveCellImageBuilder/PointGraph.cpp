@@ -18,6 +18,7 @@ function(function), dimension(dimension),
 manager((2*sizeof(Node)+4*sizeof(double)*dimension+sizeof(Edge))*100),
 upperLimit(upperLimit)
 {
+	ATLASSERT(dimension > 0);
     function_input = function->getInput();
     function_output = function->getOutput();
 }
@@ -127,14 +128,18 @@ void PointGraph::EdgeLength(const double* left, const double* right, double* len
 }
 
 
+void PointGraph::ComputeMiddle(const double* left, const double* right, double* v) {
+	for (int i=0; i<dimension; i++) {
+        *v++ = (*left++ + *right++)/2;
+    }
+}
+
 PointGraph::Node* PointGraph::split(PointGraph::Edge* edge) {
     Node* left = edge->left;
     Node* right = edge->right;
     
     double* myDouble = createArray();
-    for (int i=0; i<dimension; i++) {
-        myDouble[i] = (left->points[i] + right->points[i])/2;
-    }
+	ComputeMiddle(left->points, right->points, myDouble);
 
     left->edges.erase(right);
     right->edges.erase(left);

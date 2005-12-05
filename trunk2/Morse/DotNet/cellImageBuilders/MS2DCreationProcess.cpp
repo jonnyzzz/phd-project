@@ -2,6 +2,12 @@
 #include "MS2DCreationProcess.h"
 #include <math.h>
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 
 MS2DCreationProcess::MS2DCreationProcess(Graph* graph, int* factor, ProgressBarInfo* info) : 
 AbstractGraphCreator(graph, factor, info)

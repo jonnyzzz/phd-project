@@ -3,6 +3,13 @@
 #include <iostream>
 using namespace std;
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 AdaptiveBoxMethod::AdaptiveBoxMethod(ISystemFunction* function, Graph* graph, JInt* division, double* precision, ProgressBarInfo* info)
 : AdaptiveProcessBase(function, graph, division, precision, info), manager(sizeof(JDouble) * graph->getDimention() *1522)
 {

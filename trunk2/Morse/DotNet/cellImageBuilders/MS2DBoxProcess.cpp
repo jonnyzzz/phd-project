@@ -4,6 +4,13 @@
 #include "../graph/GraphUtil.h"
 #include "../graph/GraphException.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 MS2DBoxProcess::MS2DBoxProcess(MS2DAngleFunction* function, Graph* original, GraphSet si, int* factor, ProgressBarInfo* info)
 :AbstractProcessExt(original, info), siGraph(si), function(function)
 {

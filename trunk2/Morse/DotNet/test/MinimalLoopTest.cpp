@@ -2,6 +2,13 @@
 #include ".\minimallooptest.h"
 #include "../homotop/minimalLoopFinder.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 MinimalLoopTest::MinimalLoopTest(ostream& o) : TestBase("Minimal Loop Test", o)
 {
 }

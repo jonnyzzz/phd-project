@@ -6,17 +6,20 @@
 class PointGraphBuilder
 {
 public:
-    PointGraphBuilder(int dimention, const double* eps, PointGraph& graph);
+    PointGraphBuilder(int ldimension, int udimention, const double* eps, PointGraph& graph);
     ~PointGraphBuilder(void);
 
 public:
     void BuildInitialGraph(double* x);
 
 private:
-    const double* eps;
+    double* eps;
     double* eps2;
 
-    int dimension;
+    const int udimension;
+	const int ldimension;
+
+	const int dim;
 
     PointGraph& graph;
 };

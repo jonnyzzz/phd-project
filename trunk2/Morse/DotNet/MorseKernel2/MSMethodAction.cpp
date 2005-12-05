@@ -71,11 +71,14 @@ STDMETHODIMP CMSMethodAction::Do(IResultSet* in, IResultSet** out) {
 	hr = parameters->GetFunction(function.extract());
 	ATLASSERT(SUCCEEDED(hr) && function != NULL);
 
-	ISystemFunctionDerivate* func;
-	hr = function->GetSystemFunctionDerivate((void**)&func);
+	ISystemFunctionDerivate* funcDer;
+	hr = function->GetSystemFunctionDerivate((void**)&funcDer);
 	ATLASSERT(SUCCEEDED(hr));
-
-    SegmentProjectiveExtendedSystemFunction* projFunc = new SegmentProjectiveExtendedSystemFunction(func);
+	ISystemFunction* func;
+	hr = function->GetSystemFunction((void**)&func);
+	ATLASSERT(SUCCEEDED(hr));
+	
+    SegmentProjectiveExtendedSystemFunction* projFunc = new SegmentProjectiveExtendedSystemFunction(funcDer, func);
 
 	hr = parameters->UseOffsets(&data);
 	bool useOffset = (data == VARIANT_TRUE)?true:false;
@@ -128,6 +131,7 @@ STDMETHODIMP CMSMethodAction::Do(IResultSet* in, IResultSet** out) {
 
     delete projFunc;
 	delete func;
+	delete funcDer;
 	delete pinfo;
 	delete process;
 

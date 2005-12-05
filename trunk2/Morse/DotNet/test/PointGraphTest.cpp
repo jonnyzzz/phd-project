@@ -49,7 +49,7 @@ void PointGraphTest::Test() {
 
   
     MyFunction function;
-    PointGraph graph((ISystemFunction*)&function, 1);
+    PointGraph graph((ISystemFunction*)&function, 1, 0);
     
     graph.Dump(cout);
 

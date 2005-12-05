@@ -8,6 +8,12 @@ using namespace std;
 #include "../systemFunction/ISystemFunctionDerivate.h"
 #include "../adaptiveCellImageBuilder/AdaptiveBoxMethod.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 
 typedef smartPointer<ISystemFunction> SmartFunction;
 typedef smartPointer<Graph> SmartGraph;

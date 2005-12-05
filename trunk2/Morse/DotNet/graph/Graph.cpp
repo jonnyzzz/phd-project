@@ -587,7 +587,7 @@ void Graph::addEdgesModula(Node* node, const JDouble* min, const JDouble* max, i
 
 
 void Graph::addEdgeWithOverlaping(Node* nodeSourse, JDouble* value, JDouble* offset1, JDouble* offset2) {
-	if (!intersects(value, value)) return;
+	if (!intersects(value)) return;
 	
 	for (int i=0; i<dimention; i++) {
 		JDouble tmp;		

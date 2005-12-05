@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "MS2DSIBoxProcess.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 MS2DSIBoxProcess::MS2DSIBoxProcess(MS2DAngleFunction* function, Graph* graph, int* factor, ProgressBarInfo* info)
 : AbstractBoxProcess(graph, function->GetInternalFunction(), factor, info), centerOutput(AbstractBoxProcess::getCurrentCenterValue())  ,
   function(function)

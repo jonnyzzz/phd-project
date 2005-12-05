@@ -17,5 +17,4 @@ protected:
 
 private:
     PointGraphProcessor* processor;
-	PointGraph* pointGraph;
 };

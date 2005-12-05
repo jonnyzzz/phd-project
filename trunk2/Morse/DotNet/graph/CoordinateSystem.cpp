@@ -114,8 +114,10 @@ int CoordinateSystem::getDimention() const {
 }
 /////////////////////////////////////////////////////
 
-bool CoordinateSystem::intersects(const JDouble* x) const {
-    for (int i=0; i<dimention; i++) {
+bool CoordinateSystem::intersects(const JDouble* x, int ldim, int udim) const {
+	if (udim < 0) 
+		udim = dimention;
+    for (int i = ldim; i<udim; i++) {
         if (!( min[i] <= x[i] && x[i] <= max[i])) return false;
     }
     return true;

@@ -1,7 +1,7 @@
 #pragma once
 #include "AdaptiveProcessBase.h"
 #include "../SystemFunction/SegmentProjectiveExtendedSystemFunction.h"
-#include "PointGraphProcessor.h"
+#include "SegmentPointGraphProcessor.h"
 #include "PointGraph.h"
 
 
@@ -16,7 +16,5 @@ protected:
     virtual void processResultNode(Node* node);
 
 private:
-    PointGraphProcessor* processor;
-	PointGraph* pointGraph;
-
+	SegmentPointGraphProcessor* processor;
 };

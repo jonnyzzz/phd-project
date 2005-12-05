@@ -13,13 +13,11 @@ static char THIS_FILE[] = __FILE__;
 AdaptiveProvess::AdaptiveProvess(ISystemFunction* function, Graph* graph, JInt* division, double* precision, size_t upperLimit, ProgressBarInfo* info)
 : AdaptiveProcessBase(function, graph, division, precision, info)
 {   
-	pointGraph = new IntersectingPointGraph(graph, function, dimension, upperLimit);
-    processor = new PointGraphProcessor(pointGraph, this->resultGraph, function, dimension, precision, upperLimit);
+    processor = new PointGraphProcessor(this->resultGraph, function, dimension, precision, upperLimit);
 }
 
 AdaptiveProvess::~AdaptiveProvess(void)
 {    
-	delete pointGraph;
     delete processor;
 }
 

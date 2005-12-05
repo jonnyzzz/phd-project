@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "ProjectiveSystemFunctionDerivate.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 ProjectiveSystemFunctionDerivate::ProjectiveSystemFunctionDerivate(ISystemFunctionDerivate* function) :
   ISystemFunctionDerivate(function->getDimension()*2, function->getIteration()), function(function), 
   dimension(function->getDimension()), 

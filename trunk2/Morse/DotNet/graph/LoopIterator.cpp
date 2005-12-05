@@ -2,6 +2,15 @@
 #include "LoopIterator.h"
 #include "../graph/GraphUtil.h"
 
+/*
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+*/
+
+
 LoopIterator::LoopIterator(Graph* graph) : 
 	ExtendedMemoryManager(sizeof(NodeEx)*(16 + graph->getNumberOfNodes()/3)), 
 	graph(graph), 

@@ -40,16 +40,22 @@ GraphSet AdaptiveProcessBase::results() {
 
 
 void AdaptiveProcessBase::processNextGraph(Graph* graph) {
+	int maxCnt = graph->getNumberOfNodes()/info->Length()+1;
+	int cnt = 0;
 
     GraphNodeEnumerator en(graph);
     Node* node;
     while (node = en.next()) {
         processNode(graph, node);
+		if (cnt++ > maxCnt) {
+			cnt = 0;
+			info->Next();
+		}
     }
 }
 
 void AdaptiveProcessBase::processNode(Graph* graph, Node* node) {
-    
+    	
     ZeroMemory(b, sizeof(JInt)*(dimension+1));
 
     while (b[dimension] == 0) {

@@ -7,6 +7,13 @@
 #include "../calculator/FunctionDictionary.h"
 #include "../calculator/FunctionNodeConstant.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+
 CalculatorTest::CalculatorTest(ostream& o) : TestBase("CalculatorTest", o)
 {
 }
@@ -199,7 +206,8 @@ void CalculatorTest::TestSystemFunctionDerivateMultiple() {
 void CalculatorTest::TestSystemFunctionSegmentPojectiveExtension() {
 	FunctionFactory factory("y1=x1;y2=x2;");
 	ISystemFunctionDerivate* function = new SystemFunctionDerivate(&factory, 2, 1);
-	ISystemFunctionDerivate* exfunction = new SegmentProjectiveExtendedSystemFunction(function);
+	ISystemFunction* justFunc = new SystemFunction(&factory, 2, 1);
+	ISystemFunctionDerivate* exfunction = new SegmentProjectiveExtendedSystemFunction(function, justFunc);
 
 	double* input = function->getInput();
 	double* output = function->getOutput();
@@ -220,5 +228,6 @@ void CalculatorTest::TestSystemFunctionSegmentPojectiveExtension() {
 			   output[6] == 1 && abs(output[7]- 1) < 1e-8, "SegmentFunction Test failed");
 
 	delete function;
+	delete justFunc;
 	delete exfunction;
 }
