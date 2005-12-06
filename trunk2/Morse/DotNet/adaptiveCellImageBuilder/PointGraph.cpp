@@ -81,6 +81,8 @@ PointGraph::Node* PointGraph::AddNodeInternal(double* node) {
 
 PointGraph::Node* PointGraph::AddNode(const double* node) {
     double* myDouble = arraycopy(node);
+	
+	NormalizePoint(myDouble);
     
     return AddNodeInternal(myDouble);
 }
@@ -132,6 +134,9 @@ void PointGraph::ComputeMiddle(const double* left, const double* right, double* 
 	for (int i=0; i<dimension; i++) {
         *v++ = (*left++ + *right++)/2;
     }
+}
+
+void PointGraph::NormalizePoint(double* v) {
 }
 
 PointGraph::Node* PointGraph::split(PointGraph::Edge* edge) {

@@ -9,6 +9,17 @@
 #include "PointMethodAction.h"
 #include "AdaptiveMethodAction.h"
 
+[
+	object,
+	uuid("3D182C96-79B3-40FA-9FBA-9A384E9B3DF6"),
+	dual,	helpstring("IAdaptiveBoxMethod Interface"),
+	pointer_default(unique)
+]
+__interface IMSAdaptiveMethod : IAdaptiveMethodAction
+{
+};
+
+
 
 // CMSAdaptiveAction
 
@@ -22,7 +33,7 @@
 	helpstring("MSAdaptiveAction Class")
 ]
 class ATL_NO_VTABLE CMSAdaptiveAction : 
-	public IAdaptiveMethodAction,
+	public IMSAdaptiveMethod,
 	private ActionBaseImpl<IAdaptiveMethodParameters>
 {
 public:

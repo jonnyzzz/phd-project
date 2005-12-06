@@ -49,6 +49,8 @@ void SegmentProjectiveExtendedSystemFunctionBase::computeEx(double* v, double* d
 			output[i] /= tmp;
 		}
 	} else {
-		ZeroMemory(output, sizeof(double)*real_dimension);
+		for (int i=0; i<real_dimension; i++) {
+			output[i] = 0;
+		}
 	}
 }

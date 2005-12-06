@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Mon Dec 05 22:45:21 2005
+/* at Tue Dec 06 04:09:48 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -409,6 +409,12 @@ typedef interface IMS2DRomAction IMS2DRomAction;
 #define __IWritableSpectrumResult_FWD_DEFINED__
 typedef interface IWritableSpectrumResult IWritableSpectrumResult;
 #endif 	/* __IWritableSpectrumResult_FWD_DEFINED__ */
+
+
+#ifndef __IMSAdaptiveMethod_FWD_DEFINED__
+#define __IMSAdaptiveMethod_FWD_DEFINED__
+typedef interface IMSAdaptiveMethod IMSAdaptiveMethod;
+#endif 	/* __IMSAdaptiveMethod_FWD_DEFINED__ */
 
 
 #ifndef __IMSSegmentMetadata_FWD_DEFINED__
@@ -10287,6 +10293,166 @@ void __RPC_STUB IWritableSpectrumResult_SetMetadata_Stub(
 
 
 #endif 	/* __IWritableSpectrumResult_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMSAdaptiveMethod_INTERFACE_DEFINED__
+#define __IMSAdaptiveMethod_INTERFACE_DEFINED__
+
+/* interface IMSAdaptiveMethod */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMSAdaptiveMethod;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("3D182C96-79B3-40FA-9FBA-9A384E9B3DF6")
+    IMSAdaptiveMethod : public IAdaptiveMethodAction
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMSAdaptiveMethodVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMSAdaptiveMethod * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMSAdaptiveMethod * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMSAdaptiveMethod * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMSAdaptiveMethod * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMSAdaptiveMethod * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMSAdaptiveMethod * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMSAdaptiveMethod * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IMSAdaptiveMethod * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IMSAdaptiveMethod * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IMSAdaptiveMethod * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IMSAdaptiveMethod * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetRecomendedPrecision )( 
+            IMSAdaptiveMethod * This,
+            /* [in] */ IResultSet *in,
+            /* [in] */ int index,
+            /* [retval][out] */ double *prec);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimension )( 
+            IMSAdaptiveMethod * This,
+            /* [in] */ IResultSet *in,
+            /* [retval][out] */ int *dim);
+        
+        END_INTERFACE
+    } IMSAdaptiveMethodVtbl;
+
+    interface IMSAdaptiveMethod
+    {
+        CONST_VTBL struct IMSAdaptiveMethodVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMSAdaptiveMethod_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMSAdaptiveMethod_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMSAdaptiveMethod_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMSAdaptiveMethod_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMSAdaptiveMethod_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMSAdaptiveMethod_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMSAdaptiveMethod_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IMSAdaptiveMethod_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IMSAdaptiveMethod_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IMSAdaptiveMethod_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IMSAdaptiveMethod_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#define IMSAdaptiveMethod_GetRecomendedPrecision(This,in,index,prec)	\
+    (This)->lpVtbl -> GetRecomendedPrecision(This,in,index,prec)
+
+#define IMSAdaptiveMethod_GetDimension(This,in,dim)	\
+    (This)->lpVtbl -> GetDimension(This,in,dim)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMSAdaptiveMethod_INTERFACE_DEFINED__ */
 
 
 #ifndef __IMSSegmentMetadata_INTERFACE_DEFINED__

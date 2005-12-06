@@ -36,6 +36,9 @@ double* SegmentProjectiveExtensionMorseFunction::getOutput() {
     return &evaluation_result;
 }
 
+double SegmentProjectiveExtensionMorseFunction::Abs(double x) {
+	return x > 0 ? x : -x;
+}
 
 void SegmentProjectiveExtensionMorseFunction::evaluate() {
     function->evaluate();
@@ -45,7 +48,6 @@ void SegmentProjectiveExtensionMorseFunction::evaluate() {
     for (int i=0; i<dimension; i++) {
         norm += this->vinput[i] * this->vinput[i];
     }
-
     for (int i=0; i<dimension; i++) {
         double tmp = 0;        
         for (int j=0; j<dimension; j++) {
@@ -57,5 +59,5 @@ void SegmentProjectiveExtensionMorseFunction::evaluate() {
 	//cout<<"Eval = "<<evaluation_result<<"\n";
 	//cout<<"NormV = "<<norm<<"\n";
 
-    evaluation_result = (log(evaluation_result)-log(norm))/2;
+    evaluation_result = log(evaluation_result/norm)/2;
 }

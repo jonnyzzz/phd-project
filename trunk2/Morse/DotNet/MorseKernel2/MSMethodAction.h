@@ -24,7 +24,7 @@ __interface IMSMethodAction : IPointMethodAction
 
 [
 	coclass,
-	threading("both"),
+	threading("free"),
 	vi_progid("MorseKernel2.MSMethodAction"),
 	progid("MorseKernel2.MSMethodAction.1"),
 	version(1.0),

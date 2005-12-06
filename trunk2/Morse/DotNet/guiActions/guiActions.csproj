@@ -189,6 +189,11 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "src\actionImpl\AdaptiveMethod\MSAdaptiveAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\actionImpl\BoxMethod\BoxMethodAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

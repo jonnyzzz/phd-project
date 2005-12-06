@@ -24,6 +24,7 @@ private:
     
 
 private:
+	void Concatinate(const double* left, const double* right, double* x);
 
 
 private:

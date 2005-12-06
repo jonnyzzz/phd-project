@@ -27,4 +27,7 @@ public:
     virtual bool hasFunction() {return false;}
     virtual bool hasDerivative() {return false;}
 
+private:
+	double Abs(double x);
+
 };

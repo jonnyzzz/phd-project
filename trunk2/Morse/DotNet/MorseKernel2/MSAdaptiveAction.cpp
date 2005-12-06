@@ -48,12 +48,12 @@ STDMETHODIMP CMSAdaptiveAction::Do(IResultSet* in, IResultSet **out) {
 
 	ProgressBarNotificationAdapter pinfo(info);
 
+	HRESULT hr;
 	SmartInterface<IFunction> function;
-	parameters->GetFunction(function.extract());
+	hr = parameters->GetFunction(function.extract());
+	ATLASSERT(SUCCEEDED(hr));
 	ATLASSERT(function != NULL);
-
-    HRESULT hr;
-    
+        
 	ISystemFunctionDerivate* funcDerivate;
 	ISystemFunction* func;
     
@@ -64,7 +64,7 @@ STDMETHODIMP CMSAdaptiveAction::Do(IResultSet* in, IResultSet **out) {
 	SegmentProjectiveExtendedSystemFunction* exFunc = new SegmentProjectiveExtendedSystemFunction(funcDerivate, func);
 
     int dimension;
-	hr = function->GetDimension(&dimension);
+	hr = GetDimension(in, &dimension);
 	ATLASSERT(SUCCEEDED(hr));
    
 	cout<<"Dimension = "<<dimension<<"\n";
@@ -125,7 +125,7 @@ STDMETHODIMP CMSAdaptiveAction::GetDimension(IResultSet* in, int* dim) {
     VARIANT_BOOL test;
 	CanDo(in, &test);
 
-	if (test = VARIANT_FALSE) return E_INVALIDARG;
+	if (test == VARIANT_FALSE) return E_INVALIDARG;
 
 	GraphResultGraphIterator it(in);
 	*dim = it->getDimention();

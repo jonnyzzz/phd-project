@@ -73,14 +73,14 @@ Graph* MergeGraphs(GraphComponents* cms); /* {
 */
 
 void MSAdaptiveTest::Test() {
-	FunctionFactory fac("y1=2*x1;y2=1/2*x2;");
+	FunctionFactory fac("y1=1/2*x1;y2=2*x2;");
 
 	SmartFunction func = new SystemFunction(&fac, 2);
 	SmartDFunction dfunc = new SystemFunctionDerivate(&fac, 2);
 
 	JInt grid[] = {3,3,3,3};
-	JDouble amin[] = {-1, -1, -1, -1};
-	JDouble amax[] = {1, 1, 1, 1};
+	JDouble amin[] = {-10, -10, -1, -1};
+	JDouble amax[] = {10, 10, 1, 1};
 
 	
 	SmartGraph graph = new Graph(2, amin, amax, grid, true);
@@ -90,9 +90,9 @@ void MSAdaptiveTest::Test() {
 	ConsoleProgressBarInfo pinfo;
 
 	int factor2[] = {2, 2, 2, 2};
-	int factor[] = {2, 2, 2, 2};
+	int factor[] = {4, 4, 4, 4};
 	int ks[] = {1, 1, 2, 2};
-    int msFactor[] = {1, 1, 2,2};
+    int msFactor[] = {1, 1, 2, 2};
     int msFactor2[] = {1, 1, 2,2};
 	double precision[4];
 
@@ -129,7 +129,7 @@ void MSAdaptiveTest::Test() {
         cout<<"\n\nStarting MSAdaptiveProcess!\n\n";
 
 		for (int i=0; i<4; i++) {
-			precision[i] = cms->getAt(0)->getEps()[i]/3/msFactor[i];
+			precision[i] = cms->getAt(0)->getEps()[i]/3/msFactor2[i];
 		}
 
 		SegmentProjectiveExtendedSystemFunction jfunc(dfunc, func);        
@@ -142,7 +142,7 @@ void MSAdaptiveTest::Test() {
 		cms = (result = (pb->results()[0]))->localazeStrongComponents();
 
         cout<<"cms Length = "<<cms->length()<<"\n";
- 	}, 2);
+ 	},5);
 
 	//Morse
 	MorseResults mresult;

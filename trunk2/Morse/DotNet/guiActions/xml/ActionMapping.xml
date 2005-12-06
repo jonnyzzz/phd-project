@@ -90,10 +90,18 @@
 		<action name="ISeparatorAction" isLeaf="false"/>
 			
 		<action name="IMSCreationProcess" isLeaf="true">
-		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
+		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />		    
 		</action>
 		
-		<action name="IMSMethodAction" isLeaf="false">
+		<action name="IMSAdaptiveMethod" isLeaf="false">
+			<constraint class="DefaultConstraintFactory" metadata="IMSSegmentMetadata" result="IGraphResult" />
+			<constraint class="FixedDimensionConstraintFactory" dimension="4,6" />
+		    <nextActions>		
+				<actionReference name="ITarjanAction" isLeaf="true" />
+			</nextActions>				    
+		</action>
+		
+		<action name="IMSMethodAction" isLeaf="false" internal="true">
 		    <constraint class="DefaultConstraintFactory" metadata="IMSSegmentMetadata" result="IGraphResult" />
 		    <nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true" />
@@ -122,8 +130,8 @@
 		<action name="IMS2DRomAction" caption="Angle Projective Bundle Estimate Morse Spectrum" > You need Angle Projective Bundle Node with edges </action>
 		<action name="IProjectAction" caption="Decrease accuracy" />		
 		<action name="IMSMethodAction" caption="Segment Projective Bundle Next Step" > You need Segment Projective Bundle Node </action>
+		<action name="IMSAdaptiveMethod" caption="Adaptive Segment Projective Bundle Next Step" > You need Segment Projective Bundle Node </action>
 		<action name="IMSCreationProcess" caption="Create Segment Projective Bundle Next Step" />		
-		<action name="IMSMethodAction" caption="Segment Projective Bundle Next Step" />		
 		<action name="IMSSegmentRom" caption="Segment Projective Bundle Estimate Morse Spectrum" />		
     </names>
 

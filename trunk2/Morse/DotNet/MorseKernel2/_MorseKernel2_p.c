@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Mon Dec 05 22:45:21 2005
+/* at Tue Dec 06 04:09:48 2005
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -487,6 +487,13 @@ extern const MIDL_STUB_DESC Object_StubDesc;
 
 extern const MIDL_SERVER_INFO IWritableSpectrumResult_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IMSAdaptiveMethod_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMSAdaptiveMethod_ProxyInfo;
 
 
 extern const MIDL_STUB_DESC Object_StubDesc;
@@ -8269,6 +8276,90 @@ CInterfaceStubVtbl _IWritableSpectrumResultStubVtbl =
 };
 
 
+/* Object interface: IMSAdaptiveMethod, ver. 0.0,
+   GUID={0x3D182C96,0x79B3,0x40FA,{0x9F,0xBA,0x9A,0x38,0x4E,0x9B,0x3D,0xF6}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMSAdaptiveMethod_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    204,
+    240,
+    276,
+    318,
+    1452,
+    1500,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMSAdaptiveMethod_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMSAdaptiveMethod_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMSAdaptiveMethod_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMSAdaptiveMethod_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(13) _IMSAdaptiveMethodProxyVtbl = 
+{
+    0,
+    &IID_IMSAdaptiveMethod,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IAction::SetActionParameters */ ,
+    0 /* forced delegation IAction::SetProgressBarInfo */ ,
+    0 /* forced delegation IAction::CanDo */ ,
+    0 /* forced delegation IAction::Do */ ,
+    0 /* forced delegation IAdaptiveMethodAction::GetRecomendedPrecision */ ,
+    0 /* forced delegation IAdaptiveMethodAction::GetDimension */
+};
+
+
+static const PRPC_STUB_FUNCTION IMSAdaptiveMethod_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMSAdaptiveMethodStubVtbl =
+{
+    &IID_IMSAdaptiveMethod,
+    &IMSAdaptiveMethod_ServerInfo,
+    13,
+    &IMSAdaptiveMethod_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: IMSSegmentMetadata, ver. 0.0,
    GUID={0xEC1007B0,0xEB8F,0x4234,{0x85,0xD1,0x31,0x51,0x8B,0xBB,0xEE,0x58}} */
 
@@ -8551,6 +8642,7 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
     ( CInterfaceProxyVtbl *) &_IResultSetImplProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IMSSegmentRomProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IIsolatedSetActionProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IMSAdaptiveMethodProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IKernellImplProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IProjectActionParametersProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IComponentRegistrarProxyVtbl,
@@ -8619,6 +8711,7 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
     ( CInterfaceStubVtbl *) &_IResultSetImplStubVtbl,
     ( CInterfaceStubVtbl *) &_IMSSegmentRomStubVtbl,
     ( CInterfaceStubVtbl *) &_IIsolatedSetActionStubVtbl,
+    ( CInterfaceStubVtbl *) &_IMSAdaptiveMethodStubVtbl,
     ( CInterfaceStubVtbl *) &_IKernellImplStubVtbl,
     ( CInterfaceStubVtbl *) &_IProjectActionParametersStubVtbl,
     ( CInterfaceStubVtbl *) &_IComponentRegistrarStubVtbl,
@@ -8687,6 +8780,7 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
     "IResultSetImpl",
     "IMSSegmentRom",
     "IIsolatedSetAction",
+    "IMSAdaptiveMethod",
     "IKernellImpl",
     "IProjectActionParameters",
     "IComponentRegistrar",
@@ -8792,6 +8886,7 @@ const IID *  __MorseKernel2_BaseIIDList[] =
     &IID_IDispatch,
     &IID_IDispatch,
     &IID_IDispatch,
+    &IID_IDispatch,
     0
 };
 
@@ -8802,13 +8897,13 @@ int __stdcall __MorseKernel2_IID_Lookup( const IID * pIID, int * pIndex )
 {
     IID_BS_LOOKUP_SETUP
 
-    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 63, 32 )
+    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 64, 32 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 16 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 8 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 4 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 2 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 1 )
-    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 63, *pIndex )
+    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 64, *pIndex )
     
 }
 
@@ -8819,7 +8914,7 @@ const ExtendedProxyFileInfo _MorseKernel2_ProxyFileInfo =
     (const PCInterfaceName * ) & __MorseKernel2_InterfaceNamesList,
     (const IID ** ) & __MorseKernel2_BaseIIDList,
     & __MorseKernel2_IID_Lookup, 
-    63,
+    64,
     2,
     0, /* table of [async_uuid] interfaces */
     0, /* Filler1 */

@@ -11,7 +11,7 @@ static char THIS_FILE[] = __FILE__;
 SegmentPointGraph::SegmentPointGraph(Graph* graph, ISystemFunction* function, int dimension, size_t upperLimit) : 
 PointGraph(function, dimension, upperLimit), graph(graph)
 {
-	ATLASSERT(dimension > 0);
+	ATLASSERT(dimension > 0);	
 }
 
 SegmentPointGraph::~SegmentPointGraph(void)
@@ -30,7 +30,7 @@ double SegmentPointGraph::ProjDistance(double left, double right) {
 bool SegmentPointGraph::NeedDevideEdge(const double* left, const double* right, const double* precision) {
 	if (!graph->intersects(left, dimension) || !graph->intersects(right, dimension)) 
         return false;
-	return ProjDistance(left, right) > precision[0]/3;
+	return ProjDistance(left, right) > precision[0];
 }
 
 double SegmentPointGraph::ProjDistance(const double* left, const double* right) {
@@ -38,9 +38,10 @@ double SegmentPointGraph::ProjDistance(const double* left, const double* right) 
 	bool used = false;
 
 	for (int k=0; k<dimension; k++) {
-		double l = 0;
+		double l = 0;		
 		for (int i=0; i<dimension; i++) {
-			l += Abs(left[i]/left[k] - right[i]/right[k]);
+			double tmp = Abs(left[i]/left[k] - right[i]/right[k]);
+			if (tmp > l) l = tmp;
 		}
 		if (!used || dist > l)  {
 			used = true;
@@ -52,13 +53,15 @@ double SegmentPointGraph::ProjDistance(const double* left, const double* right) 
 
 void SegmentPointGraph::ComputeMiddle(const double* left, const double* right, double* v)
 {
+	//*
 	int index = -1;
 	double dist;
 
 	for (int k=0; k<dimension; k++) {
 		double l = 0;
 		for (int i=0; i<dimension; i++) {
-			l += Abs(left[i]/left[k] - right[i]/right[k]);
+			double tmp = Abs(left[i]/left[k] - right[i]/right[k]);
+			if (tmp > l) l = tmp;
 		}
 		if (index == -1  || dist > l)  {
 			dist = l;
@@ -66,17 +69,37 @@ void SegmentPointGraph::ComputeMiddle(const double* left, const double* right, d
 		}
 	}
 
-	int amax = 0;
 	for (int i = 0; i< dimension; i++) {
 		v[i] = (left[i]/left[index] + right[i]/right[index])/2;		
+	}
+	//*/
+
+	/*
+	for (int i = 0; i< dimension; i++) {
+		v[i] = (left[i] + right[i])/2;		
+	}
+	//*/
+}
+
+void SegmentPointGraph::NormalizePoint(double* v) 
+{	
+	int amax = 0;
+	for (int i=0; i<dimension; i++) {
 		if (Abs(v[amax]) < Abs(v[i])) {
 			amax = i;
 		}
 	}
+
 	double tmp = v[amax];
-	for (int i=0; i<dimension; i++) {
-		v[i] /= amax;
-	}
+	if (Abs(tmp) > 1e-8) {
+		for (int i=0; i<dimension; i++) {
+			v[i] /= tmp;
+		}
+	} else {
+		for (int i=0; i<dimension; i++) {
+			v[i] = 0;
+		}
+	}	
 }
 
 

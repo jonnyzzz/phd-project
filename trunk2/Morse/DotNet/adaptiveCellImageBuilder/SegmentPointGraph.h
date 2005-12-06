@@ -15,6 +15,7 @@ protected:
     virtual void EdgeLength(const double* left, const double* right, double* lengths);
 
 	virtual void ComputeMiddle(const double* left, const double* right, double* v);
+	virtual void NormalizePoint(double* v);
 
 protected:
 	double ProjDistance(const double* left, const double* right);

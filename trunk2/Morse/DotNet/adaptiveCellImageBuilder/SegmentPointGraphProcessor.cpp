@@ -59,13 +59,9 @@ void SegmentPointGraphProcessor::ProcessNode(Node* node) {
 	pointGraphBase->Reset();
 	pointGraphProj->Reset();
 
-	cout<<"Node : ";
-	for (int i=0; i<dimension; i++) {
+	for (int i=0; i<dimensionBase; i++) {
         input[i] = graph->toExternal(graph->getCells(node)[i],i) + graph->getEps()[i]/2;
-		cout<<input[i]<<" ";
     }
-	cout<<endl;
-
 	function->SetProjectiveCenter();
 
     for (int i=0; i<dimension; i++) {
@@ -76,7 +72,6 @@ void SegmentPointGraphProcessor::ProcessNode(Node* node) {
     
 	bool baseResult = pointGraphBase->Iterate(precision);
 	bool projResult = pointGraphProj->Iterate(&precision[dimensionBase]);
-
 
 	if (baseResult && projResult) {
 		const PointGraph::NodeList& listBase = pointGraphBase->Points();        
@@ -91,7 +86,6 @@ void SegmentPointGraphProcessor::ProcessNode(Node* node) {
         for (PointGraph::NodeList::const_iterator itBase = listBase.begin(); itBase != listBase.end(); ++itBase) {
 			const PointGraph::NodeList& listProj = pointGraphProj->Points();
 			for (PointGraph::NodeList::const_iterator itProj = listProj.begin(); itProj != listProj.end(); ++itProj) {
-
 				if (pointGraphBase->IsCheckedNode(*itBase) && pointGraphProj->IsCheckedNode(*itProj)) {
 					AddCheckedNode(node, (*itBase)->valueCache, (*itProj)->valueCache);
 				} else { 
@@ -104,26 +98,25 @@ void SegmentPointGraphProcessor::ProcessNode(Node* node) {
 
 
 void SegmentPointGraphProcessor::AddCheckedNode(Node* graphNode, double* base, double* proj) {
-	memcpy(x, base, sizeof(double)*dimensionBase);
-	memcpy(&x[dimensionBase], proj, sizeof(double)*dimensionBase);
+	Concatinate(base, proj, x0);
 
-	/*
-	cout<<"--->to :";
-	for (int i=0; i<dimension; i++) {
-		cout<<x[i]<<" ";
+    graph->addEdgeWithOverlaping(graphNode, x0, overlap1, overlap2);
+}
+
+void SegmentPointGraphProcessor::Concatinate(const double* left, const double* right, double* x) {
+	for (int i=0; i<dimensionBase; i++) {
+		x[i] = *left++;
+	} 
+	for (int i=dimensionBase; i<dimension; i++) {
+		x[i] = *right++;
 	}
-	cout<<endl;
-	//*/
-
-    graph->addEdgeWithOverlaping(graphNode, x, overlap1, overlap2);
 }
 
 void SegmentPointGraphProcessor::AddNonCheckedNode(Node* node, PointGraph::Node* base, PointGraph::Node* proj) {
-	memcpy(x, base->valueCache, sizeof(double)*dimensionBase);
-	memcpy(&x[dimensionBase], proj->valueCache, sizeof(double)*dimensionBase);
+	Concatinate(base->valueCache, proj->valueCache, x0);
 
 	pointGraphBase->NodeLength(base, radius);
 	pointGraphProj->NodeLength(proj, &radius[dimensionBase]);
 
-    graph->addEdgesRadius(node, x, radius);
+    graph->addEdgesRadius(node, x0, radius);
 }

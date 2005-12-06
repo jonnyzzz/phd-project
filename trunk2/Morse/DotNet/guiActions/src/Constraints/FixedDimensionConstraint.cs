@@ -9,7 +9,14 @@ namespace EugenePetrenko.Gui2.Actions.Constraints
     {
         public IConstraint CreateConstraint(XmlNode constraintNode)
         {
-            return new FixedDimensionConstraint(int.Parse(constraintNode.Attributes["dimension"].Value));
+        	string value = constraintNode.Attributes["dimension"].Value;
+			string[] data = value.Split(',');
+			int[] ints = new int[data.Length];
+			for (int i=0; i<data.Length; i++)
+			{
+				ints[i] = int.Parse(data[i]);
+			}
+        	return new FixedDimensionConstraint(ints);
         }
     }
 
@@ -18,7 +25,7 @@ namespace EugenePetrenko.Gui2.Actions.Constraints
     /// </summary>
     public class FixedDimensionConstraint : IConstraint
     {
-        private int dimension;
+        private int[] dimensions;
 
         public bool Match(ResultSet resultSet)
         {
@@ -27,8 +34,14 @@ namespace EugenePetrenko.Gui2.Actions.Constraints
                 if (result is IGraphResult)
                 {
                     IGraphResult graphResult = (IGraphResult) result;
-                    if (graphResult.GetGraphInfo().GetDimension() != dimension)
-                        return false;
+					bool succ = false;
+                	foreach (int dimention in dimensions)
+                	{
+                		if (graphResult.GetGraphInfo().GetDimension() == dimention)
+							succ = true;
+                	}                	
+                    if (!succ) 
+						return false;
                 }
                 else
                 {
@@ -38,9 +51,9 @@ namespace EugenePetrenko.Gui2.Actions.Constraints
             return true;
         }
 
-        public FixedDimensionConstraint(int dimension)
+        public FixedDimensionConstraint(params int[] dimension)
         {
-            this.dimension = dimension;
+            this.dimensions = dimension;
         }
     }
 }
