@@ -75,6 +75,7 @@
 				EnableIntrinsicFunctions="TRUE"
 				FavorSizeOrSpeed="1"
 				OptimizeForProcessor="2"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="3"
@@ -272,6 +273,9 @@
 				RelativePath=".\MS2DSIMorseTest.cpp">
 			</File>
 			<File
+				RelativePath=".\MSAdaptive3DTest.cpp">
+			</File>
+			<File
 				RelativePath=".\MSAdaptiveTest.cpp">
 			</File>
 			<File
@@ -353,6 +357,9 @@
 			</File>
 			<File
 				RelativePath=".\MS2DSIMorseTest.h">
+			</File>
+			<File
+				RelativePath=".\MSAdaptive3DTest.h">
 			</File>
 			<File
 				RelativePath=".\MSAdaptiveTest.h">
