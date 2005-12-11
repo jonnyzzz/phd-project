@@ -14,7 +14,13 @@ public:
 
 protected:
     virtual void processResultNode(Node* node);
+	virtual void initB(JInt* b, const JInt* coords);
 
 private:
 	SegmentPointGraphProcessor* processor;
+	
+	JInt* grid;
+	JInt* division;
+	int dimBase;
+	int dim;
 };

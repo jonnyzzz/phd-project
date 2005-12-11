@@ -17,6 +17,8 @@ public:
 protected:
     void processNode(Graph* graph, Node* node);
     virtual void processResultNode(Node* node) = 0;
+	
+	virtual void initB(JInt* b, const JInt* node);
     
 private:
     Graph* rootGraph;

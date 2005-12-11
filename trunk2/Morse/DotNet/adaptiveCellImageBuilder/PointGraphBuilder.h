@@ -6,7 +6,7 @@
 class PointGraphBuilder
 {
 public:
-    PointGraphBuilder(int ldimension, int udimention, const double* eps, PointGraph& graph);
+    PointGraphBuilder(int ldimension, int udimention, const double* eps, PointGraph* graph);
     ~PointGraphBuilder(void);
 
 public:
@@ -21,7 +21,7 @@ private:
 
 	const int dim;
 
-    PointGraph& graph;
+    PointGraph* graph;
 };
 
 #endif //_ADAPTIVECELLIMAGEBULDERS_POINT_GRAPH_BUIDER_H

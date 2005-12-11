@@ -14,6 +14,7 @@
 #include "../cellImageBuilders/onsoleProgressBarInfo.h"
 
 #include "../AdaptiveCellImageBuilder/SegmentAdaptiveProcess.h"
+#include "../AdaptiveCellImageBuilder/SegmentCreationProcess.h"
 #include "../SystemFunction/SegmentProjectiveExtendedSystemFunction.h"
 #include "../SystemFunction/SegmentProjectiveExtensionMorseFunction.h"
 
@@ -42,6 +43,7 @@ typedef smartPointer<GraphComponents> SmartComponents;
 typedef smartPointer<ISystemFunctionDerivate> SmartDFunction;
 typedef smartPointer<AbstractProcess> SmartProcess;
 typedef smartPointer<IMorseFunction> SmartMFunction;
+typedef smartPointer<FunctionFactory> SmartFactory;
 
 typedef pair<double, double> MorsePair;
 typedef list< MorsePair > MorseResults;
@@ -52,14 +54,14 @@ typedef list< MorsePair > MorseResults;
 Graph* MergeGraphs(GraphComponents* cms);
 
 void MSAdaptive3DTest::Test() {
-	FunctionFactory fac("y1=1/2*x1;y2=2*x2;y3=0;");
+	FunctionFactory* fac = new FunctionFactory("y1=1/2*x1;y2=2*x2;y3=1/2*x3;");
 
-	SmartFunction func = new SystemFunction(&fac, 3);
-	SmartDFunction dfunc = new SystemFunctionDerivate(&fac, 3);
+	SmartFunction func = new SystemFunction(fac, 3);
+	SmartDFunction dfunc = new SystemFunctionDerivate(fac, 3);
 
-	JInt grid[] = {1,1,1,1,1,1};
+	JInt grid[] =    {  1,   1,   1,  1,  1, 1};
 	JDouble amin[] = {-10, -10, -10, -1, -1,-1};
-	JDouble amax[] = {10, 10, 10, 1, 1, 1};
+	JDouble amax[] = { 10,  10,  10,  1,  1, 1};
 
 	
 	SmartGraph graph = new Graph(3, amin, amax, grid, true);
@@ -71,8 +73,8 @@ void MSAdaptive3DTest::Test() {
 	int factor2[] = {2, 2, 2, 2, 2, 2};
 	int factor[] = {4, 4, 4, 4, 4, 4};
 	int ks[] = {1, 1, 1, 2, 2, 2};
-    int msFactor[] = {1, 1, 1, 2, 2, 2};
-    int msFactor2[] = {1, 1, 1, 2, 2, 2};
+    int msFactor[] =  {1, 1, 1, 1, 1, 1};
+    int msFactor2[] = {1, 1, 1, 1, 1, 1};
 	double precision[6];
 
 	//SI image step
@@ -86,7 +88,7 @@ void MSAdaptive3DTest::Test() {
 
     cout<<"SI Components:"<<cms->length()<<"\n";
     	
-	SmartProcess proc = new SegmentProjectiveBundleMSCreationProcess(aResult, msFactor, &pinfo);
+	SmartProcess proc = new SegmentCreationProcess(aResult, msFactor, &pinfo);
 	proc->start();
 	for (int i=0; i<cms->length(); i++) {
 		proc->processNextGraph(cms->getAt(i));
@@ -130,9 +132,9 @@ void MSAdaptive3DTest::Test() {
 		cms->getAt(i)->resolveEdges(result);
 
 		MorsePair apair;
-		SegmentProjectiveExtensionMorseFunction jfunc(dfunc);
+		SegmentProjectiveExtensionMorseFunction* jfunc = new SegmentProjectiveExtensionMorseFunction(dfunc);
 
-        CRomFunction2N* rom = new CRomFunction2N(&jfunc, cms->getAt(i));
+        CRomFunction2N* rom = new CRomFunction2N(jfunc, cms->getAt(i));
 
 		rom->minimize();
 		cout<<"Minimim = "<<(apair.first = rom->getAnswer())<<"\t";
@@ -140,6 +142,7 @@ void MSAdaptive3DTest::Test() {
 		cout<<"Maximum = "<<(apair.second = rom->getAnswer())<<"\n";
 
 		delete rom;
+		delete jfunc;
 
 		mresult.push_back(apair);
 	}
@@ -155,4 +158,8 @@ void MSAdaptive3DTest::Test() {
 		cout<<"Minimim = "<<apair.first<<"\t";
 		cout<<"Maximum = "<<apair.second<<"\n";
 	}
+
+	pinfo.Next();
+
+	delete fac;
 }

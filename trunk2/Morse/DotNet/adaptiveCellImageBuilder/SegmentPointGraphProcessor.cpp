@@ -2,7 +2,9 @@
 #include ".\segmentpointgraphprocessor.h"
 
 #include "IntersectingPointGraph.h"
+#include "PointGraph.h"
 #include "SegmentPointGraph.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -20,8 +22,8 @@ SegmentPointGraphProcessor::SegmentPointGraphProcessor(Graph* graph, SegmentProj
   dimensionBase(dimension / 2),
   pointGraphBase(new IntersectingPointGraph(graph, function->GetBaseFunction(), dimensionBase, upperLimit)),
   pointGraphProj(new SegmentPointGraph(graph, function->GetProjectiveFunction(), dimensionBase, upperLimit)),
-  pointGraphBuilderBase(0, dimensionBase, graph->getEps(), *pointGraphBase),
-  pointGraphBuilderProj(dimensionBase, dimension, graph->getEps(), *pointGraphProj)
+  pointGraphBuilderBase(0, dimensionBase, graph->getEps(), pointGraphBase),
+  pointGraphBuilderProj(dimensionBase, dimension, graph->getEps(), pointGraphProj)
 {
 	ATLASSERT(dimensionBase > 0 && dimensionBase < dimension);
 
@@ -32,10 +34,12 @@ SegmentPointGraphProcessor::SegmentPointGraphProcessor(Graph* graph, SegmentProj
     overlap1 = new JDouble[dimension];
     overlap2 = new JDouble[dimension];
     this->precision = new JDouble[dimension];
+	dGrid = new JInt[dimension];
     for (int i=0; i<dimension; i++) {
         this->precision[i] = precision[i];
         overlap1[i] = precision[i];
         overlap2[i] = precision[i];
+		dGrid[i] = graph->getGrid()[i] - 1;
     }    
     radius = new JDouble[dimension];
 }
@@ -59,17 +63,57 @@ void SegmentPointGraphProcessor::ProcessNode(Node* node) {
 	pointGraphBase->Reset();
 	pointGraphProj->Reset();
 
+	const JInt* cells = graph->getCells(node);
+
 	for (int i=0; i<dimensionBase; i++) {
-        input[i] = graph->toExternal(graph->getCells(node)[i],i) + graph->getEps()[i]/2;
+        input[i] = graph->toExternal(cells[i],i) + graph->getEps()[i]/2;
     }
 	function->SetProjectiveCenter();
-
-    for (int i=0; i<dimension; i++) {
-        x[i] = graph->toExternal(graph->getCells(node)[i],i);		
+	
+    for (int i=0; i<dimensionBase; i++) {		
+        x[i] = graph->toExternal(cells[i],i);		
     }   
+	int index = -1;
+	for (int i = dimensionBase; i<dimension; i++) {
+		if (index == -1 && cells[i] == dGrid[i]) {
+			index = i;
+		}
+		x[i] = graph->toExternal(cells[i],i);
+	}
+
+	/*
+	cout<<"x[] = ";
+	for(int i=0; i<dimension; i++) {
+		cout<<x[i]<<", ";
+	}
+	cout<<endl<<endl;
+	*/
+
+	if (index == -1) {
+		index = pointGraphProj->NormalizePointExt(&x[dimensionBase]);
+	} else {
+		x[index] = 1;
+		index -= dimensionBase;
+	}
+	
+	/*
+	cout<<"x[] = ";
+	for(int i=0; i<dimension; i++) {
+		cout<<x[i]<<", ";
+	}
+	cout<<endl<<endl;
+	*/
+
     pointGraphBuilderBase.BuildInitialGraph(x);
-	pointGraphBuilderProj.BuildInitialGraph(x);
-    
+	pointGraphBuilderProj.BuildInitialGraph(x,index);
+	
+	/*
+	cout<<"Base: "<<endl;
+	pointGraphBase->Dump(cout);
+	cout<<"Proj: "<<endl;
+	pointGraphProj->Dump(cout);
+	*/
+
 	bool baseResult = pointGraphBase->Iterate(precision);
 	bool projResult = pointGraphProj->Iterate(&precision[dimensionBase]);
 
@@ -77,6 +121,7 @@ void SegmentPointGraphProcessor::ProcessNode(Node* node) {
 		const PointGraph::NodeList& listBase = pointGraphBase->Points();        
         for (PointGraph::NodeList::const_iterator itBase = listBase.begin(); itBase != listBase.end(); ++itBase) {
 			const PointGraph::NodeList& listProj = pointGraphProj->Points();
+			//cout<<"\nLength = "<<listProj.size()<<endl;
 			for (PointGraph::NodeList::const_iterator itProj = listProj.begin(); itProj != listProj.end(); ++itProj) {
 				AddCheckedNode(node, (*itBase)->valueCache, (*itProj)->valueCache);
 			}
@@ -94,6 +139,12 @@ void SegmentPointGraphProcessor::ProcessNode(Node* node) {
 			}
         }
 	}
+
+	/*
+	pointGraphProj->Dump(cout);
+
+	;
+	*/
 }
 
 

@@ -2,9 +2,12 @@
 #include "../SystemFunction/ISystemFunction.h"
 #include <list>
 using namespace std;
-#include "PointGraph.h"
+class PointGraph;
+class SegmentPointGraph;
+
 #include "../graph/Graph.h"
 #include "PointGraphBuilder.h"
+#include "SegmentPointGraphBuilder.h"
 #include "../SystemFunction/SegmentProjectiveExtendedSystemFunction.h"
 
 class SegmentPointGraphProcessor
@@ -38,16 +41,17 @@ private:
 	int dimensionBase;
 
     PointGraph* pointGraphBase; 
-	PointGraph* pointGraphProj;
+	SegmentPointGraph* pointGraphProj;
     PointGraphBuilder pointGraphBuilderBase;
-	PointGraphBuilder pointGraphBuilderProj;
+	SegmentPointGraphBuilder pointGraphBuilderProj;
 
     JDouble* x;
     JDouble* x0;
     JDouble* radius;
     JInt* b;
     JInt* a;
-
+	JInt* dGrid;
+    
     double* precision;
     double* overlap1;
     double* overlap2;  

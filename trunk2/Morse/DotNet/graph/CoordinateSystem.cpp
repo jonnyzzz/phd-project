@@ -147,7 +147,7 @@ bool CoordinateSystem::intersects(const JDouble* Min, const JDouble* Max) const 
 }
 
 bool CoordinateSystem::intersects(const JInt* cell) const{
-   for (int i=0; i<dimention; i++) {
+   for (int i=0; i<dimention; i++) {	   
       if ((cell[i] < 0) || (cell[i] >=  grid[i])) return false;
    }
    return true;

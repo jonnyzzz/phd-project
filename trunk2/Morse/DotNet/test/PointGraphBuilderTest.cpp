@@ -52,7 +52,7 @@ void PointGraphBuilderTest::Test() {
     JDouble eps[] = {1,1,1};
     smartPointer<ISystemFunction> func = new MyFunction<3>();
     PointGraph pg(func, func->getFunctionDimension(), 0);
-    PointGraphBuilder pgb(0, func->getFunctionDimension(), eps, pg);
+    PointGraphBuilder pgb(0, func->getFunctionDimension(), eps, &pg);
 
     JDouble x[] = {0,0,0};
 

@@ -134,7 +134,13 @@
 				RelativePath=".\SegmentAdaptiveProcess.cpp">
 			</File>
 			<File
+				RelativePath=".\SegmentCreationProcess.cpp">
+			</File>
+			<File
 				RelativePath=".\SegmentPointGraph.cpp">
+			</File>
+			<File
+				RelativePath=".\SegmentPointGraphBuilder.cpp">
 			</File>
 			<File
 				RelativePath=".\SegmentPointGraphProcessor.cpp">
@@ -184,7 +190,13 @@
 				RelativePath=".\SegmentAdaptiveProcess.h">
 			</File>
 			<File
+				RelativePath=".\SegmentCreationProcess.h">
+			</File>
+			<File
 				RelativePath=".\SegmentPointGraph.h">
+			</File>
+			<File
+				RelativePath=".\SegmentPointGraphBuilder.h">
 			</File>
 			<File
 				RelativePath=".\SegmentPointGraphProcessor.h">

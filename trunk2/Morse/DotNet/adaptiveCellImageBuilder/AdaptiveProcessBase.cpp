@@ -54,13 +54,19 @@ void AdaptiveProcessBase::processNextGraph(Graph* graph) {
     }
 }
 
+void AdaptiveProcessBase::initB(JInt* b, const JInt*) {
+	ZeroMemory(b, sizeof(JInt)*(dimension+1));
+}
+
 void AdaptiveProcessBase::processNode(Graph* graph, Node* node) {
-    	
-    ZeroMemory(b, sizeof(JInt)*(dimension+1));
+    
+	const JInt* cache = graph->getCells(node);
+
+    initB(b, cache);
 
     while (b[dimension] == 0) {
         for (int i=0; i<dimension; i++) {
-            x[i] = graph->getCells(node)[i]*division[i] + b[i];
+            x[i] = cache[i]*division[i] + b[i];
         }
 
         Node* resultNode = resultGraph->browseTo(x);

@@ -31,5 +31,6 @@ bool ProgressBarNotificationAdapter::NeedStop() {
 }
 
 void ProgressBarNotificationAdapter::Next() {
+	cout<<".";
 	this->notification->Next();
 }

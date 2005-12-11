@@ -34,6 +34,7 @@ bool SegmentPointGraph::NeedDevideEdge(const double* left, const double* right, 
 }
 
 double SegmentPointGraph::ProjDistance(const double* left, const double* right) {
+	/*
 	double dist;
 	bool used = false;
 
@@ -49,11 +50,21 @@ double SegmentPointGraph::ProjDistance(const double* left, const double* right) 
 		}
 	}	
     return dist;
+
+	//*/
+
+	double dist = 0;
+	for(int i=0; i<dimension; i++){
+		double t = Abs(left[i] - right[i]);
+		if (dist < t)
+			dist = t;		
+	}
+	return dist;
 }
 
 void SegmentPointGraph::ComputeMiddle(const double* left, const double* right, double* v)
 {
-	//*
+	/*
 	int index = -1;
 	double dist;
 
@@ -74,14 +85,14 @@ void SegmentPointGraph::ComputeMiddle(const double* left, const double* right, d
 	}
 	//*/
 
-	/*
+	//*
 	for (int i = 0; i< dimension; i++) {
 		v[i] = (left[i] + right[i])/2;		
 	}
 	//*/
 }
 
-void SegmentPointGraph::NormalizePoint(double* v) 
+int SegmentPointGraph::NormalizePointExt(double* v) 
 {	
 	int amax = 0;
 	for (int i=0; i<dimension; i++) {
@@ -100,6 +111,12 @@ void SegmentPointGraph::NormalizePoint(double* v)
 			v[i] = 0;
 		}
 	}	
+
+	return amax;
+}
+
+void SegmentPointGraph::NormalizePoint(double* v) {
+	NormalizePointExt(v);
 }
 
 

@@ -11,7 +11,7 @@ static char THIS_FILE[] = __FILE__;
 
 PointGraphProcessor::PointGraphProcessor(Graph* graph, ISystemFunction *function, int dimension, double* precision, size_t upperLimit)
 : graph(graph), dimension(dimension), pointGraph(new IntersectingPointGraph(graph, function, dimension, upperLimit)),
-  pointGraphBuilder(0, dimension, graph->getEps(), *pointGraph)
+  pointGraphBuilder(0, dimension, graph->getEps(), pointGraph)
 {
 	ATLASSERT(dimension > 0);
 
@@ -40,7 +40,7 @@ PointGraphProcessor::~PointGraphProcessor(void)
     delete[] overlap2;
     delete[] precision;
     delete[] radius;
-	delete[] pointGraph;
+	delete pointGraph;
 }
 
 

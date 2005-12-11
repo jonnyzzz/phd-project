@@ -44,6 +44,8 @@ protected:
     virtual void EdgeLength(const double* left, const double* right, double* lengths);
 
 	virtual void ComputeMiddle(const double* left, const double* right, double* v);
+
+public:
 	virtual void NormalizePoint(double* v);
 
 public:

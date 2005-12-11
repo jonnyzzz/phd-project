@@ -14,11 +14,32 @@ SegmentAdaptiveProcess::SegmentAdaptiveProcess(SegmentProjectiveExtendedSystemFu
 : AdaptiveProcessBase(function, graph, division, precision, info)
 {	
 	processor = new SegmentPointGraphProcessor(this->resultGraph, function, graph->getDimention(), precision, upperLimit);
+	dim = graph->getDimention();
+	dimBase = dim/2;
+	grid = new JInt[dim];
+	this->division = new JInt[dim];
+	for(int i=0; i<dim; i++) {
+		//see CoordinateSystem.cpp :: Interfsects(JInt*) for details
+		grid[i] = graph->getGrid()[i]-1;
+		this->division[i] = division[i] - 1;
+	}
 }
 
 SegmentAdaptiveProcess::~SegmentAdaptiveProcess(void)
 {
+	delete[] grid;
+	delete[] division;
 	delete processor;
+}
+
+void SegmentAdaptiveProcess::initB(JInt* b, const JInt* cell) {
+	for (int i=0; i<dimBase; i++) {
+		b[i] = 0;
+	}
+	for (int i=dimBase; i<dim; i++) {
+		b[i] = (b[i] == grid[i]) ? this->division[i] : 0;
+	}
+	b[dim] = 0;
 }
 
 void SegmentAdaptiveProcess::processResultNode(Node* node) {    

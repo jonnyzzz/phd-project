@@ -52,7 +52,7 @@ private:
 	const int nodeHashMax;
 	const int edgeHashMax;
 
-private:
+public:
 	static int getNodeHashMax(int nodes);
 	
 
