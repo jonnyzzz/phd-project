@@ -74,7 +74,7 @@ void MSAdaptive3DTest::Test() {
 	int factor[] = {4, 4, 4, 4, 4, 4};
 	int ks[] = {1, 1, 1, 2, 2, 2};
     int msFactor[] =  {1, 1, 1, 1, 1, 1};
-    int msFactor2[] = {1, 1, 1, 1, 1, 1};
+    int msFactor2[] = {1, 1, 1, 2, 2, 2};
 	double precision[6];
 
 	//SI image step
@@ -114,7 +114,7 @@ void MSAdaptive3DTest::Test() {
 		}
 
 		SegmentProjectiveExtendedSystemFunction jfunc(dfunc, func);        
-		SmartProcess pb = new SegmentAdaptiveProcess(&jfunc, cms->getAt(0), msFactor2, precision, 0, &pinfo);
+		SmartProcess pb = new SegmentAdaptiveProcess(&jfunc, cms->getAt(0), msFactor2, precision, 15, &pinfo);
 		pb->start();
 		for (int i=0; i<cms->length(); i++) {
 			pb->processNextGraph(cms->getAt(i));
