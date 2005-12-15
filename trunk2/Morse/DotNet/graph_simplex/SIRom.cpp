@@ -42,15 +42,21 @@ double inline SIRom::exhaussDet() {
 	
 	//gaus method for triangle matrix
 
-	
-	if (dimension == 2) {	
-		return getAt(0,0)*getAt(1,1)-getAt(1,0)*getAt(0,1);
-	} else if (dimension == 3) {
-		return  getAt(0,0) * ( getAt(1,1)*getAt(2,2) - getAt(2,1)*getAt(1,2))
-			   -getAt(1,0) * ( getAt(0,1)*getAt(2,2) - getAt(2,1)*getAt(0,2))
-			   +getAt(2,0) * ( getAt(0,1)*getAt(1,2) - getAt(1,1)*getAt(2,0));
-	} else {
-		ASSERT(FALSE);
+	switch (dimension) {
+		case 1:
+			return getAt(0,0);
+		case 2:
+			return getAt(0,0)*getAt(1,1)-getAt(1,0)*getAt(0,1);
+		case 3:
+			//maple generated
+			return getAt(0,0)*getAt(1,1)*getAt(2,2)
+			  -getAt(0,0)*getAt(1,2)*getAt(2,1)			  
+			  +getAt(1,0)*getAt(0,2)*getAt(2,1)
+			  -getAt(1,0)*getAt(0,1)*getAt(2,2)
+			  +getAt(2,0)*getAt(0,1)*getAt(1,2)
+			  -getAt(2,0)*getAt(0,2)*getAt(1,1);
+		default:
+			ASSERT(false);
 	}
 
 	return 0;
