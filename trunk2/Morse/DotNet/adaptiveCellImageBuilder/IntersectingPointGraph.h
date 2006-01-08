@@ -14,5 +14,5 @@ private:
 private:
     double Abs(double x);
 protected:
-    virtual bool NeedDevideEdge(const double* left, const double* right, const double* precision);
+    virtual PointGraphAction NeedDevideEdge(const double* left, const double* right, const double* precision);
 };

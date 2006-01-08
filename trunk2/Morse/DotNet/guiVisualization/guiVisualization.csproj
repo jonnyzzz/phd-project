@@ -186,7 +186,7 @@
                 />
                 <File
                     RelPath = "src\actionImpl\GnuPlot2\GnuPlotParameters.cs"
-                    SubType = "Code"
+                    SubType = "UserControl"
                     BuildAction = "Compile"
                 />
                 <File
@@ -230,6 +230,16 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "src\actionImpl\GnuPlot2\ShowStyleControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\ShowStyleControl.resx"
+                    DependentUpon = "ShowStyleControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "src\KernelAction\EmptyResultSet.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -261,11 +271,6 @@
                 />
                 <File
                     RelPath = "src\KernelAction\GnuPlot2\GnuPlotAction.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\KernelAction\GnuPlot2\GnuPlotScriptGen.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

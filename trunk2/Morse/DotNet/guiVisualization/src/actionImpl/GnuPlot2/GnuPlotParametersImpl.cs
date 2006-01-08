@@ -1,5 +1,6 @@
 using System;
 using EugenePetrenko.Gui2.Kernell2.Container;
+using EugenePetrenko.Gui2.MorseKernel2;
 using EugenePetrenko.Gui2.Visualization.KernelAction;
 using EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot;
 
@@ -11,17 +12,19 @@ namespace EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2
 	public class GnuPlotParametersImpl : IGnuPlotScriptGenParameters, IGnuPlotVisualizationKernelParameters
 	{
 	    private string fileName;
-	    private int width;
+		private int width;
 	    private int height;
 	    private bool showHistory;
 	    private bool needFile;
 	    private bool needShow;
 	    private bool showBoxes;
+		private string showStyle;
 
-	    public GnuPlotParametersImpl(string fileName, int width, int height, bool showHistory, bool needFile, bool needShow, bool showBoxes)
+		public GnuPlotParametersImpl(string fileName, string showStyle, int width, int height, bool showHistory, bool needFile, bool needShow, bool showBoxes)
 	    {
 	        this.fileName = fileName;
-	        this.width = width;
+			this.showStyle = showStyle;
+			this.width = width;
 	        this.height = height;
 	        this.showHistory = showHistory;
 	        this.needFile = needFile;
@@ -80,5 +83,11 @@ namespace EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2
 	    {
 	        get { return showBoxes; }
 	    }
-    }
+
+		public string ShowStyle(IResult result)
+		{
+			return showStyle;
+		}
+
+	}
 }

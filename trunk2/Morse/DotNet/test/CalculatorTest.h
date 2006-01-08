@@ -12,7 +12,7 @@ public:
 public:
     virtual void Test();
 
-protected:
+public:
     void TestMax();
     void TestMaxCompiled();
     void TestComputation(double x, double y, double z);
@@ -22,6 +22,8 @@ protected:
     void TestSystemFunctionIteration(int n);
 
     void TestSystemFunctionDerivate();
+	
+	void TestSystemFunctionDerivate2();
 
     void TestSystemFunctionDerivateMultiple();
 

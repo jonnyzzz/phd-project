@@ -422,7 +422,9 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
         public void OpenNewDocument(Document.Document document)
         {
+			//TODO: Save Expand State
             Runner.Runner.Instance.Document = document;
+			
             tree.Root = document.RootNode;
             tree.Root.ExpandAll();
         }

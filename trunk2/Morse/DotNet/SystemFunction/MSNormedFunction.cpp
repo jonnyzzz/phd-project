@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MSNormedFunction.h"
+#include "math.h"
 
 MSNormedFunction::MSNormedFunction(ISystemFunctionDerivate* function) : 
 function(function), dimension(function->getFunctionDimension()),
@@ -25,6 +26,9 @@ double* MSNormedFunction::getOutput() {
 	return output;
 }
 
+void inline MSNormedFunction::MakeZeroIfNeeded(double& x) {
+	if (Abs(x) <= 1e-9) x = 0;	
+}
 
 void MSNormedFunction::evaluate() {
 	double l = 0;
@@ -37,22 +41,35 @@ void MSNormedFunction::evaluate() {
 		l += t*t;
     }
 
+	l = sqrt(l);
+
 	//first variable should be positive to make
 	//equivalence relationship
-	for (int i=dimension-1; i>=0; i++) {
-		double t = Abs(output[i]);
-		if (t >= 1e-8) {
-			if (output[i] < 0) {
-				output[i] = t;
-				l = -l;
-			}
-			break;
-		} 
-	}	
+	//for (int i=dimension-1; i>=0; i--) {
+	//	MakeZeroIfNeeded(output[i]);
+    //
+	//	if (output[i] > 0) {
+	//		break;
+	//	} else if (output[i] < 0) {
+	//		l = -l;
+	//		break;
+	//	}		
+	//}	
+
+	int maxIndex = 0;
+	for (int i=1; i<dimension; i++) {
+		if (Abs(output[i]) > Abs(output[maxIndex])) {
+			maxIndex = i;
+		}
+	}
+
+	if (output[maxIndex] < 0) 
+		l = -l;
 
 	//norming phase
 	for (int i=0; i<dimension; i++) {
 		output[i] /= l;
+		MakeZeroIfNeeded(output[i]);
 	}
 }
 

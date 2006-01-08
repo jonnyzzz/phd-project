@@ -46,7 +46,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlotGen
                     string pointsFile = Path.Combine(parameters.GlobalPath, string.Format(parameters.PointFileFormat, cnt++));
                     graphResult.SaveText(pointsFile);
 
-                    scriptGen.AddFile(pointsFile, presenter.PresentToLogFile(graphResult));
+                    scriptGen.AddFile(pointsFile, presenter.PresentToLogFile(graphResult), parameters.ShowStyle(aRes));
                     param.WriteLine(presenter.PresentToLogFile(graphResult));
                 }
             }
@@ -103,5 +103,11 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlotGen
 	    {
 	        get { return false; }
 	    }
+
+		public string ShowStyle(IResult result)
+		{
+			return "dots";
+		}
+
 	}
 }

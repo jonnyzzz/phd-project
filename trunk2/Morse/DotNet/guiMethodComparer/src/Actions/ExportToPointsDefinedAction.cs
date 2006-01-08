@@ -85,8 +85,13 @@ namespace Eugene.Petrenko.Gui2.MethodComparer.Actions
 	    {
 	        get { return "_.txt"; }
 	    }
-	    
-	    public string LocalLogFile
+
+		public string ShowStyle(IResult result)
+		{		
+			return "dots";
+		}
+
+		public string LocalLogFile
 	    {
 	        get{ return Path.Combine(GlobalPath, "log.txt");}
 	    }

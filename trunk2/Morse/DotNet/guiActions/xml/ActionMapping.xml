@@ -63,6 +63,7 @@
 		
 		<action name="ISIRomAction" isLeaf="true">
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
+			<constraint class="FixedDimensionConstraintFactory" dimension="1,2,3" />
 			<constraint class="StrongCompGraphsConstraintFactory" />		
 		</action>
 				

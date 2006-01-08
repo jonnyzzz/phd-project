@@ -1,3 +1,5 @@
+using EugenePetrenko.Gui2.MorseKernel2;
+
 namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
 {
     /// <summary>
@@ -16,5 +18,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
 
         bool ShowHistory { get; }          
         bool ShowBoxes { get; }                
+
+		string ShowStyle(IResult result);
     }
 }

@@ -71,7 +71,7 @@ void PointGraphTest::Test() {
 
     graph.Dump(cout);
 
-    double prec[] =  {0.00045, 0.6, 0.6};
+    double prec[] =  {0.25100045, 0.6, 0.6};
 
     graph.Iterate(prec);
 

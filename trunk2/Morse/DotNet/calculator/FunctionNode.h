@@ -63,5 +63,7 @@ public:
 protected:
 	bool isZero(double value);
 
+	FunctionNode* safe_simplify(FunctionContext* cx);
+
 };
 

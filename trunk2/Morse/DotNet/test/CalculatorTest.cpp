@@ -202,6 +202,12 @@ void CalculatorTest::TestSystemFunctionDerivateMultiple() {
     delete funciton;
 }
 
+void CalculatorTest::TestSystemFunctionDerivate2() {
+	FunctionFactory fac("y1=fx;y2=fy;y3=fz;space_min1=0.01;space_min2=0.01;space_min3=0.01;space_max1=10;space_max2=10;space_max3=10;grid1=3;grid2=3;grid3=3;iteration=1;kz=(1-exp(-z))/z;ky=(1-exp(-y))/y;u=4*y*z;ku=(1-exp(-u))/u;fx=4.522*x*exp(-y)/(1+x*max(exp(-y),kz*ky));fy=0.962*ky*x*y*exp(-z)*ku;fz=4*y*z;x=x1;y=x2;z=x3;_dimension=3;");
+
+	ISystemFunctionDerivate* funciton = new SystemFunctionDerivate(&fac, 3, 1);
+}
+
 
 void CalculatorTest::TestSystemFunctionSegmentPojectiveExtension() {
 	FunctionFactory factory("y1=x1;y2=x2;");

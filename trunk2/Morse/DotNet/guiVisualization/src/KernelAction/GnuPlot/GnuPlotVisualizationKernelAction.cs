@@ -56,7 +56,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
                 IGraphResult result = (IGraphResult) aResult;
                 string file = tempFiles.CreateFile();
                 result.SaveText(file);
-                script.AddFile(file, KernelNode.GetResultCaption(result, true));
+                script.AddFile(file, KernelNode.GetResultCaption(result, true), parameters.Parameters.ShowStyle(aResult));
             }
 
             RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), template);
@@ -76,7 +76,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
                 {
                     len = tr.ReadToEnd().Split('\n').Length;
                 }
-                script.AddFile(file, file + " " + len.ToString());
+                script.AddFile(file, file + " " + len.ToString(), "dots");
             }
             RunGnuPlot(ResourceManager.Instance.TempFileAllocator.SaveToTempFile(script.Generate()), template);
         }
@@ -98,7 +98,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction
         public static void ExportFile(string[] files, string output, string title)
         {
             //GnuPlotParameters pars = new GnuPlotParameters(output, title);
-            GnuPlotParametersImpl pars = new GnuPlotParametersImpl(output, 1000, 1000, true, true, false, false);
+            GnuPlotParametersImpl pars = new GnuPlotParametersImpl(output, "dots", 1000, 1000, true, true, false, false);
             GnuPlotVisualizationKernelAction action = new GnuPlotVisualizationKernelAction();
             action.SetActionParameters(pars);
             action.ShowFromFileList(2, files);

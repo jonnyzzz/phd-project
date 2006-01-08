@@ -9,6 +9,7 @@ public:
 	MSNormedFunction(ISystemFunctionDerivate* function);
 	virtual ~MSNormedFunction(void);
 
+
 public:
     virtual double* getInput();
     virtual double* getOutput(); //f1, f2, ...
@@ -22,6 +23,8 @@ public:
 
 private:
 	double Abs(double x);
+
+	void MakeZeroIfNeeded(double& x);
 
 private:
 	ISystemFunctionDerivate* function;

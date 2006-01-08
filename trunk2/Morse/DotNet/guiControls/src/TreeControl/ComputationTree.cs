@@ -153,12 +153,21 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
             get { return root; }
             set
             {
-                root = value;
-                Clear();
-                if (root != null)
-                {
-                    tree.Nodes.Add(root);
-                }
+				tree.BeginUpdate();
+
+				try 
+				{
+					root = value;
+					Clear();
+					if (root != null)
+					{
+						tree.Nodes.Add(root);
+					}
+				} catch {throw; } 
+				finally
+				{
+					tree.EndUpdate();
+				}
             }
         }
 

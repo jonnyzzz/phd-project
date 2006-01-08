@@ -7,6 +7,13 @@ using namespace std;
 #include "../SystemFunction/ISystemFunction.h"
 #include "../graph/ExtendedMenoryManager.h"
 
+
+enum PointGraphAction {
+	PointGraph_Devide,
+	PointGraph_NotDevide
+};
+
+
 class PointGraph
 {
 public:
@@ -39,7 +46,7 @@ protected:
     const int dimension;
 
 protected:
-    virtual bool NeedDevideEdge(const double* left, const double* right, const double* precision);    
+    virtual PointGraphAction NeedDevideEdge(const double* left, const double* right, const double* precision);    
     virtual double EdgeLength(const double* left, const double* right);
     virtual void EdgeLength(const double* left, const double* right, double* lengths);
 
@@ -72,9 +79,9 @@ private:
     double* createArray();
   
 private:    
-    bool chackEdgeLength(Edge* edge, double* precision);
-    void evaluateNodeCache(Node* node);
+    PointGraphAction checkEdgeLength(Edge* edge, double* precision);
 
+    void evaluateNodeCache(Node* node);
     Node* split(Edge* edge);
         
 private:
@@ -99,6 +106,12 @@ protected:
 public:
     void DumpNode(Node* node, ostream& o);
     void Dump(ostream& o);
+
+
+private:
+	size_t maxSize;
+public:
+	size_t GetMaximumNumberOfPoints();
     
 };
 

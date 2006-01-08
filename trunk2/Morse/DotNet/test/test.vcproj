@@ -249,6 +249,9 @@
 				RelativePath=".\AdaptiveBoxTest.cpp">
 			</File>
 			<File
+				RelativePath=".\AdaptiveTest.cpp">
+			</File>
+			<File
 				RelativePath=".\CalculatorTest.cpp">
 			</File>
 			<File
@@ -277,6 +280,9 @@
 			</File>
 			<File
 				RelativePath=".\MSAdaptiveTest.cpp">
+			</File>
+			<File
+				RelativePath=".\MSNormalizedTest.cpp">
 			</File>
 			<File
 				RelativePath=".\Pefomance.cpp">
@@ -335,6 +341,9 @@
 				RelativePath=".\AdaptiveBoxTest.h">
 			</File>
 			<File
+				RelativePath=".\AdaptiveTest.h">
+			</File>
+			<File
 				RelativePath=".\CalculatorTest.h">
 			</File>
 			<File
@@ -363,6 +372,9 @@
 			</File>
 			<File
 				RelativePath=".\MSAdaptiveTest.h">
+			</File>
+			<File
+				RelativePath=".\MSNormalizedTest.h">
 			</File>
 			<File
 				RelativePath=".\objects.h">

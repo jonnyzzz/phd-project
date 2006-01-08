@@ -16,7 +16,7 @@ static char THIS_FILE[] = __FILE__;
 PointGraph::PointGraph(ISystemFunction* function, int dimension, size_t upperLimit):
 function(function), dimension(dimension), 
 manager((2*sizeof(Node)+4*sizeof(double)*dimension+sizeof(Edge))*100),
-upperLimit(upperLimit)
+upperLimit(upperLimit), maxSize(0)
 {
 	ATLASSERT(dimension > 0);
     function_input = function->getInput();
@@ -99,20 +99,20 @@ double inline PointGraph::Abs(double x) {
     return x>0 ? x : -x;
 }
 
-bool PointGraph::chackEdgeLength(PointGraph::Edge* edge, double* precision) {
+PointGraphAction PointGraph::checkEdgeLength(PointGraph::Edge* edge, double* precision) {
     evaluateNodeCache(edge->left);
     evaluateNodeCache(edge->right);
     
-    return !NeedDevideEdge(edge->left->valueCache, edge->right->valueCache, precision);
+    return NeedDevideEdge(edge->left->valueCache, edge->right->valueCache, precision);
 }
 
-bool PointGraph::NeedDevideEdge(const double* left, const double* right, const double* precision) {
+PointGraphAction PointGraph::NeedDevideEdge(const double* left, const double* right, const double* precision) {
     for (int i=0; i<dimension; i++) {
         if (Abs(left[i] - right[i]) > precision[i]){
-            return false;
+            return PointGraph_Devide;
         }
     }
-    return true;
+    return PointGraph_NotDevide;
 }
 
 double PointGraph::EdgeLength(const double* left, const double* right) {
@@ -178,15 +178,18 @@ PointGraph::Node* PointGraph::split(PointGraph::Edge* edge) {
 
 bool PointGraph::Iterate(double* precision) {
 
-    while (!edges.empty()) {
+    while (!edges.empty()) {		
         Edge* edge = edges.front();
         edges.pop_front();
               
-        if (!this->chackEdgeLength(edge, precision)) {
-            split(edge);
-        } else {
-            edge->left->checkedEdges++;
-            edge->right->checkedEdges++;
+		switch(this->checkEdgeLength(edge, precision)) {
+			case PointGraph_Devide: 
+				split(edge);
+				break;
+			case PointGraph_NotDevide:
+	            edge->left->checkedEdges++;
+				edge->right->checkedEdges++;
+				break;
         }
 
         if (upperLimit != 0 && nodes.size() > upperLimit) {
@@ -197,6 +200,8 @@ bool PointGraph::Iterate(double* precision) {
 }
 
 const PointGraph::NodeList& PointGraph::Points() {
+	if (maxSize < nodes.size())
+		maxSize = nodes.size();
     return nodes;
 }
 
@@ -264,3 +269,8 @@ void PointGraph::Dump(ostream& o) {
     }
     o<<"\n\n";
 }      
+
+
+size_t PointGraph::GetMaximumNumberOfPoints() {
+	return maxSize;
+}

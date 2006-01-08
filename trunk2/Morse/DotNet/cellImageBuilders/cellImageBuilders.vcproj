@@ -183,6 +183,9 @@
 				RelativePath=".\MSCreationProcess.h">
 			</File>
 			<File
+				RelativePath=".\MSNormedCreationProcess.h">
+			</File>
+			<File
 				RelativePath=".\MSOverlapedPointBuilder.h">
 			</File>
 			<File
@@ -272,6 +275,9 @@
 			</File>
 			<File
 				RelativePath=".\MSCreationProcess.cpp">
+			</File>
+			<File
+				RelativePath=".\MSNormedCreationProcess.cpp">
 			</File>
 			<File
 				RelativePath=".\MSOverlapedPointBuilder.cpp">

@@ -122,6 +122,15 @@
 				RelativePath=".\IntersectingPointGraph.cpp">
 			</File>
 			<File
+				RelativePath=".\MSAdaptivePointGraph.cpp">
+			</File>
+			<File
+				RelativePath=".\MSAdaptivePointGraphProcessor.cpp">
+			</File>
+			<File
+				RelativePath=".\MSNormedProcess.cpp">
+			</File>
+			<File
 				RelativePath=".\PointGraph.cpp">
 			</File>
 			<File
@@ -176,6 +185,15 @@
 			</File>
 			<File
 				RelativePath=".\IntersectingPointGraph.h">
+			</File>
+			<File
+				RelativePath=".\MSAdaptivePointGraph.h">
+			</File>
+			<File
+				RelativePath=".\MSAdaptivePointGraphProcessor.h">
+			</File>
+			<File
+				RelativePath=".\MSNormedProcess.h">
 			</File>
 			<File
 				RelativePath=".\PointGraph.h">

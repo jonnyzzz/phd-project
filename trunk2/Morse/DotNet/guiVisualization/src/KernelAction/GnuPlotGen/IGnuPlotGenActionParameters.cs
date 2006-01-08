@@ -21,5 +21,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlotGen
         string PointFileFormat { get; }
 	    string OutputFile { get; }
         string ParametersFile { get; }
+
+		string ShowStyle(IResult result);
 	}
 }

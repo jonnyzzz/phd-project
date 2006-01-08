@@ -39,3 +39,11 @@ FunctionNode* FunctionNode::simplify() {
 bool FunctionNode::canSimplify() {
     return this->canSimplify(&FunctionContext());
 }
+
+FunctionNode* FunctionNode::safe_simplify(FunctionContext* cx) {
+	if (canSimplify(cx)) {
+		return simplify(cx);
+	} else {
+		return clone();
+	}
+}

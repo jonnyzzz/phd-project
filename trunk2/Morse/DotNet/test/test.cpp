@@ -21,6 +21,8 @@
 #include "ms2dsiMorseTest.h"
 #include "msAdaptiveTest.h"
 #include "msAdaptive3DTest.h"
+#include "MSNormalizedTest.h"
+#include "AdaptiveTest.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -36,8 +38,11 @@ int _tmain(int argc, _TCHAR* argv[]) {
     //testRomFromFile("o:\\aaaa");
 
 
-	MSAdaptive3DTest().Test();
+	MSNormalizedTest().Test();
+	//MSAdaptive3DTest().Test();
+	//CalculatorTest(cout).TestSystemFunctionDerivate2();
     //PointGraphTest("PointGraphTest", cout).Test();
+	//AdaptiveTest().Test();
     //PointGraphBuilderTest().Test();
     //MS2DMorseTest().Test();
     //AdaptiveBoxTest().Test();

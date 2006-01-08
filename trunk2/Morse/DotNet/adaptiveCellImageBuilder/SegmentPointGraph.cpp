@@ -27,10 +27,14 @@ double SegmentPointGraph::ProjDistance(double left, double right) {
 	return (min1<min2)? min1 : min2;
 }
 
-bool SegmentPointGraph::NeedDevideEdge(const double* left, const double* right, const double* precision) {
+PointGraphAction SegmentPointGraph::NeedDevideEdge(const double* left, const double* right, const double* precision) {
 	if (!graph->intersects(left, dimension) || !graph->intersects(right, dimension)) 
-        return false;
-	return ProjDistance(left, right) > precision[0];
+		return PointGraph_NotDevide;
+	if (ProjDistance(left, right) > precision[0]) {
+		return PointGraph_Devide;
+	} else {
+		return PointGraph_NotDevide;
+	}
 }
 
 double SegmentPointGraph::ProjDistance(const double* left, const double* right) {

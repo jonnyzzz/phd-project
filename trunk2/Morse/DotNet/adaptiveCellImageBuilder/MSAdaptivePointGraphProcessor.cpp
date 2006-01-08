@@ -71,6 +71,7 @@ void MSAdaptivePointGraphProcessor::ProcessNode(Node* node) {
 
 
 	pointGraphBase->Dump(cout);
+	pointGraphProj->Dump(cout);
 
 	pointGraphBase->Iterate(precision);
 	pointGraphProj->Iterate(&precision[dimensionBase]);

@@ -35,7 +35,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
             this.parameters = parameters;
         }
 
-        public void AddFile(string filename, string title)
+        public void AddFile(string filename, string title, string showStyle)
         {
             if (!isFirst)
                 builder.Append(" " + template.Delimiter + " ");
@@ -45,6 +45,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
             TemplateProcessor processor = new TemplateProcessor(" " + template.BodyTemplate + " ");
             processor.subsitute("file", filename);
             processor.subsitute("title", title);
+			processor.subsitute("showStyle", showStyle);
 
             builder.Append(processor.ToString());
         }

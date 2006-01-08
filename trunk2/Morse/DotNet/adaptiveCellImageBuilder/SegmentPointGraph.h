@@ -9,7 +9,7 @@ public:
 	virtual ~SegmentPointGraph(void);
 
 protected:
-    virtual bool NeedDevideEdge(const double* left, const double* right, const double* precision);    
+    virtual PointGraphAction NeedDevideEdge(const double* left, const double* right, const double* precision);    
     virtual double EdgeLength(const double* left, const double* right);
     virtual void EdgeLength(const double* left, const double* right, double* lengths);
 
