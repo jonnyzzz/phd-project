@@ -14,15 +14,12 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
         {
         }
 
-
         /// <summary>
         /// Trys to add a node, if fails GroupException was thrown
         /// </summary>
         /// <param name="node"></param>
         public void AddNode(Node node)
         {
-            ConstraintCheck(node);
-
             nodes.Add(node);
         }
 
@@ -35,41 +32,12 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
         {
             return nodes.Contains(node);
         }
-
-
-        protected void ConstraintCheck(Node aNode)
-        {
-            if (aNode.ResultSet.Count != 1) throw new GroupException("Incorrect node type. Such node can not be added to that group");
-
-            foreach (Node node in nodes)
-            {
-                if (node.Parent != aNode.Parent) throw new GroupException("Group can only be built from nodes recieved from one result");
-                if (!ResultSet.HasEqualsGraph(node.ResultSet, aNode.ResultSet)) throw new GroupException("Unable to add this node due to uncomparable type");
-            }
-        }
-
-        public ResultSet[] ResultSets
-        {
-            get
-            {
-                ArrayList list = new ArrayList();
-                foreach (Node node in nodes)
-                {
-                    list.Add(node.ResultSet);
-                }
-                return (ResultSet[]) list.ToArray(typeof (ResultSet));
-            }
-        }
-
-        public ResultSet CreateResultSet()
-        {
-            return ResultSet.FromResultSets(ResultSets);
-        }
-
+        
         public Node CreateNode()
         {
-            //TODO:!!!
-            return new Node(new KernelNode(CreateResultSet()), ((Node) nodes[0]).Iterations);
+        	NodeResultSet set = new NodeResultSet((Node[]) nodes.ToArray(typeof(Node)));
+        	int iterations = ((Node) nodes[0]).Iterations;
+        	return new Node(new KernelNode(set), iterations);
         }
 
         public void DeCheckAndRemoveAll()

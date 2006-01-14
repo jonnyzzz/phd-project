@@ -4,6 +4,7 @@
    <actions>
 		<action name="IBoxMethodAction" isLeaf="false">	
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+			<constraint class="OneParentResultsConstraint"/>
 			<nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true" />
 			</nextActions>		
@@ -11,6 +12,7 @@
 	
 		<action name="IPointMethodAction" isLeaf="false">		
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+			<constraint class="OneParentResultsConstraint"/>
 			<nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true"/>
 			</nextActions>
@@ -20,6 +22,7 @@
 						
 		<action name="IAdaptiveMethodAction" isLeaf="false">		
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+			<constraint class="OneParentResultsConstraint"/>
 			<nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true"/>
 			</nextActions>
@@ -27,19 +30,22 @@
 		
 		<action name="IAdaptiveBoxMethod" isLeaf="false" internal="true">		
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+			<constraint class="OneParentResultsConstraint"/>
 			<nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true"/>
 			</nextActions>
 		</action>
 
-        <action name="ISeparatorAction" isLeaf="false"/>
+    <action name="ISeparatorAction" isLeaf="false"/>
 
-        <action name="IProjectAction" isLeaf="true">
-			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />			
+    <action name="IProjectAction" isLeaf="true">
+			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
+			<constraint class="OneParentResultsConstraint"/>
 		</action>
 		
 		<action name="GnuPlotVisualizationKernelAction" isLeaf="true">
 			<constraint class="GnuPlotConstraintFactory" />
+			<constraint class="SameDimensionConstraint" />
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 		</action>
 		
@@ -52,11 +58,13 @@
 		<action name="IMinimalLoopLocalizationAction" isLeaf="true">
 			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
 			<constraint class="StrongCompGraphsConstraintFactory" />
+			<constraint class="OneParentResultsConstraint"/>
 		</action>
 		
 		<action name="IIsolatedSetAction" isLeaf="true">
 			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
 			<constraint class="StrongCompGraphsConstraintFactory" />
+			<constraint class="OneParentResultsConstraint"/>
 		</action>
 		
 		<action name="ISeparatorAction" isLeaf="false"/>
@@ -65,6 +73,7 @@
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
 			<constraint class="FixedDimensionConstraintFactory" dimension="1,2,3" />
 			<constraint class="StrongCompGraphsConstraintFactory" />		
+			<constraint class="OneParentResultsConstraint"/>
 		</action>
 				
 		<action name="ISeparatorAction" isLeaf="false"/>
@@ -74,9 +83,11 @@
 		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
 		    <!--<constraint class="StrongCompGraphsConstraintFactory" /> -->
 		    <constraint class="FixedDimensionConstraintFactory" dimension="2" />		    
+		    <constraint class="OneParentResultsConstraint"/>
 		</action>
 		
 		<action name="IMS2DProcessAction" isLeaf="true">
+		    <constraint class="OneParentResultsConstraint"/>
 		    <constraint class="DefaultConstraintFactory" metadata="IMS2Metadata" result="IGraphResult" />
 		    <nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true" />
@@ -84,6 +95,7 @@
 		</action>
 		
 		<action name="IMS2DRomAction" isLeaf="true">
+		    <constraint class="OneParentResultsConstraint"/>
 		    <constraint class="DefaultConstraintFactory" metadata="IMS2Metadata" result="IGraphResult" />
 		    <constraint class="StrongCompGraphsConstraintFactory" />		
 		</action>
@@ -91,10 +103,12 @@
 		<action name="ISeparatorAction" isLeaf="false"/>
 			
 		<action name="IMSCreationProcess" isLeaf="true" >
+		    <constraint class="OneParentResultsConstraint"/>
 		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />		    
 		</action>
 		
 		<action name="IMSAdaptiveMethod" isLeaf="false">
+		  <constraint class="OneParentResultsConstraint"/>
 			<constraint class="DefaultConstraintFactory" metadata="IMSSegmentMetadata" result="IGraphResult" />
 			<constraint class="FixedDimensionConstraintFactory" dimension="4,6" />
 		    <nextActions>		
@@ -103,6 +117,7 @@
 		</action>
 		
 		<action name="IMSMethodAction" isLeaf="false" internal="true">
+		    <constraint class="OneParentResultsConstraint"/>
 		    <constraint class="DefaultConstraintFactory" metadata="IMSSegmentMetadata" result="IGraphResult" />
 		    <nextActions>		
 				<actionReference name="ITarjanAction" isLeaf="true" />
@@ -110,6 +125,7 @@
 		</action>
 		
    	<action name="IMSSegmentRom" isLeaf="true">
+   	    <constraint class="OneParentResultsConstraint"/>
 		    <constraint class="DefaultConstraintFactory" metadata="IMSSegmentMetadata" result="IGraphResult" />
 		    <constraint class="StrongCompGraphsConstraintFactory" />		
 		</action>						
@@ -140,6 +156,7 @@
 		<assembly name="EugenePetrenko.Gui2.Actions"/>
 		<assembly name="EugenePetrenko.Gui2.Visualization"/>		
 		<assembly name="EugenePetrenko.Gui2.MorseKernel2.Interop" />
+		<assembly name="EugenePetrenko.Gui2.Application" />
 	</assemblies>
 
 </mappings>

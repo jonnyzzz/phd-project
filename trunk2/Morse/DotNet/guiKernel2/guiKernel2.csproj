@@ -193,6 +193,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\ActionFactory\Constraints\SameDimensionConstraint.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Actions\ActionChain.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

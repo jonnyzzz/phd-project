@@ -19,12 +19,13 @@ namespace EugenePetrenko.Gui2.Kernell2.Node
         #region getters
 
         private IResultSet resultSet = null;
+		private int elementCount = -1;
 
         public IResultSet ToResultSet
         {
             get
             {
-                if (resultSet == null)
+                if (resultSet == null || elementCount != Count)
                 {
                     IWritableResultSet set = new CResultSetImplClass();
                     foreach (IResultBase resultBase in ToResults)
@@ -32,6 +33,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Node
                         set.AddResult(resultBase);
                     }
                     resultSet = (IResultSet) set;
+					elementCount = Count;
                 }
                 return resultSet;
             }
@@ -98,6 +100,12 @@ namespace EugenePetrenko.Gui2.Kernell2.Node
                 AddResult(set.GetResult(count));
             }
         }
+
+		protected void AddResultSetEx(ResultSet set)
+		{
+			resultSet = null;
+			this.results.AddRange(set.results);
+		}
 
         #endregion
 
