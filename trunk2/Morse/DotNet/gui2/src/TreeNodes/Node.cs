@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Windows.Forms;
 using EugenePetrenko.Gui2.Actions.Actions;
 using EugenePetrenko.Gui2.Actions.Filters;
@@ -14,13 +15,13 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
     public class Node : ComputationNode
     {
         private KernelNode kernelNode;
-        private int iterations;
+        private int iterations;		
 
-        public Node(KernelNode kernelNode, int iterations) : base()
+        public Node(KernelNode kernelNode, int iterations)
         {
             this.kernelNode = kernelNode;
-            this.iterations = iterations;
-            Update();
+            this.iterations = iterations;    
+			Update();
         }
 
         public int Iterations
@@ -104,7 +105,7 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
             }
             else
             {
-                MessageBox.Show("Unable to add an Group for such a strange case");
+                MessageBox.Show("Unable to add an Group");
             }
         }
 
@@ -124,18 +125,13 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
             return Filter.FilterActions(kernelNode.GetNextActionsAfter(Filter.ToActionWrapper(chain)));
         }
 
-        public void AddNodeChild(Node node)
-        {
-            Logger.LogMessage("Adding Node");
-
-            this.Nodes.Add(node);
-            if (this.TreeView != null)
-            {
-                this.Expand();
-                node.EnsureVisible();
-            }
-        }
-
+		public void AddResultChild(Node[] nodes, string caption)
+		{
+			ResultActionNameNode node = new ResultActionNameNode(caption);
+			node.AddNodeChild(nodes);
+			this.AddNodeChild(node);
+		}
+        
         public ResultSet ResultSet
         {
             get { return KernelNode.Results; }

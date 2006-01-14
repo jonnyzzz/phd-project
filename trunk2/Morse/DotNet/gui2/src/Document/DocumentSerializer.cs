@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using System.Xml;
 using EugenePetrenko.Gui2.Application.TreeNodes;
+using EugenePetrenko.Gui2.Controls.TreeControl;
 using EugenePetrenko.Gui2.Kernel2.Document;
 using EugenePetrenko.Gui2.Kernell2.Document;
 using EugenePetrenko.Gui2.Kernell2.Node;
@@ -35,36 +36,53 @@ namespace EugenePetrenko.Gui2.Application.Document
             return rootNode;
         }
 
-        private static void RecursiveSaveNodes(XmlNode root, Node node, XmlDocument doc, string pathBase)
+        private static void RecursiveSaveNodes(XmlNode root, ComputationNode node, XmlDocument doc, string pathBase)
         {
             if (node == null) return;
 
             XmlNode internalNode = SaveNode(root, node, doc, pathBase);
             foreach (TreeNode treeNode in node.Nodes)
             {
-                if (treeNode is Node)
+                if (treeNode is ComputationNode || treeNode is ResultActionNameNode)
                 {
-                    Node myNode = (Node) treeNode;
+                    ComputationNode myNode = (ComputationNode) treeNode;
                     RecursiveSaveNodes(internalNode, myNode, doc, pathBase);
                 }
             }
         }
 
-        private static XmlNode SaveNode(XmlNode root, Node node, XmlDocument doc, string pathBase)
+        private static XmlNode SaveNode(XmlNode root, ComputationNode cNode, XmlDocument doc, string pathBase)
         {
             XmlNode myNode = doc.CreateElement("node");
             root.AppendChild(myNode);
 
-            XmlAttribute attr = doc.CreateAttribute("iterations");
-            attr.Value = node.Iterations.ToString();
+			XmlAttribute infoNode = doc.CreateAttribute("type");
+			
+			if (cNode is Node) 
+			{
+				Node node = (Node) cNode;
 
-            myNode.Attributes.Append(attr);
+				infoNode.Value = "node";
+				XmlAttribute attr = doc.CreateAttribute("iterations");
+				attr.Value = node.Iterations.ToString();
 
-            myNode.AppendChild(KernelNodeSerializer.SaveKernelNode(node.KernelNode, doc, pathBase));
+				myNode.Attributes.Append(attr);
 
+				myNode.AppendChild(KernelNodeSerializer.SaveKernelNode(node.KernelNode, doc, pathBase));
+			} else if (cNode is ResultActionNameNode)
+			{
+				ResultActionNameNode node = (ResultActionNameNode) cNode;
+				infoNode.Value = "info";
+				XmlAttribute attr = doc.CreateAttribute("caption");
+				attr.Value = node.NodeCaption;
+				myNode.Attributes.Append(attr);
+			}
+
+			myNode.Attributes.Append(infoNode);
             return myNode;
         }
 
+		
 
         public static Document LoadDocument(XmlNode root, string pathBase)
         {
@@ -74,9 +92,9 @@ namespace EugenePetrenko.Gui2.Application.Document
 
             XmlNode resultsetNode = myNode.SelectSingleNode("nodes/node");
 
-            Node treeNode = LoadNodeTree(resultsetNode, pathBase);
+            ComputationNode treeNode = LoadNodeTree(resultsetNode, pathBase);
 
-            Document doc = new Document(function, treeNode);
+            Document doc = new Document(function, (Node) treeNode);
 
             XmlNode myCommentText = myNode.SelectSingleNode("comment/text()");
             if (myCommentText != null)
@@ -87,9 +105,9 @@ namespace EugenePetrenko.Gui2.Application.Document
             return doc;
         }
 
-        private static Node LoadNodeTree(XmlNode node, string pathBase)
-        {
-            Node treeNode = LoadOnlyNode(node, pathBase);
+        private static ComputationNode LoadNodeTree(XmlNode node, string pathBase)
+        {        	
+            ComputationNode treeNode = LoadOnlyNode(node, pathBase);
             foreach (XmlNode xmlNode in node.SelectNodes("node"))
             {
                 treeNode.AddNodeChild(LoadNodeTree(xmlNode, pathBase));
@@ -97,12 +115,19 @@ namespace EugenePetrenko.Gui2.Application.Document
             return treeNode;
         }
 
-        private static Node LoadOnlyNode(XmlNode node, string pathBase)
+        private static ComputationNode LoadOnlyNode(XmlNode node, string pathBase)
         {
-            KernelNode kernelNode = KernelNodeSerializer.LoadKernelNode(node, pathBase);
+			XmlAttribute isResult = node.Attributes["type"];
+			if (isResult == null || isResult.Value == "node" ) 
+			{
+				KernelNode kernelNode = KernelNodeSerializer.LoadKernelNode(node, pathBase);
 
-            XmlNode aNode = node.SelectSingleNode("@iterations");
-            return new Node(kernelNode, (aNode != null) ? int.Parse(aNode.Value) : 1);
+				XmlNode aNode = node.SelectSingleNode("@iterations");
+				return new Node(kernelNode, (aNode != null) ? int.Parse(aNode.Value) : 1);
+			} else if (isResult.Value == "info")
+			{				
+				return new ResultActionNameNode(node.Attributes["caption"].Value);
+			} else throw new ArgumentException("Wrong XML format");
         }
 
     }

@@ -34,6 +34,7 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
             }
 
             tree.BeforeCheck += new TreeViewCancelEventHandler(BeforeCheck);
+			tree.KeyDown += new KeyEventHandler(tree_KeyDown);
         }
 
         /// <summary> 
@@ -126,17 +127,34 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
 
         private void tree_MouseDown(object sender, MouseEventArgs e)
         {
-            TreeNode anode = tree.GetNodeAt(e.X, e.Y);
-            if (anode is ComputationNode && e.Button == MouseButtons.Right)
+            TreeNode node = tree.GetNodeAt(e.X, e.Y);
+            if (node is ComputationNode && e.Button == MouseButtons.Right)
             {
-                ComputationNode node = (ComputationNode) anode;
-                contextMenu.MenuItems.Clear();
-                contextMenu.MenuItems.AddRange(CreateMenuItemsList(node.ContextMenuItems));
-                contextMenu.Show(this, new Point(e.X, e.Y));
+            	ShowPopupMenu((ComputationNode) node, new Point(e.X, e.Y));
             }
         }
 
-        private MenuItem[] CreateMenuItemsList(MenuItem[] input)
+		private void tree_KeyDown(object sender, KeyEventArgs e)
+		{		
+			ComputationNode node = tree.SelectedNode as ComputationNode;
+			if (node != null)
+			{
+				node.FireKeyPressed(e);	
+
+				if (e.KeyCode == Keys.Apps)
+					ShowPopupMenu(node, node.Bounds.Location);
+			}
+		}
+
+
+    	private void ShowPopupMenu(ComputationNode node, Point pt)
+    	{
+    		contextMenu.MenuItems.Clear();
+    		contextMenu.MenuItems.AddRange(CreateMenuItemsList(node.ContextMenuItems));
+    		contextMenu.Show(this, pt);
+    	}
+
+    	private MenuItem[] CreateMenuItemsList(MenuItem[] input)
         {
             if (input.Length > 0)
             {
@@ -190,6 +208,6 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
 
                 insideBeforeCheck = false;
             }
-        }
-    }
+		}		
+	}
 }

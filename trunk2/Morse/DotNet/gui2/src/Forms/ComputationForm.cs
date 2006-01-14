@@ -494,14 +494,19 @@ namespace EugenePetrenko.Gui2.Application.Forms
         {
             if (Runner.Runner.Instance.Document != null)
             {
-                SystemAssignment assignment = new SystemAssignment(Runner.Runner.Instance.Document.KernelDocument.Function);
-                assignment.ShowDialog(this);
+				using(SystemAssignment assignment = new SystemAssignment(Runner.Runner.Instance.Document.KernelDocument.Function)) 
+				{
+					assignment.ShowDialog(this);
+				}
             }
         }
 
         private void menuHelpAbout_Click(object sender, EventArgs e)
         {
-            new About().ShowDialog();
+			using(About about = new About()) 
+			{
+				about.ShowDialog();
+			}
         }
 
         private void menuSave_Click(object sender, EventArgs e)

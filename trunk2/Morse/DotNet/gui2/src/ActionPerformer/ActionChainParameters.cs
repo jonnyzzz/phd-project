@@ -53,5 +53,10 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
             }
         }
 
+		public string GetActionCaption()
+		{
+			return path[0].ActionName + " + " + (path.Length - 1);			
+		}
+
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using EugenePetrenko.Gui2.Actions.Actions;
 
@@ -11,7 +12,6 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes.MenuItems
 	{
         public SeparatorMenuItem() : base("-") //base("--", false)
         {
-            
         }
 	}
 }

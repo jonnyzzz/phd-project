@@ -36,7 +36,7 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
         public Node CreateNode()
         {
         	NodeResultSet set = new NodeResultSet((Node[]) nodes.ToArray(typeof(Node)));
-        	int iterations = ((Node) nodes[0]).Iterations;
+        	int iterations = Runner.Runner.Instance.Document.KernelDocument.Function.Iterations;
         	return new Node(new KernelNode(set), iterations);
         }
 

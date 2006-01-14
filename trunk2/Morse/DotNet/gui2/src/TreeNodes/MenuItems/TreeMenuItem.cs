@@ -81,16 +81,14 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
                 }
             }
 
-            Brush brush = new SolidBrush(fontColor);
-
-            Font font = GetFont();
-
-            StringFormat format = new StringFormat();
-            format.Alignment = StringAlignment.Near;
-            format.LineAlignment = StringAlignment.Center;
-            int xOffset = 15;
-            Rectangle bounds = new Rectangle(e.Bounds.X + xOffset, e.Bounds.Y, e.Bounds.Width - xOffset, e.Bounds.Height);
-            e.Graphics.DrawString(Text, font, brush, bounds, format);
+			Brush brush = new SolidBrush(fontColor);
+			Font font = GetFont(); 
+			StringFormat format = new StringFormat();
+			format.Alignment = StringAlignment.Near;
+			format.LineAlignment = StringAlignment.Center;
+			int xOffset = 15;
+			Rectangle bounds = new Rectangle(e.Bounds.X + xOffset, e.Bounds.Y, e.Bounds.Width - xOffset, e.Bounds.Height);
+			e.Graphics.DrawString(Text, font, brush, bounds, format);
         }
 
         protected virtual void BaseDrawItem(DrawItemEventArgs e)
@@ -105,7 +103,10 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
 
         protected virtual void DrawBackGround(DrawItemEventArgs e)
         {
-            e.DrawBackground();
+			if ((e.State & DrawItemState.Selected) != DrawItemState.Selected)
+				e.Graphics.FillRectangle(new SolidBrush(SystemColors.Menu), e.Bounds);
+			else
+				e.DrawBackground();
         }
 
         private Font GetFont()

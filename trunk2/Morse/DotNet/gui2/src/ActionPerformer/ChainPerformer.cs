@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using EugenePetrenko.Gui2.Actions.Actions;
 using EugenePetrenko.Gui2.Application.TreeNodes;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory;
 using EugenePetrenko.Gui2.Kernell2.Actions;
 using EugenePetrenko.Gui2.Kernell2.Node;
 using EugenePetrenko.Gui2.Logging;
@@ -43,7 +44,7 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 
                 Performer performer = new Performer(resultSet, parameters.Chain, info);
 
-                performer.NewNode += new NewNodeEvent(NewNode);
+                performer.NewNode += new NewNodesEvent(NewNode);
 
                 performer.Do();
 
@@ -61,12 +62,14 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
             }
         }
 
+		
+
         public event ChainStart Start;
         public event ChainFinish Finish;
 
-        private void NewNode(Node node)
+        private void NewNode(Node[] node)
         {
-            this.node.AddNodeChild(node);
+            this.node.AddResultChild(node, parameters.GetActionCaption());
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using EugenePetrenko.Gui2.Application.TreeNodes;
 using EugenePetrenko.Gui2.Kernell2.Actions;
 using EugenePetrenko.Gui2.Kernell2.Container;
@@ -10,7 +11,7 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
     /// Summary description for Performer.
     /// </summary>
     /// 
-    public delegate void NewNodeEvent(Node node);
+    public delegate void NewNodesEvent(Node[] node);
 
     public class Performer
     {
@@ -18,7 +19,7 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
         private readonly ProgressBarInfo progressBarInfo;
         private readonly ResultSet result;
 
-        public event NewNodeEvent NewNode;
+        public event NewNodesEvent NewNode;
 
         private volatile bool inProcess = false;
 
@@ -38,11 +39,13 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 
             if (NewNode != null && chain.PublishResults)
             {
-                KernelNode[] nodes = resultSet.ToNodes;
-                foreach (KernelNode kernelNode in nodes)
+                KernelNode[] kernelNodes = resultSet.ToNodes;
+            	ArrayList nodes = new ArrayList();
+                foreach (KernelNode kernelNode in kernelNodes)
                 {
-                    NewNode(new Node(kernelNode, Runner.Runner.Instance.Document.KernelDocument.Function.Iterations));
+                    nodes.Add(new Node(kernelNode, Runner.Runner.Instance.Document.KernelDocument.Function.Iterations));
                 }
+				NewNode((Node[]) nodes.ToArray(typeof(Node)));
             }
             inProcess = false;
             Logger.LogMessage("Computation Finished");
