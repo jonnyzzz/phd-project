@@ -220,6 +220,9 @@
 			<File
 				RelativePath=".\SystemFunctionDerivate.cpp">
 			</File>
+			<File
+				RelativePath=".\ZeroSafeDouble.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -281,6 +284,9 @@
 			</File>
 			<File
 				RelativePath=".\SystemFunctionDerivate.h">
+			</File>
+			<File
+				RelativePath=".\ZeroSafeDouble.h">
 			</File>
 		</Filter>
 		<Filter
