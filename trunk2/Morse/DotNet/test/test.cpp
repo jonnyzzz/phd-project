@@ -22,6 +22,7 @@
 #include "msAdaptiveTest.h"
 #include "msAdaptive3DTest.h"
 #include "MSNormalizedTest.h"
+#include "MSAngleTest.h"
 #include "AdaptiveTest.h"
 
 #ifdef _DEBUG
@@ -38,7 +39,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
     //testRomFromFile("o:\\aaaa");
 
 
-	MSNormalizedTest().Test();
+	MSAngleTest().Test();
+	//MSNormalizedTest().Test();
 	//MSAdaptive3DTest().Test();
 	//CalculatorTest(cout).TestSystemFunctionDerivate2();
     //PointGraphTest("PointGraphTest", cout).Test();

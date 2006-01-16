@@ -128,6 +128,12 @@
 				RelativePath=".\MSAdaptivePointGraphProcessor.cpp">
 			</File>
 			<File
+				RelativePath=".\MSAnglePointGraphProcessor.cpp">
+			</File>
+			<File
+				RelativePath=".\MSAngleProcess.cpp">
+			</File>
+			<File
 				RelativePath=".\MSNormedProcess.cpp">
 			</File>
 			<File
@@ -191,6 +197,12 @@
 			</File>
 			<File
 				RelativePath=".\MSAdaptivePointGraphProcessor.h">
+			</File>
+			<File
+				RelativePath=".\MSAnglePointGraphProcessor.h">
+			</File>
+			<File
+				RelativePath=".\MSAngleProcess.h">
 			</File>
 			<File
 				RelativePath=".\MSNormedProcess.h">

@@ -1,7 +1,6 @@
 #include "ISystemFunction.h"
 #include "ISystemFunctionDerivate.h"
 
-
 class MSAngleFunction :
 	public ISystemFunction
 {

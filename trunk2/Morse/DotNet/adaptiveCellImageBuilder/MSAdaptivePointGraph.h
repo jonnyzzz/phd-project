@@ -9,5 +9,7 @@ public:
 	virtual ~MSAdaptivePointGraph(void);
 
 
+public:
+	virtual PointGraphAction NeedDevideEdge(const double* left, const double* right, const double* precision);    
 
 };

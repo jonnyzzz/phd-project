@@ -173,6 +173,9 @@
 				RelativePath=".\MSAngleFunction.cpp">
 			</File>
 			<File
+				RelativePath=".\MSAngleMorseFunction.cpp">
+			</File>
+			<File
 				RelativePath=".\MSNormedFunction.cpp">
 			</File>
 			<File
@@ -254,6 +257,9 @@
 			</File>
 			<File
 				RelativePath=".\MSAngleFunction.h">
+			</File>
+			<File
+				RelativePath=".\MSAngleMorseFunction.h">
 			</File>
 			<File
 				RelativePath=".\MSNormedFunction.h">

@@ -282,6 +282,9 @@
 				RelativePath=".\MSAdaptiveTest.cpp">
 			</File>
 			<File
+				RelativePath=".\MSAngleTest.cpp">
+			</File>
+			<File
 				RelativePath=".\MSNormalizedTest.cpp">
 			</File>
 			<File
@@ -372,6 +375,9 @@
 			</File>
 			<File
 				RelativePath=".\MSAdaptiveTest.h">
+			</File>
+			<File
+				RelativePath=".\MSAngleTest.h">
 			</File>
 			<File
 				RelativePath=".\MSNormalizedTest.h">
