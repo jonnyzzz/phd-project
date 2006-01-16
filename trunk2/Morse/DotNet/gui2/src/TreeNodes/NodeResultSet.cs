@@ -1,4 +1,5 @@
 using System.Collections;
+using EugenePetrenko.Gui2.Controls.TreeControl;
 using EugenePetrenko.Gui2.Kernell2.Node;
 
 namespace EugenePetrenko.Gui2.Application.TreeNodes
@@ -13,15 +14,22 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
 
 		public NodeResultSet(Node[] nodes)
 		{
-			Node parent = (Node) nodes[0].Parent;
+			Node parent = GetNodeParent( nodes[0]);
 			foreach (Node node in nodes)
 			{
-				if (node.Parent != parent)
+				if (GetNodeParent(node) != parent)
 					hasSameParent = false;
 				if (!HasEqualsGraph(this, node.ResultSet))
 					hasSameGraphs = false;
 				AddResultSetEx(node.ResultSet);
 			}
+		}
+
+		public Node GetNodeParent(ComputationNode node) 
+		{
+			while (node.Parent != null && !(node.Parent is Node))
+				node = node.Parent as ComputationNode;
+			return node as Node;
 		}
 
 		public bool HasSameParent

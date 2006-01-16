@@ -43,8 +43,7 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
                 }
             }
         }
-
-
+						
 		public void AddNodeChild(params ComputationNode[] node)
 		{
 			Logger.LogMessage("Adding Node");

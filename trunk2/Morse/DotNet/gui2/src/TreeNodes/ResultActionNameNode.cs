@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using EugenePetrenko.Gui2.Application.Forms;
+using EugenePetrenko.Gui2.Application.TreeNodes.MenuItems;
 using EugenePetrenko.Gui2.Controls.TreeControl;
 using EugenePetrenko.Gui2.Logging;
 
@@ -12,16 +13,14 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
 	public class ResultActionNameNode : ComputationNode
 	{
 		private string name;
-		private MenuItem item;
 
 		public ResultActionNameNode(string name)
 		{
 			Logger.LogMessage("Result Action: {0}", name);
 			this.name = name;
 			
-			this.item = new RenameMenuItem(this);
-			Update();
-			
+			Update();			
+
 			this.Expand();
 			this.OnKeyPressed += new KeyPressed(ResultActionNameNode_OnKeyPressed);
 		}
@@ -34,39 +33,59 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
 		protected override MenuItem[] GetMenuItems()
 		{			
 			return new MenuItem[] {
-				item};
+									  new DelegatedMenuItem("Rename", new Click(OnRemame)),
+									  new DelegatedMenuItem("Create Group From Childs", new Click(OnCreateGroup))
+				};
 		}
 
-		protected void SetCaption(string caption)
+		private void OnCreateGroup()
+		{
+			Group group = Group.GetGroup(this);
+			group.DeCheckAndRemoveAll();
+
+			Node node = null;
+			try
+			{
+				foreach (TreeNode treeNode in Nodes)
+				{
+					if (treeNode is Node)
+					{
+						node = (Node) treeNode;
+						node.Checked = true;
+					}
+				}
+				if (node != null)
+				{
+					node.CreateGroup();
+				}
+			}
+			catch (GroupException e)
+			{
+				MessageBox.Show(Runner.Runner.Instance.ComputationForm, e.Message);
+				group.DeCheckAndRemoveAll();
+			}
+		}
+
+		private void OnRemame()
+		{
+			using( UserComment cmt = new UserComment(NodeCaption)) 
+			{
+				if (cmt.ShowDialog(Runner.Runner.Instance.ComputationForm) == DialogResult.OK)
+					SetCaption(cmt.UserCommentText);
+			}
+		}
+		
+		private void ResultActionNameNode_OnKeyPressed(KeyEventArgs key)
+		{
+			if (key.KeyCode == Keys.F2)
+				OnRemame();
+		}
+
+		private void SetCaption(string caption)
 		{
 			this.name = caption;
 			Update();			
 		}
-
-		class RenameMenuItem : TreeMenuItem
-		{
-			private readonly ResultActionNameNode action;
-
-			public RenameMenuItem(ResultActionNameNode action) : base("Rename")
-			{
-				this.action = action;
-
-			}
-
-			protected override void EventClick()
-			{
-				using( UserComment cmt = new UserComment(action.NodeCaption)) 
-				{
-					if (cmt.ShowDialog(Runner.Runner.Instance.ComputationForm) == DialogResult.OK)
-						action.SetCaption(cmt.UserCommentText);
-				}
-			}
-		}
-
-		private void ResultActionNameNode_OnKeyPressed(KeyEventArgs key)
-		{
-			if (key.KeyCode == Keys.F2)
-				item.PerformClick();
-		}
+		
 	}
 }

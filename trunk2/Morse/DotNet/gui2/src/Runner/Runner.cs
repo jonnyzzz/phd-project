@@ -156,6 +156,7 @@ namespace EugenePetrenko.Gui2.Application.Runner
             get { return runner; }
         }
 
+		
         #endregion
     }
 }

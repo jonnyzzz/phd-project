@@ -1,4 +1,5 @@
 using System.Collections;
+using EugenePetrenko.Gui2.Controls.TreeControl;
 using EugenePetrenko.Gui2.Kernell2.Node;
 
 namespace EugenePetrenko.Gui2.Application.TreeNodes
@@ -53,7 +54,7 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
 
         private static Group instance = null;
 
-        public static Group GetGroup(Node node)
+        public static Group GetGroup(ComputationNode node)
         {
             if (instance == null)
             {

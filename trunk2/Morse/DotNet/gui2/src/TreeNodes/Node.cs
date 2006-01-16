@@ -29,6 +29,7 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
             get { return iterations; }
         }
 
+		
         public override string NodeCaption
         {
             get { return string.Format("{0}, iterations={1}", kernelNode.Caption, Iterations); }
@@ -52,50 +53,20 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
             {
                 return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Create Group", new Click(CreateGroup)));
             }
-            else if (this.Nodes.Count > 0)
-            {
-                return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Group all childs", new Click(CreateGroupClick)));
-            }
+//            else if (this.Nodes.Count > 0)
+//            {
+//                return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Group all childs", new Click(CreateGroupClick)));
+//            }
             else
             {
                 return GetMenuItemsActions();
             }
         }
 
-
-        private void CreateGroupClick()
+        public void CreateGroup()
         {
             Group group = Group.GetGroup(this);
-            group.DeCheckAndRemoveAll();
-
-            Node node = null;
-
-            try
-            {
-                foreach (TreeNode treeNode in Nodes)
-                {
-                    if (treeNode is Node)
-                    {
-                        node = (Node) treeNode;
-                        node.Checked = true;
-                    }
-                }
-                if (node != null)
-                {
-                    node.CreateGroup();
-                }
-            }
-            catch (GroupException e)
-            {
-                MessageBox.Show(Runner.Runner.Instance.ComputationForm, e.Message);
-                group.DeCheckAndRemoveAll();
-            }
-        }
-
-        private void CreateGroup()
-        {
-            Group group = Group.GetGroup(this);
-            Node node = Parent as Node;
+            ComputationNode node = Parent as ComputationNode;
             if (node != null)
             {
                 Node groupNode = group.CreateNode();
