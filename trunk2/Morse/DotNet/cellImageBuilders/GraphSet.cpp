@@ -93,6 +93,16 @@ GraphSetIterator GraphSet::iterator() {
 }
 
 
+
+int GraphSet::GetNumberOfNodes() {
+	int s = 0;
+	for (GraphSetIterator it = iterator(); it.HasNext(); it.Next()) {
+		s += it->getNumberOfNodes();
+	}
+	return s;
+}
+
+
 ///////////////////////////////////////////////////////////////
 
 GraphSetIterator::GraphSetIterator(const GraphSet& graphSet) : 

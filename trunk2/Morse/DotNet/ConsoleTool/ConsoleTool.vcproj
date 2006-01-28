@@ -109,6 +109,9 @@
 	</Configurations>
 	<References>
 		<ProjectReference
+			ReferencedProjectIdentifier="{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}"
+			Name="adaptiveCellImageBuilder"/>
+		<ProjectReference
 			ReferencedProjectIdentifier="{80C14A35-BD13-463C-B296-AF3F5A254439}"
 			Name="cellImageBuilders"/>
 		<ProjectReference
@@ -131,6 +134,9 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
 			<File
 				RelativePath=".\ConsoleTool.cpp">
+			</File>
+			<File
+				RelativePath=".\FoodChain3D.cpp">
 			</File>
 			<File
 				RelativePath=".\FunctionBase.cpp">
@@ -169,6 +175,9 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
 			<File
 				RelativePath=".\ConsoleTool.h">
+			</File>
+			<File
+				RelativePath=".\FoodChain3D.h">
 			</File>
 			<File
 				RelativePath=".\FunctionBase.h">

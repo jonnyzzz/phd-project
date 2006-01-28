@@ -30,7 +30,7 @@ private:
 	};
 
 private:
-	const size_t buffer_length;
+	size_t buffer_length;
 
 private:
 	typedef list<Buffer> BuffersList;

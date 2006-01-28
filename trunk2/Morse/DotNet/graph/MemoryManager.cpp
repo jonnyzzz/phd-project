@@ -8,20 +8,26 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-MemoryManager::MemoryManager(size_t buffer_length) : buffer_length(buffer_length)
+MemoryManager::MemoryManager(size_t buffer_length) 
 {
+	if (buffer_length > 500000)
+		buffer_length = 500000;
 
+	this->buffer_length = buffer_length;
 }
+
 
 MemoryManager::~MemoryManager(void)
 {
 	for (BuffersList::iterator it = buffers.begin(); it != buffers.end(); it++) {
 		//delete[] it->data;
 		free(it->data);
+		//GlobalFree((HGLOBAL)it->data);
 	}
     for (BuffersList::iterator it = reusable.begin(); it != reusable.end(); it++) {
 		//delete[] it->data;
 		free(it->data);
+		//GlobalFree((HGLOBAL)it->data);
 	}
 }
 
@@ -31,9 +37,11 @@ MemoryManager::Buffer MemoryManager::CreateBuffer() {
 	Buffer b;
 	//b.data = new char[buffer_length];
 	b.data = (char*)malloc(sizeof(char)*buffer_length);
+	//b.data = (char*)GlobalAlloc(LMEM_FIXED, sizeof(char)*buffer_length);
 	if (b.data == NULL) {
 	  cout<<"\n\n\n!!!\n!!!\n!!! Memory Allocation Error!\n!!!\n!!!\n\n\n";
 	  throw -1;
+	  ASSERT(false);
 	}
 	b.it = b.data;
 	b.end = b.data + buffer_length;

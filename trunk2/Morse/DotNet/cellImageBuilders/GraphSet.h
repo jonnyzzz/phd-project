@@ -33,6 +33,8 @@ public:
 public:
 	GraphSetIterator iterator();
 
+	int GetNumberOfNodes();
+
 private:
 	typedef list<Graph*> GraphList;
 	GraphList graphList;

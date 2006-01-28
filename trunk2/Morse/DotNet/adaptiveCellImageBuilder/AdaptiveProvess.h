@@ -13,7 +13,7 @@ public:
 	virtual ~AdaptiveProvess(void);
 
 protected:
-    virtual void processResultNode(Node* node);
+    virtual void processResultNode(Node* node);	
 
 private:
     PointGraphProcessor* processor;

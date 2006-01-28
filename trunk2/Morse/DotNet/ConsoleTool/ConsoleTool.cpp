@@ -33,18 +33,104 @@ using namespace std;
 #include "../graph_simplex/RomFunction2N.h"
 #include "../cellImageBuilders/MS2DSIBoxProcess.h"
 
+#include "../graph_simplex/SIRom.h"
+#include "../adaptiveCellImageBuilder/AdaptiveProvess.h"
+
 #include "LogisticsMap.h"
 #include "ParametrisedLogisticsMap.h"
+#include "FoodChain3D.h"
 #include <math.h>
 
 
 
 //#define FACTORY TorstenFactory
 //#define FACTORY LogisticsMapFactory
-#define FACTORY ParametrisedLogisticsMapFactory
+//#define FACTORY ParametrisedLogisticsMapFactory
+#define FACTORY FoodChain3DFactory
 //#define SYSTEM  TorstenFunction
 //#define SYSTEM  LogisticsMap
-#define SYSTEM  ParametrisedLogisticsMap
+//#define SYSTEM  ParametrisedLogisticsMap
+#define SYSTEM  FoodChain3D
+
+
+GraphSet ProcessAdaptive(GraphSet set) {
+	FoodChain3D* func = new FoodChain3D();
+	func->ComputeDerivate(false);
+
+	double prec[3];
+	int factor[] = {2, 2, 2};
+
+	Graph* graph = set[0];
+	for(int i=0; i<3; i++) {
+		prec[i] = graph->getEps()[i]/3/factor[i];
+	}
+
+
+	ConsoleProgressBarInfo* info = new ConsoleProgressBarInfo();
+
+	AbstractProcess* ps = new AdaptiveProvess(func, graph, factor, prec, 10000, info);
+	TarjanProcess* ts = new TarjanProcess(true, info);
+
+	cout<<"Start for Adaptive process"<<endl;
+	GraphSet it = AbstractProcess::Apply(ps, set);
+	cout<<"Adaptive process finished"<<endl;
+	cout<<"Start tarjam process..."<<endl;
+	GraphSet res = AbstractProcess::Apply(ts, it);
+	cout<<"Tarjan finished"<<endl;
+	//GraphSet ans = AbstractProcess::Apply(ss, res);
+
+	delete ps;
+	delete ts;
+	delete func;
+	//res.DeleteGraphs();
+	set.DeleteGraphs();
+	it. DeleteGraphs();
+
+	delete info;
+	return res;
+}
+
+void ProcessSIMorse(GraphSet set, char* filename) {
+
+    char buff[555];
+	sprintf("%s-a%d.b%d.c%d.d%d.txt", filename, FoodChain3D::a, FoodChain3D::b, FoodChain3D::c, FoodChain3D::d);
+
+	ofstream of;
+	of.open(buff);
+
+	FoodChain3D* func = new FoodChain3D();
+	func->ComputeDerivate(true);
+
+	for(GraphSetIterator it = set.iterator(); it.HasNext(); it.Next()) {
+		of<<"Graph: Nodes = "<<it->getNumberOfNodes()<<endl;
+		of<<"       Edges = "<<it->getNumberOfArcs()<<endl;
+
+		of<<"Morse Spectrum for an det(f'):"<<endl;
+		
+		double _min;
+		double _max;
+
+		{
+			SIRom rom(it, func);
+			rom.minimize();
+
+			_min = rom.getAnswer();
+			of<<"  minimum: "<<rom.getAnswer()<< " contour length: "<<rom.getAnswerLength()<<endl;
+		} {
+			SIRom rom(it, func);
+			rom.minimize();
+
+			_max = rom.getAnswer();
+			of<<"  maximum: "<<rom.getAnswer()<< " contour length: "<<rom.getAnswerLength()<<endl;
+		}
+
+		of<<endl;
+		of<<"[ "<<_min<<" ,  "<<_max<<" ]"<<endl;
+	}
+
+	of.close();
+}
+
 
 
 GraphSet Process(GraphSet set) {
@@ -111,6 +197,10 @@ void ProcessMS(GraphSet& set, MS2DAngleFunction* afunc, bool needEdge, int* fact
 
 
 
+
+
+
+
 int main(int argc, char** argv) {
 	
 	FACTORY::Dump();
@@ -123,6 +213,33 @@ int main(int argc, char** argv) {
 	if ( strcmp(argv[1], "-init") == 0 ) {
 		GraphSet set(FACTORY::CreateGraph());
 		Util::SaveGraphSet(set, argv[2]);
+	}else if ( strcmp(argv[1], "-iter_foodsi") == 0 ) {
+
+		int upper;
+		sscanf(argv[2],"%d", &upper);
+
+		double a[] =  {3.3701, 3.4001, 3.48, 3.532, 3.54, 3.57, 3.571 };
+		int m = sizeof(a)/sizeof(double);
+
+		for (int i=0; i<m; i++) {
+
+			FoodChain3D::a = a[i];
+			FoodChain3D::b = 1;
+			FoodChain3D::c = 4;
+			FoodChain3D::d = 4;
+
+			GraphSet set = GraphSet(FoodChain3DFactory().CreateGraph());
+
+			while (set.GetNumberOfNodes() < upper) {
+				set = ProcessAdaptive(set);
+				cout<<"Step result nodes : "<< set.GetNumberOfNodes() <<endl;
+			}
+
+			ProcessSIMorse(set, argv[3]);
+
+			set.DeleteGraphs();
+		}
+
 	}else if ( strcmp(argv[1], "-iter_all") == 0 ) {
 		int itsSI = 0;
 		int itsMSOnly = 0;
