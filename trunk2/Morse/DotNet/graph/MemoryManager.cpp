@@ -7,12 +7,10 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
-
-MemoryManager::MemoryManager(size_t buffer_length) 
+MemoryManager::MemoryManager(size_t buffer_length)
 {
-	if (buffer_length > 500000)
-		buffer_length = 500000;
-
+	if (buffer_length > 511000)
+		buffer_length = 511000;
 	this->buffer_length = buffer_length;
 }
 
@@ -40,8 +38,9 @@ MemoryManager::Buffer MemoryManager::CreateBuffer() {
 	//b.data = (char*)GlobalAlloc(LMEM_FIXED, sizeof(char)*buffer_length);
 	if (b.data == NULL) {
 	  cout<<"\n\n\n!!!\n!!!\n!!! Memory Allocation Error!\n!!!\n!!!\n\n\n";
+	  cout<<endl<<"Buffer size is "<<buffer_length<<endl<<endl<<endl<<endl;
 	  throw -1;
-	  ASSERT(false);
+	  ATLASSERT(false);
 	}
 	b.it = b.data;
 	b.end = b.data + buffer_length;

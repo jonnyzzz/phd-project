@@ -151,6 +151,9 @@
 				RelativePath=".\Rom.cpp">
 			</File>
 			<File
+				RelativePath=".\RomAdapter.cpp">
+			</File>
+			<File
 				RelativePath=".\RomDebug.cpp">
 			</File>
 			<File
@@ -190,6 +193,9 @@
 			</File>
 			<File
 				RelativePath=".\Rom.h">
+			</File>
+			<File
+				RelativePath=".\RomAdapter.h">
 			</File>
 			<File
 				RelativePath=".\RomDebug.h">

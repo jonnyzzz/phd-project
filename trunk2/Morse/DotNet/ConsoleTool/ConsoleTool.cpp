@@ -34,6 +34,7 @@ using namespace std;
 #include "../cellImageBuilders/MS2DSIBoxProcess.h"
 
 #include "../graph_simplex/SIRom.h"
+#include "../graph_simplex/RomAdapter.h"
 #include "../adaptiveCellImageBuilder/AdaptiveProvess.h"
 
 #include "LogisticsMap.h"
@@ -52,10 +53,11 @@ using namespace std;
 //#define SYSTEM  ParametrisedLogisticsMap
 #define SYSTEM  FoodChain3D
 
+ofstream logstream;
+
 
 GraphSet ProcessAdaptive(GraphSet set) {
 	FoodChain3D* func = new FoodChain3D();
-	func->ComputeDerivate(false);
 
 	double prec[3];
 	int factor[] = {2, 2, 2};
@@ -68,14 +70,19 @@ GraphSet ProcessAdaptive(GraphSet set) {
 
 	ConsoleProgressBarInfo* info = new ConsoleProgressBarInfo();
 
-	AbstractProcess* ps = new AdaptiveProvess(func, graph, factor, prec, 10000, info);
+	//AbstractProcess* ps = new AdaptiveProvess(func, graph, factor, prec, 500, info);
+	AbstractProcess* ps = new SimpleBoxProcess(graph, func, factor, info);
 	TarjanProcess* ts = new TarjanProcess(true, info);
 
 	cout<<"Start for Adaptive process"<<endl;
+
 	GraphSet it = AbstractProcess::Apply(ps, set);
+	
 	cout<<"Adaptive process finished"<<endl;
 	cout<<"Start tarjam process..."<<endl;
+	
 	GraphSet res = AbstractProcess::Apply(ts, it);
+	
 	cout<<"Tarjan finished"<<endl;
 	//GraphSet ans = AbstractProcess::Apply(ss, res);
 
@@ -93,42 +100,81 @@ GraphSet ProcessAdaptive(GraphSet set) {
 void ProcessSIMorse(GraphSet set, char* filename) {
 
     char buff[555];
-	sprintf("%s-a%d.b%d.c%d.d%d.txt", filename, FoodChain3D::a, FoodChain3D::b, FoodChain3D::c, FoodChain3D::d);
+	sprintf(buff, "%s-a%f.b%f.c%f.d%f.txt", filename, FoodChain3D::a, FoodChain3D::b, FoodChain3D::c, FoodChain3D::d);	
+	
+	logstream<<endl;
 
 	ofstream of;
 	of.open(buff);
 
-	FoodChain3D* func = new FoodChain3D();
-	func->ComputeDerivate(true);
-
-	for(GraphSetIterator it = set.iterator(); it.HasNext(); it.Next()) {
-		of<<"Graph: Nodes = "<<it->getNumberOfNodes()<<endl;
-		of<<"       Edges = "<<it->getNumberOfArcs()<<endl;
-
-		of<<"Morse Spectrum for an det(f'):"<<endl;
-		
-		double _min;
-		double _max;
-
-		{
-			SIRom rom(it, func);
-			rom.minimize();
-
-			_min = rom.getAnswer();
-			of<<"  minimum: "<<rom.getAnswer()<< " contour length: "<<rom.getAnswerLength()<<endl;
-		} {
-			SIRom rom(it, func);
-			rom.minimize();
-
-			_max = rom.getAnswer();
-			of<<"  maximum: "<<rom.getAnswer()<< " contour length: "<<rom.getAnswerLength()<<endl;
-		}
-
-		of<<endl;
-		of<<"[ "<<_min<<" ,  "<<_max<<" ]"<<endl;
+	if (set.Length() == 0) {
+		of<<"NO Strong components to compute";
+		of.close();
+		return;
 	}
 
+	FoodChain3DDerivate* func = new FoodChain3DDerivate();
+
+	list<CRomResult> romResults;
+
+	for(GraphSetIterator it = set.iterator(); it.HasNext(); it.Next()) {
+		cout<<"----> Begin ";
+        
+		of       <<"Graph: Nodes = "<<it->getNumberOfNodes()<<endl;
+		logstream<<"Graph: Nodes = "<<it->getNumberOfNodes()<<endl;
+		of       <<"       Edges = "<<it->getNumberOfArcs()<<endl;
+		logstream<<"       Edges = "<<it->getNumberOfArcs()<<endl;
+
+		of       <<"Morse Spectrum for an det(f'):"<<endl;
+		logstream<<"Morse Spectrum for an det(f'):"<<endl;
+		
+		CRomAdapter rom(new SIRom(it, static_cast<ISystemFunctionDerivate*>(func)));
+		
+		CRomResult result = rom.Compute(NULL);
+		romResults.push_back(result);
+		
+		of       <<"  minimum: "<<scientific<<result.left.value<< " contour length: "<<result.left.length<<endl;
+		logstream<<"  minimum: "<<scientific<<result.left.value<< " contour length: "<<result.left.length<<endl;
+
+		       of<<"  maximum: "<<scientific<<result.right.value<< " contour length: "<<result.right.length<<endl;
+		logstream<<"  maximum: "<<scientific<<result.right.value<< " contour length: "<<result.right.length<<endl;
+		
+		of       <<endl;
+		logstream<<endl;
+		of       <<"[ "<<result.left.value<<" ,  "<<result.right.value<<" ]"<<endl;
+		logstream<<"[ "<<result.left.value<<" ,  "<<result.right.value<<" ]"<<endl;
+	}
+
+	logstream<<endl<<"Results for computation, all in one:"<<endl;
+	of<<endl<<"Results for computation, all in one:"<<endl;
+	int index = 1;
+	logstream<<fixed;
+	of<<fixed;
+	for(list<CRomResult>::iterator it = romResults.begin(); it != romResults.end(); it++) {
+		CRomResult result = *it;
+		logstream<<(index)<<". ";
+		of<<(index)<<". ";
+		index++;
+		logstream<<"[ "<<result.left.value<<" ,  "<<result.right.value<<" ]"<<endl;
+		of<<"[ "<<result.left.value<<" ,  "<<result.right.value<<" ]"<<endl;
+	}
+
+	logstream<<"End"<<endl;
+	of<<"End"<<endl;
+
+	logstream.flush();
+	logstream<<endl<<endl<<endl;	
+	
 	of.close();
+
+	cout<<"After close"<<endl;
+	delete func;
+
+	char bf[555], ff[555];
+	sprintf(bf, "%s.points", buff);
+	sprintf(ff, "a = %f, b = %f, c = %f, d = %f ", FoodChain3D::a, FoodChain3D::b, FoodChain3D::c, FoodChain3D::d);
+
+    Util::ExportPoints(set, bf, "points/", ff);
 }
 
 
@@ -200,8 +246,7 @@ void ProcessMS(GraphSet& set, MS2DAngleFunction* afunc, bool needEdge, int* fact
 
 
 
-
-int main(int argc, char** argv) {
+int _tmain(int argc, char** argv) {
 	
 	FACTORY::Dump();
 
@@ -215,6 +260,10 @@ int main(int argc, char** argv) {
 		Util::SaveGraphSet(set, argv[2]);
 	}else if ( strcmp(argv[1], "-iter_foodsi") == 0 ) {
 
+		char buff[555];
+		sprintf(buff, "%s.log", argv[3]);
+		logstream.open(buff);
+		
 		int upper;
 		sscanf(argv[2],"%d", &upper);
 
@@ -222,23 +271,94 @@ int main(int argc, char** argv) {
 		int m = sizeof(a)/sizeof(double);
 
 		for (int i=0; i<m; i++) {
+			logstream<<"Next step started"<<endl;
+			logstream.flush();
 
 			FoodChain3D::a = a[i];
 			FoodChain3D::b = 1;
 			FoodChain3D::c = 4;
 			FoodChain3D::d = 4;
 
+			logstream<<"For parameters"<<endl;
+			logstream<<"  a="<<FoodChain3D::a<<endl;
+			logstream<<"  b="<<FoodChain3D::b<<endl;
+			logstream<<"  c="<<FoodChain3D::c<<endl;
+			logstream<<"  d="<<FoodChain3D::d<<endl;
+
 			GraphSet set = GraphSet(FoodChain3DFactory().CreateGraph());
 
-			while (set.GetNumberOfNodes() < upper) {
+			while (set.GetNumberOfNodes() < upper && set.Length() != 0) {
+				logstream.flush();
+
+				set = ProcessAdaptive(set);
+				cout<<"Step result nodes : "<< set.GetNumberOfNodes() <<endl;
+			}
+			if (set.Length() != 0 )
+				ProcessSIMorse(set, argv[3]);			
+
+			logstream<<"Morse Finished"<<endl;
+			logstream.flush();			
+
+			set.DeleteGraphs();
+		}
+		
+
+		logstream.close();
+
+	}else if ( strcmp(argv[1], "-iter_foodsiex") == 0 ) {
+
+		char buff[555];
+		sprintf(buff, "%s.log", argv[3]);
+		logstream.open(buff);
+		
+		int upper;
+		sscanf(argv[2],"%d", &upper);
+
+		float st;
+		float en;
+		float step;
+
+		sscanf(argv[4], "%f", &st);
+		sscanf(argv[5], "%f", &en);
+		sscanf(argv[6], "%f", &step);
+
+
+		for (double v=st; v<=en; v += step) {
+			logstream<<"Next step started"<<endl;
+			logstream.flush();
+
+			FoodChain3D::a = v;
+			FoodChain3D::b = 1;
+			FoodChain3D::c = 4;
+			FoodChain3D::d = 4;
+
+			logstream<<"For parameters"<<endl;
+			logstream<<"  a="<<FoodChain3D::a<<endl;
+			logstream<<"  b="<<FoodChain3D::b<<endl;
+			logstream<<"  c="<<FoodChain3D::c<<endl;
+			logstream<<"  d="<<FoodChain3D::d<<endl;
+
+			GraphSet set = GraphSet(FoodChain3DFactory().CreateGraph());
+
+			while (set.GetNumberOfNodes() < upper && set.Length() != 0) {
+				logstream.flush();
+
 				set = ProcessAdaptive(set);
 				cout<<"Step result nodes : "<< set.GetNumberOfNodes() <<endl;
 			}
 
-			ProcessSIMorse(set, argv[3]);
+			if (set.Length() != 0) {
+				ProcessSIMorse(set, argv[3]);			
+			}
 
+			logstream<<"Morse Finished"<<endl;
+			logstream.flush();
+			
 			set.DeleteGraphs();
 		}
+		
+
+		logstream.close();
 
 	}else if ( strcmp(argv[1], "-iter_all") == 0 ) {
 		int itsSI = 0;

@@ -8,29 +8,29 @@ SIRom::SIRom(Graph* graph, ISystemFunctionDerivate* function) : CRom(graph), gra
 {
 	input = function->getInput();
 	output = function->getOutput();
-	dimension = function->getFunctionDimension();
+	dimension = graph->getDimention();
+
+	cout<<"SI Rom for dimension = "<<dimension<<endl;
 }
 
 SIRom::~SIRom(void)
 {
+	cout<<"SIRom dispose"<<endl;
 }
 
 
 
 double SIRom::cost(Node* node) {
-	graph->toExternal(graph->getCells(node), input);
-	function->evaluate();
-
-	double tmp = (exhaussDet());
-
-	//cout<<"\n\n"<<getAt(0,0)<<"\t"<<getAt(1, 0)<<"\n"<<getAt(0,1)<<"\t"<<getAt(1,1)<<"\nResult="<<tmp<<"\n\n";
-
-	return log(Abs(tmp)) * factor;
+	for (int i=0; i<dimension; i++) {
+        input[i] = graph->toExternal(graph->getCells(node)[i], i) + graph->getEps()[i]/2;
+    }
+    function->evaluate();	
+	return log(Abs(exhaussDet())) * factor;
 }
 
 
 
-double& SIRom::getAt(int i, int j) {
+double inline SIRom::getAt(int i, int j) {
 	return output[i+j*dimension + dimension];
 }
 

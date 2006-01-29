@@ -4,8 +4,23 @@
 #include "../SystemFunction/ISystemFunctionDerivate.h"
 class Graph;
 
+class FoodChain3DBase {
+
+private:
+	double g(double x);
+
+public:
+	static double a;
+	static double b;
+	static double c;
+	static double d;
+
+protected:
+	void Evaluate(double* input, double* output, bool needDerivate);
+};
+
  
-class FoodChain3D : public FunctionBase
+class FoodChain3D : public FunctionBase, public FoodChain3DBase
 {
  public:
 	FoodChain3D(void);
@@ -13,29 +28,26 @@ class FoodChain3D : public FunctionBase
 	virtual ~FoodChain3D(void);
 
 public: 
-	virtual void evaluate();
-	virtual int getFunctionDimension();
+	virtual void evaluate();   
+};
 
-private:
-	double g(double x);
-	double Max(double x, double y);
-public:
-	static double a;
-	static double b;
-	static double c;
-	static double d;
+class FoodChain3DDerivate : public FunctionBaseDerivate, public FoodChain3DBase
+{
+ public:
+	FoodChain3DDerivate(void);
+	FoodChain3DDerivate(double *input, double* output);
+	virtual ~FoodChain3DDerivate(void);
+
+public: 
+	virtual void evaluate();   
 };
 
 
 class FoodChain3DFactory {
 public:
-	ISystemFunction* Create(double* in, double* out) {
-		return new FoodChain3D(in, out);
-	}
 	static const int Dim;	
 
 	static Graph* CreateGraph();
 	
 	static void Dump();
-
 };

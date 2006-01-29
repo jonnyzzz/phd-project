@@ -27,7 +27,7 @@ GraphSet::GraphSet(const GraphSet& graphSet) {
 }
 
 GraphSet::~GraphSet() {
-
+	cout<<"GraphSet dispose"<<endl;
 }
 
 
@@ -96,8 +96,8 @@ GraphSetIterator GraphSet::iterator() {
 
 int GraphSet::GetNumberOfNodes() {
 	int s = 0;
-	for (GraphSetIterator it = iterator(); it.HasNext(); it.Next()) {
-		s += it->getNumberOfNodes();
+	for (GraphList::const_iterator it = graphList.begin(); it != graphList.end(); it++) {
+		s += (*it)->getNumberOfNodes();
 	}
 	return s;
 }
@@ -110,6 +110,11 @@ GraphSetIterator::GraphSetIterator(const GraphSet& graphSet) :
 {
 
 }
+
+GraphSetIterator::~GraphSetIterator() {
+	cout<<"GraphSetIterator Dispose"<<endl;
+}
+
 
 bool GraphSetIterator::HasNext() {
 	return index < graphSet.Length();

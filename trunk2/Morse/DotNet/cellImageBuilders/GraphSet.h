@@ -56,6 +56,7 @@ private:
 
 public:
 	GraphSetIterator(const GraphSet& graphSet);
+	~GraphSetIterator();
 
 public:
 	bool HasNext();

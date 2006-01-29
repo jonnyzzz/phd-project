@@ -54,8 +54,8 @@ Graph::Graph(int dimention, const JDouble* min, const JDouble* max, const JInt* 
 	      sizeof(TarjanNode) 
 		   +  sizeof(Edge)*edgeHashMax 
 		   + sizeof(JInt)*dimention*nodeHashMax 
-		   + sizeof(void*)*nodeHashMax
-		)*16384
+		   + sizeof(void*)*5
+		)*128
       ),
 	isTarjanable(tarjanable), nodeHashMax(nodeHashMax), edgeHashMax(edgeHashMax)
 {	

@@ -23,7 +23,7 @@ private:
 	int dimension;
 
 private:
-	double& getAt(int i, int j);
+	double getAt(int i, int j);
 	double Abs(double x);
 
 	double exhaussDet();

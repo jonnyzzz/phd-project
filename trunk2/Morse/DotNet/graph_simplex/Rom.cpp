@@ -24,13 +24,21 @@ graph(graph)
 {
 	factor = 0;
 	nodes = new ContourNode[graph->getNumberOfNodes()+1];
+	if (nodes == NULL) {
+		cout<<endl<<endl<<endl;
+		cout<<"!!!!!!!!!!!!!!!!!11ROM ALLOC ERROR!!!!!!!!!!!!!!!!!!!!!!!1";
+		cout<<endl<<endl<<endl;
+		ASSERT(false);
+	}
 	nodes_alloc = nodes;
 }
 
 
 CRom::~CRom(void)
 {
+	cout<<" WWW "<<endl;
 	delete[] nodes;
+	cout<<" WWW2 "<<endl;
 }
 
 

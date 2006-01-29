@@ -767,7 +767,9 @@ Global
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.VisualizationDebug.Build.0 = Debug|.NET
 		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.ConsoleToolDebug.ActiveCfg = Debug|Win32
-		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.ConsoleToolRelease.ActiveCfg = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.ConsoleToolDebug.Build.0 = Debug|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.ConsoleToolRelease.ActiveCfg = Release|Win32
+		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.ConsoleToolRelease.Build.0 = Release|Win32
 		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Debug.ActiveCfg = Debug|Win32
 		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Debug.Build.0 = Debug|Win32
 		{1A4D2782-04FA-4F8B-82C4-D5588681DCBC}.Debug2.ActiveCfg = Debug|Win32
@@ -866,7 +868,6 @@ Global
 		{72E29203-553F-49EE-9B55-C36EDB280968}.VisualizationDebug.ActiveCfg = Debug|Win32
 		{72E29203-553F-49EE-9B55-C36EDB280968}.VisualizationDebug.Build.0 = Debug|Win32
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.ConsoleToolDebug.ActiveCfg = Debug|.NET
-		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.ConsoleToolDebug.Build.0 = Debug|.NET
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.ConsoleToolRelease.ActiveCfg = Release|.NET
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.ConsoleToolRelease.Build.0 = Release|.NET
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.Debug.ActiveCfg = Debug|.NET

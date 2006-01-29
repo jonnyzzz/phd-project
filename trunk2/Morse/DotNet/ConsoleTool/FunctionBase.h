@@ -5,7 +5,7 @@
 #include "../SystemFunction/ISystemFunction.h"
 #include "../SystemFunction/ISystemFunctionDerivate.h"
 
-class FunctionBase : public ISystemFunctionDerivate
+class FunctionBase : public ISystemFunction
 {
 public:
 	FunctionBase(int dim, int iter);
@@ -25,18 +25,40 @@ protected:
 
 private:
 	bool selfCreated;
-	bool computeDerivate;
-
-public:
-	void ComputeDerivate(bool value);
-
-protected:
-    bool ComputeDerivate();
 
 public:
 	virtual bool isNative() {return true;};
 	virtual bool hasFunction() {return true;};
 	virtual bool hasDerivative() {return false;};	
 };
+
+class FunctionBaseDerivate : public ISystemFunctionDerivate
+{
+public:
+	FunctionBaseDerivate(int dim, int iter);
+	FunctionBaseDerivate(int dim, int iter, double* input, double* output);
+	virtual ~FunctionBaseDerivate();
+
+public:
+    virtual double* getInput();
+    virtual double* getOutput(); //f1, f2, ...
+
+public:
+	virtual int getFunctionDimension();
+
+protected:
+	double* input;
+	double* output;
+
+private:
+	bool selfCreated;
+	int dim;
+
+public:
+	virtual bool isNative() {return true;};
+	virtual bool hasFunction() {return true;};
+	virtual bool hasDerivative() {return true;};	
+};
+
 
 #endif
