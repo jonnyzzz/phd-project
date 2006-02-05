@@ -128,7 +128,31 @@
    	    <constraint class="OneParentResultsConstraint"/>
 		    <constraint class="DefaultConstraintFactory" metadata="IMSSegmentMetadata" result="IGraphResult" />
 		    <constraint class="StrongCompGraphsConstraintFactory" />		
-		</action>						
+		</action>			
+		
+		<action name="ISeparatorAction" isLeaf="false"/>
+		
+		<action name="IMSAngleCreationMethod" isLeaf="true" >
+		    <constraint class="OneParentResultsConstraint"/>
+		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />		    
+		    <constraint class="FixedDimensionConstraintFactory" dimension="2,3" />
+		</action>
+		
+		<action name="IMSAngleMethod" isLeaf="false">
+		  <constraint class="OneParentResultsConstraint"/>
+			<constraint class="DefaultConstraintFactory" metadata="IMSAngleMetadata" result="IGraphResult" />
+			<constraint class="FixedDimensionConstraintFactory" dimension="3,5" />
+		    <nextActions>		
+				<actionReference name="ITarjanAction" isLeaf="true" />
+			</nextActions>				    
+		</action>
+		
+		<action name="IMSAngleRomProcess" isLeaf="true">
+   	    <constraint class="OneParentResultsConstraint"/>
+		    <constraint class="DefaultConstraintFactory" metadata="IMSAngleMetadata" result="IGraphResult" />
+		    <constraint class="StrongCompGraphsConstraintFactory" />		
+		</action>			
+					
     </actions>
     
     <names>
@@ -149,7 +173,10 @@
 		<action name="IMSMethodAction" caption="Segment Projective Bundle Point Method Next Step" > You need Segment Projective Bundle Node </action>
 		<action name="IMSAdaptiveMethod" caption="Adaptive Segment Projective Bundle Next Step" > You need Segment Projective Bundle Node </action>
 		<action name="IMSCreationProcess" caption="Create Segment Projective Bundle Next Step" />		
-		<action name="IMSSegmentRom" caption="Segment Projective Bundle Estimate Morse Spectrum" />		
+		<action name="IMSSegmentRom" caption="Segment Projective Bundle Estimate Morse Spectrum" />			
+		<action name="IMSAngleCreationMethod" caption="Create Angle Projective Bundle" />		
+		<action name="IMSAngleMethod" caption="Angle Projective Bundle Adaptve Next Step" />		
+		<action name="IMSAngleRomProcess" caption="Angle Projective Bundle Estimate Morse Spectrum" />		
     </names>
 
 	<assemblies>	

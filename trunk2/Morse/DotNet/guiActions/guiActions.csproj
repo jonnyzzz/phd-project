@@ -309,6 +309,21 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\MSAngle\MSAngleAdaptive.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MSAngle\MSAngleCreationAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\MSAngle\MSAngleRomAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\actionImpl\MSSegment\Create\MSCreationAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

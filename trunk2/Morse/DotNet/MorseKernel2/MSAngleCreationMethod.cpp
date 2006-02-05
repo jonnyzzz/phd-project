@@ -1,7 +1,7 @@
-// MSCreationProcess.cpp : Implementation of CMSCreationProcess
+// MSAngleCreationMethod.cpp : Implementation of CMSAngleCreationMethod
 
 #include "stdafx.h"
-#include "MSCreationProcess.h"
+#include "MSAngleCreationMethod.h"
 #include "GraphResultWrapper.h"
 #include "GraphResultUtil.h"
 #include "GraphResult.h"
@@ -12,21 +12,24 @@
 #include "../cellImageBuilders/SegmentProjectiveBundleMSCreationProcess.h"
 #include "MSSegmentMetadata.h"
 #include "SymbolicImageMetadata.h"
+#include "MSAngleMetadata.h"
+#include "../cellImageBuilders/MSAngleCreationProcess.h"
 
-// CMSCreationProcess
 
-CMSCreationProcess::CMSCreationProcess() {
+
+CMSAngleCreationMethod::CMSAngleCreationMethod() {
 }
 
-HRESULT CMSCreationProcess::FinalConstruct() {
-    return S_OK;
+HRESULT CMSAngleCreationMethod::FinalConstruct() {
+	return S_OK;
 }
 
-void CMSCreationProcess::FinalRelease() {
+void CMSAngleCreationMethod::FinalRelease() {
 }
 
+// CMSAngleCreationMethod
 
-STDMETHODIMP CMSCreationProcess::CanDo(IResultSet* in, VARIANT_BOOL* out) {
+STDMETHODIMP CMSAngleCreationMethod::CanDo(IResultSet* in, VARIANT_BOOL* out) {
      if  (GraphResultUtil::ContainsGraphOnly(in, false) && 
          GraphResultUtil::ContainsMetadataOnly<ISymbolicImageMetadata>(in)) {
              *out = VARIANT_TRUE;
@@ -36,25 +39,25 @@ STDMETHODIMP CMSCreationProcess::CanDo(IResultSet* in, VARIANT_BOOL* out) {
          return S_OK;
 }
 
-STDMETHODIMP CMSCreationProcess::GetDimension(IResultSet* in, int *dim) {
+STDMETHODIMP CMSAngleCreationMethod::GetDimension(IResultSet* in, int *dim) {
 	VARIANT_BOOL canDo;
 	CanDo(in, &canDo);
 
 	ATLASSERT(canDo == VARIANT_TRUE);
 
     GraphResultGraphIterator it(in);
-    *dim = it.Current()->getDimention()*2;
+    *dim = it.Current()->getDimention()*2 - 1;
 
     return S_OK;
 }
 
-STDMETHODIMP CMSCreationProcess::Do(IResultSet* in, IResultSet **out) {
+STDMETHODIMP CMSAngleCreationMethod::Do(IResultSet* in, IResultSet **out) {
 	VARIANT_BOOL canDo;
 	CanDo(in, &canDo);
 
 	ATLASSERT(canDo == VARIANT_TRUE);
 
-	ProgressBarNotificationAdapter pinfo(info);
+	ProgressBarNotificationAdapter* pinfo = new ProgressBarNotificationAdapter(info);
 
     HRESULT hr;
     
@@ -70,14 +73,15 @@ STDMETHODIMP CMSCreationProcess::Do(IResultSet* in, IResultSet **out) {
         ATLASSERT(SUCCEEDED(hr));
     }  	    
     
-    SegmentProjectiveBundleMSCreationProcess process(it, factor, &pinfo);
-    SmartInterface<IMSSegmentMetadata> metadata;    
-    CMSSegmentMetadata::CreateInstance(metadata.extract());
+	MSAngleCreationProcess process(it, factor, pinfo);
+    SmartInterface<IMSAngleMetadata> metadata;    
+    CMSAngleMetadata::CreateInstance(metadata.extract());
 
     GraphResultUtil::PerformProcess(&process, in, false, metadata, out);
     ATLASSERT(*out != NULL);
 
-	delete factor;
+	delete[] factor;
+	delete pinfo;
 
     return S_OK;
 }

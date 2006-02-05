@@ -23,10 +23,19 @@ public:
 		ATLASSERT(*out != NULL);
 		return S_OK;
 	}
+
+	HRESULT _MetadataBase_GetTypeName(BSTR* str) {
+		CString string = "NOT_IMPL";
+		if (str == NULL) 
+			return E_FAIL;
+		*str = string.AllocSysString();
+		return E_NOTIMPL;
+	}
 };
 
 
 #define DECLARE_RESULT_METADATA_DECLARE_BASE()  \
 	public: \
  STDMETHOD(EqualType)(IResultMetadata* metadata, VARIANT_BOOL* out) { return _MetadataBase_EqualType(metadata, out); } \
- STDMETHOD(Clone)(IResultMetadata** out) { return _MetadataBase_Clone(out);}
+ STDMETHOD(Clone)(IResultMetadata** out) { return _MetadataBase_Clone(out);}  \
+ STDMETHOD(GetTypeName)(BSTR* data) { return _MetadataBase_GetTypeName(data); }

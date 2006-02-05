@@ -281,6 +281,18 @@
 				RelativePath=".\MSAdaptiveAction.cpp">
 			</File>
 			<File
+				RelativePath=".\MSAngleCreationMethod.cpp">
+			</File>
+			<File
+				RelativePath=".\MSAngleMetadata.cpp">
+			</File>
+			<File
+				RelativePath=".\MSAngleMethod.cpp">
+			</File>
+			<File
+				RelativePath=".\MSAngleRomProcess.cpp">
+			</File>
+			<File
 				RelativePath=".\MSCreationProcess.cpp">
 			</File>
 			<File
@@ -488,6 +500,18 @@
 			</File>
 			<File
 				RelativePath=".\MSAdaptiveAction.h">
+			</File>
+			<File
+				RelativePath=".\MSAngleCreationMethod.h">
+			</File>
+			<File
+				RelativePath=".\MSAngleMetadata.h">
+			</File>
+			<File
+				RelativePath=".\MSAngleMethod.h">
+			</File>
+			<File
+				RelativePath=".\MSAngleRomProcess.h">
 			</File>
 			<File
 				RelativePath=".\MSCreationProcess.h">

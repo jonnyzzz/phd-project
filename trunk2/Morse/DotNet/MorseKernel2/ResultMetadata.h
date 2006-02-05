@@ -17,4 +17,8 @@ __interface IResultMetadata : IDispatch
 	HRESULT EqualType([in] IResultMetadata* metadata, [out, retval] VARIANT_BOOL* out);
 	[id(21)]
 	HRESULT Clone([out, retval] IResultMetadata** metadata);
+
+	[id(19)]
+	HRESULT GetTypeName([out,retval] BSTR* name);
+
 };

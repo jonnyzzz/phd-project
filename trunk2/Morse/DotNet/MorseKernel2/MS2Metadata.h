@@ -56,6 +56,7 @@ public:
 
     STDMETHOD(EqualType)(IResultMetadata* metadata, VARIANT_BOOL* out);
     STDMETHOD(Clone)(IResultMetadata** out);
+	STDMETHOD(GetTypeName)(BSTR* name);
 
     STDMETHOD(GetSIGraphResult)(IResultSet** out);
     STDMETHOD(SetSIGraphResult)(IResultSet* in);

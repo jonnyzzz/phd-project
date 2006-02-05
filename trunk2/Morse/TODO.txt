@@ -1,3 +1,4 @@
+Implement IResultMetadata.GetTypeName method, to make Serialization for metadata object in .NET
 Use ngen utiliry when installing to speed up application perfomance
 Implement MemoryManager to STL Allocator bridge.
 FIX Interval Evaluation in release mode don't works

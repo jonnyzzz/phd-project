@@ -8,7 +8,7 @@
 #include "../graph/Graph.h"
 
 
-MSAnglePointGraphProcessor::MSAnglePointGraphProcessor(Graph* graph, ISystemFunction* func, ISystemFunctionDerivate* dfunc, double* precision, size_t upperLimit)
+MSAnglePointGraphProcessor::MSAnglePointGraphProcessor(Graph* graph, ISystemFunction* func, ISystemFunctionDerivate* dfunc, double* precision, size_t upperBase, size_t upperProj)
 : functionBase(func), graph(graph), dfunctionBase(dfunc)
 {
 	dimension = graph->getDimention();
@@ -16,8 +16,8 @@ MSAnglePointGraphProcessor::MSAnglePointGraphProcessor(Graph* graph, ISystemFunc
 
 	functionProj = new MSAngleFunction(dfunctionBase);
 
-	pointGraphBase = new IntersectingPointGraph(graph, functionBase, dimensionBase, upperLimit);
-	pointGraphProj = new MSAdaptivePointGraph(functionProj, dimensionBase - 1, upperLimit);
+	pointGraphBase = new IntersectingPointGraph(graph, functionBase, dimensionBase, upperBase);
+	pointGraphProj = new MSAdaptivePointGraph(functionProj, dimensionBase - 1, upperProj);
 
 	pointGraphBuilderBase = new PointGraphBuilder(0, dimensionBase, graph->getEps(), pointGraphBase);
 	pointGraphBuilderProj = new PointGraphBuilder(dimensionBase, dimension, graph->getEps(), pointGraphProj);

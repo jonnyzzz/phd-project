@@ -11,7 +11,7 @@ struct Node;
 class MSAnglePointGraphProcessor
 {
 public:
-	MSAnglePointGraphProcessor(Graph* graph, ISystemFunction* func, ISystemFunctionDerivate* dfunction, double* precision, size_t upperLimit);
+	MSAnglePointGraphProcessor(Graph* graph, ISystemFunction* func, ISystemFunctionDerivate* dfunction, double* precision, size_t upperBase, size_t upperProj);
 	~MSAnglePointGraphProcessor(void);
 
 public:

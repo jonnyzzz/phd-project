@@ -181,6 +181,8 @@ interface IResultMetadata : IDispatch {
 	[id(20)] HRESULT  EqualType([in] IResultMetadata *metadata, [out,retval] VARIANT_BOOL *out);
 #line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\resultmetadata.h"
 	[id(21)] HRESULT  Clone([out,retval] IResultMetadata **metadata );
+#line 22 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\resultmetadata.h"
+	[id(19)] HRESULT  GetTypeName([out,retval] BSTR *name );
 };
 
 [
@@ -891,6 +893,50 @@ interface IMSMethodAction : IPointMethodAction {
 interface IMSSegmentRom : IAction {
 };
 
+[
+	object,
+	uuid(87FF96BE-B389-4AFA-8B6C-89E2E9AFD50F),
+	dual,
+	helpstring("IAdaptiveBoxMethod Interface"),
+	pointer_default(unique)
+] 
+#line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msanglemethod.h"
+interface IMSAngleMethod : IAdaptiveMethodAction {
+};
+
+[
+	object,
+	uuid(9C056BFB-EC29-4AD8-BBAF-18F6AB76EAA0),
+	dual,
+	helpstring("IMSAngleMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msanglemetadata.h"
+interface IMSAngleMetadata : IMSMetadata {
+};
+
+[
+	object,
+	uuid(4158B932-72E7-46DA-A98C-959B0C9A101E),
+	dual,
+	helpstring("IAdaptiveBoxMethod Interface"),
+	pointer_default(unique)
+] 
+#line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msanglecreationmethod.h"
+interface IMSAngleCreationMethod : IMSCreationProcess {
+};
+
+[
+	object,
+	uuid(293FB7DB-0C75-4E8D-A2D2-DC4BC662C62F),
+	dual,
+	helpstring("IMSAngleRomProcess Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msangleromprocess.h"
+interface IMSAngleRomProcess : IAction {
+};
+
 
 [ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}"), helpstring("MorseKernel2 1.0 Type Library") ]
 library MorseKernel2
@@ -1334,6 +1380,56 @@ library MorseKernel2
 #line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\mssegmentrom.h"
 	coclass CMSSegmentRom {
 		interface IMSSegmentRom;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(67446F52-3C7A-4019-84B6-4B2837860BC2),
+		helpstring("MSAngleMethod Class")
+	] 
+#line 34 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msanglemethod.h"
+	coclass CMSAngleMethod {
+		interface IMSAngleMethod;
+		interface IAdaptiveMethodAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(C9400229-3A87-43BA-9819-07EC65EBCD10),
+		helpstring("MSAngleMetadata Class")
+	] 
+#line 36 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msanglemetadata.h"
+	coclass CMSAngleMetadata {
+		interface IMSAngleMetadata;
+		interface IMSMetadata;
+		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
+		uuid(7CF17A33-3F8B-4BDB-A694-F18DE6355B6D),
+		helpstring("MSAngleCreationMethod Class")
+	] 
+#line 34 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msanglecreationmethod.h"
+	coclass CMSAngleCreationMethod {
+		interface IMSAngleCreationMethod;
+		interface IMSCreationProcess;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(B86EA936-EB19-4A0A-A51D-6823E2A089AB),
+		helpstring("MSAngleRomProcess Class")
+	] 
+#line 35 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\msangleromprocess.h"
+	coclass CMSAngleRomProcess {
+		interface IMSAngleRomProcess;
 		interface IAction;
 		interface IActionBase;
 	};

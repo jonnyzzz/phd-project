@@ -40,6 +40,9 @@ STDMETHODIMP CMS2Metadata::Clone(IResultMetadata **out) {
     return S_OK;
 }   
 
+STDMETHODIMP CMS2Metadata::GetTypeName(BSTR* name) {
+	return _MetadataBase_GetTypeName(name);
+}
 
 STDMETHODIMP CMS2Metadata::GetSIGraphResult(IResultSet** out) {
     if (graphResult == NULL) {

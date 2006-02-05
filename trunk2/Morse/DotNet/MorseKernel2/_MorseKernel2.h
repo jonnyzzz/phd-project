@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sat Jan 14 23:23:23 2006
+/* at Mon Feb 06 02:32:53 2006
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -435,6 +435,30 @@ typedef interface IMSSegmentRom IMSSegmentRom;
 #endif 	/* __IMSSegmentRom_FWD_DEFINED__ */
 
 
+#ifndef __IMSAngleMethod_FWD_DEFINED__
+#define __IMSAngleMethod_FWD_DEFINED__
+typedef interface IMSAngleMethod IMSAngleMethod;
+#endif 	/* __IMSAngleMethod_FWD_DEFINED__ */
+
+
+#ifndef __IMSAngleMetadata_FWD_DEFINED__
+#define __IMSAngleMetadata_FWD_DEFINED__
+typedef interface IMSAngleMetadata IMSAngleMetadata;
+#endif 	/* __IMSAngleMetadata_FWD_DEFINED__ */
+
+
+#ifndef __IMSAngleCreationMethod_FWD_DEFINED__
+#define __IMSAngleCreationMethod_FWD_DEFINED__
+typedef interface IMSAngleCreationMethod IMSAngleCreationMethod;
+#endif 	/* __IMSAngleCreationMethod_FWD_DEFINED__ */
+
+
+#ifndef __IMSAngleRomProcess_FWD_DEFINED__
+#define __IMSAngleRomProcess_FWD_DEFINED__
+typedef interface IMSAngleRomProcess IMSAngleRomProcess;
+#endif 	/* __IMSAngleRomProcess_FWD_DEFINED__ */
+
+
 #ifndef __CAdaptiveBoxMethod_FWD_DEFINED__
 #define __CAdaptiveBoxMethod_FWD_DEFINED__
 
@@ -841,6 +865,54 @@ typedef struct CMSSegmentRom CMSSegmentRom;
 #endif /* __cplusplus */
 
 #endif 	/* __CMSSegmentRom_FWD_DEFINED__ */
+
+
+#ifndef __CMSAngleMethod_FWD_DEFINED__
+#define __CMSAngleMethod_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CMSAngleMethod CMSAngleMethod;
+#else
+typedef struct CMSAngleMethod CMSAngleMethod;
+#endif /* __cplusplus */
+
+#endif 	/* __CMSAngleMethod_FWD_DEFINED__ */
+
+
+#ifndef __CMSAngleMetadata_FWD_DEFINED__
+#define __CMSAngleMetadata_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CMSAngleMetadata CMSAngleMetadata;
+#else
+typedef struct CMSAngleMetadata CMSAngleMetadata;
+#endif /* __cplusplus */
+
+#endif 	/* __CMSAngleMetadata_FWD_DEFINED__ */
+
+
+#ifndef __CMSAngleCreationMethod_FWD_DEFINED__
+#define __CMSAngleCreationMethod_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CMSAngleCreationMethod CMSAngleCreationMethod;
+#else
+typedef struct CMSAngleCreationMethod CMSAngleCreationMethod;
+#endif /* __cplusplus */
+
+#endif 	/* __CMSAngleCreationMethod_FWD_DEFINED__ */
+
+
+#ifndef __CMSAngleRomProcess_FWD_DEFINED__
+#define __CMSAngleRomProcess_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CMSAngleRomProcess CMSAngleRomProcess;
+#else
+typedef struct CMSAngleRomProcess CMSAngleRomProcess;
+#endif /* __cplusplus */
+
+#endif 	/* __CMSAngleRomProcess_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -2618,6 +2690,9 @@ EXTERN_C const IID IID_IResultMetadata;
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Clone( 
             /* [retval][out] */ IResultMetadata **metadata) = 0;
         
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetTypeName( 
+            /* [retval][out] */ BSTR *name) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -2675,6 +2750,10 @@ EXTERN_C const IID IID_IResultMetadata;
             IResultMetadata * This,
             /* [retval][out] */ IResultMetadata **metadata);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetTypeName )( 
+            IResultMetadata * This,
+            /* [retval][out] */ BSTR *name);
+        
         END_INTERFACE
     } IResultMetadataVtbl;
 
@@ -2717,6 +2796,9 @@ EXTERN_C const IID IID_IResultMetadata;
 #define IResultMetadata_Clone(This,metadata)	\
     (This)->lpVtbl -> Clone(This,metadata)
 
+#define IResultMetadata_GetTypeName(This,name)	\
+    (This)->lpVtbl -> GetTypeName(This,name)
+
 #endif /* COBJMACROS */
 
 
@@ -2743,6 +2825,18 @@ void __RPC_STUB IResultMetadata_EqualType_Stub(
 
 
 void __RPC_STUB IResultMetadata_Clone_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IResultMetadata_GetTypeName_Proxy( 
+    IResultMetadata * This,
+    /* [retval][out] */ BSTR *name);
+
+
+void __RPC_STUB IResultMetadata_GetTypeName_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -3997,6 +4091,10 @@ EXTERN_C const IID IID_ISymbolicImageMetadata;
             ISymbolicImageMetadata * This,
             /* [retval][out] */ IResultMetadata **metadata);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetTypeName )( 
+            ISymbolicImageMetadata * This,
+            /* [retval][out] */ BSTR *name);
+        
         END_INTERFACE
     } ISymbolicImageMetadataVtbl;
 
@@ -4038,6 +4136,9 @@ EXTERN_C const IID IID_ISymbolicImageMetadata;
 
 #define ISymbolicImageMetadata_Clone(This,metadata)	\
     (This)->lpVtbl -> Clone(This,metadata)
+
+#define ISymbolicImageMetadata_GetTypeName(This,name)	\
+    (This)->lpVtbl -> GetTypeName(This,name)
 
 
 #endif /* COBJMACROS */
@@ -7104,6 +7205,10 @@ EXTERN_C const IID IID_ISpectrumMetadata;
             ISpectrumMetadata * This,
             /* [retval][out] */ IResultMetadata **metadata);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetTypeName )( 
+            ISpectrumMetadata * This,
+            /* [retval][out] */ BSTR *name);
+        
         END_INTERFACE
     } ISpectrumMetadataVtbl;
 
@@ -7145,6 +7250,9 @@ EXTERN_C const IID IID_ISpectrumMetadata;
 
 #define ISpectrumMetadata_Clone(This,metadata)	\
     (This)->lpVtbl -> Clone(This,metadata)
+
+#define ISpectrumMetadata_GetTypeName(This,name)	\
+    (This)->lpVtbl -> GetTypeName(This,name)
 
 
 #endif /* COBJMACROS */
@@ -9686,6 +9794,10 @@ EXTERN_C const IID IID_IMSMetadata;
             IMSMetadata * This,
             /* [retval][out] */ IResultMetadata **metadata);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetTypeName )( 
+            IMSMetadata * This,
+            /* [retval][out] */ BSTR *name);
+        
         END_INTERFACE
     } IMSMetadataVtbl;
 
@@ -9727,6 +9839,9 @@ EXTERN_C const IID IID_IMSMetadata;
 
 #define IMSMetadata_Clone(This,metadata)	\
     (This)->lpVtbl -> Clone(This,metadata)
+
+#define IMSMetadata_GetTypeName(This,name)	\
+    (This)->lpVtbl -> GetTypeName(This,name)
 
 
 #endif /* COBJMACROS */
@@ -9821,6 +9936,10 @@ EXTERN_C const IID IID_IMS2Metadata;
             IMS2Metadata * This,
             /* [retval][out] */ IResultMetadata **metadata);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetTypeName )( 
+            IMS2Metadata * This,
+            /* [retval][out] */ BSTR *name);
+        
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetSIGraphResult )( 
             IMS2Metadata * This,
             /* [retval][out] */ IResultSet **out);
@@ -9874,6 +9993,9 @@ EXTERN_C const IID IID_IMS2Metadata;
 
 #define IMS2Metadata_Clone(This,metadata)	\
     (This)->lpVtbl -> Clone(This,metadata)
+
+#define IMS2Metadata_GetTypeName(This,name)	\
+    (This)->lpVtbl -> GetTypeName(This,name)
 
 
 
@@ -10527,6 +10649,10 @@ EXTERN_C const IID IID_IMSSegmentMetadata;
             IMSSegmentMetadata * This,
             /* [retval][out] */ IResultMetadata **metadata);
         
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetTypeName )( 
+            IMSSegmentMetadata * This,
+            /* [retval][out] */ BSTR *name);
+        
         END_INTERFACE
     } IMSSegmentMetadataVtbl;
 
@@ -10568,6 +10694,9 @@ EXTERN_C const IID IID_IMSSegmentMetadata;
 
 #define IMSSegmentMetadata_Clone(This,metadata)	\
     (This)->lpVtbl -> Clone(This,metadata)
+
+#define IMSSegmentMetadata_GetTypeName(This,name)	\
+    (This)->lpVtbl -> GetTypeName(This,name)
 
 
 
@@ -10875,6 +11004,593 @@ EXTERN_C const IID IID_IMSSegmentRom;
 #endif 	/* __IMSSegmentRom_INTERFACE_DEFINED__ */
 
 
+#ifndef __IMSAngleMethod_INTERFACE_DEFINED__
+#define __IMSAngleMethod_INTERFACE_DEFINED__
+
+/* interface IMSAngleMethod */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMSAngleMethod;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("87FF96BE-B389-4AFA-8B6C-89E2E9AFD50F")
+    IMSAngleMethod : public IAdaptiveMethodAction
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMSAngleMethodVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMSAngleMethod * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMSAngleMethod * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMSAngleMethod * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMSAngleMethod * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMSAngleMethod * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMSAngleMethod * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMSAngleMethod * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IMSAngleMethod * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IMSAngleMethod * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IMSAngleMethod * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IMSAngleMethod * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetRecomendedPrecision )( 
+            IMSAngleMethod * This,
+            /* [in] */ IResultSet *in,
+            /* [in] */ int index,
+            /* [retval][out] */ double *prec);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimension )( 
+            IMSAngleMethod * This,
+            /* [in] */ IResultSet *in,
+            /* [retval][out] */ int *dim);
+        
+        END_INTERFACE
+    } IMSAngleMethodVtbl;
+
+    interface IMSAngleMethod
+    {
+        CONST_VTBL struct IMSAngleMethodVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMSAngleMethod_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMSAngleMethod_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMSAngleMethod_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMSAngleMethod_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMSAngleMethod_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMSAngleMethod_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMSAngleMethod_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IMSAngleMethod_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IMSAngleMethod_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IMSAngleMethod_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IMSAngleMethod_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#define IMSAngleMethod_GetRecomendedPrecision(This,in,index,prec)	\
+    (This)->lpVtbl -> GetRecomendedPrecision(This,in,index,prec)
+
+#define IMSAngleMethod_GetDimension(This,in,dim)	\
+    (This)->lpVtbl -> GetDimension(This,in,dim)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMSAngleMethod_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMSAngleMetadata_INTERFACE_DEFINED__
+#define __IMSAngleMetadata_INTERFACE_DEFINED__
+
+/* interface IMSAngleMetadata */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMSAngleMetadata;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("9C056BFB-EC29-4AD8-BBAF-18F6AB76EAA0")
+    IMSAngleMetadata : public IMSMetadata
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMSAngleMetadataVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMSAngleMetadata * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMSAngleMetadata * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMSAngleMetadata * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMSAngleMetadata * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMSAngleMetadata * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMSAngleMetadata * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMSAngleMetadata * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *EqualType )( 
+            IMSAngleMetadata * This,
+            /* [in] */ IResultMetadata *metadata,
+            /* [retval][out] */ VARIANT_BOOL *out);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
+            IMSAngleMetadata * This,
+            /* [retval][out] */ IResultMetadata **metadata);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetTypeName )( 
+            IMSAngleMetadata * This,
+            /* [retval][out] */ BSTR *name);
+        
+        END_INTERFACE
+    } IMSAngleMetadataVtbl;
+
+    interface IMSAngleMetadata
+    {
+        CONST_VTBL struct IMSAngleMetadataVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMSAngleMetadata_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMSAngleMetadata_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMSAngleMetadata_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMSAngleMetadata_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMSAngleMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMSAngleMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMSAngleMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#define IMSAngleMetadata_EqualType(This,metadata,out)	\
+    (This)->lpVtbl -> EqualType(This,metadata,out)
+
+#define IMSAngleMetadata_Clone(This,metadata)	\
+    (This)->lpVtbl -> Clone(This,metadata)
+
+#define IMSAngleMetadata_GetTypeName(This,name)	\
+    (This)->lpVtbl -> GetTypeName(This,name)
+
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMSAngleMetadata_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMSAngleCreationMethod_INTERFACE_DEFINED__
+#define __IMSAngleCreationMethod_INTERFACE_DEFINED__
+
+/* interface IMSAngleCreationMethod */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMSAngleCreationMethod;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("4158B932-72E7-46DA-A98C-959B0C9A101E")
+    IMSAngleCreationMethod : public IMSCreationProcess
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMSAngleCreationMethodVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMSAngleCreationMethod * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMSAngleCreationMethod * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMSAngleCreationMethod * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMSAngleCreationMethod * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMSAngleCreationMethod * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMSAngleCreationMethod * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMSAngleCreationMethod * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IMSAngleCreationMethod * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IMSAngleCreationMethod * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IMSAngleCreationMethod * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IMSAngleCreationMethod * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetDimension )( 
+            IMSAngleCreationMethod * This,
+            /* [in] */ IResultSet *set,
+            /* [retval][out] */ int *dim);
+        
+        END_INTERFACE
+    } IMSAngleCreationMethodVtbl;
+
+    interface IMSAngleCreationMethod
+    {
+        CONST_VTBL struct IMSAngleCreationMethodVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMSAngleCreationMethod_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMSAngleCreationMethod_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMSAngleCreationMethod_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMSAngleCreationMethod_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMSAngleCreationMethod_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMSAngleCreationMethod_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMSAngleCreationMethod_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IMSAngleCreationMethod_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IMSAngleCreationMethod_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IMSAngleCreationMethod_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IMSAngleCreationMethod_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#define IMSAngleCreationMethod_GetDimension(This,set,dim)	\
+    (This)->lpVtbl -> GetDimension(This,set,dim)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMSAngleCreationMethod_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMSAngleRomProcess_INTERFACE_DEFINED__
+#define __IMSAngleRomProcess_INTERFACE_DEFINED__
+
+/* interface IMSAngleRomProcess */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMSAngleRomProcess;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("293FB7DB-0C75-4E8D-A2D2-DC4BC662C62F")
+    IMSAngleRomProcess : public IAction
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMSAngleRomProcessVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMSAngleRomProcess * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMSAngleRomProcess * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMSAngleRomProcess * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMSAngleRomProcess * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMSAngleRomProcess * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMSAngleRomProcess * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMSAngleRomProcess * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetActionParameters )( 
+            IMSAngleRomProcess * This,
+            /* [in] */ IParameters *parameters);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProgressBarInfo )( 
+            IMSAngleRomProcess * This,
+            /* [in] */ IProgressBarInfo *pinfo);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *CanDo )( 
+            IMSAngleRomProcess * This,
+            /* [in] */ IResultSet *result,
+            /* [retval][out] */ VARIANT_BOOL *can);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Do )( 
+            IMSAngleRomProcess * This,
+            /* [in] */ IResultSet *input,
+            /* [retval][out] */ IResultSet **output);
+        
+        END_INTERFACE
+    } IMSAngleRomProcessVtbl;
+
+    interface IMSAngleRomProcess
+    {
+        CONST_VTBL struct IMSAngleRomProcessVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMSAngleRomProcess_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMSAngleRomProcess_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMSAngleRomProcess_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMSAngleRomProcess_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMSAngleRomProcess_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMSAngleRomProcess_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMSAngleRomProcess_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+
+#define IMSAngleRomProcess_SetActionParameters(This,parameters)	\
+    (This)->lpVtbl -> SetActionParameters(This,parameters)
+
+#define IMSAngleRomProcess_SetProgressBarInfo(This,pinfo)	\
+    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+
+#define IMSAngleRomProcess_CanDo(This,result,can)	\
+    (This)->lpVtbl -> CanDo(This,result,can)
+
+#define IMSAngleRomProcess_Do(This,input,output)	\
+    (This)->lpVtbl -> Do(This,input,output)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMSAngleRomProcess_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __MorseKernel2_LIBRARY_DEFINED__
 #define __MorseKernel2_LIBRARY_DEFINED__
@@ -11155,6 +11871,38 @@ EXTERN_C const CLSID CLSID_CMSSegmentRom;
 
 class DECLSPEC_UUID("91A82ACA-C380-49C9-8A38-BBD68858100B")
 CMSSegmentRom;
+#endif
+
+EXTERN_C const CLSID CLSID_CMSAngleMethod;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("67446F52-3C7A-4019-84B6-4B2837860BC2")
+CMSAngleMethod;
+#endif
+
+EXTERN_C const CLSID CLSID_CMSAngleMetadata;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("C9400229-3A87-43BA-9819-07EC65EBCD10")
+CMSAngleMetadata;
+#endif
+
+EXTERN_C const CLSID CLSID_CMSAngleCreationMethod;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("7CF17A33-3F8B-4BDB-A694-F18DE6355B6D")
+CMSAngleCreationMethod;
+#endif
+
+EXTERN_C const CLSID CLSID_CMSAngleRomProcess;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("B86EA936-EB19-4A0A-A51D-6823E2A089AB")
+CMSAngleRomProcess;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 
