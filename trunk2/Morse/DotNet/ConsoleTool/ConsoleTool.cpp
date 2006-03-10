@@ -267,7 +267,8 @@ int _tmain(int argc, char** argv) {
 		int upper;
 		sscanf(argv[2],"%d", &upper);
 
-		double a[] =  {3.3701, 3.4001, 3.48, 3.532, 3.54, 3.57, 3.571 };
+		//double a[] =  {3.3701, 3.4001, 3.48, 3.532, 3.54, 3.57, 3.571 };
+		double a[] =  {3.30 };
 		int m = sizeof(a)/sizeof(double);
 
 		for (int i=0; i<m; i++) {

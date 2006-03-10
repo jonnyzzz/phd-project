@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Mon Feb 06 02:32:53 2006
+/* at Mon Mar 06 15:28:38 2006
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -506,22 +506,8 @@ extern const MIDL_STUBLESS_PROXY_INFO IMSSegmentMetadata_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
-extern const MIDL_SERVER_INFO IMSMethodAction_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IMSMethodAction_ProxyInfo;
-
-
-extern const MIDL_STUB_DESC Object_StubDesc;
-
-
-extern const MIDL_SERVER_INFO IMSSegmentRom_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IMSSegmentRom_ProxyInfo;
-
-
-extern const MIDL_STUB_DESC Object_StubDesc;
-
-
-extern const MIDL_SERVER_INFO IMSAngleMethod_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IMSAngleMethod_ProxyInfo;
+extern const MIDL_SERVER_INFO IMSAngleCreationMethod_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMSAngleCreationMethod_ProxyInfo;
 
 
 extern const MIDL_STUB_DESC Object_StubDesc;
@@ -534,8 +520,8 @@ extern const MIDL_STUBLESS_PROXY_INFO IMSAngleMetadata_ProxyInfo;
 extern const MIDL_STUB_DESC Object_StubDesc;
 
 
-extern const MIDL_SERVER_INFO IMSAngleCreationMethod_ServerInfo;
-extern const MIDL_STUBLESS_PROXY_INFO IMSAngleCreationMethod_ProxyInfo;
+extern const MIDL_SERVER_INFO IMSAngleMethod_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMSAngleMethod_ProxyInfo;
 
 
 extern const MIDL_STUB_DESC Object_StubDesc;
@@ -543,6 +529,20 @@ extern const MIDL_STUB_DESC Object_StubDesc;
 
 extern const MIDL_SERVER_INFO IMSAngleRomProcess_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IMSAngleRomProcess_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IMSMethodAction_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMSMethodAction_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IMSSegmentRom_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMSSegmentRom_ProxyInfo;
 
 
 extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TABLE_SIZE ];
@@ -8508,6 +8508,324 @@ CInterfaceStubVtbl _IMSSegmentMetadataStubVtbl =
 };
 
 
+/* Object interface: IMSAngleCreationMethod, ver. 0.0,
+   GUID={0x4158B932,0x72E7,0x46DA,{0xA9,0x8C,0x95,0x9B,0x0C,0x9A,0x10,0x1E}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMSAngleCreationMethod_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    204,
+    240,
+    276,
+    318,
+    1758,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMSAngleCreationMethod_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMSAngleCreationMethod_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMSAngleCreationMethod_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMSAngleCreationMethod_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(12) _IMSAngleCreationMethodProxyVtbl = 
+{
+    0,
+    &IID_IMSAngleCreationMethod,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IAction::SetActionParameters */ ,
+    0 /* forced delegation IAction::SetProgressBarInfo */ ,
+    0 /* forced delegation IAction::CanDo */ ,
+    0 /* forced delegation IAction::Do */ ,
+    0 /* forced delegation IMSCreationProcess::GetDimension */
+};
+
+
+static const PRPC_STUB_FUNCTION IMSAngleCreationMethod_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMSAngleCreationMethodStubVtbl =
+{
+    &IID_IMSAngleCreationMethod,
+    &IMSAngleCreationMethod_ServerInfo,
+    12,
+    &IMSAngleCreationMethod_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IMSAngleMetadata, ver. 0.0,
+   GUID={0x9C056BFB,0xEC29,0x4AD8,{0xBB,0xAF,0x18,0xF6,0xAB,0x76,0xEA,0xA0}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMSAngleMetadata_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    840,
+    882,
+    918,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMSAngleMetadata_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMSAngleMetadata_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMSAngleMetadata_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMSAngleMetadata_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(10) _IMSAngleMetadataProxyVtbl = 
+{
+    0,
+    &IID_IMSAngleMetadata,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IResultMetadata::EqualType */ ,
+    0 /* forced delegation IResultMetadata::Clone */ ,
+    0 /* forced delegation IResultMetadata::GetTypeName */
+};
+
+
+static const PRPC_STUB_FUNCTION IMSAngleMetadata_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMSAngleMetadataStubVtbl =
+{
+    &IID_IMSAngleMetadata,
+    &IMSAngleMetadata_ServerInfo,
+    10,
+    &IMSAngleMetadata_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IMSAngleMethod, ver. 0.0,
+   GUID={0x87FF96BE,0xB389,0x4AFA,{0x8B,0x6C,0x89,0xE2,0xE9,0xAF,0xD5,0x0F}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMSAngleMethod_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    204,
+    240,
+    276,
+    318,
+    1488,
+    1536,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMSAngleMethod_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMSAngleMethod_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMSAngleMethod_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMSAngleMethod_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(13) _IMSAngleMethodProxyVtbl = 
+{
+    0,
+    &IID_IMSAngleMethod,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IAction::SetActionParameters */ ,
+    0 /* forced delegation IAction::SetProgressBarInfo */ ,
+    0 /* forced delegation IAction::CanDo */ ,
+    0 /* forced delegation IAction::Do */ ,
+    0 /* forced delegation IAdaptiveMethodAction::GetRecomendedPrecision */ ,
+    0 /* forced delegation IAdaptiveMethodAction::GetDimension */
+};
+
+
+static const PRPC_STUB_FUNCTION IMSAngleMethod_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMSAngleMethodStubVtbl =
+{
+    &IID_IMSAngleMethod,
+    &IMSAngleMethod_ServerInfo,
+    13,
+    &IMSAngleMethod_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IMSAngleRomProcess, ver. 0.0,
+   GUID={0x293FB7DB,0x0C75,0x4E8D,{0xA2,0xD2,0xDC,0x4B,0xC6,0x62,0xC6,0x2F}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMSAngleRomProcess_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    204,
+    240,
+    276,
+    318,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMSAngleRomProcess_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMSAngleRomProcess_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMSAngleRomProcess_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMSAngleRomProcess_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(11) _IMSAngleRomProcessProxyVtbl = 
+{
+    0,
+    &IID_IMSAngleRomProcess,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */ ,
+    0 /* forced delegation IAction::SetActionParameters */ ,
+    0 /* forced delegation IAction::SetProgressBarInfo */ ,
+    0 /* forced delegation IAction::CanDo */ ,
+    0 /* forced delegation IAction::Do */
+};
+
+
+static const PRPC_STUB_FUNCTION IMSAngleRomProcess_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2
+};
+
+CInterfaceStubVtbl _IMSAngleRomProcessStubVtbl =
+{
+    &IID_IMSAngleRomProcess,
+    &IMSAngleRomProcess_ServerInfo,
+    11,
+    &IMSAngleRomProcess_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
 /* Object interface: IMSMethodAction, ver. 0.0,
    GUID={0x729D2ADA,0x2C8A,0x453F,{0x97,0xFB,0x2A,0x3F,0x64,0x09,0xB1,0x17}} */
 
@@ -8663,324 +8981,6 @@ CInterfaceStubVtbl _IMSSegmentRomStubVtbl =
     &IMSSegmentRom_ServerInfo,
     11,
     &IMSSegmentRom_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
-/* Object interface: IMSAngleMethod, ver. 0.0,
-   GUID={0x87FF96BE,0xB389,0x4AFA,{0x8B,0x6C,0x89,0xE2,0xE9,0xAF,0xD5,0x0F}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short IMSAngleMethod_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    204,
-    240,
-    276,
-    318,
-    1488,
-    1536,
-    0
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO IMSAngleMethod_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &IMSAngleMethod_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO IMSAngleMethod_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &IMSAngleMethod_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(13) _IMSAngleMethodProxyVtbl = 
-{
-    0,
-    &IID_IMSAngleMethod,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */ ,
-    0 /* forced delegation IAction::SetActionParameters */ ,
-    0 /* forced delegation IAction::SetProgressBarInfo */ ,
-    0 /* forced delegation IAction::CanDo */ ,
-    0 /* forced delegation IAction::Do */ ,
-    0 /* forced delegation IAdaptiveMethodAction::GetRecomendedPrecision */ ,
-    0 /* forced delegation IAdaptiveMethodAction::GetDimension */
-};
-
-
-static const PRPC_STUB_FUNCTION IMSAngleMethod_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2
-};
-
-CInterfaceStubVtbl _IMSAngleMethodStubVtbl =
-{
-    &IID_IMSAngleMethod,
-    &IMSAngleMethod_ServerInfo,
-    13,
-    &IMSAngleMethod_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
-/* Object interface: IMSAngleMetadata, ver. 0.0,
-   GUID={0x9C056BFB,0xEC29,0x4AD8,{0xBB,0xAF,0x18,0xF6,0xAB,0x76,0xEA,0xA0}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short IMSAngleMetadata_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    840,
-    882,
-    918,
-    0
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO IMSAngleMetadata_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &IMSAngleMetadata_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO IMSAngleMetadata_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &IMSAngleMetadata_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(10) _IMSAngleMetadataProxyVtbl = 
-{
-    0,
-    &IID_IMSAngleMetadata,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */ ,
-    0 /* forced delegation IResultMetadata::EqualType */ ,
-    0 /* forced delegation IResultMetadata::Clone */ ,
-    0 /* forced delegation IResultMetadata::GetTypeName */
-};
-
-
-static const PRPC_STUB_FUNCTION IMSAngleMetadata_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2
-};
-
-CInterfaceStubVtbl _IMSAngleMetadataStubVtbl =
-{
-    &IID_IMSAngleMetadata,
-    &IMSAngleMetadata_ServerInfo,
-    10,
-    &IMSAngleMetadata_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
-/* Object interface: IMSAngleCreationMethod, ver. 0.0,
-   GUID={0x4158B932,0x72E7,0x46DA,{0xA9,0x8C,0x95,0x9B,0x0C,0x9A,0x10,0x1E}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short IMSAngleCreationMethod_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    204,
-    240,
-    276,
-    318,
-    1758,
-    0
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO IMSAngleCreationMethod_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &IMSAngleCreationMethod_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO IMSAngleCreationMethod_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &IMSAngleCreationMethod_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(12) _IMSAngleCreationMethodProxyVtbl = 
-{
-    0,
-    &IID_IMSAngleCreationMethod,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */ ,
-    0 /* forced delegation IAction::SetActionParameters */ ,
-    0 /* forced delegation IAction::SetProgressBarInfo */ ,
-    0 /* forced delegation IAction::CanDo */ ,
-    0 /* forced delegation IAction::Do */ ,
-    0 /* forced delegation IMSCreationProcess::GetDimension */
-};
-
-
-static const PRPC_STUB_FUNCTION IMSAngleCreationMethod_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2
-};
-
-CInterfaceStubVtbl _IMSAngleCreationMethodStubVtbl =
-{
-    &IID_IMSAngleCreationMethod,
-    &IMSAngleCreationMethod_ServerInfo,
-    12,
-    &IMSAngleCreationMethod_table[-3],
-    CStdStubBuffer_DELEGATING_METHODS
-};
-
-
-/* Object interface: IMSAngleRomProcess, ver. 0.0,
-   GUID={0x293FB7DB,0x0C75,0x4E8D,{0xA2,0xD2,0xDC,0x4B,0xC6,0x62,0xC6,0x2F}} */
-
-#pragma code_seg(".orpc")
-static const unsigned short IMSAngleRomProcess_FormatStringOffsetTable[] =
-    {
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    (unsigned short) -1,
-    204,
-    240,
-    276,
-    318,
-    0
-    };
-
-static const MIDL_STUBLESS_PROXY_INFO IMSAngleRomProcess_ProxyInfo =
-    {
-    &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
-    &IMSAngleRomProcess_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0
-    };
-
-
-static const MIDL_SERVER_INFO IMSAngleRomProcess_ServerInfo = 
-    {
-    &Object_StubDesc,
-    0,
-    __MIDL_ProcFormatString.Format,
-    &IMSAngleRomProcess_FormatStringOffsetTable[-3],
-    0,
-    0,
-    0,
-    0};
-CINTERFACE_PROXY_VTABLE(11) _IMSAngleRomProcessProxyVtbl = 
-{
-    0,
-    &IID_IMSAngleRomProcess,
-    IUnknown_QueryInterface_Proxy,
-    IUnknown_AddRef_Proxy,
-    IUnknown_Release_Proxy ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
-    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
-    0 /* IDispatch_Invoke_Proxy */ ,
-    0 /* forced delegation IAction::SetActionParameters */ ,
-    0 /* forced delegation IAction::SetProgressBarInfo */ ,
-    0 /* forced delegation IAction::CanDo */ ,
-    0 /* forced delegation IAction::Do */
-};
-
-
-static const PRPC_STUB_FUNCTION IMSAngleRomProcess_table[] =
-{
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    STUB_FORWARDING_FUNCTION,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2,
-    NdrStubCall2
-};
-
-CInterfaceStubVtbl _IMSAngleRomProcessStubVtbl =
-{
-    &IID_IMSAngleRomProcess,
-    &IMSAngleRomProcess_ServerInfo,
-    11,
-    &IMSAngleRomProcess_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };
 
