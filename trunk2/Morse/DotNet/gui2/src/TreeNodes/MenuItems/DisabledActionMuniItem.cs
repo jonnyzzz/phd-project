@@ -11,10 +11,9 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes.MenuItems
     {
         private readonly string comment;
 
-        public DisabledActionMuniItem(IDisabledAction action) : base(action.Caption, false)
+        public DisabledActionMuniItem(string title, string detail) : base(title, false)
         {
-            this.comment = action.Comment;
-//            this.Enabled = false;
+            this.comment = detail;
             if (comment != null)
             {
                 this.MenuItems.Add(new CommentMenuItem(comment));

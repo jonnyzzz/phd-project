@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Text;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionImpl;
 using EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos;
 using EugenePetrenko.Gui2.Kernell2.Actions;
 using EugenePetrenko.Gui2.Kernell2.Container;
@@ -14,85 +15,7 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
     /// Summary description for NextActionFactory.
     /// </summary>
     public class NextActionFactory
-    {
-        #region resovler
-
-        public ActionWrapper[] NextAction(KernelNode node, ActionWrapper[] beforeActions)
-        {
-            return CreateInstances(FindActionInfosForPath(node, beforeActions));
-        }
-
-        public ActionWrapper[] NextAction(KernelNode node)
-        {
-            return CreateInstances(FindActionRefs(node));
-        }
-
-
-        private ActionStateRef[] FindActionRefs(KernelNode node)
-        {
-            return SelectActions(node.Results);
-        }
-
-        private ActionStateRef[] SelectActions(ResultSet results)
-        {
-            ArrayList result = new ArrayList();            
-            foreach (ActionRef actionInfo in actions)
-            {                
-                bool match = actionInfo.Constraint.Match(results);
-                ActionStateRef state = new ActionStateRef(actionInfo, match);
-                if (match) { Logger.LogMessage("Candidate Found: {0}", actionInfo); }
-
-                result.Add(state);
-            }
-            return (ActionStateRef[]) result.ToArray(typeof (ActionStateRef));
-        }
-
-        private ActionStateRef[] FindActionInfosForPath(KernelNode node, ActionWrapper[] beforeActions)
-        {
-            return FindActionInfosForPath(FindActionRefs(node), beforeActions);
-        }
-
-        private ActionStateRef[] FindActionInfosForPath(ActionStateRef[] acceptableActons, ActionWrapper[] selected)
-        {
-            if (selected.Length == 0) return acceptableActons;
-
-            string nextActionName = selected[0].ActionMappingName;
-
-            foreach (ActionStateRef actionStateInfo in acceptableActons)
-            {
-                if (!actionStateInfo.Enabled) continue;
-
-                ActionRef actionInfo = actionStateInfo.ActionRef;
-                if (string.Equals(actionInfo.ActionName, nextActionName))
-                {
-                    ActionWrapper[] dec = new ActionWrapper[selected.Length - 1];
-                    for (int i = 1; i < selected.Length; i++)
-                    {
-                        dec[i - 1] = selected[i];
-                    }
-                    ArrayList refs = new ArrayList();
-                    foreach (ActionRef rf in actionInfo.ActionRefs)
-                    {
-                        refs.Add(new ActionStateRef(rf, true));
-                    }
-                    return FindActionInfosForPath((ActionStateRef[]) refs.ToArray(typeof (ActionStateRef)) /*actionInfo.ActionRefs*/, dec);
-                }
-            }
-            return new ActionStateRef[0];
-        }
-
-        public ActionWrapper[] CreateInstances(ActionStateRef[] infos)
-        {
-            ActionWrapper[] wrappers = new ActionWrapper[infos.Length];
-            for (int i = 0; i < infos.Length; i++)
-            {
-                wrappers[i] = infos[i].CreateInstance();
-            }
-            return wrappers;
-        }
-
-        #endregion
-
+    {        
         #region Action By Name
 
         public ActionWrapper NextActionByName(KernelNode node, Type type)
@@ -117,15 +40,30 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
         {
             foreach (ActionRef actionRef in actions)
             {
-                actionRef.CreateInstance();
+            	CreateActionInstances(actionRef);
             }
         }
 
+    	private static void CreateActionInstances(ActionRef actionRef)
+    	{
+    		actionRef.CreateInstance();
+    		foreach (ActionRef ar in actionRef.ActionRefs)
+    		{
+    			CreateActionInstances(ar);
+    		}
+    	}
 
-        #region mapper
+		public ActionRef[] GetActions()
+		{
+			return (ActionRef[]) actions.ToArray(typeof(ActionRef));
+		}
 
+    	#region mapper
+		
         private ArrayList actions = new ArrayList();
         private Hashtable actionResolver = new Hashtable();
+
+		public static readonly string SEPARATOR_ACTION = typeof(ISeparatorAction).Name;
 
         public void RegisterAction(ActionRef info)
         {

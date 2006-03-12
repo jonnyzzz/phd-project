@@ -5,20 +5,9 @@ using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Actions.Constraints
 {
-    public class OneGraphResultConstraintFactory : IConstraintFactory
-    {
-        public IConstraint CreateConstraint(XmlNode constraintNode)
-        {
-            return new OneGraphResultConstraint();
-        }
-    }
-
-    /// <summary>
-    /// Summary description for OneGraphResultConstraint.
-    /// </summary>
     public class OneGraphResultConstraint : IConstraint
-    {
-        public OneGraphResultConstraint()
+    {        
+        public OneGraphResultConstraint(XmlNode constraintNode)
         {
         }
 

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Windows.Forms;
-using EugenePetrenko.Gui2.Actions.Actions;
 using EugenePetrenko.Gui2.Application.TreeNodes.MenuItems;
-using EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionImpl;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos;
+using EugenePetrenko.Gui2.Kernell2.Node;
 
 namespace EugenePetrenko.Gui2.Application.TreeNodes
 {
@@ -11,30 +12,51 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
     /// </summary>
     public class MenuItemFactory
     {
-        public static MenuItem[] CreateMenuItems(Node node)
+        private static MenuItem CreateMenuItem(Node node, ActionRef actionRef, ResultSet set, out bool next)
         {
-            return CreateMenuItems(node, node.GetActions());
+			next = false;
+			if (actionRef.ActionName == NextActionFactory.SEPARATOR_ACTION)
+			{
+				return new SeparatorMenuItem();
+			} else if (actionRef.Constraint.Match(set))
+        	{
+				next = true;
+        		return new ActionTreeMenuItem(node, actionRef);
+        	} else
+			{
+				return new DisabledActionMuniItem(actionRef.ActionCaption, actionRef.ActionDetail);
+			}
         }
 
-        public static MenuItem[] CreateMenuItems(Node node, Action[] actions, params Action[] path)
-        {
-            ArrayList menus = new ArrayList();
+		private static void BuildActionTree(Node node, ActionRef action, ResultSet set, MenuItem root)
+		{
+			foreach (ActionRef act in action.ActionRefs)
+			{
+				bool cont;
+				MenuItem item = CreateMenuItem(node, act, set, out cont);
+				root.MenuItems.Add(item);
+				if (cont)
+				{
+					BuildActionTree(node, act, set, item);
+				}
+			}
+		}
 
-            foreach (Action action in actions)
-            {
-                if (action is IDisabledAction)
-                {
-                    menus.Add(new DisabledActionMuniItem((IDisabledAction) action));
-                } else if (action is ISeparator)
-                {
-                    menus.Add(new SeparatorMenuItem());
-                } else {
-                    menus.Add(new ActionTreeMenuItem(node, action, path));
-                }
-            }
-
-            return (MenuItem[]) menus.ToArray(typeof (MenuItem));
-        }
-
+		public static MenuItem[] CreateMenuItems(Node node, ActionRef[] actions)
+		{
+			ResultSet set = node.ResultSet;
+			ArrayList items = new ArrayList();
+			foreach (ActionRef action in actions)
+			{
+				bool cont;
+				MenuItem item = CreateMenuItem(node, action, set, out cont);
+				items.Add(item);
+				if (cont)
+				{
+					BuildActionTree(node, action, set, item);
+				}
+			}
+			return (MenuItem[]) items.ToArray(typeof(MenuItem));
+		}
     }
 }

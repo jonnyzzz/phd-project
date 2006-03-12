@@ -14,7 +14,6 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
     public class ActionWrapperFactory
     {
         private Hashtable mapping = new Hashtable(); //Type -> Typez
-		private Hashtable nameToType = new Hashtable(); //string -> Type
 
         public ActionWrapperFactory(Assembly[] assemblies)
         {
@@ -35,35 +34,34 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
 
         protected void AddActionMapping(ActionMappingAttribute attribute, Type type)
         {
-            if (mapping.ContainsKey(attribute.ActionInterface)) throw new ActionWrapperFactoryException("ActionWrapper was allready defined");
-            Logger.LogMessage("Found Action Mapping [interface = {0}, wrapper = {1}", attribute.ActionInterface.Name, type.Name);
-            mapping[attribute.ActionInterface] = type;
+        	string name = attribute.ActionInterface.Name;
+        	if (mapping.ContainsKey(name)) 
+				throw new ActionWrapperFactoryException("ActionWrapper was allready defined");
+
+			mapping[name] = type;
+            Logger.LogMessage("Found Action Mapping [interface = {0}, wrapper = {1}", name, type.Name);            
         }
 
-        protected Type GetWrapperType(Type action)
+        protected Type GetWrapperType(string actionTypeName)
         {
-            if (!mapping.ContainsKey(action)) 
-				throw new ActionWrapperFactoryException("No action Wrapper for " + action.Name);
+            if (!mapping.ContainsKey(actionTypeName)) 
+				throw new ActionWrapperFactoryException("No action Wrapper for " + actionTypeName);
 
-            return (Type) mapping[action];
+            return (Type) mapping[actionTypeName];
         }
 
 
         public ActionWrapper CreateActionWrapper(string actionName, string actionCaption, bool isLeaf)
         {
-            return CreateActionWrapper(GetTypeFromName(actionName), actionCaption, isLeaf);
+			Type wrapperType = GetWrapperType(actionName);
+			ConstructorInfo info = wrapperType.GetConstructor(new Type[] {typeof (string), typeof (bool)});
+			return info.Invoke(new object[] {actionCaption, isLeaf}) as ActionWrapper;
+            
         }
-
-    	private Type GetTypeFromName(string actionName)
-    	{
-			return Core.Instance.TypeFinder.GetType(actionName);
-    	}
-
+    	
     	private ActionWrapper CreateActionWrapper(Type actionType, string actionCaption, bool isLeaf)
         {
-            Type wrapperType = GetWrapperType(actionType);
-            ConstructorInfo info = wrapperType.GetConstructor(new Type[] {typeof (string), typeof (bool)});
-            return info.Invoke(new object[] {actionCaption, isLeaf}) as ActionWrapper;
+            return CreateActionWrapper(actionType.Name, actionCaption, isLeaf);
         }
 
         public ActionWrapper CreateDisabledAction(string caption, string detail)

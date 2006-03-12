@@ -8,18 +8,13 @@ namespace EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot
     /// <summary>
     /// Summary description for GnuPlotConstaint.
     /// </summary>
-    public class GnuPlotConstraintFactory : IConstraintFactory, IConstraint
+    public class GnuPlotConstraint :  IConstraint
     {
-        public GnuPlotConstraintFactory()
-        {
-        }
+    	public GnuPlotConstraint(XmlNode node)
+    	{
+    	}
 
-        public IConstraint CreateConstraint(XmlNode constraintNode)
-        {
-            return this;
-        }
-
-        public bool Match(ResultSet resultSet)
+    	public bool Match(ResultSet resultSet)
         {
             foreach (IResult result in resultSet.ToResults)
             {

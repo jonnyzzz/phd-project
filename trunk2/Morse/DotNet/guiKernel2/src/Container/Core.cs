@@ -40,6 +40,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
             xmlParser.ParseAssemblyReferences();
 
             this.assemblies = xmlParser.Assemblies;
+			typeFinder.Init();
 
             xmlParser.ParseActions();
             actionWrapperFactory = new ActionWrapperFactory(assemblies);
@@ -61,6 +62,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
             actionWrapperFactory = null;
             assemblies = null;
             document = null;
+			typeFinder = null;
         }
 
         public void SetKernelDocument(KernelDocument document)

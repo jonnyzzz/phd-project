@@ -19,9 +19,11 @@ protected:
 	virtual JDouble getMax(int i) = 0;
     virtual int getNewDimension() = 0;
 
-private:
+protected:
 	int dimensionNew;
 	int dimensionOld;
+	
+private:
 	int* b;
 	int* factor;
 	JInt* point;

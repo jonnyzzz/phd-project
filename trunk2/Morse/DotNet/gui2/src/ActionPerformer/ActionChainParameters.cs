@@ -38,7 +38,8 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
         {
             ParametersSelector selector = new ParametersSelector(GetControls());
             DialogResult result = selector.ShowDialogOptimized(owner);
-            if (result == DialogResult.OK) wasSubmitted = true;
+            if (result == DialogResult.OK) 
+				wasSubmitted = true;
             return result;
         }
 
@@ -55,7 +56,7 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 
 		public string GetActionCaption()
 		{
-			return path[0].ActionName + " + " + (path.Length - 1);			
+			return path[0].ActionName;// + " + " + (path.Length - 1);			
 		}
 
     }

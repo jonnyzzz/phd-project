@@ -12,17 +12,21 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos
     public class ActionRef
     {
         private readonly string actionName;
-        private readonly IConstraint constraint;
+    	private readonly IConstraint constraint;
         private readonly bool isLeaf;
         private ArrayList actionRefs = new ArrayList();
+		private ActionRef parent = null;
+
+		private ActionWrapper[] actionPath = null;
 		
 		private string actionCaption = null;
 		private string actionDetail = null;
 
-        public ActionRef(string actionName, IConstraint constraint, bool isLeaf)
+        public ActionRef(ActionRef parent, string actionName, IConstraint constraint, bool isLeaf)
         {
             this.actionName = actionName;
-            this.constraint = constraint;
+        	this.parent = parent;
+        	this.constraint = constraint;
             this.isLeaf = isLeaf;
         }
 
@@ -44,12 +48,31 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos
 
         public ActionWrapper CreateInstance()
         {
+			InitCaptions();
+
             if (myCachedActionWrapper == null)
             {
                 myCachedActionWrapper = Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, ActionCaption, IsLeaf);
             }
             return myCachedActionWrapper;
         }
+
+		public ActionWrapper[] GetActionPath()
+		{
+			if (actionPath == null)
+			{
+				ArrayList list = new ArrayList();
+				ActionRef action = this;
+				while (action != null)
+				{
+					list.Add(action.CreateInstance());
+					action = action.Parent;										
+				}
+				list.Reverse();
+				actionPath = (ActionWrapper[]) list.ToArray(typeof(ActionWrapper));
+			}
+			return actionPath;
+		}
 
         public IConstraint Constraint
         {
@@ -66,7 +89,12 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos
             get { return isLeaf; }
         }
 
-        public void AddActionRef(ActionRef action)
+    	public ActionRef Parent
+    	{
+    		get { return parent; }
+    	}
+
+    	public void AddActionRef(ActionRef action)
         {
             actionRefs.Add(action);
         }

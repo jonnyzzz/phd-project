@@ -454,11 +454,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Constraints\DefaultConstraintFactory.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "src\Constraints\FixedDimensionConstraint.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

@@ -129,7 +129,10 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
 
             Size size = e.Graphics.MeasureString(Text, GetFont()).ToSize();
             e.ItemHeight = size.Height + 5;
-            e.ItemWidth = size.Width + 15;
+			if (this.MenuItems.Count > 0)
+				e.ItemWidth = size.Width + 35;
+			else
+				e.ItemWidth = size.Width + 15;
         }
 
         #endregion

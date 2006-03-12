@@ -9,17 +9,16 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.Constraints
 	/// <summary>
 	/// Summary description for OneParentResultsConstraint.
 	/// </summary>
-	public class OneParentResultsConstraint : IConstraint, IConstraintFactory
-	{		
+	public class OneParentResultsConstraint : IConstraint
+	{
+		public OneParentResultsConstraint(XmlNode node)
+		{
+		}
+
 		public bool Match(ResultSet resultSet)
 		{
 			NodeResultSet rs = resultSet as NodeResultSet;
 			return rs == null || (rs.HasSameGraphs && rs.HasSameParent);
-		}
-
-		public IConstraint CreateConstraint(XmlNode constraintNode)
-		{
-			return this;
-		}
+		}		
 	}
 }

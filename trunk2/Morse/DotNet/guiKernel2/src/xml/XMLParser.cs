@@ -86,7 +86,7 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
             XmlNodeList list = document.SelectNodes("mappings/assemblies/mappingsRef");
             foreach (XmlNode node in list)
             {
-                Console.Out.WriteLine("Ref");
+                Logger.LogMessage("Ref");
 
                 string assemblyName = node.Attributes["assembly"].Value;
                 string resourceName = node.Attributes["resource"].Value;
@@ -152,9 +152,9 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
                 }
 
                 Type constraintType = Core.Instance.TypeFinder.GetType(constraintName);
-                ConstructorInfo constructor = constraintType.GetConstructor(new Type[] {});
-                IConstraintFactory constraintFactory = (IConstraintFactory) constructor.Invoke(new object[] {});
-                constraints.Add(constraintFactory.CreateConstraint(constraintNode));
+                ConstructorInfo constructor = constraintType.GetConstructor(new Type[] {typeof(XmlNode)});
+                IConstraint constraint = (IConstraint) constructor.Invoke(new object[] {constraintNode});
+                constraints.Add(constraint);
             }
 
             return new AndConstraint((IConstraint[]) constraints.ToArray(typeof (IConstraint)));
@@ -167,15 +167,12 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
 
             foreach (XmlNode node in list)
             {
-                XmlAttributeCollection attributes = node.Attributes;
-
-            	ActionRef actionInfo = ParseActionRef(node);
-
+                ActionRef actionInfo = ParseActionRef(node, null);
             	ParseActionRefs(node, actionInfo);
-
                 Logger.LogMessage("Built Tree :\n {0}\nEnd", actionInfo.DumpTree());
 
-                if (attributes["internal"] == null || (attributes["internal"].Value == "true" && Core.Instance.IsInternal))
+				XmlAttributeCollection attributes = node.Attributes;
+                if (IsActiveAction(attributes))
                 {
                     Core.Instance.NextActionFactory.RegisterAction(actionInfo);
                 }
@@ -186,28 +183,38 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
             }
         }
 
-    	private ActionRef ParseActionRef(XmlNode node)
+    	private static bool IsActiveAction(XmlAttributeCollection attributes)
+    	{
+    		return attributes["internal"] == null || (attributes["internal"].Value == "true" && Core.Instance.IsInternal);
+    	}
+
+    	private ActionRef ParseActionRef(XmlNode node, ActionRef parent)
     	{
 			XmlAttributeCollection attributes = node.Attributes;
     		IConstraint constraint = ParseConstraint(node);
-    		ActionRef actionRef = new ActionRef(attributes["name"].Value, constraint, ParseIsLeaf(attributes));
-			if (attributes["caption"] != null && attributes["detail"] != null)
-				actionRef.SetActionCaption(attributes["caption"].Value, attributes["detail"].Value);
-
+    		ActionRef actionRef = new ActionRef(parent, attributes["name"].Value, constraint, ParseIsLeaf(attributes));
+			XmlNode captionNode = node.SelectSingleNode("caption");
+			if (captionNode != null)
+			{
+				XmlNode titleNode = captionNode.SelectSingleNode("title/text()");
+				XmlNode detailNode = captionNode.SelectSingleNode("detail/text()");
+				actionRef.SetActionCaption(
+					titleNode != null ? titleNode.Value : null, 
+					detailNode != null ? detailNode.Value : null);
+			}
     		return actionRef;
     	}
 
     	private void ParseActionRefs(XmlNode node, ActionRef info)
         {
-            XmlNodeList list = node.SelectNodes("actionReference");
+            XmlNodeList list = node.SelectNodes("action");
 
             foreach (XmlNode xmlNode in list)
             {
-                XmlAttributeCollection attributes = xmlNode.Attributes;
-                IConstraint constraint = ParseConstraint(xmlNode);
-                ActionRef actionRef = new ActionRef(attributes["name"].Value, constraint, ParseIsLeaf(attributes));
+                ActionRef actionRef = ParseActionRef(xmlNode, info);
                 ParseActionRefs(xmlNode, actionRef);
-                info.AddActionRef(actionRef);
+				if (IsActiveAction(xmlNode.Attributes))
+					info.AddActionRef(actionRef);
             }
         }
 

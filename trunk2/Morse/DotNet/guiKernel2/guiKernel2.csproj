@@ -163,6 +163,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\ActionFactory\ActionInfos\ActionBuilder.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\ActionFactory\ActionInfos\ActionRef.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -184,11 +189,6 @@
                 />
                 <File
                     RelPath = "src\ActionFactory\Constraints\IConstraint.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "src\ActionFactory\Constraints\IConstraintFactory.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />

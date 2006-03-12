@@ -1,4 +1,5 @@
-using EugenePetrenko.Gui2.Actions.Actions;
+using EugenePetrenko.Gui2.Actions.Filters;
+using EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos;
 using EugenePetrenko.Gui2.Logging;
 
 namespace EugenePetrenko.Gui2.Application.TreeNodes
@@ -8,36 +9,25 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
     /// </summary>
     public class ActionTreeMenuItem : TreeMenuItem
     {
-        private Action action;
-        private Action[] actionPath;
+        private ActionRef action;
         private Node node;
 
-        public ActionTreeMenuItem(Node node, Action action, params Action[] beforeActions) : base(action.ActionName, action.IsChainLeaf)
+        public ActionTreeMenuItem(Node node, ActionRef action) : base(action.ActionCaption, action.IsLeaf)
         {
             this.action = action;
             this.node = node;
 
-            this.MenuItems.Clear();
-            actionPath = Merge(beforeActions, action);
-            this.MenuItems.AddRange(
-                MenuItemFactory.CreateMenuItems(
-                    node,
-                    node.GetActionAfter(actionPath),
-                    actionPath
-                    )
-                );
-
+            this.MenuItems.Clear();            
             this.OwnerDraw = true;
-
-        }
+		}
 
 
         protected override void EventClick()
         {
-            if (action.IsChainLeaf)
+            if (action.IsLeaf)
             {
                 Logger.LogMessage("Event Click");
-                Runner.Runner.Instance.ComputationForm.AcceptActionChain(node, actionPath);
+                Runner.Runner.Instance.ComputationForm.AcceptActionChain(node, Filter.FilterActions(action.GetActionPath()));
             }
         }
     }

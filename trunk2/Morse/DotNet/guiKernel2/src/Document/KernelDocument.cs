@@ -41,9 +41,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
 
         public KernelNode CreateInitialNode()
         {
-            KernelNode node = new KernelNode(CreateInitialResultSet());
-            node.GetNextActions();
-            return node;
+            return new KernelNode(CreateInitialResultSet());
         }
 
         public ResultSet CreateInitialResultSet()

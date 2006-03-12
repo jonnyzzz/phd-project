@@ -1,183 +1,199 @@
-<?xml version="1.0" encoding="utf-8" ?> 
+<?xml version="1.0" encoding="utf-8" ?>
 
 <mappings>
-   <actions>
-    
-      <action name="IGroupAction">
-        <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
-	    <constraint class="OneParentResultsConstraint"/>
-        <nextActions>
-           <actionReference name="IBoxMethodAction">	
-				<actionReference name="ITarjanAction"/>
-		   </actionReference> 
-           
-           <actionReference name="IPointMethodAction">		
-				<actionReference name="ITarjanAction"/>
-		   </actionReference>
-		   
-		   <actionReference name="IAdaptiveMethodAction">		
-				<actionReference name="ITarjanAction"/>
-   		   </actionReference>
-        </nextActions>
-      </action>
-   							
-				
-		<action name="IAdaptiveBoxMethod" isLeaf="false" internal="true">		
-			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
-			<constraint class="OneParentResultsConstraint"/>
-			<nextActions>		
-				<actionReference name="ITarjanAction" isLeaf="true"/>
-			</nextActions>
-		</action>
+    <actions>
+        <action name="IGroupAction">
+            <caption>
+                <title>Symbolic Image</title>
+                <detail>This methods are aplicable to Symbolic Image nodes only</detail>
+            </caption>
 
-    <action name="ISeparatorAction" isLeaf="false"/>
+            <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+            <constraint class="OneParentResultsConstraint"/>
 
-    <action name="IProjectAction" isLeaf="true">
-			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
-			<constraint class="OneParentResultsConstraint"/>
-		</action>
-		
-		<action name="GnuPlotVisualizationKernelAction" isLeaf="true">
-			<constraint class="GnuPlotConstraintFactory" />
-			<constraint class="SameDimensionConstraint" />
-			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
-		</action>
-		
-		<action name="SavePointsKernelAction" isLeaf="true">
-			<constraint class="OneGraphResultConstraintFactory"/>
-		</action>
-		
-		<action name="ISeparatorAction" isLeaf="false"/>
-		
-		<action name="IMinimalLoopLocalizationAction" isLeaf="true">
-			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
-			<constraint class="StrongCompGraphsConstraintFactory" />
-			<constraint class="OneParentResultsConstraint"/>
-		</action>
-		
-		<action name="IIsolatedSetAction" isLeaf="true">
-			<constraint class="DefaultConstraintFactory" metadata="IResultMetadata" result="IGraphResult" />
-			<constraint class="StrongCompGraphsConstraintFactory" />
-			<constraint class="OneParentResultsConstraint"/>
-		</action>
-		
-		<action name="ISeparatorAction" isLeaf="false"/>
-		
-		<action name="ISIRomAction" isLeaf="true">
-			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
-			<constraint class="FixedDimensionConstraintFactory" dimension="1,2,3" />
-			<constraint class="StrongCompGraphsConstraintFactory" />		
-			<constraint class="OneParentResultsConstraint"/>
-		</action>
-				
-		<action name="ISeparatorAction" isLeaf="false"/>
-				              
-		<action name="IMS2DCreationAction" isLeaf="true">
-		    <!--<constraint class="OneGraphResultConstraintFactory" />-->
-		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />
-		    <!--<constraint class="StrongCompGraphsConstraintFactory" /> -->
-		    <constraint class="FixedDimensionConstraintFactory" dimension="2" />		    
-		    <constraint class="OneParentResultsConstraint"/>
-		</action>
-		
-		<action name="IMS2DProcessAction" isLeaf="true">
-		    <constraint class="OneParentResultsConstraint"/>
-		    <constraint class="DefaultConstraintFactory" metadata="IMS2Metadata" result="IGraphResult" />
-		    <nextActions>		
-				<actionReference name="ITarjanAction" isLeaf="true" />
-			</nextActions>				    
-		</action>
-		
-		<action name="IMS2DRomAction" isLeaf="true">
-		    <constraint class="OneParentResultsConstraint"/>
-		    <constraint class="DefaultConstraintFactory" metadata="IMS2Metadata" result="IGraphResult" />
-		    <constraint class="StrongCompGraphsConstraintFactory" />		
-		</action>
-		
-		<action name="ISeparatorAction" isLeaf="false"/>
-			
-		<action name="IMSCreationProcess" isLeaf="true" >
-		    <constraint class="OneParentResultsConstraint"/>
-		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />		    
-		</action>
-		
-		<action name="IMSAdaptiveMethod" isLeaf="false">
-		  <constraint class="OneParentResultsConstraint"/>
-			<constraint class="DefaultConstraintFactory" metadata="IMSSegmentMetadata" result="IGraphResult" />
-			<constraint class="FixedDimensionConstraintFactory" dimension="4,6" />
-		    <nextActions>		
-				<actionReference name="ITarjanAction" isLeaf="true" />
-			</nextActions>				    
-		</action>
-		
-		<action name="IMSMethodAction" isLeaf="false" internal="true">
-		    <constraint class="OneParentResultsConstraint"/>
-		    <constraint class="DefaultConstraintFactory" metadata="IMSSegmentMetadata" result="IGraphResult" />
-		    <nextActions>		
-				<actionReference name="ITarjanAction" isLeaf="true" />
-			</nextActions>				    
-		</action>
-		
-   	<action name="IMSSegmentRom" isLeaf="true">
-   	    <constraint class="OneParentResultsConstraint"/>
-		    <constraint class="DefaultConstraintFactory" metadata="IMSSegmentMetadata" result="IGraphResult" />
-		    <constraint class="StrongCompGraphsConstraintFactory" />		
-		</action>			
-		
-		<action name="ISeparatorAction" isLeaf="false"/>
-		
-		<action name="IMSAngleCreationMethod" isLeaf="true" >
-		    <constraint class="OneParentResultsConstraint"/>
-		    <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult" />		    
-		    <constraint class="FixedDimensionConstraintFactory" dimension="2,3" />
-		</action>
-		
-		<action name="IMSAngleMethod" isLeaf="false">
-		  <constraint class="OneParentResultsConstraint"/>
-			<constraint class="DefaultConstraintFactory" metadata="IMSAngleMetadata" result="IGraphResult" />
-			<constraint class="FixedDimensionConstraintFactory" dimension="3,5" />
-		    <nextActions>		
-				<actionReference name="ITarjanAction" isLeaf="true" />
-			</nextActions>				    
-		</action>
-		
-		<action name="IMSAngleRomProcess" isLeaf="true">
-   	    <constraint class="OneParentResultsConstraint"/>
-		    <constraint class="DefaultConstraintFactory" metadata="IMSAngleMetadata" result="IGraphResult" />
-		    <constraint class="StrongCompGraphsConstraintFactory" />		
-		</action>			
-					
+            <action name="IBoxMethodAction">
+                <action name="ITarjanAction" isLeaf="true"/>
+            </action>
+
+            <action name="IPointMethodAction">
+                <action name="ITarjanAction" isLeaf="true"/>
+            </action>
+
+            <action name="IAdaptiveMethodAction">
+                <action name="ITarjanAction" isLeaf="true"/>
+            </action>
+
+            <action name="IAdaptiveBoxMethod" isLeaf="false" internal="true">
+                <action name="ITarjanAction" isLeaf="true"/>
+            </action>
+        </action>
+
+        <action name="IGroupAction">
+            <caption>
+                <title>Morse Spectrum</title>
+            </caption>
+
+            <action name="IGroupAction">
+                <caption>
+                    <title>Angle Linear Method for R^2</title>
+                </caption>
+
+                <action name="IMS2DCreationAction" isLeaf="true">
+                    <caption>
+                        <title>Create Projective Extended System</title>
+                    </caption>
+                    <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+                    <constraint class="FixedDimensionConstraint" dimension="2"/>
+                    <constraint class="OneParentResultsConstraint"/>
+                </action>
+
+                <action name="IMS2DProcessAction">
+                    <caption>
+                        <title>Subdevide</title>
+                    </caption>
+                    <constraint class="OneParentResultsConstraint"/>
+                    <constraint class="DefaultConstraint" metadata="IMS2Metadata" result="IGraphResult"/>
+
+                    <action name="ITarjanAction" isLeaf="true"/>
+                </action>
+
+                <action name="IMS2DRomAction" isLeaf="true">
+                    <caption>
+                        <title>Estimate Morse Spectrum</title>
+                    </caption>
+                    <constraint class="OneParentResultsConstraint"/>
+                    <constraint class="DefaultConstraint" metadata="IMS2Metadata" result="IGraphResult"/>
+                    <constraint class="StrongCompGraphsConstraint"/>
+                </action>
+            </action>
+
+            <action name="IGroupAction">
+                <caption>
+                    <title>Angle Adaptive Method</title>
+                </caption>
+
+                <action name="IMSAngleCreationMethod" isLeaf="true">
+                    <caption>
+                        <title>Create Projective Extended System</title>
+                    </caption>
+                    <constraint class="OneParentResultsConstraint"/>
+                    <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+                    <constraint class="FixedDimensionConstraint" dimension="3"/>
+                </action>
+
+                <action name="IMSAngleMethod" isLeaf="false">
+                    <caption>
+                        <title>Subdevide</title>
+                    </caption>
+                    <constraint class="OneParentResultsConstraint"/>
+                    <constraint class="DefaultConstraint" metadata="IMSAngleMetadata" result="IGraphResult"/>
+                    <constraint class="FixedDimensionConstraint" dimension="5"/>
+                    <action name="ITarjanAction" isLeaf="true"/>
+                </action>
+
+                <action name="IMSAngleRomProcess" isLeaf="true">
+                    <caption>
+                        <title>Estimate Morse Spectrum</title>
+                    </caption>
+                    <constraint class="OneParentResultsConstraint"/>
+                    <constraint class="DefaultConstraint" metadata="IMSAngleMetadata" result="IGraphResult"/>
+                    <constraint class="StrongCompGraphsConstraint"/>
+                </action>
+            </action>
+
+            <action name="ISIRomAction" isLeaf="true">
+                <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+                <constraint class="FixedDimensionConstraint" dimension="1,2,3"/>
+                <constraint class="StrongCompGraphsConstraint"/>
+                <constraint class="OneParentResultsConstraint"/>
+            </action>
+        </action>
+
+        <action name="GnuPlotVisualizationKernelAction" isLeaf="true">
+            <constraint class="GnuPlotConstraint"/>
+            <constraint class="SameDimensionConstraint"/>
+            <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+        </action>
+
+        <action name="SavePointsKernelAction" isLeaf="true">
+            <constraint class="OneGraphResultConstraint"/>
+        </action>
+
+        <action name="ISeparatorAction" isLeaf="false" internal="true" />
+
+        <action name="IProjectAction" isLeaf="true" internal="true" >
+            <constraint class="DefaultConstraint" metadata="IResultMetadata" result="IGraphResult"/>
+            <constraint class="OneParentResultsConstraint"/>
+        </action>
+
+        <action name="IMinimalLoopLocalizationAction" isLeaf="true" internal="true">
+            <constraint class="DefaultConstraint" metadata="IResultMetadata" result="IGraphResult"/>
+            <constraint class="StrongCompGraphsConstraint"/>
+            <constraint class="OneParentResultsConstraint"/>
+        </action>
+
+        <action name="IIsolatedSetAction" isLeaf="true" internal="true">
+            <constraint class="DefaultConstraint" metadata="IResultMetadata" result="IGraphResult"/>
+            <constraint class="StrongCompGraphsConstraint"/>
+            <constraint class="OneParentResultsConstraint"/>
+        </action>
+
+        <action name="ISeparatorAction" isLeaf="false" internal="true" />
+
+        <action name="IMSCreationProcess" isLeaf="true" internal="true">
+            <constraint class="OneParentResultsConstraint"/>
+            <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+        </action>
+
+        <action name="IMSAdaptiveMethod" isLeaf="false" internal="true" >
+            <constraint class="OneParentResultsConstraint"/>
+            <constraint class="DefaultConstraint" metadata="IMSSegmentMetadata" result="IGraphResult"/>
+            <constraint class="FixedDimensionConstraint" dimension="4,6"/>
+            <action name="ITarjanAction" isLeaf="true"/>
+        </action>
+
+        <action name="IMSMethodAction" isLeaf="false" internal="true">
+            <constraint class="OneParentResultsConstraint"/>
+            <constraint class="DefaultConstraint" metadata="IMSSegmentMetadata" result="IGraphResult"/>
+            <action name="ITarjanAction" isLeaf="true"/>
+        </action>
+
+        <action name="IMSSegmentRom" isLeaf="true" internal="true" >
+            <constraint class="OneParentResultsConstraint"/>
+            <constraint class="DefaultConstraint" metadata="IMSSegmentMetadata" result="IGraphResult"/>
+            <constraint class="StrongCompGraphsConstraint"/>
+        </action>
     </actions>
-    
+
     <names>
-		<action name="IBoxMethodAction" caption="Linear Method" />
-		<action name="IPointMethodAction" caption="Point Method" />
-		<action name="ITarjanAction" caption="Strong Component Localization" > You need graph </action>    
-		<action name="GnuPlotVisualizationKernelAction" caption="Visualize" > You need 2D or 3D SI </action>
-		<action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search" > You need SI with edges </action>
-		<action name="IIsolatedSetAction" caption="Isolating set localization" > You need SI with edges </action>
-		<action name="SavePointsKernelAction" caption="Export to file" > You need Graph result </action>
-		<action name="ISIRomAction" caption="Morse Spectrum Multiplied" > You need SI with edges </action>
-		<action name="IAdaptiveMethodAction" caption="Adaptive Method"> You need SI </action>
-		<action name="IAdaptiveBoxMethod" caption="Adaptive Box Method" />		
-		<action name="IMS2DCreationAction" caption="Create Angle Projective Bundle" >You need plane SI with edges</action>
-		<action name="IMS2DProcessAction" caption="Angle Projective Bundle Step" > You need to use Create Angle Projective Bundle method first </action>
-		<action name="IMS2DRomAction" caption="Angle Projective Bundle Estimate Morse Spectrum" > You need Angle Projective Bundle Node with edges </action>
-		<action name="IProjectAction" caption="Decrease accuracy" />		
-		<action name="IMSMethodAction" caption="Segment Projective Bundle Point Method Next Step" > You need Segment Projective Bundle Node </action>
-		<action name="IMSAdaptiveMethod" caption="Adaptive Segment Projective Bundle Next Step" > You need Segment Projective Bundle Node </action>
-		<action name="IMSCreationProcess" caption="Create Segment Projective Bundle Next Step" />		
-		<action name="IMSSegmentRom" caption="Segment Projective Bundle Estimate Morse Spectrum" />			
-		<action name="IMSAngleCreationMethod" caption="Create Angle Projective Bundle" />		
-		<action name="IMSAngleMethod" caption="Angle Projective Bundle Adaptve Next Step" />		
-		<action name="IMSAngleRomProcess" caption="Angle Projective Bundle Estimate Morse Spectrum" />		
+        <action name="IBoxMethodAction" caption="Linear Method"/>
+        <action name="IPointMethodAction" caption="Point Method"/>
+        <action name="ITarjanAction" caption="Strong Component Localization"> You need graph </action>
+        <action name="GnuPlotVisualizationKernelAction" caption="Visualize"> You need 2D or 3D SI </action>
+        <action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search"> You need SI with edges </action>
+        <action name="IIsolatedSetAction" caption="Isolating set localization"> You need SI with edges </action>
+        <action name="SavePointsKernelAction" caption="Export to file"> You need Graph result </action>
+        <action name="ISIRomAction" caption="Morse Spectrum Multiplied"> You need SI with edges </action>
+        <action name="IAdaptiveMethodAction" caption="Adaptive Method"> You need SI </action>
+        <action name="IAdaptiveBoxMethod" caption="Adaptive Box Method"/>
+        <action name="IMS2DCreationAction" caption="Create Angle Projective Bundle">You need plane SI with edges</action>
+        <action name="IMS2DProcessAction" caption="Angle Projective Bundle Step"> You need to use Create Angle Projective Bundle method first </action>
+        <action name="IMS2DRomAction" caption="Angle Projective Bundle Estimate Morse Spectrum"> You need Angle Projective Bundle Node with edges </action>
+        <action name="IProjectAction" caption="Decrease accuracy"/>
+        <action name="IMSMethodAction" caption="Segment Projective Bundle Point Method Next Step"> You need Segment Projective Bundle Node </action>
+        <action name="IMSAdaptiveMethod" caption="Adaptive Segment Projective Bundle Next Step"> You need Segment Projective Bundle Node </action>
+        <action name="IMSCreationProcess" caption="Create Segment Projective Bundle Next Step"/>
+        <action name="IMSSegmentRom" caption="Segment Projective Bundle Estimate Morse Spectrum"/>
+        <action name="IMSAngleCreationMethod" caption="Create Angle Projective Bundle"/>
+        <action name="IMSAngleMethod" caption="Angle Projective Bundle Adaptve Next Step"/>
+        <action name="IMSAngleRomProcess" caption="Angle Projective Bundle Estimate Morse Spectrum"/>
     </names>
 
-	<assemblies>	
-		<assembly name="EugenePetrenko.Gui2.Actions"/>
-		<assembly name="EugenePetrenko.Gui2.Visualization"/>		
-		<assembly name="EugenePetrenko.Gui2.MorseKernel2.Interop" />
-		<assembly name="EugenePetrenko.Gui2.Application" />
-	</assemblies>
+    <assemblies>
+        <assembly name="EugenePetrenko.Gui2.Actions"/>
+        <assembly name="EugenePetrenko.Gui2.Visualization"/>
+        <assembly name="EugenePetrenko.Gui2.MorseKernel2.Interop"/>
+        <assembly name="EugenePetrenko.Gui2.Application"/>
+    </assemblies>
 
 </mappings>

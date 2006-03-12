@@ -12,4 +12,5 @@ protected:
 	virtual JDouble getMin(int i);
 	virtual JDouble getMax(int i);
     virtual int getNewDimension();
+
 };

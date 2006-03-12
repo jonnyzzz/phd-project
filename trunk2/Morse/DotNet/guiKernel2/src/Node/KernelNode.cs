@@ -17,17 +17,6 @@ namespace EugenePetrenko.Gui2.Kernell2.Node
             this.results = results;
         }
 
-        public ActionWrapper[] GetNextActions()
-        {
-            return Core.Instance.NextActionFactory.NextAction(this);
-        }
-
-        public ActionWrapper[] GetNextActionsAfter(ActionWrapper[] path)
-        {
-            return Core.Instance.NextActionFactory.NextAction(this, path);
-        }
-
-
         public ResultSet Results
         {
             get { return results; }

@@ -28,14 +28,14 @@ namespace EugenePetrenko.Gui2.Application.Forms
             data =
                 offet + "Created by: \n " +
                     offet + "   Euegene Petrenko (evgeni.petrenko@mail.ru),\n " +
-                    offet + "   George Osipenko,\n " +
-                    offet + "   Nataly Ampilova,\n " +
-                    offet + "   \n\n\n " + /*Kate Motkina*/
+                    offet + "   \n\n\n " +
                     offet + "Special thanks to: \n " +
                     offet + "   Joseph V. Romanovsky,\n" +
+                    offet + "   George S. Osipenko,\n " +
+                    offet + "   Nataly B. Ampilova,\n " +
                     offet + "   And to every one, who was involved \n" +
                     offet + "	  In the development process \n\n\n" +
-                    offet + "                       2001-2005 ";
+                    offet + "                       2001-2006 ";
             label1.Text = data;
 
         }

@@ -13,15 +13,15 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
 	{
         private Hashtable nameToType = new Hashtable();
 
-		private Type GetTypeFromName(string name)
+		public void Init()
 		{
 			foreach (Assembly assembly in Core.Instance.Assemblies)
 			{
-				Type type = assembly.GetType(name);
-				if (type != null)
-					return type;
+				foreach (Type type in assembly.GetTypes())
+				{
+					nameToType[type.Name] = type;
+				}
 			}
-			throw new TypeLoadException("Unable to load type: Type not Found! " + name);
 		}
 
 		public Type GetType(string name)
@@ -29,8 +29,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
 			Type t = (Type) nameToType[name];
 			if (t == null)
 			{
-				t = GetTypeFromName(name);
-				nameToType[name] = t;
+				throw new TypeLoadException("Unable to load type: Type not Found! " + name);				
 			}
 			return t;
 		}

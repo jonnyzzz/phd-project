@@ -6,6 +6,8 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos
     /// <summary>
     /// Summary description for ActionStateRef.
     /// </summary>
+    /// 
+
     public class ActionStateRef
     {
         private ActionRef actionRef;

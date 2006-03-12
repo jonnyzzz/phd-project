@@ -1,4 +1,5 @@
 using System;
+using System.Xml;
 using EugenePetrenko.Gui2.Kernell2.Constraints;
 using EugenePetrenko.Gui2.Kernell2.Container;
 using EugenePetrenko.Gui2.Kernell2.Node;
@@ -11,17 +12,22 @@ namespace EugenePetrenko.Gui2.Actions.Constraints
     /// </summary>
     public class DefaultConstraint : IConstraint
     {
-        private readonly string metadataType;
-        private readonly string resultType;
+        private readonly Type metadataType;
+        private readonly Type resultType;
 
-        public DefaultConstraint(Type metadata, Type resultType) : this(metadata.Name, resultType.Name)
-        {
-        }
+		public DefaultConstraint(XmlNode constraintNode)
+		{
+			XmlAttributeCollection attributes = constraintNode.Attributes;
+			TypeFinder typeFinder = Core.Instance.TypeFinder;
 
-        public DefaultConstraint(string metadataType, string resultType)
+			metadataType = typeFinder.GetType(attributes["metadata"].Value);
+			resultType = typeFinder.GetType(attributes["result"].Value);
+		}
+
+    	public DefaultConstraint(Type metadata, Type resultType) 
         {
-            this.metadataType = metadataType;
-            this.resultType = resultType;
+			metadataType = metadata;
+			this.resultType = resultType;
         }
 
         public bool Match(ResultSet resultSet)
@@ -31,10 +37,8 @@ namespace EugenePetrenko.Gui2.Actions.Constraints
             foreach (IResult result in results)
             {
             	TypeFinder typeFinder = Core.Instance.TypeFinder;
-            	if (!(typeFinder.ImplementsType(result, resultType) && typeFinder.ImplementsType(result.GetMetadata(), metadataType)))
-                {
+            	if (!typeFinder.ImplementsType(result, resultType) || !typeFinder.ImplementsType(result.GetMetadata(), metadataType))                
                     return false;
-                }
             }
             return true;
         }
@@ -42,6 +46,6 @@ namespace EugenePetrenko.Gui2.Actions.Constraints
         public override string ToString()
         {
             return string.Format("Default [ result = {0}, meta = {1}]", resultType, metadataType);
-        }
-    }
+        }    		
+	}
 }

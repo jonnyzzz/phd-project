@@ -3,14 +3,14 @@ using EugenePetrenko.Gui2.Kernell2.Constraints;
 using EugenePetrenko.Gui2.Kernell2.Node;
 using EugenePetrenko.Gui2.MorseKernel2;
 
-namespace EugenePetrenko.Gui2.Actions.Constraints
+namespace EugenePetrenko.Gui2.Actions.Constraints 
 {
     /// <summary>
     /// Summary description for StrongCompGraphsConstraint.
     /// </summary>
     public class StrongCompGraphsConstraint : IConstraint
     {
-        public StrongCompGraphsConstraint()
+        public StrongCompGraphsConstraint(XmlNode node)
         {
         }
 
@@ -22,14 +22,5 @@ namespace EugenePetrenko.Gui2.Actions.Constraints
             }
             return true;
         }
-    }
-
-
-    public class StrongCompGraphsConstraintFactory : IConstraintFactory
-    {
-        public IConstraint CreateConstraint(XmlNode constraintNode)
-        {
-            return new StrongCompGraphsConstraint();
-        }
-    }
+    }    
 }

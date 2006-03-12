@@ -1,4 +1,3 @@
-using System;
 using System.Xml;
 using EugenePetrenko.Gui2.Kernell2.Constraints;
 using EugenePetrenko.Gui2.Kernell2.Node;
@@ -9,9 +8,9 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.Constraints
 	/// <summary>
 	/// Summary description for SameDimensionConstraint.
 	/// </summary>
-	public class SameDimensionConstraint : IConstraint, IConstraintFactory
+	public class SameDimensionConstraint : IConstraint
 	{
-		public SameDimensionConstraint()
+		public SameDimensionConstraint(XmlNode node)
 		{
 		}
 
@@ -32,11 +31,6 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.Constraints
 					return false;				
 			}
 			return true;
-		}
-
-		public IConstraint CreateConstraint(XmlNode constraintNode)
-		{
-			return this;
 		}
 	}
 }

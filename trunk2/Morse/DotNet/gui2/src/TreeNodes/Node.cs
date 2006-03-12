@@ -1,11 +1,8 @@
-using System.Collections;
 using System.Windows.Forms;
-using EugenePetrenko.Gui2.Actions.Actions;
-using EugenePetrenko.Gui2.Actions.Filters;
 using EugenePetrenko.Gui2.Application.TreeNodes.MenuItems;
 using EugenePetrenko.Gui2.Controls.TreeControl;
+using EugenePetrenko.Gui2.Kernell2.Container;
 using EugenePetrenko.Gui2.Kernell2.Node;
-using EugenePetrenko.Gui2.Logging;
 
 namespace EugenePetrenko.Gui2.Application.TreeNodes
 {
@@ -41,7 +38,7 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
         {
             if (cachedMenuItems == null)
             {
-                cachedMenuItems = MenuItemFactory.CreateMenuItems(this, Filter.FilterActions(kernelNode.GetNextActions()));
+                cachedMenuItems = MenuItemFactory.CreateMenuItems(this, Core.Instance.NextActionFactory.GetActions());
             }
             return cachedMenuItems;
         }
@@ -53,10 +50,6 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
             {
                 return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Create Group", new Click(CreateGroup)));
             }
-//            else if (this.Nodes.Count > 0)
-//            {
-//                return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Group all childs", new Click(CreateGroupClick)));
-//            }
             else
             {
                 return GetMenuItemsActions();
@@ -80,20 +73,9 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
             }
         }
 
-
         public KernelNode KernelNode
         {
             get { return kernelNode; }
-        }
-
-        public Action[] GetActions()
-        {
-            return Filter.FilterActions(kernelNode.GetNextActions());
-        }
-
-        public Action[] GetActionAfter(Action[] chain)
-        {
-            return Filter.FilterActions(kernelNode.GetNextActionsAfter(Filter.ToActionWrapper(chain)));
         }
 
 		public void AddResultChild(Node[] nodes, string caption)
@@ -119,9 +101,6 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
             {
                 group.AddNode(this);
             }
-
-
         }
-
     }
 }
