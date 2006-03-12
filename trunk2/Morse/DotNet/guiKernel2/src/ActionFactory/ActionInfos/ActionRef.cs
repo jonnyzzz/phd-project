@@ -15,6 +15,9 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos
         private readonly IConstraint constraint;
         private readonly bool isLeaf;
         private ArrayList actionRefs = new ArrayList();
+		
+		private string actionCaption = null;
+		private string actionDetail = null;
 
         public ActionRef(string actionName, IConstraint constraint, bool isLeaf)
         {
@@ -23,14 +26,27 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos
             this.isLeaf = isLeaf;
         }
 
+		public void SetActionCaption(string caption, string detail)
+		{
+			actionCaption = caption;
+			actionDetail = detail;
+		}
+
         private ActionWrapper myCachedActionWrapper = null;
+
+		private void InitCaptions()
+		{
+			if (actionCaption == null)
+				actionCaption = Core.Instance.ActionNamingFactory.FindActionCaption(ActionName);
+			if (actionDetail == null) 
+				actionDetail = Core.Instance.ActionNamingFactory.FindActionComment(ActionName);
+		}
 
         public ActionWrapper CreateInstance()
         {
             if (myCachedActionWrapper == null)
             {
-                string caption = Core.Instance.ActionNamingFactory.FindActionCaption(ActionName);
-                myCachedActionWrapper = Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, caption, IsLeaf);
+                myCachedActionWrapper = Core.Instance.ActionWrapperFactory.CreateActionWrapper(ActionName, ActionCaption, IsLeaf);
             }
             return myCachedActionWrapper;
         }
@@ -60,7 +76,17 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos
             get { return (ActionRef[]) actionRefs.ToArray(typeof (ActionRef)); }
         }
 
-        public override string ToString()
+    	public string ActionCaption
+    	{
+    		get { return actionCaption; }
+    	}
+
+    	public string ActionDetail
+    	{
+    		get { return actionDetail; }
+    	}
+
+    	public override string ToString()
         {
             return string.Format("ActionRef [name = {0}, constraint = {2},  isLeaf = {1}]", actionName, isLeaf, constraint.ToString());
         }
@@ -84,7 +110,5 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos
                 actionRef.DumpContext(depth + 1, sb);
             }
         }
-
-
     }
 }

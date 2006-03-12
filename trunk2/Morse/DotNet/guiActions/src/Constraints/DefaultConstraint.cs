@@ -30,7 +30,8 @@ namespace EugenePetrenko.Gui2.Actions.Constraints
             if (results.Length == 0) return false;
             foreach (IResult result in results)
             {
-                if (!(Core.ImplemetsType(result, resultType) && Core.ImplemetsType(result.GetMetadata(), metadataType)))
+            	TypeFinder typeFinder = Core.Instance.TypeFinder;
+            	if (!(typeFinder.ImplementsType(result, resultType) && typeFinder.ImplementsType(result.GetMetadata(), metadataType)))
                 {
                     return false;
                 }

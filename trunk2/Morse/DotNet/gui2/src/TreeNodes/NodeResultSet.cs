@@ -27,9 +27,10 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
 
 		public Node GetNodeParent(ComputationNode node) 
 		{
-			while (node.Parent != null && !(node.Parent is Node))
+			node = node.Parent as ComputationNode;
+			while (node != null && !(node is Node))
 				node = node.Parent as ComputationNode;
-			return node as Node;
+			return (Node)node;
 		}
 
 		public bool HasSameParent

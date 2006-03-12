@@ -14,7 +14,7 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.Constraints
 		public bool Match(ResultSet resultSet)
 		{
 			NodeResultSet rs = resultSet as NodeResultSet;
-			return rs == null || rs.HasSameGraphs || rs.HasSameParent;
+			return rs == null || (rs.HasSameGraphs && rs.HasSameParent);
 		}
 
 		public IConstraint CreateConstraint(XmlNode constraintNode)

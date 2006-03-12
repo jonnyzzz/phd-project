@@ -130,7 +130,7 @@ namespace EugenePetrenko.Gui2.Application.Runner
 
         #region static
 
-        [STAThread]
+        [MTAThread]
         public static void Main(string[] args)
         {
             try

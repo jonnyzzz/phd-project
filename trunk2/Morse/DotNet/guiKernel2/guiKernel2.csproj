@@ -233,11 +233,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Container\Core2.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "src\Container\TypeFinder.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

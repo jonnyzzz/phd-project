@@ -33,6 +33,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_24F7084D9455D87F3274BABAD92BEED2"
+        "OwnerKey" = "8:_6542292EE7FD4448A8819F56B736CFA6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_26DBF9CF274948AFB9C3C46C4EE57477"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -45,20 +51,32 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_2AACAEACC3F229495AB2BC68C1B052D1"
+        "MsmKey" = "8:_2FBBE70E1510448A8DE11C029A35E547"
+        "OwnerKey" = "8:_F078CE3F1888862153D74053A9E4DE28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2FBBE70E1510448A8DE11C029A35E547"
+        "OwnerKey" = "8:_765D6FC1C93F71BB4EF69A26BBC9920D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2FBBE70E1510448A8DE11C029A35E547"
         "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2FBBE70E1510448A8DE11C029A35E547"
+        "OwnerKey" = "8:_CEFAA4583968FC7A43959498039E3365"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_38C0E654184C4FF7A7FA6D40F59FFDE5"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3CC628B6340D4AB4AB3F3D584EAFEFFF"
-        "OwnerKey" = "8:_6542292EE7FD4448A8819F56B736CFA6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -75,6 +93,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_48F9FF39E522F1B6E1C74E0E2559353C"
+        "OwnerKey" = "8:_6542292EE7FD4448A8819F56B736CFA6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4FD4D7F4916F465F88B29BBAD107BEE3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -87,18 +111,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_60A0E6CCF5E6C12CAD00947F2E488662"
-        "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_60A0E6CCF5E6C12CAD00947F2E488662"
-        "OwnerKey" = "8:_2AACAEACC3F229495AB2BC68C1B052D1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_6542292EE7FD4448A8819F56B736CFA6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -106,25 +118,37 @@
         "Entry"
         {
         "MsmKey" = "8:_6C790F984AC60F5E235BD926154BA11A"
-        "OwnerKey" = "8:_60A0E6CCF5E6C12CAD00947F2E488662"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6C790F984AC60F5E235BD926154BA11A"
-        "OwnerKey" = "8:_2AACAEACC3F229495AB2BC68C1B052D1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6C790F984AC60F5E235BD926154BA11A"
         "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6C790F984AC60F5E235BD926154BA11A"
-        "OwnerKey" = "8:_9379759427840C6C698D02347F72B00D"
+        "MsmKey" = "8:_6D19EBDB76C8FFBCA637051C8EF79D41"
+        "OwnerKey" = "8:_C3140CA9DEBD31229BDA75994A199C3A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6D19EBDB76C8FFBCA637051C8EF79D41"
+        "OwnerKey" = "8:_765D6FC1C93F71BB4EF69A26BBC9920D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6D19EBDB76C8FFBCA637051C8EF79D41"
+        "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6D19EBDB76C8FFBCA637051C8EF79D41"
+        "OwnerKey" = "8:_F078CE3F1888862153D74053A9E4DE28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6D19EBDB76C8FFBCA637051C8EF79D41"
+        "OwnerKey" = "8:_CEFAA4583968FC7A43959498039E3365"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -135,32 +159,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_73555A5A43B248D6827EED22015A75F7"
-        "OwnerKey" = "8:_6542292EE7FD4448A8819F56B736CFA6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7BA2BC8A54E0DFA6CB1A06734E2DBBB9"
-        "OwnerKey" = "8:_9379759427840C6C698D02347F72B00D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7BA2BC8A54E0DFA6CB1A06734E2DBBB9"
+        "MsmKey" = "8:_765D6FC1C93F71BB4EF69A26BBC9920D"
         "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7BA2BC8A54E0DFA6CB1A06734E2DBBB9"
-        "OwnerKey" = "8:_2AACAEACC3F229495AB2BC68C1B052D1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7BA2BC8A54E0DFA6CB1A06734E2DBBB9"
-        "OwnerKey" = "8:_60A0E6CCF5E6C12CAD00947F2E488662"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -177,26 +177,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_9379759427840C6C698D02347F72B00D"
-        "OwnerKey" = "8:_60A0E6CCF5E6C12CAD00947F2E488662"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9379759427840C6C698D02347F72B00D"
-        "OwnerKey" = "8:_2AACAEACC3F229495AB2BC68C1B052D1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9379759427840C6C698D02347F72B00D"
-        "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_93F3AA29533A49058F9C4ABA869989C1"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9689D99C46313DF73B65D3C1A8094BB4"
+        "OwnerKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -231,6 +219,24 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_C3140CA9DEBD31229BDA75994A199C3A"
+        "OwnerKey" = "8:_F078CE3F1888862153D74053A9E4DE28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C3140CA9DEBD31229BDA75994A199C3A"
+        "OwnerKey" = "8:_765D6FC1C93F71BB4EF69A26BBC9920D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C3140CA9DEBD31229BDA75994A199C3A"
+        "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_CA87B8E65F8E4E678D7CE1590E46472B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -249,104 +255,122 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CEFAA4583968FC7A43959498039E3365"
+        "OwnerKey" = "8:_F078CE3F1888862153D74053A9E4DE28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CEFAA4583968FC7A43959498039E3365"
+        "OwnerKey" = "8:_765D6FC1C93F71BB4EF69A26BBC9920D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CEFAA4583968FC7A43959498039E3365"
+        "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DD99758AA2AF4880A3806BC692F819CE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E017919A52A243BFB1B15A9D02FB99A0"
+        "MsmKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
+        "OwnerKey" = "8:_765D6FC1C93F71BB4EF69A26BBC9920D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
+        "OwnerKey" = "8:_F078CE3F1888862153D74053A9E4DE28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
+        "OwnerKey" = "8:_CEFAA4583968FC7A43959498039E3365"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
         "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E017919A52A243BFB1B15A9D02FB99A0"
-        "OwnerKey" = "8:_2AACAEACC3F229495AB2BC68C1B052D1"
+        "MsmKey" = "8:_F04EAC174B9E4072AC270B91B9A35224"
+        "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E017919A52A243BFB1B15A9D02FB99A0"
+        "MsmKey" = "8:_F04EAC174B9E4072AC270B91B9A35224"
+        "OwnerKey" = "8:_765D6FC1C93F71BB4EF69A26BBC9920D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F04EAC174B9E4072AC270B91B9A35224"
+        "OwnerKey" = "8:_CEFAA4583968FC7A43959498039E3365"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F04EAC174B9E4072AC270B91B9A35224"
+        "OwnerKey" = "8:_2FBBE70E1510448A8DE11C029A35E547"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F04EAC174B9E4072AC270B91B9A35224"
+        "OwnerKey" = "8:_6D19EBDB76C8FFBCA637051C8EF79D41"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F04EAC174B9E4072AC270B91B9A35224"
+        "OwnerKey" = "8:_C3140CA9DEBD31229BDA75994A199C3A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F04EAC174B9E4072AC270B91B9A35224"
+        "OwnerKey" = "8:_F078CE3F1888862153D74053A9E4DE28"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F04EAC174B9E4072AC270B91B9A35224"
         "OwnerKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E017919A52A243BFB1B15A9D02FB99A0"
-        "OwnerKey" = "8:_7BA2BC8A54E0DFA6CB1A06734E2DBBB9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E017919A52A243BFB1B15A9D02FB99A0"
-        "OwnerKey" = "8:_9379759427840C6C698D02347F72B00D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E017919A52A243BFB1B15A9D02FB99A0"
+        "MsmKey" = "8:_F04EAC174B9E4072AC270B91B9A35224"
         "OwnerKey" = "8:_6C790F984AC60F5E235BD926154BA11A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E017919A52A243BFB1B15A9D02FB99A0"
-        "OwnerKey" = "8:_F1791A4608D5DACAFA053F13924F2D01"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E017919A52A243BFB1B15A9D02FB99A0"
-        "OwnerKey" = "8:_60A0E6CCF5E6C12CAD00947F2E488662"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E83DEB20242EC099F835985CF17A5C9E"
-        "OwnerKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
-        "OwnerKey" = "8:_9379759427840C6C698D02347F72B00D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
+        "MsmKey" = "8:_F078CE3F1888862153D74053A9E4DE28"
         "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
-        "OwnerKey" = "8:_2AACAEACC3F229495AB2BC68C1B052D1"
+        "MsmKey" = "8:_F078CE3F1888862153D74053A9E4DE28"
+        "OwnerKey" = "8:_765D6FC1C93F71BB4EF69A26BBC9920D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EF44EA2A5FBB5237D0672258FA2DBD85"
-        "OwnerKey" = "8:_60A0E6CCF5E6C12CAD00947F2E488662"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F1791A4608D5DACAFA053F13924F2D01"
-        "OwnerKey" = "8:_60A0E6CCF5E6C12CAD00947F2E488662"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F1791A4608D5DACAFA053F13924F2D01"
-        "OwnerKey" = "8:_2AACAEACC3F229495AB2BC68C1B052D1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F1791A4608D5DACAFA053F13924F2D01"
-        "OwnerKey" = "8:_03A2002F76E54FB4AC659D62B9F1F90A"
+        "MsmKey" = "8:_F9C229E8CEBE817213842D113FA4451F"
+        "OwnerKey" = "8:_6542292EE7FD4448A8819F56B736CFA6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -460,6 +484,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_24F7084D9455D87F3274BABAD92BEED2"
+            {
+            "SourcePath" = "8:MFC71D.DLL"
+            "TargetName" = "8:MFC71D.DLL"
+            "Tag" = "8:"
+            "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_26DBF9CF274948AFB9C3C46C4EE57477"
             {
             "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\README"
@@ -500,20 +544,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_2AACAEACC3F229495AB2BC68C1B052D1"
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_2FBBE70E1510448A8DE11C029A35E547"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.Visualization, Version=1.0.2162.38710, Culture=neutral"
+            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.ExternalResource, Version=1.0.2251.37806, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_2AACAEACC3F229495AB2BC68C1B052D1"
+                    "_2FBBE70E1510448A8DE11C029A35E547"
                     {
-                    "Name" = "8:EugenePetrenko.Gui2.Visualization.dll"
+                    "Name" = "8:EugenePetrenko.Gui2.ExternalResource.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:EugenePetrenko.Gui2.Visualization.dll"
+            "SourcePath" = "8:EugenePetrenko.Gui2.ExternalResource.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
@@ -591,6 +635,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_48F9FF39E522F1B6E1C74E0E2559353C"
+            {
+            "SourcePath" = "8:MSVCR71D.dll"
+            "TargetName" = "8:MSVCR71D.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_4FD4D7F4916F465F88B29BBAD107BEE3"
             {
             "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\pm3d\\pts.dat"
@@ -631,20 +695,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_60A0E6CCF5E6C12CAD00947F2E488662"
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_6C790F984AC60F5E235BD926154BA11A"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.Actions, Version=1.0.2162.38710, Culture=neutral"
+            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.ExternalResource, Version=1.0.2256.27863, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_60A0E6CCF5E6C12CAD00947F2E488662"
+                    "_6C790F984AC60F5E235BD926154BA11A"
                     {
-                    "Name" = "8:EugenePetrenko.Gui2.Actions.dll"
+                    "Name" = "8:EugenePetrenko.Gui2.ExternalResource.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:EugenePetrenko.Gui2.Actions.dll"
+            "SourcePath" = "8:EugenePetrenko.Gui2.ExternalResource.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
@@ -662,20 +726,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_6C790F984AC60F5E235BD926154BA11A"
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_6D19EBDB76C8FFBCA637051C8EF79D41"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.ExternalResource, Version=1.0.2162.38709, Culture=neutral"
+            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.Logging, Version=1.0.2251.37806, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_6C790F984AC60F5E235BD926154BA11A"
+                    "_6D19EBDB76C8FFBCA637051C8EF79D41"
                     {
-                    "Name" = "8:EugenePetrenko.Gui2.ExternalResource.dll"
+                    "Name" = "8:EugenePetrenko.Gui2.Logging.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:EugenePetrenko.Gui2.ExternalResource.dll"
+            "SourcePath" = "8:EugenePetrenko.Gui2.Logging.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
@@ -713,20 +777,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_7BA2BC8A54E0DFA6CB1A06734E2DBBB9"
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_765D6FC1C93F71BB4EF69A26BBC9920D"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.Logging, Version=1.0.2162.38709, Culture=neutral"
+            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.Visualization, Version=1.0.2251.37807, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_7BA2BC8A54E0DFA6CB1A06734E2DBBB9"
+                    "_765D6FC1C93F71BB4EF69A26BBC9920D"
                     {
-                    "Name" = "8:EugenePetrenko.Gui2.Logging.dll"
+                    "Name" = "8:EugenePetrenko.Gui2.Visualization.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:EugenePetrenko.Gui2.Logging.dll"
+            "SourcePath" = "8:EugenePetrenko.Gui2.Visualization.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
@@ -784,37 +848,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_9379759427840C6C698D02347F72B00D"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.Kernell2, Version=1.0.2162.38709, Culture=neutral"
-                "ScatterAssemblies"
-                {
-                    "_9379759427840C6C698D02347F72B00D"
-                    {
-                    "Name" = "8:EugenePetrenko.Gui2.Kernell2.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:EugenePetrenko.Gui2.Kernell2.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_93F3AA29533A49058F9C4ABA869989C1"
             {
             "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\pm3d\\README"
@@ -833,6 +866,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_9689D99C46313DF73B65D3C1A8094BB4"
+            {
+            "SourcePath" = "8:MorseKernel2.dll"
+            "TargetName" = "8:MorseKernel2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_9BD564727E344F39A24CD1D7393EA0F8"
@@ -935,6 +988,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_C3140CA9DEBD31229BDA75994A199C3A"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.Controls, Version=1.0.2251.37807, Culture=neutral"
+                "ScatterAssemblies"
+                {
+                    "_C3140CA9DEBD31229BDA75994A199C3A"
+                    {
+                    "Name" = "8:EugenePetrenko.Gui2.Controls.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:EugenePetrenko.Gui2.Controls.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_CA87B8E65F8E4E678D7CE1590E46472B"
             {
             "SourcePath" = "8:..\\resource\\included\\gnuplot\\README.Windows"
@@ -995,6 +1079,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_CEFAA4583968FC7A43959498039E3365"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.Kernell2, Version=1.0.2251.37807, Culture=neutral"
+                "ScatterAssemblies"
+                {
+                    "_CEFAA4583968FC7A43959498039E3365"
+                    {
+                    "Name" = "8:EugenePetrenko.Gui2.Kernell2.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:EugenePetrenko.Gui2.Kernell2.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{A582A373-4685-4296-BEFE-614B80A702C3}:_DD99758AA2AF4880A3806BC692F819CE"
             {
             "SourcePath" = "8:..\\resource\\included\\gnuplot\\contrib\\pm3d\\colorpts-demo.gp"
@@ -1013,26 +1128,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{A582A373-4685-4296-BEFE-614B80A702C3}:_E83DEB20242EC099F835985CF17A5C9E"
-            {
-            "SourcePath" = "8:MorseKernel2.dll"
-            "TargetName" = "8:MorseKernel2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_EF44EA2A5FBB5237D0672258FA2DBD85"
@@ -1066,21 +1161,41 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_F1791A4608D5DACAFA053F13924F2D01"
+            "{FB480208-1853-44D0-9ABD-A3B734C3FAAA}:_F078CE3F1888862153D74053A9E4DE28"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.Controls, Version=1.0.2162.38709, Culture=neutral"
+            "AssemblyAsmDisplayName" = "8:EugenePetrenko.Gui2.Actions, Version=1.0.2251.37807, Culture=neutral"
                 "ScatterAssemblies"
                 {
-                    "_F1791A4608D5DACAFA053F13924F2D01"
+                    "_F078CE3F1888862153D74053A9E4DE28"
                     {
-                    "Name" = "8:EugenePetrenko.Gui2.Controls.dll"
+                    "Name" = "8:EugenePetrenko.Gui2.Actions.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:EugenePetrenko.Gui2.Controls.dll"
+            "SourcePath" = "8:EugenePetrenko.Gui2.Actions.dll"
             "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{A582A373-4685-4296-BEFE-614B80A702C3}:_F9C229E8CEBE817213842D113FA4451F"
+            {
+            "SourcePath" = "8:MSVCP71D.dll"
+            "TargetName" = "8:MSVCP71D.dll"
             "Tag" = "8:"
             "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
             "Condition" = "8:"
@@ -1238,14 +1353,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Dynamical System Investigation Program 2.0"
-        "ProductCode" = "8:{EBAA09EB-CB8F-43DD-BDB7-EB7796A4DDB7}"
-        "PackageCode" = "8:{2B7AC4BA-392E-4567-A9D1-4F7C7F3039BB}"
+        "ProductCode" = "8:{90AB6FA1-FE4B-4ABF-8D8A-ADE7E7F33F3E}"
+        "PackageCode" = "8:{9BA75EA4-96DA-4FB8-9677-F1B630EBE55A}"
         "UpgradeCode" = "8:{D16290EC-BEA1-4A8E-9A1F-F8BBD98C98A4}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "ProductVersion" = "8:2.2.5"
-        "Manufacturer" = "8:PK"
+        "ProductVersion" = "8:2.3.0"
+        "Manufacturer" = "8:"
         "ARPHELPTELEPHONE" = "8:+7 812 9575331"
         "ARPHELPLINK" = "8:"
         "Title" = "8:Dynamical System Investigation Program Setup"
@@ -1256,7 +1371,7 @@
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:_FDEBF30236B74C959EBC6D6C04695E5E"
         "ARPIconIndex" = "3:0"
-        "SearchPath" = "8:C:\\Program Files\\PK\\Dynamical System Investigation Program 2.0"
+        "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
         }
         "Registry"
@@ -1355,7 +1470,7 @@
         {
             "{478F747B-8505-45D1-9AAE-8C3B645C26E3}:_77A0B7F95BD642A3BFFB2BA4273D93AB"
             {
-            "Name" = "8:Dinamic Systems Investigation Program"
+            "Name" = "8:Dynamical Systems Investigation Program"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1369,7 +1484,7 @@
             }
             "{478F747B-8505-45D1-9AAE-8C3B645C26E3}:_C5ADD954D7194331A10C605D09660ACE"
             {
-            "Name" = "8:Dinamic Systems Investigation Program"
+            "Name" = "8:Dynamical Systems Investigation Program"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -1764,35 +1879,7 @@
         }
         "MergeModule"
         {
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_3CC628B6340D4AB4AB3F3D584EAFEFFF"
-            {
-            "UseDynamicProperties" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:vc_user_crt71_rtl_x86_---.msm"
-                "Properties"
-                {
-                }
-            "LanguageId" = "3:0"
-            "Exclude" = "11:FALSE"
-            "Folder" = "8:"
-            "Feature" = "8:"
-            "IsolateTo" = "8:"
-            }
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_73555A5A43B248D6827EED22015A75F7"
-            {
-            "UseDynamicProperties" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:vc_user_stl71_rtl_x86_---.msm"
-                "Properties"
-                {
-                }
-            "LanguageId" = "3:0"
-            "Exclude" = "11:FALSE"
-            "Folder" = "8:"
-            "Feature" = "8:"
-            "IsolateTo" = "8:"
-            }
-            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_E017919A52A243BFB1B15A9D02FB99A0"
+            "{35A69C6E-5BA4-440D-803D-762B59A45393}:_F04EAC174B9E4072AC270B91B9A35224"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
@@ -1811,7 +1898,7 @@
         {
             "{8062640A-2EEE-46E9-AB67-688E9A886E9F}:_03A2002F76E54FB4AC659D62B9F1F90A"
             {
-            "SourcePath" = "8:..\\gui2\\bin\\Release\\EugenePetrenko.Gui2.Application.exe"
+            "SourcePath" = "8:..\\gui2\\obj\\Debug\\EugenePetrenko.Gui2.Application.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"
@@ -1839,7 +1926,7 @@
             }
             "{8062640A-2EEE-46E9-AB67-688E9A886E9F}:_6542292EE7FD4448A8819F56B736CFA6"
             {
-            "SourcePath" = "8:..\\MorseKernel2\\Release\\MorseKernel2.dll"
+            "SourcePath" = "8:..\\MorseKernel2\\Debug\\MorseKernel2.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B7A6381ECC744D239669E5688745E69D"

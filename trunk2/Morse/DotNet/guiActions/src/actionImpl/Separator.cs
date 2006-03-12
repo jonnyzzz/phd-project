@@ -29,7 +29,7 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl
 	        return this;
 	    }
 
-	    public void SetActionParameters(IParameters parameters)
+	    public void SetActionParameters(IParameters parameters)    
 	    {
 	        throw new NotImplementedException();
 	    }

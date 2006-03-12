@@ -14,6 +14,7 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
     public class ActionWrapperFactory
     {
         private Hashtable mapping = new Hashtable(); //Type -> Typez
+		private Hashtable nameToType = new Hashtable(); //string -> Type
 
         public ActionWrapperFactory(Assembly[] assemblies)
         {
@@ -41,17 +42,24 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
 
         protected Type GetWrapperType(Type action)
         {
-            if (!mapping.ContainsKey(action)) throw new ActionWrapperFactoryException("No action Wrapper for " + action.Name);
+            if (!mapping.ContainsKey(action)) 
+				throw new ActionWrapperFactoryException("No action Wrapper for " + action.Name);
+
             return (Type) mapping[action];
         }
 
 
         public ActionWrapper CreateActionWrapper(string actionName, string actionCaption, bool isLeaf)
         {
-            return CreateActionWrapper(Core.GetType(actionName), actionCaption, isLeaf);
+            return CreateActionWrapper(GetTypeFromName(actionName), actionCaption, isLeaf);
         }
 
-        private ActionWrapper CreateActionWrapper(Type actionType, string actionCaption, bool isLeaf)
+    	private Type GetTypeFromName(string actionName)
+    	{
+			return Core.Instance.TypeFinder.GetType(actionName);
+    	}
+
+    	private ActionWrapper CreateActionWrapper(Type actionType, string actionCaption, bool isLeaf)
         {
             Type wrapperType = GetWrapperType(actionType);
             ConstructorInfo info = wrapperType.GetConstructor(new Type[] {typeof (string), typeof (bool)});

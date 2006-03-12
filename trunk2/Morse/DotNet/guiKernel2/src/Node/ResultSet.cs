@@ -156,7 +156,8 @@ namespace EugenePetrenko.Gui2.Kernell2.Node
             if (results.Length == 0) return false;
             foreach (IResult result in results)
             {
-                if (!(Core.ImplemetsType(result, resultInterface) && Core.ImplemetsType(result.GetMetadata(), metadataInterface)))
+            	TypeFinder typeFinder = Core.Instance.TypeFinder;
+            	if (!(typeFinder.ImplementsType(result, resultInterface) && typeFinder.ImplementsType(result.GetMetadata(), metadataInterface)))
                 {
                     return false;
                 }

@@ -157,7 +157,7 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory
 
             Logger.LogMessage("Is IResult = {0}", o is IResult);
 
-            Logger.LogMessage("CoreImplemets = {0}", Core.ImplemetsType(o, resultType));
+            Logger.LogMessage("CoreImplemets = {0}", Core.Instance.TypeFinder.ImplementsType(o, resultType));
 
             Logger.LogMessage("Has interface IResult = {0}", oType.GetInterface("IResult") != null);
 

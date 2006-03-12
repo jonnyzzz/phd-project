@@ -16,6 +16,15 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
     public class Core : IDisposable
     {
         private readonly bool isInternal;
+		private ActionNamingFactory actionNamingFactory = null;
+		private NextActionFactory nextActionFactory = null;
+		private ActionWrapperFactory actionWrapperFactory = null;
+		private Assembly[] assemblies = null;
+		private KernelDocument document = null;
+		private TypeFinder typeFinder = new TypeFinder();
+		private static Core instance = null;
+		private ResourceManager resourceManager = null;
+
 
         public Core(bool isInternal)
         {
@@ -44,13 +53,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
             resourceManager.SetTemporaryPath(Path.GetTempPath());
             resourceManager.Start();
         }
-
-        private ActionNamingFactory actionNamingFactory = null;
-        private NextActionFactory nextActionFactory = null;
-        private ActionWrapperFactory actionWrapperFactory = null;
-        private Assembly[] assemblies = null;
-        private KernelDocument document = null;
-
+ 
         public void Dispose()
         {
             if (resourceManager != null) resourceManager.Dispose();
@@ -75,7 +78,6 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
             get { return assemblies; }
         }
 
-
         public NextActionFactory NextActionFactory
         {
             get { return nextActionFactory; }
@@ -91,8 +93,10 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
             get { return actionWrapperFactory; }
         }
 
-        private static Core instance = null;
-        private ResourceManager resourceManager = null;
+    	public TypeFinder TypeFinder
+    	{
+    		get { return typeFinder; }
+    	}
 
         public ResourceManager ResourceManager
         {
@@ -107,49 +111,6 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
         public bool IsInternal
         {
             get { return isInternal; }
-        }
-
-        public static Type GetType(string name)
-        {
-            foreach (Assembly assembly in Core.Instance.Assemblies)
-            {
-                foreach (Type type in assembly.GetTypes())
-                {
-                    if (string.Equals(type.Name, name))
-                    {
-                        return type;
-                    }
-                }
-            }
-
-            throw new TypeLoadException("Unable to load type: Type not Found!");
-        }
-
-
-        public static bool ImplemetsType(object o, string interf)
-        {
-            return ImplemetsType(o, GetType(interf));
-
-        }
-
-        public static bool ImplemetsType(object o, Type t)
-        {
-            if (o.GetType().IsCOMObject)
-            {
-                try
-                {
-                    Marshal.Release(Marshal.GetComInterfaceForObject(o, t));
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return o.GetType().IsAssignableFrom(t);
-            }
         }
 
         public void GC()

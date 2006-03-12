@@ -151,7 +151,7 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
                     constraintName = "DefaultConstraintFactory";
                 }
 
-                Type constraintType = Core.GetType(constraintName);
+                Type constraintType = Core.Instance.TypeFinder.GetType(constraintName);
                 ConstructorInfo constructor = constraintType.GetConstructor(new Type[] {});
                 IConstraintFactory constraintFactory = (IConstraintFactory) constructor.Invoke(new object[] {});
                 constraints.Add(constraintFactory.CreateConstraint(constraintNode));
@@ -169,15 +169,9 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
             {
                 XmlAttributeCollection attributes = node.Attributes;
 
-                IConstraint constraint = ParseConstraint(node);
-                ActionRef actionInfo = new ActionRef(attributes["name"].Value, constraint, bool.Parse(attributes["isLeaf"].Value));
-                XmlNodeList refNodeList = node.SelectNodes("nextActions");
+            	ActionRef actionInfo = ParseActionRef(node);
 
-                if (refNodeList.Count > 1) throw new XMLParserException("Too much NextAction Tags");
-                foreach (XmlNode refNode in refNodeList)
-                {
-                    ParseActionRefs(refNode, actionInfo);
-                }
+            	ParseActionRefs(node, actionInfo);
 
                 Logger.LogMessage("Built Tree :\n {0}\nEnd", actionInfo.DumpTree());
 
@@ -192,7 +186,18 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
             }
         }
 
-        private void ParseActionRefs(XmlNode node, ActionRef info)
+    	private ActionRef ParseActionRef(XmlNode node)
+    	{
+			XmlAttributeCollection attributes = node.Attributes;
+    		IConstraint constraint = ParseConstraint(node);
+    		ActionRef actionRef = new ActionRef(attributes["name"].Value, constraint, ParseIsLeaf(attributes));
+			if (attributes["caption"] != null && attributes["detail"] != null)
+				actionRef.SetActionCaption(attributes["caption"].Value, attributes["detail"].Value);
+
+    		return actionRef;
+    	}
+
+    	private void ParseActionRefs(XmlNode node, ActionRef info)
         {
             XmlNodeList list = node.SelectNodes("actionReference");
 
@@ -200,14 +205,20 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
             {
                 XmlAttributeCollection attributes = xmlNode.Attributes;
                 IConstraint constraint = ParseConstraint(xmlNode);
-                ActionRef actionRef = new ActionRef(attributes["name"].Value, constraint, bool.Parse(attributes["isLeaf"].Value));
+                ActionRef actionRef = new ActionRef(attributes["name"].Value, constraint, ParseIsLeaf(attributes));
                 ParseActionRefs(xmlNode, actionRef);
                 info.AddActionRef(actionRef);
             }
         }
 
+    	private static bool ParseIsLeaf(XmlAttributeCollection attributes)
+    	{
+    		XmlAttribute attribute = attributes["isLeaf"];
+    		return attribute != null ? bool.Parse(attribute.Value) : false;
+    	}
 
-        private Stream GetXMLMapping()
+
+    	private Stream GetXMLMapping()
         {
             foreach (Assembly assembly in SearchAssemblies)
             {

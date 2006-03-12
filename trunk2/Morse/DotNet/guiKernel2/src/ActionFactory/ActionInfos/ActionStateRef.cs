@@ -26,8 +26,9 @@ namespace EugenePetrenko.Gui2.Kernell2.ActionFactory.ActionInfos
             else
             {
                 return Core.Instance.ActionWrapperFactory.CreateDisabledAction(
-                    Core.Instance.ActionNamingFactory.FindActionCaption(actionRef.ActionName),
-                    Core.Instance.ActionNamingFactory.FindActionComment(actionRef.ActionName));
+						actionRef.ActionCaption,
+						actionRef.ActionDetail
+					);
             }
         }
 

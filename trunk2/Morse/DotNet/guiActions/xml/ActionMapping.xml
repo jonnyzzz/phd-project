@@ -2,32 +2,26 @@
 
 <mappings>
    <actions>
-		<action name="IBoxMethodAction" isLeaf="false">	
-			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
-			<constraint class="OneParentResultsConstraint"/>
-			<nextActions>		
-				<actionReference name="ITarjanAction" isLeaf="true" />
-			</nextActions>		
-		</action>
-	
-		<action name="IPointMethodAction" isLeaf="false">		
-			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
-			<constraint class="OneParentResultsConstraint"/>
-			<nextActions>		
-				<actionReference name="ITarjanAction" isLeaf="true"/>
-			</nextActions>
-		</action>
-		
-		<action name="ISeparatorAction" isLeaf="false"/>
-						
-		<action name="IAdaptiveMethodAction" isLeaf="false">		
-			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
-			<constraint class="OneParentResultsConstraint"/>
-			<nextActions>		
-				<actionReference name="ITarjanAction" isLeaf="true"/>
-			</nextActions>
-		</action>
-		
+    
+      <action name="IGroupAction">
+        <constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+	    <constraint class="OneParentResultsConstraint"/>
+        <nextActions>
+           <actionReference name="IBoxMethodAction">	
+				<actionReference name="ITarjanAction"/>
+		   </actionReference> 
+           
+           <actionReference name="IPointMethodAction">		
+				<actionReference name="ITarjanAction"/>
+		   </actionReference>
+		   
+		   <actionReference name="IAdaptiveMethodAction">		
+				<actionReference name="ITarjanAction"/>
+   		   </actionReference>
+        </nextActions>
+      </action>
+   							
+				
 		<action name="IAdaptiveBoxMethod" isLeaf="false" internal="true">		
 			<constraint class="DefaultConstraintFactory" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
 			<constraint class="OneParentResultsConstraint"/>
