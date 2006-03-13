@@ -12,11 +12,11 @@ CSpectrumResultImpl::CSpectrumResultImpl() {
 
 
 HRESULT CSpectrumResultImpl::FinalConstruct() {
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CSpectrumResultImpl::FinalRelease() {
-
+    m_pUnkMarshaler.Release();
 }
 
 

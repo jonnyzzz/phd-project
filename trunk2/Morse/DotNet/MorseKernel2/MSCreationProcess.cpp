@@ -19,10 +19,11 @@ CMSCreationProcess::CMSCreationProcess() {
 }
 
 HRESULT CMSCreationProcess::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMSCreationProcess::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

@@ -18,11 +18,11 @@
 CAdaptiveBoxMethod::CAdaptiveBoxMethod() {}
 
 HRESULT CAdaptiveBoxMethod::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CAdaptiveBoxMethod::FinalRelease() {
-
+    m_pUnkMarshaler.Release();
 }
 
 

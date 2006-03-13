@@ -25,12 +25,13 @@ CMS2DCreationAction::CMS2DCreationAction() {
 }
 
 HRESULT CMS2DCreationAction::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMS2DCreationAction::FinalRelease() {
     SAFE_RELEASE(info);
     SAFE_RELEASE(parameters);
+    m_pUnkMarshaler.Release();
 }
 
 STDMETHODIMP CMS2DCreationAction::SetActionParameters(IParameters* pars) {

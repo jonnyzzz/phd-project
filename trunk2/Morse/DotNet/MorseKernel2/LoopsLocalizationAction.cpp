@@ -20,10 +20,11 @@
 CLoopsLocalizationAction::CLoopsLocalizationAction() {}
 
 HRESULT CLoopsLocalizationAction::FinalConstruct() {
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CLoopsLocalizationAction::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

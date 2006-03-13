@@ -23,12 +23,13 @@ CBoxMethodAction::CBoxMethodAction() {
 HRESULT CBoxMethodAction::FinalConstruct() {
 	parameters = NULL;
 	info = NULL;
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CBoxMethodAction::FinalRelease() {
 	SAFE_RELEASE(info);
 	SAFE_RELEASE(parameters);
+    m_pUnkMarshaler.Release();
 }
 
 

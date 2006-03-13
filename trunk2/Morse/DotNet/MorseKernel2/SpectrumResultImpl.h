@@ -52,5 +52,10 @@ private:
 	double upperBound;
 	int lowerLength;
 	int upperLength;
+
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
 };
 

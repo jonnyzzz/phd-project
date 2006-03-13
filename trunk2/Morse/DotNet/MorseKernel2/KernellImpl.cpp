@@ -15,11 +15,12 @@ CKernellImpl::CKernellImpl() {
 
 HRESULT CKernellImpl::FinalConstruct() {
 	function = NULL;
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CKernellImpl::FinalRelease() {
 	SAFE_RELEASE(function);
+    m_pUnkMarshaler.Release();
 }
 
 

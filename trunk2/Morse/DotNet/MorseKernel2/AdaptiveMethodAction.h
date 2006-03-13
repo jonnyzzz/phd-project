@@ -60,6 +60,11 @@ public:
 	void FinalRelease(); 
 
 public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
+
+public:
 	STDMETHOD(SetActionParameters)(IParameters* pars);
 	STDMETHOD(SetProgressBarInfo)(IProgressBarInfo* info);
 	STDMETHOD(CanDo)(IResultSet* in, VARIANT_BOOL* out);

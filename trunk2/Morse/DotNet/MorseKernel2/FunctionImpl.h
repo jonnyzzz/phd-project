@@ -76,4 +76,9 @@ private:
 	void Reset();
 	bool initializeContent();
 	FunctionNode* safeGetNode(const char* name, KernelException fail);
+
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
 };

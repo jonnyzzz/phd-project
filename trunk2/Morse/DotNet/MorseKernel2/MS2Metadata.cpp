@@ -10,10 +10,11 @@ CMS2Metadata::CMS2Metadata() {
 }
 
 HRESULT CMS2Metadata::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMS2Metadata::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

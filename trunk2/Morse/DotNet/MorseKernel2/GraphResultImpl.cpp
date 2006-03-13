@@ -18,13 +18,14 @@ CGraphResultImpl::CGraphResultImpl() {
 HRESULT CGraphResultImpl::FinalConstruct() {
 	this->graph = NULL;
 	this->metadata = NULL;
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 
 void CGraphResultImpl::FinalRelease() {
 	SAFE_DELETE(this->graph);
 	SAFE_RELEASE(this->metadata);
+    m_pUnkMarshaler.Release();
 }
 
 

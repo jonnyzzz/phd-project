@@ -13,11 +13,11 @@ CGraphInfoImpl::CGraphInfoImpl() {
 
 HRESULT CGraphInfoImpl::FinalConstruct() {
 	this->dimension = 0;
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CGraphInfoImpl::FinalRelease() {
-
+    m_pUnkMarshaler.Release();
 }
 
 

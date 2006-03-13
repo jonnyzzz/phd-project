@@ -10,8 +10,9 @@ CMSMetadata::CMSMetadata() {
 }
 
 HRESULT CMSMetadata::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMSMetadata::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }

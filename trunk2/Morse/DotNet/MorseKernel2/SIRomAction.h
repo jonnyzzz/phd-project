@@ -61,9 +61,9 @@ public:
 	STDMETHOD(CanDo)(IResultSet* result, VARIANT_BOOL* can);
 	STDMETHOD(Do)(IResultSet* input, IResultSet** output);
 
-
-private:
-	
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
 
 };
 

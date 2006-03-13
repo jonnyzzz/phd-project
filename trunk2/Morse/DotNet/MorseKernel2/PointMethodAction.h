@@ -75,5 +75,9 @@ private:
 	IProgressBarInfo* info;
 	IPointMethodParameters* parameters;
 
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
 };
 

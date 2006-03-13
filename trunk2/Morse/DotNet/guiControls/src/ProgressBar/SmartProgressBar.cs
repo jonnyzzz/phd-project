@@ -159,7 +159,8 @@ namespace EugenePetrenko.Gui2.Controls.Progress
         {
             set
             {
-                RePaint();
+				if (value != this.value)
+					RePaint();
                 this.value = value;
             }
             get { return value; }

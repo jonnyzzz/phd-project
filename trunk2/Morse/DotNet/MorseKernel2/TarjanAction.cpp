@@ -22,12 +22,13 @@ CTarjanAction::CTarjanAction() {
 HRESULT CTarjanAction::FinalConstruct() {
 	parameters = NULL;
 	info = NULL;
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);	
 }
 
 void CTarjanAction::FinalRelease() {
 	SAFE_RELEASE(parameters);
 	SAFE_RELEASE(info);
+    m_pUnkMarshaler.Release();
 }
 
 STDMETHODIMP CTarjanAction::SetActionParameters(IParameters* pars) {

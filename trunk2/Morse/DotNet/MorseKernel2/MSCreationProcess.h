@@ -64,5 +64,10 @@ public:
 	STDMETHOD(Do)(IResultSet* in, IResultSet** out);
     STDMETHOD(GetDimension)(IResultSet* set, int* dim);
 
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
+
 };
 

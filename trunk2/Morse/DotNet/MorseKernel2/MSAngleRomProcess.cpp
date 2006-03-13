@@ -36,10 +36,11 @@ CMSAngleRomProcess::CMSAngleRomProcess() {
 }
 
 HRESULT CMSAngleRomProcess::FinalConstruct() {
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMSAngleRomProcess::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

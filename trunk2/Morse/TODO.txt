@@ -1,3 +1,4 @@
+Subevide in Adaptive Method using adaptive graph. Not using default subdevision process. Build big graph once.
 Implement IResultMetadata.GetTypeName method, to make Serialization for metadata object in .NET
 Use ngen utiliry when installing to speed up application perfomance
 Implement MemoryManager to STL Allocator bridge.

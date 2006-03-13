@@ -23,10 +23,11 @@ CMSAdaptiveAction::CMSAdaptiveAction() {
 }
 
 HRESULT CMSAdaptiveAction::FinalConstruct() {
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMSAdaptiveAction::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

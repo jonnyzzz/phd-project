@@ -62,6 +62,11 @@ public:
     STDMETHOD(SetSIGraphResult)(IResultSet* in);
     STDMETHOD(HasSIGraphResult)(VARIANT_BOOL* out);
 
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
+
 private:
     SmartInterface<IResultSet> graphResult;
 };

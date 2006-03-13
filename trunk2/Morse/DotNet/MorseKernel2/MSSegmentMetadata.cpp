@@ -11,8 +11,9 @@ CMSSegmentMetadata::CMSSegmentMetadata() {
 }
 
 HRESULT CMSSegmentMetadata::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMSSegmentMetadata::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }

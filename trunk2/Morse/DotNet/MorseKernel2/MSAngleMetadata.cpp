@@ -10,8 +10,9 @@ CMSAngleMetadata::CMSAngleMetadata() {
 }
 
 HRESULT CMSAngleMetadata::FinalConstruct() {
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMSAngleMetadata::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }

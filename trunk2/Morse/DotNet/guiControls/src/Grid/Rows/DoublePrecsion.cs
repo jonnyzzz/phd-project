@@ -28,7 +28,7 @@ namespace EugenePetrenko.Gui2.Controls.Grid.Rows
             {
                 try
                 {
-                    double v = Double.Parse(value.Replace('.', ','));
+                    double v = Double.Parse(value/*.Replace('.', ',')*/);
                     if (v < 0) throw new ExGridException("Value should be positive at col {0}", index);
 
                     this.data[index] = v;

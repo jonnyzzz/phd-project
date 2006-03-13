@@ -21,10 +21,11 @@
 CProjectAction::CProjectAction() {}
 
 HRESULT CProjectAction::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CProjectAction::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

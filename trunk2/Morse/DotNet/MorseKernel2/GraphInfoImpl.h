@@ -62,5 +62,10 @@ private:
 	GraphSet graphSet;
 
 	int dimension;
+
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
 };
 

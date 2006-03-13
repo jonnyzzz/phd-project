@@ -23,12 +23,13 @@ CPointMethodAction::CPointMethodAction() {
 HRESULT CPointMethodAction::FinalConstruct() {
 	this->parameters = NULL;
 	this->info = NULL;
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CPointMethodAction::FinalRelease() {
 	SAFE_RELEASE(parameters);
 	SAFE_RELEASE(info);
+    m_pUnkMarshaler.Release();
 }
 
 

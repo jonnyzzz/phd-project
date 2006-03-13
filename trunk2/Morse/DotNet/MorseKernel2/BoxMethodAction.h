@@ -70,6 +70,9 @@ private:
 	IProgressBarInfo* info;
 	IBoxMethodParameters* parameters;
 
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
 
 
 };

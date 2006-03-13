@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 using EugenePetrenko.Gui2.Application.Forms;
 using EugenePetrenko.Gui2.Application.TreeNodes;
 using EugenePetrenko.Gui2.ExternalResource.Core;
@@ -9,6 +10,8 @@ using EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot;
 
 namespace EugenePetrenko.Gui2.Application.Runner
 {
+
+	public delegate void RunInThread(object[] data);
     /// <summary>
     /// Summary description for Runner.
     /// </summary>
@@ -93,6 +96,38 @@ namespace EugenePetrenko.Gui2.Application.Runner
             get { return core; }
         }
 
+		public void RunThread(RunInThread start, params object[] data)
+		{
+			Thread thread = new Thread(new MyRunInThread(data, start).GetThreadStart());
+			thread.ApartmentState = ApartmentState.MTA;
+			thread.IsBackground = true;
+			thread.Name = "COM computations";
+			thread.Priority = ThreadPriority.BelowNormal;
+			thread.Start();
+		}
+
+		private class MyRunInThread
+		{
+			private object[] data;
+			private RunInThread deleg;
+
+			public MyRunInThread(object[] data, RunInThread deleg)
+			{
+				this.data = data;
+				this.deleg = deleg;
+			}
+
+			private void ThreadStart()
+			{
+				deleg(data);
+			}
+
+			public ThreadStart GetThreadStart()
+			{
+				return new ThreadStart(ThreadStart);
+			}
+		}
+
         public Document.Document Document
         {
             get { return document; }
@@ -130,7 +165,7 @@ namespace EugenePetrenko.Gui2.Application.Runner
 
         #region static
 
-        [STAThread]
+        [MTAThread]
         public static void Main(string[] args)
         {
             try

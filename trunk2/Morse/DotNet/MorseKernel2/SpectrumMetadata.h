@@ -56,7 +56,5 @@ public:
 
 	CComPtr<IUnknown> m_pUnkMarshaler;
 
-public:
-
 };
 

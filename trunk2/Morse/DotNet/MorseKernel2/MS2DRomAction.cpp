@@ -34,10 +34,11 @@
 CMS2DRomAction::CMS2DRomAction() {}
 
 HRESULT CMS2DRomAction::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMS2DRomAction::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

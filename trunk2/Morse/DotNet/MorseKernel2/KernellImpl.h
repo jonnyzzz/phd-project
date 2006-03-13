@@ -52,5 +52,11 @@ public:
 private:
 	IFunction* function;
 
+
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
+
 };
 

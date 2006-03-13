@@ -51,5 +51,10 @@ public:
 public:
     STDMETHOD(GetRecomendedPrecision)(IResultSet* in, int index, double* prec);
     STDMETHOD(GetDimension)(IResultSet* in, int* dim);
+
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
 };
 

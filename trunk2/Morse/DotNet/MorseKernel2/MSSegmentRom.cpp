@@ -33,10 +33,11 @@ CMSSegmentRom::CMSSegmentRom() {
 }
 
 HRESULT CMSSegmentRom::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMSSegmentRom::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

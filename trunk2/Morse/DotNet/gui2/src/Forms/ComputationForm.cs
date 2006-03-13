@@ -411,21 +411,21 @@ namespace EugenePetrenko.Gui2.Application.Forms
         public void AcceptActionChain(Node node, Action[] chain)
         {
             ChainPerformer performer = new ChainPerformer(node, chain, ProgressBar);
-            performer.Start += new ChainStart(performer_Start);
-            performer.Finish += new ChainFinish(performer_Finish);
+            performer.Started += new StateEvent(performer_Start);
+            performer.Finished += new StateEvent(performer_Finish);
             performer.DoActionsWithDialog(this);
         }
 
 
         public void Lock()
         {
-            this.Enabled = false;
+//            this.Enabled = false;
             tree.Enabled = false;
         }
 
         public void Unlock()
         {
-            this.Enabled = true;
+//            this.Enabled = true;
             tree.Enabled = true;
         }
 

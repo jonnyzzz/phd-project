@@ -38,7 +38,7 @@ public:
 	CMS2DRomAction();
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
-    DECLARE_ACTION_BASE_IMPL()
+        DECLARE_ACTION_BASE_IMPL()
 
 	HRESULT FinalConstruct();
 	
@@ -48,5 +48,10 @@ public:
 
     STDMETHOD(CanDo)(IResultSet* in, VARIANT_BOOL* out);
 	STDMETHOD(Do)(IResultSet* in, IResultSet** out);
+
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
 };
 

@@ -48,11 +48,21 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
 		{
 			Logger.LogMessage("Adding Node");
 
+			if (this.TreeView != null)
+			{
+				this.TreeView.BeginUpdate();
+			}
+
 			this.Nodes.AddRange(node);
 			if (this.TreeView != null && node.Length != 0)
 			{
 				this.Expand();
 				node[0].EnsureVisible();
+			}
+
+			if (this.TreeView != null)
+			{
+				this.TreeView.EndUpdate();
 			}
 		}
 

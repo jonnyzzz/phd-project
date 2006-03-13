@@ -11,13 +11,14 @@ CResultSetImpl::CResultSetImpl() {
 
 
 HRESULT CResultSetImpl::FinalConstruct() {
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CResultSetImpl::FinalRelease() {
 	for (ResultList::iterator it = resultList.begin(); it != resultList.end(); it++) {
 		(*it)->Release();
 	}
+    m_pUnkMarshaler.Release();
 }
 
 STDMETHODIMP CResultSetImpl::GetCount(int* count) {

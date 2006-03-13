@@ -55,6 +55,11 @@ public:
 public:
 	STDMETHOD(AddResult)(IResultBase* result);
 
+
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
 private:
 	typedef list<IResultBase*> ResultList;
 	ResultList resultList;

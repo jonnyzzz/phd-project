@@ -1,7 +1,10 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
 using EugenePetrenko.Gui2.ExternalResource.Core;
 using EugenePetrenko.Gui2.Kernell2.ActionFactory;
 using EugenePetrenko.Gui2.Kernell2.Document;
@@ -28,6 +31,9 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
 
         public Core(bool isInternal)
         {
+        	Application.CurrentCulture = new CultureInfo("en-US");
+        	Thread.CurrentThread.Name = "UI";
+
             this.isInternal = isInternal;
             instance = this;
 

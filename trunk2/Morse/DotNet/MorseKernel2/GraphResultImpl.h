@@ -70,5 +70,10 @@ private:
 	IResultMetadata* metadata;
 	Graph* graph;
 	bool isStongComponent;
+
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
 };
 

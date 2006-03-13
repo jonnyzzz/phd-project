@@ -29,12 +29,13 @@ CFunctionImpl::CFunctionImpl() {
 HRESULT CFunctionImpl::FinalConstruct() {
 	Reset();
 
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 
 void CFunctionImpl::FinalRelease() {
 	CleanUp();
+    m_pUnkMarshaler.Release();
 }
 
 

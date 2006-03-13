@@ -20,11 +20,11 @@ CSIRomAction::CSIRomAction() {
 }
 
 HRESULT CSIRomAction::FinalConstruct() {
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CSIRomAction::FinalRelease() {
-
+    m_pUnkMarshaler.Release();
 }
 
 

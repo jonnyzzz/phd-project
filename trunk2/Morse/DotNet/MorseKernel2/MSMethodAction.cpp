@@ -28,10 +28,11 @@ CMSMethodAction::CMSMethodAction() {
 }
 
 HRESULT CMSMethodAction::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMSMethodAction::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

@@ -24,12 +24,13 @@ CAdaptiveMethodAction::CAdaptiveMethodAction() {
 }
 
 HRESULT CAdaptiveMethodAction::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CAdaptiveMethodAction::FinalRelease() {
     SAFE_RELEASE(info);
     SAFE_RELEASE(parameters);
+    m_pUnkMarshaler.Release();
 }
 
 

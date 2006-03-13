@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using System.Windows.Forms;
 using EugenePetrenko.Gui2.Actions.Actions;
 using EugenePetrenko.Gui2.Actions.Parameters;
@@ -56,7 +57,13 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 
 		public string GetActionCaption()
 		{
-			return path[0].ActionName;// + " + " + (path.Length - 1);			
+			StringBuilder sb = new StringBuilder();
+			foreach (Action action in path)
+			{
+				sb.Append(action.ActionName);
+				sb.Append(" ");
+			}
+			return sb.ToString();
 		}
 
     }

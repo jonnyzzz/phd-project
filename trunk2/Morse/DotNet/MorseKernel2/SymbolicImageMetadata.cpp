@@ -13,8 +13,9 @@ CSymbolicImageMetadata::CSymbolicImageMetadata() {
 }
 
 HRESULT CSymbolicImageMetadata::FinalConstruct() {
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CSymbolicImageMetadata::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }

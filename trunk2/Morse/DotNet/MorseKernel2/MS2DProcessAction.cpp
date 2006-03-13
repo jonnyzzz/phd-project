@@ -25,10 +25,11 @@ CMS2DProcessAction::CMS2DProcessAction() {
 }
 
 HRESULT CMS2DProcessAction::FinalConstruct() {
-    return S_OK;
+    return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMS2DProcessAction::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

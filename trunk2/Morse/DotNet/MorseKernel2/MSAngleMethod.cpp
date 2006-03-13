@@ -22,10 +22,11 @@ CMSAngleMethod::CMSAngleMethod() {
 }
 
 HRESULT CMSAngleMethod::FinalConstruct() {
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMSAngleMethod::FinalRelease() {
+    m_pUnkMarshaler.Release();
 }
 
 

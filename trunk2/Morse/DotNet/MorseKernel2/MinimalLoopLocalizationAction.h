@@ -69,5 +69,10 @@ public:
 private:
 	IProgressBarInfo* pinfo;
 	IMinimalLoopLocalizationParameters* parameters;
+
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
 };
 

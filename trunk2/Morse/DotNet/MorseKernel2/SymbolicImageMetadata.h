@@ -43,6 +43,9 @@ public:
 	
 	void FinalRelease();
 
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
 
 
 

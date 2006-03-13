@@ -49,5 +49,9 @@ public:
 	STDMETHOD(Do)(IResultSet* in, IResultSet** out);
     STDMETHOD(GetDimensionForParameters)(IResultSet* resultSet, int* dim);
 
+public:
+    CComPtr<IUnknown> m_pUnkMarshaler;
+    DECLARE_GET_CONTROLLING_UNKNOWN()
+
 };
 

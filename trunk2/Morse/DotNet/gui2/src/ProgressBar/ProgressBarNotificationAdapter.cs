@@ -1,3 +1,4 @@
+using System.Windows.Forms;
 using EugenePetrenko.Gui2.Controls.Progress;
 using EugenePetrenko.Gui2.Kernell2.Actions;
 
@@ -9,27 +10,39 @@ namespace EugenePetrenko.Gui2.Application.Progress
     public class ProgressBarNotificationAdapter
     {
         private SmartProgressBar progressBar;
+		private Form threadOwnerForm;
 
         public ProgressBarNotificationAdapter(SmartProgressBar progressBar, ProgressBarInfo adapter)
         {
             this.progressBar = progressBar;
+			threadOwnerForm = progressBar.FindForm();
 
             adapter.NewLength += new ProgressBarNewLength(newLength);
             adapter.Tick += new ProgressBarTick(tick);
         }
 
+		private delegate void NewLengthDelegate(int length);
+		private delegate void TickDelegate();
+
         private void newLength(int length)
         {
-            progressBar.LowerBound = 0;
-            progressBar.Value = 0;
-            progressBar.UpperBound = length;
-
-            System.Windows.Forms.Application.DoEvents();
+			if (threadOwnerForm.InvokeRequired)
+				threadOwnerForm.BeginInvoke(new NewLengthDelegate(newLength), new object[]{length});
+			else 
+			{
+			
+				progressBar.LowerBound = 0;
+				progressBar.Value = 0;
+				progressBar.UpperBound = length;
+			}
         }
 
         private void tick()
         {
-            progressBar.Value++;
+			if (threadOwnerForm.InvokeRequired) 
+				threadOwnerForm.BeginInvoke(new TickDelegate(tick), new object[0]);
+			else
+				progressBar.Value++;
         }
 
     }

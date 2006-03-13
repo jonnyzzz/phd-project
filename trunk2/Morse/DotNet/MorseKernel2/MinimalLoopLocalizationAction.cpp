@@ -22,12 +22,13 @@ CMinimalLoopLocalizationAction::CMinimalLoopLocalizationAction() {
 HRESULT CMinimalLoopLocalizationAction::FinalConstruct() {
 	pinfo = NULL;
 	parameters = NULL;
-	return S_OK;
+	return CoCreateFreeThreadedMarshaler(GetControllingUnknown(), &m_pUnkMarshaler.p);
 }
 
 void CMinimalLoopLocalizationAction::FinalRelease() {
 	SAFE_RELEASE(pinfo);
 	SAFE_RELEASE(parameters);
+    m_pUnkMarshaler.Release();
 }
 
 
