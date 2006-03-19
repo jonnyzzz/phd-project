@@ -417,16 +417,27 @@ namespace EugenePetrenko.Gui2.Application.Forms
         }
 
 
+		private Cursor cachedCursor;
+		private double cachedOpacity;
+
         public void Lock()
         {
-//            this.Enabled = false;
+			cachedOpacity = Opacity;
+			cachedCursor = Cursor;
+			Opacity = 0.5;
+			Cursor = Cursors.WaitCursor;
             tree.Enabled = false;
+			menuInvestigations.Enabled = false;
+			menuSystem.Enabled = false;
         }
 
         public void Unlock()
         {
-//            this.Enabled = true;
+			Opacity = cachedOpacity;
+			Cursor = cachedCursor;
             tree.Enabled = true;
+			menuInvestigations.Enabled = true;
+			menuSystem.Enabled = true;
         }
 
 
