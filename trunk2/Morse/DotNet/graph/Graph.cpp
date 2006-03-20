@@ -7,6 +7,7 @@
 #include "GraphComponents.h"
 #include "FileStream.h"
 #include "GraphUtil.h"
+#include "../cellImageBuilders/ProgressBarInfo.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -661,10 +662,11 @@ Node* Graph::getEdgeTo(Edge* e) const {
 ///////////////////////////////////////////////////////////////////////////////
 
 
-GraphComponents* Graph::localazeStrongComponents() {
+GraphComponents* Graph::localazeStrongComponents(ProgressBarInfo* pinfo) {
     ATLASSERT(isTarjanable);
 
 	cout<<"Localization of strong components\n";
+	ProgressBarAdapter ad(pinfo, getNumberOfNodes());
 
 	GraphComponents* cmps = new GraphComponents();
 	TarjanNode* v;
@@ -731,6 +733,7 @@ GraphComponents* Graph::localazeStrongComponents() {
 					if (v == stack.top()) {
 						stack.pop();
 						if (isLoop(v)) {
+							ad.Next();
 							tmp = this->copyCoordinatesForTarjan();												
 							tmp->addNode(v->cell);
 							cmps->addGraphAsComponent(tmp);
@@ -738,6 +741,7 @@ GraphComponents* Graph::localazeStrongComponents() {
 					} else {
 						tmp = this->copyCoordinatesForTarjan();
 						do {
+							ad.Next();
 							w = stack.pop();
 							tmp->addNode(w->cell);
 						} while (v != w);
@@ -771,13 +775,17 @@ JInt Graph::tmin(JInt a, JInt b) const{
 	return (a>b)?b:a;
 }
 
-void Graph::resolveEdges(Graph* root) {
+void Graph::resolveEdges(Graph* root, ProgressBarInfo* pinfo) {
    ATLASSERT(root->isTarjanable);
+
+   ProgressBarAdapter ad(pinfo, getNumberOfNodes());
 
    Node* node;
    Node* rootNode;
    NodeEnumerator* en = this->getNodeRoot();
    while (node = this->getNode(en)) {
+	  if (!ad.Next())
+		  break;
       rootNode = root->findNode(this->getCells(node));
       ASSERT(rootNode);
       EdgeEnumerator* ee = root->getEdgeRoot(rootNode);
@@ -797,14 +805,17 @@ void Graph::resolveEdges(Graph* root) {
 /////// Loops localization
 ///////////////////////////////////////////////////////////////////////////////
 
-Graph* Graph::localizeLoops() {
+Graph* Graph::localizeLoops(ProgressBarInfo* pinfo) {
 	ATLASSERT(isTarjanable);
 
+	ProgressBarAdapter ad(pinfo, getNumberOfNodes());
 	Graph* ret = this->copyCoordinatesForTarjan();
 
 	NodeEnumerator* ne = this->getNodeRoot();
 	Node* node;
 	while (node = this->getNode(ne)) {
+		if (!ad.Next())
+			break;
 		if (isLoop(node)) {
 			Node* n = ret->browseTo(node->cell);
 			ret->browseTo(n, n);

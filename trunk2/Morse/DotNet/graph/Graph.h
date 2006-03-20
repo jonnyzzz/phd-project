@@ -17,6 +17,7 @@ struct EdgeEnumerator;
 class GraphMemoryAllocator;
 class FileInputStream;
 class FileOutputStream;
+class ProgressBarInfo;
 
 class GraphComponents;
 
@@ -158,14 +159,14 @@ private:
 
 //StrongComponentsLocalization
 public:
-	GraphComponents* localazeStrongComponents();
-	void resolveEdges(Graph* parent);
+	GraphComponents* localazeStrongComponents(ProgressBarInfo* pinfo);
+	void resolveEdges(Graph* parent, ProgressBarInfo* pinfo);
 private:
 	JInt tmin(JInt a, JInt b) const;
 
 // Loops localization
 public:
-	Graph* localizeLoops();
+	Graph* localizeLoops(ProgressBarInfo* pinfo);
 
 
 // Stable Localization

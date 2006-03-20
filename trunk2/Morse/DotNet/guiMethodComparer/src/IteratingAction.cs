@@ -80,7 +80,7 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	    private static void PerformAction(IDefinedAction action, ref ResultSet set)
 	    {
 	        ActionWrapper wrapper = new ActionWrapper(action.Action, action.GetParameters(set), action.Name);
-	        set = wrapper.Do(set, new ProgressBarInfo());
+	        set = wrapper.Do(set, new ProgressBarInfo(new EmptyProgressBarListener()));
 	    }
 	}
 }

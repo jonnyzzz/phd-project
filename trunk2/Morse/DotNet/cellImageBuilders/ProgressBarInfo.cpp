@@ -9,29 +9,29 @@ static char THIS_FILE[] = __FILE__;
 
 
 ProgressBarInfo::ProgressBarInfo() {
-
 }
 
 
-ProgressBarInfo::~ProgressBarInfo() {
-
+ProgressBarInfo::~ProgressBarInfo() {	
 }
 
-int ProgressBarInfo::Length() {
-	return 1<<30;
+ProgressBarAdapter::ProgressBarAdapter(ProgressBarInfo* pinfo, double units) {
+	this->pinfo = pinfo;
+	this->cnt = 0;
+	this->step = units/pinfo->Length();	
+	pinfo->Start();
+}
+
+ProgressBarAdapter::~ProgressBarAdapter() {
+	pinfo->Stop();
 }
 
 
-void ProgressBarInfo::Next() {
-
-}
-
-void ProgressBarInfo::Next(int length) {
-	while (length-- >= 0) {
-		Next();
+bool ProgressBarAdapter::Next() {
+	if (++cnt >= step) {
+		cnt -= step;
+		pinfo->Advance(step);
+		return pinfo->NeedStop();
 	}
-}
-
-bool ProgressBarInfo::NeedStop() {
-	return false;
+	return true;
 }

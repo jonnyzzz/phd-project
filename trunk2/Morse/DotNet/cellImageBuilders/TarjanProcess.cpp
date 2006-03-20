@@ -22,17 +22,22 @@ TarjanProcess::~TarjanProcess(void)
 
 
 void TarjanProcess::processNextGraph(Graph* graph) {
-	GraphComponents* cms = graph->localazeStrongComponents();
+
+	ProgressBarInfo* dinfo = new DevidedProgressBarInfo(info, needResolve ? 2.0 : 1.0);
+
+	GraphComponents* cms = graph->localazeStrongComponents(dinfo);
 	GraphSet components(cms);
 	delete cms;
 
 	if (needResolve) {
 		for (GraphSetIterator it = components.iterator(); it.HasNext(); it.Next()) {
-			it->resolveEdges(graph);
+			it->resolveEdges(graph, dinfo);
 		}
 	}
 
 	this->graphSet.AddGraph(components);	
+
+	delete dinfo;
 }
 
 GraphSet TarjanProcess::results() {

@@ -5,20 +5,18 @@ ProgressBarNotificationAdapter::ProgressBarNotificationAdapter(IProgressBarInfo*
 {
 	notification->QueryInterface(&this->notification);
 	ATLASSERT(this->notification != NULL);
-
-	this->notification->Start();
+	isFinished = false;
 }
 
 ProgressBarNotificationAdapter::~ProgressBarNotificationAdapter(void)
 {
-	this->notification->Finish();
+	if (!isFinished) 
+		this->notification->Finish();
 	this->notification->Release();
 }
 
-
-
-int ProgressBarNotificationAdapter::Length() {
-	int len;
+double ProgressBarNotificationAdapter::Length() {
+	double len;
 	this->notification->Length(&len);
 	return len;
 }
@@ -30,7 +28,16 @@ bool ProgressBarNotificationAdapter::NeedStop() {
 	return (b == VARIANT_TRUE)?true:false;
 }
 
-void ProgressBarNotificationAdapter::Next() {
-	cout<<".";
-	this->notification->Next();
+void ProgressBarNotificationAdapter::Advance(double d) {	
+	this->notification->Next(d);
+}
+
+void ProgressBarNotificationAdapter::Stop() {
+	this->notification->Finish();
+	this->isFinished = true;
+}
+
+
+void ProgressBarNotificationAdapter::Start() {
+	this->notification->Start();
 }

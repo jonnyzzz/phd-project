@@ -7,43 +7,61 @@ namespace EugenePetrenko.Gui2.Application.Progress
     /// <summary>
     /// Summary description for ProgressBarNotificationAdapder.
     /// </summary>
-    public class ProgressBarNotificationAdapter
+    public class ProgressBarNotificationAdapter : IProgressBarListener
     {
         private SmartProgressBar progressBar;
-		private Form threadOwnerForm;
+    	private readonly Label label;
+    	private Form threadOwnerForm;		
 
-        public ProgressBarNotificationAdapter(SmartProgressBar progressBar, ProgressBarInfo adapter)
+        public ProgressBarNotificationAdapter(SmartProgressBar progressBar, Label label)
         {
             this.progressBar = progressBar;
-			threadOwnerForm = progressBar.FindForm();
-
-            adapter.NewLength += new ProgressBarNewLength(newLength);
-            adapter.Tick += new ProgressBarTick(tick);
+        	this.label = label;
+        	threadOwnerForm = progressBar.FindForm();
         }
+				
+		public ProgressBarInfo GetProgressBarInfo()
+		{
+			return new ProgressBarInfo(this);
+		}
 
-		private delegate void NewLengthDelegate(int length);
-		private delegate void TickDelegate();
+		private delegate void NewTaskDelegate(string capion, double length);
+		private delegate void DoubleDelegate(double v);
+		private delegate void VoidDelegate();
 
-        private void newLength(int length)
-        {
+    	public void NewTask(string caption, double length)
+    	{
 			if (threadOwnerForm.InvokeRequired)
-				threadOwnerForm.BeginInvoke(new NewLengthDelegate(newLength), new object[]{length});
+				threadOwnerForm.BeginInvoke(new NewTaskDelegate(NewTask), new object[]{caption, length});
 			else 
-			{
-			
+			{			
 				progressBar.LowerBound = 0;
 				progressBar.Value = 0;
 				progressBar.UpperBound = length;
+				label.Text = "Processing " + caption + "...";
 			}
-        }
+    	}
 
-        private void tick()
-        {
+    	public void Tick(double value)
+    	{
 			if (threadOwnerForm.InvokeRequired) 
-				threadOwnerForm.BeginInvoke(new TickDelegate(tick), new object[0]);
+				threadOwnerForm.BeginInvoke(new DoubleDelegate(Tick), new object[]{value});
 			else
-				progressBar.Value++;
-        }
+				progressBar.Value += value;
+    	}
 
+    	public void Finish()
+    	{
+    		if (threadOwnerForm.InvokeRequired)
+    		{
+    			threadOwnerForm.BeginInvoke(new VoidDelegate(Finish), new object[0]);
+    		} else
+    		{
+    			progressBar.Value = progressBar.LowerBound;
+				label.Text = "";
+    		}
+    	}
+
+    	public event CancelEvent Canceled{add{} remove{}}
     }
 }

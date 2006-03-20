@@ -14,13 +14,13 @@
 __interface IProgressBarInfo : IDispatch
 {
 	[id(1)]
-		HRESULT Length([out, retval] int* length);
+		HRESULT Length([out, retval] double* length);	
 	[id(2)]
-		HRESULT Next();
-	[id(3)]
 		HRESULT NeedStop([out, retval] VARIANT_BOOL* stop);
-	[id(4)]
+	[id(3)]
 		HRESULT Start();
+	[id(4)]
+		HRESULT Next([in] double value);
 	[id(5)]
 		HRESULT Finish();
 

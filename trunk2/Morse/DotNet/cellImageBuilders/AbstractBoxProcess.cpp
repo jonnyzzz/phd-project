@@ -72,19 +72,16 @@ void AbstractBoxProcess::start() {
 
 void AbstractBoxProcess::processNextGraph(Graph* graph) {
 
-	int maxCnt = graph->getNumberOfNodes()/info->Length()+1;
-	int cnt = 0;
+	ProgressBarAdapter ad(info, graph->getNumberOfNodes());
 
 	cout<<"Processing Next graph nodes: "<<graph->getNumberOfNodes()<<"\n";
 
 	GraphNodeEnumerator ne(graph);
 	Node* node;
 	while (node = ne.next()) {
-		cnt++;
 		multiplyNode(node, graph);
-		if (cnt > maxCnt) {
-			cnt = 0;
-			info->Next();
+		if (!ad.Next()) {
+			break;
 		}
 	}
 }

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Mar 19 23:50:27 2006
+/* at Tue Mar 21 01:36:32 2006
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -1165,14 +1165,15 @@ EXTERN_C const IID IID_IProgressBarInfo;
     {
     public:
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Length( 
-            /* [retval][out] */ int *length) = 0;
-        
-        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Next( void) = 0;
+            /* [retval][out] */ double *length) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE NeedStop( 
             /* [retval][out] */ VARIANT_BOOL *stop) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Start( void) = 0;
+        
+        virtual /* [id] */ HRESULT STDMETHODCALLTYPE Next( 
+            /* [in] */ double value) = 0;
         
         virtual /* [id] */ HRESULT STDMETHODCALLTYPE Finish( void) = 0;
         
@@ -1226,10 +1227,7 @@ EXTERN_C const IID IID_IProgressBarInfo;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Length )( 
             IProgressBarInfo * This,
-            /* [retval][out] */ int *length);
-        
-        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
-            IProgressBarInfo * This);
+            /* [retval][out] */ double *length);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *NeedStop )( 
             IProgressBarInfo * This,
@@ -1237,6 +1235,10 @@ EXTERN_C const IID IID_IProgressBarInfo;
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Start )( 
             IProgressBarInfo * This);
+        
+        /* [id] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
+            IProgressBarInfo * This,
+            /* [in] */ double value);
         
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Finish )( 
             IProgressBarInfo * This);
@@ -1280,14 +1282,14 @@ EXTERN_C const IID IID_IProgressBarInfo;
 #define IProgressBarInfo_Length(This,length)	\
     (This)->lpVtbl -> Length(This,length)
 
-#define IProgressBarInfo_Next(This)	\
-    (This)->lpVtbl -> Next(This)
-
 #define IProgressBarInfo_NeedStop(This,stop)	\
     (This)->lpVtbl -> NeedStop(This,stop)
 
 #define IProgressBarInfo_Start(This)	\
     (This)->lpVtbl -> Start(This)
+
+#define IProgressBarInfo_Next(This,value)	\
+    (This)->lpVtbl -> Next(This,value)
 
 #define IProgressBarInfo_Finish(This)	\
     (This)->lpVtbl -> Finish(This)
@@ -1301,21 +1303,10 @@ EXTERN_C const IID IID_IProgressBarInfo;
 
 /* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Length_Proxy( 
     IProgressBarInfo * This,
-    /* [retval][out] */ int *length);
+    /* [retval][out] */ double *length);
 
 
 void __RPC_STUB IProgressBarInfo_Length_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Next_Proxy( 
-    IProgressBarInfo * This);
-
-
-void __RPC_STUB IProgressBarInfo_Next_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,
@@ -1339,6 +1330,18 @@ void __RPC_STUB IProgressBarInfo_NeedStop_Stub(
 
 
 void __RPC_STUB IProgressBarInfo_Start_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Next_Proxy( 
+    IProgressBarInfo * This,
+    /* [in] */ double value);
+
+
+void __RPC_STUB IProgressBarInfo_Next_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,

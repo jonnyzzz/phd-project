@@ -51,11 +51,9 @@ namespace EugenePetrenko.Gui2.Application.Forms
 		private System.Windows.Forms.MenuItem menuItemFileNew;
 		private System.Windows.Forms.MenuItem menuItemFileSeparator;
 		private System.Windows.Forms.MenuItem menuItemFileExit;
-
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private Container components = null;
+		private System.Windows.Forms.Label labelProgressStatus;
+		private System.Windows.Forms.Timer opacityTimer;
+		private System.ComponentModel.IContainer components;
 
         public ComputationForm()
         {
@@ -63,8 +61,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
             menuInternal.Visible = Runner.Runner.Instance.IsInternal;
 
-            progressBarInfo = new ProgressBarInfo();
-            progressBarAdapter = new ProgressBarNotificationAdapter(progressBar, progressBarInfo);
+            progressBarAdapter = new ProgressBarNotificationAdapter(progressBar, labelProgressStatus);
             tree.OnBeforeCheckChanged += new BeforeCheckChanged(OnBeforeCheckChanged);
 
         }
@@ -92,6 +89,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(ComputationForm));
 			this.panelLeft = new System.Windows.Forms.Panel();
 			this.splitter = new System.Windows.Forms.Splitter();
@@ -100,12 +98,15 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.panelRightDown = new System.Windows.Forms.Panel();
 			this.groupBoxProgressBar = new System.Windows.Forms.GroupBox();
 			this.panelProgress = new System.Windows.Forms.Panel();
+			this.labelProgressStatus = new System.Windows.Forms.Label();
 			this.progressBar = new EugenePetrenko.Gui2.Controls.Progress.SmartProgressBar();
 			this.mainMenu = new System.Windows.Forms.MainMenu();
 			this.menuInvestigations = new System.Windows.Forms.MenuItem();
+			this.menuItemFileNew = new System.Windows.Forms.MenuItem();
 			this.menuOpenDocument = new System.Windows.Forms.MenuItem();
 			this.menuSave = new System.Windows.Forms.MenuItem();
-			this.menuItemFileNew = new System.Windows.Forms.MenuItem();
+			this.menuItemFileSeparator = new System.Windows.Forms.MenuItem();
+			this.menuItemFileExit = new System.Windows.Forms.MenuItem();
 			this.menuSystem = new System.Windows.Forms.MenuItem();
 			this.menuSystemNew = new System.Windows.Forms.MenuItem();
 			this.menuSystemDelimiter1 = new System.Windows.Forms.MenuItem();
@@ -120,8 +121,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.menuInternal = new System.Windows.Forms.MenuItem();
 			this.saveDocumentDialog = new System.Windows.Forms.SaveFileDialog();
 			this.openDocumentDialog = new System.Windows.Forms.OpenFileDialog();
-			this.menuItemFileSeparator = new System.Windows.Forms.MenuItem();
-			this.menuItemFileExit = new System.Windows.Forms.MenuItem();
+			this.opacityTimer = new System.Windows.Forms.Timer(this.components);
 			this.panelLeft.SuspendLayout();
 			this.panelLeftUp.SuspendLayout();
 			this.panelRightDown.SuspendLayout();
@@ -195,6 +195,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			// 
 			// panelProgress
 			// 
+			this.panelProgress.Controls.Add(this.labelProgressStatus);
 			this.panelProgress.Controls.Add(this.progressBar);
 			this.panelProgress.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelProgress.DockPadding.Bottom = 5;
@@ -205,6 +206,14 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.panelProgress.Name = "panelProgress";
 			this.panelProgress.Size = new System.Drawing.Size(612, 48);
 			this.panelProgress.TabIndex = 0;
+			// 
+			// labelProgressStatus
+			// 
+			this.labelProgressStatus.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelProgressStatus.Location = new System.Drawing.Point(5, 5);
+			this.labelProgressStatus.Name = "labelProgressStatus";
+			this.labelProgressStatus.Size = new System.Drawing.Size(602, 16);
+			this.labelProgressStatus.TabIndex = 1;
 			// 
 			// progressBar
 			// 
@@ -237,6 +246,12 @@ namespace EugenePetrenko.Gui2.Application.Forms
 																							   this.menuItemFileExit});
 			this.menuInvestigations.Text = "File";
 			// 
+			// menuItemFileNew
+			// 
+			this.menuItemFileNew.Index = 0;
+			this.menuItemFileNew.Text = "New";
+			this.menuItemFileNew.Click += new System.EventHandler(this.menuSystemNew_Click);
+			// 
 			// menuOpenDocument
 			// 
 			this.menuOpenDocument.Index = 1;
@@ -249,11 +264,16 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.menuSave.Text = "Save";
 			this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
 			// 
-			// menuItemFileNew
+			// menuItemFileSeparator
 			// 
-			this.menuItemFileNew.Index = 0;
-			this.menuItemFileNew.Text = "New";			
-			this.menuItemFileNew.Click += new System.EventHandler(this.menuSystemNew_Click);
+			this.menuItemFileSeparator.Index = 3;
+			this.menuItemFileSeparator.Text = "-";
+			// 
+			// menuItemFileExit
+			// 
+			this.menuItemFileExit.Index = 4;
+			this.menuItemFileExit.Text = "Exit";
+			this.menuItemFileExit.Click += new System.EventHandler(this.menuItemFileExit_Click);
 			// 
 			// menuSystem
 			// 
@@ -345,16 +365,10 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.openDocumentDialog.Filter = "Dynamical System Investigations Files(*.dsif)|*.dsif|All files(*.*)|*.*";
 			this.openDocumentDialog.Title = "Select System to open";
 			// 
-			// menuItemFileSeparator
+			// opacityTimer
 			// 
-			this.menuItemFileSeparator.Index = 3;
-			this.menuItemFileSeparator.Text = "-";
-			// 
-			// menuItemFileExit
-			// 
-			this.menuItemFileExit.Index = 4;
-			this.menuItemFileExit.Text = "Exit";
-			this.menuItemFileExit.Click += new System.EventHandler(this.menuItemFileExit_Click);
+			this.opacityTimer.Interval = 50;
+			this.opacityTimer.Tick += new System.EventHandler(this.opacityTick);
 			// 
 			// ComputationForm
 			// 
@@ -398,19 +412,13 @@ namespace EugenePetrenko.Gui2.Application.Forms
             tree.Root.ExpandAll();
         }
 
-
-        private ProgressBarInfo progressBarInfo;
-        private ProgressBarNotificationAdapter progressBarAdapter;
-
-        public ProgressBarInfo ProgressBar
-        {
-            get { return progressBarInfo; }
-        }
+        
+        private ProgressBarNotificationAdapter progressBarAdapter;        
 
 
         public void AcceptActionChain(Node node, Action[] chain)
         {
-            ChainPerformer performer = new ChainPerformer(node, chain, ProgressBar);
+            ChainPerformer performer = new ChainPerformer(node, chain, progressBarAdapter.GetProgressBarInfo());
             performer.Started += new StateEvent(performer_Start);
             performer.Finished += new StateEvent(performer_Finish);
             performer.DoActionsWithDialog(this);
@@ -420,11 +428,20 @@ namespace EugenePetrenko.Gui2.Application.Forms
 		private Cursor cachedCursor;
 		private double cachedOpacity;
 
+		private void opacityTick(object sender, System.EventArgs e)
+		{
+			opacityTimer.Enabled = false;
+			this.Opacity -= 0.03; //
+			if (this.Opacity > 0.5)
+				opacityTimer.Enabled = true;
+		}		
+
         public void Lock()
         {
 			cachedOpacity = Opacity;
 			cachedCursor = Cursor;
-			Opacity = 0.5;
+//			Opacity = 0.5;
+			opacityTimer.Enabled = true;
 			Cursor = Cursors.WaitCursor;
             tree.Enabled = false;
 			menuInvestigations.Enabled = false;
@@ -573,6 +590,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
     	protected override void OnClosing(CancelEventArgs e)   
 		{
-    	}		
+    	}
+		
     }
 }

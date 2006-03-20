@@ -18,7 +18,7 @@ LoopsLocalizationProcess::~LoopsLocalizationProcess(void)
 
 
 void LoopsLocalizationProcess::processNextGraph(Graph* graph) {
-	graphs.AddGraph(graph->localizeLoops());
+	graphs.AddGraph(graph->localizeLoops(info));
 }
 
 

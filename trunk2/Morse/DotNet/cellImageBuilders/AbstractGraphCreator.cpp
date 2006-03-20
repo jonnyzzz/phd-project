@@ -74,19 +74,14 @@ void AbstractGraphCreator::processNextGraph(Graph* graph) {
 	ASSERT(graph_result != NULL);
 	ASSERT(info != NULL);
 
-	int step = graph->getNumberOfNodes() / info->Length();
-	int c = 0;
+	ProgressBarAdapter ad(info, graph->getNumberOfNodes());
 
 	NodeEnumerator* ne = graph->getNodeRoot();
 	Node* node;
 	while (node = graph->getNode(ne)) {
 		putNodes(graph, graph_result, node);
-		c++;
-		if (c > step) {
-			step = graph->getNumberOfNodes() / info->Length();
-			info->Next();
-			c = 0;
-		}
+		if (!ad.Next())
+			break;
 	}
 	graph->freeNodeEnumerator(ne);
 }

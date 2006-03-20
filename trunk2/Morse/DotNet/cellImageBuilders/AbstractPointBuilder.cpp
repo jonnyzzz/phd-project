@@ -85,19 +85,14 @@ void AbstractPointBuilder::processNextGraph(Graph* graph) {
 
 	this->graph = graph;
 
-	int step = graph->getNumberOfNodes() / info->Length();
-	int c = 0;
+	ProgressBarAdapter ad(info, graph->getNumberOfNodes());
 
 	NodeEnumerator* en = graph->getNodeRoot();
 	Node* node;
 	while (node = graph->getNode(en)) {
 		this->buildNodeMultiplication(node);
-		c++;
-		if ( c >= step ) {
-			info->Next();
-			step = graph->getNumberOfNodes() / info->Length();
-			c = 0;
-		}
+		if (!ad.Next())
+			break;
 	}
 	graph->freeNodeEnumerator(en);
 }

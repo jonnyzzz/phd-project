@@ -38,13 +38,13 @@ interface IParameters : IDispatch {
 #line 14 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
 interface IProgressBarInfo : IDispatch {
 #line 17 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
-	[id(1)] HRESULT  Length([out,retval] int *length);
+	[id(1)] HRESULT  Length([out,retval] double *length);
 #line 19 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
-	[id(2)] HRESULT  Next();
+	[id(2)] HRESULT  NeedStop([out,retval] VARIANT_BOOL *stop);
 #line 21 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
-	[id(3)] HRESULT  NeedStop([out,retval] VARIANT_BOOL *stop);
+	[id(3)] HRESULT  Start();
 #line 23 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
-	[id(4)] HRESULT  Start();
+	[id(4)] HRESULT  Next([in] double value);
 #line 25 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
 	[id(5)] HRESULT  Finish();
 };

@@ -9,8 +9,7 @@ class ConsoleProgressBarInfo :
 {
 public:
 	ConsoleProgressBarInfo(void)
-	{
-		cnt=0;
+	{		
 	}
 
 	~ConsoleProgressBarInfo(void)
@@ -18,10 +17,9 @@ public:
 	}
 
 public:
-	virtual int Length() { return 50; }
-	virtual void Next() { cout<<"."; cout.flush(); }
+	virtual double Length() { return 50; }
+	virtual void Advance(double d) { cout<<"."; cout.flush(); }
 	virtual bool NeedStop() { return false; }
-
-private:
-	int cnt;
+	virtual void Stop() { }
+	virtual void Start() {}
 };

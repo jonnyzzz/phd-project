@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Windows.Forms;
 using EugenePetrenko.Gui2.Application.Forms;
 using EugenePetrenko.Gui2.Application.Runner;
 using EugenePetrenko.Gui2.Application.TreeNodes;
@@ -57,7 +56,7 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 						nodes.Add(new Node(kernelNode, Runner.Runner.Instance.Document.KernelDocument.Function.Iterations));
 					}
 					FireNewNodeEvent((Node[]) nodes.ToArray(typeof(Node)));
-				}
+				}				
 			}
 			catch(Exception e)
 			{
@@ -65,6 +64,7 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 			}
 			finally 
 			{
+				progressBarInfo.ProcessFinished();
 				inProcess = false;
 				Logger.LogMessage("Computation Finished");
 

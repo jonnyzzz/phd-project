@@ -1,79 +1,99 @@
+using System;
 using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Kernell2.Actions
 {
-    public delegate void ProgressBarTick();
+    public delegate void CancelEvent();
+	public interface IProgressBarListener
+	{
+		void NewTask(string caption, double length);
+		void Tick(double value);
+		void Finish();
 
-    public delegate void ProgressBarFinish();
-
-    public delegate void ProgressBarNewLength(int length);
-
-    public delegate void ProgressBarNewTask(string caption);
+		event CancelEvent Canceled;
+	}
+	
+	public class EmptyProgressBarListener : IProgressBarListener
+	{
+		public void NewTask(string caption, double length)
+		{			
+		}
+		public void Tick(double value)
+		{
+		}
+		public void Finish()
+		{
+		}
+		public event CancelEvent Canceled
+		{
+			add {}
+			remove{ }
+		}
+	}
 
     public class ProgressBarInfo
     {
-        public event ProgressBarTick Tick;
-        public event ProgressBarNewTask NewTask;
-        public event ProgressBarFinish TaskFinish;
-        public event ProgressBarNewLength NewLength;
+        private IProgressBarListener listener;
+		private bool needStop;		
 
-        public IProgressBarInfo GetProgressBarInfo(ActionWrapper actionWrapper)
-        {
-            if (NewTask != null)
-            {
-                NewTask(actionWrapper.ActionName);
-            }
+    	public ProgressBarInfo(IProgressBarListener listener)
+    	{
+			needStop = false;
+    		this.listener = listener;
+			this.listener.Canceled += new CancelEvent(listener_Canceled);
+    	}
 
-            ProgressBarInfoImpl info = new ProgressBarInfoImpl(this);
-            if (NewLength != null)
-            {
-                NewLength(info.Length());
-            }
-            return info;
+		private void listener_Canceled()
+		{
+			needStop = true;
+		}
+
+		public void ProcessFinished()
+		{
+			listener.Finish();
+		}
+
+    	public IProgressBarInfo GetProgressBarInfo(ActionWrapper actionWrapper)
+        {			
+            return new ProgressBarInfoImpl(this, actionWrapper.ActionName);
         }
 
         private class ProgressBarInfoImpl : IProgressBarInfo
         {
             private ProgressBarInfo instance;
+			private string actionName;
+			private int count = 0;
 
-            public ProgressBarInfoImpl(ProgressBarInfo instance)
+            public ProgressBarInfoImpl(ProgressBarInfo instance, string name)
             {
                 this.instance = instance;
+				actionName = name;
             }
 
             public void Finish()
             {
-                if (instance.TaskFinish != null)
-                {
-                    instance.TaskFinish();
-                }
+                instance.listener.Finish();
             }
 
-            public int Length()
+            public double Length()
             {
                 return 300;
             }
 
-            public void Next()
-            {
-                if (instance.Tick != null)
-                {
-                    instance.Tick();
-                }
-            }
-
             public bool NeedStop()
             {
-                return false;
+                return !instance.needStop;
             }
 
             public void Start()
             {
-                if (instance.Tick != null)
-                {
-                    instance.Tick();
-                }
+				instance.listener.NewTask(actionName + " " + (++count), Length());
             }
-        }
-    }
+
+        	public void Next(double value)
+			{
+				instance.listener.Tick(value);
+        	}
+		}		
+	}
 }

@@ -1,11 +1,8 @@
 using System;
-using System.Threading;
 using System.Windows.Forms;
 using EugenePetrenko.Gui2.Actions.Actions;
 using EugenePetrenko.Gui2.Application.TreeNodes;
-using EugenePetrenko.Gui2.Kernell2.ActionFactory;
 using EugenePetrenko.Gui2.Kernell2.Actions;
-using EugenePetrenko.Gui2.Kernell2.Container;
 using EugenePetrenko.Gui2.Kernell2.Node;
 using EugenePetrenko.Gui2.Logging;
 using ProgressBar = EugenePetrenko.Gui2.Kernell2.Actions.ProgressBarInfo;
@@ -49,6 +46,7 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 			performer.Finished += Finished;
 
             Runner.Runner.Instance.RunThread(performer.ThreadedDo());
+//			performer.Do();
         }
 
         private void OnExceptionOccours(Exception e)

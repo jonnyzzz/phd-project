@@ -94,9 +94,9 @@ namespace EugenePetrenko.Gui2.Controls.Progress
 
         #endregion
 
-        protected int lowerBound;
-        protected int upperBound;
-        protected int value;
+        protected double lowerBound;
+        protected double upperBound;
+        protected double value;
 
         private Image cacheImage = null;
 
@@ -105,37 +105,35 @@ namespace EugenePetrenko.Gui2.Controls.Progress
             if (pictureBox == null || pictureBox.Image == null) return null;
 
             Bitmap bitmap = new Bitmap(Width, Height);
-            Graphics graphics = Graphics.FromImage(bitmap);
-
-            int w = 0;
-
-            while (w <= Width)
-            {
-                graphics.DrawImage(pictureBox.Image, w, 0);
-                w += pictureBox.Width;
-            }
+			using (Graphics graphics = Graphics.FromImage(bitmap)) 
+			{
+				int w = 0;
+				while (w <= Width)
+				{
+					graphics.DrawImage(pictureBox.Image, w, 0);
+					w += pictureBox.Width;
+				}
+			}
             return bitmap;
         }
 
         private void panelBorder_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-            int width = (this.Width*value/(upperBound - lowerBound))%(Width + 1);
+            int width = (int) Math.Ceiling(((double)Width*value/(upperBound - lowerBound))); 
+			if (width >= Width)
+				width = Width;
 
             Rectangle clip = Rectangle.Intersect(e.ClipRectangle, new Rectangle(0, 0, width, Height));
             graphics.SetClip(clip, CombineMode.Intersect);
-
             if (cacheImage == null)
-            {
                 cacheImage = createCache();
-            }
-
             graphics.DrawImage(cacheImage, 0, 0);
         }
 
         #region progress bar fields
 
-        public int LowerBound
+        public double LowerBound
         {
             set
             {
@@ -145,7 +143,7 @@ namespace EugenePetrenko.Gui2.Controls.Progress
             get { return lowerBound; }
         }
 
-        public int UpperBound
+        public double UpperBound
         {
             set
             {
@@ -155,7 +153,7 @@ namespace EugenePetrenko.Gui2.Controls.Progress
             get { return upperBound; }
         }
 
-        public int Value
+        public double Value
         {
             set
             {
@@ -164,8 +162,7 @@ namespace EugenePetrenko.Gui2.Controls.Progress
                 this.value = value;
             }
             get { return value; }
-        }
-
+        }		
 
         private void RePaint()
         {

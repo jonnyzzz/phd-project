@@ -12,12 +12,15 @@ public:
 
 
 public:
-	virtual int Length();
-	virtual void Next();
+	virtual double Length();
+	virtual void Advance(double next);
 	virtual bool NeedStop();
+	virtual void Stop();
+	virtual void Start();
 
 
 private:
 	IProgressBarInfo* notification;
+	bool isFinished;
 
 };

@@ -19,7 +19,7 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.HomotopAction
     {
         private readonly KernelNode node;
         private bool hasCorrectData = false;
-        private ProgressBarInfo progressBarInfo = new ProgressBarInfo();
+        private ProgressBarInfo progressBarInfo = new ProgressBarInfo(new EmptyProgressBarListener());
         private CheckBox checkShowFoundLoop;
         private volatile IGraphResult graphResult = null;
 
@@ -59,7 +59,6 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.HomotopAction
             this.node = node;
             InitializeComponent();
             minimalLoop.DataChanged += new ContentChanged(minimalLoop_DataChanged);
-            progressBarInfo.Tick += new ProgressBarTick(progressBarInfo_Tick);
             minimalLoop.Initialize((node.Results.ToResults[0] as IGraphResult).GetGraphInfo().GetDimension());
             updateLink();
         }
@@ -296,11 +295,6 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.HomotopAction
             {
                 this.Cursor = cursor;
             }
-        }
-
-        private void progressBarInfo_Tick()
-        {
-            Application.DoEvents();
-        }
+        }        
     }
 }
