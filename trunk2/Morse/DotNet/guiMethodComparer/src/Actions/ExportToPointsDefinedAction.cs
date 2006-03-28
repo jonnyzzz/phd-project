@@ -96,6 +96,11 @@ namespace Eugene.Petrenko.Gui2.MethodComparer.Actions
 	        get{ return Path.Combine(GlobalPath, "log.txt");}
 	    }
 
+		public string LocalXmlLogFile
+		{
+			get { return Path.Combine(GlobalPath, "log.xml");}
+		}
+
 	    public override IAction Action
 	    {
 	        get { return new GnuPlotGenAction(); }

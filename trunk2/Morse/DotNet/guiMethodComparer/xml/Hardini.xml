@@ -1,12 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?> 
 
 <methodComparation>
 
-    <caption>Henon Function</caption>
+    <caption>Hardini</caption>
     <Dimension>2</Dimension>
-
-    <NumberOfSteps>12</NumberOfSteps>
-
+    <NumberOfSteps>10</NumberOfSteps>
     <Subdevision>2,2</Subdevision>
     <NumberOfPoints>10,10</NumberOfPoints>
     <OverlapingOffset>0.1,0.1</OverlapingOffset>
@@ -16,10 +14,10 @@
     <NeedResolveEdges>false</NeedResolveEdges>
 
     <function>
-        <equation>y1=1-1.4*x1*x1+0.3*x2</equation>
-        <equation>y2=x1</equation>
-        <equation>space_min1=-10</equation>
-        <equation>space_min2=-10</equation>
+        <equation>y1=(1-0.38)*x0+0.38*4.11*x1*(1-x1)</equation>
+        <equation>y2=(1-0.38)*x1+0.38*4.11*x0*(1-x0)</equation>
+        <equation>space_min1=0</equation>
+        <equation>space_min2=0</equation>
         <equation>space_max1=10</equation>
         <equation>space_max2=10</equation>
         <equation>grid1=10</equation>

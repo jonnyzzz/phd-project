@@ -11,8 +11,7 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	/// </summary>
 	public class ResultDumpCollector
 	{
-        private Hashtable/*id -> ArrayList*/ log = new Hashtable();
-        private ArrayList msgSequence = new ArrayList();
+        private Hashtable/*id -> ArrayList*/ log = new Hashtable();        
 	    private IAttachableSimpleWriter writer;
 
 	    public ResultDumpCollector(IAttachableSimpleWriter writer)

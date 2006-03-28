@@ -85,14 +85,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICSharpCode.SharpZipLib", "
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorseGraphGenerator", "MorseGraphGenerator\MorseGraphGenerator.csproj", "{EE23D9EC-5A16-4384-88B4-9C4A65C07607}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MorseGraphGeneratorC", "MorseGraphGeneratorC\MorseGraphGeneratorC.vcproj", "{6B18751A-9DDA-4D84-B620-43D35DAA8653}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiTest", "guiTest\guiTest.csproj", "{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
@@ -110,10 +102,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SegmentIterator", "SegmentI
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "guiMethodComparer", "guiMethodComparer\guiMethodComparer.csproj", "{20E2919B-5CCB-4F8E-B93A-550331C7163E}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup2.2", "Setup2.2\Setup2.2.vdproj", "{050AEECC-4D27-47F2-9B46-E242989914C5}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
@@ -692,52 +680,6 @@ Global
 		{8A8D2235-7462-446D-B513-65DB6C04083B}.TestRelease.ActiveCfg = Release|.NET
 		{8A8D2235-7462-446D-B513-65DB6C04083B}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{8A8D2235-7462-446D-B513-65DB6C04083B}.VisualizationDebug.Build.0 = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.ConsoleToolDebug.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.ConsoleToolRelease.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Debug.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Debug2.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Debug2Gui.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.DebugAll.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.DebugGL.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.DebugGUI.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.DebugGui2.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.FullDebug.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.MorseGen.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.NewDLL.ActiveCfg = Release|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Release.ActiveCfg = Release|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Release2.ActiveCfg = Release|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Release2MethodComparer.ActiveCfg = Release|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.Test.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.TestRelease.ActiveCfg = Release|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.VisualizationDebug.ActiveCfg = Debug|.NET
-		{EE23D9EC-5A16-4384-88B4-9C4A65C07607}.VisualizationDebug.Build.0 = Debug|.NET
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.ConsoleToolDebug.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.ConsoleToolRelease.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Debug.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Debug.Build.0 = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Debug2.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Debug2Gui.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.DebugAll.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.DebugAll.Build.0 = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.DebugGL.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.DebugGL.Build.0 = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.DebugGUI.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.DebugGUI.Build.0 = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.DebugGui2.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.FullDebug.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.FullDebug.Build.0 = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.MorseGen.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.MorseGen.Build.0 = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.NewDLL.ActiveCfg = Release|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.NewDLL.Build.0 = Release|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Release.ActiveCfg = Release|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Release.Build.0 = Release|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Release2.ActiveCfg = Release|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Release2MethodComparer.ActiveCfg = Release|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.Test.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.TestRelease.ActiveCfg = Release|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.VisualizationDebug.ActiveCfg = Debug|Win32
-		{6B18751A-9DDA-4D84-B620-43D35DAA8653}.VisualizationDebug.Build.0 = Debug|Win32
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.ConsoleToolDebug.ActiveCfg = Debug|.NET
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.ConsoleToolRelease.ActiveCfg = Debug|.NET
 		{B318022E-2A93-4E6D-A8D3-71096A0A9A6D}.Debug.ActiveCfg = Debug|.NET
@@ -900,24 +842,6 @@ Global
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.TestRelease.ActiveCfg = Release|.NET
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.VisualizationDebug.ActiveCfg = Debug|.NET
 		{20E2919B-5CCB-4F8E-B93A-550331C7163E}.VisualizationDebug.Build.0 = Debug|.NET
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.ConsoleToolDebug.ActiveCfg = Debug
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.ConsoleToolRelease.ActiveCfg = Debug
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.Debug.ActiveCfg = Debug
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.Debug2.ActiveCfg = Debug
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.Debug2Gui.ActiveCfg = Debug
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.DebugAll.ActiveCfg = Debug
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.DebugGL.ActiveCfg = Debug
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.DebugGUI.ActiveCfg = Debug
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.DebugGui2.ActiveCfg = Debug
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.FullDebug.ActiveCfg = Debug
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.MorseGen.ActiveCfg = Release
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.NewDLL.ActiveCfg = Release
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.Release.ActiveCfg = Release
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.Release2.ActiveCfg = Release
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.Release2MethodComparer.ActiveCfg = Release
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.Test.ActiveCfg = Release
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.TestRelease.ActiveCfg = Release
-		{050AEECC-4D27-47F2-9B46-E242989914C5}.VisualizationDebug.ActiveCfg = Debug
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection

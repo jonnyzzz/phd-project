@@ -101,7 +101,7 @@
                 </action>
             </action>
 
-            <action name="ISIRomAction" isLeaf="true">
+            <action name="ISIRomAction" isLeaf="true" internal="true">
                 <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
                 <constraint class="FixedDimensionConstraint" dimension="1,2,3"/>
                 <constraint class="StrongCompGraphsConstraint"/>

@@ -1,12 +1,6 @@
-using System;
-using System.IO;
-using System.Text;
 
 namespace Eugene.Petrenko.Gui2.MethodComparer
 {
-	/// <summary>
-	/// Summary description for ActionPerformer.
-	/// </summary>
 	public class ActionPerformer
 	{	
         private ResultDumpCollector col;

@@ -1,4 +1,3 @@
-using System;
 using System.Xml;
 using Eugene.Petrenko.Gui2.MethodComparer.Actions;
 using EugenePetrenko.Gui2.Kernel2.Document;
@@ -6,9 +5,6 @@ using EugenePetrenko.Gui2.Kernell2.Document;
 
 namespace Eugene.Petrenko.Gui2.MethodComparer.Parameters
 {
-	/// <summary>
-	/// Summary description for XMLMetodParametesSerializer.
-	/// </summary>
 	public class MethodParametersSerializer
 	{
 		public static IMethodParameters Load(XmlNode root)

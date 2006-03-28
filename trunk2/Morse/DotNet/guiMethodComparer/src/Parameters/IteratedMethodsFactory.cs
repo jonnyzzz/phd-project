@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
 using Eugene.Petrenko.Gui2.MethodComparer.Actions;
 using EugenePetrenko.Gui2.Kernell2.Node;
 
 namespace Eugene.Petrenko.Gui2.MethodComparer.Parameters
 {
-	/// <summary>
-	/// Summary description for IteratedMethodsFactory.
-	/// </summary>
 	public class IteratedMethodsFactory
 	{
         private IMethodParameters pars;

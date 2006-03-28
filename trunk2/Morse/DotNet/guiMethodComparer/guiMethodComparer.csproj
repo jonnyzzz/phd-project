@@ -224,7 +224,19 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "xml\DoubleLogistics.xml"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "xml\Hardini.xml"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "xml\Henon.xml"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "xml\Homotop.xml"
                     BuildAction = "EmbeddedResource"
                 />
                 <File
@@ -233,6 +245,14 @@
                 />
                 <File
                     RelPath = "xml\Items.xml"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "xml\Julia.xml"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "xml\Torsten.xml"
                     BuildAction = "EmbeddedResource"
                 />
             </Include>

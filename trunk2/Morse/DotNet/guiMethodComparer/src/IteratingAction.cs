@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Xml;
 using Eugene.Petrenko.Gui2.MethodComparer.Actions;
 using EugenePetrenko.Gui2.Kernell2.Actions;
 using EugenePetrenko.Gui2.Kernell2.Node;
@@ -13,15 +14,15 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	{
 	    private readonly IDefinedAction[] actions;
 
-	    private readonly ResultSet resultSet;
+		private readonly ResultSet resultSet;
 	    private readonly int power;
 	    private readonly ExportToPointsDefinedAction saveAction;
-	    private string name;
+	    private string name;		
 
-	    public IteratingAction(ResultSet resultSet, string name, int power, ExportToPointsDefinedAction saveAction, params IDefinedAction[] actions)
+		public IteratingAction(ResultSet resultSet, string name, int power, ExportToPointsDefinedAction saveAction, params IDefinedAction[] actions)
 		{
 		    this.actions = actions;
-	        this.resultSet = resultSet;
+	    	this.resultSet = resultSet;
 	        this.name = name;
 	        this.power = power;
 	        this.saveAction = saveAction;
@@ -30,9 +31,9 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
         public string Name 
         { 
            get { return name; }
-        } 
+        }		
 
-        public void Compute(ResultDumper dumper)
+		public void Compute(ResultDumper dumper)
         {
             Do(resultSet, dumper);
         }
@@ -67,6 +68,11 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
             {
                 tw.WriteLine(dumper.GetLogFileText());
             }
+
+			using(TextWriter tw = File.CreateText(saveAction.LocalXmlLogFile))
+			{
+				dumper.GetLogXML().Save(tw);
+			}
             dumper.WriteBuildCommand("cd {0}", saveAction.GlobalPath);
             dumper.WriteBuildCommand("wgnuplot {0}", saveAction.GnuPlotFile);            
             PerformAction(saveAction, ref set);
