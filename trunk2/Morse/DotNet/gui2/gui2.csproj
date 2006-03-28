@@ -15,7 +15,7 @@
                 DefaultHTMLPageLayout = "Grid"
                 DefaultTargetSchema = "IE50"
                 DelaySign = "false"
-                OutputType = "Exe"
+                OutputType = "WinExe"
                 PreBuildEvent = ""
                 PostBuildEvent = ""
                 RootNamespace = "EugenePetrenko.Gui2.Application"
@@ -236,6 +236,11 @@
                     RelPath = "src\Forms\UserComment.resx"
                     DependentUpon = "UserComment.cs"
                     BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\Function\PredefinedFunctions.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
                 />
                 <File
                     RelPath = "src\ProgressBar\ProgressBarNotificationAdapter.cs"

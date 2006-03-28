@@ -5,9 +5,7 @@ using System.Windows.Forms;
 namespace EugenePetrenko.Gui2.Controls.TreeControl
 {
     public delegate void MouseOver(ComputationNode node);
-
     public delegate void SelectionChanged(ComputationNode node);
-
     public delegate bool BeforeCheckChanged(ComputationNode node);
 
     /// <summary>
@@ -100,12 +98,17 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
         }
 
         private ComputationNode root = null;
+		private ComputationNode myCurrentSelectedNode = null;
 
         private void tree_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (OnSelectionChanged != null)
             {
-                OnSelectionChanged(e.Node as ComputationNode);
+				if (e.Node != myCurrentSelectedNode)
+				{
+					myCurrentSelectedNode = e.Node as ComputationNode;
+					OnSelectionChanged(myCurrentSelectedNode);	
+				}
             }
         }
 
@@ -143,6 +146,11 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
 
 				if (e.KeyCode == Keys.Apps)
 					ShowPopupMenu(node, node.Bounds.Location);
+			}
+
+			if (e.KeyCode == Keys.Apps && SelectedNode != null)
+			{
+				ShowPopupMenu(SelectedNode, new Point(10,10));
 			}
 		}
 
@@ -194,6 +202,25 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
         public event BeforeCheckChanged OnBeforeCheckChanged;
 
         private volatile bool insideBeforeCheck = false;
+
+		public ComputationNode SelectedNode
+		{
+			get
+			{
+				return tree.SelectedNode as ComputationNode;
+			}
+		}
+
+		public MenuItem[] SelectedNodeMenus
+		{
+			get
+			{
+				ComputationNode node = SelectedNode;
+				if (node != null)
+					return node.ContextMenuItems;
+				return null;
+			}
+		}
 
         private void BeforeCheck(object sender, TreeViewCancelEventArgs e)
         {

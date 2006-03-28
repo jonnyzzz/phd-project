@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using EugenePetrenko.Gui2.Application.Document;
+using EugenePetrenko.Gui2.Application.SystemFunctions;
 using EugenePetrenko.Gui2.Kernel2.Document;
 using EugenePetrenko.Gui2.Kernell2.Document;
 using EugenePetrenko.Gui2.Logging;
@@ -19,6 +20,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
     {
         private const string DIMENSION = "_dimension";
         private bool isReadOnly;
+		private PredefinedFunctions predefinedFunctions = new PredefinedFunctions();
 
 
         private GroupBox groupBox1;
@@ -39,6 +41,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
         private MenuItem menuLoad;
         private MenuItem menuSave;
         private MenuItem menuItemGetSource;
+		private System.Windows.Forms.MenuItem menuItem1;
         private Function function = null;
 
         public SystemAssignment() : this(false)
@@ -51,6 +54,8 @@ namespace EugenePetrenko.Gui2.Application.Forms
             InitializeComponent();
 
             menuItemGetSource.Visible = Runner.Runner.Instance.IsInternal;
+
+			BuildMenuItems(predefinedFunctions.PredefinedSystems);
 
             dimensionUpDown_ValueChanged(this, EventArgs.Empty);
             isReadOnly = false;
@@ -139,6 +144,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.menuItemGetSource = new System.Windows.Forms.MenuItem();
 			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.menuItem1 = new System.Windows.Forms.MenuItem();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dimensionUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.formulas)).BeginInit();
@@ -244,25 +250,26 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			// mainMenu
 			// 
 			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+																					 this.menuItem1,
 																					 this.menuLoad,
 																					 this.menuSave,
 																					 this.menuItemGetSource});
 			// 
 			// menuLoad
 			// 
-			this.menuLoad.Index = 0;
+			this.menuLoad.Index = 1;
 			this.menuLoad.Text = "Load";
 			this.menuLoad.Click += new System.EventHandler(this.menuLoad_Click);
 			// 
 			// menuSave
 			// 
-			this.menuSave.Index = 1;
+			this.menuSave.Index = 2;
 			this.menuSave.Text = "Save";
 			this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
 			// 
 			// menuItemGetSource
 			// 
-			this.menuItemGetSource.Index = 2;
+			this.menuItemGetSource.Index = 3;
 			this.menuItemGetSource.Text = "GetSource";
 			this.menuItemGetSource.Click += new System.EventHandler(this.menuItemGetSource_Click);
 			// 
@@ -278,6 +285,11 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.saveFileDialog.FileName = "equation";
 			this.saveFileDialog.Filter = "Equation files(*.equation)|*.equation|All files(*.*)|*.*";
 			this.saveFileDialog.Title = "Save System Equation";
+			// 
+			// menuItem1
+			// 
+			this.menuItem1.Index = 0;
+			this.menuItem1.Text = "Predefined";
 			// 
 			// SystemAssignment
 			// 
@@ -483,8 +495,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
                 try
                 {
-                    Function function = FunctionSerializer.LoadFunction(document);
-                    setSource(function.Equation);
+                	LoadFunctionFromXml(document);
                 }
                 catch (FunctionExceptions ee)
                 {
@@ -493,7 +504,13 @@ namespace EugenePetrenko.Gui2.Application.Forms
             }
         }
 
-        private void menuSave_Click(object sender, EventArgs e)
+    	private void LoadFunctionFromXml(XmlNode document)
+    	{
+    		Function function = FunctionSerializer.LoadFunction(document);
+    		setSource(function.Equation);
+    	}
+
+    	private void menuSave_Click(object sender, EventArgs e)
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -523,5 +540,38 @@ namespace EugenePetrenko.Gui2.Application.Forms
         {
             Clipboard.SetDataObject(createFunctionSource(), true);
         }
-    }
+
+		private MenuItem[] BuildMenuItems(string[] names)
+		{
+			ArrayList items = new ArrayList(names.Length);
+			foreach (string name in names)
+			{
+				items.Add(new MyMenuItem(this, name));
+			}
+			return (MenuItem[]) items.ToArray(typeof(MenuItem));
+		}
+
+		public void PerformPredefinedSelected(string name)
+		{
+			XmlNode node = predefinedFunctions.GetFunction(name);
+			LoadFunctionFromXml(node);
+		}
+
+		private class MyMenuItem : MenuItem
+		{
+			private readonly SystemAssignment assignment;
+			private readonly string name;
+
+			public MyMenuItem(SystemAssignment assignment, string name ) : base(name)
+			{
+				this.assignment = assignment;
+				this.name = name;
+			}
+
+			protected override void OnClick(EventArgs e)
+			{
+				assignment.PerformPredefinedSelected(name);
+			}
+		}
+	}
 }

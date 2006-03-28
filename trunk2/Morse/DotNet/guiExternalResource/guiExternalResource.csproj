@@ -129,6 +129,10 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "xml\predefined.xml"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "xml\Resource.xml"
                     BuildAction = "EmbeddedResource"
                 />

@@ -14,7 +14,6 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	{
 	    private readonly IAttachableSimpleWriter output;
 	    private readonly string id;
-		private readonly string pathXML;
 	    private DateTime computationStartTime;
 	    private DateTime iterationStartedTime;
 	    private DateTime actionStartedTime;

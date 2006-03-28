@@ -25,7 +25,8 @@ namespace EugenePetrenko.Gui2.Controls.Progress
             UpperBound = 10;
             Value = 5;
 
-            InitializeComponent();
+			workFlag = false;
+		    InitializeComponent();
 
             this.SizeChanged += new EventHandler(SmartProgressBar_SizeChanged);
         }
@@ -99,8 +100,9 @@ namespace EugenePetrenko.Gui2.Controls.Progress
         protected double value;
 
         private Image cacheImage = null;
+    	private bool workFlag;
 
-        private Image createCache()
+    	private Image createCache()
         {
             if (pictureBox == null || pictureBox.Image == null) return null;
 

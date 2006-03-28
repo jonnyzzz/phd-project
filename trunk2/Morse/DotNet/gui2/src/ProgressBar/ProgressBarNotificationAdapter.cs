@@ -13,11 +13,11 @@ namespace EugenePetrenko.Gui2.Application.Progress
     	private readonly Label label;
     	private Form threadOwnerForm;		
 
-        public ProgressBarNotificationAdapter(SmartProgressBar progressBar, Label label)
+        public ProgressBarNotificationAdapter(SmartProgressBar progressBar, Label label, Form form)
         {
             this.progressBar = progressBar;
         	this.label = label;
-        	threadOwnerForm = progressBar.FindForm();
+        	threadOwnerForm = form;
         }
 				
 		public ProgressBarInfo GetProgressBarInfo()

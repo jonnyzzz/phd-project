@@ -46,10 +46,17 @@ namespace EugenePetrenko.Gui2.ExternalResource.Core
         private StringSet stringResources = null;
         private XMLParser xmlParser = null;
 
-        public XmlNode GetXmlResource(string name)
+        public XmlNode GetXmlResourceFromCommon(string name)
         {
             return xmlParser.XmlResource(name);
         }
+
+		public XmlDocument GetXmlResource(string name)
+		{
+			XmlDocument doc = new XmlDocument();
+			doc.Load(typeof(ResourceManager).Assembly.GetManifestResourceStream(xmlParser.XmlPath + name));
+			return doc;
+		}
 
         public StringSet StringResources
         {

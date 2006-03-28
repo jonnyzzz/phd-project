@@ -137,6 +137,10 @@ namespace EugenePetrenko.Gui2.Application.Runner
                 {
                     document.Dispose();
                 }
+				
+				if (ComputationForm != null)
+					computationForm.OnDocumentCreated(document);
+
                 document = value;
             }
         }

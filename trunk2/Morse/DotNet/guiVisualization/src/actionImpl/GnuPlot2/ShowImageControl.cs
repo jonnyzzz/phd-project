@@ -26,7 +26,7 @@ namespace EugenePetrenko.Gui2.Visualization.src.actionImpl.GnuPlot2
 			InitializeComponent();
             reduceImageSize.Visible = false;
 
-			showStyleControl.SetControlData(ResourceManager.Instance.GetXmlResource("gnuplot"));
+			showStyleControl.SetControlData(ResourceManager.Instance.GetXmlResourceFromCommon("gnuplot"));
 		}
 
 		/// <summary> 

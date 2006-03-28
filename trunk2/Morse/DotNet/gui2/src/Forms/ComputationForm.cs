@@ -10,7 +10,6 @@ using EugenePetrenko.Gui2.Application.Progress;
 using EugenePetrenko.Gui2.Application.TreeNodes;
 using EugenePetrenko.Gui2.Controls.Progress;
 using EugenePetrenko.Gui2.Controls.TreeControl;
-using EugenePetrenko.Gui2.Kernell2.Actions;
 using EugenePetrenko.Gui2.Kernell2.Document;
 using EugenePetrenko.Gui2.Kernell2.Serialization;
 using EugenePetrenko.Gui2.Logging;
@@ -53,6 +52,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 		private System.Windows.Forms.MenuItem menuItemFileExit;
 		private System.Windows.Forms.Label labelProgressStatus;
 		private System.Windows.Forms.Timer opacityTimer;
+		private System.Windows.Forms.MenuItem menuActions;
 		private System.ComponentModel.IContainer components;
 
         public ComputationForm()
@@ -61,9 +61,19 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
             menuInternal.Visible = Runner.Runner.Instance.IsInternal;
 
-            progressBarAdapter = new ProgressBarNotificationAdapter(progressBar, labelProgressStatus);
+            progressBarAdapter = new ProgressBarNotificationAdapter(progressBar, labelProgressStatus, this);
             tree.OnBeforeCheckChanged += new BeforeCheckChanged(OnBeforeCheckChanged);
+			tree.OnSelectionChanged += new SelectionChanged(tree_OnSelectionChanged);
 
+			documentDependentMenuItems =  new System.Windows.Forms.MenuItem[] {
+							this.menuFunctionShow,
+							this.menuSystemAnalisys,
+							this.menuSystemIterations,
+							this.menuSystemComment,
+							this.menuActions}
+				;
+
+			OnDocumentCreated(null);
         }
 
         /// <summary>
@@ -122,6 +132,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.saveDocumentDialog = new System.Windows.Forms.SaveFileDialog();
 			this.openDocumentDialog = new System.Windows.Forms.OpenFileDialog();
 			this.opacityTimer = new System.Windows.Forms.Timer(this.components);
+			this.menuActions = new System.Windows.Forms.MenuItem();
 			this.panelLeft.SuspendLayout();
 			this.panelLeftUp.SuspendLayout();
 			this.panelRightDown.SuspendLayout();
@@ -232,8 +243,10 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																					 this.menuInvestigations,
 																					 this.menuSystem,
+																					 this.menuActions,
 																					 this.menuHelp,
-																					 this.menuInternal});
+																					 this.menuInternal
+																					 });
 			// 
 			// menuInvestigations
 			// 
@@ -310,7 +323,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			// menuSystemAnalisys
 			// 
 			this.menuSystemAnalisys.Index = 3;
-			this.menuSystemAnalisys.Text = "Analisys";
+			this.menuSystemAnalisys.Text = "Analysis";
 			this.menuSystemAnalisys.Click += new System.EventHandler(this.menuSystemAnalisys_Click);
 			// 
 			// menuSystemDelimiter2
@@ -337,7 +350,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			// 
 			// menuHelp
 			// 
-			this.menuHelp.Index = 2;
+			this.menuHelp.Index = 3;
 			this.menuHelp.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
 																					 this.menuHelpAbout});
 			this.menuHelp.Text = "Help";
@@ -350,7 +363,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			// 
 			// menuInternal
 			// 
-			this.menuInternal.Index = 3;
+			this.menuInternal.Index = 4;
 			this.menuInternal.Text = "Internal";
 			// 
 			// saveDocumentDialog
@@ -369,6 +382,12 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			// 
 			this.opacityTimer.Interval = 50;
 			this.opacityTimer.Tick += new System.EventHandler(this.opacityTick);
+			// 
+			// menuActions
+			// 
+			this.menuActions.Index = 2;
+			this.menuActions.Text = "Actions";
+			this.menuActions.Select +=new EventHandler(menuActions_Select);
 			// 
 			// ComputationForm
 			// 
@@ -427,11 +446,12 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
 		private Cursor cachedCursor;
 		private double cachedOpacity;
+    	private MenuItem[] documentDependentMenuItems = null;
 
-		private void opacityTick(object sender, System.EventArgs e)
+    	private void opacityTick(object sender, System.EventArgs e)
 		{
 			opacityTimer.Enabled = false;
-			this.Opacity -= 0.03; //
+			this.Opacity -= 0.03; 
 			if (this.Opacity > 0.5)
 				opacityTimer.Enabled = true;
 		}		
@@ -440,7 +460,6 @@ namespace EugenePetrenko.Gui2.Application.Forms
         {
 			cachedOpacity = Opacity;
 			cachedCursor = Cursor;
-//			Opacity = 0.5;
 			opacityTimer.Enabled = true;
 			Cursor = Cursors.WaitCursor;
             tree.Enabled = false;
@@ -450,12 +469,21 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
         public void Unlock()
         {
+			opacityTimer.Enabled = false;
 			Opacity = cachedOpacity;
 			Cursor = cachedCursor;
             tree.Enabled = true;
 			menuInvestigations.Enabled = true;
 			menuSystem.Enabled = true;
         }
+
+		public void OnDocumentCreated(Document.Document document)
+		{
+			foreach (MenuItem item in documentDependentMenuItems)
+			{
+				item.Enabled = document != null;
+			}
+		}
 
 
         public bool OnBeforeCheckChanged(ComputationNode computationNode)
@@ -485,6 +513,8 @@ namespace EugenePetrenko.Gui2.Application.Forms
         private void performer_Finish()
         {
             Runner.Runner.Instance.Document.UnLock();
+			this.progressBar.Value = 0;
+			this.labelProgressStatus.Text = "";
         }
 
         private void MenuFunctionShowClick(object sender, EventArgs e)
@@ -590,7 +620,30 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
     	protected override void OnClosing(CancelEventArgs e)   
 		{
-    	}
-		
-    }
+		}
+
+	
+		private ComputationNode myCachedComputationNode = null;
+		private void menuActions_Select(object sender, EventArgs e)
+		{
+			if (myCachedComputationNode != tree.SelectedNode) 
+			{
+				myCachedComputationNode = tree.SelectedNode;
+				menuActions.MenuItems.Clear();
+				MenuItem[] items = tree.SelectedNodeMenus;
+				if (items == null)
+					menuActions.Enabled = false;
+				else 
+				{
+					menuActions.Enabled = true;
+					menuActions.MenuItems.AddRange(items);
+				}
+			}
+		}
+
+		private void tree_OnSelectionChanged(ComputationNode node)
+		{
+			menuActions_Select(this, new EventArgs());
+		}
+	}
 }

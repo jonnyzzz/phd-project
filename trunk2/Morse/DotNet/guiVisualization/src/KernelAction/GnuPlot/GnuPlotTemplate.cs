@@ -80,7 +80,7 @@ namespace EugenePetrenko.Gui2.Visualization.KernelAction.GnuPlot
 
         public static GnuPlotTemplate Create(int dimension, bool needSave)
         {
-            XmlNode resource = ResourceManager.Instance.GetXmlResource("gnuplot").SelectSingleNode(!needSave ? "show" : "save");
+            XmlNode resource = ResourceManager.Instance.GetXmlResourceFromCommon("gnuplot").SelectSingleNode(!needSave ? "show" : "save");
             string xpath = string.Format("templates/template[@dimension=\"{0}\"]", dimension);
             return new GnuPlotTemplate(resource.SelectSingleNode(xpath), resource);
         }

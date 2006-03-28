@@ -38,7 +38,7 @@ namespace EugenePetrenko.Gui2.Visualization.src.actionImpl.GnuPlot2
 	    public SaveImageControl()
 		{
 			InitializeComponent();
-			showStyleControl.SetControlData(ResourceManager.Instance.GetXmlResource("gnuplot"));
+			showStyleControl.SetControlData(ResourceManager.Instance.GetXmlResourceFromCommon("gnuplot"));
 		}
 
 		/// <summary> 
