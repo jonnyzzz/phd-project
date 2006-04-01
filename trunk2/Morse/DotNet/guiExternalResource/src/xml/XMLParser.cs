@@ -10,7 +10,7 @@ namespace EugenePetrenko.Gui2.ExternalResource.Xml
     /// </summary>
     internal class XMLParser
     {
-		public readonly string XmlPath = "EugenePetrenko.Gui2.ExternalResource.xml.";
+		public static readonly string XmlPath = "EugenePetrenko.Gui2.ExternalResource.xml.";
         private readonly string Resource = XmlPath + "Resource.xml";
         private XmlDocument document = null;
 

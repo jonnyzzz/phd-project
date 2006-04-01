@@ -18,7 +18,7 @@ ProgressBarInfo::~ProgressBarInfo() {
 ProgressBarAdapter::ProgressBarAdapter(ProgressBarInfo* pinfo, double units) {
 	this->pinfo = pinfo;
 	this->cnt = 0;
-	this->step = units/pinfo->Length();	
+	this->step = ((double)units)/pinfo->Length();	
 	pinfo->Start();
 }
 
@@ -28,7 +28,8 @@ ProgressBarAdapter::~ProgressBarAdapter() {
 
 
 bool ProgressBarAdapter::Next() {
-	if (++cnt >= step) {
+	cnt += 1.0;
+	if (cnt >= step) {
 		cnt -= step;
 		pinfo->Advance(step);
 		return pinfo->NeedStop();

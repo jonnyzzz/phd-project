@@ -139,7 +139,7 @@ namespace EugenePetrenko.Gui2.Application.Runner
                 }
 				
 				if (ComputationForm != null)
-					computationForm.OnDocumentCreated(document);
+					computationForm.OnDocumentCreated(value);
 
                 document = value;
             }

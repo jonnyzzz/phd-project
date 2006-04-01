@@ -41,7 +41,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
         private MenuItem menuLoad;
         private MenuItem menuSave;
         private MenuItem menuItemGetSource;
-		private System.Windows.Forms.MenuItem menuItem1;
+		private System.Windows.Forms.MenuItem menuPredefined;
         private Function function = null;
 
         public SystemAssignment() : this(false)
@@ -55,7 +55,8 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
             menuItemGetSource.Visible = Runner.Runner.Instance.IsInternal;
 
-			BuildMenuItems(predefinedFunctions.PredefinedSystems);
+			menuPredefined.MenuItems.Clear();
+			menuPredefined.MenuItems.AddRange(BuildMenuItems(predefinedFunctions.PredefinedSystems));
 
             dimensionUpDown_ValueChanged(this, EventArgs.Empty);
             isReadOnly = false;
@@ -144,7 +145,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.menuItemGetSource = new System.Windows.Forms.MenuItem();
 			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.menuItem1 = new System.Windows.Forms.MenuItem();
+			this.menuPredefined = new System.Windows.Forms.MenuItem();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dimensionUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.formulas)).BeginInit();
@@ -250,7 +251,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			// mainMenu
 			// 
 			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					 this.menuItem1,
+																					 this.menuPredefined,
 																					 this.menuLoad,
 																					 this.menuSave,
 																					 this.menuItemGetSource});
@@ -288,8 +289,8 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			// 
 			// menuItem1
 			// 
-			this.menuItem1.Index = 0;
-			this.menuItem1.Text = "Predefined";
+			this.menuPredefined.Index = 0;
+			this.menuPredefined.Text = "Predefined";
 			// 
 			// SystemAssignment
 			// 

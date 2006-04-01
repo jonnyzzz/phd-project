@@ -54,7 +54,7 @@ namespace EugenePetrenko.Gui2.ExternalResource.Core
 		public XmlDocument GetXmlResource(string name)
 		{
 			XmlDocument doc = new XmlDocument();
-			doc.Load(typeof(ResourceManager).Assembly.GetManifestResourceStream(xmlParser.XmlPath + name));
+			doc.Load(typeof(ResourceManager).Assembly.GetManifestResourceStream(XMLParser.XmlPath + name));
 			return doc;
 		}
 
