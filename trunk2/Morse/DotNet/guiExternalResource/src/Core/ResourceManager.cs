@@ -58,6 +58,11 @@ namespace EugenePetrenko.Gui2.ExternalResource.Core
 			return doc;
 		}
 
+		public static IStringResources Strings
+		{
+			get { return Instance.StringResources;}
+		}
+
         public StringSet StringResources
         {
             get { return stringResources; }

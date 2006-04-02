@@ -31,12 +31,25 @@
         <action name="IGroupAction">
             <caption>
                 <title>Morse Spectrum</title>
+                <detail>This method can works only with dynamical system on R^2</detail>
             </caption>
 
             <action name="IGroupAction">
                 <caption>
                     <title>Angle Linear Method for R^2</title>
                 </caption>
+                
+                <constraint class="OneParentResultsConstraint"/>
+                <constraint class="OrConstraint">
+                   <constraint class="AndConstraint">
+                     <constraint class="FixedDimensionConstraint" dimension="2"/>
+                     <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+                   </constraint>
+                   <constraint class="AndConstraint">
+                      <constraint class="FixedDimensionConstraint" dimension="3"/>
+                      <constraint class="DefaultConstraint" metadata="IMS2Metadata" result="IGraphResult"/>
+                   </constraint>
+                </constraint>
 
                 <action name="IMS2DCreationAction" isLeaf="true">
                     <caption>
@@ -69,9 +82,23 @@
 
             <action name="IGroupAction">
                 <caption>
-                    <title>Angle Adaptive Method</title>
+                    <title>Angle Adaptive Method for R^3</title>
+                    <detail>This method can works only with dynamical system on R^3</detail>
                 </caption>
-
+                
+                <constraint class="OneParentResultsConstraint"/>
+                <constraint class="OrConstraint">
+                   <constraint class="AndConstraint">
+                      <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
+                      <constraint class="FixedDimensionConstraint" dimension="3"/>
+                   </constraint>
+                   <constraint class="AndConstraint">
+                     <constraint class="DefaultConstraint" metadata="IMSAngleMetadata" result="IGraphResult"/>
+                     <constraint class="FixedDimensionConstraint" dimension="5"/>
+                   </constraint>
+                </constraint>
+                <constraint class="FixedDimensionConstraint" dimension="3,5"/>
+                               
                 <action name="IMSAngleCreationMethod" isLeaf="true">
                     <caption>
                         <title>Create Projective Extended System</title>

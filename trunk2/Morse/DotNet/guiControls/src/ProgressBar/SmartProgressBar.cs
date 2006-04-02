@@ -25,7 +25,6 @@ namespace EugenePetrenko.Gui2.Controls.Progress
             UpperBound = 10;
             Value = 5;
 
-			workFlag = false;
 		    InitializeComponent();
 
             this.SizeChanged += new EventHandler(SmartProgressBar_SizeChanged);
@@ -98,13 +97,24 @@ namespace EugenePetrenko.Gui2.Controls.Progress
         protected double lowerBound;
         protected double upperBound;
         protected double value;
+		private bool isLocked = false;
 
-        private Image cacheImage = null;
-    	private bool workFlag;
+    	public bool IsLocked
+    	{
+    		get { return isLocked; }
+    		set
+    		{
+    			isLocked = value;
+				RePaint();
+    		}
+    	}
+
+    	private Image cacheImage = null;
 
     	private Image createCache()
         {
-            if (pictureBox == null || pictureBox.Image == null) return null;
+            if (pictureBox == null || pictureBox.Image == null) 
+				return null;
 
             Bitmap bitmap = new Bitmap(Width, Height);
 			using (Graphics graphics = Graphics.FromImage(bitmap)) 
@@ -122,9 +132,12 @@ namespace EugenePetrenko.Gui2.Controls.Progress
         private void panelBorder_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-            int width = (int) Math.Ceiling(((double)Width*value/(upperBound - lowerBound))); 
+            int width = (int) Math.Ceiling(((double)Width*Value/(UpperBound - LowerBound))); 
 			if (width >= Width)
 				width = Width;
+
+			if (IsLocked)
+				width = 0;
 
             Rectangle clip = Rectangle.Intersect(e.ClipRectangle, new Rectangle(0, 0, width, Height));
             graphics.SetClip(clip, CombineMode.Intersect);
@@ -139,8 +152,11 @@ namespace EugenePetrenko.Gui2.Controls.Progress
         {
             set
             {
-                ReCache();
-                lowerBound = value;
+				if (lowerBound != value)
+				{
+					lowerBound = value;
+					ReCache();
+				}
             }
             get { return lowerBound; }
         }
@@ -149,8 +165,11 @@ namespace EugenePetrenko.Gui2.Controls.Progress
         {
             set
             {
-                ReCache();
-                upperBound = value;
+				if (upperBound != value)
+				{
+					upperBound = value;
+					ReCache();
+				}                
             }
             get { return upperBound; }
         }
@@ -160,8 +179,10 @@ namespace EugenePetrenko.Gui2.Controls.Progress
             set
             {
 				if (value != this.value)
+				{
+					this.value = value;
 					RePaint();
-                this.value = value;
+				}
             }
             get { return value; }
         }		
@@ -173,7 +194,7 @@ namespace EugenePetrenko.Gui2.Controls.Progress
 
         private void ReCache()
         {
-            cacheImage = createCache();
+			cacheImage = createCache();
             RePaint();
         }
 

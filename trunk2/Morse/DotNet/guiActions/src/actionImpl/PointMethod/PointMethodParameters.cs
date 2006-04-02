@@ -5,6 +5,7 @@ using EugenePetrenko.Gui2.Actions.Parameters;
 using EugenePetrenko.Gui2.Controls.Control;
 using EugenePetrenko.Gui2.Controls.Grid;
 using EugenePetrenko.Gui2.Controls.Grid.Rows;
+using EugenePetrenko.Gui2.ExternalResource.Core;
 using EugenePetrenko.Gui2.Kernell2.Document;
 using EugenePetrenko.Gui2.MorseKernel2;
 
@@ -34,10 +35,10 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.PointMethod
             this.dimension = dimension;
             this.function = function;
             InitializeComponent();
-            factor = new IntPlusGridData("Cell devisor", dimension);
-            ks = new IntPlusGridData("Points in cell", dimension);
-            offset1 = new DoublePercent("Left Offset", dimension);
-            offset2 = new DoublePercent("Right Offset", dimension);
+            factor = new IntPlusGridData(ResourceManager.Strings.CellDivision, dimension);
+            ks = new IntPlusGridData(ResourceManager.Strings.PointsInCell, dimension);
+            offset1 = new DoublePercent(ResourceManager.Strings.PointLeftOffset, dimension);
+            offset2 = new DoublePercent(ResourceManager.Strings.PointRightOffset, dimension);
 
             UpdateGrid();
 

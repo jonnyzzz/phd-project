@@ -25,6 +25,22 @@ namespace EugenePetrenko.Gui2.Application.Progress
 			return new ProgressBarInfo(this);
 		}
 
+		public bool IsLocked
+		{
+			get
+			{
+				return progressBar.IsLocked;
+			}
+			set
+			{
+				progressBar.IsLocked = value;
+				if (IsLocked)
+				{
+					label.Text = "";
+				}
+			}
+		}
+
 		private delegate void NewTaskDelegate(string capion, double length);
 		private delegate void DoubleDelegate(double v);
 		private delegate void VoidDelegate();

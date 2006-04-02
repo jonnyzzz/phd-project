@@ -7,7 +7,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
     /// <summary>
     /// Summary description for UserComment.
     /// </summary>
-    public class UserComment : Form
+    public class UserCommentForm : Form
     {
         private TextBox commentText;
         private GroupBox groupBox;
@@ -20,7 +20,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
         /// </summary>
         private Container components = null;
 
-        public UserComment(string initialText)
+        public UserCommentForm(string initialText)
         {
             InitializeComponent();
 
@@ -50,7 +50,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
         /// </summary>
         private void InitializeComponent()
         {
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(UserComment));
+			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(UserCommentForm));
 			this.commentText = new System.Windows.Forms.TextBox();
 			this.groupBox = new System.Windows.Forms.GroupBox();
 			this.panelButtons = new System.Windows.Forms.Panel();

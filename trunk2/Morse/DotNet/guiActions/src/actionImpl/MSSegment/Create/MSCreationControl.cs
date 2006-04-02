@@ -2,6 +2,7 @@ using System.ComponentModel;
 using EugenePetrenko.Gui2.Actions.Parameters;
 using EugenePetrenko.Gui2.Controls.Grid;
 using EugenePetrenko.Gui2.Controls.Grid.Rows;
+using EugenePetrenko.Gui2.ExternalResource.Core;
 using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Actions.ActionImpl.MSSegment.Create
@@ -24,7 +25,7 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MSSegment.Create
         {
             InitializeComponent();
 
-            data = new IntPlusGridData("Cell Devisor on Angle", dimentsion);
+            data = new IntPlusGridData(ResourceManager.Strings.CellDivision, dimentsion);
             exGrid.SetRows(dimentsion, new IExGridRow[] {data});
         }
 

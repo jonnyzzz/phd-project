@@ -1,4 +1,3 @@
-using System;
 
 namespace EugenePetrenko.Gui2.Controls.Grid.Rows
 {
@@ -22,23 +21,8 @@ namespace EugenePetrenko.Gui2.Controls.Grid.Rows
 
         public string this[int index]
         {
-            get { return data[index].ToString(); }
-            set
-            {
-                try
-                {
-                    double d = Double.Parse(value.Replace('.', ','));
-                    data[index] = d;
-                }
-                catch (FormatException)
-                {
-                    throw new ExGridException("Number has incorect format at col {0}", index);
-                }
-                catch (OverflowException)
-                {
-                    throw new ExGridException("Number too much at col {0}", index);
-                }
-            }
+            get { return ExGridsParseUtil.DoubleToString(data[index]); }
+            set { data[index] = ExGridsParseUtil.ParseDouble(value, index); }
         }
 
         public double[] Data

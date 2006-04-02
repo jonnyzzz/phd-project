@@ -228,13 +228,13 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
-                    RelPath = "src\Forms\UserComment.cs"
+                    RelPath = "src\Forms\UserCommentForm.cs"
                     SubType = "Form"
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Forms\UserComment.resx"
-                    DependentUpon = "UserComment.cs"
+                    RelPath = "src\Forms\UserCommentForm.resx"
+                    DependentUpon = "UserCommentForm.cs"
                     BuildAction = "EmbeddedResource"
                 />
                 <File

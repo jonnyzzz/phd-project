@@ -48,18 +48,14 @@ namespace EugenePetrenko.Gui2.Application.Forms
             foreach (ParametersControl control in controls)
             {
                 if (!control.NeedShowForm)
-                {
                     control.SubmitData();
-                }
                 else
-                {
                     list.Add(control);
-                }
             }
             return (ParametersControl[]) list.ToArray(typeof (ParametersControl));
         }
 
-        private const string Title = "Set Parameters for selected ations {0} of {1}";
+        private const string Title = "Parameters for Action {0} of {1}";
 
         private void ShowCurrentParameterControl()
         {

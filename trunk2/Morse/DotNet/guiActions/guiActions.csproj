@@ -294,6 +294,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\actionImpl\MS2D\Morse\MS2DMorseActionParameters.resx"
+                    DependentUpon = "MS2DMorseActionParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
                     RelPath = "src\actionImpl\MS2D\Next\MS2DMethodAction.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
@@ -422,6 +427,11 @@
                     RelPath = "src\actionImpl\SIRom\SIRomActionParameters.cs"
                     SubType = "UserControl"
                     BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\SIRom\SIRomActionParameters.resx"
+                    DependentUpon = "SIRomActionParameters.cs"
+                    BuildAction = "EmbeddedResource"
                 />
                 <File
                     RelPath = "src\actionImpl\SIRom\SIRomActionParametersImpl.cs"

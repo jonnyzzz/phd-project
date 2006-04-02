@@ -29,4 +29,32 @@ namespace EugenePetrenko.Gui2.Controls.Grid
             get { return errorDescShort; }
         }
     }
+
+	public class ExGridCellException : ExGridException
+	{
+		private readonly int index;
+		private readonly string messageTemplate;
+
+		/// <summary>
+		/// template should contain {0} position to 
+		/// substitute error position.
+		/// </summary>
+		/// <param name="index"></param>
+		/// <param name="template"></param>
+		public ExGridCellException(int index, string template) : base(template)
+		{
+			this.messageTemplate = template;
+			this.index = index;
+		}
+
+		public string MessageTemplate
+		{
+			get { return messageTemplate; }
+		}
+
+		public int Index
+		{
+			get { return index; }
+		}
+	}
 }

@@ -26,24 +26,13 @@ namespace EugenePetrenko.Gui2.Controls.Grid.Rows
 
         public string this[int index]
         {
-            get { return data[index].ToString(); }
+            get { return ExGridsParseUtil.IntToString(data[index]); }
             set
             {
-                try
-                {
-                    int v = Int32.Parse(value);
-                    if (v < 0) throw new ExGridException("Value should be positive at col {0}", index);
+				int v = ExGridsParseUtil.ParseInt(value, index);
+				if (v < 0) throw new ExGridCellException(index, "Value should be positive at {0}.");
 
-                    this.data[index] = v;
-                }
-                catch (FormatException)
-                {
-                    throw new ExGridException("Number has incorect format at col {0}", index);
-                }
-                catch (OverflowException)
-                {
-                    throw new ExGridException("Number too much at col {0}", index);
-                }
+				this.data[index] = v;
             }
         }
 

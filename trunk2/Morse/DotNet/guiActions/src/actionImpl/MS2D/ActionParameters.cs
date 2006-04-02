@@ -1,15 +1,18 @@
+using System;
 using System.ComponentModel;
 using EugenePetrenko.Gui2.Actions.Parameters;
 using EugenePetrenko.Gui2.Controls.Grid;
 using EugenePetrenko.Gui2.Controls.Grid.Rows;
+using EugenePetrenko.Gui2.ExternalResource.Core;
 using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D
 {
     /// <summary>
     /// Summary description for ActionParameters.
+    /// This class should be abstract
     /// </summary>
-    public abstract class ActionParameters : ParametersControl
+    public class ActionParameters : ParametersControl
     {
         private ExGrid exGrid;
 
@@ -25,7 +28,7 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D
             // This call is required by the Windows.Forms Form Designer.
             InitializeComponent();
 
-            data = new IntPlusGridData("Cell Devisor on Angle", 3);
+            data = new IntPlusGridData(ResourceManager.Strings.CellDivision, 3);
             exGrid.SetRows(3, data);
         }
 
@@ -79,9 +82,12 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D
             get { return "Angle Method Projective Bundle Initial SI Creation"; }
         }
 
-        protected abstract IParameters LoadParameters(int[] factor);
+    	protected virtual IParameters LoadParameters(int[] factor)
+    	{
+			throw new NotImplementedException("Implement in inherotor");
+    	}
 
-        protected override IParameters SubmitDataInternal()
+    	protected override IParameters SubmitDataInternal()
         {
             exGrid.SubmitData();
             return LoadParameters(data.Data);

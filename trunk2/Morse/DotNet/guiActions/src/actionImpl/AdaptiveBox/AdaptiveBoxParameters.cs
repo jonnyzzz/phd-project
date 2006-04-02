@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using EugenePetrenko.Gui2.Actions.Parameters;
 using EugenePetrenko.Gui2.Controls.Grid;
 using EugenePetrenko.Gui2.Controls.Grid.Rows;
+using EugenePetrenko.Gui2.ExternalResource.Core;
 using EugenePetrenko.Gui2.Kernell2.Document;
 using EugenePetrenko.Gui2.MorseKernel2;
 
@@ -22,8 +23,8 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.AdaptiveBox
         public AdaptiveBoxParameters(Function function, int dimention, double[] recomendedPrecision)
         {
             this.function = function;
-            factor = new IntPlusGridData("Divisor", dimention);
-            precision = new DoublePrecsion(recomendedPrecision, "Precision");
+            factor = new IntPlusGridData(ResourceManager.Strings.CellDivision, dimention);
+            precision = new DoublePrecsion(recomendedPrecision, ResourceManager.Strings.AdaptivePrecision);
 
             InitializeComponent();
 

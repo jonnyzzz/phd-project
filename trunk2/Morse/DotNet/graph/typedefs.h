@@ -1,4 +1,4 @@
-
+\
 #ifndef GRAPH_TYPDEFS_H
 #define GRAPH_TYPDEFS_H
 

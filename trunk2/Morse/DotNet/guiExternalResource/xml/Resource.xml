@@ -4,7 +4,12 @@
 <resources>
 
   <strings>
- 	<string key="data">value</string>
+ 	<string key="CellDivisor">Division</string>
+ 	<string key="AdaptivePrecision">Precision</string>
+ 	<string key="AdaptiveUpperLimit">Division Limit</string>
+ 	<string key="PointsInCell">Points in Cell</string>
+ 	<string key="PointLeftOffset">"Left" Overlap</string>
+ 	<string key="PointRightOffset">"Right" Overlap</string> 	
   </strings>	
   
   

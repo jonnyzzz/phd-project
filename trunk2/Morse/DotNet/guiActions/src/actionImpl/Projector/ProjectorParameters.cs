@@ -2,6 +2,7 @@ using System.ComponentModel;
 using EugenePetrenko.Gui2.Actions.Parameters;
 using EugenePetrenko.Gui2.Controls.Grid;
 using EugenePetrenko.Gui2.Controls.Grid.Rows;
+using EugenePetrenko.Gui2.ExternalResource.Core;
 using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Actions.ActionImpl.Projector
@@ -25,7 +26,7 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.Projector
             // This call is required by the Windows.Forms Form Designer.
             InitializeComponent();
 
-            factor = new IntPlusGridData("Devisor", dimention);
+            factor = new IntPlusGridData(ResourceManager.Strings.CellDivision, dimention);
             exGrid.SetRows(dimention, factor);
         }
 

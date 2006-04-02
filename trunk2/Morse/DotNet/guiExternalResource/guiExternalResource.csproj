@@ -89,6 +89,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Core\IStringResources.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Core\ResourceManager.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

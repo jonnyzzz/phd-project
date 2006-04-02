@@ -42,8 +42,9 @@ namespace EugenePetrenko.Gui2.Application.Forms
             this.Resize += new EventHandler(OnRedesign);
             this.Closed += new EventHandler(OnClosed);
 
-            analisys.DataSource = FillDataTable();
-            redesignGrid();
+			DataView view = CreateTableView();
+            analisys.DataSource = FillDataTable(view);
+            redesignGrid(view);
         }
 
         /// <summary>
@@ -149,8 +150,12 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
         #endregion
 
-        private void redesignGrid()
+        private void redesignGrid(DataView dataView)
         {
+			dataView.AllowDelete = false;
+			dataView.AllowEdit = false;
+			dataView.AllowNew = false;
+
             DataGridTableStyle style = null;
             if (analisys.TableStyles.Count == 0)
             {
@@ -162,9 +167,10 @@ namespace EugenePetrenko.Gui2.Application.Forms
                 style = analisys.TableStyles[0];
             }
 
-            if (!(analisys.DataSource is DataTable)) return;
+            if (!(analisys.DataSource is DataTable)) 
+				return;
 
-            DataTable table = analisys.DataSource as DataTable;
+			DataTable table = dataView.Table;
 
             int w = (int) (analisys.ClientSize.Width*0.90);
 
@@ -173,7 +179,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
                 w -= style.GridColumnStyles[i].Width;
                 style.GridColumnStyles[i].WidthChanged += new EventHandler(OnRedesign);
             }
-            style.RowHeaderWidth = 10;
+//            style.RowHeaderWidth = 10;
             style.AllowSorting = false;
             style.ReadOnly = true;
 
@@ -186,25 +192,25 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
         private void OnRedesign(object sender, EventArgs e)
         {
-            redesignGrid();
+            redesignGrid((DataView) analisys.DataSource);
         }
 
-        private DataTable CreateTable()
+        private DataView CreateTableView()
         {
             DataTable table = new DataTable();
-            table.Columns.Add(new DataColumn("function"));
+            table.Columns.Add(new DataColumn("Component"));
             table.Columns.Add(new DataColumn("Minimal"));
             table.Columns.Add(new DataColumn("Maximal"));
             table.Columns.Add(new DataColumn("Lipshitz"));
 
-            return table;
+            return new DataView(table);
         }
 
-        private DataTable FillDataTable()
+        private DataView FillDataTable(DataView view)
         {
-            DataTable table = CreateTable();
+            DataTable table = view.Table;
 
-            for (int i = 0; i < function.Dimension; i++)
+			for (int i = 0; i < function.Dimension; i++)
             {
                 DataRow row = table.NewRow();
                 row[0] = string.Format("y{0}", i + 1);
@@ -213,7 +219,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
                 row[3] = function.LipshitzConstant[i];
                 table.Rows.Add(row);
             }
-            return table;
+            return view;
         }
 
         private void OnClosed(object sender, EventArgs e)

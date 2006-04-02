@@ -1,3 +1,4 @@
+using System.Xml;
 using EugenePetrenko.Gui2.Kernell2.Node;
 
 namespace EugenePetrenko.Gui2.Kernell2.Constraints
@@ -12,10 +13,13 @@ namespace EugenePetrenko.Gui2.Kernell2.Constraints
         public AndConstraint(params IConstraint[] constraints)
         {
             this.constraints = constraints;
-
         }
 
-        public bool Match(ResultSet resultSet)
+    	public AndConstraint(XmlNode node, ParseConstraints parser) : this(parser(node))
+    	{
+    	}
+
+    	public bool Match(ResultSet resultSet)
         {
             foreach (IConstraint constraint in constraints)
             {

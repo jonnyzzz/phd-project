@@ -130,34 +130,45 @@ namespace EugenePetrenko.Gui2.Kernell2.xml
             }
         }
 
-        private IConstraint ParseConstraint(XmlNode aNode)
-        {
+		private IConstraint ParseConstraint(XmlNode aNode)
+		{
+			return new AndConstraint(aNode, new ParseConstraints(ParseConstraints));
+		}
+
+		private IConstraint[] ParseConstraints(XmlNode aNode) {
             XmlNodeList nodes = aNode.SelectNodes("constraint");
-            if (nodes.Count == 0) return new EmptyConstraint();
+            if (nodes.Count == 0) 
+				return new IConstraint[]{};
 
             ArrayList constraints = new ArrayList();
-
             foreach (XmlNode constraintNode in nodes)
             {
                 string constraintName;
 
                 XmlAttribute attribute = constraintNode.Attributes["class"];
                 if (attribute != null)
-                {
                     constraintName = attribute.Value;
-                }
                 else
-                {
-                    constraintName = "DefaultConstraintFactory";
-                }
+                    throw new ArgumentException("Name of constraint is not defined");
 
                 Type constraintType = Core.Instance.TypeFinder.GetType(constraintName);
-                ConstructorInfo constructor = constraintType.GetConstructor(new Type[] {typeof(XmlNode)});
-                IConstraint constraint = (IConstraint) constructor.Invoke(new object[] {constraintNode});
-                constraints.Add(constraint);
-            }
+                ConstructorInfo constructor = constraintType.GetConstructor(new Type[] {typeof(XmlNode), typeof(ParseConstraints)});
+				if (constructor != null)
+				{
+					IConstraint constraint = (IConstraint) constructor.Invoke(new object[] {constraintNode, new ParseConstraints(ParseConstraints)});
+					constraints.Add(constraint);
+					continue;
+				} 
+				constructor = constraintType.GetConstructor(new Type[] {typeof(XmlNode)});
+				if (constructor != null)
+				{
+					IConstraint constraint = (IConstraint) constructor.Invoke(new object[] {constraintNode});
+					constraints.Add(constraint);
+					continue;
+				}            
+			}
 
-            return new AndConstraint((IConstraint[]) constraints.ToArray(typeof (IConstraint)));
+            return (IConstraint[]) constraints.ToArray(typeof (IConstraint));
         }
 
 

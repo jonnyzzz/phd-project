@@ -73,6 +73,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 							this.menuActions}
 				;
 
+			progressBarAdapter.IsLocked = true;
 			OnDocumentCreated(null);
         }
 
@@ -458,6 +459,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
         public void Lock()
         {
+			progressBarAdapter.IsLocked = false;
 			cachedOpacity = Opacity;
 			cachedCursor = Cursor;
 			opacityTimer.Enabled = true;
@@ -469,6 +471,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
         public void Unlock()
         {
+			progressBarAdapter.IsLocked = true;
 			opacityTimer.Enabled = false;
 			Opacity = cachedOpacity;
 			Cursor = cachedCursor;
@@ -605,10 +608,10 @@ namespace EugenePetrenko.Gui2.Application.Forms
             Document.Document doc = Runner.Runner.Instance.Document;
             if (doc != null)
             {
-                UserComment comment = new UserComment(doc.KernelDocument.Title);
-                if (comment.ShowDialog(this) == DialogResult.OK)
+            	UserCommentForm commentForm = new UserCommentForm(doc.KernelDocument.Title);
+                if (commentForm.ShowDialog(this) == DialogResult.OK)
                 {
-                    doc.KernelDocument.Title = comment.UserCommentText;
+                    doc.KernelDocument.Title = commentForm.UserCommentText;
                 }
             }
         }

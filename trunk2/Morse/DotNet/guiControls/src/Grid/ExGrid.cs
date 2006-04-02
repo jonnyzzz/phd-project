@@ -173,10 +173,19 @@ namespace EugenePetrenko.Gui2.Controls.Grid
 
                 for (int j = 0; j < dimension; j++)
                 {
-                    if (row[j + 1] != null)
-                    {
-                        info[j] = row[j + 1].ToString();
-                    }
+					try 
+					{
+						if (row[j + 1] != null)
+						{
+							info[j] = row[j + 1].ToString();
+						} else 
+							throw new ExGridCellException(j, "Empty parameter at {0}.");
+
+					} catch (ExGridCellException e)
+					{
+						string pos = string.Format("column {0}, row {1}", table.Columns[j+1].Caption, row[0].ToString());
+						throw new ExGridException(e.MessageTemplate,  pos);
+					}
                 }
             }
         }

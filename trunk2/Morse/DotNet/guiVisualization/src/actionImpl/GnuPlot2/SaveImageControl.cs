@@ -65,6 +65,8 @@ namespace EugenePetrenko.Gui2.Visualization.src.actionImpl.GnuPlot2
 		private void InitializeComponent()
 		{
 			this.panelMain = new System.Windows.Forms.Panel();
+			this.panelShowStyle = new System.Windows.Forms.Panel();
+			this.showStyleControl = new EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2.ShowStyleControl();
 			this.panelAdditional = new System.Windows.Forms.Panel();
 			this.additionalSettings = new EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2.AdditionalSettingsControl();
 			this.panelImageSize = new System.Windows.Forms.Panel();
@@ -79,9 +81,8 @@ namespace EugenePetrenko.Gui2.Visualization.src.actionImpl.GnuPlot2
 			this.buttonSelectFileName = new System.Windows.Forms.Button();
 			this.labelFileName = new System.Windows.Forms.Label();
 			this.dialogSave = new System.Windows.Forms.SaveFileDialog();
-			this.panelShowStyle = new System.Windows.Forms.Panel();
-			this.showStyleControl = new EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot2.ShowStyleControl();
 			this.panelMain.SuspendLayout();
+			this.panelShowStyle.SuspendLayout();
 			this.panelAdditional.SuspendLayout();
 			this.panelImageSize.SuspendLayout();
 			this.panelOutputFile.SuspendLayout();
@@ -90,7 +91,6 @@ namespace EugenePetrenko.Gui2.Visualization.src.actionImpl.GnuPlot2
 			this.panelFileName.SuspendLayout();
 			this.panelFileText.SuspendLayout();
 			this.panelFileNameButton.SuspendLayout();
-			this.panelShowStyle.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panelMain
@@ -105,13 +105,31 @@ namespace EugenePetrenko.Gui2.Visualization.src.actionImpl.GnuPlot2
 			this.panelMain.Size = new System.Drawing.Size(424, 376);
 			this.panelMain.TabIndex = 0;
 			// 
+			// panelShowStyle
+			// 
+			this.panelShowStyle.Controls.Add(this.showStyleControl);
+			this.panelShowStyle.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panelShowStyle.DockPadding.All = 5;
+			this.panelShowStyle.Location = new System.Drawing.Point(0, 248);
+			this.panelShowStyle.Name = "panelShowStyle";
+			this.panelShowStyle.Size = new System.Drawing.Size(424, 40);
+			this.panelShowStyle.TabIndex = 3;
+			// 
+			// showStyleControl
+			// 
+			this.showStyleControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.showStyleControl.Location = new System.Drawing.Point(5, 5);
+			this.showStyleControl.Name = "showStyleControl";
+			this.showStyleControl.Size = new System.Drawing.Size(414, 30);
+			this.showStyleControl.TabIndex = 0;
+			// 
 			// panelAdditional
 			// 
 			this.panelAdditional.Controls.Add(this.additionalSettings);
 			this.panelAdditional.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panelAdditional.Location = new System.Drawing.Point(0, 208);
+			this.panelAdditional.Location = new System.Drawing.Point(0, 192);
 			this.panelAdditional.Name = "panelAdditional";
-			this.panelAdditional.Size = new System.Drawing.Size(424, 72);
+			this.panelAdditional.Size = new System.Drawing.Size(424, 56);
 			this.panelAdditional.TabIndex = 2;
 			// 
 			// additionalSettings
@@ -131,7 +149,7 @@ namespace EugenePetrenko.Gui2.Visualization.src.actionImpl.GnuPlot2
 			this.panelImageSize.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelImageSize.Location = new System.Drawing.Point(0, 80);
 			this.panelImageSize.Name = "panelImageSize";
-			this.panelImageSize.Size = new System.Drawing.Size(424, 128);
+			this.panelImageSize.Size = new System.Drawing.Size(424, 112);
 			this.panelImageSize.TabIndex = 1;
 			// 
 			// reduceImageSize
@@ -250,24 +268,6 @@ namespace EugenePetrenko.Gui2.Visualization.src.actionImpl.GnuPlot2
 			this.dialogSave.RestoreDirectory = true;
 			this.dialogSave.Title = "Select filename to save image";
 			// 
-			// panelShowStyle
-			// 
-			this.panelShowStyle.Controls.Add(this.showStyleControl);
-			this.panelShowStyle.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panelShowStyle.DockPadding.All = 5;
-			this.panelShowStyle.Location = new System.Drawing.Point(0, 280);
-			this.panelShowStyle.Name = "panelShowStyle";
-			this.panelShowStyle.Size = new System.Drawing.Size(424, 40);
-			this.panelShowStyle.TabIndex = 3;
-			// 
-			// showStyleControl
-			// 
-			this.showStyleControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.showStyleControl.Location = new System.Drawing.Point(5, 5);
-			this.showStyleControl.Name = "showStyleControl";
-			this.showStyleControl.Size = new System.Drawing.Size(414, 30);
-			this.showStyleControl.TabIndex = 0;
-			// 
 			// SaveImageControl
 			// 
 			this.AutoScroll = true;
@@ -277,6 +277,7 @@ namespace EugenePetrenko.Gui2.Visualization.src.actionImpl.GnuPlot2
 			this.Name = "SaveImageControl";
 			this.Size = new System.Drawing.Size(424, 376);
 			this.panelMain.ResumeLayout(false);
+			this.panelShowStyle.ResumeLayout(false);
 			this.panelAdditional.ResumeLayout(false);
 			this.panelImageSize.ResumeLayout(false);
 			this.panelOutputFile.ResumeLayout(false);
@@ -285,7 +286,6 @@ namespace EugenePetrenko.Gui2.Visualization.src.actionImpl.GnuPlot2
 			this.panelFileName.ResumeLayout(false);
 			this.panelFileText.ResumeLayout(false);
 			this.panelFileNameButton.ResumeLayout(false);
-			this.panelShowStyle.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

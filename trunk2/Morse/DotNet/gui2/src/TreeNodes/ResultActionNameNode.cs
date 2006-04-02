@@ -68,7 +68,7 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
 
 		private void OnRemame()
 		{
-			using( UserComment cmt = new UserComment(NodeCaption)) 
+			using( UserCommentForm cmt = new UserCommentForm(NodeCaption)) 
 			{
 				if (cmt.ShowDialog(Runner.Runner.Instance.ComputationForm) == DialogResult.OK)
 					SetCaption(cmt.UserCommentText);

@@ -49,7 +49,6 @@ protected:
     virtual PointGraphAction NeedDevideEdge(const double* left, const double* right, const double* precision);    
     virtual double EdgeLength(const double* left, const double* right);
     virtual void EdgeLength(const double* left, const double* right, double* lengths);
-
 	virtual void ComputeMiddle(const double* left, const double* right, double* v);
 
 public:
@@ -100,6 +99,7 @@ private:
     double* arraycopy(const double* x);
     void arraycopy(double* to, const double* from);
     Node* AddNodeInternal(double* node);
+
 protected:
     double Abs(double x);
 

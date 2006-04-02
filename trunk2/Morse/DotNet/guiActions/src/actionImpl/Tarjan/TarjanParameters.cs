@@ -40,26 +40,27 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.Tarjan
         /// </summary>
         private void InitializeComponent()
         {
-            this.resolveEdges = new System.Windows.Forms.CheckBox();
-            this.SuspendLayout();
-            // 
-            // resolveEdges
-            // 
-            this.resolveEdges.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.resolveEdges.Location = new System.Drawing.Point(0, 0);
-            this.resolveEdges.Name = "resolveEdges";
-            this.resolveEdges.Size = new System.Drawing.Size(512, 360);
-            this.resolveEdges.TabIndex = 0;
-            this.resolveEdges.Text = "Resolve Edges";
-            // 
-            // TarjanParameters
-            // 
-            this.Controls.Add(this.resolveEdges);
-            this.Name = "TarjanParameters";
-            this.Size = new System.Drawing.Size(512, 360);
-            this.ResumeLayout(false);
+			this.resolveEdges = new System.Windows.Forms.CheckBox();
+			this.SuspendLayout();
+			// 
+			// resolveEdges
+			// 
+			this.resolveEdges.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.resolveEdges.Location = new System.Drawing.Point(5, 5);
+			this.resolveEdges.Name = "resolveEdges";
+			this.resolveEdges.Size = new System.Drawing.Size(222, 102);
+			this.resolveEdges.TabIndex = 0;
+			this.resolveEdges.Text = "Resolve Edges";
+			// 
+			// TarjanParameters
+			// 
+			this.Controls.Add(this.resolveEdges);
+			this.DockPadding.All = 5;
+			this.Name = "TarjanParameters";
+			this.Size = new System.Drawing.Size(232, 112);
+			this.ResumeLayout(false);
 
-        }
+		}
 
         #endregion
 
