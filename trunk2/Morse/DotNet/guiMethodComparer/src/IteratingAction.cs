@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Xml;
 using Eugene.Petrenko.Gui2.MethodComparer.Actions;
 using EugenePetrenko.Gui2.Kernell2.Actions;
 using EugenePetrenko.Gui2.Kernell2.Node;
@@ -18,6 +19,7 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	    private readonly int power;
 	    private readonly ExportToPointsDefinedAction saveAction;
 	    private string name;	
+		
 	
 		private const int UPPER_LIMIT_NODES = 2500000/5; //2.5M * dim = upper_limit
 
@@ -80,6 +82,9 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 			{
 				dumper.GetLogXML().Save(tw);
 			}
+
+			dumper.Parent.AppendLogMessage(dumper.GetLogXMLContent(), Name);
+
             dumper.WriteBuildCommand("cd {0}", saveAction.GlobalPath);
             dumper.WriteBuildCommand("wgnuplot {0}", saveAction.GnuPlotFile);            
             PerformAction(saveAction, ref set);

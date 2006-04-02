@@ -28,7 +28,7 @@ namespace EugenePetrenko.Gui2.Application.Runner
         {
             runner = this;
             this.commandLine = commandLine;
-            isInternal = commandLine.hasKey("Internal");
+            isInternal = commandLine.HasKey("Internal");
             this.core = new Core(IsInternal);
 
             this.computationForm = new ComputationForm();
@@ -42,17 +42,17 @@ namespace EugenePetrenko.Gui2.Application.Runner
 
         protected void Start()
         {
-            if (commandLine.hasKey("resources"))
+            if (commandLine.HasKey("resources"))
             {
-                ResourceManager.SetResourcePath(commandLine.getValue("resources"));
+                ResourceManager.SetResourcePath(commandLine.GetValue("resources"));
             }
             else
             {
                 ResourceManager.SetResourcePath(System.Windows.Forms.Application.StartupPath + @"\resource\");
             }
-            if (commandLine.hasKey("temporary"))
+            if (commandLine.HasKey("temporary"))
             {
-                ResourceManager.SetTemporaryPath(commandLine.getValue("temporary"));
+                ResourceManager.SetTemporaryPath(commandLine.GetValue("temporary"));
             }
             else
             {
@@ -61,19 +61,19 @@ namespace EugenePetrenko.Gui2.Application.Runner
 
             ResourceManager.Start();
 
-            if (!commandLine.hasKey("verbose"))
+            if (!commandLine.HasKey("verbose"))
             {
                 System.Windows.Forms.Application.Run(computationForm);
             }
-            else if (commandLine.hasKey("testMode"))
+            else if (commandLine.HasKey("testMode"))
             {
                 TestMode();
             }
-            else if (commandLine.hasKey("export"))
+            else if (commandLine.HasKey("export"))
             {
-                string[] files = commandLine.getValue("files").Split(';');
-                string output = commandLine.getValue("out");
-                string title = commandLine.getValue("title");
+                string[] files = commandLine.GetValue("files").Split(';');
+                string output = commandLine.GetValue("out");
+                string title = commandLine.GetValue("title");
 
                 Console.Out.WriteLine("Exporting file please wait...");
                 CommandLineFileExporter.ExportFiles(files, output, title);

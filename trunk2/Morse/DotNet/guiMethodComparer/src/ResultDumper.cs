@@ -22,9 +22,11 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	    private StringBuilder logOutput = new StringBuilder();
 		private XmlDocument document;
 		private XmlElement rootElement;
+		private ResultDumpCollector parent;
 
-	    public ResultDumper(IAttachableSimpleWriter output, string id)
+	    public ResultDumper(ResultDumpCollector parent, IAttachableSimpleWriter output, string id)
 	    {	        
+			this.parent = parent;
 	        this.output = output;
 	        this.id = id;
 			document = new XmlDocument();
@@ -33,6 +35,11 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 			document.AppendChild(rootElement);
 	        output.AddHandler(this);
 	    }
+
+		public ResultDumpCollector Parent
+		{
+			get { return parent; }
+		}
 
 		private void WriteArrtibute(XmlElement element, string name, object value)
 		{
@@ -126,6 +133,11 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 			return document;
 		}
 
+		public XmlElement GetLogXMLContent()
+		{
+			return rootElement;
+		}
+
         public void SavingResultsFinished()
         {
             logOutput = new StringBuilder();
@@ -171,7 +183,7 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 		}
 
 	    public void Dispose()
-	    {
+	    {			
 	        output.WriteLine("Finished");
 	        output.RemoveHandler(this);
 	    }

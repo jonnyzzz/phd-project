@@ -248,11 +248,6 @@
                     BuildAction = "Compile"
                 />
                 <File
-                    RelPath = "src\Runner\CommandLineParser.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
                     RelPath = "src\Runner\Runner.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

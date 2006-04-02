@@ -5,7 +5,7 @@
     <caption>Henon Function</caption>
     <Dimension>2</Dimension>
 
-    <NumberOfSteps>12</NumberOfSteps>
+    <NumberOfSteps>99</NumberOfSteps>
 
     <Subdevision>2,2</Subdevision>
     <NumberOfPoints>10,10</NumberOfPoints>
@@ -13,7 +13,7 @@
     <AdaptivePrecisionFactor>2,2</AdaptivePrecisionFactor>
     <LinearUseDerivate>true</LinearUseDerivate>
     <AdaptiveUpperLimit>0</AdaptiveUpperLimit>
-    <NeedResolveEdges>false</NeedResolveEdges>
+    <NeedResolveEdges>true</NeedResolveEdges>
 
     <function>
         <equation>y1=1-1.4*x1*x1+0.3*x2</equation>

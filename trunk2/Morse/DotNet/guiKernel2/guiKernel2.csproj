@@ -223,6 +223,11 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\Container\CommandLineParser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\Container\Core.cs"
                     SubType = "Code"
                     BuildAction = "Compile"

@@ -9,13 +9,14 @@ using EugenePetrenko.Gui2.Kernell2.Container;
 
 namespace Eugene.Petrenko.Gui2.MethodComparer
 {
+
 	public class Runner : IAttachableSimpleWriter
 	{
 	    private ArrayList writers = new ArrayList(); 
 	    private TextWriter logWriter;
 	    private TextWriter batWriter;
 	    
-        public Runner(string path, string[] methods)
+        public Runner(string path, IRunMode mode)
         {
             path = Path.GetFullPath(path);
             
@@ -24,37 +25,14 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
             
             logWriter = File.CreateText(Path.Combine(path, "Log.txt"));
             batWriter = File.CreateText(Path.Combine(path, "build.bat"));
-            
-            Assembly ass = Assembly.GetExecutingAssembly();
-            XmlDocument doc = new XmlDocument();
-
-            using(Stream stream = ass.GetManifestResourceStream("Eugene.Petrenko.Gui2.MethodComparer.xml.Items.xml"))
-                doc.Load(stream);
-
-            XmlNodeList nodes = doc.SelectNodes("items/item");
-            foreach (XmlNode node in nodes)
-            {
-                XmlDocument param = new XmlDocument();
-                using(Stream stream = ass.GetManifestResourceStream(node.Attributes["xml"].Value))                
-                      param.Load(stream);
-
-				bool flag = false;
-            	foreach (string method in methods)
-            	{
-                    if (method.ToUpper() == node.Attributes["name"].Value.ToUpper())
-                    {
-                    	flag = true;
-						break;
-                    }
-            	}
-				if (!flag && methods.Length != 0)
-					continue;
-
-            	IMethodParameters load = MethodParametersSerializer.Load(param);
+                        
+            foreach (XmlDocument task in mode.Items)
+            {			
+            	IMethodParameters load = MethodParametersSerializer.Load(task);
                 
                 logWriter.WriteLine("Processing {0}", load.Caption);
                 logWriter.WriteLine("\r\n Parameters Dump:");
-                logWriter.WriteLine(param.OuterXml);
+				task.Save(logWriter);
                 logWriter.WriteLine("End\r\n\r\n");
                 
                 string pathAd = Path.Combine(path, load.Caption);
@@ -62,9 +40,9 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
                 {
                     Directory.CreateDirectory(pathAd);
                 }
-                ActionPerformer pf = new ActionPerformer(this);                
+                ActionPerformer pf = new ActionPerformer(this, task);
                 IteratedMethodsFactory fac = new IteratedMethodsFactory(load, pathAd);
-                pf.Perform(fac.Task());                
+                pf.Perform(fac.Task(), pathAd);
             }
 
             WriteBuildCommand("cd {0}", path);
@@ -73,18 +51,19 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
             logWriter.Close();
             core.Dispose();
         }
+
+
 	    public static void Main(string[] args)
 	    {
-			if (args.Length > 0) 
-			{
-				ArrayList list = new ArrayList();
-				for (int i=1; i<args.Length; i++) 
-					list.Add(args[i]);
+			CommandLineParser cmd = new CommandLineParser(args);
 
-				new Runner(args[0], (string[]) list.ToArray(typeof(string)) );
-			}
-			else
-				Console.Out.WriteLine("Specify path to run");
+			if (cmd.HasKey("file"))
+			{
+				new Runner(cmd.GetValue("path"), new UserFileRunMode(cmd));
+			} else
+			{
+				new Runner(cmd.GetValue("path"), new PredefinedRunMode(cmd));
+			}			
 	    }
 
 	    public void WriteLine(string format, params object[] data)

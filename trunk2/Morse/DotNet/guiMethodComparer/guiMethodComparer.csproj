@@ -134,7 +134,17 @@
                     BuildAction = "Compile"
                 />
                 <File
+                    RelPath = "src\IRunMode.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
                     RelPath = "src\IteratingAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\PredefinedRunMode.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -150,6 +160,11 @@
                 />
                 <File
                     RelPath = "src\Runner.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\UserFileRunMode.cs"
                     SubType = "Code"
                     BuildAction = "Compile"
                 />
@@ -253,6 +268,10 @@
                 />
                 <File
                     RelPath = "xml\Torsten.xml"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "xml\transpose.xsl"
                     BuildAction = "EmbeddedResource"
                 />
             </Include>
