@@ -186,5 +186,15 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	    {
 	        output.WriteLine("Result set is empty");
 	    }
+
+		public void IterationAbortedTooBigGraph(int i, int power)
+		{
+			output.WriteLine("Iteration process ended due to big number of nodes in graph");
+
+			XmlElement element = document.CreateElement("Iteration_AbortedTooBigGraph");
+			WriteArrtibute(element, "step", i);
+			WriteArrtibute(element, "of", power);
+			rootElement.AppendChild(element);
+		}
 	}
 }

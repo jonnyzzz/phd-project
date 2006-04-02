@@ -2,7 +2,7 @@
 
 <methodComparation>
 
-    <caption>y1=x1+x2+a*x1*(1-x1)</caption>
+    <caption>y1_x1_x2_a_x1_1_x</caption>
     <Dimension>2</Dimension>
 
     <NumberOfSteps>12</NumberOfSteps>

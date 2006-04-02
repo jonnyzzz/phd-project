@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using System.Xml;
 using Eugene.Petrenko.Gui2.MethodComparer.Actions;
 using EugenePetrenko.Gui2.Kernell2.Actions;
 using EugenePetrenko.Gui2.Kernell2.Node;
+using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace Eugene.Petrenko.Gui2.MethodComparer
 {
@@ -17,7 +17,9 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 		private readonly ResultSet resultSet;
 	    private readonly int power;
 	    private readonly ExportToPointsDefinedAction saveAction;
-	    private string name;		
+	    private string name;	
+	
+		private const int UPPER_LIMIT_NODES = 2500000/5; //2.5M * dim = upper_limit
 
 		public IteratingAction(ResultSet resultSet, string name, int power, ExportToPointsDefinedAction saveAction, params IDefinedAction[] actions)
 		{
@@ -61,6 +63,11 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
                     GC.Collect();
                 }
                 dumper.IterationFinished(i, power);
+				if (!CheckUpperLimit(set)) 	
+				{
+					dumper.IterationAbortedTooBigGraph(i, power);
+					break;
+				}
             }
             dumper.SavingResultsStarted();
             
@@ -82,6 +89,21 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 
             return set;
         }
+
+		private bool CheckUpperLimit(ResultSet set)
+		{
+			foreach (IResult result in set)
+			{
+				IGraphResult graphResult = result as IGraphResult;
+				if (graphResult != null) 
+				{
+					IGraphInfo info = graphResult.GetGraphInfo();
+					if (info.GetNodes()/info.GetDimension() > UPPER_LIMIT_NODES) 
+						return false;
+				}
+			}
+			return true;
+		}
 
 	    private static void PerformAction(IDefinedAction action, ref ResultSet set)
 	    {
