@@ -452,7 +452,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
     	private void opacityTick(object sender, System.EventArgs e)
 		{
 			opacityTimer.Enabled = false;
-			this.Opacity -= 0.03; 
+			this.Opacity -= 0.003; 
 			if (this.Opacity > 0.5)
 				opacityTimer.Enabled = true;
 		}		
@@ -638,8 +638,8 @@ namespace EugenePetrenko.Gui2.Application.Forms
 					menuActions.Enabled = false;
 				else 
 				{
-					menuActions.Enabled = true;
 					menuActions.MenuItems.AddRange(items);
+					menuActions.Enabled = true;
 				}
 			}
 		}

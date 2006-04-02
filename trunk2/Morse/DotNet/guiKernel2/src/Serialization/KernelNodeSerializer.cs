@@ -23,8 +23,6 @@ namespace EugenePetrenko.Gui2.Kernell2.Serialization
 
             TempFileAllocator allocator = ResourceManager.Instance.TempFileAllocator;
 
-            //if (!node.Results.Match("IGraphResult", "IResultMetadata")) throw new SerializationException("Not implemented");
-
             try
             {
                 foreach (IResult result in node.Results.ToResults)
@@ -46,10 +44,17 @@ namespace EugenePetrenko.Gui2.Kernell2.Serialization
             return baseNode;
         }
 
+		private const string GRAPH_RESULT_TYPE = "GraphResult";
+		private const string SPECTRUM_TYPE = "Spectrum";
+
         private static void SaveResult(XmlDocument doc, XmlNode xmlNode, TempFileAllocator allocator, IGraphResult result, String pathBase)
         {
             XmlNode myNode = doc.CreateElement("result");
             xmlNode.AppendChild(myNode);
+
+			XmlAttribute type = doc.CreateAttribute("type");
+			type.Value = GRAPH_RESULT_TYPE;
+			myNode.Attributes.Append(type);
 
             string file = allocator.CreateFileName("dsif.data");
             result.SaveGraph(ResourceManager.Instance.SimplyfyPath(pathBase + "/" + file));
@@ -70,62 +75,69 @@ namespace EugenePetrenko.Gui2.Kernell2.Serialization
             SaveResultMetadata(result.GetMetadata(), myMetadataNode, doc, pathBase);
         }
 
-        private static XmlAttribute CreateFilledAttribute(XmlDocument doc, string name, string value)
+        private static XmlAttribute CreateFilledAttribute(XmlDocument doc, string name, object value)
         {
             XmlAttribute attr = doc.CreateAttribute(name);
-            attr.Value = value;
+            attr.Value = value.ToString();
             return attr;
         }
 
 
         private static void SaveResult(XmlDocument doc, XmlNode xmlNode, ISpectrumResult result, String pathBase)
         {
-            XmlNode myNode = doc.CreateElement("spectrum");
-            xmlNode.AppendChild(myNode);
+            XmlNode node = doc.CreateElement("result");
+            xmlNode.AppendChild(node);
 
-            xmlNode.Attributes.Append(CreateFilledAttribute(doc, "MinValue", result.GetLowerBound().ToString()));
-            xmlNode.Attributes.Append(CreateFilledAttribute(doc, "MinLength", result.GetLowerLength().ToString()));
-            xmlNode.Attributes.Append(CreateFilledAttribute(doc, "MaxValue", result.GetUpperBound().ToString()));
-            xmlNode.Attributes.Append(CreateFilledAttribute(doc, "MaxLength", result.GetUpperLength().ToString()));
+			XmlAttribute type = doc.CreateAttribute("type");
+			type.Value = SPECTRUM_TYPE;
+			node.Attributes.Append(type);
 
-            XmlNode myMetadataNode = doc.CreateElement("metadata");
-            myNode.AppendChild(myMetadataNode);
 
-            SaveResultMetadata(result.GetMetadata(), myMetadataNode, doc, pathBase);
+            node.Attributes.Append(CreateFilledAttribute(doc, "MinValue", result.GetLowerBound()));
+            node.Attributes.Append(CreateFilledAttribute(doc, "MinLength", result.GetLowerLength()));
+            node.Attributes.Append(CreateFilledAttribute(doc, "MaxValue", result.GetUpperBound()));
+            node.Attributes.Append(CreateFilledAttribute(doc, "MaxLength", result.GetUpperLength()));
+
+            XmlNode metadataNode = doc.CreateElement("metadata");            
+            SaveResultMetadata(result.GetMetadata(), metadataNode, doc, pathBase);
+			node.AppendChild(metadataNode);
         }
+
+		private const string MS2_METADATA = "IMS2Metadata";
+		private const string MS2_METADATA_SIGRAPH = "HasSIGraph";
+		private const string SI_METADATA = "ISymbolicImageMetadata";
+		private const string SPECTRUM_METADATA = "ISpectrumMetadata";
+		private const string MSANGLE_METADATA = "IMSAngleMetadata";
 
         private static void SaveResultMetadata(IResultMetadata metadata, XmlNode node, XmlDocument doc, string pathBase)
         {
-            if (metadata is ISymbolicImageMetadata)
-            {
-                XmlNode xmlNode = node;
-                XmlAttribute attr = doc.CreateAttribute("type");
-                attr.Value = "ISymbolicImageMetadata";
+			XmlAttribute attr = doc.CreateAttribute("type");
+			node.Attributes.Append(attr);
 
-                xmlNode.Attributes.Append(attr);
-            }
-            else if (metadata is IMS2Metadata)
-            {
-                XmlAttribute attr = doc.CreateAttribute("type");
-                attr.Value = "IMS2Metadata";
+			if (metadata is ISymbolicImageMetadata)
+				attr.Value = SI_METADATA;
+			else if (metadata is IMS2Metadata)
+			{
+				attr.Value = MS2_METADATA;
+				XmlAttribute attr2 = doc.CreateAttribute(MS2_METADATA_SIGRAPH);
 
-                node.Attributes.Append(attr);
-
-                IMS2Metadata ms = (IMS2Metadata) metadata;
-                KernelNode tmpNode = new KernelNode(ResultSet.FromResultSet(ms.GetSIGraphResult()));
-
-                node.AppendChild(SaveKernelNode(tmpNode, doc, pathBase));
-            }
-            else if (metadata is ISpectrumMetadata)
-            {
-                XmlNode xmlNode = node;
-                XmlAttribute attr = doc.CreateAttribute("type");
-                attr.Value = "ISpectrumMetadata";
-
-                xmlNode.Attributes.Append(attr);
-            }
-            else
-            {
+				IMS2Metadata ms = (IMS2Metadata) metadata;
+				if (ms.HasSIGraphResult()) {
+					KernelNode tmpNode = new KernelNode(ResultSet.FromResultSet(ms.GetSIGraphResult()));
+					node.AppendChild(SaveKernelNode(tmpNode, doc, pathBase));
+					attr2.Value = "true";
+				} else
+				{
+					attr2.Value = "false";
+				}
+				node.Attributes.Append(attr2);
+        	}
+        	else if (metadata is ISpectrumMetadata)
+        		attr.Value = SPECTRUM_METADATA;
+        	else if (metadata is IMSAngleMetadata)
+        		attr.Value = MSANGLE_METADATA;
+        	else
+        	{
                 throw new SerializationException("Unable to save Metadata info");
             }
         }
@@ -151,7 +163,9 @@ namespace EugenePetrenko.Gui2.Kernell2.Serialization
 
         private static IResult LoadResult(XmlNode root, string pathBase)
         {
-            if (root.Name == "result")
+			XmlAttribute type = root.Attributes["type"];
+
+            if (type == null || type.Value == GRAPH_RESULT_TYPE)
             {
                 String filename = root.Attributes["filename"].Value;
                 bool isStrong = Boolean.Parse(root.Attributes["isStrongComponent"].Value);
@@ -163,7 +177,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Serialization
 
                 return impl;
             }
-            else if (root.Name == "spectrum")
+            else if (type.Value == SPECTRUM_TYPE)
             {
                 IWritableSpectrumResult wsr = new CSpectrumResultImplClass();
                 wsr.SetMetadata(LoadResultMetadata(root.SelectSingleNode("metadata"), pathBase));
@@ -184,15 +198,21 @@ namespace EugenePetrenko.Gui2.Kernell2.Serialization
 
             switch (metadata.Attributes["type"].Value)
             {
-                case "ISymbolicImageMetadata":
+                case SI_METADATA:
                     return new CSymbolicImageMetadataClass();
-                case "ISpectrumMetadata":
+                case SPECTRUM_METADATA:
                     return new CSpectrumMetadataClass();
-                case "IMS2Metadata":
+                case MS2_METADATA:
                     IMS2Metadata meta = new CMS2MetadataClass();
-                    KernelNode node = LoadKernelNode(metadata, pathBase);
-                    meta.SetSIGraphResult(node.Results.ToResultSet);
+					if (metadata.Attributes[MS2_METADATA_SIGRAPH] != null 
+						&& metadata.Attributes[MS2_METADATA_SIGRAPH].Value == "true") 
+					{
+						KernelNode node = LoadKernelNode(metadata, pathBase);
+						meta.SetSIGraphResult(node.Results.ToResultSet);
+					}
                     return meta;
+				case MSANGLE_METADATA:
+					return new CMSAngleMetadataClass();
                 default:
                     throw new SerializationException("Unsupported metadata type");
             }

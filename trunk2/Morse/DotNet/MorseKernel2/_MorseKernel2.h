@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Apr 02 14:00:29 2006
+/* at Sun Apr 02 15:55:37 2006
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -457,6 +457,18 @@ typedef interface IMSMethodAction IMSMethodAction;
 #define __IMSSegmentRom_FWD_DEFINED__
 typedef interface IMSSegmentRom IMSSegmentRom;
 #endif 	/* __IMSSegmentRom_FWD_DEFINED__ */
+
+
+#ifndef __IResultPersistantManager_FWD_DEFINED__
+#define __IResultPersistantManager_FWD_DEFINED__
+typedef interface IResultPersistantManager IResultPersistantManager;
+#endif 	/* __IResultPersistantManager_FWD_DEFINED__ */
+
+
+#ifndef __IMetadataPersistantManager_FWD_DEFINED__
+#define __IMetadataPersistantManager_FWD_DEFINED__
+typedef interface IMetadataPersistantManager IMetadataPersistantManager;
+#endif 	/* __IMetadataPersistantManager_FWD_DEFINED__ */
 
 
 #ifndef __CAdaptiveBoxMethod_FWD_DEFINED__
@@ -913,6 +925,18 @@ typedef struct CMSSegmentRom CMSSegmentRom;
 #endif /* __cplusplus */
 
 #endif 	/* __CMSSegmentRom_FWD_DEFINED__ */
+
+
+#ifndef __CPersistantManager_FWD_DEFINED__
+#define __CPersistantManager_FWD_DEFINED__
+
+#ifdef __cplusplus
+typedef class CPersistantManager CPersistantManager;
+#else
+typedef struct CPersistantManager CPersistantManager;
+#endif /* __cplusplus */
+
+#endif 	/* __CPersistantManager_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -11594,6 +11618,226 @@ EXTERN_C const IID IID_IMSSegmentRom;
 #endif 	/* __IMSSegmentRom_INTERFACE_DEFINED__ */
 
 
+#ifndef __IResultPersistantManager_INTERFACE_DEFINED__
+#define __IResultPersistantManager_INTERFACE_DEFINED__
+
+/* interface IResultPersistantManager */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IResultPersistantManager;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("7750D060-BA83-45FE-8E6C-C8437F7340E8")
+    IResultPersistantManager : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IResultPersistantManagerVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IResultPersistantManager * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IResultPersistantManager * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IResultPersistantManager * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IResultPersistantManager * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IResultPersistantManager * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IResultPersistantManager * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IResultPersistantManager * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IResultPersistantManagerVtbl;
+
+    interface IResultPersistantManager
+    {
+        CONST_VTBL struct IResultPersistantManagerVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IResultPersistantManager_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IResultPersistantManager_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IResultPersistantManager_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IResultPersistantManager_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IResultPersistantManager_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IResultPersistantManager_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IResultPersistantManager_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IResultPersistantManager_INTERFACE_DEFINED__ */
+
+
+#ifndef __IMetadataPersistantManager_INTERFACE_DEFINED__
+#define __IMetadataPersistantManager_INTERFACE_DEFINED__
+
+/* interface IMetadataPersistantManager */
+/* [unique][helpstring][dual][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IMetadataPersistantManager;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("40D91BB9-1AFF-43CE-B0D8-ED857119D0B7")
+    IMetadataPersistantManager : public IDispatch
+    {
+    public:
+    };
+    
+#else 	/* C style interface */
+
+    typedef struct IMetadataPersistantManagerVtbl
+    {
+        BEGIN_INTERFACE
+        
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IMetadataPersistantManager * This,
+            /* [in] */ REFIID riid,
+            /* [iid_is][out] */ void **ppvObject);
+        
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IMetadataPersistantManager * This);
+        
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IMetadataPersistantManager * This);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
+            IMetadataPersistantManager * This,
+            /* [out] */ UINT *pctinfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
+            IMetadataPersistantManager * This,
+            /* [in] */ UINT iTInfo,
+            /* [in] */ LCID lcid,
+            /* [out] */ ITypeInfo **ppTInfo);
+        
+        HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
+            IMetadataPersistantManager * This,
+            /* [in] */ REFIID riid,
+            /* [size_is][in] */ LPOLESTR *rgszNames,
+            /* [in] */ UINT cNames,
+            /* [in] */ LCID lcid,
+            /* [size_is][out] */ DISPID *rgDispId);
+        
+        /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
+            IMetadataPersistantManager * This,
+            /* [in] */ DISPID dispIdMember,
+            /* [in] */ REFIID riid,
+            /* [in] */ LCID lcid,
+            /* [in] */ WORD wFlags,
+            /* [out][in] */ DISPPARAMS *pDispParams,
+            /* [out] */ VARIANT *pVarResult,
+            /* [out] */ EXCEPINFO *pExcepInfo,
+            /* [out] */ UINT *puArgErr);
+        
+        END_INTERFACE
+    } IMetadataPersistantManagerVtbl;
+
+    interface IMetadataPersistantManager
+    {
+        CONST_VTBL struct IMetadataPersistantManagerVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IMetadataPersistantManager_QueryInterface(This,riid,ppvObject)	\
+    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+
+#define IMetadataPersistantManager_AddRef(This)	\
+    (This)->lpVtbl -> AddRef(This)
+
+#define IMetadataPersistantManager_Release(This)	\
+    (This)->lpVtbl -> Release(This)
+
+
+#define IMetadataPersistantManager_GetTypeInfoCount(This,pctinfo)	\
+    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+
+#define IMetadataPersistantManager_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
+    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+
+#define IMetadataPersistantManager_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
+    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+
+#define IMetadataPersistantManager_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
+    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IMetadataPersistantManager_INTERFACE_DEFINED__ */
+
+
 
 #ifndef __MorseKernel2_LIBRARY_DEFINED__
 #define __MorseKernel2_LIBRARY_DEFINED__
@@ -11906,6 +12150,14 @@ EXTERN_C const CLSID CLSID_CMSSegmentRom;
 
 class DECLSPEC_UUID("91A82ACA-C380-49C9-8A38-BBD68858100B")
 CMSSegmentRom;
+#endif
+
+EXTERN_C const CLSID CLSID_CPersistantManager;
+
+#ifdef __cplusplus
+
+class DECLSPEC_UUID("54D9CE4E-C1BD-46D2-A7FD-64B5A04A7CBD")
+CPersistantManager;
 #endif
 #endif /* __MorseKernel2_LIBRARY_DEFINED__ */
 

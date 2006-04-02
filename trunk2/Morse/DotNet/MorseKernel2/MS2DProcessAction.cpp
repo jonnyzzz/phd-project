@@ -71,22 +71,23 @@ STDMETHODIMP CMS2DProcessAction::Do(IResultSet* in, IResultSet **out) {
     SmartInterface<IMS2Metadata> metadata;
     GraphResultUtil::GetMetadataClonedEx(in, metadata.extract());
     
-    GraphResultGraphIterator it(in);
-    
-    MS2DAngleFunction msFucntion(func);
+    GraphResultGraphIterator it(in);    
+	MS2DAngleFunction* msFucntion = new MS2DAngleFunction(func);
 
     VARIANT_BOOL hasOrig;
     hr = metadata->HasSIGraphResult(&hasOrig);
     AbstractProcess* process;
-    if (hasOrig == VARIANT_TRUE && factor[0] == 1 && factor[1] == 1) {
+
+    if (hasOrig == VARIANT_TRUE && factor[0] == 1 && factor[1] == 1 && false) {
         SmartInterface<IResultSet> original;
         metadata->GetSIGraphResult(original.extract());    
+
         GraphSet graph = GraphResultUtil::GetGraphs(original);
-        process = new MS2DBoxProcess(&msFucntion, it, graph, factor, &pinfo);
+        process = new MS2DBoxProcess(msFucntion, it, graph, factor, &pinfo);
         cout<<"Using original base method\n";
     } else {
         metadata->SetSIGraphResult(NULL);
-        process = new MS2DSIBoxProcess(&msFucntion, it, factor, &pinfo);
+        process = new MS2DSIBoxProcess(msFucntion, it, factor, &pinfo);
         cout<<"Using ordinary box method\n";
     }
     
@@ -94,6 +95,7 @@ STDMETHODIMP CMS2DProcessAction::Do(IResultSet* in, IResultSet **out) {
     ATLASSERT(*out != NULL);
 
     delete process;
+	delete msFucntion;
     delete func;
 
     return S_OK;

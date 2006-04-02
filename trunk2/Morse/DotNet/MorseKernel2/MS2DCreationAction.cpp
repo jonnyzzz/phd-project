@@ -85,7 +85,7 @@ STDMETHODIMP CMS2DCreationAction::Do(IResultSet* in, IResultSet **out) {
     SmartInterface<IMS2Metadata> metadata;
     
     CMS2Metadata::CreateInstance(metadata.extract());
-    if (factor[0] == 1 && factor[1] == 1 && GraphResultUtil::ContainsGraphOnly(in, true)) {
+    if (false && factor[0] == 1 && factor[1] == 1 && GraphResultUtil::ContainsGraphOnly(in, true)) {
         metadata->SetSIGraphResult(in);
     }
 

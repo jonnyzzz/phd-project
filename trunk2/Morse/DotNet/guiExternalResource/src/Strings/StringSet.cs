@@ -20,7 +20,7 @@ namespace EugenePetrenko.Gui2.ExternalResource.Strings
         {
             if (strings.ContainsKey(key.ToLower())) 
 				throw new DataException("Key duplications");
-            strings[key] = value;
+            strings[key.ToLower()] = value;
         }
 
 

@@ -937,6 +937,28 @@ interface IMSMethodAction : IPointMethodAction {
 interface IMSSegmentRom : IAction {
 };
 
+[
+	object,
+	uuid(7750D060-BA83-45FE-8E6C-C8437F7340E8),
+	dual,
+	helpstring("IPersistantManager Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\persistantmanager.h"
+interface IResultPersistantManager : IDispatch {
+};
+
+[
+	object,
+	uuid(40D91BB9-1AFF-43CE-B0D8-ED857119D0B7),
+	dual,
+	helpstring("IPersistantManager Interface"),
+	pointer_default(unique)
+] 
+#line 29 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\persistantmanager.h"
+interface IMetadataPersistantManager : IDispatch {
+};
+
 
 [ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}"), helpstring("MorseKernel2 1.0 Type Library") ]
 library MorseKernel2
@@ -1432,6 +1454,17 @@ library MorseKernel2
 		interface IMSSegmentRom;
 		interface IAction;
 		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(54D9CE4E-C1BD-46D2-A7FD-64B5A04A7CBD),
+		helpstring("PersistantManager Class")
+	] 
+#line 49 "e:\\projects\\morse\\dotnetproject\\morse\\dotnet\\morsekernel2\\persistantmanager.h"
+	coclass CPersistantManager {
+		interface IResultPersistantManager;
+		interface IMetadataPersistantManager;
 	};
 
 }

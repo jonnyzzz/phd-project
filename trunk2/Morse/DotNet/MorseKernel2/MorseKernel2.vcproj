@@ -311,6 +311,9 @@
 				RelativePath=".\Parameters.cpp">
 			</File>
 			<File
+				RelativePath=".\PersistantManager.cpp">
+			</File>
+			<File
 				RelativePath=".\PointMethodAction.cpp">
 			</File>
 			<File
@@ -530,6 +533,9 @@
 			</File>
 			<File
 				RelativePath=".\Parameters.h">
+			</File>
+			<File
+				RelativePath=".\PersistantManager.h">
 			</File>
 			<File
 				RelativePath=".\PointMethodAction.h">

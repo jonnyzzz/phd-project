@@ -132,8 +132,9 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
         {
             TreeNode node = tree.GetNodeAt(e.X, e.Y);
             if (node is ComputationNode && e.Button == MouseButtons.Right)
-            {
+            {				
             	ShowPopupMenu((ComputationNode) node, new Point(e.X, e.Y));
+				tree.SelectedNode = node;				
             }
         }
 
@@ -189,7 +190,7 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
 					{
 						tree.Nodes.Add(root);
 					}
-				} catch {throw; } 
+				}
 				finally
 				{
 					tree.EndUpdate();

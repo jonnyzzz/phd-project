@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 6.00.0361 */
-/* at Sun Apr 02 14:00:29 2006
+/* at Sun Apr 02 15:55:37 2006
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -543,6 +543,20 @@ extern const MIDL_STUB_DESC Object_StubDesc;
 
 extern const MIDL_SERVER_INFO IMSSegmentRom_ServerInfo;
 extern const MIDL_STUBLESS_PROXY_INFO IMSSegmentRom_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IResultPersistantManager_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IResultPersistantManager_ProxyInfo;
+
+
+extern const MIDL_STUB_DESC Object_StubDesc;
+
+
+extern const MIDL_SERVER_INFO IMetadataPersistantManager_ServerInfo;
+extern const MIDL_STUBLESS_PROXY_INFO IMetadataPersistantManager_ProxyInfo;
 
 
 extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TABLE_SIZE ];
@@ -9035,6 +9049,138 @@ CInterfaceStubVtbl _IMSSegmentRomStubVtbl =
     CStdStubBuffer_DELEGATING_METHODS
 };
 
+
+/* Object interface: IResultPersistantManager, ver. 0.0,
+   GUID={0x7750D060,0xBA83,0x45FE,{0x8E,0x6C,0xC8,0x43,0x7F,0x73,0x40,0xE8}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IResultPersistantManager_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IResultPersistantManager_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IResultPersistantManager_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IResultPersistantManager_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IResultPersistantManager_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IResultPersistantManagerProxyVtbl = 
+{
+    0,
+    &IID_IResultPersistantManager,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IResultPersistantManager_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IResultPersistantManagerStubVtbl =
+{
+    &IID_IResultPersistantManager,
+    &IResultPersistantManager_ServerInfo,
+    7,
+    &IResultPersistantManager_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
+
+/* Object interface: IMetadataPersistantManager, ver. 0.0,
+   GUID={0x40D91BB9,0x1AFF,0x43CE,{0xB0,0xD8,0xED,0x85,0x71,0x19,0xD0,0xB7}} */
+
+#pragma code_seg(".orpc")
+static const unsigned short IMetadataPersistantManager_FormatStringOffsetTable[] =
+    {
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    (unsigned short) -1,
+    0
+    };
+
+static const MIDL_STUBLESS_PROXY_INFO IMetadataPersistantManager_ProxyInfo =
+    {
+    &Object_StubDesc,
+    __MIDL_ProcFormatString.Format,
+    &IMetadataPersistantManager_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0
+    };
+
+
+static const MIDL_SERVER_INFO IMetadataPersistantManager_ServerInfo = 
+    {
+    &Object_StubDesc,
+    0,
+    __MIDL_ProcFormatString.Format,
+    &IMetadataPersistantManager_FormatStringOffsetTable[-3],
+    0,
+    0,
+    0,
+    0};
+CINTERFACE_PROXY_VTABLE(7) _IMetadataPersistantManagerProxyVtbl = 
+{
+    0,
+    &IID_IMetadataPersistantManager,
+    IUnknown_QueryInterface_Proxy,
+    IUnknown_AddRef_Proxy,
+    IUnknown_Release_Proxy ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfoCount */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetTypeInfo */ ,
+    0 /* (void *) (INT_PTR) -1 /* IDispatch::GetIDsOfNames */ ,
+    0 /* IDispatch_Invoke_Proxy */
+};
+
+
+static const PRPC_STUB_FUNCTION IMetadataPersistantManager_table[] =
+{
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION,
+    STUB_FORWARDING_FUNCTION
+};
+
+CInterfaceStubVtbl _IMetadataPersistantManagerStubVtbl =
+{
+    &IID_IMetadataPersistantManager,
+    &IMetadataPersistantManager_ServerInfo,
+    7,
+    &IMetadataPersistantManager_table[-3],
+    CStdStubBuffer_DELEGATING_METHODS
+};
+
 static const MIDL_STUB_DESC Object_StubDesc = 
     {
     0,
@@ -9082,6 +9228,7 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
     ( CInterfaceProxyVtbl *) &_IDummyProxyVtbl,
     ( CInterfaceProxyVtbl *) &_ISymbolicImageMetadataProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IMS2DCreationParametersProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IResultPersistantManagerProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IGraphInfoProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IGraphResultProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IParametersProxyVtbl,
@@ -9097,6 +9244,7 @@ const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] =
     ( CInterfaceProxyVtbl *) &_IWritableResultSetProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IIsolatedSetParametersProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IMSSegmentMetadataProxyVtbl,
+    ( CInterfaceProxyVtbl *) &_IMetadataPersistantManagerProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IGraphResultImplProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IMSMetadataProxyVtbl,
     ( CInterfaceProxyVtbl *) &_IPointMethodParametersProxyVtbl,
@@ -9155,6 +9303,7 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
     ( CInterfaceStubVtbl *) &_IDummyStubVtbl,
     ( CInterfaceStubVtbl *) &_ISymbolicImageMetadataStubVtbl,
     ( CInterfaceStubVtbl *) &_IMS2DCreationParametersStubVtbl,
+    ( CInterfaceStubVtbl *) &_IResultPersistantManagerStubVtbl,
     ( CInterfaceStubVtbl *) &_IGraphInfoStubVtbl,
     ( CInterfaceStubVtbl *) &_IGraphResultStubVtbl,
     ( CInterfaceStubVtbl *) &_IParametersStubVtbl,
@@ -9170,6 +9319,7 @@ const CInterfaceStubVtbl * __MorseKernel2_StubVtblList[] =
     ( CInterfaceStubVtbl *) &_IWritableResultSetStubVtbl,
     ( CInterfaceStubVtbl *) &_IIsolatedSetParametersStubVtbl,
     ( CInterfaceStubVtbl *) &_IMSSegmentMetadataStubVtbl,
+    ( CInterfaceStubVtbl *) &_IMetadataPersistantManagerStubVtbl,
     ( CInterfaceStubVtbl *) &_IGraphResultImplStubVtbl,
     ( CInterfaceStubVtbl *) &_IMSMetadataStubVtbl,
     ( CInterfaceStubVtbl *) &_IPointMethodParametersStubVtbl,
@@ -9228,6 +9378,7 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
     "IDummy",
     "ISymbolicImageMetadata",
     "IMS2DCreationParameters",
+    "IResultPersistantManager",
     "IGraphInfo",
     "IGraphResult",
     "IParameters",
@@ -9243,6 +9394,7 @@ PCInterfaceName const __MorseKernel2_InterfaceNamesList[] =
     "IWritableResultSet",
     "IIsolatedSetParameters",
     "IMSSegmentMetadata",
+    "IMetadataPersistantManager",
     "IGraphResultImpl",
     "IMSMetadata",
     "IPointMethodParameters",
@@ -9348,6 +9500,8 @@ const IID *  __MorseKernel2_BaseIIDList[] =
     &IID_IDispatch,
     &IID_IDispatch,
     &IID_IDispatch,
+    &IID_IDispatch,
+    &IID_IDispatch,
     0
 };
 
@@ -9358,14 +9512,14 @@ int __stdcall __MorseKernel2_IID_Lookup( const IID * pIID, int * pIndex )
 {
     IID_BS_LOOKUP_SETUP
 
-    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 68, 64 )
+    IID_BS_LOOKUP_INITIAL_TEST( __MorseKernel2, 70, 64 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 32 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 16 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 8 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 4 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 2 )
     IID_BS_LOOKUP_NEXT_TEST( __MorseKernel2, 1 )
-    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 68, *pIndex )
+    IID_BS_LOOKUP_RETURN_RESULT( __MorseKernel2, 70, *pIndex )
     
 }
 
@@ -9376,7 +9530,7 @@ const ExtendedProxyFileInfo _MorseKernel2_ProxyFileInfo =
     (const PCInterfaceName * ) & __MorseKernel2_InterfaceNamesList,
     (const IID ** ) & __MorseKernel2_BaseIIDList,
     & __MorseKernel2_IID_Lookup, 
-    68,
+    70,
     2,
     0, /* table of [async_uuid] interfaces */
     0, /* Filler1 */
