@@ -267,6 +267,10 @@
                     BuildAction = "EmbeddedResource"
                 />
                 <File
+                    RelPath = "xml\Julia2.xml"
+                    BuildAction = "Content"
+                />
+                <File
                     RelPath = "xml\Torsten.xml"
                     BuildAction = "EmbeddedResource"
                 />

@@ -5,7 +5,7 @@
     <caption>Henon Function</caption>
     <Dimension>2</Dimension>
 
-    <NumberOfSteps>99</NumberOfSteps>
+    <NumberOfSteps>14</NumberOfSteps>
 
     <Subdevision>2,2</Subdevision>
     <NumberOfPoints>10,10</NumberOfPoints>

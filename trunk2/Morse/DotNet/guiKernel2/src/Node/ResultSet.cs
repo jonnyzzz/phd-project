@@ -208,5 +208,10 @@ namespace EugenePetrenko.Gui2.Kernell2.Node
         {
             return this.results.GetEnumerator();
         }
+
+		public ICollection GetCollection()
+		{
+			return this.results;
+		}
     }
 }

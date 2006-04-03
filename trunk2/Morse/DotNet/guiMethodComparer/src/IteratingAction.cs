@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.IO;
 using System.Xml;
 using Eugene.Petrenko.Gui2.MethodComparer.Actions;
@@ -87,7 +88,7 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 
             dumper.WriteBuildCommand("cd {0}", saveAction.GlobalPath);
             dumper.WriteBuildCommand("wgnuplot {0}", saveAction.GnuPlotFile);            
-            PerformAction(saveAction, ref set);
+            PerformSaveAction(saveAction, ref set);
 
             dumper.SavingResultsFinished();
             dumper.DoFinished();
@@ -97,17 +98,18 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 
 		private bool CheckUpperLimit(ResultSet set)
 		{
-			foreach (IResult result in set)
-			{
-				IGraphResult graphResult = result as IGraphResult;
-				if (graphResult != null) 
-				{
-					IGraphInfo info = graphResult.GetGraphInfo();
-					if (info.GetNodes()/info.GetDimension() > UPPER_LIMIT_NODES) 
-						return false;
-				}
-			}
 			return true;
+//			foreach (IResult result in set)
+//			{
+//				IGraphResult graphResult = result as IGraphResult;
+//				if (graphResult != null) 
+//				{
+//					IGraphInfo info = graphResult.GetGraphInfo();
+//					if (info.GetNodes()/info.GetDimension() > UPPER_LIMIT_NODES) 
+//						return false;
+//				}
+//			}
+//			return true;
 		}
 
 	    private static void PerformAction(IDefinedAction action, ref ResultSet set)
@@ -115,5 +117,36 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	        ActionWrapper wrapper = new ActionWrapper(action.Action, action.GetParameters(set), action.Name);
 	        set = wrapper.Do(set, new ProgressBarInfo(new EmptyProgressBarListener()));
 	    }
+
+		
+		private static void PerformSaveAction(ExportToPointsDefinedAction action, ref ResultSet set)
+		{
+			ArrayList results = new ArrayList(set.GetCollection());
+			results.Sort(new ResultSetComparer());
+			set = ResultSet.FromResult((IResultBase[]) results.ToArray(typeof(IResult)));
+			PerformAction(action, ref set);
+		}
+
+		private class ResultSetComparer : IComparer
+		{
+			public int Compare(object x, object y)
+			{
+				if (ReferenceEquals(x,y))
+					return 0;
+
+				IGraphResult gX = (IGraphResult) x;
+				IGraphResult gY = (IGraphResult) y;
+
+				int vX = gX.GetGraphInfo().GetNodes();
+				int vY = gY.GetGraphInfo().GetNodes();
+
+				if (vX > vY)
+					return -1;
+				if (vX < vY)
+					return 1;
+				
+				return 0;
+			}
+		}
 	}
 }

@@ -11,7 +11,7 @@
     <AdaptivePrecisionFactor>2,2</AdaptivePrecisionFactor>
     <LinearUseDerivate>true</LinearUseDerivate>
     <AdaptiveUpperLimit>0</AdaptiveUpperLimit>
-    <NeedResolveEdges>false</NeedResolveEdges>
+    <NeedResolveEdges>true</NeedResolveEdges>
 
     <function>
         <equation>y1=(1-0.38)*x0+0.38*4.11*x1*(1-x1)</equation>

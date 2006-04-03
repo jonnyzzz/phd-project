@@ -88,7 +88,10 @@ namespace Eugene.Petrenko.Gui2.MethodComparer.Actions
 
 		public string ShowStyle(IResult result)
 		{		
-			return "dots";
+			IGraphResult graph = (IGraphResult) result;
+			if (graph.GetGraphInfo().GetNodes() > 200)
+				return "dots";
+			else return "points";
 		}
 
 		public string LocalLogFile
@@ -105,5 +108,7 @@ namespace Eugene.Petrenko.Gui2.MethodComparer.Actions
 	    {
 	        get { return new GnuPlotGenAction(); }
 	    }
+
+
 	}
 }

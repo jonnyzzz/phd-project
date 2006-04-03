@@ -35,7 +35,7 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 				task.Save(logWriter);
                 logWriter.WriteLine("End\r\n\r\n");
                 
-                string pathAd = Path.Combine(path, load.Caption);
+                string pathAd = Path.Combine(path, load.Caption + "." + Guid.NewGuid().ToString());
                 if (!Directory.Exists(pathAd))
                 {
                     Directory.CreateDirectory(pathAd);

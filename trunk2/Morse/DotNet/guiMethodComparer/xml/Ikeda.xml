@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <methodComparation>
     <caption>Ikeda</caption>
     <Dimension>2</Dimension>
@@ -11,7 +11,7 @@
     <AdaptivePrecisionFactor>2,2</AdaptivePrecisionFactor>
     <LinearUseDerivate>true</LinearUseDerivate>
     <AdaptiveUpperLimit>0</AdaptiveUpperLimit>
-    <NeedResolveEdges>false</NeedResolveEdges>
+    <NeedResolveEdges>true</NeedResolveEdges>
 
     <function>
         <equation>y1=2-0.9*(x1*cos(tay)-x2*sin(tay))</equation>

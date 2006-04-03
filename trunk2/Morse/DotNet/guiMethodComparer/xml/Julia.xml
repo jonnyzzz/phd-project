@@ -12,7 +12,7 @@
     <AdaptivePrecisionFactor>2,2</AdaptivePrecisionFactor>
     <LinearUseDerivate>true</LinearUseDerivate>
     <AdaptiveUpperLimit>0</AdaptiveUpperLimit>
-    <NeedResolveEdges>false</NeedResolveEdges>
+    <NeedResolveEdges>true</NeedResolveEdges>
 
 
 
