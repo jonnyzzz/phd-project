@@ -467,6 +467,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
             tree.Enabled = false;
 			menuInvestigations.Enabled = false;
 			menuSystem.Enabled = false;
+			menuActions.Enabled = false;
         }
 
         public void Unlock()
@@ -478,6 +479,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
             tree.Enabled = true;
 			menuInvestigations.Enabled = true;
 			menuSystem.Enabled = true;
+			menuActions.Enabled = true;
         }
 
 		public void OnDocumentCreated(Document.Document document)

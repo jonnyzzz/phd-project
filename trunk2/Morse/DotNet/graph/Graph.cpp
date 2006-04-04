@@ -666,7 +666,7 @@ GraphComponents* Graph::localazeStrongComponents(ProgressBarInfo* pinfo) {
     ATLASSERT(isTarjanable);
 
 	cout<<"Localization of strong components\n";
-	ProgressBarAdapter ad(pinfo, getNumberOfNodes());
+	ProgressBarAdapter ad(pinfo, getNumberOfArcs());
 
 	GraphComponents* cmps = new GraphComponents();
 	TarjanNode* v;
@@ -700,6 +700,7 @@ GraphComponents* Graph::localazeStrongComponents(ProgressBarInfo* pinfo) {
 				case 3:
 					if (v->enumerator == NULL) v->enumerator = getEdgeRoot(v);
 					e = getEdge(v->enumerator);
+					ad.Next();
 					if (e != NULL) {
 						w = (TarjanNode*)e->to;
 						if (((TarjanNode*)e->to)->label == 0) {
@@ -732,8 +733,7 @@ GraphComponents* Graph::localazeStrongComponents(ProgressBarInfo* pinfo) {
 				case 6:
 					if (v == stack.top()) {
 						stack.pop();
-						if (isLoop(v)) {
-							ad.Next();
+						if (isLoop(v)) {							
 							tmp = this->copyCoordinatesForTarjan();												
 							tmp->addNode(v->cell);
 							cmps->addGraphAsComponent(tmp);
@@ -741,7 +741,6 @@ GraphComponents* Graph::localazeStrongComponents(ProgressBarInfo* pinfo) {
 					} else {
 						tmp = this->copyCoordinatesForTarjan();
 						do {
-							ad.Next();
 							w = stack.pop();
 							tmp->addNode(w->cell);
 						} while (v != w);

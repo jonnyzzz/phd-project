@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using EugenePetrenko.Gui2.Application.Forms;
 using EugenePetrenko.Gui2.Application.Runner;
 using EugenePetrenko.Gui2.Application.TreeNodes;
@@ -60,7 +61,7 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 			}
 			catch(Exception e)
 			{
-				FireException(e);
+				FireException(e);				
 			}
 			finally 
 			{
@@ -79,9 +80,10 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 
 		public RunInThread ThreadedDo()
 		{
+
 			return new RunInThread(DoInThread);
 		}
-
+		
 		private void FireException(Exception e)
 		{
 			if (Exception == null)

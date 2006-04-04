@@ -30,8 +30,9 @@ ProgressBarAdapter::~ProgressBarAdapter() {
 bool ProgressBarAdapter::Next() {
 	cnt += 1.0;
 	if (cnt >= step) {
-		cnt -= step;
-		pinfo->Advance(step);
+		double f = cnt / step;		
+		pinfo->Advance(f);
+		cnt = 0;
 		return pinfo->NeedStop();
 	}
 	return true;
