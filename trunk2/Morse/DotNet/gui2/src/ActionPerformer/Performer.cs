@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Threading;
 using EugenePetrenko.Gui2.Application.Forms;
 using EugenePetrenko.Gui2.Application.Runner;
 using EugenePetrenko.Gui2.Application.TreeNodes;
@@ -10,10 +9,6 @@ using EugenePetrenko.Gui2.Logging;
 
 namespace EugenePetrenko.Gui2.Application.ActionPerformer
 {
-    /// <summary>
-    /// Summary description for Performer.
-    /// </summary>
-    /// 
     public delegate void NewNodesEvent(Node[] node);
 	public delegate void StateEvent();
 	public delegate void StateException(Exception e);

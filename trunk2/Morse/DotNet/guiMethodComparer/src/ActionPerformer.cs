@@ -27,6 +27,5 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
                 action.Compute(dmp);
             }
         }
-
 	}
 }

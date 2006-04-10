@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.IO;
-using System.Reflection;
 using System.Xml;
 using Eugene.Petrenko.Gui2.MethodComparer.Actions;
 using Eugene.Petrenko.Gui2.MethodComparer.Parameters;
@@ -15,6 +14,7 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 	    private ArrayList writers = new ArrayList(); 
 	    private TextWriter logWriter;
 	    private TextWriter batWriter;
+		private TextWriter localBatWriter;
 	    
         public Runner(string path, IRunMode mode)
         {
@@ -40,9 +40,14 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
                 {
                     Directory.CreateDirectory(pathAd);
                 }
-                ActionPerformer pf = new ActionPerformer(this, task);
-                IteratedMethodsFactory fac = new IteratedMethodsFactory(load, pathAd);
-                pf.Perform(fac.Task(), pathAd);
+
+				using(localBatWriter = File.CreateText(Path.Combine(pathAd, "build.bat"))) 
+				{
+					ActionPerformer pf = new ActionPerformer(this, task);
+					IteratedMethodsFactory fac = new IteratedMethodsFactory(load, pathAd);
+					pf.Perform(fac.Task(), pathAd);
+				}
+				localBatWriter = null;
             }
 
             WriteBuildCommand("cd {0}", path);
@@ -88,6 +93,9 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 
 	    public void WriteBuildCommand(string format, params object[] data)
 	    {
+			if (localBatWriter != null)
+				localBatWriter.WriteLine(format,  data);
+
 	        batWriter.WriteLine(format,  data);
 	    }
 	}
