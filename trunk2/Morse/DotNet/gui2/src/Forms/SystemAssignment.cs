@@ -162,7 +162,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 			this.groupBox1.Size = new System.Drawing.Size(496, 376);
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Descrete system";
+			this.groupBox1.Text = "Discrete system";
 			// 
 			// label1
 			// 

@@ -48,15 +48,36 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
             Group group = Group.GetGroup(this);
             if (group.Contains(this))
             {
-                return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Create Group", new Click(CreateGroup)));
+                return MergeWithDelimiter(
+					GetMenuItemsActions(), 
+					new DelegatedMenuItem("Create Group", new Click(CreateGroup))
+					);
             }
             else
             {
-                return GetMenuItemsActions();
+                return MergeWithDelimiter(GetMenuItemsActions(), new DelegatedMenuItem("Make root", new Click(MakeRoot)));
             }
         }
 
-        public void CreateGroup()
+    	private void MakeRoot()
+    	{
+			DialogResult result = MessageBox.Show(Runner.Runner.Instance.ComputationForm,
+				"You are going to erase all computation results, except selected one." + 
+				"Are you shure?", "Action", MessageBoxButtons.YesNo);
+
+			if (result != DialogResult.Yes)
+				return;
+
+    		Document.Document doc = new Document.Document(
+    			Runner.Runner.Instance.Document.KernelDocument.Function,
+				this
+				);
+    		Runner.Runner.Instance.ComputationForm.OpenNewDocument(doc);
+
+			Runner.Runner.Instance.Core.GC();
+    	}
+
+    	public void CreateGroup()
         {
             Group group = Group.GetGroup(this);
             ComputationNode node = Parent as ComputationNode;

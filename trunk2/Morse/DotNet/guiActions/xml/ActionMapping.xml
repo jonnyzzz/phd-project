@@ -4,7 +4,7 @@
     <actions>
         <action name="IGroupAction">
             <caption>
-                <title>Symbolic Image</title>
+                <title>Chain-recurrent set</title>
                 <detail>This methods are aplicable to Symbolic Image nodes only</detail>
             </caption>
 
@@ -195,7 +195,7 @@
     <names>
         <action name="IBoxMethodAction" caption="Linear Method"/>
         <action name="IPointMethodAction" caption="Point Method"/>
-        <action name="ITarjanAction" caption="Chain-recurrent set"> You need graph </action>
+        <action name="ITarjanAction" caption="Analize"> You need a graph</action>
         <action name="GnuPlotVisualizationKernelAction" caption="Visualize"> You need 2D or 3D SI </action>
         <action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search"> You need SI with edges </action>
         <action name="IIsolatedSetAction" caption="Isolating set localization"> You need SI with edges </action>

@@ -43,13 +43,13 @@ namespace EugenePetrenko.Gui2.Kernell2.Node
             switch (results.Length)
             {
                 case 0:
-                    builder.Append("Empty Node");
+                    builder.Append("Empty Result");
                     break;
                 case 1:
-                    builder.Append("Single Node");
+                    builder.Append("Single Result");
                     break;
                 default:
-                    builder.Append("Multiple Node");
+                    builder.Append("Multiple Result");
                     break;
             }
 
