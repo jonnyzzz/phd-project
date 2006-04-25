@@ -6,39 +6,39 @@ using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Actions.ActionImpl.HomotopAction
 {
-    /// <summary>
-    /// Summary description for HomotopAction.
-    /// </summary>
-    /// 
-    [ActionMapping(typeof (IIsolatedSetAction), typeof (IIsolatedSetParameters))]
-    public class HomotopAction : Action
+  /// <summary>
+  /// Summary description for HomotopAction.
+  /// </summary>
+  /// 
+  [ActionMapping(typeof (IIsolatedSetAction), typeof (IIsolatedSetParameters))]
+  public class HomotopAction : Action
+  {
+    public HomotopAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
     {
-        public HomotopAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
-        {
-        }
-
-        protected override IAction CreateAction()
-        {
-            return new CIsolatedSetActionClass();
-        }
-
-        protected override ParametersControl GetParametersControlInternal(KernelNode node)
-        {
-            return new HomotopParameters(node);
-        }
-
-        protected override ResultSet DoActionInteranl(ResultSet input)
-        {
-            HomotopParametersImpl param = (HomotopParametersImpl) this.Parameters;
-            if (!param.PublishGraph)
-            {
-                return base.DoActionInteranl(input);
-            }
-            else
-            {
-                ResultSet resultSet = base.DoActionInteranl(input);
-                return ResultSet.Merge(resultSet, param.GetStartSet());
-            }
-        }
     }
+
+    protected override IAction CreateAction()
+    {
+      return new CIsolatedSetActionClass();
+    }
+
+    protected override ParametersControl GetParametersControlInternal(KernelNode node)
+    {
+      return new HomotopParameters(node);
+    }
+
+    protected override ResultSet DoActionInteranl(ResultSet input)
+    {
+      HomotopParametersImpl param = (HomotopParametersImpl) Parameters;
+      if (!param.PublishGraph)
+      {
+        return base.DoActionInteranl(input);
+      }
+      else
+      {
+        ResultSet resultSet = base.DoActionInteranl(input);
+        return ResultSet.Merge(resultSet, param.GetStartSet());
+      }
+    }
+  }
 }

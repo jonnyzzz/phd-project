@@ -1,99 +1,106 @@
-using System;
 using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Kernell2.Actions
 {
-    public delegate void CancelEvent();
-	public interface IProgressBarListener
-	{
-		void NewTask(string caption, double length);
-		void Tick(double value);
-		void Finish();
+  public delegate void CancelEvent();
 
-		event CancelEvent Canceled;
-	}
-	
-	public class EmptyProgressBarListener : IProgressBarListener
-	{
-		public void NewTask(string caption, double length)
-		{			
-		}
-		public void Tick(double value)
-		{
-		}
-		public void Finish()
-		{
-		}
-		public event CancelEvent Canceled
-		{
-			add {}
-			remove{ }
-		}
-	}
+  public interface IProgressBarListener
+  {
+    void NewTask(string caption, double length);
+    void Tick(double value);
+    void Finish();
 
-    public class ProgressBarInfo
+    event CancelEvent Canceled;
+  }
+
+  public class EmptyProgressBarListener : IProgressBarListener
+  {
+    public void NewTask(string caption, double length)
     {
-        private IProgressBarListener listener;
-		private bool needStop;		
+    }
 
-    	public ProgressBarInfo(IProgressBarListener listener)
-    	{
-			needStop = false;
-    		this.listener = listener;
-			this.listener.Canceled += new CancelEvent(listener_Canceled);
-    	}
+    public void Tick(double value)
+    {
+    }
 
-		private void listener_Canceled()
-		{
-			needStop = true;
-		}
+    public void Finish()
+    {
+    }
 
-		public void ProcessFinished()
-		{
-			listener.Finish();
-		}
+    public event CancelEvent Canceled
+    {
+      add
+      {
+      }
+      remove
+      {
+      }
+    }
+  }
 
-    	public IProgressBarInfo GetProgressBarInfo(ActionWrapper actionWrapper)
-        {			
-            return new ProgressBarInfoImpl(this, actionWrapper.ActionName);
-        }
+  public class ProgressBarInfo
+  {
+    private IProgressBarListener listener;
+    private bool needStop;
 
-        private class ProgressBarInfoImpl : IProgressBarInfo
-        {
-            private ProgressBarInfo instance;
-			private string actionName;
-			private int count = 0;
+    public ProgressBarInfo(IProgressBarListener listener)
+    {
+      needStop = false;
+      this.listener = listener;
+      this.listener.Canceled += new CancelEvent(listener_Canceled);
+    }
 
-            public ProgressBarInfoImpl(ProgressBarInfo instance, string name)
-            {
-                this.instance = instance;
-				actionName = name;
-            }
+    private void listener_Canceled()
+    {
+      needStop = true;
+    }
 
-            public void Finish()
-            {
-                instance.listener.Finish();
-            }
+    public void ProcessFinished()
+    {
+      listener.Finish();
+    }
 
-            public double Length()
-            {
-                return 300;
-            }
+    public IProgressBarInfo GetProgressBarInfo(ActionWrapper actionWrapper)
+    {
+      return new ProgressBarInfoImpl(this, actionWrapper.ActionName);
+    }
 
-            public bool NeedStop()
-            {
-                return !instance.needStop;
-            }
+    private class ProgressBarInfoImpl : IProgressBarInfo
+    {
+      private ProgressBarInfo instance;
+      private string actionName;
+      private int count = 0;
 
-            public void Start()
-            {
-				instance.listener.NewTask(actionName + " " + (++count), Length());
-            }
+      public ProgressBarInfoImpl(ProgressBarInfo instance, string name)
+      {
+        this.instance = instance;
+        actionName = name;
+      }
 
-        	public void Next(double value)
-			{
-				instance.listener.Tick(value);
-        	}
-		}		
-	}
+      public void Finish()
+      {
+        instance.listener.Finish();
+      }
+
+      public double Length()
+      {
+        return 300;
+      }
+
+      public bool NeedStop()
+      {
+        return !instance.needStop;
+      }
+
+      public void Start()
+      {
+        instance.listener.NewTask(actionName + " " + (++count), Length());
+      }
+
+      public void Next(double value)
+      {
+        instance.listener.Tick(value);
+      }
+    }
+  }
 }

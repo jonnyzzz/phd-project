@@ -4,49 +4,49 @@ using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Kernell2.Document
 {
-    /// <summary>
-    /// Summary description for Document.
-    /// </summary>
-    public class KernelDocument
+  /// <summary>
+  /// Summary description for Document.
+  /// </summary>
+  public class KernelDocument
+  {
+    private Function function;
+    private IKernell kernell;
+    private string defaultTitle;
+
+    public KernelDocument(Function function)
     {
-        private Function function;
-        private IKernell kernell;
-        private string defaultTitle;
+      Core.Instance.SetKernelDocument(this);
 
-        public KernelDocument(Function function)
-        {
-            Core.Instance.SetKernelDocument(this);
+      this.function = function;
 
-            this.function = function;
+      CKernellImplClass kernellClass = new CKernellImplClass();
 
-            CKernellImplClass kernellClass = new CKernellImplClass();
+      IWritableKernell wKernell = kernellClass;
 
-            IWritableKernell wKernell = kernellClass;
+      wKernell.SetFunction(this.function.IFunction);
 
-            wKernell.SetFunction(this.function.IFunction);
-
-            kernell = (IKernell) wKernell;
-        }
-
-        public string Title
-        {
-            get { return defaultTitle; }
-            set { defaultTitle = value; }
-        }
-
-        public Function Function
-        {
-            get { return function; }
-        }
-
-        public KernelNode CreateInitialNode()
-        {
-            return new KernelNode(CreateInitialResultSet());
-        }
-
-        public ResultSet CreateInitialResultSet()
-        {
-            return ResultSet.FromResultSet(kernell.CreateInitialResultSet());
-        }
+      kernell = (IKernell) wKernell;
     }
+
+    public string Title
+    {
+      get { return defaultTitle; }
+      set { defaultTitle = value; }
+    }
+
+    public Function Function
+    {
+      get { return function; }
+    }
+
+    public KernelNode CreateInitialNode()
+    {
+      return new KernelNode(CreateInitialResultSet());
+    }
+
+    public ResultSet CreateInitialResultSet()
+    {
+      return ResultSet.FromResultSet(kernell.CreateInitialResultSet());
+    }
+  }
 }

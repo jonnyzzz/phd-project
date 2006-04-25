@@ -2,29 +2,30 @@ using EugenePetrenko.Gui2.Kernell2.ActionFactory;
 
 namespace EugenePetrenko.Gui2.Kernell2.Actions
 {
-    /// <summary>
-    /// Summary description for AttributeHolder.
-    /// </summary>
-    public class AttributeHolder
+  /// <summary>
+  /// Summary description for AttributeHolder.
+  /// </summary>
+  public class AttributeHolder
+  {
+    private ActionMappingAttribute myCachedAttribute = null;
+
+    protected ActionMappingAttribute Attribute
     {
-        private ActionMappingAttribute myCachedAttribute = null;
-
-        protected ActionMappingAttribute Attribute
+      get
+      {
+        if (myCachedAttribute == null)
         {
-            get
-            {
-                if (myCachedAttribute == null)
-                {
-                    ActionMappingAttribute[] attributes = (ActionMappingAttribute[]) this.GetType().GetCustomAttributes(typeof (ActionMappingAttribute), true);
-                    if (attributes.Length != 1) throw new ActionException("Incorrect Attribute");
+          ActionMappingAttribute[] attributes =
+            (ActionMappingAttribute[]) GetType().GetCustomAttributes(typeof (ActionMappingAttribute), true);
+          if (attributes.Length != 1) throw new ActionException("Incorrect Attribute");
 
-                    return myCachedAttribute = attributes[0];
-                }
-                else
-                {
-                    return myCachedAttribute;
-                }
-            }
+          return myCachedAttribute = attributes[0];
         }
+        else
+        {
+          return myCachedAttribute;
+        }
+      }
     }
+  }
 }

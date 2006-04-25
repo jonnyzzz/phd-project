@@ -6,26 +6,25 @@ using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Actions.ActionImpl.Tarjan
 {
-    /// <summary>
-    /// Summary description for TarjanAction.
-    /// </summary>
-    /// 
-    [ActionMapping(typeof (ITarjanAction), typeof (ITarjanParameters))]
-    public class TarjanAction : Action
+  /// <summary>
+  /// Summary description for TarjanAction.
+  /// </summary>
+  /// 
+  [ActionMapping(typeof (ITarjanAction), typeof (ITarjanParameters))]
+  public class TarjanAction : Action
+  {
+    public TarjanAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
     {
-        public TarjanAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
-        {
-        }
-
-        protected override ParametersControl GetParametersControlInternal(KernelNode node)
-        {
-            return new TarjanParameters();
-        }
-
-        protected override IAction CreateAction()
-        {
-            return new CTarjanActionClass();
-        }
-
     }
+
+    protected override ParametersControl GetParametersControlInternal(KernelNode node)
+    {
+      return new TarjanParameters();
+    }
+
+    protected override IAction CreateAction()
+    {
+      return new CTarjanActionClass();
+    }
+  }
 }

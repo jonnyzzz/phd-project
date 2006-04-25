@@ -1,8 +1,8 @@
 namespace EugenePetrenko.Gui2.Actions.ActionImpl.LoopLocalization
 {
-    /// <summary>
-    /// Summary description for LoopLocalizationAction.
-    /// </summary>
+  /// <summary>
+  /// Summary description for LoopLocalizationAction.
+  /// </summary>
 //	public class LoopLocalizationAction : Action
 //	{
 //		public LoopLocalizationAction()

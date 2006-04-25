@@ -8,9 +8,9 @@
 
 namespace EugenePetrenko.Gui2.Visualization.ActionImpl.GnuPlot
 {
-    /// <summary>
-    /// Summary description for GnuPlotParameters.
-    /// </summary>
+  /// <summary>
+  /// Summary description for GnuPlotParameters.
+  /// </summary>
 //    public class GnuPlotParameters //: ParametersControl //, IGnuPlotVisualizationKernelParameters, IGnuPlotScriptGenParameters
 //    {
 //        private string fileNameToSave = null;

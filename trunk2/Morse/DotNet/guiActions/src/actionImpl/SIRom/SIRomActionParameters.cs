@@ -4,28 +4,28 @@ using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Actions.ActionImpl.SIRom
 {
-    /// <summary>
-    /// Summary description for SIRomActionParameters.
-    /// </summary>
-    public class SIRomActionParameters : ParametersControl
+  /// <summary>
+  /// Summary description for SIRomActionParameters.
+  /// </summary>
+  public class SIRomActionParameters : ParametersControl
+  {
+    public SIRomActionParameters()
     {
-        public SIRomActionParameters()
-        {
-        }
-
-        protected override IParameters SubmitDataInternal()
-        {
-            return new SIRomActionParametersImpl(Core.Instance.KernelDocument.Function);
-        }
-
-        public override string BoxCaption
-        {
-            get { return "SIRom parameters"; }
-        }
-
-        public override bool NeedShowForm
-        {
-            get { return false; }
-        }
     }
+
+    protected override IParameters SubmitDataInternal()
+    {
+      return new SIRomActionParametersImpl(Core.Instance.KernelDocument.Function);
+    }
+
+    public override string BoxCaption
+    {
+      get { return "SIRom parameters"; }
+    }
+
+    public override bool NeedShowForm
+    {
+      get { return false; }
+    }
+  }
 }

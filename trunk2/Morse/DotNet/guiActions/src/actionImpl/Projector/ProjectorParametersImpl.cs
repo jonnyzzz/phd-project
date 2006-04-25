@@ -2,22 +2,21 @@ using EugenePetrenko.Gui2.MorseKernel2;
 
 namespace EugenePetrenko.Gui2.Actions.ActionImpl.Projector
 {
-    /// <summary>
-    /// Summary description for ProjectorParametersImpl.
-    /// </summary>
-    public class ProjectorParametersImpl : IProjectActionParameters
+  /// <summary>
+  /// Summary description for ProjectorParametersImpl.
+  /// </summary>
+  public class ProjectorParametersImpl : IProjectActionParameters
+  {
+    private int[] devisor;
+
+    public ProjectorParametersImpl(int[] data)
     {
-        private int[] devisor;
-
-        public ProjectorParametersImpl(int[] data)
-        {
-            this.devisor = data;
-        }
-
-        public int GetDevisor(int index)
-        {
-            return devisor[index];
-        }
-
+      devisor = data;
     }
+
+    public int GetDevisor(int index)
+    {
+      return devisor[index];
+    }
+  }
 }

@@ -4,31 +4,31 @@ using EugenePetrenko.Gui2.Logging;
 
 namespace EugenePetrenko.Gui2.Application.TreeNodes
 {
-    /// <summary>
-    /// Summary description for ActionTreeMenuItem.
-    /// </summary>
-    public class ActionTreeMenuItem : TreeMenuItem
+  /// <summary>
+  /// Summary description for ActionTreeMenuItem.
+  /// </summary>
+  public class ActionTreeMenuItem : TreeMenuItem
+  {
+    private ActionRef action;
+    private Node node;
+
+    public ActionTreeMenuItem(Node node, ActionRef action) : base(action.ActionCaption, action.IsLeaf)
     {
-        private ActionRef action;
-        private Node node;
+      this.action = action;
+      this.node = node;
 
-        public ActionTreeMenuItem(Node node, ActionRef action) : base(action.ActionCaption, action.IsLeaf)
-        {
-            this.action = action;
-            this.node = node;
-
-            this.MenuItems.Clear();            
-            this.OwnerDraw = true;
-		}
-
-
-        protected override void EventClick()
-        {
-            if (action.IsLeaf)
-            {
-                Logger.LogMessage("Event Click");
-                Runner.Runner.Instance.ComputationForm.AcceptActionChain(node, Filter.FilterActions(action.GetActionPath()));
-            }
-        }
+      MenuItems.Clear();
+      OwnerDraw = true;
     }
+
+
+    protected override void EventClick()
+    {
+      if (action.IsLeaf)
+      {
+        Logger.LogMessage("Event Click");
+        Runner.Runner.Instance.ComputationForm.AcceptActionChain(node, Filter.FilterActions(action.GetActionPath()));
+      }
+    }
+  }
 }
