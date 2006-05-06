@@ -11,5 +11,10 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D.Create
     {
       return new MS2DCreateActionParametersImpl(factor);
     }
+
+    public override string BoxCaption
+    {
+      get { return "Angle Method Projective Bundle Creation"; }
+    }
   }
 }

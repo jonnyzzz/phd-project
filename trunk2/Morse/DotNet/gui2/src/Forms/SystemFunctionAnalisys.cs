@@ -71,13 +71,13 @@ namespace EugenePetrenko.Gui2.Application.Forms
     /// </summary>
     private void InitializeComponent()
     {
-      System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (SystemFunctionAnalisys));
+      System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(SystemFunctionAnalisys));
       this.groupBox = new System.Windows.Forms.GroupBox();
       this.panelInGroup = new System.Windows.Forms.Panel();
       this.analisys = new System.Windows.Forms.DataGrid();
       this.groupBox.SuspendLayout();
       this.panelInGroup.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize) (this.analisys)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.analisys)).BeginInit();
       this.SuspendLayout();
       // 
       // groupBox
@@ -89,7 +89,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
       this.groupBox.Size = new System.Drawing.Size(396, 266);
       this.groupBox.TabIndex = 1;
       this.groupBox.TabStop = false;
-      this.groupBox.Text = "System Function Analisys";
+      this.groupBox.Text = "System Function Analysis";
       // 
       // panelInGroup
       // 
@@ -139,13 +139,14 @@ namespace EugenePetrenko.Gui2.Application.Forms
       this.Controls.Add(this.groupBox);
       this.DockPadding.All = 10;
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-      this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "SystemFunctionAnalisys";
-      this.Text = "System Function Analisys";
+      this.Text = "System Function Analysis";
       this.groupBox.ResumeLayout(false);
       this.panelInGroup.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize) (this.analisys)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.analisys)).EndInit();
       this.ResumeLayout(false);
+
     }
 
     #endregion

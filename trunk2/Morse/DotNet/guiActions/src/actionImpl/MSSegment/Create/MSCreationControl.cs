@@ -75,7 +75,7 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MSSegment.Create
 
     public override string BoxCaption
     {
-      get { return "Segment Method Projective Bundle Initial SI Creation"; }
+      get { return "Angle Method Projective Bundle Creation"; }
     }
 
     protected override IParameters SubmitDataInternal()

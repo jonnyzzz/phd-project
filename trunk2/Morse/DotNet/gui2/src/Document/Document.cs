@@ -52,6 +52,14 @@ namespace EugenePetrenko.Gui2.Application.Document
       set { analisysForm = value; }
     }
 
+    public void DisposeOnExit()
+    {
+      if (analisysForm != null)
+        analisysForm.Close();
+
+      rootNode = null;
+    }
+    
     public void Dispose()
     {
       if (analisysForm != null)
@@ -67,11 +75,11 @@ namespace EugenePetrenko.Gui2.Application.Document
     {
       foreach (TreeNode treeNode in root.Nodes)
       {
-        ComputationNode node = (ComputationNode) treeNode;
+        ComputationNode node = treeNode as ComputationNode;
         if (node != null)
           RecursiveDisposeNode(node);
       }
-      
+            
       root.Nodes.Clear();
       root.Dispose();      
     }

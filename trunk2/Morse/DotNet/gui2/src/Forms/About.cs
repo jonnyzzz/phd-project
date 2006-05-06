@@ -23,19 +23,19 @@ namespace EugenePetrenko.Gui2.Application.Forms
       //
       InitializeComponent();
 
-      String offet = new string(' ', 15);
+      string offet = new string(' ', 7);
 
       data =
-        offet + "Created by: \n " +
-        offet + "   Euegene Petrenko (evgeni.petrenko@mail.ru),\n " +
-        offet + "   \n\n\n " +
-        offet + "Special thanks to: \n " +
+        offet + "Created by: \n" +
+        offet + "   Eugene Petrenko (evgeni.petrenko@mail.ru),\n" +
+        offet + "   \n\n\n" +
+        offet + "Special thanks to: \n" +
         offet + "   Joseph V. Romanovsky,\n" +
-        offet + "   George S. Osipenko,\n " +
-        offet + "   Nataly B. Ampilova,\n " +
+        offet + "   Nataly B. Ampilova,\n" +
+        offet + "   George S. Osipenko,\n" +
         offet + "   And to every one, who was involved \n" +
         offet + "	  In the development process \n\n\n" +
-        offet + "                       2001-2006 ";
+        offet + "               (c) 2001-2006 Euegene Petrenko";
       label1.Text = data;
     }
 
@@ -63,7 +63,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (About));
+      System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(About));
       this.label1 = new System.Windows.Forms.Label();
       this.panel1 = new System.Windows.Forms.Panel();
       this.timerOpacity = new System.Windows.Forms.Timer(this.components);
@@ -75,14 +75,14 @@ namespace EugenePetrenko.Gui2.Application.Forms
       this.label1.BackColor = System.Drawing.SystemColors.Info;
       this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.label1.Font =
-        new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold,
-                                System.Drawing.GraphicsUnit.Point, ((System.Byte) (204)));
+      this.label1.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((System.Byte)(204)));
+      this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.label1.Location = new System.Drawing.Point(0, 0);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(634, 326);
       this.label1.TabIndex = 0;
       this.label1.Text = "Produced by";
+      this.label1.UseMnemonic = false;
       // 
       // panel1
       // 
@@ -105,13 +105,14 @@ namespace EugenePetrenko.Gui2.Application.Forms
       this.ClientSize = new System.Drawing.Size(634, 326);
       this.Controls.Add(this.panel1);
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-      this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MaximizeBox = false;
       this.Name = "About";
       this.Opacity = 0.45;
       this.Text = "About";
       this.panel1.ResumeLayout(false);
       this.ResumeLayout(false);
+
     }
 
     #endregion

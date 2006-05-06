@@ -27,6 +27,7 @@ namespace EugenePetrenko.Gui2.Controls.TreeControl
     {
       // This call is required by the Windows.Forms Form Designer.
       InitializeComponent();
+      tree.BackColor = Color.White;
 
       if (!DesignMode)
       {

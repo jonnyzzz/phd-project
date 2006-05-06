@@ -156,7 +156,7 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl
 
     public override string BoxCaption
     {
-      get { return "Box Method"; }
+      get { return "Linear Method"; }
     }
   }
 }

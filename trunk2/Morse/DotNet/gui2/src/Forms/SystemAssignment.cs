@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
@@ -13,9 +14,6 @@ using EugenePetrenko.Gui2.Logging;
 
 namespace EugenePetrenko.Gui2.Application.Forms
 {
-  /// <summary>
-  /// Summary description for SystemAssignment.
-  /// </summary>
   public class SystemAssignment : Form
   {
     private const string DIMENSION = "_dimension";
@@ -77,7 +75,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
     private void redesignGrid()
     {
-      DataGridTableStyle style = null;
+      DataGridTableStyle style;
       if (formulas.TableStyles.Count == 0)
       {
         style = new DataGridTableStyle();
@@ -88,7 +86,8 @@ namespace EugenePetrenko.Gui2.Application.Forms
         style = formulas.TableStyles[0];
       }
 
-      if (!(formulas.DataSource is DataTable)) return;
+      if (!(formulas.DataSource is DataTable)) 
+        return;
 
       DataTable table = formulas.DataSource as DataTable;
 

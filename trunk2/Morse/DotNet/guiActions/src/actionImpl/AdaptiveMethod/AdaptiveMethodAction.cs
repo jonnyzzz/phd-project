@@ -12,7 +12,7 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.AdaptiveMethod
   /// </summary>
   /// 
   [ActionMapping(typeof (IAdaptiveMethodAction), typeof (IAdaptiveMethodParameters))]
-  public class AdaptiveMethodAction : Action
+  public class AdaptiveMethodAction : Action  
   {
     public AdaptiveMethodAction(string caption, bool isChainLeaf) : base(caption, isChainLeaf)
     {

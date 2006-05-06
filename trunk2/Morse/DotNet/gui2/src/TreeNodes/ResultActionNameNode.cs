@@ -31,7 +31,7 @@ namespace EugenePetrenko.Gui2.Application.TreeNodes
       return new MenuItem[]
         {
           new DelegatedMenuItem("Rename", new Click(OnRemame)),
-          new DelegatedMenuItem("Create Group From Childs", new Click(OnCreateGroup))
+          new DelegatedMenuItem("Group sub-resuts", new Click(OnCreateGroup))
         };
     }
 

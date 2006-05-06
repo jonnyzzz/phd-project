@@ -31,12 +31,13 @@
         <action name="IGroupAction">
             <caption>
                 <title>Morse Spectrum</title>
-                <detail>This method can works only with dynamical system on R^2</detail>
+                <detail>This method can works only with dynamical system on R^2 or R^3</detail>
             </caption>
 
             <action name="IGroupAction">
                 <caption>
                     <title>Angle Linear Method for R^2</title>
+                    <detail>This method can works only with dynamical system on R^2</detail>
                 </caption>
                 
                 <constraint class="OneParentResultsConstraint"/>
@@ -54,6 +55,7 @@
                 <action name="IMS2DCreationAction" isLeaf="true">
                     <caption>
                         <title>Create Projective Extended System</title>
+                        <detail>You need Symbolic Image of system on R^2</detail>
                     </caption>
                     <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
                     <constraint class="FixedDimensionConstraint" dimension="2"/>
@@ -62,7 +64,7 @@
 
                 <action name="IMS2DProcessAction">
                     <caption>
-                        <title>Subdivide</title>
+                        <title>Subdivide</title>                        
                     </caption>
                     <constraint class="OneParentResultsConstraint"/>
                     <constraint class="DefaultConstraint" metadata="IMS2Metadata" result="IGraphResult"/>
@@ -73,6 +75,7 @@
                 <action name="IMS2DRomAction" isLeaf="true">
                     <caption>
                         <title>Estimate Morse Spectrum</title>
+                        <detail>You need Angle Method projective extended Symbolic Image with edges</detail>
                     </caption>
                     <constraint class="OneParentResultsConstraint"/>
                     <constraint class="DefaultConstraint" metadata="IMS2Metadata" result="IGraphResult"/>
@@ -102,6 +105,7 @@
                 <action name="IMSAngleCreationMethod" isLeaf="true">
                     <caption>
                         <title>Create Projective Extended System</title>
+                        <detail>You need Symbolic Image of system on R^3</detail>
                     </caption>
                     <constraint class="OneParentResultsConstraint"/>
                     <constraint class="DefaultConstraint" metadata="ISymbolicImageMetadata" result="IGraphResult"/>
@@ -121,6 +125,7 @@
                 <action name="IMSAngleRomProcess" isLeaf="true">
                     <caption>
                         <title>Estimate Morse Spectrum</title>
+                        <detail>You need Angle Method projective extended Symbolic Image with edges</detail>
                     </caption>
                     <constraint class="OneParentResultsConstraint"/>
                     <constraint class="DefaultConstraint" metadata="IMSAngleMetadata" result="IGraphResult"/>
@@ -196,14 +201,14 @@
         <action name="IBoxMethodAction" caption="Linear Method"/>
         <action name="IPointMethodAction" caption="Point Method"/>
         <action name="ITarjanAction" caption="Analyze"> You need a graph</action>
-        <action name="GnuPlotVisualizationKernelAction" caption="Visualize"> You need 2D or 3D SI </action>
-        <action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search"> You need SI with edges </action>
-        <action name="IIsolatedSetAction" caption="Isolating set localization"> You need SI with edges </action>
-        <action name="SavePointsKernelAction" caption="Export to file"> You need Graph result </action>
-        <action name="ISIRomAction" caption="Morse Spectrum Multiplied"> You need SI with edges </action>
-        <action name="IAdaptiveMethodAction" caption="Adaptive Method"> You need SI </action>
+        <action name="GnuPlotVisualizationKernelAction" caption="Visualize"> You need non-extended symbolic image on R^2 or R^3</action>
+        <action name="IMinimalLoopLocalizationAction" caption="Minimal Contour Search"> You need symbolic image with edges </action>
+        <action name="IIsolatedSetAction" caption="Isolating set localization"> You need symbolic image with edges </action>
+        <action name="SavePointsKernelAction" caption="Export to file"> You need one Graph result </action>
+        <action name="ISIRomAction" caption="Morse Spectrum Multiplied"> You need symbolic image with edges </action>
+        <action name="IAdaptiveMethodAction" caption="Adaptive Method"> You need symbolic image </action>
         <action name="IAdaptiveBoxMethod" caption="Adaptive Box Method"/>
-        <action name="IMS2DCreationAction" caption="Create Angle Projective Bundle">You need plane SI with edges</action>
+        <action name="IMS2DCreationAction" caption="Create Angle Projective Bundle">You need plane symbolic image with edges</action>
         <action name="IMS2DProcessAction" caption="Angle Projective Bundle Step"> You need to use Create Angle Projective Bundle method first </action>
         <action name="IMS2DRomAction" caption="Angle Projective Bundle Estimate Morse Spectrum"> You need Angle Projective Bundle Node with edges </action>
         <action name="IProjectAction" caption="Decrease accuracy"/>

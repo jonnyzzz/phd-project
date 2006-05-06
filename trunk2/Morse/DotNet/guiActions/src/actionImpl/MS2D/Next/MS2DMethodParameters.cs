@@ -19,5 +19,10 @@ namespace EugenePetrenko.Gui2.Actions.ActionImpl.MS2D.Next
     {
       return new MS2DMethodParametersImpl(factor, function);
     }
+        
+    public override string BoxCaption
+    {
+      get { return "Angle Method Projective Bundle Linear Method"; }
+    }
   }
 }

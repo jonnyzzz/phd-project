@@ -87,7 +87,7 @@ namespace EugenePetrenko.Gui2.Application.Runner
       core.Dispose();
       core = null;
       if (document != null)
-        document.Dispose();
+        document.DisposeOnExit();
       document = null;
     }
 
