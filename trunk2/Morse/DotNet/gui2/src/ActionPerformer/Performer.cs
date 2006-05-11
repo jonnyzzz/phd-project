@@ -37,6 +37,8 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
 
     public void Do()
     {
+      DateTime start = DateTime.Now;
+      
       FireStateChanged(Started);
       inProcess = true;
       try
@@ -67,6 +69,8 @@ namespace EugenePetrenko.Gui2.Application.ActionPerformer
         Logger.LogMessage("Computation Finished");
 
         FireStateChanged(Finished);
+        
+        Runner.Runner.Instance.Document.UpdateTimeSpan(DateTime.Now - start);
       }
     }
 

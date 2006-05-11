@@ -12,6 +12,7 @@ namespace EugenePetrenko.Gui2.Application.Document
     private KernelDocument kernelDocument;
     private Node rootNode = null;
     private SystemFunctionAnalisys analisysForm = null;
+    private TimeSpan workTime = TimeSpan.Zero;
 
     public Document(Function function)
     {
@@ -31,9 +32,22 @@ namespace EugenePetrenko.Gui2.Application.Document
       set { kernelDocument = value; }
     }
 
+    public TimeSpan WorkTime
+    {
+      get { return workTime; }
+    }
+
     public Node RootNode
     {
       get { return rootNode; }
+    }
+    
+    public void UpdateTimeSpan(TimeSpan span)
+    {
+      lock(this)
+      {
+        workTime += span;
+      }
     }
 
     public void Lock()
@@ -72,7 +86,7 @@ namespace EugenePetrenko.Gui2.Application.Document
     }
     
     private void RecursiveDisposeNode(ComputationNode root)
-    {
+    {      
       foreach (TreeNode treeNode in root.Nodes)
       {
         ComputationNode node = treeNode as ComputationNode;

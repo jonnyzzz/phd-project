@@ -62,6 +62,8 @@ STDMETHODIMP CMS2DRomAction::Do(IResultSet* in, IResultSet **out) {
 
 	ProgressBarNotificationAdapter pinfo(info);
 
+	pinfo.Advance(pinfo.Length()/2);
+
     HRESULT hr;
         
     SmartInterface<IFunction> function;

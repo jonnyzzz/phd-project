@@ -53,6 +53,8 @@ namespace EugenePetrenko.Gui2.Application.Forms
     private Label labelProgressStatus;
     private Timer opacityTimer;
     private MenuItem menuActions;
+    private System.Windows.Forms.MenuItem menuInternalShowTimings;
+    private System.Windows.Forms.MenuItem menuItem1;
     private IContainer components;
 
     public ComputationForm()
@@ -103,7 +105,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
     private void InitializeComponent()
     {
       this.components = new System.ComponentModel.Container();
-      System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (ComputationForm));
+      System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(ComputationForm));
       this.panelLeft = new System.Windows.Forms.Panel();
       this.splitter = new System.Windows.Forms.Splitter();
       this.panelLeftUp = new System.Windows.Forms.Panel();
@@ -129,13 +131,15 @@ namespace EugenePetrenko.Gui2.Application.Forms
       this.menuSystemIterations = new System.Windows.Forms.MenuItem();
       this.menuSystemDelimiter3 = new System.Windows.Forms.MenuItem();
       this.menuSystemComment = new System.Windows.Forms.MenuItem();
+      this.menuActions = new System.Windows.Forms.MenuItem();
       this.menuHelp = new System.Windows.Forms.MenuItem();
       this.menuHelpAbout = new System.Windows.Forms.MenuItem();
       this.menuInternal = new System.Windows.Forms.MenuItem();
       this.saveDocumentDialog = new System.Windows.Forms.SaveFileDialog();
       this.openDocumentDialog = new System.Windows.Forms.OpenFileDialog();
       this.opacityTimer = new System.Windows.Forms.Timer(this.components);
-      this.menuActions = new System.Windows.Forms.MenuItem();
+      this.menuInternalShowTimings = new System.Windows.Forms.MenuItem();
+      this.menuItem1 = new System.Windows.Forms.MenuItem();
       this.panelLeft.SuspendLayout();
       this.panelLeftUp.SuspendLayout();
       this.panelRightDown.SuspendLayout();
@@ -233,6 +237,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
       // 
       this.progressBar.BackColor = System.Drawing.SystemColors.Control;
       this.progressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.progressBar.IsLocked = false;
       this.progressBar.Location = new System.Drawing.Point(5, 27);
       this.progressBar.LowerBound = 0;
       this.progressBar.Name = "progressBar";
@@ -243,26 +248,22 @@ namespace EugenePetrenko.Gui2.Application.Forms
       // 
       // mainMenu
       // 
-      this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[]
-                                         {
-                                           this.menuInvestigations,
-                                           this.menuSystem,
-                                           this.menuActions,
-                                           this.menuHelp,
-                                           this.menuInternal
-                                         });
+      this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+                                                                             this.menuInvestigations,
+                                                                             this.menuSystem,
+                                                                             this.menuActions,
+                                                                             this.menuHelp,
+                                                                             this.menuInternal});
       // 
       // menuInvestigations
       // 
       this.menuInvestigations.Index = 0;
-      this.menuInvestigations.MenuItems.AddRange(new System.Windows.Forms.MenuItem[]
-                                                   {
-                                                     this.menuItemFileNew,
-                                                     this.menuOpenDocument,
-                                                     this.menuSave,
-                                                     this.menuItemFileSeparator,
-                                                     this.menuItemFileExit
-                                                   });
+      this.menuInvestigations.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+                                                                                       this.menuItemFileNew,
+                                                                                       this.menuOpenDocument,
+                                                                                       this.menuSave,
+                                                                                       this.menuItemFileSeparator,
+                                                                                       this.menuItemFileExit});
       this.menuInvestigations.Text = "File";
       // 
       // menuItemFileNew
@@ -297,17 +298,15 @@ namespace EugenePetrenko.Gui2.Application.Forms
       // menuSystem
       // 
       this.menuSystem.Index = 1;
-      this.menuSystem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[]
-                                           {
-                                             this.menuSystemNew,
-                                             this.menuSystemDelimiter1,
-                                             this.menuFunctionShow,
-                                             this.menuSystemAnalisys,
-                                             this.menuSystemDelimiter2,
-                                             this.menuSystemIterations,
-                                             this.menuSystemDelimiter3,
-                                             this.menuSystemComment
-                                           });
+      this.menuSystem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+                                                                               this.menuSystemNew,
+                                                                               this.menuSystemDelimiter1,
+                                                                               this.menuFunctionShow,
+                                                                               this.menuSystemAnalisys,
+                                                                               this.menuSystemDelimiter2,
+                                                                               this.menuSystemIterations,
+                                                                               this.menuSystemDelimiter3,
+                                                                               this.menuSystemComment});
       this.menuSystem.Text = "Function";
       // 
       // menuSystemNew
@@ -356,13 +355,17 @@ namespace EugenePetrenko.Gui2.Application.Forms
       this.menuSystemComment.Text = "Comment";
       this.menuSystemComment.Click += new System.EventHandler(this.menuSystemComment_Click);
       // 
+      // menuActions
+      // 
+      this.menuActions.Index = 2;
+      this.menuActions.Text = "Actions";
+      this.menuActions.Select += new System.EventHandler(this.menuActions_Select);
+      // 
       // menuHelp
       // 
       this.menuHelp.Index = 3;
-      this.menuHelp.MenuItems.AddRange(new System.Windows.Forms.MenuItem[]
-                                         {
-                                           this.menuHelpAbout
-                                         });
+      this.menuHelp.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+                                                                             this.menuHelpAbout});
       this.menuHelp.Text = "Help";
       // 
       // menuHelpAbout
@@ -374,6 +377,9 @@ namespace EugenePetrenko.Gui2.Application.Forms
       // menuInternal
       // 
       this.menuInternal.Index = 4;
+      this.menuInternal.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+                                                                                 this.menuInternalShowTimings,
+                                                                                 this.menuItem1});
       this.menuInternal.Text = "Internal";
       // 
       // saveDocumentDialog
@@ -393,18 +399,23 @@ namespace EugenePetrenko.Gui2.Application.Forms
       this.opacityTimer.Interval = 50;
       this.opacityTimer.Tick += new System.EventHandler(this.opacityTick);
       // 
-      // menuActions
+      // menuInternalShowTimings
       // 
-      this.menuActions.Index = 2;
-      this.menuActions.Text = "Actions";
-      this.menuActions.Select += new EventHandler(menuActions_Select);
+      this.menuInternalShowTimings.Index = 0;
+      this.menuInternalShowTimings.Text = "Show Timings";
+      this.menuInternalShowTimings.Click += new System.EventHandler(this.menuInternalShowTimings_Click);
+      // 
+      // menuItem1
+      // 
+      this.menuItem1.Index = 1;
+      this.menuItem1.Text = "";
       // 
       // ComputationForm
       // 
       this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
       this.ClientSize = new System.Drawing.Size(648, 609);
       this.Controls.Add(this.panelLeft);
-      this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Menu = this.mainMenu;
       this.Name = "ComputationForm";
       this.Text = "Dynamical Systems Investigation Program";
@@ -415,6 +426,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
       this.groupBoxProgressBar.ResumeLayout(false);
       this.panelProgress.ResumeLayout(false);
       this.ResumeLayout(false);
+
     }
 
     #endregion
@@ -632,11 +644,6 @@ namespace EugenePetrenko.Gui2.Application.Forms
       Close();
     }
 
-    protected override void OnClosing(CancelEventArgs e)
-    {
-    }
-
-
     private ComputationNode myCachedComputationNode = null;
 
     private void menuActions_Select(object sender, EventArgs e)
@@ -659,6 +666,13 @@ namespace EugenePetrenko.Gui2.Application.Forms
     private void tree_OnSelectionChanged(ComputationNode node)
     {
       menuActions_Select(this, new EventArgs());
+    }
+
+    private void menuInternalShowTimings_Click(object sender, System.EventArgs e)
+    {
+      Document.Document document = Runner.Runner.Instance.Document;
+      if (document != null)
+        MessageBox.Show(this, string.Format("Time for all actions {0} ms", document.WorkTime.TotalMilliseconds.ToString()));
     }
   }
 }

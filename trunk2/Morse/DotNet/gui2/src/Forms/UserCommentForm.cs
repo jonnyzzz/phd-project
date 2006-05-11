@@ -50,7 +50,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
     /// </summary>
     private void InitializeComponent()
     {
-      System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (UserCommentForm));
+      System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(UserCommentForm));
       this.commentText = new System.Windows.Forms.TextBox();
       this.groupBox = new System.Windows.Forms.GroupBox();
       this.panelButtons = new System.Windows.Forms.Panel();
@@ -120,7 +120,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
       this.buttonOK.Text = "OK";
       this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
       // 
-      // UserComment
+      // UserCommentForm
       // 
       this.AcceptButton = this.buttonOK;
       this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -130,13 +130,15 @@ namespace EugenePetrenko.Gui2.Application.Forms
       this.Controls.Add(this.panelButtons);
       this.DockPadding.All = 5;
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-      this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MaximizeBox = false;
-      this.Name = "UserComment";
+      this.Name = "UserCommentForm";
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "User Comment Editor";
       this.groupBox.ResumeLayout(false);
       this.panelButtons.ResumeLayout(false);
       this.ResumeLayout(false);
+
     }
 
     #endregion
