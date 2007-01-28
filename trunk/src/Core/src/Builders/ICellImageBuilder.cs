@@ -12,7 +12,7 @@ namespace DSIS.Core.Coordinates
   {
     void Bind(CellImageBuilderContext<TCell> cellImageBuilderContext);
 
-    void BuildImage(TCell coordinate);
+    void BuildImage(TCell coord);
   }
 
   public struct CellImageBuilderContext<TCell> where TCell : ICellCoordinate<TCell>

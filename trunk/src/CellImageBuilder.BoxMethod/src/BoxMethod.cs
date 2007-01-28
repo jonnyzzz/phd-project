@@ -4,6 +4,7 @@
  */
 
 using System.Collections.Generic;
+using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.IntegerCoordinates;
@@ -11,12 +12,8 @@ using DSIS.Util;
 
 namespace DSIS.CellImageBuilder
 {
-  public class BoxMethod : ICellImageBuilder<IntegerCoordinate>
+  public class BoxMethod : IntegerCoordinateMethodBase, ICellImageBuilder<IntegerCoordinate>
   {
-    private IIntegerCoordinateSystem mySystem;
-    private ICellConnectionBuilder<IntegerCoordinate> myBuilder;
-    private IIntegerCoordinateCellImageBuilderAdapter myAdapter;
-
     private IFunction<double> myFunction;
     private double[] x;
     private double[] xLeft;
@@ -26,15 +23,10 @@ namespace DSIS.CellImageBuilder
     private double[] y;
     private double[] eps;
 
-    private int myDim;
-
-    public void Bind(CellImageBuilderContext<IntegerCoordinate> context)
+    public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
     {
-      mySystem = (IIntegerCoordinateSystem) context.System;
-      myBuilder = context.ConnectionBuilder;
-      myFunction = context.Function.GetFunction<double>(1);
-      myAdapter = mySystem.CreateAdapter(myBuilder);
-      myDim = context.System.SystemSpace.Dimension;
+      base.Bind(context);
+      myFunction = context.Function.GetFunction<double>();
 
       y = new double[myDim];
       x = new double[myDim];
@@ -42,19 +34,18 @@ namespace DSIS.CellImageBuilder
       xRight = new double[myDim];
       eps = new double[myDim];
       
-      //todo: This paramater could be sent to the method
       for (int i = 0; i < myDim; i++)
       {
-        eps[i] = 0.1*mySystem.CellSize[i];
+        eps[i] = ((BoxMethodParameters)context.Settings).Eps*mySystem.CellSize[i];
       }
       
       myFunction.Input = x;
       myFunction.Output = y;
     }
 
-    public void BuildImage(IntegerCoordinate coordinate)
+    public void BuildImage(IntegerCoordinate coord)
     {
-      mySystem.TopLeftPoint(coordinate, xLeft);
+      mySystem.TopLeftPoint(coord, xLeft);
 
       for (int i=0; i<myDim; i++)
       {
@@ -79,7 +70,7 @@ namespace DSIS.CellImageBuilder
         }
       }
 
-      myAdapter.ConnectCellToRect(coordinate, yLeft, yRight, eps);
+      myAdapter.ConnectCellToRect(coord, yLeft, yRight, eps);
     }
   }
 }

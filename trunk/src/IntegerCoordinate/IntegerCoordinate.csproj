@@ -52,6 +52,7 @@
     <Compile Include="testSrc\IntegerCoordinateSystemTest.cs" />
     <Compile Include="testSrc\MockSystemSpace.cs" />
     <Compile Include="testSrc\SubdivisionTest.cs" />
+    <Compile Include="testSrc\TwoDimCoordinateAssert.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Mock\Core.Mock.csproj">

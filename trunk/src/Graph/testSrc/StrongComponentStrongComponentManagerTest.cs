@@ -7,9 +7,9 @@ namespace DSIS.Graph.Test
   [TestFixture]
   public class StrongComponentStrongComponentManagerTest : StrongComponentGraphTest
   {
-    protected override IGraphWithStrongComponent<IntegerCoordinate, int> CreateGraph()
+    protected override IGraphWithStrongComponent<IntegerCoordinate> CreateGraph()
     {
-      return new StrongComponentGraph<IntegerCoordinate, int>(mySystem, new StrongComponentInfoManager());
+      return new StrongComponentGraph<IntegerCoordinate>(mySystem, new StrongComponentInfoManager());
     }
   }
 }

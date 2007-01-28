@@ -4,9 +4,9 @@ using DSIS.Core.Util;
 
 namespace DSIS.Graph.Abstract
 {
-  public class TarjanGraph<TCell, TValue> :
-    AbstractGraph<TCell, TarjanNode<TCell, TValue>, TValue>,
-    IGraphWithStrongComponent<TCell, TValue>
+  public class TarjanGraph<TCell> :
+    AbstractGraph<TCell, TarjanNode<TCell>>,
+    IGraphWithStrongComponent<TCell>
     where TCell : ICellCoordinate<TCell>
   {
     private bool myWasComponents = false;
@@ -15,12 +15,12 @@ namespace DSIS.Graph.Abstract
     {
     }
 
-    protected override TarjanNode<TCell, TValue> CreateNode(TCell coordinate)
+    protected override TarjanNode<TCell> CreateNode(TCell coordinate)
     {
-      return new TarjanNode<TCell, TValue>(coordinate, default(TValue));
+      return new TarjanNode<TCell>(coordinate);
     }
 
-    protected override void EdgeAdded(TarjanNode<TCell, TValue> from, TarjanNode<TCell, TValue> to)
+    protected override void EdgeAdded(TarjanNode<TCell> from, TarjanNode<TCell> to)
     {
       base.EdgeAdded(from, to);
       if (ReferenceEquals(from, to))
@@ -29,7 +29,7 @@ namespace DSIS.Graph.Abstract
       }
     }
 
-    public IGraphStrongComponents<TCell, TValue> ComputeStrongComponents(IProgressInfo info)
+    public IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
     {
       if (myWasComponents)
       {
@@ -41,22 +41,22 @@ namespace DSIS.Graph.Abstract
       info.Minimum = 0;
       info.Maximum = EdgesCount;
 
-      TarjanNodeStack<TCell, TValue> stack = new TarjanNodeStack<TCell, TValue>(TarjanNodeFlags.STACK);
-      TarjanNodeStack<TCell, TValue> route = new TarjanNodeStack<TCell, TValue>(TarjanNodeFlags.ROUTE);
+      TarjanNodeStack<TCell> stack = new TarjanNodeStack<TCell>(TarjanNodeFlags.STACK);
+      TarjanNodeStack<TCell> route = new TarjanNodeStack<TCell>(TarjanNodeFlags.ROUTE);
 
       int state = 2;
       int cnt = 1;
 
-      TarjanNode<TCell, TValue> w = null;
+      TarjanNode<TCell> w = null;
 
       TarjanComponentInfoManager comps = new TarjanComponentInfoManager();
 
-      foreach (TarjanNode<TCell, TValue> node in NodesInternal)
+      foreach (TarjanNode<TCell> node in NodesInternal)
       {
         if (node.Data.Label != 0)
           continue;
 
-        TarjanNode<TCell, TValue> v = node;
+        TarjanNode<TCell> v = node;
         while (state > 1)
         {
           switch (state)
@@ -147,7 +147,7 @@ namespace DSIS.Graph.Abstract
         }
         state = 2;
       }
-      return new TarjanStrongComponentImpl<TCell, TValue>(this, comps);
+      return new TarjanStrongComponentImpl<TCell>(this, comps);
     }
   }
 }

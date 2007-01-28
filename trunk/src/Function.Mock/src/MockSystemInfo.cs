@@ -22,18 +22,18 @@ namespace DSIS.Function.Mock
       mySystemSpace = systemSpace;
     }
 
-    public IFunction<T> GetFunction<T>(int iteration)
+    public IFunction<T> GetFunction<T>()
     {
       AssertType<T>();
       return (IFunction<T>) new Function<TType>(mySystemSpace.Dimension, myFunc);
     }
 
-    public IFunction<T> GetDerivateFunction<T>(int iteration, int derivatePower)
+    public IFunction<T> GetDerivateFunction<T>(int derivatePower)
     {
       throw new NotImplementedException();
     }
 
-    public IFunction<T> GetDerivateFunction<T>(int iteration, int[] unsimmetricDerivate)
+    public IFunction<T> GetDerivateFunction<T>(int[] unsimmetricDerivate)
     {
       throw new NotImplementedException();
     }

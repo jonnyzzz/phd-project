@@ -3,9 +3,9 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public class TarjanNodeStack<TCell, TValue> where TCell : ICellCoordinate<TCell>
+  public class TarjanNodeStack<TCell> where TCell : ICellCoordinate<TCell>
   {
-    private readonly Stack<TarjanNode<TCell, TValue>> myStack = new Stack<TarjanNode<TCell, TValue>>();
+    private readonly Stack<TarjanNode<TCell>> myStack = new Stack<TarjanNode<TCell>>();
     private readonly TarjanNodeFlags myMask;
 
     public TarjanNodeStack(TarjanNodeFlags mask)
@@ -13,20 +13,20 @@ namespace DSIS.Graph.Abstract
       myMask = mask;
     }
 
-    public void Push(TarjanNode<TCell, TValue> node)
+    public void Push(TarjanNode<TCell> node)
     {
       myStack.Push(node);
       node.SetFlag(myMask, true);
     }
 
-    public TarjanNode<TCell, TValue> Pop()
+    public TarjanNode<TCell> Pop()
     {
-        TarjanNode<TCell, TValue> node = myStack.Pop();
+        TarjanNode<TCell> node = myStack.Pop();
         node.SetFlag(myMask, false);
         return node;
     }
 
-    public TarjanNode<TCell, TValue> Peek()
+    public TarjanNode<TCell> Peek()
     {
       return myStack.Peek();
     }
@@ -36,7 +36,7 @@ namespace DSIS.Graph.Abstract
       return myStack.Count == 0;
     }
 
-    public bool Contains(TarjanNode<TCell, TValue> node)
+    public bool Contains(TarjanNode<TCell> node)
     {
       return node.GetFlag(myMask);
     }

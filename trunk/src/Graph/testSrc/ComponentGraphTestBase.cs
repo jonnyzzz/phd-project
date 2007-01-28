@@ -10,8 +10,8 @@ namespace DSIS.Graph.Test
 {
   public abstract class ComponentGraphTestBase
   {
-    protected IGraphWithStrongComponent<IntegerCoordinate, int> myGraph;
-    protected IGraphStrongComponents<IntegerCoordinate, int> myComponents = null;
+    protected IGraphWithStrongComponent<IntegerCoordinate> myGraph;
+    protected IGraphStrongComponents<IntegerCoordinate> myComponents = null;
     protected IntegerCoordinateSystem mySystem;
     private int myNodeId;
     protected delegate void VoidDelegate();
@@ -29,7 +29,7 @@ namespace DSIS.Graph.Test
       myNodeId = 0;
     }
 
-    protected abstract IGraphWithStrongComponent<IntegerCoordinate, int> CreateGraph();
+    protected abstract IGraphWithStrongComponent<IntegerCoordinate> CreateGraph();
 
     [TearDown]
     public virtual void TearDown()
@@ -39,7 +39,7 @@ namespace DSIS.Graph.Test
     }
 
     
-    protected INode<IntegerCoordinate, int> CreateNode()
+    protected INode<IntegerCoordinate> CreateNode()
     {
       return myGraph.AddNode(new IntegerCoordinate(myNodeId++));      
     }
@@ -71,11 +71,11 @@ namespace DSIS.Graph.Test
 
     protected void BuildCircle(int offset, int factor,  int length)
     {
-      INode<IntegerCoordinate, int> n = null;
-      INode<IntegerCoordinate, int> n2 = null;
+      INode<IntegerCoordinate> n = null;
+      INode<IntegerCoordinate> n2 = null;
       for (int i = 0; i < length; i++)
       {
-        INode<IntegerCoordinate, int> n1;
+        INode<IntegerCoordinate> n1;
         n1 = n2;
         n2 = myGraph.AddNode(new IntegerCoordinate(offset + (i + 1)*factor));
         if (n == null)

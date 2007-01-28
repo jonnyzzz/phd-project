@@ -10,7 +10,7 @@ namespace DSIS.IntegerCoordinates
     long[] Coordinate { get;}
   }
 
-  public class IntegerCoordinateEqualityComparer : IEqualityComparer<IntegerCoordinate>
+  public struct IntegerCoordinateEqualityComparer : IEqualityComparer<IntegerCoordinate>
   {
     public bool Equals(IntegerCoordinate x, IntegerCoordinate y)
     {

@@ -41,6 +41,7 @@
     <Compile Include="src\Abstract\AbstractGraph.cs" />
     <Compile Include="src\Abstract\IStrongComponentInfoEx.cs" />
     <Compile Include="src\Abstract\IStrongComponentInfoManager.cs" />
+    <Compile Include="src\Abstract\NodeEqualityComparer.cs" />
     <Compile Include="src\Abstract\StrongComponentHash.cs" />
     <Compile Include="src\Abstract\StrongComponentInfo2.cs" />
     <Compile Include="src\Abstract\StrongComponentInfoManager2.cs" />

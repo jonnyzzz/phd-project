@@ -2,24 +2,24 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public class SimpleGraph<TCellCoordinate, TValue> :
-    AbstractGraph<TCellCoordinate, SimpleNode<TCellCoordinate, TValue>, TValue>
+  public class SimpleGraph<TCellCoordinate> :
+    AbstractGraph<TCellCoordinate, SimpleNode<TCellCoordinate>>
     where TCellCoordinate : ICellCoordinate<TCellCoordinate>
   {
     public SimpleGraph(ICellCoordinateSystem<TCellCoordinate> coordinateSystem) : base(coordinateSystem)
     {
     }
 
-    protected override SimpleNode<TCellCoordinate, TValue> CreateNode(TCellCoordinate coordinate)
+    protected override SimpleNode<TCellCoordinate> CreateNode(TCellCoordinate coordinate)
     {
-      return new SimpleNode<TCellCoordinate, TValue>(coordinate, default(TValue));
+      return new SimpleNode<TCellCoordinate>(coordinate);
     }
   }
 
-  public class SimpleNode<TCell, TValue> : Node<SimpleNode<TCell, TValue>, TCell, TValue> 
+  public class SimpleNode<TCell> : Node<SimpleNode<TCell>, TCell> 
     where TCell : ICellCoordinate<TCell>
   {
-    public SimpleNode(TCell coordinate, TValue value) : base(coordinate, value)
+    public SimpleNode(TCell coordinate) : base(coordinate)
     {
     }
   }

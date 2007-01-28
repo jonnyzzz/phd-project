@@ -2,11 +2,11 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public class StrongComponentNode<TCell, TValue> : Node<StrongComponentNode<TCell, TValue>, TCell, TValue> where TCell: ICellCoordinate<TCell>
+  public class StrongComponentNode<TCell> : Node<StrongComponentNode<TCell>, TCell> where TCell: ICellCoordinate<TCell>
   {
     private IStrongComponentInfoEx myStrongComponent = null;
 
-    internal StrongComponentNode(TCell coordinate, TValue value) : base(coordinate, value)
+    internal StrongComponentNode(TCell coordinate) : base(coordinate)
     {
     }
 

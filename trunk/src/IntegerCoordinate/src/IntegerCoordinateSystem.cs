@@ -59,9 +59,19 @@ namespace DSIS.IntegerCoordinates
       return new IntegerCoordinate(coordinate);      
     }
 
+    internal bool Intersects(long l, int axis)
+    {
+      return l >= 0 && l < Subdivision[axis];
+    }
+
     internal long ToInternal(double point, int i)
     {
       return Ceil( (point - mySystemSpace.AreaLeftPoint[i])/CellSize[i]);
+    }
+
+    internal double ToExternal(long pt, int i)
+    {
+      return mySystemSpace.AreaLeftPoint[i] + CellSize[i] * pt;
     }
 
     public void TopLeftPoint(IntegerCoordinate point, double[] output)
@@ -69,7 +79,7 @@ namespace DSIS.IntegerCoordinates
       IntegerCoordinate coordinate = point;
       for (int i = 0; i < Dimension; i++)
       {
-        output[i] = mySystemSpace.AreaLeftPoint[i] + CellSize[i]*coordinate.Coordinate[i];
+        output[i] = ToExternal(coordinate.Coordinate[i], i);
       }
     }
 

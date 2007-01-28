@@ -45,11 +45,11 @@ namespace DSIS.Graph.Abstract
       myComponents.Add((TCI) info);
     }
 
-    public IEnumerable<INode<TCellCoordinate, TValue>> FilterNodes<TCellCoordinate, TValue>(IEnumerable<IStrongComponentInfo> infos, IEnumerable<StrongComponentNode<TCellCoordinate, TValue>> nodes)
+    public IEnumerable<INode<TCellCoordinate>> FilterNodes<TCellCoordinate>(IEnumerable<IStrongComponentInfo> infos, IEnumerable<StrongComponentNode<TCellCoordinate>> nodes)
       where TCellCoordinate : ICellCoordinate<TCellCoordinate>
     {
       Predicate<IStrongComponentInfoEx> set = GetComponentFilter(infos);
-      foreach (StrongComponentNode<TCellCoordinate, TValue> node in nodes)
+      foreach (StrongComponentNode<TCellCoordinate> node in nodes)
       {
         if (set(node.StrongComponent))
           yield return node;

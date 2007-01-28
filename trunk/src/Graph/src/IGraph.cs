@@ -10,22 +10,22 @@ using DSIS.Core.Util;
 
 namespace DSIS.Graph
 {
-  public interface IGraph<TCoordinate, TNodeValue> where TCoordinate : ICellCoordinate <TCoordinate>
+  public interface IGraph<TCoordinate> where TCoordinate : ICellCoordinate <TCoordinate>
   {
     ICellCoordinateSystem<TCoordinate> CoordinateSystem { get; }
-    IEnumerable<INode<TCoordinate,TNodeValue>> Nodes { get; }
+    IEnumerable<INode<TCoordinate>> Nodes { get; }
 
     int NodesCount { get; }
     int EdgesCount { get; }
 
-    IEnumerable<INode<TCoordinate, TNodeValue>> GetEdges(INode<TCoordinate, TNodeValue> forNode);
+    IEnumerable<INode<TCoordinate>> GetEdges(INode<TCoordinate> forNode);
 
     /// <summary>
     /// Adds new edge connefting fromNode with toNode if there was no suck edge.
     /// </summary>
     /// <param name="fromNode"></param>
     /// <param name="toNode"></param>
-    void AddEdgeToNode(INode<TCoordinate, TNodeValue> fromNode, INode<TCoordinate, TNodeValue> toNode);
+    void AddEdgeToNode(INode<TCoordinate> fromNode, INode<TCoordinate> toNode);
 
     /// <summary>
     /// Creates new node in the graph in case this was no such node or
@@ -33,14 +33,15 @@ namespace DSIS.Graph
     /// </summary>
     /// <param name="coordinate"></param>
     /// <returns></returns>
-    INode<TCoordinate, TNodeValue> AddNode(TCoordinate coordinate);
+    INode<TCoordinate> AddNode(TCoordinate coordinate);
 
     void Dump(TextWriter tw);
     string Dump();
   }
 
-  public interface IGraphWithStrongComponent<TCell, TValue> : IGraph<TCell, TValue> where TCell : ICellCoordinate<TCell>
+  public interface IGraphWithStrongComponent<TCell> : IGraph<TCell> 
+    where TCell : ICellCoordinate<TCell>
   {
-    IGraphStrongComponents<TCell, TValue> ComputeStrongComponents(IProgressInfo info);
+    IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info);
   }
 }

@@ -10,9 +10,9 @@ namespace DSIS.Core.System
 {
   public interface ISystemInfo
   {
-    IFunction<T> GetFunction<T>(int iteration);
-    IFunction<T> GetDerivateFunction<T>(int iteration, int derivatePower);
-    IFunction<T> GetDerivateFunction<T>(int iteration, int[] unsimmetricDerivate);
+    IFunction<T> GetFunction<T>();
+    IFunction<T> GetDerivateFunction<T>(int derivatePower);
+    IFunction<T> GetDerivateFunction<T>(int[] unsimmetricDerivate);
 
     Q ProcessFunctionTree<Q>(IFunctionTreeVisitor<Q> visitor);
 

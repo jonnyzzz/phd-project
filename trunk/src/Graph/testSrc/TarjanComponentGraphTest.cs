@@ -14,22 +14,22 @@ namespace DSIS.Graph.Test
     public void Test()
     {
       IntegerCoordinateSystem cs = new IntegerCoordinateSystem(new MockSystemSpace(1, 0, 1, 1000));
-      new SimpleGraph<IntegerCoordinate, object>(cs);
+      new SimpleGraph<IntegerCoordinate>(cs);
     }
   }
   [TestFixture]
   public class TarjanComponentGraphTest : ComponentGraphTestBase
   {
-    private new TarjanGraph<IntegerCoordinate, int> myGraph;
+    private new TarjanGraph<IntegerCoordinate> myGraph;
     public override void SetUp()
     {
       base.SetUp();
-      myGraph = (TarjanGraph<IntegerCoordinate, int>) base.myGraph;
+      myGraph = (TarjanGraph<IntegerCoordinate>) base.myGraph;
     }
 
-    protected override IGraphWithStrongComponent<IntegerCoordinate, int> CreateGraph()
+    protected override IGraphWithStrongComponent<IntegerCoordinate> CreateGraph()
     {
-      return new TarjanGraph<IntegerCoordinate, int>(mySystem);
+      return new TarjanGraph<IntegerCoordinate>(mySystem);
     }
 
 
@@ -53,10 +53,9 @@ namespace DSIS.Graph.Test
     {
       ComputeComponents();
 
-      foreach (INode<IntegerCoordinate, int> node in myComponents.GetNodes(new List<IStrongComponentInfo>()))
-      {
-        Assert.Fail("No node is expected");
-      }
+      List<INode<IntegerCoordinate>> l 
+        = new List<INode<IntegerCoordinate>>(myComponents.GetNodes(new List<IStrongComponentInfo>()));
+      Assert.AreEqual(0, l.Count);
     }
 
     [Test]
@@ -71,8 +70,8 @@ namespace DSIS.Graph.Test
     [Test]
     public void Test_05()
     {
-      INode<IntegerCoordinate, int> n1 = myGraph.AddNode(new IntegerCoordinate(1));
-      INode<IntegerCoordinate, int> n2 = myGraph.AddNode(new IntegerCoordinate(1));
+      INode<IntegerCoordinate> n1 = myGraph.AddNode(new IntegerCoordinate(1));
+      INode<IntegerCoordinate> n2 = myGraph.AddNode(new IntegerCoordinate(1));
       Assert.AreEqual(n1, n2);
       Assert.AreSame(n1, n2);
       ComputeComponents();
@@ -92,8 +91,8 @@ namespace DSIS.Graph.Test
     [Test]
     public void Test_07()
     {
-      INode<IntegerCoordinate, int> n1 = myGraph.AddNode(new IntegerCoordinate(1));
-      INode<IntegerCoordinate, int> n2 = myGraph.AddNode(new IntegerCoordinate(2));
+      INode<IntegerCoordinate> n1 = myGraph.AddNode(new IntegerCoordinate(1));
+      INode<IntegerCoordinate> n2 = myGraph.AddNode(new IntegerCoordinate(2));
 
       myGraph.AddEdgeToNode(n1, n2);
       ComputeComponents();
@@ -105,8 +104,8 @@ namespace DSIS.Graph.Test
     {
       DoTest(delegate
                {
-                 INode<IntegerCoordinate, int> n1 = myGraph.AddNode(new IntegerCoordinate(1));
-                 INode<IntegerCoordinate, int> n2 = myGraph.AddNode(new IntegerCoordinate(2));
+                 INode<IntegerCoordinate> n1 = myGraph.AddNode(new IntegerCoordinate(1));
+                 INode<IntegerCoordinate> n2 = myGraph.AddNode(new IntegerCoordinate(2));
                  myGraph.AddEdgeToNode(n1, n2);
                  myGraph.AddEdgeToNode(n2, n1);
                  ComputeComponents();
@@ -180,7 +179,7 @@ namespace DSIS.Graph.Test
                    List<IStrongComponentInfo> infos = new List<IStrongComponentInfo>();
                    infos.Add(info);
                    Console.Out.WriteLine("info = {0}", info);
-                   int count = new List<INode<IntegerCoordinate, int>>(myComponents.GetNodes(infos)).Count;
+                   int count = new List<INode<IntegerCoordinate>>(myComponents.GetNodes(infos)).Count;
                    Assert.AreEqual(100, count);
                  }
                });
@@ -192,7 +191,7 @@ namespace DSIS.Graph.Test
       DoTest(delegate
                {
                  BuildCircle(0, 3, 100);
-                 BuildCircle(2, 2, 100);
+                 BuildCircle(200, 2, 100);
 
                  ComputeComponents();
 
@@ -202,7 +201,7 @@ namespace DSIS.Graph.Test
                    List<IStrongComponentInfo> infos = new List<IStrongComponentInfo>();
                    infos.Add(info);
                    Console.Out.WriteLine(info);
-                   Assert.AreEqual(100, new List<INode<IntegerCoordinate, int>>(myComponents.GetNodes(infos)).Count);
+                   Assert.AreEqual(100, new List<INode<IntegerCoordinate>>(myComponents.GetNodes(infos)).Count);
                  }
                });
     }
@@ -212,7 +211,7 @@ namespace DSIS.Graph.Test
     [Test]
     public void TestTarjanNode_01()
     {
-      TarjanNode<IntegerCoordinate, int> node = new TarjanNode<IntegerCoordinate, int>(new IntegerCoordinate(3), 0);
+      TarjanNode<IntegerCoordinate> node = new TarjanNode<IntegerCoordinate>(new IntegerCoordinate(3));
       node.ComponentId = COMPONENT_ID_TEST;
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
     }
@@ -220,7 +219,7 @@ namespace DSIS.Graph.Test
     [Test]
     public void TestTarjanNode_02()
     {
-      TarjanNode<IntegerCoordinate, int> node = new TarjanNode<IntegerCoordinate, int>(new IntegerCoordinate(3), 0);
+      TarjanNode<IntegerCoordinate> node = new TarjanNode<IntegerCoordinate>(new IntegerCoordinate(3));
       node.SetFlag(TarjanNodeFlags.ROUTE, true);
       node.ComponentId = COMPONENT_ID_TEST;
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
@@ -229,7 +228,7 @@ namespace DSIS.Graph.Test
     [Test]
     public void TestTarjanNode_03()
     {
-      TarjanNode<IntegerCoordinate, int> node = new TarjanNode<IntegerCoordinate, int>(new IntegerCoordinate(3), 0);
+      TarjanNode<IntegerCoordinate> node = new TarjanNode<IntegerCoordinate>(new IntegerCoordinate(3));
       node.ComponentId = COMPONENT_ID_TEST;
       node.SetFlag(TarjanNodeFlags.ROUTE, true);      
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
@@ -238,7 +237,7 @@ namespace DSIS.Graph.Test
     [Test]
     public void TestTarjanNode_04()
     {
-      TarjanNode<IntegerCoordinate, int> node = new TarjanNode<IntegerCoordinate, int>(new IntegerCoordinate(3), 0);
+      TarjanNode<IntegerCoordinate> node = new TarjanNode<IntegerCoordinate>(new IntegerCoordinate(3));
       node.ComponentId = COMPONENT_ID_TEST;
       node.SetFlag(TarjanNodeFlags.ROUTE, true);
       node.SetFlag(TarjanNodeFlags.STACK, false);

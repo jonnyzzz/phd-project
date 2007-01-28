@@ -6,21 +6,21 @@ using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
 {
-  public abstract class AbstractGraph<TCell, TNode, TValue> : IGraph<TCell, TValue>
+  public abstract class AbstractGraph<TCell, TNode> : IGraph<TCell>
     where TCell : ICellCoordinate<TCell>
-    where TNode : Node<TNode, TCell, TValue>
+    where TNode : Node<TNode, TCell>
   {
     private ICellCoordinateSystem<TCell> myCoordinateSystem;
     private int myNodesCount;
     private int myEdgesCount;
-    private readonly Hashset<TNode, INode<TCell, TValue>> myNodes;
+    private readonly Hashset<TNode, INode<TCell>> myNodes;
 
     public AbstractGraph(ICellCoordinateSystem<TCell> coordinateSystem)
     {
       myCoordinateSystem = coordinateSystem;
       myNodesCount = 0;
       myEdgesCount = 0;
-      myNodes = new Hashset<TNode, INode<TCell, TValue>>(NodeEqualityComparer<TNode, TCell, TValue>.INSTANCE);
+      myNodes = new Hashset<TNode, INode<TCell>>(NodeEqualityComparer<TNode, TCell>.INSTANCE);
     }
 
     #region Getters
@@ -30,7 +30,7 @@ namespace DSIS.Graph.Abstract
       get { return myCoordinateSystem; }
     }
 
-    public IEnumerable<INode<TCell, TValue>> Nodes
+    public IEnumerable<INode<TCell>> Nodes
     {
       get { return myNodes.ValuesUpcasted; }
     }
@@ -52,16 +52,16 @@ namespace DSIS.Graph.Abstract
 
     #endregion
 
-    public IEnumerable<INode<TCell, TValue>> GetEdges(INode<TCell, TValue> forNode)
+    public IEnumerable<INode<TCell>> GetEdges(INode<TCell> forNode)
     {
       TNode node = (TNode) forNode;
       return node.Edges;
     }
 
-    protected static IEnumerable<TNode> GetEdgesInternal(INode<TCell, TValue> forNode)
+    protected static IEnumerable<TNode> GetEdgesInternal(INode<TCell> forNode)
     {
       TNode node = (TNode)forNode;
-      return new ConvertEnumerator<INode<TCell, TValue>, TNode>(node.Edges);      
+      return new ConvertEnumerator<INode<TCell>, TNode>(node.Edges);      
     }
 
     #region Add
@@ -78,7 +78,7 @@ namespace DSIS.Graph.Abstract
       myEdgesCount++;
     }
 
-    public void AddEdgeToNode(INode<TCell, TValue> fromNode, INode<TCell, TValue> toNode)
+    public void AddEdgeToNode(INode<TCell> fromNode, INode<TCell> toNode)
     {
       TNode from = (TNode) fromNode;
       TNode to = (TNode) toNode;
@@ -87,7 +87,7 @@ namespace DSIS.Graph.Abstract
         EdgeAdded(from, to);
     }
 
-    public INode<TCell, TValue> AddNode(TCell coordinate)
+    public INode<TCell> AddNode(TCell coordinate)
     {
       TNode node = CreateNode(coordinate);
       if (myNodes.AddIfNotReplace(ref node))

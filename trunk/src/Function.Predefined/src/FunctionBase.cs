@@ -11,6 +11,11 @@ namespace DSIS.Function.Predefined
       myDimension = dimension;
     }
 
+    protected FunctionBase(int dimension)
+    {
+      myDimension = dimension;
+    }
+
     public abstract void Evaluate();
 
     public int Dimension

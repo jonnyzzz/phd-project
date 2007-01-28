@@ -17,45 +17,94 @@ namespace DSIS.IntegerCoordinates.Test
       myIcs = new IntegerCoordinateSystem(mySpace);
     }
 
-
-    private void DoTest(double left, double right)
+    private void DoTestBuild(double left, double right, DoBuild bld)
     {
-      List<IntegerCoordinate> list = DoTest(myIcs, delegate(IntegerCoordinateCellImageBuilderAdapter ad)
-                                                     {
-                                                       IntegerCoordinate cs = myIcs.FromPoint(new double[] {1});
-                                                       ad.ConnectCellToRect(cs, new double[] {left}, new double[] {right},
-                                                                            new double[] {0});
-                                                     });
-      List<long> coords = list.ConvertAll<long>(delegate(IntegerCoordinate input) { return input.Coordinate[0]; });
+      List<IntegerCoordinate> list = DoTest(myIcs, bld);
+      List<long> coords = list.ConvertAll<long>(delegate(IntegerCoordinate input)
+                                                  {
+                                                    return input.Coordinate[0];
+                                                  });
       coords.Sort();
-      long cnt = myIcs.FromPoint(new double[]{left}).Coordinate[0];
+      Assert.IsTrue(coords.Count > 0, "Non empty result expected");
+
+      IntegerCoordinate coor = myIcs.FromPoint(new double[] { left });
+      Assert.IsNotNull(coor);
+      long cnt = coor.Coordinate[0];
       foreach (long l in coords)
       {
-        Assert.AreEqual(cnt++, l);        
+        Assert.AreEqual(cnt++, l);
       }
+      IntegerCoordinate rightC = myIcs.FromPoint(new double[] {right});
+      Assert.IsNotNull(rightC);
+      Assert.AreEqual(rightC.Coordinate[0], cnt - 1, "Right side");
+    }
+
+    private void DoTestPointToRect(double left, double right)
+    {
+      DoTestBuild(left, right, delegate(IntegerCoordinateCellImageBuilderAdapter ad)
+                                 {
+                                   IntegerCoordinate cs = myIcs.FromPoint(new double[] { 1 });
+                                   ad.ConnectCellToRect(cs, new double[] { left}, new double[] { right },
+                                                        new double[] { 0 });                                   
+                                 });
+    }
+
+    private void DoTestOverlap(double left, double right, double pt, double procent)
+    {
+      DoTestBuild(left, right, delegate(IntegerCoordinateCellImageBuilderAdapter ad)
+                                 {
+                                   IntegerCoordinate c = myIcs.FromPoint(new double[]{1});
+                                   ad.AddPointWithOverlapping(c, new double[]{pt}, new double[]{procent});
+                                 });
     }
 
     [Test]
     public void Test_01()
     {
-      DoTest(0, 1);      
+      DoTestPointToRect(0, 1);      
     }
 
     [Test]
     public void Test_02()
     {
-      DoTest(0, 10);      
+      DoTestPointToRect(0, 10);      
     }
 
     [Test]
     public void Test_03()
     {
-      DoTest(10,20);
+      DoTestPointToRect(10,20);
     }
 
+    [Test]
     public void Test_04()
     {
-      DoTest(0, 100);
+      DoTestPointToRect(0, 100);
+    }
+
+    [Test]
+    public void Test_05()
+    {
+      DoTestOverlap(0, 0, 0, 0.1);
+    }
+
+    [Test]
+    public void Test_06()
+    {
+      DoTestOverlap(myIcs.CellSize[0], myIcs.CellSize[0], myIcs.CellSize[0] * 1.5, 0.1);
+    }
+
+    [Test]
+    public void Test_07()
+    {
+      DoTestOverlap(myIcs.CellSize[0], myIcs.CellSize[0]*2, myIcs.CellSize[0]*2, 0.1);
+    }
+
+    [Test]
+    public void Test_08()
+    {
+      long l = myIcs.Subdivision[0];
+      DoTestOverlap(myIcs.CellSize[0]*(l-1), myIcs.CellSize[0]*(l-1), myIcs.CellSize[0] * l, 0.1);
     }
   }
 }

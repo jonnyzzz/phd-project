@@ -1,15 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using DSIS.CellImageBuilder.BexMethodTest;
 using DSIS.IntegerCoordinates;
-using DSIS.IntegerCoordinates.Tests;
-using DSIS.Util;
-using NUnit.Framework;
 
 namespace DSIS.IntegerCoordinates.Test
 {
-  public class CellConnectionAdapterTestBase
+  public abstract class CellConnectionAdapterTestBase
   {
     protected delegate void DoBuild(IntegerCoordinateCellImageBuilderAdapter ad);
 

@@ -8,10 +8,10 @@ using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
 {
-  public class StrongComponentGraph<TCell, TValue> : 
-    AbstractGraph<TCell, StrongComponentNode<TCell, TValue>, TValue>, 
-    IGraphStrongComponents<TCell, TValue>,
-    IGraphWithStrongComponent<TCell, TValue>
+  public class StrongComponentGraph<TCell> : 
+    AbstractGraph<TCell, StrongComponentNode<TCell>>, 
+    IGraphStrongComponents<TCell>,
+    IGraphWithStrongComponent<TCell>
     where TCell : ICellCoordinate<TCell>
   {
     private IStrongComponentInfoManager myComponents;
@@ -32,19 +32,19 @@ namespace DSIS.Graph.Abstract
       get { return myComponents.Components; }
     }
 
-    protected override StrongComponentNode<TCell, TValue> CreateNode(TCell coordinate)
+    protected override StrongComponentNode<TCell> CreateNode(TCell coordinate)
     {
-      return new StrongComponentNode<TCell, TValue>(coordinate, default(TValue));
+      return new StrongComponentNode<TCell>(coordinate);
     }
 
-    protected override void NodeAdded(StrongComponentNode<TCell, TValue> node)
+    protected override void NodeAdded(StrongComponentNode<TCell> node)
     {
       base.NodeAdded(node);
 
       GetStrongComponentInfo(node);
     }
 
-    private IStrongComponentInfoEx GetStrongComponentInfo(StrongComponentNode<TCell, TValue> node)
+    private IStrongComponentInfoEx GetStrongComponentInfo(StrongComponentNode<TCell> node)
     {
       IStrongComponentInfoEx info = node.StrongComponent;
       if (info == null)
@@ -57,8 +57,8 @@ namespace DSIS.Graph.Abstract
       return info;
     }
 
-    protected override void EdgeAdded(StrongComponentNode<TCell, TValue> from,
-                                      StrongComponentNode<TCell, TValue> to)
+    protected override void EdgeAdded(StrongComponentNode<TCell> from,
+                                      StrongComponentNode<TCell> to)
     {
       base.EdgeAdded(from, to);
 
@@ -67,19 +67,19 @@ namespace DSIS.Graph.Abstract
       myComponents.OnConnection(fromInfo, toInfo);
     }
 
-    public IEnumerable<INode<TCell, TValue>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
+    public IEnumerable<INode<TCell>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
     {
       return myComponents.FilterNodes(componentIds, NodesInternal);
     }
 
-    public IEnumerable<INode<TCell, TValue>> GetEdgesWithFilteredEdges(INode<TCell, TValue> node, IEnumerable<IStrongComponentInfo> componentIds)
+    public IEnumerable<INode<TCell>> GetEdgesWithFilteredEdges(INode<TCell> node, IEnumerable<IStrongComponentInfo> componentIds)
     {
       return myComponents.FilterNodes(componentIds, GetEdgesInternal(node));
     }
 
     public IEnumerable<TCell> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
     {
-      foreach (INode<TCell, TValue> node in GetNodes(components))
+      foreach (INode<TCell> node in GetNodes(components))
       {
         yield return node.Coordinate;
       }
@@ -127,7 +127,7 @@ namespace DSIS.Graph.Abstract
       tw.WriteLine("-----------------------------------------");
     }
 
-    public IGraphStrongComponents<TCell, TValue> ComputeStrongComponents(IProgressInfo info)
+    public IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
     {
       return this;
     }

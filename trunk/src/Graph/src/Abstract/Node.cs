@@ -4,20 +4,18 @@ using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
 { 
-  public abstract class Node<TInh, TCell, TValue> : INode<TCell, TValue> 
+  public abstract class Node<TInh, TCell> : INode<TCell> 
     where TCell : ICellCoordinate<TCell>
-    where TInh : Node<TInh, TCell, TValue>
+    where TInh : Node<TInh, TCell>
   {
     private readonly TCell myCoordinate;
-    private TValue myValue;
-    private readonly Hashset<TInh, INode<TCell, TValue>> myEdges;
+    private readonly Hashset<TInh, INode<TCell>> myEdges;
     private int myHashcode;
 
-    internal Node(TCell coordinate, TValue value)
+    internal Node(TCell coordinate)
     {
       myCoordinate = coordinate;
-      myValue = value;
-      myEdges = new Hashset<TInh, INode<TCell, TValue>>(NodeEqualityComparer<TInh, TCell, TValue>.INSTANCE);
+      myEdges = new Hashset<TInh, INode<TCell>>(NodeEqualityComparer<TInh, TCell>.INSTANCE);
       myHashcode = myCoordinate.GetHashCode();
     }
 
@@ -26,17 +24,11 @@ namespace DSIS.Graph.Abstract
       get { return myCoordinate; }
     }
 
-    public TValue Value
-    {
-      get { return myValue; }
-      set { myValue = value; }
-    }
-
     public override bool Equals(object obj)
     {
-      if (!(obj is Node<TInh, TCell, TValue>)) 
+      if (!(obj is Node<TInh, TCell>)) 
         return false;
-      Node<TInh, TCell, TValue> node = (Node<TInh, TCell, TValue>) obj;
+      Node<TInh, TCell> node = (Node<TInh, TCell>) obj;
       return Equals(myCoordinate, node.myCoordinate);
     }
 
@@ -50,7 +42,7 @@ namespace DSIS.Graph.Abstract
       return myEdges.AddIfNotReplace(ref node);
     }
 
-    internal IEnumerable<INode<TCell, TValue>> Edges
+    internal IEnumerable<INode<TCell>> Edges
     {
       get { return myEdges.ValuesUpcasted; }
     }
@@ -68,23 +60,6 @@ namespace DSIS.Graph.Abstract
     internal int HashCodeInternal
     {
       get { return myHashcode; }
-    }
-  }
-
-  internal class NodeEqualityComparer<TNode, TCell, TValue> : IEqualityComparer<TNode>
-    where TNode : Node<TNode, TCell, TValue>
-    where TCell : ICellCoordinate<TCell>
-  {
-    public static NodeEqualityComparer<TNode, TCell, TValue> INSTANCE = new NodeEqualityComparer<TNode, TCell, TValue>();
-
-    public bool Equals(TNode x, TNode y)
-    {
-      return x.EqualsInternal(y);
-    }
-
-    public int GetHashCode(TNode obj)
-    {
-      return obj.HashCodeInternal;
     }
   }
 }

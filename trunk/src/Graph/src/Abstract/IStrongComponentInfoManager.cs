@@ -9,9 +9,9 @@ namespace DSIS.Graph.Abstract
 
     IEnumerable<IStrongComponentInfo> Components { get; }
 
-    IEnumerable<INode<TCellCoordinate, TValue>> FilterNodes<TCellCoordinate, TValue>(
+    IEnumerable<INode<TCellCoordinate>> FilterNodes<TCellCoordinate>(
       IEnumerable<IStrongComponentInfo> infos, 
-      IEnumerable<StrongComponentNode<TCellCoordinate, TValue>> nodes) 
+      IEnumerable<StrongComponentNode<TCellCoordinate>> nodes) 
       where TCellCoordinate : ICellCoordinate<TCellCoordinate>;
     
     void AddComponent(IStrongComponentInfo info);
