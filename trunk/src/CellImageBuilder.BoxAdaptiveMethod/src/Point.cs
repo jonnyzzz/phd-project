@@ -13,6 +13,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
   public struct Point
   {
     private static int[] POW_2 = new int[31];
+    private static double[] POW_1_2 = new double[31];
 
     static Point()
     {
@@ -20,6 +21,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       for (int i = 0; i < 31; i++)
       {
         POW_2[i] = l;
+        POW_1_2[i] = 1.0/l;
         l *= 2;
       }
     }
@@ -35,7 +37,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     public void Evaluate(double[] left, double[] right, double[] output)
     {
-      double p = 1.0/POW_2[myPower];
+      double p = POW_1_2[myPower];
       for (int i = 0; i < myPoints.Length; i++)
       {
         double tmp = myPoints[i]*p;
@@ -155,14 +157,14 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       return GetHashCodeInternal();
     }
 
-    public int GetHashCodeInternal()
+    internal int GetHashCodeInternal()
     {
       int l = 0;
       for (int i = 0; i < myPoints.Length; i++)
       {
         l = l*13 + myPoints[i];
       }
-      return l + 29*myPower;
+      return l*17 + myPower;
     }
 
     public override string ToString()

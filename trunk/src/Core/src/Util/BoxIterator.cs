@@ -15,11 +15,19 @@ namespace DSIS.Util
     public static IEnumerable<T[]> EnumerateBox<T>(T[] left, T[] right, T[] outs)
     {
       int dim = left.Length;
+      //todo: Move array creations to instance!
       int[] steps = new int[dim + 1];
-      for (int i = 0; i <= dim; i++)
+      bool[] skips = new bool[dim+1];
+      int inc = 0;
+      for (int i = dim - 1; i >=0 ; i--)
       {
         steps[i] = 0;
+        skips[i] = left[i].Equals(right[i]);
+        inc = skips[i] ? inc : i;
       }
+      steps[dim] = 0;
+      skips[dim] = false;
+      
 
       while (steps[dim] == 0)
       {
@@ -37,13 +45,16 @@ namespace DSIS.Util
 
         yield return outs;
 
-        steps[0]++;
-        for (int i = 0; i < dim; i++)
+        steps[inc]++;
+        for (int i = inc; i < dim; i++)
         {
           if (steps[i] > 1)
           {
             steps[i] = 0;
-            steps[i + 1]++;
+            steps[++i]++;
+            while( i+1 < dim && skips[i + 1])
+              steps[i++ + 1]++;
+            i--;
           }
           else break;
         }

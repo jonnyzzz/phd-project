@@ -17,7 +17,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private double[] xleft;
     private double[] xright;
 
-    private double eps;
+    private double[] eps;
     private double[] radius;
     private IntegerCoordinate coordinate;
     private double[] overlapL;
@@ -29,8 +29,10 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private Divide[] divMiddle;
     private Divide[] divRight;
     private Divide[] div;
-    private ISortedTaskQueue myQueue;    
+    private Divide[] div2;
+    private ISortedTaskQueue myQueue;
 
+    
     private double[] Evaluate(Point pt)
     {
       double[] result;
@@ -71,10 +73,9 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       myFunction.Input = x;
       myFunction.Output = y;
 
-      eps = 0;
+      eps = new double[myDim];
       for (int i = 0; i < myDim; i++)
-        eps += mySystem.CellSize[i];
-      eps /= 2;
+        eps[i] = mySystem.CellSize[i]*settings.CellSizePercent;
 
       radius = new double[myDim];
       for (int i = 0; i < myDim; i++)
@@ -84,32 +85,30 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       divMiddle = new Divide[myDim];
       divRight = new Divide[myDim];
       div = new Divide[myDim];
+      div2 = new Divide[myDim];
       double[] per = new double[myDim];
       for (int i = 0; i < myDim; i++)
       {
-        divLeft[i] = Divide.Middle;
+        divLeft[i] = Divide.First;
         divMiddle[i] = Divide.Middle;
-        divRight[i] = Divide.Middle;
+        divRight[i] = Divide.Second;
         per[i] = settings.Overlaping;
       }
 
       myAdapter.AddPointWithOverlappingPrepare(per, overlapL, overlapR);
     }
 
-    private double epsilon(double[] d1, double[] d2)
-    {
-      double e = 0;
-      for (int i = 0; i < myDim; i++)
-      {
-        e += Math.Abs(d1[i] - d2[i]);
-      }
-
-      return e;
-    }
-
     private bool checkEpsilon(double[] d1, double[] d2, out double length)
     {
-      return (length = epsilon(d1, d2)) > eps;
+      length = 0;
+      bool flag = true;
+      for (int i = 0; i < myDim; i++)
+      {
+        double t = Math.Abs(d1[i] - d2[i]);
+        length += t;
+        flag &= t <= eps[i];
+      }
+      return flag;
     }
 
     public void BuildImage(IntegerCoordinate coord)
@@ -126,7 +125,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       myQueue.Clear();
       addedPoints.Clear();
       cache.Clear();
-      
+
       myQueue.AddTask(0, new Pair<Point, Point>(topPoint, bottomPoint));
 
       while (myQueue.HasNextTask)
@@ -162,18 +161,47 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       double[] d1 = Evaluate(p1);
       double[] d2 = Evaluate(p2);
 
-      double len;
-      if (checkEpsilon(d1, d2, out len))
+      double len = 0;
+      bool result = true;
+      for (int i = 0; i < myDim; i++)
+      {
+        double t = Math.Abs(d1[i] - d2[i]);
+        len += t;
+        bool b = t <= eps[i];
+        if (b)
+        {
+          div2[i] = Divide.First;
+          divLeft[i] = Divide.Middle;
+          divRight[i] = Divide.Middle;
+        } else
+        {
+          div2[i] = Divide.Middle;
+          divLeft[i] = Divide.First;
+          divRight[i] = Divide.Second;
+        }
+        div2[i] = b ? Divide.First : Divide.Middle;
+        result &= b;
+      }
+      if (result)
       {
         AppendPoint(p1, d1);
         AppendPoint(p2, d2);
       }
       else
       {
-        Point m = Point.Middle(p1, p2, divMiddle);
         foreach (Divide[] ts in BoxIterator.EnumerateBox(divLeft, divRight, div))
         {
-          queue.AddTask(len, new Pair<Point, Point>(m, Point.Middle(p1, p2, ts)));
+          for (int i = 0; i < myDim; i++)
+          {
+            if (div2[i] != Divide.Middle)
+              div2[i] = ts[i] == Divide.First ? Divide.Second : Divide.First;
+          }
+          queue.AddTask(len, 
+            new Pair<Point, Point>(
+              Point.Middle(p1, p2, div2), 
+              Point.Middle(p1, p2, ts)
+              )
+              );
         }
       }
     }

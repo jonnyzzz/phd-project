@@ -8,6 +8,7 @@ using DSIS.CellImageBuilder.BexMethodTest;
 using DSIS.Core.Coordinates;
 using DSIS.Function.Mock;
 using DSIS.IntegerCoordinates;
+using DSIS.IntegerCoordinates.Test;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
@@ -44,6 +45,15 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
       method.BuildImage(test);
 
       return man.Result;
+    }
+
+    public static void DoTwoDimTest(
+      IntegerCoordinateSystem ics, 
+      IntegerCoordinate test, 
+      ComputeFunction<double> f, TP settins, string gold)
+    {
+      List<IntegerCoordinate> data = DoTest(ics, test, f, settins);
+      TwoDimCoordinateAssert.Assert(ics, data, gold);
     }
 
     public static List<IntegerCoordinate> DoTestOneDimension(

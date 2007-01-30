@@ -21,7 +21,7 @@ namespace DSIS.SimpleRunner
       Console.Out.WriteLine("Adaptive Method:");
       MainBoxAdaptiveMethod();
       Console.Out.WriteLine("Box Method:");
-      MainBoxMethod();
+      //MainBoxMethod();
     }
 
     public static void MainBoxMethod()
@@ -85,7 +85,7 @@ namespace DSIS.SimpleRunner
 
       proc.Execute(NullProgressInfo.INSTANCE);
 
-      for (int i = 0; i < 2; i++)
+      for (int i = 0; i < 3; i++)
       {
         IGraphStrongComponents<IntegerCoordinate> cmops
           = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);

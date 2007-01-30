@@ -63,10 +63,10 @@ namespace DSIS.CellImageBuilder
         myFunction.Evaluate();
         for (int i=0; i<myDim; i++)
         {
-          if (yLeft[i] > cn[i])
-            yLeft[i] = cn[i];
-          if (yRight[i] < cn[i])
-            yRight[i] = cn[i];
+          if (yLeft[i] > y[i])
+            yLeft[i] = y[i];
+          if (yRight[i] < y[i])
+            yRight[i] = y[i];
         }
       }
 

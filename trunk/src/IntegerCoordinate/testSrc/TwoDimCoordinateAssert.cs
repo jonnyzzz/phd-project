@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using DSIS.Util;
 
@@ -32,7 +34,7 @@ namespace DSIS.IntegerCoordinates.Test
       sb.AppendLine("-------------------");
 
       return sb.ToString();
-    } 
+    }
 
     public static void Assert(IntegerCoordinateSystem ics, IList<IntegerCoordinate> list, string assert)
     {
@@ -40,10 +42,28 @@ namespace DSIS.IntegerCoordinates.Test
       try
       {
         NUnit.Framework.Assert.AreEqual(assert, s);
-      } catch
+      }
+      catch
       {
         Console.Out.WriteLine(s);
         throw;
+      }
+    }
+
+    public static void AssertResource(IntegerCoordinateSystem ics, IList<IntegerCoordinate> list, string resource)
+    {
+      string s = Write(ics, list);
+      try
+      {        
+        using (
+          StreamReader sr =
+            new StreamReader(Assembly.GetCallingAssembly().GetManifestResourceStream(resource), Encoding.UTF8))
+        {
+          NUnit.Framework.Assert.AreEqual(sr.ReadToEnd(), s);
+        }
+      } catch
+      {
+        Console.Out.WriteLine(s);
       }
     }
   }
