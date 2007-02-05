@@ -51,6 +51,7 @@
     <Compile Include="src\Data\IDataProcessScheme.cs" />
     <Compile Include="src\IData.cs" />
     <Compile Include="src\IDR.cs" />
+    <Compile Include="src\Processor\CellProcessorContext.cs" />
     <Compile Include="src\Processor\ICellProcessor.cs" />
     <Compile Include="src\Processor\IConcurentProcess.cs" />
     <Compile Include="src\Processor\InThreadProcessExecutor.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="src\System\Impl\DefaultSystemSpace.cs" />
     <Compile Include="src\System\ISystemSpace.cs" />
     <Compile Include="src\Util\BoxIterator.cs" />
+    <Compile Include="src\Util\CountEnumerable.cs" />
     <Compile Include="src\Util\Hashset.cs" />
     <Compile Include="src\Util\IntLBoxIterator.cs" />
     <Compile Include="src\Util\IProgressInfo.cs" />
@@ -81,6 +83,10 @@
     <Compile Include="src\Util\Pair.cs" />
     <Compile Include="src\Util\ProcessInterruptedException.cs" />
     <Compile Include="src\Util\SegmentBoxIterator.cs" />
+    <Compile Include="src\Visualization\ICellToPointConverter.cs" />
+    <Compile Include="src\Visualization\IImageBuilder.cs" />
+    <Compile Include="src\Visualization\IImageDrawer.cs" />
+    <Compile Include="src\Visualization\ImagePoint.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

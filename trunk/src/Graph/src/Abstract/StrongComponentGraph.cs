@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
@@ -83,6 +82,11 @@ namespace DSIS.Graph.Abstract
       {
         yield return node.Coordinate;
       }
+    }
+
+    public IStrongComponentInfo GetNodeComponent(INode<TCell> node)
+    {
+      return GetStrongComponentInfo((StrongComponentNode<TCell>) node);
     }
 
     internal static IEnumerable<IStrongComponentInfoEx> Optimize(IEnumerable<IStrongComponentInfo> infos)

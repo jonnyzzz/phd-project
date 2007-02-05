@@ -24,7 +24,7 @@ namespace DSIS.Graph.Abstract
       get { return myCoordinate; }
     }
 
-    public override bool Equals(object obj)
+    public sealed override bool Equals(object obj)
     {
       if (!(obj is Node<TInh, TCell>)) 
         return false;
@@ -32,7 +32,7 @@ namespace DSIS.Graph.Abstract
       return Equals(myCoordinate, node.myCoordinate);
     }
 
-    public override int GetHashCode()
+    public sealed override int GetHashCode()
     {
       return myHashcode;
     }

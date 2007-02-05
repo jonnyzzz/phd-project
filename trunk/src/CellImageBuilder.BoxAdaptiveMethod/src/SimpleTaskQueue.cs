@@ -39,7 +39,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     public void Clear()
     {
-      myItems.Clear();
+      myItems = new Queue<Pair<Point, Point>>();
       myProcessed = 0;
     }
   }

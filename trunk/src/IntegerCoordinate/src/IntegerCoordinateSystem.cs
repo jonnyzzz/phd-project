@@ -83,6 +83,15 @@ namespace DSIS.IntegerCoordinates
       }
     }
 
+    public void CenterPoint(IntegerCoordinate point, double[] output)
+    {
+      IntegerCoordinate coordinate = point;
+      for (int i = 0; i < Dimension; i++)
+      {
+        output[i] = ToExternal(coordinate.Coordinate[i], i) + CellSizeHalf[i];
+      } 
+    }
+
     public IIntegerCoordinateCellImageBuilderAdapter CreateAdapter(ICellConnectionBuilder<IntegerCoordinate> builder)
     {
       return new IntegerCoordinateCellImageBuilderAdapter(builder, this);

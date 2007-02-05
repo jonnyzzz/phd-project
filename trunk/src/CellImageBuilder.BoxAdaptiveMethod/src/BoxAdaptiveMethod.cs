@@ -31,6 +31,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private Divide[] div;
     private Divide[] div2;
     private ISortedTaskQueue myQueue;
+    private BoxIterator<Divide> myIterator;
 
     
     private double[] Evaluate(Point pt)
@@ -69,6 +70,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       xright = new double[myDim];
       overlapL = new double[myDim];
       overlapR = new double[myDim];
+      myIterator = new BoxIterator<Divide>(myDim);
 
       myFunction.Input = x;
       myFunction.Output = y;
@@ -96,19 +98,6 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       }
 
       myAdapter.AddPointWithOverlappingPrepare(per, overlapL, overlapR);
-    }
-
-    private bool checkEpsilon(double[] d1, double[] d2, out double length)
-    {
-      length = 0;
-      bool flag = true;
-      for (int i = 0; i < myDim; i++)
-      {
-        double t = Math.Abs(d1[i] - d2[i]);
-        length += t;
-        flag &= t <= eps[i];
-      }
-      return flag;
     }
 
     public void BuildImage(IntegerCoordinate coord)
@@ -189,7 +178,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       }
       else
       {
-        foreach (Divide[] ts in BoxIterator.EnumerateBox(divLeft, divRight, div))
+        foreach (Divide[] ts in myIterator.EnumerateBox(divLeft, divRight, div))
         {
           for (int i = 0; i < myDim; i++)
           {

@@ -57,6 +57,10 @@
       <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
       <Name>Function.Predefined</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GnuplotDrawer\GnuplotDrawer.csproj">
+      <Project>{CA14A441-039B-49F2-B678-9491146C56A1}</Project>
+      <Name>GnuplotDrawer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Graph\Graph.csproj">
       <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
       <Name>Graph</Name>

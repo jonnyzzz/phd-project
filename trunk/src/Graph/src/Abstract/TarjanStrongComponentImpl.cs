@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
@@ -68,6 +67,11 @@ namespace DSIS.Graph.Abstract
       {
         yield return node.Coordinate;
       }
+    }
+
+    public IStrongComponentInfo GetNodeComponent(INode<TCell> node)
+    {
+      return myManager.FindByNode((TarjanNode<TCell>) node);
     }
   }
 }

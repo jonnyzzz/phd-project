@@ -27,6 +27,7 @@ namespace DSIS.IntegerCoordinates
     private double[] myZeroEps;
     private double[] myPercLeft;
     private double[] myPercRight;
+    private BoxIterator<long> myIterator;
 
     internal IntegerCoordinateCellImageBuilderAdapter(ICellConnectionBuilder<IntegerCoordinate> builder,
                                                       IntegerCoordinateSystem coordinateSystem)
@@ -45,6 +46,7 @@ namespace DSIS.IntegerCoordinates
       myZeroEps = new double[myCoordinateSystem.Dimension];
       myPercLeft = new double[myCoordinateSystem.Dimension];
       myPercRight = new double[myCoordinateSystem.Dimension];
+      myIterator = new BoxIterator<long>(myCoordinateSystem.Dimension);
       
       myZeros = new long[myCoordinateSystem.Dimension];
       myOnes = new long[myCoordinateSystem.Dimension];
@@ -166,7 +168,7 @@ namespace DSIS.IntegerCoordinates
       else
       {
         bool isFirst = true;
-        foreach (long[] ts in BoxIterator.EnumerateBox(myZeros, myOnes, myPoint3))
+        foreach (long[] ts in myIterator.EnumerateBox(myZeros, myOnes, myPoint3))
         {
           bool fl = false;
           bool ok = true;

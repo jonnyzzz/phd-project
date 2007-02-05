@@ -22,6 +22,7 @@ namespace DSIS.CellImageBuilder
     private double[] yRight;
     private double[] y;
     private double[] eps;
+    private BoxIterator<double> myIterator;
 
     public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
     {
@@ -33,6 +34,7 @@ namespace DSIS.CellImageBuilder
       xLeft = new double[myDim];
       xRight = new double[myDim];
       eps = new double[myDim];
+      myIterator = new BoxIterator<double>(myDim);
       
       for (int i = 0; i < myDim; i++)
       {
@@ -57,7 +59,7 @@ namespace DSIS.CellImageBuilder
       yLeft = (double[]) y.Clone();
       yRight = (double[]) y.Clone();
 
-      IEnumerable<double[]> cns = BoxIterator.EnumerateBox(xLeft, xRight, x);
+      IEnumerable<double[]> cns = myIterator.EnumerateBox(xLeft, xRight, x);
       foreach (double[] cn in cns)
       {
         myFunction.Evaluate();

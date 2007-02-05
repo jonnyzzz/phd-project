@@ -2,8 +2,20 @@ using System.Collections.Generic;
 
 namespace DSIS.Util
 {
-  public static class BoxIterator
+  public class BoxIterator<T>
   {
+    private readonly int myDim;
+    private readonly int[] steps;
+    private readonly bool[] skips;
+
+
+    public BoxIterator(int dim)
+    {
+      myDim = dim;
+      steps = new int[dim + 1];
+      skips = new bool[dim + 1];
+    }
+
     /// <summary>
     /// Every time outs array is returned. But values differs
     /// </summary>
@@ -12,26 +24,22 @@ namespace DSIS.Util
     /// <param name="right"></param>
     /// <param name="outs"></param>
     /// <returns></returns>
-    public static IEnumerable<T[]> EnumerateBox<T>(T[] left, T[] right, T[] outs)
+    public IEnumerable<T[]> EnumerateBox(T[] left, T[] right, T[] outs)
     {
-      int dim = left.Length;
-      //todo: Move array creations to instance!
-      int[] steps = new int[dim + 1];
-      bool[] skips = new bool[dim+1];
       int inc = 0;
-      for (int i = dim - 1; i >=0 ; i--)
+      for (int i = myDim - 1; i >=0 ; i--)
       {
         steps[i] = 0;
         skips[i] = left[i].Equals(right[i]);
         inc = skips[i] ? inc : i;
       }
-      steps[dim] = 0;
-      skips[dim] = false;
+      steps[myDim] = 0;
+      skips[myDim] = false;
       
 
-      while (steps[dim] == 0)
+      while (steps[myDim] == 0)
       {
-        for (int i = 0; i < dim; i++)
+        for (int i = 0; i < myDim; i++)
         {
           if (steps[i] == 0)
           {
@@ -46,13 +54,13 @@ namespace DSIS.Util
         yield return outs;
 
         steps[inc]++;
-        for (int i = inc; i < dim; i++)
+        for (int i = inc; i < myDim; i++)
         {
           if (steps[i] > 1)
           {
             steps[i] = 0;
             steps[++i]++;
-            while( i+1 < dim && skips[i + 1])
+            while( i+1 < myDim && skips[i + 1])
               steps[i++ + 1]++;
             i--;
           }

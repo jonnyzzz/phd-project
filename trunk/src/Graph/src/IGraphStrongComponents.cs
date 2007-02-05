@@ -14,5 +14,7 @@ namespace DSIS.Graph
     IEnumerable<INode<TCoordinate>> GetEdgesWithFilteredEdges(INode<TCoordinate> node, IEnumerable<IStrongComponentInfo> componentIds);
 
     IEnumerable<TCoordinate> GetCoordinates(IEnumerable<IStrongComponentInfo> components);
+
+    IStrongComponentInfo GetNodeComponent(INode<TCoordinate> node);
   }
 }
