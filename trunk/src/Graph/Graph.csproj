@@ -70,6 +70,7 @@
     <Compile Include="src\IGraph.cs" />
     <Compile Include="src\Util\MultiHashDictionary.cs" />
     <Compile Include="src\Util\OrderedList.cs" />
+    <Compile Include="testSrc\GraphPerformanceTest.cs" />
     <Compile Include="testSrc\OrderedListTest.cs" />
     <Compile Include="testSrc\SimpleGraphTest.cs" />
     <Compile Include="testSrc\HashSetTest.cs" />

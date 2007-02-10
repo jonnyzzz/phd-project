@@ -7,11 +7,13 @@ namespace DSIS.Graph.Abstract
     where TNode : Node<TNode, TCell>
     where TCell : ICellCoordinate<TCell>
   {
+    private static IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();
+
     public static NodeEqualityComparer<TNode, TCell> INSTANCE = new NodeEqualityComparer<TNode, TCell>();
 
     public bool Equals(TNode x, TNode y)
     {
-      return x.EqualsInternal(y);
+      return CellComparer.Equals(x.Coordinate, y.Coordinate);
     }
 
     public int GetHashCode(TNode obj)

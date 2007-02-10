@@ -1,11 +1,11 @@
 namespace DSIS.GnuplotDrawer
 {
-  public class Gnuplot2dScriptGen : GnuplotFileWriterBase, IGnuplotScriptGen
+  public class Gnuplot3dScriptGen : GnuplotFileWriterBase, IGnuplotScriptGen
   {
     private GnuplotScriptParameters myParams;
     private bool myIsFirstFile = true;
 
-    public Gnuplot2dScriptGen(string filename, GnuplotScriptParameters @params) : base(filename)
+    public Gnuplot3dScriptGen(string filename, GnuplotScriptParameters @params) : base(filename)
     {
       myParams = @params;
 
@@ -17,7 +17,7 @@ namespace DSIS.GnuplotDrawer
       else
         myWriter.WriteLine("set key off;");
 
-      myWriter.Write("plot ");
+      myWriter.Write("splot ");
     }
 
     public void AddPointsFile(GnuplotPointsFileWriter file)

@@ -1,18 +1,24 @@
 using System.Collections.Generic;
 using DSIS.Core.Util;
+using DSIS.Util;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
   internal class SimpleTaskQueue : ISortedTaskQueue
   {
-    private Queue<Pair<Point, Point>> myItems;
     private readonly int myLimit;
-    private int myProcessed = 0;
+    private readonly int myDim;
 
-    public SimpleTaskQueue(int limit)
+    private Queue<Pair<Point, Point>> myItems;    
+    private int myProcessed = 0;    
+    private double[] myMaxSize;
+    private Hashset<Point> myExceeded;
+
+    public SimpleTaskQueue(int limit, int dim)
     {
+      myDim = dim;
       myLimit = limit;
-      myItems = new Queue<Pair<Point, Point>>(limit);
+      Clear();
     }
 
     public Pair<Point, Point> NextTask()
@@ -25,21 +31,43 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       get { return myItems.Count > 0; }
     }
 
-    public void AddTask(double weight, Pair<Point, Point> pt)
+    public void AddTask(double[] weight, Pair<Point, Point> pt)
     {
-      myProcessed++;
+      if (weight != null)
+      {
+        for(int i=0; i<myDim; i++)
+        {
+          if (myMaxSize[i] < weight[i])
+            myMaxSize[i] = weight[i];
+        }
+      }
       if (myProcessed < myLimit)
+      {
+        myProcessed++;
         myItems.Enqueue(pt);
+      } else
+      {
+        myExceeded.Add(pt.First);
+        myExceeded.Add(pt.Second);
+      }
     }
 
-    public IEnumerable<Pair<double, Point>> NonProcessed
+    public IEnumerable<Pair<double[], Point>> NonProcessed
     {
-      get { yield break; }
+      get
+      {
+        foreach (Point point in myExceeded)
+        {
+          yield return new Pair<double[], Point>(myMaxSize, point);
+        }        
+      }
     }
 
     public void Clear()
     {
-      myItems = new Queue<Pair<Point, Point>>();
+      myItems = new Queue<Pair<Point, Point>>(myLimit);
+      myMaxSize = new double[myDim];
+      myExceeded = new Hashset<Point>(PointEqualityComparer.INSTANCE);
       myProcessed = 0;
     }
   }

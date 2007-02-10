@@ -1,5 +1,7 @@
 using System;
 using System.Text;
+using DSIS.Core.Coordinates;
+using NUnit.Framework;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {

@@ -37,6 +37,8 @@
     <Compile Include="src\Delayed\DelayedFunction.cs" />
     <Compile Include="src\Delayed\DelayedFunctionSystemInfo.cs" />
     <Compile Include="src\DoubleSystemInfoBase.cs" />
+    <Compile Include="src\FoodChain\FoodChainFunction.cs" />
+    <Compile Include="src\FoodChain\FoodChainSystemInfo.cs" />
     <Compile Include="src\FunctionBase.cs" />
     <Compile Include="src\FunctionIO.cs" />
     <Compile Include="src\Henon\HenonFunction.cs" />

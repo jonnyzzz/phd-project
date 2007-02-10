@@ -6,18 +6,18 @@ using NUnit.Framework;
 namespace DSIS.CellImageBuilder.BexMethodTest
 {
   [TestFixture]
-  public class BoxMethodTest : MethodTestBase<BoxMethod, BoxMethodParameters>
+  public class BoxMethodTest : MethodTestBase<BoxMethod, BoxMethodSettings>
   {
     [Test]
     public void Test_01()
     {
-      DoTestOneDimensionAndAssert(0, 10, 10, 5, new BoxMethodParameters(0), delegate(double ins) { return ins; }, 5, 6);
+      DoTestOneDimensionAndAssert(0, 10, 10, 5, new BoxMethodSettings(0), delegate(double ins) { return ins; }, 5, 6);
     }
 
     [Test]
     public void Test_02()
     {
-      BoxMethodParameters stategy = new BoxMethodParameters(0.1);
+      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       IntegerCoordinateSystem ics = new IntegerCoordinateSystem(ss);
@@ -47,7 +47,7 @@ namespace DSIS.CellImageBuilder.BexMethodTest
     [Test]
     public void Test_03()
     {
-      BoxMethodParameters stategy = new BoxMethodParameters(0.1);
+      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       IntegerCoordinateSystem ics = new IntegerCoordinateSystem(ss);
@@ -77,7 +77,7 @@ namespace DSIS.CellImageBuilder.BexMethodTest
     [Test]
     public void Test_04()
     {
-      BoxMethodParameters stategy = new BoxMethodParameters(0.1);
+      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       IntegerCoordinateSystem ics = new IntegerCoordinateSystem(ss);
@@ -107,7 +107,7 @@ namespace DSIS.CellImageBuilder.BexMethodTest
     [Test]
     public void Test_05()
     {
-      BoxMethodParameters stategy = new BoxMethodParameters(0.1);
+      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       IntegerCoordinateSystem ics = new IntegerCoordinateSystem(ss);
@@ -137,7 +137,7 @@ namespace DSIS.CellImageBuilder.BexMethodTest
     [Test]
     public void Test_06()
     {
-      BoxMethodParameters stategy = new BoxMethodParameters(0.1);
+      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       IntegerCoordinateSystem ics = new IntegerCoordinateSystem(ss);
@@ -167,7 +167,7 @@ namespace DSIS.CellImageBuilder.BexMethodTest
     [Test]
     public void Test_07()
     {
-      BoxMethodParameters stategy = new BoxMethodParameters(0.1);
+      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       IntegerCoordinateSystem ics = new IntegerCoordinateSystem(ss);

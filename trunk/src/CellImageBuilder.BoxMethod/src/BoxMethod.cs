@@ -38,7 +38,7 @@ namespace DSIS.CellImageBuilder
       
       for (int i = 0; i < myDim; i++)
       {
-        eps[i] = ((BoxMethodParameters)context.Settings).Eps*mySystem.CellSize[i];
+        eps[i] = ((BoxMethodSettings)context.Settings).Eps*mySystem.CellSize[i];
       }
       
       myFunction.Input = x;

@@ -60,7 +60,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       switch (settings.WorkItemStrategy)
       {
         case BoxAdaptiveMethodStategy.Simple:
-          myQueue = new SimpleTaskQueue(settings.TaskLimit);
+          myQueue = new SimpleTaskQueue(settings.TaskLimit, myDim);
           break;
       }
 
@@ -115,7 +115,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       addedPoints.Clear();
       cache.Clear();
 
-      myQueue.AddTask(0, new Pair<Point, Point>(topPoint, bottomPoint));
+      myQueue.AddTask(null, new Pair<Point, Point>(topPoint, bottomPoint));
 
       while (myQueue.HasNextTask)
       {
@@ -123,13 +123,9 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       }
 
       addedPoints.Clear(); //sizes may differ. 
-      foreach (Pair<double, Point> work in myQueue.NonProcessed)
+      foreach (Pair<double[], Point> work in myQueue.NonProcessed)
       {
-        double[] sz = new double[myDim];
-        for (int i = 0; i < myDim; i++)
-          sz[i] = work.First;
-
-        myAdapter.ConnectCellToPointWithRadius(coord, Evaluate(work.Second), sz);
+        myAdapter.ConnectCellToPointWithRadius(coord, Evaluate(work.Second), work.First);
       }
     }
 
@@ -150,12 +146,12 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       double[] d1 = Evaluate(p1);
       double[] d2 = Evaluate(p2);
 
-      double len = 0;
+      double[] len = new double[myDim];
       bool result = true;
       for (int i = 0; i < myDim; i++)
       {
         double t = Math.Abs(d1[i] - d2[i]);
-        len += t;
+        len[i] = t;
         bool b = t <= eps[i];
         if (b)
         {

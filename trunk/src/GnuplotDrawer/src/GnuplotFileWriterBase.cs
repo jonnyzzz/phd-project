@@ -5,12 +5,12 @@ namespace DSIS.GnuplotDrawer
 {
   public class GnuplotFileWriterBase : IDisposable
   {
-    public readonly string Filename;
+    private readonly string myFilename;
     protected TextWriter myWriter;
 
     public GnuplotFileWriterBase(string filename)
     {
-      Filename = filename;
+      myFilename = filename;
       myWriter = File.CreateText(filename);
     }
 
@@ -21,6 +21,11 @@ namespace DSIS.GnuplotDrawer
         myWriter.Close();
         myWriter = null;
       }
+    }
+
+    public string Filename
+    {
+      get { return myFilename; }
     }
   }  
 }

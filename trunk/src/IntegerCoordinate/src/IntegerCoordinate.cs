@@ -12,17 +12,46 @@ namespace DSIS.IntegerCoordinates
 
   public struct IntegerCoordinateEqualityComparer : IEqualityComparer<IntegerCoordinate>
   {
+    public static IntegerCoordinateEqualityComparer INSTANCE = new IntegerCoordinateEqualityComparer();
+
     public bool Equals(IntegerCoordinate x, IntegerCoordinate y)
     {
-      return x.Equals(y);
+      long[] xC = x.Coordinate;
+      long[] yC = y.Coordinate;
+
+      return Equals(xC, yC);
+    }
+
+    public static bool Equals(long[] xC, long[] yC)
+    {
+      for (int len = 0; len < xC.Length; len++)
+      {
+        if (xC[len] != yC[len])
+          return false;
+      }
+      return true;
     }
 
     public int GetHashCode(IntegerCoordinate obj)
     {
-      return obj.GetHashCode();
+      return GetHashCode(obj.Coordinate);
+    }
+
+    public static int GetHashCode(long[] x)
+    {
+      int hash = 0;
+      unchecked
+      {
+        for (int i = x.Length - 1; i >= 0; i--)
+        {
+          hash += hash * 31 + (int)x[i] + i * 17;
+        }
+      }
+      return hash;      
     }
   }
 
+  [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]
   public sealed class IntegerCoordinate : ICellCoordinate<IntegerCoordinate>, IIntegerCoordinateDebug
   {
     private long[] myCoordinare;
@@ -34,7 +63,7 @@ namespace DSIS.IntegerCoordinates
       myCoordinare = coordinare;
     }
 
-    public IntegerCoordinate  Clone()
+    public IntegerCoordinate Clone()
     {
       return new IntegerCoordinate((long[]) Coordinate.Clone());
     }
@@ -49,37 +78,14 @@ namespace DSIS.IntegerCoordinates
       get { return Coordinate; }
     }
 
-    public bool Equals(IntegerCoordinate ac)
+    public IEqualityComparer<IntegerCoordinate> Comparer
     {
-      if (ac == null)
-        return false;
-      if (ReferenceEquals(myCoordinare, ac.myCoordinare))
-        return true;
-      
-      if (ac.myCoordinare.Length != myCoordinare.Length)
-        return false;
-      
-      for(int len = myCoordinare.Length-1; len >= 0; len--)
-      {
-        if (myCoordinare[len] != ac.myCoordinare[len])
-          return false;
-      }
-      return true;
+      get { return IntegerCoordinateEqualityComparer.INSTANCE; }
     }
 
-    public int CompareTo(IntegerCoordinate other)
+    public bool Equals(IntegerCoordinate ac)
     {
-      if (other == null || myCoordinare.Length != other.myCoordinare.Length)
-        throw new ArgumentException("Dimensions are different");
-       
-      for (int i = other.myCoordinare.Length - 1; i >= 0; i--)
-      {
-        if (other.myCoordinare[i] < myCoordinare[i])
-          return -1;
-        if (other.myCoordinare[i] > myCoordinare[i])
-          return 1;
-      }
-      return 0;
+      return IntegerCoordinateEqualityComparer.Equals(myCoordinare, ac.myCoordinare);
     }
 
     public override bool Equals(object obj)
@@ -90,20 +96,13 @@ namespace DSIS.IntegerCoordinates
       IntegerCoordinate integerCoordinate = obj as IntegerCoordinate;      
       if (integerCoordinate == null) 
         return false;
+
       return Equals(integerCoordinate);
     }
 
     public override int GetHashCode()
     {
-      int hash = 0;
-      unchecked
-      {
-        for (int i = myCoordinare.Length - 1; i >= 0; i--)
-        {
-          hash = hash*31 + (int) myCoordinare[i] + (int)(myCoordinare[i]>>32) + i * 17;
-        }
-      }
-      return hash;
+      return IntegerCoordinateEqualityComparer.GetHashCode(myCoordinare);
     }
 
     public override string ToString()

@@ -2,7 +2,7 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.CellImageBuilder
 {
-  public sealed class BoxMethodParameters : ICellImageBuilderSettings
+  public sealed class BoxMethodSettings : ICellImageBuilderSettings
   {
     private readonly double myEps;
 
@@ -12,11 +12,11 @@ namespace DSIS.CellImageBuilder
     /// </summary>
     public double Eps { get { return myEps;} }
 
-    public BoxMethodParameters(double eps)
+    public BoxMethodSettings(double eps)
     {
       myEps = eps;
     }
 
-    public static readonly BoxMethodParameters DefaultBoxMethodParameters = new BoxMethodParameters(0.1);
+    public static readonly BoxMethodSettings Default = new BoxMethodSettings(0.1);
   }
 }

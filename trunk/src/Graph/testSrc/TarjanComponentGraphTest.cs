@@ -195,13 +195,13 @@ namespace DSIS.Graph.Test
 
                  ComputeComponents();
 
-                 Assert.AreEqual(2, myComponents.ComponentCount);
+                 Assert.AreEqual(1, myComponents.ComponentCount);
                  foreach (IStrongComponentInfo info in myComponents.Components)
                  {
                    List<IStrongComponentInfo> infos = new List<IStrongComponentInfo>();
                    infos.Add(info);
                    Console.Out.WriteLine(info);
-                   Assert.AreEqual(100, new List<INode<IntegerCoordinate>>(myComponents.GetNodes(infos)).Count);
+                   Assert.AreEqual(183, new List<INode<IntegerCoordinate>>(myComponents.GetNodes(infos)).Count);
                  }
                });
     }

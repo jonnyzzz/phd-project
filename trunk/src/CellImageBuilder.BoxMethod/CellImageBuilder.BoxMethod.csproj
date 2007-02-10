@@ -39,7 +39,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\BoxMethod.cs" />
-    <Compile Include="src\BoxMethodParameters.cs" />
+    <Compile Include="src\BoxMethodSettings.cs" />
     <Compile Include="testSrc\BoxMethodTest.cs" />
   </ItemGroup>
   <ItemGroup>

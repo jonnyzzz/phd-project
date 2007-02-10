@@ -31,15 +31,6 @@ namespace DSIS.IntegerCoordinates.Test
       Assert.IsTrue(c.GetHashCode() >= 0);
     }
 
-    [Test][ExpectedException(typeof(ArgumentException))]
-    public void Test_04()
-    {
-      IntegerCoordinate c1 = new IntegerCoordinate(new long[] { 1, 2, 3 });
-      IntegerCoordinate c2 = new IntegerCoordinate(new long[] { 1, 2 });
-
-      c1.CompareTo(c2);
-    }
-
     [Test]
     public void Test_05()
     {

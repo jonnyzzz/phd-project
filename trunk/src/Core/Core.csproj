@@ -41,6 +41,7 @@
     <Compile Include="src\Context\ContextKey.cs" />
     <Compile Include="src\Context\IContext.cs" />
     <Compile Include="src\Context\Impl\ContextImpl.cs" />
+    <Compile Include="src\Coordinates\CellCoordinateEqualityComparer.cs" />
     <Compile Include="src\Coordinates\ICellCoordinate.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystem.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemConverter.cs" />

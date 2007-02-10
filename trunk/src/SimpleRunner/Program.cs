@@ -9,7 +9,7 @@ using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Core.Util;
 using DSIS.Core.Visualization;
-using DSIS.Function.Predefined.Delayed;
+using DSIS.Function.Predefined;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
@@ -23,7 +23,7 @@ namespace DSIS.SimpleRunner
     private static string myWorkPath;
     private static string myHomePath;
 
-    private const int STEPS = 4;
+    private const int STEPS = 5;
 
     private static void Main()
     {
@@ -37,8 +37,8 @@ namespace DSIS.SimpleRunner
 
       Console.Out.WriteLine("Adaptive Method:");
       MethodAndLog(new BoxAdaptiveMethod(), BoxAdaptiveMethodSettings.Default);
-      //Console.Out.WriteLine("Box Method:");
-      //MethodAndLog(new BoxMethod(), BoxMethodParameters.DefaultBoxMethodParameters);      
+      Console.Out.WriteLine("Box Method:");
+      MethodAndLog(new BoxMethod(), BoxMethodSettings.Default);      
     }
 
     public static void MethodAndLog(ICellImageBuilder<IntegerCoordinate> build, ICellImageBuilderSettings settings)
@@ -63,7 +63,7 @@ namespace DSIS.SimpleRunner
 
       TarjanGraph<IntegerCoordinate> graph = new TarjanGraph<IntegerCoordinate>(cs);
 
-      ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv = cs.Subdivide(new long[] {3, 3});
+      ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv = cs.Subdivide(new long[] {3,3,3});
       CellProcessorContext<IntegerCoordinate, IntegerCoordinate> ctx =
         new CellProcessorContext<IntegerCoordinate, IntegerCoordinate>(
           cs.InitialCellsCount,
@@ -83,13 +83,15 @@ namespace DSIS.SimpleRunner
     private static ISystemInfo GetFunction(DefaultSystemSpace sp)
     {
       //return new HenonFunctionSystemInfoDecorator(sp, 1.4);
-      return new DelayedFunctionSystemInfo(sp, 2.21);
+//      return new DelayedFunctionSystemInfo(sp, 2.27);
+      return new FoodChainSystemInfo(sp);
     }
 
     private static DefaultSystemSpace GetSystemSpace()
     {
       //return new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {2, 2});
-      return new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {2, 2});
+//      return new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {2, 2});
+      return new DefaultSystemSpace(3, new double[] {0.001, 0.001, 0.001}, new double[] {10, 10, 10}, new long[] {2, 2, 2});
     }
 
     private static void DoConstruct(ICellImageBuilder<IntegerCoordinate> boxMethod,
@@ -98,7 +100,7 @@ namespace DSIS.SimpleRunner
     {
       SymbolicImageConstructionProcess<IntegerCoordinate, IntegerCoordinate> proc
         = new SymbolicImageConstructionProcess<IntegerCoordinate, IntegerCoordinate>();
-
+        
       proc.Bind(ctx);
 
       proc.Execute(NullProgressInfo.INSTANCE);
@@ -114,7 +116,7 @@ namespace DSIS.SimpleRunner
         graph = new TarjanGraph<IntegerCoordinate>(ctx.Converter.ToSystem);
 
         ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv;
-        conv = ctx.Converter.ToSystem.Subdivide(new long[] {3, 3});
+        conv = ctx.Converter.ToSystem.Subdivide(new long[] {2,2,2});
 
         ctx =
           ctx.CreateNextContext(new CountEnumerable<IntegerCoordinate>(cells, v), conv,
@@ -157,7 +159,7 @@ namespace DSIS.SimpleRunner
       Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter> files =
         new Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter>();
       int components = 0;
-      double[] data = new double[2];
+      double[] data = new double[3];
 
       foreach (INode<IntegerCoordinate> node in comps.GetNodes(comps.Components))
       {
@@ -168,14 +170,15 @@ namespace DSIS.SimpleRunner
         GnuplotPointsFileWriter fw;
         if (!files.TryGetValue(info, out fw))
         {
-          fw = new GnuplotPointsFileWriter(Path.Combine(path, title + "-" + ++components), 2);
+          fw = new GnuplotPointsFileWriter(Path.Combine(path, title + "-" + ++components), ics.Dimension);
           files[info] = fw;
         }
         ics.CenterPoint(node.Coordinate, data);
         fw.WritePoint(new ImagePoint(data));
       }
 
-      Gnuplot2dScriptGen gen = new Gnuplot2dScriptGen(
+      IGnuplotScriptGen gen = GnuplotSriptGen.ScriptGen(
+        ics.Dimension, 
         Path.Combine(path, title + "-script.gnuplot"),
         new GnuplotScriptParameters(Path.Combine(path, title + "-picture.png"), title));
 

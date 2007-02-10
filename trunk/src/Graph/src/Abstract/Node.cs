@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Graph;
 using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
@@ -8,33 +9,31 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate<TCell>
     where TInh : Node<TInh, TCell>
   {
-    private readonly TCell myCoordinate;
+    private static IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();
+
+    public readonly TCell Coordinate;
     private readonly Hashset<TInh, INode<TCell>> myEdges;
-    private int myHashcode;
+    internal int HashCodeInternal;
 
     internal Node(TCell coordinate)
     {
-      myCoordinate = coordinate;
+      Coordinate = coordinate;
       myEdges = new Hashset<TInh, INode<TCell>>(NodeEqualityComparer<TInh, TCell>.INSTANCE);
-      myHashcode = myCoordinate.GetHashCode();
+      HashCodeInternal = CellComparer.GetHashCode(Coordinate);
     }
 
-    public TCell Coordinate
-    {
-      get { return myCoordinate; }
-    }
-
-    public sealed override bool Equals(object obj)
+   public sealed override bool Equals(object obj)
     {
       if (!(obj is Node<TInh, TCell>)) 
         return false;
       Node<TInh, TCell> node = (Node<TInh, TCell>) obj;
-      return Equals(myCoordinate, node.myCoordinate);
+
+      return Equals(Coordinate, node.Coordinate);
     }
 
     public sealed override int GetHashCode()
     {
-      return myHashcode;
+      return HashCodeInternal;
     }
 
     internal bool AddEdgeTo(TInh node)
@@ -52,14 +51,9 @@ namespace DSIS.Graph.Abstract
       get { return myEdges.Values; }
     }
 
-    internal bool EqualsInternal(TInh node)
+    TCell INode<TCell>.Coordinate
     {
-      return myCoordinate.Equals(node.myCoordinate);
-    }
-
-    internal int HashCodeInternal
-    {
-      get { return myHashcode; }
+      get { return Coordinate; }
     }
   }
 }

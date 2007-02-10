@@ -5,8 +5,7 @@ using DSIS.Core.Util;
 namespace DSIS.Graph.Abstract
 {
   public class TarjanGraph<TCell> :
-    AbstractGraph<TCell, TarjanNode<TCell>>,
-    IGraphWithStrongComponent<TCell>
+    AbstractGraph<TCell, TarjanNode<TCell>>,IGraphWithStrongComponent<TCell>
     where TCell : ICellCoordinate<TCell>
   {
     private bool myWasComponents = false;
