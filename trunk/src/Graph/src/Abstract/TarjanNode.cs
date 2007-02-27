@@ -5,7 +5,7 @@ namespace DSIS.Graph.Abstract
   public class TarjanNode<TCell> : Node<TarjanNode<TCell>, TCell> 
     where TCell : ICellCoordinate<TCell>
   {
-    private TarjanNodeData<TCell> myData = null;
+    internal TarjanNodeData<TCell> Data;
     private uint myFlags = 0;
 
     public void SetFlag(TarjanNodeFlags mask, bool value)
@@ -26,19 +26,8 @@ namespace DSIS.Graph.Abstract
 
     public TarjanNode(TCell coordinate) : base(coordinate)
     {
-    }
-
-    internal TarjanNodeData<TCell> Data
-    {
-      get
-      {
-        if (myData == null)
-          myData = new TarjanNodeData<TCell>(EdgesInternal);
-
-        return myData;
-      }
-      set { myData = value; }
-    }
+      Data = new TarjanNodeData<TCell>(EdgesInternal);
+    }    
 
     public uint ComponentId
     {

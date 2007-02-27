@@ -37,15 +37,18 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private double[] Evaluate(Point pt)
     {
       double[] result;
+      /*
+      
       if (cache.TryGetValue(pt, out result))
         return result;
+      */
 
       pt.Evaluate(xleft, xright, x);
       result = new double[x.Length];
       myFunction.Output = result;
       myFunction.Evaluate();
 
-      cache[pt] = result;
+      //cache[pt] = result;
 
       return result;
     }

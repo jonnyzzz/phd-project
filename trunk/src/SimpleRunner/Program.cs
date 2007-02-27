@@ -9,7 +9,7 @@ using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Core.Util;
 using DSIS.Core.Visualization;
-using DSIS.Function.Predefined;
+using DSIS.Function.Predefined.Henon;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
@@ -23,7 +23,7 @@ namespace DSIS.SimpleRunner
     private static string myWorkPath;
     private static string myHomePath;
 
-    private const int STEPS = 5;
+    private const int STEPS = 13;
 
     private static void Main()
     {
@@ -35,8 +35,8 @@ namespace DSIS.SimpleRunner
       myWorkPath = Path.GetFullPath(Path.Combine(myHomePath, @"results"));
 
 
-      Console.Out.WriteLine("Adaptive Method:");
-      MethodAndLog(new BoxAdaptiveMethod(), BoxAdaptiveMethodSettings.Default);
+//      Console.Out.WriteLine("Adaptive Method:");
+//      MethodAndLog(new BoxAdaptiveMethod(), BoxAdaptiveMethodSettings.Default);
       Console.Out.WriteLine("Box Method:");
       MethodAndLog(new BoxMethod(), BoxMethodSettings.Default);      
     }
@@ -47,27 +47,25 @@ namespace DSIS.SimpleRunner
       {
         DateTime now = DateTime.Now;
         tw.WriteLine("Started at {0}", now);
-        
-        Method(build, settings);
-        
-        DateTime finish = DateTime.Now;
+
+        DateTime finish = Method(build, settings);
+
         tw.WriteLine("Finished at {0}", finish);
         tw.WriteLine("Time spent {0} ms", (finish - now).TotalMilliseconds);
       }
     }
 
-    public static void Method(ICellImageBuilder<IntegerCoordinate> build, ICellImageBuilderSettings settings)
+    public static DateTime Method(ICellImageBuilder<IntegerCoordinate> build, ICellImageBuilderSettings settings)
     {
       DefaultSystemSpace sp = GetSystemSpace();
       IntegerCoordinateSystem cs = new IntegerCoordinateSystem(sp);
 
       TarjanGraph<IntegerCoordinate> graph = new TarjanGraph<IntegerCoordinate>(cs);
 
-      ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv = cs.Subdivide(new long[] {3,3,3});
+      ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv = cs.Subdivide(new long[] {3,3});
       CellProcessorContext<IntegerCoordinate, IntegerCoordinate> ctx =
-        new CellProcessorContext<IntegerCoordinate, IntegerCoordinate>(
-          cs.InitialCellsCount,
-          cs.InitialSebdivision,
+        new CellProcessorContext<IntegerCoordinate, IntegerCoordinate>(          
+          cs.InitialSubdivision,
           conv,
           build,
           new CellImageBuilderContext<IntegerCoordinate>(
@@ -77,24 +75,24 @@ namespace DSIS.SimpleRunner
             )
           );
 
-      DoConstruct(build, ctx, graph);
+      return DoConstruct(build, ctx, graph);
     }
 
     private static ISystemInfo GetFunction(DefaultSystemSpace sp)
     {
-      //return new HenonFunctionSystemInfoDecorator(sp, 1.4);
+      return new HenonFunctionSystemInfoDecorator(sp, 1.4);
 //      return new DelayedFunctionSystemInfo(sp, 2.27);
-      return new FoodChainSystemInfo(sp);
+      //return new FoodChainSystemInfo(sp);
     }
 
     private static DefaultSystemSpace GetSystemSpace()
     {
-      //return new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {2, 2});
+      return new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {10, 10});
 //      return new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {2, 2});
-      return new DefaultSystemSpace(3, new double[] {0.001, 0.001, 0.001}, new double[] {10, 10, 10}, new long[] {2, 2, 2});
+      //return new DefaultSystemSpace(3, new double[] {0.001, 0.001, 0.001}, new double[] {10, 10, 10}, new long[] {2, 2, 2});
     }
 
-    private static void DoConstruct(ICellImageBuilder<IntegerCoordinate> boxMethod,
+    private static DateTime DoConstruct(ICellImageBuilder<IntegerCoordinate> boxMethod,
                                     CellProcessorContext<IntegerCoordinate, IntegerCoordinate> ctx,
                                     TarjanGraph<IntegerCoordinate> graph)
     {
@@ -107,32 +105,42 @@ namespace DSIS.SimpleRunner
 
       for (int i = 0; i < STEPS; i++)
       {
+        Console.Out.WriteLine("Strong Components: ");
+
         IGraphStrongComponents<IntegerCoordinate> cmops
           = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
 
+        Console.Out.WriteLine("Done");
         int v = DumpAndGetCount(cmops);
 
         IEnumerable<IntegerCoordinate> cells = cmops.GetCoordinates(cmops.Components);
         graph = new TarjanGraph<IntegerCoordinate>(ctx.Converter.ToSystem);
 
         ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv;
-        conv = ctx.Converter.ToSystem.Subdivide(new long[] {2,2,2});
+        conv = ctx.Converter.ToSystem.Subdivide(new long[] {2,2});
 
         ctx =
           ctx.CreateNextContext(new CountEnumerable<IntegerCoordinate>(cells, v), conv,
                                 new GraphCellImageBuilder<IntegerCoordinate>(graph));
         proc.Bind(ctx);
+
+        Console.Out.WriteLine("Image");
         proc.Execute(NullProgressInfo.INSTANCE);
+        Console.Out.WriteLine("Done");
       }
 
       IGraphStrongComponents<IntegerCoordinate> comps = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
       DumpAndGetCount(comps);
+
+      DateTime time = DateTime.Now;
 
       string gnuplotPath = Path.GetFullPath(Path.Combine(myHomePath, @"tools\gnuplot"));
 
       RenderToImage((IntegerCoordinateSystem) ctx.Converter.ToSystem,
                     myWorkPath,
                     boxMethod.GetType().Name, gnuplotPath, comps);
+
+      return time;
     }
 
     private static int DumpAndGetCount(IGraphStrongComponents<IntegerCoordinate> cmops)

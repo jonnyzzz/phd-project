@@ -3,14 +3,14 @@ using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph;
-using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
 {
   public class StrongComponentGraph<TCell> : 
-    AbstractGraph<TCell, StrongComponentNode<TCell>>, 
+    AbstractGraph<StrongComponentGraph<TCell>, TCell, StrongComponentNode<TCell>>, 
     IGraphStrongComponents<TCell>,
-    IGraphWithStrongComponent<TCell>
+    IGraphWithStrongComponent<TCell>,
+    IGraphExtension<StrongComponentNode<TCell>, TCell>
     where TCell : ICellCoordinate<TCell>
   {
     private IStrongComponentInfoManager myComponents;
@@ -31,17 +31,23 @@ namespace DSIS.Graph.Abstract
       get { return myComponents.Components; }
     }
 
-    protected override StrongComponentNode<TCell> CreateNode(TCell coordinate)
+    StrongComponentNode<TCell> IGraphExtension<StrongComponentNode<TCell>, TCell>.CreateNode(TCell coordinate)
     {
       return new StrongComponentNode<TCell>(coordinate);
     }
 
-    protected override void NodeAdded(StrongComponentNode<TCell> node)
+    void IGraphExtension<StrongComponentNode<TCell>, TCell>.NodeAdded(StrongComponentNode<TCell> node)
     {
-      base.NodeAdded(node);
-
       GetStrongComponentInfo(node);
     }
+
+    void IGraphExtension<StrongComponentNode<TCell>, TCell>.EdgeAdded(StrongComponentNode<TCell> from, StrongComponentNode<TCell> to)
+    {
+      IStrongComponentInfoEx fromInfo = GetStrongComponentInfo(from);
+      IStrongComponentInfoEx toInfo = GetStrongComponentInfo(to);
+      myComponents.OnConnection(fromInfo, toInfo);
+    }
+
 
     private IStrongComponentInfoEx GetStrongComponentInfo(StrongComponentNode<TCell> node)
     {
@@ -55,17 +61,6 @@ namespace DSIS.Graph.Abstract
       }
       return info;
     }
-
-    protected override void EdgeAdded(StrongComponentNode<TCell> from,
-                                      StrongComponentNode<TCell> to)
-    {
-      base.EdgeAdded(from, to);
-
-      IStrongComponentInfoEx fromInfo = GetStrongComponentInfo(from);
-      IStrongComponentInfoEx toInfo = GetStrongComponentInfo(to);
-      myComponents.OnConnection(fromInfo, toInfo);
-    }
-
     public IEnumerable<INode<TCell>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
     {
       return myComponents.FilterNodes(componentIds, NodesInternal);

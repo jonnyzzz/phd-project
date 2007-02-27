@@ -14,6 +14,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private double[] myMaxSize;
     private Hashset<Point> myExceeded;
 
+
     public SimpleTaskQueue(int limit, int dim)
     {
       myDim = dim;
@@ -34,7 +35,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     public void AddTask(double[] weight, Pair<Point, Point> pt)
     {
       if (weight != null)
-      {
+      {        
         for(int i=0; i<myDim; i++)
         {
           if (myMaxSize[i] < weight[i])
@@ -52,14 +53,21 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       }
     }
 
+    public IEnumerable<double[]> Overlaped
+    {
+      get { yield break; }
+    }
+
     public IEnumerable<Pair<double[], Point>> NonProcessed
     {
       get
-      {
+      {/*
         foreach (Point point in myExceeded)
         {
           yield return new Pair<double[], Point>(myMaxSize, point);
         }        
+        */
+        yield break;
       }
     }
 

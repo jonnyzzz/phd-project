@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using DSIS.Core.Util;
 using DSIS.Util;
 
 namespace DSIS.IntegerCoordinates.Test

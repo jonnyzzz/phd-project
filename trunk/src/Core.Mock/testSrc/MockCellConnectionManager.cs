@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 
-namespace DSIS.CellImageBuilder.BexMethodTest
+namespace DSIS.Core.Mock
 {
   public class MockCellConnectionManager<T> : ICellConnectionBuilder<T> where T:ICellCoordinate<T>
   {

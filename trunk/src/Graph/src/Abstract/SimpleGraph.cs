@@ -1,18 +1,29 @@
+using System;
 using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
   public class SimpleGraph<TCellCoordinate> :
-    AbstractGraph<TCellCoordinate, SimpleNode<TCellCoordinate>>
+    AbstractGraph<SimpleGraph<TCellCoordinate>, TCellCoordinate, SimpleNode<TCellCoordinate>>,
+    IGraphExtension<SimpleNode<TCellCoordinate>, TCellCoordinate>
     where TCellCoordinate : ICellCoordinate<TCellCoordinate>
   {
     public SimpleGraph(ICellCoordinateSystem<TCellCoordinate> coordinateSystem) : base(coordinateSystem)
     {
     }
 
-    protected override SimpleNode<TCellCoordinate> CreateNode(TCellCoordinate coordinate)
+    SimpleNode<TCellCoordinate> IGraphExtension<SimpleNode<TCellCoordinate>, TCellCoordinate>.CreateNode(
+      TCellCoordinate coordinate)
     {
       return new SimpleNode<TCellCoordinate>(coordinate);
+    }
+
+    public void NodeAdded(SimpleNode<TCellCoordinate> node)
+    {      
+    }
+
+    public void EdgeAdded(SimpleNode<TCellCoordinate> from, SimpleNode<TCellCoordinate> to)
+    {     
     }
   }
 

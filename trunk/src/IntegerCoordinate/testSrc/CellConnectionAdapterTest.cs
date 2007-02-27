@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DSIS.CellImageBuilder.BexMethodTest;
+using DSIS.Core.Mock;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.IntegerCoordinates.Test

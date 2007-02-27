@@ -43,11 +43,14 @@
     <Compile Include="src\IntegerCoordinate.cs" />
     <Compile Include="src\IntegerCoordinateCellConverter.cs" />
     <Compile Include="src\IntegerCoordinateCellImageBuilderAdapter.cs" />
+    <Compile Include="src\IntegerCoordinateEqualityComparer.cs" />
     <Compile Include="src\IntegerCoordinateSystem.cs" />
     <Compile Include="src\LongLBoxFixedDimentionMulIterator.cs" />
     <Compile Include="testSrc\CellConnectionAdapterOneDimTest.cs" />
     <Compile Include="testSrc\CellConnectionAdapterTest.cs" />
     <Compile Include="testSrc\CellConnectionAdapterTwoDimTest.cs" />
+    <Compile Include="testSrc\CellConnectionBuilder2DPerformanceTest.cs" />
+    <Compile Include="testSrc\CellConnectionBuilderPerformanceTestBase.cs" />
     <Compile Include="testSrc\IntegerCoordinatesTest.cs" />
     <Compile Include="testSrc\IntegerCoordinateSystemTest.cs" />
     <Compile Include="testSrc\MockSystemSpace.cs" />

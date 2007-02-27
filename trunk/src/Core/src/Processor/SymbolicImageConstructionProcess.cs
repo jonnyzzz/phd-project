@@ -19,7 +19,7 @@ namespace DSIS.Core.Processor
     public void Execute(IProgressInfo info)
     {      
       info.Minimum = 0;
-      info.Maximum = myContext.CellsCount;
+      info.Maximum = myContext.Cells.Count;
 
       foreach (TFrom cell in myContext.Cells)
       {

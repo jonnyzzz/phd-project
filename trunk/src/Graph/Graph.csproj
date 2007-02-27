@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Abstract\AbstractGraph.cs" />
+    <Compile Include="src\Abstract\GraphNodeHashList.cs" />
     <Compile Include="src\Abstract\IStrongComponentInfoEx.cs" />
     <Compile Include="src\Abstract\IStrongComponentInfoManager.cs" />
     <Compile Include="src\Abstract\NodeEqualityComparer.cs" />
@@ -70,7 +71,10 @@
     <Compile Include="src\IGraph.cs" />
     <Compile Include="src\Util\MultiHashDictionary.cs" />
     <Compile Include="src\Util\OrderedList.cs" />
+    <Compile Include="testSrc\GenericsTest.cs" />
     <Compile Include="testSrc\GraphPerformanceTest.cs" />
+    <Compile Include="testSrc\MockGraph.cs" />
+    <Compile Include="testSrc\MockNode.cs" />
     <Compile Include="testSrc\OrderedListTest.cs" />
     <Compile Include="testSrc\SimpleGraphTest.cs" />
     <Compile Include="testSrc\HashSetTest.cs" />

@@ -44,14 +44,14 @@ namespace DSIS.IntegerCoordinates.Tests
     [Test]
     public void Test_03()
     {
-      List<IntegerCoordinate> cnt = new List<IntegerCoordinate>(myCS.InitialSebdivision);
+      List<IntegerCoordinate> cnt = new List<IntegerCoordinate>(myCS.InitialSubdivision);
       Assert.AreEqual(25, cnt.Count);
     }
 
     [Test]
     public void Test_04()
     {
-      List<IntegerCoordinate> c = new List<IntegerCoordinate>(myCS.InitialSebdivision);
+      List<IntegerCoordinate> c = new List<IntegerCoordinate>(myCS.InitialSubdivision);
 
       Assert.IsTrue(myCS.Dimension == 2);
       

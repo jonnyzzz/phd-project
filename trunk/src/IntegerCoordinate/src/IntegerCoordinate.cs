@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
 using DSIS.Core.Coordinates;
@@ -10,47 +9,6 @@ namespace DSIS.IntegerCoordinates
     long[] Coordinate { get;}
   }
 
-  public struct IntegerCoordinateEqualityComparer : IEqualityComparer<IntegerCoordinate>
-  {
-    public static IntegerCoordinateEqualityComparer INSTANCE = new IntegerCoordinateEqualityComparer();
-
-    public bool Equals(IntegerCoordinate x, IntegerCoordinate y)
-    {
-      long[] xC = x.Coordinate;
-      long[] yC = y.Coordinate;
-
-      return Equals(xC, yC);
-    }
-
-    public static bool Equals(long[] xC, long[] yC)
-    {
-      for (int len = 0; len < xC.Length; len++)
-      {
-        if (xC[len] != yC[len])
-          return false;
-      }
-      return true;
-    }
-
-    public int GetHashCode(IntegerCoordinate obj)
-    {
-      return GetHashCode(obj.Coordinate);
-    }
-
-    public static int GetHashCode(long[] x)
-    {
-      int hash = 0;
-      unchecked
-      {
-        for (int i = x.Length - 1; i >= 0; i--)
-        {
-          hash += hash * 31 + (int)x[i] + i * 17;
-        }
-      }
-      return hash;      
-    }
-  }
-
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]
   public sealed class IntegerCoordinate : ICellCoordinate<IntegerCoordinate>, IIntegerCoordinateDebug
   {
@@ -58,8 +16,6 @@ namespace DSIS.IntegerCoordinates
 
     public IntegerCoordinate(params long[] coordinare)
     {
-      if (coordinare == null)
-        throw new ArgumentException("Null constructor", "coordinate");
       myCoordinare = coordinare;
     }
 
@@ -85,7 +41,7 @@ namespace DSIS.IntegerCoordinates
 
     public bool Equals(IntegerCoordinate ac)
     {
-      return IntegerCoordinateEqualityComparer.Equals(myCoordinare, ac.myCoordinare);
+      return IntegerCoordinateEqualityComparer.INSTANCE.Equals(this, ac);
     }
 
     public override bool Equals(object obj)
@@ -102,7 +58,7 @@ namespace DSIS.IntegerCoordinates
 
     public override int GetHashCode()
     {
-      return IntegerCoordinateEqualityComparer.GetHashCode(myCoordinare);
+      return IntegerCoordinateEqualityComparer.INSTANCE.GetHashCode(this);
     }
 
     public override string ToString()

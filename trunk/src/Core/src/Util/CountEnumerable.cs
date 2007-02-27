@@ -13,10 +13,10 @@ namespace DSIS.Core.Util
     private readonly IEnumerable<T> myEnumerable;
     public readonly int Count;
 
-    public CountEnumerable(IEnumerable<T> enumerable, int count)
+    public CountEnumerable(IEnumerable<T> enumerable, long count)
     {
       myEnumerable = enumerable;
-      Count = count;
+      Count = (int)count;
     }
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()

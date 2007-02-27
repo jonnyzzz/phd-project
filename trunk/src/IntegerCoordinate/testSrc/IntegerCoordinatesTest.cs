@@ -1,4 +1,5 @@
 using System;
+using DSIS.Core.Util;
 using DSIS.Util;
 using NUnit.Framework;
 

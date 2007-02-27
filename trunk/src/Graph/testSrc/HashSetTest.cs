@@ -3,6 +3,7 @@
  * Created: 2 декабря 2006 г.
  */
 
+using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
 using DSIS.Util;
 using NUnit.Framework;

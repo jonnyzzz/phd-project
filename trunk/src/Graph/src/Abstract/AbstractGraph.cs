@@ -1,26 +1,40 @@
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Util;
 using DSIS.Graph.Util;
-using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
 {
-  public abstract class AbstractGraph<TCell, TNode> : IGraph<TCell>
+  public interface IGraphExtension<TNode, TCell> 
+    where TNode : Node<TNode, TCell> 
+    where TCell : ICellCoordinate<TCell>  
+  {
+    TNode CreateNode(TCell coordinate);
+    void NodeAdded(TNode node);
+    void EdgeAdded(TNode from, TNode to);
+  }
+
+  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell>
     where TCell : ICellCoordinate<TCell>
     where TNode : Node<TNode, TCell>
+    where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>
   {
+    private readonly IGraphExtension<TNode, TCell> myExt;
+
     private ICellCoordinateSystem<TCell> myCoordinateSystem;
     private int myNodesCount;
     private int myEdgesCount;
-    private readonly Hashset<TNode, INode<TCell>> myNodes;
+    private readonly GraphNodeHashList<TNode, TCell> myNodes;
+    
 
     public AbstractGraph(ICellCoordinateSystem<TCell> coordinateSystem)
     {
+      myExt = (TInh)this;
       myCoordinateSystem = coordinateSystem;
       myNodesCount = 0;
       myEdgesCount = 0;
-      myNodes = new Hashset<TNode, INode<TCell>>(NodeEqualityComparer<TNode, TCell>.INSTANCE);
+      myNodes = new GraphNodeHashList<TNode, TCell>(Primes.Nearest(65536));
     }
 
     #region Getters
@@ -32,7 +46,7 @@ namespace DSIS.Graph.Abstract
 
     public IEnumerable<INode<TCell>> Nodes
     {
-      get { return myNodes.ValuesUpcasted; }
+      get { return new UpcastedEnumerable<TNode, INode<TCell>>(myNodes.Values); }
     }
 
     internal IEnumerable<TNode> NodesInternal
@@ -64,38 +78,28 @@ namespace DSIS.Graph.Abstract
       return new ConvertEnumerator<INode<TCell>, TNode>(node.Edges);      
     }
 
-    #region Add
-
-    protected abstract TNode CreateNode(TCell coordinate);
-
-    protected virtual void NodeAdded(TNode node)
-    {
-      myNodesCount++;
-    }
-
-    protected virtual void EdgeAdded(TNode from, TNode to)
-    {
-      myEdgesCount++;
-    }
-
     public void AddEdgeToNode(INode<TCell> fromNode, INode<TCell> toNode)
     {
       TNode from = (TNode) fromNode;
       TNode to = (TNode) toNode;
 
       if (from.AddEdgeTo(to))
-        EdgeAdded(from, to);
+      {
+        myEdgesCount++;
+        myExt.EdgeAdded(from, to);
+      }
     }
 
     public INode<TCell> AddNode(TCell coordinate)
     {
-      TNode node = CreateNode(coordinate);
+      TNode node = myExt.CreateNode(coordinate);
       if (myNodes.AddIfNotReplace(ref node))
-        NodeAdded(node);
+      {
+        myNodesCount++;
+        myExt.NodeAdded(node);
+      }
       return node;
     }
-
-    #endregion
 
     #region Dump
 

@@ -82,8 +82,10 @@
     <Compile Include="src\Util\NullableAttribute.cs" />
     <Compile Include="src\Util\NullProgressInfo.cs" />
     <Compile Include="src\Util\Pair.cs" />
+    <Compile Include="src\Util\Primes.cs" />
     <Compile Include="src\Util\ProcessInterruptedException.cs" />
     <Compile Include="src\Util\SegmentBoxIterator.cs" />
+    <Compile Include="src\Util\UpcastedEnumerator.cs" />
     <Compile Include="src\Visualization\ICellToPointConverter.cs" />
     <Compile Include="src\Visualization\IImageBuilder.cs" />
     <Compile Include="src\Visualization\IImageDrawer.cs" />

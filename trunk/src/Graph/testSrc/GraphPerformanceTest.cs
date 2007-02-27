@@ -1,3 +1,4 @@
+using System;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.src.Adapter;
 using DSIS.IntegerCoordinates;
@@ -81,6 +82,17 @@ namespace DSIS.Graph
         {
           ad.ConnectCellToRect(new IntegerCoordinate(i,j,i), new double[]{i/1000.0,j/1000.0,i/1000.0}, new double[]{(i + 6)/1000.0, (j+4)/1000.0, (i+8)/1000.0}, new double[]{0,0,0});
         }
+    }
+
+    public void Test_05_CreateNode()
+    {
+      for (int j = 0; j < 1000; j++)
+        for (int i = 0; i < 1000; i++)
+        {
+          myGraph.AddNode(new IntegerCoordinate(i, j, i));
+        }
+
+      Console.Out.WriteLine("GC.GetTotalMemory(true) = {0} Mb", GC.GetTotalMemory(true) / 1024.0 / 1024.0);
     }
   }
 }

@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using DSIS.Util;
@@ -19,7 +20,7 @@ namespace DSIS.IntegerCoordinates.Test
     private void DoTest(double[] l, double[] r, long[] g, long[] div)
     {
       IntegerCoordinateSystem ics = new IntegerCoordinateSystem(new MockSystemSpace(l.Length, l, r, g));
-      List <IntegerCoordinate> coords = new List<IntegerCoordinate>(ics.InitialSebdivision);
+      List <IntegerCoordinate> coords = new List<IntegerCoordinate>(ics.InitialSubdivision);
 
       ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> converter = ics.Subdivide(div);
 

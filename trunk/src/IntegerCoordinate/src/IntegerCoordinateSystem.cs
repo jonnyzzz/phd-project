@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
+using DSIS.Core.Util;
 
 namespace DSIS.IntegerCoordinates
 {
@@ -112,31 +113,28 @@ namespace DSIS.IntegerCoordinates
       return new IntegerCoordinateCellConverter(this, SubdividedCoordinateSystem(division), division);
     }
 
-    public IEnumerable<IntegerCoordinate> InitialSebdivision
+    private IEnumerable<IntegerCoordinate> GetInitialSubdivision()
     {
-      get
+      long[] array = new long[Dimension];
+      for (int i = 0; i < Dimension; i++)
       {
-        long[] array = new long[Dimension];
-        for (int i = 0; i < Dimension; i++)
+        array[i] = 0;
+      }
+      while (array[Dimension - 1] < Subdivision[Dimension - 1])
+      {
+        yield return new IntegerCoordinate((long[]) array.Clone());
+        array[0]++;
+        for (int i = 0; i < Dimension - 1; i++)
         {
-          array[i] = 0;
-        }
-        while (array[Dimension - 1] < Subdivision[Dimension - 1])
-        {
-          yield return new IntegerCoordinate((long[]) array.Clone());
-          array[0]++;
-          for (int i = 0; i < Dimension - 1; i++)
+          if (array[i] >= Subdivision[i])
           {
-            if (array[i] >= Subdivision[i])
-            {
-              array[i] = 0;
-              array[i + 1]++;
-            }
+            array[i] = 0;
+            array[i + 1]++;
           }
         }
       }
     }
-
+    
     public long InitialCellsCount
     {
       get { 
@@ -147,6 +145,11 @@ namespace DSIS.IntegerCoordinates
         }
         return cnt;
       }
+    }
+
+    public CountEnumerable<IntegerCoordinate> InitialSubdivision
+    {
+      get { return new CountEnumerable<IntegerCoordinate>(GetInitialSubdivision(), InitialCellsCount); }
     }
 
     public int Dimension

@@ -39,8 +39,11 @@ namespace DSIS.Core.Coordinates
     /// <summary>
     /// Returns all cells for initial space provided by ISystemSpace
     /// </summary>
-    IEnumerable<T> InitialSebdivision { get; }
+    CountEnumerable<T> InitialSubdivision { get; }
+    
     long InitialCellsCount { get; }
+
+    
 
     ISystemSpace SystemSpace { get;}
   }

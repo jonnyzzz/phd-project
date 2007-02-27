@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Util;
 using DSIS.Graph;
-using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
 { 
@@ -12,14 +12,14 @@ namespace DSIS.Graph.Abstract
     private static IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();
 
     public readonly TCell Coordinate;
-    private readonly Hashset<TInh, INode<TCell>> myEdges;
+    private readonly GraphNodeHashList<TInh, TCell> myEdges;
     internal int HashCodeInternal;
 
     internal Node(TCell coordinate)
     {
       Coordinate = coordinate;
-      myEdges = new Hashset<TInh, INode<TCell>>(NodeEqualityComparer<TInh, TCell>.INSTANCE);
-      HashCodeInternal = CellComparer.GetHashCode(Coordinate);
+      myEdges = new GraphNodeHashList<TInh, TCell>(7);
+      HashCodeInternal = CellComparer.GetHashCode(Coordinate) & 0x7fffffff;
     }
 
    public sealed override bool Equals(object obj)
@@ -43,7 +43,7 @@ namespace DSIS.Graph.Abstract
 
     internal IEnumerable<INode<TCell>> Edges
     {
-      get { return myEdges.ValuesUpcasted; }
+      get { return new UpcastedEnumerable<TInh, INode<TCell>>(myEdges.Values); }
     }
 
     internal IEnumerable<TInh> EdgesInternal

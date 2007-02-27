@@ -5,7 +5,8 @@ using DSIS.Core.Util;
 namespace DSIS.Graph.Abstract
 {
   public class TarjanGraph<TCell> :
-    AbstractGraph<TCell, TarjanNode<TCell>>,IGraphWithStrongComponent<TCell>
+    AbstractGraph<TarjanGraph<TCell>, TCell, TarjanNode<TCell>>,IGraphWithStrongComponent<TCell>,
+    IGraphExtension<TarjanNode<TCell>, TCell>
     where TCell : ICellCoordinate<TCell>
   {
     private bool myWasComponents = false;
@@ -14,18 +15,21 @@ namespace DSIS.Graph.Abstract
     {
     }
 
-    protected override TarjanNode<TCell> CreateNode(TCell coordinate)
+    TarjanNode<TCell> IGraphExtension<TarjanNode<TCell>, TCell>.CreateNode(TCell coordinate)
     {
       return new TarjanNode<TCell>(coordinate);
     }
 
-    protected override void EdgeAdded(TarjanNode<TCell> from, TarjanNode<TCell> to)
-    {
-      base.EdgeAdded(from, to);
+    void IGraphExtension<TarjanNode<TCell>, TCell>.EdgeAdded(TarjanNode<TCell> from, TarjanNode<TCell> to)
+    {      
       if (ReferenceEquals(from, to))
       {
         from.SetFlag(TarjanNodeFlags.IS_LOOP, true);
       }
+    }
+
+    void IGraphExtension<TarjanNode<TCell>, TCell>.NodeAdded(TarjanNode<TCell> node)
+    {      
     }
 
     public IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
@@ -47,6 +51,7 @@ namespace DSIS.Graph.Abstract
       int cnt = 1;
 
       TarjanNode<TCell> w = null;
+      TarjanNodeData<TCell> wData = null;
 
       TarjanComponentInfoManager comps = new TarjanComponentInfoManager();
 
@@ -56,6 +61,7 @@ namespace DSIS.Graph.Abstract
           continue;
 
         TarjanNode<TCell> v = node;
+        TarjanNodeData<TCell> vData = v.Data;
         while (state > 1)
         {
           switch (state)
@@ -64,19 +70,21 @@ namespace DSIS.Graph.Abstract
               stack.Push(v);
               route.Push(v);
               cnt++;
-              v.Data.Label = cnt;
-              v.Data.Number = cnt;
+              vData.Label = cnt;
+              vData.Number = cnt;
               state = 3;
               break;
             case 3:
-              if (v.Data.MoveNext())
+              if (vData.MoveNext())
               {
                 info.Tick(1.0);
-                w = v.Data.Current;
+                w = vData.Current;
+                wData = w.Data;
 
-                if (w.Data.Label == 0)
+                if (wData.Label == 0)
                 {
                   v = w;
+                  vData = wData;
                   state = 2;
                 }
                 else
@@ -86,7 +94,7 @@ namespace DSIS.Graph.Abstract
               }
               else
               {
-                if (v.Data.Label < v.Data.Number)
+                if (vData.Label < vData.Number)
                 {
                   state = 5;
                 }
@@ -98,17 +106,21 @@ namespace DSIS.Graph.Abstract
               break;
 
             case 4:
-              if (w.Data.Number < v.Data.Number && stack.Contains(w))
+              if (wData.Number < vData.Number && stack.Contains(w))
               {
-                v.Data.Label = Math.Min(v.Data.Label, w.Data.Label);
+                vData.Label = Math.Min(vData.Label, wData.Label);
               }
               state = 3;
               break;
             case 5:
               v = route.Pop();
+              vData = v.Data;
+
               w = route.Peek();
-              w.Data.Label = Math.Min(w.Data.Label, v.Data.Label);
+              wData = w.Data;
+              wData.Label = Math.Min(wData.Label, vData.Label);
               v = w;
+              vData = wData;
               state = 3;
               break;
             case 6:
@@ -127,6 +139,7 @@ namespace DSIS.Graph.Abstract
                 do
                 {
                   w = stack.Pop();
+                  wData = w.Data;
                   ic.SetNodeComponent(w);
                 } while (!ReferenceEquals(v, w));
               }
@@ -139,6 +152,7 @@ namespace DSIS.Graph.Abstract
               else
               {
                 v = route.Peek();
+                vData = v.Data;
                 state = 3;
               }
               break;

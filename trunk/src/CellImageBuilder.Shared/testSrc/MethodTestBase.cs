@@ -4,8 +4,8 @@
  */
 
 using System.Collections.Generic;
-using DSIS.CellImageBuilder.BexMethodTest;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Mock;
 using DSIS.Function.Mock;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Test;
