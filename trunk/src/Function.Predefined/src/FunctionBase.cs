@@ -16,11 +16,15 @@ namespace DSIS.Function.Predefined
       myDimension = dimension;
     }
 
-    public abstract void Evaluate();
+    #region IFunction<T> Members
 
     public int Dimension
     {
       get { return myDimension; }
     }
+
+    public abstract void Evaluate();
+
+    #endregion
   }
 }

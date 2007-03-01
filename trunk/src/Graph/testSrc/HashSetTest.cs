@@ -5,7 +5,6 @@
 
 using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
-using DSIS.Util;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Tests
@@ -18,7 +17,7 @@ namespace DSIS.Graph.Tests
     {
       Hashset<int> set = new Hashset<int>();
 
-      for(int i=0; i< 100; i++)
+      for (int i = 0; i < 100; i++)
       {
         set.Add(i);
         Assert.AreEqual(set.Count, i + 1);

@@ -9,6 +9,6 @@ namespace DSIS.Core.Util
 {
   [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
   public class NotNullAttribute : Attribute
-  {    
+  {
   }
 }

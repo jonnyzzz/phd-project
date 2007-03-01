@@ -5,6 +5,6 @@ namespace DSIS.GnuplotDrawer
     void AddPointsFile(GnuplotPointsFileWriter file);
     void Dispose();
 
-    string Filename { get;}
+    string Filename { get; }
   }
 }

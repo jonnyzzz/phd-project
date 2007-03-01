@@ -1,8 +1,6 @@
-using System;
-
 namespace DSIS.Core.Util
 {
-  public class NullProgressInfo : IProgressInfo
+  public sealed class NullProgressInfo : IProgressInfo
   {
     public static readonly IProgressInfo INSTANCE = new NullProgressInfo();
 
@@ -10,10 +8,11 @@ namespace DSIS.Core.Util
     private double myMaximum = 1;
     private double myValue = 0;
 
-    public double Minimum
+    #region IProgressInfo Members
+
+    public bool IsInterrupted
     {
-      get { return myMinimum; }
-      set { myMinimum = value; }
+      get { return false; }
     }
 
     public double Maximum
@@ -22,15 +21,10 @@ namespace DSIS.Core.Util
       set { myMaximum = value; }
     }
 
-    public double Value
+    public double Minimum
     {
-      get { return myValue; }
-      set { myValue = value; }
-    }
-
-    public void Tick(double step)
-    {
-      myValue += step;
+      get { return myMinimum; }
+      set { myMinimum = value; }
     }
 
     public bool SupportsSteppingProgres
@@ -38,9 +32,17 @@ namespace DSIS.Core.Util
       get { return false; }
     }
 
-    public bool IsInterrupted
+    public void Tick(double step)
     {
-      get { return false; }
+      myValue += step;
     }
+
+    public double Value
+    {
+      get { return myValue; }
+      set { myValue = value; }
+    }
+
+    #endregion
   }
 }

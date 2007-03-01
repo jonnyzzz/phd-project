@@ -17,7 +17,7 @@ namespace DSIS.Function.Predefined.Delayed
     public override void Evaluate()
     {
       Output[0] = Input[1];
-      Output[1] = myA * Input[1] * (1 - Input[0]);
+      Output[1] = myA*Input[1]*(1 - Input[0]);
     }
   }
 }

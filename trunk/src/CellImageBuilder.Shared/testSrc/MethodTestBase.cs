@@ -4,6 +4,7 @@
  */
 
 using System.Collections.Generic;
+using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Mock;
 using DSIS.Function.Mock;
@@ -15,7 +16,7 @@ using NUnit.Framework;
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
 {
   [TestFixture]
-  public class MethodTestBase<TM, TP> 
+  public class MethodTestBase<TM, TP>
     where TM : ICellImageBuilder<IntegerCoordinate>, new()
     where TP : ICellImageBuilderSettings
   {
@@ -28,7 +29,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
       MockSystemInfo<double> func = new MockSystemInfo<double>(compute, sys.SystemSpace);
       IntegerCoordinateSystem cs = new IntegerCoordinateSystem(sys.SystemSpace);
 
-      MockCellConnectionManager<IntegerCoordinate> man = 
+      MockCellConnectionManager<IntegerCoordinate> man =
         new MockCellConnectionManager<IntegerCoordinate>();
 
       CellImageBuilderContext<IntegerCoordinate> ctx =
@@ -48,8 +49,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
     }
 
     public static void DoTwoDimTest(
-      IntegerCoordinateSystem ics, 
-      IntegerCoordinate test, 
+      IntegerCoordinateSystem ics,
+      IntegerCoordinate test,
       ComputeFunction<double> f, TP settins, string gold)
     {
       List<IntegerCoordinate> data = DoTest(ics, test, f, settins);
@@ -77,10 +78,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
       List<IntegerCoordinate> list = DoTestOneDimension(ics, coord, func, eps);
       List<long> result =
         list.ConvertAll<long>(
-          delegate(IntegerCoordinate input)
-            {
-              return ((IIntegerCoordinateDebug) input).Coordinate[0];
-            });
+          delegate(IntegerCoordinate input) { return ((IIntegerCoordinateDebug) input).Coordinate[0]; });
       result.Sort();
 
       IntegerCoordinate ifl = ics.FromPoint(new double[] {fl});
@@ -89,15 +87,15 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
       Assert.IsNotNull(ifl);
       Assert.IsNotNull(ifr);
 
-      long[] cifl = ((IIntegerCoordinateDebug)ifl).Coordinate;
-      long[] cirt = ((IIntegerCoordinateDebug)ifr).Coordinate;
+      long[] cifl = ((IIntegerCoordinateDebug) ifl).Coordinate;
+      long[] cirt = ((IIntegerCoordinateDebug) ifr).Coordinate;
 
       Assert.IsTrue(cirt.Length > 0);
       Assert.IsTrue(cifl.Length > 0);
 
       Assert.IsTrue(result.Count > 0, "No result!");
 
-      Assert.AreEqual(cifl[0], result[0], "Left side");      
+      Assert.AreEqual(cifl[0], result[0], "Left side");
       Assert.AreEqual(cirt[0], result[result.Count - 1], "Right side");
     }
   }

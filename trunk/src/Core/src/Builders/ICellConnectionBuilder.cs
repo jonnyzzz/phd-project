@@ -3,8 +3,9 @@
  * Created: 18 но€бр€ 2006 г.
  */
 using System.Collections.Generic;
+using DSIS.Core.Coordinates;
 
-namespace DSIS.Core.Coordinates
+namespace DSIS.Core.Builders
 {
   /// <summary>
   /// This interface is used as a call back from ICellImageBuilder implementor.

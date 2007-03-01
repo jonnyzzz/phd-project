@@ -3,7 +3,6 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
-using System.Collections.Generic;
 using DSIS.Core.System;
 using DSIS.Core.Util;
 
@@ -16,7 +15,7 @@ namespace DSIS.Core.Coordinates
   /// <typeparam name="T"></typeparam>
   public interface ICellCoordinateSystem<T> where T : ICellCoordinate<T>
   {
-    long[] Subdivision { get;}
+    long[] Subdivision { get; }
 
     /// <summary>
     /// Return ICellCoordinate for point.
@@ -40,11 +39,10 @@ namespace DSIS.Core.Coordinates
     /// Returns all cells for initial space provided by ISystemSpace
     /// </summary>
     CountEnumerable<T> InitialSubdivision { get; }
-    
+
     long InitialCellsCount { get; }
 
-    
 
-    ISystemSpace SystemSpace { get;}
+    ISystemSpace SystemSpace { get; }
   }
 }

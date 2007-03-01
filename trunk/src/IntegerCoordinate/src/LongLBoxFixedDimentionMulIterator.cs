@@ -24,7 +24,7 @@ namespace DSIS.IntegerCoordinates
     {
       for (int i = 0; i < d.Length; i++)
       {
-        myMuls[i] = left[i] * d[i];
+        myMuls[i] = left[i]*d[i];
         myTmp[i] = myMuls[i] + d[i];
       }
 

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using DSIS.CellImageBuilder;
 using DSIS.CellImageBuilder.BoxAdaptiveMethod;
+using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
 using DSIS.Core.System;
@@ -13,17 +13,16 @@ using DSIS.Function.Predefined.Henon;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
-using DSIS.Graph.src.Adapter;
+using DSIS.Graph.Adapter;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
 {
   internal class Program
   {
+    private const int STEPS = 8;
     private static string myWorkPath;
     private static string myHomePath;
-
-    private const int STEPS = 13;
 
     private static void Main()
     {
@@ -35,10 +34,10 @@ namespace DSIS.SimpleRunner
       myWorkPath = Path.GetFullPath(Path.Combine(myHomePath, @"results"));
 
 
-//      Console.Out.WriteLine("Adaptive Method:");
-//      MethodAndLog(new BoxAdaptiveMethod(), BoxAdaptiveMethodSettings.Default);
-      Console.Out.WriteLine("Box Method:");
-      MethodAndLog(new BoxMethod(), BoxMethodSettings.Default);      
+      Console.Out.WriteLine("Adaptive Method:");
+      MethodAndLog(new BoxAdaptiveMethod(), BoxAdaptiveMethodSettings.Default);
+//      Console.Out.WriteLine("Box Method:");
+//      MethodAndLog(new BoxMethod(), BoxMethodSettings.Default);      
     }
 
     public static void MethodAndLog(ICellImageBuilder<IntegerCoordinate> build, ICellImageBuilderSettings settings)
@@ -62,9 +61,9 @@ namespace DSIS.SimpleRunner
 
       TarjanGraph<IntegerCoordinate> graph = new TarjanGraph<IntegerCoordinate>(cs);
 
-      ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv = cs.Subdivide(new long[] {3,3});
+      ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv = cs.Subdivide(new long[] {3, 3});
       CellProcessorContext<IntegerCoordinate, IntegerCoordinate> ctx =
-        new CellProcessorContext<IntegerCoordinate, IntegerCoordinate>(          
+        new CellProcessorContext<IntegerCoordinate, IntegerCoordinate>(
           cs.InitialSubdivision,
           conv,
           build,
@@ -93,12 +92,12 @@ namespace DSIS.SimpleRunner
     }
 
     private static DateTime DoConstruct(ICellImageBuilder<IntegerCoordinate> boxMethod,
-                                    CellProcessorContext<IntegerCoordinate, IntegerCoordinate> ctx,
-                                    TarjanGraph<IntegerCoordinate> graph)
+                                        CellProcessorContext<IntegerCoordinate, IntegerCoordinate> ctx,
+                                        TarjanGraph<IntegerCoordinate> graph)
     {
       SymbolicImageConstructionProcess<IntegerCoordinate, IntegerCoordinate> proc
         = new SymbolicImageConstructionProcess<IntegerCoordinate, IntegerCoordinate>();
-        
+
       proc.Bind(ctx);
 
       proc.Execute(NullProgressInfo.INSTANCE);
@@ -117,7 +116,7 @@ namespace DSIS.SimpleRunner
         graph = new TarjanGraph<IntegerCoordinate>(ctx.Converter.ToSystem);
 
         ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv;
-        conv = ctx.Converter.ToSystem.Subdivide(new long[] {2,2});
+        conv = ctx.Converter.ToSystem.Subdivide(new long[] {2, 2});
 
         ctx =
           ctx.CreateNextContext(new CountEnumerable<IntegerCoordinate>(cells, v), conv,
@@ -186,7 +185,7 @@ namespace DSIS.SimpleRunner
       }
 
       IGnuplotScriptGen gen = GnuplotSriptGen.ScriptGen(
-        ics.Dimension, 
+        ics.Dimension,
         Path.Combine(path, title + "-script.gnuplot"),
         new GnuplotScriptParameters(Path.Combine(path, title + "-picture.png"), title));
 

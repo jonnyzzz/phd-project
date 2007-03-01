@@ -17,10 +17,13 @@ namespace DSIS.Graph.Test
       new SimpleGraph<IntegerCoordinate>(cs);
     }
   }
+
   [TestFixture]
   public class TarjanComponentGraphTest : ComponentGraphTestBase
   {
+    public const uint COMPONENT_ID_TEST = 1 << 20 - 1;
     private new TarjanGraph<IntegerCoordinate> myGraph;
+
     public override void SetUp()
     {
       base.SetUp();
@@ -53,7 +56,7 @@ namespace DSIS.Graph.Test
     {
       ComputeComponents();
 
-      List<INode<IntegerCoordinate>> l 
+      List<INode<IntegerCoordinate>> l
         = new List<INode<IntegerCoordinate>>(myComponents.GetNodes(new List<IStrongComponentInfo>()));
       Assert.AreEqual(0, l.Count);
     }
@@ -115,54 +118,6 @@ namespace DSIS.Graph.Test
     }
 
     [Test]
-    public void Test_Circle_002()
-    {
-      DoCircleTest(2);
-    }
-
-    [Test]
-    public void Test_Circle_003()
-    {
-      DoCircleTest(3);
-    }
-
-    [Test]
-    public void Test_Circle_012()
-    {
-      DoCircleTest(12);
-    }
-
-    [Test]
-    public void Test_Circle_013()
-    {
-      DoCircleTest(13);
-    }
-
-    [Test]
-    public void Test_Circle_018()
-    {
-      DoCircleTest(18);
-    }
-
-    [Test]
-    public void Test_Circle_918()
-    {
-      DoCircleTest(918);
-    }
-
-    [Test]
-    public void Test_Circle_2_000()
-    {
-      DoCircleTest(2000);
-    }
-
-    [Test]
-    public void Test_Circle_20_000()
-    {
-      DoCircleTest(20000);
-    }
-
-    [Test]
     public void Test_2Circle_100()
     {
       DoTest(delegate
@@ -206,7 +161,53 @@ namespace DSIS.Graph.Test
                });
     }
 
-    public const uint COMPONENT_ID_TEST = 1 << 20 - 1;
+    [Test]
+    public void Test_Circle_002()
+    {
+      DoCircleTest(2);
+    }
+
+    [Test]
+    public void Test_Circle_003()
+    {
+      DoCircleTest(3);
+    }
+
+    [Test]
+    public void Test_Circle_012()
+    {
+      DoCircleTest(12);
+    }
+
+    [Test]
+    public void Test_Circle_013()
+    {
+      DoCircleTest(13);
+    }
+
+    [Test]
+    public void Test_Circle_018()
+    {
+      DoCircleTest(18);
+    }
+
+    [Test]
+    public void Test_Circle_2_000()
+    {
+      DoCircleTest(2000);
+    }
+
+    [Test]
+    public void Test_Circle_20_000()
+    {
+      DoCircleTest(20000);
+    }
+
+    [Test]
+    public void Test_Circle_918()
+    {
+      DoCircleTest(918);
+    }
 
     [Test]
     public void TestTarjanNode_01()
@@ -230,7 +231,7 @@ namespace DSIS.Graph.Test
     {
       TarjanNode<IntegerCoordinate> node = new TarjanNode<IntegerCoordinate>(new IntegerCoordinate(3));
       node.ComponentId = COMPONENT_ID_TEST;
-      node.SetFlag(TarjanNodeFlags.ROUTE, true);      
+      node.SetFlag(TarjanNodeFlags.ROUTE, true);
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
     }
 

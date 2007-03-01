@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace DSIS.Graph.Test
 {
 /*
@@ -15,5 +13,4 @@ namespace DSIS.Graph.Test
     IEnumerable<IDPR_Rect> Primitives { get; }      
   }
 */
-
 }

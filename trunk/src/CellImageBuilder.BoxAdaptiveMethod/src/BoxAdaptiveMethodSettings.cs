@@ -14,7 +14,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private readonly int myTaskLimit = 363;
     private readonly BoxAdaptiveMethodStategy myStategy = BoxAdaptiveMethodStategy.Simple;
     private readonly double myOverlaping = 0.2;
-    private readonly double myCellSizePercent = 0.3;
+    private readonly double myCellSizePercent = 0.7;
 
     public BoxAdaptiveMethodSettings(int taskLimit, BoxAdaptiveMethodStategy stategy, double overlaping)
     {
@@ -22,8 +22,9 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       myStategy = stategy;
       myOverlaping = overlaping;
     }
-    
-    public BoxAdaptiveMethodSettings(int taskLimit, BoxAdaptiveMethodStategy stategy, double overlaping, double cellSizePercent)
+
+    public BoxAdaptiveMethodSettings(int taskLimit, BoxAdaptiveMethodStategy stategy, double overlaping,
+                                     double cellSizePercent)
     {
       myTaskLimit = taskLimit;
       myStategy = stategy;

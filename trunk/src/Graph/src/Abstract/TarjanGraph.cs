@@ -5,7 +5,7 @@ using DSIS.Core.Util;
 namespace DSIS.Graph.Abstract
 {
   public class TarjanGraph<TCell> :
-    AbstractGraph<TarjanGraph<TCell>, TCell, TarjanNode<TCell>>,IGraphWithStrongComponent<TCell>,
+    AbstractGraph<TarjanGraph<TCell>, TCell, TarjanNode<TCell>>, IGraphWithStrongComponent<TCell>,
     IGraphExtension<TarjanNode<TCell>, TCell>
     where TCell : ICellCoordinate<TCell>
   {
@@ -15,22 +15,7 @@ namespace DSIS.Graph.Abstract
     {
     }
 
-    TarjanNode<TCell> IGraphExtension<TarjanNode<TCell>, TCell>.CreateNode(TCell coordinate)
-    {
-      return new TarjanNode<TCell>(coordinate);
-    }
-
-    void IGraphExtension<TarjanNode<TCell>, TCell>.EdgeAdded(TarjanNode<TCell> from, TarjanNode<TCell> to)
-    {      
-      if (ReferenceEquals(from, to))
-      {
-        from.SetFlag(TarjanNodeFlags.IS_LOOP, true);
-      }
-    }
-
-    void IGraphExtension<TarjanNode<TCell>, TCell>.NodeAdded(TarjanNode<TCell> node)
-    {      
-    }
+    #region IGraphWithStrongComponent<TCell> Members
 
     public IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
     {
@@ -162,5 +147,28 @@ namespace DSIS.Graph.Abstract
       }
       return new TarjanStrongComponentImpl<TCell>(this, comps);
     }
+
+    #endregion
+
+    #region IGraphExtension<TarjanNode<TCell>,TCell> Members
+
+    TarjanNode<TCell> IGraphExtension<TarjanNode<TCell>, TCell>.CreateNode(TCell coordinate)
+    {
+      return new TarjanNode<TCell>(coordinate);
+    }
+
+    void IGraphExtension<TarjanNode<TCell>, TCell>.EdgeAdded(TarjanNode<TCell> from, TarjanNode<TCell> to)
+    {
+      if (ReferenceEquals(from, to))
+      {
+        from.SetFlag(TarjanNodeFlags.IS_LOOP, true);
+      }
+    }
+
+    void IGraphExtension<TarjanNode<TCell>, TCell>.NodeAdded(TarjanNode<TCell> node)
+    {
+    }
+
+    #endregion
   }
 }

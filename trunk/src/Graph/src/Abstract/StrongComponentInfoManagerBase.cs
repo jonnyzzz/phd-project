@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
-using DSIS.Graph;
-using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
 {
@@ -12,27 +10,11 @@ namespace DSIS.Graph.Abstract
   {
     protected Hashset<TCI, IStrongComponentInfo> myComponents = new Hashset<TCI, IStrongComponentInfo>();
 
-    protected abstract void AddEdgeInternal(TCI from, TCI to);
-    protected abstract void MakeOneComponent(TCI info, IEnumerable<TCI> set);
-    protected abstract void AddInsOutsExcept(TCI to, TCI from, Predicate<TCI> except);
-    protected abstract TCI CreateComponentInfo();
+    #region IStrongComponentInfoManager Members
 
-    /// <summary>
-    /// (From.Ins \cap To.Outs) \cup From \cup To
-    /// </summary>
-    /// <param name="fromIns"></param>
-    /// <param name="toOuts"></param>
-    /// <returns></returns>
-    protected abstract Pair<IEnumerable<TCI>, Predicate<TCI>> IntersectInOutAndThis(TCI fromIns, TCI toOuts);
-
-    public int Count
+    public void AddComponent(IStrongComponentInfo info)
     {
-      get { return myComponents.Count; }
-    }
-
-    IStrongComponentInfo IStrongComponentInfoManager.CreateComponentInfo()
-    {
-      return CreateComponentInfo();
+      myComponents.Add((TCI) info);
     }
 
     public IEnumerable<IStrongComponentInfo> Components
@@ -40,12 +22,15 @@ namespace DSIS.Graph.Abstract
       get { return myComponents.ValuesUpcasted; }
     }
 
-    public void AddComponent(IStrongComponentInfo info)
+    public int Count
     {
-      myComponents.Add((TCI) info);
+      get { return myComponents.Count; }
     }
 
-    public IEnumerable<INode<TCellCoordinate>> FilterNodes<TCellCoordinate>(IEnumerable<IStrongComponentInfo> infos, IEnumerable<StrongComponentNode<TCellCoordinate>> nodes)
+    public IEnumerable<INode<TCellCoordinate>> FilterNodes<TCellCoordinate>(IEnumerable<IStrongComponentInfo> infos,
+                                                                            IEnumerable
+                                                                              <StrongComponentNode<TCellCoordinate>>
+                                                                              nodes)
       where TCellCoordinate : ICellCoordinate<TCellCoordinate>
     {
       Predicate<IStrongComponentInfoEx> set = GetComponentFilter(infos);
@@ -54,6 +39,11 @@ namespace DSIS.Graph.Abstract
         if (set(node.StrongComponent))
           yield return node;
       }
+    }
+
+    IStrongComponentInfo IStrongComponentInfoManager.CreateComponentInfo()
+    {
+      return CreateComponentInfo();
     }
 
     public void OnConnection(IStrongComponentInfo from, IStrongComponentInfo to)
@@ -70,6 +60,21 @@ namespace DSIS.Graph.Abstract
         AddEdge(fromCast, toCast);
       }
     }
+
+    #endregion
+
+    protected abstract void AddEdgeInternal(TCI from, TCI to);
+    protected abstract void MakeOneComponent(TCI info, IEnumerable<TCI> set);
+    protected abstract void AddInsOutsExcept(TCI to, TCI from, Predicate<TCI> except);
+    protected abstract TCI CreateComponentInfo();
+
+    /// <summary>
+    /// (From.Ins \cap To.Outs) \cup From \cup To
+    /// </summary>
+    /// <param name="fromIns"></param>
+    /// <param name="toOuts"></param>
+    /// <returns></returns>
+    protected abstract Pair<IEnumerable<TCI>, Predicate<TCI>> IntersectInOutAndThis(TCI fromIns, TCI toOuts);
 
     protected static bool HasArc(TCI from, TCI to)
     {
@@ -124,14 +129,14 @@ namespace DSIS.Graph.Abstract
 
         foreach (IStrongComponentInfoEx ex in si.Ins)
         {
-          if (!intersect.Second((TCI)ex))
+          if (!intersect.Second((TCI) ex))
             tins.Add((TCI) ex);
         }
 
         foreach (IStrongComponentInfoEx ex in si.Outs)
         {
-          if (!intersect.Second((TCI)ex))
-            touts.Add((TCI)ex);
+          if (!intersect.Second((TCI) ex))
+            touts.Add((TCI) ex);
         }
       }
 

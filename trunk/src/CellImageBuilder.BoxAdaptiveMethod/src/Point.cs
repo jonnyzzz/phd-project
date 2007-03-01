@@ -1,7 +1,5 @@
 using System;
 using System.Text;
-using DSIS.Core.Coordinates;
-using NUnit.Framework;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
@@ -17,6 +15,9 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private static int[] POW_2 = new int[31];
     private static double[] POW_1_2 = new double[31];
 
+    private readonly int myPower; //power of 2 as common devider
+    private int[] myPoints;
+
     static Point()
     {
       int l = 1;
@@ -27,9 +28,6 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
         l *= 2;
       }
     }
-
-    private int[] myPoints;
-    private readonly int myPower; //power of 2 as common devider
 
     private Point(int power, int[] coordinate)
     {
@@ -117,7 +115,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     internal static Point CreatePoint(int dim, int v)
     {
       int[] pt = new int[dim];
-      for (int i = 0; i<dim; i++)
+      for (int i = 0; i < dim; i++)
       {
         pt[i] = v;
       }

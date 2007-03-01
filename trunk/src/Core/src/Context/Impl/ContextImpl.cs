@@ -7,6 +7,8 @@ namespace DSIS.Core.src.Context.Impl
   {
     private Dictionary<string, object> myCollection = new Dictionary<string, object>();
 
+    #region IContext Members
+
     public T GetValue<T>(ContextKey<T> key)
     {
       return GetValue(key, default(T));
@@ -18,6 +20,10 @@ namespace DSIS.Core.src.Context.Impl
       return myCollection.TryGetValue(key.Key, out o) ? (T) o : def;
     }
 
+    #endregion
+
+    #region IWritableContext Members
+
     public void Add<T>(ContextKey<T> key, T value)
     {
       myCollection[key.Key] = value;
@@ -27,5 +33,7 @@ namespace DSIS.Core.src.Context.Impl
     {
       myCollection.Remove(key.Key);
     }
+
+    #endregion
   }
 }

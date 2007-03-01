@@ -7,11 +7,11 @@ namespace DSIS.Graph.Abstract
   internal interface IStrongComponentInfoEx : IStrongComponentInfo
   {
     IStrongComponentInfoEx Reference { get; }
-    new int NodesCount { get; set;}
+    new int NodesCount { get; set; }
 
     bool InsContains(IStrongComponentInfoEx comp);
-    IEnumerable<IStrongComponentInfoEx> Ins { get;}
-    IEnumerable<IStrongComponentInfoEx> Outs { get;}
+    IEnumerable<IStrongComponentInfoEx> Ins { get; }
+    IEnumerable<IStrongComponentInfoEx> Outs { get; }
 
     void Dump(TextWriter tw, Dictionary<IStrongComponentInfo, int> comps, ref int cnt);
   }

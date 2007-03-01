@@ -1,4 +1,4 @@
-using DSIS.Core.Coordinates;
+using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.Shared
@@ -10,10 +10,9 @@ namespace DSIS.CellImageBuilder.Shared
     protected IIntegerCoordinateCellImageBuilderAdapter myAdapter;
     protected int myDim;
 
-
     public virtual void Bind(CellImageBuilderContext<IntegerCoordinate> context)
     {
-      mySystem = (IIntegerCoordinateSystem)context.System;
+      mySystem = (IIntegerCoordinateSystem) context.System;
       myBuilder = context.ConnectionBuilder;
       myAdapter = mySystem.CreateAdapter(myBuilder);
       myDim = context.System.SystemSpace.Dimension;

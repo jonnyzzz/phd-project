@@ -3,11 +3,13 @@ using DSIS.Core.Util;
 
 namespace DSIS.Core.Processor
 {
-  public class SymbolicImageConstructionProcess<TFrom, TTo> : ICellProcessor<TFrom, TTo> 
+  public class SymbolicImageConstructionProcess<TFrom, TTo> : ICellProcessor<TFrom, TTo>
     where TFrom : ICellCoordinate<TFrom>
     where TTo : ICellCoordinate<TTo>
   {
     private CellProcessorContext<TFrom, TTo> myContext;
+
+    #region ICellProcessor<TFrom,TTo> Members
 
     public void Bind(CellProcessorContext<TFrom, TTo> context)
     {
@@ -17,7 +19,7 @@ namespace DSIS.Core.Processor
     }
 
     public void Execute(IProgressInfo info)
-    {      
+    {
       info.Minimum = 0;
       info.Maximum = myContext.Cells.Count;
 
@@ -29,9 +31,11 @@ namespace DSIS.Core.Processor
 
         foreach (TTo small in myContext.Converter.Subdivide(cell))
         {
-          myContext.CellImageBuilder.BuildImage(small);          
+          myContext.CellImageBuilder.BuildImage(small);
         }
       }
     }
+
+    #endregion
   }
 }

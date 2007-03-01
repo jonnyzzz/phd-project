@@ -7,13 +7,14 @@ namespace DSIS.Core.Src.Context
   {
     private string myKey;
 
+    internal ContextKey(string key)
+    {
+      myKey = key + "|" + TypeName(typeof (T));
+    }
+
     protected static string TypeName(Type t)
     {
       return typeof (T).AssemblyQualifiedName + "||" + typeof (T).FullName;
-    }
-    internal ContextKey(string key)
-    {
-      myKey = key + "|" + TypeName(typeof(T));
     }
 
     public override bool Equals(object obj)

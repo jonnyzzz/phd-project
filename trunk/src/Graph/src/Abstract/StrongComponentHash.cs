@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Util;
 using DSIS.Graph.Util;
-using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
 {
   internal class StrongComponentHash
   {
     public delegate int GenerationDelegate(StrongComponentInfo2 info);
-    
-    private MultiHashDictionary<int, StrongComponentInfo2> myInfos = new MultiHashDictionary<int, StrongComponentInfo2>();
+
+    private MultiHashDictionary<int, StrongComponentInfo2> myInfos =
+      new MultiHashDictionary<int, StrongComponentInfo2>();
+
     private OrderedList<int> myGenerations = new OrderedList<int>();
     private Dictionary<int, long> myGenerationEvents;
     private Dictionary<int, long> myProcessedEvents = new Dictionary<int, long>();
@@ -39,11 +40,8 @@ namespace DSIS.Graph.Abstract
       if (!myInfos.ContainsKey(info.Generation))
         myGenerations.Add(info.Generation);
 
-      myInfos.Add(info.Generation, info);      
+      myInfos.Add(info.Generation, info);
     }
-
-    private delegate bool ProcessComponent(int generation, StrongComponentInfo2 comp);
-    private delegate bool ProcessComponents(int generation, Hashset<StrongComponentInfo2> comp);
 
     private bool UpdateComponents(IEnumerable<int> gens, ProcessComponent onUpdate, ProcessComponents onNoUpdate)
     {
@@ -59,18 +57,19 @@ namespace DSIS.Graph.Abstract
             bool found = false;
             foreach (StrongComponentInfo2 info2 in list)
             {
-              StrongComponentInfo2 ex = (StrongComponentInfo2)info2.Reference;
+              StrongComponentInfo2 ex = (StrongComponentInfo2) info2.Reference;
               found |= onUpdate(g, ex);
               if (ex.Generation == g)
                 set.Add(ex);
-              else 
+              else
                 myInfos.Add(ex.Generation, ex);
             }
             if (set.Count > 0)
             {
               list.Clear();
               list.AddRange(set);
-            } else
+            }
+            else
             {
               myGenerations.Remove(g);
             }
@@ -89,7 +88,8 @@ namespace DSIS.Graph.Abstract
       return false;
     }
 
-    private static IEnumerable<StrongComponentInfo2> Intersect(Hashset<StrongComponentInfo2> i1, Hashset<StrongComponentInfo2> i2)
+    private static IEnumerable<StrongComponentInfo2> Intersect(Hashset<StrongComponentInfo2> i1,
+                                                               Hashset<StrongComponentInfo2> i2)
     {
       List<StrongComponentInfo2> result = new List<StrongComponentInfo2>();
       if (i1.Count > i2.Count)
@@ -112,8 +112,8 @@ namespace DSIS.Graph.Abstract
       h1.UpdateComponents(h1.myGenerations.Elements, delegate { return false; }, delegate { return false; });
       h2.UpdateComponents(h2.myGenerations.Elements, delegate { return false; }, delegate { return false; });
 
-      IEnumerator<int> s1 = h1.myGenerations.Elements.GetEnumerator(); 
-      IEnumerator<int> s2 = h1.myGenerations.Elements.GetEnumerator(); 
+      IEnumerator<int> s1 = h1.myGenerations.Elements.GetEnumerator();
+      IEnumerator<int> s2 = h1.myGenerations.Elements.GetEnumerator();
       bool hasElements = s1.MoveNext();
       hasElements &= s2.MoveNext();
 
@@ -122,7 +122,7 @@ namespace DSIS.Graph.Abstract
       if (!hasElements)
         return set;
 
-      while(true)
+      while (true)
       {
         if (s1.Current < s2.Current && !s1.MoveNext()) break;
         else if (s1.Current > s2.Current && !s2.MoveNext()) break;
@@ -131,7 +131,7 @@ namespace DSIS.Graph.Abstract
         set.AddRange(@int);
 
         if (!(s1.MoveNext() && s2.MoveNext()))
-          break;        
+          break;
       }
 
       return set;
@@ -162,11 +162,15 @@ namespace DSIS.Graph.Abstract
         {
           foreach (StrongComponentInfo2 info2 in info.Value)
           {
-            yield return info2; 
-          }          
+            yield return info2;
+          }
         }
       }
     }
+
+    private delegate bool ProcessComponent(int generation, StrongComponentInfo2 comp);
+
+    private delegate bool ProcessComponents(int generation, Hashset<StrongComponentInfo2> comp);
 
     private class UpdateCookie : IDisposable
     {
@@ -181,10 +185,14 @@ namespace DSIS.Graph.Abstract
         myGeneration = generation;
       }
 
+      #region IDisposable Members
+
       public void Dispose()
       {
         myHash.myProcessedEvents[myGeneration] = myChangeId;
       }
+
+      #endregion
     }
   }
 }

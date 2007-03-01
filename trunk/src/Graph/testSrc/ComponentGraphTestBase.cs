@@ -14,7 +14,6 @@ namespace DSIS.Graph.Test
     protected IGraphStrongComponents<IntegerCoordinate> myComponents = null;
     protected IntegerCoordinateSystem mySystem;
     private int myNodeId;
-    protected delegate void VoidDelegate();
 
     public void ComputeComponents()
     {
@@ -35,13 +34,13 @@ namespace DSIS.Graph.Test
     public virtual void TearDown()
     {
       mySystem = null;
-      myGraph = null;      
+      myGraph = null;
     }
 
-    
+
     protected INode<IntegerCoordinate> CreateNode()
     {
-      return myGraph.AddNode(new IntegerCoordinate(myNodeId++));      
+      return myGraph.AddNode(new IntegerCoordinate(myNodeId++));
     }
 
     protected List<IStrongComponentInfo> OneComponent
@@ -65,11 +64,10 @@ namespace DSIS.Graph.Test
 
                  Assert.AreEqual(1, myComponents.ComponentCount, "Wrong component count");
                  Assert.AreEqual(length, OneComponent[0].NodesCount, "Wrong node count number");
-                 
                });
     }
 
-    protected void BuildCircle(int offset, int factor,  int length)
+    protected void BuildCircle(int offset, int factor, int length)
     {
       INode<IntegerCoordinate> n = null;
       INode<IntegerCoordinate> n2 = null;
@@ -91,7 +89,8 @@ namespace DSIS.Graph.Test
       try
       {
         deleg();
-      } catch
+      }
+      catch
       {
         Dump();
         throw;
@@ -102,5 +101,7 @@ namespace DSIS.Graph.Test
     {
       Console.Out.WriteLine(myGraph.Dump());
     }
+
+    protected delegate void VoidDelegate();
   }
 }

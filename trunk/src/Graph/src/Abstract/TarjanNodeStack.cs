@@ -21,9 +21,9 @@ namespace DSIS.Graph.Abstract
 
     public TarjanNode<TCell> Pop()
     {
-        TarjanNode<TCell> node = myStack.Pop();
-        node.SetFlag(myMask, false);
-        return node;
+      TarjanNode<TCell> node = myStack.Pop();
+      node.SetFlag(myMask, false);
+      return node;
     }
 
     public TarjanNode<TCell> Peek()

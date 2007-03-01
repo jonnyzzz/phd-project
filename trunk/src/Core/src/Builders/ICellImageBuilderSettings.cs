@@ -6,6 +6,6 @@ namespace DSIS.Core.Coordinates
   /// for the hierarchy
   /// </summary>
   public interface ICellImageBuilderSettings
-  {    
+  {
   }
 }

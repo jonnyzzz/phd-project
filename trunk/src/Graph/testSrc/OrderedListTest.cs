@@ -12,13 +12,26 @@ namespace DSIS.Graph
     [SetUp]
     public void SetUp()
     {
-      myList = new OrderedList<int>();      
+      myList = new OrderedList<int>();
     }
 
     [TearDown]
     public void TearDown()
     {
       myList = null;
+    }
+
+    private static void AssertCollection<T>(IEnumerable<T> expected, IEnumerable<T> actual)
+    {
+      List<T> exp = new List<T>(expected);
+      List<T> act = new List<T>(actual);
+
+      Assert.AreEqual(exp.Count, act.Count, "Collection size assert");
+
+      for (int i = 0; i < exp.Count; i++)
+      {
+        Assert.AreEqual(exp[i], act[i], "Collection element at index {0}", i);
+      }
     }
 
     [Test]
@@ -40,20 +53,7 @@ namespace DSIS.Graph
       foreach (int i in myList.Elements)
       {
         Assert.IsTrue(v == null || v < i);
-        v = i;        
-      }
-    }
-
-    private static void AssertCollection<T>(IEnumerable<T> expected, IEnumerable<T> actual)
-    {
-      List<T> exp = new List<T>(expected);
-      List<T> act = new List<T>(actual);
-
-      Assert.AreEqual(exp.Count, act.Count, "Collection size assert");
-
-      for(int i=0; i<exp.Count; i++)
-      {
-        Assert.AreEqual(exp[i], act[i], "Collection element at index {0}", i);
+        v = i;
       }
     }
 
@@ -109,11 +109,11 @@ namespace DSIS.Graph
       ass.Add(10);
       ass.Add(100);
       ass.Add(1000);
-      for(int i = 0;i<100; i++)
+      for (int i = 0; i < 100; i++)
       {
         myList.Add(i + 4);
-        if (!ass.Contains(i+4))
-          ass.Add(i+4);
+        if (!ass.Contains(i + 4))
+          ass.Add(i + 4);
       }
 
       ass.Sort();
@@ -129,9 +129,9 @@ namespace DSIS.Graph
     [Test]
     public void Test_06()
     {
-      for (int i=0; i<100; i++)
+      for (int i = 0; i < 100; i++)
       {
-        myList.Add(100-i);
+        myList.Add(100 - i);
       }
 
       List<int> l = new List<int>(myList.Find(100));
@@ -141,9 +141,9 @@ namespace DSIS.Graph
     [Test]
     public void Test_07()
     {
-      for (int i=0; i<100; i++)
+      for (int i = 0; i < 100; i++)
       {
-        myList.Add(100-i);
+        myList.Add(100 - i);
       }
 
       List<int> l = new List<int>(myList.Find(1000));

@@ -6,6 +6,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
   {
     public static PointEqualityComparer INSTANCE = new PointEqualityComparer();
 
+    #region IEqualityComparer<Point> Members
+
     public bool Equals(Point x, Point y)
     {
       return x.EqualsInternal(y);
@@ -15,5 +17,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     {
       return obj.GetHashCodeInternal();
     }
+
+    #endregion
   }
 }

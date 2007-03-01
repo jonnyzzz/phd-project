@@ -1,5 +1,3 @@
-using System;
-
 namespace DSIS.GnuplotDrawer
 {
   public class GnuplotScriptParameters

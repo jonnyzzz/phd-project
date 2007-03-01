@@ -3,10 +3,6 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
-using System;
-using System.Collections.Generic;
-using DSIS.Core.Coordinates;
-
 namespace DSIS.Core.Data
 {
 //  [Obsolete("Subject to change")]

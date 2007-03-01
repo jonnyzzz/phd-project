@@ -5,7 +5,13 @@ namespace DSIS.Graph.Test
   [TestFixture]
   public class GenericsTest
   {
-    
+    [Test]
+    public void Test_01()
+    {
+      C c = new C();
+      Assert.AreEqual(4, c.DoIt());
+    }
+
     private interface A
     {
       int Foo();
@@ -15,24 +21,20 @@ namespace DSIS.Graph.Test
     {
       public int DoIt()
       {
-        return ((Inh)this).Foo();
-      }      
+        return ((Inh) this).Foo();
+      }
     }
 
     private class C : B<C>, A
     {
+      #region A Members
+
       public int Foo()
-      {        
+      {
         return 4;
       }
-    }
 
-    [Test]
-    public void Test_01()
-    {
-      C c = new C();
-      Assert.AreEqual(4, c.DoIt());
+      #endregion
     }
-    
   }
 }

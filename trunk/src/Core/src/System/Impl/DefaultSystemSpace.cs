@@ -20,10 +20,7 @@ namespace DSIS.Core.System.Impl
       myInitialSubdivision = initialSubdivision;
     }
 
-    public int Dimension
-    {
-      get { return myDimension; }
-    }
+    #region ISystemSpace Members
 
     public double[] AreaLeftPoint
     {
@@ -33,11 +30,6 @@ namespace DSIS.Core.System.Impl
     public double[] AreaRightPoint
     {
       get { return myAreaRightPoint; }
-    }
-
-    public long[] InitialSubdivision
-    {
-      get { return myInitialSubdivision; }
     }
 
     public bool Contains(double[] point)
@@ -64,5 +56,17 @@ namespace DSIS.Core.System.Impl
       }
       return true;
     }
+
+    public int Dimension
+    {
+      get { return myDimension; }
+    }
+
+    public long[] InitialSubdivision
+    {
+      get { return myInitialSubdivision; }
+    }
+
+    #endregion
   }
 }

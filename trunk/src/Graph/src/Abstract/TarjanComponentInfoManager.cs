@@ -20,7 +20,7 @@ namespace DSIS.Graph.Abstract
       get { return myInfos.Count; }
     }
 
-    public IStrongComponentInfo FindByNode<T>(TarjanNode<T> node) where T:ICellCoordinate<T>
+    public IStrongComponentInfo FindByNode<T>(TarjanNode<T> node) where T : ICellCoordinate<T>
     {
       IStrongComponentInfo info;
       return myInfos.TryGetValue(node.ComponentId, out info) ? info : null;
@@ -28,7 +28,7 @@ namespace DSIS.Graph.Abstract
 
     public IEnumerable<IStrongComponentInfo> Infos
     {
-      get{ return myInfos.Values; }
+      get { return myInfos.Values; }
     }
   }
 }

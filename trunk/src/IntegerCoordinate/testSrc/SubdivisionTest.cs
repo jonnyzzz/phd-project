@@ -7,9 +7,7 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
-using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
-using DSIS.Util;
 using NUnit.Framework;
 
 namespace DSIS.IntegerCoordinates.Test
@@ -17,10 +15,10 @@ namespace DSIS.IntegerCoordinates.Test
   [TestFixture]
   public class SubdivisionTest
   {
-    private void DoTest(double[] l, double[] r, long[] g, long[] div)
+    private static void DoTest(double[] l, double[] r, long[] g, long[] div)
     {
       IntegerCoordinateSystem ics = new IntegerCoordinateSystem(new MockSystemSpace(l.Length, l, r, g));
-      List <IntegerCoordinate> coords = new List<IntegerCoordinate>(ics.InitialSubdivision);
+      List<IntegerCoordinate> coords = new List<IntegerCoordinate>(ics.InitialSubdivision);
 
       ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> converter = ics.Subdivide(div);
 
@@ -34,7 +32,8 @@ namespace DSIS.IntegerCoordinates.Test
             try
             {
               Assert.IsFalse(ass.Contains(coordinate));
-            } catch
+            }
+            catch
             {
               Console.Out.WriteLine("coordinate = {0}", coordinate);
               throw;
@@ -61,10 +60,10 @@ namespace DSIS.IntegerCoordinates.Test
         n *= l1;
       }
 
-      Assert.AreEqual(n * m, ass.Count);
+      Assert.AreEqual(n*m, ass.Count);
     }
 
-    [Test]  
+    [Test]
     public void Test_01()
     {
       double[] l = {1, 2, 3};
@@ -75,35 +74,33 @@ namespace DSIS.IntegerCoordinates.Test
     }
 
     [Test]
-    public void Test_03()
+    public void Test_02()
     {
-      double[] l = { 1, 2, 3 };
-      double[] r = { 3, 4 + 3, 5 + 7 };
-      long[] g = { 1, 5, 6 };
-      long[] d = { 5, 7, 6 };
+      double[] l = {1, 2};
+      double[] r = {3, 4 + 3};
+      long[] g = {1, 5};
+      long[] d = {5, 7};
       DoTest(l, r, g, d);
     }
 
     [Test]
-    public void Test_02()
+    public void Test_03()
     {
-      double[] l = { 1, 2 };
-      double[] r = { 3, 4 + 3};
-      long[] g = { 1, 5};
-      long[] d = { 5, 7};
+      double[] l = {1, 2, 3};
+      double[] r = {3, 4 + 3, 5 + 7};
+      long[] g = {1, 5, 6};
+      long[] d = {5, 7, 6};
       DoTest(l, r, g, d);
     }
 
     [Test]
     public void Test_04()
     {
-      double[] l = { 0, 0 };
-      double[] r = { 1, 1};
-      long[] g = { 5, 5};
-      long[] d = { 2, 2};
+      double[] l = {0, 0};
+      double[] r = {1, 1};
+      long[] g = {5, 5};
+      long[] d = {2, 2};
       DoTest(l, r, g, d);
     }
-
-
   }
 }

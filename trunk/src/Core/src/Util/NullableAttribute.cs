@@ -7,7 +7,7 @@ using System;
 
 namespace DSIS.Core.Util
 {
-  [AttributeUsage( AttributeTargets.All, AllowMultiple = false)]
+  [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
   public class NullableAttribute : Attribute
   {
   }

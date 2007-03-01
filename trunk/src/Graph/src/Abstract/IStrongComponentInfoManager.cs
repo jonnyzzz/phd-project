@@ -10,10 +10,10 @@ namespace DSIS.Graph.Abstract
     IEnumerable<IStrongComponentInfo> Components { get; }
 
     IEnumerable<INode<TCellCoordinate>> FilterNodes<TCellCoordinate>(
-      IEnumerable<IStrongComponentInfo> infos, 
-      IEnumerable<StrongComponentNode<TCellCoordinate>> nodes) 
+      IEnumerable<IStrongComponentInfo> infos,
+      IEnumerable<StrongComponentNode<TCellCoordinate>> nodes)
       where TCellCoordinate : ICellCoordinate<TCellCoordinate>;
-    
+
     void AddComponent(IStrongComponentInfo info);
     void OnConnection(IStrongComponentInfo from, IStrongComponentInfo to);
 

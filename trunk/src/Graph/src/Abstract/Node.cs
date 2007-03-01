@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
-using DSIS.Graph;
 
 namespace DSIS.Graph.Abstract
-{ 
-  public abstract class Node<TInh, TCell> : INode<TCell> 
+{
+  public abstract class Node<TInh, TCell> : INode<TCell>
     where TCell : ICellCoordinate<TCell>
     where TInh : Node<TInh, TCell>
   {
@@ -22,16 +21,25 @@ namespace DSIS.Graph.Abstract
       HashCodeInternal = CellComparer.GetHashCode(Coordinate) & 0x7fffffff;
     }
 
-   public sealed override bool Equals(object obj)
+    #region INode<TCell> Members
+
+    TCell INode<TCell>.Coordinate
     {
-      if (!(obj is Node<TInh, TCell>)) 
+      get { return Coordinate; }
+    }
+
+    #endregion
+
+    public override sealed bool Equals(object obj)
+    {
+      if (!(obj is Node<TInh, TCell>))
         return false;
       Node<TInh, TCell> node = (Node<TInh, TCell>) obj;
 
       return Equals(Coordinate, node.Coordinate);
     }
 
-    public sealed override int GetHashCode()
+    public override sealed int GetHashCode()
     {
       return HashCodeInternal;
     }
@@ -49,11 +57,6 @@ namespace DSIS.Graph.Abstract
     internal IEnumerable<TInh> EdgesInternal
     {
       get { return myEdges.Values; }
-    }
-
-    TCell INode<TCell>.Coordinate
-    {
-      get { return Coordinate; }
     }
   }
 }

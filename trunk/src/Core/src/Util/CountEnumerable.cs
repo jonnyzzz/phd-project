@@ -16,7 +16,14 @@ namespace DSIS.Core.Util
     public CountEnumerable(IEnumerable<T> enumerable, long count)
     {
       myEnumerable = enumerable;
-      Count = (int)count;
+      Count = (int) count;
+    }
+
+    #region IEnumerable<T> Members
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return myEnumerable.GetEnumerator();
     }
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
@@ -24,9 +31,6 @@ namespace DSIS.Core.Util
       return myEnumerable.GetEnumerator();
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-      return myEnumerable.GetEnumerator();
-    }
+    #endregion
   }
 }

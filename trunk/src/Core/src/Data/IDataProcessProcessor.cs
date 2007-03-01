@@ -3,10 +3,6 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
-using System;
-using DSIS.Core.System;
-using DSIS.Core.Util;
-
 namespace DSIS.Core.Data
 {
 //  [Obsolete("Subject to change")]

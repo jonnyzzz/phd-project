@@ -14,6 +14,7 @@ namespace DSIS.Core.Coordinates
 
     [Obsolete()]
     bool Equals(T coord);
+
     [Obsolete()]
     int GetHashCode();
   }

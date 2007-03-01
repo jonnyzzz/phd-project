@@ -7,6 +7,6 @@ namespace DSIS.Core.System.Tree
 {
   public interface IFunctionNode
   {
-    IFunctionNode Parent { get; }    
+    IFunctionNode Parent { get; }
   }
 }

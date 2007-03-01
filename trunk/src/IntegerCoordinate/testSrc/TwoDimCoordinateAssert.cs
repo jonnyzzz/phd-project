@@ -4,7 +4,6 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using DSIS.Core.Util;
-using DSIS.Util;
 
 namespace DSIS.IntegerCoordinates.Test
 {
@@ -55,14 +54,15 @@ namespace DSIS.IntegerCoordinates.Test
     {
       string s = Write(ics, list);
       try
-      {        
+      {
         using (
           StreamReader sr =
             new StreamReader(Assembly.GetCallingAssembly().GetManifestResourceStream(resource), Encoding.UTF8))
         {
           NUnit.Framework.Assert.AreEqual(sr.ReadToEnd(), s);
         }
-      } catch
+      }
+      catch
       {
         Console.Out.WriteLine(s);
       }

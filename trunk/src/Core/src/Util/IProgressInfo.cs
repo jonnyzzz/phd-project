@@ -3,8 +3,6 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
-using System;
-
 namespace DSIS.Core.Util
 {
   /// <summary>

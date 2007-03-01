@@ -18,6 +18,20 @@ namespace DSIS.Core.Util
       mySet = new Dictionary<T, T>(comparer);
     }
 
+    #region IEnumerable<T> Members
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return Values.GetEnumerator();
+    }
+
+    IEnumerator<T> IEnumerable<T>.GetEnumerator()
+    {
+      return Values.GetEnumerator();
+    }
+
+    #endregion
+
     public bool Contains(T t)
     {
       return mySet.ContainsKey(t);
@@ -71,16 +85,6 @@ namespace DSIS.Core.Util
       get { return mySet.Count; }
     }
 
-    IEnumerator<T> IEnumerable<T>.GetEnumerator()
-    {
-      return Values.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-      return Values.GetEnumerator();
-    }
-
 
     public override string ToString()
     {
@@ -106,11 +110,12 @@ namespace DSIS.Core.Util
 
     public IEnumerable<TC> ValuesUpcasted
     {
-      get {
+      get
+      {
         foreach (T t in Values)
         {
           yield return t;
-        } 
+        }
       }
     }
 

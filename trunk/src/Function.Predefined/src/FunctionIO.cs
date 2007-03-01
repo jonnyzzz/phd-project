@@ -4,9 +4,9 @@ namespace DSIS.Function.Predefined
 {
   public class FunctionIO<T> : IFunctionIO<T>
   {
+    private readonly IFunctionIO<T>[] myDerivates = null;
     private T[] myInput = null;
     private T[] myOutput = null;
-    private readonly IFunctionIO<T>[] myDerivates = null;
 
     public FunctionIO()
     {
@@ -15,6 +15,13 @@ namespace DSIS.Function.Predefined
     public FunctionIO(params IFunctionIO<T>[] derivates)
     {
       myDerivates = derivates;
+    }
+
+    #region IFunctionIO<T> Members
+
+    public IFunctionIO<T>[] Derivates
+    {
+      get { return myDerivates; }
     }
 
     public T[] Input
@@ -29,9 +36,6 @@ namespace DSIS.Function.Predefined
       set { myOutput = value; }
     }
 
-    public IFunctionIO<T>[] Derivates
-    {
-      get { return myDerivates; }
-    }
+    #endregion
   }
 }

@@ -3,8 +3,8 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  internal class GraphNodeHashList<TNode, TCell> 
-    where TCell : ICellCoordinate<TCell> 
+  internal sealed class GraphNodeHashList<TNode, TCell>
+    where TCell : ICellCoordinate<TCell>
     where TNode : Node<TNode, TCell>
   {
     private static readonly IEqualityComparer<TCell> COMPARER = EqualityComparerFactory<TCell>.GetComparer();
@@ -14,14 +14,14 @@ namespace DSIS.Graph.Abstract
     public GraphNodeHashList(int capacity)
     {
       myHashMax = capacity;
-      myItems = new Item[myHashMax];      
+      myItems = new Item[myHashMax];
     }
 
     public bool AddIfNotReplace(ref TNode t)
     {
       int index = t.HashCodeInternal%myHashMax;
 
-      Item it = myItems[index];      
+      Item it = myItems[index];
       while (it != null)
       {
         if (it.Value.HashCodeInternal == t.HashCodeInternal && COMPARER.Equals(it.Value.Coordinate, t.Coordinate))
@@ -54,11 +54,11 @@ namespace DSIS.Graph.Abstract
         }
       }
     }
-    
-    private class Item
+
+    private sealed class Item
     {
-      public Item NextItem = null;
       public readonly TNode Value;
+      public Item NextItem = null;
 
       public Item(TNode value)
       {

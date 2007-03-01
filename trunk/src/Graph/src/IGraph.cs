@@ -10,7 +10,7 @@ using DSIS.Core.Util;
 
 namespace DSIS.Graph
 {
-  public interface IGraph<TCoordinate> where TCoordinate : ICellCoordinate <TCoordinate>
+  public interface IGraph<TCoordinate> where TCoordinate : ICellCoordinate<TCoordinate>
   {
     ICellCoordinateSystem<TCoordinate> CoordinateSystem { get; }
     IEnumerable<INode<TCoordinate>> Nodes { get; }
@@ -39,7 +39,7 @@ namespace DSIS.Graph
     string Dump();
   }
 
-  public interface IGraphWithStrongComponent<TCell> : IGraph<TCell> 
+  public interface IGraphWithStrongComponent<TCell> : IGraph<TCell>
     where TCell : ICellCoordinate<TCell>
   {
     IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info);

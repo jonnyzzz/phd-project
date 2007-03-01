@@ -20,10 +20,10 @@ namespace DSIS.Core.System
     /// changed.
     /// </summary>
     void Evaluate();
-    
+
     /// <summary>
     /// Retrive the dimension of the IFunction object
     /// </summary>
-    int Dimension { get;}
+    int Dimension { get; }
   }
 }

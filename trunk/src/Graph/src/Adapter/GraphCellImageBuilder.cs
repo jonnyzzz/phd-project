@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
+using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 
-namespace DSIS.Graph.src.Adapter
+namespace DSIS.Graph.Adapter
 {
-  public class GraphCellImageBuilder<TCell> : ICellConnectionBuilder<TCell> 
+  public class GraphCellImageBuilder<TCell> : ICellConnectionBuilder<TCell>
     where TCell : ICellCoordinate<TCell>
   {
     private IGraph<TCell> myGraph;
@@ -14,12 +14,7 @@ namespace DSIS.Graph.src.Adapter
       myGraph = graph;
     }
 
-    public void ConnectToOne(TCell cell, TCell v)
-    {
-      INode<TCell> cellNode = myGraph.AddNode(cell);
-      INode<TCell> vNode = myGraph.AddNode(v);
-      myGraph.AddEdgeToNode(cellNode, vNode);
-    }
+    #region ICellConnectionBuilder<TCell> Members
 
     public void ConnectToMany(TCell cell, IEnumerable<TCell> v)
     {
@@ -30,5 +25,14 @@ namespace DSIS.Graph.src.Adapter
         myGraph.AddEdgeToNode(fromNode, node);
       }
     }
+
+    public void ConnectToOne(TCell cell, TCell v)
+    {
+      INode<TCell> cellNode = myGraph.AddNode(cell);
+      INode<TCell> vNode = myGraph.AddNode(v);
+      myGraph.AddEdgeToNode(cellNode, vNode);
+    }
+
+    #endregion
   }
 }

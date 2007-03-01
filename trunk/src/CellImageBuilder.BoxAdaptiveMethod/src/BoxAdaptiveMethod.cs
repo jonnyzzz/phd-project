@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.Shared;
-using DSIS.Core.Coordinates;
+using DSIS.Core.Builders;
 using DSIS.Core.System;
 using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
@@ -19,45 +19,30 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     private double[] eps;
     private double[] radius;
-    private IntegerCoordinate coordinate;
     private double[] overlapL;
     private double[] overlapR;
 
-    private Dictionary<Point, double[]> cache = new Dictionary<Point, double[]>(new PointEqualityComparer());
-    private Hashset<Point> addedPoints = new Hashset<Point>(new PointEqualityComparer());
     private Divide[] divLeft;
     private Divide[] divMiddle;
     private Divide[] divRight;
     private Divide[] div;
     private Divide[] div2;
+
     private ISortedTaskQueue myQueue;
     private BoxIterator<Divide> myIterator;
+    private PointWithOverlappingProcessor myProcessor;
 
-    
-    private double[] Evaluate(Point pt)
-    {
-      double[] result;
-      /*
-      
-      if (cache.TryGetValue(pt, out result))
-        return result;
-      */
+    private List<IntegerCoordinate> myPoints;
 
-      pt.Evaluate(xleft, xright, x);
-      result = new double[x.Length];
-      myFunction.Output = result;
-      myFunction.Evaluate();
-
-      //cache[pt] = result;
-
-      return result;
-    }
+    #region ICellImageBuilder<IntegerCoordinate> Members
 
     public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
     {
       base.Bind(context);
+      myProcessor = new PointWithOverlappingProcessor(mySystem);
+      myPoints = new List<IntegerCoordinate>(10000);
+
       myFunction = context.Function.GetFunction<double>();
-      cache.Clear();
 
       BoxAdaptiveMethodSettings settings = (BoxAdaptiveMethodSettings) context.Settings;
       switch (settings.WorkItemStrategy)
@@ -100,13 +85,11 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
         per[i] = settings.Overlaping;
       }
 
-      myAdapter.AddPointWithOverlappingPrepare(per, overlapL, overlapR);
+      myProcessor.AddPointWithOverlappingPrepare(per, overlapL, overlapR);
     }
 
     public void BuildImage(IntegerCoordinate coord)
     {
-      coordinate = coord;
-
       mySystem.TopLeftPoint(coord, xleft);
       for (int i = 0; i < myDim; i++)
         xright[i] = xleft[i] + mySystem.CellSize[i];
@@ -115,30 +98,42 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       Point bottomPoint = Point.CreateBottomRight(myDim);
 
       myQueue.Clear();
-      addedPoints.Clear();
-      cache.Clear();
-
       myQueue.AddTask(null, new Pair<Point, Point>(topPoint, bottomPoint));
 
       while (myQueue.HasNextTask)
       {
         ProcessPoint(myQueue.NextTask(), myQueue);
       }
+      myBuilder.ConnectToMany(coord, myPoints);
 
-      addedPoints.Clear(); //sizes may differ. 
+
+      foreach (Pair<double[], Point> pair in myQueue.NonProcessed)
+      {
+        myAdapter.AddPointWithOverlapping(coord, Evaluate(pair.Second), overlapL, overlapR);
+      }
+
       foreach (Pair<double[], Point> work in myQueue.NonProcessed)
       {
         myAdapter.ConnectCellToPointWithRadius(coord, Evaluate(work.Second), work.First);
-      }
+      }      
     }
 
-    private void AppendPoint(Point p, double[] d)
+    #endregion
+
+    private double[] Evaluate(Point pt)
     {
-      if (!addedPoints.Contains(p))
-      {
-        myAdapter.AddPointWithOverlapping(coordinate, d, overlapL, overlapR);
-        addedPoints.Add(p);
-      }
+      pt.Evaluate(xleft, xright, x);
+      double[] result = new double[myDim];
+
+      myFunction.Output = result;
+      myFunction.Evaluate();
+
+      return result;
+    }
+
+    private void AppendPoint(double[] d)
+    {
+      myPoints.AddRange(myProcessor.AddPointWithOverlappingInternal(d, overlapL, overlapR));
     }
 
     private void ProcessPoint(Pair<Point, Point> task, ISortedTaskQueue queue)
@@ -161,7 +156,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
           div2[i] = Divide.First;
           divLeft[i] = Divide.Middle;
           divRight[i] = Divide.Middle;
-        } else
+        }
+        else
         {
           div2[i] = Divide.Middle;
           divLeft[i] = Divide.First;
@@ -172,8 +168,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       }
       if (result)
       {
-        AppendPoint(p1, d1);
-        AppendPoint(p2, d2);
+        AppendPoint(d1);
+        AppendPoint(d2);
       }
       else
       {
@@ -184,12 +180,12 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
             if (div2[i] != Divide.Middle)
               div2[i] = ts[i] == Divide.First ? Divide.Second : Divide.First;
           }
-          queue.AddTask(len, 
-            new Pair<Point, Point>(
-              Point.Middle(p1, p2, div2), 
-              Point.Middle(p1, p2, ts)
-              )
-              );
+          queue.AddTask(len,
+                        new Pair<Point, Point>(
+                          Point.Middle(p1, p2, div2),
+                          Point.Middle(p1, p2, ts)
+                          )
+            );
         }
       }
     }

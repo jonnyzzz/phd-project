@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DSIS.Util
+namespace DSIS.Core.Util
 {
   public abstract class SegmentBoxIterator<T>
   {

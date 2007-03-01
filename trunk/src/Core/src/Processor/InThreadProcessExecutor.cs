@@ -11,12 +11,16 @@ namespace DSIS.Core.Processor
       myProcess = process;
     }
 
+    #region IProcess Members
+
     public void Execute(IProgressInfo info)
     {
       foreach (IProcess process in myProcess.ConcurrentProcesses)
       {
-          process.Execute(info);
+        process.Execute(info);
       }
     }
+
+    #endregion
   }
 }

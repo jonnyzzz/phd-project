@@ -18,6 +18,43 @@ namespace DSIS.Graph.Abstract
       myOuts = new StrongComponentHash(events);
     }
 
+    #region IStrongComponentInfoEx Members
+
+    public void Dump(TextWriter tw, Dictionary<IStrongComponentInfo, int> comps, ref int cnt)
+    {
+      foreach (StrongComponentInfo2 info in myOuts.Elements)
+      {
+        int id;
+        if (!comps.TryGetValue(info, out id))
+        {
+          id = ++cnt;
+          comps[info] = id;
+        }
+        tw.Write(" {0}, ", id);
+      }
+    }
+
+    public IEnumerable<IStrongComponentInfoEx> Ins
+    {
+      get { return myIns.Elements; }
+    }
+
+    public bool InsContains(IStrongComponentInfoEx comp)
+    {
+      return myIns.Contains((StrongComponentInfo2) comp);
+    }
+
+    public int NodesCount
+    {
+      get { return myCount; }
+      set { myCount = value; }
+    }
+
+    public IEnumerable<IStrongComponentInfoEx> Outs
+    {
+      get { return myOuts.Elements; }
+    }
+
     public IStrongComponentInfoEx Reference
     {
       get
@@ -39,30 +76,11 @@ namespace DSIS.Graph.Abstract
       }
     }
 
-    public int NodesCount
-    {
-      get { return myCount; }
-      set { myCount = value; }
-    }
+    #endregion
 
     public int Generation
     {
       get { return myGeneration; }
-    }
-
-    public bool InsContains(IStrongComponentInfoEx comp)
-    {
-      return myIns.Contains((StrongComponentInfo2) comp);
-    }
-
-    public IEnumerable<IStrongComponentInfoEx> Ins
-    {
-      get { return myIns.Elements; }
-    }
-
-    public IEnumerable<IStrongComponentInfoEx> Outs
-    {
-      get { return myOuts.Elements; }
     }
 
     internal StrongComponentHash InsInternal
@@ -74,20 +92,5 @@ namespace DSIS.Graph.Abstract
     {
       get { return myOuts; }
     }
-
-    public void Dump(TextWriter tw, Dictionary<IStrongComponentInfo, int> comps, ref int cnt)
-    {
-      foreach (StrongComponentInfo2 info in myOuts.Elements)
-      {
-        int id;
-        if (!comps.TryGetValue(info, out id))
-        {
-          id = ++cnt;
-          comps[info] = id;
-        }
-        tw.Write(" {0}, ", id);
-      }
-    }
-
   }
 }

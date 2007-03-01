@@ -14,19 +14,29 @@ namespace DSIS.Graph
       myCoordinates = coordinates;
     }
 
+    #region IGraph<T> Members
+
+    public void AddEdgeToNode(INode<T> fromNode, INode<T> toNode)
+    {
+    }
+
+    public INode<T> AddNode(T coordinate)
+    {
+      return new MockNode<T>(coordinate);
+    }
+
     public ICellCoordinateSystem<T> CoordinateSystem
     {
       get { return myCoordinates; }
     }
 
-    public IEnumerable<INode<T>> Nodes
+    public void Dump(TextWriter tw)
     {
-      get { throw new NotImplementedException(); }
     }
 
-    public int NodesCount
+    public string Dump()
     {
-      get { throw new NotImplementedException(); }
+      return "Mock Graph. No info";
     }
 
     public int EdgesCount
@@ -39,22 +49,16 @@ namespace DSIS.Graph
       throw new NotImplementedException();
     }
 
-    public void AddEdgeToNode(INode<T> fromNode, INode<T> toNode)
-    {      
-    }
-
-    public INode<T> AddNode(T coordinate)
+    public IEnumerable<INode<T>> Nodes
     {
-      return new MockNode<T>(coordinate);
+      get { throw new NotImplementedException(); }
     }
 
-    public void Dump(TextWriter tw)
-    {      
-    }
-
-    public string Dump()
+    public int NodesCount
     {
-      return "Mock Graph. No info";        
+      get { throw new NotImplementedException(); }
     }
+
+    #endregion
   }
 }

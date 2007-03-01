@@ -6,6 +6,8 @@ namespace DSIS.IntegerCoordinates
   {
     public static IntegerCoordinateEqualityComparer INSTANCE = new IntegerCoordinateEqualityComparer();
 
+    #region IEqualityComparer<IntegerCoordinate> Members
+
     public bool Equals(IntegerCoordinate x, IntegerCoordinate y)
     {
       long[] xC = x.Coordinate;
@@ -21,18 +23,20 @@ namespace DSIS.IntegerCoordinates
 
     public int GetHashCode(IntegerCoordinate obj)
     {
-      long[] x = obj.Coordinate;          
+      long[] x = obj.Coordinate;
       unchecked
       {
         int hash1 = 0;
         int hash2 = 1;
-        for (int i = x.Length - 1; i >= 0; i--)
+        for (int i = 0; i < x.Length; i++)
         {
-          hash1 += (int)x[i];
-          hash2 *= (int)x[i] + 1;
+          hash1 += (int) x[i];
+          hash2 *= (int) x[i] + 1;
         }
         return hash1 + hash2;
-      }      
+      }
     }
+
+    #endregion
   }
 }

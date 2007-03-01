@@ -18,6 +18,5 @@ namespace DSIS.Core.Processor
     where TCellTo : ICellCoordinate<TCellTo>
   {
     void Bind(CellProcessorContext<TCellFrom, TCellTo> context);
-
   }
 }

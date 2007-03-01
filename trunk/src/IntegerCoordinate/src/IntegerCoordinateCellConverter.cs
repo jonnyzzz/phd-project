@@ -10,7 +10,7 @@ namespace DSIS.IntegerCoordinates
     private LongLBoxFixedDimentionMulIterator myBoxIterator;
     private long[] myDivision;
     private int myDim;
-    
+
     public IntegerCoordinateCellConverter(ICellCoordinateSystem<IntegerCoordinate> fromSystem,
                                           ICellCoordinateSystem<IntegerCoordinate> toSystem, long[] division)
     {
@@ -21,14 +21,11 @@ namespace DSIS.IntegerCoordinates
       myBoxIterator = new LongLBoxFixedDimentionMulIterator(myDim);
     }
 
-    public IEnumerable<IntegerCoordinate> Subdivide(IntegerCoordinate coordinate)
-    {
-      long[] v = coordinate.Coordinate;
+    #region ICellCoordinateSystemConverter<IntegerCoordinate,IntegerCoordinate> Members
 
-      foreach (long[] longs in myBoxIterator.Iterate(v, myDivision))
-      {
-        yield return new IntegerCoordinate((long[])longs.Clone());
-      }
+    public long[] Division
+    {
+      get { return myDivision; }
     }
 
     public ICellCoordinateSystem<IntegerCoordinate> FromSystem
@@ -36,14 +33,21 @@ namespace DSIS.IntegerCoordinates
       get { return myFromSystem; }
     }
 
+    public IEnumerable<IntegerCoordinate> Subdivide(IntegerCoordinate coordinate)
+    {
+      long[] v = coordinate.Coordinate;
+
+      foreach (long[] longs in myBoxIterator.Iterate(v, myDivision))
+      {
+        yield return new IntegerCoordinate((long[]) longs.Clone());
+      }
+    }
+
     public ICellCoordinateSystem<IntegerCoordinate> ToSystem
     {
       get { return myToSystem; }
     }
 
-    public long[] Division
-    {
-      get { return myDivision; }
-    }
+    #endregion
   }
 }

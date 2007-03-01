@@ -8,6 +8,6 @@ namespace DSIS.Core.System.Tree
 {
   public interface IFunctionTreeVisitor<T>
   {
-    T AcceptFunctionNode(IFunctionNode node, T t);    
+    T AcceptFunctionNode(IFunctionNode node, T t);
   }
 }

@@ -6,10 +6,10 @@ namespace DSIS.IntegerCoordinates
 {
   public interface IIntegerCoordinateDebug
   {
-    long[] Coordinate { get;}
+    long[] Coordinate { get; }
   }
 
-  [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]
+  [EqualityComparer(typeof (IntegerCoordinateEqualityComparer))]
   public sealed class IntegerCoordinate : ICellCoordinate<IntegerCoordinate>, IIntegerCoordinateDebug
   {
     private long[] myCoordinare;
@@ -19,20 +19,7 @@ namespace DSIS.IntegerCoordinates
       myCoordinare = coordinare;
     }
 
-    public IntegerCoordinate Clone()
-    {
-      return new IntegerCoordinate((long[]) Coordinate.Clone());
-    }
-
-    internal long[] Coordinate
-    {
-      get { return myCoordinare; }
-    }
-
-    long[] IIntegerCoordinateDebug.Coordinate
-    {
-      get { return Coordinate; }
-    }
+    #region ICellCoordinate<IntegerCoordinate> Members
 
     public IEqualityComparer<IntegerCoordinate> Comparer
     {
@@ -44,21 +31,42 @@ namespace DSIS.IntegerCoordinates
       return IntegerCoordinateEqualityComparer.INSTANCE.Equals(this, ac);
     }
 
-    public override bool Equals(object obj)
-    {
-      if (this == obj) 
-        return true;
-      
-      IntegerCoordinate integerCoordinate = obj as IntegerCoordinate;      
-      if (integerCoordinate == null) 
-        return false;
-
-      return Equals(integerCoordinate);
-    }
-
     public override int GetHashCode()
     {
       return IntegerCoordinateEqualityComparer.INSTANCE.GetHashCode(this);
+    }
+
+    #endregion
+
+    #region IIntegerCoordinateDebug Members
+
+    long[] IIntegerCoordinateDebug.Coordinate
+    {
+      get { return Coordinate; }
+    }
+
+    #endregion
+
+    public IntegerCoordinate Clone()
+    {
+      return new IntegerCoordinate((long[]) Coordinate.Clone());
+    }
+
+    internal long[] Coordinate
+    {
+      get { return myCoordinare; }
+    }
+
+    public override bool Equals(object obj)
+    {
+      if (this == obj)
+        return true;
+
+      IntegerCoordinate integerCoordinate = obj as IntegerCoordinate;
+      if (integerCoordinate == null)
+        return false;
+
+      return Equals(integerCoordinate);
     }
 
     public override string ToString()

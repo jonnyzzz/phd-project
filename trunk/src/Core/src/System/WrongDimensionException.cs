@@ -8,6 +8,6 @@ using System;
 namespace DSIS.Core.System
 {
   public class WrongDimensionException : Exception
-  {    
+  {
   }
 }

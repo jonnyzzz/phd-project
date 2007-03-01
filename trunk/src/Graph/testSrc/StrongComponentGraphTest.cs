@@ -33,7 +33,7 @@ namespace DSIS.Graph.Test
     public void Test_03()
     {
       IEnumerable<INode<IntegerCoordinate>> enumerable = myGraph.GetNodes(new List<IStrongComponentInfo>());
-      Assert.IsFalse(enumerable.GetEnumerator().MoveNext(), "No node is expected");      
+      Assert.IsFalse(enumerable.GetEnumerator().MoveNext(), "No node is expected");
     }
 
     [Test]
@@ -45,7 +45,7 @@ namespace DSIS.Graph.Test
       foreach (INode<IntegerCoordinate> n in myGraph.GetNodes(OneComponent))
       {
         Assert.AreEqual(node, n);
-        Assert.AreSame(node, n);        
+        Assert.AreSame(node, n);
       }
 
       Assert.AreEqual(1, new List<INode<IntegerCoordinate>>(myGraph.GetNodes(OneComponent)).Count);
@@ -172,7 +172,8 @@ namespace DSIS.Graph.Test
       Assert.AreEqual(1, myComponents.ComponentCount);
     }
 
-    [Test][Ignore()]
+    [Test]
+    [Ignore()]
     public void Test_StrongComponentMerge_02()
     {
       INode<IntegerCoordinate> n1 = CreateNode();
@@ -185,7 +186,7 @@ namespace DSIS.Graph.Test
       myGraph.AddEdgeToNode(n3, n2);
       myGraph.AddEdgeToNode(n4, n3);
       myGraph.AddEdgeToNode(n4, n5);
-      
+
 
       Dump();
 
@@ -202,6 +203,5 @@ namespace DSIS.Graph.Test
 
       Assert.AreEqual(1, myComponents.ComponentCount);
     }
-
   }
 }

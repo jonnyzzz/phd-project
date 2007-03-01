@@ -1,3 +1,4 @@
+using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 
 namespace DSIS.IntegerCoordinates
@@ -18,5 +19,8 @@ namespace DSIS.IntegerCoordinates
     double[] CellSize { get; }
 
     double[] CellSizeHalf { get; }
+    long ToInternal(double point, int i);
+    double ToExternal(long pt, int i);
+    bool Intersects(long l, int axis);
   }
 }

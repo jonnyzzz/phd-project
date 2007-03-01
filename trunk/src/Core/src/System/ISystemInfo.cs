@@ -16,8 +16,8 @@ namespace DSIS.Core.System
 
     Q ProcessFunctionTree<Q>(IFunctionTreeVisitor<Q> visitor);
 
-    Type[] SupportedFunctionTypes { get;}
+    Type[] SupportedFunctionTypes { get; }
 
-    ISystemSpace SystemSpace { get;}
+    ISystemSpace SystemSpace { get; }
   }
 }

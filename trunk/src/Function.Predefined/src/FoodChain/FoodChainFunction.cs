@@ -1,5 +1,4 @@
 using System;
-using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined
 {

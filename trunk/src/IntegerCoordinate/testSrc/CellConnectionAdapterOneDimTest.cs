@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace DSIS.IntegerCoordinates.Test
 {
   [TestFixture]
-  public class CellConnectionAdapterOneDimTest  : CellConnectionAdapterTestBase
+  public class CellConnectionAdapterOneDimTest : CellConnectionAdapterTestBase
   {
     private MockSystemSpace mySpace;
     private IntegerCoordinateSystem myIcs;
@@ -20,14 +20,11 @@ namespace DSIS.IntegerCoordinates.Test
     private void DoTestBuild(double left, double right, DoBuild bld)
     {
       List<IntegerCoordinate> list = DoTest(myIcs, bld);
-      List<long> coords = list.ConvertAll<long>(delegate(IntegerCoordinate input)
-                                                  {
-                                                    return input.Coordinate[0];
-                                                  });
+      List<long> coords = list.ConvertAll<long>(delegate(IntegerCoordinate input) { return input.Coordinate[0]; });
       coords.Sort();
       Assert.IsTrue(coords.Count > 0, "Non empty result expected");
 
-      IntegerCoordinate coor = myIcs.FromPoint(new double[] { left });
+      IntegerCoordinate coor = myIcs.FromPoint(new double[] {left});
       Assert.IsNotNull(coor);
       long cnt = coor.Coordinate[0];
       foreach (long l in coords)
@@ -43,9 +40,9 @@ namespace DSIS.IntegerCoordinates.Test
     {
       DoTestBuild(left, right, delegate(IntegerCoordinateCellImageBuilderAdapter ad)
                                  {
-                                   IntegerCoordinate cs = myIcs.FromPoint(new double[] { 1 });
-                                   ad.ConnectCellToRect(cs, new double[] { left}, new double[] { right },
-                                                        new double[] { 0 });                                   
+                                   IntegerCoordinate cs = myIcs.FromPoint(new double[] {1});
+                                   ad.ConnectCellToRect(cs, new double[] {left}, new double[] {right},
+                                                        new double[] {0});
                                  });
     }
 
@@ -53,27 +50,27 @@ namespace DSIS.IntegerCoordinates.Test
     {
       DoTestBuild(left, right, delegate(IntegerCoordinateCellImageBuilderAdapter ad)
                                  {
-                                   IntegerCoordinate c = myIcs.FromPoint(new double[]{1});
-                                   ad.AddPointWithOverlapping(c, new double[]{pt}, new double[]{procent});
+                                   IntegerCoordinate c = myIcs.FromPoint(new double[] {1});
+                                   ad.AddPointWithOverlapping(c, new double[] {pt}, new double[] {procent});
                                  });
     }
 
     [Test]
     public void Test_01()
     {
-      DoTestPointToRect(0, 1);      
+      DoTestPointToRect(0, 1);
     }
 
     [Test]
     public void Test_02()
     {
-      DoTestPointToRect(0, 10);      
+      DoTestPointToRect(0, 10);
     }
 
     [Test]
     public void Test_03()
     {
-      DoTestPointToRect(10,20);
+      DoTestPointToRect(10, 20);
     }
 
     [Test]
@@ -91,7 +88,7 @@ namespace DSIS.IntegerCoordinates.Test
     [Test]
     public void Test_06()
     {
-      DoTestOverlap(myIcs.CellSize[0], myIcs.CellSize[0], myIcs.CellSize[0] * 1.5, 0.1);
+      DoTestOverlap(myIcs.CellSize[0], myIcs.CellSize[0], myIcs.CellSize[0]*1.5, 0.1);
     }
 
     [Test]
@@ -104,7 +101,7 @@ namespace DSIS.IntegerCoordinates.Test
     public void Test_08()
     {
       long l = myIcs.Subdivision[0];
-      DoTestOverlap(myIcs.CellSize[0]*(l-1), myIcs.CellSize[0]*(l-1), myIcs.CellSize[0] * l, 0.1);
+      DoTestOverlap(myIcs.CellSize[0]*(l - 1), myIcs.CellSize[0]*(l - 1), myIcs.CellSize[0]*l, 0.1);
     }
   }
 }

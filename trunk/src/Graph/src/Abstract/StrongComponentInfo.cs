@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Util;
 using DSIS.Graph.Util;
-using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
 {
@@ -19,10 +18,20 @@ namespace DSIS.Graph.Abstract
       myIns = new Hashset<StrongComponentInfo, IStrongComponentInfo>();
     }
 
-    public int NodesCount
+    #region IStrongComponentInfoEx Members
+
+    public void Dump(TextWriter tw, Dictionary<IStrongComponentInfo, int> comps, ref int cnt)
     {
-      get { return myNodesCount; }
-      set { myNodesCount = value; }
+      foreach (StrongComponentInfo info in myOuts)
+      {
+        int id;
+        if (!comps.TryGetValue(info, out id))
+        {
+          id = ++cnt;
+          comps[info] = id;
+        }
+        tw.Write(" {0}, ", id);
+      }
     }
 
     public bool InsContains(IStrongComponentInfoEx comp)
@@ -30,14 +39,20 @@ namespace DSIS.Graph.Abstract
       return myIns.Contains((StrongComponentInfo) comp);
     }
 
-    public IEnumerable<IStrongComponentInfo> Out
+    IEnumerable<IStrongComponentInfoEx> IStrongComponentInfoEx.Ins
     {
-      get { return myOuts.ValuesUpcasted; }
+      get { return new ConvertEnumerator<StrongComponentInfo, IStrongComponentInfoEx>(Ins.Values); }
     }
 
-    public IEnumerable<IStrongComponentInfo> In
+    IEnumerable<IStrongComponentInfoEx> IStrongComponentInfoEx.Outs
     {
-      get { return myIns.ValuesUpcasted; }
+      get { return new ConvertEnumerator<StrongComponentInfo, IStrongComponentInfoEx>(Outs.Values); }
+    }
+
+    public int NodesCount
+    {
+      get { return myNodesCount; }
+      set { myNodesCount = value; }
     }
 
     public IStrongComponentInfoEx Reference
@@ -68,7 +83,23 @@ namespace DSIS.Graph.Abstract
         myIns = null;
       }
     }
-    
+
+    #endregion
+
+    #region IStrongComponentInfoConnectivity Members
+
+    public IEnumerable<IStrongComponentInfo> In
+    {
+      get { return myIns.ValuesUpcasted; }
+    }
+
+    public IEnumerable<IStrongComponentInfo> Out
+    {
+      get { return myOuts.ValuesUpcasted; }
+    }
+
+    #endregion
+
     public bool IsReference
     {
       get { return myReference != null; }
@@ -82,31 +113,6 @@ namespace DSIS.Graph.Abstract
     public Hashset<StrongComponentInfo, IStrongComponentInfo> Ins
     {
       get { return myIns; }
-    }
-
-
-    IEnumerable<IStrongComponentInfoEx> IStrongComponentInfoEx.Ins
-    {
-      get { return new ConvertEnumerator<StrongComponentInfo, IStrongComponentInfoEx>(Ins.Values); }
-    }
-
-    IEnumerable<IStrongComponentInfoEx> IStrongComponentInfoEx.Outs
-    {
-      get { return new ConvertEnumerator<StrongComponentInfo, IStrongComponentInfoEx>(Outs.Values); }
-    }
-
-    public void Dump(TextWriter tw, Dictionary<IStrongComponentInfo, int> comps, ref int cnt)
-    {
-      foreach (StrongComponentInfo info in myOuts)
-      {
-        int id;
-        if (!comps.TryGetValue(info, out id))
-        {
-          id = ++cnt;
-          comps[info] = id;
-        }
-        tw.Write(" {0}, ", id);
-      }
     }
   }
 }

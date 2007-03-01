@@ -11,6 +11,8 @@ namespace DSIS.Graph.Abstract
 
     public static NodeEqualityComparer<TNode, TCell> INSTANCE = new NodeEqualityComparer<TNode, TCell>();
 
+    #region IEqualityComparer<TNode> Members
+
     public bool Equals(TNode x, TNode y)
     {
       return CellComparer.Equals(x.Coordinate, y.Coordinate);
@@ -20,5 +22,7 @@ namespace DSIS.Graph.Abstract
     {
       return obj.HashCodeInternal;
     }
+
+    #endregion
   }
 }

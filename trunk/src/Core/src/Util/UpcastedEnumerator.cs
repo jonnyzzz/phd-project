@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DSIS.Core.Util
 {
-  public sealed class UpcastedEnumerator<T, TC> : IEnumerator<TC> where T: TC
+  public sealed class UpcastedEnumerator<T, TC> : IEnumerator<TC> where T : TC
   {
     private readonly IEnumerator<T> myEnumerable;
 
@@ -11,8 +11,10 @@ namespace DSIS.Core.Util
     {
       myEnumerable = enumerable;
     }
-    
-    TC IEnumerator<TC>.Current
+
+    #region IEnumerator<TC> Members
+
+    public object Current
     {
       get { return myEnumerable.Current; }
     }
@@ -20,6 +22,11 @@ namespace DSIS.Core.Util
     public void Dispose()
     {
       myEnumerable.Dispose();
+    }
+
+    TC IEnumerator<TC>.Current
+    {
+      get { return myEnumerable.Current; }
     }
 
     public bool MoveNext()
@@ -32,13 +39,10 @@ namespace DSIS.Core.Util
       myEnumerable.Reset();
     }
 
-    public object Current
-    {
-      get { return myEnumerable.Current; }
-    }
+    #endregion
   }
 
-  public class UpcastedEnumerable<T, TC> : IEnumerable<TC> where T: TC
+  public class UpcastedEnumerable<T, TC> : IEnumerable<TC> where T : TC
   {
     private readonly IEnumerable<T> myEnumerable;
 
@@ -47,14 +51,18 @@ namespace DSIS.Core.Util
       myEnumerable = enumerable;
     }
 
-    IEnumerator<TC> IEnumerable<TC>.GetEnumerator()
-    {
-      return new UpcastedEnumerator<T, TC>(myEnumerable.GetEnumerator());
-    }
+    #region IEnumerable<TC> Members
 
     IEnumerator IEnumerable.GetEnumerator()
     {
       return myEnumerable.GetEnumerator();
     }
+
+    IEnumerator<TC> IEnumerable<TC>.GetEnumerator()
+    {
+      return new UpcastedEnumerator<T, TC>(myEnumerable.GetEnumerator());
+    }
+
+    #endregion
   }
 }

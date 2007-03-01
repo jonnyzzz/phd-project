@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Builders\CellImageBuilderContext.cs" />
     <Compile Include="src\Builders\ICellConnectionBuilder.cs" />
     <Compile Include="src\Builders\ICellImageBuilder.cs" />
     <Compile Include="src\Builders\ICellImageBuilderSettings.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="src\System\ISystemSpace.cs" />
     <Compile Include="src\Util\BoxIterator.cs" />
     <Compile Include="src\Util\CountEnumerable.cs" />
+    <Compile Include="src\Util\EmptyArray.cs" />
     <Compile Include="src\Util\Hashset.cs" />
     <Compile Include="src\Util\IntLBoxIterator.cs" />
     <Compile Include="src\Util\IProgressInfo.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="src\System\UnsupportedFunctionTypeException.cs" />
     <Compile Include="src\System\WrongDimensionException.cs" />
     <Compile Include="src\Util\LongLBoxIterator.cs" />
+    <Compile Include="src\Util\MergeEnumerable.cs" />
     <Compile Include="src\Util\NotNullAttribute.cs" />
     <Compile Include="src\Util\NullableAttribute.cs" />
     <Compile Include="src\Util\NullProgressInfo.cs" />

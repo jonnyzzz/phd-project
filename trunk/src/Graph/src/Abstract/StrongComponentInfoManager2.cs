@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Util;
-using DSIS.Graph.Util;
-using DSIS.Util;
 
 namespace DSIS.Graph.Abstract
 {
@@ -32,7 +30,7 @@ namespace DSIS.Graph.Abstract
       }
       myChangeId++;
     }
-  
+
     private static void AddExtension(StrongComponentHash to,
                                      StrongComponentHash from,
                                      Predicate<StrongComponentInfo2> minus)

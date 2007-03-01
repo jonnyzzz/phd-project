@@ -4,6 +4,6 @@ namespace DSIS.Graph
 {
   public interface INode<TCoordinate> where TCoordinate : ICellCoordinate<TCoordinate>
   {
-    TCoordinate Coordinate { get;}
+    TCoordinate Coordinate { get; }
   }
 }

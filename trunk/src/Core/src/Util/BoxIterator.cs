@@ -27,7 +27,7 @@ namespace DSIS.Util
     public IEnumerable<T[]> EnumerateBox(T[] left, T[] right, T[] outs)
     {
       int inc = 0;
-      for (int i = myDim - 1; i >=0 ; i--)
+      for (int i = myDim - 1; i >= 0; i--)
       {
         steps[i] = 0;
         skips[i] = left[i].Equals(right[i]);
@@ -35,7 +35,7 @@ namespace DSIS.Util
       }
       steps[myDim] = 0;
       skips[myDim] = false;
-      
+
 
       while (steps[myDim] == 0)
       {
@@ -60,7 +60,7 @@ namespace DSIS.Util
           {
             steps[i] = 0;
             steps[++i]++;
-            while( i+1 < myDim && skips[i + 1])
+            while (i + 1 < myDim && skips[i + 1])
               steps[i++ + 1]++;
             i--;
           }

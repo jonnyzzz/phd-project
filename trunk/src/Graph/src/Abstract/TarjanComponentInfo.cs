@@ -13,10 +13,14 @@ namespace DSIS.Graph.Abstract
       myComponentId = componentId;
     }
 
+    #region IStrongComponentInfo Members
+
     public int NodesCount
     {
       get { return myNodesCount; }
     }
+
+    #endregion
 
     public uint ComponentId
     {

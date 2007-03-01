@@ -5,24 +5,26 @@
 
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.Shared;
-using DSIS.Core.Coordinates;
+using DSIS.Core.Builders;
 using DSIS.Core.System;
 using DSIS.IntegerCoordinates;
 using DSIS.Util;
 
-namespace DSIS.CellImageBuilder
+namespace DSIS.CellImageBuilder.BoxMethod
 {
   public class BoxMethod : IntegerCoordinateMethodBase, ICellImageBuilder<IntegerCoordinate>
   {
     private IFunction<double> myFunction;
     private double[] x;
     private double[] xLeft;
-    private double[] xRight;    
+    private double[] xRight;
     private double[] yLeft;
     private double[] yRight;
     private double[] y;
     private double[] eps;
     private BoxIterator<double> myIterator;
+
+    #region ICellImageBuilder<IntegerCoordinate> Members
 
     public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
     {
@@ -35,12 +37,12 @@ namespace DSIS.CellImageBuilder
       xRight = new double[myDim];
       eps = new double[myDim];
       myIterator = new BoxIterator<double>(myDim);
-      
+
       for (int i = 0; i < myDim; i++)
       {
-        eps[i] = ((BoxMethodSettings)context.Settings).Eps*mySystem.CellSize[i];
+        eps[i] = ((BoxMethodSettings) context.Settings).Eps*mySystem.CellSize[i];
       }
-      
+
       myFunction.Input = x;
       myFunction.Output = y;
     }
@@ -49,7 +51,7 @@ namespace DSIS.CellImageBuilder
     {
       mySystem.TopLeftPoint(coord, xLeft);
 
-      for (int i=0; i<myDim; i++)
+      for (int i = 0; i < myDim; i++)
       {
         x[i] = xLeft[i] + mySystem.CellSizeHalf[i];
         xRight[i] = xLeft[i] + mySystem.CellSize[i];
@@ -63,7 +65,7 @@ namespace DSIS.CellImageBuilder
       foreach (double[] cn in cns)
       {
         myFunction.Evaluate();
-        for (int i=0; i<myDim; i++)
+        for (int i = 0; i < myDim; i++)
         {
           if (yLeft[i] > y[i])
             yLeft[i] = y[i];
@@ -74,5 +76,7 @@ namespace DSIS.CellImageBuilder
 
       myAdapter.ConnectCellToRect(coord, yLeft, yRight, eps);
     }
+
+    #endregion
   }
 }

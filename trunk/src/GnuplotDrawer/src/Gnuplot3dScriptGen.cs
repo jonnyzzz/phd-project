@@ -20,11 +20,13 @@ namespace DSIS.GnuplotDrawer
       myWriter.Write("splot ");
     }
 
+    #region IGnuplotScriptGen Members
+
     public void AddPointsFile(GnuplotPointsFileWriter file)
     {
       if (myIsFirstFile)
         myIsFirstFile = false;
-      else 
+      else
         myWriter.Write(", ");
 
       myWriter.Write(" '{0}' title \"{1}\" with ", file.Filename, string.Format(myParams.KeyFormat, file.PointsCount));
@@ -40,5 +42,7 @@ namespace DSIS.GnuplotDrawer
       myWriter.WriteLine(" ;");
       base.Dispose();
     }
+
+    #endregion
   }
 }

@@ -1,4 +1,3 @@
-using System;
 using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
@@ -12,6 +11,12 @@ namespace DSIS.Graph.Abstract
     {
     }
 
+    #region IGraphExtension<SimpleNode<TCellCoordinate>,TCellCoordinate> Members
+
+    public void EdgeAdded(SimpleNode<TCellCoordinate> from, SimpleNode<TCellCoordinate> to)
+    {
+    }
+
     SimpleNode<TCellCoordinate> IGraphExtension<SimpleNode<TCellCoordinate>, TCellCoordinate>.CreateNode(
       TCellCoordinate coordinate)
     {
@@ -19,15 +24,13 @@ namespace DSIS.Graph.Abstract
     }
 
     public void NodeAdded(SimpleNode<TCellCoordinate> node)
-    {      
+    {
     }
 
-    public void EdgeAdded(SimpleNode<TCellCoordinate> from, SimpleNode<TCellCoordinate> to)
-    {     
-    }
+    #endregion
   }
 
-  public class SimpleNode<TCell> : Node<SimpleNode<TCell>, TCell> 
+  public class SimpleNode<TCell> : Node<SimpleNode<TCell>, TCell>
     where TCell : ICellCoordinate<TCell>
   {
     public SimpleNode(TCell coordinate) : base(coordinate)

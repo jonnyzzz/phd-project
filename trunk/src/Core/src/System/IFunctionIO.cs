@@ -28,6 +28,6 @@ namespace DSIS.Core.System
     /// Return Array of IFunctionIO&lt;T&gt; for derivates IO
     /// or null if derivates does not supported. 
     /// </summary>
-    IFunctionIO<T>[] Derivates { get; } 
+    IFunctionIO<T>[] Derivates { get; }
   }
 }

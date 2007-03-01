@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.Core.Util;
@@ -37,9 +38,21 @@ namespace DSIS.IntegerCoordinates
     {
     }
 
-    private static long Ceil(double v)
+    #region IIntegerCoordinateSystem Members
+
+    public double[] CellSize
     {
-      return (long)(v);
+      get { return myCellSize; }
+    }
+
+    public double[] CellSizeHalf
+    {
+      get { return myCellSizeHalf; }
+    }
+
+    public IIntegerCoordinateCellImageBuilderAdapter CreateAdapter(ICellConnectionBuilder<IntegerCoordinate> builder)
+    {
+      return new IntegerCoordinateCellImageBuilderAdapter(builder, this);
     }
 
     public IntegerCoordinate FromPoint(double[] point)
@@ -50,29 +63,37 @@ namespace DSIS.IntegerCoordinates
       return FromPointNoCheck(point);
     }
 
-    internal IntegerCoordinate FromPointNoCheck(double[] point)
+    public long InitialCellsCount
     {
-      long[] coordinate = new long[Dimension];
-      for (int i = Dimension - 1; i >= 0; i--)
+      get
       {
-        coordinate[i] = ToInternal(point[i], i);
+        long cnt = 1;
+        foreach (long l in mySubdivision)
+        {
+          cnt *= l;
+        }
+        return cnt;
       }
-      return new IntegerCoordinate(coordinate);      
     }
 
-    internal bool Intersects(long l, int axis)
+    public CountEnumerable<IntegerCoordinate> InitialSubdivision
     {
-      return l >= 0 && l < Subdivision[axis];
+      get { return new CountEnumerable<IntegerCoordinate>(GetInitialSubdivision(), InitialCellsCount); }
     }
 
-    internal long ToInternal(double point, int i)
+    public ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> Subdivide(long[] division)
     {
-      return Ceil( (point - mySystemSpace.AreaLeftPoint[i])/CellSize[i]);
+      return new IntegerCoordinateCellConverter(this, SubdividedCoordinateSystem(division), division);
     }
 
-    internal double ToExternal(long pt, int i)
+    public long[] Subdivision
     {
-      return mySystemSpace.AreaLeftPoint[i] + CellSize[i] * pt;
+      get { return mySubdivision; }
+    }
+
+    public ISystemSpace SystemSpace
+    {
+      get { return mySystemSpace; }
     }
 
     public void TopLeftPoint(IntegerCoordinate point, double[] output)
@@ -84,33 +105,55 @@ namespace DSIS.IntegerCoordinates
       }
     }
 
+    #endregion
+
+    private static long Ceil(double v)
+    {
+      return (long) (v);
+    }
+
+    internal IntegerCoordinate FromPointNoCheck(double[] point)
+    {
+      long[] coordinate = new long[Dimension];
+      for (int i = Dimension - 1; i >= 0; i--)
+      {
+        coordinate[i] = ToInternal(point[i], i);
+      }
+      return new IntegerCoordinate(coordinate);
+    }
+
+    public bool Intersects(long l, int axis)
+    {
+      return l >= 0 && l < Subdivision[axis];
+    }
+
+    public long ToInternal(double point, int i)
+    {
+      return Ceil((point - mySystemSpace.AreaLeftPoint[i])/CellSize[i]);
+    }
+
+    public double ToExternal(long pt, int i)
+    {
+      return mySystemSpace.AreaLeftPoint[i] + CellSize[i]*pt;
+    }
+
     public void CenterPoint(IntegerCoordinate point, double[] output)
     {
       IntegerCoordinate coordinate = point;
       for (int i = 0; i < Dimension; i++)
       {
         output[i] = ToExternal(coordinate.Coordinate[i], i) + CellSizeHalf[i];
-      } 
-    }
-
-    public IIntegerCoordinateCellImageBuilderAdapter CreateAdapter(ICellConnectionBuilder<IntegerCoordinate> builder)
-    {
-      return new IntegerCoordinateCellImageBuilderAdapter(builder, this);
+      }
     }
 
     private IntegerCoordinateSystem SubdividedCoordinateSystem(long[] division)
     {
       long[] div = new long[division.Length];
-      for (int i = 0; i < div.Length; i++ )
+      for (int i = 0; i < div.Length; i++)
       {
         div[i] = Subdivision[i]*division[i];
       }
-      return new IntegerCoordinateSystem(SystemSpace, div);      
-    }
-
-    public ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> Subdivide(long[] division)
-    {
-      return new IntegerCoordinateCellConverter(this, SubdividedCoordinateSystem(division), division);
+      return new IntegerCoordinateSystem(SystemSpace, div);
     }
 
     private IEnumerable<IntegerCoordinate> GetInitialSubdivision()
@@ -134,47 +177,10 @@ namespace DSIS.IntegerCoordinates
         }
       }
     }
-    
-    public long InitialCellsCount
-    {
-      get { 
-        long cnt = 1;
-        foreach (long l in mySubdivision)
-        {
-          cnt *= l;
-        }
-        return cnt;
-      }
-    }
-
-    public CountEnumerable<IntegerCoordinate> InitialSubdivision
-    {
-      get { return new CountEnumerable<IntegerCoordinate>(GetInitialSubdivision(), InitialCellsCount); }
-    }
 
     public int Dimension
     {
       get { return myDimension; }
-    }
-
-    public double[] CellSize
-    {
-      get { return myCellSize; }
-    }
-
-    public double[] CellSizeHalf
-    {
-      get { return myCellSizeHalf; }
-    }
-
-    public long[] Subdivision
-    {
-      get { return mySubdivision; }
-    }
-
-    public ISystemSpace SystemSpace
-    {
-      get { return mySystemSpace; }
     }
   }
 }

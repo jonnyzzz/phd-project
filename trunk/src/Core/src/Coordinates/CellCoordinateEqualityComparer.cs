@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
 
 namespace DSIS.Core.Coordinates
 {
@@ -28,7 +27,8 @@ namespace DSIS.Core.Coordinates
       if (attrs.Length == 0)
       {
         myComparer = EqualityComparer<TCell>.Default;
-      } else
+      }
+      else
       {
         EqualityComparerAttribute at = (EqualityComparerAttribute) attrs[0];
         myComparer = (IEqualityComparer<TCell>) Activator.CreateInstance(at.Comparer);

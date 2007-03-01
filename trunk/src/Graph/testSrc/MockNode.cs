@@ -11,9 +11,13 @@ namespace DSIS.Graph
       myCoordinate = coordinate;
     }
 
+    #region INode<T> Members
+
     public T Coordinate
     {
       get { return myCoordinate; }
     }
+
+    #endregion
   }
 }

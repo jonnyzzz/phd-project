@@ -17,8 +17,8 @@ namespace DSIS.IntegerCoordinates.Test
     [Test]
     public void Test_Overlapping()
     {
-      double[] eps = new double[]{0.2, 0.2};
-      double[] point = new double[] { 1, 1 };
+      double[] eps = new double[] {0.2, 0.2};
+      double[] point = new double[] {1, 1};
       IntegerCoordinate coordinate = new IntegerCoordinate(1, 1);
       for (int i = 0; i < 30000; i++)
       {
@@ -29,24 +29,24 @@ namespace DSIS.IntegerCoordinates.Test
     }
 
     [Test]
-    public void Test_rect()
-    {
-      IntegerCoordinate coordinate = new IntegerCoordinate(1, 1);
-      double[] right = new double[]{20,30};
-      double[] left = new double[]{1,1};
-      double[] eps = new double[]{0.1, 0.1};
-      for (int i = 0; i < 30000; i++)
-        myAd.ConnectCellToRect(coordinate, left, right, eps);
-    }
-    
-    [Test]
     public void Test_radius()
     {
       IntegerCoordinate coordinate = new IntegerCoordinate(1, 1);
-      double[] left = new double[]{1,1};
-      double[] eps = new double[]{2.1, 5.1};
+      double[] left = new double[] {1, 1};
+      double[] eps = new double[] {2.1, 5.1};
       for (int i = 0; i < 300; i++)
         myAd.ConnectCellToPointWithRadius(coordinate, left, eps);
+    }
+
+    [Test]
+    public void Test_rect()
+    {
+      IntegerCoordinate coordinate = new IntegerCoordinate(1, 1);
+      double[] right = new double[] {20, 30};
+      double[] left = new double[] {1, 1};
+      double[] eps = new double[] {0.1, 0.1};
+      for (int i = 0; i < 30000; i++)
+        myAd.ConnectCellToRect(coordinate, left, right, eps);
     }
   }
 }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace DSIS.Graph.Util
 {
-  public class ConvertEnumerator<TFrom, TTo> : 
-    IEnumerable<TTo>, IEnumerator<TTo>  
+  public class ConvertEnumerator<TFrom, TTo> :
+    IEnumerable<TTo>, IEnumerator<TTo>
   {
     private IEnumerator<TFrom> myEnumberator;
 
@@ -18,14 +18,35 @@ namespace DSIS.Graph.Util
       myEnumberator = enumberator;
     }
 
-    TTo IEnumerator<TTo>.Current
+    #region IEnumerable<TTo> Members
+
+    public IEnumerator GetEnumerator()
     {
-      get { return (TTo)(object)myEnumberator.Current; }
+      return this;
     }
+
+    IEnumerator<TTo> IEnumerable<TTo>.GetEnumerator()
+    {
+      return this;
+    }
+
+    #endregion
+
+    #region IEnumerator<TTo> Members
 
     public void Dispose()
     {
       myEnumberator.Dispose();
+    }
+
+    object IEnumerator.Current
+    {
+      get { return myEnumberator.Current; }
+    }
+
+    TTo IEnumerator<TTo>.Current
+    {
+      get { return (TTo) (object) myEnumberator.Current; }
     }
 
     public bool MoveNext()
@@ -38,19 +59,6 @@ namespace DSIS.Graph.Util
       myEnumberator.Reset();
     }
 
-    IEnumerator<TTo> IEnumerable<TTo>.GetEnumerator()
-    {
-      return this;
-    }
-
-    public IEnumerator GetEnumerator()
-    {
-      return this;
-    }
-
-    object IEnumerator.Current
-    {
-      get { return myEnumberator.Current; }
-    }
+    #endregion
   }
 }

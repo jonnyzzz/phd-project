@@ -11,10 +11,14 @@ namespace DSIS.Core.Processor
       this.del = del;
     }
 
+    #region IProcess Members
+
     public void Execute(IProgressInfo info)
     {
       del(info);
     }
+
+    #endregion
 
     public void Dispose()
     {

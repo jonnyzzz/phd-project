@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
+using DSIS.Core.Builders;
 using NUnit.Framework;
 
 namespace DSIS.IntegerCoordinates.Test
@@ -30,6 +30,7 @@ namespace DSIS.IntegerCoordinates.Test
 
     private class CellConnectionBuilder : ICellConnectionBuilder<IntegerCoordinate>
     {
+      #region ICellConnectionBuilder<IntegerCoordinate> Members
 
       public void ConnectToMany(IntegerCoordinate cell, IEnumerable<IntegerCoordinate> v)
       {
@@ -42,6 +43,8 @@ namespace DSIS.IntegerCoordinates.Test
       public void ConnectToOne(IntegerCoordinate cell, IntegerCoordinate v)
       {
       }
+
+      #endregion
     }
   }
 }

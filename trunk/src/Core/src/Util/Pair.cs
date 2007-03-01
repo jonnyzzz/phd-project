@@ -25,7 +25,7 @@ namespace DSIS.Core.Util
 
     public override int GetHashCode()
     {
-      return    (First != null ? First.GetHashCode() : 0) + 
+      return (First != null ? First.GetHashCode() : 0) +
              29*(Second != null ? Second.GetHashCode() : 11);
     }
 
@@ -41,7 +41,6 @@ namespace DSIS.Core.Util
     public override string ToString()
     {
       return "Pair" + "First: " + SafeToString(First) + " Second: " + SafeToString(Second);
-      
     }
   }
 }

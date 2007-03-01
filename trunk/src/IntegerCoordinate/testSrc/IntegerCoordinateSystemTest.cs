@@ -8,7 +8,7 @@ namespace DSIS.IntegerCoordinates.Tests
   {
     private MockSystemSpace mySpace = null;
     private IntegerCoordinateSystem myCS = null;
-        
+
     [SetUp]
     public void SetUp()
     {
@@ -22,7 +22,7 @@ namespace DSIS.IntegerCoordinates.Tests
       mySpace = null;
       myCS = null;
     }
-    
+
     [Test]
     public void Test_01()
     {
@@ -54,9 +54,9 @@ namespace DSIS.IntegerCoordinates.Tests
       List<IntegerCoordinate> c = new List<IntegerCoordinate>(myCS.InitialSubdivision);
 
       Assert.IsTrue(myCS.Dimension == 2);
-      
+
       bool[][] bs = new bool[myCS.Subdivision[0]][];
-      for (int i=0; i<myCS.Subdivision[0]; i++)
+      for (int i = 0; i < myCS.Subdivision[0]; i++)
       {
         bs[i] = new bool[myCS.Subdivision[1]];
       }
@@ -67,7 +67,7 @@ namespace DSIS.IntegerCoordinates.Tests
                     long coordinate2 = ic.Coordinate[1];
                     bs[coordinate1][coordinate2] = true;
                   });
-      
+
       foreach (bool[] b in bs)
       {
         foreach (bool b1 in b)
@@ -80,7 +80,7 @@ namespace DSIS.IntegerCoordinates.Tests
     [Test]
     public void Test_05()
     {
-      IntegerCoordinate c = myCS.FromPoint(new double[]{0,0});
+      IntegerCoordinate c = myCS.FromPoint(new double[] {0, 0});
       Assert.AreEqual(0, c.Coordinate[0]);
       Assert.AreEqual(0, c.Coordinate[1]);
     }
@@ -88,9 +88,9 @@ namespace DSIS.IntegerCoordinates.Tests
     [Test]
     public void Test_06()
     {
-      IntegerCoordinate c = myCS.FromPoint(new double[] { 0.1, 0.1 });
+      IntegerCoordinate c = myCS.FromPoint(new double[] {0.1, 0.1});
       Assert.AreEqual(0, c.Coordinate[0]);
-      Assert.AreEqual(0, c.Coordinate[1]);      
+      Assert.AreEqual(0, c.Coordinate[1]);
     }
 
     [Test]
@@ -110,6 +110,5 @@ namespace DSIS.IntegerCoordinates.Tests
     {
       Assert.AreEqual(0, myCS.ToInternal(0.001, 0));
     }
-
   }
 }
