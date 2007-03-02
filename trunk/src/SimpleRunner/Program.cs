@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using DSIS.CellImageBuilder;
 using DSIS.CellImageBuilder.BoxAdaptiveMethod;
+using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
@@ -10,6 +12,8 @@ using DSIS.Core.System.Impl;
 using DSIS.Core.Util;
 using DSIS.Core.Visualization;
 using DSIS.Function.Predefined.Henon;
+using DSIS.Function.Predefined.Ikeda;
+using DSIS.Function.Predefined.Julia;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
@@ -20,7 +24,7 @@ namespace DSIS.SimpleRunner
 {
   internal class Program
   {
-    private const int STEPS = 8;
+    private const int STEPS = 12;
     private static string myWorkPath;
     private static string myHomePath;
 
@@ -36,8 +40,11 @@ namespace DSIS.SimpleRunner
 
       Console.Out.WriteLine("Adaptive Method:");
       MethodAndLog(new BoxAdaptiveMethod(), BoxAdaptiveMethodSettings.Default);
-//      Console.Out.WriteLine("Box Method:");
-//      MethodAndLog(new BoxMethod(), BoxMethodSettings.Default);      
+
+      GC.Collect();
+
+      Console.Out.WriteLine("Box Method:");
+      MethodAndLog(new BoxMethod(), BoxMethodSettings.Default);      
     }
 
     public static void MethodAndLog(ICellImageBuilder<IntegerCoordinate> build, ICellImageBuilderSettings settings)
@@ -61,7 +68,7 @@ namespace DSIS.SimpleRunner
 
       TarjanGraph<IntegerCoordinate> graph = new TarjanGraph<IntegerCoordinate>(cs);
 
-      ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv = cs.Subdivide(new long[] {3, 3});
+      ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv = cs.Subdivide(new long[] {2, 2});
       CellProcessorContext<IntegerCoordinate, IntegerCoordinate> ctx =
         new CellProcessorContext<IntegerCoordinate, IntegerCoordinate>(
           cs.InitialSubdivision,
@@ -79,7 +86,9 @@ namespace DSIS.SimpleRunner
 
     private static ISystemInfo GetFunction(DefaultSystemSpace sp)
     {
-      return new HenonFunctionSystemInfoDecorator(sp, 1.4);
+      return new JuliaFuctionSystemInfoDecorator(sp);
+      //return new IkedaFunctionSystemInfoDecorator(sp);
+      //return new HenonFunctionSystemInfoDecorator(sp, 1.4);
 //      return new DelayedFunctionSystemInfo(sp, 2.27);
       //return new FoodChainSystemInfo(sp);
     }
@@ -98,21 +107,22 @@ namespace DSIS.SimpleRunner
       SymbolicImageConstructionProcess<IntegerCoordinate, IntegerCoordinate> proc
         = new SymbolicImageConstructionProcess<IntegerCoordinate, IntegerCoordinate>();
 
-      proc.Bind(ctx);
-
-      proc.Execute(NullProgressInfo.INSTANCE);
-
+      IGraphStrongComponents<IntegerCoordinate> comps = null;
       for (int i = 0; i < STEPS; i++)
       {
+        Console.Out.WriteLine("Step {0}", i + 1);
+        Console.Out.WriteLine("Build:");
+        proc.Bind(ctx);
+        proc.Execute(NullProgressInfo.INSTANCE);
+        
         Console.Out.WriteLine("Strong Components: ");
-
-        IGraphStrongComponents<IntegerCoordinate> cmops
-          = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
+        
+        comps = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
 
         Console.Out.WriteLine("Done");
-        int v = DumpAndGetCount(cmops);
+        int v = DumpAndGetCount(comps);
 
-        IEnumerable<IntegerCoordinate> cells = cmops.GetCoordinates(cmops.Components);
+        IEnumerable<IntegerCoordinate> cells = comps.GetCoordinates(comps.Components);
         graph = new TarjanGraph<IntegerCoordinate>(ctx.Converter.ToSystem);
 
         ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> conv;
@@ -120,17 +130,9 @@ namespace DSIS.SimpleRunner
 
         ctx =
           ctx.CreateNextContext(new CountEnumerable<IntegerCoordinate>(cells, v), conv,
-                                new GraphCellImageBuilder<IntegerCoordinate>(graph));
-        proc.Bind(ctx);
-
-        Console.Out.WriteLine("Image");
-        proc.Execute(NullProgressInfo.INSTANCE);
-        Console.Out.WriteLine("Done");
+                                new GraphCellImageBuilder<IntegerCoordinate>(graph));        
       }
-
-      IGraphStrongComponents<IntegerCoordinate> comps = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
-      DumpAndGetCount(comps);
-
+      
       DateTime time = DateTime.Now;
 
       string gnuplotPath = Path.GetFullPath(Path.Combine(myHomePath, @"tools\gnuplot"));

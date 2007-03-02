@@ -13,7 +13,7 @@ using DSIS.IntegerCoordinates.Test;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
+namespace DSIS.CellImageBuilder.Shared
 {
   [TestFixture]
   public class MethodTestBase<TM, TP>
@@ -29,8 +29,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
       MockSystemInfo<double> func = new MockSystemInfo<double>(compute, sys.SystemSpace);
       IntegerCoordinateSystem cs = new IntegerCoordinateSystem(sys.SystemSpace);
 
-      MockCellConnectionManager<IntegerCoordinate> man =
-        new MockCellConnectionManager<IntegerCoordinate>();
+      MockCollectingCellConnectionBuilder<IntegerCoordinate> man =
+        new MockCollectingCellConnectionBuilder<IntegerCoordinate>();
 
       CellImageBuilderContext<IntegerCoordinate> ctx =
         new CellImageBuilderContext<IntegerCoordinate>(

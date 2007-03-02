@@ -1,4 +1,4 @@
-using DSIS.CellImageBuilder.BoxAdaptiveMethod.Test;
+using DSIS.CellImageBuilder.Shared;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;

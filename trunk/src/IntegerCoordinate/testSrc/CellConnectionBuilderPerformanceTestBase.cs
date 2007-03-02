@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using DSIS.Core.Builders;
+using DSIS.Core.Mock;
 using NUnit.Framework;
 
 namespace DSIS.IntegerCoordinates.Test
@@ -15,7 +15,7 @@ namespace DSIS.IntegerCoordinates.Test
     [SetUp]
     public void SetUp()
     {
-      myBuilder = new CellConnectionBuilder();
+      myBuilder = new MockCellConnectionBuilder<IntegerCoordinate>();
       myIcs = CreateCoodinateSystem();
       myAd = myIcs.CreateAdapter(myBuilder);
     }
@@ -26,25 +26,6 @@ namespace DSIS.IntegerCoordinates.Test
       myBuilder = null;
       myIcs = null;
       myAd = null;
-    }
-
-    private class CellConnectionBuilder : ICellConnectionBuilder<IntegerCoordinate>
-    {
-      #region ICellConnectionBuilder<IntegerCoordinate> Members
-
-      public void ConnectToMany(IntegerCoordinate cell, IEnumerable<IntegerCoordinate> v)
-      {
-        foreach (IntegerCoordinate t in v)
-        {
-          ConnectToOne(cell, t);
-        }
-      }
-
-      public void ConnectToOne(IntegerCoordinate cell, IntegerCoordinate v)
-      {
-      }
-
-      #endregion
     }
   }
 }

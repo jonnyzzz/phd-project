@@ -59,6 +59,7 @@ namespace DSIS.Graph.Abstract
       if (ids.Count == 0)
         yield break;
 
+
       foreach (TarjanNode<TCell> node in myGraph.NodesInternal)
       {
         if (ids.Contains(node.ComponentId))

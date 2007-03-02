@@ -21,6 +21,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private double[] radius;
     private double[] overlapL;
     private double[] overlapR;
+    private double[] myD1;
+    private double[] myD2;
 
     private Divide[] divLeft;
     private Divide[] divMiddle;
@@ -28,32 +30,28 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private Divide[] div;
     private Divide[] div2;
 
-    private ISortedTaskQueue myQueue;
+    private SimpleTaskQueue myQueue;
     private BoxIterator<Divide> myIterator;
-    private PointWithOverlappingProcessor myProcessor;
+    private OverlappingProcessor myProcessor;
 
-    private List<IntegerCoordinate> myPoints;
+    private List<IntegerCoordinate> myPoints = new List<IntegerCoordinate>(10000);
 
     #region ICellImageBuilder<IntegerCoordinate> Members
 
     public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
     {
       base.Bind(context);
-      myProcessor = new PointWithOverlappingProcessor(mySystem);
-      myPoints = new List<IntegerCoordinate>(10000);
-
+      myProcessor = new OverlappingProcessor(mySystem);
       myFunction = context.Function.GetFunction<double>();
 
       BoxAdaptiveMethodSettings settings = (BoxAdaptiveMethodSettings) context.Settings;
-      switch (settings.WorkItemStrategy)
-      {
-        case BoxAdaptiveMethodStategy.Simple:
-          myQueue = new SimpleTaskQueue(settings.TaskLimit, myDim);
-          break;
-      }
+
+      myQueue = new SimpleTaskQueue(settings.TaskLimit);
 
       x = new double[myDim];
       y = new double[myDim];
+      myD1 = new double[myDim];
+      myD2 = new double[myDim];
       xleft = new double[myDim];
       xright = new double[myDim];
       overlapL = new double[myDim];
@@ -104,31 +102,36 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       {
         ProcessPoint(myQueue.NextTask(), myQueue);
       }
+
       myBuilder.ConnectToMany(coord, myPoints);
-
-
-      foreach (Pair<double[], Point> pair in myQueue.NonProcessed)
+      myPoints.Clear();
+      
+      foreach (Point point in myQueue.Overlaped)
       {
-        myAdapter.AddPointWithOverlapping(coord, Evaluate(pair.Second), overlapL, overlapR);
+        Evaluate(point, myD1);
+        myAdapter.AddPointWithOverlapping(coord, myD1, overlapL, overlapR);
       }
 
       foreach (Pair<double[], Point> work in myQueue.NonProcessed)
       {
-        myAdapter.ConnectCellToPointWithRadius(coord, Evaluate(work.Second), work.First);
+        Evaluate(work.Second, myD2);
+        myAdapter.ConnectCellToPointWithRadius(coord, myD2, work.First);
       }      
+    }
+
+    public ICellImageBuilder<IntegerCoordinate> Clone()
+    {
+      return new BoxAdaptiveMethod();
     }
 
     #endregion
 
-    private double[] Evaluate(Point pt)
+    private void Evaluate(Point pt, double[] output)
     {
-      pt.Evaluate(xleft, xright, x);
-      double[] result = new double[myDim];
+      pt.Evaluate(xleft, xright, x);      
 
-      myFunction.Output = result;
+      myFunction.Output = output;
       myFunction.Evaluate();
-
-      return result;
     }
 
     private void AppendPoint(double[] d)
@@ -141,16 +144,18 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       Point p1 = task.First;
       Point p2 = task.Second;
 
-      double[] d1 = Evaluate(p1);
-      double[] d2 = Evaluate(p2);
+      Evaluate(p1, myD1);
+      Evaluate(p2, myD2);
 
       double[] len = new double[myDim];
       bool result = true;
       for (int i = 0; i < myDim; i++)
       {
-        double t = Math.Abs(d1[i] - d2[i]);
+        double t = Math.Abs(myD1[i] - myD2[i]);
         len[i] = t;
         bool b = t <= eps[i];
+        result &= b;
+
         if (b)
         {
           div2[i] = Divide.First;
@@ -163,13 +168,12 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
           divLeft[i] = Divide.First;
           divRight[i] = Divide.Second;
         }
-        div2[i] = b ? Divide.First : Divide.Middle;
-        result &= b;
+        
       }
       if (result)
       {
-        AppendPoint(d1);
-        AppendPoint(d2);
+        AppendPoint(myD1);
+        AppendPoint(myD2);
       }
       else
       {

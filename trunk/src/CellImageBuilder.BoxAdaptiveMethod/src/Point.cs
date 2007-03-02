@@ -3,7 +3,7 @@ using System.Text;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
-  public enum Divide
+  public enum Divide : int
   {
     First,
     Middle,
@@ -51,10 +51,18 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       int[] point = new int[dim];
       int[] point2 = new int[dim];
 
-      int d1 = Math.Max(p2.myPower - p1.myPower, 0);
-      int m1 = POW_2[d1];
-      int d2 = Math.Max(p1.myPower - p2.myPower, 0);
-      int m2 = POW_2[d2];
+      int m1;
+      int m2;
+
+      int v = p2.myPower - p1.myPower;
+      if (v > 0)
+      {
+        m1 = POW_2[v];
+        m2 = POW_2[0];        
+      } else {
+        m1 = POW_2[0];
+        m2 = POW_2[-v];
+      }                  
       int power = Math.Max(p1.myPower, p2.myPower) + 1;
 
       for (int i = 0; i < dim; i++)
@@ -62,13 +70,13 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
         switch (type[i])
         {
           case Divide.First:
-            point[i] = 2*m1*p1.myPoints[i];
+            point[i] = (m1*p1.myPoints[i]) << 1;
             break;
           case Divide.Middle:
             point[i] = m1*p1.myPoints[i] + m2*p2.myPoints[i];
             break;
           case Divide.Second:
-            point[i] = 2*m2*p2.myPoints[i];
+            point[i] = (m2*p2.myPoints[i]) << 1;
             break;
         }
       }

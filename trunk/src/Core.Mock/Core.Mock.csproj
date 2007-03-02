@@ -34,7 +34,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="testSrc\MockCellConnectionManager.cs" />
+    <Compile Include="testSrc\MockCellConnectionBuilder.cs" />
+    <Compile Include="testSrc\MockCollectingCellConnectionBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

@@ -8,7 +8,7 @@ namespace DSIS.IntegerCoordinates
   /// </summary>
   public class IntegerCoordinateCellImageBuilderAdapter : IIntegerCoordinateCellImageBuilderAdapter
   {
-    private readonly PointWithOverlappingProcessor myOverlappingProcessor;
+    private readonly OverlappingProcessor myOverlappingProcessor;
     private readonly RectProcessor myRectProcessor;
     private readonly RadiusProcessor myRadiusProcessor;
 
@@ -20,7 +20,7 @@ namespace DSIS.IntegerCoordinates
     internal IntegerCoordinateCellImageBuilderAdapter(ICellConnectionBuilder<IntegerCoordinate> builder,
                                                       IntegerCoordinateSystem coordinateSystem)
     {
-      myOverlappingProcessor = new PointWithOverlappingProcessor(coordinateSystem);
+      myOverlappingProcessor = new OverlappingProcessor(coordinateSystem);
       myRectProcessor = new RectProcessor(coordinateSystem);
       myRadiusProcessor = new RadiusProcessor(coordinateSystem);
 

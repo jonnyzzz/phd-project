@@ -9,8 +9,6 @@ namespace DSIS.Core.Processor
   {
     private CellProcessorContext<TFrom, TTo> myContext;
 
-    #region ICellProcessor<TFrom,TTo> Members
-
     public void Bind(CellProcessorContext<TFrom, TTo> context)
     {
       myContext = context;
@@ -35,7 +33,5 @@ namespace DSIS.Core.Processor
         }
       }
     }
-
-    #endregion
   }
 }

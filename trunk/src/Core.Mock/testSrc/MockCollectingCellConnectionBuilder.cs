@@ -4,7 +4,7 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Core.Mock
 {
-  public class MockCellConnectionManager<T> : ICellConnectionBuilder<T> where T : ICellCoordinate<T>
+  public class MockCollectingCellConnectionBuilder<T> : ICellConnectionBuilder<T> where T : ICellCoordinate<T>
   {
     private List<T> myResult = new List<T>();
 

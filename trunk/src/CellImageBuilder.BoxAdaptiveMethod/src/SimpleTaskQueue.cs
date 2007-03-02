@@ -6,32 +6,19 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
   internal class SimpleTaskQueue : ISortedTaskQueue
   {
     private readonly int myLimit;
-    private readonly int myDim;
 
     private Queue<Pair<Point, Point>> myItems;
     private int myProcessed = 0;
-    private double[] myMaxSize;
     private List<Point> myExceeded;
 
-    public SimpleTaskQueue(int limit, int dim)
+    public SimpleTaskQueue(int limit)
     {
-      myDim = dim;
       myLimit = limit;
       Clear();
     }
 
-    #region ISortedTaskQueue Members
-
     public void AddTask(double[] weight, Pair<Point, Point> pt)
     {
-      if (weight != null)
-      {
-        for (int i = 0; i < myDim; i++)
-        {
-          if (myMaxSize[i] < weight[i])
-            myMaxSize[i] = weight[i];
-        }
-      }
       if (myProcessed < myLimit)
       {
         myProcessed++;
@@ -47,7 +34,6 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     public void Clear()
     {
       myItems = new Queue<Pair<Point, Point>>(myLimit);
-      myMaxSize = new double[myDim];
       myExceeded = new List<Point>();
       myProcessed = 0;
     }
@@ -67,11 +53,9 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       get { yield break; }
     }
 
-    public IEnumerable<double[]> Overlaped
+    public IEnumerable<Point> Overlaped
     {
-      get { yield break; }
+      get { return myExceeded; }
     }
-
-    #endregion
   }
 }

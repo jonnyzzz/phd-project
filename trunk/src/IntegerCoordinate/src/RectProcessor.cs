@@ -16,7 +16,7 @@ namespace DSIS.IntegerCoordinates
 
       for (int i = 0; i < myDim; i++)
       {
-        double e = eps[i]*myCoordinateSystem.CellSize[i];
+        double e = eps[i];
 
         myLeft[i] = myCoordinateSystem.ToInternal(left[i] - e, i);
         if (myLeft[i] < 0)

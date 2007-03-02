@@ -3,12 +3,13 @@
  * Created: 18 декабря 2006 г.
  */
 
+using System;
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.Core.System;
+using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
-using DSIS.Util;
 
 namespace DSIS.CellImageBuilder.BoxMethod
 {
@@ -24,7 +25,8 @@ namespace DSIS.CellImageBuilder.BoxMethod
     private double[] eps;
     private BoxIterator<double> myIterator;
 
-    #region ICellImageBuilder<IntegerCoordinate> Members
+    private double[] myCellSize;
+    private double[] myCellSizeHalf;
 
     public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
     {
@@ -35,6 +37,8 @@ namespace DSIS.CellImageBuilder.BoxMethod
       x = new double[myDim];
       xLeft = new double[myDim];
       xRight = new double[myDim];
+      yLeft = new double[myDim];
+      yRight = new double[myDim];      
       eps = new double[myDim];
       myIterator = new BoxIterator<double>(myDim);
 
@@ -42,6 +46,9 @@ namespace DSIS.CellImageBuilder.BoxMethod
       {
         eps[i] = ((BoxMethodSettings) context.Settings).Eps*mySystem.CellSize[i];
       }
+
+      myCellSize = mySystem.CellSize;
+      myCellSizeHalf = mySystem.CellSizeHalf;
 
       myFunction.Input = x;
       myFunction.Output = y;
@@ -53,16 +60,16 @@ namespace DSIS.CellImageBuilder.BoxMethod
 
       for (int i = 0; i < myDim; i++)
       {
-        x[i] = xLeft[i] + mySystem.CellSizeHalf[i];
-        xRight[i] = xLeft[i] + mySystem.CellSize[i];
+        x[i] = xLeft[i] + myCellSizeHalf[i];
+        xRight[i] = xLeft[i] + myCellSize[i];
       }
       myFunction.Evaluate();
 
-      yLeft = (double[]) y.Clone();
-      yRight = (double[]) y.Clone();
-
+      Array.Copy(y, yLeft, myDim);
+      Array.Copy(y, yRight, myDim);
+      
       IEnumerable<double[]> cns = myIterator.EnumerateBox(xLeft, xRight, x);
-      foreach (double[] cn in cns)
+      foreach (double[] _ in cns)
       {
         myFunction.Evaluate();
         for (int i = 0; i < myDim; i++)
@@ -77,6 +84,9 @@ namespace DSIS.CellImageBuilder.BoxMethod
       myAdapter.ConnectCellToRect(coord, yLeft, yRight, eps);
     }
 
-    #endregion
+    public ICellImageBuilder<IntegerCoordinate> Clone()
+    {
+      return new BoxMethod();
+    }
   }
 }

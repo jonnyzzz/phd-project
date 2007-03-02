@@ -13,5 +13,11 @@ namespace DSIS.Core.Builders
     void Bind(CellImageBuilderContext<TCell> cellImageBuilderContext);
 
     void BuildImage(TCell coord);
+
+    /// <summary>
+    /// Prototype pattern for using in multythreaded context.
+    /// </summary>
+    /// <returns>CellImage builder. Bind it before use</returns>
+    ICellImageBuilder<TCell> Clone();
   }
 }

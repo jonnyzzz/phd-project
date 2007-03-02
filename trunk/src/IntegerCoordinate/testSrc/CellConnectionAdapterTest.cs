@@ -7,8 +7,8 @@ namespace DSIS.IntegerCoordinates.Test
   {
     protected static List<IntegerCoordinate> DoTest(IntegerCoordinateSystem ics, DoBuild bld)
     {
-      MockCellConnectionManager<IntegerCoordinate> mcm =
-        new MockCellConnectionManager<IntegerCoordinate>();
+      MockCollectingCellConnectionBuilder<IntegerCoordinate> mcm =
+        new MockCollectingCellConnectionBuilder<IntegerCoordinate>();
 
       IntegerCoordinateCellImageBuilderAdapter ad =
         new IntegerCoordinateCellImageBuilderAdapter(mcm, ics);

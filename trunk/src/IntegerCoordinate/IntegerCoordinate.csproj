@@ -46,7 +46,7 @@
     <Compile Include="src\IntegerCoordinateEqualityComparer.cs" />
     <Compile Include="src\IntegerCoordinateSystem.cs" />
     <Compile Include="src\LongLBoxFixedDimentionMulIterator.cs" />
-    <Compile Include="src\PointWithOverlappingProcessor.cs" />
+    <Compile Include="src\OverlappingProcessor.cs" />
     <Compile Include="src\RadiusProcessor.cs" />
     <Compile Include="src\RectProcessor.cs" />
     <Compile Include="src\RectProcessorBase.cs" />

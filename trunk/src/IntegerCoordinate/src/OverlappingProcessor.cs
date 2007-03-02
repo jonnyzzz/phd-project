@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using DSIS.Util;
+using DSIS.Core.Util;
 
 namespace DSIS.IntegerCoordinates
 {
-  public sealed class PointWithOverlappingProcessor
+  public sealed class OverlappingProcessor
   {
     private readonly IIntegerCoordinateSystem myCoordinateSystem;
     private readonly long[] myPoint;
@@ -16,7 +16,7 @@ namespace DSIS.IntegerCoordinates
     private BoxIterator<long> myIterator;
 
 
-    public PointWithOverlappingProcessor(IIntegerCoordinateSystem coordinateSystem)
+    public OverlappingProcessor(IIntegerCoordinateSystem coordinateSystem)
     {
       myCoordinateSystem = coordinateSystem;
 
@@ -45,13 +45,13 @@ namespace DSIS.IntegerCoordinates
       for (int i = 0; i < myDim; i++)
       {
         myPoint[i] = myCoordinateSystem.ToInternal(value[i], i);
-        double tmp = myCoordinateSystem.ToExternal(myPoint[i], i);
-        if (value[i] < tmp + oLeft[i])
+        double tmp = value[i] - myCoordinateSystem.ToExternal(myPoint[i], i);
+        if (tmp <  + oLeft[i])
         {
           myPoint2[i] = -1;
           iter = true;
         }
-        else if (value[i] > tmp + oRight[i])
+        else if (tmp > oRight[i])
         {
           myPoint2[i] = 1;
           iter = true;

@@ -15,6 +15,10 @@ namespace DSIS.IntegerCoordinates
     private readonly long[] mySubdivision;
     private readonly int myDimension;
 
+    //from ISystemSpace. Optimization
+    private readonly double[] myAreaLeftPoint;
+    private readonly double[] myAreaRightPoint;
+
     public IntegerCoordinateSystem(ISystemSpace systemSpace, long[] subdivision)
     {
       mySystemSpace = systemSpace;
@@ -32,6 +36,9 @@ namespace DSIS.IntegerCoordinates
         myCellSize[i] = (mySystemSpace.AreaRightPoint[i] - mySystemSpace.AreaLeftPoint[i])/subdivision[i];
         myCellSizeHalf[i] = myCellSize[i]/2;
       }
+
+      myAreaLeftPoint = mySystemSpace.AreaLeftPoint;
+      myAreaRightPoint = mySystemSpace.AreaRightPoint;      
     }
 
     public IntegerCoordinateSystem(ISystemSpace systemSpace) : this(systemSpace, systemSpace.InitialSubdivision)
@@ -99,7 +106,7 @@ namespace DSIS.IntegerCoordinates
     public void TopLeftPoint(IntegerCoordinate point, double[] output)
     {
       IntegerCoordinate coordinate = point;
-      for (int i = 0; i < Dimension; i++)
+      for (int i = 0; i < myDimension; i++)
       {
         output[i] = ToExternal(coordinate.Coordinate[i], i);
       }
@@ -114,8 +121,8 @@ namespace DSIS.IntegerCoordinates
 
     internal IntegerCoordinate FromPointNoCheck(double[] point)
     {
-      long[] coordinate = new long[Dimension];
-      for (int i = Dimension - 1; i >= 0; i--)
+      long[] coordinate = new long[myDimension];
+      for (int i = myDimension - 1; i >= 0; i--)
       {
         coordinate[i] = ToInternal(point[i], i);
       }
@@ -124,25 +131,25 @@ namespace DSIS.IntegerCoordinates
 
     public bool Intersects(long l, int axis)
     {
-      return l >= 0 && l < Subdivision[axis];
+      return l >= 0 && l < mySubdivision[axis];
     }
 
     public long ToInternal(double point, int i)
     {
-      return Ceil((point - mySystemSpace.AreaLeftPoint[i])/CellSize[i]);
+      return Ceil((point - myAreaLeftPoint[i])/myCellSize[i]);
     }
 
     public double ToExternal(long pt, int i)
     {
-      return mySystemSpace.AreaLeftPoint[i] + CellSize[i]*pt;
+      return myAreaLeftPoint[i] + myCellSize[i]*pt;
     }
 
     public void CenterPoint(IntegerCoordinate point, double[] output)
     {
       IntegerCoordinate coordinate = point;
-      for (int i = 0; i < Dimension; i++)
+      for (int i = 0; i < myDimension; i++)
       {
-        output[i] = ToExternal(coordinate.Coordinate[i], i) + CellSizeHalf[i];
+        output[i] = ToExternal(coordinate.Coordinate[i], i) + myCellSizeHalf[i];
       }
     }
 
@@ -158,16 +165,16 @@ namespace DSIS.IntegerCoordinates
 
     private IEnumerable<IntegerCoordinate> GetInitialSubdivision()
     {
-      long[] array = new long[Dimension];
-      for (int i = 0; i < Dimension; i++)
+      long[] array = new long[myDimension];
+      for (int i = 0; i < myDimension; i++)
       {
         array[i] = 0;
       }
-      while (array[Dimension - 1] < Subdivision[Dimension - 1])
+      while (array[myDimension - 1] < Subdivision[myDimension - 1])
       {
         yield return new IntegerCoordinate((long[]) array.Clone());
         array[0]++;
-        for (int i = 0; i < Dimension - 1; i++)
+        for (int i = 0; i < myDimension - 1; i++)
         {
           if (array[i] >= Subdivision[i])
           {

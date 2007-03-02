@@ -31,7 +31,7 @@ namespace DSIS.GnuplotDrawer
 
       myWriter.Write(" '{0}' title \"{1}\" with ", file.Filename, string.Format(myParams.KeyFormat, file.PointsCount));
 
-      if (file.PointsCount < 300)
+      if (file.PointsCount >= 300)
         myWriter.Write(" dots ");
       else
         myWriter.Write(" points ");

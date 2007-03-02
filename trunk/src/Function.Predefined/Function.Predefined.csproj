@@ -44,6 +44,8 @@
     <Compile Include="src\Henon\HenonFunction.cs" />
     <Compile Include="src\Henon\HenonFunctionDerivate.cs" />
     <Compile Include="src\Henon\HenonFunctionSystemInfoDecorator.cs" />
+    <Compile Include="src\Ikeda\IkedaFunction.cs" />
+    <Compile Include="src\Julia\JuliaFunction.cs" />
     <Compile Include="src\SystemInfoDecoratorBase.cs" />
   </ItemGroup>
   <ItemGroup>

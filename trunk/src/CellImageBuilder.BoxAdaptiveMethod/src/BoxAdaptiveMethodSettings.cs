@@ -2,32 +2,23 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
-  public enum BoxAdaptiveMethodStategy
-  {
-    Simple
-  }
-
   public class BoxAdaptiveMethodSettings : ICellImageBuilderSettings
   {
     public static readonly BoxAdaptiveMethodSettings Default = new BoxAdaptiveMethodSettings();
 
-    private readonly int myTaskLimit = 363;
-    private readonly BoxAdaptiveMethodStategy myStategy = BoxAdaptiveMethodStategy.Simple;
+    private readonly int myTaskLimit = 200;
     private readonly double myOverlaping = 0.2;
     private readonly double myCellSizePercent = 0.7;
 
-    public BoxAdaptiveMethodSettings(int taskLimit, BoxAdaptiveMethodStategy stategy, double overlaping)
+    public BoxAdaptiveMethodSettings(int taskLimit, double overlaping)
     {
       myTaskLimit = taskLimit;
-      myStategy = stategy;
       myOverlaping = overlaping;
     }
 
-    public BoxAdaptiveMethodSettings(int taskLimit, BoxAdaptiveMethodStategy stategy, double overlaping,
-                                     double cellSizePercent)
+    public BoxAdaptiveMethodSettings(int taskLimit, double overlaping, double cellSizePercent)
     {
       myTaskLimit = taskLimit;
-      myStategy = stategy;
       myOverlaping = overlaping;
       myCellSizePercent = cellSizePercent;
     }
@@ -39,11 +30,6 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     public int TaskLimit
     {
       get { return myTaskLimit; }
-    }
-
-    public BoxAdaptiveMethodStategy WorkItemStrategy
-    {
-      get { return myStategy; }
     }
 
     public double Overlaping
