@@ -18,8 +18,6 @@ namespace DSIS.Core.Util
       mySet = new Dictionary<T, T>(comparer);
     }
 
-    #region IEnumerable<T> Members
-
     IEnumerator IEnumerable.GetEnumerator()
     {
       return Values.GetEnumerator();
@@ -29,8 +27,6 @@ namespace DSIS.Core.Util
     {
       return Values.GetEnumerator();
     }
-
-    #endregion
 
     public bool Contains(T t)
     {

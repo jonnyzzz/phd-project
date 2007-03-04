@@ -17,7 +17,6 @@ namespace DSIS.IntegerCoordinates
 
     //from ISystemSpace. Optimization
     private readonly double[] myAreaLeftPoint;
-    private readonly double[] myAreaRightPoint;
 
     public IntegerCoordinateSystem(ISystemSpace systemSpace, long[] subdivision)
     {
@@ -38,14 +37,11 @@ namespace DSIS.IntegerCoordinates
       }
 
       myAreaLeftPoint = mySystemSpace.AreaLeftPoint;
-      myAreaRightPoint = mySystemSpace.AreaRightPoint;      
     }
 
     public IntegerCoordinateSystem(ISystemSpace systemSpace) : this(systemSpace, systemSpace.InitialSubdivision)
     {
     }
-
-    #region IIntegerCoordinateSystem Members
 
     public double[] CellSize
     {
@@ -112,8 +108,6 @@ namespace DSIS.IntegerCoordinates
       }
     }
 
-    #endregion
-
     private static long Ceil(double v)
     {
       return (long) (v);
@@ -146,19 +140,19 @@ namespace DSIS.IntegerCoordinates
 
     public void CenterPoint(IntegerCoordinate point, double[] output)
     {
-      IntegerCoordinate coordinate = point;
+      long[] coordinate = point.Coordinate;
       for (int i = 0; i < myDimension; i++)
       {
-        output[i] = ToExternal(coordinate.Coordinate[i], i) + myCellSizeHalf[i];
+        output[i] = ToExternal(coordinate[i], i) + myCellSizeHalf[i];
       }
     }
 
     private IntegerCoordinateSystem SubdividedCoordinateSystem(long[] division)
     {
-      long[] div = new long[division.Length];
+      long[] div = new long[myDimension];
       for (int i = 0; i < div.Length; i++)
       {
-        div[i] = Subdivision[i]*division[i];
+        div[i] = mySubdivision[i]*division[i];
       }
       return new IntegerCoordinateSystem(SystemSpace, div);
     }
@@ -170,13 +164,15 @@ namespace DSIS.IntegerCoordinates
       {
         array[i] = 0;
       }
-      while (array[myDimension - 1] < Subdivision[myDimension - 1])
+
+      long limit = mySubdivision[myDimension - 1];
+      while (array[myDimension - 1] < limit)
       {
         yield return new IntegerCoordinate((long[]) array.Clone());
         array[0]++;
         for (int i = 0; i < myDimension - 1; i++)
         {
-          if (array[i] >= Subdivision[i])
+          if (array[i] >= mySubdivision[i])
           {
             array[i] = 0;
             array[i + 1]++;

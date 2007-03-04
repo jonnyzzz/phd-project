@@ -48,9 +48,11 @@
     <Compile Include="src\Context\IContext.cs" />
     <Compile Include="src\Context\Impl\ContextImpl.cs" />
     <Compile Include="src\Coordinates\CellCoordinateEqualityComparer.cs" />
+    <Compile Include="src\Coordinates\DoubleEqualityComparer.cs" />
     <Compile Include="src\Coordinates\ICellCoordinate.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystem.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemConverter.cs" />
+    <Compile Include="src\Coordinates\LongEqualityComparer.cs" />
     <Compile Include="src\Data\IContinuableDataCollectionAnalisys.cs" />
     <Compile Include="src\Data\IDataCollection.cs" />
     <Compile Include="src\Data\IDataCollectionAnalisys.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="src\Util\NotNullAttribute.cs" />
     <Compile Include="src\Util\NullableAttribute.cs" />
     <Compile Include="src\Util\NullProgressInfo.cs" />
+    <Compile Include="src\Util\OrderedList.cs" />
     <Compile Include="src\Util\Pair.cs" />
     <Compile Include="src\Util\Primes.cs" />
     <Compile Include="src\Util\ProcessInterruptedException.cs" />

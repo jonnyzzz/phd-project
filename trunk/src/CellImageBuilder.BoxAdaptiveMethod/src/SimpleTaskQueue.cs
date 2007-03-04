@@ -3,7 +3,7 @@ using DSIS.Core.Util;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
-  internal class SimpleTaskQueue : ISortedTaskQueue
+  internal class SimpleTaskQueue
   {
     private readonly int myLimit;
 

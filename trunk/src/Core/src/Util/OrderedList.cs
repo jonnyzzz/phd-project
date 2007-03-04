@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DSIS.Graph.Util
+namespace DSIS.Core.Util
 {
   public class OrderedList<T> where T : IComparable<T>
   {

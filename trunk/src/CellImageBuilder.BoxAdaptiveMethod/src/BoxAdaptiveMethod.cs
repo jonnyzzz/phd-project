@@ -5,7 +5,6 @@ using DSIS.Core.Builders;
 using DSIS.Core.System;
 using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
-using DSIS.Util;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
@@ -23,6 +22,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private double[] overlapR;
     private double[] myD1;
     private double[] myD2;
+    private double[] myLen;
 
     private Divide[] divLeft;
     private Divide[] divMiddle;
@@ -30,24 +30,34 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private Divide[] div;
     private Divide[] div2;
 
-    private SimpleTaskQueue myQueue;
     private BoxIterator<Divide> myIterator;
-    private OverlappingProcessor myProcessor;
 
+    private OverlappingProcessor myOverlappingProcessor;
+    private RadiusProcessor myRadiusProcessor;
+
+    private Queue<Pair<Point, Point>> myQueue = new Queue<Pair<Point, Point>>();
     private List<IntegerCoordinate> myPoints = new List<IntegerCoordinate>(10000);
-
-    #region ICellImageBuilder<IntegerCoordinate> Members
+    
+    private int myLimit;
+    private int myProcessed;
+    private double myAddRadiusFactor;
 
     public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
     {
       base.Bind(context);
-      myProcessor = new OverlappingProcessor(mySystem);
+      myOverlappingProcessor = new OverlappingProcessor(mySystem);
+      myRadiusProcessor = new RadiusProcessor(mySystem);
+
       myFunction = context.Function.GetFunction<double>();
 
       BoxAdaptiveMethodSettings settings = (BoxAdaptiveMethodSettings) context.Settings;
 
-      myQueue = new SimpleTaskQueue(settings.TaskLimit);
+      myLimit = settings.TaskLimit;
+      myProcessed = 0;
+      myAddRadiusFactor = settings.AddRadiusFactor;
 
+      myQueue.Clear();
+      
       x = new double[myDim];
       y = new double[myDim];
       myD1 = new double[myDim];
@@ -56,6 +66,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       xright = new double[myDim];
       overlapL = new double[myDim];
       overlapR = new double[myDim];
+      myLen = new double[myDim];
       myIterator = new BoxIterator<Divide>(myDim);
 
       myFunction.Input = x;
@@ -82,12 +93,14 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
         divRight[i] = Divide.Second;
         per[i] = settings.Overlaping;
       }
-
-      myProcessor.AddPointWithOverlappingPrepare(per, overlapL, overlapR);
+      
+      myOverlappingProcessor.AddPointWithOverlappingPrepare(per, overlapL, overlapR);
     }
 
     public void BuildImage(IntegerCoordinate coord)
     {
+      myProcessed = 0;
+
       mySystem.TopLeftPoint(coord, xleft);
       for (int i = 0; i < myDim; i++)
         xright[i] = xleft[i] + mySystem.CellSize[i];
@@ -95,36 +108,22 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       Point topPoint = Point.CreateTopLeft(myDim);
       Point bottomPoint = Point.CreateBottomRight(myDim);
 
-      myQueue.Clear();
-      myQueue.AddTask(null, new Pair<Point, Point>(topPoint, bottomPoint));
+      myQueue.Enqueue(new Pair<Point, Point>(topPoint, bottomPoint));
 
-      while (myQueue.HasNextTask)
+      while (myQueue.Count > 0)
       {
-        ProcessPoint(myQueue.NextTask(), myQueue);
+        ProcessPoint(myQueue.Dequeue());
       }
 
       myBuilder.ConnectToMany(coord, myPoints);
       myPoints.Clear();
-      
-      foreach (Point point in myQueue.Overlaped)
-      {
-        Evaluate(point, myD1);
-        myAdapter.AddPointWithOverlapping(coord, myD1, overlapL, overlapR);
-      }
-
-      foreach (Pair<double[], Point> work in myQueue.NonProcessed)
-      {
-        Evaluate(work.Second, myD2);
-        myAdapter.ConnectCellToPointWithRadius(coord, myD2, work.First);
-      }      
+      myQueue.Clear();
     }
 
     public ICellImageBuilder<IntegerCoordinate> Clone()
     {
       return new BoxAdaptiveMethod();
     }
-
-    #endregion
 
     private void Evaluate(Point pt, double[] output)
     {
@@ -136,10 +135,11 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     private void AppendPoint(double[] d)
     {
-      myPoints.AddRange(myProcessor.AddPointWithOverlappingInternal(d, overlapL, overlapR));
+      
+      myPoints.AddRange(myOverlappingProcessor.AddPointWithOverlappingInternal(d, overlapL, overlapR));
     }
 
-    private void ProcessPoint(Pair<Point, Point> task, ISortedTaskQueue queue)
+    private void ProcessPoint(Pair<Point, Point> task)
     {
       Point p1 = task.First;
       Point p2 = task.Second;
@@ -147,12 +147,11 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       Evaluate(p1, myD1);
       Evaluate(p2, myD2);
 
-      double[] len = new double[myDim];
       bool result = true;
       for (int i = 0; i < myDim; i++)
       {
         double t = Math.Abs(myD1[i] - myD2[i]);
-        len[i] = t;
+        myLen[i] = t * myAddRadiusFactor;
         bool b = t <= eps[i];
         result &= b;
 
@@ -168,28 +167,36 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
           divLeft[i] = Divide.First;
           divRight[i] = Divide.Second;
         }
-        
       }
       if (result)
       {
+        myProcessed += 2;
+
         AppendPoint(myD1);
         AppendPoint(myD2);
       }
       else
       {
-        foreach (Divide[] ts in myIterator.EnumerateBox(divLeft, divRight, div))
+        if (myProcessed < myLimit)
         {
-          for (int i = 0; i < myDim; i++)
+          foreach (Divide[] ts in myIterator.EnumerateBoxChecked(divLeft, divRight, div))
           {
-            if (div2[i] != Divide.Middle)
-              div2[i] = ts[i] == Divide.First ? Divide.Second : Divide.First;
+            for (int i = 0; i < myDim; i++)
+            {
+              if (div2[i] != Divide.Middle)
+                div2[i] = ts[i] == Divide.First ? Divide.Second : Divide.First;
+            }
+            myQueue.Enqueue(new Pair<Point, Point>(
+                              Point.Middle(p1, p2, div2),
+                              Point.Middle(p1, p2, ts)
+                              )
+              );
           }
-          queue.AddTask(len,
-                        new Pair<Point, Point>(
-                          Point.Middle(p1, p2, div2),
-                          Point.Middle(p1, p2, ts)
-                          )
-            );
+        }
+        else
+        {
+          myPoints.AddRange(myRadiusProcessor.ConnectCellToRectInternal(myD1, myLen));
+          myPoints.AddRange(myRadiusProcessor.ConnectCellToRectInternal(myD2, myLen));
         }
       }
     }

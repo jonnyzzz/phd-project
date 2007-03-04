@@ -1,12 +1,11 @@
 using System.Collections.Generic;
+using DSIS.Core.Coordinates;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
-  internal struct PointEqualityComparer : IEqualityComparer<Point>
+  public sealed class PointEqualityComparer : IEqualityComparer<Point>
   {
     public static PointEqualityComparer INSTANCE = new PointEqualityComparer();
-
-    #region IEqualityComparer<Point> Members
 
     public bool Equals(Point x, Point y)
     {
@@ -17,7 +16,5 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     {
       return obj.GetHashCodeInternal();
     }
-
-    #endregion
   }
 }

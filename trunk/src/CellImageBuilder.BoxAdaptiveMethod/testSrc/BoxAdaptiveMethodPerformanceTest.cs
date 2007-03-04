@@ -9,13 +9,13 @@ using NUnit.Framework;
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
 {
   [TestFixture]
-  public class BoxAdaptiveMethodPerformanceTest 
+  public class BoxAdaptiveMethodPerformanceTest
   {
     [Test]
     public void Test_01()
     {
       const double factor = 1;
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {-1,-1}, new double[] {1,1}, new long[] {100,100});
+      MockSystemSpace ss = new MockSystemSpace(2, new double[] {-1, -1}, new double[] {1, 1}, new long[] {100, 100});
       IntegerCoordinateSystem ics = new IntegerCoordinateSystem(ss);
       MockSystemInfo<double> si = new MockSystemInfo<double>(delegate(double[] ins, double[] outs)
                                                                {
@@ -25,16 +25,16 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
 
       BoxAdaptiveMethod m = new BoxAdaptiveMethod();
       m.Bind(new CellImageBuilderContext<IntegerCoordinate>(
-        si, BoxAdaptiveMethodSettings.Default, ics, new MockCellConnectionBuilder<IntegerCoordinate>()
-        ));
-      
-      for(int i=40; i < 60; i++)
-        for (int j=40; j<60; j++)
-          m.BuildImage(new IntegerCoordinate(i,j));
+               si, BoxAdaptiveMethodSettings.Default, ics, new MockCellConnectionBuilder<IntegerCoordinate>()
+               ));
+
+      for (int i = 30; i < 60; i++)
+        for (int j = 40; j < 70; j++)
+          m.BuildImage(new IntegerCoordinate(i, j));
 
       long mem = GC.GetTotalMemory(true);
 
-      Console.Out.WriteLine("mem = {0} Mb", mem / 1024.0 / 1024.0);
+      Console.Out.WriteLine("mem = {0} Mb", mem/1024.0/1024.0);
     }
   }
 }

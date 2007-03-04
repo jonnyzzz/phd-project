@@ -40,7 +40,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\BoxAdaptiveMethod.cs" />
     <Compile Include="src\BoxAdaptiveMethodSettings.cs" />
-    <Compile Include="src\ISortedTaskQueue.cs" />
+    <Compile Include="src\Divide.cs" />
+    <Compile Include="src\DivideEqualityComparer.cs" />
     <Compile Include="src\Point.cs" />
     <Compile Include="src\PointEqualityComparer.cs" />
     <Compile Include="src\SimpleTaskQueue.cs" />

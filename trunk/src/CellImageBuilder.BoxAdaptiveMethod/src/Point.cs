@@ -1,22 +1,20 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
+using DSIS.Core.Coordinates;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
-  public enum Divide : int
+  [EqualityComparer(typeof(PointEqualityComparer))]
+  public class Point
   {
-    First,
-    Middle,
-    Second
-  }
-
-  public struct Point
-  {
-    private static int[] POW_2 = new int[31];
-    private static double[] POW_1_2 = new double[31];
+    private static readonly int[] POW_2 = new int[31];
+    private static readonly double[] POW_1_2 = new double[31];
+    private static readonly Dictionary<int, int[]> ARRAYS_ZERO = new Dictionary<int, int[]>();
+    private static readonly Dictionary<int, int[]> ARRAYS_ONES = new Dictionary<int, int[]>();
 
     private readonly int myPower; //power of 2 as common devider
-    private int[] myPoints;
+    private readonly int[] myPoints;
 
     static Point()
     {
@@ -130,14 +128,31 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       return new Point(0, pt);
     }
 
+    private static int[] FillArray(int dim, bool zeros)
+    {
+      int[] result;
+      Dictionary<int, int[]> dic = zeros ? ARRAYS_ZERO : ARRAYS_ONES;
+
+      if (!dic.TryGetValue(dim, out result))
+      {
+        result = new int[dim];
+        int v = zeros ? 0 : 1;
+        for (int i = 0; i < dim; i++)
+          result[i] = v;
+
+        dic[dim] = result;
+      }
+      return result;
+    }
+
     public static Point CreateTopLeft(int dim)
     {
-      return CreatePoint(dim, 0);
+      return Create(FillArray(dim, true));
     }
 
     public static Point CreateBottomRight(int dim)
     {
-      return CreatePoint(dim, 1);
+      return Create(FillArray(dim, false));
     }
 
     public override bool Equals(object obj)

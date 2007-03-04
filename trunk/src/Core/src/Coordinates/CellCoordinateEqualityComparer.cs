@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DSIS.Core.Coordinates
 {
-  [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+  [AttributeUsage(AttributeTargets.Class |  AttributeTargets.Struct | AttributeTargets.Enum, AllowMultiple = false)]
   public class EqualityComparerAttribute : Attribute
   {
     public readonly Type Comparer;
@@ -14,24 +14,35 @@ namespace DSIS.Core.Coordinates
     }
   }
 
-  public static class EqualityComparerFactory<TCell>
+  public static class EqualityComparerFactory<T>
   {
-    private static IEqualityComparer<TCell> myComparer = null;
+    private static IEqualityComparer<T> myComparer = null;
 
-    public static IEqualityComparer<TCell> GetComparer()
+    public static IEqualityComparer<T> GetComparer()
     {
       if (myComparer != null)
         return myComparer;
 
-      object[] attrs = typeof (TCell).GetCustomAttributes(typeof (EqualityComparerAttribute), false);
-      if (attrs.Length == 0)
+      if (typeof(long) == typeof(T))
       {
-        myComparer = EqualityComparer<TCell>.Default;
+        myComparer = (IEqualityComparer<T>) LongEqualityComparer.INSTANCE;
+      }
+      else if (typeof(double) == typeof(T))
+      {
+        myComparer = (IEqualityComparer<T>)DoubleEqualityComparer.INSTANCE;
       }
       else
-      {
-        EqualityComparerAttribute at = (EqualityComparerAttribute) attrs[0];
-        myComparer = (IEqualityComparer<TCell>) Activator.CreateInstance(at.Comparer);
+      {       
+        object[] attrs = typeof (T).GetCustomAttributes(typeof (EqualityComparerAttribute), false);
+        if (attrs.Length == 0)
+        {
+          myComparer = EqualityComparer<T>.Default;
+        }
+        else
+        {
+          EqualityComparerAttribute at = (EqualityComparerAttribute) attrs[0];
+          myComparer = (IEqualityComparer<T>) Activator.CreateInstance(at.Comparer);
+        }
       }
 
       return myComparer;

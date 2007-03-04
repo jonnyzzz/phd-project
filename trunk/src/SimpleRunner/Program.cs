@@ -24,7 +24,7 @@ namespace DSIS.SimpleRunner
 {
   internal class Program
   {
-    private const int STEPS = 12;
+    private const int STEPS = 10;
     private static string myWorkPath;
     private static string myHomePath;
 
@@ -86,9 +86,9 @@ namespace DSIS.SimpleRunner
 
     private static ISystemInfo GetFunction(DefaultSystemSpace sp)
     {
-      return new JuliaFuctionSystemInfoDecorator(sp);
-      //return new IkedaFunctionSystemInfoDecorator(sp);
-      //return new HenonFunctionSystemInfoDecorator(sp, 1.4);
+//      return new JuliaFuctionSystemInfoDecorator(sp);
+      return new IkedaFunctionSystemInfoDecorator(sp);
+//      return new HenonFunctionSystemInfoDecorator(sp, 1.4);
 //      return new DelayedFunctionSystemInfo(sp, 2.27);
       //return new FoodChainSystemInfo(sp);
     }

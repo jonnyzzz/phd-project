@@ -9,10 +9,10 @@ namespace DSIS.IntegerCoordinates
     protected readonly long[] myRight;
     protected readonly long[] myPoint;
     protected readonly int myDim;
-    protected readonly IntegerCoordinateSystem myCoordinateSystem;
+    protected readonly IIntegerCoordinateSystem myCoordinateSystem;
     protected readonly ISystemSpace mySystemSpace;
 
-    public RectProcessorBase(IntegerCoordinateSystem coordinateSystem)
+    public RectProcessorBase(IIntegerCoordinateSystem coordinateSystem)
     {
       myCoordinateSystem = coordinateSystem;
       mySystemSpace = myCoordinateSystem.SystemSpace;
@@ -32,12 +32,12 @@ namespace DSIS.IntegerCoordinates
         yield return coordinate;
 
         myPoint[0]++;
-        for (int i = 0; i < myCoordinateSystem.Dimension; i++)
+        for (int i = 0; i < myDim; i++)
         {
           if (myPoint[i] > myRight[i])
           {
             myPoint[i] = myLeft[i];
-            if (i + 1 < myCoordinateSystem.Dimension)
+            if (i + 1 < myDim)
               myPoint[i + 1]++;
             else
               exit = true;
