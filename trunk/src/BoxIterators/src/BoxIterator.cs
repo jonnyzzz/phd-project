@@ -116,11 +116,5 @@ namespace DSIS.Core.Util
         }
       }
     }
-
-    private void GenerateEnumerableFor(int dim)
-    {
-      
-    }
-
   }
 }

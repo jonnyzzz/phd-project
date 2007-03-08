@@ -62,6 +62,10 @@
     <Compile Include="testSrc\TwoDimCoordinateAssert.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BoxIterators\BoxIterators.csproj">
+      <Project>{B5F40029-7A5F-440D-8A5A-215E032CF89C}</Project>
+      <Name>BoxIterators</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Mock\Core.Mock.csproj">
       <Project>{2B4BA54B-9B5E-4D07-B859-FAB1D15203F0}</Project>
       <Name>Core.Mock</Name>
