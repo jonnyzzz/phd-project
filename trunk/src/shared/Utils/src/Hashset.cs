@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DSIS.Core.Util
+namespace DSIS.Utils
 {
   public class Hashset<T> : IEnumerable<T>
   {

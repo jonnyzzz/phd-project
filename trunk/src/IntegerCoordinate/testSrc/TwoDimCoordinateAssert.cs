@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using DSIS.Core.Util;
+using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Test
 {

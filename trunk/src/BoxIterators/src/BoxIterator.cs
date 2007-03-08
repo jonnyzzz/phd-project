@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
+using DSIS.Utils;
 
-namespace DSIS.Core.Util
-{  
-  public class BoxIterator<T>
+namespace DSIS.BoxIterators
+{
+  public class BoxIterator<T> : IBoxIterator<T>
   {
     private static IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
 

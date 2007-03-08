@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DSIS.Core.Util
+namespace DSIS.Utils
 {
   public static class MergeEnumerable<T>
   {

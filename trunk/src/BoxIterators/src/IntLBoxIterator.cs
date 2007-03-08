@@ -1,6 +1,4 @@
-using DSIS.Core.Util;
-
-namespace DSIS.Util
+namespace DSIS.BoxIterators
 {
   internal class IntLBoxIterator : SegmentBoxIterator<int>
   {

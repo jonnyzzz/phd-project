@@ -25,11 +25,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GnuplotDrawer", "GnuplotDra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B41724D1-0224-4A61-A83A-37FD89881D44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCompiler", "CodeCompiler\CodeCompiler.csproj", "{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCompiler", "shared\CodeCompiler\CodeCompiler.csproj", "{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "shared\Utils\Utils.csproj", "{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxIterators", "BoxIterators\BoxIterators.csproj", "{B5F40029-7A5F-440D-8A5A-215E032CF89C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProcessors", "TemplateProcessors\TemplateProcessors.csproj", "{D46F95D7-FF24-4890-9C60-0B3D7921934F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{B5F40029-7A5F-440D-8A5A-215E032CF89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5F40029-7A5F-440D-8A5A-215E032CF89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5F40029-7A5F-440D-8A5A-215E032CF89C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

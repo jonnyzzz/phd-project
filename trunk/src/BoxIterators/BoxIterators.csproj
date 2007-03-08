@@ -7,8 +7,8 @@
     <ProjectGuid>{B5F40029-7A5F-440D-8A5A-215E032CF89C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BoxIterators</RootNamespace>
-    <AssemblyName>BoxIterators</AssemblyName>
+    <RootNamespace>DSIS.BoxIterators</RootNamespace>
+    <AssemblyName>DSIS.BoxIterators</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,12 +35,14 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\BoxIterator.cs" />
+    <Compile Include="src\Generator\BoxIteratorGenerator.cs" />
+    <Compile Include="src\IBoxIterator.cs" />
     <Compile Include="src\IntLBoxIterator.cs" />
     <Compile Include="src\LongLBoxIterator.cs" />
     <Compile Include="src\SegmentBoxIterator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utils\Utils.csproj">
+    <ProjectReference Include="..\shared\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>

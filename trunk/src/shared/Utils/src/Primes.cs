@@ -1,4 +1,4 @@
-namespace DSIS.Core.Util
+namespace DSIS.Utils
 {
   public static class Primes
   {

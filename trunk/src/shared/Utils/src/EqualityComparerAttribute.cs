@@ -1,6 +1,6 @@
 using System;
 
-namespace DSIS.Core.Coordinates
+namespace DSIS.Utils
 {
   [AttributeUsage(AttributeTargets.Class |  AttributeTargets.Struct | AttributeTargets.Enum, AllowMultiple = false)]
   public class EqualityComparerAttribute : Attribute

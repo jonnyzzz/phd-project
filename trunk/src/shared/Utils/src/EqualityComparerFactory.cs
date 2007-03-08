@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using DSIS.Utils;
 
-namespace DSIS.Core.Coordinates
+namespace DSIS.Utils
 {
   public static class EqualityComparerFactory<T>
   {

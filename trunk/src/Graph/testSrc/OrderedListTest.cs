@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Util;
 using DSIS.Graph.Util;
+using DSIS.Utils;
 using NUnit.Framework;
 
 namespace DSIS.Graph

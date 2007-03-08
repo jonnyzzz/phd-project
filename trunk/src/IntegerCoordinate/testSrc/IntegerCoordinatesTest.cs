@@ -1,5 +1,6 @@
 using System;
 using DSIS.Core.Util;
+using DSIS.Utils;
 using NUnit.Framework;
 
 namespace DSIS.IntegerCoordinates.Test

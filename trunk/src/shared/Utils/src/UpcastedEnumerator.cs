@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace DSIS.Core.Util
+namespace DSIS.Utils
 {
   public sealed class UpcastedEnumerator<T, TC> : IEnumerator<TC> where T : TC
   {

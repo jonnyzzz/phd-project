@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.BoxIterators;
 using DSIS.Core.Util;
 
 namespace DSIS.IntegerCoordinates

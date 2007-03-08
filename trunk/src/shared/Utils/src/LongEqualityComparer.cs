@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DSIS.Core.Coordinates
+namespace DSIS.Utils
 {
   public class LongEqualityComparer : IEqualityComparer<long>
   {

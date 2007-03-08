@@ -5,6 +5,7 @@
 
 using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
+using DSIS.Utils;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Tests

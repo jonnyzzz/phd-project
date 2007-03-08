@@ -1,6 +1,4 @@
-using DSIS.Core.Util;
-
-namespace DSIS.Util
+namespace DSIS.BoxIterators
 {
   public class LongLBoxIterator : SegmentBoxIterator<long>
   {

@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FA6D5947-51E7-4D99-9D18-D4946901FE80}</ProjectGuid>
+    <ProjectGuid>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.CellImageBuilder.BoxMethod</RootNamespace>
-    <AssemblyName>DSIS.CellImageBuilder.BoxMethod</AssemblyName>
+    <RootNamespace>DSIS.CodeCompiler</RootNamespace>
+    <AssemblyName>DSIS.CodeCompiler</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,36 +38,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\BoxMethod.cs" />
-    <Compile Include="src\BoxMethodSettings.cs" />
-    <Compile Include="testSrc\BoxMethodTest.cs" />
+    <Compile Include="src\CodeCompilerException.cs" />
+    <Compile Include="src\CodeCompilerImpl.cs" />
+    <Compile Include="src\ICodeCompiler.cs" />
+    <Compile Include="testSrc\CodeCompilerImplTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BoxIterators\BoxIterators.csproj">
-      <Project>{B5F40029-7A5F-440D-8A5A-215E032CF89C}</Project>
-      <Name>BoxIterators</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CellImageBuilder.Shared\CellImageBuilder.Shared.csproj">
-      <Project>{C75D0837-A992-41A2-8A46-A1B0F292048C}</Project>
-      <Name>CellImageBuilder.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Mock\Core.Mock.csproj">
-      <Project>{2B4BA54B-9B5E-4D07-B859-FAB1D15203F0}</Project>
-      <Name>Core.Mock</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\shared\Core\Core.csproj">
+    <ProjectReference Include="..\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Function.Mock\Function.Mock.csproj">
-      <Project>{02AFA84E-DA1B-4010-BA76-8E077E4D6175}</Project>
-      <Name>Function.Mock</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinate\IntegerCoordinate.csproj">
-      <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
-      <Name>IntegerCoordinate</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\shared\Utils\Utils.csproj">
+    <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>

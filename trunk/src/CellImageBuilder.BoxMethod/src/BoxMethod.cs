@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using DSIS.BoxIterators;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.Core.System;
