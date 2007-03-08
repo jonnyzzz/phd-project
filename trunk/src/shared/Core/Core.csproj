@@ -47,12 +47,9 @@
     <Compile Include="src\Context\ContextKey.cs" />
     <Compile Include="src\Context\IContext.cs" />
     <Compile Include="src\Context\Impl\ContextImpl.cs" />
-    <Compile Include="src\Coordinates\CellCoordinateEqualityComparer.cs" />
-    <Compile Include="src\Coordinates\DoubleEqualityComparer.cs" />
     <Compile Include="src\Coordinates\ICellCoordinate.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystem.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemConverter.cs" />
-    <Compile Include="src\Coordinates\LongEqualityComparer.cs" />
     <Compile Include="src\Data\IContinuableDataCollectionAnalisys.cs" />
     <Compile Include="src\Data\IDataCollection.cs" />
     <Compile Include="src\Data\IDataCollectionAnalisys.cs" />
@@ -71,11 +68,8 @@
     <Compile Include="src\Processor\ThreadedSymbolicImageConstructionProcess.cs" />
     <Compile Include="src\System\Impl\DefaultSystemSpace.cs" />
     <Compile Include="src\System\ISystemSpace.cs" />
-    <Compile Include="src\Util\BoxIterator.cs" />
     <Compile Include="src\Util\CountEnumerable.cs" />
     <Compile Include="src\Util\EmptyArray.cs" />
-    <Compile Include="src\Util\Hashset.cs" />
-    <Compile Include="src\Util\IntLBoxIterator.cs" />
     <Compile Include="src\Util\IProgressInfo.cs" />
     <Compile Include="src\System\IFunction.cs" />
     <Compile Include="src\System\IFunctionIO.cs" />
@@ -87,22 +81,22 @@
     <Compile Include="src\System\UnsupportedDevivateException.cs" />
     <Compile Include="src\System\UnsupportedFunctionTypeException.cs" />
     <Compile Include="src\System\WrongDimensionException.cs" />
-    <Compile Include="src\Util\LongLBoxIterator.cs" />
-    <Compile Include="src\Util\MergeEnumerable.cs" />
     <Compile Include="src\Util\NotNullAttribute.cs" />
     <Compile Include="src\Util\NullableAttribute.cs" />
     <Compile Include="src\Util\NullProgressInfo.cs" />
-    <Compile Include="src\Util\OrderedList.cs" />
     <Compile Include="src\Util\Pair.cs" />
-    <Compile Include="src\Util\Primes.cs" />
     <Compile Include="src\Util\ProcessInterruptedException.cs" />
-    <Compile Include="src\Util\SegmentBoxIterator.cs" />
-    <Compile Include="src\Util\UpcastedEnumerator.cs" />
     <Compile Include="src\Visualization\ICellToPointConverter.cs" />
     <Compile Include="src\Visualization\IImageBuilder.cs" />
     <Compile Include="src\Visualization\IImageDrawer.cs" />
     <Compile Include="src\Visualization\ImagePoint.cs" />
     <Compile Include="testSrc\Concurrent\SynckQueueTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

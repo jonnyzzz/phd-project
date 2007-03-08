@@ -49,7 +49,7 @@
       <Project>{C75D0837-A992-41A2-8A46-A1B0F292048C}</Project>
       <Name>CellImageBuilder.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\shared\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>

@@ -46,7 +46,7 @@
       <Project>{2B4BA54B-9B5E-4D07-B859-FAB1D15203F0}</Project>
       <Name>Core.Mock</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\shared\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
