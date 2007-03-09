@@ -44,7 +44,7 @@
     <Compile Include="src\IGnuplotScriptGen.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\shared\Core\Core.csproj">
+    <ProjectReference Include="..\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>

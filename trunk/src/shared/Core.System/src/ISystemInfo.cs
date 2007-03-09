@@ -13,11 +13,18 @@ namespace DSIS.Core.System
     IFunction<T> GetFunction<T>();
     IFunction<T> GetDerivateFunction<T>(int derivatePower);
     IFunction<T> GetDerivateFunction<T>(int[] unsimmetricDerivate);
-
-    Q ProcessFunctionTree<Q>(IFunctionTreeVisitor<Q> visitor);
-
+    
     Type[] SupportedFunctionTypes { get; }
 
     ISystemSpace SystemSpace { get; }
+  }
+
+  /// <summary>
+  /// Extension to get access to FunctionTree. 
+  /// </summary>
+  [Obsolete("Please contact developers before use")]
+  public interface ISystemInfoCodeTree
+  {
+    Q ProcessFunctionTree<Q>(IFunctionTreeVisitor<Q> visitor);
   }
 }
