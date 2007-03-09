@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "shared\Core\Core.csproj", "{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegerCoordinate", "IntegerCoordinate\IntegerCoordinate.csproj", "{D083C004-D65D-484B-8E8F-77B37D17C9F4}"
 EndProject
