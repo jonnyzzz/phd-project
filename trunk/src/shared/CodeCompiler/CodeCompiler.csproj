@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\CodeCompiler.cs" />
     <Compile Include="src\CodeCompilerException.cs" />
     <Compile Include="src\CodeCompilerImpl.cs" />
     <Compile Include="src\ICodeCompiler.cs" />

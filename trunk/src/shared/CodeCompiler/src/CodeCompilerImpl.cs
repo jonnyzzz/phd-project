@@ -5,7 +5,7 @@ using DSIS.Utils;
 
 namespace DSIS.CodeCompiler
 {
-  public class CodeCompilerImpl : ICodeCompiler
+  internal class CodeCompilerImpl : ICodeCompiler
   {
     public Assembly CompileCSharpCode(string code, params Type[] referedTypes)
     {
