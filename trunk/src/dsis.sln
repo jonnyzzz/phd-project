@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxIterators", "BoxIterator
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProcessors", "TemplateProcessors\TemplateProcessors.csproj", "{D46F95D7-FF24-4890-9C60-0B3D7921934F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.System", "shared\Core.System\Core.System.csproj", "{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,5 +113,6 @@ Global
 		{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE} = {B41724D1-0224-4A61-A83A-37FD89881D44}
 		{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E} = {B41724D1-0224-4A61-A83A-37FD89881D44}
 		{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9} = {B41724D1-0224-4A61-A83A-37FD89881D44}
+		{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE} = {B41724D1-0224-4A61-A83A-37FD89881D44}
 	EndGlobalSection
 EndGlobal

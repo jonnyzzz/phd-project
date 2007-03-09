@@ -66,21 +66,9 @@
     <Compile Include="src\Processor\ProcessDelegate.cs" />
     <Compile Include="src\Processor\SymbolicImageConstructionProcess.cs" />
     <Compile Include="src\Processor\ThreadedSymbolicImageConstructionProcess.cs" />
-    <Compile Include="src\System\Impl\DefaultSystemSpace.cs" />
-    <Compile Include="src\System\ISystemSpace.cs" />
     <Compile Include="src\Util\CountEnumerable.cs" />
     <Compile Include="src\Util\EmptyArray.cs" />
     <Compile Include="src\Util\IProgressInfo.cs" />
-    <Compile Include="src\System\IFunction.cs" />
-    <Compile Include="src\System\IFunctionIO.cs" />
-    <Compile Include="src\System\IFunctionParser.cs" />
-    <Compile Include="src\System\ISystemInfo.cs" />
-    <Compile Include="src\System\ParserErrorException.cs" />
-    <Compile Include="src\System\Tree\IFunctionNode.cs" />
-    <Compile Include="src\System\Tree\IFunctionTreeVisitor.cs" />
-    <Compile Include="src\System\UnsupportedDevivateException.cs" />
-    <Compile Include="src\System\UnsupportedFunctionTypeException.cs" />
-    <Compile Include="src\System\WrongDimensionException.cs" />
     <Compile Include="src\Util\NotNullAttribute.cs" />
     <Compile Include="src\Util\NullableAttribute.cs" />
     <Compile Include="src\Util\NullProgressInfo.cs" />
@@ -93,6 +81,10 @@
     <Compile Include="testSrc\Concurrent\SynckQueueTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>

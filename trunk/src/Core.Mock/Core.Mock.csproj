@@ -38,6 +38,10 @@
     <Compile Include="testSrc\MockCollectingCellConnectionBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\shared\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
+    </ProjectReference>
     <ProjectReference Include="..\shared\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>

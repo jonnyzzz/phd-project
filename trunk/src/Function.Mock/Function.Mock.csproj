@@ -41,13 +41,13 @@
     <Compile Include="src\MockSystemInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\shared\Core\Core.csproj">
-      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Function.Predefined\Function.Predefined.csproj">
       <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
       <Name>Function.Predefined</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\shared\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
