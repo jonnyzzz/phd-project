@@ -23,7 +23,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
     private double[] yRight;
     private double[] y;
     private double[] eps;
-    private BoxIterator<double> myIterator;
+    private IBoxIterator<double> myIterator;
 
     private double[] myCellSize;
     private double[] myCellSizeHalf;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
@@ -25,5 +26,20 @@ namespace DSIS.Graph.Abstract
     }
 
     #endregion
+  }
+
+  internal class INodeEqualityComparer<T> : IEqualityComparer<T> where T:ICellCoordinate<T>
+  {
+    private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
+
+    public bool Equals(T x, T y)
+    {
+      return COMPARER.Equals(x, y);
+    }
+
+    public int GetHashCode(T obj)
+    {
+      return COMPARER.GetHashCode(obj);
+    }
   }
 }

@@ -8,6 +8,14 @@ namespace DSIS.Utils
   {
     private static IEqualityComparer<T> myComparer = null;
 
+    private static TA GetAttributeInstance<TA>() where TA : Attribute
+    {
+      Type type = typeof (T);
+      object[] os = type.GetCustomAttributes(typeof (TA), true);
+      return os.Length > 0 ? (TA) os[0] : default(TA);
+    }
+
+    //todo: Append attribute search login to find exact type.
     public static IEqualityComparer<T> GetComparer()
     {
       if (myComparer != null)
@@ -19,19 +27,26 @@ namespace DSIS.Utils
       }
       else if (typeof(double) == typeof(T))
       {
-        myComparer = (IEqualityComparer<T>)DoubleEqualityComparer.INSTANCE;
+        myComparer = (IEqualityComparer<T>) DoubleEqualityComparer.INSTANCE;
       }
       else
-      {       
-        object[] attrs = typeof (T).GetCustomAttributes(typeof (EqualityComparerAttribute), false);
-        if (attrs.Length == 0)
+      {
+        EqualityComparerAttribute at = GetAttributeInstance<EqualityComparerAttribute>();
+        if (at != null)
         {
-          myComparer = EqualityComparer<T>.Default;
+          Type comparer;
+          if (at.Comparer.IsGenericTypeDefinition && typeof(T).IsGenericType)
+          {            
+            comparer = at.Comparer.MakeGenericType(typeof(T).GetGenericArguments());
+          } else
+          {
+            comparer = at.Comparer;
+          }
+          myComparer = (IEqualityComparer<T>) Activator.CreateInstance(comparer);
         }
         else
         {
-          EqualityComparerAttribute at = (EqualityComparerAttribute) attrs[0];
-          myComparer = (IEqualityComparer<T>) Activator.CreateInstance(at.Comparer);
+          myComparer = EqualityComparer<T>.Default;
         }
       }
 

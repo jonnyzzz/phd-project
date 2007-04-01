@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract

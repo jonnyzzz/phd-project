@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Utils;
 
@@ -115,6 +116,11 @@ namespace DSIS.BoxIterators
           else break;
         }
       }
+    }
+
+    public IEnumerable<T[]> EnumerateBox(T[] left, T[] right)
+    {
+      throw new NotImplementedException();
     }
   }
 }

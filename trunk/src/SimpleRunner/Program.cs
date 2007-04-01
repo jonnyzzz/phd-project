@@ -18,13 +18,14 @@ using DSIS.GnuplotDrawer;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Adapter;
+using DSIS.Graph.Entropy;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
 {
   internal class Program
   {
-    private const int STEPS = 10;
+    private const int STEPS =6;
     private static string myWorkPath;
     private static string myHomePath;
 
@@ -54,14 +55,14 @@ namespace DSIS.SimpleRunner
         DateTime now = DateTime.Now;
         tw.WriteLine("Started at {0}", now);
 
-        DateTime finish = Method(build, settings);
+        DateTime finish = Method(build, settings, tw);
 
         tw.WriteLine("Finished at {0}", finish);
         tw.WriteLine("Time spent {0} ms", (finish - now).TotalMilliseconds);
       }
     }
 
-    public static DateTime Method(ICellImageBuilder<IntegerCoordinate> build, ICellImageBuilderSettings settings)
+    public static DateTime Method(ICellImageBuilder<IntegerCoordinate> build, ICellImageBuilderSettings settings, TextWriter tw)
     {
       DefaultSystemSpace sp = GetSystemSpace();
       IntegerCoordinateSystem cs = new IntegerCoordinateSystem(sp);
@@ -81,14 +82,14 @@ namespace DSIS.SimpleRunner
             )
           );
 
-      return DoConstruct(build, ctx, graph);
+      return DoConstruct(build, ctx, graph, tw);
     }
 
     private static ISystemInfo GetFunction(DefaultSystemSpace sp)
     {
 //      return new JuliaFuctionSystemInfoDecorator(sp);
-      return new IkedaFunctionSystemInfoDecorator(sp);
-//      return new HenonFunctionSystemInfoDecorator(sp, 1.4);
+//      return new IkedaFunctionSystemInfoDecorator(sp);
+      return new HenonFunctionSystemInfoDecorator(sp, 1.4);
 //      return new DelayedFunctionSystemInfo(sp, 2.27);
       //return new FoodChainSystemInfo(sp);
     }
@@ -100,9 +101,7 @@ namespace DSIS.SimpleRunner
       //return new DefaultSystemSpace(3, new double[] {0.001, 0.001, 0.001}, new double[] {10, 10, 10}, new long[] {2, 2, 2});
     }
 
-    private static DateTime DoConstruct(ICellImageBuilder<IntegerCoordinate> boxMethod,
-                                        CellProcessorContext<IntegerCoordinate, IntegerCoordinate> ctx,
-                                        TarjanGraph<IntegerCoordinate> graph)
+    private static DateTime DoConstruct(ICellImageBuilder<IntegerCoordinate> boxMethod, CellProcessorContext<IntegerCoordinate, IntegerCoordinate> ctx, TarjanGraph<IntegerCoordinate> graph, TextWriter tw)
     {
       SymbolicImageConstructionProcess<IntegerCoordinate, IntegerCoordinate> proc
         = new SymbolicImageConstructionProcess<IntegerCoordinate, IntegerCoordinate>();
@@ -141,7 +140,25 @@ namespace DSIS.SimpleRunner
                     myWorkPath,
                     boxMethod.GetType().Name, gnuplotPath, comps);
 
+      ComputeEntropy(comps, graph, tw);
+
       return time;
+    }
+
+    private static void ComputeEntropy(IGraphStrongComponents<IntegerCoordinate> comps, TarjanGraph<IntegerCoordinate> graph, TextWriter tw)
+    {
+      Console.Out.WriteLine("Begin Entropy Computation");
+      DateTime start = DateTime.Now;
+      
+      double entropy = 
+        EntropyEvaluator.GetEntropyEvaluator().ComputeEntropy(NullProgressInfo.INSTANCE, graph, comps);
+
+      TimeSpan sp = DateTime.Now - start;
+      Console.Out.WriteLine("Completed in {0} ms", sp.TotalMilliseconds);
+      tw.WriteLine("Completed in {0} ms", sp.TotalMilliseconds);
+
+      Console.Out.WriteLine("Entropy = {0}", entropy);
+      tw.WriteLine("Entropy = {0}", entropy);
     }
 
     private static int DumpAndGetCount(IGraphStrongComponents<IntegerCoordinate> cmops)
