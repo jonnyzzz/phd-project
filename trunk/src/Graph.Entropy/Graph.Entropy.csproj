@@ -58,9 +58,9 @@
       <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
       <Name>Graph</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinate\IntegerCoordinate.csproj">
+    <ProjectReference Include="..\IntegerCoordinate\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
-      <Name>IntegerCoordinate</Name>
+      <Name>IntegerCoordinates</Name>
     </ProjectReference>
     <ProjectReference Include="..\shared\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>

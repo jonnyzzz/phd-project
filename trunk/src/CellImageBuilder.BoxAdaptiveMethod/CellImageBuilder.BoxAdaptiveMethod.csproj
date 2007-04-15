@@ -75,9 +75,9 @@
       <Project>{02AFA84E-DA1B-4010-BA76-8E077E4D6175}</Project>
       <Name>Function.Mock</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinate\IntegerCoordinate.csproj">
+    <ProjectReference Include="..\IntegerCoordinate\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
-      <Name>IntegerCoordinate</Name>
+      <Name>IntegerCoordinates</Name>
     </ProjectReference>
     <ProjectReference Include="..\shared\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>

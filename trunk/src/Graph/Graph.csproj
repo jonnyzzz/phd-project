@@ -92,9 +92,9 @@
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinate\IntegerCoordinate.csproj">
+    <ProjectReference Include="..\IntegerCoordinate\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
-      <Name>IntegerCoordinate</Name>
+      <Name>IntegerCoordinates</Name>
     </ProjectReference>
     <ProjectReference Include="..\shared\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>

@@ -45,7 +45,7 @@ namespace DSIS.IntegerCoordinates.Test
       DoTestAbstract(
         delegate(ICellConnectionBuilder<IntegerCoordinate> ad)
           {
-            RadiusProcessor ps = new RadiusProcessor(myIcs);
+            IRadiusProcessor ps = new RadiusProcessor(myIcs);
              ad.ConnectToMany(null, ps.ConnectCellToRadius(point, perc));
           },
         assert);

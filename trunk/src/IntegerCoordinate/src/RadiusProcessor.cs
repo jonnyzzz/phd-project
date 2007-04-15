@@ -3,7 +3,7 @@ using DSIS.Core.Util;
 
 namespace DSIS.IntegerCoordinates
 {
-  public sealed class RadiusProcessor : RectProcessorBase
+  public sealed class RadiusProcessor : RectProcessorBase, IRadiusProcessor
   {
     public RadiusProcessor(IntegerCoordinateSystem coordinateSystem) : base(coordinateSystem)
     {

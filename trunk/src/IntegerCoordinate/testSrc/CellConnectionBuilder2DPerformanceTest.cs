@@ -31,7 +31,7 @@ namespace DSIS.IntegerCoordinates.Test
     [Test]
     public void Test_radius()
     {
-      RadiusProcessor pr = new RadiusProcessor(myIcs);
+      IRadiusProcessor pr = new RadiusProcessor(myIcs);
       double[] left = new double[] {1, 1};
       double[] eps = new double[] {2.1, 5.1};
       for (int i = 0; i < 300; i++)

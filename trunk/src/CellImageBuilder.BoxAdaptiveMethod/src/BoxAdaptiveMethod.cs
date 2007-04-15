@@ -32,7 +32,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private BoxIterator<Divide> myIterator;
 
     private OverlappingProcessor myOverlappingProcessor;
-    private RadiusProcessor myRadiusProcessor;
+    private IRadiusProcessor myRadiusProcessor;
 
     private Queue<Pair<Point, Point>> myQueue = new Queue<Pair<Point, Point>>();
     private List<IntegerCoordinate> myPoints = new List<IntegerCoordinate>(10000);

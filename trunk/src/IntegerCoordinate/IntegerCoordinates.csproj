@@ -47,6 +47,7 @@
     <Compile Include="src\IntegerCoordinateSystem.cs" />
     <Compile Include="src\IntegerCoordinateSystemBase.cs" />
     <Compile Include="src\IntegerCoordinateSystemFactory.cs" />
+    <Compile Include="src\IRadiusProcessor.cs" />
     <Compile Include="src\LongLBoxFixedDimentionMulIterator.cs" />
     <Compile Include="src\OverlappingProcessor.cs" />
     <Compile Include="src\RadiusProcessor.cs" />
