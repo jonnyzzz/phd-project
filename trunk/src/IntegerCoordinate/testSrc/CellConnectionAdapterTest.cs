@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Core.Builders;
 using DSIS.Core.Mock;
 
 namespace DSIS.IntegerCoordinates.Test
@@ -10,14 +11,11 @@ namespace DSIS.IntegerCoordinates.Test
       MockCollectingCellConnectionBuilder<IntegerCoordinate> mcm =
         new MockCollectingCellConnectionBuilder<IntegerCoordinate>();
 
-      IntegerCoordinateCellImageBuilderAdapter ad =
-        new IntegerCoordinateCellImageBuilderAdapter(mcm, ics);
-
-      bld(ad);
+      bld(mcm);
 
       return mcm.Result;
     }
 
-    protected delegate void DoBuild(IntegerCoordinateCellImageBuilderAdapter ad);
+    protected delegate void DoBuild(ICellConnectionBuilder<IntegerCoordinate> bld);
   }
 }

@@ -10,7 +10,7 @@ namespace DSIS.Utils
 
     public Hashset()
     {
-      mySet = new Dictionary<T, T>();
+      mySet = new Dictionary<T, T>(EqualityComparerFactory<T>.GetComparer());
     }
 
     public Hashset(IEqualityComparer<T> comparer)

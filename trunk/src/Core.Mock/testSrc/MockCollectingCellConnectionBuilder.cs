@@ -8,8 +8,6 @@ namespace DSIS.Core.Mock
   {
     private List<T> myResult = new List<T>();
 
-    #region ICellConnectionBuilder<T> Members
-
     public void ConnectToMany(T cell, IEnumerable<T> v)
     {
       myResult.AddRange(v);
@@ -19,8 +17,6 @@ namespace DSIS.Core.Mock
     {
       myResult.Add(v);
     }
-
-    #endregion
 
     public List<T> Result
     {

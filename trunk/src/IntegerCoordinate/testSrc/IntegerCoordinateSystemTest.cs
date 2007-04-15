@@ -63,8 +63,8 @@ namespace DSIS.IntegerCoordinates.Tests
 
       c.ForEach(delegate(IntegerCoordinate ic)
                   {
-                    long coordinate1 = ic.Coordinate[0];
-                    long coordinate2 = ic.Coordinate[1];
+                    long coordinate1 = ic.GetCoordinate(0);
+                    long coordinate2 = ic.GetCoordinate(1);
                     bs[coordinate1][coordinate2] = true;
                   });
 
@@ -81,16 +81,16 @@ namespace DSIS.IntegerCoordinates.Tests
     public void Test_05()
     {
       IntegerCoordinate c = myCS.FromPoint(new double[] {0, 0});
-      Assert.AreEqual(0, c.Coordinate[0]);
-      Assert.AreEqual(0, c.Coordinate[1]);
+      Assert.AreEqual(0, c.GetCoordinate(0));
+      Assert.AreEqual(0, c.GetCoordinate(1));
     }
 
     [Test]
     public void Test_06()
     {
       IntegerCoordinate c = myCS.FromPoint(new double[] {0.1, 0.1});
-      Assert.AreEqual(0, c.Coordinate[0]);
-      Assert.AreEqual(0, c.Coordinate[1]);
+      Assert.AreEqual(0, c.GetCoordinate(0));
+      Assert.AreEqual(0, c.GetCoordinate(1));
     }
 
     [Test]

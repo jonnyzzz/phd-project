@@ -64,10 +64,11 @@ namespace DSIS.Graph.Entropy
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
-                 INode<IntegerCoordinate> n1 = graph.AddNode(new IntegerCoordinate(1));
-                 INode<IntegerCoordinate> n2 = graph.AddNode(new IntegerCoordinate(2));
-                 INode<IntegerCoordinate> n3 = graph.AddNode(new IntegerCoordinate(3));
-                 INode<IntegerCoordinate> n4 = graph.AddNode(new IntegerCoordinate(4));
+                 IntegerCoordinateSystem system = (IntegerCoordinateSystem) graph.CoordinateSystem;
+                 INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
+                 INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
+                 INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));
+                 INode<IntegerCoordinate> n4 = graph.AddNode(system.Create(4));
 
                  graph.AddEdgeToNode(n1, n2);
                  graph.AddEdgeToNode(n2, n3);
@@ -80,10 +81,11 @@ namespace DSIS.Graph.Entropy
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
-                 INode<IntegerCoordinate> n1 = graph.AddNode(new IntegerCoordinate(1));
-                 INode<IntegerCoordinate> n2 = graph.AddNode(new IntegerCoordinate(2));
-                 INode<IntegerCoordinate> n3 = graph.AddNode(new IntegerCoordinate(3));
-                 INode<IntegerCoordinate> n4 = graph.AddNode(new IntegerCoordinate(4));
+                 IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
+                 INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
+                 INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
+                 INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));
+                 INode<IntegerCoordinate> n4 = graph.AddNode(system.Create(4));
 
                  graph.AddEdgeToNode(n1, n2);
                  graph.AddEdgeToNode(n2, n3);

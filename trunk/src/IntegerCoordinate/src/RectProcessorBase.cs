@@ -9,10 +9,10 @@ namespace DSIS.IntegerCoordinates
     protected readonly long[] myRight;
     protected readonly long[] myPoint;
     protected readonly int myDim;
-    protected readonly IIntegerCoordinateSystem myCoordinateSystem;
+    protected readonly IntegerCoordinateSystem myCoordinateSystem;
     protected readonly ISystemSpace mySystemSpace;
 
-    public RectProcessorBase(IIntegerCoordinateSystem coordinateSystem)
+    public RectProcessorBase(IntegerCoordinateSystem coordinateSystem)
     {
       myCoordinateSystem = coordinateSystem;
       mySystemSpace = myCoordinateSystem.SystemSpace;

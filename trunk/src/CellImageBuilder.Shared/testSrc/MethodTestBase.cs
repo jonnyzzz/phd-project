@@ -21,13 +21,13 @@ namespace DSIS.CellImageBuilder.Shared
     where TP : ICellImageBuilderSettings
   {
     public static List<IntegerCoordinate> DoTest(
-      IntegerCoordinateSystem sys,
+      IIntegerCoordinateSystem<IntegerCoordinate> sys,
       IntegerCoordinate test,
       ComputeFunction<double> compute,
       TP p)
     {
       MockSystemInfo<double> func = new MockSystemInfo<double>(compute, sys.SystemSpace);
-      IntegerCoordinateSystem cs = new IntegerCoordinateSystem(sys.SystemSpace);
+      IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(sys.SystemSpace);
 
       MockCollectingCellConnectionBuilder<IntegerCoordinate> man =
         new MockCollectingCellConnectionBuilder<IntegerCoordinate>();
@@ -36,7 +36,7 @@ namespace DSIS.CellImageBuilder.Shared
         new CellImageBuilderContext<IntegerCoordinate>(
           func,
           p,
-          cs,
+          ics,
           man
           );
 
@@ -49,7 +49,7 @@ namespace DSIS.CellImageBuilder.Shared
     }
 
     public static void DoTwoDimTest(
-      IntegerCoordinateSystem ics,
+      IIntegerCoordinateSystem<IntegerCoordinate> ics,
       IntegerCoordinate test,
       ComputeFunction<double> f, TP settins, string gold)
     {
@@ -58,7 +58,7 @@ namespace DSIS.CellImageBuilder.Shared
     }
 
     public static List<IntegerCoordinate> DoTestOneDimension(
-      IntegerCoordinateSystem ics,
+      IIntegerCoordinateSystem<IntegerCoordinate> ics,
       double coord, ComputeOneFunction<double> func, TP eps)
     {
       return DoTest(
@@ -73,12 +73,12 @@ namespace DSIS.CellImageBuilder.Shared
       ComputeOneFunction<double> func, double fl, double fr)
     {
       MockSystemSpace ss = new MockSystemSpace(1, l, r, g);
-      IntegerCoordinateSystem ics = new IntegerCoordinateSystem(ss);
+      IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(ss);
 
       List<IntegerCoordinate> list = DoTestOneDimension(ics, coord, func, eps);
       List<long> result =
         list.ConvertAll<long>(
-          delegate(IntegerCoordinate input) { return ((IIntegerCoordinateDebug) input).Coordinate[0]; });
+          delegate(IntegerCoordinate input) { return input.GetCoordinate(0); });
       result.Sort();
 
       IntegerCoordinate ifl = ics.FromPoint(new double[] {fl});
@@ -87,8 +87,8 @@ namespace DSIS.CellImageBuilder.Shared
       Assert.IsNotNull(ifl);
       Assert.IsNotNull(ifr);
 
-      long[] cifl = ((IIntegerCoordinateDebug) ifl).Coordinate;
-      long[] cirt = ((IIntegerCoordinateDebug) ifr).Coordinate;
+      long[] cifl = ((IIntegerCoordinateDebug) ifl).GetCoordinates();
+      long[] cirt = ((IIntegerCoordinateDebug) ifr).GetCoordinates();
 
       Assert.IsTrue(cirt.Length > 0);
       Assert.IsTrue(cifl.Length > 0);

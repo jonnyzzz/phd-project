@@ -38,13 +38,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\IIntegerCoordinateCellImageBuilderAdapter.cs" />
+    <Compile Include="src\Generated\IntegerCoordinate2d.cs" />
     <Compile Include="src\IIntegerCoordinateSystem.cs" />
+    <Compile Include="src\IIntegerCoordinate.cs" />
     <Compile Include="src\IntegerCoordinate.cs" />
     <Compile Include="src\IntegerCoordinateCellConverter.cs" />
-    <Compile Include="src\IntegerCoordinateCellImageBuilderAdapter.cs" />
     <Compile Include="src\IntegerCoordinateEqualityComparer.cs" />
     <Compile Include="src\IntegerCoordinateSystem.cs" />
+    <Compile Include="src\IntegerCoordinateSystemBase.cs" />
+    <Compile Include="src\IntegerCoordinateSystemFactory.cs" />
     <Compile Include="src\LongLBoxFixedDimentionMulIterator.cs" />
     <Compile Include="src\OverlappingProcessor.cs" />
     <Compile Include="src\RadiusProcessor.cs" />

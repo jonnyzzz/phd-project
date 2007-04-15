@@ -16,7 +16,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
     {
       const double factor = 1;
       MockSystemSpace ss = new MockSystemSpace(2, new double[] {-1, -1}, new double[] {1, 1}, new long[] {100, 100});
-      IntegerCoordinateSystem ics = new IntegerCoordinateSystem(ss);
+      IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(ss);
       MockSystemInfo<double> si = new MockSystemInfo<double>(delegate(double[] ins, double[] outs)
                                                                {
                                                                  for (int i = 0; i < outs.Length; i++)
@@ -30,7 +30,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
 
       for (int i = 30; i < 60; i++)
         for (int j = 40; j < 70; j++)
-          m.BuildImage(new IntegerCoordinate(i, j));
+          m.BuildImage(ics.Create(i, j));
 
       long mem = GC.GetTotalMemory(true);
 

@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.System", "shared\Core.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Entropy", "Graph.Entropy\Graph.Entropy.csproj", "{43283F9D-A669-47B2-80FD-FFA447A4BD7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceChecks", "PerformanceChecks\PerformanceChecks.csproj", "{5B18F64F-452B-4155-94A7-B47CFF2FEDF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{43283F9D-A669-47B2-80FD-FFA447A4BD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43283F9D-A669-47B2-80FD-FFA447A4BD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43283F9D-A669-47B2-80FD-FFA447A4BD7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B18F64F-452B-4155-94A7-B47CFF2FEDF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B18F64F-452B-4155-94A7-B47CFF2FEDF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B18F64F-452B-4155-94A7-B47CFF2FEDF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B18F64F-452B-4155-94A7-B47CFF2FEDF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

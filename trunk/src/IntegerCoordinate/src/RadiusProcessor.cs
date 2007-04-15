@@ -5,11 +5,11 @@ namespace DSIS.IntegerCoordinates
 {
   public sealed class RadiusProcessor : RectProcessorBase
   {
-    public RadiusProcessor(IIntegerCoordinateSystem coordinateSystem) : base(coordinateSystem)
+    public RadiusProcessor(IntegerCoordinateSystem coordinateSystem) : base(coordinateSystem)
     {
     }
 
-    public IEnumerable<IntegerCoordinate> ConnectCellToRectInternal(double[] point, double[] radius)
+    public IEnumerable<IntegerCoordinate> ConnectCellToRadius(double[] point, double[] radius)
     {
       if (!mySystemSpace.Contains(point))
         return EmptyArray<IntegerCoordinate>.Instance;

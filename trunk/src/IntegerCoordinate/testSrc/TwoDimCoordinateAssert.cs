@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using DSIS.Core.Util;
 using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Test
 {
   public static class TwoDimCoordinateAssert
   {
-    private static string Write(IntegerCoordinateSystem ics, IList<IntegerCoordinate> list)
+    private static string Write(IIntegerCoordinateSystem<IntegerCoordinate> ics, IList<IntegerCoordinate> list)
     {
       Hashset<IntegerCoordinate> hs = new Hashset<IntegerCoordinate>();
       hs.AddRange(list);
@@ -37,7 +36,7 @@ namespace DSIS.IntegerCoordinates.Test
       return sb.ToString();
     }
 
-    public static void Assert(IntegerCoordinateSystem ics, IList<IntegerCoordinate> list, string assert)
+    public static void Assert(IIntegerCoordinateSystem<IntegerCoordinate> ics, IList<IntegerCoordinate> list, string assert)
     {
       string s = Write(ics, list);
       try

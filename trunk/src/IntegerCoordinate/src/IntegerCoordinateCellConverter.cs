@@ -21,8 +21,6 @@ namespace DSIS.IntegerCoordinates
       myBoxIterator = new LongLBoxFixedDimentionMulIterator(myDim);
     }
 
-    #region ICellCoordinateSystemConverter<IntegerCoordinate,IntegerCoordinate> Members
-
     public long[] Division
     {
       get { return myDivision; }
@@ -35,7 +33,7 @@ namespace DSIS.IntegerCoordinates
 
     public IEnumerable<IntegerCoordinate> Subdivide(IntegerCoordinate coordinate)
     {
-      long[] v = coordinate.Coordinate;
+      long[] v =coordinate.myCoordinate;
 
       foreach (long[] longs in myBoxIterator.Iterate(v, myDivision))
       {
@@ -47,7 +45,5 @@ namespace DSIS.IntegerCoordinates
     {
       get { return myToSystem; }
     }
-
-    #endregion
   }
 }

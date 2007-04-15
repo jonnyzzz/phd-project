@@ -12,7 +12,7 @@ namespace DSIS.Graph.Test
   {
     protected IGraphWithStrongComponent<IntegerCoordinate> myGraph;
     protected IGraphStrongComponents<IntegerCoordinate> myComponents = null;
-    protected IntegerCoordinateSystem mySystem;
+    protected IIntegerCoordinateSystem<IntegerCoordinate> mySystem;
     private int myNodeId;
 
     public void ComputeComponents()
@@ -23,7 +23,7 @@ namespace DSIS.Graph.Test
     [SetUp]
     public virtual void SetUp()
     {
-      mySystem = new IntegerCoordinateSystem(new MockSystemSpace(1, 0, 1, 1000));
+      mySystem = IntegerCoordinateSystemFactory.Create(new MockSystemSpace(1, 0, 1, 1000));
       myGraph = CreateGraph();
       myNodeId = 0;
     }
@@ -40,7 +40,7 @@ namespace DSIS.Graph.Test
 
     protected INode<IntegerCoordinate> CreateNode()
     {
-      return myGraph.AddNode(new IntegerCoordinate(myNodeId++));
+      return myGraph.AddNode(((IntegerCoordinateSystem)myGraph.CoordinateSystem).Create(myNodeId++));
     }
 
     protected List<IStrongComponentInfo> OneComponent
@@ -75,7 +75,7 @@ namespace DSIS.Graph.Test
       {
         INode<IntegerCoordinate> n1;
         n1 = n2;
-        n2 = myGraph.AddNode(new IntegerCoordinate(offset + (i + 1)*factor));
+        n2 = myGraph.AddNode(mySystem.Create(offset + (i + 1)*factor));
         if (n == null)
           n = n2;
         if (n1 != null)

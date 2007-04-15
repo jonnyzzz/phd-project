@@ -25,7 +25,7 @@ namespace DSIS.Graph.Test
     [Test]
     public void Test_02()
     {
-      myGraph.AddNode(new IntegerCoordinate(1));
+      myGraph.AddNode(mySystem.Create(1));
       Assert.AreEqual(1, myGraph.ComponentCount);
     }
 
@@ -39,7 +39,7 @@ namespace DSIS.Graph.Test
     [Test]
     public void Test_04()
     {
-      INode<IntegerCoordinate> node = myGraph.AddNode(new IntegerCoordinate(1));
+      INode<IntegerCoordinate> node = myGraph.AddNode(mySystem.Create(1));
       Assert.AreEqual(1, myGraph.ComponentCount);
 
       foreach (INode<IntegerCoordinate> n in myGraph.GetNodes(OneComponent))
@@ -55,9 +55,9 @@ namespace DSIS.Graph.Test
     [Test]
     public void Test_05()
     {
-      INode<IntegerCoordinate> n1 = myGraph.AddNode(new IntegerCoordinate(1));
+      INode<IntegerCoordinate> n1 = myGraph.AddNode(mySystem.Create(1));
       Assert.AreEqual(1, myGraph.ComponentCount);
-      INode<IntegerCoordinate> n2 = myGraph.AddNode(new IntegerCoordinate(1));
+      INode<IntegerCoordinate> n2 = myGraph.AddNode(mySystem.Create(1));
       Assert.AreEqual(n1, n2);
       Assert.AreSame(n1, n2);
       Assert.AreEqual(1, myGraph.NodesCount);
@@ -67,18 +67,18 @@ namespace DSIS.Graph.Test
     [Test]
     public void Test_06()
     {
-      myGraph.AddNode(new IntegerCoordinate(1));
+      myGraph.AddNode(mySystem.Create(1));
       Assert.AreEqual(1, myGraph.ComponentCount);
-      myGraph.AddNode(new IntegerCoordinate(2));
+      myGraph.AddNode(mySystem.Create(2));
       Assert.AreEqual(2, myGraph.ComponentCount);
     }
 
     [Test]
     public void Test_07()
     {
-      INode<IntegerCoordinate> n1 = myGraph.AddNode(new IntegerCoordinate(1));
+      INode<IntegerCoordinate> n1 = myGraph.AddNode(mySystem.Create(1));
       Assert.AreEqual(1, myGraph.ComponentCount);
-      INode<IntegerCoordinate> n2 = myGraph.AddNode(new IntegerCoordinate(2));
+      INode<IntegerCoordinate> n2 = myGraph.AddNode(mySystem.Create(2));
       Assert.AreEqual(2, myGraph.ComponentCount);
 
       myGraph.AddEdgeToNode(n1, n2);
@@ -90,9 +90,9 @@ namespace DSIS.Graph.Test
     {
       DoTest(delegate
                {
-                 INode<IntegerCoordinate> n1 = myGraph.AddNode(new IntegerCoordinate(1));
+                 INode<IntegerCoordinate> n1 = myGraph.AddNode(mySystem.Create(1));
                  Assert.AreEqual(1, myGraph.ComponentCount);
-                 INode<IntegerCoordinate> n2 = myGraph.AddNode(new IntegerCoordinate(2));
+                 INode<IntegerCoordinate> n2 = myGraph.AddNode(mySystem.Create(2));
                  Assert.AreEqual(2, myGraph.ComponentCount);
 
                  myGraph.AddEdgeToNode(n1, n2);

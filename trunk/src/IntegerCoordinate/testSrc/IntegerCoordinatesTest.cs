@@ -1,5 +1,4 @@
 using System;
-using DSIS.Core.Util;
 using DSIS.Utils;
 using NUnit.Framework;
 
@@ -11,7 +10,7 @@ namespace DSIS.IntegerCoordinates.Test
     private static void DoEqTest(params long[] l)
     {
       IntegerCoordinate ic = new IntegerCoordinate(l);
-      IntegerCoordinate ic2 = ic.Clone();
+      IntegerCoordinate ic2 = new IntegerCoordinate(l);
       IntegerCoordinate ic3 = new IntegerCoordinate((long[]) l.Clone());
 
       Hashset<IntegerCoordinate> hs = new Hashset<IntegerCoordinate>();
@@ -51,14 +50,14 @@ namespace DSIS.IntegerCoordinates.Test
       IntegerCoordinate c2 = new IntegerCoordinate(new long[] {1, 2});
 
       Assert.AreNotEqual(c1, c2);
-      Assert.IsFalse(c1.Equals(c2));
+      Assert.IsFalse(c1.Comparer.Equals(c1, c2));
     }
 
     [Test]
     public void Test_03()
     {
       IntegerCoordinate c = new IntegerCoordinate(new long[] {1});
-      Assert.IsTrue(c.GetHashCode() >= 0);
+      Assert.IsTrue(c.Comparer.GetHashCode() >= 0);
     }
 
     [Test]

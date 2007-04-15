@@ -14,12 +14,13 @@ namespace DSIS.Graph.Tests
   public class SimpleGraphTest
   {
     private SimpleGraph<IntegerCoordinate> myGraph;
+    private IIntegerCoordinateSystem<IntegerCoordinate> mySystem;
 
     [SetUp]
     public void SetUp()
     {
-      myGraph = new SimpleGraph<IntegerCoordinate>(
-        new IntegerCoordinateSystem(new MockSystemSpace(5, 0, 1, 100)));
+      mySystem = IntegerCoordinateSystemFactory.Create(new MockSystemSpace(5, 0, 1, 100));
+      myGraph = new SimpleGraph<IntegerCoordinate>(mySystem);
     }
 
     [TearDown]
@@ -43,8 +44,8 @@ namespace DSIS.Graph.Tests
     [Test]
     public void Test_03()
     {
-      myGraph.AddNode(new IntegerCoordinate(new long[] {1, 1, 1, 1, 1}));
-      myGraph.AddNode(new IntegerCoordinate(new long[] {2, 1, 1, 1, 1}));
+      myGraph.AddNode(mySystem.Create(new long[] {1, 1, 1, 1, 1}));
+      myGraph.AddNode(mySystem.Create(new long[] {2, 1, 1, 1, 1}));
 
       Assert.AreEqual(2, myGraph.NodesCount);
       Assert.AreEqual(0, myGraph.EdgesCount);
@@ -53,8 +54,8 @@ namespace DSIS.Graph.Tests
     [Test]
     public void Test_04()
     {
-      INode<IntegerCoordinate> node1 = myGraph.AddNode(new IntegerCoordinate(new long[] {1, 1, 1, 1, 1}));
-      INode<IntegerCoordinate> node2 = myGraph.AddNode(new IntegerCoordinate(new long[] {2, 1, 1, 1, 1}));
+      INode<IntegerCoordinate> node1 = myGraph.AddNode(mySystem.Create(new long[] { 1, 1, 1, 1, 1 }));
+      INode<IntegerCoordinate> node2 = myGraph.AddNode(mySystem.Create(new long[] { 2, 1, 1, 1, 1 }));
 
       myGraph.AddEdgeToNode(node1, node2);
 
@@ -65,8 +66,8 @@ namespace DSIS.Graph.Tests
     [Test]
     public void Test_05()
     {
-      INode<IntegerCoordinate> node1 = myGraph.AddNode(new IntegerCoordinate(new long[] {1, 1, 1, 1, 1}));
-      INode<IntegerCoordinate> node2 = myGraph.AddNode(new IntegerCoordinate(new long[] {2, 1, 1, 1, 1}));
+      INode<IntegerCoordinate> node1 = myGraph.AddNode(mySystem.Create(new long[] { 1, 1, 1, 1, 1 }));
+      INode<IntegerCoordinate> node2 = myGraph.AddNode(mySystem.Create(new long[] { 2, 1, 1, 1, 1 }));
 
       myGraph.AddEdgeToNode(node1, node2);
       myGraph.AddEdgeToNode(node1, node2);
@@ -81,8 +82,8 @@ namespace DSIS.Graph.Tests
     [Test]
     public void Test_06()
     {
-      INode<IntegerCoordinate> node1 = myGraph.AddNode(new IntegerCoordinate(new long[] {1, 1, 1, 1, 1}));
-      INode<IntegerCoordinate> node2 = myGraph.AddNode(new IntegerCoordinate(new long[] {2, 1, 1, 1, 1}));
+      INode<IntegerCoordinate> node1 = myGraph.AddNode(mySystem.Create(new long[] { 1, 1, 1, 1, 1 }));
+      INode<IntegerCoordinate> node2 = myGraph.AddNode(mySystem.Create(new long[] { 2, 1, 1, 1, 1 }));
 
       myGraph.AddEdgeToNode(node1, node2);
       myGraph.AddEdgeToNode(node2, node1);

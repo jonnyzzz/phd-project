@@ -5,18 +5,21 @@ namespace DSIS.IntegerCoordinates
 {
   public sealed class RectProcessor : RectProcessorBase
   {
-    public RectProcessor(IntegerCoordinateSystem coordinateSystem) : base(coordinateSystem)
+    private readonly double[] myEps;
+
+    public RectProcessor(IntegerCoordinateSystem coordinateSystem, double[] eps) : base(coordinateSystem)
     {
+      myEps = eps;
     }
 
-    public IEnumerable<IntegerCoordinate> ConnectCellToRectInternal(double[] left, double[] right, double[] eps)
+    public IEnumerable<IntegerCoordinate> ConnectCellToRect(double[] left, double[] right)
     {
       if (!mySystemSpace.ContainsRect(left, right))
         return EmptyArray<IntegerCoordinate>.Instance;
 
       for (int i = 0; i < myDim; i++)
       {
-        double e = eps[i];
+        double e = myEps[i];
 
         myLeft[i] = myCoordinateSystem.ToInternal(left[i] - e, i);
         if (myLeft[i] < 0)

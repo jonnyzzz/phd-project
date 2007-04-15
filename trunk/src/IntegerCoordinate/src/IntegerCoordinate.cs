@@ -1,26 +1,19 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
-using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates
 {
-  public interface IIntegerCoordinateDebug
-  {
-    long[] Coordinate { get; }
-  }
-
   [EqualityComparer(typeof (IntegerCoordinateEqualityComparer))]
-  public sealed class IntegerCoordinate : ICellCoordinate<IntegerCoordinate>, IIntegerCoordinateDebug
+  public sealed class IntegerCoordinate : IIntegerCoordinate<IntegerCoordinate>, IIntegerCoordinateDebug
   {
-    private long[] myCoordinare;
+    public readonly long[] myCoordinate;
 
     public IntegerCoordinate(params long[] coordinare)
     {
-      myCoordinare = coordinare;
+      myCoordinate = coordinare;
     }
-
-    #region ICellCoordinate<IntegerCoordinate> Members
 
     public IEqualityComparer<IntegerCoordinate> Comparer
     {
@@ -37,43 +30,36 @@ namespace DSIS.IntegerCoordinates
       return IntegerCoordinateEqualityComparer.INSTANCE.GetHashCode(this);
     }
 
-    #endregion
-
-    #region IIntegerCoordinateDebug Members
-
-    long[] IIntegerCoordinateDebug.Coordinate
+    long[] IIntegerCoordinateDebug.GetCoordinates()
     {
-      get { return Coordinate; }
+      return myCoordinate;
     }
-
-    #endregion
 
     public IntegerCoordinate Clone()
     {
-      return new IntegerCoordinate((long[]) Coordinate.Clone());
+      return new IntegerCoordinate((long[]) myCoordinate.Clone());
     }
 
+    public long GetCoordinate(int index)
+    {
+      return myCoordinate[index];
+    }
+
+    public int Dimension
+    {
+      get { return myCoordinate.Length; }
+    }
+
+    [Obsolete()]
     internal long[] Coordinate
     {
-      get { return myCoordinare; }
-    }
-
-    public override bool Equals(object obj)
-    {
-      if (this == obj)
-        return true;
-
-      IntegerCoordinate integerCoordinate = obj as IntegerCoordinate;
-      if (integerCoordinate == null)
-        return false;
-
-      return Equals(integerCoordinate);
+      get { return myCoordinate; }
     }
 
     public override string ToString()
     {
       StringBuilder sb = new StringBuilder();
-      foreach (long l in myCoordinare)
+      foreach (long l in myCoordinate)
       {
         sb.AppendFormat("{0}, ", l);
       }

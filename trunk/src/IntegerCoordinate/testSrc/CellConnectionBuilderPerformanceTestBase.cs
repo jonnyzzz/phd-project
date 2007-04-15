@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DSIS.Core.Builders;
 using DSIS.Core.Mock;
 using NUnit.Framework;
@@ -8,7 +9,6 @@ namespace DSIS.IntegerCoordinates.Test
   {
     protected ICellConnectionBuilder<IntegerCoordinate> myBuilder;
     protected IntegerCoordinateSystem myIcs;
-    protected IIntegerCoordinateCellImageBuilderAdapter myAd;
 
     protected abstract IntegerCoordinateSystem CreateCoodinateSystem();
 
@@ -17,7 +17,6 @@ namespace DSIS.IntegerCoordinates.Test
     {
       myBuilder = new MockCellConnectionBuilder<IntegerCoordinate>();
       myIcs = CreateCoodinateSystem();
-      myAd = myIcs.CreateAdapter(myBuilder);
     }
 
     [TearDown]
@@ -25,7 +24,14 @@ namespace DSIS.IntegerCoordinates.Test
     {
       myBuilder = null;
       myIcs = null;
-      myAd = null;
+    }
+
+
+    protected static void Iterate<T>(IEnumerable<T> t)
+    {
+      foreach (T t1 in t)
+      {        
+      }
     }
   }
 }

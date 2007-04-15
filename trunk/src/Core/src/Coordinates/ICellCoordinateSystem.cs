@@ -40,9 +40,6 @@ namespace DSIS.Core.Coordinates
     /// </summary>
     CountEnumerable<T> InitialSubdivision { get; }
 
-    long InitialCellsCount { get; }
-
-
     ISystemSpace SystemSpace { get; }
   }
 }

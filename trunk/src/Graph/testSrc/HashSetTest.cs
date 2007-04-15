@@ -3,7 +3,6 @@
  * Created: 2 декабря 2006 г.
  */
 
-using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 using NUnit.Framework;
@@ -56,8 +55,8 @@ namespace DSIS.Graph.Tests
     [Test]
     public void Test_04()
     {
-      IntegerCoordinate c1 = new IntegerCoordinate(new long[] {1});
-      IntegerCoordinate c2 = new IntegerCoordinate(new long[] {1});
+      IntegerCoordinate c1 = new IntegerCoordinate(1);
+      IntegerCoordinate c2 = new IntegerCoordinate(1);
 
       Hashset<IntegerCoordinate, IntegerCoordinate> set = new Hashset<IntegerCoordinate, IntegerCoordinate>();
       Assert.AreNotSame(c1, c2);
@@ -71,10 +70,10 @@ namespace DSIS.Graph.Tests
     [Test]
     public void Test_05()
     {
-      IntegerCoordinate c1 = new IntegerCoordinate(new long[] {1});
-      IntegerCoordinate c2 = new IntegerCoordinate(new long[] {1});
+      IntegerCoordinate c1 = new IntegerCoordinate(1);
+      IntegerCoordinate c2 = new IntegerCoordinate(1);
 
-      Hashset<IntegerCoordinate, IntegerCoordinate> set = new Hashset<IntegerCoordinate, IntegerCoordinate>();
+      Hashset<IntegerCoordinate> set = new Hashset<IntegerCoordinate>();
       Assert.AreNotSame(c1, c2);
 
       set.Add(c1);

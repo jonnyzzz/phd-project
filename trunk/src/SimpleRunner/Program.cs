@@ -65,7 +65,7 @@ namespace DSIS.SimpleRunner
     public static DateTime Method(ICellImageBuilder<IntegerCoordinate> build, ICellImageBuilderSettings settings, TextWriter tw)
     {
       DefaultSystemSpace sp = GetSystemSpace();
-      IntegerCoordinateSystem cs = new IntegerCoordinateSystem(sp);
+      IIntegerCoordinateSystem<IntegerCoordinate> cs = IntegerCoordinateSystemFactory.Create(sp);
 
       TarjanGraph<IntegerCoordinate> graph = new TarjanGraph<IntegerCoordinate>(cs);
 

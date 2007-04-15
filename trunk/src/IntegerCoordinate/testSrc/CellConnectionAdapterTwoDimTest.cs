@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
@@ -7,30 +8,46 @@ namespace DSIS.IntegerCoordinates.Test
   [TestFixture]
   public class CellConnectionAdapterTwoDimTest : CellConnectionAdapterTestBase
   {
-    private static void DoTestAbstract(DoBuild bld, string assert)
+    private IntegerCoordinateSystem myIcs;
+
+    private void DoTestAbstract(DoBuild bld, string assert)
     {
       double[] sleft = {0, 0};
       double[] sright = {10, 10};
       long[] sgrid = {10, 10};
 
-      IntegerCoordinateSystem ics = new IntegerCoordinateSystem(new MockSystemSpace(2, sleft, sright, sgrid));
+      IntegerCoordinateSystem ics = new IntegerCoordinateSystem(
+        new MockSystemSpace(2, sleft, sright, sgrid)
+        );
+
+      myIcs = ics;
       List<IntegerCoordinate> data = DoTest(ics, bld);
 
       TwoDimCoordinateAssert.Assert(ics, data, assert);
+      myIcs = null;
     }
 
-    private static void DoTestAddCellToRect(double[] left, double[] right, string assert)
+    private void DoTestAddCellToRect(double[] left, double[] right, string assert)
     {
       double[] eps = {0, 0};
 
       DoTestAbstract(
-        delegate(IntegerCoordinateCellImageBuilderAdapter ad) { ad.ConnectCellToRect(null, left, right, eps); }, assert);
+        delegate(ICellConnectionBuilder<IntegerCoordinate> ad)
+          {
+            RectProcessor ps = new RectProcessor(myIcs, eps);
+            
+            ad.ConnectToMany(null, ps.ConnectCellToRect(left, right));
+          }, assert);
     }
 
-    private static void DoTestAddCellToPoint(double[] point, double[] perc, string assert)
+    private void DoTestAddCellToPoint(double[] point, double[] perc, string assert)
     {
       DoTestAbstract(
-        delegate(IntegerCoordinateCellImageBuilderAdapter ad) { ad.ConnectCellToPointWithRadius(null, point, perc); },
+        delegate(ICellConnectionBuilder<IntegerCoordinate> ad)
+          {
+            RadiusProcessor ps = new RadiusProcessor(myIcs);
+             ad.ConnectToMany(null, ps.ConnectCellToRadius(point, perc));
+          },
         assert);
     }
 

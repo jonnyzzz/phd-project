@@ -19,8 +19,6 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     private double[] eps;
     private double[] radius;
-    private double[] overlapL;
-    private double[] overlapR;
     private double[] myD1;
     private double[] myD2;
     private double[] myLen;
@@ -46,7 +44,6 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
     {
       base.Bind(context);
-      myOverlappingProcessor = new OverlappingProcessor(mySystem);
       myRadiusProcessor = new RadiusProcessor(mySystem);
 
       myFunction = context.Function.GetFunction<double>();
@@ -65,8 +62,6 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       myD2 = new double[myDim];
       xleft = new double[myDim];
       xright = new double[myDim];
-      overlapL = new double[myDim];
-      overlapR = new double[myDim];
       myLen = new double[myDim];
       myIterator = new BoxIterator<Divide>(myDim);
 
@@ -94,8 +89,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
         divRight[i] = Divide.Second;
         per[i] = settings.Overlaping;
       }
-      
-      myOverlappingProcessor.AddPointWithOverlappingPrepare(per, overlapL, overlapR);
+      myOverlappingProcessor = new OverlappingProcessor(mySystem, per);
     }
 
     public void BuildImage(IntegerCoordinate coord)
@@ -135,9 +129,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     }
 
     private void AppendPoint(double[] d)
-    {
-      
-      myPoints.AddRange(myOverlappingProcessor.AddPointWithOverlappingInternal(d, overlapL, overlapR));
+    {      
+      myPoints.AddRange(myOverlappingProcessor.AddPointWithOverlapping(d));
     }
 
     private void ProcessPoint(Pair<Point, Point> task)
@@ -196,8 +189,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
         }
         else
         {
-          myPoints.AddRange(myRadiusProcessor.ConnectCellToRectInternal(myD1, myLen));
-          myPoints.AddRange(myRadiusProcessor.ConnectCellToRectInternal(myD2, myLen));
+          myPoints.AddRange(myRadiusProcessor.ConnectCellToRadius(myD1, myLen));
+          myPoints.AddRange(myRadiusProcessor.ConnectCellToRadius(myD2, myLen));
         }
       }
     }

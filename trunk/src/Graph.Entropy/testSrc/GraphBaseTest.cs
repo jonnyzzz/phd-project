@@ -18,8 +18,9 @@ namespace DSIS.Graph.Entropy
 
     protected static void AddEdge(IGraph<IntegerCoordinate> graph,  int i, int j)
     {
-      INode<IntegerCoordinate> n1 = graph.AddNode(new IntegerCoordinate(i));
-      INode<IntegerCoordinate> n2 = graph.AddNode(new IntegerCoordinate(j));
+      IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
+      INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(i));
+      INode<IntegerCoordinate> n2 = graph.AddNode(system.Create((j)));
       graph.AddEdgeToNode(n1, n2);
     }
 
@@ -32,7 +33,7 @@ namespace DSIS.Graph.Entropy
         List<string> sloop = new List<string>();
         foreach (INode<IntegerCoordinate> node in loop)
         {
-          sloop.Add(((IIntegerCoordinateDebug)node.Coordinate).Coordinate[0].ToString());
+          sloop.Add((node.Coordinate).GetCoordinate(0).ToString());
         }
 
         myLoops.Add(sloop);
@@ -47,7 +48,7 @@ namespace DSIS.Graph.Entropy
     protected static TarjanGraph<IntegerCoordinate> DoBuildGraph(BuildGraph bg)
     {
       MockSystemSpace mss = new MockSystemSpace(1, 0, 1, 1000);
-      IntegerCoordinateSystem ics = new IntegerCoordinateSystem(mss);
+      IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(mss);
       TarjanGraph<IntegerCoordinate> graph = new TarjanGraph<IntegerCoordinate>(ics);
       bg(graph);
 
@@ -56,7 +57,7 @@ namespace DSIS.Graph.Entropy
 
     protected static string ToString(INode<IntegerCoordinate> node)
     {
-      return ((IIntegerCoordinateDebug) node.Coordinate).Coordinate[0].ToString();
+      return (node.Coordinate).GetCoordinate(0).ToString();
     }
 
     internal static string ToString(NodePair<IntegerCoordinate> p)

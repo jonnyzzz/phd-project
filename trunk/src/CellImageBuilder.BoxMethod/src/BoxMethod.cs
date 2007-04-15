@@ -24,6 +24,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
     private double[] y;
     private double[] eps;
     private IBoxIterator<double> myIterator;
+    private RectProcessor myProcessor;
 
     private double[] myCellSize;
     private double[] myCellSizeHalf;
@@ -46,6 +47,8 @@ namespace DSIS.CellImageBuilder.BoxMethod
       {
         eps[i] = ((BoxMethodSettings) context.Settings).Eps*mySystem.CellSize[i];
       }
+
+      myProcessor = new RectProcessor(mySystem, eps);
 
       myCellSize = mySystem.CellSize;
       myCellSizeHalf = mySystem.CellSizeHalf;
@@ -81,7 +84,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
         }
       }
 
-      myAdapter.ConnectCellToRect(coord, yLeft, yRight, eps);
+      myBuilder.ConnectToMany(coord, myProcessor.ConnectCellToRect(yLeft, yRight));
     }
 
     public ICellImageBuilder<IntegerCoordinate> Clone()
