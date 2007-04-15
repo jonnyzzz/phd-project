@@ -1,11 +1,13 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.Core.Util;
+using DSIS.IntegerCoordinates.Impl;
 
 namespace DSIS.IntegerCoordinates
 {
-  public class IntegerCoordinateSystem : IntegerCoordinateSystemBase<IntegerCoordinate>, IIntegerCoordinateSystem<IntegerCoordinate>
+  public class IntegerCoordinateSystem : IntegerCoordinateSystemBase<IntegerCoordinate>, IIntegerCoordinateSystem<IntegerCoordinate>, IProcessorFactory<IntegerCoordinate>
   {
     public IntegerCoordinateSystem(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
@@ -57,6 +59,11 @@ namespace DSIS.IntegerCoordinates
       return new IntegerCoordinate(param);
     }
 
+    public IProcessorFactory<IntegerCoordinate> ProcessorFactory
+    {
+      get { return this; }
+    }
+
     public void CenterPoint(IntegerCoordinate point, double[] output)
     {
       for (int i = 0; i < myDimension; i++)
@@ -92,6 +99,48 @@ namespace DSIS.IntegerCoordinates
           }
         }
       }
+    }
+
+    public IRadiusProcessor<IntegerCoordinate> CreateRadiusProcessor()
+    {
+      return new RadiusProcessor(this);
+    }
+
+    public IRectProcessor<IntegerCoordinate> CreateRectProcessor(double[] eps)
+    {
+      return new RectProcessor(this, eps);
+    }
+
+    public IRectProcessor<IntegerCoordinate> CreateRectProcessor(double cellSizeFactor)
+    {
+      double[] eps = new double[myDimension];
+      for (int i = 0; i < myDimension; i++)
+        eps[i] = cellSizeFactor * myCellSize[i];
+
+      return CreateRectProcessor(eps);
+    }
+
+    private double[] FillArray(double cellSizeFactor)
+    {
+      double[] eps = new double[myDimension];
+      for (int i = 0; i < myDimension; i++)
+        eps[i] = cellSizeFactor;
+      return eps;
+    }
+
+    public IPointProcessor<IntegerCoordinate> CreatePointProcessor()
+    {
+      return new PointProcessor<IntegerCoordinateSystem, IntegerCoordinate>(this);
+    }
+
+    public IPointProcessor<IntegerCoordinate> CreateOverlapedPointProcessor(double cellSizePercent)
+    {
+      return new OverlappingProcessor(this, FillArray(cellSizePercent));
+    }
+
+    public IPointProcessor<IntegerCoordinate> CreateOverlapedPointProcessor(double[] cellSizePercent)
+    {
+      return new OverlappingProcessor(this, cellSizePercent);
     }
   }
 }

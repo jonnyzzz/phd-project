@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using DSIS.BoxIterators;
 
-namespace DSIS.IntegerCoordinates
+namespace DSIS.IntegerCoordinates.Impl
 {
-  public sealed class OverlappingProcessor
+  internal sealed class OverlappingProcessor : IPointProcessor<IntegerCoordinate>
   {
     private readonly IntegerCoordinateSystem myCoordinateSystem;
     private readonly long[] myPoint;
@@ -34,6 +33,7 @@ namespace DSIS.IntegerCoordinates
       myOnes = new long[myDim];
 
       myOLeft = new double[myDim];
+
       myORight = new double[myDim];
 
       for (int i = 0; i < myDim; i++)
@@ -49,7 +49,7 @@ namespace DSIS.IntegerCoordinates
       }
     }
 
-    public IEnumerable<IntegerCoordinate> AddPointWithOverlapping(double[] value)
+    public IEnumerable<IntegerCoordinate> AddPoint(double[] value)
     {
       bool iter = false;
       for (int i = 0; i < myDim; i++)

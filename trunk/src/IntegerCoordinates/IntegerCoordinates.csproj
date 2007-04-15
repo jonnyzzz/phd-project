@@ -7,8 +7,8 @@
     <ProjectGuid>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.IntegerCoordinate</RootNamespace>
-    <AssemblyName>DSIS.IntegerCoordinate</AssemblyName>
+    <RootNamespace>DSIS.IntegerCoordinates</RootNamespace>
+    <AssemblyName>DSIS.IntegerCoordinates</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,18 +41,19 @@
     <Compile Include="src\Generated\IntegerCoordinate2d.cs" />
     <Compile Include="src\IIntegerCoordinateSystem.cs" />
     <Compile Include="src\IIntegerCoordinate.cs" />
-    <Compile Include="src\IntegerCoordinate.cs" />
-    <Compile Include="src\IntegerCoordinateCellConverter.cs" />
-    <Compile Include="src\IntegerCoordinateEqualityComparer.cs" />
-    <Compile Include="src\IntegerCoordinateSystem.cs" />
-    <Compile Include="src\IntegerCoordinateSystemBase.cs" />
+    <Compile Include="src\Impl\IntegerCoordinate.cs" />
+    <Compile Include="src\Impl\IntegerCoordinateCellConverter.cs" />
+    <Compile Include="src\Impl\IntegerCoordinateEqualityComparer.cs" />
+    <Compile Include="src\Impl\IntegerCoordinateSystem.cs" />
+    <Compile Include="src\Impl\IntegerCoordinateSystemBase.cs" />
+    <Compile Include="src\Impl\PointProcessor.cs" />
     <Compile Include="src\IntegerCoordinateSystemFactory.cs" />
-    <Compile Include="src\IRadiusProcessor.cs" />
-    <Compile Include="src\LongLBoxFixedDimentionMulIterator.cs" />
-    <Compile Include="src\OverlappingProcessor.cs" />
-    <Compile Include="src\RadiusProcessor.cs" />
-    <Compile Include="src\RectProcessor.cs" />
-    <Compile Include="src\RectProcessorBase.cs" />
+    <Compile Include="src\Impl\LongLBoxFixedDimentionMulIterator.cs" />
+    <Compile Include="src\Impl\OverlappingProcessor.cs" />
+    <Compile Include="src\Impl\RadiusProcessor.cs" />
+    <Compile Include="src\Impl\RectProcessor.cs" />
+    <Compile Include="src\Impl\RectProcessorBase.cs" />
+    <Compile Include="src\IRectProcessors.cs" />
     <Compile Include="testSrc\CellConnectionAdapterOneDimTest.cs" />
     <Compile Include="testSrc\CellConnectionAdapterTest.cs" />
     <Compile Include="testSrc\CellConnectionAdapterTwoDimTest.cs" />

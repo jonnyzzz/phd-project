@@ -41,7 +41,7 @@ namespace DSIS.IntegerCoordinates.Test
     {
       DoTestBuild(left, right, delegate(ICellConnectionBuilder<IntegerCoordinate> bld)
                                  {
-                                   RectProcessor ps = new RectProcessor(myIcs, new double[]{0});
+                                   IRectProcessor<IntegerCoordinate> ps = myIcs.ProcessorFactory.CreateRectProcessor(0);
                                    IntegerCoordinate c = myIcs.Create(0);
                                    bld.ConnectToMany(c,
                                                      ps.ConnectCellToRect(new double[] {left},
@@ -54,9 +54,9 @@ namespace DSIS.IntegerCoordinates.Test
     {
       DoTestBuild(left, right, delegate(ICellConnectionBuilder<IntegerCoordinate> bld)
                                  {
-                                   OverlappingProcessor ps = new OverlappingProcessor(myIcs, new double[] {procent});
+                                   IPointProcessor<IntegerCoordinate> ps = myIcs.ProcessorFactory.CreateOverlapedPointProcessor(new double[] {procent});
                                    IntegerCoordinate c = myIcs.FromPoint(new double[] {1});
-                                   bld.ConnectToMany(c, ps.AddPointWithOverlapping(new double[] {pt}));
+                                   bld.ConnectToMany(c, ps.AddPoint(new double[] {pt}));
                                  });
     }
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Graph.Abstract;
-using DSIS.Graph.Adapter;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
@@ -85,7 +84,7 @@ namespace DSIS.Graph
     [Test]
     public void Test_04_ConnectCellToRect()
     {
-      RectProcessor ps = new RectProcessor((IntegerCoordinateSystem)myIcs, new double[] { 0, 0, 0 });
+      IRectProcessor<IntegerCoordinate> ps = myIcs.ProcessorFactory.CreateRectProcessor(0);
       for (int j = 0; j < 100; j++)
         for (int i = 0; i < 100; i++)
         {

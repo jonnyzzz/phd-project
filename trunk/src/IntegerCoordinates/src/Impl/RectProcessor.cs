@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using DSIS.Core.Util;
 
-namespace DSIS.IntegerCoordinates
+namespace DSIS.IntegerCoordinates.Impl
 {
-  public sealed class RectProcessor : RectProcessorBase
+  internal sealed class RectProcessor : RectProcessorBase, IRectProcessor<IntegerCoordinate>
   {
     private readonly double[] myEps;
 

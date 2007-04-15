@@ -58,7 +58,7 @@
       <Project>{02AFA84E-DA1B-4010-BA76-8E077E4D6175}</Project>
       <Name>Function.Mock</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinate\IntegerCoordinates.csproj">
+    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
       <Name>IntegerCoordinates</Name>
     </ProjectReference>

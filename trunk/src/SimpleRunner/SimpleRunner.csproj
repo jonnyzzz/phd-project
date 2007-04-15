@@ -73,7 +73,7 @@
       <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
       <Name>Graph</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinate\IntegerCoordinates.csproj">
+    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
       <Name>IntegerCoordinates</Name>
     </ProjectReference>

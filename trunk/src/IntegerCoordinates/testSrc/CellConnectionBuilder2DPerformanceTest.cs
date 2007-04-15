@@ -19,19 +19,19 @@ namespace DSIS.IntegerCoordinates.Test
     {
       double[] eps = new double[] {0.2, 0.2};
       double[] point = new double[] {1, 1};
-      OverlappingProcessor ps = new OverlappingProcessor(myIcs, eps);
+      IPointProcessor<IntegerCoordinate> ps = myIcs.ProcessorFactory.CreateOverlapedPointProcessor(eps);
       for (int i = 0; i < 30000; i++)
       {
         point[0] += myIcs.CellSizeHalf[0]*.79;
         point[1] += myIcs.CellSizeHalf[1]*.76;        
-        Iterate(ps.AddPointWithOverlapping(point));
+        Iterate(ps.AddPoint(point));
       }
     }
 
     [Test]
     public void Test_radius()
     {
-      IRadiusProcessor pr = new RadiusProcessor(myIcs);
+      IRadiusProcessor<IntegerCoordinate> pr = myIcs.CreateRadiusProcessor();
       double[] left = new double[] {1, 1};
       double[] eps = new double[] {2.1, 5.1};
       for (int i = 0; i < 300; i++)
@@ -44,7 +44,7 @@ namespace DSIS.IntegerCoordinates.Test
       double[] right = new double[] {20, 30};
       double[] left = new double[] {1, 1};
       double[] eps = new double[] {0.1, 0.1};
-      RectProcessor pr = new RectProcessor(myIcs, eps);
+      IRectProcessor<IntegerCoordinate> pr = myIcs.ProcessorFactory.CreateRectProcessor(eps);
       for (int i = 0; i < 30000; i++)
         Iterate(pr.ConnectCellToRect(left, right));
     }

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using DSIS.Core.Util;
 
-namespace DSIS.IntegerCoordinates
+namespace DSIS.IntegerCoordinates.Impl
 {
-  public sealed class RadiusProcessor : RectProcessorBase, IRadiusProcessor
+  internal sealed class RadiusProcessor : RectProcessorBase, IRadiusProcessor<IntegerCoordinate>
   {
     public RadiusProcessor(IntegerCoordinateSystem coordinateSystem) : base(coordinateSystem)
     {

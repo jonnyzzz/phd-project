@@ -6,8 +6,8 @@ namespace DSIS.IntegerCoordinates
   public abstract class IntegerCoordinateSystemBase<T> where T : IIntegerCoordinate<T>
   {
     private readonly ISystemSpace mySystemSpace;
-    private readonly double[] myCellSize;
- 
+
+    protected readonly double[] myCellSize; 
     protected readonly double[] myCellSizeHalf;
     protected readonly long[] mySubdivision;
     protected readonly int myDimension;

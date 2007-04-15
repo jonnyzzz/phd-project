@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using DSIS.Core.Coordinates;
-using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates
 {

@@ -34,7 +34,7 @@ namespace DSIS.IntegerCoordinates.Test
       DoTestAbstract(
         delegate(ICellConnectionBuilder<IntegerCoordinate> ad)
           {
-            RectProcessor ps = new RectProcessor(myIcs, eps);
+            IRectProcessor<IntegerCoordinate> ps = myIcs.ProcessorFactory.CreateRectProcessor(eps);
             
             ad.ConnectToMany(null, ps.ConnectCellToRect(left, right));
           }, assert);
@@ -45,7 +45,7 @@ namespace DSIS.IntegerCoordinates.Test
       DoTestAbstract(
         delegate(ICellConnectionBuilder<IntegerCoordinate> ad)
           {
-            IRadiusProcessor ps = new RadiusProcessor(myIcs);
+            IRadiusProcessor<IntegerCoordinate> ps = myIcs.CreateRadiusProcessor();
              ad.ConnectToMany(null, ps.ConnectCellToRadius(point, perc));
           },
         assert);

@@ -31,8 +31,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     private BoxIterator<Divide> myIterator;
 
-    private OverlappingProcessor myOverlappingProcessor;
-    private IRadiusProcessor myRadiusProcessor;
+    private IPointProcessor<IntegerCoordinate> myOverlappingProcessor;
+    private IRadiusProcessor<IntegerCoordinate> myRadiusProcessor;
 
     private Queue<Pair<Point, Point>> myQueue = new Queue<Pair<Point, Point>>();
     private List<IntegerCoordinate> myPoints = new List<IntegerCoordinate>(10000);
@@ -44,7 +44,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
     {
       base.Bind(context);
-      myRadiusProcessor = new RadiusProcessor(mySystem);
+      myRadiusProcessor = mySystem.CreateRadiusProcessor();
 
       myFunction = context.Function.GetFunction<double>();
 
@@ -89,7 +89,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
         divRight[i] = Divide.Second;
         per[i] = settings.Overlaping;
       }
-      myOverlappingProcessor = new OverlappingProcessor(mySystem, per);
+      myOverlappingProcessor = mySystem.CreateOverlapedPointProcessor(per);
     }
 
     public void BuildImage(IntegerCoordinate coord)
@@ -130,7 +130,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     private void AppendPoint(double[] d)
     {      
-      myPoints.AddRange(myOverlappingProcessor.AddPointWithOverlapping(d));
+      myPoints.AddRange(myOverlappingProcessor.AddPoint(d));
     }
 
     private void ProcessPoint(Pair<Point, Point> task)

@@ -22,5 +22,7 @@ namespace DSIS.IntegerCoordinates
     bool Intersects(long l, int axis);
 
     T Create(params long[] param);
+
+    IProcessorFactory<T> ProcessorFactory { get; }
   }
 }
