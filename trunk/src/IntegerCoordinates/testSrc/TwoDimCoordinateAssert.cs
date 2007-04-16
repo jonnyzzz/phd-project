@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 
-namespace DSIS.IntegerCoordinates.Test
+namespace DSIS.IntegerCoordinates
 {
   public static class TwoDimCoordinateAssert
   {
-    private static string Write(IIntegerCoordinateSystem<IntegerCoordinate> ics, IList<IntegerCoordinate> list)
+    private static string Write<Q>(IIntegerCoordinateSystem<Q> ics, IEnumerable<Q> list)
+      where Q : IIntegerCoordinate<Q>
     {
-      Hashset<IntegerCoordinate> hs = new Hashset<IntegerCoordinate>();
+      Hashset<Q> hs = new Hashset<Q>();
       hs.AddRange(list);
 
       StringBuilder sb = new StringBuilder();
@@ -20,7 +22,7 @@ namespace DSIS.IntegerCoordinates.Test
       {
         for (long ly = 0; ly < ics.Subdivision[1]; ly++)
         {
-          if (hs.Contains(new IntegerCoordinate(lx, ly)))
+          if (hs.Contains(ics.Create(lx, ly)))
           {
             sb.AppendFormat("x");
           }
@@ -36,7 +38,8 @@ namespace DSIS.IntegerCoordinates.Test
       return sb.ToString();
     }
 
-    public static void Assert(IIntegerCoordinateSystem<IntegerCoordinate> ics, IList<IntegerCoordinate> list, string assert)
+    public static void Assert<Q>(IIntegerCoordinateSystem<Q> ics, IList<Q> list, string assert)
+      where Q : IIntegerCoordinate<Q>
     {
       string s = Write(ics, list);
       try

@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
   [EqualityComparer(typeof(IntegerCoordinate2dEqualityComparer))]
-  public struct IntegerCoordinate2d : ICellCoordinate<IntegerCoordinate2d>, IIntegerCoordinateDebug
+  public class IntegerCoordinate2d : IIntegerCoordinate<IntegerCoordinate2d>
   {
     public readonly long l1;
     public readonly long l2;
@@ -23,13 +22,12 @@ namespace DSIS.IntegerCoordinates.Generated
       get { return IntegerCoordinate2dEqualityComparer.INSTANCE; }
     }
 
-    public bool Equals(IntegerCoordinate2d coord)
+    public override bool Equals(object obj)
     {
-      return IntegerCoordinate2dEqualityComparer.INSTANCE.Equals(this, coord);
+      throw new NotImplementedException();
     }
 
-
-    public long[] GetCoordinates()
+    public override int GetHashCode()
     {
       throw new NotImplementedException();
     }
@@ -46,6 +44,17 @@ namespace DSIS.IntegerCoordinates.Generated
           throw new IndexOutOfRangeException();
       }
     }
+
+    public int Dimension
+    {
+      get { return 2; }
+    }
+
+
+    public override string ToString()
+    {
+      return string.Format("[{0}, {1}]", l1, l2);
+    }
   }
 
   public class IntegerCoordinate2dEqualityComparer : IEqualityComparer<IntegerCoordinate2d>
@@ -59,22 +68,7 @@ namespace DSIS.IntegerCoordinates.Generated
 
     public int GetHashCode(IntegerCoordinate2d obj)
     {
-      return (int) (obj.l1 + obj.l2*93);
+      return (int) (obj.l1 + obj.l2*93) & 0x7fffff;
     }
   }
-
-//  public class IntegerCoordinateSystem2d : IntegerCoordinateSystemBase, IIntegerCoordinateSystem
-//  {
-//    public IntegerCoordinateSystem2d(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
-//    {
-//    }
-//
-//    public IntegerCoordinateSystem2d(ISystemSpace systemSpace) : base(systemSpace)
-//    {
-//    }
-//
-//
-//
-//
-//  }
 }

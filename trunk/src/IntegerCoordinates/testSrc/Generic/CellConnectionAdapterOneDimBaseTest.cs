@@ -3,59 +3,57 @@ using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.IntegerCoordinates.Test
+namespace DSIS.IntegerCoordinates.Generic
 {
-  [TestFixture]
-  public class CellConnectionAdapterOneDimTest : CellConnectionAdapterTestBase
+  public class CellConnectionAdapterOneDimBaseTest<T,Q> : CellConnectionAdapterTestBase<T,Q>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q>
   {
-    private MockSystemSpace mySpace;
-    private IntegerCoordinateSystem myIcs;
-
     [SetUp]
     public void SetUp()
     {
       mySpace = new MockSystemSpace(1, 0, 100, 500);
-      myIcs = new IntegerCoordinateSystem(mySpace);
+      myIcs = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(mySpace);
     }
 
     private void DoTestBuild(double left, double right, DoBuild bld)
     {
-      List<IntegerCoordinate> list = DoTest(myIcs, bld);
-      List<long> coords = list.ConvertAll<long>(delegate(IntegerCoordinate input) { return input.GetCoordinate(0); });
+      List<Q> list = DoTest(myIcs, bld);
+      List<long> coords = list.ConvertAll<long>(delegate(Q input) { return input.GetCoordinate(0); });
       coords.Sort();
       Assert.IsTrue(coords.Count > 0, "Non empty result expected");
 
-      IntegerCoordinate coor = myIcs.FromPoint(new double[] {left});
+      Q coor = myIcs.FromPoint(new double[] {left});
       Assert.IsNotNull(coor);
       long cnt = coor.GetCoordinate(0);
       foreach (long l in coords)
       {
         Assert.AreEqual(cnt++, l);
       }
-      IntegerCoordinate rightC = myIcs.FromPoint(new double[] {right});
+      Q rightC = myIcs.FromPoint(new double[] {right});
       Assert.IsNotNull(rightC);
       Assert.AreEqual(rightC.GetCoordinate(0), cnt - 1, "Right side");
     }
 
     private void DoTestPointToRect(double left, double right)
     {
-      DoTestBuild(left, right, delegate(ICellConnectionBuilder<IntegerCoordinate> bld)
+      DoTestBuild(left, right, delegate(ICellConnectionBuilder<Q> bld)
                                  {
-                                   IRectProcessor<IntegerCoordinate> ps = myIcs.ProcessorFactory.CreateRectProcessor(0);
-                                   IntegerCoordinate c = myIcs.Create(0);
+                                   IRectProcessor<Q> ps = myIcs.ProcessorFactory.CreateRectProcessor(0);
+                                   Q c = myIcs.Create(0);
                                    bld.ConnectToMany(c,
                                                      ps.ConnectCellToRect(new double[] {left},
-                                                                                  new double[] {right}
-                                                                                  ));
+                                                                          new double[] {right}
+                                                       ));
                                  });
     }
 
     private void DoTestOverlap(double left, double right, double pt, double procent)
     {
-      DoTestBuild(left, right, delegate(ICellConnectionBuilder<IntegerCoordinate> bld)
+      DoTestBuild(left, right, delegate(ICellConnectionBuilder<Q> bld)
                                  {
-                                   IPointProcessor<IntegerCoordinate> ps = myIcs.ProcessorFactory.CreateOverlapedPointProcessor(new double[] {procent});
-                                   IntegerCoordinate c = myIcs.FromPoint(new double[] {1});
+                                   IPointProcessor<Q> ps = myIcs.ProcessorFactory.CreateOverlapedPointProcessor(new double[] {procent});
+                                   Q c = myIcs.FromPoint(new double[] {1});
                                    bld.ConnectToMany(c, ps.AddPoint(new double[] {pt}));
                                  });
     }

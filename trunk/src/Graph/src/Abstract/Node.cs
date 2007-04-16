@@ -8,7 +8,7 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate<TCell>
     where TInh : Node<TInh, TCell>
   {
-    private static IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();
+    private static readonly IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();
 
     public readonly TCell Coordinate;
     private readonly GraphNodeHashList<TInh, TCell> myEdges;
@@ -21,14 +21,10 @@ namespace DSIS.Graph.Abstract
       HashCodeInternal = CellComparer.GetHashCode(Coordinate) & 0x7fffffff;
     }
 
-    #region INode<TCell> Members
-
     TCell INode<TCell>.Coordinate
     {
       get { return Coordinate; }
     }
-
-    #endregion
 
     public override sealed bool Equals(object obj)
     {
@@ -36,7 +32,7 @@ namespace DSIS.Graph.Abstract
         return false;
       Node<TInh, TCell> node = (Node<TInh, TCell>) obj;
 
-      return Equals(Coordinate, node.Coordinate);
+      return CellComparer.Equals(Coordinate, node.Coordinate);
     }
 
     public override sealed int GetHashCode()
@@ -57,6 +53,12 @@ namespace DSIS.Graph.Abstract
     internal IEnumerable<TInh> EdgesInternal
     {
       get { return myEdges.Values; }
+    }
+
+
+    public override string ToString()
+    {
+      return string.Format("[Node: {0}]", Coordinate);
     }
   }
 }

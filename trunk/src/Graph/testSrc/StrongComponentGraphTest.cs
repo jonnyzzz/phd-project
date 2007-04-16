@@ -1,18 +1,20 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates;
+using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Test
 {
-  public abstract class StrongComponentGraphTest : ComponentGraphTestBase
+  public abstract class StrongComponentGraphTest<T,Q> : ComponentGraphTestBase<T,Q, StrongComponentGraph<Q>>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q>
   {
-    private new StrongComponentGraph<IntegerCoordinate> myGraph;
-
+    [SetUp]
     public override void SetUp()
     {
       base.SetUp();
-      myGraph = (StrongComponentGraph<IntegerCoordinate>) base.myGraph;
       ComputeComponents();
     }
 
@@ -25,39 +27,40 @@ namespace DSIS.Graph.Test
     [Test]
     public void Test_02()
     {
-      myGraph.AddNode(mySystem.Create(1));
+      CreateNode();
       Assert.AreEqual(1, myGraph.ComponentCount);
     }
 
     [Test]
     public void Test_03()
     {
-      IEnumerable<INode<IntegerCoordinate>> enumerable = myGraph.GetNodes(new List<IStrongComponentInfo>());
+      IEnumerable<INode<Q>> enumerable = myGraph.GetNodes(new List<IStrongComponentInfo>());
       Assert.IsFalse(enumerable.GetEnumerator().MoveNext(), "No node is expected");
     }
 
     [Test]
     public void Test_04()
     {
-      INode<IntegerCoordinate> node = myGraph.AddNode(mySystem.Create(1));
+      INode<Q> node = CreateNode();
       Assert.AreEqual(1, myGraph.ComponentCount);
 
-      foreach (INode<IntegerCoordinate> n in myGraph.GetNodes(OneComponent))
+      foreach (INode<Q> n in myGraph.GetNodes(OneComponent))
       {
         Assert.AreEqual(node, n);
         Assert.AreSame(node, n);
       }
 
-      Assert.AreEqual(1, new List<INode<IntegerCoordinate>>(myGraph.GetNodes(OneComponent)).Count);
+      Assert.AreEqual(1, new List<INode<Q>>(myGraph.GetNodes(OneComponent)).Count);
     }
 
 
     [Test]
     public void Test_05()
     {
-      INode<IntegerCoordinate> n1 = myGraph.AddNode(mySystem.Create(1));
+      INode<Q> n1 = myGraph.AddNode(CreateCoordinate(1));
       Assert.AreEqual(1, myGraph.ComponentCount);
-      INode<IntegerCoordinate> n2 = myGraph.AddNode(mySystem.Create(1));
+      INode<Q> n2 = myGraph.AddNode(CreateCoordinate(1));
+
       Assert.AreEqual(n1, n2);
       Assert.AreSame(n1, n2);
       Assert.AreEqual(1, myGraph.NodesCount);
@@ -67,18 +70,18 @@ namespace DSIS.Graph.Test
     [Test]
     public void Test_06()
     {
-      myGraph.AddNode(mySystem.Create(1));
+      CreateNode();
       Assert.AreEqual(1, myGraph.ComponentCount);
-      myGraph.AddNode(mySystem.Create(2));
+      CreateNode();
       Assert.AreEqual(2, myGraph.ComponentCount);
     }
 
     [Test]
     public void Test_07()
     {
-      INode<IntegerCoordinate> n1 = myGraph.AddNode(mySystem.Create(1));
+      INode<Q> n1 = CreateNode();
       Assert.AreEqual(1, myGraph.ComponentCount);
-      INode<IntegerCoordinate> n2 = myGraph.AddNode(mySystem.Create(2));
+      INode<Q> n2 = CreateNode();
       Assert.AreEqual(2, myGraph.ComponentCount);
 
       myGraph.AddEdgeToNode(n1, n2);
@@ -90,9 +93,9 @@ namespace DSIS.Graph.Test
     {
       DoTest(delegate
                {
-                 INode<IntegerCoordinate> n1 = myGraph.AddNode(mySystem.Create(1));
+                 INode<Q> n1 = CreateNode();
                  Assert.AreEqual(1, myGraph.ComponentCount);
-                 INode<IntegerCoordinate> n2 = myGraph.AddNode(mySystem.Create(2));
+                 INode<Q> n2 = CreateNode();
                  Assert.AreEqual(2, myGraph.ComponentCount);
 
                  myGraph.AddEdgeToNode(n1, n2);
@@ -149,11 +152,11 @@ namespace DSIS.Graph.Test
     [Test]
     public void Test_StrongComponentMerge()
     {
-      INode<IntegerCoordinate> n1 = CreateNode();
-      INode<IntegerCoordinate> n2 = CreateNode();
-      INode<IntegerCoordinate> n3 = CreateNode();
-      INode<IntegerCoordinate> n4 = CreateNode();
-      INode<IntegerCoordinate> n5 = CreateNode();
+      INode<Q> n1 = CreateNode();
+      INode<Q> n2 = CreateNode();
+      INode<Q> n3 = CreateNode();
+      INode<Q> n4 = CreateNode();
+      INode<Q> n5 = CreateNode();
 
       myGraph.AddEdgeToNode(n1, n2);
       myGraph.AddEdgeToNode(n3, n2);
@@ -176,11 +179,11 @@ namespace DSIS.Graph.Test
     [Ignore()]
     public void Test_StrongComponentMerge_02()
     {
-      INode<IntegerCoordinate> n1 = CreateNode();
-      INode<IntegerCoordinate> n2 = CreateNode();
-      INode<IntegerCoordinate> n3 = CreateNode();
-      INode<IntegerCoordinate> n4 = CreateNode();
-      INode<IntegerCoordinate> n5 = CreateNode();
+      INode<Q> n1 = CreateNode();
+      INode<Q> n2 = CreateNode();
+      INode<Q> n3 = CreateNode();
+      INode<Q> n4 = CreateNode();
+      INode<Q> n5 = CreateNode();
 
       myGraph.AddEdgeToNode(n1, n2);
       myGraph.AddEdgeToNode(n3, n2);

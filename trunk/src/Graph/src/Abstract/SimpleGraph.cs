@@ -11,8 +11,6 @@ namespace DSIS.Graph.Abstract
     {
     }
 
-    #region IGraphExtension<SimpleNode<TCellCoordinate>,TCellCoordinate> Members
-
     public void EdgeAdded(SimpleNode<TCellCoordinate> from, SimpleNode<TCellCoordinate> to)
     {
     }
@@ -26,8 +24,6 @@ namespace DSIS.Graph.Abstract
     public void NodeAdded(SimpleNode<TCellCoordinate> node)
     {
     }
-
-    #endregion
   }
 
   public class SimpleNode<TCell> : Node<SimpleNode<TCell>, TCell>

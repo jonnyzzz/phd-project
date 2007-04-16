@@ -3,11 +3,12 @@
  * Created: 2 декабря 2006 г.
  */
 
-using DSIS.IntegerCoordinates;
+using DSIS.IntegerCoordinates.Generated;
+using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Tests
+namespace DSIS.Graph
 {
   [TestFixture]
   public class HashSetTest
@@ -80,7 +81,41 @@ namespace DSIS.Graph.Tests
 
       Assert.AreEqual(1, set.Count);
       set.AddIfNotReplace(ref c2);
-      Assert.AreEqual(c2, c1);
+      Assert.IsTrue(c2.Comparer.Equals(c2, c1));
+    }
+
+
+    [Test]
+    public void Test_06()
+    {
+      IntegerCoordinate2d c1 = new IntegerCoordinate2d(1,2);
+      IntegerCoordinate2d c2 = new IntegerCoordinate2d(1,2);
+
+      Hashset<IntegerCoordinate2d, IntegerCoordinate2d> set = new Hashset<IntegerCoordinate2d, IntegerCoordinate2d>();
+      Assert.AreNotSame(c1, c2);
+
+      set.Add(c1);
+      set.Add(c2);
+
+      Assert.AreEqual(1, set.Count);
+    }
+
+
+    [Test]
+    public void Test_07()
+    {
+      IntegerCoordinate2d c1 = new IntegerCoordinate2d(1, 2);
+      IntegerCoordinate2d c2 = new IntegerCoordinate2d(1, 1);
+      IntegerCoordinate2d c3 = new IntegerCoordinate2d(2, 2);
+
+      Hashset<IntegerCoordinate2d, IntegerCoordinate2d> set = new Hashset<IntegerCoordinate2d, IntegerCoordinate2d>();
+      Assert.AreNotSame(c1, c2);
+
+      set.Add(c1);
+      set.Add(c2);
+      set.Add(c3);
+
+      Assert.AreEqual(3, set.Count);
     }
   }
 }

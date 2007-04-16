@@ -3,16 +3,18 @@ using DSIS.Core.Util;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
-  internal sealed class RadiusProcessor : RectProcessorBase, IRadiusProcessor<IntegerCoordinate>
+  internal sealed class RadiusProcessor<T, Q> : RectProcessorBase<T, Q>, IRadiusProcessor<Q>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q> 
   {
-    public RadiusProcessor(IntegerCoordinateSystem coordinateSystem) : base(coordinateSystem)
+    public RadiusProcessor(T coordinateSystem) : base(coordinateSystem)
     {
     }
 
-    public IEnumerable<IntegerCoordinate> ConnectCellToRadius(double[] point, double[] radius)
+    public IEnumerable<Q> ConnectCellToRadius(double[] point, double[] radius)
     {
       if (!mySystemSpace.Contains(point))
-        return EmptyArray<IntegerCoordinate>.Instance;
+        return EmptyArray<Q>.Instance;
 
       for (int i = 0; i < myDim; i++)
       {

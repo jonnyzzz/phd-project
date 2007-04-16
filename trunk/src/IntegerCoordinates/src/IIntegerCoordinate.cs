@@ -4,7 +4,6 @@ namespace DSIS.IntegerCoordinates
 {
   public interface IIntegerCoordinateDebug
   {
-    long[] GetCoordinates();
     long GetCoordinate(int index);
   }
 

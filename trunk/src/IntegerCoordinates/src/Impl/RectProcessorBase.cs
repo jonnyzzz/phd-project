@@ -1,18 +1,20 @@
 using System.Collections.Generic;
 using DSIS.Core.System;
 
-namespace DSIS.IntegerCoordinates
+namespace DSIS.IntegerCoordinates.Impl
 {
-  public class RectProcessorBase
+  public class RectProcessorBase<T, Q>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q>
   {
     protected readonly long[] myLeft;
     protected readonly long[] myRight;
     protected readonly long[] myPoint;
     protected readonly int myDim;
-    protected readonly IntegerCoordinateSystem myCoordinateSystem;
+    protected readonly T myCoordinateSystem;
     protected readonly ISystemSpace mySystemSpace;
 
-    public RectProcessorBase(IntegerCoordinateSystem coordinateSystem)
+    public RectProcessorBase(T coordinateSystem)
     {
       myCoordinateSystem = coordinateSystem;
       mySystemSpace = myCoordinateSystem.SystemSpace;
@@ -23,13 +25,12 @@ namespace DSIS.IntegerCoordinates
       myPoint = new long[myDim];
     }
 
-    protected IEnumerable<IntegerCoordinate> Enumerate()
+    protected IEnumerable<Q> Enumerate()
     {
       bool exit = false;
       while (!exit)
       {
-        IntegerCoordinate coordinate = new IntegerCoordinate((long[]) myPoint.Clone());
-        yield return coordinate;
+        yield return myCoordinateSystem.Create(myPoint);
 
         myPoint[0]++;
         for (int i = 0; i < myDim; i++)

@@ -6,7 +6,7 @@ namespace DSIS.Graph.Util
   public class ConvertEnumerator<TFrom, TTo> :
     IEnumerable<TTo>, IEnumerator<TTo>
   {
-    private IEnumerator<TFrom> myEnumberator;
+    private readonly IEnumerator<TFrom> myEnumberator;
 
     public ConvertEnumerator(IEnumerable<TFrom> enumberator)
     {
@@ -18,8 +18,6 @@ namespace DSIS.Graph.Util
       myEnumberator = enumberator;
     }
 
-    #region IEnumerable<TTo> Members
-
     public IEnumerator GetEnumerator()
     {
       return this;
@@ -29,10 +27,6 @@ namespace DSIS.Graph.Util
     {
       return this;
     }
-
-    #endregion
-
-    #region IEnumerator<TTo> Members
 
     public void Dispose()
     {
@@ -58,7 +52,5 @@ namespace DSIS.Graph.Util
     {
       myEnumberator.Reset();
     }
-
-    #endregion
   }
 }

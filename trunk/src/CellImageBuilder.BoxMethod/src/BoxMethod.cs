@@ -13,7 +13,9 @@ using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.BoxMethod
 {
-  public class BoxMethod : IntegerCoordinateMethodBase, ICellImageBuilder<IntegerCoordinate>
+  public class BoxMethod<T, Q> : IntegerCoordinateMethodBase<T, Q>, ICellImageBuilder<Q>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q>
   {
     private IFunction<double> myFunction;
     private double[] x;
@@ -24,12 +26,12 @@ namespace DSIS.CellImageBuilder.BoxMethod
     private double[] y;
     private double[] eps;
     private IBoxIterator<double> myIterator;
-    private IRectProcessor<IntegerCoordinate> myProcessor;
+    private IRectProcessor<Q> myProcessor;
 
     private double[] myCellSize;
     private double[] myCellSizeHalf;
 
-    public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
+    public override void Bind(CellImageBuilderContext<Q> context)
     {
       base.Bind(context);
       myFunction = context.Function.GetFunction<double>();
@@ -57,7 +59,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
       myFunction.Output = y;
     }
 
-    public void BuildImage(IntegerCoordinate coord)
+    public void BuildImage(Q coord)
     {
       mySystem.TopLeftPoint(coord, xLeft);
 
@@ -87,9 +89,9 @@ namespace DSIS.CellImageBuilder.BoxMethod
       myBuilder.ConnectToMany(coord, myProcessor.ConnectCellToRect(yLeft, yRight));
     }
 
-    public ICellImageBuilder<IntegerCoordinate> Clone()
+    public ICellImageBuilder<Q> Clone()
     {
-      return new BoxMethod();
+      return new BoxMethod<T, Q>();
     }
   }
 }

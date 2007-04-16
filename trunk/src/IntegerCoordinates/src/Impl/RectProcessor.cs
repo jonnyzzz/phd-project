@@ -3,19 +3,21 @@ using DSIS.Core.Util;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
-  internal sealed class RectProcessor : RectProcessorBase, IRectProcessor<IntegerCoordinate>
+  internal sealed class RectProcessor<T, Q> : RectProcessorBase<T, Q>, IRectProcessor<Q>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q> 
   {
     private readonly double[] myEps;
 
-    public RectProcessor(IntegerCoordinateSystem coordinateSystem, double[] eps) : base(coordinateSystem)
+    public RectProcessor(T coordinateSystem, double[] eps) : base(coordinateSystem)
     {
       myEps = eps;
     }
 
-    public IEnumerable<IntegerCoordinate> ConnectCellToRect(double[] left, double[] right)
+    public IEnumerable<Q> ConnectCellToRect(double[] left, double[] right)
     {
       if (!mySystemSpace.ContainsRect(left, right))
-        return EmptyArray<IntegerCoordinate>.Instance;
+        return EmptyArray<Q>.Instance;
 
       for (int i = 0; i < myDim; i++)
       {

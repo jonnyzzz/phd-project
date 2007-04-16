@@ -27,14 +27,10 @@ namespace DSIS.Graph.Test
 
     private class C : B<C>, A
     {
-      #region A Members
-
       public int Foo()
       {
         return 4;
       }
-
-      #endregion
     }
   }
 }

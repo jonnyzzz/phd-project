@@ -3,9 +3,11 @@ using DSIS.BoxIterators;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
-  internal sealed class OverlappingProcessor : IPointProcessor<IntegerCoordinate>
+  internal sealed class OverlappingProcessor<T, Q> : IPointProcessor<Q>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q> 
   {
-    private readonly IntegerCoordinateSystem myCoordinateSystem;
+    private readonly T myCoordinateSystem;
     private readonly long[] myPoint;
     private readonly long[] myPoint2;
     private readonly long[] myPoint3;
@@ -18,7 +20,7 @@ namespace DSIS.IntegerCoordinates.Impl
     private BoxIterator<long> myIterator;
 
 
-    public OverlappingProcessor(IntegerCoordinateSystem coordinateSystem, double[] percent)
+    public OverlappingProcessor(T coordinateSystem, double[] percent)
     {
       myCoordinateSystem = coordinateSystem;
 
@@ -49,7 +51,7 @@ namespace DSIS.IntegerCoordinates.Impl
       }
     }
 
-    public IEnumerable<IntegerCoordinate> AddPoint(double[] value)
+    public IEnumerable<Q> AddPoint(double[] value)
     {
       bool iter = false;
       for (int i = 0; i < myDim; i++)
@@ -72,7 +74,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
       if (!iter)
       {
-        yield return new IntegerCoordinate((long[]) myPoint.Clone());
+        yield return myCoordinateSystem.Create(myPoint);
       }
       else
       {
@@ -91,7 +93,7 @@ namespace DSIS.IntegerCoordinates.Impl
             ok &= myCoordinateSystem.Intersects(ts[i], i);
           }
           if (ok && (isFirst || fl))
-            yield return new IntegerCoordinate((long[]) ts.Clone());
+            yield return myCoordinateSystem.Create(ts);
 
           isFirst = false;
         }

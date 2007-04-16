@@ -1,44 +1,19 @@
 /*
- * Created by: 
+ * Created by: Eugene.Petrenko
  * Created: 3 декабря 2006 г.
  */
 
-using DSIS.Graph.Abstract;
-using DSIS.IntegerCoordinates;
-using DSIS.IntegerCoordinates.Tests;
+using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Tests
+namespace DSIS.Graph
 {
   [TestFixture]
-  public class SimpleGraphTest
+  public class SimpleGraphTest : SimpleGraphTestBase<IntegerCoordinateSystem, IntegerCoordinate>
   {
-    private SimpleGraph<IntegerCoordinate> myGraph;
-    private IIntegerCoordinateSystem<IntegerCoordinate> mySystem;
-
-    [SetUp]
-    public void SetUp()
+    protected override int Dimension
     {
-      mySystem = IntegerCoordinateSystemFactory.Create(new MockSystemSpace(5, 0, 1, 100));
-      myGraph = new SimpleGraph<IntegerCoordinate>(mySystem);
-    }
-
-    [TearDown]
-    public void TearDown()
-    {
-      myGraph = null;
-    }
-
-    [Test]
-    public void Test_01()
-    {
-      Assert.AreEqual("Graph [Nodes: 0, Edges: 0]\r\nFinished!\r\n\r\n", myGraph.Dump());
-    }
-
-    [Test]
-    public void Test_02()
-    {
-      Assert.AreEqual("Graph [Nodes: 0, Edges: 0]", myGraph.ToString());
+      get { return 5; }
     }
 
     [Test]

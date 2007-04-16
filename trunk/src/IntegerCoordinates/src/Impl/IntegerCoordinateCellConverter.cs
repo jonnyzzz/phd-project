@@ -1,18 +1,21 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 
-namespace DSIS.IntegerCoordinates
+namespace DSIS.IntegerCoordinates.Impl
 {
-  internal class IntegerCoordinateCellConverter : ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate>
+  internal class IntegerCoordinateCellConverter<T, Q> : ICellCoordinateSystemConverter<Q, Q> 
+    where T : IIntegerCoordinateSystem<Q> 
+    where Q : IIntegerCoordinate<Q>
   {
-    private ICellCoordinateSystem<IntegerCoordinate> myFromSystem;
-    private ICellCoordinateSystem<IntegerCoordinate> myToSystem;
+    private T myFromSystem;
+    private T myToSystem;
     private LongLBoxFixedDimentionMulIterator myBoxIterator;
     private long[] myDivision;
     private int myDim;
 
-    public IntegerCoordinateCellConverter(ICellCoordinateSystem<IntegerCoordinate> fromSystem,
-                                          ICellCoordinateSystem<IntegerCoordinate> toSystem, long[] division)
+    public IntegerCoordinateCellConverter(T fromSystem,
+                                          T toSystem, 
+                                          long[] division)
     {
       myFromSystem = fromSystem;
       myToSystem = toSystem;
@@ -26,22 +29,26 @@ namespace DSIS.IntegerCoordinates
       get { return myDivision; }
     }
 
-    public ICellCoordinateSystem<IntegerCoordinate> FromSystem
+    public ICellCoordinateSystem<Q> FromSystem
     {
       get { return myFromSystem; }
     }
 
-    public IEnumerable<IntegerCoordinate> Subdivide(IntegerCoordinate coordinate)
+    public IEnumerable<Q> Subdivide(Q coordinate)
     {
-      long[] v =coordinate.myCoordinate;
+      long[] v = new long[myDim];
+      for (int i = 0; i < myDim; i++)
+      {
+        v[i] = coordinate.GetCoordinate(i);
+      } 
 
       foreach (long[] longs in myBoxIterator.Iterate(v, myDivision))
       {
-        yield return new IntegerCoordinate((long[]) longs.Clone());
+        yield return myToSystem.Create(longs);
       }
     }
 
-    public ICellCoordinateSystem<IntegerCoordinate> ToSystem
+    public ICellCoordinateSystem<Q> ToSystem
     {
       get { return myToSystem; }
     }

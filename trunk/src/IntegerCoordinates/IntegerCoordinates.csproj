@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Generated\IntegerCoordinate2d.cs" />
+    <Compile Include="src\Generated\IntegerCoordinateSystem2d.cs" />
     <Compile Include="src\IIntegerCoordinateSystem.cs" />
     <Compile Include="src\IIntegerCoordinate.cs" />
     <Compile Include="src\Impl\IntegerCoordinate.cs" />
@@ -54,15 +55,24 @@
     <Compile Include="src\Impl\RectProcessor.cs" />
     <Compile Include="src\Impl\RectProcessorBase.cs" />
     <Compile Include="src\IRectProcessors.cs" />
-    <Compile Include="testSrc\CellConnectionAdapterOneDimTest.cs" />
-    <Compile Include="testSrc\CellConnectionAdapterTest.cs" />
-    <Compile Include="testSrc\CellConnectionAdapterTwoDimTest.cs" />
+    <Compile Include="testSrc\Generated\SubdivisionTest.cs" />
+    <Compile Include="testSrc\Generic\CellConnectionAdapterTwoDimBaseTest.cs" />
+    <Compile Include="testSrc\Generated\CellConnectionAdapterOneDimTest.cs" />
+    <Compile Include="testSrc\Generated\IntegerCoordinate2dTest.cs" />
+    <Compile Include="testSrc\Generic\CellConnectionAdapterOneDimBaseTest.cs" />
+    <Compile Include="testSrc\Impl\CellConnectionAdapterOneDimTest.cs" />
+    <Compile Include="testSrc\Generic\CellConnectionAdapterTest.cs" />
+    <Compile Include="testSrc\Impl\CellConnectionAdapterTwoDimTest.cs" />
     <Compile Include="testSrc\CellConnectionBuilder2DPerformanceTest.cs" />
     <Compile Include="testSrc\CellConnectionBuilderPerformanceTestBase.cs" />
-    <Compile Include="testSrc\IntegerCoordinatesTest.cs" />
-    <Compile Include="testSrc\IntegerCoordinateSystemTest.cs" />
+    <Compile Include="testSrc\Generated\IntegerCoordinateSystem2dTest.cs" />
+    <Compile Include="testSrc\Generic\IntegerCoordinatesBaseTest.cs" />
+    <Compile Include="testSrc\Impl\IntegerCoordinatesTest.cs" />
+    <Compile Include="testSrc\Generic\IntegerCoordinateSystemBaseTest.cs" />
+    <Compile Include="testSrc\Impl\IntegerCoordinateSystemTest.cs" />
     <Compile Include="testSrc\MockSystemSpace.cs" />
-    <Compile Include="testSrc\SubdivisionTest.cs" />
+    <Compile Include="testSrc\Impl\SubdivisionTest.cs" />
+    <Compile Include="testSrc\Generic\SubdivisionTestBase.cs" />
     <Compile Include="testSrc\TwoDimCoordinateAssert.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,26 +1,29 @@
 using System.Collections.Generic;
+using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.IntegerCoordinates.Tests
+namespace DSIS.IntegerCoordinates.Generic
 {
-  [TestFixture]
-  public class IntegerCoordinateSystemTest
+  public class IntegerCoordinateSystemBaseTest<T, Q> 
+    where T :IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q>
   {
     private MockSystemSpace mySpace = null;
-    private IntegerCoordinateSystem myCS = null;
+    private T myCS = default(T);
 
     [SetUp]
     public void SetUp()
     {
       mySpace = new MockSystemSpace(2, 0, 1, 5);
-      myCS = new IntegerCoordinateSystem(mySpace);
+      myCS = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(mySpace);
     }
+
 
     [TearDown]
     public void TeamDown()
     {
       mySpace = null;
-      myCS = null;
+      myCS = default(T);
     }
 
     [Test]
@@ -44,16 +47,16 @@ namespace DSIS.IntegerCoordinates.Tests
     [Test]
     public void Test_03()
     {
-      List<IntegerCoordinate> cnt = new List<IntegerCoordinate>(myCS.InitialSubdivision);
+      List<Q> cnt = new List<Q>(myCS.InitialSubdivision);
       Assert.AreEqual(25, cnt.Count);
     }
 
     [Test]
     public void Test_04()
     {
-      List<IntegerCoordinate> c = new List<IntegerCoordinate>(myCS.InitialSubdivision);
+      List<Q> c = new List<Q>(myCS.InitialSubdivision);
 
-      Assert.IsTrue(myCS.Dimension == 2);
+      Assert.AreEqual(2, myCS.SystemSpace.Dimension);
 
       bool[][] bs = new bool[myCS.Subdivision[0]][];
       for (int i = 0; i < myCS.Subdivision[0]; i++)
@@ -61,7 +64,7 @@ namespace DSIS.IntegerCoordinates.Tests
         bs[i] = new bool[myCS.Subdivision[1]];
       }
 
-      c.ForEach(delegate(IntegerCoordinate ic)
+      c.ForEach(delegate(Q ic)
                   {
                     long coordinate1 = ic.GetCoordinate(0);
                     long coordinate2 = ic.GetCoordinate(1);
@@ -80,7 +83,8 @@ namespace DSIS.IntegerCoordinates.Tests
     [Test]
     public void Test_05()
     {
-      IntegerCoordinate c = myCS.FromPoint(new double[] {0, 0});
+      Q c = myCS.FromPoint(new double[] {0, 0});
+      Assert.IsNotNull(c);
       Assert.AreEqual(0, c.GetCoordinate(0));
       Assert.AreEqual(0, c.GetCoordinate(1));
     }
@@ -88,7 +92,8 @@ namespace DSIS.IntegerCoordinates.Tests
     [Test]
     public void Test_06()
     {
-      IntegerCoordinate c = myCS.FromPoint(new double[] {0.1, 0.1});
+      Q c = myCS.FromPoint(new double[] {0.1, 0.1});
+      Assert.IsNotNull(c);
       Assert.AreEqual(0, c.GetCoordinate(0));
       Assert.AreEqual(0, c.GetCoordinate(1));
     }

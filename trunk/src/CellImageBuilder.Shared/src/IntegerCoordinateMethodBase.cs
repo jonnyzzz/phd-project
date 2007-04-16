@@ -3,15 +3,17 @@ using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.Shared
 {
-  public abstract class IntegerCoordinateMethodBase
+  public abstract class IntegerCoordinateMethodBase<T, Q> 
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q>
   {
-    protected IntegerCoordinateSystem mySystem;
-    protected ICellConnectionBuilder<IntegerCoordinate> myBuilder;
+    protected T mySystem;
+    protected ICellConnectionBuilder<Q> myBuilder;
     protected int myDim;
 
-    public virtual void Bind(CellImageBuilderContext<IntegerCoordinate> context)
+    public virtual void Bind(CellImageBuilderContext<Q> context)
     {
-      mySystem = (IntegerCoordinateSystem) context.System;
+      mySystem = (T) context.System;
       myBuilder = context.ConnectionBuilder;
       myDim = context.System.SystemSpace.Dimension;
     }

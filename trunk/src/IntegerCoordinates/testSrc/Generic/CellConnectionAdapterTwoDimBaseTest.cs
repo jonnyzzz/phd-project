@@ -3,28 +3,26 @@ using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.IntegerCoordinates.Test
+namespace DSIS.IntegerCoordinates.Generic
 {
-  [TestFixture]
-  public class CellConnectionAdapterTwoDimTest : CellConnectionAdapterTestBase
+  public abstract class CellConnectionAdapterTwoDimBaseTest<T,Q> : CellConnectionAdapterTestBase<T,Q>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q>
   {
-    private IntegerCoordinateSystem myIcs;
-
     private void DoTestAbstract(DoBuild bld, string assert)
     {
       double[] sleft = {0, 0};
       double[] sright = {10, 10};
       long[] sgrid = {10, 10};
 
-      IntegerCoordinateSystem ics = new IntegerCoordinateSystem(
-        new MockSystemSpace(2, sleft, sright, sgrid)
-        );
+      mySpace = new MockSystemSpace(2, sleft, sright, sgrid);
+      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(mySpace);
 
       myIcs = ics;
-      List<IntegerCoordinate> data = DoTest(ics, bld);
+      List<Q> data = DoTest(ics, bld);
 
       TwoDimCoordinateAssert.Assert(ics, data, assert);
-      myIcs = null;
+      myIcs = default(T);
     }
 
     private void DoTestAddCellToRect(double[] left, double[] right, string assert)
@@ -32,21 +30,21 @@ namespace DSIS.IntegerCoordinates.Test
       double[] eps = {0, 0};
 
       DoTestAbstract(
-        delegate(ICellConnectionBuilder<IntegerCoordinate> ad)
+        delegate(ICellConnectionBuilder<Q> ad)
           {
-            IRectProcessor<IntegerCoordinate> ps = myIcs.ProcessorFactory.CreateRectProcessor(eps);
+            IRectProcessor<Q> ps = myIcs.ProcessorFactory.CreateRectProcessor(eps);
             
-            ad.ConnectToMany(null, ps.ConnectCellToRect(left, right));
+            ad.ConnectToMany(default(Q), ps.ConnectCellToRect(left, right));
           }, assert);
     }
 
     private void DoTestAddCellToPoint(double[] point, double[] perc, string assert)
     {
       DoTestAbstract(
-        delegate(ICellConnectionBuilder<IntegerCoordinate> ad)
+        delegate(ICellConnectionBuilder<Q> ad)
           {
-            IRadiusProcessor<IntegerCoordinate> ps = myIcs.CreateRadiusProcessor();
-             ad.ConnectToMany(null, ps.ConnectCellToRadius(point, perc));
+            IRadiusProcessor<Q> ps = myIcs.ProcessorFactory.CreateRadiusProcessor();
+            ad.ConnectToMany(default(Q), ps.ConnectCellToRadius(point, perc));
           },
         assert);
     }

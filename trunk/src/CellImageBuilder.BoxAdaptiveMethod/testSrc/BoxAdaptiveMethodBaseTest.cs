@@ -3,20 +3,12 @@ using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
+namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
-  [TestFixture]
-  public class BoxAdaptiveMethodTest : MethodTestBase<BoxAdaptiveMethod, BoxAdaptiveMethodSettings>
+  public abstract class BoxAdaptiveMethodBaseTest<T,Q> : MethodTestBase<T, Q, BoxAdaptiveMethod<T, Q>, BoxAdaptiveMethodSettings>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q>
   {
-    [Test]
-    public void Test_01()
-    {
-      BoxAdaptiveMethodSettings stategy = new BoxAdaptiveMethodSettings(
-        100, 0.1);
-      DoTestOneDimensionAndAssert(0, 10, 10,
-                                  5, stategy,
-                                  delegate(double ins) { return ins; }, 4, 6);
-    }
 
     [Test]
     public void Test_02()
@@ -25,7 +17,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
         100, 0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
-      IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(ss);
+      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(5, 5),
@@ -56,7 +48,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
         100, 0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
-      IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(ss);
+      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(5, 5),
@@ -87,7 +79,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
         100, 0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
-      IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(ss);
+      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(2, 2),
@@ -118,7 +110,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
         100, 0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
-      IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(ss);
+      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(1, 1),
@@ -149,7 +141,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
         100, 0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
-      IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(ss);
+      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(1, 1),
@@ -180,7 +172,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
         100, 0.1);
 
       MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
-      IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(ss);
+      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(1, 1),

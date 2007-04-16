@@ -6,13 +6,16 @@ using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Test
+namespace DSIS.Graph
 {
-  public abstract class ComponentGraphTestBase
+  public abstract class ComponentGraphTestBase<T, Q, G>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q>
+    where G : IGraphWithStrongComponent<Q>
   {
-    protected IGraphWithStrongComponent<IntegerCoordinate> myGraph;
-    protected IGraphStrongComponents<IntegerCoordinate> myComponents = null;
-    protected IIntegerCoordinateSystem<IntegerCoordinate> mySystem;
+    protected G myGraph;
+    protected IGraphStrongComponents<Q> myComponents = null;
+    private T mySystem;
     private int myNodeId;
 
     public void ComputeComponents()
@@ -23,24 +26,39 @@ namespace DSIS.Graph.Test
     [SetUp]
     public virtual void SetUp()
     {
-      mySystem = IntegerCoordinateSystemFactory.Create(new MockSystemSpace(1, 0, 1, 1000));
-      myGraph = CreateGraph();
+      mySystem = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(new MockSystemSpace(Dimension, 0, 1, 1000));
+      myGraph = CreateGraph(mySystem);
       myNodeId = 0;
     }
 
-    protected abstract IGraphWithStrongComponent<IntegerCoordinate> CreateGraph();
+    protected virtual int Dimension { get { return 1;} }
+    protected abstract G CreateGraph(T system);
 
     [TearDown]
     public virtual void TearDown()
     {
-      mySystem = null;
-      myGraph = null;
+      mySystem = default(T);
+      myGraph = default(G);
     }
 
-
-    protected INode<IntegerCoordinate> CreateNode()
+    protected INode<Q> CreateNode()
     {
-      return myGraph.AddNode(((IntegerCoordinateSystem)myGraph.CoordinateSystem).Create(myNodeId++));
+      return myGraph.AddNode(CreateCoordinate());
+    }
+    
+    protected Q CreateCoordinate()
+    {
+      return CreateCoordinate(myNodeId++, mySystem);
+    }
+
+    protected Q CreateCoordinate(long nodeId)
+    {
+      return CreateCoordinate(nodeId, mySystem);
+    }
+
+    protected virtual Q CreateCoordinate(long nodeId, T t)
+    {
+      return t.Create(nodeId);
     }
 
     protected List<IStrongComponentInfo> OneComponent
@@ -69,13 +87,13 @@ namespace DSIS.Graph.Test
 
     protected void BuildCircle(int offset, int factor, int length)
     {
-      INode<IntegerCoordinate> n = null;
-      INode<IntegerCoordinate> n2 = null;
+      INode<Q> n = null;
+      INode<Q> n2 = null;
       for (int i = 0; i < length; i++)
       {
-        INode<IntegerCoordinate> n1;
+        INode<Q> n1;
         n1 = n2;
-        n2 = myGraph.AddNode(mySystem.Create(offset + (i + 1)*factor));
+        n2 = myGraph.AddNode(CreateCoordinate(offset + (i + 1)*factor, mySystem));
         if (n == null)
           n = n2;
         if (n1 != null)

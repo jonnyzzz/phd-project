@@ -6,6 +6,7 @@ using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl;
 using DSIS.IntegerCoordinates;
+using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy

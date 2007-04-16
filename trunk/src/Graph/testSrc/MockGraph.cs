@@ -14,8 +14,6 @@ namespace DSIS.Graph
       myCoordinates = coordinates;
     }
 
-    #region IGraph<T> Members
-
     public void AddEdgeToNode(INode<T> fromNode, INode<T> toNode)
     {
     }
@@ -58,7 +56,5 @@ namespace DSIS.Graph
     {
       get { throw new NotImplementedException(); }
     }
-
-    #endregion
   }
 }

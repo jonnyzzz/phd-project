@@ -3,10 +3,16 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
+using System.Collections.Generic;
+using DSIS.Utils;
+
 namespace DSIS.Core.Util
 {
   public struct Pair<TK, TV>
   {
+    private static readonly IEqualityComparer<TK> ComparerK = EqualityComparerFactory<TK>.GetComparer();
+    private static readonly IEqualityComparer<TV> ComparerV = EqualityComparerFactory<TV>.GetComparer();
+
     public readonly TK First;
     public readonly TV Second;
 
@@ -20,13 +26,13 @@ namespace DSIS.Core.Util
     {
       if (!(obj is Pair<TK, TV>)) return false;
       Pair<TK, TV> pair = (Pair<TK, TV>) obj;
-      return Equals(First, pair.First) && Equals(Second, pair.Second);
+      return ComparerK.Equals(First, pair.First) && ComparerV.Equals(Second, pair.Second);
     }
 
     public override int GetHashCode()
     {
-      return (First != null ? First.GetHashCode() : 0) +
-             29*(Second != null ? Second.GetHashCode() : 11);
+      return (First != null ? ComparerK.GetHashCode(First) : 0) +
+             29*(Second != null ? ComparerV.GetHashCode(Second) : 11);
     }
 
     private static string SafeToString<T>(T t)

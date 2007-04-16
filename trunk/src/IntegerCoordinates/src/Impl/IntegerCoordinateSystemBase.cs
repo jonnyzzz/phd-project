@@ -1,9 +1,21 @@
 using System;
+using System.Collections.Generic;
+using DSIS.Core.Coordinates;
 using DSIS.Core.System;
+using DSIS.Core.Util;
 
-namespace DSIS.IntegerCoordinates
+namespace DSIS.IntegerCoordinates.Impl
 {
-  public abstract class IntegerCoordinateSystemBase<T> where T : IIntegerCoordinate<T>
+  public interface IEXIntegerCoordinateSystemBase<TInh, Q>  : IIntegerCoordinateSystem<Q>
+    where TInh : IIntegerCoordinateSystem<Q> 
+    where Q : IIntegerCoordinate<Q>
+  {
+    TInh SubdividedCoordinateSystem(long[] division);
+  }
+
+  public abstract class IntegerCoordinateSystemBase<TInh, Q> 
+    where TInh : IEXIntegerCoordinateSystemBase<TInh, Q> 
+    where Q : IIntegerCoordinate<Q>
   {
     private readonly ISystemSpace mySystemSpace;
 
@@ -13,10 +25,14 @@ namespace DSIS.IntegerCoordinates
     protected readonly int myDimension;
 
     //from ISystemSpace. Optimization
-    private readonly double[] myAreaLeftPoint;   
+    protected readonly double[] myAreaLeftPoint;
+
+    private readonly TInh myInh;
  
     public IntegerCoordinateSystemBase(ISystemSpace systemSpace, long[] subdivision)
     {
+      myInh = (TInh)(object)this;
+
       mySystemSpace = systemSpace;
       mySubdivision = subdivision;
       myDimension = subdivision.Length;
@@ -27,10 +43,10 @@ namespace DSIS.IntegerCoordinates
       myCellSize = new double[mySubdivision.Length];
       myCellSizeHalf = new double[mySubdivision.Length];
 
-      for (int i = mySubdivision.Length - 1; i >= 0; i--)
+      for (int i = 0; i < mySubdivision.Length;  i++)
       {
-        myCellSize[i] = (mySystemSpace.AreaRightPoint[i] - mySystemSpace.AreaLeftPoint[i])/subdivision[i];
-        myCellSizeHalf[i] = myCellSize[i]/2;
+        myCellSize[i] = (mySystemSpace.AreaRightPoint[i] - mySystemSpace.AreaLeftPoint[i]) / subdivision[i];
+        myCellSizeHalf[i] = myCellSize[i] / 2;
       }
 
       myAreaLeftPoint = mySystemSpace.AreaLeftPoint;
@@ -39,6 +55,40 @@ namespace DSIS.IntegerCoordinates
     public IntegerCoordinateSystemBase(ISystemSpace systemSpace)
       : this(systemSpace, systemSpace.InitialSubdivision)
     {
+    }
+
+    public CountEnumerable<Q> InitialSubdivision
+    {
+      get { return new CountEnumerable<Q>(GetInitialSubdivision(), GetInitialCellsCount()); }
+    }
+
+    private IEnumerable<Q> GetInitialSubdivision()
+    {
+      long[] array = new long[myDimension];
+      for (int i = 0; i < myDimension; i++)
+      {
+        array[i] = 0;
+      }
+
+      long limit = mySubdivision[myDimension - 1];
+      while (array[myDimension - 1] < limit)
+      {
+        yield return myInh.Create(array);
+        array[0]++;
+        for (int i = 0; i < myDimension - 1; i++)
+        {
+          if (array[i] >= mySubdivision[i])
+          {
+            array[i] = 0;
+            array[i + 1]++;
+          }
+        }
+      }
+    }
+
+    public ICellCoordinateSystemConverter<Q, Q> Subdivide(long[] division)
+    {
+      return new IntegerCoordinateCellConverter<TInh, Q>(myInh, myInh.SubdividedCoordinateSystem(division), division);
     }
 
     public double[] CellSize
@@ -64,11 +114,6 @@ namespace DSIS.IntegerCoordinates
     protected static long Ceil(double v)
     {
       return (long)(v);
-    }
-
-    public int Dimension
-    {
-      get { return myDimension; }
     }
 
     protected long GetInitialCellsCount()
@@ -104,6 +149,52 @@ namespace DSIS.IntegerCoordinates
         div[i] = mySubdivision[i]*division[i];
       }
       return div;
+    }
+
+    public double[] FillArrayFromCell(double cellSizeFactor)
+    {
+      double[] eps = new double[myDimension];
+      for (int i = 0; i < myDimension; i++)
+        eps[i] = cellSizeFactor * myCellSize[i];
+      return eps;
+    }
+
+    public double[] FillArray(double cellSizeFactor)
+    {
+      double[] eps = new double[myDimension];
+      for (int i = 0; i < myDimension; i++)
+        eps[i] = cellSizeFactor;
+      return eps;
+    }
+
+    public IRadiusProcessor<Q> CreateRadiusProcessor()
+    {
+      return new RadiusProcessor<TInh, Q>(myInh);
+    }
+
+    public IRectProcessor<Q> CreateRectProcessor(double[] eps)
+    {
+      return new RectProcessor<TInh, Q>(myInh, eps);
+    }
+
+    public IRectProcessor<Q> CreateRectProcessor(double cellSizeFactor)
+    {
+      return CreateRectProcessor(FillArrayFromCell(cellSizeFactor));
+    }
+
+    public IPointProcessor<Q> CreatePointProcessor()
+    {
+      return new PointProcessor<TInh, Q>(myInh);
+    }
+
+    public IPointProcessor<Q> CreateOverlapedPointProcessor(double cellSizePercent)
+    {
+      return new OverlappingProcessor<TInh, Q>(myInh, FillArray(cellSizePercent));
+    }
+
+    public IPointProcessor<Q> CreateOverlapedPointProcessor(double[] cellSizePercent)
+    {
+      return new OverlappingProcessor<TInh, Q>(myInh, cellSizePercent);
     }
   }
 }

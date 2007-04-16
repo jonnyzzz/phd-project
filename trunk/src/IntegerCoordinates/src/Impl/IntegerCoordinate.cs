@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using DSIS.Utils;
 
-namespace DSIS.IntegerCoordinates
+namespace DSIS.IntegerCoordinates.Impl
 {
   [EqualityComparer(typeof (IntegerCoordinateEqualityComparer))]
-  public sealed class IntegerCoordinate : IIntegerCoordinate<IntegerCoordinate>, IIntegerCoordinateDebug
+  public sealed class IntegerCoordinate : IIntegerCoordinate<IntegerCoordinate>
   {
     public readonly long[] myCoordinate;
 
@@ -20,24 +20,14 @@ namespace DSIS.IntegerCoordinates
       get { return IntegerCoordinateEqualityComparer.INSTANCE; }
     }
 
-    public bool Equals(IntegerCoordinate ac)
+    public override bool Equals(object obj)
     {
-      return IntegerCoordinateEqualityComparer.INSTANCE.Equals(this, ac);
+      throw new NotImplementedException();
     }
 
     public override int GetHashCode()
     {
-      return IntegerCoordinateEqualityComparer.INSTANCE.GetHashCode(this);
-    }
-
-    long[] IIntegerCoordinateDebug.GetCoordinates()
-    {
-      return myCoordinate;
-    }
-
-    public IntegerCoordinate Clone()
-    {
-      return new IntegerCoordinate((long[]) myCoordinate.Clone());
+      throw new NotImplementedException();
     }
 
     public long GetCoordinate(int index)
@@ -48,12 +38,6 @@ namespace DSIS.IntegerCoordinates
     public int Dimension
     {
       get { return myCoordinate.Length; }
-    }
-
-    [Obsolete()]
-    internal long[] Coordinate
-    {
-      get { return myCoordinate; }
     }
 
     public override string ToString()

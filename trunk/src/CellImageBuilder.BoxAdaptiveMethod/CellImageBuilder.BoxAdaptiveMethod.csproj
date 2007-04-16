@@ -45,8 +45,10 @@
     <Compile Include="src\Point.cs" />
     <Compile Include="src\PointEqualityComparer.cs" />
     <Compile Include="src\SimpleTaskQueue.cs" />
+    <Compile Include="testSrc\BoxAdaptiveMethodBaseTest.cs" />
+    <Compile Include="testSrc\BoxAdaptiveMethodIntegerCoordinate2dTest.cs" />
+    <Compile Include="testSrc\BoxAdaptiveMethodIntegerCoordinateTest.cs" />
     <Compile Include="testSrc\BoxAdaptiveMethodPerformanceTest.cs" />
-    <Compile Include="testSrc\BoxAdaptiveMethodTest.cs" />
     <Compile Include="testSrc\DictionaryTest.cs" />
     <Compile Include="testSrc\PointTest.cs" />
   </ItemGroup>

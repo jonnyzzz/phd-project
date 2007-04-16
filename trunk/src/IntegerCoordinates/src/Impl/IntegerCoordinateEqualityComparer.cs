@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.IntegerCoordinates.Impl;
 
 namespace DSIS.IntegerCoordinates
 {

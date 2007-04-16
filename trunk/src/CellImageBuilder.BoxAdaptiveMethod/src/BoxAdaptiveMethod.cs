@@ -9,7 +9,9 @@ using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
-  public class BoxAdaptiveMethod : IntegerCoordinateMethodBase, ICellImageBuilder<IntegerCoordinate>
+  public class BoxAdaptiveMethod<T, Q> : IntegerCoordinateMethodBase<T, Q>, ICellImageBuilder<Q>
+    where T : IIntegerCoordinateSystem<Q>
+    where Q : IIntegerCoordinate<Q>
   {
     private IFunction<double> myFunction;
     private double[] x;
@@ -31,20 +33,20 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     private BoxIterator<Divide> myIterator;
 
-    private IPointProcessor<IntegerCoordinate> myOverlappingProcessor;
-    private IRadiusProcessor<IntegerCoordinate> myRadiusProcessor;
+    private IPointProcessor<Q> myOverlappingProcessor;
+    private IRadiusProcessor<Q> myRadiusProcessor;
 
     private Queue<Pair<Point, Point>> myQueue = new Queue<Pair<Point, Point>>();
-    private List<IntegerCoordinate> myPoints = new List<IntegerCoordinate>(10000);
+    private List<Q> myPoints = new List<Q>(10000);
     
     private int myLimit;
     private int myProcessed;
     private double myAddRadiusFactor;
 
-    public override void Bind(CellImageBuilderContext<IntegerCoordinate> context)
+    public override void Bind(CellImageBuilderContext<Q> context)
     {
       base.Bind(context);
-      myRadiusProcessor = mySystem.CreateRadiusProcessor();
+      myRadiusProcessor = mySystem.ProcessorFactory.CreateRadiusProcessor();
 
       myFunction = context.Function.GetFunction<double>();
 
@@ -89,10 +91,10 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
         divRight[i] = Divide.Second;
         per[i] = settings.Overlaping;
       }
-      myOverlappingProcessor = mySystem.CreateOverlapedPointProcessor(per);
+      myOverlappingProcessor = mySystem.ProcessorFactory.CreateOverlapedPointProcessor(per);
     }
 
-    public void BuildImage(IntegerCoordinate coord)
+    public void BuildImage(Q coord)
     {
       myProcessed = 0;
 
@@ -115,9 +117,9 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       myQueue.Clear();
     }
 
-    public ICellImageBuilder<IntegerCoordinate> Clone()
+    public ICellImageBuilder<Q> Clone()
     {
-      return new BoxAdaptiveMethod();
+      return new BoxAdaptiveMethod<T, Q>();
     }
 
     private void Evaluate(Point pt, double[] output)

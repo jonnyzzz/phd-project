@@ -75,12 +75,15 @@
     <Compile Include="testSrc\MockGraph.cs" />
     <Compile Include="testSrc\MockNode.cs" />
     <Compile Include="testSrc\OrderedListTest.cs" />
+    <Compile Include="testSrc\SimpleGraph2dTest.cs" />
     <Compile Include="testSrc\SimpleGraphTest.cs" />
     <Compile Include="testSrc\HashSetTest.cs" />
+    <Compile Include="testSrc\SimpleGraphTestBase.cs" />
     <Compile Include="testSrc\StrongComponentGraphTest.cs" />
     <Compile Include="testSrc\ComponentGraphTestBase.cs" />
     <Compile Include="testSrc\StrongComponentStrongComponentManager2Test.cs" />
     <Compile Include="testSrc\StrongComponentStrongComponentManagerTest.cs" />
+    <Compile Include="testSrc\TarjanComponentGraphBaseTest.cs" />
     <Compile Include="testSrc\TarjanComponentGraphTest.cs" />
   </ItemGroup>
   <ItemGroup>
