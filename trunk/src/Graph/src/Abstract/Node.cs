@@ -4,6 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
+  [EqualityComparer(typeof(NodeEqualityComparer<,>))]
   public abstract class Node<TInh, TCell> : INode<TCell>
     where TCell : ICellCoordinate<TCell>
     where TInh : Node<TInh, TCell>

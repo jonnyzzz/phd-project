@@ -22,14 +22,10 @@ namespace DSIS.IntegerCoordinates.Generated
       get { return IntegerCoordinate2dEqualityComparer.INSTANCE; }
     }
 
-    public override bool Equals(object obj)
+    public void CopyTo(long[] dest)
     {
-      throw new NotImplementedException();
-    }
-
-    public override int GetHashCode()
-    {
-      throw new NotImplementedException();
+      dest[0] = l1;
+      dest[1] = l2;
     }
 
     public long GetCoordinate(int index)

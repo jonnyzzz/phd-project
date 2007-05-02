@@ -1,5 +1,6 @@
 using System;
 using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using System.Reflection;
 using DSIS.Utils;
 
@@ -21,7 +22,7 @@ namespace DSIS.CodeCompiler
       }
 
       CompilerParameters ps = new CompilerParameters();
-      ps.ReferencedAssemblies.AddRange(assemblies.ToArray());
+      ps.ReferencedAssemblies.AddRange(new List<string>(assemblies.Values).ToArray());
       ps.CompilerOptions = "/t:library";
       ps.GenerateInMemory = true;
       ps.GenerateExecutable = false;

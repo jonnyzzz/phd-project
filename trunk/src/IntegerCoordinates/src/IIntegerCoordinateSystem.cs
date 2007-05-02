@@ -2,7 +2,13 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.IntegerCoordinates
 {
-  public interface IIntegerCoordinateSystem<T> : ICellCoordinateSystem<T> where T : IIntegerCoordinate<T>
+  public interface IIntegerCoordinateSystemInfo
+  {
+    double[] CellSize { get; }
+    double[] CellSizeHalf { get; }    
+  }
+
+  public interface IIntegerCoordinateSystem<T> : ICellCoordinateSystem<T>, IIntegerCoordinateSystemInfo where T : IIntegerCoordinate<T>
   {
     /// <summary>
     /// Writes to output array the point of top-left conner of cell 
@@ -12,9 +18,6 @@ namespace DSIS.IntegerCoordinates
     /// <param name="output">result array</param>
     void TopLeftPoint(T point, double[] output);
     void CenterPoint(T point, double[] output);
-
-    double[] CellSize { get; }
-    double[] CellSizeHalf { get; }
 
     long ToInternal(double point, int i);
     double ToExternal(long pt, int i);

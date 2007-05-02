@@ -20,14 +20,9 @@ namespace DSIS.IntegerCoordinates.Impl
       get { return IntegerCoordinateEqualityComparer.INSTANCE; }
     }
 
-    public override bool Equals(object obj)
+    public void CopyTo(long[] dest)
     {
-      throw new NotImplementedException();
-    }
-
-    public override int GetHashCode()
-    {
-      throw new NotImplementedException();
+      Array.Copy(myCoordinate, dest, myCoordinate.Length);
     }
 
     public long GetCoordinate(int index)

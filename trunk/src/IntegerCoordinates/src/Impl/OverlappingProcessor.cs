@@ -17,7 +17,7 @@ namespace DSIS.IntegerCoordinates.Impl
     private readonly double[] myORight;
     private readonly int myDim;
 
-    private BoxIterator<long> myIterator;
+    private readonly BoxIterator<long> myIterator;
 
 
     public OverlappingProcessor(T coordinateSystem, double[] percent)
@@ -35,17 +35,12 @@ namespace DSIS.IntegerCoordinates.Impl
       myOnes = new long[myDim];
 
       myOLeft = new double[myDim];
-
       myORight = new double[myDim];
 
       for (int i = 0; i < myDim; i++)
       {
         myZeros[i] = 0;
         myOnes[i] = 1;
-      }
-
-      for (int i = 0; i < myDim; i++)
-      {
         myOLeft[i] = myCoordinateSystem.CellSize[i] * percent[i];
         myORight[i] = myCoordinateSystem.CellSize[i] * (1 - percent[i]);
       }

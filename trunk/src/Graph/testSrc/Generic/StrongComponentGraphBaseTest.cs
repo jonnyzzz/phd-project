@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates;
-using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Test
+namespace DSIS.Graph.Generic
 {
-  public abstract class StrongComponentGraphTest<T,Q> : ComponentGraphTestBase<T,Q, StrongComponentGraph<Q>>
+  public abstract class StrongComponentGraphBaseTest<T,Q> : ComponentGraphTestBase<T,Q, StrongComponentGraph<Q>>
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {

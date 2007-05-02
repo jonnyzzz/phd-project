@@ -3,7 +3,7 @@ using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.Graph
+namespace DSIS.Graph.Generic
 {
   public abstract class SimpleGraphTestBase<T,Q>
     where T : IIntegerCoordinateSystem<Q>
@@ -15,7 +15,8 @@ namespace DSIS.Graph
     [SetUp]
     public void SetUp()
     {
-      mySystem = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(new MockSystemSpace(Dimension, 0, 1, 100));
+      MockSystemSpace space = new MockSystemSpace(Dimension, 0, 1, 100);
+      mySystem = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(space);
       myGraph = new SimpleGraph<Q>(mySystem);
     }
 

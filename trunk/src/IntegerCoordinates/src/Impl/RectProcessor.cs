@@ -11,7 +11,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public RectProcessor(T coordinateSystem, double[] eps) : base(coordinateSystem)
     {
-      myEps = eps;
+      myEps = (double[]) eps.Clone();
     }
 
     public IEnumerable<Q> ConnectCellToRect(double[] left, double[] right)

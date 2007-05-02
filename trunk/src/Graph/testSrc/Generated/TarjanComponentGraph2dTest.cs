@@ -1,15 +1,9 @@
+using DSIS.Graph.Generic;
 using DSIS.IntegerCoordinates.Generated;
-using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
-namespace DSIS.Graph
+namespace DSIS.Graph.Generated
 {
-  [TestFixture]
-  public class TarjanComponentGraphTest : TarjanComponentGraphBaseTest<IntegerCoordinateSystem, IntegerCoordinate>
-  {
-    
-  }
-
   [TestFixture]
   public class TarjanComponentGraph2dTest : TarjanComponentGraphBaseTest<IntegerCoordinateSystem2d, IntegerCoordinate2d>
   {

@@ -6,7 +6,7 @@ namespace DSIS.BoxIterators
 {
   public class BoxIterator<T> : IBoxIterator<T>
   {
-    private static IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
+    private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
 
     private readonly int myDim;
     private readonly int[] steps;

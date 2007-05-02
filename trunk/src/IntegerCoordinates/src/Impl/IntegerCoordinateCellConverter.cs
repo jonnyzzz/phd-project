@@ -7,11 +7,12 @@ namespace DSIS.IntegerCoordinates.Impl
     where T : IIntegerCoordinateSystem<Q> 
     where Q : IIntegerCoordinate<Q>
   {
-    private T myFromSystem;
-    private T myToSystem;
-    private LongLBoxFixedDimentionMulIterator myBoxIterator;
-    private long[] myDivision;
-    private int myDim;
+    private readonly T myFromSystem;
+    private readonly T myToSystem;
+    private readonly LongLBoxFixedDimentionMulIterator myBoxIterator;
+    private readonly long[] myDivision;
+    private readonly long[] myV;
+    private readonly int myDim;
 
     public IntegerCoordinateCellConverter(T fromSystem,
                                           T toSystem, 
@@ -21,6 +22,7 @@ namespace DSIS.IntegerCoordinates.Impl
       myToSystem = toSystem;
       myDivision = division;
       myDim = fromSystem.SystemSpace.Dimension;
+      myV = new long[myDim];
       myBoxIterator = new LongLBoxFixedDimentionMulIterator(myDim);
     }
 
@@ -36,13 +38,12 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public IEnumerable<Q> Subdivide(Q coordinate)
     {
-      long[] v = new long[myDim];
       for (int i = 0; i < myDim; i++)
       {
-        v[i] = coordinate.GetCoordinate(i);
+        myV[i] = coordinate.GetCoordinate(i);
       } 
 
-      foreach (long[] longs in myBoxIterator.Iterate(v, myDivision))
+      foreach (long[] longs in myBoxIterator.Iterate(myV, myDivision))
       {
         yield return myToSystem.Create(longs);
       }

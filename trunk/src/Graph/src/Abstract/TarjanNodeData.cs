@@ -7,15 +7,21 @@ namespace DSIS.Graph.Abstract
   {
     public int Label = 0;
     public int Number = 0;
-    private IEnumerator<TarjanNode<TCell>> myNodes;
+    private IEnumerator<TarjanNode<TCell>> myNodes = null;
+    private readonly TarjanNode<TCell> myNode;
 
-    public TarjanNodeData(IEnumerable<TarjanNode<TCell>> nodes)
+    public TarjanNodeData(TarjanNode<TCell> node)
     {
-      myNodes = nodes.GetEnumerator();
+      myNode = node;      
     }
 
     public bool MoveNext()
     {
+      if (myNodes == null)
+      {
+        myNodes = myNode.EdgesInternal.GetEnumerator();
+      }
+
       return myNodes.MoveNext();
     }
 

@@ -15,8 +15,6 @@ namespace DSIS.Graph.Abstract
     {
     }
 
-    #region IGraphWithStrongComponent<TCell> Members
-
     public IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
     {
       if (myWasComponents)
@@ -148,10 +146,6 @@ namespace DSIS.Graph.Abstract
       return new TarjanStrongComponentImpl<TCell>(this, comps);
     }
 
-    #endregion
-
-    #region IGraphExtension<TarjanNode<TCell>,TCell> Members
-
     TarjanNode<TCell> IGraphExtension<TarjanNode<TCell>, TCell>.CreateNode(TCell coordinate)
     {
       return new TarjanNode<TCell>(coordinate);
@@ -168,7 +162,5 @@ namespace DSIS.Graph.Abstract
     void IGraphExtension<TarjanNode<TCell>, TCell>.NodeAdded(TarjanNode<TCell> node)
     {
     }
-
-    #endregion
   }
 }

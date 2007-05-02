@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Graph.Util;
 using DSIS.Utils;
 
@@ -24,10 +23,9 @@ namespace DSIS.Graph.Abstract
     private readonly IGraphExtension<TNode, TCell> myExt;
     private readonly GraphNodeHashList<TNode, TCell> myNodes;
 
-    private ICellCoordinateSystem<TCell> myCoordinateSystem;
+    private readonly ICellCoordinateSystem<TCell> myCoordinateSystem;
     private int myNodesCount;
     private int myEdgesCount;
-
 
     public AbstractGraph(ICellCoordinateSystem<TCell> coordinateSystem)
     {
@@ -37,8 +35,6 @@ namespace DSIS.Graph.Abstract
       myEdgesCount = 0;
       myNodes = new GraphNodeHashList<TNode, TCell>(Primes.Nearest(65536));
     }
-
-    #region IGraph<TCell> Members
 
     public void AddEdgeToNode(INode<TCell> fromNode, INode<TCell> toNode)
     {
@@ -62,8 +58,6 @@ namespace DSIS.Graph.Abstract
       }
       return node;
     }
-
-    #region Getters
 
     public ICellCoordinateSystem<TCell> CoordinateSystem
     {
@@ -115,8 +109,6 @@ namespace DSIS.Graph.Abstract
       get { return myEdgesCount; }
     }
 
-    #endregion
-
     public IEnumerable<INode<TCell>> GetEdges(INode<TCell> forNode)
     {
       TNode node = (TNode) forNode;
@@ -133,8 +125,6 @@ namespace DSIS.Graph.Abstract
       get { return myNodesCount; }
     }
 
-    #endregion
-
     internal IEnumerable<TNode> NodesInternal
     {
       get { return myNodes.Values; }
@@ -146,13 +136,9 @@ namespace DSIS.Graph.Abstract
       return new ConvertEnumerator<INode<TCell>, TNode>(node.Edges);
     }
 
-    #region Dump
-
     public override string ToString()
     {
       return string.Format("Graph [Nodes: {0}, Edges: {1}]", NodesCount, EdgesCount);
     }
-
-    #endregion
   }
 }

@@ -41,7 +41,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
       xLeft = new double[myDim];
       xRight = new double[myDim];
       yLeft = new double[myDim];
-      yRight = new double[myDim];      
+      yRight = new double[myDim];
       eps = new double[myDim];
       myIterator = new BoxIterator<double>(myDim);
 
@@ -72,17 +72,19 @@ namespace DSIS.CellImageBuilder.BoxMethod
 
       Array.Copy(y, yLeft, myDim);
       Array.Copy(y, yRight, myDim);
-      
-      IEnumerable<double[]> cns = myIterator.EnumerateBox(xLeft, xRight, x);
-      foreach (double[] _ in cns)
+
+      using (IEnumerator<double[]> cns = myIterator.EnumerateBox(xLeft, xRight, x).GetEnumerator())
       {
-        myFunction.Evaluate();
-        for (int i = 0; i < myDim; i++)
+        while (cns.MoveNext())
         {
-          if (yLeft[i] > y[i])
-            yLeft[i] = y[i];
-          if (yRight[i] < y[i])
-            yRight[i] = y[i];
+          myFunction.Evaluate();
+          for (int i = 0; i < myDim; i++)
+          {
+            if (yLeft[i] > y[i])
+              yLeft[i] = y[i];
+            if (yRight[i] < y[i])
+              yRight[i] = y[i];
+          }
         }
       }
 

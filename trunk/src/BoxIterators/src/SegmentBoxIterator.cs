@@ -4,8 +4,8 @@ namespace DSIS.BoxIterators
 {
   public abstract class SegmentBoxIterator<T>
   {
-    public abstract void Inc(ref T t1);
-    public abstract bool IsLower(T t1, T t2);
+    public abstract void Inc(int index, ref T t1);
+    public abstract bool IsLower(int index, T t1, T t2);
 
     public IEnumerable<T[]> EnumerateSteps(T[] left, T[] right, T[] outs)
     {
@@ -18,15 +18,15 @@ namespace DSIS.BoxIterators
       {
         yield return outs;
 
-        Inc(ref outs[0]);
+        Inc(0, ref outs[0]);
 
         for (int i = 0; i < dim; i++)
         {
-          if (!IsLower(outs[i], right[i]))
+          if (!IsLower(i, outs[i], right[i]))
           {
             outs[i] = left[i];
             if (i + 1 < dim)
-              Inc(ref outs[i + 1]);
+              Inc(i+1, ref outs[i + 1]);
             else
               isWorking = false;
           }

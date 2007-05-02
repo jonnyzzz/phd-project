@@ -120,7 +120,7 @@ namespace DSIS.IntegerCoordinates.Generated
 
     public IntegerCoordinateSystem2d SubdividedCoordinateSystem(long[] division)
     {
-      return new IntegerCoordinateSystem2d(SystemSpace, division);
+      return new IntegerCoordinateSystem2d(SystemSpace, GetSubdividedFactor(division));
     }
   }
 }

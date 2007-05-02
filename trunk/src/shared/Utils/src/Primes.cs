@@ -2,7 +2,7 @@ namespace DSIS.Utils
 {
   public static class Primes
   {
-    private static int[] ourPrimes = new int[]
+    private static readonly int[] ourPrimes = new int[]
       {
         2, 3, 7, 11, 0x11, 0x17, 0x1d, 0x25,
         0x2f, 0x3b, 0x47, 0x59, 0x6b, 0x83,

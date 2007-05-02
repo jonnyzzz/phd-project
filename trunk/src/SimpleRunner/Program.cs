@@ -25,9 +25,9 @@ using DSIS.IntegerCoordinates.Impl;
 
 namespace DSIS.SimpleRunner
 {
-  internal class Program
+  public class Program
   {
-    private const int STEPS = 6;
+    private const int STEPS = 11;
     private static string myWorkPath;
     private static string myHomePath;
 
@@ -53,20 +53,20 @@ namespace DSIS.SimpleRunner
 //        new BoxMethod<IntegerCoordinateSystem, IntegerCoordinate>(), 
 //        BoxMethodSettings.Default);
 //      
-//      GC.Collect();
-
-//      Console.Out.WriteLine("Adaptive Method:");
-//      MethodAndLog<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-//        (new BoxAdaptiveMethod<IntegerCoordinateSystem2d, IntegerCoordinate2d>(), 
-//        BoxAdaptiveMethodSettings.Default);
-
       GC.Collect();
 
-      Console.Out.WriteLine("Box Method:");
-      MethodAndLog<IntegerCoordinateSystem2d, IntegerCoordinate2d>(
-        new BoxMethod<IntegerCoordinateSystem2d, IntegerCoordinate2d>(), 
-        BoxMethodSettings.Default);
-      
+      Console.Out.WriteLine("Adaptive Method:");
+      MethodAndLog<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+        (new BoxAdaptiveMethod<IntegerCoordinateSystem2d, IntegerCoordinate2d>(), 
+        BoxAdaptiveMethodSettings.Default);
+//
+//      GC.Collect();
+//
+//      Console.Out.WriteLine("Box Method:");
+//      MethodAndLog<IntegerCoordinateSystem2d, IntegerCoordinate2d>(
+//        new BoxMethod<IntegerCoordinateSystem2d, IntegerCoordinate2d>(), 
+//        BoxMethodSettings.Default);
+//      
       GC.Collect();
 
     }
@@ -179,6 +179,11 @@ namespace DSIS.SimpleRunner
     {
       Console.Out.WriteLine("Begin Entropy Computation");
       DateTime start = DateTime.Now;
+
+      foreach (IStrongComponentInfo info in comps.Components)
+      {
+        tw.WriteLine("Component: nodes {0}", info.NodesCount);
+      }
       
       double entropy = 
         EntropyEvaluator.GetEntropyEvaluator().ComputeEntropy(NullProgressInfo.INSTANCE, graph, comps);

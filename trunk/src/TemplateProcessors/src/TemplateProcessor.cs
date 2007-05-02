@@ -5,7 +5,7 @@ namespace DSIS.TemplateProcessors
 {
   public static class TemplateProcessor
   {
-    private static Regex ourSubstitute = new Regex(@"\[([a-zA-Z0-9]+)\]", RegexOptions.Compiled);
+    private static readonly Regex ourSubstitute = new Regex(@"\[([a-zA-Z0-9]+)\]", RegexOptions.Compiled);
 
     public static string Substitute(Template template, Dictionary<string, string> values)
     {

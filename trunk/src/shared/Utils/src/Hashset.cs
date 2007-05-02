@@ -6,11 +6,10 @@ namespace DSIS.Utils
 {
   public class Hashset<T> : IEnumerable<T>
   {
-    private Dictionary<T, T> mySet;
+    private readonly Dictionary<T, T> mySet;
 
-    public Hashset()
+    public Hashset() : this(EqualityComparerFactory<T>.GetComparer())
     {
-      mySet = new Dictionary<T, T>(EqualityComparerFactory<T>.GetComparer());
     }
 
     public Hashset(IEqualityComparer<T> comparer)
@@ -43,9 +42,9 @@ namespace DSIS.Utils
       mySet.Clear();
     }
 
-    public void AddRange(IEnumerable<T> enums)
+    public void AddRange<P>(IEnumerable<P> enums) where P : T
     {
-      foreach (T t in enums)
+      foreach (P t in enums)
       {
         Add(t);
       }
@@ -81,15 +80,20 @@ namespace DSIS.Utils
       get { return mySet.Count; }
     }
 
-    public T[] ToArray()
+    public static IEnumerable<T> Intersect(Hashset<T> h1, Hashset<T> h2)
     {
-      T[] array = new T[Count];
-      int index = 0;
-      foreach (T t in this)
+      if (h1.Count > h2.Count)
       {
-        array[index++] = t;
+        Hashset<T> t = h1;
+        h1 = h2;
+        h2 = t;
       }
-      return array;      
+
+      foreach (T node1 in h1)
+      {
+        if (h2.Contains(node1))
+          yield return node1;
+      }        
     }
 
     public override string ToString()
@@ -106,14 +110,6 @@ namespace DSIS.Utils
 
   public class Hashset<T, TC> : Hashset<T> where T : TC
   {
-    public Hashset()
-    {
-    }
-
-    public Hashset(IEqualityComparer<T> comparer) : base(comparer)
-    {
-    }
-
     public IEnumerable<TC> ValuesUpcasted
     {
       get
@@ -122,14 +118,6 @@ namespace DSIS.Utils
         {
           yield return t;
         }
-      }
-    }
-
-    public void AddRange(Hashset<T, TC> h)
-    {
-      foreach (T t in h)
-      {
-        Add(t);
       }
     }
   }

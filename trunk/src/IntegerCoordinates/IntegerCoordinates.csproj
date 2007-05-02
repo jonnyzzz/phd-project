@@ -70,6 +70,7 @@
     <Compile Include="testSrc\Impl\IntegerCoordinatesTest.cs" />
     <Compile Include="testSrc\Generic\IntegerCoordinateSystemBaseTest.cs" />
     <Compile Include="testSrc\Impl\IntegerCoordinateSystemTest.cs" />
+    <Compile Include="testSrc\MockIntegerCoordinateSystemInfo.cs" />
     <Compile Include="testSrc\MockSystemSpace.cs" />
     <Compile Include="testSrc\Impl\SubdivisionTest.cs" />
     <Compile Include="testSrc\Generic\SubdivisionTestBase.cs" />

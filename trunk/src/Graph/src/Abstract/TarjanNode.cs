@@ -10,7 +10,7 @@ namespace DSIS.Graph.Abstract
 
     public TarjanNode(TCell coordinate) : base(coordinate)
     {
-      Data = new TarjanNodeData<TCell>(EdgesInternal);
+      Data = new TarjanNodeData<TCell>(this);
     }
 
     public void SetFlag(TarjanNodeFlags mask, bool value)
@@ -39,5 +39,5 @@ namespace DSIS.Graph.Abstract
                   (myFlags & ~(uint) TarjanNodeFlags._MASK);
       }
     }
-  }
+  }  
 }

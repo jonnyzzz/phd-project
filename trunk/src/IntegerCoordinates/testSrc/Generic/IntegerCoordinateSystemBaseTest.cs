@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Core.Coordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
@@ -8,8 +9,8 @@ namespace DSIS.IntegerCoordinates.Generic
     where T :IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
-    private MockSystemSpace mySpace = null;
-    private T myCS = default(T);
+    protected MockSystemSpace mySpace = null;
+    protected T myCS = default(T);
 
     [SetUp]
     public void SetUp()
@@ -115,5 +116,16 @@ namespace DSIS.IntegerCoordinates.Generic
     {
       Assert.AreEqual(0, myCS.ToInternal(0.001, 0));
     }
+
+    [Test]
+    public void Test_Subdivision()
+    {
+      long[] div = { 7, 8 };
+      ICellCoordinateSystemConverter<Q, Q> sb = myCS.Subdivide(div);
+
+      Assert.AreEqual(sb.ToSystem.Subdivision[0], myCS.Subdivision[0] * div[0]);
+      Assert.AreEqual(sb.ToSystem.Subdivision[1], myCS.Subdivision[1] * div[1]);
+    }
+
   }
 }

@@ -3,10 +3,11 @@
  * Created: 3 декабря 2006 г.
  */
 
+using DSIS.Graph.Generic;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
-namespace DSIS.Graph
+namespace DSIS.Graph.Impl
 {
   [TestFixture]
   public class SimpleGraphTest : SimpleGraphTestBase<IntegerCoordinateSystem, IntegerCoordinate>
