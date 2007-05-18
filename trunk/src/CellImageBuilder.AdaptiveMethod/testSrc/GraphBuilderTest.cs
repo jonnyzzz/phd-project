@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace DSIS.CellImageBuilder.AdaptiveMethod
 {
   [TestFixture]
-  public class GraphBuilderTest
+  public class GraphBuilderTest : PointGraphBaseTest
   {
     private Mock myMock;
 
@@ -40,6 +40,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       myMock.TestCreateBuilder(4);
     }
 
+    [Test]
     public void Test_05()
     {
       IGraphBuilder bld = myMock.TestCreateBuilder(1);
@@ -47,8 +48,11 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       IGraphBuilderProcessor ps = bld.Init(new MockIntegerCoordinateSystemInfo(1, 1));
       IFunction<double> function = new MockFunction<double>(1, delegate(double input) { return input; });
-      PointGraph graph = new PointGraph(function, new double[]{0.3});
+      PointGraph graph = new PointGraph(function, new double[]{0.1});
 
+      ps.BuildGraph(graph, new double[]{0});
+
+      AssertDump("build_05", graph.Nodes);
     }
 
     private class Mock : PointGraphInitialBuilder

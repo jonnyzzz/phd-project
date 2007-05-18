@@ -45,6 +45,7 @@
     <Compile Include="src\PointGraphInitialBuilder.cs" />
     <Compile Include="src\PointGraphNode.cs" />
     <Compile Include="testSrc\GraphBuilderTest.cs" />
+    <Compile Include="testSrc\PointGraphBaseTest.cs" />
     <Compile Include="testSrc\PointGraphTest.cs" />
   </ItemGroup>
   <ItemGroup>

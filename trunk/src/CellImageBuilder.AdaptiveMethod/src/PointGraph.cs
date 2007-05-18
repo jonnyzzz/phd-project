@@ -54,18 +54,23 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       n2.Edges.Add(n1);
     }
 
-    public PointGraphNode CreateNode(params double[] data)
+    public PointGraphNode CreateNodeCopy(params double[] data)
     {
       double[] d = CreateArray();
       Array.Copy(data, d, myDim);
-      return CreateNodeInternal(d);
+      return CreateNodeNoCopy(d);
     }
 
-    private PointGraphNode CreateNodeInternal(double[] d)
+    public PointGraphNode CreateNodeNoCopy(params double[] d)
     {
       PointGraphNode node = new PointGraphNode(d);
       myNodes.Add(node);
       return node;      
+    }
+
+    public IEnumerable<PointGraphNode> Nodes
+    {
+      get { return myNodes; }
     }
 
     public Pair<PointGraphNode, List<PointGraphEdge>> Subdivide(PointGraphNode n1, PointGraphNode n2)
@@ -74,7 +79,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       n1.Edges.Remove(n2);
       n2.Edges.Remove(n1);
 
-      PointGraphNode node = CreateNodeInternal(Middle(n1.PointX, n2.PointX));
+      PointGraphNode node = CreateNodeNoCopy(Middle(n1.PointX, n2.PointX));
       foreach (PointGraphNode mid in Hashset<PointGraphNode>.Intersect(n1.Edges, n2.Edges))
       {
         AddEdge(mid, node);

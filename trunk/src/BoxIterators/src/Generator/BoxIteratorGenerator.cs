@@ -9,7 +9,8 @@ namespace DSIS.BoxIterators.Generator
 {
   public static class BoxIteratorGenerator<T>
   {
-    private static Dictionary<int, IBoxIterator<T>> myCaches = new Dictionary<int, IBoxIterator<T>>();
+    private static readonly Dictionary<int, IBoxIterator<T>> myCaches 
+      = new Dictionary<int, IBoxIterator<T>>();
 
     public static IBoxIterator<T> GenerateIterator(int dim)
     {

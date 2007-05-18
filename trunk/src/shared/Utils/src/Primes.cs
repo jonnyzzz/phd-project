@@ -19,6 +19,13 @@ namespace DSIS.Utils
         0x3f928f, 0x4c4987, 0x5b8b6f, 0x6dda89
       };
 
+    public static int ByIndex(int i)
+    {
+      if (i < ourPrimes.Length)
+        return ourPrimes[i];
+      return ourPrimes[ourPrimes.Length - 1];
+    }
+
     public static int Nearest(int v)
     {
       int l = 0;

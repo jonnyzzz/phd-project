@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using DSIS.BoxIterators.Generator;
+using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
+using DSIS.Utils;
 
 namespace DSIS.CellImageBuilder.AdaptiveMethod
 {
@@ -59,6 +62,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
                        }}
 
                        public void BuildGraph(PointGraph graph, double[] point) {{
+                          {5}
                        }}
                    }}
                 }}
@@ -67,7 +71,8 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
           typeof (IIntegerCoordinateSystemInfo).Namespace,
           BuildPrivateFields(dim),
           dim,
-          BuildProcessorConstructor(dim));
+          BuildProcessorConstructor(dim),
+          BuildGeneratorCode(dim));
     }
 
     private static string BuildPrivateFields(int dim)
@@ -90,6 +95,130 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
         sb.AppendFormat("  myEpsHalf{0} = info.CellSizeHalf[{0}];", i);
       }
       return sb.ToString();
+    }
+    
+    private static int[] FillArray(int dim, int v)
+    {
+      int[] r = new int[dim];
+      for (int i = 0; i < dim; i++)
+        r[i] = v;
+      return r;
+    }
+
+    private static string ArrayToString(IEnumerable<int> v)
+    {
+      string s = String.Empty;
+      foreach (int i in v)
+      {
+        s += i;
+      }
+      return s;
+    }
+
+    private delegate string Element(int i);
+    private static string EnumerateArray(int dim, Element el)
+    {
+      StringBuilder sb = new StringBuilder();
+      for (int i = 0; i < dim; i++)
+      {
+        sb.AppendFormat("{1}{0}", el(i), i != 0 ? ", " : "");
+      }
+      return sb.ToString();
+    }
+
+    private static bool IsArc(int[] from, int[] to)
+    {
+      int diffs = 0;
+      for (int i = 0; i < to.Length && diffs < 2; i++)
+      {
+        if (from[i] != to[i])
+          diffs++;
+      }
+      return diffs == 1;
+    }
+
+    private static string BuildGeneratorCode(int dim)
+    {
+      StringBuilder sb = new StringBuilder();
+      for (int i = 0; i < dim; i++)
+      {
+        sb.AppendFormat("double myLeft{0} = point[{0}];", i);
+        sb.AppendLine();
+        sb.AppendFormat("double myRight{0} = myLeft{0} + myEps{0};", i);
+        sb.AppendLine();
+        sb.AppendFormat("double myMiddle{0} = myLeft{0} + myEpsHalf{0};", i);
+        sb.AppendLine();
+      }
+
+      int[] zeros = FillArray(dim, 0);
+      int[] ones = FillArray(dim, 1);
+      
+      foreach (int[] pt in BoxIteratorGenerator<int>.GenerateIterator(dim).EnumerateBox(zeros, ones, new int[dim]))
+      {
+        sb.AppendFormat("PointGraphNode node{0} = graph.CreateNodeNoCopy(", ArrayToString(pt));
+        EnumerateArray(dim, delegate(int i) { return (pt[i] == 0 ? "myLeft" : "myRight") + i; });        
+        sb.AppendLine(");");
+      }
+
+      sb.AppendFormat("PointGraphNode nodeMiddle = graph.CreateNodeNoCopy({0});",
+                      EnumerateArray(dim, delegate(int i)
+                                            {
+                                              return "myMiddle" + i;
+                                            }));
+
+      sb.AppendLine();
+      sb.AppendLine();
+      sb.AppendLine();
+
+      AddedEdgesHash hash = new AddedEdgesHash();
+
+      foreach (int[] pt in BoxIteratorGenerator<int>.GenerateIterator(dim).EnumerateBox(zeros, ones, new int[dim]))
+      {
+        sb.AppendFormat("graph.AddEdge(nodeMiddle, node{0});", ArrayToString(pt));
+        sb.AppendLine();
+
+        foreach (int[] pt2 in BoxIteratorGenerator<int>.GenerateIterator(dim).EnumerateBox(zeros, ones, new int[dim]))
+        {
+          if (!IsArc(pt, pt2) && !hash.HasArc(pt, pt2))
+          {
+            sb.AppendFormat("graph.AddEdge(node{1}, node{0});", ArrayToString(pt), ArrayToString(pt2));
+            sb.AppendLine();            
+            hash.AddEdge(pt, pt2);
+          }
+        }        
+      }
+
+      return sb.ToString();
+    }
+
+    private class AddedEdgesHash
+    {
+      private readonly Hashset<int[]> data = new Hashset<int[]>(ArrayEqualityComparer<int>.INSTANCE);
+
+      public void AddEdge(int[] from, int[] to)
+      {
+        data.Add(MakeKey(from, to));
+        data.Add(MakeKey(to, from));
+      }
+
+      public bool HasArc(int[] from, int[] to)
+      {
+        return data.Contains(MakeKey(from, to));
+      }
+
+          private static int[] MakeKey(int[] from, int[] to)
+    {
+      int[] key = new int[from.Length + to.Length];
+      for(int i=0; i< from.Length; i++)
+      {
+        key[i] = from[i];
+      }
+      for(int i=0; i<to.Length; i++)
+      {
+        key[from.Length + i] = to[i];
+      }
+      return key;
+    }
     }
   }
 }

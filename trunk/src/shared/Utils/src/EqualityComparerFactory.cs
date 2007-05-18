@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using DSIS.Core.Util;
 using DSIS.Utils;
 
 namespace DSIS.Utils
@@ -24,10 +26,20 @@ namespace DSIS.Utils
       if (typeof(long) == typeof(T))
       {
         myComparer = (IEqualityComparer<T>) LongEqualityComparer.INSTANCE;
-      }
+      } 
       else if (typeof(double) == typeof(T))
       {
         myComparer = (IEqualityComparer<T>) DoubleEqualityComparer.INSTANCE;
+      }
+      else if (typeof(int) == typeof(T))
+      {
+        myComparer = (IEqualityComparer<T>) IntEqualityComparer.INSTANCE;
+      }
+      else if (typeof(T).IsArray)
+      {
+        Type array = typeof (T).GetElementType();
+        Type converter = typeof (ArrayEqualityComparer<>).MakeGenericType(array);
+        myComparer = (IEqualityComparer<T>) converter.GetField("INSTANCE", BindingFlags.Public | BindingFlags.Static).GetValue(null);        
       }
       else
       {
