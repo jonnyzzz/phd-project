@@ -1,3 +1,4 @@
+using System;
 using DSIS.Core.System;
 using DSIS.Function.Mock;
 using DSIS.IntegerCoordinates.Tests;
@@ -52,7 +53,37 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       ps.BuildGraph(graph, new double[]{0});
 
-      AssertDump("build_05", graph.Nodes);
+      AssertDumpWithCoordinates("build_05", graph.Nodes);
+    }
+
+    [Test]
+    public void Test_06()
+    {
+      IGraphBuilder bld = myMock.TestCreateBuilder(2);
+      Assert.AreEqual(2, bld.Dimension);
+
+      IGraphBuilderProcessor ps = bld.Init(new MockIntegerCoordinateSystemInfo(2, 1));
+      IFunction<double> function = new MockFunction<double>(2, delegate(double[] input, double[] output) { Array.Copy(input, output, 2); });
+      PointGraph graph = new PointGraph(function, new double[]{0.1});
+
+      ps.BuildGraph(graph, new double[]{0, 0});
+
+      AssertDumpWithCoordinates("build_06", graph.Nodes);
+    }
+
+    [Test]
+    public void Test_07()
+    {
+      IGraphBuilder bld = myMock.TestCreateBuilder(3);
+      Assert.AreEqual(3, bld.Dimension);
+
+      IGraphBuilderProcessor ps = bld.Init(new MockIntegerCoordinateSystemInfo(3, 1));
+      IFunction<double> function = new MockFunction<double>(3, delegate(double[] input, double[] output) { Array.Copy(input, output, 2); });
+      PointGraph graph = new PointGraph(function, new double[]{0.1});
+
+      ps.BuildGraph(graph, new double[]{0, 0, 0});
+
+      AssertDumpWithCoordinates("build_07", graph.Nodes);
     }
 
     private class Mock : PointGraphInitialBuilder

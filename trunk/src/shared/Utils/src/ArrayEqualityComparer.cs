@@ -12,7 +12,7 @@ namespace DSIS.Core.Util
     {
       for (int i = 0; i < y.Length; i++)
       {
-        if (COMPARER.Equals(x[i],y[i]))
+        if (!COMPARER.Equals(x[i],y[i]))
           return false;
       }
       return true;

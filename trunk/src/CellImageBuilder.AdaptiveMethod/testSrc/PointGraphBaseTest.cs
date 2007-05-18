@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Text;
 using DSIS.Core.Util;
 using DSIS.Utils;
 using NUnit.Framework;
@@ -22,7 +24,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       }
     }
 
-    private void DumpGraph(TextWriter tw, IEnumerable<PointGraphNode> initialNodes)
+    private void DumpGraph(TextWriter tw, IEnumerable<PointGraphNode> initialNodes, bool dumpPoints)
     {
       Hashset<PointGraphNode> nodes = new Hashset<PointGraphNode>();
 
@@ -39,7 +41,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       foreach (PointGraphNode node in nodes)
       {
-        marker.Id(node);
+        marker.Id(node);       
       }
 
       tw.WriteLine("Graph: ");
@@ -54,6 +56,22 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
         tw.WriteLine();
       }
       tw.WriteLine("Done");
+
+      if (dumpPoints)
+      {
+        tw.WriteLine("Points:");
+
+        foreach (PointGraphNode node in initialNodes)
+        {
+          tw.Write("{0} -> ", marker.Id(node));          
+          foreach (double d in node.PointX)
+          {
+            tw.Write("{0}, ", d.ToString(CultureInfo.InvariantCulture));
+          }
+          tw.WriteLine();
+        }
+        tw.WriteLine("Done.");
+      }
     }
 
     protected void AssertDump(string gold, params PointGraphNode[] nodes)
@@ -61,17 +79,10 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       AssertDump(gold, (IEnumerable<PointGraphNode>) nodes);
     }
 
-    protected void AssertDump(string gold, IEnumerable<PointGraphNode> nodes)
+    private void AssertDumpInternal(string actual, string gold)
     {
-      string actual = "Failed to dump";
       try
       {
-        using (StringWriter tw = new StringWriter())
-        {
-          DumpGraph(tw, nodes);
-          actual = tw.ToString();
-        }
-
         string expected;
         using (
           TextReader tr =
@@ -87,6 +98,28 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
         Console.Out.WriteLine(actual);
         throw;
       }
+
+    }
+
+    protected void AssertDump(string gold, IEnumerable<PointGraphNode> nodes)
+    {
+      AssertDumpInternal(DumpGraphConnections(nodes, false), gold);
+    }
+
+    private string DumpGraphConnections(IEnumerable<PointGraphNode> nodes, bool withPoints)
+    {
+      string actual;
+      using (StringWriter tw = new StringWriter())
+      {
+        DumpGraph(tw, nodes, withPoints);
+        actual = tw.ToString();
+      }
+      return actual;
+    }
+
+    protected void AssertDumpWithCoordinates(string gold, IEnumerable<PointGraphNode> nodes)
+    {
+      AssertDumpInternal(DumpGraphConnections(nodes, true), gold);
     }
   }
 }

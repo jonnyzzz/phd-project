@@ -96,7 +96,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       }
       return sb.ToString();
     }
-    
+
     private static int[] FillArray(int dim, int v)
     {
       int[] r = new int[dim];
@@ -116,6 +116,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
     }
 
     private delegate string Element(int i);
+
     private static string EnumerateArray(int dim, Element el)
     {
       StringBuilder sb = new StringBuilder();
@@ -152,19 +153,18 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       int[] zeros = FillArray(dim, 0);
       int[] ones = FillArray(dim, 1);
-      
+
       foreach (int[] pt in BoxIteratorGenerator<int>.GenerateIterator(dim).EnumerateBox(zeros, ones, new int[dim]))
       {
-        sb.AppendFormat("PointGraphNode node{0} = graph.CreateNodeNoCopy(", ArrayToString(pt));
-        EnumerateArray(dim, delegate(int i) { return (pt[i] == 0 ? "myLeft" : "myRight") + i; });        
-        sb.AppendLine(");");
+        sb.AppendFormat("PointGraphNode node{0} = graph.CreateNodeNoCopy({1});",
+                        ArrayToString(pt),
+                        EnumerateArray(dim, delegate(int i) { return (pt[i] == 0 ? "myLeft" : "myRight") + i; })
+          );
+        sb.AppendLine();
       }
 
       sb.AppendFormat("PointGraphNode nodeMiddle = graph.CreateNodeNoCopy({0});",
-                      EnumerateArray(dim, delegate(int i)
-                                            {
-                                              return "myMiddle" + i;
-                                            }));
+                      EnumerateArray(dim, delegate(int i) { return "myMiddle" + i; }));
 
       sb.AppendLine();
       sb.AppendLine();
@@ -179,13 +179,13 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
         foreach (int[] pt2 in BoxIteratorGenerator<int>.GenerateIterator(dim).EnumerateBox(zeros, ones, new int[dim]))
         {
-          if (!IsArc(pt, pt2) && !hash.HasArc(pt, pt2))
+          if (IsArc(pt, pt2) && !hash.HasArc(pt, pt2))
           {
             sb.AppendFormat("graph.AddEdge(node{1}, node{0});", ArrayToString(pt), ArrayToString(pt2));
-            sb.AppendLine();            
+            sb.AppendLine();
             hash.AddEdge(pt, pt2);
           }
-        }        
+        }
       }
 
       return sb.ToString();
@@ -206,19 +206,19 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
         return data.Contains(MakeKey(from, to));
       }
 
-          private static int[] MakeKey(int[] from, int[] to)
-    {
-      int[] key = new int[from.Length + to.Length];
-      for(int i=0; i< from.Length; i++)
+      private static int[] MakeKey(int[] from, int[] to)
       {
-        key[i] = from[i];
+        int[] key = new int[from.Length + to.Length];
+        for (int i = 0; i < from.Length; i++)
+        {
+          key[i] = from[i];
+        }
+        for (int i = 0; i < to.Length; i++)
+        {
+          key[from.Length + i] = to[i];
+        }
+        return key;
       }
-      for(int i=0; i<to.Length; i++)
-      {
-        key[from.Length + i] = to[i];
-      }
-      return key;
-    }
     }
   }
 }
