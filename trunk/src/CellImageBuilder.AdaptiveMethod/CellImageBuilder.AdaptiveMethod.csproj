@@ -38,12 +38,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\AdaptiveMethod.cs" />
+    <Compile Include="src\AdaptiveMethodSettings.cs" />
     <Compile Include="src\GraphBuildOneDiminsion.cs" />
     <Compile Include="src\IGraphBuilder.cs" />
     <Compile Include="src\PointGraph.cs" />
     <Compile Include="src\PointGraphEdge.cs" />
     <Compile Include="src\PointGraphInitialBuilder.cs" />
     <Compile Include="src\PointGraphNode.cs" />
+    <Compile Include="testSrc\AdaptiveMethodTestBase.cs" />
     <Compile Include="testSrc\GraphBuilderTest.cs" />
     <Compile Include="testSrc\PointGraphBaseTest.cs" />
     <Compile Include="testSrc\PointGraphTest.cs" />

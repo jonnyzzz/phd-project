@@ -40,6 +40,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\IEntropyEvaluator.cs" />
     <Compile Include="src\EntropyEvaluator.cs" />
+    <Compile Include="src\Impl\Eigen\EigenEntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\EntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\EntropyGraphWeightCallback.cs" />
     <Compile Include="src\Impl\GraphWeightSearch.cs" />

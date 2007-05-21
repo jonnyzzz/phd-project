@@ -14,10 +14,4 @@ namespace DSIS.CellImageBuilder.BoxMethod
                                   delegate(double ins) { return ins; }, 5, 6);
     }    
   }
-
-  [TestFixture]
-  public class BoxMethodIntegerCoordinate2dTest : BoxMethodBaseTest<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-  {
-    
-  }
 }

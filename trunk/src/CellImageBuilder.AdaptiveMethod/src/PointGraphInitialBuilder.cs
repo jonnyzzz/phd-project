@@ -46,7 +46,8 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       return
         string.Format(
           @" using {0};
-                using {1};
+             using {1};
+             using System.Collections.Generic;
                 public class GenerateCodeImpl{3} : IGraphBuilder {{
                    public int Dimension {{ get {{ return {3}; }} }}
 
@@ -61,7 +62,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
                           {4}
                        }}
 
-                       public void BuildGraph(PointGraph graph, double[] point) {{
+                       public IEnumerable<PointGraphEdge> BuildGraph(PointGraph graph, double[] point) {{
                           {5}
                        }}
                    }}
@@ -141,6 +142,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
     private static string BuildGeneratorCode(int dim)
     {
       StringBuilder sb = new StringBuilder();
+
       for (int i = 0; i < dim; i++)
       {
         sb.AppendFormat("double myLeft{0} = point[{0}];", i);
@@ -172,21 +174,23 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       AddedEdgesHash hash = new AddedEdgesHash();
 
+      sb.AppendLine("return new PointGraphEdge[] {");
       foreach (int[] pt in BoxIteratorGenerator<int>.GenerateIterator(dim).EnumerateBox(zeros, ones, new int[dim]))
       {
-        sb.AppendFormat("graph.AddEdge(nodeMiddle, node{0});", ArrayToString(pt));
+        sb.AppendFormat("graph.AddEdge(nodeMiddle, node{0}),", ArrayToString(pt));
         sb.AppendLine();
 
         foreach (int[] pt2 in BoxIteratorGenerator<int>.GenerateIterator(dim).EnumerateBox(zeros, ones, new int[dim]))
         {
           if (IsArc(pt, pt2) && !hash.HasArc(pt, pt2))
           {
-            sb.AppendFormat("graph.AddEdge(node{1}, node{0});", ArrayToString(pt), ArrayToString(pt2));
+            sb.AppendFormat("graph.AddEdge(node{1}, node{0}),", ArrayToString(pt), ArrayToString(pt2));
             sb.AppendLine();
             hash.AddEdge(pt, pt2);
           }
         }
       }
+      sb.AppendLine("};");
 
       return sb.ToString();
     }

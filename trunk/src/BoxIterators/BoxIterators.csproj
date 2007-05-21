@@ -41,6 +41,7 @@
     <Compile Include="src\BoxIterator.cs" />
     <Compile Include="src\DoubleLBoxIterator.cs" />
     <Compile Include="src\Generator\BoxIteratorGenerator.cs" />
+    <Compile Include="src\Generator\SegmentIteratorGenerator.cs" />
     <Compile Include="src\Generator\ShennonFenoCodec.cs" />
     <Compile Include="src\IBoxIterator.cs" />
     <Compile Include="src\LongLBoxIterator.cs" />

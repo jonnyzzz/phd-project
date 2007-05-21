@@ -12,6 +12,7 @@ namespace DSIS.CodeCompiler
   [TestFixture]
   public class CodeCompilerImplTest
   {
+    [Test]
     public void Test_01()
     {
       CodeCompilerImpl compiter = new CodeCompilerImpl();

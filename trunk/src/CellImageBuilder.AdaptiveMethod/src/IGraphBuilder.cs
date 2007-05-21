@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.AdaptiveMethod
@@ -10,6 +11,6 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
   
   public interface IGraphBuilderProcessor
   {
-    void BuildGraph(PointGraph graph, double[] point);
+    IEnumerable<PointGraphEdge> BuildGraph(PointGraph graph, double[] point);
   }
 }

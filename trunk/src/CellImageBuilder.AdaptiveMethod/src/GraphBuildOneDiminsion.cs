@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.AdaptiveMethod
@@ -17,19 +18,18 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
     private class Processor : IGraphBuilderProcessor
     {
       private readonly double myEps;
-      private readonly double[] tmp = new double[0];
 
       public Processor(double eps)
       {
         myEps = eps;
       }
 
-      public void BuildGraph(PointGraph graph, double[] point)
+      public IEnumerable<PointGraphEdge> BuildGraph(PointGraph graph, double[] point)
       {
-        double t = tmp[0] = point[0];
-        PointGraphNode n1 = graph.CreateNodeCopy(tmp);
-        PointGraphNode n2 = graph.CreateNodeCopy(t + myEps);
-        graph.AddEdge(n1, n2);
+        double t = point[0];
+        PointGraphNode n1 = graph.CreateNodeNoCopy(t);
+        PointGraphNode n2 = graph.CreateNodeNoCopy(t + myEps);
+        return new PointGraphEdge[] { graph.AddEdge(n1, n2) };
       }
     }
   }

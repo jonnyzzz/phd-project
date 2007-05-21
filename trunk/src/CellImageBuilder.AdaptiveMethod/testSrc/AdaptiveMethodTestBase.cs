@@ -1,29 +1,36 @@
 using DSIS.CellImageBuilder.Shared;
 using DSIS.IntegerCoordinates;
+using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.BoxMethod
+namespace DSIS.CellImageBuilder.AdaptiveMethod
 {
-  public abstract class BoxMethodBaseTest<T,Q> :
-    MethodTestBase<T, Q, BoxMethod<T, Q>, BoxMethodSettings>
+  [TestFixture]
+  public class AdaptiveMethodTest : AdaptiveMethodTestBase<IntegerCoordinateSystem, IntegerCoordinate>
+  {
+    
+  }
+
+  public class AdaptiveMethodTestBase<T, Q> : MethodTestBase<T, Q, AdaptiveMethod<T, Q>, AdaptiveMethodSettings>
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
+    private static readonly AdaptiveMethodSettings SETTINGS = new AdaptiveMethodSettings();
+
     [Test]
     public void Test_02()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
+      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
-      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(ss);
 
       DoTwoDimTest(ics, ics.Create(5, 5),
                    delegate(double[] ins, double[] outs)
-                     {
-                       outs[0] = ins[0];
-                       outs[1] = ins[1];
-                     }, stategy,
+                   {
+                     outs[0] = ins[0];
+                     outs[1] = ins[1];
+                   }, SETTINGS,
                    @"-------------------
 ..........
 ..........
@@ -42,18 +49,16 @@ namespace DSIS.CellImageBuilder.BoxMethod
     [Test]
     public void Test_03()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
-
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
-      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(ss);
+      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(5, 5),
                    delegate(double[] ins, double[] outs)
-                     {
-                       outs[0] = 5;
-                       outs[1] = 5;
-                     }, stategy,
+                   {
+                     outs[0] = 5;
+                     outs[1] = 5;
+                   }, SETTINGS,
                    @"-------------------
 ..........
 ..........
@@ -72,18 +77,16 @@ namespace DSIS.CellImageBuilder.BoxMethod
     [Test]
     public void Test_04()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
-
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
+      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(2, 2),
                    delegate(double[] ins, double[] outs)
-                     {
-                       outs[0] = 2*ins[0];
-                       outs[1] = 2*ins[1];
-                     }, stategy,
+                   {
+                     outs[0] = 2 * ins[0];
+                     outs[1] = 2 * ins[1];
+                   }, SETTINGS,
                    @"-------------------
 ..........
 ..........
@@ -102,18 +105,16 @@ namespace DSIS.CellImageBuilder.BoxMethod
     [Test]
     public void Test_05()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
-
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
+      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                     {
-                       outs[0] = 0.1*ins[0];
-                       outs[1] = 7*ins[1];
-                     }, stategy,
+                   {
+                     outs[0] = 0.1 * ins[0];
+                     outs[1] = 7 * ins[1];
+                   }, SETTINGS,
                    @"-------------------
 ......xxxx
 ..........
@@ -132,22 +133,20 @@ namespace DSIS.CellImageBuilder.BoxMethod
     [Test]
     public void Test_06()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
-
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
+      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                     {
-                       outs[0] = 3 + 0.1*ins[0];
-                       outs[1] = 7*ins[1] - 2;
-                     }, stategy,
+                   {
+                     outs[0] = 3 + 0.1 * ins[0];
+                     outs[1] = 7 * ins[1] - 2;
+                   }, SETTINGS,
                    @"-------------------
 ..........
 ..........
-..........
+....xxxxxx
 ....xxxxxx
 ..........
 ..........
@@ -162,18 +161,16 @@ namespace DSIS.CellImageBuilder.BoxMethod
     [Test]
     public void Test_07()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
-
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
+      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                     {
-                       outs[0] = 3.45 + 0.001*ins[0];
-                       outs[1] = 0.001*ins[1] + 2.66;
-                     }, stategy,
+                   {
+                     outs[0] = 3.45 + 0.001 * ins[0];
+                     outs[1] = 0.001 * ins[1] + 2.66;
+                   }, SETTINGS,
                    @"-------------------
 ..........
 ..........

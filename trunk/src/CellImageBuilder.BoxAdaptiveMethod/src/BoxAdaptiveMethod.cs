@@ -36,8 +36,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     private IPointProcessor<Q> myOverlappingProcessor;
     private IRadiusProcessor<Q> myRadiusProcessor;
 
-    private Queue<Pair<Point, Point>> myQueue = new Queue<Pair<Point, Point>>();
-    private List<Q> myPoints = new List<Q>(10000);
+    private readonly Queue<Pair<Point, Point>> myQueue = new Queue<Pair<Point, Point>>();
+    private readonly List<Q> myPoints = new List<Q>(10000);
     
     private int myLimit;
     private int myProcessed;

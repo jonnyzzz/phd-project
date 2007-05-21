@@ -6,16 +6,9 @@ using DSIS.Utils;
 
 namespace DSIS.Utils
 {
-  public static class EqualityComparerFactory<T>
+  public class EqualityComparerFactory<T> : AttributeUtil<T>
   {
     private static IEqualityComparer<T> myComparer = null;
-
-    private static TA GetAttributeInstance<TA>() where TA : Attribute
-    {
-      Type type = typeof (T);
-      object[] os = type.GetCustomAttributes(typeof (TA), true);
-      return os.Length > 0 ? (TA) os[0] : default(TA);
-    }
 
     //todo: Append attribute search login to find exact type.
     public static IEqualityComparer<T> GetComparer()

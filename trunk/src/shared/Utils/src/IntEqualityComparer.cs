@@ -15,5 +15,10 @@ namespace DSIS.Utils
     {
       return obj;
     }
+
+    public string Hashcode(string v)
+    {
+      return v;
+    }
   }
 }

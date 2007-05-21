@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DSIS.BoxIterators;
+using DSIS.BoxIterators.Generator;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
@@ -11,14 +12,14 @@ namespace DSIS.IntegerCoordinates.Impl
     private readonly long[] myPoint;
     private readonly long[] myPoint2;
     private readonly long[] myPoint3;
+    private readonly long[] myPoint4;
     private readonly long[] myZeros;
     private readonly long[] myOnes;
     private readonly double[] myOLeft;
     private readonly double[] myORight;
     private readonly int myDim;
 
-    private readonly BoxIterator<long> myIterator;
-
+    private readonly IBoxIterator<long> myIterator;
 
     public OverlappingProcessor(T coordinateSystem, double[] percent)
     {
@@ -28,8 +29,9 @@ namespace DSIS.IntegerCoordinates.Impl
       myPoint = new long[myDim];
       myPoint2 = new long[myDim];
       myPoint3 = new long[myDim];
+      myPoint4 = new long[myDim];
 
-      myIterator = new BoxIterator<long>(myDim);
+      myIterator = BoxIteratorGenerator<long>.GenerateIterator(myDim);
 
       myZeros = new long[myDim];
       myOnes = new long[myDim];
@@ -83,12 +85,12 @@ namespace DSIS.IntegerCoordinates.Impl
           {
             long t = ts[i]*myPoint2[i];
             fl |= t != 0;
-            ts[i] = myPoint[i] + t;
+            myPoint4[i] = myPoint[i] + t;
 
-            ok &= myCoordinateSystem.Intersects(ts[i], i);
+            ok &= myCoordinateSystem.Intersects(myPoint4[i], i);
           }
           if (ok && (isFirst || fl))
-            yield return myCoordinateSystem.Create(ts);
+            yield return myCoordinateSystem.Create(myPoint4);
 
           isFirst = false;
         }

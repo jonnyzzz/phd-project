@@ -10,5 +10,10 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       Node1 = node1;
       Node2 = node2;
     }
+
+    public override string ToString()
+    {
+      return string.Format("{0} -> {1}", Node1, Node2);
+    }
   }
 }

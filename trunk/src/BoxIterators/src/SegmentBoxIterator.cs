@@ -2,10 +2,15 @@ using System.Collections.Generic;
 
 namespace DSIS.BoxIterators
 {
-  public abstract class SegmentBoxIterator<T>
+  public interface ISegmentBoxIterator<T>
   {
-    public abstract void Inc(int index, ref T t1);
-    public abstract bool IsLower(int index, T t1, T t2);
+    IEnumerable<T[]> EnumerateSteps(T[] left, T[] right, T[] outs);    
+  }
+
+  public abstract class SegmentBoxIterator<T> : ISegmentBoxIterator<T>
+  {
+    protected abstract void Inc(int index, ref T t1);
+    protected abstract bool IsLower(int index, T t1, T t2);
 
     public IEnumerable<T[]> EnumerateSteps(T[] left, T[] right, T[] outs)
     {

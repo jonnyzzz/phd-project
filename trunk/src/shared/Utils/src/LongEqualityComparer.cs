@@ -15,5 +15,10 @@ namespace DSIS.Utils
     {
       return (int)obj | (int)(obj >> 32);
     }
+
+    public string Hashcode(string v)
+    {
+      return string.Format("((int){0} | (int)({0}>>32)", v);
+    }
   }
 }

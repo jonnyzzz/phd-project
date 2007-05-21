@@ -20,7 +20,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       myDim = myFunction.Dimension;
     }
 
-    private double[] Evaluate(PointGraphNode node)
+    public double[] Evaluate(PointGraphNode node)
     {
       if (node.PointY != null)
         return node.PointY;
@@ -48,10 +48,11 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       return result;
     }
 
-    public void AddEdge(PointGraphNode n1, PointGraphNode n2)
+    public PointGraphEdge AddEdge(PointGraphNode n1, PointGraphNode n2)
     {
       n1.Edges.Add(n2);
       n2.Edges.Add(n1);
+      return new PointGraphEdge(n1, n2);
     }
 
     public PointGraphNode CreateNodeCopy(params double[] data)
@@ -88,6 +89,8 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       AddEdge(n1, node);
       AddEdge(n2, node);
+      result.Add(new PointGraphEdge(n1,node));
+      result.Add(new PointGraphEdge(n2,node));
 
       return new Pair<PointGraphNode, List<PointGraphEdge>>(node, result);
     }

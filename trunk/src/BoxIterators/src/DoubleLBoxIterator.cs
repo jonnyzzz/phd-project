@@ -9,12 +9,12 @@ namespace DSIS.BoxIterators
       mySteps = steps;
     }
 
-    public override void Inc(int i, ref double t1)
+    protected override void Inc(int i, ref double t1)
     {
       t1 += mySteps[i];
     }
 
-    public override bool IsLower(int i, double t1, double t2)
+    protected override bool IsLower(int i, double t1, double t2)
     {
       return t1 < t2;
     }

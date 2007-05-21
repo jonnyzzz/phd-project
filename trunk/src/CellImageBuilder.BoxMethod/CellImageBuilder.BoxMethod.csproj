@@ -41,6 +41,7 @@
     <Compile Include="src\BoxMethod.cs" />
     <Compile Include="src\BoxMethodSettings.cs" />
     <Compile Include="testSrc\BoxMethodBaseTest.cs" />
+    <Compile Include="testSrc\BoxMethodIntegerCoordinate2dTest.cs" />
     <Compile Include="testSrc\BoxMethodTest.cs" />
   </ItemGroup>
   <ItemGroup>

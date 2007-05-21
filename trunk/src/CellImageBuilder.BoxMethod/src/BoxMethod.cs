@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.BoxIterators;
+using DSIS.BoxIterators.Generator;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.Core.System;
@@ -43,7 +44,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
       yLeft = new double[myDim];
       yRight = new double[myDim];
       eps = new double[myDim];
-      myIterator = new BoxIterator<double>(myDim);
+      myIterator = BoxIteratorGenerator<double>.GenerateIterator(myDim);
 
       for (int i = 0; i < myDim; i++)
       {

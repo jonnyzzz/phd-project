@@ -67,13 +67,11 @@
     <Compile Include="src\Processor\SymbolicImageConstructionProcess.cs" />
     <Compile Include="src\Processor\ThreadedSymbolicImageConstructionProcess.cs" />
     <Compile Include="src\Util\CountEnumerable.cs" />
-    <Compile Include="src\Util\EmptyArray.cs" />
     <Compile Include="src\Util\IProgressInfo.cs" />
     <Compile Include="src\Util\NotNullAttribute.cs" />
     <Compile Include="src\Util\NullableAttribute.cs" />
     <Compile Include="src\Util\NullProgressInfo.cs" />
     <Compile Include="src\Util\ObjectMarker.cs" />
-    <Compile Include="src\Util\Pair.cs" />
     <Compile Include="src\Util\ProcessInterruptedException.cs" />
     <Compile Include="src\Visualization\ICellToPointConverter.cs" />
     <Compile Include="src\Visualization\IImageBuilder.cs" />

@@ -4,7 +4,7 @@ namespace DSIS.Graph.Entropy
 {
   public static class EntropyEvaluator
   {
-    public static IEntropyEvaluator GetEntropyEvaluator()
+    public static IEntropyEvaluator GetLoopEntropyEvaluator()
     {
       return new EntropyEvaluatorImpl();
     }    

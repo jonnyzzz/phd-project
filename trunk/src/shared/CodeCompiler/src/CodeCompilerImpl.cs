@@ -1,4 +1,5 @@
 using System;
+using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Reflection;
@@ -30,7 +31,7 @@ namespace DSIS.CodeCompiler
       ps.OutputAssembly = "DSIS.Generated.Assembly." + Guid.NewGuid();
 
       using (CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp"))
-      {
+      {        
         CompilerResults results = provider.CompileAssemblyFromSource(ps, code);
 
         if (results.Errors.Count != 0 || results.CompiledAssembly == null)

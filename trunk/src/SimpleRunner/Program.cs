@@ -185,8 +185,7 @@ namespace DSIS.SimpleRunner
         tw.WriteLine("Component: nodes {0}", info.NodesCount);
       }
       
-      double entropy = 
-        EntropyEvaluator.GetEntropyEvaluator().ComputeEntropy(NullProgressInfo.INSTANCE, graph, comps);
+      double entropy = EntropyEvaluator.GetLoopEntropyEvaluator().ComputeEntropy(NullProgressInfo.INSTANCE, graph, comps);
 
       TimeSpan sp = DateTime.Now - start;
       Console.Out.WriteLine("Completed in {0} ms", sp.TotalMilliseconds);
