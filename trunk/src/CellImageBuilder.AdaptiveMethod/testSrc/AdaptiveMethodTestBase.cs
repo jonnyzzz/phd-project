@@ -1,5 +1,6 @@
 using DSIS.CellImageBuilder.Shared;
 using DSIS.IntegerCoordinates;
+using DSIS.IntegerCoordinates.Generated;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
@@ -8,6 +9,12 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 {
   [TestFixture]
   public class AdaptiveMethodTest : AdaptiveMethodTestBase<IntegerCoordinateSystem, IntegerCoordinate>
+  {
+    
+  }
+
+  [TestFixture]
+  public class AdaptiveMethodTest2d : AdaptiveMethodTestBase<IntegerCoordinateSystem2d, IntegerCoordinate2d>
   {
     
   }

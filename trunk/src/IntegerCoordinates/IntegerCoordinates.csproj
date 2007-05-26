@@ -47,6 +47,7 @@
     <Compile Include="src\Impl\IntegerCoordinateEqualityComparer.cs" />
     <Compile Include="src\Impl\IntegerCoordinateSystem.cs" />
     <Compile Include="src\Impl\IntegerCoordinateSystemBase.cs" />
+    <Compile Include="src\Impl\OverlapingPointProcessorGenerated.cs" />
     <Compile Include="src\Impl\PointProcessor.cs" />
     <Compile Include="src\IntegerCoordinateSystemFactory.cs" />
     <Compile Include="src\Impl\LongLBoxFixedDimentionMulIterator.cs" />
@@ -84,6 +85,10 @@
     <ProjectReference Include="..\Core.Mock\Core.Mock.csproj">
       <Project>{2B4BA54B-9B5E-4D07-B859-FAB1D15203F0}</Project>
       <Name>Core.Mock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\shared\CodeCompiler\CodeCompiler.csproj">
+      <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
+      <Name>CodeCompiler</Name>
     </ProjectReference>
     <ProjectReference Include="..\shared\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>

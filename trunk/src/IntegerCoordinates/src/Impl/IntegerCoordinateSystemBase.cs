@@ -136,11 +136,6 @@ namespace DSIS.IntegerCoordinates.Impl
       return myAreaLeftPoint[i] + myCellSize[i] * pt;
     }
 
-    public bool Intersects(long l, int axis)
-    {
-      return l >= 0 && l < mySubdivision[axis];
-    }
-
     protected long[] GetSubdividedFactor(long[] division)
     {
       long[] div = new long[myDimension];

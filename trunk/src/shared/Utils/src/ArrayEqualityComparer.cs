@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Utils;
 
-namespace DSIS.Core.Util
+namespace DSIS.Utils
 {
   public class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
   {

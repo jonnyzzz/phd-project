@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -11,18 +12,35 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
       where T : ICellCoordinate<T>
     {
       Dictionary<INode<T>, double> v = Create(graph, 1);
+      double eigen = -1;
+      double t = 0;
 
       double div = graph.NodesCount;
-      while(true)
+      while (Math.Abs(eigen - t) > 1e-4)
       {
+        eigen = t;
+
+        //mul = (|v_n+1|, v_n+1) = A v_n/|v_n|
+        //eig_n+1 = |v_n+1|/|v_n| = |A v_n| / |v_n|        
         Pair<double, Dictionary<INode<T>, double>> mul = Multiply(div, graph, v);
         v = mul.Second;
+       
+        t = div/mul.First;
         div = mul.First;
       }
-
-      return 0;
+      eigen = t;
+      return eigen;
     }
 
+
+    /// <summary>
+    /// Computes (|Av/div|, Av/div) where A is Graph, v is Dictionary
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="div"></param>
+    /// <param name="graph"></param>
+    /// <param name="v"></param>
+    /// <returns></returns>
     private static Pair<double, Dictionary<INode<T>, double>> Multiply<T>(double div, IGraph<T> graph, Dictionary<INode<T>, double> v) where T : ICellCoordinate<T>
     {
       Dictionary<INode<T>, double> v2 = Create(graph, 0);

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using DSIS.CellImageBuilder;
+using DSIS.CellImageBuilder.AdaptiveMethod;
 using DSIS.CellImageBuilder.BoxAdaptiveMethod;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.Core.Builders;
@@ -27,7 +28,7 @@ namespace DSIS.SimpleRunner
 {
   public class Program
   {
-    private const int STEPS = 11;
+    private const int STEPS = 9;
     private static string myWorkPath;
     private static string myHomePath;
 
@@ -57,8 +58,15 @@ namespace DSIS.SimpleRunner
 
       Console.Out.WriteLine("Adaptive Method:");
       MethodAndLog<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-        (new BoxAdaptiveMethod<IntegerCoordinateSystem2d, IntegerCoordinate2d>(), 
-        BoxAdaptiveMethodSettings.Default);
+        (new AdaptiveMethod<IntegerCoordinateSystem2d, IntegerCoordinate2d>(), 
+        AdaptiveMethodSettings.DEFAULT);
+      
+      GC.Collect();
+//
+//      Console.Out.WriteLine("Adaptive Method:");
+//      MethodAndLog<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+//        (new BoxAdaptiveMethod<IntegerCoordinateSystem2d, IntegerCoordinate2d>(), 
+//        BoxAdaptiveMethodSettings.Default);
 //
 //      GC.Collect();
 //

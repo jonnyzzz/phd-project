@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Util;
 using NUnit.Framework;
 
 namespace DSIS.Utils.Test

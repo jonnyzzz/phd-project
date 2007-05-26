@@ -56,7 +56,6 @@ namespace DSIS.Graph.Abstract
       get { return myEdges.Values; }
     }
 
-
     public override string ToString()
     {
       return string.Format("[Node: {0}]", Coordinate);

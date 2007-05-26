@@ -2,7 +2,7 @@ using DSIS.Core.System;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
-  public class IntegerCoordinateSystem : IntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>, IIntegerCoordinateSystem<IntegerCoordinate>, IProcessorFactory<IntegerCoordinate>, IEXIntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>
+  public class IntegerCoordinateSystem : IntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>, IProcessorFactory<IntegerCoordinate>, IEXIntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>
   {
     public IntegerCoordinateSystem(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
@@ -31,6 +31,11 @@ namespace DSIS.IntegerCoordinates.Impl
         coordinate[i] = ToInternal(point[i], i);
       }
       return Create(coordinate);
+    }
+
+    public bool Intersects(long l, int axis)
+    {
+      return l >= 0 && l < mySubdivision[axis];
     }
 
     public IntegerCoordinate Create(params long[] param)

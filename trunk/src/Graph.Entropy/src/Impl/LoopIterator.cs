@@ -6,32 +6,30 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl
 {
-  public class GraphWeightSearch<T, C> where T : ICellCoordinate<T> where C : IGraphWeightSearchCallback<T>
+  public class LoopIterator<T, C> where T : ICellCoordinate<T> where C : ILoopIteratorCallback<T>
   {
-    private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
+    private static readonly IEqualityComparer<INode<T>> COMPARER = NodeReferenceEqualityComparer<T>.INSTANCE;
 
     private readonly IGraph<T> myGraph;
     private readonly IGraphStrongComponents<T> myComponents;
     private readonly IStrongComponentInfo myComponent;
-    private readonly Hashset<INode<T>> myVisited;
     private readonly C myCallback;
 
     private SearchTreeNode mySearchRoot;
-    private Queue<SearchTreeNode> myNodes = new Queue<SearchTreeNode>();
+    private readonly HashedQueue<SearchTreeNode> myNodes = new HashedQueue<SearchTreeNode>(SearchTreeNodeEqualityComparer.INSTANCE);
+    private readonly Hashset<INode<T>> myVisitedNodes = new Hashset<INode<T>>();
 
-    public GraphWeightSearch(C callback, IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component)
+    public LoopIterator(C callback, IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component)
     {
       myGraph = graph;
       myComponents = components;
       myComponent = component;
       myCallback = callback;
-
-      myVisited = new Hashset<INode<T>>();
     }
 
     private static bool IsUpperInTree(SearchTreeNode root, INode<T> node, List<INode<T>> result)
     {
-      long hash = COMPARER.GetHashCode(node.Coordinate);
+      long hash = COMPARER.GetHashCode(node);
       while (root != null)
       {
         result.Add(root.Node);
@@ -46,10 +44,7 @@ namespace DSIS.Graph.Entropy.Impl
 
     private void WidthSearch(SearchTreeNode node)
     {
-      if (myVisited.Contains(node.Node))
-        return;
-
-      myVisited.Add(node.Node);
+      myVisitedNodes.Add(node.Node);
 
       foreach (INode<T> edge in myGraph.GetEdges(node.Node))
       {
@@ -57,7 +52,7 @@ namespace DSIS.Graph.Entropy.Impl
           continue;
 
         List<INode<T>> loop = new List<INode<T>>();
-        if (myVisited.Contains(edge) && IsUpperInTree(node, edge, loop))
+        if (myVisitedNodes.Contains(node.Node) && IsUpperInTree(node, edge, loop))
         {
           myCallback.OnLoopFound(loop);          
         }
@@ -76,7 +71,7 @@ namespace DSIS.Graph.Entropy.Impl
 
       info.Minimum = 0;
       info.Minimum = 1;
-      while (myNodes.Count > 0 )
+      while (!myNodes.IsEmpty)
       {
         info.Tick(1.0);
         WidthSearch(myNodes.Dequeue());
@@ -85,7 +80,7 @@ namespace DSIS.Graph.Entropy.Impl
 
     private sealed class SearchTreeNode
     {
-      public SearchTreeNode Parent = null;
+      public readonly SearchTreeNode Parent = null;
       public readonly INode<T> Node;
       public readonly int Hash;
 
@@ -93,12 +88,28 @@ namespace DSIS.Graph.Entropy.Impl
       {
         Parent = parent;
         Node = node;
-        Hash = COMPARER.GetHashCode(node.Coordinate);
+        Hash = COMPARER.GetHashCode(node);
       }
 
       public bool IsNode(INode<T> node)
       {
-        return COMPARER.Equals(Node.Coordinate, node.Coordinate);
+        return COMPARER.Equals(Node, node);
+      }
+    }
+
+    private sealed class SearchTreeNodeEqualityComparer : IEqualityComparer<SearchTreeNode>
+    {
+      public static readonly IEqualityComparer<SearchTreeNode> INSTANCE 
+        = new SearchTreeNodeEqualityComparer();
+
+      public bool Equals(SearchTreeNode x, SearchTreeNode y)
+      {
+        return x.Hash == y.Hash && x.Parent == y.Parent && COMPARER.Equals(x.Node, y.Node);
+      }
+
+      public int GetHashCode(SearchTreeNode obj)
+      {
+        return COMPARER.GetHashCode(obj.Node) | (obj.Parent != null ? COMPARER.GetHashCode(obj.Parent.Node) : 0);
       }
     }
   }

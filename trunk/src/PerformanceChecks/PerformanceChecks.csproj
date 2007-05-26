@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{43283F9D-A669-47B2-80FD-FFA447A4BD7F}</ProjectGuid>
+    <ProjectGuid>{5B18F64F-452B-4155-94A7-B47CFF2FEDF4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.Graph.Entropy</RootNamespace>
-    <AssemblyName>DSIS.Graph.Entropy</AssemblyName>
+    <RootNamespace>DSIS.PerformanceChecks</RootNamespace>
+    <AssemblyName>DSIS.PerformanceChecks</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,40 +38,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\IEntropyEvaluator.cs" />
-    <Compile Include="src\EntropyEvaluator.cs" />
-    <Compile Include="src\Impl\Eigen\EigenEntropyEvaluatorImpl.cs" />
-    <Compile Include="src\Impl\EntropyEvaluatorImpl.cs" />
-    <Compile Include="src\Impl\EntropyGraphWeightCallback.cs" />
-    <Compile Include="src\Impl\LoopIterator.cs" />
-    <Compile Include="src\Impl\ILoopIteratorCallback.cs" />
-    <Compile Include="src\Impl\NodePair.cs" />
-    <Compile Include="src\Impl\NonDuplicatedLoopIteratorCallback.cs" />
-    <Compile Include="testSrc\EigenEvaluatorImplTest.cs" />
-    <Compile Include="testSrc\EntropyLoopIteratorCallbackTest.cs" />
-    <Compile Include="testSrc\GraphBaseTest.cs" />
-    <Compile Include="testSrc\LoopIteratorTest.cs" />
+    <Compile Include="src\ArrayPerformance.cs" />
+    <Compile Include="src\BoxIteratorGeneratedPerformance.cs" />
+    <Compile Include="src\PerformanceBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Graph\Graph.csproj">
-      <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
-      <Name>Graph</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
-      <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
-      <Name>IntegerCoordinates</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\shared\Core.System\Core.System.csproj">
-      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
-      <Name>Core.System</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\shared\Utils\Utils.csproj">
-      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
-      <Name>Utils</Name>
+    <ProjectReference Include="..\BoxIterators\BoxIterators.csproj">
+      <Project>{B5F40029-7A5F-440D-8A5A-215E032CF89C}</Project>
+      <Name>BoxIterators</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

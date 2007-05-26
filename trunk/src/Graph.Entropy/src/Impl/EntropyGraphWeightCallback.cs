@@ -6,10 +6,10 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl
 {
-  public class EntropyGraphWeightCallback<T> : IGraphWeightSearchCallback<T> where T : ICellCoordinate<T>
+  public class EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> where T : ICellCoordinate<T>
   {
     private static readonly double LN2 = Math.Log(2);
-    private Dictionary<NodePair<T>, double> myM = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer()); 
+    private readonly Dictionary<NodePair<T>, double> myM = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer()); 
     private int myLoopsCount = 0;
 
     public void OnLoopFound(IList<INode<T>> loop)

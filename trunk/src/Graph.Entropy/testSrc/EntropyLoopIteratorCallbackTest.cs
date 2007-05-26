@@ -5,14 +5,13 @@ using System.Text;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl;
-using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy
 {
   [TestFixture]
-  public class EntropyGraphWeightCallbackTest : GraphBaseTest
+  public class EntropyLoopIteratorCallbackTest : GraphBaseTest
   {
     [Test]
     public void Test_01()

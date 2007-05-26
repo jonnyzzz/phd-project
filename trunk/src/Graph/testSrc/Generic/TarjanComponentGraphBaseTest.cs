@@ -5,7 +5,7 @@ using DSIS.IntegerCoordinates;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Generic
-{
+{  
   public abstract class TarjanComponentGraphBaseTest<T,Q> : ComponentGraphTestBase<T,Q, TarjanGraph<Q>>
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>

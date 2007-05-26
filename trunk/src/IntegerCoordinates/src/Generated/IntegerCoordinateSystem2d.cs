@@ -18,6 +18,9 @@ namespace DSIS.IntegerCoordinates.Generated
     private readonly double myAreaLeftPointL1;
     private readonly double myAreaLeftPointL2;
 
+    private readonly long mySubdivisionL1;
+    private readonly long mySubdivisionL2;
+
     public IntegerCoordinateSystem2d(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
       myCellSizeL1 = myCellSize[0];
@@ -28,6 +31,9 @@ namespace DSIS.IntegerCoordinates.Generated
 
       myAreaLeftPointL1 = myAreaLeftPoint[0];
       myAreaLeftPointL2 = myAreaLeftPoint[1];
+
+      mySubdivisionL1 = mySubdivision[0];
+      mySubdivisionL2 = mySubdivision[1];
     }
 
     public IntegerCoordinateSystem2d(ISystemSpace systemSpace) : this(systemSpace, systemSpace.InitialSubdivision)
@@ -90,6 +96,19 @@ namespace DSIS.IntegerCoordinates.Generated
     {
       output[0] = ToExternalL1(point.l1) + myCellSizeHalfL1;
       output[1] = ToExternalL2(point.l2) + myCellSizeHalfL2;
+    }
+
+    public bool Intersects(long l, int axis)
+    {
+      switch(axis)
+      {
+        case 0 :
+          return l >= 0 && l < mySubdivisionL1;
+        case 1:
+          return l >= 0 && l < mySubdivisionL2;
+        default:
+          return false;
+      }
     }
 
     public IntegerCoordinate2d Create(params long[] param)

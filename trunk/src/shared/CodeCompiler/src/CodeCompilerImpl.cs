@@ -1,30 +1,18 @@
 using System;
-using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.Collections.Generic;
 using System.Reflection;
-using DSIS.Utils;
 
 namespace DSIS.CodeCompiler
 {
   internal class CodeCompilerImpl : ICodeCompiler
   {
+    private readonly TypesToAssemblyCache myCache = new TypesToAssemblyCache();
+
     public Assembly CompileCSharpCode(string code, params Type[] referedTypes)
     {
-      Hashset<string> assemblies = new Hashset<string>();
-      foreach (Type type in referedTypes)
-      {
-        Assembly assembly = type.Assembly;
-        assemblies.Add(assembly.Location);
-        foreach (AssemblyName name in assembly.GetReferencedAssemblies())
-        {
-          assemblies.Add(Assembly.Load(name).Location);
-        }
-      }
-
       CompilerParameters ps = new CompilerParameters();
-      ps.ReferencedAssemblies.AddRange(new List<string>(assemblies.Values).ToArray());
-      ps.CompilerOptions = "/t:library";
+      ps.ReferencedAssemblies.AddRange(myCache.CollectAssemblies(referedTypes));
+      ps.CompilerOptions = "/t:library /debug:pdbonly /optimize+";
       ps.GenerateInMemory = true;
       ps.GenerateExecutable = false;
       ps.IncludeDebugInformation = true;

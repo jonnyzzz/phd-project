@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using DSIS.Utils;
 using NUnit.Framework;
 
 namespace DSIS.CodeCompiler

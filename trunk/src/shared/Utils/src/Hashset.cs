@@ -8,7 +8,8 @@ namespace DSIS.Utils
   {
     private readonly Dictionary<T, T> mySet;
 
-    public Hashset() : this(EqualityComparerFactory<T>.GetComparer())
+    public Hashset()
+      : this(EqualityComparerFactory<T>.GetComparer())
     {
     }
 
@@ -55,6 +56,14 @@ namespace DSIS.Utils
       mySet.Remove(t);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="t"></param>
+    /// <returns>
+    /// true is object was added
+    /// if false is returned than t will contain reference to stored object
+    /// </returns>
     public bool AddIfNotReplace(ref T t)
     {
       T obj;
@@ -93,7 +102,7 @@ namespace DSIS.Utils
       {
         if (h2.Contains(node1))
           yield return node1;
-      }        
+      }
     }
 
     public override string ToString()
@@ -105,6 +114,17 @@ namespace DSIS.Utils
         sb.AppendFormat("{0}, ", t);
       }
       return sb + "\r\n}";
+    }
+
+    public T[] ToArray()
+    {
+      T[] result = new T[Count];
+      int index = 0;
+      foreach (T t in this)
+      {
+        result[index++] = t;
+      }
+      return result;
     }
   }
 

@@ -1,28 +1,11 @@
 using System;
 using System.Collections.Generic;
+using DSIS.BoxIterators;
+using DSIS.BoxIterators.Generator;
 using NUnit.Framework;
 
 namespace DSIS.PerformanceChecks
 {
-  public abstract class PerformanceBase
-  {
-    protected delegate void DAction();
-
-    protected static double DoAction(DAction d)
-    {
-      DateTime start = DateTime.Now;
-      d();
-      return (DateTime.Now - start).Milliseconds;
-    }
-
-    protected static double DoAction(string caption, DAction d)
-    {
-      double dt = DoAction(d);
-      Console.Out.WriteLine("{0} {1}ms", caption, dt);
-      return dt;
-    }
-  }
-
   [TestFixture]
   public class ArrayPerformance : PerformanceBase
   {

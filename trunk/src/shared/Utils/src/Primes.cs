@@ -21,9 +21,7 @@ namespace DSIS.Utils
 
     public static int ByIndex(int i)
     {
-      if (i < ourPrimes.Length)
-        return ourPrimes[i];
-      return ourPrimes[ourPrimes.Length - 1];
+      return ourPrimes[i%ourPrimes.Length];
     }
 
     public static int Nearest(int v)

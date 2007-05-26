@@ -44,6 +44,7 @@
     <Compile Include="src\EmptyArray.cs" />
     <Compile Include="src\EqualityComparerAttribute.cs" />
     <Compile Include="src\EqualityComparerFactory.cs" />
+    <Compile Include="src\HashedQueue.cs" />
     <Compile Include="testSrc\EqualityComparerFactoryTest.cs" />
     <Compile Include="src\Hashset.cs" />
     <Compile Include="src\IntEqualityComparer.cs" />

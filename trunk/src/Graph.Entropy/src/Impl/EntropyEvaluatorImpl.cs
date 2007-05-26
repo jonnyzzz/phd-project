@@ -3,7 +3,6 @@
  * Created: 21 марта 2007 г.
  */
 
-using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -30,8 +29,9 @@ namespace DSIS.Graph.Entropy.Impl
       foreach (IStrongComponentInfo info in comps.Components)
       {
         EntropyGraphWeightCallback<T> cb = new EntropyGraphWeightCallback<T>();
-        GraphWeightSearch<T, EntropyGraphWeightCallback<T>> search =
-          new GraphWeightSearch<T, EntropyGraphWeightCallback<T>>(cb, graph, comps, info);
+        LoopIterator<T, NonDuplicatedLoopIteratorCallback<T, EntropyGraphWeightCallback<T>>> search =
+          new LoopIterator<T, NonDuplicatedLoopIteratorCallback<T, EntropyGraphWeightCallback<T>>>(
+          new NonDuplicatedLoopIteratorCallback<T, EntropyGraphWeightCallback<T>>(cb), graph, comps, info);
 
         search.WidthSearch(progress, info.NodesCount, GetFirst(comps.GetNodes(new IStrongComponentInfo[] {info})));
 

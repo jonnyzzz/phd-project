@@ -25,11 +25,11 @@ namespace DSIS.Graph.Entropy
       graph.AddEdgeToNode(n1, n2);
     }
 
-    protected class MockCallback : IGraphWeightSearchCallback<IntegerCoordinate>
+    protected class MockCallback : ILoopIteratorCallback<IntegerCoordinate>
     {
       private readonly List<List<string>> myLoops = new List<List<string>>();
 
-      void IGraphWeightSearchCallback<IntegerCoordinate>.OnLoopFound(IList<INode<IntegerCoordinate>> loop)
+      void ILoopIteratorCallback<IntegerCoordinate>.OnLoopFound(IList<INode<IntegerCoordinate>> loop)
       {
         List<string> sloop = new List<string>();
         foreach (INode<IntegerCoordinate> node in loop)

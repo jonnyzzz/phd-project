@@ -51,6 +51,5 @@ namespace DSIS.BoxIterators.Generator
 
       Assert.IsFalse(enumerable.MoveNext());
     }
-
   }
 }

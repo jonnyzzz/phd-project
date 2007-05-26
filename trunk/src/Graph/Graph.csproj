@@ -73,6 +73,7 @@
     <Compile Include="src\Util\MultiHashDictionary.cs" />
     <Compile Include="testSrc\GenericsTest.cs" />
     <Compile Include="testSrc\GraphPerformanceTest.cs" />
+    <Compile Include="testSrc\HashedQueueTest.cs" />
     <Compile Include="testSrc\MockGraph.cs" />
     <Compile Include="testSrc\MockNode.cs" />
     <Compile Include="testSrc\OrderedListTest.cs" />
