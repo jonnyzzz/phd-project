@@ -61,7 +61,7 @@
       <Project>{43283F9D-A669-47B2-80FD-FFA447A4BD7F}</Project>
       <Name>Graph.Entropy</Name>
     </ProjectReference>
-    <ProjectReference Include="..\shared\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>

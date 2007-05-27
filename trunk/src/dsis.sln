@@ -35,11 +35,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProcessors", "Templ
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{661FCE95-CF4E-4FDC-84E5-CEABC2BBC075}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCompiler", "shared\CodeCompiler\CodeCompiler.csproj", "{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCompiler", "..\shared\src\CodeCompiler\CodeCompiler.csproj", "{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.System", "shared\Core.System\Core.System.csproj", "{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.System", "..\shared\src\Core.System\Core.System.csproj", "{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "shared\Utils\Utils.csproj", "{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "..\shared\src\Utils\Utils.csproj", "{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.AdaptiveMethod", "CellImageBuilder.AdaptiveMethod\CellImageBuilder.AdaptiveMethod.csproj", "{096D6D4E-B782-4B87-95FE-8B59D80510BC}"
 EndProject

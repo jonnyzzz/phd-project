@@ -80,11 +80,11 @@
     <Compile Include="testSrc\Concurrent\SynckQueueTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\shared\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
-    <ProjectReference Include="..\shared\Utils\Utils.csproj">
+    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>

@@ -46,7 +46,7 @@
       <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
       <Name>Function.Predefined</Name>
     </ProjectReference>
-    <ProjectReference Include="..\shared\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
