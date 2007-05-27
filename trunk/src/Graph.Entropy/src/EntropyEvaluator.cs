@@ -1,4 +1,5 @@
 using DSIS.Graph.Entropy.Impl;
+using DSIS.Graph.Entropy.Impl.Eigen;
 
 namespace DSIS.Graph.Entropy
 {
@@ -8,5 +9,10 @@ namespace DSIS.Graph.Entropy
     {
       return new EntropyEvaluatorImpl();
     }    
+
+    public static IEntropyEvaluator GetEigentEvaluator()
+    {
+      return new EigenEntropyEvaluatorImpl();
+    }
   }
 }

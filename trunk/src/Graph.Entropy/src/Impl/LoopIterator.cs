@@ -16,7 +16,7 @@ namespace DSIS.Graph.Entropy.Impl
     private readonly C myCallback;
 
     private SearchTreeNode mySearchRoot;
-    private readonly HashedQueue<SearchTreeNode> myNodes = new HashedQueue<SearchTreeNode>(SearchTreeNodeEqualityComparer.INSTANCE);
+    private readonly Queue<SearchTreeNode> myNodes = new Queue<SearchTreeNode>();
     private readonly Hashset<INode<T>> myVisitedNodes = new Hashset<INode<T>>();
 
     public LoopIterator(C callback, IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component)
@@ -71,7 +71,7 @@ namespace DSIS.Graph.Entropy.Impl
 
       info.Minimum = 0;
       info.Minimum = 1;
-      while (!myNodes.IsEmpty)
+      while (myNodes.Count > 0)
       {
         info.Tick(1.0);
         WidthSearch(myNodes.Dequeue());
@@ -96,21 +96,20 @@ namespace DSIS.Graph.Entropy.Impl
         return COMPARER.Equals(Node, node);
       }
     }
-
-    private sealed class SearchTreeNodeEqualityComparer : IEqualityComparer<SearchTreeNode>
-    {
-      public static readonly IEqualityComparer<SearchTreeNode> INSTANCE 
-        = new SearchTreeNodeEqualityComparer();
-
-      public bool Equals(SearchTreeNode x, SearchTreeNode y)
-      {
-        return x.Hash == y.Hash && x.Parent == y.Parent && COMPARER.Equals(x.Node, y.Node);
-      }
-
-      public int GetHashCode(SearchTreeNode obj)
-      {
-        return COMPARER.GetHashCode(obj.Node) | (obj.Parent != null ? COMPARER.GetHashCode(obj.Parent.Node) : 0);
-      }
-    }
+//    private sealed class SearchTreeNodeEqualityComparer : IEqualityComparer<SearchTreeNode>
+//    {
+//      public static readonly IEqualityComparer<SearchTreeNode> INSTANCE 
+//        = new SearchTreeNodeEqualityComparer();
+//
+//      public bool Equals(SearchTreeNode x, SearchTreeNode y)
+//      {
+//        return x.Hash == y.Hash && x.Parent == y.Parent && COMPARER.Equals(x.Node, y.Node);
+//      }
+//
+//      public int GetHashCode(SearchTreeNode obj)
+//      {
+//        return COMPARER.GetHashCode(obj.Node) | (obj.Parent != null ? COMPARER.GetHashCode(obj.Parent.Node) : 0);
+//      }
+//    }
   }
 }

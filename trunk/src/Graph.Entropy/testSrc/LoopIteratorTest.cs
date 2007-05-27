@@ -22,7 +22,14 @@ namespace DSIS.Graph.Entropy
       DoTest(bg, false, golds);      
     }
 
+    protected delegate string[] LazyArray();
+
     private static void DoTest(BuildGraph bg, bool filter, params string[] golds)
+    {
+      DoTest(bg, filter, delegate { return golds; });
+    }
+
+    private static void DoTest(BuildGraph bg, bool filter, LazyArray lazyGolds)
     {
       TarjanGraph<IntegerCoordinate> graph = DoBuildGraph(bg);
 
@@ -54,6 +61,8 @@ namespace DSIS.Graph.Entropy
         }
         sb.AppendLine();
       }
+
+      string[] golds = lazyGolds();
       try
       {
         for (int index = 0; index < mcb.Loops.Count; index++)
@@ -70,10 +79,10 @@ namespace DSIS.Graph.Entropy
 
         Assert.AreEqual(golds.Length, mcb.Loops.Count, "Incorrect loops count");
       }
-      catch
+      catch(Exception e)
       {
         Console.Error.WriteLine(sb.ToString().Trim());
-        throw;
+        throw new Exception("innter", e)  ;
       }
     }
 
@@ -365,5 +374,57 @@ namespace DSIS.Graph.Entropy
                "1, 2, 4, 5, 6, ",
                "1, 3, 2, 4, 5, 6,");
     }
+
+    [Test]
+    public void Test_16()
+    {
+      DoTest(delegate(IGraph<IntegerCoordinate> graph)
+               {
+                 //       /  3 -        \
+                 // 1 - 2 -  4 - 6 - 7 - 8 - 11 - 1
+                 //       \  5 - 9 - 10 /
+                 //          12 -13- 14
+
+                 AddEdge(graph, 1,2);
+                 AddEdge(graph, 2,3);
+                 AddEdge(graph, 2,4);
+                 AddEdge(graph, 2,5);
+                 AddEdge(graph, 3,8);
+                 AddEdge(graph, 4,6);
+                 AddEdge(graph, 6,7);
+                 AddEdge(graph, 7,8);
+                 AddEdge(graph, 5,9);
+                 AddEdge(graph, 9,10);
+                 AddEdge(graph, 10, 8);
+                 AddEdge(graph, 8, 11);
+                 AddEdge(graph, 11, 1);
+                 AddEdge(graph, 2, 12);
+                 AddEdge(graph, 12, 13);
+                 AddEdge(graph, 13, 14);
+                 AddEdge(graph, 14, 8);
+               }, true,               
+               "1, 2, 3, 8, 11, ", 
+               "1, 2, 4, 6, 7, 8, 11, ",
+               "1, 2, 12, 13, 14, 8, 11, ", 
+               "1, 2, 5, 9, 10, 8, 11,");
+    }
+    
+    [Test]
+    public void Test_17()
+    {
+      List<string> result = new List<string>();
+      DoTest(delegate(IGraph<IntegerCoordinate> graph)
+               {
+                 const int MAX = 100;
+                 string s = "";
+                 for (int i = 0; i < MAX; i++)
+                 {
+                   AddEdge(graph, i, (i + 1)%MAX);
+                   s += i + ", ";
+                 }
+                 result.Add(s);
+               }, true,
+             delegate { return result.ToArray(); });
+    }    
   }
 }
