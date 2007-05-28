@@ -8,7 +8,6 @@ namespace DSIS.CellImageBuilders.PointMethod
     public readonly bool UseOverlapping;
     public readonly double Overlap;
 
-
     public PointMethodSettings(int[] points)
     {
       Points = points;
@@ -21,6 +20,6 @@ namespace DSIS.CellImageBuilders.PointMethod
       Points = points;
       Overlap = overlap;
       UseOverlapping = false;
-    }
+    }    
   }
 }
