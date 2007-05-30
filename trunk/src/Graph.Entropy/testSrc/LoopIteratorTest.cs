@@ -426,5 +426,43 @@ namespace DSIS.Graph.Entropy
                }, true,
              delegate { return result.ToArray(); });
     }    
+
+    [Test]
+    public void Test_18()
+    {
+      List<string> result = new List<string>();
+      DoTest(delegate(IGraph<IntegerCoordinate> graph)
+               {
+                 const int MAX = 1000;
+                 string s = "";
+                 for (int i = 0; i < MAX; i++)
+                 {
+                   AddEdge(graph, i, (i + 1)%MAX);
+                   s += i + ", ";
+                 }
+                 result.Add(s);
+               }, true,
+             delegate { return result.ToArray(); });
+    }
+
+    [Test]
+    public void Test_19()
+    {
+      List<string> result = new List<string>();
+      DoTest(delegate(IGraph<IntegerCoordinate> graph)
+               {                 
+                 const int MAX = 1000;
+                 string s = "";
+                 for (int i = 1; i <= MAX; i++)
+                 {
+                   AddEdge(graph, 0, i);
+                   AddEdge(graph, i, MAX + 1);
+                   s += i + ", ";
+                 }
+                 AddEdge(graph, MAX + 1, 0);
+                 result.Add(s);
+               }, true,
+             delegate { return result.ToArray(); });
+    }
   }
 }

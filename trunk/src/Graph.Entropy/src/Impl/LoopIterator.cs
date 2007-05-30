@@ -70,7 +70,7 @@ namespace DSIS.Graph.Entropy.Impl
       myNodes.Enqueue(mySearchRoot);
 
       info.Minimum = 0;
-      info.Minimum = 1;
+      info.Maximum = 1;
       while (myNodes.Count > 0)
       {
         info.Tick(1.0);
