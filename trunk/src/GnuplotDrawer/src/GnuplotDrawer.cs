@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -16,6 +17,10 @@ namespace DSIS.GnuplotDrawer
     {
       ProcessStartInfo pi = new ProcessStartInfo();
       pi.FileName = Path.Combine(myGnuplotFolder, @"bin\pgnuplot.exe");
+
+      if (!File.Exists(pi.FileName))
+        throw new ArgumentException("Unable to locate pgnuplot.exe");
+
       pi.Arguments = script.Filename;
 
       Process ps = Process.Start(pi);

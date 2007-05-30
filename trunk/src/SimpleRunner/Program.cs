@@ -1,8 +1,9 @@
-using System;
 using System.IO;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
+using DSIS.Function.Predefined.Delayed;
 using DSIS.Function.Predefined.Henon;
+using DSIS.Function.Predefined.Ikeda;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 
@@ -22,8 +23,20 @@ namespace DSIS.SimpleRunner
       myHomePath = Path.GetFullPath(Path.Combine(prePath, @"..\..\..\..\"));
       myWorkPath = Path.GetFullPath(Path.Combine(myHomePath, @"results"));
 
+      for (int i = 0; ; i++)
+      {
+        new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+          (myHomePath, myWorkPath, 10 + i).ComputeAllMethods();
 
-      new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myHomePath, myWorkPath, 7).ComputeAllMethods();
+        new IkedaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+          (myHomePath, myWorkPath, 7 + i).ComputeAllMethods();
+
+        new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+          (2.27, myHomePath, myWorkPath, 7 + i).ComputeAllMethods();
+
+        new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+          (2.21, myHomePath, myWorkPath, 7 + i).ComputeAllMethods();
+      }
     }
 
 
@@ -31,7 +44,8 @@ namespace DSIS.SimpleRunner
       where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate<Q> 
     {
-      public HenonFullBuilder(string homePath, string rootPath, int steps) : base(homePath, rootPath, steps)
+      public HenonFullBuilder(string homePath, string rootPath, int steps) :
+        base(homePath, rootPath, steps, "Henon")
       {
       }
 
@@ -43,6 +57,49 @@ namespace DSIS.SimpleRunner
       protected override ISystemInfo CreateSystemFunction(ISystemSpace space)
       {
          return new HenonFunctionSystemInfoDecorator(space, 1.4);
+      }
+    }
+    
+    public class IkedaFullBuilder<T,Q> : FullImageBuilder<T,Q> 
+      where T : IIntegerCoordinateSystem<Q>
+      where Q : IIntegerCoordinate<Q> 
+    {
+      public IkedaFullBuilder(string homePath, string rootPath, int steps) :
+        base(homePath, rootPath, steps, "Ikeda")
+      {
+      }
+
+      protected override ISystemSpace CreateSystemSpace()
+      {
+        return new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {10, 10});
+      }
+
+      protected override ISystemInfo CreateSystemFunction(ISystemSpace space)
+      {
+        return new IkedaFunctionSystemInfoDecorator(space);
+      }
+    }
+
+    public class DelayedFullBuilder<T,Q> : FullImageBuilder<T,Q> 
+      where T : IIntegerCoordinateSystem<Q>
+      where Q : IIntegerCoordinate<Q> 
+    {
+      private readonly double myA;
+
+      public DelayedFullBuilder(double a, string homePath, string rootPath, int steps) :
+        base(homePath, rootPath, steps, "Delayed " + a)      
+      {
+        myA = a;
+      }
+
+      protected override ISystemSpace CreateSystemSpace()
+      {
+        return new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {2, 2});
+      }
+
+      protected override ISystemInfo CreateSystemFunction(ISystemSpace space)
+      {
+        return new DelayedFunctionSystemInfo(space, myA);
       }
     }
 

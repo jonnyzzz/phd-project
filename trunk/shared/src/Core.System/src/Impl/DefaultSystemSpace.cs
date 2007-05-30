@@ -7,10 +7,10 @@ namespace DSIS.Core.System.Impl
 {
   public class DefaultSystemSpace : ISystemSpace
   {
-    private int myDimension;
-    private double[] myAreaLeftPoint;
-    private double[] myAreaRightPoint;
-    private long[] myInitialSubdivision;
+    private readonly int myDimension;
+    private readonly double[] myAreaLeftPoint;
+    private readonly double[] myAreaRightPoint;
+    private readonly long[] myInitialSubdivision;
 
     public DefaultSystemSpace(int dimension, double[] areaLeftPoint, double[] areaRightPoint, long[] initialSubdivision)
     {

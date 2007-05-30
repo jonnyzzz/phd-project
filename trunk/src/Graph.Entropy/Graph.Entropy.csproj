@@ -43,6 +43,8 @@
     <Compile Include="src\Impl\Eigen\EigenEntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\EntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\EntropyGraphWeightCallback.cs" />
+    <Compile Include="src\Impl\GraphWeightSearch.cs" />
+    <Compile Include="src\Impl\ILoopIterator.cs" />
     <Compile Include="src\Impl\LoopIterator.cs" />
     <Compile Include="src\Impl\ILoopIteratorCallback.cs" />
     <Compile Include="src\Impl\NodePair.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="testSrc\EigenEvaluatorImplTest.cs" />
     <Compile Include="testSrc\EntropyLoopIteratorCallbackTest.cs" />
     <Compile Include="testSrc\GraphBaseTest.cs" />
+    <Compile Include="testSrc\GraphWeightSearchTest.cs" />
     <Compile Include="testSrc\LoopIteratorTest.cs" />
   </ItemGroup>
   <ItemGroup>

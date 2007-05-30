@@ -22,8 +22,6 @@ namespace DSIS.CellImageBuilders.PointMethod
 
     public void BuildImage(Q coord)
     {
-      myPoints.Clear();
-
       mySystem.TopLeftPoint(coord, myDLeft);
       for (int i = 0; i < myDLeft.Length; i++)
         myDRight[i] = myDLeft[i] + mySystem.CellSize[i];

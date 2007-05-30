@@ -27,16 +27,22 @@ namespace DSIS.SimpleRunner
     private readonly string myRootPath;
     private readonly int mySteps;
     private readonly string myHomePath;
+    private readonly string myName;
 
     protected abstract ISystemSpace CreateSystemSpace();
     protected abstract ISystemInfo CreateSystemFunction(ISystemSpace space);
 
-    protected FullImageBuilder(string homePath, string rootPath, int steps)
+
+    private double myEntropy;
+    private int myComponents;
+
+    protected FullImageBuilder(string homePath, string rootPath, int steps, string name)
     {
       myHomePath = homePath;
+      myName = name;
       mySteps = steps;
       DateTime now = DateTime.Now;      
-      myRootPath = Path.Combine(rootPath, string.Format("{0}-{1}-{2} {3}-{4}", now.Year, now.Month, now.Day, now.Hour, now.Minute));
+      myRootPath = Path.Combine(rootPath, string.Format("{0}.{1}step.{2}", myName, steps, now.ToString("yyyy-MM-dd.HH-mm-ss")));
 
       if (Directory.Exists(myRootPath))
       {
@@ -52,15 +58,15 @@ namespace DSIS.SimpleRunner
         Console.Out.WriteLine("Adaptive Method:");
         log.WriteLine("Adaptive Method:");
         MethodAndLog
-          (string.Empty,
-           new AdaptiveMethod<T, Q>(), AdaptiveMethodSettings.DEFAULT);
+          ("Adaptive",
+           new AdaptiveMethod<T, Q>(), AdaptiveMethodSettings.DEFAULT, log);
 
         GC.Collect();
 
         Console.Out.WriteLine("Point Method:");
         MethodAndLog
           ("Point",
-           new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3}));
+           new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3}), log);
 
         GC.Collect();
 
@@ -68,23 +74,25 @@ namespace DSIS.SimpleRunner
         log.WriteLine("Overlaping Point Method:");
         MethodAndLog
           ("Overlaping",
-           new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3}, 0.1));
+           new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3}, 0.1), log);
 
         GC.Collect();
 
         Console.Out.WriteLine("Box Method:");
         log.WriteLine("Box Method:");
         MethodAndLog(
-          string.Empty,
-          new BoxMethod<T, Q>(), BoxMethodSettings.Default);
+          "BoxMethod",
+          new BoxMethod<T, Q>(), BoxMethodSettings.Default, log);
 
         GC.Collect();
       }
     }
 
-    protected void MethodAndLog(string title, ICellImageBuilder<Q> build, ICellImageBuilderSettings settings)
+    protected void MethodAndLog(string title, ICellImageBuilder<Q> build, ICellImageBuilderSettings settings, TextWriter log)
     {
-      string dir = Path.Combine(myRootPath, string.Format("{0}.{1}.{2}", title, build.GetType().Name, typeof (Q).Name));
+      string blockName = string.Format("{0}.{1}.{2}", title, build.GetType().Name, typeof (Q).Name);
+      string dir = Path.Combine(myRootPath, blockName);
+      dir = ToSafePath(dir);
       if (!Directory.Exists(dir))
         Directory.CreateDirectory(dir);
 
@@ -101,8 +109,15 @@ namespace DSIS.SimpleRunner
 
         logWriter.WriteLine("Finished at {0}", finish);
         Console.Out.WriteLine("Finished at {0}", finish);
-        logWriter.WriteLine("Time spent {0} ms", (finish - now).TotalMilliseconds);
-        Console.Out.WriteLine("Time spent {0} ms", (finish - now).TotalMilliseconds);
+        double workTime = (finish - now).TotalMilliseconds;
+
+        logWriter.WriteLine("Time spent {0} ms", workTime);
+        Console.Out.WriteLine("Time spent {0} ms", workTime);
+
+        log.WriteLine("{0}:", blockName);
+        log.WriteLine("Computation time {0}ms for {1} steps", workTime, mySteps);
+        log.WriteLine("Entropy = {0}", myEntropy);
+        log.WriteLine("Components = {0}", myComponents);
       }
     }
 
@@ -161,6 +176,9 @@ namespace DSIS.SimpleRunner
 
       DateTime time = DateTime.Now;
 
+      if (comps == null)
+        throw new NullReferenceException("Opps");
+
       string gnuplotPath = Path.GetFullPath(Path.Combine(myHomePath, @"tools\gnuplot"));
 
       RenderToImage((T)ctx.Converter.ToSystem,
@@ -169,13 +187,14 @@ namespace DSIS.SimpleRunner
                     gnuplotPath, comps,
                     logWriter);
 
+      
+      myComponents = comps.ComponentCount;
       ComputeEntropy(comps, graph, logWriter, dir);
 
       return time;
     }
 
-    private static int DumpAndGetCount<Q>(IGraphStrongComponents<Q> cmops, TextWriter log)
-      where Q : IIntegerCoordinate<Q>
+    private static int DumpAndGetCount(IGraphStrongComponents<Q> cmops, TextWriter log)
     {
       int v = 0;
       foreach (IStrongComponentInfo info in cmops.Components)
@@ -188,11 +207,15 @@ namespace DSIS.SimpleRunner
       return v;
     }
 
+    private static string ToSafePath(string s)
+    {
+      return s.Replace("`", "_");
+    }
 
     private static void RenderToImage(T ics, string path, string title, string gnuplotPath,                
                                   IGraphStrongComponents<Q> comps, TextWriter log)
     {
-      title = title.Replace("`", "_");
+      title = ToSafePath(title);
 
       log.WriteLine("Begin rendering...");
       Console.Out.WriteLine("Begin rendering...");
@@ -238,7 +261,7 @@ namespace DSIS.SimpleRunner
       drw.DrawImage(gen);
     }
 
-    private static void ComputeEntropy(IGraphStrongComponents<Q> comps, IGraph<Q> graph, TextWriter log, string dir)
+    private void ComputeEntropy(IGraphStrongComponents<Q> comps, IGraph<Q> graph, TextWriter log, string dir)
     {
       using (TextWriter ent = File.CreateText(Path.Combine(dir, "Entropy.txt")))
       {
@@ -266,6 +289,8 @@ namespace DSIS.SimpleRunner
         log.WriteLine("Entropy = {0}", entropy);
         ent.WriteLine("Entropy = {0}", entropy);
         Console.Out.WriteLine("Entropy = {0}", entropy);
+
+        myEntropy = entropy;
       }
     }
   }
