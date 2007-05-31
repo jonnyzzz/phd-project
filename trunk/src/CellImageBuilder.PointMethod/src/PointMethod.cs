@@ -65,7 +65,7 @@ namespace DSIS.CellImageBuilders.PointMethod
       double[] dStep = new double[myDim];
       for (int i = 0; i < dStep.Length; i++)
       {
-        dStep[i] = mySystem.CellSize[i]/set.Points[i];
+        dStep[i] = mySystem.CellSize[i]/(set.Points[i] - 1.0); //last point is right side
       }
 
       myIterator = new DoubleLBoxIterator(dStep);

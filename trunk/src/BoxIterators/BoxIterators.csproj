@@ -46,6 +46,7 @@
     <Compile Include="src\IBoxIterator.cs" />
     <Compile Include="src\LongLBoxIterator.cs" />
     <Compile Include="src\SegmentBoxIterator.cs" />
+    <Compile Include="testSrc\DoubleLBoxIteratorTest.cs" />
     <Compile Include="testSrc\Generator\BoxIteratorGeneratorTest.cs" />
     <Compile Include="testSrc\Generator\ShennonFenoCodecTest.cs" />
   </ItemGroup>

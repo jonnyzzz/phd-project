@@ -16,7 +16,7 @@ namespace DSIS.BoxIterators
 
     protected override bool IsLower(int i, double t1, double t2)
     {
-      return t1 < t2;
+      return t1 <= t2;
     }
   }
 }
