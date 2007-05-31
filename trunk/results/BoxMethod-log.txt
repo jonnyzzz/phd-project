@@ -1,5 +1,0 @@
-Started at 30.03.2007 15:53:05
-Completed in 46,875 ms
-Entropy = 0,460161193000405
-Finished at 30.03.2007 15:53:06
-Time spent 93,75 ms

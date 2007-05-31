@@ -1,4 +1,6 @@
+using System;
 using System.IO;
+using System.Threading;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Delayed;
@@ -23,26 +25,39 @@ namespace DSIS.SimpleRunner
       myHomePath = Path.GetFullPath(Path.Combine(prePath, @"..\..\..\..\"));
       myWorkPath = Path.GetFullPath(Path.Combine(myHomePath, @"results"));
 
-      for (int i = 0; ; i++)
+      for (int i = 0;; i++)
       {
+        new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+          (2.27, myHomePath, myWorkPath, 6 + i).ComputeAllMethods();
+
+        new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+          (2.21, myHomePath, myWorkPath, 6 + i).ComputeAllMethods();
+
         new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-          (myHomePath, myWorkPath, 10 + i).ComputeAllMethods();
+          (myHomePath, myWorkPath, 9 + i).ComputeAllMethods();
 
         new IkedaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-          (myHomePath, myWorkPath, 7 + i).ComputeAllMethods();
+          (myHomePath, myWorkPath, 6 + i).ComputeAllMethods();
 
-        new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-          (2.27, myHomePath, myWorkPath, 7 + i).ComputeAllMethods();
+        Console.Out.WriteLine("Loop Complete. ");
+        Console.Out.WriteLine("Loop Complete. ");
+        Console.Out.WriteLine("Loop Complete. ");
+        Console.Out.WriteLine("Loop Complete. ");
+        Console.Out.WriteLine("Loop Complete. ");
+        Console.Out.WriteLine("Loop Complete. ");
+        Console.Out.WriteLine("Loop Complete. ");
+        Console.Out.WriteLine("Loop Complete. ");
+        Console.Out.WriteLine("Loop Complete. ");
+        Console.Out.WriteLine("Loop Complete. ");
 
-        new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-          (2.21, myHomePath, myWorkPath, 7 + i).ComputeAllMethods();
+        Thread.Sleep(5000);
       }
     }
 
 
-    public class HenonFullBuilder<T,Q> : FullImageBuilder<T,Q> 
+    public class HenonFullBuilder<T, Q> : FullImageBuilder<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q> 
+      where Q : IIntegerCoordinate<Q>
     {
       public HenonFullBuilder(string homePath, string rootPath, int steps) :
         base(homePath, rootPath, steps, "Henon")
@@ -56,13 +71,13 @@ namespace DSIS.SimpleRunner
 
       protected override ISystemInfo CreateSystemFunction(ISystemSpace space)
       {
-         return new HenonFunctionSystemInfoDecorator(space, 1.4);
+        return new HenonFunctionSystemInfoDecorator(space, 1.4);
       }
     }
-    
-    public class IkedaFullBuilder<T,Q> : FullImageBuilder<T,Q> 
+
+    public class IkedaFullBuilder<T, Q> : FullImageBuilder<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q> 
+      where Q : IIntegerCoordinate<Q>
     {
       public IkedaFullBuilder(string homePath, string rootPath, int steps) :
         base(homePath, rootPath, steps, "Ikeda")
@@ -80,14 +95,14 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    public class DelayedFullBuilder<T,Q> : FullImageBuilder<T,Q> 
+    public class DelayedFullBuilder<T, Q> : FullImageBuilder<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q> 
+      where Q : IIntegerCoordinate<Q>
     {
       private readonly double myA;
 
       public DelayedFullBuilder(double a, string homePath, string rootPath, int steps) :
-        base(homePath, rootPath, steps, "Delayed " + a)      
+        base(homePath, rootPath, steps, "Delayed " + a)
       {
         myA = a;
       }

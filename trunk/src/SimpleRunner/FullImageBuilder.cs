@@ -209,7 +209,7 @@ namespace DSIS.SimpleRunner
 
     private static string ToSafePath(string s)
     {
-      return s.Replace("`", "_");
+      return s.Replace("`", "_").Replace(",", ".").Replace(" ","_");
     }
 
     private static void RenderToImage(T ics, string path, string title, string gnuplotPath,                
@@ -247,7 +247,7 @@ namespace DSIS.SimpleRunner
       IGnuplotScriptGen gen = GnuplotSriptGen.ScriptGen(
         ics.SystemSpace.Dimension,
         Path.Combine(path, title + "-script.gnuplot"),
-        new GnuplotScriptParameters(Path.Combine(path, title + "-picture.png"), title));
+        new GnuplotScriptParameters(Path.Combine(path, "-" + title + "-picture.png"), title));
 
       foreach (GnuplotPointsFileWriter file in files.Values)
       {
