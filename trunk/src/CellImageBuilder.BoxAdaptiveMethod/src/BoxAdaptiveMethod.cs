@@ -122,6 +122,11 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       return new BoxAdaptiveMethod<T, Q>();
     }
 
+    public string PresentableName
+    {
+      get { return "Box Adaptive Method"; }
+    }
+
     private void Evaluate(Point pt, double[] output)
     {
       pt.Evaluate(xleft, xright, x);      

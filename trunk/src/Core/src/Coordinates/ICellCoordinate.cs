@@ -10,7 +10,5 @@ namespace DSIS.Core.Coordinates
   public interface ICellCoordinate<T> where T : ICellCoordinate<T>
   {
     IEqualityComparer<T> Comparer { get; }
-
-    void CopyTo(long[] dest);
   }
 }

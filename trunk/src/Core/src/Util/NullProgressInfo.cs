@@ -15,6 +15,11 @@ namespace DSIS.Core.Util
       get { return false; }
     }
 
+    public IProgressInfo SubProgress(double value)
+    {
+      return new NullProgressInfo();
+    }
+
     public double Maximum
     {
       get { return myMaximum; }

@@ -24,5 +24,7 @@ namespace DSIS.Core.Util
     bool SupportsSteppingProgres { get; }
 
     bool IsInterrupted { get; }
+
+    IProgressInfo SubProgress(double value);
   }
 }

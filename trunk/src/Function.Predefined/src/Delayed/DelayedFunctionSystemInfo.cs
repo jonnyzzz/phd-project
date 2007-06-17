@@ -17,6 +17,11 @@ namespace DSIS.Function.Predefined.Delayed
       myA = a;
     }
 
+    public override string PresentableName
+    {
+      get { return string.Format("Delayed a={0}", myA); }
+    }
+
     protected override IFunction<double> GetFunctionInternal()
     {
       return new DelayedFunction(myA);

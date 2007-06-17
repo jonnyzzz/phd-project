@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -13,18 +12,6 @@ namespace DSIS.Core.Processor
     private readonly CountEnumerable<TFrom> myCountEnumerable;
     private readonly ICellImageBuilder<TTo> myCellImageBuilder;
     private readonly CellImageBuilderContext<TTo> myCellImageBuilderContext;
-
-    public CellProcessorContext(long cellsCount, IEnumerable<TFrom> cells,
-                                ICellCoordinateSystemConverter<TFrom, TTo> converter,
-                                ICellImageBuilder<TTo> cellImageBuilder,
-                                CellImageBuilderContext<TTo> cellImageBuilderContext)
-    {
-      myConverter = converter;
-      myCountEnumerable = new CountEnumerable<TFrom>(cells, cellsCount);
-      myCellImageBuilder = cellImageBuilder;
-      myCellImageBuilderContext = cellImageBuilderContext;
-    }
-
 
     public CellProcessorContext(
       CountEnumerable<TFrom> countEnumerable,
@@ -65,7 +52,6 @@ namespace DSIS.Core.Processor
       )
     {
       return new CellProcessorContext<TFrom, TTo>(
-        input.Count,
         input,
         converter,
         CellImageBuilder,

@@ -22,12 +22,6 @@ namespace DSIS.IntegerCoordinates.Generated
       get { return IntegerCoordinate2dEqualityComparer.INSTANCE; }
     }
 
-    public void CopyTo(long[] dest)
-    {
-      dest[0] = l1;
-      dest[1] = l2;
-    }
-
     public long GetCoordinate(int index)
     {
       switch(index)

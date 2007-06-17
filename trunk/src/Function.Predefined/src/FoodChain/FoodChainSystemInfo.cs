@@ -9,6 +9,11 @@ namespace DSIS.Function.Predefined
     {
     }
 
+    public override string PresentableName
+    {
+      get { return "Food Chain"; }
+    }
+
     protected override IFunction<double> GetFunctionInternal()
     {
       return new FoodChainFunction();
@@ -18,5 +23,7 @@ namespace DSIS.Function.Predefined
     {
       throw new NotImplementedException();
     }
+
+
   }
 }

@@ -22,7 +22,11 @@ namespace DSIS.Function.Predefined.Julia
     {
     }
 
-
+    public override string PresentableName
+    {
+      get { return "Julia"; }
+    }
+    
     protected override IFunction<double> GetFunctionInternal()
     {
       return new JuliaFunction();

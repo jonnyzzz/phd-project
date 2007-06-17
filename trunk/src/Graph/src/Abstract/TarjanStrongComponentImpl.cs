@@ -8,8 +8,8 @@ namespace DSIS.Graph.Abstract
   internal class TarjanStrongComponentImpl<TCell> : IGraphStrongComponents<TCell>
     where TCell : ICellCoordinate<TCell>
   {
-    private TarjanGraph<TCell> myGraph;
-    private TarjanComponentInfoManager myManager;
+    private readonly TarjanGraph<TCell> myGraph;
+    private readonly TarjanComponentInfoManager myManager;
 
     internal TarjanStrongComponentImpl(TarjanGraph<TCell> graph, TarjanComponentInfoManager manager)
     {
@@ -29,7 +29,17 @@ namespace DSIS.Graph.Abstract
       get { return myManager.Infos; }
     }
 
-    public IEnumerable<TCell> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
+    public CountEnumerable<TCell> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
+    {
+      int cnt = 0;
+      foreach (IStrongComponentInfo info in components)
+      {
+        cnt += info.NodesCount;
+      }
+      return new CountEnumerable<TCell>(GetCoordinatesImpl(components), cnt);
+    }
+
+    private IEnumerable<TCell> GetCoordinatesImpl(IEnumerable<IStrongComponentInfo> components)
     {
       foreach (INode<TCell> node in GetNodes(components))
       {

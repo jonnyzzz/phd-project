@@ -6,7 +6,8 @@ namespace DSIS.Graph.Abstract
   public class TarjanComponentInfoManager
   {
     private uint myIndex = 0;
-    private Dictionary<uint, IStrongComponentInfo> myInfos = new Dictionary<uint, IStrongComponentInfo>();
+    private readonly Dictionary<uint, IStrongComponentInfo> myInfos 
+      = new Dictionary<uint, IStrongComponentInfo>();
 
     public TarjanComponentInfo NextComponent()
     {

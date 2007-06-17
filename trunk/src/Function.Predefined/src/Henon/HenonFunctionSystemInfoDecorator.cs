@@ -11,6 +11,11 @@ namespace DSIS.Function.Predefined.Henon
       myA = a;
     }
 
+    public override string PresentableName
+    {
+      get { return string.Format("Henon a={0}", myA); }
+    }
+
     protected override IFunction<double> GetFunctionInternal()
     {
       return new HenonFunction(myA);

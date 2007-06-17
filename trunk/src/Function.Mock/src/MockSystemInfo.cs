@@ -47,6 +47,11 @@ namespace DSIS.Function.Mock
       get { return mySystemSpace; }
     }
 
+    public string PresentableName
+    {
+      get { return "Mock"; }
+    }
+
     private static void AssertType<T>()
     {
       Assert.AreEqual(typeof (TType), typeof (T));

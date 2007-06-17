@@ -25,6 +25,11 @@ namespace DSIS.Function.Predefined.Ikeda
     {
     }
 
+    public override string PresentableName
+    {
+      get { return "Ikeda"; }
+    }
+
     protected override IFunction<double> GetFunctionInternal()
     {
       return new IkedaFunction();

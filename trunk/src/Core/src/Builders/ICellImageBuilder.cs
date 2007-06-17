@@ -19,5 +19,7 @@ namespace DSIS.Core.Builders
     /// </summary>
     /// <returns>CellImage builder. Bind it before use</returns>
     ICellImageBuilder<TCell> Clone();
+
+    string PresentableName { get; }
   }
 }

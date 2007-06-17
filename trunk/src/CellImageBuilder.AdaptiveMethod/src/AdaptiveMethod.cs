@@ -96,5 +96,10 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
     {
       return new AdaptiveMethod<T, Q>();
     }
+
+    public string PresentableName
+    {
+      get { return "Adaptive Method"; }
+    }
   }
 }

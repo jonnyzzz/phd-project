@@ -43,6 +43,8 @@ namespace DSIS.Function.Predefined
       get { return new Type[] {typeof (double)}; }
     }
 
+    public abstract string PresentableName { get; }
+
     #endregion
 
     protected abstract IFunction<double> GetFunctionInternal();

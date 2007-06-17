@@ -75,5 +75,10 @@ namespace DSIS.CellImageBuilders.PointMethod
     {
       return new PointMethod<T, Q>();
     }
+
+    public string PresentableName
+    {
+      get { return "PointMethod"; }
+    }
   }
 }

@@ -13,7 +13,7 @@ namespace DSIS.Graph.Abstract
     IGraphExtension<StrongComponentNode<TCell>, TCell>
     where TCell : ICellCoordinate<TCell>
   {
-    private IStrongComponentInfoManager myComponents;
+    private readonly IStrongComponentInfoManager myComponents;
 
     public StrongComponentGraph(ICellCoordinateSystem<TCell> coordinateSystem, IStrongComponentInfoManager info)
       : base(coordinateSystem)
@@ -28,13 +28,23 @@ namespace DSIS.Graph.Abstract
       get { return myComponents.Count; }
     }
 
-
     public IEnumerable<IStrongComponentInfo> Components
     {
       get { return myComponents.Components; }
     }
 
-    public IEnumerable<TCell> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
+
+    public CountEnumerable<TCell> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
+    {
+      int cnt = 0;
+      foreach (IStrongComponentInfo info in components)
+      {
+        cnt += info.NodesCount;
+      }
+      return new CountEnumerable<TCell>(GetCoordinatesImpl(components), cnt);
+    }
+
+    private IEnumerable<TCell> GetCoordinatesImpl(IEnumerable<IStrongComponentInfo> components)
     {
       foreach (INode<TCell> node in GetNodes(components))
       {

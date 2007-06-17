@@ -17,6 +17,8 @@ namespace DSIS.Core.System
     Type[] SupportedFunctionTypes { get; }
 
     ISystemSpace SystemSpace { get; }
+
+    string PresentableName { get; }
   }
 
   /// <summary>

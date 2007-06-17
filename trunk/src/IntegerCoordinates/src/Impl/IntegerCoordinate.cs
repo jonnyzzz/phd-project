@@ -20,11 +20,6 @@ namespace DSIS.IntegerCoordinates.Impl
       get { return IntegerCoordinateEqualityComparer.INSTANCE; }
     }
 
-    public void CopyTo(long[] dest)
-    {
-      Array.Copy(myCoordinate, dest, myCoordinate.Length);
-    }
-
     public long GetCoordinate(int index)
     {
       return myCoordinate[index];

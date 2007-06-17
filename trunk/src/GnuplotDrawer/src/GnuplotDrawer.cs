@@ -8,6 +8,24 @@ namespace DSIS.GnuplotDrawer
   {
     private readonly string myGnuplotFolder;
 
+    private static string EvalPath2Gnuplot()
+    {
+      string pathBase = Path.GetDirectoryName(typeof (GnuplotDrawer).Assembly.Location);
+      while (pathBase != null)
+      {
+        string test = Path.Combine(pathBase, @"tools\gnuplot");
+        test = Path.GetFullPath(test);
+        if (Directory.Exists(test))
+          return test;
+        pathBase = Path.GetDirectoryName(pathBase);
+      }
+      return null;
+    }
+
+    public GnuplotDrawer() : this(EvalPath2Gnuplot())
+    {
+    }
+
     public GnuplotDrawer(string gnuplotFolder)
     {
       myGnuplotFolder = gnuplotFolder;
