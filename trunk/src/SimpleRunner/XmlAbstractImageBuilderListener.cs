@@ -139,14 +139,15 @@ namespace DSIS.SimpleRunner
 
     public void ImageFile(string file)
     {
-      AppendAttribute(AppendElement(myCoputationElement, "draw-image"), "image", file);
+      XmlElement imageElement = AppendElement(myCoputationElement, "draw-image");
+      AppendAttribute(imageElement, "image", file);
 
       if (file.StartsWith(myBasePath))
       {
         string rel = file.Substring(myBasePath.Length);
         if (rel[0] != '\\')
           rel = "\\" + rel;
-        AppendAttribute(AppendElement(myCoputationElement, "draw-image"), "rel-image", rel);
+        AppendAttribute(imageElement, "rel-image", rel.TrimStart(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
       }
       Serialize();
     }

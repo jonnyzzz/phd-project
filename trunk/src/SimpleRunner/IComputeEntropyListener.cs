@@ -1,6 +1,3 @@
-using DSIS.Graph;
-using DSIS.IntegerCoordinates;
-
 namespace DSIS.SimpleRunner
 {
   public interface IComputeEntropyListener

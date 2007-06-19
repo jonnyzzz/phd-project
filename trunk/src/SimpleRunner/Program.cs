@@ -24,7 +24,8 @@ namespace DSIS.SimpleRunner
         prePath = prePath.Substring("file:\\".Length);
 
       myHomePath = Path.GetFullPath(Path.Combine(prePath, @"..\..\..\..\"));
-      myWorkPath = Path.Combine(Path.GetFullPath(Path.Combine(myHomePath, @"results")), DateTime.Now.ToString("yyyy-mm-dd--hh-MM-ss"));
+      myWorkPath = Path.Combine(Path.GetFullPath(Path.Combine(myHomePath, @"results")), 
+        DateTime.Now.ToString("yyyy-MM-dd--hh-mm-ss"));
 
       if (Directory.Exists(myWorkPath))
         Directory.Delete(myWorkPath);

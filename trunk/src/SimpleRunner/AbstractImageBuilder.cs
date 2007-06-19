@@ -48,11 +48,12 @@ namespace DSIS.SimpleRunner
         {
           ext.AddListener(builderListener);
         }
+        myExtensions.Add(ext);
       }
       myListeners.Add(listener);
       foreach (IProvideExtendedListener extension in myExtensions)
       {
-        extension.RemoveListener(listener);
+        extension.AddListener(listener);
       }
     }
 
@@ -65,6 +66,7 @@ namespace DSIS.SimpleRunner
         {
           ext.RemoveListener(builderListener);
         }
+        myExtensions.Remove(ext);
       }
       myListeners.Remove(listener);
       foreach (IProvideExtendedListener extension in myExtensions)
@@ -72,7 +74,6 @@ namespace DSIS.SimpleRunner
         extension.RemoveListener(listener);
       }
     }
-
 
     protected virtual void DoConstruct(ICellImageBuilder<Q> builder, ICellImageBuilderSettings settings, IProgressInfo progress)
     {
