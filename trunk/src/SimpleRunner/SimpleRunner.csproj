@@ -107,7 +107,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\xslt\default.xslt" />
+    <EmbeddedResource Include="src\xslt\default.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

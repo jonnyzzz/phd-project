@@ -15,6 +15,7 @@ namespace DSIS.SimpleRunner
     private readonly XmlDocument myDocument = new XmlDocument();
     private readonly string myFile;
     private readonly string myBasePath;
+    private XmlElement myRootElement;
     private XmlElement myCoputationElement;
     private XmlElement myStep;
     private XmlElement myGraphElement;
@@ -29,10 +30,18 @@ namespace DSIS.SimpleRunner
     public XmlAbstractImageBuilderListener(string file)
     {
       myFile = file;
-      myDocument.AppendChild(myDocument.CreateXmlDeclaration("1.0", "utf-8", null));
-      XmlElement root = myDocument.CreateElement("root");
-      AppendAttribute(root, "path-base", myBasePath = Path.GetDirectoryName(file));
-      myDocument.AppendChild(root);
+      myBasePath = Path.GetDirectoryName(file);
+      if (!File.Exists(file))
+      {
+        myDocument.AppendChild(myDocument.CreateXmlDeclaration("1.0", "utf-8", null));
+        XmlElement root = myDocument.CreateElement("root");        
+        myDocument.AppendChild(root);
+      } else
+      {
+        myDocument.Load(file);
+      }
+      myRootElement = AppendElement(myDocument.DocumentElement, "computation-root");
+      AppendAttribute(myRootElement, "path-base", myBasePath);
     }
 
     private static void AppendAttribute(XmlNode element, string key, string template, params object[] args)
@@ -60,7 +69,7 @@ namespace DSIS.SimpleRunner
     public void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx)
     {
       myComputationStartedTime = DateTime.Now;
-      myCoputationElement = AppendElement(myDocument.DocumentElement, "computation");
+      myCoputationElement = AppendElement(myRootElement, "computation");
 
       AppendAttribute(myCoputationElement, "system", cx.Info.PresentableName);
       AppendAttribute(myCoputationElement, "method", cx.Builder.PresentableName);

@@ -6,7 +6,7 @@
 
 
 
-  <xsl:template match="/root">
+  <xsl:template match="/root/computation-root">
     <html>
       <head>
          <title>default</title>
@@ -19,7 +19,7 @@
 
   
   <xsl:template match="computation">
-    <h1><xsl:value-of select="@select"/> - <xsl:value-of select="@method"/></h1>
+    <h1><xsl:value-of select="@system"/> - <xsl:value-of select="@method"/></h1>
     <table>
       <tr><td>Coordinate System</td><td><xsl:value-of select="@ics"/></td></tr>
       <tr><td>Computation time</td><td><xsl:value-of select="@time"/>ms</td></tr>
