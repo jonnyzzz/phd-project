@@ -1,6 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Mime;
+using System.Runtime;
+using System.Security.Cryptography;
 using System.Xml.Xsl;
+using DSIS.Core.Processor;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner

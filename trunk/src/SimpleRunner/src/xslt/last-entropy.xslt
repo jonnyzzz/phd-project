@@ -9,7 +9,7 @@
   <xsl:template match="/root/computation-root">
     <html>
       <head>
-         <title>default</title>
+         <title>last-entropy</title>
       </head>
       <body>
         <xsl:apply-templates select="computation" />
@@ -23,7 +23,6 @@
     <table>
       <tr><td>Coordinate System</td><td><xsl:value-of select="@ics"/></td></tr>
       <tr><td>Computation time</td><td><xsl:value-of select="@time"/>ms</td></tr>
-      <tr><td>Components</td><td><xsl:value-of select="step[last()]/graph/@components"/></td></tr>
       <tr><td>Number of steps</td><td><xsl:value-of select="@totalSteps"/></td></tr>
       <tr><td>Number of nodes</td><td><xsl:value-of select="step[last()]/@nodes"/></td></tr>
       <tr><td colspan="2">

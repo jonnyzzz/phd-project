@@ -18,7 +18,8 @@ namespace DSIS.Function.Predefined.Julia
 
   public class JuliaFuctionSystemInfoDecorator : DoubleSystemInfoBase
   {
-    public JuliaFuctionSystemInfoDecorator(ISystemSpace systemSpace) : base(systemSpace)
+    public JuliaFuctionSystemInfoDecorator(ISystemSpace systemSpace)
+      : base(systemSpace)
     {
     }
 
@@ -26,7 +27,7 @@ namespace DSIS.Function.Predefined.Julia
     {
       get { return "Julia"; }
     }
-    
+
     protected override IFunction<double> GetFunctionInternal()
     {
       return new JuliaFunction();
@@ -36,5 +37,5 @@ namespace DSIS.Function.Predefined.Julia
     {
       throw new NotImplementedException();
     }
-  }
+  }  
 }

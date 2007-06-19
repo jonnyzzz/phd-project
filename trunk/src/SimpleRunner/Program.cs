@@ -8,6 +8,7 @@ using DSIS.Core.Util;
 using DSIS.Function.Predefined.Delayed;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
+using DSIS.Function.Predefined.Julia;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 
@@ -57,19 +58,26 @@ namespace DSIS.SimpleRunner
 
       Console.Out.WriteLine("Work directory: {0}", myWorkPath);
 
-      int i = -4;
+      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 13), myXSLTs);
+      Do(new IkedaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 10), myXSLTs);
+      Do(new JuliaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 12), myXSLTs);
+      Do(new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(2.21, myWorkPath, 13), myXSLTs);
+      Do(new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(2.27, myWorkPath, 13), myXSLTs);
 
-      Do(new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-           (2.27, myWorkPath, 6 + i), myXSLTs);
-
-      Do(new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-           (2.21, myWorkPath, 6 + i), myXSLTs);
-
-      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-           (myWorkPath, 9 + i), myXSLTs);
-
-      Do(new IkedaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-           (myWorkPath, 6 + i), myXSLTs);
+//      for (double a = 2; a >= 1.5; a -= 0.1)
+//      {
+//        Do(new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+//             (a, myWorkPath, 10), myXSLTs);
+//      }
+//
+//      Do(new DelayedFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+//           (2.21, myWorkPath, 6 + i), myXSLTs);
+//
+//      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+//           (myWorkPath, 9 + i), myXSLTs);
+//
+//      Do(new IkedaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>
+//           (myWorkPath, 6 + i), myXSLTs);
 
       Console.Out.WriteLine("Loop Complete. ");
     }
@@ -150,7 +158,28 @@ namespace DSIS.SimpleRunner
       {
         ISystemSpace sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {2, 2});
         return new DelayedFunctionSystemInfo(sp, myA);
+      }      
+    }
+    
+    public class JuliaFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
+      where T : IIntegerCoordinateSystem<Q>
+      where Q : IIntegerCoordinate<Q>
+    {
+      public JuliaFullBuilder(string homePath, int steps) :
+        base(homePath, steps, -1)
+      {
       }
+
+      protected override long[] Subdivide
+      {
+        get { return new long[] {2, 2}; }
+      }
+
+      protected override ISystemInfo CreateSystemInfo()
+      {
+        ISystemSpace sp = new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {2, 2});
+        return new JuliaFuctionSystemInfoDecorator(sp);
+      }      
     }
   }
 }
