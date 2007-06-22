@@ -15,7 +15,7 @@ namespace DSIS.SimpleRunner
     private readonly XmlDocument myDocument = new XmlDocument();
     private readonly string myFile;
     private readonly string myBasePath;
-    private XmlElement myRootElement;
+    private readonly XmlElement myRootElement;
     private XmlElement myCoputationElement;
     private XmlElement myStep;
     private XmlElement myGraphElement;

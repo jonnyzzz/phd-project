@@ -2,29 +2,23 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined
 {
-  public abstract class FunctionBase<T> : FunctionIO<T>, IFunction<T>
+  public abstract class Function<T> : FunctionIO<T>
   {
-    private int myDimension;
-
-    protected FunctionBase(int dimension, params IFunctionIO<T>[] derivates) : base(derivates)
-    {
-      myDimension = dimension;
-    }
-
-    protected FunctionBase(int dimension)
-    {
-      myDimension = dimension;
-    }
-
-    #region IFunction<T> Members
+    private readonly int myDimension;
 
     public int Dimension
     {
       get { return myDimension; }
     }
 
-    public abstract void Evaluate();
+    protected Function(int dimension, params IFunctionIO<T>[] derivates) : base(derivates)
+    {
+      myDimension = dimension;
+    }
 
-    #endregion
+    protected Function(int dimension)
+    {
+      myDimension = dimension;
+    }
   }
 }

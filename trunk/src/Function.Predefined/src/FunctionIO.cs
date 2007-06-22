@@ -17,8 +17,6 @@ namespace DSIS.Function.Predefined
       myDerivates = derivates;
     }
 
-    #region IFunctionIO<T> Members
-
     public IFunctionIO<T>[] Derivates
     {
       get { return myDerivates; }
@@ -35,7 +33,5 @@ namespace DSIS.Function.Predefined
       get { return myOutput; }
       set { myOutput = value; }
     }
-
-    #endregion
   }
 }

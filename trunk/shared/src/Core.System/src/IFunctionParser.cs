@@ -13,6 +13,6 @@ namespace DSIS.Core.System
     /// <param name="input"></param>
     /// <returns> System information object as the result of parse</returns>
     /// <exception cref="ParserErrorException">Parse error ocured</exception>
-    ISystemInfo ParseUserInput(string input);
+    IDiscreteSystemInfo ParseUserInput(string input);
   }
 }

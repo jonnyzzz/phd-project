@@ -8,7 +8,7 @@ namespace DSIS.Core.Data
 //  [Obsolete("Subject to change")]
 //  public interface IDataProcessScheme<T>
 //  {
-//    void Bind(ISystemInfo info);
+//    void Bind(IDiscreteSystemInfo info);
 //
 //    IDataCollection GetInitialCollection();
 //    IList<IContinuableDataCollectionAnalisys> AnalisysSteps { get; }

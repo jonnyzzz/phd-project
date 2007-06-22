@@ -3,13 +3,13 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Ikeda
 {
-  public class IkedaFunction : FunctionBase<double>
+  public class IkedaFunction : Function<double>, IFunction<double>
   {
     public IkedaFunction() : base(2)
     {
     }
 
-    public override void Evaluate()
+    public void Evaluate()
     {
       double t = 0.4 - 6/(1 + Input[0]*Input[0] + Input[1]*Input[1]);
       double cost = Math.Cos(t);
@@ -19,7 +19,7 @@ namespace DSIS.Function.Predefined.Ikeda
     }
   }
 
-  public class IkedaFunctionSystemInfoDecorator : DoubleSystemInfoBase
+  public class IkedaFunctionSystemInfoDecorator : DoubleDescreteSystemInfoBase
   {
     public IkedaFunctionSystemInfoDecorator(ISystemSpace systemSpace) : base(systemSpace)
     {

@@ -8,7 +8,7 @@ namespace DSIS.Core.Data
 //  [Obsolete("Subject to change")]
 //  public interface IDataCollectionAnalisys<T>
 //  {
-//    void Bind(ISystemInfo info);
+//    void Bind(IDiscreteSystemInfo info);
 //    T Analize(IDataCollection collection);
 //  }
 }

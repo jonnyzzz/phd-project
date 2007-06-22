@@ -58,7 +58,7 @@ namespace DSIS.SimpleRunner
       return new TarjanGraph<Q>(system);
     }
 
-    protected virtual T CreateCoordinateSystem(ISystemInfo info)
+    protected virtual T CreateCoordinateSystem(IDiscreteSystemInfo info)
     {
       if (typeof(T) == typeof(IntegerCoordinateSystem))
         return (T)(object)new IntegerCoordinateSystem(info.SystemSpace);
@@ -67,12 +67,12 @@ namespace DSIS.SimpleRunner
       throw new ArgumentException("Unknnown type T");
     }
 
-    protected abstract ISystemInfo CreateSystemInfo();
+    protected abstract IDiscreteSystemInfo CreateSystemInfo();
     
-    protected sealed override Pair<ISystemInfo, T> CreateInfos()
+    protected sealed override Pair<IDiscreteSystemInfo, T> CreateInfos()
     {
-      ISystemInfo info = CreateSystemInfo();
-      return new Pair<ISystemInfo, T>(info, CreateCoordinateSystem(info));
+      IDiscreteSystemInfo info = CreateSystemInfo();
+      return new Pair<IDiscreteSystemInfo, T>(info, CreateCoordinateSystem(info));
     }
   }
 }

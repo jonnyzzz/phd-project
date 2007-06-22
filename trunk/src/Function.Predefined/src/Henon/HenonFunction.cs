@@ -3,9 +3,11 @@
  * Created: 5 ÿםגאנÿ 2007 ד.
  */
 
+using DSIS.Core.System;
+
 namespace DSIS.Function.Predefined.Henon
 {
-  public class HenonFunction : FunctionBase<double>
+  public class HenonFunction : Function<double>, IFunction<double>
   {
     protected readonly double myA;
 
@@ -14,7 +16,7 @@ namespace DSIS.Function.Predefined.Henon
       myA = a;
     }
 
-    public override void Evaluate()
+    public void Evaluate()
     {
       Output[0] = 1 - myA*Input[0]*Input[0] + 0.3*Input[1];
       Output[1] = Input[0];

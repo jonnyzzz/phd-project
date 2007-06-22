@@ -1,14 +1,15 @@
 using System;
+using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined
 {
-  public class FoodChainFunction : FunctionBase<double>
+  public class FoodChainFunction : Function<double>, IFunction<double>
   {
     public FoodChainFunction() : base(3)
     {
     }
 
-    public override void Evaluate()
+    public void Evaluate()
     {
       double x = Input[0];
       double y = Input[1];

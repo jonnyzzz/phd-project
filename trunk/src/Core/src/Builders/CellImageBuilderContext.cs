@@ -5,12 +5,12 @@ namespace DSIS.Core.Builders
 {
   public struct CellImageBuilderContext<TCell> where TCell : ICellCoordinate<TCell>
   {
-    private readonly ISystemInfo myFunction;
+    private readonly IDiscreteSystemInfo myFunction;
     private readonly ICellImageBuilderSettings mySettings;
     private readonly ICellCoordinateSystem<TCell> mySystem;
     private readonly ICellConnectionBuilder<TCell> myConnectionBuilder;
 
-    public CellImageBuilderContext(ISystemInfo function, ICellImageBuilderSettings settings,
+    public CellImageBuilderContext(IDiscreteSystemInfo function, ICellImageBuilderSettings settings,
                                    ICellCoordinateSystem<TCell> system, ICellConnectionBuilder<TCell> connectionBuilder)
     {
       myFunction = function;
@@ -19,7 +19,7 @@ namespace DSIS.Core.Builders
       myConnectionBuilder = connectionBuilder;
     }
 
-    public ISystemInfo Function
+    public IDiscreteSystemInfo Function
     {
       get { return myFunction; }
     }

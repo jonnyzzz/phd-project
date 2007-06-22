@@ -1,11 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Mime;
-using System.Runtime;
-using System.Security.Cryptography;
 using System.Xml.Xsl;
-using DSIS.Core.Processor;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
@@ -27,6 +22,7 @@ namespace DSIS.SimpleRunner
       myXmlListener = new XmlAbstractImageBuilderListener<T,Q>(myXmlFile);
       AddListener(myXmlListener);
       AddListener(new DrawLastComputationResultListener<T,Q>(myWorkPath));
+      AddListener(new ConsoleListener<T,Q>());
     }
 
     public void ApplyXSL(IEnumerable<string> xslFiles)

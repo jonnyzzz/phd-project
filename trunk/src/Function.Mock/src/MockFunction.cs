@@ -7,7 +7,7 @@ namespace DSIS.Function.Mock
 
   public delegate T ComputeOneFunction<T>(T ins);
 
-  public class MockFunction<T> : FunctionBase<T>, IFunction<T>
+  public class MockFunction<T> : Function<T>, IFunction<T>
   {
     private readonly ComputeFunction<T> myCompute;
 
@@ -21,7 +21,7 @@ namespace DSIS.Function.Mock
       myCompute = delegate(T[] ins, T[] outs) { outs[0] = compute(ins[0]); };
     }
 
-    public override void Evaluate()
+    public void Evaluate()
     {
       myCompute(Input, Output);
     }

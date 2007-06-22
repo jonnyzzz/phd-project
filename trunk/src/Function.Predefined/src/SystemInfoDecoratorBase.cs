@@ -4,7 +4,7 @@ namespace DSIS.Function.Predefined
 {
   public class SystemInfoDecoratorBase
   {
-    private ISystemSpace mySystemSpace;
+    private readonly ISystemSpace mySystemSpace;
 
     public SystemInfoDecoratorBase(ISystemSpace systemSpace)
     {

@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace DSIS.Function.Mock
 {
-  public class MockSystemInfo<TType> : ISystemInfo
+  public class MockSystemInfo<TType> : IDiscreteSystemInfo
   {
     private readonly ComputeFunction<TType> myFunc;
     private readonly ISystemSpace mySystemSpace;

@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</ProjectGuid>
+    <ProjectGuid>{4340017C-0FB4-4A43-8D5A-28ACB55045F0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.Function.Predefined</RootNamespace>
-    <AssemblyName>DSIS.Function.Predefined</AssemblyName>
+    <RootNamespace>DSIS.Function.Solvers</RootNamespace>
+    <AssemblyName>DSIS.Function.Solvers</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,27 +34,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Delayed\DelayedFunction.cs" />
-    <Compile Include="src\Delayed\DelayedFunctionSystemInfo.cs" />
-    <Compile Include="src\DoubleContiniousSystemInfoBase.cs" />
-    <Compile Include="src\DoubleDescreteSystemInfoBase.cs" />
-    <Compile Include="src\Duffing\DuffingFunction.cs" />
-    <Compile Include="src\Duffing\DuffingSystemInfo.cs" />
-    <Compile Include="src\FoodChain\FoodChainFunction.cs" />
-    <Compile Include="src\FoodChain\FoodChainSystemInfo.cs" />
     <Compile Include="src\FunctionBase.cs" />
-    <Compile Include="src\FunctionIO.cs" />
-    <Compile Include="src\Henon\HenonFunction.cs" />
-    <Compile Include="src\Henon\HenonFunctionDerivate.cs" />
-    <Compile Include="src\Henon\HenonFunctionSystemInfoDecorator.cs" />
-    <Compile Include="src\Ikeda\IkedaFunction.cs" />
-    <Compile Include="src\Julia\JuliaFunction.cs" />
-    <Compile Include="src\SystemInfoDecoratorBase.cs" />
+    <Compile Include="src\RungeKutt\RungeKuttSolver.cs" />
+    <Compile Include="src\SimpleSolver\SimpleSolvedFunction.cs" />
+    <Compile Include="src\SolvedFunctionBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

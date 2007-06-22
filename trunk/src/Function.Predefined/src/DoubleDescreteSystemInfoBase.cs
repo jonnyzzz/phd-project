@@ -4,9 +4,9 @@ using DSIS.Core.System.Tree;
 
 namespace DSIS.Function.Predefined
 {
-  public abstract class DoubleSystemInfoBase : SystemInfoDecoratorBase, ISystemInfo
+  public abstract class DoubleDescreteSystemInfoBase : SystemInfoDecoratorBase, IDiscreteSystemInfo
   {
-    public DoubleSystemInfoBase(ISystemSpace systemSpace) : base(systemSpace)
+    public DoubleDescreteSystemInfoBase(ISystemSpace systemSpace) : base(systemSpace)
     {
     }
 
@@ -41,12 +41,10 @@ namespace DSIS.Function.Predefined
     public Type[] SupportedFunctionTypes
     {
       get { return new Type[] {typeof (double)}; }
-    }
-
-    public abstract string PresentableName { get; }
-
+    }    
     #endregion
 
+    public abstract string PresentableName { get; }
     protected abstract IFunction<double> GetFunctionInternal();
     protected abstract IFunction<double> GetFunctionDerivateInternal();
   }

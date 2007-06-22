@@ -45,6 +45,6 @@ namespace DSIS.Core.Src.Context
 
   public static class PredefinedObjects
   {
-    public static readonly ContextKey<ISystemInfo> SYSTEM_INFO = new PredefinedObject<ISystemInfo>();
+    public static readonly ContextKey<IDiscreteSystemInfo> SYSTEM_INFO = new PredefinedObject<IDiscreteSystemInfo>();
   }
 }
