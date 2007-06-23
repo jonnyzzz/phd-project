@@ -7,7 +7,7 @@ namespace DSIS.GnuplotDrawer
     public readonly int Height = 1000;
     public readonly string Title;
     public readonly string KeyFormat = "Count {0}";
-    public bool ShowKeyHistory = true;
+    public bool ShowKeyHistory = false;
 
     public GnuplotScriptParameters(string outputFile, string title)
     {

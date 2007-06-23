@@ -14,8 +14,6 @@ namespace DSIS.GnuplotDrawer
       myWriter = File.CreateText(filename);
     }
 
-    #region IDisposable Members
-
     public virtual void Dispose()
     {
       if (myWriter != null)
@@ -24,8 +22,6 @@ namespace DSIS.GnuplotDrawer
         myWriter = null;
       }
     }
-
-    #endregion
 
     public string Filename
     {

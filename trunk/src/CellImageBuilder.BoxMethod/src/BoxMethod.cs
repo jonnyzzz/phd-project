@@ -35,7 +35,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
     public override void Bind(CellImageBuilderContext<Q> context)
     {
       base.Bind(context);
-      myFunction = context.Function.GetFunction<double>();
+      myFunction = context.Function.GetFunction<double>(mySystem.CellSize);
 
       y = new double[myDim];
       x = new double[myDim];

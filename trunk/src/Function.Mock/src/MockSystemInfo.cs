@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace DSIS.Function.Mock
 {
-  public class MockSystemInfo<TType> : IDiscreteSystemInfo
+  public class MockSystemInfo<TType> : ISystemInfo
   {
     private readonly ComputeFunction<TType> myFunc;
     private readonly ISystemSpace mySystemSpace;
@@ -16,17 +16,17 @@ namespace DSIS.Function.Mock
       mySystemSpace = systemSpace;
     }
 
-    public IFunction<T> GetDerivateFunction<T>(int derivatePower)
+    public IFunction<T> GetDerivateFunction<T>(T[] precision, int derivatePower)
     {
       throw new NotImplementedException();
     }
 
-    public IFunction<T> GetDerivateFunction<T>(int[] unsimmetricDerivate)
+    public IFunction<T> GetDerivateFunction<T>(T[] precision, int[] unsimmetricDerivate)
     {
       throw new NotImplementedException();
     }
 
-    public IFunction<T> GetFunction<T>()
+    public IFunction<T> GetFunction<T>(T[] precision)
     {
       AssertType<T>();
       return (IFunction<T>) new MockFunction<TType>(mySystemSpace.Dimension, myFunc);

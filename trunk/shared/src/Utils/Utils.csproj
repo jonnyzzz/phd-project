@@ -41,6 +41,7 @@
     <Compile Include="src\ArrayEqualityComparer.cs" />
     <Compile Include="src\AttributeUtil.cs" />
     <Compile Include="src\DoubleEqualityComparer.cs" />
+    <Compile Include="src\DynamicGeneric.cs" />
     <Compile Include="src\EmptyArray.cs" />
     <Compile Include="src\EqualityComparerAttribute.cs" />
     <Compile Include="src\EqualityComparerFactory.cs" />

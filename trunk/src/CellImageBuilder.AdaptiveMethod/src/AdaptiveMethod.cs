@@ -30,7 +30,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       base.Bind(context);
       myGraphBuilder = BUILDER.BuildGraph(myDim).Init(mySystem);
       myD = new double[myDim];
-      myFunction = context.Function.GetFunction<double>();
+      myFunction = context.Function.GetFunction<double>(mySystem.CellSize);
       mySettings = (AdaptiveMethodSettings) context.Settings;
       myEps = new double[myDim];
       double[] eps2 = new double[myDim];

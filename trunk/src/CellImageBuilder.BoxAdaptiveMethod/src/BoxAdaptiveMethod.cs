@@ -48,7 +48,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       base.Bind(context);
       myRadiusProcessor = mySystem.ProcessorFactory.CreateRadiusProcessor();
 
-      myFunction = context.Function.GetFunction<double>();
+      myFunction = context.Function.GetFunction<double>(mySystem.CellSize);
 
       BoxAdaptiveMethodSettings settings = (BoxAdaptiveMethodSettings) context.Settings;
 

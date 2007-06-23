@@ -18,26 +18,11 @@ namespace DSIS.Core.System
   /// <summary>
   /// Represents descrete system's function of right hand
   /// </summary>
-  public interface IDiscreteSystemInfo : ISystemInfoBase
+  public interface ISystemInfo : ISystemInfoBase
   {
-    IFunction<T> GetFunction<T>();
-    IFunction<T> GetDerivateFunction<T>(int derivatePower);
-    IFunction<T> GetDerivateFunction<T>(int[] unsimmetricDerivate);
-  }
-
-  /// <summary>
-  /// Represents continious system's 
-  /// and right hand function of the
-  /// dx/dt = F(x,t)
-  /// where x is sent throung IFunctionIO&lt;T&gt;,
-  /// but t is put to the IFunctionWithTime&lt;T&gt;.Evaluate
-  /// method.
-  /// </summary>
-  public interface IContiniousSystemInfo : ISystemInfoBase
-  {
-    IFunctionWithTime<T> GetFunction<T>();
-    IFunctionWithTime<T> GetDerivateFunction<T>(int derivatePower);
-    IFunctionWithTime<T> GetDerivateFunction<T>(int[] unsimmetricDerivate);    
+    IFunction<T> GetFunction<T>(T[] precision);
+    IFunction<T> GetDerivateFunction<T>(T[] precision, int derivatePower);
+    IFunction<T> GetDerivateFunction<T>(T[] precision, int[] unsimmetricDerivate);
   }
 
   /// <summary>

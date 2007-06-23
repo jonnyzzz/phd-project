@@ -16,7 +16,7 @@ namespace DSIS.Function.Predefined.Julia
     }
   }
 
-  public class JuliaFuctionSystemInfoDecorator : DoubleDescreteSystemInfoBase
+  public class JuliaFuctionSystemInfoDecorator : DoubleSystemInfoBase
   {
     public JuliaFuctionSystemInfoDecorator(ISystemSpace systemSpace)
       : base(systemSpace)

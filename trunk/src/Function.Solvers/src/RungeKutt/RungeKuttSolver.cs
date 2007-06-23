@@ -1,61 +1,81 @@
-using System;
 using DSIS.Core.System;
 using DSIS.Function.Solvers.SimpleSolver;
 
-namespace DSIS.Function.Solvers.src.RungeKutt
+namespace DSIS.Function.Solvers.RungeKutt
 {
   public class RungeKuttSolver : SolvedFunctionBase
   {
-    public RungeKuttSolver(IContiniousSystemInfo function, double dt)
-      : base(function, dt)
+    public RungeKuttSolver(ISystemInfo function, int steps, double dt)
+      : base(function, steps, dt)
     {
-    }
-
-    protected override IFunction<double> GetDoubleFunction()
-    {
-      return new Function(this);
     }
 
     protected override string PresentableMethodName
     {
-      get { return "Simple"; }
+      get { return "Runge-Kutt"; }
     }
+
+    protected override IFunction<double> GetDoubleFunctionOne(double[] precision)
+    {
+      return new Function(this, precision);
+    }
+
+    #region Nested type: Function
 
     public class Function : IFunction<double>
     {
-      private readonly RungeKuttSolver myFunctionInfo;
       private readonly int myDimension;
-      private readonly IFunctionWithTime<double> myK1;
-      private readonly IFunctionWithTime<double> myK2;
-      private readonly IFunctionWithTime<double> myK3;
-      private readonly IFunctionWithTime<double> myK4;
+      private readonly IFunction<double> myF1;
+      private readonly IFunction<double> myF2;
+      private readonly IFunction<double> myF3;
+      private readonly IFunction<double> myF4;
+      private readonly RungeKuttSolver myFunctionInfo;
+      private readonly double[] myH;
+      private double[] myOutput;
 
-      private readonly double myDt;
-
-      public Function(RungeKuttSolver function)
+      public Function(RungeKuttSolver function, double[] precision)
       {
         myFunctionInfo = function;
         myDimension = myFunctionInfo.SystemSpace.Dimension;
-        myDt = myFunctionInfo.myDt;
 
-        myK1 = Create();
-        myK2 = Create();
-        myK3 = Create();
-        myK4 = Create();        
+        myF1 = Create(precision);
+        myF2 = Create(precision);
+        myF3 = Create(precision);
+        myF4 = Create(precision);
+
+        myH = new double[myDimension];
+        for (int i = 0; i < myDimension; i++)
+        {
+          myH[i] = myFunctionInfo.myDt/myFunctionInfo.mySteps;
+        }
       }
 
-      private IFunctionWithTime<double> Create()
-      {
-        IFunctionWithTime<double> func = myFunctionInfo.myFunction.GetFunction<double>();
-        func.Input = new double[myDimension];
-        func.Output = new double[myDimension];
-        return func;
-      }
+      #region IFunction<double> Members
 
       public void Evaluate()
       {
-        //todo: http://www.delphiplus.org/articles/algorithm/rk_method/
-        throw new NotImplementedException("need to implement");
+        myF1.Evaluate();
+        for (int i = 0; i < myDimension; i++)
+        {
+          myF2.Input[i] = myF1.Input[i] + myH[i]*myF1.Output[i];
+        }
+        myF2.Evaluate();
+        for (int i = 0; i < myDimension; i++)
+        {
+          myF3.Input[i] = myF1.Input[i] + myH[i]*myF2.Output[i];
+        }
+        myF3.Evaluate();
+        for (int i = 0; i < myDimension; i++)
+        {
+          myF4.Input[i] = myF1.Input[i] + 2*myH[i]*myF3.Output[i];
+        }
+        myF4.Evaluate();
+        for (int i = 0; i < myDimension; i++)
+        {
+          myOutput[i] = myF1.Input[i] +
+                        myH[i]/3.0*(myF1.Output[i] + 2*myF2.Output[i] + 2*myF3.Output[i] + myF4.Output[i]);
+        }
+        //NOTE: http://www.delphiplus.org/articles/algorithm/rk_method/
       }
 
       public int Dimension
@@ -65,21 +85,32 @@ namespace DSIS.Function.Solvers.src.RungeKutt
 
       public double[] Output
       {
-        get { return myK1.Output; }
-        set { myK1.Output = value; }
+        get { return myOutput; }
+        set { myOutput = value; }
       }
 
       public double[] Input
       {
-        get { return myK1.Input; }
-        set { myK1.Input = value; }
+        get { return myF1.Input; }
+        set { myF1.Input = value; }
       }
 
       public IFunctionIO<double>[] Derivates
       {
         get { return null; }
       }
-    }
-  }
 
+      #endregion
+
+      private IFunction<double> Create(double[] size)
+      {
+        IFunction<double> func = myFunctionInfo.myFunction.GetFunction(size);
+        func.Input = new double[myDimension];
+        func.Output = new double[myDimension];
+        return func;
+      }
+    }
+
+    #endregion
+  }
 }

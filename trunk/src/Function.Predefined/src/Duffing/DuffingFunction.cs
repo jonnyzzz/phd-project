@@ -1,25 +1,29 @@
-using System;
 using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Duffing
 {
-  public class DuffingFunction : Function<double>, IFunctionWithTime<double>
+  public class DuffingFunction : Function<double>, IFunctionWithTime<double>, IFunction<double>
   {
-    private readonly double myA;
-    private readonly double myB;
-    private readonly double myW;
+    private readonly double myK;
+    private readonly double myAlpha;
+    private readonly double myBeta;
 
-    public DuffingFunction(double a, double b, double w) : base(2)
+    public DuffingFunction(double alpha, double beta, double k) : base(2)
     {
-      myA = a;
-      myB = b;
-      myW = w;
+      myBeta = beta;
+      myK = k;
+      myAlpha = alpha;
     }
 
     public void Evaluate(double time)
     {
+      Evaluate();
+    }
+
+    public void Evaluate()
+    {
       Output[0] = Input[1];
-      Output[1] = Input[0] - Input[0] * Input[0] * Input[0] - myA * Input[1] + myB * Math.Cos(myW * time);
+      Output[1] = -myK * Input[1] - myAlpha * Input[0] - myBeta * Input[0] * Input[0] * Input[0];
     }
   }
 }

@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ComposedFunction.cs" />
     <Compile Include="src\FunctionBase.cs" />
     <Compile Include="src\RungeKutt\RungeKuttSolver.cs" />
     <Compile Include="src\SimpleSolver\SimpleSolvedFunction.cs" />

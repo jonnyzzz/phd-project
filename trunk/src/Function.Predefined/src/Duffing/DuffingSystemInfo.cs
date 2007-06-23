@@ -3,17 +3,17 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Duffing
 {
-  public class DuffingSystemInfo : DoubleContiniousSystemInfoBase
+  public class DuffingSystemInfo : DoubleSystemInfoBase
   {
-    private readonly double myA;
-    private readonly double myB;
-    private readonly double myW;
+    private readonly double myAlpha;
+    private readonly double myBeta;
+    private readonly double myK;
 
-    public DuffingSystemInfo(ISystemSpace systemSpace, double a, double b, double w) : base(systemSpace)
+    public DuffingSystemInfo(ISystemSpace systemSpace, double alpha, double beta, double k) : base(systemSpace)
     {
-      myA = a;
-      myB = b;
-      myW = w;
+      myAlpha = alpha;
+      myK = k;
+      myBeta = beta;
     }
 
     public override string PresentableName
@@ -21,12 +21,12 @@ namespace DSIS.Function.Predefined.Duffing
       get { return "Duffing"; }
     }
 
-    protected override IFunctionWithTime<double> GetFunctionInternal()
+    protected override IFunction<double> GetFunctionInternal()
     {
-      return new DuffingFunction(myA, myB, myW);
+      return new DuffingFunction(myAlpha, myBeta, myK);
     }
 
-    protected override IFunctionWithTime<double> GetFunctionDerivateInternal()
+    protected override IFunction<double> GetFunctionDerivateInternal()
     {
       throw new NotImplementedException();
     }

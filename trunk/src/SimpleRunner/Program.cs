@@ -13,6 +13,8 @@ using DSIS.Function.Predefined.Duffing;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Function.Predefined.Julia;
+using DSIS.Function.Predefined.VanDerPol;
+using DSIS.Function.Solvers.RungeKutt;
 using DSIS.Function.Solvers.SimpleSolver;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
@@ -62,7 +64,8 @@ namespace DSIS.SimpleRunner
       }
 
       Console.Out.WriteLine("Work directory: {0}", myWorkPath);      
-      Do(new DuffingFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 10), myXSLTs);
+//      Do(new DuffingFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 8), myXSLTs);
+      Do(new VanDerPolFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 5), myXSLTs);
 
 //      int i = 0;
 //      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 13 + i), myXSLTs);
@@ -117,11 +120,44 @@ namespace DSIS.SimpleRunner
           };
       }
 
-      protected override IDiscreteSystemInfo CreateSystemInfo()
+      protected override ISystemInfo CreateSystemInfo()
       {
         DefaultSystemSpace space =
           new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 10, 10 });
-        return new SimpleSolvedFunction(new DuffingSystemInfo(space, 0.25, 0.3, 1), 1);
+        return new RungeKuttSolver(new DuffingSystemInfo(space, -1, 0.27, 0.48), 5, 1);
+      }
+
+      protected override long[] Subdivide
+      {
+        get { return new long[] { 2, 2 }; }
+      }
+    }
+
+    
+    public class VanDerPolFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
+      where T : IIntegerCoordinateSystem<Q>
+      where Q : IIntegerCoordinate<Q>
+    {
+      public VanDerPolFullBuilder(string homePath, int steps)
+        :
+        base(homePath, steps, -1)
+      {
+      }
+
+      protected override ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> GetMethods()
+      {
+        return new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>[]
+          {
+            new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
+            new BoxMethod<T,Q>(), BoxMethodSettings.Default), 
+          };
+      }
+
+      protected override ISystemInfo CreateSystemInfo()
+      {
+        DefaultSystemSpace space =
+          new DefaultSystemSpace(2, new double[] { -5, -5 }, new double[] { 5, 5}, new long[] { 10, 10 });
+        return new RungeKuttSolver(new VanDerPolSystemInfo(space, 1.5), 15, 1);
       }
 
       protected override long[] Subdivide
@@ -141,7 +177,7 @@ namespace DSIS.SimpleRunner
       }
 
 
-      protected override IDiscreteSystemInfo CreateSystemInfo()
+      protected override ISystemInfo CreateSystemInfo()
       {
         DefaultSystemSpace space =
           new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {10, 10});
@@ -163,7 +199,7 @@ namespace DSIS.SimpleRunner
       {
       }
 
-      protected override IDiscreteSystemInfo CreateSystemInfo()
+      protected override ISystemInfo CreateSystemInfo()
       {
         DefaultSystemSpace space =
           new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {10, 10});
@@ -193,7 +229,7 @@ namespace DSIS.SimpleRunner
         get { return new long[] {2, 2}; }
       }
 
-      protected override IDiscreteSystemInfo CreateSystemInfo()
+      protected override ISystemInfo CreateSystemInfo()
       {
         ISystemSpace sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {2, 2});
         return new DelayedFunctionSystemInfo(sp, myA);
@@ -214,7 +250,7 @@ namespace DSIS.SimpleRunner
         get { return new long[] {2, 2}; }
       }
 
-      protected override IDiscreteSystemInfo CreateSystemInfo()
+      protected override ISystemInfo CreateSystemInfo()
       {
         ISystemSpace sp = new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {2, 2});
         return new JuliaFuctionSystemInfoDecorator(sp);

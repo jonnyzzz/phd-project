@@ -1,39 +1,55 @@
 using System;
+using System.Collections.Generic;
 using DSIS.Core.System;
 
 namespace DSIS.Function.Solvers.SimpleSolver
 {
-  public abstract class SolvedFunctionBase : IDiscreteSystemInfo
+  public abstract class SolvedFunctionBase : ISystemInfo
   {
-    protected readonly IContiniousSystemInfo myFunction;
+    protected readonly int mySteps;
     protected readonly double myDt;
+    protected readonly ISystemInfo myFunction;    
 
-    protected abstract IFunction<double> GetDoubleFunction();
+    protected abstract IFunction<double> GetDoubleFunctionOne(double[] precision);    
     protected abstract string PresentableMethodName { get; }
-
-    protected SolvedFunctionBase(IContiniousSystemInfo function, double dt)
+    
+    protected SolvedFunctionBase(ISystemInfo function, int steps, double dt)
     {
       myFunction = function;
+      mySteps = steps;
       myDt = dt;
-    }
+    }    
 
-    public IFunction<T> GetFunction<T>()
+    public IFunction<T> GetFunction<T>(T[] precision)
     {
       if (typeof(T) == typeof(double))
       {
-        return (IFunction<T>) GetDoubleFunction();
+        return (IFunction<T>) GetDoubleFunction((double[])(object)precision);
       } else throw new ArgumentException("T");
-    }    
+    }
 
-    public IFunction<T> GetDerivateFunction<T>(int derivatePower)
+    private IFunction<double> GetDoubleFunction(double[] precision)
     {
-      if (derivatePower == 0)
-        return GetFunction<T>();
+      if (mySteps == 1)
+      {
+        return GetDoubleFunctionOne(precision);
+      } else
+      {
+        List<IFunction<double>> myFuncs = new List<IFunction<double>>();
+        for(int i=0; i<mySteps; i++)
+        {
+          myFuncs.Add(GetDoubleFunctionOne(precision));
+        }
+        return new ComposedFunction(myFuncs.ToArray());
+      }
+    }
 
+    public IFunction<T> GetDerivateFunction<T>(T[] precision, int derivatePower)
+    {    
       throw new NotImplementedException();
     }
 
-    public IFunction<T> GetDerivateFunction<T>(int[] unsimmetricDerivate)
+    public IFunction<T> GetDerivateFunction<T>(T[] precision, int[] unsimmetricDerivate)
     {
       throw new NotImplementedException();
     }

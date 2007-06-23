@@ -18,7 +18,7 @@ namespace DSIS.SimpleRunner
     private readonly List<IAbstractImageBuilderListener<T,Q>> myListeners = new List<IAbstractImageBuilderListener<T, Q>>();
     private readonly List<IProvideExtendedListener> myExtensions = new List<IProvideExtendedListener>();
 
-    protected abstract Pair<IDiscreteSystemInfo, T> CreateInfos();
+    protected abstract Pair<ISystemInfo, T> CreateInfos();
     protected abstract ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> GetMethods();
     protected abstract long[] Subdivide { get;}
     protected abstract IGraphWithStrongComponent<Q> CreateGraph(T system);
@@ -77,7 +77,7 @@ namespace DSIS.SimpleRunner
 
     protected virtual void DoConstruct(ICellImageBuilder<Q> builder, ICellImageBuilderSettings settings, IProgressInfo progress)
     {
-      Pair<IDiscreteSystemInfo, T> infos = CreateInfos();
+      Pair<ISystemInfo, T> infos = CreateInfos();
       IGraphWithStrongComponent<Q> graph = CreateGraph(infos.Second);
 
       AbstractImageBuilderContext<Q> cx = new AbstractImageBuilderContext<Q>(infos.First, builder, settings);

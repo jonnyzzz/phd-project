@@ -20,11 +20,11 @@ namespace DSIS.SimpleRunner
 
   public struct AbstractImageBuilderContext<Q> where Q : IIntegerCoordinate<Q>
   {
-    public readonly IDiscreteSystemInfo Info;
+    public readonly ISystemInfo Info;
     public readonly ICellImageBuilder<Q> Builder;
     public readonly ICellImageBuilderSettings Settings;
 
-    public AbstractImageBuilderContext(IDiscreteSystemInfo info, ICellImageBuilder<Q> builder, ICellImageBuilderSettings settings)
+    public AbstractImageBuilderContext(ISystemInfo info, ICellImageBuilder<Q> builder, ICellImageBuilderSettings settings)
     {
       Info = info;
       Builder = builder;

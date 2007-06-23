@@ -13,5 +13,10 @@ namespace DSIS.GnuplotDrawer
 
       throw new ArgumentException("Unexpected value", "dim");
     }
+
+    public static IGnuplotScriptGen CutGen(int dim, string filename, GnuplotScriptParameters ps)
+    {
+      return new MergedGnuplotScriptGen(ScriptGen(dim, filename, ps));
+    }
   }
 }

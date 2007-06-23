@@ -4,15 +4,13 @@ using DSIS.Core.System.Tree;
 
 namespace DSIS.Function.Predefined
 {
-  public abstract class DoubleDescreteSystemInfoBase : SystemInfoDecoratorBase, IDiscreteSystemInfo
+  public abstract class DoubleSystemInfoBase : SystemInfoDecoratorBase, ISystemInfo
   {
-    public DoubleDescreteSystemInfoBase(ISystemSpace systemSpace) : base(systemSpace)
+    public DoubleSystemInfoBase(ISystemSpace systemSpace) : base(systemSpace)
     {
     }
 
-    #region ISystemInfo Members
-
-    public IFunction<T> GetDerivateFunction<T>(int derivatePower)
+    public IFunction<T> GetDerivateFunction<T>(T[] precision, int derivatePower)
     {
       if (typeof (T) != typeof (double) || derivatePower != 1)
         throw new NotImplementedException();
@@ -20,29 +18,23 @@ namespace DSIS.Function.Predefined
       return (IFunction<T>) GetFunctionDerivateInternal();
     }
 
-    public IFunction<T> GetDerivateFunction<T>(int[] unsimmetricDerivate)
+    public IFunction<T> GetDerivateFunction<T>(T[] precision, int[] unsimmetricDerivate)
     {
       throw new NotImplementedException();
     }
 
-    public IFunction<T> GetFunction<T>()
+    public IFunction<T> GetFunction<T>(T[] precision)
     {
       if (typeof (T) != typeof (double))
         throw new NotImplementedException();
 
       return (IFunction<T>) GetFunctionInternal();
     }
-
-    public Q ProcessFunctionTree<Q>(IFunctionTreeVisitor<Q> visitor)
-    {
-      throw new NotImplementedException();
-    }
-
+    
     public Type[] SupportedFunctionTypes
     {
       get { return new Type[] {typeof (double)}; }
     }    
-    #endregion
 
     public abstract string PresentableName { get; }
     protected abstract IFunction<double> GetFunctionInternal();

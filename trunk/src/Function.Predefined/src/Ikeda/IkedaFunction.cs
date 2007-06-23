@@ -19,7 +19,7 @@ namespace DSIS.Function.Predefined.Ikeda
     }
   }
 
-  public class IkedaFunctionSystemInfoDecorator : DoubleDescreteSystemInfoBase
+  public class IkedaFunctionSystemInfoDecorator : DoubleSystemInfoBase
   {
     public IkedaFunctionSystemInfoDecorator(ISystemSpace systemSpace) : base(systemSpace)
     {

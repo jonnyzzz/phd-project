@@ -1,29 +1,31 @@
 using System;
 using DSIS.Core.System;
 
-namespace DSIS.Function.Predefined
+namespace DSIS.Function.Predefined.VanDerPol
 {
-  public class FoodChainSystemInfo : DoubleSystemInfoBase
+  public class VanDerPolSystemInfo : DoubleSystemInfoBase
   {
-    public FoodChainSystemInfo(ISystemSpace systemSpace) : base(systemSpace)
+    private readonly double myA;
+
+    public VanDerPolSystemInfo(ISystemSpace systemSpace, double a)
+      : base(systemSpace)
     {
+      myA = a;
     }
 
     public override string PresentableName
     {
-      get { return "Food Chain"; }
+      get { return "Van-der-Pol"; }
     }
 
     protected override IFunction<double> GetFunctionInternal()
     {
-      return new FoodChainFunction();
+      return new VanDerPolFunction(myA);
     }
 
     protected override IFunction<double> GetFunctionDerivateInternal()
     {
       throw new NotImplementedException();
     }
-
-
   }
 }

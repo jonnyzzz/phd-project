@@ -10,7 +10,7 @@ namespace DSIS.Core.Visualization
 {
   public interface IImageDrawer
   {
-    IImageBuilder CreateBuilder(IDiscreteSystemInfo system);
+    IImageBuilder CreateBuilder(ISystemInfo system);
     void RenderToFile(IProgressInfo info, string file, IImageBuilder builders);
   }
 

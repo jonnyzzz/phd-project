@@ -8,7 +8,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Delayed
 {
-  public class DelayedFunctionSystemInfo : DoubleDescreteSystemInfoBase
+  public class DelayedFunctionSystemInfo : DoubleSystemInfoBase
   {
     private double myA;
 
