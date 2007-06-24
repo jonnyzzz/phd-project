@@ -72,8 +72,11 @@ namespace DSIS.Core.Processor
           return true;
         } if (!myCollectionFinished)
         {
+          bool willReturn = false;
           if (myCurrents.Count == 1)
+          {
             myCurrents.Dequeue();
+          }
 
           using (new MutexCookie(myMutex))
           {
