@@ -9,12 +9,12 @@ namespace DSIS.Core.Processor
     where TFrom : ICellCoordinate<TFrom>
   {
     private readonly ICellCoordinateSystemConverter<TFrom, TTo> myConverter;
-    private readonly CountEnumerable<TFrom> myCountEnumerable;
+    private readonly ICountEnumerable<TFrom> myCountEnumerable;
     private readonly ICellImageBuilder<TTo> myCellImageBuilder;
     private readonly CellImageBuilderContext<TTo> myCellImageBuilderContext;
 
     public CellProcessorContext(
-      CountEnumerable<TFrom> countEnumerable,
+      ICountEnumerable<TFrom> countEnumerable,
       ICellCoordinateSystemConverter<TFrom, TTo> converter,
       ICellImageBuilder<TTo> cellImageBuilder,
       CellImageBuilderContext<TTo> cellImageBuilderContext)
@@ -25,7 +25,7 @@ namespace DSIS.Core.Processor
       myCellImageBuilderContext = cellImageBuilderContext;
     }
 
-    public CountEnumerable<TFrom> Cells
+    public ICountEnumerable<TFrom> Cells
     {
       get { return myCountEnumerable; }
     }

@@ -30,8 +30,8 @@ namespace DSIS.Graph.Abstract
       TarjanNodeStack<TCell> stack = new TarjanNodeStack<TCell>(TarjanNodeFlags.STACK);
       TarjanNodeStack<TCell> route = new TarjanNodeStack<TCell>(TarjanNodeFlags.ROUTE);
 
-      int state = 2;
-      int cnt = 1;
+      long state = 2;
+      long cnt = 1;
 
       TarjanNode<TCell> w = null;
       TarjanNodeData<TCell> wData = null;

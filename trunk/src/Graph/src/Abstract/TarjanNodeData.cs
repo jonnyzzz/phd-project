@@ -5,8 +5,8 @@ namespace DSIS.Graph.Abstract
 {
   internal class TarjanNodeData<TCell> where TCell : ICellCoordinate<TCell>
   {
-    public int Label = 0;
-    public int Number = 0;
+    public long Label = 0;
+    public long Number = 0;
     private IEnumerator<TarjanNode<TCell>> myNodes = null;
     private readonly TarjanNode<TCell> myNode;
 

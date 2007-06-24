@@ -47,5 +47,5 @@ namespace DSIS.Utils
     {
       return string.Format("HashedQueue[ Count = {0} ]", myQueue.Count);
     }
-  }
+  }  
 }

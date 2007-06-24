@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DSIS.Core.Util;
+using DSIS.Utils;
 using NUnit.Framework;
 
 namespace DSIS.BoxIterators.Generator

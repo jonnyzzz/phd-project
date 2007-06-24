@@ -1,4 +1,4 @@
-namespace DSIS.Core.Util
+namespace DSIS.Utils
 {
   public sealed class EmptyArray<T>
   {

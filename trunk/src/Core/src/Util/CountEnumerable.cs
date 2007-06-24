@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace DSIS.Core.Util
 {
-  public struct CountEnumerable<T> : IEnumerable<T>
+  public struct CountEnumerable<T> : ICountEnumerable<T>
   {
     private readonly IEnumerable<T> myEnumerable;
     public readonly int Count;
@@ -18,8 +18,6 @@ namespace DSIS.Core.Util
       myEnumerable = enumerable;
       Count = (int) count;
     }
-
-    #region IEnumerable<T> Members
 
     IEnumerator IEnumerable.GetEnumerator()
     {
@@ -31,6 +29,9 @@ namespace DSIS.Core.Util
       return myEnumerable.GetEnumerator();
     }
 
-    #endregion
+    int ICountEnumerable<T>.Count
+    {
+      get { return Count; }
+    }
   }
 }

@@ -49,6 +49,11 @@ namespace DSIS.IntegerCoordinates.Impl
       }
     }
 
+    public ICellCoordinateSystemConverter<Q, Q> Clone()
+    {
+      return new IntegerCoordinateCellConverter<T, Q>(myFromSystem, myToSystem, myDivision);
+    }
+
     public ICellCoordinateSystem<Q> ToSystem
     {
       get { return myToSystem; }

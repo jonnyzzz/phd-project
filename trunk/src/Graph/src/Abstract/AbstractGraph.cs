@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Util;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
@@ -133,7 +132,7 @@ namespace DSIS.Graph.Abstract
     protected static IEnumerable<TNode> GetEdgesInternal(INode<TCell> forNode)
     {
       TNode node = (TNode) forNode;
-      return new ConvertEnumerator<INode<TCell>, TNode>(node.Edges);
+      return node.EdgesInternal;
     }
 
     public override string ToString()

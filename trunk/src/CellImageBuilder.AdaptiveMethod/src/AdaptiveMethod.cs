@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.Core.System;
-using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
+using DSIS.Utils;
 
 namespace DSIS.CellImageBuilder.AdaptiveMethod
 {

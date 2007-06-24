@@ -7,14 +7,12 @@ namespace DSIS.Graph.Adapter
   public class GraphCellImageBuilder<TCell> : ICellConnectionBuilder<TCell>
     where TCell : ICellCoordinate<TCell>
   {
-    private IGraph<TCell> myGraph;
+    private readonly IGraph<TCell> myGraph;
 
     public GraphCellImageBuilder(IGraph<TCell> graph)
     {
       myGraph = graph;
     }
-
-    #region ICellConnectionBuilder<TCell> Members
 
     public void ConnectToMany(TCell cell, IEnumerable<TCell> v)
     {
@@ -32,7 +30,5 @@ namespace DSIS.Graph.Adapter
       INode<TCell> vNode = myGraph.AddNode(v);
       myGraph.AddEdgeToNode(cellNode, vNode);
     }
-
-    #endregion
   }
 }

@@ -3,10 +3,12 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using DSIS.Utils;
 
-namespace DSIS.Core.Util
+namespace DSIS.Utils
 {
   public struct Pair<TK, TV>
   {

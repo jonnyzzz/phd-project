@@ -8,12 +8,12 @@ using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
 using DSIS.Core.System;
-using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.IntegerCoordinates.Impl;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {

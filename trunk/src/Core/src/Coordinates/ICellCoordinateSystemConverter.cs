@@ -16,5 +16,7 @@ namespace DSIS.Core.Coordinates
     long[] Division { get; }
 
     IEnumerable<TTo> Subdivide(TFrom coordinate);
+
+    ICellCoordinateSystemConverter<TFrom, TTo> Clone();
   }
 }

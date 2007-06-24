@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Threading;
 using DSIS.Core.Builders;
-using DSIS.Core.Concurrent;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 
@@ -10,34 +11,56 @@ namespace DSIS.Core.Processor
     where TFrom : ICellCoordinate<TFrom>
     where TTo : ICellCoordinate<TTo>
   {
+    private readonly Mutex myReadMutex = new Mutex();
+    private readonly Mutex myWriteMutex = new Mutex();
     private CellProcessorContext<TFrom, TTo> myContext;
-
 
     public void Bind(CellProcessorContext<TFrom, TTo> context)
     {
-      throw new NotImplementedException();
+      myContext = context;
     }
 
     public void Execute(IProgressInfo info)
     {
-      
-      throw new NotImplementedException();
-    }
+      List<Thread> workers = new List<Thread>();
 
+      for(int i = 0; i < Environment.ProcessorCount; i++)
+      {
+        Thread worker = new Thread(ThreadRun);
+        worker.Name = "SI construction thread " + (i + 1);
+        worker.Start(myContext);
+
+        workers.Add(worker);        
+      }
+
+      foreach (Thread worker in workers)
+      {
+        worker.Join();
+      }
+    }
 
     private void ThreadRun(object o)
     {
-      SynchQueue<TTo> queue = (SynchQueue<TTo>) o;
-
-      ICellImageBuilder<TTo> builder = myContext.CellImageBuilder.Clone();
-
-      while(true)
+      using (ThreadedCellConnectionBuilder<TTo> bld =
+        new ThreadedCellConnectionBuilder<TTo>(myWriteMutex, myContext.CellImageBuilderContext.ConnectionBuilder))
       {
-        queue.WaitData();
-        TTo to = queue.Dequeue();
+        CellProcessorContext<TFrom, TTo> ctx = new CellProcessorContext<TFrom, TTo>(
+          new BufferedThreadedCountEnumerable<TFrom>(myReadMutex, myContext.Cells, Math.Min(myContext.Cells.Count / Environment.ProcessorCount / 4, 8192)),
+          myContext.Converter.Clone(),
+          myContext.CellImageBuilder.Clone(),
+          new CellImageBuilderContext<TTo>(
+            myContext.CellImageBuilderContext.Function,
+            myContext.CellImageBuilderContext.Settings,
+            myContext.CellImageBuilderContext.System,
+            bld
+            )
+          );
 
+        SymbolicImageConstructionProcess<TFrom, TTo> ps = new SymbolicImageConstructionProcess<TFrom, TTo>();
+        ps.Bind(ctx);
+
+        ps.Execute(NullProgressInfo.INSTANCE);
       }
-
     }
   }
 }

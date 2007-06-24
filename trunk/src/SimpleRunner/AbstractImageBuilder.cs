@@ -8,6 +8,7 @@ using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Adapter;
 using DSIS.IntegerCoordinates;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
@@ -97,7 +98,7 @@ namespace DSIS.SimpleRunner
             )
           );
 
-      SymbolicImageConstructionProcess<Q, Q> proc = new SymbolicImageConstructionProcess<Q, Q>();
+      ICellProcessor<Q, Q> proc = CreateCellConstructionProcess();
 
       IGraphStrongComponents<Q> comps = null;
       long stepCount = 0;
@@ -127,6 +128,11 @@ namespace DSIS.SimpleRunner
 
       }
       OnComputationFinished(comps, graph, (T)ctx.Converter.ToSystem, cx);
+    }
+
+    protected virtual ICellProcessor<Q, Q> CreateCellConstructionProcess()
+    {
+      return new SymbolicImageConstructionProcess<Q, Q>();
     }
 
     protected virtual void OnComputationStarted(T system, AbstractImageBuilderContext<Q> cx)

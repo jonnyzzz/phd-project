@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using DSIS.CodeCompiler;
-using DSIS.Core.Util;
+using DSIS.Utils;
 
 namespace DSIS.BoxIterators.Generator
 {
   public static class BoxIteratorGenerator<T>
   {
-    private static readonly Dictionary<int, IBoxIterator<T>> myCaches 
+    private static readonly Dictionary<int, IBoxIterator<T>> myCaches
       = new Dictionary<int, IBoxIterator<T>>();
 
     public static IBoxIterator<T> GenerateIterator(int dim)
@@ -19,16 +19,15 @@ namespace DSIS.BoxIterators.Generator
       {
         if (myCaches.TryGetValue(dim, out result))
           return result;
-      }
 
-      ICodeCompiler compiler = CodeCompiler.CodeCompiler.CreateCompiler();
-      string clazz = "BoxIteratorGenerated";
-      Assembly ass = compiler.CompileCSharpCode(GenerateIEnumerableFromT(clazz, dim),
-                                                typeof (T), typeof (IBoxIterator<>), typeof (IEnumerable<>));
 
-      result = (IBoxIterator<T>) Activator.CreateInstance(ass.GetType(clazz));
-      lock (myCaches)
-      {
+        ICodeCompiler compiler = CodeCompiler.CodeCompiler.CreateCompiler();
+        string clazz = "BoxIteratorGenerated";
+        Assembly ass = compiler.CompileCSharpCode(GenerateIEnumerableFromT(clazz, dim),
+                                                  typeof (T), typeof (IBoxIterator<>), typeof (IEnumerable<>));
+
+        result = (IBoxIterator<T>) Activator.CreateInstance(ass.GetType(clazz));
+
         if (!myCaches.ContainsKey(dim))
           myCaches[dim] = result;
       }
@@ -51,7 +50,8 @@ namespace DSIS.BoxIterators.Generator
                  {2}
               }}
          }}
-          ", clazz, tClazz, GenerateEnumeration(dim, tClazz));
+          ",
+          clazz, tClazz, GenerateEnumeration(dim, tClazz));
 
       return code;
     }
@@ -67,7 +67,7 @@ namespace DSIS.BoxIterators.Generator
         sb.AppendLine();
         sb.AppendFormat("outs[{0}] = left{0};", i);
         sb.AppendLine();
-      }      
+      }
       sb.AppendLine();
       sb.Append(@"yield return outs;");
       foreach (Pair<int, bool> pair in new ShennonFenoCodec(dim))
@@ -78,6 +78,5 @@ namespace DSIS.BoxIterators.Generator
       }
       return sb.ToString();
     }
-
   }
 }

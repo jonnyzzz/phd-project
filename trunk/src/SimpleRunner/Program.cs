@@ -5,6 +5,7 @@ using DSIS.CellImageBuilder;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Processor;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Core.Util;
@@ -18,6 +19,7 @@ using DSIS.Function.Solvers.RungeKutt;
 using DSIS.Function.Solvers.SimpleSolver;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
@@ -142,6 +144,12 @@ namespace DSIS.SimpleRunner
         :
         base(homePath, steps, -1)
       {
+      }
+
+
+      protected override ICellProcessor<Q, Q> CreateCellConstructionProcess()
+      {
+        return new ThreadedSymbolicImageConstructionProcess<Q, Q>();
       }
 
       protected override ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> GetMethods()
