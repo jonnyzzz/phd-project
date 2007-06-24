@@ -72,6 +72,9 @@ namespace DSIS.Core.Processor
           return true;
         } if (!myCollectionFinished)
         {
+          if (myCurrents.Count == 1)
+            myCurrents.Dequeue();
+
           using (new MutexCookie(myMutex))
           {
             bool lastNext;
@@ -81,7 +84,7 @@ namespace DSIS.Core.Processor
             }
             myCollectionFinished = !lastNext;            
             
-            return MoveNext();
+            return myCurrents.Count > 0;
           }
         }
         else return false;
