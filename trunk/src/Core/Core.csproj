@@ -80,6 +80,7 @@
     <Compile Include="src\Visualization\IImageDrawer.cs" />
     <Compile Include="src\Visualization\ImagePoint.cs" />
     <Compile Include="testSrc\Concurrent\SynckQueueTest.cs" />
+    <Compile Include="testSrc\Processor\BufferedThreadedCountEnumerableTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">

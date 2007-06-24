@@ -70,18 +70,17 @@ namespace DSIS.Core.Processor
         {
           myCurrents.Dequeue();
           return true;
-        } if (!myCollectionFinished)
-        {
-          bool willReturn = false;
-          if (myCurrents.Count == 1)
+        } 
+        else if (!myCollectionFinished) {
+          if (myCurrents.Count > 0)
           {
             myCurrents.Dequeue();
           }
 
           using (new MutexCookie(myMutex))
           {
-            bool lastNext;
-            while ((lastNext = myInput.MoveNext()) && myCurrents.Count < myBufferSize)
+            bool lastNext = true;
+            while (myCurrents.Count < myBufferSize && (lastNext = myInput.MoveNext()))
             {
               myCurrents.Enqueue(myInput.Current);              
             }
