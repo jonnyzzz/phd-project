@@ -13,7 +13,12 @@ namespace DSIS.IntegerCoordinates.Generic
     public void SetUp()
     {
       mySpace = new MockSystemSpace(1, 0, 100, 500);
-      myIcs = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(mySpace);
+      myIcs = CoordinateSystem();
+    }
+
+    protected virtual T CoordinateSystem()
+    {
+      return IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(mySpace);
     }
 
     private void DoTestBuild(double left, double right, DoBuild bld)

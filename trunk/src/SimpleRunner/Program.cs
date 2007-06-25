@@ -146,7 +146,6 @@ namespace DSIS.SimpleRunner
       {
       }
 
-
       protected override ICellProcessor<Q, Q> CreateCellConstructionProcess()
       {
         return new ThreadedSymbolicImageConstructionProcess<Q, Q>();

@@ -31,8 +31,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceChecks", "Perfor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleRunner", "SimpleRunner\SimpleRunner.csproj", "{C6473776-929F-4328-B786-C51BB93E8994}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateProcessors", "TemplateProcessors\TemplateProcessors.csproj", "{D46F95D7-FF24-4890-9C60-0B3D7921934F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{661FCE95-CF4E-4FDC-84E5-CEABC2BBC075}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCompiler", "..\shared\src\CodeCompiler\CodeCompiler.csproj", "{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}"
@@ -111,10 +109,6 @@ Global
 		{C6473776-929F-4328-B786-C51BB93E8994}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6473776-929F-4328-B786-C51BB93E8994}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6473776-929F-4328-B786-C51BB93E8994}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D46F95D7-FF24-4890-9C60-0B3D7921934F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU

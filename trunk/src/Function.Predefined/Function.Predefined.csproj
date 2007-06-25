@@ -48,6 +48,7 @@
     <Compile Include="src\Henon\HenonFunctionSystemInfoDecorator.cs" />
     <Compile Include="src\Ikeda\IkedaFunction.cs" />
     <Compile Include="src\Julia\JuliaFunction.cs" />
+    <Compile Include="src\Lorentz\LorentzFunction.cs" />
     <Compile Include="src\Lorentz\LorentzSystemInfo.cs" />
     <Compile Include="src\SystemInfoDecoratorBase.cs" />
     <Compile Include="src\VanDerPol\VanDerPolFunction.cs" />

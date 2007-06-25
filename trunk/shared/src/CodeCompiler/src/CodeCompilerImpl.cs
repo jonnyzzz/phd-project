@@ -6,12 +6,12 @@ namespace DSIS.CodeCompiler
 {
   internal class CodeCompilerImpl : ICodeCompiler
   {
-    private readonly TypesToAssemblyCache myCache = new TypesToAssemblyCache();
     private static readonly object LOCK = new object();
+    private readonly TypesToAssemblyCache myCache = new TypesToAssemblyCache();
 
     public Assembly CompileCSharpCode(string code, params Type[] referedTypes)
     {
-      lock(LOCK)
+      lock (LOCK)
       {
         CompilerParameters ps = new CompilerParameters();
         ps.ReferencedAssemblies.AddRange(myCache.CollectAssemblies(referedTypes));
@@ -26,7 +26,7 @@ namespace DSIS.CodeCompiler
           CompilerResults results = provider.CompileAssemblyFromSource(ps, code);
 
           if (results.Errors.Count != 0 || results.CompiledAssembly == null)
-            throw new CodeCompilerException(results);
+            throw new CodeCompilerException(results, code);
 
           return results.CompiledAssembly;
         }

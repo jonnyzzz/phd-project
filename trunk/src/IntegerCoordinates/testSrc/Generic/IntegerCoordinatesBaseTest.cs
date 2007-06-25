@@ -10,7 +10,7 @@ namespace DSIS.IntegerCoordinates.Generic
   {
     protected static void DoEqTest(params long[] l)
     {
-      MockSystemSpace sp = new MockSystemSpace(l.Length, 0, 1, 981000);
+      MockSystemSpace sp = new MockSystemSpace(l.Length, 0, 1, 980);
       T ss = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(sp);
 
       Q ic = ss.Create(l);

@@ -28,7 +28,7 @@ namespace DSIS.IntegerCoordinates
         return (T) (object) new IntegerCoordinateSystem2d(ss);
       } else
       {
-        throw new ArgumentException("Unexpected type");
+        throw new ArgumentException("Unexpected type", "ss");
       }
     }
 

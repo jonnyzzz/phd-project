@@ -10,7 +10,7 @@ namespace DSIS.CodeCompiler
       return GenerateFQTypeName(t);
     }
 
-    private static string GenerateFQTypeName(Type t)
+    public static string GenerateFQTypeName(Type t)
     {
       if (t.IsGenericType)
       {

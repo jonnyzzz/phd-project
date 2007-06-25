@@ -32,28 +32,4 @@ namespace DSIS.Function.Predefined.Lorentz
       throw new NotImplementedException();
     }
   }
-
-  public class LorentzFunction : Function<double>, IFunction<double>
-  {
-    private readonly double mySigma;
-    private readonly double myRho;
-    private readonly double myBeta;
-
-    public LorentzFunction(double beta, double rho, double sigma)
-      : base(3)
-    {
-      myBeta = beta;
-      mySigma = sigma;
-      myRho = rho;
-    }
-
-    public void Evaluate()
-    {
-      Output[0] = mySigma * (Input[1] - Input[0]);
-      Output[1] = Input[0]*(myRho - Input[2]) - Input[1];
-      Output[2] = Input[0]*Input[1] - myBeta*Input[2];
-    }
-  }
-
-
 }
