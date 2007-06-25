@@ -156,7 +156,8 @@ namespace DSIS.SimpleRunner
 
     protected virtual ICellProcessor<Q, Q> CreateCellConstructionProcess()
     {
-      return new SymbolicImageConstructionProcess<Q, Q>();
+//      return new SymbolicImageConstructionProcess<Q, Q>();
+      return new ThreadedSymbolicImageConstructionProcess<Q, Q>();
     }
 
     protected virtual void OnComputationStarted(T system, AbstractImageBuilderContext<Q> cx)

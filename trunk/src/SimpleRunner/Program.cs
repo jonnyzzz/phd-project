@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using DSIS.CellImageBuilder;
 using DSIS.CellImageBuilder.BoxMethod;
+using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
@@ -15,8 +16,10 @@ using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Function.Predefined.Julia;
 using DSIS.Function.Predefined.Lorentz;
+using DSIS.Function.Predefined.Rossel;
 using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
+using DSIS.Function.Solvers.SimpleSolver;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 
@@ -68,7 +71,8 @@ namespace DSIS.SimpleRunner
 //      Do(new DuffingFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 8), myXSLTs);
 //      Do(new VanDerPolFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 5), myXSLTs);
 //      Do(new LorentzFullBuilder<IntegerCoordinateSystem, IntegerCoordinate>(myWorkPath, 5), myXSLTs);
-      new LorentzRunner(myWorkPath, 4, myXSLTs).Run();
+//      new LorentzRunner(myWorkPath, 4, myXSLTs).Run();
+      new RosselRunner(myWorkPath, 4, myXSLTs).Run();
 
 //      int i = 0;
 //      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 13 + i), myXSLTs);
@@ -199,6 +203,71 @@ namespace DSIS.SimpleRunner
         Run(3);
       }
     }
+    
+     public class RosslerFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
+      where T : IIntegerCoordinateSystem<Q>
+      where Q : IIntegerCoordinate<Q>
+    {
+      public RosslerFullBuilder(string homePath, int steps)
+        :
+        base(homePath, steps, -1)
+      {
+      }
+
+      protected override ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> GetMethods()
+      {
+        return new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>[]
+          {
+            new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
+            new BoxMethod<T,Q>(), BoxMethodSettings.Default), 
+//              new PointMethod<T,Q>(), new PointMethodSettings(new int[] {3, 3, 3}, 0.2))
+          };
+      }
+
+      protected override ISystemInfo CreateSystemInfo()
+      {
+        DefaultSystemSpace space =
+          new DefaultSystemSpace(3, new double[] { -100, -100, -100 }, new double[] { 100, 100, 100}, new long[] { 10, 10, 10 });
+//        return new RungeKuttSolver(new RosslerSystemInfo(space, 0.2, 0.2, 5.7), 5, 0.1);
+        return new SimpleSolvedFunction(new RosslerSystemInfo(space, 0.1, 0.1, 14), 1, 0.01);
+      }
+
+      protected override long[] Subdivide
+      {
+        get { return new long[] { 2, 2, 2 }; }
+      }
+    }
+
+    public class RosselRunner : GeneratedAbstactImageBuilderRunner
+    {
+      private readonly string myPath;
+      private readonly int mySteps;
+      private readonly List<string> myXslt;
+
+      public RosselRunner(string path, int steps, List<string> xslt)
+      {
+        myPath = path;
+        mySteps = steps;
+        myXslt = xslt;
+      }
+
+      public override AbstractImageBuilder<T, Q> CreateBuilder<T, Q>()
+      {
+        return new RosslerFullBuilder<T, Q>(myPath, mySteps);
+      }
+
+      protected override void ComputationFinished<T, Q>(AbstractImageBuilder<T, Q> builder)
+      {
+        base.ComputationFinished(builder);
+        FullImageBuilderWithLog<T, Q> bld = (FullImageBuilderWithLog<T, Q>) builder;
+        bld.ApplyXSL(myXslt);
+      }
+
+      public void Run()
+      {
+        Run(3);
+      }
+    }
      
 
     
@@ -210,11 +279,6 @@ namespace DSIS.SimpleRunner
         :
         base(homePath, steps, -1)
       {
-      }
-
-      protected override ICellProcessor<Q, Q> CreateCellConstructionProcess()
-      {
-        return new ThreadedSymbolicImageConstructionProcess<Q, Q>();
       }
 
       protected override ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> GetMethods()
