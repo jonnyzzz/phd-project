@@ -16,7 +16,12 @@ namespace DSIS.IntegerCoordinates.Generic
     public void SetUp()
     {
       mySpace = new MockSystemSpace(2, 0, 1, 5);
-      myCS = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(mySpace);
+      myCS = CoordinateSystem();
+    }
+
+    protected virtual T CoordinateSystem()
+    {
+      return IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(mySpace);
     }
 
 
@@ -57,7 +62,8 @@ namespace DSIS.IntegerCoordinates.Generic
     {
       List<Q> c = new List<Q>(myCS.InitialSubdivision);
 
-      Assert.AreEqual(2, myCS.SystemSpace.Dimension);
+      if (myCS.SystemSpace.Dimension != 2)
+        Assert.Ignore("Dimension != 2");
 
       bool[][] bs = new bool[myCS.Subdivision[0]][];
       for (int i = 0; i < myCS.Subdivision[0]; i++)
@@ -70,7 +76,7 @@ namespace DSIS.IntegerCoordinates.Generic
                     long coordinate1 = ic.GetCoordinate(0);
                     long coordinate2 = ic.GetCoordinate(1);
                     bs[coordinate1][coordinate2] = true;
-                  });
+                  }); 
 
       foreach (bool[] b in bs)
       {
@@ -84,6 +90,10 @@ namespace DSIS.IntegerCoordinates.Generic
     [Test]
     public void Test_05()
     {
+      if (myCS.SystemSpace.Dimension != 2)
+        Assert.Ignore("Dimension != 2");
+
+
       Q c = myCS.FromPoint(new double[] {0, 0});
       Assert.IsNotNull(c);
       Assert.AreEqual(0, c.GetCoordinate(0));
@@ -93,6 +103,10 @@ namespace DSIS.IntegerCoordinates.Generic
     [Test]
     public void Test_06()
     {
+      if (myCS.SystemSpace.Dimension != 2)
+        Assert.Ignore("Dimension != 2");
+
+
       Q c = myCS.FromPoint(new double[] {0.1, 0.1});
       Assert.IsNotNull(c);
       Assert.AreEqual(0, c.GetCoordinate(0));

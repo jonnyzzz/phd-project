@@ -3,6 +3,8 @@
  * Created: 5 ÿםגאנÿ 2007 ד.
  */
 
+using System;
+
 namespace DSIS.Core.System.Impl
 {
   public class DefaultSystemSpace : ISystemSpace
@@ -18,6 +20,13 @@ namespace DSIS.Core.System.Impl
       myAreaLeftPoint = areaLeftPoint;
       myAreaRightPoint = areaRightPoint;
       myInitialSubdivision = initialSubdivision;
+
+      if (myAreaLeftPoint.Length != myDimension)
+        throw new ArgumentException("wrong size", "areaLeftPoint");
+      if (myAreaRightPoint.Length != myDimension)
+        throw new ArgumentException("wrong size", "areaRightPoint");
+      if (initialSubdivision.Length != myDimension)
+        throw new ArgumentException("wrong size", "initialSubdivision");
     }
 
     #region ISystemSpace Members

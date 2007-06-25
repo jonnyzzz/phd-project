@@ -6,7 +6,7 @@ using DSIS.Core.System;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Generated;
 
-namespace DSIS.Generated
+namespace DSIS.Generated	
 {
   public class IntegerCoordinateSystem : 
     IntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>, 

@@ -58,21 +58,13 @@ namespace DSIS.SimpleRunner
       return new TarjanGraph<Q>(system);
     }
 
-    protected virtual T CreateCoordinateSystem(ISystemInfo info)
+    protected override T CreateCoordinateSystem(ISystemInfo info)
     {
       if (typeof(T) == typeof(IntegerCoordinateSystem))
         return (T)(object)new IntegerCoordinateSystem(info.SystemSpace);
       if (typeof(T) == typeof(IntegerCoordinateSystem2d))
         return (T)(object)new IntegerCoordinateSystem2d(info.SystemSpace);
       throw new ArgumentException("Unknnown type T");
-    }
-
-    protected abstract ISystemInfo CreateSystemInfo();
-    
-    protected sealed override Pair<ISystemInfo, T> CreateInfos()
-    {
-      ISystemInfo info = CreateSystemInfo();
-      return new Pair<ISystemInfo, T>(info, CreateCoordinateSystem(info));
-    }
+    }            
   }
 }

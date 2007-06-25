@@ -19,7 +19,7 @@ namespace DSIS.Function.Predefined.Lorentz
     public void Evaluate()
     {
       Output[0] = mySigma * (Input[1] - Input[0]);
-      Output[1] = Input[0]*(myRho - Input[2]) - Input[1];
+      Output[1] = myRho * Input[0] - Input[0] * Input[2] - Input[1];
       Output[2] = Input[0]*Input[1] - myBeta*Input[2];
     }
   }

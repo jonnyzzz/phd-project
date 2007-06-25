@@ -16,13 +16,18 @@ namespace DSIS.IntegerCoordinates.Generic
       long[] sgrid = {10, 10};
 
       mySpace = new MockSystemSpace(2, sleft, sright, sgrid);
-      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(mySpace);
+      T ics = CoordinateSystem();
 
       myIcs = ics;
       List<Q> data = DoTest(ics, bld);
 
       TwoDimCoordinateAssert.Assert(ics, data, assert);
       myIcs = default(T);
+    }
+
+    protected virtual T CoordinateSystem()
+    {
+      return IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(mySpace);
     }
 
     private void DoTestAddCellToRect(double[] left, double[] right, string assert)

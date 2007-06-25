@@ -40,6 +40,7 @@
     <Compile Include="DrawLastComputationResultListener.cs" />
     <Compile Include="FullImageBuilder.cs" />
     <Compile Include="FullImageBuilderWithLog.cs" />
+    <Compile Include="GeneratedAbstactImageBuilderRunner.cs" />
     <Compile Include="IAbstractImageBuilderListener.cs" />
     <Compile Include="IComputeEntropyListener.cs" />
     <Compile Include="Program.cs" />

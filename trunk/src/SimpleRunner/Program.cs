@@ -14,11 +14,10 @@ using DSIS.Function.Predefined.Duffing;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Function.Predefined.Julia;
+using DSIS.Function.Predefined.Lorentz;
 using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
-using DSIS.Function.Solvers.SimpleSolver;
 using DSIS.IntegerCoordinates;
-using DSIS.IntegerCoordinates.Generated;
 using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
@@ -67,7 +66,9 @@ namespace DSIS.SimpleRunner
 
       Console.Out.WriteLine("Work directory: {0}", myWorkPath);      
 //      Do(new DuffingFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 8), myXSLTs);
-      Do(new VanDerPolFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 5), myXSLTs);
+//      Do(new VanDerPolFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 5), myXSLTs);
+//      Do(new LorentzFullBuilder<IntegerCoordinateSystem, IntegerCoordinate>(myWorkPath, 5), myXSLTs);
+      new LorentzRunner(myWorkPath, 4, myXSLTs).Run();
 
 //      int i = 0;
 //      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 13 + i), myXSLTs);
@@ -133,7 +134,72 @@ namespace DSIS.SimpleRunner
       {
         get { return new long[] { 2, 2 }; }
       }
+    }  
+    
+    
+    public class LorentzFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
+      where T : IIntegerCoordinateSystem<Q>
+      where Q : IIntegerCoordinate<Q>
+    {
+      public LorentzFullBuilder(string homePath, int steps)
+        :
+        base(homePath, steps, -1)
+      {
+      }
+
+      protected override ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> GetMethods()
+      {
+        return new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>[]
+          {
+            new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
+            new BoxMethod<T,Q>(), BoxMethodSettings.Default), 
+          };
+      }
+
+      protected override ISystemInfo CreateSystemInfo()
+      {
+        DefaultSystemSpace space =
+          new DefaultSystemSpace(3, new double[] { -100, -100, -100 }, new double[] { 100, 100, 100}, new long[] { 10, 10, 10 });
+        return new RungeKuttSolver(new LorentzSystemInfo(space, 8.0/3.0, 28, 10), 15, 0.1);
+      }
+
+      protected override long[] Subdivide
+      {
+        get { return new long[] { 2, 2, 2 }; }
+      }
     }
+
+    public class LorentzRunner : GeneratedAbstactImageBuilderRunner
+    {
+      private readonly string myPath;
+      private readonly int mySteps;
+      private readonly List<string> myXslt;
+
+      public LorentzRunner(string path, int steps, List<string> xslt)
+      {
+        myPath = path;
+        mySteps = steps;
+        myXslt = xslt;
+      }
+
+      public override AbstractImageBuilder<T, Q> CreateBuilder<T, Q>()
+      {
+        return new LorentzFullBuilder<T, Q>(myPath, mySteps);
+      }
+
+      protected override void ComputationFinished<T, Q>(AbstractImageBuilder<T, Q> builder)
+      {
+        base.ComputationFinished(builder);
+        FullImageBuilderWithLog<T, Q> bld = (FullImageBuilderWithLog<T, Q>) builder;
+        bld.ApplyXSL(myXslt);
+      }
+
+      public void Run()
+      {
+        Run(3);
+      }
+    }
+     
 
     
     public class VanDerPolFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>

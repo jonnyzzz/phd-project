@@ -19,7 +19,7 @@ namespace DSIS.Function.Predefined.Lorentz
 
     public override string PresentableName
     {
-      get { return "Van-der-Pol"; }
+      get { return "Lorentz"; }
     }
 
     protected override IFunction<double> GetFunctionInternal()

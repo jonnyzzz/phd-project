@@ -8,6 +8,7 @@ using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Adapter;
 using DSIS.IntegerCoordinates;
+using DSIS.IntegerCoordinates.Generated;
 using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
@@ -18,8 +19,10 @@ namespace DSIS.SimpleRunner
   { 
     private readonly List<IAbstractImageBuilderListener<T,Q>> myListeners = new List<IAbstractImageBuilderListener<T, Q>>();
     private readonly List<IProvideExtendedListener> myExtensions = new List<IProvideExtendedListener>();
+    private CreateSystem<T> myCreateSystem = null;
 
-    protected abstract Pair<ISystemInfo, T> CreateInfos();
+    protected abstract T CreateCoordinateSystem(ISystemInfo info);
+    protected abstract ISystemInfo CreateSystemInfo();    
     protected abstract ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> GetMethods();
     protected abstract long[] Subdivide { get;}
     protected abstract IGraphWithStrongComponent<Q> CreateGraph(T system);
@@ -27,6 +30,27 @@ namespace DSIS.SimpleRunner
     protected virtual IEnumerable<IStrongComponentInfo> FilterStrongComponents(IGraphStrongComponents<Q> info, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
     {
       return info.Components;
+    }
+
+
+    internal CreateSystem<T> CreateSystem
+    {
+      get { return myCreateSystem; }
+      set { myCreateSystem = value; }
+    }
+
+    protected virtual T CreateCoordinateSystemInternal(ISystemInfo info)
+    {
+      if (myCreateSystem != null)
+        return myCreateSystem(info.SystemSpace, info.SystemSpace.InitialSubdivision);
+      else
+        return CreateCoordinateSystem(info);
+    }
+
+    protected virtual Pair<ISystemInfo, T> CreateInfos()
+    {
+      ISystemInfo info = CreateSystemInfo();
+      return new Pair<ISystemInfo, T>(info, CreateCoordinateSystemInternal(info));
     }
 
     public virtual void ComputeAllMethods(IProgressInfo progress)

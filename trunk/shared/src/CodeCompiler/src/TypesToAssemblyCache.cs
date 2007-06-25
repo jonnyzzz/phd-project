@@ -56,10 +56,21 @@ namespace DSIS.CodeCompiler
 
     private static void Closure(Assembly assembly, Hashset<string> result)
     {
-      result.Add(assembly.Location);
+      if (assembly.GlobalAssemblyCache)
+        return;
+
+      string location = assembly.Location;
+      if (string.IsNullOrEmpty(location))
+        throw new ArgumentException("Unable to get assembly for assembly " + assembly.FullName);
+
+      result.Add(location);
       foreach (AssemblyName name in assembly.GetReferencedAssemblies())
       {
-        result.Add(Assembly.Load(name).Location);
+        string refLocation = Assembly.Load(name).Location;
+        result.Add(refLocation);
+
+        if (string.IsNullOrEmpty(refLocation))
+          throw new ArgumentException("Unable to get assembly for assembly " + name.FullName);
       }
     }
 

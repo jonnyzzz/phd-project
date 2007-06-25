@@ -26,6 +26,20 @@ namespace DSIS.IntegerCoordinates.Generated
   
   public class GeneratedIntegerCoordinateSystemManager
   {
+    private static GeneratedIntegerCoordinateSystemManager myInstance;
+
+    public static GeneratedIntegerCoordinateSystemManager Instance
+    {
+      get
+      {
+        if( myInstance == null)
+        {
+          myInstance = new GeneratedIntegerCoordinateSystemManager();
+        }
+        return myInstance;
+      }
+    }
+
     private readonly Dictionary<int, Type> myCachedIcs = new Dictionary<int, Type>();  
     
     public IIntegerCoordinateFactory CreateSystem(int dim)
