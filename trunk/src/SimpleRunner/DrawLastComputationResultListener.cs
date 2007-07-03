@@ -17,6 +17,7 @@ namespace DSIS.SimpleRunner
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
+    private static int myUnique = 0;
     private readonly string myPath;
 
     public DrawLastComputationResultListener(string path)
@@ -31,7 +32,7 @@ namespace DSIS.SimpleRunner
 
     private static string CreateTitle(AbstractImageBuilderContext<Q> cx)
     {
-      return ToSafePath(string.Format("{0}-{1}", cx.Info.PresentableName, cx.Builder.PresentableName));
+      return ToSafePath(string.Format("{0}-{1}", cx.Info.PresentableName, cx.Builder.PresentableName) + "-" + myUnique++);
     }
 
     public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,

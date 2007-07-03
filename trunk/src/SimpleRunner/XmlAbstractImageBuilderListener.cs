@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Xml;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
@@ -66,25 +68,37 @@ namespace DSIS.SimpleRunner
       myDocument.Save(myFile);
     }
 
-    public void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx)
+    public void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {
       myComputationStartedTime = DateTime.Now;
       myCoputationElement = AppendElement(myRootElement, "computation");
 
       AppendAttribute(myCoputationElement, "system", cx.Info.PresentableName);
       AppendAttribute(myCoputationElement, "method", cx.Builder.PresentableName);
+      AppendAttribute(myCoputationElement, "unsimmetric", isUnsimmetric);
       AppendAttribute(myCoputationElement, "ics", typeof (T).Name);
 
       stepCount = 0;
       Serialize();
     }
 
-    public void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx)
+    private static string Subdivide(IEnumerable<long> ls)
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (long l in ls)
+      {
+        sb.AppendFormat("{0}, ", l);
+      }
+      return sb.ToString();
+    }
+
+    public void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
     {
       stepCount++;
       myComputationStepStartedTime = DateTime.Now;
       myStep = AppendElement(myCoputationElement, "step");
       AppendAttribute(myStep, "step", stepCount);
+      AppendAttribute(myStep, "subdivide", Subdivide(subdivide));
       Serialize();
     }
 

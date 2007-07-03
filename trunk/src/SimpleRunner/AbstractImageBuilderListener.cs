@@ -7,11 +7,11 @@ namespace DSIS.SimpleRunner
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
-    public virtual void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx)
+    public virtual void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {      
     }
 
-    public virtual void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx)
+    public virtual void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
     {
     }
 

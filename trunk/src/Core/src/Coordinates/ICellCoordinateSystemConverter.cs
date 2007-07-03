@@ -13,10 +13,15 @@ namespace DSIS.Core.Coordinates
   {
     ICellCoordinateSystem<TFrom> FromSystem { get; }
     ICellCoordinateSystem<TTo> ToSystem { get; }
-    long[] Division { get; }
-
+    
     IEnumerable<TTo> Subdivide(TFrom coordinate);
 
     ICellCoordinateSystemConverter<TFrom, TTo> Clone();
+  }
+
+  public interface ICellCoordinateSystemMultiplyConverter<T> : ICellCoordinateSystemConverter<T,T> 
+    where T : ICellCoordinate<T>
+  {
+    long[] Division { get; }
   }
 }

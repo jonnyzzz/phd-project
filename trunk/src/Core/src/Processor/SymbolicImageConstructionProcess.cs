@@ -7,9 +7,9 @@ namespace DSIS.Core.Processor
     where TFrom : ICellCoordinate<TFrom>
     where TTo : ICellCoordinate<TTo>
   {
-    private CellProcessorContext<TFrom, TTo> myContext;
+    private ICellProcessorContext<TFrom, TTo> myContext;
 
-    public void Bind(CellProcessorContext<TFrom, TTo> context)
+    public void Bind(ICellProcessorContext<TFrom, TTo> context)
     {
       myContext = context;
 

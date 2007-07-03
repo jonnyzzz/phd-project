@@ -38,5 +38,10 @@ namespace DSIS.Core.Builders
     {
       get { return myConnectionBuilder; }
     }
+
+    public CellImageBuilderContext<TCell> NextStep(ICellCoordinateSystem<TCell> system, ICellConnectionBuilder<TCell> connection)
+    {
+      return new CellImageBuilderContext<TCell>(Function, Settings, system, connection);
+    }
   }
 }

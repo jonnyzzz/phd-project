@@ -3,7 +3,7 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
-  internal class IntegerCoordinateCellConverter<T, Q> : ICellCoordinateSystemConverter<Q, Q> 
+  internal class IntegerCoordinateCellConverter<T, Q> : ICellCoordinateSystemMultiplyConverter<Q> 
     where T : IIntegerCoordinateSystem<Q> 
     where Q : IIntegerCoordinate<Q>
   {

@@ -12,18 +12,25 @@ namespace DSIS.SimpleRunner
   {        
     private int stepCount = 0;
     
-    public void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx)
+    public void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {
       Console.Out.WriteLine("Computation started.\r\nSystem {0},\r\nMethod {1},\r\nIcs {2}",cx.Info.PresentableName,cx.Builder.PresentableName,typeof(T).Name);
+      Console.Out.WriteLine("isUnsimmetric = {0}", isUnsimmetric);
       Console.Out.WriteLine("{0}", DateTime.Now);
 
       stepCount = 0;
     }
 
-    public void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx)
+    public void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
     {
       stepCount++;
-      Console.Out.WriteLine("Step {0} started.", stepCount);      
+      Console.Out.WriteLine("Step {0} started.", stepCount);
+      Console.Out.Write("subdivide = [");
+      foreach (long d in subdivide)
+      {
+        Console.Out.Write("{0},",d);
+      }
+      Console.Out.WriteLine();
     }
 
     public void GraphConstructed(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)

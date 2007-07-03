@@ -17,6 +17,12 @@ namespace DSIS.Core.Processor
     where TCellFrom : ICellCoordinate<TCellFrom>
     where TCellTo : ICellCoordinate<TCellTo>
   {
-    void Bind(CellProcessorContext<TCellFrom, TCellTo> context);
+    void Bind(ICellProcessorContext<TCellFrom, TCellTo> context);
+  }
+
+  public interface ICellProcessor<T> : IProcess 
+    where T : ICellCoordinate<T>
+  {
+    void Bind(ICellProcessorMultiplyContext<T> context);
   }
 }

@@ -10,8 +10,8 @@ namespace DSIS.SimpleRunner
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
-    void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx);
-    void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx);    
+    void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric);
+    void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide);    
     void GraphConstructed(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
     void GraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
     void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);    

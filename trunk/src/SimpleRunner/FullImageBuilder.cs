@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DSIS.CellImageBuilder;
 using DSIS.CellImageBuilder.AdaptiveMethod;
+using DSIS.CellImageBuilder.BoxAdaptiveMethod;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Core.Builders;
@@ -27,9 +28,7 @@ namespace DSIS.SimpleRunner
     protected FullImageBuilder(long stepLimit, long cellsLimit)
     {
       myStepLimit = stepLimit;
-      myCellsLimit = cellsLimit;
-
-      AddListener(new ComputeEntropyListener<T,Q>());
+      myCellsLimit = cellsLimit;      
     }
 
     protected override ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> GetMethods()
@@ -44,13 +43,17 @@ namespace DSIS.SimpleRunner
             new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3}, 0.1)),
           new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
             new BoxMethod<T, Q>(), BoxMethodSettings.Default),
+          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
+            new BoxAdaptiveMethod<T,Q>(), BoxAdaptiveMethodSettings.Default),
         };
     }
 
-    protected override bool PerformStep(CellProcessorContext<Q, Q> ctx, AbstractImageBuilderContext<Q> cx, long stepCount)
+    protected override bool PerformStep(ICellProcessorContext<Q,Q> ctx, AbstractImageBuilderContext<Q> cx, long stepCount)
     {
+      long limit = UseUnsimmetric ? myStepLimit * ctx.CellImageBuilderContext.Function.SystemSpace.Dimension : myStepLimit;
+
       return (myCellsLimit < 0 || ctx.Cells.Count < myCellsLimit) && 
-              (myStepLimit < 0 || stepCount < myStepLimit);
+             (myStepLimit < 0 || stepCount < limit);
     }
 
     protected override IGraphWithStrongComponent<Q> CreateGraph(T system)

@@ -13,9 +13,9 @@ namespace DSIS.Core.Processor
   {
     private readonly Mutex myReadMutex = new Mutex();
     private readonly Mutex myWriteMutex = new Mutex();
-    private CellProcessorContext<TFrom, TTo> myContext;
+    private ICellProcessorContext<TFrom, TTo> myContext;
 
-    public void Bind(CellProcessorContext<TFrom, TTo> context)
+    public void Bind(ICellProcessorContext<TFrom, TTo> context)
     {
       myContext = context;
     }
@@ -44,7 +44,7 @@ namespace DSIS.Core.Processor
       using (ThreadedCellConnectionBuilder<TTo> bld =
         new ThreadedCellConnectionBuilder<TTo>(myWriteMutex, myContext.CellImageBuilderContext.ConnectionBuilder))
       {
-        CellProcessorContext<TFrom, TTo> ctx = new CellProcessorContext<TFrom, TTo>(
+        ICellProcessorContext<TFrom, TTo> ctx = new CellProcessorContext<TFrom, TTo>(
           new BufferedThreadedCountEnumerable<TFrom>(myReadMutex, myContext.Cells, Math.Min(myContext.Cells.Count / Environment.ProcessorCount / 4, 8192)),
           myContext.Converter.Clone(),
           myContext.CellImageBuilder.Clone(),

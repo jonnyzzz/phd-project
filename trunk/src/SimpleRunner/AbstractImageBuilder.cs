@@ -13,25 +13,57 @@ using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
-  public abstract class AbstractImageBuilder<T,Q>
+  public abstract class AbstractImageBuilder<T, Q>
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
-  { 
-    private readonly List<IAbstractImageBuilderListener<T,Q>> myListeners = new List<IAbstractImageBuilderListener<T, Q>>();
+  {
+    private readonly List<IAbstractImageBuilderListener<T, Q>> myListeners =
+      new List<IAbstractImageBuilderListener<T, Q>>();
+
     private readonly List<IProvideExtendedListener> myExtensions = new List<IProvideExtendedListener>();
     private CreateSystem<T> myCreateSystem = null;
+    private bool myUseUnsimmetric = false;
 
+    protected abstract long[] Subdivide { get; }
     protected abstract T CreateCoordinateSystem(ISystemInfo info);
-    protected abstract ISystemInfo CreateSystemInfo();    
+    protected abstract ISystemInfo CreateSystemInfo();
     protected abstract ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> GetMethods();
-    protected abstract long[] Subdivide { get;}
     protected abstract IGraphWithStrongComponent<Q> CreateGraph(T system);
-    protected abstract bool PerformStep(CellProcessorContext<Q, Q> ctx, AbstractImageBuilderContext<Q> cx, long stepCount);
-    protected virtual IEnumerable<IStrongComponentInfo> FilterStrongComponents(IGraphStrongComponents<Q> info, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
+
+    protected abstract bool PerformStep(ICellProcessorContext<Q, Q> ctx, AbstractImageBuilderContext<Q> cx,
+                                        long stepCount);
+
+    protected virtual IEnumerable<IStrongComponentInfo> FilterStrongComponents(IGraphStrongComponents<Q> info,
+                                                                               IGraph<Q> graph, T system,
+                                                                               AbstractImageBuilderContext<Q> cx)
     {
       return info.Components;
     }
 
+    public bool UseUnsimmetric
+    {
+      get { return myUseUnsimmetric; }
+      set { myUseUnsimmetric = value; }
+    }
+
+    protected virtual long[] GetSubdivide(long step)
+    {
+      if (myUseUnsimmetric)
+      {
+        step %= Subdivide.Length;
+        long d = Subdivide[step];
+
+        long[] part = new long[Subdivide.Length];
+        for (int i = 0; i < part.Length; i++)
+        {
+          part[i] = i == step ? d : 1;
+        }
+        return part;
+      } else
+      {
+        return Subdivide;
+      }
+    }
 
     internal CreateSystem<T> CreateSystem
     {
@@ -64,7 +96,7 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    public void AddListener(IAbstractImageBuilderListener<T,Q> listener)
+    public void AddListener(IAbstractImageBuilderListener<T, Q> listener)
     {
       IProvideExtendedListener ext = listener as IProvideExtendedListener;
       if (ext != null)
@@ -82,7 +114,7 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    public void RemoveListener(IAbstractImageBuilderListener<T,Q> listener)
+    public void RemoveListener(IAbstractImageBuilderListener<T, Q> listener)
     {
       IProvideExtendedListener ext = listener as IProvideExtendedListener;
       if (ext != null)
@@ -100,7 +132,8 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    protected virtual void DoConstruct(ICellImageBuilder<Q> builder, ICellImageBuilderSettings settings, IProgressInfo progress)
+    protected virtual void DoConstruct(ICellImageBuilder<Q> builder, ICellImageBuilderSettings settings,
+                                       IProgressInfo progress)
     {
       Pair<ISystemInfo, T> infos = CreateInfos();
       IGraphWithStrongComponent<Q> graph = CreateGraph(infos.Second);
@@ -109,7 +142,10 @@ namespace DSIS.SimpleRunner
 
       OnComputationStarted(infos.Second, cx);
 
-      ICellCoordinateSystemConverter<Q, Q> conv = infos.Second.Subdivide(Subdivide);
+
+      long stepCount = 0;
+      long[] subdivide = GetSubdivide(stepCount);
+      ICellCoordinateSystemConverter<Q, Q> conv = infos.Second.Subdivide(subdivide);
       CellProcessorContext<Q, Q> ctx =
         new CellProcessorContext<Q, Q>(
           infos.Second.InitialSubdivision,
@@ -125,10 +161,10 @@ namespace DSIS.SimpleRunner
       ICellProcessor<Q, Q> proc = CreateCellConstructionProcess();
 
       IGraphStrongComponents<Q> comps = null;
-      long stepCount = 0;
-      while(PerformStep(ctx, cx, stepCount))
+
+      while (PerformStep(ctx, cx, stepCount))
       {
-        OnStepStarted((T) ctx.Converter.FromSystem, cx);
+        OnStepStarted((T) ctx.Converter.FromSystem, cx, subdivide);
 
         proc.Bind(ctx);
         proc.Execute(NullProgressInfo.INSTANCE);
@@ -137,42 +173,42 @@ namespace DSIS.SimpleRunner
 
         comps = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
 
-        OnGraphComponentsConstructed(comps, graph, (T)ctx.Converter.ToSystem, cx);
+        OnGraphComponentsConstructed(comps, graph, (T) ctx.Converter.ToSystem, cx);
 
-        OnStepFinished(comps, graph, (T)ctx.Converter.ToSystem, cx);
+        OnStepFinished(comps, graph, (T) ctx.Converter.ToSystem, cx);
 
         stepCount++;
 
-        IEnumerable<IStrongComponentInfo> componentsId = FilterStrongComponents(comps, graph, (T)ctx.Converter.ToSystem, cx);
+        IEnumerable<IStrongComponentInfo> componentsId =
+          FilterStrongComponents(comps, graph, (T) ctx.Converter.ToSystem, cx);
 
         graph = new TarjanGraph<Q>(ctx.Converter.ToSystem);
-        conv = ctx.Converter.ToSystem.Subdivide(Subdivide);
+        conv = ctx.Converter.ToSystem.Subdivide(subdivide = GetSubdivide(stepCount));
 
         ctx = ctx.CreateNextContext(comps.GetCoordinates(componentsId), conv, new GraphCellImageBuilder<Q>(graph));
-
       }
-      OnComputationFinished(comps, graph, (T)ctx.Converter.ToSystem, cx);
+      OnComputationFinished(comps, graph, (T) ctx.Converter.ToSystem, cx);
     }
 
     protected virtual ICellProcessor<Q, Q> CreateCellConstructionProcess()
     {
-//      return new SymbolicImageConstructionProcess<Q, Q>();
-      return new ThreadedSymbolicImageConstructionProcess<Q, Q>();
+      return new SymbolicImageConstructionProcess<Q, Q>();
+//      return new ThreadedSymbolicImageConstructionProcess<Q, Q>();
     }
 
     protected virtual void OnComputationStarted(T system, AbstractImageBuilderContext<Q> cx)
     {
       foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
       {
-        listener.ComputationStarted(system, cx);
+        listener.ComputationStarted(system, cx, myUseUnsimmetric);
       }
     }
 
-    protected virtual void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx)
+    protected virtual void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
     {
       foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
       {
-        listener.OnStepStarted(system, cx);
+        listener.OnStepStarted(system, cx, (long[]) subdivide.Clone());
       }
     }
 
@@ -184,7 +220,8 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    protected virtual void OnGraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
+    protected virtual void OnGraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+                                                        AbstractImageBuilderContext<Q> cx)
     {
       foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
       {
@@ -192,7 +229,8 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    protected virtual void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
+    protected virtual void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+                                          AbstractImageBuilderContext<Q> cx)
     {
       foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
       {
@@ -200,7 +238,8 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    protected virtual void OnComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
+    protected virtual void OnComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+                                                 AbstractImageBuilderContext<Q> cx)
     {
       foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
       {

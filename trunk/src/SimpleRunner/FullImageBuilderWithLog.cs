@@ -16,13 +16,17 @@ namespace DSIS.SimpleRunner
     protected FullImageBuilderWithLog(string workPath, long stepLimit, long cellsLimit) : base(stepLimit, cellsLimit)
     {
       myWorkPath = workPath;
+      UseUnsimmetric = true;
       
       myXmlFile = Path.Combine(myWorkPath, "log.xml");
       
       myXmlListener = new XmlAbstractImageBuilderListener<T,Q>(myXmlFile);
+      
+      AddListener(new ConsoleListener<T, Q>());      
       AddListener(myXmlListener);
+      
       AddListener(new DrawLastComputationResultListener<T,Q>(myWorkPath));
-      AddListener(new ConsoleListener<T,Q>());
+      AddListener(new ComputeEntropyListener<T, Q>());      
     }
 
     public void ApplyXSL(IEnumerable<string> xslFiles)
