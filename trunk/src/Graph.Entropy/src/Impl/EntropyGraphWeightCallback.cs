@@ -6,11 +6,11 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl
 {
-  public class EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> where T : ICellCoordinate<T>
+  public class  EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> where T : ICellCoordinate<T>
   {
     private static readonly double LN2 = Math.Log(2);
-    private readonly Dictionary<NodePair<T>, double> myM = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer()); 
-    private int myLoopsCount = 0;
+    protected readonly Dictionary<NodePair<T>, double> myM = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer()); 
+    private double myLoopsCount = 0;
 
     public void OnLoopFound(IList<INode<T>> loop)
     {
@@ -23,17 +23,28 @@ namespace DSIS.Graph.Entropy.Impl
       {
         if (prev != null)
         {
-          Add(prev, node, p);
+          Add(prev.Coordinate, node.Coordinate, p);
         } else
         {
           first = node;
         }
         prev = node;
       }
-      Add(prev, first, p);
+      Add(prev.Coordinate, first.Coordinate, p);
     }
 
-    private void Add(INode<T> from, INode<T> to, double p)
+    protected IEnumerable<Pair<NodePair<T>, double>> Weights
+    {
+      get
+      {
+        foreach (KeyValuePair<NodePair<T>, double> pair in myM)
+        {
+          yield return new Pair<NodePair<T>, double>(pair.Key, pair.Value);
+        }
+      }
+    }
+
+    protected void Add(T from, T to, double p)
     {
       double d;
       NodePair<T> pair = new NodePair<T>(from, to);
@@ -41,7 +52,7 @@ namespace DSIS.Graph.Entropy.Impl
       myM[pair] = d + p;
     }
 
-    private static void Add(Dictionary<INode<T>, double> ds, INode<T> node, double v)
+    private static void Add(Dictionary<T, double> ds, T node, double v)
     {
       double b;
       ds.TryGetValue(node, out b);
@@ -54,7 +65,7 @@ namespace DSIS.Graph.Entropy.Impl
       info.Minimum = 0;
       info.Maximum = myM.Count;
 
-      Dictionary<INode<T>, double> values = new Dictionary<INode<T>, double>();
+      Dictionary<T, double> values = new Dictionary<T, double>();
 
       foreach (KeyValuePair<NodePair<T>, double> pair in myM)
       {
@@ -65,17 +76,17 @@ namespace DSIS.Graph.Entropy.Impl
       }
 
       info.Maximum += values.Count;
-      foreach (KeyValuePair<INode<T>, double> pair in values)
+      foreach (double value in values.Values)
       {
-        v += Entropy(pair.Value);
+        v += Entropy(value);
         info.Tick(1.0);
       }
-      return v;
+      return v / LN2;
     }
 
     private static double Entropy(double d)
     {
-      return d * Math.Log(d) / LN2;
+      return d * Math.Log(d);
     }
 
     public Dictionary<NodePair<T>, double> M
@@ -83,9 +94,10 @@ namespace DSIS.Graph.Entropy.Impl
       get { return myM; }
     }
 
-    public int LoopsCount
+    public double LoopsCount
     {
       get { return myLoopsCount; }
+      protected set { myLoopsCount = value; }
     }
   }
 }

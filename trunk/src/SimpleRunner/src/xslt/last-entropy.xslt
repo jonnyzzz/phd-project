@@ -29,9 +29,15 @@
          <img><xsl:attribute name="src"><xsl:value-of select="draw-image/@rel-image"/></xsl:attribute></img>
       </td></tr>
       <xsl:apply-templates select="step"/>
-      <tr><td><b>entropy-value</b></td><td><b><xsl:value-of select="entropy/@value"/></b></td></tr>
+      <tr><td><b>entropy-value</b></td><td><b><xsl:value-of select="entropy/@value"/></b>(<xsl:apply-templates select="entropy/entropy-step"/>)
+      </td></tr>
       <tr><td>entropy-time</td><td><xsl:value-of select="entropy/@time"/>ms</td></tr>
     </table>      
+  </xsl:template>
+
+  <xsl:template match="entropy-step">
+    <xsl:value-of select="@value"/>
+    <xsl:text>, </xsl:text>
   </xsl:template>
 
   <xsl:template match="step">

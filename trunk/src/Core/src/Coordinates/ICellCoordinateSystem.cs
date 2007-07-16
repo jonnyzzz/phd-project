@@ -35,6 +35,8 @@ namespace DSIS.Core.Coordinates
     /// <returns></returns>
     ICellCoordinateSystemConverter<T, T> Subdivide(long[] division);
 
+    ICellCoordinateSystemProjector<T> Project(long[] factor);
+
     /// <summary>
     /// Returns all cells for initial space provided by ISystemSpace
     /// </summary>

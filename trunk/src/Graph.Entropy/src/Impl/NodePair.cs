@@ -8,16 +8,16 @@ namespace DSIS.Graph.Entropy.Impl
   public struct NodePair<T> where T:ICellCoordinate<T>
   {
     private readonly static IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
-    public readonly INode<T> From;
-    public readonly INode<T> To;
+    public readonly T From;
+    public readonly T To;
     public readonly int Hash;
 
-    public NodePair(INode<T> from, INode<T> to)
+
+    public NodePair(T from, T to)
     {
       From = from;
       To = to;
-
-      Hash = (COMPARER.GetHashCode(from.Coordinate) << 4) + 91 * COMPARER.GetHashCode(to.Coordinate);
+      Hash = COMPARER.GetHashCode(From) + 131 * COMPARER.GetHashCode(To);
     }
   }
 
@@ -29,8 +29,8 @@ namespace DSIS.Graph.Entropy.Impl
     public bool Equals(NodePair<T> x, NodePair<T> y)
     {
       return x.Hash == y.Hash &&
-        COMPARER.Equals(x.From.Coordinate, y.From.Coordinate) &&
-        COMPARER.Equals(x.To.Coordinate, y.To.Coordinate);
+        COMPARER.Equals(x.From, y.From) &&
+        COMPARER.Equals(x.To, y.To);
     }
 
     public int GetHashCode(NodePair<T> obj)

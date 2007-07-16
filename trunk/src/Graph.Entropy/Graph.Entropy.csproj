@@ -41,6 +41,8 @@
     <Compile Include="src\IEntropyEvaluator.cs" />
     <Compile Include="src\EntropyEvaluator.cs" />
     <Compile Include="src\Impl\Eigen\EigenEntropyEvaluatorImpl.cs" />
+    <Compile Include="src\Impl\EntropyBackStepGraphWeightCallback.cs" />
+    <Compile Include="src\Impl\EntropyEvaluatorBase.cs" />
     <Compile Include="src\Impl\EntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\EntropyGraphWeightCallback.cs" />
     <Compile Include="src\Impl\GraphWeightSearch.cs" />
@@ -49,6 +51,7 @@
     <Compile Include="src\Impl\ILoopIteratorCallback.cs" />
     <Compile Include="src\Impl\NodePair.cs" />
     <Compile Include="src\Impl\NonDuplicatedLoopIteratorCallback.cs" />
+    <Compile Include="src\Impl\StrangeEntropyEvaluatorImpl.cs" />
     <Compile Include="testSrc\EigenEvaluatorImplTest.cs" />
     <Compile Include="testSrc\EntropyLoopIteratorCallbackTest.cs" />
     <Compile Include="testSrc\GraphBaseTest.cs" />

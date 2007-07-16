@@ -73,6 +73,7 @@
     <Compile Include="src\IIntegerCoordinate.cs" />
     <Compile Include="src\Impl\IntegerCoordinate.cs" />
     <Compile Include="src\Impl\IntegerCoordinateCellConverter.cs" />
+    <Compile Include="src\Impl\IntegerCoordinateCellProjector.cs" />
     <Compile Include="src\Impl\IntegerCoordinateEqualityComparer.cs" />
     <Compile Include="src\Impl\IntegerCoordinateSystem.cs" />
     <Compile Include="src\Impl\IntegerCoordinateSystemBase.cs" />

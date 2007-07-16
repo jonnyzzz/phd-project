@@ -66,9 +66,12 @@ namespace DSIS.SimpleRunner
     {
     }
 
-    public void OnComputeEntropyFinished(double value)
+    public void OnComputeEntropyFinished(double[] value)
     {
-      Console.Out.WriteLine("Entropy {0}", value);      
+      foreach (double d in value)
+      {
+        Console.Out.WriteLine("Entropy {0}", d);      
+      }      
     }
 
     public void ImageFile(string file)

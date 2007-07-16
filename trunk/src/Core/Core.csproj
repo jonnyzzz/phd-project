@@ -50,6 +50,7 @@
     <Compile Include="src\Coordinates\ICellCoordinate.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystem.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemConverter.cs" />
+    <Compile Include="src\Coordinates\ICellCoordinateSystemProjector.cs" />
     <Compile Include="src\Data\IContinuableDataCollectionAnalisys.cs" />
     <Compile Include="src\Data\IDataCollection.cs" />
     <Compile Include="src\Data\IDataCollectionAnalisys.cs" />

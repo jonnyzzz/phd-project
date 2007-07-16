@@ -11,10 +11,11 @@ namespace DSIS.IntegerCoordinates.Impl
     where Q : IIntegerCoordinate<Q>
   {
     TInh SubdividedCoordinateSystem(long[] division);
+    TInh ProjectedCoordinateSystem(long[] division);
   }
 
   public abstract class IntegerCoordinateSystemBase<TInh, Q> 
-    where TInh : IEXIntegerCoordinateSystemBase<TInh, Q> 
+    where TInh : class, IEXIntegerCoordinateSystemBase<TInh, Q> 
     where Q : IIntegerCoordinate<Q>
   {
     private readonly ISystemSpace mySystemSpace;
@@ -91,6 +92,14 @@ namespace DSIS.IntegerCoordinates.Impl
       return new IntegerCoordinateCellConverter<TInh, Q>(myInh, myInh.SubdividedCoordinateSystem(division), division);
     }
 
+    public ICellCoordinateSystemProjector<Q> Project(long[] factor)
+    {
+      TInh subdivide = myInh.ProjectedCoordinateSystem(factor);
+      if (subdivide == null)
+        return null;
+      return new IntegerCoordinateCellProjector<TInh, Q>(myInh, subdivide, factor);
+    }
+
     public double[] CellSize
     {
       get { return myCellSize; }
@@ -142,6 +151,18 @@ namespace DSIS.IntegerCoordinates.Impl
       for (int i = 0; i < div.Length; i++)
       {
         div[i] = mySubdivision[i]*division[i];
+      }
+      return div;
+    }
+
+    protected long[] GetProjectedFactor(long[] project)
+    {
+      long[] div = new long[myDimension];
+      for (int i = 0; i < div.Length; i++)
+      {
+        div[i] = mySubdivision[i]/project[i];
+        if (div[i] == 0)
+          return null;
       }
       return div;
     }

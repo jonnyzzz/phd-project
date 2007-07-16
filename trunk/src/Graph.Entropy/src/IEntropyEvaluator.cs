@@ -10,6 +10,13 @@ namespace DSIS.Graph.Entropy
 {
   public interface IEntropyEvaluator
   {
-    double ComputeEntropy<T>(IProgressInfo progress, IGraph<T> graph, IGraphStrongComponents<T> comps) where T : ICellCoordinate<T>;
+    double ComputeEntropy<T>(IProgressInfo progress, IGraph<T> graph, IGraphStrongComponents<T> comps)
+      where T : ICellCoordinate<T>;
+
+    double[] ComputeEntropyWithBackSteps<T>(IProgressInfo progress, IGraph<T> graph, IGraphStrongComponents<T> comps)
+      where T : ICellCoordinate<T>;
+
+    double[] ComputeEntropyWithBackSteps<T>(IProgressInfo progress, IGraph<T> graph, IGraphStrongComponents<T> comps, int limit)
+      where T : ICellCoordinate<T>;
   }
 }

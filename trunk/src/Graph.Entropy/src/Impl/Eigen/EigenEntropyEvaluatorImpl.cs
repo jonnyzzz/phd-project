@@ -32,6 +32,19 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
       return eigen;
     }
 
+    public double[] ComputeEntropyWithBackSteps<T>(IProgressInfo progress, IGraph<T> graph,
+                                                   IGraphStrongComponents<T> comps) where T : ICellCoordinate<T>
+    {
+      throw new NotImplementedException();
+    }
+
+    public double[] ComputeEntropyWithBackSteps<T>(IProgressInfo progress, IGraph<T> graph,
+                                                   IGraphStrongComponents<T> comps, int limit)
+      where T : ICellCoordinate<T>
+    {
+      throw new NotImplementedException();
+    }
+
 
     /// <summary>
     /// Computes (|Av/div|, Av/div) where A is Graph, v is Dictionary

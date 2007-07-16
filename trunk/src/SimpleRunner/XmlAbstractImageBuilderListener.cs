@@ -21,6 +21,7 @@ namespace DSIS.SimpleRunner
     private XmlElement myCoputationElement;
     private XmlElement myStep;
     private XmlElement myGraphElement;
+    private XmlElement myEntropy;
 
     private DateTime myComputationStartedTime;
     private DateTime myComputationStepStartedTime;
@@ -149,13 +150,20 @@ namespace DSIS.SimpleRunner
     public void OnComputeEntropyStarted()
     {
       myComputationEntropyStartedTime = DateTime.Now;
+      myEntropy = AppendElement(myCoputationElement, "entropy");
     }
 
-    public void OnComputeEntropyFinished(double value)
-    {
-      XmlElement eltropy = AppendElement(myCoputationElement, "entropy");
-      AppendAttribute(eltropy, "value", value);
-      AppendAttribute(eltropy, "time", (DateTime.Now - myComputationEntropyStartedTime).TotalMilliseconds);
+    public void OnComputeEntropyFinished(double[] value)
+    {      
+      AppendAttribute(myEntropy, "value", value[0]);
+      AppendAttribute(myEntropy, "time", (DateTime.Now - myComputationEntropyStartedTime).TotalMilliseconds);
+      for (int i = 0; i < value.Length; i++)
+      {
+        double d = value[i];
+        XmlElement el = AppendElement(myEntropy, "entropy-step");
+        AppendAttribute(el, "value", d);
+        AppendAttribute(el, "project", i);
+      }
 
       Serialize();
     }

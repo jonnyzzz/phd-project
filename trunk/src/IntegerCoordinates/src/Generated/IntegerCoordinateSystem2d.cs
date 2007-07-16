@@ -160,6 +160,12 @@ namespace DSIS.IntegerCoordinates.Generated
     public IntegerCoordinateSystem2d SubdividedCoordinateSystem(long[] division)
     {
       return new IntegerCoordinateSystem2d(SystemSpace, GetSubdividedFactor(division));
-    }    
+    }
+
+    public IntegerCoordinateSystem2d ProjectedCoordinateSystem(long[] division)
+    {
+      long[] factor = GetProjectedFactor(division);
+      return factor != null ? new IntegerCoordinateSystem2d(SystemSpace, factor) : null;
+    }
   }
 }

@@ -56,9 +56,9 @@ namespace DSIS.Graph.Entropy
       return graph;
     }
 
-    protected static string ToString(INode<IntegerCoordinate> node)
+    protected static string ToString(IntegerCoordinate node)
     {
-      return (node.Coordinate).GetCoordinate(0).ToString();
+      return node.GetCoordinate(0).ToString();
     }
 
     internal static string ToString(NodePair<IntegerCoordinate> p)

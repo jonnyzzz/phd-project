@@ -15,12 +15,12 @@ namespace DSIS.SimpleRunner
     {
       OnComputeEntropyStarted();
 
-      double entropy = EntropyEvaluator.GetLoopEntropyEvaluator().ComputeEntropy(NullProgressInfo.INSTANCE, graph, comps);
+      double[] entropy = EntropyEvaluator.GetLoopEntropyEvaluator().ComputeEntropyWithBackSteps(NullProgressInfo.INSTANCE, graph, comps);
       
       OnComputeEntropyFinished(entropy);
     }
 
-    private void OnComputeEntropyFinished(double entropy)
+    private void OnComputeEntropyFinished(double[] entropy)
     {
       FireListeners(delegate(IComputeEntropyListener listener)
                       {

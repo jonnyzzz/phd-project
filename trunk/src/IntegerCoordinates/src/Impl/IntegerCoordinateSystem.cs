@@ -60,5 +60,12 @@ namespace DSIS.IntegerCoordinates.Impl
     {
       return new IntegerCoordinateSystem(SystemSpace, GetSubdividedFactor(division));
     }
+
+
+    public IntegerCoordinateSystem ProjectedCoordinateSystem(long[] division)
+    {
+      long[] factor = GetProjectedFactor(division);
+      return factor != null ? new IntegerCoordinateSystem(SystemSpace, factor) : null;
+    }
   }
 }
