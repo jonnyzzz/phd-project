@@ -6,7 +6,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl
 {
-  public class  EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> where T : ICellCoordinate<T>
+  public class EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> where T : ICellCoordinate<T>
   {
     private static readonly double LN2 = Math.Log(2);
     protected readonly Dictionary<NodePair<T>, double> myM = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer()); 
@@ -86,7 +86,7 @@ namespace DSIS.Graph.Entropy.Impl
 
     private static double Entropy(double d)
     {
-      return d * Math.Log(d);
+      return Math.Abs(d) < 1e-5 ? 0.0 : d * Math.Log(d);
     }
 
     public Dictionary<NodePair<T>, double> M

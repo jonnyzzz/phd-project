@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl;
 using DSIS.IntegerCoordinates.Impl;
+using DSIS.Utils;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy
@@ -17,21 +16,21 @@ namespace DSIS.Graph.Entropy
     public void Test_01()
     {
       double p = 0.25;
-      DoTest2(ll(l(1,2,3,4)), 0, d(1,2,p), d(2,3,p), d(3,4,p), d(4,1,p));
+      DoTest2(l(l(1,2,3,4)), P(0, d(1,2,p), d(2,3,p), d(3,4,p), d(4,1,p)));
     }
 
     [Test]
     public void Test_02()
     {
       double p = 1.0/7.0;
-      DoTest2(ll(l(1,2,3,4,5,6,7)), 0, d(1,2,p), d(2,3,p), d(3,4,p), d(4,5,p), d(5,6,p), d(6,7,p), d(7,1,p));
+      DoTest2(l(l(1,2,3,4,5,6,7)), P(0, d(1,2,p), d(2,3,p), d(3,4,p), d(4,5,p), d(5,6,p), d(6,7,p), d(7,1,p)));
     }
 
     [Test]
     public void Test_03()
     {
       double p = 1.0;
-      DoTest2(ll(l(1)), 0, d(1,1,p));
+      DoTest2(l(l(1)), P(0, d(1,1,p)));
     }
 
     [Test]
@@ -39,94 +38,113 @@ namespace DSIS.Graph.Entropy
     {
       double p = 0.2;
       double q = 0.25;
-      DoTest2(ll(l(1,2,3,5), l(2,3,8,7,6)), 0.22299, d(1,2,q), d(2,3, p+q), d(3,5,q), d(5,1,q), d(3,8,p), d(8,7,p), d(7,6,p), d(6,2,p));
+      DoTest2(l(l(1,2,3,5), l(2,3,8,7,6)), P(0.22299, d(1,2,q), d(2,3, p+q), d(3,5,q), d(5,1,q), d(3,8,p), d(8,7,p), d(7,6,p), d(6,2,p)));
     }
 
     [Test]
     public void Test_05_one_node_loop()
     {
-      DoTest2(ll(l(1)), 0, d(1, 1, 1));
+      DoTest2(l(l(1)), P(0, d(1, 1, 1)));
     }
 
     [Test]
     public void Test_06_two_node_loop()
     {
-      DoTest2(ll(l(1, 2)), 0, d(1, 2, 0.5), d(2, 1, 0.5));
+      DoTest2(l(l(1, 2)), P(0, d(1, 2, 0.5), d(2, 1, 0.5)));
     }
 
     [Test]
     public void Test_07_one_node_loop_proj()
     {
-      DoTest3(2, ll(l(1)), 0, d(1, 1, 1));
+      DoTest2(l(l(1)), P(0, d(1, 1, 1)));
     }
 
     [Test]
     public void Test_08_two_node_loop()
     {
-      DoTest3(2, ll(l(1, 2)), 0, d(1, 2, 0.5), d(2, 1, 0.5));
+      DoTest2(l(l(1, 2)), P( 0, d(1, 2, 0.5), d(2, 1, 0.5)));
     }
 
-    [Test][ExpectedException(ExceptionType = typeof(Exception),ExpectedMessage = "Computation has stopped")]
-    public void Test_09_one_node_loop_proj()
+    [Test]
+    public void  Test_09_project2()
     {
-      DoTest3(16, ll(l(1)), 0, d(1, 1, 1));
+      //  1 -> 0
+      //  2 -> 1
+      //  3 -> 1
+      //  4 -> 2
+      double q = 0.25;
+      DoTest2(l(l(1,2,3,4)), 
+        P(0, d(1,2,q), d(2,3,q), d(3,4,q), d(4,1,q)), 
+          P(0, d(0,1,q), d(1,1,q), d(1,2,q),d(2,0,q)));
+    }
+
+    [Test]
+    public void Test_10_project2()
+    {
+      double q = 0.25;
+      double w = 0.5;
+
+      DoTest2(l(l(0,2,4,6), l(1,3,5,7)), 
+        P(0, d(0,2,q), d(1,3,q), d(2,4,q), d(3,5,q), d(4,6,q), d(5,7,q), d(6,0,q), d(7,1,q)),
+        P(0, d(0,1,w), d(1,2,w), d(2,3,w), d(3, 0, w)));
+    }
+
+    [Test]
+    public void Test_11_project3()
+    {
+      double p = 0.2;
+      double q = 0.25;
+      DoTest2(l(l(1, 2, 3, 5), l(2, 3, 8, 7, 6)), 
+        P(0.22299, d(1, 2, q), d(2, 3, p + q), d(3, 5, q), d(5, 1, q), d(3, 8, p), d(8, 7, p), d(7, 6, p), d(6, 2, p)),
+        P(0, d(0, 1, q), d(1, 1, p + q), d(1, 2, q), d(2, 0, q), d(1, 4, p), d(4, 3, p), d(3, 3, p), d(3, 1, p)),
+        P(0, d(0, 0, p + q + q), d(0, 1, q), d(1, 0, p + q), d(0, 2, p), d(2, 1, p), d(1, 1, p)),
+        P(0, d(0, 0, p + q + q + q + p + q + p), d(0, 1, p), d(1, 0, p)),
+        P(0, d(0, 0, p + q + q + q + p + q + p + p + p)));
     }
 
 
-    private static List<int> l(params int[] @is)
+    private static List<T> l<T>(params T[] ls)
     {
-      return new List<int>(@is);
+      return new List<T>(ls);
     }
 
-    private static List<List<int>> ll(params List<int>[] ls)
+    private static AssertData d(long i, long j, double d)
     {
-      return new List<List<int>>(ls);
+      return new AssertData(i, j, d);
     }
 
-    private static string d(int i, int j, double d)
+    private static Pair<double, List<AssertData>> P(double e, params AssertData[] p)
     {
-      return i + "->" + j + "=" + d.ToString("F6", CultureInfo.InvariantCulture);
+      return new Pair<double, List<AssertData>>(e, new List<AssertData>(p));
     }
 
-    protected static void DoTest2(List<List<int>> loops, double expectedEntropy, params string[] expected)
+    protected static void DoTest2(List<List<int>> loops, params Pair<double, List<AssertData>>[] expected)
     {
-      EntropyGraphWeightCallback<IntegerCoordinate> cb = DoTest(loops, expected);
-      double ent = cb.ComputeAntropy(NullProgressInfo.INSTANCE);
-      try
+      EntropyBackStepGraphWeightCallback<IntegerCoordinate> cb = DoTest(loops);
+
+      for (int i = 0; i < expected.Length; i++)
       {
-        Assert.AreEqual(expectedEntropy, ent, 1e-4);                
-      } catch
-      {
-        Console.Error.Write(ent);
-        throw;  
-      }
-    }
+        Pair<double, List<AssertData>> pair = expected[i];
+        
+        double ent = cb.ComputeAntropy(NullProgressInfo.INSTANCE);
 
-    protected static void DoTest3(int step, List<List<int>> loops, double expectedEntropy, params string[] expected)
-    {
-      EntropyBackStepGraphWeightCallback<IntegerCoordinate> cb = DoTest(loops, expected);
-      double ent = cb.ComputeAntropy(NullProgressInfo.INSTANCE);
-      step--;
-      for (; step > 0; step --)
-      {
-        cb = cb.BackStep(new long[] { 2 });
-        if (cb == null)
+        try
         {
-          throw new Exception("Computation has stopped");
+          Assert.AreEqual(pair.First, ent, 1e-4);
+          AssertResult(cb, pair.Second);
         }
-        ent = cb.ComputeAntropy(NullProgressInfo.INSTANCE);
-      }
-      try
-      {
-        Assert.AreEqual(expectedEntropy, ent, 1e-4);                
-      } catch
-      {
-        Console.Error.Write(ent);
-        throw;  
+        catch(Exception e)
+        {
+          Console.Error.WriteLine("step = {0}", i + 1);
+          throw new Exception(e.Message, e);
+        }
+
+        if (i < expected.Length - 1)
+          cb = cb.BackStep(new long[] {2});
       }
     }
 
-    protected static EntropyBackStepGraphWeightCallback<IntegerCoordinate> DoTest(List<List<int>> loops, params string[] expected)
+    protected static EntropyBackStepGraphWeightCallback<IntegerCoordinate> DoTest(List<List<int>> loops)
     {
       TarjanGraph<IntegerCoordinate> graph = DoBuildGraph(delegate { });
 
@@ -150,33 +168,92 @@ namespace DSIS.Graph.Entropy
         cb.OnLoopFound(nodes);
       }
 
-      Assert.AreEqual(loops.Count, loops.Count);
+      return cb;
+    }
 
-      int index = 0;
-      Exception e = null;
-      StringBuilder sb = new StringBuilder();
+    protected static void AssertResult(EntropyGraphWeightCallback<IntegerCoordinate> cb, List<AssertData> expected)
+    {
+      List<AssertData> weights = new List<AssertData>();
       foreach (KeyValuePair<NodePair<IntegerCoordinate>, double> pair in cb.M)
       {
-        string s = ToString(pair.Key) + "=" + pair.Value.ToString("F6", CultureInfo.InvariantCulture);
-        sb.AppendLine(s);
-        if (e == null)
-        {
-          try
-          {
-            Assert.AreEqual(expected[index++], s);
-          } catch(Exception ee)
-          {
-            e = new Exception("Compare failed at line " + index, ee);
-          }
-        }
-      }
-      if (e != null)
-      {
-        Console.Out.WriteLine(sb);
-        throw e;
+        weights.Add(d(pair.Key.From.GetCoordinate(0), pair.Key.To.GetCoordinate(0), pair.Value));
       }
 
-      return cb;
+      weights.Sort();
+      expected.Sort();
+
+      try
+      {
+        Assert.AreEqual(expected.Count, weights.Count);
+
+        for(int i=0; i<expected.Count; i++)
+        {
+          Assert.AreEqual(expected[i], weights[i]);
+        }
+      } catch(Exception e)
+      {
+        foreach (AssertData pair in weights)
+        {
+          Console.Out.WriteLine("pair = {0}", pair);
+        }
+
+        throw new Exception(e.Message, e);
+      }
+    }
+
+    protected class AssertData : IEquatable<AssertData>, IComparable<AssertData>
+    {
+      public readonly long From;
+      public readonly long To;
+      public readonly double D;
+
+      public AssertData(long from, long to, double d)
+      {
+        From = from;
+        To = to;
+        D = d;
+      }
+
+      public bool Equals(AssertData assertData)
+      {
+        if (assertData == null) return false;
+        if (From != assertData.From) return false;
+        if (To != assertData.To) return false;
+        if (D != assertData.D) return false;
+        return true;
+      }
+
+      public override bool Equals(object obj)
+      {
+        if (ReferenceEquals(this, obj)) return true;
+        return Equals(obj as AssertData);
+      }
+
+      public override int GetHashCode()
+      {
+        int result = (int) From;
+        result = 29*result + (int) To;
+        result = 29*result + D.GetHashCode();
+        return result;
+      }
+
+      public int CompareTo(AssertData other)
+      {
+        int v = From.CompareTo(other.From);
+        if (v != 0)
+          return v;
+
+        v = To.CompareTo(other.To);
+        if (v != 0)
+          return v;
+
+        return D.CompareTo(other.D);
+      }
+
+      public override string ToString()
+      {
+        return From + "->" + To + ":" + D;
+      }
     }
   }
 }

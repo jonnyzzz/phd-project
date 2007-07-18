@@ -22,7 +22,6 @@ namespace DSIS.Graph.Entropy.Impl
 
       EntropyBackStepGraphWeightCallback<Q> instance = new EntropyBackStepGraphWeightCallback<Q>(projector.ToSystem);
 
-      double mySum = 0;
       foreach (Pair<NodePair<Q>, double> pair in Weights)
       {
         Q pFrom = projector.Project(pair.First.From);
@@ -30,11 +29,10 @@ namespace DSIS.Graph.Entropy.Impl
 
         if (pFrom != null && pTo != null)
         {
-          mySum += pair.Second;
           instance.Add(pFrom, pTo, pair.Second);
         }
       }
-      instance.LoopsCount = mySum;
+      instance.LoopsCount = LoopsCount;
       return instance;
     }
   }
