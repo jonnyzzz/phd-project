@@ -32,7 +32,7 @@ namespace DSIS.Graph.Entropy.Impl
           instance.Add(pFrom, pTo, pair.Second);
         }
       }
-      instance.LoopsCount = LoopsCount;
+      instance.Norm = Norm;
       return instance;
     }
   }

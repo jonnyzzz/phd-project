@@ -10,11 +10,11 @@ namespace DSIS.Graph.Entropy.Impl
   {
     private static readonly double LN2 = Math.Log(2);
     protected readonly Dictionary<NodePair<T>, double> myM = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer()); 
-    private double myLoopsCount = 0;
+    private double myNorm = 0;
 
     public void OnLoopFound(IList<INode<T>> loop)
     {
-      myLoopsCount++;
+      myNorm++;
 
       double p = 1.0/loop.Count;
       INode<T> prev = null;
@@ -69,7 +69,7 @@ namespace DSIS.Graph.Entropy.Impl
 
       foreach (KeyValuePair<NodePair<T>, double> pair in myM)
       {
-        double val = pair.Value / myLoopsCount;
+        double val = pair.Value / myNorm;
         Add(values, pair.Key.To, val);
         v -= Entropy(val);
         info.Tick(1.0);
@@ -94,10 +94,10 @@ namespace DSIS.Graph.Entropy.Impl
       get { return myM; }
     }
 
-    public double LoopsCount
+    public double Norm
     {
-      get { return myLoopsCount; }
-      protected set { myLoopsCount = value; }
+      get { return myNorm; }
+      protected set { myNorm = value; }
     }
   }
 }

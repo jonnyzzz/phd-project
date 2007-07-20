@@ -121,13 +121,17 @@ namespace DSIS.Graph.Entropy
     protected static void DoTest2(List<List<int>> loops, params Pair<double, List<AssertData>>[] expected)
     {
       EntropyBackStepGraphWeightCallback<IntegerCoordinate> cb = DoTest(loops);
-
+      double norm = -1;
       for (int i = 0; i < expected.Length; i++)
       {
         Pair<double, List<AssertData>> pair = expected[i];
         
         double ent = cb.ComputeAntropy(NullProgressInfo.INSTANCE);
 
+        if (i == 0)
+          norm = cb.Norm;
+
+        AssertNorm(cb, norm);
         try
         {
           Assert.AreEqual(pair.First, ent, 1e-4);
@@ -169,6 +173,35 @@ namespace DSIS.Graph.Entropy
       }
 
       return cb;
+    }
+
+    private static void AssertNorm(EntropyGraphWeightCallback<IntegerCoordinate> cb, double expected)
+    {
+      Dictionary<IntegerCoordinate, double> myValuedIn = new Dictionary<IntegerCoordinate, double>(EqualityComparerFactory<IntegerCoordinate>.GetComparer());
+      Dictionary<IntegerCoordinate, double> myValuedOut = new Dictionary<IntegerCoordinate, double>(EqualityComparerFactory<IntegerCoordinate>.GetComparer());
+
+      double sum = 0;
+      foreach (KeyValuePair<NodePair<IntegerCoordinate>, double> pair in cb.M)
+      {
+        double vIn;
+        double vOut;
+        myValuedIn.TryGetValue(pair.Key.To, out vIn);
+        myValuedOut.TryGetValue(pair.Key.From, out vOut);
+
+        myValuedIn[pair.Key.To] = vIn + pair.Value;
+        myValuedOut[pair.Key.From] = vOut + pair.Value;
+
+        sum += pair.Value;
+      }
+
+      Assert.AreEqual(myValuedIn.Count, myValuedOut.Count);
+
+      foreach (IntegerCoordinate c in myValuedIn.Keys)
+      {
+        Assert.AreEqual(myValuedIn[c], myValuedOut[c], 1e-4);
+      }
+
+      Assert.AreEqual(expected, sum, 1e-4);
     }
 
     protected static void AssertResult(EntropyGraphWeightCallback<IntegerCoordinate> cb, List<AssertData> expected)
