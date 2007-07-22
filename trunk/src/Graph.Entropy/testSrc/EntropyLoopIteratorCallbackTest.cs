@@ -71,11 +71,11 @@ namespace DSIS.Graph.Entropy
       //  1 -> 0
       //  2 -> 1
       //  3 -> 1
-      //  4 -> 2
+      //  4 -> 2  
       double q = 0.25;
       DoTest2(l(l(1,2,3,4)), 
         P(0, d(1,2,q), d(2,3,q), d(3,4,q), d(4,1,q)), 
-          P(0, d(0,1,q), d(1,1,q), d(1,2,q),d(2,0,q)));
+          P(0.5, d(0,1,q), d(1,1,q), d(1,2,q),d(2,0,q)));
     }
 
     [Test]
@@ -96,12 +96,33 @@ namespace DSIS.Graph.Entropy
       double q = 0.25;
       DoTest2(l(l(1, 2, 3, 5), l(2, 3, 8, 7, 6)), 
         P(0.22299, d(1, 2, q), d(2, 3, p + q), d(3, 5, q), d(5, 1, q), d(3, 8, p), d(8, 7, p), d(7, 6, p), d(6, 2, p)),
-        P(0, d(0, 1, q), d(1, 1, p + q), d(1, 2, q), d(2, 0, q), d(1, 4, p), d(4, 3, p), d(3, 3, p), d(3, 1, p)),
-        P(0, d(0, 0, p + q + q), d(0, 1, q), d(1, 0, p + q), d(0, 2, p), d(2, 1, p), d(1, 1, p)),
-        P(0, d(0, 0, p + q + q + q + p + q + p), d(0, 1, p), d(1, 0, p)),
+        P(0.87299, d(0, 1, q), d(1, 1, p + q), d(1, 2, q), d(2, 0, q), d(1, 4, p), d(4, 3, p), d(3, 3, p), d(3, 1, p)),
+        P(1.0676426732230349, d(0, 0, p + q + q), d(0, 1, q), d(1, 0, p + q), d(0, 2, p), d(2, 1, p), d(1, 1, p)),
+        P(0.4529325012980811, d(0, 0, p + q + q + q + p + q + p), d(0, 1, p), d(1, 0, p)),
         P(0, d(0, 0, p + q + q + q + p + q + p + p + p)));
     }
 
+    [Test]
+    public void Test_12()
+    {
+      double p = 1.0/8.0;
+      double q = 0.1;
+
+      double v1 = 2*e(p) + e(2*(p + q)) + e(q) + e(q + q);
+      double v2 = 3*e(p) + 4*e(q) + e(p + q);
+
+      Console.Out.WriteLine("v1 = {0}", v1);
+      Console.Out.WriteLine("v2 = {0}", v2);
+
+      double v = v1 - v2;
+      Console.Out.WriteLine("v = {0}", v);
+//      Assert.AreEqual(v1, v2, 1e-5);
+    }
+
+    private static double e(double e)
+    {
+      return e*Math.Log(e);
+    }
 
     private static List<T> l<T>(params T[] ls)
     {
@@ -285,7 +306,7 @@ namespace DSIS.Graph.Entropy
 
       public override string ToString()
       {
-        return From + "->" + To + ":" + D;
+        return string.Format("{0}->{1}:{2}", From, To, D);
       }
     }
   }
