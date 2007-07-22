@@ -155,7 +155,9 @@ namespace DSIS.Graph.Entropy
         AssertNorm(cb, norm);
         try
         {
+          Assert.AreEqual(ent, ComputeEntropy(pair.Second, cb.Norm), 1e-4, "Computed entropy differs");
           Assert.AreEqual(pair.First, ent, 1e-4);
+          
           AssertResult(cb, pair.Second);
         }
         catch(Exception e)
@@ -253,6 +255,30 @@ namespace DSIS.Graph.Entropy
 
         throw new Exception(e.Message, e);
       }
+    }
+
+    protected static double ComputeEntropy(IEnumerable<AssertData> data, double div)
+    {
+      Dictionary<long, double> nodeW = new Dictionary<long, double>();
+
+      double e1 = 0;
+      foreach (AssertData assertData in data)
+      {
+        double v;
+        nodeW.TryGetValue(assertData.To, out v);
+        double val = assertData.D/div;
+        nodeW[assertData.To] = v + val;
+
+        e1 += e(val);
+      }
+
+      double e2 = 0;
+      foreach (KeyValuePair<long, double> pair in nodeW)
+      {
+        e2 += e(pair.Value);
+      }
+
+      return (e2 - e1) / Math.Log(2);
     }
 
     protected class AssertData : IEquatable<AssertData>, IComparable<AssertData>

@@ -8,7 +8,7 @@ namespace DSIS.Graph.Entropy.Impl
 {
   public class EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> where T : ICellCoordinate<T>
   {
-    private static readonly double LN2 = 1;//Math.Log(2);
+    private static readonly double LN2 = Math.Log(2);
     protected readonly Dictionary<NodePair<T>, double> myM = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer()); 
     private double myNorm = 0;
 
