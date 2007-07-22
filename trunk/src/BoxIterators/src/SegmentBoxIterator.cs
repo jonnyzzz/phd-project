@@ -34,8 +34,7 @@ namespace DSIS.BoxIterators
               Inc(i+1, ref outs[i + 1]);
             else
               isWorking = false;
-          }
-          else break;
+          }          
         }
       }
     }

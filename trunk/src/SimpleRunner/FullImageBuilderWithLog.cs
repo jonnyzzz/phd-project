@@ -25,8 +25,11 @@ namespace DSIS.SimpleRunner
       AddListener(new ConsoleListener<T, Q>());      
       AddListener(myXmlListener);
       
-      AddListener(new DrawLastComputationResultListener<T,Q>(myWorkPath));
+      AddListener(new ComputationPathListener<T,Q>(myWorkPath));
+
+      AddListener(new DrawLastComputationResultListener<T,Q>());
       AddListener(new ComputeEntropyListener<T, Q>());      
+      AddListener(new DrawEntropyListener<T,Q>());      
     }
 
     public void ApplyXSL(IEnumerable<string> xslFiles)

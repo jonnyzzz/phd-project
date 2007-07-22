@@ -26,12 +26,12 @@
       <tr><td>Number of steps</td><td><xsl:value-of select="@totalSteps"/></td></tr>
       <tr><td>Number of nodes</td><td><xsl:value-of select="step[last()]/@nodes"/></td></tr>
       <tr><td colspan="2">
-         <img><xsl:attribute name="src"><xsl:value-of select="draw-image/@rel-image"/></xsl:attribute></img>
+         <img><xsl:attribute name="src"><xsl:value-of select="draw-image[@type='phase']/@rel-image"/></xsl:attribute></img>
       </td></tr>
       <xsl:apply-templates select="step"/>
-      <tr><td><b>entropy-value</b></td><td><b><xsl:value-of select="entropy/@value"/></b>(<xsl:apply-templates select="entropy/entropy-step"/>)
+      <tr><td><b>entropy-value</b></td><td><b><xsl:value-of select="step[last()]/entropy/@value"/></b>(<xsl:apply-templates select="step[last()]/entropy/entropy-step"/>)
       </td></tr>
-      <tr><td>entropy-time</td><td><xsl:value-of select="entropy/@time"/>ms</td></tr>
+      <tr><td>entropy-time</td><td><xsl:value-of select="step[last()]/entropy/@time"/>ms</td></tr>
     </table>      
   </xsl:template>
 

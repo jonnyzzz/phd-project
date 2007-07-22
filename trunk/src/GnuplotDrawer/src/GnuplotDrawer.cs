@@ -31,7 +31,7 @@ namespace DSIS.GnuplotDrawer
       myGnuplotFolder = gnuplotFolder;
     }
 
-    public void DrawImage(IGnuplotScriptGen script)
+    public void DrawImage(IGnuplotScript script)
     {
       ProcessStartInfo pi = new ProcessStartInfo();
       pi.FileName = Path.Combine(myGnuplotFolder, @"bin\pgnuplot.exe");

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Visualization;
@@ -5,6 +6,7 @@ using DSIS.GnuplotDrawer;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
@@ -13,34 +15,30 @@ namespace DSIS.SimpleRunner
     void ImageFile(string file);
   }
 
-  public class DrawLastComputationResultListener<T,Q> : ProvideExternalListenerBase<T,Q, IDrawLastComputationResultEvents>
+  public class DrawLastComputationResultListener<T,Q> : ProvideExternalListenerBase<T,Q, IDrawLastComputationResultEvents>, IComputationPathListener
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
-    private static int myUnique = 0;
-    private readonly string myPath;
+    private string myTitle;
+    private string myPath;
 
-    public DrawLastComputationResultListener(string path)
+      
+    public IEnumerable<Pair<string, Action<string>>> FormatPath
     {
-      myPath = path;
+      get { yield return new Pair<string, Action<string>>("{0}", delegate(string path) { myPath = path; }); }
     }
 
-    private static string ToSafePath(string s)
+    public void ComputationTitle(string title)
     {
-      return s.Replace("`", "_").Replace(",", ".").Replace(" ", "_");
-    }
-
-    private static string CreateTitle(AbstractImageBuilderContext<Q> cx)
-    {
-      return ToSafePath(string.Format("{0}-{1}", cx.Info.PresentableName, cx.Builder.PresentableName) + "-" + myUnique++);
+      myTitle = title;
     }
 
     public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                              AbstractImageBuilderContext<Q> cx)
     {
-      string title = CreateTitle(cx);
+      string path = myPath;
+      string outputFile = Path.Combine(path, "-" + myTitle + "-picture.png");
 
-      string path = Path.Combine(myPath, title);
       if (!Directory.Exists(path))
         Directory.CreateDirectory(path);
 
@@ -57,18 +55,19 @@ namespace DSIS.SimpleRunner
         GnuplotPointsFileWriter fw;
         if (!files.TryGetValue(info, out fw))
         {
-          fw = new GnuplotPointsFileWriter(Path.Combine(path, title + "-" + ++components), system.SystemSpace.Dimension);
+          string gnuplotComponent = Path.Combine(path, myTitle + "-" + ++components);
+
+          fw = new GnuplotPointsFileWriter(gnuplotComponent, system.SystemSpace.Dimension);
           files[info] = fw;
         }
         system.CenterPoint(node.Coordinate, data);
         fw.WritePoint(new ImagePoint(data));
       }
-
-      string outputFile = Path.Combine(path, "-" + title + "-picture.png");
-      IGnuplotScriptGen gen = GnuplotSriptGen.ScriptGen(
+      
+      IGnuplotPhaseScriptGen gen = GnuplotSriptGen.ScriptGen(
         system.SystemSpace.Dimension,
-        Path.Combine(path, title + "-script.gnuplot"),
-        new GnuplotScriptParameters(outputFile, title));
+        Path.Combine(path, myTitle + "-script.gnuplot"),
+        new GnuplotScriptParameters(outputFile, myTitle));
 
       foreach (GnuplotPointsFileWriter file in files.Values)
       {
@@ -76,7 +75,7 @@ namespace DSIS.SimpleRunner
         gen.AddPointsFile(file);
       }
 
-      gen.Dispose();
+      gen.Finish();
 
       GnuplotDrawer.GnuplotDrawer drw = new GnuplotDrawer.GnuplotDrawer();
       drw.DrawImage(gen);

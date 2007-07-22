@@ -47,7 +47,7 @@ namespace DSIS.CellImageBuilders.PointMethod
       myDLeft = new double[myDim];
       myDRight = new double[myDim];
 
-      myFunction = context.Function.GetFunction<double>(mySystem.CellSize);
+      myFunction = context.Function.GetFunction(mySystem.CellSize);
       myFunction.Input = myDX;
       myFunction.Output = myDY;
 

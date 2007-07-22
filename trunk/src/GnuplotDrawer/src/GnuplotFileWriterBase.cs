@@ -1,17 +1,18 @@
 using System;
 using System.IO;
+using System.Text;
 
 namespace DSIS.GnuplotDrawer
 {
   public class GnuplotFileWriterBase : IDisposable
   {
     private readonly string myFilename;
-    protected TextWriter myWriter;
+    internal TextWriter myWriter;
 
     public GnuplotFileWriterBase(string filename)
     {
-      myFilename = filename;
-      myWriter = File.CreateText(filename);
+      myFilename = Path.GetFullPath(filename);
+      myWriter = new StreamWriter(filename, true, Encoding.ASCII);
     }
 
     public virtual void Dispose()

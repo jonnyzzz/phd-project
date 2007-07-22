@@ -35,15 +35,19 @@
   <ItemGroup>
     <Compile Include="AbstractImageBuilder.cs" />
     <Compile Include="AbstractImageBuilderListener.cs" />
+    <Compile Include="ComputationPathListener.cs" />
     <Compile Include="ComputeEntropyListener.cs" />
     <Compile Include="ConsoleListener.cs" />
+    <Compile Include="DrawEntropyListener.cs" />
     <Compile Include="DrawLastComputationResultListener.cs" />
     <Compile Include="FullImageBuilder.cs" />
     <Compile Include="FullImageBuilderWithLog.cs" />
     <Compile Include="GeneratedAbstactImageBuilderRunner.cs" />
     <Compile Include="GeneratedImageBuilderRunner.cs" />
     <Compile Include="IAbstractImageBuilderListener.cs" />
+    <Compile Include="IComputationPathListener.cs" />
     <Compile Include="IComputeEntropyListener.cs" />
+    <Compile Include="IDrawEntropyImageListener.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvideExternalListenerBase.cs" />

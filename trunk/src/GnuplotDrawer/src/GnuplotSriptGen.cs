@@ -1,10 +1,10 @@
 using System;
 
 namespace DSIS.GnuplotDrawer
-{
+{ 
   public static class GnuplotSriptGen
   {
-    public static IGnuplotScriptGen ScriptGen(int dim, string filename, GnuplotScriptParameters ps)
+    public static IGnuplotPhaseScriptGen ScriptGen(int dim, string filename, GnuplotScriptParameters ps)
     {
       if (dim == 2)
         return new Gnuplot2dScriptGen(filename, ps);

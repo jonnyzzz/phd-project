@@ -17,6 +17,21 @@
     </html>      
   </xsl:template>
 
+  <xsl:template match="draw-image">
+    <a>
+      <xsl:attribute name="href">
+        <xsl:value-of select="@rel-image"/>
+      </xsl:attribute>
+      <xsl:attribute name="alt">image</xsl:attribute>
+      <xsl:attribute name="style">border:0;</xsl:attribute>
+      <img>
+        <xsl:attribute name="src">
+          <xsl:value-of select="@rel-image"/>
+        </xsl:attribute>
+        <xsl:attribute name="style">width: 250px;</xsl:attribute>
+      </img>
+    </a>
+  </xsl:template>
   
   <xsl:template match="computation">
     <h1><xsl:value-of select="@system"/> - <xsl:value-of select="@method"/></h1>
@@ -26,24 +41,12 @@
       <tr><td>Components</td><td><xsl:value-of select="step[last()]/graph/@components"/></td></tr>
       <tr><td>Number of steps</td><td><xsl:value-of select="@totalSteps"/></td></tr>
       <tr><td>Number of nodes</td><td><xsl:value-of select="step[last()]/@nodes"/></td></tr>
-      <tr><td colspan="2">
-        <a>
-          <xsl:attribute name="href"><xsl:value-of select="draw-image/@rel-image"/></xsl:attribute>
-          <xsl:attribute name="alt">image</xsl:attribute>
-          <xsl:attribute name="style">border:0;</xsl:attribute>
-          <img>
-            <xsl:attribute name="src">
-              <xsl:value-of select="draw-image/@rel-image"/>
-            </xsl:attribute>
-            <xsl:attribute name="style">width: 250px;</xsl:attribute>
-          </img>
-        </a>
-      </td></tr>
+      <tr><td colspan="2"> <xsl:apply-templates select="draw-image"/> </td></tr>
       <xsl:apply-templates select="step"/>
       <tr><td><b>entropy-value</b></td>
-          <td><b><xsl:value-of select="entropy/@value"/></b>(<xsl:apply-templates select="entropy/entropy-step"/>)</td>
+          <td><b><xsl:value-of select="step[last()]/entropy/@value"/></b>(<xsl:apply-templates select="step[last()]/entropy/entropy-step"/>)</td>
       </tr>
-      <tr><td>entropy-time</td><td><xsl:value-of select="entropy/@time"/>ms</td></tr>
+      <tr><td>entropy-time</td><td><xsl:value-of select="step[last()]/entropy/@time"/>ms</td></tr>
     </table>      
   </xsl:template>
 

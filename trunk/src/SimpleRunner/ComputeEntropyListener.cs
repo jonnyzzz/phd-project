@@ -9,23 +9,23 @@ namespace DSIS.SimpleRunner
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
-
-    public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
-                                             AbstractImageBuilderContext<Q> cx)
+    public override void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+                                        AbstractImageBuilderContext<Q> cx)
     {
       OnComputeEntropyStarted();
 
       double[] entropy = EntropyEvaluator.GetLoopEntropyEvaluator().ComputeEntropyWithBackSteps(NullProgressInfo.INSTANCE, graph, comps);
-      
-      OnComputeEntropyFinished(entropy);
-    }
 
+      OnComputeEntropyFinished(entropy); 
+    }
+    
     private void OnComputeEntropyFinished(double[] entropy)
     {
       FireListeners(delegate(IComputeEntropyListener listener)
                       {
                         listener.OnComputeEntropyFinished(entropy);
                       });
+
     }
 
     private void OnComputeEntropyStarted()

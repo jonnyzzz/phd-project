@@ -10,7 +10,7 @@ using DSIS.IntegerCoordinates;
 namespace DSIS.SimpleRunner
 {
   public class XmlAbstractImageBuilderListener<T, Q> : IAbstractImageBuilderListener<T, Q>, IComputeEntropyListener,
-                                                       IDrawLastComputationResultEvents
+                                                       IDrawLastComputationResultEvents, IDrawEntropyImageListener
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
@@ -132,8 +132,6 @@ namespace DSIS.SimpleRunner
                                AbstractImageBuilderContext<Q> cx)
     {
       AppendAttribute(myStep, "time", (DateTime.Now - myComputationStepStartedTime).TotalMilliseconds);
-      myStep = null;
-      myGraphElement = null;
 
       Serialize();
     }
@@ -150,7 +148,7 @@ namespace DSIS.SimpleRunner
     public void OnComputeEntropyStarted()
     {
       myComputationEntropyStartedTime = DateTime.Now;
-      myEntropy = AppendElement(myCoputationElement, "entropy");
+      myEntropy = AppendElement(myStep, "entropy");
     }
 
     public void OnComputeEntropyFinished(double[] value)
@@ -161,17 +159,28 @@ namespace DSIS.SimpleRunner
       {
         double d = value[i];
         XmlElement el = AppendElement(myEntropy, "entropy-step");
-        AppendAttribute(el, "value", d);
+        AppendAttribute(el, "value", d.ToString("F6"));
         AppendAttribute(el, "project", i);
       }
 
       Serialize();
     }
 
+    public void EntropyImageAdded(string file)
+    {
+      Image(file, myCoputationElement, "entropy");
+    }
+
     public void ImageFile(string file)
     {
-      XmlElement imageElement = AppendElement(myCoputationElement, "draw-image");
+      Image(file, myCoputationElement, "phase");
+    }
+
+    private void Image(string file, XmlNode parent, string type)
+    {
+      XmlElement imageElement = AppendElement(parent, "draw-image");
       AppendAttribute(imageElement, "image", file);
+      AppendAttribute(imageElement, "type", type);
 
       if (file.StartsWith(myBasePath))
       {

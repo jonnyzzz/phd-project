@@ -17,11 +17,16 @@ namespace DSIS.GnuplotDrawer
     {
       for (int i = 0; i < myDim; i++)
       {
-        myWriter.Write(pt.Point[i].ToString("E", CultureInfo.InvariantCulture));
+        myWriter.Write(DoubleToString(pt.Point[i]));
         myWriter.Write(' ');
       }
       myWriter.WriteLine();
       myPointsCount++;
+    }
+
+    public static string DoubleToString(double d)
+    {
+      return d.ToString("R", CultureInfo.InvariantCulture);
     }
 
     public int PointsCount
