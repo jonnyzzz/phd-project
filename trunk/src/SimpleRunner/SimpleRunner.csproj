@@ -39,6 +39,7 @@
     <Compile Include="ComputeEntropyListener.cs" />
     <Compile Include="ConsoleListener.cs" />
     <Compile Include="DrawEntropyListener.cs" />
+    <Compile Include="DrawEntropyUtil.cs" />
     <Compile Include="DrawLastComputationResultListener.cs" />
     <Compile Include="FullImageBuilder.cs" />
     <Compile Include="FullImageBuilderWithLog.cs" />

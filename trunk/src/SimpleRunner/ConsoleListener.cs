@@ -5,14 +5,14 @@ using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
 {
-  public class ConsoleListener<T, Q> : IAbstractImageBuilderListener<T, Q>, IComputeEntropyListener,
+  public class ConsoleListener<T, Q> : AbstractImageBuilderListener<T, Q>, IComputeEntropyListener,
                                        IDrawLastComputationResultEvents
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {        
     private int stepCount = 0;
     
-    public void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
+    public override void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {
       Console.Out.WriteLine("Computation started.\r\nSystem {0},\r\nMethod {1},\r\nIcs {2}",cx.Info.PresentableName,cx.Builder.PresentableName,typeof(T).Name);
       Console.Out.WriteLine("isUnsimmetric = {0}", isUnsimmetric);
@@ -21,7 +21,7 @@ namespace DSIS.SimpleRunner
       stepCount = 0;
     }
 
-    public void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
+    public override void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
     {
       stepCount++;
       Console.Out.WriteLine("Step {0} started.", stepCount);
@@ -33,12 +33,12 @@ namespace DSIS.SimpleRunner
       Console.Out.WriteLine();
     }
 
-    public void GraphConstructed(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
+    public override void GraphConstructed(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
     {
       Console.Out.WriteLine("Graph constructed.Nodes = {0}", graph.NodesCount);      
     }
 
-    public void GraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void GraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                            AbstractImageBuilderContext<Q> cx)
     {
       Console.Out.WriteLine("Graph components done. {0} components", comps.ComponentCount);
@@ -50,13 +50,13 @@ namespace DSIS.SimpleRunner
       Console.Out.Write("Components: ");      
     }
 
-    public void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                AbstractImageBuilderContext<Q> cx)
     {
       Console.Out.WriteLine("Step {0} finished", stepCount);      
     }
 
-    public void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                     AbstractImageBuilderContext<Q> cx)
     {
       Console.Out.WriteLine("Computation finished");      

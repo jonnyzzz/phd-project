@@ -28,17 +28,20 @@ namespace DSIS.SimpleRunner
     }
 
 
-    public override void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
+    public override VoidDelegate ComputationStartedC(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {
       string title = CreateTitle(cx);
-      FireListeners(delegate(IComputationPathListener obj)
-                      {
-                        foreach (Pair<string, Action<string>> pair in obj.FormatPath)
-                        {
-                          pair.Second(Path.Combine(myPath, string.Format(pair.First, title)));
-                        }
-                        obj.ComputationTitle(title);
-                      });
+      return delegate
+               {
+                 FireListeners(delegate(IComputationPathListener obj)
+                                 {
+                                   foreach (Pair<string, Action<string>> pair in obj.FormatPath)
+                                   {
+                                     pair.Second(Path.Combine(myPath, string.Format(pair.First, title)));
+                                   }
+                                   obj.ComputationTitle(title);
+                                 });
+               };
     }
   }
 }

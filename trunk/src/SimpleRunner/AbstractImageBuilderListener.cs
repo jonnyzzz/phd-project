@@ -1,5 +1,6 @@
 using DSIS.Graph;
 using DSIS.IntegerCoordinates;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
@@ -7,6 +8,12 @@ namespace DSIS.SimpleRunner
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
+    public virtual VoidDelegate ComputationStartedC(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
+    {
+      ComputationStarted(system, cx, isUnsimmetric);
+      return delegate { };
+    }
+
     public virtual void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {      
     }

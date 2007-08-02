@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using DSIS.GnuplotDrawer;
 using DSIS.Graph;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
@@ -12,68 +10,69 @@ namespace DSIS.SimpleRunner
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
-    private Dictionary<int, double[]> mySeries = new Dictionary<int, double[]>();
-    private int myStepNumber = 0;
-    private int myCounputation = 0;
-    private string myPath;
-    private string myTitle;
-
+    private readonly Dictionary<string, DrawEntropyUtil> myDrawers = new Dictionary<string, DrawEntropyUtil>();
+    private readonly Hashset<string> myWorking = new Hashset<string>();
 
     public IEnumerable<Pair<string, Action<string>>> FormatPath
     {
-      get { yield return new Pair<string, Action<string>>("{0}", delegate(string path) { myPath = path; }); }
+      get {
+        foreach (KeyValuePair<string, DrawEntropyUtil> pair in myDrawers)
+        {
+          yield return pair.Value.FormatPath;
+        }        
+      }
     }
 
     public void ComputationTitle(string title)
     {
-      myTitle = title;
+      foreach (KeyValuePair<string, DrawEntropyUtil> pair in myDrawers)
+      {
+        pair.Value.Title = pair.Key + " " + title;
+      }
     }
 
     public override void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {
-      mySeries = new Dictionary<int, double[]>();
-      myStepNumber = 0;
-      myCounputation++;
+      myDrawers["Full"] = new DrawEntropyUtil();
+      myDrawers["BigStep"] = new DrawEntropyUtil();      
     }
-
 
     public override void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
-    {
-      myStepNumber++;
+    {   
+      myWorking.Clear();
+
+      if (AreAllEqual(system.Subdivision))
+      {
+        myWorking.AddRange(myDrawers.Keys);
+      } else
+      {
+        myWorking.Add("Full");
+      }
     }
 
-    private string CreateFileName(string ext)
+    private static bool AreAllEqual(long[] ls)
     {
-      string path = myPath + "/entropy/image_" + myCounputation + ext;
-      string dir = Path.GetDirectoryName(path);
-      if (!Directory.Exists(dir))
-        Directory.CreateDirectory(dir);
-      return path;
+      long l = ls[0];
+      for(int i=1; i<ls.Length; i++)
+      {
+        if (l != ls[i])
+          return false;
+      }
+      return true;
     }
 
-    private GnuplotScriptParameters CreateGnuplotParams(string image)
-    {
-      GnuplotScriptParameters ps = new GnuplotScriptParameters(image, "Entropy for " + myTitle);
-      ps.ShowKeyHistory = true;
-      return ps;
-    }
-    
     public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                              AbstractImageBuilderContext<Q> cx)
     {
-      string image = CreateFileName(".png");
-
-      LinesScriptGen gen = new LinesScriptGen(CreateFileName(".pnuplot"), CreateGnuplotParams(image));
-      foreach (KeyValuePair<int, double[]> pair in mySeries)
+      foreach (KeyValuePair<string, DrawEntropyUtil> pair in myDrawers)
       {
-        gen.AddSeria(pair.Key.ToString(), pair.Value);
-      }
-      gen.Finish();
+        string image = pair.Value.DrawImage(pair.Key);
 
-      GnuplotDrawer.GnuplotDrawer dw = new GnuplotDrawer.GnuplotDrawer();
-      dw.DrawImage(gen);
-
-      FireListeners(delegate(IDrawEntropyImageListener obj) { obj.EntropyImageAdded(image); });
+        FireListeners(delegate(IDrawEntropyImageListener obj)
+                        {
+                          obj.EntropyImageAdded(pair.Key, image);
+                        });  
+      }      
     }
 
     public void OnComputeEntropyStarted()
@@ -82,7 +81,11 @@ namespace DSIS.SimpleRunner
 
     public void OnComputeEntropyFinished(double[] value)
     {
-      mySeries[myStepNumber] = value;
+      foreach (KeyValuePair<string, DrawEntropyUtil> pair in myDrawers)
+      {
+        if (myWorking.Contains(pair.Key))
+          pair.Value.AppendResult(value);
+      }
     }
   }
 }

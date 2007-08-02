@@ -9,7 +9,7 @@ using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
 {
-  public class XmlAbstractImageBuilderListener<T, Q> : IAbstractImageBuilderListener<T, Q>, IComputeEntropyListener,
+  public class XmlAbstractImageBuilderListener<T, Q> : AbstractImageBuilderListener<T, Q>, IComputeEntropyListener,
                                                        IDrawLastComputationResultEvents, IDrawEntropyImageListener
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
@@ -69,7 +69,7 @@ namespace DSIS.SimpleRunner
       myDocument.Save(myFile);
     }
 
-    public void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
+    public override void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {
       myComputationStartedTime = DateTime.Now;
       myCoputationElement = AppendElement(myRootElement, "computation");
@@ -93,7 +93,7 @@ namespace DSIS.SimpleRunner
       return sb.ToString();
     }
 
-    public void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
+    public override void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
     {
       stepCount++;
       myComputationStepStartedTime = DateTime.Now;
@@ -103,7 +103,7 @@ namespace DSIS.SimpleRunner
       Serialize();
     }
 
-    public void GraphConstructed(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
+    public override void GraphConstructed(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
     {
       myComputationGraphConstructedTime = DateTime.Now;
       myGraphElement = AppendElement(myStep, "graph");
@@ -111,7 +111,7 @@ namespace DSIS.SimpleRunner
       Serialize();
     }
 
-    public void GraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void GraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                            AbstractImageBuilderContext<Q> cx)
     {
       XmlElement components = AppendElement(myGraphElement, "components");
@@ -128,7 +128,7 @@ namespace DSIS.SimpleRunner
       Serialize();
     }
 
-    public void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                AbstractImageBuilderContext<Q> cx)
     {
       AppendAttribute(myStep, "time", (DateTime.Now - myComputationStepStartedTime).TotalMilliseconds);
@@ -136,7 +136,7 @@ namespace DSIS.SimpleRunner
       Serialize();
     }
 
-    public void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                     AbstractImageBuilderContext<Q> cx)
     {
       AppendAttribute(myCoputationElement, "time", (DateTime.Now - myComputationStartedTime).TotalMilliseconds);
@@ -166,9 +166,10 @@ namespace DSIS.SimpleRunner
       Serialize();
     }
 
-    public void EntropyImageAdded(string file)
+    public void EntropyImageAdded(string imageName, string file)
     {
-      Image(file, myCoputationElement, "entropy");
+      XmlElement img = Image(file, myCoputationElement, "entropy");
+      AppendAttribute(img, "entropy-type", imageName);
     }
 
     public void ImageFile(string file)
@@ -176,7 +177,7 @@ namespace DSIS.SimpleRunner
       Image(file, myCoputationElement, "phase");
     }
 
-    private void Image(string file, XmlNode parent, string type)
+    private XmlElement Image(string file, XmlNode parent, string type)
     {
       XmlElement imageElement = AppendElement(parent, "draw-image");
       AppendAttribute(imageElement, "image", file);
@@ -190,6 +191,8 @@ namespace DSIS.SimpleRunner
         AppendAttribute(imageElement, "rel-image", rel.TrimStart(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar));
       }
       Serialize();
+
+      return imageElement;
     }
   }
 }

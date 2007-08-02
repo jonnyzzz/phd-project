@@ -198,9 +198,19 @@ namespace DSIS.SimpleRunner
 
     protected virtual void OnComputationStarted(T system, AbstractImageBuilderContext<Q> cx)
     {
+      List<VoidDelegate> post = new List<VoidDelegate>();
       foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
       {
-        listener.ComputationStarted(system, cx, myUseUnsimmetric);
+        VoidDelegate d = listener.ComputationStartedC(system, cx, myUseUnsimmetric);
+        if (d != null)
+        {
+          post.Add(d);
+        }
+      }
+
+      foreach (VoidDelegate voidDelegate in post)
+      {
+        voidDelegate();
       }
     }
 

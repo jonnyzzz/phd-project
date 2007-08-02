@@ -2,6 +2,6 @@ namespace DSIS.SimpleRunner
 {
   public interface IDrawEntropyImageListener
   {
-    void EntropyImageAdded(string file);
+    void EntropyImageAdded(string imageName, string file);
   }
 }
