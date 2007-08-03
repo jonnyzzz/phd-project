@@ -33,7 +33,7 @@ namespace DSIS.SimpleRunner
 
     public override void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {
-      myDrawers["Full"] = new DrawEntropyUtil();
+//      myDrawers["Full"] = new DrawEntropyUtil();
       myDrawers["BigStep"] = new DrawEntropyUtil();      
     }
 

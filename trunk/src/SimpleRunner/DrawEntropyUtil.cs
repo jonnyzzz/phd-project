@@ -34,6 +34,23 @@ namespace DSIS.SimpleRunner
       return path;
     }
 
+    private static List<double> Scan(Dictionary<int, double[]> ds, int idx)
+    {
+      List<double> result = new List<double>();
+      for(int i = idx; ; i++)
+      {
+        double[] dl;
+        if (!ds.TryGetValue(i, out dl))
+          break;
+        int k = i - idx;
+        if (k >= 0 && k < dl.Length)
+          result.Add(dl[i - idx]);
+        else
+          break;
+      }
+      return result;
+    }
+
     private GnuplotScriptParameters CreateGnuplotParams(string image)
     {
       GnuplotScriptParameters ps = new GnuplotScriptParameters(image, "Entropy for " + myTitle);
@@ -48,7 +65,7 @@ namespace DSIS.SimpleRunner
       LinesScriptGen gen = new LinesScriptGen(CreateFileName(".pnuplot"), CreateGnuplotParams(image));
       foreach (KeyValuePair<int, double[]> pair in mySeries)
       {
-        gen.AddSeria(pair.Key.ToString(), pair.Value);
+        gen.AddSeria(pair.Key.ToString(), Scan(mySeries, pair.Key));
       }
       gen.Finish();
 

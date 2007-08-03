@@ -119,6 +119,18 @@ namespace DSIS.Graph.Entropy
 //      Assert.AreEqual(v1, v2, 1e-5);
     }
 
+    [Test]
+    public void Test_foo()
+    {
+      double v1 = -1/6.0*Math.Log(2) - 1/4.0*Math.Log(3) + 5/12.0*Math.Log(5);
+      double v2 = 2/5.0*Math.Log(2);
+
+      Console.Out.WriteLine("v1 = {0}", v1);
+      Console.Out.WriteLine("v2 = {0}", v2);
+
+      Console.Out.WriteLine("v1-v2 = {0}", v1-v2);
+
+    }
     private static double e(double e)
     {
       return e*Math.Log(e);

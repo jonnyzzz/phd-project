@@ -37,10 +37,10 @@ namespace DSIS.SimpleRunner
         {
 //          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
 //            new AdaptiveMethod<T, Q>(), AdaptiveMethodSettings.DEFAULT),
-          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-            new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3})),
-          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-            new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3}, 0.1)),
+//          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
+//            new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3})),
+//          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
+//            new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3}, 0.1)),
           new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
             new BoxMethod<T, Q>(), BoxMethodSettings.Default),
 //          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
