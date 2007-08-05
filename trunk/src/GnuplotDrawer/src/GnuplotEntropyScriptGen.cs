@@ -1,11 +1,13 @@
 namespace DSIS.GnuplotDrawer
 {
-  public class Gnuplot3dScriptGen : PngWriterBase, IGnuplotPhaseScriptGen
+  public class GnuplotEntropyScriptGen : PngWriterBase, IGnuplotPhaseScriptGen
   {
     private bool myIsFirstFile = true;
 
-    public Gnuplot3dScriptGen(string filename, GnuplotScriptParameters @params) : base(filename, @params)
+    public GnuplotEntropyScriptGen(string filename, GnuplotScriptParameters @params)
+      : base(filename, @params)
     {
+      myWriter.WriteLine("set view map;");
       myWriter.Write("splot ");
     }
 
@@ -22,6 +24,8 @@ namespace DSIS.GnuplotDrawer
         myWriter.Write(" dots ");
       else
         myWriter.Write(" points ");
+
+      myWriter.Write(" palette ");
     }
 
     public override void Dispose()

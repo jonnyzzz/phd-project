@@ -4,9 +4,10 @@ using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph.Entropy.Impl
 {
-  internal class StrangeEntropyEvaluatorImpl : EntropyEvaluatorBase, IEntropyEvaluator
+  internal class StrangeEntropyEvaluatorImpl<T> : EntropyEvaluatorBase<T>
+    where T : ICellCoordinate<T>
   {
-    protected override ILoopIterator<T> CreateIterator<T, C>(C callback, IGraphStrongComponents<T> comps,
+    protected override ILoopIterator<T> CreateIterator<C>(C callback, IGraphStrongComponents<T> comps,
                                                              IGraph<T> graph, IStrongComponentInfo info,
                                                              IProgressInfo progress)
     {

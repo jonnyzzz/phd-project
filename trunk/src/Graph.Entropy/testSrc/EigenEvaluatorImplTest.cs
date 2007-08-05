@@ -1,4 +1,5 @@
 using DSIS.Graph.Entropy.Impl;
+using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy
@@ -12,5 +13,11 @@ namespace DSIS.Graph.Entropy
     {
       EntropyEvaluatorImpl imp = new EntropyEvaluatorImpl();            
     }    
+
+
+    private class EntropyEvaluatorImpl : EntropyEvaluatorImpl<IntegerCoordinate>
+    {
+      
+    }
   }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl;
@@ -151,6 +152,50 @@ namespace DSIS.Graph.Entropy
       return new Pair<double, List<AssertData>>(e, new List<AssertData>(p));
     }
 
+    private class Listener : IEntropyListener<IntegerCoordinate>
+    {
+      public double Result;
+      public IDictionary<IntegerCoordinate, double> Measure;
+
+      public void OnResult(double result, IDictionary<IntegerCoordinate, double> measure)
+      {
+        Result = result;
+        Measure = measure;
+      }
+    }
+
+    private class Controller : Listener, IEntropyEvaluatorController<IntegerCoordinate>
+    {
+      private readonly IGraph<IntegerCoordinate> myGraph;
+      private readonly IGraphStrongComponents<IntegerCoordinate> myComponents;
+
+      public Controller(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components)
+      {
+        myGraph = graph;
+        myComponents = components;
+      }
+
+      public IGraph<IntegerCoordinate> Graph
+      {
+        get { return myGraph; }
+      }
+
+      public IGraphStrongComponents<IntegerCoordinate> Components
+      {
+        get { return myComponents; }
+      }
+
+      public bool SubdivideNext(ICellCoordinateSystem<IntegerCoordinate> system)
+      {
+        return false;
+      }
+
+      public void SetCoordinateSystem(ICellCoordinateSystem<IntegerCoordinate> system)
+      {
+        
+      }
+    }
+
     protected static void DoTest2(List<List<int>> loops, params Pair<double, List<AssertData>>[] expected)
     {
       EntropyBackStepGraphWeightCallback<IntegerCoordinate> cb = DoTest(loops);
@@ -159,7 +204,10 @@ namespace DSIS.Graph.Entropy
       {
         Pair<double, List<AssertData>> pair = expected[i];
         
-        double ent = cb.ComputeAntropy(NullProgressInfo.INSTANCE);
+        Listener listener = new Listener();
+
+        cb.ComputeAntropy(NullProgressInfo.INSTANCE, listener);
+        double ent = listener.Result;
 
         if (i == 0)
           norm = cb.Norm;

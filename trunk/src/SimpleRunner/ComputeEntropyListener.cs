@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Graph.Entropy;
@@ -7,7 +7,7 @@ using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
 {
-  public class ComputeEntropyListener<T,Q> : ProvideExternalListenerBase<T,Q, IComputeEntropyListener>
+  public class ComputeEntropyListener<T,Q> : ProvideExternalListenerBase<T,Q, IComputeEntropyListener<Q>>
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
@@ -16,30 +16,17 @@ namespace DSIS.SimpleRunner
     {
       OnComputeEntropyStarted();
 
-      double[] entropy = EntropyEvaluator.GetLoopEntropyEvaluator().ComputeEntropyWithBackSteps(NullProgressInfo.INSTANCE, graph, comps);
+      Controller controller = new Controller(graph, comps, this);
 
-      OnComputeEntropyFinished(TrimRight(entropy)); 
-    }
+      IEntropyEvaluator<Q> evaluator = EntropyEvaluator<Q>.GetLoopEntropyEvaluator();
+      evaluator.ComputeEntropy(controller, NullProgressInfo.INSTANCE);
 
-    private static double[] TrimRight(double[] ds)
-    {
-      int idx;
-      for(idx = ds.Length-1; idx >=0; idx--)
-      {
-        if (Math.Abs(ds[idx]) >= 1e-6)
-          break;
-      }
-      List<double> r = new List<double>();
-      for(int i=0; i<idx; i++)
-      {
-        r.Add(ds[i]);
-      }
-      return r.ToArray();
+      OnComputeEntropyFinished(controller.Results); 
     }
 
     private void OnComputeEntropyFinished(double[] entropy)
     {
-      FireListeners(delegate(IComputeEntropyListener listener)
+      FireListeners(delegate(IComputeEntropyListener<Q> listener)
                       {
                         listener.OnComputeEntropyFinished(entropy);
                       });
@@ -48,10 +35,60 @@ namespace DSIS.SimpleRunner
 
     private void OnComputeEntropyStarted()
     {
-      FireListeners(delegate(IComputeEntropyListener listener)
+      FireListeners(delegate(IComputeEntropyListener<Q> listener)
                       {
                         listener.OnComputeEntropyStarted();
                       });
+    }
+
+    private class Controller : IEntropyEvaluatorController<Q>
+    {
+      private readonly ComputeEntropyListener<T, Q> myHost;
+      private readonly IGraph<Q> myGraph;
+      private readonly IGraphStrongComponents<Q> myComponents;
+      private readonly List<double> myResults = new List<double>();
+      private ICellCoordinateSystem<Q> mySystem;
+
+      public Controller(IGraph<Q> graph, IGraphStrongComponents<Q> components, ComputeEntropyListener<T, Q> host)
+      {
+        myGraph = graph;
+        myHost = host;
+        myComponents = components;
+      }
+
+      public double[] Results
+      {
+        get { return myResults.ToArray(); }
+      }
+
+      public IGraph<Q> Graph
+      {
+        get { return myGraph; }
+      }
+
+      public IGraphStrongComponents<Q> Components
+      {
+        get { return myComponents; }
+      }
+
+      public bool SubdivideNext(ICellCoordinateSystem<Q> system)
+      {
+        return system.Subdivision[0] > 10;
+      }
+
+      public void SetCoordinateSystem(ICellCoordinateSystem<Q> system)
+      {
+        mySystem = system;
+      }
+
+      public void OnResult(double result, IDictionary<Q, double> measure)
+      {
+        myResults.Add(result);
+        myHost.FireListeners(delegate(IComputeEntropyListener<Q> obj)
+                               {
+                                 obj.OnComputeEntropyStep(result, measure, mySystem);
+                               });
+      }
     }
   }
 }

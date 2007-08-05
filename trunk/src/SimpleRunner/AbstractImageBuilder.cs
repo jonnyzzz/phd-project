@@ -132,6 +132,25 @@ namespace DSIS.SimpleRunner
       }
     }
 
+    protected delegate VoidDelegate WithListener(IAbstractImageBuilderListener<T, Q> listener);
+    protected void Fire(WithListener listener)
+    {
+      List<VoidDelegate> post =new List<VoidDelegate>();
+      foreach (IAbstractImageBuilderListener<T, Q> builderListener in myListeners)
+      {
+        VoidDelegate p = listener(builderListener);
+        if (p != null)
+        {
+          post.Add(p);
+        }
+      }
+
+      foreach (VoidDelegate voidDelegate in post)
+      {
+        voidDelegate();
+      }
+    }
+
     protected virtual void DoConstruct(ICellImageBuilder<Q> builder, ICellImageBuilderSettings settings,
                                        IProgressInfo progress)
     {
@@ -216,45 +235,45 @@ namespace DSIS.SimpleRunner
 
     protected virtual void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
     {
-      foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
-      {
-        listener.OnStepStarted(system, cx, (long[]) subdivide.Clone());
-      }
+      Fire(delegate(IAbstractImageBuilderListener<T, Q> listener)
+             {
+               return listener.OnStepStartedC(system, cx, (long[]) subdivide.Clone());
+             });
     }
 
     protected virtual void OnGraphConstructed(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
     {
-      foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
-      {
-        listener.GraphConstructed(graph, system, cx);
-      }
+      Fire(delegate(IAbstractImageBuilderListener<T, Q> listener)
+             {
+               return listener.GraphConstructedC(graph, system, cx);
+             });
     }
 
     protected virtual void OnGraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                                         AbstractImageBuilderContext<Q> cx)
     {
-      foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
-      {
-        listener.GraphComponentsConstructed(comps, graph, system, cx);
-      }
+      Fire(delegate(IAbstractImageBuilderListener<T, Q> listener)
+             {
+               return listener.GraphComponentsConstructedC(comps, graph, system, cx);
+             });
     }
 
     protected virtual void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                           AbstractImageBuilderContext<Q> cx)
     {
-      foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
-      {
-        listener.OnStepFinished(comps, graph, system, cx);
-      }
+      Fire(delegate(IAbstractImageBuilderListener<T, Q> listener)
+             {
+               return listener.OnStepFinishedC(comps, graph, system, cx);
+             });
     }
 
     protected virtual void OnComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                                  AbstractImageBuilderContext<Q> cx)
     {
-      foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
+      Fire(delegate(IAbstractImageBuilderListener<T, Q> listener)
       {
-        listener.ComputationFinished(comps, graph, system, cx);
-      }
+        return listener.ComputationFinishedC(comps, graph, system, cx);
+      });
     }
   }
 }

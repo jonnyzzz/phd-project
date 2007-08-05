@@ -5,59 +5,37 @@ using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph.Entropy.Impl
 {
-  internal abstract class EntropyEvaluatorBase
+  internal abstract class EntropyEvaluatorBase<T> : IEntropyEvaluator<T>
+    where T : ICellCoordinate<T>
   {
-    public double ComputeEntropy<T>(IProgressInfo progress, IGraph<T> graph, IGraphStrongComponents<T> comps)
-      where T : ICellCoordinate<T>
+    public void ComputeEntropy(IEntropyEvaluatorController<T> controller, IProgressInfo progressInfo)
     {
-      EntropyGraphWeightCallback<T> cb = new EntropyGraphWeightCallback<T>();
-      foreach (IStrongComponentInfo info in comps.Components)
-      {
-        ILoopIterator<T> it = CreateIterator(cb, comps, graph, info, progress);
-        it.WidthSearch(
-          progress,
-          info.NodesCount,
-          GetFirst(comps.GetNodes(new IStrongComponentInfo[] {info})));
-      }
-
-      return cb.ComputeAntropy(progress);
-    }
-
-    public double[] ComputeEntropyWithBackSteps<T>(IProgressInfo progress, IGraph<T> graph,
-                                                   IGraphStrongComponents<T> comps) where T : ICellCoordinate<T>
-    {
-      return ComputeEntropyWithBackSteps(progress, graph, comps, 1 << 30);
-    }
-
-    public double[] ComputeEntropyWithBackSteps<T>(IProgressInfo progress, IGraph<T> graph,
-                                                   IGraphStrongComponents<T> comps, int limit)
-      where T : ICellCoordinate<T>
-    {
-      List<double> results = new List<double>();
-
       EntropyBackStepGraphWeightCallback<T> cb =
-        new EntropyBackStepGraphWeightCallback<T>(graph.CoordinateSystem);
+        new EntropyBackStepGraphWeightCallback<T>(controller.Graph.CoordinateSystem);
 
-      foreach (IStrongComponentInfo info in comps.Components)
+      foreach (IStrongComponentInfo info in controller.Components.Components)
       {
-        ILoopIterator<T> it = CreateIterator(cb, comps, graph, info, progress);
+        ILoopIterator<T> it = CreateIterator(cb, controller.Components, controller.Graph, info, progressInfo);
         it.WidthSearch(
-          progress,
+          progressInfo,
           info.NodesCount,
-          GetFirst(comps.GetNodes(new IStrongComponentInfo[] {info})));
+          GetFirst(controller.Components.GetNodes(new IStrongComponentInfo[] {info})));
       }
 
-      results.Add(cb.ComputeAntropy(progress));
+      controller.SetCoordinateSystem(cb.System);
+      cb.ComputeAntropy(progressInfo, controller);
 
-      while (limit -- > 0)
+      int dim = cb.System.SystemSpace.Dimension;
+
+      while (controller.SubdivideNext(cb.System))
       {
-        cb = cb.BackStep(FillArray(2, graph.CoordinateSystem.SystemSpace.Dimension));
+        controller.SetCoordinateSystem(cb.System);
+        cb = cb.BackStep(FillArray(2, dim));
         if (cb == null)
           break;
-        results.Add(cb.ComputeAntropy(progress));
+        
+        cb.ComputeAntropy(progressInfo, controller);
       }
-
-      return results.ToArray();
     }
 
     private static long[] FillArray(long l, long dim)
@@ -70,12 +48,6 @@ namespace DSIS.Graph.Entropy.Impl
       return result;
     }
 
-    protected abstract ILoopIterator<T> CreateIterator<T, C>(
-      C callback, IGraphStrongComponents<T> comps, IGraph<T> graph,
-      IStrongComponentInfo info, IProgressInfo progress)
-      where T : ICellCoordinate<T>
-      where C : ILoopIteratorCallback<T>;
-
     private static T GetFirst<T>(IEnumerable<T> ts) where T : class
     {
       foreach (T t in ts)
@@ -84,5 +56,10 @@ namespace DSIS.Graph.Entropy.Impl
       }
       return null;
     }
+
+    protected abstract ILoopIterator<T> CreateIterator<C>(
+      C callback, IGraphStrongComponents<T> comps, IGraph<T> graph,
+      IStrongComponentInfo info, IProgressInfo progress)
+      where C : ILoopIteratorCallback<T>;
   }
 }

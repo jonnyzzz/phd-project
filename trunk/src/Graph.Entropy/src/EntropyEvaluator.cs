@@ -1,18 +1,19 @@
+using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl;
-using DSIS.Graph.Entropy.Impl.Eigen;
 
 namespace DSIS.Graph.Entropy
 {
-  public static class EntropyEvaluator
+  public static class EntropyEvaluator<T>
+    where T : ICellCoordinate<T>
   {
-    public static IEntropyEvaluator GetLoopEntropyEvaluator()
+    public static IEntropyEvaluator<T> GetLoopEntropyEvaluator()
     {
-      return new StrangeEntropyEvaluatorImpl();
+      return new StrangeEntropyEvaluatorImpl<T>();
     }    
 
-    public static IEntropyEvaluator GetEigentEvaluator()
+    public static IEntropyEvaluator<T> GetEigentEvaluator()
     {
-      return new EigenEntropyEvaluatorImpl();
+      return null;// new EigenEntropyEvaluatorImpl();
     }
   }
 }

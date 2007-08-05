@@ -14,6 +14,11 @@ namespace DSIS.GnuplotDrawer
       throw new ArgumentException("Unexpected value", "dim");
     }
 
+    public static IGnuplotPhaseScriptGen Entrorpy2d(string filename, GnuplotScriptParameters param)
+    {
+      return new GnuplotEntropyScriptGen(filename, param);
+    }
+
     public static IGnuplotScriptGen CutGen(int dim, string filename, GnuplotScriptParameters ps)
     {
       return new MergedGnuplotScriptGen(ScriptGen(dim, filename, ps));

@@ -8,10 +8,50 @@ namespace DSIS.SimpleRunner
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
+
+    private static void Void()
+    {
+      
+    }
+
+
     public virtual VoidDelegate ComputationStartedC(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {
       ComputationStarted(system, cx, isUnsimmetric);
-      return delegate { };
+      return Void;
+    }
+    
+    public virtual VoidDelegate OnStepStartedC(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
+    {
+      OnStepStarted(system, cx, subdivide);
+      return Void;
+    }
+
+    public virtual VoidDelegate GraphConstructedC(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
+    {
+      GraphConstructed(graph, system, cx);
+      return Void;
+    }
+
+    public virtual VoidDelegate GraphComponentsConstructedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+                                                    AbstractImageBuilderContext<Q> cx)
+    {
+      GraphComponentsConstructed(comps, graph, system, cx);
+      return Void;
+    }
+
+    public virtual VoidDelegate OnStepFinishedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+                                        AbstractImageBuilderContext<Q> cx)
+    {
+      OnStepFinished(comps, graph, system, cx);
+      return Void;
+    }
+
+    public virtual VoidDelegate ComputationFinishedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+                                             AbstractImageBuilderContext<Q> cx)
+    {
+      ComputationFinished(comps, graph, system, cx);
+      return Void;
     }
 
     public virtual void ComputationStarted(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)

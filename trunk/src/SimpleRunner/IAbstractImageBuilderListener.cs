@@ -12,11 +12,11 @@ namespace DSIS.SimpleRunner
     where Q : IIntegerCoordinate<Q>
   {
     VoidDelegate ComputationStartedC(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric);
-    void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide);    
-    void GraphConstructed(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
-    void GraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
-    void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);    
-    void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
+    VoidDelegate OnStepStartedC(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide);
+    VoidDelegate GraphConstructedC(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
+    VoidDelegate GraphComponentsConstructedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
+    VoidDelegate OnStepFinishedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
+    VoidDelegate ComputationFinishedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
   }
 
   public struct AbstractImageBuilderContext<Q> where Q : IIntegerCoordinate<Q>

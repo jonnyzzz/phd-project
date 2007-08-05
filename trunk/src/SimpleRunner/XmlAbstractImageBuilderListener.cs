@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+using DSIS.Core.Coordinates;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
 {
-  public class XmlAbstractImageBuilderListener<T, Q> : AbstractImageBuilderListener<T, Q>, IComputeEntropyListener,
+  public class XmlAbstractImageBuilderListener<T, Q> : AbstractImageBuilderListener<T, Q>, IComputeEntropyListener<Q>,
                                                        IDrawLastComputationResultEvents, IDrawEntropyImageListener
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
@@ -164,6 +165,10 @@ namespace DSIS.SimpleRunner
       }
 
       Serialize();
+    }
+
+    public void OnComputeEntropyStep(double value, IDictionary<Q, double> measure, ICellCoordinateSystem<Q> system)
+    {      
     }
 
     public void EntropyImageAdded(string imageName, string file)

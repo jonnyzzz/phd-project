@@ -57,9 +57,12 @@ namespace DSIS.Graph.Entropy.Impl
           continue;
 
         List<INode<T>> loop = new List<INode<T>>();
-        if (myVisited.Contains(edge) && IsUpperInTree(node, edge, loop))
+        if (myVisited.Contains(edge))
         {
-          myCallback.OnLoopFound(loop);          
+          if (IsUpperInTree(node, edge, loop))
+          {
+            myCallback.OnLoopFound(loop);
+          }
         }
         else
         {

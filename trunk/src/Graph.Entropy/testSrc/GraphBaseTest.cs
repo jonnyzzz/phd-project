@@ -40,6 +40,10 @@ namespace DSIS.Graph.Entropy
         myLoops.Add(sloop);
       }
 
+      public void OnNodeInTreeButNotInParents(INode<IntegerCoordinate> node)
+      {        
+      }
+
       public List<List<string>> Loops
       {
         get { return myLoops; }

@@ -27,6 +27,11 @@ namespace DSIS.Graph.Entropy.Impl
       }
     }
 
+    public void OnNodeInTreeButNotInParents(INode<T> node)
+    {
+      
+    }
+
     private class LoopData
     {
       public readonly IList<INode<T>> Loop;

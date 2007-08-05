@@ -1,22 +1,32 @@
 /*
- * Created by: 
+ * Created by: Eugene Petrenko
  * Created: 21 марта 2007 г.
  */
 
+using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
+using DSIS.IntegerCoordinates;
 
 namespace DSIS.Graph.Entropy
 {
-  public interface IEntropyEvaluator
+  public interface IEntropyEvaluator<T>
+    where T : ICellCoordinate<T>
+  { 
+    void ComputeEntropy(IEntropyEvaluatorController<T> controller, IProgressInfo progressInfo);
+  }
+
+  public interface IEntropyListener<T> where T : ICellCoordinate<T>
   {
-    double ComputeEntropy<T>(IProgressInfo progress, IGraph<T> graph, IGraphStrongComponents<T> comps)
-      where T : ICellCoordinate<T>;
+    void OnResult(double result, IDictionary<T, double> measure);
+  }
 
-    double[] ComputeEntropyWithBackSteps<T>(IProgressInfo progress, IGraph<T> graph, IGraphStrongComponents<T> comps)
-      where T : ICellCoordinate<T>;
+  public interface IEntropyEvaluatorController<T> : IEntropyListener<T> where T : ICellCoordinate<T>
+  {
+    IGraph<T> Graph { get;}
+    IGraphStrongComponents<T> Components { get; }
 
-    double[] ComputeEntropyWithBackSteps<T>(IProgressInfo progress, IGraph<T> graph, IGraphStrongComponents<T> comps, int limit)
-      where T : ICellCoordinate<T>;
+    bool SubdivideNext(ICellCoordinateSystem<T> system);
+    void SetCoordinateSystem(ICellCoordinateSystem<T> system);
   }
 }

@@ -38,8 +38,12 @@
     <Compile Include="ComputationPathListener.cs" />
     <Compile Include="ComputeEntropyListener.cs" />
     <Compile Include="ConsoleListener.cs" />
+    <Compile Include="DrawBase.cs" />
+    <Compile Include="DrawEntropyBase.cs" />
     <Compile Include="DrawEntropyListener.cs" />
-    <Compile Include="DrawEntropyUtil.cs" />
+    <Compile Include="DrawEntropyWithSpace.cs" />
+    <Compile Include="ProjectTheSameMeasureEntropyDraw.cs" />
+    <Compile Include="ProjectToTheSameEntropyDraw.cs" />
     <Compile Include="DrawLastComputationResultListener.cs" />
     <Compile Include="FullImageBuilder.cs" />
     <Compile Include="FullImageBuilderWithLog.cs" />

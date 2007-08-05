@@ -1,11 +1,13 @@
 using System;
+using System.Collections.Generic;
+using DSIS.Core.Coordinates;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
 {
-  public class ConsoleListener<T, Q> : AbstractImageBuilderListener<T, Q>, IComputeEntropyListener,
+  public class ConsoleListener<T, Q> : AbstractImageBuilderListener<T, Q>, IComputeEntropyListener<Q>,
                                        IDrawLastComputationResultEvents
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
@@ -72,6 +74,10 @@ namespace DSIS.SimpleRunner
       {
         Console.Out.WriteLine("Entropy {0}", d);      
       }      
+    }
+
+    public void OnComputeEntropyStep(double value, IDictionary<Q, double> measure, ICellCoordinateSystem<Q> system)
+    {      
     }
 
     public void ImageFile(string file)

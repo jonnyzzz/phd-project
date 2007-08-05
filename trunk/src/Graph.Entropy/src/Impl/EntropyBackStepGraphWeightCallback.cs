@@ -13,6 +13,11 @@ namespace DSIS.Graph.Entropy.Impl
       mySystem = system;
     }
 
+    public ICellCoordinateSystem<Q> System
+    {
+      get { return mySystem; }
+    }
+
     public EntropyBackStepGraphWeightCallback<Q> BackStep(long[] power)
     {
       ICellCoordinateSystemProjector<Q> projector = mySystem.Project(power);
@@ -34,6 +39,10 @@ namespace DSIS.Graph.Entropy.Impl
       }
       instance.Norm = Norm;
       return instance;
+    }
+
+    public void OnNodeInTreeButNotInParents(INode<Q> node)
+    {      
     }
   }
 }

@@ -33,6 +33,10 @@ namespace DSIS.Graph.Entropy.Impl
       Add(prev.Coordinate, first.Coordinate, p);
     }
 
+    public void OnNodeInTreeButNotInParents(INode<T> node)
+    {      
+    }
+
     protected IEnumerable<Pair<NodePair<T>, double>> Weights
     {
       get
@@ -59,7 +63,7 @@ namespace DSIS.Graph.Entropy.Impl
       ds[node] = b + v;
     }
     
-    public double ComputeAntropy(IProgressInfo info)
+    public void ComputeAntropy(IProgressInfo info, IEntropyListener<T> listener)
     {
       double v = 0;
       info.Minimum = 0;
@@ -81,7 +85,8 @@ namespace DSIS.Graph.Entropy.Impl
         v += Entropy(value);
         info.Tick(1.0);
       }
-      return v / LN2;
+
+      listener.OnResult(v / LN2, values);
     }
 
     private static double Entropy(double d)

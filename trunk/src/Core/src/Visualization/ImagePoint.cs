@@ -4,7 +4,7 @@ namespace DSIS.Core.Visualization
   {
     public readonly double[] Point;
 
-    public ImagePoint(double[] point)
+    public ImagePoint(params double[] point)
     {
       Point = point;
     }
