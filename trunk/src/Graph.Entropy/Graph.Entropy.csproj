@@ -40,6 +40,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\IEntropyEvaluator.cs" />
     <Compile Include="src\EntropyEvaluator.cs" />
+    <Compile Include="src\Impl\AllEngesOnALoopGraphSearch.cs" />
     <Compile Include="src\Impl\Eigen\EigenEntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\EntropyBackStepGraphWeightCallback.cs" />
     <Compile Include="src\Impl\EntropyEvaluatorBase.cs" />
@@ -49,12 +50,16 @@
     <Compile Include="src\Impl\ILoopIterator.cs" />
     <Compile Include="src\Impl\LoopIterator.cs" />
     <Compile Include="src\Impl\ILoopIteratorCallback.cs" />
+    <Compile Include="src\Impl\LoopIteratorBase.cs" />
+    <Compile Include="src\Impl\LoopIteratorFirst.cs" />
     <Compile Include="src\Impl\NodePair.cs" />
     <Compile Include="src\Impl\NonDuplicatedLoopIteratorCallback.cs" />
     <Compile Include="src\Impl\StrangeEntropyEvaluatorImpl.cs" />
+    <Compile Include="testSrc\AllEngesOnALoopGraphSearchTest.cs" />
     <Compile Include="testSrc\EigenEvaluatorImplTest.cs" />
     <Compile Include="testSrc\EntropyLoopIteratorCallbackTest.cs" />
     <Compile Include="testSrc\GraphBaseTest.cs" />
+    <Compile Include="testSrc\GraphSearchTest.cs" />
     <Compile Include="testSrc\GraphWeightSearchTest.cs" />
     <Compile Include="testSrc\LoopIteratorTest.cs" />
   </ItemGroup>

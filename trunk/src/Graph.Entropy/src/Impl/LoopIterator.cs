@@ -6,25 +6,20 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl
 {
-  public class LoopIterator<T, C> : ILoopIterator<T> where T : ICellCoordinate<T> where C : ILoopIteratorCallback<T>
+  public class LoopIterator<T> : LoopIteratorFirst<T> where T : ICellCoordinate<T>
   {
     private static readonly IEqualityComparer<INode<T>> COMPARER = NodeReferenceEqualityComparer<T>.INSTANCE;
 
     private readonly IGraph<T> myGraph;
-    private readonly IGraphStrongComponents<T> myComponents;
-    private readonly IStrongComponentInfo myComponent;
-    private readonly C myCallback;
 
     private SearchTreeNode mySearchRoot;
     private readonly Queue<SearchTreeNode> myNodes = new Queue<SearchTreeNode>();
     private readonly Hashset<INode<T>> myVisitedNodes = new Hashset<INode<T>>();
 
-    public LoopIterator(C callback, IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component)
+
+    public LoopIterator(ILoopIteratorCallback<T> callback, IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component) : base(callback, components, component)
     {
       myGraph = graph;
-      myComponents = components;
-      myComponent = component;
-      myCallback = callback;
     }
 
     private static bool IsUpperInTree(SearchTreeNode root, INode<T> node, List<INode<T>> result)
@@ -63,7 +58,7 @@ namespace DSIS.Graph.Entropy.Impl
       }
     }
 
-    public void WidthSearch(IProgressInfo info, long nodesCount, INode<T> node)
+    protected override void WidthSearch(IProgressInfo info, long nodesCount, INode<T> node)
     {
       mySearchRoot = new SearchTreeNode(null, node);
 
@@ -96,20 +91,5 @@ namespace DSIS.Graph.Entropy.Impl
         return COMPARER.Equals(Node, node);
       }
     }
-//    private sealed class SearchTreeNodeEqualityComparer : IEqualityComparer<SearchTreeNode>
-//    {
-//      public static readonly IEqualityComparer<SearchTreeNode> INSTANCE 
-//        = new SearchTreeNodeEqualityComparer();
-//
-//      public bool Equals(SearchTreeNode x, SearchTreeNode y)
-//      {
-//        return x.Hash == y.Hash && x.Parent == y.Parent && COMPARER.Equals(x.Node, y.Node);
-//      }
-//
-//      public int GetHashCode(SearchTreeNode obj)
-//      {
-//        return COMPARER.GetHashCode(obj.Node) | (obj.Parent != null ? COMPARER.GetHashCode(obj.Parent.Node) : 0);
-//      }
-//    }
   }
 }

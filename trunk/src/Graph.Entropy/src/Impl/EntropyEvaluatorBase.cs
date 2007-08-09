@@ -16,10 +16,7 @@ namespace DSIS.Graph.Entropy.Impl
       foreach (IStrongComponentInfo info in controller.Components.Components)
       {
         ILoopIterator<T> it = CreateIterator(cb, controller.Components, controller.Graph, info, progressInfo);
-        it.WidthSearch(
-          progressInfo,
-          info.NodesCount,
-          GetFirst(controller.Components.GetNodes(new IStrongComponentInfo[] {info})));
+        it.WidthSearch(progressInfo);
       }
 
       controller.SetCoordinateSystem(cb.System);
@@ -46,15 +43,6 @@ namespace DSIS.Graph.Entropy.Impl
         result[i] = l;
       }
       return result;
-    }
-
-    private static T GetFirst<T>(IEnumerable<T> ts) where T : class
-    {
-      foreach (T t in ts)
-      {
-        return t;
-      }
-      return null;
     }
 
     protected abstract ILoopIterator<T> CreateIterator<C>(

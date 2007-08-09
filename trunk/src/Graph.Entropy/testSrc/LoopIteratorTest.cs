@@ -37,17 +37,17 @@ namespace DSIS.Graph.Entropy
       MockCallback mcb = new MockCallback();
       if (!filter)
       {
-        LoopIterator<IntegerCoordinate, MockCallback> gws =
-          new LoopIterator<IntegerCoordinate, MockCallback>(mcb, graph, components, GetFirst(components.Components));
+        LoopIterator<IntegerCoordinate> gws =
+          new LoopIterator<IntegerCoordinate>(mcb, graph, components, GetFirst(components.Components));
 
-        gws.WidthSearch(NullProgressInfo.INSTANCE, graph.NodesCount, GetFirst(graph.Nodes));
+        gws.WidthSearch(NullProgressInfo.INSTANCE);
       } else
       {
-        LoopIterator<IntegerCoordinate, NonDuplicatedLoopIteratorCallback<IntegerCoordinate,MockCallback>> gws =
-          new LoopIterator<IntegerCoordinate, NonDuplicatedLoopIteratorCallback<IntegerCoordinate, MockCallback>>(
+        LoopIterator<IntegerCoordinate> gws =
+          new LoopIterator<IntegerCoordinate>(
             new NonDuplicatedLoopIteratorCallback<IntegerCoordinate, MockCallback>(mcb), graph, components, GetFirst(components.Components));
 
-        gws.WidthSearch(NullProgressInfo.INSTANCE, graph.NodesCount, GetFirst(graph.Nodes));        
+        gws.WidthSearch(NullProgressInfo.INSTANCE);
       }
 
       StringBuilder sb = new StringBuilder();

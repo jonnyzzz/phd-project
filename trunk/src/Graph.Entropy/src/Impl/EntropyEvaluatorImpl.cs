@@ -17,7 +17,7 @@ namespace DSIS.Graph.Entropy.Impl
                                                 IStrongComponentInfo info, IProgressInfo progress)      
     {
       
-        return new LoopIterator<T, NonDuplicatedLoopIteratorCallback<T, C>>(
+        return new LoopIterator<T>(
             new NonDuplicatedLoopIteratorCallback<T, C>(cb), graph, comps, info);
     }
   }

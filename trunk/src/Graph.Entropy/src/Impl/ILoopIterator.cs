@@ -5,6 +5,6 @@ namespace DSIS.Graph.Entropy.Impl
 {
   public interface ILoopIterator<T> where T : ICellCoordinate<T>
   {
-    void WidthSearch(IProgressInfo info, long nodesCount, INode<T> node);
+    void WidthSearch(IProgressInfo info);
   }
 }

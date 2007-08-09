@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
@@ -11,7 +12,7 @@ namespace DSIS.Graph.Entropy.Impl
                                                              IGraph<T> graph, IStrongComponentInfo info,
                                                              IProgressInfo progress)
     {
-      return new GraphWeightSearch<T, C>(callback, graph, comps, info);
+      return new GraphWeightSearch<T>(callback, graph, comps, info);
     }
   }
 }

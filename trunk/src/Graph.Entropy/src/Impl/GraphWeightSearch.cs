@@ -6,26 +6,20 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl
 {
-  public class GraphWeightSearch<T, C> : ILoopIterator<T> where T : ICellCoordinate<T> where C : ILoopIteratorCallback<T>
+  public class GraphWeightSearch<T> : LoopIteratorFirst<T> where T : ICellCoordinate<T>
   {
     private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
 
     private readonly IGraph<T> myGraph;
-    private readonly IGraphStrongComponents<T> myComponents;
-    private readonly IStrongComponentInfo myComponent;
     private readonly Hashset<INode<T>> myVisited;
-    private readonly C myCallback;
 
     private SearchTreeNode mySearchRoot;
     private readonly Queue<SearchTreeNode> myNodes = new Queue<SearchTreeNode>();
 
-    public GraphWeightSearch(C callback, IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component)
+
+    public GraphWeightSearch(ILoopIteratorCallback<T> callback, IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component) : base(callback, components, component)
     {
       myGraph = graph;
-      myComponents = components;
-      myComponent = component;
-      myCallback = callback;
-
       myVisited = new Hashset<INode<T>>();
     }
 
@@ -71,7 +65,7 @@ namespace DSIS.Graph.Entropy.Impl
       }
     }
 
-    public void WidthSearch(IProgressInfo info, long nodesCount, INode<T> node)
+    protected override void WidthSearch(IProgressInfo info, long nodesCount, INode<T> node)
     {
       mySearchRoot = new SearchTreeNode(null, node);
 
