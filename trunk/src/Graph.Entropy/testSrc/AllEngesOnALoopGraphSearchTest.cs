@@ -1,3 +1,4 @@
+using System;
 using DSIS.Graph.Entropy.Impl;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
@@ -7,17 +8,19 @@ namespace DSIS.Graph.Entropy
   [TestFixture]
   public class AllEngesOnALoopGraphSearchTest : GraphSearchTest
   {
-    protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components)
+    protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,
+                                                  IGraphStrongComponents<T> components)
     {
       return new AllEngesOnALoopGraphSearch<T>(mcb, components, GetFirst(components.Components));
     }
 
     [Test]
+    [ExpectedException(typeof (ArgumentNullException))]
     public void Test_02()
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
+                 IntegerCoordinateSystem system = (IntegerCoordinateSystem) graph.CoordinateSystem;
                  INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
                  INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
                  INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));
@@ -34,7 +37,7 @@ namespace DSIS.Graph.Entropy
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
+                 IntegerCoordinateSystem system = (IntegerCoordinateSystem) graph.CoordinateSystem;
                  INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
                  INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
                  INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));
@@ -44,7 +47,8 @@ namespace DSIS.Graph.Entropy
                  graph.AddEdgeToNode(n2, n3);
                  graph.AddEdgeToNode(n3, n4);
                  graph.AddEdgeToNode(n4, n1);
-               }, "1, 2, 3, 4,");
+               },
+             "2, 3, 4, 1,", "3, 4, 1, 2,", "4, 1, 2, 3,", "1, 2, 3, 4,");
     }
 
     [Test]
@@ -56,7 +60,7 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 1, 3);
                  AddEdge(graph, 3, 2);
                  AddEdge(graph, 2, 3);
-               }, "2, 3,");
+               }, "3, 2,", "2, 3,");
     }
 
     [Test]
@@ -69,7 +73,13 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 3, 2); //                 
                  AddEdge(graph, 2, 3);
                  AddEdge(graph, 3, 1);
-               }, "1, 3, ");
+               },
+             "3, 1,",
+             "2, 3, 1,",
+             "3, 2,",
+             "1, 3,",
+             "2, 3,"
+        );
     }
 
     [Test]
@@ -87,7 +97,15 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 8, 7);
                  AddEdge(graph, 7, 6);
                  AddEdge(graph, 6, 2);
-               }, "1, 2, 3, 5,", "2, 3, 8, 7, 6,");
+               },
+             "2, 3, 5, 1,",
+             "3, 5, 1, 2,",
+             "8, 7, 6, 2, 3,",
+             "5, 1, 2, 3,",
+             "1, 2, 3, 5,",
+             "2, 3, 8, 7, 6,",
+             "6, 2, 3, 8, 7,",
+             "7, 6, 2, 3, 8,");
     }
 
     [Test]
@@ -105,8 +123,18 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 8, 7);
                  AddEdge(graph, 7, 6);
                  AddEdge(graph, 6, 2);
-               }, "1, 2,", "1, 2, 3,", "1, 2, 3, 5,", "2, 3, 8, 7, 6,");
+               },
+             "2, 1,",
+             "3, 1, 2,",
+             "1, 2,",
+             "8, 7, 6, 2, 3,",
+             "1, 2, 3,",
+             "5, 1, 2, 3,",
+             "1, 2, 3, 5,",
+             "2, 3, 8, 7, 6,",
+             "6, 2, 3, 8, 7,",
+             "7, 6, 2, 3, 8,"
+        );
     }
-    
   }
 }

@@ -40,9 +40,5 @@ namespace DSIS.Graph.Entropy.Impl
       instance.Norm = Norm;
       return instance;
     }
-
-    public void OnNodeInTreeButNotInParents(INode<Q> node)
-    {      
-    }
   }
 }
