@@ -11,11 +11,11 @@ namespace DSIS.Graph.Entropy.Impl
                                                              IGraph<T> graph, IStrongComponentInfo info,
                                                              IProgressInfo progress)
     {
-      return new GraphWeightSearch<T>(callback, graph, comps, info);
+      return new GraphWeightSearch<T>(callback, comps, info);
     }
   }
 
-  internal class StrangeEntropyAllLoopsEvaluatorImpl<T> : EntropyEvaluatorBase<T>
+  internal class StrangeEntropyAllEdgesLoopsEvaluatorImpl<T> : EntropyEvaluatorBase<T>
     where T : ICellCoordinate<T>
   {
     protected override ILoopIterator<T> CreateIterator<C>(C callback, IGraphStrongComponents<T> comps,
@@ -23,6 +23,17 @@ namespace DSIS.Graph.Entropy.Impl
                                                              IProgressInfo progress)
     {
       return new AllEngesOnALoopGraphSearch<T>(callback, comps, info);
+    }
+  }
+  
+  internal class StrangeEntropyAllNodesLoopsEvaluatorImpl<T> : EntropyEvaluatorBase<T>
+    where T : ICellCoordinate<T>
+  {
+    protected override ILoopIterator<T> CreateIterator<C>(C callback, IGraphStrongComponents<T> comps,
+                                                             IGraph<T> graph, IStrongComponentInfo info,
+                                                             IProgressInfo progress)
+    {
+      return new AllNodesOnALoopGraphSearch<T>(callback, comps, info);
     }
   }
 }

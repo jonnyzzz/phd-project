@@ -21,7 +21,7 @@ namespace DSIS.Graph.Entropy
     {
       IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
       INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(i));
-      INode<IntegerCoordinate> n2 = graph.AddNode(system.Create((j)));
+      INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(j));
       graph.AddEdgeToNode(n1, n2);
     }
 
@@ -38,10 +38,6 @@ namespace DSIS.Graph.Entropy
         }
 
         myLoops.Add(sloop);
-      }
-
-      public void OnNodeInTreeButNotInParents(INode<IntegerCoordinate> node)
-      {        
       }
 
       public List<List<string>> Loops

@@ -41,6 +41,7 @@
     <Compile Include="src\IEntropyEvaluator.cs" />
     <Compile Include="src\EntropyEvaluator.cs" />
     <Compile Include="src\Impl\AllEngesOnALoopGraphSearch.cs" />
+    <Compile Include="src\Impl\AllNodesOnALoopGraphSearch.cs" />
     <Compile Include="src\Impl\Eigen\EigenEntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\EntropyBackStepGraphWeightCallback.cs" />
     <Compile Include="src\Impl\EntropyEvaluatorBase.cs" />
@@ -56,12 +57,15 @@
     <Compile Include="src\Impl\NonDuplicatedLoopIteratorCallback.cs" />
     <Compile Include="src\Impl\StrangeEntropyEvaluatorImpl.cs" />
     <Compile Include="testSrc\AllEngesOnALoopGraphSearchTest.cs" />
+    <Compile Include="testSrc\AllNodesOnALoopGraphSearchTest.cs" />
     <Compile Include="testSrc\EigenEvaluatorImplTest.cs" />
     <Compile Include="testSrc\EntropyLoopIteratorCallbackTest.cs" />
     <Compile Include="testSrc\GraphBaseTest.cs" />
     <Compile Include="testSrc\GraphSearchTest.cs" />
     <Compile Include="testSrc\GraphWeightSearchTest.cs" />
+    <Compile Include="testSrc\LoopIteratorsPerfomance.cs" />
     <Compile Include="testSrc\LoopIteratorTest.cs" />
+    <Compile Include="testSrc\PerfomanceTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

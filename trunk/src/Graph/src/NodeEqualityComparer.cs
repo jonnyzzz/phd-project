@@ -19,20 +19,4 @@ namespace DSIS.Graph
       return COMPARER.GetHashCode(obj.Coordinate);
     }
   }
-
-  public class NodeReferenceEqualityComparer<T> : IEqualityComparer<INode<T>> where T : ICellCoordinate<T>
-  {
-    public static readonly IEqualityComparer<INode<T>> INSTANCE = new NodeReferenceEqualityComparer<T>();
-    
-    public bool Equals(INode<T> x, INode<T> y)
-    {
-      return ReferenceEquals(x, y);
-    }
-
-    public int GetHashCode(INode<T> obj)
-    {
-      //todo: Eliminate GetHashCode from INode<T> implementations
-      return obj.GetHashCode();
-    }
-  }
 }

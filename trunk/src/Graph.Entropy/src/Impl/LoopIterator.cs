@@ -8,7 +8,7 @@ namespace DSIS.Graph.Entropy.Impl
 {
   public class LoopIterator<T> : LoopIteratorFirst<T> where T : ICellCoordinate<T>
   {
-    private static readonly IEqualityComparer<INode<T>> COMPARER = NodeReferenceEqualityComparer<T>.INSTANCE;
+    private static readonly IEqualityComparer<INode<T>> COMPARER = EqualityComparerFactory<INode<T>>.GetReferenceComparer();
 
     private readonly IGraph<T> myGraph;
 

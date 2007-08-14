@@ -10,20 +10,11 @@ namespace DSIS.Graph.Entropy.Impl
   {
     private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
 
-    private readonly IGraph<T> myGraph;
-    private readonly Hashset<INode<T>> myVisited;
-
-    private SearchTreeNode mySearchRoot;
-    private readonly Queue<SearchTreeNode> myNodes = new Queue<SearchTreeNode>();
-
-
-    public GraphWeightSearch(ILoopIteratorCallback<T> callback, IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component) : base(callback, components, component)
+    public GraphWeightSearch(ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components, IStrongComponentInfo component) : base(callback, components, component)
     {
-      myGraph = graph;
-      myVisited = new Hashset<INode<T>>();
     }
 
-    private static bool IsUpperInTree(SearchTreeNode root, INode<T> node, List<INode<T>> result)
+    private static bool IsUpperInTree(SearchTreeNode root, INode<T> node, ICollection<INode<T>> result)
     {
       long hash = COMPARER.GetHashCode(node.Coordinate);
       while (root != null)
@@ -38,45 +29,41 @@ namespace DSIS.Graph.Entropy.Impl
       return false;
     }
 
-    private void WidthSearch(SearchTreeNode node)
+    protected override void WidthSearch(IProgressInfo info, long nodesCount, INode<T> anode)
     {
-      if (myVisited.Contains(node.Node))
-        return;
+      Hashset<INode<T>> visited = new Hashset<INode<T>>(EqualityComparerFactory<INode<T>>.GetComparer());
+      Queue<SearchTreeNode> queue = new Queue<SearchTreeNode>();
 
-      myVisited.Add(node.Node);
+      IStrongComponentInfo[] infos = new IStrongComponentInfo[] { myComponent };
 
-      foreach (INode<T> edge in myGraph.GetEdges(node.Node))
+      queue.Enqueue(new SearchTreeNode(null, anode));
+      while (queue.Count > 0)
       {
-        if (myComponent != myComponents.GetNodeComponent(edge))
+        SearchTreeNode node = queue.Dequeue();
+
+        if (visited.Contains(node.Node))
           continue;
 
-        List<INode<T>> loop = new List<INode<T>>();
-        if (myVisited.Contains(edge))
-        {
-          if (IsUpperInTree(node, edge, loop))
+        visited.Add(node.Node);
+
+        foreach (INode<T> edge in myComponents.GetEdgesWithFilteredEdges(node.Node, infos))
+        {          
+          if (visited.Contains(edge))
           {
-            myCallback.OnLoopFound(loop);
+            List<INode<T>> loop = new List<INode<T>>();
+            if (IsUpperInTree(node, edge, loop))
+            {
+              myCallback.OnLoopFound(loop);
+            } else
+            {
+              queue.Enqueue(new SearchTreeNode(null, edge));
+            }            
+          }
+          else
+          {
+            queue.Enqueue(new SearchTreeNode(node, edge));
           }
         }
-        else
-        {
-          myNodes.Enqueue(new SearchTreeNode(node, edge));
-        }
-      }
-    }
-
-    protected override void WidthSearch(IProgressInfo info, long nodesCount, INode<T> node)
-    {
-      mySearchRoot = new SearchTreeNode(null, node);
-
-      myNodes.Enqueue(mySearchRoot);
-
-      info.Minimum = 0;
-      info.Minimum = 1;
-      while (myNodes.Count > 0 )
-      {
-        info.Tick(1.0);
-        WidthSearch(myNodes.Dequeue());
       }
     }
 

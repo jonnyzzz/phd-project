@@ -6,7 +6,6 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
-using DSIS.IntegerCoordinates;
 
 namespace DSIS.Graph.Entropy
 {

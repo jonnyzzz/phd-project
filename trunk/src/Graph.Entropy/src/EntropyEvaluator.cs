@@ -8,7 +8,7 @@ namespace DSIS.Graph.Entropy
   {
     public static IEntropyEvaluator<T> GetLoopEntropyEvaluator()
     {
-      return new StrangeEntropyAllLoopsEvaluatorImpl<T>();
+      return new StrangeEntropyEvaluatorImpl<T>();
     }    
 
     public static IEntropyEvaluator<T> GetEigentEvaluator()

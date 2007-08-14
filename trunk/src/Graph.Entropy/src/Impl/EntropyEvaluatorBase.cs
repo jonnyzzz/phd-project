@@ -1,3 +1,4 @@
+using System;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
@@ -12,11 +13,13 @@ namespace DSIS.Graph.Entropy.Impl
       EntropyBackStepGraphWeightCallback<T> cb =
         new EntropyBackStepGraphWeightCallback<T>(controller.Graph.CoordinateSystem);
 
+      Console.Out.WriteLine("Loops search started");
       foreach (IStrongComponentInfo info in controller.Components.Components)
       {
         ILoopIterator<T> it = CreateIterator(cb, controller.Components, controller.Graph, info, progressInfo);
         it.WidthSearch(progressInfo);
       }
+      Console.Out.WriteLine("Loops search finished");
 
       controller.SetCoordinateSystem(cb.System);
       cb.ComputeAntropy(progressInfo, controller);

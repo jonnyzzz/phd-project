@@ -8,7 +8,8 @@ namespace DSIS.Graph.Entropy.Impl
     where T : ICellCoordinate<T>
     where C : ILoopIteratorCallback<T>
   {
-    private static readonly IEqualityComparer<INode<T>> COMPARER = NodeReferenceEqualityComparer<T>.INSTANCE;
+    private static readonly IEqualityComparer<INode<T>> COMPARER =
+      EqualityComparerFactory<INode<T>>.GetReferenceComparer();
 
     private readonly C myCallback;
     private readonly Hashset<LoopData> myFoundLoops = new Hashset<LoopData>(LoopDataComparer.INSTANCE);
@@ -25,11 +26,6 @@ namespace DSIS.Graph.Entropy.Impl
       {
         myCallback.OnLoopFound(loop);
       }
-    }
-
-    public void OnNodeInTreeButNotInParents(INode<T> node)
-    {
-      
     }
 
     private class LoopData
@@ -76,7 +72,7 @@ namespace DSIS.Graph.Entropy.Impl
 
       public int GetHashCode(LoopData obj)
       {
-        return obj.Hash | Primes.ByIndex(obj.Loop.Count);
+        return obj.Hash * Primes.ByIndex(obj.Loop.Count);
       }
     }
   }

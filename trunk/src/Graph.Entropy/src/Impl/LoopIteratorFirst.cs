@@ -24,8 +24,14 @@ namespace DSIS.Graph.Entropy.Impl
 
     public override sealed void WidthSearch(IProgressInfo info)
     {
-      WidthSearch(info, myComponent.NodesCount,
-                  GetFirst(myComponents.GetNodes(new IStrongComponentInfo[] {myComponent})));
+      if (myComponent == null)
+        return;
+
+      INode<T> first = GetFirst(myComponents.GetNodes(new IStrongComponentInfo[] {myComponent}));
+      if (first == null)
+        return;
+
+      WidthSearch(info, myComponent.NodesCount, first);
     }
 
     protected abstract void WidthSearch(IProgressInfo info, long nodesCount, INode<T> node);
