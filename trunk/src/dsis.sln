@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.AdaptiveMe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.Solvers", "Function.Solvers\Function.Solvers.csproj", "{4340017C-0FB4-4A43-8D5A-28ACB55045F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistance", "Persistance\Persistance.csproj", "{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{4340017C-0FB4-4A43-8D5A-28ACB55045F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4340017C-0FB4-4A43-8D5A-28ACB55045F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4340017C-0FB4-4A43-8D5A-28ACB55045F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
