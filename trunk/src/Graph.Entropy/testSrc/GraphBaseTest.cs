@@ -20,9 +20,19 @@ namespace DSIS.Graph.Entropy
     protected static void AddEdge(IGraph<IntegerCoordinate> graph,  int i, int j)
     {
       IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
-      INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(i));
+      INode<IntegerCoordinate> n1 = AddNode(graph, system, i);
       INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(j));
       graph.AddEdgeToNode(n1, n2);
+    }
+
+    protected static INode<IntegerCoordinate> AddNode(IGraph<IntegerCoordinate> graph, int id)
+    {
+      return AddNode(graph, (IIntegerCoordinateSystem<IntegerCoordinate>) graph.CoordinateSystem, id);
+    }
+
+    private static INode<IntegerCoordinate> AddNode(IGraph<IntegerCoordinate> graph, IIntegerCoordinateSystem<IntegerCoordinate> system, int i)
+    {
+      return graph.AddNode(system.Create(i));
     }
 
     protected class MockCallback : ILoopIteratorCallback<IntegerCoordinate>

@@ -7,6 +7,10 @@ namespace DSIS.Graph.Entropy.Impl
   internal class StrangeEntropyEvaluatorImpl<T> : EntropyEvaluatorBase<T>
     where T : ICellCoordinate<T>
   {
+    public StrangeEntropyEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
+    {
+    }
+
     protected override ILoopIterator<T> CreateIterator<C>(C callback, IGraphStrongComponents<T> comps,
                                                              IGraph<T> graph, IStrongComponentInfo info,
                                                              IProgressInfo progress)
@@ -18,6 +22,10 @@ namespace DSIS.Graph.Entropy.Impl
   internal class StrangeEntropyAllEdgesLoopsEvaluatorImpl<T> : EntropyEvaluatorBase<T>
     where T : ICellCoordinate<T>
   {
+    public StrangeEntropyAllEdgesLoopsEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
+    {
+    }
+
     protected override ILoopIterator<T> CreateIterator<C>(C callback, IGraphStrongComponents<T> comps,
                                                              IGraph<T> graph, IStrongComponentInfo info,
                                                              IProgressInfo progress)
@@ -29,6 +37,10 @@ namespace DSIS.Graph.Entropy.Impl
   internal class StrangeEntropyAllNodesLoopsEvaluatorImpl<T> : EntropyEvaluatorBase<T>
     where T : ICellCoordinate<T>
   {
+    public StrangeEntropyAllNodesLoopsEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
+    {
+    }
+
     protected override ILoopIterator<T> CreateIterator<C>(C callback, IGraphStrongComponents<T> comps,
                                                              IGraph<T> graph, IStrongComponentInfo info,
                                                              IProgressInfo progress)

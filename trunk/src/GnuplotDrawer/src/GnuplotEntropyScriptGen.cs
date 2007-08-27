@@ -20,10 +20,7 @@ namespace DSIS.GnuplotDrawer
 
       myWriter.Write(" '{0}' title \"{1}\" with ", file.Filename, string.Format("Count {0}", file.PointsCount));
 
-      if (file.PointsCount >= 300)
-        myWriter.Write(" dots ");
-      else
-        myWriter.Write(" points ");
+      myWriter.Write(" points ");
 
       myWriter.Write(" palette ");
     }

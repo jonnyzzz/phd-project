@@ -44,11 +44,18 @@
     <Compile Include="src\Impl\AllNodesOnALoopGraphSearch.cs" />
     <Compile Include="src\Impl\Eigen\EigenEntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\EntropyBackStepGraphWeightCallback.cs" />
+    <Compile Include="src\Impl\EntropyEvaluator.cs" />
     <Compile Include="src\Impl\EntropyEvaluatorBase.cs" />
     <Compile Include="src\Impl\EntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\EntropyGraphWeightCallback.cs" />
+    <Compile Include="src\Impl\EntropyLoopConstantWeight.cs" />
+    <Compile Include="src\Impl\EntropyLoopLinearEntropyWeight.cs" />
+    <Compile Include="src\Impl\EntropyLoopSquareEntropyWeight.cs" />
+    <Compile Include="src\Impl\IEntropyLoopWeightCallback.cs" />
     <Compile Include="src\Impl\GraphWeightSearch.cs" />
     <Compile Include="src\Impl\ILoopIterator.cs" />
+    <Compile Include="src\Impl\JVR\JVRMeasure.cs" />
+    <Compile Include="src\Impl\JVR\SortedQueue.cs" />
     <Compile Include="src\Impl\LoopIterator.cs" />
     <Compile Include="src\Impl\ILoopIteratorCallback.cs" />
     <Compile Include="src\Impl\LoopIteratorBase.cs" />
@@ -63,6 +70,7 @@
     <Compile Include="testSrc\GraphBaseTest.cs" />
     <Compile Include="testSrc\GraphSearchTest.cs" />
     <Compile Include="testSrc\GraphWeightSearchTest.cs" />
+    <Compile Include="testSrc\JVRMeasureTest.cs" />
     <Compile Include="testSrc\LoopIteratorsPerfomance.cs" />
     <Compile Include="testSrc\LoopIteratorTest.cs" />
     <Compile Include="testSrc\PerfomanceTestBase.cs" />

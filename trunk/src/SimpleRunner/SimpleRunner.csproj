@@ -36,7 +36,10 @@
     <Compile Include="AbstractImageBuilder.cs" />
     <Compile Include="AbstractImageBuilderListener.cs" />
     <Compile Include="ComputationPathListener.cs" />
+    <Compile Include="ComputeEntropyLinearListener.cs" />
     <Compile Include="ComputeEntropyListener.cs" />
+    <Compile Include="ComputeEntropyListenerBase.cs" />
+    <Compile Include="ComputeEntropySquareListener.cs" />
     <Compile Include="ConsoleListener.cs" />
     <Compile Include="DrawBase.cs" />
     <Compile Include="DrawEntropyBase.cs" />

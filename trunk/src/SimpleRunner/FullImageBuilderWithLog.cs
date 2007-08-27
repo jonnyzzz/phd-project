@@ -28,7 +28,9 @@ namespace DSIS.SimpleRunner
       AddListener(new ComputationPathListener<T,Q>(myWorkPath));
 
       AddListener(new DrawLastComputationResultListener<T,Q>());
-      AddListener(new ComputeEntropyListener<T, Q>());      
+//      AddListener(new ComputeEntropyListener<T, Q>());      
+      AddListener(new ComputeEntropySquareListener<T,Q>());      
+//      AddListener(new ComputeEntropyLinearListener<T,Q>());      
       AddListener(new DrawEntropyListener<T,Q>());      
     }
 

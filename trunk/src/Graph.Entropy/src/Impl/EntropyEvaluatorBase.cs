@@ -8,10 +8,17 @@ namespace DSIS.Graph.Entropy.Impl
   internal abstract class EntropyEvaluatorBase<T> : IEntropyEvaluator<T>
     where T : ICellCoordinate<T>
   {
+    private readonly IEntropyLoopWeightCallback myLoopCallback;
+
+    protected EntropyEvaluatorBase(IEntropyLoopWeightCallback loopCallback)
+    {
+      myLoopCallback = loopCallback;
+    }
+
     public void ComputeEntropy(IEntropyEvaluatorController<T> controller, IProgressInfo progressInfo)
     {
       EntropyBackStepGraphWeightCallback<T> cb =
-        new EntropyBackStepGraphWeightCallback<T>(controller.Graph.CoordinateSystem);
+        new EntropyBackStepGraphWeightCallback<T>(controller.Graph.CoordinateSystem, myLoopCallback);
 
       Console.Out.WriteLine("Loops search started");
       foreach (IStrongComponentInfo info in controller.Components.Components)
@@ -22,7 +29,7 @@ namespace DSIS.Graph.Entropy.Impl
       Console.Out.WriteLine("Loops search finished");
 
       controller.SetCoordinateSystem(cb.System);
-      cb.ComputeAntropy(progressInfo, controller);
+      cb.ComputeEntropy(progressInfo, controller);
 
       int dim = cb.System.SystemSpace.Dimension;
 
@@ -33,7 +40,7 @@ namespace DSIS.Graph.Entropy.Impl
         if (cb == null)
           break;
         
-        cb.ComputeAntropy(progressInfo, controller);
+        cb.ComputeEntropy(progressInfo, controller);
       }
     }
 

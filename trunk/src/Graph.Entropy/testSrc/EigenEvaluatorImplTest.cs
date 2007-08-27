@@ -11,13 +11,15 @@ namespace DSIS.Graph.Entropy
     [Test]
     public void Test_01()
     {
-      EntropyEvaluatorImpl imp = new EntropyEvaluatorImpl();            
+      new EntropyEvaluatorImpl();            
     }    
 
 
     private class EntropyEvaluatorImpl : EntropyEvaluatorImpl<IntegerCoordinate>
     {
-      
+      public EntropyEvaluatorImpl() : base(EntropyLoopConstantWeight.ONE)
+      {
+      }
     }
   }
 }

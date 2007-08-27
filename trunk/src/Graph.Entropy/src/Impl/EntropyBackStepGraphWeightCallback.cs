@@ -8,7 +8,7 @@ namespace DSIS.Graph.Entropy.Impl
   {
     private readonly ICellCoordinateSystem<Q> mySystem;
 
-    public EntropyBackStepGraphWeightCallback(ICellCoordinateSystem<Q> system)
+    public EntropyBackStepGraphWeightCallback(ICellCoordinateSystem<Q> system, IEntropyLoopWeightCallback loopWeight) : base(loopWeight)
     {
       mySystem = system;
     }
@@ -25,7 +25,7 @@ namespace DSIS.Graph.Entropy.Impl
       if (projector == null)
         return null;
 
-      EntropyBackStepGraphWeightCallback<Q> instance = new EntropyBackStepGraphWeightCallback<Q>(projector.ToSystem);
+      EntropyBackStepGraphWeightCallback<Q> instance = new EntropyBackStepGraphWeightCallback<Q>(projector.ToSystem, myWeight);
 
       foreach (Pair<NodePair<Q>, double> pair in Weights)
       {

@@ -206,7 +206,7 @@ namespace DSIS.Graph.Entropy
         
         Listener listener = new Listener();
 
-        cb.ComputeAntropy(NullProgressInfo.INSTANCE, listener);
+        cb.ComputeEntropy(NullProgressInfo.INSTANCE, listener);
         double ent = listener.Result;
 
         if (i == 0)
@@ -244,7 +244,7 @@ namespace DSIS.Graph.Entropy
       }
 
       EntropyBackStepGraphWeightCallback<IntegerCoordinate> cb =
-        new EntropyBackStepGraphWeightCallback<IntegerCoordinate>(graph.CoordinateSystem);
+        new EntropyBackStepGraphWeightCallback<IntegerCoordinate>(graph.CoordinateSystem, EntropyLoopConstantWeight.ONE);
 
       foreach (List<int> loop in loops)
       {

@@ -13,6 +13,10 @@ namespace DSIS.Graph.Entropy.Impl
   internal class EntropyEvaluatorImpl<T> : EntropyEvaluatorBase<T>
     where T : ICellCoordinate<T>
   {
+    public EntropyEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
+    {
+    }
+
     protected override ILoopIterator<T> CreateIterator<C>(C cb, IGraphStrongComponents<T> comps, IGraph<T> graph,
                                                 IStrongComponentInfo info, IProgressInfo progress)      
     {

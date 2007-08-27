@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -8,15 +7,23 @@ namespace DSIS.Graph.Entropy.Impl
 {
   public class EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> where T : ICellCoordinate<T>
   {
-    private static readonly double LN2 = Math.Log(2);
-    protected readonly Dictionary<NodePair<T>, double> myM = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer()); 
+    protected readonly Dictionary<NodePair<T>, double> myM =
+      new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer());
+
     private double myNorm = 0;
+    protected readonly IEntropyLoopWeightCallback myWeight;
+
+    public EntropyGraphWeightCallback(IEntropyLoopWeightCallback weight)
+    {
+      myWeight = weight;
+    }
 
     public void OnLoopFound(IList<INode<T>> loop)
     {
-      myNorm++;
+      double weight = myWeight.Weight(loop.Count);
+      myNorm += weight;
 
-      double p = 1.0/loop.Count;
+      double p = weight/loop.Count;
       INode<T> prev = null;
       INode<T> first = null;
       foreach (INode<T> node in loop)
@@ -24,17 +31,14 @@ namespace DSIS.Graph.Entropy.Impl
         if (prev != null)
         {
           Add(prev.Coordinate, node.Coordinate, p);
-        } else
+        }
+        else
         {
           first = node;
         }
         prev = node;
       }
       Add(prev.Coordinate, first.Coordinate, p);
-    }
-
-    public void OnNodeInTreeButNotInParents(INode<T> node)
-    {      
     }
 
     protected IEnumerable<Pair<NodePair<T>, double>> Weights
@@ -48,50 +52,17 @@ namespace DSIS.Graph.Entropy.Impl
       }
     }
 
+    public void ComputeEntropy(IProgressInfo info, IEntropyListener<T> listener)
+    {
+      EntropyEvaluator<T>.ComputeEntropy(myM, myNorm, info, listener);
+    }
+
     protected void Add(T from, T to, double p)
     {
       double d;
       NodePair<T> pair = new NodePair<T>(from, to);
       myM.TryGetValue(pair, out d);
       myM[pair] = d + p;
-    }
-
-    private static void Add(Dictionary<T, double> ds, T node, double v)
-    {
-      double b;
-      ds.TryGetValue(node, out b);
-      ds[node] = b + v;
-    }
-    
-    public void ComputeAntropy(IProgressInfo info, IEntropyListener<T> listener)
-    {
-      double v = 0;
-      info.Minimum = 0;
-      info.Maximum = myM.Count;
-
-      Dictionary<T, double> values = new Dictionary<T, double>(EqualityComparerFactory<T>.GetComparer());
-
-      foreach (KeyValuePair<NodePair<T>, double> pair in myM)
-      {
-        double val = pair.Value / myNorm;
-        Add(values, pair.Key.To, val);
-        v -= Entropy(val);
-        info.Tick(1.0);
-      }
-
-      info.Maximum += values.Count;
-      foreach (double value in values.Values)
-      {
-        v += Entropy(value);
-        info.Tick(1.0);
-      }
-
-      listener.OnResult(v / LN2, values);
-    }
-
-    private static double Entropy(double d)
-    {
-      return Math.Abs(d) < 1e-5 ? 0.0 : d * Math.Log(d);
     }
 
     public Dictionary<NodePair<T>, double> M
