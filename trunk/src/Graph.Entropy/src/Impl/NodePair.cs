@@ -5,11 +5,10 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl
 {
   [EqualityComparer(typeof (NodePairEqualityComparer<>))]
-  public struct NodePair<T> where T : ICellCoordinate<T>
+  public class NodePair<T> : PairBase<T> where T : ICellCoordinate<T>
   {
-    private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
+    public static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
     public readonly T From;
-    public readonly T To;
     public readonly int Hash;
 
     public NodePair(T from, T to) : this(from, HashValue(from), to)
@@ -20,10 +19,9 @@ namespace DSIS.Graph.Entropy.Impl
     {
     } 
 
-    public  NodePair(T from, int fromHash, T to, int toHash)
+    public NodePair(T from, int fromHash, T to, int toHash) : base(to)
     {
       From = from;
-      To = to;
       Hash = fromHash + 131*toHash;
     }
 
@@ -42,7 +40,7 @@ namespace DSIS.Graph.Entropy.Impl
   internal class NodePairEqualityComparer<T> : IEqualityComparer<NodePair<T>>
     where T : ICellCoordinate<T>
   {
-    private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
+    private static readonly IEqualityComparer<T> COMPARER = NodePair<T>.COMPARER;
 
     public bool Equals(NodePair<T> x, NodePair<T> y)
     {

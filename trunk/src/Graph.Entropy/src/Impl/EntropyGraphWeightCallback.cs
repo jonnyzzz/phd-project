@@ -54,7 +54,7 @@ namespace DSIS.Graph.Entropy.Impl
 
     public void ComputeEntropy(IProgressInfo info, IEntropyListener<T> listener)
     {
-      EntropyEvaluator<T>.ComputeEntropy(myM, myNorm, info, listener);
+      EntropyEvaluator<T, NodePair<T>>.ComputeEntropy(myM, myNorm, listener);
     }
 
     protected void Add(T from, T to, double p)

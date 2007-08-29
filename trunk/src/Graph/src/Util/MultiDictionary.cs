@@ -4,6 +4,10 @@ namespace DSIS.Graph.Util
 {
   public class MultiDictionary<TK, TV> : Dictionary<TK, List<TV>>
   {
+    public MultiDictionary(IEqualityComparer<TK> comparer) : base(comparer)
+    {
+    }
+
     public new List<TV> this[TK k]
     {
       get
@@ -24,7 +28,7 @@ namespace DSIS.Graph.Util
       }
     }
 
-    public void Add(TK k, TV v)
+    public void AddValue(TK k, TV v)
     {
       List<TV> l;
       if (TryGetValue(k, out l))
@@ -33,7 +37,7 @@ namespace DSIS.Graph.Util
       }
       else
       {
-        l = new List<TV>();
+        l = new List<TV>(2);
         l.Add(v);
         this[k] = l;
       }

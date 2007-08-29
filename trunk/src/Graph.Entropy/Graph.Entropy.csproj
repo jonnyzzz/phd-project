@@ -54,8 +54,13 @@
     <Compile Include="src\Impl\IEntropyLoopWeightCallback.cs" />
     <Compile Include="src\Impl\GraphWeightSearch.cs" />
     <Compile Include="src\Impl\ILoopIterator.cs" />
+    <Compile Include="src\Impl\JVR\ArcDirection.cs" />
+    <Compile Include="src\Impl\JVR\HashHolder.cs" />
+    <Compile Include="src\Impl\JVR\InverseArcDirection.cs" />
     <Compile Include="src\Impl\JVR\JVRMeasure.cs" />
+    <Compile Include="src\Impl\JVR\JVRPair.cs" />
     <Compile Include="src\Impl\JVR\SortedQueue.cs" />
+    <Compile Include="src\Impl\JVR\StraitArcDirection.cs" />
     <Compile Include="src\Impl\LoopIterator.cs" />
     <Compile Include="src\Impl\ILoopIteratorCallback.cs" />
     <Compile Include="src\Impl\LoopIteratorBase.cs" />
@@ -71,6 +76,7 @@
     <Compile Include="testSrc\GraphSearchTest.cs" />
     <Compile Include="testSrc\GraphWeightSearchTest.cs" />
     <Compile Include="testSrc\JVRMeasureTest.cs" />
+    <Compile Include="testSrc\JVrPairTest.cs" />
     <Compile Include="testSrc\LoopIteratorsPerfomance.cs" />
     <Compile Include="testSrc\LoopIteratorTest.cs" />
     <Compile Include="testSrc\PerfomanceTestBase.cs" />
