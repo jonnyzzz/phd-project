@@ -1,5 +1,5 @@
 using System;
-using DSIS.Graph.Entropy.Impl;
+using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 

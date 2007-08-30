@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop
 {
   public class NonDuplicatedLoopIteratorCallback<T,C> : ILoopIteratorCallback<T> 
     where T : ICellCoordinate<T>

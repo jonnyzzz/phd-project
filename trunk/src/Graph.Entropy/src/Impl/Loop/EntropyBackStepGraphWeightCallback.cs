@@ -1,8 +1,12 @@
+using System;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Entropy.Impl.Loop.Weight;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop
 {
+  [Obsolete]
   public class EntropyBackStepGraphWeightCallback<Q> : EntropyGraphWeightCallback<Q>
     where Q : ICellCoordinate<Q>
   {
@@ -13,18 +17,13 @@ namespace DSIS.Graph.Entropy.Impl
       mySystem = system;
     }
 
-    public ICellCoordinateSystem<Q> System
-    {
-      get { return mySystem; }
-    }
-
     public EntropyBackStepGraphWeightCallback<Q> BackStep(long[] power)
     {
       ICellCoordinateSystemProjector<Q> projector = mySystem.Project(power);
 
       if (projector == null)
         return null;
-
+      
       EntropyBackStepGraphWeightCallback<Q> instance = new EntropyBackStepGraphWeightCallback<Q>(projector.ToSystem, myWeight);
 
       foreach (Pair<NodePair<Q>, double> pair in Weights)

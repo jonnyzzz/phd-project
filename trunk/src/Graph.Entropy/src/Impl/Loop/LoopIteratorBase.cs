@@ -1,8 +1,8 @@
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Loop;
 
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop
 {
   public abstract class LoopIteratorBase<T> : ILoopIterator<T>
     where T : ICellCoordinate<T>
@@ -19,6 +19,6 @@ namespace DSIS.Graph.Entropy.Impl
       myComponent = component;
     }
 
-    public abstract void WidthSearch(IProgressInfo info);
+    public abstract void WidthSearch();
   }
 }

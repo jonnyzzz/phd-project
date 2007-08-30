@@ -3,7 +3,7 @@ using System.Threading;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
-using DSIS.Graph.Entropy.Impl;
+using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
@@ -56,7 +56,7 @@ namespace DSIS.Graph.Entropy
       
       DoWithTimeout(delegate
                       {
-                        iter.WidthSearch(NullProgressInfo.INSTANCE);
+                        iter.WidthSearch();
                       }, timeout);      
     }
   }

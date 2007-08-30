@@ -1,5 +1,6 @@
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Entropy.Impl;
+using DSIS.Graph.Entropy.Impl.Loop;
+using DSIS.Graph.Entropy.Impl.Loop.Weight;
 
 namespace DSIS.Graph.Entropy
 {

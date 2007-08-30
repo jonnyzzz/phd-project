@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop
 {
   public class GraphWeightSearch<T> : LoopIteratorFirst<T> where T : ICellCoordinate<T>
   {
@@ -29,7 +28,7 @@ namespace DSIS.Graph.Entropy.Impl
       return false;
     }
 
-    protected override void WidthSearch(IProgressInfo info, long nodesCount, INode<T> anode)
+    protected override void WidthSearch(long nodesCount, INode<T> anode)
     {
       Hashset<INode<T>> visited = new Hashset<INode<T>>(EqualityComparerFactory<INode<T>>.GetComparer());
       Queue<SearchTreeNode> queue = new Queue<SearchTreeNode>();

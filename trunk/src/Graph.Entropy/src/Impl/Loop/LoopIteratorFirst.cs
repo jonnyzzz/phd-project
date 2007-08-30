@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Loop;
 
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop
 {
   public abstract class LoopIteratorFirst<T> : LoopIteratorBase<T>
     where T : ICellCoordinate<T>
   {
     protected LoopIteratorFirst(ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components,
-                               IStrongComponentInfo component) : base(callback, components, component)
+                                IStrongComponentInfo component) : base(callback, components, component)
     {
     }
 
@@ -22,7 +22,7 @@ namespace DSIS.Graph.Entropy.Impl
       return default(Q);
     }
 
-    public override sealed void WidthSearch(IProgressInfo info)
+    public override sealed void WidthSearch()
     {
       if (myComponent == null)
         return;
@@ -31,9 +31,9 @@ namespace DSIS.Graph.Entropy.Impl
       if (first == null)
         return;
 
-      WidthSearch(info, myComponent.NodesCount, first);
+      WidthSearch(myComponent.NodesCount, first);
     }
 
-    protected abstract void WidthSearch(IProgressInfo info, long nodesCount, INode<T> node);
+    protected abstract void WidthSearch(long nodesCount, INode<T> node);
   }
 }

@@ -1,6 +1,6 @@
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop.Weight
 {
-  public class EntropyLoopSquareEntropyWeight : IEntropyLoopWeightCallback
+  public class EntropyLoopLinearEntropyWeight : IEntropyLoopWeightCallback
   {
     public static readonly IEntropyLoopWeightCallback VALUE = new EntropyLoopLinearEntropyWeight();
 

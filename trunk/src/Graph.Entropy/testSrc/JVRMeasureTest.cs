@@ -58,16 +58,25 @@ namespace DSIS.Graph.Entropy
     [Test]
     public void Test_Ampi()
     {
-      DoTest("fninin", 0.1539, n(1, 2, 0.0535), n(2, 3, 0.00025), n(3, 5, 0.518844), n(5, 1, 0.00119), n(3, 8, 0.300632),
-             n(8, 7, 0.005146), n(7, 6, 0.001719), n(6, 2, 0.1186969));
+      DoTest("fni", 0.2215, n(1, 2), n(2, 3), n(3, 5), n(5, 1), n(3, 8),
+             n(8, 7), n(7, 6), n(6, 2));
     }
 
     [Test]
-    public void Test_Ampi2()
+    public void Test_BigFull()
     {
-      DoTest("fninininin", -10, n(1, 2), n(2, 3), n(3, 5), n(5, 1), n(3, 8), n(8, 7), n(7, 6), n(6, 2));
-    }
+      List<Node> ns = new List<Node>();
+      const int N = 10;
+      for(int i=0; i<N; i++)
+      {
+        for(int j=0; j<N; j++)
+        {          
+          ns.Add(n(i,j));
+        }
+      }
 
+      DoTest("fni", 3.3219280948873489, ns.ToArray());
+    }
 
     private const double EPS = 1e-3;
 
@@ -76,7 +85,7 @@ namespace DSIS.Graph.Entropy
       JVR j = DoTest(script, nodes);
 
       EntropyListener<IntegerCoordinate> l = new EntropyListener<IntegerCoordinate>();
-      j.Entropy(l);
+      j.CreateEvaluator().ComputeEntropy(l);
 
       Assert.AreEqual(entropy, l.Result, EPS);
 
@@ -175,7 +184,7 @@ namespace DSIS.Graph.Entropy
 
         foreach (KeyValuePair<IntegerCoordinate, double> pair in mi)
         {
-          Assert.AreEqual(0, pair.Value, "Balance for node {0}", pair.Key);
+          Assert.AreEqual(0, pair.Value, EPS, "Balance for node {0}", pair.Key);
         }
       }
       finally
@@ -239,8 +248,8 @@ namespace DSIS.Graph.Entropy
               FillGraph();
               break;
             case 'i':
-              Iterate();
-              break;
+              Iterate(EPS / 2);
+              return;
             case 'n':
               Norm();
               break;

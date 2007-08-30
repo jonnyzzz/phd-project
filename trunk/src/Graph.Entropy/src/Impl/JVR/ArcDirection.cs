@@ -22,12 +22,11 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       myIndex.AddValue(GetStart(node), node);
     }
     
-    public double ComputeWeight(INode<T> node)
+    public double ComputeWeight(T node)
     {
       double w = 0;
-      T nodeCoordinates = node.Coordinate;
-
-      foreach (JVRPair<T> edge in myIndex[nodeCoordinates])
+      
+      foreach (JVRPair<T> edge in myIndex[node])
       {        
         w += myHash[edge];
       }
@@ -35,11 +34,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     }
 
-    public void MultiplyWeight(INode<T> node, double factor) 
+    public void MultiplyWeight(T node, double factor) 
     {
-      T nodeCoordinates = node.Coordinate;
-
-      foreach (JVRPair<T> edge in myIndex[nodeCoordinates])
+      foreach (JVRPair<T> edge in myIndex[node])
       {
         myHash[edge] *= factor;        
       }

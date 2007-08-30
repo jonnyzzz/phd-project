@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Util
 {
   [EqualityComparer(typeof (NodePairEqualityComparer<>))]
   public class NodePair<T> : PairBase<T> where T : ICellCoordinate<T>
   {
     public static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
-    public readonly T From;
     public readonly int Hash;
 
     public NodePair(T from, T to) : this(from, HashValue(from), to)
@@ -19,9 +18,8 @@ namespace DSIS.Graph.Entropy.Impl
     {
     } 
 
-    public NodePair(T from, int fromHash, T to, int toHash) : base(to)
+    public NodePair(T from, int fromHash, T to, int toHash) : base(from, to)
     {
-      From = from;
       Hash = fromHash + 131*toHash;
     }
 

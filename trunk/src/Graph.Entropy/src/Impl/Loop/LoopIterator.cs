@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop
 {
   public class LoopIterator<T> : LoopIteratorFirst<T> where T : ICellCoordinate<T>
   {
@@ -58,17 +58,14 @@ namespace DSIS.Graph.Entropy.Impl
       }
     }
 
-    protected override void WidthSearch(IProgressInfo info, long nodesCount, INode<T> node)
+    protected override void WidthSearch(long nodesCount, INode<T> node)
     {
       mySearchRoot = new SearchTreeNode(null, node);
 
       myNodes.Enqueue(mySearchRoot);
 
-      info.Minimum = 0;
-      info.Maximum = 1;
       while (myNodes.Count > 0)
       {
-        info.Tick(1.0);
         WidthSearch(myNodes.Dequeue());
       }
     }

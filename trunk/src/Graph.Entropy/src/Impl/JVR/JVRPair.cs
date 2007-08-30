@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
@@ -8,7 +9,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   public class JVRPair<T> : PairBase<T> where T : ICellCoordinate<T>
   {
     public static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
-    public readonly T From;
     public readonly int Hash;
     public readonly int BackHash;
 
@@ -20,13 +20,8 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
     } 
 
-    public JVRPair(T from, T to, int toHash) : this(from, HashValue(from), to, toHash)
-    {      
-    }
-
     public JVRPair(T from, int fromHash, T to, int toHash) : this(from, to, HashValue(fromHash, toHash), HashValue(toHash, fromHash))
     {
-      From = from;      
       Hash = fromHash + 131*toHash;
       Hash = toHash + 131*fromHash;
     }
@@ -36,9 +31,8 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return a + 131*b;
     }
 
-    private JVRPair(T from, T to, int hash, int backHash) : base(to)
+    private JVRPair(T from, T to, int hash, int backHash) : base(from, to)
     {
-      From = from;
       Hash = hash;
       BackHash = backHash;
     }

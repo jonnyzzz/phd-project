@@ -3,7 +3,7 @@
  * Created: 27 марта 2007 г.
  */
 
-using DSIS.Graph.Entropy.Impl;
+using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 

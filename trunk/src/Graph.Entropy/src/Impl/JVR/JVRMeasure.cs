@@ -1,5 +1,6 @@
 using System;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Entropy.Impl.Entropy;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
@@ -58,34 +59,41 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       }      
     }
 
-    protected void Norm()
+    public void Norm()
     {
       myHashHolder.Normalize();      
     }
-    
-    protected void Iterate()
-    {
-      const double EPS = 1e-2;
 
-      foreach (INode<T> node in myGraph.Nodes)
+    public void Iterate(double precision)
+    {     
+      double normEps = precision * 1e-4;
+      while(true)
       {
-        if (!VisitNode(node))
-          continue;
-
+        T node = myHashHolder.NextNode();
+        
         double incoming = myBackEdges.ComputeWeight(node);
         double outgoing  = myEdges.ComputeWeight(node);
 
-        if (Math.Abs(incoming - outgoing) <= EPS)
-          continue;
+        if (Math.Abs(incoming - outgoing) <= precision)
+          break;
 
-        myBackEdges.MultiplyWeight(node, Math.Sqrt(incoming / outgoing));
-        myEdges.MultiplyWeight(node, Math.Sqrt(outgoing / incoming));               
+        double a = Math.Sqrt(outgoing / incoming);
+        double b = Math.Sqrt(incoming / outgoing);
+
+        if (a <= normEps || b <= normEps)
+        {
+          myHashHolder.Normalize();
+          continue;
+        }
+
+        myBackEdges.MultiplyWeight(node, a);        
+        myEdges.MultiplyWeight(node, b);
       }      
     }
 
-    public void Entropy(IEntropyListener<T> listener)
-    {      
-      myHashHolder.ComputeEntropy(listener);
-    }
+    public EntropyEvaluator<T, JVRPair<T>> CreateEvaluator()
+    {
+      return myHashHolder.CreateEvaluator();
+    }    
   }
 }

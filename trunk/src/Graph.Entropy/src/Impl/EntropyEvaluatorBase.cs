@@ -1,50 +1,38 @@
-using System;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
-using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Entropy;
 
 namespace DSIS.Graph.Entropy.Impl
 {
   internal abstract class EntropyEvaluatorBase<T> : IEntropyEvaluator<T>
     where T : ICellCoordinate<T>
   {
-    private readonly IEntropyLoopWeightCallback myLoopCallback;
-
-    protected EntropyEvaluatorBase(IEntropyLoopWeightCallback loopCallback)
-    {
-      myLoopCallback = loopCallback;
-    }
+    protected abstract IEntropyProcessor<T> Measure(IEntropyEvaluatorInput<T> data);
 
     public void ComputeEntropy(IEntropyEvaluatorController<T> controller, IProgressInfo progressInfo)
     {
-      EntropyBackStepGraphWeightCallback<T> cb =
-        new EntropyBackStepGraphWeightCallback<T>(controller.Graph.CoordinateSystem, myLoopCallback);
+      IEntropyProcessor<T> measure = Measure(controller);
 
-      Console.Out.WriteLine("Loops search started");
-      foreach (IStrongComponentInfo info in controller.Components.Components)
+      ICellCoordinateSystem<T> system = controller.Graph.CoordinateSystem;      
+      int dim = system.SystemSpace.Dimension;
+      ICellCoordinateSystemProjector<T> project = null;
+
+      while (controller.SubdivideNext(system))
       {
-        ILoopIterator<T> it = CreateIterator(cb, controller.Components, controller.Graph, info, progressInfo);
-        it.WidthSearch(progressInfo);
-      }
-      Console.Out.WriteLine("Loops search finished");
+        if (project != null) 
+          measure = measure.Divide(project);        
 
-      controller.SetCoordinateSystem(cb.System);
-      cb.ComputeEntropy(progressInfo, controller);
-
-      int dim = cb.System.SystemSpace.Dimension;
-
-      while (controller.SubdivideNext(cb.System))
-      {
-        controller.SetCoordinateSystem(cb.System);
-        cb = cb.BackStep(FillArray(2, dim));
-        if (cb == null)
-          break;
-        
-        cb.ComputeEntropy(progressInfo, controller);
+        measure.ComputeEntropy(controller);        
+      
+        project = system.Project(FillArray(2, dim));
+        if (project == null)
+          return;
+        system = project.ToSystem;
+        controller.SetCoordinateSystem(system);        
       }
     }
 
-    private static long[] FillArray(long l, long dim)
+    protected static long[] FillArray(long l, long dim)
     {
       long[] result = new long[dim];
       for (int i = 0; i < dim; i++)
@@ -53,10 +41,5 @@ namespace DSIS.Graph.Entropy.Impl
       }
       return result;
     }
-
-    protected abstract ILoopIterator<T> CreateIterator<C>(
-      C callback, IGraphStrongComponents<T> comps, IGraph<T> graph,
-      IStrongComponentInfo info, IProgressInfo progress)
-      where C : ILoopIteratorCallback<T>;
   }
 }

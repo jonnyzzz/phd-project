@@ -1,4 +1,4 @@
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop.Weight
 {
   public interface IEntropyLoopWeightCallback
   {

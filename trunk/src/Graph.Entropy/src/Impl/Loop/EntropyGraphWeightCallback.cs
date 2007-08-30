@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
+using DSIS.Graph.Entropy.Impl.Entropy;
+using DSIS.Graph.Entropy.Impl.Loop.Weight;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop
 {
   public class EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> where T : ICellCoordinate<T>
   {
@@ -52,11 +54,6 @@ namespace DSIS.Graph.Entropy.Impl
       }
     }
 
-    public void ComputeEntropy(IProgressInfo info, IEntropyListener<T> listener)
-    {
-      EntropyEvaluator<T, NodePair<T>>.ComputeEntropy(myM, myNorm, listener);
-    }
-
     protected void Add(T from, T to, double p)
     {
       double d;
@@ -74,6 +71,11 @@ namespace DSIS.Graph.Entropy.Impl
     {
       get { return myNorm; }
       protected set { myNorm = value; }
+    }
+
+    public IEntropyProcessor<T> Entropy()
+    {
+      return new EntropyEvaluator<T, NodePair<T>>(M, Norm, EqualityComparerFactory<T>.GetReferenceComparer());
     }
   }
 }

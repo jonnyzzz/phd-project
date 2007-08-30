@@ -4,7 +4,7 @@ using System.Text;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
-using DSIS.Graph.Entropy.Impl;
+using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
@@ -20,7 +20,7 @@ namespace DSIS.Graph.Entropy
       MockCallback mcb = new MockCallback();
       ILoopIterator<IntegerCoordinate> gws = Create(graph, mcb, components);
 
-      gws.WidthSearch(NullProgressInfo.INSTANCE);
+      gws.WidthSearch();
 
       StringBuilder sb = new StringBuilder();
       foreach (List<string> loop in mcb.Loops)

@@ -15,16 +15,22 @@ namespace DSIS.Graph.Entropy
     void ComputeEntropy(IEntropyEvaluatorController<T> controller, IProgressInfo progressInfo);
   }
 
-  public interface IEntropyListener<T> where T : ICellCoordinate<T>
+  public interface IEntropyListener<T> 
+    where T : ICellCoordinate<T>
   {
     void OnResult(double result, IDictionary<T, double> measure);
   }
 
-  public interface IEntropyEvaluatorController<T> : IEntropyListener<T> where T : ICellCoordinate<T>
+  public interface IEntropyEvaluatorInput<T>
+    where T : ICellCoordinate<T>
   {
     IGraph<T> Graph { get;}
-    IGraphStrongComponents<T> Components { get; }
+    IGraphStrongComponents<T> Components { get; }    
+  }
 
+  public interface IEntropyEvaluatorController<T> : IEntropyListener<T>, IEntropyEvaluatorInput<T>
+    where T : ICellCoordinate<T>
+  {
     bool SubdivideNext(ICellCoordinateSystem<T> system);
     void SetCoordinateSystem(ICellCoordinateSystem<T> system);
   }

@@ -1,10 +1,9 @@
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop
 {
   public interface ILoopIterator<T> where T : ICellCoordinate<T>
   {
-    void WidthSearch(IProgressInfo info);
+    void WidthSearch();
   }
 }

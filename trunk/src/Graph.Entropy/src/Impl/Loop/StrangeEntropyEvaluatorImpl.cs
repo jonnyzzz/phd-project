@@ -1,20 +1,14 @@
-/*
- * Created by: Eugene Petrenko
- * Created: 21 марта 2007 г.
- */
-
 using DSIS.Core.Coordinates;
-using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 
-namespace DSIS.Graph.Entropy.Impl
+namespace DSIS.Graph.Entropy.Impl.Loop
 {
-  internal class EntropyEvaluatorImpl<T> : EntropyEvaluatorLoopBase<T>
+  internal class StrangeEntropyEvaluatorImpl<T> : EntropyEvaluatorLoopBase<T>
     where T : ICellCoordinate<T>
   {
-    public EntropyEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
+    public StrangeEntropyEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
     {
     }
 
@@ -22,9 +16,8 @@ namespace DSIS.Graph.Entropy.Impl
     protected override ILoopIterator<T> CreateIterator(ILoopIteratorCallback<T> callback,
                                                        IGraphStrongComponents<T> comps, IGraph<T> graph,
                                                        IStrongComponentInfo info)
-    {      
-        return new LoopIterator<T>(
-            new NonDuplicatedLoopIteratorCallback<T, ILoopIteratorCallback<T>>(callback), graph, comps, info);
+    {
+      return new GraphWeightSearch<T>(callback, comps, info);
     }
   }
 }
