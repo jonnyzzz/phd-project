@@ -1,18 +1,29 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
   public class SortedNodeSet<T> where T : ICellCoordinate<T>
   {
-    private readonly Dictionary<T, double> myValues = new Dictionary<T, double>();
+    private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
 
-    public void AddValue(T node, double value)
+    private readonly Dictionary<T, double> myValues = new Dictionary<T, double>(COMPARER);
+
+    private void AddValue(T node, double value)
     {
       double v;
-      myValues.TryGetValue(node, out v);
-      myValues[node] = v + value;      
+      if (myValues.TryGetValue(node, out v))
+        value += v;
+
+      myValues[node] = value;      
+    }
+
+    public void Add(JVRPair<T> pair, double v)
+    {
+      AddValue(pair.From, -v);
+      AddValue(pair.To, v);
     }
 
     public T NextNode()

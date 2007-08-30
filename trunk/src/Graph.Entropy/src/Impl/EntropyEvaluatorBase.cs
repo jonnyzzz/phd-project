@@ -20,15 +20,15 @@ namespace DSIS.Graph.Entropy.Impl
       while (controller.SubdivideNext(system))
       {
         if (project != null) 
-          measure = measure.Divide(project);        
+          measure = measure.Divide(project);
 
+        controller.SetCoordinateSystem(system);
         measure.ComputeEntropy(controller);        
       
         project = system.Project(FillArray(2, dim));
         if (project == null)
           return;
-        system = project.ToSystem;
-        controller.SetCoordinateSystem(system);        
+        system = project.ToSystem;        
       }
     }
 

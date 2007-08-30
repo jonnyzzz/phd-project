@@ -29,7 +29,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return myComponents.GetNodeComponent(node) != null;
     }
 
-    protected void FillGraph()
+    public void FillGraph()
     {
       foreach (INode<T> node in myGraph.Nodes)
       {
@@ -39,22 +39,16 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         T nodeCoordinate = node.Coordinate;
         int nodeHash = JVRPair<T>.HashValue(nodeCoordinate);
         
-        double weight = 0;
         foreach (INode<T> edge in myGraph.GetEdges(node))
         {
           if (!VisitNode(edge))
             continue;
 
-          T edgeCoordinate = edge.Coordinate;
-          int edgeHash = JVRPair<T>.HashValue(edgeCoordinate);
-
-          JVRPair<T> key = new JVRPair<T>(nodeCoordinate, nodeHash, edgeCoordinate, edgeHash);
+          JVRPair<T> key = new JVRPair<T>(nodeCoordinate, nodeHash, edge.Coordinate);
           myHashHolder.Add(key,  1);
           
           myEdges.Add(key);
           myBackEdges.Add(key);
-
-          weight += 1;
         }
       }      
     }
@@ -67,6 +61,8 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public void Iterate(double precision)
     {     
       double normEps = precision * 1e-4;
+      const double maxValue = 3;
+
       while(true)
       {
         T node = myHashHolder.NextNode();
@@ -74,13 +70,25 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         double incoming = myBackEdges.ComputeWeight(node);
         double outgoing  = myEdges.ComputeWeight(node);
 
+        if (incoming >= maxValue || outgoing >= maxValue || incoming <= normEps || outgoing <= normEps)
+        {
+          myHashHolder.Normalize();
+          continue;
+        }
+
         if (Math.Abs(incoming - outgoing) <= precision)
           break;
 
-        double a = Math.Sqrt(outgoing / incoming);
-        double b = Math.Sqrt(incoming / outgoing);
+        double a = Math.Sqrt(outgoing) / Math.Sqrt(incoming);
+        double b = Math.Sqrt(incoming) / Math.Sqrt(outgoing);
 
-        if (a <= normEps || b <= normEps)
+        if (IsInvalid(a) || IsInvalid(b))
+        {
+          a = 0;
+          b = 0;
+        }
+          
+        if (incoming *  a <= normEps || outgoing * b <= normEps)
         {
           myHashHolder.Normalize();
           continue;
@@ -88,7 +96,14 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
         myBackEdges.MultiplyWeight(node, a);        
         myEdges.MultiplyWeight(node, b);
+      
+        Norm();
       }      
+    }
+
+    private static bool IsInvalid(double a)
+    {
+      return double.IsNaN(a) || double.IsInfinity(a);
     }
 
     public EntropyEvaluator<T, JVRPair<T>> CreateEvaluator()

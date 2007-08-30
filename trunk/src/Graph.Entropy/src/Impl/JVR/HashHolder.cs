@@ -9,6 +9,8 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   public class HashHolder<T> 
     where T : ICellCoordinate<T>
   {
+    private static readonly IEqualityComparer<JVRPair<T>> COMPARER = EqualityComparerFactory<JVRPair<T>>.GetComparer();
+
     private Dictionary<JVRPair<T>, double> myHash = CreateHash();
     private SortedNodeSet<T> mySet = CreateSet();
 
@@ -16,7 +18,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     
     private static Dictionary<JVRPair<T>, double> CreateHash()
     {
-      return new Dictionary<JVRPair<T>, double>(EqualityComparerFactory<JVRPair<T>>.GetComparer());
+      return new Dictionary<JVRPair<T>, double>(COMPARER);
     }
     
     private static SortedNodeSet<T> CreateSet()
@@ -33,8 +35,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         double value = pair.Value / div;
         JVRPair<T> key = pair.Key;
         ret.Add(key, value);
-        set.AddValue(key.From, -value);
-        set.AddValue(key.To, value);
+        set.Add(key, value);
       }
       myHash = ret;
       mySet = set;
@@ -63,8 +64,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public void Add(JVRPair<T> pair, double v)
     {
       myHash.Add(pair, v);
-      mySet.AddValue(pair.From, -v);
-      mySet.AddValue(pair.To, v);
+      mySet.Add(pair, v);
     }
 
     public double this[JVRPair<T> pair]
@@ -73,19 +73,14 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       set
       {
         double t = myHash[pair];
-        mySet.AddValue(pair.From, t);
-        mySet.AddValue(pair.To, -t);
-
         myHash[pair] = value;
-
-        mySet.AddValue(pair.From, -value);
-        mySet.AddValue(pair.To, value);
+        mySet.Add(pair, value - t);        
       }
     }
 
     public EntropyEvaluator<T, JVRPair<T>> CreateEvaluator()
     {
-      return new EntropyEvaluator<T, JVRPair<T>>(myHash, Norm(), EqualityComparerFactory<T>.GetReferenceComparer());
+      return new EntropyEvaluator<T, JVRPair<T>>(myHash, Norm(), EqualityComparerFactory<T>.GetComparer());
     }
     
     public T NextNode()

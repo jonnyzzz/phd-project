@@ -75,7 +75,7 @@ namespace DSIS.SimpleRunner
 
       public bool SubdivideNext(ICellCoordinateSystem<Q> system)
       {
-        return system.Subdivision[0] > 10;
+        return system.Subdivision[0] >= 10;
       }
 
       public void SetCoordinateSystem(ICellCoordinateSystem<Q> system)

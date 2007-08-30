@@ -52,13 +52,15 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     private static void Add<Q>(IDictionary<Q, double> ds, Q node, double v)
     {
       double b;
-      ds.TryGetValue(node, out b);
-      ds[node] = b + v;
+      if (ds.TryGetValue(node, out b))
+        v += b;
+
+      ds[node] = v;
     }
     
     private static double Entropy(double d)
     {
-      return Math.Abs(d) < 1e-5 ? 0.0 : d * Math.Log(d);
+      return d * Math.Log(d);
     }
 
 

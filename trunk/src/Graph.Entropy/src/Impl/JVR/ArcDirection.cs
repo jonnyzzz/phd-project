@@ -8,7 +8,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     where T : ICellCoordinate<T>
   {
     protected readonly HashHolder<T> myHash;
-    protected readonly MultiDictionary<T, JVRPair<T>> myIndex = new MultiDictionary<T, JVRPair<T>>(EqualityComparerFactory<T>.GetReferenceComparer());
+    protected readonly MultiDictionary<T, JVRPair<T>> myIndex = new MultiDictionary<T, JVRPair<T>>(EqualityComparerFactory<T>.GetComparer());
 
     public ArcDirection(HashHolder<T> hash)
     {
@@ -31,7 +31,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         w += myHash[edge];
       }
       return w;
-
     }
 
     public void MultiplyWeight(T node, double factor) 

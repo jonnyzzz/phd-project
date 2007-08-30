@@ -40,6 +40,7 @@
     <Compile Include="ComputeEntropyListener.cs" />
     <Compile Include="ComputeEntropyListenerBase.cs" />
     <Compile Include="ComputeEntropySquareListener.cs" />
+    <Compile Include="ComputeJVREntropySquareListener.cs" />
     <Compile Include="ConsoleListener.cs" />
     <Compile Include="DrawBase.cs" />
     <Compile Include="DrawEntropyBase.cs" />

@@ -1,4 +1,5 @@
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 
@@ -18,6 +19,11 @@ namespace DSIS.Graph.Entropy
     public static IEntropyEvaluator<T> GetLoopEntropySquareEvaluator()
     {
       return new StrangeEntropyEvaluatorImpl<T>(EntropyLoopSquareEntropyWeight.VALUE);
+    }    
+    
+    public static IEntropyEvaluator<T> GetJVREvaluator()
+    {
+      return new JVREvaluator<T>();
     }    
 
     public static IEntropyEvaluator<T> GetEigentEvaluator()

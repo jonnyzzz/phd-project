@@ -22,8 +22,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public JVRPair(T from, int fromHash, T to, int toHash) : this(from, to, HashValue(fromHash, toHash), HashValue(toHash, fromHash))
     {
-      Hash = fromHash + 131*toHash;
-      Hash = toHash + 131*fromHash;
     }
 
     private static int HashValue(int a, int b)
@@ -56,7 +54,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   internal class JVRPairEqualityComparer<T> : IEqualityComparer<JVRPair<T>>
   where T : ICellCoordinate<T>
   {
-    private static readonly IEqualityComparer<T> COMPARER = NodePair<T>.COMPARER;
+    private static readonly IEqualityComparer<T> COMPARER = JVRPair<T>.COMPARER;
 
     public bool Equals(JVRPair<T> x, JVRPair<T> y)
     {
