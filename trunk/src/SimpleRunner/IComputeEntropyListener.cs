@@ -7,7 +7,7 @@ namespace DSIS.SimpleRunner
     where T : ICellCoordinate<T>
   {
     void OnComputeEntropyStarted();
-    void OnComputeEntropyFinished(double[] value);
+    void OnComputeEntropyFinished(string key, double[] value);
 
     void OnComputeEntropyStep(double value, IDictionary<T, double> measure, ICellCoordinateSystem<T> system);
   }

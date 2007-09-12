@@ -11,6 +11,8 @@ namespace DSIS.SimpleRunner
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
+    protected abstract string Suffix { get; }
+
     public override void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                         AbstractImageBuilderContext<Q> cx)
     {
@@ -30,7 +32,7 @@ namespace DSIS.SimpleRunner
     {
       FireListeners(delegate(IComputeEntropyListener<Q> listener)
                       {
-                        listener.OnComputeEntropyFinished(entropy);
+                        listener.OnComputeEntropyFinished(Suffix, entropy);
                       });
 
     }

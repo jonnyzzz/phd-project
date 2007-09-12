@@ -68,7 +68,7 @@ namespace DSIS.SimpleRunner
     {
     }
 
-    public void OnComputeEntropyFinished(double[] value)
+    public void OnComputeEntropyFinished(string key, double[] value)
     {
       foreach (double d in value)
       {

@@ -11,5 +11,10 @@ namespace DSIS.SimpleRunner
     {
       return EntropyEvaluator<Q>.GetJVREvaluator();
     }
+
+    protected override string Suffix
+    {
+      get { return "JVR"; }
+    }
   }
 }

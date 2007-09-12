@@ -152,8 +152,9 @@ namespace DSIS.SimpleRunner
       myEntropy = AppendElement(myStep, "entropy");
     }
 
-    public void OnComputeEntropyFinished(double[] value)
+    public void OnComputeEntropyFinished(string key, double[] value)
     {      
+      AppendAttribute(myEntropy, "entropy-type", key);
       AppendAttribute(myEntropy, "value", value[0]);
       AppendAttribute(myEntropy, "time", (DateTime.Now - myComputationEntropyStartedTime).TotalMilliseconds);
       for (int i = 0; i < value.Length; i++)

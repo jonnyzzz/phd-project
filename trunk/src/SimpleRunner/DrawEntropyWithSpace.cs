@@ -38,6 +38,9 @@ namespace DSIS.SimpleRunner
 
     public override string DrawImage(string suffix)
     {
+      if (myWights == null)
+        return null;
+
       GnuplotPointsFileWriter file = Render(myWights.Value);
       {
         string outputFile = CreateFileName(suffix + "measure.png");

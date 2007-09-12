@@ -11,5 +11,10 @@ namespace DSIS.SimpleRunner
     {
       return EntropyEvaluator<Q>.GetLoopEntropyLinearEvaluator();
     }
+
+    protected override string Suffix
+    {
+      get { return "Linear"; }
+    }
   }
 }
