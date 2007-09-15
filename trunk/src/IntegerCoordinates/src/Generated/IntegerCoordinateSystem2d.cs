@@ -1,6 +1,7 @@
 using System;
 using DSIS.Core.System;
 using DSIS.IntegerCoordinates.Impl;
+using DSIS.Persistance;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
@@ -166,6 +167,20 @@ namespace DSIS.IntegerCoordinates.Generated
     {
       long[] factor = GetProjectedFactor(division);
       return factor != null ? new IntegerCoordinateSystem2d(SystemSpace, factor) : null;
+    }
+
+
+    public void SaveCoordinate(IntegerCoordinate2d coord, IBinaryWriter writer)
+    {
+      writer.WriteLong(coord.l1);
+      writer.WriteLong(coord.l2);
+    }
+
+    public IntegerCoordinate2d LoadCoordinate(IBinaryReader reader)
+    {
+      long l1 = reader.ReadLong();
+      long l2 = reader.ReadLong();
+      return Create(l1, l2);
     }
   }
 }

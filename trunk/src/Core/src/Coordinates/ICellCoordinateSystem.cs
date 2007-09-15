@@ -5,6 +5,7 @@
 
 using DSIS.Core.System;
 using DSIS.Core.Util;
+using DSIS.Persistance;
 
 namespace DSIS.Core.Coordinates
 {
@@ -43,5 +44,8 @@ namespace DSIS.Core.Coordinates
     CountEnumerable<T> InitialSubdivision { get; }
 
     ISystemSpace SystemSpace { get; }
+
+    void SaveCoordinate(T coord, IBinaryWriter writer);
+    T LoadCoordinate(IBinaryReader reader);
   }
 }

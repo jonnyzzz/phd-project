@@ -1,4 +1,5 @@
 using DSIS.Core.System;
+using DSIS.Persistance;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
@@ -66,6 +67,24 @@ namespace DSIS.IntegerCoordinates.Impl
     {
       long[] factor = GetProjectedFactor(division);
       return factor != null ? new IntegerCoordinateSystem(SystemSpace, factor) : null;
+    }
+
+    public void SaveCoordinate(IntegerCoordinate coord, IBinaryWriter writer)
+    {
+      for(int i =0; i<myDimension; i++)
+      {
+        writer.WriteLong(coord.GetCoordinate(i));
+      }
+    }
+
+    public IntegerCoordinate LoadCoordinate(IBinaryReader reader)
+    {
+      long[] t = new long[myDimension];
+      for(int i=0; i<myDimension; i++)
+      {
+        t[i] = reader.ReadLong();
+      }
+      return new IntegerCoordinate(t);
     }
   }
 }

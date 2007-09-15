@@ -133,6 +133,10 @@
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Persistance\Persistance.csproj">
+      <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
+      <Name>Persistance</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="src\Generated\Template\IntegerCoordinate.st" />

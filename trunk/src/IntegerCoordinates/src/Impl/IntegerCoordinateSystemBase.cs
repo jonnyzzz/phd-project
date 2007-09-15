@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.Core.Util;
+using DSIS.Persistance;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
