@@ -87,6 +87,7 @@ namespace DSIS.Graph.Entropy
       EntropyListener<IntegerCoordinate> l = new EntropyListener<IntegerCoordinate>();
       j.CreateEvaluator().ComputeEntropy(l);
 
+      Console.Out.WriteLine("l.Result = {0}", l.Result);
       Assert.AreEqual(entropy, l.Result, EPS);
 
       return j;

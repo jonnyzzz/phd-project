@@ -68,7 +68,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         T node = myHashHolder.NextNode();
         
         double incoming = myBackEdges.ComputeWeight(node);
-        double outgoing  = myEdges.ComputeWeight(node);
+        double outgoing = myEdges.ComputeWeight(node);
 
         if (incoming >= maxValue || outgoing >= maxValue || incoming <= normEps || outgoing <= normEps)
         {

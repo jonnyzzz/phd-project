@@ -6,7 +6,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   internal class JVREvaluator<T> : EntropyEvaluatorBase<T> 
     where T : ICellCoordinate<T>
   {
-    private const double EPS = 1e-3;
+    private const double EPS = 1e-6;
 
     protected override IEntropyProcessor<T> Measure(IEntropyEvaluatorInput<T> data)
     {

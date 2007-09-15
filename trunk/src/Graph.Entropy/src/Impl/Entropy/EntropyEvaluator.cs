@@ -58,9 +58,22 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
       ds[node] = v;
     }
     
+    private const double EPS = 1e-10;
+
+    private static double Log(double d)
+    {
+      if (d < 1)
+        return -Math.Log(1.0/d);
+      else
+        return Math.Log(d);
+    }
+
     private static double Entropy(double d)
     {
-      return d * Math.Log(d);
+      if (d < EPS)
+        return 0;
+
+      return d * Log(d);
     }
 
 
