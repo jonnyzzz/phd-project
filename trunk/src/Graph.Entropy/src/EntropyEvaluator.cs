@@ -20,6 +20,14 @@ namespace DSIS.Graph.Entropy
     {
       return new StrangeEntropyEvaluatorImpl<T>(EntropyLoopSquareEntropyWeight.VALUE);
     }    
+    public static IEntropyEvaluator<T> GetLoopEntropyMunisOneEvaluator()
+    {
+      return new StrangeEntropyEvaluatorImpl<T>(EntropyLoopMunisOneEntropyWeight.VALUE);
+    }    
+    public static IEntropyEvaluator<T> GetLoopEntropyMunisTwoEvaluator()
+    {
+      return new StrangeEntropyEvaluatorImpl<T>(EntropyLoopMunisTwoEntropyWeight.VALUE);
+    }    
     
     public static IEntropyEvaluator<T> GetJVREvaluator()
     {

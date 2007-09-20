@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Persistance;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
@@ -64,6 +65,17 @@ namespace DSIS.Graph.Abstract
       public Item(TNode value)
       {
         Value = value;
+      }
+    }
+
+    public void Save(ICellCoordinateSystem<TCell> ics, IBinaryWriter writer)
+    {
+      writer.WriteInt(myHashMax);
+      foreach (Item item in myItems)
+      {
+        writer.WriteByte(1);
+//        ics.SaveCoordinate(item.Value., writer);
+
       }
     }
   }

@@ -4,7 +4,6 @@ using DSIS.CellImageBuilder;
 using DSIS.CellImageBuilder.AdaptiveMethod;
 using DSIS.CellImageBuilder.BoxAdaptiveMethod;
 using DSIS.CellImageBuilder.BoxMethod;
-using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
@@ -41,8 +40,8 @@ namespace DSIS.SimpleRunner
 //            new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3})),
 //          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
 //            new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3}, 0.1)),
-//          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-//            new BoxMethod<T, Q>(), BoxMethodSettings.Default),
+          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
+            new BoxMethod<T, Q>(), BoxMethodSettings.Default),
 //          new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
 //            new BoxAdaptiveMethod<T,Q>(), BoxAdaptiveMethodSettings.Default),
         };

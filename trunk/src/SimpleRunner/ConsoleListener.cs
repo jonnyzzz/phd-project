@@ -72,7 +72,7 @@ namespace DSIS.SimpleRunner
     {
       foreach (double d in value)
       {
-        Console.Out.WriteLine("Entropy {0}", d);      
+        Console.Out.WriteLine("Entropy-{1} {0}", d, key);      
       }      
     }
 

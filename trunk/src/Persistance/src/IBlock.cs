@@ -4,6 +4,7 @@ namespace DSIS.Persistance
 {
   public interface IBinaryWriter
   {
+    void WriteByte(byte b);
     void WriteLong(long l);
     void WriteInt(int i);
     void WriteString(string s);
@@ -50,6 +51,11 @@ namespace DSIS.Persistance
       myWriter = writer;
     }
 
+    public void WriteByte(byte b)
+    {
+      myWriter.Write(b);
+    }
+
     public void WriteLong(long l)
     {
       myWriter.Write(l);
@@ -65,6 +71,4 @@ namespace DSIS.Persistance
       myWriter.Write(s);
     }
   }
-
-
 }

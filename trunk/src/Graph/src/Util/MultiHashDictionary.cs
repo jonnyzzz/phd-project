@@ -39,5 +39,11 @@ namespace DSIS.Graph.Util
         this[k] = l;
       }
     }
+
+    public bool ContainsPair(TK key, TV value)
+    {
+      Hashset<TV> set;
+      return TryGetValue(key, out set) && set.Contains(value);
+    }
   }
 }
