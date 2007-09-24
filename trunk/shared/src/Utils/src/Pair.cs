@@ -8,6 +8,14 @@ using DSIS.Utils;
 
 namespace DSIS.Utils
 {
+  public static class Pair
+  {
+    public static Pair<A,B> Create<A,B>(A a, B b)
+    {
+      return new Pair<A, B>(a,b);
+    }
+  }
+
   public struct Pair<TK, TV>
   {
     private static readonly IEqualityComparer<TK> ComparerK = EqualityComparerFactory<TK>.GetComparer();

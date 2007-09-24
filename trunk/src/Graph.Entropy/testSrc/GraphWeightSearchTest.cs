@@ -146,18 +146,47 @@ namespace DSIS.Graph.Entropy
     }
 
 
-    [Test]
-    public void Test_08()
-    {
-      DoTest(delegate(IGraph<IntegerCoordinate> graph)
+    protected static BuildGraph BuildFullGraph(int pow)
+    {      
+      return delegate(IGraph<IntegerCoordinate> graph)
                {
-                 const int n = 3;
-                 for (int i = 1; i <= n; i++)
-                   for (int j = 1; j <= n; j++)
+                 for (int i = 1; i <= pow; i++)
+                   for (int j = 1; j <= pow; j++)
                    {
-                     AddEdge(graph, i, j); 
-                   }                                      
-               }, "1, ", "3, ", "1, 3, ", "1, 2,", "2," );
+                     AddEdge(graph, i, j);
+                   }
+               };
+    }
+
+
+    [Test]
+    public void Test_08_full3()
+    {
+      DoTest(BuildFullGraph(3), "1, ", "3, ", "1, 3, ", "1, 2,", "2," );
+    }
+    
+    [Test]
+    public void Test_09_full4()
+    {
+      DoTest(BuildFullGraph(4), "1, ", "3, ", "1, 3, ", "4, ", "1, 4, ", "1, 2,", "2," );
+    }
+    
+    [Test]
+    public void Test_09_full5()
+    {
+      DoTest(BuildFullGraph(5), "1, ", "3, ", "1, 3, ", "4, ", "1, 4, ", "1, 5, ", "5,", "1, 2,", "2," );
+    }
+    
+    [Test]
+    public void Test_09_full6()
+    {
+      DoTest(BuildFullGraph(6), "1, ", "3, ", "1, 3, ", "4, ", "1, 4, ", "1, 5, ", "5,", "1, 2,", "2,", "1, 6,", "6, " );
+    }
+
+    [Test]
+    public void Test_09_full7()
+    {
+      DoTest(BuildFullGraph(7), "1, ", "3, ", "1, 3, ", "7, ", "1, 7, ", "4, ", "1, 4, ", "1, 5, ", "5,", "1, 2,", "2,", "1, 6,", "6, " );
     }
   }
 }

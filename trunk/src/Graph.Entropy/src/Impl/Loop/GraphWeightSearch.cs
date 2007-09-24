@@ -61,11 +61,12 @@ namespace DSIS.Graph.Entropy.Impl.Loop
             else
             {
               queue.Enqueue(new SearchTreeNode(null, edge));
-            }
+//              queue.Enqueue(node.Child(edge));
+            }            
           }
           else
           {
-            queue.Enqueue(new SearchTreeNode(node, edge));
+            queue.Enqueue(node.Child(edge));
           }
         }
       }

@@ -67,7 +67,10 @@
     <Compile Include="src\EqualityComparerAttribute.cs" />
     <Compile Include="src\EqualityComparerFactory.cs" />
     <Compile Include="src\HashedQueue.cs" />
+    <Compile Include="src\Log2Helper.cs" />
     <Compile Include="src\MutexCookie.cs" />
+    <Compile Include="src\PriorityQueue.cs" />
+    <Compile Include="testSrc\BinTreePriorityQueueTest.cs" />
     <Compile Include="testSrc\EqualityComparerFactoryTest.cs" />
     <Compile Include="src\Hashset.cs" />
     <Compile Include="src\IntEqualityComparer.cs" />
@@ -77,6 +80,7 @@
     <Compile Include="src\Pair.cs" />
     <Compile Include="src\Primes.cs" />
     <Compile Include="src\UpcastedEnumerator.cs" />
+    <Compile Include="testSrc\Log2HelperTest.cs" />
     <Compile Include="testSrc\NUnitFixtureHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
