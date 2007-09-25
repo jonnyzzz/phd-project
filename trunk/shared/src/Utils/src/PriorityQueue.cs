@@ -79,6 +79,8 @@ namespace DSIS.Utils
 
     protected void Consolidate()
     {
+      myNonConsolidatedSize = 0;
+
       if (myMin == null || myMin.Sibling == myMin)
         return;
 

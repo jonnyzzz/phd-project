@@ -20,7 +20,7 @@ namespace DSIS.Utils.testSrc
     [Test]
     public void Test_03()
     {
-      DoTest(2, 2);
+      DoTest(2, 3);
     }
     
     [Test]
@@ -32,7 +32,7 @@ namespace DSIS.Utils.testSrc
     [Test]
     public void Test_05()
     {
-      DoTest(4, 3);
+      DoTest(4, 4);
     }
     
     [Test]
@@ -56,7 +56,7 @@ namespace DSIS.Utils.testSrc
     [Test]
     public void Test_09()
     {
-      DoTest(8, 4);
+      DoTest(8, 5);
     }
 
     private static void DoTest(int v, int r)

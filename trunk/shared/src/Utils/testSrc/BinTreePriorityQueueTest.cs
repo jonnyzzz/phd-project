@@ -177,6 +177,18 @@ namespace DSIS.Utils.testSrc
     {
       DoSetTest(Random(128355));
     }
+    
+    [Test]
+    public void Test_19()
+    {
+      DoSetTest2(Random(355));
+    }
+    
+    [Test]
+    public void Test_20()
+    {
+      DoSetTest2(Random(555));
+    }
 
     private static int[] Random(int size)
     {
@@ -191,11 +203,18 @@ namespace DSIS.Utils.testSrc
 
     private void DoSetTest(params int[] data)
     {
+      int? min = null;
       List<int> dta = new List<int>();
       foreach (int i in data)
       {
+        if (min == null || min.Value < i)
+          min = i;
+
         queue.Enqueue(new Pair<string, int>(i.ToString(), i));
         dta.Add(i);
+
+        Assert.AreEqual(min, queue.Dequeue().Second);
+        queue.Enqueue(new Pair<string, int>(min.ToString(), min.Value));
       }
 
       dta.Sort();
@@ -204,6 +223,26 @@ namespace DSIS.Utils.testSrc
       {        
         Assert.AreEqual(i, queue.Dequeue().Second);
       }
+    }
+    
+    private void DoSetTest2(params int[] data)
+    {
+      for(int i=1; i < data.Length; i++)
+      {
+        List<int> dta = new List<int>();
+        for (int j =0; j<i; j++)
+        {          
+          int v = data[j];
+          dta.Add(v);
+          queue.Enqueue(new Pair<string, int>(v.ToString(), v));          
+        }
+        dta.Sort();
+
+        foreach (int v in dta)
+        {
+          Assert.AreEqual(v, queue.Dequeue().Second);
+        }        
+      }      
     }
     
     private void AssertMin(int v, string d)
