@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace DSIS.GnuplotDrawer
 {
   public interface IGnuplotScript
@@ -13,5 +15,10 @@ namespace DSIS.GnuplotDrawer
   public interface IGnuplotPhaseScriptGen : IGnuplotScriptGen
   {
     void AddPointsFile(GnuplotPointsFileWriter file);    
+  }
+
+  public interface IGnuplotLineScriptGen : IGnuplotScriptGen
+  {
+    string AddSeria(string name, IEnumerable<double> values);
   }
 }

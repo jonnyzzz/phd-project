@@ -71,7 +71,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public void SaveCoordinate(IntegerCoordinate coord, IBinaryWriter writer)
     {
-      for(int i =0; i<myDimension; i++)
+      for(int i = 0; i<myDimension; i++)
       {
         writer.WriteLong(coord.GetCoordinate(i));
       }

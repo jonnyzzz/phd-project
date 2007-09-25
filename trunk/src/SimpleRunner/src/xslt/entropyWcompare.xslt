@@ -55,11 +55,10 @@
       <thead>
         <tr>
           <td>Step</td>
-          <td>MinusTwo</td>
-          <td>MinusOne</td>
-          <td>Const</td>
-          <td>Linear</td>
-          <td>Square</td>
+          <xsl:for-each select="step[last()]/entropy">
+            <xsl:sort select="@entropy-type"/>
+            <td><xsl:value-of select="@entropy-type"/></td>
+          </xsl:for-each>
         </tr>
       </thead>
       <tbody>
@@ -75,11 +74,10 @@
   <xsl:template match="step">
     <tr>
       <td><xsl:apply-templates select="@step"/></td>
-      <td><xsl:value-of select="entropy[@entropy-type='MinusTwo']/entropy-step[@project='0']/@value"/></td>
-      <td><xsl:value-of select="entropy[@entropy-type='MinusOne']/entropy-step[@project='0']/@value"/></td>
-      <td><xsl:value-of select="entropy[@entropy-type='Const']/entropy-step[@project='0']/@value"/></td>      
-      <td><xsl:value-of select="entropy[@entropy-type='Linear']/entropy-step[@project='0']/@value"/></td>
-      <td><xsl:value-of select="entropy[@entropy-type='Square']/entropy-step[@project='0']/@value"/></td>
+      <xsl:for-each select="entropy">
+        <xsl:sort select="@entropy-type"/>
+        <td><xsl:value-of select="entropy-step[@project='0']/@value"/></td>
+      </xsl:for-each>
     </tr>
   </xsl:template>  
 </xsl:stylesheet>

@@ -46,6 +46,7 @@
     <Compile Include="ConsoleListener.cs" />
     <Compile Include="DrawBase.cs" />
     <Compile Include="DrawEntropyBase.cs" />
+    <Compile Include="DrawEntropyDivCurveListener.cs" />
     <Compile Include="DrawEntropyListener.cs" />
     <Compile Include="DrawEntropyWithSpace.cs" />
     <Compile Include="ProjectTheSameMeasureEntropyDraw.cs" />

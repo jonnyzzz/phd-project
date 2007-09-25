@@ -35,16 +35,12 @@ namespace DSIS.SimpleRunner
 
       AddListener(myFake);
 
-      AddListener<ComputeEntropyMinusTwoListener<T, Q>>("MinusTwo");
-      AddListener<ComputeEntropyMinusOneListener<T, Q>>("MinusOne");      
-      AddListener<ComputeEntropyConstListener<T, Q>>("Const");
-      AddListener<ComputeEntropySquareListener<T, Q>>("Square");      
-      AddListener<ComputeEntropyLinearListener<T, Q>>("Linear");
-
-//      AddListener(new ComputeEntropyConstListener<T, Q>());      
-//      AddListener(new ComputeEntropySquareListener<T,Q>());      
-//      AddListener(new ComputeEntropyLinearListener<T,Q>());      
-//      AddListener(new ComputeJVREntropySquareListener<T,Q>());
+//      AddListener<ComputeEntropyMinusTwoListener<T, Q>>("MinusTwo");
+//      AddListener<ComputeEntropyMinusOneListener<T, Q>>("MinusOne");      
+//      AddListener<ComputeEntropyConstListener<T, Q>>("Const");
+//      AddListener<ComputeEntropySquareListener<T, Q>>("Square");      
+//      AddListener<ComputeEntropyLinearListener<T, Q>>("Linear");
+      AddListener<ComputeJVREntropySquareListener<T, Q>>("jvr");
     }
 
     private void AddListener<_>(string __) where _ : ComputeEntropyListenerBase<T, Q>, new()
@@ -55,9 +51,11 @@ namespace DSIS.SimpleRunner
 
     private void AddListener(ComputeEntropyListenerBase<T, Q> listener, string suffix)
     {
-//      DrawEntropyListener<T, Q> l = new DrawEntropyListener<T, Q>(suffix);
-//      listener.AddListener(l);
-//      myFake.AddListener(l);
+/*
+      DrawEntropyCurveListener<T, Q> l = new DrawEntropyCurveListener<T, Q>();
+      listener.AddListener(l);
+      myFake.AddListener(l);
+*/
       AddListener(listener);
     }
 
@@ -73,7 +71,7 @@ namespace DSIS.SimpleRunner
 
     private class FakeEvent : AbstractImageBuilderListener<T, Q>, IComputationPathListener
     {
-      private readonly List<DrawEntropyListener<T, Q>> myListeners = new List<DrawEntropyListener<T, Q>>();
+      private readonly List<object> myListeners = new List<object>();
       
       IEnumerable<Pair<string, Action<string>>> IComputationPathListener.FormatPath
       {
@@ -97,7 +95,7 @@ namespace DSIS.SimpleRunner
         }
       }
 
-      public void AddListener(DrawEntropyListener<T,Q> l)
+      public void AddListener(object l)
       {
         myListeners.Add(l);
       }
@@ -141,7 +139,7 @@ namespace DSIS.SimpleRunner
       public override void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
       {
         base.OnStepStarted(system, cx, subdivide);
-        foreach (DrawEntropyListener<T, Q> listener in myListeners)
+        foreach (AbstractImageBuilderListener<T, Q> listener in myListeners)
         {
           listener.OnStepStarted(system, cx, subdivide);
         }

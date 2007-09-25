@@ -4,7 +4,7 @@ using System.IO;
 
 namespace DSIS.GnuplotDrawer
 {
-  public class LinesScriptGen : PngWriterBase, IGnuplotScriptGen
+  public class LinesScriptGen : PngWriterBase, IGnuplotLineScriptGen
   {
     private readonly Dictionary<string, int> myCriteriaToCode = new Dictionary<string, int>();
     private bool myIsFirst = true;

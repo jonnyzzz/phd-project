@@ -73,7 +73,7 @@ namespace DSIS.Graph.Abstract
       writer.WriteInt(myHashMax);
       foreach (Item item in myItems)
       {
-        writer.WriteByte(1);
+//        writer.WriteByte(1);
 //        ics.SaveCoordinate(item.Value., writer);
 
       }

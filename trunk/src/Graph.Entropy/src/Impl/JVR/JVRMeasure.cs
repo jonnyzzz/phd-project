@@ -97,7 +97,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         myBackEdges.MultiplyWeight(node, a);        
         myEdges.MultiplyWeight(node, b);
       
-        Norm();
+//        Norm();
       }      
     }
 
