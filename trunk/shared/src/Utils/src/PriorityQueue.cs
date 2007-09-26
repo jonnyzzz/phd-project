@@ -39,11 +39,11 @@ namespace DSIS.Utils
       myMin = myMin.Sibling;
       mySize--;
 
-      for (Node child = min.Child; child != null; )
+      for (Node child = min.Child; child != null;)
       {
         Node t = child.Sibling;
         child.Sibling = myMin;
-        myMin = child;        
+        myMin = child;
         child = t;
       }
 
@@ -62,7 +62,7 @@ namespace DSIS.Utils
 
     private static void ProcessNode(Node[] A, Node cur)
     {
-      int d = cur.Degree;
+      uint d = cur.Degree;
       while (A[d] != null)
       {
         Node child = A[d];
@@ -126,7 +126,7 @@ namespace DSIS.Utils
       {
         preMin.Sibling = null;
         prev.Sibling = leaf;
-      } // else myMin == leaf
+      }
     }
 
     private void Add(Node node)
@@ -144,16 +144,41 @@ namespace DSIS.Utils
       {
         node.Sibling = myMin.Sibling;
         myMin.Sibling = node;
-      }      
+      }
     }
 
     protected class Node : IComparable<Node>
     {
+      private const uint FLAG = 0x80000000;
+      private const uint MASK = 0x4fffffff;
+      private uint myData;
+
       public readonly Q Value;
       public readonly T Data;
       public Node Child;
       public Node Sibling;
-      public int Degree;
+
+      public uint Degree
+      {
+        get { return myData & MASK; }
+        set { myData = (myData & ~MASK) + (value & MASK); }
+      }
+
+      public bool Mark
+      {
+        get { return (myData & FLAG) != 0; }
+        protected set
+        {
+          if (value)
+          {
+            myData |= FLAG;
+          }
+          else
+          {
+            myData &= ~FLAG;
+          }
+        }
+      }
 
       public Node(Q value, T data)
       {

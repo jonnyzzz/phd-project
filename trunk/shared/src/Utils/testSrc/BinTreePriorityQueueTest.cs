@@ -207,13 +207,13 @@ namespace DSIS.Utils.testSrc
       List<int> dta = new List<int>();
       foreach (int i in data)
       {
-        if (min == null || min.Value < i)
+        if (min == null || min.Value >  i)
           min = i;
 
         queue.Enqueue(new Pair<string, int>(i.ToString(), i));
         dta.Add(i);
 
-        Assert.AreEqual(min, queue.Dequeue().Second);
+        Assert.AreEqual(min, queue.Dequeue().Second, "Min test failed");
         queue.Enqueue(new Pair<string, int>(min.ToString(), min.Value));
       }
 

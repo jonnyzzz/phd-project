@@ -35,6 +35,7 @@ namespace DSIS.Graph.Entropy
       }
       try
       {
+        Assert.AreEqual(golds.Length, mcb.Loops.Count);
         for (int index = 0; index < mcb.Loops.Count; index++)
         {
           List<string> loop = mcb.Loops[index];

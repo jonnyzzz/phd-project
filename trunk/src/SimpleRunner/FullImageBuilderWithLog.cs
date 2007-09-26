@@ -35,12 +35,12 @@ namespace DSIS.SimpleRunner
 
       AddListener(myFake);
 
-//      AddListener<ComputeEntropyMinusTwoListener<T, Q>>("MinusTwo");
-//      AddListener<ComputeEntropyMinusOneListener<T, Q>>("MinusOne");      
-//      AddListener<ComputeEntropyConstListener<T, Q>>("Const");
-//      AddListener<ComputeEntropySquareListener<T, Q>>("Square");      
-//      AddListener<ComputeEntropyLinearListener<T, Q>>("Linear");
-      AddListener<ComputeJVREntropySquareListener<T, Q>>("jvr");
+      AddListener<ComputeEntropyMinusTwoListener<T, Q>>("MinusTwo");
+      AddListener<ComputeEntropyMinusOneListener<T, Q>>("MinusOne");      
+      AddListener<ComputeEntropyConstListener<T, Q>>("Const");
+      AddListener<ComputeEntropySquareListener<T, Q>>("Square");      
+      AddListener<ComputeEntropyLinearListener<T, Q>>("Linear");
+//      AddListener<ComputeJVREntropySquareListener<T, Q>>("jvr");
     }
 
     private void AddListener<_>(string __) where _ : ComputeEntropyListenerBase<T, Q>, new()

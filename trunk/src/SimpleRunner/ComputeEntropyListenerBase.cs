@@ -18,7 +18,7 @@ namespace DSIS.SimpleRunner
     {
       OnComputeEntropyStarted();
 
-      Controller controller = new Controller(graph, comps, this);
+      Controller controller = new NoProjectController(graph, comps, this);
 
       IEntropyEvaluator<Q> evaluator = GetLoopEntropyEvaluator();
       evaluator.ComputeEntropy(controller, NullProgressInfo.INSTANCE);
@@ -75,7 +75,7 @@ namespace DSIS.SimpleRunner
         get { return myComponents; }
       }
 
-      public bool SubdivideNext(ICellCoordinateSystem<Q> system)
+      public virtual bool SubdivideNext(ICellCoordinateSystem<Q> system)
       {
         return system.Subdivision[0] >= 10;
       }
@@ -85,13 +85,33 @@ namespace DSIS.SimpleRunner
         mySystem = system;
       }
 
-      public void OnResult(double result, IDictionary<Q, double> measure)
+      public virtual void OnResult(double result, IDictionary<Q, double> measure)
       {
         myResults.Add(result);
         myHost.FireListeners(delegate(IComputeEntropyListener<Q> obj)
                                {
                                  obj.OnComputeEntropyStep(result, measure, mySystem);
                                });
+      }
+    }
+  
+    private class NoProjectController : Controller
+    {
+      private bool myHasResult;
+
+      public NoProjectController(IGraph<Q> graph, IGraphStrongComponents<Q> components, ComputeEntropyListenerBase<T, Q> host) : base(graph, components, host)
+      {
+      }
+
+      public override bool SubdivideNext(ICellCoordinateSystem<Q> system)
+      {
+        return !myHasResult;
+      }
+
+      public override void OnResult(double result, IDictionary<Q, double> measure)
+      {
+        myHasResult = true;
+        base.OnResult(result, measure);
       }
     }
   }
