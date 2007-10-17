@@ -225,25 +225,25 @@ namespace DSIS.Utils.testSrc
       }
     }
     
-    private void DoSetTest2(params int[] data)
-    {
-      for(int i=1; i < data.Length; i++)
+      private void DoSetTest2(params int[] data)
       {
-        List<int> dta = new List<int>();
-        for (int j =0; j<i; j++)
-        {          
-          int v = data[j];
-          dta.Add(v);
-          queue.Enqueue(new Pair<string, int>(v.ToString(), v));          
-        }
-        dta.Sort();
-
-        foreach (int v in dta)
+        for(int i=1; i < data.Length; i++)
         {
-          Assert.AreEqual(v, queue.Dequeue().Second);
-        }        
-      }      
-    }
+          List<int> dta = new List<int>();
+          for (int j =0; j<i; j++)
+          {          
+            int v = data[j];
+            dta.Add(v);
+            queue.Enqueue(new Pair<string, int>(v.ToString(), v));          
+          }
+          dta.Sort();
+
+          foreach (int v in dta)
+          {
+            Assert.AreEqual(v, queue.Dequeue().Second);
+          }        
+        }      
+      }
     
     private void AssertMin(int v, string d)
     {
@@ -307,7 +307,7 @@ namespace DSIS.Utils.testSrc
 
       private static void DumpTree(string so, int offset, Node node, StringBuilder sb)
       {
-        sb.AppendFormat("{2}{0, 3}. {1}", offset, node, so);
+        sb.AppendFormat("{2}{0, 3}. {1}", offset, node.ToString(), so);
         sb.AppendFormat("d={0}", node.Degree);
         sb.AppendLine();
         for (Node n = node.Child; n != null; n = n.Sibling)

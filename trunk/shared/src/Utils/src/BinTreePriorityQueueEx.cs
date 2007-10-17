@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace DSIS.Utils
 {
@@ -45,9 +46,31 @@ namespace DSIS.Utils
         myMin = null;
       else
       {
-        node.PrevSibling.Sibling = node.Sibling;
-        node.Sibling.PrevSibling = node.PrevSibling;
-        myMin = node.Sibling;
+        Node mBegin = myMin.PrevSibling;
+        Node mEnd = myMin.Sibling;
+
+        if (myMin.Child == null)
+        {
+          mBegin.Sibling = mEnd;
+          mEnd.PrevSibling = mBegin;
+        } else {
+          Node cBegin = myMin.Child;
+          Node cEnd = myMin.Child.PrevSibling;
+
+          cEnd.Sibling = null;
+
+          for (Node tmp = cBegin; tmp != null; tmp = tmp.Sibling)
+            tmp.Parent = null;
+
+          mBegin.Sibling = cBegin;
+          cBegin.PrevSibling = mBegin;
+
+          cEnd.Sibling = mEnd;
+          mEnd.PrevSibling = cEnd;
+        }
+
+        myMin = mEnd;
+        
         Consolidate();
       }
 
@@ -57,19 +80,68 @@ namespace DSIS.Utils
 
     protected void Consolidate()
     {
-      
+      if (myMin != null)
+        Join(Group());     
     }
 
+    private List<Node> Nodes()
+    {
+      List<Node> nodes = new List<Node>();
+      if (myMin == null)
+        return nodes;
+
+      nodes.Add(myMin);
+
+      for(Node node = myMin.Sibling; node != myMin; node = node.Sibling)
+        nodes.Add(node);
+
+      return nodes;
+    }
+
+    private void Join(Node[] nodes)
+    {
+      myMin = null;
+
+      foreach (Node node in nodes)
+      {
+        if (node == null)
+          continue;
+
+        if (myMin == null)
+        {
+          myMin = node;
+          node.Sibling = node.PrevSibling = node;
+        }
+
+        Node mBegin = myMin;
+        Node mEnd = myMin.Sibling;
+
+        mBegin.Sibling = node;
+        node.PrevSibling = mBegin;
+
+        mEnd.PrevSibling = node;
+        node.Sibling = mEnd;
+
+        if (myMin.Value.CompareTo(node.Value) > 0)
+        {
+          myMin = node;
+        }
+      }
+    }
 
     protected Node[] Group()
     {
+      if (myMin == null)
+        return null;
+      
       Node[] A = new Node[Count+1];
 
-      Node next = null;
-      for (Node node = myMin; next == null || node != myMin; node = next)
+      foreach (Node node in Nodes())
       {
+        if (node.Parent != null)
+          continue;
+
         Node x = node;
-        next = x.Sibling;
 
         int d = node.Degree;
         while (A[d] != null)
@@ -77,32 +149,29 @@ namespace DSIS.Utils
           Node y = A[d];
           if (x.Value.CompareTo(y.Value) > 0)
             Swap(ref x, ref y);
-
-          if (y.PrevSibling == y)
-          {
-            throw new ArgumentException();
-          } else
-          {
-            y.PrevSibling.Sibling = y.Sibling;
-            y.Sibling.PrevSibling = y.PrevSibling;
-          }
-
-
+          
           if (x.Child == null)
           {
-            x.Child = y;            
+            x.Child = y;
+            y.Sibling = y.PrevSibling = y;
           } else
           {
-            y.Sibling = x.Child;
-            x.Child.PrevSibling = y;
+            Node xBegin = x.Child;
+            Node xEnd = x.Child.Sibling;
 
-            y.PrevSibling = x.Child.PrevSibling;
-            x.Child.PrevSibling.Sibling = y;            
+            xBegin.Sibling = y;
+            y.Sibling = xEnd;
+
+            xEnd.PrevSibling = y;
+            y.PrevSibling = xBegin;           
           }
 
           y.Parent = x;
-          y.Degree = x.Degree + 1;
+          x.Degree++;
+          
+          A[d++] = null;
         }
+        A[d] = x;
       }
       return A;
     }
@@ -112,9 +181,9 @@ namespace DSIS.Utils
       get { return myCount; }
     }
 
-    private static void Swap<T>(ref T a, ref T b)
+    private static void Swap<W>(ref W a, ref W b)
     {
-      T c = a;
+      W c = a;
       a = b;
       b = c;
     }
@@ -134,6 +203,12 @@ namespace DSIS.Utils
       {
         Data = data;
         Value = value;
+      }
+
+
+      public override string ToString()
+      { 
+        return string.Format("{0}({1})", Data, Value);
       }
     }
   }
