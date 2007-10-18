@@ -5,8 +5,8 @@ namespace DSIS.Utils
 {
   public class BinTreePriorityQueueEx<T,Q> where Q : IComparable<Q>
   {
-    protected Node myMin = null;
-    private int myCount = 0;
+    protected Node myMin;
+    private int myCount;
     
     public object AddNode(Q value, T data)
     {
@@ -38,12 +38,28 @@ namespace DSIS.Utils
     public Pair<T,Q> ExtractMin()
     {
       if (myMin == null)
-        throw new ArgumentException();
+        throw new ArgumentException("No elemets");
 
       Node node = myMin;
 
       if (myMin.PrevSibling == myMin)
-        myMin = null;
+      {
+        if (myMin.Child == null)
+        {
+          myMin = null;
+        }
+        else
+        {
+          Node n = myMin.Child;
+          n.Parent = null;
+          for(Node q = n.Sibling; q != n; q = q.Sibling)
+          {
+            q.Parent = null;
+          }
+
+          myMin = myMin.Child;          
+        }
+      }
       else
       {
         Node mBegin = myMin.PrevSibling;
@@ -53,14 +69,18 @@ namespace DSIS.Utils
         {
           mBegin.Sibling = mEnd;
           mEnd.PrevSibling = mBegin;
-        } else {
+        }
+        else
+        {
           Node cBegin = myMin.Child;
           Node cEnd = myMin.Child.PrevSibling;
 
           cEnd.Sibling = null;
 
           for (Node tmp = cBegin; tmp != null; tmp = tmp.Sibling)
+          {
             tmp.Parent = null;
+          }
 
           mBegin.Sibling = cBegin;
           cBegin.PrevSibling = mBegin;
@@ -69,10 +89,10 @@ namespace DSIS.Utils
           mEnd.PrevSibling = cEnd;
         }
 
-        myMin = mEnd;
-        
-        Consolidate();
+        myMin = mEnd;        
       }
+      
+      Consolidate();
 
       myCount--;
       return new Pair<T, Q>(node.Data, node.Value);
@@ -112,19 +132,21 @@ namespace DSIS.Utils
           myMin = node;
           node.Sibling = node.PrevSibling = node;
         }
-
-        Node mBegin = myMin;
-        Node mEnd = myMin.Sibling;
-
-        mBegin.Sibling = node;
-        node.PrevSibling = mBegin;
-
-        mEnd.PrevSibling = node;
-        node.Sibling = mEnd;
-
-        if (myMin.Value.CompareTo(node.Value) > 0)
+        else
         {
-          myMin = node;
+          Node mBegin = myMin;
+          Node mEnd = myMin.Sibling;
+
+          mBegin.Sibling = node;
+          node.PrevSibling = mBegin;
+
+          mEnd.PrevSibling = node;
+          node.Sibling = mEnd;
+
+          if (myMin.Value.CompareTo(node.Value) > 0)
+          {
+            myMin = node;
+          }
         }
       }
     }
