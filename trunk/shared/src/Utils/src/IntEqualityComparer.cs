@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace DSIS.Utils
 {
-  public class IntEqualityComparer : IEqualityComparer<int>
+  public class IntEqualityComparer : IEqualityComparer<int>, IComparer<int>
   {
-    public static readonly IEqualityComparer<int> INSTANCE = new IntEqualityComparer();
+    public static readonly IntEqualityComparer INSTANCE = new IntEqualityComparer();
 
     public bool Equals(int x, int y)
     {
@@ -16,9 +16,9 @@ namespace DSIS.Utils
       return obj;
     }
 
-    public string Hashcode(string v)
+    public int Compare(int x, int y)
     {
-      return v;
+      return x - y;
     }
   }
 }

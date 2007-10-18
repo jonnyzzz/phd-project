@@ -153,7 +153,7 @@ namespace DSIS.Utils.testSrc
       queue.AddNode(1, "a");
       queue.AddNode(2, "b");
       queue.AddNode(-3, "c");
-      queue.AssertConsolidateGroup("0. b(2)", "|", "0. c(-3)", "1. a(1)", "|", "<null>", "|", "<null>", "|");
+      queue.AssertConsolidateGroup("0. b(2)", "|", "0. c(-3)", "1. a(1)", "|", "<null>", "|");
     }
     
     [Test]
@@ -170,7 +170,7 @@ namespace DSIS.Utils.testSrc
       queue.AddNode(1, "a");
       queue.AddNode(-2, "b");
       queue.AddNode(3, "c");
-      queue.AssertConsolidateGroup("0. c(3)", "|", "0. b(-2)", "1. a(1)", "|", "<null>", "|", "<null>", "|");
+      queue.AssertConsolidateGroup("0. c(3)", "|", "0. b(-2)", "1. a(1)", "|", "<null>", "|");
     }
     
     [Test]
@@ -180,7 +180,7 @@ namespace DSIS.Utils.testSrc
       queue.AddNode(-2, "b");
       queue.AddNode(3, "c");
       queue.AddNode(4, "d");
-      queue.AssertConsolidateGroup("<null>", "|", "<null>", "|", "0. b(-2)", "1. a(1)", "1. c(3)", "2. d(4)", "|", "<null>", "|", "<null>", "|");
+      queue.AssertConsolidateGroup("<null>", "|", "<null>", "|", "0. b(-2)", "1. a(1)", "1. c(3)", "2. d(4)", "|", "<null>", "|");
     }
 
     [Test]
@@ -443,6 +443,12 @@ namespace DSIS.Utils.testSrc
     {
       DoSetTest2(Random(128355));
     }
+    
+    [Test]
+    public void Test_58_2()
+    {
+      DoSetTest2(Random(328355));
+    }
 
     [Test]
     public void Test_59()
@@ -455,6 +461,53 @@ namespace DSIS.Utils.testSrc
     {
       DoSetTest2(Random(555));
     }
+
+
+    [Test]
+    public void Test_70()
+    {
+      queue.AddNode(1, "a");
+      queue.AddNode(2, "b");
+      queue.AddNode(3, "c");
+      object n = queue.AddNode(4, "d");
+      
+      Assert.AreEqual(queue.ExtractMin(), Pair.Create("a", 1));      
+      queue.Remove(n);
+
+      Assert.AreEqual(queue.ExtractMin(), Pair.Create("b", 2));      
+      Assert.AreEqual(queue.ExtractMin(), Pair.Create("c", 3));      
+    }
+    
+    [Test]
+    public void Test_71()
+    {
+      queue.AddNode(1, "a");
+      queue.AddNode(2, "b");
+      queue.AddNode(3, "c");
+      object n = queue.AddNode(4, "d");
+      
+      Assert.AreEqual(queue.ExtractMin(), Pair.Create("a", 1));      
+      queue.Remove(n);
+
+      Assert.AreEqual(queue.ExtractMin(), Pair.Create("b", 2));      
+      Assert.AreEqual(queue.ExtractMin(), Pair.Create("c", 3));      
+    }
+    
+    [Test]
+    public void Test_72()
+    {
+                  queue.AddNode(1, "a");
+      object n1 = queue.AddNode(2, "b");
+                  queue.AddNode(3, "c");
+      object n2 = queue.AddNode(4, "d");
+      
+      Assert.AreEqual(queue.ExtractMin(), Pair.Create("a", 1));      
+      queue.Remove(n1);
+      queue.Remove(n2);
+
+      Assert.AreEqual(queue.ExtractMin(), Pair.Create("c", 3));      
+    }
+
 
     private static int[] Random(int size)
     {
@@ -479,8 +532,8 @@ namespace DSIS.Utils.testSrc
         queue.AddNode(i, i.ToString());
         dta.Add(i);
 
-//        Assert.AreEqual(min, queue.ExtractMin().Second, "Min test failed");
-//        queue.AddNode(min.Value, min.Value.ToString());
+        Assert.AreEqual(min, queue.ExtractMin().Second, "Min test failed");
+        queue.AddNode(min.Value, min.Value.ToString());
       }
 
       dta.Sort();
@@ -518,14 +571,27 @@ namespace DSIS.Utils.testSrc
           throw new Exception(e.Message + ddd, e);          
         }
       }
-    }
+    }    
 
+    private static Q[] l<Q>(params Q[] d)
+    {
+      return d;
+    }
 
     private class Queue : BinTreePriorityQueueEx<string, int>
     {
+      public Queue() : base(IntEqualityComparer.INSTANCE)
+      {
+      }
+
       public string Min
       {
         get { return myMin == null ? null : myMin.Data; }
+      }
+
+      public void Remove(object o)
+      {
+        base.Remove((Node)o);
       }
 
       public void AssertConsolidate(params string[] data)
