@@ -783,6 +783,11 @@ namespace DSIS.Utils.testSrc
       {
       }
 
+      public new object AddNode(int value, string data)
+      {
+        return base.AddNode(value, data);
+      }
+
       public void Consolidate()
       {
         DoConsolidate();

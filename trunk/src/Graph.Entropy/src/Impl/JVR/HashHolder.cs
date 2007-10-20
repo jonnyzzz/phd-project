@@ -9,12 +9,11 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   public class HashHolder<T> 
     where T : ICellCoordinate<T>
   {
+    const double EPS = 1e-4;
     private static readonly IEqualityComparer<JVRPair<T>> COMPARER = EqualityComparerFactory<JVRPair<T>>.GetComparer();
 
     private Dictionary<JVRPair<T>, double> myHash = CreateHash();
-    private SortedNodeSet<T> mySet = CreateSet();
-
-    const double EPS = 1e-4;
+    private SortedNodeSet<T> mySet = CreateSet();    
     
     private static Dictionary<JVRPair<T>, double> CreateHash()
     {
@@ -67,15 +66,16 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       mySet.Add(pair, v);
     }
 
-    public double this[JVRPair<T> pair]
+    public void SetItem(JVRPair<T> pair, double value)
     {
-      get { return myHash[pair];}
-      set
-      {
-        double t = myHash[pair];
-        myHash[pair] = value;
-        mySet.Add(pair, value - t);        
-      }
+      double t = myHash[pair];
+      myHash[pair] = value;
+      mySet.Add(pair, value - t);
+    }
+
+    public double GetItem(JVRPair<T> pair)
+    {
+      return myHash[pair];
     }
 
     public EntropyEvaluator<T, JVRPair<T>> CreateEvaluator()

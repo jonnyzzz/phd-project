@@ -42,40 +42,4 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return max;
     }
   }
-
-  public class FBHeap<T>
-  {
-    private Node myMin = null;
-
-    public T ExtractMin()
-    {
-      return default(T);
-    }
-
-    public void Insert(T t, double v)
-    {
-      Node node = new Node(v, t);
-
-      
-    }
-
-    private class Node
-    {
-      public byte degree;
-      public Node parent;
-      public Node sibling;
-      public readonly double value;
-      public readonly T node;
-
-      public Node(double value, T node)
-      {
-        this.value = value;
-        this.node = node;
-        degree = 0;
-        parent = null;
-        sibling = null;
-      }
-    }
-    
-  }
 }

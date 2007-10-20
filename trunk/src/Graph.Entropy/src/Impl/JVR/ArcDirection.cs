@@ -28,7 +28,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       
       foreach (JVRPair<T> edge in myIndex[node])
       {        
-        w += myHash[edge];
+        w += myHash.GetItem(edge);
       }
       return w;
     }
@@ -37,7 +37,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
       foreach (JVRPair<T> edge in myIndex[node])
       {
-        myHash[edge] *= factor;        
+        myHash.SetItem(edge, myHash.GetItem(edge)*factor);        
       }
     }
   }

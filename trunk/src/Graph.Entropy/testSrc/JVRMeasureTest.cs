@@ -236,7 +236,7 @@ namespace DSIS.Graph.Entropy
       {
         JVRPair<IntegerCoordinate> ft = new JVRPair<IntegerCoordinate>(from, to);
 
-        return myHashHolder[ft];
+        return myHashHolder.GetItem(ft);
       }
 
       public void Script(IEnumerable<char> s)

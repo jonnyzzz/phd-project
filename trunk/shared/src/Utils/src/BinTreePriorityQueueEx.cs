@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DSIS.Utils
 {
-  public class BinTreePriorityQueueEx<T, Q>
+  public abstract class BinTreePriorityQueueEx<T, Q>
   {
     private readonly IComparer<Q> myComparer;
 
@@ -16,7 +16,7 @@ namespace DSIS.Utils
       myComparer = comparer;
     }
 
-    public object AddNode(Q value, T data)
+    protected Node AddNode(Q value, T data)
     {
       Node node = new Node(data, value);
 
