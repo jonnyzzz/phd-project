@@ -7,9 +7,9 @@ namespace DSIS.Utils
   {
     private readonly IComparer<Q> myComparer;
 
-    private Q myMinValue = default(Q);
     protected Node myMin;
     private int myCount;
+    private bool myConsolidateRequired = false;
 
     public BinTreePriorityQueueEx(IComparer<Q> comparer)
     {
@@ -22,7 +22,6 @@ namespace DSIS.Utils
 
       if (myMin == null)
       {
-        myMinValue = value;
         myMin = node;
         node.Sibling = node.PrevSibling = node;
       }
@@ -34,16 +33,11 @@ namespace DSIS.Utils
         myMin.PrevSibling = node;
 
         node.PrevSibling = prev;
-        prev.Sibling = node;
-
-        if (myComparer.Compare(value, myMinValue) < 0)
-        {
-          myMinValue = value;
-          myMin = node;
-        }
+        prev.Sibling = node;        
       }
 
       myCount++;
+      Consolidate();
       return node;
     }
 
@@ -51,6 +45,9 @@ namespace DSIS.Utils
     {
       if (myMin == null)
         throw new ArgumentException("No elemets");
+
+      if (myConsolidateRequired)
+        DoConsolidate();
 
       Node node = myMin;
       if (myMin.PrevSibling == myMin)
@@ -67,7 +64,6 @@ namespace DSIS.Utils
             q.Parent = null;
 
           myMin = myMin.Child;
-          myMinValue = myMin.Value;
         }
       }
       else
@@ -97,7 +93,6 @@ namespace DSIS.Utils
         }
 
         myMin = mEnd;
-        myMinValue = myMin.Value;
       }
 
       Consolidate();
@@ -105,11 +100,16 @@ namespace DSIS.Utils
       myCount--;
       return new Pair<T, Q>(node.Data, node.Value);
     }
-
-    protected void Consolidate()
+    
+    protected void DoConsolidate()
     {
       if (myMin != null)
-        Join(Group());
+        Join(Group());      
+    }
+
+    private void Consolidate()
+    {
+      myConsolidateRequired = true;
     }
 
     private void Join(Node[] nodes)
@@ -146,7 +146,6 @@ namespace DSIS.Utils
           }
         }
       }
-      myMinValue = minValue;
     }
 
     protected Node[] Group()
@@ -206,33 +205,66 @@ namespace DSIS.Utils
 
     protected void Remove(Node node)
     {
-      if (node.Parent == null && node.Child == null)
+      myCount--;
+
+      Node parent = node.Parent;
+      if (parent == null)
       {
-        if (myMin == null && node.Sibling == node)
+        if (node.Sibling == node)
+        {
           myMin = null;
+        }
         else
         {
-          Node nBegin = node.PrevSibling;
-          Node nEnd = node.Sibling;
+          if (node == myMin)
+            myMin = node.Sibling;
 
-          nBegin.Sibling = nEnd;
-          nEnd.PrevSibling = nBegin;
+          RemoveMe(node);          
         }
-      }
-      else
+
+        if (node.Child != null)
+        {
+          if (myMin != null)
+            AppendList(myMin, node.Child);
+          else
+          {
+            ZeroParent(node.Child);
+            myMin = node.Child;
+            node.Parent = null;
+          }
+        }
+      } else 
       {
-        if (node.Parent != null)
-          RemoveAndAdd(node);
+        if (myMin == null)
+          throw new Exception("rotten");
+
+        if (node.Sibling == node)
+        {          
+          parent.Child = null;
+        }
         else
-          RemoveAndAddRoot(node);
+        {
+          parent.Child = node.Sibling;
+          RemoveMe(node);
+        }
+
+        if (node.Child != null)
+        {
+          AppendList(myMin, node.Child);
+        }
+
+        node.Parent.Degree--;
+        MarkParent(node.Parent);
       }
 
       Consolidate();
     }
 
-    private void RemoveAndAdd(Node node)
+    private void MarkParent(Node node)
     {
       Node parent = node.Parent;
+      if (parent == null)
+        return;
 
       if (node.Sibling == node)
       {
@@ -240,101 +272,57 @@ namespace DSIS.Utils
       }
       else
       {
-        Node lC = node.PrevSibling;
-        Node rC = node.Sibling;
-
-        lC.Sibling = rC;
-        rC.PrevSibling = lC;
+        parent.Child = node.Sibling;
+        RemoveMe(node);
       }
-
-      if (node.Child == null)
-        return;
-
-      Node l = node.Child.Sibling;
-      Node r = node.Child;
-
-      r.Sibling = null;
-      for (Node n = l; n != null; n = n.Sibling)
-        n.Parent = null;
-
-      Node minL = myMin;
-      Node minR = myMin.Sibling;
-
-      minL.Sibling = l;
-      l.PrevSibling = minL;
-
-      r.Sibling = minR;
-      minR.PrevSibling = r;
 
       parent.Degree--;
+      node.Sibling = node.PrevSibling = node;
+      AppendList(myMin, node);
 
-      if (!parent.Mark)
-        parent.Mark = true;
+      if (node.Mark)
+        MarkParent(parent);
       else
-        MoveToTop(parent);
+        node.Mark = true;
     }
-    
-    private void RemoveAndAddRoot(Node node)
+
+    private static void ZeroParent(Node node)
     {
-      if (node.Sibling == node)
-      {
-        myMin = node.Child;
-      }
-      else
-      {
-        Node lC = node.PrevSibling;
-        Node rC = node.Sibling;
+      Node prev = node.PrevSibling;
+      prev.Sibling = null;
 
-        lC.Sibling = rC;
-        rC.PrevSibling = lC;
-      }
-
-      if (node.Child == null)
-        return;
-
-      Node l = node.Child.Sibling;
-      Node r = node.Child;
-
-      r.Sibling = null;
-      for (Node n = l; n != null; n = n.Sibling)
+      for (Node n = node; n != null; n = n.Sibling)
         n.Parent = null;
 
-      Node minL = myMin;
-      Node minR = myMin.Sibling;
-
-      minL.Sibling = l;
-      l.PrevSibling = minL;
-
-      r.Sibling = minR;
-      minR.PrevSibling = r;     
+      prev.Sibling = node;
     }
 
-    private void MoveToTop(Node node)
+    private static void AppendList(Node reciever, Node what)
     {
-      Node parent = node.Parent;
-      while (parent != null)
-      {
-        Node l = myMin;
-        Node r = myMin.Sibling;
+      Node rBegin = reciever.PrevSibling;
+      Node rEnd = reciever;
 
-        node.Parent = null;
-        l.Sibling = node;
-        node.PrevSibling = l;
+      Node whatBegin = what.PrevSibling;
+      Node whatEnd = what;
 
-        node.Sibling = r;
-        r.PrevSibling = node;
+      whatBegin.Sibling = null;
+      for (Node n = whatEnd; n != null; n = n.Sibling)
+        n.Parent = null;
 
-        if (parent.Mark)
-        {
-          node = parent;
-          parent = node.Parent;
-        }
-        else
-        {
-          parent.Mark = true;
-          break;
-        }
-      }
+      rBegin.Sibling = whatEnd;
+      whatEnd.PrevSibling = rBegin;
+
+      whatBegin.Sibling = rEnd;
+      rEnd.PrevSibling = whatBegin;
+    }
+
+    private static void RemoveMe(Node node)
+    {
+      Node nBegin = node.PrevSibling;
+      Node nEnd = node.Sibling;
+
+      nBegin.Sibling = nEnd;
+      nEnd.PrevSibling = nBegin;
     }
 
     public int Count

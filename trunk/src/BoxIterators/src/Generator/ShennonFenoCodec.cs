@@ -5,6 +5,7 @@ using DSIS.Utils;
 
 namespace DSIS.BoxIterators.Generator
 {
+  //Todo: Gray codec!
   public class ShennonFenoCodec : IEnumerator<Pair<int, bool>>, IEnumerable<Pair<int,bool>>
   {
     private readonly int myDim;
