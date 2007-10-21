@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using NUnit.Framework;
 
 namespace DSIS.Utils.testSrc
-{
+{ 
   [TestFixture]
   public class BinTreePriorityQueueExTest
   {
@@ -14,6 +16,8 @@ namespace DSIS.Utils.testSrc
     [SetUp]
     public void SetUp()
     {
+      Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
+      Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-us");
       queue = new Queue();
     }
 
@@ -512,7 +516,7 @@ namespace DSIS.Utils.testSrc
     [Test]
     public void Test_73()
     {
-      DoSetTest3(1,2,3,4,5);
+      DoSetTest3(1, 2, 3, 4, 5);
     }
 
     [Test]
@@ -526,7 +530,7 @@ namespace DSIS.Utils.testSrc
         int v = data[i];
         listData.Add(v, queue.AddNode(v, v.ToString()));
       }
-      
+
       queue.Debug();
       for (int j = 0; j < data.Length; j++)
       {
@@ -555,7 +559,7 @@ namespace DSIS.Utils.testSrc
 
       Assert.AreEqual(queue.Count, 0);
     }
-    
+
     [Test]
     public void Test_73_2()
     {
@@ -567,11 +571,11 @@ namespace DSIS.Utils.testSrc
         int v = data[i];
         listData.Add(v, queue.AddNode(v, v.ToString()));
       }
-      
+
       queue.Debug();
       for (int j = 0; j < data.Length; j++)
       {
-        if (j % 2 == 0)
+        if (j%2 == 0)
         {
           Console.Out.WriteLine("data[j] = {0}", data[j]);
           queue.Remove(listData[data[j]]);
@@ -599,59 +603,1029 @@ namespace DSIS.Utils.testSrc
 
       Assert.AreEqual(queue.Count, 0);
     }
-    
+
     [Test]
     public void Test_74()
     {
-      DoSetTest3(1,2,3,4,5,6,7,8,9);
-    }    
-    
+      DoSetTest3(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    }
+
     [Test]
     public void Test_75()
     {
-      DoSetTest3(9,8,7,6);
+      DoSetTest3(9, 8, 7, 6);
     }
-    
+
     [Test]
     public void Test_76()
     {
-      DoSetTest3(9,8,7,6,5,4,3,2,1);
+      DoSetTest3(9, 8, 7, 6, 5, 4, 3, 2, 1);
     }
-    
+
     [Test]
     public void Test_77()
     {
       DoSetTest3(Random2(10));
     }
-    
+
     [Test]
     public void Test_78()
     {
       DoSetTest3(Random2(20));
     }
-    
+
     [Test]
     public void Test_79()
     {
       DoSetTest3(Random2(80));
     }
-    
+
     [Test]
     public void Test_80()
     {
       DoSetTest3(Random2(512));
     }
-    
+
     [Test]
     public void Test_81()
     {
       DoSetTest3(Random2(1024));
     }
-    
+
     [Test]
     public void Test_82()
     {
       DoSetTest3(Random2(4096));
+    }
+
+    [Test]
+    public void Test_x001()
+    {
+      queue.ScriptTest(
+        @"Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [1, ]
+Add [1, ]
+Add [2, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Rem [3, ]
+Add [3, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [7, ]
+Add [7, ]
+Add [6, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [5, ]
+Add [5, ]
+Add [1, ]
+Rem [1, ]
+Add [1, ]
+Rem [2, ]
+Add [2, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [1, ]
+Add [1, ]
+Add [2, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Rem [3, ]
+Add [3, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [8, ]
+Add [8, ]
+Add [7, ]
+Rem [7, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [5, ]
+Add [5, ]
+Add [1, ]
+Rem [1, ]
+Add [1, ]
+Rem [2, ]
+Add [2, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [7, ]
+Add [7, ]
+Add [6, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [1, ]
+Add [1, ]
+Add [2, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Rem [3, ]
+Add [3, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [8, ]
+Add [8, ]
+Add [7, ]
+Rem [7, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [7, ]
+Add [7, ]
+Add [6, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [5, ]
+Add [5, ]
+Add [1, ]
+Rem [1, ]
+Add [1, ]
+Rem [2, ]
+Add [2, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [1, ]
+Add [1, ]
+Add [2, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Rem [3, ]
+Add [3, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [8, ]
+Add [8, ]
+Add [7, ]
+Rem [7, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [7, ]
+Add [7, ]
+Add [6, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [8, ]
+Add [8, ]
+Add [7, ]
+Rem [7, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Max
+Rem [5, ]
+Add [5, ]
+Add [1, ]
+Rem [1, ]
+Add [1, ]
+Rem [2, ]
+Add [2, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [1, ]
+Add [1, ]
+Add [2, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Rem [3, ]
+Add [3, ]
+Max
+Rem [7, ]
+Add [7, ]
+Add [6, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [8, ]
+Add [8, ]
+Add [7, ]
+Rem [7, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Max
+Rem [5, ]
+Add [5, ]
+Add [1, ]
+Rem [1, ]
+Add [1, ]
+Rem [2, ]
+Add [2, ]
+Max
+Rem [1, ]
+Add [1, ]
+Add [2, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Rem [3, ]
+Add [3, ]
+Max
+Rem [7, ]
+Add [7, ]
+Add [6, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [1, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Add [3, ]
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max
+Rem [8, ]
+Add [8, ]
+Add [7, ]
+Rem [7, ]
+Add [7, ]
+Rem [6, ]
+Add [6, ]
+Max
+Rem [1, ]
+Add [1, ]
+Add [2, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Rem [3, ]
+Add [3, ]
+Max
+Rem [7, ]
+Add [7, ]
+Add [6, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Max
+Rem [5, ]
+Add [5, ]
+Add [1, ]
+Rem [1, ]
+Add [1, ]
+Rem [2, ]
+Add [2, ]
+Max
+Rem [1, ]
+Add [1, ]
+Add [2, ]
+Rem [6, ]
+Add [6, ]
+Rem [2, ]
+Add [2, ]
+Rem [2, ]
+Add [2, ]
+Rem [3, ]
+Add [3, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [5, ]
+Rem [5, ]
+Add [5, ]
+Rem [1, ]
+Add [1, ]
+Max
+Rem [3, ]
+Add [3, ]
+Add [8, ]
+Rem [8, ]
+Add [8, ]
+Rem [7, ]
+Add [7, ]
+Max",
+        delegate(string input)
+          {
+            input = input.Trim();
+            
+            if (input.StartsWith("Max"))
+              return Pair.Create(Queue.Action.Max, 0);
+            else if (input.StartsWith("Dump"))
+              return Pair.Create(Queue.Action.Dump, 0);
+            else
+            {
+              int v = int.Parse(input.Substring(5, 1));
+
+              if (input.StartsWith("Add ["))
+                return Pair.Create(Queue.Action.Add, v);
+              else
+                return Pair.Create(Queue.Action.Remove, v);
+            }          
+          }
+        );
     }
 
     private static int[] Random(int size)
@@ -668,12 +1642,12 @@ namespace DSIS.Utils.testSrc
     private static int[] Random2(int size)
     {
       Hashset<int> list = new Hashset<int>();
-      Random r = new Random((int)DateTime.Now.Ticks);
+      Random r = new Random((int) DateTime.Now.Ticks);
       while (list.Count < size)
       {
         list.Add(r.Next());
       }
-      return list.ToArray();      
+      return list.ToArray();
     }
 
     private void DoSetTest3(params int[] data)
@@ -691,7 +1665,7 @@ namespace DSIS.Utils.testSrc
 
           for (int j = 0; j < data.Length; j++)
           {
-            if (j % p == 0)
+            if (j%p == 0)
             {
               queue.Remove(listData[data[j]]);
               listData.Remove(data[j]);
@@ -716,7 +1690,8 @@ namespace DSIS.Utils.testSrc
           }
 
           Assert.AreEqual(queue.Count, 0);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
           throw new Exception("p=" + p + "  " + e.Message, e);
         }
@@ -895,6 +1870,52 @@ namespace DSIS.Utils.testSrc
         }
 
         return sb.ToString();
+      }
+
+      public void ScriptTest(string script, Converter<string, Pair<Action, int>> parse)
+      {
+        Dictionary<int, object> cache = new Dictionary<int, object>();
+        string[] data = script.Split('\n');
+
+        for (int i = 0; i < data.Length; i++)
+        {
+          try
+          {
+            string s = data[i];
+            Pair<Action, int> p = parse(s);
+            switch (p.First)
+            {
+              case Action.Add:
+                cache.Add(p.Second, AddNode(p.Second, p.Second.ToString()));
+                break;
+              case Action.Remove:
+                Remove(cache[p.Second]);
+                cache.Remove(p.Second);
+                break;
+              case Action.Max:
+                int second = ExtractMin().Second;
+                List<int> list = new List<int>(cache.Keys);
+                list.Sort();
+                Assert.AreEqual(second, list[0]);
+                cache.Remove(second);
+                break;
+              case Action.Dump:
+                Debug();
+                break;
+            }
+          } catch (Exception e)
+          {
+            throw new Exception("Failed at line " + (i + 1) + " " + e.Message, e);
+          }
+        }
+      }
+
+      public enum Action
+      {
+        Add,
+        Remove,
+        Max,
+        Dump
       }
     }
   }

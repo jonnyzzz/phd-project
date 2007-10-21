@@ -86,6 +86,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public T NextNode()
     {
       return mySet.NextNode();
-    }
+    }    
   }
 }

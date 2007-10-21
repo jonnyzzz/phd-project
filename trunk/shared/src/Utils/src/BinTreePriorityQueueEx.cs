@@ -1,8 +1,38 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace DSIS.Utils
 {
+  public abstract class BinTreePriorityQueueExDebug<T,Q> : BinTreePriorityQueueEx<T,Q>
+  {
+    private static readonly TextWriter Out = File.CreateText("e:\\out3eee3.txt");
+    protected BinTreePriorityQueueExDebug(IComparer<Q> comparer) : base(comparer)
+    {      
+    }
+
+    protected new Node AddNode(Q value, T data)
+    {
+      Out.WriteLine("Add {0}", data);
+      Out.Flush();  
+      return base.AddNode(value, data);
+    }
+
+    protected new void Remove(Node node)
+    {
+      Out.WriteLine("Rem {0}", node.Data);
+      Out.Flush();
+      base.Remove(node);
+    }
+
+    public new Pair<T,Q> ExtractMin()
+    {
+      Out.WriteLine("Max");
+      Out.Flush();
+      return base.ExtractMin(); 
+    }
+  }
+
   public abstract class BinTreePriorityQueueEx<T, Q>
   {
     private readonly IComparer<Q> myComparer;
@@ -158,7 +188,7 @@ namespace DSIS.Utils
       myMin.PrevSibling.Sibling = null;
       Node next;
       for (Node node = myMin; node != null; node = next)
-      {
+        {
         next = node.Sibling;
         if (node.Parent != null)
           continue;

@@ -2,13 +2,7 @@ using System;
 
 namespace DSIS.Utils
 {
-  public interface IPriorityQueue<T, Q> where Q : IComparable<Q>
-  {
-    void Enqueue(Pair<T, Q> data);
-    Pair<T, Q> Dequeue();
-  }
-
-  public class BinTreePriorityQueue<T, Q> : IPriorityQueue<T, Q>
+  public class BinTreePriorityQueue<T, Q>
     where Q : IComparable<Q>
   {
     private const int AUTO_CONSOLIDATE = 1023;
@@ -149,36 +143,11 @@ namespace DSIS.Utils
 
     protected class Node : IComparable<Node>
     {
-      private const uint FLAG = 0x80000000;
-      private const uint MASK = 0x4fffffff;
-      private uint myData;
-
       public readonly Q Value;
       public readonly T Data;
       public Node Child;
       public Node Sibling;
-
-      public uint Degree
-      {
-        get { return myData & MASK; }
-        set { myData = (myData & ~MASK) + (value & MASK); }
-      }
-
-      public bool Mark
-      {
-        get { return (myData & FLAG) != 0; }
-        protected set
-        {
-          if (value)
-          {
-            myData |= FLAG;
-          }
-          else
-          {
-            myData &= ~FLAG;
-          }
-        }
-      }
+      public uint Degree;
 
       public Node(Q value, T data)
       {

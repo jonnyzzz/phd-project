@@ -1,23 +1,29 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
-  public class SortedNodeSet<T> where T : ICellCoordinate<T>
+  public class SortedNodeSet<T> : BinTreePriorityQueueExDebug<T,double> where T : ICellCoordinate<T>
   {
     private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
+    private readonly Dictionary<T, Node> myValues = new Dictionary<T, Node>(COMPARER);
 
-    private readonly Dictionary<T, double> myValues = new Dictionary<T, double>(COMPARER);
+    public SortedNodeSet() : base(new Comparer())
+    {
+    }
 
     private void AddValue(T node, double value)
     {
-      double v;
+      Node v;
       if (myValues.TryGetValue(node, out v))
-        value += v;
+      {
+        value += v.Value;
+        Remove(v);
+        myValues.Remove(node);
+      }
 
-      myValues[node] = value;      
+      myValues.Add(node, AddNode(value, node));
     }
 
     public void Add(JVRPair<T> pair, double v)
@@ -28,18 +34,21 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public T NextNode()
     {
-      T max = default(T);
-      double? v = null;
-      foreach (KeyValuePair<T, double> pair in myValues)
+      Pair<T, double> min = ExtractMin();
+      myValues.Remove(min.First);
+      return min.First;
+    }
+
+    private class Comparer : IComparer<double>
+    {
+      public int Compare(double x, double y)
       {
-        double q = Math.Abs(pair.Value);
-        if (v == null || v.Value < q)
-        {
-          max = pair.Key;
-          v = q;
-        }
+        if (x < y)
+          return 1;
+        if (x > y)
+          return -1;
+        return 0;
       }
-      return max;
     }
   }
 }

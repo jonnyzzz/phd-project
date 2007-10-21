@@ -95,8 +95,11 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         }
 
         myBackEdges.MultiplyWeight(node, a);        
-        myEdges.MultiplyWeight(node, b);      
-      }      
+        myEdges.MultiplyWeight(node, b);
+
+        Norm();
+      }    
+      
     }
 
     private static bool IsInvalid(double a)

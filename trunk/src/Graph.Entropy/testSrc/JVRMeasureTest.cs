@@ -6,6 +6,7 @@ using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
+using DSIS.Utils.testSrc;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy
@@ -57,9 +58,9 @@ namespace DSIS.Graph.Entropy
 
     [Test]
     public void Test_Ampi()
-    {
-      DoTest("fni", 0.2215, n(1, 2), n(2, 3), n(3, 5), n(5, 1), n(3, 8),
-             n(8, 7), n(7, 6), n(6, 2));
+    {                                           
+       DoTest("fni", 0.2215, n(1, 2), n(2, 3), n(3, 5), n(5, 1), n(3, 8),
+              n(8, 7), n(7, 6), n(6, 2));                                                                                        
     }
 
     [Test]
@@ -112,7 +113,6 @@ namespace DSIS.Graph.Entropy
         }
       }
     }
-
 
     protected static JVR DoTest(string script, params Node[] nodes)
     {
