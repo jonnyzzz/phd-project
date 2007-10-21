@@ -94,8 +94,11 @@ namespace DSIS.Graph.Entropy.Impl.JVR
           continue;
         }
 
-        myBackEdges.MultiplyWeight(node, a);        
-        myEdges.MultiplyWeight(node, b);
+        using (ItemUpdateCookie<T> cookie = myHashHolder.UpdateCookie(myEdges, myBackEdges))
+        {
+          myBackEdges.MultiplyWeight(cookie, node, a);
+          myEdges.MultiplyWeight(cookie, node, b);
+        }
 
         Norm();
       }    

@@ -1,41 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace DSIS.Utils
 {
-  public abstract class BinTreePriorityQueueExDebug<T,Q> : BinTreePriorityQueueEx<T,Q>
-  {
-    private static readonly TextWriter Out = File.CreateText("e:\\out3eee3.txt");
-    protected BinTreePriorityQueueExDebug(IComparer<Q> comparer) : base(comparer)
-    {      
-    }
-
-    protected new Node AddNode(Q value, T data)
-    {
-      Out.WriteLine("Add {0}", data);
-      Out.Flush();  
-      return base.AddNode(value, data);
-    }
-
-    protected new void Remove(Node node)
-    {
-      Out.WriteLine("Rem {0}", node.Data);
-      Out.Flush();
-      base.Remove(node);
-    }
-
-    public new Pair<T,Q> ExtractMin()
-    {
-      Out.WriteLine("Max");
-      Out.Flush();
-      return base.ExtractMin(); 
-    }
-  }
-
   public abstract class BinTreePriorityQueueEx<T, Q>
   {
-    private readonly IComparer<Q> myComparer;
+    protected readonly IComparer<Q> myComparer;
 
     protected Node myMin;
     private int myCount;
@@ -63,7 +33,7 @@ namespace DSIS.Utils
         myMin.PrevSibling = node;
 
         node.PrevSibling = prev;
-        prev.Sibling = node;        
+        prev.Sibling = node;
       }
 
       myCount++;
@@ -130,11 +100,11 @@ namespace DSIS.Utils
       myCount--;
       return new Pair<T, Q>(node.Data, node.Value);
     }
-    
+
     protected void DoConsolidate()
     {
       if (myMin != null)
-        Join(Group());      
+        Join(Group());
     }
 
     private void Consolidate()
@@ -188,7 +158,7 @@ namespace DSIS.Utils
       myMin.PrevSibling.Sibling = null;
       Node next;
       for (Node node = myMin; node != null; node = next)
-        {
+      {
         next = node.Sibling;
         if (node.Parent != null)
           continue;
@@ -249,7 +219,7 @@ namespace DSIS.Utils
           if (node == myMin)
             myMin = node.Sibling;
 
-          RemoveMe(node);          
+          RemoveMe(node);
         }
 
         if (node.Child != null)
@@ -263,13 +233,14 @@ namespace DSIS.Utils
             node.Parent = null;
           }
         }
-      } else 
+      }
+      else
       {
         if (myMin == null)
           throw new Exception("rotten");
 
         if (node.Sibling == node)
-        {          
+        {
           parent.Child = null;
         }
         else
@@ -284,36 +255,21 @@ namespace DSIS.Utils
         }
 
         node.Parent.Degree--;
-        MarkParent(node.Parent);
+
+        if (node.Parent.Mark)
+        {
+          Node aParent = node.Parent;
+          Remove(aParent);
+          AddNode(aParent.Value, aParent.Data);          
+        }
+        else
+          node.Parent.Mark = true;
       }
+      
+      node.Child = node.Parent = node.Sibling = node.PrevSibling = null;
+      node.Degree = -1;
 
       Consolidate();
-    }
-
-    private void MarkParent(Node node)
-    {
-      Node parent = node.Parent;
-      if (parent == null)
-        return;
-
-      if (node.Sibling == node)
-      {
-        parent.Child = null;
-      }
-      else
-      {
-        parent.Child = node.Sibling;
-        RemoveMe(node);
-      }
-
-      parent.Degree--;
-      node.Sibling = node.PrevSibling = node;
-      AppendList(myMin, node);
-
-      if (node.Mark)
-        MarkParent(parent);
-      else
-        node.Mark = true;
     }
 
     private static void ZeroParent(Node node)

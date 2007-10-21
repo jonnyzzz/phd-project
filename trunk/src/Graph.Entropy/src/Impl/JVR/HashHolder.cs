@@ -6,7 +6,14 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
-  public class HashHolder<T> 
+  internal interface IHashholderController<T> where T : ICellCoordinate<T>
+  {
+    void SetItem(JVRPair<T> pair, double value);
+    void SetItem(T node, double output, double input);    
+  }
+   
+
+  public class HashHolder<T> : IHashholderController<T>
     where T : ICellCoordinate<T>
   {
     const double EPS = 1e-4;
@@ -66,11 +73,19 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       mySet.Add(pair, v);
     }
 
-    public void SetItem(JVRPair<T> pair, double value)
+    public ItemUpdateCookie<T> UpdateCookie(ArcDirection<T> strait, ArcDirection<T> back)
     {
-      double t = myHash[pair];
-      myHash[pair] = value;
-      mySet.Add(pair, value - t);
+      return new ItemUpdateCookie<T>(this, strait, back);
+    }
+    
+    void IHashholderController<T>.SetItem(JVRPair<T> pair, double value)
+    {      
+      myHash[pair] = value;     
+    }
+
+    void IHashholderController<T>.SetItem(T node, double output, double input)
+    {
+      mySet.SetValue(node, output, input);
     }
 
     public double GetItem(JVRPair<T> pair)

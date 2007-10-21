@@ -61,6 +61,7 @@
     <Compile Include="src\ArrayEqualityComparer.cs" />
     <Compile Include="src\AttributeUtil.cs" />
     <Compile Include="src\BinTreePriorityQueueEx.cs" />
+    <Compile Include="src\BinTreePriorityQueueExDebug.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueExTest.cs" />
     <Compile Include="src\Delegates.cs" />
     <Compile Include="src\DoubleEqualityComparer.cs" />
@@ -72,6 +73,12 @@
     <Compile Include="src\Log2Helper.cs" />
     <Compile Include="src\MutexCookie.cs" />
     <Compile Include="src\PriorityQueue.cs" />
+    <Compile Include="testSrc\BinTreePriorityQueueExTestAllCases.cs" />
+    <Compile Include="testSrc\BinTreePriorityQueueExTestBase.cs" />
+    <Compile Include="testSrc\BinTreePriorityQueueExTestBase`2.cs" />
+    <Compile Include="testSrc\BinTreePriorityQueueExTestEasy.cs" />
+    <Compile Include="testSrc\BinTreePriorityQueueExTestScenario.cs" />
+    <Compile Include="testSrc\BinTreePriorityQueueExTestSmart.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueTest.cs" />
     <Compile Include="testSrc\EqualityComparerFactoryTest.cs" />
     <Compile Include="src\Hashset.cs" />

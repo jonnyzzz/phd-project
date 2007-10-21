@@ -6,7 +6,6 @@ using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
-using DSIS.Utils.testSrc;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy
@@ -249,7 +248,7 @@ namespace DSIS.Graph.Entropy
               FillGraph();
               break;
             case 'i':
-              Iterate(EPS / 2);
+              Iterate(EPS / 1000);
               return;
             case 'n':
               Norm();

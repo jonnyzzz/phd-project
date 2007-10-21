@@ -33,11 +33,11 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return w;
     }
 
-    public void MultiplyWeight(T node, double factor) 
+    public void MultiplyWeight(ItemUpdateCookie<T> cookie, T node, double factor) 
     {
       foreach (JVRPair<T> edge in myIndex[node])
       {
-        myHash.SetItem(edge, myHash.GetItem(edge)*factor);        
+        cookie.SetItem(edge, myHash.GetItem(edge)*factor);        
       }
     }
   }
