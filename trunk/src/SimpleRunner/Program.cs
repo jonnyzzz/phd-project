@@ -18,6 +18,7 @@ using DSIS.Function.Predefined.Duffing;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Function.Predefined.Julia;
+using DSIS.Function.Predefined.Logistics;
 using DSIS.Function.Predefined.Lorentz;
 using DSIS.Function.Predefined.Rossel;
 using DSIS.Function.Predefined.VanDerPol;
@@ -77,10 +78,12 @@ namespace DSIS.SimpleRunner
 //      new LorentzRunner(myWorkPath, 3, myXSLTs).Run();
 //      new RosselRunner(myWorkPath, 4, myXSLTs).Run();
 
+      new LogisticFullBuilder(myWorkPath, 20, myXSLTs).Run();
+
 //      int i = 0;
       ///generate code.
-//      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 10), myXSLTs);
-      Do(new IkedaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 9), myXSLTs);
+      //Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 10), myXSLTs);
+//      Do(new IkedaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 9), myXSLTs);
 //      Do(new JuliaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 1), myXSLTs);
 //      
 //      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 13), myXSLTs);
@@ -117,6 +120,61 @@ namespace DSIS.SimpleRunner
       action.ComputeAllMethods(NullProgressInfo.INSTANCE);
       action.ApplyXSL(xslt);
     }
+
+
+    public class LogisticFullBuilder : GeneratedAbstactImageBuilderRunner
+    {
+      private readonly string myPath;
+      private readonly int mySteps;
+      private readonly List<string> myXslt;
+
+      public LogisticFullBuilder(string path, int steps, List<string> xslt)
+      {
+        myPath = path;
+        mySteps = steps;
+        myXslt = xslt;
+      }
+
+      public override AbstractImageBuilder<T, Q> CreateBuilder<T, Q>()
+      {
+        return new LogisticFullBuilder<T, Q>(myPath, mySteps);
+      }
+
+      protected override void ComputationFinished<T, Q>(AbstractImageBuilder<T, Q> builder)
+      {
+        base.ComputationFinished(builder);
+        FullImageBuilderWithLog<T, Q> bld = (FullImageBuilderWithLog<T, Q>)builder;
+        bld.ApplyXSL(myXslt);
+      }
+
+      public void Run()
+      {
+        Run(1);
+      }
+    }
+
+    public class LogisticFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
+      where T : IIntegerCoordinateSystem<Q>
+      where Q : IIntegerCoordinate<Q>
+    {
+      public LogisticFullBuilder(string homePath, int steps)
+        :
+        base(homePath, steps, -1)
+      {
+      }
+      
+      protected override ISystemInfo CreateSystemInfo()
+      {
+        DefaultSystemSpace space =
+          new DefaultSystemSpace(1, new double[] { 0 }, new double[] { 1 }, new long[] { 10 });
+        return new LogisticSystemInfo(space, 4);
+      }
+
+      protected override long[] Subdivide
+      {
+        get { return new long[] { 2 }; }
+      }
+    }  
 
 
     public class DuffingFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>

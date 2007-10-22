@@ -135,22 +135,7 @@ namespace DSIS.Generated
     {
       long[] factor = GetProjectedFactor(division);
       return factor != null ? new IntegerCoordinateSystem(SystemSpace, factor) : null;
-    }
-        
-    public void SaveCoordinate(IntegerCoordinate2d coord, IBinaryWriter writer)
-    {
-	  $DimensionIt:{
-        writer.WriteLong(coord.l$it$);
-      }$      
-    }
-
-    public IntegerCoordinate2d LoadCoordinate(IBinaryReader reader)
-    {
-      $DimensionIt:{
-	    long l$it$ = reader.ReadLong();
-	  }$      
-      return Create($DimensionIt:{ l$it$ }; separator=","$	);
-    }
+    }        
   }
 
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]

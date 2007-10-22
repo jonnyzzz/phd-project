@@ -6,10 +6,15 @@ namespace DSIS.GnuplotDrawer
   {
     public static IGnuplotPhaseScriptGen ScriptGen(int dim, string filename, GnuplotScriptParameters ps)
     {
-      if (dim == 2)
-        return new Gnuplot2dScriptGen(filename, ps);
-      else if (dim == 3)
-        return new Gnuplot3dScriptGen(filename, ps);
+      switch (dim)
+      {
+        case 1:
+          return new Gnuplot1dScriptGen(filename, ps);
+        case 2:
+          return new Gnuplot2dScriptGen(filename, ps);
+        case 3:
+          return new Gnuplot3dScriptGen(filename, ps);
+      }
 
       throw new ArgumentException("Unexpected value", "dim");
     }

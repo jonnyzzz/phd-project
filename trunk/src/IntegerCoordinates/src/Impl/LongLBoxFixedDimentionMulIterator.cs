@@ -8,10 +8,10 @@ namespace DSIS.IntegerCoordinates
   /// </summary>
   internal class LongLBoxFixedDimentionMulIterator
   {
-    private long[] myTmp;
-    private long[] myOuts;
-    private long[] myMuls;
-    private LongLBoxIterator myIt = new LongLBoxIterator();
+    private readonly long[] myTmp;
+    private readonly long[] myOuts;
+    private readonly long[] myMuls;
+    private readonly LongLBoxIterator myIt = new LongLBoxIterator();
 
     public LongLBoxFixedDimentionMulIterator(int dim)
     {

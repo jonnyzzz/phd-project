@@ -5,7 +5,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
-  public class SortedNodeSet<T> : BinTreePriorityQueueExDebugDouble<T> where T : ICellCoordinate<T>
+  public class SortedNodeSet<T> : BinTreePriorityQueueEx<T,double> where T : ICellCoordinate<T>
   {
     private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
     private readonly Dictionary<T, Node> myValues = new Dictionary<T, Node>(COMPARER);
@@ -37,25 +37,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
       base.NodeRemoved(node);
       myValues.Remove(node.Data);
-    }
-
-    private void AddValue(T node, double value)
-    {
-      Node v;
-      if (myValues.TryGetValue(node, out v))
-      {
-        value += v.Value;
-        Remove(v);
-        myValues.Remove(node);
-      }
-
-      AddNode(value, node);
-    }
-
-    public void Add(JVRPair<T> pair, double v)
-    {
-      AddValue(pair.From, -v);
-      AddValue(pair.To, v);
     }
 
     public T NextNode()

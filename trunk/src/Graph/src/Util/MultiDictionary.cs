@@ -39,7 +39,7 @@ namespace DSIS.Graph.Util
       {
         l = new List<TV>(2);
         l.Add(v);
-        this[k] = l;
+        base[k] = l;
       }
     }
   }

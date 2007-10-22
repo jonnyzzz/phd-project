@@ -32,19 +32,22 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return new SortedNodeSet<T>();
     }
 
-    private void Divide(double div)
+    private void Divide(double div, ArcDirection<T> strait, ArcDirection<T> back)
     {
-      Dictionary<JVRPair<T>, double> ret = CreateHash();
-      SortedNodeSet<T> set = CreateSet();
-      foreach (KeyValuePair<JVRPair<T>, double> pair in myHash)
+      Dictionary<JVRPair<T>, double> current = myHash;
+
+      myHash = CreateHash();      
+      mySet = CreateSet();
+      
+      using (ItemUpdateCookie<T> cookie = UpdateCookie(strait, back))
       {
-        double value = pair.Value / div;
-        JVRPair<T> key = pair.Key;
-        ret.Add(key, value);
-        set.Add(key, value);
-      }
-      myHash = ret;
-      mySet = set;
+        foreach (KeyValuePair<JVRPair<T>, double> pair in current)
+        {
+          double value = pair.Value/div;
+          JVRPair<T> key = pair.Key;
+          cookie.SetItem(key, value);
+        }
+      }      
     }
 
     private double Norm()
@@ -57,20 +60,14 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return v;
     }
 
-    public void Normalize()
+    public void Normalize(ArcDirection<T> strait, ArcDirection<T> back)
     {
       double myNorm = Norm();
       
       if (Math.Abs(myNorm - 1.0) < EPS)
         return;
 
-      Divide(myNorm);
-    }
-
-    public void Add(JVRPair<T> pair, double v)
-    {
-      myHash.Add(pair, v);
-      mySet.Add(pair, v);
+      Divide(myNorm, strait, back);
     }
 
     public ItemUpdateCookie<T> UpdateCookie(ArcDirection<T> strait, ArcDirection<T> back)
@@ -102,5 +99,5 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
       return mySet.NextNode();
     }    
-  }
+  }      
 }

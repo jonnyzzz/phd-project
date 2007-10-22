@@ -1,4 +1,3 @@
-using System;
 using DSIS.Core.Util;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
