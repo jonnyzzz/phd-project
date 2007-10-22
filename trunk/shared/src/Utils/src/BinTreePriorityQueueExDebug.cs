@@ -36,11 +36,11 @@ namespace DSIS.Utils
       return t.ToString();      
     }
 
-    protected new Node AddNode(Q value, T data)
+    protected new void AddNode(Q value, T data)
     {
       Out.WriteLine("{1,3}.Add {0} |{2}", data, myCount++, value);
       Out.Flush();  
-      return base.AddNode(value, data);
+      base.AddNode(value, data);
     }
 
     protected new void Remove(Node node)

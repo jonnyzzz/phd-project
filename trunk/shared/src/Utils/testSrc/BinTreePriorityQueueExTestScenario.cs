@@ -13,7 +13,7 @@ namespace DSIS.Utils.testSrc
     {
       return new Queue2();
     }
-
+    /*
     [Test] public void Test_x000() { DoScriptTest("dump_0.txt");}
     [Test] public void Test_x001() { DoScriptTest("dump_1.txt");}
     [Test] public void Test_x002() { DoScriptTest("dump_2.txt");}
@@ -38,7 +38,8 @@ namespace DSIS.Utils.testSrc
     [Test] public void Test_x021() { DoScriptTest("dump_21.txt");}
     [Test] public void Test_x022() { DoScriptTest("dump_22.txt");}
     [Test] public void Test_x023() { DoScriptTest("dump_23.txt");}    
-    [Test] public void Test_x024() { DoScriptTest("dump_24.txt");}    
+    [Test] public void Test_x024() { DoScriptTest("dump_24.txt");}   
+     * */
     
     private void DoScriptTest(string script)
     {
@@ -66,6 +67,8 @@ namespace DSIS.Utils.testSrc
 
       if (input.StartsWith("Dump"))
         return new Queue.Action(Queue.ActionType.Dump);
+      else if (input.StartsWith("Break"))
+        return new Queue.Action(Queue.ActionType.Break);
       else
       {
         int v = int.Parse(input.Substring(5, 1));

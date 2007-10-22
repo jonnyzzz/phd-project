@@ -16,7 +16,15 @@ namespace DSIS.Utils
       myComparer = comparer;
     }
 
-    protected Node AddNode(Q value, T data)
+    protected virtual void NodeAdded(Node node)
+    {      
+    }
+
+    protected virtual void NodeRemoved(Node node)
+    {      
+    }
+
+    protected void AddNode(Q value, T data)
     {
       Node node = new Node(data, value);
 
@@ -38,7 +46,8 @@ namespace DSIS.Utils
 
       myCount++;
       Consolidate();
-      return node;
+
+      NodeAdded(node);
     }
 
     public Pair<T, Q> ExtractMin()
@@ -269,6 +278,7 @@ namespace DSIS.Utils
       node.Child = node.Parent = node.Sibling = node.PrevSibling = null;
       node.Degree = -1;
 
+      NodeRemoved(node);
       Consolidate();
     }
 

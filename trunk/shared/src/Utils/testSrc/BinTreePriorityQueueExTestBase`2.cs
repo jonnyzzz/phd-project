@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -29,9 +30,18 @@ namespace DSIS.Utils.testSrc
       {
       }
 
+      private object myAdded;
+
+      protected override void NodeAdded(Node node)
+      {
+        base.NodeAdded(node);
+        myAdded = node;
+      }
+
       public new object AddNode(Q value, T data)
       {
-        return base.AddNode(value, data);
+        base.AddNode(value, data);
+        return myAdded;
       }
 
       public void Consolidate()
@@ -157,7 +167,8 @@ namespace DSIS.Utils.testSrc
         Add,
         Remove,
         Max,
-        Dump
+        Dump,
+        Break
       }
 
       public struct Action
@@ -204,6 +215,9 @@ namespace DSIS.Utils.testSrc
 
             switch (p.ActionType)
             {
+              case ActionType.Break:
+                Debugger.Break();
+                break;
               case ActionType.Add:
                 cache.Add(p.T, AddNode(p.Q, p.T));
                 cache2.Add(p.T, p.Q);

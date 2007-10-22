@@ -23,7 +23,20 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         myValues.Remove(node);
       }
 
-      myValues.Add(node, AddNode(output - input, node));      
+      AddNode(output - input, node);      
+    }
+
+
+    protected override void NodeAdded(Node node)
+    {
+      base.NodeAdded(node);
+      myValues.Add(node.Data, node); 
+    }
+
+    protected override void NodeRemoved(Node node)
+    {
+      base.NodeRemoved(node);
+      myValues.Remove(node.Data);
     }
 
     private void AddValue(T node, double value)
@@ -36,7 +49,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         myValues.Remove(node);
       }
 
-      myValues.Add(node, AddNode(value, node));
+      AddNode(value, node);
     }
 
     public void Add(JVRPair<T> pair, double v)
