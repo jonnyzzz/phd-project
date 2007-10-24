@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
 
@@ -8,7 +9,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     where T : ICellCoordinate<T>
   {
     protected HashHolder<T> myHashHolder;
-    protected ArcDirection<T> myEdges;
+    protected ArcDirection<T> myStraitEdges;
     protected ArcDirection<T> myBackEdges;
 
     private readonly IGraph<T> myGraph;
@@ -18,7 +19,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
       myHashHolder = new HashHolder<T>();
       myBackEdges = new InverseArcDirection<T>(myHashHolder);
-      myEdges = new StraitArcDirection<T>(myHashHolder);
+      myStraitEdges = new StraitArcDirection<T>(myHashHolder);
 
       myGraph = graph;
       myComponents = components;
@@ -31,27 +32,26 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public void FillGraph()
     {
-      using (ItemUpdateCookie<T> cookie = myHashHolder.UpdateCookie(myEdges, myBackEdges))
+      using (ItemRebuildCookie<T> cookie = myHashHolder.RebuildCookie())
       {
         foreach (INode<T> node in myGraph.Nodes)
         {
           if (!VisitNode(node))
             continue;
 
-          T nodeCoordinate = node.Coordinate;
-          int nodeHash = JVRPair<T>.HashValue(nodeCoordinate);
-
-
+          JVRPair<T>.JVRPairFactory factory = JVRPair<T>.Factory(node.Coordinate);
+          
           foreach (INode<T> edge in myGraph.GetEdges(node))
           {
             if (!VisitNode(edge))
               continue;
 
-            JVRPair<T> key = new JVRPair<T>(nodeCoordinate, nodeHash, edge.Coordinate);
-            cookie.SetItem(key, 1);
-
-            myEdges.Add(key);
+            JVRPair<T> key = factory.Create(edge.Coordinate);
+            
+            myStraitEdges.Add(key);
             myBackEdges.Add(key);
+
+            cookie.SetItem(key, 1);
           }
         }
       }
@@ -59,7 +59,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     protected void Norm()
     {
-      myHashHolder.Normalize(myEdges, myBackEdges);
+      myHashHolder.Normalize();
     }
 
     public void Iterate(double precision)
@@ -72,13 +72,10 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         T node = myHashHolder.NextNode();
 
         double incoming = myBackEdges.ComputeWeight(node);
-        double outgoing = myEdges.ComputeWeight(node);
+        double outgoing = myStraitEdges.ComputeWeight(node);
+        bool needNorm = false;
 
-        if (incoming >= maxValue || outgoing >= maxValue || incoming <= normEps || outgoing <= normEps)
-        {
-          Norm();
-          continue;
-        }
+        needNorm |= (incoming >= maxValue || outgoing >= maxValue || incoming <= normEps || outgoing <= normEps);
 
         if (Math.Abs(incoming - outgoing) <= precision)
           break;
@@ -92,20 +89,17 @@ namespace DSIS.Graph.Entropy.Impl.JVR
           b = 0;
         }
 
-        if (incoming*a <= normEps || outgoing*b <= normEps)
-        {
-          Norm();
-          continue;
-        }
+        needNorm |= (incoming*a <= normEps || outgoing*b <= normEps);
 
-        using (ItemUpdateCookie<T> cookie = myHashHolder.UpdateCookie(myEdges, myBackEdges))
+        using (ItemUpdateCookie<T> cookie = myHashHolder.UpdateCookie(myStraitEdges, myBackEdges))
         {
           myBackEdges.MultiplyWeight(cookie, node, a);
-          myEdges.MultiplyWeight(cookie, node, b);
+          myStraitEdges.MultiplyWeight(cookie, node, b);
         }
-      }
 
-      Norm();
+        if (needNorm)
+          Norm();
+      }
     }
 
     private static bool IsInvalid(double a)
@@ -116,6 +110,12 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public EntropyEvaluator<T, JVRPair<T>> CreateEvaluator()
     {
       return myHashHolder.CreateEvaluator();
+    }
+
+    public void Dump(TextWriter tw)
+    {
+      Norm();
+      myHashHolder.Dump(tw);
     }
   }
 }

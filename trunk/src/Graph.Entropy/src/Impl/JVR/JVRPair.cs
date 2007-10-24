@@ -10,44 +10,46 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   {
     public static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
     public readonly int Hash;
-    public readonly int BackHash;
 
     public JVRPair(T from, T to) : this(from, HashValue(from), to)
     {
     }
 
-    public JVRPair(T from, int fromHash, T to) : this(from, fromHash, to, HashValue(to))
-    {
-    } 
-
-    public JVRPair(T from, int fromHash, T to, int toHash) : this(from, to, HashValue(fromHash, toHash), HashValue(toHash, fromHash))
-    {
+    private JVRPair(T from, int fromHash, T to) : base(from, to)
+    {    
+      Hash = HashValue(fromHash, HashValue(to));      
     }
-
+    
     private static int HashValue(int a, int b)
     {
       return a + 131*b;
     }
 
-    private JVRPair(T from, T to, int hash, int backHash) : base(from, to)
-    {
-      Hash = hash;
-      BackHash = backHash;
-    }
-
-    public static int HashValue(T t)
+    private static int HashValue(T t)
     {
       return COMPARER.GetHashCode(t);
     }
 
-    public override string ToString()
+    public static JVRPairFactory Factory(T from)
     {
-      return string.Format("{0} -> {1}", From, To);
+      return new JVRPairFactory(from);
     }
 
-    public JVRPair<T> Inverse()
+    public class JVRPairFactory
     {
-      return new JVRPair<T>(To, From, BackHash, Hash);
+      private readonly T myNode;
+      private readonly int myHash;
+
+      public JVRPairFactory(T node)
+      {
+        myNode = node;
+        myHash = HashValue(node);
+      }
+
+      public JVRPair<T> Create(T nodeTo)
+      {
+        return new JVRPair<T>(myNode, myHash, nodeTo);
+      }
     }
   }
 

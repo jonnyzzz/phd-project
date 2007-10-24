@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
@@ -360,8 +359,7 @@ namespace DSIS.Graph.Entropy
       {
         if (assertData == null) return false;
         if (From != assertData.From) return false;
-        if (To != assertData.To) return false;
-        if (D != assertData.D) return false;
+        if (To != assertData.To) return false;        
         return true;
       }
 
@@ -374,8 +372,7 @@ namespace DSIS.Graph.Entropy
       public override int GetHashCode()
       {
         int result = (int) From;
-        result = 29*result + (int) To;
-        result = 29*result + D.GetHashCode();
+        result = 29*result + (int) To;        
         return result;
       }
 
@@ -389,7 +386,7 @@ namespace DSIS.Graph.Entropy
         if (v != 0)
           return v;
 
-        return D.CompareTo(other.D);
+        return 0;
       }
 
       public override string ToString()

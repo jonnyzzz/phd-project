@@ -27,12 +27,6 @@ namespace DSIS.Graph.Entropy.Impl.Util
     {
       return COMPARER.GetHashCode(t);
     }
-
-
-    public override string ToString()
-    {
-      return string.Format("{0} -> {1}", From, To);
-    }
   }
 
   internal class NodePairEqualityComparer<T> : IEqualityComparer<NodePair<T>>

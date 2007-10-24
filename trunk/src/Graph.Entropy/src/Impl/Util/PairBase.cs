@@ -13,5 +13,10 @@ namespace DSIS.Graph.Entropy.Impl.Util
       To = to;
       From = from;
     }
+
+    public override string ToString()
+    {
+      return string.Format("{0} -> {1}", From, To);
+    }
   }
 }

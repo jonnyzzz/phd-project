@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
+using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
@@ -16,7 +19,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   public class HashHolder<T> : IHashholderController<T>
     where T : ICellCoordinate<T>
   {
-    const double EPS = 1e-4;
+    const double EPS = 1e-8;
     private static readonly IEqualityComparer<JVRPair<T>> COMPARER = EqualityComparerFactory<JVRPair<T>>.GetComparer();
 
     private Dictionary<JVRPair<T>, double> myHash = CreateHash();
@@ -32,14 +35,14 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return new SortedNodeSet<T>();
     }
 
-    private void Divide(double div, ArcDirection<T> strait, ArcDirection<T> back)
+    private void Divide(double div)
     {
       Dictionary<JVRPair<T>, double> current = myHash;
 
       myHash = CreateHash();      
       mySet = CreateSet();
       
-      using (ItemUpdateCookie<T> cookie = UpdateCookie(strait, back))
+      using (ItemRebuildCookie<T> cookie = RebuildCookie())
       {
         foreach (KeyValuePair<JVRPair<T>, double> pair in current)
         {
@@ -60,19 +63,24 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return v;
     }
 
-    public void Normalize(ArcDirection<T> strait, ArcDirection<T> back)
+    public void Normalize()
     {
       double myNorm = Norm();
       
       if (Math.Abs(myNorm - 1.0) < EPS)
         return;
 
-      Divide(myNorm, strait, back);
+      Divide(myNorm);
     }
 
     public ItemUpdateCookie<T> UpdateCookie(ArcDirection<T> strait, ArcDirection<T> back)
     {
       return new ItemUpdateCookie<T>(this, strait, back);
+    }
+
+    public ItemRebuildCookie<T> RebuildCookie()
+    {
+      return new ItemRebuildCookie<T>(this);
     }
     
     void IHashholderController<T>.SetItem(JVRPair<T> pair, double value)
@@ -98,6 +106,25 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public T NextNode()
     {
       return mySet.NextNode();
-    }    
+    }   
+ 
+    public void Dump(TextWriter tw)
+    {
+      foreach (KeyValuePair<JVRPair<T>, double> pair in myHash)
+      {
+        tw.WriteLine(
+          string.Format(CultureInfo.GetCultureInfo("en-us"),
+          "n({0},{1}),", ToString(pair.Key.From), ToString(pair.Key.To)));
+      }
+    }
+
+    private static string ToString(T node)
+    {
+      IIntegerCoordinate ic = (IIntegerCoordinate) node;
+      if (ic.Dimension == 1)
+        return ic.GetCoordinate(0).ToString();
+      else
+        return node.ToString();
+    }
   }      
 }

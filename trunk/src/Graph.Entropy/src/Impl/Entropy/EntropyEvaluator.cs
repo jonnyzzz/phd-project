@@ -9,8 +9,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
   public class EntropyEvaluator<T, TPair> : IEntropyProcessor<T>
     where T : ICellCoordinate<T>
     where TPair : PairBase<T>
-  {
-    private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
+  {    
     private static readonly double LN2 = Math.Log(2);
 
     private readonly IDictionary<TPair, double> myM;
@@ -26,7 +25,10 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     
     public IEntropyProcessor<T> Divide(ICellCoordinateSystemProjector<T> projector)
     {
-      return new EntropyEvaluator<T, NodePair<T>>(Project(myM, projector), myNorm, COMPARER);
+      return new EntropyEvaluator<T, NodePair<T>>(
+        Project(myM, projector), 
+        myNorm, 
+        EqualityComparerFactory<T>.GetComparer());
     }
 
     public void ComputeEntropy(IEntropyListener<T> listener)
@@ -62,10 +64,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
     private static double Log(double d)
     {
-      if (d < 1)
-        return -Math.Log(1.0/d);
-      else
-        return Math.Log(d);
+      return Math.Log(d);
     }
 
     private static double Entropy(double d)

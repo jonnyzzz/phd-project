@@ -24,17 +24,6 @@ namespace DSIS.Graph.Entropy
 
       Assert.IsTrue(c.Equals(p1.From, i1));
       Assert.IsTrue(c.Equals(p1.To, i2));
-
-      JVRPair<IntegerCoordinate> p2 = p1.Inverse();
-
-      Assert.IsTrue(c.Equals(p2.From, i2));
-      Assert.IsTrue(c.Equals(p2.To, i1));
-
-      Assert.AreEqual(p1.Hash, p2.BackHash);
-      Assert.AreEqual(p2.BackHash, p2.Hash);
-      
-      Assert.AreEqual(p1.Hash, p2.Inverse().Hash);
-      Assert.AreEqual(p2.BackHash, p2.Inverse().BackHash);
     }    
   }
 }

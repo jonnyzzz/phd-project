@@ -3,7 +3,7 @@ using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
 {
-  public class ComputeJVREntropySquareListener<T,Q> : ComputeEntropyListenerBase<T,Q>
+  public class ComputeJVREntropyListener<T,Q> : ComputeEntropyListenerBase<T,Q>
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
