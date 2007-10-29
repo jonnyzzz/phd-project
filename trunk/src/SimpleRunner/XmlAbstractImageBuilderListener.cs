@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Xml;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
@@ -30,6 +32,7 @@ namespace DSIS.SimpleRunner
     private DateTime myComputationEntropyStartedTime;
 
     private int stepCount = 0;
+    private int myEdgesCount;
 
     public XmlAbstractImageBuilderListener(string file)
     {
@@ -119,12 +122,15 @@ namespace DSIS.SimpleRunner
 
       AppendAttribute(myGraphElement, "components", comps.ComponentCount);
       AppendAttribute(components, "count", comps.ComponentCount);
+      AppendAttribute(components, "total-edges", graph.EdgesCount);
+      AppendAttribute(components, "total-nodes", graph.NodesCount);
       AppendAttribute(components, "time", (DateTime.Now - myComputationGraphConstructedTime).TotalMilliseconds);
       foreach (IStrongComponentInfo info in comps.Components)
       {
         XmlElement element = AppendElement(components, "component");
         AppendAttribute(element, "count", info.NodesCount);
       }
+      myEdgesCount = graph.EdgesCount;
 
       Serialize();
     }
@@ -132,14 +138,14 @@ namespace DSIS.SimpleRunner
     public override void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                AbstractImageBuilderContext<Q> cx)
     {
-      AppendAttribute(myStep, "time", (DateTime.Now - myComputationStepStartedTime).TotalMilliseconds);
-
+      AppendAttribute(myStep, "time", (DateTime.Now - myComputationStepStartedTime).TotalMilliseconds);      
       Serialize();
     }
-
+   
     public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                     AbstractImageBuilderContext<Q> cx)
     {
+      
       AppendAttribute(myCoputationElement, "time", (DateTime.Now - myComputationStartedTime).TotalMilliseconds);
       AppendAttribute(myCoputationElement, "totalSteps", stepCount);
 
@@ -148,12 +154,18 @@ namespace DSIS.SimpleRunner
 
     public void OnComputeEntropyStarted()
     {
+      myUsedEdgesCount = null;
       myComputationEntropyStartedTime = DateTime.Now;
       myEntropy = AppendElement(myStep, "entropy");
     }
 
+
+    private int? myUsedEdgesCount;
+
     public void OnComputeEntropyFinished(string key, double[] value)
     {      
+      AppendAttribute(myEntropy, "graphEdges", myEdgesCount.ToString());
+      AppendAttribute(myEntropy, "usedEdges", myUsedEdgesCount.ToString());
       AppendAttribute(myEntropy, "entropy-type", key);
       AppendAttribute(myEntropy, "value", value[0]);
       AppendAttribute(myEntropy, "time", (DateTime.Now - myComputationEntropyStartedTime).TotalMilliseconds);
@@ -168,8 +180,12 @@ namespace DSIS.SimpleRunner
       Serialize();
     }
 
-    public void OnComputeEntropyStep(double value, IDictionary<Q, double> measure, ICellCoordinateSystem<Q> system)
+    public void OnComputeEntropyStep<P>(double value, IDictionary<Q, double> measure, IDictionary<P, double> egdes, ICellCoordinateSystem<Q> system) where P : PairBase<Q>
     {      
+      if (myUsedEdgesCount == null)
+      {
+        myUsedEdgesCount = egdes.Count;
+      }
     }
 
     public void EntropyImageAdded(string imageName, string file)

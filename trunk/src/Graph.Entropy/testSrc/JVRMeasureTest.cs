@@ -4,6 +4,7 @@ using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.JVR;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
@@ -166,7 +167,7 @@ n(19,3)
     {
       private double? myResult;
 
-      public void OnResult(double result, IDictionary<T, double> measure)
+      public void OnResult<Q>(double result, IDictionary<T, double> measure, IDictionary<Q, double> q) where Q : PairBase<T>
       {
         myResult = result;
       }

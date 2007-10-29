@@ -181,6 +181,7 @@ namespace DSIS.SimpleRunner
 
       IGraphStrongComponents<Q> comps = null;
 
+      IGraph<Q> prevGraph = graph;
       while (PerformStep(ctx, cx, stepCount))
       {
         OnStepStarted((T) ctx.Converter.FromSystem, cx, subdivide);
@@ -201,12 +202,14 @@ namespace DSIS.SimpleRunner
         IEnumerable<IStrongComponentInfo> componentsId =
           FilterStrongComponents(comps, graph, (T) ctx.Converter.ToSystem, cx);
 
+        prevGraph = graph;
         graph = new TarjanGraph<Q>(ctx.Converter.ToSystem);
         conv = ctx.Converter.ToSystem.Subdivide(subdivide = GetSubdivide(stepCount));
 
         ctx = ctx.CreateNextContext(comps.GetCoordinates(componentsId), conv, new GraphCellImageBuilder<Q>(graph));
       }
-      OnComputationFinished(comps, graph, (T) ctx.Converter.ToSystem, cx);
+
+      OnComputationFinished(comps, prevGraph, (T)prevGraph.CoordinateSystem, cx);
     }
 
     protected virtual ICellProcessor<Q, Q> CreateCellConstructionProcess()

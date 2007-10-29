@@ -3,6 +3,7 @@ using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Graph.Entropy;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
@@ -85,12 +86,12 @@ namespace DSIS.SimpleRunner
         mySystem = system;
       }
 
-      public virtual void OnResult(double result, IDictionary<Q, double> measure)
-      {
+      public virtual void OnResult<P>(double result, IDictionary<Q, double> measure, IDictionary<P, double> edges) where P : PairBase<Q>
+      {        
         myResults.Add(result);
         myHost.FireListeners(delegate(IComputeEntropyListener<Q> obj)
                                {
-                                 obj.OnComputeEntropyStep(result, measure, mySystem);
+                                 obj.OnComputeEntropyStep(result, measure, edges, mySystem);
                                });
       }
     }
@@ -108,10 +109,10 @@ namespace DSIS.SimpleRunner
         return !myHasResult;
       }
 
-      public override void OnResult(double result, IDictionary<Q, double> measure)
+      public override void OnResult<P>(double result, IDictionary<Q, double> measure, IDictionary<P, double> edges)
       {
         myHasResult = true;
-        base.OnResult(result, measure);
+        base.OnResult(result, measure, edges);
       }
     }
   }

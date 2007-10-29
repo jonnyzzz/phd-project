@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
@@ -157,8 +158,8 @@ namespace DSIS.Graph.Entropy
     {
       public double Result;
       public IDictionary<IntegerCoordinate, double> Measure;
-
-      public void OnResult(double result, IDictionary<IntegerCoordinate, double> measure)
+      
+      public void OnResult<Q>(double result, IDictionary<IntegerCoordinate, double> measure, IDictionary<Q, double> edges) where Q : PairBase<IntegerCoordinate>
       {
         Result = result;
         Measure = measure;

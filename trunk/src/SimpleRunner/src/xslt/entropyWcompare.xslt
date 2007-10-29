@@ -76,8 +76,15 @@
       <td><xsl:apply-templates select="@step"/></td>
       <xsl:for-each select="entropy">
         <xsl:sort select="@entropy-type"/>
-        <td><xsl:value-of select="entropy-step[@project='0']/@value"/></td>
+        <td>
+          <xsl:value-of select="entropy-step[@project='0']/@value"/>
+          <small>
+            <xsl:text>(</xsl:text>
+            <xsl:number value="ceiling((@usedEdges div @graphEdges) * 10000) div 100.0"/>
+            <xsl:text>%)</xsl:text>
+          </small>
+        </td>
       </xsl:for-each>
     </tr>
-  </xsl:template>  
+  </xsl:template>      
 </xsl:stylesheet>

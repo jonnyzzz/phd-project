@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
@@ -76,8 +78,9 @@ namespace DSIS.SimpleRunner
       }      
     }
 
-    public void OnComputeEntropyStep(double value, IDictionary<Q, double> measure, ICellCoordinateSystem<Q> system)
-    {      
+    public void OnComputeEntropyStep<P>(double value, IDictionary<Q, double> measure, IDictionary<P, double> edges, ICellCoordinateSystem<Q> system) where P: PairBase<Q>
+    {
+      Console.Out.WriteLine("Used edges {0}, nodes {1}", edges.Count, measure.Count);
     }
 
     public void ImageFile(string file)

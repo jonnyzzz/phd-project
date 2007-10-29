@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 
@@ -12,12 +13,12 @@ namespace DSIS.SimpleRunner
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate<Q>
   {
-    private int myStepNumber = 0;
+    private int myStepNumber;
     private readonly Dictionary<string, DrawBase> myDrawers = new Dictionary<string, DrawBase>();
     private readonly Hashset<string> myWorking = new Hashset<string>();
 
     private readonly string mySuffix;
-    private int myEntropyStep = 0;
+    private int myEntropyStep;
 
     public DrawEntropyListener(string suffix)
     {
@@ -112,7 +113,7 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    public void OnComputeEntropyStep(double value, IDictionary<Q, double> measure, ICellCoordinateSystem<Q> system)
+    public void OnComputeEntropyStep<P>(double value, IDictionary<Q, double> measure, IDictionary<P, double> edges, ICellCoordinateSystem<Q> system) where P : PairBase<Q>
     {
       if (myEntropyStep == 0)
       {

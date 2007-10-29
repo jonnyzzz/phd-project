@@ -6,6 +6,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
+using DSIS.Graph.Entropy.Impl.Util;
 
 namespace DSIS.Graph.Entropy
 {
@@ -18,7 +19,7 @@ namespace DSIS.Graph.Entropy
   public interface IEntropyListener<T> 
     where T : ICellCoordinate<T>
   {
-    void OnResult(double result, IDictionary<T, double> measure);
+    void OnResult<Q>(double result, IDictionary<T, double> measure, IDictionary<Q, double> edges) where Q:PairBase<T>;
   }
 
   public interface IEntropyEvaluatorInput<T>

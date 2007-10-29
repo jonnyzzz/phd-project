@@ -48,7 +48,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
         v += Entropy(value);
       }
 
-      listener.OnResult(v / LN2, values);
+      listener.OnResult(v / LN2, values, myM);
     }
 
     private static void Add<Q>(IDictionary<Q, double> ds, Q node, double v)

@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 
@@ -67,7 +69,7 @@ namespace DSIS.SimpleRunner
       return base.ComputationFinishedC(comps, graph, system, cx);
     }
 
-    public void OnComputeEntropyStep(double value, IDictionary<Q, double> measure, ICellCoordinateSystem<Q> system)
+    public void OnComputeEntropyStep<P>(double value, IDictionary<Q, double> measure, IDictionary<P, double> edges, ICellCoordinateSystem<Q> system) where P:PairBase<Q>
     {      
     }
   }
