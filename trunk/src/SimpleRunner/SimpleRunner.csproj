@@ -49,6 +49,8 @@
     <Compile Include="DrawEntropyDivCurveListener.cs" />
     <Compile Include="DrawEntropyListener.cs" />
     <Compile Include="DrawEntropyWithSpace.cs" />
+    <Compile Include="DrawEntropyWithSpace3d.cs" />
+    <Compile Include="DrawEntropyWithSpaceBase.cs" />
     <Compile Include="ProjectTheSameMeasureEntropyDraw.cs" />
     <Compile Include="ProjectToTheSameEntropyDraw.cs" />
     <Compile Include="DrawLastComputationResultListener.cs" />

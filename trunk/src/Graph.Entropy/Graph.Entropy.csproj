@@ -52,6 +52,9 @@
     <Compile Include="src\Impl\EntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\Loop\EntropyEvaluatorLoopBase.cs" />
     <Compile Include="src\Impl\Loop\EntropyGraphWeightCallback.cs" />
+    <Compile Include="src\Impl\Loop\GraphWeightSearch2.cs" />
+    <Compile Include="src\Impl\Loop\GraphWeightSearchBase.cs" />
+    <Compile Include="src\Impl\Loop\Search\Limited\LimitedLoopSearch.cs" />
     <Compile Include="src\Impl\Loop\StrangeEntropyAllEdgesLoopsEvaluatorImpl.cs" />
     <Compile Include="src\Impl\Loop\StrangeEntropyAllNodesLoopsEvaluatorImpl.cs" />
     <Compile Include="src\Impl\Loop\Weight\EntropyLoopConstantWeight.cs" />
@@ -88,8 +91,10 @@
     <Compile Include="testSrc\GraphWeightSearchTest.cs" />
     <Compile Include="testSrc\JVRMeasureTest.cs" />
     <Compile Include="testSrc\JVrPairTest.cs" />
+    <Compile Include="testSrc\LimitedLoopSearchTest.cs" />
     <Compile Include="testSrc\LoopIteratorsPerfomance.cs" />
     <Compile Include="testSrc\LoopIteratorTest.cs" />
+    <Compile Include="testSrc\LoopIteratorTestBase.cs" />
     <Compile Include="testSrc\PerfomanceTestBase.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -51,6 +51,7 @@ namespace DSIS.SimpleRunner
       myDrawers["BigStep to the same"] = new ProjectToTheSameEntropyDraw();
       myDrawers["BigStep for the measure"] = new ProjectTheSameMeasureEntropyDraw();
       myDrawers["Measure"] = new DrawEntropyWithSpace<Q>();
+      myDrawers["Measure3D"] = new DrawEntropyWithSpace3d<Q>();
       myStepNumber = 0;
     }
 
@@ -71,6 +72,7 @@ namespace DSIS.SimpleRunner
         }
       }
       myWorking.Add("Measure");
+      myWorking.Add("Measure3D");
 
       myStepNumber++;
     }
@@ -121,7 +123,7 @@ namespace DSIS.SimpleRunner
         {
           if (myWorking.Contains(pair.Key))
           {
-            DrawEntropyWithSpace<Q> sp = pair.Value as DrawEntropyWithSpace<Q>;
+            DrawEntropyWithSpaceBase<Q> sp = pair.Value as DrawEntropyWithSpaceBase<Q>;
             if (sp != null)
               sp.SetMeasure(system, measure, value);
           }

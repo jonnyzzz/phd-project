@@ -6,7 +6,7 @@ namespace DSIS.GnuplotDrawer
   public class GnuplotPointsFileWriter : GnuplotFileWriterBase
   {
     private readonly int myDim;
-    private int myPointsCount = 0;
+    private int myPointsCount;
 
     public GnuplotPointsFileWriter(string filename, int dim) : base(filename)
     {

@@ -7,6 +7,7 @@ namespace DSIS.GnuplotDrawer
     public readonly int Height = 1000;
     public readonly string Title;
     public bool ShowKeyHistory = false;
+    public bool ForcePoints = false;
 
     public GnuplotScriptParameters(string outputFile, string title)
     {

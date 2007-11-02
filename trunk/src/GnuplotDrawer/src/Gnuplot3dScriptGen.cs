@@ -18,10 +18,10 @@ namespace DSIS.GnuplotDrawer
 
       myWriter.Write(" '{0}' title \"{1}\" with ", file.Filename, string.Format("Count {0}", file.PointsCount));
 
-      if (file.PointsCount >= 300)
-        myWriter.Write(" dots ");
-      else
+      if (myParams.ForcePoints || file.PointsCount < 300)
         myWriter.Write(" points ");
+      else
+        myWriter.Write(" dots ");
     }
 
     public override void Dispose()

@@ -16,7 +16,6 @@ namespace DSIS.Graph.Entropy.Impl.Loop
     private readonly Queue<SearchTreeNode> myNodes = new Queue<SearchTreeNode>();
     private readonly Hashset<INode<T>> myVisitedNodes = new Hashset<INode<T>>();
 
-
     public LoopIterator(ILoopIteratorCallback<T> callback, IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component) : base(callback, components, component)
     {
       myGraph = graph;

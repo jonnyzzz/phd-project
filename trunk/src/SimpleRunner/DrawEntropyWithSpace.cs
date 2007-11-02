@@ -7,18 +7,8 @@ using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
-  public class DrawEntropyWithSpace<T> : DrawBase
-    where T : IIntegerCoordinate<T>
+  public class DrawEntropyWithSpace<T> : DrawEntropyWithSpaceBase<T> where T : IIntegerCoordinate<T>
   {
-    private Pair<ICellCoordinateSystem<T>, IDictionary<T, double>>? myWights = null;
-    private double? myEntropy = null;
-
-    public void SetMeasure(ICellCoordinateSystem<T> system, IDictionary<T, double> measure, double entropy)
-    {
-      myWights = new Pair<ICellCoordinateSystem<T>, IDictionary<T, double>>(system, measure);
-      myEntropy = entropy;
-    }
-
     private GnuplotPointsFileWriter Render(Pair<ICellCoordinateSystem<T>, IDictionary<T, double>> file)
     {
       IIntegerCoordinateSystem<T> sys = (IIntegerCoordinateSystem<T>) file.First;
@@ -38,14 +28,14 @@ namespace DSIS.SimpleRunner
 
     public override string DrawImage(string suffix)
     {
-      if (myWights == null)
+      if (Wights == null)
         return null;
 
-      GnuplotPointsFileWriter file = Render(myWights.Value);
+      GnuplotPointsFileWriter file = Render(Wights.Value);
       {
         string outputFile = CreateFileName(suffix + "measure.png");
 
-        GnuplotScriptParameters ps = new GnuplotScriptParameters(outputFile, Title + string.Format("Entropy = {0}", myEntropy.Value.ToString("F6")));
+        GnuplotScriptParameters ps = new GnuplotScriptParameters(outputFile, Title + string.Format("Entropy = {0}", Entropy.Value.ToString("F6")));
         IGnuplotPhaseScriptGen gen = GnuplotSriptGen.Entrorpy2d(
           CreateFileName("measure.gnuplot"),
           ps);
