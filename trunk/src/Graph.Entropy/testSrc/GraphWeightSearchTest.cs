@@ -3,6 +3,7 @@
  * Created: 27 марта 2007 г.
  */
 
+using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
@@ -15,25 +16,8 @@ namespace DSIS.Graph.Entropy
     protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,
                                                   IGraphStrongComponents<T> components)
     {
-      return new GraphWeightSearch<T>(mcb, components, GetFirst(components.Components));
-    }
-
-    [Test]
-    [ExpectedException]
-    public void Test_02()
-    {
-      DoTest(delegate(IGraph<IntegerCoordinate> graph)
-               {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem) graph.CoordinateSystem;
-                 INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
-                 INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
-                 INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));
-                 INode<IntegerCoordinate> n4 = graph.AddNode(system.Create(4));
-
-                 graph.AddEdgeToNode(n1, n2);
-                 graph.AddEdgeToNode(n2, n3);
-                 graph.AddEdgeToNode(n3, n4);
-               }, @"");
+      IStrongComponentInfo first = GetFirst(components.Components);
+      return new LoopIteratorFirst<T>(mcb, components, first, new GraphWeightSearch<T>(components, first));
     }
 
     [Test]
@@ -79,22 +63,7 @@ namespace DSIS.Graph.Entropy
                }, "1, 3, ");
     }
 
-    [Test]
-    public void Test_05_5()
-    {
-      DoTest(delegate(IGraph<IntegerCoordinate> graph)
-               {
-                 AddEdge(graph, 1, 2); //                    1 \
-                 AddEdge(graph, 1, 3); //                  2 -> 3 -> 4 -> 2
-                 AddEdge(graph, 1, 4); // 
-
-                 AddEdge(graph, 2, 3);
-                 AddEdge(graph, 3, 4);
-                 AddEdge(graph, 5, 1);
-               }, "2, 3, 4, ");
-    }
-
-
+   
     [Test]
     public void Test_05_6()
     {
@@ -108,7 +77,7 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 3, 2);
                  AddEdge(graph, 3, 4);
                  AddEdge(graph, 5, 1);
-               }, "2, 3, ", "2, 3, 4, ");
+               }, "2, 3, ");
     }
 
     [Test]

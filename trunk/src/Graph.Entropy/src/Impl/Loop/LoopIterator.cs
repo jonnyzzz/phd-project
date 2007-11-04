@@ -6,7 +6,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
-  public class LoopIterator<T> : LoopIteratorFirst<T> where T : ICellCoordinate<T>
+  public class LoopIterator<T> : ContextBase<T>, IGraphWeightSearch<T> where T : ICellCoordinate<T>
   {
     private static readonly IEqualityComparer<INode<T>> COMPARER = EqualityComparerFactory<INode<T>>.GetReferenceComparer();
 
@@ -16,7 +16,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
     private readonly Queue<SearchTreeNode> myNodes = new Queue<SearchTreeNode>();
     private readonly Hashset<INode<T>> myVisitedNodes = new Hashset<INode<T>>();
 
-    public LoopIterator(ILoopIteratorCallback<T> callback, IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component) : base(callback, components, component)
+    public LoopIterator(IGraph<T> graph, IGraphStrongComponents<T> components, IStrongComponentInfo component) : base(components, component)
     {
       myGraph = graph;
     }
@@ -36,7 +36,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
       return false;
     }
 
-    private void WidthSearch(SearchTreeNode node)
+    private void WidthSearch(ILoopIteratorCallback<T> callback, SearchTreeNode node)
     {
       myVisitedNodes.Add(node.Node);
 
@@ -48,7 +48,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
         List<INode<T>> loop = new List<INode<T>>();
         if (myVisitedNodes.Contains(node.Node) && IsUpperInTree(node, edge, loop))
         {
-          myCallback.OnLoopFound(loop);          
+          callback.OnLoopFound(loop);          
         }
         else
         {
@@ -57,7 +57,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
       }
     }
 
-    protected override void WidthSearch(long nodesCount, INode<T> node)
+    public void WidthSearch(ILoopIteratorCallback<T> callback, INode<T> node)
     {
       mySearchRoot = new SearchTreeNode(null, node);
 
@@ -65,7 +65,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 
       while (myNodes.Count > 0)
       {
-        WidthSearch(myNodes.Dequeue());
+        WidthSearch(callback, myNodes.Dequeue());
       }
     }
 

@@ -5,12 +5,15 @@ using DSIS.Graph.Entropy.Impl.Loop;
 
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
-  public abstract class LoopIteratorFirst<T> : LoopIteratorBase<T>
+  public class LoopIteratorFirst<T> : LoopIteratorBase<T>
     where T : ICellCoordinate<T>
   {
-    protected LoopIteratorFirst(ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components,
-                                IStrongComponentInfo component) : base(callback, components, component)
+    private readonly IGraphWeightSearch<T> mySearcher;
+
+    public LoopIteratorFirst(ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components,
+                                IStrongComponentInfo component, IGraphWeightSearch<T> searcher) : base(callback, components, component)
     {
+      mySearcher = searcher;
     }
 
     private static Q GetFirst<Q>(IEnumerable<Q> t)
@@ -31,9 +34,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
       if (first == null)
         return;
 
-      WidthSearch(myComponent.NodesCount, first);
+      mySearcher.WidthSearch(myCallback, first);
     }
-
-    protected abstract void WidthSearch(long nodesCount, INode<T> node);
   }
 }

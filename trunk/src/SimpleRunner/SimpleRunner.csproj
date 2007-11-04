@@ -36,13 +36,9 @@
     <Compile Include="AbstractImageBuilder.cs" />
     <Compile Include="AbstractImageBuilderListener.cs" />
     <Compile Include="ComputationPathListener.cs" />
-    <Compile Include="ComputeEntropyLinearListener.cs" />
-    <Compile Include="ComputeEntropyConstListener.cs" />
     <Compile Include="ComputeEntropyListenerBase.cs" />
-    <Compile Include="ComputeEntropyMinusOneListener.cs" />
-    <Compile Include="ComputeEntropyMinusTwoListener.cs" />
-    <Compile Include="ComputeEntropySquareListener.cs" />
     <Compile Include="ComputeJVREntropyListener.cs" />
+    <Compile Include="ComputeStrangeEntropyListener.cs" />
     <Compile Include="ConsoleListener.cs" />
     <Compile Include="DrawBase.cs" />
     <Compile Include="DrawEntropyBase.cs" />

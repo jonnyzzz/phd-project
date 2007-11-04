@@ -1,19 +1,21 @@
+using System;
+using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy
 {
-//  [TestFixture]
-  public abstract class GraphWeightSearch2Test : GraphSearchTest
+  [TestFixture]
+  public class GraphWeightSearch2Test : GraphSearchTest
   {
     protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components)
     {
-      return new GraphWeightSearch2<T>(mcb, components, GetFirst(components.Components));
+      IStrongComponentInfo first = GetFirst(components.Components);
+      return new LoopIteratorFirst<T>(mcb, components, first, new GraphWeightSearch2<T>(components, first));
     }
 
-    [Test]
-    [ExpectedException]
+    [Test]  [ExpectedException(typeof(ArgumentException))]
     public void Test_02()
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
@@ -73,7 +75,7 @@ namespace DSIS.Graph.Entropy
                }, "1, 3, ");
     }
 
-    [Test]
+    [Test][ExpectedException(typeof(ArgumentException))]
     public void Test_05_5()
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
@@ -102,7 +104,7 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 3, 2);
                  AddEdge(graph, 3, 4);
                  AddEdge(graph, 5, 1);
-               }, "2, 3, ", "2, 3, 4, ");
+               }, "2, 3, ");
     }
 
     [Test]

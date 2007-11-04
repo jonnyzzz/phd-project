@@ -6,7 +6,6 @@
 using System.Collections.Generic;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop;
-using DSIS.Graph.Entropy.Impl.Loop.Search.Limited;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
@@ -17,7 +16,7 @@ namespace DSIS.Graph.Entropy
   {
     protected override ILoopIterator<IntegerCoordinate> CreateLoopIterator(TarjanGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components, ILoopIteratorCallback<IntegerCoordinate> mcb, IStrongComponentInfo firstComponent)
     {
-      return new LoopIterator<IntegerCoordinate>(mcb, graph, components, firstComponent);
+      return new LoopIteratorFirst<IntegerCoordinate>(mcb, components, firstComponent, new LoopIterator<IntegerCoordinate>(graph, components, firstComponent));
     }
 
     [Test]

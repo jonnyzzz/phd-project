@@ -18,7 +18,7 @@ namespace DSIS.Graph.Entropy
 
     private class EntropyEvaluatorImpl : EntropyEvaluatorImpl<IntegerCoordinate>
     {
-      public EntropyEvaluatorImpl() : base(EntropyLoopConstantWeight.ONE)
+      public EntropyEvaluatorImpl() : base(EntropyLoopWeights.CONST)
       {
       }
     }

@@ -4,7 +4,7 @@ using DSIS.Graph.Entropy.Impl.Entropy;
 
 namespace DSIS.Graph.Entropy.Impl
 {
-  internal abstract class EntropyEvaluatorBase<T> : IEntropyEvaluator<T>
+  public abstract class EntropyEvaluatorBase<T> : IEntropyEvaluator<T>
     where T : ICellCoordinate<T>
   {
     protected abstract IEntropyProcessor<T> Measure(IEntropyEvaluatorInput<T> data);

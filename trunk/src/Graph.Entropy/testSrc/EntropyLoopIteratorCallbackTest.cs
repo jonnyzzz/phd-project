@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
@@ -246,7 +245,7 @@ namespace DSIS.Graph.Entropy
       }
 
       EntropyBackStepGraphWeightCallback<IntegerCoordinate> cb =
-        new EntropyBackStepGraphWeightCallback<IntegerCoordinate>(graph.CoordinateSystem, EntropyLoopConstantWeight.ONE);
+        new EntropyBackStepGraphWeightCallback<IntegerCoordinate>(graph.CoordinateSystem, EntropyLoopWeights.CONST);
 
       foreach (List<int> loop in loops)
       {

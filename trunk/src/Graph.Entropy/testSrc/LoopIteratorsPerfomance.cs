@@ -43,7 +43,7 @@ namespace DSIS.Graph.Entropy
                               MockLoopIteratorCallback<IntegerCoordinate> callback = new MockLoopIteratorCallback<IntegerCoordinate>();
                               IStrongComponentInfo component = GetFirst(comps.Components);
 
-                              return new GraphWeightSearch<IntegerCoordinate>(callback, comps, component);
+                              return new LoopIteratorFirst<IntegerCoordinate>(callback, comps, component, new GraphWeightSearch<IntegerCoordinate>(comps, component));
                             }, new TimeSpan(0,0,9));
     }
   }

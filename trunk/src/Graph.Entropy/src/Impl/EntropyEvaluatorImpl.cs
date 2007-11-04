@@ -23,8 +23,9 @@ namespace DSIS.Graph.Entropy.Impl
                                                        IGraphStrongComponents<T> comps, IGraph<T> graph,
                                                        IStrongComponentInfo info)
     {      
-        return new LoopIterator<T>(
-            new NonDuplicatedLoopIteratorCallback<T, ILoopIteratorCallback<T>>(callback), graph, comps, info);
+        return new LoopIteratorFirst<T>(
+            new NonDuplicatedLoopIteratorCallback<T, ILoopIteratorCallback<T>>(callback), comps, info,
+            new LoopIterator<T>(graph, comps, info));
     }
   }
 }

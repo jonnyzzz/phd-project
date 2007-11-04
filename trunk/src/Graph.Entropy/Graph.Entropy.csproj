@@ -46,6 +46,7 @@
     <Compile Include="src\Impl\Loop\AllEngesOnALoopGraphSearch.cs" />
     <Compile Include="src\Impl\Loop\AllNodesOnALoopGraphSearch.cs" />
     <Compile Include="src\Impl\Eigen\EigenEntropyEvaluatorImpl.cs" />
+    <Compile Include="src\Impl\Loop\ContextBase.cs" />
     <Compile Include="src\Impl\Loop\EntropyBackStepGraphWeightCallback.cs" />
     <Compile Include="src\Impl\Entropy\EntropyEvaluator.cs" />
     <Compile Include="src\Impl\EntropyEvaluatorBase.cs" />
@@ -54,14 +55,13 @@
     <Compile Include="src\Impl\Loop\EntropyGraphWeightCallback.cs" />
     <Compile Include="src\Impl\Loop\GraphWeightSearch2.cs" />
     <Compile Include="src\Impl\Loop\GraphWeightSearchBase.cs" />
+    <Compile Include="src\Impl\Loop\IGraphWeightSearch.cs" />
+    <Compile Include="src\Impl\Loop\LoopIteratorSmart.cs" />
     <Compile Include="src\Impl\Loop\Search\Limited\LimitedLoopSearch.cs" />
     <Compile Include="src\Impl\Loop\StrangeEntropyAllEdgesLoopsEvaluatorImpl.cs" />
     <Compile Include="src\Impl\Loop\StrangeEntropyAllNodesLoopsEvaluatorImpl.cs" />
+    <Compile Include="src\Impl\Loop\StrangeEntropyEvaluator.cs" />
     <Compile Include="src\Impl\Loop\Weight\EntropyLoopConstantWeight.cs" />
-    <Compile Include="src\Impl\Loop\Weight\EntropyLoopLinearEntropyWeight.cs" />
-    <Compile Include="src\Impl\Loop\Weight\EntropyLoopMunisOneEntropyWeight.cs" />
-    <Compile Include="src\Impl\Loop\Weight\EntropyLoopMunisTwoEntropyWeight.cs" />
-    <Compile Include="src\Impl\Loop\Weight\EntropyLoopSquareEntropyWeight.cs" />
     <Compile Include="src\Impl\Loop\Weight\IEntropyLoopWeightCallback.cs" />
     <Compile Include="src\Impl\Loop\GraphWeightSearch.cs" />
     <Compile Include="src\Impl\Entropy\IEntropyProcessor.cs" />
@@ -80,7 +80,6 @@
     <Compile Include="src\Impl\Util\NodePair.cs" />
     <Compile Include="src\Impl\Loop\NonDuplicatedLoopIteratorCallback.cs" />
     <Compile Include="src\Impl\Util\PairBase.cs" />
-    <Compile Include="src\Impl\Loop\StrangeEntropyEvaluatorImpl.cs" />
     <Compile Include="testSrc\AllEngesOnALoopGraphSearchTest.cs" />
     <Compile Include="testSrc\AllNodesOnALoopGraphSearchTest.cs" />
     <Compile Include="testSrc\EigenEvaluatorImplTest.cs" />

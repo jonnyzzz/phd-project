@@ -5,7 +5,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Weight;
 
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
-  internal abstract class EntropyEvaluatorLoopBase<T> : EntropyEvaluatorBase<T>
+  public abstract class EntropyEvaluatorLoopBase<T> : EntropyEvaluatorBase<T>
     where T : ICellCoordinate<T>
   {
     private readonly IEntropyLoopWeightCallback myLoopCallback;

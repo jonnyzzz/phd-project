@@ -13,7 +13,7 @@ namespace DSIS.Graph.Entropy
   public interface IEntropyEvaluator<T>
     where T : ICellCoordinate<T>
   { 
-    void ComputeEntropy(IEntropyEvaluatorController<T> controller, IProgressInfo progressInfo);
+    void ComputeEntropy(IEntropyEvaluatorController<T> controller, IProgressInfo progressInfo);    
   }
 
   public interface IEntropyListener<T> 

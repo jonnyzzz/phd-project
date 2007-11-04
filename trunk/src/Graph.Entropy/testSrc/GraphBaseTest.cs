@@ -1,15 +1,25 @@
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
+using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy
 {
   public class GraphBaseTest
   {
+    [SetUp]
+    public void SetUp()
+    {
+      Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
+      Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-us");
+    }
+
     protected static T GetFirst<T>(IEnumerable<T> ts)
     {
       foreach (T t in ts){ return t; }

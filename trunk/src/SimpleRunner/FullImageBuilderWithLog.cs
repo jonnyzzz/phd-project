@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Xsl;
 using DSIS.Graph;
+using DSIS.Graph.Entropy.Impl.Loop;
+using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 
@@ -37,7 +39,10 @@ namespace DSIS.SimpleRunner
 
 //      AddListener<ComputeEntropyMinusTwoListener<T, Q>>("MinusTwo");
 //      AddListener<ComputeEntropyMinusOneListener<T, Q>>("MinusOne");      
-      AddListener<ComputeEntropyConstListener<T, Q>>("Const");
+//      AddListener<ComputeEntropyConstListener<T, Q>>("Const");
+//      AddListener<ComputeEntropyConstListener2<T, Q>>("Const2");
+      AddListener(new ComputeStrangeEntropyListener<T,Q>(StrangeEvaluatorType.WeightSearch_1, StrangeEvaluatorStrategy.SMART, EntropyLoopWeights.CONST), "1_smart");
+      AddListener(new ComputeStrangeEntropyListener<T,Q>(StrangeEvaluatorType.WeightSearch_1, StrangeEvaluatorStrategy.FIRST, EntropyLoopWeights.CONST), "1_first");
 //      AddListener<ComputeEntropySquareListener<T, Q>>("Square");      
 //      AddListener<ComputeEntropyLinearListener<T, Q>>("Linear");
 //      AddListener<ComputeJVREntropyListener<T, Q>>("jvr");

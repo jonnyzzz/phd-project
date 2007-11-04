@@ -17,6 +17,7 @@ namespace DSIS.Graph.Entropy
       TarjanGraph<IntegerCoordinate> graph = DoBuildGraph(bg);
 
       IGraphStrongComponents<IntegerCoordinate> components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
+      
       MockCallback mcb = new MockCallback();
       ILoopIterator<IntegerCoordinate> gws = Create(graph, mcb, components);
 
