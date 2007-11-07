@@ -5,22 +5,22 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Graph.Morse")]
+[assembly: AssemblyTitle("Graph.Morse.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("PKK")]
-[assembly: AssemblyProduct("Graph.Morse")]
+[assembly: AssemblyProduct("Graph.Morse.Tests")]
 [assembly: AssemblyCopyright("Copyright © PKK 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a Type in this assembly from 
-// COM, set the ComVisible attribute to true on that Type.
+// to COM components.  If you need to access a type in this assembly from 
+// COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ffd83d24-ca43-4db8-8a9e-5166e3d716a0")]
+[assembly: Guid("2b95b1f5-0dde-4370-9ea6-53d314fac6eb")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -34,9 +34,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ComputationResult.cs" />
+    <Compile Include="src\ContourNode.cs" />
+    <Compile Include="src\MorseEvaluator.cs" />
+    <Compile Include="src\NodeType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\" />
+    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Graph\Graph.csproj">
+      <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
+      <Name>Graph</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
