@@ -40,6 +40,9 @@ namespace DSIS.Graph.Entropy
 
     private class EntropyEvaluatorImpl : EigenEntropyEvaluatorImpl<IntegerCoordinate>
     {
+      public EntropyEvaluatorImpl() : base(EPS)
+      {
+      }
     }
 
     private class EntropyController : IEntropyEvaluatorController<IntegerCoordinate>

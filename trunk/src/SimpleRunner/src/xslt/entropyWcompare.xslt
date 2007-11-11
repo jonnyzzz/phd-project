@@ -33,6 +33,7 @@
               padding: 2px 2px 2px 2px;
               margin: 2px 2px 2px 2px;
               white-space: nowrap;
+              text-align:center;
           }
           </xsl:text>
         </style>

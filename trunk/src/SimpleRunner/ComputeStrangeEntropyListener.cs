@@ -1,4 +1,5 @@
 using DSIS.Graph.Entropy;
+using DSIS.Graph.Entropy.Impl.Eigen;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.IntegerCoordinates;

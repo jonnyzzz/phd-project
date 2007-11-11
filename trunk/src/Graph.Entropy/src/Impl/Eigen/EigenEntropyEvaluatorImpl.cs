@@ -9,6 +9,13 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
 {
   public class EigenEntropyEvaluatorImpl<T> : IEntropyEvaluator<T> where T : ICellCoordinate<T>
   {
+    private readonly double myEps;
+
+    public EigenEntropyEvaluatorImpl(double eps)
+    {
+      myEps = eps;
+    }
+
     public void ComputeEntropy(IEntropyEvaluatorController<T> controller, IProgressInfo progressInfo)
     {
       IGraph<T> graph = controller.Graph;
@@ -19,7 +26,7 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
       double t = 0;
       Dictionary<INode<T>, double> v = Create(graph, 1);
       double div = graph.NodesCount;
-      while (Math.Abs(eigen - t) > 1e-4)
+      while (Math.Abs(eigen - t) > myEps)
       {
         eigen = t;
 

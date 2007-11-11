@@ -31,9 +31,8 @@ namespace DSIS.SimpleRunner
       AddListener(new ConsoleListener<T, Q>());
       AddListener(myXmlListener);
 
-      AddListener(new ComputationPathListener<T, Q>(myWorkPath));
-
-      AddListener(new DrawLastComputationResultListener<T, Q>());
+//      AddListener(new ComputationPathListener<T, Q>(myWorkPath));
+//      AddListener(new DrawLastComputationResultListener<T, Q>());
 
       AddListener(myFake);
 
@@ -43,9 +42,10 @@ namespace DSIS.SimpleRunner
 //      AddListener<ComputeEntropyConstListener2<T, Q>>("Const2");
       AddListener(new ComputeStrangeEntropyListener<T,Q>(StrangeEvaluatorType.WeightSearch_1, StrangeEvaluatorStrategy.SMART, EntropyLoopWeights.CONST), "1_smart");
       AddListener(new ComputeStrangeEntropyListener<T,Q>(StrangeEvaluatorType.WeightSearch_1, StrangeEvaluatorStrategy.FIRST, EntropyLoopWeights.CONST), "1_first");
+      AddListener(new ComputeEigenEntropyListener<T,Q>(), "eigen");
 //      AddListener<ComputeEntropySquareListener<T, Q>>("Square");      
 //      AddListener<ComputeEntropyLinearListener<T, Q>>("Linear");
-//      AddListener<ComputeJVREntropyListener<T, Q>>("jvr");
+      AddListener<ComputeJVREntropyListener<T, Q>>("jvr");
     }
 
     private void AddListener<_>(string __) where _ : ComputeEntropyListenerBase<T, Q>, new()
@@ -56,9 +56,9 @@ namespace DSIS.SimpleRunner
 
     private void AddListener(ComputeEntropyListenerBase<T, Q> listener, string suffix)
     {
-      DrawEntropyListener<T,Q> l = new DrawEntropyListener<T, Q>(suffix);
+      /*DrawEntropyListener<T,Q> l = new DrawEntropyListener<T, Q>(suffix);
       listener.AddListener(l);
-      myFake.AddListener(l);
+      myFake.AddListener(l);*/
       /*
       DrawEntropyCurveListener<T, Q> l = new DrawEntropyCurveListener<T, Q>();
       listener.AddListener(l);

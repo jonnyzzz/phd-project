@@ -14,8 +14,29 @@ namespace DSIS.SimpleRunner
   {
     protected abstract string Suffix { get; }
 
+    public ComputeEventType ComputeEvent = ComputeEventType.OnFinish;
+
+    public enum ComputeEventType
+    {
+      OnFinish,
+      OnEveryStep
+    }
+
+    public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+                                             AbstractImageBuilderContext<Q> cx)
+    {
+      if (ComputeEvent == ComputeEventType.OnFinish)
+        DoEvaluate(graph, comps);
+    }
+
     public override void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                         AbstractImageBuilderContext<Q> cx)
+    {
+      if (ComputeEvent == ComputeEventType.OnEveryStep)
+        DoEvaluate(graph, comps);
+    }
+
+    private void DoEvaluate(IGraph<Q> graph, IGraphStrongComponents<Q> comps)
     {
       OnComputeEntropyStarted();
 
@@ -24,7 +45,7 @@ namespace DSIS.SimpleRunner
       IEntropyEvaluator<Q> evaluator = GetLoopEntropyEvaluator();
       evaluator.ComputeEntropy(controller, NullProgressInfo.INSTANCE);
 
-      OnComputeEntropyFinished(controller.Results); 
+      OnComputeEntropyFinished(controller.Results);
     }
 
     protected abstract IEntropyEvaluator<Q> GetLoopEntropyEvaluator();
