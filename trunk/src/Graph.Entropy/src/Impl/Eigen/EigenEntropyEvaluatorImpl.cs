@@ -2,34 +2,37 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Eigen
 {
-  public class EigenEntropyEvaluatorImpl //: IEntropyEvaluator
+  public class EigenEntropyEvaluatorImpl<T> : IEntropyEvaluator<T> where T : ICellCoordinate<T>
   {
-    public double ComputeEntropy<T>(IProgressInfo progress, IGraph<T> graph, IGraphStrongComponents<T> comps)
-      where T : ICellCoordinate<T>
+    public void ComputeEntropy(IEntropyEvaluatorController<T> controller, IProgressInfo progressInfo)
     {
-      Dictionary<INode<T>, double> v = Create(graph, 1);
+      IGraph<T> graph = controller.Graph;
+      
+      controller.SetCoordinateSystem(graph.CoordinateSystem);
+
       double eigen = -1;
       double t = 0;
-
+      Dictionary<INode<T>, double> v = Create(graph, 1);
       double div = graph.NodesCount;
       while (Math.Abs(eigen - t) > 1e-4)
       {
         eigen = t;
 
         //mul = (|v_n+1|, v_n+1) = A v_n/|v_n|
-        //eig_n+1 = |v_n+1|/|v_n| = |A v_n| / |v_n|        
-        Pair<double, Dictionary<INode<T>, double>> mul = Multiply(div, graph, v);
-        v = mul.Second;
-       
-        t = div/mul.First;
+        //eig_n+1 = |v_n+1|/|v_n| = |A v_n| / |v_n|
+        Pair<double, Dictionary<INode<T>, double>> mul = Multiply(Math.Sqrt(div), graph, v);
+        v = mul.Second;       
+        t = mul.First;
         div = mul.First;
       }
       eigen = t;
-      return eigen;
+      
+      controller.OnResult(Math.Log(eigen)/Math.Log(2)/2, new Dictionary<T, double>(), new Dictionary<PairBase<T>, double>());      
     }
 
     /// <summary>
@@ -40,9 +43,9 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
     /// <param name="graph"></param>
     /// <param name="v"></param>
     /// <returns></returns>
-    private static Pair<double, Dictionary<INode<T>, double>> Multiply<T>(double div, IGraph<T> graph, Dictionary<INode<T>, double> v) where T : ICellCoordinate<T>
+    private static Pair<double, Dictionary<INode<T>, double>> Multiply(double div, IGraph<T> graph, IDictionary<INode<T>, double> v)
     {
-      Dictionary<INode<T>, double> v2 = Create(graph, 0);
+      Dictionary<INode<T>, double> v2 = Create(graph);
       double norm = 0;
       foreach (INode<T> node in graph.Nodes)
       {
@@ -52,18 +55,18 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
           t += v[edge]; //* 1
         }
         t /= div;
-        v2[node] += t;
-        norm += t; //All numbers > 0 thus Abs is not necessary
+        v2.Add(node, t);
+        norm += t*t; //All numbers > 0 thus Abs is not necessary
       }
       return new Pair<double, Dictionary<INode<T>, double>>(norm, v2);
     }
 
-    private static Dictionary<INode<T>, double> Create<T>(IGraph<T> graph) where T : ICellCoordinate<T>
+    private static Dictionary<INode<T>, double> Create(IGraph<T> graph)
     {
       return new Dictionary<INode<T>, double>(graph.NodesCount, EqualityComparerFactory<INode<T>>.GetComparer());
     }
 
-    private static Dictionary<INode<T>, double> Create<T>(IGraph<T> graph, double v) where T : ICellCoordinate<T>
+    private static Dictionary<INode<T>, double> Create(IGraph<T> graph, double v)
     {
       Dictionary<INode<T>, double> vs = Create(graph);
       foreach (INode<T> node in graph.Nodes)
