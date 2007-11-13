@@ -34,7 +34,7 @@ namespace DSIS.Graph.Abstract
     }
 
 
-    public CountEnumerable<TCell> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
+    public CountEnumerable<TCell> GetCoordinates(ICollection<IStrongComponentInfo> components)
     {
       int cnt = 0;
       foreach (IStrongComponentInfo info in components)
@@ -44,7 +44,7 @@ namespace DSIS.Graph.Abstract
       return new CountEnumerable<TCell>(GetCoordinatesImpl(components), cnt);
     }
 
-    private IEnumerable<TCell> GetCoordinatesImpl(IEnumerable<IStrongComponentInfo> components)
+    private IEnumerable<TCell> GetCoordinatesImpl(ICollection<IStrongComponentInfo> components)
     {
       foreach (INode<TCell> node in GetNodes(components))
       {
@@ -52,8 +52,7 @@ namespace DSIS.Graph.Abstract
       }
     }
 
-    public IEnumerable<INode<TCell>> GetEdgesWithFilteredEdges(INode<TCell> node,
-                                                               IEnumerable<IStrongComponentInfo> componentIds)
+    public IEnumerable<INode<TCell>> GetEdgesWithFilteredEdges(INode<TCell> node, ICollection<IStrongComponentInfo> componentIds)
     {
       return myComponents.FilterNodes(componentIds, GetEdgesInternal(node));
     }
@@ -63,7 +62,7 @@ namespace DSIS.Graph.Abstract
       return GetStrongComponentInfo((StrongComponentNode<TCell>) node);
     }
 
-    public IEnumerable<INode<TCell>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
+    public IEnumerable<INode<TCell>> GetNodes(ICollection<IStrongComponentInfo> componentIds)
     {
       return myComponents.FilterNodes(componentIds, NodesInternal);
     }

@@ -116,7 +116,7 @@ namespace DSIS.Graph.Abstract
 
     public IEnumerable<INode<TCell>> Nodes
     {
-      get { return new UpcastedEnumerable<TNode, INode<TCell>>(myNodes.Values); }
+      get { return myNodes.ValuesUpcasted; }
     }
 
     public int NodesCount

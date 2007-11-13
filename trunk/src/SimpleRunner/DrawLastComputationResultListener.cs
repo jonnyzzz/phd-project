@@ -46,7 +46,7 @@ namespace DSIS.SimpleRunner
       int components = 0;
       double[] data = new double[system.SystemSpace.Dimension];
 
-      foreach (INode<Q> node in comps.GetNodes(comps.Components))
+      foreach (INode<Q> node in comps.GetNodes(new List<IStrongComponentInfo>(comps.Components)))
       {
         IStrongComponentInfo info = comps.GetNodeComponent(node);
         if (info == null)

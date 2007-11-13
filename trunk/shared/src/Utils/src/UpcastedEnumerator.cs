@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace DSIS.Utils
 {
-  public sealed class UpcastedEnumerator<T, TC> : IEnumerator<TC> where T : TC
+  public sealed class UpcastedEnumerator<TEnu, T, TC> : IEnumerator<TC> where T : TC where TEnu : IEnumerator<T>
   {
-    private readonly IEnumerator<T> myEnumerable;
+    private readonly TEnu myEnumerable;
 
-    public UpcastedEnumerator(IEnumerator<T> enumerable)
+    public UpcastedEnumerator(TEnu enumerable)
     {
       myEnumerable = enumerable;
     }
@@ -42,11 +42,11 @@ namespace DSIS.Utils
     #endregion
   }
 
-  public class UpcastedEnumerable<T, TC> : IEnumerable<TC> where T : TC
+  public class UpcastedEnumerable<TEnu, T, TC> : IEnumerable<TC> where T : TC where TEnu : IEnumerable<T>
   {
-    private readonly IEnumerable<T> myEnumerable;
+    private readonly TEnu myEnumerable;
 
-    public UpcastedEnumerable(IEnumerable<T> enumerable)
+    public UpcastedEnumerable(TEnu enumerable)
     {
       myEnumerable = enumerable;
     }
@@ -60,7 +60,7 @@ namespace DSIS.Utils
 
     IEnumerator<TC> IEnumerable<TC>.GetEnumerator()
     {
-      return new UpcastedEnumerator<T, TC>(myEnumerable.GetEnumerator());
+      return new UpcastedEnumerator<IEnumerator<T>, T, TC>(myEnumerable.GetEnumerator());
     }
 
     #endregion

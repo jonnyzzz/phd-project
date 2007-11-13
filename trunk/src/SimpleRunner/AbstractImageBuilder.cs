@@ -59,10 +59,9 @@ namespace DSIS.SimpleRunner
           part[i] = i == step ? d : 1;
         }
         return part;
-      } else
-      {
-        return Subdivide;
-      }
+      } 
+      
+      return Subdivide;      
     }
 
     internal CreateSystem<T> CreateSystem
@@ -206,7 +205,7 @@ namespace DSIS.SimpleRunner
         graph = new TarjanGraph<Q>(ctx.Converter.ToSystem);
         conv = ctx.Converter.ToSystem.Subdivide(subdivide = GetSubdivide(stepCount));
 
-        ctx = ctx.CreateNextContext(comps.GetCoordinates(componentsId), conv, new GraphCellImageBuilder<Q>(graph));
+        ctx = ctx.CreateNextContext(comps.GetCoordinates(new List<IStrongComponentInfo>(componentsId)), conv, new GraphCellImageBuilder<Q>(graph));
       }
 
       OnComputationFinished(comps, prevGraph, (T)prevGraph.CoordinateSystem, cx);

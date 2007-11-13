@@ -48,7 +48,7 @@ namespace DSIS.Graph.Abstract
 
     internal IEnumerable<INode<TCell>> Edges
     {
-      get { return new UpcastedEnumerable<TInh, INode<TCell>>(myEdges.Values); }
+      get { return myEdges.ValuesUpcasted; }
     }
 
     internal IEnumerable<TInh> EdgesInternal

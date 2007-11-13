@@ -12,13 +12,12 @@ namespace DSIS.Graph
     int ComponentCount { get; }
 
     //todo: Move to CountEnumerable
-    IEnumerable<INode<TCoordinate>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds);
+    IEnumerable<INode<TCoordinate>> GetNodes(ICollection<IStrongComponentInfo> componentIds);
 
     //todo: Move to CountEnumerable
-    IEnumerable<INode<TCoordinate>> GetEdgesWithFilteredEdges(INode<TCoordinate> node,
-                                                              IEnumerable<IStrongComponentInfo> componentIds);
+    IEnumerable<INode<TCoordinate>> GetEdgesWithFilteredEdges(INode<TCoordinate> node, ICollection<IStrongComponentInfo> componentIds);
 
-    CountEnumerable<TCoordinate> GetCoordinates(IEnumerable<IStrongComponentInfo> components);
+    CountEnumerable<TCoordinate> GetCoordinates(ICollection<IStrongComponentInfo> components);
 
     IStrongComponentInfo GetNodeComponent(INode<TCoordinate> node);
   }

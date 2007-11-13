@@ -40,6 +40,17 @@ namespace DSIS.Graph.Morse
       return r/kV;
     }
 
+    private static void ToList(ContourNode<T> node, ICollection<INode<T>> list)
+    {
+      ContourNode<T> n = node.Next;
+
+      while (n != node)
+      {
+        list.Add(n.Node);
+        n = n.Next;
+      }
+    }
+
     private static bool IsSub(ContourNode<T> root, ContourNode<T> i1, ContourNode<T> i2)
     {
       int cnt = 0;
@@ -60,16 +71,13 @@ namespace DSIS.Graph.Morse
 
     private bool Tree(ContourNode<T> rnode)
     {
-      foreach (ContourNode<T> node in myNodes.Values)
-      {
-        node.Type = NodeType.M2;
-      }
+      ResetType();
 
       List<ContourNode<T>> m = new List<ContourNode<T>>();
       double z = ContourCost(rnode);
 
       rnode.Value = 0;
-      rnode.Type = NodeType.M1;
+      rnode.Type2 = NodeType.M1;
       m.Insert(0, rnode);
 
       ContourNode<T> n = rnode.Next;
@@ -78,7 +86,7 @@ namespace DSIS.Graph.Morse
       while (n != rnode)
       {
         m.Insert(0, n);
-        n.Type = NodeType.M1;
+        n.Type2 = NodeType.M1;
         n.Value = p.Value - p.NodeCost + z;
         p = n;
         n = n.Next;
@@ -89,25 +97,23 @@ namespace DSIS.Graph.Morse
       {
         ContourNode<T> node = m[0];
         m.RemoveAt(0);
-        node.Type = NodeType.M0;
+        node.Type2 = NodeType.M0;
 
         foreach (INode<T> toNode in myComponents.GetEdgesWithFilteredEdges(node.Node, myComponentInfos))
         {
           ContourNode<T> to = myNodes[toNode];
           double w = node.Value + to.NodeCost - z;
 
-          if (to.Type == NodeType.M2)
+          if (to.Type2 == NodeType.M2)
           {
             m.Add(to);
 
-            to.Type = NodeType.M1;
+            to.Type2 = NodeType.M1;
             to.Value = w;
             to.Next = node;
           }
           else
           {
-            //ASSERT(to.Type == NodeType.M0 || to.Type == NodeType.M1);
-
             if ((w + EPS) < to.Value)
             {
               if (Preceeds(rnode, to, node))
@@ -120,9 +126,9 @@ namespace DSIS.Graph.Morse
               {
                 to.Value = w;
                 to.Next = node;
-                if (to.Type == NodeType.M0)
+                if (to.Type2 == NodeType.M0)
                 {
-                  to.Type = NodeType.M1;
+                  to.Type2 = NodeType.M1;
                   m.Insert(0, to);
                 }
               }
@@ -135,6 +141,14 @@ namespace DSIS.Graph.Morse
         }
       }
       return true; //contour is minimal.
+    }
+
+    private void ResetType()
+    {
+      foreach (ContourNode<T> node in myNodes.Values)
+      {
+        node.Type2 = NodeType.M2;
+      }
     }
 
     private ContourNode<T> DoCompute(ContourNode<T> node)
@@ -171,28 +185,26 @@ namespace DSIS.Graph.Morse
           }
         }
         gnode.Next = minEdge;
-        minEdge.Type++;
+        minEdge.Incoming++;
       }
 
       foreach (ContourNode<T> _node in myNodes.Values)
       {
         ContourNode<T> node = _node;
-        while (node.Type == NodeType.M2)
+        while (node.Incoming == 0)
         {
-          node.Type = NodeType.M1; //mark as trash
+          node.Incoming = -1; //mark as trash
           node = node.Next;
-          node.Type--;
+          node.Incoming--;
         }
       }
 
       ContourNode<T> root = null;
-      double rootZ = 1.7E+300;
+      double rootZ = 0;
       foreach (ContourNode<T> nde in myNodes.Values)
       {
-        if (nde.Type > 0)
-        {
-          nde.Type = NodeType.M2;
-
+        if (nde.Incoming > 0)
+        {          
           double cst = nde.NodeCost;
           int kV = 1;
           ContourNode<T> t = nde.Next;
@@ -200,7 +212,7 @@ namespace DSIS.Graph.Morse
           {
             cst += t.NodeCost;
             kV++;
-            t.Type = NodeType.M2;
+            t.Incoming = 0;
             t = t.Next;
           }
 
@@ -211,7 +223,7 @@ namespace DSIS.Graph.Morse
             rootZ = cst;
           }
         }
-        nde.Type = NodeType.M2;
+        nde.Incoming = 0;
       }
 
       CreateTreeInit(root);
@@ -242,13 +254,8 @@ namespace DSIS.Graph.Morse
       extrema = DoCompute(extrema);
       double answerValue = ContourCost(extrema);
 
-      List<INode<T>> list = new List<INode<T>>();
-      ContourNode<T> n = extrema.Next;
-      while (extrema != n)
-      {
-        list.Add(n.Node);
-        extrema = n.Next;
-      }
+      List<INode<T>> list = new List<INode<T>>();      
+      ToList(extrema, list);
       return new ComputationResult<T>(myFactor * answerValue, list.AsReadOnly());
     }
   }

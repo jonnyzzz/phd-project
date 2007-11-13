@@ -34,6 +34,7 @@ namespace DSIS.BoxIterators.Generator
       return result;
     }
 
+    //todo: Implement IEnumerable without yield return
     private static string GenerateIEnumerableFromT(string clazz, int dim)
     {
       string tClazz = GeneratorTypeUtil.GenerateFQTypeName<T>();

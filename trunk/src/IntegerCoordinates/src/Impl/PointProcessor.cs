@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates
 {
@@ -17,11 +18,9 @@ namespace DSIS.IntegerCoordinates
     {
       Q q = myIcs.FromPoint(value);
       if (q != null)
-      {
-        yield return q;
-      } else {
-        yield break;
-      }
+        return new Q[] {q};
+      else
+        return EmptyArray<Q>.Instance;
     }
   }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -29,7 +30,7 @@ namespace DSIS.Graph.Abstract
       get { return myManager.Infos; }
     }
 
-    public CountEnumerable<TCell> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
+    public CountEnumerable<TCell> GetCoordinates(ICollection<IStrongComponentInfo> components)
     {
       int cnt = 0;
       foreach (IStrongComponentInfo info in components)
@@ -39,21 +40,13 @@ namespace DSIS.Graph.Abstract
       return new CountEnumerable<TCell>(GetCoordinatesImpl(components), cnt);
     }
 
-    private IEnumerable<TCell> GetCoordinatesImpl(IEnumerable<IStrongComponentInfo> components)
-    {
-      foreach (INode<TCell> node in GetNodes(components))
-      {
-        yield return node.Coordinate;
-      }
-    }
-
     public IEnumerable<INode<TCell>> GetEdgesWithFilteredEdges(INode<TCell> node,
-                                                               IEnumerable<IStrongComponentInfo> componentIds)
+                                                               ICollection<IStrongComponentInfo> componentIds)
     {
-      Hashset<uint> ids = GetIdsHashset(componentIds);
+      Predicate<uint> ids = GetIdsHashset(componentIds);
       foreach (TarjanNode<TCell> edge in myGraph.GetEdges(node))
       {
-        if (ids.Contains(edge.ComponentId))
+        if (ids(edge.ComponentId))
           yield return edge;
       }
     }
@@ -63,31 +56,69 @@ namespace DSIS.Graph.Abstract
       return myManager.FindByNode((TarjanNode<TCell>) node);
     }
 
-    public IEnumerable<INode<TCell>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
+    public IEnumerable<INode<TCell>> GetNodes(ICollection<IStrongComponentInfo> componentIds)
     {
-      Hashset<uint> ids = GetIdsHashset(componentIds);
-
-      if (ids.Count == 0)
-        yield break;
-
+      Predicate<uint> ids = GetIdsHashset(componentIds);
 
       foreach (TarjanNode<TCell> node in myGraph.NodesInternal)
       {
-        if (ids.Contains(node.ComponentId))
+        if (ids(node.ComponentId))
           yield return node;
       }
     }
 
     #endregion
 
-    private static Hashset<uint> GetIdsHashset(IEnumerable<IStrongComponentInfo> componentIds)
+    private IEnumerable<TCell> GetCoordinatesImpl(ICollection<IStrongComponentInfo> components)
     {
-      Hashset<uint> ids = new Hashset<uint>();
-      foreach (TarjanComponentInfo id in componentIds)
+      foreach (INode<TCell> node in GetNodes(components))
       {
-        ids.Add(id.ComponentId);
+        yield return node.Coordinate;
       }
-      return ids;
+    }
+
+    private static Predicate<uint> GetIdsHashset(ICollection<IStrongComponentInfo> componentIds)
+    {
+      int count = componentIds.Count;
+      if (count == 0)
+      {
+        return delegate { return false; };
+      }
+      else if (count == 1)
+      {
+        uint cid = 0;
+        foreach (TarjanComponentInfo id in componentIds)
+        {
+          cid = id.ComponentId;
+          break;
+        }
+        return delegate(uint v) { return v == cid; };
+      }
+      else if (count > 10)
+      {
+        Hashset<uint> ids = new Hashset<uint>();
+        foreach (TarjanComponentInfo id in componentIds)
+        {
+          ids.Add(id.ComponentId);
+        }
+        return ids.Contains;
+      }
+      else
+      {
+        uint[] data = new uint[count];
+        int cnt = 0;
+        foreach (TarjanComponentInfo id in componentIds)
+        {
+          data[cnt++] = id.ComponentId;
+        }
+        return delegate(uint v)
+                 {
+                   for (int i = 0; i < cnt; i++)
+                     if (data[i] == v)
+                       return true;
+                   return false;
+                 };
+      }
     }
   }
 }

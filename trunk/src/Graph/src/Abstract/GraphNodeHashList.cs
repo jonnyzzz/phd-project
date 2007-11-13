@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Persistance;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
@@ -43,18 +43,12 @@ namespace DSIS.Graph.Abstract
 
     public IEnumerable<TNode> Values
     {
-      get
-      {
-        for (int i = 0; i < myItems.Length; i++)
-        {
-          Item t = myItems[i];
-          while (t != null)
-          {
-            yield return t.Value;
-            t = t.NextItem;
-          }
-        }
-      }
+      get{return new NodeEnumerable(myItems);}
+    }
+
+    public IEnumerable<INode<TCell>> ValuesUpcasted
+    {
+      get { return new NodeEnumerableUpcatsed(myItems); }
     }
 
     private sealed class Item
@@ -68,15 +62,108 @@ namespace DSIS.Graph.Abstract
       }
     }
 
-    public void Save(ICellCoordinateSystem<TCell> ics, IBinaryWriter writer)
+    private sealed class NodeEnumerable : IEnumerable<TNode>
     {
-      writer.WriteInt(myHashMax);
-      foreach (Item item in myItems)
-      {
-//        writer.WriteByte(1);
-//        ics.SaveCoordinate(item.Value., writer);
+      private readonly Item[] myData;
 
+      public NodeEnumerable(Item[] data)
+      {
+        myData = data;
+      }
+
+      IEnumerator<TNode> IEnumerable<TNode>.GetEnumerator()
+      {
+        return Create();
+      }
+
+      IEnumerator IEnumerable.GetEnumerator()
+      {
+        return Create();
+      }
+
+      private NodeEnumerator Create()
+      {
+        return new NodeEnumerator(myData);
       }
     }
+    
+    private sealed class NodeEnumerableUpcatsed : IEnumerable<INode<TCell>>
+    {
+      private readonly Item[] myData;
+
+      public NodeEnumerableUpcatsed(Item[] data)
+      {
+        myData = data;
+      }
+
+      IEnumerator<INode<TCell>> IEnumerable<INode<TCell>>.GetEnumerator()
+      {
+        return new UpcastedEnumerator<NodeEnumerator, TNode, INode<TCell>>(new NodeEnumerator(myData));
+      }
+
+      IEnumerator IEnumerable.GetEnumerator()
+      {
+        return new NodeEnumerator(myData);
+      }
+    }
+
+    private sealed class NodeEnumerator : IEnumerator<TNode>
+    {
+      private readonly Item[] myData;
+
+      private Item myCurrent;      
+      private int myCnt;
+
+
+      public NodeEnumerator(Item[] data)
+      {
+        myData = data;
+        Reset();
+      }
+
+      public void Dispose()
+      {                
+      }
+
+      public bool MoveNext()
+      {
+        while (myCnt < myData.Length)
+        {
+          if (myCurrent != null)
+          {
+            myCurrent = myCurrent.NextItem;
+          }
+          else if (myCnt + 1 < myData.Length)
+          {
+            myCurrent = myData[++myCnt];
+          } else
+          {
+            myCnt++;
+            myCurrent = null;
+            return false;
+          }
+
+          if (myCurrent != null)
+            return true;
+        }
+        return false;
+      }
+
+      public void Reset()
+      {
+        myCurrent = null;
+        myCnt = -1;
+      }
+
+      object IEnumerator.Current
+      {
+        get { return Current; }
+      }
+
+      public TNode Current
+      {
+        get { return myCurrent.Value; }
+      }
+    }    
   }
 }

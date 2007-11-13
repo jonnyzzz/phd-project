@@ -72,6 +72,7 @@
     <Compile Include="src\IGraph.cs" />
     <Compile Include="src\Util\MultiHashDictionary.cs" />
     <Compile Include="testSrc\GenericsTest.cs" />
+    <Compile Include="testSrc\GraphNodeHashListTest.cs" />
     <Compile Include="testSrc\GraphPerformanceTest.cs" />
     <Compile Include="testSrc\HashedQueueTest.cs" />
     <Compile Include="testSrc\MockGraph.cs" />
