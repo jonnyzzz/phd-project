@@ -30,6 +30,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -37,9 +38,11 @@
     <Compile Include="src\Gnuplot1dScriptGen.cs" />
     <Compile Include="src\Gnuplot2dScriptGen.cs" />
     <Compile Include="src\Gnuplot3dScriptGen.cs" />
+    <Compile Include="src\GnuplotEntropy3dScriptGen.cs" />
     <Compile Include="src\GnuplotEntropyScriptGen.cs" />
     <Compile Include="src\GnuplotFileWriterBase.cs" />
     <Compile Include="src\GnuplotDrawer.cs" />
+    <Compile Include="src\GnuplotPointsFileReader.cs" />
     <Compile Include="src\GnuplotPointsFileWriter.cs" />
     <Compile Include="src\GnuplotScriptParameters.cs" />
     <Compile Include="src\GnuplotSriptGen.cs" />

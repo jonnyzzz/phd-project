@@ -33,6 +33,16 @@ namespace DSIS.Utils
       return mySet.ContainsKey(t);
     }
 
+    public bool ContainsRange<Q>(IEnumerable<Q> enu) where Q:T
+    {
+      foreach (Q q in enu)
+      {
+        if (!Contains(q))
+          return false;
+      }
+      return true;
+    }
+
     public void Add(T t)
     {
       mySet[t] = t;
@@ -132,56 +142,7 @@ namespace DSIS.Utils
   {
     public IEnumerable<TC> ValuesUpcasted
     {
-      get
-      {
-        foreach (T t in Values)
-        {
-          yield return t;
-        }
-      }
-    }
-  }
-
-  public class SortedSet<T>
-  {
-    private readonly IComparer<T> myComparer;
-    private readonly IEqualityComparer<T> myEquality;
-
-    private readonly List<T> myData = new List<T>();
-
-    public SortedSet(IComparer<T> comparer, IEqualityComparer<T> equality)
-    {      
-      myComparer = comparer;
-      myEquality = equality;
-    }
-
-    public void Add(T data)
-    {
-      int v = myData.BinarySearch(data, myComparer);
-
-      if (v < 0)
-        v = ~v;
-
-      myData.Insert(v, data);
-    }
-
-    public void Update(T data)
-    {
-      List<T> remove = new List<T>();
-      foreach (T t in myData)
-      {
-        if (myEquality.Equals(t, data))
-        {
-          myData.Remove(t);
-          break;
-        }
-      }
-      Add(data);      
-    }
-
-    public T Maxinum()
-    {
-      return myData[0];
+      get { return new UpcastedEnumerable<IEnumerable<T>, T, TC>(Values); }
     }
   }
 }

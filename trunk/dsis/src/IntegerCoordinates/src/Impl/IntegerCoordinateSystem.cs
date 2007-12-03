@@ -86,5 +86,10 @@ namespace DSIS.IntegerCoordinates.Impl
       }
       return new IntegerCoordinate(t);
     }
+
+    public void DoGeneric(IIntegerCoordinateSystemWith with)
+    {
+      with.Do<IntegerCoordinateSystem, IntegerCoordinate>(this);
+    }
   }
 }

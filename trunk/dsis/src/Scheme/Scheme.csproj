@@ -34,8 +34,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Context.cs" />
-    <Compile Include="src\INode.cs" />
+    <Compile Include="src\Ctx\Context.cs" />
+    <Compile Include="src\ContextMissmatch.cs" />
+    <Compile Include="src\Ctx\KeyWrapper.cs" />
+    <Compile Include="src\IAction.cs" />
     <Compile Include="src\Key.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

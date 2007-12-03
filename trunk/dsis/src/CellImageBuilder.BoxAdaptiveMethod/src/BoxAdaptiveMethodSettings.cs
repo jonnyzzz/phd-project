@@ -1,8 +1,10 @@
-using DSIS.Core.Coordinates;
+using DSIS.CellImageBuilder.Shared;
+using DSIS.Core.Builders;
+using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
-  public class BoxAdaptiveMethodSettings : ICellImageBuilderSettings
+  public class BoxAdaptiveMethodSettings : ICellImageBuilderIntegerCoordinatesSettings
   {
     public static readonly BoxAdaptiveMethodSettings Default = new BoxAdaptiveMethodSettings();
 
@@ -54,6 +56,12 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     public double CellSizePercent
     {
       get { return myCellSizePercent; }
+    }
+
+    public ICellImageBuilder<TCell> Create<TSys, TCell>() where TSys : IIntegerCoordinateSystem<TCell>
+      where TCell : IIntegerCoordinate<TCell>
+    {
+      return new BoxAdaptiveMethod<TSys, TCell>();
     }
   }
 }

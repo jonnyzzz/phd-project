@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Antlr.StringTemplate;
 using DSIS.CodeCompiler;
 using DSIS.Core.System;
@@ -19,11 +20,14 @@ namespace DSIS.IntegerCoordinates.Generated
 
   public interface IIntegerCoordinateFactory
   {
+    [Obsolete("Use IIntegerCoordinateSystem.DoWith")]
     void WithIntegerCoordinateSystem(IIntegerCoordinateCallback cb);
+
     Type System { get; }
     Type Coordinate { get; }
-  }  
-  
+    IIntegerCoordinateSystemInfo Create(ISystemSpace space, long[] subd);
+  }
+
   public class GeneratedIntegerCoordinateSystemManager
   {
     private static GeneratedIntegerCoordinateSystemManager myInstance;
@@ -32,7 +36,7 @@ namespace DSIS.IntegerCoordinates.Generated
     {
       get
       {
-        if( myInstance == null)
+        if (myInstance == null)
         {
           myInstance = new GeneratedIntegerCoordinateSystemManager();
         }
@@ -40,28 +44,28 @@ namespace DSIS.IntegerCoordinates.Generated
       }
     }
 
-    private readonly Dictionary<int, Type> myCachedIcs = new Dictionary<int, Type>();  
-    
+    private readonly Dictionary<int, Type> myCachedIcs = new Dictionary<int, Type>();
+
     public IIntegerCoordinateFactory CreateSystem(int dim)
-    {      
-      lock(myCachedIcs)
+    {
+      lock (myCachedIcs)
       {
         Type t;
         if (!myCachedIcs.TryGetValue(dim, out t))
         {
-          myCachedIcs[dim] = t = CreateType(dim );
+          myCachedIcs[dim] = t = CreateType(dim);
         }
-          return (IIntegerCoordinateFactory) Activator.CreateInstance(t, new object[] {});        
+        return (IIntegerCoordinateFactory) Activator.CreateInstance(t, new object[] {});
       }
     }
-  
+
     private Type CreateType(int dim)
-    {      
+    {
       ICodeCompiler compiler = CodeCompiler.CodeCompiler.CreateCompiler();
       Assembly assembly = compiler.CompileCSharpCode(GenerateCoordinate(dim), typeof (IIntegerCoordinate<>),
                                                      typeof (EqualityComparerAttribute),
-                                                     typeof(IIntegerCoordinateFactory),
-                                                     typeof(IIntegerCoordinateCallback));
+                                                     typeof (IIntegerCoordinateFactory),
+                                                     typeof (IIntegerCoordinateCallback));
 
       if (assembly == null)
       {
@@ -81,11 +85,14 @@ namespace DSIS.IntegerCoordinates.Generated
       for (int i = 0; i < dim; i++)
       {
         dims.Add(i);
-        dimAndPrime.Add(new Pair<int, int>(i, Primes.ByIndex(3 * i) ));
+        dimAndPrime.Add(new Pair<int, int>(i, Primes.ByIndex(3*i)));
       }
 
 
-      StringTemplateGroup g = new StringTemplateGroup("foo", new EmbeddedResourceTemplateLoader(GetType().Assembly, "DSIS.IntegerCoordinates.src.Generated.Template"));
+      StringTemplateGroup g =
+        new StringTemplateGroup("foo",
+                                new EmbeddedResourceTemplateLoader(GetType().Assembly,
+                                                                   "DSIS.IntegerCoordinates.src.Generated.Template"));
       StringTemplate template = g.GetInstanceOf("IntegerCoordinate");
       template.SetAttribute("Dimension", dim);
       template.SetAttribute("DimensionIt", dims);
@@ -93,5 +100,5 @@ namespace DSIS.IntegerCoordinates.Generated
 
       return template.ToString();
     }
-  }  
+  }
 }

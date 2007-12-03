@@ -1,13 +1,19 @@
 using DSIS.Core.Coordinates;
-using DSIS.Core.Src.Context;
-using DSIS.Persistance;
 
 namespace DSIS.IntegerCoordinates
 {
+  public interface IIntegerCoordinateSystemWith {
+     void Do<T, Q>(T system)
+      where T : IIntegerCoordinateSystem<Q>
+      where Q : IIntegerCoordinate<Q>;
+  }
+
   public interface IIntegerCoordinateSystemInfo
   {
     double[] CellSize { get; }
-    double[] CellSizeHalf { get; }    
+    double[] CellSizeHalf { get; }
+
+    void DoGeneric(IIntegerCoordinateSystemWith with);
   }
 
   public interface IIntegerCoordinateSystem<T> : ICellCoordinateSystem<T>, IIntegerCoordinateSystemInfo where T : IIntegerCoordinate<T>

@@ -51,7 +51,7 @@ namespace DSIS.SimpleRunner
       myDrawers["BigStep to the same"] = new ProjectToTheSameEntropyDraw();
       myDrawers["BigStep for the measure"] = new ProjectTheSameMeasureEntropyDraw();
       myDrawers["Measure"] = new DrawEntropyWithSpace<Q>();
-      myDrawers["Measure3D"] = new DrawEntropyWithSpace3d<Q>();
+      myDrawers["Measure3D"] = new DrawEntropyWithSpace3dSegments<Q>();
       myStepNumber = 0;
     }
 

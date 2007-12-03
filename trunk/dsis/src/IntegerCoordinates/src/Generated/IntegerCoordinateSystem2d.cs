@@ -23,6 +23,11 @@ namespace DSIS.IntegerCoordinates.Generated
     {
       get { return typeof (IntegerCoordinate2d); }
     }
+
+    public IIntegerCoordinateSystemInfo Create(ISystemSpace space, long[] subd)
+    {
+      return new IntegerCoordinateSystem2d(space, subd);
+    }
   }
 
   public class IntegerCoordinateSystem2d : 
@@ -181,6 +186,11 @@ namespace DSIS.IntegerCoordinates.Generated
       long l1 = reader.ReadLong();
       long l2 = reader.ReadLong();
       return Create(l1, l2);
+    }
+
+    public void DoGeneric(IIntegerCoordinateSystemWith with)
+    {
+      with.Do<IntegerCoordinateSystem2d, IntegerCoordinate2d>(this);
     }
   }
 }

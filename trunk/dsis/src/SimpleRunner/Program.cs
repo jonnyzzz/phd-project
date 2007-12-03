@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using DSIS.CellImageBuilder;
 using DSIS.CellImageBuilder.AdaptiveMethod;
 using DSIS.CellImageBuilder.BoxAdaptiveMethod;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Processor;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Core.Util;
@@ -25,6 +23,7 @@ using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
+using DSIS.Scheme.Impl.Exec;
 using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
@@ -34,7 +33,13 @@ namespace DSIS.SimpleRunner
     private static string myWorkPath;
     private static string myHomePath;
 
-    private static void Main()
+    public static void Main()
+    {
+      ActionGraph gr = new ActionGraph();
+
+    }
+
+    private static void Main2()
     {
       string prePath = Path.GetDirectoryName(typeof (Program).Assembly.CodeBase);
       if (prePath.StartsWith("file:\\"))
@@ -82,8 +87,8 @@ namespace DSIS.SimpleRunner
 
 //      int i = 0;
       ///generate code.
-      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 7), myXSLTs);
-      Do(new IkedaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 6), myXSLTs);
+      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 5), myXSLTs);
+//      Do(new IkedaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 6), myXSLTs);
 //      Do(new JuliaFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 1), myXSLTs);
 //      
 //      Do(new HenonFullBuilder<IntegerCoordinateSystem2d, IntegerCoordinate2d>(myWorkPath, 13), myXSLTs);

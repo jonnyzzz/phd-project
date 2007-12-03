@@ -26,5 +26,10 @@ namespace DSIS.IntegerCoordinates.Tests
     {
       get { return myCellSizeHalf; }
     }
+
+    public void DoGeneric(IIntegerCoordinateSystemWith with)
+    {
+      throw new System.NotImplementedException();
+    }
   }
 }

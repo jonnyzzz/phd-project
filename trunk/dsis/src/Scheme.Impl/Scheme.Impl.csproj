@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C6473776-929F-4328-B786-C51BB93E8994}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.SimpleRunner</RootNamespace>
-    <AssemblyName>DSIS.SimpleRunner</AssemblyName>
+    <RootNamespace>DSIS.Scheme.Impl</RootNamespace>
+    <AssemblyName>DSIS.Scheme.Impl</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,50 +28,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\shared\lib\nunit\bin\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractImageBuilder.cs" />
-    <Compile Include="AbstractImageBuilderListener.cs" />
-    <Compile Include="ComputationPathListener.cs" />
-    <Compile Include="ComputeEigenEntropyListener.cs" />
-    <Compile Include="ComputeEntropyListenerBase.cs" />
-    <Compile Include="ComputeJVREntropyListener.cs" />
-    <Compile Include="ComputeStrangeEntropyListener.cs" />
-    <Compile Include="ConsoleListener.cs" />
-    <Compile Include="DrawBase.cs" />
-    <Compile Include="DrawEntropyBase.cs" />
-    <Compile Include="DrawEntropyDivCurveListener.cs" />
-    <Compile Include="DrawEntropyListener.cs" />
-    <Compile Include="DrawEntropyWithSpace.cs" />
-    <Compile Include="DrawEntropyWithSpace3d.cs" />
-    <Compile Include="DrawEntropyWithSpace3dSegments.cs" />
-    <Compile Include="DrawEntropyWithSpaceBase.cs" />
-    <Compile Include="ProjectTheSameMeasureEntropyDraw.cs" />
-    <Compile Include="ProjectToTheSameEntropyDraw.cs" />
-    <Compile Include="DrawLastComputationResultListener.cs" />
-    <Compile Include="FullImageBuilder.cs" />
-    <Compile Include="FullImageBuilderWithLog.cs" />
-    <Compile Include="GeneratedAbstactImageBuilderRunner.cs" />
-    <Compile Include="GeneratedImageBuilderRunner.cs" />
-    <Compile Include="IAbstractImageBuilderListener.cs" />
-    <Compile Include="IComputationPathListener.cs" />
-    <Compile Include="IComputeEntropyListener.cs" />
-    <Compile Include="IDrawEntropyImageListener.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProvideExternalListenerBase.cs" />
-    <Compile Include="src\Actions\ActionBase.cs" />
-    <Compile Include="src\Actions\ActionBuilder.cs" />
-    <Compile Include="src\Actions\DelegateLeafAction.cs" />
-    <Compile Include="src\Actions\LeafAction.cs" />
-    <Compile Include="src\Actions\OperationStack.cs" />
-    <Compile Include="src\Actions\RootAction.cs" />
-    <Compile Include="XmlAbstractImageBuilderListener.cs" />
+    <Compile Include="src\Actions\BuildSymbolicImageAction.cs" />
+    <Compile Include="src\Actions\ChainRecurrenctSimbolicImageAction.cs" />
+    <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />
+    <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
+    <Compile Include="src\Actions\StartAction.cs" />
+    <Compile Include="src\Exec\ActionWrapper.cs" />
+    <Compile Include="src\Exec\Executor.cs" />
+    <Compile Include="src\Exec\IActionGraphBuilder.cs" />
+    <Compile Include="src\Exec\IActionMatch.cs" />
+    <Compile Include="src\Exec\SimpleActionMatch.cs" />
+    <Compile Include="src\Exec\XmlActionGraphParser.cs" />
+    <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />
+    <Compile Include="src\Keys.cs" />
+    <Compile Include="src\Actions\MergeComponetsAction.cs" />
+    <Compile Include="src\MergeInputAndOutputAction.cs" />
+    <Compile Include="testSrc\ActionExecutorTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
@@ -96,29 +84,17 @@
       <Project>{C75D0837-A992-41A2-8A46-A1B0F292048C}</Project>
       <Name>CellImageBuilder.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Function.Solvers\Function.Solvers.csproj">
-      <Project>{4340017C-0FB4-4A43-8D5A-28ACB55045F0}</Project>
-      <Name>Function.Solvers</Name>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
+      <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Graph.Entropy\Graph.Entropy.csproj">
       <Project>{43283F9D-A669-47B2-80FD-FFA447A4BD7F}</Project>
       <Name>Graph.Entropy</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
-      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
-      <Name>Core.System</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Function.Predefined\Function.Predefined.csproj">
-      <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
-      <Name>Function.Predefined</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GnuplotDrawer\GnuplotDrawer.csproj">
-      <Project>{CA14A441-039B-49F2-B678-9491146C56A1}</Project>
-      <Name>GnuplotDrawer</Name>
+    <ProjectReference Include="..\Graph.Morse\Graph.Morse.csproj">
+      <Project>{CB0FD4CC-E606-4A2A-967D-A086E1AE2B9D}</Project>
+      <Name>Graph.Morse</Name>
     </ProjectReference>
     <ProjectReference Include="..\Graph\Graph.csproj">
       <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
@@ -128,26 +104,10 @@
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
       <Name>IntegerCoordinates</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Scheme.Impl\Scheme.Impl.csproj">
-      <Project>{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}</Project>
-      <Name>Scheme.Impl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Scheme\Scheme.csproj">
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
       <Name>Scheme</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="src\xslt\default.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="src\xslt\last-entropy.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="src\xslt\entropyTable.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="src\xslt\entropyWcompare.xslt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

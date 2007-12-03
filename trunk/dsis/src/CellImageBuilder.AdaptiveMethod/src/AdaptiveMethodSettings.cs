@@ -1,8 +1,10 @@
-using DSIS.Core.Coordinates;
+using DSIS.CellImageBuilder.Shared;
+using DSIS.Core.Builders;
+using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.AdaptiveMethod
 {
-  public class AdaptiveMethodSettings : ICellImageBuilderSettings
+  public class AdaptiveMethodSettings : ICellImageBuilderIntegerCoordinatesSettings
   {
     public static readonly AdaptiveMethodSettings DEFAULT = new AdaptiveMethodSettings();
 
@@ -19,6 +21,13 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       Eps = eps;
       EdgesPerCell = nodesPerCell;
       OveplapFactor = overlapFactor;
+    }
+
+    public ICellImageBuilder<TCell> Create<TSys, TCell>() 
+      where TSys : IIntegerCoordinateSystem<TCell> 
+      where TCell : IIntegerCoordinate<TCell>
+    {
+      return new AdaptiveMethod<TSys, TCell>();
     }
   }
 }

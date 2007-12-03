@@ -28,6 +28,12 @@ namespace DSIS.Graph.Util
       }
     }
 
+    public List<TV> GetValue(TK k)
+    {
+      List<TV> list;
+      return TryGetValue(k, out list) ? list : new List<TV>();
+    }
+
     public void AddValue(TK k, TV v)
     {
       List<TV> l;

@@ -56,9 +56,9 @@ namespace DSIS.SimpleRunner
 
     private void AddListener(ComputeEntropyListenerBase<T, Q> listener, string suffix)
     {
-      /*DrawEntropyListener<T,Q> l = new DrawEntropyListener<T, Q>(suffix);
+      DrawEntropyListener<T,Q> l = new DrawEntropyListener<T, Q>(suffix);
       listener.AddListener(l);
-      myFake.AddListener(l);*/
+      myFake.AddListener(l);
       /*
       DrawEntropyCurveListener<T, Q> l = new DrawEntropyCurveListener<T, Q>();
       listener.AddListener(l);

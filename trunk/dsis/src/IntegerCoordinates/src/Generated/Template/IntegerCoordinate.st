@@ -135,7 +135,12 @@ namespace DSIS.Generated
     {
       long[] factor = GetProjectedFactor(division);
       return factor != null ? new IntegerCoordinateSystem(SystemSpace, factor) : null;
-    }        
+    }       
+    
+    public void DoGeneric(IIntegerCoordinateSystemWith with)
+    {
+      with.Do<IntegerCoordinateSystem, IntegerCoordinate>(this);
+    } 
   }
 
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]
@@ -215,7 +220,10 @@ namespace DSIS.Generated
     {
       get { return typeof (IntegerCoordinate); }
     }
+    
+    public IIntegerCoordinateSystemInfo Create(ISystemSpace space, long[] subd)
+    {
+      return new IntegerCoordinateSystem(space, subd);
+    }
   }
-
-   
 }

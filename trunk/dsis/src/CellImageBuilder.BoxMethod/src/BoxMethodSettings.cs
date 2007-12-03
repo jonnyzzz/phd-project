@@ -1,8 +1,10 @@
-using DSIS.Core.Coordinates;
+using DSIS.CellImageBuilder.Shared;
+using DSIS.Core.Builders;
+using DSIS.IntegerCoordinates;
 
-namespace DSIS.CellImageBuilder
+namespace DSIS.CellImageBuilder.BoxMethod
 {
-  public sealed class BoxMethodSettings : ICellImageBuilderSettings
+  public sealed class BoxMethodSettings : ICellImageBuilderIntegerCoordinatesSettings
   {
     public static readonly BoxMethodSettings Default = new BoxMethodSettings(0.1);
     private readonly double myEps;
@@ -19,6 +21,13 @@ namespace DSIS.CellImageBuilder
     public double Eps
     {
       get { return myEps; }
+    }
+
+
+    public ICellImageBuilder<TCell> Create<TSys, TCell>() where TSys : IIntegerCoordinateSystem<TCell>
+      where TCell : IIntegerCoordinate<TCell>
+    {
+      return new BoxMethod<TSys, TCell>();
     }
   }
 }

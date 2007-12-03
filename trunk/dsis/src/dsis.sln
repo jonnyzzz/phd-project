@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Morse", "Graph.Morse\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Morse.Tests", "Graph.Morse.Tests\Graph.Morse.Tests.csproj", "{504B29F2-8B62-4F5C-9FF8-89175002C3A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheme.Impl", "Scheme.Impl\Scheme.Impl.csproj", "{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{504B29F2-8B62-4F5C-9FF8-89175002C3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{504B29F2-8B62-4F5C-9FF8-89175002C3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{504B29F2-8B62-4F5C-9FF8-89175002C3A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

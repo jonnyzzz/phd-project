@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DSIS.CellImageBuilder;
 using DSIS.CellImageBuilder.AdaptiveMethod;
 using DSIS.CellImageBuilder.BoxAdaptiveMethod;
 using DSIS.CellImageBuilder.BoxMethod;

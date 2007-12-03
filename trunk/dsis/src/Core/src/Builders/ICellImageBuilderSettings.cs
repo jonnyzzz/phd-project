@@ -1,3 +1,5 @@
+using DSIS.Core.Builders;
+
 namespace DSIS.Core.Coordinates
 {
   /// <summary>

@@ -1,8 +1,10 @@
-using DSIS.Core.Coordinates;
+using DSIS.CellImageBuilder.Shared;
+using DSIS.Core.Builders;
+using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilders.PointMethod
 {
-  public class PointMethodSettings : ICellImageBuilderSettings
+  public class PointMethodSettings : ICellImageBuilderIntegerCoordinatesSettings
   {
     public readonly int[] Points;
     public readonly bool UseOverlapping;
@@ -20,6 +22,12 @@ namespace DSIS.CellImageBuilders.PointMethod
       Points = points;
       Overlap = overlap;
       UseOverlapping = false;
-    }    
+    }
+
+    public ICellImageBuilder<TCell> Create<TSys, TCell>() where TSys : IIntegerCoordinateSystem<TCell>
+      where TCell : IIntegerCoordinate<TCell>
+    {
+      return new PointMethod<TSys, TCell>();
+    }
   }
 }
