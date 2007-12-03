@@ -11,8 +11,8 @@ namespace DSIS.Scheme.Impl
     public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
       return
-        CheckContext(ctx, ContextMissmatchChech.Create(Keys.SystemSpaceKey, ""),
-                     ContextMissmatchChech.Create(Keys.SubdivisionKey, "")
+        CheckContext(ctx, ContextMissmatchCheck.Create(Keys.SystemSpaceKey, ""),
+                     ContextMissmatchCheck.Create(Keys.SubdivisionKey, "")
           );
     }
 

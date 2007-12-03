@@ -23,6 +23,10 @@ using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
+using DSIS.Scheme;
+using DSIS.Scheme.Ctx;
+using DSIS.Scheme.Impl;
+using DSIS.Scheme.Impl.Actions.Console;
 using DSIS.Scheme.Impl.Exec;
 using DSIS.Utils;
 
@@ -37,6 +41,25 @@ namespace DSIS.SimpleRunner
     {
       ActionGraph gr = new ActionGraph();
 
+      IAction a1 = new UpdateContextAction(delegate(Context input, Context cx)
+                                                         {
+                                                           Keys.SubdivisionKey.Set(cx, new long[] {3,3});
+                                                           DefaultSystemSpace sp = new DefaultSystemSpace(2, new double[]{-10,-10}, new double[]{10,10}, new long[]{3,3});
+                                                           Keys.SystemSpaceKey.Set(cx, sp);
+                                                           Keys.SystemInfoKey.Set(cx, new HenonFunctionSystemInfoDecorator(sp, 1.4));
+                                                         });
+      IAction a2 = new CreateCoordinateSystemAction();
+      IAction a3 = new CreateInitialCellsAction();
+      IAction a4 = new BuildSymbolicImageAction();
+      IAction a5 = new ChainRecurrenctSimbolicImageAction();
+
+      gr.AddEdge(a1, a2);
+      gr.AddEdge(a2, a3);
+      gr.AddEdge(a3, a4);
+      gr.AddEdge(a4, a5);
+      gr.AddEdge(a4, new DumpGraphInfoAction());
+
+      gr.Execite();
     }
 
     private static void Main2()

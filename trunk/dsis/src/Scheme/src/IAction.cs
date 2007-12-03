@@ -19,10 +19,10 @@ namespace DSIS.Scheme
       return result;
     }
 
-    protected static ICollection<ContextMissmatch> CheckContext(Context ctx, params ContextMissmatchChech[] data)
+    protected static ICollection<ContextMissmatch> CheckContext(Context ctx, params ContextMissmatchCheck[] data)
     {
       List<ContextMissmatch> list = new List<ContextMissmatch>();
-      foreach (ContextMissmatchChech missmatch in data)
+      foreach (ContextMissmatchCheck missmatch in data)
       {
         if (!missmatch.Check(ctx))
           list.Add(missmatch);
@@ -30,7 +30,7 @@ namespace DSIS.Scheme
       return list;
     }
 
-    protected static ContextMissmatchChech Create<Y>(Key<Y> key)
+    protected static ContextMissmatchCheck Create<Y>(Key<Y> key)
     {
       return new ContextMissmatchCheckImpl<Y>(key, "None");
     }

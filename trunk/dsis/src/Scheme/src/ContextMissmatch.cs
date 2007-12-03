@@ -14,21 +14,21 @@ namespace DSIS.Scheme
     }
   }
 
-  public abstract class ContextMissmatchChech : ContextMissmatch
+  public abstract class ContextMissmatchCheck : ContextMissmatch
   {
-    protected ContextMissmatchChech(IKey key, string message) : base(key, message)
+    protected ContextMissmatchCheck(IKey key, string message) : base(key, message)
     {
     }
 
     public abstract bool Check(Context ctx);
 
-    public static ContextMissmatchChech Create<Y>(Key<Y> data, string msg)
+    public static ContextMissmatchCheck Create<Y>(Key<Y> data, string msg)
     {
       return new ContextMissmatchCheckImpl<Y>(data, msg);
     }
   }
 
-  public class ContextMissmatchCheckImpl<Y> : ContextMissmatchChech
+  public class ContextMissmatchCheckImpl<Y> : ContextMissmatchCheck
   {
     public readonly Key<Y> TKey;
 

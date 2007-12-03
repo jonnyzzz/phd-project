@@ -5,6 +5,7 @@ using DSIS.Core.Processor;
 using DSIS.Core.System;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Adapter;
+using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl
@@ -71,6 +72,7 @@ namespace DSIS.Scheme.Impl
         proc.Execute(Keys.ProgressInfoKey.Get(myContext));
 
         Keys.Graph<Q>().Set(myOutputContext, graph);
+        Keys.IntegerCoordinateSystemInfo.Set(myOutputContext, (IIntegerCoordinateSystemInfo)toSystem);
       }
     }
   }

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
-using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl
 {
@@ -24,6 +23,7 @@ namespace DSIS.Scheme.Impl
     protected sealed override void Apply(Context ctx, Context result)
     {
       IIntegerCoordinateSystemInfo info = ctx.Get(Keys.IntegerCoordinateSystemInfo);
+      Keys.IntegerCoordinateSystemInfo.Set(result, info);
       info.DoGeneric(Create(ctx, result));      
     }
 
@@ -37,7 +37,7 @@ namespace DSIS.Scheme.Impl
     protected class Check : IIntegerCoordinateSystemWith
     {
       protected readonly Context myContext;
-      public readonly List<ContextMissmatchChech> Result = new List<ContextMissmatchChech>();
+      public readonly List<ContextMissmatchCheck> Result = new List<ContextMissmatchCheck>();
 
       public Check(Context context)
       {
