@@ -8,7 +8,7 @@ using DSIS.Graph.Adapter;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 
-namespace DSIS.Scheme.Impl
+namespace DSIS.Scheme.Impl.Actions
 {
   public class BuildSymbolicImageAction : IntegerCoordinateSystemActionBase
   {

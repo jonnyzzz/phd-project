@@ -4,7 +4,6 @@ using DSIS.Core.System;
 using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.IntegerCoordinates;
-using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl
 {

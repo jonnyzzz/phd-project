@@ -2,7 +2,7 @@ using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Scheme.Ctx;
 
-namespace DSIS.Scheme.Impl
+namespace DSIS.Scheme.Impl.Actions
 {
   public class ChainRecurrenctSimbolicImageAction : IntegerCoordinateSystemActionBase
   {

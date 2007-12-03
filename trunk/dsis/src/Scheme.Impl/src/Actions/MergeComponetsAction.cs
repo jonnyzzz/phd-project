@@ -4,7 +4,7 @@ using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.Scheme.Ctx;
 
-namespace DSIS.Scheme.Impl
+namespace DSIS.Scheme.Impl.Actions
 {
   public class MergeComponetsAction : IntegerCoordinateSystemActionBase
   {

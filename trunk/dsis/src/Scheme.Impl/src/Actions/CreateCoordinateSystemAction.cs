@@ -4,7 +4,7 @@ using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.Scheme.Ctx;
 
-namespace DSIS.Scheme.Impl
+namespace DSIS.Scheme.Impl.Actions
 {
   public class CreateCoordinateSystemAction : ActionBase
   {

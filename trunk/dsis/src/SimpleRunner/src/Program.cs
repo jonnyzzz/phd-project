@@ -26,6 +26,7 @@ using DSIS.IntegerCoordinates.Generated;
 using DSIS.Scheme;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
+using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Console;
 using DSIS.Scheme.Impl.Exec;
 using DSIS.Utils;
