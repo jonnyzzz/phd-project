@@ -1,49 +1,24 @@
+using System.Collections.Generic;
 using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions
 {
-  public class ChainRecurrenctSimbolicImageAction : IntegerCoordinateSystemActionBase
+  public class ChainRecurrenctSimbolicImageAction : IntegerCoordinateSystemActionBase2
   {
-    protected override With Create(Context @in, Context @out)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
-      return new With2(@in, @out);
+      return new ContextMissmatchCheck[] { Create(Keys.Graph<Q>()) };     
     }
 
-    protected override Check Create(Context @in)
+    protected override void Apply<T, Q>(T system, Context input, Context output)
     {
-      return new Check2(@in);
-    }
+      IProgressInfo info = NullProgressInfo.INSTANCE;
+      IGraphWithStrongComponent<Q> graph = Keys.Graph<Q>().Get(input);
+      IGraphStrongComponents<Q> comps = graph.ComputeStrongComponents(info);
 
-    protected class Check2 : Check
-    {
-      public Check2(Context context) : base(context)
-      {
-      }
-
-      public override void Do<T, Q>(T system)
-      {
-        base.Do<T, Q>(system);
-        Result.Add(Create(Keys.Graph<Q>()));
-        Result.Add(Create(Keys.ProgressInfoKey));
-      }
-    }
-
-    protected class With2 : With
-    {
-      public With2(Context context, Context outputContext) : base(context, outputContext)
-      {
-      }
-
-      public override void Do<T, Q>(T system)
-      {
-        IProgressInfo info = Keys.ProgressInfoKey.Get(myContext);
-        IGraphWithStrongComponent<Q> graph = Keys.Graph<Q>().Get(myContext);
-        IGraphStrongComponents<Q> comps = graph.ComputeStrongComponents(info);
-
-        Keys.GraphComponents<Q>().Set(myOutputContext, comps);
-      }
-    }
+      Keys.GraphComponents<Q>().Set(output, comps);
+    }    
   }
 }

@@ -6,44 +6,19 @@ using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions
 {
-  public class MergeComponetsAction : IntegerCoordinateSystemActionBase
+  public class MergeComponetsAction : IntegerCoordinateSystemActionBase2
   {
-    protected override With Create(Context @in, Context @out)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
-      return new With2(@in, @out);
+      return Col(base.Check<T, Q>(system, ctx), Create(Keys.GraphComponents<Q>()));
     }
 
-    protected override Check Create(Context @in)
+    protected override void Apply<T, Q>(T system, Context input, Context output)
     {
-      return new Check2(@in);
-    }
+      IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
+      CountEnumerable<Q> data = comps.GetCoordinates(new List<IStrongComponentInfo>(comps.Components));
 
-    protected class Check2 : Check
-    {
-      public Check2(Context context) : base(context)
-      {
-      }
-
-      public override void Do<T, Q>(T system)
-      {
-        base.Do<T, Q>(system);
-        Result.Add(Create(Keys.GraphComponents<Q>()));
-      }
-    }
-
-    protected class With2 : With
-    {
-      public With2(Context context, Context outputContext) : base(context, outputContext)
-      {
-      }
-
-      public override void Do<T, Q>(T system)
-      {
-        IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(myContext);
-        CountEnumerable<Q> data = comps.GetCoordinates(new List<IStrongComponentInfo>(comps.Components));
-
-        Keys.CellsEnumerationKey<Q>().Set(myOutputContext, data);
-      }
-    }
+      Keys.CellsEnumerationKey<Q>().Set(output, data);
+    }    
   }
 }

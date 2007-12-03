@@ -16,7 +16,6 @@ namespace DSIS.Scheme.Impl.Actions
           );
     }
 
-
     protected override void Apply(Context ctx, Context result)
     {
       ISystemSpace info = ctx.Get(Keys.SystemSpaceKey);
@@ -25,21 +24,6 @@ namespace DSIS.Scheme.Impl.Actions
       IIntegerCoordinateSystemInfo sys = factory.Create(info, subd);
 
       result.Set(Keys.IntegerCoordinateSystemInfo, sys);
-      sys.DoGeneric(new SetContext(result));
-    }
-
-    private class SetContext : IIntegerCoordinateSystemWith
-    {
-      private readonly Context ctx;
-
-      public SetContext(Context ctx)
-      {
-        this.ctx = ctx;
-      }
-
-      public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate<Q>
-      {
-      }
     }
   }
 }

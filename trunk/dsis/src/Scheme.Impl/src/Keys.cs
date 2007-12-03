@@ -34,8 +34,6 @@ namespace DSIS.Scheme.Impl
     public static Key<IGraphStrongComponents<Q>> GraphComponents<Q>() where Q : ICellCoordinate<Q>
     {
       return new Key<IGraphStrongComponents<Q>>("comps");
-    }
-
-    public static readonly Key<IProgressInfo> ProgressInfoKey = new Key<IProgressInfo>("info");
+    }    
   }
 }

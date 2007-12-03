@@ -53,5 +53,10 @@ namespace DSIS.Scheme
     {
       ctx.Set(this, value);
     }
+
+    public void Copy(Context input, Context output)
+    {
+      Set(output, Get(input));
+    }
   }
 }

@@ -51,12 +51,16 @@ namespace DSIS.SimpleRunner
                                                          });
       IAction a2 = new CreateCoordinateSystemAction();
       IAction a3 = new CreateInitialCellsAction();
+
       IAction a4 = new BuildSymbolicImageAction();
       IAction a5 = new ChainRecurrenctSimbolicImageAction();
 
       gr.AddEdge(a1, a2);
       gr.AddEdge(a2, a3);
       gr.AddEdge(a3, a4);
+      gr.AddEdge(a1, a4);
+      gr.AddEdge(new SetMethod(new BoxMethodSettings(0.1), new long[]{2,2}), a4);
+
       gr.AddEdge(a4, a5);
       gr.AddEdge(a4, new DumpGraphInfoAction());
 

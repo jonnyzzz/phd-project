@@ -17,6 +17,7 @@ namespace DSIS.Scheme.Impl.Actions
 
       public override void Do<T, Q>(T system)
       {
+        Keys.IntegerCoordinateSystemInfo.Copy(myContext, myOutputContext);
         Keys.CellsEnumerationKey<Q>().Set(myOutputContext, system.InitialSubdivision);
       }
     }

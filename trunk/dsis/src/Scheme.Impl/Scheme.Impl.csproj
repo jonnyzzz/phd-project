@@ -43,9 +43,10 @@
     <Compile Include="src\Actions\Console\DumpGraphInfoAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
+    <Compile Include="src\Actions\SetMethod.cs" />
     <Compile Include="src\Actions\StartAction.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />
-    <Compile Include="src\UpdateContextAction.cs" />
+    <Compile Include="src\Actions\UpdateContextAction.cs" />
     <Compile Include="src\Exec\ActionWrapper.cs" />
     <Compile Include="src\Exec\Executor.cs" />
     <Compile Include="src\Exec\IActionGraphBuilder.cs" />
