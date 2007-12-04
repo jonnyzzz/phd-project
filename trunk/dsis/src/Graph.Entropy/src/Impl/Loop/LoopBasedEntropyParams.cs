@@ -42,7 +42,6 @@ namespace DSIS.Graph.Entropy.Impl.Loop
         default:
           throw new ArgumentException("Unexpected state " + Strategy);
       }
-
     }
   }
 }

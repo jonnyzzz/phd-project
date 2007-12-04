@@ -14,7 +14,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -22,7 +22,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,6 +41,7 @@
     <Compile Include="src\IEntropyEvaluator.cs" />
     <Compile Include="src\EntropyEvaluator.cs" />
     <Compile Include="src\Impl\Entropy\DividingEntropyEvaluator.cs" />
+    <Compile Include="src\Impl\Entropy\GraphMeasure.cs" />
     <Compile Include="src\Impl\JVR\ItemRebuildCookie.cs" />
     <Compile Include="src\Impl\JVR\ItemUpdateCookie.cs" />
     <Compile Include="src\Impl\JVR\JVREvaluator.cs" />

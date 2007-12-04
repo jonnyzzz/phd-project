@@ -5,32 +5,22 @@ using DSIS.Graph.Entropy.Impl.Util;
 
 namespace DSIS.Graph.Entropy.Impl.Entropy
 {
-  public class EntropyEvaluator<T, TPair>
-    where T : ICellCoordinate<T>
-    where TPair : PairBase<T>
+  public class EntropyEvaluator
   {
     private const double EPS = 1e-10;
     private static readonly double LN2 = Math.Log(2);
 
-    protected readonly IDictionary<TPair, double> myM;
-    protected readonly IEqualityComparer<T> myComparer;
-    protected readonly double myNorm;
 
-    public EntropyEvaluator(IDictionary<TPair, double> m, double norm, IEqualityComparer<T> comparer)
-    {
-      myNorm = norm;
-      myM = m;
-      myComparer = comparer;
-    }
-    
-    public void ComputeEntropy(IEntropyListener<T> listener)
+    public static void ComputeEntropy<T,TPair>(GraphMeasure<T,TPair> measure, IEntropyListener<T> result) 
+      where T : ICellCoordinate<T> 
+      where TPair : PairBase<T>
     {
       double v = 0;
-      Dictionary<T, double> values = new Dictionary<T, double>(myComparer);
+      Dictionary<T, double> values = new Dictionary<T, double>(measure.Comparer);
 
-      foreach (KeyValuePair<TPair, double> pair in myM)
+      foreach (KeyValuePair<TPair, double> pair in measure.M)
       {
-        double val = pair.Value / myNorm;
+        double val = pair.Value / measure.Norm;
         Add(values, pair.Key.To, val);
         v -= Entropy(val);
       }
@@ -40,7 +30,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
         v += Entropy(value);
       }
 
-      listener.OnResult(v / LN2, values, myM);
+      result.OnResult(v / LN2, values, measure.M);
     }
 
     protected static void Add<Q>(IDictionary<Q, double> ds, Q node, double v)
@@ -64,5 +54,28 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
       return d * Log(d);
     }
+  }
+
+  
+  public class EntropyEvaluator<T, TPair>
+    where T : ICellCoordinate<T>
+    where TPair : PairBase<T>
+  {
+
+    protected readonly IDictionary<TPair, double> myM;
+    protected readonly IEqualityComparer<T> myComparer;
+    protected readonly double myNorm;
+
+    public EntropyEvaluator(IDictionary<TPair, double> m, double norm, IEqualityComparer<T> comparer)
+    {      
+      myNorm = norm;
+      myM = m;
+      myComparer = comparer;
+    }
+    
+    public void ComputeEntropy(IEntropyListener<T> listener)
+    {
+      EntropyEvaluator.ComputeEntropy(new GraphMeasure<T, TPair>(myM, myComparer, myNorm), listener);      
+    }    
   }
 }

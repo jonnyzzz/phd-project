@@ -41,28 +41,4 @@ namespace DSIS.Utils
 
     #endregion
   }
-
-  public class UpcastedEnumerable<TEnu, T, TC> : IEnumerable<TC> where T : TC where TEnu : IEnumerable<T>
-  {
-    private readonly TEnu myEnumerable;
-
-    public UpcastedEnumerable(TEnu enumerable)
-    {
-      myEnumerable = enumerable;
-    }
-
-    #region IEnumerable<TC> Members
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-      return myEnumerable.GetEnumerator();
-    }
-
-    IEnumerator<TC> IEnumerable<TC>.GetEnumerator()
-    {
-      return new UpcastedEnumerator<IEnumerator<T>, T, TC>(myEnumerable.GetEnumerator());
-    }
-
-    #endregion
-  }
 }
