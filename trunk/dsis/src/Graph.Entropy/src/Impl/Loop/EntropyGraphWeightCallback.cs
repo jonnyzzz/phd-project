@@ -75,7 +75,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 
     public IEntropyProcessor<T> Entropy()
     {
-      return new EntropyEvaluator<T, NodePair<T>>(M, Norm, EqualityComparerFactory<T>.GetReferenceComparer());
+      return new DividingEntropyEvaluator<T, NodePair<T>>(M, Norm, EqualityComparerFactory<T>.GetReferenceComparer());
     }
   }
 }

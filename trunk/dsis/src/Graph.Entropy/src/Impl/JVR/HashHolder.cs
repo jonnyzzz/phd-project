@@ -98,9 +98,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return myHash[pair];
     }
 
-    public EntropyEvaluator<T, JVRPair<T>> CreateEvaluator()
+    public DividingEntropyEvaluator<T, JVRPair<T>> CreateEvaluator()
     {
-      return new EntropyEvaluator<T, JVRPair<T>>(myHash, Norm(), EqualityComparerFactory<T>.GetComparer());
+      return new DividingEntropyEvaluator<T, JVRPair<T>>(myHash, Norm(), EqualityComparerFactory<T>.GetComparer());
     }
     
     public T NextNode()

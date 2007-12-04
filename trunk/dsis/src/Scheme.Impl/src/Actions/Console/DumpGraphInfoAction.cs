@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Graph;
+using DSIS.Graph.Abstract;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Console

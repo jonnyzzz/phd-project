@@ -107,7 +107,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return double.IsNaN(a) || double.IsInfinity(a);
     }
 
-    public EntropyEvaluator<T, JVRPair<T>> CreateEvaluator()
+    public IEntropyProcessor<T> CreateEvaluator()
     {
       return myHashHolder.CreateEvaluator();
     }

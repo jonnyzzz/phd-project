@@ -63,6 +63,8 @@ namespace DSIS.SimpleRunner
 
       gr.AddEdge(a4, a5);
       gr.AddEdge(a4, new DumpGraphInfoAction());
+      
+      gr.AddEdge(a5, new DumpGraphComponentsInfoAction());
 
       gr.Execite();
     }

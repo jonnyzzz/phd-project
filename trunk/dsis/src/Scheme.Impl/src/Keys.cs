@@ -4,6 +4,7 @@ using DSIS.Core.System;
 using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.IntegerCoordinates;
+using DSIS.Scheme.Impl.Actions.Entropy;
 
 namespace DSIS.Scheme.Impl
 {
@@ -35,5 +36,7 @@ namespace DSIS.Scheme.Impl
     {
       return new Key<IGraphStrongComponents<Q>>("comps");
     }    
+
+//    public static Key<StarangeEntropyActionParams> StrangeEntropyParamsKey = new Key<StarangeEntropyActionParams>("");
   }
 }

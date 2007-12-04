@@ -2,35 +2,27 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Util;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Entropy
 {
-  public class EntropyEvaluator<T, TPair> : IEntropyProcessor<T>
+  public class EntropyEvaluator<T, TPair>
     where T : ICellCoordinate<T>
     where TPair : PairBase<T>
-  {    
+  {
+    private const double EPS = 1e-10;
     private static readonly double LN2 = Math.Log(2);
 
-    private readonly IDictionary<TPair, double> myM;
-    private readonly double myNorm;
-    private readonly IEqualityComparer<T> myComparer;
+    protected readonly IDictionary<TPair, double> myM;
+    protected readonly IEqualityComparer<T> myComparer;
+    protected readonly double myNorm;
 
     public EntropyEvaluator(IDictionary<TPair, double> m, double norm, IEqualityComparer<T> comparer)
     {
+      myNorm = norm;
       myM = m;
       myComparer = comparer;
-      myNorm = norm;
     }
     
-    public IEntropyProcessor<T> Divide(ICellCoordinateSystemProjector<T> projector)
-    {
-      return new EntropyEvaluator<T, NodePair<T>>(
-        Project(myM, projector), 
-        myNorm, 
-        EqualityComparerFactory<T>.GetComparer());
-    }
-
     public void ComputeEntropy(IEntropyListener<T> listener)
     {
       double v = 0;
@@ -51,7 +43,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
       listener.OnResult(v / LN2, values, myM);
     }
 
-    private static void Add<Q>(IDictionary<Q, double> ds, Q node, double v)
+    protected static void Add<Q>(IDictionary<Q, double> ds, Q node, double v)
     {
       double b;
       if (ds.TryGetValue(node, out b))
@@ -59,9 +51,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
       ds[node] = v;
     }
-    
-    private const double EPS = 1e-10;
-
+        
     private static double Log(double d)
     {
       return Math.Log(d);
@@ -74,23 +64,5 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
       return d * Log(d);
     }
-
-
-    private static Dictionary<NodePair<T>, double> Project(IEnumerable<KeyValuePair<TPair, double>> m, ICellCoordinateSystemProjector<T> projector)
-    {
-      Dictionary<NodePair<T>, double> ret = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer());
-
-      foreach (KeyValuePair<TPair, double> pair in m)
-      {
-        T pFrom = projector.Project(pair.Key.From);
-        T pTo = projector.Project(pair.Key.To);
-
-        if (pFrom != null && pTo != null)
-        {
-          Add(ret, new NodePair<T>(pFrom, pTo), pair.Value);
-        }
-      }
-      return ret;
-    }    
   }
 }
