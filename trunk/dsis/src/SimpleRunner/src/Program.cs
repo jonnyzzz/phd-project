@@ -21,14 +21,19 @@ using DSIS.Function.Predefined.Lorentz;
 using DSIS.Function.Predefined.Rossel;
 using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
+using DSIS.Graph.Entropy.Impl.Loop.Strange;
+using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
+using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
+using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
+using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.Utils;
 
@@ -83,13 +88,12 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(step, draw);
       gr.AddEdge(wf, draw);
  
-      /*IAction a6 = new UpdateContextAction(delegate(Context input, Context cx)
+      IAction a6 = new UpdateContextAction(delegate(Context input, Context cx)
                                              {
                                                Keys.StrangeEntropyEvaluatorParams.Set(cx,
                                                                                       new StrangeEntropyEvaluatorParams(
-                                                                                        StrangeEvaluatorType.
-                                                                                          WeightSearch_1,
-                                                                                        StrangeEvaluatorStrategy.SMART,
+                                                                                        StrangeEvaluatorType.WeightSearch_2,
+                                                                                        StrangeEvaluatorStrategy.FIRST,
                                                                                         EntropyLoopWeights.CONST));
                                              });
 
@@ -101,11 +105,16 @@ namespace DSIS.SimpleRunner
 
       
       IAction drawEntropy = new DrawEntropyMeasure3dAction();
+      IAction drawEntropy2 = new DrawEntropyMeasureColorMapAction();
 
       gr.AddEdge(wf, drawEntropy);
+      gr.AddEdge(wf, drawEntropy2);      
       gr.AddEdge(a7, drawEntropy);
+      gr.AddEdge(a7, drawEntropy2);
       gr.AddEdge(step, drawEntropy);
-      gr.AddEdge(wf, new DumpWorkingFolderAction());*/
+      gr.AddEdge(step, drawEntropy2);
+
+      gr.AddEdge(wf, new DumpWorkingFolderAction());
       gr.Execute();
     }
 

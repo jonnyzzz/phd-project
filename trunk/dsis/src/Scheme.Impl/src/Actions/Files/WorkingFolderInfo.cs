@@ -18,7 +18,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     private string MakeFileName(string ext)
     {
-      string bs = myPath + ToSafePath("/" + GetType().Name + "/image_");
+      string bs = myPath + ToSafePath("/");
 
       string path = bs + ext;
       string dir = System.IO.Path.GetDirectoryName(path);

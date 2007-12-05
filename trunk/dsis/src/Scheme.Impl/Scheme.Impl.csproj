@@ -50,6 +50,8 @@
     <Compile Include="src\Actions\Entropy\StrangeEntropyAction.cs" />
     <Compile Include="src\Actions\Files\DrawChainRecurrentAction.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasure3d.cs" />
+    <Compile Include="src\Actions\Files\DrawEntropyMeasureActionBase.cs" />
+    <Compile Include="src\Actions\Files\DrawEntropyMeasureColorMapAction.cs" />
     <Compile Include="src\Actions\Files\FileKeys.cs" />
     <Compile Include="src\Actions\Files\WorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\WorkingFolderInfo.cs" />

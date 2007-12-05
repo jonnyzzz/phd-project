@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Core.Visualization;
 using DSIS.GnuplotDrawer;
@@ -7,18 +6,8 @@ using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public class DrawEntropyMeasure3dAction : IntegerCoordinateSystemActionBase2
+  public class DrawEntropyMeasure3dAction : DrawEntropyMeasureActionBase
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
-    {
-      if (system.SystemSpace.Dimension != 2)
-        throw new Exception("Dimension is assumend to be 2");
-
-      return ColBase(base.Check<T, Q>(system, ctx),
-                 Create(FileKeys.WorkingFolderKey),
-                 Create(Keys.GraphMeasure<Q>()
-                 ));
-    }
 
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
