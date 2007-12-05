@@ -14,7 +14,7 @@ namespace DSIS.Graph.Entropy
   public class GraphBaseTest
   {
     [SetUp]
-    public void SetUp()
+    public virtual void SetUp()
     {
       Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
       Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-us");

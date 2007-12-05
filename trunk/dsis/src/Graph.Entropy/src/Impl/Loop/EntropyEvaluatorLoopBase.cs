@@ -25,7 +25,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
         it.WidthSearch();
       }
 
-      return cb.Entropy();
+      return new EntropyProcessorAdapter<T>(cb.Entropy());
     }
 
     protected abstract ILoopIterator<T> CreateIterator(ILoopIteratorCallback<T> callback,

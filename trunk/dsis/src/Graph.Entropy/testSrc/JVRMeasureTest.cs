@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates.Impl;
@@ -82,7 +83,7 @@ namespace DSIS.Graph.Entropy
     [Test]
     public void Test_Logistics()
     {
-      DoTest("fnin", 0, n(0,0),
+      DoTest("fnin", 1.5912074632572841d, n(0, 0),
 n(0,1),
 n(0,2),
 n(0,3),
@@ -153,33 +154,13 @@ n(19,3)
     {
       JVR j = DoTest(script, nodes);
 
-      EntropyListener<IntegerCoordinate> l = new EntropyListener<IntegerCoordinate>();
-      j.CreateEvaluator().ComputeEntropy(l);
+      IGraphMeasure<IntegerCoordinate> evaluator = j.CreateEvaluator();
+      evaluator.GetEntropy();
 
-      Console.Out.WriteLine("l.Result = {0}", l.Result);
-      Assert.AreEqual(entropy, l.Result, EPS);
+      Console.Out.WriteLine("l.Result = {0}", evaluator.GetEntropy());
+      Assert.AreEqual(entropy, evaluator.GetEntropy(), EPS);
 
       return j;
-    }
-
-    private class EntropyListener<T> : IEntropyListener<T>
-      where T : ICellCoordinate<T>
-    {
-      private double? myResult;
-
-      public void OnResult<Q>(double result, IDictionary<T, double> measure, IDictionary<Q, double> q) where Q : PairBase<T>
-      {
-        myResult = result;
-      }
-
-      public double Result
-      {
-        get
-        {
-          Assert.IsNotNull(myResult);
-          return myResult.Value;
-        }
-      }
     }
 
     protected static JVR DoTest(string script, params Node[] nodes)

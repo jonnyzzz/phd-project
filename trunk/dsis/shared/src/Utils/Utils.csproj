@@ -62,6 +62,9 @@
     <Compile Include="src\AttributeUtil.cs" />
     <Compile Include="src\BinTreePriorityQueueEx.cs" />
     <Compile Include="src\BinTreePriorityQueueExDebug.cs" />
+    <Compile Include="src\CollectionUtil.cs" />
+    <Compile Include="src\UpcastedCollection.cs" />
+    <Compile Include="src\UpcastedDictionary.cs" />
     <Compile Include="src\UpcastedEnumerable.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueExTest.cs" />
     <Compile Include="src\Delegates.cs" />

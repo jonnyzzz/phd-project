@@ -19,7 +19,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 //      using(TextWriter tw = File.CreateText(string.Format(@"e:\graph{0}.txt", ++cmt)))
 //        j.Dump(tw);
 
-      return j.CreateEvaluator();
+      return new EntropyProcessorAdapter<T>(j.CreateEvaluator());
     }
   }
 }

@@ -73,9 +73,9 @@ namespace DSIS.Graph.Entropy.Impl.Loop
       protected set { myNorm = value; }
     }
 
-    public IEntropyProcessor<T> Entropy()
+    public IGraphMeasure<T> Entropy()
     {
-      return new DividingEntropyEvaluator<T, NodePair<T>>(M, Norm, EqualityComparerFactory<T>.GetReferenceComparer());
+      return new GraphMeasure<T, NodePair<T>>(M, EqualityComparerFactory<T>.GetReferenceComparer(), Norm);
     }
   }
 }

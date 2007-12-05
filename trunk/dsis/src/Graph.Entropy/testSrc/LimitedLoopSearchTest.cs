@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy
 {
-  [TestFixture]
+  [TestFixture, Ignore]
   public class  LimitedLoopSearchTest : LoopIteratorTestBase
   {
     private int myDeep;
@@ -18,7 +18,7 @@ namespace DSIS.Graph.Entropy
     }
 
     [SetUp]
-    public void SetUp()
+    public override void SetUp()
     {
       myDeep = 10;      
     }

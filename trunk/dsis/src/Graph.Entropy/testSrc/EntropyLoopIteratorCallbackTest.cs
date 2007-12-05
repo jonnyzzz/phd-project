@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Graph.Entropy.Impl.Util;
@@ -205,10 +206,8 @@ namespace DSIS.Graph.Entropy
       {
         Pair<double, List<AssertData>> pair = expected[i];
         
-        Listener listener = new Listener();
-
-        cb.Entropy().ComputeEntropy(listener);
-        double ent = listener.Result;
+        IGraphMeasure<IntegerCoordinate> entropy = cb.Entropy();        
+        double ent = entropy.GetEntropy();
 
         if (i == 0)
           norm = cb.Norm;

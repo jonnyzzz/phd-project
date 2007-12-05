@@ -40,25 +40,6 @@ namespace DSIS.Graph.Entropy
                }, @"1, 2,");
     }
 
-
-    [Test]
-    [ExpectedException(typeof(ArgumentNullException))]
-    public void Test_02()
-    {
-      DoTest(delegate(IGraph<IntegerCoordinate> graph)
-               {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
-                 INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
-                 INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
-                 INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));
-                 INode<IntegerCoordinate> n4 = graph.AddNode(system.Create(4));
-
-                 graph.AddEdgeToNode(n1, n2);
-                 graph.AddEdgeToNode(n2, n3);
-                 graph.AddEdgeToNode(n3, n4);
-               }, @"");
-    }
-
     [Test]
     public void Test_03()
     {

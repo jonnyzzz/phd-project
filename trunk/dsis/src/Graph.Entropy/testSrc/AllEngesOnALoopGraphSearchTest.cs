@@ -15,24 +15,6 @@ namespace DSIS.Graph.Entropy
     }
 
     [Test]
-    [ExpectedException(typeof (ArgumentNullException))]
-    public void Test_02()
-    {
-      DoTest(delegate(IGraph<IntegerCoordinate> graph)
-               {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem) graph.CoordinateSystem;
-                 INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
-                 INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
-                 INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));
-                 INode<IntegerCoordinate> n4 = graph.AddNode(system.Create(4));
-
-                 graph.AddEdgeToNode(n1, n2);
-                 graph.AddEdgeToNode(n2, n3);
-                 graph.AddEdgeToNode(n3, n4);
-               }, @"");
-    }
-
-    [Test]
     public void Test_03()
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
@@ -48,7 +30,7 @@ namespace DSIS.Graph.Entropy
                  graph.AddEdgeToNode(n3, n4);
                  graph.AddEdgeToNode(n4, n1);
                },
-             "2, 3, 4, 1,", "3, 4, 1, 2,", "4, 1, 2, 3,", "1, 2, 3, 4,");
+             "2, 3, 4, 1,");
     }
 
     [Test]
@@ -60,7 +42,7 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 1, 3);
                  AddEdge(graph, 3, 2);
                  AddEdge(graph, 2, 3);
-               }, "3, 2,", "2, 3,");
+               }, "3, 2,");
     }
 
     [Test]
@@ -75,10 +57,7 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 3, 1);
                },
              "3, 1,",
-             "2, 3, 1,",
-             "3, 2,",
-             "1, 3,",
-             "2, 3,"
+             "2, 3, 1,"
         );
     }
 

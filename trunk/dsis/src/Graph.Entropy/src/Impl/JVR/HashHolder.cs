@@ -9,13 +9,6 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
-  internal interface IHashholderController<T> where T : ICellCoordinate<T>
-  {
-    void SetItem(JVRPair<T> pair, double value);
-    void SetItem(T node, double output, double input);    
-  }
-   
-
   public class HashHolder<T> : IHashholderController<T>
     where T : ICellCoordinate<T>
   {
@@ -98,9 +91,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return myHash[pair];
     }
 
-    public DividingEntropyEvaluator<T, JVRPair<T>> CreateEvaluator()
+    public IGraphMeasure<T> CreateEvaluator()
     {
-      return new DividingEntropyEvaluator<T, JVRPair<T>>(myHash, Norm(), EqualityComparerFactory<T>.GetComparer());
+      return new GraphMeasure<T, JVRPair<T>>(myHash, EqualityComparerFactory<T>.GetComparer(), Norm());
     }
     
     public T NextNode()
