@@ -13,21 +13,19 @@ namespace DSIS.SimpleRunner
     private IEnumerable<GnuplotPointsFileWriter> Render(Pair<ICellCoordinateSystem<T>, IDictionary<T, double>> file)
     {
       IIntegerCoordinateSystem<T> sys = (IIntegerCoordinateSystem<T>) file.First;
-      double[] data = new double[2]{0,0};
+      double[] data = new double[2] {0, 0};
       GnuplotPointsFileWriter wr;
       GnuplotPointsFileWriter wrz;
 
       using (wr = new GnuplotPointsFileWriter(CreateFileName("measure3d_value.data"), 3))
+      using (wrz = new GnuplotPointsFileWriter(CreateFileName("measure3d_zero.data"), 3))
       {
-        using (wrz = new GnuplotPointsFileWriter(CreateFileName("measure3d_zero.data"), 3))
+        foreach (KeyValuePair<T, double> pair in file.Second)
         {
-          foreach (KeyValuePair<T, double> pair in file.Second)
-          {
-            T key = pair.Key;
-            sys.CenterPoint(key, data);
-            wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
-            wrz.WritePoint(new ImagePoint(data[0], data[1], 0));
-          }
+          T key = pair.Key;
+          sys.CenterPoint(key, data);
+          wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
+          wrz.WritePoint(new ImagePoint(data[0], data[1], 0));
         }
       }
 
@@ -42,14 +40,18 @@ namespace DSIS.SimpleRunner
 
       string outputFile = CreateFileName(suffix + "measure3d.png");
 
-      GnuplotScriptParameters ps = new GnuplotScriptParameters(outputFile,
-                                                               Title +
-                                                               string.Format("Entropy = {0}",
-                                                                             Entropy.Value.ToString("F6")));
+      GnuplotScriptParameters3d ps = new GnuplotScriptParameters3d(outputFile,
+                                                                   Title +
+                                                                   string.Format("Entropy = {0}",
+                                                                                 Entropy.Value.ToString("F6")));
       ps.ForcePoints = true;
-      IGnuplotPhaseScriptGen gen = GnuplotSriptGen.ScriptGen(3,
-        CreateFileName("measure3d.gnuplot"),
-        ps);
+      ps.RotX = 75;
+      ps.RotZ = 30;
+      ps.XYPane = 0;
+      IGnuplotPhaseScriptGen gen =
+        new Gnuplot3dScriptGen(
+          CreateFileName("measure3d.gnuplot"),
+          ps);
 
       foreach (GnuplotPointsFileWriter file in Render(Wights.Value))
         gen.AddPointsFile(file);
@@ -59,7 +61,7 @@ namespace DSIS.SimpleRunner
       GnuplotDrawer.GnuplotDrawer drw = new GnuplotDrawer.GnuplotDrawer();
       drw.DrawImage(gen);
 
-      return outputFile;
+      return "";
     }
   }
 }
