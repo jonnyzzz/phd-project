@@ -43,9 +43,14 @@
     <Compile Include="src\Actions\Console\DumpEntropyValueAction.cs" />
     <Compile Include="src\Actions\Console\DumpGraphComponentsInfoAction.cs" />
     <Compile Include="src\Actions\Console\DumpGraphInfoAction.cs" />
+    <Compile Include="src\Actions\Console\DumpWorkingFolderAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
     <Compile Include="src\Actions\Entropy\StrangeEntropyAction.cs" />
+    <Compile Include="src\Actions\Files\DrawEntropyMeasure3d.cs" />
+    <Compile Include="src\Actions\Files\FileKeys.cs" />
+    <Compile Include="src\Actions\Files\WorkingFolderAction.cs" />
+    <Compile Include="src\Actions\Files\WorkingFolderInfo.cs" />
     <Compile Include="src\Actions\SetMethod.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />
@@ -85,6 +90,10 @@
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GnuplotDrawer\GnuplotDrawer.csproj">
+      <Project>{CA14A441-039B-49F2-B678-9491146C56A1}</Project>
+      <Name>GnuplotDrawer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Graph.Entropy\Graph.Entropy.csproj">
       <Project>{43283F9D-A669-47B2-80FD-FFA447A4BD7F}</Project>
       <Name>Graph.Entropy</Name>
@@ -107,7 +116,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\Actions\Files\" />
     <Folder Include="testSrc\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

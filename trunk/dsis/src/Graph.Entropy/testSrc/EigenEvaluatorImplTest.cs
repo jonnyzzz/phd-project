@@ -29,6 +29,8 @@ namespace DSIS.Graph.Entropy
       TarjanGraph<IntegerCoordinate> graph = DoBuildGraph(bg);
       IGraphEntropy entropy = new EntropyEvaluatorImpl(graph).ComputeEntropy();
       Assert.AreEqual(v, entropy.GetEntropy(), EPS);
+      Console.Out.WriteLine("entropy = {0}", entropy);
+      Console.Out.WriteLine("e^entropy = {0}", Math.Exp(entropy.GetEntropy()));
     }
 
     private class EntropyEvaluatorImpl : EigenEntropyEvaluatorImpl<IntegerCoordinate>

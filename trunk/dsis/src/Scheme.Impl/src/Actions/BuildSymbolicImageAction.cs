@@ -16,7 +16,7 @@ namespace DSIS.Scheme.Impl.Actions
   {
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
-      return Col(base.Check<T, Q>(system, ctx), Create(Keys.SystemInfoKey),
+      return ColBase(base.Check<T, Q>(system, ctx), Create(Keys.SystemInfoKey),
                  Create(Keys.CellImageBuilderKey),
                  Create(Keys.CellsEnumerationKey<Q>()),
                  Create(Keys.SubdivisionKey));

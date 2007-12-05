@@ -35,17 +35,17 @@ namespace DSIS.Scheme
       return new ContextMissmatchCheckImpl<Y>(key, "None");
     }
 
-    protected static ICollection<ContextMissmatchCheck> Col(params ContextMissmatchCheck[] data)
+    protected static ICollection<T> Col<T>(params T[] data)
     {
       return data;
     }
 
-    protected static ICollection<ContextMissmatchCheck> Col(ICollection<ContextMissmatchCheck> bs, params ContextMissmatchCheck[] data)
+    protected static ICollection<ContextMissmatchCheck> ColBase(ICollection<ContextMissmatchCheck> bs, params ContextMissmatchCheck[] data)
     {
       List<ContextMissmatchCheck> dta = new List<ContextMissmatchCheck>();
       dta.AddRange(bs);
       dta.AddRange(data);
-      return dta;
+      return dta;      
     }
 
     protected abstract void Apply(Context ctx, Context result);

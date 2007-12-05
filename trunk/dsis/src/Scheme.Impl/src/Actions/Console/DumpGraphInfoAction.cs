@@ -8,7 +8,7 @@ namespace DSIS.Scheme.Impl.Actions.Console
   {
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
-      return Col(base.Check<T, Q>(system, ctx),
+      return ColBase(base.Check<T, Q>(system, ctx),
                  Create(Keys.Graph<Q>()));
     }
 

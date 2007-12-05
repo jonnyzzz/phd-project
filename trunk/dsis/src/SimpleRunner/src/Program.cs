@@ -33,6 +33,7 @@ using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Console;
 using DSIS.Scheme.Impl.Actions.Entropy;
+using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
@@ -89,6 +90,12 @@ namespace DSIS.SimpleRunner
 
       gr.AddEdge(a7, new DumpEntropyValueAction());
 
+      IAction wf = new WorkingFolderAction();
+      IAction drawEntropy = new DrawEntropyMeasure3dAction();
+
+      gr.AddEdge(wf, drawEntropy);
+      gr.AddEdge(a7, drawEntropy);
+      gr.AddEdge(a4, drawEntropy);
 
       gr.Execute();
     }
