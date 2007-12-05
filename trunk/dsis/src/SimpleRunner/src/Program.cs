@@ -105,14 +105,18 @@ namespace DSIS.SimpleRunner
 
       
       IAction drawEntropy = new DrawEntropyMeasure3dAction();
+      IAction drawEntropy3 = new DrawEntropyMeasure3dWithBaseAction();
       IAction drawEntropy2 = new DrawEntropyMeasureColorMapAction();
 
       gr.AddEdge(wf, drawEntropy);
       gr.AddEdge(wf, drawEntropy2);      
+      gr.AddEdge(wf, drawEntropy3);      
       gr.AddEdge(a7, drawEntropy);
       gr.AddEdge(a7, drawEntropy2);
+      gr.AddEdge(a7, drawEntropy3);
       gr.AddEdge(step, drawEntropy);
       gr.AddEdge(step, drawEntropy2);
+      gr.AddEdge(step, drawEntropy3);
 
       gr.AddEdge(wf, new DumpWorkingFolderAction());
       gr.Execute();

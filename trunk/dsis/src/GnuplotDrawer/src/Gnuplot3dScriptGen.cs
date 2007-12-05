@@ -5,7 +5,8 @@ namespace DSIS.GnuplotDrawer
     private bool myIsFirstFile = true;
 
     public Gnuplot3dScriptGen(string filename, GnuplotScriptParameters @params) : base(filename, @params)
-    {     
+    {
+      myWriter.Write("splot ");
     }
 
     public virtual void AddPointsFile(GnuplotPointsFileWriter file)

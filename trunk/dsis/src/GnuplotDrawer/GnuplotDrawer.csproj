@@ -39,6 +39,7 @@
     <Compile Include="src\Gnuplot2dScriptGen.cs" />
     <Compile Include="src\Gnuplot3dScriptGen.cs" />
     <Compile Include="src\GnuplotEntropy3dScriptGen.cs" />
+    <Compile Include="src\GnuplotEntropy3dWithBaseScriptGen.cs" />
     <Compile Include="src\GnuplotEntropyScriptGen.cs" />
     <Compile Include="src\GnuplotFileWriterBase.cs" />
     <Compile Include="src\GnuplotDrawer.cs" />

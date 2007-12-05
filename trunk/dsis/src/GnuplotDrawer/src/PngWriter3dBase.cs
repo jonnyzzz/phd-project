@@ -11,8 +11,7 @@ namespace DSIS.GnuplotDrawer
 
         if (p3d.XYPane != null)
           myWriter.WriteLine("set xyplane at {0};", p3d.XYPane);
-      }
-      myWriter.Write("splot ");
+      }      
     }
   }
 }
