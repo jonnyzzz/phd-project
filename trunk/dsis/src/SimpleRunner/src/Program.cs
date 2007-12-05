@@ -21,6 +21,8 @@ using DSIS.Function.Predefined.Lorentz;
 using DSIS.Function.Predefined.Rossel;
 using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
+using DSIS.Graph.Entropy.Impl.Loop.Strange;
+using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.Scheme;
@@ -28,6 +30,7 @@ using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Console;
+using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Exec;
 using DSIS.Utils;
 
@@ -63,8 +66,28 @@ namespace DSIS.SimpleRunner
 
       gr.AddEdge(a4, a5);
       gr.AddEdge(a4, new DumpGraphInfoAction());
-      
-      gr.AddEdge(a5, new DumpGraphComponentsInfoAction());
+
+      DumpGraphComponentsInfoAction a55 = new DumpGraphComponentsInfoAction();
+      gr.AddEdge(a5, a55);
+
+      IAction a6 = new UpdateContextAction(delegate(Context input, Context cx)
+                                             {
+                                               Keys.StrangeEntropyEvaluatorParams.Set(cx,
+                                                                                      new StrangeEntropyEvaluatorParams(
+                                                                                        StrangeEvaluatorType.
+                                                                                          WeightSearch_1,
+                                                                                        StrangeEvaluatorStrategy.SMART,
+                                                                                        EntropyLoopWeights.CONST));
+                                             });
+
+      IAction a7 = new StrangeEntropyAction();
+
+      gr.AddEdge(a6, a7);
+      gr.AddEdge(a4, a7);
+      gr.AddEdge(a5, a7);
+
+      gr.AddEdge(a7, new DumpEntropyValueAction());
+
 
       gr.Execite();
     }

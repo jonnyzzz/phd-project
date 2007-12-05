@@ -40,6 +40,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Actions\BuildSymbolicImageAction.cs" />
     <Compile Include="src\Actions\ChainRecurrenctSimbolicImageAction.cs" />
+    <Compile Include="src\Actions\Console\DumpEntropyValueAction.cs" />
     <Compile Include="src\Actions\Console\DumpGraphComponentsInfoAction.cs" />
     <Compile Include="src\Actions\Console\DumpGraphInfoAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />

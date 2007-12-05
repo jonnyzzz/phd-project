@@ -3,6 +3,8 @@ using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.Core.Util;
 using DSIS.Graph;
+using DSIS.Graph.Entropy.Impl.Entropy;
+using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Impl.Actions.Entropy;
 
@@ -35,8 +37,13 @@ namespace DSIS.Scheme.Impl
     public static Key<IGraphStrongComponents<Q>> GraphComponents<Q>() where Q : ICellCoordinate<Q>
     {
       return new Key<IGraphStrongComponents<Q>>("comps");
-    }    
+    }
 
-//    public static Key<StarangeEntropyActionParams> StrangeEntropyParamsKey = new Key<StarangeEntropyActionParams>("");
+    public static Key<StrangeEntropyEvaluatorParams> StrangeEntropyEvaluatorParams = new Key<StrangeEntropyEvaluatorParams>("");
+    
+    public static Key<IGraphMeasure<T>> GraphMeasure<T>() where T : ICellCoordinate<T>
+    {
+      return new Key<IGraphMeasure<T>>("measure");
+    }
   }
 }

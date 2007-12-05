@@ -1,5 +1,5 @@
+using System;
 using DSIS.Graph.Entropy;
-using DSIS.Graph.Entropy.Impl.Eigen;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
@@ -15,7 +15,8 @@ namespace DSIS.SimpleRunner
 
     protected override IEntropyEvaluator<Q> GetLoopEntropyEvaluator()
     {
-      return new EigenEntropyEvaluatorImpl<Q>(1e-5);
+      throw new NotImplementedException();
+//  return new EigenEntropyEvaluatorImpl<Q>(1e-5);
     }
   }
 }

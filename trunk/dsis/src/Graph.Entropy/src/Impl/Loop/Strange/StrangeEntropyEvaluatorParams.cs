@@ -4,17 +4,20 @@ using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
+using DSIS.Graph.Entropy.Impl.Loop.Weight;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
-  public class LoopBasedEntropyParams
+  public class StrangeEntropyEvaluatorParams
   {
     public readonly StrangeEvaluatorType EntropyType;
     public readonly StrangeEvaluatorStrategy Strategy;
+    public readonly IEntropyLoopWeightCallback LoopWeight;
 
-    public LoopBasedEntropyParams(StrangeEvaluatorType entropyType, StrangeEvaluatorStrategy strategy)
+    public StrangeEntropyEvaluatorParams(StrangeEvaluatorType entropyType, StrangeEvaluatorStrategy strategy, IEntropyLoopWeightCallback loopWeight)
     {
       EntropyType = entropyType;
+      LoopWeight = loopWeight;
       Strategy = strategy;
     }
 
@@ -46,5 +49,5 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
           throw new ArgumentException("Unexpected state " + Strategy);
       }
     }
-  }
+  }  
 }

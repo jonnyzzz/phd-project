@@ -1,4 +1,6 @@
+using System;
 using DSIS.Graph.Entropy;
+using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.SimpleRunner
@@ -9,7 +11,7 @@ namespace DSIS.SimpleRunner
   {
     protected override IEntropyEvaluator<Q> GetLoopEntropyEvaluator()
     {
-      return EntropyEvaluator<Q>.GetJVREvaluator();
+      throw new NotImplementedException();      
     }
 
     protected override string Suffix

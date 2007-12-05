@@ -1,3 +1,4 @@
+using System;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Entropy;
@@ -6,6 +7,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Weight;
 
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
+  [Obsolete]
   public abstract class EntropyEvaluatorLoopBase<T> : EntropyEvaluatorBase<T>
     where T : ICellCoordinate<T>
   {

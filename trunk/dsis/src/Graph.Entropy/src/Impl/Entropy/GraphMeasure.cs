@@ -29,16 +29,6 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
     #region IGraphMeasure<T> Members
 
-    public IEqualityComparer<T> Comparer
-    {
-      get { return myComparer; }
-    }
-
-    public double Norm
-    {
-      get { return myNorm; }
-    }
-
     public IEnumerable<Pair<PairBase<T>, double>> Measure
     {
       //todo: yield
@@ -68,7 +58,6 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
       }
       return myEntropy.Value;
     }
-
 
     public IGraphMeasure<T> Project(ICellCoordinateSystemProjector<T> projector)
     {

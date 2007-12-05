@@ -5,15 +5,15 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Entropy
 {
-  public interface IGraphMeasure<T> where T : ICellCoordinate<T>
+  public interface IGraphEntropy
   {
-    double Norm { get; }
-    IEqualityComparer<T> Comparer { get; }
-    IEnumerable<Pair<PairBase<T>, double>> Measure { get; }
-    
-    IDictionary<T, double> GetMeasureNodes();
-    double GetEntropy();
+    double GetEntropy();    
+  }
 
+  public interface IGraphMeasure<T> : IGraphEntropy where T : ICellCoordinate<T>
+  {
+    IEnumerable<Pair<PairBase<T>, double>> Measure { get; }    
+    IDictionary<T, double> GetMeasureNodes();
     IGraphMeasure<T> Project(ICellCoordinateSystemProjector<T> projector);
   }
 }

@@ -1,9 +1,11 @@
+using System;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Entropy.Impl.Entropy;
 
 namespace DSIS.Graph.Entropy.Impl
 {
+  [Obsolete]
   public abstract class EntropyEvaluatorBase<T> : IEntropyEvaluator<T>
     where T : ICellCoordinate<T>
   {

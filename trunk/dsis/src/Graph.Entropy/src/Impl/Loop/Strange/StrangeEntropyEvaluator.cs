@@ -1,29 +1,25 @@
+using System;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
-using DSIS.Graph.Entropy.Impl.Loop.Weight;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
-  public class StrangeEntropyEvaluator<T> : EntropyEvaluatorLoopBase<T> 
+  public class StrangeEntropyEvaluator<T>
     where T : ICellCoordinate<T>
-  {
-    private readonly StrangeEvaluatorType myType;
-    private readonly StrangeEvaluatorStrategy myStrategy;
-
-
-    public StrangeEntropyEvaluator(IEntropyLoopWeightCallback loopCallback, StrangeEvaluatorType type, StrangeEvaluatorStrategy strategy) : base(loopCallback)
+  {    
+    public IGraphMeasure<T> Measure(IGraph<T> graph, IGraphStrongComponents<T> comps, StrangeEntropyEvaluatorParams @params)
     {
-      myType = type;
-      myStrategy = strategy;
-    }
+      EntropyGraphWeightCallback<T> cb = new EntropyGraphWeightCallback<T>(@params.LoopWeight);
+      foreach (IStrongComponentInfo info in comps.Components)
+      {
+        ILoopIterator<T> it = @params.CreateIterator(cb, comps, info);
+        it.WidthSearch();
+      }
 
-    protected override ILoopIterator<T> CreateIterator(ILoopIteratorCallback<T> callback,
-                                                       IGraphStrongComponents<T> comps, IGraph<T> graph,
-                                                       IStrongComponentInfo info)
-    {
-      return new LoopBasedEntropyParams(myType, myStrategy).CreateIterator(callback, comps, info);
-    }
+      return cb.Entropy();
+    }    
   }
 }

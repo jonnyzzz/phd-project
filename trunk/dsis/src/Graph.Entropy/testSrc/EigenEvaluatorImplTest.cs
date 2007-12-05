@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
-using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Eigen;
-using DSIS.Graph.Entropy.Impl.Util;
+using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
@@ -30,73 +27,15 @@ namespace DSIS.Graph.Entropy
     private static void DoTest(double v, BuildGraph bg)
     {
       TarjanGraph<IntegerCoordinate> graph = DoBuildGraph(bg);
-      IGraphStrongComponents<IntegerCoordinate> components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
-
-      EntropyController controller = new EntropyController(graph, components);
-      new EntropyEvaluatorImpl().ComputeEntropy(controller, NullProgressInfo.INSTANCE);
-
-      Assert.AreEqual(v, controller.Result, EPS);
+      IGraphEntropy entropy = new EntropyEvaluatorImpl(graph).ComputeEntropy();
+      Assert.AreEqual(v, entropy.GetEntropy(), EPS);
     }
 
     private class EntropyEvaluatorImpl : EigenEntropyEvaluatorImpl<IntegerCoordinate>
     {
-      public EntropyEvaluatorImpl() : base(EPS)
+      public EntropyEvaluatorImpl(IGraph<IntegerCoordinate> graph) : base(EPS, graph)
       {
       }
-    }
-
-    private class EntropyController : IEntropyEvaluatorController<IntegerCoordinate>
-    {
-      private readonly IGraphStrongComponents<IntegerCoordinate> myComponents;
-      private readonly IGraph<IntegerCoordinate> myGraph;
-      private double? myResult;
-
-      public EntropyController(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components)
-      {
-        myGraph = graph;
-        myComponents = components;
-      }
-
-      public double Result
-      {
-        get { return myResult.Value; }
-      }
-
-      #region IEntropyEvaluatorController<IntegerCoordinate> Members
-
-      public bool SubdivideNext(ICellCoordinateSystem<IntegerCoordinate> system)
-      {
-        throw new NotImplementedException();
-      }
-
-      public void SetCoordinateSystem(ICellCoordinateSystem<IntegerCoordinate> system)
-      {
-      }
-
-      public void OnResult<Q>(double result, IDictionary<IntegerCoordinate, double> measure,
-                              IDictionary<Q, double> edges) where Q : PairBase<IntegerCoordinate>
-      {
-        Assert.AreEqual(null, myResult);
-        myResult = result;
-      }
-
-      public IGraph<IntegerCoordinate> Graph
-      {
-        get { return myGraph; }
-      }
-
-      public IGraphStrongComponents<IntegerCoordinate> Components
-      {
-        get { return myComponents; }
-      }
-
-      #endregion
-    }
-
-    [Test]
-    public void Test_01()
-    {
-      new EntropyEvaluatorImpl();
     }
 
     [Test]

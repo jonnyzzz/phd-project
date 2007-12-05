@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DSIS.Graph;
-using DSIS.Graph.Abstract;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Console
@@ -9,9 +8,8 @@ namespace DSIS.Scheme.Impl.Actions.Console
   {
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
-      return new ContextMissmatchCheck[] {
-        Create(Keys.Graph<Q>())
-      };
+      return Col(base.Check<T, Q>(system, ctx),
+                 Create(Keys.Graph<Q>()));
     }
 
     protected override void Apply<T, Q>(T system, Context input, Context output)

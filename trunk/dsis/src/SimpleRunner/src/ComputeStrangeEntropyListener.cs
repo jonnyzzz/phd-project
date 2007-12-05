@@ -1,5 +1,5 @@
+using System;
 using DSIS.Graph.Entropy;
-using DSIS.Graph.Entropy.Impl.Eigen;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.IntegerCoordinates;
@@ -29,7 +29,7 @@ namespace DSIS.SimpleRunner
 
     protected override IEntropyEvaluator<Q> GetLoopEntropyEvaluator()
     {
-      return new StrangeEntropyEvaluator<Q>(myCallback, myType, myStrategy);
+      throw new NotImplementedException();      
     }
   }
 }

@@ -39,7 +39,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\IEntropyEvaluator.cs" />
-    <Compile Include="src\EntropyEvaluator.cs" />
     <Compile Include="src\Impl\Entropy\EntropyProcessorAdapter.cs" />
     <Compile Include="src\Impl\Entropy\GraphMeasure.cs" />
     <Compile Include="src\Impl\Entropy\IGraphMeasure.cs" />
@@ -68,7 +67,7 @@
     <Compile Include="src\Impl\Loop\Search\GraphWeightSearchBase.cs" />
     <Compile Include="src\Impl\Loop\Search\IGraphWeightSearch.cs" />
     <Compile Include="src\Impl\Loop\Search\Limited\LimitedLoopSearch.cs" />
-    <Compile Include="src\Impl\Loop\Strange\LoopBasedEntropyParams.cs" />
+    <Compile Include="src\Impl\Loop\Strange\StrangeEntropyEvaluatorParams.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEntropyAllEdgesLoopsEvaluatorImpl.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEntropyAllNodesLoopsEvaluatorImpl.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEntropyEvaluator.cs" />
