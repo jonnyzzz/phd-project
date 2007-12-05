@@ -1,6 +1,7 @@
 using System.Xml;
+using DSIS.Scheme.Exec;
 
-namespace DSIS.Scheme.Impl.Exec
+namespace DSIS.Scheme.Exec
 {
   public class SimpleActionMatch<C> : IActionMatch
     where C : class, IAction, new()

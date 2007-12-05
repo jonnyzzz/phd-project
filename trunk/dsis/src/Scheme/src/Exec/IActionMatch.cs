@@ -1,6 +1,6 @@
 using System.Xml;
 
-namespace DSIS.Scheme.Impl.Exec
+namespace DSIS.Scheme.Exec
 {
   public interface IActionMatch
   {

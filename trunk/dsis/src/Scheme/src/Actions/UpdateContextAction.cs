@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;
 
-namespace DSIS.Scheme.Impl.Actions
+namespace DSIS.Scheme.Actions
 {
   public class UpdateContextAction : ActionBase
   {

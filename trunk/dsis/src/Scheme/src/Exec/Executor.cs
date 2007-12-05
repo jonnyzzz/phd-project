@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
+using DSIS.Scheme.Exec;
 using DSIS.Utils;
 
-namespace DSIS.Scheme.Impl.Exec
+namespace DSIS.Scheme.Exec
 {
   public class ActionGraph : IActionGraphBuilder
   {
@@ -17,10 +18,13 @@ namespace DSIS.Scheme.Impl.Exec
     private readonly Hashset<ActionWrapper> myActions = new Hashset<ActionWrapper>();
     private readonly Dictionary<ActionWrapper, Context> myPendingContexts = new Dictionary<ActionWrapper, Context>();
 
-    public void Execite()
+    public void Execute()
     {
       SetInitialActionsContext();
       while (DoAction()) ;
+
+      if (myActions.Count != myDoneActions.Count)
+        throw new ActionGraphException("Failed to evaluate graph. Loops or components?");
     }
 
     private void SetInitialActionsContext()
@@ -50,9 +54,10 @@ namespace DSIS.Scheme.Impl.Exec
             cx.AddAll(myPendingContexts[dep]);
           }
 
-          if (wrapper.Action.Compatible(cx).Count != 0)
+          ICollection<ContextMissmatch> compatible = wrapper.Action.Compatible(cx);
+          if (compatible.Count != 0)
           {
-            throw new Exception("Incompatible action!");
+            throw new ContextMissmatchException(compatible);
           }
 
           Context result = wrapper.Action.Apply(cx);

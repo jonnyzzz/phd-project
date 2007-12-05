@@ -1,4 +1,4 @@
-namespace DSIS.Scheme.Impl.Exec
+namespace DSIS.Scheme.Exec
 {
   public interface IActionGraphBuilder
   {

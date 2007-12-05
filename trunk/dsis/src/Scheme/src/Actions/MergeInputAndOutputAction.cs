@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
 
-namespace DSIS.Scheme.Impl
+namespace DSIS.Scheme.Actions
 {
   public class MergeInputAndOutputAction : ActionBase
   {

@@ -1,42 +1,27 @@
-using System.Collections.Generic;
-using System.Globalization;
-using System.Threading;
-using DSIS.Scheme.Ctx;
-using DSIS.Scheme.Impl.Exec;
-using DSIS.Utils;
+using DSIS.Scheme.Exec;
 using NUnit.Framework;
 
-namespace DSIS.Scheme.Impl
+namespace DSIS.Scheme.testSrc
 {
   [TestFixture]
-  public class ActionExecutorTest
+  public class ActionExecutorTest : ActionTestBase
   {
-    private string myData;
-
-    [SetUp]
-    public void SetUp()
-    {
-      Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
-      Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-      myData = "";      
-    }
-
     [Test]
     public void Test_01_empty()
     {
-      new ActionGraph().Execite();      
+      new ActionGraph().Execute();
     }
-    
+
     [Test]
     public void Test_02()
     {
       ActionGraph g = new ActionGraph();
       g.AddEdge(Create("a"), Create("b"));
-      g.Execite();
+      g.Execute();
 
-      Assert.AreEqual("|a||b|", myData);
+      AssertData("|a||b|");
     }
-    
+
     [Test]
     public void Test_03_4nodes()
     {
@@ -51,45 +36,71 @@ namespace DSIS.Scheme.Impl
       g.AddEdge(b, d);
       g.AddEdge(c, d);
 
-      g.Execite();
+      g.Execute();
 
-      Assert.AreEqual("|a||b||c||d|", myData);
+      AssertData("|a||b||c||d|");
     }
 
-    private IAction Create(string name)
+    [Test][ExpectedException(typeof(ActionGraphException))]
+    public void Test_04_Loop()
     {
-      return new Mock(name, this);
+      ActionGraph g = new ActionGraph();
+      IAction a = Create("a");
+      g.AddEdge(a,a);
+
+      g.Execute();
+
+      AssertData("");
     }
 
-    private class Mock : IAction
+    [Test]
+    [ExpectedException(typeof(ActionGraphException))]
+    public void Test_05_Loop()
     {
-      private readonly string myName;
-      private readonly ActionExecutorTest myInstance;
+      ActionGraph g = new ActionGraph();
+      IAction a = Create("a");
+      IAction b = Create("b");
+      g.AddEdge(a,b);
+      g.AddEdge(b,a);
 
-      public Mock(string name, ActionExecutorTest instance)
-      {
-        myName = name;
-        myInstance = instance;
-      }
+      g.Execute();
 
+      AssertData("");
+    }
 
-      public override string ToString()
-      {
-        return myName;
-      }
+    [Test]
+    [ExpectedException(typeof(ActionGraphException))]
+    public void Test_06_Loop()
+    {
+      ActionGraph g = new ActionGraph();
+      IAction a = Create("a");
+      IAction b = Create("b");
+      g.AddEdge(a,b);
+      g.AddEdge(b,b);
+      g.AddEdge(b,a);
+      g.AddEdge(a,a);
 
-      public ICollection<ContextMissmatch> Compatible(Context ctx)
-      {
-        return EmptyArray<ContextMissmatch>.Instance;
-      }
+      g.Execute();
 
-      public Context Apply(Context ctx)
-      {
-        myInstance.myData += "|" + myName + "|";
-        Context context = new Context();
-        context.Set(new Key<string>(myName), myName);
-        return context;
-      }
+      AssertData("");
+    }
+
+    [Test]
+    [ExpectedException(typeof(ActionGraphException))]
+    public void Test_07_Loop()
+    {
+      ActionGraph g = new ActionGraph();
+      IAction a = Create("a");
+      IAction b = Create("b");
+      g.AddEdge(Create("z"), a);
+      g.AddEdge(a,b);
+      g.AddEdge(b,b);
+      g.AddEdge(b,a);
+      g.AddEdge(a,a);
+
+      g.Execute();
+
+      AssertData("|z|");
     }
   }
 }

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using DSIS.Scheme.Impl.Actions;
+using DSIS.Scheme.Actions;
+using DSIS.Scheme.Exec;
 
-namespace DSIS.Scheme.Impl.Exec
+namespace DSIS.Scheme.Exec
 {
   public class XmlActionGraphParser
   {

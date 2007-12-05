@@ -26,12 +26,13 @@ using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.Scheme;
+using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
+using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Console;
 using DSIS.Scheme.Impl.Actions.Entropy;
-using DSIS.Scheme.Impl.Exec;
 using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
@@ -89,7 +90,7 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(a7, new DumpEntropyValueAction());
 
 
-      gr.Execite();
+      gr.Execute();
     }
 
     private static void Main2()

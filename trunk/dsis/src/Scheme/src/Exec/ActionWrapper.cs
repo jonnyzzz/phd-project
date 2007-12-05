@@ -1,6 +1,6 @@
 using System;
 
-namespace DSIS.Scheme.Impl.Exec
+namespace DSIS.Scheme.Exec
 {
   internal class ActionWrapper : IEquatable<ActionWrapper>
   {
