@@ -4,7 +4,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 
-namespace DSIS.Graph.Entropy.Impl.Loop
+namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
   public class StrangeEntropyEvaluator<T> : EntropyEvaluatorLoopBase<T> 
     where T : ICellCoordinate<T>

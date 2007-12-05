@@ -3,7 +3,7 @@ using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Entropy.Impl.Loop
+namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
   public class NonDuplicatedLoopIteratorCallback<T,C> : ILoopIteratorCallback<T> 
     where T : ICellCoordinate<T>

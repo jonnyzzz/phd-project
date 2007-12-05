@@ -3,12 +3,12 @@ using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 
-namespace DSIS.Graph.Entropy.Impl.Loop
+namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
-  internal class StrangeEntropyAllNodesLoopsEvaluatorImpl<T> : EntropyEvaluatorLoopBase<T>
+  internal class StrangeEntropyAllEdgesLoopsEvaluatorImpl<T> : EntropyEvaluatorLoopBase<T>
     where T : ICellCoordinate<T>
   {
-    public StrangeEntropyAllNodesLoopsEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
+    public StrangeEntropyAllEdgesLoopsEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
     {
     }
 
@@ -17,7 +17,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
                                                        IGraphStrongComponents<T> comps, IGraph<T> graph,
                                                        IStrongComponentInfo info)
     {
-      return new AllNodesOnALoopGraphSearch<T>(callback, comps, info);
+      return new AllEngesOnALoopGraphSearch<T>(callback, comps, info);
     }
   }
 }
