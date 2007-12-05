@@ -45,7 +45,7 @@ namespace DSIS.GnuplotDrawer
         }
       }
 
-      myWriter.Write(" '{1}' with points, '{0}' with lines ", lines, bases);
+      myWriter.Write(" '{1}' with dots, '{0}' with lines ", lines, bases);
     }
 
     public override void Dispose()
