@@ -1,8 +1,0 @@
-<Configuration>
-  <SolutionAnalysisSettings>
-    <SkipFilesAndFolders>
-      <Item>1621FA23-0B6C-4B2A-98B2-982DC0F26FE9/d:testSrc/f:BinTreePriorityQueueExTestBase.cs</Item>
-      <Item>1621FA23-0B6C-4B2A-98B2-982DC0F26FE9/d:testSrc/f:BinTreePriorityQueueExTestScenario.cs</Item>
-    </SkipFilesAndFolders>
-  </SolutionAnalysisSettings>
-</Configuration>

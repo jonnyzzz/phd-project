@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
+using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
@@ -17,21 +17,12 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
       mySearcher = searcher;
     }
 
-    private static Q GetFirst<Q>(IEnumerable<Q> t)
-    {
-      foreach (Q t1 in t)
-      {
-        return t1;
-      }
-      return default(Q);
-    }
-
     public override sealed void WidthSearch()
     {
       if (myComponent == null)
         return;
 
-      INode<T> first = GetFirst(myComponents.GetNodes(new IStrongComponentInfo[] {myComponent}));
+      INode<T> first = CollectionUtil.GetFirst(myComponents.GetNodes(new IStrongComponentInfo[] {myComponent}));
       if (first == null)
         return;
 
