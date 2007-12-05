@@ -25,8 +25,8 @@ namespace DSIS.SimpleRunner
 
       DefaultSystemSpace sp = new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });
 
-//      IAction system = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
-      IAction system = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
+      IAction system = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
+//      IAction system = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
       
       IAction a2 = new CreateCoordinateSystemAction();
       IAction a3 = new CreateInitialCellsAction();      
@@ -44,7 +44,7 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(a4, new DumpGraphInfoAction());
       gr.AddEdge(a5, new DumpGraphComponentsInfoAction());
 
-      IAction step = new LoopAction(10,new AgregateAction(
+      IAction step = new LoopAction(8,new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
           {
             SymbolicImageConstructionStep build = new SymbolicImageConstructionStep();
@@ -68,7 +68,7 @@ namespace DSIS.SimpleRunner
                                              {
                                                Keys.StrangeEntropyEvaluatorParams.Set(cx,
                                                                                       new StrangeEntropyEvaluatorParams(
-                                                                                        StrangeEvaluatorType.WeightSearch_2,
+                                                                                        StrangeEvaluatorType.WeightSearch,
                                                                                         StrangeEvaluatorStrategy.SMART,
                                                                                         EntropyLoopWeights.CONST));
                                              });

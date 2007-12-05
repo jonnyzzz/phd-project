@@ -119,6 +119,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
       }
     }
 
+
+    //todo: One instance per object!
     protected interface IVisitedCollection
     {
       bool Contains(SearchTreeNode node);
