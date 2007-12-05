@@ -13,11 +13,11 @@ namespace DSIS.Scheme.Impl.Exec
     {
       myMatches = new IActionMatch[]
         {
-          new SimpleActionMatch<BuildSymbolicImageAction>("build"),
+          /*new SimpleActionMatch<BuildSymbolicImageAction>("build"),
           new SimpleActionMatch<ChainRecurrenctSimbolicImageAction>("chain-recurrent-set"),
           new SimpleActionMatch<CreateCoordinateSystemAction>("create"),
           new SimpleActionMatch<CreateInitialCellsAction>("initial-cells"),
-          new SimpleActionMatch<MergeComponetsAction>("merge"),          
+          new SimpleActionMatch<MergeComponetsAction>("merge"),          */
         };
     }
 

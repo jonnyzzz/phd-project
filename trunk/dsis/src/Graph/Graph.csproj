@@ -56,21 +56,18 @@
     <Compile Include="src\Abstract\TarjanStrongComponentImpl.cs" />
     <Compile Include="src\Adapter\GraphCellImageBuilder.cs" />
     <Compile Include="src\NodeEqualityComparer.cs" />
-    <Compile Include="src\Util\ConvertEnumerator.cs" />
     <Compile Include="src\INode.cs" />
     <Compile Include="src\IStrongComponentInfo.cs" />
     <Compile Include="src\IStrongComponentInfoConnectivity.cs" />
     <Compile Include="src\Abstract\StrongComponentInfoManager.cs" />
     <Compile Include="src\Abstract\TarjanGraph.cs" />
     <Compile Include="src\IGraphStrongComponents.cs" />
-    <Compile Include="src\Util\MultiDictionary.cs" />
     <Compile Include="src\Abstract\SimpleGraph.cs" />
     <Compile Include="src\Abstract\Node.cs" />
     <Compile Include="src\Abstract\StrongComponentGraph.cs" />
     <Compile Include="src\Abstract\StrongComponentInfo.cs" />
     <Compile Include="src\Abstract\StrongComponentNode.cs" />
     <Compile Include="src\IGraph.cs" />
-    <Compile Include="src\Util\MultiHashDictionary.cs" />
     <Compile Include="testSrc\GenericsTest.cs" />
     <Compile Include="testSrc\GraphNodeHashListTest.cs" />
     <Compile Include="testSrc\GraphPerformanceTest.cs" />
@@ -115,6 +112,9 @@
       <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
       <Name>Persistance</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Util\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

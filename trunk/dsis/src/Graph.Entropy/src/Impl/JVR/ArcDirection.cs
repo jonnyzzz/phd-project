@@ -1,5 +1,4 @@
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Util;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR

@@ -47,20 +47,10 @@
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
     <Compile Include="src\Actions\Entropy\StrangeEntropyAction.cs" />
     <Compile Include="src\Actions\SetMethod.cs" />
-    <Compile Include="src\Actions\StartAction.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />
-    <Compile Include="src\Actions\UpdateContextAction.cs" />
-    <Compile Include="src\Exec\ActionWrapper.cs" />
-    <Compile Include="src\Exec\Executor.cs" />
-    <Compile Include="src\Exec\IActionGraphBuilder.cs" />
-    <Compile Include="src\Exec\IActionMatch.cs" />
-    <Compile Include="src\Exec\SimpleActionMatch.cs" />
-    <Compile Include="src\Exec\XmlActionGraphParser.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />
     <Compile Include="src\Keys.cs" />
     <Compile Include="src\Actions\MergeComponetsAction.cs" />
-    <Compile Include="src\MergeInputAndOutputAction.cs" />
-    <Compile Include="testSrc\ActionExecutorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
@@ -115,6 +105,9 @@
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
       <Name>Scheme</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="testSrc\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

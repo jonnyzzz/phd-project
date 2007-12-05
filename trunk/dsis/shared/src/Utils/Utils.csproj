@@ -63,6 +63,9 @@
     <Compile Include="src\BinTreePriorityQueueEx.cs" />
     <Compile Include="src\BinTreePriorityQueueExDebug.cs" />
     <Compile Include="src\CollectionUtil.cs" />
+    <Compile Include="src\ConvertEnumerator.cs" />
+    <Compile Include="src\MultiDictionary.cs" />
+    <Compile Include="src\MultiHashDictionary.cs" />
     <Compile Include="src\UpcastedCollection.cs" />
     <Compile Include="src\UpcastedDictionary.cs" />
     <Compile Include="src\UpcastedEnumerable.cs" />

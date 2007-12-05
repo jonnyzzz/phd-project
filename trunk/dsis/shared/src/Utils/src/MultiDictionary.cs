@@ -1,15 +1,18 @@
 using System.Collections.Generic;
-using DSIS.Utils;
 
-namespace DSIS.Graph.Util
+namespace DSIS.Utils
 {
-  public class MultiHashDictionary<TK, TV> : Dictionary<TK, Hashset<TV>>
+  public class MultiDictionary<TK, TV> : Dictionary<TK, List<TV>>
   {
-    public new Hashset<TV> this[TK k]
+    public MultiDictionary(IEqualityComparer<TK> comparer) : base(comparer)
+    {
+    }
+
+    public new List<TV> this[TK k]
     {
       get
       {
-        Hashset<TV> tvs = base[k];
+        List<TV> tvs = base[k];
         if (tvs.Count == 0)
         {
           Remove(k);
@@ -25,25 +28,25 @@ namespace DSIS.Graph.Util
       }
     }
 
-    public void Add(TK k, TV v)
+    public List<TV> GetValue(TK k)
     {
-      Hashset<TV> l;
+      List<TV> list;
+      return TryGetValue(k, out list) ? list : new List<TV>();
+    }
+
+    public void AddValue(TK k, TV v)
+    {
+      List<TV> l;
       if (TryGetValue(k, out l))
       {
         l.Add(v);
       }
       else
       {
-        l = new Hashset<TV>();
+        l = new List<TV>(2);
         l.Add(v);
-        this[k] = l;
+        base[k] = l;
       }
-    }
-
-    public bool ContainsPair(TK key, TV value)
-    {
-      Hashset<TV> set;
-      return TryGetValue(key, out set) && set.Contains(value);
     }
   }
 }

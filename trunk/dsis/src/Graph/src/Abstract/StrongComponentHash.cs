@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Util;
-using DSIS.Graph.Util;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
@@ -10,12 +8,12 @@ namespace DSIS.Graph.Abstract
   {
     public delegate int GenerationDelegate(StrongComponentInfo2 info);
 
-    private MultiHashDictionary<int, StrongComponentInfo2> myInfos =
+    private readonly MultiHashDictionary<int, StrongComponentInfo2> myInfos =
       new MultiHashDictionary<int, StrongComponentInfo2>();
 
-    private OrderedList<int> myGenerations = new OrderedList<int>();
-    private Dictionary<int, long> myGenerationEvents;
-    private Dictionary<int, long> myProcessedEvents = new Dictionary<int, long>();
+    private readonly OrderedList<int> myGenerations = new OrderedList<int>();
+    private readonly Dictionary<int, long> myGenerationEvents;
+    private readonly Dictionary<int, long> myProcessedEvents = new Dictionary<int, long>();
 
     public StrongComponentHash(Dictionary<int, long> generationEvents)
     {

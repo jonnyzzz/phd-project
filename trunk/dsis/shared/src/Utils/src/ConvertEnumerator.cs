@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace DSIS.Graph.Util
+namespace DSIS.Utils
 {
   public class ConvertEnumerator<TFrom, TTo> :
     IEnumerable<TTo>, IEnumerator<TTo>
