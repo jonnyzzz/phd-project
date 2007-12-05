@@ -1,4 +1,4 @@
-namespace DSIS.Graph.Entropy.Impl.Loop
+namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
   public enum StrangeEvaluatorType
   {

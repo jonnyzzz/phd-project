@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
-using DSIS.Graph.Entropy.Impl.Loop;
+using DSIS.Graph.Entropy.Impl.Loop.Iterators;
+using DSIS.Graph.Entropy.Impl.Loop.Search;
 
-namespace DSIS.Graph.Entropy.Impl.Loop
+namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
   public class LoopIteratorFirst<T> : LoopIteratorBase<T>
     where T : ICellCoordinate<T>
@@ -11,7 +12,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
     private readonly IGraphWeightSearch<T> mySearcher;
 
     public LoopIteratorFirst(ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components,
-                                IStrongComponentInfo component, IGraphWeightSearch<T> searcher) : base(callback, components, component)
+                             IStrongComponentInfo component, IGraphWeightSearch<T> searcher) : base(callback, components, component)
     {
       mySearcher = searcher;
     }

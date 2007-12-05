@@ -1,9 +1,9 @@
 using System;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
-using DSIS.Graph.Entropy.Impl.Loop;
+using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 
-namespace DSIS.Graph.Entropy.Impl.Loop
+namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
   public abstract class LoopIteratorBase<T> : ContextBase<T>, ILoopIterator<T>
     where T : ICellCoordinate<T>

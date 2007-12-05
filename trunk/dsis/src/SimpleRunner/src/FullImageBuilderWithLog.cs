@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Xsl;
 using DSIS.Graph;
-using DSIS.Graph.Entropy.Impl.Loop;
+using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;

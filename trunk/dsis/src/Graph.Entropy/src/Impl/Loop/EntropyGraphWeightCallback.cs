@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
+using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Utils;

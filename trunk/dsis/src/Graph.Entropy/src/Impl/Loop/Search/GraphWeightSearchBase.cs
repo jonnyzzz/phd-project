@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Loop.Iterators;
+using DSIS.Graph.Entropy.Impl.Loop.Search;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Entropy.Impl.Loop
+namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
   public abstract class GraphWeightSearchBase<T> : IGraphWeightSearch<T> where T : ICellCoordinate<T>
   {

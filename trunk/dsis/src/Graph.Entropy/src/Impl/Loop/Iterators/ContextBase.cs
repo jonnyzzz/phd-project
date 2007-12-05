@@ -1,7 +1,7 @@
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
 
-namespace DSIS.Graph.Entropy.Impl.Loop
+namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
   public abstract class ContextBase<T> where T : ICellCoordinate<T>
   {
