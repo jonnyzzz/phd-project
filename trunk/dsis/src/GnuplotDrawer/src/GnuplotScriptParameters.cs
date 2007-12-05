@@ -15,4 +15,15 @@ namespace DSIS.GnuplotDrawer
       Title = title;
     }
   }
+
+  public class GnuplotScriptParameters3d : GnuplotScriptParameters
+  {
+    public float RotX = 60;
+    public float RotZ = 30;
+    public double? XYPane = null;
+
+    public GnuplotScriptParameters3d(string outputFile, string title) : base(outputFile, title)
+    {
+    }
+  }
 }
