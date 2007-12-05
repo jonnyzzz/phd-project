@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
@@ -25,6 +24,12 @@ namespace DSIS.Scheme.Exec
 
       if (myActions.Count != myDoneActions.Count)
         throw new ActionGraphException("Failed to evaluate graph. Loops or components?");
+    }
+
+    public void Clear()
+    {
+      myDoneActions.Clear();
+      myPendingContexts.Clear();
     }
 
     private void SetInitialActionsContext()

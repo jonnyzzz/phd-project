@@ -11,6 +11,8 @@ namespace DSIS.Core.System
   public interface ISystemInfoBase
   {
     Type[] SupportedFunctionTypes { get; }
+    
+    [Obsolete("Only Dimension is allowed")]
     ISystemSpace SystemSpace { get; }
     string PresentableName { get; }
   }

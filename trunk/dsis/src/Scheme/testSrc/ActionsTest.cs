@@ -12,14 +12,15 @@ namespace DSIS.Scheme.testSrc
     {
       ActionGraph g = new ActionGraph();
 
-      AgregateAction a = new AgregateAction();
-      IActionGraphPartBuilder builder = a.Builder;
-
-      builder.AddEdge(builder.Start, Create("in_a"));
-      IAction in_c = Create("in_c");
-      builder.AddEdge(Create("in_b"), in_c);
-      builder.AddEdge(in_c, builder.End);
-
+      AgregateAction a = new AgregateAction(
+        delegate(IActionGraphPartBuilder bld)
+          {
+            bld.AddEdge(bld.Start, Create("in_a"));
+            IAction in_c = Create("in_c");
+            bld.AddEdge(Create("in_b"), in_c);
+            bld.AddEdge(in_c, bld.End);      
+          });
+      
       g.AddEdge(Create("a"), a);
       g.AddEdge(a, Create("b"));
 

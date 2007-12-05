@@ -30,7 +30,9 @@ namespace DSIS.Scheme.Actions
           throw new ContextMissmatchException(check);
         }
 
-        ctx = myAction.Apply(ctx);
+        Context newCtx = myAction.Apply(ctx);
+        newCtx.AddAllNew(ctx);
+        ctx = newCtx;
       }
       return ctx;      
     }

@@ -33,15 +33,9 @@ namespace DSIS.Graph.Morse
       set { myValue = value; }
     }
 
-
     public override string ToString()
     {
       return string.Format("{0} {1:F}", Node, NodeCost);
-    }
-
-    public override bool Equals(object obj)
-    {
-      throw new NotImplementedException();
     }
   }
 }

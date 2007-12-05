@@ -21,7 +21,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       string bs = myPath + ToSafePath("/" + GetType().Name + "/image_");
 
       string path = bs + ext;
-      string dir = Path.GetDirectoryName(path);
+      string dir = System.IO.Path.GetDirectoryName(path);
       if (!Directory.Exists(dir))
         Directory.CreateDirectory(dir);
       return path;

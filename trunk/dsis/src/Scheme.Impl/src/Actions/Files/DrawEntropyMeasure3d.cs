@@ -39,9 +39,14 @@ namespace DSIS.Scheme.Impl.Actions.Files
       
       string outputFile = info.CreateFileName("measure3d_segments.png");
 
-      GnuplotScriptParameters ps = new GnuplotScriptParameters(outputFile,
+      GnuplotScriptParameters3d ps = new GnuplotScriptParameters3d(outputFile,
                                                                string.Format("Entropy = {0}",
                                                                              measure.GetEntropy().ToString("F6")));
+      ps.ForcePoints = true;
+      ps.RotX = 75;
+      ps.RotZ = 30;
+      ps.XYPane = 0;
+
       ps.ForcePoints = true;
       IGnuplotPhaseScriptGen gen = new GnuplotEntropy3dScriptGen(
                                                              info.CreateFileName("measure3d_segments.gnuplot"),

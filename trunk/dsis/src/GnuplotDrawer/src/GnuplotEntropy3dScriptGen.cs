@@ -3,14 +3,13 @@ using DSIS.Core.Visualization;
 
 namespace DSIS.GnuplotDrawer
 {
-  public class GnuplotEntropy3dScriptGen : PngWriterBase, IGnuplotPhaseScriptGen
+  public class GnuplotEntropy3dScriptGen : PngWriter3dBase, IGnuplotPhaseScriptGen
   {
     private bool myIsFirstFile = true;
 
     public GnuplotEntropy3dScriptGen(string filename, GnuplotScriptParameters @params)
       : base(filename, @params)
-    {      
-      myWriter.Write("splot ");
+    {            
     }
 
     public void AddPointsFile(GnuplotPointsFileWriter file)

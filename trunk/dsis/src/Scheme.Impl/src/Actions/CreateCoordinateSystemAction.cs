@@ -10,18 +10,14 @@ namespace DSIS.Scheme.Impl.Actions
   {
     public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
-      return
-        CheckContext(ctx, ContextMissmatchCheck.Create(Keys.SystemSpaceKey, ""),
-                     ContextMissmatchCheck.Create(Keys.SubdivisionKey, "")
-          );
+      return CheckContext(ctx, Create(Keys.SystemSpaceKey));
     }
 
     protected override void Apply(Context ctx, Context result)
     {
       ISystemSpace info = ctx.Get(Keys.SystemSpaceKey);
-      long[] subd = ctx.Get(Keys.SubdivisionKey);
       IIntegerCoordinateFactory factory = GeneratedIntegerCoordinateSystemManager.Instance.CreateSystem(info.Dimension);
-      IIntegerCoordinateSystemInfo sys = factory.Create(info, subd);
+      IIntegerCoordinateSystemInfo sys = factory.Create(info, info.InitialSubdivision);
 
       result.Set(Keys.IntegerCoordinateSystemInfo, sys);
     }

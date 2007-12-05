@@ -38,8 +38,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ActionBase.cs" />
     <Compile Include="src\Actions\AgregateAction.cs" />
     <Compile Include="src\Actions\LoopAction.cs" />
+    <Compile Include="src\Actions\ProxyAction.cs" />
     <Compile Include="src\Exec\ContextMissmatchException.cs" />
     <Compile Include="src\Exec\IActionGraphPartBuilder.cs" />
     <Compile Include="src\Actions\MergeInputAndOutputAction.cs" />

@@ -21,18 +21,14 @@ using DSIS.Function.Predefined.Lorentz;
 using DSIS.Function.Predefined.Rossel;
 using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
-using DSIS.Graph.Entropy.Impl.Loop.Strange;
-using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
-using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
-using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
+using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
-using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.Utils;
 
@@ -47,32 +43,47 @@ namespace DSIS.SimpleRunner
     {
       ActionGraph gr = new ActionGraph();
 
-      IAction a1 = new UpdateContextAction(delegate(Context input, Context cx)
-                                                         {
-                                                           Keys.SubdivisionKey.Set(cx, new long[] {3,3});
-                                                           DefaultSystemSpace sp = new DefaultSystemSpace(2, new double[]{-10,-10}, new double[]{10,10}, new long[]{3,3});
-                                                           Keys.SystemSpaceKey.Set(cx, sp);
-                                                           Keys.SystemInfoKey.Set(cx, new HenonFunctionSystemInfoDecorator(sp, 1.4));
-                                                         });
-      IAction a2 = new CreateCoordinateSystemAction();
-      IAction a3 = new CreateInitialCellsAction();
+      DefaultSystemSpace sp = new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });
 
+      IAction system = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
+      
+      IAction a2 = new CreateCoordinateSystemAction();
+      IAction a3 = new CreateInitialCellsAction();      
       IAction a4 = new BuildSymbolicImageAction();
       IAction a5 = new ChainRecurrenctSimbolicImageAction();
+      IAction method = new SetMethod(new BoxMethodSettings(0.1), new long[] { 2, 2 });
 
-      gr.AddEdge(a1, a2);
+      gr.AddEdge(system, a2);
       gr.AddEdge(a2, a3);
       gr.AddEdge(a3, a4);
-      gr.AddEdge(a1, a4);
-      gr.AddEdge(new SetMethod(new BoxMethodSettings(0.1), new long[]{2,2}), a4);
-
+      gr.AddEdge(system, a4);
+      
+      gr.AddEdge(method, a4);
       gr.AddEdge(a4, a5);
       gr.AddEdge(a4, new DumpGraphInfoAction());
+      gr.AddEdge(a5, new DumpGraphComponentsInfoAction());
 
-      DumpGraphComponentsInfoAction a55 = new DumpGraphComponentsInfoAction();
-      gr.AddEdge(a5, a55);
+      IAction step = new LoopAction(13,new AgregateAction(
+        delegate(IActionGraphPartBuilder bld)
+          {
+            SymbolicImageConstructionStep build = new SymbolicImageConstructionStep();
+            bld.AddEdge(build, new DumpGraphInfoAction());
+            bld.AddEdge(build, new DumpGraphComponentsInfoAction());
+            bld.AddEdge(bld.Start, build);
+            bld.AddEdge(build, bld.End);
+          }));
 
-      IAction a6 = new UpdateContextAction(delegate(Context input, Context cx)
+      gr.AddEdge(a5, step);
+      gr.AddEdge(system, step);     
+      gr.AddEdge(method, step);
+
+      IAction wf = new WorkingFolderAction();
+
+      IAction draw = new DrawChainRecurrentAction();
+      gr.AddEdge(step, draw);
+      gr.AddEdge(wf, draw);
+ 
+      /*IAction a6 = new UpdateContextAction(delegate(Context input, Context cx)
                                              {
                                                Keys.StrangeEntropyEvaluatorParams.Set(cx,
                                                                                       new StrangeEntropyEvaluatorParams(
@@ -85,18 +96,16 @@ namespace DSIS.SimpleRunner
       IAction a7 = new StrangeEntropyAction();
 
       gr.AddEdge(a6, a7);
-      gr.AddEdge(a4, a7);
-      gr.AddEdge(a5, a7);
-
+      gr.AddEdge(step, a7);      
       gr.AddEdge(a7, new DumpEntropyValueAction());
 
-      IAction wf = new WorkingFolderAction();
+      
       IAction drawEntropy = new DrawEntropyMeasure3dAction();
 
       gr.AddEdge(wf, drawEntropy);
       gr.AddEdge(a7, drawEntropy);
-      gr.AddEdge(a4, drawEntropy);
-
+      gr.AddEdge(step, drawEntropy);
+      gr.AddEdge(wf, new DumpWorkingFolderAction());*/
       gr.Execute();
     }
 

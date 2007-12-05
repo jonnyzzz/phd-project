@@ -19,7 +19,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       if (prePath.StartsWith("file:\\"))
         prePath = prePath.Substring("file:\\".Length);
 
-      string homePath = Path.GetFullPath(Path.Combine(prePath, @"..\..\..\..\"));
+      string homePath = Path.GetFullPath(Path.Combine(prePath, @"..\"));
       string workPath = Path.Combine(Path.GetFullPath(Path.Combine(homePath, @"results")),
                                 DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss"));
 

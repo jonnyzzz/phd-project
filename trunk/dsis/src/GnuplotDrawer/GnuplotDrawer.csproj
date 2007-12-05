@@ -49,6 +49,7 @@
     <Compile Include="src\IGnuplotScriptGen.cs" />
     <Compile Include="src\LinesScriptGen.cs" />
     <Compile Include="src\MergedGnuplotScriptGen.cs" />
+    <Compile Include="src\PngWriter3dBase.cs" />
     <Compile Include="src\PngWriterBase.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -43,5 +43,14 @@ namespace DSIS.Scheme.Ctx
         myContext[pair.Key] = pair.Value;
       }
     }
+    
+    public void AddAllNew(Context ctx)
+    {
+      foreach (KeyValuePair<KeyWrapper, object> pair in ctx.myContext)
+      {
+        if (!myContext.ContainsKey(pair.Key))
+          myContext[pair.Key] = pair.Value;
+      }
+    }
   }
 }

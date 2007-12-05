@@ -12,24 +12,37 @@ namespace DSIS.Scheme.Actions
     private readonly ActionGraph myGraph = new ActionGraph();
     private readonly StartAction myStart = new StartAction();
 
+    public delegate void ConstructGraph(IActionGraphPartBuilder bld);
+
+    protected AgregateAction()
+    {
+    }
+
+    public AgregateAction(ConstructGraph construct)
+    {
+      construct(Builder);
+    }
+
     #region IAction Members
 
     public ICollection<ContextMissmatch> Compatible(Context ctx)
     {
-      return myStart.Compatible(ctx);
+      return myStart.CompatibleExternal(ctx);
     }
 
     public Context Apply(Context ctx)
     {
+      myStart.SetContext(ctx);
       myGraph.Execute();
       Context result = myEnd.Result;
       if (result == null)
         throw new Exception("End is unreacheble");
 
+      myGraph.Clear();
       return result;
     }
 
-    public IActionGraphPartBuilder Builder
+    protected IActionGraphPartBuilder Builder
     {
       get { return this; }
     }
@@ -92,10 +105,16 @@ namespace DSIS.Scheme.Actions
     private class StartAction : IAction
     {
       private readonly List<IAction> myChidren = new List<IAction>();
+      private Context myContext;
 
       #region IAction Members
 
       public ICollection<ContextMissmatch> Compatible(Context ctx)
+      {        
+        return EmptyArray<ContextMissmatch>.Instance;
+      }
+
+      public ICollection<ContextMissmatch> CompatibleExternal(Context ctx)
       {
         List<ContextMissmatch> list = new List<ContextMissmatch>();
         foreach (IAction action in myChidren)
@@ -105,9 +124,9 @@ namespace DSIS.Scheme.Actions
         return list;
       }
 
-      public Context Apply(Context ctx)
+      public Context Apply(Context _)
       {
-        return ctx;
+        return myContext;
       }
 
       #endregion
@@ -115,6 +134,11 @@ namespace DSIS.Scheme.Actions
       public void AddChild(IAction child)
       {
         myChidren.Add(child);
+      }
+
+      public void SetContext(Context cx)
+      {
+        myContext = cx;
       }
     }
 
