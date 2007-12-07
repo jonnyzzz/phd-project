@@ -40,7 +40,9 @@ namespace DSIS.GnuplotDrawer
         throw new ArgumentException("Unable to locate pgnuplot.exe");
 
       pi.Arguments = script.Filename;
-
+      pi.CreateNoWindow = true;
+      pi.WindowStyle = ProcessWindowStyle.Hidden;
+      
       Process ps = Process.Start(pi);
       ps.WaitForExit();
     }

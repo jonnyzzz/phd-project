@@ -12,13 +12,14 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
     private readonly IGraphWeightSearch<T> mySearch;
     private readonly Hashset<INode<T>> myNodes = new Hashset<INode<T>>(EqualityComparerFactory<INode<T>>.GetComparer());
 
-    public LoopIteratorSmart(ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components, IStrongComponentInfo component, IGraphWeightSearch<T> search) : base(callback, components, component)
+    public LoopIteratorSmart(ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components, IStrongComponentInfo component, IGraphWeightSearch<T> search) : 
+      base(callback, components, component)
     {
       mySearch = search;
     }
 
     public override void WidthSearch()
-    {
+    {      
       foreach (INode<T> node in myComponents.GetNodes(myComponentInfos))
       {
         if (myNodes.Contains(node))

@@ -55,6 +55,7 @@
     <Compile Include="src\Abstract\TarjanNodeStack.cs" />
     <Compile Include="src\Abstract\TarjanStrongComponentImpl.cs" />
     <Compile Include="src\Adapter\GraphCellImageBuilder.cs" />
+    <Compile Include="src\CachedGraphStrongComponents.cs" />
     <Compile Include="src\NodeEqualityComparer.cs" />
     <Compile Include="src\INode.cs" />
     <Compile Include="src\IStrongComponentInfo.cs" />

@@ -4,21 +4,17 @@ using DSIS.Graph.Entropy.Impl.Loop.Search;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
-  public class GraphWeightSearch2<T> : GraphWeightSearchBase<T> where T : ICellCoordinate<T>
+  public class GraphWeightSearch2<T> : GraphWeightSearchBase<T, GraphWeightSearch2<T>.VisitedCollection> 
+    where T : ICellCoordinate<T>
   {
     public GraphWeightSearch2(IGraphStrongComponents<T> components,
                               IStrongComponentInfo component) : base(components, component)
     {
     }
 
-    protected override IVisitedCollection CreateVisitedCollection()
+    public sealed class VisitedCollection : VisitedCollectionBase<T>, IVisitedCollection<T>
     {
-      return new VisitedCollection();
-    }
-
-    protected class VisitedCollection : VisitedCollectionBase
-    {
-      public override SearchTreeNode CreateQueuedNodeIfNoLoop(SearchTreeNode parent, INode<T> to)
+      public override SearchTreeNode<T> CreateQueuedNodeIfNoLoop(SearchTreeNode<T> parent, INode<T> to)
       {
         return parent.Child(to);
       }

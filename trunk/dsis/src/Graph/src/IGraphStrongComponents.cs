@@ -20,5 +20,7 @@ namespace DSIS.Graph
     CountEnumerable<TCoordinate> GetCoordinates(ICollection<IStrongComponentInfo> components);
 
     IStrongComponentInfo GetNodeComponent(INode<TCoordinate> node);
+
+    IGraph<TCoordinate> AsGraph(IEnumerable<IStrongComponentInfo> components);
   }
 }

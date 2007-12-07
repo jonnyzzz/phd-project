@@ -4,24 +4,20 @@ using DSIS.Graph.Entropy.Impl.Loop.Search;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
-  public class GraphWeightSearch<T> : GraphWeightSearchBase<T> where T : ICellCoordinate<T>
+  public class GraphWeightSearch<T> : GraphWeightSearchBase<T, GraphWeightSearch<T>.VisitedCollection> 
+    where T : ICellCoordinate<T>
   {
     public GraphWeightSearch(IGraphStrongComponents<T> components,
                              IStrongComponentInfo component) : base(components, component)
     {
     }
 
-    protected override IVisitedCollection CreateVisitedCollection()
+    public sealed class VisitedCollection : VisitedCollectionBase<T>, IVisitedCollection<T>
     {
-      return new VisitedCollection();
-    }
-
-    private class VisitedCollection : VisitedCollectionBase
-    {
-      public override SearchTreeNode CreateQueuedNodeIfNoLoop(SearchTreeNode parent, INode<T> to)
+      public override SearchTreeNode<T> CreateQueuedNodeIfNoLoop(SearchTreeNode<T> parent, INode<T> to)
       {
-        return new SearchTreeNode(null, to);
+        return new SearchTreeNode<T>(null, to);
       }
     }
-  }
+  }     
 }

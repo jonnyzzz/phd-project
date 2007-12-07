@@ -4,8 +4,14 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
+  internal interface INodeInternal<TCell> 
+    where TCell : ICellCoordinate<TCell>
+  {
+    IEnumerable<INode<TCell>> Edges{ get; }
+  } 
+
   [EqualityComparer(typeof(NodeEqualityComparer<,>))]
-  public abstract class Node<TInh, TCell> : INode<TCell>
+  public abstract class Node<TInh, TCell> : INode<TCell>, INodeInternal<TCell>
     where TCell : ICellCoordinate<TCell>
     where TInh : Node<TInh, TCell>
   {
@@ -49,6 +55,11 @@ namespace DSIS.Graph.Abstract
     internal IEnumerable<INode<TCell>> Edges
     {
       get { return myEdges.ValuesUpcasted; }
+    }
+
+    IEnumerable<INode<TCell>> INodeInternal<TCell>.Edges
+    {
+      get { return Edges; }
     }
 
     internal IEnumerable<TInh> EdgesInternal

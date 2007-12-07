@@ -65,8 +65,13 @@
     <Compile Include="src\Impl\Loop\Search\GraphWeightSearch.cs" />
     <Compile Include="src\Impl\Loop\Search\GraphWeightSearch2.cs" />
     <Compile Include="src\Impl\Loop\Search\GraphWeightSearchBase.cs" />
+    <Compile Include="src\Impl\Loop\Search\GraphWeightSearchFiltering.cs" />
+    <Compile Include="src\Impl\Loop\Search\GraphWeightSearchLimited.cs" />
     <Compile Include="src\Impl\Loop\Search\IGraphWeightSearch.cs" />
+    <Compile Include="src\Impl\Loop\Search\IVisitedCollection.cs" />
     <Compile Include="src\Impl\Loop\Search\Limited\LimitedLoopSearch.cs" />
+    <Compile Include="src\Impl\Loop\Search\SearchTreeNode.cs" />
+    <Compile Include="src\Impl\Loop\Search\VisitedCollectionBase.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEntropyEvaluatorParams.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEntropyAllEdgesLoopsEvaluatorImpl.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEntropyAllNodesLoopsEvaluatorImpl.cs" />

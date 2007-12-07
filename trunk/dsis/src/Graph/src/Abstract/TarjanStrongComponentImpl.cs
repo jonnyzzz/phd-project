@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -9,6 +8,8 @@ namespace DSIS.Graph.Abstract
   internal class TarjanStrongComponentImpl<TCell> : IGraphStrongComponents<TCell>
     where TCell : ICellCoordinate<TCell>
   {
+    private static readonly IFilter ALL_FILTER = new AllFilter();
+    private static readonly IFilter DROP = new DropAllFilter();
     private readonly TarjanGraph<TCell> myGraph;
     private readonly TarjanComponentInfoManager myManager;
 
@@ -43,10 +44,10 @@ namespace DSIS.Graph.Abstract
     public IEnumerable<INode<TCell>> GetEdgesWithFilteredEdges(INode<TCell> node,
                                                                ICollection<IStrongComponentInfo> componentIds)
     {
-      Predicate<uint> ids = GetIdsHashset(componentIds);
+      IFilter ids = GetIdsHashset(componentIds);
       foreach (TarjanNode<TCell> edge in myGraph.GetEdges(node))
       {
-        if (ids(edge.ComponentId))
+        if (ids.Accept(edge.ComponentId))
           yield return edge;
       }
     }
@@ -56,13 +57,36 @@ namespace DSIS.Graph.Abstract
       return myManager.FindByNode((TarjanNode<TCell>) node);
     }
 
-    public IEnumerable<INode<TCell>> GetNodes(ICollection<IStrongComponentInfo> componentIds)
+    public IGraph<TCell> AsGraph(IEnumerable<IStrongComponentInfo> components)
     {
-      Predicate<uint> ids = GetIdsHashset(componentIds);
+      IFilter filter = GetIdsHashset(new List<IStrongComponentInfo>(components));
+
+      TarjanGraph<TCell> graph = new TarjanGraph<TCell>(myGraph.CoordinateSystem);
 
       foreach (TarjanNode<TCell> node in myGraph.NodesInternal)
       {
-        if (ids(node.ComponentId))
+        if (filter.Accept(node.ComponentId))
+        {
+          INode<TCell> newFrom = graph.AddNode(node.Coordinate);
+          foreach (TarjanNode<TCell> tarjanNode in node.EdgesInternal)
+          {
+            if (filter.Accept(tarjanNode.ComponentId))
+            {
+              graph.AddEdgeToNode(newFrom, graph.AddNode(tarjanNode.Coordinate));
+            }
+          }
+        }
+      }
+      return graph;
+    }
+
+    public IEnumerable<INode<TCell>> GetNodes(ICollection<IStrongComponentInfo> componentIds)
+    {
+      IFilter ids = GetIdsHashset(componentIds);
+
+      foreach (TarjanNode<TCell> node in myGraph.NodesInternal)
+      {
+        if (ids.Accept(node.ComponentId))
           yield return node;
       }
     }
@@ -77,22 +101,20 @@ namespace DSIS.Graph.Abstract
       }
     }
 
-    private static Predicate<uint> GetIdsHashset(ICollection<IStrongComponentInfo> componentIds)
+    private IFilter GetIdsHashset(ICollection<IStrongComponentInfo> componentIds)
     {
       int count = componentIds.Count;
       if (count == 0)
       {
-        return delegate { return false; };
+        return DROP;
       }
       else if (count == 1)
       {
-        uint cid = 0;
-        foreach (TarjanComponentInfo id in componentIds)
-        {
-          cid = id.ComponentId;
-          break;
-        }
-        return delegate(uint v) { return v == cid; };
+        return new ExactFilter(((TarjanComponentInfo) CollectionUtil.GetFirst(componentIds)).ComponentId);
+      }
+      else if (count == myManager.Count)
+      {
+        return ALL_FILTER;
       }
       else if (count > 10)
       {
@@ -101,7 +123,7 @@ namespace DSIS.Graph.Abstract
         {
           ids.Add(id.ComponentId);
         }
-        return ids.Contains;
+        return new HashSetFilter(ids);
       }
       else
       {
@@ -111,14 +133,126 @@ namespace DSIS.Graph.Abstract
         {
           data[cnt++] = id.ComponentId;
         }
-        return delegate(uint v)
-                 {
-                   for (int i = 0; i < cnt; i++)
-                     if (data[i] == v)
-                       return true;
-                   return false;
-                 };
+        return new ArrayFilter(data);
       }
     }
+
+    #region Nested type: AllFilter
+
+    private class AllFilter : IFilter
+    {
+      #region IFilter Members
+
+      public bool Accept(uint value)
+      {
+        return value > 0;
+      }
+
+      #endregion
+    }
+
+    #endregion
+
+    #region Nested type: ArrayFilter
+
+    private class ArrayFilter : IFilter
+    {
+      private readonly uint[] myData;
+
+      public ArrayFilter(uint[] data)
+      {
+        myData = data;
+      }
+
+      #region IFilter Members
+
+      public bool Accept(uint value)
+      {
+        if (value <= 0)
+          return false;
+
+        for (int i = 0; i < myData.Length; i++)
+        {
+          if (value == myData[i])
+            return true;
+        }
+        return false;
+      }
+
+      #endregion
+    }
+
+    #endregion
+
+    #region Nested type: DropAllFilter
+
+    private class DropAllFilter : IFilter
+    {
+      #region IFilter Members
+
+      public bool Accept(uint value)
+      {
+        return false;
+      }
+
+      #endregion
+    }
+
+    #endregion
+
+    #region Nested type: ExactFilter
+
+    private class ExactFilter : IFilter
+    {
+      private readonly uint myValue;
+
+      public ExactFilter(uint value)
+      {
+        myValue = value;
+      }
+
+      #region IFilter Members
+
+      public bool Accept(uint value)
+      {
+        return value == myValue;
+      }
+
+      #endregion
+    }
+
+    #endregion
+
+    #region Nested type: HashSetFilter
+
+    private class HashSetFilter : IFilter
+    {
+      private readonly Hashset<uint> mySet;
+
+      public HashSetFilter(Hashset<uint> set)
+      {
+        mySet = set;
+      }
+
+      #region IFilter Members
+
+      public bool Accept(uint value)
+      {
+        return mySet.Contains(value);
+      }
+
+      #endregion
+    }
+
+    #endregion
+
+    #region Nested type: IFilter
+
+    private interface IFilter
+    {
+      bool Accept(uint value);
+    }
+
+    #endregion
   }
 }

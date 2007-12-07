@@ -62,6 +62,11 @@ namespace DSIS.Graph.Abstract
       return GetStrongComponentInfo((StrongComponentNode<TCell>) node);
     }
 
+    public IGraph<TCell> AsGraph(IEnumerable<IStrongComponentInfo> components)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public IEnumerable<INode<TCell>> GetNodes(ICollection<IStrongComponentInfo> componentIds)
     {
       return myComponents.FilterNodes(componentIds, NodesInternal);

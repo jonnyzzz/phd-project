@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Henon;
@@ -38,11 +39,19 @@ namespace DSIS.SimpleRunner
         StrangeEvaluatorType.WeightSearch_1,
         StrangeEvaluatorStrategy.FIRST,
         EntropyLoopWeights.CONST);
+      StrangeEntropyEvaluatorParams entropySmartF = new StrangeEntropyEvaluatorParams(
+        StrangeEvaluatorType.WeightSearch_Filtering,
+        StrangeEvaluatorStrategy.SMART,
+        EntropyLoopWeights.CONST);
+      StrangeEntropyEvaluatorParams entropySmartL = new StrangeEntropyEvaluatorParams(
+        StrangeEvaluatorType.WeightSearch_Limited,
+        StrangeEvaluatorStrategy.SMART,
+        EntropyLoopWeights.CONST);
 
-      StrangeEntropyEvaluatorParams[] entropys = {entropyFirst, entropySmart};
-      IAction[] system = {systemHenon, systemIked, systemIkedaCut};
+      StrangeEntropyEvaluatorParams[] entropys = {entropyFirst, entropySmartL, entropySmart};
+      IAction[] system = {systemHenon/*, systemIked, systemIkedaCut*/};
 
-      for (int steps = 1; steps < 2; steps++)
+      for (int steps = 12; steps <= 12; steps++)
       {
         foreach (IAction action in system)
         {
@@ -56,7 +65,7 @@ namespace DSIS.SimpleRunner
     }
 
     private static void ComputeEntropy(IAction wfBase, int steps, IAction system,
-                                       StrangeEntropyEvaluatorParams[] entropyMethod)
+                                       IEnumerable<StrangeEntropyEvaluatorParams> entropyMethod)
     {
       IAction a2 = new CreateCoordinateSystemAction();
       IAction a3 = new CreateInitialCellsAction();

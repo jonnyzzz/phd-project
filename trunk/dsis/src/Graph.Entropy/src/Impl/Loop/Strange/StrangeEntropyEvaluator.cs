@@ -11,6 +11,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
   {    
     public IGraphMeasure<T> Measure(IGraph<T> graph, IGraphStrongComponents<T> comps, StrangeEntropyEvaluatorParams @params)
     {
+      comps = new CachedGraphStrongComponents<T>(comps);
+
       EntropyGraphWeightCallback<T> cb = new EntropyGraphWeightCallback<T>(@params.LoopWeight);
       foreach (IStrongComponentInfo info in comps.Components)
       {
