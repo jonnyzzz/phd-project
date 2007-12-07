@@ -1,19 +1,21 @@
 using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
-using DSIS.Scheme.Impl.Actions.Files;
 
-namespace DSIS.Scheme.Impl.Actions.Console
+namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public class DumpWorkingFolderAction : ActionBase
+  public abstract class PrefixWorkingFolderAction : ActionBase
   {
     public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
       return CheckContext(ctx, Create(FileKeys.WorkingFolderKey));
     }
 
+    protected abstract string Prefix(Context ctx);
+
     protected override void Apply(Context ctx, Context result)
     {
-      Logger.Instance(ctx).Write("Working folder is {0}", FileKeys.WorkingFolderKey.Get(ctx).Path);
+      WorkingFolderInfo info = FileKeys.WorkingFolderKey.Get(ctx);
+      FileKeys.WorkingFolderKey.Set(result, info.Prefix(Prefix(ctx)));
     }
   }
 }

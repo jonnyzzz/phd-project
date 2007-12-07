@@ -8,12 +8,9 @@ namespace DSIS.Scheme.Impl.Actions.Files
 {
   public class WorkingFolderAction : ActionBase
   {
-    public override ICollection<ContextMissmatch> Compatible(Context ctx)
-    {
-      return EmptyArray<ContextMissmatch>.Instance;
-    }
+    private readonly string myPath;
 
-    protected override void Apply(Context ctx, Context result)
+    public WorkingFolderAction()
     {
       string prePath = Path.GetDirectoryName(GetType().Assembly.CodeBase);
       if (prePath.StartsWith("file:\\"))
@@ -21,14 +18,24 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       string homePath = Path.GetFullPath(Path.Combine(prePath, @"..\"));
       string workPath = Path.Combine(Path.GetFullPath(Path.Combine(homePath, @"results")),
-                                DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss"));
+                                     DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss"));
 
       if (Directory.Exists(workPath))
         Directory.Delete(workPath);
 
       Directory.CreateDirectory(workPath);
 
-      FileKeys.WorkingFolderKey.Set(result, new WorkingFolderInfo(workPath));
+      myPath = workPath;
+    }
+
+    public override ICollection<ContextMissmatch> Compatible(Context ctx)
+    {
+      return EmptyArray<ContextMissmatch>.Instance;
+    }
+
+    protected override void Apply(Context ctx, Context result)
+    {
+      FileKeys.WorkingFolderKey.Set(result, new WorkingFolderInfo(myPath));
     }
   }
 }

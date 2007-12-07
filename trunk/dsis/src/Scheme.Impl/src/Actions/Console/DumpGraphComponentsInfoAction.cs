@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Text;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.Scheme.Ctx;
+using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.Scheme.Impl.Actions.Console
 {
@@ -18,13 +20,14 @@ namespace DSIS.Scheme.Impl.Actions.Console
     {
       IGraphStrongComponents<Q> gr = Keys.GraphComponents<Q>().Get(input);
 
-      System.Console.Out.WriteLine("Components: {0}", gr.ComponentCount);
-      System.Console.Out.Write("Component's Nodes: ");
+      StringBuilder sb = new StringBuilder();
+      sb.AppendFormat("Components: {0}", gr.ComponentCount).AppendLine();
+      sb.Append("Component's Nodes: ");
       foreach (IStrongComponentInfo info in gr.Components)
       {
-        System.Console.Out.Write("{0}, ", info.NodesCount);        
+        sb.AppendFormat("{0}, ", info.NodesCount);        
       }
-      System.Console.Out.WriteLine();
+      Logger.Instance(input).Write(sb.ToString());
     }
   }
 }

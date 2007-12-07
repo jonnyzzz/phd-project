@@ -21,6 +21,11 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
       Strategy = strategy;
     }
 
+    public string PresentableName
+    {
+      get { return string.Format("{0}:{1}:{2}", EntropyType, Strategy, LoopWeight.Name); }
+    }
+
     private IGraphWeightSearch<Q> CreateSearch<Q>(IGraphStrongComponents<Q> comps, IStrongComponentInfo info)
       where Q : ICellCoordinate<Q>
     {

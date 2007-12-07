@@ -1,3 +1,4 @@
+using System;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Henon;
@@ -6,9 +7,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
-using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
-using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
@@ -21,82 +20,142 @@ namespace DSIS.SimpleRunner
   {
     public static void Main()
     {
-      ActionGraph gr = new ActionGraph();
+      DefaultSystemSpace sp =
+        new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
+      DefaultSystemSpace spIkedaCutted =
+        new DefaultSystemSpace(2, new double[] { -1.1, -1.5 }, new double[] { 3.5, 1.8 }, new long[] { 3, 3 });
+      IAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
+      IAction systemIked = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
+      IAction systemIkedaCut = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(spIkedaCutted, "Ikeda Cut"), spIkedaCutted);
 
-      DefaultSystemSpace sp = new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });
+      IAction wfBase = new WorkingFolderAction();
 
-      IAction system = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
-//      IAction system = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
-      
+      StrangeEntropyEvaluatorParams entropySmart = new StrangeEntropyEvaluatorParams(
+        StrangeEvaluatorType.WeightSearch_1,
+        StrangeEvaluatorStrategy.SMART,
+        EntropyLoopWeights.CONST);
+      StrangeEntropyEvaluatorParams entropyFirst = new StrangeEntropyEvaluatorParams(
+        StrangeEvaluatorType.WeightSearch_1,
+        StrangeEvaluatorStrategy.FIRST,
+        EntropyLoopWeights.CONST);
+
+      StrangeEntropyEvaluatorParams[] entropys = {entropyFirst, entropySmart};
+      IAction[] system = {systemHenon, systemIked, systemIkedaCut};
+
+      for (int steps = 1; steps < 2; steps++)
+      {
+        foreach (IAction action in system)
+        {
+          ComputeEntropy(wfBase, steps, action, entropys);
+        }        
+
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+      }
+    }
+
+    private static void ComputeEntropy(IAction wfBase, int steps, IAction system,
+                                       StrangeEntropyEvaluatorParams[] entropyMethod)
+    {
       IAction a2 = new CreateCoordinateSystemAction();
-      IAction a3 = new CreateInitialCellsAction();      
+      IAction a3 = new CreateInitialCellsAction();
       IAction a4 = new BuildSymbolicImageAction();
       IAction a5 = new ChainRecurrenctSimbolicImageAction();
-      IAction method = new SetMethod(new BoxMethodSettings(0.1), new long[] { 2, 2 });
+      IAction method = new SetMethod(new BoxMethodSettings(0.1), new long[] {2, 2});
+
+      ActionGraph gr = new ActionGraph();
+
+      SystemWorkingFolderAction sysWf = new SystemWorkingFolderAction();
+      CustomPrefixWorkingFolderAction wf = new CustomPrefixWorkingFolderAction(steps.ToString());
+      IAction logger = new LoggerAction();
+
+      gr.AddEdge(system, wfBase);
+      gr.AddEdge(system, sysWf);
+      gr.AddEdge(wfBase, sysWf);
+      gr.AddEdge(sysWf, wf);
+      gr.AddEdge(wf, logger);
 
       gr.AddEdge(system, a2);
       gr.AddEdge(a2, a3);
       gr.AddEdge(a3, a4);
       gr.AddEdge(system, a4);
-      
+
       gr.AddEdge(method, a4);
       gr.AddEdge(a4, a5);
+
       gr.AddEdge(a4, new DumpGraphInfoAction());
       gr.AddEdge(a5, new DumpGraphComponentsInfoAction());
 
-      IAction step = new LoopAction(8,new AgregateAction(
-        delegate(IActionGraphPartBuilder bld)
-          {
-            SymbolicImageConstructionStep build = new SymbolicImageConstructionStep();
-            bld.AddEdge(build, new DumpGraphInfoAction());
-            bld.AddEdge(build, new DumpGraphComponentsInfoAction());
-            bld.AddEdge(bld.Start, build);
-            bld.AddEdge(build, bld.End);
-          }));
+      IAction step = new LoopAction(steps, new AgregateAction(
+                                             delegate(IActionGraphPartBuilder bld)
+                                               {
+                                                 SymbolicImageConstructionStep build =
+                                                   new SymbolicImageConstructionStep();
+                                                 bld.AddEdge(bld.Start, build);
+                                                 bld.AddEdge(build, bld.End);
+                                                 ParallelAction b = new ParallelAction(new DumpGraphInfoAction(),
+                                                                                       new DumpGraphComponentsInfoAction
+                                                                                         ());
+                                                 ProxyAction p = new ProxyAction();
+                                                 bld.AddEdge(build, b);
+                                                 bld.AddEdge(bld.Start, p);
+                                                 bld.AddEdge(p, b);
+                                               }));
 
+      gr.AddEdge(wf, step);
+      gr.AddEdge(logger, step);
       gr.AddEdge(a5, step);
-      gr.AddEdge(system, step);     
+      gr.AddEdge(system, step);
       gr.AddEdge(method, step);
-
-      IAction wf = new WorkingFolderAction();
 
       IAction draw = new DrawChainRecurrentAction();
       gr.AddEdge(step, draw);
       gr.AddEdge(wf, draw);
- 
-      IAction a6 = new UpdateContextAction(delegate(Context input, Context cx)
-                                             {
-                                               Keys.StrangeEntropyEvaluatorParams.Set(cx,
-                                                                                      new StrangeEntropyEvaluatorParams(
-                                                                                        StrangeEvaluatorType.WeightSearch,
-                                                                                        StrangeEvaluatorStrategy.SMART,
-                                                                                        EntropyLoopWeights.CONST));
-                                             });
+      gr.AddEdge(logger, draw);
 
-      IAction a7 = new StrangeEntropyAction();
+      foreach (StrangeEntropyEvaluatorParams evaluatorParams in entropyMethod)
+      {
+        IAction customWf = new CustomPrefixWorkingFolderAction(evaluatorParams.PresentableName);
 
-      gr.AddEdge(a6, a7);
-      gr.AddEdge(step, a7);      
-      gr.AddEdge(a7, new DumpEntropyValueAction());
+        IAction entropyParams = new SetStrangeEntropyParamsAction(evaluatorParams);
 
-      
-      IAction drawEntropy = new DrawEntropyMeasure3dAction();
-      IAction drawEntropy3 = new DrawEntropyMeasure3dWithBaseAction();
-      IAction drawEntropy2 = new DrawEntropyMeasureColorMapAction();
+        IAction entropy = DrawEntropyAction();
+        gr.AddEdge(step, entropy);
+        gr.AddEdge(wf, customWf);
+        gr.AddEdge(customWf, entropy);
+        gr.AddEdge(logger, entropy);
+        gr.AddEdge(entropyParams, entropy);
+      }
 
-      gr.AddEdge(wf, drawEntropy);
-      gr.AddEdge(wf, drawEntropy2);      
-      gr.AddEdge(wf, drawEntropy3);      
-      gr.AddEdge(a7, drawEntropy);
-      gr.AddEdge(a7, drawEntropy2);
-      gr.AddEdge(a7, drawEntropy3);
-      gr.AddEdge(step, drawEntropy);
-      gr.AddEdge(step, drawEntropy2);
-      gr.AddEdge(step, drawEntropy3);
-
-      gr.AddEdge(wf, new DumpWorkingFolderAction());
       gr.Execute();
     }
 
+
+    private static IAction DrawEntropyAction()
+    {
+      return new AgregateAction(
+        delegate(IActionGraphPartBuilder bld)
+          {
+            IAction a7 = new StrangeEntropyAction();
+
+            bld.AddEdge(bld.Start, a7);
+
+            IAction drawEntropy =
+              new ProxiedChainAction(
+                new DumpEntropyParamsAction(),
+                new DumpEntropyValueAction(),
+                new DrawEntropyMeasure3dAction(),
+                new DrawEntropyMeasure3dWithBaseAction(),
+                new DrawEntropyMeasureColorMapAction()
+                );
+            ProxyAction pa = new ProxyAction();
+            bld.AddEdge(bld.Start, pa);
+            bld.AddEdge(pa, drawEntropy);
+            bld.AddEdge(a7, drawEntropy);
+
+            bld.AddEdge(drawEntropy, bld.End);
+          });
+    }
   }
 }

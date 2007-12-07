@@ -59,7 +59,6 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       GnuplotDrawer.GnuplotDrawer drw = new GnuplotDrawer.GnuplotDrawer();
       drw.DrawImage(gen);
-
     }
   }
 }

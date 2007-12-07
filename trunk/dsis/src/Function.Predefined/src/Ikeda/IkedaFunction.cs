@@ -21,13 +21,21 @@ namespace DSIS.Function.Predefined.Ikeda
 
   public class IkedaFunctionSystemInfoDecorator : DoubleSystemInfoBase
   {
+    private readonly string myName;
+
     public IkedaFunctionSystemInfoDecorator(ISystemSpace systemSpace) : base(systemSpace)
     {
+      myName = "Ikeda";
+    }
+
+    public IkedaFunctionSystemInfoDecorator(ISystemSpace systemSpace, string name) : base(systemSpace)
+    {
+      myName = name;
     }
 
     public override string PresentableName
     {
-      get { return "Ikeda"; }
+      get { return myName; }
     }
 
     protected override IFunction<double> GetFunctionInternal()

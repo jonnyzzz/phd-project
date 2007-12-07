@@ -42,6 +42,7 @@ namespace DSIS.Scheme
       return dta;      
     }
 
+
     protected abstract void Apply(Context ctx, Context result);
   }
 }

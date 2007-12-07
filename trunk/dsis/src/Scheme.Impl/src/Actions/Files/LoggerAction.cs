@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
-using DSIS.Scheme.Impl.Actions.Files;
 
-namespace DSIS.Scheme.Impl.Actions.Console
+namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public class DumpWorkingFolderAction : ActionBase
+  public class LoggerAction : ActionBase
   {
     public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
@@ -13,7 +12,7 @@ namespace DSIS.Scheme.Impl.Actions.Console
 
     protected override void Apply(Context ctx, Context result)
     {
-      Logger.Instance(ctx).Write("Working folder is {0}", FileKeys.WorkingFolderKey.Get(ctx).Path);
+      FileKeys.LoggerKey.Set(result, new Logger(FileKeys.WorkingFolderKey.Get(ctx)));
     }
   }
 }

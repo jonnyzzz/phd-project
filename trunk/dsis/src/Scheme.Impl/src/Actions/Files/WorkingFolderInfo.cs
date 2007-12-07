@@ -11,9 +11,14 @@ namespace DSIS.Scheme.Impl.Actions.Files
       myPath = path;
     }
 
-    private static string ToSafePath(string s)
+    public WorkingFolderInfo Prefix(string pref)
     {
-      return s.Replace("`", "_").Replace(",", ".").Replace(" ", "_");
+      return new WorkingFolderInfo(System.IO.Path.Combine(myPath, ToSafePath(pref)));
+    }
+
+    private static string ToSafePath(string s)
+    {      
+      return s.Replace("`", "_").Replace(",", ".").Replace(" ", "_").Replace("=", "_").Replace(":","_");
     }
 
     private string MakeFileName(string ext)
@@ -32,14 +37,14 @@ namespace DSIS.Scheme.Impl.Actions.Files
       string path = MakeFileName(ext);
       if (!File.Exists(path))
       {
-        return path;
+        return System.IO.Path.GetFullPath(path);
       }
 
       for (int c = 0; ; c++)
       {
         path = MakeFileName(c + ext);
         if (!File.Exists(path))
-          return path;
+          return System.IO.Path.GetFullPath(path);
       }
     }
 

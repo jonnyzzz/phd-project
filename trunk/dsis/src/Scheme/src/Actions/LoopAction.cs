@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
@@ -11,6 +12,8 @@ namespace DSIS.Scheme.Actions
 
     public LoopAction(int count, IAction action)
     {
+      if (count <= 0)
+        throw new ArgumentException("Count should be >= 1", "count");
       myCount = count;
       myAction = action;
     }
