@@ -3,7 +3,6 @@ using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Scheme.Ctx;
-using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {

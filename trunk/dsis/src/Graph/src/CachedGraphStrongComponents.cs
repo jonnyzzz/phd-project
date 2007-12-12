@@ -73,6 +73,11 @@ namespace DSIS.Graph
       return myOriginal.AsGraph(components);
     }
 
+    public IGraphWithStrongComponent<T> AsGraphWithStrongComponents(IEnumerable<IStrongComponentInfo> components)
+    {
+      return myOriginal.AsGraphWithStrongComponents(components);
+    }
+
     public IEnumerable<IStrongComponentInfo> Components
     {
       get { return myOriginal.Components; }

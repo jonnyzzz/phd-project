@@ -59,6 +59,11 @@ namespace DSIS.Graph.Abstract
 
     public IGraph<TCell> AsGraph(IEnumerable<IStrongComponentInfo> components)
     {
+      return AsGraphWithStrongComponents(components);
+    }
+
+    public IGraphWithStrongComponent<TCell> AsGraphWithStrongComponents(IEnumerable<IStrongComponentInfo> components)
+    {
       IFilter filter = GetIdsHashset(new List<IStrongComponentInfo>(components));
 
       TarjanGraph<TCell> graph = new TarjanGraph<TCell>(myGraph.CoordinateSystem);

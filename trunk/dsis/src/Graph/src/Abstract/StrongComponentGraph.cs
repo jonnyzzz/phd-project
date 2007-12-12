@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
@@ -64,7 +65,12 @@ namespace DSIS.Graph.Abstract
 
     public IGraph<TCell> AsGraph(IEnumerable<IStrongComponentInfo> components)
     {
-      throw new System.NotImplementedException();
+      throw new NotImplementedException();
+    }
+
+    public IGraphWithStrongComponent<TCell> AsGraphWithStrongComponents(IEnumerable<IStrongComponentInfo> components)
+    {
+      throw new NotImplementedException();
     }
 
     public IEnumerable<INode<TCell>> GetNodes(ICollection<IStrongComponentInfo> componentIds)

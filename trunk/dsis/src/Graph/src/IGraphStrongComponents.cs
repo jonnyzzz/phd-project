@@ -22,5 +22,6 @@ namespace DSIS.Graph
     IStrongComponentInfo GetNodeComponent(INode<TCoordinate> node);
 
     IGraph<TCoordinate> AsGraph(IEnumerable<IStrongComponentInfo> components);
+    IGraphWithStrongComponent<TCoordinate> AsGraphWithStrongComponents(IEnumerable<IStrongComponentInfo> components);
   }
 }

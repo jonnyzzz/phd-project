@@ -66,6 +66,7 @@
     <Compile Include="src\Actions\Files\WorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\WorkingFolderInfo.cs" />
     <Compile Include="src\Actions\Files\Xml\XmlLogger.cs" />
+    <Compile Include="src\Actions\ForeachStrongComponentAction.cs" />
     <Compile Include="src\Actions\SetMethod.cs" />
     <Compile Include="src\Actions\SystemInfoAction.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />

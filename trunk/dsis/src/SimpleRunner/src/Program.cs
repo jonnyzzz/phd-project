@@ -141,6 +141,7 @@ namespace DSIS.SimpleRunner
     }
 
 
+
     private static IAction DrawEntropyAction()
     {
       return new AgregateAction(
