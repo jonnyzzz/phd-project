@@ -20,7 +20,7 @@ namespace DSIS.SimpleRunner
   public class Program
   {
     public static void Main()
-    {
+    {      
       DefaultSystemSpace sp =
         new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
       DefaultSystemSpace spIkedaCutted =
@@ -48,20 +48,25 @@ namespace DSIS.SimpleRunner
         StrangeEvaluatorStrategy.SMART,
         EntropyLoopWeights.CONST);
 
-      StrangeEntropyEvaluatorParams[] entropys = {entropyFirst/*, entropySmartL, entropySmart*/};
+      StrangeEntropyEvaluatorParams[] entropys = {/*entropyFirst, entropySmartL, */entropySmart};
       IAction[] system = {systemHenon/*, systemIked, systemIkedaCut*/};
 
-      for (int steps = 12; steps <= 12; steps++)
+      for (int steps = 12; steps <= 20; steps++)
       {
         foreach (IAction action in system)
         {
           ComputeEntropy(wfBase, steps, action, entropys);
-        }        
+        }
 
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
-        GC.Collect();
+        Collect();
       }
+    }
+
+    private static void Collect()
+    {
+      GC.Collect();
+      GC.WaitForPendingFinalizers();
+      GC.Collect();
     }
 
     private static void ComputeEntropy(IAction wfBase, int steps, IAction system,
@@ -110,6 +115,8 @@ namespace DSIS.SimpleRunner
                                                  bld.AddEdge(build, b);
                                                  bld.AddEdge(bld.Start, p);
                                                  bld.AddEdge(p, b);
+                                                 
+                                                 Collect();
                                                }));
 
       gr.AddEdge(wf, step);
