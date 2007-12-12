@@ -69,6 +69,7 @@
     <Compile Include="src\Abstract\StrongComponentInfo.cs" />
     <Compile Include="src\Abstract\StrongComponentNode.cs" />
     <Compile Include="src\IGraph.cs" />
+    <Compile Include="src\OneComponentsGraphAdapter.cs" />
     <Compile Include="testSrc\GenericsTest.cs" />
     <Compile Include="testSrc\GraphNodeHashListTest.cs" />
     <Compile Include="testSrc\GraphPerformanceTest.cs" />

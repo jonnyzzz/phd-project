@@ -25,19 +25,20 @@ namespace DSIS.Scheme.Impl.Actions
     {
       IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
       foreach (IStrongComponentInfo info in comps.Components)
-      {        
+      {
         ActionGraph ag = new ActionGraph();
-        UpdateContextAction ac = new UpdateContextAction(delegate(Context _, Context ctx)
-                                                           {
-                                                             IGraphWithStrongComponent<Q> graph = comps.AsGraphWithStrongComponents(new IStrongComponentInfo[] { info });                                                             
-                                                             ctx.AddAll(input);
-                                                             Keys.Graph<Q>().Set(ctx, graph);
-                                                           });
+        UpdateContextAction ac = new UpdateContextAction(
+          delegate(Context _, Context ctx)
+            {
+              IGraphStrongComponents<Q> oneComponent =
+                new OneComponentsGraphAdapter<Q>(comps, info);
 
-        UpdateContextAction save = new UpdateContextAction(delegate(Context @in, Context _)
-                                                             {
-                                                               output.AddAll(@in);
-                                                             });
+              ctx.AddAll(input);
+              Keys.GraphComponents<Q>().Set(ctx, oneComponent);
+            });
+
+        UpdateContextAction save = new UpdateContextAction(
+          delegate(Context @in, Context _) { output.AddAll(@in); });
 
         ag.AddEdge(ac, myBody);
         ag.AddEdge(myBody, save);

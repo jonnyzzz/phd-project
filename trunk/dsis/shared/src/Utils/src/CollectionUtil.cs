@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 
 namespace DSIS.Utils
@@ -27,6 +28,19 @@ namespace DSIS.Utils
         list.Add(t2);
       }
       return list.AsReadOnly();
+    }
+
+    public static bool Contains<T>(IEnumerable<T> collection, T check)
+    {
+      IEqualityComparer<T> comparer = EqualityComparerFactory<T>.GetComparer();
+      foreach (T item in collection)
+      {
+        if (comparer.Equals(item, check))
+        {
+          return true;
+        }
+      }
+      return false;
     }
 
   }
