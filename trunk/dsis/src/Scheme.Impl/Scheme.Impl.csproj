@@ -50,6 +50,7 @@
     <Compile Include="src\Actions\Console\DumpWorkingFolderAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
+    <Compile Include="src\Actions\Entropy\JVRMeasureAction.cs" />
     <Compile Include="src\Actions\Entropy\SetStrangeEntropyParamsAction.cs" />
     <Compile Include="src\Actions\Entropy\StrangeEntropyAction.cs" />
     <Compile Include="src\Actions\Files\CustomPrefixWorkingFolderAction.cs" />

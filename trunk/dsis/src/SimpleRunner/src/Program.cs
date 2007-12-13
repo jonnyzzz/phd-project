@@ -51,7 +51,7 @@ namespace DSIS.SimpleRunner
       StrangeEntropyEvaluatorParams[] entropys = {/*entropyFirst, entropySmartL, */entropySmart};
       IAction[] system = {systemHenon/*, systemIked, systemIkedaCut*/};
 
-      for (int steps = 12; steps <= 20; steps++)
+      for (int steps = 8; steps <= 20; steps++)
       {
         foreach (IAction action in system)
         {
@@ -152,7 +152,11 @@ namespace DSIS.SimpleRunner
       return new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
           {
-            IAction a7 = new StrangeEntropyAction();
+//            IAction a7 = new StrangeEntropyAction();
+            IAction a7 = new JVRMeasureAction();
+
+            bld.AddEdge(bld.Start, new DumpGraphInfoAction());
+            bld.AddEdge(bld.Start, new DumpGraphComponentsInfoAction());
 
             bld.AddEdge(bld.Start, a7);
 

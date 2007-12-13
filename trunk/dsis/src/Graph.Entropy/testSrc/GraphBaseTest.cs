@@ -69,7 +69,7 @@ namespace DSIS.Graph.Entropy
 
     protected static TarjanGraph<IntegerCoordinate> DoBuildGraph(BuildGraph bg)
     {
-      MockSystemSpace mss = new MockSystemSpace(1, 0, 1, 1000);
+      MockSystemSpace mss = new MockSystemSpace(1, 0, 1, 100000);
       IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(mss);
       TarjanGraph<IntegerCoordinate> graph = new TarjanGraph<IntegerCoordinate>(ics);
       bg(graph);

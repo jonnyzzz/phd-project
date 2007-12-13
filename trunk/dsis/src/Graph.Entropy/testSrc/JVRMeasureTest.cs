@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.JVR;
-using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
@@ -15,6 +13,15 @@ namespace DSIS.Graph.Entropy
   [TestFixture]
   public class JVRMeasureTest : GraphBaseTest
   {
+    private static bool DEBUG = false;
+
+    [SetUp]
+    public override void SetUp()
+    {
+      base.SetUp();
+      DEBUG = false;
+    }
+
     [Test]
     public void Test_F_One()
     {
@@ -79,6 +86,40 @@ namespace DSIS.Graph.Entropy
 
       DoTest("fni", 3.3219280948873489, ns.ToArray());
     }
+
+    [Test]
+    public void Test_OneLoop()
+    {
+      const int N = 2000;
+      for(int i=1000; i<N; i++)
+      {
+        List<Node> ns = new List<Node>();
+        for(int j=0; j<i; j++)
+        {
+          ns.Add(n(j, (j+1)%i));          
+        }
+
+        DoTest("fi", 0, ns.ToArray());
+      }            
+    }
+    
+    [Test]
+    public void Test_TwoLoop_OnNode()
+    {
+      DEBUG = true;
+      for(int i=10; i<200; i++)
+      {
+        List<Node> ns = new List<Node>();
+        for(int j=0; j<i; j++)
+        {
+          ns.Add(n(j, (j+1)%i));          
+          ns.Add(n(j + i - 1, (j+1)%i + i - 1));          
+        }
+
+        DoTest("fnin", /*(i + 1.0)/i*Math.Log(i,2) - 2.0/i - Math.Log(i+1,2)*/ 2.0/(i+1.0), ns.ToArray());
+      }            
+    }
+
 
     [Test]
     public void Test_Logistics()
@@ -157,12 +198,14 @@ n(19,3)
       IGraphMeasure<IntegerCoordinate> evaluator = j.CreateEvaluator();
       evaluator.GetEntropy();
 
-      Console.Out.WriteLine("l.Result = {0}", evaluator.GetEntropy());
+      if (DEBUG)
+        Console.Out.WriteLine("l.Result = {0}", evaluator.GetEntropy());
+
       Assert.AreEqual(entropy, evaluator.GetEntropy(), EPS);
 
       return j;
     }
-
+    
     protected static JVR DoTest(string script, params Node[] nodes)
     {
       TarjanGraph<IntegerCoordinate> g = DoBuildGraph(delegate(IGraph<IntegerCoordinate> graph)
@@ -172,6 +215,10 @@ n(19,3)
                                                             AddEdge(graph, node.From, node.To);
                                                           }
                                                         });
+
+      Console.Out.WriteLine("g.NodesCount = {0}", g.NodesCount);
+      Console.Out.WriteLine("g.EdgesCount = {0}", g.EdgesCount);
+
       IGraphStrongComponents<IntegerCoordinate> c = g.ComputeStrongComponents(NullProgressInfo.INSTANCE);
 
       JVR j = new JVR(g, c);
@@ -204,13 +251,16 @@ n(19,3)
         }
       }
       finally
-      {        
-        foreach (Node node in nodes)
+      {
+        if (DEBUG)
         {
-          IntegerCoordinate fromC = AddNode(g, node.From).Coordinate;
-          IntegerCoordinate toC = AddNode(g, node.To).Coordinate;
+          foreach (Node node in nodes)
+          {
+            IntegerCoordinate fromC = AddNode(g, node.From).Coordinate;
+            IntegerCoordinate toC = AddNode(g, node.To).Coordinate;
 
-          Console.Out.WriteLine("{0}->{1} {2}", fromC, toC, j.Edge(fromC, toC));
+            Console.Out.WriteLine("{0}->{1} {2}", fromC, toC, j.Edge(fromC, toC));
+          }
         }
       }
 
@@ -239,12 +289,15 @@ n(19,3)
       }
       finally
       {
-        Console.Out.WriteLine();
-        foreach (KeyValuePair<IntegerCoordinate, double> pair in mi)
+        if (DEBUG)
         {
-          Console.Out.WriteLine("{0} -> {1}", pair.Key, pair.Value);
+          Console.Out.WriteLine();
+          foreach (KeyValuePair<IntegerCoordinate, double> pair in mi)
+          {
+            Console.Out.WriteLine("{0} -> {1}", pair.Key, pair.Value);
+          }
+          Console.Out.WriteLine();
         }
-        Console.Out.WriteLine();
       }
 
       return j;

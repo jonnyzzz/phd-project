@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.Scheme.Actions;
@@ -33,8 +34,13 @@ namespace DSIS.Scheme.Impl.Actions
               IGraphStrongComponents<Q> oneComponent =
                 new OneComponentsGraphAdapter<Q>(comps, info);
 
+              IGraphWithStrongComponent<Q> graph =
+                oneComponent.AsGraphWithStrongComponents(new IStrongComponentInfo[] {info});
+
               ctx.AddAll(input);
-              Keys.GraphComponents<Q>().Set(ctx, oneComponent);
+
+              Keys.Graph<Q>().Set(ctx, graph);
+              Keys.GraphComponents<Q>().Set(ctx, graph.ComputeStrongComponents(NullProgressInfo.INSTANCE));
             });
 
         UpdateContextAction save = new UpdateContextAction(
