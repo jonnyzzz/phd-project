@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.BoxMethod;
+using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
@@ -48,10 +49,10 @@ namespace DSIS.SimpleRunner
         StrangeEvaluatorStrategy.SMART,
         EntropyLoopWeights.CONST);
 
-      StrangeEntropyEvaluatorParams[] entropys = {/*entropyFirst, entropySmartL, */entropySmart};
+      StrangeEntropyEvaluatorParams[] entropys = {entropyFirst, entropySmartL, entropySmart};
       IAction[] system = {systemHenon/*, systemIked, systemIkedaCut*/};
 
-      for (int steps = 8; steps <= 20; steps++)
+      for (int steps = 8; steps <= 15; steps++)
       {
         foreach (IAction action in system)
         {
@@ -101,23 +102,39 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(a4, new DumpGraphInfoAction());
       gr.AddEdge(a5, new DumpGraphComponentsInfoAction());
 
-      IAction step = new LoopAction(steps, new AgregateAction(
-                                             delegate(IActionGraphPartBuilder bld)
-                                               {
-                                                 SymbolicImageConstructionStep build =
-                                                   new SymbolicImageConstructionStep();
-                                                 bld.AddEdge(bld.Start, build);
-                                                 bld.AddEdge(build, bld.End);
-                                                 ParallelAction b = new ParallelAction(new DumpGraphInfoAction(),
-                                                                                       new DumpGraphComponentsInfoAction
-                                                                                         ());
-                                                 ProxyAction p = new ProxyAction();
-                                                 bld.AddEdge(build, b);
-                                                 bld.AddEdge(bld.Start, p);
-                                                 bld.AddEdge(p, b);
+      AgregateAction buildIS = new AgregateAction(
+        delegate(IActionGraphPartBuilder bld)
+          {
+            SymbolicImageConstructionStep build =
+              new SymbolicImageConstructionStep();
+            bld.AddEdge(bld.Start, build);
+            bld.AddEdge(build, bld.End);
+            ParallelAction b = new ParallelAction(new DumpGraphInfoAction(),
+                                                  new DumpGraphComponentsInfoAction(),
+                                                  new DumpMethodAction()
+                                                  );
+            ProxyAction p = new ProxyAction();
+            bld.AddEdge(build, b);
+            bld.AddEdge(bld.Start, p);
+            bld.AddEdge(p, b);
                                                  
-                                                 Collect();
-                                               }));
+            Collect();
+          });
+
+      IAction step =
+        new AgregateAction(
+          delegate(IActionGraphPartBuilder bld)
+            {
+              LoopAction loop = new LoopAction(steps - 1, buildIS);
+              bld.AddEdge(bld.Start, loop);
+              bld.AddEdge(loop, buildIS);
+              bld.AddEdge(new SetMethod(new PointMethodSettings(new int[]{2,2}, 0.1), new long[]{2,2}), buildIS);
+              
+              bld.AddEdge(buildIS, bld.End);
+              bld.AddEdge(buildIS, bld.End);
+            });
+        
+        
 
       gr.AddEdge(wf, step);
       gr.AddEdge(logger, step);
@@ -136,7 +153,7 @@ namespace DSIS.SimpleRunner
 
         IAction entropyParams = new SetStrangeEntropyParamsAction(evaluatorParams);
 
-        IAction entropy = new ForeachStrongComponentAction(DrawEntropyAction());
+        IAction entropy = new ParallelAction(new ForeachStrongComponentAction(DrawEntropyAction()), DrawEntropyAction());
         gr.AddEdge(step, entropy);
         gr.AddEdge(wf, customWf);
         gr.AddEdge(customWf, entropy);
@@ -152,8 +169,8 @@ namespace DSIS.SimpleRunner
       return new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
           {
-//            IAction a7 = new StrangeEntropyAction();
-            IAction a7 = new JVRMeasureAction();
+            IAction a7 = new StrangeEntropyAction();
+//            IAction a7 = new JVRMeasureAction();
 
             bld.AddEdge(bld.Start, new DumpGraphInfoAction());
             bld.AddEdge(bld.Start, new DumpGraphComponentsInfoAction());
