@@ -1,21 +1,13 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
+using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.Utils;
 
-namespace DSIS.Scheme.Actions
+namespace DSIS.Scheme.Impl.Actions.Console
 {
-  public class UpdateContextAction : ActionBase
+  public class DumpNewLineAction : TransparentAction
   {
-    public delegate void WithContext(Context input, Context cx);
-
-    private readonly WithContext myWith;
-
-    public UpdateContextAction(WithContext with)
-    {
-      myWith = with;
-    }
-
-
     public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
       return EmptyArray<ContextMissmatch>.Instance;
@@ -23,7 +15,9 @@ namespace DSIS.Scheme.Actions
 
     protected override void Apply(Context ctx, Context result)
     {
-      myWith(ctx, result);
+      base.Apply(ctx, result);
+
+      Logger.Instance(ctx).Write(Environment.NewLine);
     }
   }
 }

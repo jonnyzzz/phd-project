@@ -45,6 +45,7 @@
     <Compile Include="src\Actions\ParallelAction.cs" />
     <Compile Include="src\Actions\ProxiedChainAction.cs" />
     <Compile Include="src\Actions\ProxyAction.cs" />
+    <Compile Include="src\Actions\ReplaceContextAction.cs" />
     <Compile Include="src\Exec\ContextMissmatchException.cs" />
     <Compile Include="src\Exec\IActionGraphPartBuilder.cs" />
     <Compile Include="src\Actions\MergeInputAndOutputAction.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="src\Exec\XmlActionGraphParser.cs" />
     <Compile Include="src\IAction.cs" />
     <Compile Include="src\Key.cs" />
+    <Compile Include="src\TransparentAction.cs" />
     <Compile Include="testSrc\ActionExecutorTest.cs" />
     <Compile Include="testSrc\ActionTestBase.cs" />
     <Compile Include="testSrc\ActionsTest.cs" />

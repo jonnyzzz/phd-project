@@ -121,21 +121,12 @@ namespace DSIS.SimpleRunner
             Collect();
           });
 
-      IAction step =
-        new AgregateAction(
-          delegate(IActionGraphPartBuilder bld)
-            {
-              LoopAction loop = new LoopAction(steps - 1, buildIS);
-              bld.AddEdge(bld.Start, loop);
-              bld.AddEdge(loop, buildIS);
-              bld.AddEdge(new SetMethod(new PointMethodSettings(new int[]{2,2}, 0.1), new long[]{2,2}), buildIS);
-              
-              bld.AddEdge(buildIS, bld.End);
-              bld.AddEdge(buildIS, bld.End);
-            });
-        
-        
-
+      IAction step = new ChainAction(
+        new LoopAction(steps - 1, buildIS),
+        new ReplaceContextAction(new SetMethod(new PointMethodSettings(new int[] {2, 2}, 0.1), new long[] {2, 2})),
+        buildIS
+        );
+               
       gr.AddEdge(wf, step);
       gr.AddEdge(logger, step);
       gr.AddEdge(a5, step);
@@ -153,7 +144,7 @@ namespace DSIS.SimpleRunner
 
         IAction entropyParams = new SetStrangeEntropyParamsAction(evaluatorParams);
 
-        IAction entropy = new ParallelAction(new ForeachStrongComponentAction(DrawEntropyAction()), DrawEntropyAction());
+        IAction entropy = new ParallelAction(new ForeachStrongComponentAction(DrawEntropyAction(new StrangeEntropyAction())), DrawEntropyAction(new StartAction()));
         gr.AddEdge(step, entropy);
         gr.AddEdge(wf, customWf);
         gr.AddEdge(customWf, entropy);
@@ -164,18 +155,18 @@ namespace DSIS.SimpleRunner
       gr.Execute();
     }
     
-    private static IAction DrawEntropyAction()
+    private static IAction DrawEntropyAction(IAction entropy)
     {
       return new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
           {
-            IAction a7 = new StrangeEntropyAction();
+//            IAction a7 = new StrangeEntropyAction();
 //            IAction a7 = new JVRMeasureAction();
 
             bld.AddEdge(bld.Start, new DumpGraphInfoAction());
             bld.AddEdge(bld.Start, new DumpGraphComponentsInfoAction());
 
-            bld.AddEdge(bld.Start, a7);
+            bld.AddEdge(bld.Start, entropy);
 
             IAction drawEntropy =
               new ProxiedChainAction(
@@ -188,7 +179,7 @@ namespace DSIS.SimpleRunner
             ProxyAction pa = new ProxyAction();
             bld.AddEdge(bld.Start, pa);
             bld.AddEdge(pa, drawEntropy);
-            bld.AddEdge(a7, drawEntropy);
+            bld.AddEdge(entropy, drawEntropy);
 
             bld.AddEdge(drawEntropy, bld.End);
           });

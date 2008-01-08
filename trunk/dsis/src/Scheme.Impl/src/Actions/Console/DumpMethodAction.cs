@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Scheme.Ctx;
+using DSIS.Scheme.Impl.Actions.Files;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Console
 {
@@ -9,15 +12,13 @@ namespace DSIS.Scheme.Impl.Actions.Console
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
       return ColBase(base.Check<T, Q>(system, ctx), Create(Keys.SubdivisionKey), Create(Keys.CellImageBuilderKey));
-;
     }
 
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
-      long[] longs = Keys.SubdivisionKey.Get(input);
       ICellImageBuilderIntegerCoordinatesSettings sets = Keys.CellImageBuilderKey.Get(input);
 
-      System.Console.Out.WriteLine("Method: {0}", sets.Create<T,Q>().PresentableName);
+      Logger.Instance(input).Write("Method: {0}", sets.Create<T,Q>().PresentableName);
     }
   }
 }

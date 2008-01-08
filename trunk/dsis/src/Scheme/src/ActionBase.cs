@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme
 {
@@ -41,7 +42,6 @@ namespace DSIS.Scheme
       dta.AddRange(data);
       return dta;      
     }
-
 
     protected abstract void Apply(Context ctx, Context result);
   }
