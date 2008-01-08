@@ -163,6 +163,11 @@ namespace DSIS.IntegerCoordinates.Generated
       return Create(l1, l2);
     }
 
+    public int Dimension
+    {
+      get { return 2; }
+    }
+
     public IntegerCoordinateSystem2d SubdividedCoordinateSystem(long[] division)
     {
       return new IntegerCoordinateSystem2d(SystemSpace, GetSubdividedFactor(division));

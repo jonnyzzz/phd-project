@@ -24,7 +24,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       string outputFile = folderInfo.CreateFileName("chain-recurrent-picture.png");      
       Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter> files = new Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter>();
       int components = 0;
-      double[] data = new double[system.SystemSpace.Dimension];
+      double[] data = new double[system.Dimension];
 
       foreach (INode<Q> node in comps.GetNodes(new List<IStrongComponentInfo>(comps.Components)))
       {
@@ -37,7 +37,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
         {
           string gnuplotComponent = folderInfo.CreateFileName("chain-recurrent-picture-" + ++components);
 
-          fw = new GnuplotPointsFileWriter(gnuplotComponent, system.SystemSpace.Dimension);
+          fw = new GnuplotPointsFileWriter(gnuplotComponent, system.Dimension);
           files[info] = fw;
         }
         system.CenterPoint(node.Coordinate, data);
@@ -45,7 +45,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       }
 
       IGnuplotPhaseScriptGen gen = GnuplotSriptGen.ScriptGen(
-        system.SystemSpace.Dimension,
+        system.Dimension,
         folderInfo.CreateFileName("chain-recurrent-picture-script.gnuplot"),
         new GnuplotScriptParameters(outputFile, ""));
 

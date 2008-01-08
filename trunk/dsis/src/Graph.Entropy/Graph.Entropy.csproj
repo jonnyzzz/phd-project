@@ -28,10 +28,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -90,21 +86,6 @@
     <Compile Include="src\Impl\JVR\StraitArcDirection.cs" />
     <Compile Include="src\Impl\Util\NodePair.cs" />
     <Compile Include="src\Impl\Util\PairBase.cs" />
-    <Compile Include="testSrc\AllEngesOnALoopGraphSearchTest.cs" />
-    <Compile Include="testSrc\AllNodesOnALoopGraphSearchTest.cs" />
-    <Compile Include="testSrc\EigenEvaluatorImplTest.cs" />
-    <Compile Include="testSrc\EntropyLoopIteratorCallbackTest.cs" />
-    <Compile Include="testSrc\GraphBaseTest.cs" />
-    <Compile Include="testSrc\GraphSearchTest.cs" />
-    <Compile Include="testSrc\GraphWeightSearch2Test.cs" />
-    <Compile Include="testSrc\GraphWeightSearchTest.cs" />
-    <Compile Include="testSrc\JVRMeasureTest.cs" />
-    <Compile Include="testSrc\JVrPairTest.cs" />
-    <Compile Include="testSrc\LimitedLoopSearchTest.cs" />
-    <Compile Include="testSrc\LoopIteratorsPerfomance.cs" />
-    <Compile Include="testSrc\LoopIteratorTest.cs" />
-    <Compile Include="testSrc\LoopIteratorTestBase.cs" />
-    <Compile Include="testSrc\PerfomanceTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
@@ -114,14 +95,6 @@
     <ProjectReference Include="..\Graph\Graph.csproj">
       <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
       <Name>Graph</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
-      <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
-      <Name>IntegerCoordinates</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
-      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
-      <Name>Core.System</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>

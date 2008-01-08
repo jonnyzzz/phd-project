@@ -25,7 +25,7 @@ namespace DSIS.IntegerCoordinates.Impl
     {
       myCoordinateSystem = coordinateSystem;
 
-      myDim = myCoordinateSystem.SystemSpace.Dimension;
+      myDim = myCoordinateSystem.Dimension;
       myPoint = new long[myDim];
       myPoint2 = new long[myDim];
       myPoint3 = new long[myDim];

@@ -18,7 +18,7 @@ namespace DSIS.IntegerCoordinates.Impl
     {
       myCoordinateSystem = coordinateSystem;
       mySystemSpace = myCoordinateSystem.SystemSpace;
-      myDim = myCoordinateSystem.SystemSpace.Dimension;
+      myDim = myCoordinateSystem.Dimension;
 
       myLeft = new long[myDim + 1];
       myRight = new long[myDim + 1];

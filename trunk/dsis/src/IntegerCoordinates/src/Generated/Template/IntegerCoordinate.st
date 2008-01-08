@@ -141,6 +141,11 @@ namespace DSIS.Generated
     {
       with.Do<IntegerCoordinateSystem, IntegerCoordinate>(this);
     } 
+    
+    public int Dimension
+    {
+      get { return $Dimension$; }
+    }
   }
 
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]

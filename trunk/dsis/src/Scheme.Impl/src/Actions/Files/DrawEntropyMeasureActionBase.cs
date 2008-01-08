@@ -8,7 +8,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
   {
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
-      if (system.SystemSpace.Dimension != 2)
+      if (system.Dimension != 2)
         throw new Exception("Dimension is assumend to be 2");
 
       return ColBase(base.Check<T, Q>(system, ctx),

@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
 
@@ -110,12 +109,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public IGraphMeasure<T> CreateEvaluator()
     {
       return myHashHolder.CreateEvaluator();
-    }
-
-    public void Dump(TextWriter tw)
-    {
-      Norm();
-      myHashHolder.Dump(tw);
     }
   }
 }

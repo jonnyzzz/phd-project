@@ -34,6 +34,11 @@ namespace DSIS.IntegerCoordinates.Impl
       return Create(coordinate);
     }
 
+    public int Dimension
+    {
+      get { return myDimension; }
+    }
+
     public bool Intersects(long l, int axis)
     {
       return l >= 0 && l < mySubdivision[axis];

@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
-using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
@@ -101,7 +98,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return mySet.NextNode();
     }   
  
-    public void Dump(TextWriter tw)
+/*    public void Dump(TextWriter tw)
     {
       foreach (KeyValuePair<JVRPair<T>, double> pair in myHash)
       {
@@ -118,6 +115,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         return ic.GetCoordinate(0).ToString();
       else
         return node.ToString();
-    }
+    }*/
   }      
 }

@@ -15,8 +15,8 @@ namespace DSIS.Graph.Entropy.Impl
     {
       IEntropyProcessor<T> measure = Measure(controller);
 
-      ICellCoordinateSystem<T> system = controller.Graph.CoordinateSystem;      
-      int dim = system.SystemSpace.Dimension;
+      ICellCoordinateSystem<T> system = controller.Graph.CoordinateSystem;          
+      int dim = system.Dimension;
       ICellCoordinateSystemProjector<T> project = null;
 
       while (controller.SubdivideNext(system))

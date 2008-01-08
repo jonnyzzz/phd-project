@@ -62,7 +62,7 @@ namespace DSIS.IntegerCoordinates.Generic
     {
       List<Q> c = new List<Q>(myCS.InitialSubdivision);
 
-      if (myCS.SystemSpace.Dimension != 2)
+      if (myCS.Dimension != 2)
         Assert.Ignore("Dimension != 2");
 
       bool[][] bs = new bool[myCS.Subdivision[0]][];
@@ -90,7 +90,7 @@ namespace DSIS.IntegerCoordinates.Generic
     [Test]
     public void Test_05()
     {
-      if (myCS.SystemSpace.Dimension != 2)
+      if (myCS.Dimension != 2)
         Assert.Ignore("Dimension != 2");
 
 
@@ -103,7 +103,7 @@ namespace DSIS.IntegerCoordinates.Generic
     [Test]
     public void Test_06()
     {
-      if (myCS.SystemSpace.Dimension != 2)
+      if (myCS.Dimension != 2)
         Assert.Ignore("Dimension != 2");
 
 

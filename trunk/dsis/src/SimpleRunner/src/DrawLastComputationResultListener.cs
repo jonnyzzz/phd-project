@@ -44,7 +44,7 @@ namespace DSIS.SimpleRunner
 
       Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter> files = new Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter>();
       int components = 0;
-      double[] data = new double[system.SystemSpace.Dimension];
+      double[] data = new double[system.Dimension];
 
       foreach (INode<Q> node in comps.GetNodes(new List<IStrongComponentInfo>(comps.Components)))
       {
@@ -57,7 +57,7 @@ namespace DSIS.SimpleRunner
         {
           string gnuplotComponent = Path.Combine(path, myTitle + "-" + ++components);
 
-          fw = new GnuplotPointsFileWriter(gnuplotComponent, system.SystemSpace.Dimension);
+          fw = new GnuplotPointsFileWriter(gnuplotComponent, system.Dimension);
           files[info] = fw;
         }
         system.CenterPoint(node.Coordinate, data);
@@ -65,7 +65,7 @@ namespace DSIS.SimpleRunner
       }
       
       IGnuplotPhaseScriptGen gen = GnuplotSriptGen.ScriptGen(
-        system.SystemSpace.Dimension,
+        system.Dimension,
         Path.Combine(path, myTitle + "-script.gnuplot"),
         new GnuplotScriptParameters(outputFile, myTitle));
 

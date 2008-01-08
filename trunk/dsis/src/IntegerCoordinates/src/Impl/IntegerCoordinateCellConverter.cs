@@ -21,7 +21,7 @@ namespace DSIS.IntegerCoordinates.Impl
       myFromSystem = fromSystem;
       myToSystem = toSystem;
       myDivision = division;
-      myDim = fromSystem.SystemSpace.Dimension;
+      myDim = fromSystem.Dimension;
       myV = new long[myDim];
       myBoxIterator = new LongLBoxFixedDimentionMulIterator(myDim);
     }

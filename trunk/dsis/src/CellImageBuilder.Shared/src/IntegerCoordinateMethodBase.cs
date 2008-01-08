@@ -16,7 +16,7 @@ namespace DSIS.CellImageBuilder.Shared
     {
       mySystem = (T) context.System;
       myBuilder = context.ConnectionBuilder;
-      myDim = context.System.SystemSpace.Dimension;
+      myDim = context.System.Dimension;
     }
   }
 

@@ -42,6 +42,8 @@ namespace DSIS.Core.Coordinates
     /// </summary>
     CountEnumerable<T> InitialSubdivision { get; }
 
-    ISystemSpace SystemSpace { get; }    
+    ISystemSpace SystemSpace { get; }
+
+    int Dimension { get;}
   }
 }
