@@ -22,10 +22,10 @@ namespace DSIS.SimpleRunner
   {
     public static void Main()
     {      
-      DefaultSystemSpace sp =
-        new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
       DefaultSystemSpace spIkedaCutted =
         new DefaultSystemSpace(2, new double[] { -1.1, -1.5 }, new double[] { 3.5, 1.8 }, new long[] { 3, 3 });
+      DefaultSystemSpace sp =
+        new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
       IAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
       IAction systemIked = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
       IAction systemIkedaCut = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(spIkedaCutted, "Ikeda Cut"), spIkedaCutted);

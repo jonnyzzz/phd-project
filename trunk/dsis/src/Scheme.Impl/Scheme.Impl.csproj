@@ -52,6 +52,8 @@
     <Compile Include="src\Actions\Console\DumpWorkingFolderAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
+    <Compile Include="src\Actions\Entropy\EigenEntropyAction.cs" />
+    <Compile Include="src\Actions\Entropy\EigenPerComoponentAction.cs" />
     <Compile Include="src\Actions\Entropy\JVRMeasureAction.cs" />
     <Compile Include="src\Actions\Entropy\SetStrangeEntropyParamsAction.cs" />
     <Compile Include="src\Actions\Entropy\StrangeEntropyAction.cs" />
@@ -76,6 +78,8 @@
     <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />
     <Compile Include="src\Keys.cs" />
     <Compile Include="src\Actions\MergeComponetsAction.cs" />
+    <Compile Include="testSrc\SimbolicImageBuildTest.cs" />
+    <Compile Include="testSrc\SimbolicImageBuildTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
@@ -110,6 +114,14 @@
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Function.Mock\Function.Mock.csproj">
+      <Project>{02AFA84E-DA1B-4010-BA76-8E077E4D6175}</Project>
+      <Name>Function.Mock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Function.Predefined\Function.Predefined.csproj">
+      <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
+      <Name>Function.Predefined</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GnuplotDrawer\GnuplotDrawer.csproj">
       <Project>{CA14A441-039B-49F2-B678-9491146C56A1}</Project>
       <Name>GnuplotDrawer</Name>
@@ -134,9 +146,6 @@
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
       <Name>Scheme</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="testSrc\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

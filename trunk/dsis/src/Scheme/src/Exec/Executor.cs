@@ -20,7 +20,7 @@ namespace DSIS.Scheme.Exec
     public void Execute()
     {
       SetInitialActionsContext();
-      while (DoAction()) ;
+      while (DoAction()) { }
 
       if (myActions.Count != myDoneActions.Count)
         throw new ActionGraphException("Failed to evaluate graph. Loops or components?");
@@ -62,7 +62,7 @@ namespace DSIS.Scheme.Exec
           ICollection<ContextMissmatch> compatible = wrapper.Action.Compatible(cx);
           if (compatible.Count != 0)
           {
-            throw new ContextMissmatchException(compatible);
+            throw new ContextMissmatchException(compatible, wrapper.Action);
           }
 
           Context result = wrapper.Action.Apply(cx);

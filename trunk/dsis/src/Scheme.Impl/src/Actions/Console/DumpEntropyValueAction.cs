@@ -1,7 +1,4 @@
-using System.Collections.Generic;
 using DSIS.Graph.Entropy.Impl.Entropy;
-using DSIS.Graph.Entropy.Impl.Loop.Strange;
-using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.Scheme.Impl.Actions.Console

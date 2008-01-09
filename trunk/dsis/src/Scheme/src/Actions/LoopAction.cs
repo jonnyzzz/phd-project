@@ -5,7 +5,7 @@ using DSIS.Scheme.Exec;
 
 namespace DSIS.Scheme.Actions
 {
-  public class LoopAction : IAction
+  public class LoopAction : DebugableAction, IAction
   {
     private readonly int myCount;
     private readonly IAction myAction;
@@ -30,7 +30,7 @@ namespace DSIS.Scheme.Actions
         ICollection<ContextMissmatch> check = myAction.Compatible(ctx);
         if (check.Count != 0)
         {
-          throw new ContextMissmatchException(check);
+          throw new ContextMissmatchException(check, this);
         }
 
         Context newCtx = myAction.Apply(ctx);

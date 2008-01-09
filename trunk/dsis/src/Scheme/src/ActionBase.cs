@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
-using DSIS.Utils;
-
+  
 namespace DSIS.Scheme
 {
-  public abstract class ActionBase : IAction
+  public abstract class ActionBase : DebugableAction, IAction
   {
     public abstract ICollection<ContextMissmatch> Compatible(Context ctx);
     public Context Apply(Context ctx)
@@ -27,7 +27,7 @@ namespace DSIS.Scheme
 
     protected static ContextMissmatchCheck Create<Y>(Key<Y> key)
     {
-      return new ContextMissmatchCheckImpl<Y>(key, "None");
+      return new ContextMissmatchCheckImpl<Y>(key, typeof(Y).Name + "@" + key.Name);
     }
 
     protected static ICollection<T> Col<T>(params T[] data)

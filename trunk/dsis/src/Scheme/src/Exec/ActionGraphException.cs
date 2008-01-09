@@ -7,5 +7,9 @@ namespace DSIS.Scheme.Exec
     public ActionGraphException(string message) : base(message)
     {
     }
+
+    public ActionGraphException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
   }
 }

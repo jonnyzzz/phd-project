@@ -6,7 +6,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Eigen
 {
-  public class EigenEntropyEvaluatorImpl<T> : IGraphEntropy
+  public class EigenEntropyEvaluatorImpl<T>
     where T : ICellCoordinate<T>
   {
     private readonly double myEps;
@@ -19,21 +19,12 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
       myGraph = graph;
     }
 
-    #region IGraphEntropy Members
-
-    public double GetEntropy()
-    {
-      return myEntropy.Value;
-    }
-
-    #endregion
-
     public IGraphEntropy ComputeEntropy()
     {
       if (myEntropy == null)
         myEntropy = DoCompute();
 
-      return this;
+      return new GraphEntropy(myEntropy.Value);
     }
 
     private double DoCompute()

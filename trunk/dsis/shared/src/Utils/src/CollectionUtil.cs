@@ -42,5 +42,14 @@ namespace DSIS.Utils
       return false;
     }
 
+    public static int Count<T>(IEnumerable<T> collection)
+    {
+      int count = 0;
+      foreach (T t in collection)
+      {
+        count++;
+      }
+      return count;
+    }
   }
 }

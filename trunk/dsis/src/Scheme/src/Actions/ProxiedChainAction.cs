@@ -13,7 +13,7 @@ namespace DSIS.Scheme.Actions
     {
       ProxyAction pa = new ProxyAction();
       Builder.AddEdge(Builder.Start, pa);
-      IAction prev = Builder.Start;
+      IAction prev = Builder.Start; //todo: pa?
       foreach (IAction action in chain)
       {
         Builder.AddEdge(pa, action);

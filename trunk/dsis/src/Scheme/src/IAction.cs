@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme
@@ -7,5 +9,10 @@ namespace DSIS.Scheme
   {
     ICollection<ContextMissmatch> Compatible(Context ctx);
     Context Apply(Context ctx);
+  }
+
+  public interface IActionDebug
+  {
+    StackTrace Creation { get; }
   }
 }

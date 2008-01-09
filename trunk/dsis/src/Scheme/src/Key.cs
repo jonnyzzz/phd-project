@@ -30,6 +30,7 @@ namespace DSIS.Scheme
     public bool Equals(Key<TValue> key)
     {
       if (key == null) return false;
+
       return Equals(myName, key.myName);
     }
 

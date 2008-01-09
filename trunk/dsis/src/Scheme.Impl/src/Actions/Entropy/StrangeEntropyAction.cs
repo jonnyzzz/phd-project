@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
-using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Scheme.Ctx;
 
@@ -26,6 +25,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       IGraphMeasure<Q> measure = new StrangeEntropyEvaluator<Q>().Measure(graph, comps, ps);
 
       Keys.GraphMeasure<Q>().Set(output, measure);      
+      Keys.GraphEntropyKey.Set(output, measure);      
     }    
   }
 }

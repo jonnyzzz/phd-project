@@ -20,7 +20,9 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 
       JVREvaluator<Q> evaluator = new JVREvaluator<Q>();
       IGraphMeasure<Q> measure = evaluator.Measure(graph, comps);
+      
       Keys.GraphMeasure<Q>().Set(output, measure);
+      Keys.GraphEntropyKey.Set(output, measure);
     }
   }
 }

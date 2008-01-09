@@ -6,7 +6,6 @@ using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.IntegerCoordinates;
-using DSIS.Scheme.Impl.Actions.Entropy;
 
 namespace DSIS.Scheme.Impl
 {
@@ -45,5 +44,7 @@ namespace DSIS.Scheme.Impl
     {
       return new Key<IGraphMeasure<T>>("measure");
     }
+
+    public static Key<IGraphEntropy> GraphEntropyKey = new Key<IGraphEntropy>("measure");
   }
 }

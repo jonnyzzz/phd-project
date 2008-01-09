@@ -41,6 +41,7 @@
     <Compile Include="src\ActionBase.cs" />
     <Compile Include="src\Actions\AgregateAction.cs" />
     <Compile Include="src\Actions\ChainAction.cs" />
+    <Compile Include="src\Actions\DebugableAction.cs" />
     <Compile Include="src\Actions\LoopAction.cs" />
     <Compile Include="src\Actions\ParallelAction.cs" />
     <Compile Include="src\Actions\ProxiedChainAction.cs" />
