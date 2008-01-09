@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DSIS.Graph;
-using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Eigen;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Scheme.Ctx;

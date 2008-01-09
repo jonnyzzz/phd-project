@@ -41,12 +41,14 @@
     <Compile Include="src\AllEngesOnALoopGraphSearchTest.cs" />
     <Compile Include="src\AllNodesOnALoopGraphSearchTest.cs" />
     <Compile Include="src\EigenEvaluatorImplTest.cs" />
+    <Compile Include="src\EntropyBlackboxTest.cs" />
     <Compile Include="src\EntropyLoopIteratorCallbackTest.cs" />
     <Compile Include="src\GraphBaseTest.cs" />
     <Compile Include="src\GraphSearchTest.cs" />
     <Compile Include="src\GraphWeightSearch2Test.cs" />
     <Compile Include="src\GraphWeightSearchTest.cs" />
     <Compile Include="src\JVRMeasureTest.cs" />
+    <Compile Include="src\JVRMeasureTestBase.cs" />
     <Compile Include="src\JVrPairTest.cs" />
     <Compile Include="src\LimitedLoopSearchTest.cs" />
     <Compile Include="src\LoopIteratorsPerfomance.cs" />
@@ -54,6 +56,8 @@
     <Compile Include="src\LoopIteratorTestBase.cs" />
     <Compile Include="src\PerfomanceTestBase.cs" />
     <Compile Include="src\StrangeComparison\StrangeComparison.cs" />
+    <Compile Include="src\StrangeEntropyBlackboxTest.cs" />
+    <Compile Include="src\StrangeEntropyBlackboxTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">

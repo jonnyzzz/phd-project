@@ -1,15 +1,12 @@
-/*
- * Created by: 
- * Created: 27 марта 2007 г.
- */
-
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
+using DSIS.Graph.Entropy.Tests;
 using DSIS.IntegerCoordinates.Impl;
+using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Entropy
+namespace DSIS.Graph.Entropy.Tests
 {
   [TestFixture]
   public class GraphWeightSearchTest : GraphSearchTest
@@ -17,7 +14,7 @@ namespace DSIS.Graph.Entropy
     protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,
                                                   IGraphStrongComponents<T> components)
     {
-      IStrongComponentInfo first = GetFirst(components.Components);
+      IStrongComponentInfo first = CollectionUtil.GetFirst(components.Components);
       return new LoopIteratorFirst<T>(mcb, components, first, new GraphWeightSearch<T>(components, first));
     }
 

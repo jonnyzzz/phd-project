@@ -1,10 +1,12 @@
 using System;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
+using DSIS.Graph.Entropy.Tests;
 using DSIS.IntegerCoordinates.Impl;
+using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Entropy
+namespace DSIS.Graph.Entropy.Tests
 {
   [TestFixture]
   public class AllEngesOnALoopGraphSearchTest : GraphSearchTest
@@ -12,7 +14,7 @@ namespace DSIS.Graph.Entropy
     protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,
                                                   IGraphStrongComponents<T> components)
     {
-      return new AllEngesOnALoopGraphSearch<T>(mcb, components, GetFirst(components.Components));
+      return new AllEngesOnALoopGraphSearch<T>(mcb, components, CollectionUtil.GetFirst(components.Components));
     }
 
     [Test]

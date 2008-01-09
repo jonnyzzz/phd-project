@@ -27,12 +27,12 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
       myComponentInfos = new IStrongComponentInfo[]{myComponent};
     }
 
-    private static bool IsUpperInTree(SearchTreeNode<T> root, INode<T> node, ICollection<INode<T>> result)
+    private static bool IsUpperInTree(SearchTreeNode<T> root, INode<T> node, List<INode<T>> result)
     {
       long hash = COMPARER.GetHashCode(node.Coordinate);
       while (root != null)
       {
-        result.Add(root.Node);
+        result.Insert(0, root.Node);
         if (hash == root.Hash && root.IsNode(node))
         {
           return true;

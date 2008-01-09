@@ -8,7 +8,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Entropy
+namespace DSIS.Graph.Entropy.Tests
 {
   public abstract class GraphSearchTest : GraphBaseTest
   {
@@ -26,7 +26,7 @@ namespace DSIS.Graph.Entropy
       StringBuilder sb = new StringBuilder();
       foreach (List<string> loop in mcb.Loops)
       {
-        loop.Reverse();
+//        loop.Reverse();
         foreach (string s in loop)
         {
           sb.Append(s);

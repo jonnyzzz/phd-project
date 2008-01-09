@@ -6,6 +6,7 @@ using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Graph.Entropy.Impl.Util;
+using DSIS.Graph.Entropy.Tests;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
@@ -132,8 +133,8 @@ namespace DSIS.Graph.Entropy
       Console.Out.WriteLine("v2 = {0}", v2);
 
       Console.Out.WriteLine("v1-v2 = {0}", v1-v2);
-
     }
+
     private static double e(double e)
     {
       return e*Math.Log(e);
@@ -198,7 +199,7 @@ namespace DSIS.Graph.Entropy
       }
     }
     
-    protected static void DoTest2(List<List<int>> loops, params Pair<double, List<AssertData>>[] expected)
+    protected static void DoTest2(IEnumerable<List<int>> loops, params Pair<double, List<AssertData>>[] expected)
     {
       EntropyBackStepGraphWeightCallback<IntegerCoordinate> cb = DoTest(loops);
       double norm = -1;
@@ -231,7 +232,7 @@ namespace DSIS.Graph.Entropy
       }
     }
 
-    protected static EntropyBackStepGraphWeightCallback<IntegerCoordinate> DoTest(List<List<int>> loops)
+    protected static EntropyBackStepGraphWeightCallback<IntegerCoordinate> DoTest(IEnumerable<List<int>> loops)
     {
       TarjanGraph<IntegerCoordinate> graph = DoBuildGraph(delegate { });
 

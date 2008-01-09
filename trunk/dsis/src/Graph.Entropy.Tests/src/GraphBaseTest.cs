@@ -9,7 +9,7 @@ using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Entropy
+namespace DSIS.Graph.Entropy.Tests
 {
   public class GraphBaseTest
   {
@@ -18,12 +18,6 @@ namespace DSIS.Graph.Entropy
     {
       Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
       Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-us");
-    }
-
-    protected static T GetFirst<T>(IEnumerable<T> ts)
-    {
-      foreach (T t in ts){ return t; }
-      return default(T);
     }
 
     protected delegate void BuildGraph(IGraph<IntegerCoordinate> graph);

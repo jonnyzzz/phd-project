@@ -11,7 +11,6 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     where TPair : PairBase<T>
   {
     private const double EPS = 1e-10;
-    private static readonly double LN2 = Math.Log(2);
 
     private readonly IEqualityComparer<T> myComparer;
     private readonly IDictionary<TPair, double> myM;
@@ -106,7 +105,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
         v += Entropy(value);
       }
 
-      myEntropy = v/LN2;
+      myEntropy = v ;
       myNodesM = values;
     }
 
@@ -121,7 +120,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
     private static double Log(double d)
     {
-      return Math.Log(d);
+      return Math.Log(d, 2);
     }
 
     private static double Entropy(double d)
@@ -130,6 +129,11 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
         return 0;
 
       return d*Log(d);
+    }
+
+    public IDictionary<TPair, double> M
+    {
+      get { return myM; }
     }
   }
 }

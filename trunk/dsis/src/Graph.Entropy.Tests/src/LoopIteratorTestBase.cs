@@ -4,10 +4,12 @@ using System.Text;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
+using DSIS.Graph.Entropy.Tests;
 using DSIS.IntegerCoordinates.Impl;
+using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Entropy
+namespace DSIS.Graph.Entropy.Tests
 {
   public abstract class LoopIteratorTestBase : GraphBaseTest
   {
@@ -32,7 +34,7 @@ namespace DSIS.Graph.Entropy
       Assert.IsTrue(components.ComponentCount > 0, "There is no components");
 
       MockCallback mcb = new MockCallback();
-      IStrongComponentInfo firstComponent = GetFirst(components.Components);
+      IStrongComponentInfo firstComponent = CollectionUtil.GetFirst(components.Components);
       if (!filter)
       {
         ILoopIterator<IntegerCoordinate> gws = CreateLoopIterator(graph, components, mcb, firstComponent);

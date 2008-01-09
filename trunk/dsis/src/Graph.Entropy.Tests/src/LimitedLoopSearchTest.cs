@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search.Limited;
+using DSIS.Graph.Entropy.Tests;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 

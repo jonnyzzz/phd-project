@@ -59,8 +59,11 @@ namespace DSIS.Graph.Entropy.Impl.Loop
     {
       double d;
       NodePair<T> pair = new NodePair<T>(from, to);
-      myM.TryGetValue(pair, out d);
-      myM[pair] = d + p;
+      if (myM.TryGetValue(pair, out d))
+      {
+        p += d;
+      }
+      myM[pair] = p;
     }
 
     public Dictionary<NodePair<T>, double> M
@@ -76,7 +79,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 
     public IGraphMeasure<T> Entropy()
     {
-      return new GraphMeasure<T, NodePair<T>>(M, EqualityComparerFactory<T>.GetReferenceComparer(), Norm);
+      return new GraphMeasure<T, NodePair<T>>(M, EqualityComparerFactory<T>.GetReferenceComparer(), myNorm);
     }
   }
 }

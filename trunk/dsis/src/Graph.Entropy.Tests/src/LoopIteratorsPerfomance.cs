@@ -6,6 +6,7 @@ using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
 using DSIS.IntegerCoordinates.Impl;
+using DSIS.Utils;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy.Tests
@@ -19,7 +20,7 @@ namespace DSIS.Graph.Entropy.Tests
       DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
                                MockLoopIteratorCallback<IntegerCoordinate> callback = new MockLoopIteratorCallback<IntegerCoordinate>();
-                               IStrongComponentInfo component = GetFirst(comps.Components);
+                               IStrongComponentInfo component = CollectionUtil.GetFirst(comps.Components);
 
                                return new AllEngesOnALoopGraphSearch<IntegerCoordinate>(callback, comps, component);
                              }, new TimeSpan(0,0,20));
@@ -31,7 +32,7 @@ namespace DSIS.Graph.Entropy.Tests
       DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
                                MockLoopIteratorCallback<IntegerCoordinate> callback = new MockLoopIteratorCallback<IntegerCoordinate>();
-                               IStrongComponentInfo component = GetFirst(comps.Components);
+                               IStrongComponentInfo component = CollectionUtil.GetFirst(comps.Components);
 
                                return new AllNodesOnALoopGraphSearch<IntegerCoordinate>(callback, comps, component);
                              }, new TimeSpan(0,0,9));
@@ -43,7 +44,7 @@ namespace DSIS.Graph.Entropy.Tests
       DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
                                MockLoopIteratorCallback<IntegerCoordinate> callback = new MockLoopIteratorCallback<IntegerCoordinate>();
-                               IStrongComponentInfo component = GetFirst(comps.Components);
+                               IStrongComponentInfo component = CollectionUtil.GetFirst(comps.Components);
 
                                return new LoopIteratorFirst<IntegerCoordinate>(callback, comps, component, new GraphWeightSearch<IntegerCoordinate>(comps, component));
                              }, new TimeSpan(0,0,9));
