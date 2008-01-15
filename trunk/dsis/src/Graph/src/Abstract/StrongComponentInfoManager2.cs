@@ -4,10 +4,10 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
-  internal class StrongComponentInfoManager2 : StrongComponentInfoManagerBase<StrongComponentInfo2>
+  public class StrongComponentInfoManager2 : StrongComponentInfoManagerBase<StrongComponentInfo2>
   {
     private long myChangeId = 0;
-    private Dictionary<int, long> myEvents = new Dictionary<int, long>();
+    private readonly Dictionary<int, long> myEvents = new Dictionary<int, long>();
 
     protected override void AddEdgeInternal(StrongComponentInfo2 from, StrongComponentInfo2 to)
     {

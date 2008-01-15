@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheme.Impl", "Scheme.Impl\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Entropy.Tests", "Graph.Entropy.Tests\Graph.Entropy.Tests.csproj", "{E23B0AB1-6374-4E97-9303-CEE8FD167FDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Tests", "Graph.Tests\Graph.Tests.csproj", "{55507A34-E276-49CB-93DF-8E31E27703FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +167,10 @@ Global
 		{E23B0AB1-6374-4E97-9303-CEE8FD167FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E23B0AB1-6374-4E97-9303-CEE8FD167FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E23B0AB1-6374-4E97-9303-CEE8FD167FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55507A34-E276-49CB-93DF-8E31E27703FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55507A34-E276-49CB-93DF-8E31E27703FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55507A34-E276-49CB-93DF-8E31E27703FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55507A34-E276-49CB-93DF-8E31E27703FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

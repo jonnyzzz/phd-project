@@ -21,7 +21,7 @@ namespace DSIS.Graph.Abstract
     private readonly GraphNodeHashList<TInh, TCell> myEdges;
     internal int HashCodeInternal;
 
-    internal Node(TCell coordinate)
+    public Node(TCell coordinate)
     {
       Coordinate = coordinate;
       myEdges = new GraphNodeHashList<TInh, TCell>(7);

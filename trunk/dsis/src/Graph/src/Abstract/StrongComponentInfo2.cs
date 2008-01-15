@@ -4,7 +4,7 @@ using System.IO;
 
 namespace DSIS.Graph.Abstract
 {
-  internal class StrongComponentInfo2 : IStrongComponentInfoEx
+  public class StrongComponentInfo2 : IStrongComponentInfoEx
   {
     private StrongComponentInfo2 myReference = null;
     private int myCount;

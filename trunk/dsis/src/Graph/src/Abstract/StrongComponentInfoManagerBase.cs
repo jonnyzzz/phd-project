@@ -5,7 +5,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
-  internal abstract class StrongComponentInfoManagerBase<TCI> : IStrongComponentInfoManager
+  public abstract class StrongComponentInfoManagerBase<TCI> : IStrongComponentInfoManager
     where TCI : class, IStrongComponentInfoEx
   {
     protected Hashset<TCI, IStrongComponentInfo> myComponents = new Hashset<TCI, IStrongComponentInfo>();

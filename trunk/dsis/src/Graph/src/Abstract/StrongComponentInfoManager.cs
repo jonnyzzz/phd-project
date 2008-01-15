@@ -4,7 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
-  internal class StrongComponentInfoManager : StrongComponentInfoManagerBase<StrongComponentInfo>,
+  public class StrongComponentInfoManager : StrongComponentInfoManagerBase<StrongComponentInfo>,
                                               IStrongComponentInfoManager
   {
     protected override void AddEdgeInternal(StrongComponentInfo from, StrongComponentInfo to)

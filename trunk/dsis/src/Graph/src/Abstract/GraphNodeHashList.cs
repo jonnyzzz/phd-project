@@ -5,7 +5,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
-  internal class GraphNodeHashList<TNode, TCell>
+  public class GraphNodeHashList<TNode, TCell>
     where TCell : ICellCoordinate<TCell>
     where TNode : Node<TNode, TCell>
   {

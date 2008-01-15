@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
-using DSIS.Core.Util;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
-  internal class StrongComponentInfo : IStrongComponentInfoEx, IStrongComponentInfoConnectivity
+  public class StrongComponentInfo : IStrongComponentInfoEx, IStrongComponentInfoConnectivity
   {
     private StrongComponentInfo myReference = null;
     private Hashset<StrongComponentInfo, IStrongComponentInfo> myOuts;

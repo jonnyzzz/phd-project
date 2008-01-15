@@ -7,7 +7,7 @@ namespace DSIS.Scheme.Impl
 {
   public abstract class IntegerCoordinateSystemActionBase2 : IntegerCoordinateSystemActionBase
   {
-    protected virtual ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected new virtual ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
       where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate<Q>
     {

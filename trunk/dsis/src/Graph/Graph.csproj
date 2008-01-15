@@ -28,13 +28,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,28 +65,6 @@
     <Compile Include="src\Abstract\StrongComponentNode.cs" />
     <Compile Include="src\IGraph.cs" />
     <Compile Include="src\OneComponentsGraphAdapter.cs" />
-    <Compile Include="testSrc\GenericsTest.cs" />
-    <Compile Include="testSrc\GraphNodeHashListTest.cs" />
-    <Compile Include="testSrc\GraphPerformanceTest.cs" />
-    <Compile Include="testSrc\HashedQueueTest.cs" />
-    <Compile Include="testSrc\MockGraph.cs" />
-    <Compile Include="testSrc\MockNode.cs" />
-    <Compile Include="testSrc\OrderedListTest.cs" />
-    <Compile Include="testSrc\Generated\SimpleGraph2dTest.cs" />
-    <Compile Include="testSrc\Impl\SimpleGraphTest.cs" />
-    <Compile Include="testSrc\HashSetTest.cs" />
-    <Compile Include="testSrc\Generic\SimpleGraphTestBase.cs" />
-    <Compile Include="testSrc\Generic\StrongComponentGraphBaseTest.cs" />
-    <Compile Include="testSrc\ComponentGraphTestBase.cs" />
-    <Compile Include="testSrc\Generated\StrongComponentStrongComponentManager2dTest.cs" />
-    <Compile Include="testSrc\Generated\StrongComponentStrongComponentManager22dTest.cs" />
-    <Compile Include="testSrc\Generic\StrongComponentStrongComponentManager2BaseTest.cs" />
-    <Compile Include="testSrc\Impl\StrongComponentStrongComponentManager2Test.cs" />
-    <Compile Include="testSrc\Generic\StrongComponentStrongComponentManagerBaseTest.cs" />
-    <Compile Include="testSrc\Impl\StrongComponentStrongComponentManagerTest.cs" />
-    <Compile Include="testSrc\Generic\TarjanComponentGraphBaseTest.cs" />
-    <Compile Include="testSrc\Generated\TarjanComponentGraph2dTest.cs" />
-    <Compile Include="testSrc\Impl\TarjanComponentGraphTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
@@ -103,17 +75,9 @@
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
-      <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
-      <Name>IntegerCoordinates</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Persistance\Persistance.csproj">
-      <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
-      <Name>Persistance</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
