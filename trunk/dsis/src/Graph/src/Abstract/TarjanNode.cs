@@ -3,7 +3,7 @@ using DSIS.Core.Coordinates;
 namespace DSIS.Graph.Abstract
 {
   public class TarjanNode<TCell> : Node<TarjanNode<TCell>, TCell>
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
   {
     internal TarjanNodeData<TCell> Data;
     private uint myFlags = 0;

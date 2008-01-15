@@ -5,7 +5,8 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
-  public class ItemRebuildCookie<T> : IDisposable where T : ICellCoordinate<T>
+  public class ItemRebuildCookie<T> : IDisposable 
+    where T : ICellCoordinate
   {
     private readonly Dictionary<T, double> myValues = new Dictionary<T, double>(EqualityComparerFactory<T>.GetComparer());
 

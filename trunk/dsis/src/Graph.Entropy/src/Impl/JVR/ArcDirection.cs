@@ -4,7 +4,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
   public abstract class ArcDirection<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     protected readonly HashHolder<T> myHash;
     protected readonly MultiDictionary<T, JVRPair<T>> myIndex = new MultiDictionary<T, JVRPair<T>>(EqualityComparerFactory<T>.GetComparer());

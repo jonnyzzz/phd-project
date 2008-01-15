@@ -8,7 +8,7 @@ using DSIS.Core.Coordinates;
 namespace DSIS.Core.Builders
 {
   public interface ICellImageBuilder<TCell>
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
   {
     void Bind(CellImageBuilderContext<TCell> cellImageBuilderContext);
 

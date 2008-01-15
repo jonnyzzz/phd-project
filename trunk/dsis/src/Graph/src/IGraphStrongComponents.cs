@@ -6,7 +6,7 @@ using DSIS.Graph.Abstract;
 namespace DSIS.Graph
 {
   public interface IGraphStrongComponents<TCoordinate>
-    where TCoordinate : ICellCoordinate<TCoordinate>
+    where TCoordinate : ICellCoordinate
   {
     IEnumerable<IStrongComponentInfo> Components { get; }
     int ComponentCount { get; }

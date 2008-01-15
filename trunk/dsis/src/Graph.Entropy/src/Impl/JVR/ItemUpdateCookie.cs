@@ -1,11 +1,11 @@
 using System;
-using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
-  public class ItemUpdateCookie<T> : IDisposable where T : ICellCoordinate<T>
+  public class ItemUpdateCookie<T> : IDisposable 
+    where T : ICellCoordinate
   {
     private readonly IHashholderController<T> myInstance;
     private readonly ArcDirection<T> myStrait;

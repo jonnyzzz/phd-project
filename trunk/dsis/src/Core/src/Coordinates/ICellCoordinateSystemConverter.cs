@@ -8,8 +8,8 @@ using System.Collections.Generic;
 namespace DSIS.Core.Coordinates
 {
   public interface ICellCoordinateSystemConverter<TFrom, TTo>
-    where TFrom : ICellCoordinate<TFrom>
-    where TTo : ICellCoordinate<TTo>
+    where TFrom : ICellCoordinate
+    where TTo : ICellCoordinate
   {
     ICellCoordinateSystem<TFrom> FromSystem { get; }
     ICellCoordinateSystem<TTo> ToSystem { get; }
@@ -17,11 +17,5 @@ namespace DSIS.Core.Coordinates
     IEnumerable<TTo> Subdivide(TFrom coordinate);
 
     ICellCoordinateSystemConverter<TFrom, TTo> Clone();
-  }
-
-  public interface ICellCoordinateSystemMultiplyConverter<T> : ICellCoordinateSystemConverter<T,T> 
-    where T : ICellCoordinate<T>
-  {
-    long[] Division { get; }
   }
 }

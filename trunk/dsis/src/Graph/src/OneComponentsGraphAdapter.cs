@@ -8,7 +8,7 @@ using DSIS.Utils;
 namespace DSIS.Graph
 {
   public class OneComponentsGraphAdapter<T> : IGraphStrongComponents<T> 
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private readonly IGraphStrongComponents<T> myComps;
     private readonly IStrongComponentInfo myComponent;

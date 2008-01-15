@@ -4,15 +4,9 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
-  internal interface INodeInternal<TCell> 
-    where TCell : ICellCoordinate<TCell>
-  {
-    IEnumerable<INode<TCell>> Edges{ get; }
-  } 
-
   [EqualityComparer(typeof(NodeEqualityComparer<,>))]
   public abstract class Node<TInh, TCell> : INode<TCell>, INodeInternal<TCell>
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
     where TInh : Node<TInh, TCell>
   {
     private static readonly IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();

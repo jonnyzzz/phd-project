@@ -9,7 +9,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 {
   public class AdaptiveMethod<T, Q> : IntegerCoordinateMethodBase<T, Q>, ICellImageBuilder<Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private static readonly PointGraphInitialBuilder BUILDER = new PointGraphInitialBuilder();
 

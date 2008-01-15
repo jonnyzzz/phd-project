@@ -3,7 +3,7 @@ using DSIS.Core.Coordinates;
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
   public class StraitArcDirection<T> : ArcDirection<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     public StraitArcDirection(HashHolder<T> hash) : base(hash)
     {

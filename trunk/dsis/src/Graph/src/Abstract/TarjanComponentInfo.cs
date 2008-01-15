@@ -27,7 +27,8 @@ namespace DSIS.Graph.Abstract
       get { return myComponentId; }
     }
 
-    internal void SetNodeComponent<TCell>(TarjanNode<TCell> node) where TCell : ICellCoordinate<TCell>
+    internal void SetNodeComponent<TCell>(TarjanNode<TCell> node) 
+      where TCell : ICellCoordinate
     {
       node.ComponentId = myComponentId;
 

@@ -4,8 +4,8 @@ using DSIS.Core.Util;
 namespace DSIS.Core.Processor
 {
   public class SymbolicImageConstructionProcess<TFrom, TTo> : ICellProcessor<TFrom, TTo>
-    where TFrom : ICellCoordinate<TFrom>
-    where TTo : ICellCoordinate<TTo>
+    where TFrom : ICellCoordinate
+    where TTo : ICellCoordinate
   {
     private ICellProcessorContext<TFrom, TTo> myContext;
 

@@ -9,14 +9,14 @@ namespace DSIS.Scheme.Impl
   {
     protected new virtual ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       return EmptyArray<ContextMissmatchCheck>.Instance;
     }
 
     protected abstract void Apply<T,Q>(T system, Context input, Context output)
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>;
+      where Q : IIntegerCoordinate;
 
 
     protected sealed override With Create(Context @in, Context @out)

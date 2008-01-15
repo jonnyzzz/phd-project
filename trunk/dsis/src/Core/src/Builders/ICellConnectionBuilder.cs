@@ -13,7 +13,8 @@ namespace DSIS.Core.Builders
   /// To separate some figure to cells please use ICellCoordinateSystem implementor
   /// object. 
   /// </summary>
-  public interface ICellConnectionBuilder<TCell> where TCell : ICellCoordinate<TCell>
+  public interface ICellConnectionBuilder<TCell> 
+    where TCell : ICellCoordinate
   {
     void ConnectToOne(TCell cell, TCell v);
     void ConnectToMany(TCell cell, IEnumerable<TCell> v);

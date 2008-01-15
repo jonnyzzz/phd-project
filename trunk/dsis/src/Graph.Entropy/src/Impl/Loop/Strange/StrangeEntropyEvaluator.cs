@@ -7,7 +7,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Strange;
 namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
   public class StrangeEntropyEvaluator<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {    
     public IGraphMeasure<T> Measure(IGraph<T> graph, IGraphStrongComponents<T> comps, StrangeEntropyEvaluatorParams @params)
     {

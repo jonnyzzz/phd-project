@@ -8,7 +8,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
   public abstract class GraphWeightSearchBase<T, TCollection> : IGraphWeightSearch<T> 
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
     where TCollection : IVisitedCollection<T>, new()
   {
     private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();

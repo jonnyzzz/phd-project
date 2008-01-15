@@ -6,7 +6,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Abstract
 {
   public class GraphNodeHashList<TNode, TCell>
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
   {
     private static readonly IEqualityComparer<TCell> COMPARER = EqualityComparerFactory<TCell>.GetComparer();

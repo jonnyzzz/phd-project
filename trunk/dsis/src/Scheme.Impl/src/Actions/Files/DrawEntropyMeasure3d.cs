@@ -10,7 +10,8 @@ namespace DSIS.Scheme.Impl.Actions.Files
 {
   public abstract class DrawEntropy3dActionBase : DrawEntropyMeasureActionBase
   {
-    protected static GnuplotScriptParameters3d CreateProperties<Q>(IGraphMeasure<Q> measure, string outputFile) where Q : ICellCoordinate<Q>
+    protected static GnuplotScriptParameters3d CreateProperties<Q>(IGraphMeasure<Q> measure, string outputFile) 
+      where Q : ICellCoordinate
     {
       GnuplotScriptParameters3d ps = new GnuplotScriptParameters3d(outputFile, string.Format("Entropy = {0}", measure.GetEntropy().ToString("F6")));
       ps.ForcePoints = true;
@@ -22,7 +23,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
     }
 
     protected static GnuplotPointsFileWriter WriteMeasureFile<T, Q>(string measureFile, IGraphMeasure<Q> measure, T system)
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
       where T : IIntegerCoordinateSystem<Q>
     {
       GnuplotPointsFileWriter wr;

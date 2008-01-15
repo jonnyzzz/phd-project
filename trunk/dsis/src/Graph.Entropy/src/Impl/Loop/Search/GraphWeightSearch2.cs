@@ -5,7 +5,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Search;
 namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
   public class GraphWeightSearch2<T> : GraphWeightSearchBase<T, GraphWeightSearch2<T>.VisitedCollection> 
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     public GraphWeightSearch2(IGraphStrongComponents<T> components,
                               IStrongComponentInfo component) : base(components, component)

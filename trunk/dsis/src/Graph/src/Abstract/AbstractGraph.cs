@@ -5,17 +5,8 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
-  public interface IGraphExtension<TNode, TCell>
-    where TNode : Node<TNode, TCell>
-    where TCell : ICellCoordinate<TCell>
-  {
-    TNode CreateNode(TCell coordinate);
-    void NodeAdded(TNode node);
-    void EdgeAdded(TNode from, TNode to);
-  }
-
   public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell>
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
     where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>
   {

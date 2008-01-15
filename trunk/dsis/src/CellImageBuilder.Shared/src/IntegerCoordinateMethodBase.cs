@@ -6,7 +6,7 @@ namespace DSIS.CellImageBuilder.Shared
 {
   public abstract class IntegerCoordinateMethodBase<T, Q> 
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     protected T mySystem;
     protected ICellConnectionBuilder<Q> myBuilder;
@@ -18,18 +18,5 @@ namespace DSIS.CellImageBuilder.Shared
       myBuilder = context.ConnectionBuilder;
       myDim = context.System.Dimension;
     }
-  }
-
-
-  /// <summary>
-  /// Base Interface for cell Image Builder settings. 
-  /// No common parameters. Used as the base interface 
-  /// for the hierarchy
-  /// </summary>
-  public interface ICellImageBuilderIntegerCoordinatesSettings : ICellImageBuilderSettings
-  {
-    ICellImageBuilder<TCell> Create<TSys, TCell>()
-      where TSys : IIntegerCoordinateSystem<TCell>
-      where TCell : IIntegerCoordinate<TCell>;
   }
 }

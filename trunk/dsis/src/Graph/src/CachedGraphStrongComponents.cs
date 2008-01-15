@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
-using DSIS.Utils;
 
 namespace DSIS.Graph
 {
   public class CachedGraphStrongComponents<T>  : IGraphStrongComponents<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private readonly IGraphStrongComponents<T> myOriginal;
     private readonly Dictionary<IStrongComponentInfo, IGraph<T>> myCache = new Dictionary<IStrongComponentInfo, IGraph<T>>();

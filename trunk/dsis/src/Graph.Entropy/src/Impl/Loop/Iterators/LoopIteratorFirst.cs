@@ -7,7 +7,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
   public class LoopIteratorFirst<T> : LoopIteratorBase<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private readonly IGraphWeightSearch<T> mySearcher;
 

@@ -13,7 +13,7 @@ namespace DSIS.Core.Coordinates
   /// it's specific interface.
   /// </summary>
   /// <typeparam name="T"></typeparam>
-  public interface ICellCoordinateSystem<T> where T : ICellCoordinate<T>
+  public interface ICellCoordinateSystem<T> where T : ICellCoordinate
   {
     long[] Subdivision { get; }
 

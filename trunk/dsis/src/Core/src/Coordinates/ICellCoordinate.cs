@@ -3,12 +3,21 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
-using System.Collections.Generic;
+using System;
 
 namespace DSIS.Core.Coordinates
 {
-  public interface ICellCoordinate<T> where T : ICellCoordinate<T>
-  {
-    IEqualityComparer<T> Comparer { get; }
+  /// <summary>
+  /// Marker interface for cell coordinate implementation. 
+  /// This implementation depends on the coordinate system class
+  /// </summary>
+  public interface ICellCoordinate
+  {    
+  }
+
+  [Obsolete("Use ICellCoordinate instead")]
+  public interface ICellCoordinate<T> : ICellCoordinate
+    where T : ICellCoordinate<T>
+  {    
   }
 }

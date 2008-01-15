@@ -5,7 +5,8 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
-  public class SortedNodeSet<T> : BinTreePriorityQueueEx<T,double> where T : ICellCoordinate<T>
+  public class SortedNodeSet<T> : BinTreePriorityQueueEx<T,double> 
+    where T : ICellCoordinate
   {
     private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
     private readonly Dictionary<T, Node> myValues = new Dictionary<T, Node>(COMPARER);

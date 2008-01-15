@@ -5,7 +5,7 @@ namespace DSIS.IntegerCoordinates
   public interface IIntegerCoordinateSystemWith {
      void Do<T, Q>(T system)
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>;
+      where Q : IIntegerCoordinate;
   }
 
   public interface IIntegerCoordinateSystemInfo
@@ -16,7 +16,10 @@ namespace DSIS.IntegerCoordinates
     void DoGeneric(IIntegerCoordinateSystemWith with);
   }
 
-  public interface IIntegerCoordinateSystem<T> : ICellCoordinateSystem<T>, IIntegerCoordinateSystemInfo where T : IIntegerCoordinate<T>
+  public interface IIntegerCoordinateSystem<T> 
+    : ICellCoordinateSystem<T>
+    , IIntegerCoordinateSystemInfo 
+    where T : IIntegerCoordinate
   {
     /// <summary>
     /// Writes to output array the point of top-left conner of cell 

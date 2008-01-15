@@ -5,7 +5,8 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.Util
 {
   [EqualityComparer(typeof (NodePairEqualityComparer<>))]
-  public class NodePair<T> : PairBase<T> where T : ICellCoordinate<T>
+  public class NodePair<T> : PairBase<T> 
+    where T : ICellCoordinate
   {
     public static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
     public readonly int Hash;
@@ -30,7 +31,7 @@ namespace DSIS.Graph.Entropy.Impl.Util
   }
 
   internal class NodePairEqualityComparer<T> : IEqualityComparer<NodePair<T>>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private static readonly IEqualityComparer<T> COMPARER = NodePair<T>.COMPARER;
 

@@ -4,8 +4,9 @@ using DSIS.Graph.Entropy.Impl.Entropy;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
+  //todo: Store edges in node to throw away dictionary usage!
   public class JVRMeasure<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     protected HashHolder<T> myHashHolder;
     protected ArcDirection<T> myStraitEdges;

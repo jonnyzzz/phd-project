@@ -4,7 +4,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
   public abstract class VisitedCollectionBase<T> : IVisitedCollection<T> 
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private readonly Hashset<INode<T>> myVisited =
       new Hashset<INode<T>>(EqualityComparerFactory<INode<T>>.GetComparer());

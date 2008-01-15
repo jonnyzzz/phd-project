@@ -25,7 +25,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
     public ICellImageBuilder<TCell> Create<TSys, TCell>() 
       where TSys : IIntegerCoordinateSystem<TCell> 
-      where TCell : IIntegerCoordinate<TCell>
+      where TCell : IIntegerCoordinate
     {
       return new AdaptiveMethod<TSys, TCell>();
     }

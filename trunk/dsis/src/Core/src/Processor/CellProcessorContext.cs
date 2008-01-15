@@ -6,8 +6,8 @@ using DSIS.Core.Util;
 namespace DSIS.Core.Processor
 {
   public class CellProcessorContext<TFrom, TTo> : CellProcessorContextBase<TFrom, TTo>
-    where TTo : ICellCoordinate<TTo>
-    where TFrom : ICellCoordinate<TFrom>
+    where TTo : ICellCoordinate
+    where TFrom : ICellCoordinate
   {
     public CellProcessorContext(ICountEnumerable<TFrom> countEnumerable,
                                 ICellCoordinateSystemConverter<TFrom, TTo> converter,

@@ -5,7 +5,7 @@ using DSIS.Core.Coordinates;
 namespace DSIS.Graph.Adapter
 {
   public class GraphCellImageBuilder<TCell> : ICellConnectionBuilder<TCell>
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
   {
     private readonly IGraph<TCell> myGraph;
 

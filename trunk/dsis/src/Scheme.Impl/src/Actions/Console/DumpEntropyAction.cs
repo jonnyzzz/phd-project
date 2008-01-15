@@ -19,6 +19,7 @@ namespace DSIS.Scheme.Impl.Actions.Console
       Dump(Logger.Instance(input), Keys.GraphMeasure<Q>().Get(input));      
     }
 
-    protected abstract void Dump<Q>(Logger logger, IGraphMeasure<Q> measure) where Q : ICellCoordinate<Q>;
+    protected abstract void Dump<Q>(Logger logger, IGraphMeasure<Q> measure) 
+      where Q : ICellCoordinate;
   }
 }

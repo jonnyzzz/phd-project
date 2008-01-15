@@ -44,7 +44,9 @@ namespace DSIS.Scheme.Impl
         myContext = context;
       }
 
-      public virtual void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate<Q>
+      public virtual void Do<T, Q>(T system) 
+        where T : IIntegerCoordinateSystem<Q> 
+        where Q : IIntegerCoordinate
       {
       }
     }
@@ -62,7 +64,7 @@ namespace DSIS.Scheme.Impl
 
       public abstract void Do<T, Q>(T system)
         where T : IIntegerCoordinateSystem<Q>
-        where Q : IIntegerCoordinate<Q>;
+        where Q : IIntegerCoordinate;
     }
   }
 }

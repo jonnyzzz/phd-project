@@ -7,7 +7,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.Entropy
 {
   public class GraphMeasure<T, TPair> : IGraphMeasure<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
     where TPair : PairBase<T>
   {
     private const double EPS = 1e-10;

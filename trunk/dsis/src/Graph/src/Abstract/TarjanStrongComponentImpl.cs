@@ -6,7 +6,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Abstract
 {
   internal class TarjanStrongComponentImpl<TCell> : IGraphStrongComponents<TCell>
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
   {
     private static readonly IFilter ALL_FILTER = new AllFilter();
     private static readonly IFilter DROP = new DropAllFilter();

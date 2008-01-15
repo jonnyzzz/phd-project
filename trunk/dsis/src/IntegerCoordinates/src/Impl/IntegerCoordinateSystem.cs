@@ -67,14 +67,13 @@ namespace DSIS.IntegerCoordinates.Impl
       return new IntegerCoordinateSystem(SystemSpace, GetSubdividedFactor(division));
     }
 
-
     public IntegerCoordinateSystem ProjectedCoordinateSystem(long[] division)
     {
       long[] factor = GetProjectedFactor(division);
       return factor != null ? new IntegerCoordinateSystem(SystemSpace, factor) : null;
     }
 
-    public void SaveCoordinate(IntegerCoordinate coord, IBinaryWriter writer)
+/*    public void SaveCoordinate(IntegerCoordinate coord, IBinaryWriter writer)
     {
       for(int i = 0; i<myDimension; i++)
       {
@@ -90,7 +89,7 @@ namespace DSIS.IntegerCoordinates.Impl
         t[i] = reader.ReadLong();
       }
       return new IntegerCoordinate(t);
-    }
+    }*/
 
     public void DoGeneric(IIntegerCoordinateSystemWith with)
     {

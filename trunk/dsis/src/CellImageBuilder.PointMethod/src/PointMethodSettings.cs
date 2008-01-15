@@ -24,8 +24,9 @@ namespace DSIS.CellImageBuilders.PointMethod
       UseOverlapping = false;
     }
 
-    public ICellImageBuilder<TCell> Create<TSys, TCell>() where TSys : IIntegerCoordinateSystem<TCell>
-      where TCell : IIntegerCoordinate<TCell>
+    public ICellImageBuilder<TCell> Create<TSys, TCell>() 
+      where TSys : IIntegerCoordinateSystem<TCell>
+      where TCell : IIntegerCoordinate
     {
       return new PointMethod<TSys, TCell>();
     }

@@ -7,7 +7,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
   public class HashHolder<T> : IHashholderController<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     const double EPS = 1e-8;
     private static readonly IEqualityComparer<JVRPair<T>> COMPARER = EqualityComparerFactory<JVRPair<T>>.GetComparer();

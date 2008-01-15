@@ -7,7 +7,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.Eigen
 {
   public class EigenEntropyEvaluatorImpl<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private readonly double myEps;
     private readonly IGraph<T> myGraph;

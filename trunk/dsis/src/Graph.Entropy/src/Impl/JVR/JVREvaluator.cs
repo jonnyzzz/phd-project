@@ -4,7 +4,7 @@ using DSIS.Graph.Entropy.Impl.Entropy;
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
   public class JVREvaluator<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private const double EPS = 1e-3;
 

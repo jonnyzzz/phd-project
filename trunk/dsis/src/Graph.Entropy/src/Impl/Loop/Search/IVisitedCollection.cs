@@ -2,7 +2,7 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
-  public interface IVisitedCollection<T> where T : ICellCoordinate<T>
+  public interface IVisitedCollection<T> where T : ICellCoordinate
   {
     bool Contains(SearchTreeNode<T> node);
     bool IsInTree(SearchTreeNode<T> from, INode<T> to);

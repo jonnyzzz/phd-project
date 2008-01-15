@@ -10,7 +10,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     double GetEntropy();    
   }
 
-  public interface IGraphMeasure<T> : IGraphEntropy where T : ICellCoordinate<T>
+  public interface IGraphMeasure<T> : IGraphEntropy where T : ICellCoordinate
   {
     IEnumerable<Pair<PairBase<T>, double>> Measure { get; }    
     IDictionary<T, double> GetMeasureNodes();

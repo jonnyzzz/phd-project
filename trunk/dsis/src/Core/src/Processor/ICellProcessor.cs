@@ -14,14 +14,14 @@ namespace DSIS.Core.Processor
   /// <typeparam name="TCellFrom"></typeparam>
   /// <typeparam name="TCellTo"></typeparam>
   public interface ICellProcessor<TCellFrom, TCellTo> : IProcess
-    where TCellFrom : ICellCoordinate<TCellFrom>
-    where TCellTo : ICellCoordinate<TCellTo>
+    where TCellFrom : ICellCoordinate
+    where TCellTo : ICellCoordinate
   {
     void Bind(ICellProcessorContext<TCellFrom, TCellTo> context);
   }
 
   public interface ICellProcessor<T> : IProcess 
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     void Bind(ICellProcessorMultiplyContext<T> context);
   }

@@ -3,7 +3,8 @@ using DSIS.Core.System;
 
 namespace DSIS.Core.Builders
 {
-  public struct CellImageBuilderContext<TCell> where TCell : ICellCoordinate<TCell>
+  public struct CellImageBuilderContext<TCell> 
+    where TCell : ICellCoordinate
   {
     private readonly ISystemInfo myFunction;
     private readonly ICellImageBuilderSettings mySettings;

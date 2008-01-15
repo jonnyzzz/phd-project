@@ -3,7 +3,8 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public class TarjanNodeStack<TCell> where TCell : ICellCoordinate<TCell>
+  public class TarjanNodeStack<TCell> 
+    where TCell : ICellCoordinate
   {
     private readonly Stack<TarjanNode<TCell>> myStack = new Stack<TarjanNode<TCell>>();
     private readonly TarjanNodeFlags myMask;

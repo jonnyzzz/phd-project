@@ -8,7 +8,8 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
-  public class EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> where T : ICellCoordinate<T>
+  public class EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> 
+    where T : ICellCoordinate
   {
     protected readonly Dictionary<NodePair<T>, double> myM =
       new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer());

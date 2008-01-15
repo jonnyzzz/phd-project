@@ -7,7 +7,7 @@ namespace DSIS.Graph.Abstract
   public class TarjanGraph<TCell> :
     AbstractGraph<TarjanGraph<TCell>, TCell, TarjanNode<TCell>>, IGraphWithStrongComponent<TCell>,
     IGraphExtension<TarjanNode<TCell>, TCell>
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
   {
     private bool myWasComponents = false;
 

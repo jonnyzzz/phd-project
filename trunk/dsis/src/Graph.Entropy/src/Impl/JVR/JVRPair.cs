@@ -6,7 +6,8 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
   [EqualityComparer(typeof(JVRPairEqualityComparer<>))]
-  public class JVRPair<T> : PairBase<T> where T : ICellCoordinate<T>
+  public class JVRPair<T> : PairBase<T> 
+    where T : ICellCoordinate
   {
     public static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
     public readonly int Hash;

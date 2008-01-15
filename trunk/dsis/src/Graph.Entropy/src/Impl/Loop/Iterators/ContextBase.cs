@@ -3,7 +3,8 @@ using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
-  public abstract class ContextBase<T> where T : ICellCoordinate<T>
+  public abstract class ContextBase<T> 
+    where T : ICellCoordinate
   {
     protected readonly IGraphStrongComponents<T> myComponents;
     protected readonly IStrongComponentInfo myComponent;

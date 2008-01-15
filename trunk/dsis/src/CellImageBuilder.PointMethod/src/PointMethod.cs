@@ -9,7 +9,7 @@ namespace DSIS.CellImageBuilders.PointMethod
 {
   public class PointMethod<T, Q> : IntegerCoordinateMethodBase<T, Q>, ICellImageBuilder<Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private IPointProcessor<Q> myPointProcessor;
     private readonly List<Q> myPoints = new List<Q>();

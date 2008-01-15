@@ -27,7 +27,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
     }
 
     private IGraphWeightSearch<Q> CreateSearch<Q>(IGraphStrongComponents<Q> comps, IStrongComponentInfo info)
-      where Q : ICellCoordinate<Q>
+      where Q : ICellCoordinate
     {
       switch (EntropyType)
       {
@@ -44,7 +44,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
       }
     }
 
-    internal ILoopIterator<Q> CreateIterator<Q>(ILoopIteratorCallback<Q> callback, IGraphStrongComponents<Q> comps, IStrongComponentInfo info) where Q : ICellCoordinate<Q>
+    internal ILoopIterator<Q> CreateIterator<Q>(ILoopIteratorCallback<Q> callback, IGraphStrongComponents<Q> comps, IStrongComponentInfo info) 
+      where Q : ICellCoordinate
     {
       IGraphWeightSearch<Q> search = CreateSearch(comps, info);
       switch (Strategy)

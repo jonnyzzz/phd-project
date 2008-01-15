@@ -34,6 +34,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Abstract\AbstractGraph.cs" />
     <Compile Include="src\Abstract\GraphNodeHashList.cs" />
+    <Compile Include="src\Abstract\IGraphExtension.cs" />
+    <Compile Include="src\Abstract\INodeInternal.cs" />
     <Compile Include="src\Abstract\IStrongComponentInfoEx.cs" />
     <Compile Include="src\Abstract\IStrongComponentInfoManager.cs" />
     <Compile Include="src\Abstract\NodeEqualityComparer.cs" />

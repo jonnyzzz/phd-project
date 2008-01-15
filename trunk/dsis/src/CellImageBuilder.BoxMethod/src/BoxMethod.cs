@@ -16,7 +16,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
 {
   public class BoxMethod<T, Q> : IntegerCoordinateMethodBase<T, Q>, ICellImageBuilder<Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private IFunction<double> myFunction;
     private double[] x;

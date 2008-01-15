@@ -50,6 +50,7 @@
     <Compile Include="src\Coordinates\ICellCoordinate.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystem.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemConverter.cs" />
+    <Compile Include="src\Coordinates\ICellCoordinateSystemMultiplyConverter.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemProjector.cs" />
     <Compile Include="src\Data\IContinuableDataCollectionAnalisys.cs" />
     <Compile Include="src\Data\IDataCollection.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="src\Processor\CellProcessorContextBase.cs" />
     <Compile Include="src\Processor\ICellProcessor.cs" />
     <Compile Include="src\Processor\ICellProcessorContext.cs" />
+    <Compile Include="src\Processor\ICellProcessorMultiplyContext.cs" />
     <Compile Include="src\Processor\IConcurentProcess.cs" />
     <Compile Include="src\Processor\InThreadProcessExecutor.cs" />
     <Compile Include="src\Processor\IProcess.cs" />
