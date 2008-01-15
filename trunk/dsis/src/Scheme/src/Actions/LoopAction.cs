@@ -5,8 +5,22 @@ using DSIS.Scheme.Exec;
 
 namespace DSIS.Scheme.Actions
 {
+  public struct LoopIndex
+  {
+    public readonly int Index;
+    public readonly int Count;
+
+    public LoopIndex(int index, int count)
+    {
+      Index = index;
+      Count = count;
+    }
+  }
+
   public class LoopAction : DebugableAction, IAction
   {
+    public static readonly Key<LoopIndex> LoopIndexKey = new Key<LoopIndex>("loop");
+
     private readonly int myCount;
     private readonly IAction myAction;
 
@@ -32,9 +46,9 @@ namespace DSIS.Scheme.Actions
         {
           throw new ContextMissmatchException(check, this);
         }
-
+        ctx.Set(LoopIndexKey, new LoopIndex(i, myCount));
         Context newCtx = myAction.Apply(ctx);
-        newCtx.AddAllNew(ctx);
+        newCtx.AddAllNew(ctx);        
         ctx = newCtx;
       }
       return ctx;      

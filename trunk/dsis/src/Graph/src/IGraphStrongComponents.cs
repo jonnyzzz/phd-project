@@ -5,12 +5,15 @@ using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph
 {
-  public interface IGraphStrongComponents<TCoordinate>
-    where TCoordinate : ICellCoordinate
+  public interface IGraphStrongComponents
   {
     IEnumerable<IStrongComponentInfo> Components { get; }
-    int ComponentCount { get; }
+    int ComponentCount { get; }    
+  }
 
+  public interface IGraphStrongComponents<TCoordinate> : IGraphStrongComponents
+    where TCoordinate : ICellCoordinate
+  {
     //todo: Move to CountEnumerable
     IEnumerable<INode<TCoordinate>> GetNodes(ICollection<IStrongComponentInfo> componentIds);
 

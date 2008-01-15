@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.BoxMethod;
+using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.System;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
@@ -17,18 +18,33 @@ namespace DSIS.Scheme.Impl
   public abstract class SimbolicImageBuildTestBase
   {
     protected abstract ISystemInfo SystemInfo { get;}
-    protected abstract ISystemSpace SystemSpace{ get;}
+    protected abstract ISystemSpace SystemSpace { get;}
+
+    protected ICellImageBuilderIntegerCoordinatesSettings Method;
+    protected long[] MethodSubdivision;
+
+    [SetUp]
+    public virtual void SetUp()
+    {
+      Method = new BoxMethodSettings(0.1);
+      MethodSubdivision = new long[] {2, 2 };
+    }
 
     protected delegate void AddAssertActions(ActionBuilderAdapter ad, IAction leaf);
 
     protected virtual void DoTest(int steps, AddAssertActions addAssertActions)
+    {
+      DoTest(steps, delegate { }, addAssertActions);
+    }
+
+    protected virtual void DoTest(int steps, AddAssertActions loop, AddAssertActions addAssertActions)
     {
       ActionGraph agr = new ActionGraph();
       ActionBuilderAdapter gr = new ActionBuilderAdapter(agr);
       IAction system = new SystemInfoAction(SystemInfo, SystemSpace);
 
       IAction a5 = new ChainRecurrenctSimbolicImageAction();
-      IAction method = new SetMethod(new BoxMethodSettings(0.1), new long[] { 2, 2 });
+      IAction method = new SetMethod(Method, MethodSubdivision);
 
       IAction a4 = gr.AddLine(
         system,
@@ -49,7 +65,8 @@ namespace DSIS.Scheme.Impl
             SymbolicImageConstructionStep build = new SymbolicImageConstructionStep();
             bld.AddEdge(bld.Start, build);
             bld.AddEdge(build, bld.End);
-            ParallelAction b = new ParallelAction(new DumpGraphInfoAction(),
+            ProxyAction b = new ProxyAction();
+            ParallelAction b2 = new ParallelAction(new DumpGraphInfoAction(),
                                                   new DumpGraphComponentsInfoAction(),
                                                   new DumpMethodAction()
               );
@@ -57,6 +74,9 @@ namespace DSIS.Scheme.Impl
             bld.AddEdge(build, b);
             bld.AddEdge(bld.Start, p);
             bld.AddEdge(p, b);
+            bld.AddEdge(b, b2);
+
+            loop(new ActionBuilderAdapter(bld), b);
           });
 
       IAction buildIS = new LoopAction(steps, buildSI);

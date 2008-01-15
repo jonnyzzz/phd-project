@@ -10,13 +10,18 @@ using DSIS.Core.Util;
 
 namespace DSIS.Graph
 {
-  public interface IGraph<TCoordinate> where TCoordinate : ICellCoordinate
+  public interface IGraph
+  {
+    int NodesCount { get; }
+    int EdgesCount { get; }
+    
+  }
+
+  public interface IGraph<TCoordinate> : IGraph where TCoordinate : ICellCoordinate
   {
     ICellCoordinateSystem<TCoordinate> CoordinateSystem { get; }
     IEnumerable<INode<TCoordinate>> Nodes { get; }
 
-    int NodesCount { get; }
-    int EdgesCount { get; }
 
     IEnumerable<INode<TCoordinate>> GetEdges(INode<TCoordinate> forNode);
 

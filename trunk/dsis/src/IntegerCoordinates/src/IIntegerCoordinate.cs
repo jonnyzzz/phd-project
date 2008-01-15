@@ -10,7 +10,8 @@ namespace DSIS.IntegerCoordinates
   }
 
   [Obsolete("Use IIntegerCoordinate instead")]
-  public interface IIntegerCoordinate<T> : IIntegerCoordinate, ICellCoordinate<T> where T : IIntegerCoordinate<T>
+  public interface IIntegerCoordinate<T> : IIntegerCoordinate, ICellCoordinate<T> 
+    where T : IIntegerCoordinate<T>
   {
   }
 }

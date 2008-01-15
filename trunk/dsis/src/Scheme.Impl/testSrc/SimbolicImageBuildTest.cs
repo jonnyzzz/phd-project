@@ -6,7 +6,7 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
 namespace DSIS.Scheme.Impl
-{
+{  
   [TestFixture]
   public class SimbolicImageBuildTest : SimbolicImageBuildTestBase
   {

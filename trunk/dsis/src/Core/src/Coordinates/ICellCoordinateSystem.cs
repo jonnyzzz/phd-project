@@ -8,15 +8,22 @@ using DSIS.Core.Util;
 
 namespace DSIS.Core.Coordinates
 {
+  public interface ICellCoordinateSystem
+  {
+    long[] Subdivision { get; }
+    ISystemSpace SystemSpace { get; }
+
+    int Dimension { get;}
+  }
+
   /// <summary>
   /// Basic notion of CellCoordinate System. Custom system features to be defined in
   /// it's specific interface.
   /// </summary>
   /// <typeparam name="T"></typeparam>
-  public interface ICellCoordinateSystem<T> where T : ICellCoordinate
+  public interface ICellCoordinateSystem<T> : ICellCoordinateSystem
+    where T : ICellCoordinate
   {
-    long[] Subdivision { get; }
-
     /// <summary>
     /// Return ICellCoordinate for point.
     /// If point is outside of space <code>null</code> is returned
@@ -41,9 +48,5 @@ namespace DSIS.Core.Coordinates
     /// Returns all cells for initial space provided by ISystemSpace
     /// </summary>
     CountEnumerable<T> InitialSubdivision { get; }
-
-    ISystemSpace SystemSpace { get; }
-
-    int Dimension { get;}
   }
 }

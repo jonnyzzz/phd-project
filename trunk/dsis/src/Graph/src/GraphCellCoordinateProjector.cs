@@ -3,7 +3,8 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph
 {
-  public class GraphCellCoordinateProjector<T> : ICellCoordinateSystemProjector<T> where T : ICellCoordinate<T>
+  public class GraphCellCoordinateProjector<T> : ICellCoordinateSystemProjector<T> 
+    where T : ICellCoordinate
   {
     private readonly ICellCoordinateSystemProjector<T> myProjector;
     private readonly IGraph<T> myGraph;
@@ -16,11 +17,11 @@ namespace DSIS.Graph
       if (!myGraph.CoordinateSystem.Equals(projector.ToSystem))
         throw new ArgumentException("Coordinate systems should be the same");
     }
-
+   
     public T Project(T coordinate)
     {
       T project = myProjector.Project(coordinate);
-      return project != null && !myGraph.Contains(coordinate) ? default(T) : project;
+      return project != null && myGraph.Contains(project) ? project : default(T);
     }
 
     public ICellCoordinateSystem<T> FromSystem
