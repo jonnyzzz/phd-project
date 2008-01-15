@@ -23,6 +23,11 @@ namespace DSIS.Graph
       return new MockNode<T>(coordinate);
     }
 
+    public bool Contains(T coordinate)
+    {
+      throw new NotImplementedException();
+    }
+
     public ICellCoordinateSystem<T> CoordinateSystem
     {
       get { return myCoordinates; }

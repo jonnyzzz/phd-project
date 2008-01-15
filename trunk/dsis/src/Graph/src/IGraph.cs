@@ -35,6 +35,8 @@ namespace DSIS.Graph
     /// <returns></returns>
     INode<TCoordinate> AddNode(TCoordinate coordinate);
 
+    bool Contains(TCoordinate coordinate);
+
     void Dump(TextWriter tw);
     string Dump();
   }

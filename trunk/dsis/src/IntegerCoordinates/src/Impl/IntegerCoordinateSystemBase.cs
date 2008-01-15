@@ -146,6 +146,37 @@ namespace DSIS.IntegerCoordinates.Impl
       return myAreaLeftPoint[i] + myCellSize[i] * pt;
     }
 
+    public override bool Equals(object obj)
+    {
+      if (obj is TInh)
+      {
+        IntegerCoordinateSystemBase<TInh,Q> inh = (IntegerCoordinateSystemBase<TInh, Q>) obj;
+        if (inh.myDimension != myDimension)
+          return false;
+
+        for(int i=0; i<myDimension; i++)
+        {
+          if (myAreaLeftPoint[i] != inh.myAreaLeftPoint[i])
+            return false;
+          if (mySubdivision[i] != inh.mySubdivision[i])
+            return false;
+          if (myCellSize[i] != inh.myCellSize[i])
+            return false;
+        }
+        return true;        
+      } 
+      return false;      
+    }
+
+    public override int GetHashCode()
+    {
+      int v = 0;
+      for (int i = 0; i < myDimension; i++)
+        v += (int)mySubdivision[i];
+
+      return myDimension;
+    }
+
     protected long[] GetSubdividedFactor(long[] division)
     {
       long[] div = new long[myDimension];

@@ -58,6 +58,12 @@ namespace DSIS.Graph.Abstract
       return node;
     }
 
+    public bool Contains(TCell coordinate)
+    {
+      //todo: Not necessary to call myExt.CreateNode!
+      return myNodes.Contains(myExt.CreateNode(coordinate));
+    }
+
     public ICellCoordinateSystem<TCell> CoordinateSystem
     {
       get { return myCoordinateSystem; }

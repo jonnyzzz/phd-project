@@ -12,6 +12,16 @@ namespace DSIS.Utils
       }
       return default(T);
     }
+    
+    public static T GetLast<T>(IEnumerable<T> enu)
+    {
+      T v = default(T);
+      foreach (T t in enu)
+      {
+        v = t;
+      }
+      return v;
+    }
 
     public static ICollection<TZ> Merge<T1, T2, TZ>(IEnumerable<T1> c1, IEnumerable<T2> c2)
       where T1 : TZ

@@ -4,6 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
+  //todo: Why class? struct is cheaper for memory
   [EqualityComparer(typeof (IntegerCoordinateEqualityComparer))]
   public sealed class IntegerCoordinate : IIntegerCoordinate<IntegerCoordinate>
   {

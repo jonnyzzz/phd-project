@@ -41,6 +41,23 @@ namespace DSIS.Graph.Abstract
       return true;
     }
 
+    public bool Contains(TNode node)
+    {
+      int index = node.HashCodeInternal % myHashMax;
+
+      Item it = myItems[index];
+      while (it != null)
+      {
+        if (it.Value.HashCodeInternal == node.HashCodeInternal 
+          && COMPARER.Equals(it.Value.Coordinate, node.Coordinate))
+        {
+          return true;
+        }
+        it = it.NextItem;
+      }
+      return false;
+    }
+
     public IEnumerable<TNode> Values
     {
       get{return new NodeEnumerable(myItems);}

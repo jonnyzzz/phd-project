@@ -3,6 +3,7 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
+using System;
 using System.Collections.Generic;
 using DSIS.Utils;
 
@@ -16,7 +17,7 @@ namespace DSIS.Utils
     }
   }
 
-  public struct Pair<TK, TV>
+  public struct Pair<TK, TV> : IEquatable<Pair<TK, TV>>
   {
     private static readonly IEqualityComparer<TK> ComparerK = EqualityComparerFactory<TK>.GetComparer();
     private static readonly IEqualityComparer<TV> ComparerV = EqualityComparerFactory<TV>.GetComparer();
@@ -34,7 +35,7 @@ namespace DSIS.Utils
     {
       if (!(obj is Pair<TK, TV>)) return false;
       Pair<TK, TV> pair = (Pair<TK, TV>) obj;
-      return ComparerK.Equals(First, pair.First) && ComparerV.Equals(Second, pair.Second);
+      return Equals(pair);      
     }
 
     public override int GetHashCode()
@@ -55,6 +56,11 @@ namespace DSIS.Utils
     public override string ToString()
     {
       return "Pair" + "First: " + SafeToString(First) + " Second: " + SafeToString(Second);
+    }
+
+    public bool Equals(Pair<TK, TV> pair)
+    {
+      return ComparerK.Equals(First, pair.First) && ComparerV.Equals(Second, pair.Second);
     }
   }
 }
