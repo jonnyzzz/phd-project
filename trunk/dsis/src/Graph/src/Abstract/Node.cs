@@ -19,7 +19,12 @@ namespace DSIS.Graph.Abstract
     {
       Coordinate = coordinate;
       myEdges = new GraphNodeHashList<TInh, TCell>(7);
-      HashCodeInternal = CellComparer.GetHashCode(Coordinate) & 0x7fffffff;
+      HashCodeInternal = NodeHashCode(coordinate);
+    }
+
+    internal static int NodeHashCode(TCell coordinate)
+    {
+      return CellComparer.GetHashCode(coordinate) & 0x7fffffff;
     }
 
     TCell INode<TCell>.Coordinate

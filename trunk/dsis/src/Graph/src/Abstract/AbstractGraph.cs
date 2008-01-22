@@ -51,8 +51,7 @@ namespace DSIS.Graph.Abstract
 
     public bool Contains(TCell coordinate)
     {
-      //todo: Not necessary to call myExt.CreateNode!
-      return myNodes.Contains(myExt.CreateNode(coordinate));
+      return myNodes.Contains(coordinate);
     }
 
     public ICellCoordinateSystem<TCell> CoordinateSystem

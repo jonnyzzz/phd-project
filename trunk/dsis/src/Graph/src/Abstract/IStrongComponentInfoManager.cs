@@ -12,7 +12,7 @@ namespace DSIS.Graph.Abstract
     IEnumerable<INode<TCellCoordinate>> FilterNodes<TCellCoordinate>(
       IEnumerable<IStrongComponentInfo> infos,
       IEnumerable<StrongComponentNode<TCellCoordinate>> nodes)
-      where TCellCoordinate : ICellCoordinate<TCellCoordinate>;
+      where TCellCoordinate : ICellCoordinate;
 
     void AddComponent(IStrongComponentInfo info);
     void OnConnection(IStrongComponentInfo from, IStrongComponentInfo to);

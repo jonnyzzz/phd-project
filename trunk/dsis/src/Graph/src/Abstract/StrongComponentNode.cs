@@ -2,7 +2,8 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public class StrongComponentNode<TCell> : Node<StrongComponentNode<TCell>, TCell> where TCell : ICellCoordinate<TCell>
+  public class StrongComponentNode<TCell> : Node<StrongComponentNode<TCell>, TCell> 
+    where TCell : ICellCoordinate
   {
     private IStrongComponentInfoEx myStrongComponent = null;
 

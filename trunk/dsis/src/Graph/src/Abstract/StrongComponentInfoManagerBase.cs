@@ -27,11 +27,10 @@ namespace DSIS.Graph.Abstract
       get { return myComponents.Count; }
     }
 
-    public IEnumerable<INode<TCellCoordinate>> FilterNodes<TCellCoordinate>(IEnumerable<IStrongComponentInfo> infos,
-                                                                            IEnumerable
-                                                                              <StrongComponentNode<TCellCoordinate>>
-                                                                              nodes)
-      where TCellCoordinate : ICellCoordinate<TCellCoordinate>
+    public IEnumerable<INode<TCellCoordinate>> FilterNodes<TCellCoordinate>(
+      IEnumerable<IStrongComponentInfo> infos,
+      IEnumerable<StrongComponentNode<TCellCoordinate>> nodes)
+      where TCellCoordinate : ICellCoordinate
     {
       Predicate<IStrongComponentInfoEx> set = GetComponentFilter(infos);
       foreach (StrongComponentNode<TCellCoordinate> node in nodes)

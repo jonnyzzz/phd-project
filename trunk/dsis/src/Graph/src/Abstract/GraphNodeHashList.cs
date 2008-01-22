@@ -41,15 +41,16 @@ namespace DSIS.Graph.Abstract
       return true;
     }
 
-    public bool Contains(TNode node)
+    public bool Contains(TCell node)
     {
-      int index = node.HashCodeInternal % myHashMax;
+      int hashCode = Node<TNode, TCell>.NodeHashCode(node);
+      int index = hashCode%myHashMax;
 
       Item it = myItems[index];
       while (it != null)
       {
-        if (it.Value.HashCodeInternal == node.HashCodeInternal 
-          && COMPARER.Equals(it.Value.Coordinate, node.Coordinate))
+        if (it.Value.HashCodeInternal == hashCode
+            && COMPARER.Equals(it.Value.Coordinate, node))
         {
           return true;
         }
@@ -60,12 +61,12 @@ namespace DSIS.Graph.Abstract
 
     public IEnumerable<TNode> Values
     {
-      get{return new NodeEnumerable(myItems);}
+      get { return new NodeEnumerableTNode(myItems); }
     }
 
     public IEnumerable<INode<TCell>> ValuesUpcasted
     {
-      get { return new NodeEnumerableUpcatsed(myItems); }
+      get { return new NodeEnumerableINode(myItems); }
     }
 
     private sealed class Item
@@ -79,13 +80,21 @@ namespace DSIS.Graph.Abstract
       }
     }
 
-    private sealed class NodeEnumerable : IEnumerable<TNode>
+    private class NodeEnumerable
     {
-      private readonly Item[] myData;
+      protected readonly Item[] myData;
 
       public NodeEnumerable(Item[] data)
       {
         myData = data;
+      }
+    }
+
+    private class NodeEnumerableTNode : NodeEnumerable, IEnumerable<TNode>
+    {
+      public NodeEnumerableTNode(Item[] data)
+        : base(data)
+      {
       }
 
       IEnumerator<TNode> IEnumerable<TNode>.GetEnumerator()
@@ -98,37 +107,39 @@ namespace DSIS.Graph.Abstract
         return Create();
       }
 
-      private NodeEnumerator Create()
+      private NodeEnumeratorTNode Create()
       {
-        return new NodeEnumerator(myData);
+        return new NodeEnumeratorTNode(myData);
       }
     }
-    
-    private sealed class NodeEnumerableUpcatsed : IEnumerable<INode<TCell>>
+
+    private class NodeEnumerableINode : NodeEnumerable, IEnumerable<INode<TCell>>
     {
-      private readonly Item[] myData;
-
-      public NodeEnumerableUpcatsed(Item[] data)
+      public NodeEnumerableINode(Item[] data) : base(data)
       {
-        myData = data;
-      }
-
-      IEnumerator<INode<TCell>> IEnumerable<INode<TCell>>.GetEnumerator()
-      {
-        return new UpcastedEnumerator<NodeEnumerator, TNode, INode<TCell>>(new NodeEnumerator(myData));
       }
 
       IEnumerator IEnumerable.GetEnumerator()
       {
-        return new NodeEnumerator(myData);
+        return Create();
+      }
+
+      private NodeEnumeratorINode Create()
+      {
+        return new NodeEnumeratorINode(myData);
+      }
+
+      IEnumerator<INode<TCell>> IEnumerable<INode<TCell>>.GetEnumerator()
+      {
+        return Create();
       }
     }
 
-    private sealed class NodeEnumerator : IEnumerator<TNode>
+    private class NodeEnumerator : IEnumerator
     {
       private readonly Item[] myData;
 
-      private Item myCurrent;      
+      private Item myCurrent;
       private int myCnt;
 
 
@@ -139,7 +150,7 @@ namespace DSIS.Graph.Abstract
       }
 
       public void Dispose()
-      {                
+      {
       }
 
       public bool MoveNext()
@@ -153,7 +164,8 @@ namespace DSIS.Graph.Abstract
           else if (myCnt + 1 < myData.Length)
           {
             myCurrent = myData[++myCnt];
-          } else
+          }
+          else
           {
             myCnt++;
             myCurrent = null;
@@ -181,6 +193,30 @@ namespace DSIS.Graph.Abstract
       {
         get { return myCurrent.Value; }
       }
-    }    
+    }
+
+    private class NodeEnumeratorTNode : NodeEnumerator, IEnumerator<TNode>
+    {
+      public NodeEnumeratorTNode(Item[] data) : base(data)
+      {
+      }
+
+      TNode IEnumerator<TNode>.Current
+      {
+        get { return Current; }
+      }
+    }
+
+    private class NodeEnumeratorINode : NodeEnumerator, IEnumerator<INode<TCell>>
+    {
+      public NodeEnumeratorINode(Item[] data) : base(data)
+      {
+      }
+
+      INode<TCell> IEnumerator<INode<TCell>>.Current
+      {
+        get { return Current; }
+      }
+    }
   }
 }
