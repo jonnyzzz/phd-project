@@ -15,6 +15,7 @@ using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
 using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Actions.Files;
+using DSIS.SimpleRunner.parallel;
 
 namespace DSIS.SimpleRunner
 {
@@ -49,19 +50,42 @@ namespace DSIS.SimpleRunner
         StrangeEvaluatorStrategy.SMART,
         EntropyLoopWeights.CONST);
 
-      StrangeEntropyEvaluatorParams[] entropys = {entropyFirst, entropySmartL, entropySmart};
-      IAction[] system = {systemHenon/*, systemIked, systemIkedaCut*/};
+      StrangeEntropyEvaluatorParams[] entropys = {entropyFirst, /*entropySmartL, */entropySmart};
+      IAction[] system = {systemHenon, systemIked, systemIkedaCut};
 
-      for (int steps = 8; steps <= 15; steps++)
+      SimpleParallel parallel = new SimpleParallel();
+//      for (int steps = 8; steps <= 15; steps++)
       {
         foreach (IAction action in system)
         {
-          ComputeEntropy(wfBase, steps, action, entropys);
-        }
+          parallel.DoParallel(new ComputeDelegate(wfBase, 2, action, entropys).Do);          
+        }        
+      }
+      parallel.WaitForEnd();
+    }
 
+    private class ComputeDelegate
+    {
+      private readonly IAction wfBase;
+      private readonly int steps;
+      private readonly IAction action;
+      private readonly IEnumerable<StrangeEntropyEvaluatorParams> entropys;
+
+      public void Do()
+      {
+        ComputeEntropy(wfBase, steps, action, entropys);
         Collect();
       }
+
+      public ComputeDelegate(IAction wfBase, int steps, IAction action, IEnumerable<StrangeEntropyEvaluatorParams> entropys)
+      {
+        this.wfBase = wfBase;
+        this.steps = steps;
+        this.action = action;
+        this.entropys = entropys;
+      }
     }
+
 
     private static void Collect()
     {
@@ -143,8 +167,12 @@ namespace DSIS.SimpleRunner
         IAction customWf = new CustomPrefixWorkingFolderAction(evaluatorParams.PresentableName);
 
         IAction entropyParams = new SetStrangeEntropyParamsAction(evaluatorParams);
+        IAction entropy = /*new ParallelAction(
+          new ForeachStrongComponentAction(
+          DrawEntropyAction(
+            new StrangeEntropyAction())),*/
+          DrawEntropyAction(new StrangeEntropyAction());
 
-        IAction entropy = new ParallelAction(new ForeachStrongComponentAction(DrawEntropyAction(new StrangeEntropyAction())), DrawEntropyAction(new StartAction()));
         gr.AddEdge(step, entropy);
         gr.AddEdge(wf, customWf);
         gr.AddEdge(customWf, entropy);
@@ -165,11 +193,10 @@ namespace DSIS.SimpleRunner
 
             bld.AddEdge(bld.Start, new DumpGraphInfoAction());
             bld.AddEdge(bld.Start, new DumpGraphComponentsInfoAction());
-
             bld.AddEdge(bld.Start, entropy);
 
             IAction drawEntropy =
-              new ProxiedChainAction(
+              new ParallelAction(
                 new DumpEntropyParamsAction(),
                 new DumpEntropyValueAction(),
                 new DrawEntropyMeasure3dAction(),

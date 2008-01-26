@@ -50,6 +50,7 @@
     <Compile Include="src\DrawEntropyWithSpace3dSegments.cs" />
     <Compile Include="src\DrawEntropyWithSpaceBase.cs" />
     <Compile Include="src\OldProgram.cs" />
+    <Compile Include="src\parallel\SimpleParallel.cs" />
     <Compile Include="src\ProjectTheSameMeasureEntropyDraw.cs" />
     <Compile Include="src\ProjectToTheSameEntropyDraw.cs" />
     <Compile Include="src\DrawLastComputationResultListener.cs" />
