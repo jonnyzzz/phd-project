@@ -23,7 +23,5 @@ namespace DSIS.Function.Predefined
     {
       throw new NotImplementedException();
     }
-
-
   }
 }

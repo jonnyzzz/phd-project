@@ -43,8 +43,7 @@
     <Compile Include="src\FoodChain\FoodChainSystemInfo.cs" />
     <Compile Include="src\FunctionBase.cs" />
     <Compile Include="src\FunctionIO.cs" />
-    <Compile Include="src\Henon\HenonFunction.cs" />
-    <Compile Include="src\Henon\HenonFunctionDerivate.cs" />
+    <Compile Include="src\Henon\HenonDellnitzFunctionSystemInfoDecorator.cs" />
     <Compile Include="src\Henon\HenonFunctionSystemInfoDecorator.cs" />
     <Compile Include="src\Ikeda\IkedaFunction.cs" />
     <Compile Include="src\Julia\JuliaFunction.cs" />
