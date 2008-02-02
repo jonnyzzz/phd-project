@@ -21,12 +21,16 @@ namespace DSIS.Graph.Abstract
 
     public bool AddIfNotReplace(ref TNode t)
     {
-      int index = t.HashCodeInternal%myHashMax;
+      TCell tCoordinate = t.Coordinate;
+      int tHashCode = t.HashCodeInternal;
+
+      int index = tHashCode%myHashMax;
 
       Item it = myItems[index];
       while (it != null)
       {
-        if (it.Value.HashCodeInternal == t.HashCodeInternal && COMPARER.Equals(it.Value.Coordinate, t.Coordinate))
+        
+        if (it.Value.HashCodeInternal == tHashCode && COMPARER.Equals(it.Value.Coordinate, tCoordinate))
         {
           t = it.Value;
           return false;

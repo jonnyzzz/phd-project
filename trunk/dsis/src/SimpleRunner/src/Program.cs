@@ -30,7 +30,8 @@ namespace DSIS.SimpleRunner
       DefaultSystemSpace spD =
         new DefaultSystemSpace(2, new double[] { -2, -2 }, new double[] { 2, 2 }, new long[] { 2, 2 });      
       IAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
-      IAction systemHenonD = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(sp, 1.272, 0.2), spD);
+      IAction systemHenonD = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(sp, 1.2, 0.2), spD);
+      IAction systemHenonD_272 = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(sp, 1.272, 0.2), spD);
       IAction systemIked = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
       IAction systemIkedaCut = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(spIkedaCutted, "Ikeda Cut"), spIkedaCutted);
 
@@ -54,7 +55,7 @@ namespace DSIS.SimpleRunner
         EntropyLoopWeights.CONST);
 
       StrangeEntropyEvaluatorParams[] entropys = {entropyFirst, /*entropySmartL, */entropySmart};
-      IAction[] system = {/*systemHenon, */systemHenonD, /*systemIked, systemIkedaCut*/};
+      IAction[] system = {/*systemHenon, */systemHenonD, systemHenonD_272 /*systemIked, systemIkedaCut*/};
 
       SimpleParallel parallel = new SimpleParallel();
       for (int steps = 8; steps <= 15; steps++)
@@ -149,9 +150,9 @@ namespace DSIS.SimpleRunner
           });
 
       IAction step = new ChainAction(
-        new LoopAction(steps - 1, buildIS),
-        new ReplaceContextAction(new SetMethod(new PointMethodSettings(new int[] {2, 2}, 0.1), new long[] {2, 2})),
-        buildIS
+        new LoopAction(steps /*- 1*/, buildIS)
+//        new ReplaceContextAction(new SetMethod(new PointMethodSettings(new int[] {2, 2}, 0.1), new long[] {2, 2})),
+//        buildIS
         );
                
       gr.AddEdge(wf, step);

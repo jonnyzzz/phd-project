@@ -7,7 +7,7 @@ namespace DSIS.IntegerCoordinates
       where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate;
   }
-
+  
   public interface IIntegerCoordinateSystemInfo
   {
     double[] CellSize { get; }

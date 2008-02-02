@@ -1,6 +1,8 @@
+using System;
 using System.Reflection;
 using DSIS.CodeCompiler;
 using DSIS.IntegerCoordinates.Generic;
+using DSIS.IntegerCoordinates.Tests;
 using DSIS.Utils.Test;
 using NUnit.Core;
 using NUnit.Framework;
@@ -25,6 +27,43 @@ namespace DSIS.IntegerCoordinates.Generated
       for (int i = 1; i < 10; i++)
         myManager.CreateSystem(i);
     }
+
+    [Test]
+    public void Test_Identity()
+    {
+      for(int i = 1; i<10; i++)
+      {
+        IIntegerCoordinateFactory system = myManager.CreateSystem(i);
+        IIntegerCoordinateSystemInfo info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000l,i)), Fill(100000L, i));
+
+        info.DoGeneric(new DoWithCoordunates_Identity());
+      }
+    }
+
+    private class DoWithCoordunates_Identity : IIntegerCoordinateSystemWith
+    {
+      public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate
+      {
+        for (int i = 0; i < system.Dimension; i++)
+        {
+          for (double v = 0; v < 1; v += 0.00001)
+          {
+            Assert.AreEqual(v, system.ToExternal(system.ToInternal(v, i), i), system.CellSize[i]);
+          }
+        }
+      }
+    }
+
+    private static T[] Fill<T>(T v, int length)
+    {
+      T[] arr = new T[length];
+      for(int i=0; i<length;i++)
+      {
+        arr[i] = v;
+      }
+      return arr;
+    }
+
 
     [Test]
     public void Test_Dimension1()

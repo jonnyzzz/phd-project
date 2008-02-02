@@ -38,6 +38,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\HenonDellnitzInvariantSetTestBase.cs" />
+    <Compile Include="src\InvariantSetTestBase.cs" />
+    <Compile Include="src\LinearOneFixedPointInvariantSetTest.cs" />
     <Compile Include="src\ProjectorHenonSystemTest.cs" />
     <Compile Include="src\ProjectorLinearSystemTest.cs" />
     <Compile Include="src\ProjectorTest.cs" />
@@ -122,6 +125,10 @@
     <ProjectReference Include="..\Scheme\Scheme.csproj">
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
       <Name>Scheme</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrajectoryBuilder\TrajectoryBuilder.csproj">
+      <Project>{B31CAF74-1534-40F4-A6AC-3C35459E45C9}</Project>
+      <Name>TrajectoryBuilder</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

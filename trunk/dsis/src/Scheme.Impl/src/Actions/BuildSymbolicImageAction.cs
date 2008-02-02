@@ -34,7 +34,7 @@ namespace DSIS.Scheme.Impl.Actions
       TarjanGraph<Q> graph = new TarjanGraph<Q>(toSystem);
 
       CellImageBuilderContext<Q> cellSettings = new CellImageBuilderContext<Q>(
-        info, bld, system, new GraphCellImageBuilder<Q>(graph));
+        info, bld, toSystem, new GraphCellImageBuilder<Q>(graph));
 
       CellProcessorContext<Q, Q> ctx = new CellProcessorContext<Q, Q>(
         Keys.CellsEnumerationKey<Q>().Get(input),

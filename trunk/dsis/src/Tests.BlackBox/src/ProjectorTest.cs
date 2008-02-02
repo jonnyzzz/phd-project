@@ -11,78 +11,78 @@ using NUnit.Framework;
 
 namespace DSIS.Tests.BlackBox
 {
-  public abstract class ProjectorTestBase : SimbolicImageBuildTestBase2 
+  public abstract class ProjectorTestBase : SimbolicImageBuildTestBase2
   {
     [Test]
     public void Test_1_3()
     {
-      DoTestAssertSame(1,3);
+      DoTestAssertSame(1, 3);
     }
-    
+
     [Test]
     public void Test_1_4()
     {
-      DoTestAssertSame(1,4);
+      DoTestAssertSame(1, 4);
     }
 
     [Test]
     public void Test_1_5()
     {
-      DoTestAssertSame(1,5);
+      DoTestAssertSame(1, 5);
     }
-    
+
     [Test]
     public void Test_1_6()
     {
-      DoTestAssertSame(1,6);
+      DoTestAssertSame(1, 6);
     }
 
     [Test]
     public void Test_1_7()
     {
-      DoTestAssertSame(1,7);
+      DoTestAssertSame(1, 7);
     }
-    
+
     [Test]
     public void Test_2_7()
     {
-      DoTestAssertSame(2,7);
+      DoTestAssertSame(2, 7);
     }
-    
+
     [Test]
     public void Test_3_7()
     {
-      DoTestAssertSame(3,7);
+      DoTestAssertSame(3, 7);
     }
 
     [Test]
     public void Test_4_7()
     {
-      DoTestAssertSame(4,7);
+      DoTestAssertSame(4, 7);
     }
 
     [Test]
     public void Test_5_7()
     {
-      DoTestAssertSame(5,7);
+      DoTestAssertSame(5, 7);
     }
-    
+
     [Test]
     public void Test_5_10()
     {
-      DoTestAssertSame(5,10);
+      DoTestAssertSame(5, 10);
     }
-    
+
     [Test]
     public void Test_5_12()
     {
-      DoTestAssertSame(5,12);
+      DoTestAssertSame(5, 12);
     }
 
     [Test]
     public void Test_7_12()
     {
-      DoTestAssertSame(7,12);
+      DoTestAssertSame(7, 12);
     }
 
     private void DoTestAssertSame(int a, int b)
@@ -92,10 +92,9 @@ namespace DSIS.Tests.BlackBox
 
     private void DoTest(int a, int b, AssertProjectedGraphs assert)
     {
-      DoTest(b, delegate(ActionBuilderAdapter ad, IAction leaf)
-                  {
-                    ad.AddEdge(leaf, new RememberGraphAction(a, assert));
-                  }, delegate { });      
+      DoTest(b,
+             delegate(ActionBuilderAdapter ad, IAction leaf) { ad.AddEdge(leaf, new RememberGraphAction(a, assert)); },
+             delegate { });
     }
 
 
@@ -127,13 +126,15 @@ namespace DSIS.Tests.BlackBox
         {
           IGraphStrongComponents<Q> components = Keys.GraphComponents<Q>().Get(input);
           myGraph = components.AsGraph(components.Components);
-        } else if (index.Count - 1 == index.Index)
+        }
+        else if (index.Count - 1 == index.Index)
         {
           IGraphStrongComponents<Q> components = Keys.GraphComponents<Q>().Get(input);
           IGraph<Q> other = components.AsGraph(components.Components);
           IGraph<Q> prev = (IGraph<Q>) myGraph;
 
-          ICellCoordinateSystemProjector<Q> project = other.CoordinateSystem.Project(Factor(other.CoordinateSystem, prev.CoordinateSystem));
+          ICellCoordinateSystemProjector<Q> project =
+            other.CoordinateSystem.Project(Factor(other.CoordinateSystem, prev.CoordinateSystem));
           ICellCoordinateSystemProjector<Q> filteredProject = new GraphCellCoordinateProjector<Q>(prev, project);
 
           int projNodes;
@@ -147,7 +148,7 @@ namespace DSIS.Tests.BlackBox
           DumpProjected(projNodes, projFNodes, projEdges, projFEdges);
           myAssert(projNodes, projFNodes, projEdges, projFEdges);
         }
-        Assert.Less(myIndex, index.Count-1, "Nothing to project");
+        Assert.Less(myIndex, index.Count - 1, "Nothing to project");
       }
 
       private static void DumpProjected(int projNodes, int projFNodes, int projEdges, int projFEdges)
@@ -158,8 +159,9 @@ namespace DSIS.Tests.BlackBox
         Console.Out.WriteLine("projEdges = {0}", projEdges);
         Console.Out.WriteLine("projFEdges = {0}", projFEdges);
       }
-      
-      public void ComputeProjectedGraphParams<Q>(IGraph<Q> graph, ICellCoordinateSystemProjector<Q> proj, out int nodes, out int edges)
+
+      public void ComputeProjectedGraphParams<Q>(IGraph<Q> graph, ICellCoordinateSystemProjector<Q> proj, out int nodes,
+                                                 out int edges)
         where Q : ICellCoordinate
       {
         nodes = 0;
@@ -173,10 +175,10 @@ namespace DSIS.Tests.BlackBox
           foreach (INode<Q> edge in graph.GetEdges(node))
           {
             bool hasEdge = proj.Project(edge.Coordinate) != null;
-            if (hasEdge && hasNodeProj  )
-              edges++;            
+            if (hasEdge && hasNodeProj)
+              edges++;
           }
-        }        
+        }
       }
 
       private static long[] Factor(ICellCoordinateSystem from, ICellCoordinateSystem to)
@@ -184,7 +186,7 @@ namespace DSIS.Tests.BlackBox
         List<long> list = new List<long>();
         for (int i = 0; i < from.Subdivision.Length; i++)
         {
-          list.Add(from.Subdivision[i] / to.Subdivision[i]);
+          list.Add(from.Subdivision[i]/to.Subdivision[i]);
         }
         return list.ToArray();
       }

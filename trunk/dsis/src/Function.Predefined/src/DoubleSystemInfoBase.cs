@@ -37,6 +37,10 @@ namespace DSIS.Function.Predefined
 
     public abstract string PresentableName { get; }
     protected abstract IFunction<double> GetFunctionInternal();
-    protected abstract IFunction<double> GetFunctionDerivateInternal();
+
+    protected virtual IFunction<double> GetFunctionDerivateInternal()
+    {
+      throw new NotImplementedException();
+    }
   }
 }

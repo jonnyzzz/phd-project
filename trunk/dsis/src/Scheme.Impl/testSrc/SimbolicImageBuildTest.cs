@@ -42,6 +42,6 @@ namespace DSIS.Scheme.Impl
                   {
                     ad.AddEdge(leaf, b);
                   });
-    } 
+    }     
   }
 }
