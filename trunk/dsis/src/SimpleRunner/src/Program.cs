@@ -55,7 +55,7 @@ namespace DSIS.SimpleRunner
         EntropyLoopWeights.CONST);
 
       StrangeEntropyEvaluatorParams[] entropys = {entropyFirst, /*entropySmartL, */entropySmart};
-      IAction[] system = {/*systemHenon, */systemHenonD, systemHenonD_272 /*systemIked, systemIkedaCut*/};
+      IAction[] system = {systemHenon, systemHenonD, systemHenonD_272, systemIked, systemIkedaCut};
 
       SimpleParallel parallel = new SimpleParallel();
       for (int steps = 8; steps <= 15; steps++)
@@ -175,7 +175,7 @@ namespace DSIS.SimpleRunner
           new ForeachStrongComponentAction(
           DrawEntropyAction(
             new StrangeEntropyAction())),*/
-          DrawEntropyAction(new StrangeEntropyAction());
+          DrawEntropyAction(new PathEntropyAction());
 
         gr.AddEdge(step, entropy);
         gr.AddEdge(wf, customWf);

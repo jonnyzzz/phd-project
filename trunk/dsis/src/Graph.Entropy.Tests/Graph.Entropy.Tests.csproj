@@ -54,7 +54,10 @@
     <Compile Include="src\LoopIteratorsPerfomance.cs" />
     <Compile Include="src\LoopIteratorTest.cs" />
     <Compile Include="src\LoopIteratorTestBase.cs" />
+    <Compile Include="src\PathBuilderTest.cs" />
+    <Compile Include="src\PathBuilderTestBase.cs" />
     <Compile Include="src\PerfomanceTestBase.cs" />
+    <Compile Include="src\StrangeComparison\PathComparison.cs" />
     <Compile Include="src\StrangeComparison\StrangeComparison.cs" />
     <Compile Include="src\StrangeEntropyBlackboxTest.cs" />
     <Compile Include="src\StrangeEntropyBlackboxTestBase.cs" />

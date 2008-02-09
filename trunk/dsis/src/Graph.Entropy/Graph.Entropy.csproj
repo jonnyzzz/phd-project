@@ -51,9 +51,9 @@
     <Compile Include="src\Impl\EntropyEvaluatorImpl.cs" />
     <Compile Include="src\Impl\Loop\EntropyEvaluatorLoopBase.cs" />
     <Compile Include="src\Impl\Loop\EntropyGraphWeightCallback.cs" />
+    <Compile Include="src\Impl\Loop\ILoopIteratorCallback.cs" />
     <Compile Include="src\Impl\Loop\Iterators\ContextBase.cs" />
     <Compile Include="src\Impl\Loop\Iterators\ILoopIterator.cs" />
-    <Compile Include="src\Impl\Loop\Iterators\ILoopIteratorCallback.cs" />
     <Compile Include="src\Impl\Loop\Iterators\LoopIterator.cs" />
     <Compile Include="src\Impl\Loop\Iterators\LoopIteratorBase.cs" />
     <Compile Include="src\Impl\Loop\Iterators\LoopIteratorFirst.cs" />
@@ -85,8 +85,10 @@
     <Compile Include="src\Impl\JVR\JVRPair.cs" />
     <Compile Include="src\Impl\JVR\SortedNodeSet.cs" />
     <Compile Include="src\Impl\JVR\StraitArcDirection.cs" />
+    <Compile Include="src\Impl\Loop\Path\PathBuilder.cs" />
     <Compile Include="src\Impl\Util\NodePair.cs" />
     <Compile Include="src\Impl\Util\PairBase.cs" />
+    <Compile Include="src\Impl\Util\Vector.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

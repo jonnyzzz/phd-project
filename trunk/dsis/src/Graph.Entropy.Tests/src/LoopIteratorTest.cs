@@ -5,12 +5,13 @@
 
 using System.Collections.Generic;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Tests;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Entropy
+namespace DSIS.Graph.Entropy.Tests
 {
   [TestFixture]
   public class LoopIteratorTest : LoopIteratorTestBase
@@ -71,7 +72,7 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 2, 3);
                  AddEdge(graph, 3, 1);
                }, "1, 3, ", "3, 2, ", "1, 2, 3, ", "2, 3,"
-               );
+        );
     }
     
     [Test]
@@ -136,18 +137,18 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 6, 1);
 
                }, 
-               "1, 3, ", 
-               "3, 2, ", 
-               "1, 2, 3, ", 
-               "2, 3, ", 
-               "5, 4, ", 
-               "1, 3, 5, 6, ", 
-               "4, 5, ", 
-               "4, 5, ", 
-               "5, 4, ", 
-               "1, 2, 3, 5, 6, ", 
-               "1, 2, 4, 5, 6, ", 
-               "1, 3, 2, 4, 5, 6,");
+             "1, 3, ", 
+             "3, 2, ", 
+             "1, 2, 3, ", 
+             "2, 3, ", 
+             "5, 4, ", 
+             "1, 3, 5, 6, ", 
+             "4, 5, ", 
+             "4, 5, ", 
+             "5, 4, ", 
+             "1, 2, 3, 5, 6, ", 
+             "1, 2, 4, 5, 6, ", 
+             "1, 3, 2, 4, 5, 6,");
     }
   
     [Test]
@@ -265,14 +266,14 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 6, 1);
 
                }, true,
-               "1, 3, ",
-               "3, 2, ",
-               "1, 2, 3, ",
-               "5, 4, ",
-               "1, 3, 5, 6, ",
-               "1, 2, 3, 5, 6, ",
-               "1, 2, 4, 5, 6, ",
-               "1, 3, 2, 4, 5, 6,");
+             "1, 3, ",
+             "3, 2, ",
+             "1, 2, 3, ",
+             "5, 4, ",
+             "1, 3, 5, 6, ",
+             "1, 2, 3, 5, 6, ",
+             "1, 2, 4, 5, 6, ",
+             "1, 3, 2, 4, 5, 6,");
     }
 
     [Test]
@@ -303,10 +304,10 @@ namespace DSIS.Graph.Entropy
                  AddEdge(graph, 13, 14);
                  AddEdge(graph, 14, 8);
                }, true,               
-               "1, 2, 3, 8, 11, ", 
-               "1, 2, 4, 6, 7, 8, 11, ",
-               "1, 2, 12, 13, 14, 8, 11, ", 
-               "1, 2, 5, 9, 10, 8, 11,");
+             "1, 2, 3, 8, 11, ", 
+             "1, 2, 4, 6, 7, 8, 11, ",
+             "1, 2, 12, 13, 14, 8, 11, ", 
+             "1, 2, 5, 9, 10, 8, 11,");
     }
     
     [Test]

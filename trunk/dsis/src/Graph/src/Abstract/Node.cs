@@ -14,6 +14,7 @@ namespace DSIS.Graph.Abstract
     public readonly TCell Coordinate;
     private readonly GraphNodeHashList<TInh, TCell> myEdges;
     internal int HashCodeInternal;
+    private object myUserValue = null;
 
     public Node(TCell coordinate)
     {
@@ -30,6 +31,16 @@ namespace DSIS.Graph.Abstract
     TCell INode<TCell>.Coordinate
     {
       get { return Coordinate; }
+    }
+
+    public void SetUserData<T>(T data)
+    {
+      myUserValue = data;
+    }
+
+    public T GetUserData<T>()
+    {
+      return (T) myUserValue;
     }
 
     public override sealed bool Equals(object obj)

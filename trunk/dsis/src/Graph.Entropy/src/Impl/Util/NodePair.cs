@@ -28,7 +28,7 @@ namespace DSIS.Graph.Entropy.Impl.Util
     {
       return COMPARER.GetHashCode(t);
     }
-  }
+  } 
 
   internal class NodePairEqualityComparer<T> : IEqualityComparer<NodePair<T>>
     where T : ICellCoordinate

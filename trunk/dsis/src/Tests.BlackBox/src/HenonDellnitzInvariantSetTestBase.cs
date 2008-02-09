@@ -1,8 +1,5 @@
-using System;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Henon;
-using DSIS.Function.Predefined.Linear;
-using DSIS.TrajectoryBuilder;
 using NUnit.Framework;
 
 namespace DSIS.Tests.BlackBox

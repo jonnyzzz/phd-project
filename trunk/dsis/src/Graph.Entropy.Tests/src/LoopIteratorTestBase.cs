@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Tests;
 using DSIS.IntegerCoordinates.Impl;

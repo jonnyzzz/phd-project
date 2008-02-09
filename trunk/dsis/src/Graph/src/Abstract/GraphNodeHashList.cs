@@ -5,12 +5,14 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
+  //todo: Implement IList to have indexer and to be able to replace it with List<T>
   public class GraphNodeHashList<TNode, TCell>
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
   {
     private static readonly IEqualityComparer<TCell> COMPARER = EqualityComparerFactory<TCell>.GetComparer();
     private readonly Item[] myItems;
+    private int myCount = 0;    
     private readonly int myHashMax;
 
     public GraphNodeHashList(int capacity)
@@ -37,7 +39,7 @@ namespace DSIS.Graph.Abstract
         }
         it = it.NextItem;
       }
-
+      myCount++;
       it = new Item(t);
       it.NextItem = myItems[index];
       myItems[index] = it;
@@ -221,6 +223,6 @@ namespace DSIS.Graph.Abstract
       {
         get { return Current; }
       }
-    }
+    }   
   }
 }
