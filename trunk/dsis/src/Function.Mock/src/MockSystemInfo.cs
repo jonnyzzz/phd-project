@@ -32,6 +32,16 @@ namespace DSIS.Function.Mock
       return (IFunction<T>) new MockFunction<TType>(mySystemSpace.Dimension, myFunc);
     }
 
+    public IFunction<T> GetFunction<T>(T precision)
+    {
+      T[] ts = new T[SystemSpace.Dimension];
+      for(int i=0; i< SystemSpace.Dimension; i++)
+      {
+        ts[i] = precision;
+      }
+      return GetFunction<T>(ts);
+    }
+
     public Q ProcessFunctionTree<Q>(IFunctionTreeVisitor<Q> visitor)
     {
       throw new NotImplementedException();

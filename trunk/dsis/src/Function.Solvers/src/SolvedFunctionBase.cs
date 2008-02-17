@@ -28,6 +28,17 @@ namespace DSIS.Function.Solvers.SimpleSolver
       } else throw new ArgumentException("T");
     }
 
+    public IFunction<T> GetFunction<T>(T precision)
+    {
+      T[] ts = new T[SystemSpace.Dimension];
+      for (int i = 0; i < SystemSpace.Dimension; i++)
+      {
+        ts[i] = precision;
+      }
+      return GetFunction<T>(ts);
+    }
+
+
     private IFunction<double> GetDoubleFunction(double[] precision)
     {
       if (mySteps == 1)

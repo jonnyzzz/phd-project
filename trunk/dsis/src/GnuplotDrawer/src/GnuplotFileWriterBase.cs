@@ -28,5 +28,10 @@ namespace DSIS.GnuplotDrawer
     {
       get { return myFilename; }
     }
+
+    public TextWriter Writer
+    {
+      get { return myWriter; }
+    }
   }
 }

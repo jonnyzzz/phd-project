@@ -66,6 +66,7 @@
     <Compile Include="src\CollectionUtil.cs" />
     <Compile Include="src\ConvertEnumerator.cs" />
     <Compile Include="src\InfiniteEnumerable.cs" />
+    <Compile Include="src\LinkedList.cs" />
     <Compile Include="src\MultiDictionary.cs" />
     <Compile Include="src\MultiHashDictionary.cs" />
     <Compile Include="src\SynchList.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="src\Primes.cs" />
     <Compile Include="src\UpcastedEnumerator.cs" />
     <Compile Include="testSrc\InfiniteEnumerableTest.cs" />
+    <Compile Include="testSrc\LinedListTest.cs" />
     <Compile Include="testSrc\Log2HelperTest.cs" />
     <Compile Include="testSrc\NUnitFixtureHelper.cs" />
     <Compile Include="testSrc\TimeoutTest.cs" />

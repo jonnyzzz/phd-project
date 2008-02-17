@@ -41,6 +41,7 @@
     <Compile Include="src\Actions\Agregated\SymbolicImageConstructionStep.cs" />
     <Compile Include="src\Actions\BuildSymbolicImageAction.cs" />
     <Compile Include="src\Actions\ChainRecurrenctSimbolicImageAction.cs" />
+    <Compile Include="src\Actions\Console\DumpLineAction.cs" />
     <Compile Include="src\Actions\Console\DumpNewLineAction.cs" />
     <Compile Include="src\Actions\Console\DumpEntropyAction.cs" />
     <Compile Include="src\Actions\Console\DumpEntropyParamsAction.cs" />
@@ -60,10 +61,12 @@
     <Compile Include="src\Actions\Entropy\StrangeEntropyAction.cs" />
     <Compile Include="src\Actions\Files\CustomPrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\DrawChainRecurrentAction.cs" />
+    <Compile Include="src\Actions\Files\DrawEntropy3dActionBase.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasure3d.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasure3dWithBaseAction.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasureActionBase.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasureColorMapAction.cs" />
+    <Compile Include="src\Actions\Files\DrawLineAction.cs" />
     <Compile Include="src\Actions\Files\FileKeys.cs" />
     <Compile Include="src\Actions\Files\Logger.cs" />
     <Compile Include="src\Actions\Files\LoggerAction.cs" />
@@ -73,6 +76,9 @@
     <Compile Include="src\Actions\Files\WorkingFolderInfo.cs" />
     <Compile Include="src\Actions\Files\Xml\XmlLogger.cs" />
     <Compile Include="src\Actions\ForeachStrongComponentAction.cs" />
+    <Compile Include="src\Actions\Line\LineAction.cs" />
+    <Compile Include="src\Actions\Line\LineBaseAction.cs" />
+    <Compile Include="src\Actions\Line\LineInitialAction.cs" />
     <Compile Include="src\Actions\SetMethod.cs" />
     <Compile Include="src\Actions\SystemInfoAction.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />
@@ -144,6 +150,10 @@
     <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
       <Name>IntegerCoordinates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LineIterator\LineIterator.csproj">
+      <Project>{4B165C39-5882-49C7-A69B-20E93855C702}</Project>
+      <Name>LineIterator</Name>
     </ProjectReference>
     <ProjectReference Include="..\Scheme\Scheme.csproj">
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>

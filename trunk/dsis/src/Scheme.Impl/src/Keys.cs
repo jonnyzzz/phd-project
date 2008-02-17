@@ -1,3 +1,4 @@
+using System.Collections;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
@@ -6,6 +7,7 @@ using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.IntegerCoordinates;
+using DSIS.LineIterator;
 
 namespace DSIS.Scheme.Impl
 {
@@ -45,5 +47,7 @@ namespace DSIS.Scheme.Impl
     }
 
     public static Key<IGraphEntropy> GraphEntropyKey = new Key<IGraphEntropy>("measure");
+
+    public static Key<ILine> LineKey = new Key<ILine>("Line");
   }
 }

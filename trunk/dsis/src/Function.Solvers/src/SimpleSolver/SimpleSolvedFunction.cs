@@ -25,7 +25,7 @@ namespace DSIS.Function.Solvers.SimpleSolver
       private readonly IFunction<double> myHostFunction;
       private double[] myOutput;
       private double[] myInput;
-      private double[] myFOutput;
+      private readonly double[] myFOutput;
       private readonly double myDt;
 
 
@@ -34,7 +34,7 @@ namespace DSIS.Function.Solvers.SimpleSolver
       {
         myFunctionInfo = function;
         myDimension = myFunctionInfo.SystemSpace.Dimension;
-        myHostFunction = myFunctionInfo.myFunction.GetFunction(precision);
+        myHostFunction = myFunctionInfo.myFunction.GetFunction<double>(precision);
         myInput = myHostFunction.Input;
         myFOutput = new double[myDimension];
         myHostFunction.Output = myFOutput;

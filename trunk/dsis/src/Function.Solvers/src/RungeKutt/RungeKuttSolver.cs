@@ -114,7 +114,7 @@ namespace DSIS.Function.Solvers.RungeKutt
 
       private IFunction<double> Create(double[] size, out double[] input, out double[] output)
       {
-        IFunction<double> func = myFunctionInfo.myFunction.GetFunction(size);
+        IFunction<double> func = myFunctionInfo.myFunction.GetFunction<double>(size);
         input = func.Input = new double[myDimension];
         output = func.Output = new double[myDimension];
         return func;

@@ -33,5 +33,7 @@ namespace DSIS.GnuplotDrawer
     {
       get { return myPointsCount; }
     }
+
+
   }
 }

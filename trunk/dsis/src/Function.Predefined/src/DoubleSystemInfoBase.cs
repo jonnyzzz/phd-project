@@ -29,7 +29,17 @@ namespace DSIS.Function.Predefined
 
       return (IFunction<T>) GetFunctionInternal();
     }
-    
+
+    public IFunction<T> GetFunction<T>(T precision)
+    {
+      T[] ts = new T[SystemSpace.Dimension];
+      for(int i=0; i< SystemSpace.Dimension; i++)
+      {
+        ts[i] = precision;
+      }
+      return GetFunction<T>(ts);
+    }
+
     public Type[] SupportedFunctionTypes
     {
       get { return new Type[] {typeof (double)}; }

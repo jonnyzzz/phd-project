@@ -37,8 +37,13 @@ namespace DSIS.GnuplotDrawer
         myIsFirst = false;
       }
 
-      myWriter.WriteLine("'{0}' with linespoint title \"{1}\" \\", file, name);
+      AddFile(file, name);
       return file;
+    }
+
+    public void AddFile(string file, string title)
+    {
+      myWriter.WriteLine("'{0}' with linespoint title \"{1}\" \\", file, title);
     }
 
     private string CreateCriteriaFileName(string name)

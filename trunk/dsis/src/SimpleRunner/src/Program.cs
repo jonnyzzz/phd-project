@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.BoxMethod;
-using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
@@ -15,13 +14,59 @@ using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
 using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Actions.Files;
+using DSIS.Scheme.Impl.Actions.Line;
 using DSIS.SimpleRunner.parallel;
 
 namespace DSIS.SimpleRunner
 {
   public class Program
   {
-    public static void Main()
+    public static void Main(string[] args)
+    {
+      DefaultSystemSpace sp =
+        new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
+//      IAction function = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
+      IAction function = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
+
+      IAction init = new LineInitialAction(0.001, new double[] {-2.6, -2.1}, new double[] {0.5, 0});
+      int v = 0;
+      IAction loop = new LoopAction(10, new AgregateAction(delegate(IActionGraphPartBuilder bld)
+                                                             {
+                                                               IAction act = new LineAction();
+                                                               IAction wf = new CustomPrefixWorkingFolderAction((++v).ToString());
+                                                               IAction draw2 = new DrawLineAction();
+
+                                                               bld.AddEdge(bld.Start, act);
+                                                               bld.AddEdge(act, bld.End);
+                                                               bld.AddEdge(act, new DumpLineAction());
+                                                               bld.AddEdge(bld.Start, wf);
+                                                               bld.AddEdge(wf, draw2);
+                                                               bld.AddEdge(act, draw2);
+                                                             }));
+      IAction draw = new DrawLineAction();
+
+      SystemWorkingFolderAction sysWf = new SystemWorkingFolderAction();      
+      IAction logger = new LoggerAction();
+      IAction wfBase = new WorkingFolderAction();
+
+      ActionGraph gr = new ActionGraph();
+      
+      gr.AddEdge(logger, init);
+      gr.AddEdge(wfBase, sysWf);
+      gr.AddEdge(sysWf, init);
+      gr.AddEdge(sysWf, logger);
+      gr.AddEdge(function, sysWf);
+      gr.AddEdge(function, init);
+      gr.AddEdge(init, loop);
+      gr.AddEdge(sysWf, loop);
+      gr.AddEdge(function, loop);
+      gr.AddEdge(loop, draw);
+      gr.AddEdge(sysWf, draw);
+
+      gr.Execute();
+    }
+
+    public static void Main2()
     {      
       DefaultSystemSpace spIkedaCutted =
         new DefaultSystemSpace(2, new double[] { -1.1, -1.5 }, new double[] { 3.5, 1.8 }, new long[] { 3, 3 });

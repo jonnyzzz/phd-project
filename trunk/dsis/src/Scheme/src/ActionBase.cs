@@ -14,7 +14,14 @@ namespace DSIS.Scheme
       return result;
     }
 
-    protected static ICollection<ContextMissmatch> CheckContext(Context ctx, params ContextMissmatchCheck[] data)
+    protected static ICollection<ContextMissmatch> CheckContext(Context ctx, ICollection<ContextMissmatch> data, params ContextMissmatchCheck[] data2)
+    {
+      List<ContextMissmatch> context = CheckContext(ctx, data2);
+      context.AddRange(data);
+      return context;
+    }
+
+    protected static List<ContextMissmatch> CheckContext(Context ctx, params ContextMissmatchCheck[] data)
     {
       List<ContextMissmatch> list = new List<ContextMissmatch>();
       foreach (ContextMissmatchCheck missmatch in data)

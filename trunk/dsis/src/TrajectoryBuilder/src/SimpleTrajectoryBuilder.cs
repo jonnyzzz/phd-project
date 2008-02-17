@@ -24,7 +24,7 @@ namespace DSIS.TrajectoryBuilder
       {
         precision[i] = (space.AreaRightPoint[i] - space.AreaLeftPoint[i])/precisionFactor;
       }
-      myFunction = function.GetFunction(precision);
+      myFunction = function.GetFunction<double>(precision);
 
       Point = space.AreaLeftPoint;
     }

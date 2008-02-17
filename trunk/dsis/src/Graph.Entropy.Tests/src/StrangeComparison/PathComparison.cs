@@ -65,19 +65,19 @@ namespace DSIS.Graph.Entropy.Tests.StrangeComparison
       DoTest(7, Null);
     }
 
-    [Test]
+    [Test, Ignore("too long")]
     public void Test_8xSteps()
     {
       DoTest(8, Null);
     }
 
-    [Test]
+    [Test, Ignore("too long")]
     public void Test_9xSteps()
     {
       DoTest(9, Null);
     }
 
-    [Test]
+    [Test, Ignore("too long")]
     public void Test_10xSteps()
     {
       DoTest(10, Null);
