@@ -25,12 +25,22 @@ namespace DSIS.SimpleRunner
     {
       DefaultSystemSpace sp =
         new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
-//      IAction function = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
-      IAction function = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
-
+      IAction henon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
+      IAction ikeda = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
       IAction init = new LineInitialAction(0.001, new double[] {-2.6, -2.1}, new double[] {0.5, 0});
+      ActionGraph gr = new ActionGraph();
+      IAction wfBase = new WorkingFolderAction();
+      
+      BuildCurveLength(10, gr, init, wfBase, ikeda);
+      BuildCurveLength(5, gr, init, wfBase, henon);
+      
+      gr.Execute();
+    }
+
+    private static void BuildCurveLength(int steps, IActionGraphBuilder gr, IAction init, IAction wfBase, IAction function)
+    {
       int v = 0;
-      IAction loop = new LoopAction(10, new AgregateAction(delegate(IActionGraphPartBuilder bld)
+      IAction loop = new LoopAction(steps, new AgregateAction(delegate(IActionGraphPartBuilder bld)
                                                              {
                                                                IAction act = new LineAction();
                                                                IAction wf = new CustomPrefixWorkingFolderAction((++v).ToString());
@@ -47,9 +57,7 @@ namespace DSIS.SimpleRunner
 
       SystemWorkingFolderAction sysWf = new SystemWorkingFolderAction();      
       IAction logger = new LoggerAction();
-      IAction wfBase = new WorkingFolderAction();
-
-      ActionGraph gr = new ActionGraph();
+      
       
       gr.AddEdge(logger, init);
       gr.AddEdge(wfBase, sysWf);
@@ -62,8 +70,6 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(function, loop);
       gr.AddEdge(loop, draw);
       gr.AddEdge(sysWf, draw);
-
-      gr.Execute();
     }
 
     public static void Main2()
