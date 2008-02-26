@@ -4,56 +4,81 @@
     <xs:restriction base="xs:string">
       <xs:pattern value="[A-Za-z_][A-Za-z_0-9]*" />
     </xs:restriction>
+  </xs:simpleType>    
+  <xs:simpleType name="Point">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Za-z_][A-Za-z_0-9]*" />
+    </xs:restriction>
   </xs:simpleType>
+  <xs:complexType name="PointAttribute">
+    <xs:attribute name="Point" type="Point" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="IdAttribute">
+    <xs:attribute name="Id" type="Id" use="required"/>
+  </xs:complexType>
   <xs:complexType name="Action">
-    <xs:attribute name="Id" type="Id" />
-    <xs:attribute name="Class" type="xs:string" />
+    <xs:complexContent>
+      <xs:restriction base="IdAttribute"/>
+    </xs:complexContent>    
+  </xs:complexType>
+  <xs:complexType name="UserAction">
+    <xs:complexContent>
+      <xs:extension base="Action">
+        <xs:attribute name="Class" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="XmlAction">
+    <xs:complexContent>
+      <xs:extension base="Action">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Input" type="PointAttribute"/>
+          <xs:element name="Output" type="PointAttribute"/>
+          <xs:element name="Value" type="ComputationScheme" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="EdgePoint">
-    <xs:attribute name="Id" type="Id" />
-    <xs:attribute name="Point" type="xs:string" />
+    <xs:complexContent>
+      <xs:extension base="PointAttribute">
+        <xs:attribute name="Id" type="Id" use="required" />
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Arc">
     <xs:sequence>
-      <xs:element name="From" type="EdgePoint" maxOccurs="1"/>
-      <xs:element name="From-Object" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:any processContents="skip"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
+      <xs:choice>
+        <xs:element name="From-Action" type="EdgePoint" maxOccurs="1"/>
+        <xs:element name="From-Object" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:any processContents="skip"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="From-Action-Instance" maxOccurs="1" type="IdAttribute"/>          
+      </xs:choice>
       <xs:element name="To" type="EdgePoint" minOccurs="1" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Actions">
-    <xs:sequence minOccurs="1" maxOccurs="unbounded">
-      <xs:element name="Action" type="Action" />
-      <xs:element name="Block">
-        <xs:complexType>
-          <xs:sequence minOccurs="0" maxOccurs="unbounded">
-            <xs:element name="Input" type="EdgePoint"/>
-            <xs:element name="Output" type="EdgePoint"/>
-            <xs:element name="Value" type="ComputationScheme" minOccurs="1" maxOccurs="1"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
+    <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Code-Action" type="UserAction" />
+      <xs:element name="Xml-Action" type="XmlAction"/>
+    </xs:choice>
   </xs:complexType>
   <xs:complexType name="ComputationScheme">
-    <xs:sequence>
-      <xs:sequence>
-        <xs:element name="Actions" type="Actions"/>
-        <xs:element name="Connections">
-          <xs:complexType>
-            <xs:sequence minOccurs="1" maxOccurs="unbounded">
-              <xs:element name="Arc" type="Arc"/>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:sequence>
+    <xs:sequence minOccurs="1">      
+      <xs:element name="Actions" type="Actions" minOccurs="0"/>
+      <xs:element name="Connections" type="Connections" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
-    
+  <xs:complexType name="Connections">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Arc" type="Arc"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:element name="Computation-Graph" type="ComputationScheme"/>
 </xs:schema>
