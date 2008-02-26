@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<computation-graph>
+  <actions>
+    <action id="a" class="DSIS.blah-blah.a"/>
+    <action id="b" class="#springbean.b"/>
+  </actions>
+
+  <connections>
+    <arc>
+      <from id="a" point="a"/>
+      <to id="a" point="a"/>
+    </arc>
+    <arc>
+      <from-data>Textual or xml value of the object</from-data>
+      <to id="a" point="a"/>
+    </arc>
+  </connections>        
+</computation-graph>

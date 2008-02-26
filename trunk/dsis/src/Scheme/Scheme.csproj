@@ -47,6 +47,9 @@
     <Compile Include="src\Actions\ProxiedChainAction.cs" />
     <Compile Include="src\Actions\ProxyAction.cs" />
     <Compile Include="src\Actions\ReplaceContextAction.cs" />
+    <Compile Include="src\Attributed\ConnectionPointAttribute.cs" />
+    <Compile Include="src\Attributed\InputAttribute.cs" />
+    <Compile Include="src\Attributed\OutputAttribute.cs" />
     <Compile Include="src\Exec\ContextMissmatchException.cs" />
     <Compile Include="src\Exec\IActionGraphPartBuilder.cs" />
     <Compile Include="src\Actions\MergeInputAndOutputAction.cs" />
@@ -74,6 +77,23 @@
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\XmlModel\computation-graph-scheme.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="src\XmlModel\computation-graph-scheme.xsx">
+      <DependentUpon>computation-graph-scheme.xsd</DependentUpon>
+    </None>
+    <None Include="testSrc\testData\scheme1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="testSrc\testData\scheme1.xsx">
+      <DependentUpon>scheme1.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="testSrc\testData\scheme1.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

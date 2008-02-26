@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema 
+  targetNamespace="urn:shemas-dsis-org:computation-graph-xml" 
+  elementFormDefault="qualified" 
+  xmlns="urn:shemas-dsis-org:computation-graph-xml" 
+  xmlns:mstns="urn:shemas-dsis-org:computation-graph-xml" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="id">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Za-z_][A-Za-z_0-9]*" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="action">
+    <xs:attribute name="id" type="id"/>    
+    <xs:attribute name="class" type="xs:string"/>    
+  </xs:complexType>
+
+  <xs:complexType name="point" abstract="true">
+    <xs:attribute name="id" type="id"/>
+    <xs:attribute name="point" type="xs:string"/>
+  </xs:complexType>
+  
+  <xs:complexType name="arc">
+    <xs:sequence>
+      <xs:element name="from" type="point"/>
+      <xs:element name="to" type="point"/>
+    </xs:sequence>
+
+
+  </xs:complexType>
+  
+</xs:schema>
