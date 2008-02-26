@@ -4,6 +4,9 @@
   <actions>
     <action id="a" class="DSIS.blah-blah.a"/>
     <action id="b" class="#springbean.b"/>
+    <complex>
+      
+    </complex>
   </actions>
 
   <connections>

@@ -1,34 +1,59 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<xs:schema 
-  targetNamespace="urn:shemas-dsis-org:computation-graph-xml" 
-  elementFormDefault="qualified" 
-  xmlns="urn:shemas-dsis-org:computation-graph-xml" 
-  xmlns:mstns="urn:shemas-dsis-org:computation-graph-xml" 
-  xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
-  <xs:simpleType name="id">
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="urn:shemas-dsis-org:computation-graph-xml" elementFormDefault="qualified" xmlns="urn:shemas-dsis-org:computation-graph-xml" xmlns:mstns="urn:shemas-dsis-org:computation-graph-xml" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="Id">
     <xs:restriction base="xs:string">
       <xs:pattern value="[A-Za-z_][A-Za-z_0-9]*" />
     </xs:restriction>
   </xs:simpleType>
-  
-  <xs:complexType name="action">
-    <xs:attribute name="id" type="id"/>    
-    <xs:attribute name="class" type="xs:string"/>    
+  <xs:complexType name="Action">
+    <xs:attribute name="Id" type="Id" />
+    <xs:attribute name="Class" type="xs:string" />
   </xs:complexType>
-
-  <xs:complexType name="point" abstract="true">
-    <xs:attribute name="id" type="id"/>
-    <xs:attribute name="point" type="xs:string"/>
+  <xs:complexType name="EdgePoint">
+    <xs:attribute name="Id" type="Id" />
+    <xs:attribute name="Point" type="xs:string" />
   </xs:complexType>
-  
-  <xs:complexType name="arc">
+  <xs:complexType name="Arc">
     <xs:sequence>
-      <xs:element name="from" type="point"/>
-      <xs:element name="to" type="point"/>
+      <xs:element name="From" type="EdgePoint" maxOccurs="1"/>
+      <xs:element name="From-Object" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any processContents="skip"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="To" type="EdgePoint" minOccurs="1" />
     </xs:sequence>
-
-
   </xs:complexType>
-  
+  <xs:complexType name="Actions">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Action" type="Action" />
+      <xs:element name="Block">
+        <xs:complexType>
+          <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="Input" type="EdgePoint"/>
+            <xs:element name="Output" type="EdgePoint"/>
+            <xs:element name="Value" type="ComputationScheme" minOccurs="1" maxOccurs="1"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComputationScheme">
+    <xs:sequence>
+      <xs:sequence>
+        <xs:element name="Actions" type="Actions"/>
+        <xs:element name="Connections">
+          <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+              <xs:element name="Arc" type="Arc"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:sequence>
+  </xs:complexType>
+    
+  <xs:element name="Computation-Graph" type="ComputationScheme"/>
 </xs:schema>
