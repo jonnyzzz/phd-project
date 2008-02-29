@@ -87,7 +87,7 @@ namespace DSIS.Graph.Entropy.Tests
       }            
     }
     
-    [Test]
+    [Test, Ignore("Formula is required!")]
     public void Test_TwoLoop_OnNode()
     {
       DEBUG = true;

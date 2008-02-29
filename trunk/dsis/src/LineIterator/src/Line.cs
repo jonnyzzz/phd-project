@@ -31,7 +31,7 @@ namespace DSIS.LineIterator
 
     public void AddPointToEnd(T point)
     {
-      if (myLastPoint.Distance(point) > myEps)
+      if (myLastPoint.Distance(point) >= myEps)
         myPoints.AddLast(myLastPoint = new LinePoint(point));
     }
 

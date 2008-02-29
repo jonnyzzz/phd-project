@@ -7,8 +7,9 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
+  [Obsolete("Have to be tested")]
   public class AllEngesOnALoopGraphSearch<T> : LoopIteratorBase<T> 
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private static readonly IEqualityComparer<INode<T>> COMPARER = EqualityComparerFactory<INode<T>>.GetReferenceComparer();
 

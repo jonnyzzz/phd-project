@@ -18,7 +18,7 @@ namespace DSIS.PerformanceChecks
       {
         d();
       }
-      return (DateTime.Now - start).Milliseconds;
+      return (DateTime.Now - start).TotalMilliseconds;
     }
 
     protected static double DoAction(string caption, DAction d)

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Entropy;
@@ -31,8 +30,9 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
     private void BuildPath(IGraph<T> graph, INode<T> startNode)
     {
       INode<T> start = startNode;
+      int initialValues = myValues.Count;
 
-      while(!ReferenceEquals(start, startNode) || myValues.Count != graph.EdgesCount)
+      while(!ReferenceEquals(start, startNode) || myValues.Count - initialValues != graph.EdgesCount)
       {
         INode<T> next = GetNextNode(graph, start);
 

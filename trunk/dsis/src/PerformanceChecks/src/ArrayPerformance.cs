@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DSIS.BoxIterators;
-using DSIS.BoxIterators.Generator;
 using NUnit.Framework;
 
 namespace DSIS.PerformanceChecks
@@ -24,17 +22,20 @@ namespace DSIS.PerformanceChecks
 
       public long this[int i]
       {
-        get { switch(i)
+        get
         {
-          case 0:
-            return l1;
-          case 1:
-            return l2;
-          case 2:
-            return l3;
-          default:
-            throw new ArgumentException();
-        }}
+          switch (i)
+          {
+            case 0:
+              return l1;
+            case 1:
+              return l2;
+            case 2:
+              return l3;
+            default:
+              throw new ArgumentException();
+          }
+        }
       }
 
       public ArrayAsStruct Clone()
@@ -67,6 +68,7 @@ namespace DSIS.PerformanceChecks
     }
 
 
+    [Test]
     public void Test_Array_Foreach()
     {
       const int MAX = 1000000;
@@ -143,36 +145,54 @@ namespace DSIS.PerformanceChecks
                                      }
                                    });
       DoAction("struct as array ", delegate
-                                   {
-                                     List<ArrayAsStruct> data = new List<ArrayAsStruct>();
-                                     long j = 0;
-                                     for (int i = 0; i < MAX; i++)
                                      {
-                                       ArrayAsStruct ass = new ArrayAsStruct(j++, j++, j++);
-                                       data.Add(ass);
-                                     }
+                                       List<ArrayAsStruct> data = new List<ArrayAsStruct>();
+                                       long j = 0;
+                                       for (int i = 0; i < MAX; i++)
+                                       {
+                                         ArrayAsStruct ass = new ArrayAsStruct(j++, j++, j++);
+                                         data.Add(ass);
+                                       }
 
-                                     foreach (ArrayAsStruct l in data)
-                                     {
-                                       j -= l.l1 + l.l2 + l.l3;
-                                     }
-                                   });
+                                       foreach (ArrayAsStruct l in data)
+                                       {
+                                         j -= l.l1 + l.l2 + l.l3;
+                                       }
+                                     });
 
       DoAction("struct as array with indexer ", delegate
-                                   {
-                                     List<ArrayAsStruct> data = new List<ArrayAsStruct>();
-                                     long j = 0;
-                                     for (int i = 0; i < MAX; i++)
-                                     {
-                                       ArrayAsStruct ass = new ArrayAsStruct(j++, j++, j++);
-                                       data.Add(ass);
-                                     }
+                                                  {
+                                                    List<ArrayAsStruct> data = new List<ArrayAsStruct>();
+                                                    long j = 0;
+                                                    for (int i = 0; i < MAX; i++)
+                                                    {
+                                                      ArrayAsStruct ass = new ArrayAsStruct(j++, j++, j++);
+                                                      data.Add(ass);
+                                                    }
 
-                                     foreach (ArrayAsStruct l in data)
-                                     {
-                                       j -= l[0] + l[1] + l[2];
-                                     }
-                                   });
+                                                    foreach (ArrayAsStruct l in data)
+                                                    {
+                                                      j -= l[0] + l[1] + l[2];
+                                                    }
+                                                  });
+
+      DoAction("struct as array with indexer 2", delegate
+                                                   {
+                                                     List<ArrayAsStruct> data = new List<ArrayAsStruct>();
+                                                     long j = 0;
+                                                     for (int i = 0; i < MAX; i++)
+                                                     {
+                                                       ArrayAsStruct ass = new ArrayAsStruct(j++, j++, j++);
+                                                       data.Add(ass);
+                                                     }
+
+                                                     int q = 0;
+                                                     foreach (ArrayAsStruct l in data)
+                                                     {
+                                                       j -= l[q++] + l[q++] + l[q++];
+                                                       q -= q;
+                                                     }
+                                                   });
     }
 
     [Test]
@@ -191,18 +211,18 @@ namespace DSIS.PerformanceChecks
                                     data.Add((long[]) arr.Clone());
                                   }
                                 });
-      DoAction("Struct clone", delegate
-                                {
-                                  List<ArrayAsStruct> data = new List<ArrayAsStruct>();
-                                  ArrayAsStruct ass = new ArrayAsStruct(1,2,4);
-                                  for (int i = 0; i < MAX; i++)
-                                  {
-                                    ass.l1 += 1;
-                                    ass.l2 -= 7;
-                                    ass.l3 += 7;
-                                    data.Add(ass.Clone());
-                                  }
-                                });      
+      DoAction("Struct clone var", delegate
+                                     {
+                                       List<ArrayAsStruct> data = new List<ArrayAsStruct>();
+                                       ArrayAsStruct ass = new ArrayAsStruct(1, 2, 4);
+                                       for (int i = 0; i < MAX; i++)
+                                       {
+                                         ass.l1 += 1;
+                                         ass.l2 -= 7;
+                                         ass.l3 += 7;
+                                         data.Add(ass.Clone());
+                                       }
+                                     });
     }
   }
 }

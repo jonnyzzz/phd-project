@@ -44,7 +44,7 @@ namespace DSIS.LineIterator
       for (int i = 0; i < myPoint.Length; i++)
       {
         double c = myPoint[i] - point.myPoint[i];
-        dist += c*c;
+        dist = Math.Max(dist, Math.Abs(c));
       }
       return dist;
     }

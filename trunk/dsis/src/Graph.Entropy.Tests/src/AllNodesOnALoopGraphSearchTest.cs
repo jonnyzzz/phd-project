@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy.Tests
 {
-  [TestFixture]
+  [TestFixture, Ignore]
   public class AllNodesOnALoopGraphSearchTest : GraphSearchTest
   {
     protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,

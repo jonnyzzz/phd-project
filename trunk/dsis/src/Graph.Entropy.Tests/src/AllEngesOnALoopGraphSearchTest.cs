@@ -1,4 +1,3 @@
-using System;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Tests;
@@ -8,7 +7,7 @@ using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy.Tests
 {
-  [TestFixture]
+  [TestFixture, Ignore]
   public class AllEngesOnALoopGraphSearchTest : GraphSearchTest
   {
     protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,

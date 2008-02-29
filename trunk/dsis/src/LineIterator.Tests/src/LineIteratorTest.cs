@@ -149,7 +149,7 @@ namespace DSIS.LineIterator.Tests
     private static ISystemInfo Create(Converter<double, double> function)
     {
       return new MockSystemInfo<double>(delegate(double[] ins, double[] outs) { outs[0] = function(ins[0]); },
-                                   new MockSystemSpace(1, 0, 1, 10));
+                                   new MockSystemSpace(1, 0, 1000, 1000));
             
     }
 
@@ -202,7 +202,7 @@ namespace DSIS.LineIterator.Tests
         }
       } catch(Exception e)
       {
-        Console.Out.WriteLine("sw = {0}", sw);
+        Console.Out.WriteLine("sw = \r\n{0}", sw);
         throw new Exception(e.Message, e);
       }
     }
