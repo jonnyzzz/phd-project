@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using DSIS.Scheme.Attributed;
+using DSIS.Scheme2.XmlModel;
 
-namespace DSIS.Scheme.XmlModel
+namespace DSIS.Scheme2.XmlModel
 {
   public class CurrentAppDomainFactory : ISchemeNodeFactoryExtension
   {
@@ -68,7 +69,7 @@ namespace DSIS.Scheme.XmlModel
       {
         if (Check(property))
         {
-          myPoints.Add(myFactory.CreateConnectionPoint(myInstance, property));
+          myPoints.Add(myFactory.ForProperty(myInstance, property));
         }                
       }
 
@@ -81,7 +82,7 @@ namespace DSIS.Scheme.XmlModel
       {
         if (Check(field))
         {
-          myPoints.Add(myFactory.CreateConnectionPoint(myInstance, field));
+          myPoints.Add(myFactory.ForField(myInstance, field));
         }                
       }
 

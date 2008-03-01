@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using DSIS.Scheme2.XmlModel;
 
-namespace DSIS.Scheme.XmlModel
+namespace DSIS.Scheme2.XmlModel
 {
   public class SchemeArc<T>
   {

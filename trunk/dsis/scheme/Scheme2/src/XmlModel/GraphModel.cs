@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace DSIS.Scheme.XmlModel
+namespace DSIS.Scheme2.XmlModel
 {
   public class GraphModel
   {
@@ -18,16 +18,16 @@ namespace DSIS.Scheme.XmlModel
       }
     }
 
-    public ComputationScheme Parse(Stream stream)
+    public XsdComputationScheme Parse(Stream stream)
     {
       XmlReaderSettings settings = new XmlReaderSettings();
       settings.ValidationType = ValidationType.Schema;
       settings.Schemas.Add(Schema);
 
       // Load the AllAssembliesXml, validating against the schema
-      ComputationScheme graph;
+      XsdComputationScheme graph;
       using (XmlReader xmlrValidating = XmlReader.Create(stream, settings))
-        graph = (ComputationScheme)new XmlSerializer(typeof(ComputationScheme)).Deserialize(xmlrValidating);
+        graph = (XsdComputationScheme)new XmlSerializer(typeof(XsdComputationScheme)).Deserialize(xmlrValidating);
 
       return graph;
     }

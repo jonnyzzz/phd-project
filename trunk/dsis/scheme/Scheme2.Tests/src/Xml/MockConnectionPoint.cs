@@ -1,6 +1,6 @@
-using DSIS.Scheme.XmlModel;
+using DSIS.Scheme2.XmlModel;
 
-namespace DSIS.Scheme.testSrc.Xml
+namespace DSIS.Scheme2.Tests.src.Xml
 {
   public class MockConnectionPoint : IConnectionPoint
   {

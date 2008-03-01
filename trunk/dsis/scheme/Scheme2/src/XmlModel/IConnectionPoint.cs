@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DSIS.Scheme.XmlModel
+namespace DSIS.Scheme2.XmlModel
 {
   public interface IConnectionPoint
   {

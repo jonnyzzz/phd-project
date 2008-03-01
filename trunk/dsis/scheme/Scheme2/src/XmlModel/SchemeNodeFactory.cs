@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using System.Reflection;
+using DSIS.Scheme2.XmlModel;
 
-namespace DSIS.Scheme.XmlModel
+namespace DSIS.Scheme2.XmlModel
 {
   public class SchemeNodeFactory
   {

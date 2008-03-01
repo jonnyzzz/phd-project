@@ -1,4 +1,6 @@
-namespace DSIS.Scheme.XmlModel
+using DSIS.Scheme2.XmlModel;
+
+namespace DSIS.Scheme2.XmlModel
 {
   public interface ISchemeNodeFactoryExtension
   {
