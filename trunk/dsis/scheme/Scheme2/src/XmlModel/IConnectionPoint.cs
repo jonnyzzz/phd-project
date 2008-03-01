@@ -48,6 +48,11 @@ namespace DSIS.Scheme2.XmlModel
     ICollection<IInputConnectionPoint> Input { get; }
     ICollection<IOutputConnectionPoint> Output { get; }
 
+    IInputConnectionPoint GetInput(string name);
+    IOutputConnectionPoint GetOutput(string name);
+
     string Name { get; }
+
+    void Initizlized();
   }
 }

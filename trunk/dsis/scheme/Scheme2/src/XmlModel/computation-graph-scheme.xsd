@@ -46,10 +46,10 @@
         <xs:attribute name="Id" type="XsdId" use="required" />
       </xs:extension>
     </xs:complexContent>
-  </xs:complexType>
+  </xs:complexType>  
   <xs:complexType name="XsdArc">
-    <xs:sequence>
-      <xs:choice>
+    <xs:sequence>            
+      <xs:choice>              
         <xs:element name="From-Action" type="XsdEdgePoint" maxOccurs="1"/>
         <xs:element name="From-Object" maxOccurs="1">
           <xs:complexType>

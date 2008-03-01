@@ -3,9 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
   
-  <object id="nodeFactory" type="DSIS.Scheme2.XmlModel.SchemeNodeFactory, DSIS.Scheme2"/>    
+  <object id="nodeNodeFactory" type="DSIS.Scheme2.XmlModel.SchemeNodeFactory, DSIS.Scheme2"/>    
+  <object id="schemeGraphFactory" type="DSIS.Scheme2.XmlModel.SchemeGraphFactory, DSIS.Scheme2"/>    
   <object id="currentAppDomainFactory" type="DSIS.Scheme2.XmlModel.CurrentAppDomainFactory, DSIS.Scheme2"/>    
   <object id="connectionPointFactory" type="DSIS.Scheme2.XmlModel.ConnectionPointFactory, DSIS.Scheme2"/>    
-  <object id="connectionPointFactoryImpl" type="DSIS.Scheme2.Impl.ConnectionPoints.ClassConnectionPointFactory, DSIS.Scheme2"/>    
+  <object id="connectionPointFactoryImpl" type="DSIS.Scheme2.Impl.ConnectionPoints.ClassConnectionPointFactory, DSIS.Scheme2"/>      
   
 </objects>

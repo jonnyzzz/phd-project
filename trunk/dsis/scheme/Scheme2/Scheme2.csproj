@@ -43,6 +43,7 @@
     <Compile Include="src\Impl\ConnectionPoints\ConnectionPointBase.cs" />
     <Compile Include="src\Impl\ConnectionPoints\InputConnectionPoint.cs" />
     <Compile Include="src\Impl\ConnectionPoints\OutputConnectionPoint.cs" />
+    <Compile Include="src\SpringAttribute.cs" />
     <Compile Include="src\XmlModel\AppDomainNode.cs" />
     <Compile Include="src\Impl\ConnectionPoints\ClassConnectionPointFactory.cs" />
     <Compile Include="src\XmlModel\computation-graph-scheme.cs">
@@ -56,6 +57,7 @@
     <Compile Include="src\XmlModel\IConnectionPointFactoryExtension.cs" />
     <Compile Include="src\XmlModel\ISchemeNodeFactoryExtension.cs" />
     <Compile Include="src\XmlModel\SchemeGraph.cs" />
+    <Compile Include="src\XmlModel\SchemeGraphFactory.cs" />
     <Compile Include="src\XmlModel\SchemeNodeFactory.cs" />
   </ItemGroup>
   <ItemGroup>

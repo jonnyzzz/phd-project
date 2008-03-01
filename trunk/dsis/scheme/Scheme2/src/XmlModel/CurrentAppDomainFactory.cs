@@ -35,7 +35,7 @@ namespace DSIS.Scheme2.XmlModel
         Add<OutputAttribute, IOutputConnectionPoint>(instance, info, myConnectionPointFactory.Output, outputPoints);       
       }
       
-      return new AppDomainNode(inputPoints, outputPoints, tAction.FullName);
+      return new AppDomainNode(inputPoints, outputPoints, tAction.FullName, instance as IInitializeAware);
     }
 
     private delegate TPoint Factory<TPoint>(string name, object instance, MemberInfo info);

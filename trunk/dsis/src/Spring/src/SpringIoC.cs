@@ -7,7 +7,8 @@ using log4net;
 using Spring.Context;
 using Spring.Context.Support;
 
-[assembly: SpringConfigXml("resources.spring.xml", typeof(SpringIoC))]
+[assembly : SpringConfigXml("resources.spring.xml", Type = typeof (SpringIoC))]
+
 namespace DSIS.Spring
 {
   public class SpringIoC
@@ -23,14 +24,13 @@ namespace DSIS.Spring
 
     private readonly IApplicationContext myContext;
 
-    internal protected SpringIoC(params Assembly[] extra)
+    protected internal SpringIoC(params Assembly[] extra)
     {
       Hashset<Assembly> assemblies = new Hashset<Assembly>();
       Hashset<Assembly> visit = new Hashset<Assembly>();
 
       visit.Add(GetType().Assembly);
       visit.Add(Assembly.GetCallingAssembly());
-      visit.Add(Assembly.GetEntryAssembly());
       visit.Add(Assembly.GetExecutingAssembly());
       visit.AddRange(AppDomain.CurrentDomain.GetAssemblies());
       visit.AddRange(extra);
@@ -42,10 +42,15 @@ namespace DSIS.Spring
 
         foreach (AssemblyName name in assembly.GetReferencedAssemblies())
         {
-          Assembly reference = Assembly.Load(name);
-          if (reference != null && !assemblies.Contains(reference))
+          try
           {
-            visit.Add(reference);
+            Assembly reference = Assembly.Load(name);
+            if (reference != null && !assemblies.Contains(reference))
+              visit.Add(reference);
+          }
+          catch (Exception e)
+          {
+            LOG.Warn(e.Message, e);
           }
         }
         assemblies.Add(assembly);
@@ -63,7 +68,7 @@ namespace DSIS.Spring
       foreach (Assembly assembly in assemblies)
       {
         string assemblyPath = assembly.GetName().Name;
-        foreach (SpringConfigXmlAttribute attr in assembly.GetCustomAttributes(typeof(SpringConfigXmlAttribute), true))
+        foreach (SpringConfigXmlAttribute attr in assembly.GetCustomAttributes(typeof (SpringConfigXmlAttribute), true))
         {
           string portion = string.Format("assembly://{0}/{1}/{2}", assemblyPath, attr.Namespace, attr.Location);
           LOG.InfoFormat("Config: {0}", portion);
@@ -74,14 +79,20 @@ namespace DSIS.Spring
       myContext = new XmlApplicationContext(paths.ToArray());
     }
 
-    public object this[string name]
+    public T GetComponent<T>(string name)
     {
-      get { return myContext[name]; }      
+      return (T) myContext.GetObject(name, typeof (T));
     }
 
     protected internal static void SetInsance(SpringIoC instance)
     {
       ourInstance = instance;
+    }
+
+    protected internal static void Dispose()
+    {
+      ourInstance.myContext.Dispose();
+      ourInstance = null;
     }
   }
 }

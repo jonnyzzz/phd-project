@@ -24,5 +24,10 @@ namespace DSIS.Spring
       }
       SetUp(list.ToArray());
     }
+
+    public static new void Dispose()
+    {
+      SpringIoC.Dispose();
+    }
   }
 }
