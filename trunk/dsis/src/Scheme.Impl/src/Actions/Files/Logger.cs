@@ -13,6 +13,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       if (info != null)
       {
         myWriter = info.CreateFileName("log.txt");
+        Write("Logger is set to {0}", myWriter);
       }
       else
       {

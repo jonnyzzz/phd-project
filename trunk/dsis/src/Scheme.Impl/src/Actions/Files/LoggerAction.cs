@@ -12,7 +12,9 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     protected override void Apply(Context ctx, Context result)
     {
-      FileKeys.LoggerKey.Set(result, new Logger(FileKeys.WorkingFolderKey.Get(ctx)));
+      WorkingFolderInfo folder = FileKeys.WorkingFolderKey.Get(ctx);
+      Logger logger = new Logger(folder);
+      FileKeys.LoggerKey.Set(result, logger);
     }
   }
 }

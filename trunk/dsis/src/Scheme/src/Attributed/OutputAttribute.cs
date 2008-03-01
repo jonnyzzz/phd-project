@@ -9,14 +9,4 @@ namespace DSIS.Scheme.Attributed
     {
     }
   }
-
-  public interface IField
-  {
-    object Value {get; set;}
-  }
-
-  public interface IDataNode
-  {
-    
-  }
 }

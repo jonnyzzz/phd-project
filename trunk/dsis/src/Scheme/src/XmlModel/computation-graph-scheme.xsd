@@ -1,55 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema targetNamespace="urn:shemas-dsis-org:computation-graph-xml" elementFormDefault="qualified" xmlns="urn:shemas-dsis-org:computation-graph-xml" xmlns:mstns="urn:shemas-dsis-org:computation-graph-xml" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:simpleType name="Id">
+  <xs:simpleType name="XsdId">
     <xs:restriction base="xs:string">
       <xs:pattern value="[A-Za-z_][A-Za-z_0-9]*" />
     </xs:restriction>
   </xs:simpleType>    
-  <xs:simpleType name="Point">
+  <xs:simpleType name="XsdPoint">
     <xs:restriction base="xs:string">
       <xs:pattern value="[A-Za-z_][A-Za-z_0-9]*" />
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name="PointAttribute">
-    <xs:attribute name="Point" type="Point" use="required"/>
+  <xs:complexType name="XsdPointAttribute">
+    <xs:attribute name="Point" type="XsdPoint" use="required"/>
   </xs:complexType>
-  <xs:complexType name="IdAttribute">
-    <xs:attribute name="Id" type="Id" use="required"/>
+  <xs:complexType name="XsdIdAttribute">
+    <xs:attribute name="Id" type="XsdId" use="required"/>
   </xs:complexType>
-  <xs:complexType name="Action">
+  <xs:complexType name="XsdAction" abstract="true">
     <xs:complexContent>
-      <xs:restriction base="IdAttribute"/>
+      <xs:restriction base="XsdIdAttribute"/>
     </xs:complexContent>    
   </xs:complexType>
-  <xs:complexType name="UserAction">
+  <xs:complexType name="XsdUserAction">
     <xs:complexContent>
-      <xs:extension base="Action">
+      <xs:extension base="XsdAction">
         <xs:attribute name="Class" type="xs:string" use="required" />
+        <xs:attribute name="Assembly" type="xs:string" use="required" />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="XmlAction">
+  <xs:complexType name="XsdXmlAction">
     <xs:complexContent>
-      <xs:extension base="Action">
+      <xs:extension base="XsdAction">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element name="Input" type="PointAttribute"/>
-          <xs:element name="Output" type="PointAttribute"/>
-          <xs:element name="Value" type="ComputationScheme" minOccurs="1" maxOccurs="1"/>
+          <xs:element name="Input" type="XsdPointAttribute"/>
+          <xs:element name="Output" type="XsdPointAttribute"/>
+          <xs:element name="Value" type="XsdComputationScheme" minOccurs="1" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="EdgePoint">
+  <xs:complexType name="XsdEdgePoint">
     <xs:complexContent>
-      <xs:extension base="PointAttribute">
-        <xs:attribute name="Id" type="Id" use="required" />
+      <xs:extension base="XsdPointAttribute">
+        <xs:attribute name="Id" type="XsdId" use="required" />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="Arc">
+  <xs:complexType name="XsdArc">
     <xs:sequence>
       <xs:choice>
-        <xs:element name="From-Action" type="EdgePoint" maxOccurs="1"/>
+        <xs:element name="From-Action" type="XsdEdgePoint" maxOccurs="1"/>
         <xs:element name="From-Object" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
@@ -57,28 +58,28 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="From-Action-Instance" maxOccurs="1" type="IdAttribute"/>          
+        <xs:element name="From-Action-Instance" maxOccurs="1" type="XsdIdAttribute"/>
       </xs:choice>
-      <xs:element name="To" type="EdgePoint" minOccurs="1" />
+      <xs:element name="To" type="XsdEdgePoint" minOccurs="1" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="Actions">
+  <xs:complexType name="XsdActions">
     <xs:choice minOccurs="1" maxOccurs="unbounded">
-      <xs:element name="Code-Action" type="UserAction" />
-      <xs:element name="Xml-Action" type="XmlAction"/>
+      <xs:element name="Code-Action" type="XsdUserAction" />
+      <xs:element name="Xml-Action" type="XsdXmlAction"/>
     </xs:choice>
   </xs:complexType>
-  <xs:complexType name="ComputationScheme">
+  <xs:complexType name="XsdComputationScheme">
     <xs:sequence minOccurs="1">      
-      <xs:element name="Actions" type="Actions" minOccurs="0"/>
-      <xs:element name="Connections" type="Connections" minOccurs="0"/>
+      <xs:element name="Actions" type="XsdActions" minOccurs="0"/>
+      <xs:element name="Connections" type="XsdConnections" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="Connections">
+  <xs:complexType name="XsdConnections">
     <xs:sequence minOccurs="1" maxOccurs="unbounded">
-      <xs:element name="Arc" type="Arc"/>
+      <xs:element name="Arc" type="XsdArc"/>
     </xs:sequence>
   </xs:complexType>
 
-  <xs:element name="Computation-Graph" type="ComputationScheme"/>
+  <xs:element name="Computation-Graph" type="XsdComputationScheme"/>
 </xs:schema>

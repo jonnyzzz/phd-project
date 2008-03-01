@@ -21,5 +21,5 @@ namespace DSIS.Scheme.Impl.Actions.Line
       Keys.LineKey.Set(result, line);
       Keys.SystemInfoKey.Set(result, system);
     }
-  }
+  }  
 }

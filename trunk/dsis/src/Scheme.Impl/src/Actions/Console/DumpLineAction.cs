@@ -11,5 +11,5 @@ namespace DSIS.Scheme.Impl.Actions.Console
     {
       Logger.Instance(ctx).Write("Line: Points {0}, Length {1:R}", line.Count, line.Length);
     }
-  }
+  }  
 }
