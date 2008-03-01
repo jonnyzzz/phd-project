@@ -1,6 +1,6 @@
 using System;
 
-namespace DSIS.Scheme.Attributed
+namespace DSIS.Scheme2.Attributed
 {
   public abstract class ConnectionPointAttribute : Attribute
   {
@@ -9,6 +9,11 @@ namespace DSIS.Scheme.Attributed
     protected ConnectionPointAttribute(string name)
     {
       myName = name;
+    }
+
+    public string Name
+    {
+      get { return myName; }
     }
   }
 }

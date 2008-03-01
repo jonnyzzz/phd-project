@@ -4,23 +4,23 @@ namespace DSIS.Scheme2.XmlModel
 {
   public class AppDomainNode : INode
   {
-    private readonly ICollection<IConnectionPoint> myInput;
-    private readonly ICollection<IConnectionPoint> myOutput;
+    private readonly ICollection<IInputConnectionPoint> myInput;
+    private readonly ICollection<IOutputConnectionPoint> myOutput;
     private readonly string myName;
 
-    public AppDomainNode(ICollection<IConnectionPoint> input, ICollection<IConnectionPoint> output, string name)
+    public AppDomainNode(ICollection<IInputConnectionPoint> input, ICollection<IOutputConnectionPoint> output, string name)
     {
       myInput = input;
-      myName = name;
       myOutput = output;
+      myName = name;
     }
 
-    public ICollection<IConnectionPoint> Input
+    public ICollection<IInputConnectionPoint> Input
     {
       get { return myInput; }
     }
 
-    public ICollection<IConnectionPoint> Output
+    public ICollection<IOutputConnectionPoint> Output
     {
       get { return myOutput; }
     }

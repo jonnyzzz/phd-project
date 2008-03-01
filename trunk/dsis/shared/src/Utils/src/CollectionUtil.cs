@@ -62,5 +62,10 @@ namespace DSIS.Utils
       }
       return count;
     }
+
+    public static List<T> AsList<T>(params T[] ts)
+    {
+      return new List<T>(ts);
+    }
   }
 }

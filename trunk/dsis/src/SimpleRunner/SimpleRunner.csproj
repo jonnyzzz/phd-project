@@ -74,6 +74,10 @@
     <Compile Include="src\XmlAbstractImageBuilderListener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\scheme\Scheme2\Scheme2.csproj">
+      <Project>{69A72457-55CD-463A-840B-73F62BDCA0E5}</Project>
+      <Name>Scheme2</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
@@ -137,6 +141,10 @@
     <ProjectReference Include="..\Scheme\Scheme.csproj">
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
       <Name>Scheme</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Spring\Spring.csproj">
+      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
+      <Name>Spring</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

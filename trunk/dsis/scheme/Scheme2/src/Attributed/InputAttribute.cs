@@ -1,6 +1,6 @@
 using System;
 
-namespace DSIS.Scheme.Attributed
+namespace DSIS.Scheme2.Attributed
 {
   [AttributeUsage(AttributeTargets.Field|AttributeTargets.Property)]
   public class InputAttribute : ConnectionPointAttribute

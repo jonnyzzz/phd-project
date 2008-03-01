@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{606E255C-62EB-4AC3-B85C-A4B5F78D73E9}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{EE9B260E-4E51-4BEA-A3F7-7C82210716B5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.Scheme2.Tests</RootNamespace>
-    <AssemblyName>DSIS.Scheme2.Tests</AssemblyName>
+    <RootNamespace>DSIS.SpringRunner</RootNamespace>
+    <AssemblyName>DSIS.SpringRunner</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,45 +28,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.Mocks, Version=3.4.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\Rhino.Mocks\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\..\shared\lib\log4net\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Xml\ClassConnectionPointFactoryTest.cs" />
-    <Compile Include="src\Xml\CurrentAppDomainFactoryTest.cs" />
-    <Compile Include="src\Xml\NIs.cs" />
-    <Compile Include="src\Xml\XsdUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
-      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
-      <Name>Utils</Name>
+    <ProjectReference Include="..\Spring\Spring.csproj">
+      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
+      <Name>Spring</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Scheme2\Scheme2.csproj">
-      <Project>{69A72457-55CD-463A-840B-73F62BDCA0E5}</Project>
-      <Name>Scheme2</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="src\testData\scheme1.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\testData\scheme1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="src\testData\scheme1.xsx">
-      <DependentUpon>scheme1.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

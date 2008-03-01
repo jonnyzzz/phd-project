@@ -80,13 +80,9 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="../Build.Targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   -->
-  <Target Name="BeforeBuild">
-    <XsdCs InputFile="src\XmlModel\computation-graph-scheme.xsd" OutDir="$(MSBuildProjectDirectory)\src\XmlModel" Namespace="DSIS.Scheme.XmlModel" />
-  </Target>
   <!--  <Target Name="AfterBuild">
   </Target>
   -->

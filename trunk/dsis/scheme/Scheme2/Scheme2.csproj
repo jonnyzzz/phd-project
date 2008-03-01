@@ -37,15 +37,23 @@
     <Compile Include="src\Attributed\ConnectionPointAttribute.cs" />
     <Compile Include="src\Attributed\InputAttribute.cs" />
     <Compile Include="src\Attributed\OutputAttribute.cs" />
+    <Compile Include="src\Impl\ConnectionPoints\Bind.cs" />
+    <Compile Include="src\Impl\ConnectionPoints\BindInput.cs" />
+    <Compile Include="src\Impl\ConnectionPoints\BindOutput.cs" />
+    <Compile Include="src\Impl\ConnectionPoints\ConnectionPointBase.cs" />
+    <Compile Include="src\Impl\ConnectionPoints\InputConnectionPoint.cs" />
+    <Compile Include="src\Impl\ConnectionPoints\OutputConnectionPoint.cs" />
     <Compile Include="src\XmlModel\AppDomainNode.cs" />
+    <Compile Include="src\Impl\ConnectionPoints\ClassConnectionPointFactory.cs" />
     <Compile Include="src\XmlModel\computation-graph-scheme.cs">
       <DependentUpon>computation-graph-scheme.xsd</DependentUpon>
     </Compile>
     <Compile Include="src\XmlModel\ConnectionPointFactory.cs" />
+    <Compile Include="src\XmlModel\ConnectionPointFactoryException.cs" />
     <Compile Include="src\XmlModel\CurrentAppDomainFactory.cs" />
     <Compile Include="src\XmlModel\GraphModel.cs" />
     <Compile Include="src\XmlModel\IConnectionPoint.cs" />
-    <Compile Include="src\XmlModel\IConnectionPointFactory.cs" />
+    <Compile Include="src\XmlModel\IConnectionPointFactoryExtension.cs" />
     <Compile Include="src\XmlModel\ISchemeNodeFactoryExtension.cs" />
     <Compile Include="src\XmlModel\SchemeGraph.cs" />
     <Compile Include="src\XmlModel\SchemeNodeFactory.cs" />
@@ -57,6 +65,19 @@
     <None Include="src\XmlModel\computation-graph-scheme.xsx">
       <DependentUpon>computation-graph-scheme.xsd</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="resources\spring.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Spring\Spring.csproj">
+      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
+      <Name>Spring</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

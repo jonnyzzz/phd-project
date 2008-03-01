@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using DSIS.Scheme.Attributed;
+using DSIS.Scheme2.Attributed;
 using DSIS.Scheme2.XmlModel;
 
 namespace DSIS.Scheme2.XmlModel
 {
   public class CurrentAppDomainFactory : ISchemeNodeFactoryExtension
   {
-    private readonly IConnectionPointFactory myConnectionPointFactory;
+    private readonly ConnectionPointFactory myConnectionPointFactory;
 
-    public CurrentAppDomainFactory(IConnectionPointFactory connectionPointFactory)
+    public CurrentAppDomainFactory(ConnectionPointFactory connectionPointFactory)
     {
       myConnectionPointFactory = connectionPointFactory;
     }
@@ -26,70 +26,40 @@ namespace DSIS.Scheme2.XmlModel
 
       object instance = Activator.CreateInstance(tAction);
 
-      ConnectionPointInfo input = new ConnectionPointInfo(myConnectionPointFactory, typeof(InputAttribute), instance);
-      ConnectionPointInfo output = new ConnectionPointInfo(myConnectionPointFactory, typeof(OutputAttribute), instance);
+      List<IInputConnectionPoint> inputPoints = new List<IInputConnectionPoint>();
+      List<IOutputConnectionPoint> outputPoints = new List<IOutputConnectionPoint>();
+            
+      foreach (MemberInfo info in tAction.GetMembers())
+      {
+        Add<InputAttribute, IInputConnectionPoint>(instance, info, myConnectionPointFactory.Input, inputPoints);
+        Add<OutputAttribute, IOutputConnectionPoint>(instance, info, myConnectionPointFactory.Output, outputPoints);       
+      }
       
-      ConnectionPointInfo[] points = new ConnectionPointInfo[] { input, output, };
-
-      foreach (PropertyInfo info in tAction.GetProperties())
-      {
-        foreach (ConnectionPointInfo point in points)
-        {
-          point.Match(info);
-        }        
-      }
-
-      foreach (FieldInfo info in tAction.GetFields())
-      {
-        foreach (ConnectionPointInfo point in points)
-        {
-          point.Match(info);
-        }                
-      }
-
-      return new AppDomainNode(input.Points, output.Points, tAction.FullName);
+      return new AppDomainNode(inputPoints, outputPoints, tAction.FullName);
     }
 
+    private delegate TPoint Factory<TPoint>(string name, object instance, MemberInfo info);
 
-    private class ConnectionPointInfo
+    private static void Add<TAttr, TPoint>(object instance, MemberInfo info, Factory<TPoint> factory, ICollection<TPoint> list)
+      where TAttr : ConnectionPointAttribute
+      where TPoint : class
     {
-      private readonly object myInstance;
-      private readonly IConnectionPointFactory myFactory;
-      private readonly List<IConnectionPoint> myPoints = new List<IConnectionPoint>();
-      private readonly Type myAttributeToCheck;
-
-      public ConnectionPointInfo(IConnectionPointFactory factory, Type attributeToCheck, object instance)
+      TAttr output = GetAtttribute<TAttr>(info);
+      if (output != null)
       {
-        myFactory = factory;
-        myInstance = instance;
-        myAttributeToCheck = attributeToCheck;
-      }
+        TPoint @out = factory(output.Name, instance, info);
+        if (@out != null)
+          list.Add(@out);
+      }      
+    }
 
-      public void Match(PropertyInfo property)
-      {
-        if (Check(property))
-        {
-          myPoints.Add(myFactory.ForProperty(myInstance, property));
-        }                
-      }
-
-      private bool Check(ICustomAttributeProvider property)
-      {
-        return property.IsDefined(myAttributeToCheck, true);
-      }
-
-      public void Match(FieldInfo field)
-      {
-        if (Check(field))
-        {
-          myPoints.Add(myFactory.ForField(myInstance, field));
-        }                
-      }
-
-      public List<IConnectionPoint> Points
-      {
-        get { return myPoints; }
-      }
+    private static T GetAtttribute<T>(ICustomAttributeProvider prov) 
+      where T : Attribute
+    {
+      object[] attributes = prov.GetCustomAttributes(typeof(T), true);
+      if (attributes != null && attributes.Length == 1)
+        return (T) attributes[0];
+      return null;
     }
   }
 }
