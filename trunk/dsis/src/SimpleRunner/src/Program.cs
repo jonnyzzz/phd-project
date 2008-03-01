@@ -27,12 +27,13 @@ namespace DSIS.SimpleRunner
         new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
       IAction henon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
       IAction ikeda = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
-      IAction init = new LineInitialAction(0.001, new double[] {-2.6, -2.1}, new double[] {0.5, 0});
+//      IAction init = new LineInitialAction(0.001, new double[] {-2.6, -2.1}, new double[] {0.5, 0});
+      IAction init = new LineInitialAction(0.001, new double[] { 0.63313, 0.18940634 }, new double[] { 0.63313 + 0.01, 0.18940634 + 1.92*0.01});
       ActionGraph gr = new ActionGraph();
       IAction wfBase = new WorkingFolderAction();
       
-      BuildCurveLength(10, gr, init, wfBase, ikeda);
-      BuildCurveLength(5, gr, init, wfBase, henon);
+//      BuildCurveLength(10, gr, init, wfBase, ikeda);
+      BuildCurveLength(100, gr, init, wfBase, henon);
       
       gr.Execute();
     }
