@@ -7,14 +7,15 @@ using NUnit.Framework.SyntaxHelpers;
 namespace DSIS.Scheme2.Tests.Xml
 {
   [TestFixture]
-  public class ClassConnectionPointFactoryTest
+  public class ClassConnectionPointFactoryTest : MockTestBase
   {
     private ClassConnectionPointFactory myFactory;
 
     [SetUp]
-    public void SetUp()
+    public override void SetUp()
     {
-      myFactory = new ClassConnectionPointFactory();
+      base.SetUp();
+      myFactory = new ClassConnectionPointFactory(myMocks.DynamicMock<ConnectionPointFactory>());
     }
 
     [Test]

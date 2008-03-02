@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
+using Common.Logging.Log4Net;
 using log4net;
 using log4net.Config;
 
@@ -30,6 +32,10 @@ namespace DSIS.Spring
           XmlConfigurator.Configure(str);
         }
       }
+
+      NameValueCollection col = new NameValueCollection();
+      col.Add("configType", "EXTERNAL");      
+      Common.Logging.LogManager.Adapter = new Log4NetLoggerFactoryAdapter(col);      
 
       ILog LOG = LogManager.GetLogger(GetType());
       LOG.InfoFormat("Started log4net from {0}", file.FullName);

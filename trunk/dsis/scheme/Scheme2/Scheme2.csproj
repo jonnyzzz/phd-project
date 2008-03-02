@@ -28,6 +28,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\shared\lib\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -43,7 +47,10 @@
     <Compile Include="src\Impl\ConnectionPoints\ConnectionPointBase.cs" />
     <Compile Include="src\Impl\ConnectionPoints\InputConnectionPoint.cs" />
     <Compile Include="src\Impl\ConnectionPoints\OutputConnectionPoint.cs" />
+    <Compile Include="src\Registrar.cs" />
     <Compile Include="src\SpringAttribute.cs" />
+    <Compile Include="src\AbstractRegistry.cs" />
+    <Compile Include="src\UsedByScheme.cs" />
     <Compile Include="src\XmlModel\AppDomainNode.cs" />
     <Compile Include="src\Impl\ConnectionPoints\ClassConnectionPointFactory.cs" />
     <Compile Include="src\XmlModel\computation-graph-scheme.cs">
@@ -52,7 +59,8 @@
     <Compile Include="src\XmlModel\ConnectionPointFactory.cs" />
     <Compile Include="src\XmlModel\ConnectionPointFactoryException.cs" />
     <Compile Include="src\XmlModel\CurrentAppDomainFactory.cs" />
-    <Compile Include="src\XmlModel\GraphModel.cs" />
+    <Compile Include="src\XmlModel\CurrentAppDomainFactoryException.cs" />
+    <Compile Include="src\XmlModel\SchemeGraphLoader.cs" />
     <Compile Include="src\XmlModel\IConnectionPoint.cs" />
     <Compile Include="src\XmlModel\IConnectionPointFactoryExtension.cs" />
     <Compile Include="src\XmlModel\ISchemeNodeFactoryExtension.cs" />
@@ -61,15 +69,15 @@
     <Compile Include="src\XmlModel\SchemeNodeFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\XmlModel\computation-graph-scheme.xsd">
+    <EmbeddedResource Include="src\XmlModel\computation-graph-scheme.xsd">
       <SubType>Designer</SubType>
-    </None>
+    </EmbeddedResource>
     <None Include="src\XmlModel\computation-graph-scheme.xsx">
       <DependentUpon>computation-graph-scheme.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resources\spring.xml" />
+    <EmbeddedResource Include="resources\spring.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">

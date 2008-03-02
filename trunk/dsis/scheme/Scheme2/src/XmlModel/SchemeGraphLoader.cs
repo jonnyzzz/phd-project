@@ -5,13 +5,13 @@ using System.Xml.Serialization;
 
 namespace DSIS.Scheme2.XmlModel
 {
-  public class GraphModel
+  public class SchemeGraphLoader
   {
     private static XmlSchema Schema
     {
       get
       {
-        using(Stream str = typeof(GraphModel).Assembly.GetManifestResourceStream("DSIS.Scheme.XmlModel.computation-graph-scheme.xsd"))
+        using(Stream str = typeof(SchemeGraphLoader).Assembly.GetManifestResourceStream("DSIS.Scheme2.src.XmlModel.computation-graph-scheme.xsd"))
         {
           return XmlSchema.Read(str, null);
         }

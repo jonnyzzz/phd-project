@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 using DSIS.Scheme2.XmlModel;
+using DSIS.Utils;
+using log4net;
 
 namespace DSIS.Scheme2.XmlModel
 {
   public class SchemeGraph
   {
+    private static readonly ILog LOG = LogManager.GetLogger(typeof (SchemeGraph));
+
     private readonly Dictionary<string, INode> myActions = new Dictionary<string, INode>();
     private readonly SchemeNodeFactory myFactory;
     private readonly XsdComputationScheme myScheme;
@@ -20,11 +24,13 @@ namespace DSIS.Scheme2.XmlModel
 
     private void BuildActions(XsdComputationScheme scheme)
     {
-      foreach (XsdAction action in scheme.Actions)
+      foreach (XsdAction action in Safe(scheme.Actions))
       {
         INode node = myFactory.LoadNode(action);
         if (node != null)
         {
+          LOG.InfoFormat("Added action {0} of type {1}", node.Name, node.GetType().FullName);
+
           myActions[node.Name] = node;
         }
       }
@@ -32,7 +38,10 @@ namespace DSIS.Scheme2.XmlModel
 
     private void LinkActions(XsdComputationScheme scheme)
     {
-      foreach (XsdArc arc in scheme.Connections.Arc)
+      if (scheme.Connections == null)
+        return;
+
+      foreach (XsdArc arc in Safe(scheme.Connections.Arc))
       {
         IInputConnectionPoint input = myActions[arc.To.Id].GetInput(arc.To.Point);
 
@@ -54,6 +63,11 @@ namespace DSIS.Scheme2.XmlModel
       {
         node.Initizlized();
       }
+    }
+
+    private static T[] Safe<T>(T[] array)
+    {
+      return array ?? EmptyArray<T>.Instance;
     }
   }
 }

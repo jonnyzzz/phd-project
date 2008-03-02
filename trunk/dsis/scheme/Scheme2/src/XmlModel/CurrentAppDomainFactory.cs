@@ -6,11 +6,11 @@ using DSIS.Scheme2.XmlModel;
 
 namespace DSIS.Scheme2.XmlModel
 {
-  public class CurrentAppDomainFactory : ISchemeNodeFactoryExtension
+  public class CurrentAppDomainFactory : Registrar<ISchemeNodeFactoryExtension, SchemeNodeFactory>, ISchemeNodeFactoryExtension
   {
     private readonly ConnectionPointFactory myConnectionPointFactory;
 
-    public CurrentAppDomainFactory(ConnectionPointFactory connectionPointFactory)
+    public CurrentAppDomainFactory(SchemeNodeFactory factory, ConnectionPointFactory connectionPointFactory) : base(factory)
     {
       myConnectionPointFactory = connectionPointFactory;
     }
@@ -22,7 +22,12 @@ namespace DSIS.Scheme2.XmlModel
         return null;
 
       Assembly assembly = Assembly.Load(action.Assembly);
+      if (assembly == null)
+        throw new CurrentAppDomainFactoryException("Failed to load assembly " + action.Assembly);
+
       Type tAction = assembly.GetType(action.Class);
+      if (tAction == null)
+        throw new CurrentAppDomainFactoryException("Failed to find Type " + action.Class);
 
       object instance = Activator.CreateInstance(tAction);
 
@@ -35,7 +40,7 @@ namespace DSIS.Scheme2.XmlModel
         Add<OutputAttribute, IOutputConnectionPoint>(instance, info, myConnectionPointFactory.Output, outputPoints);       
       }
       
-      return new AppDomainNode(inputPoints, outputPoints, tAction.FullName, instance as IInitializeAware);
+      return new AppDomainNode(inputPoints, outputPoints, action.Id ?? tAction.FullName, instance as IInitializeAware);
     }
 
     private delegate TPoint Factory<TPoint>(string name, object instance, MemberInfo info);

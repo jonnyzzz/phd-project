@@ -3,7 +3,7 @@ using DSIS.Scheme2.XmlModel;
 
 namespace DSIS.Scheme2.Tests.Xml
 {
-  public class XsdUtil
+  public class XsdUtil : MockTestBase
   {
     public static XsdAction Create(Type t)
     {

@@ -1,7 +1,6 @@
 using DSIS.Scheme2.Attributed;
 using DSIS.Scheme2.Tests.src.Xml;
 using DSIS.Scheme2.XmlModel;
-using DSIS.Utils;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Rhino.Mocks.Constraints;
@@ -11,17 +10,17 @@ namespace DSIS.Scheme2.Tests.Xml
   [TestFixture]
   public class CurrentAppDomainFactoryTest : XsdUtil
   {
-    private readonly MockRepository myMocks = new MockRepository();
-
     private IConnectionPointFactoryExtension myConnectionPoint;
     private CurrentAppDomainFactory myFactory;
     
-
     [SetUp]
-    public virtual void SetUp()
+    public override void SetUp()
     {
-      myConnectionPoint = myMocks.CreateMock<IConnectionPointFactoryExtension>();      
-      myFactory = new CurrentAppDomainFactory(new ConnectionPointFactory(CollectionUtil.AsList(myConnectionPoint)));      
+      base.SetUp();      
+      myConnectionPoint = myMocks.CreateMock<IConnectionPointFactoryExtension>();
+      ConnectionPointFactory factory = new ConnectionPointFactory();
+      factory.Register(myConnectionPoint);
+      myFactory = new CurrentAppDomainFactory(myMocks.DynamicMock<SchemeNodeFactory>(), factory);      
     }
 
     [Test]

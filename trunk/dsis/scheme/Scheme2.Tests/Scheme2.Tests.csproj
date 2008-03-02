@@ -42,10 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\testData\TestGraphRegistry.cs" />
+    <Compile Include="src\testData\Test_01_A.cs" />
     <Compile Include="src\Xml\ClassConnectionPointFactoryTest.cs" />
+    <Compile Include="src\Xml\MockTestBase.cs" />
     <Compile Include="src\Xml\SchemeGraphTest.cs" />
     <Compile Include="src\Xml\CurrentAppDomainFactoryTest.cs" />
     <Compile Include="src\Xml\NIs.cs" />
+    <Compile Include="src\Xml\TestSchemeGraphLoader.cs" />
     <Compile Include="src\Xml\XsdUtil.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,15 +67,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\testData\scheme1.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\testData\scheme1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="src\testData\scheme1.xsx">
-      <DependentUpon>scheme1.xsd</DependentUpon>
-    </None>
+    <Content Include="resources\scheme1.xml" />
+    <EmbeddedResource Include="resources\test_02.xml" />
+    <EmbeddedResource Include="resources\test_01.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

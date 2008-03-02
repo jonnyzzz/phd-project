@@ -7,8 +7,12 @@ using DSIS.Spring;
 namespace DSIS.Scheme2.Impl.ConnectionPoints
 {
   [UsedBySpring]
-  public class ClassConnectionPointFactory : IConnectionPointFactoryExtension
+  public class ClassConnectionPointFactory : Registrar<IConnectionPointFactoryExtension, ConnectionPointFactory>, IConnectionPointFactoryExtension
   {
+    public ClassConnectionPointFactory(ConnectionPointFactory factory) : base(factory)
+    {
+    }
+
     public IInputConnectionPoint Input(string name, object instance, MemberInfo _property)
     {
       PropertyInfo property = _property as PropertyInfo;

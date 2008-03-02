@@ -50,7 +50,7 @@ namespace DSIS.Spring
           }
           catch (Exception e)
           {
-            LOG.Warn(e.Message, e);
+            LOG.Debug(e.Message, e);
           }
         }
         assemblies.Add(assembly);
