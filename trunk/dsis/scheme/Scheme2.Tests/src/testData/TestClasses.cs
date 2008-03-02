@@ -1,8 +1,8 @@
 using System.Xml;
 using DSIS.Scheme2.Attributed;
-using DSIS.Scheme2.Impl.ObjectParsers;
+using DSIS.Scheme2.ConnectionPoints;
+using DSIS.Scheme2.ObjectParsers;
 using DSIS.Scheme2.Tests.src.Xml;
-using DSIS.Scheme2.XmlModel;
 using NUnit.Framework;
 
 namespace DSIS.Scheme2.Tests.testData

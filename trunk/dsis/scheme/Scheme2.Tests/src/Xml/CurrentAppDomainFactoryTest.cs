@@ -1,6 +1,8 @@
 using DSIS.Scheme2.Attributed;
+using DSIS.Scheme2.ConnectionPoints;
+using DSIS.Scheme2.ConnectionPoints.Object;
+using DSIS.Scheme2.Nodes;
 using DSIS.Scheme2.Tests.src.Xml;
-using DSIS.Scheme2.XmlModel;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Rhino.Mocks.Constraints;
@@ -10,17 +12,17 @@ namespace DSIS.Scheme2.Tests.Xml
   [TestFixture]
   public class CurrentAppDomainFactoryTest : XsdUtil
   {
-    private IConnectionPointFactoryExtension myConnectionPoint;
-    private CurrentAppDomainFactory myFactory;
+    private IObjectConnectionPointFactoryExtension myObjectConnectionPoint;
+    private ObjectNodeFactory myFactory;
     
     [SetUp]
     public override void SetUp()
     {
       base.SetUp();      
-      myConnectionPoint = myMocks.CreateMock<IConnectionPointFactoryExtension>();
-      ConnectionPointFactory factory = new ConnectionPointFactory();
-      factory.Register(myConnectionPoint);
-      myFactory = new CurrentAppDomainFactory(myMocks.DynamicMock<SchemeNodeFactory>(), factory);      
+      myObjectConnectionPoint = myMocks.CreateMock<IObjectConnectionPointFactoryExtension>();
+      ObjectConnectionPointFactory factory = new ObjectConnectionPointFactory();
+      factory.Register(myObjectConnectionPoint);
+      myFactory = new ObjectNodeFactory(myMocks.DynamicMock<SchemeNodeFactory>(), factory);      
     }
 
     [Test]
@@ -34,7 +36,7 @@ namespace DSIS.Scheme2.Tests.Xml
     [Test]
     public void Test_InputProperty()
     {
-      Expect.Call(myConnectionPoint.Input(null, null, null)).IgnoreArguments().Constraints(
+      Expect.Call(myObjectConnectionPoint.Input(null, null, null)).IgnoreArguments().Constraints(
         Is.Equal("QQQ"), 
         Is.TypeOf(typeof(Class_InputProperty)), 
         Is.NotNull()
@@ -48,7 +50,7 @@ namespace DSIS.Scheme2.Tests.Xml
     [Test]
     public void Test_OutputEvent()
     {
-      Expect.Call(myConnectionPoint.Output(null, null, null)).IgnoreArguments().Constraints(
+      Expect.Call(myObjectConnectionPoint.Output(null, null, null)).IgnoreArguments().Constraints(
         Is.Equal("QQQ"),
         Is.TypeOf(typeof(Class_OutputEvent)), 
         Is.NotNull()

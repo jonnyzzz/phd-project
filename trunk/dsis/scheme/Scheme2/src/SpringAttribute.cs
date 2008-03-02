@@ -1,3 +1,3 @@
 using DSIS.Spring;
 
-[assembly: SpringConfigXml("resources.spring.xml", Namespace = "DSIS.Scheme2") ]
+[assembly : SpringConfigXml("resources.spring.xml", Namespace = "DSIS.Scheme2")]

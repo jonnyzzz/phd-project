@@ -1,3 +1,4 @@
+using DSIS.Scheme2.Graph;
 using DSIS.Scheme2.Tests.src.Xml;
 using DSIS.Scheme2.Tests.testData;
 using DSIS.Scheme2.XmlModel;
@@ -19,7 +20,7 @@ namespace DSIS.Scheme2.Tests.Xml
       SpringIoCSetup.SetUp(typeof(SchemeGraph).Assembly);
       TestGraphRegistry.Clear();
 
-      myFactory = SpringIoC.Instance.GetComponent<SchemeGraphFactory>("schemeGraphFactory");
+      myFactory = SpringIoC.Instance.GetComponent<SchemeGraphFactory>("SchemeGraphFactory");
     }
 
     [TearDown]

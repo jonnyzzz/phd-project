@@ -28,9 +28,6 @@
   <xs:complexType name="XsdFromActionInstance">
     <xs:attribute name="Id" type="XsdId" use="required"/>
   </xs:complexType>
-  <xs:complexType name="XsdExternalPoint">
-    <xs:attribute name="Point" type="XsdPoint" use="required"/>
-  </xs:complexType>
   <xs:complexType name="XsdFromObject">
     <xs:sequence>
       <xs:any processContents="skip"/>
@@ -56,16 +53,14 @@
                 <xs:choice>
                   <xs:element name="Action" maxOccurs="1" type="XsdEdgePoint"/>
                   <xs:element name="Object" maxOccurs="1" type="XsdFromObject"/>
-                  <xs:element name="Action-Instance" maxOccurs="1" type="XsdFromActionInstance"/>
-                  <xs:element name="External" maxOccurs="1" type="XsdExternalPoint"/>
+                  <xs:element name="Action-Instance" maxOccurs="1" type="XsdFromActionInstance"/>                  
                 </xs:choice>
               </xs:complexType>
             </xs:element>
             <xs:element name="To" minOccurs="1" maxOccurs="1">
               <xs:complexType>
                 <xs:choice>
-                  <xs:element name="Action" type="XsdEdgePoint" minOccurs="1" />
-                  <xs:element name="External" type="XsdExternalPoint" minOccurs="1"/>
+                  <xs:element name="Action" type="XsdEdgePoint" minOccurs="1" />                  
                 </xs:choice>
               </xs:complexType>
             </xs:element>
