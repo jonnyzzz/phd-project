@@ -23,23 +23,4 @@
   <object id="XmlSchemeActionFactory" type="DSIS.Scheme2.Graph.XmlSchemeActionFactory, DSIS.Scheme2"/>
   
   <object id="SchemeNodeFactory" type="DSIS.Scheme2.Nodes.SchemeNodeFactory, DSIS.Scheme2"/>
-
-  <!--
-  <object id="currentAppDomainFactory" type="DSIS.Scheme2.XmlModel.CurrentAppDomainFactory, DSIS.Scheme2"/>
-  <object id="xmlSchemeActionFactory" type="DSIS.Scheme2.XmlModel.XmlSchemeActionFactory, DSIS.Scheme2"/>
-
-  <object id="nodeNodeFactory" type="DSIS.Scheme2.XmlModel.SchemeNodeFactory, DSIS.Scheme2"/>
-
-  <object id="schemeGraphFactory" type="DSIS.Scheme2.XmlModel.SchemeGraphFactory, DSIS.Scheme2"/>
-  <object id="outputConnectionPointFactory" type="DSIS.Scheme2.XmlModel.OutputConnectionPointFactory, DSIS.Scheme2"/>
-  <object id="outputConnectionPointFromFactory" type="DSIS.Scheme2.XmlModel.OutputConnectionPointFromFactory, DSIS.Scheme2"/>
-  <object id="outputConnectionPointFromActionFactory" type="DSIS.Scheme2.XmlModel.OutputConnectionPointFromActionFactory, DSIS.Scheme2"/>
-  <object id="outputObjectParserFromFactory" type="DSIS.Scheme2.XmlModel.OutputObjectParserFromFactory, DSIS.Scheme2"/>
-
-  <object id="inputConnectionPointFactory" type="DSIS.Scheme2.XmlModel.InputConnectionPointFactory, DSIS.Scheme2"/>
-  <object id="inputConnectionPointExtension" type="DSIS.Scheme2.XmlModel.InputConnectionPointExtension, DSIS.Scheme2"/>
-
-  <object id="connectionPointFactory" type="DSIS.Scheme2.XmlModel.ConnectionPointFactory, DSIS.Scheme2"/>    
-  <object id="connectionPointFactoryImpl" type="DSIS.Scheme2.Impl.ConnectionPoints.ClassConnectionPointFactory, DSIS.Scheme2"/>      
- -->      
 </objects>

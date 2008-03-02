@@ -40,7 +40,14 @@ namespace DSIS.Spring
         Assembly assembly = CollectionUtil.GetFirst(visit);
         visit.Remove(assembly);
 
-        foreach (AssemblyName name in assembly.GetReferencedAssemblies())
+        List<AssemblyName> refAssemblies = new List<AssemblyName>(assembly.GetReferencedAssemblies());
+
+        foreach (SpringIncludeAssembly includeAssembly in assembly.GetCustomAttributes(typeof(SpringIncludeAssembly), true))
+        {
+          refAssemblies.Add(new AssemblyName(includeAssembly.Assembly));
+        }
+
+        foreach (AssemblyName name in refAssemblies)
         {
           try
           {
