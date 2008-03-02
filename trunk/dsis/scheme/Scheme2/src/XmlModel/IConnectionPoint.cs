@@ -43,7 +43,7 @@ namespace DSIS.Scheme2.XmlModel
     void Register<T>(IInputConnectionPoint<T> point);
   }
 
-  public interface INode
+  public interface INode : IInitializeAware
   {
     ICollection<IInputConnectionPoint> Input { get; }
     ICollection<IOutputConnectionPoint> Output { get; }
@@ -51,8 +51,11 @@ namespace DSIS.Scheme2.XmlModel
     IInputConnectionPoint GetInput(string name);
     IOutputConnectionPoint GetOutput(string name);
 
-    string Name { get; }
+    string Name { get; }    
+  }
 
-    void Initizlized();
+  public interface INodeAsOutputAction
+  {
+    IOutputConnectionPoint AsOutputConnectionPoint();
   }
 }

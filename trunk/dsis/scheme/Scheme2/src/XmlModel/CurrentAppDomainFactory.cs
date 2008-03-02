@@ -6,11 +6,13 @@ using DSIS.Scheme2.XmlModel;
 
 namespace DSIS.Scheme2.XmlModel
 {
-  public class CurrentAppDomainFactory : Registrar<ISchemeNodeFactoryExtension, SchemeNodeFactory>, ISchemeNodeFactoryExtension
+  public class CurrentAppDomainFactory : Registrar<ISchemeNodeFactoryExtension, SchemeNodeFactory>,
+                                         ISchemeNodeFactoryExtension
   {
     private readonly ConnectionPointFactory myConnectionPointFactory;
 
-    public CurrentAppDomainFactory(SchemeNodeFactory factory, ConnectionPointFactory connectionPointFactory) : base(factory)
+    public CurrentAppDomainFactory(SchemeNodeFactory factory, ConnectionPointFactory connectionPointFactory)
+      : base(factory)
     {
       myConnectionPointFactory = connectionPointFactory;
     }
@@ -33,19 +35,20 @@ namespace DSIS.Scheme2.XmlModel
 
       List<IInputConnectionPoint> inputPoints = new List<IInputConnectionPoint>();
       List<IOutputConnectionPoint> outputPoints = new List<IOutputConnectionPoint>();
-            
+
       foreach (MemberInfo info in tAction.GetMembers())
       {
         Add<InputAttribute, IInputConnectionPoint>(instance, info, myConnectionPointFactory.Input, inputPoints);
-        Add<OutputAttribute, IOutputConnectionPoint>(instance, info, myConnectionPointFactory.Output, outputPoints);       
+        Add<OutputAttribute, IOutputConnectionPoint>(instance, info, myConnectionPointFactory.Output, outputPoints);
       }
-      
-      return new AppDomainNode(inputPoints, outputPoints, action.Id ?? tAction.FullName, instance as IInitializeAware);
+
+      return new AppDomainNode(inputPoints, outputPoints, action.Id ?? tAction.FullName, instance);
     }
 
     private delegate TPoint Factory<TPoint>(string name, object instance, MemberInfo info);
 
-    private static void Add<TAttr, TPoint>(object instance, MemberInfo info, Factory<TPoint> factory, ICollection<TPoint> list)
+    private static void Add<TAttr, TPoint>(object instance, MemberInfo info, Factory<TPoint> factory,
+                                           ICollection<TPoint> list)
       where TAttr : ConnectionPointAttribute
       where TPoint : class
     {
@@ -55,13 +58,13 @@ namespace DSIS.Scheme2.XmlModel
         TPoint @out = factory(output.Name, instance, info);
         if (@out != null)
           list.Add(@out);
-      }      
+      }
     }
 
-    private static T GetAtttribute<T>(ICustomAttributeProvider prov) 
+    private static T GetAtttribute<T>(ICustomAttributeProvider prov)
       where T : Attribute
     {
-      object[] attributes = prov.GetCustomAttributes(typeof(T), true);
+      object[] attributes = prov.GetCustomAttributes(typeof (T), true);
       if (attributes != null && attributes.Length == 1)
         return (T) attributes[0];
       return null;

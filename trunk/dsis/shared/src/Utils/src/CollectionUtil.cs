@@ -40,6 +40,32 @@ namespace DSIS.Utils
       return list.AsReadOnly();
     }
 
+    public static IEnumerable<T> And<T,Q1,Q2>(IEnumerable<Q1> enu1, IEnumerable<Q2> enu2)
+      where Q1 : T
+      where Q2 : T
+    {
+      foreach (Q1 q1 in enu1)
+      {
+        yield return q1;
+      }
+
+      foreach (Q2 q2 in enu2)
+      {
+        yield return q2;
+      }
+    }
+
+    public static IEnumerable<T> And<T>(params IEnumerable<T>[] enums)
+    {
+      foreach (IEnumerable<T> enumerable in enums)
+      {
+        foreach (T t in enumerable)
+        {
+          yield return t;
+        }
+      }
+    }
+
     public static bool Contains<T>(IEnumerable<T> collection, T check)
     {
       IEqualityComparer<T> comparer = EqualityComparerFactory<T>.GetComparer();

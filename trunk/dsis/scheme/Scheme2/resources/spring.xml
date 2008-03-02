@@ -10,9 +10,13 @@
 
   <object id="nodeNodeFactory" type="DSIS.Scheme2.XmlModel.SchemeNodeFactory, DSIS.Scheme2"/>
 
-  <object id="schemeGraphFactory" type="DSIS.Scheme2.XmlModel.SchemeGraphFactory, DSIS.Scheme2"/>    
-  
+  <object id="schemeGraphFactory" type="DSIS.Scheme2.XmlModel.SchemeGraphFactory, DSIS.Scheme2"/>
+  <object id="outputConnectionPointFactory" type="DSIS.Scheme2.XmlModel.OutputConnectionPointFactory, DSIS.Scheme2"/>
+  <object id="outputConnectionPointFromFactory" type="DSIS.Scheme2.XmlModel.OutputConnectionPointFromFactory, DSIS.Scheme2"/>
+  <object id="outputConnectionPointFromActionFactory" type="DSIS.Scheme2.XmlModel.OutputConnectionPointFromActionFactory, DSIS.Scheme2"/>
+  <object id="outputObjectParserFromFactory" type="DSIS.Scheme2.XmlModel.OutputObjectParserFromFactory, DSIS.Scheme2"/>
+
   <object id="connectionPointFactory" type="DSIS.Scheme2.XmlModel.ConnectionPointFactory, DSIS.Scheme2"/>    
   <object id="connectionPointFactoryImpl" type="DSIS.Scheme2.Impl.ConnectionPoints.ClassConnectionPointFactory, DSIS.Scheme2"/>      
-  
+      
 </objects>

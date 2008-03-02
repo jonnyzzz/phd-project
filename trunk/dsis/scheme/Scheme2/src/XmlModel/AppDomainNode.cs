@@ -1,24 +1,20 @@
 using System;
 using System.Collections.Generic;
+using DSIS.Scheme2.Impl.ConnectionPoints;
 
 namespace DSIS.Scheme2.XmlModel
 {
-  public interface IInitializeAware
-  {
-    void Initialized();
-  }
-
-  public class AppDomainNode : INode
+  public class AppDomainNode : INode, INodeAsOutputAction
   {
     private readonly ICollection<IInputConnectionPoint> myInput;
     private readonly ICollection<IOutputConnectionPoint> myOutput;
     private readonly string myName;
-    private readonly IInitializeAware myInitListener;
+    private readonly object myAction;
 
-    public AppDomainNode(ICollection<IInputConnectionPoint> input, ICollection<IOutputConnectionPoint> output, string name, IInitializeAware initListener)
+    public AppDomainNode(ICollection<IInputConnectionPoint> input, ICollection<IOutputConnectionPoint> output, string name, object action)
     {
       myInput = input;
-      myInitListener = initListener;
+      myAction = action;
       myOutput = output;
       myName = name;
     }
@@ -58,10 +54,16 @@ namespace DSIS.Scheme2.XmlModel
       get { return myName; }
     }
 
-    public void Initizlized()
+    public void Initialized()
     {
-      if (myInitListener != null)
-        myInitListener.Initialized();      
+      IInitializeAware init = myAction as IInitializeAware;
+      if (init != null)
+        init.Initialized();      
     }
-  }
+
+    public IOutputConnectionPoint AsOutputConnectionPoint()
+    {
+      return ActionOutputConnectionPoint.FromActionObject(Name, myAction);
+    }
+  }  
 }

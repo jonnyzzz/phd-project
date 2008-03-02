@@ -7,38 +7,21 @@ namespace DSIS.Scheme2.Impl.ConnectionPoints
   /// Bound object produces new data using event
   /// </summary>
   /// <typeparam name="T"></typeparam>
-  public class OutputConnectionPoint<T> : IOutputConnectionPoint<T>
+  public class OutputConnectionPoint<T> : OutputConnectionPointBase<T>
   {
     private readonly object myInstance;
     private readonly EventInfo myEvent;
-    private readonly string myName;
-
-    public OutputConnectionPoint(string name, object instance, EventInfo @event)
+    
+    public OutputConnectionPoint(string name, object instance, EventInfo @event) : base(name)
     {
       myInstance = instance;
       myEvent = @event;
-      myName = name;
     }
 
-    public event DataReady<T> OnDataReady
+    public override event DataReady<T> OnDataReady
     {
       add { myEvent.AddEventHandler(myInstance, value); }
       remove { myEvent.RemoveEventHandler(myInstance, value); }
-    }
-
-    public void With(IOutputConnectionPointWith with)
-    {
-      with.Register(this);
-    }
-
-    public void Bind(IInputConnectionPoint pt)
-    {
-      pt.With(new BindInput<T>(this));
-    }
-
-    public string Name
-    {
-      get { return myName; }
     }
   }
 }
