@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using DSIS.Scheme2.Attributed;
 using DSIS.Scheme2.XmlModel;
+using DSIS.Spring;
 
 namespace DSIS.Scheme2.XmlModel
 {
+  [UsedBySpring]
   public class CurrentAppDomainFactory : Registrar<ISchemeNodeFactoryExtension, SchemeNodeFactory>,
                                          ISchemeNodeFactoryExtension
   {
@@ -19,7 +21,7 @@ namespace DSIS.Scheme2.XmlModel
 
     public INode Create(XsdAction _action)
     {
-      XsdUserAction action = _action as XsdUserAction;
+      XsdComputationSchemeCode action = _action as XsdComputationSchemeCode;
       if (action == null)
         return null;
 

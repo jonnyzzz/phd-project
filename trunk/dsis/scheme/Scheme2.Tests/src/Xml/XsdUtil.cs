@@ -7,7 +7,7 @@ namespace DSIS.Scheme2.Tests.Xml
   {
     public static XsdAction Create(Type t)
     {
-      XsdUserAction action = new XsdUserAction();
+      XsdComputationSchemeCode action = new XsdComputationSchemeCode();
       action.Assembly = t.Assembly.FullName;
       action.Class = t.FullName;
       return action;

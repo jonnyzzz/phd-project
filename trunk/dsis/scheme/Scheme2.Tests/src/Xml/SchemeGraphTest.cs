@@ -96,5 +96,16 @@ namespace DSIS.Scheme2.Tests.Xml
 
       TestGraphRegistry.AssertData("B:Recieved");
     }
+    
+    [Test]
+    public void Test_FromsubAction()
+    {
+      SchemeGraph build = myFactory.Build(TestSchemeGraphLoader.LoadTest_06());
+      Assert.That(build, NIs.Not.Null);
+
+      build.Start();
+
+      TestGraphRegistry.AssertData("A:Initized", "B:Recieved");
+    }
   }
 }

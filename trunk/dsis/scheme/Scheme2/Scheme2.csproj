@@ -81,6 +81,7 @@
     <Compile Include="src\XmlModel\SchemeGraph.cs" />
     <Compile Include="src\XmlModel\SchemeGraphFactory.cs" />
     <Compile Include="src\XmlModel\SchemeNodeFactory.cs" />
+    <Compile Include="src\XmlModel\XmlSchemeActionFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="src\XmlModel\computation-graph-scheme.xsd">

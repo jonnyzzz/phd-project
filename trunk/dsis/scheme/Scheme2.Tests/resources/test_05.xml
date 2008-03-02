@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<Computation-Graph xmlns="urn:shemas-dsis-org:computation-graph-xml">
+<Computation-Graph xmlns="urn:shemas-dsis-org:computation-graph-xml" Id="AAA">
   <Actions>
     <Code Id="B" Assembly="DSIS.Scheme2.Tests" Class="DSIS.Scheme2.Tests.testData.Test_01_B"/>
   </Actions>

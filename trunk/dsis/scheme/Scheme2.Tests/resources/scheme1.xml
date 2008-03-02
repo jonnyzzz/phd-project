@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<Computation-Graph xmlns="urn:shemas-dsis-org:computation-graph-xml">
+<Computation-Graph xmlns="urn:shemas-dsis-org:computation-graph-xml" Id="AAA">
+  <External>
+    <Inputs>
+      <Input Id="aaa" Point="ZZZ"/>
+    </Inputs>
+    <Outputs>
+      <Output Point="QQQ"/>
+    </Outputs>
+  </External>
   <Actions>
     <Code-Action Id="A" Class="ZZZ"/>
-    <Xml-Action Id="B">      
-      <
+    <Xml-Action Id="B">            
       <Input Point="sss"/>       
       <Output Point="eee"/>
       <Value>

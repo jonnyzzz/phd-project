@@ -7,6 +7,7 @@
          default-lazy-init="false">
 
   <object id="currentAppDomainFactory" type="DSIS.Scheme2.XmlModel.CurrentAppDomainFactory, DSIS.Scheme2"/>
+  <object id="xmlSchemeActionFactory" type="DSIS.Scheme2.XmlModel.XmlSchemeActionFactory, DSIS.Scheme2"/>
 
   <object id="nodeNodeFactory" type="DSIS.Scheme2.XmlModel.SchemeNodeFactory, DSIS.Scheme2"/>
 

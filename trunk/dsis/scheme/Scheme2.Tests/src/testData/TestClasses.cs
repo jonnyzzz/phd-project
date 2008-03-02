@@ -1,4 +1,3 @@
-using System;
 using System.Xml;
 using DSIS.Scheme2.Attributed;
 using DSIS.Scheme2.Impl.ObjectParsers;

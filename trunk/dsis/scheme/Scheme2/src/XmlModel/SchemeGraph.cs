@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Scheme2.XmlModel;
 using DSIS.Utils;
@@ -6,7 +5,7 @@ using log4net;
 
 namespace DSIS.Scheme2.XmlModel
 {
-  public class SchemeGraph : ISchemeGraphBuildContext
+  public class SchemeGraph : NodeBase, ISchemeGraphBuildContext
   {
     private static readonly ILog LOG = LogManager.GetLogger(typeof (SchemeGraph));
 
@@ -16,14 +15,17 @@ namespace DSIS.Scheme2.XmlModel
     private readonly InputConnectionPointFactory myInputConnection;
     private readonly List<IInitializeAware> myInitializers = new List<IInitializeAware>();
     private readonly Dictionary<string, object> myUserDataHolder = new Dictionary<string, object>();
+    
 
     public SchemeGraph(XsdComputationScheme scheme, SchemeNodeFactory factory, OutputConnectionPointFactory outputConnection, InputConnectionPointFactory inputConnection)
+      : base(new List<IInputConnectionPoint>(), new List<IOutputConnectionPoint>(), scheme.Id)
     {
       myFactory = factory;
       myInputConnection = inputConnection;
       myOutputConnection = outputConnection;
-
+      
       BuildActions(scheme);
+      ExternalPoints(scheme);
       LinkActions(scheme);
     }
 
@@ -63,6 +65,34 @@ namespace DSIS.Scheme2.XmlModel
       }
     }
 
+    private void ExternalPoints(XsdComputationScheme external)
+    {      
+      ExternalPointInput(external.External);
+      ExternalPointOutput(external.External);
+    }
+
+    private void ExternalPointInput(XsdComputationSchemeExternal inputs)
+    {
+      if (inputs == null)
+        return;
+
+      foreach (XsdEdgePoint input in Safe(inputs.Inputs))
+      {
+        Input.Add(GetAction(input.Id).GetInput(input.Point));        
+      }
+    }
+    
+    private void ExternalPointOutput(XsdComputationSchemeExternal outputs)
+    {
+      if (outputs == null)
+        return;
+
+      foreach (XsdEdgePoint point in Safe(outputs.Outputs))
+      {
+        Output.Add(GetAction(point.Id).GetOutput(point.Point));
+      }      
+    }
+
     public void Start()
     {
       foreach (IInitializeAware node in myInitializers)
@@ -71,12 +101,24 @@ namespace DSIS.Scheme2.XmlModel
       }
     }
 
+
+    public override void Initialized()
+    {
+      base.Initialized();
+      Start();
+    }
+
     private static T[] Safe<T>(T[] array)
     {
       return array ?? EmptyArray<T>.Instance;
     }
 
     INode ISchemeGraphBuildContext.GetAction(string name)
+    {
+      return GetAction(name);
+    }
+
+    private INode GetAction(string name)
     {
       return myActions[name];
     }

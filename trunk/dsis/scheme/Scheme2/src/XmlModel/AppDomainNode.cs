@@ -5,9 +5,7 @@ namespace DSIS.Scheme2.XmlModel
 {
   public class AppDomainNode : NodeBase, INodeAsOutputAction
   {
-
     private readonly object myAction;
-
 
     public AppDomainNode(ICollection<IInputConnectionPoint> input, ICollection<IOutputConnectionPoint> output, string name, object action) : base(input, output, name)
     {

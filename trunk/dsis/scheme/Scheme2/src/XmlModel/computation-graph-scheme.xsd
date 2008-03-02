@@ -17,29 +17,7 @@
     <xs:attribute name="Id" type="XsdId" use="required"/>
   </xs:complexType>
   
-  <xs:complexType name="XsdAction" abstract="true">
-    <xs:complexContent>
-      <xs:restriction base="XsdIdAttribute"/>
-    </xs:complexContent>    
-  </xs:complexType>
-  <xs:complexType name="XsdUserAction">
-    <xs:complexContent>
-      <xs:extension base="XsdAction">
-        <xs:attribute name="Class" type="xs:string" use="required" />
-        <xs:attribute name="Assembly" type="xs:string" use="required" />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="XsdXmlAction">
-    <xs:complexContent>
-      <xs:extension base="XsdAction">
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">          
-          <xs:element name="Value" type="XsdComputationScheme" minOccurs="1" maxOccurs="1"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  
+   
   <xs:complexType name="XsdEdgePoint">
     <xs:complexContent>
       <xs:extension base="XsdPointAttribute">
@@ -60,10 +38,16 @@
     <xs:attribute name="Name" type="XsdId"/>
     <xs:attribute name="FormatterClass" type="xs:string"/>
     <xs:attribute name="FormatterAssembly" type="xs:string"/>    
-  </xs:complexType>  
+  </xs:complexType>
+
+  <xs:complexType name="XsdAction" abstract="true">
+    <xs:complexContent>
+      <xs:restriction base="XsdIdAttribute"/>
+    </xs:complexContent>
+  </xs:complexType>
 
   <xs:complexType name="XsdConnections">
-    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element name="Arc">
         <xs:complexType>
           <xs:sequence>
@@ -92,37 +76,50 @@
   </xs:complexType>
   
   <xs:complexType name="XsdComputationScheme">
-    <xs:sequence maxOccurs="1">
-      <xs:element name="External" minOccurs="0" maxOccurs="1">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="Inputs" minOccurs="1" >
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Input" type="XsdPointAttribute"/>
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-            <xs:element name="Outputs" minOccurs="1" >
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="Output" type="XsdPointAttribute"/>
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="Actions" minOccurs="0">
-        <xs:complexType>
-          <xs:choice minOccurs="1" maxOccurs="unbounded">
-            <xs:element name="Code" type="XsdUserAction" />
-            <xs:element name="Xml" type="XsdXmlAction"/>
-          </xs:choice>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="Connections" type="XsdConnections" minOccurs="0"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="XsdAction">
+        <xs:sequence maxOccurs="1">
+          <xs:element name="Actions" minOccurs="0">
+            <xs:complexType>
+              <xs:choice minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="Code">
+                  <xs:complexType>
+                    <xs:complexContent>
+                      <xs:extension base="XsdAction">
+                        <xs:attribute name="Class" type="xs:string" use="required" />
+                        <xs:attribute name="Assembly" type="xs:string" use="required" />
+                      </xs:extension>
+                    </xs:complexContent>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Xml" type="XsdComputationScheme"/>
+              </xs:choice>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Connections" type="XsdConnections" minOccurs="0"/>
+          <xs:element name="External" minOccurs="0" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Inputs" minOccurs="1" >
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="Input" type="XsdEdgePoint" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+                <xs:element name="Outputs" minOccurs="1" >
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="Output" type="XsdEdgePoint" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:element name="Computation-Graph" type="XsdComputationScheme"/>
