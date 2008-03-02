@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using DSIS.Scheme2.Impl.ConnectionPoints;
-using DSIS.Scheme2.Impl.ObjectParsers;
 using DSIS.Spring;
 
 namespace DSIS.Scheme2.XmlModel
@@ -14,7 +9,7 @@ namespace DSIS.Scheme2.XmlModel
     {
     }
 
-    public IOutputConnectionPoint Create(ISchemeGraphBuildContext ctx, XsdArc arc)
+    public IOutputConnectionPoint Create(ISchemeGraphBuildContext ctx, XsdConnectionsArcFrom arc)
     {
       if (arc.Item is XsdEdgePoint)
       {

@@ -16,6 +16,9 @@
   <object id="outputConnectionPointFromActionFactory" type="DSIS.Scheme2.XmlModel.OutputConnectionPointFromActionFactory, DSIS.Scheme2"/>
   <object id="outputObjectParserFromFactory" type="DSIS.Scheme2.XmlModel.OutputObjectParserFromFactory, DSIS.Scheme2"/>
 
+  <object id="inputConnectionPointFactory" type="DSIS.Scheme2.XmlModel.InputConnectionPointFactory, DSIS.Scheme2"/>
+  <object id="inputConnectionPointExtension" type="DSIS.Scheme2.XmlModel.InputConnectionPointExtension, DSIS.Scheme2"/>
+
   <object id="connectionPointFactory" type="DSIS.Scheme2.XmlModel.ConnectionPointFactory, DSIS.Scheme2"/>    
   <object id="connectionPointFactoryImpl" type="DSIS.Scheme2.Impl.ConnectionPoints.ClassConnectionPointFactory, DSIS.Scheme2"/>      
       

@@ -13,12 +13,14 @@ namespace DSIS.Scheme2.XmlModel
     private readonly Dictionary<string, INode> myActions = new Dictionary<string, INode>();
     private readonly SchemeNodeFactory myFactory;
     private readonly OutputConnectionPointFactory myOutputConnection;
+    private readonly InputConnectionPointFactory myInputConnection;
     private readonly List<IInitializeAware> myInitializers = new List<IInitializeAware>();
     private readonly Dictionary<string, object> myUserDataHolder = new Dictionary<string, object>();
 
-    public SchemeGraph(XsdComputationScheme scheme, SchemeNodeFactory factory, OutputConnectionPointFactory outputConnection)
+    public SchemeGraph(XsdComputationScheme scheme, SchemeNodeFactory factory, OutputConnectionPointFactory outputConnection, InputConnectionPointFactory inputConnection)
     {
       myFactory = factory;
+      myInputConnection = inputConnection;
       myOutputConnection = outputConnection;
 
       BuildActions(scheme);
@@ -44,16 +46,18 @@ namespace DSIS.Scheme2.XmlModel
       if (scheme.Connections == null)
         return;
 
-      foreach (XsdArc arc in Safe(scheme.Connections.Arc))
+      foreach (XsdConnectionsArc arc in Safe(scheme.Connections.Arc))
       {
-        IInputConnectionPoint input = myActions[arc.To.Id].GetInput(arc.To.Point);
-        IOutputConnectionPoint output = myOutputConnection.Create(this, arc);
+        IInputConnectionPoint input = myInputConnection.Create(this, arc.To);
+        IOutputConnectionPoint output = myOutputConnection.Create(this, arc.From);
 
         RegisterInitializeAware(output as IInitializeAware);
         RegisterInitializeAware(input as IInitializeAware);
 
-        if (output == null)
-          throw new SchemeGraphException("Failed to deserialize action {0}" + (arc.Item != null ? arc.Item.GetType().FullName : "null"));
+        if (output == null)        
+          throw new SchemeGraphException("Failed to deserialize from action");
+        if (input == null)        
+          throw new SchemeGraphException("Failed to deserialize to action");
 
         input.Bind(output);        
       }

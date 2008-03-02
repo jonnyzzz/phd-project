@@ -10,7 +10,7 @@ namespace DSIS.Scheme2.XmlModel
     {
     }
 
-    public IOutputConnectionPoint Create(ISchemeGraphBuildContext ctx, XsdArc arc)
+    public IOutputConnectionPoint Create(ISchemeGraphBuildContext ctx, XsdConnectionsArcFrom arc)
     {
       if (arc.Item is XsdFromActionInstance)
       {

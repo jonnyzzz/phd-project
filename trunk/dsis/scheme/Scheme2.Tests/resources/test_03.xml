@@ -2,13 +2,15 @@
 
 <Computation-Graph xmlns="urn:shemas-dsis-org:computation-graph-xml">
   <Actions>
-    <Code-Action Id="B" Assembly="DSIS.Scheme2.Tests" Class="DSIS.Scheme2.Tests.testData.Test_01_B"/>    
-    <Code-Action Id="C" Assembly="DSIS.Scheme2.Tests" Class="DSIS.Scheme2.Tests.testData.Test_01_C"/>    
+    <Code Id="B" Assembly="DSIS.Scheme2.Tests" Class="DSIS.Scheme2.Tests.testData.Test_01_B"/>    
+    <Code Id="C" Assembly="DSIS.Scheme2.Tests" Class="DSIS.Scheme2.Tests.testData.Test_01_C"/>    
   </Actions>
   <Connections>
     <Arc>
-      <From-Action-Instance Id="B"/>
-      <To Id="C" Point="Z"/>
+      <From><Action-Instance Id="B"/></From>
+      <To>
+        <Action Id="C" Point="Z"/>
+      </To>
     </Arc>    
   </Connections>
 </Computation-Graph>
