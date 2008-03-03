@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.BoxMethod;
+using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Henon;
@@ -203,9 +204,9 @@ namespace DSIS.SimpleRunner
           });
 
       IAction step = new ChainAction(
-        new LoopAction(steps /*- 1*/, buildIS)
-//        new ReplaceContextAction(new SetMethod(new PointMethodSettings(new int[] {2, 2}, 0.1), new long[] {2, 2})),
-//        buildIS
+        new LoopAction(steps - 1, buildIS),
+        new ReplaceContextAction(new SetMethod(new PointMethodSettings(new int[] {2, 2}, 0.1), new long[] {2, 2})),
+        buildIS
         );
                
       gr.AddEdge(wf, step);

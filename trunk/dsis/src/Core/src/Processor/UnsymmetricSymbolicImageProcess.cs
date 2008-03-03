@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -6,7 +5,7 @@ using DSIS.Core.Util;
 namespace DSIS.Core.Processor
 {
   public class UnsymmetricSymbolicImageProcess<T> : ICellProcessor<T>, ICellProcessor<T,T>
-    where T: ICellCoordinate<T>
+    where T: ICellCoordinate
   {
     private readonly ICellProcessor<T, T> myProcessor = new SymbolicImageConstructionProcess<T, T>();
     private ICellProcessorMultiplyContext<T> myContext;

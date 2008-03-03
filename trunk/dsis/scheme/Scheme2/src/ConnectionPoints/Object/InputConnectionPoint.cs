@@ -21,6 +21,7 @@ namespace DSIS.Scheme2.ConnectionPoints.Object
 
     public void DataReady(T obj)
     {
+      //todo: Reflection
       myProperty.SetValue(myObject, obj, null);
     }
 
