@@ -1,5 +1,7 @@
 using System;
 using DSIS.Core.System;
+using DSIS.Scheme.Objects.Systemx;
+using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Logistics
 {
@@ -23,8 +25,8 @@ namespace DSIS.Function.Predefined.Logistics
   {
     private readonly double myA;
 
-    public LogisticSystemInfo(ISystemSpace systemSpace, double a)
-      : base(systemSpace)
+    public LogisticSystemInfo(double a)
+      : base(1)
     {
       myA = a;
     }
@@ -42,6 +44,18 @@ namespace DSIS.Function.Predefined.Logistics
     protected override IFunction<double> GetFunctionDerivateInternal()
     {
       throw new NotImplementedException();
+    }
+  }
+
+  [UsedBySpring]
+  public class LogisticsFactory : DoubleParametersSystemInfoFactoryBase
+  {
+    public LogisticsFactory(DoubleArrayParser parser, SystemInfoFactory factory)
+      : base("Logistics", 1, delegate(double[] paramz)
+                                                         {
+                                                           return new LogisticSystemInfo(paramz[0]);
+                                                         }, parser, factory)
+    {
     }
   }
 }

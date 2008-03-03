@@ -1,19 +1,11 @@
-using DSIS.Core.System;
+using DSIS.Function.Predefined;
+using DSIS.Spring;
+
+[assembly: SpringConfigXml("resources.spring.xml", Type = typeof(SystemInfoDecoratorBase))]
 
 namespace DSIS.Function.Predefined
 {
   public class SystemInfoDecoratorBase
-  {
-    private readonly ISystemSpace mySystemSpace;
-
-    public SystemInfoDecoratorBase(ISystemSpace systemSpace)
-    {
-      mySystemSpace = systemSpace;
-    }
-
-    public ISystemSpace SystemSpace
-    {
-      get { return mySystemSpace; }
-    }
+  {    
   }
 }

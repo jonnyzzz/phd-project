@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
+using System.Text;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Scheme2;
@@ -33,7 +35,7 @@ namespace DSIS.Scheme.Objects.Tests
     }
 
     [Test]
-    public void Test_01()
+    public void Test_SystemSpace01()
     {
       SchemeGraph build = myFactory.Build(Load("DSIS.Scheme.Objects.Tests.resources.SystemSpace_01.xml"));
       Assert.That(build, NIs.Not.Null);
@@ -41,6 +43,50 @@ namespace DSIS.Scheme.Objects.Tests
       build.Start();
 
       TestGraphRegistry.AssertData("Data set: Dim=1, L=(-1, ), R=(1, ), Grid=(10, )");      
+    }
+
+    [Test]
+    public void Test_SystemInfo01()
+    {
+      SchemeGraph build = myFactory.Build(Load("DSIS.Scheme.Objects.Tests.resources.SystemInfo_01.xml"));
+      Assert.That(build, NIs.Not.Null);
+
+      build.Start();
+
+      TestGraphRegistry.AssertData("Data set: Food Chain");      
+    }
+
+    [Test]
+    public void Test_SystemInfo02()
+    {
+      SchemeGraph build = myFactory.Build(Load("DSIS.Scheme.Objects.Tests.resources.SystemInfo_02.xml"));
+      Assert.That(build, NIs.Not.Null);
+
+      build.Start();
+
+      TestGraphRegistry.AssertData("Data set: Henon a=1.4");
+    }
+    
+    [Test]
+    public void Test_SystemInfo03()
+    {
+      SchemeGraph build = myFactory.Build(Load("DSIS.Scheme.Objects.Tests.resources.SystemInfo_03.xml"));
+      Assert.That(build, NIs.Not.Null);
+
+      build.Start();
+
+      TestGraphRegistry.AssertData("Data set: Henon a=1.4", "Data set: Food Chain");
+    }
+
+    [Test]
+    public void Test_DoubleArray01()
+    {
+      SchemeGraph build = myFactory.Build(Load("DSIS.Scheme.Objects.Tests.resources.DoubleArray_01.xml"));
+      Assert.That(build, NIs.Not.Null);
+
+      build.Start();
+
+      TestGraphRegistry.AssertData("Data set: 5, -5, ");      
     }
   }
 
@@ -56,6 +102,44 @@ namespace DSIS.Scheme.Objects.Tests
       set { 
         mySystemSpace = value;        
         TestGraphRegistry.Log("Data set: " + (mySystemSpace.ToString() ?? "NULL"));        
+      }
+    }
+  }
+
+  [UsedByScheme]
+  public class InfoSpaceAction
+  {
+    private ISystemInfo mySystemInfo;
+
+    [Input("SystemInfo")]
+    public ISystemInfo SystemInfo
+    {
+      get { return mySystemInfo; }
+      set { 
+        mySystemInfo = value;        
+        TestGraphRegistry.Log("Data set: " + mySystemInfo.PresentableName);        
+      }
+    }
+  }
+  
+  [UsedByScheme]
+  public class DoubleArray
+  {
+    private double[] mySystemInfo;
+
+    [Input("Arr")]
+    public double[] SystemInfo
+    {
+      get { return mySystemInfo; }
+      set { 
+        mySystemInfo = value;        
+        StringBuilder sb = new StringBuilder();
+        sb.Append("Data set: ");
+        foreach (double d in value)
+        {
+          sb.Append(d.ToString(CultureInfo.InvariantCulture)).Append(", ");
+        }
+        TestGraphRegistry.Log(sb.ToString());        
       }
     }
   }

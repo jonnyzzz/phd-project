@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.BoxMethod;
+using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
@@ -25,8 +26,8 @@ namespace DSIS.SimpleRunner
     {
       DefaultSystemSpace sp =
         new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
-      IAction henon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
-      IAction ikeda = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
+      IAction henon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
+      IAction ikeda = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), sp);
 //      IAction init = new LineInitialAction(0.001, new double[] {-2.6, -2.1}, new double[] {0.5, 0});
       IAction init = new LineInitialAction(0.001, new double[] { 0.63313, 0.18940634 }, new double[] { 0.63313 + 0.01, 0.18940634 + 1.92*0.01});
       ActionGraph gr = new ActionGraph();
@@ -81,11 +82,11 @@ namespace DSIS.SimpleRunner
         new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
       DefaultSystemSpace spD =
         new DefaultSystemSpace(2, new double[] { -2, -2 }, new double[] { 2, 2 }, new long[] { 2, 2 });      
-      IAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(sp, 1.4), sp);
-      IAction systemHenonD = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(sp, 1.2, 0.2), spD);
-      IAction systemHenonD_272 = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(sp, 1.272, 0.2), spD);
-      IAction systemIked = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(sp), sp);
-      IAction systemIkedaCut = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(spIkedaCutted, "Ikeda Cut"), spIkedaCutted);
+      IAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
+      IAction systemHenonD = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(1.2, 0.2), spD);
+      IAction systemHenonD_272 = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(1.272, 0.2), spD);
+      IAction systemIked = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), sp);
+      IAction systemIkedaCut = new SystemInfoAction(new RenameSystem(new IkedaFunctionSystemInfoDecorator(), "Ikeda Cut"), spIkedaCutted);
 
       IAction wfBase = new WorkingFolderAction();
 

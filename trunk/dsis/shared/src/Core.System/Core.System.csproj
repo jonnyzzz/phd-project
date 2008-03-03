@@ -41,6 +41,7 @@
     <Compile Include="src\ISystemInfo.cs" />
     <Compile Include="src\ISystemSpace.cs" />
     <Compile Include="src\ParserErrorException.cs" />
+    <Compile Include="src\RenameSystem.cs" />
     <Compile Include="src\Tree\IFunctionNode.cs" />
     <Compile Include="src\Tree\IFunctionTreeVisitor.cs" />
     <Compile Include="src\UnsupportedDevivateException.cs" />

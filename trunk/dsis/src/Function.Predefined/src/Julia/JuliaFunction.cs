@@ -1,5 +1,7 @@
 using System;
 using DSIS.Core.System;
+using DSIS.Scheme.Objects.Systemx;
+using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Julia
 {
@@ -18,8 +20,8 @@ namespace DSIS.Function.Predefined.Julia
 
   public class JuliaFuctionSystemInfoDecorator : DoubleSystemInfoBase
   {
-    public JuliaFuctionSystemInfoDecorator(ISystemSpace systemSpace)
-      : base(systemSpace)
+    public JuliaFuctionSystemInfoDecorator()
+      : base(2)
     {
     }
 
@@ -38,4 +40,13 @@ namespace DSIS.Function.Predefined.Julia
       throw new NotImplementedException();
     }
   }  
+
+  [UsedBySpring]
+  public class JuliaFactory : NoParameterSystemInfoFactoryBase
+  {
+    public JuliaFactory(SystemInfoFactory factory)
+      : base(factory, "Julia", delegate { return new JuliaFuctionSystemInfoDecorator(); })
+    {
+    }
+  }
 }

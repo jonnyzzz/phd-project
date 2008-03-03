@@ -1,7 +1,11 @@
 using DSIS.Core.System;
+using DSIS.Scheme.Objects.Systemx;
+using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Linear
 {
+  
+
   public class Linear2DSystemInfo : DoubleSystemInfoBase
   {
     private readonly double myA;
@@ -9,8 +13,8 @@ namespace DSIS.Function.Predefined.Linear
     private readonly double myC;
     private readonly double myD;
 
-    public Linear2DSystemInfo(ISystemSpace systemSpace, double a, double b, double c, double d)
-      : base(systemSpace)
+    public Linear2DSystemInfo(double a, double b, double c, double d)
+      : base(2)
     {
       myA = a;
       myB = b;
@@ -49,6 +53,18 @@ namespace DSIS.Function.Predefined.Linear
         Output[0] = myA * Input[0] + myB * Input[1];
         Output[1] = myC * Input[0] + myD * Input[1];
       }
+    }
+  }
+
+  [UsedBySpring]
+  public class Linear2DFactory : DoubleParametersSystemInfoFactoryBase
+  {
+    public Linear2DFactory(DoubleArrayParser parser, SystemInfoFactory factory)
+      : base("Linear2D", 4, delegate(double[] paramz)
+                                                         {
+                                                           return new Linear2DSystemInfo(paramz[0], paramz[1], paramz[2], paramz[3]);
+                                                         }, parser, factory)
+    {
     }
   }
 }

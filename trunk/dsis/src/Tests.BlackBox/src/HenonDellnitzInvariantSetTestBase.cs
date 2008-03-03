@@ -13,7 +13,7 @@ namespace DSIS.Tests.BlackBox
       base.SetUp();
 
       mySystemSpace = new DefaultSystemSpace(2, new double[] {-2, -2}, new double[] {2, 2}, new long[] {3, 3});
-      mySystemInfo = new HenonDellnitzFunctionSystemInfoDecorator(mySystemSpace, 1.2, 0.2);
+      mySystemInfo = new HenonDellnitzFunctionSystemInfoDecorator(1.2, 0.2);
     }
 
     [Test]

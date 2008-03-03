@@ -1,5 +1,7 @@
 using System;
 using DSIS.Core.System;
+using DSIS.Scheme.Objects.Systemx;
+using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Ikeda
 {
@@ -21,21 +23,13 @@ namespace DSIS.Function.Predefined.Ikeda
 
   public class IkedaFunctionSystemInfoDecorator : DoubleSystemInfoBase
   {
-    private readonly string myName;
-
-    public IkedaFunctionSystemInfoDecorator(ISystemSpace systemSpace) : base(systemSpace)
+    public IkedaFunctionSystemInfoDecorator() : base(2)
     {
-      myName = "Ikeda";
-    }
-
-    public IkedaFunctionSystemInfoDecorator(ISystemSpace systemSpace, string name) : base(systemSpace)
-    {
-      myName = name;
     }
 
     public override string PresentableName
     {
-      get { return myName; }
+      get { return "Ikeda"; }
     }
 
     protected override IFunction<double> GetFunctionInternal()
@@ -46,6 +40,15 @@ namespace DSIS.Function.Predefined.Ikeda
     protected override IFunction<double> GetFunctionDerivateInternal()
     {
       throw new NotImplementedException();
+    }
+  }
+
+  [UsedBySpring]
+  public class IkeadFactory : NoParameterSystemInfoFactoryBase
+  {
+    public IkeadFactory(SystemInfoFactory factory)
+      : base(factory, "Ikeda", delegate { return new IkedaFunctionSystemInfoDecorator(); })
+    {
     }
   }
 }

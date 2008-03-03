@@ -9,7 +9,7 @@ namespace DSIS.Function.Predefined.Duffing
     private readonly double myBeta;
     private readonly double myK;
 
-    public DuffingSystemInfo(ISystemSpace systemSpace, double alpha, double beta, double k) : base(systemSpace)
+    public DuffingSystemInfo(double alpha, double beta, double k) : base(2)
     {
       myAlpha = alpha;
       myK = k;

@@ -73,6 +73,18 @@
   <ItemGroup>
     <EmbeddedResource Include="resources\SystemSpace_01.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\SystemInfo_01.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\DoubleArray_01.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\SystemInfo_02.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\SystemInfo_03.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

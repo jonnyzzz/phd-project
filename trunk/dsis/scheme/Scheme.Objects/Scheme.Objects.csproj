@@ -34,10 +34,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="resources\DoubleArray.cs">
+      <DependentUpon>DoubleArray.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="resources\SystemInfo.cs">
+      <DependentUpon>SystemInfo.xsd</DependentUpon>
+    </Compile>
     <Compile Include="resources\SystemSpace.cs">
       <DependentUpon>SystemSpace.xsd</DependentUpon>
     </Compile>
     <Compile Include="src\NamespaceHolder.cs" />
+    <Compile Include="src\Systemx\DoubleArrayParser.cs" />
+    <Compile Include="src\Systemx\ISystemInfoFactory.cs" />
+    <Compile Include="src\Systemx\SchemaBasedParser.cs" />
+    <Compile Include="src\Systemx\SystemInfoFactory.cs" />
+    <Compile Include="src\Systemx\SystemInfoParser.cs" />
     <Compile Include="src\Systemx\SystemSpaceParser.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +73,18 @@
     <EmbeddedResource Include="resources\SystemSpace.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="resources\SystemInfo.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\DoubleArray.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="resources\DoubleArray.xsx">
+      <DependentUpon>DoubleArray.xsd</DependentUpon>
+    </None>
+    <None Include="resources\SystemInfo.xsx">
+      <DependentUpon>SystemInfo.xsd</DependentUpon>
+    </None>
     <None Include="resources\SystemSpace.xsx">
       <DependentUpon>SystemSpace.xsd</DependentUpon>
     </None>
@@ -73,6 +96,8 @@
   <Import Project="../../src/Build.Targets" />
   <Target Name="BeforeBuild">
     <XsdCs InputFile="resources\SystemSpace.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
+    <XsdCs InputFile="resources\SystemInfo.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
+    <XsdCs InputFile="resources\DoubleArray.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

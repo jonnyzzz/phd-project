@@ -1,5 +1,7 @@
 using System;
 using DSIS.Core.System;
+using DSIS.Scheme.Objects.Systemx;
+using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.VanDerPol
 {
@@ -7,8 +9,8 @@ namespace DSIS.Function.Predefined.VanDerPol
   {
     private readonly double myA;
 
-    public VanDerPolSystemInfo(ISystemSpace systemSpace, double a)
-      : base(systemSpace)
+    public VanDerPolSystemInfo(double a)
+      : base(2)
     {
       myA = a;
     }
@@ -26,6 +28,18 @@ namespace DSIS.Function.Predefined.VanDerPol
     protected override IFunction<double> GetFunctionDerivateInternal()
     {
       throw new NotImplementedException();
+    }
+  }
+
+  [UsedBySpring]
+  public class VanDerPolFactory : DoubleParametersSystemInfoFactoryBase
+  {
+    public VanDerPolFactory(DoubleArrayParser parser, SystemInfoFactory factory)
+      : base("Van-der-Pol", 1, delegate(double[] paramz)
+                                                         {
+                                                           return new VanDerPolSystemInfo(paramz[0]);
+                                                         }, parser,factory)
+    {
     }
   }
 }

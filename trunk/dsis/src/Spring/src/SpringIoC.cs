@@ -34,7 +34,7 @@ namespace DSIS.Spring
       load.Add(Assembly.GetExecutingAssembly());
       load.AddRange(AppDomain.CurrentDomain.GetAssemblies());
       
-      ClosureAssemblies(extra, assemblies);
+      ClosureAssemblies(load, assemblies);
 
       if (LOG.IsDebugEnabled)
       {

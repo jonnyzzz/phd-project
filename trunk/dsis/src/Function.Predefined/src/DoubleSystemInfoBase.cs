@@ -6,9 +6,9 @@ namespace DSIS.Function.Predefined
   public abstract class DoubleSystemInfoBase : SystemInfoDecoratorBase, ISystemInfo
   {
     private readonly int myDimension;
-    public DoubleSystemInfoBase(ISystemSpace systemSpace) : base(systemSpace)
+    public DoubleSystemInfoBase(int dimension)
     {
-      myDimension = systemSpace.Dimension;
+      myDimension = dimension;
     }
 
     public IFunction<T> GetDerivateFunction<T>(T[] precision, int derivatePower)

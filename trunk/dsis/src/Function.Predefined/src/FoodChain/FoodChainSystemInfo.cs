@@ -1,11 +1,13 @@
 using System;
 using DSIS.Core.System;
+using DSIS.Scheme.Objects.Systemx;
+using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.FoodChain
 {
   public class FoodChainSystemInfo : DoubleSystemInfoBase
   {
-    public FoodChainSystemInfo(ISystemSpace systemSpace) : base(systemSpace)
+    public FoodChainSystemInfo() : base(3)
     {
     }
 

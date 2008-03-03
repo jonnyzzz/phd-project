@@ -16,7 +16,7 @@ namespace DSIS.Scheme.Impl
     public SimbolicImageBuildTest()
     {
       mySystemSpace = new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });
-      mySystemInfo = new HenonFunctionSystemInfoDecorator(mySystemSpace, 1.4);
+      mySystemInfo = new HenonFunctionSystemInfoDecorator(1.4);
     }
 
     protected override ISystemInfo SystemInfo

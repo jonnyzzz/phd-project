@@ -30,7 +30,7 @@
   </xs:complexType>
   <xs:complexType name="XsdFromObject">
     <xs:sequence>
-      <xs:any processContents="skip"/>
+      <xs:any processContents="skip" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="Name" type="XsdId"/>
     <xs:attribute name="FormatterClass" type="xs:string"/>

@@ -23,4 +23,6 @@
   <object id="XmlSchemeActionFactory" type="DSIS.Scheme2.Graph.XmlSchemeActionFactory, DSIS.Scheme2"/>
   
   <object id="SchemeNodeFactory" type="DSIS.Scheme2.Nodes.SchemeNodeFactory, DSIS.Scheme2"/>
+  
+  <object id="ObjectParserFactory" type="DSIS.Scheme2.ObjectParsers.ObjectParserFactory, DSIS.Scheme2"/>
 </objects>

@@ -13,7 +13,7 @@ namespace DSIS.Tests.BlackBox
       base.SetUp();
       MethodSubdivision = new long[] { 5, 5 };
       mySystemSpace = new DefaultSystemSpace(2, new double[] { -2, -2 }, new double[] { 2, 2 }, new long[] { 3, 3 });
-      mySystemInfo = new Linear2DSystemInfo(mySystemSpace, 0.2, 0, 0, 0.2);    
+      mySystemInfo = new Linear2DSystemInfo(0.2, 0, 0, 0.2);    
     }
 
 

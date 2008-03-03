@@ -22,7 +22,7 @@ namespace DSIS.Scheme2.ConnectionPoints.Object
 
     public IOutputConnectionPoint AsOutputConnectionPoint()
     {
-      return ActionOutputConnectionPoint.FromActionObject(Name, myAction);
+      return ActionOutputConnectionPoint.FromActionObject(Name, new object[] { myAction });
     }
   }
 }

@@ -16,7 +16,7 @@ namespace DSIS.Trajectory.Tests
     {
       //x -> 0.5x
       MockSystemSpace space = new MockSystemSpace(1,0,1,1000);
-      Linear1DSystemInfo linear = new Linear1DSystemInfo(space, 0.5, 0);
+      Linear1DSystemInfo linear = new Linear1DSystemInfo(0.5, 0);
    
       SimpleTrajectoryBuilder bld = new SimpleTrajectoryBuilder(space, linear, 10000);
 
@@ -35,7 +35,7 @@ namespace DSIS.Trajectory.Tests
     public void TestConverge()
     {
       ISystemSpace mySystemSpace = new DefaultSystemSpace(2, new double[] { -2, -2 }, new double[] { 2, 2 }, new long[] { 3, 3 });
-      ISystemInfo mySystemInfo = new Linear2DSystemInfo(mySystemSpace, 0.2, 0, 0, 0.2);
+      ISystemInfo mySystemInfo = new Linear2DSystemInfo(0.2, 0, 0, 0.2);
 
       for (double dx = -2; dx < 2; dx += 0.01)
       {

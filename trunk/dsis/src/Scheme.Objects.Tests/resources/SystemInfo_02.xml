@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Computation-Graph xmlns="urn:shemas-dsis-org:computation-graph-xml" Id="AAA">
+  <Actions>
+    <Code Id="A" Assembly="DSIS.Scheme.Objects.Tests" Class="DSIS.Scheme.Objects.Tests.InfoSpaceAction"/>
+  </Actions>
+  <Connections>
+    <Arc>
+      <From>
+        <Object>
+          <System-Info xmlns="urn:shemas-dsis-org:system-info" Name="Henon">
+            <Array xmlns="urn:shemas-dsis-org:double-array">
+              <Value>1.4</Value>
+            </Array>
+          </System-Info>
+        </Object>
+      </From>
+      <To>
+        <Action Id="A" Point="SystemInfo"/>
+      </To>
+    </Arc>
+  </Connections>
+</Computation-Graph>
+

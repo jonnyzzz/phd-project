@@ -7,7 +7,7 @@
   <Connections>
     <Arc>
       <From>
-        <Object FormatterAssembly="DSIS.Scheme.Objects" FormatterClass="DSIS.Scheme.Objects.Systemx.SystemSpaceParser">
+        <Object>
           <System-Space xmlns="urn:shemas-dsis-org:system-space" Dimension="1">
             <LeftPoint>
               <Left>-1</Left>

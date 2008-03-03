@@ -22,7 +22,7 @@ namespace DSIS.Graph.Entropy.Tests.StrangeComparison
     public PathComparison()
     {
       mySystemSpace = new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });
-      mySystemInfo = new HenonFunctionSystemInfoDecorator(mySystemSpace, 1.4);
+      mySystemInfo = new HenonFunctionSystemInfoDecorator(1.4);
     }
 
     protected override ISystemInfo SystemInfo

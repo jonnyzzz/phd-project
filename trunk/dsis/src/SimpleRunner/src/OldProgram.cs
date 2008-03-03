@@ -164,7 +164,7 @@ namespace DSIS.SimpleRunner
       {
         DefaultSystemSpace space =
           new DefaultSystemSpace(1, new double[] { 0 }, new double[] { 1 }, new long[] { 10 });
-        return new LogisticSystemInfo(space, 4);
+        return new LogisticSystemInfo(4);
       }
 
       protected override long[] Subdivide
@@ -197,7 +197,7 @@ namespace DSIS.SimpleRunner
       {
         DefaultSystemSpace space =
           new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 10, 10 });
-        return new RungeKuttSolver(new DuffingSystemInfo(space, -1, 0.27, 0.48), 5, 1);
+        return new RungeKuttSolver(new DuffingSystemInfo(-1, 0.27, 0.48), 5, 1);
       }
 
       protected override long[] Subdivide
@@ -360,7 +360,7 @@ namespace DSIS.SimpleRunner
       {
         DefaultSystemSpace space =
           new DefaultSystemSpace(2, new double[] { -5, -5 }, new double[] { 5, 5}, new long[] { 10, 10 });
-        return new RungeKuttSolver(new VanDerPolSystemInfo(space, 1.5), 15, 1);
+        return new RungeKuttSolver(new VanDerPolSystemInfo(1.5), 15, 1);
       }
 
       protected override long[] Subdivide
@@ -384,7 +384,7 @@ namespace DSIS.SimpleRunner
       {
         DefaultSystemSpace space =
           new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {10, 10});
-        return new HenonFunctionSystemInfoDecorator(space, 1.4);
+        return new HenonFunctionSystemInfoDecorator(1.4);
       }
 
       protected override long[] Subdivide
@@ -406,7 +406,7 @@ namespace DSIS.SimpleRunner
       {
         DefaultSystemSpace space =
           new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {10, 10});
-        return new IkedaFunctionSystemInfoDecorator(space);
+        return new IkedaFunctionSystemInfoDecorator();
       }
 
       protected override long[] Subdivide
@@ -435,7 +435,7 @@ namespace DSIS.SimpleRunner
       protected override ISystemInfo CreateSystemInfo()
       {
         ISystemSpace sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {2, 2});
-        return new DelayedFunctionSystemInfo(sp, myA);
+        return new DelayedFunctionSystemInfo(myA);
       }      
     }
     
@@ -456,7 +456,7 @@ namespace DSIS.SimpleRunner
       protected override ISystemInfo CreateSystemInfo()
       {
         ISystemSpace sp = new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {2, 2});
-        return new JuliaFuctionSystemInfoDecorator(sp);
+        return new JuliaFuctionSystemInfoDecorator();
       }      
     } 
     
@@ -496,7 +496,7 @@ namespace DSIS.SimpleRunner
       protected override ISystemInfo CreateSystemInfo()
       {
         ISystemSpace sp = new DefaultSystemSpace(3, new double[] {0.01, 0.01, 0.01}, new double[] {50, 50, 50}, new long[] {1, 1, 1 });
-        return new FoodChainSystemInfo(sp);
+        return new FoodChainSystemInfo();
       }      
     }
 

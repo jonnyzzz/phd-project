@@ -1,4 +1,7 @@
+using System.Globalization;
 using DSIS.Core.System;
+using DSIS.Scheme.Objects.Systemx;
+using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Henon
 {
@@ -6,14 +9,14 @@ namespace DSIS.Function.Predefined.Henon
   {
     private readonly double myA;
     
-    public HenonFunctionSystemInfoDecorator(ISystemSpace systemSpace, double a) : base(systemSpace)
+    public HenonFunctionSystemInfoDecorator(double a) : base(2)
     {
       myA = a;
     }
 
     public override string PresentableName
     {
-      get { return string.Format("Henon a={0}", myA); }
+      get { return string.Format("Henon a={0}", myA.ToString(CultureInfo.InvariantCulture)); }
     }
 
     protected override IFunction<double> GetFunctionInternal()
@@ -63,6 +66,18 @@ namespace DSIS.Function.Predefined.Henon
         Derivates[1].Output[0] = 1;
         Derivates[1].Output[1] = 0;
       }
+    }
+  }
+
+  [UsedBySpring]
+  public class HenonFactory : DoubleParametersSystemInfoFactoryBase
+  {
+    public HenonFactory(DoubleArrayParser parser, SystemInfoFactory factory)
+      : base("Henon", 1, delegate(double[] paramz)
+                                                         {
+                                                           return new HenonFunctionSystemInfoDecorator(paramz[0]);
+                                                         }, parser, factory)
+    {
     }
   }
 }

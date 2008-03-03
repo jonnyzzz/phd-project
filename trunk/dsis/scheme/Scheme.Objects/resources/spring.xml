@@ -8,4 +8,9 @@
 
   <object id="SystemSpaceParser" type="DSIS.Scheme.Objects.Systemx.SystemSpaceParser" />
   
+  <object id="SystemInfoParser" type="DSIS.Scheme.Objects.Systemx.SystemInfoParser" />
+  <object id="SystemInfoFactory" type="DSIS.Scheme.Objects.Systemx.SystemInfoFactory" />
+  
+  <object id="DoubleArrayParser" type="DSIS.Scheme.Objects.Systemx.DoubleArrayParser" />
+
 </objects>

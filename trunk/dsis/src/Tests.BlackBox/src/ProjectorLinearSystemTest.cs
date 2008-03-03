@@ -14,7 +14,7 @@ namespace DSIS.Tests.BlackBox
       base.SetUp();
 
       mySystemSpace = new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });
-      mySystemInfo = new Linear2DSystemInfo(mySystemSpace, 2,0,0,0.5);
+      mySystemInfo = new Linear2DSystemInfo(2,0,0,0.5);
     }
   }
   

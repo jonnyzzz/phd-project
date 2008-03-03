@@ -1,7 +1,4 @@
-using System.IO;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
+using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Scheme2.ObjectParsers;
 using DSIS.Spring;
@@ -9,30 +6,16 @@ using DSIS.Spring;
 namespace DSIS.Scheme.Objects.Systemx
 {
   [UsedBySpring]
-  public class SystemSpaceParser : IObjectParser
+  public class SystemSpaceParser : SchemaBasedParser<XsdSystemSpace, ISystemSpace>
   {
-    private XmlSchema GetSchema()
+    public SystemSpaceParser(ObjectParserFactory factory)
+      : base(factory, "resources.SystemSpace.xsd")
     {
-      using (Stream str = GetType().Assembly.GetManifestResourceStream(typeof(NamespaceHolder), "resources.SystemSpace.xsd"))
-        return XmlSchema.Read(str, null);
     }
 
-    public object Parse(XmlElement element)
+    protected override ISystemSpace Parse(XsdSystemSpace space)
     {
-      XmlSchema schema = GetSchema();
-      element.OwnerDocument.Schemas.Add(schema);            
-      
-      XmlSerializer ser = new XmlSerializer(typeof(XsdSystemSpace));
-
-      XmlReaderSettings settings = new XmlReaderSettings();
-      settings.ValidationType = ValidationType.Schema;
-      settings.Schemas.Add(schema);
-
-      using(XmlReader reader = XmlReader.Create(new XmlNodeReader(element), settings))
-      {                
-        XsdSystemSpace space = (XsdSystemSpace) ser.Deserialize(reader);
-        return new DefaultSystemSpace(space.Dimension, space.LeftPoint, space.RightPoint, space.Division);
-      }            
+      return new DefaultSystemSpace(space.Dimension, space.LeftPoint, space.RightPoint, space.Division);
     }
   }
 }
