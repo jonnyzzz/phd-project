@@ -9,14 +9,15 @@ namespace DSIS.Scheme.Impl.Actions.Line
   {
     public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
-      return CheckContext(ctx, base.Compatible(ctx), Create(Keys.SystemInfoKey));
+      return CheckContext(ctx, base.Compatible(ctx), Create(Keys.SystemInfoKey), Create(Keys.SystemSpaceKey));
     }
 
     protected override void Apply(ILine line, Context ctx, Context result)
     {      
       ISystemInfo system = Keys.SystemInfoKey.Get(ctx);
+      ISystemSpace space = Keys.SystemSpaceKey.Get(ctx);
 
-      (line = line.Clone()).Iterate(system);
+      (line = line.Clone()).Iterate(space, system);
       
       Keys.LineKey.Set(result, line);
       Keys.SystemInfoKey.Set(result, system);

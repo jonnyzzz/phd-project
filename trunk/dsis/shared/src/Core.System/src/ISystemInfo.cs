@@ -10,11 +10,17 @@ namespace DSIS.Core.System
 {
   public interface ISystemInfoBase
   {
-    Type[] SupportedFunctionTypes { get; }
+    Type[] SupportedFunctionTypes { get; }    
     
-    [Obsolete("Only Dimension is allowed")]
-    ISystemSpace SystemSpace { get; }
     string PresentableName { get; }
+
+    int Dimension { get; }
+  }
+
+  [Obsolete("Remove It")]
+  public interface ISystemInfoAndSpaceProvider : ISystemInfo
+  {    
+    ISystemSpace SystemSpace { get; }    
   }
 
   /// <summary>

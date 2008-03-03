@@ -5,8 +5,10 @@ namespace DSIS.Function.Predefined
 {
   public abstract class DoubleSystemInfoBase : SystemInfoDecoratorBase, ISystemInfo
   {
+    private readonly int myDimension;
     public DoubleSystemInfoBase(ISystemSpace systemSpace) : base(systemSpace)
     {
+      myDimension = systemSpace.Dimension;
     }
 
     public IFunction<T> GetDerivateFunction<T>(T[] precision, int derivatePower)
@@ -32,8 +34,8 @@ namespace DSIS.Function.Predefined
 
     public IFunction<T> GetFunction<T>(T precision)
     {
-      T[] ts = new T[SystemSpace.Dimension];
-      for(int i=0; i< SystemSpace.Dimension; i++)
+      T[] ts = new T[myDimension];
+      for(int i=0; i< myDimension; i++)
       {
         ts[i] = precision;
       }
@@ -46,6 +48,12 @@ namespace DSIS.Function.Predefined
     }    
 
     public abstract string PresentableName { get; }
+
+    public int Dimension
+    {
+      get { return myDimension; }
+    }
+
     protected abstract IFunction<double> GetFunctionInternal();
 
     protected virtual IFunction<double> GetFunctionDerivateInternal()

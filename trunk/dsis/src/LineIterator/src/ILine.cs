@@ -5,7 +5,7 @@ namespace DSIS.LineIterator
 {
   public interface ILine
   {
-    void Iterate(ISystemInfo system);
+    void Iterate(ISystemSpace space, ISystemInfo system);
     void Save(TextWriter tw);
 
     int Count{ get;}

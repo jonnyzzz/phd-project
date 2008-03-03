@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
@@ -72,10 +73,13 @@ namespace DSIS.SimpleRunner
 
     protected virtual T CreateCoordinateSystemInternal(ISystemInfo info)
     {
+      throw new Exception("Refactoring required. ISystemSpace!");
+      /*
       if (myCreateSystem != null)
         return myCreateSystem(info.SystemSpace, info.SystemSpace.InitialSubdivision);
       else
         return CreateCoordinateSystem(info);
+       */
     }
 
     protected virtual Pair<ISystemInfo, T> CreateInfos()

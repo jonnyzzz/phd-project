@@ -49,7 +49,7 @@ namespace DSIS.SimpleRunner
 
     protected override bool PerformStep(ICellProcessorContext<Q,Q> ctx, AbstractImageBuilderContext<Q> cx, long stepCount)
     {
-      long limit = UseUnsimmetric ? myStepLimit * ctx.CellImageBuilderContext.Function.SystemSpace.Dimension : myStepLimit;
+      long limit = UseUnsimmetric ? myStepLimit * ctx.CellImageBuilderContext.Function.Dimension : myStepLimit;
 
       return (myCellsLimit < 0 || ctx.Cells.Count < myCellsLimit) && 
              (myStepLimit < 0 || stepCount < limit);
@@ -62,11 +62,14 @@ namespace DSIS.SimpleRunner
 
     protected override T CreateCoordinateSystem(ISystemInfo info)
     {
+      throw new Exception("Refactoring required. ISystemSpace!");
+      /*
       if (typeof(T) == typeof(IntegerCoordinateSystem))
         return (T)(object)new IntegerCoordinateSystem(info.SystemSpace);
       if (typeof(T) == typeof(IntegerCoordinateSystem2d))
         return (T)(object)new IntegerCoordinateSystem2d(info.SystemSpace);
       throw new ArgumentException("Unknnown type T");
+       */
     }            
   }
 }

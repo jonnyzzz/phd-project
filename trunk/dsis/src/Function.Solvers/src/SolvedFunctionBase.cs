@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.System;
+using DSIS.Function.Solvers.SimpleSolver;
 
-namespace DSIS.Function.Solvers.SimpleSolver
+namespace DSIS.Function.Solvers
 {
   public abstract class SolvedFunctionBase : ISystemInfo
   {
+    private readonly int myDimension;
     protected readonly int mySteps;
     protected readonly double myDt;
     protected readonly ISystemInfo myFunction;    
@@ -18,6 +20,7 @@ namespace DSIS.Function.Solvers.SimpleSolver
       myFunction = function;
       mySteps = steps;
       myDt = dt;
+      myDimension = function.Dimension;
     }    
 
     public IFunction<T> GetFunction<T>(T[] precision)
@@ -30,8 +33,8 @@ namespace DSIS.Function.Solvers.SimpleSolver
 
     public IFunction<T> GetFunction<T>(T precision)
     {
-      T[] ts = new T[SystemSpace.Dimension];
-      for (int i = 0; i < SystemSpace.Dimension; i++)
+      T[] ts = new T[myDimension];
+      for (int i = 0; i < myDimension; i++)
       {
         ts[i] = precision;
       }
@@ -70,14 +73,14 @@ namespace DSIS.Function.Solvers.SimpleSolver
       get { return new Type[] {typeof (double)}; }
     }
 
-    public ISystemSpace SystemSpace
-    {
-      get { return myFunction.SystemSpace; }
-    }
-
     public string PresentableName
     {
       get { return string.Format("{0} {1}", PresentableMethodName, myFunction.PresentableName); }
+    }
+
+    public int Dimension
+    {
+      get { return myDimension; }
     }
   }
 }

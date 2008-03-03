@@ -40,10 +40,10 @@ namespace DSIS.LineIterator
       get { return myPoints.Count; }
     }
 
-    public void Iterate(ISystemInfo system)
+    public void Iterate(ISystemSpace space, ISystemInfo system)
     {
       IFunction<double> function = system.GetFunction(myEps);
-      LinkedList<LinePoint> list = Iterate(myEps, myPoints, function, system.SystemSpace);
+      LinkedList<LinePoint> list = Iterate(myEps, myPoints, function, space);
       myPoints = list;
       myLastPoint = list.Last.Value;
     }

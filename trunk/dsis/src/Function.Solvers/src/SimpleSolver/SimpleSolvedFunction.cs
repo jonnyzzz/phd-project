@@ -33,7 +33,7 @@ namespace DSIS.Function.Solvers.SimpleSolver
       public Function(SimpleSolvedFunction function, double[] precision)
       {
         myFunctionInfo = function;
-        myDimension = myFunctionInfo.SystemSpace.Dimension;
+        myDimension = myFunctionInfo.Dimension;
         myHostFunction = myFunctionInfo.myFunction.GetFunction<double>(precision);
         myInput = myHostFunction.Input;
         myFOutput = new double[myDimension];

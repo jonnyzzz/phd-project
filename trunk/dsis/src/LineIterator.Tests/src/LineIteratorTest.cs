@@ -13,12 +13,12 @@ namespace DSIS.LineIterator.Tests
   [TestFixture]
   public class LineIteratorTest
   {
-    private Line<LinePointImpl> myLine;
+    private LineEx<LinePointImpl> myLine;
 
     [SetUp]
     public void SetUp()
     {
-      myLine = new Line<LinePointImpl>(0.999999, new LinePointImpl(new double[] {0}));
+      myLine = new LineEx<LinePointImpl>(0.999999, new LinePointImpl(new double[] {0}));
       myLine.AddPointToEnd(new LinePointImpl(new double[] {1}));
     }
 
@@ -31,7 +31,7 @@ namespace DSIS.LineIterator.Tests
     [Test]
     public void Test_const()
     {
-      ISystemInfo info = Create(delegate(double d) { return d; });        
+      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return d; });        
       myLine.Iterate(info);
 
       AssertPoints(1, "0", "0.5", "1");
@@ -42,7 +42,7 @@ namespace DSIS.LineIterator.Tests
     {
       myLine.AddPointToEnd(new LinePointImpl(new double[]{2}));
 
-      ISystemInfo info = Create(delegate(double d) { return d; });        
+      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return d; });        
       myLine.Iterate(info);
 
       AssertPoints(2, "0", "0.5", "1", "1.5", "2");
@@ -62,7 +62,7 @@ namespace DSIS.LineIterator.Tests
         gld.Add(((double)i).ToString("R", CultureInfo.InvariantCulture));
       }
 
-      ISystemInfo info = Create(delegate(double d) { return d; });
+      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return d; });
       myLine.Iterate(info);
 
       AssertPoints(100, gld.ToArray());
@@ -76,7 +76,7 @@ namespace DSIS.LineIterator.Tests
         myLine.AddPointToEnd(new LinePointImpl(new double[] {i}));
       }
 
-      ISystemInfo info = Create(delegate(double d) { return 2*d; });
+      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 2 * d; });
       myLine.Iterate(info);
 
       AssertPoints(200, Gold(0, 200.1, 0.5));
@@ -90,7 +90,7 @@ namespace DSIS.LineIterator.Tests
         myLine.AddPointToEnd(new LinePointImpl(new double[] {i}));
       }
 
-      ISystemInfo info = Create(delegate(double d) { return 0.5*d; });
+      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 0.5 * d; });
       myLine.Iterate(info);
 
       AssertPoints(50, Gold(0, 50.1, 0.5));
@@ -99,7 +99,7 @@ namespace DSIS.LineIterator.Tests
     [Test]
     public void Test_2x()
     {
-      ISystemInfo info = Create(delegate(double d) { return 2*d; });
+      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 2 * d; });
       myLine.Iterate(info);
 
       AssertPoints(2,"0", "0.5", "1", "1.5", "2");
@@ -108,7 +108,7 @@ namespace DSIS.LineIterator.Tests
     [Test]
     public void Test_0_5x()
     {
-      ISystemInfo info = Create(delegate(double d) { return 0.5*d; });
+      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 0.5 * d; });
       myLine.Iterate(info);
 
       AssertPoints(0.5, "0", "0.5");
@@ -118,7 +118,7 @@ namespace DSIS.LineIterator.Tests
     public void Test_2x3()
     {
       myLine.AddPointToEnd(new LinePointImpl(new double[] { 2 }));
-      ISystemInfo info = Create(delegate(double d) { return 2*d; });
+      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 2 * d; });
       myLine.Iterate(info);
 
       AssertPoints(4,"0", "0.5", "1", "1.5", "2","2.5", "3", "3.5", "4");
@@ -128,7 +128,7 @@ namespace DSIS.LineIterator.Tests
     public void Test_0_5x3()
     {
       myLine.AddPointToEnd(new LinePointImpl(new double[] { 2 }));
-      ISystemInfo info = Create(delegate(double d) { return 0.5*d; });
+      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 0.5 * d; });
       myLine.Iterate(info);
 
       AssertPoints(1,"0", "0.5", "1");
@@ -138,7 +138,7 @@ namespace DSIS.LineIterator.Tests
     [Test]
     public void Test_Pefomance_0_5()
     {
-      ISystemInfo info = Create(delegate(double d) { return 0.5 * d; });
+      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 0.5 * d; });
       for (int i = 0; i < 1000000; i++)
         myLine.AddPointToEnd(new LinePointImpl(new double[] {i}));
 
@@ -146,7 +146,7 @@ namespace DSIS.LineIterator.Tests
     }
 
 
-    private static ISystemInfo Create(Converter<double, double> function)
+    private static ISystemInfoAndSpaceProvider Create(Converter<double, double> function)
     {
       return new MockSystemInfo<double>(delegate(double[] ins, double[] outs) { outs[0] = function(ins[0]); },
                                    new MockSystemSpace(1, 0, 1000, 1000));
@@ -204,6 +204,19 @@ namespace DSIS.LineIterator.Tests
       {
         Console.Out.WriteLine("sw = \r\n{0}", sw);
         throw new Exception(e.Message, e);
+      }
+    }
+
+    private class LineEx<T> : Line<T> where T : ILinePoint<T>
+    {
+      public LineEx(double eps, T initial)
+        : base(eps, initial)
+      {
+      }
+
+      public void Iterate(ISystemInfoAndSpaceProvider prov)
+      {
+        Iterate(prov.SystemSpace, prov);
       }
     }
   }

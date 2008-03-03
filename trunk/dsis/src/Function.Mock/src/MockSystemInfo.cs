@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace DSIS.Function.Mock
 {
-  public class MockSystemInfo<TType> : ISystemInfo
+  public class MockSystemInfo<TType> : ISystemInfo, ISystemInfoAndSpaceProvider
   {
     private readonly ComputeFunction<TType> myFunc;
     private readonly ISystemSpace mySystemSpace;
@@ -29,13 +29,13 @@ namespace DSIS.Function.Mock
     public IFunction<T> GetFunction<T>(T[] precision)
     {
       AssertType<T>();
-      return (IFunction<T>) new MockFunction<TType>(mySystemSpace.Dimension, myFunc);
+      return (IFunction<T>) new MockFunction<TType>(Dimension, myFunc);
     }
 
     public IFunction<T> GetFunction<T>(T precision)
     {
-      T[] ts = new T[SystemSpace.Dimension];
-      for(int i=0; i< SystemSpace.Dimension; i++)
+      T[] ts = new T[Dimension];
+      for(int i=0; i< Dimension; i++)
       {
         ts[i] = precision;
       }
@@ -60,6 +60,11 @@ namespace DSIS.Function.Mock
     public string PresentableName
     {
       get { return "Mock"; }
+    }
+
+    public int Dimension
+    {
+      get { return mySystemSpace.Dimension; }
     }
 
     private static void AssertType<T>()

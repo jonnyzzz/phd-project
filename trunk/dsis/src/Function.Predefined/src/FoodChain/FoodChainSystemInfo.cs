@@ -1,7 +1,7 @@
 using System;
 using DSIS.Core.System;
 
-namespace DSIS.Function.Predefined
+namespace DSIS.Function.Predefined.FoodChain
 {
   public class FoodChainSystemInfo : DoubleSystemInfoBase
   {

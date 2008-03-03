@@ -10,7 +10,7 @@ namespace DSIS.Function.Predefined.Delayed
 {
   public class DelayedFunctionSystemInfo : DoubleSystemInfoBase
   {
-    private double myA;
+    private readonly double myA;
 
     public DelayedFunctionSystemInfo(ISystemSpace systemSpace, double a) : base(systemSpace)
     {

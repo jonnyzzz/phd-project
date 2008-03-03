@@ -1,5 +1,4 @@
 using DSIS.Core.System;
-using DSIS.Function.Solvers.SimpleSolver;
 
 namespace DSIS.Function.Solvers.RungeKutt
 {
@@ -50,7 +49,7 @@ namespace DSIS.Function.Solvers.RungeKutt
       public Function(RungeKuttSolver function, double[] precision)
       {
         myFunctionInfo = function;
-        myDimension = myFunctionInfo.SystemSpace.Dimension;
+        myDimension = myFunctionInfo.Dimension;
 
         myF1 = Create(precision, out myF1Input, out myF1Output);
         myF2 = Create(precision, out myF2Input, out myF2Output);
