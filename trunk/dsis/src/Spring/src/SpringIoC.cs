@@ -27,41 +27,14 @@ namespace DSIS.Spring
     protected internal SpringIoC(params Assembly[] extra)
     {
       Hashset<Assembly> assemblies = new Hashset<Assembly>();
-      Hashset<Assembly> visit = new Hashset<Assembly>();
-
-      visit.Add(GetType().Assembly);
-      visit.Add(Assembly.GetCallingAssembly());
-      visit.Add(Assembly.GetExecutingAssembly());
-      visit.AddRange(AppDomain.CurrentDomain.GetAssemblies());
-      visit.AddRange(extra);
-
-      while (visit.Count > 0)
-      {
-        Assembly assembly = CollectionUtil.GetFirst(visit);
-        visit.Remove(assembly);
-
-        List<AssemblyName> refAssemblies = new List<AssemblyName>(assembly.GetReferencedAssemblies());
-
-        foreach (SpringIncludeAssembly includeAssembly in assembly.GetCustomAttributes(typeof(SpringIncludeAssembly), true))
-        {
-          refAssemblies.Add(new AssemblyName(includeAssembly.Assembly));
-        }
-
-        foreach (AssemblyName name in refAssemblies)
-        {
-          try
-          {
-            Assembly reference = Assembly.Load(name);
-            if (reference != null && !assemblies.Contains(reference))
-              visit.Add(reference);
-          }
-          catch (Exception e)
-          {
-            LOG.Debug(e.Message, e);
-          }
-        }
-        assemblies.Add(assembly);
-      }
+      List<Assembly> load = new List<Assembly>();
+      load.AddRange(extra);
+      load.Add(GetType().Assembly);
+      load.Add(Assembly.GetCallingAssembly());
+      load.Add(Assembly.GetExecutingAssembly());
+      load.AddRange(AppDomain.CurrentDomain.GetAssemblies());
+      
+      ClosureAssemblies(extra, assemblies);
 
       if (LOG.IsDebugEnabled)
       {
@@ -84,6 +57,51 @@ namespace DSIS.Spring
       }
 
       myContext = new XmlApplicationContext(paths.ToArray());
+    }
+
+    private static void ClosureAssemblies(IEnumerable<Assembly> extra, Hashset<Assembly> assemblies)
+    {
+      Hashset<Assembly> visit = new Hashset<Assembly>();
+      Hashset<Assembly> visited = new Hashset<Assembly>();
+      Hashset<AssemblyName> visitedNames = new Hashset<AssemblyName>();
+      
+      visit.AddRange(extra);
+
+      while (visit.Count > 0)
+      {        
+        Assembly assembly = CollectionUtil.GetFirst(visit);
+        visit.Remove(assembly);
+
+        if (visited.Contains(assembly))
+          continue;
+        visited.Add(assembly);
+        
+        List<AssemblyName> refAssemblies = new List<AssemblyName>(assembly.GetReferencedAssemblies());
+
+        foreach (SpringIncludeAssembly includeAssembly in assembly.GetCustomAttributes(typeof(SpringIncludeAssembly), true))
+        {
+          refAssemblies.Add(new AssemblyName(includeAssembly.Assembly));
+        }
+
+        foreach (AssemblyName name in refAssemblies)
+        {          
+          if (visitedNames.Contains(name))
+            continue;
+          visitedNames.Add(name);
+
+          try
+          {
+            Assembly reference = Assembly.Load(name);
+            if (reference != null && !assemblies.Contains(reference))
+              visit.Add(reference);
+          }
+          catch (Exception e)
+          {
+            LOG.Debug(e.Message, e);
+          }
+        }
+        assemblies.Add(assembly);
+      }
     }
 
     public T GetComponent<T>(string name)

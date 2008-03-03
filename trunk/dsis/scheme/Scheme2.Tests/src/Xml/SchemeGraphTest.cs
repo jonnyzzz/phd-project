@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Reflection;
 using DSIS.Scheme2.Graph;
 using DSIS.Scheme2.Tests.src.Xml;
 using DSIS.Scheme2.Tests.testData;
@@ -9,27 +11,8 @@ using NUnit.Framework.SyntaxHelpers;
 namespace DSIS.Scheme2.Tests.Xml
 {
   [TestFixture]
-  public class SchemeGraphTest
-  {
-    private SchemeGraphFactory myFactory;
-    
-    [SetUp]
-    public void SetUp()
-    {
-      Log4NetConfigurator.SetUp();
-      SpringIoCSetup.SetUp(typeof(SchemeGraph).Assembly);
-      TestGraphRegistry.Clear();
-
-      myFactory = SpringIoC.Instance.GetComponent<SchemeGraphFactory>("SchemeGraphFactory");
-    }
-
-    [TearDown]
-    public void TearDown()
-    {
-      SpringIoCSetup.Dispose();
-      Log4NetConfigurator.Dispose();
-    }
-    
+  public class SchemeGraphTest : SchemeGraphBaseTest
+  {    
     [Test]
     public void Test_CreateFactory()
     {

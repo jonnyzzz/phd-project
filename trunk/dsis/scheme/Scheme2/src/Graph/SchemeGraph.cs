@@ -62,9 +62,9 @@ namespace DSIS.Scheme2.Graph
         RegisterInitializeAware(input as IInitializeAware);
 
         if (output == null)
-          throw new SchemeGraphException("Failed to deserialize from action");
+          throw new SchemeGraphException("Failed to deserialize 'from' action");
         if (input == null)
-          throw new SchemeGraphException("Failed to deserialize to action");
+          throw new SchemeGraphException("Failed to deserialize 'to' action");
 
         input.Bind(output);
       }

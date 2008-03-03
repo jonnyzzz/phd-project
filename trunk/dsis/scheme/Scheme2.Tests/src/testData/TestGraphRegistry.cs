@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -14,7 +15,18 @@ namespace DSIS.Scheme2.Tests.testData
 
     public static void AssertData(params string[] messages)
     {
-      CollectionAssert.AreEqual(messages, myLog);
+      try
+      {
+        CollectionAssert.AreEqual(messages, myLog);
+      } catch (Exception e)
+      {
+        Console.Out.WriteLine("Actual messages:");
+        foreach (string s in myLog)
+        {
+          Console.Out.WriteLine(s);
+        }
+        throw new Exception(e.Message, e);
+      }
     }
 
     public static  void Clear()

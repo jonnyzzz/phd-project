@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Text;
 
 namespace DSIS.Core.System.Impl
 {
@@ -77,5 +78,21 @@ namespace DSIS.Core.System.Impl
     }
 
     #endregion
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      sb.AppendFormat("Dim={0}, L=(", myDimension);
+      for (int i = 0; i < myDimension; i++)
+        sb.AppendFormat("{0}, ", myAreaLeftPoint[i]);
+      sb.Append("), R=(");
+      for (int i = 0; i < myDimension; i++)
+        sb.AppendFormat("{0}, ", myAreaRightPoint[i]);
+      sb.Append("), Grid=(");
+      for (int i = 0; i < myDimension; i++)
+        sb.AppendFormat("{0}, ", myInitialSubdivision[i]);
+      sb.Append(")");
+      return sb.ToString();
+    }
   }
 }

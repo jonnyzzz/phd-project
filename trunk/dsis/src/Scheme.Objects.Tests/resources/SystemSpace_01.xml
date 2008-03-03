@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Computation-Graph xmlns="urn:shemas-dsis-org:computation-graph-xml" Id="AAA">
+  <Actions>
+     <Code Id="A" Assembly="DSIS.Scheme.Objects.Tests" Class="DSIS.Scheme.Objects.Tests.SystemSpaceAction"/>        
+  </Actions>
+  <Connections>
+    <Arc>
+      <From>
+        <Object FormatterAssembly="DSIS.Scheme.Objects" FormatterClass="DSIS.Scheme.Objects.Systemx.SystemSpaceParser">
+          <System-Space xmlns="urn:shemas-dsis-org:system-space" Dimension="1">
+            <LeftPoint>
+              <Left>-1</Left>
+            </LeftPoint>
+            <RightPoint>
+              <Right>1</Right>
+            </RightPoint>
+            <Division>
+              <Grid>10</Grid>
+            </Division>
+          </System-Space>          
+        </Object>
+      </From>
+      <To>
+        <Action Id="A" Point="SystemSpace"/>
+      </To>
+    </Arc>
+  </Connections>
+</Computation-Graph>
+
+

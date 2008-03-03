@@ -49,22 +49,26 @@ namespace DSIS.Scheme2.Tests.Xml
 
     private static XsdComputationScheme Load(string xml)
     {
-      SchemeGraphLoader l = new SchemeGraphLoader();
-      return l.Parse(Stream(xml));
+      return Load(typeof(TestSchemeGraphLoader).Assembly, "DSIS.Scheme2.Tests.resources." + xml);
     }
 
-    private static Stream Stream(string name)
+    public static XsdComputationScheme Load(Assembly assembly,string xml)
+    {
+      SchemeGraphLoader l = new SchemeGraphLoader();
+      return l.Parse(Stream(assembly, xml));
+    }
+
+    private static Stream Stream(Assembly assembly, string name)
     {
       try
       {
         Stream stream =
-          typeof (TestSchemeGraphLoader).Assembly.GetManifestResourceStream("DSIS.Scheme2.Tests.resources." + name);
+          assembly.GetManifestResourceStream(name);
         Assert.That(stream, NIs.Not.Null);
         return stream;
       }
       catch (Exception e)
-      {
-        Assembly assembly = typeof (TestSchemeGraphLoader).Assembly;
+      {        
         DumpResources(assembly);
         throw new Exception(e.Message, e);
       }
