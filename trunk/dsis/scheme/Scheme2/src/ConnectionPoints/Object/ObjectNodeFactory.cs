@@ -13,12 +13,14 @@ namespace DSIS.Scheme2.ConnectionPoints.Object
   public class ObjectNodeFactory : Registrar<ISchemeNodeFactoryExtension, SchemeNodeFactory>,
                                    ISchemeNodeFactoryExtension
   {
-    private readonly ObjectConnectionPointFactory myObjectConnectionPointFactory;
+    private readonly InputObjectConnectionPointFactory myObjectConnectionPointInputFactory;
+    private readonly OutputObjectConnectionPointFactory myObjectConnectionPointOutputFactory;
 
-    public ObjectNodeFactory(SchemeNodeFactory factory, ObjectConnectionPointFactory objectConnectionPointFactory)
+    public ObjectNodeFactory(SchemeNodeFactory factory, InputObjectConnectionPointFactory objectConnectionPointInputFactory, OutputObjectConnectionPointFactory objectConnectionPointOutputFactory)
       : base(factory)
     {
-      myObjectConnectionPointFactory = objectConnectionPointFactory;
+      myObjectConnectionPointInputFactory = objectConnectionPointInputFactory;
+      myObjectConnectionPointOutputFactory = objectConnectionPointOutputFactory;
     }
 
     public INode Create(XsdAction _action)
@@ -42,8 +44,8 @@ namespace DSIS.Scheme2.ConnectionPoints.Object
 
       foreach (MemberInfo info in tAction.GetMembers())
       {
-        Add<InputAttribute, IInputConnectionPoint>(instance, info, myObjectConnectionPointFactory.Input, inputPoints);
-        Add<OutputAttribute, IOutputConnectionPoint>(instance, info, myObjectConnectionPointFactory.Output, outputPoints);
+        Add<InputAttribute, IInputConnectionPoint>(instance, info, myObjectConnectionPointInputFactory.Input, inputPoints);
+        Add<OutputAttribute, IOutputConnectionPoint>(instance, info, myObjectConnectionPointOutputFactory.Output, outputPoints);
       }
 
       return new ObjectNode(inputPoints, outputPoints, action.Id ?? tAction.FullName, instance);

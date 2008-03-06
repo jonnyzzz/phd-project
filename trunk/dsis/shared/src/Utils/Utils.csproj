@@ -65,6 +65,7 @@
     <Compile Include="src\BinTreePriorityQueueExDebug.cs" />
     <Compile Include="src\CollectionUtil.cs" />
     <Compile Include="src\ConvertEnumerator.cs" />
+    <Compile Include="src\GenericHelper.cs" />
     <Compile Include="src\InfiniteEnumerable.cs" />
     <Compile Include="src\LinkedList.cs" />
     <Compile Include="src\MultiDictionary.cs" />

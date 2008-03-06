@@ -9,20 +9,22 @@ namespace DSIS.Scheme2.Tests.Xml
   [TestFixture]
   public class ObjectConnectionPointFactoryTest : MockTestBase
   {
-    private ObjectConnectionPointFactoryImpl myFactory;
+    private PropertyInputObjectConnectionPointFactoryImpl myInput;
+    private OutputObjectConnectionPointFactoryImpl myOutput;
 
     [SetUp]
     public override void SetUp()
     {
       base.SetUp();
-      myFactory = new ObjectConnectionPointFactoryImpl(myMocks.DynamicMock<ObjectConnectionPointFactory>());
+      myInput = new PropertyInputObjectConnectionPointFactoryImpl(myMocks.DynamicMock<InputObjectConnectionPointFactory>());
+      myOutput = new OutputObjectConnectionPointFactoryImpl(myMocks.DynamicMock<OutputObjectConnectionPointFactory>());
     }
 
     [Test]
     public void Test_Input()
     {
       Class_InputProperty input = new Class_InputProperty();
-      IInputConnectionPoint fin = myFactory.Input("III", input, input.GetType().GetProperty("Field"));
+      IInputConnectionPoint fin = myInput.Input("III", input, input.GetType().GetProperty("Field"));
 
       Assert.That(fin.Name, Is.EqualTo("III"));      
       fin.With(new AssertInput<string>("QQQQQQQ"));
@@ -34,7 +36,7 @@ namespace DSIS.Scheme2.Tests.Xml
     public void Test_Output()
     {
       Class_OutputEvent evt = new Class_OutputEvent();
-      IOutputConnectionPoint fou = myFactory.Output("III", evt, evt.GetType().GetEvent("OnDataXXX"));
+      IOutputConnectionPoint fou = myOutput.Output("III", evt, evt.GetType().GetEvent("OnDataXXX"));
 
       Assert.That(fou.Name, Is.EqualTo(fou.Name));
       fou.With(new AssertOutput<string>("QQQQQ"));
@@ -45,10 +47,10 @@ namespace DSIS.Scheme2.Tests.Xml
     public void Test_BindOnInput()
     {
       Class_OutputEvent evt = new Class_OutputEvent();
-      IOutputConnectionPoint fou = myFactory.Output("III", evt, evt.GetType().GetEvent("OnDataXXX"));
+      IOutputConnectionPoint fou = myOutput.Output("III", evt, evt.GetType().GetEvent("OnDataXXX"));
 
       Class_InputProperty input = new Class_InputProperty();
-      IInputConnectionPoint fin = myFactory.Input("III", input, input.GetType().GetProperty("Field"));
+      IInputConnectionPoint fin = myInput.Input("III", input, input.GetType().GetProperty("Field"));
 
       fin.Bind(fou);
 
@@ -60,10 +62,10 @@ namespace DSIS.Scheme2.Tests.Xml
     public void Test_BindOnOutput()
     {
       Class_OutputEvent evt = new Class_OutputEvent();
-      IOutputConnectionPoint fou = myFactory.Output("III", evt, evt.GetType().GetEvent("OnDataXXX"));
+      IOutputConnectionPoint fou = myOutput.Output("III", evt, evt.GetType().GetEvent("OnDataXXX"));
 
       Class_InputProperty input = new Class_InputProperty();
-      IInputConnectionPoint fin = myFactory.Input("III", input, input.GetType().GetProperty("Field"));
+      IInputConnectionPoint fin = myInput.Input("III", input, input.GetType().GetProperty("Field"));
 
       fou.Bind(fin);
 
