@@ -18,15 +18,29 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     private readonly double myNorm;
     private double? myEntropy;
     private Dictionary<T, double> myNodesM = null;
+    private readonly string myMethodName;
+    private readonly ICellCoordinateSystem<T> myCoorsinateSystem;
 
-    public GraphMeasure(IDictionary<TPair, double> m, IEqualityComparer<T> comparer, double norm)
+    public GraphMeasure(string name, IDictionary<TPair, double> m, IEqualityComparer<T> comparer, double norm, ICellCoordinateSystem<T> coorsinateSystem)
     {
+      myMethodName = name;
+      myCoorsinateSystem = coorsinateSystem;
       myM = m;
       myComparer = comparer;
       myNorm = norm;
     }
 
     #region IGraphMeasure<T> Members
+
+    public string Method
+    {
+      get { return myMethodName; }
+    }
+
+    public ICellCoordinateSystem<T> CoordinateSystem
+    {
+      get { return myCoorsinateSystem; }
+    }
 
     public IEnumerable<Pair<PairBase<T>, double>> Measure
     {
@@ -61,10 +75,10 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     public IGraphMeasure<T> Project(ICellCoordinateSystemProjector<T> projector)
     {
       return new
-        GraphMeasure<T, NodePair<T>>(
+        GraphMeasure<T, NodePair<T>>(Method,
         Project(myM, projector),
         EqualityComparerFactory<T>.GetComparer(),
-        myNorm);
+        myNorm, projector.ToSystem);
     }
 
     #endregion
@@ -80,7 +94,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
         T pFrom = projector.Project(pair.Key.From);
         T pTo = projector.Project(pair.Key.To);
 
-        if (Equals(pFrom, null) && Equals(pTo, null))
+        if (!Equals(pFrom, null) && !Equals(pTo, null))
         {
           Add(ret, new NodePair<T>(pFrom, pTo), pair.Value);
         }

@@ -14,6 +14,8 @@ namespace DSIS.Graph
   public interface IGraphStrongComponents<TCoordinate> : IGraphStrongComponents
     where TCoordinate : ICellCoordinate
   {
+    ICellCoordinateSystem<TCoordinate> CoordinateSystem { get; }
+
     //todo: Move to CountEnumerable
     IEnumerable<INode<TCoordinate>> GetNodes(ICollection<IStrongComponentInfo> componentIds);
 

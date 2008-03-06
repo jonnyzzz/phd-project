@@ -23,7 +23,7 @@ namespace DSIS.SimpleRunner
 {
   public class Program
   {
-    public static void Main(string[] args)
+    public static void Mai0n(string[] args)
     {
       DefaultSystemSpace sp =
         new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
@@ -75,7 +75,7 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(sysWf, draw);
     }
 
-    public static void Main2()
+    public static void Main()
     {      
       DefaultSystemSpace spIkedaCutted =
         new DefaultSystemSpace(2, new double[] { -1.1, -1.5 }, new double[] { 3.5, 1.8 }, new long[] { 3, 3 });
@@ -112,7 +112,7 @@ namespace DSIS.SimpleRunner
       IAction[] system = {systemHenon, systemHenonD, systemHenonD_272, systemIked, systemIkedaCut};
 
       SimpleParallel parallel = new SimpleParallel();
-      for (int steps = 8; steps <= 15; steps++)
+      for (int steps = 5; steps <= 5; steps++)
       {
         foreach (IAction action in system)
         {
@@ -143,7 +143,6 @@ namespace DSIS.SimpleRunner
         this.entropys = entropys;
       }
     }
-
 
     private static void Collect()
     {
@@ -199,6 +198,10 @@ namespace DSIS.SimpleRunner
             bld.AddEdge(build, b);
             bld.AddEdge(bld.Start, p);
             bld.AddEdge(p, b);
+
+            GraphEntropyLogAction dumpEntropy = new GraphEntropyLogAction();
+            bld.AddEdge(build, dumpEntropy);
+            bld.AddEdge(p, dumpEntropy);
                                                  
             Collect();
           });
@@ -225,23 +228,22 @@ namespace DSIS.SimpleRunner
         IAction customWf = new CustomPrefixWorkingFolderAction(evaluatorParams.PresentableName);
 
         IAction entropyParams = new SetStrangeEntropyParamsAction(evaluatorParams);
-        IAction entropy = /*new ParallelAction(
-          new ForeachStrongComponentAction(
-          DrawEntropyAction(
-            new StrangeEntropyAction())),*/
-          DrawEntropyAction(new PathEntropyAction());
+        IAction entropy = new ParallelAction(
+          //          new ForeachStrongComponentAction(
+          DrawEntropyAction(steps, new StrangeEntropyAction()));
+//          DrawEntropyAction(new PathEntropyAction());
 
         gr.AddEdge(step, entropy);
         gr.AddEdge(wf, customWf);
         gr.AddEdge(customWf, entropy);
         gr.AddEdge(logger, entropy);
-        gr.AddEdge(entropyParams, entropy);
+        gr.AddEdge(entropyParams, entropy);        
       }
 
       gr.Execute();
     }
     
-    private static IAction DrawEntropyAction(IAction entropy)
+    private static IAction DrawEntropyAction(int steps, IAction entropy)
     {
       return new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
@@ -259,7 +261,8 @@ namespace DSIS.SimpleRunner
                 new DumpEntropyValueAction(),
                 new DrawEntropyMeasure3dAction(),
                 new DrawEntropyMeasure3dWithBaseAction(),
-                new DrawEntropyMeasureColorMapAction()
+                new DrawEntropyMeasureColorMapAction(),
+                new MeasureEntropyLogAction()
                 );
             ProxyAction pa = new ProxyAction();
             bld.AddEdge(bld.Start, pa);
@@ -267,6 +270,29 @@ namespace DSIS.SimpleRunner
             bld.AddEdge(entropy, drawEntropy);
 
             bld.AddEdge(drawEntropy, bld.End);
+
+            IAction project = new LoopAction(steps, new AgregateAction(delegate(IActionGraphPartBuilder bl)
+                                                                         {
+                                                                           IAction proj = new ProjectEntopryAction();
+                                                                           bl.AddEdge(bl.Start, proj);
+                                                                           bl.AddEdge(proj, bl.End);
+
+                                                                           MeasureEntropyLogAction b = new MeasureEntropyLogAction("Project");
+                                                                           DumpEntropyValueAction bb = new DumpEntropyValueAction("Project");
+                                                                           bl.AddEdge(proj, b);                                                                           
+                                                                           bl.AddEdge(proj, bb);
+
+                                                                           IAction action =
+                                                                             new SelectiveCopyAction(
+                                                                               FileKeys.WorkingFolderKey);
+                                                                           bl.AddEdge(bl.Start, action);
+                                                                           
+                                                                           bl.AddEdge(action, b);                                                                           
+                                                                           bl.AddEdge(action, bb);
+                                                                         }));
+
+            bld.AddEdge(entropy, project);
+            bld.AddEdge(pa, project);
           });
     }
   }

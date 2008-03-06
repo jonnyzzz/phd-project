@@ -33,6 +33,8 @@ namespace DSIS.Scheme.Ctx
       return w != null && w.Equals(this);
     }
 
+    public abstract bool EqualsKey(IKey key);
+
     private class KeyWrapperImpl<T> : KeyWrapper
     {
       private readonly Key<T> myKey;
@@ -55,6 +57,11 @@ namespace DSIS.Scheme.Ctx
       public override string ToString()
       {
         return base.ToString() + myKey;
+      }
+     
+      public override bool EqualsKey(IKey key)
+      {
+        return myKey.Equals(key);
       }
     }
   }

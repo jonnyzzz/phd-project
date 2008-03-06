@@ -28,9 +28,9 @@ namespace DSIS.Graph.Entropy.Impl.Util
     {
       return COMPARER.GetHashCode(t);
     }
-  } 
+  }
 
-  internal class NodePairEqualityComparer<T> : IEqualityComparer<NodePair<T>>
+  public class NodePairEqualityComparer<T> : IEqualityComparer<NodePair<T>>
     where T : ICellCoordinate
   {
     private static readonly IEqualityComparer<T> COMPARER = NodePair<T>.COMPARER;

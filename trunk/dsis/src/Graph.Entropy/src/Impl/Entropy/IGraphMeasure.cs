@@ -12,6 +12,9 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
   public interface IGraphMeasure<T> : IGraphEntropy where T : ICellCoordinate
   {
+    string Method { get; }
+    ICellCoordinateSystem<T> CoordinateSystem { get;}
+
     IEnumerable<Pair<PairBase<T>, double>> Measure { get; }    
     IDictionary<T, double> GetMeasureNodes();
     IGraphMeasure<T> Project(ICellCoordinateSystemProjector<T> projector);

@@ -28,6 +28,11 @@ namespace DSIS.Graph
       return graph;
     }
 
+    public ICellCoordinateSystem<T> CoordinateSystem
+    {
+      get { return myOriginal.CoordinateSystem; }
+    }
+
     public IEnumerable<INode<T>> GetNodes(ICollection<IStrongComponentInfo> componentIds)
     {
       foreach (IStrongComponentInfo id in componentIds)

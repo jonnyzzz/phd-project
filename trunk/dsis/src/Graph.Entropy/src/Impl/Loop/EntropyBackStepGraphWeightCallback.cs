@@ -12,7 +12,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
   {
     private readonly ICellCoordinateSystem<Q> mySystem;
 
-    public EntropyBackStepGraphWeightCallback(ICellCoordinateSystem<Q> system, IEntropyLoopWeightCallback loopWeight) : base(loopWeight)
+    public EntropyBackStepGraphWeightCallback(ICellCoordinateSystem<Q> system, IEntropyLoopWeightCallback loopWeight) : base(loopWeight, system)
     {
       mySystem = system;
     }

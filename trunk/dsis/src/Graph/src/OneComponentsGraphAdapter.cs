@@ -22,6 +22,11 @@ namespace DSIS.Graph
         throw new ArgumentException();
     }
 
+    public ICellCoordinateSystem<T> CoordinateSystem
+    {
+      get { return myComps.CoordinateSystem; }
+    }
+
     public IEnumerable<INode<T>> GetNodes(ICollection<IStrongComponentInfo> componentIds)
     {
       return myComps.GetNodes(componentIds);

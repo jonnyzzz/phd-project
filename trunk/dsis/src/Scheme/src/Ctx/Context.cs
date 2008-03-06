@@ -43,6 +43,20 @@ namespace DSIS.Scheme.Ctx
         myContext[pair.Key] = pair.Value;
       }
     }
+
+    public void AddAllBut(Context ctx, ICollection<IKey> toSkip)
+    {
+      foreach (KeyValuePair<KeyWrapper, object> pair in ctx.myContext)
+      {
+        foreach (IKey key in toSkip)
+        {
+          if (pair.Key.EqualsKey(key))
+            continue;          
+        }
+        
+        myContext[pair.Key] = pair.Value;        
+      }      
+    }
     
     public void AddAllNew(Context ctx)
     {

@@ -6,6 +6,8 @@ namespace DSIS.Scheme
   public interface IKey
   {
     string Name { get; }
+
+    void Copy(Context from, Context to);
   }
 
   public class Key<TValue> : IKey, IEquatable<Key<TValue>>

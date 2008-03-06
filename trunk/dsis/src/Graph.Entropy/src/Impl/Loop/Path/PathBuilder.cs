@@ -14,7 +14,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
     private int myNorm = 0;
         
     public PathBuilder(IGraphStrongComponents<T> comps)
-    {
+    {      
       myComps = comps;
     }
 
@@ -56,7 +56,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
 
     public IGraphMeasure<T> Entropy()
     {
-      return new GraphMeasure<T, NodePair<T>>(myValues.Dictionary, EqualityComparerFactory<T>.GetReferenceComparer(), myNorm);
+      return new GraphMeasure<T, NodePair<T>>("Long Path", myValues.Dictionary, EqualityComparerFactory<T>.GetReferenceComparer(), myNorm, myComps.CoordinateSystem);
     }    
   }   
 }

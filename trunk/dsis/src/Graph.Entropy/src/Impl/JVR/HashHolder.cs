@@ -11,10 +11,16 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   {
     const double EPS = 1e-8;
     private static readonly IEqualityComparer<JVRPair<T>> COMPARER = EqualityComparerFactory<JVRPair<T>>.GetComparer();
+    private readonly ICellCoordinateSystem<T> mySystem;
 
     private Dictionary<JVRPair<T>, double> myHash = CreateHash();
-    private SortedNodeSet<T> mySet = CreateSet();    
-    
+    private SortedNodeSet<T> mySet = CreateSet();
+
+    public HashHolder(ICellCoordinateSystem<T> system)
+    {
+      mySystem = system;
+    }
+
     private static Dictionary<JVRPair<T>, double> CreateHash()
     {
       return new Dictionary<JVRPair<T>, double>(COMPARER);
@@ -90,7 +96,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public IGraphMeasure<T> CreateEvaluator()
     {
-      return new GraphMeasure<T, JVRPair<T>>(myHash, EqualityComparerFactory<T>.GetComparer(), Norm());
+      return new GraphMeasure<T, JVRPair<T>>("JVR", myHash, EqualityComparerFactory<T>.GetComparer(), Norm(), mySystem);
     }
     
     public T NextNode()

@@ -85,6 +85,11 @@ namespace DSIS.Graph.Abstract
       return graph;
     }
 
+    public ICellCoordinateSystem<TCell> CoordinateSystem
+    {
+      get { return myGraph.CoordinateSystem; }
+    }
+
     public IEnumerable<INode<TCell>> GetNodes(ICollection<IStrongComponentInfo> componentIds)
     {
       IFilter ids = GetIdsHashset(componentIds);

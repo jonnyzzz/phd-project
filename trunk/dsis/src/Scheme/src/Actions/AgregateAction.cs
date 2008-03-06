@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
 using DSIS.Utils;
 
 namespace DSIS.Scheme.Actions
-{
+{  
   public class AgregateAction : DebugableAction, IAction, IActionGraphPartBuilder, IActionDebug
   {
     private readonly EndAction myEnd = new EndAction();

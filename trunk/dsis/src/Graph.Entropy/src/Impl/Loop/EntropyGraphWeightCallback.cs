@@ -15,10 +15,12 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 
     private double myNorm = 0;
     protected readonly IEntropyLoopWeightCallback myWeight;
+    private readonly ICellCoordinateSystem<T> mySystem;
 
-    public EntropyGraphWeightCallback(IEntropyLoopWeightCallback weight)
+    public EntropyGraphWeightCallback(IEntropyLoopWeightCallback weight, ICellCoordinateSystem<T> system)
     {
       myWeight = weight;
+      mySystem = system;
     }
 
     public void OnLoopFound(IList<INode<T>> loop)
@@ -79,7 +81,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 
     public IGraphMeasure<T> Entropy()
     {
-      return new GraphMeasure<T, NodePair<T>>(M, EqualityComparerFactory<T>.GetReferenceComparer(), myNorm);
+      return new GraphMeasure<T, NodePair<T>>("Loops", M, EqualityComparerFactory<T>.GetReferenceComparer(), myNorm, mySystem);
     }
   }
 }

@@ -17,7 +17,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public JVRMeasure(IGraph<T> graph, IGraphStrongComponents<T> components)
     {
-      myHashHolder = new HashHolder<T>();
+      myHashHolder = new HashHolder<T>(graph.CoordinateSystem);
       myBackEdges = new InverseArcDirection<T>(myHashHolder);
       myStraitEdges = new StraitArcDirection<T>(myHashHolder);
 
