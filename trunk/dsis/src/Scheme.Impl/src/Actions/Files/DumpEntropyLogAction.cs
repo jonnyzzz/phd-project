@@ -11,8 +11,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 {
   public class MeasureEntropyLogAction : IntegerCoordinateSystemActionBase2  
   {
-    private string myPrefix;
-
+    private readonly string myPrefix;
 
     public MeasureEntropyLogAction() : this(string.Empty)
     {
@@ -37,7 +36,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       double value = measure.GetEntropy();
 
       string text = string.Format("{0} edges={1} [{2}] {3}", value.ToString(CultureInfo.InvariantCulture), CollectionUtil.Count(measure.GetMeasureNodes()), myPrefix, Environment.NewLine);
-      File.AppendAllText(file, text);
+      File.AppendAllText(file, text);      
     }
   }
   
@@ -60,9 +59,11 @@ namespace DSIS.Scheme.Impl.Actions.Files
       int nodes = graph.NodesCount;
       int edges = graph.EdgesCount;
 
-      double value = Math.Log(edges/nodes);
+      double factor = (double)(edges/(double)nodes);
+      double value = Math.Log(factor);
+      double value2 = Math.Log(factor, 2);
 
-      string text = string.Format("{0}  nodes={1} edges={2}{3}", value.ToString(CultureInfo.InvariantCulture), nodes, edges, Environment.NewLine);
+      string text = string.Format("{0}  nodes={1} edges={2} lb={3} {4}", value.ToString(CultureInfo.InvariantCulture), nodes, edges, value2, Environment.NewLine);
 
       File.AppendAllText(file, text);
     }

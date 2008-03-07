@@ -112,7 +112,7 @@ namespace DSIS.SimpleRunner
       IAction[] system = {systemHenon, systemHenonD, systemHenonD_272, systemIked, systemIkedaCut};
 
       SimpleParallel parallel = new SimpleParallel();
-      for (int steps = 5; steps <= 5; steps++)
+      for (int steps = 5; steps <= 15; steps++)
       {
         foreach (IAction action in system)
         {
