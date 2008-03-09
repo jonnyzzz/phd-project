@@ -12,5 +12,6 @@
   <object id="SystemInfoFactory" type="DSIS.Scheme.Objects.Systemx.SystemInfoFactory" />
   
   <object id="DoubleArrayParser" type="DSIS.Scheme.Objects.Systemx.DoubleArrayParser" />
+  <object id="LongArrayParser" type="DSIS.Scheme.Objects.Systemx.LongArrayParser" />
 
 </objects>

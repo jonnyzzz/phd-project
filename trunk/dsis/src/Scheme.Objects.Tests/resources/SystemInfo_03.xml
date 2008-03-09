@@ -9,9 +9,9 @@
       <From>
         <Object>
           <System-Info xmlns="urn:shemas-dsis-org:system-info" Name="Henon">
-            <Array xmlns="urn:shemas-dsis-org:double-array">
+            <Double-Array xmlns="urn:shemas-dsis-org:double-array">
               <Value>1.4</Value>
-            </Array>
+            </Double-Array>
           </System-Info>
           <System-Info xmlns="urn:shemas-dsis-org:system-info" Name="FoodChain"/>
         </Object>        

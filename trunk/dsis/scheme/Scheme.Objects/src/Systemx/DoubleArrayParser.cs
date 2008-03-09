@@ -10,7 +10,7 @@ namespace DSIS.Scheme.Objects.Systemx
       : base(factory, "resources.DoubleArray.xsd")
     {
     }
-    
+
     protected override double[] Parse(XsdDoubleArray obj)
     {
       return obj.Value;

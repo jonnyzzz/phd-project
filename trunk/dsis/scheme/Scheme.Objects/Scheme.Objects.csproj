@@ -37,6 +37,9 @@
     <Compile Include="resources\DoubleArray.cs">
       <DependentUpon>DoubleArray.xsd</DependentUpon>
     </Compile>
+    <Compile Include="resources\IntArray.cs">
+      <DependentUpon>IntArray.xsd</DependentUpon>
+    </Compile>
     <Compile Include="resources\SystemInfo.cs">
       <DependentUpon>SystemInfo.xsd</DependentUpon>
     </Compile>
@@ -46,6 +49,7 @@
     <Compile Include="src\NamespaceHolder.cs" />
     <Compile Include="src\Systemx\DoubleArrayParser.cs" />
     <Compile Include="src\Systemx\ISystemInfoFactory.cs" />
+    <Compile Include="src\Systemx\LongArrayParser.cs" />
     <Compile Include="src\Systemx\SchemaBasedParser.cs" />
     <Compile Include="src\Systemx\SystemInfoFactory.cs" />
     <Compile Include="src\Systemx\SystemInfoParser.cs" />
@@ -82,6 +86,9 @@
     <None Include="resources\DoubleArray.xsx">
       <DependentUpon>DoubleArray.xsd</DependentUpon>
     </None>
+    <EmbeddedResource Include="resources\IntArray.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="resources\SystemInfo.xsx">
       <DependentUpon>SystemInfo.xsd</DependentUpon>
     </None>
@@ -98,6 +105,7 @@
     <XsdCs InputFile="resources\SystemSpace.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
     <XsdCs InputFile="resources\SystemInfo.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
     <XsdCs InputFile="resources\DoubleArray.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
+    <XsdCs InputFile="resources\IntArray.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

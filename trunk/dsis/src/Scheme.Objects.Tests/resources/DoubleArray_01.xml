@@ -7,10 +7,10 @@
     <Arc>
       <From>
         <Object>
-          <Array xmlns="urn:shemas-dsis-org:double-array">
+          <Double-Array xmlns="urn:shemas-dsis-org:double-array">
             <Value>5</Value>
             <Value>-5</Value>
-          </Array>
+          </Double-Array>
         </Object>
       </From>
       <To>
