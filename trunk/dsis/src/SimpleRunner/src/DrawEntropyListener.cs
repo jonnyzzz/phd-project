@@ -11,7 +11,7 @@ namespace DSIS.SimpleRunner
   public class DrawEntropyListener<T, Q> : ProvideExternalListenerBase<T, Q, IDrawEntropyImageListener>,
                                            IComputeEntropyListener<Q>, IComputationPathListener
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private int myStepNumber;
     private readonly Dictionary<string, DrawBase> myDrawers = new Dictionary<string, DrawBase>();

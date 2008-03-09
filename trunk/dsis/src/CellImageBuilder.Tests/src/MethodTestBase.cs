@@ -5,7 +5,6 @@
 
 using System.Collections.Generic;
 using DSIS.Core.Builders;
-using DSIS.Core.Coordinates;
 using DSIS.Core.Mock;
 using DSIS.Function.Mock;
 using DSIS.IntegerCoordinates;

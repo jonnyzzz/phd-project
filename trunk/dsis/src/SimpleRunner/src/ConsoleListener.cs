@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
@@ -12,7 +11,7 @@ namespace DSIS.SimpleRunner
   public class ConsoleListener<T, Q> : AbstractImageBuilderListener<T, Q>, IComputeEntropyListener<Q>,
                                        IDrawLastComputationResultEvents
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {        
     private int stepCount = 0;
     

@@ -5,7 +5,7 @@ using DSIS.Graph.Entropy.Impl.Util;
 namespace DSIS.SimpleRunner
 {
   public interface IComputeEntropyListener<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     void OnComputeEntropyStarted();
     void OnComputeEntropyFinished(string key, double[] value);

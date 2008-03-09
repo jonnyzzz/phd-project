@@ -1,7 +1,8 @@
-using DSIS.IntegerCoordinates.Generic;
+using DSIS.IntegerCoordinates.Generated;
+using DSIS.IntegerCoordinates.Tests.Generic;
 using NUnit.Framework;
 
-namespace DSIS.IntegerCoordinates.Generated
+namespace DSIS.IntegerCoordinates.Tests.Generated
 {
   [TestFixture]
   public class CellConnectionAdapterTwoDimTest : 

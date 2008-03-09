@@ -16,7 +16,7 @@ namespace DSIS.SimpleRunner
 {
   public abstract class AbstractImageBuilder<T, Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly List<IAbstractImageBuilderListener<T, Q>> myListeners =
       new List<IAbstractImageBuilderListener<T, Q>>();

@@ -2,11 +2,11 @@ using DSIS.IntegerCoordinates.Tests;
 using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.IntegerCoordinates.Generic
+namespace DSIS.IntegerCoordinates.Tests.Generic
 {
   public class IntegerCoordinatesBaseTest<T,Q> 
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     protected static void DoEqTest(params long[] l)
     {

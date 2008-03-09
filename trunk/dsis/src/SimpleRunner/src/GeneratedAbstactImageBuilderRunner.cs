@@ -8,10 +8,10 @@ namespace DSIS.SimpleRunner
   {
     public abstract AbstractImageBuilder<T, Q> CreateBuilder<T, Q>()
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>;
+      where Q : IIntegerCoordinate;
     
     public void Do<T, Q>(CreateSystem<T> createSystem) where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       AbstractImageBuilder<T, Q> builder = CreateBuilder<T, Q>();
       builder.CreateSystem = createSystem;
@@ -23,7 +23,7 @@ namespace DSIS.SimpleRunner
 
     protected virtual void ComputationFinished<T,Q>(AbstractImageBuilder<T,Q> builder)
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {      
     }
 

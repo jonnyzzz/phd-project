@@ -6,7 +6,7 @@ namespace DSIS.SimpleRunner
 {
   public abstract class AbstractImageBuilderListener<T,Q> : IAbstractImageBuilderListener<T,Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
 
     private static void Void()

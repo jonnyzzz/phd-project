@@ -22,8 +22,9 @@ namespace DSIS.CodeCompiler
         ps.GenerateInMemory = false ;
         ps.GenerateExecutable = false;
         ps.IncludeDebugInformation = true;
-        ps.OutputAssembly = "DSIS.Generated.Assembly." + Guid.NewGuid() + ".dll";
-        string codeFile = ps.OutputAssembly + ".cs";
+        string basePath = Path.GetDirectoryName(new Uri(GetType().Assembly.CodeBase).LocalPath);
+        ps.OutputAssembly = Path.Combine(basePath, "DSIS.Generated.Assembly." + Guid.NewGuid() + ".dll");
+        string codeFile = Path.Combine(basePath, ps.OutputAssembly + ".cs");
         using(TextWriter tw = File.CreateText(codeFile))
         {
           tw.WriteLine(code);
@@ -39,6 +40,11 @@ namespace DSIS.CodeCompiler
           return results.CompiledAssembly;
         }
       }
+    }
+
+    //todo: Register assembly resolver for newly created assembly.
+    private void RegisterAssemblyResolver(string assemblyPath, string assemblyName)
+    {
     }
   }
 }

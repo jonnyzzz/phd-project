@@ -14,7 +14,7 @@ namespace DSIS.SimpleRunner
   public class XmlAbstractImageBuilderListener<T, Q> : AbstractImageBuilderListener<T, Q>, IComputeEntropyListener<Q>,
                                                        IDrawLastComputationResultEvents, IDrawEntropyImageListener
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly XmlDocument myDocument = new XmlDocument();
     private readonly string myFile;

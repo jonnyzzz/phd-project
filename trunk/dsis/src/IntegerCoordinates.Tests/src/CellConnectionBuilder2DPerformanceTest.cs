@@ -2,7 +2,7 @@ using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.IntegerCoordinates.Test
+namespace DSIS.IntegerCoordinates.Tests
 {
   [TestFixture]
   public class CellConnectionBuilder2DPerformanceTest : CellConnectionBuilderPerformanceTestBase

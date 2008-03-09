@@ -6,7 +6,6 @@ using DSIS.CellImageBuilder.BoxAdaptiveMethod;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Core.Builders;
-using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Core.Util;
@@ -152,7 +151,7 @@ namespace DSIS.SimpleRunner
 
     public class LogisticFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       public LogisticFullBuilder(string homePath, int steps)
         :
@@ -176,7 +175,7 @@ namespace DSIS.SimpleRunner
 
     public class DuffingFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       public DuffingFullBuilder(string homePath, int steps)
         :
@@ -209,7 +208,7 @@ namespace DSIS.SimpleRunner
     
     public class LorentzFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       public LorentzFullBuilder(string homePath, int steps)
         :
@@ -272,7 +271,7 @@ namespace DSIS.SimpleRunner
     
     public class RosslerFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       public RosslerFullBuilder(string homePath, int steps)
         :
@@ -462,7 +461,7 @@ namespace DSIS.SimpleRunner
     
     public class FoodChainFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       public FoodChainFullBuilder(string homePath, int steps)
         :

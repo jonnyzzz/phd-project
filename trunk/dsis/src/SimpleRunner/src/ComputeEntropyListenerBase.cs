@@ -10,7 +10,7 @@ namespace DSIS.SimpleRunner
 {
   public abstract class ComputeEntropyListenerBase<T,Q> : ProvideExternalListenerBase<T,Q, IComputeEntropyListener<Q>>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     protected abstract string Suffix { get; }
 

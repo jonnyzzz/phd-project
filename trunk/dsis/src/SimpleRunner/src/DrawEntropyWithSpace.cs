@@ -7,7 +7,8 @@ using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
-  public class DrawEntropyWithSpace<T> : DrawEntropyWithSpaceBase<T> where T : IIntegerCoordinate<T>
+  public class DrawEntropyWithSpace<T> : DrawEntropyWithSpaceBase<T> 
+    where T : IIntegerCoordinate
   {
     private GnuplotPointsFileWriter Render(Pair<ICellCoordinateSystem<T>, IDictionary<T, double>> file)
     {

@@ -5,7 +5,8 @@ using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
-  public abstract class DrawEntropyWithSpaceBase<T> : DrawBase where T : IIntegerCoordinate<T>
+  public abstract class DrawEntropyWithSpaceBase<T> : DrawBase 
+    where T : IIntegerCoordinate
   {
     private Pair<ICellCoordinateSystem<T>, IDictionary<T, double>>? myWights;
     private double? myEntropy;

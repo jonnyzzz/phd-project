@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace DSIS.CodeCompiler
 {
@@ -14,17 +15,35 @@ namespace DSIS.CodeCompiler
     {
       if (t.IsGenericType)
       {
-        string name = GenerateTypeName(t.GetGenericTypeDefinition()) + "<";
-        bool isFirst = true;
-        foreach (Type type in t.GetGenericArguments())
-        {
-          if (!isFirst) name += ", ";
-          isFirst = false;
-          name += GenerateFQTypeName(type);
-        }
-        return name + "> ";        
+        string name = GenerateTypeName(t.GetGenericTypeDefinition());
+        return GenerateGenericArguments(name, t.GetGenericArguments());
       }
       return t.FullName;
+    }
+
+    public static string GenerateFQTypeInstance(Type t, params Type[] args)
+    {
+      if (t.IsGenericType)
+      {
+        string name = GenerateTypeName(t.GetGenericTypeDefinition());
+        return GenerateGenericArguments(name, args);        
+      } else
+      {
+        return GenerateFQTypeName(t);
+      }
+    }
+
+    private static string GenerateGenericArguments(string name, IEnumerable<Type> arguments)
+    {
+      name+= "<";
+      bool isFirst = true;        
+      foreach (Type type in arguments)
+      {
+        if (!isFirst) name += ", ";
+        isFirst = false;
+        name += GenerateFQTypeName(type);
+      }
+      return name + "> ";
     }
 
     private static string GenerateTypeName(Type t)

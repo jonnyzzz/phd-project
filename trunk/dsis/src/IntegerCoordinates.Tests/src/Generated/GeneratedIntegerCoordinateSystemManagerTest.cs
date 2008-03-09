@@ -1,15 +1,14 @@
-using System;
 using System.Reflection;
 using DSIS.CodeCompiler;
-using DSIS.IntegerCoordinates.Generic;
+using DSIS.IntegerCoordinates.Generated;
 using DSIS.IntegerCoordinates.Tests;
+using DSIS.IntegerCoordinates.Tests.Generic;
 using DSIS.Utils.Test;
 using NUnit.Core;
 using NUnit.Framework;
 
-namespace DSIS.IntegerCoordinates.Generated
+namespace DSIS.IntegerCoordinates.Tests.Generated
 {
-
   [TestFixture]
   public class GeneratedIntegerCoordinateSystemManagerTest
   {
@@ -75,10 +74,9 @@ namespace DSIS.IntegerCoordinates.Generated
                                                   @" 
            using NUnit.Framework;
            using DSIS.IntegerCoordinates.Generated; 
-           using DSIS.IntegerCoordinates.Generic; 
            
           [TestFixture]
-          public class Test1 : CellConnectionAdapterOneDimBaseTest<{0},{1}> {{
+          public class Test1 : {1} {{
               private readonly GeneratedIntegerCoordinateSystemManager myManager = 
                                     new GeneratedIntegerCoordinateSystemManager();
 
@@ -88,17 +86,18 @@ namespace DSIS.IntegerCoordinates.Generated
              }}
           }}
 ",
-                                                  GeneratorTypeUtil.GenerateFQTypeName(system.System),
-                                                  GeneratorTypeUtil.GenerateFQTypeName(system.Coordinate)),
+ GeneratorTypeUtil.GenerateFQTypeName(system.System),
+ GeneratorTypeUtil.GenerateFQTypeInstance(typeof(CellConnectionAdapterOneDimBaseTest<,>), system.System, system.Coordinate)),
                                                 typeof (TestFixture),
                                                 GetType(),
                                                 typeof (GeneratedIntegerCoordinateSystemManager),
                                                 system.GetType(),
                                                 system.System,
                                                 system.Coordinate,
+                                                GetType(),
                                                 typeof (CellConnectionAdapterOneDimBaseTest<,>),
                                                 typeof(IntegerCoordinateSystemBaseTest<,>)
-                                                );
+        );
       NUnitFixtureHelper.RunTests(ass);
     }
 
@@ -112,10 +111,10 @@ namespace DSIS.IntegerCoordinates.Generated
                                                   @" 
            using NUnit.Framework;
            using DSIS.IntegerCoordinates.Generated; 
-           using DSIS.IntegerCoordinates.Generic; 
+           using DSIS.IntegerCoordinates.Tests.Generated; 
            
           [TestFixture]
-          public class Test1 : CellConnectionAdapterTwoDimBaseTest<{0},{1}> {{
+          public class Test1 : {2} {{
               private readonly GeneratedIntegerCoordinateSystemManager myManager = 
                                     new GeneratedIntegerCoordinateSystemManager();
 
@@ -126,7 +125,7 @@ namespace DSIS.IntegerCoordinates.Generated
           }}
 
           [TestFixture]
-          public class Test2 : IntegerCoordinateSystemBaseTest<{0},{1}> {{
+          public class Test2 : {3} {{
               private readonly GeneratedIntegerCoordinateSystemManager myManager = 
                                     new GeneratedIntegerCoordinateSystemManager();
 
@@ -137,8 +136,9 @@ namespace DSIS.IntegerCoordinates.Generated
           }}
 ",
                                                   GeneratorTypeUtil.GenerateFQTypeName(system.System),
-                                                  GeneratorTypeUtil.GenerateFQTypeName(system.Coordinate)),
-
+                                                  GeneratorTypeUtil.GenerateFQTypeName(system.Coordinate),
+                                                  GeneratorTypeUtil.GenerateFQTypeInstance(typeof(CellConnectionAdapterTwoDimBaseTest<,>),system.System, system.Coordinate),
+                                                  GeneratorTypeUtil.GenerateFQTypeInstance(typeof(IntegerCoordinateSystemBaseTest<,>),system.System, system.Coordinate)),
                                                 typeof (TestFixture),
                                                 GetType(),
                                                 typeof (GeneratedIntegerCoordinateSystemManager),
@@ -147,7 +147,7 @@ namespace DSIS.IntegerCoordinates.Generated
                                                 system.Coordinate,
                                                 typeof(CellConnectionAdapterTwoDimBaseTest<,>),
                                                 typeof(IntegerCoordinateSystemBaseTest<,>)
-                                                );
+        );
 
       NUnitFixtureHelper.RunTests(ass);
     }

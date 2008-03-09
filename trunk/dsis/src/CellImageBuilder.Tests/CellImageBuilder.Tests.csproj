@@ -120,6 +120,10 @@
       <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
       <Name>Function.Predefined</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IntegerCoordinates.Tests\IntegerCoordinates.Tests.csproj">
+      <Project>{FE0FA82B-A965-4AA8-958B-150ED7200F12}</Project>
+      <Name>IntegerCoordinates.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
       <Name>IntegerCoordinates</Name>

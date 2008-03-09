@@ -14,7 +14,7 @@ namespace DSIS.IntegerCoordinates.Generated
   {
     void Do<T, Q>(CreateSystem<T> createSystem)
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>;
+      where Q : IIntegerCoordinate;
   }
 
   public interface IIntegerCoordinateFactory
@@ -30,6 +30,7 @@ namespace DSIS.IntegerCoordinates.Generated
   public class GeneratedIntegerCoordinateSystemManager
   {
     private static GeneratedIntegerCoordinateSystemManager myInstance;
+    private readonly Dictionary<int, Type> myCachedIcs = new Dictionary<int, Type>();
 
     public static GeneratedIntegerCoordinateSystemManager Instance
     {
@@ -41,9 +42,7 @@ namespace DSIS.IntegerCoordinates.Generated
         }
         return myInstance;
       }
-    }
-
-    private readonly Dictionary<int, Type> myCachedIcs = new Dictionary<int, Type>();
+    }    
 
     public IIntegerCoordinateFactory CreateSystem(int dim)
     {
@@ -61,7 +60,7 @@ namespace DSIS.IntegerCoordinates.Generated
     private Type CreateType(int dim)
     {
       ICodeCompiler compiler = CodeCompiler.CodeCompiler.CreateCompiler();
-      Assembly assembly = compiler.CompileCSharpCode(GenerateCoordinate(dim), typeof (IIntegerCoordinate<>),
+      Assembly assembly = compiler.CompileCSharpCode(GenerateCoordinate(dim), typeof (IIntegerCoordinate),
                                                      typeof (EqualityComparerAttribute),
                                                      typeof (IIntegerCoordinateFactory),
                                                      typeof (IIntegerCoordinateCallback));

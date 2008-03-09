@@ -1,6 +1,4 @@
-using DSIS.Core.Builders;
-
-namespace DSIS.Core.Coordinates
+namespace DSIS.Core.Builders
 {
   /// <summary>
   /// Base Interface for cell Image Builder settings. 

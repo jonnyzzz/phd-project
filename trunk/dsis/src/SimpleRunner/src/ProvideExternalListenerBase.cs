@@ -6,7 +6,7 @@ namespace DSIS.SimpleRunner
 {
   public abstract class ProvideExternalListenerBase<T,Q,L> : AbstractImageBuilderListener<T,Q>, IProvideExtendedListener
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
     where L : class
   {
     private readonly List<L> myListeners = new List<L>();

@@ -32,30 +32,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\StringTemplate\net-2.0\antlr.runtime.dll</HintPath>
     </Reference>
-    <Reference Include="nunit-console-runner, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit-console-runner.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core.extensions, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit.core.extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core.interfaces, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit.core.interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.util, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit.util.dll</HintPath>
-    </Reference>
     <Reference Include="StringTemplate, Version=3.0.1.21733, Culture=neutral, PublicKeyToken=beee492b52c41e85, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\StringTemplate\net-2.0\StringTemplate.dll</HintPath>
@@ -89,35 +65,11 @@
     <Compile Include="src\IProcessorFactory.cs" />
     <Compile Include="src\IRadiusProcessor.cs" />
     <Compile Include="src\IRectProcessors.cs" />
-    <Compile Include="testSrc\Generated\GeneratedIntegerCoordinateSystemManagerTest.cs" />
-    <Compile Include="testSrc\Generated\SubdivisionTest.cs" />
-    <Compile Include="testSrc\Generic\CellConnectionAdapterTwoDimBaseTest.cs" />
-    <Compile Include="testSrc\Generated\CellConnectionAdapterOneDimTest.cs" />
-    <Compile Include="testSrc\Generated\IntegerCoordinate2dTest.cs" />
-    <Compile Include="testSrc\Generic\CellConnectionAdapterOneDimBaseTest.cs" />
-    <Compile Include="testSrc\Impl\CellConnectionAdapterOneDimTest.cs" />
-    <Compile Include="testSrc\Generic\CellConnectionAdapterTest.cs" />
-    <Compile Include="testSrc\Impl\CellConnectionAdapterTwoDimTest.cs" />
-    <Compile Include="testSrc\CellConnectionBuilder2DPerformanceTest.cs" />
-    <Compile Include="testSrc\CellConnectionBuilderPerformanceTestBase.cs" />
-    <Compile Include="testSrc\Generated\IntegerCoordinateSystem2dTest.cs" />
-    <Compile Include="testSrc\Generic\IntegerCoordinatesBaseTest.cs" />
-    <Compile Include="testSrc\Impl\IntegerCoordinatesTest.cs" />
-    <Compile Include="testSrc\Generic\IntegerCoordinateSystemBaseTest.cs" />
-    <Compile Include="testSrc\Impl\IntegerCoordinateSystemTest.cs" />
-    <Compile Include="testSrc\MockIntegerCoordinateSystemInfo.cs" />
-    <Compile Include="testSrc\Impl\SubdivisionTest.cs" />
-    <Compile Include="testSrc\Generic\SubdivisionTestBase.cs" />
-    <Compile Include="testSrc\TwoDimCoordinateAssert.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BoxIterators\BoxIterators.csproj">
       <Project>{B5F40029-7A5F-440D-8A5A-215E032CF89C}</Project>
       <Name>BoxIterators</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Mock\Core.Mock.csproj">
-      <Project>{2B4BA54B-9B5E-4D07-B859-FAB1D15203F0}</Project>
-      <Name>Core.Mock</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shared\src\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>

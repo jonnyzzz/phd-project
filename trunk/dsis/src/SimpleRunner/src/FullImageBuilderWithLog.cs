@@ -12,7 +12,7 @@ namespace DSIS.SimpleRunner
 {
   public abstract class FullImageBuilderWithLog<T, Q> : FullImageBuilder<T, Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly string myWorkPath;
     private readonly string myXmlFile;

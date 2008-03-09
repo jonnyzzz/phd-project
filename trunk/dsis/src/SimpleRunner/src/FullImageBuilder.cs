@@ -1,25 +1,20 @@
 using System;
 using System.Collections.Generic;
-using DSIS.CellImageBuilder.AdaptiveMethod;
-using DSIS.CellImageBuilder.BoxAdaptiveMethod;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Core.Builders;
-using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
 using DSIS.Core.System;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates;
-using DSIS.IntegerCoordinates.Generated;
-using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
   public abstract class FullImageBuilder<T, Q> : AbstractImageBuilder<T, Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly long myStepLimit;
     private readonly long myCellsLimit;

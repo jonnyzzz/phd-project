@@ -6,8 +6,9 @@ namespace DSIS.SimpleRunner
 {
   public class ComputeEigenEntropyListener<T,Q> : ComputeEntropyListenerBase<T,Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
+ 
     protected override string Suffix
     {
       get { return "Eigen"; }

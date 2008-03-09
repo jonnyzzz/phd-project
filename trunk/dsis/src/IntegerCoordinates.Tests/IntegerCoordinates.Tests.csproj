@@ -1,0 +1,116 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FE0FA82B-A965-4AA8-958B-150ED7200F12}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.IntegerCoordinates.Tests</RootNamespace>
+    <AssemblyName>DSIS.IntegerCoordinates.Tests</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit-console-runner, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\shared\lib\nunit\bin\nunit-console-runner.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\shared\lib\nunit\bin\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core.interfaces, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\shared\lib\nunit\bin\nunit.core.interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\shared\lib\nunit\bin\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.util, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\shared\lib\nunit\bin\nunit.util.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\CellConnectionBuilder2DPerformanceTest.cs" />
+    <Compile Include="src\CellConnectionBuilderPerformanceTestBase.cs" />
+    <Compile Include="src\Generated\CellConnectionAdapterOneDimTest.cs" />
+    <Compile Include="src\Generated\GeneratedIntegerCoordinateSystemManagerTest.cs" />
+    <Compile Include="src\Generated\IntegerCoordinate2dTest.cs" />
+    <Compile Include="src\Generated\IntegerCoordinateSystem2dTest.cs" />
+    <Compile Include="src\Generated\SubdivisionTest.cs" />
+    <Compile Include="src\Generic\CellConnectionAdapterOneDimBaseTest.cs" />
+    <Compile Include="src\Generic\CellConnectionAdapterTest.cs" />
+    <Compile Include="src\Generic\CellConnectionAdapterTwoDimBaseTest.cs" />
+    <Compile Include="src\Generic\IntegerCoordinatesBaseTest.cs" />
+    <Compile Include="src\Generic\IntegerCoordinateSystemBaseTest.cs" />
+    <Compile Include="src\Generic\SubdivisionTestBase.cs" />
+    <Compile Include="src\Impl\CellConnectionAdapterOneDimTest.cs" />
+    <Compile Include="src\Impl\CellConnectionAdapterTwoDimTest.cs" />
+    <Compile Include="src\Impl\IntegerCoordinatesTest.cs" />
+    <Compile Include="src\Impl\IntegerCoordinateSystemTest.cs" />
+    <Compile Include="src\Impl\SubdivisionTest.cs" />
+    <Compile Include="src\MockIntegerCoordinateSystemInfo.cs" />
+    <Compile Include="src\TwoDimCoordinateAssert.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\shared\src\CodeCompiler\CodeCompiler.csproj">
+      <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
+      <Name>CodeCompiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Mock\Core.Mock.csproj">
+      <Project>{2B4BA54B-9B5E-4D07-B859-FAB1D15203F0}</Project>
+      <Name>Core.Mock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Function.Mock\Function.Mock.csproj">
+      <Project>{02AFA84E-DA1B-4010-BA76-8E077E4D6175}</Project>
+      <Name>Function.Mock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
+      <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
+      <Name>IntegerCoordinates</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

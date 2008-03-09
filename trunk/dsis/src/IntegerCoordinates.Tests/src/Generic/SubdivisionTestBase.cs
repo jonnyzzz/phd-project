@@ -5,11 +5,11 @@ using DSIS.IntegerCoordinates.Tests;
 using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.IntegerCoordinates.Generic
+namespace DSIS.IntegerCoordinates.Tests.Generic
 {
   public class SubdivisionTestBase<T,Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     protected static void DoTest(double[] l, double[] r, long[] g, long[] div)
     {

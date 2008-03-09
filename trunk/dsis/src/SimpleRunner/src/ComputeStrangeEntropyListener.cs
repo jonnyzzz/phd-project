@@ -8,7 +8,7 @@ namespace DSIS.SimpleRunner
 {
   public class ComputeStrangeEntropyListener<T,Q> : ComputeEntropyListenerBase<T,Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly StrangeEvaluatorType myType;
     private readonly StrangeEvaluatorStrategy myStrategy;

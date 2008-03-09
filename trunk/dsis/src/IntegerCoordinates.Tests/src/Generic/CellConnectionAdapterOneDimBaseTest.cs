@@ -3,11 +3,11 @@ using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.IntegerCoordinates.Generic
+namespace DSIS.IntegerCoordinates.Tests.Generic
 {
   public class CellConnectionAdapterOneDimBaseTest<T,Q> : CellConnectionAdapterTestBase<T,Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     [SetUp]
     public void SetUp()

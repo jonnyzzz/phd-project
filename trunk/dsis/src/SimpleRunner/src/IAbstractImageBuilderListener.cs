@@ -1,5 +1,4 @@
 using DSIS.Core.Builders;
-using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.Graph;
 using DSIS.IntegerCoordinates;
@@ -9,7 +8,7 @@ namespace DSIS.SimpleRunner
 {
   public interface IAbstractImageBuilderListener<T,Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     VoidDelegate ComputationStartedC(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric);
     VoidDelegate OnStepStartedC(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide);
@@ -19,7 +18,7 @@ namespace DSIS.SimpleRunner
     VoidDelegate ComputationFinishedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
   }
 
-  public struct AbstractImageBuilderContext<Q> where Q : IIntegerCoordinate<Q>
+  public struct AbstractImageBuilderContext<Q> where Q : IIntegerCoordinate
   {
     public readonly ISystemInfo Info;
     public readonly ICellImageBuilder<Q> Builder;

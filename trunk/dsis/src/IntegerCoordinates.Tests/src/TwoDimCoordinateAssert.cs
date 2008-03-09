@@ -6,7 +6,7 @@ using System.Text;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 
-namespace DSIS.IntegerCoordinates
+namespace DSIS.IntegerCoordinates.Tests
 {
   public static class TwoDimCoordinateAssert
   {

@@ -1,5 +1,4 @@
 using DSIS.Core.Builders;
-using DSIS.Core.Coordinates;
 using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.Shared

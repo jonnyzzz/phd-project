@@ -95,6 +95,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheme.Objects.Tests", "Sch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.Tests", "CellImageBuilder.Tests\CellImageBuilder.Tests.csproj", "{5889B68D-709C-4CC2-8492-B421D6D8BCE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegerCoordinates.Tests", "IntegerCoordinates.Tests\IntegerCoordinates.Tests.csproj", "{FE0FA82B-A965-4AA8-958B-150ED7200F12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -265,6 +267,10 @@ Global
 		{5889B68D-709C-4CC2-8492-B421D6D8BCE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5889B68D-709C-4CC2-8492-B421D6D8BCE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5889B68D-709C-4CC2-8492-B421D6D8BCE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE0FA82B-A965-4AA8-958B-150ED7200F12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE0FA82B-A965-4AA8-958B-150ED7200F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE0FA82B-A965-4AA8-958B-150ED7200F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE0FA82B-A965-4AA8-958B-150ED7200F12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

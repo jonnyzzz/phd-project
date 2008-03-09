@@ -4,7 +4,7 @@ using DSIS.Core.Mock;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
-namespace DSIS.IntegerCoordinates.Test
+namespace DSIS.IntegerCoordinates.Tests
 {
   public abstract class CellConnectionBuilderPerformanceTestBase
   {
