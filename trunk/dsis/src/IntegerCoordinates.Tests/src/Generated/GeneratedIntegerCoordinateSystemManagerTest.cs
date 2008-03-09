@@ -77,9 +77,6 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
            
           [TestFixture]
           public class Test1 : {1} {{
-              private readonly GeneratedIntegerCoordinateSystemManager myManager = 
-                                    new GeneratedIntegerCoordinateSystemManager();
-
              protected override {0} CoordinateSystem()
              {{
                 return new {0}(mySpace  );
@@ -115,9 +112,6 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
            
           [TestFixture]
           public class Test1 : {2} {{
-              private readonly GeneratedIntegerCoordinateSystemManager myManager = 
-                                    new GeneratedIntegerCoordinateSystemManager();
-
              protected override {0} CoordinateSystem()
              {{
                 return new {0}(mySpace  );
@@ -126,9 +120,6 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
 
           [TestFixture]
           public class Test2 : {3} {{
-              private readonly GeneratedIntegerCoordinateSystemManager myManager = 
-                                    new GeneratedIntegerCoordinateSystemManager();
-
              protected override {0} CoordinateSystem()
              {{
                 return new {0}(mySpace  );

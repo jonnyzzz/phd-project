@@ -207,7 +207,7 @@ namespace DSIS.Generated
     }
   }
     
-  public class IntegerCoordinateSystemFactory : IIntegerCoordinateFactory
+  public class IntegerCoordinateSystemFactory : IIntegerCoordinateFactoryEx
   {    
     public void WithIntegerCoordinateSystem(IIntegerCoordinateCallback cb)
     {
