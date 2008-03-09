@@ -3,48 +3,37 @@ using System.Collections.Generic;
 using System.Reflection;
 using Antlr.StringTemplate;
 using DSIS.CodeCompiler;
-using DSIS.Core.System;
+using DSIS.Spring;
 using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
-  public delegate T CreateSystem<T>(ISystemSpace ss, long[] subd);
-
-  public interface IIntegerCoordinateCallback
-  {
-    void Do<T, Q>(CreateSystem<T> createSystem)
-      where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate;
-  }
-
-  public interface IIntegerCoordinateFactory
-  {
-    [Obsolete("Use IIntegerCoordinateSystem.DoWith")]
-    void WithIntegerCoordinateSystem(IIntegerCoordinateCallback cb);
-
-    Type System { get; }
-    Type Coordinate { get; }
-    IIntegerCoordinateSystemInfo Create(ISystemSpace space, long[] subd);
-  }
-
+  [UsedBySpring]
   public class GeneratedIntegerCoordinateSystemManager
   {
     private static GeneratedIntegerCoordinateSystemManager myInstance;
     private readonly Dictionary<int, Type> myCachedIcs = new Dictionary<int, Type>();
+    private readonly ICodeCompiler myCompiler;
 
+    [Obsolete("Use spring")]
     public static GeneratedIntegerCoordinateSystemManager Instance
     {
       get
       {
         if (myInstance == null)
         {
-          myInstance = new GeneratedIntegerCoordinateSystemManager();
+          myInstance = new GeneratedIntegerCoordinateSystemManager(CodeCompiler.CodeCompiler.CreateCompiler());
         }
         return myInstance;
       }
-    }    
+    }
 
-    public IIntegerCoordinateFactory CreateSystem(int dim)
+    public GeneratedIntegerCoordinateSystemManager(ICodeCompiler compiler)
+    {
+      myCompiler = compiler;
+    }
+
+    public IIntegerCoordinateFactoryEx CreateSystem(int dim)
     {
       lock (myCachedIcs)
       {
@@ -53,16 +42,15 @@ namespace DSIS.IntegerCoordinates.Generated
         {
           myCachedIcs[dim] = t = CreateType(dim);
         }
-        return (IIntegerCoordinateFactory) Activator.CreateInstance(t, new object[] {});
+        return (IIntegerCoordinateFactoryEx) Activator.CreateInstance(t, new object[] {});
       }
     }
 
     private Type CreateType(int dim)
     {
-      ICodeCompiler compiler = CodeCompiler.CodeCompiler.CreateCompiler();
-      Assembly assembly = compiler.CompileCSharpCode(GenerateCoordinate(dim), typeof (IIntegerCoordinate),
+      Assembly assembly = myCompiler.CompileCSharpCode(GenerateCoordinate(dim), typeof (IIntegerCoordinate),
                                                      typeof (EqualityComparerAttribute),
-                                                     typeof (IIntegerCoordinateFactory),
+                                                     typeof (IIntegerCoordinateFactoryEx),
                                                      typeof (IIntegerCoordinateCallback));
 
       if (assembly == null)

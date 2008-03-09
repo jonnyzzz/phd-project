@@ -83,4 +83,9 @@ namespace DSIS.Scheme2.Tests.testData
       return element.InnerText;
     }
   }
+
+  public class Test_08_A
+  {
+    //todo: Check how generic methods are supported
+  }
 }

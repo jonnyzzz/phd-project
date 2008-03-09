@@ -5,7 +5,7 @@ using DSIS.Persistance;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
-  public class IntegerCoordinateSystem2dFactory : IIntegerCoordinateFactory
+  public class IntegerCoordinateSystem2dFactory : IIntegerCoordinateFactoryEx
   {    
     public void WithIntegerCoordinateSystem(IIntegerCoordinateCallback cb)
     {

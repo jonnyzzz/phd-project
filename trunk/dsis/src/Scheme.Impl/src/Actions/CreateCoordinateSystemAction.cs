@@ -16,8 +16,8 @@ namespace DSIS.Scheme.Impl.Actions
     protected override void Apply(Context ctx, Context result)
     {
       ISystemSpace info = ctx.Get(Keys.SystemSpaceKey);
-      IIntegerCoordinateFactory factory = GeneratedIntegerCoordinateSystemManager.Instance.CreateSystem(info.Dimension);
-      IIntegerCoordinateSystemInfo sys = factory.Create(info, info.InitialSubdivision);
+      IIntegerCoordinateFactoryEx factoryEx = GeneratedIntegerCoordinateSystemManager.Instance.CreateSystem(info.Dimension);
+      IIntegerCoordinateSystemInfo sys = factoryEx.Create(info, info.InitialSubdivision);
 
       result.Set(Keys.IntegerCoordinateSystemInfo, sys);
     }

@@ -17,7 +17,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
     [SetUp]
     public void SetUp()
     {
-      myManager = new GeneratedIntegerCoordinateSystemManager();
+      myManager = new GeneratedIntegerCoordinateSystemManager(CodeCompiler.CodeCompiler.CreateCompiler());
     }
 
     [Test]
@@ -32,7 +32,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
     {
       for(int i = 1; i<10; i++)
       {
-        IIntegerCoordinateFactory system = myManager.CreateSystem(i);
+        IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i);
         IIntegerCoordinateSystemInfo info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000l,i)), Fill(100000L, i));
 
         info.DoGeneric(new DoWithCoordunates_Identity());
@@ -67,7 +67,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
     [Test]
     public void Test_Dimension1()
     {
-      IIntegerCoordinateFactory system = myManager.CreateSystem(1);
+      IIntegerCoordinateFactoryEx system = myManager.CreateSystem(1);
 
       ICodeCompiler compiler = CodeCompiler.CodeCompiler.CreateCompiler();
       Assembly ass = compiler.CompileCSharpCode(string.Format(
@@ -104,7 +104,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
     [Test]
     public void Test_Dimension2()
     {
-      IIntegerCoordinateFactory system = myManager.CreateSystem(2);
+      IIntegerCoordinateFactoryEx system = myManager.CreateSystem(2);
 
       ICodeCompiler compiler = CodeCompiler.CodeCompiler.CreateCompiler();
       Assembly ass = compiler.CompileCSharpCode(string.Format(
