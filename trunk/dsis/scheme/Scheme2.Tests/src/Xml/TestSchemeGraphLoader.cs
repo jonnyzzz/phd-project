@@ -46,6 +46,11 @@ namespace DSIS.Scheme2.Tests.Xml
     {      
       return Load("test_06.xml");
     }
+    
+    public static XsdComputationScheme LoadTest_07()
+    {      
+      return Load("test_07.xml");
+    }
 
     private static XsdComputationScheme Load(string xml)
     {

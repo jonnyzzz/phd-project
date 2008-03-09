@@ -1,10 +1,7 @@
-using System.Collections.Generic;
-using System.Reflection;
 using DSIS.Scheme2.Graph;
 using DSIS.Scheme2.Tests.src.Xml;
 using DSIS.Scheme2.Tests.testData;
 using DSIS.Scheme2.XmlModel;
-using DSIS.Spring;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 
@@ -29,6 +26,17 @@ namespace DSIS.Scheme2.Tests.Xml
     public void Test_2_objects_1_arc()
     {
       SchemeGraph build = myFactory.Build(TestSchemeGraphLoader.LoadTest_01());
+      Assert.That(build, NIs.Not.Null);
+
+      build.Start();
+
+      TestGraphRegistry.AssertData("A:Initized", "B:Recieved");
+    }
+
+    [Test]
+    public void Test_2_objects_1_arc2()
+    {
+      SchemeGraph build = myFactory.Build(TestSchemeGraphLoader.LoadTest_07());
       Assert.That(build, NIs.Not.Null);
 
       build.Start();

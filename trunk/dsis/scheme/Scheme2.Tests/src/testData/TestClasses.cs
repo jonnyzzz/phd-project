@@ -3,7 +3,6 @@ using DSIS.Scheme2.Attributed;
 using DSIS.Scheme2.ConnectionPoints;
 using DSIS.Scheme2.ObjectParsers;
 using DSIS.Scheme2.Tests.src.Xml;
-using DSIS.Spring.Util;
 using NUnit.Framework;
 
 namespace DSIS.Scheme2.Tests.testData
@@ -18,7 +17,7 @@ namespace DSIS.Scheme2.Tests.testData
     public void Initialized()
     {
       TestGraphRegistry.Log("A:Initized");
-      OnPointReady("AAA");      
+      OnPointReady("AAA");
     }
   }
 
@@ -37,10 +36,21 @@ namespace DSIS.Scheme2.Tests.testData
   }
 
   [UsedByScheme]
-  public class Test_01_B_B : Test_01_B
-  {    
+  public class Test_01_B_S
+  {
+    [Input("Point")]
+    public void OnPointReady(string value)
+    {
+      Assert.That(value, NIs.EqualTo("AAA"));
+      TestGraphRegistry.Log("B:Recieved");
+    }
   }
-  
+
+  [UsedByScheme]
+  public class Test_01_B_B : Test_01_B
+  {
+  }
+
   [UsedByScheme]
   public class Test_01_C
   {

@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resources\scheme1.xml" />
+    <EmbeddedResource Include="resources\test_07.xml" />
     <EmbeddedResource Include="resources\test_06.xml" />
     <EmbeddedResource Include="resources\test_05.xml" />
     <EmbeddedResource Include="resources\test_04.xml" />
