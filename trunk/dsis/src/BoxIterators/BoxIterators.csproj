@@ -51,10 +51,6 @@
     <Compile Include="testSrc\Generator\ShennonFenoCodecTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\shared\src\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>

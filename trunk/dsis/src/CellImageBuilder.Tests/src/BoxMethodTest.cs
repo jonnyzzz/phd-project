@@ -1,8 +1,9 @@
-using DSIS.IntegerCoordinates.Generated;
+using DSIS.CellImageBuilder.BoxMethod;
+using DSIS.CellImageBuilder.Tests;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.BoxMethod
+namespace DSIS.CellImageBuilder.Tests
 {
   [TestFixture]
   public class BoxMethodIntegerCoordinateTest : BoxMethodBaseTest<IntegerCoordinateSystem, IntegerCoordinate>

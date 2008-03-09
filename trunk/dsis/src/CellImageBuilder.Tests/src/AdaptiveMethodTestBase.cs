@@ -1,27 +1,14 @@
+using DSIS.CellImageBuilder.AdaptiveMethod;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.IntegerCoordinates;
-using DSIS.IntegerCoordinates.Generated;
-using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.AdaptiveMethod
+namespace DSIS.CellImageBuilder.Tests
 {
-  [TestFixture]
-  public class AdaptiveMethodTest : AdaptiveMethodTestBase<IntegerCoordinateSystem, IntegerCoordinate>
-  {
-    
-  }
-
-  [TestFixture]
-  public class AdaptiveMethodTest2d : AdaptiveMethodTestBase<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-  {
-    
-  }
-
   public class AdaptiveMethodTestBase<T, Q> : MethodTestBase<T, Q, AdaptiveMethod<T, Q>, AdaptiveMethodSettings>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private static readonly AdaptiveMethodSettings SETTINGS = new AdaptiveMethodSettings();
 
@@ -34,10 +21,10 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       DoTwoDimTest(ics, ics.Create(5, 5),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = ins[0];
-                     outs[1] = ins[1];
-                   }, SETTINGS,
+                     {
+                       outs[0] = ins[0];
+                       outs[1] = ins[1];
+                     }, SETTINGS,
                    @"-------------------
 ..........
 ..........
@@ -62,10 +49,10 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       DoTwoDimTest(ics, ics.Create(5, 5),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 5;
-                     outs[1] = 5;
-                   }, SETTINGS,
+                     {
+                       outs[0] = 5;
+                       outs[1] = 5;
+                     }, SETTINGS,
                    @"-------------------
 ..........
 ..........
@@ -90,10 +77,10 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       DoTwoDimTest(ics, ics.Create(2, 2),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 2 * ins[0];
-                     outs[1] = 2 * ins[1];
-                   }, SETTINGS,
+                     {
+                       outs[0] = 2 * ins[0];
+                       outs[1] = 2 * ins[1];
+                     }, SETTINGS,
                    @"-------------------
 ..........
 ..........
@@ -118,10 +105,10 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 0.1 * ins[0];
-                     outs[1] = 7 * ins[1];
-                   }, SETTINGS,
+                     {
+                       outs[0] = 0.1 * ins[0];
+                       outs[1] = 7 * ins[1];
+                     }, SETTINGS,
                    @"-------------------
 ......xxxx
 ..........
@@ -146,10 +133,10 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 3 + 0.1 * ins[0];
-                     outs[1] = 7 * ins[1] - 2;
-                   }, SETTINGS,
+                     {
+                       outs[0] = 3 + 0.1 * ins[0];
+                       outs[1] = 7 * ins[1] - 2;
+                     }, SETTINGS,
                    @"-------------------
 ..........
 ..........
@@ -174,10 +161,10 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 3.45 + 0.001 * ins[0];
-                     outs[1] = 0.001 * ins[1] + 2.66;
-                   }, SETTINGS,
+                     {
+                       outs[0] = 3.45 + 0.001 * ins[0];
+                       outs[1] = 0.001 * ins[1] + 2.66;
+                     }, SETTINGS,
                    @"-------------------
 ..........
 ..........

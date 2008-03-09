@@ -11,7 +11,7 @@ namespace DSIS.IntegerCoordinates
   public static class TwoDimCoordinateAssert
   {
     private static string Write<Q>(IIntegerCoordinateSystem<Q> ics, IEnumerable<Q> list)
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       Hashset<Q> hs = new Hashset<Q>();
       hs.AddRange(list);
@@ -39,7 +39,7 @@ namespace DSIS.IntegerCoordinates
     }
 
     public static void Assert<Q>(IIntegerCoordinateSystem<Q> ics, IList<Q> list, string assert)
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       string s = Write(ics, list);
       try

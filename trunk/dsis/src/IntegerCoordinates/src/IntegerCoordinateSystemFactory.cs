@@ -20,7 +20,7 @@ namespace DSIS.IntegerCoordinates
 
     public static T CreateCoordinateSystem<T, Q>(ISystemSpace ss)
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       if (typeof(T) == typeof(IntegerCoordinateSystem)) {
         return (T)(object)new IntegerCoordinateSystem(ss);

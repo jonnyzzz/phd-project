@@ -1,6 +1,7 @@
+using DSIS.CellImageBuilder.BoxAdaptiveMethod;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
+namespace DSIS.CellImageBuilder.Tests
 {
   [TestFixture]
   public class PointTest

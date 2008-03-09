@@ -1,7 +1,9 @@
+using DSIS.CellImageBuilder.BoxAdaptiveMethod;
+using DSIS.CellImageBuilder.Tests;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
+namespace DSIS.CellImageBuilder.Tests
 {
   [TestFixture]
   public class BoxAdaptiveMethodIntegerCoordinateTest : BoxAdaptiveMethodBaseTest<IntegerCoordinateSystem, IntegerCoordinate>

@@ -18,7 +18,7 @@ namespace DSIS.CellImageBuilder.Shared
     where TM : ICellImageBuilder<Q>, new()
     where TP : ICellImageBuilderSettings
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     public static List<Q> DoTest(
       T sys,

@@ -4,9 +4,9 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Core.Mock
 {
-  public class MockCollectingCellConnectionBuilder<T> : ICellConnectionBuilder<T> where T : ICellCoordinate<T>
+  public class MockCollectingCellConnectionBuilder<T> : ICellConnectionBuilder<T> where T : ICellCoordinate
   {
-    private List<T> myResult = new List<T>();
+    private readonly List<T> myResult = new List<T>();
 
     public void ConnectToMany(T cell, IEnumerable<T> v)
     {

@@ -1,28 +1,15 @@
 using DSIS.CellImageBuilder.Shared;
+using DSIS.CellImageBuilders.PointMethod;
 using DSIS.IntegerCoordinates;
-using DSIS.IntegerCoordinates.Generated;
-using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilders.PointMethod.testSrc
+namespace DSIS.CellImageBuilder.Tests
 {
-  [TestFixture]
-  public class PointMethodTest : PointMethodTestBase<IntegerCoordinateSystem, IntegerCoordinate>
-  {
-
-  }
-
-  [TestFixture]
-  public class PointMethod2dTest : PointMethodTestBase<IntegerCoordinateSystem2d, IntegerCoordinate2d>
-  {
-
-  }
-
   public abstract class PointMethodTestBase<T, Q> :
     MethodTestBase<T, Q, PointMethod<T, Q>, PointMethodSettings>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly PointMethodSettings stategy = new PointMethodSettings(new int[] { 2, 2 });
     private readonly PointMethodSettings stategy2 = new PointMethodSettings(new int[] { 2, 2 }, 0.3);
@@ -35,10 +22,10 @@ namespace DSIS.CellImageBuilders.PointMethod.testSrc
 
       DoTwoDimTest(ics, ics.Create(5, 5),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = ins[0];
-                     outs[1] = ins[1] / 7;
-                   }, new PointMethodSettings(new int[] { 2, 2 }),
+                     {
+                       outs[0] = ins[0];
+                       outs[1] = ins[1] / 7;
+                     }, new PointMethodSettings(new int[] { 2, 2 }),
                    @"-------------------
 ..........
 ..........
@@ -63,10 +50,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(5, 5),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = ins[0];
-                     outs[1] = ins[1];
-                   }, stategy,
+                     {
+                       outs[0] = ins[0];
+                       outs[1] = ins[1];
+                     }, stategy,
                    @"-------------------
 ..........
 ..........
@@ -91,10 +78,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(5, 5),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 5;
-                     outs[1] = 5;
-                   }, stategy,
+                     {
+                       outs[0] = 5;
+                       outs[1] = 5;
+                     }, stategy,
                    @"-------------------
 ..........
 ..........
@@ -119,10 +106,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(2, 2),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 2 * ins[0];
-                     outs[1] = 2 * ins[1];
-                   }, stategy,
+                     {
+                       outs[0] = 2 * ins[0];
+                       outs[1] = 2 * ins[1];
+                     }, stategy,
                    @"-------------------
 ..........
 ..........
@@ -147,10 +134,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 0.1 * ins[0];
-                     outs[1] = 7 * ins[1];
-                   }, stategy,
+                     {
+                       outs[0] = 0.1 * ins[0];
+                       outs[1] = 7 * ins[1];
+                     }, stategy,
                    @"-------------------
 .......x..
 ..........
@@ -175,10 +162,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 3 + 0.1 * ins[0];
-                     outs[1] = 7 * ins[1] - 2;
-                   }, stategy,
+                     {
+                       outs[0] = 3 + 0.1 * ins[0];
+                       outs[1] = 7 * ins[1] - 2;
+                     }, stategy,
                    @"-------------------
 ..........
 ..........
@@ -203,10 +190,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 3.45 + 0.001 * ins[0];
-                     outs[1] = 0.001 * ins[1] + 2.66;
-                   }, stategy,
+                     {
+                       outs[0] = 3.45 + 0.001 * ins[0];
+                       outs[1] = 0.001 * ins[1] + 2.66;
+                     }, stategy,
                    @"-------------------
 ..........
 ..........
@@ -229,10 +216,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(5, 5),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = ins[0];
-                     outs[1] = ins[1];
-                   }, stategy2,
+                     {
+                       outs[0] = ins[0];
+                       outs[1] = ins[1];
+                     }, stategy2,
                    @"-------------------
 ..........
 ..........
@@ -257,10 +244,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(5, 5),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 5;
-                     outs[1] = 5;
-                   }, stategy2,
+                     {
+                       outs[0] = 5;
+                       outs[1] = 5;
+                     }, stategy2,
                    @"-------------------
 ..........
 ..........
@@ -285,10 +272,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(2, 2),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 2 * ins[0];
-                     outs[1] = 2 * ins[1];
-                   }, stategy2,
+                     {
+                       outs[0] = 2 * ins[0];
+                       outs[1] = 2 * ins[1];
+                     }, stategy2,
                    @"-------------------
 ..........
 ..........
@@ -313,10 +300,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 0.1 * ins[0];
-                     outs[1] = 7 * ins[1];
-                   }, stategy2,
+                     {
+                       outs[0] = 0.1 * ins[0];
+                       outs[1] = 7 * ins[1];
+                     }, stategy2,
                    @"-------------------
 .......x..
 ..........
@@ -341,10 +328,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 3 + 0.1 * ins[0];
-                     outs[1] = 7 * ins[1] - 2;
-                   }, stategy2,
+                     {
+                       outs[0] = 3 + 0.1 * ins[0];
+                       outs[1] = 7 * ins[1] - 2;
+                     }, stategy2,
                    @"-------------------
 ..........
 ..........
@@ -369,10 +356,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(1, 1),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = 3.45 + 0.001 * ins[0];
-                     outs[1] = 0.001 * ins[1] + 2.66;
-                   }, stategy2,
+                     {
+                       outs[0] = 3.45 + 0.001 * ins[0];
+                       outs[1] = 0.001 * ins[1] + 2.66;
+                     }, stategy2,
                    @"-------------------
 ..........
 ..........
@@ -396,10 +383,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(2, 2),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = ins[0];
-                     outs[1] = ins[1] * 3;
-                   }, new PointMethodSettings(new int[] { 2, 2 }),
+                     {
+                       outs[0] = ins[0];
+                       outs[1] = ins[1] * 3;
+                     }, new PointMethodSettings(new int[] { 2, 2 }),
                    @"-------------------
 ..........
 ..........
@@ -423,10 +410,10 @@ x.........
 
       DoTwoDimTest(ics, ics.Create(2, 2),
                    delegate(double[] ins, double[] outs)
-                   {
-                     outs[0] = ins[0];
-                     outs[1] = ins[1] * 3;
-                   }, new PointMethodSettings(new int[] { 2, 2 }, 0.3),
+                     {
+                       outs[0] = ins[0];
+                       outs[1] = ins[1] * 3;
+                     }, new PointMethodSettings(new int[] { 2, 2 }, 0.3),
                    @"-------------------
 ..........
 ..........

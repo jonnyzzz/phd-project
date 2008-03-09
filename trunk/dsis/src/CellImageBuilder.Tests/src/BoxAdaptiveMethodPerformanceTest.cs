@@ -1,4 +1,5 @@
 using System;
+using DSIS.CellImageBuilder.BoxAdaptiveMethod;
 using DSIS.Core.Builders;
 using DSIS.Core.Mock;
 using DSIS.Function.Mock;
@@ -7,7 +8,7 @@ using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.BoxAdaptiveMethod.Test
+namespace DSIS.CellImageBuilder.Tests
 {
   [TestFixture]
   public class BoxAdaptiveMethodPerformanceTest

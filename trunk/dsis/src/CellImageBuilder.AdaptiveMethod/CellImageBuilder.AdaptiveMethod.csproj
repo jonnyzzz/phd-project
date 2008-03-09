@@ -28,13 +28,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -46,10 +40,6 @@
     <Compile Include="src\PointGraphEdge.cs" />
     <Compile Include="src\PointGraphInitialBuilder.cs" />
     <Compile Include="src\PointGraphNode.cs" />
-    <Compile Include="testSrc\AdaptiveMethodTestBase.cs" />
-    <Compile Include="testSrc\GraphBuilderTest.cs" />
-    <Compile Include="testSrc\PointGraphBaseTest.cs" />
-    <Compile Include="testSrc\PointGraphTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BoxIterators\BoxIterators.csproj">
@@ -60,25 +50,9 @@
       <Project>{C75D0837-A992-41A2-8A46-A1B0F292048C}</Project>
       <Name>CellImageBuilder.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.Mock\Core.Mock.csproj">
-      <Project>{2B4BA54B-9B5E-4D07-B859-FAB1D15203F0}</Project>
-      <Name>Core.Mock</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Function.Mock\Function.Mock.csproj">
-      <Project>{02AFA84E-DA1B-4010-BA76-8E077E4D6175}</Project>
-      <Name>Function.Mock</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Function.Predefined\Function.Predefined.csproj">
-      <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
-      <Name>Function.Predefined</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
-      <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
-      <Name>IntegerCoordinates</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\shared\src\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
@@ -92,27 +66,10 @@
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="testSrc\gold\test_03.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="testSrc\gold\test_04.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="testSrc\gold\test_05.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="testSrc\gold\test_06.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="testSrc\gold\build_05.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="testSrc\gold\build_06.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="testSrc\gold\build_07.txt" />
+    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
+      <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
+      <Name>IntegerCoordinates</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

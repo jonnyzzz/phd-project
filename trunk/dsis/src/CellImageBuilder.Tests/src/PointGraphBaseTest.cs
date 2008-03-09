@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Text;
+using DSIS.CellImageBuilder.AdaptiveMethod;
 using DSIS.Core.Util;
 using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.AdaptiveMethod
+namespace DSIS.CellImageBuilder.Tests
 {
   public class PointGraphBaseTest
   {
-    private void CollectNodes(PointGraphNode node, Hashset<PointGraphNode> nodes)
+    private static void CollectNodes(PointGraphNode node, Hashset<PointGraphNode> nodes)
     {
       nodes.Add(node);
       foreach (PointGraphNode edge in node.Edges)
@@ -24,7 +24,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       }
     }
 
-    private void DumpGraph(TextWriter tw, IEnumerable<PointGraphNode> initialNodes, bool dumpPoints)
+    private static void DumpGraph(TextWriter tw, IEnumerable<PointGraphNode> initialNodes, bool dumpPoints)
     {
       Hashset<PointGraphNode> nodes = new Hashset<PointGraphNode>();
 
@@ -87,7 +87,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
         using (
           TextReader tr =
             new StreamReader(GetType().Assembly.GetManifestResourceStream(
-                               "DSIS.CellImageBuilder.AdaptiveMethod.testSrc.gold." + gold + ".txt")))
+                               "DSIS.CellImageBuilder.Tests.resources.gold." + gold + ".txt")))
           expected = tr.ReadToEnd();
 
 
@@ -106,7 +106,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       AssertDumpInternal(DumpGraphConnections(nodes, false), gold);
     }
 
-    private string DumpGraphConnections(IEnumerable<PointGraphNode> nodes, bool withPoints)
+    private static string DumpGraphConnections(IEnumerable<PointGraphNode> nodes, bool withPoints)
     {
       string actual;
       using (StringWriter tw = new StringWriter())

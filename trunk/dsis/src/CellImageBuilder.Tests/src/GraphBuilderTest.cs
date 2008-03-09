@@ -1,10 +1,11 @@
 using System;
+using DSIS.CellImageBuilder.AdaptiveMethod;
 using DSIS.Core.System;
 using DSIS.Function.Mock;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.AdaptiveMethod
+namespace DSIS.CellImageBuilder.Tests
 {
   [TestFixture]
   public class GraphBuilderTest : PointGraphBaseTest

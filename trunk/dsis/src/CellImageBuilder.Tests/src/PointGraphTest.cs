@@ -1,8 +1,9 @@
+using DSIS.CellImageBuilder.AdaptiveMethod;
 using DSIS.Core.System;
 using DSIS.Function.Mock;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.AdaptiveMethod
+namespace DSIS.CellImageBuilder.Tests
 {
   [TestFixture]
   public class PointGraphTest : PointGraphBaseTest
