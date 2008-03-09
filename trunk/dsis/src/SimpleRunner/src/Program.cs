@@ -114,8 +114,11 @@ namespace DSIS.SimpleRunner
 
       SimpleParallel parallel = new SimpleParallel();
 
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, entropys).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systemIked, entropys).Do);
+      for (int i = -2; i <= 0; i++)
+      {
+//        parallel.DoParallel(new ComputeDelegate(wfBase, 12 + i, systemHenon, entropys).Do);
+        parallel.DoParallel(new ComputeDelegate(wfBase, 8 + i, systemIked, entropys).Do);
+      }
       /*for (int steps = 8; steps <= 15; steps++)
       {
         foreach (IAction action in system)
@@ -228,7 +231,7 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(logger, draw);
 
       Dictionary<IAction, string> entropies = new Dictionary<IAction, string>();
-      foreach (StrangeEntropyEvaluatorParams evaluatorParams in entropyMethod)
+      /*foreach (StrangeEntropyEvaluatorParams evaluatorParams in entropyMethod)
       {
         entropies.Add(new AgregateAction(delegate(IActionGraphPartBuilder bld)
                                            {
@@ -245,9 +248,9 @@ namespace DSIS.SimpleRunner
                                              bld.AddEdge(new SetStrangeEntropyParamsAction(evaluatorParams), entropy);
                                            }), evaluatorParams.PresentableName);       
       }
-
-      entropies.Add(new PathEntropyAction(), "Path");
-      entropies.Add(new JVRMeasureAction(), "JVR");
+*/
+      entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
+//      entropies.Add(DrawEntropyAction(steps, new JVRMeasureAction()), "JVR");
 
       foreach (KeyValuePair<IAction, string> pair in entropies)
       {
@@ -274,7 +277,7 @@ namespace DSIS.SimpleRunner
 
             IAction drawEntropy =
               new ParallelAction(
-                new DumpEntropyParamsAction(),
+//                new DumpEntropyParamsAction(),
                 new DumpEntropyValueAction(),
                 new DrawEntropyMeasure3dAction(),
                 new DrawEntropyMeasure3dWithBaseAction(),
