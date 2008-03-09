@@ -1,4 +1,4 @@
-using DSIS.CellImageBuilders.PointMethod;
+using DSIS.CellImageBuilder.PointMethod;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Linear;
 using NUnit.Framework;

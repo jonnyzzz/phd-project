@@ -7,5 +7,6 @@ namespace DSIS.Core.Builders
   /// </summary>
   public interface ICellImageBuilderSettings
   {
+    string PresentableName { get;}
   }
 }

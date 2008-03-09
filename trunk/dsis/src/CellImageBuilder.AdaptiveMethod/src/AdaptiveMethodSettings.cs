@@ -23,6 +23,11 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       OveplapFactor = overlapFactor;
     }
 
+    public string PresentableName
+    {
+      get { return "Adaptive Method"; }
+    }
+
     public ICellImageBuilder<TCell> Create<TSys, TCell>() 
       where TSys : IIntegerCoordinateSystem<TCell> 
       where TCell : IIntegerCoordinate

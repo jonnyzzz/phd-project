@@ -6,6 +6,6 @@
          default-dependency-check="all"
          default-lazy-init="false">
 
-  <object id="PointMethodSettingsFactory" name="DSIS.CellImageBuilders.PointMethod.PointMethodSettingsFactory"/>
+  <object id="PointMethodSettingsFactory" type="DSIS.CellImageBuilder.PointMethod.PointMethodSettingsFactory"/>
 
 </objects>

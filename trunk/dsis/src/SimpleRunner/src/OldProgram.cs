@@ -4,7 +4,7 @@ using System.IO;
 using DSIS.CellImageBuilder.AdaptiveMethod;
 using DSIS.CellImageBuilder.BoxAdaptiveMethod;
 using DSIS.CellImageBuilder.BoxMethod;
-using DSIS.CellImageBuilders.PointMethod;
+using DSIS.CellImageBuilder.PointMethod;
 using DSIS.Core.Builders;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;

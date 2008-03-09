@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
+using DSIS.Core.Builders;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Scheme2;
@@ -88,6 +89,29 @@ namespace DSIS.Scheme.Objects.Tests
 
       TestGraphRegistry.AssertData("Data set: 5, -5, ");      
     }
+
+    
+    [Test]
+    public void Test_PointMethodSettings_01()
+    {
+      SchemeGraph build = myFactory.Build(Load("DSIS.Scheme.Objects.Tests.resources.PointMethod_01.xml"));
+      Assert.That(build, NIs.Not.Null);
+
+      build.Start();
+
+      TestGraphRegistry.AssertData("Data set: Point Method");
+    }
+
+    [Test]
+    public void Test_BoxMethod_01()
+    {
+      SchemeGraph build = myFactory.Build(Load("DSIS.Scheme.Objects.Tests.resources.BoxMethod_01.xml"));
+      Assert.That(build, NIs.Not.Null);
+
+      build.Start();
+
+      TestGraphRegistry.AssertData("Data set: Box Method");
+    }
   }
 
   [UsedByScheme]
@@ -118,6 +142,19 @@ namespace DSIS.Scheme.Objects.Tests
       set { 
         mySystemInfo = value;        
         TestGraphRegistry.Log("Data set: " + mySystemInfo.PresentableName);        
+      }
+    }
+  }
+
+
+  [UsedByScheme]
+  public class CellImageBuilderSettingsAction
+  {
+    [Input("Settings")]
+    public ICellImageBuilderSettings SystemInfo
+    {
+      set { 
+        TestGraphRegistry.Log("Data set: " + value.PresentableName);        
       }
     }
   }

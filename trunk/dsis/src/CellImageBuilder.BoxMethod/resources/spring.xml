@@ -6,5 +6,5 @@
          default-dependency-check="all"
          default-lazy-init="false">
 
-  <object id="BoxMethodFactory" name="DSIS.CellImageBuilder.BoxMethod.BoxMethodFactory"/>
+  <object id="BoxMethodSettingsFactory" type="DSIS.CellImageBuilder.BoxMethod.BoxMethodSettingsFactory"/>
 </objects>

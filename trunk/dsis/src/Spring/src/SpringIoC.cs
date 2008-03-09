@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using DSIS.LibraryVersionFixer;
 using DSIS.Spring;
 using DSIS.Utils;
 using log4net;
 using Spring.Context;
 using Spring.Context.Support;
-
-[assembly : SpringConfigXml("resources.spring.xml", Type = typeof (SpringIoC))]
 
 namespace DSIS.Spring
 {
@@ -22,10 +21,15 @@ namespace DSIS.Spring
       get { return ourInstance; }
     }
 
+    private readonly IApplicationContext myRootContext;
     private readonly IApplicationContext myContext;
 
     protected internal SpringIoC(params Assembly[] extra)
     {
+      string rootResource = "assembly://" + GetType().Assembly.GetName().Name + "/" +
+                            typeof (NamespaceHolder).Namespace + "/resources.spring.xml";
+      myRootContext = new XmlApplicationContext(rootResource);
+
       Hashset<Assembly> assemblies = new Hashset<Assembly>();
       List<Assembly> load = new List<Assembly>();
       load.AddRange(extra);
@@ -35,6 +39,8 @@ namespace DSIS.Spring
       load.AddRange(AppDomain.CurrentDomain.GetAssemblies());
       
       ClosureAssemblies(load, assemblies);
+
+      assemblies.Remove(GetType().Assembly);
 
       if (LOG.IsDebugEnabled)
       {
@@ -56,7 +62,7 @@ namespace DSIS.Spring
         }
       }
 
-      myContext = new XmlApplicationContext(paths.ToArray());
+      myContext = new XmlApplicationContext(myRootContext, paths.ToArray());
     }
 
     private static void ClosureAssemblies(IEnumerable<Assembly> extra, Hashset<Assembly> assemblies)
@@ -74,6 +80,7 @@ namespace DSIS.Spring
 
         if (visited.Contains(assembly))
           continue;
+
         visited.Add(assembly);
         
         List<AssemblyName> refAssemblies = new List<AssemblyName>(assembly.GetReferencedAssemblies());
@@ -97,7 +104,7 @@ namespace DSIS.Spring
           }
           catch (Exception e)
           {
-            LOG.Debug(e.Message, e);
+             LOG.Error(e.Message, e);
           }
         }
         assemblies.Add(assembly);
@@ -116,7 +123,7 @@ namespace DSIS.Spring
 
     protected internal static void Dispose()
     {
-      ourInstance.myContext.Dispose();
+      ourInstance.myRootContext.Dispose();
       ourInstance = null;
     }
   }

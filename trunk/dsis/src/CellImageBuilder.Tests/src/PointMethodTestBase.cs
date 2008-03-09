@@ -1,5 +1,5 @@
+using DSIS.CellImageBuilder.PointMethod;
 using DSIS.CellImageBuilder.Shared;
-using DSIS.CellImageBuilders.PointMethod;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;

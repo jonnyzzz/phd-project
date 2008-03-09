@@ -58,6 +58,11 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       get { return myCellSizePercent; }
     }
 
+    public string PresentableName
+    {
+      get { return "Box Addaptive Method"; }
+    }
+
     public ICellImageBuilder<TCell> Create<TSys, TCell>() where TSys : IIntegerCoordinateSystem<TCell>
       where TCell : IIntegerCoordinate
     {

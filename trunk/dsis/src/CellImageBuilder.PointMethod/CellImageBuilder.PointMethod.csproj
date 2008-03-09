@@ -7,8 +7,8 @@
     <ProjectGuid>{E240B619-3EF8-46C0-BE73-1A9D22D50446}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.CellImageBuilders.PointMethod</RootNamespace>
-    <AssemblyName>DSIS.CellImageBuilders.PointMethod</AssemblyName>
+    <RootNamespace>DSIS.CellImageBuilder.PointMethod</RootNamespace>
+    <AssemblyName>DSIS.CellImageBuilder.PointMethod</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

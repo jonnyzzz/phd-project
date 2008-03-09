@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.BoxMethod;
-using DSIS.CellImageBuilders.PointMethod;
+using DSIS.CellImageBuilder.PointMethod;
 using DSIS.Core.Builders;
 using DSIS.Core.Processor;
 using DSIS.Core.System;

@@ -5,7 +5,7 @@ using DSIS.Core.Builders;
 using DSIS.Core.System;
 using DSIS.IntegerCoordinates;
 
-namespace DSIS.CellImageBuilders.PointMethod
+namespace DSIS.CellImageBuilder.PointMethod
 {
   public class PointMethod<T, Q> : IntegerCoordinateMethodBase<T, Q>, ICellImageBuilder<Q>
     where T : IIntegerCoordinateSystem<Q>

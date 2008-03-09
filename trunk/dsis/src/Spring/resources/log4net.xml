@@ -31,12 +31,13 @@
   <!-- Setup the root category, add the appenders and set the default priority -->
 
   <category name="Spring" additivity="false">
-    <level value="INFO"/>
+    <level value="DEBUG"/>
     <appender-ref ref="SpringConsoleAppender" />
+    <appender-ref ref="RollingFileAppender" />
   </category>
   
   <category name="DSIS.Spring.SpringIoC">
-    <level value="INFO"/>    
+    <level value="INFO"/>       
   </category>
   
   <root>

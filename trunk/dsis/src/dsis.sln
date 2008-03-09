@@ -97,6 +97,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.Tests", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegerCoordinates.Tests", "IntegerCoordinates.Tests\IntegerCoordinates.Tests.csproj", "{FE0FA82B-A965-4AA8-958B-150ED7200F12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryVersionFixer", "LibraryVersionFixer\LibraryVersionFixer.csproj", "{140A6F8B-2877-4CC6-B9D8-B3B25FFDB885}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -271,6 +273,10 @@ Global
 		{FE0FA82B-A965-4AA8-958B-150ED7200F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE0FA82B-A965-4AA8-958B-150ED7200F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE0FA82B-A965-4AA8-958B-150ED7200F12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{140A6F8B-2877-4CC6-B9D8-B3B25FFDB885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{140A6F8B-2877-4CC6-B9D8-B3B25FFDB885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{140A6F8B-2877-4CC6-B9D8-B3B25FFDB885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{140A6F8B-2877-4CC6-B9D8-B3B25FFDB885}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

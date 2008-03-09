@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
@@ -11,9 +12,14 @@ namespace DSIS.Scheme.Objects.Systemx
   {
     private readonly XmlSchema mySchema;
 
-    protected SchemaBasedParser(ObjectParserFactory factory, string schema) : base(factory)
+    [Obsolete]
+    internal protected SchemaBasedParser(ObjectParserFactory factory, string schema) : this(factory, typeof(NamespaceHolder), schema)
+    {      
+    }
+
+    protected SchemaBasedParser(ObjectParserFactory factory, Type @namespace, string schema) : base(factory)
     {
-      mySchema = LoadSchema(schema);
+      mySchema = LoadSchema(@namespace.Namespace + "." + schema);
     }
 
     object IObjectParser.Parse(XmlElement element)
@@ -40,9 +46,9 @@ namespace DSIS.Scheme.Objects.Systemx
       }                  
     }
 
-    private static XmlSchema LoadSchema(string name)
+    private XmlSchema LoadSchema(string name)
     {
-      using (Stream str = typeof(NamespaceHolder).Assembly.GetManifestResourceStream(typeof(NamespaceHolder), name))
+      using (Stream str = GetType().Assembly.GetManifestResourceStream(name))
         return XmlSchema.Read(str, null);
     }
 
