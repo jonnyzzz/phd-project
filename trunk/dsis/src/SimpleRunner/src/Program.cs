@@ -18,6 +18,7 @@ using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.Scheme.Impl.Actions.Line;
 using DSIS.SimpleRunner.parallel;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
@@ -109,16 +110,19 @@ namespace DSIS.SimpleRunner
         EntropyLoopWeights.CONST);
 
       StrangeEntropyEvaluatorParams[] entropys = {entropyFirst, /*entropySmartL, */entropySmart};
-      IAction[] system = {systemHenon, systemHenonD, systemHenonD_272, systemIked, systemIkedaCut};
+      IAction[] system = {systemHenon, /*systemHenonD, systemHenonD_272, */systemIked, /*systemIkedaCut*/};
 
       SimpleParallel parallel = new SimpleParallel();
-      for (int steps = 5; steps <= 15; steps++)
+
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, entropys).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systemIked, entropys).Do);
+      /*for (int steps = 8; steps <= 15; steps++)
       {
         foreach (IAction action in system)
         {
           parallel.DoParallel(new ComputeDelegate(wfBase, steps, action, entropys).Do);          
         }        
-      }
+      }*/
       parallel.WaitForEnd();
     }
 
@@ -223,21 +227,37 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(wf, draw);
       gr.AddEdge(logger, draw);
 
+      Dictionary<IAction, string> entropies = new Dictionary<IAction, string>();
       foreach (StrangeEntropyEvaluatorParams evaluatorParams in entropyMethod)
       {
-        IAction customWf = new CustomPrefixWorkingFolderAction(evaluatorParams.PresentableName);
+        entropies.Add(new AgregateAction(delegate(IActionGraphPartBuilder bld)
+                                           {
+                                             IAction entropy = new ParallelAction(
+                                               //          new ForeachStrongComponentAction(
+                                                DrawEntropyAction(steps, new StrangeEntropyAction()));
+                                             //          DrawEntropyAction(new PathEntropyAction());
+                                             
+                                             ProxyAction pa = new ProxyAction();
 
-        IAction entropyParams = new SetStrangeEntropyParamsAction(evaluatorParams);
-        IAction entropy = new ParallelAction(
-          //          new ForeachStrongComponentAction(
-          DrawEntropyAction(steps, new StrangeEntropyAction()));
-//          DrawEntropyAction(new PathEntropyAction());
+                                             bld.AddEdge(bld.Start, pa);
+                                             bld.AddEdge(pa, entropy);
+                                             bld.AddEdge(entropy, bld.End);
+                                             bld.AddEdge(new SetStrangeEntropyParamsAction(evaluatorParams), entropy);
+                                           }), evaluatorParams.PresentableName);       
+      }
+
+      entropies.Add(new PathEntropyAction(), "Path");
+      entropies.Add(new JVRMeasureAction(), "JVR");
+
+      foreach (KeyValuePair<IAction, string> pair in entropies)
+      {
+        IAction entropy = pair.Key;            
+        IAction customWf = new CustomPrefixWorkingFolderAction(pair.Value);
 
         gr.AddEdge(step, entropy);
         gr.AddEdge(wf, customWf);
         gr.AddEdge(customWf, entropy);
-        gr.AddEdge(logger, entropy);
-        gr.AddEdge(entropyParams, entropy);        
+        gr.AddEdge(logger, entropy);        
       }
 
       gr.Execute();
@@ -248,9 +268,6 @@ namespace DSIS.SimpleRunner
       return new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
           {
-//            IAction a7 = new StrangeEntropyAction();
-//            IAction a7 = new JVRMeasureAction();
-
             bld.AddEdge(bld.Start, new DumpGraphInfoAction());
             bld.AddEdge(bld.Start, new DumpGraphComponentsInfoAction());
             bld.AddEdge(bld.Start, entropy);

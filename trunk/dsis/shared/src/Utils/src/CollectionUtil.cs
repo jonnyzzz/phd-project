@@ -89,6 +89,16 @@ namespace DSIS.Utils
       return count;
     }
 
+    public static T[] Fill<T>(int count, T data)
+    {
+      T[] t = new T[count];
+      for (int i = 0; i < t.Length; i++)
+      {
+        t[i] = data;
+      }
+      return t;
+    }
+
     public static List<T> AsList<T>(params T[] ts)
     {
       return new List<T>(ts);

@@ -4,9 +4,9 @@ using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Tests;
 
-namespace DSIS.Graph
+namespace DSIS.Graph.Tests
 {
-  public class MockGraph<T> : IGraph<T> where T : ICellCoordinate<T>
+  public class MockGraph<T> : IGraph<T> where T : ICellCoordinate
   {
     private readonly ICellCoordinateSystem<T> myCoordinates;
 
@@ -25,6 +25,11 @@ namespace DSIS.Graph
     }
 
     public bool Contains(T coordinate)
+    {
+      throw new NotImplementedException();
+    }
+
+    public IGraph<T> Project(ICellCoordinateSystemProjector<T> projector)
     {
       throw new NotImplementedException();
     }

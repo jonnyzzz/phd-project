@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
 using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Path;

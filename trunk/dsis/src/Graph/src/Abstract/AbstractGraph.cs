@@ -54,6 +54,38 @@ namespace DSIS.Graph.Abstract
       return myNodes.Contains(coordinate);
     }
 
+    protected abstract TInh CreateGraph(ICellCoordinateSystem<TCell> system);
+    
+    public IGraph<TCell> Project(ICellCoordinateSystemProjector<TCell> projector)
+    {
+      TInh graph = CreateGraph(projector.ToSystem);
+
+      foreach (INode<TCell> node in Nodes)
+      {
+        TCell proj = projector.Project(node.Coordinate);
+        if (!Equals(proj, null))
+        {
+          INode<TCell> gNode = graph.AddNode(proj);
+          if (gNode != null)
+          {
+            foreach (INode<TCell> edge in GetEdges(node))
+            {
+              TCell eProj = projector.Project(edge.Coordinate);
+              if (!Equals(eProj, null))
+              {
+                INode<TCell> gToNode = graph.AddNode(eProj);
+                if (gToNode != null)
+                {
+                  graph.AddEdgeToNode(gNode, gToNode);
+                }
+              }
+            }
+          }
+        }
+      }
+      return graph;
+    }
+
     public ICellCoordinateSystem<TCell> CoordinateSystem
     {
       get { return myCoordinateSystem; }

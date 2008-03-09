@@ -12,7 +12,7 @@ namespace DSIS.Graph.Abstract
     IGraphStrongComponents<TCell>,
     IGraphWithStrongComponent<TCell>,
     IGraphExtension<StrongComponentNode<TCell>, TCell>
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
   {
     private readonly IStrongComponentInfoManager myComponents;
 
@@ -85,6 +85,11 @@ namespace DSIS.Graph.Abstract
     public IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
     {
       return this;
+    }
+
+    protected override StrongComponentGraph<TCell> CreateGraph(ICellCoordinateSystem<TCell> system)
+    {
+      throw new NotImplementedException();
     }
 
     public override void Dump(TextWriter tw)

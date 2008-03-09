@@ -162,5 +162,10 @@ namespace DSIS.Graph.Abstract
     void IGraphExtension<TarjanNode<TCell>, TCell>.NodeAdded(TarjanNode<TCell> node)
     {
     }
+
+    protected override TarjanGraph<TCell> CreateGraph(ICellCoordinateSystem<TCell> system)
+    {
+      return new TarjanGraph<TCell>(system);
+    }
   }
 }

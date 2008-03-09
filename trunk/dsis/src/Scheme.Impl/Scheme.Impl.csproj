@@ -70,6 +70,7 @@
     <Compile Include="src\Actions\Files\DrawLineAction.cs" />
     <Compile Include="src\Actions\Files\DumpEntropyLogAction.cs" />
     <Compile Include="src\Actions\Files\FileKeys.cs" />
+    <Compile Include="src\Actions\Files\GraphEntropyLogAction.cs" />
     <Compile Include="src\Actions\Files\Logger.cs" />
     <Compile Include="src\Actions\Files\LoggerAction.cs" />
     <Compile Include="src\Actions\Files\PrefixWorkingFolderAction.cs" />

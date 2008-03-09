@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;
@@ -37,35 +36,6 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       string text = string.Format("{0} edges={1} [{2}] {3}", value.ToString(CultureInfo.InvariantCulture), CollectionUtil.Count(measure.GetMeasureNodes()), myPrefix, Environment.NewLine);
       File.AppendAllText(file, text);      
-    }
-  }
-  
-  public class GraphEntropyLogAction : IntegerCoordinateSystemActionBase2
-  {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
-    {
-      return ColBase(base.Check<T, Q>(system, ctx), Create(FileKeys.WorkingFolderKey), Create(Keys.GraphComponents<Q>()));
-    }
-
-    protected override void Apply<T, Q>(T system, Context input, Context output)
-    {
-      string dir = FileKeys.WorkingFolderKey.Get(input).Path;
-      string file = Path.Combine(dir, "graph-entropy.log");
-
-      //todo:!Not optimal!
-      IGraphStrongComponents<Q> components = Keys.GraphComponents<Q>().Get(input);
-      IGraph<Q> graph = components.AsGraph(components.Components);
-      
-      int nodes = graph.NodesCount;
-      int edges = graph.EdgesCount;
-
-      double factor = (double)(edges/(double)nodes);
-      double value = Math.Log(factor);
-      double value2 = Math.Log(factor, 2);
-
-      string text = string.Format("{0}  nodes={1} edges={2} lb={3} {4}", value.ToString(CultureInfo.InvariantCulture), nodes, edges, value2, Environment.NewLine);
-
-      File.AppendAllText(file, text);
     }
   }
 }

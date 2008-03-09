@@ -22,7 +22,6 @@ namespace DSIS.Graph
     ICellCoordinateSystem<TCoordinate> CoordinateSystem { get; }
     IEnumerable<INode<TCoordinate>> Nodes { get; }
 
-
     IEnumerable<INode<TCoordinate>> GetEdges(INode<TCoordinate> forNode);
 
     /// <summary>
@@ -41,6 +40,8 @@ namespace DSIS.Graph
     INode<TCoordinate> AddNode(TCoordinate coordinate);
 
     bool Contains(TCoordinate coordinate);
+
+    IGraph<TCoordinate> Project(ICellCoordinateSystemProjector<TCoordinate> projector);
 
     void Dump(TextWriter tw);
     string Dump();
