@@ -52,6 +52,7 @@
     <Compile Include="src\Linear\Linear.cs" />
     <Compile Include="src\Linear\Linear1DSystemInfo.cs" />
     <Compile Include="src\Logistics\Logistic.cs" />
+    <Compile Include="src\Logistics\LogisticFunction2d.cs" />
     <Compile Include="src\Lorentz\LorentzFunction.cs" />
     <Compile Include="src\Lorentz\LorentzSystemInfo.cs" />
     <Compile Include="src\NoParameterSystemInfoFactoryBase.cs" />

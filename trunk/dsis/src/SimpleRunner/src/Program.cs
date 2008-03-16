@@ -6,6 +6,7 @@ using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
+using DSIS.Function.Predefined.Logistics;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Scheme;
@@ -26,8 +27,8 @@ namespace DSIS.SimpleRunner
   {
     public static void Mai0n(string[] args)
     {
-      DefaultSystemSpace sp =
-        new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
+      DefaultSystemSpace sp = new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
+      DefaultSystemSpace log_sp = new DefaultSystemSpace(2, new double[] { 0, 0 }, new double[] { 1, 4 }, new long[] { 3, 3 });      
       IAction henon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
       IAction ikeda = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), sp);
 //      IAction init = new LineInitialAction(0.001, new double[] {-2.6, -2.1}, new double[] {0.5, 0});
@@ -83,12 +84,19 @@ namespace DSIS.SimpleRunner
       DefaultSystemSpace sp =
         new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
       DefaultSystemSpace spD =
-        new DefaultSystemSpace(2, new double[] { -2, -2 }, new double[] { 2, 2 }, new long[] { 2, 2 });      
+        new DefaultSystemSpace(2, new double[] { -2, -2 }, new double[] { 2, 2 }, new long[] { 2, 2 });
+
+      DefaultSystemSpace log_sp = new DefaultSystemSpace(2, new double[] { 0, 0 }, new double[] { 1, 4 }, new long[] { 3, 3 });      
+      DefaultSystemSpace log_sp2 = new DefaultSystemSpace(2, new double[] { 0, 3 }, new double[] { 1, 3.7 }, new long[] { 3, 3 });      
+
+
       IAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
       IAction systemHenonD = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(1.2, 0.2), spD);
       IAction systemHenonD_272 = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(1.272, 0.2), spD);
       IAction systemIked = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), sp);
       IAction systemIkedaCut = new SystemInfoAction(new RenameSystem(new IkedaFunctionSystemInfoDecorator(), "Ikeda Cut"), spIkedaCutted);
+      IAction systenLogistic2 = new SystemInfoAction(new Logistic2dSystemInfo(), log_sp);
+      IAction systenLogistic2_x = new SystemInfoAction(new Logistic2dSystemInfo(), log_sp2);
 
       IAction wfBase = new WorkingFolderAction();
 
@@ -114,10 +122,10 @@ namespace DSIS.SimpleRunner
 
       SimpleParallel parallel = new SimpleParallel();
 
-      for (int i = -2; i <= 0; i++)
+      for (int i = 2; i <= 10; i++)
       {
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 12 + i, systemHenon, entropys).Do);
-        parallel.DoParallel(new ComputeDelegate(wfBase, 8 + i, systemIked, entropys).Do);
+        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x, entropys).Do);
       }
       /*for (int steps = 8; steps <= 15; steps++)
       {
@@ -249,7 +257,7 @@ namespace DSIS.SimpleRunner
                                            }), evaluatorParams.PresentableName);       
       }
 */
-      entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
+//      entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
 //      entropies.Add(DrawEntropyAction(steps, new JVRMeasureAction()), "JVR");
 
       foreach (KeyValuePair<IAction, string> pair in entropies)
