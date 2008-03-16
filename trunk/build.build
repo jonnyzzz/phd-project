@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<project name="dontknow" default="all" basedir=".">
+  <property name="base" value="${project::get-base-directory()}" />
+
+  <property name="results" value="${base}\results" />
+  <property name="results.lite" value="${base}\results.lite" />
+
+  <property name="mask" value="" if="${not property::exists('mask')}" />
+
+  <target name="lite">    
+     <mkdir dir="${results.lite}" failonerror="false" />
+
+     <copy todir="${results.lite}">
+       <fileset basedir="${results}">
+         <include name="**/*.png" />
+         <include name="**/*.log" />
+         <include name="**/*.txt" />
+       </fileset>
+     </copy>
+  </target>
+
+</project>
