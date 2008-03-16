@@ -13,9 +13,9 @@
 
      <copy todir="${results.lite}">
        <fileset basedir="${results}">
-         <include name="**/*.png" />
-         <include name="**/*.log" />
-         <include name="**/*.txt" />
+         <include name="${mask}**/*.png" />
+         <include name="${mask}**/*.log" />
+         <include name="${mask}**/*.txt" />
        </fileset>
      </copy>
   </target>
