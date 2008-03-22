@@ -103,11 +103,10 @@ namespace DSIS.SimpleRunner
 
       SimpleParallel parallel = new SimpleParallel();
 
-//      for (int i = 2; i <= 10; i++)
-      {
-        parallel.DoParallel(new ComputeDelegate(wfBase, 3, systemHenon).Do);
+//        parallel.DoParallel(
+        new ComputeDelegate(wfBase, 30, systemHenon).Do();
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
-      }
+//      }
       /*for (int steps = 8; steps <= 15; steps++)
       {
         foreach (IAction action in system)

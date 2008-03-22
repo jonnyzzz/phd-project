@@ -19,9 +19,15 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       long[] divv = Fill(2L, measure.CoordinateSystem.Dimension);
       ICellCoordinateSystemProjector<Q> project = measure.CoordinateSystem.Project(divv);
 
-      IGraphMeasure<Q> proj = measure.Project(project);
-      Keys.GraphMeasure<Q>().Set(output, proj);
-      Keys.IntegerCoordinateSystemInfo.Set(output, (IIntegerCoordinateSystemInfo) proj.CoordinateSystem);
+      if (project != null)
+      {
+        IGraphMeasure<Q> proj = measure.Project(project);
+        Keys.GraphMeasure<Q>().Set(output, proj);
+        Keys.IntegerCoordinateSystemInfo.Set(output, (IIntegerCoordinateSystemInfo) proj.CoordinateSystem);
+      } else
+      {
+        output.AddAll(input);
+      }
     }
 
     private static T[] Fill<T>(T value, int dim)
