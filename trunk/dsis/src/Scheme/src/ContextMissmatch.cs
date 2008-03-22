@@ -16,15 +16,18 @@ namespace DSIS.Scheme
 
   public abstract class ContextMissmatchCheck : ContextMissmatch
   {
-    protected ContextMissmatchCheck(IKey key, string message) : base(key, message)
+    private readonly IAction myAction;
+
+    protected ContextMissmatchCheck(IKey key, string message, IAction action) : base(key, message)
     {
+      myAction = action;
     }
 
     public abstract bool Check(Context ctx);
 
-    public static ContextMissmatchCheck Create<Y>(Key<Y> data, string msg)
+    public IAction Action
     {
-      return new ContextMissmatchCheckImpl<Y>(data, msg);
+      get { return myAction; }
     }
   }
 
@@ -32,7 +35,7 @@ namespace DSIS.Scheme
   {
     public readonly Key<Y> TKey;
 
-    public ContextMissmatchCheckImpl(Key<Y> key, string message) : base(key, message)
+    public ContextMissmatchCheckImpl(IAction action, Key<Y> key, string message) : base(key, message, action)
     {
       TKey = key;
     }

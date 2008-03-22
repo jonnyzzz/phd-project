@@ -5,18 +5,6 @@ using DSIS.Scheme.Exec;
 
 namespace DSIS.Scheme.Actions
 {
-  public struct LoopIndex
-  {
-    public readonly int Index;
-    public readonly int Count;
-
-    public LoopIndex(int index, int count)
-    {
-      Index = index;
-      Count = count;
-    }
-  }
-
   public class LoopAction : DebugableAction, IAction
   {
     public static readonly Key<LoopIndex> LoopIndexKey = new Key<LoopIndex>("loop");
@@ -34,19 +22,22 @@ namespace DSIS.Scheme.Actions
 
     public ICollection<ContextMissmatch> Compatible(Context ctx)
     {
-      return myAction.Compatible(ctx);
+      Context cz = new Context();
+      cz.AddAll(ctx);
+      LoopIndexKey.Set(cz, new LoopIndex(0,0));
+      return myAction.Compatible(cz);
     }
 
     public Context Apply(Context ctx)
     {
       for(int i = 0; i<myCount; i++)
       {
+        ctx.Set(LoopIndexKey, new LoopIndex(i, myCount));
         ICollection<ContextMissmatch> check = myAction.Compatible(ctx);
         if (check.Count != 0)
         {
           throw new ContextMissmatchException(check, this);
-        }
-        ctx.Set(LoopIndexKey, new LoopIndex(i, myCount));
+        }       
         Context newCtx = myAction.Apply(ctx);
         newCtx.AddAllNew(ctx);        
         ctx = newCtx;

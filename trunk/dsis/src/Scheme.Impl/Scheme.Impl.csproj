@@ -73,6 +73,7 @@
     <Compile Include="src\Actions\Files\GraphEntropyLogAction.cs" />
     <Compile Include="src\Actions\Files\Logger.cs" />
     <Compile Include="src\Actions\Files\LoggerAction.cs" />
+    <Compile Include="src\Actions\Files\LoopStepWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\PrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\SystemWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\WorkingFolderAction.cs" />

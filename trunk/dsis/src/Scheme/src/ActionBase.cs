@@ -32,9 +32,9 @@ namespace DSIS.Scheme
       return list;
     }
 
-    protected static ContextMissmatchCheck Create<Y>(Key<Y> key)
+    protected ContextMissmatchCheck Create<Y>(Key<Y> key)
     {
-      return new ContextMissmatchCheckImpl<Y>(key, typeof(Y).Name + "@" + key.Name);
+      return new ContextMissmatchCheckImpl<Y>(this, key, typeof(Y).Name + "@" + key.Name);
     }
 
     protected static ICollection<T> Col<T>(params T[] data)
