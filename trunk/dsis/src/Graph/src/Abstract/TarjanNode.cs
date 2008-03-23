@@ -5,7 +5,7 @@ namespace DSIS.Graph.Abstract
   public class TarjanNode<TCell> : Node<TarjanNode<TCell>, TCell>
     where TCell : ICellCoordinate
   {
-    internal TarjanNodeData<TCell> Data;
+    internal readonly TarjanNodeData<TCell> Data;
     private uint myFlags = 0;
 
     public TarjanNode(TCell coordinate) : base(coordinate)

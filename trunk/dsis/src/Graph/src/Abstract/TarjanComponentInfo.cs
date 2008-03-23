@@ -5,7 +5,7 @@ namespace DSIS.Graph.Abstract
   public class TarjanComponentInfo : IStrongComponentInfo
   {
     private int myNodesCount = 0;
-    private uint myComponentId;
+    private readonly uint myComponentId;
 
     public TarjanComponentInfo(int nodesCount, uint componentId)
     {
