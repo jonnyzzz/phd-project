@@ -30,7 +30,7 @@ namespace DSIS.Graph.Abstract
     internal void SetNodeComponent<TCell>(TarjanNode<TCell> node) 
       where TCell : ICellCoordinate
     {
-      node.ComponentId = myComponentId;
+      node.SetComponentId(myComponentId);
 
       myNodesCount++;
     }

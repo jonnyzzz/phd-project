@@ -5,12 +5,25 @@ namespace DSIS.Graph.Abstract
   public class TarjanNode<TCell> : Node<TarjanNode<TCell>, TCell>
     where TCell : ICellCoordinate
   {
-    internal readonly TarjanNodeData<TCell> Data;
+    private TarjanNodeData<TCell> myData;
     private uint myFlags = 0;
 
     public TarjanNode(TCell coordinate) : base(coordinate)
+    {      
+    }
+
+    internal TarjanNodeData<TCell> Data
     {
-      Data = new TarjanNodeData<TCell>(this);
+      get
+      {
+        if (myData == null) myData = new TarjanNodeData<TCell>(this);
+        return myData;
+      }
+    }
+
+    internal void ClearNodeData()
+    {
+      myData = null;
     }
 
     public void SetFlag(TarjanNodeFlags mask, bool value)
@@ -32,12 +45,13 @@ namespace DSIS.Graph.Abstract
 
     public uint ComponentId
     {
-      get { return myFlags & (uint) TarjanNodeFlags._MASK; }
-      set
-      {
-        myFlags = (value & (uint) TarjanNodeFlags._MASK) +
-                  (myFlags & ~(uint) TarjanNodeFlags._MASK);
-      }
+      get { return myFlags & (uint)TarjanNodeFlags._MASK; }
+    }
+
+    public void SetComponentId(uint componentId)
+    {
+      myFlags = (componentId & (uint)TarjanNodeFlags._MASK) +
+                  (myFlags & ~(uint)TarjanNodeFlags._MASK);
     }
   }  
 }

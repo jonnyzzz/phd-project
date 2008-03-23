@@ -33,12 +33,20 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Abstract\AbstractGraph.cs" />
+    <Compile Include="src\Abstract\ArrayNodeSet.cs" />
+    <Compile Include="src\Abstract\EmptyNodeSetState.cs" />
     <Compile Include="src\Abstract\GraphNodeHashList.cs" />
     <Compile Include="src\Abstract\IGraphExtension.cs" />
+    <Compile Include="src\Abstract\INodeCollection.cs" />
     <Compile Include="src\Abstract\INodeInternal.cs" />
+    <Compile Include="src\Abstract\INodeSet.cs" />
+    <Compile Include="src\Abstract\INodeSetState.cs" />
     <Compile Include="src\Abstract\IStrongComponentInfoEx.cs" />
     <Compile Include="src\Abstract\IStrongComponentInfoManager.cs" />
     <Compile Include="src\Abstract\NodeEqualityComparer.cs" />
+    <Compile Include="src\Abstract\NodeSetBase.cs" />
+    <Compile Include="src\Abstract\NodeSetFactory.cs" />
+    <Compile Include="src\Abstract\OneNodeSetState.cs" />
     <Compile Include="src\Abstract\StrongComponentHash.cs" />
     <Compile Include="src\Abstract\StrongComponentInfo2.cs" />
     <Compile Include="src\Abstract\StrongComponentInfoManager2.cs" />

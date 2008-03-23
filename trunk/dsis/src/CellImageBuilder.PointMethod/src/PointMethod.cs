@@ -12,7 +12,6 @@ namespace DSIS.CellImageBuilder.PointMethod
     where Q : IIntegerCoordinate
   {
     private IPointProcessor<Q> myPointProcessor;
-    private readonly List<Q> myPoints = new List<Q>();
     private double[] myDX;
     private double[] myDY;
     private double[] myDLeft;
@@ -21,6 +20,11 @@ namespace DSIS.CellImageBuilder.PointMethod
     private DoubleLBoxIterator myIterator;
 
     public void BuildImage(Q coord)
+    {
+      myBuilder.ConnectToMany(coord, BuildImageInternal(coord));
+    }
+
+    private IEnumerable<Q> BuildImageInternal(Q coord)
     {
       mySystem.TopLeftPoint(coord, myDLeft);
       for (int i = 0; i < myDLeft.Length; i++)
@@ -31,12 +35,12 @@ namespace DSIS.CellImageBuilder.PointMethod
         while (it.MoveNext())
         {
           myFunction.Evaluate();
-          myPoints.AddRange(myPointProcessor.AddPoint(myDY));
+          foreach (Q q in myPointProcessor.AddPoint(myDY))
+          {
+            yield return q;
+          }          
         }
-      }
-
-      myBuilder.ConnectToMany(coord, myPoints);
-      myPoints.Clear();
+      }      
     }
 
     public override void Bind(CellImageBuilderContext<Q> context)

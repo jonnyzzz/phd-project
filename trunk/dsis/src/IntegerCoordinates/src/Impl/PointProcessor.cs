@@ -5,7 +5,7 @@ namespace DSIS.IntegerCoordinates
 {
   public sealed class PointProcessor<T, Q> : IPointProcessor<Q>
     where T : IIntegerCoordinateSystem<Q> 
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly T myIcs;
 
@@ -17,10 +17,7 @@ namespace DSIS.IntegerCoordinates
     public IEnumerable<Q> AddPoint(double[] value)
     {
       Q q = myIcs.FromPoint(value);
-      if (q != null)
-        return new Q[] {q};
-      else
-        return EmptyArray<Q>.Instance;
+      return q != null ? new Q[] {q} : EmptyArray<Q>.Instance;
     }
   }
 }

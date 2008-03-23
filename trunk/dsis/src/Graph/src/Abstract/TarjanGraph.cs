@@ -143,6 +143,17 @@ namespace DSIS.Graph.Abstract
         }
         state = 2;
       }
+
+      //clean up all useless data.
+      foreach (TarjanNode<TCell> node in NodesInternal)
+      {
+        node.ClearNodeData();
+      }
+
+      GC.Collect();
+      GC.WaitForPendingFinalizers();
+      GC.Collect();
+
       return new TarjanStrongComponentImpl<TCell>(this, comps);
     }
 

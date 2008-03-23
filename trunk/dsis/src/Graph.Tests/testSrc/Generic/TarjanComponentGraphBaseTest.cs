@@ -194,7 +194,7 @@ namespace DSIS.Graph.Generic
     public void TestTarjanNode_01()
     {
       TarjanNode<Q> node = (TarjanNode<Q>) CreateNode();
-      node.ComponentId = COMPONENT_ID_TEST;
+      node.SetComponentId(COMPONENT_ID_TEST);
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
     }
 
@@ -203,7 +203,7 @@ namespace DSIS.Graph.Generic
     {
       TarjanNode<Q> node = (TarjanNode<Q>) CreateNode();
       node.SetFlag(TarjanNodeFlags.ROUTE, true);
-      node.ComponentId = COMPONENT_ID_TEST;
+      node.SetComponentId(COMPONENT_ID_TEST);
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
     }
 
@@ -211,7 +211,7 @@ namespace DSIS.Graph.Generic
     public void TestTarjanNode_03()
     {
       TarjanNode<Q> node = (TarjanNode<Q>) CreateNode();
-      node.ComponentId = COMPONENT_ID_TEST;
+      node.SetComponentId(COMPONENT_ID_TEST);
       node.SetFlag(TarjanNodeFlags.ROUTE, true);
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
     }
@@ -220,7 +220,7 @@ namespace DSIS.Graph.Generic
     public void TestTarjanNode_04()
     {
       TarjanNode<Q> node = (TarjanNode<Q>) CreateNode();
-      node.ComponentId = COMPONENT_ID_TEST;
+      node.SetComponentId(COMPONENT_ID_TEST);
       node.SetFlag(TarjanNodeFlags.ROUTE, true);
       node.SetFlag(TarjanNodeFlags.STACK, false);
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);

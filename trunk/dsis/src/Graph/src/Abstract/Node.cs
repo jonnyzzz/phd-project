@@ -10,16 +10,17 @@ namespace DSIS.Graph.Abstract
     where TInh : Node<TInh, TCell>
   {
     private static readonly IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();
+    private static readonly NodeSetFactory<TInh, TCell> NodeFactory = new NodeSetFactory<TInh, TCell>();
 
     public readonly TCell Coordinate;
-    private readonly GraphNodeHashList<TInh, TCell> myEdges;
-    internal int HashCodeInternal;
-    private object myUserValue = null;
+    private INodeSetState<TInh, TCell> myEdges;
+    internal readonly int HashCodeInternal;
+    private object myUserValue;
 
-    public Node(TCell coordinate)
+    protected Node(TCell coordinate)
     {
       Coordinate = coordinate;
-      myEdges = new GraphNodeHashList<TInh, TCell>(7);
+      myEdges = NodeFactory.Create();
       HashCodeInternal = NodeHashCode(coordinate);
     }
 
@@ -59,7 +60,9 @@ namespace DSIS.Graph.Abstract
 
     internal bool AddEdgeTo(TInh node)
     {
-      return myEdges.AddIfNotReplace(ref node);
+      bool wasAdded;
+      myEdges = myEdges.AddIfNotReplace(ref node, out wasAdded);
+      return wasAdded;
     }
 
     internal IEnumerable<INode<TCell>> Edges

@@ -6,7 +6,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Abstract
 {
   //todo: Implement IList to have indexer and to be able to replace it with List<T>
-  public class GraphNodeHashList<TNode, TCell>
+  public class GraphNodeHashList<TNode, TCell> : INodeSet<TNode, TCell>, INodeSetState<TNode, TCell>
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
   {
@@ -19,6 +19,27 @@ namespace DSIS.Graph.Abstract
     {
       myHashMax = capacity;
       myItems = new Item[myHashMax];
+    }
+
+    public GraphNodeHashList(int capacity, TNode node, params TNode[] nodes) : this(capacity)
+    {
+      foreach (TNode tNode in nodes)
+      {
+        AddNodeNoCheck(tNode);
+      }
+      AddNodeNoCheck(node);
+    }
+
+    private void AddNodeNoCheck(TNode t)
+    {
+      int tHashCode = t.HashCodeInternal;
+
+      int index = tHashCode % myHashMax;
+      myCount++;
+
+      Item it = new Item(t);
+      it.NextItem = myItems[index];
+      myItems[index] = it;
     }
 
     public bool AddIfNotReplace(ref TNode t)
@@ -223,6 +244,12 @@ namespace DSIS.Graph.Abstract
       {
         get { return Current; }
       }
-    }   
+    }
+
+    public INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded)
+    {
+      wasAdded = AddIfNotReplace(ref t);
+      return this;
+    }
   }
 }
