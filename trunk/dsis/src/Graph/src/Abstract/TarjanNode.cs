@@ -5,7 +5,6 @@ namespace DSIS.Graph.Abstract
   public class TarjanNode<TCell> : Node<TarjanNode<TCell>, TCell>
     where TCell : ICellCoordinate
   {
-    private TarjanNodeData<TCell> myData;
     private uint myFlags = 0;
 
     public TarjanNode(TCell coordinate) : base(coordinate)
@@ -16,14 +15,17 @@ namespace DSIS.Graph.Abstract
     {
       get
       {
-        if (myData == null) myData = new TarjanNodeData<TCell>(this);
-        return myData;
+        if (!HasUserData)
+        {
+          SetUserData(new TarjanNodeData<TCell>(this));
+        }
+        return GetUserData<TarjanNodeData<TCell>>();
       }
     }
 
     internal void ClearNodeData()
     {
-      myData = null;
+      SetUserData<TarjanNodeData<TCell>>(null);
     }
 
     public void SetFlag(TarjanNodeFlags mask, bool value)

@@ -44,6 +44,11 @@ namespace DSIS.Graph.Abstract
       return (T) myUserValue;
     }
 
+    public bool HasUserData
+    {
+      get { return myUserValue != null; }
+    }
+
     public override sealed bool Equals(object obj)
     {
       if (!(obj is Node<TInh, TCell>))
