@@ -7,8 +7,7 @@ using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.PointMethod
 {
-  public class PointMethod<T, Q> : IntegerCoordinateMethodBase<T, Q>, ICellImageBuilder<Q>
-    where T : IIntegerCoordinateSystem<Q>
+  public class PointMethod<Q> : IntegerCoordinateMethodBase<Q>, ICellImageBuilder<Q>    
     where Q : IIntegerCoordinate
   {
     private IPointProcessor<Q> myPointProcessor;
@@ -77,7 +76,7 @@ namespace DSIS.CellImageBuilder.PointMethod
 
     public ICellImageBuilder<Q> Clone()
     {
-      return new PointMethod<T, Q>();
+      return new PointMethod<Q>();
     }
 
     public string PresentableName

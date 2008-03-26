@@ -28,11 +28,10 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       get { return "Adaptive Method"; }
     }
 
-    public ICellImageBuilder<TCell> Create<TSys, TCell>() 
-      where TSys : IIntegerCoordinateSystem<TCell> 
+    public ICellImageBuilder<TCell> Create<TCell>() 
       where TCell : IIntegerCoordinate
     {
-      return new AdaptiveMethod<TSys, TCell>();
+      return new AdaptiveMethod<TCell>();
     }
   }
 }

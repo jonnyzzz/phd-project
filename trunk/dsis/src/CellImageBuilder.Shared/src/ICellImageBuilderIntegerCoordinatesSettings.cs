@@ -10,8 +10,7 @@ namespace DSIS.CellImageBuilder.Shared
   /// </summary>
   public interface ICellImageBuilderIntegerCoordinatesSettings : ICellImageBuilderSettings
   {
-    ICellImageBuilder<TCell> Create<TSys, TCell>()
-      where TSys : IIntegerCoordinateSystem<TCell>
+    ICellImageBuilder<TCell> Create<TCell>()
       where TCell : IIntegerCoordinate;
   }
 }

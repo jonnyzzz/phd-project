@@ -29,10 +29,10 @@ namespace DSIS.CellImageBuilder.BoxMethod
     }
 
 
-    public ICellImageBuilder<TCell> Create<TSys, TCell>() where TSys : IIntegerCoordinateSystem<TCell>
+    public ICellImageBuilder<TCell> Create<TCell>()
       where TCell : IIntegerCoordinate
     {
-      return new BoxMethod<TSys, TCell>();
+      return new BoxMethod<TCell>();
     }
   }
 }

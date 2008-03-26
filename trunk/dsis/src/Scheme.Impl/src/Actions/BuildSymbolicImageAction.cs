@@ -39,7 +39,7 @@ namespace DSIS.Scheme.Impl.Actions
       CellProcessorContext<Q, Q> ctx = new CellProcessorContext<Q, Q>(
         Keys.CellsEnumerationKey<Q>().Get(input),
         subdivide,
-        bld.Create<T, Q>(),
+        bld.Create<Q>(),
         cellSettings
         );
 

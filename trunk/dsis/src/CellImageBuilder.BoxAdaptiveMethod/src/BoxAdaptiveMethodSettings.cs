@@ -63,10 +63,10 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       get { return "Box Addaptive Method"; }
     }
 
-    public ICellImageBuilder<TCell> Create<TSys, TCell>() where TSys : IIntegerCoordinateSystem<TCell>
+    public ICellImageBuilder<TCell> Create<TCell>()
       where TCell : IIntegerCoordinate
     {
-      return new BoxAdaptiveMethod<TSys, TCell>();
+      return new BoxAdaptiveMethod<TCell>();
     }
   }
 }

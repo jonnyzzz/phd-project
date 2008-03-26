@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace DSIS.CellImageBuilder.Tests
 {
-  public class AdaptiveMethodTestBase<T, Q> : MethodTestBase<T, Q, AdaptiveMethod<T, Q>, AdaptiveMethodSettings>
+  public class AdaptiveMethodTestBase<T, Q> : MethodTestBase<T, Q, AdaptiveMethod<Q>, AdaptiveMethodSettings>
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate
   {

@@ -30,11 +30,10 @@ namespace DSIS.CellImageBuilder.PointMethod
       get { return "Point Method"; }
     }
 
-    public ICellImageBuilder<TCell> Create<TSys, TCell>() 
-      where TSys : IIntegerCoordinateSystem<TCell>
+    public ICellImageBuilder<TCell> Create<TCell>()       
       where TCell : IIntegerCoordinate
     {
-      return new PointMethod<TSys, TCell>();
+      return new PointMethod<TCell>();
     }
   }
 }

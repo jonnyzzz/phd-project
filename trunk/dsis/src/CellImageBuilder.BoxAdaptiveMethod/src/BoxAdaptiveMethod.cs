@@ -9,8 +9,7 @@ using DSIS.Utils;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
-  public class BoxAdaptiveMethod<T, Q> : IntegerCoordinateMethodBase<T, Q>, ICellImageBuilder<Q>
-    where T : IIntegerCoordinateSystem<Q>
+  public class BoxAdaptiveMethod<Q> : IntegerCoordinateMethodBase<Q>, ICellImageBuilder<Q>    
     where Q : IIntegerCoordinate
   {
     private IFunction<double> myFunction;
@@ -119,7 +118,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     public ICellImageBuilder<Q> Clone()
     {
-      return new BoxAdaptiveMethod<T, Q>();
+      return new BoxAdaptiveMethod<Q>();
     }
 
     public string PresentableName

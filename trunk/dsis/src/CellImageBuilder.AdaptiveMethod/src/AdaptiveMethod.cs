@@ -7,8 +7,7 @@ using DSIS.Utils;
 
 namespace DSIS.CellImageBuilder.AdaptiveMethod
 {
-  public class AdaptiveMethod<T, Q> : IntegerCoordinateMethodBase<T, Q>, ICellImageBuilder<Q>
-    where T : IIntegerCoordinateSystem<Q>
+  public class AdaptiveMethod<Q> : IntegerCoordinateMethodBase<Q>, ICellImageBuilder<Q>
     where Q : IIntegerCoordinate
   {
     private static readonly PointGraphInitialBuilder BUILDER = new PointGraphInitialBuilder();
@@ -94,7 +93,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
     public ICellImageBuilder<Q> Clone()
     {
-      return new AdaptiveMethod<T, Q>();
+      return new AdaptiveMethod<Q>();
     }
 
     public string PresentableName

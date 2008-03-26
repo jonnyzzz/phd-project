@@ -188,7 +188,7 @@ namespace DSIS.SimpleRunner
         return new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>[]
           {
             new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-              new BoxMethod<T,Q>(), BoxMethodSettings.Default), 
+              new BoxMethod<Q>(), BoxMethodSettings.Default), 
           };
       }
 
@@ -221,7 +221,7 @@ namespace DSIS.SimpleRunner
         return new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>[]
           {
             new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-              new BoxMethod<T,Q>(), BoxMethodSettings.Default), 
+              new BoxMethod<Q>(), BoxMethodSettings.Default), 
           };
       }
 
@@ -284,7 +284,7 @@ namespace DSIS.SimpleRunner
         return new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>[]
           {
             new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-              new BoxMethod<T,Q>(), BoxMethodSettings.Default), 
+              new BoxMethod<Q>(), BoxMethodSettings.Default), 
 //              new PointMethod<T,Q>(), new PointMethodSettings(new int[] {3, 3, 3}, 0.2))
           };
       }
@@ -338,7 +338,7 @@ namespace DSIS.SimpleRunner
     
     public class VanDerPolFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       public VanDerPolFullBuilder(string homePath, int steps)
         :
@@ -351,7 +351,7 @@ namespace DSIS.SimpleRunner
         return new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>[]
           {
             new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-              new BoxMethod<T,Q>(), BoxMethodSettings.Default), 
+              new BoxMethod<Q>(), BoxMethodSettings.Default), 
           };
       }
 
@@ -371,7 +371,7 @@ namespace DSIS.SimpleRunner
 
     public class HenonFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       public HenonFullBuilder(string homePath, int steps) :
         base(homePath, steps, -1)
@@ -394,7 +394,7 @@ namespace DSIS.SimpleRunner
 
     public class IkedaFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       public IkedaFullBuilder(string homePath, int steps) :
         base(homePath, steps, -1)
@@ -416,7 +416,7 @@ namespace DSIS.SimpleRunner
 
     public class DelayedFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       private readonly double myA;
 
@@ -440,7 +440,7 @@ namespace DSIS.SimpleRunner
     
     public class JuliaFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       public JuliaFullBuilder(string homePath, int steps) :
         base(homePath, steps, -1)
@@ -475,15 +475,15 @@ namespace DSIS.SimpleRunner
         return new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>[]
           {
             new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-              new AdaptiveMethod<T, Q>(), new AdaptiveMethodSettings(1, 30, 0.1)),
+              new AdaptiveMethod<Q>(), new AdaptiveMethodSettings(1, 30, 0.1)),
             new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-              new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3, 3 })),
+              new PointMethod<Q>(), new PointMethodSettings(new int[] {3, 3, 3 })),
             new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-              new PointMethod<T, Q>(), new PointMethodSettings(new int[] {3, 3, 3}, 0.1)),
+              new PointMethod<Q>(), new PointMethodSettings(new int[] {3, 3, 3}, 0.1)),
             new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-              new BoxMethod<T, Q>(), BoxMethodSettings.Default),
+              new BoxMethod<Q>(), BoxMethodSettings.Default),
             new Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>(
-              new BoxAdaptiveMethod<T,Q>(), new BoxAdaptiveMethodSettings(30, 0.1)),
+              new BoxAdaptiveMethod<Q>(), new BoxAdaptiveMethodSettings(30, 0.1)),
           };
       }
 

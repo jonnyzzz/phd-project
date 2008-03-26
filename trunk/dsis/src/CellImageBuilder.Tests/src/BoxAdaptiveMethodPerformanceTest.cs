@@ -25,7 +25,7 @@ namespace DSIS.CellImageBuilder.Tests
                                                                    outs[i] = ins[i]*factor;
                                                                }, ss);
 
-      BoxAdaptiveMethod<IntegerCoordinateSystem, IntegerCoordinate> m = new BoxAdaptiveMethod<IntegerCoordinateSystem, IntegerCoordinate>();
+      BoxAdaptiveMethod<IntegerCoordinate> m = new BoxAdaptiveMethod<IntegerCoordinate>();
       m.Bind(new CellImageBuilderContext<IntegerCoordinate>(
                si, BoxAdaptiveMethodSettings.Default, ics, new MockCellConnectionBuilder<IntegerCoordinate>()
                ));

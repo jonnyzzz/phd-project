@@ -18,7 +18,7 @@ namespace DSIS.Scheme.Impl.Actions.Console
     {
       ICellImageBuilderIntegerCoordinatesSettings sets = Keys.CellImageBuilderKey.Get(input);
 
-      Logger.Instance(input).Write("Method: {0}", sets.Create<T,Q>().PresentableName);
+      Logger.Instance(input).Write("Method: {0}", sets.Create<Q>().PresentableName);
     }
   }
 }

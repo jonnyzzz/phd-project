@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace DSIS.CellImageBuilder.Tests
 {
   public abstract class BoxMethodBaseTest<T,Q> :
-    MethodTestBase<T, Q, BoxMethod<T, Q>, BoxMethodSettings>
+    MethodTestBase<T, Q, BoxMethod<Q>, BoxMethodSettings>
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate
   {

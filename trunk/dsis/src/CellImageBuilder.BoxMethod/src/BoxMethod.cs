@@ -14,8 +14,7 @@ using DSIS.IntegerCoordinates;
 
 namespace DSIS.CellImageBuilder.BoxMethod
 {
-  public class BoxMethod<T, Q> : IntegerCoordinateMethodBase<T, Q>, ICellImageBuilder<Q>
-    where T : IIntegerCoordinateSystem<Q>
+  public class BoxMethod<Q> : IntegerCoordinateMethodBase<Q>, ICellImageBuilder<Q>
     where Q : IIntegerCoordinate
   {
     private IFunction<double> myFunction;
@@ -94,7 +93,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
 
     public ICellImageBuilder<Q> Clone()
     {
-      return new BoxMethod<T, Q>();
+      return new BoxMethod<Q>();
     }
 
     public string PresentableName
