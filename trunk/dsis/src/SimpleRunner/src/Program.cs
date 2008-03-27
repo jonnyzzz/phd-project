@@ -28,12 +28,12 @@ namespace DSIS.SimpleRunner
     {
       DefaultSystemSpace sp = new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });      
       DefaultSystemSpace log_sp = new DefaultSystemSpace(2, new double[] { 0, 0 }, new double[] { 1, 4 }, new long[] { 3, 3 });      
-      IAction henon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
+      ISimpleAction henon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
       IAction ikeda = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), sp);
 //      IAction init = new LineInitialAction(0.001, new double[] {-2.6, -2.1}, new double[] {0.5, 0});
-      IAction init = new LineInitialAction(0.001, new double[] { 0.63313, 0.18940634 }, new double[] { 0.63313 + 0.01, 0.18940634 + 1.92*0.01});
+      ISimpleAction init = new LineInitialAction(0.001, new double[] { 0.63313, 0.18940634 }, new double[] { 0.63313 + 0.01, 0.18940634 + 1.92*0.01});
       ActionGraph gr = new ActionGraph();
-      IAction wfBase = new WorkingFolderAction();
+      ISimpleAction wfBase = new WorkingFolderAction();
       
 //      BuildCurveLength(10, gr, init, wfBase, ikeda);
       BuildCurveLength(100, gr, init, wfBase, henon);
@@ -41,14 +41,14 @@ namespace DSIS.SimpleRunner
       gr.Execute();
     }
 
-    private static void BuildCurveLength(int steps, IActionGraphBuilder gr, IAction init, IAction wfBase, IAction function)
+    private static void BuildCurveLength(int steps, IActionGraphBuilder gr, ISimpleAction init, ISimpleAction wfBase, ISimpleAction function)
     {
       int v = 0;
       IAction loop = new LoopAction(steps, new AgregateAction(delegate(IActionGraphPartBuilder bld)
                                                              {
-                                                               IAction act = new LineAction();
-                                                               IAction wf = new CustomPrefixWorkingFolderAction((++v).ToString());
-                                                               IAction draw2 = new DrawLineAction();
+                                                               ISimpleAction act = new LineAction();
+                                                               ISimpleAction wf = new CustomPrefixWorkingFolderAction((++v).ToString());
+                                                               ISimpleAction draw2 = new DrawLineAction();
 
                                                                bld.AddEdge(bld.Start, act);
                                                                bld.AddEdge(act, bld.End);
@@ -57,10 +57,10 @@ namespace DSIS.SimpleRunner
                                                                bld.AddEdge(wf, draw2);
                                                                bld.AddEdge(act, draw2);
                                                              }));
-      IAction draw = new DrawLineAction();
+      ISimpleAction draw = new DrawLineAction();
 
       SystemWorkingFolderAction sysWf = new SystemWorkingFolderAction();      
-      IAction logger = new LoggerAction();
+      ISimpleAction logger = new LoggerAction();
       
       
       gr.AddEdge(logger, init);
@@ -89,7 +89,7 @@ namespace DSIS.SimpleRunner
       DefaultSystemSpace log_sp2 = new DefaultSystemSpace(2, new double[] { 0, 3 }, new double[] { 1, 3.7 }, new long[] { 3, 3 });      
 
 
-      IAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
+      ISimpleAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
       IAction systemHenonD = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(1.2, 0.2), spD);
       IAction systemHenonD_272 = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(1.272, 0.2), spD);
       IAction systemIked = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), sp);
@@ -97,7 +97,7 @@ namespace DSIS.SimpleRunner
       IAction systenLogistic2 = new SystemInfoAction(new Logistic2dSystemInfo(), log_sp);
       IAction systenLogistic2_x = new SystemInfoAction(new Logistic2dSystemInfo(), log_sp2);
 
-      IAction wfBase = new WorkingFolderAction();
+      ISimpleAction wfBase = new WorkingFolderAction();
 
       IAction[] system = {systemHenon, /*systemHenonD, systemHenonD_272, */systemIked, /*systemIkedaCut*/};
 
@@ -119,9 +119,9 @@ namespace DSIS.SimpleRunner
 
     private class ComputeDelegate
     {
-      private readonly IAction wfBase;
+      private readonly ISimpleAction wfBase;
       private readonly int steps;
-      private readonly IAction action;
+      private readonly ISimpleAction action;
 
       public void Do()
       {
@@ -129,7 +129,7 @@ namespace DSIS.SimpleRunner
         Collect();
       }
 
-      public ComputeDelegate(IAction wfBase, int steps, IAction action)
+      public ComputeDelegate(ISimpleAction wfBase, int steps, ISimpleAction action)
       {
         this.wfBase = wfBase;
         this.steps = steps;
@@ -144,19 +144,19 @@ namespace DSIS.SimpleRunner
       GC.Collect();
     }
 
-    private static void ComputeEntropy(IAction wfBase, int steps, IAction system)
+    private static void ComputeEntropy(ISimpleAction wfBase, int steps, ISimpleAction system)
     {
-      IAction a2 = new CreateCoordinateSystemAction();
-      IAction a3 = new CreateInitialCellsAction();
-      IAction a4 = new BuildSymbolicImageAction();
-      IAction a5 = new ChainRecurrenctSimbolicImageAction();
-      IAction method = new SetMethod(new BoxMethodSettings(0.1), new long[] {2, 2});
+      ISimpleAction a2 = new CreateCoordinateSystemAction();
+      ISimpleAction a3 = new CreateInitialCellsAction();
+      ISimpleAction a4 = new BuildSymbolicImageAction();
+      ISimpleAction a5 = new ChainRecurrenctSimbolicImageAction();
+      ISimpleAction method = new SetMethod(new BoxMethodSettings(0.1), new long[] {2, 2});
 
       ActionGraph gr = new ActionGraph();
 
       SystemWorkingFolderAction sysWf = new SystemWorkingFolderAction();
       CustomPrefixWorkingFolderAction wf = new CustomPrefixWorkingFolderAction(steps.ToString());
-      IAction logger = new LoggerAction();
+      ISimpleAction logger = new LoggerAction();
 
       gr.AddEdge(system, wfBase);
       gr.AddEdge(system, sysWf);
@@ -200,7 +200,7 @@ namespace DSIS.SimpleRunner
 
       buildIS = new BranchAction(buildIS, new AgregateAction(delegate(IActionGraphPartBuilder bld)
                                                                {
-                                                                 IAction xa1 = new ReplaceContextAction(
+                                                                 ISimpleAction xa1 = new ReplaceContextAction(
                                                                    new SetMethod(
                                                                      new PointMethodSettings(new int[] {2, 2}, 0.1),
                                                                      new long[] {2, 2}));
@@ -208,7 +208,7 @@ namespace DSIS.SimpleRunner
                                                                  IAction xa2 = buildIS;
                                                                  IAction xa3 = EntropyAction(steps);
 
-                                                                 IAction la = new LoopIndexIncrementAction();
+                                                                 ISimpleAction la = new LoopIndexIncrementAction();
                                                                  
                                                                  bld.AddEdge(bld.Start, xa1);
                                                                  bld.AddEdge(bld.Start, xa3);
@@ -240,8 +240,8 @@ namespace DSIS.SimpleRunner
     {
       return new AgregateAction(delegate(IActionGraphPartBuilder xgr)
                                   {
-                                    IAction draw = new DrawChainRecurrentAction();
-                                    IAction xwf = new ReplaceContextAction(new LoopStepWorkingFolderAction("step-{0}"));
+                                    ISimpleAction draw = new DrawChainRecurrentAction();
+                                    ISimpleAction xwf = new ReplaceContextAction(new LoopStepWorkingFolderAction("step-{0}"));
                                     xgr.AddEdge(xgr.Start, xwf);
 
                                     xgr.AddEdge(xgr.Start, xwf);
@@ -305,7 +305,7 @@ namespace DSIS.SimpleRunner
                                   });
     }
 
-    private static IAction DrawEntropyAction(int steps, IAction entropy)
+    private static IAction DrawEntropyAction(int steps, ISimpleAction entropy)
     {
       return new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
@@ -332,7 +332,7 @@ namespace DSIS.SimpleRunner
 
             IAction project = new LoopAction(steps, new AgregateAction(delegate(IActionGraphPartBuilder bl)
                                                                          {
-                                                                           IAction proj = new ProjectEntopryAction();
+                                                                           ISimpleAction proj = new ProjectEntopryAction();
                                                                            bl.AddEdge(bl.Start, proj);
                                                                            bl.AddEdge(proj, bl.End);
 
@@ -341,7 +341,7 @@ namespace DSIS.SimpleRunner
                                                                            bl.AddEdge(proj, b);                                                                           
                                                                            bl.AddEdge(proj, bb);
 
-                                                                           IAction action =
+                                                                           ISimpleAction action =
                                                                              new SelectiveCopyAction(
                                                                                FileKeys.WorkingFolderKey);
                                                                            bl.AddEdge(bl.Start, action);

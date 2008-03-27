@@ -4,7 +4,7 @@ using DSIS.Scheme.Ctx;
   
 namespace DSIS.Scheme
 {
-  public abstract class ActionBase : DebugableAction, IAction
+  public abstract class ActionBase : DebugableAction, ISimpleAction
   {
     public abstract ICollection<ContextMissmatch> Compatible(Context ctx);
     public Context Apply(Context ctx)

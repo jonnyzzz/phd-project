@@ -10,14 +10,15 @@ namespace DSIS.Scheme.Actions
     public static readonly Key<LoopIndex> LoopIndexKey = new Key<LoopIndex>("loop");
 
     private readonly int myCount;
-    private readonly IAction myAction;
+    //TODO:
+    private readonly ISimpleAction myAction;
 
     public LoopAction(int count, IAction action)
     {
       if (count <= 0)
         throw new ArgumentException("Count should be >= 1", "count");
       myCount = count;
-      myAction = action;
+      myAction = (ISimpleAction) action;
     }
 
     public ICollection<ContextMissmatch> Compatible(Context ctx)

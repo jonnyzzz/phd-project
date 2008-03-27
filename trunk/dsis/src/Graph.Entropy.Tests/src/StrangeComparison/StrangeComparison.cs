@@ -104,13 +104,13 @@ namespace DSIS.Graph.Entropy.Tests.StrangeComparison
                                new EigenEntropyAction(), 
                                new GetEntropyAction(delegate(double entropy) {eigenE = entropy;})
                                );
-                             
+
                              IAction eigenPer = new ChainAction( 
                                new EigenPerComoponentAction(), 
                                new GetEntropyAction(delegate(double entropy) {eigenPerE = entropy;})
                                );
 
-                               IAction first = new ChainAction(
+                             IAction first = new ChainAction(
                                   Strange(StrangeEvaluatorStrategy.FIRST),
                                   new GetEntropyAction(delegate(double e) { firstE = e; })
                                   );
@@ -157,8 +157,8 @@ namespace DSIS.Graph.Entropy.Tests.StrangeComparison
                                                {
                                                  SetStrangeEntropyParamsAction set = new SetStrangeEntropyParamsAction(ps);
                                                  bld.AddEdge(bld.Start, set);
-                                                 IAction main = new StrangeEntropyAction();
-                                                 IAction mainProxy = new ProxyAction();
+                                                 ISimpleAction main = new StrangeEntropyAction();
+                                                 ISimpleAction mainProxy = new ProxyAction();
                                                  bld.AddEdge(bld.Start, mainProxy);
                                                  bld.AddEdge(mainProxy, main);
                                                  bld.AddEdge(set, main);

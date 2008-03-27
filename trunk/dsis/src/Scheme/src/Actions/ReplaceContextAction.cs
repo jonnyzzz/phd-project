@@ -5,9 +5,9 @@ namespace DSIS.Scheme.Actions
 {
   public class ReplaceContextAction : ActionBase
   {
-    private readonly IAction myAction;
+    private readonly ISimpleAction myAction;
 
-    public ReplaceContextAction(IAction action)
+    public ReplaceContextAction(ISimpleAction action)
     {
       myAction = action;
     }

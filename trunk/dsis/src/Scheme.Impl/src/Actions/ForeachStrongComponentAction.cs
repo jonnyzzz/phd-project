@@ -10,9 +10,9 @@ namespace DSIS.Scheme.Impl.Actions
 {
   public class ForeachStrongComponentAction : IntegerCoordinateSystemActionBase2
   {
-    private readonly IAction myBody;
+    private readonly ISimpleAction myBody;
 
-    public ForeachStrongComponentAction(IAction body)
+    public ForeachStrongComponentAction(ISimpleAction body)
     {
       myBody = body;
     }

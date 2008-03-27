@@ -19,10 +19,10 @@ namespace DSIS.Scheme.Exec
       myBuilder.AddEdge(a, b);
     }
 
-    public IAction AddLine(params IAction[] actions)
+    public ISimpleAction AddLine(params IAction[] actions)
     {
-      IAction prev = null;
-      foreach (IAction action in actions)
+      ISimpleAction prev = null;
+      foreach (ISimpleAction action in actions)
       {
         if (prev != null)
         {

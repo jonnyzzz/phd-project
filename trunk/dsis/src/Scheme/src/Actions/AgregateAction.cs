@@ -51,12 +51,12 @@ namespace DSIS.Scheme.Actions
 
     #region IActionGraphPartBuilder Members
 
-    IAction IActionGraphPartBuilder.Start
+    ISimpleAction IActionGraphPartBuilder.Start
     {
       get { return myStart; }
     }
 
-    IAction IActionGraphPartBuilder.End
+    ISimpleAction IActionGraphPartBuilder.End
     {
       get { return myEnd; }
     }
@@ -73,7 +73,7 @@ namespace DSIS.Scheme.Actions
 
     #region Nested type: EndAction
 
-    private class EndAction : IAction
+    private class EndAction : ISimpleAction
     {
       private Context myResult;
 
@@ -102,7 +102,7 @@ namespace DSIS.Scheme.Actions
 
     #region Nested type: StartAction
 
-    private class StartAction : IAction
+    private class StartAction : ISimpleAction
     {
       private readonly List<IAction> myChidren = new List<IAction>();
       private Context myContext;
@@ -117,7 +117,7 @@ namespace DSIS.Scheme.Actions
       public ICollection<ContextMissmatch> CompatibleExternal(Context ctx)
       {
         List<ContextMissmatch> list = new List<ContextMissmatch>();
-        foreach (IAction action in myChidren)
+        foreach (ISimpleAction action in myChidren)
         {
           list.AddRange(action.Compatible(ctx));
         }

@@ -85,13 +85,20 @@ namespace DSIS.Scheme.Exec
 
     public void AddEdge(IAction a, IAction b)
     {
-      ActionWrapper bW = new ActionWrapper(b);
-      ActionWrapper bA = new ActionWrapper(a);
+      ActionWrapper bW = new ActionWrapper(Simplify(b));
+      ActionWrapper bA = new ActionWrapper(Simplify(a));
 
       myActions.Add(bW);
       myActions.Add(bA);
       myBackEdges.AddValue(bW, bA);
       myStraitEdges.AddValue(bA, bW);
     }
+
+    private ISimpleAction Simplify(IAction sb)
+    {
+      return (ISimpleAction) sb;
+    }
+
+
   }
 }

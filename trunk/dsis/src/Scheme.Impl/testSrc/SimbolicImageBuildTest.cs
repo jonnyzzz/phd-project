@@ -37,7 +37,7 @@ namespace DSIS.Scheme.Impl
       b.CompontentsNodesCountConstraint = new GreaterThanOrEqualConstraint(10);
       b.GraphNodesConstraint = new GreaterThanOrEqualConstraint(56  );
       b.GraphEdgesConstraint = new GreaterThanOrEqualConstraint(100);
-        
+
       DoTest(3, delegate(ActionBuilderAdapter ad, IAction leaf)
                   {
                     ad.AddEdge(leaf, b);

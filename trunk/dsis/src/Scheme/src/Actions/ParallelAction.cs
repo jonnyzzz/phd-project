@@ -11,7 +11,7 @@ namespace DSIS.Scheme.Actions
 
     public ParallelAction(IEnumerable<IAction> actions)
     {
-      foreach (IAction action in actions)
+      foreach (ISimpleAction action in actions)
       {
         Builder.AddEdge(Builder.Start, action);
         Builder.AddEdge(action, Builder.End);
