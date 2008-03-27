@@ -26,6 +26,19 @@ namespace DSIS.Graph.Entropy.Impl.Util
       myValues[key] = value;
     }
 
+    public double this[T data]
+    {
+      get
+      {
+        double tmp;
+        return myValues.TryGetValue(data, out tmp) ? tmp : 0;
+      }
+      set
+      {
+        myValues[data] = value;
+      }
+    }
+
     public int Count
     {
       get { return myValues.Count; }
