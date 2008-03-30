@@ -5,16 +5,16 @@ using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Path
-{ 
+{
   public class PathBuilder<T> where T : ICellCoordinate
   {
     private readonly IGraphStrongComponents<T> myComps;
 
     protected readonly Vector<NodePair<T>> myValues = new Vector<NodePair<T>>();
     private int myNorm = 0;
-        
+
     public PathBuilder(IGraphStrongComponents<T> comps)
-    {      
+    {
       myComps = comps;
     }
 
@@ -24,7 +24,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
       {
         IGraph<T> graph = myComps.AsGraph(new IStrongComponentInfo[] {info});
         BuildPath(graph, CollectionUtil.GetFirst(graph.Nodes));
-      }      
+      }
     }
 
     private void BuildPath(IGraph<T> graph, INode<T> startNode)
@@ -32,7 +32,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
       INode<T> start = startNode;
       int initialValues = myValues.Count;
 
-      while(!ReferenceEquals(start, startNode) || myValues.Count - initialValues != graph.EdgesCount)
+      while (!ReferenceEquals(start, startNode) || myValues.Count - initialValues != graph.EdgesCount)
       {
         INode<T> next = GetNextNode(graph, start);
 
@@ -40,23 +40,27 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
         myNorm++;
 
         start = next;
-      }      
+      }
     }
-    
+
     private static INode<T> GetNextNode(IGraph<T> graph, INode<T> from)
     {
-      InfiniteEnumerator<INode<T>> outs = from.GetUserData<InfiniteEnumerator<INode<T>>>();
-
-      if (outs == null)
-        from.SetUserData(outs = new InfiniteEnumerator<INode<T>>(graph.GetEdges(from).GetEnumerator()));
-
+      InfiniteEnumerator<INode<T>> outs = from.GetUserData<InfiniteEnumerator<INode<T>>>(
+        delegate
+          {
+            return new InfiniteEnumerator<INode<T>>(
+              graph.GetEdges(from).GetEnumerator());
+          });
       outs.MoveNext();
       return outs.Current;
     }
 
     public IGraphMeasure<T> Entropy()
     {
-      return new GraphMeasure<T, NodePair<T>>("Long Path", myValues.Dictionary, EqualityComparerFactory<T>.GetReferenceComparer(), myNorm, myComps.CoordinateSystem);
-    }    
-  }   
+      return
+        new GraphMeasure<T, NodePair<T>>("Long Path", myValues.Dictionary,
+                                         EqualityComparerFactory<T>.GetReferenceComparer(), myNorm,
+                                         myComps.CoordinateSystem);
+    }
+  }
 }

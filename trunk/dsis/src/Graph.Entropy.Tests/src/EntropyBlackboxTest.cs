@@ -116,6 +116,11 @@ namespace DSIS.Graph.Entropy.Tests
             Assert.AreEqual(w.Value, edge, EPS, "Node assert value failed fro node {0}", node);
         }
       }
+      catch(Exception e)
+      {
+        DEBUG = true;
+        throw new Exception(e.Message, e);
+      }
       finally
       {
         if (DEBUG)
@@ -152,6 +157,11 @@ namespace DSIS.Graph.Entropy.Tests
         {
           Assert.AreEqual(0, pair.Value, EPS, "Balance for node {0}", pair.Key);
         }
+      }
+      catch (Exception e)
+      {
+        DEBUG = true;
+        throw new Exception(e.Message, e);
       }
       finally
       {

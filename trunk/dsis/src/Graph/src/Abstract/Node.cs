@@ -39,14 +39,19 @@ namespace DSIS.Graph.Abstract
       myUserValue = data;
     }
 
-    public T GetUserData<T>()
+    public T GetUserData<T>(Lazy<T> def)
     {
-      return (T) myUserValue;
+      if (myUserValue is T)
+        return (T)myUserValue;
+
+      T newValue = def();
+      myUserValue = newValue;
+      return newValue;
     }
 
-    public bool HasUserData
+    public bool HasUserData<T>()
     {
-      get { return myUserValue != null; }
+      return myUserValue is T;
     }
 
     public override sealed bool Equals(object obj)

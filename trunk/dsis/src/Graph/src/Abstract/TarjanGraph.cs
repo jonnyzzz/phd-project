@@ -1,6 +1,7 @@
 using System;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
+using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
@@ -150,9 +151,7 @@ namespace DSIS.Graph.Abstract
         node.ClearNodeData();
       }
 
-      GC.Collect();
-      GC.WaitForPendingFinalizers();
-      GC.Collect();
+      GCHelper.Collect();
 
       return new TarjanStrongComponentImpl<TCell>(this, comps);
     }

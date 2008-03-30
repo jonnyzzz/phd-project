@@ -1,4 +1,5 @@
 using DSIS.Core.Coordinates;
+using DSIS.Utils;
 
 namespace DSIS.Graph.Tests
 {
@@ -21,7 +22,12 @@ namespace DSIS.Graph.Tests
       throw new System.NotImplementedException();
     }
 
-    public T1 GetUserData<T1>()
+    public T1 GetUserData<T1>(Lazy<T1> def)
+    {
+      throw new System.NotImplementedException();
+    }
+
+    public bool HasUserData<T1>()
     {
       throw new System.NotImplementedException();
     }

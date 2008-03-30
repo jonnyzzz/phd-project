@@ -1,11 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
-  public class ArrayNodeSet<TNode, TCell> : INodeSetState<TNode, TCell>
+  public class ArrayNodeSet<TNode, TCell> : INodeSetState<TNode, TCell>, IEnumerable<TNode>
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
   {
@@ -49,21 +50,58 @@ namespace DSIS.Graph.Abstract
     
     public IEnumerable<TNode> Values
     {
-      get {
-        for (int i = 0; i < myNodes.Length; i++)
-        {
-          TNode node = myNodes[i];
-          if (node != null)
-            yield return node;
-          else
-            break;
-        }
-      }
+      get { return this; }
     }
 
     public IEnumerable<INode<TCell>> ValuesUpcasted
     {
       get { return new UpcastedEnumerable<IEnumerable<TNode>, TNode, INode<TCell>>(Values); }
-    }    
+    }  
+      
+    private class NodesEmunerator : IEnumerator<TNode>
+    {
+      private readonly TNode[] myNodes;
+      private int myIndex;
+
+      public NodesEmunerator(TNode[] nodes)
+      {
+        Reset();
+        myNodes = nodes;
+      }
+
+      public TNode Current
+      {
+        get { return myNodes[myIndex]; }
+      }
+
+      public void Dispose()
+      {        
+      }
+
+      public bool MoveNext()
+      {
+        return ++myIndex < myNodes.Length && myNodes[myIndex] != null;
+      }
+
+      public void Reset()
+      {
+        myIndex = -1;
+      }
+
+      object IEnumerator.Current
+      {
+        get { return Current; }
+      }
+    }
+
+    IEnumerator<TNode> IEnumerable<TNode>.GetEnumerator()
+    {
+      return new NodesEmunerator(myNodes);
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return ((IEnumerable<TNode>) this).GetEnumerator();
+    }
   }
 }

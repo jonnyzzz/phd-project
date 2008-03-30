@@ -69,6 +69,11 @@
     <Compile Include="src\Impl\Loop\Search\Limited\LimitedLoopSearch.cs" />
     <Compile Include="src\Impl\Loop\Search\SearchTreeNode.cs" />
     <Compile Include="src\Impl\Loop\Search\VisitedCollectionBase.cs" />
+    <Compile Include="src\Impl\Loop\SmartPath\INodeState.cs" />
+    <Compile Include="src\Impl\Loop\SmartPath\IteratorState.cs" />
+    <Compile Include="src\Impl\Loop\SmartPath\SearchState.cs" />
+    <Compile Include="src\Impl\Loop\SmartPath\SmartPathBuilder.cs" />
+    <Compile Include="src\Impl\Loop\SmartPath\ThisNodeState.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEntropyEvaluatorParams.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEntropyAllEdgesLoopsEvaluatorImpl.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEntropyAllNodesLoopsEvaluatorImpl.cs" />

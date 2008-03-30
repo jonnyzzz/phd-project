@@ -1,4 +1,5 @@
 using DSIS.Core.Coordinates;
+using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
@@ -6,20 +7,21 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate
   {
     private uint myFlags = 0;
+    private readonly Lazy<TarjanNodeData<TCell>> myLazyTarjanNodeData;
 
     public TarjanNode(TCell coordinate) : base(coordinate)
-    {      
+    {
+      myLazyTarjanNodeData = delegate
+                               {
+                                 return new TarjanNodeData<TCell>(this);
+                               };
     }
-
+    
     internal TarjanNodeData<TCell> Data
     {
       get
       {
-        if (!HasUserData)
-        {
-          SetUserData(new TarjanNodeData<TCell>(this));
-        }
-        return GetUserData<TarjanNodeData<TCell>>();
+        return GetUserData(myLazyTarjanNodeData);        
       }
     }
 

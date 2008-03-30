@@ -9,6 +9,9 @@ namespace DSIS.Graph
     TCoordinate Coordinate { get; }
 
     void SetUserData<T>(T data);
-    T GetUserData<T>();
+
+    T GetUserData<T>(Lazy<T> def);
+
+    bool HasUserData<T>();
   }
 }

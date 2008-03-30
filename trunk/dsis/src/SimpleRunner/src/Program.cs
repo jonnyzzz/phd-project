@@ -19,6 +19,7 @@ using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.Scheme.Impl.Actions.Line;
 using DSIS.SimpleRunner.parallel;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
@@ -139,9 +140,7 @@ namespace DSIS.SimpleRunner
 
     private static void Collect()
     {
-      GC.Collect();
-      GC.WaitForPendingFinalizers();
-      GC.Collect();
+      GCHelper.Collect();
     }
 
     private static void ComputeEntropy(ISimpleAction wfBase, int steps, ISimpleAction system)
