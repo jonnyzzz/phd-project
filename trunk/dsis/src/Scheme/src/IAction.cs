@@ -10,6 +10,11 @@ namespace DSIS.Scheme
     
   }
 
+  public interface ICompositeAction
+  {
+    
+  }
+
   public interface ISimpleAction : IAction
   {
     ICollection<ContextMissmatch> Compatible(Context ctx);
