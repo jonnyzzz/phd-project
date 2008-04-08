@@ -6,7 +6,7 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Actions
 {
-  public class AgregateAction : DebugableAction, IAction, IActionGraphPartBuilder
+  public class AgregateAction : DebugableAction, IAction, IActionGraphPartBuilder, ISimpleAction
   {
     private readonly EndAction myEnd = new EndAction();
     private readonly ActionGraph myGraph = new ActionGraph();

@@ -7,7 +7,7 @@ namespace DSIS.SimpleRunner
 {
   public class ComputationPathListener<T,Q> : ProvideExternalListenerBase<T,Q, IComputationPathListener>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly string myPath;
     private int myUnique = 0;

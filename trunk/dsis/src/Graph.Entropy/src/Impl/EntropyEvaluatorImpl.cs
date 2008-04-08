@@ -15,7 +15,7 @@ namespace DSIS.Graph.Entropy.Impl
 {
   [Obsolete]
   internal class EntropyEvaluatorImpl<T> : EntropyEvaluatorLoopBase<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     public EntropyEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
     {

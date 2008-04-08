@@ -5,7 +5,7 @@ using DSIS.Core.Util;
 namespace DSIS.Core.Processor
 {
   public class SubdevideCellProcessorContext<T> : CellProcessorContextBase<T, T>, ICellProcessorMultiplyContext<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private readonly long[] myDivision;
 

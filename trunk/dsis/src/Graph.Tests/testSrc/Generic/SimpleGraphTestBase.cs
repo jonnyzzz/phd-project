@@ -3,11 +3,11 @@ using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Generic
+namespace DSIS.Graph.Tests.Generic
 {
   public abstract class SimpleGraphTestBase<T,Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     protected SimpleGraph<Q> myGraph;
     protected T mySystem;

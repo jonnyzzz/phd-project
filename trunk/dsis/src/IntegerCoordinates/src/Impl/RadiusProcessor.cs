@@ -5,7 +5,7 @@ namespace DSIS.IntegerCoordinates.Impl
 {
   internal sealed class RadiusProcessor<T, Q> : RectProcessorBase<T, Q>, IRadiusProcessor<Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q> 
+    where Q : IIntegerCoordinate
   {
     public RadiusProcessor(T coordinateSystem) : base(coordinateSystem)
     {

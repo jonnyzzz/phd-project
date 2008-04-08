@@ -7,7 +7,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
-  public class LoopIterator<T> : ContextBase<T>, IGraphWeightSearch<T> where T : ICellCoordinate<T>
+  public class LoopIterator<T> : ContextBase<T>, IGraphWeightSearch<T> where T : ICellCoordinate
   {
     private static readonly IEqualityComparer<INode<T>> COMPARER = EqualityComparerFactory<INode<T>>.GetReferenceComparer();
 

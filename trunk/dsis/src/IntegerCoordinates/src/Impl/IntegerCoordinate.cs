@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Text;
 using DSIS.Utils;
 
@@ -6,7 +5,7 @@ namespace DSIS.IntegerCoordinates.Impl
 {
   //todo: Why class? struct is cheaper for memory
   [EqualityComparer(typeof (IntegerCoordinateEqualityComparer))]
-  public sealed class IntegerCoordinate : IIntegerCoordinate<IntegerCoordinate>
+  public sealed class IntegerCoordinate : IIntegerCoordinate
   {
     public readonly long[] myCoordinate;
 
@@ -14,12 +13,7 @@ namespace DSIS.IntegerCoordinates.Impl
     {
       myCoordinate = coordinare;
     }
-
-    public IEqualityComparer<IntegerCoordinate> Comparer
-    {
-      get { return IntegerCoordinateEqualityComparer.INSTANCE; }
-    }
-
+    
     public long GetCoordinate(int index)
     {
       return myCoordinate[index];

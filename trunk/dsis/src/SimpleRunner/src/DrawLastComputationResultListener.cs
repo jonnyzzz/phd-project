@@ -17,7 +17,7 @@ namespace DSIS.SimpleRunner
 
   public class DrawLastComputationResultListener<T,Q> : ProvideExternalListenerBase<T,Q, IDrawLastComputationResultEvents>, IComputationPathListener
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private string myTitle;
     private string myPath;

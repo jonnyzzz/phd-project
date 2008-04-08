@@ -41,6 +41,8 @@
     <Compile Include="src\Actions\Agregated\SymbolicImageConstructionStep.cs" />
     <Compile Include="src\Actions\BuildSymbolicImageAction.cs" />
     <Compile Include="src\Actions\ChainRecurrenctSimbolicImageAction.cs" />
+    <Compile Include="src\Actions\Console\DumpGraphMeasureAction.cs" />
+    <Compile Include="src\Actions\Console\DumpGraphMeasureAction2.cs" />
     <Compile Include="src\Actions\Console\DumpLineAction.cs" />
     <Compile Include="src\Actions\Console\DumpNewLineAction.cs" />
     <Compile Include="src\Actions\Console\DumpEntropyAction.cs" />

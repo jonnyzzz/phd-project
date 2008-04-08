@@ -4,7 +4,7 @@ using DSIS.Graph.Entropy.Impl.Util;
 namespace DSIS.Graph.Entropy.Impl.Entropy
 {
   public class EntropyProcessorAdapter<T> : IEntropyProcessor<T> 
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private readonly IGraphMeasure<T> myMeasure;
 

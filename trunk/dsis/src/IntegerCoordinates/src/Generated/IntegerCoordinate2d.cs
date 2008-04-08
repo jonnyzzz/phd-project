@@ -6,7 +6,7 @@ using DSIS.Utils;
 namespace DSIS.IntegerCoordinates.Generated
 {
   [EqualityComparer(typeof(IntegerCoordinate2dEqualityComparer))]
-  public class IntegerCoordinate2d : IIntegerCoordinate<IntegerCoordinate2d>
+  public class IntegerCoordinate2d : IIntegerCoordinate
   {
     public readonly long l1;
     public readonly long l2;
@@ -15,11 +15,6 @@ namespace DSIS.IntegerCoordinates.Generated
     {
       this.l1 = l1;
       this.l2 = l2;
-    }
-
-    public IEqualityComparer<IntegerCoordinate2d> Comparer
-    {
-      get { return IntegerCoordinate2dEqualityComparer.INSTANCE; }
     }
 
     public long GetCoordinate(int index)

@@ -6,7 +6,7 @@ namespace DSIS.IntegerCoordinates.Impl
 {
   internal sealed class OverlappingProcessor<T, Q> : IPointProcessor<Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q> 
+    where Q : IIntegerCoordinate
   {
     private readonly T myCoordinateSystem;
     private readonly long[] myPoint;

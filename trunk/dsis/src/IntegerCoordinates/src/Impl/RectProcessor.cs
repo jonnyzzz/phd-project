@@ -5,7 +5,7 @@ namespace DSIS.IntegerCoordinates.Impl
 {
   internal sealed class RectProcessor<T, Q> : RectProcessorBase<T, Q>, IRectProcessor<Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q> 
+    where Q : IIntegerCoordinate
   {
     private readonly double[] myEps;
 

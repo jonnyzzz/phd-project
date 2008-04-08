@@ -55,7 +55,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   }
 
   internal class JVRPairEqualityComparer<T> : IEqualityComparer<JVRPair<T>>
-  where T : ICellCoordinate<T>
+  where T : ICellCoordinate
   {
     private static readonly IEqualityComparer<T> COMPARER = JVRPair<T>.COMPARER;
 

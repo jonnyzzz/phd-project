@@ -8,7 +8,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
   [Obsolete]
   internal class StrangeEntropyAllEdgesLoopsEvaluatorImpl<T> : EntropyEvaluatorLoopBase<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     public StrangeEntropyAllEdgesLoopsEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
     {

@@ -9,7 +9,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 {
   [Obsolete]
   public abstract class EntropyEvaluatorLoopBase<T> : EntropyEvaluatorBase<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     private readonly IEntropyLoopWeightCallback myLoopCallback;
 

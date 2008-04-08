@@ -52,7 +52,7 @@ namespace DSIS.Graph.Entropy.Tests
   }
 
   public class MockLoopIteratorCallback<T> : ILoopIteratorCallback<T> 
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     public void OnLoopFound(IList<INode<T>> loop)
     {

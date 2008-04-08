@@ -58,6 +58,6 @@ namespace DSIS.Graph.Entropy.Tests
     }
 
     protected abstract ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components) 
-      where T : ICellCoordinate<T>;
+      where T : ICellCoordinate;
   }
 }

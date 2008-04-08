@@ -1,11 +1,12 @@
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Tests.Generic;
 using DSIS.IntegerCoordinates;
 
-namespace DSIS.Graph.Generic
+namespace DSIS.Graph.Tests.Generic
 {
   public abstract class StrongComponentStrongComponentManagerBaseTest<T,Q> : StrongComponentGraphBaseTest<T,Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     protected override StrongComponentGraph<Q> CreateGraph(T system)
     {

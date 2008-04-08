@@ -8,8 +8,8 @@ using DSIS.Core.Util;
 namespace DSIS.Core.Processor
 {
   public class ThreadedSymbolicImageConstructionProcess<TFrom, TTo> : ICellProcessor<TFrom, TTo>
-    where TFrom : ICellCoordinate<TFrom>
-    where TTo : ICellCoordinate<TTo>
+    where TFrom : ICellCoordinate
+    where TTo : ICellCoordinate
   {
     private readonly Mutex myReadMutex = new Mutex();
     private readonly Mutex myWriteMutex = new Mutex();

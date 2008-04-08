@@ -8,7 +8,7 @@ using DSIS.Utils;
 namespace DSIS.Core.Processor
 {
   public class ThreadedCellConnectionBuilder<TCell> : ICellConnectionBuilder<TCell>, IDisposable 
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
   {
     private readonly List<Pair<TCell, List<TCell>>> myCache = new List<Pair<TCell, List<TCell>>>();
     private readonly Mutex myMutex;

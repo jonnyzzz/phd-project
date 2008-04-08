@@ -4,7 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph
 {
-  public class NodeEqualityComparer<T> : IEqualityComparer<INode<T>> where T :ICellCoordinate<T>
+  public class NodeEqualityComparer<T> : IEqualityComparer<INode<T>> where T :ICellCoordinate
   {
     private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
     public static readonly IEqualityComparer<INode<T>> INSTANCE = new NodeEqualityComparer<T>();

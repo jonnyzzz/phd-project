@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests.Generic;
+using DSIS.Utils;
 using NUnit.Framework;
 
 namespace DSIS.IntegerCoordinates.Tests.Impl
@@ -22,15 +24,18 @@ namespace DSIS.IntegerCoordinates.Tests.Impl
       IntegerCoordinate c1 = new IntegerCoordinate(new long[] { 1, 2, 3 });
       IntegerCoordinate c2 = new IntegerCoordinate(new long[] { 1, 2 });
 
-      Assert.IsFalse(c1.Comparer.Equals(c1, c2));
-      Assert.IsFalse(c1.Comparer.Equals(c1, c2));
+      IEqualityComparer<IntegerCoordinate> cmp = EqualityComparerFactory<IntegerCoordinate>.GetComparer();
+
+      Assert.IsFalse(cmp.Equals(c1, c2));
+      Assert.IsFalse(cmp.Equals(c1, c2));
     }
 
     [Test]
     public void Test_03()
     {
+      IEqualityComparer<IntegerCoordinate> cmp = EqualityComparerFactory<IntegerCoordinate>.GetComparer();
       IntegerCoordinate c = new IntegerCoordinate(new long[] { 1 });
-      Assert.IsTrue(c.Comparer.GetHashCode(c) >= 0);
+      Assert.IsTrue(cmp.GetHashCode(c) >= 0);
     }
 
 

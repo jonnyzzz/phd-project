@@ -111,7 +111,7 @@ namespace DSIS.SimpleRunner
 
     public static void Do<T, Q>(FullImageBuilderWithLog<T, Q> action, List<string> xslt)
       where T : IIntegerCoordinateSystem<Q>
-      where Q : IIntegerCoordinate<Q>
+      where Q : IIntegerCoordinate
     {
       action.ComputeAllMethods(NullProgressInfo.INSTANCE);
       action.ApplyXSL(xslt);

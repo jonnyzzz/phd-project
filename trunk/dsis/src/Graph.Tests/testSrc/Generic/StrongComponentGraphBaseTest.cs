@@ -3,11 +3,11 @@ using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Generic
+namespace DSIS.Graph.Tests.Generic
 {
   public abstract class StrongComponentGraphBaseTest<T,Q> : ComponentGraphTestBase<T,Q, StrongComponentGraph<Q>>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     [SetUp]
     public override void SetUp()

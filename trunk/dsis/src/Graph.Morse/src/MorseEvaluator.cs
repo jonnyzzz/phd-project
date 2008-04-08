@@ -5,7 +5,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Morse
 {
-  public abstract class MorseEvaluator<T> where T : ICellCoordinate<T>
+  public abstract class MorseEvaluator<T> where T : ICellCoordinate
   {
     private const double EPS = 1e-8;
 

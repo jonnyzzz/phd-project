@@ -5,7 +5,7 @@ namespace DSIS.IntegerCoordinates.Impl
 {
   public class RectProcessorBase<T, Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     protected readonly long[] myLeft;
     protected readonly long[] myRight;

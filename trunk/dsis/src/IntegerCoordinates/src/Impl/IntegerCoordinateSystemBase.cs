@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.Core.Util;
-using DSIS.Persistance;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
   public interface IEXIntegerCoordinateSystemBase<TInh, Q>  : IIntegerCoordinateSystem<Q>
     where TInh : IIntegerCoordinateSystem<Q> 
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     TInh SubdividedCoordinateSystem(long[] division);
     TInh ProjectedCoordinateSystem(long[] division);
@@ -17,7 +16,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
   public abstract class IntegerCoordinateSystemBase<TInh, Q> 
     where TInh : class, IEXIntegerCoordinateSystemBase<TInh, Q> 
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly ISystemSpace mySystemSpace;
 

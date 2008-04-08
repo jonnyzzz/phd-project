@@ -7,7 +7,7 @@ namespace DSIS.Graph.Entropy.Impl
 {
   [Obsolete]
   public abstract class EntropyEvaluatorBase<T> : IEntropyEvaluator<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     protected abstract IEntropyProcessor<T> Measure(IEntropyEvaluatorInput<T> data);
 

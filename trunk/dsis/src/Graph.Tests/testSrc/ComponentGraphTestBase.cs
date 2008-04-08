@@ -6,11 +6,11 @@ using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.Graph
+namespace DSIS.Graph.Tests
 {
   public abstract class ComponentGraphTestBase<T, Q, G>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
     where G : IGraphWithStrongComponent<Q>
   {
     protected G myGraph;

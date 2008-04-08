@@ -1,10 +1,9 @@
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Entropy.Impl.Util;
 
 namespace DSIS.Graph.Entropy.Impl.Entropy
 {
   public interface IEntropyProcessor<T>
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
   {
     void ComputeEntropy(IEntropyListener<T> listener);
 

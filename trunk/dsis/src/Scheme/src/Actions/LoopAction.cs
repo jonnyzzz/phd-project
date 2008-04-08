@@ -5,7 +5,7 @@ using DSIS.Scheme.Exec;
 
 namespace DSIS.Scheme.Actions
 {
-  public class LoopAction : DebugableAction, IAction
+  public class LoopAction : DebugableAction, IAction, ISimpleAction
   {
     public static readonly Key<LoopIndex> LoopIndexKey = new Key<LoopIndex>("loop");
 

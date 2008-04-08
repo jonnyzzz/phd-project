@@ -9,12 +9,12 @@ using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Entropy
+namespace DSIS.Graph.Entropy.Tests
 {
   public class PerfomanceTestBase : GraphBaseTest
   {
     protected delegate ILoopIterator<IntegerCoordinate> Factory<T>(IGraph<T> graph, IGraphStrongComponents<T> comps)
-      where T : ICellCoordinate<T>;
+      where T : ICellCoordinate;
 
     public void DoWithTimeout(VoidDelegate action, TimeSpan time)
     {
@@ -41,15 +41,15 @@ namespace DSIS.Graph.Entropy
     protected void DoWithFullGraph(int power, Factory<IntegerCoordinate> test, TimeSpan timeout)
     {
       TarjanGraph<IntegerCoordinate> gr = DoBuildGraph(delegate(IGraph<IntegerCoordinate> graph)
-                     {
-                       for (int i = 1; i <= power; i++)
-                       {
-                         for (int j = 1; j <= power; j++)
-                         {
-                           AddEdge(graph, i, j);
-                         }
-                       }
-                     });
+                                                         {
+                                                           for (int i = 1; i <= power; i++)
+                                                           {
+                                                             for (int j = 1; j <= power; j++)
+                                                             {
+                                                               AddEdge(graph, i, j);
+                                                             }
+                                                           }
+                                                         });
       IGraphStrongComponents<IntegerCoordinate> components 
         = gr.ComputeStrongComponents(NullProgressInfo.INSTANCE);
 

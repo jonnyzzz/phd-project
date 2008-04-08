@@ -5,7 +5,7 @@ namespace DSIS.IntegerCoordinates.Impl
 {
   internal class IntegerCoordinateCellConverter<T, Q> : ICellCoordinateSystemMultiplyConverter<Q> 
     where T : IIntegerCoordinateSystem<Q> 
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly T myFromSystem;
     private readonly T myToSystem;

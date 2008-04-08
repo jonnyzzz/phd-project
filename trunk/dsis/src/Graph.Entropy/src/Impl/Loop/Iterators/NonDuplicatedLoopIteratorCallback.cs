@@ -5,7 +5,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
   public class NonDuplicatedLoopIteratorCallback<T,C> : ILoopIteratorCallback<T> 
-    where T : ICellCoordinate<T>
+    where T : ICellCoordinate
     where C : ILoopIteratorCallback<T>
   {
     private static readonly IEqualityComparer<INode<T>> COMPARER =

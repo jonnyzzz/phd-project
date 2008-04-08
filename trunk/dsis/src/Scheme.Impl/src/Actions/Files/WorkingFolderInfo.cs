@@ -32,9 +32,17 @@ namespace DSIS.Scheme.Impl.Actions.Files
       return path;
     }
 
+    
+
     public string CreateFileName(string ext)
     {
-      string path = MakeFileName(ext);
+      //todo: Escape
+      return CreateFileNameFromTemplate(ext);
+    }
+
+    public string CreateFileNameFromTemplate(string template)
+    {
+      string path = MakeFileName(string.Format(template, string.Empty));
       if (!File.Exists(path))
       {
         return System.IO.Path.GetFullPath(path);
@@ -42,7 +50,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       for (int c = 0; ; c++)
       {
-        path = MakeFileName(c + ext);
+        path = MakeFileName(string.Format(template, c));
         if (!File.Exists(path))
           return System.IO.Path.GetFullPath(path);
       }

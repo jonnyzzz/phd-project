@@ -3,6 +3,7 @@
  * Created: 2 декабря 2006 г.
  */
 
+using System.Collections.Generic;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
@@ -81,7 +82,8 @@ namespace DSIS.Graph
 
       Assert.AreEqual(1, set.Count);
       set.AddIfNotReplace(ref c2);
-      Assert.IsTrue(c2.Comparer.Equals(c2, c1));
+      IEqualityComparer<IntegerCoordinate> cmp = EqualityComparerFactory<IntegerCoordinate>.GetComparer();
+      Assert.IsTrue(cmp.Equals(c2, c1));
     }
 
 

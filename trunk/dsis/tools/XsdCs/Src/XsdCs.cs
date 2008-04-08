@@ -76,6 +76,30 @@ namespace JetBrains.Build.Tools
 
 		#region Overrides
 
+    public override bool Execute()
+    {
+      // XSD file
+      if (InputFile == null)
+        throw new InvalidOperationException(string.Format("The input file must be specified."));
+
+      string file = InputFile.ItemSpec;
+      if (file == null || !File.Exists(file))
+        throw new InvalidOperationException(string.Format("The input file must be specified."));
+
+      DateTime time = File.GetLastWriteTime(file);
+
+ 			// Outdir
+			if(OutDir == null)
+				throw new InvalidOperationException(string.Format("The output folder must be specified."));
+      string destFile = Path.Combine(OutDir.ItemSpec, Path.GetFileNameWithoutExtension(file) + ".cs");
+
+      DateTime destTime = File.Exists(destFile) ? File.GetLastWriteTime(destFile) : DateTime.MinValue;
+
+      return time < destTime || base.Execute();
+    }
+
+
+
 		protected override string GenerateCommandLineCommands()
 		{
 			CommandLineBuilder cmd = new CommandLineBuilder();

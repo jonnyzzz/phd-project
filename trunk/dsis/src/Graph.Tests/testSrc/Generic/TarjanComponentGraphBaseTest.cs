@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Tests;
 using DSIS.IntegerCoordinates;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Generic
-{  
+namespace DSIS.Graph.Tests.Generic
+{
   public abstract class TarjanComponentGraphBaseTest<T,Q> : ComponentGraphTestBase<T,Q, TarjanGraph<Q>>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     public const uint COMPONENT_ID_TEST = 1 << 20 - 1;
 

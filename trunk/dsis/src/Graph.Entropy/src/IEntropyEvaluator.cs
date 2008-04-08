@@ -42,7 +42,7 @@ namespace DSIS.Graph.Entropy
   }
 
 
-  public interface IEntropyEvaluator2<T> where T : ICellCoordinate<T>
+  public interface IEntropyEvaluator2<T> where T : ICellCoordinate
   {
     IGraphMeasure<T> ComputeEntropy();
   }

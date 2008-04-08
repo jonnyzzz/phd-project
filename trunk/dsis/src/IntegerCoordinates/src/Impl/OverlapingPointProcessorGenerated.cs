@@ -6,7 +6,7 @@ namespace DSIS.IntegerCoordinates.Impl
   //todo:
   internal static class OverlapingPointProcessorGenerated<T, Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private static readonly Dictionary<int, IPointProcessor<Q>> myCache = new Dictionary<int, IPointProcessor<Q>>();
 

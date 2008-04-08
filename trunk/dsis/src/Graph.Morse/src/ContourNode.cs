@@ -1,9 +1,8 @@
-using System;
 using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Morse
 {
-  public class ContourNode<T> where T : ICellCoordinate<T>
+  public class ContourNode<T> where T : ICellCoordinate
   {
     private int myValue = 0;
 

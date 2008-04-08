@@ -4,7 +4,7 @@ namespace DSIS.IntegerCoordinates.Impl
 {
   internal class IntegerCoordinateCellProjector<T, Q> : ICellCoordinateSystemProjector<Q>
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {
     private readonly T myFromSystem;
     private readonly T myToSystem;

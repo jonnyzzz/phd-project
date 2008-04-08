@@ -1,4 +1,4 @@
-	using System;
+using System;
 using System.Collections.Generic;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
@@ -149,7 +149,7 @@ namespace DSIS.Generated
   }
 
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]
-  public class IntegerCoordinate : IIntegerCoordinate<IntegerCoordinate>
+  public class IntegerCoordinate : IIntegerCoordinate
   {
     $DimensionIt:	{
     public readonly long l$it$;

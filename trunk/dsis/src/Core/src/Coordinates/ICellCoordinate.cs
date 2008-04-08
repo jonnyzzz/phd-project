@@ -3,8 +3,6 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
-using System;
-
 namespace DSIS.Core.Coordinates
 {
   /// <summary>
@@ -13,11 +11,5 @@ namespace DSIS.Core.Coordinates
   /// </summary>
   public interface ICellCoordinate
   {    
-  }
-
-  [Obsolete("Use ICellCoordinate instead")]
-  public interface ICellCoordinate<T> : ICellCoordinate
-    where T : ICellCoordinate<T>
-  {    
-  }
+  }  
 }

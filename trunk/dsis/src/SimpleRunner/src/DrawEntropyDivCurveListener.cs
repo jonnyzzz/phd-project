@@ -14,7 +14,7 @@ namespace DSIS.SimpleRunner
   public class DrawEntropyCurveListener<T, Q> : ProvideExternalListenerBase<T, Q, IDrawEntropyImageListener>,
                                                    IComputeEntropyListener<Q>, IComputationPathListener
     where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate<Q>
+    where Q : IIntegerCoordinate
   {    
     private string myTitle;
     private string myPath;

@@ -8,7 +8,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 {
   [Obsolete]
   public class EntropyBackStepGraphWeightCallback<Q> : EntropyGraphWeightCallback<Q>
-    where Q : ICellCoordinate<Q>
+    where Q : ICellCoordinate
   {
     private readonly ICellCoordinateSystem<Q> mySystem;
 

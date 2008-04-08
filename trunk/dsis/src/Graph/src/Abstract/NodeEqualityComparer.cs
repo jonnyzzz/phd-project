@@ -6,7 +6,7 @@ namespace DSIS.Graph.Abstract
 {
   public class NodeEqualityComparer<TNode, TCell> : IEqualityComparer<TNode>
     where TNode : Node<TNode, TCell>
-    where TCell : ICellCoordinate<TCell>
+    where TCell : ICellCoordinate
   {
     private static readonly IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();
     public static NodeEqualityComparer<TNode, TCell> INSTANCE = new NodeEqualityComparer<TNode, TCell>();
