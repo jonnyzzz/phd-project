@@ -1,6 +1,8 @@
+using DSIS.Core.Coordinates;
+
 namespace DSIS.IntegerCoordinates
 {
-  public interface IProcessorFactory<T> where T : IIntegerCoordinate
+  public interface IProcessorFactory<T> where T : ICellCoordinate
   {
     IRadiusProcessor<T> CreateRadiusProcessor();
 
