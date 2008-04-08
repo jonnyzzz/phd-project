@@ -51,11 +51,6 @@ namespace DSIS.Core.Coordinates
     CountEnumerable<T> InitialSubdivision { get; }
 
     /// <summary>
-    /// Returns default set of helper classes for building cells
-    /// </summary>
-    IProcessorFactory<T> ProcessorFactory { get; }
-
-    /// <summary>
     /// Checks if coord represents null. Really usefull in case ICellCoordinate is struct
     /// </summary>
     /// <param name="coord"></param>

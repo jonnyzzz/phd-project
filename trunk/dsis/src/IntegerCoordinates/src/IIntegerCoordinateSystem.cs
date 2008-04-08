@@ -35,6 +35,11 @@ namespace DSIS.IntegerCoordinates
 
     bool Intersects(long l, int axis);
 
+    /// <summary>
+    /// Returns default set of helper classes for building cells
+    /// </summary>
+    IProcessorFactory<T> ProcessorFactory { get; }
+
     T Create(params long[] param);
   }
 }

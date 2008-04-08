@@ -63,6 +63,10 @@
     <Compile Include="src\Impl\RadiusProcessor.cs" />
     <Compile Include="src\Impl\RectProcessor.cs" />
     <Compile Include="src\Impl\RectProcessorBase.cs" />
+    <Compile Include="src\IPointProcessor.cs" />
+    <Compile Include="src\IProcessorFactory.cs" />
+    <Compile Include="src\IRadiusProcessor.cs" />
+    <Compile Include="src\IRectProcessors.cs" />
     <Compile Include="src\NamespaceHolder.cs" />
   </ItemGroup>
   <ItemGroup>
