@@ -5,6 +5,7 @@
 
 using DSIS.Core.System;
 using DSIS.Core.Util;
+using DSIS.IntegerCoordinates;
 
 namespace DSIS.Core.Coordinates
 {
@@ -48,5 +49,17 @@ namespace DSIS.Core.Coordinates
     /// Returns all cells for initial space provided by ISystemSpace
     /// </summary>
     CountEnumerable<T> InitialSubdivision { get; }
+
+    /// <summary>
+    /// Returns default set of helper classes for building cells
+    /// </summary>
+    IProcessorFactory<T> ProcessorFactory { get; }
+
+    /// <summary>
+    /// Checks if coord represents null. Really usefull in case ICellCoordinate is struct
+    /// </summary>
+    /// <param name="coord"></param>
+    /// <returns></returns>
+    bool IsNull(T coord);
   }
 }

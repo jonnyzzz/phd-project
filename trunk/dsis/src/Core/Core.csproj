@@ -52,6 +52,10 @@
     <Compile Include="src\Coordinates\ICellCoordinateSystemConverter.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemMultiplyConverter.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemProjector.cs" />
+    <Compile Include="src\Coordinates\IPointProcessor.cs" />
+    <Compile Include="src\Coordinates\IProcessorFactory.cs" />
+    <Compile Include="src\Coordinates\IRadiusProcessor.cs" />
+    <Compile Include="src\Coordinates\IRectProcessors.cs" />
     <Compile Include="src\Data\IContinuableDataCollectionAnalisys.cs" />
     <Compile Include="src\Data\IDataCollection.cs" />
     <Compile Include="src\Data\IDataCollectionAnalisys.cs" />

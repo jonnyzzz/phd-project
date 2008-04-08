@@ -18,7 +18,7 @@ namespace DSIS.Generated
       private readonly double myCellSizeHalfL$it$;
       private readonly double myCellSizeL$it$;    
       private readonly double myAreaLeftPointL$it$;    
-      private readonly long mySubdivisionL$it$;
+      internal readonly long mySubdivisionL$it$;
     }$
 
     public IntegerCoordinateSystem(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
@@ -49,11 +49,11 @@ namespace DSIS.Generated
     }
 
 	$DimensionIt:{
-    private long ToInternalL$it$(double point)
+    public long ToInternalL$it$(double point)
     {
       return Ceil((point - myAreaLeftPointL$it$)/ myCellSizeL$it$);
     }
-    private double ToExternalL$it$(long pt)
+    public double ToExternalL$it$(long pt)
     {
       return myAreaLeftPointL$it$ + myCellSizeL$it$ * pt;
     }
@@ -146,6 +146,16 @@ namespace DSIS.Generated
     {
       get { return $Dimension$; }
     }
+    
+    public override IRadiusProcessor<IntegerCoordinate> CreateRadiusProcessor()
+    {
+      return new RadiusProcessor(this);
+    }
+
+    public override IRectProcessor<IntegerCoordinate> CreateRectProcessor(double[] eps)
+    {
+      return new RectProcessor(this, eps);
+    }        
   }
 
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]
@@ -229,6 +239,108 @@ namespace DSIS.Generated
     public IIntegerCoordinateSystemInfo Create(ISystemSpace space, long[] subd)
     {
       return new IntegerCoordinateSystem(space, subd);
+    }
+  }
+  
+  public class RectProcessorBase
+  {
+    $DimensionIt:{
+    protected long myLeft$it$;
+    protected long myRight$it$;
+    protected long myPoint$it$;
+    }$
+        
+    protected readonly IntegerCoordinateSystem myCoordinateSystem;
+    protected readonly ISystemSpace mySystemSpace;
+
+    public RectProcessorBase(IntegerCoordinateSystem coordinateSystem)
+    {
+      myCoordinateSystem = coordinateSystem;
+      mySystemSpace = myCoordinateSystem.SystemSpace;            
+    }
+
+    protected IEnumerable<IntegerCoordinate> Enumerate()
+    {      
+      while (true)
+      {
+        yield return myCoordinateSystem.Create($DimensionIt:{myPoint$it$};separator=", "$);
+
+        myPoint0++;
+        
+        $DimensionItNext:{
+          if (myPoint$it.First$ > myRight$it.First$)
+          {            
+            $if(it.Second)$
+              myPoint$it.First$ = myLeft$it.First$;
+              myPoint$it.Second$++;              
+            $else$
+              break;
+            $endif$
+          }
+          else continue;
+        }$
+      }
+    }
+  }
+  
+  internal sealed class RectProcessor : RectProcessorBase, IRectProcessor<IntegerCoordinate>    
+  {
+    $DimensionIt:{
+    private readonly double myEps$it$;
+    }$
+
+    public RectProcessor(IntegerCoordinateSystem coordinateSystem, double[] eps) : base(coordinateSystem)
+    {
+      $DimensionIt:{
+      myEps$it$ = eps[$it$];
+      }$
+    }
+
+    public IEnumerable<IntegerCoordinate> ConnectCellToRect(double[] left, double[] right)
+    {
+      if (!mySystemSpace.ContainsRect(left, right))
+        return EmptyArray<IntegerCoordinate>.Instance;
+
+      $DimensionIt:{      
+        myLeft$it$ = myCoordinateSystem.ToInternalL$it$(left[$it$] - myEps$it$);
+        if (myLeft$it$ < 0)
+          myLeft$it$ = 0;
+
+        myRight$it$ = myCoordinateSystem.ToInternalL$it$(right[$it$] + myEps$it$);
+        if (myRight$it$ > myCoordinateSystem.mySubdivisionL$it$)
+          myRight$it$ = myCoordinateSystem.mySubdivisionL$it$ - 1;
+
+        myPoint$it$ = myLeft$it$;
+      }$
+
+      return Enumerate();
+    }
+  }
+  
+  internal sealed class RadiusProcessor : RectProcessorBase, IRadiusProcessor<IntegerCoordinate>
+  {
+    public RadiusProcessor(IntegerCoordinateSystem coordinateSystem) : base(coordinateSystem)
+    {
+    }
+
+    public IEnumerable<IntegerCoordinate> ConnectCellToRadius(double[] point, double[] radius)
+    {
+      if (!mySystemSpace.Contains(point))
+        return EmptyArray<IntegerCoordinate>.Instance;
+
+      $DimensionIt:{
+        myLeft$it$ = myCoordinateSystem.ToInternalL$it$(point[$it$] - radius[$it$]);
+        if (myLeft$it$ < 0)
+          myLeft$it$ = 0;
+
+        myRight$it$ = myCoordinateSystem.ToInternalL$it$(point[$it$] + radius[$it$]);
+        if (myRight$it$ > myCoordinateSystem.mySubdivisionL$it$)
+          myRight$it$ = myCoordinateSystem.mySubdivisionL$it$ - 1;
+
+        myPoint$it$ = myLeft$it$;
+      }$
+
+      return Enumerate();
     }
   }
 }

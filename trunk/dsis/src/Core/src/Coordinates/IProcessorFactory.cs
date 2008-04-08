@@ -13,4 +13,5 @@ namespace DSIS.IntegerCoordinates
     IPointProcessor<T> CreateOverlapedPointProcessor(double cellSizePercent);
     IPointProcessor<T> CreateOverlapedPointProcessor(double[] cellSizePercent);
   }
+  
 }

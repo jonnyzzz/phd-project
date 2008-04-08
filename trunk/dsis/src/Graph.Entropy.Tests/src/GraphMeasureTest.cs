@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Util;
-using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using DSIS.Utils;

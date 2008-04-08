@@ -214,32 +214,37 @@ namespace DSIS.IntegerCoordinates.Impl
       return eps;
     }
 
-    public IRadiusProcessor<Q> CreateRadiusProcessor()
+    public bool IsNull(Q coord)
+    {
+      return coord == null;
+    }
+
+    public virtual IRadiusProcessor<Q> CreateRadiusProcessor()
     {
       return new RadiusProcessor<TInh, Q>(myInh);
     }
 
-    public IRectProcessor<Q> CreateRectProcessor(double[] eps)
+    public virtual IRectProcessor<Q> CreateRectProcessor(double[] eps)
     {
       return new RectProcessor<TInh, Q>(myInh, eps);
     }
 
-    public IRectProcessor<Q> CreateRectProcessor(double cellSizeFactor)
+    public virtual IRectProcessor<Q> CreateRectProcessor(double cellSizeFactor)
     {
       return CreateRectProcessor(FillArrayFromCell(cellSizeFactor));
     }
 
-    public IPointProcessor<Q> CreatePointProcessor()
+    public virtual IPointProcessor<Q> CreatePointProcessor()
     {
       return new PointProcessor<TInh, Q>(myInh);
     }
 
-    public IPointProcessor<Q> CreateOverlapedPointProcessor(double cellSizePercent)
+    public virtual IPointProcessor<Q> CreateOverlapedPointProcessor(double cellSizePercent)
     {
       return new OverlappingProcessor<TInh, Q>(myInh, FillArray(cellSizePercent));
     }
 
-    public IPointProcessor<Q> CreateOverlapedPointProcessor(double[] cellSizePercent)
+    public virtual IPointProcessor<Q> CreateOverlapedPointProcessor(double[] cellSizePercent)
     {
       return new OverlappingProcessor<TInh, Q>(myInh, cellSizePercent);
     }

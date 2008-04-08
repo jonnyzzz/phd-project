@@ -68,12 +68,13 @@ namespace DSIS.IntegerCoordinates.Generated
 
       List<int> dims = new List<int>();
       List<Pair<int, int>> dimAndPrime = new List<Pair<int, int>>();
+      List<Pair<int, int?>> dimAndNext = new List<Pair<int, int?>>();
       for (int i = 0; i < dim; i++)
       {
         dims.Add(i);
         dimAndPrime.Add(new Pair<int, int>(i, Primes.ByIndex(3*i)));
+        dimAndNext.Add(new Pair<int, int?>(i, i+1 < dim ? i+1 : (int?)null));
       }
-
 
       StringTemplateGroup g =
         new StringTemplateGroup("foo",
@@ -83,6 +84,7 @@ namespace DSIS.IntegerCoordinates.Generated
       template.SetAttribute("Dimension", dim);
       template.SetAttribute("DimensionIt", dims);
       template.SetAttribute("DimensionItPair", dimAndPrime);
+      template.SetAttribute("DimensionItNext", dimAndNext);
 
       return template.ToString();
     }

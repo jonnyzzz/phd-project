@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DSIS.IntegerCoordinates.Impl;
 
-namespace DSIS.IntegerCoordinates
+namespace DSIS.IntegerCoordinates.Impl
 {
   public struct IntegerCoordinateEqualityComparer : IEqualityComparer<IntegerCoordinate>
   {

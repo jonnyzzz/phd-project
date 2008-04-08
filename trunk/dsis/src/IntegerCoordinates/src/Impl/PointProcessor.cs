@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using DSIS.Utils;
 
-namespace DSIS.IntegerCoordinates
+namespace DSIS.IntegerCoordinates.Impl
 {
   public sealed class PointProcessor<T, Q> : IPointProcessor<Q>
     where T : IIntegerCoordinateSystem<Q> 
@@ -17,7 +16,10 @@ namespace DSIS.IntegerCoordinates
     public IEnumerable<Q> AddPoint(double[] value)
     {
       Q q = myIcs.FromPoint(value);
-      return q != null ? new Q[] {q} : EmptyArray<Q>.Instance;
+      if (myIcs.IsNull(q))
+        yield break;
+      else
+        yield return q;
     }
   }
 }

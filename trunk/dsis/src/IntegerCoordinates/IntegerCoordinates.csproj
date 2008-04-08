@@ -42,6 +42,7 @@
     <Compile Include="src\Generated\GeneratedIntegerCoordinateFactory.cs" />
     <Compile Include="src\Generated\GeneratedIntegerCoordinateSystemManager.cs" />
     <Compile Include="src\Generated\IIntegerCoordinateCallback.cs" />
+    <Compile Include="src\Generated\IntegerCoordinateSystem2dFactory.cs" />
     <Compile Include="src\IIntegerCoordinateFactory.cs" />
     <Compile Include="src\IIntegerCoordinateFactoryEx.cs" />
     <Compile Include="src\Generated\IntegerCoordinate2d.cs" />
@@ -62,10 +63,6 @@
     <Compile Include="src\Impl\RadiusProcessor.cs" />
     <Compile Include="src\Impl\RectProcessor.cs" />
     <Compile Include="src\Impl\RectProcessorBase.cs" />
-    <Compile Include="src\IPointProcessor.cs" />
-    <Compile Include="src\IProcessorFactory.cs" />
-    <Compile Include="src\IRadiusProcessor.cs" />
-    <Compile Include="src\IRectProcessors.cs" />
     <Compile Include="src\NamespaceHolder.cs" />
   </ItemGroup>
   <ItemGroup>
