@@ -15,9 +15,9 @@ namespace DSIS.Generated
   {
   
     $DimensionIt:{
-      private readonly double myCellSizeHalfL$it$;
-      private readonly double myCellSizeL$it$;    
-      private readonly double myAreaLeftPointL$it$;    
+      internal readonly double myCellSizeHalfL$it$;
+      internal readonly double myCellSizeL$it$;    
+      internal readonly double myAreaLeftPointL$it$;    
       internal readonly long mySubdivisionL$it$;
     }$
 
@@ -49,11 +49,11 @@ namespace DSIS.Generated
     }
 
 	$DimensionIt:{
-    public long ToInternalL$it$(double point)
+    internal long ToInternalL$it$(double point)
     {
       return Ceil((point - myAreaLeftPointL$it$)/ myCellSizeL$it$);
     }
-    public double ToExternalL$it$(long pt)
+    internal double ToExternalL$it$(long pt)
     {
       return myAreaLeftPointL$it$ + myCellSizeL$it$ * pt;
     }
@@ -86,13 +86,20 @@ namespace DSIS.Generated
       }$
     }
 
+	$DimensionIt:{
+    internal bool IntersectsL$it$(long l)
+    {      
+      return l >= 0 && l < mySubdivisionL$it$;     
+    }
+    }$
+
     public bool Intersects(long l, int axis)
     {
       switch(axis)
       {
         $DimensionIt:{
         case $it$:
-          return l >= 0 && l < mySubdivisionL$it$;
+          return IntersectsL$it$(l);
         }$
         default:
           return false;
@@ -156,12 +163,17 @@ namespace DSIS.Generated
     {
       return new RectProcessor(this, eps);
     }        
+    
+    public override IPointProcessor<IntegerCoordinate> CreateOverlapedPointProcessor(double[] cellSizePercent)
+    {
+      return new OverlappingProcessor(this, cellSizePercent);
+    }
   }
 
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]
   public class IntegerCoordinate : IIntegerCoordinate
   {
-    $DimensionIt:	{
+    $DimensionIt:{
     public readonly long l$it$;
     }$
 
@@ -266,7 +278,7 @@ namespace DSIS.Generated
         yield return myCoordinateSystem.Create($DimensionIt:{myPoint$it$};separator=", "$);
 
         myPoint0++;
-        
+                
         $DimensionItNext:{
           if (myPoint$it.First$ > myRight$it.First$)
           {            
@@ -343,4 +355,78 @@ namespace DSIS.Generated
       return Enumerate();
     }
   }
+  
+  
+  internal sealed class OverlappingProcessor : IPointProcessor<IntegerCoordinate>
+  {
+    private readonly IntegerCoordinateSystem myCoordinateSystem;
+    $DimensionIt:{
+    private long myPoint_$it$;
+    private long myPoint2_$it$;    
+    private long myZeros$it$;
+    private long myOnes$it$;
+    private double myOLeft$it$;
+    private double myORight$it$;
+    }$
+
+    public OverlappingProcessor(IntegerCoordinateSystem coordinateSystem, double[] percent)
+    {
+      myCoordinateSystem = coordinateSystem;
+
+      $DimensionIt:{
+        myZeros$it$ = 0;
+        myOnes$it$ = 1;
+        myOLeft$it$ = myCoordinateSystem.myCellSizeL$it$ * percent[$it$];
+        myORight$it$ = myCoordinateSystem.myCellSizeL$it$ * (1 - percent[$it$]);
+      }$
+    }
+
+    public IEnumerable<IntegerCoordinate> AddPoint(double[] value)
+    {
+      bool iter = false;
+      bool intersects = true;
+      $DimensionIt:{ {     
+        double v = value[$it$];
+        myPoint_$it$ = myCoordinateSystem.ToInternalL$it$(v);
+                
+        intersects &= myCoordinateSystem.IntersectsL$it$(myPoint_$it$);
+        
+        if (!intersects && (myPoint_$it$ < -1 || myPoint_$it$ > myCoordinateSystem.mySubdivisionL$it$ + 1))
+			yield break;
+		
+		double tmp = v - myCoordinateSystem.ToExternalL$it$(myPoint_$it$);
+        if (tmp < myOLeft$it$)
+        {
+          myPoint2_$it$ = -1;
+          iter = true;
+        }
+        else if (tmp > myORight$it$)
+        {
+          myPoint2_$it$ = 1;
+          iter = true;
+        }
+        else
+          myPoint2_$it$ = 0;		
+      } }$
+            
+      if (intersects)
+		yield return myCoordinateSystem.Create($DimensionIt:{myPoint_$it$};separator=", "$);
+      
+      if (iter) {
+        $BoxIt:{ {
+          if (myPoint2_$it.First$ != 0)
+          {
+			  $if(it.Second)$
+				myPoint_$it.First$ += myPoint2_$it.First$;
+			  $else$
+				myPoint_$it.First$ -= myPoint2_$it.First$;
+			  $endif$
+
+	  		  if (myCoordinateSystem.IntersectsL$it.First$(myPoint_$it.First$))
+				yield return myCoordinateSystem.Create($DimensionIt:{myPoint_$it$};separator=", "$);          
+		  }		  
+        } }$     
+      }             
+    }
+  }  
 }

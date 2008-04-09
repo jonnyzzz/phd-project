@@ -229,7 +229,7 @@ namespace DSIS.IntegerCoordinates.Impl
       return new RectProcessor<TInh, Q>(myInh, eps);
     }
 
-    public virtual IRectProcessor<Q> CreateRectProcessor(double cellSizeFactor)
+    public IRectProcessor<Q> CreateRectProcessor(double cellSizeFactor)
     {
       return CreateRectProcessor(FillArrayFromCell(cellSizeFactor));
     }
@@ -239,9 +239,9 @@ namespace DSIS.IntegerCoordinates.Impl
       return new PointProcessor<TInh, Q>(myInh);
     }
 
-    public virtual IPointProcessor<Q> CreateOverlapedPointProcessor(double cellSizePercent)
+    public IPointProcessor<Q> CreateOverlapedPointProcessor(double cellSizePercent)
     {
-      return new OverlappingProcessor<TInh, Q>(myInh, FillArray(cellSizePercent));
+      return CreateOverlapedPointProcessor(FillArray(cellSizePercent));
     }
 
     public virtual IPointProcessor<Q> CreateOverlapedPointProcessor(double[] cellSizePercent)

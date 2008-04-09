@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Antlr.StringTemplate;
+using DSIS.BoxIterators.Generator;
 using DSIS.CodeCompiler;
 using DSIS.Spring;
 using DSIS.Utils;
@@ -85,6 +86,7 @@ namespace DSIS.IntegerCoordinates.Generated
       template.SetAttribute("DimensionIt", dims);
       template.SetAttribute("DimensionItPair", dimAndPrime);
       template.SetAttribute("DimensionItNext", dimAndNext);
+      template.SetAttribute("BoxIt", new ShennonFenoCodec(dim));
 
       return template.ToString();
     }
