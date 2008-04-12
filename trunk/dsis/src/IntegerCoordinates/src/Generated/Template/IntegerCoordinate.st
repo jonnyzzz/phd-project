@@ -259,7 +259,6 @@ namespace DSIS.Generated
     $DimensionIt:{
     protected long myLeft$it$;
     protected long myRight$it$;
-    protected long myPoint$it$;
     }$
         
     protected readonly IntegerCoordinateSystem myCoordinateSystem;
@@ -272,26 +271,11 @@ namespace DSIS.Generated
     }
 
     protected IEnumerable<IntegerCoordinate> Enumerate()
-    {      
-      while (true)
-      {
-        yield return myCoordinateSystem.Create($DimensionIt:{myPoint$it$};separator=", "$);
-
-        myPoint0++;
-                
-        $DimensionItNext:{
-          if (myPoint$it.First$ > myRight$it.First$)
-          {            
-            $if(it.Second)$
-              myPoint$it.First$ = myLeft$it.First$;
-              myPoint$it.Second$++;              
-            $else$
-              break;
-            $endif$
-          }
-          else continue;
-        }$
-      }
+    {             
+	  $DimensionIt:{
+		for(long myPoint$it$=myLeft$it$; myPoint$it$ <= myRight$it$; myPoint$it$++)
+      }$
+		yield return myCoordinateSystem.Create($DimensionIt:{myPoint$it$};separator=", "$);        
     }
   }
   
@@ -321,8 +305,6 @@ namespace DSIS.Generated
         myRight$it$ = myCoordinateSystem.ToInternalL$it$(right[$it$] + myEps$it$);
         if (myRight$it$ > myCoordinateSystem.mySubdivisionL$it$)
           myRight$it$ = myCoordinateSystem.mySubdivisionL$it$ - 1;
-
-        myPoint$it$ = myLeft$it$;
       }$
 
       return Enumerate();
@@ -348,8 +330,6 @@ namespace DSIS.Generated
         myRight$it$ = myCoordinateSystem.ToInternalL$it$(point[$it$] + radius[$it$]);
         if (myRight$it$ > myCoordinateSystem.mySubdivisionL$it$)
           myRight$it$ = myCoordinateSystem.mySubdivisionL$it$ - 1;
-
-        myPoint$it$ = myLeft$it$;
       }$
 
       return Enumerate();
