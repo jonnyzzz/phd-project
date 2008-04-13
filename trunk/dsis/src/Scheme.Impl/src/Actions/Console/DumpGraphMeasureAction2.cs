@@ -32,14 +32,14 @@ namespace DSIS.Scheme.Impl.Actions.Console
                     for (int i = 0; i < system.Dimension; i++)
                     {
                       int v;
-                      if ((v = p1.First.From.GetCoordinate(i).CompareTo(p1.First.From.GetCoordinate(i))) != 0)
+                      if ((v = p1.First.From.GetCoordinate(i).CompareTo(p2.First.From.GetCoordinate(i))) != 0)
                         return v;                     
                     } 
                     
                     for (int i = 0; i < system.Dimension; i++)
                     {
                       int v;
-                      if ((v = p1.First.To.GetCoordinate(i).CompareTo(p1.First.To.GetCoordinate(i))) != 0)
+                      if ((v = p1.First.To.GetCoordinate(i).CompareTo(p2.First.To.GetCoordinate(i))) != 0)
                         return v;                     
                     } 
                       
