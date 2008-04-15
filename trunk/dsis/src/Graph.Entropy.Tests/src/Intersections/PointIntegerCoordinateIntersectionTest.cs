@@ -1,4 +1,3 @@
-using System;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy.Tests.Intersections
@@ -6,21 +5,28 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
   [TestFixture]
   public class PointIntegerCoordinateIntersectionTest :  PointIntegerCoordinateIntersectionTestBase
   {
-    //todo: Build function according to the Graph
-    private static double Id(double x)
+    [Test]
+    public void DoTest_01_one()
     {
-      if (Math.Abs(x - 1) < 1e-4)
-        return 2;
-      if (Math.Abs(x - 2) < 1e-4)
-        return 1;
-      return x;
+      DoTest(ConnectionType.One, 0, n(1, 2, 0.5), n(2, 1, 0.5));
     }
 
-
     [Test]
-    public void DoTest_01()
+    public void DoTest_01_many()
     {
-      DoTest(Id, 3, 0, n(1, 2), n(2, 1));
+      DoTest(ConnectionType.Many, 0, n(1, 2,0.5), n(2, 1, 0.5));
+    }
+    
+    [Test]
+    public void DoTest_02_many()
+    {
+      DoTest(ConnectionType.Many, 0, n(1, 5), n(2, 5), n(3, 5), n(4, 5), n(5,5), n(5, 1), n(1,2), n(2,3), n(3,4));
+    }
+    
+    [Test]
+    public void DoTest_02_one()
+    {
+      DoTest(ConnectionType.Many, 0, n(1, 5), n(2, 5), n(3, 5), n(4, 5), n(5,5));
     }
     
   }

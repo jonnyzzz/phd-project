@@ -38,13 +38,13 @@ namespace DSIS.Graph.Entropy.Intersection
         cellImageBuilder.BuildImage(node.Coordinate);
       }
 
-      builder.Norm(myGraph);
+      double norm = builder.Norm(myGraph);
 
       return new GraphMeasure<Q, NodePair<Q>>(
         "Intersection", 
         builder.Vector.Dictionary, 
         EqualityComparerFactory<Q>.GetReferenceComparer(), 
-        1.0, 
+        norm, 
         myGraph.CoordinateSystem
         );
     }
@@ -89,18 +89,39 @@ namespace DSIS.Graph.Entropy.Intersection
         get { return myVector; }
       }
 
-      public void Norm(IGraph<Q> graph)
+      public double Norm(IGraph<Q> graph)
       {
+        
+        Vector<Q> mi = new Vector<Q>();
         foreach (INode<Q> node in graph.Nodes)
         {
           Q cell = node.Coordinate;
           int cellHash = NodePair<Q>.HashValue(cell);
+          double count = myNodePoints[cell];
+          double t = 0;
           foreach (INode<Q> edge in graph.GetEdges(node))
           {
-            myVector[new NodePair<Q>(cell, cellHash, edge.Coordinate)] /= myNodePoints[cell]*graph.NodesCount;            
-          }          
+            t+= (myVector[new NodePair<Q>(cell, cellHash, edge.Coordinate)] /= count);                        
+          }
+
+          mi.Add(cell, t);
         }
-      }
+
+        double sum = 0;
+        foreach (INode<Q> node in graph.Nodes)
+        {
+          Q cell = node.Coordinate;
+          int cellHash = NodePair<Q>.HashValue(cell);
+          double dv = mi[cell];
+
+          foreach (INode<Q> edge in graph.GetEdges(node))
+          {
+            sum += (myVector[new NodePair<Q>(cell, cellHash, edge.Coordinate)] /= dv);
+          }
+        }
+
+        return sum;
+      }     
     }
   }
 }
