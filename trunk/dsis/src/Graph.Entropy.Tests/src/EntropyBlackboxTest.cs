@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Entropy;
+using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
@@ -56,7 +58,7 @@ namespace DSIS.Graph.Entropy.Tests
       }
     }
 
-    protected void DoTest(string script, double entropy, params Node[] nodes)
+    protected virtual void DoTest(string script, double entropy, params Node[] nodes)
     {
       IGraphEntropy evaluator = DoTest(script, nodes);
       evaluator.GetEntropy();
@@ -187,6 +189,26 @@ namespace DSIS.Graph.Entropy.Tests
     protected static double L(double v)
     {
       return v*Math.Log(v)/Math.Log(2);
+    }
+
+    protected class GraphMeasureEdgeInfo<TPair> : IEdgeInfo 
+      where TPair : PairBase<IntegerCoordinate>       
+    {
+      private readonly GraphMeasure<IntegerCoordinate, TPair> myMeasure;
+      private readonly Create myFactory;
+
+      public GraphMeasureEdgeInfo(GraphMeasure<IntegerCoordinate, TPair> measure, Create factory)
+      {
+        myMeasure = measure;
+        myFactory = factory;
+      }
+
+      public delegate TPair Create(IntegerCoordinate from, IntegerCoordinate to);
+
+      public double Edge(IntegerCoordinate from, IntegerCoordinate to)
+      {
+        return myMeasure.M[myFactory(from, to)];
+      }
     }
   }
 }

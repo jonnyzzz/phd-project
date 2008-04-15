@@ -26,10 +26,8 @@ namespace DSIS.Graph.Entropy.Intersection
 
     public IGraphMeasure<Q> Start()    
     {
-      Vector<NodePair<Q>> myVector = new Vector<NodePair<Q>>();
-
       ICellImageBuilder<Q> cellImageBuilder = CreateBuilder(mySettings);            
-      CellConnectionBuilderImpl builder = new CellConnectionBuilderImpl(myVector, myGraph);
+      CellConnectionBuilderImpl builder = new CellConnectionBuilderImpl(myGraph);
       cellImageBuilder.Bind(new CellImageBuilderContext<Q>(
                               myFunction, 
                               mySettings, myGraph.CoordinateSystem, builder
@@ -40,61 +38,69 @@ namespace DSIS.Graph.Entropy.Intersection
         cellImageBuilder.BuildImage(node.Coordinate);
       }
 
-      double norm = 0;
-      foreach (INode<Q> node in myGraph.Nodes)
-      {
-        double cnt = 0;
-        Dictionary<NodePair<Q>, double> values = new Dictionary<NodePair<Q>, double>();
-        int nodeHash = NodePair<Q>.HashValue(node.Coordinate);
-        foreach (INode<Q> edge in myGraph.GetEdges(node))
-        {
-          NodePair<Q> data = new NodePair<Q>(node.Coordinate, nodeHash, edge.Coordinate);
-          double times = myVector[data];
-          values.Add(data, times);
-          cnt += times;
-        }
+      builder.Norm(myGraph);
 
-        foreach (KeyValuePair<NodePair<Q>, double> pair in values)
-        {
-          double n = pair.Value/cnt;
-          norm += n;
-          myVector[pair.Key] = n;
-        }
-      }
-
-      return new GraphMeasure<Q, NodePair<Q>>("Intersection", myVector.Dictionary, EqualityComparerFactory<Q>.GetReferenceComparer(), norm, myGraph.CoordinateSystem);
+      return new GraphMeasure<Q, NodePair<Q>>(
+        "Intersection", 
+        builder.Vector.Dictionary, 
+        EqualityComparerFactory<Q>.GetReferenceComparer(), 
+        1.0, 
+        myGraph.CoordinateSystem
+        );
     }
 
-    private class CellConnectionBuilderImpl : ICellConnectionBuilder<Q>
+    protected class CellConnectionBuilderImpl : ICellConnectionBuilder<Q>
     {
-      private readonly Vector<NodePair<Q>> myVector;
+      private readonly Vector<NodePair<Q>> myVector = new Vector<NodePair<Q>>();
+      private readonly Vector<Q> myNodePoints = new Vector<Q>();
       private readonly IGraph<Q> myGraph;
 
-      public CellConnectionBuilderImpl(Vector<NodePair<Q>> vector, IGraph<Q> graph)
-      {
-        myVector = vector;
+      public CellConnectionBuilderImpl(IGraph<Q> graph)
+      {       
         myGraph = graph;
       }
 
-      public void ConnectToOne(Q cell, Q v)
+      void ICellConnectionBuilder<Q>.ConnectToOne(Q cell, Q v)
       {
         if (myGraph.Contains(v))
         {
           myVector.Add(new NodePair<Q>(cell, v), 1);
+          myNodePoints.Add(cell, 1);
         }
       }
 
-      public void ConnectToMany(Q cell, IEnumerable<Q> v)
+      void ICellConnectionBuilder<Q>.ConnectToMany(Q cell, IEnumerable<Q> v)
       {
         int cellHash = NodePair<Q>.HashValue(cell);
+        long cnt = 0;
         foreach (Q q in v)
         {
           if (myGraph.Contains(q))
           {
             myVector.Add(new NodePair<Q>(cell, cellHash, q), 1);
+            cnt++;
           }
         }
-      }      
+        myNodePoints.Add(cell, cnt);
+      }
+
+      public Vector<NodePair<Q>> Vector
+      {
+        get { return myVector; }
+      }
+
+      public void Norm(IGraph<Q> graph)
+      {
+        foreach (INode<Q> node in graph.Nodes)
+        {
+          Q cell = node.Coordinate;
+          int cellHash = NodePair<Q>.HashValue(cell);
+          foreach (INode<Q> edge in graph.GetEdges(node))
+          {
+            myVector[new NodePair<Q>(cell, cellHash, edge.Coordinate)] /= myNodePoints[cell]*graph.NodesCount;            
+          }          
+        }
+      }
     }
   }
 }

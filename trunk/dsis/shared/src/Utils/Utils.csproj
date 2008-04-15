@@ -76,6 +76,7 @@
     <Compile Include="src\UpcastedCollection.cs" />
     <Compile Include="src\UpcastedDictionary.cs" />
     <Compile Include="src\UpcastedEnumerable.cs" />
+    <Compile Include="src\UsedAttribute.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueExTest.cs" />
     <Compile Include="src\Delegates.cs" />
     <Compile Include="src\DoubleEqualityComparer.cs" />

@@ -48,6 +48,8 @@
     <Compile Include="src\GraphSearchTest.cs" />
     <Compile Include="src\GraphWeightSearch2Test.cs" />
     <Compile Include="src\GraphWeightSearchTest.cs" />
+    <Compile Include="src\Intersections\PointIntegerCoordinateIntersectionTest.cs" />
+    <Compile Include="src\Intersections\PointIntegerCoordinateIntersectionTestBase.cs" />
     <Compile Include="src\JVRMeasureTest.cs" />
     <Compile Include="src\JVRMeasureTestBase.cs" />
     <Compile Include="src\JVrPairTest.cs" />
@@ -109,6 +111,10 @@
     <ProjectReference Include="..\Function.Predefined\Function.Predefined.csproj">
       <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
       <Name>Function.Predefined</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Graph.Entropy.Intersection\Graph.Entropy.Intersection.csproj">
+      <Project>{655665D8-F6E8-45A2-85CB-AE10B2215C26}</Project>
+      <Name>Graph.Entropy.Intersection</Name>
     </ProjectReference>
     <ProjectReference Include="..\Graph.Entropy\Graph.Entropy.csproj">
       <Project>{43283F9D-A669-47B2-80FD-FFA447A4BD7F}</Project>
