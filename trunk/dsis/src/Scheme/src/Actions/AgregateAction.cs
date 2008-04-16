@@ -23,8 +23,6 @@ namespace DSIS.Scheme.Actions
       construct(Builder);
     }
 
-    #region IAction Members
-
     public ICollection<ContextMissmatch> Compatible(Context ctx)
     {
       return myStart.CompatibleExternal(ctx);
@@ -47,10 +45,6 @@ namespace DSIS.Scheme.Actions
       get { return this; }
     }
 
-    #endregion
-
-    #region IActionGraphPartBuilder Members
-
     ISimpleAction IActionGraphPartBuilder.Start
     {
       get { return myStart; }
@@ -68,10 +62,6 @@ namespace DSIS.Scheme.Actions
 
       myGraph.AddEdge(a, b);
     }
-
-    #endregion
-
-    #region Nested type: EndAction
 
     private class EndAction : ISimpleAction
     {
@@ -97,10 +87,6 @@ namespace DSIS.Scheme.Actions
 
       #endregion
     }
-
-    #endregion
-
-    #region Nested type: StartAction
 
     private class StartAction : ISimpleAction
     {
@@ -141,7 +127,5 @@ namespace DSIS.Scheme.Actions
         myContext = cx;
       }
     }
-
-    #endregion
   }
 }

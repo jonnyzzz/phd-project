@@ -19,6 +19,16 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
       myGraph = graph;
     }
 
+    public IGraph<T> Graph
+    {
+      get { return myGraph; }
+    }
+
+    public double Eps
+    {
+      get { return myEps; }
+    }
+
     public IGraphEntropy ComputeEntropy()
     {
       if (myEntropy == null)
@@ -75,7 +85,7 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
       return new Pair<double, Dictionary<INode<T>, double>>(norm, v2);
     }
 
-    private static Dictionary<INode<T>, double> Create(IGraph<T> graph)
+    private static Dictionary<INode<T>, double> Create(IGraph graph)
     {
       return new Dictionary<INode<T>, double>(graph.NodesCount, EqualityComparerFactory<INode<T>>.GetComparer());
     }

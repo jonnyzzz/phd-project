@@ -21,8 +21,9 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       IGraph<Q> graph = Keys.Graph<Q>().Get(input);
       EigenEntropyEvaluatorImpl<Q> evaluator = new EigenEntropyEvaluatorImpl<Q>(EPS, graph);
 
-      IGraphEntropy entropy = evaluator.ComputeEntropy();
+      IGraphMeasure<Q> entropy = new EigenEntropyMeasure<Q>(evaluator);
       Keys.GraphEntropyKey.Set(output, entropy);
+      Keys.GraphMeasure<Q>().Set(output, entropy);
     }
   }
 }

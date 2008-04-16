@@ -36,9 +36,8 @@ namespace DSIS.Scheme.Actions
         ctx.Set(LoopIndexKey, new LoopIndex(i, myCount));
         ICollection<ContextMissmatch> check = myAction.Compatible(ctx);
         if (check.Count != 0)
-        {
-          throw new ContextMissmatchException(check, this);
-        }       
+          throw new ContextMissmatchException(check, this, ctx);
+
         Context newCtx = myAction.Apply(ctx);
         newCtx.AddAllNew(ctx);        
         ctx = newCtx;

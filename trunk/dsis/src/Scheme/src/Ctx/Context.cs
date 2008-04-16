@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Ctx
@@ -65,6 +66,17 @@ namespace DSIS.Scheme.Ctx
         if (!myContext.ContainsKey(pair.Key))
           myContext[pair.Key] = pair.Value;
       }
+    }
+
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (KeyValuePair<KeyWrapper, object> pair in myContext)
+      {
+        sb.AppendFormat("Key: " + pair.Key).AppendLine();
+      }
+      return sb.AppendLine().ToString();
     }
   }
 }

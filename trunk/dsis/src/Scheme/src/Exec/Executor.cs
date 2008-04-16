@@ -62,7 +62,7 @@ namespace DSIS.Scheme.Exec
           ICollection<ContextMissmatch> compatible = wrapper.Action.Compatible(cx);
           if (compatible.Count != 0)
           {
-            throw new ContextMissmatchException(compatible, wrapper.Action);
+            throw new ContextMissmatchException(compatible, wrapper.Action, cx);
           }
 
           Context result = wrapper.Action.Apply(cx);

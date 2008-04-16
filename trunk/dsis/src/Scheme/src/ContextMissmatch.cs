@@ -5,30 +5,34 @@ namespace DSIS.Scheme
   public class ContextMissmatch
   {
     public readonly IKey Key;
-    public readonly string Message;
-
-    public ContextMissmatch(IKey key, string message)
-    {
-      Key = key;
-      Message = message;
-    }
-  }
-
-  public abstract class ContextMissmatchCheck : ContextMissmatch
-  {
+    private readonly string myMessage;
     private readonly IAction myAction;
 
-    protected ContextMissmatchCheck(IKey key, string message, IAction action) : base(key, message)
+    public ContextMissmatch(IKey key, string message, IAction action)
     {
+      Key = key;
       myAction = action;
+      myMessage = message;
     }
-
-    public abstract bool Check(Context ctx);
 
     public IAction Action
     {
       get { return myAction; }
     }
+
+    public string Message
+    {
+      get { return string.Format("Action: {0}\r\nContext: {1}", myAction.GetType().Name, myMessage); }
+    }
+  }
+
+  public abstract class ContextMissmatchCheck : ContextMissmatch
+  {
+    protected ContextMissmatchCheck(IKey key, string message, IAction action) : base(key, message, action)
+    {      
+    }
+
+    public abstract bool Check(Context ctx);
   }
 
   public class ContextMissmatchCheckImpl<Y> : ContextMissmatchCheck

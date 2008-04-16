@@ -29,7 +29,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
       string dir = FileKeys.WorkingFolderKey.Get(input).Path;
-      string file = dir + "-entropy.log";
+      string file = Path.Combine(Path.GetDirectoryName(dir), "entropy-" + Path.GetFileName(dir) + ".log");
 
       IGraphMeasure<Q> measure = Keys.GraphMeasure<Q>().Get(input);
       double value = measure.GetEntropy();
