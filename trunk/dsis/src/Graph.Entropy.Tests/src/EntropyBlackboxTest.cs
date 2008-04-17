@@ -115,7 +115,7 @@ namespace DSIS.Graph.Entropy.Tests
 
           double? w = node.Weight;
           if (w != null)
-            Assert.AreEqual(w.Value, edge, EPS, "Node assert value failed fro node {0}", node);
+            Assert.AreEqual(w.Value, edge, EPS, "Node assert value failed for node {0}", node);
         }
       }
       catch(Exception e)
@@ -207,7 +207,7 @@ namespace DSIS.Graph.Entropy.Tests
 
       public double Edge(IntegerCoordinate from, IntegerCoordinate to)
       {
-        return myMeasure.M[myFactory(from, to)];
+        return myMeasure.M[myFactory(from, to)] / myMeasure.Norm;
       }
     }
   }

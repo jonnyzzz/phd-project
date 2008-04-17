@@ -91,35 +91,17 @@ namespace DSIS.Graph.Entropy.Intersection
 
       public double Norm(IGraph<Q> graph)
       {
-        
-        Vector<Q> mi = new Vector<Q>();
-        foreach (INode<Q> node in graph.Nodes)
-        {
-          Q cell = node.Coordinate;
-          int cellHash = NodePair<Q>.HashValue(cell);
-          double count = myNodePoints[cell];
-          double t = 0;
-          foreach (INode<Q> edge in graph.GetEdges(node))
-          {
-            t+= (myVector[new NodePair<Q>(cell, cellHash, edge.Coordinate)] /= count);                        
-          }
-
-          mi.Add(cell, t);
-        }
-
         double sum = 0;
         foreach (INode<Q> node in graph.Nodes)
         {
           Q cell = node.Coordinate;
           int cellHash = NodePair<Q>.HashValue(cell);
-          double dv = mi[cell];
-
+          double count = myNodePoints[cell];
           foreach (INode<Q> edge in graph.GetEdges(node))
           {
-            sum += (myVector[new NodePair<Q>(cell, cellHash, edge.Coordinate)] /= dv);
+            sum += myVector.Div(new NodePair<Q>(cell, cellHash, edge.Coordinate), count);
           }
-        }
-
+        }                
         return sum;
       }     
     }

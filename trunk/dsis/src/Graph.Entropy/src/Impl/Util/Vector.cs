@@ -16,14 +16,27 @@ namespace DSIS.Graph.Entropy.Impl.Util
       myValues = values;
     }
 
-    public void Add(T key, double value)
+
+
+    public double Add(T key, double value)
     {
       double tmp;
       if (myValues.TryGetValue(key, out tmp))
       {
         value += tmp;        
       }
-      myValues[key] = value;
+      return myValues[key] = value;
+    }
+    
+    public double Div(T key, double value)
+    {
+      double tmp;
+      if (myValues.TryGetValue(key, out tmp))
+      {
+        value /= tmp;
+        return myValues[key] = value;
+      }
+      return 0;
     }
 
     public double this[T data]

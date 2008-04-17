@@ -37,6 +37,11 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
       get { return myMethodName; }
     }
 
+    public double Norm
+    {
+      get { return myNorm; }
+    }
+
     public ICellCoordinateSystem<T> CoordinateSystem
     {
       get { return myCoorsinateSystem; }
