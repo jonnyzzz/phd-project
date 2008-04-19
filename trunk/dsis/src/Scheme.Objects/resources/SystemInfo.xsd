@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema targetNamespace="urn:shemas-dsis-org:system-info" 
+           elementFormDefault="qualified" 
+           xmlns="urn:shemas-dsis-org:system-info" 
+           xmlns:mstns="urn:shemas-dsis-org:system-info" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:complexType name="XsdSystemInfo">
+    <xs:sequence>
+      <xs:any processContents="skip" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required"/>    
+  </xs:complexType>
+  <xs:element name="System-Info" type="XsdSystemInfo"/>
+</xs:schema>
