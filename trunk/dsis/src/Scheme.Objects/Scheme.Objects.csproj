@@ -56,19 +56,19 @@
     <Compile Include="src\Systemx\SystemSpaceParser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\scheme\Scheme2\Scheme2.csproj">
+    <ProjectReference Include="..\Scheme2\Scheme2.csproj">
       <Project>{69A72457-55CD-463A-840B-73F62BDCA0E5}</Project>
       <Name>Scheme2</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
+    <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Spring\Spring.csproj">
+    <ProjectReference Include="..\Spring\Spring.csproj">
       <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
       <Name>Spring</Name>
     </ProjectReference>
@@ -100,7 +100,7 @@
     <EmbeddedResource Include="resources\spring.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="../../src/Build.Targets" />
+  <Import Project="../Build.Targets" />
   <Target Name="BeforeBuild">
     <XsdCs InputFile="resources\SystemSpace.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
     <XsdCs InputFile="resources\SystemInfo.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />

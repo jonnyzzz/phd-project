@@ -76,11 +76,11 @@
     <Compile Include="src\TwoDimCoordinateAssert.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\CodeCompiler\CodeCompiler.csproj">
+    <ProjectReference Include="..\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>

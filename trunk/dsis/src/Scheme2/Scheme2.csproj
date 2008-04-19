@@ -30,7 +30,7 @@
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\log4net\log4net.dll</HintPath>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -102,11 +102,11 @@
     <EmbeddedResource Include="resources\spring.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
+    <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Spring\Spring.csproj">
+    <ProjectReference Include="..\Spring\Spring.csproj">
       <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
       <Name>Spring</Name>
     </ProjectReference>
@@ -115,7 +115,7 @@
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
    -->
-  <Import Project="../../src/Build.Targets" />
+  <Import Project="../Build.Targets" />
   <Target Name="BeforeBuild">
     <XsdCs InputFile="src\XmlModel\computation-graph-scheme.xsd" OutDir="$(MSBuildProjectDirectory)\src\XmlModel" Namespace="DSIS.Scheme2.XmlModel" />
   </Target>

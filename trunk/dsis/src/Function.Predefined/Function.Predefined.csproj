@@ -75,7 +75,7 @@
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Spring.csproj">
+    <ProjectReference Include="..\Spring\Spring.csproj">
       <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
       <Name>Spring</Name>
     </ProjectReference>
