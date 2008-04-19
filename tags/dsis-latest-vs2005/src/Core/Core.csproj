@@ -1,0 +1,114 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.Core</RootNamespace>
+    <AssemblyName>DSIS.Core</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Builders\CellImageBuilderContext.cs" />
+    <Compile Include="src\Builders\ICellConnectionBuilder.cs" />
+    <Compile Include="src\Builders\ICellImageBuilder.cs" />
+    <Compile Include="src\Builders\ICellImageBuilderSettings.cs" />
+    <Compile Include="src\Concurrent\SynchQueue.cs" />
+    <Compile Include="src\Context\CellImageBuilderKey.cs" />
+    <Compile Include="src\Context\ContextKey.cs" />
+    <Compile Include="src\Context\IContext.cs" />
+    <Compile Include="src\Context\Impl\ContextImpl.cs" />
+    <Compile Include="src\Coordinates\ICellCoordinate.cs" />
+    <Compile Include="src\Coordinates\ICellCoordinateSystem.cs" />
+    <Compile Include="src\Coordinates\ICellCoordinateSystemConverter.cs" />
+    <Compile Include="src\Coordinates\ICellCoordinateSystemMultiplyConverter.cs" />
+    <Compile Include="src\Coordinates\ICellCoordinateSystemProjector.cs" />
+    <Compile Include="src\Data\IContinuableDataCollectionAnalisys.cs" />
+    <Compile Include="src\Data\IDataCollection.cs" />
+    <Compile Include="src\Data\IDataCollectionAnalisys.cs" />
+    <Compile Include="src\Data\IDataProcessProcessor.cs" />
+    <Compile Include="src\Data\IDataProcessScheme.cs" />
+    <Compile Include="src\IData.cs" />
+    <Compile Include="src\IDR.cs" />
+    <Compile Include="src\Processor\BufferedThreadedCountEnumerable.cs" />
+    <Compile Include="src\Processor\CellProcessorContext.cs" />
+    <Compile Include="src\Processor\CellProcessorContextBase.cs" />
+    <Compile Include="src\Processor\ICellProcessor.cs" />
+    <Compile Include="src\Processor\ICellProcessorContext.cs" />
+    <Compile Include="src\Processor\ICellProcessorMultiplyContext.cs" />
+    <Compile Include="src\Processor\IConcurentProcess.cs" />
+    <Compile Include="src\Processor\InThreadProcessExecutor.cs" />
+    <Compile Include="src\Processor\IProcess.cs" />
+    <Compile Include="src\Processor\SubdevideCellProcessorContext.cs" />
+    <Compile Include="src\Processor\SymbolicImageConstructionProcess.cs" />
+    <Compile Include="src\Processor\ThreadedCellConnectionBuilder.cs" />
+    <Compile Include="src\Processor\ThreadedCountEnumerable.cs" />
+    <Compile Include="src\Processor\ThreadedSymbolicImageConstructionProcess.cs" />
+    <Compile Include="src\Processor\UnsymmetricSymbolicImageProcess.cs" />
+    <Compile Include="src\Util\CountEnumerable.cs" />
+    <Compile Include="src\Util\ICountEnumerable.cs" />
+    <Compile Include="src\Util\IProgressInfo.cs" />
+    <Compile Include="src\Util\NotNullAttribute.cs" />
+    <Compile Include="src\Util\NullableAttribute.cs" />
+    <Compile Include="src\Util\NullProgressInfo.cs" />
+    <Compile Include="src\Util\ObjectMarker.cs" />
+    <Compile Include="src\Util\ProcessInterruptedException.cs" />
+    <Compile Include="src\Visualization\ICellToPointConverter.cs" />
+    <Compile Include="src\Visualization\IImageBuilder.cs" />
+    <Compile Include="src\Visualization\IImageDrawer.cs" />
+    <Compile Include="src\Visualization\ImagePoint.cs" />
+    <Compile Include="testSrc\Concurrent\SynckQueueTest.cs" />
+    <Compile Include="testSrc\Processor\BufferedThreadedCountEnumerableTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistance\Persistance.csproj">
+      <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
+      <Name>Persistance</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

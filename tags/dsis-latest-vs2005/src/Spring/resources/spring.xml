@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd"
+         default-autowire="constructor"
+         default-dependency-check="all"
+         default-lazy-init="false">
+
+  <object id="AntlrFix" type="DSIS.LibraryVersionFixer.VersionFixer, DSIS.LibraryVersionFixer">
+    <constructor-arg>
+      <list>
+        <value>antlr.runtime.2.7.6.2.dll</value>
+        <value>antlr.runtime.2.7.7.1.dll</value>
+      </list>
+    </constructor-arg>
+  </object>
+
+</objects>

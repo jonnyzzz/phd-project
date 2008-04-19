@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema targetNamespace="urn:shemas-dsis-org:box-method-settings"
+           elementFormDefault="qualified"
+           xmlns="urn:shemas-dsis-org:box-method-settings"
+           xmlns:mstns="urn:shemas-dsis-org:box-method-settings"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="XsdDouble">
+    <xs:restriction base="xs:double">
+      <xs:minExclusive value="0"/>
+    </xs:restriction>
+  </xs:simpleType>
+ 
+  <xs:complexType name="XsdBoxMethodSettings">
+    <xs:attribute name="Eps" default="0.1" use="optional" type="XsdDouble"/>
+  </xs:complexType>
+
+  <xs:element name="BoxMethod-Settings" type="XsdBoxMethodSettings"/>
+</xs:schema>

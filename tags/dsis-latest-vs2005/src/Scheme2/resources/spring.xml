@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd" 
+         default-autowire="autodetect"
+         default-dependency-check="all"          
+         default-lazy-init="false">
+
+  <object id="InputObjectConnectionPointFactory" type="DSIS.Scheme2.ConnectionPoints.Object.InputObjectConnectionPointFactory, DSIS.Scheme2"/>
+  <object id="OutputObjectConnectionPointFactory" type="DSIS.Scheme2.ConnectionPoints.Object.OutputObjectConnectionPointFactory, DSIS.Scheme2"/>    
+  
+  <object id="PropertyInputObjectConnectionPointFactoryImpl" type="DSIS.Scheme2.ConnectionPoints.Object.PropertyInputObjectConnectionPointFactoryImpl, DSIS.Scheme2"/>
+  <object id="SetterInputObjectConnectionPointFactoryImpl" type="DSIS.Scheme2.ConnectionPoints.Object.SetterInputObjectConnectionPointFactoryImpl, DSIS.Scheme2"/>
+  <object id="OutputObjectConnectionPointFactoryImpl" type="DSIS.Scheme2.ConnectionPoints.Object.OutputObjectConnectionPointFactoryImpl, DSIS.Scheme2"/>
+  
+  <object id="ObjectNodeFactory" type="DSIS.Scheme2.ConnectionPoints.Object.ObjectNodeFactory, DSIS.Scheme2"/>
+  
+  <object id="InputConnectionPointExtension" type="DSIS.Scheme2.ConnectionPoints.Xml.Input.InputConnectionPointExtension, DSIS.Scheme2"/>
+  <object id="InputConnectionPointFactory" type="DSIS.Scheme2.ConnectionPoints.Xml.Input.InputConnectionPointFactory, DSIS.Scheme2"/>
+  
+  <object id="OutputConnectionPointFactory" type="DSIS.Scheme2.ConnectionPoints.Xml.Output.OutputConnectionPointFactory, DSIS.Scheme2"/>
+  <object id="ActionInstanceOutputConnectionPointFactory" type="DSIS.Scheme2.ConnectionPoints.Xml.Output.ActionInstanceOutputConnectionPointFactory, DSIS.Scheme2"/>
+  <object id="FromPointOutputConnectionFactory" type="DSIS.Scheme2.ConnectionPoints.Xml.Output.FromPointOutputConnectionFactory, DSIS.Scheme2"/>
+  <object id="ObjectParserOutputConnectionFactory" type="DSIS.Scheme2.ConnectionPoints.Xml.Output.ObjectParserOutputConnectionFactory, DSIS.Scheme2"/>
+    
+  <object id="SchemeGraphFactory" type="DSIS.Scheme2.Graph.SchemeGraphFactory, DSIS.Scheme2"/>
+  <object id="XmlSchemeActionFactory" type="DSIS.Scheme2.Graph.XmlSchemeActionFactory, DSIS.Scheme2"/>
+  
+  <object id="SchemeNodeFactory" type="DSIS.Scheme2.Nodes.SchemeNodeFactory, DSIS.Scheme2"/>
+  
+  <object id="ObjectParserFactory" type="DSIS.Scheme2.ObjectParsers.ObjectParserFactory, DSIS.Scheme2"/>
+</objects>
