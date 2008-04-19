@@ -91,8 +91,9 @@ namespace DSIS.SimpleRunner
         new DefaultSystemSpace(2, new double[] {-2, -2}, new double[] {2, 2}, new long[] {2, 2});
 
       DefaultSystemSpace log_sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {1, 4}, new long[] {3, 3});
-      DefaultSystemSpace log_sp2 =
-        new DefaultSystemSpace(2, new double[] {0, 3}, new double[] {1, 3.7}, new long[] {3, 3});
+      DefaultSystemSpace log_sp2 = new DefaultSystemSpace(2, new double[] {0, 3}, new double[] {1, 3.7}, new long[] {3, 3});
+      
+      DefaultSystemSpace log_sp1 = new DefaultSystemSpace(1, new double[] {0}, new double[] {1}, new long[] {3});
 
 
       ISimpleAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
@@ -103,6 +104,8 @@ namespace DSIS.SimpleRunner
         new SystemInfoAction(new RenameSystem(new IkedaFunctionSystemInfoDecorator(), "Ikeda Cut"), spIkedaCutted);
       IAction systenLogistic2 = new SystemInfoAction(new Logistic2dSystemInfo(), log_sp);
       IAction systenLogistic2_x = new SystemInfoAction(new Logistic2dSystemInfo(), log_sp2);
+      IAction systenLogistic3569 = new SystemInfoAction(new LogisticSystemInfo(3.569), log_sp1);
+      IAction systenLogistic4 = new SystemInfoAction(new LogisticSystemInfo(4), log_sp1);
 
       ISimpleAction wfBase = new WorkingFolderAction();
 
@@ -110,8 +113,9 @@ namespace DSIS.SimpleRunner
 
       SimpleParallel parallel = new SimpleParallel();
 
-//        parallel.DoParallel(
-      new ComputeDelegate(wfBase, 10, systemHenon).Do();
+      parallel.DoParallel(new ComputeDelegate(wfBase, 3, systenLogistic3569, 1).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 3, systenLogistic4, 1).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 3, systemHenon, 2).Do);        
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
 //      }
       /*for (int steps = 8; steps <= 15; steps++)
@@ -126,19 +130,21 @@ namespace DSIS.SimpleRunner
 
     private class ComputeDelegate
     {
-      private readonly ISimpleAction wfBase;
+      private readonly int myDim;
+      private readonly IAction wfBase;
       private readonly int steps;
-      private readonly ISimpleAction action;
+      private readonly IAction action;
 
       public void Do()
       {
-        ComputeEntropy(wfBase, steps, action);
+        ComputeEntropy(myDim, wfBase, steps, action);
         Collect();
       }
 
-      public ComputeDelegate(ISimpleAction wfBase, int steps, ISimpleAction action)
+      public ComputeDelegate(IAction wfBase, int steps, IAction action, int dim)
       {
         this.wfBase = wfBase;
+        myDim = dim;
         this.steps = steps;
         this.action = action;
       }
@@ -149,13 +155,23 @@ namespace DSIS.SimpleRunner
       GCHelper.Collect();
     }
 
-    private static void ComputeEntropy(IAction wfBase, int steps, IAction system)
+    private static T[] Fill<T>(T t, int dim)
+    {
+      T[] tt = new T[dim];
+      for(int i=0; i<dim; i++)
+      {
+        tt[i] = t;
+      }
+      return tt;
+    }
+
+    private static void ComputeEntropy(int dim, IAction wfBase, int steps, IAction system)
     {
       ISimpleAction a2 = new CreateCoordinateSystemAction();
       ISimpleAction a3 = new CreateInitialCellsAction();
       ISimpleAction a4 = new BuildSymbolicImageAction();
       ISimpleAction a5 = new ChainRecurrenctSimbolicImageAction();
-      ISimpleAction method = new SetMethod(new BoxMethodSettings(0.1), new long[] {2, 2});
+      ISimpleAction method = new SetMethod(new BoxMethodSettings(0.1), Fill(2L, dim));
 
       ActionGraph gr = new ActionGraph();
 
@@ -205,8 +221,8 @@ namespace DSIS.SimpleRunner
                                                                {
                                                                  ISimpleAction xa1 = new ReplaceContextAction(
                                                                    new SetMethod(
-                                                                     new PointMethodSettings(new int[] {2, 2}, 0.1),
-                                                                     new long[] {1, 1}));
+                                                                     new PointMethodSettings(Fill(2,dim), 0.1),
+                                                                     Fill(1L, dim)));
 
                                                                  IAction xa2 = buildIS;
                                                                  IAction xa3 = EntropyAction(steps);
@@ -296,7 +312,7 @@ namespace DSIS.SimpleRunner
                                                                  entropy);
                                                    }), evaluatorParams.PresentableName);
                                }
-                               entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
+//                               entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
                                entropies.Add(DrawEntropyAction(steps, new JVRMeasureAction()), "JVR");
                                entropies.Add(DrawEntropyAction(steps, new EigenEntropyAction()), "Eigen");
 
@@ -327,10 +343,10 @@ namespace DSIS.SimpleRunner
                                         IAction drawEntropy =
                                           new ParallelAction(
 //                                            new DumpEntropyParamsAction(),
-                                            new DumpEntropyValueAction(),
-                                            new DrawEntropyMeasure3dAction(),
-                                            new DrawEntropyMeasure3dWithBaseAction(),
-                                            new DrawEntropyMeasureColorMapAction(),
+//                                            new DumpEntropyValueAction(),
+//                                            new DrawEntropyMeasure3dAction(),
+//                                            new DrawEntropyMeasure3dWithBaseAction(),
+//                                            new DrawEntropyMeasureColorMapAction(),
                                             new MeasureEntropyLogAction(),
                                             new DumpGraphMeasureAction2(),
                                             new DumpGraphMeasureAction()
