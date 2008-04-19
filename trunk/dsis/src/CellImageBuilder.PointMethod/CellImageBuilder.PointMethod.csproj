@@ -41,11 +41,11 @@
     <Compile Include="src\PointMethodSettingsFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\scheme\Scheme.Objects\Scheme.Objects.csproj">
+    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
       <Name>Scheme.Objects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\scheme\Scheme2\Scheme2.csproj">
+    <ProjectReference Include="..\Scheme2\Scheme2.csproj">
       <Project>{69A72457-55CD-463A-840B-73F62BDCA0E5}</Project>
       <Name>Scheme2</Name>
     </ProjectReference>
@@ -61,7 +61,7 @@
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
@@ -69,7 +69,7 @@
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
       <Name>IntegerCoordinates</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Spring\Spring.csproj">
+    <ProjectReference Include="..\Spring.csproj">
       <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
       <Name>Spring</Name>
     </ProjectReference>
@@ -86,7 +86,7 @@
     <EmbeddedResource Include="resources\spring.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="../../src/Build.Targets" />
+  <Import Project="../Build.Targets" />
   <Target Name="BeforeBuild">
     <XsdCs InputFile="resources\PointMethodSettings.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.CellImageBuilders.PointMethod" />
   </Target>
