@@ -1,146 +1,217 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="8,00"
 	Name="calculator"
 	ProjectGUID="{A42EF8BC-57CF-4D5A-A423-9B03C034210A}"
 	RootNamespace="calculator"
-	Keyword="Win32Proj">
+	Keyword="Win32Proj"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			CharacterSet="2">
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="TRUE"
+				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="3"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/calculator.lib"/>
+				OutputFile="$(OutDir)/calculator.lib"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			CharacterSet="2">
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				GlobalOptimizations="TRUE"
 				InlineFunctionExpansion="2"
-				EnableIntrinsicFunctions="TRUE"
+				EnableIntrinsicFunctions="true"
 				FavorSizeOrSpeed="1"
-				OptimizeForProcessor="2"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
-				UsePrecompiledHeader="3"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="FALSE"
-				DebugInformationFormat="3"/>
+				Detect64BitPortabilityProblems="false"
+				DebugInformationFormat="3"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/calculator.lib"/>
+				OutputFile="$(OutDir)/calculator.lib"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Test|Win32"
 			OutputDirectory="$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			CharacterSet="2">
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="TRUE"
+				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="3"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/calculator.lib"/>
+				OutputFile="$(OutDir)/calculator.lib"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -149,245 +220,324 @@
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
 			<File
-				RelativePath=".\FunctionContext.cpp">
+				RelativePath=".\FunctionContext.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionDictionary.cpp">
+				RelativePath=".\FunctionDictionary.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionFactory.cpp">
+				RelativePath=".\FunctionFactory.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionFactoryParseException.cpp">
+				RelativePath=".\FunctionFactoryParseException.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNative.cpp">
+				RelativePath=".\FunctionNative.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNode.cpp">
+				RelativePath=".\FunctionNode.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeConstant.cpp">
+				RelativePath=".\FunctionNodeConstant.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeDiv.cpp">
+				RelativePath=".\FunctionNodeDiv.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeEquation.cpp">
+				RelativePath=".\FunctionNodeEquation.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeFunction.cpp">
+				RelativePath=".\FunctionNodeFunction.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeIfLZ.cpp">
+				RelativePath=".\FunctionNodeIfLZ.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeMax.cpp">
+				RelativePath=".\FunctionNodeMax.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeMin.cpp">
+				RelativePath=".\FunctionNodeMin.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeMul.cpp">
+				RelativePath=".\FunctionNodeMul.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodePower.cpp">
+				RelativePath=".\FunctionNodePower.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeSub.cpp">
+				RelativePath=".\FunctionNodeSub.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeSum.cpp">
+				RelativePath=".\FunctionNodeSum.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUMinus.cpp">
+				RelativePath=".\FunctionNodeUMinus.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnary.cpp">
+				RelativePath=".\FunctionNodeUnary.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnaryATan.cpp">
+				RelativePath=".\FunctionNodeUnaryATan.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnaryCos.cpp">
+				RelativePath=".\FunctionNodeUnaryCos.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnaryExp.cpp">
+				RelativePath=".\FunctionNodeUnaryExp.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnaryLn.cpp">
+				RelativePath=".\FunctionNodeUnaryLn.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnaryTg.cpp">
+				RelativePath=".\FunctionNodeUnaryTg.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnatySin.cpp">
+				RelativePath=".\FunctionNodeUnatySin.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUserFunction.cpp">
+				RelativePath=".\FunctionNodeUserFunction.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeVariable.cpp">
+				RelativePath=".\FunctionNodeVariable.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeVisitor.cpp">
+				RelativePath=".\FunctionNodeVisitor.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionTest.cpp">
+				RelativePath=".\FunctionTest.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\IntervalEvaluator.cpp">
+				RelativePath=".\IntervalEvaluator.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\IntervalValue.cpp">
+				RelativePath=".\IntervalValue.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\LipsitzFinder.cpp">
+				RelativePath=".\LipsitzFinder.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\stdafx.cpp">
+				RelativePath=".\stdafx.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Test|Win32">
+					Name="Test|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\SystemNative.cpp">
+				RelativePath=".\SystemNative.cpp"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
 			<File
-				RelativePath=".\FunctionContext.h">
+				RelativePath=".\FunctionContext.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionDictionary.h">
+				RelativePath=".\FunctionDictionary.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionFactory.h">
+				RelativePath=".\FunctionFactory.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionFactoryParseException.h">
+				RelativePath=".\FunctionFactoryParseException.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNative.h">
+				RelativePath=".\FunctionNative.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNode.h">
+				RelativePath=".\FunctionNode.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeConstant.h">
+				RelativePath=".\FunctionNodeConstant.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeDiv.h">
+				RelativePath=".\FunctionNodeDiv.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeEquation.h">
+				RelativePath=".\FunctionNodeEquation.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeFunction.h">
+				RelativePath=".\FunctionNodeFunction.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeIfLZ.h">
+				RelativePath=".\FunctionNodeIfLZ.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeMax.h">
+				RelativePath=".\FunctionNodeMax.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeMin.h">
+				RelativePath=".\FunctionNodeMin.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeMul.h">
+				RelativePath=".\FunctionNodeMul.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodePower.h">
+				RelativePath=".\FunctionNodePower.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeSub.h">
+				RelativePath=".\FunctionNodeSub.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeSum.h">
+				RelativePath=".\FunctionNodeSum.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUMinus.h">
+				RelativePath=".\FunctionNodeUMinus.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnary.h">
+				RelativePath=".\FunctionNodeUnary.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnaryATan.h">
+				RelativePath=".\FunctionNodeUnaryATan.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnaryCos.h">
+				RelativePath=".\FunctionNodeUnaryCos.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnaryExp.h">
+				RelativePath=".\FunctionNodeUnaryExp.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnaryLn.h">
+				RelativePath=".\FunctionNodeUnaryLn.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnaryTg.h">
+				RelativePath=".\FunctionNodeUnaryTg.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUnatySin.h">
+				RelativePath=".\FunctionNodeUnatySin.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeUserFunction.h">
+				RelativePath=".\FunctionNodeUserFunction.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeVariable.h">
+				RelativePath=".\FunctionNodeVariable.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionNodeVisitor.h">
+				RelativePath=".\FunctionNodeVisitor.h"
+				>
 			</File>
 			<File
-				RelativePath=".\FunctionTest.h">
+				RelativePath=".\FunctionTest.h"
+				>
 			</File>
 			<File
-				RelativePath=".\IntervalEvaluator.h">
+				RelativePath=".\IntervalEvaluator.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Intervals.h">
+				RelativePath=".\Intervals.h"
+				>
 			</File>
 			<File
-				RelativePath=".\IntervalValue.h">
+				RelativePath=".\IntervalValue.h"
+				>
 			</File>
 			<File
-				RelativePath=".\LipsitzFinder.h">
+				RelativePath=".\LipsitzFinder.h"
+				>
 			</File>
 			<File
-				RelativePath=".\stdafx.h">
+				RelativePath=".\stdafx.h"
+				>
 			</File>
 			<File
-				RelativePath=".\SystemNative.h">
+				RelativePath=".\SystemNative.h"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
 		</Filter>
 		<File
-			RelativePath=".\ReadMe.txt">
+			RelativePath=".\ReadMe.txt"
+			>
 		</File>
 	</Files>
 	<Globals>

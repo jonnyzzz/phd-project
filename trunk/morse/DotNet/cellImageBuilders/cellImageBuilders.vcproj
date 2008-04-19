@@ -1,145 +1,216 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="7.10"
+	Version="8,00"
 	Name="cellImageBuilders"
 	ProjectGUID="{80C14A35-BD13-463C-B296-AF3F5A254439}"
-	Keyword="Win32Proj">
+	Keyword="Win32Proj"
+	>
 	<Platforms>
 		<Platform
-			Name="Win32"/>
+			Name="Win32"
+		/>
 	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="Debug"
 			IntermediateDirectory="Debug"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			CharacterSet="2">
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="TRUE"
+				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="3"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/cellImageBuilders.lib"/>
+				OutputFile="$(OutDir)/cellImageBuilders.lib"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="Release"
 			IntermediateDirectory="Release"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			CharacterSet="2">
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				GlobalOptimizations="TRUE"
 				InlineFunctionExpansion="2"
-				EnableIntrinsicFunctions="TRUE"
+				EnableIntrinsicFunctions="true"
 				FavorSizeOrSpeed="1"
-				OptimizeForProcessor="2"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
-				UsePrecompiledHeader="3"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="FALSE"
-				DebugInformationFormat="3"/>
+				Detect64BitPortabilityProblems="false"
+				DebugInformationFormat="3"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/cellImageBuilders.lib"/>
+				OutputFile="$(OutDir)/cellImageBuilders.lib"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 		<Configuration
 			Name="Test|Win32"
 			OutputDirectory="$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			UseOfMFC="2"
-			CharacterSet="2">
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\calculator\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
-				MinimalRebuild="TRUE"
+				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="3"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="TRUE"
-				DebugInformationFormat="4"/>
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="4"
+			/>
 			<Tool
-				Name="VCCustomBuildTool"/>
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)/cellImageBuilders.lib"/>
+				OutputFile="$(OutDir)/cellImageBuilders.lib"
+			/>
 			<Tool
-				Name="VCMIDLTool"/>
+				Name="VCALinkTool"
+			/>
 			<Tool
-				Name="VCPostBuildEventTool"/>
+				Name="VCXDCMakeTool"
+			/>
 			<Tool
-				Name="VCPreBuildEventTool"/>
+				Name="VCBscMakeTool"
+			/>
 			<Tool
-				Name="VCPreLinkEventTool"/>
+				Name="VCFxCopTool"
+			/>
 			<Tool
-				Name="VCResourceCompilerTool"/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"/>
-			<Tool
-				Name="VCManagedWrapperGeneratorTool"/>
-			<Tool
-				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+				Name="VCPostBuildEventTool"
+			/>
 		</Configuration>
 	</Configurations>
 	<References>
@@ -148,203 +219,268 @@
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}">
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
 			<File
-				RelativePath=".\AbstractBoxProcess.h">
+				RelativePath=".\AbstractBoxProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\AbstractGraphCreator.h">
+				RelativePath=".\AbstractGraphCreator.h"
+				>
 			</File>
 			<File
-				RelativePath=".\AbstractPointBuilder.h">
+				RelativePath=".\AbstractPointBuilder.h"
+				>
 			</File>
 			<File
-				RelativePath=".\AbstractProcess.h">
+				RelativePath=".\AbstractProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\AbstractProcessExt.h">
+				RelativePath=".\AbstractProcessExt.h"
+				>
 			</File>
 			<File
-				RelativePath=".\GraphSet.h">
+				RelativePath=".\GraphSet.h"
+				>
 			</File>
 			<File
-				RelativePath=".\LoopsLocalizationProcess.h">
+				RelativePath=".\LoopsLocalizationProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MS2DBoxProcess.h">
+				RelativePath=".\MS2DBoxProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MS2DCreationProcess.h">
+				RelativePath=".\MS2DCreationProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MS2DSIBoxProcess.h">
+				RelativePath=".\MS2DSIBoxProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MSAngleCreationProcess.h">
+				RelativePath=".\MSAngleCreationProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MSCreationProcess.h">
+				RelativePath=".\MSCreationProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MSNormedCreationProcess.h">
+				RelativePath=".\MSNormedCreationProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MSOverlapedPointBuilder.h">
+				RelativePath=".\MSOverlapedPointBuilder.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MSPointBuilder.h">
+				RelativePath=".\MSPointBuilder.h"
+				>
 			</File>
 			<File
-				RelativePath=".\MSSegmentBoxProcess.h">
+				RelativePath=".\MSSegmentBoxProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\onsoleProgressBarInfo.h">
+				RelativePath=".\onsoleProgressBarInfo.h"
+				>
 			</File>
 			<File
-				RelativePath=".\Processes.h">
+				RelativePath=".\Processes.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ProgressBarInfo.h">
+				RelativePath=".\ProgressBarInfo.h"
+				>
 			</File>
 			<File
-				RelativePath=".\ProjectionProcess.h">
+				RelativePath=".\ProjectionProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.h">
+				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\SimpleBoxProcess.h">
+				RelativePath=".\SimpleBoxProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\SIOverlapedPointBuilder.h">
+				RelativePath=".\SIOverlapedPointBuilder.h"
+				>
 			</File>
 			<File
-				RelativePath=".\SIPointBuilder.h">
+				RelativePath=".\SIPointBuilder.h"
+				>
 			</File>
 			<File
-				RelativePath=".\StableLocalizationProcess.h">
+				RelativePath=".\StableLocalizationProcess.h"
+				>
 			</File>
 			<File
-				RelativePath=".\stdafx.h">
+				RelativePath=".\stdafx.h"
+				>
 			</File>
 			<File
-				RelativePath=".\TarjanProcess.h">
+				RelativePath=".\TarjanProcess.h"
+				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}">
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
 		</Filter>
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}">
+			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+			>
 			<File
-				RelativePath=".\AbstractBoxProcess.cpp">
+				RelativePath=".\AbstractBoxProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\AbstractGraphCreator.cpp">
+				RelativePath=".\AbstractGraphCreator.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\AbstractPointBuilder.cpp">
+				RelativePath=".\AbstractPointBuilder.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\AbstractProcess.cpp">
+				RelativePath=".\AbstractProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\AbstractProcessExt.cpp">
+				RelativePath=".\AbstractProcessExt.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\GraphSet.cpp">
+				RelativePath=".\GraphSet.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\LoopsLocalizationProcess.cpp">
+				RelativePath=".\LoopsLocalizationProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\MS2DBoxProcess.cpp">
+				RelativePath=".\MS2DBoxProcess.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="3"/>
+						UsePrecompiledHeader="2"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\MS2DCreationProcess.cpp">
+				RelativePath=".\MS2DCreationProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\MS2DSIBoxProcess.cpp">
+				RelativePath=".\MS2DSIBoxProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\MSAngleCreationProcess.cpp">
+				RelativePath=".\MSAngleCreationProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\MSCreationProcess.cpp">
+				RelativePath=".\MSCreationProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\MSNormedCreationProcess.cpp">
+				RelativePath=".\MSNormedCreationProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\MSOverlapedPointBuilder.cpp">
+				RelativePath=".\MSOverlapedPointBuilder.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\MSPointBuilder.cpp">
+				RelativePath=".\MSPointBuilder.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\MSSegmentBoxProcess.cpp">
+				RelativePath=".\MSSegmentBoxProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\Processes.cpp">
+				RelativePath=".\Processes.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ProgressBarInfo.cpp">
+				RelativePath=".\ProgressBarInfo.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\ProjectionProcess.cpp">
+				RelativePath=".\ProjectionProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.cpp">
+				RelativePath=".\SegmentProjectiveBundleMSCreationProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\SimpleBoxProcess.cpp">
+				RelativePath=".\SimpleBoxProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\SIOverlapedPointBuilder.cpp">
+				RelativePath=".\SIOverlapedPointBuilder.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\SIPointBuilder.cpp">
+				RelativePath=".\SIPointBuilder.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\StableLocalizationProcess.cpp">
+				RelativePath=".\StableLocalizationProcess.cpp"
+				>
 			</File>
 			<File
-				RelativePath=".\stdafx.cpp">
+				RelativePath=".\stdafx.cpp"
+				>
 				<FileConfiguration
-					Name="Debug|Win32">
+					Name="Debug|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32">
+					Name="Release|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Test|Win32">
+					Name="Test|Win32"
+					>
 					<Tool
 						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="1"/>
+						UsePrecompiledHeader="1"
+					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\TarjanProcess.cpp">
+				RelativePath=".\TarjanProcess.cpp"
+				>
 			</File>
 		</Filter>
 		<File
-			RelativePath=".\ReadMe.txt">
+			RelativePath=".\ReadMe.txt"
+			>
 		</File>
 	</Files>
 	<Globals>

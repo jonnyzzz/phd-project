@@ -3,8 +3,8 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 6.00.0361 */
-/* at Wed May 10 12:46:01 2006
+ /* File created by MIDL compiler version 6.00.0366 */
+/* at Sat Apr 19 15:01:27 2008
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -11843,7 +11843,7 @@ EXTERN_C const IID IID_IMetadataPersistantManager;
 #define __MorseKernel2_LIBRARY_DEFINED__
 
 /* library MorseKernel2 */
-/* [helpstring][custom][uuid][version] */ 
+/* [custom][helpstring][uuid][version] */ 
 
 
 EXTERN_C const IID LIBID_MorseKernel2;

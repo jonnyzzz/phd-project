@@ -1,5 +1,6 @@
 using System;
 using EugenePetrenko.Gui2.Kernell2.Document;
+using NUnit.Framework;
 
 namespace EugenePetrenko.Gui2.Test.Function
 {
@@ -9,7 +10,7 @@ namespace EugenePetrenko.Gui2.Test.Function
   [TestFixture]
   public class MinMaxLipsitzTest
   {
-    private IEvaluateFunction CreateFunction()
+    private static IEvaluateFunction CreateFunction()
     {
       Kernell2.Document.Function function = Util.Util.CreateFunction(
         new double[] {0, 0, 0, 0},

@@ -3,8 +3,8 @@
 /* this ALWAYS GENERATED file contains the proxy stub code */
 
 
- /* File created by MIDL compiler version 6.00.0361 */
-/* at Wed May 10 12:46:01 2006
+ /* File created by MIDL compiler version 6.00.0366 */
+/* at Sat Apr 19 15:01:27 2008
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -26,6 +26,8 @@
 #pragma warning( disable: 4100 ) /* unreferenced arguments in x86 call */
 #pragma warning( disable: 4211 )  /* redefine extent to static */
 #pragma warning( disable: 4232 )  /* dllimport identity*/
+#pragma optimize("", off ) 
+
 #define USE_STUBLESS_PROXY
 
 
@@ -9195,7 +9197,7 @@ static const MIDL_STUB_DESC Object_StubDesc =
     1, /* -error bounds_check flag */
     0x50002, /* Ndr library version */
     0,
-    0x6000169, /* MIDL Version 6.0.361 */
+    0x600016e, /* MIDL Version 6.0.366 */
     0,
     UserMarshalRoutines,
     0,  /* notify & notify_flag routine table */
@@ -9537,6 +9539,7 @@ const ExtendedProxyFileInfo _MorseKernel2_ProxyFileInfo =
     0, /* Filler2 */
     0  /* Filler3 */
 };
+#pragma optimize("", on )
 #if _MSC_VER >= 1200
 #pragma warning(pop)
 #endif

@@ -9,7 +9,7 @@ namespace EugenePetrenko.Gui2.Test
   {
     public static void Main(string[] args)
     {
-      Application.Run(new TestFrom());
+      System.Windows.Forms.Application.Run(new TestFrom());
     }
   }
 }

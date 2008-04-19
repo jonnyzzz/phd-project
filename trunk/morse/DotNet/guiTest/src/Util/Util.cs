@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using NUnit.Framework;
 
 namespace EugenePetrenko.Gui2.Test.Util
 {

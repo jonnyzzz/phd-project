@@ -5,8 +5,8 @@
 /* link this file in with the server and any clients */
 
 
- /* File created by MIDL compiler version 6.00.0361 */
-/* at Wed May 10 12:46:01 2006
+ /* File created by MIDL compiler version 6.00.0366 */
+/* at Sat Apr 19 15:01:27 2008
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -17,9 +17,6 @@
          DECLSPEC_UUID(), MIDL_INTERFACE()
 */
 //@@MIDL_FILE_HEADING(  )
-
-#if !defined(_M_IA64) && !defined(_M_AMD64)
-
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
 
@@ -409,6 +406,4 @@ MIDL_DEFINE_GUID(CLSID, CLSID_CPersistantManager,0x54D9CE4E,0xC1BD,0x46D2,0xA7,0
 #endif
 
 
-
-#endif /* !defined(_M_IA64) && !defined(_M_AMD64)*/
 

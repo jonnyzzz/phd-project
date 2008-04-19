@@ -11,7 +11,8 @@ static char THIS_FILE[] = __FILE__;
 FunctionFactoryParseException::FunctionFactoryParseException(FunctionFactoryParseExceptionType type, const char* problem) : type(type)
 {
 	char tmp[30];
-	for (int i=0; i<25 && *problem != 0; i++) {
+	int i;
+	for (i=0; i<25 && *problem != 0; i++) {
 		tmp[i] = *problem++;
 	}
 	tmp[i++] = '\0';
