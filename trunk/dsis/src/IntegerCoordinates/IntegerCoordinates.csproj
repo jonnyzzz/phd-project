@@ -70,11 +70,11 @@
     <Compile Include="src\NamespaceHolder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\scheme\Scheme.Objects\Scheme.Objects.csproj">
+    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
       <Name>Scheme.Objects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\scheme\Scheme2\Scheme2.csproj">
+    <ProjectReference Include="..\Scheme2\Scheme2.csproj">
       <Project>{69A72457-55CD-463A-840B-73F62BDCA0E5}</Project>
       <Name>Scheme2</Name>
     </ProjectReference>
@@ -82,11 +82,11 @@
       <Project>{B5F40029-7A5F-440D-8A5A-215E032CF89C}</Project>
       <Name>BoxIterators</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\CodeCompiler\CodeCompiler.csproj">
+    <ProjectReference Include="..\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
@@ -94,7 +94,7 @@
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
+    <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>

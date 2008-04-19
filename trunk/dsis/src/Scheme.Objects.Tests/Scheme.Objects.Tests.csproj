@@ -30,11 +30,11 @@
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\nunit\bin\nunit.framework.dll</HintPath>
+      <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Rhino.Mocks, Version=3.4.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\shared\lib\Rhino.Mocks\Rhino.Mocks.dll</HintPath>
+      <HintPath>..\..\lib\Rhino.Mocks\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -45,23 +45,23 @@
     <Compile Include="src\SystemSpaceParseTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\scheme\Scheme.Objects\Scheme.Objects.csproj">
+    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
       <Name>Scheme.Objects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\scheme\Scheme2.Tests\Scheme2.Tests.csproj">
+    <ProjectReference Include="..\Scheme2.Tests\Scheme2.Tests.csproj">
       <Project>{606E255C-62EB-4AC3-B85C-A4B5F78D73E9}</Project>
       <Name>Scheme2.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\scheme\Scheme2\Scheme2.csproj">
+    <ProjectReference Include="..\Scheme2\Scheme2.csproj">
       <Project>{69A72457-55CD-463A-840B-73F62BDCA0E5}</Project>
       <Name>Scheme2</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
+    <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>

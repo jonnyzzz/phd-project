@@ -105,7 +105,7 @@
       <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
       <Name>Graph</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
+    <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>
