@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Computation-Graph xmlns="urn:shemas-dsis-org:computation-graph-xml" Id="AAA">
+  <External>
+    <Inputs>
+      <Input Id="aaa" Point="ZZZ"/>
+    </Inputs>
+    <Outputs>
+      <Output Point="QQQ"/>
+    </Outputs>
+  </External>
+  <Actions>
+    <Code-Action Id="A" Class="ZZZ"/>
+    <Xml-Action Id="B">            
+      <Input Point="sss"/>       
+      <Output Point="eee"/>
+      <Value>
+        <Actions>
+          <Code-Action Id="aaa" Class="111"/>
+        </Actions>
+        <Connections>
+          <Arc>
+            <From-Action-Instance Id="wewe"/>
+            <To Id="DSDS" Point="DDDD"/>
+          </Arc>
+        </Connections>
+      </Value>
+    </Xml-Action>    
+  </Actions>
+
+  <Connections>
+    <Arc>
+      <From-Action Id="aAa" Point="zzz"/>
+      <To  Id="sss" Point="qqq"/>
+    </Arc>
+  </Connections>  
+</Computation-Graph>
