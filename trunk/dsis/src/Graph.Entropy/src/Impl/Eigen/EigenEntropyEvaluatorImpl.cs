@@ -10,6 +10,8 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
     where T : ICellCoordinate
   {
     private readonly double myEps;
+    private readonly int myMaxSteps = 1000;
+
     private readonly IGraph<T> myGraph;
     private double? myEntropy = null;
 
@@ -39,23 +41,27 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
 
     private double DoCompute()
     {
+      int steps = myMaxSteps;
+      double? maxEntropy = 0;
+
       double eigen = -1;
       double t = 0;
-      Dictionary<INode<T>, double> v = Create(myGraph, 1);
+      var v = Create(myGraph, 1);
       double div = myGraph.NodesCount;
-      while (Math.Abs(eigen - t) > myEps)
+      while (Math.Abs(eigen - t) > myEps && steps-- >= 0)
       {
         eigen = t;
 
         //mul = (|v_n+1|, v_n+1) = A v_n/|v_n|
         //eig_n+1 = |v_n+1|/|v_n| = |A v_n| / |v_n|
-        Pair<double, Dictionary<INode<T>, double>> mul = Multiply(Math.Sqrt(div), myGraph, v);
+        var mul = Multiply(Math.Sqrt(div), myGraph, v);
         v = mul.Second;
         t = mul.First;
         div = mul.First;
+
+        maxEntropy = maxEntropy == null ? t : Math.Max(t, maxEntropy.Value);
       }
-      eigen = t;
-      return Math.Log(eigen)/Math.Log(2)/2;
+      return Math.Log(steps == 0 ? maxEntropy.Value : t, 2)/2;      
     }
 
     /// <summary>
