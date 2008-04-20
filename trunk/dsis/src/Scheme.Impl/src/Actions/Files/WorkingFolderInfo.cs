@@ -37,7 +37,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
     public string CreateFileName(string ext)
     {
       //todo: Escape
-      return CreateFileNameFromTemplate(ext);
+      return CreateFileNameFromTemplate(System.IO.Path.GetFileNameWithoutExtension(ext) + "-{0}." + System.IO.Path.GetExtension(ext));
     }
 
     public string CreateFileNameFromTemplate(string template)

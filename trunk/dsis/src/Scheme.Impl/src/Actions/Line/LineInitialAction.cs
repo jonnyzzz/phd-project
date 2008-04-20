@@ -24,7 +24,7 @@ namespace DSIS.Scheme.Impl.Actions.Line
 
     protected override void Apply(Context ctx, Context result)
     {            
-      ILine line = LineFactory.CreateInitialLine(myEps, myLeft, myRight);
+      var line = LineFactory.CreateInitialLine(myEps, myLeft, myRight);
       
       Keys.LineKey.Set(result, line);     
     }    

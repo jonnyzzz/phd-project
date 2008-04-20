@@ -24,7 +24,7 @@ namespace DSIS.SimpleRunner
 {
   public class Program
   {
-    public static void Mai0n(string[] args)
+    public static void Main(string[] args)
     {
       DefaultSystemSpace sp =
         new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
@@ -33,8 +33,11 @@ namespace DSIS.SimpleRunner
       IAction ikeda = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), sp);
 //      IAction init = new LineInitialAction(0.001, new double[] {-2.6, -2.1}, new double[] {0.5, 0});
       ISimpleAction init =
-        new LineInitialAction(0.001, new double[] {0.63313, 0.18940634},
-                              new double[] {0.63313 + 0.01, 0.18940634 + 1.92*0.01});
+//        new LineInitialAction(0.001, new[] {0.63313, 0.18940634},
+//                              new[] {0.63313 + 0.01, 0.18940634 + 1.92*0.01});
+        new LineInitialAction(0.001, new[] {0.54890950520833448, -0.75236002604166552},
+                              new[] {0.53588867187500056, -0.74991861979166552});
+
       ActionGraph gr = new ActionGraph();
       ISimpleAction wfBase = new WorkingFolderAction();
 
@@ -81,17 +84,17 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(sysWf, draw);
     }
 
-    public static void Main()
+    public static void _Main(string[] args)
     {
       DefaultSystemSpace spIkedaCutted =
-        new DefaultSystemSpace(2, new double[] {-1.1, -1.5}, new double[] {3.5, 1.8}, new long[] {3, 3});
+        new DefaultSystemSpace(2, new[] {-1.1, -1.5}, new[] {3.5, 1.8}, new[] {3, 3L});
       DefaultSystemSpace sp =
         new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
       DefaultSystemSpace spD =
         new DefaultSystemSpace(2, new double[] {-2, -2}, new double[] {2, 2}, new long[] {2, 2});
 
       DefaultSystemSpace log_sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {1, 4}, new long[] {3, 3});
-      DefaultSystemSpace log_sp2 = new DefaultSystemSpace(2, new double[] {0, 3}, new double[] {1, 3.7}, new long[] {3, 3});
+      DefaultSystemSpace log_sp2 = new DefaultSystemSpace(2, new double[] {0, 3}, new[] {1, 3.7}, new long[] {3, 3});
       
       DefaultSystemSpace log_sp1 = new DefaultSystemSpace(1, new double[] {0}, new double[] {1}, new long[] {3});
 
