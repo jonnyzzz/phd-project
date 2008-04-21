@@ -26,9 +26,9 @@ namespace DSIS.SimpleRunner
   {
     public static void _Main(string[] args)
     {
-      DefaultSystemSpace sp =
+      var sp =
         new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
-      DefaultSystemSpace log_sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {1, 4}, new long[] {3, 3});
+      var log_sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {1, 4}, new long[] {3, 3});
       ISimpleAction henon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
       IAction ikeda = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), sp);
 //      IAction init = new LineInitialAction(0.001, new double[] {-2.6, -2.1}, new double[] {0.5, 0});
@@ -38,7 +38,7 @@ namespace DSIS.SimpleRunner
         new LineInitialAction(0.001, new[] {0.54890950520833448, -0.75236002604166552},
                               new[] {0.53588867187500056, -0.74991861979166552});
 
-      ActionGraph gr = new ActionGraph();
+      var gr = new ActionGraph();
       ISimpleAction wfBase = new WorkingFolderAction();
 
 //      BuildCurveLength(10, gr, init, wfBase, ikeda);
@@ -67,7 +67,7 @@ namespace DSIS.SimpleRunner
                                                                 }));
       ISimpleAction draw = new DrawLineAction();
 
-      SystemWorkingFolderAction sysWf = new SystemWorkingFolderAction();
+      var sysWf = new SystemWorkingFolderAction();
       ISimpleAction logger = new LoggerAction();
 
 
@@ -86,17 +86,17 @@ namespace DSIS.SimpleRunner
 
     public static void Main(string[] args)
     {
-      DefaultSystemSpace spIkedaCutted =
+      var spIkedaCutted =
         new DefaultSystemSpace(2, new[] {-1.1, -1.5}, new[] {3.5, 1.8}, new[] {3, 3L});
-      DefaultSystemSpace sp =
+      var sp =
         new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
-      DefaultSystemSpace spD =
+      var spD =
         new DefaultSystemSpace(2, new double[] {-2, -2}, new double[] {2, 2}, new long[] {2, 2});
 
-      DefaultSystemSpace log_sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {1, 4}, new long[] {3, 3});
-      DefaultSystemSpace log_sp2 = new DefaultSystemSpace(2, new double[] {0, 3}, new[] {1, 3.7}, new long[] {3, 3});
-      
-      DefaultSystemSpace log_sp1 = new DefaultSystemSpace(1, new double[] {0}, new double[] {1}, new long[] {3});
+      var log_sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {1, 4}, new long[] {3, 3});
+      var log_sp2 = new DefaultSystemSpace(2, new double[] {0, 3}, new[] {1, 3.7}, new long[] {3, 3});
+
+      var log_sp1 = new DefaultSystemSpace(1, new double[] {0}, new double[] {1}, new long[] {3});
 
 
       ISimpleAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
@@ -114,11 +114,11 @@ namespace DSIS.SimpleRunner
 
       IAction[] system = {systemHenon, /*systemHenonD, systemHenonD_272, systemIked, systemIkedaCut*/};
 
-      SimpleParallel parallel = new SimpleParallel();
+      var parallel = new SimpleParallel();
 
       parallel.DoParallel(new ComputeDelegate(wfBase, 3, systenLogistic3569, 1).Do);
       parallel.DoParallel(new ComputeDelegate(wfBase, 3, systenLogistic4, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 3, systemHenon, 2).Do);        
+      parallel.DoParallel(new ComputeDelegate(wfBase, 3, systemHenon, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
 //      }
       /*for (int steps = 8; steps <= 15; steps++)
@@ -131,28 +131,6 @@ namespace DSIS.SimpleRunner
       parallel.WaitForEnd();
     }
 
-    private class ComputeDelegate
-    {
-      private readonly int myDim;
-      private readonly IAction wfBase;
-      private readonly int steps;
-      private readonly IAction action;
-
-      public void Do()
-      {
-        ComputeEntropy(myDim, wfBase, steps, action);
-        Collect();
-      }
-
-      public ComputeDelegate(IAction wfBase, int steps, IAction action, int dim)
-      {
-        this.wfBase = wfBase;
-        myDim = dim;
-        this.steps = steps;
-        this.action = action;
-      }
-    }
-
     private static void Collect()
     {
       GCHelper.Collect();
@@ -160,8 +138,8 @@ namespace DSIS.SimpleRunner
 
     private static T[] Fill<T>(T t, int dim)
     {
-      T[] tt = new T[dim];
-      for(int i=0; i<dim; i++)
+      var tt = new T[dim];
+      for (int i = 0; i < dim; i++)
       {
         tt[i] = t;
       }
@@ -176,10 +154,10 @@ namespace DSIS.SimpleRunner
       ISimpleAction a5 = new ChainRecurrenctSimbolicImageAction();
       ISimpleAction method = new SetMethod(new BoxMethodSettings(0.1), Fill(2L, dim));
 
-      ActionGraph gr = new ActionGraph();
+      var gr = new ActionGraph();
 
-      SystemWorkingFolderAction sysWf = new SystemWorkingFolderAction();
-      CustomPrefixWorkingFolderAction wf = new CustomPrefixWorkingFolderAction(steps.ToString());
+      var sysWf = new SystemWorkingFolderAction();
+      var wf = new CustomPrefixWorkingFolderAction(steps.ToString());
       ISimpleAction logger = new LoggerAction();
 
       gr.AddEdge(system, wfBase);
@@ -202,20 +180,20 @@ namespace DSIS.SimpleRunner
       IAction buildIS = new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
           {
-            SymbolicImageConstructionStep build =
+            var build =
               new SymbolicImageConstructionStep();
             bld.AddEdge(bld.Start, build);
             bld.AddEdge(build, bld.End);
-            ParallelAction b = new ParallelAction(new DumpGraphInfoAction(),
-                                                  new DumpGraphComponentsInfoAction(),
-                                                  new DumpMethodAction()
+            var b = new ParallelAction(new DumpGraphInfoAction(),
+                                       new DumpGraphComponentsInfoAction(),
+                                       new DumpMethodAction()
               );
-            ProxyAction p = new ProxyAction();
+            var p = new ProxyAction();
             bld.AddEdge(build, b);
             bld.AddEdge(bld.Start, p);
             bld.AddEdge(p, b);
 
-            GraphEntropyLogAction dumpEntropy = new GraphEntropyLogAction();
+            var dumpEntropy = new GraphEntropyLogAction();
             bld.AddEdge(build, dumpEntropy);
             bld.AddEdge(p, dumpEntropy);
           });
@@ -224,7 +202,7 @@ namespace DSIS.SimpleRunner
                                                                {
                                                                  ISimpleAction xa1 = new ReplaceContextAction(
                                                                    new SetMethod(
-                                                                     new PointMethodSettings(Fill(2,dim), 0.1),
+                                                                     new PointMethodSettings(Fill(2, dim), 0.1),
                                                                      Fill(1L, dim)));
 
                                                                  IAction xa2 = buildIS;
@@ -271,21 +249,21 @@ namespace DSIS.SimpleRunner
                                xgr.AddEdge(xgr.Start, new DumpContextAction("EntropyAction"));
                                xgr.AddEdge(xgr.Start, xwf);
                                xgr.AddEdge(xwf, draw);
-                               Dictionary<IAction, string> entropies = new Dictionary<IAction, string>();
+                               var entropies = new Dictionary<IAction, string>();
 
-                               StrangeEntropyEvaluatorParams entropySmart = new StrangeEntropyEvaluatorParams(
+                               var entropySmart = new StrangeEntropyEvaluatorParams(
                                  StrangeEvaluatorType.WeightSearch_1,
                                  StrangeEvaluatorStrategy.SMART,
                                  EntropyLoopWeights.CONST);
-                               StrangeEntropyEvaluatorParams entropyFirst = new StrangeEntropyEvaluatorParams(
+                               var entropyFirst = new StrangeEntropyEvaluatorParams(
                                  StrangeEvaluatorType.WeightSearch_1,
                                  StrangeEvaluatorStrategy.FIRST,
                                  EntropyLoopWeights.CONST);
-                               StrangeEntropyEvaluatorParams entropySmartF = new StrangeEntropyEvaluatorParams(
+                               var entropySmartF = new StrangeEntropyEvaluatorParams(
                                  StrangeEvaluatorType.WeightSearch_Filtering,
                                  StrangeEvaluatorStrategy.SMART,
                                  EntropyLoopWeights.CONST);
-                               StrangeEntropyEvaluatorParams entropySmartL = new StrangeEntropyEvaluatorParams(
+                               var entropySmartL = new StrangeEntropyEvaluatorParams(
                                  StrangeEvaluatorType.WeightSearch_Limited,
                                  StrangeEvaluatorStrategy.SMART,
                                  EntropyLoopWeights.CONST);
@@ -301,25 +279,24 @@ namespace DSIS.SimpleRunner
                                  entropies.Add(new AgregateAction(
                                                  delegate(IActionGraphPartBuilder bld)
                                                    {
-                                                     IAction entropy =  new ParallelAction(
-//                                                                 new ForeachStrongComponentAction(
-                                                       DrawEntropyAction(steps, new StrangeEntropyAction()));
-                                                     
+                                                     IAction entropy = EntropyForEachComponent(
+                                                       DrawEntropyAction(steps,
+                                                                         new StrangeEntropyAction
+                                                                           ()));
 
-                                                     ProxyAction pa = new ProxyAction();
+                                                     var pa = new ProxyAction();
 
                                                      bld.AddEdge(bld.Start, pa);
                                                      bld.AddEdge(pa, entropy);
                                                      bld.AddEdge(entropy, bld.End);
-                                                     bld.AddEdge(new SetStrangeEntropyParamsAction(evaluatorParams),
-                                                                 entropy);
+                                                     bld.AddEdge(new SetStrangeEntropyParamsAction(evaluatorParams), entropy);
                                                    }), evaluatorParams.PresentableName);
                                }
 //                               entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
-                               entropies.Add(DrawEntropyAction(steps, new JVRMeasureAction()), "JVR");
-                               entropies.Add(DrawEntropyAction(steps, new EigenEntropyAction()), "Eigen");
+                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction())), "JVR");
+                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new EigenEntropyAction())), "Eigen");
 
-                               foreach (KeyValuePair<IAction, string> pair in entropies)
+                               foreach (var pair in entropies)
                                {
                                  IAction entropy = pair.Key;
                                  IAction customWf = new CustomPrefixWorkingFolderAction(pair.Value);
@@ -330,6 +307,23 @@ namespace DSIS.SimpleRunner
                                }
                                xgr.AddEdge(xgr.Start, xgr.End);
                              });
+    }
+
+    private static IAction EntropyForEachComponent(IAction doDrawAndCompute)
+    {
+      return
+        new ForeachStrongComponentAction(
+          new AgregateAction(
+            delegate(IActionGraphPartBuilder xld)
+              {
+                xld.AddEdge(xld.Start, doDrawAndCompute);
+                xld.AddEdge(doDrawAndCompute, xld.End);
+                var wf = new LoopStepWorkingFolderAction("comp-{0}");
+                xld.AddEdge(xld.Start, wf);
+                xld.AddEdge(wf, doDrawAndCompute);
+              }
+            )
+          );
     }
 
     private static IAction DrawEntropyAction(int steps, IAction entropy)
@@ -355,7 +349,7 @@ namespace DSIS.SimpleRunner
                                             new DumpGraphMeasureAction()
                                             );
 
-                                        ProxyAction pa = new ProxyAction();
+                                        var pa = new ProxyAction();
                                         bld.AddEdge(bld.Start, pa);
                                         bld.AddEdge(pa, drawEntropy);
                                         bld.AddEdge(entropy, drawEntropy);
@@ -371,7 +365,7 @@ namespace DSIS.SimpleRunner
                                                                                bl.AddEdge(bl.Start, proj);
                                                                                bl.AddEdge(proj, bl.End);
 
-                                                                               MeasureEntropyLogAction b =
+                                                                               var b =
                                                                                  new MeasureEntropyLogAction(
                                                                                    "Project");
                                                                                IAction bb = new ParallelAction(
@@ -396,5 +390,31 @@ namespace DSIS.SimpleRunner
                                         bld.AddEdge(pa, project);
                                       }));
     }
+
+    #region Nested type: ComputeDelegate
+
+    private class ComputeDelegate
+    {
+      private readonly IAction action;
+      private readonly int myDim;
+      private readonly int steps;
+      private readonly IAction wfBase;
+
+      public ComputeDelegate(IAction wfBase, int steps, IAction action, int dim)
+      {
+        this.wfBase = wfBase;
+        myDim = dim;
+        this.steps = steps;
+        this.action = action;
+      }
+
+      public void Do()
+      {
+        ComputeEntropy(myDim, wfBase, steps, action);
+        Collect();
+      }
+    }
+
+    #endregion
   }
 }

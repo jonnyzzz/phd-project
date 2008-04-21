@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Files
@@ -14,8 +15,12 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     protected override void Apply(Context ctx, Context result)
     {
-      WorkingFolderInfo info = FileKeys.WorkingFolderKey.Get(ctx);
-      FileKeys.WorkingFolderKey.Set(result, info.Prefix(Prefix(ctx)));
+      var info = FileKeys.WorkingFolderKey.Get(ctx);
+      var prefix = info.Prefix(Prefix(ctx));
+      if (!Directory.Exists(prefix.Path))
+        Directory.CreateDirectory(prefix.Path);
+
+      FileKeys.WorkingFolderKey.Set(result, prefix);
     }
   }
 }
