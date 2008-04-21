@@ -1,4 +1,3 @@
-using System.Collections;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
@@ -39,15 +38,15 @@ namespace DSIS.Scheme.Impl
       return new Key<IGraphStrongComponents<Q>>("comps");
     }
 
-    public static Key<StrangeEntropyEvaluatorParams> StrangeEntropyEvaluatorParams = new Key<StrangeEntropyEvaluatorParams>("");
+    public static readonly Key<StrangeEntropyEvaluatorParams> StrangeEntropyEvaluatorParams = new Key<StrangeEntropyEvaluatorParams>("");
     
     public static Key<IGraphMeasure<T>> GraphMeasure<T>() where T : ICellCoordinate
     {
       return new Key<IGraphMeasure<T>>("measure");
     }
 
-    public static Key<IGraphEntropy> GraphEntropyKey = new Key<IGraphEntropy>("measure");
+    public static readonly Key<IGraphEntropy> GraphEntropyKey = new Key<IGraphEntropy>("measure");
 
-    public static Key<ILine> LineKey = new Key<ILine>("Line");
+    public static readonly Key<ILine> LineKey = new Key<ILine>("Line");
   }
 }

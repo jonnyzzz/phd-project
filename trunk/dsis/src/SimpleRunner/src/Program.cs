@@ -24,7 +24,7 @@ namespace DSIS.SimpleRunner
 {
   public class Program
   {
-    public static void Main(string[] args)
+    public static void _Main(string[] args)
     {
       DefaultSystemSpace sp =
         new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
@@ -84,7 +84,7 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(sysWf, draw);
     }
 
-    public static void _Main(string[] args)
+    public static void Main(string[] args)
     {
       DefaultSystemSpace spIkedaCutted =
         new DefaultSystemSpace(2, new[] {-1.1, -1.5}, new[] {3.5, 1.8}, new[] {3, 3L});
@@ -301,10 +301,10 @@ namespace DSIS.SimpleRunner
                                  entropies.Add(new AgregateAction(
                                                  delegate(IActionGraphPartBuilder bld)
                                                    {
-                                                     IAction entropy = // new ParallelAction(
-                                                       //          new ForeachStrongComponentAction(
-                                                       DrawEntropyAction(steps, new StrangeEntropyAction());
-                                                     //          DrawEntropyAction(new PathEntropyAction());
+                                                     IAction entropy =  new ParallelAction(
+//                                                                 new ForeachStrongComponentAction(
+                                                       DrawEntropyAction(steps, new StrangeEntropyAction()));
+                                                     
 
                                                      ProxyAction pa = new ProxyAction();
 

@@ -12,9 +12,9 @@ namespace DSIS.Scheme.Impl.Actions
   {
     private readonly ISimpleAction myBody;
 
-    public ForeachStrongComponentAction(ISimpleAction body)
+    public ForeachStrongComponentAction(IAction body)
     {
-      myBody = body;
+      myBody = (ISimpleAction) body;
     }
 
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
@@ -25,31 +25,37 @@ namespace DSIS.Scheme.Impl.Actions
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
       IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
-      foreach (IStrongComponentInfo info in comps.Components)
+      int index = 0;
+      foreach (var _info in comps.Components)
       {
+        var info = _info;
         ActionGraph ag = new ActionGraph();
-        UpdateContextAction ac = new UpdateContextAction(
+
+        var dIndex = index;
+        var ac = new UpdateContextAction(
           delegate(Context _, Context ctx)
             {
               IGraphStrongComponents<Q> oneComponent =
                 new OneComponentsGraphAdapter<Q>(comps, info);
 
               IGraphWithStrongComponent<Q> graph =
-                oneComponent.AsGraphWithStrongComponents(new IStrongComponentInfo[] {info});
+                oneComponent.AsGraphWithStrongComponents(new[] {info});
 
               ctx.AddAll(input);
 
               Keys.Graph<Q>().Set(ctx, graph);
               Keys.GraphComponents<Q>().Set(ctx, graph.ComputeStrongComponents(NullProgressInfo.INSTANCE));
+              LoopAction.LoopIndexKey.Set(ctx, new LoopIndex(dIndex, comps.ComponentCount));
             });
 
-        UpdateContextAction save = new UpdateContextAction(
-          delegate(Context @in, Context _) { output.AddAll(@in); });
+        var save = new UpdateContextAction((@in, _) => output.AddAll(@in));
 
         ag.AddEdge(ac, myBody);
         ag.AddEdge(myBody, save);
 
         ag.Execute();
+
+        index++;
       }
     }
   }
