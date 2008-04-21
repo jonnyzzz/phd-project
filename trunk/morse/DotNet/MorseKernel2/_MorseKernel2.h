@@ -3,8 +3,8 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 6.00.0366 */
-/* at Sat Apr 19 15:01:27 2008
+ /* File created by MIDL compiler version 7.00.0500 */
+/* at Mon Apr 21 21:49:19 2008
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -950,8 +950,6 @@ typedef struct CPersistantManager CPersistantManager;
 extern "C"{
 #endif 
 
-void * __RPC_USER MIDL_user_allocate(size_t);
-void __RPC_USER MIDL_user_free( void * ); 
 
 #ifndef __IActionBase_INTERFACE_DEFINED__
 #define __IActionBase_INTERFACE_DEFINED__
@@ -979,7 +977,8 @@ EXTERN_C const IID IID_IActionBase;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IActionBase * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IActionBase * This);
@@ -1001,7 +1000,7 @@ EXTERN_C const IID IID_IActionBase;
             IActionBase * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -1030,26 +1029,26 @@ EXTERN_C const IID IID_IActionBase;
 
 
 #define IActionBase_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IActionBase_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IActionBase_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IActionBase_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IActionBase_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IActionBase_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IActionBase_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -1089,7 +1088,8 @@ EXTERN_C const IID IID_IParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IParameters * This);
@@ -1111,7 +1111,7 @@ EXTERN_C const IID IID_IParameters;
             IParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -1140,26 +1140,26 @@ EXTERN_C const IID IID_IParameters;
 
 
 #define IParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -1212,7 +1212,8 @@ EXTERN_C const IID IID_IProgressBarInfo;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IProgressBarInfo * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IProgressBarInfo * This);
@@ -1234,7 +1235,7 @@ EXTERN_C const IID IID_IProgressBarInfo;
             IProgressBarInfo * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -1281,106 +1282,48 @@ EXTERN_C const IID IID_IProgressBarInfo;
 
 
 #define IProgressBarInfo_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IProgressBarInfo_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IProgressBarInfo_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IProgressBarInfo_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IProgressBarInfo_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IProgressBarInfo_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IProgressBarInfo_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IProgressBarInfo_Length(This,length)	\
-    (This)->lpVtbl -> Length(This,length)
+    ( (This)->lpVtbl -> Length(This,length) ) 
 
 #define IProgressBarInfo_NeedStop(This,stop)	\
-    (This)->lpVtbl -> NeedStop(This,stop)
+    ( (This)->lpVtbl -> NeedStop(This,stop) ) 
 
 #define IProgressBarInfo_Start(This)	\
-    (This)->lpVtbl -> Start(This)
+    ( (This)->lpVtbl -> Start(This) ) 
 
 #define IProgressBarInfo_Next(This,value)	\
-    (This)->lpVtbl -> Next(This,value)
+    ( (This)->lpVtbl -> Next(This,value) ) 
 
 #define IProgressBarInfo_Finish(This)	\
-    (This)->lpVtbl -> Finish(This)
+    ( (This)->lpVtbl -> Finish(This) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Length_Proxy( 
-    IProgressBarInfo * This,
-    /* [retval][out] */ double *length);
-
-
-void __RPC_STUB IProgressBarInfo_Length_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_NeedStop_Proxy( 
-    IProgressBarInfo * This,
-    /* [retval][out] */ VARIANT_BOOL *stop);
-
-
-void __RPC_STUB IProgressBarInfo_NeedStop_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Start_Proxy( 
-    IProgressBarInfo * This);
-
-
-void __RPC_STUB IProgressBarInfo_Start_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Next_Proxy( 
-    IProgressBarInfo * This,
-    /* [in] */ double value);
-
-
-void __RPC_STUB IProgressBarInfo_Next_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IProgressBarInfo_Finish_Proxy( 
-    IProgressBarInfo * This);
-
-
-void __RPC_STUB IProgressBarInfo_Finish_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -1413,7 +1356,8 @@ EXTERN_C const IID IID_IResultBase;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IResultBase * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IResultBase * This);
@@ -1435,7 +1379,7 @@ EXTERN_C const IID IID_IResultBase;
             IResultBase * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -1464,26 +1408,26 @@ EXTERN_C const IID IID_IResultBase;
 
 
 #define IResultBase_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IResultBase_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IResultBase_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IResultBase_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IResultBase_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IResultBase_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IResultBase_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -1530,7 +1474,8 @@ EXTERN_C const IID IID_IResultSet;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IResultSet * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IResultSet * This);
@@ -1552,7 +1497,7 @@ EXTERN_C const IID IID_IResultSet;
             IResultSet * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -1590,64 +1535,39 @@ EXTERN_C const IID IID_IResultSet;
 
 
 #define IResultSet_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IResultSet_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IResultSet_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IResultSet_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IResultSet_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IResultSet_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IResultSet_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IResultSet_GetCount(This,count)	\
-    (This)->lpVtbl -> GetCount(This,count)
+    ( (This)->lpVtbl -> GetCount(This,count) ) 
 
 #define IResultSet_GetResult(This,index,result)	\
-    (This)->lpVtbl -> GetResult(This,index,result)
+    ( (This)->lpVtbl -> GetResult(This,index,result) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IResultSet_GetCount_Proxy( 
-    IResultSet * This,
-    /* [retval][out] */ int *count);
-
-
-void __RPC_STUB IResultSet_GetCount_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IResultSet_GetResult_Proxy( 
-    IResultSet * This,
-    /* [in] */ int index,
-    /* [retval][out] */ IResultBase **result);
-
-
-void __RPC_STUB IResultSet_GetResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -1694,7 +1614,8 @@ EXTERN_C const IID IID_IAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAction * This);
@@ -1716,7 +1637,7 @@ EXTERN_C const IID IID_IAction;
             IAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -1763,96 +1684,46 @@ EXTERN_C const IID IID_IAction;
 
 
 #define IAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAction_SetActionParameters_Proxy( 
-    IAction * This,
-    /* [in] */ IParameters *parameters);
-
-
-void __RPC_STUB IAction_SetActionParameters_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAction_SetProgressBarInfo_Proxy( 
-    IAction * This,
-    /* [in] */ IProgressBarInfo *pinfo);
-
-
-void __RPC_STUB IAction_SetProgressBarInfo_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAction_CanDo_Proxy( 
-    IAction * This,
-    /* [in] */ IResultSet *result,
-    /* [retval][out] */ VARIANT_BOOL *can);
-
-
-void __RPC_STUB IAction_CanDo_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAction_Do_Proxy( 
-    IAction * This,
-    /* [in] */ IResultSet *input,
-    /* [retval][out] */ IResultSet **output);
-
-
-void __RPC_STUB IAction_Do_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -1918,7 +1789,8 @@ EXTERN_C const IID IID_IFunction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFunction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IFunction * This);
@@ -1940,7 +1812,7 @@ EXTERN_C const IID IID_IFunction;
             IFunction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -2012,186 +1884,63 @@ EXTERN_C const IID IID_IFunction;
 
 
 #define IFunction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IFunction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IFunction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IFunction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IFunction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IFunction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IFunction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IFunction_GetSystemFunction(This,function)	\
-    (This)->lpVtbl -> GetSystemFunction(This,function)
+    ( (This)->lpVtbl -> GetSystemFunction(This,function) ) 
 
 #define IFunction_GetSystemFunctionDerivate(This,function)	\
-    (This)->lpVtbl -> GetSystemFunctionDerivate(This,function)
+    ( (This)->lpVtbl -> GetSystemFunctionDerivate(This,function) ) 
 
 #define IFunction_CreateGraph(This,graph)	\
-    (This)->lpVtbl -> CreateGraph(This,graph)
+    ( (This)->lpVtbl -> CreateGraph(This,graph) ) 
 
 #define IFunction_GetEquations(This,equations)	\
-    (This)->lpVtbl -> GetEquations(This,equations)
+    ( (This)->lpVtbl -> GetEquations(This,equations) ) 
 
 #define IFunction_GetDimension(This,dimenstion)	\
-    (This)->lpVtbl -> GetDimension(This,dimenstion)
+    ( (This)->lpVtbl -> GetDimension(This,dimenstion) ) 
 
 #define IFunction_GetIterations(This,iterations)	\
-    (This)->lpVtbl -> GetIterations(This,iterations)
+    ( (This)->lpVtbl -> GetIterations(This,iterations) ) 
 
 #define IFunction_SetIterations(This,iterations)	\
-    (This)->lpVtbl -> SetIterations(This,iterations)
+    ( (This)->lpVtbl -> SetIterations(This,iterations) ) 
 
 #define IFunction_GetMinimum(This,id,value)	\
-    (This)->lpVtbl -> GetMinimum(This,id,value)
+    ( (This)->lpVtbl -> GetMinimum(This,id,value) ) 
 
 #define IFunction_GetMaximum(This,id,value)	\
-    (This)->lpVtbl -> GetMaximum(This,id,value)
+    ( (This)->lpVtbl -> GetMaximum(This,id,value) ) 
 
 #define IFunction_GetLipshitz(This,id,value)	\
-    (This)->lpVtbl -> GetLipshitz(This,id,value)
+    ( (This)->lpVtbl -> GetLipshitz(This,id,value) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IFunction_GetSystemFunction_Proxy( 
-    IFunction * This,
-    /* [out] */ void **function);
-
-
-void __RPC_STUB IFunction_GetSystemFunction_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IFunction_GetSystemFunctionDerivate_Proxy( 
-    IFunction * This,
-    /* [out] */ void **function);
-
-
-void __RPC_STUB IFunction_GetSystemFunctionDerivate_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IFunction_CreateGraph_Proxy( 
-    IFunction * This,
-    /* [out] */ void **graph);
-
-
-void __RPC_STUB IFunction_CreateGraph_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetEquations_Proxy( 
-    IFunction * This,
-    /* [retval][out] */ BSTR *equations);
-
-
-void __RPC_STUB IFunction_GetEquations_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetDimension_Proxy( 
-    IFunction * This,
-    /* [retval][out] */ int *dimenstion);
-
-
-void __RPC_STUB IFunction_GetDimension_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetIterations_Proxy( 
-    IFunction * This,
-    /* [retval][out] */ int *iterations);
-
-
-void __RPC_STUB IFunction_GetIterations_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_SetIterations_Proxy( 
-    IFunction * This,
-    /* [in] */ int iterations);
-
-
-void __RPC_STUB IFunction_SetIterations_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetMinimum_Proxy( 
-    IFunction * This,
-    /* [in] */ int id,
-    /* [retval][out] */ double *value);
-
-
-void __RPC_STUB IFunction_GetMinimum_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetMaximum_Proxy( 
-    IFunction * This,
-    /* [in] */ int id,
-    /* [retval][out] */ double *value);
-
-
-void __RPC_STUB IFunction_GetMaximum_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IFunction_GetLipshitz_Proxy( 
-    IFunction * This,
-    /* [in] */ int id,
-    /* [retval][out] */ double *value);
-
-
-void __RPC_STUB IFunction_GetLipshitz_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -2227,7 +1976,8 @@ EXTERN_C const IID IID_IComputationParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IComputationParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IComputationParameters * This);
@@ -2249,7 +1999,7 @@ EXTERN_C const IID IID_IComputationParameters;
             IComputationParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -2282,49 +2032,37 @@ EXTERN_C const IID IID_IComputationParameters;
 
 
 #define IComputationParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IComputationParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IComputationParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IComputationParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IComputationParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IComputationParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IComputationParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IComputationParameters_GetFunction(This,function)	\
-    (This)->lpVtbl -> GetFunction(This,function)
+    ( (This)->lpVtbl -> GetFunction(This,function) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IComputationParameters_GetFunction_Proxy( 
-    IComputationParameters * This,
-    /* [retval][out] */ IFunction **function);
-
-
-void __RPC_STUB IComputationParameters_GetFunction_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -2366,7 +2104,8 @@ EXTERN_C const IID IID_IAdaptiveBoxMethod;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAdaptiveBoxMethod * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAdaptiveBoxMethod * This);
@@ -2388,7 +2127,7 @@ EXTERN_C const IID IID_IAdaptiveBoxMethod;
             IAdaptiveBoxMethod * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -2446,80 +2185,53 @@ EXTERN_C const IID IID_IAdaptiveBoxMethod;
 
 
 #define IAdaptiveBoxMethod_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IAdaptiveBoxMethod_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IAdaptiveBoxMethod_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IAdaptiveBoxMethod_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IAdaptiveBoxMethod_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IAdaptiveBoxMethod_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IAdaptiveBoxMethod_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IAdaptiveBoxMethod_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IAdaptiveBoxMethod_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IAdaptiveBoxMethod_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IAdaptiveBoxMethod_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IAdaptiveBoxMethod_GetDimensionFromParameters(This,in,demention)	\
-    (This)->lpVtbl -> GetDimensionFromParameters(This,in,demention)
+    ( (This)->lpVtbl -> GetDimensionFromParameters(This,in,demention) ) 
 
 #define IAdaptiveBoxMethod_GetRecomendedPrecision(This,in,id,prec)	\
-    (This)->lpVtbl -> GetRecomendedPrecision(This,in,id,prec)
+    ( (This)->lpVtbl -> GetRecomendedPrecision(This,in,id,prec) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveBoxMethod_GetDimensionFromParameters_Proxy( 
-    IAdaptiveBoxMethod * This,
-    /* [in] */ IResultSet *in,
-    /* [retval][out] */ int *demention);
-
-
-void __RPC_STUB IAdaptiveBoxMethod_GetDimensionFromParameters_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveBoxMethod_GetRecomendedPrecision_Proxy( 
-    IAdaptiveBoxMethod * This,
-    /* [in] */ IResultSet *in,
-    /* [in] */ int id,
-    /* [retval][out] */ double *prec);
-
-
-void __RPC_STUB IAdaptiveBoxMethod_GetRecomendedPrecision_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -2560,7 +2272,8 @@ EXTERN_C const IID IID_IAdaptiveBoxParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAdaptiveBoxParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAdaptiveBoxParameters * This);
@@ -2582,7 +2295,7 @@ EXTERN_C const IID IID_IAdaptiveBoxParameters;
             IAdaptiveBoxParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -2625,70 +2338,44 @@ EXTERN_C const IID IID_IAdaptiveBoxParameters;
 
 
 #define IAdaptiveBoxParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IAdaptiveBoxParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IAdaptiveBoxParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IAdaptiveBoxParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IAdaptiveBoxParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IAdaptiveBoxParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IAdaptiveBoxParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IAdaptiveBoxParameters_GetFunction(This,function)	\
-    (This)->lpVtbl -> GetFunction(This,function)
+    ( (This)->lpVtbl -> GetFunction(This,function) ) 
 
 
 #define IAdaptiveBoxParameters_GetFactor(This,id,factor)	\
-    (This)->lpVtbl -> GetFactor(This,id,factor)
+    ( (This)->lpVtbl -> GetFactor(This,id,factor) ) 
 
 #define IAdaptiveBoxParameters_GetPrecision(This,id,prec)	\
-    (This)->lpVtbl -> GetPrecision(This,id,prec)
+    ( (This)->lpVtbl -> GetPrecision(This,id,prec) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveBoxParameters_GetFactor_Proxy( 
-    IAdaptiveBoxParameters * This,
-    /* [in] */ int id,
-    /* [retval][out] */ int *factor);
-
-
-void __RPC_STUB IAdaptiveBoxParameters_GetFactor_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveBoxParameters_GetPrecision_Proxy( 
-    IAdaptiveBoxParameters * This,
-    /* [in] */ int id,
-    /* [retval][out] */ double *prec);
-
-
-void __RPC_STUB IAdaptiveBoxParameters_GetPrecision_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -2731,7 +2418,8 @@ EXTERN_C const IID IID_IResultMetadata;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IResultMetadata * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IResultMetadata * This);
@@ -2753,7 +2441,7 @@ EXTERN_C const IID IID_IResultMetadata;
             IResultMetadata * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -2795,79 +2483,42 @@ EXTERN_C const IID IID_IResultMetadata;
 
 
 #define IResultMetadata_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IResultMetadata_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IResultMetadata_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IResultMetadata_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IResultMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IResultMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IResultMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IResultMetadata_EqualType(This,metadata,out)	\
-    (This)->lpVtbl -> EqualType(This,metadata,out)
+    ( (This)->lpVtbl -> EqualType(This,metadata,out) ) 
 
 #define IResultMetadata_Clone(This,metadata)	\
-    (This)->lpVtbl -> Clone(This,metadata)
+    ( (This)->lpVtbl -> Clone(This,metadata) ) 
 
 #define IResultMetadata_GetTypeName(This,name)	\
-    (This)->lpVtbl -> GetTypeName(This,name)
+    ( (This)->lpVtbl -> GetTypeName(This,name) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IResultMetadata_EqualType_Proxy( 
-    IResultMetadata * This,
-    /* [in] */ IResultMetadata *metadata,
-    /* [retval][out] */ VARIANT_BOOL *out);
-
-
-void __RPC_STUB IResultMetadata_EqualType_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IResultMetadata_Clone_Proxy( 
-    IResultMetadata * This,
-    /* [retval][out] */ IResultMetadata **metadata);
-
-
-void __RPC_STUB IResultMetadata_Clone_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IResultMetadata_GetTypeName_Proxy( 
-    IResultMetadata * This,
-    /* [retval][out] */ BSTR *name);
-
-
-void __RPC_STUB IResultMetadata_GetTypeName_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -2903,7 +2554,8 @@ EXTERN_C const IID IID_IResult;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IResult * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IResult * This);
@@ -2925,7 +2577,7 @@ EXTERN_C const IID IID_IResult;
             IResult * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -2958,49 +2610,37 @@ EXTERN_C const IID IID_IResult;
 
 
 #define IResult_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IResult_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IResult_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IResult_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IResult_GetMetadata(This,out)	\
-    (This)->lpVtbl -> GetMetadata(This,out)
+    ( (This)->lpVtbl -> GetMetadata(This,out) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IResult_GetMetadata_Proxy( 
-    IResult * This,
-    /* [retval][out] */ IResultMetadata **out);
-
-
-void __RPC_STUB IResult_GetMetadata_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -3033,7 +2673,8 @@ EXTERN_C const IID IID_IResultInfo;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IResultInfo * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IResultInfo * This);
@@ -3055,7 +2696,7 @@ EXTERN_C const IID IID_IResultInfo;
             IResultInfo * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -3084,26 +2725,26 @@ EXTERN_C const IID IID_IResultInfo;
 
 
 #define IResultInfo_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IResultInfo_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IResultInfo_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IResultInfo_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IResultInfo_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IResultInfo_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IResultInfo_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -3168,7 +2809,8 @@ EXTERN_C const IID IID_IGraphInfo;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGraphInfo * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IGraphInfo * This);
@@ -3190,7 +2832,7 @@ EXTERN_C const IID IID_IGraphInfo;
             IGraphInfo * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -3251,142 +2893,54 @@ EXTERN_C const IID IID_IGraphInfo;
 
 
 #define IGraphInfo_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IGraphInfo_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IGraphInfo_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IGraphInfo_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IGraphInfo_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IGraphInfo_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IGraphInfo_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IGraphInfo_GetNodes(This,value)	\
-    (This)->lpVtbl -> GetNodes(This,value)
+    ( (This)->lpVtbl -> GetNodes(This,value) ) 
 
 #define IGraphInfo_GetEdges(This,value)	\
-    (This)->lpVtbl -> GetEdges(This,value)
+    ( (This)->lpVtbl -> GetEdges(This,value) ) 
 
 #define IGraphInfo_GetDimension(This,value)	\
-    (This)->lpVtbl -> GetDimension(This,value)
+    ( (This)->lpVtbl -> GetDimension(This,value) ) 
 
 #define IGraphInfo_GetMinimum(This,index,value)	\
-    (This)->lpVtbl -> GetMinimum(This,index,value)
+    ( (This)->lpVtbl -> GetMinimum(This,index,value) ) 
 
 #define IGraphInfo_GetMaximum(This,index,value)	\
-    (This)->lpVtbl -> GetMaximum(This,index,value)
+    ( (This)->lpVtbl -> GetMaximum(This,index,value) ) 
 
 #define IGraphInfo_GetGridNumber(This,index,value)	\
-    (This)->lpVtbl -> GetGridNumber(This,index,value)
+    ( (This)->lpVtbl -> GetGridNumber(This,index,value) ) 
 
 #define IGraphInfo_GetGridSize(This,index,value)	\
-    (This)->lpVtbl -> GetGridSize(This,index,value)
+    ( (This)->lpVtbl -> GetGridSize(This,index,value) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetNodes_Proxy( 
-    IGraphInfo * This,
-    /* [retval][out] */ int *value);
-
-
-void __RPC_STUB IGraphInfo_GetNodes_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetEdges_Proxy( 
-    IGraphInfo * This,
-    /* [retval][out] */ int *value);
-
-
-void __RPC_STUB IGraphInfo_GetEdges_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetDimension_Proxy( 
-    IGraphInfo * This,
-    /* [retval][out] */ int *value);
-
-
-void __RPC_STUB IGraphInfo_GetDimension_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetMinimum_Proxy( 
-    IGraphInfo * This,
-    /* [in] */ int index,
-    /* [retval][out] */ double *value);
-
-
-void __RPC_STUB IGraphInfo_GetMinimum_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetMaximum_Proxy( 
-    IGraphInfo * This,
-    /* [in] */ int index,
-    /* [retval][out] */ double *value);
-
-
-void __RPC_STUB IGraphInfo_GetMaximum_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetGridNumber_Proxy( 
-    IGraphInfo * This,
-    /* [in] */ int index,
-    /* [retval][out] */ int *value);
-
-
-void __RPC_STUB IGraphInfo_GetGridNumber_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphInfo_GetGridSize_Proxy( 
-    IGraphInfo * This,
-    /* [in] */ int index,
-    /* [retval][out] */ double *value);
-
-
-void __RPC_STUB IGraphInfo_GetGridSize_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -3434,7 +2988,8 @@ EXTERN_C const IID IID_IGraphResult;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGraphResult * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IGraphResult * This);
@@ -3456,7 +3011,7 @@ EXTERN_C const IID IID_IGraphResult;
             IGraphResult * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -3509,113 +3064,53 @@ EXTERN_C const IID IID_IGraphResult;
 
 
 #define IGraphResult_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IGraphResult_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IGraphResult_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IGraphResult_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IGraphResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IGraphResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IGraphResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IGraphResult_GetMetadata(This,out)	\
-    (This)->lpVtbl -> GetMetadata(This,out)
+    ( (This)->lpVtbl -> GetMetadata(This,out) ) 
 
 
 #define IGraphResult_GetGraph(This,graph)	\
-    (This)->lpVtbl -> GetGraph(This,graph)
+    ( (This)->lpVtbl -> GetGraph(This,graph) ) 
 
 #define IGraphResult_GetGraphInfo(This,info)	\
-    (This)->lpVtbl -> GetGraphInfo(This,info)
+    ( (This)->lpVtbl -> GetGraphInfo(This,info) ) 
 
 #define IGraphResult_IsStrongComponent(This,value)	\
-    (This)->lpVtbl -> IsStrongComponent(This,value)
+    ( (This)->lpVtbl -> IsStrongComponent(This,value) ) 
 
 #define IGraphResult_SaveText(This,file)	\
-    (This)->lpVtbl -> SaveText(This,file)
+    ( (This)->lpVtbl -> SaveText(This,file) ) 
 
 #define IGraphResult_SaveGraph(This,file)	\
-    (This)->lpVtbl -> SaveGraph(This,file)
+    ( (This)->lpVtbl -> SaveGraph(This,file) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IGraphResult_GetGraph_Proxy( 
-    IGraphResult * This,
-    /* [out] */ void **graph);
-
-
-void __RPC_STUB IGraphResult_GetGraph_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphResult_GetGraphInfo_Proxy( 
-    IGraphResult * This,
-    /* [retval][out] */ IGraphInfo **info);
-
-
-void __RPC_STUB IGraphResult_GetGraphInfo_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphResult_IsStrongComponent_Proxy( 
-    IGraphResult * This,
-    /* [retval][out] */ VARIANT_BOOL *value);
-
-
-void __RPC_STUB IGraphResult_IsStrongComponent_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphResult_SaveText_Proxy( 
-    IGraphResult * This,
-    /* [in] */ BSTR file);
-
-
-void __RPC_STUB IGraphResult_SaveText_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IGraphResult_SaveGraph_Proxy( 
-    IGraphResult * This,
-    /* [in] */ BSTR file);
-
-
-void __RPC_STUB IGraphResult_SaveGraph_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -3659,7 +3154,8 @@ EXTERN_C const IID IID_IWritableGraphResult;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWritableGraphResult * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWritableGraphResult * This);
@@ -3681,7 +3177,7 @@ EXTERN_C const IID IID_IWritableGraphResult;
             IWritableGraphResult * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -3724,80 +3220,42 @@ EXTERN_C const IID IID_IWritableGraphResult;
 
 
 #define IWritableGraphResult_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IWritableGraphResult_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IWritableGraphResult_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IWritableGraphResult_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IWritableGraphResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IWritableGraphResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IWritableGraphResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IWritableGraphResult_SetGraph(This,graph,isStrongComponent)	\
-    (This)->lpVtbl -> SetGraph(This,graph,isStrongComponent)
+    ( (This)->lpVtbl -> SetGraph(This,graph,isStrongComponent) ) 
 
 #define IWritableGraphResult_SetMetadata(This,metadata)	\
-    (This)->lpVtbl -> SetMetadata(This,metadata)
+    ( (This)->lpVtbl -> SetMetadata(This,metadata) ) 
 
 #define IWritableGraphResult_SetGraphFromFile(This,file,isStrongComponent)	\
-    (This)->lpVtbl -> SetGraphFromFile(This,file,isStrongComponent)
+    ( (This)->lpVtbl -> SetGraphFromFile(This,file,isStrongComponent) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IWritableGraphResult_SetGraph_Proxy( 
-    IWritableGraphResult * This,
-    /* [in] */ void **graph,
-    /* [in] */ VARIANT_BOOL isStrongComponent);
-
-
-void __RPC_STUB IWritableGraphResult_SetGraph_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableGraphResult_SetMetadata_Proxy( 
-    IWritableGraphResult * This,
-    /* [in] */ IResultMetadata *metadata);
-
-
-void __RPC_STUB IWritableGraphResult_SetMetadata_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableGraphResult_SetGraphFromFile_Proxy( 
-    IWritableGraphResult * This,
-    /* [in] */ BSTR file,
-    /* [in] */ VARIANT_BOOL isStrongComponent);
-
-
-void __RPC_STUB IWritableGraphResult_SetGraphFromFile_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -3833,7 +3291,8 @@ EXTERN_C const IID IID_IWritableResultSet;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWritableResultSet * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWritableResultSet * This);
@@ -3855,7 +3314,7 @@ EXTERN_C const IID IID_IWritableResultSet;
             IWritableResultSet * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -3888,48 +3347,36 @@ EXTERN_C const IID IID_IWritableResultSet;
 
 
 #define IWritableResultSet_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IWritableResultSet_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IWritableResultSet_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IWritableResultSet_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IWritableResultSet_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IWritableResultSet_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IWritableResultSet_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IWritableResultSet_AddResult(This,result)	\
-    (This)->lpVtbl -> AddResult(This,result)
+    ( (This)->lpVtbl -> AddResult(This,result) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableResultSet_AddResult_Proxy( 
-    IWritableResultSet * This,
-    /* [in] */ IResultBase *result);
-
-
-void __RPC_STUB IWritableResultSet_AddResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -3962,7 +3409,8 @@ EXTERN_C const IID IID_IGraphResultImpl;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGraphResultImpl * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IGraphResultImpl * This);
@@ -3984,7 +3432,7 @@ EXTERN_C const IID IID_IGraphResultImpl;
             IGraphResultImpl * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -4013,26 +3461,26 @@ EXTERN_C const IID IID_IGraphResultImpl;
 
 
 #define IGraphResultImpl_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IGraphResultImpl_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IGraphResultImpl_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IGraphResultImpl_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IGraphResultImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IGraphResultImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IGraphResultImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -4072,7 +3520,8 @@ EXTERN_C const IID IID_ISymbolicImageMetadata;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISymbolicImageMetadata * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISymbolicImageMetadata * This);
@@ -4094,7 +3543,7 @@ EXTERN_C const IID IID_ISymbolicImageMetadata;
             ISymbolicImageMetadata * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -4136,36 +3585,36 @@ EXTERN_C const IID IID_ISymbolicImageMetadata;
 
 
 #define ISymbolicImageMetadata_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define ISymbolicImageMetadata_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define ISymbolicImageMetadata_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define ISymbolicImageMetadata_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define ISymbolicImageMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define ISymbolicImageMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define ISymbolicImageMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define ISymbolicImageMetadata_EqualType(This,metadata,out)	\
-    (This)->lpVtbl -> EqualType(This,metadata,out)
+    ( (This)->lpVtbl -> EqualType(This,metadata,out) ) 
 
 #define ISymbolicImageMetadata_Clone(This,metadata)	\
-    (This)->lpVtbl -> Clone(This,metadata)
+    ( (This)->lpVtbl -> Clone(This,metadata) ) 
 
 #define ISymbolicImageMetadata_GetTypeName(This,name)	\
-    (This)->lpVtbl -> GetTypeName(This,name)
+    ( (This)->lpVtbl -> GetTypeName(This,name) ) 
 
 
 #endif /* COBJMACROS */
@@ -4205,7 +3654,8 @@ EXTERN_C const IID IID_IResultSetImpl;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IResultSetImpl * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IResultSetImpl * This);
@@ -4227,7 +3677,7 @@ EXTERN_C const IID IID_IResultSetImpl;
             IResultSetImpl * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -4256,26 +3706,26 @@ EXTERN_C const IID IID_IResultSetImpl;
 
 
 #define IResultSetImpl_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IResultSetImpl_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IResultSetImpl_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IResultSetImpl_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IResultSetImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IResultSetImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IResultSetImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -4324,7 +3774,8 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAdaptiveMethodAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAdaptiveMethodAction * This);
@@ -4346,7 +3797,7 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
             IAdaptiveMethodAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -4404,80 +3855,53 @@ EXTERN_C const IID IID_IAdaptiveMethodAction;
 
 
 #define IAdaptiveMethodAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IAdaptiveMethodAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IAdaptiveMethodAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IAdaptiveMethodAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IAdaptiveMethodAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IAdaptiveMethodAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IAdaptiveMethodAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IAdaptiveMethodAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IAdaptiveMethodAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IAdaptiveMethodAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IAdaptiveMethodAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IAdaptiveMethodAction_GetRecomendedPrecision(This,in,index,prec)	\
-    (This)->lpVtbl -> GetRecomendedPrecision(This,in,index,prec)
+    ( (This)->lpVtbl -> GetRecomendedPrecision(This,in,index,prec) ) 
 
 #define IAdaptiveMethodAction_GetDimension(This,in,dim)	\
-    (This)->lpVtbl -> GetDimension(This,in,dim)
+    ( (This)->lpVtbl -> GetDimension(This,in,dim) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodAction_GetRecomendedPrecision_Proxy( 
-    IAdaptiveMethodAction * This,
-    /* [in] */ IResultSet *in,
-    /* [in] */ int index,
-    /* [retval][out] */ double *prec);
-
-
-void __RPC_STUB IAdaptiveMethodAction_GetRecomendedPrecision_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodAction_GetDimension_Proxy( 
-    IAdaptiveMethodAction * This,
-    /* [in] */ IResultSet *in,
-    /* [retval][out] */ int *dim);
-
-
-void __RPC_STUB IAdaptiveMethodAction_GetDimension_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -4521,7 +3945,8 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAdaptiveMethodParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAdaptiveMethodParameters * This);
@@ -4543,7 +3968,7 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
             IAdaptiveMethodParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -4590,85 +4015,47 @@ EXTERN_C const IID IID_IAdaptiveMethodParameters;
 
 
 #define IAdaptiveMethodParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IAdaptiveMethodParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IAdaptiveMethodParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IAdaptiveMethodParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IAdaptiveMethodParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IAdaptiveMethodParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IAdaptiveMethodParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IAdaptiveMethodParameters_GetFunction(This,function)	\
-    (This)->lpVtbl -> GetFunction(This,function)
+    ( (This)->lpVtbl -> GetFunction(This,function) ) 
 
 
 #define IAdaptiveMethodParameters_GetFactor(This,index,factor)	\
-    (This)->lpVtbl -> GetFactor(This,index,factor)
+    ( (This)->lpVtbl -> GetFactor(This,index,factor) ) 
 
 #define IAdaptiveMethodParameters_GetPrecision(This,index,prec)	\
-    (This)->lpVtbl -> GetPrecision(This,index,prec)
+    ( (This)->lpVtbl -> GetPrecision(This,index,prec) ) 
 
 #define IAdaptiveMethodParameters_GetUpperLimit(This,out)	\
-    (This)->lpVtbl -> GetUpperLimit(This,out)
+    ( (This)->lpVtbl -> GetUpperLimit(This,out) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodParameters_GetFactor_Proxy( 
-    IAdaptiveMethodParameters * This,
-    /* [in] */ int index,
-    /* [retval][out] */ int *factor);
-
-
-void __RPC_STUB IAdaptiveMethodParameters_GetFactor_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodParameters_GetPrecision_Proxy( 
-    IAdaptiveMethodParameters * This,
-    /* [in] */ int index,
-    /* [retval][out] */ double *prec);
-
-
-void __RPC_STUB IAdaptiveMethodParameters_GetPrecision_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IAdaptiveMethodParameters_GetUpperLimit_Proxy( 
-    IAdaptiveMethodParameters * This,
-    /* [retval][out] */ int *out);
-
-
-void __RPC_STUB IAdaptiveMethodParameters_GetUpperLimit_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -4705,7 +4092,8 @@ EXTERN_C const IID IID_IBoxMethodAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IBoxMethodAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IBoxMethodAction * This);
@@ -4727,7 +4115,7 @@ EXTERN_C const IID IID_IBoxMethodAction;
             IBoxMethodAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -4779,63 +4167,50 @@ EXTERN_C const IID IID_IBoxMethodAction;
 
 
 #define IBoxMethodAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IBoxMethodAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IBoxMethodAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IBoxMethodAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IBoxMethodAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IBoxMethodAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IBoxMethodAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IBoxMethodAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IBoxMethodAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IBoxMethodAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IBoxMethodAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IBoxMethodAction_GetDimensionForParameters(This,resultSet,dimension)	\
-    (This)->lpVtbl -> GetDimensionForParameters(This,resultSet,dimension)
+    ( (This)->lpVtbl -> GetDimensionForParameters(This,resultSet,dimension) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IBoxMethodAction_GetDimensionForParameters_Proxy( 
-    IBoxMethodAction * This,
-    /* [in] */ IResultSet *resultSet,
-    /* [retval][out] */ int *dimension);
-
-
-void __RPC_STUB IBoxMethodAction_GetDimensionForParameters_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -4875,7 +4250,8 @@ EXTERN_C const IID IID_IBoxMethodParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IBoxMethodParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IBoxMethodParameters * This);
@@ -4897,7 +4273,7 @@ EXTERN_C const IID IID_IBoxMethodParameters;
             IBoxMethodParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -4939,69 +4315,44 @@ EXTERN_C const IID IID_IBoxMethodParameters;
 
 
 #define IBoxMethodParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IBoxMethodParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IBoxMethodParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IBoxMethodParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IBoxMethodParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IBoxMethodParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IBoxMethodParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IBoxMethodParameters_GetFunction(This,function)	\
-    (This)->lpVtbl -> GetFunction(This,function)
+    ( (This)->lpVtbl -> GetFunction(This,function) ) 
 
 
 #define IBoxMethodParameters_GetFactor(This,index,factor)	\
-    (This)->lpVtbl -> GetFactor(This,index,factor)
+    ( (This)->lpVtbl -> GetFactor(This,index,factor) ) 
 
 #define IBoxMethodParameters_UseDerivate(This,out)	\
-    (This)->lpVtbl -> UseDerivate(This,out)
+    ( (This)->lpVtbl -> UseDerivate(This,out) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IBoxMethodParameters_GetFactor_Proxy( 
-    IBoxMethodParameters * This,
-    /* [in] */ int index,
-    /* [retval][out] */ int *factor);
-
-
-void __RPC_STUB IBoxMethodParameters_GetFactor_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IBoxMethodParameters_UseDerivate_Proxy( 
-    IBoxMethodParameters * This,
-    /* [retval][out] */ VARIANT_BOOL *out);
-
-
-void __RPC_STUB IBoxMethodParameters_UseDerivate_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -5051,7 +4402,8 @@ EXTERN_C const IID IID_IComponentRegistrar;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IComponentRegistrar * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IComponentRegistrar * This);
@@ -5073,7 +4425,7 @@ EXTERN_C const IID IID_IComponentRegistrar;
             IComponentRegistrar * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -5125,122 +4477,51 @@ EXTERN_C const IID IID_IComponentRegistrar;
 
 
 #define IComponentRegistrar_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IComponentRegistrar_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IComponentRegistrar_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IComponentRegistrar_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IComponentRegistrar_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IComponentRegistrar_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IComponentRegistrar_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IComponentRegistrar_Attach(This,bstrPath)	\
-    (This)->lpVtbl -> Attach(This,bstrPath)
+    ( (This)->lpVtbl -> Attach(This,bstrPath) ) 
 
 #define IComponentRegistrar_RegisterAll(This)	\
-    (This)->lpVtbl -> RegisterAll(This)
+    ( (This)->lpVtbl -> RegisterAll(This) ) 
 
 #define IComponentRegistrar_UnregisterAll(This)	\
-    (This)->lpVtbl -> UnregisterAll(This)
+    ( (This)->lpVtbl -> UnregisterAll(This) ) 
 
 #define IComponentRegistrar_GetComponents(This,pbstrCLSIDs,pbstrDescriptions)	\
-    (This)->lpVtbl -> GetComponents(This,pbstrCLSIDs,pbstrDescriptions)
+    ( (This)->lpVtbl -> GetComponents(This,pbstrCLSIDs,pbstrDescriptions) ) 
 
 #define IComponentRegistrar_RegisterComponent(This,bstrCLSID)	\
-    (This)->lpVtbl -> RegisterComponent(This,bstrCLSID)
+    ( (This)->lpVtbl -> RegisterComponent(This,bstrCLSID) ) 
 
 #define IComponentRegistrar_UnregisterComponent(This,bstrCLSID)	\
-    (This)->lpVtbl -> UnregisterComponent(This,bstrCLSID)
+    ( (This)->lpVtbl -> UnregisterComponent(This,bstrCLSID) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IComponentRegistrar_Attach_Proxy( 
-    IComponentRegistrar * This,
-    /* [in] */ BSTR bstrPath);
-
-
-void __RPC_STUB IComponentRegistrar_Attach_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IComponentRegistrar_RegisterAll_Proxy( 
-    IComponentRegistrar * This);
-
-
-void __RPC_STUB IComponentRegistrar_RegisterAll_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IComponentRegistrar_UnregisterAll_Proxy( 
-    IComponentRegistrar * This);
-
-
-void __RPC_STUB IComponentRegistrar_UnregisterAll_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IComponentRegistrar_GetComponents_Proxy( 
-    IComponentRegistrar * This,
-    /* [out] */ SAFEARRAY * *pbstrCLSIDs,
-    /* [out] */ SAFEARRAY * *pbstrDescriptions);
-
-
-void __RPC_STUB IComponentRegistrar_GetComponents_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IComponentRegistrar_RegisterComponent_Proxy( 
-    IComponentRegistrar * This,
-    /* [in] */ BSTR bstrCLSID);
-
-
-void __RPC_STUB IComponentRegistrar_RegisterComponent_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IComponentRegistrar_UnregisterComponent_Proxy( 
-    IComponentRegistrar * This,
-    /* [in] */ BSTR bstrCLSID);
-
-
-void __RPC_STUB IComponentRegistrar_UnregisterComponent_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -5273,7 +4554,8 @@ EXTERN_C const IID IID_ITarjanAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITarjanAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITarjanAction * This);
@@ -5295,7 +4577,7 @@ EXTERN_C const IID IID_ITarjanAction;
             ITarjanAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -5342,40 +4624,40 @@ EXTERN_C const IID IID_ITarjanAction;
 
 
 #define ITarjanAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define ITarjanAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define ITarjanAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define ITarjanAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define ITarjanAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define ITarjanAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define ITarjanAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define ITarjanAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define ITarjanAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define ITarjanAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define ITarjanAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #endif /* COBJMACROS */
@@ -5418,7 +4700,8 @@ EXTERN_C const IID IID_ITarjanParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITarjanParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITarjanParameters * This);
@@ -5440,7 +4723,7 @@ EXTERN_C const IID IID_ITarjanParameters;
             ITarjanParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -5473,49 +4756,37 @@ EXTERN_C const IID IID_ITarjanParameters;
 
 
 #define ITarjanParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define ITarjanParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define ITarjanParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define ITarjanParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define ITarjanParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define ITarjanParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define ITarjanParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define ITarjanParameters_NeedEdgeResolve(This,result)	\
-    (This)->lpVtbl -> NeedEdgeResolve(This,result)
+    ( (This)->lpVtbl -> NeedEdgeResolve(This,result) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE ITarjanParameters_NeedEdgeResolve_Proxy( 
-    ITarjanParameters * This,
-    /* [retval][out] */ VARIANT_BOOL *result);
-
-
-void __RPC_STUB ITarjanParameters_NeedEdgeResolve_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -5552,7 +4823,8 @@ EXTERN_C const IID IID_IPointMethodAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPointMethodAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPointMethodAction * This);
@@ -5574,7 +4846,7 @@ EXTERN_C const IID IID_IPointMethodAction;
             IPointMethodAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -5626,63 +4898,50 @@ EXTERN_C const IID IID_IPointMethodAction;
 
 
 #define IPointMethodAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IPointMethodAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IPointMethodAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IPointMethodAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IPointMethodAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IPointMethodAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IPointMethodAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IPointMethodAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IPointMethodAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IPointMethodAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IPointMethodAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IPointMethodAction_GetDimensionForParameters(This,resultSet,dimension)	\
-    (This)->lpVtbl -> GetDimensionForParameters(This,resultSet,dimension)
+    ( (This)->lpVtbl -> GetDimensionForParameters(This,resultSet,dimension) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IPointMethodAction_GetDimensionForParameters_Proxy( 
-    IPointMethodAction * This,
-    /* [in] */ IResultSet *resultSet,
-    /* [retval][out] */ int *dimension);
-
-
-void __RPC_STUB IPointMethodAction_GetDimensionForParameters_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -5731,7 +4990,8 @@ EXTERN_C const IID IID_IPointMethodParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPointMethodParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPointMethodParameters * This);
@@ -5753,7 +5013,7 @@ EXTERN_C const IID IID_IPointMethodParameters;
             IPointMethodParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -5806,102 +5066,50 @@ EXTERN_C const IID IID_IPointMethodParameters;
 
 
 #define IPointMethodParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IPointMethodParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IPointMethodParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IPointMethodParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IPointMethodParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IPointMethodParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IPointMethodParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IPointMethodParameters_GetFunction(This,function)	\
-    (This)->lpVtbl -> GetFunction(This,function)
+    ( (This)->lpVtbl -> GetFunction(This,function) ) 
 
 
 #define IPointMethodParameters_GetFactor(This,index,factor)	\
-    (This)->lpVtbl -> GetFactor(This,index,factor)
+    ( (This)->lpVtbl -> GetFactor(This,index,factor) ) 
 
 #define IPointMethodParameters_GetPoints(This,index,ks)	\
-    (This)->lpVtbl -> GetPoints(This,index,ks)
+    ( (This)->lpVtbl -> GetPoints(This,index,ks) ) 
 
 #define IPointMethodParameters_UseOffsets(This,data)	\
-    (This)->lpVtbl -> UseOffsets(This,data)
+    ( (This)->lpVtbl -> UseOffsets(This,data) ) 
 
 #define IPointMethodParameters_GetOffset(This,index,offset1,offset2)	\
-    (This)->lpVtbl -> GetOffset(This,index,offset1,offset2)
+    ( (This)->lpVtbl -> GetOffset(This,index,offset1,offset2) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IPointMethodParameters_GetFactor_Proxy( 
-    IPointMethodParameters * This,
-    /* [in] */ int index,
-    /* [retval][out] */ int *factor);
-
-
-void __RPC_STUB IPointMethodParameters_GetFactor_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IPointMethodParameters_GetPoints_Proxy( 
-    IPointMethodParameters * This,
-    /* [in] */ int index,
-    /* [retval][out] */ int *ks);
-
-
-void __RPC_STUB IPointMethodParameters_GetPoints_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IPointMethodParameters_UseOffsets_Proxy( 
-    IPointMethodParameters * This,
-    /* [retval][out] */ VARIANT_BOOL *data);
-
-
-void __RPC_STUB IPointMethodParameters_UseOffsets_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IPointMethodParameters_GetOffset_Proxy( 
-    IPointMethodParameters * This,
-    /* [in] */ int index,
-    /* [out] */ double *offset1,
-    /* [out] */ double *offset2);
-
-
-void __RPC_STUB IPointMethodParameters_GetOffset_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -5938,7 +5146,8 @@ EXTERN_C const IID IID_IProjectAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IProjectAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IProjectAction * This);
@@ -5960,7 +5169,7 @@ EXTERN_C const IID IID_IProjectAction;
             IProjectAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -6012,63 +5221,50 @@ EXTERN_C const IID IID_IProjectAction;
 
 
 #define IProjectAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IProjectAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IProjectAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IProjectAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IProjectAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IProjectAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IProjectAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IProjectAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IProjectAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IProjectAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IProjectAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IProjectAction_GetDimention(This,set,dim)	\
-    (This)->lpVtbl -> GetDimention(This,set,dim)
+    ( (This)->lpVtbl -> GetDimention(This,set,dim) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IProjectAction_GetDimention_Proxy( 
-    IProjectAction * This,
-    /* [in] */ IResultSet *set,
-    /* [retval][out] */ int *dim);
-
-
-void __RPC_STUB IProjectAction_GetDimention_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -6105,7 +5301,8 @@ EXTERN_C const IID IID_IProjectActionParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IProjectActionParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IProjectActionParameters * This);
@@ -6127,7 +5324,7 @@ EXTERN_C const IID IID_IProjectActionParameters;
             IProjectActionParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -6161,50 +5358,37 @@ EXTERN_C const IID IID_IProjectActionParameters;
 
 
 #define IProjectActionParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IProjectActionParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IProjectActionParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IProjectActionParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IProjectActionParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IProjectActionParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IProjectActionParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IProjectActionParameters_GetDevisor(This,index,value)	\
-    (This)->lpVtbl -> GetDevisor(This,index,value)
+    ( (This)->lpVtbl -> GetDevisor(This,index,value) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IProjectActionParameters_GetDevisor_Proxy( 
-    IProjectActionParameters * This,
-    /* [in] */ int index,
-    /* [retval][out] */ int *value);
-
-
-void __RPC_STUB IProjectActionParameters_GetDevisor_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -6237,7 +5421,8 @@ EXTERN_C const IID IID_IDummy;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDummy * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDummy * This);
@@ -6259,7 +5444,7 @@ EXTERN_C const IID IID_IDummy;
             IDummy * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -6288,26 +5473,26 @@ EXTERN_C const IID IID_IDummy;
 
 
 #define IDummy_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IDummy_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IDummy_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IDummy_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IDummy_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IDummy_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IDummy_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -6347,7 +5532,8 @@ EXTERN_C const IID IID_IIsolatedSetAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsolatedSetAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IIsolatedSetAction * This);
@@ -6369,7 +5555,7 @@ EXTERN_C const IID IID_IIsolatedSetAction;
             IIsolatedSetAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -6416,40 +5602,40 @@ EXTERN_C const IID IID_IIsolatedSetAction;
 
 
 #define IIsolatedSetAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IIsolatedSetAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IIsolatedSetAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IIsolatedSetAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IIsolatedSetAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IIsolatedSetAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IIsolatedSetAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IIsolatedSetAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IIsolatedSetAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IIsolatedSetAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IIsolatedSetAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #endif /* COBJMACROS */
@@ -6492,7 +5678,8 @@ EXTERN_C const IID IID_IIsolatedSetParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIsolatedSetParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IIsolatedSetParameters * This);
@@ -6514,7 +5701,7 @@ EXTERN_C const IID IID_IIsolatedSetParameters;
             IIsolatedSetParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -6547,49 +5734,37 @@ EXTERN_C const IID IID_IIsolatedSetParameters;
 
 
 #define IIsolatedSetParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IIsolatedSetParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IIsolatedSetParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IIsolatedSetParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IIsolatedSetParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IIsolatedSetParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IIsolatedSetParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IIsolatedSetParameters_GetStartSet(This,result)	\
-    (This)->lpVtbl -> GetStartSet(This,result)
+    ( (This)->lpVtbl -> GetStartSet(This,result) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IIsolatedSetParameters_GetStartSet_Proxy( 
-    IIsolatedSetParameters * This,
-    /* [retval][out] */ IGraphResult **result);
-
-
-void __RPC_STUB IIsolatedSetParameters_GetStartSet_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -6626,7 +5801,8 @@ EXTERN_C const IID IID_IMinimalLoopLocalizationAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMinimalLoopLocalizationAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMinimalLoopLocalizationAction * This);
@@ -6648,7 +5824,7 @@ EXTERN_C const IID IID_IMinimalLoopLocalizationAction;
             IMinimalLoopLocalizationAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -6700,63 +5876,50 @@ EXTERN_C const IID IID_IMinimalLoopLocalizationAction;
 
 
 #define IMinimalLoopLocalizationAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMinimalLoopLocalizationAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMinimalLoopLocalizationAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMinimalLoopLocalizationAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMinimalLoopLocalizationAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMinimalLoopLocalizationAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMinimalLoopLocalizationAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMinimalLoopLocalizationAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMinimalLoopLocalizationAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMinimalLoopLocalizationAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMinimalLoopLocalizationAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IMinimalLoopLocalizationAction_GetDimension(This,resultSet,dimension)	\
-    (This)->lpVtbl -> GetDimension(This,resultSet,dimension)
+    ( (This)->lpVtbl -> GetDimension(This,resultSet,dimension) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMinimalLoopLocalizationAction_GetDimension_Proxy( 
-    IMinimalLoopLocalizationAction * This,
-    /* [in] */ IResultSet *resultSet,
-    /* [retval][out] */ int *dimension);
-
-
-void __RPC_STUB IMinimalLoopLocalizationAction_GetDimension_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -6793,7 +5956,8 @@ EXTERN_C const IID IID_IMinimalLoopLocalizationParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMinimalLoopLocalizationParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMinimalLoopLocalizationParameters * This);
@@ -6815,7 +5979,7 @@ EXTERN_C const IID IID_IMinimalLoopLocalizationParameters;
             IMinimalLoopLocalizationParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -6849,50 +6013,37 @@ EXTERN_C const IID IID_IMinimalLoopLocalizationParameters;
 
 
 #define IMinimalLoopLocalizationParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMinimalLoopLocalizationParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMinimalLoopLocalizationParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMinimalLoopLocalizationParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMinimalLoopLocalizationParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMinimalLoopLocalizationParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMinimalLoopLocalizationParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMinimalLoopLocalizationParameters_GetCoordinate(This,id,data)	\
-    (This)->lpVtbl -> GetCoordinate(This,id,data)
+    ( (This)->lpVtbl -> GetCoordinate(This,id,data) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMinimalLoopLocalizationParameters_GetCoordinate_Proxy( 
-    IMinimalLoopLocalizationParameters * This,
-    /* [in] */ int id,
-    /* [retval][out] */ double *data);
-
-
-void __RPC_STUB IMinimalLoopLocalizationParameters_GetCoordinate_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -6925,7 +6076,8 @@ EXTERN_C const IID IID_ISIRomActionParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISIRomActionParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISIRomActionParameters * This);
@@ -6947,7 +6099,7 @@ EXTERN_C const IID IID_ISIRomActionParameters;
             ISIRomActionParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -6980,31 +6132,31 @@ EXTERN_C const IID IID_ISIRomActionParameters;
 
 
 #define ISIRomActionParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define ISIRomActionParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define ISIRomActionParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define ISIRomActionParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define ISIRomActionParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define ISIRomActionParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define ISIRomActionParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define ISIRomActionParameters_GetFunction(This,function)	\
-    (This)->lpVtbl -> GetFunction(This,function)
+    ( (This)->lpVtbl -> GetFunction(This,function) ) 
 
 
 #endif /* COBJMACROS */
@@ -7044,7 +6196,8 @@ EXTERN_C const IID IID_ISIRomAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISIRomAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISIRomAction * This);
@@ -7066,7 +6219,7 @@ EXTERN_C const IID IID_ISIRomAction;
             ISIRomAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -7113,40 +6266,40 @@ EXTERN_C const IID IID_ISIRomAction;
 
 
 #define ISIRomAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define ISIRomAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define ISIRomAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define ISIRomAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define ISIRomAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define ISIRomAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define ISIRomAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define ISIRomAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define ISIRomAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define ISIRomAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define ISIRomAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #endif /* COBJMACROS */
@@ -7186,7 +6339,8 @@ EXTERN_C const IID IID_ISpectrumMetadata;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpectrumMetadata * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpectrumMetadata * This);
@@ -7208,7 +6362,7 @@ EXTERN_C const IID IID_ISpectrumMetadata;
             ISpectrumMetadata * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -7250,36 +6404,36 @@ EXTERN_C const IID IID_ISpectrumMetadata;
 
 
 #define ISpectrumMetadata_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define ISpectrumMetadata_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define ISpectrumMetadata_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define ISpectrumMetadata_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define ISpectrumMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define ISpectrumMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define ISpectrumMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define ISpectrumMetadata_EqualType(This,metadata,out)	\
-    (This)->lpVtbl -> EqualType(This,metadata,out)
+    ( (This)->lpVtbl -> EqualType(This,metadata,out) ) 
 
 #define ISpectrumMetadata_Clone(This,metadata)	\
-    (This)->lpVtbl -> Clone(This,metadata)
+    ( (This)->lpVtbl -> Clone(This,metadata) ) 
 
 #define ISpectrumMetadata_GetTypeName(This,name)	\
-    (This)->lpVtbl -> GetTypeName(This,name)
+    ( (This)->lpVtbl -> GetTypeName(This,name) ) 
 
 
 #endif /* COBJMACROS */
@@ -7331,7 +6485,8 @@ EXTERN_C const IID IID_ISpectrumResult;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISpectrumResult * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISpectrumResult * This);
@@ -7353,7 +6508,7 @@ EXTERN_C const IID IID_ISpectrumResult;
             ISpectrumResult * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -7402,98 +6557,50 @@ EXTERN_C const IID IID_ISpectrumResult;
 
 
 #define ISpectrumResult_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define ISpectrumResult_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define ISpectrumResult_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define ISpectrumResult_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define ISpectrumResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define ISpectrumResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define ISpectrumResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define ISpectrumResult_GetMetadata(This,out)	\
-    (This)->lpVtbl -> GetMetadata(This,out)
+    ( (This)->lpVtbl -> GetMetadata(This,out) ) 
 
 
 #define ISpectrumResult_GetLowerBound(This,data)	\
-    (This)->lpVtbl -> GetLowerBound(This,data)
+    ( (This)->lpVtbl -> GetLowerBound(This,data) ) 
 
 #define ISpectrumResult_GetUpperBound(This,data)	\
-    (This)->lpVtbl -> GetUpperBound(This,data)
+    ( (This)->lpVtbl -> GetUpperBound(This,data) ) 
 
 #define ISpectrumResult_GetLowerLength(This,data)	\
-    (This)->lpVtbl -> GetLowerLength(This,data)
+    ( (This)->lpVtbl -> GetLowerLength(This,data) ) 
 
 #define ISpectrumResult_GetUpperLength(This,data)	\
-    (This)->lpVtbl -> GetUpperLength(This,data)
+    ( (This)->lpVtbl -> GetUpperLength(This,data) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE ISpectrumResult_GetLowerBound_Proxy( 
-    ISpectrumResult * This,
-    /* [retval][out] */ double *data);
-
-
-void __RPC_STUB ISpectrumResult_GetLowerBound_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE ISpectrumResult_GetUpperBound_Proxy( 
-    ISpectrumResult * This,
-    /* [retval][out] */ double *data);
-
-
-void __RPC_STUB ISpectrumResult_GetUpperBound_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE ISpectrumResult_GetLowerLength_Proxy( 
-    ISpectrumResult * This,
-    /* [retval][out] */ int *data);
-
-
-void __RPC_STUB ISpectrumResult_GetLowerLength_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE ISpectrumResult_GetUpperLength_Proxy( 
-    ISpectrumResult * This,
-    /* [retval][out] */ int *data);
-
-
-void __RPC_STUB ISpectrumResult_GetUpperLength_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -7526,7 +6633,8 @@ EXTERN_C const IID IID_IDummy1;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDummy1 * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDummy1 * This);
@@ -7548,7 +6656,7 @@ EXTERN_C const IID IID_IDummy1;
             IDummy1 * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -7577,26 +6685,26 @@ EXTERN_C const IID IID_IDummy1;
 
 
 #define IDummy1_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IDummy1_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IDummy1_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IDummy1_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IDummy1_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IDummy1_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IDummy1_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -7636,7 +6744,8 @@ EXTERN_C const IID IID_IDummy2;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDummy2 * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDummy2 * This);
@@ -7658,7 +6767,7 @@ EXTERN_C const IID IID_IDummy2;
             IDummy2 * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -7687,26 +6796,26 @@ EXTERN_C const IID IID_IDummy2;
 
 
 #define IDummy2_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IDummy2_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IDummy2_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IDummy2_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IDummy2_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IDummy2_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IDummy2_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -7746,7 +6855,8 @@ EXTERN_C const IID IID_IMS2DCreationAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMS2DCreationAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMS2DCreationAction * This);
@@ -7768,7 +6878,7 @@ EXTERN_C const IID IID_IMS2DCreationAction;
             IMS2DCreationAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -7815,40 +6925,40 @@ EXTERN_C const IID IID_IMS2DCreationAction;
 
 
 #define IMS2DCreationAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMS2DCreationAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMS2DCreationAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMS2DCreationAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMS2DCreationAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMS2DCreationAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMS2DCreationAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMS2DCreationAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMS2DCreationAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMS2DCreationAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMS2DCreationAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #endif /* COBJMACROS */
@@ -7892,7 +7002,8 @@ EXTERN_C const IID IID_IMS2DCreationParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMS2DCreationParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMS2DCreationParameters * This);
@@ -7914,7 +7025,7 @@ EXTERN_C const IID IID_IMS2DCreationParameters;
             IMS2DCreationParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -7948,50 +7059,37 @@ EXTERN_C const IID IID_IMS2DCreationParameters;
 
 
 #define IMS2DCreationParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMS2DCreationParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMS2DCreationParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMS2DCreationParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMS2DCreationParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMS2DCreationParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMS2DCreationParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMS2DCreationParameters_GetFactor(This,index,factor)	\
-    (This)->lpVtbl -> GetFactor(This,index,factor)
+    ( (This)->lpVtbl -> GetFactor(This,index,factor) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMS2DCreationParameters_GetFactor_Proxy( 
-    IMS2DCreationParameters * This,
-    /* [in] */ int index,
-    /* [retval][out] */ int *factor);
-
-
-void __RPC_STUB IMS2DCreationParameters_GetFactor_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -8024,7 +7122,8 @@ EXTERN_C const IID IID_IDummy3;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDummy3 * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDummy3 * This);
@@ -8046,7 +7145,7 @@ EXTERN_C const IID IID_IDummy3;
             IDummy3 * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -8075,26 +7174,26 @@ EXTERN_C const IID IID_IDummy3;
 
 
 #define IDummy3_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IDummy3_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IDummy3_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IDummy3_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IDummy3_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IDummy3_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IDummy3_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -8134,7 +7233,8 @@ EXTERN_C const IID IID_IMS2DProcessAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMS2DProcessAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMS2DProcessAction * This);
@@ -8156,7 +7256,7 @@ EXTERN_C const IID IID_IMS2DProcessAction;
             IMS2DProcessAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -8203,40 +7303,40 @@ EXTERN_C const IID IID_IMS2DProcessAction;
 
 
 #define IMS2DProcessAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMS2DProcessAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMS2DProcessAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMS2DProcessAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMS2DProcessAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMS2DProcessAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMS2DProcessAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMS2DProcessAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMS2DProcessAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMS2DProcessAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMS2DProcessAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #endif /* COBJMACROS */
@@ -8280,7 +7380,8 @@ EXTERN_C const IID IID_IMS2DProcessParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMS2DProcessParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMS2DProcessParameters * This);
@@ -8302,7 +7403,7 @@ EXTERN_C const IID IID_IMS2DProcessParameters;
             IMS2DProcessParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -8340,54 +7441,41 @@ EXTERN_C const IID IID_IMS2DProcessParameters;
 
 
 #define IMS2DProcessParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMS2DProcessParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMS2DProcessParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMS2DProcessParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMS2DProcessParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMS2DProcessParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMS2DProcessParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMS2DProcessParameters_GetFunction(This,function)	\
-    (This)->lpVtbl -> GetFunction(This,function)
+    ( (This)->lpVtbl -> GetFunction(This,function) ) 
 
 
 #define IMS2DProcessParameters_GetFactor(This,index,factor)	\
-    (This)->lpVtbl -> GetFactor(This,index,factor)
+    ( (This)->lpVtbl -> GetFactor(This,index,factor) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMS2DProcessParameters_GetFactor_Proxy( 
-    IMS2DProcessParameters * This,
-    /* [in] */ int index,
-    /* [retval][out] */ int *factor);
-
-
-void __RPC_STUB IMS2DProcessParameters_GetFactor_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -8424,7 +7512,8 @@ EXTERN_C const IID IID_IMSCreationProcess;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSCreationProcess * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSCreationProcess * This);
@@ -8446,7 +7535,7 @@ EXTERN_C const IID IID_IMSCreationProcess;
             IMSCreationProcess * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -8498,63 +7587,50 @@ EXTERN_C const IID IID_IMSCreationProcess;
 
 
 #define IMSCreationProcess_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSCreationProcess_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSCreationProcess_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSCreationProcess_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSCreationProcess_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSCreationProcess_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSCreationProcess_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMSCreationProcess_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMSCreationProcess_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMSCreationProcess_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMSCreationProcess_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IMSCreationProcess_GetDimension(This,set,dim)	\
-    (This)->lpVtbl -> GetDimension(This,set,dim)
+    ( (This)->lpVtbl -> GetDimension(This,set,dim) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMSCreationProcess_GetDimension_Proxy( 
-    IMSCreationProcess * This,
-    /* [in] */ IResultSet *set,
-    /* [retval][out] */ int *dim);
-
-
-void __RPC_STUB IMSCreationProcess_GetDimension_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -8591,7 +7667,8 @@ EXTERN_C const IID IID_IMSCreationParameters;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSCreationParameters * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSCreationParameters * This);
@@ -8613,7 +7690,7 @@ EXTERN_C const IID IID_IMSCreationParameters;
             IMSCreationParameters * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -8647,50 +7724,37 @@ EXTERN_C const IID IID_IMSCreationParameters;
 
 
 #define IMSCreationParameters_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSCreationParameters_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSCreationParameters_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSCreationParameters_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSCreationParameters_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSCreationParameters_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSCreationParameters_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMSCreationParameters_GetFactor(This,index,factor)	\
-    (This)->lpVtbl -> GetFactor(This,index,factor)
+    ( (This)->lpVtbl -> GetFactor(This,index,factor) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMSCreationParameters_GetFactor_Proxy( 
-    IMSCreationParameters * This,
-    /* [in] */ int index,
-    /* [retval][out] */ int *factor);
-
-
-void __RPC_STUB IMSCreationParameters_GetFactor_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -8723,7 +7787,8 @@ EXTERN_C const IID IID_IDummy4;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDummy4 * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDummy4 * This);
@@ -8745,7 +7810,7 @@ EXTERN_C const IID IID_IDummy4;
             IDummy4 * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -8774,26 +7839,26 @@ EXTERN_C const IID IID_IDummy4;
 
 
 #define IDummy4_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IDummy4_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IDummy4_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IDummy4_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IDummy4_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IDummy4_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IDummy4_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -8839,7 +7904,8 @@ EXTERN_C const IID IID_IWritableFunction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWritableFunction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWritableFunction * This);
@@ -8861,7 +7927,7 @@ EXTERN_C const IID IID_IWritableFunction;
             IWritableFunction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -8898,63 +7964,39 @@ EXTERN_C const IID IID_IWritableFunction;
 
 
 #define IWritableFunction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IWritableFunction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IWritableFunction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IWritableFunction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IWritableFunction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IWritableFunction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IWritableFunction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IWritableFunction_SetEquations(This,equations)	\
-    (This)->lpVtbl -> SetEquations(This,equations)
+    ( (This)->lpVtbl -> SetEquations(This,equations) ) 
 
 #define IWritableFunction_GetLastError(This,message)	\
-    (This)->lpVtbl -> GetLastError(This,message)
+    ( (This)->lpVtbl -> GetLastError(This,message) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableFunction_SetEquations_Proxy( 
-    IWritableFunction * This,
-    /* [in] */ BSTR equations);
-
-
-void __RPC_STUB IWritableFunction_SetEquations_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableFunction_GetLastError_Proxy( 
-    IWritableFunction * This,
-    /* [retval][out] */ BSTR *message);
-
-
-void __RPC_STUB IWritableFunction_GetLastError_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -8990,7 +8032,8 @@ EXTERN_C const IID IID_IWritableGraphInfo;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWritableGraphInfo * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWritableGraphInfo * This);
@@ -9012,7 +8055,7 @@ EXTERN_C const IID IID_IWritableGraphInfo;
             IWritableGraphInfo * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -9045,48 +8088,36 @@ EXTERN_C const IID IID_IWritableGraphInfo;
 
 
 #define IWritableGraphInfo_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IWritableGraphInfo_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IWritableGraphInfo_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IWritableGraphInfo_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IWritableGraphInfo_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IWritableGraphInfo_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IWritableGraphInfo_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IWritableGraphInfo_AddGraph(This,graph)	\
-    (This)->lpVtbl -> AddGraph(This,graph)
+    ( (This)->lpVtbl -> AddGraph(This,graph) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [hidden][local][id] */ HRESULT STDMETHODCALLTYPE IWritableGraphInfo_AddGraph_Proxy( 
-    IWritableGraphInfo * This,
-    /* [in] */ void **graph);
-
-
-void __RPC_STUB IWritableGraphInfo_AddGraph_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -9119,7 +8150,8 @@ EXTERN_C const IID IID_IGraphInfoImpl;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGraphInfoImpl * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IGraphInfoImpl * This);
@@ -9141,7 +8173,7 @@ EXTERN_C const IID IID_IGraphInfoImpl;
             IGraphInfoImpl * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -9170,26 +8202,26 @@ EXTERN_C const IID IID_IGraphInfoImpl;
 
 
 #define IGraphInfoImpl_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IGraphInfoImpl_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IGraphInfoImpl_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IGraphInfoImpl_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IGraphInfoImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IGraphInfoImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IGraphInfoImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -9235,7 +8267,8 @@ EXTERN_C const IID IID_IKernell;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IKernell * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IKernell * This);
@@ -9257,7 +8290,7 @@ EXTERN_C const IID IID_IKernell;
             IKernell * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -9294,63 +8327,39 @@ EXTERN_C const IID IID_IKernell;
 
 
 #define IKernell_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IKernell_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IKernell_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IKernell_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IKernell_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IKernell_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IKernell_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IKernell_GetFunction(This,function)	\
-    (This)->lpVtbl -> GetFunction(This,function)
+    ( (This)->lpVtbl -> GetFunction(This,function) ) 
 
 #define IKernell_CreateInitialResultSet(This,result)	\
-    (This)->lpVtbl -> CreateInitialResultSet(This,result)
+    ( (This)->lpVtbl -> CreateInitialResultSet(This,result) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IKernell_GetFunction_Proxy( 
-    IKernell * This,
-    /* [retval][out] */ IFunction **function);
-
-
-void __RPC_STUB IKernell_GetFunction_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IKernell_CreateInitialResultSet_Proxy( 
-    IKernell * This,
-    /* [retval][out] */ IResultSet **result);
-
-
-void __RPC_STUB IKernell_CreateInitialResultSet_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -9386,7 +8395,8 @@ EXTERN_C const IID IID_IWritableKernell;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWritableKernell * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWritableKernell * This);
@@ -9408,7 +8418,7 @@ EXTERN_C const IID IID_IWritableKernell;
             IWritableKernell * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -9441,48 +8451,36 @@ EXTERN_C const IID IID_IWritableKernell;
 
 
 #define IWritableKernell_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IWritableKernell_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IWritableKernell_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IWritableKernell_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IWritableKernell_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IWritableKernell_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IWritableKernell_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IWritableKernell_SetFunction(This,function)	\
-    (This)->lpVtbl -> SetFunction(This,function)
+    ( (This)->lpVtbl -> SetFunction(This,function) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableKernell_SetFunction_Proxy( 
-    IWritableKernell * This,
-    /* [in] */ IFunction *function);
-
-
-void __RPC_STUB IWritableKernell_SetFunction_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -9515,7 +8513,8 @@ EXTERN_C const IID IID_IKernellImpl;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IKernellImpl * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IKernellImpl * This);
@@ -9537,7 +8536,7 @@ EXTERN_C const IID IID_IKernellImpl;
             IKernellImpl * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -9570,30 +8569,30 @@ EXTERN_C const IID IID_IKernellImpl;
 
 
 #define IKernellImpl_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IKernellImpl_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IKernellImpl_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IKernellImpl_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IKernellImpl_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IKernellImpl_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IKernellImpl_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IKernellImpl_SetFunction(This,function)	\
-    (This)->lpVtbl -> SetFunction(This,function)
+    ( (This)->lpVtbl -> SetFunction(This,function) ) 
 
 
 #endif /* COBJMACROS */
@@ -9633,7 +8632,8 @@ EXTERN_C const IID IID_ILoopsLocalizationAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ILoopsLocalizationAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ILoopsLocalizationAction * This);
@@ -9655,7 +8655,7 @@ EXTERN_C const IID IID_ILoopsLocalizationAction;
             ILoopsLocalizationAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -9702,40 +8702,40 @@ EXTERN_C const IID IID_ILoopsLocalizationAction;
 
 
 #define ILoopsLocalizationAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define ILoopsLocalizationAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define ILoopsLocalizationAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define ILoopsLocalizationAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define ILoopsLocalizationAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define ILoopsLocalizationAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define ILoopsLocalizationAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define ILoopsLocalizationAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define ILoopsLocalizationAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define ILoopsLocalizationAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define ILoopsLocalizationAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #endif /* COBJMACROS */
@@ -9775,7 +8775,8 @@ EXTERN_C const IID IID_IMSMetadata;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSMetadata * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSMetadata * This);
@@ -9797,7 +8798,7 @@ EXTERN_C const IID IID_IMSMetadata;
             IMSMetadata * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -9839,36 +8840,36 @@ EXTERN_C const IID IID_IMSMetadata;
 
 
 #define IMSMetadata_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSMetadata_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSMetadata_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSMetadata_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IMSMetadata_EqualType(This,metadata,out)	\
-    (This)->lpVtbl -> EqualType(This,metadata,out)
+    ( (This)->lpVtbl -> EqualType(This,metadata,out) ) 
 
 #define IMSMetadata_Clone(This,metadata)	\
-    (This)->lpVtbl -> Clone(This,metadata)
+    ( (This)->lpVtbl -> Clone(This,metadata) ) 
 
 #define IMSMetadata_GetTypeName(This,name)	\
-    (This)->lpVtbl -> GetTypeName(This,name)
+    ( (This)->lpVtbl -> GetTypeName(This,name) ) 
 
 
 #endif /* COBJMACROS */
@@ -9917,7 +8918,8 @@ EXTERN_C const IID IID_IMS2Metadata;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMS2Metadata * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMS2Metadata * This);
@@ -9939,7 +8941,7 @@ EXTERN_C const IID IID_IMS2Metadata;
             IMS2Metadata * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -9993,89 +8995,53 @@ EXTERN_C const IID IID_IMS2Metadata;
 
 
 #define IMS2Metadata_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMS2Metadata_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMS2Metadata_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMS2Metadata_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMS2Metadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMS2Metadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMS2Metadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IMS2Metadata_EqualType(This,metadata,out)	\
-    (This)->lpVtbl -> EqualType(This,metadata,out)
+    ( (This)->lpVtbl -> EqualType(This,metadata,out) ) 
 
 #define IMS2Metadata_Clone(This,metadata)	\
-    (This)->lpVtbl -> Clone(This,metadata)
+    ( (This)->lpVtbl -> Clone(This,metadata) ) 
 
 #define IMS2Metadata_GetTypeName(This,name)	\
-    (This)->lpVtbl -> GetTypeName(This,name)
+    ( (This)->lpVtbl -> GetTypeName(This,name) ) 
 
 
 
 #define IMS2Metadata_GetSIGraphResult(This,out)	\
-    (This)->lpVtbl -> GetSIGraphResult(This,out)
+    ( (This)->lpVtbl -> GetSIGraphResult(This,out) ) 
 
 #define IMS2Metadata_SetSIGraphResult(This,in)	\
-    (This)->lpVtbl -> SetSIGraphResult(This,in)
+    ( (This)->lpVtbl -> SetSIGraphResult(This,in) ) 
 
 #define IMS2Metadata_HasSIGraphResult(This,out)	\
-    (This)->lpVtbl -> HasSIGraphResult(This,out)
+    ( (This)->lpVtbl -> HasSIGraphResult(This,out) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMS2Metadata_GetSIGraphResult_Proxy( 
-    IMS2Metadata * This,
-    /* [retval][out] */ IResultSet **out);
-
-
-void __RPC_STUB IMS2Metadata_GetSIGraphResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMS2Metadata_SetSIGraphResult_Proxy( 
-    IMS2Metadata * This,
-    /* [in] */ IResultSet *in);
-
-
-void __RPC_STUB IMS2Metadata_SetSIGraphResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IMS2Metadata_HasSIGraphResult_Proxy( 
-    IMS2Metadata * This,
-    /* [retval][out] */ VARIANT_BOOL *out);
-
-
-void __RPC_STUB IMS2Metadata_HasSIGraphResult_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -10108,7 +9074,8 @@ EXTERN_C const IID IID_IMS2DRomAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMS2DRomAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMS2DRomAction * This);
@@ -10130,7 +9097,7 @@ EXTERN_C const IID IID_IMS2DRomAction;
             IMS2DRomAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -10177,40 +9144,40 @@ EXTERN_C const IID IID_IMS2DRomAction;
 
 
 #define IMS2DRomAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMS2DRomAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMS2DRomAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMS2DRomAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMS2DRomAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMS2DRomAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMS2DRomAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMS2DRomAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMS2DRomAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMS2DRomAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMS2DRomAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #endif /* COBJMACROS */
@@ -10265,7 +9232,8 @@ EXTERN_C const IID IID_IWritableSpectrumResult;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWritableSpectrumResult * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWritableSpectrumResult * This);
@@ -10287,7 +9255,7 @@ EXTERN_C const IID IID_IWritableSpectrumResult;
             IWritableSpectrumResult * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -10336,108 +9304,48 @@ EXTERN_C const IID IID_IWritableSpectrumResult;
 
 
 #define IWritableSpectrumResult_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IWritableSpectrumResult_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IWritableSpectrumResult_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IWritableSpectrumResult_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IWritableSpectrumResult_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IWritableSpectrumResult_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IWritableSpectrumResult_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IWritableSpectrumResult_SetLowerBound(This,data)	\
-    (This)->lpVtbl -> SetLowerBound(This,data)
+    ( (This)->lpVtbl -> SetLowerBound(This,data) ) 
 
 #define IWritableSpectrumResult_SetUpperBound(This,data)	\
-    (This)->lpVtbl -> SetUpperBound(This,data)
+    ( (This)->lpVtbl -> SetUpperBound(This,data) ) 
 
 #define IWritableSpectrumResult_SetLowerLength(This,data)	\
-    (This)->lpVtbl -> SetLowerLength(This,data)
+    ( (This)->lpVtbl -> SetLowerLength(This,data) ) 
 
 #define IWritableSpectrumResult_SetUpperLength(This,data)	\
-    (This)->lpVtbl -> SetUpperLength(This,data)
+    ( (This)->lpVtbl -> SetUpperLength(This,data) ) 
 
 #define IWritableSpectrumResult_SetMetadata(This,data)	\
-    (This)->lpVtbl -> SetMetadata(This,data)
+    ( (This)->lpVtbl -> SetMetadata(This,data) ) 
 
 #endif /* COBJMACROS */
 
 
 #endif 	/* C style interface */
 
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableSpectrumResult_SetLowerBound_Proxy( 
-    IWritableSpectrumResult * This,
-    /* [in] */ double data);
-
-
-void __RPC_STUB IWritableSpectrumResult_SetLowerBound_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableSpectrumResult_SetUpperBound_Proxy( 
-    IWritableSpectrumResult * This,
-    /* [in] */ double data);
-
-
-void __RPC_STUB IWritableSpectrumResult_SetUpperBound_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableSpectrumResult_SetLowerLength_Proxy( 
-    IWritableSpectrumResult * This,
-    /* [in] */ int data);
-
-
-void __RPC_STUB IWritableSpectrumResult_SetLowerLength_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableSpectrumResult_SetUpperLength_Proxy( 
-    IWritableSpectrumResult * This,
-    /* [in] */ int data);
-
-
-void __RPC_STUB IWritableSpectrumResult_SetUpperLength_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
-
-
-/* [id] */ HRESULT STDMETHODCALLTYPE IWritableSpectrumResult_SetMetadata_Proxy( 
-    IWritableSpectrumResult * This,
-    /* [in] */ IResultMetadata *data);
-
-
-void __RPC_STUB IWritableSpectrumResult_SetMetadata_Stub(
-    IRpcStubBuffer *This,
-    IRpcChannelBuffer *_pRpcChannelBuffer,
-    PRPC_MESSAGE _pRpcMessage,
-    DWORD *_pdwStubPhase);
 
 
 
@@ -10470,7 +9378,8 @@ EXTERN_C const IID IID_IMSAdaptiveMethod;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSAdaptiveMethod * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSAdaptiveMethod * This);
@@ -10492,7 +9401,7 @@ EXTERN_C const IID IID_IMSAdaptiveMethod;
             IMSAdaptiveMethod * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -10550,47 +9459,47 @@ EXTERN_C const IID IID_IMSAdaptiveMethod;
 
 
 #define IMSAdaptiveMethod_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSAdaptiveMethod_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSAdaptiveMethod_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSAdaptiveMethod_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSAdaptiveMethod_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSAdaptiveMethod_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSAdaptiveMethod_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMSAdaptiveMethod_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMSAdaptiveMethod_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMSAdaptiveMethod_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMSAdaptiveMethod_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IMSAdaptiveMethod_GetRecomendedPrecision(This,in,index,prec)	\
-    (This)->lpVtbl -> GetRecomendedPrecision(This,in,index,prec)
+    ( (This)->lpVtbl -> GetRecomendedPrecision(This,in,index,prec) ) 
 
 #define IMSAdaptiveMethod_GetDimension(This,in,dim)	\
-    (This)->lpVtbl -> GetDimension(This,in,dim)
+    ( (This)->lpVtbl -> GetDimension(This,in,dim) ) 
 
 
 #endif /* COBJMACROS */
@@ -10630,7 +9539,8 @@ EXTERN_C const IID IID_IMSSegmentMetadata;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSSegmentMetadata * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSSegmentMetadata * This);
@@ -10652,7 +9562,7 @@ EXTERN_C const IID IID_IMSSegmentMetadata;
             IMSSegmentMetadata * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -10694,36 +9604,36 @@ EXTERN_C const IID IID_IMSSegmentMetadata;
 
 
 #define IMSSegmentMetadata_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSSegmentMetadata_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSSegmentMetadata_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSSegmentMetadata_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSSegmentMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSSegmentMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSSegmentMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IMSSegmentMetadata_EqualType(This,metadata,out)	\
-    (This)->lpVtbl -> EqualType(This,metadata,out)
+    ( (This)->lpVtbl -> EqualType(This,metadata,out) ) 
 
 #define IMSSegmentMetadata_Clone(This,metadata)	\
-    (This)->lpVtbl -> Clone(This,metadata)
+    ( (This)->lpVtbl -> Clone(This,metadata) ) 
 
 #define IMSSegmentMetadata_GetTypeName(This,name)	\
-    (This)->lpVtbl -> GetTypeName(This,name)
+    ( (This)->lpVtbl -> GetTypeName(This,name) ) 
 
 
 
@@ -10764,7 +9674,8 @@ EXTERN_C const IID IID_IMSAngleCreationMethod;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSAngleCreationMethod * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSAngleCreationMethod * This);
@@ -10786,7 +9697,7 @@ EXTERN_C const IID IID_IMSAngleCreationMethod;
             IMSAngleCreationMethod * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -10838,44 +9749,44 @@ EXTERN_C const IID IID_IMSAngleCreationMethod;
 
 
 #define IMSAngleCreationMethod_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSAngleCreationMethod_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSAngleCreationMethod_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSAngleCreationMethod_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSAngleCreationMethod_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSAngleCreationMethod_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSAngleCreationMethod_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMSAngleCreationMethod_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMSAngleCreationMethod_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMSAngleCreationMethod_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMSAngleCreationMethod_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IMSAngleCreationMethod_GetDimension(This,set,dim)	\
-    (This)->lpVtbl -> GetDimension(This,set,dim)
+    ( (This)->lpVtbl -> GetDimension(This,set,dim) ) 
 
 
 #endif /* COBJMACROS */
@@ -10915,7 +9826,8 @@ EXTERN_C const IID IID_IMSAngleMetadata;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSAngleMetadata * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSAngleMetadata * This);
@@ -10937,7 +9849,7 @@ EXTERN_C const IID IID_IMSAngleMetadata;
             IMSAngleMetadata * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -10979,36 +9891,36 @@ EXTERN_C const IID IID_IMSAngleMetadata;
 
 
 #define IMSAngleMetadata_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSAngleMetadata_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSAngleMetadata_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSAngleMetadata_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSAngleMetadata_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSAngleMetadata_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSAngleMetadata_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #define IMSAngleMetadata_EqualType(This,metadata,out)	\
-    (This)->lpVtbl -> EqualType(This,metadata,out)
+    ( (This)->lpVtbl -> EqualType(This,metadata,out) ) 
 
 #define IMSAngleMetadata_Clone(This,metadata)	\
-    (This)->lpVtbl -> Clone(This,metadata)
+    ( (This)->lpVtbl -> Clone(This,metadata) ) 
 
 #define IMSAngleMetadata_GetTypeName(This,name)	\
-    (This)->lpVtbl -> GetTypeName(This,name)
+    ( (This)->lpVtbl -> GetTypeName(This,name) ) 
 
 
 
@@ -11049,7 +9961,8 @@ EXTERN_C const IID IID_IMSAngleMethod;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSAngleMethod * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSAngleMethod * This);
@@ -11071,7 +9984,7 @@ EXTERN_C const IID IID_IMSAngleMethod;
             IMSAngleMethod * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -11129,47 +10042,47 @@ EXTERN_C const IID IID_IMSAngleMethod;
 
 
 #define IMSAngleMethod_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSAngleMethod_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSAngleMethod_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSAngleMethod_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSAngleMethod_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSAngleMethod_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSAngleMethod_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMSAngleMethod_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMSAngleMethod_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMSAngleMethod_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMSAngleMethod_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IMSAngleMethod_GetRecomendedPrecision(This,in,index,prec)	\
-    (This)->lpVtbl -> GetRecomendedPrecision(This,in,index,prec)
+    ( (This)->lpVtbl -> GetRecomendedPrecision(This,in,index,prec) ) 
 
 #define IMSAngleMethod_GetDimension(This,in,dim)	\
-    (This)->lpVtbl -> GetDimension(This,in,dim)
+    ( (This)->lpVtbl -> GetDimension(This,in,dim) ) 
 
 
 #endif /* COBJMACROS */
@@ -11209,7 +10122,8 @@ EXTERN_C const IID IID_IMSAngleRomProcess;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSAngleRomProcess * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSAngleRomProcess * This);
@@ -11231,7 +10145,7 @@ EXTERN_C const IID IID_IMSAngleRomProcess;
             IMSAngleRomProcess * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -11278,40 +10192,40 @@ EXTERN_C const IID IID_IMSAngleRomProcess;
 
 
 #define IMSAngleRomProcess_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSAngleRomProcess_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSAngleRomProcess_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSAngleRomProcess_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSAngleRomProcess_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSAngleRomProcess_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSAngleRomProcess_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMSAngleRomProcess_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMSAngleRomProcess_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMSAngleRomProcess_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMSAngleRomProcess_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #endif /* COBJMACROS */
@@ -11351,7 +10265,8 @@ EXTERN_C const IID IID_IMSMethodAction;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSMethodAction * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSMethodAction * This);
@@ -11373,7 +10288,7 @@ EXTERN_C const IID IID_IMSMethodAction;
             IMSMethodAction * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -11425,44 +10340,44 @@ EXTERN_C const IID IID_IMSMethodAction;
 
 
 #define IMSMethodAction_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSMethodAction_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSMethodAction_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSMethodAction_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSMethodAction_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSMethodAction_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSMethodAction_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMSMethodAction_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMSMethodAction_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMSMethodAction_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMSMethodAction_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #define IMSMethodAction_GetDimensionForParameters(This,resultSet,dimension)	\
-    (This)->lpVtbl -> GetDimensionForParameters(This,resultSet,dimension)
+    ( (This)->lpVtbl -> GetDimensionForParameters(This,resultSet,dimension) ) 
 
 
 #endif /* COBJMACROS */
@@ -11502,7 +10417,8 @@ EXTERN_C const IID IID_IMSSegmentRom;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMSSegmentRom * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMSSegmentRom * This);
@@ -11524,7 +10440,7 @@ EXTERN_C const IID IID_IMSSegmentRom;
             IMSSegmentRom * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -11571,40 +10487,40 @@ EXTERN_C const IID IID_IMSSegmentRom;
 
 
 #define IMSSegmentRom_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMSSegmentRom_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMSSegmentRom_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMSSegmentRom_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMSSegmentRom_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMSSegmentRom_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMSSegmentRom_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 
 #define IMSSegmentRom_SetActionParameters(This,parameters)	\
-    (This)->lpVtbl -> SetActionParameters(This,parameters)
+    ( (This)->lpVtbl -> SetActionParameters(This,parameters) ) 
 
 #define IMSSegmentRom_SetProgressBarInfo(This,pinfo)	\
-    (This)->lpVtbl -> SetProgressBarInfo(This,pinfo)
+    ( (This)->lpVtbl -> SetProgressBarInfo(This,pinfo) ) 
 
 #define IMSSegmentRom_CanDo(This,result,can)	\
-    (This)->lpVtbl -> CanDo(This,result,can)
+    ( (This)->lpVtbl -> CanDo(This,result,can) ) 
 
 #define IMSSegmentRom_Do(This,input,output)	\
-    (This)->lpVtbl -> Do(This,input,output)
+    ( (This)->lpVtbl -> Do(This,input,output) ) 
 
 
 #endif /* COBJMACROS */
@@ -11644,7 +10560,8 @@ EXTERN_C const IID IID_IResultPersistantManager;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IResultPersistantManager * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IResultPersistantManager * This);
@@ -11666,7 +10583,7 @@ EXTERN_C const IID IID_IResultPersistantManager;
             IResultPersistantManager * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -11695,26 +10612,26 @@ EXTERN_C const IID IID_IResultPersistantManager;
 
 
 #define IResultPersistantManager_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IResultPersistantManager_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IResultPersistantManager_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IResultPersistantManager_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IResultPersistantManager_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IResultPersistantManager_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IResultPersistantManager_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */
@@ -11754,7 +10671,8 @@ EXTERN_C const IID IID_IMetadataPersistantManager;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMetadataPersistantManager * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMetadataPersistantManager * This);
@@ -11776,7 +10694,7 @@ EXTERN_C const IID IID_IMetadataPersistantManager;
             IMetadataPersistantManager * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -11805,26 +10723,26 @@ EXTERN_C const IID IID_IMetadataPersistantManager;
 
 
 #define IMetadataPersistantManager_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IMetadataPersistantManager_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IMetadataPersistantManager_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IMetadataPersistantManager_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IMetadataPersistantManager_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IMetadataPersistantManager_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IMetadataPersistantManager_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 
 #endif /* COBJMACROS */

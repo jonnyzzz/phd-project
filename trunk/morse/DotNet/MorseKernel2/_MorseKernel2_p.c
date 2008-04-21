@@ -3,8 +3,8 @@
 /* this ALWAYS GENERATED file contains the proxy stub code */
 
 
- /* File created by MIDL compiler version 6.00.0366 */
-/* at Sat Apr 19 15:01:27 2008
+ /* File created by MIDL compiler version 7.00.0500 */
+/* at Mon Apr 21 21:49:19 2008
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -23,9 +23,13 @@
 #if _MSC_VER >= 1200
 #pragma warning(push)
 #endif
-#pragma warning( disable: 4100 ) /* unreferenced arguments in x86 call */
-#pragma warning( disable: 4211 )  /* redefine extent to static */
+
+#pragma warning( disable: 4211 )  /* redefine extern to static */
 #pragma warning( disable: 4232 )  /* dllimport identity*/
+#pragma warning( disable: 4024 )  /* array to pointer mapping*/
+#pragma warning( disable: 4152 )  /* function/data pointer conversion in expression */
+#pragma warning( disable: 4100 ) /* unreferenced arguments in x86 call */
+
 #pragma optimize("", off ) 
 
 #define USE_STUBLESS_PROXY
@@ -46,29 +50,37 @@
 #include "_MorseKernel2.h"
 
 #define TYPE_FORMAT_STRING_SIZE   1321                              
-#define PROC_FORMAT_STRING_SIZE   2593                              
+#define PROC_FORMAT_STRING_SIZE   2665                              
+#define EXPR_FORMAT_STRING_SIZE   1                                 
 #define TRANSMIT_AS_TABLE_SIZE    0            
 #define WIRE_MARSHAL_TABLE_SIZE   2            
 
-typedef struct _MIDL_TYPE_FORMAT_STRING
+typedef struct __MorseKernel2_MIDL_TYPE_FORMAT_STRING
     {
     short          Pad;
     unsigned char  Format[ TYPE_FORMAT_STRING_SIZE ];
-    } MIDL_TYPE_FORMAT_STRING;
+    } _MorseKernel2_MIDL_TYPE_FORMAT_STRING;
 
-typedef struct _MIDL_PROC_FORMAT_STRING
+typedef struct __MorseKernel2_MIDL_PROC_FORMAT_STRING
     {
     short          Pad;
     unsigned char  Format[ PROC_FORMAT_STRING_SIZE ];
-    } MIDL_PROC_FORMAT_STRING;
+    } _MorseKernel2_MIDL_PROC_FORMAT_STRING;
+
+typedef struct __MorseKernel2_MIDL_EXPR_FORMAT_STRING
+    {
+    long          Pad;
+    unsigned char  Format[ EXPR_FORMAT_STRING_SIZE ];
+    } _MorseKernel2_MIDL_EXPR_FORMAT_STRING;
 
 
 static RPC_SYNTAX_IDENTIFIER  _RpcTransferSyntax = 
 {{0x8A885D04,0x1CEB,0x11C9,{0x9F,0xE8,0x08,0x00,0x2B,0x10,0x48,0x60}},{2,0}};
 
 
-extern const MIDL_TYPE_FORMAT_STRING __MIDL_TypeFormatString;
-extern const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString;
+extern const _MorseKernel2_MIDL_TYPE_FORMAT_STRING _MorseKernel2__MIDL_TypeFormatString;
+extern const _MorseKernel2_MIDL_PROC_FORMAT_STRING _MorseKernel2__MIDL_ProcFormatString;
+extern const _MorseKernel2_MIDL_EXPR_FORMAT_STRING _MorseKernel2__MIDL_ExprFormatString;
 
 
 extern const MIDL_STUB_DESC Object_StubDesc;
@@ -571,11 +583,11 @@ extern const USER_MARSHAL_ROUTINE_QUADRUPLE UserMarshalRoutines[ WIRE_MARSHAL_TA
 #error You need a Windows 2000 or later to run this stub because it uses these features:
 #error   /robust command line switch.
 #error However, your C/C++ compilation flags indicate you intend to run this app on earlier systems.
-#error This app will die there with the RPC_X_WRONG_STUB_VERSION error.
+#error This app will fail with the RPC_X_WRONG_STUB_VERSION error.
 #endif
 
 
-static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
+static const _MorseKernel2_MIDL_PROC_FORMAT_STRING _MorseKernel2__MIDL_ProcFormatString =
     {
         0,
         {
@@ -1522,7 +1534,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 			0x2,		/* 2 */
 /* 976 */	0x8,		/* 8 */
 			0x3,		/* Ext Flags:  new corr desc, clt corr check, */
-/* 978 */	NdrFcShort( 0x1 ),	/* 1 */
+/* 978 */	NdrFcShort( 0x4 ),	/* 4 */
 /* 980 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 982 */	NdrFcShort( 0x0 ),	/* 0 */
 
@@ -1892,9 +1904,6 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1378 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure UnregisterComponent */
-
-
 	/* Procedure SaveGraph */
 
 /* 1380 */	0x33,		/* FC_AUTO_HANDLE */
@@ -1909,20 +1918,14 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1396 */	0x8,		/* 8 */
 			0x5,		/* Ext Flags:  new corr desc, srv corr check, */
 /* 1398 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1400 */	NdrFcShort( 0x1 ),	/* 1 */
+/* 1400 */	NdrFcShort( 0x5 ),	/* 5 */
 /* 1402 */	NdrFcShort( 0x0 ),	/* 0 */
-
-	/* Parameter bstrCLSID */
-
 
 	/* Parameter file */
 
 /* 1404 */	NdrFcShort( 0x8b ),	/* Flags:  must size, must free, in, by val, */
 /* 1406 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 1408 */	NdrFcShort( 0xcc ),	/* Type Offset=204 */
-
-	/* Return value */
-
 
 	/* Return value */
 
@@ -1975,7 +1978,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1468 */	0x8,		/* 8 */
 			0x5,		/* Ext Flags:  new corr desc, srv corr check, */
 /* 1470 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1472 */	NdrFcShort( 0x1 ),	/* 1 */
+/* 1472 */	NdrFcShort( 0x5 ),	/* 5 */
 /* 1474 */	NdrFcShort( 0x0 ),	/* 0 */
 
 	/* Parameter file */
@@ -2180,9 +2183,6 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1690 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetEquations */
-
-
 	/* Procedure Attach */
 
 /* 1692 */	0x33,		/* FC_AUTO_HANDLE */
@@ -2197,20 +2197,14 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1708 */	0x8,		/* 8 */
 			0x5,		/* Ext Flags:  new corr desc, srv corr check, */
 /* 1710 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1712 */	NdrFcShort( 0x1 ),	/* 1 */
+/* 1712 */	NdrFcShort( 0x5 ),	/* 5 */
 /* 1714 */	NdrFcShort( 0x0 ),	/* 0 */
-
-	/* Parameter equations */
-
 
 	/* Parameter bstrPath */
 
 /* 1716 */	NdrFcShort( 0x8b ),	/* Flags:  must size, must free, in, by val, */
 /* 1718 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 1720 */	NdrFcShort( 0xcc ),	/* Type Offset=204 */
-
-	/* Return value */
-
 
 	/* Return value */
 
@@ -2256,7 +2250,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 			0x3,		/* 3 */
 /* 1774 */	0x8,		/* 8 */
 			0x3,		/* Ext Flags:  new corr desc, clt corr check, */
-/* 1776 */	NdrFcShort( 0x24 ),	/* 36 */
+/* 1776 */	NdrFcShort( 0xb7 ),	/* 183 */
 /* 1778 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 1780 */	NdrFcShort( 0x0 ),	/* 0 */
 
@@ -2279,35 +2273,65 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 1798 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure NeedEdgeResolve */
+	/* Procedure UnregisterComponent */
 
 /* 1800 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 1802 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1806 */	NdrFcShort( 0x7 ),	/* 7 */
+/* 1806 */	NdrFcShort( 0xc ),	/* 12 */
 /* 1808 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 1810 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1812 */	NdrFcShort( 0x22 ),	/* 34 */
-/* 1814 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+/* 1812 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 1814 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
 			0x2,		/* 2 */
 /* 1816 */	0x8,		/* 8 */
-			0x1,		/* Ext Flags:  new corr desc, */
+			0x5,		/* Ext Flags:  new corr desc, srv corr check, */
 /* 1818 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1820 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1820 */	NdrFcShort( 0x9 ),	/* 9 */
 /* 1822 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter result */
+	/* Parameter bstrCLSID */
 
-/* 1824 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+/* 1824 */	NdrFcShort( 0x8b ),	/* Flags:  must size, must free, in, by val, */
 /* 1826 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 1828 */	0x6,		/* FC_SHORT */
-			0x0,		/* 0 */
+/* 1828 */	NdrFcShort( 0xcc ),	/* Type Offset=204 */
 
 	/* Return value */
 
 /* 1830 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
 /* 1832 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 1834 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure NeedEdgeResolve */
+
+/* 1836 */	0x33,		/* FC_AUTO_HANDLE */
+			0x6c,		/* Old Flags:  object, Oi2 */
+/* 1838 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 1842 */	NdrFcShort( 0x7 ),	/* 7 */
+/* 1844 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 1846 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1848 */	NdrFcShort( 0x22 ),	/* 34 */
+/* 1850 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x2,		/* 2 */
+/* 1852 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 1854 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1856 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1858 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter result */
+
+/* 1860 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+/* 1862 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 1864 */	0x6,		/* FC_SHORT */
+			0x0,		/* 0 */
+
+	/* Return value */
+
+/* 1866 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 1868 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 1870 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Procedure GetDimension */
@@ -2321,20 +2345,20 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Procedure GetDimensionForParameters */
 
-/* 1836 */	0x33,		/* FC_AUTO_HANDLE */
+/* 1872 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
-/* 1838 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1842 */	NdrFcShort( 0xb ),	/* 11 */
-/* 1844 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 1846 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1848 */	NdrFcShort( 0x24 ),	/* 36 */
-/* 1850 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+/* 1874 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 1878 */	NdrFcShort( 0xb ),	/* 11 */
+/* 1880 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 1882 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1884 */	NdrFcShort( 0x24 ),	/* 36 */
+/* 1886 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
 			0x3,		/* 3 */
-/* 1852 */	0x8,		/* 8 */
+/* 1888 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
-/* 1854 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1856 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1858 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1890 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1892 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1894 */	NdrFcShort( 0x0 ),	/* 0 */
 
 	/* Parameter set */
 
@@ -2347,9 +2371,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter resultSet */
 
-/* 1860 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
-/* 1862 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 1864 */	NdrFcShort( 0x4d4 ),	/* Type Offset=1236 */
+/* 1896 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
+/* 1898 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 1900 */	NdrFcShort( 0x4d4 ),	/* Type Offset=1236 */
 
 	/* Parameter dim */
 
@@ -2362,9 +2386,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter dimension */
 
-/* 1866 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
-/* 1868 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
-/* 1870 */	0x8,		/* FC_LONG */
+/* 1902 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+/* 1904 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 1906 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Return value */
@@ -2378,92 +2402,92 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Return value */
 
-/* 1872 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 1874 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 1876 */	0x8,		/* FC_LONG */
+/* 1908 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 1910 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 1912 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Procedure GetPoints */
 
-/* 1878 */	0x33,		/* FC_AUTO_HANDLE */
+/* 1914 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
-/* 1880 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1884 */	NdrFcShort( 0x9 ),	/* 9 */
-/* 1886 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 1888 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 1890 */	NdrFcShort( 0x24 ),	/* 36 */
-/* 1892 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+/* 1916 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 1920 */	NdrFcShort( 0x9 ),	/* 9 */
+/* 1922 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 1924 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 1926 */	NdrFcShort( 0x24 ),	/* 36 */
+/* 1928 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x3,		/* 3 */
-/* 1894 */	0x8,		/* 8 */
+/* 1930 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
-/* 1896 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1898 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1900 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1932 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1934 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1936 */	NdrFcShort( 0x0 ),	/* 0 */
 
 	/* Parameter index */
 
-/* 1902 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
-/* 1904 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 1906 */	0x8,		/* FC_LONG */
+/* 1938 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 1940 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 1942 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Parameter ks */
 
-/* 1908 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
-/* 1910 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
-/* 1912 */	0x8,		/* FC_LONG */
+/* 1944 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+/* 1946 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 1948 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Return value */
 
-/* 1914 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 1916 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 1918 */	0x8,		/* FC_LONG */
+/* 1950 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 1952 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 1954 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Procedure GetOffset */
 
-/* 1920 */	0x33,		/* FC_AUTO_HANDLE */
+/* 1956 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
-/* 1922 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1926 */	NdrFcShort( 0xb ),	/* 11 */
-/* 1928 */	NdrFcShort( 0x14 ),	/* x86 Stack size/offset = 20 */
-/* 1930 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 1932 */	NdrFcShort( 0x50 ),	/* 80 */
-/* 1934 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+/* 1958 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 1962 */	NdrFcShort( 0xb ),	/* 11 */
+/* 1964 */	NdrFcShort( 0x14 ),	/* x86 Stack size/offset = 20 */
+/* 1966 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 1968 */	NdrFcShort( 0x50 ),	/* 80 */
+/* 1970 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x4,		/* 4 */
-/* 1936 */	0x8,		/* 8 */
+/* 1972 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
-/* 1938 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1940 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1942 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1974 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1976 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 1978 */	NdrFcShort( 0x0 ),	/* 0 */
 
 	/* Parameter index */
 
-/* 1944 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
-/* 1946 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 1948 */	0x8,		/* FC_LONG */
+/* 1980 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 1982 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 1984 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Parameter offset1 */
 
-/* 1950 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
-/* 1952 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
-/* 1954 */	0xc,		/* FC_DOUBLE */
+/* 1986 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+/* 1988 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 1990 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
 
 	/* Parameter offset2 */
 
-/* 1956 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
-/* 1958 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 1960 */	0xc,		/* FC_DOUBLE */
+/* 1992 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+/* 1994 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 1996 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
 
 	/* Return value */
 
-/* 1962 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 1964 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 1966 */	0x8,		/* FC_LONG */
+/* 1998 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 2000 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 2002 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Procedure GetFactor */
@@ -2474,20 +2498,20 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Procedure GetDevisor */
 
-/* 1968 */	0x33,		/* FC_AUTO_HANDLE */
+/* 2004 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
-/* 1970 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 1974 */	NdrFcShort( 0x7 ),	/* 7 */
-/* 1976 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 1978 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 1980 */	NdrFcShort( 0x24 ),	/* 36 */
-/* 1982 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+/* 2006 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 2010 */	NdrFcShort( 0x7 ),	/* 7 */
+/* 2012 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 2014 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2016 */	NdrFcShort( 0x24 ),	/* 36 */
+/* 2018 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x3,		/* 3 */
-/* 1984 */	0x8,		/* 8 */
+/* 2020 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
-/* 1986 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1988 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 1990 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2022 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2024 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2026 */	NdrFcShort( 0x0 ),	/* 0 */
 
 	/* Parameter index */
 
@@ -2497,9 +2521,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter index */
 
-/* 1992 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
-/* 1994 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 1996 */	0x8,		/* FC_LONG */
+/* 2028 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 2030 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 2032 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Parameter factor */
@@ -2510,9 +2534,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter value */
 
-/* 1998 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
-/* 2000 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
-/* 2002 */	0x8,		/* FC_LONG */
+/* 2034 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+/* 2036 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2038 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 	/* Return value */
@@ -2520,119 +2544,88 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Return value */
 
-
-	/* Return value */
-
-/* 2004 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2006 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 2008 */	0x8,		/* FC_LONG */
-			0x0,		/* 0 */
-
-	/* Procedure GetStartSet */
-
-/* 2010 */	0x33,		/* FC_AUTO_HANDLE */
-			0x6c,		/* Old Flags:  object, Oi2 */
-/* 2012 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2016 */	NdrFcShort( 0x7 ),	/* 7 */
-/* 2018 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 2020 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 2022 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2024 */	0x45,		/* Oi2 Flags:  srv must size, has return, has ext, */
-			0x2,		/* 2 */
-/* 2026 */	0x8,		/* 8 */
-			0x1,		/* Ext Flags:  new corr desc, */
-/* 2028 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 2030 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 2032 */	NdrFcShort( 0x0 ),	/* 0 */
-
-	/* Parameter result */
-
-/* 2034 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
-/* 2036 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2038 */	NdrFcShort( 0x4e6 ),	/* Type Offset=1254 */
 
 	/* Return value */
 
 /* 2040 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2042 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2042 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2044 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure GetCoordinate */
+	/* Procedure GetStartSet */
 
 /* 2046 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2048 */	NdrFcLong( 0x0 ),	/* 0 */
 /* 2052 */	NdrFcShort( 0x7 ),	/* 7 */
-/* 2054 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 2056 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2058 */	NdrFcShort( 0x2c ),	/* 44 */
-/* 2060 */	0x44,		/* Oi2 Flags:  has return, has ext, */
-			0x3,		/* 3 */
+/* 2054 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2056 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2058 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2060 */	0x45,		/* Oi2 Flags:  srv must size, has return, has ext, */
+			0x2,		/* 2 */
 /* 2062 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
 /* 2064 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2066 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2068 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter id */
+	/* Parameter result */
 
-/* 2070 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 2070 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
 /* 2072 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2074 */	0x8,		/* FC_LONG */
-			0x0,		/* 0 */
-
-	/* Parameter data */
-
-/* 2076 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
-/* 2078 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
-/* 2080 */	0xc,		/* FC_DOUBLE */
-			0x0,		/* 0 */
+/* 2074 */	NdrFcShort( 0x4e6 ),	/* Type Offset=1254 */
 
 	/* Return value */
 
-/* 2082 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2084 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 2086 */	0x8,		/* FC_LONG */
+/* 2076 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 2078 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2080 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure GetLowerBound */
+	/* Procedure GetCoordinate */
 
-/* 2088 */	0x33,		/* FC_AUTO_HANDLE */
+/* 2082 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
-/* 2090 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2094 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2096 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 2098 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 2100 */	NdrFcShort( 0x2c ),	/* 44 */
-/* 2102 */	0x44,		/* Oi2 Flags:  has return, has ext, */
-			0x2,		/* 2 */
-/* 2104 */	0x8,		/* 8 */
+/* 2084 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 2088 */	NdrFcShort( 0x7 ),	/* 7 */
+/* 2090 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 2092 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2094 */	NdrFcShort( 0x2c ),	/* 44 */
+/* 2096 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x3,		/* 3 */
+/* 2098 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
-/* 2106 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 2108 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 2110 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2100 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2102 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2104 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter id */
+
+/* 2106 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 2108 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 2110 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
 
 	/* Parameter data */
 
 /* 2112 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
-/* 2114 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 2114 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 2116 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
 
 	/* Return value */
 
 /* 2118 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2120 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2120 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2122 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure GetUpperBound */
+	/* Procedure GetLowerBound */
 
 /* 2124 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2126 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2130 */	NdrFcShort( 0x9 ),	/* 9 */
+/* 2130 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 2132 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2134 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2136 */	NdrFcShort( 0x2c ),	/* 44 */
@@ -2658,28 +2651,29 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2158 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure GetLastError */
+	/* Procedure GetUpperBound */
 
 /* 2160 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2162 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2166 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2166 */	NdrFcShort( 0x9 ),	/* 9 */
 /* 2168 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2170 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 2172 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2174 */	0x45,		/* Oi2 Flags:  srv must size, has return, has ext, */
+/* 2172 */	NdrFcShort( 0x2c ),	/* 44 */
+/* 2174 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
 /* 2176 */	0x8,		/* 8 */
-			0x3,		/* Ext Flags:  new corr desc, clt corr check, */
-/* 2178 */	NdrFcShort( 0x1 ),	/* 1 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 2178 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2180 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2182 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter message */
+	/* Parameter data */
 
-/* 2184 */	NdrFcShort( 0x2113 ),	/* Flags:  must size, must free, out, simple ref, srv alloc size=8 */
+/* 2184 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
 /* 2186 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2188 */	NdrFcShort( 0x7c ),	/* Type Offset=124 */
+/* 2188 */	0xc,		/* FC_DOUBLE */
+			0x0,		/* 0 */
 
 	/* Return value */
 
@@ -2688,7 +2682,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2194 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure GetFunction */
+	/* Procedure SetEquations */
 
 /* 2196 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
@@ -2697,19 +2691,19 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2204 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2206 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2208 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2210 */	0x45,		/* Oi2 Flags:  srv must size, has return, has ext, */
+/* 2210 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
 			0x2,		/* 2 */
 /* 2212 */	0x8,		/* 8 */
-			0x1,		/* Ext Flags:  new corr desc, */
+			0x5,		/* Ext Flags:  new corr desc, srv corr check, */
 /* 2214 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 2216 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2216 */	NdrFcShort( 0x9 ),	/* 9 */
 /* 2218 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter function */
+	/* Parameter equations */
 
-/* 2220 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
+/* 2220 */	NdrFcShort( 0x8b ),	/* Flags:  must size, must free, in, by val, */
 /* 2222 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2224 */	NdrFcShort( 0x4fc ),	/* Type Offset=1276 */
+/* 2224 */	NdrFcShort( 0xcc ),	/* Type Offset=204 */
 
 	/* Return value */
 
@@ -2718,7 +2712,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2230 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure CreateInitialResultSet */
+	/* Procedure GetLastError */
 
 /* 2232 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
@@ -2730,16 +2724,16 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2246 */	0x45,		/* Oi2 Flags:  srv must size, has return, has ext, */
 			0x2,		/* 2 */
 /* 2248 */	0x8,		/* 8 */
-			0x1,		/* Ext Flags:  new corr desc, */
-/* 2250 */	NdrFcShort( 0x0 ),	/* 0 */
+			0x3,		/* Ext Flags:  new corr desc, clt corr check, */
+/* 2250 */	NdrFcShort( 0x1 ),	/* 1 */
 /* 2252 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2254 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter result */
+	/* Parameter message */
 
-/* 2256 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
+/* 2256 */	NdrFcShort( 0x2113 ),	/* Flags:  must size, must free, out, simple ref, srv alloc size=8 */
 /* 2258 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2260 */	NdrFcShort( 0x512 ),	/* Type Offset=1298 */
+/* 2260 */	NdrFcShort( 0x7c ),	/* Type Offset=124 */
 
 	/* Return value */
 
@@ -2748,7 +2742,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2266 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetFunction */
+	/* Procedure GetFunction */
 
 /* 2268 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
@@ -2757,7 +2751,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2276 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2278 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2280 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2282 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+/* 2282 */	0x45,		/* Oi2 Flags:  srv must size, has return, has ext, */
 			0x2,		/* 2 */
 /* 2284 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
@@ -2767,9 +2761,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter function */
 
-/* 2292 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
+/* 2292 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
 /* 2294 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2296 */	NdrFcShort( 0x500 ),	/* Type Offset=1280 */
+/* 2296 */	NdrFcShort( 0x4fc ),	/* Type Offset=1276 */
 
 	/* Return value */
 
@@ -2778,12 +2772,12 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2302 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure GetSIGraphResult */
+	/* Procedure CreateInitialResultSet */
 
 /* 2304 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2306 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2310 */	NdrFcShort( 0xa ),	/* 10 */
+/* 2310 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 2312 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2314 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2316 */	NdrFcShort( 0x8 ),	/* 8 */
@@ -2795,7 +2789,7 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2324 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2326 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter out */
+	/* Parameter result */
 
 /* 2328 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
 /* 2330 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
@@ -2808,12 +2802,12 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2338 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetSIGraphResult */
+	/* Procedure SetFunction */
 
 /* 2340 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2342 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2346 */	NdrFcShort( 0xb ),	/* 11 */
+/* 2346 */	NdrFcShort( 0x7 ),	/* 7 */
 /* 2348 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2350 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2352 */	NdrFcShort( 0x8 ),	/* 8 */
@@ -2825,11 +2819,11 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2360 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2362 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter in */
+	/* Parameter function */
 
 /* 2364 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
 /* 2366 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2368 */	NdrFcShort( 0x4d4 ),	/* Type Offset=1236 */
+/* 2368 */	NdrFcShort( 0x500 ),	/* Type Offset=1280 */
 
 	/* Return value */
 
@@ -2838,16 +2832,16 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2374 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure HasSIGraphResult */
+	/* Procedure GetSIGraphResult */
 
 /* 2376 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2378 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2382 */	NdrFcShort( 0xc ),	/* 12 */
+/* 2382 */	NdrFcShort( 0xa ),	/* 10 */
 /* 2384 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2386 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 2388 */	NdrFcShort( 0x22 ),	/* 34 */
-/* 2390 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+/* 2388 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2390 */	0x45,		/* Oi2 Flags:  srv must size, has return, has ext, */
 			0x2,		/* 2 */
 /* 2392 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
@@ -2857,10 +2851,9 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter out */
 
-/* 2400 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
+/* 2400 */	NdrFcShort( 0x13 ),	/* Flags:  must size, must free, out, */
 /* 2402 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2404 */	0x6,		/* FC_SHORT */
-			0x0,		/* 0 */
+/* 2404 */	NdrFcShort( 0x512 ),	/* Type Offset=1298 */
 
 	/* Return value */
 
@@ -2869,16 +2862,16 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2410 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetLowerBound */
+	/* Procedure SetSIGraphResult */
 
 /* 2412 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2414 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2418 */	NdrFcShort( 0x7 ),	/* 7 */
-/* 2420 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 2422 */	NdrFcShort( 0x10 ),	/* 16 */
+/* 2418 */	NdrFcShort( 0xb ),	/* 11 */
+/* 2420 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2422 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2424 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2426 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+/* 2426 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
 			0x2,		/* 2 */
 /* 2428 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
@@ -2886,29 +2879,28 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2432 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2434 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter data */
+	/* Parameter in */
 
-/* 2436 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 2436 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
 /* 2438 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2440 */	0xc,		/* FC_DOUBLE */
-			0x0,		/* 0 */
+/* 2440 */	NdrFcShort( 0x4d4 ),	/* Type Offset=1236 */
 
 	/* Return value */
 
 /* 2442 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2444 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2444 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 2446 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetUpperBound */
+	/* Procedure HasSIGraphResult */
 
 /* 2448 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2450 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2454 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2456 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
-/* 2458 */	NdrFcShort( 0x10 ),	/* 16 */
-/* 2460 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2454 */	NdrFcShort( 0xc ),	/* 12 */
+/* 2456 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2458 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2460 */	NdrFcShort( 0x22 ),	/* 34 */
 /* 2462 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
 /* 2464 */	0x8,		/* 8 */
@@ -2917,28 +2909,28 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2468 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 2470 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter data */
+	/* Parameter out */
 
-/* 2472 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 2472 */	NdrFcShort( 0x2150 ),	/* Flags:  out, base type, simple ref, srv alloc size=8 */
 /* 2474 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2476 */	0xc,		/* FC_DOUBLE */
+/* 2476 */	0x6,		/* FC_SHORT */
 			0x0,		/* 0 */
 
 	/* Return value */
 
 /* 2478 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2480 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2480 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 2482 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetLowerLength */
+	/* Procedure SetLowerBound */
 
 /* 2484 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2486 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2490 */	NdrFcShort( 0x9 ),	/* 9 */
-/* 2492 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 2494 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2490 */	NdrFcShort( 0x7 ),	/* 7 */
+/* 2492 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 2494 */	NdrFcShort( 0x10 ),	/* 16 */
 /* 2496 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 2498 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
@@ -2952,24 +2944,24 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 /* 2508 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 2510 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2512 */	0x8,		/* FC_LONG */
+/* 2512 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
 
 	/* Return value */
 
 /* 2514 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2516 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2516 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2518 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetUpperLength */
+	/* Procedure SetUpperBound */
 
 /* 2520 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2522 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2526 */	NdrFcShort( 0xa ),	/* 10 */
-/* 2528 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 2530 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2526 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2528 */	NdrFcShort( 0x10 ),	/* x86 Stack size/offset = 16 */
+/* 2530 */	NdrFcShort( 0x10 ),	/* 16 */
 /* 2532 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 2534 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
@@ -2983,26 +2975,26 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 /* 2544 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 2546 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2548 */	0x8,		/* FC_LONG */
+/* 2548 */	0xc,		/* FC_DOUBLE */
 			0x0,		/* 0 */
 
 	/* Return value */
 
 /* 2550 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 2552 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2552 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
 /* 2554 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SetMetadata */
+	/* Procedure SetLowerLength */
 
 /* 2556 */	0x33,		/* FC_AUTO_HANDLE */
 			0x6c,		/* Old Flags:  object, Oi2 */
 /* 2558 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 2562 */	NdrFcShort( 0xb ),	/* 11 */
+/* 2562 */	NdrFcShort( 0x9 ),	/* 9 */
 /* 2564 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
-/* 2566 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2566 */	NdrFcShort( 0x8 ),	/* 8 */
 /* 2568 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 2570 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+/* 2570 */	0x44,		/* Oi2 Flags:  has return, has ext, */
 			0x2,		/* 2 */
 /* 2572 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
@@ -3012,9 +3004,10 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 
 	/* Parameter data */
 
-/* 2580 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
+/* 2580 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
 /* 2582 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 2584 */	NdrFcShort( 0x516 ),	/* Type Offset=1302 */
+/* 2584 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
 
 	/* Return value */
 
@@ -3023,11 +3016,72 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 /* 2590 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
+	/* Procedure SetUpperLength */
+
+/* 2592 */	0x33,		/* FC_AUTO_HANDLE */
+			0x6c,		/* Old Flags:  object, Oi2 */
+/* 2594 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 2598 */	NdrFcShort( 0xa ),	/* 10 */
+/* 2600 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2602 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2604 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2606 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x2,		/* 2 */
+/* 2608 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 2610 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2612 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2614 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter data */
+
+/* 2616 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 2618 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 2620 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Return value */
+
+/* 2622 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 2624 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2626 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure SetMetadata */
+
+/* 2628 */	0x33,		/* FC_AUTO_HANDLE */
+			0x6c,		/* Old Flags:  object, Oi2 */
+/* 2630 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 2634 */	NdrFcShort( 0xb ),	/* 11 */
+/* 2636 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 2638 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2640 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 2642 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+			0x2,		/* 2 */
+/* 2644 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 2646 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2648 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 2650 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter data */
+
+/* 2652 */	NdrFcShort( 0xb ),	/* Flags:  must size, must free, in, */
+/* 2654 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 2656 */	NdrFcShort( 0x516 ),	/* Type Offset=1302 */
+
+	/* Return value */
+
+/* 2658 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 2660 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 2662 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
 			0x0
         }
     };
 
-static const MIDL_TYPE_FORMAT_STRING __MIDL_TypeFormatString =
+static const _MorseKernel2_MIDL_TYPE_FORMAT_STRING _MorseKernel2__MIDL_TypeFormatString =
     {
         0,
         {
@@ -3997,7 +4051,7 @@ static const unsigned short IActionBase_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IActionBase_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IActionBase_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4009,7 +4063,7 @@ static const MIDL_SERVER_INFO IActionBase_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IActionBase_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4063,7 +4117,7 @@ static const unsigned short IParameters_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4075,7 +4129,7 @@ static const MIDL_SERVER_INFO IParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4133,7 +4187,7 @@ static const unsigned short IProgressBarInfo_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IProgressBarInfo_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IProgressBarInfo_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4145,7 +4199,7 @@ static const MIDL_SERVER_INFO IProgressBarInfo_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IProgressBarInfo_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4209,7 +4263,7 @@ static const unsigned short IResultBase_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IResultBase_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultBase_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4221,7 +4275,7 @@ static const MIDL_SERVER_INFO IResultBase_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultBase_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4276,7 +4330,7 @@ static const unsigned short IResultSet_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IResultSet_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultSet_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4288,7 +4342,7 @@ static const MIDL_SERVER_INFO IResultSet_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultSet_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4349,7 +4403,7 @@ static const unsigned short IAction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4361,7 +4415,7 @@ static const MIDL_SERVER_INFO IAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4432,7 +4486,7 @@ static const unsigned short IFunction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IFunction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IFunction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4444,7 +4498,7 @@ static const MIDL_SERVER_INFO IFunction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IFunction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4518,7 +4572,7 @@ static const unsigned short IComputationParameters_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IComputationParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IComputationParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4530,7 +4584,7 @@ static const MIDL_SERVER_INFO IComputationParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IComputationParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4591,7 +4645,7 @@ static const unsigned short IAdaptiveBoxMethod_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IAdaptiveBoxMethod_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IAdaptiveBoxMethod_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4603,7 +4657,7 @@ static const MIDL_SERVER_INFO IAdaptiveBoxMethod_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IAdaptiveBoxMethod_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4671,7 +4725,7 @@ static const unsigned short IAdaptiveBoxParameters_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IAdaptiveBoxParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IAdaptiveBoxParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4683,7 +4737,7 @@ static const MIDL_SERVER_INFO IAdaptiveBoxParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IAdaptiveBoxParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4745,7 +4799,7 @@ static const unsigned short IResultMetadata_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IResultMetadata_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4757,7 +4811,7 @@ static const MIDL_SERVER_INFO IResultMetadata_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4817,7 +4871,7 @@ static const unsigned short IResult_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IResult_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResult_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4829,7 +4883,7 @@ static const MIDL_SERVER_INFO IResult_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResult_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4885,7 +4939,7 @@ static const unsigned short IResultInfo_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IResultInfo_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultInfo_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4897,7 +4951,7 @@ static const MIDL_SERVER_INFO IResultInfo_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultInfo_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4957,7 +5011,7 @@ static const unsigned short IGraphInfo_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IGraphInfo_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IGraphInfo_FormatStringOffsetTable[-3],
     0,
     0,
@@ -4969,7 +5023,7 @@ static const MIDL_SERVER_INFO IGraphInfo_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IGraphInfo_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5042,7 +5096,7 @@ static const unsigned short IGraphResult_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IGraphResult_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IGraphResult_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5054,7 +5108,7 @@ static const MIDL_SERVER_INFO IGraphResult_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IGraphResult_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5122,7 +5176,7 @@ static const unsigned short IWritableGraphResult_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IWritableGraphResult_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IWritableGraphResult_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5134,7 +5188,7 @@ static const MIDL_SERVER_INFO IWritableGraphResult_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IWritableGraphResult_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5194,7 +5248,7 @@ static const unsigned short IWritableResultSet_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IWritableResultSet_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IWritableResultSet_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5206,7 +5260,7 @@ static const MIDL_SERVER_INFO IWritableResultSet_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IWritableResultSet_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5262,7 +5316,7 @@ static const unsigned short IGraphResultImpl_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IGraphResultImpl_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IGraphResultImpl_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5274,7 +5328,7 @@ static const MIDL_SERVER_INFO IGraphResultImpl_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IGraphResultImpl_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5331,7 +5385,7 @@ static const unsigned short ISymbolicImageMetadata_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO ISymbolicImageMetadata_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ISymbolicImageMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5343,7 +5397,7 @@ static const MIDL_SERVER_INFO ISymbolicImageMetadata_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ISymbolicImageMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5403,7 +5457,7 @@ static const unsigned short IResultSetImpl_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IResultSetImpl_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultSetImpl_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5415,7 +5469,7 @@ static const MIDL_SERVER_INFO IResultSetImpl_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultSetImpl_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5474,7 +5528,7 @@ static const unsigned short IAdaptiveMethodAction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IAdaptiveMethodAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IAdaptiveMethodAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5486,7 +5540,7 @@ static const MIDL_SERVER_INFO IAdaptiveMethodAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IAdaptiveMethodAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5555,7 +5609,7 @@ static const unsigned short IAdaptiveMethodParameters_FormatStringOffsetTable[] 
 static const MIDL_STUBLESS_PROXY_INFO IAdaptiveMethodParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IAdaptiveMethodParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5567,7 +5621,7 @@ static const MIDL_SERVER_INFO IAdaptiveMethodParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IAdaptiveMethodParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5633,7 +5687,7 @@ static const unsigned short IBoxMethodAction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IBoxMethodAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IBoxMethodAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5645,7 +5699,7 @@ static const MIDL_SERVER_INFO IBoxMethodAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IBoxMethodAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5711,7 +5765,7 @@ static const unsigned short IBoxMethodParameters_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IBoxMethodParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IBoxMethodParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5723,7 +5777,7 @@ static const MIDL_SERVER_INFO IBoxMethodParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IBoxMethodParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5782,13 +5836,13 @@ static const unsigned short IComponentRegistrar_FormatStringOffsetTable[] =
     72,
     1758,
     1344,
-    1380
+    1800
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IComponentRegistrar_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IComponentRegistrar_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5800,7 +5854,7 @@ static const MIDL_SERVER_INFO IComponentRegistrar_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IComponentRegistrar_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5870,7 +5924,7 @@ static const unsigned short ITarjanAction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO ITarjanAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ITarjanAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5882,7 +5936,7 @@ static const MIDL_SERVER_INFO ITarjanAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ITarjanAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5938,13 +5992,13 @@ static const unsigned short ITarjanParameters_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    1800
+    1836
     };
 
 static const MIDL_STUBLESS_PROXY_INFO ITarjanParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ITarjanParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -5956,7 +6010,7 @@ static const MIDL_SERVER_INFO ITarjanParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ITarjanParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6010,13 +6064,13 @@ static const unsigned short IPointMethodAction_FormatStringOffsetTable[] =
     282,
     318,
     360,
-    1836
+    1872
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IPointMethodAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IPointMethodAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6028,7 +6082,7 @@ static const MIDL_SERVER_INFO IPointMethodAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IPointMethodAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6088,15 +6142,15 @@ static const unsigned short IPointMethodParameters_FormatStringOffsetTable[] =
     (unsigned short) -1,
     672,
     798,
-    1878,
+    1914,
     1308,
-    1920
+    1956
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IPointMethodParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IPointMethodParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6108,7 +6162,7 @@ static const MIDL_SERVER_INFO IPointMethodParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IPointMethodParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6170,13 +6224,13 @@ static const unsigned short IProjectAction_FormatStringOffsetTable[] =
     282,
     318,
     360,
-    1836
+    1872
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IProjectAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IProjectAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6188,7 +6242,7 @@ static const MIDL_SERVER_INFO IProjectAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IProjectAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6246,13 +6300,13 @@ static const unsigned short IProjectActionParameters_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    1968
+    2004
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IProjectActionParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IProjectActionParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6264,7 +6318,7 @@ static const MIDL_SERVER_INFO IProjectActionParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IProjectActionParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6320,7 +6374,7 @@ static const unsigned short IDummy_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IDummy_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IDummy_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6332,7 +6386,7 @@ static const MIDL_SERVER_INFO IDummy_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IDummy_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6390,7 +6444,7 @@ static const unsigned short IIsolatedSetAction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IIsolatedSetAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IIsolatedSetAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6402,7 +6456,7 @@ static const MIDL_SERVER_INFO IIsolatedSetAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IIsolatedSetAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6458,13 +6512,13 @@ static const unsigned short IIsolatedSetParameters_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    2010
+    2046
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IIsolatedSetParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IIsolatedSetParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6476,7 +6530,7 @@ static const MIDL_SERVER_INFO IIsolatedSetParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IIsolatedSetParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6530,13 +6584,13 @@ static const unsigned short IMinimalLoopLocalizationAction_FormatStringOffsetTab
     282,
     318,
     360,
-    1836
+    1872
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IMinimalLoopLocalizationAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMinimalLoopLocalizationAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6548,7 +6602,7 @@ static const MIDL_SERVER_INFO IMinimalLoopLocalizationAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMinimalLoopLocalizationAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6606,13 +6660,13 @@ static const unsigned short IMinimalLoopLocalizationParameters_FormatStringOffse
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    2046
+    2082
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IMinimalLoopLocalizationParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMinimalLoopLocalizationParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6624,7 +6678,7 @@ static const MIDL_SERVER_INFO IMinimalLoopLocalizationParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMinimalLoopLocalizationParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6681,7 +6735,7 @@ static const unsigned short ISIRomActionParameters_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO ISIRomActionParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ISIRomActionParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6693,7 +6747,7 @@ static const MIDL_SERVER_INFO ISIRomActionParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ISIRomActionParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6753,7 +6807,7 @@ static const unsigned short ISIRomAction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO ISIRomAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ISIRomAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6765,7 +6819,7 @@ static const MIDL_SERVER_INFO ISIRomAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ISIRomAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6830,7 +6884,7 @@ static const unsigned short ISpectrumMetadata_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO ISpectrumMetadata_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ISpectrumMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6842,7 +6896,7 @@ static const MIDL_SERVER_INFO ISpectrumMetadata_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ISpectrumMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6897,8 +6951,8 @@ static const unsigned short ISpectrumResult_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     996,
-    2088,
     2124,
+    2160,
     1620,
     438
     };
@@ -6906,7 +6960,7 @@ static const unsigned short ISpectrumResult_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO ISpectrumResult_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ISpectrumResult_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6918,7 +6972,7 @@ static const MIDL_SERVER_INFO ISpectrumResult_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ISpectrumResult_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6982,7 +7036,7 @@ static const unsigned short IDummy1_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IDummy1_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IDummy1_FormatStringOffsetTable[-3],
     0,
     0,
@@ -6994,7 +7048,7 @@ static const MIDL_SERVER_INFO IDummy1_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IDummy1_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7048,7 +7102,7 @@ static const unsigned short IDummy2_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IDummy2_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IDummy2_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7060,7 +7114,7 @@ static const MIDL_SERVER_INFO IDummy2_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IDummy2_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7118,7 +7172,7 @@ static const unsigned short IMS2DCreationAction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMS2DCreationAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2DCreationAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7130,7 +7184,7 @@ static const MIDL_SERVER_INFO IMS2DCreationAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2DCreationAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7186,13 +7240,13 @@ static const unsigned short IMS2DCreationParameters_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    1968
+    2004
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IMS2DCreationParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2DCreationParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7204,7 +7258,7 @@ static const MIDL_SERVER_INFO IMS2DCreationParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2DCreationParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7260,7 +7314,7 @@ static const unsigned short IDummy3_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IDummy3_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IDummy3_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7272,7 +7326,7 @@ static const MIDL_SERVER_INFO IDummy3_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IDummy3_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7330,7 +7384,7 @@ static const unsigned short IMS2DProcessAction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMS2DProcessAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2DProcessAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7342,7 +7396,7 @@ static const MIDL_SERVER_INFO IMS2DProcessAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2DProcessAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7405,7 +7459,7 @@ static const unsigned short IMS2DProcessParameters_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMS2DProcessParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2DProcessParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7417,7 +7471,7 @@ static const MIDL_SERVER_INFO IMS2DProcessParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2DProcessParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7473,13 +7527,13 @@ static const unsigned short IMSCreationProcess_FormatStringOffsetTable[] =
     282,
     318,
     360,
-    1836
+    1872
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IMSCreationProcess_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSCreationProcess_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7491,7 +7545,7 @@ static const MIDL_SERVER_INFO IMSCreationProcess_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSCreationProcess_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7549,13 +7603,13 @@ static const unsigned short IMSCreationParameters_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    1968
+    2004
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IMSCreationParameters_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSCreationParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7567,7 +7621,7 @@ static const MIDL_SERVER_INFO IMSCreationParameters_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSCreationParameters_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7623,7 +7677,7 @@ static const unsigned short IDummy4_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IDummy4_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IDummy4_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7635,7 +7689,7 @@ static const MIDL_SERVER_INFO IDummy4_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IDummy4_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7683,14 +7737,14 @@ static const unsigned short IWritableFunction_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    1692,
-    2160
+    2196,
+    2232
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IWritableFunction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IWritableFunction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7702,7 +7756,7 @@ static const MIDL_SERVER_INFO IWritableFunction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IWritableFunction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7764,7 +7818,7 @@ static const unsigned short IGraphInfoImpl_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IGraphInfoImpl_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IGraphInfoImpl_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7776,7 +7830,7 @@ static const MIDL_SERVER_INFO IGraphInfoImpl_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IGraphInfoImpl_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7824,14 +7878,14 @@ static const unsigned short IKernell_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    2196,
-    2232
+    2268,
+    2304
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IKernell_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IKernell_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7843,7 +7897,7 @@ static const MIDL_SERVER_INFO IKernell_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IKernell_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7895,13 +7949,13 @@ static const unsigned short IWritableKernell_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    2268
+    2340
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IWritableKernell_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IWritableKernell_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7913,7 +7967,7 @@ static const MIDL_SERVER_INFO IWritableKernell_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IWritableKernell_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7963,14 +8017,14 @@ static const unsigned short IKernellImpl_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    2268,
+    2340,
     0
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IKernellImpl_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IKernellImpl_FormatStringOffsetTable[-3],
     0,
     0,
@@ -7982,7 +8036,7 @@ static const MIDL_SERVER_INFO IKernellImpl_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IKernellImpl_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8042,7 +8096,7 @@ static const unsigned short ILoopsLocalizationAction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO ILoopsLocalizationAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ILoopsLocalizationAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8054,7 +8108,7 @@ static const MIDL_SERVER_INFO ILoopsLocalizationAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &ILoopsLocalizationAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8119,7 +8173,7 @@ static const unsigned short IMSMetadata_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMSMetadata_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8131,7 +8185,7 @@ static const MIDL_SERVER_INFO IMSMetadata_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8188,15 +8242,15 @@ static const unsigned short IMS2Metadata_FormatStringOffsetTable[] =
     882,
     924,
     960,
-    2304,
-    2340,
-    2376
+    2376,
+    2412,
+    2448
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IMS2Metadata_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2Metadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8208,7 +8262,7 @@ static const MIDL_SERVER_INFO IMS2Metadata_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2Metadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8278,7 +8332,7 @@ static const unsigned short IMS2DRomAction_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMS2DRomAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2DRomAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8290,7 +8344,7 @@ static const MIDL_SERVER_INFO IMS2DRomAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMS2DRomAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8346,17 +8400,17 @@ static const unsigned short IWritableSpectrumResult_FormatStringOffsetTable[] =
     (unsigned short) -1,
     (unsigned short) -1,
     (unsigned short) -1,
-    2412,
-    2448,
     2484,
     2520,
-    2556
+    2556,
+    2592,
+    2628
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IWritableSpectrumResult_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IWritableSpectrumResult_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8368,7 +8422,7 @@ static const MIDL_SERVER_INFO IWritableSpectrumResult_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IWritableSpectrumResult_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8438,7 +8492,7 @@ static const unsigned short IMSAdaptiveMethod_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMSAdaptiveMethod_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSAdaptiveMethod_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8450,7 +8504,7 @@ static const MIDL_SERVER_INFO IMSAdaptiveMethod_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSAdaptiveMethod_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8519,7 +8573,7 @@ static const unsigned short IMSSegmentMetadata_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMSSegmentMetadata_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSSegmentMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8531,7 +8585,7 @@ static const MIDL_SERVER_INFO IMSSegmentMetadata_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSSegmentMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8589,14 +8643,14 @@ static const unsigned short IMSAngleCreationMethod_FormatStringOffsetTable[] =
     282,
     318,
     360,
-    1836,
+    1872,
     0
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IMSAngleCreationMethod_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSAngleCreationMethod_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8608,7 +8662,7 @@ static const MIDL_SERVER_INFO IMSAngleCreationMethod_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSAngleCreationMethod_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8675,7 +8729,7 @@ static const unsigned short IMSAngleMetadata_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMSAngleMetadata_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSAngleMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8687,7 +8741,7 @@ static const MIDL_SERVER_INFO IMSAngleMetadata_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSAngleMetadata_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8753,7 +8807,7 @@ static const unsigned short IMSAngleMethod_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMSAngleMethod_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSAngleMethod_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8765,7 +8819,7 @@ static const MIDL_SERVER_INFO IMSAngleMethod_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSAngleMethod_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8835,7 +8889,7 @@ static const unsigned short IMSAngleRomProcess_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMSAngleRomProcess_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSAngleRomProcess_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8847,7 +8901,7 @@ static const MIDL_SERVER_INFO IMSAngleRomProcess_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSAngleRomProcess_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8907,14 +8961,14 @@ static const unsigned short IMSMethodAction_FormatStringOffsetTable[] =
     282,
     318,
     360,
-    1836,
+    1872,
     0
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IMSMethodAction_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSMethodAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8926,7 +8980,7 @@ static const MIDL_SERVER_INFO IMSMethodAction_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSMethodAction_FormatStringOffsetTable[-3],
     0,
     0,
@@ -8994,7 +9048,7 @@ static const unsigned short IMSSegmentRom_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IMSSegmentRom_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSSegmentRom_FormatStringOffsetTable[-3],
     0,
     0,
@@ -9006,7 +9060,7 @@ static const MIDL_SERVER_INFO IMSSegmentRom_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMSSegmentRom_FormatStringOffsetTable[-3],
     0,
     0,
@@ -9068,7 +9122,7 @@ static const unsigned short IResultPersistantManager_FormatStringOffsetTable[] =
 static const MIDL_STUBLESS_PROXY_INFO IResultPersistantManager_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultPersistantManager_FormatStringOffsetTable[-3],
     0,
     0,
@@ -9080,7 +9134,7 @@ static const MIDL_SERVER_INFO IResultPersistantManager_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IResultPersistantManager_FormatStringOffsetTable[-3],
     0,
     0,
@@ -9134,7 +9188,7 @@ static const unsigned short IMetadataPersistantManager_FormatStringOffsetTable[]
 static const MIDL_STUBLESS_PROXY_INFO IMetadataPersistantManager_ProxyInfo =
     {
     &Object_StubDesc,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMetadataPersistantManager_FormatStringOffsetTable[-3],
     0,
     0,
@@ -9146,7 +9200,7 @@ static const MIDL_SERVER_INFO IMetadataPersistantManager_ServerInfo =
     {
     &Object_StubDesc,
     0,
-    __MIDL_ProcFormatString.Format,
+    _MorseKernel2__MIDL_ProcFormatString.Format,
     &IMetadataPersistantManager_FormatStringOffsetTable[-3],
     0,
     0,
@@ -9193,18 +9247,18 @@ static const MIDL_STUB_DESC Object_StubDesc =
     0,
     0,
     0,
-    __MIDL_TypeFormatString.Format,
+    _MorseKernel2__MIDL_TypeFormatString.Format,
     1, /* -error bounds_check flag */
     0x50002, /* Ndr library version */
     0,
-    0x600016e, /* MIDL Version 6.0.366 */
+    0x70001f4, /* MIDL Version 7.0.500 */
     0,
     UserMarshalRoutines,
     0,  /* notify & notify_flag routine table */
     0x1, /* MIDL flag */
     0, /* cs routines */
     0,   /* proxy/server info */
-    0   /* Reserved5 */
+    0
     };
 
 const CInterfaceProxyVtbl * __MorseKernel2_ProxyVtblList[] = 

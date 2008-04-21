@@ -5,8 +5,8 @@
 /* link this file in with the server and any clients */
 
 
- /* File created by MIDL compiler version 6.00.0366 */
-/* at Sat Apr 19 15:01:27 2008
+ /* File created by MIDL compiler version 7.00.0500 */
+/* at Mon Apr 21 21:49:19 2008
  */
 /* Compiler settings for _MorseKernel2.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
