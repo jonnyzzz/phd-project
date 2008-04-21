@@ -1,16 +1,44 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DSIS.UI.Model
 {  
-  public interface IUIAction
+  /// <summary>
+  /// Represents any result that is possible to be shown in the tree
+  /// </summary>
+  public interface IResult
   {
-    string Name { get;}    
+    string ShortName { get; }    
   }
 
-
-  public class Class1
+  /// <summary>
+  /// Collection of results, that is contained in some tree node
+  /// </summary>
+  public interface IResultSet
   {
+    List<IResult> Results { get;}    
+  }
+
+  /// <summary>
+  /// Represents action that is possible to be applied to IResultSet
+  /// </summary>
+  public interface IAction
+  {
+    string ShortName { get; }
+
+    IEnumerable<ActionIncompatibilityInfo> IsCompatible(IResultSet set);
+
+    IResultSet Do(IResultSet input, IActionParameters parameters);
+  }
+
+  /// <summary>
+  /// All necessary action parameters
+  /// </summary>
+  public interface IActionParameters
+  {    
+  }
+  
+  public class ActionIncompatibilityInfo
+  {
+    
   }
 }
