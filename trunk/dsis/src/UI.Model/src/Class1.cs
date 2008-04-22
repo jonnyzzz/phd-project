@@ -41,4 +41,16 @@ namespace DSIS.UI.Model
   {
     
   }
+
+
+  public interface IDocument
+  {
+  
+  }
+
+  public interface IApplication
+  {
+    void DocumentOpened(IDocument document);
+    void DocumentClosed(IDocument document);
+  }
 }
