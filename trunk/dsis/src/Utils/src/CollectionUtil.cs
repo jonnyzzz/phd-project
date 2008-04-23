@@ -79,7 +79,7 @@ namespace DSIS.Utils
       return false;
     }
 
-    public static int Count<T>(IEnumerable<T> collection)
+    public static int Count<T>(this IEnumerable<T> collection)
     {
       int count = 0;
       foreach (T t in collection)
@@ -102,6 +102,14 @@ namespace DSIS.Utils
     public static List<T> AsList<T>(params T[] ts)
     {
       return new List<T>(ts);
+    }
+
+    public static IEnumerable<T> Map<T, Q>(this IEnumerable<Q> en, Converter<Q, T> conv)
+    {
+      foreach (var q in en)
+      {
+        yield return conv(q);
+      }
     }
   }
 }
