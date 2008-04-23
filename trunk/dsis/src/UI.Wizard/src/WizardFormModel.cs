@@ -25,7 +25,7 @@ namespace DSIS.UI.Wizard
       {
         myPage = page;
         Prev = prev;
-        myControl = page.CreateControl();
+        myControl = page.Control;
       }
     }
   }
