@@ -9,11 +9,12 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
   public class EigenEntropyEvaluatorImpl<T>
     where T : ICellCoordinate
   {
-    private readonly double myEps;
-    private readonly int myMaxSteps = 1000;
+    private const int myMaxSteps = 1000;
 
+    private readonly double myEps;
+    
     private readonly IGraph<T> myGraph;
-    private double? myEntropy = null;
+    private double? myEntropy;
 
     public EigenEntropyEvaluatorImpl(double eps, IGraph<T> graph)
     {
@@ -75,12 +76,12 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
     private static Pair<double, Dictionary<INode<T>, double>> Multiply(double div, IGraph<T> graph,
                                                                        IDictionary<INode<T>, double> v)
     {
-      Dictionary<INode<T>, double> v2 = Create(graph);
+      var v2 = Create(graph);
       double norm = 0;
-      foreach (INode<T> node in graph.Nodes)
+      foreach (var node in graph.Nodes)
       {
         double t = 0;
-        foreach (INode<T> edge in graph.GetEdges(node))
+        foreach (var edge in graph.GetEdges(node))
         {
           t += v[edge]; //* 1
         }
@@ -98,8 +99,8 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
 
     private static Dictionary<INode<T>, double> Create(IGraph<T> graph, double v)
     {
-      Dictionary<INode<T>, double> vs = Create(graph);
-      foreach (INode<T> node in graph.Nodes)
+      var vs = Create(graph);
+      foreach (var node in graph.Nodes)
       {
         vs[node] = v;
       }
