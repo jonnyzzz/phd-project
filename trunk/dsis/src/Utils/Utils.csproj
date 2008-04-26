@@ -73,6 +73,7 @@
     <Compile Include="src\BinTreePriorityQueueEx.cs" />
     <Compile Include="src\BinTreePriorityQueueExDebug.cs" />
     <Compile Include="src\CollectionUtil.cs" />
+    <Compile Include="src\CollectionWriter.cs" />
     <Compile Include="src\ConvertEnumerator.cs" />
     <Compile Include="src\GCHelper.cs" />
     <Compile Include="src\GenericHelper.cs" />

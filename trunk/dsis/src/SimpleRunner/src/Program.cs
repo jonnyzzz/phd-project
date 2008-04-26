@@ -116,9 +116,9 @@ namespace DSIS.SimpleRunner
 
       var parallel = new SimpleParallel();
 
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 6, systenLogistic3569, 1).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 6, systenLogistic4, 1).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 6, systemHenon, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
 //      }
       /*for (int steps = 8; steps <= 15; steps++)
@@ -139,7 +139,7 @@ namespace DSIS.SimpleRunner
     private static T[] Fill<T>(T t, int dim)
     {
       var tt = new T[dim];
-      for (int i = 0; i < dim; i++)
+      for (var i = 0; i < dim; i++)
       {
         tt[i] = t;
       }
@@ -274,7 +274,7 @@ namespace DSIS.SimpleRunner
                                                                           };
 
 
-                               foreach (StrangeEntropyEvaluatorParams evaluatorParams in entropys)
+/*                               foreach (StrangeEntropyEvaluatorParams evaluatorParams in entropys)
                                {
                                  entropies.Add(new AgregateAction(
                                                  delegate(IActionGraphPartBuilder bld)
@@ -291,7 +291,7 @@ namespace DSIS.SimpleRunner
                                                      bld.AddEdge(entropy, bld.End);
                                                      bld.AddEdge(new SetStrangeEntropyParamsAction(evaluatorParams), entropy);
                                                    }), evaluatorParams.PresentableName);
-                               }
+                               }*/
 //                               entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
                                entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction())), "JVR");
                                entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new EigenEntropyAction())), "Eigen");
@@ -339,6 +339,7 @@ namespace DSIS.SimpleRunner
 
                                         IAction drawEntropy =
                                           new ParallelAction(
+                                            new DumpGraphAsMatrixForMapleAction(),
 //                                            new DumpEntropyParamsAction(),
 //                                            new DumpEntropyValueAction(),
 //                                            new DrawEntropyMeasure3dAction(),

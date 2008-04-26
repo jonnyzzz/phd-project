@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Core.Util;
 using DSIS.Graph;
-using DSIS.Graph.Abstract;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
@@ -24,12 +23,12 @@ namespace DSIS.Scheme.Impl.Actions
 
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
-      IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
-      int index = 0;
+      var comps = Keys.GraphComponents<Q>().Get(input);
+      var index = 0;
       foreach (var _info in comps.Components)
       {
         var info = _info;
-        ActionGraph ag = new ActionGraph();
+        var ag = new ActionGraph();
 
         var dIndex = index;
         var ac = new UpdateContextAction(

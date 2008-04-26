@@ -20,13 +20,13 @@ namespace DSIS.Scheme.Impl.Actions.Console
 
     protected sealed override void Apply<T, Q>(T system, Context input, Context output)
     {
-      IGraphMeasure<Q> measure = Keys.GraphMeasure<Q>().Get(input);
-      WorkingFolderInfo folder = FileKeys.WorkingFolderKey.Get(input);
+      var measure = Keys.GraphMeasure<Q>().Get(input);
+      var folder = FileKeys.WorkingFolderKey.Get(input);
 
       string name = folder.CreateFileNameFromTemplate("measure-log-{0}");
 
-      List<Pair<PairBase<Q>, double>> data = new List<Pair<PairBase<Q>, double>>(measure.Measure);
-      Dictionary<Q, int> enu = new Dictionary<Q, int>();
+      var data = new List<Pair<PairBase<Q>, double>>(measure.Measure);
+      var enu = new Dictionary<Q, int>();
 
       int cnt = 0;
       foreach (Pair<PairBase<Q>, double> pair in data)
@@ -55,7 +55,7 @@ namespace DSIS.Scheme.Impl.Actions.Console
       {
         tw.WriteLine("Edges: {0}, Nodes: {1}", data.Count, enu.Count);
         tw.WriteLine();
-        foreach (Pair<PairBase<Q>, double> pair in data)
+        foreach (var pair in data)
         {
           tw.WriteLine("{0}->{1} : {2}", enu[pair.First.From], enu[pair.First.To], pair.Second.ToString("R", CultureInfo.InvariantCulture));
         }

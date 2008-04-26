@@ -59,7 +59,7 @@ namespace DSIS.Graph
 
     public IEnumerable<IStrongComponentInfo> Components
     {
-      get { return new IStrongComponentInfo[] { myComponent }; }
+      get { return new[] { myComponent }; }
     }
 
     public int ComponentCount

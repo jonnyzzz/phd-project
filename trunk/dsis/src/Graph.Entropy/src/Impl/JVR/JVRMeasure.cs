@@ -8,9 +8,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   public class JVRMeasure<T>
     where T : ICellCoordinate
   {
-    protected HashHolder<T> myHashHolder;
-    protected ArcDirection<T> myStraitEdges;
-    protected ArcDirection<T> myBackEdges;
+    protected readonly HashHolder<T> myHashHolder;
+    protected readonly ArcDirection<T> myStraitEdges;
+    protected readonly ArcDirection<T> myBackEdges;
 
     private readonly IGraph<T> myGraph;
     private readonly IGraphStrongComponents<T> myComponents;

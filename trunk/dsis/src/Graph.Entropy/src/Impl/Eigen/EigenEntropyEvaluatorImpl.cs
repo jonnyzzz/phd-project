@@ -9,7 +9,7 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
   public class EigenEntropyEvaluatorImpl<T>
     where T : ICellCoordinate
   {
-    private const int myMaxSteps = 1000;
+    private const int myMaxSteps = 10000;
 
     private readonly double myEps;
     
@@ -42,7 +42,7 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
 
     private double DoCompute()
     {
-      int steps = myMaxSteps;
+      var steps = myMaxSteps;
       double? maxEntropy = 0;
 
       double eigen = -1;
