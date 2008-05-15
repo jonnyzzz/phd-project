@@ -75,6 +75,7 @@
     <Compile Include="src\CollectionUtil.cs" />
     <Compile Include="src\CollectionWriter.cs" />
     <Compile Include="src\ConvertEnumerator.cs" />
+    <Compile Include="src\DisposableWrapper.cs" />
     <Compile Include="src\GCHelper.cs" />
     <Compile Include="src\GenericHelper.cs" />
     <Compile Include="src\InfiniteEnumerable.cs" />

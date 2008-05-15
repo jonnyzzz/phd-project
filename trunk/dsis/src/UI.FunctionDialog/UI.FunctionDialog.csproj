@@ -48,11 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\SapceControl.cs">
+    <Compile Include="src\SpaceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="src\SapceControl.Designer.cs">
-      <DependentUpon>SapceControl.cs</DependentUpon>
+    <Compile Include="src\SpaceControl.Designer.cs">
+      <DependentUpon>SpaceControl.cs</DependentUpon>
     </Compile>
     <Compile Include="src\SpaceModel.cs" />
     <Compile Include="src\SpaceParametersRow.cs">
@@ -71,8 +71,8 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\SapceControl.resx">
-      <DependentUpon>SapceControl.cs</DependentUpon>
+    <EmbeddedResource Include="src\SpaceControl.resx">
+      <DependentUpon>SpaceControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\SpaceParametersRow.resx">
@@ -83,6 +83,16 @@
       <DependentUpon>SystemFunctionForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UI\UI.csproj">
+      <Project>{5410F9D5-9D98-44CF-9518-CE5374CE4B22}</Project>
+      <Name>UI %28UI\UI%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

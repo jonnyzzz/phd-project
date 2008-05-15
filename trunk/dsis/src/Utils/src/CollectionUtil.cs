@@ -28,7 +28,7 @@ namespace DSIS.Utils
       where T1 : TZ
       where T2 : TZ
     {
-      List<TZ> list = new List<TZ>();
+      var list = new List<TZ>();
       foreach (T1 t1 in c1)
       {
         list.Add(t1);
@@ -109,6 +109,33 @@ namespace DSIS.Utils
       foreach (var q in en)
       {
         yield return conv(q);
+      }
+    }
+
+    private static bool AndEval(bool b1, bool b2)
+    {
+      return b1 && b2;
+    }
+
+    public static void Zip<T,Q>(IEnumerable<T> ts, IEnumerable<Q> qs, Zip<T,Q> zip)
+    {
+      var te = ts.GetEnumerator();
+      var qe = qs.GetEnumerator();
+
+      TDelegate<bool> hasMore = delegate
+                                        {
+                                          var tb = te.MoveNext();
+                                          var qb = qe.MoveNext();
+
+                                          if (tb != qb)
+                                            throw new ArgumentException("collections should be the same length");
+
+                                          return tb & qb;
+                                        };
+
+      while (hasMore())
+      {
+        zip(te.Current, qe.Current);
       }
     }
   }

@@ -83,6 +83,10 @@
       <Project>{C8FBFBAF-B2DF-49FA-B428-6BC429658BB5}</Project>
       <Name>UI.FunctionDialog</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UI\UI.csproj">
+      <Project>{5410F9D5-9D98-44CF-9518-CE5374CE4B22}</Project>
+      <Name>UI %28UI\UI%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

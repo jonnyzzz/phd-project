@@ -1,6 +1,6 @@
 ﻿namespace DSIS.UI.FunctionDialog
 {
-  partial class SapceControl
+  partial class SpaceControl
   {
     /// <summary> 
     /// Required designer variable.
@@ -83,6 +83,7 @@
             0,
             0});
       this.myDimension.Name = "myDimension";
+      this.myDimension.ReadOnly = true;
       this.myDimension.Size = new System.Drawing.Size(120, 20);
       this.myDimension.TabIndex = 1;
       this.myDimension.Value = new decimal(new int[] {
@@ -92,14 +93,14 @@
             0});
       this.myDimension.ValueChanged += new System.EventHandler(this.myDimension_ValueChanged);
       // 
-      // SapceControl
+      // SpaceControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.Controls.Add(myGroupBoxSpaceInformation);
       this.Controls.Add(this.myDimension);
       this.Controls.Add(label1);
-      this.Name = "SapceControl";
+      this.Name = "SpaceControl";
       this.Size = new System.Drawing.Size(481, 277);
       myGroupBoxSpaceInformation.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.myDimension)).EndInit();

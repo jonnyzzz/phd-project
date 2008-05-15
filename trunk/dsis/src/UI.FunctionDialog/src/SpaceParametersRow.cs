@@ -5,14 +5,19 @@ namespace DSIS.UI.FunctionDialog
 {
   public partial class SpaceParametersRow : UserControl
   {
-    private readonly SpaceParametersRowModel myModel;
-    
+    private SpaceParametersRowModel myModel;
+
+
+    public SpaceParametersRowModel Model
+    {
+      get { return myModel; }
+      set { myModel = value; Synch();}
+    }
 
     public SpaceParametersRow(SpaceParametersRowModel model)
     {
-      myModel = model;
       InitializeComponent();
-      Synch();
+      Model = model;
     }
 
     private void Synch()

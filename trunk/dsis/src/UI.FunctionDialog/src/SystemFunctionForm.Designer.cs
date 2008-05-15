@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.mySpaceInfo = new DSIS.UI.FunctionDialog.SapceControl();
+      this.mySpaceInfo = new DSIS.UI.FunctionDialog.SpaceControl();
       this.SuspendLayout();
       // 
       // mySpaceInfo
@@ -38,15 +38,16 @@
                   | System.Windows.Forms.AnchorStyles.Right)));
       this.mySpaceInfo.Location = new System.Drawing.Point(12, 12);
       this.mySpaceInfo.Name = "mySpaceInfo";
-      this.mySpaceInfo.Size = new System.Drawing.Size(720, 421);
+      this.mySpaceInfo.Size = new System.Drawing.Size(494, 207);
       this.mySpaceInfo.TabIndex = 0;
       // 
       // SystemFunctionForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(744, 445);
+      this.ClientSize = new System.Drawing.Size(518, 231);
       this.Controls.Add(this.mySpaceInfo);
+      this.MinimumSize = new System.Drawing.Size(520, 265);
       this.Name = "SystemFunctionForm";
       this.Text = "SystemFunctionForm";
       this.ResumeLayout(false);
@@ -55,6 +56,6 @@
 
     #endregion
 
-    private SapceControl mySpaceInfo;
+    private SpaceControl mySpaceInfo;
   }
 }
