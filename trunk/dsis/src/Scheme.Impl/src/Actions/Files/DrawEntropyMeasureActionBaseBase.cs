@@ -25,6 +25,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
     {
       get { return 2; }
     }
+
     protected GnuplotPointsFileWriter WriteMeasureFile<T, Q>(string measureFile, IGraphMeasure<Q> measure, T system)
       where Q : IIntegerCoordinate
       where T : IIntegerCoordinateSystem<Q>

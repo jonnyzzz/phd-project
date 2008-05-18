@@ -28,10 +28,10 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       var ps = CreateProperties(measure, outputFile);
 
-      var gen = new GnuplotEntropy3dWithBaseScriptGen(info.CreateFileName("measure_base.gnuplot"), ps);
+      IGnuplotEntropyScriptGen gen = CreateScriptGen(info.CreateFileName("measure_base.gnuplot"), ps);
 
       GnuplotPointsFileWriter bs;
-      using (bs = new GnuplotPointsFileWriter(info.CreateFileName("measure_base_vbase.data"), 2))
+      using (bs = new GnuplotPointsFileWriter(info.CreateFileName("measure_base_vbase.data"), SystemDimension))
       {
         var data = new double[SystemDimension];
         foreach (Q q in components.GetCoordinates(new List<IStrongComponentInfo>(components.Components)))
@@ -47,5 +47,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       var drw = new GnuplotDrawer.GnuplotDrawer();
       drw.DrawImage(gen);
     }
+
+    protected abstract IGnuplotEntropyScriptGen CreateScriptGen(string file, GnuplotScriptParameters ps);    
   }
 }

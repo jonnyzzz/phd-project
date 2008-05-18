@@ -27,5 +27,10 @@ namespace DSIS.Scheme.Impl.Actions.Files
     {
       get { return 2; }
     }
+    
+    protected override IGnuplotEntropyScriptGen CreateScriptGen(string file, GnuplotScriptParameters ps)
+    {
+      return new GnuplotEntropy3dWithBaseScriptGen(file, ps);
+    }
   }
 }

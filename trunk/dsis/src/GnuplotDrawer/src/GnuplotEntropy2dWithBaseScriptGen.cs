@@ -2,7 +2,7 @@ using DSIS.Core.Visualization;
 
 namespace DSIS.GnuplotDrawer
 {
-  public class GnuplotEntropy2dWithBaseScriptGen : PngWriterBase, IGnuplotScriptGen
+  public class GnuplotEntropy2dWithBaseScriptGen : PngWriterBase, IGnuplotScriptGen, IGnuplotEntropyScriptGen
   {
     private bool myIsFirstFile = true;
 

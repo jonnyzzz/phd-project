@@ -54,6 +54,7 @@
     <Compile Include="src\GnuplotScriptParameters.cs" />
     <Compile Include="src\GnuplotScriptParameters3d.cs" />
     <Compile Include="src\GnuplotSriptGen.cs" />
+    <Compile Include="src\IGnuplotEntropyScriptGen.cs" />
     <Compile Include="src\IGnuplotScriptGen.cs" />
     <Compile Include="src\LinesScriptGen.cs" />
     <Compile Include="src\MergedGnuplotScriptGen.cs" />

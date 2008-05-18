@@ -17,6 +17,11 @@ namespace DSIS.Scheme.Impl.Actions.Files
       get { return 1; }
     }
 
+    protected override IGnuplotEntropyScriptGen CreateScriptGen(string file, GnuplotScriptParameters ps)
+    {
+      return new GnuplotEntropy2dWithBaseScriptGen(file, ps);
+    }
+
     protected override GnuplotScriptParameters CreateProperties<Q>(IGraphMeasure<Q> measure, string outputFile)
     {
       return new GnuplotScriptParameters(outputFile, string.Format("Entropy = {0}", measure.GetEntropy().ToString("F6")))
