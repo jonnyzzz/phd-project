@@ -7,7 +7,7 @@ namespace DSIS.Scheme.Impl
 {
   public abstract class IntegerCoordinateSystemActionBase2 : IntegerCoordinateSystemActionBase
   {
-    protected new virtual ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected virtual ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
       where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate
     {
@@ -29,7 +29,7 @@ namespace DSIS.Scheme.Impl
       return new Check2(@in, this);
     }
 
-    protected class Check2 : Check
+    private class Check2 : Check
     {
       private readonly IntegerCoordinateSystemActionBase2 myInstance;
 
@@ -45,7 +45,7 @@ namespace DSIS.Scheme.Impl
       }
     }
 
-    protected class With2 : With
+    private class With2 : With
     {
       private readonly IntegerCoordinateSystemActionBase2 myInstance;
 

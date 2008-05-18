@@ -2,15 +2,15 @@ using DSIS.Core.Visualization;
 
 namespace DSIS.GnuplotDrawer
 {
-  public class GnuplotEntropy3dWithBaseScriptGen : PngWriter3dBase, IGnuplotScriptGen
+  public class GnuplotEntropy2dWithBaseScriptGen : PngWriterBase, IGnuplotScriptGen
   {
     private bool myIsFirstFile = true;
 
-    public GnuplotEntropy3dWithBaseScriptGen(string filename, GnuplotScriptParameters @params)
+    public GnuplotEntropy2dWithBaseScriptGen(string filename, GnuplotScriptParameters @params)
       : base(filename, @params)
     {
-      myWriter.WriteLine("set zrange [0.00001:*];");
-      myWriter.Write("splot ");
+      myWriter.WriteLine("set yrange [0.00001:*];");
+      myWriter.Write("plot ");
     }
 
     public void AddPointsFile(GnuplotPointsFileWriter entropy, GnuplotPointsFileWriter @base)
@@ -23,11 +23,11 @@ namespace DSIS.GnuplotDrawer
       string lines = entropy.Filename + ".lines";
       string bases = entropy.Filename + ".bases";
 
-      using (var linesWriter = new GnuplotPointsFileWriter(lines, 3))
+      using (var linesWriter = new GnuplotPointsFileWriter(lines, 2))
       {
         foreach (ImagePoint point in new GnuplotPointsFileReader(entropy.Filename).Read())
         {
-          ImagePoint bs = new ImagePoint(point.Point[0], point.Point[1], 0);
+          var bs = new ImagePoint(point.Point[0], 0);
 
           linesWriter.WritePoint(bs);
           linesWriter.WritePoint(point);
@@ -35,11 +35,11 @@ namespace DSIS.GnuplotDrawer
         }
       }
 
-      using (GnuplotPointsFileWriter zeroPlane = new GnuplotPointsFileWriter(bases, 3))
+      using (var zeroPlane = new GnuplotPointsFileWriter(bases, 2))
       {
         foreach (ImagePoint point in new GnuplotPointsFileReader(@base.Filename).Read())
         {
-          ImagePoint bs = new ImagePoint(point.Point[0], point.Point[1], 0.00002);
+          var bs = new ImagePoint(point.Point[0], 0.00002);
 
           zeroPlane.WritePoint(bs);
         }

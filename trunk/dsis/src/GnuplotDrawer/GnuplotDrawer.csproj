@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CA14A441-039B-49F2-B678-9491146C56A1}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -43,6 +43,7 @@
     <Compile Include="src\Gnuplot1dScriptGen.cs" />
     <Compile Include="src\Gnuplot2dScriptGen.cs" />
     <Compile Include="src\Gnuplot3dScriptGen.cs" />
+    <Compile Include="src\GnuplotEntropy2dWithBaseScriptGen.cs" />
     <Compile Include="src\GnuplotEntropy3dScriptGen.cs" />
     <Compile Include="src\GnuplotEntropy3dWithBaseScriptGen.cs" />
     <Compile Include="src\GnuplotEntropyScriptGen.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="src\GnuplotPointsFileReader.cs" />
     <Compile Include="src\GnuplotPointsFileWriter.cs" />
     <Compile Include="src\GnuplotScriptParameters.cs" />
+    <Compile Include="src\GnuplotScriptParameters3d.cs" />
     <Compile Include="src\GnuplotSriptGen.cs" />
     <Compile Include="src\IGnuplotScriptGen.cs" />
     <Compile Include="src\LinesScriptGen.cs" />

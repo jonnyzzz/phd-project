@@ -22,7 +22,7 @@ namespace DSIS.GnuplotDrawer
         string line;
         while ((line = tw.ReadLine()) != null)
         {
-          string[] digs = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+          string[] digs = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
           yield return new ImagePoint(Parse(digs));
         }
       }
@@ -30,7 +30,7 @@ namespace DSIS.GnuplotDrawer
 
     private static double[] Parse(string[] data)
     {
-      double[] result = new double[data.Length];
+      var result = new double[data.Length];
       for(int i=0; i<data.Length; i++)
       {
         result[i] = double.Parse(data[i], CultureInfo.GetCultureInfo("en-us"));

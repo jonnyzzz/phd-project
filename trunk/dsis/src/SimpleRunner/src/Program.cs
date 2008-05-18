@@ -57,10 +57,12 @@ namespace DSIS.SimpleRunner
                                                                   ISimpleAction wf =
                                                                     new CustomPrefixWorkingFolderAction((++v).ToString());
                                                                   ISimpleAction draw2 = new DrawLineAction();
+                                                                  DumpLineAction dumpLineAction = new DumpLineAction();
 
                                                                   bld.AddEdge(bld.Start, act);
-                                                                  bld.AddEdge(act, bld.End);
-                                                                  bld.AddEdge(act, new DumpLineAction());
+                                                                  bld.AddEdge(act, bld.End);                                                                  
+                                                                  bld.AddEdge(wf, dumpLineAction);
+                                                                  bld.AddEdge(act, dumpLineAction);
                                                                   bld.AddEdge(bld.Start, wf);
                                                                   bld.AddEdge(wf, draw2);
                                                                   bld.AddEdge(act, draw2);
@@ -116,9 +118,9 @@ namespace DSIS.SimpleRunner
 
       var parallel = new SimpleParallel();
 
-      parallel.DoParallel(new ComputeDelegate(wfBase, 6, systenLogistic3569, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 6, systenLogistic4, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 6, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 11, systenLogistic3569, 1).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 11, systenLogistic4, 1).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
 //      }
       /*for (int steps = 8; steps <= 15; steps++)
@@ -339,7 +341,8 @@ namespace DSIS.SimpleRunner
 
                                         IAction drawEntropy =
                                           new ParallelAction(
-                                            new DumpGraphAsMatrixForMapleAction(),
+//                                            new DumpGraphAsMatrixForMa  pleAction(),
+                                            new DrawEntropyMeasureWithBaseAction(),
 //                                            new DumpEntropyParamsAction(),
 //                                            new DumpEntropyValueAction(),
 //                                            new DrawEntropyMeasure3dAction(),

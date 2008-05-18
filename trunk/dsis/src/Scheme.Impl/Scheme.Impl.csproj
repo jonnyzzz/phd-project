@@ -71,11 +71,15 @@
     <Compile Include="src\Actions\Entropy\StrangeEntropyAction.cs" />
     <Compile Include="src\Actions\Files\CustomPrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\DrawChainRecurrentAction.cs" />
+    <Compile Include="src\Actions\Files\DrawEntropy2dActionBase.cs" />
     <Compile Include="src\Actions\Files\DrawEntropy3dActionBase.cs" />
+    <Compile Include="src\Actions\Files\DrawEntropyMeasure2dWithBaseAction.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasure3d.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasure3dWithBaseAction.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasureActionBase.cs" />
+    <Compile Include="src\Actions\Files\DrawEntropyMeasureActionBaseBase.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasureColorMapAction.cs" />
+    <Compile Include="src\Actions\Files\DrawEntropyMeasureWithBaseAction.cs" />
     <Compile Include="src\Actions\Files\DrawLineAction.cs" />
     <Compile Include="src\Actions\Files\DumpEntropyLogAction.cs" />
     <Compile Include="src\Actions\Files\FileKeys.cs" />
