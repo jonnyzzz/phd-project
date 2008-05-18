@@ -38,14 +38,14 @@
                   | System.Windows.Forms.AnchorStyles.Right)));
       this.mySpaceInfo.Location = new System.Drawing.Point(12, 12);
       this.mySpaceInfo.Name = "mySpaceInfo";
-      this.mySpaceInfo.Size = new System.Drawing.Size(494, 207);
+      this.mySpaceInfo.Size = new System.Drawing.Size(494, 306);
       this.mySpaceInfo.TabIndex = 0;
       // 
       // SystemFunctionForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(518, 231);
+      this.ClientSize = new System.Drawing.Size(518, 330);
       this.Controls.Add(this.mySpaceInfo);
       this.MinimumSize = new System.Drawing.Size(520, 265);
       this.Name = "SystemFunctionForm";
