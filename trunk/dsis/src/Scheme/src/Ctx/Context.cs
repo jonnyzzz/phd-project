@@ -71,8 +71,8 @@ namespace DSIS.Scheme.Ctx
 
     public override string ToString()
     {
-      StringBuilder sb = new StringBuilder();
-      foreach (KeyValuePair<KeyWrapper, object> pair in myContext)
+      var sb = new StringBuilder();
+      foreach (var pair in myContext)
       {
         sb.AppendFormat("Key: " + pair.Key).AppendLine();
       }

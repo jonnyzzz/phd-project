@@ -32,8 +32,7 @@ namespace DSIS.Graph.Entropy.Tests
 
       public double Edge(IntegerCoordinate from, IntegerCoordinate to)
       {
-        JVRPair<IntegerCoordinate> ft = new JVRPair<IntegerCoordinate>(from, to);
-
+        var ft = new JVRPair<IntegerCoordinate>(from, to);
         return myHashHolder.GetItem(ft);
       }
 

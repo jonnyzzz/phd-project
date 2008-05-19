@@ -1,5 +1,6 @@
 using System;
 using DSIS.UI.Application;
+using DSIS.UI.FunctionDialog;
 using DSIS.UI.Wizard;
 
 namespace DSIS.UI.Application
@@ -15,9 +16,9 @@ namespace DSIS.UI.Application
       System.Windows.Forms.Application.EnableVisualStyles();
       System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
       System.Windows.Forms.Application.Run(
-        new WizardForm(
-          new SimpleWizard(new[]
-                             {new EmptyWizardPage(), new EmptyWizardPage()}){Title = "ZZZ"}) /*new MainForm()*/);
+        new WizardForm(new SystemFunctionSelectionWizard()));
+//          new SimpleWizard(new[]
+//                             {new EmptyWizardPage(), new EmptyWizardPage()}){Title = "ZZZ"}) /*new MainForm()*/);
     }
   }
 }

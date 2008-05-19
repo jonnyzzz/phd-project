@@ -47,7 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\BoolErrorProviderHelper.cs" />
     <Compile Include="src\ControlUtils.cs" />
+    <Compile Include="src\ErrorProviderHelper.cs" />
+    <Compile Include="src\IErrorProvider.cs" />
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

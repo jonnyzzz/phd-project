@@ -54,6 +54,7 @@
     <Compile Include="src\SpaceControl.Designer.cs">
       <DependentUpon>SpaceControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\SpaceControlWizardPage.cs" />
     <Compile Include="src\SpaceModel.cs" />
     <Compile Include="src\SpaceParametersRow.cs">
       <SubType>UserControl</SubType>
@@ -68,6 +69,7 @@
     <Compile Include="src\SystemFunctionForm.Designer.cs">
       <DependentUpon>SystemFunctionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\SystemFunctionSelectionWizard.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +87,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UI.Wizard\UI.Wizard.csproj">
+      <Project>{F08FC04F-28A4-4A97-80CB-7F3867C8244B}</Project>
+      <Name>UI.Wizard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UI\UI.csproj">
       <Project>{5410F9D5-9D98-44CF-9518-CE5374CE4B22}</Project>
       <Name>UI %28UI\UI%29</Name>

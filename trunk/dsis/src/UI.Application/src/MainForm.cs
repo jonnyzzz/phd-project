@@ -1,5 +1,5 @@
-﻿using System.Windows.Forms;
-using DSIS.UI.FunctionDialog.src;
+using System.Windows.Forms;
+using DSIS.UI.FunctionDialog;
 
 namespace DSIS.UI.Application
 {

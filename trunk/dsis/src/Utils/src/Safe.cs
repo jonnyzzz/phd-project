@@ -23,5 +23,10 @@ namespace DSIS.Utils
     {
       action(obj);
     }
+
+    public T Safe<T>(TDelegate<T> del)
+    {
+      return del();
+    }
   }
 }

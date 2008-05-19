@@ -1,4 +1,4 @@
-﻿namespace DSIS.UI.FunctionDialog.src
+namespace DSIS.UI.FunctionDialog
 {
   partial class SystemFunctionForm
   {
@@ -34,8 +34,8 @@
       // mySpaceInfo
       // 
       this.mySpaceInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                  | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+                                                                       | System.Windows.Forms.AnchorStyles.Left)
+                                                                      | System.Windows.Forms.AnchorStyles.Right)));
       this.mySpaceInfo.Location = new System.Drawing.Point(12, 12);
       this.mySpaceInfo.Name = "mySpaceInfo";
       this.mySpaceInfo.Size = new System.Drawing.Size(494, 306);

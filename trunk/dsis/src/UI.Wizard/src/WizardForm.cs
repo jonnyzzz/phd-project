@@ -63,6 +63,8 @@ namespace DSIS.UI.Wizard
 
     private void ShowPage(IWizardPage page, IWizardPage prevPage)
     {
+      myButtonsTimer.Enabled = false;
+
       if (prevPage != null)
         ErrorHandler.Safe(prevPage.ControlHidden);
 
@@ -76,7 +78,7 @@ namespace DSIS.UI.Wizard
         Panel panel;
         if (!myCachedViwes.TryGetValue(page, out panel))
         {
-          panel = new Panel {Dock = DockStyle.Fill, BackColor = Color.Red};
+          panel = new Panel { Dock = DockStyle.Fill };
           var pageContent = page.Control;
           pageContent.Dock = DockStyle.Fill;
           panel.Controls.Add(pageContent);
@@ -90,12 +92,31 @@ namespace DSIS.UI.Wizard
           panel.Visible = panel.Enabled = true;
         }
 
-        myHeader.SecondaryTitle = page.Title;
-        myButtons.ButtonFinish.Enabled = myPack.IsLastPage(page);
-        myButtons.ButtonNext.Enabled = myPack.Next(page) != null;
-        myButtons.ButtonBack.Enabled = myPages.Count > 1;
+        UpdateButtonState(page);
       }
       ErrorHandler.Safe(page.ControlShown);
+
+      myButtonsTimer.Enabled = true;
+    }
+
+    private void UpdateButtonState(IWizardPage page)
+    {
+      bool status = ErrorHandler.Safe<bool>(page.Validate);
+
+      myHeader.SecondaryTitle = page.Title;
+      myButtons.ButtonFinish.Enabled = status && myPack.IsLastPage(page);
+      myButtons.ButtonNext.Enabled = status && myPack.Next(page) != null;
+      myButtons.ButtonBack.Enabled = myPages.Count > 1;            
+    }
+
+    private void myButtonsTimer_Tick(object sender, EventArgs e)
+    {
+      if (myPages.Count > 0)
+      {
+        myButtonsTimer.Enabled = false;
+        UpdateButtonState(myPages.Peek());
+        myButtonsTimer.Enabled = true;
+      }
     }
   }
 }

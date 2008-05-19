@@ -1,23 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using DSIS.UI.UI;
 
 namespace DSIS.UI.FunctionDialog
 {
-  public partial class SpaceParametersRow : UserControl
+  public partial class SpaceParametersRow : UserControl, IErrorProvider<bool>
   {
     private SpaceParametersRowModel myModel;
-
-
-    public SpaceParametersRowModel Model
-    {
-      get { return myModel; }
-      set { myModel = value; Synch();}
-    }
+    private readonly List<Control> myErrors = new List<Control>();
 
     public SpaceParametersRow(SpaceParametersRowModel model)
     {
       InitializeComponent();
       Model = model;
+    }
+
+    public SpaceParametersRowModel Model
+    {
+      get { return myModel; }
+      set { myModel = value; Synch(); }
     }
 
     private void Synch()
@@ -73,10 +75,12 @@ namespace DSIS.UI.FunctionDialog
       string error;
       if (!(parse(box.Text, out v, out error)))
       {
+        myErrors.Add(box);
         myErrorProvider.SetError(box, error);
       }
       else
       {
+        myErrors.Remove(box);
         myErrorProvider.SetError(box, null);
         set(v);
       }
@@ -95,6 +99,11 @@ namespace DSIS.UI.FunctionDialog
     private void myGrid_TextChanged(object sender, EventArgs e)
     {
       TrySetValue(myGrid, delegate(long x) { myModel.Grid = x; }, Parse);
+    }
+
+    bool IErrorProvider<bool>.Validate()
+    {
+      return myErrors.Count == 0;
     }
   }
 }

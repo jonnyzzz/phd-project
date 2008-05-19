@@ -28,11 +28,13 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       System.Windows.Forms.Panel myHeaderPanel;
       System.Windows.Forms.Panel myButtonsPanel;
       this.myHeader = new DSIS.UI.Wizard.HeaderControl();
-      this.myMiddleContainer = new System.Windows.Forms.Panel();
       this.myButtons = new DSIS.UI.Wizard.src.ButtonsControl();
+      this.myMiddleContainer = new System.Windows.Forms.Panel();
+      this.myButtonsTimer = new System.Windows.Forms.Timer(this.components);
       myHeaderPanel = new System.Windows.Forms.Panel();
       myButtonsPanel = new System.Windows.Forms.Panel();
       myHeaderPanel.SuspendLayout();
@@ -61,15 +63,6 @@
       this.myHeader.Size = new System.Drawing.Size(500, 71);
       this.myHeader.TabIndex = 0;
       // 
-      // myMiddleContainer
-      // 
-      this.myMiddleContainer.AutoScroll = true;
-      this.myMiddleContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.myMiddleContainer.Location = new System.Drawing.Point(0, 72);
-      this.myMiddleContainer.Name = "myMiddleContainer";
-      this.myMiddleContainer.Size = new System.Drawing.Size(502, 482);
-      this.myMiddleContainer.TabIndex = 1;
-      // 
       // myButtonsPanel
       // 
       myButtonsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -89,6 +82,19 @@
       this.myButtons.Name = "myButtons";
       this.myButtons.Size = new System.Drawing.Size(324, 29);
       this.myButtons.TabIndex = 0;
+      // 
+      // myMiddleContainer
+      // 
+      this.myMiddleContainer.AutoScroll = true;
+      this.myMiddleContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.myMiddleContainer.Location = new System.Drawing.Point(0, 72);
+      this.myMiddleContainer.Name = "myMiddleContainer";
+      this.myMiddleContainer.Size = new System.Drawing.Size(502, 482);
+      this.myMiddleContainer.TabIndex = 1;
+      // 
+      // myButtonsTimer
+      // 
+      this.myButtonsTimer.Tick += new System.EventHandler(this.myButtonsTimer_Tick);
       // 
       // WizardForm
       // 
@@ -115,6 +121,7 @@
     private HeaderControl myHeader;
     private DSIS.UI.Wizard.src.ButtonsControl myButtons;
     private System.Windows.Forms.Panel myMiddleContainer;
+    private System.Windows.Forms.Timer myButtonsTimer;
 
   }
 }
