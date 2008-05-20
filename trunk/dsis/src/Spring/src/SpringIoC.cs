@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using DSIS.LibraryVersionFixer;
 using DSIS.Spring;
 using DSIS.Utils;
 using log4net;
@@ -30,8 +29,9 @@ namespace DSIS.Spring
                             typeof (NamespaceHolder).Namespace + "/resources.spring.xml";
       myRootContext = new XmlApplicationContext(rootResource);
 
-      Hashset<Assembly> assemblies = new Hashset<Assembly>();
-      List<Assembly> load = new List<Assembly>();
+      var assemblies = new Hashset<Assembly>();
+      var load = new List<Assembly>();
+
       load.AddRange(extra);
       load.Add(GetType().Assembly);
       load.Add(Assembly.GetCallingAssembly());
@@ -50,7 +50,7 @@ namespace DSIS.Spring
         }
       }
 
-      List<string> paths = new List<string>();
+      var paths = new List<string>();
       foreach (Assembly assembly in assemblies)
       {
         string assemblyPath = assembly.GetName().Name;
@@ -67,9 +67,9 @@ namespace DSIS.Spring
 
     private static void ClosureAssemblies(IEnumerable<Assembly> extra, Hashset<Assembly> assemblies)
     {
-      Hashset<Assembly> visit = new Hashset<Assembly>();
-      Hashset<Assembly> visited = new Hashset<Assembly>();
-      Hashset<AssemblyName> visitedNames = new Hashset<AssemblyName>();
+      var visit = new Hashset<Assembly>();
+      var visited = new Hashset<Assembly>();
+      var visitedNames = new Hashset<AssemblyName>();
       
       visit.AddRange(extra);
 
@@ -83,7 +83,7 @@ namespace DSIS.Spring
 
         visited.Add(assembly);
         
-        List<AssemblyName> refAssemblies = new List<AssemblyName>(assembly.GetReferencedAssemblies());
+        var refAssemblies = new List<AssemblyName>(assembly.GetReferencedAssemblies());
 
         foreach (SpringIncludeAssembly includeAssembly in assembly.GetCustomAttributes(typeof(SpringIncludeAssembly), true))
         {
@@ -114,6 +114,17 @@ namespace DSIS.Spring
     public T GetComponent<T>(string name)
     {
       return (T) myContext.GetObject(name, typeof (T));
+    }
+
+    public int Main(string[] args)
+    {
+      var names = myContext.GetObjectNamesForType(typeof(IApplicationEntryPoint));
+      if (names.Length != 1)
+      {
+        throw new ArgumentException(typeof(IApplicationEntryPoint).FullName + " class should be defined only once");
+      }
+
+      return GetComponent<IApplicationEntryPoint>(names[0]).Main(args);
     }
 
     protected internal static void SetInsance(SpringIoC instance)

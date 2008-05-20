@@ -28,7 +28,7 @@ namespace DSIS.Utils
       }
     }
 
-    public List<TV> GetValue(TK k)
+    public List<TV> GetValues(TK k)
     {
       List<TV> list;
       return TryGetValue(k, out list) ? list : new List<TV>();
@@ -43,8 +43,7 @@ namespace DSIS.Utils
       }
       else
       {
-        l = new List<TV>(2);
-        l.Add(v);
+        l = new List<TV>(2) {v};
         base[k] = l;
       }
     }

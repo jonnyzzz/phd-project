@@ -1,5 +1,5 @@
 using System;
-using DSIS.UI.Application;
+using DSIS.Spring;
 using DSIS.UI.FunctionDialog;
 using DSIS.UI.Wizard;
 
@@ -11,14 +11,12 @@ namespace DSIS.UI.Application
     /// The main entry point for the application.
     /// </summary>
     [STAThread]
-    private static void Main()
+    private static int Main(string[] args)
     {
-      System.Windows.Forms.Application.EnableVisualStyles();
-      System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-      System.Windows.Forms.Application.Run(
-        new WizardForm(new SystemFunctionSelectionWizard()));
-//          new SimpleWizard(new[]
-//                             {new EmptyWizardPage(), new EmptyWizardPage()}){Title = "ZZZ"}) /*new MainForm()*/);
+      Log4NetConfigurator.SetUp();
+      SpringIoCSetup.SetUp();
+
+      return SpringIoC.Instance.Main(args);      
     }
   }
 }

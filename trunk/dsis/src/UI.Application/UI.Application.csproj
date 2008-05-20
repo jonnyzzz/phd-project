@@ -6,18 +6,20 @@
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{0A091EAB-F110-4CEC-9DEF-0A8E966641C8}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DSIS.UI.Application</RootNamespace>
     <AssemblyName>DSIS.UI.Application</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,12 +27,16 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -41,13 +47,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Actions\ActionDescriptor.cs" />
+    <Compile Include="src\Actions\ActionDescriptorXmlAttributre.cs" />
+    <Compile Include="src\Actions\ActionPresentationManager.cs" />
+    <Compile Include="src\Actions\BuildingActionPresentationManager.cs" />
+    <Compile Include="src\Actions\IActionHandler.cs" />
     <Compile Include="src\Actions\IActionManager.cs" />
+    <Compile Include="src\Actions\IActionPresentationManager.cs" />
+    <Compile Include="src\Actions\IMainMenuFactory.cs" />
+    <Compile Include="src\Actions\ToolStripMenuItemPresentationManager.cs" />
+    <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
+    <Compile Include="src\ApplicationClass.cs" />
+    <Compile Include="src\IMainForm.cs" />
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="src\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\MainFormProxy.cs" />
+    <Compile Include="src\NamespaceHolder.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -79,6 +98,10 @@
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
       <Name>Scheme</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Spring\Spring.csproj">
+      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
+      <Name>Spring</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UI.FunctionDialog\UI.FunctionDialog.csproj">
       <Project>{C8FBFBAF-B2DF-49FA-B428-6BC429658BB5}</Project>
       <Name>UI.FunctionDialog</Name>
@@ -91,6 +114,16 @@
       <Project>{5410F9D5-9D98-44CF-9518-CE5374CE4B22}</Project>
       <Name>UI %28UI\UI%29</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\MainMenu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\Spring.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

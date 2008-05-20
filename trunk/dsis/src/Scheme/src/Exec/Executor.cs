@@ -50,7 +50,7 @@ namespace DSIS.Scheme.Exec
         if (myDoneActions.Contains(wrapper))
           continue;
 
-        List<ActionWrapper> deps = myBackEdges.GetValue(wrapper);
+        List<ActionWrapper> deps = myBackEdges.GetValues(wrapper);
         if (myDoneActions.ContainsRange(deps))
         {
           Context cx = new Context();
@@ -72,7 +72,7 @@ namespace DSIS.Scheme.Exec
 
           foreach (ActionWrapper act in new List<ActionWrapper>(myPendingContexts.Keys))
           {
-            if (myDoneActions.ContainsRange(myStraitEdges.GetValue(act)))
+            if (myDoneActions.ContainsRange(myStraitEdges.GetValues(act)))
             {
               myPendingContexts.Remove(act);
             }

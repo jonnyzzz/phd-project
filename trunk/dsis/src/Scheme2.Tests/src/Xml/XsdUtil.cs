@@ -5,12 +5,13 @@ namespace DSIS.Scheme2.Tests.Xml
 {
   public class XsdUtil : MockTestBase
   {
-    public static XsdAction Create(Type t)
+    protected static XsdAction Create(Type t)
     {
-      XsdComputationSchemeCode action = new XsdComputationSchemeCode();
-      action.Assembly = t.Assembly.FullName;
-      action.Class = t.FullName;
-      return action;
+      return new XsdComputationSchemeCode
+               {
+                 Assembly = t.Assembly.FullName,
+                 Class = t.FullName
+               };
     }        
   }
 }

@@ -17,7 +17,7 @@ namespace DSIS.Spring
 
     public static void SetUpFiles(params string[] paths)
     {
-      List<Assembly> list = new List<Assembly>();
+      var list = new List<Assembly>();
       foreach (string path in paths)
       {
         list.Add(Assembly.LoadFile(path));

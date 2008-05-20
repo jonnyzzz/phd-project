@@ -5,15 +5,9 @@ using Context=DSIS.Scheme.Ctx.Context;
 
 namespace DSIS.UI.Application.Actions
 {
-  public interface IUIAction
-  {
-    bool Enabled(Context ctx);
-    void Do(Context ctx);    
-  }
-
   public interface IActionManager
   {
-    void RegisterAction(IUIAction action);
+    void RegisterAction(string actionId, string parentActionId, IActionHandler actionHandler);
   }
 
   public interface IContextProvider
@@ -28,7 +22,7 @@ namespace DSIS.UI.Application.Actions
 
   public interface IActionPresentationFactory
   {
-    IActionPresentation CreatePresentation(IUIAction action);
+    IActionPresentation CreatePresentation(IActionHandler actionHandler);
   }
 
   [AttributeUsage(AttributeTargets.Struct|AttributeTargets.Class)]
@@ -38,13 +32,13 @@ namespace DSIS.UI.Application.Actions
   }
   
 
-  public class ActionManager : IActionManager
+  public class ActionManager //: IActionManager
   {
-    private readonly List<IUIAction> myActions = new List<IUIAction>();
+    private readonly List<IActionHandler> myActions = new List<IActionHandler>();
 
-    public void RegisterAction(IUIAction action)
+    public void RegisterAction(IActionHandler actionHandler)
     {
-      myActions.Add(action);
+      myActions.Add(actionHandler);
     }
 
     private void BuildFocusContext(Control control, Context context)
