@@ -3,6 +3,7 @@ using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Scheme2.ObjectParsers;
 using DSIS.Spring;
+using DSIS.Spring.Config;
 
 [assembly: SpringConfigXml("resources.spring.xml", Type=typeof(PointMethodSettingsFactory))]
 

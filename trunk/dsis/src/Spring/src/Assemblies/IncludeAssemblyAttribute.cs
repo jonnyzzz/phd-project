@@ -1,14 +1,14 @@
 using System;
 
-namespace DSIS.Spring
+namespace DSIS.Spring.Assemblies
 {
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-  public class SpringIncludeAssembly : Attribute
+  public class IncludeAssemblyAttribute : Attribute
   {
     private readonly string myAssembly;
 
 
-    public SpringIncludeAssembly(string assembly)
+    public IncludeAssemblyAttribute(string assembly)
     {
       myAssembly = assembly;
     }

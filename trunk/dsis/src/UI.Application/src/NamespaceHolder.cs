@@ -1,4 +1,4 @@
-using DSIS.Spring;
+using DSIS.Spring.Config;
 using DSIS.UI.Application;
 using DSIS.UI.Application.Actions;
 

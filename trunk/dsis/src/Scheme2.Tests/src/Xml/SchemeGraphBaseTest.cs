@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using DSIS.Scheme2.Graph;
 using DSIS.Scheme2.Tests.testData;
-using DSIS.Spring;
 using NUnit.Framework;
 
 namespace DSIS.Scheme2.Tests.Xml
@@ -21,7 +20,7 @@ namespace DSIS.Scheme2.Tests.Xml
     {
       base.SetUp();
       TestGraphRegistry.Clear();
-      myFactory = SpringIoC.Instance.GetComponent<SchemeGraphFactory>("SchemeGraphFactory");
+      myFactory = myServiceProvider.GetService<SchemeGraphFactory>();
     }    
   }
 }

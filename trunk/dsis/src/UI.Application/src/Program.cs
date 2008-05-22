@@ -1,7 +1,5 @@
 using System;
 using DSIS.Spring;
-using DSIS.UI.FunctionDialog;
-using DSIS.UI.Wizard;
 
 namespace DSIS.UI.Application
 {
@@ -13,10 +11,7 @@ namespace DSIS.UI.Application
     [STAThread]
     private static int Main(string[] args)
     {
-      Log4NetConfigurator.SetUp();
-      SpringIoCSetup.SetUp();
-
-      return SpringIoC.Instance.Main(args);      
+      return SpringIoCSetup.AsMain<ApplicationClass>(args);      
     }
   }
 }

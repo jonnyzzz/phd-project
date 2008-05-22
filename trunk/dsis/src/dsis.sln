@@ -109,6 +109,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Wizard", "UI.Wizard\UI.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Application.Test", "UI.Application.Test\UI.Application.Test.csproj", "{74DCA687-4C27-4891-90A7-067B9F4F5B7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring.Tests", "Spring.Tests\Spring.Tests.csproj", "{5F987F37-0034-41B4-9691-F8BCF13AB1BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -307,6 +309,10 @@ Global
 		{74DCA687-4C27-4891-90A7-067B9F4F5B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74DCA687-4C27-4891-90A7-067B9F4F5B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74DCA687-4C27-4891-90A7-067B9F4F5B7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F987F37-0034-41B4-9691-F8BCF13AB1BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F987F37-0034-41B4-9691-F8BCF13AB1BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F987F37-0034-41B4-9691-F8BCF13AB1BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F987F37-0034-41B4-9691-F8BCF13AB1BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

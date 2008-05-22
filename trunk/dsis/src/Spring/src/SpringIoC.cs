@@ -1,141 +1,67 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-using DSIS.Spring;
-using DSIS.Utils;
-using log4net;
+using DSIS.Spring.Assemblies;
+using DSIS.Spring.Config;
 using Spring.Context;
 using Spring.Context.Support;
+using Spring.Objects.Factory;
+using IServiceProvider=DSIS.Spring.Service.IServiceProvider;
 
 namespace DSIS.Spring
 {
-  public class SpringIoC
+  [UsedBySpring]
+  public class SpringIoC : IApplicationContextAware, IInitializingObject, IDisposable
   {
-    private static readonly ILog LOG = LogManager.GetLogger(typeof (SpringIoC));
+    private readonly IServiceProvider myServiceProvider;
+    private IApplicationContext myChildContext;
 
-    private static SpringIoC ourInstance;
+    public IApplicationContext ApplicationContext { get; set; }
 
-    public static SpringIoC Instance
+    public SpringIoC(IServiceProvider serviceProvider)
     {
-      get { return ourInstance; }
+      myServiceProvider = serviceProvider;
     }
 
-    private readonly IApplicationContext myRootContext;
-    private readonly IApplicationContext myContext;
-
-    protected internal SpringIoC(params Assembly[] extra)
+    public void AfterPropertiesSet()
     {
-      string rootResource = "assembly://" + GetType().Assembly.GetName().Name + "/" +
-                            typeof (NamespaceHolder).Namespace + "/resources.spring.xml";
-      myRootContext = new XmlApplicationContext(rootResource);
-
-      var assemblies = new Hashset<Assembly>();
-      var load = new List<Assembly>();
-
-      load.AddRange(extra);
-      load.Add(GetType().Assembly);
-      load.Add(Assembly.GetCallingAssembly());
-      load.Add(Assembly.GetExecutingAssembly());
+      var load = new List<Assembly>
+                   {
+                     typeof (SpringIoCSetup).Assembly,
+                     Assembly.GetCallingAssembly(),
+                     Assembly.GetExecutingAssembly()
+                   };
       load.AddRange(AppDomain.CurrentDomain.GetAssemblies());
-      
-      ClosureAssemblies(load, assemblies);
 
-      assemblies.Remove(GetType().Assembly);
+      var includeManager = myServiceProvider.GetService<IAssemblyIncludeManager>();
+      includeManager.RegisterAssembly(load);
 
-      if (LOG.IsDebugEnabled)
+      myChildContext = new XmlApplicationContext(ApplicationContext,
+                                                 myServiceProvider.GetService<SpringConfigRegistry>().
+                                                   GetSpringConfigPaths().ToArray());
+    }
+
+    public void Dispose()
+    {
+      if (myChildContext != null)
       {
-        foreach (Assembly assembly in assemblies)
-        {
-          LOG.DebugFormat("Spring assembly: {0}", assembly.FullName);
-        }
-      }
-
-      var paths = new List<string>();
-      foreach (Assembly assembly in assemblies)
-      {
-        string assemblyPath = assembly.GetName().Name;
-        foreach (SpringConfigXmlAttribute attr in assembly.GetCustomAttributes(typeof (SpringConfigXmlAttribute), true))
-        {
-          string portion = string.Format("assembly://{0}/{1}/{2}", assemblyPath, attr.Namespace, attr.Location);
-          LOG.InfoFormat("Config: {0}", portion);
-          paths.Add(portion);
-        }
-      }
-
-      myContext = new XmlApplicationContext(myRootContext, paths.ToArray());
-    }
-
-    private static void ClosureAssemblies(IEnumerable<Assembly> extra, Hashset<Assembly> assemblies)
-    {
-      var visit = new Hashset<Assembly>();
-      var visited = new Hashset<Assembly>();
-      var visitedNames = new Hashset<AssemblyName>();
-      
-      visit.AddRange(extra);
-
-      while (visit.Count > 0)
-      {        
-        Assembly assembly = CollectionUtil.GetFirst(visit);
-        visit.Remove(assembly);
-
-        if (visited.Contains(assembly))
-          continue;
-
-        visited.Add(assembly);
-        
-        var refAssemblies = new List<AssemblyName>(assembly.GetReferencedAssemblies());
-
-        foreach (SpringIncludeAssembly includeAssembly in assembly.GetCustomAttributes(typeof(SpringIncludeAssembly), true))
-        {
-          refAssemblies.Add(new AssemblyName(includeAssembly.Assembly));
-        }
-
-        foreach (AssemblyName name in refAssemblies)
-        {          
-          if (visitedNames.Contains(name))
-            continue;
-          visitedNames.Add(name);
-
-          try
-          {
-            Assembly reference = Assembly.Load(name);
-            if (reference != null && !assemblies.Contains(reference))
-              visit.Add(reference);
-          }
-          catch (Exception e)
-          {
-             LOG.Error(e.Message, e);
-          }
-        }
-        assemblies.Add(assembly);
+        myChildContext.Dispose();
+        myChildContext = null;
       }
     }
 
-    public T GetComponent<T>(string name)
-    {
-      return (T) myContext.GetObject(name, typeof (T));
-    }
 
-    public int Main(string[] args)
+    public int AsMain<Q>(string[] args, params Assembly[] extra)
+      where Q : IApplicationEntryPoint
     {
-      var names = myContext.GetObjectNamesForType(typeof(IApplicationEntryPoint));
+      var names = myChildContext.GetObjectNamesForType(typeof (Q));
       if (names.Length != 1)
       {
-        throw new ArgumentException(typeof(IApplicationEntryPoint).FullName + " class should be defined only once");
+        throw new ArgumentException(typeof (Q).FullName + " class should be defined only once");
       }
 
-      return GetComponent<IApplicationEntryPoint>(names[0]).Main(args);
-    }
-
-    protected internal static void SetInsance(SpringIoC instance)
-    {
-      ourInstance = instance;
-    }
-
-    protected internal static void Dispose()
-    {
-      ourInstance.myRootContext.Dispose();
-      ourInstance = null;
+      return ((Q) myChildContext.GetObject(names[0])).Main(args);
     }
   }
 }

@@ -1,8 +1,8 @@
 using System.Xml;
 using DSIS.Core.System;
-using DSIS.Spring;
+using DSIS.Spring.Assemblies;
 
-[assembly: SpringIncludeAssembly("DSIS.Function.Predefined")]
+[assembly: IncludeAssembly("DSIS.Function.Predefined")]
 namespace DSIS.Scheme.Objects.Systemx
 {
   public interface ISystemInfoFactory

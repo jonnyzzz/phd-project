@@ -1,5 +1,5 @@
 using DSIS.IntegerCoordinates;
-using DSIS.Spring;
+using DSIS.Spring.Config;
 
 [assembly:SpringConfigXml("resources.spring.xml", Type=typeof(NamespaceHolder))]
 namespace DSIS.IntegerCoordinates

@@ -15,4 +15,20 @@
     </constructor-arg>
   </object>
 
+  <object id="SpringXmlConfigWriter2" type="DSIS.Spring.Attributes.SpringXmlConfigWriter" />
+  <object id="SpringConfigXmlProvider2" type="DSIS.Spring.Attributes.SpringConfigXmlProvider" />
+  <object id="StringConfigurator" type="DSIS.Spring.Attributes.StringConfigurator" />
+  <object id="AttributedSpringContextLoader" type="DSIS.Spring.Assemblies.AttributedSpringContextLoader" />
+  <object id="AssemblyIncludeManagerRegistrar" type="DSIS.Spring.Assemblies.AssemblyIncludeManagerRegistrar" />
+
+  <object id="AssemblyIncludeManager" type="DSIS.Spring.Assemblies.AssemblyIncludeManager"/>
+
+  <object id="SpringConfigRegistry" type="DSIS.Spring.Config.SpringConfigRegistry"/>
+  <object id="SpringConfigXmlProvider" type="DSIS.Spring.Config.SpringConfigXmlProvider"/>
+  <object id="ServiceProviderImpl" type="DSIS.Spring.Service.ServiceProviderImpl"/>
+
+  <object id="SpringIoC" type="DSIS.Spring.SpringIoC"/>
+
+  <object id="TempFileManager" type="DSIS.Spring.Util.TempFileManager"/>
+  
 </objects>

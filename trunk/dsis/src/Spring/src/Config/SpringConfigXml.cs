@@ -1,6 +1,6 @@
 using System;
 
-namespace DSIS.Spring
+namespace DSIS.Spring.Config
 {
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
   public class SpringConfigXmlAttribute : Attribute

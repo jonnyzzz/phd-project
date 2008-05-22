@@ -91,6 +91,7 @@
     <Compile Include="src\UpcastedEnumerable.cs" />
     <Compile Include="src\UsedAttribute.cs" />
     <Compile Include="src\Utils.cs" />
+    <Compile Include="src\XmlUtil.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueExTest.cs" />
     <Compile Include="src\Delegates.cs" />
     <Compile Include="src\DoubleEqualityComparer.cs" />

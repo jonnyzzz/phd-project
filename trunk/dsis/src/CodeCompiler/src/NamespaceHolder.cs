@@ -1,5 +1,5 @@
 using DSIS.CodeCompiler;
-using DSIS.Spring;
+using DSIS.Spring.Config;
 
 [assembly: SpringConfigXml("resources.spring.xml", Type=typeof(NamespaceHolder))]
 

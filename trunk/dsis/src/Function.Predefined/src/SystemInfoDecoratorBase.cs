@@ -1,5 +1,5 @@
 using DSIS.Function.Predefined;
-using DSIS.Spring;
+using DSIS.Spring.Config;
 
 [assembly: SpringConfigXml("resources.spring.xml", Type = typeof(SystemInfoDecoratorBase))]
 

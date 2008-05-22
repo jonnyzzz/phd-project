@@ -5,7 +5,7 @@ namespace DSIS.Utils
 {
   public static class CollectionUtil
   {
-    public static T GetFirst<T>(IEnumerable<T> enu)
+    public static T GetFirst<T>(this IEnumerable<T> enu)
     {
       foreach (T t in enu)
       {
@@ -14,7 +14,7 @@ namespace DSIS.Utils
       return default(T);
     }
     
-    public static T GetLast<T>(IEnumerable<T> enu)
+    public static T GetLast<T>(this IEnumerable<T> enu)
     {
       T v = default(T);
       foreach (T t in enu)

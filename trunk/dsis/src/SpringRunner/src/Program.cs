@@ -1,10 +1,12 @@
 using DSIS.Spring;
+using DSIS.Spring.Assemblies;
+using DSIS.Spring.Config;
 using DSIS.SpringRunner;
 using log4net;
 
 [assembly: SpringConfigXml("resources.spring.xml", Type = typeof(Program))]
-[assembly: SpringIncludeAssembly("DSIS.Scheme2")]
-[assembly: SpringIncludeAssembly("DSIS.Scheme.Objects")]
+[assembly: IncludeAssembly("DSIS.Scheme2")]
+[assembly: IncludeAssembly("DSIS.Scheme.Objects")]
 
 namespace DSIS.SpringRunner
 {  
