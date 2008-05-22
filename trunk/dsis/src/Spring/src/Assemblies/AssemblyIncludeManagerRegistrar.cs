@@ -1,38 +1,16 @@
 using System.Reflection;
 using DSIS.Spring.Attributes;
-using Spring.Objects.Factory.Config;
+using DSIS.Spring.Util;
 
 namespace DSIS.Spring.Assemblies
 {
   [SpringBean]
-  public class AssemblyIncludeManagerRegistrar : IObjectPostProcessor
+  public class AssemblyIncludeManagerRegistrar
   {
-    private readonly AssemblyIncludeManager myManager;
-
-    public AssemblyIncludeManagerRegistrar(AssemblyIncludeManager myManager)
+    public AssemblyIncludeManagerRegistrar(IAssemblyIncludeManager myManager, IBeanManager beans)
     {
-      this.myManager = myManager;
-    }
-
-    public object PostProcessBeforeInitialization(object instance, string name)
-    {
-      return instance;
-    }
-
-    public object PostProcessAfterInitialization(object instance, string objectName)
-    {
-      var man = instance as IAssemblyLoadListener;
-      if (man != null)
-      {
-        myManager.RegisterAssemblyLoaded(man);
-      }
-
-      var proxy = instance as ITypeLoadListener;
-      if (proxy != null)
-      {
-        myManager.RegisterAssemblyLoaded(new TypeLoadListenerProxy(proxy));
-      }
-      return instance;
+      beans.RegisterBeanProcessor<IAssemblyLoadListener>(q => myManager.RegisterAssemblyLoaded(q));
+      beans.RegisterBeanProcessor<ITypeLoadListener>(q => myManager.RegisterAssemblyLoaded(new TypeLoadListenerProxy(q)));
     }
 
     private class TypeLoadListenerProxy : IAssemblyLoadListener

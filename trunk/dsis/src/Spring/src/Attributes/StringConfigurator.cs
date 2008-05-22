@@ -7,6 +7,7 @@ namespace DSIS.Spring.Attributes
   [UsedBySpring]
   public class StringConfigurator : ITypeLoadListener
   {
+    //todo: Support priority of bean declarations!
     private readonly SpringXmlConfigWriter myWriter;
 
     public StringConfigurator(SpringXmlConfigWriter myWriter)

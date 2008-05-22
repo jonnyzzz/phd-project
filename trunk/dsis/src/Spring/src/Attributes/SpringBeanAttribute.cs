@@ -6,5 +6,7 @@ namespace DSIS.Spring.Attributes
   public class SpringBeanAttribute : Attribute
   {
     public string BeanName { get; set;}
+
+    public int Priority { get; set; }
   }
 }

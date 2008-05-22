@@ -15,6 +15,8 @@
     </constructor-arg>
   </object>
 
+  <object id="ServiceProviderExImpl" type="DSIS.Spring.Service.ServiceProviderExImpl"/>
+
   <object id="SpringXmlConfigWriter2" type="DSIS.Spring.Attributes.SpringXmlConfigWriter" />
   <object id="SpringConfigXmlProvider2" type="DSIS.Spring.Attributes.SpringConfigXmlProvider" />
   <object id="StringConfigurator" type="DSIS.Spring.Attributes.StringConfigurator" />
@@ -30,5 +32,7 @@
   <object id="SpringIoC" type="DSIS.Spring.SpringIoC"/>
 
   <object id="TempFileManager" type="DSIS.Spring.Util.TempFileManager"/>
+
+  <object id="BeanProcessor" type="DSIS.Spring.Util.BeanProcessor"/>
   
 </objects>

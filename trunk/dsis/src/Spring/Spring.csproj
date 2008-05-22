@@ -77,6 +77,9 @@
     <Compile Include="src\Attributes\SpringConfigXmlProvider.cs" />
     <Compile Include="src\Attributes\SpringXmlConfigWriter.cs" />
     <Compile Include="src\Attributes\StringConfigurator.cs" />
+    <Compile Include="src\Service\ServiceProviderExImpl.cs" />
+    <Compile Include="src\Util\BeanProcessor.cs" />
+    <Compile Include="src\Util\IBeanManager.cs" />
     <Compile Include="src\Util\TempFileManager.cs" />
     <Compile Include="src\IApplicationEntryPoint.cs" />
     <Compile Include="src\Assemblies\IAssemblyLoadListener.cs" />

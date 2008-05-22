@@ -1,29 +1,32 @@
 using System;
-using DSIS.Spring.Attributes;
-using Spring.Context;
+using System.Collections.Generic;
 
 namespace DSIS.Spring.Service
 {
-  [UsedBySpring, SpringBean]
-  public class ServiceProviderImpl : IServiceProvider, IApplicationContextAware
+  public interface IServiceProviderEx
   {
+    bool GetService<T>(out T obj);
+  }
+
+  [UsedBySpring]
+  public class ServiceProviderImpl : IServiceProvider
+  {
+    private readonly List<IServiceProviderEx> myProviders = new List<IServiceProviderEx>();
+
     public T GetService<T>()
     {
-      var names = ApplicationContext.GetObjectNamesForType(typeof(T));
-      if (names.Length != 1)
+      foreach (var ex in myProviders)
       {
-        throw new ArgumentException(typeof(T).FullName + " class should be defined only once");
+        T obj;
+        if (ex.GetService(out obj))
+          return obj;
       }
-
-      return GetComponent<T>(names[0]);
+      throw new Exception("Failed to get object of type " + typeof(T).AssemblyQualifiedName);      
     }
 
-    private T GetComponent<T>(string name)
+    public void RegisterProvider(IServiceProviderEx prov)
     {
-      return (T) ApplicationContext.GetObject(name, typeof (T));
+      myProviders.Add(prov);
     }
-
-
-    public IApplicationContext ApplicationContext { get; set; }
   }
 }
