@@ -3,17 +3,27 @@ using DSIS.UI.UI;
 
 namespace DSIS.UI.Wizard
 {
-  public class WizardPageBase : IWizardPage
+  public class WizardPageBase : WizardPageBase<Control>
   {
-    private Control myControl;
+  }
+
+  public class WizardPageBase<T> : IWizardPage
+    where T : Control
+  {
+    private T myControl;
     private BoolErrorProviderHelper myHelper;
 
     public string Title { get; protected set; }
 
     public Control Control
     {
+      get { return ControlInternal; }
+    }
+
+    protected T ControlInternal
+    {
       get { return myControl; }
-      protected set
+      set
       {
         if (myControl != value && myHelper != null)
         {

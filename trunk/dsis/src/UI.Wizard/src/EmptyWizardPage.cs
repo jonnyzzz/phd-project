@@ -7,7 +7,7 @@ namespace DSIS.UI.Wizard
     public EmptyWizardPage()
     {
       Title = "Empty page";
-      Control = new Label {Text = "Empty page content"};
+      ControlInternal = new Label {Text = "Empty page content"};
     }
   }
 }

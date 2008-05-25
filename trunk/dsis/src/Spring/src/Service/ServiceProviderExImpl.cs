@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DSIS.Spring.Attributes;
 using Spring.Context;
+using Spring.Objects.Factory.Config;
 
 namespace DSIS.Spring.Service
 {

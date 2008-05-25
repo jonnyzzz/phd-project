@@ -39,13 +39,10 @@ namespace DSIS.Function.Predefined.Logistics
   public class Logistics2dFactory : NoParameterSystemInfoFactoryBase
   {
     public Logistics2dFactory(SystemInfoFactory systemFactory)
-      : base(
+      : base(2,SystemType.Descrete,
         systemFactory,
         "Logistics2d",
-        delegate
-          {
-            return new Logistic2dSystemInfo();
-          })
+             () => new Logistic2dSystemInfo())
     {
     }
   }

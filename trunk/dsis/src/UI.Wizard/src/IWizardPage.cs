@@ -37,4 +37,9 @@ namespace DSIS.UI.Wizard
     /// </summary>
     void ControlHidden();
   }
+
+  public interface IWizardPageWithState : IWizardPage
+  {
+    IWizardPageWithState NextPage { get;  }
+  }
 }

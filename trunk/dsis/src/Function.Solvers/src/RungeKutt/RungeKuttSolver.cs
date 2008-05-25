@@ -1,4 +1,5 @@
 using DSIS.Core.System;
+using DSIS.Spring.Attributes;
 
 namespace DSIS.Function.Solvers.RungeKutt
 {
@@ -22,9 +23,7 @@ namespace DSIS.Function.Solvers.RungeKutt
       return new Function(this, precision);
     }
 
-    #region Nested type: Function
-
-    public class Function : IFunction<double>
+    private class Function : IFunction<double>
     {
       private readonly int myDimension;
       private readonly IFunction<double> myF1;
@@ -59,8 +58,6 @@ namespace DSIS.Function.Solvers.RungeKutt
         myDt = myFunctionInfo.myDt/myFunctionInfo.mySteps;
         myDt3 = myDt/3.0;
       }
-
-      #region IFunction<double> Members
 
       public void Evaluate()
       {
@@ -109,8 +106,6 @@ namespace DSIS.Function.Solvers.RungeKutt
         get { return null; }
       }
 
-      #endregion
-
       private IFunction<double> Create(double[] size, out double[] input, out double[] output)
       {
         IFunction<double> func = myFunctionInfo.myFunction.GetFunction<double>(size);
@@ -119,7 +114,13 @@ namespace DSIS.Function.Solvers.RungeKutt
         return func;
       }
     }
+  }
 
-    #endregion
+  [SpringBean]
+  public class RungeKuttSolverFactory : ContiniousFunctionSolverBase
+  {
+    public RungeKuttSolverFactory() : base("Runge-Kutt solver")
+    {
+    }
   }
 }

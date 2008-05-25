@@ -34,11 +34,9 @@ namespace DSIS.Function.Predefined.VanDerPol
   [UsedBySpring]
   public class VanDerPolFactory : DoubleParametersSystemInfoFactoryBase
   {
+    //todo: Provide continious system converter
     public VanDerPolFactory(DoubleArrayParser parser, SystemInfoFactory factory)
-      : base("Van-der-Pol", 1, delegate(double[] paramz)
-                                                         {
-                                                           return new VanDerPolSystemInfo(paramz[0]);
-                                                         }, parser,factory)
+      : base(2, SystemType.Continious, "Van-der-Pol TODO:", 1, paramz => new VanDerPolSystemInfo(paramz[0]), parser,factory)
     {
     }
   }

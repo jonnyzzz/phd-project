@@ -51,10 +51,7 @@ namespace DSIS.Function.Predefined.Logistics
   public class LogisticsFactory : DoubleParametersSystemInfoFactoryBase
   {
     public LogisticsFactory(DoubleArrayParser parser, SystemInfoFactory factory)
-      : base("Logistics", 1, delegate(double[] paramz)
-                                                         {
-                                                           return new LogisticSystemInfo(paramz[0]);
-                                                         }, parser, factory)
+      : base(1,SystemType.Descrete, "Logistics", 1, paramz => new LogisticSystemInfo(paramz[0]), parser, factory)
     {
     }
   }

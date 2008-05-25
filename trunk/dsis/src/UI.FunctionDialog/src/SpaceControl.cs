@@ -37,6 +37,8 @@ namespace DSIS.UI.FunctionDialog
     {
       using (this.UpdateCookie())
       {
+        myDimension.Enabled = myModel.CanChangeDimension;
+        myDimension.Text = myModel.Dimension.ToString();
         while (myRows.Count != myModel.Spaces.Count)
         {
           if (myRows.Count < myModel.Spaces.Count)

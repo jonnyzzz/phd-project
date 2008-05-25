@@ -14,6 +14,11 @@ namespace DSIS.Spring.Assemblies
     
     private readonly Hashset<Assembly> myAssemblies = new Hashset<Assembly>();
 
+    public AssemblyIncludeManager()
+    {
+      AppDomain.CurrentDomain.AssemblyLoad += (o, x) => RegisterAssemblies(new[] {x.LoadedAssembly});
+    }
+
     public void RegisterAssemblyLoaded(IAssemblyLoadListener listener)
     {
       FireLoadedAssemblies(listener);
@@ -45,7 +50,7 @@ namespace DSIS.Spring.Assemblies
       ForEach(x => x.AssemblyLoaded(assembly));
     }
 
-    public void RegisterAssembly(IEnumerable<Assembly> assemblies)
+    public void RegisterAssemblies(IEnumerable<Assembly> assemblies)
     {
       ClosureAssemblies(assemblies);
     }
@@ -53,20 +58,19 @@ namespace DSIS.Spring.Assemblies
     private void ClosureAssemblies(IEnumerable<Assembly> extra)
     {
       var visit = new Hashset<Assembly>();
-      var visited = new Hashset<Assembly>();
-      var visitedNames = new Hashset<AssemblyName>();
       
       visit.AddRange(extra);
-
       while (visit.Count > 0)
       {        
         Assembly assembly = visit.GetFirst();
         visit.Remove(assembly);
 
-        if (visited.Contains(assembly))
+        LOG.DebugFormat("Scan assembly: {0}", assembly.FullName);
+
+        if (ContainsAssembly(assembly))
           continue;
 
-        visited.Add(assembly);
+        AddAssembly(assembly);
         
         var refAssemblies = new List<AssemblyName>(assembly.GetReferencedAssemblies());
 
@@ -75,28 +79,25 @@ namespace DSIS.Spring.Assemblies
           refAssemblies.Add(new AssemblyName(includeAssembly.Assembly));
         }
 
-        foreach (AssemblyName name in refAssemblies)
+        foreach (var name in refAssemblies)
         {          
-          if (visitedNames.Contains(name))
-            continue;
-          visitedNames.Add(name);
-
+          LOG.DebugFormat("Scan ref: {0}", name);
           if (name.FullName.StartsWith("DSIS"))
           {
             try
             {
-              Assembly reference = Assembly.Load(name);
+              var reference = Assembly.Load(name);
               if (reference != null && !ContainsAssembly(reference))
+              {
                 visit.Add(reference);
+              }
             }
-
             catch (Exception e)
             {
               LOG.Error(e.Message, e);
             }
           } 
         }
-        AddAssembly(assembly);
       }
     }
   }

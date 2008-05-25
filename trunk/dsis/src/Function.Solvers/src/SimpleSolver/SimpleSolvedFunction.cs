@@ -16,9 +16,9 @@ namespace DSIS.Function.Solvers.SimpleSolver
     protected override string PresentableMethodName
     {
       get { return "Simple"; }
-    } 
+    }
 
-    public class Function : IFunction<double>
+    private class Function : IFunction<double>
     {
       private readonly SimpleSolvedFunction myFunctionInfo;
       private readonly int myDimension;

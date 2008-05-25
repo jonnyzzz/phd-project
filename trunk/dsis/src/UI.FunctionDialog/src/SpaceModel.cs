@@ -15,30 +15,41 @@ namespace DSIS.UI.FunctionDialog
       get { return mySpaces.AsReadOnly(); }
     }
 
-    public SpaceModel()
+    public SpaceModel() :this(1)
     {
-      Dimension = 1;
     }
 
-    public int Dimension
+    public SpaceModel(int dimension)
+    {
+      UpdateDimension(dimension);
+    }
+
+    public virtual bool CanChangeDimension
+    {
+      get { return true; }
+    }
+
+    public virtual int Dimension
     {
       get { return myDimension; }
-      set
+      set { UpdateDimension(value); }
+    }
+
+    private void UpdateDimension(int value)
+    {
+      myDimension = value;
+      while (mySpaces.Count < myDimension)
       {
-        myDimension = value;
-        while (mySpaces.Count < myDimension)
-        {
-          var item = new SpaceParametersRowModel();
-          mySpaces.Add(item);
-        }
-
-        while (mySpaces.Count > myDimension)
-        {
-          mySpaces.RemoveAt(mySpaces.Count - 1);
-        }
-
-        FireModelChanged();
+        var item = new SpaceParametersRowModel();
+        mySpaces.Add(item);
       }
+
+      while (mySpaces.Count > myDimension)
+      {
+        mySpaces.RemoveAt(mySpaces.Count - 1);
+      }
+
+      FireModelChanged();
     }
 
     private void FireModelChanged()

@@ -47,7 +47,7 @@ namespace DSIS.Function.Predefined.Ikeda
   public class IkeadFactory : NoParameterSystemInfoFactoryBase
   {
     public IkeadFactory(SystemInfoFactory factory)
-      : base(factory, "Ikeda", delegate { return new IkedaFunctionSystemInfoDecorator(); })
+      : base(2,SystemType.Descrete, factory, "Ikeda", () => new IkedaFunctionSystemInfoDecorator())
     {
     }
   }

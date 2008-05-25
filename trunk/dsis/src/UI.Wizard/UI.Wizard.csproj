@@ -71,6 +71,7 @@
     <Compile Include="src\IWizardPack.cs" />
     <Compile Include="src\IWizardPage.cs" />
     <Compile Include="src\SimpleWizard.cs" />
+    <Compile Include="src\StateWizard.cs" />
     <Compile Include="src\WizardForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +79,8 @@
       <DependentUpon>WizardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="src\WizardPageBase.cs" />
+    <Compile Include="src\WizardPageWithState.cs" />
+    <Compile Include="src\WizardPageWithStateD.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>

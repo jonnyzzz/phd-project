@@ -19,7 +19,9 @@ namespace DSIS.Spring
 
       myServiceProvider = (IServiceProvider) myContext.GetObject(myContext.GetObjectNamesForType(typeof (IServiceProvider))[0]);
     
-      myServiceProvider.GetService<IAssemblyIncludeManager>().RegisterAssembly(extra);
+      myServiceProvider.GetService<IAssemblyIncludeManager>().RegisterAssemblies(extra);
+
+      myServiceProvider.GetService<SpringIoC>().Start();
     }
 
     public static void SetUp(params Assembly[] extraRefs)
@@ -51,6 +53,7 @@ namespace DSIS.Spring
       where Q : IApplicationEntryPoint
     {
       SetUp(new List<Assembly>(extra) {typeof (Q).Assembly}.ToArray());
+      
       try
       {
         return myServiceProvider.GetService<SpringIoC>().AsMain<Q>(args, extra);

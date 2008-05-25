@@ -60,10 +60,7 @@ namespace DSIS.Function.Predefined.Linear
   public class Linear2DFactory : DoubleParametersSystemInfoFactoryBase
   {
     public Linear2DFactory(DoubleArrayParser parser, SystemInfoFactory factory)
-      : base("Linear2D", 4, delegate(double[] paramz)
-                                                         {
-                                                           return new Linear2DSystemInfo(paramz[0], paramz[1], paramz[2], paramz[3]);
-                                                         }, parser, factory)
+      : base(2, SystemType.Descrete, "Linear2D", 4, paramz => new Linear2DSystemInfo(paramz[0], paramz[1], paramz[2], paramz[3]), parser, factory)
     {
     }
   }

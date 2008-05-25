@@ -73,10 +73,7 @@ namespace DSIS.Function.Predefined.Henon
   public class HenonFactory : DoubleParametersSystemInfoFactoryBase
   {
     public HenonFactory(DoubleArrayParser parser, SystemInfoFactory factory)
-      : base("Henon", 1, delegate(double[] paramz)
-                                                         {
-                                                           return new HenonFunctionSystemInfoDecorator(paramz[0]);
-                                                         }, parser, factory)
+      : base(2,SystemType.Descrete, "Henon", 1, paramz => new HenonFunctionSystemInfoDecorator(paramz[0]), parser, factory)
     {
     }
   }

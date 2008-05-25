@@ -1,34 +1,25 @@
 using System.Xml;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring.Util;
 
 namespace DSIS.Function.Predefined
 {
-  public class DoubleParametersSystemInfoFactoryBase : Registrar<ISystemInfoFactory, SystemInfoFactory>, ISystemInfoFactory
-  {
-    private readonly string myFactoryName;
+  public abstract class DoubleParametersSystemInfoFactoryBase : SystemInfoFactoryBase  {
     private readonly CreateDelegate myFactory;
     private readonly DoubleArrayParser myParser;
     
     private readonly int myParamsCount;
     protected delegate ISystemInfo CreateDelegate(double[] paramz);
 
-    protected DoubleParametersSystemInfoFactoryBase(string factoryName, int paramsCount, CreateDelegate factory, DoubleArrayParser parser, SystemInfoFactory systemFactory)
-      : base(systemFactory)
+    protected DoubleParametersSystemInfoFactoryBase(int dim, SystemType type, string factoryName, int paramsCount, CreateDelegate factory, DoubleArrayParser parser, SystemInfoFactory systemFactory)
+      : base(dim, type, factoryName, systemFactory)
     {
-      myFactoryName = factoryName;
       myParser = parser;
       myParamsCount = paramsCount;
       myFactory = factory;
     }
     
-    public string FactoryName
-    {
-      get { return myFactoryName; }
-    }
-
-    public ISystemInfo Parse(XmlElement element)
+    public override ISystemInfo Parse(XmlElement element)
     {
       double[] parz = myParser.Parse(element);
       if (parz == null)

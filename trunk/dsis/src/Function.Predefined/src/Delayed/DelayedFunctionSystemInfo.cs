@@ -39,10 +39,7 @@ namespace DSIS.Function.Predefined.Delayed
   public class DelayedFactory : DoubleParametersSystemInfoFactoryBase
   {
     public DelayedFactory(DoubleArrayParser parser, SystemInfoFactory factory)
-      : base("Delayed", 1, delegate(double[] paramz)
-                                                         {
-                                                           return new DelayedFunctionSystemInfo(paramz[0]);
-                                                         }, parser, factory)
+      : base(2,SystemType.Descrete, "Delayed", 1, paramz => new DelayedFunctionSystemInfo(paramz[0]), parser, factory)
     {
     }
   }

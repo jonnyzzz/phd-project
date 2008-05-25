@@ -7,7 +7,7 @@ namespace DSIS.Function.Predefined.FoodChain
   public class FoodChainSystemFactory : NoParameterSystemInfoFactoryBase
   {
     public FoodChainSystemFactory(SystemInfoFactory factory)
-      : base(factory, "FoodChain", delegate { return new FoodChainSystemInfo(); })
+      : base(3,SystemType.Descrete, factory, "FoodChain", () => new FoodChainSystemInfo())
     {
     }
   }

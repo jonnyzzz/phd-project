@@ -3,6 +3,6 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd">
 
-  <object id="CodeCompilerImpl" name="DSIS.CodeCompiler.CodeCompilerImpl"/>
+  <object id="CodeCompilerImpl" type="DSIS.CodeCompiler.CodeCompilerImpl"/>
   
 </objects>

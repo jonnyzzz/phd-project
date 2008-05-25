@@ -1,12 +1,12 @@
+using DSIS.Spring.Service;
 using DSIS.UI.Wizard;
 
 namespace DSIS.UI.FunctionDialog
 {
-  public class SystemFunctionSelectionWizard : SimpleWizard
+  public class SystemFunctionSelectionWizard : StateWizard
   {
-    public SystemFunctionSelectionWizard() : base(new[]{new SpaceControlWizardPage(new SpaceModel())})
+    public SystemFunctionSelectionWizard(IServiceProvider prov) : base(new SelectSystemWizardPage(prov))
     {
-      Title = "System Function";
     }
   }
 }

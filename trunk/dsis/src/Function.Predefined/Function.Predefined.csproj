@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -64,6 +64,7 @@
     <Compile Include="src\Rossel\RosslerSystemFunction.cs" />
     <Compile Include="src\Rossel\RosslerSystemInfo.cs" />
     <Compile Include="src\SystemInfoDecoratorBase.cs" />
+    <Compile Include="src\SystemInfoFactoryBase.cs" />
     <Compile Include="src\VanDerPol\VanDerPolFunction.cs" />
     <Compile Include="src\VanDerPol\VanDerPolSystemInfo.cs" />
   </ItemGroup>

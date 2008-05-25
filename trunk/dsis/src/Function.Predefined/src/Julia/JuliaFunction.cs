@@ -45,7 +45,7 @@ namespace DSIS.Function.Predefined.Julia
   public class JuliaFactory : NoParameterSystemInfoFactoryBase
   {
     public JuliaFactory(SystemInfoFactory factory)
-      : base(factory, "Julia", delegate { return new JuliaFuctionSystemInfoDecorator(); })
+      : base(2, SystemType.Descrete, factory, "Julia", () => new JuliaFuctionSystemInfoDecorator())
     {
     }
   }

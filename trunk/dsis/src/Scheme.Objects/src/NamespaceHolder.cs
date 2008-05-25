@@ -9,7 +9,7 @@ using DSIS.Spring.Config;
 
 namespace DSIS.Scheme.Objects
 {
-  internal class NamespaceHolder
+  internal static class NamespaceHolder
   {    
   }
 } 
