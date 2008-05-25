@@ -1,3 +1,4 @@
+using System;
 using System.Xml;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
@@ -32,6 +33,11 @@ namespace DSIS.Function.Predefined
     public SystemType Type
     {
       get { return myType; }
+    }
+
+    public virtual Type OptionsObjectType
+    {
+       get { return null; }
     }
 
     public abstract ISystemInfo Parse(XmlElement element);

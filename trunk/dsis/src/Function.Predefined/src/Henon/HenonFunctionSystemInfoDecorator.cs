@@ -1,7 +1,10 @@
+using System;
+using System.ComponentModel;
 using System.Globalization;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring;
+using DSIS.UI.Wizard.FormsGenerator;
 
 namespace DSIS.Function.Predefined.Henon
 {
@@ -76,5 +79,22 @@ namespace DSIS.Function.Predefined.Henon
       : base(2,SystemType.Descrete, "Henon", 1, paramz => new HenonFunctionSystemInfoDecorator(paramz[0]), parser, factory)
     {
     }
+
+    public override Type OptionsObjectType
+    {
+      get { return typeof (HenonOptions); }
+    }
+  }
+
+  [Serializable]
+  public class HenonOptions
+  {
+    public HenonOptions()
+    {
+      A = 1.4;
+    }
+
+    [IncludeGenerate(Title = "Parameter A"), DefaultValue(1.4)]
+    public double A { get; set; }
   }
 }

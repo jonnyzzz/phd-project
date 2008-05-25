@@ -1,7 +1,9 @@
+using System;
 using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring.Service;
 using DSIS.UI.Wizard;
+using DSIS.UI.Wizard.FormsGenerator;
 using log4net;
+using IServiceProvider=DSIS.Spring.Service.IServiceProvider;
 
 namespace DSIS.UI.FunctionDialog
 {
@@ -38,6 +40,15 @@ namespace DSIS.UI.FunctionDialog
         var page = new WizardPageWithStateD(
           new SpaceControlWizardPage(
             new FixedDimensionSpaceModel(factory.Dimension)), () => null);
+
+        if (factory.OptionsObjectType != null)
+        {
+          var _page = page;
+          page = new WizardPageWithStateD(
+            new FormGeneratorWizardPage("Options", Activator.CreateInstance(factory.OptionsObjectType)),
+            () => _page
+            );
+        }
 
         if (factory.Type == SystemType.Descrete)
         {
