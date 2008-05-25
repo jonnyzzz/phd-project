@@ -1,7 +1,9 @@
+using System;
 using DSIS.Spring.Util;
 
 namespace DSIS.Spring.Util
 {
+  [Obsolete("Use IServiceProvider.GetServices`1")]
   public abstract class Registrar<T,F> 
     where T : class
     where F : AbstractRegistry<T>    

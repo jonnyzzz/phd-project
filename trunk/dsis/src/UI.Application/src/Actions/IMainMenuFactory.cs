@@ -4,6 +4,6 @@ namespace DSIS.UI.Application.Actions
 {
   public interface IMainMenuFactory
   {
-    ToolStripMenuItem BuildMenu(ActionDescriptor action);
+    ToolStripItem BuildMenu(IActionDescriptor action);
   }
 }

@@ -7,20 +7,26 @@ using DSIS.Spring;
 namespace DSIS.UI.Application.Actions
 {
   [UsedBySpring]
-  public class ToolStripMenuItemPresentationManager : BuildingActionPresentationManager<ToolStripMenuItem>, IMainMenuFactory
+  public class ToolStripMenuItemPresentationManager : BuildingActionPresentationManager<ToolStripItem>, IMainMenuFactory
   {
     public ToolStripMenuItemPresentationManager(IActionPresentationManager presentation) : base(presentation)
     {
     }
 
-    protected override ToolStripMenuItem CreateItem(ActionDescriptor descriptor, IActionHandler handler)
+    protected override ToolStripItem CreateItem(IActionDescriptor descriptor, IActionHandler handler)
     {
-      return new ToolStripMenuItem(descriptor.Title, null, delegate { handler.Do(new Context()); });
+      if (descriptor is ActionDescriptor)
+        return new ToolStripMenuItem(((ActionDescriptor)descriptor).Title, null, delegate { handler.Do(new Context()); });
+      else if (descriptor is SeparatorDescriptor)
+      {
+        return new ToolStripSeparator();        
+      }
+      return null;
     }
 
-    protected override void SetChildren(ToolStripMenuItem node, IEnumerable<ToolStripMenuItem> children)
+    protected override void SetChildren(ToolStripItem node, IEnumerable<ToolStripItem> children)
     {
-      node.DropDownItems.AddRange(children.ToArray());
+      ((ToolStripDropDownItem)node).DropDownItems.AddRange(children.ToArray());
     }
   }
 }

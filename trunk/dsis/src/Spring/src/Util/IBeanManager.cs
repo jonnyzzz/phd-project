@@ -5,5 +5,7 @@ namespace DSIS.Spring.Util
   public interface IBeanManager
   {
     void RegisterBeanProcessor<Q>(ProcessBean<Q> process) where Q : class;
+
+    void RegisterTypeProcessor(ProcessBean<object> process);
   }
 }

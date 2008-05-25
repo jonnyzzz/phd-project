@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DSIS.Spring.Attributes;
 using Spring.Objects.Factory;
 using Spring.Objects.Factory.Config;
 
@@ -20,7 +19,7 @@ namespace DSIS.Spring.Util
     {
       myLoadedObjects.Add(instance);
 
-        foreach (IKey key in myHandlers)
+      foreach (IKey key in myHandlers)
       {
         key.Process(instance);
       }
@@ -56,7 +55,12 @@ namespace DSIS.Spring.Util
       new List<object>(myLoadedObjects).ForEach(item.Process);
       myHandlers.Add(item);
     }
-      
+
+    public void RegisterTypeProcessor(ProcessBean<object> process)
+    {
+      RegisterBeanProcessor(process);
+    }
+
     public void AfterPropertiesSet()
     {
     } 

@@ -1,13 +1,7 @@
-using System;
-using System.Xml;
-using DSIS.Utils;
-
 namespace DSIS.UI.Application.Actions
 {
-  public class ActionDescriptor
+  public class ActionDescriptor : IActionDescriptor
   {
-    public const string ELEMENT_NAME = "Action";
-
     private readonly string myActionId;
     private readonly string myAncor;
     private readonly string myTitle;
@@ -21,23 +15,6 @@ namespace DSIS.UI.Application.Actions
       myDescription = description;
       myParentId = parentActionId;
       myTitle = title;
-    }
-
-    public static ActionDescriptor FromXml(XmlElement action, ActionDescriptor parentAction)
-    {
-      if (action.Name != ELEMENT_NAME)
-        throw new ArgumentException("Wrong xml");
-
-      var actionId = action.GetAttribute("Id");
-      var parentId = action.GetAttribute("Parent");
-      if (String.IsNullOrEmpty(parentId) && parentAction != null)
-        parentId = parentAction.ActionId;
-
-      var ancor = action.GetAttribute("Ancor");
-      var title = action.GetAttribute("Title");
-      var description = Util.Safe(action.SelectSingleNode("description/text()"), string.Empty, x => x.Value);
-
-      return new ActionDescriptor(actionId, parentId, ancor, description, title);
     }
 
     public string ParentId
@@ -64,7 +41,6 @@ namespace DSIS.UI.Application.Actions
     {
       get { return myDescription; }
     }
-
 
     public override string ToString()
     {

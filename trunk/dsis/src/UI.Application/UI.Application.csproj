@@ -47,14 +47,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Actions.Impl\ActionHandlerBase.cs" />
+    <Compile Include="src\Actions.Impl\CreateNewSystemActionHandler.cs" />
+    <Compile Include="src\Actions.Impl\ExitProgramActionHandler.cs" />
+    <Compile Include="src\Actions\ActionDescriptorParser.cs" />
     <Compile Include="src\Actions\ActionDescriptor.cs" />
+    <Compile Include="src\Actions\ActionDescriptorParserBase.cs" />
+    <Compile Include="src\Actions\ActionDescriptorParserManager.cs" />
     <Compile Include="src\Actions\ActionDescriptorXmlAttributre.cs" />
+    <Compile Include="src\Actions\ActionHandlerBeanProcessor.cs" />
     <Compile Include="src\Actions\ActionPresentationManager.cs" />
     <Compile Include="src\Actions\BuildingActionPresentationManager.cs" />
+    <Compile Include="src\Actions\IActionDescriptor.cs" />
+    <Compile Include="src\Actions\IActionDescriptorParser.cs" />
     <Compile Include="src\Actions\IActionHandler.cs" />
     <Compile Include="src\Actions\IActionManager.cs" />
     <Compile Include="src\Actions\IActionPresentationManager.cs" />
     <Compile Include="src\Actions\IMainMenuFactory.cs" />
+    <Compile Include="src\Actions\SeparatorActionParser.cs" />
+    <Compile Include="src\Actions\SeparatorDescriptor.cs" />
     <Compile Include="src\Actions\ToolStripMenuItemPresentationManager.cs" />
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />

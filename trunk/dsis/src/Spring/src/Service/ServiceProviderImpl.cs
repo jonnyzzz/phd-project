@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using DSIS.Utils;
 
 namespace DSIS.Spring.Service
 {
   public interface IServiceProviderEx
   {
     bool GetService<T>(out T obj);
+
+    IEnumerable<T> GetServices<T>();
   }
 
   [UsedBySpring]
@@ -22,6 +25,11 @@ namespace DSIS.Spring.Service
           return obj;
       }
       throw new Exception("Failed to get object of type " + typeof(T).AssemblyQualifiedName);      
+    }
+
+    public IEnumerable<T> GetServices<T>()
+    {
+      return CollectionUtil.Merge(myProviders.ConvertAll(x => x.GetServices<T>()));
     }
 
     public void RegisterProvider(IServiceProviderEx prov)

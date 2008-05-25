@@ -4,9 +4,9 @@ namespace DSIS.UI.Application.Actions
 {
   public interface IActionPresentationManager
   {
-    void RegisterAction(ActionDescriptor desc);
+    void RegisterAction(IActionDescriptor desc);
     ActionDescriptor RootAction { get; }
-    IEnumerable<ActionDescriptor> Children(ActionDescriptor action);
-    IActionHandler Handler(ActionDescriptor action);
+    IEnumerable<IActionDescriptor> Children(IActionDescriptor action);
+    IActionHandler Handler(IActionDescriptor action);
   }
 }

@@ -24,6 +24,23 @@ namespace DSIS.Utils
       return v;
     }
 
+    public static IEnumerable<T> Merge<T>(IEnumerable<IEnumerable<T>> cs)
+    {
+      return Merge<T, T>(cs);
+    }
+
+    public static IEnumerable<TZ> Merge<TZ,T>(IEnumerable<IEnumerable<T>> cs) 
+      where T : TZ
+    {
+      foreach (IEnumerable<T> c in cs)
+      {
+        foreach (T t in c)
+        {
+          yield return t;
+        }
+      }
+    }
+
     public static ICollection<TZ> Merge<T1, T2, TZ>(IEnumerable<T1> c1, IEnumerable<T2> c2)
       where T1 : TZ
       where T2 : TZ
@@ -109,6 +126,17 @@ namespace DSIS.Utils
       foreach (var q in en)
       {
         yield return conv(q);
+      }
+    }
+
+    public static IEnumerable<T> MapNotNull<T, Q>(this IEnumerable<Q> en, Converter<Q, T> conv)
+      where T : class
+    {
+      foreach (var q in en)
+      {
+        var notNull = conv(q);
+        if (notNull != null)
+          yield return notNull;
       }
     }
 

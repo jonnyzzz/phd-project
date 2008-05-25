@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DSIS.Spring.Attributes;
 using Spring.Context;
 
@@ -26,6 +27,14 @@ namespace DSIS.Spring.Service
       }
       t = GetComponent<T>(names[0]);
       return true;
+    }
+
+    public IEnumerable<T> GetServices<T>()
+    {
+      foreach (string name in ApplicationContext.GetObjectNamesForType(typeof(T)))
+      {
+        yield return (T) ApplicationContext.GetObject(name);
+      }
     }
 
     private T GetComponent<T>(string name)

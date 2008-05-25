@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace DSIS.Spring.Util
 {
+  [Obsolete("Use IServiceProvider.GetServices`1")]
   public abstract class AbstractRegistry<T>
   {
     private readonly List<T> myElements = new List<T>();

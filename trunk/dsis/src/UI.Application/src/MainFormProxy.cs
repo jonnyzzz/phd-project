@@ -9,16 +9,25 @@ namespace DSIS.UI.Application
   {
     private readonly IActionPresentationManager myActionManager;
     private readonly IMainMenuFactory myMenuFactoy;
+    private readonly XmlActionPreesentationManager myPresentation;
 
-    public MainFormProxy(IActionPresentationManager actionManager, IMainMenuFactory menuFactoy)
+    private Form myForm = null;
+
+    public MainFormProxy(IActionPresentationManager actionManager, IMainMenuFactory menuFactoy, XmlActionPreesentationManager presentation)
     {
       myActionManager = actionManager;
       myMenuFactoy = menuFactoy;
+      myPresentation = presentation;
     }
 
     public Form GetFrom()
     {
-      return new MainForm(myActionManager, myMenuFactoy);
+      if (myForm == null)
+      {
+        myPresentation.LoadAssembly(GetType().Assembly);
+        myForm = new MainForm(myActionManager, myMenuFactoy);
+      }
+      return myForm;
     }
   }
 }

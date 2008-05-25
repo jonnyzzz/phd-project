@@ -9,13 +9,12 @@ namespace DSIS.UI.Application.Actions
   public class XmlActionPreesentationManager
   {
     private readonly IActionPresentationManager myManager;
-
-    public XmlActionPreesentationManager(IActionPresentationManager manager)
+    private readonly ActionDescriptorParserManager myActionParser;
+    
+    public XmlActionPreesentationManager(ActionDescriptorParserManager actionParser, IActionPresentationManager manager)
     {
       myManager = manager;
-
-      //todo: Hack
-      LoadAssembly(GetType().Assembly);
+      myActionParser = actionParser;
     }
 
     public void LoadAssembly(Assembly assembly)
@@ -41,21 +40,26 @@ namespace DSIS.UI.Application.Actions
         var doc = new XmlDocument();
         doc.Load(stream);
 
-        foreach (XmlElement element in Util.Safe(doc.SelectNodes("MainMenu/" + ActionDescriptor.ELEMENT_NAME)))
+        foreach (XmlElement element in Util.Safe(doc.SelectNodes("MainMenu/*")))
         {
-          LoadDeclarationsFromXml(element, myManager.RootAction);
+            LoadDeclarationsFromXml(element, myManager.RootAction);
         }
       }
     }
 
-    public void LoadDeclarationsFromXml(XmlElement element, ActionDescriptor parent)
+    public void LoadDeclarationsFromXml(XmlElement element, IActionDescriptor parent)
     {
-      var desc = ActionDescriptor.FromXml(element, parent);
+      var desc = myActionParser.Parse(element, parent);
       if (desc == null)
         return;
 
-      foreach (XmlElement node in Util.Safe(element.SelectNodes(ActionDescriptor.ELEMENT_NAME)))
-        LoadDeclarationsFromXml(node, desc);
+      foreach (XmlNode node in Util.Safe(element.ChildNodes))
+      {
+        if (node is XmlElement)
+        {
+          LoadDeclarationsFromXml((XmlElement) node, desc);
+        }
+      }
 
       myManager.RegisterAction(desc);
     }

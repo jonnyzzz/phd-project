@@ -4,6 +4,7 @@ using DSIS.Utils;
 namespace DSIS.UI.Application.Actions
 {
   public abstract class BuildingActionPresentationManager<T>
+    where T : class 
   {
     private readonly IActionPresentationManager myPresentation;
 
@@ -12,14 +13,18 @@ namespace DSIS.UI.Application.Actions
       myPresentation = presentation;
     }
 
-    protected abstract T CreateItem(ActionDescriptor descriptor, IActionHandler handler);
+    protected abstract T CreateItem(IActionDescriptor descriptor, IActionHandler handler);
 
     protected abstract void SetChildren(T node, IEnumerable<T> children);
     
-    public T BuildMenu(ActionDescriptor action)
+    public T BuildMenu(IActionDescriptor action)
     {
       var item = CreateItem(action, myPresentation.Handler(action));
-      SetChildren( item, myPresentation.Children(action).Map(x => BuildMenu(x)));
+      var notNull = new List<T>(myPresentation.Children(action).MapNotNull(x => BuildMenu(x)));
+      if (notNull.Count > 0)
+      {
+        SetChildren( item, notNull);
+      }
       return item;
     }
   }

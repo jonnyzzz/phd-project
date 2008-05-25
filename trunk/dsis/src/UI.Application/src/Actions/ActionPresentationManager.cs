@@ -10,15 +10,15 @@ namespace DSIS.UI.Application.Actions
   {
     private readonly ActionDescriptor myRootAction = new ActionDescriptor("root", null, "", "", "RootAction");
 
-    private readonly Dictionary<string, ActionDescriptor> myIdToAction = new Dictionary<string, ActionDescriptor>();
+    private readonly Dictionary<string, IActionDescriptor> myIdToAction = new Dictionary<string, IActionDescriptor>();
 
     private readonly MultiDictionary<string, IActionHandler> myIdToHandler =
       new MultiDictionary<string, IActionHandler>(EqualityComparerFactory<string>.GetComparer());
 
-    private readonly MultiDictionary<string, ActionDescriptor> myChildren =
-      new MultiDictionary<string, ActionDescriptor>(EqualityComparerFactory<string>.GetComparer());
+    private readonly MultiDictionary<string, IActionDescriptor> myChildren =
+      new MultiDictionary<string, IActionDescriptor>(EqualityComparerFactory<string>.GetComparer());
 
-    public void RegisterAction(ActionDescriptor desc)
+    public void RegisterAction(IActionDescriptor desc)
     {
       myChildren.AddValue(desc.ParentId, desc);
       myIdToAction.Add(desc.ActionId, desc);
@@ -34,7 +34,7 @@ namespace DSIS.UI.Application.Actions
       get { return myRootAction; }
     }
 
-    public IEnumerable<ActionDescriptor> Children(ActionDescriptor action)
+    public IEnumerable<IActionDescriptor> Children(IActionDescriptor action)
     {
       foreach (var child in myChildren.GetValues(action.ActionId))
       {
@@ -42,19 +42,19 @@ namespace DSIS.UI.Application.Actions
       }
     }
 
-    public IActionHandler Handler(ActionDescriptor action)
+    public IActionHandler Handler(IActionDescriptor action)
     {
-      return new ActionHandlerProxy(action.ActionId, myIdToHandler.GetValues(action.ActionId));
+      return new ActionHandlerProxy(action.ActionId, () => myIdToHandler.GetValues(action.ActionId));
     }
 
     private class ActionHandlerProxy : IActionHandler
     {
       private readonly string myId;
-      private readonly List<IActionHandler> myChain;
+      private readonly Lazy<IEnumerable<IActionHandler>> myChain;
 
-      public ActionHandlerProxy(string id, IEnumerable<IActionHandler> chain)
+      public ActionHandlerProxy(string id, Lazy<IEnumerable<IActionHandler>> chain)
       {
-        myChain = new List<IActionHandler>(chain);
+        myChain = chain;
         myId = id;
       }
 
@@ -65,7 +65,7 @@ namespace DSIS.UI.Application.Actions
 
       public bool Do(Context ctx)
       {
-        foreach (var handler in myChain)
+        foreach (var handler in myChain())
         {
           if (handler.Enabled(ctx) && handler.Do(ctx))
             return true;
@@ -75,7 +75,7 @@ namespace DSIS.UI.Application.Actions
 
       public bool Enabled(Context ctx)
       {
-        foreach (var handler in myChain)
+        foreach (var handler in myChain())
         {
           if (handler.Enabled(ctx))
             return true;

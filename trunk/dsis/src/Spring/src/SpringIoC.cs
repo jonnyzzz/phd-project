@@ -37,6 +37,7 @@ namespace DSIS.Spring
       var includeManager = myServiceProvider.GetService<IAssemblyIncludeManager>();
       includeManager.RegisterAssembly(load);
 
+      //NOTE: The idea here is to split intializing context from Application context.
       myChildContext = new XmlApplicationContext(ApplicationContext,
                                                  myServiceProvider.GetService<SpringConfigRegistry>().
                                                    GetSpringConfigPaths().ToArray());

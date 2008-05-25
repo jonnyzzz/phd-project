@@ -21,12 +21,12 @@ namespace DSIS.UI.Application
 
       var menu = myMenuFactoy.BuildMenu(myActionManager.RootAction);
       myMainMenu.Items.Clear();
-      myMainMenu.Items.AddRange(menu.DropDownItems);
+      myMainMenu.Items.AddRange(((ToolStripDropDownItem)menu).DropDownItems);
     }
 
     private void newToolStripMenuItem_Click(object sender, System.EventArgs e)
     {
-      using(SystemFunctionForm form = new SystemFunctionForm())
+      using(var form = new SystemFunctionForm())
       {
         form.ShowDialog(this);
       }
