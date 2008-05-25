@@ -1,10 +1,11 @@
 using System.Windows.Forms;
 using DSIS.Spring;
+using DSIS.UI.UI;
 
 namespace DSIS.UI.Application
 {
   [UsedBySpring]
-  public class ApplicationClass : IApplicationEntryPoint
+  public class ApplicationClass : IApplicationEntryPoint, IApplicationClass
   {
     private readonly IMainForm myMainForm;
 
@@ -19,15 +20,8 @@ namespace DSIS.UI.Application
       System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
       System.Windows.Forms.Application.Run(myMainForm.GetFrom());
 
-//        new WizardForm(new SystemFunctionSelectionWizard()));
-      //          new SimpleWizard(new[]
-      //                             {new EmptyWizardPage(), new EmptyWizardPage()}){Title = "ZZZ"}) /*new MainForm()*/);
-
       return 0;
     }
-
-    public delegate T WithForm<T>(Form form);
-    public delegate void WithForm(Form form);
 
     public T ShowDialog<T>(WithForm<T> action)
     {
