@@ -69,6 +69,7 @@
     <Compile Include="src\Actions\ToolStripMenuItemPresentationManager.cs" />
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />
+    <Compile Include="src\DocumentChangedEventArgs.cs" />
     <Compile Include="src\IMainForm.cs" />
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>

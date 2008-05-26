@@ -1,20 +1,10 @@
 namespace DSIS.UI.Wizard
 {
-  public class StateWizard : IWizardPack
+  public abstract class StateWizard : IWizardPack
   {
-    private readonly IWizardPageWithState myRootPage;
-
-    protected StateWizard(IWizardPageWithState rootPage)
-    {
-      myRootPage = rootPage;
-    }
-
     public string Title { get; protected set; }
 
-    public IWizardPage FirstPage
-    {
-      get { return myRootPage; }
-    }
+    public IWizardPage FirstPage { get; protected set; }
 
     public bool IsLastPage(IWizardPage page)
     {

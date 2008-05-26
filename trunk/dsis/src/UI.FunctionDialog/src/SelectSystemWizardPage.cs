@@ -9,13 +9,16 @@ namespace DSIS.UI.FunctionDialog
     private readonly Dictionary<SystemSpaceSelection, IWizardPageWithState> myFactory =
       new Dictionary<SystemSpaceSelection, IWizardPageWithState>();
 
-    public SelectSystemWizardPage(IServiceProvider prov)
+    private readonly ISystemFunctionSelectionWizardInt myWizard;
+
+    public SelectSystemWizardPage(IServiceProvider prov, ISystemFunctionSelectionWizardInt wizard)
     {
+      myWizard = wizard;
       Title = "Select the way to define system";
       ControlInternal = new SelectSystemPage();
       myFactory = new Dictionary<SystemSpaceSelection, IWizardPageWithState>
                     {
-                      {SystemSpaceSelection.PREDEFINED, new SelectPredefinedSystemWizardPage(prov)},
+                      {SystemSpaceSelection.PREDEFINED, new SelectPredefinedSystemWizardPage(prov, myWizard)},
                       {SystemSpaceSelection.USER, null}
                     };
     }

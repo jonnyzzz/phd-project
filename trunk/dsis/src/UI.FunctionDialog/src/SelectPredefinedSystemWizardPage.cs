@@ -9,24 +9,14 @@ namespace DSIS.UI.FunctionDialog
 {
   public class SelectPredefinedSystemWizardPage : WizardPageBase<SelectPredefinedSystemPage>, IWizardPageWithState
   {
-    private static readonly ILog LOG = LogManager.GetLogger(typeof (SelectPredefinedSystemWizardPage));
     private readonly IServiceProvider myProvider;
+    private readonly ISystemFunctionSelectionWizardInt myWizard;
 
-    public SelectPredefinedSystemWizardPage(IServiceProvider prov)
+    public SelectPredefinedSystemWizardPage(IServiceProvider prov, ISystemFunctionSelectionWizardInt wizard)
     {
       myProvider = prov;
-      var services = prov.GetServices<ISystemInfoFactory>();
-      if (LOG.IsDebugEnabled)
-      {
-        using (NDC.Push("Predefined systems"))
-        {
-          foreach (var service in services)
-          {
-            LOG.DebugFormat("System: {0}", service.FactoryName);
-          }
-        }
-      }
-      ControlInternal = new SelectPredefinedSystemPage(services);
+      myWizard = wizard;
+      ControlInternal = new SelectPredefinedSystemPage(prov.GetServices<ISystemInfoFactory>());
     }
 
     public IWizardPageWithState NextPage
@@ -54,14 +44,15 @@ namespace DSIS.UI.FunctionDialog
         {
           return page;
         }
-        else if (factory.Type == SystemType.Continious)
+        
+        if (factory.Type == SystemType.Continious)
         {
-          return
-            new WizardPageWithStateD(
+          return new WizardPageWithStateD(
               new SelectPredefinedContiniousMethodWizardPage(myProvider),
               () => page);
         }
-        else return null;
+        
+        return null;
       }
     }
   }

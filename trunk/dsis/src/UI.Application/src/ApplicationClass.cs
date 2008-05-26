@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Forms;
 using DSIS.Spring;
 using DSIS.UI.UI;
@@ -8,6 +9,9 @@ namespace DSIS.UI.Application
   public class ApplicationClass : IApplicationEntryPoint, IApplicationClass
   {
     private readonly IMainForm myMainForm;
+
+    public event EventHandler<DocumentChangedEventArgs> DocumentChanging;
+    
 
     public ApplicationClass(IMainForm mainForm)
     {
@@ -31,6 +35,12 @@ namespace DSIS.UI.Application
     public void ShowDialog(WithForm action)
     {
       action(MainForm());
+    }
+
+    public IApplicationDocument Document
+    {
+      get { throw new System.NotImplementedException(); }
+      set { throw new System.NotImplementedException(); }
     }
 
     public void OnMenuExit()
