@@ -6,7 +6,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Abstract
 {
   //todo: Implement IList to have indexer and to be able to replace it with List<T>
-  public class GraphNodeHashList<TNode, TCell> : INodeSet<TNode, TCell>, INodeSetState<TNode, TCell>
+  public class GraphNodeHashList<TNode, TCell> : INodeSet<TNode, TCell>
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
   {
@@ -37,53 +37,53 @@ namespace DSIS.Graph.Abstract
       int index = tHashCode % myHashMax;
       myCount++;
 
-      Item it = new Item(t);
-      it.NextItem = myItems[index];
+      var it = new Item(t) { NextItem = myItems[index] };
       myItems[index] = it;
     }
 
-    public bool AddIfNotReplace(ref TNode t)
+    public TNode AddIfNotReplace(TCell cell, IGraphNodeFactory<TNode, TCell> ext, out bool wasAdded)
     {
-      TCell tCoordinate = t.Coordinate;
-      int tHashCode = t.HashCodeInternal;
-
-      int index = tHashCode%myHashMax;
-
-      Item it = myItems[index];
-      while (it != null)
+      var node = Find(cell);
+      if (node != null)
       {
-        
-        if (it.Value.HashCodeInternal == tHashCode && COMPARER.Equals(it.Value.Coordinate, tCoordinate))
-        {
-          t = it.Value;
-          return false;
-        }
-        it = it.NextItem;
+        wasAdded = false;
+        return node;
       }
-      myCount++;
-      it = new Item(t);
-      it.NextItem = myItems[index];
-      myItems[index] = it;
 
-      return true;
+      node = ext.CreateNode(cell);
+      AddNodeNoCheck(node);
+      wasAdded = true;
+      return node;      
     }
 
     public bool Contains(TCell node)
     {
+      return FindItem(node) != null;
+    }
+    
+    public TNode Find(TCell node)
+    {
+      var find = FindItem(node);
+      return find != null ? find.Value : null;
+    }
+
+    //todo: Create FindItem(TNode) no use cached hashcodes
+    private Item FindItem(TCell node)
+    {
       int hashCode = Node<TNode, TCell>.NodeHashCode(node);
-      int index = hashCode%myHashMax;
+      int index = hashCode % myHashMax;
 
       Item it = myItems[index];
       while (it != null)
       {
-        if (it.Value.HashCodeInternal == hashCode
-            && COMPARER.Equals(it.Value.Coordinate, node))
+        var value = it.Value;
+        if (value.HashCodeInternal == hashCode && COMPARER.Equals(value.Coordinate, node))
         {
-          return true;
+          return it;
         }
         it = it.NextItem;
       }
-      return false;
+      return null;
     }
 
     public IEnumerable<TNode> Values
@@ -244,12 +244,6 @@ namespace DSIS.Graph.Abstract
       {
         get { return Current; }
       }
-    }
-
-    public INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded)
-    {
-      wasAdded = AddIfNotReplace(ref t);
-      return this;
     }
   }
 }

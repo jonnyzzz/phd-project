@@ -24,7 +24,7 @@ namespace DSIS.Graph.Entropy.Tests
 
     protected static void AddEdge(IGraph<IntegerCoordinate> graph,  int i, int j)
     {
-      IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
+      var system = (IntegerCoordinateSystem)graph.CoordinateSystem;
       INode<IntegerCoordinate> n1 = AddNode(graph, system, i);
       INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(j));
       graph.AddEdgeToNode(n1, n2);
@@ -63,9 +63,9 @@ namespace DSIS.Graph.Entropy.Tests
 
     protected static TarjanGraph<IntegerCoordinate> DoBuildGraph(BuildGraph bg)
     {
-      MockSystemSpace mss = new MockSystemSpace(1, 0, 1, 100000);
+      var mss = new MockSystemSpace(1, 0, 1, 100000);
       IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(mss);
-      TarjanGraph<IntegerCoordinate> graph = new TarjanGraph<IntegerCoordinate>(ics);
+      var graph = new TarjanGraph<IntegerCoordinate>(ics);
       bg(graph);
 
       return graph;

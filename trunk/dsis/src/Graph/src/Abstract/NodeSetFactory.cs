@@ -35,7 +35,7 @@ namespace DSIS.Graph.Abstract
 
     private static INodeSetState<TNode, TCell> FromEightElementArray(TNode[] nodes, TNode t)
     {
-      return new GraphNodeHashList<TNode, TCell>(8, t, nodes);
+      return new GraphNodeHashListSetState<TNode, TCell>(8, t, nodes);
     }
   }
 }

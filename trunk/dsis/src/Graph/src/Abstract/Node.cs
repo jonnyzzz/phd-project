@@ -58,7 +58,7 @@ namespace DSIS.Graph.Abstract
     {
       if (!(obj is Node<TInh, TCell>))
         return false;
-      Node<TInh, TCell> node = (Node<TInh, TCell>) obj;
+      var node = (Node<TInh, TCell>) obj;
 
       return CellComparer.Equals(Coordinate, node.Coordinate);
     }

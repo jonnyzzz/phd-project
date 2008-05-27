@@ -28,8 +28,8 @@ namespace DSIS.Graph.Abstract
 
     public void AddEdgeToNode(INode<TCell> fromNode, INode<TCell> toNode)
     {
-      TNode from = (TNode) fromNode;
-      TNode to = (TNode) toNode;
+      var from = (TNode) fromNode;
+      var to = (TNode) toNode;
 
       if (from.AddEdgeTo(to))
       {
@@ -40,8 +40,10 @@ namespace DSIS.Graph.Abstract
 
     public INode<TCell> AddNode(TCell coordinate)
     {
-      TNode node = myExt.CreateNode(coordinate);
-      if (myNodes.AddIfNotReplace(ref node))
+      bool wasAdded;
+      var node = myNodes.AddIfNotReplace(coordinate, myExt, out wasAdded);
+
+      if (wasAdded)
       {
         myNodesCount++;
         myExt.NodeAdded(node);
@@ -84,6 +86,11 @@ namespace DSIS.Graph.Abstract
         }
       }
       return graph;
+    }
+
+    public bool HasArcToItself(TCell node)
+    {
+      return myExt.HasArcToItself(myNodes.Find(node));
     }
 
     public ICellCoordinateSystem<TCell> CoordinateSystem

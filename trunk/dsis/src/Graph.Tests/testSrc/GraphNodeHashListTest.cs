@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
-namespace DSIS.Graph
+namespace DSIS.Graph.Tests
 {
   [TestFixture]
   public class GraphNodeHashListTest
@@ -34,20 +35,19 @@ namespace DSIS.Graph
         
     private static void doTest(int hash, int N)
     {
-      GraphList list = new GraphList(hash);      
-      List<long> data = new List<long>();
+      var list = new GraphList(hash);      
+      var data = new List<long>();
       for(int i = 0; i < N; i++)
       {
         data.Add(i);
-        FakeNode node = new FakeNode(i);
-        Assert.IsTrue(list.AddIfNotReplace(ref node));
+        var node = new FakeNode(i);
+        bool wasAdded;
+        Assert.That(list.AddIfNotReplace(node.Coordinate, new FakeNodeFactory(), out wasAdded), Is.Not.Null);
+        Assert.That(wasAdded, Is.True);
       }
 
-      List<FakeNode> fakeNodes = new List<FakeNode>(list.Values);
-      List<long> nodes = fakeNodes.ConvertAll<long>(delegate(FakeNode node)
-                                                                            {
-                                                                              return node.Coordinate.GetCoordinate(0);
-                                                                            });
+      var fakeNodes = new List<FakeNode>(list.Values);
+      var nodes = fakeNodes.ConvertAll(node => node.Coordinate.GetCoordinate(0));
 
       nodes.Sort();
       data.Sort();
@@ -57,6 +57,14 @@ namespace DSIS.Graph
       for(int i=0; i<data.Count; i++)
       {
         Assert.AreEqual(data[i], nodes[i]);
+      }
+    }
+
+    private class FakeNodeFactory : IGraphNodeFactory<FakeNode, IntegerCoordinate>
+    {
+      public FakeNode CreateNode(IntegerCoordinate coordinate)
+      {
+        return new FakeNode(coordinate.GetCoordinate(0));
       }
     }
 

@@ -1,3 +1,4 @@
+using System.Linq;
 using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
@@ -15,7 +16,12 @@ namespace DSIS.Graph.Abstract
     {
     }
 
-    SimpleNode<TCellCoordinate> IGraphExtension<SimpleNode<TCellCoordinate>, TCellCoordinate>.CreateNode(
+    public bool HasArcToItself(SimpleNode<TCellCoordinate> node)
+    {
+      return GetEdgesInternal(node).Contains(node);
+    }
+
+    SimpleNode<TCellCoordinate> IGraphNodeFactory<SimpleNode<TCellCoordinate>, TCellCoordinate>.CreateNode(
       TCellCoordinate coordinate)
     {
       return new SimpleNode<TCellCoordinate>(coordinate);

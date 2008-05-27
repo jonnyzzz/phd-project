@@ -1,3 +1,4 @@
+using System;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
@@ -6,10 +7,10 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   public abstract class ArcDirection<T>
     where T : ICellCoordinate
   {
-    protected readonly HashHolder<T> myHash;
-    protected readonly MultiDictionary<T, JVRPair<T>> myIndex = new MultiDictionary<T, JVRPair<T>>(EqualityComparerFactory<T>.GetComparer());
+    private readonly HashHolder<T> myHash;
+    private readonly MultiDictionary<T, JVRPair<T>> myIndex = new MultiDictionary<T, JVRPair<T>>(EqualityComparerFactory<T>.GetComparer());
 
-    public ArcDirection(HashHolder<T> hash)
+    protected ArcDirection(HashHolder<T> hash)
     {
       myHash = hash;
     }
@@ -24,10 +25,18 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public double ComputeWeight(T node)
     {
       double w = 0;
-      
-      foreach (JVRPair<T> edge in myIndex[node])
-      {        
-        w += myHash.GetItem(edge);
+      var values = myIndex.GetValues(node);
+
+      if (values.Count == 0)
+      {
+        throw new Exception("Failed to find edges for " + node);
+      }
+      else
+      {
+        foreach (JVRPair<T> edge in values)
+        {
+          w += myHash.GetItem(edge);
+        }
       }
       return w;
     }

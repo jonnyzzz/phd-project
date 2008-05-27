@@ -6,6 +6,10 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate 
     where TNode : Node<TNode, TCell>
   {
-    bool AddIfNotReplace(ref TNode t);    
+    TNode AddIfNotReplace(TCell cell, IGraphNodeFactory<TNode, TCell> ext, out bool wasAdded);
+
+    bool Contains(TCell node);
+
+    TNode Find(TCell node);
   }
 }

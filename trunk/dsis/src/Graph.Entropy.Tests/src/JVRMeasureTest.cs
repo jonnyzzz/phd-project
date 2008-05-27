@@ -56,28 +56,64 @@ namespace DSIS.Graph.Entropy.Tests
     }
 
     [Test]
-    public void Test_BigFull()
+    public void Test_9Full()
     {
-      List<Node> ns = new List<Node>();
-      const int N = 10;
-      for(int i=0; i<N; i++)
+      DoFullGraphTest(9, 3.1699250014423015d);
+    }
+    
+    [Test]
+    public void Test_10Full()
+    {
+      DoFullGraphTest(10, 3.1699250014423015d);
+    }
+
+    [Test]
+    public void Test_11Full()
+    {
+      DoFullGraphTest(11, 3.1699250014423015d);
+    }
+
+    private void DoFullGraphTest(int N, double entropy)
+    {
+      var ns = new List<Node>();
+      
+      for(int i=1; i<=N; i++)
       {
-        for(int j=0; j<N; j++)
+        for(int j=1; j<=N; j++)
         {          
           ns.Add(n(i,j));
         }
       }
+      
+      DoTest("fni", entropy, ns.ToArray());
+    }
 
-      DoTest("fni", 3.3219280948873489, ns.ToArray());
+    [Test]
+    public void Test_2Full()
+    {
+      var ns = new List<Node> { n(1, 1), n(1, 2), n(2, 2), n(2, 1)};
+      DoTest("fni", 1, ns.ToArray());
+    }
+    
+    [Test]
+    public void Test_3Full()
+    {
+      var ns = new List<Node>
+                 {
+                    n(1, 1), n(1, 2), n(1, 3), 
+                    n(2, 1), n(2, 2), n(2, 3), 
+                    n(3, 1), n(3, 2), n(3, 3), 
+                  };
+      DoTest("fni", 1.5849625007211552d, ns.ToArray());
     }
 
     [Test]
     public void Test_OneLoop()
     {
-      const int N = 2000;
-      for(int i=1000; i<N; i++)
+      const int N = 300;
+      for(int i=100; i<N; i++)
       {
-        List<Node> ns = new List<Node>();
+        var ns = new List<Node>();
         for(int j=0; j<i; j++)
         {
           ns.Add(n(j, (j+1)%i));          

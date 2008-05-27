@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Utils;
@@ -21,8 +22,6 @@ namespace DSIS.Graph.Abstract
     {
       myComponents = info;
     }
-
-    #region IGraphStrongComponents<TCell> Members
 
     public int ComponentCount
     {
@@ -78,10 +77,6 @@ namespace DSIS.Graph.Abstract
       return myComponents.FilterNodes(componentIds, NodesInternal);
     }
 
-    #endregion
-
-    #region IGraphWithStrongComponent<TCell> Members
-
     public IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
     {
       return this;
@@ -100,11 +95,7 @@ namespace DSIS.Graph.Abstract
       tw.WriteLine("-----------------------------------------");
     }
 
-    #endregion
-
-    #region IGraphExtension<StrongComponentNode<TCell>,TCell> Members
-
-    StrongComponentNode<TCell> IGraphExtension<StrongComponentNode<TCell>, TCell>.CreateNode(TCell coordinate)
+    StrongComponentNode<TCell> IGraphNodeFactory<StrongComponentNode<TCell>, TCell>.CreateNode(TCell coordinate)
     {
       return new StrongComponentNode<TCell>(coordinate);
     }
@@ -117,12 +108,15 @@ namespace DSIS.Graph.Abstract
       myComponents.OnConnection(fromInfo, toInfo);
     }
 
+    public bool HasArcToItself(StrongComponentNode<TCell> node)
+    {
+      return GetEdgesInternal(node).Contains(node);
+    }
+
     void IGraphExtension<StrongComponentNode<TCell>, TCell>.NodeAdded(StrongComponentNode<TCell> node)
     {
       GetStrongComponentInfo(node);
     }
-
-    #endregion
 
     private IStrongComponentInfoEx GetStrongComponentInfo(StrongComponentNode<TCell> node)
     {
@@ -139,7 +133,7 @@ namespace DSIS.Graph.Abstract
 
     internal static IEnumerable<IStrongComponentInfoEx> Optimize(IEnumerable<IStrongComponentInfo> infos)
     {
-      Hashset<IStrongComponentInfoEx> result = new Hashset<IStrongComponentInfoEx>();
+      var result = new Hashset<IStrongComponentInfoEx>();
       foreach (IStrongComponentInfoEx info in infos)
       {
         result.Add(info.Reference);
@@ -168,6 +162,6 @@ namespace DSIS.Graph.Abstract
         tw.WriteLine("}}");
       }
       tw.WriteLine("Finished \r\n");
-    }
+    }    
   }
 }

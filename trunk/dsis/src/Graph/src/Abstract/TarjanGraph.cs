@@ -28,8 +28,8 @@ namespace DSIS.Graph.Abstract
       info.Minimum = 0;
       info.Maximum = EdgesCount;
 
-      TarjanNodeStack<TCell> stack = new TarjanNodeStack<TCell>(TarjanNodeFlags.STACK);
-      TarjanNodeStack<TCell> route = new TarjanNodeStack<TCell>(TarjanNodeFlags.ROUTE);
+      var stack = new TarjanNodeStack<TCell>(TarjanNodeFlags.STACK);
+      var route = new TarjanNodeStack<TCell>(TarjanNodeFlags.ROUTE);
 
       long state = 2;
       long cnt = 1;
@@ -37,7 +37,7 @@ namespace DSIS.Graph.Abstract
       TarjanNode<TCell> w = null;
       TarjanNodeData<TCell> wData = null;
 
-      TarjanComponentInfoManager comps = new TarjanComponentInfoManager();
+      var comps = new TarjanComponentInfoManager();
 
       foreach (TarjanNode<TCell> node in NodesInternal)
       {
@@ -111,15 +111,14 @@ namespace DSIS.Graph.Abstract
               if (v == stack.Peek())
               {
                 stack.Pop();
-                if (v.GetFlag(TarjanNodeFlags.IS_LOOP))
+                if (v.IsSelfLoop)
                 {
-                  TarjanComponentInfo ic = comps.NextComponent();
-                  ic.SetNodeComponent(v);
+                  comps.NextComponent().SetNodeComponent(v);
                 }
               }
               else
               {
-                TarjanComponentInfo ic = comps.NextComponent();
+                var ic = comps.NextComponent();
                 do
                 {
                   w = stack.Pop();
@@ -146,7 +145,7 @@ namespace DSIS.Graph.Abstract
       }
 
       //clean up all useless data.
-      foreach (TarjanNode<TCell> node in NodesInternal)
+      foreach (var node in NodesInternal)
       {
         node.ClearNodeData();
       }
@@ -156,7 +155,7 @@ namespace DSIS.Graph.Abstract
       return new TarjanStrongComponentImpl<TCell>(this, comps);
     }
 
-    TarjanNode<TCell> IGraphExtension<TarjanNode<TCell>, TCell>.CreateNode(TCell coordinate)
+    TarjanNode<TCell> IGraphNodeFactory<TarjanNode<TCell>, TCell>.CreateNode(TCell coordinate)
     {
       return new TarjanNode<TCell>(coordinate);
     }
@@ -167,6 +166,11 @@ namespace DSIS.Graph.Abstract
       {
         from.SetFlag(TarjanNodeFlags.IS_LOOP, true);
       }
+    }
+
+    public bool HasArcToItself(TarjanNode<TCell> node)
+    {
+      return node.IsSelfLoop;
     }
 
     void IGraphExtension<TarjanNode<TCell>, TCell>.NodeAdded(TarjanNode<TCell> node)

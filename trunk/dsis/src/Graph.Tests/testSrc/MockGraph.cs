@@ -34,6 +34,11 @@ namespace DSIS.Graph.Tests
       throw new NotImplementedException();
     }
 
+    public bool HasArcToItself(T node)
+    {
+      throw new NotImplementedException();
+    }
+
     public ICellCoordinateSystem<T> CoordinateSystem
     {
       get { return myCoordinates; }

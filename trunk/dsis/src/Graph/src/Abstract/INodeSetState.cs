@@ -6,7 +6,6 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
   {
-    INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded);
-    
+    INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded);    
   }
 }

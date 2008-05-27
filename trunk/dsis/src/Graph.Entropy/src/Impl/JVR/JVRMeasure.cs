@@ -75,6 +75,14 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         double outgoing = myStraitEdges.ComputeWeight(node);
         bool needNorm = false;
 
+        //this is a fix for JVR method refered to JVR2
+        if (myGraph.HasArcToItself(node))
+        {
+          var weight = myHashHolder.GetItem(new JVRPair<T>(node, node));
+          incoming -= weight;
+          outgoing -= weight;
+        }
+
         needNorm |= (incoming >= maxValue || outgoing >= maxValue || incoming <= normEps || outgoing <= normEps);
 
         if (Math.Abs(incoming - outgoing) <= precision)

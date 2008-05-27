@@ -43,6 +43,8 @@ namespace DSIS.Graph
 
     IGraph<TCoordinate> Project(ICellCoordinateSystemProjector<TCoordinate> projector);
 
+    bool HasArcToItself(TCoordinate node);
+
     void Dump(TextWriter tw);
     string Dump();
   }

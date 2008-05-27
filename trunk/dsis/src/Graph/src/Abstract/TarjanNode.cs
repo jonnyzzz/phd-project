@@ -11,23 +11,22 @@ namespace DSIS.Graph.Abstract
 
     public TarjanNode(TCell coordinate) : base(coordinate)
     {
-      myLazyTarjanNodeData = delegate
-                               {
-                                 return new TarjanNodeData<TCell>(this);
-                               };
+      myLazyTarjanNodeData = () => new TarjanNodeData<TCell>(this);
     }
     
     internal TarjanNodeData<TCell> Data
     {
-      get
-      {
-        return GetUserData(myLazyTarjanNodeData);        
-      }
+      get { return GetUserData(myLazyTarjanNodeData); }
     }
 
     internal void ClearNodeData()
     {
       SetUserData<TarjanNodeData<TCell>>(null);
+    }
+
+    public bool IsSelfLoop
+    {
+      get { return GetFlag(TarjanNodeFlags.IS_LOOP); }
     }
 
     public void SetFlag(TarjanNodeFlags mask, bool value)
