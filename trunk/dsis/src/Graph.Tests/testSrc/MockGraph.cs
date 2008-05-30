@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
+using DSIS.Core.System.Impl;
 using DSIS.Graph.Tests;
 
 namespace DSIS.Graph.Tests

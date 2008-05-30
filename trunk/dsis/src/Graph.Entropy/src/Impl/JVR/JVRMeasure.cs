@@ -8,6 +8,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   public class JVRMeasure<T>
     where T : ICellCoordinate
   {
+    private readonly JVRMeasureOptions myOptions;
     protected readonly HashHolder<T> myHashHolder;
     private readonly ArcDirection<T> myStraitEdges;
     private readonly ArcDirection<T> myBackEdges;
@@ -15,8 +16,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     private readonly IGraph<T> myGraph;
     private readonly IGraphStrongComponents<T> myComponents;
 
-    public JVRMeasure(IGraph<T> graph, IGraphStrongComponents<T> components)
+    public JVRMeasure(IGraph<T> graph, IGraphStrongComponents<T> components, JVRMeasureOptions opts)
     {
+      myOptions = opts;
       myHashHolder = new HashHolder<T>(graph.CoordinateSystem);
       myBackEdges = new InverseArcDirection<T>(myHashHolder);
       myStraitEdges = new StraitArcDirection<T>(myHashHolder);
@@ -67,6 +69,8 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       double normEps = precision*1e-4;
       const double maxValue = 3;
 
+      bool notIncludeSelfLoop = myOptions.IncludeSelfEdge;
+
       while (true)
       {
         T node = myHashHolder.NextNode();
@@ -76,7 +80,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         bool needNorm = false;
 
         //this is a fix for JVR method refered to JVR2
-        if (myGraph.HasArcToItself(node))
+        if (notIncludeSelfLoop && myGraph.HasArcToItself(node))
         {
           var weight = myHashHolder.GetItem(new JVRPair<T>(node, node));
           incoming -= weight;

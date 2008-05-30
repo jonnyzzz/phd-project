@@ -30,11 +30,10 @@ namespace DSIS.Graph.Abstract
       AddNodeNoCheck(node);
     }
 
-    private void AddNodeNoCheck(TNode t)
+    protected void AddNodeNoCheck(TNode t)
     {
-      int tHashCode = t.HashCodeInternal;
-
-      int index = tHashCode % myHashMax;
+      var tHashCode = t.HashCodeInternal;
+      var index = tHashCode % myHashMax;
       myCount++;
 
       var it = new Item(t) { NextItem = myItems[index] };
@@ -70,8 +69,8 @@ namespace DSIS.Graph.Abstract
     //todo: Create FindItem(TNode) no use cached hashcodes
     private Item FindItem(TCell node)
     {
-      int hashCode = Node<TNode, TCell>.NodeHashCode(node);
-      int index = hashCode % myHashMax;
+      var hashCode = Node<TNode, TCell>.NodeHashCode(node);
+      var index = hashCode % myHashMax;
 
       Item it = myItems[index];
       while (it != null)

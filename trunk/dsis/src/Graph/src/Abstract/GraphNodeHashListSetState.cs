@@ -17,10 +17,14 @@ namespace DSIS.Graph.Abstract
     public INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded)
     {
       var found = Find(t.Coordinate);
-      wasAdded = found == null;
-      if (!wasAdded)
-        t = found;
 
+      if (wasAdded = (found == null))
+      {
+        AddNodeNoCheck(t);
+      } else
+      {
+        t = found;
+      }
       return this;
     }
   }

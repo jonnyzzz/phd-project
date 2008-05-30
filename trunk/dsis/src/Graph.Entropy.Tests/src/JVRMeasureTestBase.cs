@@ -25,7 +25,7 @@ namespace DSIS.Graph.Entropy.Tests
       private readonly double myEps;
 
       public JVR(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components, double eps)
-        : base(graph, components)
+        : base(graph, components, new JVRMeasureOptions{IncludeSelfEdge = false})
       {
         myEps = eps;
       }

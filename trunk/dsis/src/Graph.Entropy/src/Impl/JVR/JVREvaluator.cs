@@ -10,12 +10,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public IGraphMeasure<T> Measure(IGraph<T> graph, IGraphStrongComponents<T> comps)
     {
-      JVRMeasure<T> j = new JVRMeasure<T>(graph, comps);
+      var j = new JVRMeasure<T>(graph, comps, new JVRMeasureOptions{IncludeSelfEdge = false});
       j.FillGraph();      
       j.Iterate(EPS);
-
-//      using(TextWriter tw = File.CreateText(string.Format(@"e:\graph{0}.txt", ++cmt)))
-//        j.Dump(tw);
 
       return j.CreateEvaluator();
     }

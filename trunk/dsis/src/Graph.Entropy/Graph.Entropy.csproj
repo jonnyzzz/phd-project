@@ -53,6 +53,7 @@
     <Compile Include="src\Impl\JVR\ItemRebuildCookie.cs" />
     <Compile Include="src\Impl\JVR\ItemUpdateCookie.cs" />
     <Compile Include="src\Impl\JVR\JVREvaluator.cs" />
+    <Compile Include="src\Impl\JVR\JVRMeasureOptions.cs" />
     <Compile Include="src\Impl\Loop\AllEngesOnALoopGraphSearch.cs" />
     <Compile Include="src\Impl\Loop\AllNodesOnALoopGraphSearch.cs" />
     <Compile Include="src\Impl\Eigen\EigenEntropyEvaluatorImpl.cs" />

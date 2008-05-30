@@ -24,6 +24,18 @@ namespace DSIS.Utils
       return v;
     }
 
+    public static T Find<T>(this IEnumerable<T> enu, T def, Predicate<T> pred)
+    {
+      foreach (var t in enu)
+      {
+        if (pred(t))
+        {
+          return t;
+        }
+      }
+      return def;
+    }
+
     public static IEnumerable<T> Merge<T>(IEnumerable<IEnumerable<T>> cs)
     {
       return Merge<T, T>(cs);

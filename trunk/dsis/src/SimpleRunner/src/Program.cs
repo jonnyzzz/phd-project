@@ -118,9 +118,9 @@ namespace DSIS.SimpleRunner
 
       var parallel = new SimpleParallel();
 
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
-//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systemHenon, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
 //      }
       /*for (int steps = 8; steps <= 15; steps++)

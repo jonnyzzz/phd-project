@@ -31,13 +31,14 @@ namespace DSIS.Scheme.Impl.Actions.Files
       where T : IIntegerCoordinateSystem<Q>
     {
       GnuplotPointsFileWriter wr;
-      var data = new double[SystemDimension];
+      var data = new double[SystemDimension+1];
       using (wr = new GnuplotPointsFileWriter(measureFile, SystemDimension + 1))
       {
         foreach (var pair in measure.GetMeasureNodes())
         {
           system.CenterPoint(pair.Key, data);
-          wr.WritePoint(new ImagePoint(data[0], pair.Value));
+          data[SystemDimension] = pair.Value;
+          wr.WritePoint(new ImagePoint(data));
         }
       }
       return wr;
