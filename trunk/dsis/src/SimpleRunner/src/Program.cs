@@ -6,6 +6,7 @@ using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Function.Predefined.Logistics;
+using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Scheme;
@@ -118,9 +119,9 @@ namespace DSIS.SimpleRunner
 
       var parallel = new SimpleParallel();
 
-//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
-//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
 //      }
       /*for (int steps = 8; steps <= 15; steps++)
@@ -276,15 +277,14 @@ namespace DSIS.SimpleRunner
                                                                           };
 
 
-/*                               foreach (StrangeEntropyEvaluatorParams evaluatorParams in entropys)
+                               foreach (var _evaluatorParams in entropys)
                                {
+                                 var evaluatorParams = _evaluatorParams;
                                  entropies.Add(new AgregateAction(
                                                  delegate(IActionGraphPartBuilder bld)
                                                    {
-                                                     IAction entropy = EntropyForEachComponent(
-                                                       DrawEntropyAction(steps,
-                                                                         new StrangeEntropyAction
-                                                                           ()));
+                                                     var entropy = EntropyForEachComponent(
+                                                       DrawEntropyAction(steps,new StrangeEntropyAction()));
 
                                                      var pa = new ProxyAction();
 
@@ -293,9 +293,10 @@ namespace DSIS.SimpleRunner
                                                      bld.AddEdge(entropy, bld.End);
                                                      bld.AddEdge(new SetStrangeEntropyParamsAction(evaluatorParams), entropy);
                                                    }), evaluatorParams.PresentableName);
-                               }*/
+                               }
 //                               entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
-                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction())), "JVR");
+                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = false }))), "JVR2");
+                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = true }))), "JVR");
                                entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new EigenEntropyAction())), "Eigen");
 
                                foreach (var pair in entropies)

@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using DSIS.Graph;
-using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Scheme.Ctx;
 
@@ -8,6 +6,13 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 {
   public class JVRMeasureAction : IntegerCoordinateSystemActionBase2
   {
+    private readonly JVRMeasureOptions myOpts;
+
+    public JVRMeasureAction(JVRMeasureOptions opts)
+    {
+      myOpts = opts;
+    }
+
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
       return ColBase(base.Check<T, Q>(system, ctx), Create(Keys.Graph<Q>()), Create(Keys.GraphComponents<Q>()));
@@ -15,11 +20,11 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
-      IGraphWithStrongComponent<Q> graph = Keys.Graph<Q>().Get(input);
-      IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
+      var graph = Keys.Graph<Q>().Get(input);
+      var comps = Keys.GraphComponents<Q>().Get(input);
 
-      JVREvaluator<Q> evaluator = new JVREvaluator<Q>();
-      IGraphMeasure<Q> measure = evaluator.Measure(graph, comps);
+      var evaluator = new JVREvaluator<Q>(myOpts);
+      var measure = evaluator.Measure(graph, comps);
       
       Keys.GraphMeasure<Q>().Set(output, measure);
       Keys.GraphEntropyKey.Set(output, measure);
