@@ -1,7 +1,5 @@
 using System;
 using DSIS.Core.System;
-using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Ikeda
 {
@@ -40,15 +38,6 @@ namespace DSIS.Function.Predefined.Ikeda
     protected override IFunction<double> GetFunctionDerivateInternal()
     {
       throw new NotImplementedException();
-    }
-  }
-
-  [UsedBySpring]
-  public class IkeadFactory : NoParameterSystemInfoFactoryBase
-  {
-    public IkeadFactory(SystemInfoFactory factory)
-      : base(2,SystemType.Descrete, factory, "Ikeda", () => new IkedaFunctionSystemInfoDecorator())
-    {
     }
   }
 }

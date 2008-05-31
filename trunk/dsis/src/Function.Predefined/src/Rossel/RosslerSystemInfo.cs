@@ -9,7 +9,7 @@ namespace DSIS.Function.Predefined.Rossel
     private readonly double myB;
     private readonly double myA;
 
-    public RosslerSystemInfo(ISystemSpace systemSpace, double a, double b, double c)
+    public RosslerSystemInfo(double a, double b, double c)
       : base(3)
     {
       myA = a;

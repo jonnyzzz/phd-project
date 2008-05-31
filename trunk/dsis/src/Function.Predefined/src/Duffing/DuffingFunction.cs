@@ -1,4 +1,5 @@
 using DSIS.Core.System;
+using DSIS.Function.Predefined.Delayed;
 
 namespace DSIS.Function.Predefined.Duffing
 {

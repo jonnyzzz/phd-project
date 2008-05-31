@@ -1,7 +1,5 @@
 using System;
 using DSIS.Core.System;
-using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Henon
 {
@@ -32,7 +30,7 @@ namespace DSIS.Function.Predefined.Henon
       throw new NotImplementedException();
     }
 
-    public class HenonFunction : Function<double>, IFunction<double>
+    private class HenonFunction : Function<double>, IFunction<double>
     {
       protected readonly double myA;
       protected readonly double myB;
@@ -49,15 +47,6 @@ namespace DSIS.Function.Predefined.Henon
         Output[0] = 1 - myA * Input[0] * Input[0] + Input[1] / 5;
         Output[1] = 5 * myB * Input[0];
       }
-    }
-  }
-
-  [UsedBySpring]
-  public class HenonDellnitzFactory : DoubleParametersSystemInfoFactoryBase
-  {
-    public HenonDellnitzFactory(DoubleArrayParser parser, SystemInfoFactory factory)
-      : base(2,SystemType.Descrete, "HenonDellnitz", 2, paramz => new HenonDellnitzFunctionSystemInfoDecorator(paramz[0], paramz[1]), parser, factory)
-    {
     }
   }
 }

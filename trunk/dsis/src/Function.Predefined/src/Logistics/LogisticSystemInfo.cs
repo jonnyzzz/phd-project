@@ -1,26 +1,26 @@
 using System;
 using DSIS.Core.System;
 
-namespace DSIS.Function.Predefined.VanDerPol
+namespace DSIS.Function.Predefined.Logistics
 {
-  public class VanDerPolSystemInfo : DoubleSystemInfoBase
+  public class LogisticSystemInfo : DoubleSystemInfoBase
   {
     private readonly double myA;
 
-    public VanDerPolSystemInfo(double a)
-      : base(2)
+    public LogisticSystemInfo(double a)
+      : base(1)
     {
       myA = a;
     }
 
     public override string PresentableName
     {
-      get { return "Van-der-Pol"; }
+      get { return string.Format("Logistic {0}", myA); }
     }
 
     protected override IFunction<double> GetFunctionInternal()
     {
-      return new VanDerPolFunction(myA);
+      return new LogisticFunction(myA);
     }
 
     protected override IFunction<double> GetFunctionDerivateInternal()

@@ -5,8 +5,6 @@
 
 using System;
 using DSIS.Core.System;
-using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Delayed
 {
@@ -32,15 +30,6 @@ namespace DSIS.Function.Predefined.Delayed
     protected override IFunction<double> GetFunctionDerivateInternal()
     {
       throw new NotImplementedException();
-    }
-  }
-
-  [UsedBySpring]
-  public class DelayedFactory : DoubleParametersSystemInfoFactoryBase
-  {
-    public DelayedFactory(DoubleArrayParser parser, SystemInfoFactory factory)
-      : base(2,SystemType.Descrete, "Delayed", 1, paramz => new DelayedFunctionSystemInfo(paramz[0]), parser, factory)
-    {
     }
   }
 }

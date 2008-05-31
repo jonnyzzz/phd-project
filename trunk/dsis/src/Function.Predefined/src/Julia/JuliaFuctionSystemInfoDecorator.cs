@@ -1,26 +1,23 @@
 using System;
 using DSIS.Core.System;
 
-namespace DSIS.Function.Predefined.VanDerPol
+namespace DSIS.Function.Predefined.Julia
 {
-  public class VanDerPolSystemInfo : DoubleSystemInfoBase
+  public class JuliaFuctionSystemInfoDecorator : DoubleSystemInfoBase
   {
-    private readonly double myA;
-
-    public VanDerPolSystemInfo(double a)
+    public JuliaFuctionSystemInfoDecorator()
       : base(2)
     {
-      myA = a;
     }
 
     public override string PresentableName
     {
-      get { return "Van-der-Pol"; }
+      get { return "Julia"; }
     }
 
     protected override IFunction<double> GetFunctionInternal()
     {
-      return new VanDerPolFunction(myA);
+      return new JuliaFunction();
     }
 
     protected override IFunction<double> GetFunctionDerivateInternal()

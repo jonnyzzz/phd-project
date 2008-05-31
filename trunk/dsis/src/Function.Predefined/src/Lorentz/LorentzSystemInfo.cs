@@ -9,7 +9,7 @@ namespace DSIS.Function.Predefined.Lorentz
     private readonly double myRho;
     private readonly double myBeta;
 
-    public LorentzSystemInfo(ISystemSpace systemSpace, double beta, double rho, double sigma)
+    public LorentzSystemInfo(double beta, double rho, double sigma)
       : base(3)
     {
       myBeta = beta;
