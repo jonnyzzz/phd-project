@@ -12,7 +12,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
     {
     }
 
-    public sealed class VisitedCollection : VisitedCollectionBase<T>, IVisitedCollection<T>
+    public sealed class VisitedCollection : VisitedCollectionBase<T>
     {
       public override SearchTreeNode<T> CreateQueuedNodeIfNoLoop(SearchTreeNode<T> parent, INode<T> to)
       {

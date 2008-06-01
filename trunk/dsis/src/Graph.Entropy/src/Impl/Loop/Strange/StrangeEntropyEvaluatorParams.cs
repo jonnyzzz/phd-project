@@ -1,6 +1,7 @@
 using System;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Entropy.Impl.Loop.Combinatorics;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
@@ -39,6 +40,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
           return new GraphWeightSearchFiltering<Q>(comps, info);
         case StrangeEvaluatorType.WeightSearch_Limited:
           return new GraphWeightSearchLimited<Q>(comps, info);
+        case StrangeEvaluatorType.Combinatorics:
+          return null;
         default:
           throw new ArgumentException("Unexpected state " + EntropyType);
       }
@@ -47,13 +50,14 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
     internal ILoopIterator CreateIterator<Q>(ILoopIteratorCallback<Q> callback, IGraphStrongComponents<Q> comps, IStrongComponentInfo info) 
       where Q : ICellCoordinate
     {
-      IGraphWeightSearch<Q> search = CreateSearch(comps, info);
       switch (Strategy)
       {
         case StrangeEvaluatorStrategy.FIRST:
-          return new LoopIteratorFirst<Q>(callback, comps, info, search);
+          return new LoopIteratorFirst<Q>(callback, comps, info, CreateSearch(comps, info));
         case StrangeEvaluatorStrategy.SMART:          
-          return new LoopIteratorSmart<Q>(callback, comps, info, search);
+          return new LoopIteratorSmart<Q>(callback, comps, info, CreateSearch(comps, info));
+        case StrangeEvaluatorStrategy.COMBINATORICS:
+          return new CombinatoricsLoopSearch<Q>(callback, comps.AsGraph(new[]{info}), int.MaxValue);
         default:
           throw new ArgumentException("Unexpected state " + Strategy);
       }

@@ -6,5 +6,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
     WeightSearch_2,
     WeightSearch_Filtering,
     WeightSearch_Limited,
+
+    Combinatorics
   }
 }

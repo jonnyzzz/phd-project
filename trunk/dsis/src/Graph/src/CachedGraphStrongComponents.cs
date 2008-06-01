@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -22,7 +21,7 @@ namespace DSIS.Graph
       IGraph<T> graph;
       if (!myCache.TryGetValue(info, out graph))
       {
-        graph = myOriginal.AsGraph(new IStrongComponentInfo[] {info});
+        graph = myOriginal.AsGraph(new[] {info});
         myCache[info] = graph;
       }
       return graph;

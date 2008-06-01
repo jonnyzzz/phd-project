@@ -132,8 +132,8 @@ namespace DSIS.SimpleRunner
 
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
-//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, duffing, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, duffing, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, vanderpol, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
 //      }
@@ -284,9 +284,15 @@ namespace DSIS.SimpleRunner
                                  StrangeEvaluatorStrategy.SMART,
                                  EntropyLoopWeights.CONST);
 
+                               var combinatoricsEntropy = new StrangeEntropyEvaluatorParams(
+                                 StrangeEvaluatorType.Combinatorics,
+                                 StrangeEvaluatorStrategy.COMBINATORICS,
+                                 EntropyLoopWeights.CONST);
+
                                StrangeEntropyEvaluatorParams[] entropys = {
                                                                             entropyFirst, //entropySmartL, 
-                                                                            entropySmart
+                                                                            entropySmart,
+                                                                            combinatoricsEntropy
                                                                           };
 
 
@@ -312,7 +318,7 @@ namespace DSIS.SimpleRunner
                                entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = true }))), "JVR");
                                entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new EigenEntropyAction())), "Eigen");
 
-                               /*foreach (var pair in entropies)
+                               foreach (var pair in entropies)
                                {
                                  IAction entropy = pair.Key;
                                  IAction customWf = new CustomPrefixWorkingFolderAction(pair.Value);
@@ -320,7 +326,7 @@ namespace DSIS.SimpleRunner
                                  xgr.AddEdge(xgr.Start, entropy);
                                  xgr.AddEdge(xwf, customWf);
                                  xgr.AddEdge(customWf, entropy);
-                               }*/
+                               }
                                xgr.AddEdge(xgr.Start, xgr.End);
                              });
     }

@@ -13,7 +13,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
     {
       comps = new CachedGraphStrongComponents<T>(comps);
       
-      EntropyGraphWeightCallback<T> cb = new EntropyGraphWeightCallback<T>(@params.LoopWeight, graph.CoordinateSystem);
+      var cb = new EntropyGraphWeightCallback<T>(@params.LoopWeight, graph.CoordinateSystem);
       foreach (IStrongComponentInfo info in comps.Components)
       {
         ILoopIterator it = @params.CreateIterator(cb, comps, info);

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
-using DSIS.Graph.Entropy.Impl.Loop.Path;
+using DSIS.Graph.Entropy.Impl.Loop;
+using DSIS.Graph.Entropy.Impl.Loop.Combinatorics;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Scheme.Ctx;
 
