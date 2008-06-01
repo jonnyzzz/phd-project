@@ -227,9 +227,8 @@ namespace DSIS.SimpleRunner
 
       protected override ISystemInfo CreateSystemInfo()
       {
-        DefaultSystemSpace space =
-          new DefaultSystemSpace(3, new double[] { -100, -100, -100 }, new double[] { 100, 100, 100}, new long[] { 10, 10, 10 });
-        return new RungeKuttSolver(new LorentzSystemInfo(space, 8.0/3.0, 28, 10), 15, 0.1);
+        var space = new DefaultSystemSpace(3, new double[] { -100, -100, -100 }, new double[] { 100, 100, 100}, new long[] { 10, 10, 10 });
+        return new RungeKuttSolver(new LorentzSystemInfo(8.0/3.0, 28, 10), 15, 0.1);
       }
 
       protected override long[] Subdivide
@@ -291,10 +290,9 @@ namespace DSIS.SimpleRunner
 
       protected override ISystemInfo CreateSystemInfo()
       {
-        DefaultSystemSpace space =
-          new DefaultSystemSpace(3, new double[] { -100, -100, -100 }, new double[] { 100, 100, 100}, new long[] { 10, 10, 10 });
+        var space = new DefaultSystemSpace(3, new double[] { -100, -100, -100 }, new double[] { 100, 100, 100}, new long[] { 10, 10, 10 });
 //        return new RungeKuttSolver(new RosslerSystemInfo(space, 0.2, 0.2, 5.7), 5, 0.1);
-        return new RungeKuttSolver(new RosslerSystemInfo(space, 0.1, 0.1, 14), 1, 0.01);
+        return new RungeKuttSolver(new RosslerSystemInfo(0.1, 0.1, 14), 1, 0.01);
       }
 
       protected override long[] Subdivide

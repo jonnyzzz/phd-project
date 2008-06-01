@@ -3,9 +3,12 @@ using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.CellImageBuilder.PointMethod;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
+using DSIS.Function.Predefined.Duffing;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Function.Predefined.Logistics;
+using DSIS.Function.Predefined.VanDerPol;
+using DSIS.Function.Solvers.RungeKutt;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
@@ -27,8 +30,8 @@ namespace DSIS.SimpleRunner
   {
     public static void _Main(string[] args)
     {
-      var sp =
-        new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
+      var sp = new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
+      var duffingSp = new DefaultSystemSpace(2, new[] {-4.3, -3}, new[] {4.3, 3}, new long[] {3, 3});
       var log_sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {1, 4}, new long[] {3, 3});
       ISimpleAction henon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
       IAction ikeda = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), sp);
@@ -89,6 +92,9 @@ namespace DSIS.SimpleRunner
 
     public static void Main(string[] args)
     {
+
+      var duffingSp = new DefaultSystemSpace(2, new[] { -4.3, -3 }, new[] { 4.3, 3 }, new long[] { 3, 3 });
+
       var spIkedaCutted =
         new DefaultSystemSpace(2, new[] {-1.1, -1.5}, new[] {3.5, 1.8}, new[] {3, 3L});
       var sp =
@@ -113,15 +119,22 @@ namespace DSIS.SimpleRunner
       IAction systenLogistic3569 = new SystemInfoAction(new LogisticSystemInfo(3.569), log_sp1);
       IAction systenLogistic4 = new SystemInfoAction(new LogisticSystemInfo(4), log_sp1);
 
+      IAction duffing = new SystemInfoAction(new RungeKuttSolver(new DuffingSystemInfo(0.48, 0.27, -1), 15, 0.1),
+                                             duffingSp);
+      IAction vanderpol = new SystemInfoAction(new RungeKuttSolver(new VanDerPolSystemInfo(1), 15, 0.1),
+                                             duffingSp);
+
       ISimpleAction wfBase = new WorkingFolderAction();
 
       IAction[] system = {systemHenon, /*systemHenonD, systemHenonD_272, systemIked, systemIkedaCut*/};
 
       var parallel = new SimpleParallel();
 
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, duffing, 2).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, vanderpol, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
 //      }
       /*for (int steps = 8; steps <= 15; steps++)
@@ -299,7 +312,7 @@ namespace DSIS.SimpleRunner
                                entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = true }))), "JVR");
                                entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new EigenEntropyAction())), "Eigen");
 
-                               foreach (var pair in entropies)
+                               /*foreach (var pair in entropies)
                                {
                                  IAction entropy = pair.Key;
                                  IAction customWf = new CustomPrefixWorkingFolderAction(pair.Value);
@@ -307,7 +320,7 @@ namespace DSIS.SimpleRunner
                                  xgr.AddEdge(xgr.Start, entropy);
                                  xgr.AddEdge(xwf, customWf);
                                  xgr.AddEdge(customWf, entropy);
-                               }
+                               }*/
                                xgr.AddEdge(xgr.Start, xgr.End);
                              });
     }
