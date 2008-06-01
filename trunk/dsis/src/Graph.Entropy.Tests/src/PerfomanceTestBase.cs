@@ -13,12 +13,12 @@ namespace DSIS.Graph.Entropy.Tests
 {
   public class PerfomanceTestBase : GraphBaseTest
   {
-    protected delegate ILoopIterator<IntegerCoordinate> Factory<T>(IGraph<T> graph, IGraphStrongComponents<T> comps)
+    protected delegate ILoopIterator Factory<T>(IGraph<T> graph, IGraphStrongComponents<T> comps)
       where T : ICellCoordinate;
 
     public void DoWithTimeout(VoidDelegate action, TimeSpan time)
     {
-      Thread thread = new Thread(delegate()
+      var thread = new Thread(delegate()
                                    {
                                      DateTime now = DateTime.Now;
                                      action();
@@ -53,12 +53,9 @@ namespace DSIS.Graph.Entropy.Tests
       IGraphStrongComponents<IntegerCoordinate> components 
         = gr.ComputeStrongComponents(NullProgressInfo.INSTANCE);
 
-      ILoopIterator<IntegerCoordinate> iter = test(gr, components );
+      ILoopIterator iter = test(gr, components );
       
-      DoWithTimeout(delegate
-                      {
-                        iter.WidthSearch();
-                      }, timeout);      
+      DoWithTimeout(iter.WidthSearch, timeout);      
     }
   }
 }

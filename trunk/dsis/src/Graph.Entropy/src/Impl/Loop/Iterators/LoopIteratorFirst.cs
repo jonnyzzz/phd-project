@@ -22,7 +22,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
       if (myComponent == null)
         return;
 
-      INode<T> first = CollectionUtil.GetFirst(myComponents.GetNodes(new IStrongComponentInfo[] {myComponent}));
+      INode<T> first = myComponents.GetNodes(new[] {myComponent}).GetFirst();
       if (first == null)
         return;
 

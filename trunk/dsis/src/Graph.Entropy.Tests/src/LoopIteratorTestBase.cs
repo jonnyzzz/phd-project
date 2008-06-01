@@ -38,7 +38,7 @@ namespace DSIS.Graph.Entropy.Tests
       IStrongComponentInfo firstComponent = CollectionUtil.GetFirst(components.Components);
       if (!filter)
       {
-        ILoopIterator<IntegerCoordinate> gws = CreateLoopIterator(graph, components, mcb, firstComponent);
+        ILoopIterator gws = CreateLoopIterator(graph, components, mcb, firstComponent);
 
         gws.WidthSearch();
       }
@@ -46,7 +46,7 @@ namespace DSIS.Graph.Entropy.Tests
       {
         NonDuplicatedLoopIteratorCallback<IntegerCoordinate, MockCallback> callback =
           new NonDuplicatedLoopIteratorCallback<IntegerCoordinate, MockCallback>(mcb);
-        ILoopIterator<IntegerCoordinate> gws = CreateLoopIterator(graph, components, callback, firstComponent);
+        ILoopIterator gws = CreateLoopIterator(graph, components, callback, firstComponent);
 
         gws.WidthSearch();
       }
@@ -88,7 +88,7 @@ namespace DSIS.Graph.Entropy.Tests
     }
 
 
-    protected abstract ILoopIterator<IntegerCoordinate> CreateLoopIterator(TarjanGraph<IntegerCoordinate> graph,
+    protected abstract ILoopIterator CreateLoopIterator(TarjanGraph<IntegerCoordinate> graph,
                                                                            IGraphStrongComponents<IntegerCoordinate>
                                                                              components,
                                                                            ILoopIteratorCallback<IntegerCoordinate> mcb,

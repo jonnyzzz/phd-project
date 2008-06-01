@@ -19,8 +19,8 @@ namespace DSIS.Graph.Entropy.Tests
     {
       DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
-                               MockLoopIteratorCallback<IntegerCoordinate> callback = new MockLoopIteratorCallback<IntegerCoordinate>();
-                               IStrongComponentInfo component = CollectionUtil.GetFirst(comps.Components);
+                               var callback = new MockLoopIteratorCallback<IntegerCoordinate>();
+                               IStrongComponentInfo component = comps.Components.GetFirst();
 
                                return new AllEngesOnALoopGraphSearch<IntegerCoordinate>(callback, comps, component);
                              }, new TimeSpan(0,0,20));
@@ -31,8 +31,8 @@ namespace DSIS.Graph.Entropy.Tests
     {
       DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
-                               MockLoopIteratorCallback<IntegerCoordinate> callback = new MockLoopIteratorCallback<IntegerCoordinate>();
-                               IStrongComponentInfo component = CollectionUtil.GetFirst(comps.Components);
+                               var callback = new MockLoopIteratorCallback<IntegerCoordinate>();
+                               IStrongComponentInfo component = comps.Components.GetFirst();
 
                                return new AllNodesOnALoopGraphSearch<IntegerCoordinate>(callback, comps, component);
                              }, new TimeSpan(0,0,9));
@@ -43,8 +43,8 @@ namespace DSIS.Graph.Entropy.Tests
     {
       DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
-                               MockLoopIteratorCallback<IntegerCoordinate> callback = new MockLoopIteratorCallback<IntegerCoordinate>();
-                               IStrongComponentInfo component = CollectionUtil.GetFirst(comps.Components);
+                               var callback = new MockLoopIteratorCallback<IntegerCoordinate>();
+                               IStrongComponentInfo component = comps.Components.GetFirst();
 
                                return new LoopIteratorFirst<IntegerCoordinate>(callback, comps, component, new GraphWeightSearch<IntegerCoordinate>(comps, component));
                              }, new TimeSpan(0,0,9));
@@ -54,7 +54,7 @@ namespace DSIS.Graph.Entropy.Tests
   public class MockLoopIteratorCallback<T> : ILoopIteratorCallback<T> 
     where T : ICellCoordinate
   {
-    public void OnLoopFound(IList<INode<T>> loop)
+    public void OnLoopFound(IEnumerable<INode<T>> loop, int length)
     {
     }
   }

@@ -30,10 +30,10 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
       }
     }
 
-    public void OnLoopFound(IList<INode<T>> loop)
+    public void OnLoopFound(IEnumerable<INode<T>> loop, int length)
     {
       myNodes.AddRange(loop);
-      myCallback.OnLoopFound(loop);
+      myCallback.OnLoopFound(loop, length);
     }
   }
 }

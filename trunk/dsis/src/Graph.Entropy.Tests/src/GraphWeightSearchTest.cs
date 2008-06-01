@@ -12,7 +12,7 @@ namespace DSIS.Graph.Entropy.Tests
   [TestFixture]
   public class GraphWeightSearchTest : GraphSearchTest
   {
-    protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,
+    protected override ILoopIterator Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,
                                                   IGraphStrongComponents<T> components)
     {
       IStrongComponentInfo first = CollectionUtil.GetFirst(components.Components);

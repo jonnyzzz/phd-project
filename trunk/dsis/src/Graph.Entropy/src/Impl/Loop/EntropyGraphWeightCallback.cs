@@ -10,10 +10,10 @@ namespace DSIS.Graph.Entropy.Impl.Loop
   public class EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> 
     where T : ICellCoordinate
   {
-    protected readonly Dictionary<NodePair<T>, double> myM =
+    private readonly Dictionary<NodePair<T>, double> myM =
       new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer());
 
-    private double myNorm = 0;
+    private double myNorm;
     protected readonly IEntropyLoopWeightCallback myWeight;
     private readonly ICellCoordinateSystem<T> mySystem;
 
@@ -23,12 +23,12 @@ namespace DSIS.Graph.Entropy.Impl.Loop
       mySystem = system;
     }
 
-    public void OnLoopFound(IList<INode<T>> loop)
+    public void OnLoopFound(IEnumerable<INode<T>> loop, int length)
     {
-      double weight = myWeight.Weight(loop.Count);
+      double weight = myWeight.Weight(length);
       myNorm += weight;
 
-      double p = weight/loop.Count;
+      double p = weight/length;
       INode<T> prev = null;
       INode<T> first = null;
       foreach (INode<T> node in loop)
@@ -60,7 +60,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
     protected void Add(T from, T to, double p)
     {
       double d;
-      NodePair<T> pair = new NodePair<T>(from, to);
+      var pair = new NodePair<T>(from, to);
       if (myM.TryGetValue(pair, out d))
       {
         p += d;

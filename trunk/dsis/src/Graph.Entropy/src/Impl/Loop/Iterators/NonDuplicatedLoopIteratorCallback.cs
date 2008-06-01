@@ -19,12 +19,12 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
       myCallback = callback;
     }
 
-    public void OnLoopFound(IList<INode<T>> loop)
+    public void OnLoopFound(IEnumerable<INode<T>> loop, int length)
     {
-      LoopData data = new LoopData(loop);
+      var data = new LoopData(loop);
       if (myFoundLoops.AddIfNotReplace(ref data))
       {
-        myCallback.OnLoopFound(loop);
+        myCallback.OnLoopFound(loop, length);
       }
     }
 
@@ -33,11 +33,11 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
       public readonly IList<INode<T>> Loop;
       public readonly int Hash;
 
-      public LoopData(IList<INode<T>> loop)
+      public LoopData(IEnumerable<INode<T>> loop)
       {
-        Loop = loop;
+        Loop = new List<INode<T>>(loop);
         Hash = 0;
-        foreach (INode<T> node in loop)
+        foreach (var node in Loop)
         {
           Hash += COMPARER.GetHashCode(node);
         }

@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\AllEngesOnALoopGraphSearchTest.cs" />
     <Compile Include="src\AllNodesOnALoopGraphSearchTest.cs" />
+    <Compile Include="src\CombinatoricsGraphWeightSearch.cs" />
     <Compile Include="src\EigenEvaluatorImplTest.cs" />
     <Compile Include="src\EntropyBlackboxTest.cs" />
     <Compile Include="src\EntropyLoopIteratorCallbackTest.cs" />

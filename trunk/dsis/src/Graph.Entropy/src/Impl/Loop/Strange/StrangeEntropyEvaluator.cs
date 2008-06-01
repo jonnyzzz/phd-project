@@ -16,7 +16,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
       EntropyGraphWeightCallback<T> cb = new EntropyGraphWeightCallback<T>(@params.LoopWeight, graph.CoordinateSystem);
       foreach (IStrongComponentInfo info in comps.Components)
       {
-        ILoopIterator<T> it = @params.CreateIterator(cb, comps, info);
+        ILoopIterator it = @params.CreateIterator(cb, comps, info);
         it.WidthSearch();
       }
 

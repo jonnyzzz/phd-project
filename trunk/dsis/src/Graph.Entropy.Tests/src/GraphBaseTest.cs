@@ -44,9 +44,9 @@ namespace DSIS.Graph.Entropy.Tests
     {
       private readonly List<List<string>> myLoops = new List<List<string>>();
 
-      void ILoopIteratorCallback<IntegerCoordinate>.OnLoopFound(IList<INode<IntegerCoordinate>> loop)
+      void ILoopIteratorCallback<IntegerCoordinate>.OnLoopFound(IEnumerable<INode<IntegerCoordinate>> loop, int length)
       {
-        List<string> sloop = new List<string>();
+        var sloop = new List<string>();
         foreach (INode<IntegerCoordinate> node in loop)
         {
           sloop.Add((node.Coordinate).GetCoordinate(0).ToString());

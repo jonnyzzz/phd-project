@@ -244,16 +244,14 @@ namespace DSIS.Graph.Entropy
         }
       }
 
-      EntropyBackStepGraphWeightCallback<IntegerCoordinate> cb =
-        new EntropyBackStepGraphWeightCallback<IntegerCoordinate>(graph.CoordinateSystem, EntropyLoopWeights.CONST);
+      var cb = new EntropyBackStepGraphWeightCallback<IntegerCoordinate>(graph.CoordinateSystem, EntropyLoopWeights.CONST);
 
       foreach (List<int> loop in loops)
       {
-        List<INode<IntegerCoordinate>> nodes =
-          loop.ConvertAll<INode<IntegerCoordinate>>(
-            delegate(int input) { return graph.AddNode(new IntegerCoordinate(input)); });
+        List<INode<IntegerCoordinate>> nodes = loop.ConvertAll(
+            input => graph.AddNode(new IntegerCoordinate(input)));
 
-        cb.OnLoopFound(nodes);
+        cb.OnLoopFound(nodes, nodes.Count);
       }
 
       return cb;
@@ -261,11 +259,11 @@ namespace DSIS.Graph.Entropy
 
     private static void AssertNorm(EntropyGraphWeightCallback<IntegerCoordinate> cb, double expected)
     {
-      Dictionary<IntegerCoordinate, double> myValuedIn = new Dictionary<IntegerCoordinate, double>(EqualityComparerFactory<IntegerCoordinate>.GetComparer());
-      Dictionary<IntegerCoordinate, double> myValuedOut = new Dictionary<IntegerCoordinate, double>(EqualityComparerFactory<IntegerCoordinate>.GetComparer());
+      var myValuedIn = new Dictionary<IntegerCoordinate, double>(EqualityComparerFactory<IntegerCoordinate>.GetComparer());
+      var myValuedOut = new Dictionary<IntegerCoordinate, double>(EqualityComparerFactory<IntegerCoordinate>.GetComparer());
 
       double sum = 0;
-      foreach (KeyValuePair<NodePair<IntegerCoordinate>, double> pair in cb.M)
+      foreach (var pair in cb.M)
       {
         double vIn;
         double vOut;

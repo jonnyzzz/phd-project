@@ -16,14 +16,14 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
     private readonly IStrongComponentInfo myComponent;
     private readonly IStrongComponentInfo[] myComponentInfos;
 
-    private readonly TCollection myCollection = new TCollection();    
+    private readonly TCollection myCollection = new TCollection();
 
-    public GraphWeightSearchBase(IGraphStrongComponents<T> components,
+    protected GraphWeightSearchBase(IGraphStrongComponents<T> components,
                                  IStrongComponentInfo component)
     {
       myComponents = components;
       myComponent = component;
-      myComponentInfos = new IStrongComponentInfo[]{myComponent};
+      myComponentInfos = new[]{myComponent};
     }
 
     private static bool IsUpperInTree(SearchTreeNode<T> root, INode<T> node, List<INode<T>> result)
@@ -70,7 +70,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
             loop.Clear();
             if (IsUpperInTree(node, edge, loop))
             {
-              callback.OnLoopFound(loop);
+              callback.OnLoopFound(loop, loop.Count);
             }
             else
             {

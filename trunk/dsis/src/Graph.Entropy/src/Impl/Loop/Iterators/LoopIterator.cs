@@ -46,10 +46,10 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
         if (myComponent != myComponents.GetNodeComponent(edge))
           continue;
 
-        List<INode<T>> loop = new List<INode<T>>();
+        var loop = new List<INode<T>>();
         if (myVisitedNodes.Contains(node.Node) && IsUpperInTree(node, edge, loop))
         {
-          callback.OnLoopFound(loop);          
+          callback.OnLoopFound(loop, loop.Count);          
         }
         else
         {
@@ -72,7 +72,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 
     private sealed class SearchTreeNode
     {
-      public readonly SearchTreeNode Parent = null;
+      public readonly SearchTreeNode Parent;
       public readonly INode<T> Node;
       public readonly int Hash;
 

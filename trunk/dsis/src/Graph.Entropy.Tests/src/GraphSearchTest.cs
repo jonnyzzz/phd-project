@@ -19,12 +19,12 @@ namespace DSIS.Graph.Entropy.Tests
 
       IGraphStrongComponents<IntegerCoordinate> components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
       
-      MockCallback mcb = new MockCallback();
-      ILoopIterator<IntegerCoordinate> gws = Create(graph, mcb, components);
+      var mcb = new MockCallback();
+      ILoopIterator gws = Create(graph, mcb, components);
 
       gws.WidthSearch();
 
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       foreach (List<string> loop in mcb.Loops)
       {
 //        loop.Reverse();
@@ -41,7 +41,7 @@ namespace DSIS.Graph.Entropy.Tests
         for (int index = 0; index < mcb.Loops.Count; index++)
         {
           List<string> loop = mcb.Loops[index];
-          StringBuilder sbb = new StringBuilder();
+          var sbb = new StringBuilder();
           foreach (string s in loop)
           {
             sbb.Append(s);
@@ -57,7 +57,7 @@ namespace DSIS.Graph.Entropy.Tests
       }
     }
 
-    protected abstract ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components) 
+    protected abstract ILoopIterator Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components) 
       where T : ICellCoordinate;
   }
 }

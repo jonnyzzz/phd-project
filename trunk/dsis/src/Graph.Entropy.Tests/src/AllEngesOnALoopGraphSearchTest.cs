@@ -10,7 +10,7 @@ namespace DSIS.Graph.Entropy.Tests
   [TestFixture, Ignore]
   public class AllEngesOnALoopGraphSearchTest : GraphSearchTest
   {
-    protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,
+    protected override ILoopIterator Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,
                                                   IGraphStrongComponents<T> components)
     {
       return new AllEngesOnALoopGraphSearch<T>(mcb, components, CollectionUtil.GetFirst(components.Components));

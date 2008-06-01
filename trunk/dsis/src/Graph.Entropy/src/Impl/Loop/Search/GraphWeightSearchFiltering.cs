@@ -33,7 +33,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
         return base.Contains(node) && !myVisited2.Contains(node.Node);
       }
 
-      public void MarkVisited(IList<INode<T>> loop)
+      public void MarkVisited(IEnumerable<INode<T>> loop)
       {
         myVisited2.AddRange(loop);
       }
@@ -50,10 +50,10 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
         myCollection = collection;
       }
 
-      public void OnLoopFound(IList<INode<T>> loop)
+      public void OnLoopFound(IEnumerable<INode<T>> loop, int length)
       {
         myCollection.MarkVisited(loop);
-        myIterator.OnLoopFound(loop);
+        myIterator.OnLoopFound(loop, length);
       }
     }
   }

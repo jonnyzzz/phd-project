@@ -15,7 +15,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
     }
 
 
-    protected override ILoopIterator<T> CreateIterator(ILoopIteratorCallback<T> callback,
+    protected override ILoopIterator CreateIterator(ILoopIteratorCallback<T> callback,
                                                        IGraphStrongComponents<T> comps, IGraph<T> graph,
                                                        IStrongComponentInfo info)
     {

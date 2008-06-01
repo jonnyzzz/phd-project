@@ -16,7 +16,7 @@ namespace DSIS.Graph.Entropy.Tests
   [TestFixture]
   public class LoopIteratorTest : LoopIteratorTestBase
   {
-    protected override ILoopIterator<IntegerCoordinate> CreateLoopIterator(TarjanGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components, ILoopIteratorCallback<IntegerCoordinate> mcb, IStrongComponentInfo firstComponent)
+    protected override ILoopIterator CreateLoopIterator(TarjanGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components, ILoopIteratorCallback<IntegerCoordinate> mcb, IStrongComponentInfo firstComponent)
     {
       return new LoopIteratorFirst<IntegerCoordinate>(mcb, components, firstComponent, new LoopIterator<IntegerCoordinate>(graph, components, firstComponent));
     }

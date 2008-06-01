@@ -7,7 +7,7 @@ namespace DSIS.Utils
 
     public void AddFront(T data)
     {
-      Item item = new Item(myRoot, data);
+      var item = new Item(myRoot, data);
       
       if (myRoot == null)
         myLast = item;

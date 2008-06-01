@@ -49,7 +49,7 @@ namespace DSIS.SimpleRunner.parallel
         }
 
 
-        ManualResetEvent evt = new ManualResetEvent(false);
+        var evt = new ManualResetEvent(false);
         lock (LOCK)
         {
           myWorking.Add(evt);

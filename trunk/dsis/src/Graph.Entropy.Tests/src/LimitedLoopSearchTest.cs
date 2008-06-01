@@ -14,7 +14,7 @@ namespace DSIS.Graph.Entropy.Tests
   {
     private int myDeep;
 
-    protected override ILoopIterator<IntegerCoordinate> CreateLoopIterator(TarjanGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components, ILoopIteratorCallback<IntegerCoordinate> mcb, IStrongComponentInfo firstComponent)
+    protected override ILoopIterator CreateLoopIterator(TarjanGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components, ILoopIteratorCallback<IntegerCoordinate> mcb, IStrongComponentInfo firstComponent)
     {
       return new LimitedLoopSearch<IntegerCoordinate>(myDeep, mcb, components, firstComponent);
     }

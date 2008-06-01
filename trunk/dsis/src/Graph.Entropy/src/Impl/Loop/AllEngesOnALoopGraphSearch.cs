@@ -19,33 +19,32 @@ namespace DSIS.Graph.Entropy.Impl.Loop
     {
       if (myComponent == null)
         throw new ArgumentNullException("component");
-      myComp = new IStrongComponentInfo[] { component };
+      myComp = new[] { component };
     }
 
     public override void WidthSearch()
     {      
-      Hashset<INode<T>> visited = new Hashset<INode<T>>();
+      var visited = new Hashset<INode<T>>();
 
       foreach (INode<T> node in myComponents.GetNodes(myComp))
       {
         if (visited.Contains(node))
           continue;
 
-        foreach (INode<T> to in GetNodes(node))
+        foreach (var to in GetNodes(node))
         {
           if (visited.Contains(to))
             continue;
 
-          List<INode<T>> loop = new List<INode<T>>();
-          loop.Add(node);
+          var loop = new List<INode<T>> {node};
 
-          for(SearchNode path = FindShortestLoop(node, to); path != null; path = path.Parent)
+          for(var path = FindShortestLoop(node, to); path != null; path = path.Parent)
           {
             loop.Add(path.Node);
           }
           visited.AddRange(loop);
           
-          myCallback.OnLoopFound(loop);
+          myCallback.OnLoopFound(loop, loop.Count);
         }
       }
     }
@@ -57,7 +56,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 
     private SearchNode FindShortestLoop(INode<T> toNode, INode<T> fromNode)
     {      
-      Queue<SearchNode> queue = new Queue<SearchNode>();
+      var queue = new Queue<SearchNode>();
       queue.Enqueue(new SearchNode(fromNode));
       
       while (queue.Count > 0)
@@ -78,7 +77,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
     private class SearchNode
     {
       public readonly INode<T> Node;
-      public readonly SearchNode Parent = null;
+      public readonly SearchNode Parent;
 
       public SearchNode(INode<T> node)
       {

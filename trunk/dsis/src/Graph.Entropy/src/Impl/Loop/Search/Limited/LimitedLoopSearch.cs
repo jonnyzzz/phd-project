@@ -19,7 +19,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search.Limited
 
     public override void WidthSearch()
     {
-      Hashset<INode<T>> skips = new Hashset<INode<T>>(COMPARER);
+      var skips = new Hashset<INode<T>>(COMPARER);
       foreach (INode<T> node in myComponents.GetNodes(myComponentInfos))
       {
         if (skips.Contains(node))
@@ -31,15 +31,15 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search.Limited
 
     private void LoopSearch(INode<T> node, Hashset<INode<T>> skips)
     {
-      Queue<INode<T>> list = new Queue<INode<T>>(myDeep);
-      Hashset<INode<T>> skips2 = new Hashset<INode<T>>(COMPARER); 
+      var queue = new Queue<INode<T>>(myDeep);
+      var skips2 = new Hashset<INode<T>>(COMPARER); 
 
-      list.Enqueue(node);
+      queue.Enqueue(node);
       skips2.Add(node);
               
       foreach (INode<T> edge in myComponents.GetEdgesWithFilteredEdges(node, myComponentInfos))
       { 
-        DoSearch(myDeep, edge, node, list, skips, skips2);
+        DoSearch(myDeep, edge, node, queue, skips, skips2);
       }
     }
 
@@ -47,10 +47,10 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search.Limited
     {    
       if (COMPARER.Equals(current, loop))
       {
-        List<INode<T>> found = new List<INode<T>>(path);
+        var found = new List<INode<T>>(path);
         found.Reverse();
         skips.AddRange(found);
-        myCallback.OnLoopFound(found);
+        myCallback.OnLoopFound(found, found.Count);
         return;
       }
 

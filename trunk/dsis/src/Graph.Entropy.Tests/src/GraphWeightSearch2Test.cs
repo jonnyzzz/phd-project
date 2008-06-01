@@ -13,9 +13,9 @@ namespace DSIS.Graph.Entropy.Tests
   [TestFixture]
   public class GraphWeightSearch2Test : GraphSearchTest
   {
-    protected override ILoopIterator<T> Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components)
+    protected override ILoopIterator Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components)
     {
-      IStrongComponentInfo first = CollectionUtil.GetFirst(components.Components);
+      IStrongComponentInfo first = components.Components.GetFirst();
       return new LoopIteratorFirst<T>(mcb, components, first, new GraphWeightSearch2<T>(components, first));
     }
 
@@ -24,7 +24,7 @@ namespace DSIS.Graph.Entropy.Tests
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
+                 var system = (IntegerCoordinateSystem)graph.CoordinateSystem;
                  INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
                  INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
                  INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));
@@ -41,7 +41,7 @@ namespace DSIS.Graph.Entropy.Tests
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
+                 var system = (IntegerCoordinateSystem)graph.CoordinateSystem;
                  INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
                  INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
                  INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));

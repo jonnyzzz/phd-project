@@ -5,7 +5,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
-  public abstract class LoopIteratorBase<T> : ContextBase<T>, ILoopIterator<T>
+  public abstract class LoopIteratorBase<T> : ContextBase<T>, ILoopIterator
     where T : ICellCoordinate
   {
     protected readonly ILoopIteratorCallback<T> myCallback;

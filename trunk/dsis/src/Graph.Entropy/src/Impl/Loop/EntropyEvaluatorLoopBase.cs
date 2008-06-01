@@ -24,14 +24,14 @@ namespace DSIS.Graph.Entropy.Impl.Loop
       EntropyGraphWeightCallback<T> cb = new EntropyGraphWeightCallback<T>(myLoopCallback, data.Graph.CoordinateSystem);
       foreach (IStrongComponentInfo info in data.Components.Components)
       {
-        ILoopIterator<T> it = CreateIterator(cb, data.Components, data.Graph, info);
+        ILoopIterator it = CreateIterator(cb, data.Components, data.Graph, info);
         it.WidthSearch();
       }
 
       return new EntropyProcessorAdapter<T>(cb.Entropy());
     }
 
-    protected abstract ILoopIterator<T> CreateIterator(ILoopIteratorCallback<T> callback,
+    protected abstract ILoopIterator CreateIterator(ILoopIteratorCallback<T> callback,
                                                        IGraphStrongComponents<T> comps, IGraph<T> graph,
                                                        IStrongComponentInfo info);
   }
