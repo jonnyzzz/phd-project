@@ -53,25 +53,18 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\FixedDimensionSpaceModel.cs" />
+    <Compile Include="src\IListInfo.cs" />
     <Compile Include="src\IWizardPageWithStateFactory.cs" />
+    <Compile Include="src\ListInfo.cs" />
+    <Compile Include="src\ListSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="src\ListSelectorBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\NamespaceHolder.cs" />
-    <Compile Include="src\SelectPredefinedContiniousMethodPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="src\SelectPredefinedContiniousMethodWizardPage.cs" />
-    <Compile Include="src\SelectPredefinedSystemPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="src\SelectPredefinedSystemWizardPage.cs">
-    </Compile>
-    <Compile Include="src\SelectSystemPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\SelectSystemPage.Designer.cs">
-      <DependentUpon>SelectSystemPage.cs</DependentUpon>
     </Compile>
     <Compile Include="src\SelectSystemWizardPage.cs">
     </Compile>
@@ -90,30 +83,16 @@
       <DependentUpon>SpaceParametersRow.cs</DependentUpon>
     </Compile>
     <Compile Include="src\SpaceParametersRowModel.cs" />
-    <Compile Include="src\SystemFunctionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\SystemFunctionForm.Designer.cs">
-      <DependentUpon>SystemFunctionForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="src\SystemFunctionSelectionWizard.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\SelectSystemPage.resx">
-      <DependentUpon>SelectSystemPage.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="src\SpaceControl.resx">
       <DependentUpon>SpaceControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\SpaceParametersRow.resx">
       <DependentUpon>SpaceParametersRow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\SystemFunctionForm.resx">
-      <DependentUpon>SystemFunctionForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

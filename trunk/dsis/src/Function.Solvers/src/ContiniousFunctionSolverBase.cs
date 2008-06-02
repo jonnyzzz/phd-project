@@ -1,8 +1,9 @@
+using System;
 using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Solvers
 {
-  public class ContiniousFunctionSolverBase : IContiniousFunctionSolverFactory
+  public abstract class ContiniousFunctionSolverBase : IContiniousFunctionSolverFactory
   {
     private readonly string myTitle;
 
@@ -15,5 +16,7 @@ namespace DSIS.Function.Solvers
     {
       get { return myTitle; }
     }
+
+    public abstract Type OptionsObjectType { get; }
   }
 }

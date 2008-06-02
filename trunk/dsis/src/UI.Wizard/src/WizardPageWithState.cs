@@ -6,7 +6,7 @@ namespace DSIS.UI.Wizard
   {
     private readonly IWizardPage myPage;
 
-    public WizardPageWithState(IWizardPage page)
+    protected WizardPageWithState(IWizardPage page)
     {
       myPage = page;
     }
@@ -37,5 +37,10 @@ namespace DSIS.UI.Wizard
     }
 
     public abstract IWizardPageWithState NextPage { get; }
+
+    public bool IsLastPage
+    {
+      get { return false; }
+    }
   }
 }

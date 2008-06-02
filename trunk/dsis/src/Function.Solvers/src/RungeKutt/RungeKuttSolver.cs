@@ -1,5 +1,5 @@
 using DSIS.Core.System;
-using DSIS.Spring.Attributes;
+using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Solvers.RungeKutt
 {
@@ -113,14 +113,6 @@ namespace DSIS.Function.Solvers.RungeKutt
         output = func.Output = new double[myDimension];
         return func;
       }
-    }
-  }
-
-  [SpringBean]
-  public class RungeKuttSolverFactory : ContiniousFunctionSolverBase
-  {
-    public RungeKuttSolverFactory() : base("Runge-Kutt solver")
-    {
     }
   }
 }

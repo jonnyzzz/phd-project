@@ -12,7 +12,6 @@ namespace DSIS.UI.Application
 
     public event EventHandler<DocumentChangedEventArgs> DocumentChanging;
     
-
     public ApplicationClass(IMainForm mainForm)
     {
       myMainForm = mainForm;
@@ -35,12 +34,6 @@ namespace DSIS.UI.Application
     public void ShowDialog(WithForm action)
     {
       action(MainForm());
-    }
-
-    public IApplicationDocument Document
-    {
-      get { throw new System.NotImplementedException(); }
-      set { throw new System.NotImplementedException(); }
     }
 
     public void OnMenuExit()

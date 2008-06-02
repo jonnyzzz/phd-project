@@ -14,6 +14,7 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -42,7 +46,9 @@
     <Compile Include="src\ComposedFunction.cs" />
     <Compile Include="src\FunctionBase.cs" />
     <Compile Include="src\ContiniousFunctionSolverBase.cs" />
+    <Compile Include="src\RungeKutt\RungeKuttOptions.cs" />
     <Compile Include="src\RungeKutt\RungeKuttSolver.cs" />
+    <Compile Include="src\RungeKutt\RungeKuttSolverFactory.cs" />
     <Compile Include="src\SimpleSolver\SimpleSolvedFunction.cs" />
     <Compile Include="src\SolvedFunctionBase.cs" />
   </ItemGroup>
@@ -62,6 +68,10 @@
     <ProjectReference Include="..\Spring\Spring.csproj">
       <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
       <Name>Spring</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

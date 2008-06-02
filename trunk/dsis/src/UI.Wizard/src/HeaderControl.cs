@@ -15,16 +15,31 @@ namespace DSIS.UI.Wizard
       InitializeComponent();
     }
 
+    private string myMainTitleCache;
+    private string mySecondaryTitleCache;
+
     public string MainTitle
     {
-      get { return myMainTitle.Text;}
-      set { myMainTitle.Text = value;}
+      get { return myMainTitleCache; }
+      set
+      {
+        if (myMainTitleCache != value)
+        {
+          myMainTitleCache = myMainTitle.Text = value;
+        }
+      }
     }
 
     public string SecondaryTitle
     {
-      get { return mySecondaryTitle.Text;}
-      set { mySecondaryTitle.Text = value;}
+      get { return mySecondaryTitleCache; }
+      set
+      {
+        if (mySecondaryTitleCache != value)
+        {
+          mySecondaryTitleCache = mySecondaryTitle.Text = value;
+        }
+      }
     }
   }
 }

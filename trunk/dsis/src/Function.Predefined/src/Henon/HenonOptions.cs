@@ -1,6 +1,6 @@
 using System;
 using System.ComponentModel;
-using DSIS.UI.Wizard.FormsGenerator;
+using DSIS.Utils.Bean;
 
 namespace DSIS.Function.Predefined.Henon
 {

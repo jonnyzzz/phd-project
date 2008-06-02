@@ -1,4 +1,4 @@
-﻿namespace DSIS.UI.Wizard.src
+﻿namespace DSIS.UI.Wizard
 {
   partial class ButtonsControl
   {

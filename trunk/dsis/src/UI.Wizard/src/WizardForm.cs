@@ -11,6 +11,7 @@ namespace DSIS.UI.Wizard
     private readonly IWizardPack myPack;
     private readonly Dictionary<IWizardPage, Panel> myCachedViwes = new Dictionary<IWizardPage, Panel>();
     private readonly Stack<IWizardPage> myPages = new Stack<IWizardPage>();
+    private bool myIsUnderTimer = false;
 
     public WizardForm() : this(new EmptyWizard())
     {
@@ -100,21 +101,29 @@ namespace DSIS.UI.Wizard
 
     private void UpdateButtonState(IWizardPage page)
     {
-      bool status = ErrorHandler.Safe<bool>(page.Validate);
+      var status = ErrorHandler.Safe<bool>(page.Validate);
 
       myHeader.SecondaryTitle = page.Title;
-      myButtons.ButtonFinish.Enabled = status && myPack.IsLastPage(page);
-      myButtons.ButtonNext.Enabled = status && myPack.Next(page) != null;
-      myButtons.ButtonBack.Enabled = myPages.Count > 1;            
+      bool isLastPage = myPack.IsLastPage(page);
+
+
+      myButtons.FinishEnabled = status && isLastPage;
+      myButtons.NextEnabled = status && !isLastPage;
+      myButtons.BackEnabled = myPages.Count > 1;            
     }
 
     private void myButtonsTimer_Tick(object sender, EventArgs e)
     {
-      if (myPages.Count > 0)
+      if (myIsUnderTimer || myPages.Count == 0)
+        return;
+
+      try
       {
-        myButtonsTimer.Enabled = false;
+        myIsUnderTimer = true;
         UpdateButtonState(myPages.Peek());
-        myButtonsTimer.Enabled = true;
+      } finally
+      {
+        myIsUnderTimer = false;
       }
     }
   }

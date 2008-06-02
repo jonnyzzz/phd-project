@@ -1,6 +1,5 @@
 using System.Windows.Forms;
 using DSIS.UI.Application.Actions;
-using DSIS.UI.FunctionDialog;
 
 namespace DSIS.UI.Application
 {
@@ -26,10 +25,6 @@ namespace DSIS.UI.Application
 
     private void newToolStripMenuItem_Click(object sender, System.EventArgs e)
     {
-      using(var form = new SystemFunctionForm())
-      {
-        form.ShowDialog(this);
-      }
     }
   }
 }

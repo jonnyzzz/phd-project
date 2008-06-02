@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using DSIS.Utils.Bean;
 using log4net;
 
 namespace DSIS.UI.Wizard.FormsGenerator
@@ -11,7 +12,6 @@ namespace DSIS.UI.Wizard.FormsGenerator
   public class FormGenerator : UserControl, IErrorProvider<bool>
   {
     private static readonly ILog LOG = LogManager.GetLogger(typeof (FormGenerator));
-
 
     private readonly Type myType;
     private readonly object myObject;
@@ -26,14 +26,21 @@ namespace DSIS.UI.Wizard.FormsGenerator
       myErrorProvider = new ErrorProvider(this);
 
       Padding = new Padding(5,5,5,5);
+      var controls = new List<Control>();
 
       foreach (var info in myType.GetProperties())
       {
         var attr = info.OneInstance<IncludeGenerateAttribute>();
         if (attr != null)
         {
-          AddAttribute(this, new FieldInfo(attr.Title, attr.Description, info, myObject));
+          AddAttribute(controls, new FieldInfo(attr.Title, attr.Description, info, myObject));
         }
+      }
+
+      controls.Reverse();
+      foreach (var control in controls)
+      {
+        Controls.Add(control);
       }
     }
 
@@ -42,20 +49,20 @@ namespace DSIS.UI.Wizard.FormsGenerator
       return myPendingErrors.Count == 0;
     }
 
-    private void AddAttribute(Control host, FieldInfo info)
+    private void AddAttribute(ICollection<Control> host, FieldInfo info)
     {
       var panel = new Panel
                     {
-                      Dock = DockStyle.Left, 
-                      AutoSize = true,
-                      Padding = new Padding(0,0,30,0)
+                      Dock = DockStyle.Top, 
+                      Width = 150,
+                      Padding = new Padding(0,0,5,0),
+                      Height = 25
                     };
       var caption = new Label
                       {
                         Text = info.Caption, 
                         Width = 70, 
                         Dock = DockStyle.Left, 
-                        Padding = new Padding(0, 5, 5, 0)
                       };
       var field = new TextBox
                     {
@@ -80,9 +87,10 @@ namespace DSIS.UI.Wizard.FormsGenerator
       };
 
       panel.Controls.Add(field); 
-      panel.Controls.Add(caption);
+      panel.Controls.Add(caption); 
+      
 
-      host.Controls.Add(panel);
+      host.Add(panel);
       
       if (info.Description != null)
       {
@@ -93,7 +101,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
                         Text = info.Description
                       };
 
-        host.Controls.Add(label);
+        host.Add(label);
       }
     }
 

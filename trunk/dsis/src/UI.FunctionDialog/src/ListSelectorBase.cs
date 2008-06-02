@@ -17,6 +17,7 @@ namespace DSIS.UI.FunctionDialog
 
     private void RegisterRadio(Control control, IEnumerable<T> factories)
     {
+      var controls = new List<Control>();
       foreach (var factory in factories)
       {
         var bt = new RadioButton
@@ -24,11 +25,42 @@ namespace DSIS.UI.FunctionDialog
                      Text = FactoryName(factory),
                      Dock = DockStyle.Top,
                      Padding = new Padding(5, 0, 0, 0),
-                     AutoSize = true
+                     AutoSize = true,
+                     Enabled = IsFactoryEnabled(factory),
+                     
                    };
-        control.Controls.Add(bt);
+        controls.Add(bt);
+        var descr = FactoryDescription(factory);
+        if (!string.IsNullOrEmpty(descr))
+        {
+          var lab = new Label
+                        {
+                          Text = descr,
+                          Padding = new Padding(15, 0, 0, 0),
+                          AutoSize = true,
+                          Dock = DockStyle.Top,
+                          Enabled = IsFactoryEnabled(factory)
+                        };
+          controls.Add(lab);
+        }
         myFactories.Add(bt, factory);
       }
+
+      controls.Reverse();
+      foreach (var cnt in controls)
+      {
+        control.Controls.Add(cnt);
+      }
+    }
+
+    protected virtual bool IsFactoryEnabled(T factory)
+    {
+      return true;
+    }
+
+    protected virtual string FactoryDescription(T factory)
+    {
+      return null;
     }
 
     protected abstract string FactoryName(T factory);

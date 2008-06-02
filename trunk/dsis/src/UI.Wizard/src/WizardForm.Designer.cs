@@ -32,7 +32,7 @@
       System.Windows.Forms.Panel myHeaderPanel;
       System.Windows.Forms.Panel myButtonsPanel;
       this.myHeader = new DSIS.UI.Wizard.HeaderControl();
-      this.myButtons = new DSIS.UI.Wizard.src.ButtonsControl();
+      this.myButtons = new ButtonsControl();
       this.myMiddleContainer = new System.Windows.Forms.Panel();
       this.myButtonsTimer = new System.Windows.Forms.Timer(this.components);
       myHeaderPanel = new System.Windows.Forms.Panel();
@@ -119,7 +119,7 @@
     #endregion
 
     private HeaderControl myHeader;
-    private DSIS.UI.Wizard.src.ButtonsControl myButtons;
+    private ButtonsControl myButtons;
     private System.Windows.Forms.Panel myMiddleContainer;
     private System.Windows.Forms.Timer myButtonsTimer;
 

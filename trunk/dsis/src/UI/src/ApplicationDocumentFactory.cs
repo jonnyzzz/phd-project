@@ -1,9 +1,7 @@
 using DSIS.Core.System;
-using DSIS.Spring.Attributes;
 
 namespace DSIS.UI.UI
 {
-  [SpringBean]
   public class ApplicationDocumentFactory : IApplicationDocumentFactory
   {
     public string Title { get; set;}

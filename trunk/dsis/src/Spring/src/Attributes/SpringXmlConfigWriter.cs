@@ -36,6 +36,7 @@ namespace DSIS.Spring.Attributes
       XmlElement element = myObjectsElement.CreateChildElement("object", OBJECTS_NAMESPACE);
       element.CreateAttribute("id", name);
       element.CreateAttribute("type", type.AssemblyQualifiedName);
+      element.CreateAttribute("autowire", "constructor");
     }
 
     public void WriteConfig(string file)

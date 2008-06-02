@@ -8,7 +8,7 @@ namespace DSIS.UI.Wizard
 
     public bool IsLastPage(IWizardPage page)
     {
-      return Next(page) == null;
+      return ((IWizardPageWithState)page).IsLastPage;
     }
 
     public IWizardPage Next(IWizardPage page)

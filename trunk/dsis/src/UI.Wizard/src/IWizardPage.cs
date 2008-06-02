@@ -41,5 +41,11 @@ namespace DSIS.UI.Wizard
   public interface IWizardPageWithState : IWizardPage
   {
     IWizardPageWithState NextPage { get;  }
+
+    /// <summary>
+    /// Finish button checked <see cref="NextPage"/> returns null and <see cref="IsLastPage"/> returns true
+    /// 
+    /// </summary>
+    bool IsLastPage { get; }
   }
 }

@@ -2,21 +2,15 @@ using System;
 using System.Xml;
 using DSIS.Core.System;
 using DSIS.Spring.Assemblies;
-using DSIS.UI.Wizard.FormsGenerator;
+using DSIS.Utils.Bean;
 
 [assembly: IncludeAssembly("DSIS.Function.Predefined")]
 [assembly: IncludeAssembly("DSIS.Function.Solvers")]
 
 namespace DSIS.Scheme.Objects.Systemx
 {
-  public interface ISystemInfoFactory
+  public interface IOptionsHolder
   {
-    string FactoryName { get; }
-
-    int Dimension { get; }
-
-    SystemType Type { get;  }
-
     /// <summary>
     /// Object providing options to create the system.
     /// Null is the place for no options.
@@ -25,6 +19,16 @@ namespace DSIS.Scheme.Objects.Systemx
     /// field markers
     /// </summary>
     Type OptionsObjectType { get; }
+  }
+
+  public interface ISystemInfoFactory : IOptionsHolder
+  {
+    string FactoryName { get; }
+
+    int Dimension { get; }
+
+
+    SystemType Type { get; }
 
     ISystemInfo Parse(XmlElement element);
   }
@@ -35,7 +39,7 @@ namespace DSIS.Scheme.Objects.Systemx
     Descrete
   }
 
-  public interface IContiniousFunctionSolverFactory
+  public interface IContiniousFunctionSolverFactory : IOptionsHolder
   {
     string MethodName { get; }
   }
