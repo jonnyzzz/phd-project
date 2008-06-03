@@ -34,26 +34,29 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public void FillGraph()
     {
-      using (ItemRebuildCookie<T> cookie = myHashHolder.RebuildCookie())
+      using (var cookie = myHashHolder.RebuildCookie())
       {
-        foreach (INode<T> node in myGraph.Nodes)
+        int index = 0;
+        var weight = myOptions.InitialWeight;
+
+        foreach (var node in myGraph.Nodes)
         {
           if (!VisitNode(node))
             continue;
 
-          JVRPair<T>.JVRPairFactory factory = JVRPair<T>.Factory(node.Coordinate);
+          var factory = JVRPair<T>.Factory(node.Coordinate);
           
-          foreach (INode<T> edge in myGraph.GetEdges(node))
+          foreach (var edge in myGraph.GetEdges(node))
           {
             if (!VisitNode(edge))
               continue;
 
-            JVRPair<T> key = factory.Create(edge.Coordinate);
+            var key = factory.Create(edge.Coordinate);
             
             myStraitEdges.Add(key);
             myBackEdges.Add(key);
 
-            cookie.SetItem(key, 1);
+            cookie.SetItem(key, weight.Weight(++index));
           }
         }
       }

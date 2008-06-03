@@ -296,7 +296,7 @@ namespace DSIS.SimpleRunner
                                                                           };
 
 
-                               foreach (var _evaluatorParams in entropys)
+                /*               foreach (var _evaluatorParams in entropys)
                                {
                                  var evaluatorParams = _evaluatorParams;
                                  entropies.Add(new AgregateAction(
@@ -312,10 +312,12 @@ namespace DSIS.SimpleRunner
                                                      bld.AddEdge(entropy, bld.End);
                                                      bld.AddEdge(new SetStrangeEntropyParamsAction(evaluatorParams), entropy);
                                                    }), evaluatorParams.PresentableName);
-                               }
+                               }*/
 //                               entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
-                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = false }))), "JVR2");
-                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = true }))), "JVR");
+                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = false, InitialWeight = EntropyLoopWeights.CONST}))), "JVR2-Const");
+                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = false, InitialWeight = EntropyLoopWeights.ONE}))), "JVR2-One");
+                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = false, InitialWeight = EntropyLoopWeights.MINUS_ONE}))), "JVR2-MinusOne");
+//                               entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = true }))), "JVR");
                                entropies.Add(EntropyForEachComponent(DrawEntropyAction(steps, new EigenEntropyAction())), "Eigen");
 
                                foreach (var pair in entropies)
