@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
+using DSIS.UI.UI;
 using DSIS.Utils;
 
-namespace DSIS.UI.FunctionDialog
+namespace DSIS.UI.FunctionDialog.UI
 {
-  public abstract class ListSelectorBase<T> : UserControl
+  public abstract class ListSelectorBase<T> : UserControl, IErrorProvider<bool>
     where T : class
   {
     private readonly Dictionary<RadioButton, T> myFactories = new Dictionary<RadioButton, T>();
@@ -34,13 +35,13 @@ namespace DSIS.UI.FunctionDialog
         if (!string.IsNullOrEmpty(descr))
         {
           var lab = new Label
-                        {
-                          Text = descr,
-                          Padding = new Padding(15, 0, 0, 0),
-                          AutoSize = true,
-                          Dock = DockStyle.Top,
-                          Enabled = IsFactoryEnabled(factory)
-                        };
+                      {
+                        Text = descr,
+                        Padding = new Padding(15, 0, 0, 0),
+                        AutoSize = true,
+                        Dock = DockStyle.Top,
+                        Enabled = IsFactoryEnabled(factory)
+                      };
           controls.Add(lab);
         }
         myFactories.Add(bt, factory);
@@ -65,6 +66,11 @@ namespace DSIS.UI.FunctionDialog
 
     protected abstract string FactoryName(T factory);
 
+    bool IErrorProvider<bool>.Validate()
+    {
+      return SelectedFactory != null;
+    }
+
     public T SelectedFactory
     {
       get
@@ -77,6 +83,17 @@ namespace DSIS.UI.FunctionDialog
           }
         }
         return null;
+      }
+      set
+      {
+        foreach (var pair in myFactories)
+        {
+          if (pair.Value == value)
+          {
+            pair.Key.Checked = true;
+            return;
+          }
+        }
       }
     }
   }

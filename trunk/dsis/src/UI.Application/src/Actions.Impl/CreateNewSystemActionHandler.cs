@@ -2,6 +2,7 @@ using DSIS.Scheme.Ctx;
 using DSIS.Spring.Attributes;
 using DSIS.Spring.Service;
 using DSIS.UI.FunctionDialog;
+using DSIS.UI.UI;
 using DSIS.UI.Wizard;
 
 namespace DSIS.UI.Application.Actions.Impl
@@ -9,10 +10,10 @@ namespace DSIS.UI.Application.Actions.Impl
   [SpringBean]
   public class CreateNewSystemActionHandler : ActionHandlerBase
   {
-    private readonly ApplicationClass myApp;
+    private readonly IApplicationClass myApp;
     private readonly IServiceProvider myProvider;
 
-    public CreateNewSystemActionHandler(ApplicationClass app, IServiceProvider provider) : base("File.Create")
+    public CreateNewSystemActionHandler(IApplicationClass app, IServiceProvider provider) : base("File.Create")
     {
       myApp = app;
       myProvider = provider;
@@ -20,7 +21,10 @@ namespace DSIS.UI.Application.Actions.Impl
 
     public override bool Do(Context ctx)
     {
-      myApp.ShowDialog(form => new WizardForm(new SystemFunctionSelectionWizard(myProvider)).ShowDialog());
+      myApp.ShowDialog(form => new WizardForm(new SystemFunctionSelectionWizard(myProvider))
+                                 {
+                                   Parent = form
+                                 }.ShowDialog(form));
 
       return true;
     }

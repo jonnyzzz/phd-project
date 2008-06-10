@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
@@ -15,11 +16,8 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public IEnumerable<Q> AddPoint(double[] value)
     {
-      Q q = myIcs.FromPoint(value);
-      if (myIcs.IsNull(q))
-        yield break;
-      else
-        yield return q;
+      var q = myIcs.FromPoint(value);
+      return myIcs.IsNull(q) ? EmptyArray<Q>.Instance : new[]{q};
     }
   }
 }

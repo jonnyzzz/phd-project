@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using DSIS.UI.UI;
 using DSIS.Utils;
 
-namespace DSIS.UI.FunctionDialog
+namespace DSIS.UI.FunctionDialog.UI
 {
   public partial class SpaceControl : UserControl
   {

@@ -1,4 +1,4 @@
-﻿namespace DSIS.UI.FunctionDialog
+﻿namespace DSIS.UI.FunctionDialog.UI
 {
   partial class SpaceControl
   {
@@ -50,8 +50,8 @@
       // myGroupBoxSpaceInformation
       // 
       myGroupBoxSpaceInformation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                  | System.Windows.Forms.AnchorStyles.Left)
-                  | System.Windows.Forms.AnchorStyles.Right)));
+                                                                                 | System.Windows.Forms.AnchorStyles.Left)
+                                                                                | System.Windows.Forms.AnchorStyles.Right)));
       myGroupBoxSpaceInformation.Controls.Add(this.mySpaceInformationPanel);
       myGroupBoxSpaceInformation.Location = new System.Drawing.Point(3, 32);
       myGroupBoxSpaceInformation.Name = "myGroupBoxSpaceInformation";
@@ -73,24 +73,24 @@
       // 
       this.myDimension.Location = new System.Drawing.Point(99, 6);
       this.myDimension.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
+                                                         1000,
+                                                         0,
+                                                         0,
+                                                         0});
       this.myDimension.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+                                                         1,
+                                                         0,
+                                                         0,
+                                                         0});
       this.myDimension.Name = "myDimension";
       this.myDimension.ReadOnly = true;
       this.myDimension.Size = new System.Drawing.Size(120, 20);
       this.myDimension.TabIndex = 1;
       this.myDimension.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+                                                       1,
+                                                       0,
+                                                       0,
+                                                       0});
       this.myDimension.ValueChanged += new System.EventHandler(this.myDimension_ValueChanged);
       // 
       // SpaceControl

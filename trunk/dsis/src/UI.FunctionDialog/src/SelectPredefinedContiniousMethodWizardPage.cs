@@ -1,5 +1,6 @@
 using System;
 using DSIS.Scheme.Objects.Systemx;
+using DSIS.UI.FunctionDialog.UI;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.FormsGenerator;
 using DSIS.Utils;
@@ -9,10 +10,12 @@ namespace DSIS.UI.FunctionDialog
 {
   public class SelectPredefinedContiniousMethodWizardPage : WizardPageBase<ListSelector<ListInfo<IContiniousFunctionSolverFactory>, IContiniousFunctionSolverFactory>>, IWizardPageWithState
   {
+    private readonly ISystemFunctionSelectionWizardInt myWizard;
     private readonly Lazy<IWizardPageWithState> myNext;
 
-    public SelectPredefinedContiniousMethodWizardPage(IServiceProvider prov, Lazy<IWizardPageWithState> next)
+    public SelectPredefinedContiniousMethodWizardPage(ISystemFunctionSelectionWizardInt wizard, IServiceProvider prov, Lazy<IWizardPageWithState> next)
     {
+      myWizard = wizard;
       var services = prov.GetServices<IContiniousFunctionSolverFactory>();
       ControlInternal = ListSelector.Create(services.Map(x => ListInfo.Create(x.MethodName, "", true, x)));
       myNext = next;
@@ -28,14 +31,34 @@ namespace DSIS.UI.FunctionDialog
 
         if (factory.OptionsObjectType != null)
         {
+          var paramz = Activator.CreateInstance(factory.OptionsObjectType);
+
+          myWizard.ContiniousParameters = paramz;
+
           return
             new WizardPageWithStateD(
               new FormGeneratorWizardPage("Continiois system evaluation parameters",
-                                          Activator.CreateInstance(factory.OptionsObjectType)),
+                                          paramz),
               myNext);
         }
         return myNext();
       }
+    }
+
+    public override void ControlShown()
+    {
+      var factory = myWizard.ContiniousFactory;
+      if (factory != null)
+      {
+        ControlInternal.SelectedValue = factory;
+      }
+      base.ControlShown();
+    }
+
+    public override void ControlHidden()
+    {
+      myWizard.ContiniousFactory = ControlInternal.SelectedValue;
+      base.ControlHidden();
     }
 
     public bool IsLastPage

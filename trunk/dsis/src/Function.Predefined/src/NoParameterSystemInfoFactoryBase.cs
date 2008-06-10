@@ -19,5 +19,10 @@ namespace DSIS.Function.Predefined
     {
       return myFactory();
     }
+
+    public override ISystemInfo Create(ISystemInfoParameters parameters)
+    {
+      return myFactory();
+    }
   }
 }

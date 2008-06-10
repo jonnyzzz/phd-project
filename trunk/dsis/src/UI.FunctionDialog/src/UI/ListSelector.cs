@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.UI.FunctionDialog.UI;
 
 namespace DSIS.UI.FunctionDialog
 {
@@ -19,8 +20,15 @@ namespace DSIS.UI.FunctionDialog
   public class ListSelector<T,Q> : ListSelectorBase<T> 
     where T : class, IListInfo<Q>
   {
+    private readonly Dictionary<Q, T> myValueToObj = new Dictionary<Q, T>();
     public ListSelector(IEnumerable<T> factories) : base(factories)
     {
+      foreach (var q in factories)
+      {
+        var value = q.Value;
+        if (value != null)
+          myValueToObj[value] = q;
+      }
     }
 
     protected override string FactoryName(T factory)
@@ -44,6 +52,14 @@ namespace DSIS.UI.FunctionDialog
       {
         T factory = SelectedFactory;
         return factory != null ? factory.Value : default(Q);
+      }
+      set
+      {
+        T factory;
+        if (myValueToObj.TryGetValue(value, out factory))
+        {
+          SelectedFactory = factory;
+        }
       }
     }
   }

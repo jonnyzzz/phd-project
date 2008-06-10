@@ -5,7 +5,6 @@
 
 using DSIS.Core.System;
 using DSIS.Core.Util;
-using DSIS.IntegerCoordinates;
 
 namespace DSIS.Core.Coordinates
 {
@@ -21,7 +20,7 @@ namespace DSIS.Core.Coordinates
   /// Basic notion of CellCoordinate System. Custom system features to be defined in
   /// it's specific interface.
   /// </summary>
-  /// <typeparam name="T"></typeparam>
+  /// <typeparam name="T">Coordinate class</typeparam>
   public interface ICellCoordinateSystem<T> : ICellCoordinateSystem
     where T : ICellCoordinate
   {
@@ -43,6 +42,11 @@ namespace DSIS.Core.Coordinates
     /// <returns></returns>
     ICellCoordinateSystemConverter<T, T> Subdivide(long[] division);
 
+    /// <summary>
+    /// Projects coordinate system by factor
+    /// </summary>
+    /// <param name="factor">projection factor for each coordinate</param>
+    /// <returns>coordinate system projector</returns>
     ICellCoordinateSystemProjector<T> Project(long[] factor);
 
     /// <summary>
@@ -51,7 +55,7 @@ namespace DSIS.Core.Coordinates
     CountEnumerable<T> InitialSubdivision { get; }
 
     /// <summary>
-    /// Checks if coord represents null. Really usefull in case ICellCoordinate is struct
+    /// Checks if coord represents null. Really usefull in case ICellCoordinate is a value type
     /// </summary>
     /// <param name="coord"></param>
     /// <returns></returns>

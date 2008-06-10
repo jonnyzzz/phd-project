@@ -65,7 +65,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     private IEnumerable<Q> GetInitialSubdivision()
     {
-      long[] array = new long[myDimension];
+      var array = new long[myDimension];
       for (int i = 0; i < myDimension; i++)
       {
         array[i] = 0;
@@ -149,7 +149,7 @@ namespace DSIS.IntegerCoordinates.Impl
     {
       if (obj is TInh)
       {
-        IntegerCoordinateSystemBase<TInh,Q> inh = (IntegerCoordinateSystemBase<TInh, Q>) obj;
+        var inh = (IntegerCoordinateSystemBase<TInh, Q>) obj;
         if (inh.myDimension != myDimension)
           return false;
 
@@ -169,16 +169,16 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public override int GetHashCode()
     {
-      int v = 0;
+      long v = 0;
       for (int i = 0; i < myDimension; i++)
-        v += (int)mySubdivision[i];
+        v += mySubdivision[i];
 
-      return myDimension;
+      return myDimension + ((int)v) * 97 + ((int)(v>>32)) * 131;
     }
 
     protected long[] GetSubdividedFactor(long[] division)
     {
-      long[] div = new long[myDimension];
+      var div = new long[myDimension];
       for (int i = 0; i < div.Length; i++)
       {
         div[i] = mySubdivision[i]*division[i];
@@ -188,7 +188,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     protected long[] GetProjectedFactor(long[] project)
     {
-      long[] div = new long[myDimension];
+      var div = new long[myDimension];
       for (int i = 0; i < div.Length; i++)
       {
         div[i] = mySubdivision[i]/project[i];
@@ -200,7 +200,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public double[] FillArrayFromCell(double cellSizeFactor)
     {
-      double[] eps = new double[myDimension];
+      var eps = new double[myDimension];
       for (int i = 0; i < myDimension; i++)
         eps[i] = cellSizeFactor * myCellSize[i];
       return eps;
@@ -208,7 +208,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public double[] FillArray(double cellSizeFactor)
     {
-      double[] eps = new double[myDimension];
+      var eps = new double[myDimension];
       for (int i = 0; i < myDimension; i++)
         eps[i] = cellSizeFactor;
       return eps;
@@ -216,6 +216,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public bool IsNull(Q coord)
     {
+      //todo: Implement for each concrete Q
       return coord == null;
     }
 

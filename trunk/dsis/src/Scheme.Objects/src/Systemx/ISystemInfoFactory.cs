@@ -21,16 +21,38 @@ namespace DSIS.Scheme.Objects.Systemx
     Type OptionsObjectType { get; }
   }
 
+  /// <summary>
+  /// Marker interface for all SystemInfo creation parameter classes.
+  /// </summary>
+  public interface ISystemInfoParameters
+  {
+  }
+
+  /// <summary>
+  /// Marker interface for all SystemInfo creation parameter classes.
+  /// </summary>
+  public interface IContiniousSolverParameters
+  {
+  }
+
   public interface ISystemInfoFactory : IOptionsHolder
   {
     string FactoryName { get; }
 
     int Dimension { get; }
 
-
     SystemType Type { get; }
 
     ISystemInfo Parse(XmlElement element);
+
+    /// <summary>
+    /// Creates instance of ISystemInfo using parameters specified 
+    /// in object of type <see cref="IOptionsHolder.OptionsObjectType"/>
+    /// </summary>
+    /// <param name="parameters">parameters to the system. 
+    /// Must be an instance of <see cref="IOptionsHolder.OptionsObjectType"/></param>
+    /// <returns>new system info</returns>
+    ISystemInfo Create(ISystemInfoParameters parameters);
   }
 
   public enum SystemType
@@ -42,5 +64,15 @@ namespace DSIS.Scheme.Objects.Systemx
   public interface IContiniousFunctionSolverFactory : IOptionsHolder
   {
     string MethodName { get; }
+
+    /// <summary>
+    /// Creates instance of ISystemInfo using parameters specified 
+    /// in object of type <see cref="IOptionsHolder.OptionsObjectType"/>
+    /// </summary>
+    /// <param name="system">System to integrate</param>
+    /// <param name="parameters">parameters to the system. 
+    /// Must be an instance of <see cref="IOptionsHolder.OptionsObjectType"/></param>
+    /// <returns>new system info</returns>
+    ISystemInfo Create(ISystemInfo system, IContiniousSolverParameters parameters);
   }
 }

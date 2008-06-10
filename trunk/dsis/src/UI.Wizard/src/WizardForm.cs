@@ -26,12 +26,29 @@ namespace DSIS.UI.Wizard
       CancelButton = myButtons.ButtonCancel;
       myButtons.ButtonNext.Click += ButtonNextClick;
       myButtons.ButtonBack.Click += ButtonBackClick;
+      myButtons.ButtonFinish.Click += ButtonFinishClick;
 
       Text = myHeader.MainTitle = model.Title;
 
       var firstPage = myPack.FirstPage;
       myPages.Push(firstPage);
       ShowPage(firstPage, null);
+    }
+
+    private void ButtonFinishClick(object sender, EventArgs e)
+    {
+      if (myPages.Count == 0)
+      {
+        MessageBox.Show(this, "Unable to finish wizard. No active page shown", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        return;
+      }
+      if (!myPack.IsLastPage(myPages.Peek()))
+      {
+        MessageBox.Show(this, "Unable to finish wizard. This is not the last page", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        return;
+      }
+
+      DialogResult = DialogResult.OK;
     }
 
     private void ButtonNextClick(object sender, EventArgs args)
@@ -121,7 +138,8 @@ namespace DSIS.UI.Wizard
       {
         myIsUnderTimer = true;
         UpdateButtonState(myPages.Peek());
-      } finally
+      }
+      finally
       {
         myIsUnderTimer = false;
       }

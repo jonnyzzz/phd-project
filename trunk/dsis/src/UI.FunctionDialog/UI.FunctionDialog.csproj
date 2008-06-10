@@ -53,47 +53,46 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\FixedDimensionSpaceModel.cs" />
-    <Compile Include="src\IListInfo.cs" />
     <Compile Include="src\IWizardPageWithStateFactory.cs" />
-    <Compile Include="src\ListInfo.cs" />
-    <Compile Include="src\ListSelector.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\ListSelectorBase.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="src\NamespaceHolder.cs" />
     <Compile Include="src\SelectPredefinedContiniousMethodWizardPage.cs" />
     <Compile Include="src\SelectPredefinedSystemWizardPage.cs">
     </Compile>
+    <Compile Include="src\SelectSystemConfirmPage.cs" />
     <Compile Include="src\SelectSystemWizardPage.cs">
-    </Compile>
-    <Compile Include="src\SpaceControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\SpaceControl.Designer.cs">
-      <DependentUpon>SpaceControl.cs</DependentUpon>
     </Compile>
     <Compile Include="src\SpaceControlWizardPage.cs" />
     <Compile Include="src\SpaceModel.cs" />
-    <Compile Include="src\SpaceParametersRow.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\SpaceParametersRow.Designer.cs">
-      <DependentUpon>SpaceParametersRow.cs</DependentUpon>
-    </Compile>
     <Compile Include="src\SpaceParametersRowModel.cs" />
     <Compile Include="src\SystemFunctionSelectionWizard.cs" />
+    <Compile Include="src\UI\IListInfo.cs" />
+    <Compile Include="src\UI\ListInfo.cs" />
+    <Compile Include="src\UI\ListSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UI\ListSelectorBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UI\SpaceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UI\SpaceControl.Designer.cs">
+      <DependentUpon>SpaceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\UI\SpaceParametersRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UI\SpaceParametersRow.Designer.cs">
+      <DependentUpon>SpaceParametersRow.cs</DependentUpon>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\SpaceControl.resx">
+    <EmbeddedResource Include="src\UI\SpaceControl.resx">
       <DependentUpon>SpaceControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\SpaceParametersRow.resx">
+    <EmbeddedResource Include="src\UI\SpaceParametersRow.resx">
       <DependentUpon>SpaceParametersRow.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +111,10 @@
     <ProjectReference Include="..\Spring\Spring.csproj">
       <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
       <Name>Spring</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI.Controls\UI.Controls.csproj">
+      <Project>{3305A57B-0432-4E75-8E13-8AB265B8ECB6}</Project>
+      <Name>UI.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\UI.Wizard\UI.Wizard.csproj">
       <Project>{F08FC04F-28A4-4A97-80CB-7F3867C8244B}</Project>

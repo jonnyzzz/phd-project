@@ -1,4 +1,5 @@
 using DSIS.Spring.Service;
+using DSIS.UI.FunctionDialog.UI;
 using DSIS.UI.Wizard;
 
 namespace DSIS.UI.FunctionDialog

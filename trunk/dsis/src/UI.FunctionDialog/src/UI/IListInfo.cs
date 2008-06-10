@@ -1,4 +1,4 @@
-namespace DSIS.UI.FunctionDialog
+namespace DSIS.UI.FunctionDialog.UI
 {
   public interface IListInfo<Q>
   {

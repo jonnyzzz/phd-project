@@ -1,4 +1,5 @@
 using System;
+using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Solvers
@@ -16,6 +17,8 @@ namespace DSIS.Function.Solvers
     {
       get { return myTitle; }
     }
+
+    public abstract ISystemInfo Create(ISystemInfo system, IContiniousSolverParameters parameters);
 
     public abstract Type OptionsObjectType { get; }
   }

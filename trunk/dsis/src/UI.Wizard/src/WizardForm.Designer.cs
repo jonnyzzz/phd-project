@@ -32,7 +32,7 @@
       System.Windows.Forms.Panel myHeaderPanel;
       System.Windows.Forms.Panel myButtonsPanel;
       this.myHeader = new DSIS.UI.Wizard.HeaderControl();
-      this.myButtons = new ButtonsControl();
+      this.myButtons = new DSIS.UI.Wizard.ButtonsControl();
       this.myMiddleContainer = new System.Windows.Forms.Panel();
       this.myButtonsTimer = new System.Windows.Forms.Timer(this.components);
       myHeaderPanel = new System.Windows.Forms.Panel();
@@ -78,8 +78,12 @@
       this.myButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.myButtons.AutoSize = true;
       this.myButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.myButtons.BackEnabled = true;
+      this.myButtons.CancelEnabled = true;
+      this.myButtons.FinishEnabled = true;
       this.myButtons.Location = new System.Drawing.Point(93, 22);
       this.myButtons.Name = "myButtons";
+      this.myButtons.NextEnabled = true;
       this.myButtons.Size = new System.Drawing.Size(324, 29);
       this.myButtons.TabIndex = 0;
       // 
@@ -89,7 +93,8 @@
       this.myMiddleContainer.Dock = System.Windows.Forms.DockStyle.Fill;
       this.myMiddleContainer.Location = new System.Drawing.Point(0, 72);
       this.myMiddleContainer.Name = "myMiddleContainer";
-      this.myMiddleContainer.Size = new System.Drawing.Size(502, 482);
+      this.myMiddleContainer.Padding = new System.Windows.Forms.Padding(5);
+      this.myMiddleContainer.Size = new System.Drawing.Size(502, 418);
       this.myMiddleContainer.TabIndex = 1;
       // 
       // myButtonsTimer
@@ -103,8 +108,8 @@
       this.AutoScroll = true;
       this.AutoScrollMinSize = new System.Drawing.Size(380, 450);
       this.ClientSize = new System.Drawing.Size(502, 554);
-      this.Controls.Add(myButtonsPanel);
       this.Controls.Add(this.myMiddleContainer);
+      this.Controls.Add(myButtonsPanel);
       this.Controls.Add(myHeaderPanel);
       this.MinimumSize = new System.Drawing.Size(510, 450);
       this.Name = "WizardForm";

@@ -41,5 +41,6 @@ namespace DSIS.Function.Predefined
     }
 
     public abstract ISystemInfo Parse(XmlElement element);
+    public abstract ISystemInfo Create(ISystemInfoParameters parameters);
   }
 }

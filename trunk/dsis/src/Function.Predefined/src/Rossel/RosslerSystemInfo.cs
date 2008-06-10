@@ -2,7 +2,7 @@ using System;
 using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Rossel
-{  
+{
   public class RosslerSystemInfo : DoubleSystemInfoBase
   {
     private readonly double myC;
