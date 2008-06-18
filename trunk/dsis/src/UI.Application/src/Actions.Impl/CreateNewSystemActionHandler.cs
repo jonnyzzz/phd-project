@@ -21,10 +21,7 @@ namespace DSIS.UI.Application.Actions.Impl
 
     public override bool Do(Context ctx)
     {
-      myApp.ShowDialog(form => new WizardForm(new SystemFunctionSelectionWizard(myProvider))
-                                 {
-                                   Parent = form
-                                 }.ShowDialog(form));
+      myApp.ShowDialog(form => new WizardForm(new SystemFunctionSelectionWizard(myProvider)).ShowDialog(form));
 
       return true;
     }

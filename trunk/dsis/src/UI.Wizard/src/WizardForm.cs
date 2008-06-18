@@ -27,12 +27,19 @@ namespace DSIS.UI.Wizard
       myButtons.ButtonNext.Click += ButtonNextClick;
       myButtons.ButtonBack.Click += ButtonBackClick;
       myButtons.ButtonFinish.Click += ButtonFinishClick;
+      myButtons.ButtonCancel.Click += ButtonCancelClick;
 
       Text = myHeader.MainTitle = model.Title;
 
       var firstPage = myPack.FirstPage;
       myPages.Push(firstPage);
       ShowPage(firstPage, null);
+    }
+
+    private void ButtonCancelClick(object sender, EventArgs e)
+    {
+      ErrorHandler.Safe(myPack.OnCancel);
+      DialogResult = DialogResult.Cancel;
     }
 
     private void ButtonFinishClick(object sender, EventArgs e)
@@ -47,6 +54,8 @@ namespace DSIS.UI.Wizard
         MessageBox.Show(this, "Unable to finish wizard. This is not the last page", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
+
+      ErrorHandler.Safe(myPack.OnFinish);
 
       DialogResult = DialogResult.OK;
     }

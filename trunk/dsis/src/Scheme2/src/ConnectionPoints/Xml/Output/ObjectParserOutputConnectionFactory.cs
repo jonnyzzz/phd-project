@@ -26,9 +26,9 @@ namespace DSIS.Scheme2.ConnectionPoints.Xml.Output
     {
       if (arc.Item is XsdFromObject)
       {
-        XsdFromObject from = (XsdFromObject) arc.Item;
+        var from = (XsdFromObject) arc.Item;
 
-        List<object> os = new List<object>();
+        var os = new List<object>();
 
         foreach(XmlElement any in from.Any)
         {
@@ -39,7 +39,7 @@ namespace DSIS.Scheme2.ConnectionPoints.Xml.Output
             Assembly assembly = Assembly.Load(from.FormatterAssembly);
             Type type = assembly.GetType(from.FormatterClass);
 
-            IObjectParser factory = (IObjectParser) Activator.CreateInstance(type);
+            var factory = (IObjectParser) Activator.CreateInstance(type);
             o = factory.Parse(any);
           }
           if (o != null)

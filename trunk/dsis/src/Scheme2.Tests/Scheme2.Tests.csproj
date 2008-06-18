@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{606E255C-62EB-4AC3-B85C-A4B5F78D73E9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="resources\scheme1.xml" />
+    <Content Include="resources\test_09.xml" />
     <EmbeddedResource Include="resources\test_08.xml" />
     <EmbeddedResource Include="resources\test_07.xml" />
     <EmbeddedResource Include="resources\test_06.xml" />

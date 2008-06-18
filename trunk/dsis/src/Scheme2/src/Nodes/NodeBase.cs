@@ -10,7 +10,7 @@ namespace DSIS.Scheme2.Nodes
     private readonly ICollection<IOutputConnectionPoint> myOutput;
     private readonly string myName;
 
-    public NodeBase(ICollection<IInputConnectionPoint> input, ICollection<IOutputConnectionPoint> output, string name)
+    protected NodeBase(ICollection<IInputConnectionPoint> input, ICollection<IOutputConnectionPoint> output, string name)
     {
       myInput = input;
       myOutput = output;
@@ -29,7 +29,7 @@ namespace DSIS.Scheme2.Nodes
 
     public IInputConnectionPoint GetInput(string name)
     {
-      foreach (IInputConnectionPoint point in myInput)
+      foreach (var point in myInput)
       {
         if (point.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
           return point;
@@ -39,7 +39,7 @@ namespace DSIS.Scheme2.Nodes
 
     public IOutputConnectionPoint GetOutput(string name)
     {
-      foreach (IOutputConnectionPoint point in myOutput)
+      foreach (var point in myOutput)
       {
         if (point.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
           return point;

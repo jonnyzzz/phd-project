@@ -11,6 +11,6 @@
   <object id="ToolStripMenuItemPresentationManager" type="DSIS.UI.Application.Actions.ToolStripMenuItemPresentationManager"/>
   
   <object id="MainForm" type="DSIS.UI.Application.MainFormProxy" autowire="constructor"/>
-  <object id="ApplicationClass" type="DSIS.UI.Application.ApplicationClass"/>
+  <object id="ApplicationClass" type="DSIS.UI.Application.ApplicationClass" autowire="constructor"/>
   
 </objects>

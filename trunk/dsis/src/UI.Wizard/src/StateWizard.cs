@@ -15,5 +15,13 @@ namespace DSIS.UI.Wizard
     {
       return ((IWizardPageWithState) page).NextPage;
     }
+
+    public virtual void OnFinish()
+    {
+    }
+
+    public virtual void OnCancel()
+    {
+    }
   }
 }

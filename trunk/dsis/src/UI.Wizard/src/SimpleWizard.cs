@@ -42,6 +42,14 @@ namespace DSIS.UI.Wizard
       return ((SimplePage)page).Next;
     }
 
+    public virtual void OnFinish()
+    {
+    }
+
+    public virtual void OnCancel()
+    {
+    }
+
 
     private class SimplePage : IWizardPage
     {

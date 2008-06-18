@@ -33,7 +33,7 @@ namespace DSIS.UI.FunctionDialog
         {
           var paramz = Activator.CreateInstance(factory.OptionsObjectType);
 
-          myWizard.ContiniousParameters = paramz;
+          myWizard.ContiniousParameters = (IContiniousSolverParameters) paramz;
 
           return
             new WizardPageWithStateD(

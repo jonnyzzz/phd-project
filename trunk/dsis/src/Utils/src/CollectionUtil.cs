@@ -5,6 +5,18 @@ namespace DSIS.Utils
 {
   public static class CollectionUtil
   {
+    public delegate Q Fold<T, Q>(T t, Q q);
+
+    public static Q FoldLeft<T,Q>(this IEnumerable<T> enu, Q start, Fold<T,Q> fold)
+    {
+      Q q = start;
+      foreach (var t in enu)
+      {
+        q = fold(t, q);
+      }
+      return q;
+    }
+
     public static T GetFirst<T>(this IEnumerable<T> enu)
     {
       foreach (T t in enu)

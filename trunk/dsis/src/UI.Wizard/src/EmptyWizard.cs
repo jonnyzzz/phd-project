@@ -23,5 +23,13 @@ namespace DSIS.UI.Wizard
     {
       return null;
     }
+
+    public void OnFinish()
+    {
+    }
+
+    public void OnCancel()
+    {
+    }
   }
 }

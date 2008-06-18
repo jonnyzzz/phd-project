@@ -97,7 +97,7 @@ namespace DSIS.UI.FunctionDialog
 
       var instance = Activator.CreateInstance(factory.OptionsObjectType);
 
-      myWizard.SystemParameters = instance;
+      myWizard.SystemParameters = (ISystemInfoParameters) instance;
       return factory.OptionsObjectType == null
                ? next
                : new WizardPageWithStateD(

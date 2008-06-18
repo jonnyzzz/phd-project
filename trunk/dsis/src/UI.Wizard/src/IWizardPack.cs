@@ -26,6 +26,16 @@ namespace DSIS.UI.Wizard
     /// </summary>
     /// <param name="page">Page to compute next page</param>
     /// <returns>Next page or null</returns>
-    IWizardPage Next(IWizardPage page);    
+    IWizardPage Next(IWizardPage page);
+
+    /// <summary>
+    /// Called when user pressed 'Finish' button on some page where <see cref="IsLastPage"/> returned true
+    /// </summary>
+    void OnFinish();
+
+    /// <summary>
+    /// Called if user cancel the dialod.
+    /// </summary>
+    void OnCancel();
   }
 }

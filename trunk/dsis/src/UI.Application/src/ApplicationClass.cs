@@ -36,6 +36,19 @@ namespace DSIS.UI.Application
       action(MainForm());
     }
 
+    public void SetDocument(IApplicationDocument value)
+    {
+      if (GetDocument() != value && DocumentChanging != null)
+      {
+//        DocumentChanging(this, ShowDialog());
+        
+      }
+    }
+    public IApplicationDocument GetDocument()
+    {
+      return null;
+    }
+
     public void OnMenuExit()
     {
       MainForm().Close();
