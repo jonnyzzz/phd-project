@@ -26,10 +26,10 @@ namespace DSIS.Scheme.testSrc
     public void Test_03_4nodes()
     {
       ActionGraph g = new ActionGraph();
-      ISimpleAction a = Create("a");
-      ISimpleAction b = Create("b");
-      ISimpleAction c = Create("c");
-      ISimpleAction d = Create("d");
+      IAction a = Create("a");
+      IAction b = Create("b");
+      IAction c = Create("c");
+      IAction d = Create("d");
 
       g.AddEdge(a, b);
       g.AddEdge(a, c);
@@ -45,7 +45,7 @@ namespace DSIS.Scheme.testSrc
     public void Test_04_Loop()
     {
       ActionGraph g = new ActionGraph();
-      ISimpleAction a = Create("a");
+      IAction a = Create("a");
       g.AddEdge(a,a);
 
       g.Execute();
@@ -58,8 +58,8 @@ namespace DSIS.Scheme.testSrc
     public void Test_05_Loop()
     {
       ActionGraph g = new ActionGraph();
-      ISimpleAction a = Create("a");
-      ISimpleAction b = Create("b");
+      IAction a = Create("a");
+      IAction b = Create("b");
       g.AddEdge(a,b);
       g.AddEdge(b,a);
 
@@ -73,8 +73,8 @@ namespace DSIS.Scheme.testSrc
     public void Test_06_Loop()
     {
       ActionGraph g = new ActionGraph();
-      ISimpleAction a = Create("a");
-      ISimpleAction b = Create("b");
+      IAction a = Create("a");
+      IAction b = Create("b");
       g.AddEdge(a,b);
       g.AddEdge(b,b);
       g.AddEdge(b,a);
@@ -90,8 +90,8 @@ namespace DSIS.Scheme.testSrc
     public void Test_07_Loop()
     {
       ActionGraph g = new ActionGraph();
-      ISimpleAction a = Create("a");
-      ISimpleAction b = Create("b");
+      IAction a = Create("a");
+      IAction b = Create("b");
       g.AddEdge(Create("z"), a);
       g.AddEdge(a,b);
       g.AddEdge(b,b);

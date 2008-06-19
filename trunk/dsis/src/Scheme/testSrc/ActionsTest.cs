@@ -16,7 +16,7 @@ namespace DSIS.Scheme.testSrc
         delegate(IActionGraphPartBuilder bld)
           {
             bld.AddEdge(bld.Start, Create("in_a"));
-            ISimpleAction in_c = Create("in_c");
+            IAction in_c = Create("in_c");
             bld.AddEdge(Create("in_b"), in_c);
             bld.AddEdge(in_c, bld.End);      
           });

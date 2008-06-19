@@ -6,10 +6,10 @@ namespace DSIS.Scheme.Impl.Actions.Agregated
   {
     public SymbolicImageConstructionStep()
     {
-      ISimpleAction merge = new MergeComponetsAction();
-      ISimpleAction buildImage = new BuildSymbolicImageAction();
-      ISimpleAction components = new ChainRecurrenctSimbolicImageAction();
-      ISimpleAction buildImageStartProxy = new ProxyAction();
+      IAction merge = new MergeComponetsAction();
+      IAction buildImage = new BuildSymbolicImageAction();
+      IAction components = new ChainRecurrenctSimbolicImageAction();
+      IAction buildImageStartProxy = new ProxyAction();
 
       Builder.AddEdge(Builder.Start, merge);
       Builder.AddEdge(merge, buildImage);

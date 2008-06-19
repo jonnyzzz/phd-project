@@ -4,7 +4,7 @@ namespace DSIS.Scheme.Exec
 {
   public interface IActionGraphPartBuilder : IActionGraphBuilder
   {
-    ISimpleAction Start { get; }
-    ISimpleAction End { get; }
+    IAction Start { get; }
+    IAction End { get; }
   }
 }

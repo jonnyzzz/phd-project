@@ -9,11 +9,11 @@ namespace DSIS.Scheme.Impl.Actions
 {
   public class ForeachStrongComponentAction : IntegerCoordinateSystemActionBase2
   {
-    private readonly ISimpleAction myBody;
+    private readonly IAction myBody;
 
     public ForeachStrongComponentAction(IAction body)
     {
-      myBody = (ISimpleAction) body;
+      myBody = (IAction) body;
     }
 
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)

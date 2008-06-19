@@ -4,9 +4,9 @@ namespace DSIS.Scheme.Exec
 {
   internal class ActionWrapper : IEquatable<ActionWrapper>
   {
-    public readonly ISimpleAction Action;
+    public readonly IAction Action;
 
-    public ActionWrapper(ISimpleAction action)
+    public ActionWrapper(IAction action)
     {
       Action = action;
     }

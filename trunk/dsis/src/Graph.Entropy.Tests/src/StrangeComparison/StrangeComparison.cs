@@ -157,8 +157,8 @@ namespace DSIS.Graph.Entropy.Tests.StrangeComparison
                                                {
                                                  SetStrangeEntropyParamsAction set = new SetStrangeEntropyParamsAction(ps);
                                                  bld.AddEdge(bld.Start, set);
-                                                 ISimpleAction main = new StrangeEntropyAction();
-                                                 ISimpleAction mainProxy = new ProxyAction();
+                                                 IAction main = new StrangeEntropyAction();
+                                                 IAction mainProxy = new ProxyAction();
                                                  bld.AddEdge(bld.Start, mainProxy);
                                                  bld.AddEdge(mainProxy, main);
                                                  bld.AddEdge(set, main);

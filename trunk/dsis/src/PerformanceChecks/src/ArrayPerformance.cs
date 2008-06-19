@@ -7,13 +7,18 @@ namespace DSIS.PerformanceChecks
   [TestFixture]
   public class ArrayPerformance : PerformanceBase
   {
-    public struct ArrayAsStruct
+    public interface IFoo
     {
-      public long l1;
-      public long l2;
-      public long l3;
+      long this[int i] { get; }
+    }
 
-      public ArrayAsStruct(long l1, long l2, long l3)
+    public class ArrayAsStruct3 : IFoo
+    {
+      public readonly long l1;
+      public readonly long l2;
+      public readonly long l3;
+
+      public ArrayAsStruct3(long l1, long l2, long l3)
       {
         this.l1 = l1;
         this.l2 = l2;
@@ -38,35 +43,211 @@ namespace DSIS.PerformanceChecks
         }
       }
 
-      public ArrayAsStruct Clone()
+      public ArrayAsStruct3 Clone()
       {
-        return new ArrayAsStruct(l1, l2, l3);
+        return new ArrayAsStruct3(l1, l2, l3);
       }
     }
+
+    public class ArrayAsStruct2 : IFoo
+    {
+      public readonly long l1;
+      public readonly long l2;
+
+      public ArrayAsStruct2(long l1, long l2)
+      {
+        this.l1 = l1;
+        this.l2 = l2;
+      }
+
+      public long this[int i]
+      {
+        get
+        {
+          switch (i)
+          {
+            case 0:
+              return l1;
+            case 1:
+              return l2;
+            default:
+              throw new ArgumentException();
+          }
+        }
+      }
+
+      public ArrayAsStruct2 Clone()
+      {
+        return new ArrayAsStruct2(l1, l2);
+      }
+    }
+
+    public class ArrayAsArray : IFoo
+    {
+      public readonly long[] myArray;
+
+      public ArrayAsArray(long[] array)
+      {
+        myArray = array;
+      }
+
+
+      public long this[int i]
+      {
+        get { return myArray[i]; }
+      }
+    }
+
 
     [Test]
     public void Test_Arrays_To_List()
     {
       const int MAX = 1000000;
 
-      DoAction("Arrays ", delegate
-                            {
-                              List<long[]> data = new List<long[]>();
-                              for (int i = 0; i < MAX; i++)
-                              {
-                                data.Add(new long[3]);
-                              }
-                            });
-      DoAction("Structs ", delegate
+      DoAction("Arrays 3", delegate
                              {
-                               List<ArrayAsStruct> data = new List<ArrayAsStruct>();
+                               var data = new List<IFoo>();
                                for (int i = 0; i < MAX; i++)
                                {
-                                 data.Add(new ArrayAsStruct());
+                                 data.Add(new ArrayAsArray(new long[3]));
                                }
-                             });
+                             }, 5);
+      DoAction("Structs 3", delegate
+                              {
+                                var data = new List<IFoo>();
+                                for (int i = 0; i < MAX; i++)
+                                {
+                                  data.Add(new ArrayAsStruct3(1,2,3));
+                                }
+                              }, 5);
+      DoAction("Arrays 2", delegate
+                             {
+                               var data = new List<IFoo>();
+                               for (int i = 0; i < MAX; i++)
+                               {
+                                 data.Add(new ArrayAsArray(new long[2]));
+                               }
+                             }, 5);
+      DoAction("Structs 2", delegate
+                              {
+                                var data = new List<IFoo>();
+                                for (int i = 0; i < MAX; i++)
+                                {
+                                  data.Add(new ArrayAsStruct2(1,2));
+                                }
+                              }, 5);
     }
 
+    [Test]
+    public void Test_Arrays_To_List_Memory()
+    {
+      const int MAX = 1000000;
+
+      DoAction("Arrays 3", delegate
+                             {
+                               long init = Memory;
+                               var data = new List<IFoo>();
+                               for (int i = 0; i < MAX; i++)
+                               {
+                                 data.Add(new ArrayAsArray(new long[3]));
+                               }
+                               Usage(init);
+                               data.Clear();
+                             });
+      DoAction("Structs 3", delegate
+                              {
+                                long init = Memory;
+                                var data = new List<IFoo>();
+                                for (int i = 0; i < MAX; i++)
+                                {
+                                  data.Add(new ArrayAsStruct3(1,2,3));
+                                }
+                                Usage(init);
+                                data.Clear();
+                              });
+      DoAction("Arrays 2", delegate
+                             {
+                               long init = Memory;
+                               var data = new List<IFoo>();
+                               for (int i = 0; i < MAX; i++)
+                               {
+                                 data.Add(new ArrayAsArray(new long[2]));
+                               }
+                               Usage(init);
+                               data.Clear();
+                             });
+      DoAction("Structs 2", delegate
+                              {
+                                long init = Memory;
+                                var data = new List<IFoo>();
+                                for (int i = 0; i < MAX; i++)
+                                {
+                                  data.Add(new ArrayAsStruct2(1,2));
+                                }
+                                Usage(init);
+                                data.Clear();
+                              });
+    }
+
+    private static void DoAccessTest(string name, int dim, List<IFoo> data)
+    {
+      long q = 0;
+      DoAction(name, delegate
+                       {                         
+                         foreach (var foo in data)
+                         {
+                           for (int i = 0; i < dim; i++)
+                           {
+                             q += foo[i];
+                           }
+                         }                        
+                       }, 15);
+    }
+
+    [Test]
+    public void Test_Arrays_To_List_Access()
+    {
+      const int MAX = 10000000;
+
+      {
+        var data = new List<IFoo>();
+        for (int i = 0; i < MAX; i++)
+        {
+          data.Add(new ArrayAsArray(new long[3]));
+        }
+        DoAccessTest("Arrays 3", 3, data);
+        data.Clear();
+      }
+
+      {
+        var data = new List<IFoo>();
+        for (int i = 0; i < MAX; i++)
+        {
+          data.Add(new ArrayAsStruct3(1,2,3));
+        }
+        DoAccessTest("Struct 3", 3, data);
+        data.Clear();
+      }
+      {
+        var data = new List<IFoo>();
+        for (int i = 0; i < MAX; i++)
+        {
+          data.Add(new ArrayAsArray(new long[2]));
+        }
+        DoAccessTest("Arrays 2", 2, data);
+        data.Clear();
+      }
+
+      {
+        var data = new List<IFoo>();
+        for (int i = 0; i < MAX; i++)
+        {
+          data.Add(new ArrayAsStruct2(1,2));
+        }
+        DoAccessTest("Struct 2", 2, data);
+        data.Clear();
+      }
+    }
 
     [Test]
     public void Test_Array_Foreach()
@@ -146,15 +327,15 @@ namespace DSIS.PerformanceChecks
                                    });
       DoAction("struct as array ", delegate
                                      {
-                                       List<ArrayAsStruct> data = new List<ArrayAsStruct>();
+                                       List<ArrayAsStruct3> data = new List<ArrayAsStruct3>();
                                        long j = 0;
                                        for (int i = 0; i < MAX; i++)
                                        {
-                                         ArrayAsStruct ass = new ArrayAsStruct(j++, j++, j++);
+                                         ArrayAsStruct3 ass = new ArrayAsStruct3(j++, j++, j++);
                                          data.Add(ass);
                                        }
 
-                                       foreach (ArrayAsStruct l in data)
+                                       foreach (ArrayAsStruct3 l in data)
                                        {
                                          j -= l.l1 + l.l2 + l.l3;
                                        }
@@ -162,15 +343,15 @@ namespace DSIS.PerformanceChecks
 
       DoAction("struct as array with indexer ", delegate
                                                   {
-                                                    List<ArrayAsStruct> data = new List<ArrayAsStruct>();
+                                                    List<ArrayAsStruct3> data = new List<ArrayAsStruct3>();
                                                     long j = 0;
                                                     for (int i = 0; i < MAX; i++)
                                                     {
-                                                      ArrayAsStruct ass = new ArrayAsStruct(j++, j++, j++);
+                                                      ArrayAsStruct3 ass = new ArrayAsStruct3(j++, j++, j++);
                                                       data.Add(ass);
                                                     }
 
-                                                    foreach (ArrayAsStruct l in data)
+                                                    foreach (ArrayAsStruct3 l in data)
                                                     {
                                                       j -= l[0] + l[1] + l[2];
                                                     }
@@ -178,16 +359,16 @@ namespace DSIS.PerformanceChecks
 
       DoAction("struct as array with indexer 2", delegate
                                                    {
-                                                     List<ArrayAsStruct> data = new List<ArrayAsStruct>();
+                                                     List<ArrayAsStruct3> data = new List<ArrayAsStruct3>();
                                                      long j = 0;
                                                      for (int i = 0; i < MAX; i++)
                                                      {
-                                                       ArrayAsStruct ass = new ArrayAsStruct(j++, j++, j++);
+                                                       ArrayAsStruct3 ass = new ArrayAsStruct3(j++, j++, j++);
                                                        data.Add(ass);
                                                      }
 
                                                      int q = 0;
-                                                     foreach (ArrayAsStruct l in data)
+                                                     foreach (ArrayAsStruct3 l in data)
                                                      {
                                                        j -= l[q++] + l[q++] + l[q++];
                                                        q -= q;
@@ -213,13 +394,10 @@ namespace DSIS.PerformanceChecks
                                 });
       DoAction("Struct clone var", delegate
                                      {
-                                       List<ArrayAsStruct> data = new List<ArrayAsStruct>();
-                                       ArrayAsStruct ass = new ArrayAsStruct(1, 2, 4);
+                                       List<ArrayAsStruct3> data = new List<ArrayAsStruct3>();
+                                       ArrayAsStruct3 ass = new ArrayAsStruct3(1, 2, 4);
                                        for (int i = 0; i < MAX; i++)
                                        {
-                                         ass.l1 += 1;
-                                         ass.l2 -= 7;
-                                         ass.l3 += 7;
                                          data.Add(ass.Clone());
                                        }
                                      });

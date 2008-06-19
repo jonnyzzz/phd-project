@@ -5,9 +5,9 @@ namespace DSIS.Scheme.Actions
 {
   public class MergeInputAndOutputAction : ActionBase
   {
-    private readonly ISimpleAction myDelegate;
+    private readonly IAction myDelegate;
 
-    public MergeInputAndOutputAction(ISimpleAction @delegate)
+    public MergeInputAndOutputAction(IAction @delegate)
     {
       myDelegate = @delegate;
     }

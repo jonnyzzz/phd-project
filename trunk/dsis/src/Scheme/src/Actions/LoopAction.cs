@@ -5,20 +5,20 @@ using DSIS.Scheme.Exec;
 
 namespace DSIS.Scheme.Actions
 {
-  public class LoopAction : DebugableAction, IAction, ISimpleAction
+  public class LoopAction : DebugableAction, IAction
   {
     public static readonly Key<LoopIndex> LoopIndexKey = new Key<LoopIndex>("loop");
 
     private readonly int myCount;
     //TODO:
-    private readonly ISimpleAction myAction;
+    private readonly IAction myAction;
 
     public LoopAction(int count, IAction action)
     {
       if (count <= 0)
         throw new ArgumentException("Count should be >= 1", "count");
       myCount = count;
-      myAction = (ISimpleAction) action;
+      myAction = (IAction) action;
     }
 
     public ICollection<ContextMissmatch> Compatible(Context ctx)

@@ -24,12 +24,12 @@ namespace DSIS.Scheme.testSrc
       Assert.AreEqual(data, myData);
     }
 
-    protected ISimpleAction Create(string name)
+    protected IAction Create(string name)
     {
       return new Mock(name, this);
     }
 
-    protected class Mock : ISimpleAction
+    private class Mock : IAction
     {
       private readonly string myName;
       private readonly ActionTestBase myInstance;

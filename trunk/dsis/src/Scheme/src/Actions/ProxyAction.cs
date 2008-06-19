@@ -22,11 +22,11 @@ namespace DSIS.Scheme.Actions
   [Obsolete("Get rid of it")]
   public class NoCheckAction : ActionBase
   {
-    private readonly ISimpleAction myAction;
+    private readonly IAction myAction;
 
     public NoCheckAction(IAction action)
     {
-      myAction = (ISimpleAction)action;
+      myAction = (IAction)action;
     }
 
     public override ICollection<ContextMissmatch> Compatible(Context ctx)

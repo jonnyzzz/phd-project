@@ -6,7 +6,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 {
   public class DrawEntropyMeasureWithBaseAction : IntegerCoordinateSystemActionBase2
   {
-    private readonly Dictionary<int, ISimpleAction> myActions = new Dictionary<int, ISimpleAction>
+    private readonly Dictionary<int, IAction> myActions = new Dictionary<int, IAction>
                                                                   {
                                                                     {1, new DrawEntropyMeasure2dWithBaseAction()},
                                                                     {2, new DrawEntropyMeasure3dWithBaseAction()},                                                              
@@ -14,7 +14,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
-      ISimpleAction action;
+      IAction action;
       if (!myActions.TryGetValue(system.Dimension, out action))
       {
         throw new ContextMissmatchException(
@@ -26,7 +26,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
-      ISimpleAction action;
+      IAction action;
       if (!myActions.TryGetValue(system.Dimension, out action))
       {
         throw new ContextMissmatchException(

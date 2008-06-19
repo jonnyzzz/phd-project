@@ -39,14 +39,14 @@ namespace DSIS.Scheme.Impl
 
     protected virtual void DoTest(int steps, AddAssertActions loop, AddAssertActions addAssertActions)
     {
-      ActionGraph agr = new ActionGraph();
-      ActionBuilderAdapter gr = new ActionBuilderAdapter(agr);
-      ISimpleAction system = new SystemInfoAction(SystemInfo, SystemSpace);
+      var agr = new ActionGraph();
+      var gr = new ActionBuilderAdapter(agr);
+      IAction system = new SystemInfoAction(SystemInfo, SystemSpace);
 
-      ISimpleAction a5 = new ChainRecurrenctSimbolicImageAction();
-      ISimpleAction method = new SetMethod(Method, MethodSubdivision);
+      IAction a5 = new ChainRecurrenctSimbolicImageAction();
+      IAction method = new SetMethod(Method, MethodSubdivision);
 
-      ISimpleAction a4 = gr.AddLine(
+      IAction a4 = gr.AddLine(
         system,
         new CreateCoordinateSystemAction(),
         new CreateInitialCellsAction(),

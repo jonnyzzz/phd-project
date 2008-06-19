@@ -45,7 +45,7 @@ namespace DSIS.Scheme.Impl.Actions.Console
     {
       Logger.Instance(ctx).Write(myTitle + ": " + ctx);
 
-      result.AddAll(((ISimpleAction)myAction).Apply(ctx));
+      result.AddAll(((IAction)myAction).Apply(ctx));
     }
   }
 }

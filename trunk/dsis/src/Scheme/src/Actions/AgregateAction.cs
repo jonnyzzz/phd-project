@@ -6,7 +6,7 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Actions
 {
-  public class AgregateAction : DebugableAction, IAction, IActionGraphPartBuilder, ISimpleAction
+  public class AgregateAction : DebugableAction, IAction, IActionGraphPartBuilder
   {
     private readonly EndAction myEnd = new EndAction();
     private readonly ActionGraph myGraph = new ActionGraph();
@@ -45,12 +45,12 @@ namespace DSIS.Scheme.Actions
       get { return this; }
     }
 
-    ISimpleAction IActionGraphPartBuilder.Start
+    IAction IActionGraphPartBuilder.Start
     {
       get { return myStart; }
     }
 
-    ISimpleAction IActionGraphPartBuilder.End
+    IAction IActionGraphPartBuilder.End
     {
       get { return myEnd; }
     }
@@ -63,7 +63,7 @@ namespace DSIS.Scheme.Actions
       myGraph.AddEdge(a, b);
     }
 
-    private class EndAction : ISimpleAction
+    private class EndAction : IAction
     {
       private Context myResult;
 
@@ -88,7 +88,7 @@ namespace DSIS.Scheme.Actions
       #endregion
     }
 
-    private class StartAction : ISimpleAction
+    private class StartAction : IAction
     {
       private readonly List<IAction> myChidren = new List<IAction>();
       private Context myContext;
@@ -103,7 +103,7 @@ namespace DSIS.Scheme.Actions
       public ICollection<ContextMissmatch> CompatibleExternal(Context ctx)
       {
         List<ContextMissmatch> list = new List<ContextMissmatch>();
-        foreach (ISimpleAction action in myChidren)
+        foreach (IAction action in myChidren)
         {
           list.AddRange(action.Compatible(ctx));
         }

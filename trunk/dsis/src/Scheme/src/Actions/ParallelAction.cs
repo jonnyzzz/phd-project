@@ -12,7 +12,7 @@ namespace DSIS.Scheme.Actions
     public ParallelAction(IEnumerable<IAction> actions)
     {
       bool build = false;
-      foreach (ISimpleAction action in actions)
+      foreach (IAction action in actions)
       {
         build = true;
         Builder.AddEdge(Builder.Start, action);

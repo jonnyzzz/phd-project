@@ -65,6 +65,7 @@
     <Compile Include="src\Actions\Entropy\EigenEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\EigenPerComoponentAction.cs" />
     <Compile Include="src\Actions\Entropy\JVRMeasureAction.cs" />
+    <Compile Include="src\Actions\Entropy\MeasureCollectorAction.cs" />
     <Compile Include="src\Actions\Entropy\PathEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\ProjectEntopryAction.cs" />
     <Compile Include="src\Actions\Entropy\SetStrangeEntropyParamsAction.cs" />

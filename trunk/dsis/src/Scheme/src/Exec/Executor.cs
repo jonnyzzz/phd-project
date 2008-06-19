@@ -94,9 +94,9 @@ namespace DSIS.Scheme.Exec
       myStraitEdges.AddValue(bA, bW);
     }
 
-    private ISimpleAction Simplify(IAction sb)
+    private IAction Simplify(IAction sb)
     {
-      return (ISimpleAction) sb;
+      return (IAction) sb;
     }
 
 

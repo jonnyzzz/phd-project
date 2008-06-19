@@ -5,14 +5,14 @@ namespace DSIS.Scheme.Actions
 {
   public class ChainAction : AgregateAction
   {
-    public ChainAction(params IAction[] chain) : this((IEnumerable<ISimpleAction>)new ArrayList(chain).ToArray(typeof(ISimpleAction)))
+    public ChainAction(params IAction[] chain) : this((IEnumerable<IAction>)new ArrayList(chain).ToArray(typeof(IAction)))
     {     
     }
 
-    public ChainAction(IEnumerable<ISimpleAction> chain)
+    public ChainAction(IEnumerable<IAction> chain)
     {
-      ISimpleAction prev = Builder.Start;
-      foreach (ISimpleAction action in chain)
+      IAction prev = Builder.Start;
+      foreach (IAction action in chain)
       {
         Builder.AddEdge(prev, action);
         prev = action;
