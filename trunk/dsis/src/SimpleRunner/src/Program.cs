@@ -55,7 +55,7 @@ namespace DSIS.SimpleRunner
                                          IAction function)
     {
       int v = 0;
-      IAction loop = new LoopAction(steps, new AgregateAction(delegate(IActionGraphPartBuilder bld)
+      IAction loop = LoopAction.CreateAgreagated("Curve", steps, (bld, key) =>
                                                                 {
                                                                   IAction act = new LineAction();
                                                                   IAction wf =
@@ -70,7 +70,7 @@ namespace DSIS.SimpleRunner
                                                                   bld.AddEdge(bld.Start, wf);
                                                                   bld.AddEdge(wf, draw2);
                                                                   bld.AddEdge(act, draw2);
-                                                                }));
+                                                                });
       IAction draw = new DrawLineAction();
 
       var sysWf = new SystemWorkingFolderAction();
@@ -239,7 +239,7 @@ namespace DSIS.SimpleRunner
                                             ));
 
       IAction step = new ChainAction(
-        new LoopAction(steps, buildIS)
+        new LoopAction("step", steps, buildIS)
         );
 
 
@@ -372,7 +372,8 @@ namespace DSIS.SimpleRunner
 //                                            new DrawEntropyMeasureColorMapAction(),
                                             new MeasureEntropyLogAction(),
                                             new DumpGraphMeasureAction2(),
-                                            new DumpGraphMeasureAction()
+                                            new DumpGraphMeasureAction(), 
+                                            new InsertMeasureToSlotAction("")
                                             );
 
                                         var pa = new ProxyAction();
@@ -382,7 +383,7 @@ namespace DSIS.SimpleRunner
 
                                         bld.AddEdge(drawEntropy, bld.End);
 
-                                        IAction project = new LoopAction(steps,
+                                        IAction project = new LoopAction("proj", steps,
                                                                          new AgregateAction(
                                                                            delegate(IActionGraphPartBuilder bl)
                                                                              {

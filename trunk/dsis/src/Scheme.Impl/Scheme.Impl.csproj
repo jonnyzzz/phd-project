@@ -64,6 +64,7 @@
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
     <Compile Include="src\Actions\Entropy\EigenEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\EigenPerComoponentAction.cs" />
+    <Compile Include="src\Actions\Entropy\InsertMeasureToSlotAction.cs" />
     <Compile Include="src\Actions\Entropy\JVRMeasureAction.cs" />
     <Compile Include="src\Actions\Entropy\MeasureCollectorAction.cs" />
     <Compile Include="src\Actions\Entropy\PathEntropyAction.cs" />

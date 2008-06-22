@@ -4,7 +4,6 @@ namespace DSIS.Scheme.Exec
 {
   public interface IActionEdgesBuilder
   {
-
     /// <returns>Action builder from newly added action</returns>
     IActionEdgesBuilder Edge(IAction action);
     

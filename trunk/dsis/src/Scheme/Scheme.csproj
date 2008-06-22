@@ -66,6 +66,9 @@
     <Compile Include="src\Actions\ProxyAction.cs" />
     <Compile Include="src\Actions\ReplaceContextAction.cs" />
     <Compile Include="src\Actions\SelectiveCopyAction.cs" />
+    <Compile Include="src\Ctx\SlotStore.cs" />
+    <Compile Include="src\Exec\ActionBuilder2Adaptor.cs" />
+    <Compile Include="src\Exec\ActionEdgesBuilderAdapter.cs" />
     <Compile Include="src\Exec\ContextMissmatchException.cs" />
     <Compile Include="src\Exec\IActionEdgesBuilder.cs" />
     <Compile Include="src\Exec\IActionGraphBuilder2.cs" />

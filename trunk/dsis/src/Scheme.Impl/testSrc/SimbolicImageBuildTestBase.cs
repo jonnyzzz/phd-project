@@ -79,7 +79,7 @@ namespace DSIS.Scheme.Impl
             loop(new ActionBuilderAdapter(bld), b);
           });
 
-      IAction buildIS = new LoopAction(steps, buildSI);
+      IAction buildIS = new LoopAction("", steps, buildSI);
 
       gr.AddEdge(a5, buildIS);
       gr.AddEdge(system, buildIS);
