@@ -7,9 +7,11 @@ namespace DSIS.Scheme.Impl.Actions.Files
   public class LoopStepWorkingFolderAction : PrefixWorkingFolderAction
   {
     private readonly string myTemplate;
+    private readonly ILoopAction myLoopAction;
 
-    public LoopStepWorkingFolderAction(string template)
+    public LoopStepWorkingFolderAction(ILoopAction action, string template)
     {
+      myLoopAction = action;
       myTemplate = template;
     }
 
@@ -20,7 +22,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     protected override string Prefix(Context ctx)
     {
-      return string.Format(myTemplate, LoopAction.LoopIndexKey.Get(ctx).Index);
+      return string.Format(myTemplate, myLoopAction.Key.Get(ctx).Index);
     }
   } 
 }

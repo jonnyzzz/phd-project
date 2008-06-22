@@ -9,10 +9,14 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 {
   public class InsertMeasureToSlotAction : IntegerCoordinateSystemActionBase2
   {
+    private readonly ILoopAction myLoopAction;
+    private readonly ILoopAction myProjAction;
     private readonly string myKey;
 
-    public InsertMeasureToSlotAction(string key)
+    public InsertMeasureToSlotAction(string key, ILoopAction loopAction, ILoopAction projAction)
     {
+      myLoopAction = loopAction;
+      myProjAction = projAction;
       myKey = key;
     }
 
@@ -20,7 +24,8 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     {
       return ColBase(base.Check<T, Q>(system, ctx),
                      Create(Keys.GraphMeasure<Q>()),
-                     Create(LoopAction.LoopIndexKey)
+                     Create(myLoopAction.Key),
+                     Create(myProjAction.Key)
                      );
     }
 
@@ -29,8 +34,8 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     {
       IGraphMeasure<Q> measure = Keys.GraphMeasure<Q>().Get(input);
       SlotStore slot = SlotStore.Get(input);
-      var idx = LoopAction.CreateKey("step").Get(input);
-      var prj = LoopAction.CreateKey("proj").Get(input);
+      var idx = myLoopAction.Key.Get(input);
+      var prj = myProjAction.Key.Get(input);
 
       MeasureSlot<Q>.Get(myKey, slot).RegisterResult(idx.Index, prj.Index, measure);
 

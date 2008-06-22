@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C6473776-929F-4328-B786-C51BB93E8994}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -56,6 +56,7 @@
     <Compile Include="src\DrawEntropyWithSpaceBase.cs" />
     <Compile Include="src\OldProgram.cs" />
     <Compile Include="src\parallel\SimpleParallel.cs" />
+    <Compile Include="src\ProgramCurve.cs" />
     <Compile Include="src\ProjectTheSameMeasureEntropyDraw.cs" />
     <Compile Include="src\ProjectToTheSameEntropyDraw.cs" />
     <Compile Include="src\DrawLastComputationResultListener.cs" />

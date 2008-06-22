@@ -23,7 +23,20 @@ namespace DSIS.Scheme.Exec
     {
       var cid = (ActionEdgesBuilderAdapter) id;
       myGraph.Builder.AddEdge(myAction, cid.myAction);
-      return this;
+      return id;
+    }
+
+    public IActionEdgesBuilder Back(IActionEdgesBuilder id)
+    {
+      id.Edge(this);
+      return id;
+    }
+
+    public IActionEdgesBuilder Back(IAction id)
+    {
+      var back = new ActionEdgesBuilderAdapter(id, myGraph);
+      back.Edge(this);
+      return back;
     }
 
     public IActionEdgesBuilder With(DAction<IActionEdgesBuilder> closure)

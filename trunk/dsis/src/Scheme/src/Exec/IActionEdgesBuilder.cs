@@ -10,6 +10,12 @@ namespace DSIS.Scheme.Exec
     /// <returns>this</returns>
     IActionEdgesBuilder Edge(IActionEdgesBuilder id);
 
+    /// <returns>id</returns>
+    IActionEdgesBuilder Back(IActionEdgesBuilder id);
+
+    /// <returns>IActionBuilder for id</returns>
+    IActionEdgesBuilder Back(IAction id);
+
     IActionEdgesBuilder With(DAction<IActionEdgesBuilder> closure);    
   }
 }

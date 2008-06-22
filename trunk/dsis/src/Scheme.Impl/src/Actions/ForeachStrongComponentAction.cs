@@ -7,13 +7,25 @@ using DSIS.Scheme.Exec;
 
 namespace DSIS.Scheme.Impl.Actions
 {
-  public class ForeachStrongComponentAction : IntegerCoordinateSystemActionBase2
+  public class ForeachStrongComponentAction : IntegerCoordinateSystemActionBase2, ILoopAction
   {
     private readonly IAction myBody;
+    private readonly string myKey;
 
-    public ForeachStrongComponentAction(IAction body)
+    public ForeachStrongComponentAction(string key, ConstructGraph cg)
     {
-      myBody = (IAction) body;
+      myKey = key;
+      myBody = cg(this);
+      
+    }
+
+    public ForeachStrongComponentAction(string key, IAction body) : this(key, x => body)
+    {
+    }
+
+    public Key<LoopIndex> Key
+    {
+      get { return LoopIndex.Create(myKey); }
     }
 
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
@@ -44,7 +56,7 @@ namespace DSIS.Scheme.Impl.Actions
 
               Keys.Graph<Q>().Set(ctx, graph);
               Keys.GraphComponents<Q>().Set(ctx, graph.ComputeStrongComponents(NullProgressInfo.INSTANCE));
-              LoopAction.LoopIndexKey.Set(ctx, new LoopIndex(dIndex, comps.ComponentCount));
+              Key.Set(ctx, new LoopIndex(dIndex, comps.ComponentCount));
             });
 
         var save = new UpdateContextAction((@in, _) => output.AddAll(@in));

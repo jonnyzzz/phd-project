@@ -15,5 +15,10 @@ namespace DSIS.Scheme.Actions
     {
       return new LoopIndex(Index+1, Count);
     }
+
+    public static Key<LoopIndex> Create(string key)
+    {
+      return new Key<LoopIndex>(key);
+    }
   }
 }

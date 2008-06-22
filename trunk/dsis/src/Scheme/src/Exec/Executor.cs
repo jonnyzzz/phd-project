@@ -53,13 +53,13 @@ namespace DSIS.Scheme.Exec
         List<ActionWrapper> deps = myBackEdges.GetValues(wrapper);
         if (myDoneActions.ContainsRange(deps))
         {
-          Context cx = new Context();
+          var cx = new Context();
           foreach (ActionWrapper dep in deps)
           {
             cx.AddAll(myPendingContexts[dep]);
           }
 
-          ICollection<ContextMissmatch> compatible = wrapper.Action.Compatible(cx);
+          var compatible = wrapper.Action.Compatible(cx);
           if (compatible.Count != 0)
           {
             throw new ContextMissmatchException(compatible, wrapper.Action, cx);
