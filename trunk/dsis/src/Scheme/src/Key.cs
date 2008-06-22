@@ -57,6 +57,11 @@ namespace DSIS.Scheme
       ctx.Set(this, value);
     }
 
+    public void Remove(Context ctx)
+    {
+      ctx.Remove(this);
+    }
+
     public void Copy(Context input, Context output)
     {
       Set(output, Get(input));

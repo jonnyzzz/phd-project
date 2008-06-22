@@ -30,6 +30,7 @@ namespace DSIS.Scheme.Impl
       MethodSubdivision = new long[] {2, 2 };
     }
 
+    protected delegate void AddAssertActionsLoop(ILoopAction loop, ActionBuilderAdapter ad, IAction leaf);
     protected delegate void AddAssertActions(ActionBuilderAdapter ad, IAction leaf);
 
     protected virtual void DoTest(int steps, AddAssertActions addAssertActions)
@@ -37,7 +38,7 @@ namespace DSIS.Scheme.Impl
       DoTest(steps, delegate { }, addAssertActions);
     }
 
-    protected virtual void DoTest(int steps, AddAssertActions loop, AddAssertActions addAssertActions)
+    protected virtual void DoTest(int steps, AddAssertActionsLoop loop, AddAssertActions addAssertActions)
     {
       var agr = new ActionGraph();
       var gr = new ActionBuilderAdapter(agr);
@@ -58,28 +59,26 @@ namespace DSIS.Scheme.Impl
 
       gr.AddEdge(a4, new DumpGraphInfoAction());
       gr.AddEdge(a5, new DumpGraphComponentsInfoAction());
-
-      AgregateAction buildSI = new AgregateAction(
+      
+      IAction buildIS = new LoopAction("", steps, x => new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
           {
-            SymbolicImageConstructionStep build = new SymbolicImageConstructionStep();
+            var build = new SymbolicImageConstructionStep();
             bld.AddEdge(bld.Start, build);
             bld.AddEdge(build, bld.End);
-            ProxyAction b = new ProxyAction();
-            ParallelAction b2 = new ParallelAction(new DumpGraphInfoAction(),
+            var b = new ProxyAction();
+            var b2 = new ParallelAction(new DumpGraphInfoAction(),
                                                   new DumpGraphComponentsInfoAction(),
                                                   new DumpMethodAction()
               );
-            ProxyAction p = new ProxyAction();
+            var p = new ProxyAction();
             bld.AddEdge(build, b);
             bld.AddEdge(bld.Start, p);
             bld.AddEdge(p, b);
             bld.AddEdge(b, b2);
 
-            loop(new ActionBuilderAdapter(bld), b);
-          });
-
-      IAction buildIS = new LoopAction("", steps, buildSI);
+            loop(x, new ActionBuilderAdapter(bld), b);
+          }));
 
       gr.AddEdge(a5, buildIS);
       gr.AddEdge(system, buildIS);

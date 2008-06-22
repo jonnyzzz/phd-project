@@ -17,7 +17,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
-      return CheckContext(ctx, base.Compatible(ctx), Create(LoopAction.LoopIndexKey));
+      return CheckContext(ctx, base.Compatible(ctx), Create(myLoopAction.Key));
     }
 
     protected override string Prefix(Context ctx)

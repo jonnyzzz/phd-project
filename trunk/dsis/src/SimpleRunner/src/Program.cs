@@ -153,30 +153,33 @@ namespace DSIS.SimpleRunner
 
       IAction step = new ChainAction(
         new LoopAction("step", steps,
-                       x => new BranchAction(buildIS, new AgregateAction(delegate(IActionGraphPartBuilder bld)
-                                                                           {
-                                                                             IAction xa1 = new ReplaceContextAction(
-                                                                               new SetMethod(
-                                                                                 new PointMethodSettings(Fill(2, dim),
-                                                                                                         0.1),
-                                                                                 Fill(1L, dim)));
+                       x => new BranchAction(
+                              buildIS,
+                              new AgregateAction(
+                                bld =>
+                                  {
+                                    IAction xa1 = new ReplaceContextAction(
+                                      new SetMethod(
+                                        new PointMethodSettings(Fill(2, dim),
+                                                                0.1),
+                                        Fill(1L, dim)));
 
-                                                                             IAction xa2 = buildIS;
-                                                                             IAction xa3 = EntropyAction(x, steps);
+                                    IAction xa2 = buildIS;
+                                    IAction xa3 = EntropyAction(x, steps);
 
-                                                                             IAction la = new LoopIndexIncrementAction(x);
+                                    IAction la = new LoopIndexIncrementAction(x);
 
-                                                                             bld.AddEdge(bld.Start, xa1);
-                                                                             bld.AddEdge(bld.Start, xa3);
-                                                                             bld.AddEdge(bld.Start, la);
+                                    bld.AddEdge(bld.Start, xa1);
+                                    bld.AddEdge(bld.Start, xa3);
+                                    bld.AddEdge(bld.Start, la);
 
-                                                                             bld.AddEdge(xa1, xa2);
-                                                                             bld.AddEdge(la, xa2);
-                                                                             bld.AddEdge(xa2, xa3);
+                                    bld.AddEdge(xa1, xa2);
+                                    bld.AddEdge(la, xa2);
+                                    bld.AddEdge(xa2, xa3);
 
-                                                                             bld.AddEdge(xa2, bld.End);
-                                                                           }
-                                                        )))
+                                    bld.AddEdge(xa2, bld.End);
+                                  }
+                                )))
         );
 
 
@@ -186,6 +189,8 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(system, step);
       gr.AddEdge(method, step);
 
+
+      gr.AddEdge(step, new WriteSequenceSlotAction(""));
       gr.Execute();
     }
 
@@ -333,8 +338,11 @@ namespace DSIS.SimpleRunner
                                         bld2.Start.Edge(new DumpGraphInfoAction());
                                         bld2.Start.Edge(new DumpGraphComponentsInfoAction());
 
-                                        IAction project = EntropyProjectAction(steps, loop, entropy);
-                                        bld2.Start.Edge(project).Edge(bld2.Finish);
+                                        bld2.Start
+                                          .Edge(entropy)
+//                                          .With(x => x.Edge(new ProxyAction()).Edge(new DrawEntropyMeasureWithBaseAction()))
+                                          .Edge(EntropyProjectAction(steps, loop, entropy)).With(x => x.Back(bld2.Start))
+                                          .Edge(bld2.Finish);
                                       }));
     }
 
@@ -349,10 +357,10 @@ namespace DSIS.SimpleRunner
                      IActionGraphBuilder2 bl2 = new ActionBuilder2Adaptor(bl);
 
                      bl2.Start
-                       .Edge(entropy)
+//                       .Edge(entropy)
                        .With(x => x
-                                   .Edge(new DumpContextProxy("After Entropy", 
-                                    new ParallelAction(
+                                    .Edge(new DumpContextProxy("After Entropy",
+                                                               new ParallelAction(
 //                                    new DumpGraphAsMatrixForMapleAction(),
 //                                    new DrawEntropyMeasureWithBaseAction(),
 //                                    new DumpEntropyParamsAction(),
@@ -360,20 +368,20 @@ namespace DSIS.SimpleRunner
 //                                    new DrawEntropyMeasure3dAction(),
 //                                    new DrawEntropyMeasure3dWithBaseAction(),
 //                                    new DrawEntropyMeasureColorMapAction(),
-                                      new MeasureEntropyLogAction(),
-                                      new DumpGraphMeasureAction2(),
-                                      new DumpGraphMeasureAction(),
-                                      new DumpEntropyValueAction("Project"),
-                                      new InsertMeasureToSlotAction("", loop, projStep)
-                                      ))
+                                                                 new MeasureEntropyLogAction(),
+                                                                 new DumpGraphMeasureAction2(),
+                                                                 new DumpGraphMeasureAction(),
+                                                                 new DumpEntropyValueAction("Project"),
+                                                                 new InsertMeasureToSlotAction("", loop, projStep)
+                                                                 ))
                                     ).With(xx => xx
-                                      .Back(new SelectiveCopyAction(
-                                        FileKeys.WorkingFolderKey,
-                                        loop.Key,
-                                        projStep.Key
-                                        )
-                                       )
-                                      .Back(bl2.Start)
+                                                   .Back(new SelectiveCopyAction(
+                                                           FileKeys.WorkingFolderKey,
+                                                           loop.Key,
+                                                           projStep.Key
+                                                           )
+                                                   )
+                                                   .Back(bl2.Start)
                                     )
                        )
                        .With(x => x

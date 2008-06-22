@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
+using System.IO;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
+using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
@@ -43,75 +43,50 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     }
   }
 
-  public class MeasureSlot<Q> where Q : ICellCoordinate
+  public class WriteSequenceSlotAction : IntegerCoordinateSystemActionBase2
   {
-    private readonly List<MeasureInfo<Q>> myMeasures = new List<MeasureInfo<Q>>();
+    private readonly string myKey;
 
-    private struct C : IEquatable<C>
+    public WriteSequenceSlotAction(string key)
     {
-      public readonly int Step;
-      public readonly int Proj;
+      myKey = key;
+    }
 
-      public C(int step, int proj)
-      {
-        Step = step;
-        Proj = proj;
-      }
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    {
+      return ColBase(base.Check<T,Q>(system, ctx), Create(FileKeys.WorkingFolderKey));
+    }
 
-      public bool Equals(C obj)
-      {
-        return obj.Step == Step && obj.Proj == Proj;
-      }
+    protected override void Apply<T, Q>(T system, Context input, Context output)
+    {
+      var info = FileKeys.WorkingFolderKey.Get(input);
 
-      public override bool Equals(object obj)
-      {
-        return obj.GetType() == typeof (C) && Equals((C) obj);
-      }
+      string file = info.CreateFileNameFromTemplate("entropy-log-{0}");
+      var slot = MeasureSlot<Q>.Get(myKey, SlotStore.Get(input));
 
-      public override int GetHashCode()
+      MeasureInfo<Q> mi = null;
+      using (TextWriter tw = File.CreateText(file))
       {
-        unchecked
+        for (int i = 0;; i++)
         {
-          return (Step*397) ^ Proj;
+          var col = slot.ForStep(i);
+
+          bool hasData = false;
+          foreach (var measureInfo in col)
+          {
+            hasData = true;
+            if (mi != null)
+            {
+              tw.WriteLine("Step {0} - Step{1} = {2}", mi, measureInfo, MeasureInfo<Q>.Rho(mi, measureInfo));
+            }
+            mi = measureInfo;
+          }
+
+          if (!hasData)
+            break;
         }
-      }
-    }
-
-    public static MeasureSlot<Q> Get(string key, Context ctx)
-    {
-      if (ctx.ContainsKey(Key(key)))
-      {
-        return ctx.Get(Key(key));
-      } else
-      {
-        var ms = new MeasureSlot<Q>();
-        ctx.Set(Key(key), ms);
-        return ms;
-      }
-    }
-
-    private static Key<MeasureSlot<Q>> Key(string key)
-    {
-      return new Key<MeasureSlot<Q>>(key);
-    }
-
-    public void RegisterResult(int step, int proj, IGraphMeasure<Q> mes)
-    {
-      myMeasures.Add(new MeasureInfo<Q>(step, proj, mes));      
+      }      
     }
   }
 
-  public class MeasureInfo<Q> where Q : ICellCoordinate
-  {
-    public readonly int Proj;
-    public readonly int Step;
-    public readonly IGraphMeasure<Q> Measure;
-
-    public MeasureInfo(int step, int proj, IGraphMeasure<Q> measure)
-    {
-      Step = step;
-      Proj = proj;
-      Measure = measure;
-    }
-  }
 }

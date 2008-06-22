@@ -7,6 +7,15 @@ namespace DSIS.Utils
   {
     public delegate Q Fold<T, Q>(T t, Q q);
 
+    public static IEnumerable<Q> Filter<Q>(this IEnumerable<Q> enu, Predicate<Q> pred)
+    {
+      foreach (var q in enu)
+      {
+        if (pred(q))
+          yield return q;
+      }
+    }
+
     public static Q FoldLeft<T,Q>(this IEnumerable<T> enu, Q start, Fold<T,Q> fold)
     {
       Q q = start;

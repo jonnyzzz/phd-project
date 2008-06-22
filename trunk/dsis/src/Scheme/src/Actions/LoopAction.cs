@@ -6,9 +6,7 @@ using DSIS.Scheme.Exec;
 namespace DSIS.Scheme.Actions
 {
   public class LoopAction : DebugableAction, IAction, ILoopAction
-  {
-    public static readonly Key<LoopIndex> LoopIndexKey = new Key<LoopIndex>("loop");
-
+  {    
     private readonly string myKey;
     private readonly int myCount;
     private readonly IAction myAction;
@@ -29,8 +27,7 @@ namespace DSIS.Scheme.Actions
     public ICollection<ContextMissmatch> Compatible(Context ctx)
     {
       var cz = new Context();
-      cz.AddAll(ctx);
-      LoopIndexKey.Set(cz, new LoopIndex(0,0));
+      cz.AddAll(ctx);      
       Key.Set(cz, new LoopIndex(0,0));
       return myAction.Compatible(cz);
     }
@@ -38,8 +35,7 @@ namespace DSIS.Scheme.Actions
     public Context Apply(Context ctx)
     {
       for(int i = 0; i<myCount; i++)
-      {
-        LoopIndexKey.Set(ctx, new LoopIndex(i, myCount));
+      {        
         Key.Set(ctx, new LoopIndex(i, myCount));
         var check = myAction.Compatible(ctx);
         if (check.Count != 0)
@@ -49,6 +45,7 @@ namespace DSIS.Scheme.Actions
         newCtx.AddAllNew(ctx);        
         ctx = newCtx;
       }
+      Key.Remove(ctx);
       return ctx;      
     }
 

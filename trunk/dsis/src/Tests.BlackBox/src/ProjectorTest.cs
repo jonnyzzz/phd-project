@@ -92,8 +92,7 @@ namespace DSIS.Tests.BlackBox
 
     private void DoTest(int a, int b, AssertProjectedGraphs assert)
     {
-      DoTest(b,
-             delegate(ActionBuilderAdapter ad, IAction leaf) { ad.AddEdge(leaf, new RememberGraphAction(a, assert)); },
+      DoTest(b, (_, ad, leaf) => ad.AddEdge(leaf, new RememberGraphAction(_, a, assert)),
              delegate { });
     }
 
@@ -112,16 +111,18 @@ namespace DSIS.Tests.BlackBox
       private readonly int myIndex;
       private IGraph myGraph;
       private readonly AssertProjectedGraphs myAssert;
+      private readonly ILoopAction myLoop;
 
-      public RememberGraphAction(int index, AssertProjectedGraphs assert)
+      public RememberGraphAction(ILoopAction loop, int index, AssertProjectedGraphs assert)
       {
         myIndex = index;
         myAssert = assert;
+        myLoop = loop;
       }
 
       protected override void Apply<T, Q>(T system, Context input, Context output)
       {
-        LoopIndex index = LoopAction.LoopIndexKey.Get(input);
+        LoopIndex index = myLoop.Key.Get(input);
         if (index.Index == myIndex)
         {
           IGraphStrongComponents<Q> components = Keys.GraphComponents<Q>().Get(input);
