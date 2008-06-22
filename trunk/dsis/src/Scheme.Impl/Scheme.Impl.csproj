@@ -73,6 +73,7 @@
     <Compile Include="src\Actions\Entropy\ProjectEntopryAction.cs" />
     <Compile Include="src\Actions\Entropy\SetStrangeEntropyParamsAction.cs" />
     <Compile Include="src\Actions\Entropy\StrangeEntropyAction.cs" />
+    <Compile Include="src\Actions\Entropy\WriteSequenceSlotAction.cs" />
     <Compile Include="src\Actions\Files\CustomPrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\DrawChainRecurrentAction.cs" />
     <Compile Include="src\Actions\Files\DrawEntropy2dActionBase.cs" />

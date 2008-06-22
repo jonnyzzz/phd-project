@@ -257,8 +257,7 @@ namespace DSIS.SimpleRunner
                                }*/
 //                               entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
                                entropies.Add(
-                                 EntropyForEachComponent(loop,
-                                                         DrawEntropyAction(loop, steps,
+                                 EntropyForEachComponent(DrawEntropyAction(loop, steps,
                                                                            new JVRMeasureAction(new JVRMeasureOptions
                                                                                                   {
                                                                                                     IncludeSelfEdge =
@@ -269,8 +268,7 @@ namespace DSIS.SimpleRunner
                                                                                                   }))),
                                  "JVR2-Const");
                                entropies.Add(
-                                 EntropyForEachComponent(loop,
-                                                         DrawEntropyAction(loop, steps,
+                                 EntropyForEachComponent(DrawEntropyAction(loop, steps,
                                                                            new JVRMeasureAction(new JVRMeasureOptions
                                                                                                   {
                                                                                                     IncludeSelfEdge =
@@ -281,8 +279,7 @@ namespace DSIS.SimpleRunner
                                                                                                   }))),
                                  "JVR2-One");
                                entropies.Add(
-                                 EntropyForEachComponent(loop,
-                                                         DrawEntropyAction(loop, steps,
+                                 EntropyForEachComponent(DrawEntropyAction(loop, steps,
                                                                            new JVRMeasureAction(new JVRMeasureOptions
                                                                                                   {
                                                                                                     IncludeSelfEdge =
@@ -294,7 +291,7 @@ namespace DSIS.SimpleRunner
                                  "JVR2-MinusOne");
 //                               entropies.Add(EntropyForEachComponent(loop, DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = true }))), "JVR");
                                entropies.Add(
-                                 EntropyForEachComponent(loop, DrawEntropyAction(loop, steps, new EigenEntropyAction())),
+                                 EntropyForEachComponent(DrawEntropyAction(loop, steps, new EigenEntropyAction())),
                                  "Eigen");
 
                                foreach (var pair in entropies)
@@ -310,7 +307,7 @@ namespace DSIS.SimpleRunner
                              });
     }
 
-    private static IAction EntropyForEachComponent(ILoopAction loop, IAction doDrawAndCompute)
+    private static IAction EntropyForEachComponent(IAction doDrawAndCompute)
     {
       return
         new ForeachStrongComponentAction("foreach_componen",
@@ -341,12 +338,12 @@ namespace DSIS.SimpleRunner
                                         bld2.Start
                                           .Edge(entropy)
 //                                          .With(x => x.Edge(new ProxyAction()).Edge(new DrawEntropyMeasureWithBaseAction()))
-                                          .Edge(EntropyProjectAction(steps, loop, entropy)).With(x => x.Back(bld2.Start))
+                                          .Edge(EntropyProjectAction(steps, loop)).With(x => x.Back(bld2.Start))
                                           .Edge(bld2.Finish);
                                       }));
     }
 
-    private static LoopAction EntropyProjectAction(int steps, ILoopAction loop, IAction entropy)
+    private static LoopAction EntropyProjectAction(int steps, ILoopAction loop)
     {
       return new LoopAction(
         "proj",
