@@ -33,18 +33,18 @@ namespace DSIS.GnuplotDrawer
 
     public void DrawImage(IGnuplotScript script)
     {
-      ProcessStartInfo pi = new ProcessStartInfo();
-      pi.FileName = Path.Combine(myGnuplotFolder, @"bin\pgnuplot.exe");
+
+      var pi = new ProcessStartInfo
+                              {
+                                FileName = Path.Combine(myGnuplotFolder, @"bin\wgnuplot.exe"),
+                                Arguments = script.Filename,
+                                ErrorDialog = true,
+                              };
 
       if (!File.Exists(pi.FileName))
         throw new ArgumentException("Unable to locate pgnuplot.exe");
 
-      pi.Arguments = script.Filename;
-      pi.CreateNoWindow = true;
-      pi.WindowStyle = ProcessWindowStyle.Hidden;
-      
-      Process ps = Process.Start(pi);
-      ps.WaitForExit();
+      Process.Start(pi).WaitForExit();
     }
   }
 }

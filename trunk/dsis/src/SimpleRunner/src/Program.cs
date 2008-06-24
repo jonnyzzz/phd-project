@@ -337,7 +337,7 @@ namespace DSIS.SimpleRunner
 
                                         bld2.Start
                                           .Edge(entropy)
-//                                          .With(x => x.Edge(new ProxyAction()).Edge(new DrawEntropyMeasureWithBaseAction()))
+                                          .With(x => x.Edge(new DrawEntropyMeasureWithBaseAction()).Back(bld2.Start))
                                           .Edge(EntropyProjectAction(steps, loop)).With(x => x.Back(bld2.Start))
                                           .Edge(bld2.Finish);
                                       }));
@@ -354,12 +354,11 @@ namespace DSIS.SimpleRunner
                      IActionGraphBuilder2 bl2 = new ActionBuilder2Adaptor(bl);
 
                      bl2.Start
-//                       .Edge(entropy)
                        .With(x => x
                                     .Edge(new DumpContextProxy("After Entropy",
                                                                new ParallelAction(
 //                                    new DumpGraphAsMatrixForMapleAction(),
-//                                    new DrawEntropyMeasureWithBaseAction(),
+
 //                                    new DumpEntropyParamsAction(),
 //                                    new DumpEntropyValueAction(),
 //                                    new DrawEntropyMeasure3dAction(),
