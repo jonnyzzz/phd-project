@@ -9,6 +9,6 @@ namespace DSIS.Scheme.Ctx
     public static SlotStore Get(Context ctx)
     {
       return ourStore;
-    }
+    }    
   }
 }

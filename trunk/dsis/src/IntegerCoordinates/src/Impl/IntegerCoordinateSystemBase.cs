@@ -29,8 +29,8 @@ namespace DSIS.IntegerCoordinates.Impl
     protected readonly double[] myAreaLeftPoint;
 
     private readonly TInh myInh;
- 
-    public IntegerCoordinateSystemBase(ISystemSpace systemSpace, long[] subdivision)
+
+    protected IntegerCoordinateSystemBase(ISystemSpace systemSpace, long[] subdivision)
     {
       myInh = (TInh)(object)this;
 
@@ -53,7 +53,7 @@ namespace DSIS.IntegerCoordinates.Impl
       myAreaLeftPoint = mySystemSpace.AreaLeftPoint;
     }
 
-    public IntegerCoordinateSystemBase(ISystemSpace systemSpace)
+    protected IntegerCoordinateSystemBase(ISystemSpace systemSpace)
       : this(systemSpace, systemSpace.InitialSubdivision)
     {
     }

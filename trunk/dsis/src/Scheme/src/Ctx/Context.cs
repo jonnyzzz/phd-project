@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Text;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Scheme.Ctx
 {
@@ -15,6 +17,12 @@ namespace DSIS.Scheme.Ctx
 
     public Context() : this(new Dictionary<KeyWrapper, object>())
     {
+    }
+    
+    /// <returns>All stored keys without regard to name</returns>
+    public IEnumerable<Key<Y>> AllKeys<Y>()
+    {
+      return myContext.Keys.Filter(x => x.IsKey<Y>()).Convert(x=>x.Cast<Y>());
     }
 
     public bool ContainsKey<Y>(Key<Y> key)

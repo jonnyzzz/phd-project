@@ -16,6 +16,14 @@ namespace DSIS.Utils
       }
     }
 
+    public static IEnumerable<P> Convert<Q,P>(this IEnumerable<Q> enu, Converter<Q,P> conv)
+    {
+      foreach (var q in enu)
+      {
+        yield return conv(q);
+      }
+    }
+
     public static Q FoldLeft<T,Q>(this IEnumerable<T> enu, Q start, Fold<T,Q> fold)
     {
       Q q = start;
@@ -139,9 +147,9 @@ namespace DSIS.Utils
       return count;
     }
 
-    public static T[] Fill<T>(int count, T data)
+    public static T[] Fill<T>(this T data, int count)
     {
-      T[] t = new T[count];
+      var t = new T[count];
       for (int i = 0; i < t.Length; i++)
       {
         t[i] = data;
@@ -171,11 +179,6 @@ namespace DSIS.Utils
         if (notNull != null)
           yield return notNull;
       }
-    }
-
-    private static bool AndEval(bool b1, bool b2)
-    {
-      return b1 && b2;
     }
 
     public static void Zip<T,Q>(IEnumerable<T> ts, IEnumerable<Q> qs, Zip<T,Q> zip)

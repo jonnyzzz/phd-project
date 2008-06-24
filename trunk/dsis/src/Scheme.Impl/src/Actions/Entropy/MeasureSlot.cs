@@ -28,17 +28,45 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       return new Key<MeasureSlot<Q>>(key);
     }
 
-    public IEnumerable<MeasureInfo<Q>> ForStep(int step)
+    public IEnumerable<MeasureInfo<Q>> ForStep(int Step)
     {
-      var mesures = new List<MeasureInfo<Q>>(myMeasures.Filter(x => x.Step == step));
-      mesures.Sort((x,y) => x.Proj.CompareTo(y.Proj));
-      return mesures;
+      int proj = 0;
+      int step = Step;
+      while(true)
+      {
+        var info = Get(step, proj);
+        if (info == null)
+        {
+          yield break;
+        }
+        yield return info;
+
+        proj++;
+        step++;
+      }
     }
 
 
+    public MeasureInfo<Q> Get(int step, int proj)
+    {
+      foreach (var info in myMeasures)
+      {
+        if (info.Step == step && info.Proj == proj)
+          return info;
+      }
+      return null;
+    }
+
     public void RegisterResult(int step, int proj, IGraphMeasure<Q> mes)
     {
-      myMeasures.Add(new MeasureInfo<Q>(step, proj, mes));      
+      MeasureInfo<Q> info = Get(step, proj);
+      if (info == null)
+      {
+        myMeasures.Add(new MeasureInfo<Q>(step, proj, mes));
+      } else
+      {
+        info.Join(mes);
+      }
     }
   }
 }

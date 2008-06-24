@@ -25,7 +25,7 @@ namespace DSIS.IntegerCoordinates.Impl
       if (!SystemSpace.Contains(point))
         return null;
 
-      long[] coordinate = new long[myDimension];
+      var coordinate = new long[myDimension];
       for (int i = 0; i< myDimension; i++)
       {
         coordinate[i] = ToInternal(point[i], i);
@@ -68,7 +68,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public IntegerCoordinateSystem ProjectedCoordinateSystem(long[] division)
     {
-      long[] factor = GetProjectedFactor(division);
+      var factor = GetProjectedFactor(division);
       return factor != null ? new IntegerCoordinateSystem(SystemSpace, factor) : null;
     }
 

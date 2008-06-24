@@ -15,7 +15,6 @@ using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Exec;
-using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
@@ -69,7 +68,8 @@ namespace DSIS.SimpleRunner
 
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 5, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemIked, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, duffing, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, vanderpol, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
@@ -89,23 +89,13 @@ namespace DSIS.SimpleRunner
       GCHelper.Collect();
     }
 
-    private static T[] Fill<T>(T t, int dim)
-    {
-      var tt = new T[dim];
-      for (int i = 0; i < dim; i++)
-      {
-        tt[i] = t;
-      }
-      return tt;
-    }
-
     private static void ComputeEntropy(int dim, IAction wfBase, int steps, IAction system)
     {
       IAction a2 = new CreateCoordinateSystemAction();
       IAction a3 = new CreateInitialCellsAction();
       IAction a4 = new BuildSymbolicImageAction();
       IAction a5 = new ChainRecurrenctSimbolicImageAction();
-      IAction method = new SetMethod(new BoxMethodSettings(0.1), Fill(2L, dim));
+      IAction method = new SetMethod(new BoxMethodSettings(0.1), 2L.Fill(dim));
 
       var gr = new ActionGraph();
 
@@ -160,10 +150,7 @@ namespace DSIS.SimpleRunner
                                   {
                                     IAction xa1 = new ReplaceContextAction(
                                       new SetMethod(
-                                        new PointMethodSettings(Fill(2, dim),
-                                                                0.1),
-                                        Fill(1L, dim)));
-
+                                        new PointMethodSettings(2.Fill(dim), 0.1), 1L.Fill(dim)));
                                     IAction xa2 = buildIS;
                                     IAction xa3 = EntropyAction(x, steps);
 
@@ -190,7 +177,9 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(method, step);
 
 
-      gr.AddEdge(step, new WriteSequenceSlotAction(""));
+      var writeSequenceSlotAction = new WriteSequenceSlotAction();
+      gr.AddEdge(step, writeSequenceSlotAction);
+      gr.AddEdge(a5, writeSequenceSlotAction);
       gr.Execute();
     }
 
@@ -207,8 +196,7 @@ namespace DSIS.SimpleRunner
                                xgr.AddEdge(xgr.Start, new DumpContextAction("EntropyAction"));
                                xgr.AddEdge(xgr.Start, xwf);
                                xgr.AddEdge(xwf, draw);
-                               var entropies = new Dictionary<IAction, string>();
-
+                               
                                var entropySmart = new StrangeEntropyEvaluatorParams(
                                  StrangeEvaluatorType.WeightSearch_1,
                                  StrangeEvaluatorStrategy.SMART,
@@ -236,7 +224,32 @@ namespace DSIS.SimpleRunner
                                                                             entropySmart,
                                                                             combinatoricsEntropy
                                                                           };
-
+                               var entropies =
+                                 new Dictionary<IAction, string>
+                                   {
+                                     {
+                                       new JVRMeasureAction(new JVRMeasureOptions
+                                                              {
+                                                                IncludeSelfEdge = false,
+                                                                InitialWeight = EntropyLoopWeights.CONST
+                                                              }), "JVR2-Const"
+                                       },
+//                                     {
+//                                       new JVRMeasureAction(new JVRMeasureOptions
+//                                                              {
+//                                                                IncludeSelfEdge = false,
+//                                                                InitialWeight = EntropyLoopWeights.ONE
+//                                                              }), "JVR2-One"
+//                                       },
+//                                     {
+//                                       new JVRMeasureAction(new JVRMeasureOptions
+//                                                              {
+//                                                                IncludeSelfEdge = false,
+//                                                                InitialWeight = EntropyLoopWeights.MINUS_ONE
+//                                                              }), "JVR2-MinusOne"
+//                                       },
+                                     { new EigenEntropyAction(), "Eigen" }
+                                   };
 
                                /*               foreach (var _evaluatorParams in entropys)
                                {
@@ -256,47 +269,11 @@ namespace DSIS.SimpleRunner
                                                    }), evaluatorParams.PresentableName);
                                }*/
 //                               entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
-                               entropies.Add(
-                                 EntropyForEachComponent(DrawEntropyAction(loop, steps,
-                                                                           new JVRMeasureAction(new JVRMeasureOptions
-                                                                                                  {
-                                                                                                    IncludeSelfEdge =
-                                                                                                      false,
-                                                                                                    InitialWeight =
-                                                                                                      EntropyLoopWeights
-                                                                                                      .CONST
-                                                                                                  }))),
-                                 "JVR2-Const");
-                               entropies.Add(
-                                 EntropyForEachComponent(DrawEntropyAction(loop, steps,
-                                                                           new JVRMeasureAction(new JVRMeasureOptions
-                                                                                                  {
-                                                                                                    IncludeSelfEdge =
-                                                                                                      false,
-                                                                                                    InitialWeight =
-                                                                                                      EntropyLoopWeights
-                                                                                                      .ONE
-                                                                                                  }))),
-                                 "JVR2-One");
-                               entropies.Add(
-                                 EntropyForEachComponent(DrawEntropyAction(loop, steps,
-                                                                           new JVRMeasureAction(new JVRMeasureOptions
-                                                                                                  {
-                                                                                                    IncludeSelfEdge =
-                                                                                                      false,
-                                                                                                    InitialWeight =
-                                                                                                      EntropyLoopWeights
-                                                                                                      .MINUS_ONE
-                                                                                                  }))),
-                                 "JVR2-MinusOne");
 //                               entropies.Add(EntropyForEachComponent(loop, DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = true }))), "JVR");
-                               entropies.Add(
-                                 EntropyForEachComponent(DrawEntropyAction(loop, steps, new EigenEntropyAction())),
-                                 "Eigen");
 
                                foreach (var pair in entropies)
                                {
-                                 IAction entropy = pair.Key;
+                                 IAction entropy = EntropyForEachComponent(DrawEntropyAction(pair.Value, loop, steps, pair.Key));
                                  IAction customWf = new CustomPrefixWorkingFolderAction(pair.Value);
 
                                  xgr.AddEdge(xgr.Start, entropy);
@@ -324,26 +301,25 @@ namespace DSIS.SimpleRunner
           );
     }
 
-    private static IAction DrawEntropyAction(ILoopAction loop, int steps, IAction entropy)
+    private static IAction DrawEntropyAction(string entropyMethod, ILoopAction loop, int steps, IAction entropy)
     {
-      return new DumpContextProxy("EEE",
-                                  new AgregateAction(
-                                    delegate(IActionGraphPartBuilder bld)
-                                      {
-                                        IActionGraphBuilder2 bld2 = new ActionBuilder2Adaptor(bld);
-                                        bld2.Start.Edge(new DumpContextAction("DrawEntropyAction"));
-                                        bld2.Start.Edge(new DumpGraphInfoAction());
-                                        bld2.Start.Edge(new DumpGraphComponentsInfoAction());
+      return new DumpContextProxy("DrawEntropyAction", new AgregateAction(
+        delegate(IActionGraphPartBuilder bld)
+          {
+            IActionGraphBuilder2 bld2 = new ActionBuilder2Adaptor(bld);
+//            bld2.Start.Edge(new DumpContextAction("DrawEntropyAction-" + entropyMethod));
+            bld2.Start.Edge(new DumpGraphInfoAction());
+            bld2.Start.Edge(new DumpGraphComponentsInfoAction());
 
-                                        bld2.Start
-                                          .Edge(entropy)
-                                          .With(x => x.Edge(new DrawEntropyMeasureWithBaseAction()).Back(bld2.Start))
-                                          .Edge(EntropyProjectAction(steps, loop)).With(x => x.Back(bld2.Start))
-                                          .Edge(bld2.Finish);
-                                      }));
+            bld2.Start
+              .Edge(entropy)
+              .With(x => x.Edge(new DrawEntropyMeasureWithBaseAction()).Back(bld2.Start))
+              .Edge(EntropyProjectAction(entropyMethod, steps, loop)).With(x => x.Back(bld2.Start))
+              .Edge(bld2.Finish);
+          }));
     }
 
-    private static LoopAction EntropyProjectAction(int steps, ILoopAction loop)
+    private static LoopAction EntropyProjectAction(string method, int steps, ILoopAction loop)
     {
       return new LoopAction(
         "proj",
@@ -355,7 +331,7 @@ namespace DSIS.SimpleRunner
 
                      bl2.Start
                        .With(x => x
-                                    .Edge(new DumpContextProxy("After Entropy",
+                                    .Edge(new DumpContextProxy("After Entropy" + method,
                                                                new ParallelAction(
 //                                    new DumpGraphAsMatrixForMapleAction(),
 
@@ -365,10 +341,10 @@ namespace DSIS.SimpleRunner
 //                                    new DrawEntropyMeasure3dWithBaseAction(),
 //                                    new DrawEntropyMeasureColorMapAction(),
                                                                  new MeasureEntropyLogAction(),
-                                                                 new DumpGraphMeasureAction2(),
-                                                                 new DumpGraphMeasureAction(),
+//                                                                 new DumpGraphMeasureAction2(),
+//                                                                 new DumpGraphMeasureAction(),
                                                                  new DumpEntropyValueAction("Project"),
-                                                                 new InsertMeasureToSlotAction("", loop, projStep)
+                                                                 new InsertMeasureToSlotAction(method, loop, projStep)
                                                                  ))
                                     ).With(xx => xx
                                                    .Back(new SelectiveCopyAction(

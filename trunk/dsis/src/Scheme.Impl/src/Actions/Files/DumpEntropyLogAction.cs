@@ -34,7 +34,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       IGraphMeasure<Q> measure = Keys.GraphMeasure<Q>().Get(input);
       double value = measure.GetEntropy();
 
-      string text = string.Format("{0} edges={1} [{2}] {3}", value.ToString(CultureInfo.InvariantCulture), CollectionUtil.Count(measure.GetMeasureNodes()), myPrefix, Environment.NewLine);
+      string text = string.Format("{0} edges={1} [{2}] {3}", value.ToString(CultureInfo.InvariantCulture), measure.GetMeasureNodes().Count(), myPrefix, Environment.NewLine);
       File.AppendAllText(file, text);      
     }
   }

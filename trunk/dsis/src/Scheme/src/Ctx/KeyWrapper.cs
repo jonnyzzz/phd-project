@@ -27,11 +27,15 @@ namespace DSIS.Scheme.Ctx
       return new KeyWrapperImpl<Y>(key);
     }
 
+    public abstract bool IsKey<Y>();
+
     public override bool Equals(object obj)
     {
-      KeyWrapper w = obj as KeyWrapper;
+      var w = obj as KeyWrapper;
       return w != null && w.Equals(this);
     }
+
+    public abstract Key<Y> Cast<Y>();
 
     public abstract bool EqualsKey(IKey key);
 
@@ -58,7 +62,18 @@ namespace DSIS.Scheme.Ctx
       {
         return base.ToString() + myKey;
       }
-     
+
+      public override bool IsKey<Y>()
+      {
+        return new Key<Y>("QQQ").EqualsWithoutName(myKey);
+      }
+
+      public override Key<Y> Cast<Y>()
+      {
+        //todo: Check that case
+        return (Key<Y>)(object)myKey;
+      }
+
       public override bool EqualsKey(IKey key)
       {
         return myKey.Equals(key);

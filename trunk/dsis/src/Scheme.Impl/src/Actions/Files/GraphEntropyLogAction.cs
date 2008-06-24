@@ -29,7 +29,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       while(graph.CoordinateSystem.Subdivision[0] > 1)
       {
-        ICellCoordinateSystemProjector<Q> proj = graph.CoordinateSystem.Project(CollectionUtil.Fill(graph.CoordinateSystem.Dimension, 2L));
+        ICellCoordinateSystemProjector<Q> proj = graph.CoordinateSystem.Project(2L.Fill(graph.CoordinateSystem.Dimension));
         graph = graph.Project(proj);
         DumpEntropy(graph, file, true);
       }

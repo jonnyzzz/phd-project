@@ -7,7 +7,10 @@ namespace DSIS.Scheme
   {
     string Name { get; }
 
+    string ShortName { get; }
+
     void Copy(Context from, Context to);
+    bool EqualsWithoutName(IKey key);
   }
 
   public class Key<TValue> : IKey, IEquatable<Key<TValue>>
@@ -21,7 +24,12 @@ namespace DSIS.Scheme
 
     public string Name
     {
-      get { return typeof(TValue).FullName + "|" + myName; }
+      get { return myName + "|" + typeof(TValue).FullName; }
+    }
+
+    public string ShortName
+    {
+      get { return myName; }
     }
 
     public override string ToString()
@@ -41,6 +49,12 @@ namespace DSIS.Scheme
       if (ReferenceEquals(this, obj)) return true;
       return Equals(obj as Key<TValue>);
     }
+
+    public bool EqualsWithoutName(IKey key)
+    {
+      return key is Key<TValue>;      
+    }
+
 
     public override int GetHashCode()
     {

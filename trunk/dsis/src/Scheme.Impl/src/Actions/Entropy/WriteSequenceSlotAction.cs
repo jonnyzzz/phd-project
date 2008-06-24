@@ -7,13 +7,6 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 {
   public class WriteSequenceSlotAction : IntegerCoordinateSystemActionBase2
   {
-    private readonly string myKey;
-
-    public WriteSequenceSlotAction(string key)
-    {
-      myKey = key;
-    }
-
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
       return ColBase(base.Check<T,Q>(system, ctx), Create(FileKeys.WorkingFolderKey));
@@ -23,30 +16,36 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     {
       var info = FileKeys.WorkingFolderKey.Get(input);
 
-      string file = info.CreateFileNameFromTemplate("entropy-log-{0}");
-      var slot = MeasureSlot<Q>.Get(myKey, SlotStore.Get(input));
-
-      MeasureInfo<Q> mi = null;
-      using (TextWriter tw = File.CreateText(file))
+      var slotStore = SlotStore.Get(input);
+      foreach (Key<MeasureSlot<Q>> key in slotStore.AllKeys<MeasureSlot<Q>>())
       {
-        for (int i = 0;; i++)
+        string file = info.CreateFileNameFromTemplate("entropy-log-{0}-" + key.ShortName);
+        var slot = key.Get(slotStore);
+
+        
+        using (TextWriter tw = File.CreateText(file))
         {
-          var col = slot.ForStep(i);
-
-          bool hasData = false;
-          foreach (var measureInfo in col)
+          
+          for (int i = 0; ; i++)
           {
-            hasData = true;
-            if (mi != null)
+            MeasureInfo<Q> mi = null;
+            bool hasData = false;
+            foreach (var measureInfo in slot.ForStep(i))
             {
-              tw.WriteLine("Step{0} - Step{1} = {2}", mi.Step, measureInfo.Step, MeasureInfo<Q>.Rho(mi, measureInfo));
+              hasData = true;
+              if (mi != null)
+              {
+                tw.WriteLine("s{0}p{1} - s{2}p{3} = {4}", mi.Step, mi.Proj, measureInfo.Step, measureInfo.Proj, MeasureInfo<Q>.Rho(mi, measureInfo));
+              }
+              mi = measureInfo;
             }
-            mi = measureInfo;
-          }
 
-          if (!hasData)
-            break;
-        }
+            if (!hasData)
+              break;
+
+            tw.WriteLine("-----");
+          }
+        }        
       }      
     }
   }
