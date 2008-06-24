@@ -39,12 +39,13 @@ namespace DSIS.GnuplotDrawer
                                 FileName = Path.Combine(myGnuplotFolder, @"bin\wgnuplot.exe"),
                                 Arguments = script.Filename,
                                 ErrorDialog = true,
+                                UseShellExecute = true,                                
                               };
 
       if (!File.Exists(pi.FileName))
         throw new ArgumentException("Unable to locate pgnuplot.exe");
 
-      Process.Start(pi).WaitForExit();
+      Process.Start(pi);
     }
   }
 }

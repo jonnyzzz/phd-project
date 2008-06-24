@@ -17,7 +17,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       var info = FileKeys.WorkingFolderKey.Get(input);
 
       var slotStore = SlotStore.Get(input);
-      foreach (Key<MeasureSlot<Q>> key in slotStore.AllKeys<MeasureSlot<Q>>())
+      foreach (Key<MeasureSlot<Q>> key in new List<Key<MeasureSlot<Q>>>(slotStore.AllKeys<MeasureSlot<Q>>()))
       {
         string file = info.CreateFileNameFromTemplate("entropy-log-{0}-" + key.ShortName);
         var slot = key.Get(slotStore);
@@ -46,6 +46,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
             tw.WriteLine("-----");
           }
         }        
+        slotStore.Remove(key);
       }      
     }
   }
