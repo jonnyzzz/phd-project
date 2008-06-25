@@ -154,7 +154,6 @@ namespace DSIS.IntegerCoordinates.Generated
       return factor != null ? new IntegerCoordinateSystem2d(SystemSpace, factor) : null;
     }
 
-
     public void SaveCoordinate(IntegerCoordinate2d coord, IBinaryWriter writer)
     {
       writer.WriteLong(coord.l1);

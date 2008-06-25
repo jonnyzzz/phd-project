@@ -3,8 +3,10 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
+using System.Collections.Generic;
 using DSIS.Core.System;
 using DSIS.Core.Util;
+using DSIS.Persistance;
 
 namespace DSIS.Core.Coordinates
 {
@@ -33,7 +35,6 @@ namespace DSIS.Core.Coordinates
     [Nullable]
     T FromPoint(double[] point);
 
-
     /// <summary>
     /// This interface is intended to be used to perform 
     /// subdivision of cell coordinates
@@ -60,5 +61,13 @@ namespace DSIS.Core.Coordinates
     /// <param name="coord"></param>
     /// <returns></returns>
     bool IsNull(T coord);
+
+    void Save(IBinaryWriter writer, IEnumerable<T> coords);
+    IEnumerable<T> Load(IBinaryReader reader);
+  }
+
+  public interface ICellCoordinateSystemPersistance
+  {
+    
   }
 }

@@ -63,6 +63,7 @@
     <Compile Include="src\Generated\GeneratedIntegerCoordinateFactory.cs" />
     <Compile Include="src\Generated\GeneratedIntegerCoordinateSystemManager.cs" />
     <Compile Include="src\Generated\IIntegerCoordinateCallback.cs" />
+    <Compile Include="src\Generated\IntegerCoordinatePersistance.cs" />
     <Compile Include="src\Generated\IntegerCoordinateSystem2dFactory.cs" />
     <Compile Include="src\IIntegerCoordinateFactory.cs" />
     <Compile Include="src\IIntegerCoordinateFactoryEx.cs" />

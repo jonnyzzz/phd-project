@@ -16,6 +16,7 @@ namespace DSIS.IntegerCoordinates.Generated
     private readonly Dictionary<int, Type> myCachedIcs = new Dictionary<int, Type>();
     private readonly ICodeCompiler myCompiler;
 
+
     [Obsolete("Use spring")]
     public static GeneratedIntegerCoordinateSystemManager Instance
     {
@@ -67,20 +68,19 @@ namespace DSIS.IntegerCoordinates.Generated
       if (dim <= 0)
         throw new ArgumentOutOfRangeException("dim");
 
-      List<int> dims = new List<int>();
-      List<Pair<int, int>> dimAndPrime = new List<Pair<int, int>>();
-      List<Pair<int, int?>> dimAndNext = new List<Pair<int, int?>>();
+      var dims = new List<int>();
+      var dimAndPrime = new List<Pair<int, int>>();
+      var dimAndNext = new List<Pair<int, int?>>();
       for (int i = 0; i < dim; i++)
       {
         dims.Add(i);
         dimAndPrime.Add(new Pair<int, int>(i, Primes.ByIndex(3*i)));
-        dimAndNext.Add(new Pair<int, int?>(i, i+1 < dim ? i+1 : (int?)null));
+        dimAndNext.Add(new Pair<int, int?>(i, i + 1 < dim ? i + 1 : (int?) null));
       }
 
-      StringTemplateGroup g =
-        new StringTemplateGroup("foo",
-                                new EmbeddedResourceTemplateLoader(GetType().Assembly,
-                                                                   "DSIS.IntegerCoordinates.src.Generated.Template"));
+      var g = new StringTemplateGroup("foo",
+                                      new EmbeddedResourceTemplateLoader(GetType().Assembly,
+                                                                         "DSIS.IntegerCoordinates.src.Generated.Template"));
       StringTemplate template = g.GetInstanceOf("IntegerCoordinate");
       template.SetAttribute("Dimension", dim);
       template.SetAttribute("DimensionIt", dims);
@@ -90,5 +90,7 @@ namespace DSIS.IntegerCoordinates.Generated
 
       return template.ToString();
     }
+
+
   }
 }

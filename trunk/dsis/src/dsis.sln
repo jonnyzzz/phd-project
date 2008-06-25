@@ -113,6 +113,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring.Tests", "Spring.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Controls", "UI.Controls\UI.Controls.csproj", "{3305A57B-0432-4E75-8E13-8AB265B8ECB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistance.Tests", "Persistance.Tests\Persistance.Tests.csproj", "{83ED607D-158F-4B0A-84F9-0DA6FFC88BDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -521,6 +523,12 @@ Global
 		{3305A57B-0432-4E75-8E13-8AB265B8ECB6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3305A57B-0432-4E75-8E13-8AB265B8ECB6}.Release|x64.ActiveCfg = Release|x64
 		{3305A57B-0432-4E75-8E13-8AB265B8ECB6}.Release|x64.Build.0 = Release|x64
+		{83ED607D-158F-4B0A-84F9-0DA6FFC88BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83ED607D-158F-4B0A-84F9-0DA6FFC88BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83ED607D-158F-4B0A-84F9-0DA6FFC88BDE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{83ED607D-158F-4B0A-84F9-0DA6FFC88BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83ED607D-158F-4B0A-84F9-0DA6FFC88BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83ED607D-158F-4B0A-84F9-0DA6FFC88BDE}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

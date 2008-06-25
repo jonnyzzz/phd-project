@@ -1,5 +1,6 @@
 using System.Reflection;
 using DSIS.CodeCompiler;
+using DSIS.Core.System.Impl;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.IntegerCoordinates.Tests;
 using DSIS.IntegerCoordinates.Tests.Generic;

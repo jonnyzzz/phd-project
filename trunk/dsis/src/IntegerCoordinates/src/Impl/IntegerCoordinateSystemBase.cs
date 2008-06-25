@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.Core.Util;
+using DSIS.Persistance;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
@@ -248,6 +249,42 @@ namespace DSIS.IntegerCoordinates.Impl
     public virtual IPointProcessor<Q> CreateOverlapedPointProcessor(double[] cellSizePercent)
     {
       return new OverlappingProcessor<TInh, Q>(myInh, cellSizePercent);
+    }
+
+    private static string SaveMarker()
+    {
+      return "INTEGER_COORDINATE_" + typeof (TInh).AssemblyQualifiedName + "_";
+    }
+
+    public void Save(IBinaryWriter writer, IEnumerable<Q> coords)
+    {
+      writer.WriteString(SaveMarker());
+
+      foreach (var q in coords)
+      { 
+        writer.WriteInt(0);
+        for(var i=0; i<myDimension; i++)
+        {
+          writer.WriteLong(q.GetCoordinate(i));
+        }
+      }
+      writer.WriteInt(1);        
+    }
+
+    public IEnumerable<Q> Load(IBinaryReader reader)
+    {
+      if (SaveMarker() != reader.ReadString())
+        throw new ArgumentException("Failed to read. Marker is expected");
+
+      while(reader.ReadInt() == 0)
+      {
+        var data = new long[myDimension];
+        for(var i=0; i<myDimension;i++)
+        {
+          reader.Read(out data[i]); 
+        }
+        yield return myInh.Create(data);
+      }      
     }
   }
 }

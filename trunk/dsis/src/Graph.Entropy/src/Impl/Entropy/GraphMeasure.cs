@@ -17,7 +17,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
     private readonly double myNorm;
     private double? myEntropy;
-    private Dictionary<T, double> myNodesM = null;
+    private Dictionary<T, double> myNodesM;
     private readonly string myMethodName;
     private readonly ICellCoordinateSystem<T> myCoorsinateSystem;
 
@@ -91,8 +91,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     private static Dictionary<NodePair<T>, double> Project(IEnumerable<KeyValuePair<TPair, double>> m,
                                                            ICellCoordinateSystemProjector<T> projector)
     {
-      Dictionary<NodePair<T>, double> ret =
-        new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer());
+      var ret = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer());
 
       foreach (KeyValuePair<TPair, double> pair in m)
       {
@@ -110,7 +109,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     private void ComputeEntropy()
     {
       double v = 0;
-      Dictionary<T, double> values = new Dictionary<T, double>(myComparer);
+      var values = new Dictionary<T, double>(myComparer);
 
       foreach (KeyValuePair<TPair, double> pair in myM)
       {

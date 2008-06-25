@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Persistance;
 
 namespace DSIS.IntegerCoordinates
 {
@@ -7,8 +9,8 @@ namespace DSIS.IntegerCoordinates
       where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate;
   }
-  
-  public interface IIntegerCoordinateSystemInfo
+
+  public interface IIntegerCoordinateSystemInfo : ICellCoordinateSystem
   {
     double[] CellSize { get; }
     double[] CellSizeHalf { get; }

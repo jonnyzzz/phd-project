@@ -1,3 +1,5 @@
+using DSIS.Core.System;
+
 namespace DSIS.IntegerCoordinates.Tests
 {
   public class MockIntegerCoordinateSystemInfo : IIntegerCoordinateSystemInfo
@@ -25,6 +27,21 @@ namespace DSIS.IntegerCoordinates.Tests
     public double[] CellSizeHalf
     {
       get { return myCellSizeHalf; }
+    }
+
+    public long[] Subdivision
+    {
+      get { throw new System.NotImplementedException(); }
+    }
+
+    public ISystemSpace SystemSpace
+    {
+      get { throw new System.NotImplementedException(); }
+    }
+
+    public int Dimension
+    {
+      get { throw new System.NotImplementedException(); }
     }
 
     public void DoGeneric(IIntegerCoordinateSystemWith with)

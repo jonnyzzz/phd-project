@@ -65,6 +65,7 @@
     <Compile Include="src\IBinaryWriter.cs" />
     <Compile Include="src\IBlock.cs" />
     <Compile Include="src\IgnoreField.cs" />
+    <Compile Include="src\IPersistance.cs" />
     <Compile Include="src\ObjectSerializer.cs" />
     <Compile Include="src\RefDataType.cs" />
   </ItemGroup>
