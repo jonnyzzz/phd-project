@@ -253,7 +253,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     private static string SaveMarker()
     {
-      return "INTEGER_COORDINATE_" + typeof (TInh).AssemblyQualifiedName + "_";
+      return "INTEGER_COORDINATE_BASE";
     }
 
     public void Save(IBinaryWriter writer, IEnumerable<Q> coords)
@@ -286,5 +286,11 @@ namespace DSIS.IntegerCoordinates.Impl
         yield return myInh.Create(data);
       }      
     }
+
+    public void DoGeneric(ICellCoordinateWith with)
+    {
+      with.With(myInh);
+    }
+
   }
 }

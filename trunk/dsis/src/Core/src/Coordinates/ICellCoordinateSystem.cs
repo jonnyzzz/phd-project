@@ -16,6 +16,13 @@ namespace DSIS.Core.Coordinates
     ISystemSpace SystemSpace { get; }
 
     int Dimension { get;}
+
+    void DoGeneric(ICellCoordinateWith with);
+  }
+
+  public interface ICellCoordinateWith
+  {
+    void With<Q>(ICellCoordinateSystem<Q> system) where Q : ICellCoordinate;
   }
 
   /// <summary>
@@ -64,10 +71,5 @@ namespace DSIS.Core.Coordinates
 
     void Save(IBinaryWriter writer, IEnumerable<T> coords);
     IEnumerable<T> Load(IBinaryReader reader);
-  }
-
-  public interface ICellCoordinateSystemPersistance
-  {
-    
   }
 }

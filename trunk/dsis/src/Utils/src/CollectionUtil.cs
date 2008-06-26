@@ -157,6 +157,11 @@ namespace DSIS.Utils
       return t;
     }
 
+    public static IEnumerable<int> Each(this int n)
+    {
+      for (int i = 0; i < n; i++) yield return i;
+    }
+
     public static List<T> AsList<T>(params T[] ts)
     {
       return new List<T>(ts);
@@ -167,6 +172,17 @@ namespace DSIS.Utils
       foreach (var q in en)
       {
         yield return conv(q);
+      }
+    }
+
+    public static IEnumerable<T> Maps<T,Q>(this IEnumerable<Q> en, Converter<Q, IEnumerable<T>> conv)
+    {
+      foreach (var q in en)
+      {
+        foreach (var t in conv(q))
+        {
+          yield return t;
+        }
       }
     }
 

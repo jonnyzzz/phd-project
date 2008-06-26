@@ -54,7 +54,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
       {
         foreach (KeyValuePair<TPair, double> pair in myM)
         {
-          yield return Pair.Create((PairBase<T>) pair.Key, pair.Value);
+          yield return Pair.Create((PairBase<T>) pair.Key, pair.Value/myNorm);
         }
       }
     }
@@ -93,7 +93,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     {
       var ret = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer());
 
-      foreach (KeyValuePair<TPair, double> pair in m)
+      foreach (var pair in m)
       {
         T pFrom = projector.Project(pair.Key.From);
         T pTo = projector.Project(pair.Key.To);
@@ -111,7 +111,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
       double v = 0;
       var values = new Dictionary<T, double>(myComparer);
 
-      foreach (KeyValuePair<TPair, double> pair in myM)
+      foreach (var pair in myM)
       {
         double val = pair.Value/myNorm;
         Add(values, pair.Key.To, val);
@@ -152,6 +152,11 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     public IDictionary<TPair, double> M
     {
       get { return myM; }
+    }
+
+    public void DoCallback(IGraphMeasureWith measure)
+    {
+      measure.WithGraphMeasure(this);
     }
   }
 }

@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\IEntropyEvaluator.cs" />
+    <Compile Include="src\Impl\Entropy\GraphMeasurePersistance.cs" />
     <Compile Include="src\Impl\Loop\Combinatorics\CombinatoricsLoopSearch.cs" />
     <Compile Include="src\Impl\Eigen\EigenEntropyMeasure.cs" />
     <Compile Include="src\Impl\Entropy\EntropyProcessorAdapter.cs" />

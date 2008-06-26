@@ -46,5 +46,10 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
     {
       return myImpl.ComputeEntropy().GetEntropy();
     }
+
+    public void DoCallback(IGraphMeasureWith measure)
+    {
+      measure.WithGraphMeasure(this);
+    }
   }
 }

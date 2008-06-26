@@ -1,3 +1,4 @@
+using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 
 namespace DSIS.IntegerCoordinates.Tests
@@ -42,6 +43,11 @@ namespace DSIS.IntegerCoordinates.Tests
     public int Dimension
     {
       get { throw new System.NotImplementedException(); }
+    }
+
+    public void DoGeneric(ICellCoordinateWith with)
+    {
+      throw new System.NotImplementedException();
     }
 
     public void DoGeneric(IIntegerCoordinateSystemWith with)
