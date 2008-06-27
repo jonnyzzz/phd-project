@@ -35,7 +35,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       var idx = myLoopAction.Key.Get(input);
       var prj = myProjAction.Key.Get(input);
 
-      MeasureSlot<Q>.Get(myKey, slot).RegisterResult(idx.Index, prj.Index, measure);
+      MeasureSlot.Get(myKey, slot).RegisterResult(idx.Index, prj.Index, measure);
 
       output.AddAll(input);
     }

@@ -2,33 +2,32 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Scheme.Ctx;
-using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
-  public class MeasureSlot<Q> where Q : ICellCoordinate
+  public class MeasureSlot
   {
-    private readonly List<MeasureInfo<Q>> myMeasures = new List<MeasureInfo<Q>>();
+    private readonly List<IMeasureInfo> myMeasures = new List<IMeasureInfo>();
 
-    public static MeasureSlot<Q> Get(string key, Context ctx)
+    public static MeasureSlot Get(string key, Context ctx)
     {
       if (ctx.ContainsKey(Key(key)))
       {
         return ctx.Get(Key(key));
       } else
       {
-        var ms = new MeasureSlot<Q>();
+        var ms = new MeasureSlot();
         ctx.Set(Key(key), ms);
         return ms;
       }
     }
 
-    private static Key<MeasureSlot<Q>> Key(string key)
+    private static Key<MeasureSlot> Key(string key)
     {
-      return new Key<MeasureSlot<Q>>(key);
+      return new Key<MeasureSlot>(key);
     }
 
-    public IEnumerable<MeasureInfo<Q>> ForStep(int Step)
+    public IEnumerable<IMeasureInfo> ForStep(int Step)
     {
       int proj = 0;
       int step = Step;
@@ -47,7 +46,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     }
 
 
-    public MeasureInfo<Q> Get(int step, int proj)
+    private IMeasureInfo Get(int step, int proj)
     {
       foreach (var info in myMeasures)
       {
@@ -57,9 +56,10 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       return null;
     }
 
-    public void RegisterResult(int step, int proj, IGraphMeasure<Q> mes)
+    public void RegisterResult<Q>(int step, int proj, IGraphMeasure<Q> mes)
+      where Q : ICellCoordinate
     {
-      MeasureInfo<Q> info = Get(step, proj);
+      var info = Get(step, proj);
       if (info == null)
       {
         myMeasures.Add(new MeasureInfo<Q>(step, proj, mes));

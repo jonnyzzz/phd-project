@@ -6,11 +6,26 @@ using DSIS.Graph.Entropy.Impl.Util;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
-  public class MeasureInfo<Q> where Q : ICellCoordinate
+  public class MeasureInfo<Q> : IMeasureInfo
+    where Q : ICellCoordinate
   {
-    public readonly int Proj;
-    public readonly int Step;
-    public readonly List<IGraphMeasure<Q>> myMeasures;
+    public int Proj { get; private set;}
+    public int Step { get; private set;}
+
+    public IEnumerable<IGraphMeasure> Measures()
+    {
+      foreach (var mes in myMeasures)
+      {
+        yield return mes;
+      }
+    }
+
+    public double Dist(IMeasureInfo _info)
+    {
+      return Rho(this, (MeasureInfo<Q>) _info);
+    }
+
+    private readonly List<IGraphMeasure<Q>> myMeasures;
 
     public MeasureInfo(int step, int proj, IGraphMeasure<Q> measure)
     {
@@ -61,7 +76,12 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       return "step=" + Step + " proj=" + Proj;
     }
 
-    public void Join(IGraphMeasure<Q> mes)
+    public void Join<T>(IGraphMeasure<T> mes) where T : ICellCoordinate
+    {
+      Join((IGraphMeasure<Q>)mes);
+    }
+
+    private void Join(IGraphMeasure<Q> mes)
     {
       foreach (var measure in myMeasures)
       {

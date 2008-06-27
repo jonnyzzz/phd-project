@@ -5,19 +5,19 @@ using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
-  public class WriteSequenceSlotAction : IntegerCoordinateSystemActionBase2
+  public class WriteSequenceSlotAction : ActionBase
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
-      return ColBase(base.Check<T,Q>(system, ctx), Create(FileKeys.WorkingFolderKey));
+      return CheckContext(ctx, Create(FileKeys.WorkingFolderKey));
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply(Context ctx, Context result)
     {
-      var info = FileKeys.WorkingFolderKey.Get(input);
+      var info = FileKeys.WorkingFolderKey.Get(ctx);
 
-      var slotStore = SlotStore.Get(input);
-      foreach (Key<MeasureSlot<Q>> key in new List<Key<MeasureSlot<Q>>>(slotStore.AllKeys<MeasureSlot<Q>>()))
+      var slotStore = SlotStore.Get(ctx);
+      foreach (var key in new List<Key<MeasureSlot>>(slotStore.AllKeys<MeasureSlot>()))
       {
         string file = info.CreateFileNameFromTemplate("entropy-log-{0}-" + key.ShortName);
         var slot = key.Get(slotStore);
@@ -28,14 +28,14 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
           
           for (int i = 0; ; i++)
           {
-            MeasureInfo<Q> mi = null;
+            IMeasureInfo mi = null;
             bool hasData = false;
-            foreach (var measureInfo in slot.ForStep(i))
+            foreach (IMeasureInfo measureInfo in slot.ForStep(i))
             {
               hasData = true;
               if (mi != null)
               {
-                tw.WriteLine("s{0}p{1} - s{2}p{3} = {4}", mi.Step, mi.Proj, measureInfo.Step, measureInfo.Proj, MeasureInfo<Q>.Rho(mi, measureInfo));
+                tw.WriteLine("s{0}p{1} - s{2}p{3} = {4}", mi.Step, mi.Proj, measureInfo.Step, measureInfo.Proj, mi.Dist(measureInfo));
               }
               mi = measureInfo;
             }
