@@ -6,11 +6,18 @@ using DSIS.Graph.Entropy.Impl.Util;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
-  public class MeasureInfo<Q> : IMeasureInfo
+  public class MeasureInfo<Q> : IMeasureInfo<Q>
     where Q : ICellCoordinate
   {
-    public int Proj { get; private set;}
+    private readonly List<IGraphMeasure<Q>> myMeasures; 
+    
+    public int Proj { get; private set; }
     public int Step { get; private set;}
+
+    public IEnumerable<IGraphMeasure<Q>> Measures2()
+    {
+      return myMeasures; 
+    }
 
     public IEnumerable<IGraphMeasure> Measures()
     {
@@ -25,7 +32,6 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       return Rho(this, (MeasureInfo<Q>) _info);
     }
 
-    private readonly List<IGraphMeasure<Q>> myMeasures;
 
     public MeasureInfo(int step, int proj, IGraphMeasure<Q> measure)
     {
@@ -79,6 +85,11 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     public void Join<T>(IGraphMeasure<T> mes) where T : ICellCoordinate
     {
       Join((IGraphMeasure<Q>)mes);
+    }
+
+    public void DoGeneric(IMeasureInfoWith with)
+    {
+      with.With(this);
     }
 
     private void Join(IGraphMeasure<Q> mes)

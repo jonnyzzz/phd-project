@@ -13,7 +13,13 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 
     double Dist(IMeasureInfo info);
 
-
     void Join<T>(IGraphMeasure<T> mes) where T : ICellCoordinate;
+
+    void DoGeneric(IMeasureInfoWith with);
+  }
+
+  public interface IMeasureInfoWith
+  {
+    void With<Q>(IMeasureInfo<Q> info) where Q : ICellCoordinate;
   }
 }

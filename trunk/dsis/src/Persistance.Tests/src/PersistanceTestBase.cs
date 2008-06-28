@@ -102,6 +102,10 @@ namespace DSIS.Persistance.Tests
         Assert.IsTrue(myData.Current.GetType() == typeof (double));
         return (double) myData.Current;
       }
+
+      public void Dispose()
+      {
+      }
     }
 
     private class Writer : IBinaryWriter
@@ -126,6 +130,10 @@ namespace DSIS.Persistance.Tests
       public void WriteString(string s)
       {
         myData.Add(s);
+      }
+
+      public void Dispose()
+      {
       }
     }
   }

@@ -1,6 +1,8 @@
+using System;
+
 namespace DSIS.Persistance
 {
-  public interface IBinaryReader
+  public interface IBinaryReader : IDisposable
   {
     void Read(out int v);
     void Read(out long v);

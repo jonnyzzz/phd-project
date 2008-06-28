@@ -53,9 +53,14 @@ namespace DSIS.Persistance.Tests
       DoTest(3);
     }
 
-
-
     private void DoTest(int dim)
+    {
+      GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>> m = CreateGraphMeasure(dim);
+
+      DoTest2(m, (w,x)=>myPersistance.Save(x,w), r => myPersistance.Load(r), AssertM);
+    }
+
+    public static GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>> CreateGraphMeasure(int dim)
     {
       var ics = new Dictionary<NodePair<IntegerCoordinate>,double>();
       for(long i=0; i<100; i++)
@@ -68,20 +73,17 @@ namespace DSIS.Persistance.Tests
       }
 
 
-      var m = 
-        new GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>>(
-          "aaa", ics, EqualityComparerFactory<IntegerCoordinate>.GetComparer(), 4, 
-          new IntegerCoordinateSystem(
-            new DefaultSystemSpace(dim, 1.0.Fill(dim), 2.0.Fill(dim), 55555L.Fill(dim)))
-          ); 
-
-      DoTest2(m, (w,x)=>myPersistance.Save(x,w), r => myPersistance.Load(r), AssertM);
+      return new GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>>(
+        "aaa", ics, EqualityComparerFactory<IntegerCoordinate>.GetComparer(), 4, 
+        new IntegerCoordinateSystem(
+          new DefaultSystemSpace(dim, 1.0.Fill(dim), 2.0.Fill(dim), 55555L.Fill(dim)))
+        );
     }
 
-    private static void AssertM(IGraphMeasure a, IGraphMeasure b)
+    public static void AssertM(IGraphMeasure a, IGraphMeasure b)
     {
-      WithQ qA = new WithQ();
-      WithQ qB = new WithQ();
+      var qA = new WithQ();
+      var qB = new WithQ();
 
       a.DoCallback(qA);
       b.DoCallback(qB);

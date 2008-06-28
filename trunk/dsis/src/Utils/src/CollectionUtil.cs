@@ -34,6 +34,20 @@ namespace DSIS.Utils
       return q;
     }
 
+    public static IEnumerable<T> Skip<T>(this IEnumerable<T> enu, int t)
+    {
+      foreach (var o in enu)
+      {
+        if (t == 0)
+        {
+          yield return o;
+        } else
+        {
+          t--;
+        }
+      }
+    }
+
     public static T GetFirst<T>(this IEnumerable<T> enu)
     {
       foreach (T t in enu)

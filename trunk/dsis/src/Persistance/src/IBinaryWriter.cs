@@ -1,6 +1,8 @@
+using System;
+
 namespace DSIS.Persistance
 {
-  public interface IBinaryWriter 
+  public interface IBinaryWriter : IDisposable
   {
     void WriteDouble(double d);
     void WriteLong(long l);
