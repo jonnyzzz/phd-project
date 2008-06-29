@@ -8,7 +8,8 @@ namespace DSIS.Utils
     {
       GC.Collect();
       GC.WaitForPendingFinalizers();
-      GC.Collect();      
+      GC.Collect();
+      GC.WaitForPendingFinalizers();
     }    
   }
 }

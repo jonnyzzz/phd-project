@@ -60,6 +60,7 @@
     <Compile Include="src\Abstract\AbstractGraph.cs" />
     <Compile Include="src\Abstract\ArrayNodeSet.cs" />
     <Compile Include="src\Abstract\EmptyNodeSetState.cs" />
+    <Compile Include="src\Abstract\GraphAlgorithms.cs" />
     <Compile Include="src\Abstract\GraphNodeHashList.cs" />
     <Compile Include="src\Abstract\GraphNodeHashListSetState.cs" />
     <Compile Include="src\Abstract\IGraphExtension.cs" />

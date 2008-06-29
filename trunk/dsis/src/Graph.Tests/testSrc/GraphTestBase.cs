@@ -1,4 +1,3 @@
-using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using DSIS.Utils;
@@ -7,15 +6,6 @@ using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Graph.Tests
 {
-  [TestFixture]
-  public class TarjanGraphTest : GraphTestBase<TarjanGraph<IntegerCoordinate>>
-  {
-    protected override TarjanGraph<IntegerCoordinate> CreateGraph(IntegerCoordinateSystem ics)
-    {
-      return new TarjanGraph<IntegerCoordinate>(ics);
-    }
-  }
-
   public abstract class GraphTestBase<T> where T : IGraph<IntegerCoordinate>
   {
     private T myGraph;

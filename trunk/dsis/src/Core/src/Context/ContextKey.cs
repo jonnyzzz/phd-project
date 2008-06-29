@@ -20,9 +20,8 @@ namespace DSIS.Core.Src.Context
     public override bool Equals(object obj)
     {
       if (this == obj) return true;
-      ContextKey<T> contextKey = obj as ContextKey<T>;
-      if (contextKey == null) return false;
-      return Equals(myKey, contextKey.myKey);
+      var contextKey = obj as ContextKey<T>;
+      return contextKey != null && Equals(myKey, contextKey.myKey);
     }
 
     public override int GetHashCode()

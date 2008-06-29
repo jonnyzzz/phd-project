@@ -40,6 +40,11 @@ namespace DSIS.Graph.Tests
       throw new NotImplementedException();
     }
 
+    public IGraph<T> CreateEmptyGraph()
+    {
+      throw new NotImplementedException();
+    }
+
     public ICellCoordinateSystem<T> CoordinateSystem
     {
       get { return myCoordinates; }

@@ -21,7 +21,7 @@ namespace DSIS.Graph.Abstract
       myItems = new Item[myHashMax];
     }
 
-    public GraphNodeHashList(int capacity, TNode node, params TNode[] nodes) : this(capacity)
+    protected GraphNodeHashList(int capacity, TNode node, params TNode[] nodes) : this(capacity)
     {
       foreach (TNode tNode in nodes)
       {
@@ -98,7 +98,7 @@ namespace DSIS.Graph.Abstract
     private sealed class Item
     {
       public readonly TNode Value;
-      public Item NextItem = null;
+      public Item NextItem;
 
       public Item(TNode value)
       {

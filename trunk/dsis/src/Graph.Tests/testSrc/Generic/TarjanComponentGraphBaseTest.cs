@@ -11,7 +11,7 @@ namespace DSIS.Graph.Tests.Generic
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate
   {
-    public const uint COMPONENT_ID_TEST = 1 << 20 - 1;
+    private const uint COMPONENT_ID_TEST = 1 << 20 - 1;
 
     protected override TarjanGraph<Q> CreateGraph(T system)
     {
@@ -38,8 +38,7 @@ namespace DSIS.Graph.Tests.Generic
     {
       ComputeComponents();
 
-      List<INode<Q>> l
-        = new List<INode<Q>>(myComponents.GetNodes(new List<IStrongComponentInfo>()));
+      var l = new List<INode<Q>>(myComponents.GetNodes(new List<IStrongComponentInfo>()));
       Assert.AreEqual(0, l.Count);
     }
 
@@ -111,10 +110,9 @@ namespace DSIS.Graph.Tests.Generic
 
                  Assert.AreEqual(2, myComponents.ComponentCount);
 
-                 foreach (IStrongComponentInfo info in myComponents.Components)
+                 foreach (var info in myComponents.Components)
                  {
-                   List<IStrongComponentInfo> infos = new List<IStrongComponentInfo>();
-                   infos.Add(info);
+                   var infos = new List<IStrongComponentInfo> {info};
                    Console.Out.WriteLine("info = {0}", info);
                    int count = new List<INode<Q>>(myComponents.GetNodes(infos)).Count;
                    Assert.AreEqual(100, count);
@@ -133,10 +131,9 @@ namespace DSIS.Graph.Tests.Generic
                  ComputeComponents();
 
                  Assert.AreEqual(1, myComponents.ComponentCount);
-                 foreach (IStrongComponentInfo info in myComponents.Components)
+                 foreach (var info in myComponents.Components)
                  {
-                   List<IStrongComponentInfo> infos = new List<IStrongComponentInfo>();
-                   infos.Add(info);
+                   var infos = new List<IStrongComponentInfo> {info};
                    Console.Out.WriteLine(info);
                    Assert.AreEqual(183, new List<INode<Q>>(myComponents.GetNodes(infos)).Count);
                  }
@@ -194,7 +191,7 @@ namespace DSIS.Graph.Tests.Generic
     [Test]
     public void TestTarjanNode_01()
     {
-      TarjanNode<Q> node = (TarjanNode<Q>) CreateNode();
+      var node = (TarjanNode<Q>) CreateNode();
       node.SetComponentId(COMPONENT_ID_TEST);
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
     }
@@ -202,7 +199,7 @@ namespace DSIS.Graph.Tests.Generic
     [Test]
     public void TestTarjanNode_02()
     {
-      TarjanNode<Q> node = (TarjanNode<Q>) CreateNode();
+      var node = (TarjanNode<Q>) CreateNode();
       node.SetFlag(TarjanNodeFlags.ROUTE, true);
       node.SetComponentId(COMPONENT_ID_TEST);
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
@@ -211,7 +208,7 @@ namespace DSIS.Graph.Tests.Generic
     [Test]
     public void TestTarjanNode_03()
     {
-      TarjanNode<Q> node = (TarjanNode<Q>) CreateNode();
+      var node = (TarjanNode<Q>) CreateNode();
       node.SetComponentId(COMPONENT_ID_TEST);
       node.SetFlag(TarjanNodeFlags.ROUTE, true);
       Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
@@ -220,7 +217,7 @@ namespace DSIS.Graph.Tests.Generic
     [Test]
     public void TestTarjanNode_04()
     {
-      TarjanNode<Q> node = (TarjanNode<Q>) CreateNode();
+      var node = (TarjanNode<Q>) CreateNode();
       node.SetComponentId(COMPONENT_ID_TEST);
       node.SetFlag(TarjanNodeFlags.ROUTE, true);
       node.SetFlag(TarjanNodeFlags.STACK, false);

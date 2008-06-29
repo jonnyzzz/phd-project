@@ -11,13 +11,13 @@ namespace DSIS.Graph.Abstract
     where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>
   {
     private readonly IGraphExtension<TNode, TCell> myExt;
-    private readonly GraphNodeHashList<TNode, TCell> myNodes;
+    private readonly INodeSet<TNode, TCell> myNodes;
 
     private readonly ICellCoordinateSystem<TCell> myCoordinateSystem;
     private int myNodesCount;
     private int myEdgesCount;
 
-    public AbstractGraph(ICellCoordinateSystem<TCell> coordinateSystem)
+    protected AbstractGraph(ICellCoordinateSystem<TCell> coordinateSystem)
     {
       myExt = (TInh) this;
       myCoordinateSystem = coordinateSystem;
@@ -60,37 +60,17 @@ namespace DSIS.Graph.Abstract
     
     public IGraph<TCell> Project(ICellCoordinateSystemProjector<TCell> projector)
     {
-      TInh graph = CreateGraph(projector.ToSystem);
-
-      foreach (INode<TCell> node in Nodes)
-      {
-        TCell proj = projector.Project(node.Coordinate);
-        if (!Equals(proj, null))
-        {
-          INode<TCell> gNode = graph.AddNode(proj);
-          if (gNode != null)
-          {
-            foreach (INode<TCell> edge in GetEdges(node))
-            {
-              TCell eProj = projector.Project(edge.Coordinate);
-              if (!Equals(eProj, null))
-              {
-                INode<TCell> gToNode = graph.AddNode(eProj);
-                if (gToNode != null)
-                {
-                  graph.AddEdgeToNode(gNode, gToNode);
-                }
-              }
-            }
-          }
-        }
-      }
-      return graph;
+      return this.Project(projector, CreateGraph);
     }
 
     public bool HasArcToItself(TCell node)
     {
       return myExt.HasArcToItself(myNodes.Find(node));
+    }
+
+    public IGraph<TCell> CreateEmptyGraph()
+    {
+      return CreateGraph(CoordinateSystem);
     }
 
     public ICellCoordinateSystem<TCell> CoordinateSystem
@@ -101,7 +81,7 @@ namespace DSIS.Graph.Abstract
     public virtual void Dump(TextWriter tw)
     {
       tw.WriteLine(this);
-      Dictionary<TNode, int> ids = new Dictionary<TNode, int>();
+      var ids = new Dictionary<TNode, int>();
       int lastId = 0;
       foreach (TNode node in myNodes.Values)
       {
@@ -133,7 +113,7 @@ namespace DSIS.Graph.Abstract
 
     public string Dump()
     {
-      StringWriter sw = new StringWriter();
+      var sw = new StringWriter();
       Dump(sw);
       return sw.ToString();
     }
@@ -145,8 +125,7 @@ namespace DSIS.Graph.Abstract
 
     public IEnumerable<INode<TCell>> GetEdges(INode<TCell> forNode)
     {
-      TNode node = (TNode) forNode;
-      return node.Edges;
+      return ((TNode) forNode).Edges;
     }
 
     public IEnumerable<INode<TCell>> Nodes
@@ -166,8 +145,7 @@ namespace DSIS.Graph.Abstract
 
     protected static IEnumerable<TNode> GetEdgesInternal(INode<TCell> forNode)
     {
-      TNode node = (TNode) forNode;
-      return node.EdgesInternal;
+      return ((TNode) forNode).EdgesInternal;
     }
 
     public override string ToString()

@@ -14,7 +14,6 @@ namespace DSIS.Graph
   {
     int NodesCount { get; }
     int EdgesCount { get; }
-    
   }
 
   public interface IGraph<TCoordinate> : IGraph where TCoordinate : ICellCoordinate

@@ -19,8 +19,6 @@ namespace DSIS.Graph.Abstract
       myManager = manager;
     }
 
-    #region IGraphStrongComponents<TCell> Members
-
     public int ComponentCount
     {
       get { return myManager.Count; }
@@ -44,7 +42,7 @@ namespace DSIS.Graph.Abstract
     public IEnumerable<INode<TCell>> GetEdgesWithFilteredEdges(INode<TCell> node,
                                                                ICollection<IStrongComponentInfo> componentIds)
     {
-      IFilter ids = GetIdsHashset(componentIds);
+      var ids = GetIdsHashset(componentIds);
       foreach (TarjanNode<TCell> edge in myGraph.GetEdges(node))
       {
         if (ids.Accept(edge.ComponentId))
@@ -66,7 +64,7 @@ namespace DSIS.Graph.Abstract
     {
       IFilter filter = GetIdsHashset(new List<IStrongComponentInfo>(components));
 
-      TarjanGraph<TCell> graph = new TarjanGraph<TCell>(myGraph.CoordinateSystem);
+      var graph = new TarjanGraph<TCell>(myGraph.CoordinateSystem);
 
       foreach (TarjanNode<TCell> node in myGraph.NodesInternal)
       {
@@ -101,8 +99,6 @@ namespace DSIS.Graph.Abstract
       }
     }
 
-    #endregion
-
     private IEnumerable<TCell> GetCoordinatesImpl(ICollection<IStrongComponentInfo> components)
     {
       foreach (INode<TCell> node in GetNodes(components))
@@ -118,52 +114,39 @@ namespace DSIS.Graph.Abstract
       {
         return DROP;
       }
-      else if (count == 1)
+      if (count == 1)
       {
-        return new ExactFilter(((TarjanComponentInfo) CollectionUtil.GetFirst(componentIds)).ComponentId);
+        return new ExactFilter(((TarjanComponentInfo) componentIds.GetFirst()).ComponentId);
       }
-      else if (count == myManager.Count)
+      if (count == myManager.Count)
       {
         return ALL_FILTER;
       }
-      else if (count > 10)
+      if (count > 10)
       {
-        Hashset<uint> ids = new Hashset<uint>();
+        var ids = new Hashset<uint>();
         foreach (TarjanComponentInfo id in componentIds)
         {
           ids.Add(id.ComponentId);
         }
         return new HashSetFilter(ids);
       }
-      else
+      var data = new uint[count];
+      int cnt = 0;
+      foreach (TarjanComponentInfo id in componentIds)
       {
-        uint[] data = new uint[count];
-        int cnt = 0;
-        foreach (TarjanComponentInfo id in componentIds)
-        {
-          data[cnt++] = id.ComponentId;
-        }
-        return new ArrayFilter(data);
+        data[cnt++] = id.ComponentId;
       }
+      return new ArrayFilter(data);
     }
-
-    #region Nested type: AllFilter
 
     private class AllFilter : IFilter
     {
-      #region IFilter Members
-
       public bool Accept(uint value)
       {
         return value > 0;
       }
-
-      #endregion
     }
-
-    #endregion
-
-    #region Nested type: ArrayFilter
 
     private class ArrayFilter : IFilter
     {
@@ -173,8 +156,6 @@ namespace DSIS.Graph.Abstract
       {
         myData = data;
       }
-
-      #region IFilter Members
 
       public bool Accept(uint value)
       {
@@ -188,29 +169,15 @@ namespace DSIS.Graph.Abstract
         }
         return false;
       }
-
-      #endregion
     }
-
-    #endregion
-
-    #region Nested type: DropAllFilter
 
     private class DropAllFilter : IFilter
     {
-      #region IFilter Members
-
       public bool Accept(uint value)
       {
         return false;
       }
-
-      #endregion
     }
-
-    #endregion
-
-    #region Nested type: ExactFilter
 
     private class ExactFilter : IFilter
     {
@@ -221,19 +188,11 @@ namespace DSIS.Graph.Abstract
         myValue = value;
       }
 
-      #region IFilter Members
-
       public bool Accept(uint value)
       {
         return value == myValue;
       }
-
-      #endregion
     }
-
-    #endregion
-
-    #region Nested type: HashSetFilter
 
     private class HashSetFilter : IFilter
     {
@@ -244,25 +203,15 @@ namespace DSIS.Graph.Abstract
         mySet = set;
       }
 
-      #region IFilter Members
-
       public bool Accept(uint value)
       {
         return mySet.Contains(value);
       }
-
-      #endregion
     }
-
-    #endregion
-
-    #region Nested type: IFilter
 
     private interface IFilter
     {
       bool Accept(uint value);
     }
-
-    #endregion
   }
 }

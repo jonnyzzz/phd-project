@@ -82,6 +82,7 @@
     <Compile Include="testSrc\MockGraph.cs" />
     <Compile Include="testSrc\MockNode.cs" />
     <Compile Include="testSrc\OrderedListTest.cs" />
+    <Compile Include="testSrc\TarjanGraphTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.System\Core.System.csproj">

@@ -92,13 +92,14 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
                                                            ICellCoordinateSystemProjector<T> projector)
     {
       var ret = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer());
+      var toSystem = projector.ToSystem;
 
       foreach (var pair in m)
       {
-        T pFrom = projector.Project(pair.Key.From);
-        T pTo = projector.Project(pair.Key.To);
+        var pFrom = projector.Project(pair.Key.From);
+        var pTo = projector.Project(pair.Key.To);
 
-        if (!Equals(pFrom, null) && !Equals(pTo, null))
+        if (toSystem.IsNull(pFrom) && toSystem.IsNull(pTo))
         {
           Add(ret, new NodePair<T>(pFrom, pTo), pair.Value);
         }
