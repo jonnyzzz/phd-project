@@ -7,9 +7,9 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate
   {
     private readonly Stack<TarjanNode<TCell>> myStack = new Stack<TarjanNode<TCell>>();
-    private readonly TarjanNodeFlags myMask;
+    private readonly NodeFlag myMask;
 
-    public TarjanNodeStack(TarjanNodeFlags mask)
+    public TarjanNodeStack(NodeFlag mask)
     {
       myMask = mask;
     }
@@ -17,13 +17,13 @@ namespace DSIS.Graph.Abstract
     public void Push(TarjanNode<TCell> node)
     {
       myStack.Push(node);
-      node.SetFlag(myMask, true);
+      ((Node) node).SetFlag(myMask, true);
     }
 
     public TarjanNode<TCell> Pop()
     {
       TarjanNode<TCell> node = myStack.Pop();
-      node.SetFlag(myMask, false);
+      ((Node) node).SetFlag(myMask, false);
       return node;
     }
 
@@ -39,7 +39,7 @@ namespace DSIS.Graph.Abstract
 
     public bool Contains(TarjanNode<TCell> node)
     {
-      return node.GetFlag(myMask);
+      return ((Node) node).GetFlag(myMask);
     }
   }
 }

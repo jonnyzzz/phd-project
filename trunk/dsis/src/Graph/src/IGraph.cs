@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
+using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph
 {
@@ -14,6 +15,8 @@ namespace DSIS.Graph
   {
     int NodesCount { get; }
     int EdgesCount { get; }
+
+    NodeFlags NodeFlags { get; }
   }
 
   public interface IGraph<TCoordinate> : IGraph where TCoordinate : ICellCoordinate

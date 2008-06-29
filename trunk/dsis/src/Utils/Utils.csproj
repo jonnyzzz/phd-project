@@ -87,6 +87,7 @@
     <Compile Include="src\AtomicInteger.cs" />
     <Compile Include="src\AttributeUtil.cs" />
     <Compile Include="src\Bean\IncludeGenerateAttribute.cs" />
+    <Compile Include="src\BiDictionary.cs" />
     <Compile Include="src\BinTreePriorityQueueEx.cs" />
     <Compile Include="src\BinTreePriorityQueueExDebug.cs" />
     <Compile Include="src\CollectionUtil.cs" />

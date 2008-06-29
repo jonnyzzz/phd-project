@@ -188,40 +188,5 @@ namespace DSIS.Graph.Tests.Generic
       DoCircleTest(918);
     }
 
-    [Test]
-    public void TestTarjanNode_01()
-    {
-      var node = (TarjanNode<Q>) CreateNode();
-      node.SetComponentId(COMPONENT_ID_TEST);
-      Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
-    }
-
-    [Test]
-    public void TestTarjanNode_02()
-    {
-      var node = (TarjanNode<Q>) CreateNode();
-      node.SetFlag(TarjanNodeFlags.ROUTE, true);
-      node.SetComponentId(COMPONENT_ID_TEST);
-      Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
-    }
-
-    [Test]
-    public void TestTarjanNode_03()
-    {
-      var node = (TarjanNode<Q>) CreateNode();
-      node.SetComponentId(COMPONENT_ID_TEST);
-      node.SetFlag(TarjanNodeFlags.ROUTE, true);
-      Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
-    }
-
-    [Test]
-    public void TestTarjanNode_04()
-    {
-      var node = (TarjanNode<Q>) CreateNode();
-      node.SetComponentId(COMPONENT_ID_TEST);
-      node.SetFlag(TarjanNodeFlags.ROUTE, true);
-      node.SetFlag(TarjanNodeFlags.STACK, false);
-      Assert.AreEqual(COMPONENT_ID_TEST, node.ComponentId);
-    }
   }
 }

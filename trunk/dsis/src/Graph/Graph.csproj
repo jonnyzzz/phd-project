@@ -71,6 +71,7 @@
     <Compile Include="src\Abstract\IStrongComponentInfoEx.cs" />
     <Compile Include="src\Abstract\IStrongComponentInfoManager.cs" />
     <Compile Include="src\Abstract\NodeEqualityComparer.cs" />
+    <Compile Include="src\Abstract\NodeFlagValue.cs" />
     <Compile Include="src\Abstract\NodeSetBase.cs" />
     <Compile Include="src\Abstract\NodeSetFactory.cs" />
     <Compile Include="src\Abstract\OneNodeSetState.cs" />
@@ -82,7 +83,7 @@
     <Compile Include="src\Abstract\TarjanNode.cs" />
     <Compile Include="src\Abstract\TarjanComponentInfoManager.cs" />
     <Compile Include="src\Abstract\TarjanNodeData.cs" />
-    <Compile Include="src\Abstract\TarjanNodeFlags.cs" />
+    <Compile Include="src\Abstract\NodeFlags.cs" />
     <Compile Include="src\Abstract\TarjanNodeStack.cs" />
     <Compile Include="src\Abstract\TarjanStrongComponentImpl.cs" />
     <Compile Include="src\Adapter\GraphCellImageBuilder.cs" />

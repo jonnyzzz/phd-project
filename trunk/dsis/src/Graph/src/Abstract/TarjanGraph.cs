@@ -11,9 +11,13 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate
   {
     private bool myWasComponents = false;
+    private readonly NodeFlag STACK;
+    private readonly NodeFlag ROUTE;
 
     public TarjanGraph(ICellCoordinateSystem<TCell> coordinateSystem) : base(coordinateSystem)
     {
+      STACK = NodeFlags.NextFlag("STACK");
+      ROUTE = NodeFlags.NextFlag("ROUTE");
     }
 
     public IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
@@ -28,8 +32,8 @@ namespace DSIS.Graph.Abstract
       info.Minimum = 0;
       info.Maximum = EdgesCount;
 
-      var stack = new TarjanNodeStack<TCell>(TarjanNodeFlags.STACK);
-      var route = new TarjanNodeStack<TCell>(TarjanNodeFlags.ROUTE);
+      var stack = new TarjanNodeStack<TCell>(STACK);
+      var route = new TarjanNodeStack<TCell>(ROUTE);
 
       long state = 2;
       long cnt = 1;
@@ -164,7 +168,7 @@ namespace DSIS.Graph.Abstract
     {
       if (ReferenceEquals(from, to))
       {
-        from.SetFlag(TarjanNodeFlags.IS_LOOP, true);
+        ((Node) from).SetFlag(NodeFlags.IS_LOOP, true);
       }
     }
 

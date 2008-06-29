@@ -12,6 +12,7 @@ namespace DSIS.Graph.Abstract
   {
     private readonly IGraphExtension<TNode, TCell> myExt;
     private readonly INodeSet<TNode, TCell> myNodes;
+    private readonly NodeFlags myNodeFlags = new NodeFlags();
 
     private readonly ICellCoordinateSystem<TCell> myCoordinateSystem;
     private int myNodesCount;
@@ -121,6 +122,11 @@ namespace DSIS.Graph.Abstract
     public int EdgesCount
     {
       get { return myEdgesCount; }
+    }
+
+    public NodeFlags NodeFlags
+    {
+      get { return myNodeFlags; }
     }
 
     public IEnumerable<INode<TCell>> GetEdges(INode<TCell> forNode)

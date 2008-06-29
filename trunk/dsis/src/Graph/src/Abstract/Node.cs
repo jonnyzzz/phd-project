@@ -16,6 +16,7 @@ namespace DSIS.Graph.Abstract
     private INodeSetState<TInh, TCell> myEdges;
     internal readonly int HashCodeInternal;
     private object myUserValue;
+    private uint myFlags = 0;
 
     protected Node(TCell coordinate)
     {
@@ -90,9 +91,42 @@ namespace DSIS.Graph.Abstract
       get { return myEdges.Values; }
     }
 
+    public bool IsSelfLoop
+    {
+      get { return GetFlag(NodeFlags.IS_LOOP); }
+    }
+
+    public uint ComponentId
+    {
+      get { return myFlags & (uint)NodeFlags._MASK; }
+    }
+
     public override string ToString()
     {
       return string.Format("[Node: {0}]", Coordinate);
+    }
+
+    public void SetFlag(NodeFlags mask, bool value)
+    {
+      if (value)
+      {
+        myFlags |= (uint) mask;
+      }
+      else
+      {
+        myFlags &= ~(uint) mask;
+      }
+    }
+
+    public bool GetFlag(NodeFlags mask)
+    {
+      return (myFlags & (uint) mask) == (uint) mask;
+    }
+
+    public void SetComponentId(uint componentId)
+    {
+      myFlags = (componentId & (uint)NodeFlags._MASK) +
+                (myFlags & ~(uint)NodeFlags._MASK);
     }
   }
 }

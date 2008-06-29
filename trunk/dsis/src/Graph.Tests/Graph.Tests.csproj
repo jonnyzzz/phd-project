@@ -65,6 +65,7 @@
     <Compile Include="testSrc\Generated\StrongComponentStrongComponentManager2dTest.cs" />
     <Compile Include="testSrc\Generated\TarjanComponentGraph2dTest.cs" />
     <Compile Include="testSrc\GenericsTest.cs" />
+    <Compile Include="testSrc\Generic\NodeFalgsTest.cs" />
     <Compile Include="testSrc\Generic\SimpleGraphTestBase.cs" />
     <Compile Include="testSrc\Generic\StrongComponentGraphBaseTest.cs" />
     <Compile Include="testSrc\Generic\StrongComponentStrongComponentManager2BaseTest.cs" />
