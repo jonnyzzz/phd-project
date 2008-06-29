@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace DSIS.Utils
@@ -231,6 +232,13 @@ namespace DSIS.Utils
       {
         zip(te.Current, qe.Current);
       }
+    }
+
+    public static IEnumerable<TU> Upcast<TEnu, TU,TC>(this TEnu enu) 
+      where TC : TU
+      where TEnu : IEnumerable<TC>
+    {
+      return new UpcastedEnumerable<TEnu, TC, TU>(enu);
     }
   }
 }

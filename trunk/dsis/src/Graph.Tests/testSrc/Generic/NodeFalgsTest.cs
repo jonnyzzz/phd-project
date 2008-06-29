@@ -8,12 +8,14 @@ namespace DSIS.Graph.Tests.Generic
   {
     private NodeFlags myNodeFlags;
     private NodeFlagValue myValue;
+    private NodeFlag FLAG;
 
     [SetUp]
     public void SetUp()
     {
       myNodeFlags = new NodeFlags();
       myValue = new NodeFlagValue();
+      FLAG = myNodeFlags.CreateFlag("FLAG");
     }
 
     [TearDown]
@@ -25,21 +27,21 @@ namespace DSIS.Graph.Tests.Generic
     [Test]
     public void Test_HasNoFlags()
     {
-      Assert.IsFalse(myValue.GetFlag(NodeFlags.IS_LOOP));
+      Assert.IsFalse(myValue.GetFlag(FLAG));
     }
-
+    
     [Test]
     public void Test_SetResetLoopFlag()
     {
-      Assert.IsFalse(myValue.GetFlag(NodeFlags.IS_LOOP));
-      myValue.SetFlag(NodeFlags.IS_LOOP, true);
-      Assert.IsTrue(myValue.GetFlag(NodeFlags.IS_LOOP));
-      myValue.SetFlag(NodeFlags.IS_LOOP, true);
-      Assert.IsTrue(myValue.GetFlag(NodeFlags.IS_LOOP));
-      myValue.SetFlag(NodeFlags.IS_LOOP, true);
-      Assert.IsTrue(myValue.GetFlag(NodeFlags.IS_LOOP));
-      myValue.SetFlag(NodeFlags.IS_LOOP, false);
-      Assert.IsFalse(myValue.GetFlag(NodeFlags.IS_LOOP));
+      Assert.IsFalse(myValue.GetFlag(FLAG));
+      myValue.SetFlag(FLAG, true);
+      Assert.IsTrue(myValue.GetFlag(FLAG));
+      myValue.SetFlag(FLAG, true);
+      Assert.IsTrue(myValue.GetFlag(FLAG));
+      myValue.SetFlag(FLAG, true);
+      Assert.IsTrue(myValue.GetFlag(FLAG));
+      myValue.SetFlag(FLAG, false);
+      Assert.IsFalse(myValue.GetFlag(FLAG));
     }
 
     [Test]
@@ -60,21 +62,49 @@ namespace DSIS.Graph.Tests.Generic
     public void Test_ComponentId_change2()
     {
       Assert.AreEqual(0, myValue.ComponentId);
-      myValue.SetFlag(NodeFlags.IS_LOOP, true);
+      myValue.SetFlag(FLAG, true);
       Assert.AreEqual(0, myValue.ComponentId);
-      myValue.SetFlag(NodeFlags.IS_LOOP, true);
+      myValue.SetFlag(FLAG, true);
       Assert.AreEqual(0, myValue.ComponentId);
       myValue.SetComponentId(100);
-      Assert.IsTrue(myValue.GetFlag(NodeFlags.IS_LOOP));
+      Assert.IsTrue(myValue.GetFlag(FLAG));
       Assert.AreEqual(100, myValue.ComponentId);
-      myValue.SetFlag(NodeFlags.IS_LOOP, false);
+      myValue.SetFlag(FLAG, false);
       Assert.AreEqual(100, myValue.ComponentId);
-      Assert.IsTrue(myValue.GetFlag(NodeFlags.IS_LOOP));
+      Assert.IsFalse(myValue.GetFlag(FLAG));
     }
 
+    [Test]
+    public void Test_2Falgs()
+    {
+      var f1 = myNodeFlags.CreateFlag("A");
+      var f2 = myNodeFlags.CreateFlag("B");
 
+      Assert.IsFalse(myValue.GetFlag(f1));
+      Assert.IsFalse(myValue.GetFlag(f2));
 
+      myValue.SetFlag(f1, false);
+      myValue.SetFlag(f2, false);
+      Assert.IsFalse(myValue.GetFlag(f1));
+      Assert.IsFalse(myValue.GetFlag(f2));
 
+      myValue.SetFlag(f1, true);      
+      Assert.IsTrue(myValue.GetFlag(f1));
+      Assert.IsFalse(myValue.GetFlag(f2));
+
+      myValue.SetFlag(f2, true);
+      Assert.IsTrue(myValue.GetFlag(f1));
+      Assert.IsTrue(myValue.GetFlag(f2));
+      
+      myValue.SetFlag(f1, false);      
+      Assert.IsFalse(myValue.GetFlag(f1));
+      Assert.IsTrue(myValue.GetFlag(f2));
+
+      myValue.SetFlag(f2, false);
+      Assert.IsFalse(myValue.GetFlag(f1));
+      Assert.IsFalse(myValue.GetFlag(f2));
+    }
+    
 
     /*[Test]
     public void TestTarjanNode_01()

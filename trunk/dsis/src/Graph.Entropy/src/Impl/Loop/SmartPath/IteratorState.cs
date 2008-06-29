@@ -14,18 +14,18 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
       myNodes = nodes;
     }
 
-    public INodeState<T> GetNextNode(IGraph<T> thisGraph, INode<T> startNode, INode<T> thisNode, out INode<T> result)
+    public INodeState<T> GetNextNode(IGraph<T> thisGraph, INode<T> startNode, INode<T> thisNode, out INode<T> result, IGraphDataHoler<INodeState<T>, INode<T>> holder)
     {      
       while (myNodes.MoveNext())
       {
-        if (SmartPathBuilder<T>.IsNodeOpened(result = myNodes.Current) || ReferenceEquals(startNode, result))
+        if (SmartPathBuilder<T>.IsNodeOpened(result = myNodes.Current, holder) || ReferenceEquals(startNode, result))
         {
           return this;
         }
       }
 
       INodeState<T> state = new SearchState<T>(new InfiniteEnumerable<INode<T>>(thisGraph.GetEdges(thisNode)));
-      return state.GetNextNode(thisGraph, startNode, thisNode, out result);      
+      return state.GetNextNode(thisGraph, startNode, thisNode, out result, holder);      
     }
   }
 }

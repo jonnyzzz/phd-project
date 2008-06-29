@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Util;
 using DSIS.Graph;
+using DSIS.Graph.Abstract;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
@@ -46,14 +47,10 @@ namespace DSIS.Scheme.Impl.Actions
         var ac = new UpdateContextAction(
           delegate(Context _, Context ctx)
             {
-              IGraphStrongComponents<Q> oneComponent =
-                new OneComponentsGraphAdapter<Q>(comps, info);
-
-              IGraphWithStrongComponent<Q> graph =
-                oneComponent.AsGraphWithStrongComponents(new[] {info});
+              IGraph<Q> graph = comps.AsGraph(new[] {info});
 
               ctx.AddAll(input);
-
+              
               Keys.Graph<Q>().Set(ctx, graph);
               Keys.GraphComponents<Q>().Set(ctx, graph.ComputeStrongComponents(NullProgressInfo.INSTANCE));
               Key.Set(ctx, new LoopIndex(dIndex, comps.ComponentCount));

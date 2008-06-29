@@ -52,7 +52,7 @@ namespace DSIS.Graph.Entropy.Tests
     [Test]
     public void Test_BigFull()
     {
-      List<Node> ns = new List<Node>();
+      var ns = new List<Node>();
       const int N = 10;
       for (int i = 0; i < N; i++)
       {
@@ -71,7 +71,7 @@ namespace DSIS.Graph.Entropy.Tests
       const int N = 2200;
       for (int i = 2000; i < N; i++)
       {
-        List<Node> ns = new List<Node>();
+        var ns = new List<Node>();
         for (int j = 0; j < i; j++)
         {
           ns.Add(n(j, (j + 1) % i));

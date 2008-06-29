@@ -59,8 +59,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Abstract\AbstractGraph.cs" />
     <Compile Include="src\Abstract\ArrayNodeSet.cs" />
+    <Compile Include="src\Abstract\ComponentsFilter.cs" />
+    <Compile Include="src\Abstract\DataHolder.cs" />
     <Compile Include="src\Abstract\EmptyNodeSetState.cs" />
     <Compile Include="src\Abstract\GraphAlgorithms.cs" />
+    <Compile Include="src\Abstract\GraphAlgorithms.Tarjan.cs" />
+    <Compile Include="src\Abstract\GraphDataHolder.cs" />
+    <Compile Include="src\Abstract\GraphDataHolderProxy.cs" />
     <Compile Include="src\Abstract\GraphNodeHashList.cs" />
     <Compile Include="src\Abstract\GraphNodeHashListSetState.cs" />
     <Compile Include="src\Abstract\IGraphExtension.cs" />
@@ -71,6 +76,7 @@
     <Compile Include="src\Abstract\IStrongComponentInfoEx.cs" />
     <Compile Include="src\Abstract\IStrongComponentInfoManager.cs" />
     <Compile Include="src\Abstract\NodeEqualityComparer.cs" />
+    <Compile Include="src\Abstract\NodeFlag.cs" />
     <Compile Include="src\Abstract\NodeFlagValue.cs" />
     <Compile Include="src\Abstract\NodeSetBase.cs" />
     <Compile Include="src\Abstract\NodeSetFactory.cs" />

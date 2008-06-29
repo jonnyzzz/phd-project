@@ -5,6 +5,8 @@ namespace DSIS.Utils
   public delegate void DAction<T>(T obj);
 
   public delegate T TDelegate<T>();
+  
+  public delegate T TDelegateQ<T,Q>(Q q);
 
   public delegate T Lazy<T>();
 

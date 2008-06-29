@@ -27,12 +27,12 @@ namespace DSIS.Graph
       get { return myComps.CoordinateSystem; }
     }
 
-    public IEnumerable<INode<T>> GetNodes(ICollection<IStrongComponentInfo> componentIds)
+    public IEnumerable<INode<T>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
     {
       return myComps.GetNodes(componentIds);
     }
 
-    public IEnumerable<INode<T>> GetEdgesWithFilteredEdges(INode<T> node, ICollection<IStrongComponentInfo> componentIds)
+    public IEnumerable<INode<T>> GetEdgesWithFilteredEdges(INode<T> node, IEnumerable<IStrongComponentInfo> componentIds)
     {
       return myComps.GetEdgesWithFilteredEdges(node, componentIds);
     }
@@ -50,11 +50,6 @@ namespace DSIS.Graph
     public IGraph<T> AsGraph(IEnumerable<IStrongComponentInfo> components)
     {
       return myComps.AsGraph(components);
-    }
-
-    public IGraphWithStrongComponent<T> AsGraphWithStrongComponents(IEnumerable<IStrongComponentInfo> components)
-    {
-      return myComps.AsGraphWithStrongComponents(components);
     }
 
     public IEnumerable<IStrongComponentInfo> Components

@@ -42,11 +42,11 @@ namespace DSIS.SimpleRunner
       if (!Directory.Exists(path))
         Directory.CreateDirectory(path);
 
-      Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter> files = new Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter>();
+      var files = new Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter>();
       int components = 0;
       double[] data = new double[system.Dimension];
 
-      foreach (INode<Q> node in comps.GetNodes(new List<IStrongComponentInfo>(comps.Components)))
+      foreach (INode<Q> node in comps.GetNodes(comps.Components))
       {
         IStrongComponentInfo info = comps.GetNodeComponent(node);
         if (info == null)

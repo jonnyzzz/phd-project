@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
@@ -5,7 +6,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
-  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell>
+  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell>, IGraph<TCell, TNode>
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
     where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>
@@ -13,10 +14,12 @@ namespace DSIS.Graph.Abstract
     private readonly IGraphExtension<TNode, TCell> myExt;
     private readonly INodeSet<TNode, TCell> myNodes;
     private readonly NodeFlags myNodeFlags = new NodeFlags();
+    private readonly NodeFlag IS_LOOP;
 
     private readonly ICellCoordinateSystem<TCell> myCoordinateSystem;
     private int myNodesCount;
     private int myEdgesCount;
+    private object myGraphDataHolder;
 
     protected AbstractGraph(ICellCoordinateSystem<TCell> coordinateSystem)
     {
@@ -25,6 +28,7 @@ namespace DSIS.Graph.Abstract
       myNodesCount = 0;
       myEdgesCount = 0;
       myNodes = new GraphNodeHashList<TNode, TCell>(Primes.Nearest(65536));
+      IS_LOOP = myNodeFlags.CreateFlag("IS_LOOP");
     }
 
     public void AddEdgeToNode(INode<TCell> fromNode, INode<TCell> toNode)
@@ -35,6 +39,10 @@ namespace DSIS.Graph.Abstract
       if (from.AddEdgeTo(to))
       {
         myEdgesCount++;
+        
+        if (ReferenceEquals(from, to)) 
+          from.SetFlag(IS_LOOP, true);
+
         myExt.EdgeAdded(from, to);
       }
     }
@@ -46,7 +54,7 @@ namespace DSIS.Graph.Abstract
 
       if (wasAdded)
       {
-        myNodesCount++;
+        myNodesCount++;        
         myExt.NodeAdded(node);
       }
       return node;
@@ -57,6 +65,12 @@ namespace DSIS.Graph.Abstract
       return myNodes.Contains(coordinate);
     }
 
+    public bool Contains(TNode coordinate)
+    {
+      //todo:
+      return myNodes.Contains(coordinate.Coordinate);
+    }
+
     protected abstract TInh CreateGraph(ICellCoordinateSystem<TCell> system);
     
     public IGraph<TCell> Project(ICellCoordinateSystemProjector<TCell> projector)
@@ -64,14 +78,20 @@ namespace DSIS.Graph.Abstract
       return this.Project(projector, CreateGraph);
     }
 
-    public bool HasArcToItself(TCell node)
+    public void DoGeneric(IGraphWith<TCell> with)
     {
-      return myExt.HasArcToItself(myNodes.Find(node));
+      with.With(this);
     }
 
-    public IGraph<TCell> CreateEmptyGraph()
+    public bool IsSelfLoop(TCell node)
     {
-      return CreateGraph(CoordinateSystem);
+      var find = myNodes.Find(node);
+      return find != null && find.FlagValues.GetFlag(IS_LOOP);
+    }
+
+    public bool IsSelfLoop(TNode node)
+    {
+      return node.FlagValues.GetFlag(IS_LOOP);
     }
 
     public ICellCoordinateSystem<TCell> CoordinateSystem
@@ -119,6 +139,11 @@ namespace DSIS.Graph.Abstract
       return sw.ToString();
     }
 
+    public void DoGeneric(IGraphWith with)
+    {
+      with.With(this);
+    }
+
     public int EdgesCount
     {
       get { return myEdgesCount; }
@@ -144,12 +169,12 @@ namespace DSIS.Graph.Abstract
       get { return myNodesCount; }
     }
 
-    internal IEnumerable<TNode> NodesInternal
+    public IEnumerable<TNode> NodesInternal
     {
       get { return myNodes.Values; }
     }
 
-    protected static IEnumerable<TNode> GetEdgesInternal(INode<TCell> forNode)
+    public IEnumerable<TNode> GetEdgesInternal(INode<TCell> forNode)
     {
       return ((TNode) forNode).EdgesInternal;
     }
@@ -157,6 +182,36 @@ namespace DSIS.Graph.Abstract
     public override string ToString()
     {
       return string.Format("Graph [Nodes: {0}, Edges: {1}]", NodesCount, EdgesCount);
+    }
+
+    public IGraphDataHoler<TData, TNode> CreateDataHolder<TData>(Converter<TNode,TData> def)
+    {
+      if (myGraphDataHolder != null)
+      {
+        throw new ArgumentException("GraphHolder is allocated. " + myGraphDataHolder);
+      }
+      var holder = new GraphDataHolder<TData, TNode, TCell, TInh>(this, def);
+      myGraphDataHolder = holder;
+      return holder;
+    }
+
+    public void DisposeDataHolder<TData>(IGraphDataHoler<TData, TNode> holder)
+    {
+      if (!Equals(myGraphDataHolder, holder))
+      {
+        throw new ArgumentException("Wrong data holder object to dispose");
+      }
+      myGraphDataHolder = null;
+    }
+
+    IGraphDataHoler<TData, INode<TCell>> IGraph<TCell>.CreateDataHolder<TData>(Converter<INode<TCell>, TData> def)
+    {
+      return new GraphDataHolderProxy<TData, TCell, TNode>(CreateDataHolder(x=>def(x)));
+    }
+    
+    void IGraph<TCell>.DisposeDataHolder<TData>(IGraphDataHoler<TData, INode<TCell>> holder)
+    {
+      DisposeDataHolder(((GraphDataHolderProxy<TData, TCell, TNode>)holder).Holder);
     }
   }
 }

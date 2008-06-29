@@ -11,7 +11,7 @@ namespace DSIS.Graph.Abstract
 
     public TarjanComponentInfo NextComponent()
     {
-      TarjanComponentInfo info = new TarjanComponentInfo(0, ++myIndex);
+      var info = new TarjanComponentInfo(0, ++myIndex);
       myInfos[info.ComponentId] = info;
       return info;
     }
@@ -21,7 +21,7 @@ namespace DSIS.Graph.Abstract
       get { return myInfos.Count; }
     }
 
-    public IStrongComponentInfo FindByNode<T>(TarjanNode<T> node) 
+    public IStrongComponentInfo FindByNode<T>(INode<T> node) 
       where T : ICellCoordinate
     {
       IStrongComponentInfo info;

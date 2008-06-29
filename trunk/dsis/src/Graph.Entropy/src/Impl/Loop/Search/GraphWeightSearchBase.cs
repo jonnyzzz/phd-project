@@ -50,8 +50,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
     {
       myCollection.Clear();
 
-      Queue<SearchTreeNode<T>> queue = new Queue<SearchTreeNode<T>>();
-      List<INode<T>> loop = new List<INode<T>>();
+      var queue = new Queue<SearchTreeNode<T>>();
+      var loop = new List<INode<T>>();
 
       queue.Enqueue(new SearchTreeNode<T>(null, anode));
       while (queue.Count > 0)

@@ -50,7 +50,7 @@ namespace DSIS.SimpleRunner
              (myStepLimit < 0 || stepCount < limit);
     }
 
-    protected override IGraphWithStrongComponent<Q> CreateGraph(T system)
+    protected override IGraph<Q> CreateGraph(T system)
     {
       return new TarjanGraph<Q>(system);
     }

@@ -13,28 +13,23 @@ namespace DSIS.Graph.Abstract
       myComponentId = componentId;
     }
 
-    #region IStrongComponentInfo Members
-
     public int NodesCount
     {
       get { return myNodesCount; }
     }
-
-    #endregion
 
     public uint ComponentId
     {
       get { return myComponentId; }
     }
 
-    internal void SetNodeComponent<TCell>(TarjanNode<TCell> node) 
+    internal void SetNodeComponent<TCell, TNode>(TNode node)
       where TCell : ICellCoordinate
+      where TNode : Node<TNode, TCell>
     {
-      ((Node) node).SetComponentId(myComponentId);
-
+      node.SetComponentId(myComponentId);
       myNodesCount++;
     }
-
 
     public override string ToString()
     {

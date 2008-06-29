@@ -83,7 +83,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         bool needNorm = false;
 
         //this is a fix for JVR method refered to JVR2
-        if (notIncludeSelfLoop && myGraph.HasArcToItself(node))
+        if (notIncludeSelfLoop && myGraph.IsSelfLoop(node))
         {
           var weight = myHashHolder.GetItem(new JVRPair<T>(node, node));
           incoming -= weight;

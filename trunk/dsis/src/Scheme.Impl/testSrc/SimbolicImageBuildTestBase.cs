@@ -107,7 +107,7 @@ namespace DSIS.Scheme.Impl
       {
         IGraph<Q> graph = Keys.Graph<Q>().Get(input);
         IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
-        int nodesInComponents = CollectionUtil.Count(comps.GetNodes(new List<IStrongComponentInfo>(comps.Components)));
+        int nodesInComponents = comps.GetNodes(comps.Components).Count();
 
         Apply(GraphNodesConstraint, graph.NodesCount);
         Apply(GraphEdgesConstraint, graph.EdgesCount);        

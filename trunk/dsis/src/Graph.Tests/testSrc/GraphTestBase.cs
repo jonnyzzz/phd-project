@@ -99,6 +99,21 @@ namespace DSIS.Graph.Tests
         }
       }
     }
+
+    [Test]
+    public void Test_DetectLoop()
+    {
+      n(0, 0);
+      Assert.IsTrue(myGraph.IsSelfLoop(new IntegerCoordinate(0)));      
+    }
+    
+    [Test]
+    public void Test_DetectLoop2()
+    {
+      n(0, 1);
+      Assert.IsFalse(myGraph.IsSelfLoop(new IntegerCoordinate(0)));      
+      Assert.IsFalse(myGraph.IsSelfLoop(new IntegerCoordinate(1)));      
+    }
     
   }
 }

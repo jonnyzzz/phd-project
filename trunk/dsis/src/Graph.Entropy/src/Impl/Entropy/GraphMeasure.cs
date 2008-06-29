@@ -54,7 +54,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
       {
         foreach (KeyValuePair<TPair, double> pair in myM)
         {
-          yield return Pair.Create((PairBase<T>) pair.Key, pair.Value/myNorm);
+          yield return Pair.Create((PairBase<T>) pair.Key, pair.Value/*/myNorm*/);
         }
       }
     }
@@ -99,7 +99,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
         var pFrom = projector.Project(pair.Key.From);
         var pTo = projector.Project(pair.Key.To);
 
-        if (toSystem.IsNull(pFrom) && toSystem.IsNull(pTo))
+        if (!toSystem.IsNull(pFrom) && !toSystem.IsNull(pTo))
         {
           Add(ret, new NodePair<T>(pFrom, pTo), pair.Value);
         }

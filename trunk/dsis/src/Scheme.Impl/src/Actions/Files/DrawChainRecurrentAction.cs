@@ -22,11 +22,11 @@ namespace DSIS.Scheme.Impl.Actions.Files
       IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
 
       string outputFile = folderInfo.CreateFileName("chain-recurrent-picture.png");      
-      Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter> files = new Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter>();
+      var files = new Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter>();
       int components = 0;
       double[] data = new double[system.Dimension];
 
-      foreach (INode<Q> node in comps.GetNodes(new List<IStrongComponentInfo>(comps.Components)))
+      foreach (INode<Q> node in comps.GetNodes(comps.Components))
       {
         IStrongComponentInfo info = comps.GetNodeComponent(node);
         if (info == null)

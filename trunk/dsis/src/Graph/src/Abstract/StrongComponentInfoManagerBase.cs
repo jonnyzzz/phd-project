@@ -8,7 +8,7 @@ namespace DSIS.Graph.Abstract
   public abstract class StrongComponentInfoManagerBase<TCI> : IStrongComponentInfoManager
     where TCI : class, IStrongComponentInfoEx
   {
-    protected Hashset<TCI, IStrongComponentInfo> myComponents = new Hashset<TCI, IStrongComponentInfo>();
+    protected readonly Hashset<TCI, IStrongComponentInfo> myComponents = new Hashset<TCI, IStrongComponentInfo>();
 
     #region IStrongComponentInfoManager Members
 
@@ -32,7 +32,7 @@ namespace DSIS.Graph.Abstract
       IEnumerable<StrongComponentNode<TCellCoordinate>> nodes)
       where TCellCoordinate : ICellCoordinate
     {
-      Predicate<IStrongComponentInfoEx> set = GetComponentFilter(infos);
+      var set = GetComponentFilter(infos);
       foreach (StrongComponentNode<TCellCoordinate> node in nodes)
       {
         if (set(node.StrongComponent))
@@ -47,8 +47,8 @@ namespace DSIS.Graph.Abstract
 
     public void OnConnection(IStrongComponentInfo from, IStrongComponentInfo to)
     {
-      TCI toCast = (TCI) to;
-      TCI fromCast = (TCI) from;
+      var toCast = (TCI) to;
+      var fromCast = (TCI) from;
 
       if (HasArc(toCast, fromCast))
       {
@@ -90,8 +90,8 @@ namespace DSIS.Graph.Abstract
 
       AddEdgeInternal(from, to);
 
-      List<IStrongComponentInfoEx> fromIns = new List<IStrongComponentInfoEx>(from.Ins);
-      List<IStrongComponentInfoEx> toOuts = new List<IStrongComponentInfoEx>(to.Outs);
+      var fromIns = new List<IStrongComponentInfoEx>(from.Ins);
+      var toOuts = new List<IStrongComponentInfoEx>(to.Outs);
 
       foreach (TCI infoFrom in fromIns)
       {
@@ -118,8 +118,8 @@ namespace DSIS.Graph.Abstract
       Pair<IEnumerable<TCI>, Predicate<TCI>> intersect = IntersectInOutAndThis(from, to);
 
 
-      Hashset<TCI> tins = new Hashset<TCI>();
-      Hashset<TCI> touts = new Hashset<TCI>();
+      var tins = new Hashset<TCI>();
+      var touts = new Hashset<TCI>();
 
       foreach (TCI si in intersect.First)
       {
@@ -154,7 +154,7 @@ namespace DSIS.Graph.Abstract
 
     protected static Predicate<IStrongComponentInfoEx> GetComponentFilter(IEnumerable<IStrongComponentInfo> infos)
     {
-      Hashset<IStrongComponentInfoEx> set = new Hashset<IStrongComponentInfoEx>();
+      var set = new Hashset<IStrongComponentInfoEx>();
       foreach (TCI id in infos)
       {
         set.Add(id);

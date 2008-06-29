@@ -5,7 +5,7 @@ using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph
 {
-  public class CachedGraphStrongComponents<T>  : IGraphStrongComponents<T>
+  public class CachedGraphStrongComponents<T> : IGraphStrongComponents<T>
     where T : ICellCoordinate
   {
     private readonly IGraphStrongComponents<T> myOriginal;
@@ -32,21 +32,22 @@ namespace DSIS.Graph
       get { return myOriginal.CoordinateSystem; }
     }
 
-    public IEnumerable<INode<T>> GetNodes(ICollection<IStrongComponentInfo> componentIds)
+    public IEnumerable<INode<T>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
     {
-      foreach (IStrongComponentInfo id in componentIds)
+      foreach (var id in componentIds)
       {
-        foreach (INode<T> node in Cache(id).Nodes)
+        foreach (var node in Cache(id).Nodes)
         {
           yield return node;
         }
       }
     }
 
-    public IEnumerable<INode<T>> GetEdgesWithFilteredEdges(INode<T> node, ICollection<IStrongComponentInfo> componentIds)
+    public IEnumerable<INode<T>> GetEdgesWithFilteredEdges(INode<T> node, IEnumerable<IStrongComponentInfo> componentIds)
     {
-      //todo: Hack!
-      return ((INodeInternal<T>) node).Edges;
+      var filter = ComponentsFilter.CreateFilter(componentIds, ComponentCount);
+
+      return filter.FilterUpper(((INodeInternal<T>) node).Edges);      
     }
 
     public CountEnumerable<T> GetCoordinates(ICollection<IStrongComponentInfo> componentIds)
@@ -60,7 +61,7 @@ namespace DSIS.Graph
       return new CountEnumerable<T>(CoordinatesImpl(componentIds), N);
     }
 
-    private IEnumerable<T> CoordinatesImpl(ICollection<IStrongComponentInfo> componentIds)
+    private IEnumerable<T> CoordinatesImpl(IEnumerable<IStrongComponentInfo> componentIds)
     {
       foreach (INode<T> node in GetNodes(componentIds))
       {
@@ -78,10 +79,6 @@ namespace DSIS.Graph
       return myOriginal.AsGraph(components);
     }
 
-    public IGraphWithStrongComponent<T> AsGraphWithStrongComponents(IEnumerable<IStrongComponentInfo> components)
-    {
-      return myOriginal.AsGraphWithStrongComponents(components);
-    }
 
     public IEnumerable<IStrongComponentInfo> Components
     {

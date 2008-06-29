@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace DSIS.Utils
 {
+  
   public class UpcastedEnumerable<TEnu, T, TC> : IEnumerable<TC> where T : TC where TEnu : IEnumerable<T>
   {
     private readonly TEnu myEnumerable;

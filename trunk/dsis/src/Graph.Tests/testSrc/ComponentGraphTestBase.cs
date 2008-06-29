@@ -11,7 +11,7 @@ namespace DSIS.Graph.Tests
   public abstract class ComponentGraphTestBase<T, Q, G>
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate
-    where G : IGraphWithStrongComponent<Q>
+    where G : IGraph<Q>
   {
     protected G myGraph;
     protected IGraphStrongComponents<Q> myComponents = null;
@@ -20,7 +20,13 @@ namespace DSIS.Graph.Tests
 
     public void ComputeComponents()
     {
-      myComponents = myGraph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
+      var instance = NullProgressInfo.INSTANCE;
+      myComponents = ComputeStrongComponents(myGraph, instance);
+    }
+
+    protected virtual IGraphStrongComponents<Q> ComputeStrongComponents(G graph, IProgressInfo instance)
+    {
+      return graph.ComputeStrongComponents(instance);
     }
 
     [SetUp]
@@ -66,7 +72,7 @@ namespace DSIS.Graph.Tests
       get
       {
         Assert.AreEqual(1, myComponents.ComponentCount);
-        List<IStrongComponentInfo> list = new List<IStrongComponentInfo>(myComponents.Components);
+        var list = new List<IStrongComponentInfo>(myComponents.Components);
         Assert.AreEqual(1, list.Count);
         return list;
       }

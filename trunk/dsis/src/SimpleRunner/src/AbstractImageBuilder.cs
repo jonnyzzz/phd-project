@@ -29,7 +29,7 @@ namespace DSIS.SimpleRunner
     protected abstract T CreateCoordinateSystem(ISystemInfo info);
     protected abstract ISystemInfo CreateSystemInfo();
     protected abstract ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> GetMethods();
-    protected abstract IGraphWithStrongComponent<Q> CreateGraph(T system);
+    protected abstract IGraph<Q> CreateGraph(T system);
 
     protected abstract bool PerformStep(ICellProcessorContext<Q, Q> ctx, AbstractImageBuilderContext<Q> cx,
                                         long stepCount);
@@ -158,9 +158,9 @@ namespace DSIS.SimpleRunner
                                        IProgressInfo progress)
     {
       Pair<ISystemInfo, T> infos = CreateInfos();
-      IGraphWithStrongComponent<Q> graph = CreateGraph(infos.Second);
+      IGraph<Q> graph = CreateGraph(infos.Second);
 
-      AbstractImageBuilderContext<Q> cx = new AbstractImageBuilderContext<Q>(infos.First, builder, settings);
+      var cx = new AbstractImageBuilderContext<Q>(infos.First, builder, settings);
 
       OnComputationStarted(infos.Second, cx);
 
@@ -168,7 +168,7 @@ namespace DSIS.SimpleRunner
       long stepCount = 0;
       long[] subdivide = GetSubdivide(stepCount);
       ICellCoordinateSystemConverter<Q, Q> conv = infos.Second.Subdivide(subdivide);
-      CellProcessorContext<Q, Q> ctx =
+      var ctx =
         new CellProcessorContext<Q, Q>(
           infos.Second.InitialSubdivision,
           conv,

@@ -15,7 +15,7 @@ namespace DSIS.Scheme.Impl.Actions.Console
 
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
-      IGraphWithStrongComponent<Q> gr = Keys.Graph<Q>().Get(input);
+      IGraph<Q> gr = Keys.Graph<Q>().Get(input);
 
       Logger.Instance(input).Write("Graph: Nodes {0}, Edges {1}", gr.NodesCount, gr.EdgesCount);
     }

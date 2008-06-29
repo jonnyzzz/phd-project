@@ -11,7 +11,6 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
   {
     private readonly IGraphStrongComponents<T> myComps;
     private static readonly INodeState<T> ourInitialState = new ThisNodeState<T>();
-    private static readonly Lazy<INodeState<T>> Lazy = delegate { return ourInitialState; };
 
     protected readonly Vector<NodePair<T>> myValues = new Vector<NodePair<T>>();
     private int myNorm = 0;
@@ -33,17 +32,20 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
     {
       foreach (IStrongComponentInfo info in myComps.Components)
       {
-        IGraph<T> graph = myComps.AsGraph(new IStrongComponentInfo[] {info});
+        IGraph<T> graph = myComps.AsGraph(new[] {info});
 
-        int initialComponents = myValues.Count;
-
-        while (myValues.Count - initialComponents < graph.EdgesCount)
+        using (var holder = graph.CreateDataHolder(x => ourInitialState))
         {
-          foreach (INode<T> node in graph.Nodes)
+          int initialComponents = myValues.Count;
+
+          while (myValues.Count - initialComponents < graph.EdgesCount)
           {
-            //          if (GetNodeState(node) is ThisNodeState<T>)
+            foreach (INode<T> node in graph.Nodes)
             {
-              BuildPath(graph, node);
+              //          if (GetNodeState(node) is ThisNodeState<T>)
+              {
+                BuildPath(graph, node, holder);
+              }
             }
           }
         }
@@ -52,12 +54,12 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
       GCHelper.Collect();
     }
 
-    private void BuildPath(IGraph<T> graph, INode<T> startNode)
+    private void BuildPath(IGraph<T> graph, INode<T> startNode, IGraphDataHoler<INodeState<T>, INode<T>> holder)
     {      
-      INode<T> start = startNode;
+      var start = startNode;
       do
       {
-        INode<T> next = GetNextNode(graph, startNode, start);
+        var next = GetNextNode(graph, startNode, start, holder);
 
         myValues.Add(new NodePair<T>(start.Coordinate, next.Coordinate), 1);
         myNorm++;
@@ -66,22 +68,22 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
       } while (!ReferenceEquals(start, startNode));
     }
 
-    internal static INode<T> GetNextNode(IGraph<T> graph, INode<T> startNode, INode<T> from)
+    internal static INode<T> GetNextNode(IGraph<T> graph, INode<T> startNode, INode<T> from, IGraphDataHoler<INodeState<T>, INode<T>> holder)
     {
       INode<T> result;
-      from.SetUserData(GetNodeState(from).GetNextNode(graph, startNode, from, out result));
-
+      holder.SetData(from,GetNodeState(from, holder).GetNextNode(graph, startNode, from, out result, holder));
+      
       return result;
     }
 
-    internal static bool IsNodeOpened(INode<T> from)
+    internal static bool IsNodeOpened(INode<T> from, IGraphDataHoler<INodeState<T>, INode<T>> holder)
     {
-      return GetNodeState(from) is ThisNodeState<T>;        
+      return GetNodeState(from, holder) is ThisNodeState<T>;        
     }
 
-    private static INodeState<T> GetNodeState(INode<T> from)
+    private static INodeState<T> GetNodeState(INode<T> from, IGraphDataHoler<INodeState<T>, INode<T>> holder)
     {
-      return from.GetUserData(Lazy);
+      return holder.GetData(from);
     }
   }
 }

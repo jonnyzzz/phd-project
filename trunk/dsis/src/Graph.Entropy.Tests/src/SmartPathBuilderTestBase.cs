@@ -16,7 +16,7 @@ namespace DSIS.Graph.Entropy.Tests
                                                                                          IGraphStrongComponents
                                                                                            <IntegerCoordinate> comps)
     {
-      PathBuilder bld = new PathBuilder(comps);
+      var bld = new PathBuilder(comps);
       bld.BuildPath();
 
       return Pair.Create(bld.Entropy(), (IEdgeInfo)bld);
@@ -32,7 +32,7 @@ namespace DSIS.Graph.Entropy.Tests
       public double Edge(IntegerCoordinate from, IntegerCoordinate to)
       {
         double v;
-        NodePair<IntegerCoordinate> key = new NodePair<IntegerCoordinate>(from, to);
+        var key = new NodePair<IntegerCoordinate>(from, to);
         if (myValues.Dictionary.TryGetValue(key, out v))
         {
           return v;

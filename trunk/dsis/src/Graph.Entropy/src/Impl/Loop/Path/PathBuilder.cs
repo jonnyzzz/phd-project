@@ -11,7 +11,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
     private readonly IGraphStrongComponents<T> myComps;
 
     protected readonly Vector<NodePair<T>> myValues = new Vector<NodePair<T>>();
-    private int myNorm = 0;
+    private int myNorm;
 
     public PathBuilder(IGraphStrongComponents<T> comps)
     {
@@ -22,19 +22,23 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
     {
       foreach (IStrongComponentInfo info in myComps.Components)
       {
-        IGraph<T> graph = myComps.AsGraph(new IStrongComponentInfo[] {info});
-        BuildPath(graph, CollectionUtil.GetFirst(graph.Nodes));
+        var graph = myComps.AsGraph(new[] {info});
+        using (var holder = graph.CreateDataHolder(x => new InfiniteEnumerator<INode<T>>(graph.GetEdges(x).GetEnumerator())))
+        {
+          BuildPath(graph, holder, graph.Nodes.GetFirst());
+        }
       }
     }
 
-    private void BuildPath(IGraph<T> graph, INode<T> startNode)
+    private void BuildPath(IGraph graph, IGraphDataHoler<InfiniteEnumerator<INode<T>>, INode<T>> holder,
+                           INode<T> startNode)
     {
-      INode<T> start = startNode;
+      var start = startNode;
       int initialValues = myValues.Count;
 
       while (!ReferenceEquals(start, startNode) || myValues.Count - initialValues != graph.EdgesCount)
       {
-        INode<T> next = GetNextNode(graph, start);
+        var next = GetNextNode(holder, start);
 
         myValues.Add(new NodePair<T>(start.Coordinate, next.Coordinate), 1);
         myNorm++;
@@ -43,22 +47,16 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
       }
     }
 
-    private static INode<T> GetNextNode(IGraph<T> graph, INode<T> from)
+    private static INode<T> GetNextNode(IGraphDataHoler<InfiniteEnumerator<INode<T>>, INode<T>> holder, INode<T> from)
     {
-      InfiniteEnumerator<INode<T>> outs = from.GetUserData<InfiniteEnumerator<INode<T>>>(
-        delegate
-          {
-            return new InfiniteEnumerator<INode<T>>(
-              graph.GetEdges(from).GetEnumerator());
-          });
+      var outs = holder.GetData(from);
       outs.MoveNext();
       return outs.Current;
     }
 
     public IGraphMeasure<T> Entropy()
     {
-      return
-        new GraphMeasure<T, NodePair<T>>("Long Path", myValues.Dictionary,
+      return new GraphMeasure<T, NodePair<T>>("Long Path", myValues.Dictionary,
                                          EqualityComparerFactory<T>.GetReferenceComparer(), myNorm,
                                          myComps.CoordinateSystem);
     }

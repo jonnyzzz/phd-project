@@ -14,7 +14,6 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate
   {        
     void NodeAdded(TNode node);
-    void EdgeAdded(TNode from, TNode to);
-    bool HasArcToItself(TNode node);
+    void EdgeAdded(TNode from, TNode to);    
   }
 }

@@ -7,5 +7,6 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate
   {
     IEnumerable<INode<TCell>> Edges{ get; }
+    uint ComponentId { get; }
   }
 }

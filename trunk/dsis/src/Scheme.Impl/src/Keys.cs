@@ -28,9 +28,9 @@ namespace DSIS.Scheme.Impl
       return new Key<ICountEnumerable<Q>>("Cells");
     }
 
-    public static Key<IGraphWithStrongComponent<Q>> Graph<Q>() where Q : ICellCoordinate
+    public static Key<IGraph<Q>> Graph<Q>() where Q : ICellCoordinate
     {
-      return new Key<IGraphWithStrongComponent<Q>>("graph");
+      return new Key<IGraph<Q>>("graph");
     }
 
     public static Key<IGraphStrongComponents<Q>> GraphComponents<Q>() where Q : ICellCoordinate

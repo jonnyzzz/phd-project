@@ -35,7 +35,7 @@ namespace DSIS.Graph.Entropy.Tests
 
     private static void DoProjectTest(IEnumerable<Arc> arcs, double norm, long project, IEnumerable<Arc> projected)
     {
-      Dictionary<PairBase<IntegerCoordinate>, double> M = new Dictionary<PairBase<IntegerCoordinate>, double>();
+      var M = new Dictionary<PairBase<IntegerCoordinate>, double>();
       foreach (Arc arc in arcs)
       {
         M.Add(arc.Ar, arc.value);
@@ -46,15 +46,16 @@ namespace DSIS.Graph.Entropy.Tests
                                                                        new IntegerCoordinateSystem(
                                                                          new MockSystemSpace(1, 0, 1000, 1000)));
 
-      IGraphMeasure<IntegerCoordinate> prj = meas.Project(meas.CoordinateSystem.Project(new long[]{project}));
+      IGraphMeasure<IntegerCoordinate> prj = meas.Project(meas.CoordinateSystem.Project(new[]{project}));
 
-      List<Pair<PairBase<IntegerCoordinate>, double>> list = new List<Pair<PairBase<IntegerCoordinate>, double>>(prj.Measure);
-      List<Arc> gold = new List<Arc>(projected);
+      var list = new List<Pair<PairBase<IntegerCoordinate>, double>>(prj.Measure);
+      var gold = new List<Arc>(projected);
 
-      Dictionary<NodePair<IntegerCoordinate>, double> hash = new Dictionary<NodePair<IntegerCoordinate>, double>(new NodePairEqualityComparer<IntegerCoordinate>());
+      var hash = new Dictionary<NodePair<IntegerCoordinate>, double>(new NodePairEqualityComparer<IntegerCoordinate>());
+      var w = gold.FoldLeft(0.0, (x,v)=>x.value+v);      
       foreach (Arc arc in gold)
       {
-        hash.Add(arc.Ar, arc.value);
+        hash.Add(arc.Ar, arc.value/w);
       }
 
       try
@@ -62,8 +63,8 @@ namespace DSIS.Graph.Entropy.Tests
         Assert.AreEqual(gold.Count, list.Count);
 
         foreach (Pair<PairBase<IntegerCoordinate>, double> pair in list)
-        {
-          NodePair<IntegerCoordinate> np = (NodePair<IntegerCoordinate>)pair.First;
+        {         
+          var np = (NodePair<IntegerCoordinate>)pair.First;
           Assert.That(hash.ContainsKey(np), Is.True);
           Assert.That(hash[np], Is.EqualTo(pair.Second));
         }

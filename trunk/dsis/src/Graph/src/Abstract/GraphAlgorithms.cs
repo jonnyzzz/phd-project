@@ -2,7 +2,7 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public static class GraphAlgorithms
+  public static partial class GraphAlgorithms
   {
     public delegate IGraph<TCell> Create<TCell>(ICellCoordinateSystem<TCell> cs) where TCell : ICellCoordinate;
 

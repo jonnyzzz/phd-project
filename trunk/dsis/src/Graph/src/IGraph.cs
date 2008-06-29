@@ -3,11 +3,14 @@
  * Created: 1 декабря 2006 г.
  */
 
+using System;
 using System.Collections.Generic;
 using System.IO;
+using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Utils;
 
 namespace DSIS.Graph
 {
@@ -17,8 +20,38 @@ namespace DSIS.Graph
     int EdgesCount { get; }
 
     NodeFlags NodeFlags { get; }
+
+    void Dump(TextWriter tw);
+    string Dump();
+
+    void DoGeneric(IGraphWith with);    
+  }
+  
+  public interface IGraphWith
+  {
+    void With<TCell, TNode>(IGraph<TCell, TNode> graph)
+      where TCell : ICellCoordinate
+      where TNode : Node<TNode, TCell>;
+  }
+  
+  public interface IGraphWith<TCell> 
+    where TCell : ICellCoordinate
+  {
+    void With<TNode>(IGraph<TCell, TNode> graph)
+      where TNode : Node<TNode, TCell>;
   }
 
+
+  public interface IGraphDataHoler<TData,TNode> : IDisposable
+  {
+    TData GetData(TNode node);
+
+    void SetData(TNode node, TData data);
+    bool HasData(TNode node);
+
+    void CleanAll();
+  }
+  
   public interface IGraph<TCoordinate> : IGraph where TCoordinate : ICellCoordinate
   {
     ICellCoordinateSystem<TCoordinate> CoordinateSystem { get; }
@@ -44,16 +77,27 @@ namespace DSIS.Graph
     bool Contains(TCoordinate coordinate);
 
     IGraph<TCoordinate> Project(ICellCoordinateSystemProjector<TCoordinate> projector);
+    
+    bool IsSelfLoop(TCoordinate node);
 
-    bool HasArcToItself(TCoordinate node);
+    IGraphDataHoler<TData, INode<TCoordinate>> CreateDataHolder<TData>(Converter<INode<TCoordinate>, TData> def);
+    void DisposeDataHolder<TData>(IGraphDataHoler<TData, INode<TCoordinate>> holder);
 
-    void Dump(TextWriter tw);
-    string Dump();
+    void DoGeneric(IGraphWith<TCoordinate> with);    
   }
 
-  public interface IGraphWithStrongComponent<TCell> : IGraph<TCell>
+  public interface IGraph<TCell, TNode> : IGraph<TCell>
+    where TNode : Node<TNode, TCell>
     where TCell : ICellCoordinate
   {
-    IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info);
-  }
+    IEnumerable<TNode> NodesInternal { get; }
+    IEnumerable<TNode> GetEdgesInternal(INode<TCell> forNode);
+
+    IGraphDataHoler<TData, TNode> CreateDataHolder<TData>(Converter<TNode,TData> def);
+    void DisposeDataHolder<TData>(IGraphDataHoler<TData, TNode> holder);
+
+    bool Contains(TNode coordinate);
+
+    bool IsSelfLoop(TNode node);
+  }  
 }

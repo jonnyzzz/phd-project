@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract 
 {
   [EqualityComparer(typeof(NodeEqualityComparer<,>))]
   public abstract class Node<TInh, TCell> : INode<TCell>, INodeInternal<TCell>
@@ -11,12 +12,13 @@ namespace DSIS.Graph.Abstract
   {
     private static readonly IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();
     private static readonly NodeSetFactory<TInh, TCell> NodeFactory = new NodeSetFactory<TInh, TCell>();
+    private INodeSetState<TInh, TCell> myEdges;
 
     public readonly TCell Coordinate;
-    private INodeSetState<TInh, TCell> myEdges;
-    internal readonly int HashCodeInternal;
-    private object myUserValue;
-    private uint myFlags = 0;
+
+    internal Object UserData = null;
+    internal readonly int HashCodeInternal;    
+    internal readonly NodeFlagValue FlagValues = new NodeFlagValue();
 
     protected Node(TCell coordinate)
     {
@@ -33,26 +35,6 @@ namespace DSIS.Graph.Abstract
     TCell INode<TCell>.Coordinate
     {
       get { return Coordinate; }
-    }
-
-    public void SetUserData<T>(T data)
-    {
-      myUserValue = data;
-    }
-
-    public T GetUserData<T>(Lazy<T> def)
-    {
-      if (myUserValue is T)
-        return (T)myUserValue;
-
-      T newValue = def();
-      myUserValue = newValue;
-      return newValue;
-    }
-
-    public bool HasUserData<T>()
-    {
-      return myUserValue is T;
     }
 
     public override sealed bool Equals(object obj)
@@ -91,14 +73,9 @@ namespace DSIS.Graph.Abstract
       get { return myEdges.Values; }
     }
 
-    public bool IsSelfLoop
-    {
-      get { return GetFlag(NodeFlags.IS_LOOP); }
-    }
-
     public uint ComponentId
     {
-      get { return myFlags & (uint)NodeFlags._MASK; }
+      get { return FlagValues.ComponentId; }
     }
 
     public override string ToString()
@@ -106,27 +83,19 @@ namespace DSIS.Graph.Abstract
       return string.Format("[Node: {0}]", Coordinate);
     }
 
-    public void SetFlag(NodeFlags mask, bool value)
+    public void SetFlag(NodeFlag mask, bool value)
     {
-      if (value)
-      {
-        myFlags |= (uint) mask;
-      }
-      else
-      {
-        myFlags &= ~(uint) mask;
-      }
+      FlagValues.SetFlag(mask, value);
     }
 
-    public bool GetFlag(NodeFlags mask)
+    public bool GetFlag(NodeFlag mask)
     {
-      return (myFlags & (uint) mask) == (uint) mask;
+      return FlagValues.GetFlag(mask);
     }
 
     public void SetComponentId(uint componentId)
     {
-      myFlags = (componentId & (uint)NodeFlags._MASK) +
-                (myFlags & ~(uint)NodeFlags._MASK);
+      FlagValues.SetComponentId(componentId);
     }
   }
 }

@@ -3,15 +3,16 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  internal class TarjanNodeData<TCell> 
+  internal class TarjanNodeData<TCell, TNode> 
     where TCell : ICellCoordinate
+    where TNode : Node<TNode, TCell>
   {
     public long Label = 0;
     public long Number = 0;
-    private IEnumerator<TarjanNode<TCell>> myNodes = null;
-    private readonly TarjanNode<TCell> myNode;
+    private IEnumerator<TNode> myNodes = null;
+    private readonly TNode myNode;
 
-    public TarjanNodeData(TarjanNode<TCell> node)
+    public TarjanNodeData(TNode node)
     {
       myNode = node;      
     }
@@ -26,7 +27,7 @@ namespace DSIS.Graph.Abstract
       return myNodes.MoveNext();
     }
 
-    public TarjanNode<TCell> Current
+    public TNode Current
     {
       get { return myNodes.Current; }
     }
