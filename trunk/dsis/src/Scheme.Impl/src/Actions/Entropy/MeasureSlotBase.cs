@@ -30,7 +30,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       var info = Get(step, proj);
       if (info == null)
       {
-        Add(new BiggestMeasureInfo<Q>(proj, sGntep, mes));
+        Add(new BiggestMeasureInfo<Q>(proj, step, mes));
       }
       else
       {
