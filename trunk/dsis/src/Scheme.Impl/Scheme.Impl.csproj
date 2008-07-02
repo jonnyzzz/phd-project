@@ -78,6 +78,7 @@
     <Compile Include="src\Actions\Console\DumpWorkingFolderAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
+    <Compile Include="src\Actions\Entropy\BiggestMeasureInfo.cs" />
     <Compile Include="src\Actions\Entropy\EigenEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\EigenPerComoponentAction.cs" />
     <Compile Include="src\Actions\Entropy\FileSystemMeasureSlot.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="src\Actions\Entropy\JVRMeasureAction.cs" />
     <Compile Include="src\Actions\Entropy\MeasureCollectorAction.cs" />
     <Compile Include="src\Actions\Entropy\MeasureInfo.cs" />
+    <Compile Include="src\Actions\Entropy\MeasureInfoBase.cs" />
     <Compile Include="src\Actions\Entropy\MeasureInfoPersistance.cs" />
     <Compile Include="src\Actions\Entropy\MeasureSlot.cs" />
     <Compile Include="src\Actions\Entropy\MeasureSlotBase.cs" />

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace DSIS.Utils
@@ -129,6 +128,11 @@ namespace DSIS.Utils
     }
 
     public static IEnumerable<T> And<T>(params IEnumerable<T>[] enums)
+    {
+      return And((IEnumerable<IEnumerable<T>>)enums);
+    }
+
+    public static IEnumerable<T> And<T>(IEnumerable<IEnumerable<T>> enums)
     {
       foreach (IEnumerable<T> enumerable in enums)
       {

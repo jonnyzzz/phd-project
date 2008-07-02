@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace DSIS.Graph.Tests.Generated
 {
-  [TestFixture]
+  [TestFixture, Ignore]
   public class StrongComponentStrongComponentManager22dTest : 
     StrongComponentStrongComponentManager2BaseTest<IntegerCoordinateSystem2d, IntegerCoordinate2d>
   {

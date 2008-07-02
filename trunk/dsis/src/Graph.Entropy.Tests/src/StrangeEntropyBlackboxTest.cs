@@ -12,14 +12,14 @@ namespace DSIS.Graph.Entropy.Tests
       get { return 1e-5; }
     }
 
-    [Test]
+    [Test, Ignore]
     public void Test_2LoopDot()
     {
       for (int p = 2; p < 20; p++)
       {
         for (int q = 2; q < 20; q++)
         {
-          List<Node> ns = new List<Node>();
+          var ns = new List<Node>();
           int prev = p;
           for (int i = 0; i <= p; i++)
           {

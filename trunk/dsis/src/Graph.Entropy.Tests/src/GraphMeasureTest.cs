@@ -100,6 +100,5 @@ namespace DSIS.Graph.Entropy.Tests
         this.value = value;
       }
     }
-    
   }
 }

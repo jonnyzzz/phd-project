@@ -64,13 +64,13 @@ namespace DSIS.Graph.Entropy.Tests
     [Test]
     public void Test_10Full()
     {
-      DoFullGraphTest(10, 3.1699250014423015d);
+      DoFullGraphTest(10, 3.321928d);
     }
 
     [Test]
     public void Test_11Full()
     {
-      DoFullGraphTest(11, 3.1699250014423015d);
+      DoFullGraphTest(11, 3.459131d);
     }
 
     private void DoFullGraphTest(int N, double entropy)

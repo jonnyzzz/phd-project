@@ -4,10 +4,9 @@ using NUnit.Framework;
 
 namespace DSIS.Graph.Tests.Impl
 {
-  [TestFixture]
+  [TestFixture, Ignore]
   public class StrongComponentStrongComponentManagerTest :
     StrongComponentStrongComponentManagerBaseTest<IntegerCoordinateSystem, IntegerCoordinate>
   {
-
   }
 }

@@ -151,7 +151,7 @@ namespace DSIS.Graph.Entropy.Tests
     [Test]
     public void Test_08()
     {
-      DoTest(delegate(IGraph<IntegerCoordinate> graph)
+      DoTest(graph =>
                {
                  const int n = 3;
                  for (int i = 1; i <= n; i++)
@@ -159,7 +159,12 @@ namespace DSIS.Graph.Entropy.Tests
                    {
                      AddEdge(graph, i, j);
                    }
-               }, "1, ", "3, ", "1, 3, ", "1, 2,", "2,");
+               }, 
+               "1, ", 
+               "2, ", 
+               "1, 2, ", 
+               "1, 3,", 
+               "3,");
     }
 
 

@@ -132,32 +132,69 @@ namespace DSIS.Graph.Entropy.Tests
     [Test]
     public void Test_08_full3()
     {
-      DoTest(BuildFullGraph(3), "1, ", "3, ", "1, 3, ", "1, 2,", "2,");
+      DoTest(BuildFullGraph(3), "1, ", "2, ", "1, 2, ", "1, 3,", "3,");
     }
 
     [Test]
     public void Test_09_full4()
     {
-      DoTest(BuildFullGraph(4), "1, ", "3, ", "1, 3, ", "4, ", "1, 4, ", "1, 2,", "2,");
+      DoTest(BuildFullGraph(4), 
+        "1,", 
+"2, ",
+"1, 2,", 
+"1, 3, ",
+"3,", 
+"1, 4,",
+"4,");
     }
 
     [Test]
     public void Test_09_full5()
     {
-      DoTest(BuildFullGraph(5), "1, ", "3, ", "1, 3, ", "4, ", "1, 4, ", "1, 5, ", "5,", "1, 2,", "2,");
+      DoTest(BuildFullGraph(5),
+        @"1, 
+2, 
+1, 2, 
+1, 3, 
+3, 
+1, 4, 
+4, 
+1, 5, 
+5,".Split('\n'));
     }
 
     [Test]
     public void Test_09_full6()
     {
-      DoTest(BuildFullGraph(6), "1, ", "3, ", "1, 3, ", "4, ", "1, 4, ", "1, 5, ", "5,", "1, 2,", "2,", "1, 6,", "6, ");
+      DoTest(BuildFullGraph(6), @"1, 
+2, 
+1, 2, 
+1, 3, 
+3, 
+1, 4, 
+4, 
+1, 5, 
+5, 
+1, 6, 
+6,".Split('\n') );
     }
 
     [Test]
     public void Test_09_full7()
     {
-      DoTest(BuildFullGraph(7), "1, ", "3, ", "1, 3, ", "7, ", "1, 7, ", "4, ", "1, 4, ", "1, 5, ", "5,", "1, 2,", "2,",
-             "1, 6,", "6, ");
+      DoTest(BuildFullGraph(7),@"1, 
+2, 
+1, 2, 
+1, 3, 
+3, 
+1, 4, 
+4, 
+1, 5, 
+5, 
+1, 6, 
+6, 
+1, 7, 
+7,".Split('\n'));
     }
 
 

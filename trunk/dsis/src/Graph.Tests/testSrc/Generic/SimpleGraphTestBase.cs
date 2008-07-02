@@ -15,7 +15,7 @@ namespace DSIS.Graph.Tests.Generic
     [SetUp]
     public void SetUp()
     {
-      MockSystemSpace space = new MockSystemSpace(Dimension, 0, 1, 100);
+      var space = new MockSystemSpace(Dimension, 0, 1, 100);
       mySystem = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(space);
       myGraph = new SimpleGraph<Q>(mySystem);
     }

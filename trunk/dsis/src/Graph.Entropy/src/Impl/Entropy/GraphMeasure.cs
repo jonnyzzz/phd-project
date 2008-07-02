@@ -52,9 +52,9 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
       //todo: yield
       get
       {
-        foreach (KeyValuePair<TPair, double> pair in myM)
+        foreach (var pair in myM)
         {
-          yield return Pair.Create((PairBase<T>) pair.Key, pair.Value/*/myNorm*/);
+          yield return Pair.Create((PairBase<T>) pair.Key, pair.Value/myNorm);
         }
       }
     }
@@ -62,9 +62,8 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     public IDictionary<T, double> GetMeasureNodes()
     {
       if (myNodesM == null)
-      {
         ComputeEntropy();
-      }
+
       return myNodesM;
     }
 
@@ -139,7 +138,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
     private static double Log(double d)
     {
-      return Math.Log(d, 2);
+      return Math.Log(d,2 );
     }
 
     private static double Entropy(double d)

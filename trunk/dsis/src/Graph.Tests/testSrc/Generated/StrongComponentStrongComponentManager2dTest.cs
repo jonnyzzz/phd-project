@@ -2,9 +2,9 @@ using DSIS.Graph.Tests.Generic;
 using DSIS.IntegerCoordinates.Generated;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Generated
+namespace DSIS.Graph.Tests.Generated
 {
-  [TestFixture]
+  [TestFixture, Ignore]
   public class StrongComponentStrongComponentManager2dTest :
     StrongComponentStrongComponentManagerBaseTest<IntegerCoordinateSystem2d, IntegerCoordinate2d>
   {
@@ -12,7 +12,6 @@ namespace DSIS.Graph.Generated
     {
       get { return 2; }
     }
-
 
     protected override IntegerCoordinate2d CreateCoordinate(long nodeId, IntegerCoordinateSystem2d t)
     {

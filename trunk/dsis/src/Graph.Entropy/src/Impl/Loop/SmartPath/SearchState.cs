@@ -17,7 +17,11 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
     {
       myNodes.MoveNext();
       INode<T> next = myNodes.Current;
-      result = ReferenceEquals(startNode, next) ? next : SmartPathBuilder<T>.GetNextNode(thisGraph, startNode, next, holder);
+
+      //todo: I cannt remember what is done here!
+      //result = ReferenceEquals(startNode, next) ? next : SmartPathBuilder<T>.GetNextNode(thisGraph, startNode, next, holder);
+
+      result = next;
       return this;
     }
   }

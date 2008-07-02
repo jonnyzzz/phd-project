@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy.Tests
 {
-  [TestFixture]
+  [TestFixture, Ignore]
   public class SmartPathBuilderTest : SmartPathBuilderTestBase
   {
     [Test]

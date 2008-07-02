@@ -26,7 +26,7 @@ namespace DSIS.Graph.Entropy.Tests
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
+                 var system = (IntegerCoordinateSystem)graph.CoordinateSystem;
                  INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
                  INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
                  INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));
@@ -136,19 +136,19 @@ namespace DSIS.Graph.Entropy.Tests
                  AddEdge(graph, 3, 5);
                  AddEdge(graph, 6, 1);
 
-               }, 
-             "1, 3, ", 
-             "3, 2, ", 
-             "1, 2, 3, ", 
-             "2, 3, ", 
-             "5, 4, ", 
-             "1, 3, 5, 6, ", 
-             "4, 5, ", 
-             "4, 5, ", 
-             "5, 4, ", 
-             "1, 2, 3, 5, 6, ", 
-             "1, 2, 4, 5, 6, ", 
-             "1, 3, 2, 4, 5, 6,");
+               },
+             @"1, 3, 
+3, 2, 
+1, 2, 3, 
+2, 3, 
+1, 3, 5, 6, 
+5, 4, 
+4, 5, 
+4, 5, 
+1, 2, 4, 5, 6, 
+1, 2, 3, 5, 6, 
+5, 4, 
+1, 3, 2, 4, 5, 6,".Split('\n'));
     }
   
     [Test]
@@ -156,7 +156,7 @@ namespace DSIS.Graph.Entropy.Tests
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem)graph.CoordinateSystem;
+                 var system = (IntegerCoordinateSystem)graph.CoordinateSystem;
                  INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
                  INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
                  INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));
@@ -266,14 +266,15 @@ namespace DSIS.Graph.Entropy.Tests
                  AddEdge(graph, 6, 1);
 
                }, true,
-             "1, 3, ",
-             "3, 2, ",
-             "1, 2, 3, ",
-             "5, 4, ",
-             "1, 3, 5, 6, ",
-             "1, 2, 3, 5, 6, ",
-             "1, 2, 4, 5, 6, ",
-             "1, 3, 2, 4, 5, 6,");
+               @"1, 3, 
+3, 2, 
+1, 2, 3, 
+1, 3, 5, 6, 
+5, 4, 
+1, 2, 4, 5, 6, 
+1, 2, 3, 5, 6, 
+1, 3, 2, 4, 5, 6,
+".Split('\n'));
     }
 
     [Test]
@@ -303,17 +304,17 @@ namespace DSIS.Graph.Entropy.Tests
                  AddEdge(graph, 12, 13);
                  AddEdge(graph, 13, 14);
                  AddEdge(graph, 14, 8);
-               }, true,               
-             "1, 2, 3, 8, 11, ", 
-             "1, 2, 4, 6, 7, 8, 11, ",
-             "1, 2, 12, 13, 14, 8, 11, ", 
-             "1, 2, 5, 9, 10, 8, 11,");
+               }, true,
+             @"1, 2, 3, 8, 11, 
+1, 2, 4, 6, 7, 8, 11, 
+1, 2, 5, 9, 10, 8, 11, 
+1, 2, 12, 13, 14, 8, 11,".Split('\n'));
     }
     
     [Test]
     public void Test_17()
     {
-      List<string> result = new List<string>();
+      var result = new List<string>();
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
                  const int MAX = 100;
@@ -325,13 +326,13 @@ namespace DSIS.Graph.Entropy.Tests
                  }
                  result.Add(s);
                }, true,
-             delegate { return result.ToArray(); });
+             result.ToArray);
     }    
 
     [Test]
     public void Test_18()
     {
-      List<string> result = new List<string>();
+      var result = new List<string>();
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
                  const int MAX = 1000;
@@ -343,13 +344,13 @@ namespace DSIS.Graph.Entropy.Tests
                  }
                  result.Add(s);
                }, true,
-             delegate { return result.ToArray(); });
+             result.ToArray);
     }
 
     [Test][Ignore("Fix me")]
     public void Test_19()
     {
-      List<string> result = new List<string>();
+      var result = new List<string>();
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {                 
                  const int MAX = 1000;
@@ -363,7 +364,7 @@ namespace DSIS.Graph.Entropy.Tests
                  AddEdge(graph, MAX + 1, 0);
                  result.Add(s);
                }, true,
-             delegate { return result.ToArray(); });
+             result.ToArray);
     }
   }
 }
