@@ -11,7 +11,7 @@ namespace DSIS.Persistance.Tests
   [TestFixture]
   public class GeneratedIntegerCoordinateSystemPersistanceTest : PersistanceTestBase
   {
-    private IPersistance<IIntegerCoordinateSystemInfo> myManager;
+    private IPersistance<IIntegerCoordinateSystem> myManager;
     private GeneratedIntegerCoordinateSystemManager myFactory;
 
     [SetUp]

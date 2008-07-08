@@ -68,8 +68,8 @@ namespace DSIS.SimpleRunner
 
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
-//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 5, systemIked, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 10, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systemIked, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, duffing, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, vanderpol, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
@@ -271,6 +271,7 @@ namespace DSIS.SimpleRunner
 //                               entropies.Add(DrawEntropyAction(steps, new PathEntropyAction()), "Path");
 //                               entropies.Add(EntropyForEachComponent(loop, DrawEntropyAction(steps, new JVRMeasureAction(new JVRMeasureOptions { IncludeSelfEdge = true }))), "JVR");
 
+/*
                                foreach (var pair in entropies)
                                {
                                  IAction entropy = EntropyForEachComponent(DrawEntropyAction(pair.Value, loop, steps, pair.Key));
@@ -280,6 +281,7 @@ namespace DSIS.SimpleRunner
                                  xgr.AddEdge(xwf, customWf);
                                  xgr.AddEdge(customWf, entropy);
                                }
+*/
                                xgr.AddEdge(xgr.Start, xgr.End);
                              });
     }

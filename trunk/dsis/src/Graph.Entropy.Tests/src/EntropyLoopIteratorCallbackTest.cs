@@ -249,7 +249,7 @@ namespace DSIS.Graph.Entropy
       foreach (List<int> loop in loops)
       {
         List<INode<IntegerCoordinate>> nodes = loop.ConvertAll(
-            input => graph.AddNode(new IntegerCoordinate(input)));
+            input => (INode<IntegerCoordinate>)graph.AddNode(new IntegerCoordinate(input)));
 
         cb.OnLoopFound(nodes, nodes.Count);
       }

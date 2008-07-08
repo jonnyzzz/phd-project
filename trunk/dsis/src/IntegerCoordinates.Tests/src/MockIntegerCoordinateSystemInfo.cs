@@ -3,7 +3,7 @@ using DSIS.Core.System;
 
 namespace DSIS.IntegerCoordinates.Tests
 {
-  public class MockIntegerCoordinateSystemInfo : IIntegerCoordinateSystemInfo
+  public class MockIntegerCoordinateSystemInfo : IIntegerCoordinateSystem
   {
     private readonly double[] myCellSize;
     private readonly double[] myCellSizeHalf;

@@ -21,7 +21,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       {
         var proj = measure.Project(project);
         Keys.GraphMeasure<Q>().Set(output, proj);
-        Keys.IntegerCoordinateSystemInfo.Set(output, (IIntegerCoordinateSystemInfo) proj.CoordinateSystem);
+        Keys.IntegerCoordinateSystemInfo.Set(output, (IIntegerCoordinateSystem) proj.CoordinateSystem);
       } else
       {
         output.AddAll(input);

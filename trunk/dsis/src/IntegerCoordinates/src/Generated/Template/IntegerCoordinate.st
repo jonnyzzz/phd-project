@@ -248,7 +248,7 @@ namespace DSIS.Generated
       get { return typeof (IntegerCoordinate); }
     }
     
-    public IIntegerCoordinateSystemInfo Create(ISystemSpace space, long[] subd)
+    public IIntegerCoordinateSystem Create(ISystemSpace space, long[] subd)
     {
       return new IntegerCoordinateSystem(space, subd);
     }

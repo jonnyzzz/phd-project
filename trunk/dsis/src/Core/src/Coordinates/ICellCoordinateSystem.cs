@@ -69,7 +69,14 @@ namespace DSIS.Core.Coordinates
     /// <returns></returns>
     bool IsNull(T coord);
 
+    /// <summary>
+    /// Saves a number of coords to the stream. Amount of coords is saved too.
+    /// </summary>
     void Save(IBinaryWriter writer, IEnumerable<T> coords);
+ 
+    /// <summary>
+    /// Loads saved set of coords. 
+    /// </summary>
     IEnumerable<T> Load(IBinaryReader reader);
   }
 }

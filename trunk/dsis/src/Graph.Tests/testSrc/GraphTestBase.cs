@@ -1,3 +1,4 @@
+using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using DSIS.Utils;
@@ -6,19 +7,25 @@ using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Graph.Tests
 {
-  public abstract class GraphTestBase<T> where T : IGraph<IntegerCoordinate>
+  public abstract class GraphTestBase<T, TNode> 
+    where T : AbstractGraph<T, IntegerCoordinate, TNode>, IGraphExtension<TNode, IntegerCoordinate>
+    where TNode : Node<TNode, IntegerCoordinate>
   {
-    private T myGraph;
+    protected T myGraph;
 
     [SetUp]
     public virtual void SetUp()
     {
-      var ics = new IntegerCoordinateSystem(new MockSystemSpace(1,0,1000,1000000));
+      var ics = new IntegerCoordinateSystem(new MockSystemSpace(1,0,10000,1000000));
       myGraph = CreateGraph(ics);
     }
 
     protected abstract T CreateGraph(IntegerCoordinateSystem ics);
   
+    protected TNode n(int i)
+    {
+      return myGraph.AddNode(new IntegerCoordinate(i));
+    }
   
     protected void n(int i, int j)
     {
@@ -31,19 +38,38 @@ namespace DSIS.Graph.Tests
       myGraph.AddEdgeToNode(n_i, n_j);
     }
 
+
     protected void an(int i, int j)
     {
-      INode<IntegerCoordinate> n_i = myGraph.Nodes.Find(null, x => x.Coordinate.GetCoordinate(0) == i);
-      INode<IntegerCoordinate> n_j = myGraph.GetEdges(n_i).Find(null, x => x.Coordinate.GetCoordinate(0) == j);
-
-      Assert.That(n_i, Is.Not.Null);
-      Assert.That(n_j, Is.Not.Null);     
+      an(myGraph, i, j);
     }
 
-    protected void nan(int i)
+    protected void an(T graph, int i, int j)
     {
-      INode<IntegerCoordinate> n_i = myGraph.Nodes.Find(null, x => x.Coordinate.GetCoordinate(0) == i);
+      INode<IntegerCoordinate> n_i = graph.Nodes.Find(null, x => x.Coordinate.GetCoordinate(0) == i);
+      INode<IntegerCoordinate> n_j = graph.GetEdges(n_i).Find(null, x => x.Coordinate.GetCoordinate(0) == j);
+
+      Assert.That(n_i, Is.Not.Null, "Node from " + i);
+      Assert.That(n_j, Is.Not.Null, "Node to " + j);     
+    }
+
+    protected TNode nan(int i)
+    {
+      var n_i = myGraph.NodesInternal.Find(null, x => x.Coordinate.GetCoordinate(0) == i);
       Assert.That(n_i, Is.Null);
+      return n_i;
+    }
+
+    protected TNode an(int i)
+    {
+      return an(myGraph, i);
+    }
+
+    protected TNode an(T graph, int i)
+    {
+      var n_i = graph.NodesInternal.Find(null, x => x.Coordinate.GetCoordinate(0) == i);
+      Assert.That(n_i, Is.Not.Null);
+      return n_i;
     }
 
     [Test]
@@ -96,6 +122,26 @@ namespace DSIS.Graph.Tests
         for (int i = 1; i < j; i++)
         {
           an(0, i);
+        }
+      }
+    }
+
+    [Test]
+    public void Test_FullGraph()
+    {
+      for(int i=0; i<100; i++)
+      {
+        for(int j=0; j<100; j++)
+        {
+          n(i, j);
+        }
+      }
+      for(int i=0; i<100; i++)
+      {
+        an(i);
+        for(int j=0; j<100; j++)
+        {
+          an(i, j);
         }
       }
     }

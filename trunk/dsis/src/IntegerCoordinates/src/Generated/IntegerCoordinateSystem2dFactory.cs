@@ -22,7 +22,7 @@ namespace DSIS.IntegerCoordinates.Generated
       get { return typeof (IntegerCoordinate2d); }
     }
 
-    public IIntegerCoordinateSystemInfo Create(ISystemSpace space, long[] subd)
+    public IIntegerCoordinateSystem Create(ISystemSpace space, long[] subd)
     {
       return new IntegerCoordinateSystem2d(space, subd);
     }

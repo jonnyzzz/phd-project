@@ -6,7 +6,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
   public interface IGraphBuilder
   {
     int Dimension { get; }
-    IGraphBuilderProcessor Init(IIntegerCoordinateSystemInfo info);
+    IGraphBuilderProcessor Init(IIntegerCoordinateSystem info);
   }
   
   public interface IGraphBuilderProcessor

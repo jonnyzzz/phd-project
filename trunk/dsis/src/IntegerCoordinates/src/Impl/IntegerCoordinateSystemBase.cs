@@ -218,7 +218,7 @@ namespace DSIS.IntegerCoordinates.Impl
     public bool IsNull(Q coord)
     {
       //todo: Implement for each concrete Q
-      return coord == null;
+      return ReferenceEquals(coord, null);
     }
 
     public virtual IRadiusProcessor<Q> CreateRadiusProcessor()

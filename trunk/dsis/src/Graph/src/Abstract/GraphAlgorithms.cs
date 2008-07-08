@@ -4,10 +4,13 @@ namespace DSIS.Graph.Abstract
 {
   public static partial class GraphAlgorithms
   {
-    public delegate IGraph<TCell> Create<TCell>(ICellCoordinateSystem<TCell> cs) where TCell : ICellCoordinate;
-
-    public static IGraph<TCell> Project<TCell>(this IGraph<TCell> baseGraph, ICellCoordinateSystemProjector<TCell> projector, Create<TCell> create)
+    public delegate IGraph<TCell, TNode> Create<TCell, TNode>(ICellCoordinateSystem<TCell> cs)
       where TCell : ICellCoordinate
+      where TNode : Node<TNode, TCell>;
+
+    public static IGraph<TCell, TNode> Project<TCell, TNode>(this IGraph<TCell, TNode> baseGraph, ICellCoordinateSystemProjector<TCell> projector, Create<TCell, TNode> create)
+      where TCell : ICellCoordinate
+      where TNode : Node<TNode, TCell>
     {
       var toSystem = projector.ToSystem;
       var graph = create(toSystem);
@@ -25,7 +28,7 @@ namespace DSIS.Graph.Abstract
         foreach (var edge in baseGraph.GetEdges(node))
         {
           var eProj = projector.Project(edge.Coordinate);
-          if (!toSystem.IsNull(eProj)) 
+          if (toSystem.IsNull(eProj)) 
             continue;
           
           var gToNode = graph.AddNode(eProj);

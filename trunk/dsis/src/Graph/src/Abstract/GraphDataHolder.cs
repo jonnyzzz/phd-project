@@ -58,6 +58,7 @@ namespace DSIS.Graph.Abstract
     public void Dispose()
     {
       CleanAll();
+      GCHelper.Collect();
       myGraph.DisposeDataHolder(this);
     }
 

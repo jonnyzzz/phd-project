@@ -6,7 +6,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
-  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell>, IGraph<TCell, TNode>
+  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell, TNode>
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
     where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>
@@ -14,7 +14,7 @@ namespace DSIS.Graph.Abstract
     private readonly IGraphExtension<TNode, TCell> myExt;
     private readonly INodeSet<TNode, TCell> myNodes;
     private readonly NodeFlags myNodeFlags = new NodeFlags();
-    private readonly NodeFlag IS_LOOP;
+    private readonly IGraphDataHoler<bool, TNode> myIsLoop;
 
     private readonly ICellCoordinateSystem<TCell> myCoordinateSystem;
     private int myNodesCount;
@@ -28,7 +28,7 @@ namespace DSIS.Graph.Abstract
       myNodesCount = 0;
       myEdgesCount = 0;
       myNodes = new GraphNodeHashList<TNode, TCell>(Primes.Nearest(65536));
-      IS_LOOP = myNodeFlags.CreateFlag("IS_LOOP");
+      myIsLoop = CreateNodeFlagsHolder("IS_LOOP");
     }
 
     public void AddEdgeToNode(INode<TCell> fromNode, INode<TCell> toNode)
@@ -41,13 +41,18 @@ namespace DSIS.Graph.Abstract
         myEdgesCount++;
         
         if (ReferenceEquals(from, to)) 
-          from.SetFlag(IS_LOOP, true);
+          myIsLoop.SetData(from, true);
 
         myExt.EdgeAdded(from, to);
       }
     }
 
-    public INode<TCell> AddNode(TCell coordinate)
+    INode<TCell> IGraph<TCell>.AddNode(TCell coordinate)
+    {
+      return AddNode(coordinate);
+    }
+
+    public TNode AddNode(TCell coordinate)
     {
       bool wasAdded;
       var node = myNodes.AddIfNotReplace(coordinate, myExt, out wasAdded);
@@ -72,8 +77,13 @@ namespace DSIS.Graph.Abstract
     }
 
     protected abstract TInh CreateGraph(ICellCoordinateSystem<TCell> system);
-    
-    public IGraph<TCell> Project(ICellCoordinateSystemProjector<TCell> projector)
+
+    IGraph<TCell> IGraph<TCell>.Project(ICellCoordinateSystemProjector<TCell> projector)
+    {
+      return Project(projector);
+    }
+
+    public IGraph<TCell, TNode> Project(ICellCoordinateSystemProjector<TCell> projector)
     {
       return this.Project(projector, CreateGraph);
     }
@@ -86,12 +96,12 @@ namespace DSIS.Graph.Abstract
     public bool IsSelfLoop(TCell node)
     {
       var find = myNodes.Find(node);
-      return find != null && find.FlagValues.GetFlag(IS_LOOP);
+      return find != null && IsSelfLoop(find);
     }
 
     public bool IsSelfLoop(TNode node)
     {
-      return node.FlagValues.GetFlag(IS_LOOP);
+      return myIsLoop.GetData(node);
     }
 
     public ICellCoordinateSystem<TCell> CoordinateSystem
@@ -149,11 +159,6 @@ namespace DSIS.Graph.Abstract
       get { return myEdgesCount; }
     }
 
-    public NodeFlags NodeFlags
-    {
-      get { return myNodeFlags; }
-    }
-
     public IEnumerable<INode<TCell>> GetEdges(INode<TCell> forNode)
     {
       return ((TNode) forNode).Edges;
@@ -195,6 +200,17 @@ namespace DSIS.Graph.Abstract
       return holder;
     }
 
+    public IGraphDataHoler<bool, TNode> CreateNodeFlagsHolder(string key)
+    {
+      var flag = myNodeFlags.CreateFlag(key);
+      var holder = new FlagsNodeHolder<TInh, TNode, TCell>(this, myNodeFlags, flag);
+      if (flag.IsReusing)
+      {
+        holder.CleanAll();
+      }
+      return holder;
+    }
+
     public void DisposeDataHolder<TData>(IGraphDataHoler<TData, TNode> holder)
     {
       if (!Equals(myGraphDataHolder, holder))
@@ -207,11 +223,6 @@ namespace DSIS.Graph.Abstract
     IGraphDataHoler<TData, INode<TCell>> IGraph<TCell>.CreateDataHolder<TData>(Converter<INode<TCell>, TData> def)
     {
       return new GraphDataHolderProxy<TData, TCell, TNode>(CreateDataHolder(x=>def(x)));
-    }
-    
-    void IGraph<TCell>.DisposeDataHolder<TData>(IGraphDataHoler<TData, INode<TCell>> holder)
-    {
-      DisposeDataHolder(((GraphDataHolderProxy<TData, TCell, TNode>)holder).Holder);
     }
   }
 }

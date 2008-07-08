@@ -9,9 +9,10 @@ namespace DSIS.Graph.Abstract
     private const uint VALUE_MASK = 0x00FFFFFF;
     private const uint LAST_FLAG = 0xFF000000;
     
-    internal static readonly NodeFlag _MASK = new NodeFlag(VALUE_MASK, "Fake _MASK", null);
+    internal static readonly NodeFlag _MASK = new NodeFlag(VALUE_MASK, "Fake _MASK", null, false);
 
     private readonly Dictionary<uint, string> myFlags = new Dictionary<uint, string>();
+    private readonly HashSet<uint> myUsedFlags = new HashSet<uint>();
 
     public NodeFlags()
     {
@@ -28,12 +29,16 @@ namespace DSIS.Graph.Abstract
 
     public NodeFlag CreateFlag(string name)
     {
-      foreach (var flag in new List<KeyValuePair<uint, string>>(myFlags))
+      var list = new List<KeyValuePair<uint, string>>(myFlags);
+      list.Sort((x,y)=>(myUsedFlags.Contains(x.Key) ? 0 : 1).CompareTo(myUsedFlags.Contains(y.Key) ? 0 : 1));
+      foreach (var flag in list)
       {
         if (flag.Value == null)
         {
           myFlags[flag.Key] = name;
-          return new NodeFlag(flag.Key, name, this);
+          var reuse = myUsedFlags.Contains(flag.Key);
+          myUsedFlags.Add(flag.Key);
+          return new NodeFlag(flag.Key, name, this, reuse);
         }
       }
       throw new ArgumentException("Failed to allocate more flags");

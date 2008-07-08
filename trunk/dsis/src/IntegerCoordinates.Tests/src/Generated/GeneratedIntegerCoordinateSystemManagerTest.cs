@@ -1,8 +1,6 @@
 using System.Reflection;
 using DSIS.CodeCompiler;
-using DSIS.Core.System.Impl;
 using DSIS.IntegerCoordinates.Generated;
-using DSIS.IntegerCoordinates.Tests;
 using DSIS.IntegerCoordinates.Tests.Generic;
 using DSIS.Utils.Test;
 using NUnit.Core;
@@ -34,7 +32,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
       for(int i = 1; i<10; i++)
       {
         IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i);
-        IIntegerCoordinateSystemInfo info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000L,i)), Fill(100000L, i));
+        IIntegerCoordinateSystem info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000L,i)), Fill(100000L, i));
 
         info.DoGeneric(new DoWithCoordunates_Identity());
       }

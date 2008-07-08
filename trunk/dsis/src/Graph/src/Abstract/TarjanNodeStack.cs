@@ -8,9 +8,9 @@ namespace DSIS.Graph.Abstract
     where TNode : Node<TNode, TCell>
   {
     private readonly Stack<TNode> myStack = new Stack<TNode>();
-    private readonly NodeFlag myMask;
+    private readonly IGraphDataHoler<bool, TNode> myMask;
 
-    public TarjanNodeStack(NodeFlag mask)
+    public TarjanNodeStack(IGraphDataHoler<bool,TNode> mask)
     {
       myMask = mask;
     }
@@ -18,13 +18,13 @@ namespace DSIS.Graph.Abstract
     public void Push(TNode node)
     {
       myStack.Push(node);
-      node.SetFlag(myMask, true);
+      myMask.SetData(node, true);
     }
 
     public TNode Pop()
     {
       var node = myStack.Pop();
-      node.SetFlag(myMask, false);
+      myMask.SetData(node, false);
       return node;
     }
 
@@ -40,7 +40,7 @@ namespace DSIS.Graph.Abstract
 
     public bool Contains(TNode node)
     {
-      return node.GetFlag(myMask);
+      return myMask.GetData(node);
     }
 
     public void Clear()

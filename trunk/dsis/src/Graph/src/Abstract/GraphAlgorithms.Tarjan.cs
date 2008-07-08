@@ -1,8 +1,6 @@
 using System;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
-using DSIS.Utils;
-using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph.Abstract
 {
@@ -35,9 +33,9 @@ namespace DSIS.Graph.Abstract
       info.Minimum = 0;
       info.Maximum = graph.EdgesCount;
 
-      using(var holder = graph.CreateDataHolder(x => new TarjanNodeData<TCell,TNode>(x)))
-      using(var stackFlag = graph.NodeFlags.CreateFlag("STACK"))
-      using(var routeFlag = graph.NodeFlags.CreateFlag("ROUTE"))
+      using (var holder = graph.CreateDataHolder(x => new TarjanNodeData<TCell,TNode>(x)))
+      using (var stackFlag = graph.CreateNodeFlagsHolder("STACK"))
+      using (var routeFlag = graph.CreateNodeFlagsHolder("ROUTE"))
       {
         var stack = new TarjanNodeStack<TCell, TNode>(stackFlag);
         var route = new TarjanNodeStack<TCell, TNode>(routeFlag);
@@ -156,12 +154,8 @@ namespace DSIS.Graph.Abstract
           state = 2;
         }
 
-        holder.CleanAll();        
         stack.Clear();
         route.Clear();
-
-        GCHelper.Collect();
-
         return new TarjanStrongComponentImpl<TCell, TNode>(graph, comps);
       }
     }

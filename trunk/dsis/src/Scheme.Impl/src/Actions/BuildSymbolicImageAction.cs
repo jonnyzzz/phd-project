@@ -49,7 +49,7 @@ namespace DSIS.Scheme.Impl.Actions
       proc.Execute(NullProgressInfo.INSTANCE);
 
       Keys.Graph<Q>().Set(output, graph);
-      Keys.IntegerCoordinateSystemInfo.Set(output, (IIntegerCoordinateSystemInfo)toSystem);
+      Keys.IntegerCoordinateSystemInfo.Set(output, (IIntegerCoordinateSystem)toSystem);
     }   
   }
 }

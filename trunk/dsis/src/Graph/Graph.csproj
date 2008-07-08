@@ -62,6 +62,7 @@
     <Compile Include="src\Abstract\ComponentsFilter.cs" />
     <Compile Include="src\Abstract\DataHolder.cs" />
     <Compile Include="src\Abstract\EmptyNodeSetState.cs" />
+    <Compile Include="src\Abstract\FlagsNodeHolder.cs" />
     <Compile Include="src\Abstract\GraphAlgorithms.cs" />
     <Compile Include="src\Abstract\GraphAlgorithms.Tarjan.cs" />
     <Compile Include="src\Abstract\GraphDataHolder.cs" />
@@ -95,6 +96,8 @@
     <Compile Include="src\Adapter\GraphCellImageBuilder.cs" />
     <Compile Include="src\CachedGraphStrongComponents.cs" />
     <Compile Include="src\GraphCellCoordinateProjector.cs" />
+    <Compile Include="src\IGraphDataHoler.cs" />
+    <Compile Include="src\IGraphWith.cs" />
     <Compile Include="src\NodeEqualityComparer.cs" />
     <Compile Include="src\INode.cs" />
     <Compile Include="src\IStrongComponentInfo.cs" />

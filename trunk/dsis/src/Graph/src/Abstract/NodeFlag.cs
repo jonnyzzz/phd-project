@@ -3,17 +3,20 @@ using System;
 namespace DSIS.Graph.Abstract
 {
   public class NodeFlag : IDisposable   
-  { 
-    internal readonly uint Flag;
+  {
+    public readonly uint Flag;
     private readonly string myName;
     private readonly NodeFlags myHolder;
 
-    internal NodeFlag(uint flag, string name, NodeFlags holder)
+    internal NodeFlag(uint flag, string name, NodeFlags holder, bool reuse)
     {
       Flag = flag;
       myHolder = holder;
       myName = name;
+      IsReusing = reuse;
     }
+
+    public bool IsReusing { get; private set; }
 
     public string Name
     {

@@ -6,11 +6,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
-using DSIS.Utils;
 
 namespace DSIS.Graph
 {
@@ -19,39 +16,12 @@ namespace DSIS.Graph
     int NodesCount { get; }
     int EdgesCount { get; }
 
-    NodeFlags NodeFlags { get; }
-
     void Dump(TextWriter tw);
     string Dump();
 
     void DoGeneric(IGraphWith with);    
   }
-  
-  public interface IGraphWith
-  {
-    void With<TCell, TNode>(IGraph<TCell, TNode> graph)
-      where TCell : ICellCoordinate
-      where TNode : Node<TNode, TCell>;
-  }
-  
-  public interface IGraphWith<TCell> 
-    where TCell : ICellCoordinate
-  {
-    void With<TNode>(IGraph<TCell, TNode> graph)
-      where TNode : Node<TNode, TCell>;
-  }
 
-
-  public interface IGraphDataHoler<TData,TNode> : IDisposable
-  {
-    TData GetData(TNode node);
-
-    void SetData(TNode node, TData data);
-    bool HasData(TNode node);
-
-    void CleanAll();
-  }
-  
   public interface IGraph<TCoordinate> : IGraph where TCoordinate : ICellCoordinate
   {
     ICellCoordinateSystem<TCoordinate> CoordinateSystem { get; }
@@ -75,14 +45,14 @@ namespace DSIS.Graph
     INode<TCoordinate> AddNode(TCoordinate coordinate);
 
     bool Contains(TCoordinate coordinate);
-
+    
     IGraph<TCoordinate> Project(ICellCoordinateSystemProjector<TCoordinate> projector);
     
     bool IsSelfLoop(TCoordinate node);
 
+    [Obsolete("Use DoGeneric to get IGraph<TNode, TCell>")]
     IGraphDataHoler<TData, INode<TCoordinate>> CreateDataHolder<TData>(Converter<INode<TCoordinate>, TData> def);
-    void DisposeDataHolder<TData>(IGraphDataHoler<TData, INode<TCoordinate>> holder);
-
+    
     void DoGeneric(IGraphWith<TCoordinate> with);    
   }
 
@@ -93,8 +63,13 @@ namespace DSIS.Graph
     IEnumerable<TNode> NodesInternal { get; }
     IEnumerable<TNode> GetEdgesInternal(INode<TCell> forNode);
 
+    new TNode AddNode(TCell coordinate);
+
+    new IGraph<TCell, TNode> Project(ICellCoordinateSystemProjector<TCell> projector);
+
     IGraphDataHoler<TData, TNode> CreateDataHolder<TData>(Converter<TNode,TData> def);
-    void DisposeDataHolder<TData>(IGraphDataHoler<TData, TNode> holder);
+
+    IGraphDataHoler<bool, TNode> CreateNodeFlagsHolder(string key);
 
     bool Contains(TNode coordinate);
 

@@ -36,7 +36,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
     {
       Assembly ass =
         CodeCompiler.CodeCompiler.CreateCompiler().CompileCSharpCode(DoGenerateCode(dim), typeof (IGraphBuilder),
-                                                                     typeof (IIntegerCoordinateSystemInfo));
+                                                                     typeof (IIntegerCoordinateSystem));
       return (IGraphBuilder) Activator.CreateInstance(ass.GetType("GenerateCodeImpl" + dim));
     }
 
@@ -50,14 +50,14 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
                 public class GenerateCodeImpl{3} : IGraphBuilder {{
                    public int Dimension {{ get {{ return {3}; }} }}
 
-                   public IGraphBuilderProcessor Init(IIntegerCoordinateSystemInfo info) {{
+                   public IGraphBuilderProcessor Init(IIntegerCoordinateSystem info) {{
                        return new Processor(info);
                    }}                   
 
                    private class Processor : IGraphBuilderProcessor {{
                        {2}
 
-                       public Processor(IIntegerCoordinateSystemInfo info) {{
+                       public Processor(IIntegerCoordinateSystem info) {{
                           {4}
                        }}
 
@@ -68,7 +68,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
                 }}
 ",
           typeof (IGraphBuilder).Namespace,
-          typeof (IIntegerCoordinateSystemInfo).Namespace,
+          typeof (IIntegerCoordinateSystem).Namespace,
           BuildPrivateFields(dim),
           dim,
           BuildProcessorConstructor(dim),

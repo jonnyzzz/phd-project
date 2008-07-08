@@ -15,8 +15,8 @@ namespace DSIS.Scheme.Impl
     public static readonly Key<ISystemSpace> SystemSpaceKey = new Key<ISystemSpace>("SystemSpace");
     public static readonly Key<long[]> SubdivisionKey = new Key<long[]>("Subdivision");
 
-    public static readonly Key<IIntegerCoordinateSystemInfo> IntegerCoordinateSystemInfo =
-      new Key<IIntegerCoordinateSystemInfo>("Info");
+    public static readonly Key<IIntegerCoordinateSystem> IntegerCoordinateSystemInfo =
+      new Key<IIntegerCoordinateSystem>("Info");
 
     public static readonly Key<ISystemInfo> SystemInfoKey = new Key<ISystemInfo>("Function");
 

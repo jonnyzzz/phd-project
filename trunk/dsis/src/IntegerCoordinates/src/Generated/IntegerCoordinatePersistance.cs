@@ -6,7 +6,7 @@ using DSIS.Spring.Attributes;
 namespace DSIS.IntegerCoordinates.Generated
 {
   [SpringBean]
-  public class IntegerCoordinatePersistance : IPersistance<IIntegerCoordinateSystemInfo>
+  public class IntegerCoordinatePersistance : IPersistance<IIntegerCoordinateSystem>
   {
     private readonly IPersistance<ISystemSpace> mySpacePersistance;
     private readonly GeneratedIntegerCoordinateSystemManager myManager;
@@ -22,7 +22,7 @@ namespace DSIS.IntegerCoordinates.Generated
       return "INTEGER_COORDINATE_GENERATED";
     }
 
-    public IIntegerCoordinateSystemInfo Load(IBinaryReader reader)
+    public IIntegerCoordinateSystem Load(IBinaryReader reader)
     {
       if (SerializeKey() != reader.ReadString())
         throw new ArgumentException("Failed to load. String token was not found");
@@ -35,7 +35,7 @@ namespace DSIS.IntegerCoordinates.Generated
       return factory.Create(space, space.InitialSubdivision);
     }
 
-    public void Save(IIntegerCoordinateSystemInfo info, IBinaryWriter writer)
+    public void Save(IIntegerCoordinateSystem info, IBinaryWriter writer)
     {
       writer.WriteString(SerializeKey());
 

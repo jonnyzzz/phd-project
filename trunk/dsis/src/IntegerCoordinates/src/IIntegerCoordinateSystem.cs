@@ -8,7 +8,7 @@ namespace DSIS.IntegerCoordinates
       where Q : IIntegerCoordinate;
   }
 
-  public interface IIntegerCoordinateSystemInfo : ICellCoordinateSystem
+  public interface IIntegerCoordinateSystem : ICellCoordinateSystem
   {
     double[] CellSize { get; }
     double[] CellSizeHalf { get; }
@@ -18,7 +18,7 @@ namespace DSIS.IntegerCoordinates
 
   public interface IIntegerCoordinateSystem<T> 
     : ICellCoordinateSystem<T>
-    , IIntegerCoordinateSystemInfo 
+    , IIntegerCoordinateSystem 
     where T : IIntegerCoordinate
   {
     /// <summary>

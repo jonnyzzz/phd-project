@@ -17,7 +17,7 @@ namespace DSIS.Scheme.Impl.Actions
     {
       ISystemSpace info = ctx.Get(Keys.SystemSpaceKey);
       IIntegerCoordinateFactoryEx factoryEx = GeneratedIntegerCoordinateSystemManager.Instance.CreateSystem(info.Dimension);
-      IIntegerCoordinateSystemInfo sys = factoryEx.Create(info, info.InitialSubdivision);
+      IIntegerCoordinateSystem sys = factoryEx.Create(info, info.InitialSubdivision);
 
       result.Set(Keys.IntegerCoordinateSystemInfo, sys);
     }

@@ -10,7 +10,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       get { return 1; }
     }
 
-    public IGraphBuilderProcessor Init(IIntegerCoordinateSystemInfo info)
+    public IGraphBuilderProcessor Init(IIntegerCoordinateSystem info)
     {
       return new Processor(info.CellSize[0]);
     }

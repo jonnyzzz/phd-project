@@ -16,7 +16,7 @@ namespace DSIS.IntegerCoordinates.Generated
 
     public void Save(ICellCoordinateSystem t, IBinaryWriter wr)
     {
-      myPersistance.Save((IIntegerCoordinateSystemInfo) t, wr);
+      myPersistance.Save((IIntegerCoordinateSystem) t, wr);
     }
 
     public ICellCoordinateSystem Load(IBinaryReader reader)

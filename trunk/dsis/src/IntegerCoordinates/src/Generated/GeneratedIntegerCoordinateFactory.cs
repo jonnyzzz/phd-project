@@ -14,7 +14,7 @@ namespace DSIS.IntegerCoordinates.Generated
       myManager = manager;
     }
 
-    public IIntegerCoordinateSystemInfo Create(ISystemSpace space, long[] subd)
+    public IIntegerCoordinateSystem Create(ISystemSpace space, long[] subd)
     {
       if (subd.Length != space.Dimension)
         throw new ArgumentException("Dimensions of arguments shoulb be the same");

@@ -22,7 +22,7 @@ namespace DSIS.Scheme.Impl
 
     protected sealed override void Apply(Context ctx, Context result)
     {
-      IIntegerCoordinateSystemInfo info = ctx.Get(Keys.IntegerCoordinateSystemInfo);
+      IIntegerCoordinateSystem info = ctx.Get(Keys.IntegerCoordinateSystemInfo);
       Keys.IntegerCoordinateSystemInfo.Set(result, info);
       info.DoGeneric(Create(ctx, result));      
     }
