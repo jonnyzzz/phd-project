@@ -5,7 +5,6 @@ using System.Text;
 using System.Xml;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
-using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates;
 

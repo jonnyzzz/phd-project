@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Graph.Abstract
 {
@@ -11,14 +12,15 @@ namespace DSIS.Graph.Abstract
 
     public static IFilter CreateFilter(IEnumerable<IStrongComponentInfo> componentIds, int allComponents)
     {
-      var count = componentIds.Count();
+      var infos = new HashSet<TarjanComponentInfo>(componentIds.Cast<TarjanComponentInfo>());
+      var count = infos.Count;
       if (count == 0)
       {
         return DROP;
       }
       if (count == 1)
       {
-        return new ExactFilter(((TarjanComponentInfo)componentIds.GetFirst()).ComponentId);
+        return new ExactFilter(infos.GetFirst().ComponentId);
       }
       if (count == allComponents)
       {
@@ -27,7 +29,7 @@ namespace DSIS.Graph.Abstract
       if (count > 10)
       {
         var ids = new Hashset<uint>();
-        foreach (TarjanComponentInfo id in componentIds)
+        foreach (TarjanComponentInfo id in infos)
         {
           ids.Add(id.ComponentId);
         }
@@ -35,7 +37,7 @@ namespace DSIS.Graph.Abstract
       }
       var data = new uint[count];
       int cnt = 0;
-      foreach (TarjanComponentInfo id in componentIds)
+      foreach (TarjanComponentInfo id in infos)
       {
         data[cnt++] = id.ComponentId;
       }

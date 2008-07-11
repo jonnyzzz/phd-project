@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
+using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
@@ -29,22 +30,15 @@ namespace DSIS.Graph.Abstract
 
     public CountEnumerable<TCell> GetCoordinates(ICollection<IStrongComponentInfo> components)
     {
-      int cnt = 0;
-      foreach (IStrongComponentInfo info in components)
-      {
-        cnt += info.NodesCount;
-      }
+      var set = new HashSet<IStrongComponentInfo>(components);
+      int cnt = set.FoldLeft(0, (x, y) => x.NodesCount + y);
       return new CountEnumerable<TCell>(GetCoordinatesImpl(components), cnt);
     }
 
     public IEnumerable<INode<TCell>> GetEdgesWithFilteredEdges(INode<TCell> node, IEnumerable<IStrongComponentInfo> componentIds)
     {
-      var ids = ComponentsFilter.CreateFilter(componentIds, ComponentCount);      
-      foreach (TNode edge in myGraph.GetEdges(node))
-      {
-        if (ids.Accept(edge.ComponentId))
-          yield return edge;
-      }
+      var ids = ComponentsFilter.CreateFilter(componentIds, ComponentCount);
+      return ids.FilterUpper(myGraph.GetEdges(node));
     }
 
     public IStrongComponentInfo GetNodeComponent(INode<TCell> node)
@@ -60,15 +54,15 @@ namespace DSIS.Graph.Abstract
 
       foreach (var node in myGraph.NodesInternal)
       {
-        if (filter.Accept(node.ComponentId))
+        if (!filter.Accept(node.ComponentId)) 
+          continue;
+        
+        INode<TCell> newFrom = graph.AddNode(node.Coordinate);
+        foreach (var tarjanNode in node.EdgesInternal)
         {
-          INode<TCell> newFrom = graph.AddNode(node.Coordinate);
-          foreach (var tarjanNode in node.EdgesInternal)
+          if (filter.Accept(tarjanNode.ComponentId))
           {
-            if (filter.Accept(tarjanNode.ComponentId))
-            {
-              graph.AddEdgeToNode(newFrom, graph.AddNode(tarjanNode.Coordinate));
-            }
+            graph.AddEdgeToNode(newFrom, graph.AddNode(tarjanNode.Coordinate));
           }
         }
       }
@@ -83,20 +77,12 @@ namespace DSIS.Graph.Abstract
     public IEnumerable<INode<TCell>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
     {
       var ids = ComponentsFilter.CreateFilter(componentIds, ComponentCount);
-
-      foreach (var node in myGraph.NodesInternal)
-      {
-        if (ids.Accept(node.ComponentId))
-          yield return node;
-      }
+      return ids.FilterUpper(myGraph.Nodes);
     }
 
     private IEnumerable<TCell> GetCoordinatesImpl(IEnumerable<IStrongComponentInfo> components)
     {
-      foreach (INode<TCell> node in GetNodes(components))
-      {
-        yield return node.Coordinate;
-      }
+      return GetNodes(components).Map(x => x.Coordinate);
     }
   }
 }

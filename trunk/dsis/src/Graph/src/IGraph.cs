@@ -44,6 +44,8 @@ namespace DSIS.Graph
     /// <returns></returns>
     INode<TCoordinate> AddNode(TCoordinate coordinate);
 
+    INode<TCoordinate> Find(TCoordinate node);
+
     bool Contains(TCoordinate coordinate);
     
     IGraph<TCoordinate> Project(ICellCoordinateSystemProjector<TCoordinate> projector);

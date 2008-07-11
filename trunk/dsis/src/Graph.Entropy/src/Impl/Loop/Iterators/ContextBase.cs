@@ -1,5 +1,4 @@
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {

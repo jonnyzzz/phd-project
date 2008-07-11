@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using DSIS.Core.Visualization;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph;
-using DSIS.Graph.Abstract;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Files

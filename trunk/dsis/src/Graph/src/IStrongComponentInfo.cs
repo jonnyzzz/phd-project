@@ -1,4 +1,4 @@
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph
 {
   public interface IStrongComponentInfo
   {

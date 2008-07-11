@@ -93,6 +93,11 @@ namespace DSIS.Graph.Abstract
       with.With(this);
     }
 
+    public INode<TCell> Find(TCell node)
+    {
+      return myNodes.Find(node);
+    }
+
     public bool IsSelfLoop(TCell node)
     {
       var find = myNodes.Find(node);

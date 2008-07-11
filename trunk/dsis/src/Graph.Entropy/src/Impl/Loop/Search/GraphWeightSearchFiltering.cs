@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Abstract;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Search

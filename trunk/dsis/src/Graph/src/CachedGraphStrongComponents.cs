@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Utils;
 
 namespace DSIS.Graph
 {
@@ -9,7 +11,7 @@ namespace DSIS.Graph
     where T : ICellCoordinate
   {
     private readonly IGraphStrongComponents<T> myOriginal;
-    private readonly Dictionary<IStrongComponentInfo, IGraph<T>> myCache = new Dictionary<IStrongComponentInfo, IGraph<T>>();
+    private readonly Dictionary<IStrongComponentInfo, IGraph<T>> myCache = new Dictionary<IStrongComponentInfo, IGraph<T>>(EqualityComparerFactory<IStrongComponentInfo>.GetComparer());
 
     public CachedGraphStrongComponents(IGraphStrongComponents<T> original)
     {
@@ -34,39 +36,34 @@ namespace DSIS.Graph
 
     public IEnumerable<INode<T>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
     {
-      foreach (var id in componentIds)
-      {
-        foreach (var node in Cache(id).Nodes)
-        {
-          yield return node;
-        }
-      }
+      var set = new HashSet<IStrongComponentInfo>(componentIds);
+      return set.Maps(x => Cache(x).Nodes);
     }
 
     public IEnumerable<INode<T>> GetEdgesWithFilteredEdges(INode<T> node, IEnumerable<IStrongComponentInfo> componentIds)
     {
-      var filter = ComponentsFilter.CreateFilter(componentIds, ComponentCount);
+      //todo: Take into account edges between components!
 
-      return filter.FilterUpper(((INodeInternal<T>) node).Edges);      
+      var set = new HashSet<IStrongComponentInfo>(componentIds);
+      var filter = ComponentsFilter.CreateFilter(set, ComponentCount);
+      //todo: Check cached graphs first
+      foreach (var info in set)
+      {
+        var g = Cache(info);
+        var n = g.Find(node.Coordinate);
+        if (n != null)
+          //only one strong component may contain node
+          return filter.FilterUpper(g.GetEdges(n));
+      }
+      return EmptyArray<INode<T>>.Instance;
     }
 
     public CountEnumerable<T> GetCoordinates(ICollection<IStrongComponentInfo> componentIds)
     {
-      int N = 0;
-      foreach (IStrongComponentInfo id in componentIds)
-      {
-        N += id.NodesCount;
-      }
-
-      return new CountEnumerable<T>(CoordinatesImpl(componentIds), N);
-    }
-
-    private IEnumerable<T> CoordinatesImpl(IEnumerable<IStrongComponentInfo> componentIds)
-    {
-      foreach (INode<T> node in GetNodes(componentIds))
-      {
-        yield return node.Coordinate;
-      }
+      var nodes = GetNodes(componentIds).Map(x => x.Coordinate);
+      var count = new HashSet<IStrongComponentInfo>(componentIds).FoldLeft(0, (x,y)=>x.NodesCount+y);
+      
+      return new CountEnumerable<T>(nodes, count);
     }
 
     public IStrongComponentInfo GetNodeComponent(INode<T> node)
@@ -75,10 +72,13 @@ namespace DSIS.Graph
     }
 
     public IGraph<T> AsGraph(IEnumerable<IStrongComponentInfo> components)
-    {      
-      return myOriginal.AsGraph(components);
-    }
+    {
+      var set = new HashSet<IStrongComponentInfo>(components);
+      if (set.Count != 1)
+        throw new NotImplementedException("Cached components does not support extracting more than one component");
 
+      return Cache(set.GetFirst());
+    }
 
     public IEnumerable<IStrongComponentInfo> Components
     {
