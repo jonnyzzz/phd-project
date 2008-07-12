@@ -1,0 +1,20 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  
+  <Target Name="Build">
+    <Delete Files="bin\**\*" />
+    <MSBuiild Projects="src\DSIS.sln" />
+
+    <ItemGroup>
+      <Tests Include="bin\DSIS*Test*dll" 
+             Exclude="**\*Generated*"
+      />
+    </ItemGroup>
+
+    <Message Text="Test assembly: %(Tests.FileName)%(Tests.Extension)" />
+
+    <NUnit Assembiles="%(Tests)" NUnitVersion="NUnit-2.4.7" />
+
+    <Message Text="##teamcity[text='Done. {build.status.text}']" />      
+  </Target>
+
+</Project>

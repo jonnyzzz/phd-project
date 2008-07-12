@@ -98,10 +98,9 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
         var pFrom = projector.Project(pair.Key.From);
         var pTo = projector.Project(pair.Key.To);
 
-        if (toSystem.IsNull(pFrom))
-          continue;
-
         if (toSystem.IsNull(pTo))
+          continue;
+        if (toSystem.IsNull(pFrom))
           continue;
 
         Add(ret, new NodePair<T>(pFrom, pTo), pair.Value);

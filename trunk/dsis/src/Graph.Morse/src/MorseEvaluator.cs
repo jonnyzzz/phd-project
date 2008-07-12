@@ -13,7 +13,6 @@ namespace DSIS.Graph.Morse
     private readonly Dictionary<INode<T>, ContourNode<T>> myNodes;
     private double myFactor;
 
-
     public MorseEvaluator(IGraphStrongComponents<T> components, IStrongComponentInfo comp)
     {
       myComponentInfos = new IStrongComponentInfo[] {comp};
@@ -72,7 +71,7 @@ namespace DSIS.Graph.Morse
     {
       ResetType();
 
-      List<ContourNode<T>> m = new List<ContourNode<T>>();
+      var m = new List<ContourNode<T>>();
       double z = ContourCost(rnode);
 
       rnode.Value = 0;
@@ -253,7 +252,7 @@ namespace DSIS.Graph.Morse
       extrema = DoCompute(extrema);
       double answerValue = ContourCost(extrema);
 
-      List<INode<T>> list = new List<INode<T>>();      
+      var list = new List<INode<T>>();      
       ToList(extrema, list);
       return new ComputationResult<T>(myFactor * answerValue, list.AsReadOnly());
     }
