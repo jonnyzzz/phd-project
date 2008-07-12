@@ -49,10 +49,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -132,10 +128,6 @@
     <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />
     <Compile Include="src\Keys.cs" />
     <Compile Include="src\Actions\MergeComponetsAction.cs" />
-    <Compile Include="testSrc\SimbolicImageBuildTest.cs" />
-    <Compile Include="testSrc\SimbolicImageBuildTestBase.cs" />
-    <Compile Include="testSrc\SimbolicImageBuildTestBase2.cs" />
-    <Compile Include="testSrc\SimpleComputationResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.System\Core.System.csproj">
