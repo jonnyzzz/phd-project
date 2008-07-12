@@ -1,0 +1,126 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.Scheme</RootNamespace>
+    <AssemblyName>DSIS.Scheme</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nunit\bin\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ActionBase.cs" />
+    <Compile Include="src\Actions\AgregateAction.cs" />
+    <Compile Include="src\Actions\BranchAction.cs" />
+    <Compile Include="src\Actions\ChainAction.cs" />
+    <Compile Include="src\Actions\DebugableAction.cs" />
+    <Compile Include="src\Actions\FilterAction.cs" />
+    <Compile Include="src\Actions\FilterProxyAction.cs" />
+    <Compile Include="src\Actions\ILoopAction.cs" />
+    <Compile Include="src\Actions\LoopAction.cs" />
+    <Compile Include="src\Actions\LoopIndex.cs" />
+    <Compile Include="src\Actions\LoopIndexIncrementAction.cs" />
+    <Compile Include="src\Actions\ParallelAction.cs" />
+    <Compile Include="src\Actions\ProxiedChainAction.cs" />
+    <Compile Include="src\Actions\ProxyAction.cs" />
+    <Compile Include="src\Actions\ReplaceContextAction.cs" />
+    <Compile Include="src\Actions\SelectiveCopyAction.cs" />
+    <Compile Include="src\Ctx\SlotStore.cs" />
+    <Compile Include="src\Exec\ActionBuilder2Adaptor.cs" />
+    <Compile Include="src\Exec\ActionEdgesBuilderAdapter.cs" />
+    <Compile Include="src\Exec\ContextMissmatchException.cs" />
+    <Compile Include="src\Exec\IActionEdgesBuilder.cs" />
+    <Compile Include="src\Exec\IActionGraphBuilder2.cs" />
+    <Compile Include="src\Exec\IActionGraphPartBuilder.cs" />
+    <Compile Include="src\Actions\MergeInputAndOutputAction.cs" />
+    <Compile Include="src\Actions\StartAction.cs" />
+    <Compile Include="src\Actions\UpdateContextAction.cs" />
+    <Compile Include="src\Ctx\Context.cs" />
+    <Compile Include="src\ContextMissmatch.cs" />
+    <Compile Include="src\Ctx\KeyWrapper.cs" />
+    <Compile Include="src\Exec\ActionGraphException.cs" />
+    <Compile Include="src\Exec\ActionWrapper.cs" />
+    <Compile Include="src\Exec\Executor.cs" />
+    <Compile Include="src\Exec\IActionGraphBuilder.cs" />
+    <Compile Include="src\Exec\IActionMatch.cs" />
+    <Compile Include="src\Exec\SimpleActionMatch.cs" />
+    <Compile Include="src\Exec\XmlActionGraphParser.cs" />
+    <Compile Include="src\IAction.cs" />
+    <Compile Include="src\Key.cs" />
+    <Compile Include="src\TransparentAction.cs" />
+    <Compile Include="testSrc\ActionExecutorTest.cs" />
+    <Compile Include="testSrc\ActionTestBase.cs" />
+    <Compile Include="testSrc\ActionsTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  -->
+  <!--  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
