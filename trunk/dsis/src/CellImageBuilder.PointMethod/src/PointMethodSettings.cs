@@ -1,4 +1,3 @@
-using DSIS.CellImageBuilder.PointMethod;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates;
