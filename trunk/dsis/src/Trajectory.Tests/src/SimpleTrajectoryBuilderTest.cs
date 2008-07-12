@@ -15,10 +15,10 @@ namespace DSIS.Trajectory.Tests
     public void Test_01()
     {
       //x -> 0.5x
-      MockSystemSpace space = new MockSystemSpace(1,0,1,1000);
-      Linear1DSystemInfo linear = new Linear1DSystemInfo(0.5, 0);
+      var space = new MockSystemSpace(1,0,1,1000);
+      var linear = new Linear1DSystemInfo(0.5, 0);
    
-      SimpleTrajectoryBuilder bld = new SimpleTrajectoryBuilder(space, linear, 10000);
+      var bld = new SimpleTrajectoryBuilder(space, linear, 10000);
 
       double v = 1;
       bld.Point = new double[] {v};
@@ -41,9 +41,7 @@ namespace DSIS.Trajectory.Tests
       {
         for (double dy = -2; dy < 2; dy += 0.01)
         {
-          SimpleTrajectoryBuilder bld = new SimpleTrajectoryBuilder(mySystemSpace, mySystemInfo, 1 << 40);
-
-          bld.Point = new double[] { dx, dy };
+          var bld = new SimpleTrajectoryBuilder(mySystemSpace, mySystemInfo, 1 << 40) {Point = new[] {dx, dy}};
 
           bool success = false;
           for (int i = 0; i < 1000; i++)

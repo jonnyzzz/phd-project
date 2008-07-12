@@ -94,9 +94,21 @@
     <Compile Include="src\StrangeEntropyBlackboxTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.System.Tests\Core.System.Tests.csproj">
+      <Project>{66A2C35A-E042-4F0C-B8E7-D61401133359}</Project>
+      <Name>Core.System.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntegerCoordinates.Tests\IntegerCoordinates.Tests.csproj">
+      <Project>{FE0FA82B-A965-4AA8-958B-150ED7200F12}</Project>
+      <Name>IntegerCoordinates.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scheme.Impl.Tests\Scheme.Impl.Tests.csproj">
+      <Project>{02C16579-3016-49FF-9037-1341A378A411}</Project>
+      <Name>Scheme.Impl.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>

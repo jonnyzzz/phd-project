@@ -8,7 +8,7 @@ using log4net;
 namespace DSIS.CodeCompiler
 {
   //todo: Cleanup generated assemblies/sources
-  internal class CodeCompilerImpl : ICodeCompiler, IDisposable
+  public class CodeCompilerImpl : ICodeCompiler, IDisposable
   {
     private static readonly ILog LOG = LogManager.GetLogger(typeof (CodeCompilerImpl));
 

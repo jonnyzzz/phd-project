@@ -15,10 +15,10 @@ namespace DSIS.CodeCompiler
     [Test]
     public void Test_01()
     {
-      CodeCompilerImpl compiter = new CodeCompilerImpl();
+      var compiter = new CodeCompilerImpl();
       Assembly assembly = compiter.CompileCSharpCode(@"public class Claszz : DSIS.CodeCompiler.ITest01 { public void Foo() { } }", typeof(ITest01));
 
-      ITest01 o = (ITest01) Activator.CreateInstance(assembly.GetType("Claszz"));
+      var o = (ITest01) Activator.CreateInstance(assembly.GetType("Claszz"));
       o.Foo();      
     }
   }

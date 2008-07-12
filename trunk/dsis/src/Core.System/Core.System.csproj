@@ -73,7 +73,6 @@
     <Compile Include="src\UnsupportedDevivateException.cs" />
     <Compile Include="src\UnsupportedFunctionTypeException.cs" />
     <Compile Include="src\WrongDimensionException.cs" />
-    <Compile Include="testSrc\MockSystemSpace.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Persistance\Persistance.csproj">

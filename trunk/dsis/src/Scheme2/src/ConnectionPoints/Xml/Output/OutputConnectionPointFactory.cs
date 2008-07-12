@@ -13,7 +13,7 @@ namespace DSIS.Scheme2.ConnectionPoints.Xml.Output
     {
       return
         ForEach<IOutputConnectionPoint>(
-          delegate(IOutputConnectionPointExtension instance) { return instance.Create(ctx, arc); });
+          instance => instance.Create(ctx, arc));
     }
   }
 }

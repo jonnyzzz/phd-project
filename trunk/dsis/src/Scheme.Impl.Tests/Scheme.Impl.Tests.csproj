@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}</ProjectGuid>
+    <ProjectGuid>{02C16579-3016-49FF-9037-1341A378A411}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DSIS.Scheme.Impl.Tests</RootNamespace>
@@ -72,6 +72,10 @@
     <ProjectReference Include="..\Persistance\Persistance.csproj">
       <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
       <Name>Persistance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scheme.Impl\Scheme.Impl.csproj">
+      <Project>{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}</Project>
+      <Name>Scheme.Impl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>

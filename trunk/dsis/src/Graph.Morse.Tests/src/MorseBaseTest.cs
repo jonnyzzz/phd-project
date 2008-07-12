@@ -32,13 +32,13 @@ namespace DSIS.Graph.Morse.Tests
 
     protected void DoTest(double value, BuildGraph bg)
     {
-      MockSystemSpace mss = new MockSystemSpace(1, 0, 1, 1000);
+      var mss = new MockSystemSpace(1, 0, 1, 1000);
       IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(mss);
-      TarjanGraph<IntegerCoordinate> graph = new TarjanGraph<IntegerCoordinate>(ics);
-      Dictionary<INode<IntegerCoordinate>, double> costs =
+      var graph = new TarjanGraph<IntegerCoordinate>(ics);
+      var costs =
         new Dictionary<INode<IntegerCoordinate>, double>(EqualityComparerFactory<INode<IntegerCoordinate>>.GetComparer());
 
-      CostContext ctx = new CostContext(graph, costs);
+      var ctx = new CostContext(graph, costs);
 
       bg(ctx);
 

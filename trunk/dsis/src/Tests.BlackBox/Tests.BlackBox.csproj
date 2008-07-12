@@ -71,6 +71,10 @@
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Scheme.Impl.Tests\Scheme.Impl.Tests.csproj">
+      <Project>{02C16579-3016-49FF-9037-1341A378A411}</Project>
+      <Name>Scheme.Impl.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>

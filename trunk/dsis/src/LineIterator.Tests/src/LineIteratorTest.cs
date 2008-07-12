@@ -31,7 +31,7 @@ namespace DSIS.LineIterator.Tests
     [Test]
     public void Test_const()
     {
-      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return d; });        
+      ISystemInfoAndSpaceProvider info = Create(d => d);        
       myLine.Iterate(info);
 
       AssertPoints(1, "0", "0.5", "1");
@@ -62,7 +62,7 @@ namespace DSIS.LineIterator.Tests
         gld.Add(((double)i).ToString("R", CultureInfo.InvariantCulture));
       }
 
-      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return d; });
+      ISystemInfoAndSpaceProvider info = Create(d => d);
       myLine.Iterate(info);
 
       AssertPoints(100, gld.ToArray());
@@ -76,7 +76,7 @@ namespace DSIS.LineIterator.Tests
         myLine.AddPointToEnd(new LinePointImpl(new double[] {i}));
       }
 
-      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 2 * d; });
+      ISystemInfoAndSpaceProvider info = Create(d => 2*d);
       myLine.Iterate(info);
 
       AssertPoints(200, Gold(0, 200.1, 0.5));
@@ -90,7 +90,7 @@ namespace DSIS.LineIterator.Tests
         myLine.AddPointToEnd(new LinePointImpl(new double[] {i}));
       }
 
-      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 0.5 * d; });
+      ISystemInfoAndSpaceProvider info = Create(d => 0.5*d);
       myLine.Iterate(info);
 
       AssertPoints(50, Gold(0, 50.1, 0.5));
@@ -99,7 +99,7 @@ namespace DSIS.LineIterator.Tests
     [Test]
     public void Test_2x()
     {
-      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 2 * d; });
+      ISystemInfoAndSpaceProvider info = Create(d => 2*d);
       myLine.Iterate(info);
 
       AssertPoints(2,"0", "0.5", "1", "1.5", "2");
@@ -108,7 +108,7 @@ namespace DSIS.LineIterator.Tests
     [Test]
     public void Test_0_5x()
     {
-      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 0.5 * d; });
+      ISystemInfoAndSpaceProvider info = Create(d => 0.5*d);
       myLine.Iterate(info);
 
       AssertPoints(0.5, "0", "0.5");
@@ -118,7 +118,7 @@ namespace DSIS.LineIterator.Tests
     public void Test_2x3()
     {
       myLine.AddPointToEnd(new LinePointImpl(new double[] { 2 }));
-      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 2 * d; });
+      ISystemInfoAndSpaceProvider info = Create(d => 2*d);
       myLine.Iterate(info);
 
       AssertPoints(4,"0", "0.5", "1", "1.5", "2","2.5", "3", "3.5", "4");
@@ -128,7 +128,7 @@ namespace DSIS.LineIterator.Tests
     public void Test_0_5x3()
     {
       myLine.AddPointToEnd(new LinePointImpl(new double[] { 2 }));
-      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 0.5 * d; });
+      ISystemInfoAndSpaceProvider info = Create(d => 0.5*d);
       myLine.Iterate(info);
 
       AssertPoints(1,"0", "0.5", "1");
@@ -138,7 +138,7 @@ namespace DSIS.LineIterator.Tests
     [Test]
     public void Test_Pefomance_0_5()
     {
-      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return 0.5 * d; });
+      ISystemInfoAndSpaceProvider info = Create(d => 0.5*d);
       for (int i = 0; i < 1000000; i++)
         myLine.AddPointToEnd(new LinePointImpl(new double[] {i}));
 
@@ -155,7 +155,7 @@ namespace DSIS.LineIterator.Tests
 
     private static string[] Gold(double start, double stop, double step)
     {
-      List<string> list = new List<string>();
+      var list = new List<string>();
       while(start <= stop)
       {
         list.Add(start.ToString("R", CultureInfo.InvariantCulture));
@@ -187,7 +187,7 @@ namespace DSIS.LineIterator.Tests
 
     private void AssertPoints(params string[] gld)
     {
-      StringWriter sw = new StringWriter(CultureInfo.InvariantCulture);
+      var sw = new StringWriter(CultureInfo.InvariantCulture);
       myLine.Save(sw);
 
       try

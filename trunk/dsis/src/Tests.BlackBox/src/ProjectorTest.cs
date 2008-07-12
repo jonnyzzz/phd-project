@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
-using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
-using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl;
 using NUnit.Framework;
 
@@ -132,7 +130,7 @@ namespace DSIS.Tests.BlackBox
         {
           IGraphStrongComponents<Q> components = Keys.GraphComponents<Q>().Get(input);
           IGraph<Q> other = components.AsGraph(components.Components);
-          IGraph<Q> prev = (IGraph<Q>) myGraph;
+          var prev = (IGraph<Q>) myGraph;
 
           ICellCoordinateSystemProjector<Q> project =
             other.CoordinateSystem.Project(Factor(other.CoordinateSystem, prev.CoordinateSystem));
@@ -184,7 +182,7 @@ namespace DSIS.Tests.BlackBox
 
       private static long[] Factor(ICellCoordinateSystem from, ICellCoordinateSystem to)
       {
-        List<long> list = new List<long>();
+        var list = new List<long>();
         for (int i = 0; i < from.Subdivision.Length; i++)
         {
           list.Add(from.Subdivision[i]/to.Subdivision[i]);

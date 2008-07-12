@@ -101,6 +101,10 @@
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.System.Tests\Core.System.Tests.csproj">
+      <Project>{66A2C35A-E042-4F0C-B8E7-D61401133359}</Project>
+      <Name>Core.System.Tests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
@@ -108,6 +112,10 @@
     <ProjectReference Include="..\Persistance\Persistance.csproj">
       <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
       <Name>Persistance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils.Tests\Utils.Tests.csproj">
+      <Project>{62D6EB84-48A7-4FCF-A0E0-02CDFC8FD586}</Project>
+      <Name>Utils.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>

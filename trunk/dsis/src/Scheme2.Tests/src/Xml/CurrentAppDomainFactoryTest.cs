@@ -22,8 +22,8 @@ namespace DSIS.Scheme2.Tests.Xml
       base.SetUp();
       myInputObjectConnectionPoint = myMocks.CreateMock<IInputObjectConnectionPointFactoryExtension>();
       myOutputObjectConnectionPoint = myMocks.CreateMock<IOutputObjectConnectionPointFactoryExtension>();
-      InputObjectConnectionPointFactory ifactory = new InputObjectConnectionPointFactory();
-      OutputObjectConnectionPointFactory ofactory = new OutputObjectConnectionPointFactory();
+      var ifactory = new InputObjectConnectionPointFactory();
+      var ofactory = new OutputObjectConnectionPointFactory();
       ifactory.Register(myInputObjectConnectionPoint);
       ofactory.Register(myOutputObjectConnectionPoint);
       myFactory = new ObjectNodeFactory(myMocks.DynamicMock<SchemeNodeFactory>(), ifactory, ofactory);

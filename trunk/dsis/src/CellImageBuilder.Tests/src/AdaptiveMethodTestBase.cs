@@ -15,7 +15,7 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_02()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -71,7 +71,7 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_04()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -127,7 +127,7 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_06()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -155,7 +155,7 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_07()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
