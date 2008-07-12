@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GnuplotDrawer", "GnuplotDra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Entropy", "Graph.Entropy\Graph.Entropy.csproj", "{43283F9D-A669-47B2-80FD-FFA447A4BD7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceChecks", "PerformanceChecks\PerformanceChecks.csproj", "{5B18F64F-452B-4155-94A7-B47CFF2FEDF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.PerformanceChecks", "Tests.PerformanceChecks\Tests.PerformanceChecks.csproj", "{5B18F64F-452B-4155-94A7-B47CFF2FEDF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleRunner", "SimpleRunner\SimpleRunner.csproj", "{C6473776-929F-4328-B786-C51BB93E8994}"
 EndProject

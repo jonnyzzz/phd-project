@@ -7,8 +7,8 @@
     <ProjectGuid>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.CodeCompiler</RootNamespace>
-    <AssemblyName>DSIS.CodeCompiler</AssemblyName>
+    <RootNamespace>DSIS.CodeCompiler.Tests</RootNamespace>
+    <AssemblyName>DSIS.CodeCompiler.Tests</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>

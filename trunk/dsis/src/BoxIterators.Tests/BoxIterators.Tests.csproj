@@ -7,8 +7,8 @@
     <ProjectGuid>{B5F40029-7A5F-440D-8A5A-215E032CF89C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.BoxIterators</RootNamespace>
-    <AssemblyName>DSIS.BoxIterators</AssemblyName>
+    <RootNamespace>DSIS.BoxIterators.Tests</RootNamespace>
+    <AssemblyName>DSIS.BoxIterators.Tests</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>

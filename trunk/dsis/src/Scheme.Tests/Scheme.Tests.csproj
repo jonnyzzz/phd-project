@@ -7,8 +7,8 @@
     <ProjectGuid>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.Scheme</RootNamespace>
-    <AssemblyName>DSIS.Scheme</AssemblyName>
+    <RootNamespace>DSIS.Scheme.Tests</RootNamespace>
+    <AssemblyName>DSIS.Scheme.Tests</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>

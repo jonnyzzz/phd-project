@@ -7,8 +7,8 @@
     <ProjectGuid>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSIS.Core</RootNamespace>
-    <AssemblyName>DSIS.Core</AssemblyName>
+    <RootNamespace>DSIS.Core.Tests</RootNamespace>
+    <AssemblyName>DSIS.Core.Tests</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
