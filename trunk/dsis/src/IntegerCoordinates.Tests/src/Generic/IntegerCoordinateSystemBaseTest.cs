@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
+using DSIS.Utils;
+using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.IntegerCoordinates.Tests.Generic
 {
@@ -141,5 +142,10 @@ namespace DSIS.IntegerCoordinates.Tests.Generic
       Assert.AreEqual(sb.ToSystem.Subdivision[1], myCS.Subdivision[1] * div[1]);
     }
 
+    [Test]
+    public void Test_NonNull()
+    {
+      Assert.That(myCS.IsNull(myCS.FromPoint(0.5.Fill(2))), Is.False);
+    }
   }
 }
