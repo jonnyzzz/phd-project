@@ -2,7 +2,7 @@
   
   <Target Name="Build">
     <Delete Files="bin\**\*" />
-    <MSBuild Projects="src\DSIS.sln" />
+    <MSBuild Projects="src\DSIS.sln" Properties="Configuration=Release" Targets="Clean;Rebuild"/>
   </Target>
 
   <Target Name="Tests">
