@@ -14,7 +14,7 @@
 
     <Message Text="Test assembly: %(Tests.FileName)%(Tests.Extension)" />
 
-    <NUnit Assembiles="%(Tests.FullName)" NUnitVersion="NUnit-2.4.7" />
+    <NUnit Assemblies="%(Tests.FullName)" NUnitVersion="NUnit-2.4.7" />
 
     <Message Text="##teamcity[text='Done. {build.status.text}']" />      
   </Target>
