@@ -50,30 +50,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit-console-runner, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit-console-runner.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core.extensions, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.core.extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core.interfaces, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.core.interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework.extensions, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.framework.extensions.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -111,7 +87,6 @@
     <Compile Include="src\Utils.cs" />
     <Compile Include="src\WeakDictionary.cs" />
     <Compile Include="src\XmlUtil.cs" />
-    <Compile Include="testSrc\BinTreePriorityQueueExTest.cs" />
     <Compile Include="src\Delegates.cs" />
     <Compile Include="src\DoubleEqualityComparer.cs" />
     <Compile Include="src\DynamicGeneric.cs" />
@@ -122,14 +97,6 @@
     <Compile Include="src\Log2Helper.cs" />
     <Compile Include="src\MutexCookie.cs" />
     <Compile Include="src\PriorityQueue.cs" />
-    <Compile Include="testSrc\BinTreePriorityQueueExTestAllCases.cs" />
-    <Compile Include="testSrc\BinTreePriorityQueueExTestBase.cs" />
-    <Compile Include="testSrc\BinTreePriorityQueueExTestBase`2.cs" />
-    <Compile Include="testSrc\BinTreePriorityQueueExTestEasy.cs" />
-    <Compile Include="testSrc\BinTreePriorityQueueExTestScenario.cs" />
-    <Compile Include="testSrc\BinTreePriorityQueueExTestSmart.cs" />
-    <Compile Include="testSrc\BinTreePriorityQueueTest.cs" />
-    <Compile Include="testSrc\EqualityComparerFactoryTest.cs" />
     <Compile Include="src\Hashset.cs" />
     <Compile Include="src\IntEqualityComparer.cs" />
     <Compile Include="src\LongEqualityComparer.cs" />
@@ -138,11 +105,6 @@
     <Compile Include="src\Pair.cs" />
     <Compile Include="src\Primes.cs" />
     <Compile Include="src\UpcastedEnumerator.cs" />
-    <Compile Include="testSrc\InfiniteEnumerableTest.cs" />
-    <Compile Include="testSrc\LinedListTest.cs" />
-    <Compile Include="testSrc\Log2HelperTest.cs" />
-    <Compile Include="testSrc\NUnitFixtureHelper.cs" />
-    <Compile Include="testSrc\TimeoutTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
