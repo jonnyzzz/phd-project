@@ -1,6 +1,0 @@
-<Configuration>
-  <NamespaceFolders>
-    <SkipFolder>7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E/d:src</SkipFolder>
-    <SkipFolder>7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E/d:testSrc</SkipFolder>
-  </NamespaceFolders>
-</Configuration>

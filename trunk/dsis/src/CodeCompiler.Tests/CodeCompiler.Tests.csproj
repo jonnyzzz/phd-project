@@ -63,18 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\CodeCompiler.cs" />
-    <Compile Include="src\CodeCompilerException.cs" />
-    <Compile Include="src\CodeCompilerImpl.cs" />
-    <Compile Include="src\EqualityFactory\DefaultGeneratorEqualityComparer.cs" />
-    <Compile Include="src\EqualityFactory\EqEqGeneratorEqualityComparer.cs" />
-    <Compile Include="src\EqualityFactory\GeneratedEqualityComparerFactory.cs" />
-    <Compile Include="src\EqualityFactory\GeneratorEqualityComparerAttribute.cs" />
-    <Compile Include="src\GeneratorTypeUtil.cs" />
-    <Compile Include="src\ICodeCompiler.cs" />
-    <Compile Include="src\IGeneratorEqualityComparer.cs" />
-    <Compile Include="src\NamespaceHolder.cs" />
-    <Compile Include="src\TypesToAssemblyCache.cs" />
     <Compile Include="testSrc\CodeCompilerImplTest.cs" />
     <Compile Include="testSrc\GeneratorTypeUtilTest.cs" />
     <Compile Include="testSrc\TypesToAssemblyCacheTest.cs" />
