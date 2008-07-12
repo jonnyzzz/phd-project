@@ -49,10 +49,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -67,9 +63,6 @@
     <Compile Include="src\IBoxIterator.cs" />
     <Compile Include="src\LongLBoxIterator.cs" />
     <Compile Include="src\SegmentBoxIterator.cs" />
-    <Compile Include="testSrc\DoubleLBoxIteratorTest.cs" />
-    <Compile Include="testSrc\Generator\BoxIteratorGeneratorTest.cs" />
-    <Compile Include="testSrc\Generator\ShennonFenoCodecTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeCompiler\CodeCompiler.csproj">
