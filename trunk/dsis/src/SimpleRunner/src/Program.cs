@@ -68,8 +68,8 @@ namespace DSIS.SimpleRunner
 
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 10, systemHenon, 2).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systemIked, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 10, systemIked, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, duffing, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, vanderpol, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);
@@ -148,9 +148,9 @@ namespace DSIS.SimpleRunner
                               new AgregateAction(
                                 bld =>
                                   {
-                                    IAction xa1 = new ReplaceContextAction(
-                                      new SetMethod(
-                                        new PointMethodSettings(2.Fill(dim), 0.1), 1L.Fill(dim)));
+                                    IAction xa1 = new ProxyAction(); var xxx= new ReplaceContextAction(
+                                       new SetMethod(
+                                         new PointMethodSettings(2.Fill(dim), 0.1), 1L.Fill(dim)));
                                     IAction xa2 = buildIS;
                                     IAction xa3 = EntropyAction(x, steps);
 
