@@ -76,6 +76,8 @@
     <Compile Include="src\Henon\HenonFactory.cs" />
     <Compile Include="src\Henon\HenonFunctionSystemInfoDecorator.cs" />
     <Compile Include="src\Henon\HenonOptions.cs" />
+    <Compile Include="src\HomoLinear\HomoLinearSystemInfo.cs" />
+    <Compile Include="src\HomoSquare\HomoSquareSystemInfo.cs" />
     <Compile Include="src\Ikeda\IkeadFactory.cs" />
     <Compile Include="src\Ikeda\IkedaFunction.cs" />
     <Compile Include="src\Julia\JuliaFactory.cs" />
