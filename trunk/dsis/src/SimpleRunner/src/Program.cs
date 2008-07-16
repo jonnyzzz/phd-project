@@ -59,7 +59,7 @@ namespace DSIS.SimpleRunner
       IAction systenHomoLinear = new SystemInfoAction(new HomoLinearSystemInfo(1.35), sp);
       IAction systenHomoSquare = new SystemInfoAction(new HomoSquareSystemInfo(0.4), sp);
 
-      IAction duffing = new SystemInfoAction(new RungeKuttSolver(new DuffingSystemInfo(0.48, 0.27, -1), 15, 0.1),
+      IAction duffing = new SystemInfoAction(new RungeKuttSolver(new DuffingSystemInfo(1, 1, 0.01), 3, 0.01),
                                              duffingSp);
       IAction vanderpol = new SystemInfoAction(new RungeKuttSolver(new VanDerPolSystemInfo(1), 15, 0.1),
                                                duffingSp);
@@ -72,10 +72,12 @@ namespace DSIS.SimpleRunner
 
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic3569, 1).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoLinear, 2).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoSquare, 2).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoLinear, 2).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoSquare, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 5, duffing, 2).Do); 
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 10, systemIked, 2).Do);
+      
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, duffing, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, vanderpol, 2).Do);
 //        parallel.DoParallel(new ComputeDelegate(wfBase, 0 + i, systenLogistic2_x).Do);

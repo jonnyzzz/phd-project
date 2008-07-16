@@ -22,8 +22,10 @@ namespace DSIS.Function.Predefined.Duffing
 
     public void Evaluate()
     {
-      Output[0] = Input[1];
-      Output[1] = -myK * Input[1] - myAlpha * Input[0] - myBeta * Input[0] * Input[0] * Input[0];
+      var y = Input[1];
+      var x = Input[0]; 
+      Output[0] = y;
+      Output[1] = myAlpha * x - myBeta * x * x * x  - myK * y;
     }
   }
 }
