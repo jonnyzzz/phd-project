@@ -74,6 +74,7 @@
     <Compile Include="src\Actions\Console\DumpWorkingFolderAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
+    <Compile Include="src\Actions\DefaultBoxMethodSettings.cs" />
     <Compile Include="src\Actions\Entropy\BiggestMeasureInfo.cs" />
     <Compile Include="src\Actions\Entropy\EigenEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\EigenPerComoponentAction.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="src\Actions\Line\LineBaseAction.cs" />
     <Compile Include="src\Actions\Line\LineInitialAction.cs" />
     <Compile Include="src\Actions\SetMethod.cs" />
+    <Compile Include="src\Actions\SetMethod2.cs" />
     <Compile Include="src\Actions\SystemInfoAction.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />

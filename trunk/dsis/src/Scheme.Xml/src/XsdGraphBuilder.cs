@@ -9,6 +9,13 @@ namespace DSIS.Scheme.Xml
 {
   public class XsdGraphBuilder
   {
+    private readonly Dictionary<string, object> myBag = new Dictionary<string, object>();
+
+    public void AddObject(string key, object value)
+    {
+      myBag[key] = value;
+    }
+
     public Dictionary<string, IAction> BuildActions(Graphs graph)
     {
       for (bool done = true; done; )
@@ -48,7 +55,7 @@ namespace DSIS.Scheme.Xml
       }
     }
     
-    private static NodeFactory<IAction> BuildAction(TypeFinder fnd, Graph graph, Converter<string, IAction> loadGraph)
+    private NodeFactory<IAction> BuildAction(TypeFinder fnd, Graph graph, Converter<string, IAction> loadGraph)
     {
       fnd.LoadAssembliesFromXml(graph.IncludeAssemblies);
       var nodes = CreateNodes<IAction,Node>(graph.Nodes.Node, (x,c) => CreateNode(x, fnd, c, loadGraph), x=>x.Id);
@@ -146,7 +153,7 @@ namespace DSIS.Scheme.Xml
       return data ?? EmptyArray<T>.Instance;      
     }
 
-    private static NodeFactory<IAction> CreateNode(Node node, TypeFinder finder, Converter<string, IAction> loadNode, Converter<string, IAction> loadGraph)
+    private NodeFactory<IAction> CreateNode(Node node, TypeFinder finder, Converter<string, IAction> loadNode, Converter<string, IAction> loadGraph)
     {
       var clazz = node.Class;
       var type = finder.Find(clazz);
@@ -181,6 +188,12 @@ namespace DSIS.Scheme.Xml
           }
           
           throw new NotImplementedException(arg.GetType().FullName);
+        } else if (arg is NodeConstructorArgumentObject)
+        {
+          var key = ((NodeConstructorArgumentObject) arg).key;
+          var obj = myBag[key];
+
+          argz.Add(()=>obj);
         }
         else if (arg is NodeConstructorArgumentGraphReference)
         {

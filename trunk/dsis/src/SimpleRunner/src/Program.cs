@@ -103,7 +103,7 @@ namespace DSIS.SimpleRunner
       IAction a3 = new CreateInitialCellsAction();
       IAction a4 = new BuildSymbolicImageAction();
       IAction a5 = new ChainRecurrenctSimbolicImageAction();
-      IAction method = new SetMethod(new BoxMethodSettings(0.1), 2L.Fill(dim));
+      IAction method = new DefaultBoxMethodSettings();
 
       var gr = new ActionGraph();
 

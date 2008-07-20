@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Graphs xmlns="urn:shemas-dsis-org:computation-graph-scheme-xml">
+  <Graph Id="base_SI">
+    <Nodes>
+      <Node Id="A" Class="DSIS.Scheme.Impl.Actions.CreateCoordinateSystemAction"/>
+      <Node Id="B" Class="DSIS.Scheme.Impl.Actions.CreateInitialCellsAction"/>
+      <Node Id="SI" Class="DSIS.Scheme.Impl.Actions.BuildSymbolicImageAction"/>
+      <Node Id="Tarjan" Class="DSIS.Scheme.Impl.Actions.ChainRecurrenctSimbolicImageAction"/>
+      <Node Id="Method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings"/>
+      <Node Id="SWF" Class="DSIS.Scheme.Impl.Actions.Files.SystemWorkingFolderAction"/>
+    </Nodes>
+  </Graph>
+
+  <Graph Id="base_SI_step">
+    <Nodes>
+      <Node Id="Step" Class="DSIS.Scheme.Impl.Actions.Agregated.SymbolicImageConstructionStep"/>
+      <Node Id=""
+    </Nodes>
+      
+  </Graph>
+
+</Graphs>

@@ -42,6 +42,14 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:complexType name="NodeConstructorArgumentObject">
+    <xs:complexContent>
+      <xs:extension base="NodeConstructorArgument">
+        <xs:attribute name="key" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
   <xs:complexType name="Node">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element name="Args" type="NodeConstructorArgument"/>
