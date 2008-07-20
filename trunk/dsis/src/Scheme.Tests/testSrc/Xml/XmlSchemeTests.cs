@@ -76,6 +76,32 @@ StartAction|DSIS.Scheme.Actions.AgregateAction+StartAction =>
       }
     }
 
+    [Test]
+    public void Test_03()
+    {
+      var gr = Load("XmlTest_03.xml");
+      var bld = new XsdGraphBuilder();
+      var actions = bld.BuildActions(gr);
+      var code = actions["Test_02"].ToString();
+      try
+      {
+        Assert.That(code.Trim(), Is.EqualTo(@"AgragateAction:
+A|DSIS.Scheme.Tests.testData.A => 
+    B|DSIS.Scheme.Tests.testData.B
+    D|DSIS.Scheme.Tests.testData.D
+B|DSIS.Scheme.Tests.testData.B => 
+    EndAction|DSIS.Scheme.Actions.AgregateAction+EndAction
+D|DSIS.Scheme.Tests.testData.D => 
+EndAction|DSIS.Scheme.Actions.AgregateAction+EndAction => 
+StartAction|DSIS.Scheme.Actions.AgregateAction+StartAction => 
+    A|DSIS.Scheme.Tests.testData.A"));
+      } catch(Exception e)
+      {
+        Console.Out.WriteLine("code = '{0}'", code);
+        throw new Exception(e.Message, e);
+      }
+    }
+
     private Graphs Load(string res)
     {
       return Parse(Stream(GetType().Assembly, "DSIS.Scheme.Tests.testData." + res));

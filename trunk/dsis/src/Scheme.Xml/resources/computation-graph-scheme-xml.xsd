@@ -78,7 +78,8 @@
       </xs:element>
       <xs:element name="IncludeAssemblies" type="IncludeAssemblies" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
-    <xs:attribute name="Id" type="GraphId" use="required"/>    
+    <xs:attribute name="Id" type="GraphId" use="required"/>
+    <xs:attribute name="Base" type="GraphId" use="optional"/>
   </xs:complexType>
 
   <xs:complexType name="IncludeAssemblies">

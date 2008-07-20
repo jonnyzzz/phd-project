@@ -11,6 +11,36 @@ namespace DSIS.Scheme.Xml
   {
     public Dictionary<string, IAction> BuildActions(Graphs graph)
     {
+      for (bool done = true; done; )
+      {
+        done = false;
+        foreach (var g in graph.Graph)
+        {
+          if (g.Base != null)
+          {
+            Graph baseGraph = graph.Find(g.Base);
+            if (baseGraph.Base == null)
+            {
+              if (g.IncludeAssemblies == null)
+              {
+                g.IncludeAssemblies = baseGraph.IncludeAssemblies;
+              } else if (baseGraph.IncludeAssemblies != null)
+              {
+                g.IncludeAssemblies.Assembly =
+                  baseGraph.IncludeAssemblies.Assembly.Safe().Join(g.IncludeAssemblies.Assembly).ToArray();
+              }
+              g.Nodes.Node = baseGraph.Nodes.Node.Join(g.Nodes.Node).ToArray();
+              g.Links.Link = baseGraph.Links.Link.Join(g.Links.Link).ToArray();
+              g.Base = null;
+              done = true;
+            }
+          }
+        }
+      }
+
+      if (!graph.Graph.Filter(x => x.Base != null).IsEmpty())
+        throw new ArgumentException("Failed to resolve Base graphs");
+
       using (var fnd = new TypeFinder())
       {
         fnd.LoadAssembliesFromXml(graph.IncludeAssemblies);

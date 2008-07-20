@@ -21,6 +21,7 @@ namespace DSIS.Scheme.Tests.testData
 
   public class A : FakeAction {     }
   public class B : FakeAction {     }
+  public class D : FakeAction {     }
   public class C : FakeAction
   {
     private readonly IAction myA;

@@ -12,6 +12,13 @@ namespace DSIS.Utils
       return enu ?? EmptyArray<Q>.Instance;
     }
 
+    public static bool IsEmpty<Q>(this IEnumerable<Q> enu)
+    {
+      foreach (var q in enu)
+        return false;
+      return true;
+    }
+
     public static IEnumerable<Q> Filter<Q>(this IEnumerable<Q> enu, Predicate<Q> pred)
     {
       foreach (var q in enu)
@@ -291,6 +298,19 @@ namespace DSIS.Utils
       where TEnu : IEnumerable<TC>
     {
       return new UpcastedEnumerable<TEnu, TC, TU>(enu);
+    }
+
+    public static IEnumerable<Q> Join<Q,T>(this IEnumerable<Q> enu, IEnumerable<T> ex)
+      where T : Q
+    {
+      foreach (var q in enu)
+      {
+        yield return q;
+      }
+      foreach (var t in ex)
+      {
+        yield return t;
+      }
     }
   }
 }
