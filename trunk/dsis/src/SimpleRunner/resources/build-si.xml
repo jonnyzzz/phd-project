@@ -14,9 +14,29 @@
   <Graph Id="base_SI_step">
     <Nodes>
       <Node Id="Step" Class="DSIS.Scheme.Impl.Actions.Agregated.SymbolicImageConstructionStep"/>
-      <Node Id=""
+      <Node Id="Dump1" Class="DSIS.Scheme.Impl.Actions.Console.DumpGraphInfoAction"/>
+      <Node Id="Dump2" Class="DSIS.Scheme.Impl.Actions.Console.DumpGraphComponentsInfoAction"/>
+      <Node Id="Dump3" Class="DSIS.Scheme.Impl.Actions.Console.DumpMethodAction"/>      
     </Nodes>
-      
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="Step"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="Step"/>
+        <Nodes node-ref="Dump1"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="Step"/>
+        <Nodes node-ref="Dump2"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="Step"/>
+        <Nodes node-ref="Dump3"/>
+      </Link>
+    </Links>   
   </Graph>
 
 </Graphs>
