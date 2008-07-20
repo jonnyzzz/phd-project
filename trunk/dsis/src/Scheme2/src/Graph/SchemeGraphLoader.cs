@@ -24,8 +24,7 @@ namespace DSIS.Scheme2.Graph
 
     public XsdComputationScheme Parse(Stream stream)
     {
-      XmlReaderSettings settings = new XmlReaderSettings();
-      settings.ValidationType = ValidationType.Schema;
+      var settings = new XmlReaderSettings {ValidationType = ValidationType.Schema};
       settings.Schemas.Add(Schema);
 
       // Load the AllAssembliesXml, validating against the schema

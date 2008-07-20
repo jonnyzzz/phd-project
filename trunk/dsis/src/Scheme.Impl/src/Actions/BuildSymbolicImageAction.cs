@@ -31,12 +31,12 @@ namespace DSIS.Scheme.Impl.Actions
       ICellCoordinateSystemConverter<Q, Q> subdivide = system.Subdivide(subdivision);
       ICellCoordinateSystem<Q> toSystem = subdivide.ToSystem;
 
-      TarjanGraph<Q> graph = new TarjanGraph<Q>(toSystem);
+      var graph = new TarjanGraph<Q>(toSystem);
 
-      CellImageBuilderContext<Q> cellSettings = new CellImageBuilderContext<Q>(
+      var cellSettings = new CellImageBuilderContext<Q>(
         info, bld, toSystem, new GraphCellImageBuilder<Q>(graph));
 
-      CellProcessorContext<Q, Q> ctx = new CellProcessorContext<Q, Q>(
+      var ctx = new CellProcessorContext<Q, Q>(
         Keys.CellsEnumerationKey<Q>().Get(input),
         subdivide,
         bld.Create<Q>(),

@@ -63,6 +63,11 @@ namespace DSIS.Scheme.Actions
       myGraph.AddEdge(a, b);
     }
 
+    public override string ToString()
+    {
+      return "AgragateAction:\r\n" + myGraph;
+    }
+
     private class EndAction : IAction
     {
       private Context myResult;

@@ -25,7 +25,7 @@ namespace DSIS.Graph.Test
       }
     }
 
-    private class C : B<C>, A
+    private class   C : B<C>, A
     {
       public int Foo()
       {

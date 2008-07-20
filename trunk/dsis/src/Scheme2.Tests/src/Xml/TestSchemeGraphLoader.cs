@@ -59,8 +59,7 @@ namespace DSIS.Scheme2.Tests.Xml
 
     public static XsdComputationScheme Load(Assembly assembly,string xml)
     {
-      SchemeGraphLoader l = new SchemeGraphLoader();
-      return l.Parse(Stream(assembly, xml));
+      return new SchemeGraphLoader().Parse(Stream(assembly, xml));
     }
 
     private static Stream Stream(Assembly assembly, string name)

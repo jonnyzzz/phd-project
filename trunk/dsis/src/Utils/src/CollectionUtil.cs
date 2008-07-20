@@ -7,6 +7,11 @@ namespace DSIS.Utils
   {
     public delegate Q Fold<T, Q>(T t, Q q);
 
+    public static IEnumerable<Q> Safe<Q>(this IEnumerable<Q> enu)
+    {
+      return enu ?? EmptyArray<Q>.Instance;
+    }
+
     public static IEnumerable<Q> Filter<Q>(this IEnumerable<Q> enu, Predicate<Q> pred)
     {
       foreach (var q in enu)
@@ -32,6 +37,27 @@ namespace DSIS.Utils
         q = fold(t, q);
       }
       return q;
+    }
+
+    public static T[] ToArray<T>(this IEnumerable<T> enu)
+    {
+      if (enu is List<T>)
+      {
+        return ((List<T>) enu).ToArray();
+      } else
+      {
+        return new List<T>(enu).ToArray();
+      }
+    }
+
+    public static bool ContainsKeyRange<T,Q>(this Dictionary<T,Q> dic, IEnumerable<T> enu)
+    {
+      foreach (var t in enu)
+      {
+        if (!dic.ContainsKey(t))
+          return false;
+      }
+      return true;
     }
 
     public static IEnumerable<T> Skip<T>(this IEnumerable<T> enu, int t)
@@ -235,6 +261,28 @@ namespace DSIS.Utils
       while (hasMore())
       {
         zip(te.Current, qe.Current);
+      }
+    }
+
+    public static IEnumerable<R> Merge<T,Q,R>(IEnumerable<T> ts, IEnumerable<Q> qs, Merge<T,Q,R> zip)
+    {
+      var te = ts.GetEnumerator();
+      var qe = qs.GetEnumerator();
+
+      TDelegate<bool> hasMore = delegate
+                                        {
+                                          var tb = te.MoveNext();
+                                          var qb = qe.MoveNext();
+
+                                          if (tb != qb)
+                                            throw new ArgumentException("collections should be the same length");
+
+                                          return tb & qb;
+                                        };
+
+      while (hasMore())
+      {
+        yield return zip(te.Current, qe.Current);
       }
     }
 

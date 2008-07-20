@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Text;
 using DSIS.Scheme.Ctx;
-using DSIS.Scheme.Exec;
 using DSIS.Utils;
 
 namespace DSIS.Scheme.Exec
@@ -23,7 +23,7 @@ namespace DSIS.Scheme.Exec
       while (DoAction()) { }
 
       if (myActions.Count != myDoneActions.Count)
-        throw new ActionGraphException("Failed to evaluate graph. Loops or components?");
+        throw new ActionGraphException("Failed to evaluate graph. Loops of components?");
     }
 
     public void Clear()
@@ -85,8 +85,8 @@ namespace DSIS.Scheme.Exec
 
     public void AddEdge(IAction a, IAction b)
     {
-      ActionWrapper bW = new ActionWrapper(Simplify(b));
-      ActionWrapper bA = new ActionWrapper(Simplify(a));
+      var bW = new ActionWrapper(Simplify(b));
+      var bA = new ActionWrapper(Simplify(a));
 
       myActions.Add(bW);
       myActions.Add(bA);
@@ -94,11 +94,36 @@ namespace DSIS.Scheme.Exec
       myStraitEdges.AddValue(bA, bW);
     }
 
-    private IAction Simplify(IAction sb)
+    private static IAction Simplify(IAction sb)
     {
-      return (IAction) sb;
+      return sb;
     }
 
+    private static IEnumerable<ActionWrapper> SortActions(IEnumerable<ActionWrapper> actions)
+    {
+      var list = new List<ActionWrapper>(actions);
+      list.Sort((x,y) => (x.ToString().CompareTo(y.ToString())));
 
+      return list;      
+    }
+
+    public override string ToString()
+    {
+      var sb = new StringBuilder();
+
+      foreach (var actionWrapper in SortActions(myActions))
+      {
+        string str = string.Format("{0} => ", actionWrapper);
+        sb.AppendLine(str);
+        foreach (var wrapper in SortActions(myStraitEdges.GetValues(actionWrapper)))
+        {
+          sb
+            .Append(' ', 4)
+            .AppendLine(wrapper.ToString());
+        }
+      }
+
+      return sb.ToString();
+    }
   }
 }

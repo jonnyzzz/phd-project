@@ -29,7 +29,7 @@
   <xs:complexType name="NodeConstructorArgumentReference">
     <xs:complexContent>
       <xs:extension base="NodeConstructorArgument">
-        <xs:attribute name="ref-id" type="NodeId"/>
+        <xs:attribute name="ref-id" type="NodeId" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -37,7 +37,7 @@
   <xs:complexType name="NodeConstructorArgumentGraphReference">
     <xs:complexContent>
       <xs:extension base="NodeConstructorArgument">
-        <xs:attribute name="ref-id" type="GraphId"/>
+        <xs:attribute name="ref-id" type="GraphId" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -46,6 +46,8 @@
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element name="Args" type="NodeConstructorArgument"/>
     </xs:sequence>
+    <xs:attribute name="Class" type="xs:string" use="required"/>
+    <xs:attribute name="Id" type="NodeId" use="required"/>
   </xs:complexType>
   
   <xs:complexType name="NodeRef">
@@ -60,28 +62,38 @@
 
   <xs:complexType name="Graph">
     <xs:sequence>
-      <xs:element name="Nodes">
+      <xs:element name="Nodes" minOccurs="1" maxOccurs="1">
         <xs:complexType>
           <xs:sequence minOccurs="1" maxOccurs="unbounded">
             <xs:element name="Node" type="Node" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="Links">
+      <xs:element name="Links" minOccurs="1" maxOccurs="1">
         <xs:complexType>
           <xs:sequence minOccurs="1" maxOccurs="unbounded">
             <xs:element name="Link" type="Link"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="IncludeAssemblies" type="IncludeAssemblies" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
-    <xs:attribute name="Id" type="GraphId"/>    
+    <xs:attribute name="Id" type="GraphId" use="required"/>    
+  </xs:complexType>
+
+  <xs:complexType name="IncludeAssemblies">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Assembly" type="xs:string"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:element name="Graphs">
     <xs:complexType>
-      <xs:sequence minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Graph" type="Graph"/>
+      <xs:sequence>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Graph" type="Graph" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:element name="IncludeAssemblies" type="IncludeAssemblies" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

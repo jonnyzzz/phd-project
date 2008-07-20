@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using DSIS.Utils;
 
 namespace DSIS.Utils
 {
@@ -34,7 +33,7 @@ namespace DSIS.Utils
     public override bool Equals(object obj)
     {
       if (!(obj is Pair<TK, TV>)) return false;
-      Pair<TK, TV> pair = (Pair<TK, TV>) obj;
+      var pair = (Pair<TK, TV>) obj;
       return Equals(pair);      
     }
 
