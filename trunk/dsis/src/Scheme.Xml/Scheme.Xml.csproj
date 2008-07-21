@@ -48,7 +48,6 @@
     <Compile Include="resources\computation-graph-scheme-xml.cs">
       <DependentUpon>computation-graph-scheme-xml.xsd</DependentUpon>
     </Compile>
-    <Compile Include="src\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Graph.cs" />
     <Compile Include="src\Graphs.cs" />

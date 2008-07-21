@@ -22,7 +22,7 @@
         <xs:sequence>
           <xs:element type="xs:string" name="Code"/>
         </xs:sequence>
-      </xs:extension>
+      </xs:extension>      
     </xs:complexContent>
   </xs:complexType>
 
@@ -56,6 +56,7 @@
     </xs:sequence>
     <xs:attribute name="Class" type="xs:string" use="required"/>
     <xs:attribute name="Id" type="NodeId" use="required"/>
+    <xs:attribute name="RegisterKey" use="optional"/>
   </xs:complexType>
   
   <xs:complexType name="NodeRef">

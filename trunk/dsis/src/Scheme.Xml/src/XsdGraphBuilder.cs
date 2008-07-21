@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Exec;
 using DSIS.Utils;
@@ -9,16 +8,16 @@ namespace DSIS.Scheme.Xml
 {
   public class XsdGraphBuilder
   {
-    private readonly Dictionary<string, object> myBag = new Dictionary<string, object>();
+    private readonly Bag myBag = new Bag();
 
     public void AddObject(string key, object value)
     {
-      myBag[key] = value;
+      myBag.Add(key, value);
     }
 
     public Dictionary<string, IAction> BuildActions(Graphs graph)
     {
-      for (bool done = true; done; )
+      for (bool done = true; done;)
       {
         done = false;
         foreach (var g in graph.Graph)
@@ -31,7 +30,8 @@ namespace DSIS.Scheme.Xml
               if (g.IncludeAssemblies == null)
               {
                 g.IncludeAssemblies = baseGraph.IncludeAssemblies;
-              } else if (baseGraph.IncludeAssemblies != null)
+              }
+              else if (baseGraph.IncludeAssemblies != null)
               {
                 g.IncludeAssemblies.Assembly =
                   baseGraph.IncludeAssemblies.Assembly.Safe().Join(g.IncludeAssemblies.Assembly).ToArray();
@@ -51,20 +51,26 @@ namespace DSIS.Scheme.Xml
       using (var fnd = new TypeFinder())
       {
         fnd.LoadAssembliesFromXml(graph.IncludeAssemblies);
-        return CreateNodes<IAction, Graph>(graph.Graph, (g, c) => BuildAction(fnd, g, c), x => x.Id);
+        return CreateNodes<IAction, Graph>(graph.Graph, (g, c) => BuildAction(fnd, myBag, g, c), x => x.Id);
       }
     }
-    
-    private NodeFactory<IAction> BuildAction(TypeFinder fnd, Graph graph, Converter<string, IAction> loadGraph)
+
+    private static NodeFactory<IAction> BuildAction(TypeFinder fnd, Bag bag, Graph graph,
+                                                    Converter<string, IAction> loadGraph)
     {
       fnd.LoadAssembliesFromXml(graph.IncludeAssemblies);
-      var nodes = CreateNodes<IAction,Node>(graph.Nodes.Node, (x,c) => CreateNode(x, fnd, c, loadGraph), x=>x.Id);
       return new NodeFactory<IAction>(
         graph.GraphRequirements(),
         graph.Id,
         () => new AgregateAction(
                 x =>
                   {
+                    var nodes = CreateNodes<IAction, Node>(
+                      graph.Nodes.Node,
+                      (xx, c) => CreateNode(xx, fnd, bag, c, loadGraph),
+                      xx => xx.Id
+                      );
+
                     nodes["#input"] = x.Start;
                     nodes["#output"] = x.End;
                     LinkNodes(x, nodes, graph.Links);
@@ -84,28 +90,39 @@ namespace DSIS.Scheme.Xml
       }
     }
 
-    private delegate NodeFactory<T> DCreateNode<T,Node>(Node node, Converter<string, T> load) where T : class;
+    private delegate NodeFactory<T> DCreateNode<T, Node>(Node node, Converter<string, T> load) where T : class;
 
-    private static Dictionary<string, T> CreateNodes<T, Node>(IEnumerable<Node> nodes, DCreateNode<T, Node> factory, Converter<Node, string> id)
+    private static Dictionary<string, T> CreateNodes<T, Node>(IEnumerable<Node> nodes, DCreateNode<T, Node> factory,
+                                                              Converter<Node, string> id)
       where T : class
     {
       var data = new Dictionary<string, T>();
-     
+      Converter<string, T> sageGet = delegate(string x)
+                                       {
+                                         T t;
+                                         if (!data.TryGetValue(x, out t))
+                                         {
+                                           throw new KeyNotFoundException("Failed to find key " + x);
+                                         }
+                                         return t;
+                                       };
+
       var map = new Dictionary<string, NodeFactory<T>>();
       foreach (var node in nodes)
       {
-        var n = factory(node, name => data[name]);
+        var n = factory(node, sageGet);
 
         if (n.NodePrerequisites.Count() == 0)
         {
           data[n.Id] = n.Create();
-        } else
+        }
+        else
         {
           map.Add(id(node), n);
         }
       }
 
-      for (bool working = true; working && map.Count > 0; )
+      for (bool working = true; working && map.Count > 0;)
       {
         working = false;
         foreach (var n in new List<NodeFactory<T>>(map.Values))
@@ -128,7 +145,7 @@ namespace DSIS.Scheme.Xml
     }
 
     private class NodeFactory<T>
-      where T : class 
+      where T : class
     {
       public readonly Hashset<string> NodePrerequisites;
       public readonly string Id;
@@ -150,10 +167,12 @@ namespace DSIS.Scheme.Xml
 
     private static T[] Safe<T>(T[] data)
     {
-      return data ?? EmptyArray<T>.Instance;      
+      return data ?? EmptyArray<T>.Instance;
     }
 
-    private NodeFactory<IAction> CreateNode(Node node, TypeFinder finder, Converter<string, IAction> loadNode, Converter<string, IAction> loadGraph)
+    private static NodeFactory<IAction> CreateNode(Node node, TypeFinder finder, Bag bag,
+                                                   Converter<string, IAction> loadNode,
+                                                   Converter<string, IAction> loadGraph)
     {
       var clazz = node.Class;
       var type = finder.Find(clazz);
@@ -164,40 +183,42 @@ namespace DSIS.Scheme.Xml
       var argz = new List<Lazy<Object>>();
       var reqNodes = new Hashset<string>();
       var reqGraphs = new Hashset<string>();
-      foreach (var p in CollectionUtil.Merge(constructor.GetParameters(), Safe(node.Args), (x,y)=>Pair.Create<ParameterInfo,NodeConstructorArgument>(x,y)))
+      foreach (var p in CollectionUtil.Merge(constructor.GetParameters(), Safe(node.Args), (x, y) => Pair.Create(x, y)))
       {
         var arg = p.Second;
         var parameterType = p.First.ParameterType;
         if (arg is NodeConstructorArgumentCode)
         {
           var code = ((NodeConstructorArgumentCode) arg).Code;
-
-          var n = arg as NodeConstructorArgumentCode;
-          if (typeof(string) == parameterType)
+          if (typeof (string) == parameterType)
           {
             argz.Add(code.Trim);
-          } else if (typeof(double) == parameterType)
-          {
-            argz.Add(()=>double.Parse(code.Trim()));
-          } else if (typeof(int) == parameterType)
-          {
-            argz.Add(()=>int.Parse(code.Trim()));
-          } else if (typeof(long) == parameterType)
-          {
-            argz.Add(()=>long.Parse(code.Trim()));
           }
-          
+          else if (typeof (double) == parameterType)
+          {
+            argz.Add(() => double.Parse(code.Trim()));
+          }
+          else if (typeof (int) == parameterType)
+          {
+            argz.Add(() => int.Parse(code.Trim()));
+          }
+          else if (typeof (long) == parameterType)
+          {
+            argz.Add(() => long.Parse(code.Trim()));
+          }
+
           throw new NotImplementedException(arg.GetType().FullName);
-        } else if (arg is NodeConstructorArgumentObject)
+        }
+        else if (arg is NodeConstructorArgumentObject)
         {
           var key = ((NodeConstructorArgumentObject) arg).key;
-          var obj = myBag[key];
+          var obj = bag.Get(key);
 
-          argz.Add(()=>obj);
+          argz.Add(() => obj);
         }
         else if (arg is NodeConstructorArgumentGraphReference)
         {
-          var reference = (NodeConstructorArgumentGraphReference)arg;
+          var reference = (NodeConstructorArgumentGraphReference) arg;
           reqGraphs.Add(reference.refid);
 
           argz.Add(() => loadGraph(reference.refid));
@@ -220,9 +241,41 @@ namespace DSIS.Scheme.Xml
         node.Id,
         () =>
           {
-            object[] args = argz.Map(x=>x()).ToArray();
-            return (IAction) Activator.CreateInstance(type, args);
-          });      
+            object[] args = argz.Map(x => x()).ToArray();
+            var action = (IAction) Activator.CreateInstance(type, args);
+            if (node.RegisterKey != null)
+              bag.Add(node.RegisterKey, action);
+            return action;
+          });
+    }
+
+    private class Bag
+    {
+      private readonly Bag myParent;
+      private readonly IDictionary<string, object> myBag = new Dictionary<string, object>();
+
+      public Bag() : this(null)
+      {
+      }
+
+      public Bag(Bag parent)
+      {
+        myParent = parent;
+      }
+
+      public object Get(string key)
+      {
+        object o;
+        if (myBag.TryGetValue(key, out o))
+          return o;
+
+        return myParent == null ? null : myParent.Get(key);
+      }
+
+      public void Add(string key, object o)
+      {
+        myBag[key] = o;
+      }
     }
   }
 }

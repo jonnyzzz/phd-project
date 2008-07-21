@@ -102,6 +102,61 @@ StartAction|DSIS.Scheme.Actions.AgregateAction+StartAction =>
       }
     }
 
+    [Test]
+    public void Test_04()
+    {
+      var gr = Load("XmlTest_04.xml");
+      var bld = new XsdGraphBuilder();
+      var actions = bld.BuildActions(gr);
+      var code = actions["Test_01"].ToString();
+      try
+      {
+        Assert.That(code.Trim(), Is.EqualTo(@"AgragateAction:
+C|C:     DSIS.Scheme.Tests.testData.A => 
+    EndAction|DSIS.Scheme.Actions.AgregateAction+EndAction
+EndAction|DSIS.Scheme.Actions.AgregateAction+EndAction => 
+StartAction|DSIS.Scheme.Actions.AgregateAction+StartAction => 
+    C|C:     DSIS.Scheme.Tests.testData.A"));
+      } catch(Exception e)
+      {
+        Console.Out.WriteLine("code = '{0}'", code);
+        throw new Exception(e.Message, e);
+      }
+    }
+
+    [Test]
+    public void Test_05()
+    {
+      var gr = Load("XmlTest_05.xml");
+      var bld = new XsdGraphBuilder();
+      var actions = bld.BuildActions(gr);
+      var code = actions["Test_01"].ToString();
+      try
+      {
+        Assert.That(code.Trim(), Is.EqualTo(@"AgragateAction:
+C|C:     AgragateAction:
+     A|DSIS.Scheme.Tests.testData.A => 
+         EndAction|DSIS.Scheme.Actions.AgregateAction+EndAction
+     EndAction|DSIS.Scheme.Actions.AgregateAction+EndAction => 
+     StartAction|DSIS.Scheme.Actions.AgregateAction+StartAction => 
+         A|DSIS.Scheme.Tests.testData.A
+      => 
+    EndAction|DSIS.Scheme.Actions.AgregateAction+EndAction
+EndAction|DSIS.Scheme.Actions.AgregateAction+EndAction => 
+StartAction|DSIS.Scheme.Actions.AgregateAction+StartAction => 
+    C|C:     AgragateAction:
+     A|DSIS.Scheme.Tests.testData.A => 
+         EndAction|DSIS.Scheme.Actions.AgregateAction+EndAction
+     EndAction|DSIS.Scheme.Actions.AgregateAction+EndAction => 
+     StartAction|DSIS.Scheme.Actions.AgregateAction+StartAction => 
+         A|DSIS.Scheme.Tests.testData.A"));
+      } catch(Exception e)
+      {
+        Console.Out.WriteLine("code = '{0}'", code);
+        throw new Exception(e.Message, e);
+      }
+    }
+
     private Graphs Load(string res)
     {
       return Parse(Stream(GetType().Assembly, "DSIS.Scheme.Tests.testData." + res));

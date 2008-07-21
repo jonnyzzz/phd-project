@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Graphs xmlns="urn:shemas-dsis-org:computation-graph-scheme-xml">
+<Graphs xmlns="urn:shemas-dsis-org:computation-graph-scheme-xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
   <Graph Id="base_SI">
     <Nodes>
       <Node Id="A" Class="DSIS.Scheme.Impl.Actions.CreateCoordinateSystemAction"/>
@@ -37,6 +37,31 @@
         <Nodes node-ref="Dump3"/>
       </Link>
     </Links>   
+  </Graph>
+
+  <Graph Id="base_SI_step_last">
+    <Nodes>
+      <Node Id="LoopIndexIncrement" Class="DSIS.Scheme.Actions.LoopIndexIncrementAction">
+        <Args xsi:type="NodeConstructorArgumentObject" key="SIConstructionLoop"/>
+      </Node>
+      <Node Id="LoopWorkingFolder" Class="DSIS.Scheme.Impl.Actions.Files.LoopStepWorkingFolderAction">
+        <Args xsi:type="NodeConstructorArgumentObject" key="SIConstructionLoop"/>
+        <Args xsi:type="NodeConstructorArgumentCode">
+          <Code>step-{0}</Code>
+        </Args>
+      </Node>
+      <Node Id="ReplaceWorkingFolder" Class="DSIS.Scheme.Actions.ReplaceContextAction">
+        <Args xsi:type="NodeConstructorArgumentReference" ref-id="LoopWorkingFolder"/>
+      </Node>
+      <Node Id="DrawSI" Class="DSIS.Scheme.Impl.Actions.Files.DrawChainRecurrentAction" />
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="ReplaceWorkingFolder"/>
+        <Nodes node-ref="DrawSI"/>
+      </Link>
+    </Links>
   </Graph>
 
 </Graphs>
