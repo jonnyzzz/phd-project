@@ -75,6 +75,7 @@
     <Compile Include="src\Actions\ProxyAction.cs" />
     <Compile Include="src\Actions\ReplaceContextAction.cs" />
     <Compile Include="src\Actions\SelectiveCopyAction.cs" />
+    <Compile Include="src\Actions\TransparentAction.cs" />
     <Compile Include="src\Ctx\SlotStore.cs" />
     <Compile Include="src\Exec\ActionBuilder2Adaptor.cs" />
     <Compile Include="src\Exec\ActionEdgesBuilderAdapter.cs" />
@@ -97,7 +98,7 @@
     <Compile Include="src\Exec\XmlActionGraphParser.cs" />
     <Compile Include="src\IAction.cs" />
     <Compile Include="src\Key.cs" />
-    <Compile Include="src\TransparentAction.cs" />
+    <Compile Include="src\CopyContextAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj">

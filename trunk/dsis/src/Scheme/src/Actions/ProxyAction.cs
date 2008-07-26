@@ -19,6 +19,7 @@ namespace DSIS.Scheme.Actions
     }
   }
 
+
   [Obsolete("Get rid of it")]
   public class NoCheckAction : ActionBase
   {

@@ -7,8 +7,19 @@
       <Node Id="SI" Class="DSIS.Scheme.Impl.Actions.BuildSymbolicImageAction"/>
       <Node Id="Tarjan" Class="DSIS.Scheme.Impl.Actions.ChainRecurrenctSimbolicImageAction"/>
       <Node Id="Method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings"/>
+      <Node Id="WFBase" Class="DSIS.Scheme.Impl.Actions.Files.WorkingFolderAction"/>
       <Node Id="SWF" Class="DSIS.Scheme.Impl.Actions.Files.SystemWorkingFolderAction"/>
+      <Node Id="System" Class="DSIS.Scheme.Actions.TransparentAction">
+        <Args xsi:type="NodeConstructorArgumentObject" key="System"/>
+      </Node>
     </Nodes>
+    <Links>
+      <!-- TODO: Create LinkTo element-->
+      <Link>
+        <Nodes node-ref="System"/>
+        <Nodes node-ref="SWF"/>
+      </Link>      
+    </Links>
   </Graph>
 
   <Graph Id="base_SI_step">
@@ -59,9 +70,14 @@
       <Link>
         <Nodes node-ref="#input"/>
         <Nodes node-ref="ReplaceWorkingFolder"/>
-        <Nodes node-ref="DrawSI"/>
+        <Nodes node-ref="DrawSI"/>       
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="#output"/>       
       </Link>
     </Links>
+    
   </Graph>
 
 </Graphs>

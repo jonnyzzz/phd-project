@@ -6,7 +6,7 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Console
 {
-  public class DumpNewLineAction : TransparentAction
+  public class DumpNewLineAction : CopyContextAction
   {
     public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {

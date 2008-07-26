@@ -4,7 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme
 {
-  public abstract class TransparentAction : ActionBase
+  public abstract class CopyContextAction : ActionBase
   {
     public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
