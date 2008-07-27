@@ -29,7 +29,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
         double t = point[0];
         PointGraphNode n1 = graph.CreateNodeNoCopy(t);
         PointGraphNode n2 = graph.CreateNodeNoCopy(t + myEps);
-        return new PointGraphEdge[] { graph.AddEdge(n1, n2) };
+        return new[] { graph.AddEdge(n1, n2) };
       }
     }
   }

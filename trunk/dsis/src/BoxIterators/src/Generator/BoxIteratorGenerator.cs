@@ -59,7 +59,7 @@ namespace DSIS.BoxIterators.Generator
 
     private static string GenerateEnumeration(int dim, string type)
     {
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       for (int i = 0; i < dim; i++)
       {
         sb.AppendFormat("{1} left{0} = left[{0}];", i, type);

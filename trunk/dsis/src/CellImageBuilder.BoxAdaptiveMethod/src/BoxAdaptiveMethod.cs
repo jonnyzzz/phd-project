@@ -49,7 +49,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
       myFunction = context.Function.GetFunction<double>(mySystem.CellSize);
 
-      BoxAdaptiveMethodSettings settings = (BoxAdaptiveMethodSettings) context.Settings;
+      var settings = (BoxAdaptiveMethodSettings) context.Settings;
 
       myLimit = settings.TaskLimit;
       myProcessed = 0;
@@ -82,7 +82,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       divRight = new Divide[myDim];
       div = new Divide[myDim];
       div2 = new Divide[myDim];
-      double[] per = new double[myDim];
+      var per = new double[myDim];
       for (int i = 0; i < myDim; i++)
       {
         divLeft[i] = Divide.First;

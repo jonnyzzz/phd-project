@@ -77,7 +77,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
     private static string BuildPrivateFields(int dim)
     {
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       for (int i = 0; i < dim; i++)
       {
         sb.AppendFormat("  private double myEps{0};", i);
@@ -88,7 +88,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
     private static string BuildProcessorConstructor(int dim)
     {
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       for (int i = 0; i < dim; i++)
       {
         sb.AppendFormat("  myEps{0} = info.CellSize[{0}];", i);
@@ -99,7 +99,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
     private static int[] FillArray(int dim, int v)
     {
-      int[] r = new int[dim];
+      var r = new int[dim];
       for (int i = 0; i < dim; i++)
         r[i] = v;
       return r;
@@ -119,7 +119,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
     private static string EnumerateArray(int dim, Element el)
     {
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       for (int i = 0; i < dim; i++)
       {
         sb.AppendFormat("{1}{0}", el(i), i != 0 ? ", " : "");
@@ -140,7 +140,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
     private static string BuildGeneratorCode(int dim)
     {
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
 
       for (int i = 0; i < dim; i++)
       {
@@ -159,19 +159,19 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       {
         sb.AppendFormat("PointGraphNode node{0} = graph.CreateNodeNoCopy({1});",
                         ArrayToString(pt),
-                        EnumerateArray(dim, delegate(int i) { return (pt[i] == 0 ? "myLeft" : "myRight") + i; })
+                        EnumerateArray(dim, i => (pt[i] == 0 ? "myLeft" : "myRight") + i)
           );
         sb.AppendLine();
       }
 
       sb.AppendFormat("PointGraphNode nodeMiddle = graph.CreateNodeNoCopy({0});",
-                      EnumerateArray(dim, delegate(int i) { return "myMiddle" + i; }));
+                      EnumerateArray(dim, i => "myMiddle" + i));
 
       sb.AppendLine();
       sb.AppendLine();
       sb.AppendLine();
 
-      AddedEdgesHash hash = new AddedEdgesHash();
+      var hash = new AddedEdgesHash();
 
       sb.AppendLine("return new PointGraphEdge[] {");
       foreach (int[] pt in BoxIteratorGenerator<int>.GenerateIterator(dim).EnumerateBox(zeros, ones, new int[dim]))
@@ -211,7 +211,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
       private static int[] MakeKey(int[] from, int[] to)
       {
-        int[] key = new int[from.Length + to.Length];
+        var key = new int[from.Length + to.Length];
         for (int i = 0; i < from.Length; i++)
         {
           key[i] = from[i];

@@ -14,8 +14,8 @@ namespace DSIS.PerformanceChecks
       IBoxIterator<int> iterator = BoxIteratorGenerator<int>.GenerateIterator(1);
       DoAction("dim 1", delegate
                           {
-                            List<int[]> l = new List<int[]>();
-                            IEnumerable<int[]> box = iterator.EnumerateBox(new int[] {0}, new int[] {100}, new int[1]);
+                            var l = new List<int[]>();
+                            var box = iterator.EnumerateBox(new[] {0}, new[] {100}, new int[1]);
                             l.AddRange(box);
                           }, 1000000);      
     }
@@ -26,8 +26,8 @@ namespace DSIS.PerformanceChecks
       IBoxIterator<int> iterator = BoxIteratorGenerator<int>.GenerateIterator(2);
       DoAction("dim 2", delegate
                           {
-                            List<int[]> l = new List<int[]>();
-                            IEnumerable<int[]> box = iterator.EnumerateBox(new int[] {0,0}, new int[] {100,100}, new int[2]);
+                            var l = new List<int[]>();
+                            IEnumerable<int[]> box = iterator.EnumerateBox(new[] {0,0}, new[] {100,100}, new int[2]);
                             l.AddRange(box);
                           }, 1000000);      
     }

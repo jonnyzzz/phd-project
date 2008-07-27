@@ -37,17 +37,17 @@ namespace DSIS.PerformanceChecks
                             Marshal.SizeOf(typeof (double)));      
     }
 
-    private ISystemSpace create2d()
+    private static ISystemSpace create2d()
     {
       return new DefaultSystemSpace(2, 0.0.Fill(2), 1.0.Fill(2), 1000L.Fill(2));
     }
     
-    private ISystemSpace create3d()
+    private static ISystemSpace create3d()
     {
       return new DefaultSystemSpace(3, 0.0.Fill(3), 1.0.Fill(3), 50L.Fill(3));
     }
 
-    private ISystemSpace create4d()
+    private static ISystemSpace create4d()
     {
       return new DefaultSystemSpace(4, 0.0.Fill(4), 1.0.Fill(4), 20L.Fill(4));
     }
@@ -100,7 +100,7 @@ namespace DSIS.PerformanceChecks
 
         GCHelper.Collect();
         totalMem += GC.GetTotalMemory(true) - mem;
-        Console.Out.WriteLine("                                       x = {0}", xx.ToString().Substring(0, 1));
+        Console.Out.WriteLine("x = {0}", xx.ToString().Substring(0, 1));
       }
       
       WriteList("{0}- Time={1}ms", name, totalTime.TotalMilliseconds/TIMES);

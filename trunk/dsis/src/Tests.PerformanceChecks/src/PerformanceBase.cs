@@ -35,6 +35,7 @@ namespace DSIS.PerformanceChecks
 
     protected static double DoAction(DAction d, int count)
     {
+      d(); //let it be cached
       DateTime start = DateTime.Now;
       for (int i = 0; i < count; i++)
       {
