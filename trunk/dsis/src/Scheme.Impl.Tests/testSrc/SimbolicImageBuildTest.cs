@@ -1,12 +1,11 @@
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Henon;
-using DSIS.Scheme.Exec;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
-namespace DSIS.Scheme.Impl
-{  
+namespace DSIS.Scheme.Impl.Tests
+{
   [TestFixture]
   public class SimbolicImageBuildTest : SimbolicImageBuildTestBase
   {
@@ -32,16 +31,15 @@ namespace DSIS.Scheme.Impl
     [Test]
     public void Test_CellsInctement()
     {
-      AssertGraphAction b = new AssertGraphAction();
-      b.CompontentsCountConstraint = new GreaterThanOrEqualConstraint(1);
-      b.CompontentsNodesCountConstraint = new GreaterThanOrEqualConstraint(10);
-      b.GraphNodesConstraint = new GreaterThanOrEqualConstraint(56  );
-      b.GraphEdgesConstraint = new GreaterThanOrEqualConstraint(100);
+      var b = new AssertGraphAction
+                {
+                  CompontentsCountConstraint = new GreaterThanOrEqualConstraint(1),
+                  CompontentsNodesCountConstraint = new GreaterThanOrEqualConstraint(10),
+                  GraphNodesConstraint = new GreaterThanOrEqualConstraint(56),
+                  GraphEdgesConstraint = new GreaterThanOrEqualConstraint(100)
+                };
 
-      DoTest(3, delegate(ActionBuilderAdapter ad, IAction leaf)
-                  {
-                    ad.AddEdge(leaf, b);
-                  });
+      DoTest(3, (ad, leaf) => ad.AddEdge(leaf, b));
     }     
   }
 }

@@ -209,7 +209,7 @@ namespace DSIS.Scheme.Xml
 
           throw new NotImplementedException(arg.GetType().FullName);
         }
-        else if (arg is NodeConstructorArgumentObject)
+        if (arg is NodeConstructorArgumentObject)
         {
           var key = ((NodeConstructorArgumentObject) arg).key;
           var obj = bag.Get(key);
@@ -247,35 +247,6 @@ namespace DSIS.Scheme.Xml
               bag.Add(node.RegisterKey, action);
             return action;
           });
-    }
-
-    private class Bag
-    {
-      private readonly Bag myParent;
-      private readonly IDictionary<string, object> myBag = new Dictionary<string, object>();
-
-      public Bag() : this(null)
-      {
-      }
-
-      public Bag(Bag parent)
-      {
-        myParent = parent;
-      }
-
-      public object Get(string key)
-      {
-        object o;
-        if (myBag.TryGetValue(key, out o))
-          return o;
-
-        return myParent == null ? null : myParent.Get(key);
-      }
-
-      public void Add(string key, object o)
-      {
-        myBag[key] = o;
-      }
     }
   }
 }

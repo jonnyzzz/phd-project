@@ -2,6 +2,7 @@ using System.Reflection;
 using DSIS.CodeCompiler;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.IntegerCoordinates.Tests.Generic;
+using DSIS.Utils;
 using DSIS.Utils.Test;
 using NUnit.Core;
 using NUnit.Framework;
@@ -49,6 +50,35 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
             Assert.AreEqual(v, system.ToExternal(system.ToInternal(v, i), i), system.CellSize[i]);
           }
         }
+      }
+    }
+
+    [Test]
+    public void Test_Subdivision()
+    {
+      for (int i = 1; i < 10; i++)
+      {
+        IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i);
+        IIntegerCoordinateSystem info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000L, i)), Fill(100000L, i));
+
+        info.DoGeneric(new DoWithCoordunates_Subdivision());
+      }
+    }
+
+
+    private class DoWithCoordunates_Subdivision : IIntegerCoordinateSystemWith
+    {
+      public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate
+      {
+        var div = system.Subdivide(2L.Fill(system.Dimension));
+        Assert.IsTrue(!div.GetType().IsGenericType);
+
+        var x = system.Create(100L.Fill(system.Dimension));
+        var set = new Hashset<Q>(EqualityComparerFactory<Q>.GetComparer());
+        set.AddRange(div.Subdivide(x));
+
+        Assert.IsTrue(set.Contains(((T)div.ToSystem).Create(200L.Fill(system.Dimension))));
+        Assert.IsTrue(set.Contains(((T)div.ToSystem).Create(201L.Fill(system.Dimension))));
       }
     }
 

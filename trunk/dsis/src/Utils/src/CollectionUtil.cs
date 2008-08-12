@@ -227,6 +227,16 @@ namespace DSIS.Utils
       }
     }
 
+    public static Dictionary<T,P> MapValues<T,P,Q>(this Dictionary<T,Q> dic, Converter<Q,P> conv)
+    {
+      var result = new Dictionary<T, P>(dic.Comparer);
+      foreach (var pair in dic)
+      {
+        result.Add(pair.Key, conv(pair.Value));
+      }
+      return result;
+    }
+
     public static IEnumerable<T> Maps<T,Q>(this IEnumerable<Q> en, Converter<Q, IEnumerable<T>> conv)
     {
       foreach (var q in en)

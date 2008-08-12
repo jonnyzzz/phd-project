@@ -90,7 +90,13 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public ICellCoordinateSystemConverter<Q, Q> Subdivide(long[] division)
     {
-      return new IntegerCoordinateCellConverter<TInh, Q>(myInh, myInh.SubdividedCoordinateSystem(division), division);
+      var toSystem = myInh.SubdividedCoordinateSystem(division);
+      return CreateSubdivideConverter(myInh, toSystem, division);
+    }
+
+    protected virtual ICellCoordinateSystemConverter<Q, Q> CreateSubdivideConverter(TInh from, TInh to, long[] division)
+    {
+      return new IntegerCoordinateCellConverter<TInh, Q>(from, to, division);
     }
 
     public ICellCoordinateSystemProjector<Q> Project(long[] factor)

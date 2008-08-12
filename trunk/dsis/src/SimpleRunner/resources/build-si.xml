@@ -22,6 +22,26 @@
     </Links>
   </Graph>
 
+  <Graph Id="base_SI_step2">
+    <Nodes>
+      <Node Id="BuildSI" Class="DSIS.Scheme.Impl.Actions.BuildSymbolicImageAction2">
+        <Args xsi:type="NodeConstructorArgumentObject" key="Subdivision"/>
+        <Args xsi:type="NodeConstructorArgumentObject" key="CellImageBuilderSettings"/>
+      </Node>
+      <Node Id="Merge" Class="DSIS.Scheme.Impl.Actions.MergeComponetsAction"/>
+      <Node Id="Tarjan" Class="DSIS.Scheme.Impl.Actions.ChainRecurrenctSimbolicImageAction"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="BuildSI"/>
+        <Nodes node-ref="Merge"/>
+        <Nodes node-ref="Tarjan"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+
   <Graph Id="base_SI_step">
     <Nodes>
       <Node Id="Step" Class="DSIS.Scheme.Impl.Actions.Agregated.SymbolicImageConstructionStep"/>

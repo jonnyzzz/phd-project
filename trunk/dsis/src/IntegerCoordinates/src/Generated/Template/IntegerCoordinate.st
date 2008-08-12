@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 using DSIS.Core.System;
+using DSIS.Core.Coordinates;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Generated;
 
@@ -168,6 +169,11 @@ namespace DSIS.Generated
     {
       return new OverlappingProcessor(this, cellSizePercent);
     }
+    
+    protected override ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> CreateSubdivideConverter(IntegerCoordinateSystem from, IntegerCoordinateSystem to, long[] division)
+    {
+      return new IntegerCoordinateCellConverter(from, to, division);
+    }
   }
 
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]
@@ -251,6 +257,67 @@ namespace DSIS.Generated
     public IIntegerCoordinateSystem Create(ISystemSpace space, long[] subd)
     {
       return new IntegerCoordinateSystem(space, subd);
+    }
+  }
+  
+  
+  internal class IntegerCoordinateCellConverter : ICellCoordinateSystemMultiplyConverter<IntegerCoordinate> 
+  {
+    private readonly IntegerCoordinateSystem myFromSystem;
+    private readonly IntegerCoordinateSystem myToSystem;
+    
+    private readonly long[] myDivision; 
+    
+    $DimensionIt:{
+      private readonly long myDivision$it$;
+    }$
+    
+    public IntegerCoordinateCellConverter(IntegerCoordinateSystem fromSystem,
+                                          IntegerCoordinateSystem toSystem, 
+                                          long[] division)
+    {
+      myFromSystem = fromSystem;
+      myToSystem = toSystem;
+      myDivision = division;
+      
+      $DimensionIt:{
+         myDivision$it$=division[$it$];
+      }$
+    }
+
+    public long[] Division
+    {
+      get { return myDivision; }
+    }
+
+    public ICellCoordinateSystem<IntegerCoordinate> FromSystem
+    {
+      get { return myFromSystem; }
+    }
+
+    public IEnumerable<IntegerCoordinate> Subdivide(IntegerCoordinate coordinate)
+    {
+      $DimensionIt:{
+        long min$it$ = coordinate.l$it$ * myDivision$it$;
+        long max$it$ = min$it$ + myDivision$it$;
+      }$
+      
+      $DimensionIt:{
+        for(long i$it$=min$it$; i$it$ < max$it$ ; i$it$++)
+      }$
+      {
+        yield return myToSystem.Create($DimensionIt:{i$it$}; separator=", "$);
+      }      
+    }
+
+    public ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> Clone()
+    {
+      return new IntegerCoordinateCellConverter(myFromSystem, myToSystem, myDivision);
+    }
+
+    public ICellCoordinateSystem<IntegerCoordinate> ToSystem
+    {
+      get { return myToSystem; }
     }
   }
   

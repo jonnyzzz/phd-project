@@ -1,55 +1,26 @@
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.Shared;
-using DSIS.Core.Builders;
-using DSIS.Core.Coordinates;
-using DSIS.Core.Processor;
-using DSIS.Core.System;
-using DSIS.Core.Util;
-using DSIS.Graph.Abstract;
-using DSIS.Graph.Adapter;
-using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions
 {
-  public class BuildSymbolicImageAction : IntegerCoordinateSystemActionBase2
+  public class BuildSymbolicImageAction : BuildSymbolicImageActionBase
   {
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx), Create(Keys.SystemInfoKey),
+      return ColBase(base.Check<T, Q>(system, ctx),
                  Create(Keys.CellImageBuilderKey),
-                 Create(Keys.CellsEnumerationKey<Q>()),
                  Create(Keys.SubdivisionKey));
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override ICellImageBuilderIntegerCoordinatesSettings GetCellImageBuilderSettings(Context input)
     {
-      ISystemInfo info = Keys.SystemInfoKey.Get(input);
-      ICellImageBuilderIntegerCoordinatesSettings bld = Keys.CellImageBuilderKey.Get(input);
-      long[] subdivision = Keys.SubdivisionKey.Get(input);
+      return Keys.CellImageBuilderKey.Get(input);
+    }
 
-      ICellCoordinateSystemConverter<Q, Q> subdivide = system.Subdivide(subdivision);
-      ICellCoordinateSystem<Q> toSystem = subdivide.ToSystem;
-
-      var graph = new TarjanGraph<Q>(toSystem);
-
-      var cellSettings = new CellImageBuilderContext<Q>(
-        info, bld, toSystem, new GraphCellImageBuilder<Q>(graph));
-
-      var ctx = new CellProcessorContext<Q, Q>(
-        Keys.CellsEnumerationKey<Q>().Get(input),
-        subdivide,
-        bld.Create<Q>(),
-        cellSettings
-        );
-
-      ICellProcessor<Q, Q> proc = new SymbolicImageConstructionProcess<Q, Q>();
-      proc.Bind(ctx);
-
-      proc.Execute(NullProgressInfo.INSTANCE);
-
-      Keys.Graph<Q>().Set(output, graph);
-      Keys.IntegerCoordinateSystemInfo.Set(output, (IIntegerCoordinateSystem)toSystem);
-    }   
+    protected override long[] GetSubdivision(Context input)
+    {
+      return Keys.SubdivisionKey.Get(input);
+    }
   }
 }

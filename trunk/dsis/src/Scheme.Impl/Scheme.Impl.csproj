@@ -57,6 +57,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Actions\Agregated\SymbolicImageConstructionStep.cs" />
     <Compile Include="src\Actions\BuildSymbolicImageAction.cs" />
+    <Compile Include="src\Actions\BuildSymbolicImageAction2.cs" />
+    <Compile Include="src\Actions\BuildSymbolicImageActionBase.cs" />
     <Compile Include="src\Actions\ChainRecurrenctSimbolicImageAction.cs" />
     <Compile Include="src\Actions\Console\DumpContextAction.cs" />
     <Compile Include="src\Actions\Console\DumpGraphAsMatrixForMapleAction.cs" />
@@ -73,7 +75,9 @@
     <Compile Include="src\Actions\Console\DumpMethodAction.cs" />
     <Compile Include="src\Actions\Console\DumpWorkingFolderAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />
+    <Compile Include="src\Actions\CreateCoordinateSystemActionBase.cs" />
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
+    <Compile Include="src\Actions\CreateRealCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\DefaultBoxMethodSettings.cs" />
     <Compile Include="src\Actions\Entropy\BiggestMeasureInfo.cs" />
     <Compile Include="src\Actions\Entropy\EigenEntropyAction.cs" />
@@ -123,6 +127,9 @@
     <Compile Include="src\Actions\Line\LineAction.cs" />
     <Compile Include="src\Actions\Line\LineBaseAction.cs" />
     <Compile Include="src\Actions\Line\LineInitialAction.cs" />
+    <Compile Include="src\Actions\Performance\DumpSlotTimesAction.cs" />
+    <Compile Include="src\Actions\Performance\PerformanceSlot.cs" />
+    <Compile Include="src\Actions\Performance\RecordTimeSlotAction.cs" />
     <Compile Include="src\Actions\SetMethod.cs" />
     <Compile Include="src\Actions\SetMethod2.cs" />
     <Compile Include="src\Actions\SystemInfoAction.cs" />

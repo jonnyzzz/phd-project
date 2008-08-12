@@ -1,4 +1,5 @@
 using DSIS.Scheme.Actions;
+using DSIS.Scheme.Impl.Actions.Performance;
 
 namespace DSIS.Scheme.Impl.Actions.Agregated
 {
@@ -7,7 +8,10 @@ namespace DSIS.Scheme.Impl.Actions.Agregated
     public SymbolicImageConstructionStep()
     {
       IAction merge = new MergeComponetsAction();
-      IAction buildImage = new BuildSymbolicImageAction();
+
+      //todo:Crap!!! Do not use time checker here!
+      IAction buildImage = new RecordTimeSlotAction(new BuildSymbolicImageAction(), "BuildSymbolicImage");
+
       IAction components = new ChainRecurrenctSimbolicImageAction();
       IAction buildImageStartProxy = new ProxyAction();
 

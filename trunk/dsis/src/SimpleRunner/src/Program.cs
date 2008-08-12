@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.CellImageBuilder.PointMethod;
@@ -22,6 +23,7 @@ using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
 using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Actions.Files;
+using DSIS.Scheme.Impl.Actions.Performance;
 using DSIS.SimpleRunner.parallel;
 using DSIS.Utils;
 
@@ -64,7 +66,7 @@ namespace DSIS.SimpleRunner
       IAction vanderpol = new SystemInfoAction(new RungeKuttSolver(new VanDerPolSystemInfo(1), 15, 0.1),
                                                duffingSp);
 
-      IAction wfBase = new WorkingFolderAction();
+      var wfBase = new WorkingFolderAction();
 
       IAction[] system = {systemHenon, /*systemHenonD, systemHenonD_272, systemIked, systemIkedaCut*/};
 
@@ -74,9 +76,10 @@ namespace DSIS.SimpleRunner
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systenLogistic4, 1).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoLinear, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoSquare, 2).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 10, duffing, 2).Do); 
-//      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
-//      parallel.DoParallel(new ComputeDelegate(wfBase, 10, systemIked, 2).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 10, duffing, 2).Do); 
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemHenon, 2).Do);
+
+      parallel.DoParallel(new ComputeDelegate(wfBase, 7, systemIked, 2).Do);
       
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, duffing, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, vanderpol, 2).Do);
@@ -99,9 +102,11 @@ namespace DSIS.SimpleRunner
 
     private static void ComputeEntropy(int dim, IAction wfBase, int steps, IAction system)
     {
+      const string timeSlotKey = "BuildSymbolicImage";
+
       IAction a2 = new CreateCoordinateSystemAction();
       IAction a3 = new CreateInitialCellsAction();
-      IAction a4 = new BuildSymbolicImageAction();
+      IAction a4 = new RecordTimeSlotAction(new BuildSymbolicImageAction(), timeSlotKey);
       IAction a5 = new ChainRecurrenctSimbolicImageAction();
       IAction method = new DefaultBoxMethodSettings();
 
@@ -122,6 +127,7 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(a3, a4);
       gr.AddEdge(system, a4);
 
+      gr.AddEdge(a3, method);
       gr.AddEdge(method, a4);
       gr.AddEdge(a4, a5);
 
@@ -131,8 +137,7 @@ namespace DSIS.SimpleRunner
       IAction buildIS = new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
           {
-            var build =
-              new SymbolicImageConstructionStep();
+            var build = (new SymbolicImageConstructionStep());
             bld.AddEdge(bld.Start, build);
             bld.AddEdge(build, bld.End);
             var b = new ParallelAction(new DumpGraphInfoAction(),
@@ -156,7 +161,9 @@ namespace DSIS.SimpleRunner
                               new AgregateAction(
                                 bld =>
                                   {
-                                    IAction xa1 = new ProxyAction(); var xxx= new ReplaceContextAction(
+                                    IAction xa1 = new ProxyAction(); 
+                                    
+                                    var xxx= new ReplaceContextAction(
                                        new SetMethod(
                                          new PointMethodSettings(2.Fill(dim), 0.1), 1L.Fill(dim)));
                                     IAction xa2 = buildIS;
@@ -188,6 +195,8 @@ namespace DSIS.SimpleRunner
       var writeSequenceSlotAction = new WriteSequenceSlotAction();
       gr.AddEdge(step, writeSequenceSlotAction);
       gr.AddEdge(a5, writeSequenceSlotAction);
+      gr.AddEdge(a5, new DumpSlotTimesAction(timeSlotKey));
+      gr.AddEdge(a5, new DumpSlotTimesAction("BuildSI"));
       gr.Execute();
     }
 
