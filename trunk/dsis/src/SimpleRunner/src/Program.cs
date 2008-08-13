@@ -5,6 +5,7 @@ using DSIS.CellImageBuilder.PointMethod;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Duffing;
+using DSIS.Function.Predefined.FoodChain;
 using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.HomoLinear;
 using DSIS.Function.Predefined.HomoSquare;
@@ -41,6 +42,8 @@ namespace DSIS.SimpleRunner
         new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
       var spD =
         new DefaultSystemSpace(2, new double[] {-2, -2}, new double[] {2, 2}, new long[] {2, 2});
+      var sp3 =
+        new DefaultSystemSpace(3, new double[] {0, 0, 0}, new double[] {200, 200, 200}, new long[] {2, 2, 2});
 
       var log_sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {1, 4}, new long[] {3, 3});
       var log_sp2 = new DefaultSystemSpace(2, new double[] {0, 3}, new[] {1, 3.7}, new long[] {3, 3});
@@ -60,6 +63,7 @@ namespace DSIS.SimpleRunner
       IAction systenLogistic4 = new SystemInfoAction(new LogisticSystemInfo(4), log_sp1);
       IAction systenHomoLinear = new SystemInfoAction(new HomoLinearSystemInfo(1.35), sp);
       IAction systenHomoSquare = new SystemInfoAction(new HomoSquareSystemInfo(0.4), sp);
+      IAction systemTorsten = new SystemInfoAction(new FoodChainSystemInfo(), sp3);
 
       IAction duffing = new SystemInfoAction(new RungeKuttSolver(new DuffingSystemInfo(1, 1, 0.01), 3, 0.01),
                                              duffingSp);
@@ -79,7 +83,8 @@ namespace DSIS.SimpleRunner
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 10, duffing, 2).Do); 
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemHenon, 2).Do);
 
-      parallel.DoParallel(new ComputeDelegate(wfBase, 7, systemIked, 2).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemIked, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemTorsten, 3).Do);
       
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, duffing, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, vanderpol, 2).Do);
@@ -104,7 +109,7 @@ namespace DSIS.SimpleRunner
     {
       const string timeSlotKey = "BuildSymbolicImage";
 
-      IAction a2 = new CreateCoordinateSystemAction();
+      IAction a2 = new CreateRealCoordinateSystemAction();
       IAction a3 = new CreateInitialCellsAction();
       IAction a4 = new RecordTimeSlotAction(new BuildSymbolicImageAction(), timeSlotKey);
       IAction a5 = new ChainRecurrenctSimbolicImageAction();
