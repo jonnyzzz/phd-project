@@ -50,7 +50,7 @@ namespace DSIS.Scheme.Impl.Actions
         cellSettings
         );
 
-      ICellProcessor<Q, Q> proc = new SymbolicImageConstructionProcess<Q, Q>();
+      var proc = new SymbolicImageConstructionProcess<Q, Q>();
       proc.Bind(ctx);
 
       PerformanceSlot ps = PerformanceSlot.Get("BuildSI", SlotStore.Get(input));
