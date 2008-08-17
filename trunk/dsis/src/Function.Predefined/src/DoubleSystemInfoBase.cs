@@ -6,7 +6,8 @@ namespace DSIS.Function.Predefined
   public abstract class DoubleSystemInfoBase : SystemInfoDecoratorBase, ISystemInfo
   {
     private readonly int myDimension;
-    public DoubleSystemInfoBase(int dimension)
+
+    protected DoubleSystemInfoBase(int dimension)
     {
       myDimension = dimension;
     }
@@ -34,7 +35,7 @@ namespace DSIS.Function.Predefined
 
     public IFunction<T> GetFunction<T>(T precision)
     {
-      T[] ts = new T[myDimension];
+      var ts = new T[myDimension];
       for(int i=0; i< myDimension; i++)
       {
         ts[i] = precision;
@@ -44,7 +45,7 @@ namespace DSIS.Function.Predefined
 
     public Type[] SupportedFunctionTypes
     {
-      get { return new Type[] {typeof (double)}; }
+      get { return new[] {typeof (double)}; }
     }    
 
     public abstract string PresentableName { get; }

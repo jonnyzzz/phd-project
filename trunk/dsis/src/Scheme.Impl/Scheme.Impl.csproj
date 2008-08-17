@@ -83,6 +83,7 @@
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
     <Compile Include="src\Actions\CreateRealCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\DefaultBoxMethodSettings.cs" />
+    <Compile Include="src\Actions\DefaultPointMethodSettings.cs" />
     <Compile Include="src\Actions\Entropy\BiggestMeasureInfo.cs" />
     <Compile Include="src\Actions\Entropy\EigenEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\EigenPerComoponentAction.cs" />

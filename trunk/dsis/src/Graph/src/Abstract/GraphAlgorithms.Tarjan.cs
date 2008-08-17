@@ -34,12 +34,9 @@ namespace DSIS.Graph.Abstract
       info.Maximum = graph.EdgesCount;
 
       using (var holder = graph.CreateDataHolder(x => new TarjanNodeData<TCell,TNode>(x)))
-      using (var stackFlag = graph.CreateNodeFlagsHolder("STACK"))
-      using (var routeFlag = graph.CreateNodeFlagsHolder("ROUTE"))
+      using(var stack = new TarjanNodeStack<TCell, TNode>(graph.CreateNodeFlagsHolder("STACK")))
+      using(var route = new TarjanNodeStack<TCell, TNode>(graph.CreateNodeFlagsHolder("ROUTE")))
       {
-        var stack = new TarjanNodeStack<TCell, TNode>(stackFlag);
-        var route = new TarjanNodeStack<TCell, TNode>(routeFlag);
-
         long state = 2;
         long cnt = 1;
 
@@ -122,9 +119,7 @@ namespace DSIS.Graph.Abstract
                 {
                   stack.Pop();
                   if (graph.IsSelfLoop(v))
-                  {
                     comps.NextComponent().SetNodeComponent<TCell, TNode>(v);
-                  }
                 }
                 else
                 {
@@ -134,7 +129,7 @@ namespace DSIS.Graph.Abstract
                     w = stack.Pop();
                     wData = holder.GetData(w);
                     ic.SetNodeComponent<TCell, TNode>(w);
-                  } while (!ReferenceEquals(v, w));
+                  } while (w != v);
                 }
                 route.Pop();
 
@@ -154,8 +149,6 @@ namespace DSIS.Graph.Abstract
           state = 2;
         }
 
-        stack.Clear();
-        route.Clear();
         return new TarjanStrongComponentImpl<TCell, TNode>(graph, comps);
       }
     }

@@ -1,8 +1,9 @@
+using System;
 using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public class TarjanComponentInfo : IStrongComponentInfo
+  public class TarjanComponentInfo : IStrongComponentInfo, IEquatable<TarjanComponentInfo>
   {
     private int myNodesCount = 0;
     private readonly uint myComponentId;
@@ -34,6 +35,26 @@ namespace DSIS.Graph.Abstract
     public override string ToString()
     {
       return "StrongComponent: Id = " + myComponentId;
+    }
+
+    public bool Equals(TarjanComponentInfo obj)
+    {
+      if (ReferenceEquals(null, obj)) return false;
+      if (ReferenceEquals(this, obj)) return true;
+      return obj.myComponentId == myComponentId;
+    }
+
+    public override bool Equals(object obj)
+    {
+      if (ReferenceEquals(null, obj)) return false;
+      if (ReferenceEquals(this, obj)) return true;
+      if (obj.GetType() != typeof (TarjanComponentInfo)) return false;
+      return Equals((TarjanComponentInfo) obj);
+    }
+
+    public override int GetHashCode()
+    {
+      return myComponentId.GetHashCode();
     }
   }
 }

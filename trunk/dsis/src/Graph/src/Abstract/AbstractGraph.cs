@@ -210,9 +210,8 @@ namespace DSIS.Graph.Abstract
       var flag = myNodeFlags.CreateFlag(key);
       var holder = new FlagsNodeHolder<TInh, TNode, TCell>(this, myNodeFlags, flag);
       if (flag.IsReusing)
-      {
         holder.CleanAll();
-      }
+
       return holder;
     }
 

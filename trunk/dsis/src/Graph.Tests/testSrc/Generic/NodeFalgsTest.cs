@@ -1,5 +1,6 @@
 using DSIS.Graph.Abstract;
 using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Graph.Tests.Generic
 {
@@ -104,7 +105,107 @@ namespace DSIS.Graph.Tests.Generic
       Assert.IsFalse(myValue.GetFlag(f1));
       Assert.IsFalse(myValue.GetFlag(f2));
     }
-    
+
+    [Test]
+    public void Test_ReturnDifferentFlags()
+    {
+      var f1 = myNodeFlags.CreateFlag("F");
+      var f2 = myNodeFlags.CreateFlag("F2");
+      var f3 = myNodeFlags.CreateFlag("F3");
+
+      Assert.That(myValue.GetFlag(f1), Is.False);
+      Assert.That(myValue.GetFlag(f2), Is.False);
+      Assert.That(myValue.GetFlag(f3), Is.False);
+      
+      myValue.SetFlag(f1, true);
+      Assert.That(myValue.GetFlag(f1), Is.True);
+      Assert.That(myValue.GetFlag(f2), Is.False);
+      Assert.That(myValue.GetFlag(f3), Is.False);
+
+      myValue.SetFlag(f2, true);
+      Assert.That(myValue.GetFlag(f1), Is.True);
+      Assert.That(myValue.GetFlag(f2), Is.True);
+      Assert.That(myValue.GetFlag(f3), Is.False);
+
+      myValue.SetFlag(f3, true);
+      Assert.That(myValue.GetFlag(f1), Is.True);
+      Assert.That(myValue.GetFlag(f2), Is.True);
+      Assert.That(myValue.GetFlag(f3), Is.True);
+
+      myValue.SetFlag(f1, false);
+      Assert.That(myValue.GetFlag(f1), Is.False);
+      Assert.That(myValue.GetFlag(f2), Is.True);
+      Assert.That(myValue.GetFlag(f3), Is.True);
+
+      myValue.SetFlag(f2, false);
+      Assert.That(myValue.GetFlag(f1), Is.False);
+      Assert.That(myValue.GetFlag(f2), Is.False);
+      Assert.That(myValue.GetFlag(f3), Is.True);
+    }
+
+    [Test]
+    public void Test_ReturnDifferentFlagsComponentId()
+    {
+      CheckCid(0);
+
+      for(uint i=0; i<5;i++)
+      {
+        myValue.SetComponentId(i);
+        CheckCid(i);
+      }
+    }
+
+    private void CheckCid(uint cID)
+    {
+      using(var f1 = myNodeFlags.CreateFlag("F"))
+      using(var f2 = myNodeFlags.CreateFlag("F2"))
+      using(var f3 = myNodeFlags.CreateFlag("F3"))
+      {
+        if (f1.IsReusing) myValue.SetFlag(f1, false);
+        if (f2.IsReusing) myValue.SetFlag(f2, false);
+        if (f3.IsReusing) myValue.SetFlag(f3, false);
+
+        Assert.That(myValue.ComponentId, Is.EqualTo(cID));
+        Assert.That(myValue.GetFlag(f1), Is.False);
+        Assert.That(myValue.GetFlag(f2), Is.False);
+        Assert.That(myValue.GetFlag(f3), Is.False);
+
+        myValue.SetFlag(f1, true);
+        Assert.That(myValue.ComponentId, Is.EqualTo(cID));
+        Assert.That(myValue.GetFlag(f1), Is.True);
+        Assert.That(myValue.GetFlag(f2), Is.False);
+        Assert.That(myValue.GetFlag(f3), Is.False);
+
+        myValue.SetFlag(f2, true);
+        Assert.That(myValue.ComponentId, Is.EqualTo(cID));
+        Assert.That(myValue.GetFlag(f1), Is.True);
+        Assert.That(myValue.GetFlag(f2), Is.True);
+        Assert.That(myValue.GetFlag(f3), Is.False);
+
+        myValue.SetFlag(f3, true);
+        Assert.That(myValue.ComponentId, Is.EqualTo(cID));
+        Assert.That(myValue.GetFlag(f1), Is.True);
+        Assert.That(myValue.GetFlag(f2), Is.True);
+        Assert.That(myValue.GetFlag(f3), Is.True);
+
+        myValue.SetFlag(f1, false);
+        Assert.That(myValue.ComponentId, Is.EqualTo(cID));
+        Assert.That(myValue.GetFlag(f1), Is.False);
+        Assert.That(myValue.GetFlag(f2), Is.True);
+        Assert.That(myValue.GetFlag(f3), Is.True);
+
+        myValue.SetFlag(f2, false);
+        Assert.That(myValue.ComponentId, Is.EqualTo(cID));
+        Assert.That(myValue.GetFlag(f1), Is.False);
+        Assert.That(myValue.GetFlag(f2), Is.False);
+        Assert.That(myValue.GetFlag(f3), Is.True);
+
+        myValue.SetFlag(f1, true);
+        myValue.SetFlag(f2, true);
+        myValue.SetFlag(f3, true);
+      }
+    }
+
 
     /*[Test]
     public void TestTarjanNode_01()

@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public class TarjanNodeStack<TCell, TNode> 
+  public class TarjanNodeStack<TCell, TNode> : IDisposable
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
   {
@@ -43,9 +44,10 @@ namespace DSIS.Graph.Abstract
       return myMask.GetData(node);
     }
 
-    public void Clear()
+    public void Dispose()
     {
       myStack.Clear();
-    }    
+      myMask.Dispose();
+    }
   }
 }

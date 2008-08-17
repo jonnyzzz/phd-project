@@ -81,10 +81,10 @@ namespace DSIS.SimpleRunner
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoLinear, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoSquare, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 10, duffing, 2).Do); 
-//      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemHenon, 2).Do);
 
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemIked, 2).Do);
-      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemTorsten, 3).Do);
+//      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systemTorsten, 3).Do);
       
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, duffing, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 12, vanderpol, 2).Do);
@@ -109,11 +109,11 @@ namespace DSIS.SimpleRunner
     {
       const string timeSlotKey = "BuildSymbolicImage";
 
-      IAction a2 = new CreateRealCoordinateSystemAction();
+      IAction a2 = new CreateCoordinateSystemAction();
       IAction a3 = new CreateInitialCellsAction();
       IAction a4 = new RecordTimeSlotAction(new BuildSymbolicImageAction(), timeSlotKey);
       IAction a5 = new ChainRecurrenctSimbolicImageAction();
-      IAction method = new DefaultBoxMethodSettings();
+      IAction method = new DefaultPointMethodSettings(); //!
 
       var gr = new ActionGraph();
 
