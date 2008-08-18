@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
@@ -29,8 +30,8 @@ namespace DSIS.Graph.Abstract
 
     public NodeFlag CreateFlag(string name)
     {
-      var list = new List<KeyValuePair<uint, string>>(myFlags);
-      list.Sort((x,y)=>(myUsedFlags.Contains(x.Key) ? 0 : 1).CompareTo(myUsedFlags.Contains(y.Key) ? 0 : 1));
+      var list = new List<KeyValuePair<uint, string>>(myFlags.Filter(x=>x.Value == null));
+      list.Sort((x,y)=>(myUsedFlags.Contains(x.Key) ? 1 : -1).CompareTo(myUsedFlags.Contains(y.Key) ? 1 : -1));
       foreach (var flag in list)
       {
         if (flag.Value == null)

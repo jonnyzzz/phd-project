@@ -1,4 +1,3 @@
-using System;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 
@@ -21,16 +20,18 @@ namespace DSIS.Core.Processor
     {
       info.Minimum = 0;
       info.Maximum = myContext.Cells.Count;
+      var builder = myContext.CellImageBuilder;
+      var converter = myContext.Converter;
 
       foreach (TFrom cell in myContext.Cells)
       {
         info.Tick(1.0);
         if (info.IsInterrupted)
           throw new ProcessInterruptedException();
-
-        foreach (TTo small in myContext.Converter.Subdivide(cell))
+        
+        foreach (TTo small in converter.Subdivide(cell))
         {
-          myContext.CellImageBuilder.BuildImage(small);
+          builder.BuildImage(small);
         }
       }
     }

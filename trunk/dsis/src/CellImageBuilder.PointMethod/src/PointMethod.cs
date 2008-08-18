@@ -54,7 +54,7 @@ namespace DSIS.CellImageBuilder.PointMethod
       myFunction.Input = myDX;
       myFunction.Output = myDY;
 
-      PointMethodSettings set = (PointMethodSettings) context.Settings;
+      var set = (PointMethodSettings) context.Settings;
 
       if (!set.UseOverlapping)
       {
@@ -65,7 +65,7 @@ namespace DSIS.CellImageBuilder.PointMethod
         myPointProcessor = mySystem.ProcessorFactory.CreateOverlapedPointProcessor(set.Overlap);
       }
 
-      double[] dStep = new double[myDim];
+      var dStep = new double[myDim];
       for (int i = 0; i < myDim; i++)
       {
         dStep[i] = mySystem.CellSize[i]/(set.Points[i] - 1.0); //last point is right side
