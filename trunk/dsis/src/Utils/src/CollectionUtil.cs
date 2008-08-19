@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace DSIS.Utils
@@ -318,6 +319,14 @@ namespace DSIS.Utils
         yield return q;
       }
       foreach (var t in ex)
+      {
+        yield return t;
+      }
+    }
+
+    public static IEnumerable<T> Cast<T>(this IEnumerable enu)
+    {
+      foreach (T t in enu)
       {
         yield return t;
       }

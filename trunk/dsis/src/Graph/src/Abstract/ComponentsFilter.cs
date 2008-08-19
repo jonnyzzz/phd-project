@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
-using System.Linq;
 
 namespace DSIS.Graph.Abstract
 {
@@ -18,13 +17,13 @@ namespace DSIS.Graph.Abstract
       {
         return DROP;
       }
-      if (count == 1)
-      {
-        return new ExactFilter(infos.GetFirst().ComponentId);
-      }
       if (count == allComponents)
       {
         return ALL_FILTER;
+      }
+      if (count == 1)
+      {
+        return new ExactFilter(infos.GetFirst().ComponentId);
       }
       if (count > 10)
       {
@@ -41,7 +40,7 @@ namespace DSIS.Graph.Abstract
       {
         data[cnt++] = id.ComponentId;
       }
-      return new ArrayFilter(data);
+      return new ArrayFilter(infos.Map(x=>x.ComponentId).ToArray());
     }
 
     private class AllFilter : IFilter

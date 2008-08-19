@@ -113,7 +113,7 @@ namespace DSIS.SimpleRunner
       IAction a3 = new CreateInitialCellsAction();
       IAction a4 = new RecordTimeSlotAction(new BuildSymbolicImageAction(), timeSlotKey);
       IAction a5 = new ChainRecurrenctSimbolicImageAction();
-      IAction method = new DefaultPointMethodSettings(); //!
+      IAction method = new DefaultBoxMethodSettings(); //!
 
       var gr = new ActionGraph();
 

@@ -33,6 +33,8 @@ namespace DSIS.Graph.Abstract
 
     public void AddEdgeToNode(INode<TCell> fromNode, INode<TCell> toNode)
     {
+      File.AppendAllText(@"c:\graph.txt", string.Format("{0}\t->\t{1}\r\n", fromNode, toNode));
+
       var from = (TNode) fromNode;
       var to = (TNode) toNode;
 
