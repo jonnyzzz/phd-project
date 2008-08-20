@@ -1,0 +1,1 @@
+splot '$file$' using ($1+$x_offset$):($2+$y_offset$):($3+$z_offset$) with candlesticks;

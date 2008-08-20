@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gui", "..\gui\gui.csproj", "{244AE96A-5D5F-43BA-812C-7EF6F3885850}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		FullDebug = FullDebug
+		Release = Release
+		Test = Test
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{244AE96A-5D5F-43BA-812C-7EF6F3885850}.Debug.ActiveCfg = Debug|.NET
+		{244AE96A-5D5F-43BA-812C-7EF6F3885850}.Debug.Build.0 = Debug|.NET
+		{244AE96A-5D5F-43BA-812C-7EF6F3885850}.FullDebug.ActiveCfg = FullDebug|.NET
+		{244AE96A-5D5F-43BA-812C-7EF6F3885850}.FullDebug.Build.0 = FullDebug|.NET
+		{244AE96A-5D5F-43BA-812C-7EF6F3885850}.Release.ActiveCfg = Release|.NET
+		{244AE96A-5D5F-43BA-812C-7EF6F3885850}.Release.Build.0 = Release|.NET
+		{244AE96A-5D5F-43BA-812C-7EF6F3885850}.Test.ActiveCfg = Test|.NET
+		{244AE96A-5D5F-43BA-812C-7EF6F3885850}.Test.Build.0 = Test|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

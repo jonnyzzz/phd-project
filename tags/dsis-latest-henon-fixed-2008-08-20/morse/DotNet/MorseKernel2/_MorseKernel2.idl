@@ -1,0 +1,1471 @@
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\prsht.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\mshtml.idl";
+import "c:\program files\microsoft sdks\windows\v6.0a\include\dimm.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\mshtmhst.idl";
+import "c:\program files\microsoft sdks\windows\v6.0a\include\docobj.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\exdisp.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\objsafe.idl";
+
+[
+	object,
+	uuid(285691E1-BFC9-4E8B-BE17-5B1CC2302ED9),
+	dual,
+	helpstring("IActionBase Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\actionbase.h"
+interface IActionBase : IDispatch {
+};
+
+[
+	object,
+	uuid(16C62C7B-6775-4D2B-9BD2-43624E01738B),
+	dual,
+	helpstring("IParameters Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\parameters.h"
+interface IParameters : IDispatch {
+};
+
+[
+	object,
+	uuid(54E003E2-EAA0-4321-9A14-31CF8E5BCB84),
+	dual,
+	helpstring("IProgressBarInfo Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
+interface IProgressBarInfo : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
+	[id(1)] HRESULT  Length([out,retval] double *length);
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
+	[id(2)] HRESULT  NeedStop([out,retval] VARIANT_BOOL *stop);
+#line 21 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
+	[id(3)] HRESULT  Start();
+#line 23 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
+	[id(4)] HRESULT  Next([in] double value);
+#line 25 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\progressbarinfo.h"
+	[id(5)] HRESULT  Finish();
+};
+
+[
+	object,
+	uuid(92F4EEEF-602A-496D-8067-5184F4F1D37B),
+	dual,
+	helpstring("IResultBase Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultbase.h"
+interface IResultBase : IDispatch {
+};
+
+[
+	object,
+	uuid(5498E339-8014-4366-9092-13EB8AD35E1D),
+	dual,
+	helpstring("IResultSet Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultset.h"
+interface IResultSet : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultset.h"
+	[id(1)] HRESULT  GetCount([out,retval] int *count);
+#line 20 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultset.h"
+	[id(2)] HRESULT  GetResult([in] int index, [out,retval] IResultBase **result);
+};
+
+[
+	object,
+	uuid(B94E10D8-08BD-405C-A435-0868DD86CD3C),
+	dual,
+	helpstring("IAction Interface"),
+	pointer_default(unique)
+] 
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\action.h"
+interface IAction : IActionBase {
+#line 20 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\action.h"
+	[id(2)] HRESULT  SetActionParameters([in] IParameters *parameters);
+#line 22 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\action.h"
+	[id(4)] HRESULT  SetProgressBarInfo([in] IProgressBarInfo *pinfo);
+#line 24 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\action.h"
+	[id(5)] HRESULT  CanDo([in] IResultSet *result, [out,retval] VARIANT_BOOL *can);
+#line 26 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\action.h"
+	[id(3)] HRESULT  Do([in] IResultSet *input, [out,retval] IResultSet **output);
+};
+
+[
+	object,
+	uuid(63B946E2-2AEE-4034-BA1C-1B4CFD68CEC0),
+	dual,
+	helpstring("IFunction Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+interface IFunction : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+	[id(1),local,hidden] HRESULT  GetSystemFunction([out] void **function);
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+	[id(2),local,hidden] HRESULT  GetSystemFunctionDerivate([out] void **function);
+#line 21 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+	[id(3),local,hidden] HRESULT  CreateGraph([out] void **graph);
+#line 24 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+	[id(4)] HRESULT  GetEquations([out,retval] BSTR *equations);
+#line 26 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+	[id(5)] HRESULT  GetDimension([out,retval] int *dimenstion);
+#line 28 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+	[id(6)] HRESULT  GetIterations([out,retval] int *iterations);
+#line 30 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+	[id(7)] HRESULT  SetIterations([in] int iterations);
+#line 33 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+	[id(8)] HRESULT  GetMinimum([in] int id, [out,retval] double *value);
+#line 35 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+	[id(9)] HRESULT  GetMaximum([in] int id, [out,retval] double *value);
+#line 37 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\function.h"
+	[id(10)] HRESULT  GetLipshitz([in] int id, [out,retval] double *value);
+};
+
+[
+	object,
+	uuid(AB57FCFD-2759-4E43-8095-34FD20EAAA8B),
+	dual,
+	helpstring("IComputationParameters Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\computationparameters.h"
+interface IComputationParameters : IParameters {
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\computationparameters.h"
+	[id(5)] HRESULT  GetFunction([out,retval] IFunction **function);
+};
+
+[
+	object,
+	uuid(20B6A0EB-2F40-4AA7-A066-0CC672BF1531),
+	dual,
+	helpstring("IAdaptiveBoxMethod Interface"),
+	pointer_default(unique)
+] 
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptiveboxmethod.h"
+interface IAdaptiveBoxMethod : IAction {
+#line 22 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptiveboxmethod.h"
+	[id(110)] HRESULT  GetDimensionFromParameters([in] IResultSet *in, [out,retval] int *demention);
+#line 24 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptiveboxmethod.h"
+	[id(111)] HRESULT  GetRecomendedPrecision([in] IResultSet *in, [in] int id, [out,retval] double *prec);
+};
+
+[
+	object,
+	uuid(AF4C5C56-DFE3-4DCE-9A4E-E48943F49F51),
+	dual,
+	helpstring("IAdaptiveBoxMethod Interface"),
+	pointer_default(unique)
+] 
+#line 34 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptiveboxmethod.h"
+interface IAdaptiveBoxParameters : IComputationParameters {
+#line 37 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptiveboxmethod.h"
+	[id(11)] HRESULT  GetFactor([in] int id, [out,retval] int *factor);
+#line 39 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptiveboxmethod.h"
+	[id(12)] HRESULT  GetPrecision([in] int id, [out,retval] double *prec);
+};
+
+[
+	object,
+	uuid(A8E4F6FF-93DA-489A-A6C3-22A5884932C9),
+	dual,
+	helpstring("IResultMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultmetadata.h"
+interface IResultMetadata : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultmetadata.h"
+	[id(20)] HRESULT  EqualType([in] IResultMetadata *metadata, [out,retval] VARIANT_BOOL *out);
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultmetadata.h"
+	[id(21)] HRESULT  Clone([out,retval] IResultMetadata **metadata);
+#line 22 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultmetadata.h"
+	[id(19)] HRESULT  GetTypeName([out,retval] BSTR *name);
+};
+
+[
+	object,
+	uuid(9B7D45A5-77FD-4E97-8C4A-76D3610CC875),
+	dual,
+	helpstring("IResult Interface"),
+	pointer_default(unique)
+] 
+#line 16 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\result.h"
+interface IResult : IResultBase {
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\result.h"
+	[id(1)] HRESULT  GetMetadata([out,retval] IResultMetadata **out);
+};
+
+[
+	object,
+	uuid(EDD6B3E5-2F48-4232-BCF6-005FC87576BF),
+	dual,
+	helpstring("IResultInfo Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultinfo.h"
+interface IResultInfo : IDispatch {
+};
+
+[
+	object,
+	uuid(0641C669-B362-48C9-8B73-D02B6E252A9D),
+	dual,
+	helpstring("IGraphInfo Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphinfo.h"
+interface IGraphInfo : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphinfo.h"
+	[id(1)] HRESULT  GetNodes([out,retval] int *value);
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphinfo.h"
+	[id(2)] HRESULT  GetEdges([out,retval] int *value);
+#line 21 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphinfo.h"
+	[id(3)] HRESULT  GetDimension([out,retval] int *value);
+#line 23 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphinfo.h"
+	[id(4)] HRESULT  GetMinimum([in] int index, [out,retval] double *value);
+#line 25 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphinfo.h"
+	[id(5)] HRESULT  GetMaximum([in] int index, [out,retval] double *value);
+#line 27 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphinfo.h"
+	[id(6)] HRESULT  GetGridNumber([in] int index, [out,retval] int *value);
+#line 29 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphinfo.h"
+	[id(7)] HRESULT  GetGridSize([in] int index, [out,retval] double *value);
+};
+
+[
+	object,
+	uuid(6E606370-04E2-4BCB-852C-313A7D4BAD15),
+	dual,
+	helpstring("IGraphResult Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphresult.h"
+interface IGraphResult : IResult {
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphresult.h"
+	[id(10),local,hidden] HRESULT  GetGraph([out] void **graph);
+#line 20 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphresult.h"
+	[id(12)] HRESULT  GetGraphInfo([out,retval] IGraphInfo **info);
+#line 22 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphresult.h"
+	[id(13)] HRESULT  IsStrongComponent([out,retval] VARIANT_BOOL *value);
+#line 24 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphresult.h"
+	[id(14)] HRESULT  SaveText([in] BSTR file);
+#line 26 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphresult.h"
+	[id(15)] HRESULT  SaveGraph([in] BSTR file);
+};
+
+[
+	object,
+	uuid(6ED8D0EA-3E9C-441A-96C6-EEB2AFCBE27D),
+	dual,
+	helpstring("IWritableGraphResult Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablegraphresult.h"
+interface IWritableGraphResult : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablegraphresult.h"
+	[id(20),local,hidden] HRESULT  SetGraph([in] void **graph, [in] VARIANT_BOOL isStrongComponent);
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablegraphresult.h"
+	[id(21)] HRESULT  SetMetadata([in] IResultMetadata *metadata);
+#line 22 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablegraphresult.h"
+	[id(22)] HRESULT  SetGraphFromFile([in] BSTR file, [in] VARIANT_BOOL isStrongComponent);
+};
+
+[
+	object,
+	uuid(A56A15AC-EAC4-4D8B-92FC-84CF84FC4F16),
+	dual,
+	helpstring("IWritableResultSet Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writableresultset.h"
+interface IWritableResultSet : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writableresultset.h"
+	[id(5)] HRESULT  AddResult([in] IResultBase *result);
+};
+
+[
+	object,
+	dual,
+	uuid(150237B9-7739-4882-87E1-8FE926A96AFF),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphresultimpl.h"
+interface IGraphResultImpl : IDispatch {
+};
+
+[
+	object,
+	uuid(24EEB65B-81FF-42EA-8521-6B3F62665F84),
+	dual,
+	helpstring("ISymbolicImageMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\symbolicimagemetadata.h"
+interface ISymbolicImageMetadata : IResultMetadata {
+};
+
+[
+	object,
+	dual,
+	uuid(3EB38E81-F41E-44BD-85E3-486CF05FD1B2),
+	pointer_default(unique)
+] 
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultsetimpl.h"
+interface IResultSetImpl : IDispatch {
+};
+
+[
+	object,
+	uuid(6EBF68E3-4686-40C8-9F63-3ABC3504923A),
+	dual,
+	helpstring("IAdaptiveMethodAction Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+interface IAdaptiveMethodAction : IAction {
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	[id(110)] HRESULT  GetRecomendedPrecision([in] IResultSet *in, [in] int index, [out,retval] double *prec);
+#line 20 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	[id(111)] HRESULT  GetDimension([in] IResultSet *in, [out,retval] int *dim);
+};
+
+[
+	object,
+	uuid(554362EE-42C4-48EB-B5C3-8C10273D73B5),
+	dual,
+	pointer_default(unique)
+] 
+#line 29 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+interface IAdaptiveMethodParameters : IComputationParameters {
+#line 31 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+#line 33 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	[id(11)] HRESULT  GetPrecision([in] int index, [out,retval] double *prec);
+#line 35 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	[id(12)] HRESULT  GetUpperLimit([out,retval] int *out);
+};
+
+[
+	object,
+	uuid(586FAD2F-D9E4-4A30-A925-345C7E1BDC56),
+	dual,
+	helpstring("IBoxMethodAction Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+interface IBoxMethodAction : IAction {
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+	[id(110)] HRESULT  GetDimensionForParameters([in] IResultSet *resultSet, [out,retval] int *dimension);
+};
+
+[
+	object,
+	uuid(EF3F28E7-DA5A-4294-9C12-656D0B7CB74A),
+	dual,
+	pointer_default(unique)
+] 
+#line 28 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+interface IBoxMethodParameters : IComputationParameters {
+#line 30 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+#line 32 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+	[id(11)] HRESULT  UseDerivate([out,retval] VARIANT_BOOL *out);
+};
+
+[
+	object,
+	uuid(a817e7a2-43fa-11d0-9e44-00aa00b6770a),
+	dual,
+	helpstring("IComponentRegistrar Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\compreg.h"
+interface IComponentRegistrar : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\compreg.h"
+	[id(1)] HRESULT  Attach([in] BSTR bstrPath);
+	[id(2)] HRESULT  RegisterAll();
+	[id(3)] HRESULT  UnregisterAll();
+	[id(4)] HRESULT  GetComponents([out] SAFEARRAY(BSTR)* pbstrCLSIDs, [out] SAFEARRAY(BSTR)* pbstrDescriptions);
+	[id(5)] HRESULT  RegisterComponent([in] BSTR bstrCLSID);
+	[id(6)] HRESULT  UnregisterComponent([in] BSTR bstrCLSID);
+};
+
+[
+	object,
+	uuid(FAFD82A9-346E-4BD7-8316-F16B105A4653),
+	dual,
+	helpstring("ITarjanAction Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\tarjanaction.h"
+interface ITarjanAction : IAction {
+};
+
+[
+	object,
+	uuid(8DB63B4A-7E18-4328-9335-419C4CE5A4E5),
+	dual,
+	helpstring("EmptyParameters"),
+	pointer_default(unique)
+] 
+#line 26 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\tarjanaction.h"
+interface ITarjanParameters : IParameters {
+#line 29 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\tarjanaction.h"
+	[id(1)] HRESULT  NeedEdgeResolve([out,retval] VARIANT_BOOL *result);
+};
+
+[
+	object,
+	uuid(1B1FF1EE-4EB6-4F0A-B6AB-CCBFFA28B9F0),
+	dual,
+	helpstring("IPointMethodAction Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+interface IPointMethodAction : IAction {
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	[id(110)] HRESULT  GetDimensionForParameters([in] IResultSet *resultSet, [out,retval] int *dimension);
+};
+
+[
+	object,
+	uuid(ADCEDDBC-441A-479D-8E7A-706921DA82AC),
+	dual,
+	pointer_default(unique)
+] 
+#line 28 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+interface IPointMethodParameters : IComputationParameters {
+#line 30 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+#line 32 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	[id(11)] HRESULT  GetPoints([in] int index, [out,retval] int *ks);
+#line 34 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	[id(12)] HRESULT  UseOffsets([out,retval] VARIANT_BOOL *data);
+#line 36 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	[id(13)] HRESULT  GetOffset([in] int index, [out] double *offset1, [out] double *offset2);
+};
+
+[
+	object,
+	uuid(DD6571DF-3579-4F30-BB16-482CA0A104A4),
+	dual,
+	helpstring("IProjectAction Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\projectaction.h"
+interface IProjectAction : IAction {
+#line 21 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\projectaction.h"
+	[id(11)] HRESULT  GetDimention([in] IResultSet *set, [out,retval] int *dim);
+};
+
+[
+	object,
+	uuid(840AFB9E-F0B8-4601-8326-C101F192137D),
+	dual,
+	helpstring("IProjectAction Interface"),
+	pointer_default(unique)
+] 
+#line 31 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\projectaction.h"
+interface IProjectActionParameters : IParameters {
+#line 34 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\projectaction.h"
+	[id(11)] HRESULT  GetDevisor([in] int index, [out,retval] int *value);
+};
+
+[
+	object,
+	uuid(0A8C775B-8E19-4642-B2D7-5BBB437B7B97),
+	dual,
+	helpstring("IDummy Interface"),
+	pointer_default(unique)
+] 
+#line 24 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\dummy.h"
+interface IDummy : IDispatch {
+};
+
+[
+	object,
+	uuid(787DC58F-CD39-4BE2-9B58-D5B99ADCFC4D),
+	dual,
+	helpstring("IIsolatedSetAction Interface"),
+	pointer_default(unique)
+] 
+#line 16 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\isolatedsetaction.h"
+interface IIsolatedSetAction : IAction {
+};
+
+[
+	object,
+	uuid(01C806AD-6003-4F5B-8405-AE3DD637D854),
+	dual,
+	pointer_default(unique)
+] 
+#line 26 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\isolatedsetaction.h"
+interface IIsolatedSetParameters : IParameters {
+#line 28 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\isolatedsetaction.h"
+	[id(22)] HRESULT  GetStartSet([out,retval] IGraphResult **result);
+};
+
+[
+	object,
+	uuid(9FFB9554-2D64-45EE-9F79-B31098FF8512),
+	dual,
+	helpstring("IMinimalLoopLocalizationAction Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\minimallooplocalizationaction.h"
+interface IMinimalLoopLocalizationAction : IAction {
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\minimallooplocalizationaction.h"
+	[id(44)] HRESULT  GetDimension([in] IResultSet *resultSet, [out,retval] int *dimension);
+};
+
+[
+	object,
+	uuid(B90D3C01-F6F8-4D06-8E01-C12C6D51F70A),
+	dual,
+	pointer_default(unique)
+] 
+#line 28 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\minimallooplocalizationaction.h"
+interface IMinimalLoopLocalizationParameters : IParameters {
+#line 30 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\minimallooplocalizationaction.h"
+	[id(10)] HRESULT  GetCoordinate([in] int id, [out,retval] double *data);
+};
+
+[
+	object,
+	uuid(9CF385EA-26DB-4A19-AB20-5E735654D469),
+	dual,
+	helpstring("ISIRomAction Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\siromaction.h"
+interface ISIRomActionParameters : IComputationParameters {
+};
+
+[
+	object,
+	uuid(44DAD8BF-971F-485D-86C5-45FD1F67ACFE),
+	dual,
+	helpstring("ISIRomAction Interface"),
+	pointer_default(unique)
+] 
+#line 29 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\siromaction.h"
+interface ISIRomAction : IAction {
+};
+
+[
+	object,
+	uuid(139E4822-4DF9-44B1-8825-FAD074492505),
+	dual,
+	helpstring("ISpectrumMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\spectrummetadata.h"
+interface ISpectrumMetadata : IResultMetadata {
+};
+
+[
+	object,
+	uuid(2003DF4C-5367-4F11-A29C-447E7E45E5AA),
+	dual,
+	helpstring("ISpectrumResult Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\spectrumresult.h"
+interface ISpectrumResult : IResult {
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\spectrumresult.h"
+	[id(10)] HRESULT  GetLowerBound([out,retval] double *data);
+#line 20 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\spectrumresult.h"
+	[id(11)] HRESULT  GetUpperBound([out,retval] double *data);
+#line 22 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\spectrumresult.h"
+	[id(12)] HRESULT  GetLowerLength([out,retval] int *data);
+#line 24 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\spectrumresult.h"
+	[id(13)] HRESULT  GetUpperLength([out,retval] int *data);
+};
+
+[
+	object,
+	uuid(5896F6EB-CFBF-406C-A0FD-EA25367673D0),
+	dual,
+	helpstring("IDummy1 Interface"),
+	pointer_default(unique)
+] 
+#line 21 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\dummy1.h"
+interface IDummy1 : IDispatch {
+};
+
+[
+	object,
+	uuid(880BF42F-A1E3-4FA8-87AD-FB8D96F275A0),
+	dual,
+	helpstring("IDummy2 Interface"),
+	pointer_default(unique)
+] 
+#line 16 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\dummy2.h"
+interface IDummy2 : IDispatch {
+};
+
+[
+	object,
+	uuid(B56578FA-7E2F-4EDC-A2F0-1B3F9128F227),
+	dual,
+	helpstring("IMS2DCreationAction Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2dcreationaction.h"
+interface IMS2DCreationAction : IAction {
+};
+
+[
+	object,
+	uuid(52E2BF5B-0E91-4588-8B56-D7B49EF8DE0B),
+	dual,
+	pointer_default(unique)
+] 
+#line 26 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2dcreationaction.h"
+interface IMS2DCreationParameters : IParameters {
+#line 28 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2dcreationaction.h"
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+};
+
+[
+	object,
+	uuid(506F850B-7CBA-4A7F-A16D-25B3D104F7BE),
+	dual,
+	helpstring("IDummy3 Interface"),
+	pointer_default(unique)
+] 
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\dummy3.h"
+interface IDummy3 : IDispatch {
+};
+
+[
+	object,
+	uuid(F8F384DC-FF2E-48B5-9FB3-958A828554C5),
+	dual,
+	helpstring("IMS2DProcessAction Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+interface IMS2DProcessAction : IAction {
+};
+
+[
+	object,
+	uuid(9FAD2A0A-2208-4F26-ABF7-01CEFE67B738),
+	dual,
+	helpstring("IMS2DProcessAction Interface"),
+	pointer_default(unique)
+] 
+#line 29 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+interface IMS2DProcessParameters : IComputationParameters {
+#line 32 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+	[id(14)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+};
+
+[
+	object,
+	uuid(03982D3C-F495-4B48-AD40-9E14C6B34387),
+	dual,
+	helpstring("IMSCreationProcess Interface"),
+	pointer_default(unique)
+] 
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\mscreationprocess.h"
+interface IMSCreationProcess : IAction {
+#line 22 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\mscreationprocess.h"
+	[id(10)] HRESULT  GetDimension([in] IResultSet *set, [out,retval] int *dim);
+};
+
+[
+	object,
+	uuid(FF53DE10-042E-4444-9D72-81FB5120DF2B),
+	dual,
+	pointer_default(unique)
+] 
+#line 32 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\mscreationprocess.h"
+interface IMSCreationParameters : IParameters {
+#line 34 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\mscreationprocess.h"
+	[id(10)] HRESULT  GetFactor([in] int index, [out,retval] int *factor);
+};
+
+[
+	object,
+	uuid(4D810CEE-9913-438E-9883-BC055371B174),
+	dual,
+	helpstring("IDummy4 Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\dummy4.h"
+interface IDummy4 : IDispatch {
+};
+
+[
+	object,
+	uuid(9B3DA2D8-E279-4552-99F4-13AA066642D5),
+	dual,
+	helpstring("IWritableFunction Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablefunction.h"
+interface IWritableFunction : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablefunction.h"
+	[id(11)] HRESULT  SetEquations([in] BSTR equations);
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablefunction.h"
+	[id(12)] HRESULT  GetLastError([out,retval] BSTR *message);
+};
+
+[
+	object,
+	uuid(5F89F9F3-AB8D-4129-A752-8A4258A8ECE9),
+	dual,
+	helpstring("IWritableGraphInfo Interface"),
+	pointer_default(unique),
+	local,
+	hidden
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablegraphinfo.h"
+interface IWritableGraphInfo : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablegraphinfo.h"
+	[id(12),local,hidden] HRESULT  AddGraph([in] void **graph);
+};
+
+[
+	object,
+	dual,
+	uuid(E8AC201A-48EE-4CC4-A7D3-D075C3016104),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphinfoimpl.h"
+interface IGraphInfoImpl : IDispatch {
+};
+
+[
+	object,
+	uuid(F2D78B39-D782-49DE-91B7-771CDA2ED0E0),
+	dual,
+	helpstring("IKernell Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\kernell.h"
+interface IKernell : IDispatch {
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\kernell.h"
+	[id(3)] HRESULT  GetFunction([out,retval] IFunction **function);
+#line 20 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\kernell.h"
+	[id(4)] HRESULT  CreateInitialResultSet([out,retval] IResultSet **result);
+};
+
+[
+	object,
+	uuid(DB255DC6-645A-4D60-A7C6-5D3019C2DBB7),
+	dual,
+	helpstring("IWritableKernell Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablekernell.h"
+interface IWritableKernell : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablekernell.h"
+	[id(11)] HRESULT  SetFunction([in] IFunction *function);
+};
+
+[
+	object,
+	dual,
+	uuid(0667C597-8C23-4B74-A298-821DB594ED01),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\kernellimpl.h"
+interface IKernellImpl : IWritableKernell {
+};
+
+[
+	object,
+	uuid(7EC2A3FE-E845-4FAC-9E24-8A5101C2E922),
+	dual,
+	helpstring("ILoopsLocalizationAction Interface"),
+	pointer_default(unique)
+] 
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\loopslocalizationaction.h"
+interface ILoopsLocalizationAction : IAction {
+};
+
+[
+	object,
+	uuid(9FC179BA-4641-46FF-8F8B-D277C1035964),
+	dual,
+	helpstring("IMSMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msmetadata.h"
+interface IMSMetadata : IResultMetadata {
+};
+
+[
+	object,
+	uuid(5E5AEEE1-A73F-43C7-91A6-35249171D3C4),
+	dual,
+	helpstring("IMS2Metadata Interface"),
+	pointer_default(unique)
+] 
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+interface IMS2Metadata : IMSMetadata {
+#line 22 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+	[id(10)] HRESULT  GetSIGraphResult([out,retval] IResultSet **out);
+#line 24 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+	[id(11)] HRESULT  SetSIGraphResult([in] IResultSet *in);
+#line 26 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+	[id(12)] HRESULT  HasSIGraphResult([out,retval] VARIANT_BOOL *out);
+};
+
+[
+	object,
+	uuid(27633F37-3573-46D6-B45D-78AE25616DAD),
+	dual,
+	helpstring("IMS2DRomAction Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2dromaction.h"
+interface IMS2DRomAction : IAction {
+};
+
+[
+	object,
+	uuid(80B6D423-1E6D-4236-B187-FFDEC3A2A139),
+	dual,
+	helpstring("IWritableSpectrum Interface"),
+	pointer_default(unique)
+] 
+#line 14 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+interface IWritableSpectrumResult : IDispatch {
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+	[id(20)] HRESULT  SetLowerBound([in] double data);
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+	[id(21)] HRESULT  SetUpperBound([in] double data);
+#line 21 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+	[id(22)] HRESULT  SetLowerLength([in] int data);
+#line 23 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+	[id(23)] HRESULT  SetUpperLength([in] int data);
+#line 25 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\writablespectrum.h"
+	[id(24)] HRESULT  SetMetadata([in] IResultMetadata *data);
+};
+
+[
+	object,
+	uuid(3D182C96-79B3-40FA-9FBA-9A384E9B3DF6),
+	dual,
+	helpstring("IAdaptiveBoxMethod Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msadaptiveaction.h"
+interface IMSAdaptiveMethod : IAdaptiveMethodAction {
+};
+
+[
+	object,
+	uuid(EC1007B0-EB8F-4234-85D1-31518BBBEE58),
+	dual,
+	helpstring("IMSSegmentMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\mssegmentmetadata.h"
+interface IMSSegmentMetadata : IMSMetadata {
+};
+
+[
+	object,
+	uuid(4158B932-72E7-46DA-A98C-959B0C9A101E),
+	dual,
+	helpstring("IAdaptiveBoxMethod Interface"),
+	pointer_default(unique)
+] 
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msanglecreationmethod.h"
+interface IMSAngleCreationMethod : IMSCreationProcess {
+};
+
+[
+	object,
+	uuid(9C056BFB-EC29-4AD8-BBAF-18F6AB76EAA0),
+	dual,
+	helpstring("IMSAngleMetadata Interface"),
+	pointer_default(unique)
+] 
+#line 19 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msanglemetadata.h"
+interface IMSAngleMetadata : IMSMetadata {
+};
+
+[
+	object,
+	uuid(87FF96BE-B389-4AFA-8B6C-89E2E9AFD50F),
+	dual,
+	helpstring("IAdaptiveBoxMethod Interface"),
+	pointer_default(unique)
+] 
+#line 17 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msanglemethod.h"
+interface IMSAngleMethod : IAdaptiveMethodAction {
+};
+
+[
+	object,
+	uuid(293FB7DB-0C75-4E8D-A2D2-DC4BC662C62F),
+	dual,
+	helpstring("IMSAngleRomProcess Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msangleromprocess.h"
+interface IMSAngleRomProcess : IAction {
+};
+
+[
+	object,
+	uuid(729D2ADA-2C8A-453F-97FB-2A3F6409B117),
+	dual,
+	helpstring("IMS2Metadata Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msmethodaction.h"
+interface IMSMethodAction : IPointMethodAction {
+};
+
+[
+	object,
+	uuid(A5FEE589-2AE6-4F6F-8327-E531D2269F50),
+	dual,
+	helpstring("IMSSegmentRom Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\mssegmentrom.h"
+interface IMSSegmentRom : IAction {
+};
+
+[
+	object,
+	uuid(7750D060-BA83-45FE-8E6C-C8437F7340E8),
+	dual,
+	helpstring("IPersistantManager Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\persistantmanager.h"
+interface IResultPersistantManager : IDispatch {
+};
+
+[
+	object,
+	uuid(40D91BB9-1AFF-43CE-B0D8-ED857119D0B7),
+	dual,
+	helpstring("IPersistantManager Interface"),
+	pointer_default(unique)
+] 
+#line 29 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\persistantmanager.h"
+interface IMetadataPersistantManager : IDispatch {
+};
+
+
+[ version(1.0), uuid(922445B5-C296-49D0-B69D-45FF70F8CE56), helpstring("MorseKernel2 1.0 Type Library"), custom(a817e7a1-43fa-11d0-9e44-00aa00b6770a, "{84035475-16DE-4504-ABF2-5C734E46A96A}") ]
+library MorseKernel2
+{
+	importlib("stdole2.tlb");
+	importlib("olepro32.dll");
+
+	[
+		version(1.0),
+		uuid(ACFA6EFC-A4B6-4BE9-A70B-3F74B724D3DD),
+		helpstring("AdaptiveBoxMethod Class")
+	] 
+#line 56 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptiveboxmethod.h"
+	coclass CAdaptiveBoxMethod {
+		interface IAdaptiveBoxMethod;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(43037E6F-9884-4D5C-BB41-44D582888F9E),
+		helpstring("GraphResultImpl Class")
+	] 
+#line 36 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphresultimpl.h"
+	coclass CGraphResultImpl {
+		interface IGraphResultImpl;
+		interface IWritableGraphResult;
+		interface IGraphResult;
+		interface IResult;
+		interface IResultBase;
+	};
+
+	[
+		version(1.0),
+		uuid(A5D5EA06-663E-4755-A3E7-A536E83B5AC2),
+		helpstring("SymbolicImageMetadata Class")
+	] 
+#line 32 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\symbolicimagemetadata.h"
+	coclass CSymbolicImageMetadata {
+		interface ISymbolicImageMetadata;
+		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
+		uuid(5FAAF083-60CC-4A9B-AAC0-4FDB29047B08),
+		helpstring("ResultSetImpl Class")
+	] 
+#line 35 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\resultsetimpl.h"
+	coclass CResultSetImpl {
+		interface IResultSetImpl;
+		interface IWritableResultSet;
+		interface IResultSet;
+	};
+
+	[
+		version(1.0),
+		uuid(92548416-C178-460D-A026-3EADF256E19F),
+		helpstring("AdaptiveMethodAction Class")
+	] 
+#line 50 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\adaptivemethodaction.h"
+	coclass CAdaptiveMethodAction {
+		interface IAdaptiveMethodAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(FDA0C930-C1F5-40C0-A0B6-A978CDA93F50),
+		helpstring("BoxMethodAction Class")
+	] 
+#line 47 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\boxmethodaction.h"
+	coclass CBoxMethodAction {
+		interface IBoxMethodAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(84035475-16DE-4504-ABF2-5C734E46A96A),
+		helpstring("ComponentRegistrar Class")
+	] 
+#line 33 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\compreg.h"
+	coclass CCompReg {
+		interface IComponentRegistrar;
+	};
+
+	[
+		version(1.0),
+		uuid(76C75A0A-AC4C-4CA9-8A4E-D8283388C361),
+		helpstring("TarjanAction Class")
+	] 
+#line 45 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\tarjanaction.h"
+	coclass CTarjanAction {
+		interface ITarjanAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(A1A0ABCD-1591-4846-88A0-10AF62560C37),
+		helpstring("PointMethodAction Class")
+	] 
+#line 51 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\pointmethodaction.h"
+	coclass CPointMethodAction {
+		interface IPointMethodAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(6BA86546-D41F-4AC5-A63F-71F7A6B61529),
+		helpstring("ProjectAction Class")
+	] 
+#line 49 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\projectaction.h"
+	coclass CProjectAction {
+		interface IProjectAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(8C3F6AAB-F725-4C70-A92A-7E4BD2A30C23),
+		helpstring("Dummy Class")
+	] 
+#line 41 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\dummy.h"
+	coclass CDummy {
+		interface IDummy;
+		interface IAction;
+		interface IActionBase;
+		interface IResult;
+		interface IResultBase;
+		interface IResultBase;
+		interface IResultSet;
+		interface IBoxMethodParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface ITarjanParameters;
+		interface IParameters;
+		interface IFunction;
+		interface IProjectActionParameters;
+		interface IParameters;
+	};
+
+	[
+		version(1.0),
+		uuid(5345FB53-5138-4D28-A6FC-294DF9D0A1E9),
+		helpstring("IsolatedSetAction Class")
+	] 
+#line 43 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\isolatedsetaction.h"
+	coclass CIsolatedSetAction {
+		interface IIsolatedSetAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(7D81B505-C5D6-4AEF-83EF-CFAF07767898),
+		helpstring("MinimalLoopLocalizationAction Class")
+	] 
+#line 44 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\minimallooplocalizationaction.h"
+	coclass CMinimalLoopLocalizationAction {
+		interface IMinimalLoopLocalizationAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(8C4D17D1-3A75-4E95-8D6F-CF58743A12BD),
+		helpstring("SIRomAction Class")
+	] 
+#line 45 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\siromaction.h"
+	coclass CSIRomAction {
+		interface ISIRomAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(3855504A-AE6E-4601-B6E5-026F7E073D9B),
+		helpstring("SpectrumMetadata Class")
+	] 
+#line 31 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\spectrummetadata.h"
+	coclass CSpectrumMetadata {
+		interface ISpectrumMetadata;
+		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
+		uuid(62172280-D7A2-46C1-AF3D-E8762035048E),
+		helpstring("Dummy1 Class")
+	] 
+#line 38 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\dummy1.h"
+	coclass CDummy1 {
+		interface IDummy1;
+		interface IPointMethodParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IIsolatedSetParameters;
+		interface IParameters;
+		interface IMinimalLoopLocalizationParameters;
+		interface IParameters;
+	};
+
+	[
+		version(1.0),
+		uuid(F47CA110-2F50-43F2-BB91-455C9FCE6B96),
+		helpstring("Dummy2 Class")
+	] 
+#line 33 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\dummy2.h"
+	coclass CDummy2 {
+		interface IDummy2;
+		interface ISIRomActionParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IComputationParameters;
+		interface IParameters;
+	};
+
+	[
+		version(1.0),
+		uuid(69D041A3-98CE-44FD-A384-3EA929F27075),
+		helpstring("MS2DCreationAction Class")
+	] 
+#line 43 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2dcreationaction.h"
+	coclass CMS2DCreationAction {
+		interface IMS2DCreationAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(8E730EE1-B837-42E1-BB4E-3D5F9954FEA1),
+		helpstring("Dummy3 Class")
+	] 
+#line 34 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\dummy3.h"
+	coclass CDummy3 {
+		interface IDummy3;
+		interface IAdaptiveMethodParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IMS2DCreationParameters;
+		interface IParameters;
+	};
+
+	[
+		version(1.0),
+		uuid(A1BF0187-E515-4B73-9F0E-7CB55F74243B),
+		helpstring("MS2DProcessAction Class")
+	] 
+#line 48 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2dprocessaction.h"
+	coclass CMS2DProcessAction {
+		interface IMS2DProcessAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(533A73C2-C47D-43CA-9DE4-73E2FA1981B9),
+		helpstring("MSCreationProcess Class")
+	] 
+#line 50 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\mscreationprocess.h"
+	coclass CMSCreationProcess {
+		interface IMSCreationProcess;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(365CB059-BEBE-4707-8475-67724C3DF50A),
+		helpstring("Dummy4 Class")
+	] 
+#line 35 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\dummy4.h"
+	coclass CDummy4 {
+		interface IDummy4;
+		interface IMS2DProcessParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IAdaptiveBoxParameters;
+		interface IComputationParameters;
+		interface IParameters;
+		interface IMSCreationParameters;
+		interface IParameters;
+	};
+
+	[
+		version(1.1),
+		uuid(FDFB8D0E-74FF-439C-A13B-4A39387B7037),
+		helpstring("FunctionImpl Class")
+	] 
+#line 26 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\functionimpl.h"
+	coclass CFunctionImpl {
+		interface IFunction;
+		interface IWritableFunction;
+	};
+
+	[
+		version(1.0),
+		uuid(1FCB1E52-C321-4E44-8BA6-83DA8C532365),
+		helpstring("GraphInfoImpvffffl Class")
+	] 
+#line 34 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\graphinfoimpl.h"
+	coclass CGraphInfoImpl {
+		interface IGraphInfoImpl;
+		interface IWritableGraphInfo;
+		interface IGraphInfo;
+	};
+
+	[
+		version(1.1),
+		uuid(96E908D0-29BD-423D-8CA8-9F4343C796A0),
+		helpstring("KernellImpl Class")
+	] 
+#line 30 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\kernellimpl.h"
+	coclass CKernellImpl {
+		interface IKernellImpl;
+		interface IWritableKernell;
+		interface IKernell;
+	};
+
+	[
+		version(1.0),
+		uuid(7D61797D-1EB0-477F-B93D-10B854DC5F53),
+		helpstring("LoopsLocalizationAction Class")
+	] 
+#line 34 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\loopslocalizationaction.h"
+	coclass CLoopsLocalizationAction {
+		interface ILoopsLocalizationAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(C6CD341D-6AFD-48E2-8711-643D3ED2377A),
+		helpstring("MSMetadata Class")
+	] 
+#line 35 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msmetadata.h"
+	coclass CMSMetadata {
+		interface IMSMetadata;
+		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
+		uuid(C18A9780-7C3A-4CA7-BD07-C8CE20EE8D6B),
+		helpstring("MS2Metadata Class")
+	] 
+#line 42 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2metadata.h"
+	coclass CMS2Metadata {
+		interface IMS2Metadata;
+		interface IMSMetadata;
+		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
+		uuid(8394D313-8E16-4A8D-9ECD-5C42F61601B1),
+		helpstring("MS2DRomAction Class")
+	] 
+#line 33 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\ms2dromaction.h"
+	coclass CMS2DRomAction {
+		interface IMS2DRomAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(45FBC041-D2C1-495D-8CC9-58019691E9CC),
+		helpstring("SpectrumResultImpl Class")
+	] 
+#line 20 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\spectrumresultimpl.h"
+	coclass CSpectrumResultImpl {
+		interface ISpectrumResult;
+		interface IResult;
+		interface IResultBase;
+		interface IWritableSpectrumResult;
+	};
+
+	[
+		version(1.0),
+		uuid(8AB4B68E-C39E-4FD9-8466-1B88F524BD9D),
+		helpstring("MSAdaptiveAction Class")
+	] 
+#line 35 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msadaptiveaction.h"
+	coclass CMSAdaptiveAction {
+		interface IMSAdaptiveMethod;
+		interface IAdaptiveMethodAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(2EC18A59-16F4-4532-BCE8-360B777D68AF),
+		helpstring("MSSegmentMetadata Class")
+	] 
+#line 35 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\mssegmentmetadata.h"
+	coclass CMSSegmentMetadata {
+		interface IMSSegmentMetadata;
+		interface IMSMetadata;
+		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
+		uuid(7CF17A33-3F8B-4BDB-A694-F18DE6355B6D),
+		helpstring("MSAngleCreationMethod Class")
+	] 
+#line 34 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msanglecreationmethod.h"
+	coclass CMSAngleCreationMethod {
+		interface IMSAngleCreationMethod;
+		interface IMSCreationProcess;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(C9400229-3A87-43BA-9819-07EC65EBCD10),
+		helpstring("MSAngleMetadata Class")
+	] 
+#line 36 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msanglemetadata.h"
+	coclass CMSAngleMetadata {
+		interface IMSAngleMetadata;
+		interface IMSMetadata;
+		interface IResultMetadata;
+	};
+
+	[
+		version(1.0),
+		uuid(67446F52-3C7A-4019-84B6-4B2837860BC2),
+		helpstring("MSAngleMethod Class")
+	] 
+#line 34 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msanglemethod.h"
+	coclass CMSAngleMethod {
+		interface IMSAngleMethod;
+		interface IAdaptiveMethodAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(B86EA936-EB19-4A0A-A51D-6823E2A089AB),
+		helpstring("MSAngleRomProcess Class")
+	] 
+#line 35 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msangleromprocess.h"
+	coclass CMSAngleRomProcess {
+		interface IMSAngleRomProcess;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(FD0149F7-8FE6-47FB-8BE9-64A16DB8247C),
+		helpstring("MSMethodAction Class")
+	] 
+#line 34 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\msmethodaction.h"
+	coclass CMSMethodAction {
+		interface IMSMethodAction;
+		interface IPointMethodAction;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(91A82ACA-C380-49C9-8A38-BBD68858100B),
+		helpstring("MSSegmentRom Class")
+	] 
+#line 35 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\mssegmentrom.h"
+	coclass CMSSegmentRom {
+		interface IMSSegmentRom;
+		interface IAction;
+		interface IActionBase;
+	};
+
+	[
+		version(1.0),
+		uuid(54D9CE4E-C1BD-46D2-A7FD-64B5A04A7CBD),
+		helpstring("PersistantManager Class")
+	] 
+#line 49 "e:\\dsis\\dsis\\morse\\dotnet\\morsekernel2\\persistantmanager.h"
+	coclass CPersistantManager {
+		interface IResultPersistantManager;
+		interface IMetadataPersistantManager;
+	};
+
+}
+

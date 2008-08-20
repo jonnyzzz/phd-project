@@ -1,0 +1,184 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{69A72457-55CD-463A-840B-73F62BDCA0E5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.Scheme2</RootNamespace>
+    <AssemblyName>DSIS.Scheme2</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>http://localhost/DSIS.Scheme2/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Attributed\ConnectionPointAttribute.cs" />
+    <Compile Include="src\Attributed\InputAttribute.cs" />
+    <Compile Include="src\Attributed\OutputAttribute.cs" />
+    <Compile Include="src\ConnectionPoints\IInputConnectionPoint.cs" />
+    <Compile Include="src\ConnectionPoints\IOutputConnectionPoint.cs" />
+    <Compile Include="src\ConnectionPoints\Object\InputConnectionBase.cs" />
+    <Compile Include="src\ConnectionPoints\Object\OutputObjectConnectionPointFactory.cs" />
+    <Compile Include="src\ConnectionPoints\Object\OutputObjectConnectionPointFactoryImpl.cs" />
+    <Compile Include="src\ConnectionPoints\Object\PropertyInputObjectConnectionPointFactoryImpl.cs" />
+    <Compile Include="src\ConnectionPoints\Object\SetterInputConnectionPoint.cs" />
+    <Compile Include="src\ConnectionPoints\Object\SetterInputObjectConnectionPointFactoryImpl.cs" />
+    <Compile Include="src\ConnectionPoints\Xml\Input\InputConnectionPointExtension.cs" />
+    <Compile Include="src\Nodes\INode.cs" />
+    <Compile Include="src\ConnectionPoints\Object\ObjectOutputConnectionPoint.cs" />
+    <Compile Include="src\ConnectionPoints\Bind.cs" />
+    <Compile Include="src\ConnectionPoints\BindInput.cs" />
+    <Compile Include="src\ConnectionPoints\BindOutput.cs" />
+    <Compile Include="src\ConnectionPoints\Object\PropertyInputConnectionPoint.cs" />
+    <Compile Include="src\ConnectionPoints\Object\OutputConnectionPoint.cs" />
+    <Compile Include="src\ConnectionPoints\Xml\Output\OutputConnectionPointBase.cs" />
+    <Compile Include="src\ObjectParsers\IObjectParser.cs" />
+    <Compile Include="src\SpringAttribute.cs" />
+    <Compile Include="src\UsedByScheme.cs" />
+    <Compile Include="src\ConnectionPoints\Object\ObjectNode.cs" />
+    <Compile Include="src\ConnectionPoints\Object\ObjectConnectionPointFactory.cs" />
+    <Compile Include="src\XmlModel\computation-graph-scheme.cs">
+      <DependentUpon>computation-graph-scheme.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="src\ConnectionPoints\Object\ConnectionPointFactory.cs" />
+    <Compile Include="src\ConnectionPoints\Object\ConnectionPointFactoryException.cs" />
+    <Compile Include="src\ConnectionPoints\Object\ObjectNodeFactory.cs" />
+    <Compile Include="src\ConnectionPoints\Object\ObjectNodeFactoryException.cs" />
+    <Compile Include="src\IInitializeAware.cs" />
+    <Compile Include="src\ConnectionPoints\Xml\Input\IInputConnectionPointExtension.cs" />
+    <Compile Include="src\ConnectionPoints\Xml\Input\InputConnectionPointFactory.cs" />
+    <Compile Include="src\ConnectionPoints\Xml\Output\IOutputConnectionPointExtension.cs" />
+    <Compile Include="src\Graph\ISchemeGraphBuildContext.cs" />
+    <Compile Include="src\Nodes\NodeBase.cs" />
+    <Compile Include="src\ConnectionPoints\Xml\Output\OutputConnectionPointFactory.cs" />
+    <Compile Include="src\ConnectionPoints\Xml\Output\ActionInstanceOutputConnectionPointFactory.cs" />
+    <Compile Include="src\ConnectionPoints\Xml\Output\FromPointOutputConnectionFactory.cs" />
+    <Compile Include="src\ConnectionPoints\Xml\Output\ObjectParserOutputConnectionFactory.cs" />
+    <Compile Include="src\Graph\SchemeGraphException.cs" />
+    <Compile Include="src\Graph\SchemeGraphLoader.cs" />
+    <Compile Include="src\ConnectionPoints\IConnectionPoint.cs" />
+    <Compile Include="src\ConnectionPoints\Object\IObjectConnectionPointFactoryExtension.cs" />
+    <Compile Include="src\Nodes\ISchemeNodeFactoryExtension.cs" />
+    <Compile Include="src\Graph\SchemeGraph.cs" />
+    <Compile Include="src\Graph\SchemeGraphFactory.cs" />
+    <Compile Include="src\Nodes\SchemeNodeFactory.cs" />
+    <Compile Include="src\Graph\XmlSchemeActionFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\XmlModel\computation-graph-scheme.xsd">
+      <SubType>
+      </SubType>
+    </EmbeddedResource>
+    <None Include="src\XmlModel\computation-graph-scheme.xsx">
+      <DependentUpon>computation-graph-scheme.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\spring.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Spring\Spring.csproj">
+      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
+      <Name>Spring</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+   -->
+  <Import Project="../Build.Targets" />
+  <Target Name="BeforeBuild">
+    <XsdCs InputFile="src\XmlModel\computation-graph-scheme.xsd" OutDir="$(MSBuildProjectDirectory)\src\XmlModel" Namespace="DSIS.Scheme2.XmlModel" />
+  </Target>
+  <!--
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,28 @@
+<Project DefaultTargets="NoTask" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+
+  <Target Name="Clean">
+    <ItemGroup>
+      <BinaryToDelete Include="bin\**\*"/>
+    </ItemGroup>
+    <Delete Files="@(BinaryToDelete)" />
+  </Target>  
+  
+  <Target Name="Build">
+    <MSBuild Projects="src\DSIS.sln" Properties="Configuration=Release" Targets="Clean;Rebuild"/>
+  </Target>
+
+  <Target Name="Tests">
+    <ItemGroup>
+      <Tests Include="bin\DSIS*Test*dll" 
+             Exclude="**\*Generated*"
+      />
+    </ItemGroup>
+
+    <Message Text="Test assembly: %(Tests.FileName)%(Tests.Extension)" />
+
+    <NUnit Assemblies="%(Tests.FullPath)" NUnitVersion="NUnit-2.4.7" ContinueOnError="True" />
+
+    <Message Text="##teamcity[text='Done. {build.status.text}']" />      
+  </Target>
+
+</Project>

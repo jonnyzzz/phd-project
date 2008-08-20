@@ -1,0 +1,117 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.Utils</RootNamespace>
+    <AssemblyName>DSIS.Utils</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ArrayEqualityComparer.cs" />
+    <Compile Include="src\AtomicInteger.cs" />
+    <Compile Include="src\AttributeUtil.cs" />
+    <Compile Include="src\Bean\IncludeGenerateAttribute.cs" />
+    <Compile Include="src\BiDictionary.cs" />
+    <Compile Include="src\BinTreePriorityQueueEx.cs" />
+    <Compile Include="src\BinTreePriorityQueueExDebug.cs" />
+    <Compile Include="src\CollectionUtil.cs" />
+    <Compile Include="src\CollectionWriter.cs" />
+    <Compile Include="src\ConvertEnumerator.cs" />
+    <Compile Include="src\DisposableWrapper.cs" />
+    <Compile Include="src\GCHelper.cs" />
+    <Compile Include="src\GenericHelper.cs" />
+    <Compile Include="src\InfiniteEnumerable.cs" />
+    <Compile Include="src\ISafe.cs" />
+    <Compile Include="src\LinkedList.cs" />
+    <Compile Include="src\MultiDictionary.cs" />
+    <Compile Include="src\MultiHashDictionary.cs" />
+    <Compile Include="src\ReferenceEqualityComparer.cs" />
+    <Compile Include="src\Safe.cs" />
+    <Compile Include="src\SynchList.cs" />
+    <Compile Include="src\UpcastedCollection.cs" />
+    <Compile Include="src\UpcastedDictionary.cs" />
+    <Compile Include="src\UpcastedEnumerable.cs" />
+    <Compile Include="src\UsedAttribute.cs" />
+    <Compile Include="src\Utils.cs" />
+    <Compile Include="src\WeakDictionary.cs" />
+    <Compile Include="src\XmlUtil.cs" />
+    <Compile Include="src\Delegates.cs" />
+    <Compile Include="src\DoubleEqualityComparer.cs" />
+    <Compile Include="src\DynamicGeneric.cs" />
+    <Compile Include="src\EmptyArray.cs" />
+    <Compile Include="src\EqualityComparerAttribute.cs" />
+    <Compile Include="src\EqualityComparerFactory.cs" />
+    <Compile Include="src\HashedQueue.cs" />
+    <Compile Include="src\Log2Helper.cs" />
+    <Compile Include="src\MutexCookie.cs" />
+    <Compile Include="src\PriorityQueue.cs" />
+    <Compile Include="src\Hashset.cs" />
+    <Compile Include="src\IntEqualityComparer.cs" />
+    <Compile Include="src\LongEqualityComparer.cs" />
+    <Compile Include="src\MergeEnumerable.cs" />
+    <Compile Include="src\OrderedList.cs" />
+    <Compile Include="src\Pair.cs" />
+    <Compile Include="src\Primes.cs" />
+    <Compile Include="src\UpcastedEnumerator.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

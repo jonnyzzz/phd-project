@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Computation-Graph xmlns="urn:shemas-dsis-org:computation-graph-xml" Id="AAA">
+  <Actions>
+    <Code Id="A" Assembly="DSIS.Scheme.Objects.Tests" Class="DSIS.Scheme.Objects.Tests.CellImageBuilderSettingsAction"/>
+  </Actions>
+  <Connections>
+    <Arc>
+      <From>
+        <Object>
+          <BoxMethod-Settings xmlns="urn:shemas-dsis-org:box-method-settings" Eps="0.4"/>
+        </Object>
+      </From>
+      <To>
+        <Action Id="A" Point="Settings"/>
+      </To>
+    </Arc>
+  </Connections>
+</Computation-Graph>

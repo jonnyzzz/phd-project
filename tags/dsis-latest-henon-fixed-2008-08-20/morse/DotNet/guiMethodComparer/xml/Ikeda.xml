@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<methodComparation>
+    <caption>Ikeda</caption>
+    <Dimension>2</Dimension>
+
+    <NumberOfSteps>10</NumberOfSteps>
+
+    <Subdevision>2,2</Subdevision>
+    <NumberOfPoints>2,2</NumberOfPoints>
+    <OverlapingOffset>0.1,0.1</OverlapingOffset>
+    <AdaptivePrecisionFactor>2,2</AdaptivePrecisionFactor>
+    <LinearUseDerivate>true</LinearUseDerivate>
+    <AdaptiveUpperLimit>0</AdaptiveUpperLimit>
+    <NeedResolveEdges>true</NeedResolveEdges>
+
+    <function>
+        <equation>y1=2-0.9*(x1*cos(tay)-x2*sin(tay))</equation>
+        <equation>y2=0.9*(x1*sin(tay)+x2*cos(tay))</equation>
+        <equation>space_min1=-10</equation>
+        <equation>space_min2=-10</equation>
+        <equation>space_max1=10</equation>
+        <equation>space_max2=10</equation>
+        <equation>grid1=10</equation>
+        <equation>grid2=10</equation>
+        <equation>iteration=1</equation>
+        <equation>tay=0.4-6/(1+x1*x1+x2*x2)</equation>
+        <equation>_dimension=2</equation>
+    </function>
+</methodComparation>

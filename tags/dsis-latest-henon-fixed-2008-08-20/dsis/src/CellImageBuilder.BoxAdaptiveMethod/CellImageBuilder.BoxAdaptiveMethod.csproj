@@ -1,0 +1,98 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5E26950D-C4A4-4DDE-BBAB-E7317E0C864F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.CellImageBuilder.BoxAdaptiveMethod</RootNamespace>
+    <AssemblyName>DSIS.CellImageBuilder.BoxAdaptiveMethod</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\BoxAdaptiveMethod.cs" />
+    <Compile Include="src\BoxAdaptiveMethodSettings.cs" />
+    <Compile Include="src\Divide.cs" />
+    <Compile Include="src\DivideEqualityComparer.cs" />
+    <Compile Include="src\Point.cs" />
+    <Compile Include="src\PointEqualityComparer.cs" />
+    <Compile Include="src\SimpleTaskQueue.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BoxIterators\BoxIterators.csproj">
+      <Project>{B5F40029-7A5F-440D-8A5A-215E032CF89C}</Project>
+      <Name>BoxIterators</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CellImageBuilder.Shared\CellImageBuilder.Shared.csproj">
+      <Project>{C75D0837-A992-41A2-8A46-A1B0F292048C}</Project>
+      <Name>CellImageBuilder.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
+      <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
+      <Name>IntegerCoordinates</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
