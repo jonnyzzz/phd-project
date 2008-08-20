@@ -6,15 +6,15 @@ using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.Scheme.Impl.Actions.Console
 {
-  public abstract class DumpEntropyAction : IntegerCoordinateSystemActionBase2
+  public abstract class DumpEntropyAction : IntegerCoordinateSystemActionBase3
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx),
+      return ColBase(base.Check<T, Q>(ctx),
                      Create(Keys.GraphMeasure<Q>()));      
     }
 
-    protected sealed override void Apply<T, Q>(T system, Context input, Context output)
+    protected sealed override void Apply<T, Q>(Context input, Context output)
     {
       Dump(Logger.Instance(input), Keys.GraphMeasure<Q>().Get(input));      
     }

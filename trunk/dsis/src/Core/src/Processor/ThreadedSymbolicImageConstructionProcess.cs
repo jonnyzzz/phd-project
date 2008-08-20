@@ -22,12 +22,11 @@ namespace DSIS.Core.Processor
 
     public void Execute(IProgressInfo info)
     {
-      List<Thread> workers = new List<Thread>();
+      var workers = new List<Thread>();
 
       for(int i = 0; i < Environment.ProcessorCount; i++)
       {
-        Thread worker = new Thread(ThreadRun);
-        worker.Name = "SI construction thread " + (i + 1);
+        var worker = new Thread(ThreadRun) {Name = ("SI construction thread " + (i + 1))};
         worker.Start(myContext);
 
         workers.Add(worker);        
@@ -41,11 +40,14 @@ namespace DSIS.Core.Processor
 
     private void ThreadRun(object o)
     {
-      using (ThreadedCellConnectionBuilder<TTo> bld =
+      using (var bld =
         new ThreadedCellConnectionBuilder<TTo>(myWriteMutex, myContext.CellImageBuilderContext.ConnectionBuilder))
       {
         ICellProcessorContext<TFrom, TTo> ctx = new CellProcessorContext<TFrom, TTo>(
-          new BufferedThreadedCountEnumerable<TFrom>(myReadMutex, myContext.Cells, Math.Min(myContext.Cells.Count / Environment.ProcessorCount / 4, 8192)),
+          new CellCoordinateCollection<TFrom>(
+            myContext.Converter.FromSystem,
+        new BufferedThreadedCountEnumerable<TFrom>(myReadMutex, myContext.Cells, Math.Min(myContext.Cells.Count / Environment.ProcessorCount / 4, 8192)))        
+        ,
           myContext.Converter.Clone(),
           myContext.CellImageBuilder.Clone(),
           new CellImageBuilderContext<TTo>(
@@ -56,7 +58,7 @@ namespace DSIS.Core.Processor
             )
           );
 
-        SymbolicImageConstructionProcess<TFrom, TTo> ps = new SymbolicImageConstructionProcess<TFrom, TTo>();
+        var ps = new SymbolicImageConstructionProcess<TFrom, TTo>();
         ps.Bind(ctx);
 
         ps.Execute(NullProgressInfo.INSTANCE);

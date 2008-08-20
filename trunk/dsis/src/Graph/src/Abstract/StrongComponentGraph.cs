@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Processor;
 using DSIS.Core.Util;
 using DSIS.Utils;
 
@@ -33,14 +34,14 @@ namespace DSIS.Graph.Abstract
     }
 
 
-    public CountEnumerable<TCell> GetCoordinates(ICollection<IStrongComponentInfo> components)
+    public ICellCoordinateCollection<TCell> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
     {
       int cnt = 0;
       foreach (IStrongComponentInfo info in components)
       {
         cnt += info.NodesCount;
       }
-      return new CountEnumerable<TCell>(GetCoordinatesImpl(components), cnt);
+      return new CellCoordinateCollection<TCell>(CoordinateSystem, GetCoordinatesImpl(components), cnt);
     }
 
     private IEnumerable<TCell> GetCoordinatesImpl(IEnumerable<IStrongComponentInfo> components)
@@ -137,7 +138,7 @@ namespace DSIS.Graph.Abstract
 
     private void DumpComponentsGraph(TextWriter tw)
     {
-      Dictionary<IStrongComponentInfo, int> ids = new Dictionary<IStrongComponentInfo, int>();
+      var ids = new Dictionary<IStrongComponentInfo, int>();
       int cnt = 0;
       tw.WriteLine("Components:[ Count =  {0} ]", ComponentCount);
       foreach (IStrongComponentInfoEx info in Optimize(myComponents.Components))

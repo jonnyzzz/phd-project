@@ -4,7 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions
 {
-  public class SetMethod2 : IntegerCoordinateSystemActionBase2
+  public class SetMethod2 : IntegerCoordinateSystemActionBase3
   {
     private readonly ICellImageBuilderIntegerCoordinatesSettings mySettings;
     private readonly long mySubdivision;
@@ -15,9 +15,9 @@ namespace DSIS.Scheme.Impl.Actions
       mySubdivision = subdivision;
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
-      Keys.SubdivisionKey.Set(output, mySubdivision.Fill(system.Dimension));
+      Keys.SubdivisionKey.Set(output, mySubdivision.Fill(Dimension));
       Keys.CellImageBuilderKey.Set(output, mySettings);
     }
   }

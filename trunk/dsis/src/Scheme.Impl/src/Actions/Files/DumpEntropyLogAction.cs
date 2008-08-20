@@ -8,7 +8,7 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public class MeasureEntropyLogAction : IntegerCoordinateSystemActionBase2  
+  public class MeasureEntropyLogAction : IntegerCoordinateSystemActionBase3
   {
     private readonly string myPrefix;
 
@@ -21,12 +21,12 @@ namespace DSIS.Scheme.Impl.Actions.Files
       myPrefix = prefix;
     }
 
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx), Create(FileKeys.WorkingFolderKey), Create(Keys.GraphMeasure<Q>()));
+      return ColBase(base.Check<T, Q>(ctx), Create(FileKeys.WorkingFolderKey), Create(Keys.GraphMeasure<Q>()));
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       string dir = FileKeys.WorkingFolderKey.Get(input).Path;
       string file = Path.Combine(Path.GetDirectoryName(dir), "entropy-" + Path.GetFileName(dir) + ".log");

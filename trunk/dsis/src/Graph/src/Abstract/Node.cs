@@ -16,7 +16,7 @@ namespace DSIS.Graph.Abstract
 
     public readonly TCell Coordinate;
 
-    internal Object UserData = null;
+    internal Object UserData;
     internal readonly int HashCodeInternal;    
     internal readonly NodeFlagValue FlagValues = new NodeFlagValue();
 

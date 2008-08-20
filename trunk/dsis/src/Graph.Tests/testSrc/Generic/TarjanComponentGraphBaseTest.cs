@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Graph.Abstract;
-using DSIS.Graph.Tests;
 using DSIS.IntegerCoordinates;
 using NUnit.Framework;
 
@@ -78,7 +77,7 @@ namespace DSIS.Graph.Tests.Generic
       INode<Q> n1 = CreateNode();
       INode<Q> n2 = CreateNode();
 
-      myGraph.AddEdgeToNode(n1, n2);
+      ((IGraph<Q>)myGraph).AddEdgeToNode(n1, n2);
       ComputeComponents();
       Assert.AreEqual(0, myComponents.ComponentCount);
     }
@@ -90,8 +89,8 @@ namespace DSIS.Graph.Tests.Generic
                {
                  INode<Q> n1 = CreateNode();
                  INode<Q> n2 = CreateNode();
-                 myGraph.AddEdgeToNode(n1, n2);
-                 myGraph.AddEdgeToNode(n2, n1);
+                 ((IGraph<Q>)myGraph).AddEdgeToNode(n1, n2);
+                 ((IGraph<Q>)myGraph).AddEdgeToNode(n2, n1);
                  ComputeComponents();
                  Assert.AreEqual(1, myComponents.ComponentCount);
                  Assert.AreEqual(2, OneComponent[0].NodesCount);

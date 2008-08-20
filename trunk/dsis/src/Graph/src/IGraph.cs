@@ -67,6 +67,13 @@ namespace DSIS.Graph
 
     new TNode AddNode(TCell coordinate);
 
+    /// <summary>
+    /// Adds new edge connefting fromNode with toNode if there was no suck edge.
+    /// </summary>
+    /// <param name="fromNode"></param>
+    /// <param name="toNode"></param>
+    void AddEdgeToNode(TNode fromNode, TNode toNode);
+
     new IGraph<TCell, TNode> Project(ICellCoordinateSystemProjector<TCell> projector);
 
     IGraphDataHoler<TData, TNode> CreateDataHolder<TData>(Converter<TNode,TData> def);

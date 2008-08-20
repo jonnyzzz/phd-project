@@ -9,7 +9,7 @@ namespace DSIS.Core.Processor
   {
     private readonly long[] myDivision;
 
-    public SubdevideCellProcessorContext(ICountEnumerable<T> countEnumerable, ICellCoordinateSystem<T> system,
+    public SubdevideCellProcessorContext(ICellCoordinateCollection<T> countEnumerable, ICellCoordinateSystem<T> system,
                                          long[] subdivision, ICellImageBuilder<T> cellImageBuilder,
                                          CellImageBuilderContext<T> cellImageBuilderContext)
       : base(countEnumerable, system.Subdivide(subdivision), cellImageBuilder, cellImageBuilderContext)
@@ -23,7 +23,7 @@ namespace DSIS.Core.Processor
     }
 
 
-    public SubdevideCellProcessorContext<T> CreateNextContext(CountEnumerable<T> input,
+    public SubdevideCellProcessorContext<T> CreateNextContext(ICellCoordinateCollection<T> input,
                                                               ICellCoordinateSystem<T> system,
                                                               long[] subdivision,
                                                               ICellConnectionBuilder<T> builder)

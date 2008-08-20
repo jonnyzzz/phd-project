@@ -6,14 +6,14 @@ using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions
 {
-  public class ChainRecurrenctSimbolicImageAction : IntegerCoordinateSystemActionBase2
+  public class ChainRecurrenctSimbolicImageAction : IntegerCoordinateSystemActionBase3
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
       return new[] { Create(Keys.Graph<Q>()) };     
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       IProgressInfo info = NullProgressInfo.INSTANCE;
       IGraph<Q> graph = Keys.Graph<Q>().Get(input);

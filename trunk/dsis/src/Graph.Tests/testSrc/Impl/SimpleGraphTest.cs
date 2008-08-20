@@ -33,7 +33,7 @@ namespace DSIS.Graph.Tests.Impl
       INode<IntegerCoordinate> node1 = myGraph.AddNode(mySystem.Create(new long[] { 1, 1, 1, 1, 1 }));
       INode<IntegerCoordinate> node2 = myGraph.AddNode(mySystem.Create(new long[] { 2, 1, 1, 1, 1 }));
 
-      myGraph.AddEdgeToNode(node1, node2);
+      ((IGraph<IntegerCoordinate>)myGraph).AddEdgeToNode(node1, node2);
 
       Assert.AreEqual(2, myGraph.NodesCount);
       Assert.AreEqual(1, myGraph.EdgesCount);
@@ -45,14 +45,15 @@ namespace DSIS.Graph.Tests.Impl
       INode<IntegerCoordinate> node1 = myGraph.AddNode(mySystem.Create(new long[] { 1, 1, 1, 1, 1 }));
       INode<IntegerCoordinate> node2 = myGraph.AddNode(mySystem.Create(new long[] { 2, 1, 1, 1, 1 }));
 
-      myGraph.AddEdgeToNode(node1, node2);
-      myGraph.AddEdgeToNode(node1, node2);
-      myGraph.AddEdgeToNode(node1, node2);
-      myGraph.AddEdgeToNode(node1, node2);
-      myGraph.AddEdgeToNode(node1, node2);
+      var x = ((IGraph<IntegerCoordinate>) myGraph);
+      x.AddEdgeToNode(node1, node2);
+      x.AddEdgeToNode(node1, node2);
+      x.AddEdgeToNode(node1, node2);
+      x.AddEdgeToNode(node1, node2);
+      x.AddEdgeToNode(node1, node2);
 
-      Assert.AreEqual(2, myGraph.NodesCount);
-      Assert.AreEqual(1, myGraph.EdgesCount);
+      Assert.AreEqual(2, x.NodesCount);
+      Assert.AreEqual(1, x.EdgesCount);
     }
 
     [Test]
@@ -61,8 +62,8 @@ namespace DSIS.Graph.Tests.Impl
       INode<IntegerCoordinate> node1 = myGraph.AddNode(mySystem.Create(new long[] { 1, 1, 1, 1, 1 }));
       INode<IntegerCoordinate> node2 = myGraph.AddNode(mySystem.Create(new long[] { 2, 1, 1, 1, 1 }));
 
-      myGraph.AddEdgeToNode(node1, node2);
-      myGraph.AddEdgeToNode(node2, node1);
+      ((IGraph<IntegerCoordinate>)myGraph).AddEdgeToNode(node1, node2);
+      ((IGraph<IntegerCoordinate>)myGraph).AddEdgeToNode(node2, node1);
 
       Assert.AreEqual("Graph [Nodes: 2, Edges: 2]\r\n  1 -> { 2,  }}\r\n  2 -> { 1,  }}\r\nFinished!\r\n\r\n",
                       myGraph.Dump());

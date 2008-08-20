@@ -1,3 +1,4 @@
+using System;
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -9,12 +10,12 @@ namespace DSIS.Core.Processor
     where TFrom : ICellCoordinate
   {
     private readonly ICellCoordinateSystemConverter<TFrom, TTo> myConverter;
-    private readonly ICountEnumerable<TFrom> myCountEnumerable;
+    private readonly ICellCoordinateCollection<TFrom> myCountEnumerable;
     private readonly ICellImageBuilder<TTo> myCellImageBuilder;
     private readonly CellImageBuilderContext<TTo> myCellImageBuilderContext;
 
-    public CellProcessorContextBase(
-      ICountEnumerable<TFrom> countEnumerable,
+    protected CellProcessorContextBase(
+      ICellCoordinateCollection<TFrom> countEnumerable,
       ICellCoordinateSystemConverter<TFrom, TTo> converter,
       ICellImageBuilder<TTo> cellImageBuilder,
       CellImageBuilderContext<TTo> cellImageBuilderContext)
@@ -23,6 +24,11 @@ namespace DSIS.Core.Processor
       myCountEnumerable = countEnumerable;
       myCellImageBuilder = cellImageBuilder;
       myCellImageBuilderContext = cellImageBuilderContext;
+
+      if (!countEnumerable.System.Equals(converter.FromSystem))
+      {
+        throw new ArgumentException("Cells coordinate system should match converter from system");
+      }
     }
 
     public ICountEnumerable<TFrom> Cells

@@ -6,9 +6,9 @@ namespace DSIS.Scheme.Impl.Actions
 {
   public class BuildSymbolicImageAction : BuildSymbolicImageActionBase
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx),
+      return ColBase(base.Check<T, Q>(ctx),
                  Create(Keys.CellImageBuilderKey),
                  Create(Keys.SubdivisionKey));
     }

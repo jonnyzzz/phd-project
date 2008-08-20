@@ -26,6 +26,49 @@ namespace DSIS.Graph.Abstract
       }
     }
 
+    private class NodeAndData<TNode,TCell> : IEquatable<NodeAndData<TNode, TCell>> where TNode : Node<TNode,TCell>
+      where TCell : ICellCoordinate
+    {
+      public readonly TNode Node;
+      public readonly TarjanNodeData<TCell, TNode> Data;
+
+      public NodeAndData(TNode node, IGraphDataHoler<TarjanNodeData<TCell, TNode>, TNode> holder)
+      {
+        Node = node;
+        Data = holder.GetData(node);
+      }
+
+      public bool Equals(NodeAndData<TNode, TCell> obj)
+      {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.Node == Node;
+      }
+
+      public override bool Equals(object obj)
+      {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != typeof (NodeAndData<TNode, TCell>)) return false;
+        return Equals((NodeAndData<TNode, TCell>) obj);
+      }
+
+      public override int GetHashCode()
+      {
+        return (Node != null ? Node.GetHashCode() : 0);
+      }
+
+      public static bool operator ==(NodeAndData<TNode, TCell> left, NodeAndData<TNode, TCell> right)
+      {
+        return Equals(left, right);
+      }
+
+      public static bool operator !=(NodeAndData<TNode, TCell> left, NodeAndData<TNode, TCell> right)
+      {
+        return !Equals(left, right);
+      }
+    }
+
     public static IGraphStrongComponents<TCell> ComputeStrongComponents<TCell, TNode>(this IGraph<TCell, TNode> graph, IProgressInfo info)
       where TNode : Node<TNode, TCell>
       where TCell : ICellCoordinate
@@ -33,49 +76,42 @@ namespace DSIS.Graph.Abstract
       info.Minimum = 0;
       info.Maximum = graph.EdgesCount;
 
-      using (var holder = graph.CreateDataHolder(x => new TarjanNodeData<TCell,TNode>(x)))
+      using (IGraphDataHoler<TarjanNodeData<TCell, TNode>, TNode> holder = graph.CreateDataHolder(x => new TarjanNodeData<TCell,TNode>(x)))
       using(var stack = new TarjanNodeStack<TCell, TNode>(graph.CreateNodeFlagsHolder("STACK")))
       using(var route = new TarjanNodeStack<TCell, TNode>(graph.CreateNodeFlagsHolder("ROUTE")))
       {
         long state = 2;
         long cnt = 1;
 
-        TNode w = null;
-        TarjanNodeData<TCell, TNode> wData = null;
-
+        NodeAndData<TNode,TCell> w = null;
         var comps = new TarjanComponentInfoManager();
         
         foreach (TNode node in graph.NodesInternal)
         {
-          var nodeData = holder.GetData(node);
-          if (nodeData.Label != 0)
+          var v = new NodeAndData<TNode, TCell>(node, holder);
+          if (v.Data.Label != 0)
             continue;
-
-          TNode v = node;
-          TarjanNodeData<TCell,TNode> vData = nodeData;
+          
           while (state > 1)
           {
             switch (state)
             {
               case 2:
-                stack.Push(v);
-                route.Push(v);
+                stack.Push(v.Node);
+                route.Push(v.Node);
                 cnt++;
-                vData.Label = cnt;
-                vData.Number = cnt;
+                v.Data.Label = cnt;
+                v.Data.Number = cnt;
                 state = 3;
                 break;
               case 3:
-                if (vData.MoveNext())
+                if (v.Data.MoveNext())
                 {
                   info.Tick(1.0);
-                  w = vData.Current;
-                  wData = holder.GetData(w);
-
-                  if (wData.Label == 0)
+                  w = new NodeAndData<TNode, TCell>(v.Data.Current, holder);
+                  if (w.Data.Label == 0)
                   {
                     v = w;
-                    vData = wData;
                     state = 2;
                   }
                   else
@@ -85,51 +121,41 @@ namespace DSIS.Graph.Abstract
                 }
                 else
                 {
-                  if (vData.Label < vData.Number)
-                  {
-                    state = 5;
-                  }
-                  else
-                  {
-                    state = 6;
-                  }
+                  state = v.Data.Label < v.Data.Number ? 5 : 6;
                 }
                 break;
 
               case 4:
-                if (wData.Number < vData.Number && stack.Contains(w))
+                if (w.Data.Number < v.Data.Number && stack.Contains(w.Node))
                 {
-                  vData.Label = Math.Min(vData.Label, wData.Label);
+                  v.Data.Label = Math.Min(v.Data.Label, w.Data.Label);
                 }
                 state = 3;
                 break;
               case 5:
-                v = route.Pop();
-                vData = holder.GetData(v);
-
-                w = route.Peek();
-                wData = holder.GetData(w);
-                wData.Label = Math.Min(wData.Label, vData.Label);
+                v = new NodeAndData<TNode, TCell>(route.Pop(), holder);
+                w = new NodeAndData<TNode, TCell>(route.Peek(), holder);
+                w.Data.Label = Math.Min(w.Data.Label, v.Data.Label);
                 v = w;
-                vData = wData;
                 state = 3;
                 break;
               case 6:
-                if (v == stack.Peek())
+                if (v.Node == stack.Peek())
                 {
                   stack.Pop();
-                  if (graph.IsSelfLoop(v))
-                    comps.NextComponent().SetNodeComponent<TCell, TNode>(v);
+                  if (graph.IsSelfLoop(v.Node))
+                    comps.NextComponent().SetNodeComponent<TCell, TNode>(v.Node);
                 }
                 else
                 {
                   var ic = comps.NextComponent();
+                  TNode ww;
                   do
-                  {
-                    w = stack.Pop();
-                    wData = holder.GetData(w);
-                    ic.SetNodeComponent<TCell, TNode>(w);
-                  } while (w != v);
+                  {                      
+                    ww = stack.Pop();
+                    ic.SetNodeComponent<TCell, TNode>(ww);
+                  } while (ww != v.Node);
+                  w = new NodeAndData<TNode, TCell>(ww, holder);
                 }
                 route.Pop();
 
@@ -139,8 +165,7 @@ namespace DSIS.Graph.Abstract
                 }
                 else
                 {
-                  v = route.Peek();
-                  vData = holder.GetData(v);
+                  v = new NodeAndData<TNode, TCell>(route.Peek(), holder);
                   state = 3;
                 }
                 break;

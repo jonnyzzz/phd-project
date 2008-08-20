@@ -6,14 +6,14 @@ using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.Scheme.Impl.Actions.Console
 {
-  public class DumpGraphComponentsInfoAction : IntegerCoordinateSystemActionBase2
+  public class DumpGraphComponentsInfoAction : IntegerCoordinateSystemActionBase3
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
       return new[] {Create(Keys.GraphComponents<Q>())};
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       IGraphStrongComponents<Q> gr = Keys.GraphComponents<Q>().Get(input);
 

@@ -4,12 +4,12 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions
 {
-  public class DefaultPointMethodSettings : IntegerCoordinateSystemActionBase2
+  public class DefaultPointMethodSettings : IntegerCoordinateSystemActionBase3
   {
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
-      Keys.SubdivisionKey.Set(output, 2L.Fill(system.Dimension));
-      Keys.CellImageBuilderKey.Set(output, new PointMethodSettings(3.Fill(system.Dimension)));
+      Keys.SubdivisionKey.Set(output, 2L.Fill(Dimension));
+      Keys.CellImageBuilderKey.Set(output, new PointMethodSettings(3.Fill(Dimension)));
     }
   }
 }

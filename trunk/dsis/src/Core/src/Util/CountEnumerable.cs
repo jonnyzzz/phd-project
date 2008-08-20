@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace DSIS.Core.Util
 {
-  public struct CountEnumerable<T> : ICountEnumerable<T>
+  public class CountEnumerable<T> : ICountEnumerable<T>
   {
     private readonly IEnumerable<T> myEnumerable;
     public readonly int Count;

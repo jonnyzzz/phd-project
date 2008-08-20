@@ -8,14 +8,14 @@ using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public abstract class DrawEntropyMeasureActionBaseBase : IntegerCoordinateSystemActionBase2
+  public abstract class DrawEntropyMeasureActionBaseBase : IntegerCoordinateSystemActionBase3
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      if (system.Dimension != SystemDimension)
+      if (Dimension != SystemDimension)
         throw new Exception("Dimension is assumend to be " + SystemDimension);
 
-      return ColBase(base.Check<T, Q>(system, ctx),
+      return ColBase(base.Check<T, Q>(ctx),
                      Create(FileKeys.WorkingFolderKey),
                      Create(Keys.GraphMeasure<Q>()
                        ));
@@ -26,9 +26,8 @@ namespace DSIS.Scheme.Impl.Actions.Files
       get { return 2; }
     }
 
-    protected GnuplotPointsFileWriter WriteMeasureFile<T, Q>(string measureFile, IGraphMeasure<Q> measure, T system)
+    protected GnuplotPointsFileWriter WriteMeasureFile<Q>(string measureFile, IGraphMeasure<Q> measure)
       where Q : IIntegerCoordinate
-      where T : IIntegerCoordinateSystem<Q>
     {
       GnuplotPointsFileWriter wr;
       var data = new double[SystemDimension+1];
@@ -36,7 +35,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       {
         foreach (var pair in measure.GetMeasureNodes())
         {
-          system.CenterPoint(pair.Key, data);
+          ((IIntegerCoordinateSystem<Q>)measure.CoordinateSystem).CenterPoint(pair.Key, data);
           data[SystemDimension] = pair.Value;
           wr.WritePoint(new ImagePoint(data));
         }

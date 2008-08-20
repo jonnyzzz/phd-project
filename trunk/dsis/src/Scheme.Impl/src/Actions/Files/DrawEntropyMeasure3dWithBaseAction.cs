@@ -7,9 +7,9 @@ namespace DSIS.Scheme.Impl.Actions.Files
 {
   public class DrawEntropyMeasure3dWithBaseAction : DrawEntropyMeasureActionBase
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx), Create(Keys.GraphComponents<Q>()));
+      return ColBase(base.Check<T, Q>(ctx), Create(Keys.GraphComponents<Q>()));
     }
 
     protected override GnuplotScriptParameters CreateProperties<Q>(IGraphMeasure<Q> measure, string outputFile)

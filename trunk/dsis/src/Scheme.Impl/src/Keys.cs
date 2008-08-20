@@ -1,7 +1,6 @@
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
-using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
@@ -23,9 +22,9 @@ namespace DSIS.Scheme.Impl
     public static readonly Key<ICellImageBuilderIntegerCoordinatesSettings> CellImageBuilderKey =
       new Key<ICellImageBuilderIntegerCoordinatesSettings>("Builder");
 
-    public static Key<ICountEnumerable<Q>> CellsEnumerationKey<Q>() where Q : ICellCoordinate
+    public static Key<ICellCoordinateCollection<Q>> CellsEnumerationKey<Q>() where Q : ICellCoordinate
     {
-      return new Key<ICountEnumerable<Q>>("Cells");
+      return new Key<ICellCoordinateCollection<Q>>("Cells");
     }
 
     public static Key<IGraph<Q>> Graph<Q>() where Q : ICellCoordinate

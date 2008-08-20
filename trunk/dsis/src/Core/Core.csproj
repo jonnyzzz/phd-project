@@ -65,6 +65,7 @@
     <Compile Include="src\Context\IContext.cs" />
     <Compile Include="src\Context\Impl\ContextImpl.cs" />
     <Compile Include="src\Coordinates\ICellCoordinate.cs" />
+    <Compile Include="src\Coordinates\ICellCoordinateCollection.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystem.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemConverter.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemMultiplyConverter.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="src\IData.cs" />
     <Compile Include="src\IDR.cs" />
     <Compile Include="src\Processor\BufferedThreadedCountEnumerable.cs" />
+    <Compile Include="src\Processor\CellCoordinateCollection.cs" />
     <Compile Include="src\Processor\CellProcessorContext.cs" />
     <Compile Include="src\Processor\CellProcessorContextBase.cs" />
     <Compile Include="src\Processor\ICellProcessor.cs" />

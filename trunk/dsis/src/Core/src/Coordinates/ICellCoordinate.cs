@@ -11,5 +11,5 @@ namespace DSIS.Core.Coordinates
   /// </summary>
   public interface ICellCoordinate
   {    
-  }  
+  }
 }

@@ -140,6 +140,7 @@
     <Compile Include="src\Actions\SystemInfoAction.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />
+    <Compile Include="src\IntegerCoordinateSystemActionBase3.cs" />
     <Compile Include="src\Keys.cs" />
     <Compile Include="src\Actions\MergeComponetsAction.cs" />
   </ItemGroup>

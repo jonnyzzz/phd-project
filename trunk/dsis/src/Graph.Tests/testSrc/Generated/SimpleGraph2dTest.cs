@@ -2,7 +2,7 @@ using DSIS.Graph.Tests.Generic;
 using DSIS.IntegerCoordinates.Generated;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Generated
+namespace DSIS.Graph.Tests.Generated
 {
   [TestFixture]
   public class SimpleGraph2dTest : SimpleGraphTestBase<IntegerCoordinateSystem2d, IntegerCoordinate2d>
@@ -28,7 +28,7 @@ namespace DSIS.Graph.Generated
       INode<IntegerCoordinate2d> node1 = myGraph.AddNode(mySystem.Create(new long[] { 1, 1, }));
       INode<IntegerCoordinate2d> node2 = myGraph.AddNode(mySystem.Create(new long[] { 2, 1, }));
 
-      myGraph.AddEdgeToNode(node1, node2);
+      ((IGraph<IntegerCoordinate2d>)myGraph).AddEdgeToNode(node1, node2);
 
       Assert.AreEqual(2, myGraph.NodesCount);
       Assert.AreEqual(1, myGraph.EdgesCount);
@@ -40,14 +40,16 @@ namespace DSIS.Graph.Generated
       INode<IntegerCoordinate2d> node1 = myGraph.AddNode(mySystem.Create(new long[] { 1, 1 }));
       INode<IntegerCoordinate2d> node2 = myGraph.AddNode(mySystem.Create(new long[] { 2, 1 }));
 
-      myGraph.AddEdgeToNode(node1, node2);
-      myGraph.AddEdgeToNode(node1, node2);
-      myGraph.AddEdgeToNode(node1, node2);
-      myGraph.AddEdgeToNode(node1, node2);
-      myGraph.AddEdgeToNode(node1, node2);
+      var x = ((IGraph<IntegerCoordinate2d>) myGraph);
 
-      Assert.AreEqual(2, myGraph.NodesCount);
-      Assert.AreEqual(1, myGraph.EdgesCount);
+      x.AddEdgeToNode(node1, node2);
+      x.AddEdgeToNode(node1, node2);
+      x.AddEdgeToNode(node1, node2);
+      x.AddEdgeToNode(node1, node2);
+      x.AddEdgeToNode(node1, node2);
+
+      Assert.AreEqual(2, x.NodesCount);
+      Assert.AreEqual(1, x.EdgesCount);
     }
 
     [Test]
@@ -56,8 +58,8 @@ namespace DSIS.Graph.Generated
       INode<IntegerCoordinate2d> node1 = myGraph.AddNode(mySystem.Create(new long[] { 1, 1}));
       INode<IntegerCoordinate2d> node2 = myGraph.AddNode(mySystem.Create(new long[] { 2, 1}));
 
-      myGraph.AddEdgeToNode(node1, node2);
-      myGraph.AddEdgeToNode(node2, node1);
+      ((IGraph<IntegerCoordinate2d>)myGraph).AddEdgeToNode(node1, node2);
+      ((IGraph<IntegerCoordinate2d>)myGraph).AddEdgeToNode(node2, node1);
 
       Assert.AreEqual("Graph [Nodes: 2, Edges: 2]\r\n  1 -> { 2,  }}\r\n  2 -> { 1,  }}\r\nFinished!\r\n\r\n",
                       myGraph.Dump());

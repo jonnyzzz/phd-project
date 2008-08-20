@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.CellImageBuilder.PointMethod;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
@@ -81,7 +79,7 @@ namespace DSIS.SimpleRunner
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoLinear, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoSquare, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 10, duffing, 2).Do); 
-      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
 
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemIked, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systemTorsten, 3).Do);

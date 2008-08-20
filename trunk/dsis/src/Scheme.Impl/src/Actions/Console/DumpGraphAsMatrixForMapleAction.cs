@@ -7,16 +7,16 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Console
 {
-  public class DumpGraphAsMatrixForMapleAction : IntegerCoordinateSystemActionBase2
+  public class DumpGraphAsMatrixForMapleAction : IntegerCoordinateSystemActionBase3
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx),
+      return ColBase(base.Check<T, Q>(ctx),
                      Create(Keys.GraphComponents<Q>()),
                      Create(FileKeys.WorkingFolderKey));
     }
 
-    protected sealed override void Apply<T, Q>(T system, Context input, Context output)
+    protected sealed override void Apply<T, Q>(Context input, Context output)
     {
       var measure = Keys.GraphComponents<Q>().Get(input);
       var folder = FileKeys.WorkingFolderKey.Get(input);

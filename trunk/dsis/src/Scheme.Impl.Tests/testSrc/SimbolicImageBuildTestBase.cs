@@ -90,7 +90,7 @@ namespace DSIS.Scheme.Impl
     }
 
 
-    public class AssertGraphAction : IntegerCoordinateSystemActionBase2
+    public class AssertGraphAction : IntegerCoordinateSystemActionBase3
     {
       public IConstraint GraphNodesConstraint;
       public IConstraint GraphEdgesConstraint;
@@ -98,12 +98,12 @@ namespace DSIS.Scheme.Impl
       public IConstraint CompontentsCountConstraint;
       public IConstraint CompontentsNodesCountConstraint;
 
-      protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+      protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
       {
-        return ColBase(base.Check<T, Q>(system, ctx), Create(Keys.Graph<Q>()), Create(Keys.GraphComponents<Q>()));
+        return ColBase(base.Check<T, Q>(ctx), Create(Keys.Graph<Q>()), Create(Keys.GraphComponents<Q>()));
       }
 
-      protected override void Apply<T, Q>(T system, Context input, Context output)
+      protected override void Apply<T, Q>(Context input, Context output)
       {
         IGraph<Q> graph = Keys.Graph<Q>().Get(input);
         IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);

@@ -11,40 +11,42 @@ using DSIS.Graph.Adapter;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl.Actions.Performance;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions
 {
-  public abstract class BuildSymbolicImageActionBase : IntegerCoordinateSystemActionBase2
+  public abstract class BuildSymbolicImageActionBase : IntegerCoordinateSystemActionBase3
   {
     protected abstract ICellImageBuilderIntegerCoordinatesSettings GetCellImageBuilderSettings(Context input);
 
     protected abstract long[] GetSubdivision(Context input);
 
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx), 
+      return ColBase(EmptyArray<ContextMissmatchCheck>.Instance, 
                      Create(Keys.SystemInfoKey),
                      Create(Keys.CellsEnumerationKey<Q>())
         );
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       var bld = GetCellImageBuilderSettings(input);
       var subdivision = GetSubdivision(input);
+      var cellsToBuildFrom = Keys.CellsEnumerationKey<Q>().Get(input);
 
       ISystemInfo info = Keys.SystemInfoKey.Get(input);
 
-      ICellCoordinateSystemConverter<Q, Q> subdivide = system.Subdivide(subdivision);
+      ICellCoordinateSystemConverter<Q, Q> subdivide = cellsToBuildFrom.System.Subdivide(subdivision);
       ICellCoordinateSystem<Q> toSystem = subdivide.ToSystem;
 
       var graph = new TarjanGraph<Q>(toSystem);
 
       var cellSettings = new CellImageBuilderContext<Q>(
         info, bld, toSystem, new GraphCellImageBuilder<Q>(graph));
-
+      
       var ctx = new CellProcessorContext<Q, Q>(
-        Keys.CellsEnumerationKey<Q>().Get(input),
+        cellsToBuildFrom,
         subdivide,
         bld.Create<Q>(),
         cellSettings

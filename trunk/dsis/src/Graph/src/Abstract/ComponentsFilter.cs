@@ -25,22 +25,11 @@ namespace DSIS.Graph.Abstract
       {
         return new ExactFilter(infos.GetFirst().ComponentId);
       }
-      if (count > 10)
+      if (count <= 10)
       {
-        var ids = new Hashset<uint>();
-        foreach (TarjanComponentInfo id in infos)
-        {
-          ids.Add(id.ComponentId);
-        }
-        return new HashSetFilter(ids);
+        return new ArrayFilter(infos.Map(x => x.ComponentId).ToArray());
       }
-      var data = new uint[count];
-      int cnt = 0;
-      foreach (TarjanComponentInfo id in infos)
-      {
-        data[cnt++] = id.ComponentId;
-      }
-      return new ArrayFilter(infos.Map(x=>x.ComponentId).ToArray());
+      return new HashSetFilter(new HashSet<uint>(infos.Map(x=>x.ComponentId)));
     }
 
     private class AllFilter : IFilter
@@ -99,9 +88,9 @@ namespace DSIS.Graph.Abstract
 
     private class HashSetFilter : IFilter
     {
-      private readonly Hashset<uint> mySet;
+      private readonly HashSet<uint> mySet;
 
-      public HashSetFilter(Hashset<uint> set)
+      public HashSetFilter(HashSet<uint> set)
       {
         mySet = set;
       }

@@ -36,7 +36,7 @@ namespace DSIS.Graph
       return myComps.GetEdgesWithFilteredEdges(node, componentIds);
     }
 
-    public CountEnumerable<T> GetCoordinates(ICollection<IStrongComponentInfo> components)
+    public ICellCoordinateCollection<T> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
     {
       return myComps.GetCoordinates(components);
     }

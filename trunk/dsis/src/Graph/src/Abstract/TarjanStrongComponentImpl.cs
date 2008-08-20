@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Processor;
 using DSIS.Core.Util;
 using DSIS.Utils;
 
@@ -28,11 +29,14 @@ namespace DSIS.Graph.Abstract
       get { return myManager.Infos; }
     }
 
-    public CountEnumerable<TCell> GetCoordinates(ICollection<IStrongComponentInfo> components)
+    public ICellCoordinateCollection<TCell> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
     {
       var set = new HashSet<IStrongComponentInfo>(components);
-      int cnt = set.FoldLeft(0, (x, y) => x.NodesCount + y);
-      return new CountEnumerable<TCell>(GetCoordinatesImpl(components), cnt);
+      
+      var cnt = set.FoldLeft(0, (x, y) => x.NodesCount + y);
+      var coodrs = GetNodes(components).Map(x => x.Coordinate);
+
+      return new CellCoordinateCollection<TCell>(CoordinateSystem, coodrs, cnt);
     }
 
     public IEnumerable<INode<TCell>> GetEdgesWithFilteredEdges(INode<TCell> node, IEnumerable<IStrongComponentInfo> componentIds)
@@ -57,7 +61,7 @@ namespace DSIS.Graph.Abstract
         if (!filter.Accept(node.ComponentId)) 
           continue;
         
-        INode<TCell> newFrom = graph.AddNode(node.Coordinate);
+        var newFrom = graph.AddNode(node.Coordinate);
         foreach (var tarjanNode in node.EdgesInternal)
         {
           if (filter.Accept(tarjanNode.ComponentId))
@@ -78,11 +82,6 @@ namespace DSIS.Graph.Abstract
     {
       var ids = ComponentsFilter.CreateFilter(componentIds, ComponentCount);
       return ids.FilterUpper(myGraph.Nodes);
-    }
-
-    private IEnumerable<TCell> GetCoordinatesImpl(IEnumerable<IStrongComponentInfo> components)
-    {
-      return GetNodes(components).Map(x => x.Coordinate);
     }
   }
 }

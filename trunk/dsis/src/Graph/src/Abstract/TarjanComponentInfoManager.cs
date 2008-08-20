@@ -32,5 +32,10 @@ namespace DSIS.Graph.Abstract
     {
       get { return myInfos.Values; }
     }
+
+    public override string ToString()
+    {
+      return string.Format("TarjanComponentes[Count: {0}]}", Count);
+    }
   }
 }

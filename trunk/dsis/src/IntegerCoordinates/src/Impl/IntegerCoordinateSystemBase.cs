@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Processor;
 using DSIS.Core.System;
 using DSIS.Core.Util;
 using DSIS.Persistance;
@@ -59,9 +60,9 @@ namespace DSIS.IntegerCoordinates.Impl
     {
     }
 
-    public CountEnumerable<Q> InitialSubdivision
+    public ICellCoordinateCollection<Q> InitialSubdivision
     {
-      get { return new CountEnumerable<Q>(GetInitialSubdivision(), GetInitialCellsCount()); }
+      get { return new CellCoordinateCollection<Q>(myInh, GetInitialSubdivision(), GetInitialCellsCount()); }
     }
 
     private IEnumerable<Q> GetInitialSubdivision()

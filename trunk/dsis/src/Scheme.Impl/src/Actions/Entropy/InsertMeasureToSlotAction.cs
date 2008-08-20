@@ -5,7 +5,7 @@ using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
-  public class InsertMeasureToSlotAction : IntegerCoordinateSystemActionBase2
+  public class InsertMeasureToSlotAction : IntegerCoordinateSystemActionBase3
   {
     private readonly ILoopAction myLoopAction;
     private readonly ILoopAction myProjAction;
@@ -18,9 +18,9 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       myKey = key;
     }
 
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx),
+      return ColBase(base.Check<T, Q>(ctx),
                      Create(Keys.GraphMeasure<Q>()),
                      Create(myLoopAction.Key),
                      Create(myProjAction.Key)
@@ -28,7 +28,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     }
 
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       IGraphMeasure<Q> measure = Keys.GraphMeasure<Q>().Get(input);
       SlotStore slot = SlotStore.Get(input);

@@ -6,7 +6,6 @@ using DSIS.Graph;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme;
 using DSIS.Scheme.Ctx;
-using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl;
 using DSIS.TrajectoryBuilder;
 using NUnit.Framework;
@@ -17,16 +16,14 @@ namespace DSIS.Tests.BlackBox
   {
     protected void DoTest(int steps, int startPoint, int endPoint, double[] error, params double[][] testPoints)
     {
-      SimpleTrajectoryBuilder bld = new SimpleTrajectoryBuilder(mySystemSpace, mySystemInfo, 1 << 40);
+      var bld = new SimpleTrajectoryBuilder(mySystemSpace, mySystemInfo, 1 << 40);
       DoTest(steps,
-             delegate(ActionBuilderAdapter ad, IAction leaf)
-               {
-                 ad.AddEdge(leaf,
-                            new RememberGraphAction(startPoint, endPoint, bld, new List<double[]>(testPoints), error));
-               });
+             (ad, leaf) => ad.AddEdge(leaf,
+                                      new RememberGraphAction(startPoint, endPoint, bld, new List<double[]>(testPoints),
+                                                              error)));
     }
 
-    private class RememberGraphAction : IntegerCoordinateSystemActionBase2
+    private class RememberGraphAction : IntegerCoordinateSystemActionBase3
     {
       private readonly int myStartPoint;
       private readonly int myEndPoint;
@@ -45,16 +42,16 @@ namespace DSIS.Tests.BlackBox
       }
 
 
-      protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+      protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
       {
-        return ColBase(base.Check<T, Q>(system, ctx), Create(Keys.GraphComponents<Q>()), Create(Keys.Graph<Q>()));
+        return ColBase(base.Check<T, Q>(ctx), Create(Keys.GraphComponents<Q>()), Create(Keys.Graph<Q>()));
       }
 
-      protected override void Apply<T, Q>(T system, Context input, Context output)
+      protected override void Apply<T, Q>(Context input, Context output)
       {
         IGraph<Q> graph = Keys.Graph<Q>().Get(input);
 
-        Assert.AreSame(graph.CoordinateSystem, system);
+        var system = (IIntegerCoordinateSystem<Q>)graph.CoordinateSystem;
 
         foreach (double[] point in myTestPoints)
         {
@@ -65,7 +62,7 @@ namespace DSIS.Tests.BlackBox
           }
 
           IRadiusProcessor<Q> processor = system.ProcessorFactory.CreateRadiusProcessor();
-          double[] error = new double[system.Dimension];
+          var error = new double[system.Dimension];
           for (int i = 0; i < system.Dimension; i++)
           {
             error[i] = myError[i]*system.CellSize[i];
@@ -83,7 +80,7 @@ namespace DSIS.Tests.BlackBox
             }
             if (!found)
             {
-              StringBuilder sb = new StringBuilder();
+              var sb = new StringBuilder();
               sb.Append("{");
               foreach (double v in myBuilder.Point)
               {
@@ -109,13 +106,13 @@ namespace DSIS.Tests.BlackBox
     }
 
     protected static List<double[]> Parse(string points) {
-      List<double[]> result = new List<double[]>();
+      var result = new List<double[]>();
       foreach (string line in points.Split('\n'))
       {
         if (line.Trim().Length == 0)
           continue;
-        string[] data = line.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        double[] ddata = new double[data.Length];
+        string[] data = line.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        var ddata = new double[data.Length];
         for(int i=0; i<data.Length; i++)
         {
           string str = data[i].Trim();          

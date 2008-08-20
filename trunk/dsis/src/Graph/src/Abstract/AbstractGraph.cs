@@ -31,13 +31,16 @@ namespace DSIS.Graph.Abstract
       myIsLoop = CreateNodeFlagsHolder("IS_LOOP");
     }
 
-    public void AddEdgeToNode(INode<TCell> fromNode, INode<TCell> toNode)
+    void IGraph<TCell>.AddEdgeToNode(INode<TCell> fromNode, INode<TCell> toNode)
     {
-      File.AppendAllText(@"c:\graph.txt", string.Format("{0}\t->\t{1}\r\n", fromNode, toNode));
-
       var from = (TNode) fromNode;
       var to = (TNode) toNode;
 
+      AddEdgeToNode(from, to);
+    }
+
+    public void AddEdgeToNode(TNode from, TNode to)
+    {
       if (from.AddEdgeTo(to))
       {
         myEdgesCount++;

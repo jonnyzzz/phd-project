@@ -9,14 +9,18 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public class GraphEntropyLogAction : IntegerCoordinateSystemActionBase2
+  public class GraphEntropyLogAction : IntegerCoordinateSystemActionBase3
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx), Create(FileKeys.WorkingFolderKey), Create(Keys.GraphComponents<Q>()));
+      return ColBase(
+        base.Check<T, Q>(ctx), 
+        Create(FileKeys.WorkingFolderKey), 
+        Create(Keys.GraphComponents<Q>())
+        );
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       string dir = FileKeys.WorkingFolderKey.Get(input).Path;
       string file = Path.Combine(dir, "graph-entropy.log");

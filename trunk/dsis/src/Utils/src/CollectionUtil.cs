@@ -20,6 +20,11 @@ namespace DSIS.Utils
       return true;
     }
 
+    public static IEnumerable<T> Copy<T>(this IEnumerable<T> enu)
+    {
+      return new List<T>(enu);
+    }
+
     public static IEnumerable<Q> Filter<Q>(this IEnumerable<Q> enu, Predicate<Q> pred)
     {
       foreach (var q in enu)

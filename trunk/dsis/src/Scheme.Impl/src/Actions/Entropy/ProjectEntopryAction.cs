@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
-  public class ProjectEntopryAction : IntegerCoordinateSystemActionBase2
+  public class ProjectEntopryAction : IntegerCoordinateSystemActionBase3
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx), Create(Keys.GraphMeasure<Q>()));
+      return ColBase(base.Check<T, Q>(ctx), Create(Keys.GraphMeasure<Q>()));
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       var measure = Keys.GraphMeasure<Q>().Get(input);
-      var divv = Fill(2L, measure.CoordinateSystem.Dimension);
+      var divv = 2L.Fill(measure.CoordinateSystem.Dimension);
       var project = measure.CoordinateSystem.Project(divv);
 
       if (project != null)
@@ -26,14 +27,6 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       {
         output.AddAll(input);
       }
-    }
-
-    private static T[] Fill<T>(T value, int dim)
-    {
-      var ts = new T[dim];
-      for (int i = 0; i < dim; i++)
-        ts[i] = value;
-      return ts;
     }
   }
 }

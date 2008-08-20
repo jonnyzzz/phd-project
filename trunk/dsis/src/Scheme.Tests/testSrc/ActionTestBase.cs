@@ -53,7 +53,7 @@ namespace DSIS.Scheme.testSrc
       public Context Apply(Context ctx)
       {
         myInstance.myData += "|" + myName + "|";
-        Context context = new Context();
+        var context = new Context();
         context.Set(new Key<string>(myName), myName);
         return context;
       }

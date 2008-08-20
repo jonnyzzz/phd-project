@@ -60,7 +60,7 @@ namespace DSIS.Core.Coordinates
     /// <summary>
     /// Returns all cells for initial space provided by ISystemSpace
     /// </summary>
-    CountEnumerable<T> InitialSubdivision { get; }
+    ICellCoordinateCollection<T> InitialSubdivision { get; }
 
     /// <summary>
     /// Checks if coord represents null. Really usefull in case ICellCoordinate is a value type

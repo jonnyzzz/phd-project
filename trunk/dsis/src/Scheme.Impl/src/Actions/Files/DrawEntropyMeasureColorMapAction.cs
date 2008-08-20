@@ -1,13 +1,14 @@
 using DSIS.Core.Visualization;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph.Entropy.Impl.Entropy;
+using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
   public class DrawEntropyMeasureColorMapAction : DrawEntropyMeasureActionBaseBase
   {
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       WorkingFolderInfo info = FileKeys.WorkingFolderKey.Get(input);
       IGraphMeasure<Q> measure = Keys.GraphMeasure<Q>().Get(input);
@@ -19,7 +20,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
         foreach (var pair in measure.GetMeasureNodes())
         {
           Q key = pair.Key;
-          system.CenterPoint(key, data);
+          ((IIntegerCoordinateSystem<Q>)measure.CoordinateSystem).CenterPoint(key, data);
           wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
         }
       }

@@ -6,26 +6,26 @@ using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
-  public class EigenPerComoponentAction : IntegerCoordinateSystemActionBase2
+  public class EigenPerComoponentAction : IntegerCoordinateSystemActionBase3
   {
     private const double EPS = 1e-4;
 
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx),
+      return ColBase(base.Check<T, Q>(ctx),
                      Create(Keys.GraphComponents<Q>()));
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
 
       double? value = null;
       foreach (IStrongComponentInfo info in comps.Components)
       {
-        IGraph<Q> graph = comps.AsGraph(new IStrongComponentInfo[] {info});
+        IGraph<Q> graph = comps.AsGraph(new[] {info});
 
-        EigenEntropyEvaluatorImpl<Q> evaluator = new EigenEntropyEvaluatorImpl<Q>(EPS, graph);
+        var evaluator = new EigenEntropyEvaluatorImpl<Q>(EPS, graph);
         IGraphEntropy entropy = evaluator.ComputeEntropy();
         double ent = entropy.GetEntropy();
 

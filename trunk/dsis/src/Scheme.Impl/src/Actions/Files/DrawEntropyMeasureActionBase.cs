@@ -4,6 +4,7 @@ using DSIS.Core.Visualization;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
+using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Files
@@ -15,13 +16,13 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     protected abstract override int SystemDimension { get; }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       WorkingFolderInfo info = FileKeys.WorkingFolderKey.Get(input);
       IGraphMeasure<Q> measure = Keys.GraphMeasure<Q>().Get(input);
       IGraphStrongComponents<Q> components = Keys.GraphComponents<Q>().Get(input);
 
-      GnuplotPointsFileWriter wr = WriteMeasureFile(info.CreateFileName("measure_base_value.data"), measure, system);
+      GnuplotPointsFileWriter wr = WriteMeasureFile(info.CreateFileName("measure_base_value.data"), measure);
 
       string outputFile = info.CreateFileName("measure_base.png");
 
@@ -35,7 +36,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
         var data = new double[SystemDimension];
         foreach (Q q in components.GetCoordinates(new List<IStrongComponentInfo>(components.Components)))
         {
-          system.CenterPoint(q, data);
+          ((IIntegerCoordinateSystem<Q>)components.CoordinateSystem).CenterPoint(q, data);
           bs.WritePoint(new ImagePoint(data));
         }
       }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Processor;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Utils;
@@ -11,7 +12,7 @@ namespace DSIS.Graph
     where T : ICellCoordinate
   {
     private readonly IGraphStrongComponents<T> myOriginal;
-    private readonly Dictionary<IStrongComponentInfo, IGraph<T>> myCache = new Dictionary<IStrongComponentInfo, IGraph<T>>(EqualityComparerFactory<IStrongComponentInfo>.GetComparer());
+    private readonly Dictionary<IStrongComponentInfo, IGraph<T>> myCache = new Dictionary<IStrongComponentInfo, IGraph<T>>();
 
     public CachedGraphStrongComponents(IGraphStrongComponents<T> original)
     {
@@ -46,7 +47,14 @@ namespace DSIS.Graph
 
       var set = new HashSet<IStrongComponentInfo>(componentIds);
       var filter = ComponentsFilter.CreateFilter(set, ComponentCount);
-      //todo: Check cached graphs first
+      foreach (var pair in myCache.Copy())
+      {
+        var n = pair.Value.Find(node.Coordinate);
+        if (n != null)
+          return filter.FilterUpper(pair.Value.GetEdges(n));
+        set.Remove(pair.Key);
+      }
+
       foreach (var info in set)
       {
         var g = Cache(info);
@@ -58,12 +66,12 @@ namespace DSIS.Graph
       return EmptyArray<INode<T>>.Instance;
     }
 
-    public CountEnumerable<T> GetCoordinates(ICollection<IStrongComponentInfo> componentIds)
+    public ICellCoordinateCollection<T> GetCoordinates(IEnumerable<IStrongComponentInfo> componentIds)
     {
       var nodes = GetNodes(componentIds).Map(x => x.Coordinate);
       var count = new HashSet<IStrongComponentInfo>(componentIds).FoldLeft(0, (x,y)=>x.NodesCount+y);
-      
-      return new CountEnumerable<T>(nodes, count);
+
+      return new CellCoordinateCollection<T>(CoordinateSystem, nodes, count);
     }
 
     public IStrongComponentInfo GetNodeComponent(INode<T> node)

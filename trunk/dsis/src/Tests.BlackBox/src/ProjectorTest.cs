@@ -104,7 +104,7 @@ namespace DSIS.Tests.BlackBox
     }
 
 
-    private class RememberGraphAction : IntegerCoordinateSystemActionBase2
+    private class RememberGraphAction : IntegerCoordinateSystemActionBase3
     {
       private readonly int myIndex;
       private IGraph myGraph;
@@ -118,7 +118,7 @@ namespace DSIS.Tests.BlackBox
         myLoop = loop;
       }
 
-      protected override void Apply<T, Q>(T system, Context input, Context output)
+      protected override void Apply<T, Q>(Context input, Context output)
       {
         LoopIndex index = myLoop.Key.Get(input);
         if (index.Index == myIndex)
@@ -168,12 +168,12 @@ namespace DSIS.Tests.BlackBox
 
         foreach (INode<Q> node in graph.Nodes)
         {
-          bool hasNodeProj = proj.Project(node.Coordinate) != null;
+          bool hasNodeProj = graph.CoordinateSystem.IsNull(proj.Project(node.Coordinate));
           if (hasNodeProj)
             nodes++;
           foreach (INode<Q> edge in graph.GetEdges(node))
           {
-            bool hasEdge = proj.Project(edge.Coordinate) != null;
+            bool hasEdge = graph.CoordinateSystem.IsNull(proj.Project(edge.Coordinate));
             if (hasEdge && hasNodeProj)
               edges++;
           }

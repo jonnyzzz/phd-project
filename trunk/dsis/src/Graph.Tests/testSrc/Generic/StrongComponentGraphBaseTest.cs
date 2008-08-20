@@ -9,30 +9,33 @@ namespace DSIS.Graph.Tests.Generic
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate
   {
+    private new IGraph<Q> myGraph;
+
     [SetUp]
     public override void SetUp()
     {
       base.SetUp();
       ComputeComponents();
+      myGraph = base.myGraph;
     }
 
     [Test]
     public void Test_01()
     {
-      Assert.AreEqual(0, myGraph.ComponentCount);
+      Assert.AreEqual(0, base.myGraph.ComponentCount);
     }
 
     [Test]
     public void Test_02()
     {
       CreateNode();
-      Assert.AreEqual(1, myGraph.ComponentCount);
+      Assert.AreEqual(1, base.myGraph.ComponentCount);
     }
 
     [Test]
     public void Test_03()
     {
-      IEnumerable<INode<Q>> enumerable = myGraph.GetNodes(new List<IStrongComponentInfo>());
+      IEnumerable<INode<Q>> enumerable = base.myGraph.GetNodes(new List<IStrongComponentInfo>());
       Assert.IsFalse(enumerable.GetEnumerator().MoveNext(), "No node is expected");
     }
 
@@ -40,15 +43,15 @@ namespace DSIS.Graph.Tests.Generic
     public void Test_04()
     {
       INode<Q> node = CreateNode();
-      Assert.AreEqual(1, myGraph.ComponentCount);
+      Assert.AreEqual(1, base.myGraph.ComponentCount);
 
-      foreach (INode<Q> n in myGraph.GetNodes(OneComponent))
+      foreach (INode<Q> n in base.myGraph.GetNodes(OneComponent))
       {
         Assert.AreEqual(node, n);
         Assert.AreSame(node, n);
       }
 
-      Assert.AreEqual(1, new List<INode<Q>>(myGraph.GetNodes(OneComponent)).Count);
+      Assert.AreEqual(1, new List<INode<Q>>(base.myGraph.GetNodes(OneComponent)).Count);
     }
 
 
@@ -56,34 +59,34 @@ namespace DSIS.Graph.Tests.Generic
     public void Test_05()
     {
       INode<Q> n1 = myGraph.AddNode(CreateCoordinate(1));
-      Assert.AreEqual(1, myGraph.ComponentCount);
+      Assert.AreEqual(1, base.myGraph.ComponentCount);
       INode<Q> n2 = myGraph.AddNode(CreateCoordinate(1));
 
       Assert.AreEqual(n1, n2);
       Assert.AreSame(n1, n2);
       Assert.AreEqual(1, myGraph.NodesCount);
-      Assert.AreEqual(1, myGraph.ComponentCount);
+      Assert.AreEqual(1, base.myGraph.ComponentCount);
     }
 
     [Test]
     public void Test_06()
     {
       CreateNode();
-      Assert.AreEqual(1, myGraph.ComponentCount);
+      Assert.AreEqual(1, base.myGraph.ComponentCount);
       CreateNode();
-      Assert.AreEqual(2, myGraph.ComponentCount);
+      Assert.AreEqual(2, base.myGraph.ComponentCount);
     }
 
     [Test]
     public void Test_07()
     {
-      INode<Q> n1 = CreateNode();
-      Assert.AreEqual(1, myGraph.ComponentCount);
-      INode<Q> n2 = CreateNode();
-      Assert.AreEqual(2, myGraph.ComponentCount);
+      var n1 = CreateNode();
+      Assert.AreEqual(1, base.myGraph.ComponentCount);
+      var n2 = CreateNode();
+      Assert.AreEqual(2, base.myGraph.ComponentCount);
 
       myGraph.AddEdgeToNode(n1, n2);
-      Assert.AreEqual(2, myGraph.ComponentCount);
+      Assert.AreEqual(2, base.myGraph.ComponentCount);
     }
 
     [Test]
@@ -92,15 +95,15 @@ namespace DSIS.Graph.Tests.Generic
       DoTest(delegate
                {
                  INode<Q> n1 = CreateNode();
-                 Assert.AreEqual(1, myGraph.ComponentCount);
+                 Assert.AreEqual(1, base.myGraph.ComponentCount);
                  INode<Q> n2 = CreateNode();
-                 Assert.AreEqual(2, myGraph.ComponentCount);
+                 Assert.AreEqual(2, base.myGraph.ComponentCount);
 
                  myGraph.AddEdgeToNode(n1, n2);
-                 Assert.AreEqual(2, myGraph.ComponentCount);
+                 Assert.AreEqual(2, base.myGraph.ComponentCount);
 
                  myGraph.AddEdgeToNode(n2, n1);
-                 Assert.AreEqual(1, myGraph.ComponentCount);
+                 Assert.AreEqual(1, base.myGraph.ComponentCount);
                  Assert.AreEqual(2, OneComponent[0].NodesCount);
                });
     }

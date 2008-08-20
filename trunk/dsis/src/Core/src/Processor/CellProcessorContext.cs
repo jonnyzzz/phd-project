@@ -9,7 +9,7 @@ namespace DSIS.Core.Processor
     where TTo : ICellCoordinate
     where TFrom : ICellCoordinate
   {
-    public CellProcessorContext(ICountEnumerable<TFrom> countEnumerable,
+    public CellProcessorContext(ICellCoordinateCollection<TFrom> countEnumerable,
                                 ICellCoordinateSystemConverter<TFrom, TTo> converter,
                                 ICellImageBuilder<TTo> cellImageBuilder,
                                 CellImageBuilderContext<TTo> cellImageBuilderContext)
@@ -18,7 +18,7 @@ namespace DSIS.Core.Processor
     }
 
     public CellProcessorContext<TFrom, TTo> CreateNextContext(
-      CountEnumerable<TFrom> input,
+      ICellCoordinateCollection<TFrom> input,
       ICellCoordinateSystemConverter<TFrom, TTo> converter,
       ICellConnectionBuilder<TTo> builder
       )

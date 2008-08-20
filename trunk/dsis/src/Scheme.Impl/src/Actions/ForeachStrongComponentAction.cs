@@ -5,10 +5,11 @@ using DSIS.Graph.Abstract;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions
 {
-  public class ForeachStrongComponentAction : IntegerCoordinateSystemActionBase2, ILoopAction
+  public class ForeachStrongComponentAction : IntegerCoordinateSystemActionBase3, ILoopAction
   {
     private readonly IAction myBody;
     private readonly string myKey;
@@ -29,12 +30,12 @@ namespace DSIS.Scheme.Impl.Actions
       get { return LoopIndex.Create(myKey); }
     }
 
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
+    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(system, ctx), Create(Keys.GraphComponents<Q>()));
+      return ColBase(EmptyArray<ContextMissmatchCheck>.Instance, Create(Keys.GraphComponents<Q>()));
     }
 
-    protected override void Apply<T, Q>(T system, Context input, Context output)
+    protected override void Apply<T, Q>(Context input, Context output)
     {
       var comps = Keys.GraphComponents<Q>().Get(input);
       var index = 0;
