@@ -13,11 +13,29 @@
     </Links>
   </Graph>
   <!--______________________________________________________________-->
+  <Graph Id="workingFolder">
+    <Nodes>
+      <Node Id="wf" Class="DSIS.Scheme.Impl.Actions.Files.WorkingFolderAction"/>
+      <Node Id="swf" Class="DSIS.Scheme.Impl.Actions.Files.SystemWorkingFolderAction"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="swf"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="wf"/>
+        <Nodes node-ref="swf"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->
   <Graph Id="init">
     <Nodes>
       <Node Id="cs" Class="DSIS.Scheme.Impl.Actions.CreateCoordinateSystemAction" />
       <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings" />
-      <Node Id="workingFolder" Class="DSIS.Scheme.Impl.Actions.Files.WorkingFolderAction"/>
       <Node Id="subdivision" Class="DSIS.Scheme.Impl.Actions.CreateInitialCellsAction"/>
     </Nodes>
     <Links>
@@ -30,23 +48,12 @@
       <Link>
         <Nodes node-ref="#input"/>
         <Nodes node-ref="cs"/>
-        <Nodes node-ref="workingFolder"/>
-        <Nodes node-ref="#output"/>
-      </Link>
-      <Link>
-        <Nodes node-ref="#input"/>
-        <Nodes node-ref="cs"/>
         <Nodes node-ref="#output"/>
       </Link>
       <Link>
         <Nodes node-ref="#input"/>
         <Nodes node-ref="cs"/>
         <Nodes node-ref="subdivision"/>
-        <Nodes node-ref="#output"/>
-      </Link>
-      <Link>
-        <Nodes node-ref="#input"/>
-        <Nodes node-ref="workingFolder"/>
         <Nodes node-ref="#output"/>
       </Link>
     </Links>
@@ -93,6 +100,19 @@
         <Nodes node-ref="dumpMethodInfo"/>
         <Nodes node-ref="#output"/>
       </Link>      
+    </Links>
+  </Graph>
+  <!--__________________________________________________________-->
+  <Graph Id="drawGraph">
+    <Nodes>
+      <Node Id="draw" Class="DSIS.Scheme.Impl.Actions.Files.DrawChainRecurrentAction"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="draw"/>
+        <Nodes node-ref="#output"/>
+      </Link>
     </Links>
   </Graph>
 </Graphs>

@@ -9,11 +9,10 @@ namespace DSIS.Scheme.Impl.Actions.Files
   {
     public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
-      return CollectionUtil.Merge<ContextMissmatch, ContextMissmatch, ContextMissmatch>(base.Compatible(ctx),
-                                                                                        CheckContext(ctx,
-                                                                                                     Create(
-                                                                                                       Keys.
-                                                                                                         SystemInfoKey)));
+      return CollectionUtil.Merge<ContextMissmatch, ContextMissmatch, ContextMissmatch>(
+        base.Compatible(ctx),
+         CheckContext(ctx, Create( Keys.SystemInfoKey))
+      );
     }
 
     protected override string Prefix(Context ctx)

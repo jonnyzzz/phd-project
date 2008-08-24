@@ -23,24 +23,27 @@ namespace DSIS.SimpleRunner
       var image = builder["imageBuilder"];
       var rootAction = builder["build"];
       var init = builder["init"];
+      var workingFolder = builder["workingFolder"];
       var dump = builder["dumpGraph"];
+      var draw = builder["drawGraph"];
 
       var system = SystemInfoFactory.Henon1_4();
 
+
       bld.Start.Edge(system).Edge(init).Edge(image);
+      bld.Start.Edge(system).Edge(workingFolder);
 
       bld.Start
         .Edge(rootAction).
           With(x=>x.Back(system)).
           With(x=>x.Back(image)).
           With(x=>x.Back(init))
-        .Edge(dump).
-          With(x=>x.Back(image))
+        .With(x=>x.Edge(dump).
+          With(xx=>xx.Back(image)).
+          With(xx=>xx.Back(workingFolder)))
+        .Edge(draw).
+          With(x=>x.Back(workingFolder))
         .Edge(bld.Finish)
-        
-//        .Edge(rootAction)
-//        .With(x=>x.Back(system))
-//        .Edge(dump)
         ;
     }
   }

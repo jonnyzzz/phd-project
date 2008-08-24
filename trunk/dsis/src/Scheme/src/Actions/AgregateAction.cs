@@ -114,12 +114,17 @@ namespace DSIS.Scheme.Actions
 
       public ICollection<ContextMissmatch> CompatibleExternal(Context ctx)
       {
-        var list = new List<ContextMissmatch>();
+       /* var list = new List<ContextMissmatch>();
         foreach (IAction action in myChidren)
         {
           list.AddRange(action.Compatible(ctx));
         }
-        return list;
+        return list;*/
+
+        //TODO: Some action may show part of context the is resolved inside
+        //TODO: that action, but there is no way to guess what requirements
+        //TODO: are to be omitted here. Thus all checks would be made dynamical
+        return EmptyArray<ContextMissmatch>.Instance;
       }
 
       public Context Apply(Context _)
