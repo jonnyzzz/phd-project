@@ -8,7 +8,6 @@ namespace DSIS.Scheme.Impl.Actions.Agregated
     public SymbolicImageConstructionStep()
     {
       IAction merge = new MergeComponetsAction();
-
       //todo:Crap!!! Do not use time checker here!
       IAction buildImage = new RecordTimeSlotAction(new BuildSymbolicImageAction(), "BuildSymbolicImage");
 

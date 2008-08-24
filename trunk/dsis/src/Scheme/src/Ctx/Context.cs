@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
-using DSIS.Scheme.Ctx;
 using DSIS.Utils;
-using System.Linq;
 
 namespace DSIS.Scheme.Ctx
 {
@@ -73,6 +71,27 @@ namespace DSIS.Scheme.Ctx
       {
         if (!myContext.ContainsKey(pair.Key))
           myContext[pair.Key] = pair.Value;
+      }
+    }
+
+    public delegate bool ReplaceKey(IKey key, object oldValue, object newValue);
+
+    /// <summary>
+    /// Adds all key to the context. If same keys contains different values, callback
+    /// is called. Values is overriden if callback returns true
+    /// </summary>
+    /// <param name="ctx">context to add</param>
+    /// <param name="keyClashed">Unresolved clash callback</param>
+    public void AddAllNew(Context ctx, ReplaceKey keyClashed)
+    {
+      foreach (KeyValuePair<KeyWrapper, object> pair in ctx.myContext)
+      {
+        object value;
+        if (!myContext.TryGetValue(pair.Key, out value) || pair.Key.Key.Comparer.Equals(value, pair.Value) ||
+            keyClashed(pair.Key.Key, value, pair.Value))
+        {
+          myContext[pair.Key] = pair.Value;
+        }
       }
     }
 

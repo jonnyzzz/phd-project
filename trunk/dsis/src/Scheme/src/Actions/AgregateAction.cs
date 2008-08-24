@@ -32,9 +32,18 @@ namespace DSIS.Scheme.Actions
     {
       myStart.SetContext(ctx);
       myGraph.Execute();
-      Context result = myEnd.Result;
-      if (result == null)
+      var list = myEnd.Result;
+
+      if (list.Count == 0)
         throw new Exception("End is unreacheble");
+
+      var result = list.FoldLeft(
+        new Context(),
+        (x, r) =>
+          {
+            myGraph.AddAllNewAndCheck(r, x, () => "");
+            return r;
+          });
 
       myGraph.Clear();
       return result;
@@ -70,9 +79,9 @@ namespace DSIS.Scheme.Actions
 
     private class EndAction : IAction
     {
-      private Context myResult;
+      private readonly List<Context> myResult = new List<Context>();
 
-      public Context Result
+      public List<Context> Result
       {
         get { return myResult; }
       }
@@ -86,7 +95,7 @@ namespace DSIS.Scheme.Actions
 
       public Context Apply(Context ctx)
       {
-        myResult = ctx;
+        myResult.Add(ctx);
         return ctx;
       }
 
@@ -98,16 +107,14 @@ namespace DSIS.Scheme.Actions
       private readonly List<IAction> myChidren = new List<IAction>();
       private Context myContext;
 
-      #region IAction Members
-
       public ICollection<ContextMissmatch> Compatible(Context ctx)
-      {        
+      {
         return EmptyArray<ContextMissmatch>.Instance;
       }
 
       public ICollection<ContextMissmatch> CompatibleExternal(Context ctx)
       {
-        List<ContextMissmatch> list = new List<ContextMissmatch>();
+        var list = new List<ContextMissmatch>();
         foreach (IAction action in myChidren)
         {
           list.AddRange(action.Compatible(ctx));
@@ -119,8 +126,6 @@ namespace DSIS.Scheme.Actions
       {
         return myContext;
       }
-
-      #endregion
 
       public void AddChild(IAction child)
       {

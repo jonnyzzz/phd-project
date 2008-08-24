@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme
 {
@@ -11,6 +13,8 @@ namespace DSIS.Scheme
 
     void Copy(Context from, Context to);
     bool EqualsWithoutName(IKey key);
+
+    IEqualityComparer Comparer { get; }
   }
 
   public class Key<TValue> : IKey, IEquatable<Key<TValue>>
@@ -53,6 +57,11 @@ namespace DSIS.Scheme
     public bool EqualsWithoutName(IKey key)
     {
       return key is Key<TValue>;      
+    }
+
+    public IEqualityComparer Comparer
+    {
+      get { return EqualityComparerFactory<TValue>.GetOldComparer(); }
     }
 
 

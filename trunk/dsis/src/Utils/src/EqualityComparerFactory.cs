@@ -1,13 +1,19 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using DSIS.Utils;
 
 namespace DSIS.Utils
 {
   public class EqualityComparerFactory<T> : AttributeUtil<T>
   {
     private static IEqualityComparer<T> myComparer = null;
+
+
+    public static IEqualityComparer GetOldComparer()
+    {
+      return new EqualityComparerProxy<T>(GetComparer());
+    } 
 
     //todo: Append attribute search login to find exact type.
     public static IEqualityComparer<T> GetComparer()
@@ -35,7 +41,7 @@ namespace DSIS.Utils
       }
       else
       {
-        EqualityComparerAttribute at = GetAttributeInstance<EqualityComparerAttribute>();
+        var at = GetAttributeInstance<EqualityComparerAttribute>();
         if (at != null)
         {
           Type comparer;
@@ -62,6 +68,28 @@ namespace DSIS.Utils
     public static IEqualityComparer<T> GetReferenceComparer()      
     {
       return new ReferenceEqualityComparer<T>();
+    }
+  }
+
+  public class EqualityComparerProxy<T> : IEqualityComparer
+  {
+    private readonly IEqualityComparer<T> myImpl;
+
+    public EqualityComparerProxy(IEqualityComparer<T> impl)
+    {
+      myImpl = impl;
+    }
+
+    bool IEqualityComparer.Equals(object x, object y)
+    {
+      if (x is T && y is T)
+        return myImpl.Equals((T) x, (T) y);
+      return false;
+    }
+
+    int IEqualityComparer.GetHashCode(object obj)
+    {
+      return myImpl.GetHashCode((T) obj);
     }
   }
 }

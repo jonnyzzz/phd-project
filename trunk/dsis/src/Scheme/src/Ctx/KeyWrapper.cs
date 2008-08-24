@@ -4,17 +4,17 @@ namespace DSIS.Scheme.Ctx
 {
   internal abstract class KeyWrapper : IEquatable<KeyWrapper>
   {
-    protected abstract string Key { get; }
+    protected abstract string KeyName { get; }
     protected abstract Type Type { get; }
 
     public bool Equals(KeyWrapper other)
     {
-      return Equals(Key, other.Key) && Equals(Type, other.Type);
+      return Equals(KeyName, other.KeyName) && Equals(Type, other.Type);
     }
 
     public override int GetHashCode()
     {
-      return Key.GetHashCode() + 31* Type.GetHashCode();
+      return KeyName.GetHashCode() + 31* Type.GetHashCode();
     }
 
     public override string ToString()
@@ -35,6 +35,8 @@ namespace DSIS.Scheme.Ctx
       return w != null && w.Equals(this);
     }
 
+    public abstract IKey Key { get; }
+
     public abstract Key<Y> Cast<Y>();
 
     public abstract bool EqualsKey(IKey key);
@@ -48,7 +50,7 @@ namespace DSIS.Scheme.Ctx
         myKey = key;
       }
 
-      protected override string Key
+      protected override string KeyName
       {
         get { return myKey.Name; }
       }
@@ -66,6 +68,11 @@ namespace DSIS.Scheme.Ctx
       public override bool IsKey<Y>()
       {
         return new Key<Y>("QQQ").EqualsWithoutName(myKey);
+      }
+
+      public override IKey Key
+      {
+        get { return myKey; }
       }
 
       public override Key<Y> Cast<Y>()

@@ -2,7 +2,7 @@ using DSIS.Scheme.Actions;
 using DSIS.Scheme.Exec;
 using NUnit.Framework;
 
-namespace DSIS.Scheme.testSrc
+namespace DSIS.Scheme.Tests
 {
   [TestFixture]
   public class ActionsTest : ActionTestBase

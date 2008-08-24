@@ -16,8 +16,6 @@ namespace DSIS.Graph.Entropy.Impl.Util
       myValues = values;
     }
 
-
-
     public double Add(T key, double value)
     {
       double tmp;

@@ -11,7 +11,7 @@ namespace DSIS.Scheme.Xml
   {
     public Graphs Load(Assembly assembly, string resource)
     {
-      return Parse(Stream(GetType().Assembly, resource));
+      return Parse(Stream(assembly, resource));
     }
 
     private static Stream Stream(Assembly assembly, string name)

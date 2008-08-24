@@ -5,7 +5,7 @@ using DSIS.Scheme.Ctx;
 using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.Scheme.testSrc
+namespace DSIS.Scheme.Tests
 {
   public class ActionTestBase
   {
@@ -24,19 +24,26 @@ namespace DSIS.Scheme.testSrc
       Assert.AreEqual(data, myData);
     }
 
-    protected IAction Create(string name)
+    protected IAction Create<T>(string name, T t)
     {
-      return new Mock(name, this);
+      return new Mock<T>(name, this, t);
     }
 
-    private class Mock : IAction
+    protected IAction Create(string name)
+    {
+      return new Mock<string>(name, this, name);
+    }
+
+    private class Mock<T> : IAction
     {
       private readonly string myName;
       private readonly ActionTestBase myInstance;
+      private readonly T myResult;
 
-      public Mock(string name, ActionTestBase instance)
+      public Mock(string name, ActionTestBase instance, T result)
       {
         myName = name;
+        myResult = result;
         myInstance = instance;
       }
 
@@ -54,7 +61,7 @@ namespace DSIS.Scheme.testSrc
       {
         myInstance.myData += "|" + myName + "|";
         var context = new Context();
-        context.Set(new Key<string>(myName), myName);
+        context.Set(new Key<T>(myName), myResult);
         return context;
       }
     }

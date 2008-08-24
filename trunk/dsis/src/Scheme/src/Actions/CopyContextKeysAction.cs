@@ -4,11 +4,11 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Actions
 {
-  public class FilterAction : ActionBase
+  public class CopyContextKeysAction : ActionBase
   {
     private readonly ICollection<IKey> myAcceptKeys;
 
-    public FilterAction(params IKey[] acceptKeys)
+    public CopyContextKeysAction(params IKey[] acceptKeys)
     {
       myAcceptKeys = acceptKeys;
     }

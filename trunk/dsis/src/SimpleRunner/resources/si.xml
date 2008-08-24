@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Graphs xmlns="urn:shemas-dsis-org:computation-graph-scheme-xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <Graph Id="imageBuilder">
+    <Nodes>
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->
+  <Graph Id="init">
+    <Nodes>
+      <Node Id="cs" Class="DSIS.Scheme.Impl.Actions.CreateCoordinateSystemAction" />
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings" />
+      <Node Id="workingFolder" Class="DSIS.Scheme.Impl.Actions.Files.WorkingFolderAction"/>
+      <Node Id="subdivision" Class="DSIS.Scheme.Impl.Actions.CreateInitialCellsAction"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="cs"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="cs"/>
+        <Nodes node-ref="workingFolder"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="cs"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="cs"/>
+        <Nodes node-ref="subdivision"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="workingFolder"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--_________________________________________________________-->
+  <Graph Id="build">
+    <Nodes>
+      <Node Id="Build" Class="DSIS.Scheme.Impl.Actions.BuildSymbolicImageAction"/>
+      <Node Id="Tarjan" Class="DSIS.Scheme.Impl.Actions.ChainRecurrenctSimbolicImageAction"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="Build"/>
+        <Nodes node-ref="Tarjan"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="Build"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--_________________________________________________________-->
+  <Graph Id="dumpGraph">
+    <Nodes>
+      <Node Id="dumpGraphInfo" Class="DSIS.Scheme.Impl.Actions.Console.DumpGraphInfoAction" />
+      <Node Id="dumpComponentsInfo" Class="DSIS.Scheme.Impl.Actions.Console.DumpGraphComponentsInfoAction" />
+      <Node Id="dumpMethodInfo" Class="DSIS.Scheme.Impl.Actions.Console.DumpMethodAction" />
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="dumpGraphInfo"/>
+        <Nodes node-ref="#output"/>
+      </Link>      
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="dumpComponentsInfo"/>
+        <Nodes node-ref="#output"/>
+      </Link>      
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="dumpMethodInfo"/>
+        <Nodes node-ref="#output"/>
+      </Link>      
+    </Links>
+  </Graph>
+</Graphs>

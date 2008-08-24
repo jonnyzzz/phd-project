@@ -93,9 +93,15 @@
     <Compile Include="src\Actions\LeafAction.cs" />
     <Compile Include="src\Actions\OperationStack.cs" />
     <Compile Include="src\Actions\RootAction.cs" />
+    <Compile Include="src\SIBuild.cs" />
+    <Compile Include="src\SystemInfoFactory.cs" />
     <Compile Include="src\XmlAbstractImageBuilderListener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Scheme.Xml\Scheme.Xml.csproj">
+      <Project>{90ED6605-1FD5-4C7E-A5A2-914DD9FB9820}</Project>
+      <Name>Scheme.Xml</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scheme2\Scheme2.csproj">
       <Project>{69A72457-55CD-463A-840B-73F62BDCA0E5}</Project>
       <Name>Scheme2</Name>
@@ -183,6 +189,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="resources\build-si.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\si.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

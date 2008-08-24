@@ -17,6 +17,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Exec;
+using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
@@ -32,45 +33,9 @@ namespace DSIS.SimpleRunner
   {
     public static void Main(string[] args)
     {
-      var duffingSp = new DefaultSystemSpace(2, new[] {-4.3, -3}, new[] {4.3, 3}, new long[] {3, 3});
-
-      var spIkedaCutted =
-        new DefaultSystemSpace(2, new[] {-1.1, -1.5}, new[] {3.5, 1.8}, new[] {3, 3L});
-      var sp =
-        new DefaultSystemSpace(2, new double[] {-10, -10}, new double[] {10, 10}, new long[] {3, 3});
-      var spD =
-        new DefaultSystemSpace(2, new double[] {-2, -2}, new double[] {2, 2}, new long[] {2, 2});
-      var sp3 =
-        new DefaultSystemSpace(3, new double[] {0, 0, 0}, new double[] {200, 200, 200}, new long[] {2, 2, 2});
-
-      var log_sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {1, 4}, new long[] {3, 3});
-      var log_sp2 = new DefaultSystemSpace(2, new double[] {0, 3}, new[] {1, 3.7}, new long[] {3, 3});
-
-      var log_sp1 = new DefaultSystemSpace(1, new double[] {0}, new double[] {1}, new long[] {3});
-
-
-      IAction systemHenon = new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), sp);
-      IAction systemHenonD = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(1.2, 0.2), spD);
-      IAction systemHenonD_272 = new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(1.272, 0.2), spD);
-      IAction systemIked = new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), sp);
-      IAction systemIkedaCut =
-        new SystemInfoAction(new RenameSystem(new IkedaFunctionSystemInfoDecorator(), "Ikeda Cut"), spIkedaCutted);
-      IAction systenLogistic2 = new SystemInfoAction(new Logistic2dSystemInfo(), log_sp);
-      IAction systenLogistic2_x = new SystemInfoAction(new Logistic2dSystemInfo(), log_sp2);
-      IAction systenLogistic3569 = new SystemInfoAction(new LogisticSystemInfo(3.569), log_sp1);
-      IAction systenLogistic4 = new SystemInfoAction(new LogisticSystemInfo(4), log_sp1);
-      IAction systenHomoLinear = new SystemInfoAction(new HomoLinearSystemInfo(1.35), sp);
-      IAction systenHomoSquare = new SystemInfoAction(new HomoSquareSystemInfo(0.4), sp);
-      IAction systemTorsten = new SystemInfoAction(new FoodChainSystemInfo(), sp3);
-
-      IAction duffing = new SystemInfoAction(new RungeKuttSolver(new DuffingSystemInfo(1, 1, 0.01), 3, 0.01),
-                                             duffingSp);
-      IAction vanderpol = new SystemInfoAction(new RungeKuttSolver(new VanDerPolSystemInfo(1), 15, 0.1),
-                                               duffingSp);
-
+      SIBuild.Action();
+      return;
       var wfBase = new WorkingFolderAction();
-
-      IAction[] system = {systemHenon, /*systemHenonD, systemHenonD_272, systemIked, systemIkedaCut*/};
 
       var parallel = new SimpleParallel();
 
@@ -79,7 +44,7 @@ namespace DSIS.SimpleRunner
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoLinear, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systenHomoSquare, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 10, duffing, 2).Do); 
-      parallel.DoParallel(new ComputeDelegate(wfBase, 12, systemHenon, 2).Do);
+      parallel.DoParallel(new ComputeDelegate(wfBase, 12, SystemInfoFactory.Henon1_4(), 2).Do);
 
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 9, systemIked, 2).Do);
 //      parallel.DoParallel(new ComputeDelegate(wfBase, 8, systemTorsten, 3).Do);
@@ -135,26 +100,26 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(a4, a5);
 
       gr.AddEdge(a4, new DumpGraphInfoAction());
-      gr.AddEdge(a5, new DumpGraphComponentsInfoAction());
+      
+      var dumpGraphComponents = new DumpGraphComponentsInfoAction();
+      gr.AddEdge(a5, dumpGraphComponents);
+      gr.AddEdge(a4, dumpGraphComponents);
 
       IAction buildIS = new AgregateAction(
         delegate(IActionGraphPartBuilder bld)
           {
-            var build = (new SymbolicImageConstructionStep());
+            var build = new SymbolicImageConstructionStep();
             bld.AddEdge(bld.Start, build);
             bld.AddEdge(build, bld.End);
             var b = new ParallelAction(new DumpGraphInfoAction(),
                                        new DumpGraphComponentsInfoAction(),
-                                       new DumpMethodAction()
+                                       new DumpMethodAction(),
+                                       new GraphEntropyLogAction()
               );
-            var p = new ProxyAction();
             bld.AddEdge(build, b);
-            bld.AddEdge(bld.Start, p);
-            bld.AddEdge(p, b);
-
-            var dumpEntropy = new GraphEntropyLogAction();
-            bld.AddEdge(build, dumpEntropy);
-            bld.AddEdge(p, dumpEntropy);
+            var filterStart = new CopyContextKeysAction(FileKeys.WorkingFolderKey, FileKeys.LoggerKey);
+            bld.AddEdge(bld.Start, filterStart);
+            bld.AddEdge(filterStart, b);
           });
 
       IAction step = new ChainAction(
@@ -191,6 +156,7 @@ namespace DSIS.SimpleRunner
       gr.AddEdge(wf, step);
       gr.AddEdge(logger, step);
       gr.AddEdge(a5, step);
+      gr.AddEdge(a4, step);
       gr.AddEdge(system, step);
       gr.AddEdge(method, step);
 

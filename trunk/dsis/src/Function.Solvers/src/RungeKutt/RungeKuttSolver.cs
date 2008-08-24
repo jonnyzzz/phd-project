@@ -15,7 +15,7 @@ namespace DSIS.Function.Solvers.RungeKutt
 
     protected override string PresentableMethodName
     {
-      get { return "Runge-Kutt"; }
+      get { return string.Format("Runge-Kutt(Step:{0},dt:{1})", mySteps, myDt); }
     }
 
     protected override IFunction<double> GetDoubleFunctionOne(double[] precision)
