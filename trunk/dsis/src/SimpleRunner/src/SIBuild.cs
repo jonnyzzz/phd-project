@@ -1,9 +1,12 @@
+using System;
+using System.Collections.Generic;
+using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl.Actions;
-using DSIS.Scheme.Impl.Actions.Console;
 using DSIS.Scheme.Xml;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
@@ -21,7 +24,6 @@ namespace DSIS.SimpleRunner
       var builder = new XsdGraphBuilder().BuildActions(graphs);
 
       var image = builder["imageBuilder"];
-      var rootAction = builder["build"];
       var init = builder["init"];
       var workingFolder = builder["workingFolder"];
       var dump = builder["dumpGraph"];
@@ -29,15 +31,12 @@ namespace DSIS.SimpleRunner
 
       var system = SystemInfoFactory.Henon1_4();
 
-
       bld.Start.Edge(system).Edge(init).Edge(image);
       bld.Start.Edge(system).Edge(workingFolder);
 
-      bld.Start
-        .Edge(rootAction).
-          With(x=>x.Back(system)).
-          With(x=>x.Back(image)).
-          With(x=>x.Back(init))
+      var rootAction = RepeatSI(bld.Start, 5, builder["build"], new[]{system, image, init}, new[]{system,image});
+
+      rootAction
         .With(x=>x.Edge(dump).
           With(xx=>xx.Back(image)).
           With(xx=>xx.Back(workingFolder)))
@@ -45,6 +44,24 @@ namespace DSIS.SimpleRunner
           With(x=>x.Back(workingFolder))
         .Edge(bld.Finish)
         ;
+    }
+
+    private static IActionEdgesBuilder RepeatSI(IActionEdgesBuilder holder, int count, IAction buildSI, IEnumerable<IAction> firstContext, IEnumerable<IAction> innerContext)
+    {
+      if (count < 2)
+        throw new ArgumentException("Count should be >= 2", "count");
+
+      var next = holder.Edge(buildSI.Clone()).With(x => firstContext.Each(y => x.Back(y)));
+      for (int i = 1; i < count; i++)
+      {
+        var tmp = next;
+        next = next
+          .Edge(buildSI.Clone())
+            .With(x => innerContext.Each(y => x.Back(y)))
+            .With(x=>x.Back(new MergeComponetsAction()).Back(tmp));
+      }
+
+      return next;
     }
   }
 }

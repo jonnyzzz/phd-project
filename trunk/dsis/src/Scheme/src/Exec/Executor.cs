@@ -18,6 +18,50 @@ namespace DSIS.Scheme.Exec
     private readonly HashSet<ActionWrapper> myActions = new HashSet<ActionWrapper>();
     private readonly Dictionary<ActionWrapper, Context> myPendingContexts = new Dictionary<ActionWrapper, Context>();
 
+    public ActionGraph()
+    {
+    }
+
+
+    private class GraphClone
+    {
+      private readonly Dictionary<IAction, IAction> myClonedCache = new Dictionary<IAction, IAction>();
+
+      private IAction Clone(IAction action)
+      {
+        IAction clone;
+        if (myClonedCache.TryGetValue(action, out clone))
+          return clone;
+        return myClonedCache[action] = action.Clone();        
+      }
+
+      public ActionWrapper Clone(ActionWrapper aw)
+      {
+        return new ActionWrapper(Clone(aw.Action));
+      }
+
+      public IEnumerable<ActionWrapper> Clone(IEnumerable<ActionWrapper> enu)
+      {
+        return enu.Map(x => Clone(x));
+      }      
+    }
+
+    private ActionGraph(ActionGraph source)
+    {
+      var clone = new GraphClone();
+
+      foreach (KeyValuePair<ActionWrapper, List<ActionWrapper>> pair in source.myBackEdges)
+        myBackEdges.AddValues(clone.Clone(pair.Key), clone.Clone(pair.Value));
+      foreach (KeyValuePair<ActionWrapper, List<ActionWrapper>> pair in source.myStraitEdges)
+        myStraitEdges.AddValues(clone.Clone(pair.Key), clone.Clone(pair.Value));
+      foreach (ActionWrapper action in source.myDoneActions)
+        myDoneActions.Add(clone.Clone(action));
+      foreach (ActionWrapper action in source.myActions)
+        myActions.Add(clone.Clone(action));
+      foreach (KeyValuePair<ActionWrapper, Context> pair in source.myPendingContexts)
+        myPendingContexts.Add(clone.Clone(pair.Key), pair.Value.Clone());
+    }
+
     public void Execute()
     {
       SetInitialActionsContext();
@@ -33,6 +77,11 @@ namespace DSIS.Scheme.Exec
     {
       myDoneActions.Clear();
       myPendingContexts.Clear();
+    }
+
+    public ActionGraph Clone()
+    {
+      return new ActionGraph(this);
     }
 
     private void SetInitialActionsContext()
@@ -150,6 +199,11 @@ namespace DSIS.Scheme.Exec
       list.Sort((x, y) => (x.ToString().CompareTo(y.ToString())));
 
       return list;
+    }
+
+    public IEnumerable<T> NodesOfType<T>() where T : IAction
+    {
+      return myActions.Map(x=>x.Action).Filter(x => x is T).Cast<T>();
     }
 
     public override string ToString()

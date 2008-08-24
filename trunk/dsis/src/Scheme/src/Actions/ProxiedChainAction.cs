@@ -11,7 +11,7 @@ namespace DSIS.Scheme.Actions
 
     public ProxiedChainAction(IEnumerable<IAction> chain)
     {
-      ProxyAction pa = new ProxyAction();
+      var pa = new ProxyAction();
       Builder.AddEdge(Builder.Start, pa);
       IAction prev = Builder.Start; //todo: pa?
       foreach (IAction action in chain)

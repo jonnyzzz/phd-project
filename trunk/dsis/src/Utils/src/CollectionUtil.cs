@@ -13,6 +13,14 @@ namespace DSIS.Utils
       return enu ?? EmptyArray<Q>.Instance;
     }
 
+    public static void Each<Q>(this IEnumerable<Q> enu, Action<Q> action)
+    {
+      foreach (Q q in enu)
+      {
+        action(q);
+      }
+    }
+
     public static bool IsEmpty<Q>(this IEnumerable<Q> enu)
     {
       foreach (var q in enu)
@@ -85,6 +93,22 @@ namespace DSIS.Utils
           t--;
         }
       }
+    }
+
+    public static T Singleton<T>(this IEnumerable<T> enu)
+    {
+      T t = default(T);
+      bool reached = false;
+      foreach (T q in enu)
+      {
+        t = q;
+        if (reached)
+          throw new ArgumentException("Collection is expected to be singleton, too much elements");
+        reached = true;
+      }
+      if (!reached)
+        throw new ArgumentException("Collection is expected to be singleton, but not empty");
+      return t;
     }
 
     public static T GetFirst<T>(this IEnumerable<T> enu)
@@ -316,6 +340,12 @@ namespace DSIS.Utils
       return new UpcastedEnumerable<TEnu, TC, TU>(enu);
     }
 
+    public static IEnumerable<Q> Join<Q,T>(this IEnumerable<Q> enu, params T[] ex)
+      where T : Q
+    {
+      return Join(enu, (IEnumerable<T>) ex);
+    }
+
     public static IEnumerable<Q> Join<Q,T>(this IEnumerable<Q> enu, IEnumerable<T> ex)
       where T : Q
     {
@@ -327,6 +357,11 @@ namespace DSIS.Utils
       {
         yield return t;
       }
+    }
+
+    public static IEnumerable<Q> En<Q>(this Q q)
+    {
+      yield return q;
     }
 
     public static IEnumerable<T> Cast<T>(this IEnumerable enu)

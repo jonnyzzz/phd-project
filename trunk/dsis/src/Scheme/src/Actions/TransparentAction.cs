@@ -21,5 +21,10 @@ namespace DSIS.Scheme.Actions
     {
       return myAction.Apply(ctx);
     }
+
+    public IAction Clone()
+    {
+      return new TransparentAction(myAction.Clone());
+    }
   }
 }

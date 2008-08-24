@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 
 namespace DSIS.Scheme.Actions
 {
   public class ChainAction : AgregateAction
   {
-    public ChainAction(params IAction[] chain) : this((IEnumerable<IAction>)new ArrayList(chain).ToArray(typeof(IAction)))
+    public ChainAction(params IAction[] chain) : this((IEnumerable<IAction>)chain)
     {     
     }
 

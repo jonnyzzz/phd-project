@@ -23,6 +23,13 @@ namespace DSIS.Scheme.Ctx
       return myContext.Keys.Filter(x => x.IsKey<Y>()).Convert(x=>x.Cast<Y>());
     }
 
+    public Context Clone()
+    {
+      var ctx = new Context();
+      ctx.AddAll(this);
+      return ctx;
+    }
+
     public bool ContainsKey<Y>(Key<Y> key)
     {
       return myContext.ContainsKey(KeyWrapper.FromKey(key));

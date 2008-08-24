@@ -34,6 +34,15 @@ namespace DSIS.Utils
       return TryGetValue(k, out list) ? list : new List<TV>();
     } 
 
+    public void AddValues<TQ>(TK k, IEnumerable<TQ> enu)
+      where TQ : TV
+    {
+      foreach (TQ tq in enu)
+      {
+        AddValue(k, tq);
+      }
+    }
+
     public void AddValue(TK k, TV v)
     {
       List<TV> l;

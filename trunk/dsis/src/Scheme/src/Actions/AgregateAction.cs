@@ -18,6 +18,13 @@ namespace DSIS.Scheme.Actions
     {
     }
 
+    private AgregateAction(AgregateAction source)
+    {
+      myGraph = source.myGraph.Clone();
+      myStart = myGraph.NodesOfType<StartAction>().Singleton();
+      myEnd = myGraph.NodesOfType<EndAction>().Singleton();
+    }
+
     public AgregateAction(ConstructGraph construct)
     {
       construct(Builder);
@@ -47,6 +54,11 @@ namespace DSIS.Scheme.Actions
 
       myGraph.Clear();
       return result;
+    }
+
+    public IAction Clone()
+    {
+      return new AgregateAction(this);
     }
 
     protected IActionGraphPartBuilder Builder
@@ -99,6 +111,11 @@ namespace DSIS.Scheme.Actions
         return ctx;
       }
 
+      public IAction Clone()
+      {
+        return new EndAction();
+      }
+
       #endregion
     }
 
@@ -114,13 +131,6 @@ namespace DSIS.Scheme.Actions
 
       public ICollection<ContextMissmatch> CompatibleExternal(Context ctx)
       {
-       /* var list = new List<ContextMissmatch>();
-        foreach (IAction action in myChidren)
-        {
-          list.AddRange(action.Compatible(ctx));
-        }
-        return list;*/
-
         //TODO: Some action may show part of context the is resolved inside
         //TODO: that action, but there is no way to guess what requirements
         //TODO: are to be omitted here. Thus all checks would be made dynamical
@@ -130,6 +140,11 @@ namespace DSIS.Scheme.Actions
       public Context Apply(Context _)
       {
         return myContext;
+      }
+
+      public IAction Clone()
+      {
+        return new StartAction();
       }
 
       public void AddChild(IAction child)

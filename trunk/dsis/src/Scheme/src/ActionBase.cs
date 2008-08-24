@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
@@ -12,6 +13,21 @@ namespace DSIS.Scheme
       var result = new Context();
       Apply(ctx, result);
       return result;
+    }
+
+    public IAction Clone()
+    {
+      var constructor = GetType().GetConstructor(new Type[0]);
+      if (constructor == null)
+        throw new NotImplementedException("Clone() does not implemented for " + GetType().FullName);
+
+      try
+      {
+        return (IAction) Activator.CreateInstance(GetType());
+      } catch (Exception e)
+      {
+        throw new Exception("Failed to Clone type " + GetType().FullName + ". " + e.Message, e);
+      }
     }
 
     protected static ICollection<ContextMissmatch> CheckContext(Context ctx, ICollection<ContextMissmatch> data, params ContextMissmatchCheck[] data2)

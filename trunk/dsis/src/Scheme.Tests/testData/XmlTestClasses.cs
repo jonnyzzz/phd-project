@@ -17,6 +17,11 @@ namespace DSIS.Scheme.Tests.testData
       r.AddAll(ctx);
       return r;
     }
+
+    public IAction Clone()
+    {
+      throw new System.NotImplementedException();
+    }
   }
 
   public class A : FakeAction {     }

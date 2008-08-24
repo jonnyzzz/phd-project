@@ -64,6 +64,11 @@ namespace DSIS.Scheme.Tests
         context.Set(new Key<T>(myName), myResult);
         return context;
       }
+
+      public IAction Clone()
+      {
+        throw new System.NotImplementedException();
+      }
     }
   }
 }

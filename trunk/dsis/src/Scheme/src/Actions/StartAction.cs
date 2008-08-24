@@ -15,5 +15,10 @@ namespace DSIS.Scheme.Actions
     {
       return new Context();
     }
+
+    public IAction Clone()
+    {
+      throw new System.NotImplementedException();
+    }
   }
 }

@@ -29,6 +29,11 @@ namespace DSIS.Scheme.Impl.Actions.Performance
       return res;
     }
 
+    public IAction Clone()
+    {
+      return new RecordTimeSlotAction(myAction.Clone(), mySlot);
+    }
+
     public ICollection<ContextMissmatch> Compatible(Context ctx)
     {
       return myAction.Compatible(ctx);        

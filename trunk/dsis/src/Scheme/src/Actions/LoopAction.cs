@@ -49,6 +49,11 @@ namespace DSIS.Scheme.Actions
       return ctx;      
     }
 
+    public IAction Clone()
+    {
+      return new LoopAction(myKey, myCount, myAction.Clone());
+    }
+
     public Key<LoopIndex> Key
     {
       get { return LoopIndex.Create(myKey); }
