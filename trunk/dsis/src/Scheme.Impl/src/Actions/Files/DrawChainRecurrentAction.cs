@@ -4,6 +4,7 @@ using DSIS.GnuplotDrawer;
 using DSIS.Graph;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
@@ -23,22 +24,41 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       string outputFile = folderInfo.CreateFileName("chain-recurrent-picture.png");      
       var files = new Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter>();
+      GnuplotPointsFileWriter otherFilesWriter = null;
+
       int components = 0;
       var data = new double[Dimension];
 
-      foreach (INode<Q> node in comps.GetNodes(comps.Components))
+      var componentIds = new List<IStrongComponentInfo>(comps.Components);
+      componentIds.Sort((c1,c2)=>-c1.NodesCount.CompareTo(c2.NodesCount));
+
+      const int COMPONENTS_TO_SHOW = 15;
+      var bigerComps = new HashSet<IStrongComponentInfo>(componentIds.First(COMPONENTS_TO_SHOW));
+
+      foreach (INode<Q> node in comps.GetNodes(componentIds))
       {
         IStrongComponentInfo info = comps.GetNodeComponent(node);
         if (info == null)
           continue;
-
+        
         GnuplotPointsFileWriter fw;
-        if (!files.TryGetValue(info, out fw))
-        {
-          string gnuplotComponent = folderInfo.CreateFileName("chain-recurrent-picture-" + ++components);
+        if (bigerComps.Contains(info))
+        {         
+          if (!files.TryGetValue(info, out fw))
+          {
+            string gnuplotComponent = folderInfo.CreateFileName("chain-recurrent-picture-" + ++components);
 
-          fw = new GnuplotPointsFileWriter(gnuplotComponent, Dimension);
-          files[info] = fw;
+            fw = new GnuplotPointsFileWriter(gnuplotComponent, Dimension);
+            files[info] = fw;
+          }
+        } else
+        {
+          if (otherFilesWriter == null)
+          {
+            string gnuplotComponent = folderInfo.CreateFileName("chain-recurrent-picture-other");
+            otherFilesWriter = new GnuplotPointsFileWriter(gnuplotComponent, Dimension);            
+          }
+          fw = otherFilesWriter;          
         }
 
         ((IIntegerCoordinateSystem<Q>)comps.CoordinateSystem).CenterPoint(node.Coordinate, data);
@@ -50,7 +70,12 @@ namespace DSIS.Scheme.Impl.Actions.Files
         folderInfo.CreateFileName("chain-recurrent-picture-script.gnuplot"),
         new GnuplotScriptParameters(outputFile, ""));
 
-      foreach (GnuplotPointsFileWriter file in files.Values)
+      var values = (IEnumerable<GnuplotPointsFileWriter>)files.Values;
+      if (otherFilesWriter != null)
+      {
+        values = values.Join(otherFilesWriter);
+      }
+      foreach (GnuplotPointsFileWriter file in values)
       {
         file.Dispose();
         gen.AddPointsFile(file);

@@ -3,6 +3,7 @@
   <Graph Id="imageBuilder">
     <Nodes>
       <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings"/>
+<!--      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultPointMethodSettings"/>-->
     </Nodes>
     <Links>
       <Link>
@@ -34,17 +35,10 @@
   <!--______________________________________________________________-->
   <Graph Id="init">
     <Nodes>
-      <Node Id="cs" Class="DSIS.Scheme.Impl.Actions.CreateCoordinateSystemAction" />
-      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings" />
+      <Node Id="cs" Class="DSIS.Scheme.Impl.Actions.CreateCoordinateSystemAction" />      
       <Node Id="subdivision" Class="DSIS.Scheme.Impl.Actions.CreateInitialCellsAction"/>
     </Nodes>
     <Links>
-      <Link>
-        <Nodes node-ref="#input"/>
-        <Nodes node-ref="cs"/>
-        <Nodes node-ref="method"/>
-        <Nodes node-ref="#output"/>
-      </Link>
       <Link>
         <Nodes node-ref="#input"/>
         <Nodes node-ref="cs"/>

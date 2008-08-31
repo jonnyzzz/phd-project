@@ -4,6 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions
 {
+  [Used]
   public class DefaultPointMethodSettings : IntegerCoordinateSystemActionBase3
   {
     protected override void Apply<T, Q>(Context input, Context output)

@@ -13,16 +13,4 @@ namespace DSIS.Utils
     {
     }
   }
-
-  [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-  public class UsedInTests : UsedAttribute
-  {
-    public UsedInTests(string place) : base(place)
-    {
-    }
-
-    public UsedInTests()
-    {
-    }
-  }
 }

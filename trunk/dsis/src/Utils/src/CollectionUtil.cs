@@ -120,6 +120,16 @@ namespace DSIS.Utils
       return default(T);
     }
     
+    public static IEnumerable<T> First<T>(this IEnumerable<T> enu, int count)
+    {
+      int i = 0;
+      foreach (T t in enu)
+      {
+        if (i++ < count)
+          yield return t;
+      }
+    }
+
     public static T GetLast<T>(this IEnumerable<T> enu)
     {
       T v = default(T);

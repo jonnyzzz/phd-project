@@ -100,7 +100,7 @@ namespace DSIS.SimpleRunner
 
     public static IAction LorentzRunge()
     {
-      var info = new LorentzSystemInfo(8.0/3.0, 20, 10);
+      var info = new LorentzSystemInfo(8.0/3.0, 14.6, 10);
       return new SystemInfoAction(new RungeKuttSolver(info, 100, 0.001), Space(3, 40));
     }
 
