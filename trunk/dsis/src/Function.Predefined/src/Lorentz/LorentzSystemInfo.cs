@@ -19,7 +19,7 @@ namespace DSIS.Function.Predefined.Lorentz
 
     public override string PresentableName
     {
-      get { return "Lorentz"; }
+      get { return string.Format("Lorentz[Beta={0},Sigma={1},Rho={2}]", myBeta, mySigma, myRho); }
     }
 
     protected override IFunction<double> GetFunctionInternal()

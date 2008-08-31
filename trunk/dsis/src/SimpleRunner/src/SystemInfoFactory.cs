@@ -7,10 +7,12 @@ using DSIS.Function.Predefined.HomoLinear;
 using DSIS.Function.Predefined.HomoSquare;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Function.Predefined.Logistics;
+using DSIS.Function.Predefined.Lorentz;
 using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
 using DSIS.Scheme;
 using DSIS.Scheme.Impl.Actions;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
@@ -24,6 +26,11 @@ namespace DSIS.SimpleRunner
     private static ISystemSpace TwoTwo()
     {
       return new DefaultSystemSpace(2, new double[] {-2, -2}, new double[] {2, 2}, new long[] {3, 3});
+    }
+    
+    private static ISystemSpace Space(int dim, double v)
+    {
+      return new DefaultSystemSpace(dim, (-v).Fill(dim), v.Fill(dim), 3L.Fill(dim));
     }
 
     private static ISystemSpace IkedaCutSpace()
@@ -89,6 +96,12 @@ namespace DSIS.SimpleRunner
     public static IAction HomoDoubleRunge()
     {
       return new SystemInfoAction(new HomoSquareSystemInfo(0.4), TenTen());
+    }
+
+    public static IAction LorentzRunge()
+    {
+      var info = new LorentzSystemInfo(8.0/3.0, 20, 10);
+      return new SystemInfoAction(new RungeKuttSolver(info, 100, 0.001), Space(3, 40));
     }
 
     /*

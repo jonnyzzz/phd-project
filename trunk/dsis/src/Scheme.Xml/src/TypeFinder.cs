@@ -9,19 +9,9 @@ namespace DSIS.Scheme.Xml
   {
     private readonly List<Assembly> myAssemblies = new List<Assembly>();
 
-    public TypeFinder()
-    {
-      myAssemblies.AddRange(AppDomain.CurrentDomain.GetAssemblies());
-      AppDomain.CurrentDomain.AssemblyLoad += OnAssemblyLoadEvent;
-    }
-
     public void Dispose()
     {
-      AppDomain.CurrentDomain.AssemblyLoad -= OnAssemblyLoadEvent;
     }
-
-    private void OnAssemblyLoadEvent(object x, AssemblyLoadEventArgs a)
-    { myAssemblies.Add(a.LoadedAssembly); }
 
     public void LoadAssembliesFromXml(IncludeAssemblies ass)
     {
@@ -37,13 +27,13 @@ namespace DSIS.Scheme.Xml
     public Type Find(string clazz)
     {
       clazz = clazz.Trim();
-      foreach (var assembly in myAssemblies)
+      foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Join((IEnumerable<Assembly>)myAssemblies))
       {
         var type = assembly.GetType(clazz);
         if (type != null)
           return type;
       }
-      throw new Exception("Class not found");
+      throw new Exception("Class not found: " + clazz);
     }
   }
 }
