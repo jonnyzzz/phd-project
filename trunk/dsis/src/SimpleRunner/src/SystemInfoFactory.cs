@@ -78,14 +78,12 @@ namespace DSIS.SimpleRunner
 
     public static IAction DuffingRunge()
     {
-      var duffingSp = new DefaultSystemSpace(2, new[] { -4.3, -3 }, new[] { 4.3, 3 }, new long[] { 3, 3 });
-      return new SystemInfoAction(new RungeKuttSolver(new DuffingSystemInfo(1, 1, 0.01), 3, 0.01), duffingSp);
+      return new SystemInfoAction(new RungeKuttSolver(new DuffingSystemInfo(1, 1, 0.01), 100, 0.001), Space(2,5));
     }
 
     public static IAction VanDerPolRunge()
     {
-      var duffingSp = new DefaultSystemSpace(2, new[] { -4.3, -3 }, new[] { 4.3, 3 }, new long[] { 3, 3 });
-      return new SystemInfoAction(new RungeKuttSolver(new VanDerPolSystemInfo(1), 15, 0.1), duffingSp);
+      return new SystemInfoAction(new RungeKuttSolver(new VanDerPolSystemInfo(1.5), 100, 0.001), Space(2, 5));
     }
 
     public static IAction HomoLinearRunge()
@@ -100,7 +98,7 @@ namespace DSIS.SimpleRunner
 
     public static IAction LorentzRunge()
     {
-      var info = new LorentzSystemInfo(8.0/3.0, 14.6, 10);
+      var info = new LorentzSystemInfo(8.0/3.0, 20, 10);
       return new SystemInfoAction(new RungeKuttSolver(info, 100, 0.001), Space(3, 40));
     }
 

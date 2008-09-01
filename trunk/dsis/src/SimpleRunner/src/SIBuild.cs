@@ -29,14 +29,19 @@ namespace DSIS.SimpleRunner
       var dump = builder["dumpGraph"];
       var draw = builder["drawGraph"];
 
-//      var system = SystemInfoFactory.Henon1_4();
-      var system = SystemInfoFactory.LorentzRunge();
-      var repeat = 5;
+//      var sys = new {system = SystemInfoFactory.VanDerPolRunge(), repeat = 10};
+//      var sys = new {system = SystemInfoFactory.LorentzRunge(), repeat = 8};
+      var sys = new {system = SystemInfoFactory.DuffingRunge(), repeat = 10};
 
-      bld.Start.Edge(system).Edge(init).Edge(image);
-      bld.Start.Edge(system).Edge(workingFolder);
+      bld.Start.Edge(sys.system).Edge(init).Edge(image);
+      bld.Start.Edge(sys.system).Edge(workingFolder);
 
-      var rootAction = RepeatSI(bld.Start, repeat, builder["build"], new[]{system, image, init}, new[]{system,image});
+      var rootAction = RepeatSI(
+        bld.Start, 
+        sys.repeat, 
+        builder["build"], 
+        new[]{sys.system, image, init}, 
+        new[]{sys.system,image});
 
       rootAction
         .With(x=>x.Edge(dump).

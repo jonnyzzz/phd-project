@@ -28,12 +28,13 @@ namespace DSIS.Function.Solvers
       if (typeof(T) == typeof(double))
       {
         return (IFunction<T>) GetDoubleFunction((double[])(object)precision);
-      } else throw new ArgumentException("T");
+      }
+      throw new ArgumentException("T");
     }
 
     public IFunction<T> GetFunction<T>(T precision)
     {
-      T[] ts = new T[myDimension];
+      var ts = new T[myDimension];
       for (int i = 0; i < myDimension; i++)
       {
         ts[i] = precision;
@@ -45,17 +46,14 @@ namespace DSIS.Function.Solvers
     private IFunction<double> GetDoubleFunction(double[] precision)
     {
       if (mySteps == 1)
-      {
         return GetDoubleFunctionOne(precision);
-      } else
+
+      var myFuncs = new List<IFunction<double>>();
+      for(int i=0; i<mySteps; i++)
       {
-        List<IFunction<double>> myFuncs = new List<IFunction<double>>();
-        for(int i=0; i<mySteps; i++)
-        {
-          myFuncs.Add(GetDoubleFunctionOne(precision));
-        }
-        return new ComposedFunction(myFuncs.ToArray());
+        myFuncs.Add(GetDoubleFunctionOne(precision));
       }
+      return new ComposedFunction(myFuncs.ToArray());
     }
 
     public IFunction<T> GetDerivateFunction<T>(T[] precision, int derivatePower)
@@ -70,12 +68,12 @@ namespace DSIS.Function.Solvers
 
     public Type[] SupportedFunctionTypes
     {
-      get { return new Type[] {typeof (double)}; }
+      get { return new[] {typeof (double)}; }
     }
 
     public string PresentableName
     {
-      get { return string.Format("{0} {1}", PresentableMethodName, myFunction.PresentableName); }
+      get { return string.Format("{1}@{0}", PresentableMethodName, myFunction.PresentableName); }
     }
 
     public int Dimension

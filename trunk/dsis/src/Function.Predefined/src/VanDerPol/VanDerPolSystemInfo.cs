@@ -15,7 +15,7 @@ namespace DSIS.Function.Predefined.VanDerPol
 
     public override string PresentableName
     {
-      get { return "Van-der-Pol"; }
+      get { return string.Format("Van-der-Pol[gamma={0}]", myA); }
     }
 
     protected override IFunction<double> GetFunctionInternal()

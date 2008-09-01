@@ -1,5 +1,4 @@
 using DSIS.Core.System;
-using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Solvers.RungeKutt
 {
@@ -41,7 +40,8 @@ namespace DSIS.Function.Solvers.RungeKutt
 
       private readonly RungeKuttSolver myFunctionInfo;
       private readonly double myDt;
-      private readonly double myDt3;
+      private readonly double myDt2;
+      private readonly double myDt6;
       private double[] myOutput;
       
 
@@ -55,8 +55,9 @@ namespace DSIS.Function.Solvers.RungeKutt
         myF3 = Create(precision, out myF3Input, out myF3Output);
         myF4 = Create(precision, out myF4Input, out myF4Output);
 
-        myDt = myFunctionInfo.myDt/myFunctionInfo.mySteps;
-        myDt3 = myDt/3.0;
+        myDt = myFunctionInfo.myDt;
+        myDt2 = myDt/2.0;
+        myDt6 = myDt/6.0;
       }
 
       public void Evaluate()
@@ -64,23 +65,23 @@ namespace DSIS.Function.Solvers.RungeKutt
         myF1.Evaluate();
         for (int i = 0; i < myDimension; i++)
         {
-          myF2Input[i] = myF1Input[i] + myDt*myF1Output[i];
+          myF2Input[i] = myF1Input[i] + myDt2*myF1Output[i];
         }
         myF2.Evaluate();
         for (int i = 0; i < myDimension; i++)
         {
-          myF3Input[i] = myF1Input[i] + myDt*myF2Output[i];
+          myF3Input[i] = myF1Input[i] + myDt2*myF2Output[i];
         }
         myF3.Evaluate();
         for (int i = 0; i < myDimension; i++)
         {
-          myF4Input[i] = myF1Input[i] + 2*myDt*myF3Output[i];
+          myF4Input[i] = myF1Input[i] + myDt*myF3Output[i];
         }
         myF4.Evaluate();
         for (int i = 0; i < myDimension; i++)
         {
           myOutput[i] = myF1Input[i] +
-                        myDt3 * (myF1Output[i] + 2*myF2Output[i] + 2*myF3Output[i] + myF4Output[i]);
+                        myDt6 * (myF1Output[i] + 2*myF2Output[i] + 2*myF3Output[i] + myF4Output[i]);
         }        
       }
 
