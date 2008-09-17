@@ -18,11 +18,12 @@
       />
     </ItemGroup>
 
-    <Message Text="Test assembly: %(Tests.FileName)%(Tests.Extension)" />
 
-    <NUnit Assemblies="%(Tests.FullPath)" NUnitVersion="NUnit-2.4.7" ContinueOnError="True" />
+    <Message Text="##teamcity[Test assembly: %(Tests.FileName)%(Tests.Extension)" />
 
-    <Message Text="##teamcity[text='Done. {build.status.text}']" />      
+    <NUnit Assemblies="%(Tests.FullPath)" NUnitVersion="NUnit-2.5.0" ContinueOnError="True" />
+
+    <TeamCityProgressMessage Status="SUCCESS" Text="Done. {build.status.text}" />
   </Target>
 
 </Project>
