@@ -61,10 +61,15 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Actions.Impl\AboutBoxActionHandler.cs" />
     <Compile Include="src\Actions.Impl\ActionHandlerBase.cs" />
     <Compile Include="src\Actions.Impl\CreateNewSystemActionHandler.cs" />
+    <Compile Include="src\Actions.Impl\DisabledActionHandler.cs" />
     <Compile Include="src\Actions.Impl\ExitProgramActionHandler.cs" />
     <Compile Include="src\Actions\ActionDescriptorParser.cs" />
     <Compile Include="src\Actions\ActionDescriptor.cs" />
@@ -115,6 +120,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="resources\Menu.xsd" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>

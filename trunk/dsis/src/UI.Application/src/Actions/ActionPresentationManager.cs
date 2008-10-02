@@ -21,12 +21,19 @@ namespace DSIS.UI.Application.Actions
     public void RegisterAction(IActionDescriptor desc)
     {
       myChildren.AddValue(desc.ParentId, desc);
-      myIdToAction.Add(desc.ActionId, desc);
+
+      if (!string.IsNullOrEmpty(desc.ActionId))
+      {
+        myIdToAction.Add(desc.ActionId, desc);
+      }
     }
 
     public void RegisterHandler(IActionHandler handler)
     {
-      myIdToHandler.AddValue(handler.ActionId, handler);      
+      foreach (var id in handler.ActionId)
+      {
+        myIdToHandler.AddValue(id, handler);
+      }
     }
 
     public ActionDescriptor RootAction
@@ -58,9 +65,9 @@ namespace DSIS.UI.Application.Actions
         myId = id;
       }
 
-      public string ActionId
+      public string[] ActionId
       {
-        get { return myId; }
+        get { return new[]{myId}; }
       }
 
       public bool Do(Context ctx)

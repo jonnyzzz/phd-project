@@ -1,3 +1,4 @@
+using System;
 using System.Xml;
 using DSIS.Spring.Attributes;
 
@@ -11,7 +12,7 @@ namespace DSIS.UI.Application.Actions
     }
     protected override IActionDescriptor CreateElement(XmlElement element, string id, string parentId, string ancor)
     {
-      return new SeparatorDescriptor(id, parentId, ancor);
+      return new SeparatorDescriptor("Separator:" + Guid.NewGuid(), parentId, ancor);
     }
   }
 }

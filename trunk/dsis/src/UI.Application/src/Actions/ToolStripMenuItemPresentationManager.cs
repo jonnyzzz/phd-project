@@ -16,7 +16,11 @@ namespace DSIS.UI.Application.Actions
     protected override ToolStripItem CreateItem(IActionDescriptor descriptor, IActionHandler handler)
     {
       if (descriptor is ActionDescriptor)
-        return new ToolStripMenuItem(((ActionDescriptor)descriptor).Title, null, delegate { handler.Do(new Context()); });
+        return new ToolStripMenuItem(
+          ((ActionDescriptor)descriptor).Title, 
+          null, 
+          delegate { handler.Do(new Context()); }
+          );
       else if (descriptor is SeparatorDescriptor)
       {
         return new ToolStripSeparator();        

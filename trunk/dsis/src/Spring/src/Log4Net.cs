@@ -20,7 +20,7 @@ namespace DSIS.Spring
 
       SetFile(Path.Combine(home, "Logs"));
       
-      FileInfo file = new FileInfo(Path.Combine(home, LOG_4_NET_CONFIG));
+      var file = new FileInfo(Path.Combine(home, LOG_4_NET_CONFIG));
       if (file.Exists)
       {
         XmlConfigurator.Configure(file);
@@ -33,11 +33,10 @@ namespace DSIS.Spring
         }
       }
 
-      NameValueCollection col = new NameValueCollection();
-      col.Add("configType", "EXTERNAL");      
+      var col = new NameValueCollection {{"configType", "EXTERNAL"}};
       Common.Logging.LogManager.Adapter = new Log4NetLoggerFactoryAdapter(col);      
 
-      ILog LOG = LogManager.GetLogger(GetType());
+      var LOG = LogManager.GetLogger(GetType());
       LOG.InfoFormat("Started log4net from {0}", file.FullName);
     }
 

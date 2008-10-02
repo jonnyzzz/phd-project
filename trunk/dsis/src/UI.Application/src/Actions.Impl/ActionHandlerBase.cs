@@ -1,18 +1,17 @@
-using System;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.UI.Application.Actions.Impl
 {
   public class ActionHandlerBase : IActionHandler
   {
-    private readonly string myActionId;
+    private readonly string[] myActionId;
 
-    public ActionHandlerBase(string actionId)
+    public ActionHandlerBase(params string[] actionId)
     {
       myActionId = actionId;
     }
 
-    public string ActionId
+    public string[] ActionId
     {
       get { return myActionId; }
     }

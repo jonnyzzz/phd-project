@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 using DSIS.UI.Application.Actions;
+using System.Linq;
 
 namespace DSIS.UI.Application
 {
@@ -20,7 +21,8 @@ namespace DSIS.UI.Application
 
       var menu = myMenuFactoy.BuildMenu(myActionManager.RootAction);
       myMainMenu.Items.Clear();
-      myMainMenu.Items.AddRange(((ToolStripDropDownItem)menu).DropDownItems);
+      var dropDownItems = ((ToolStripDropDownItem)menu).DropDownItems.OfType<ToolStripItem>().ToArray();
+      myMainMenu.Items.AddRange(dropDownItems);
     }
 
     private void newToolStripMenuItem_Click(object sender, System.EventArgs e)

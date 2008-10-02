@@ -13,7 +13,7 @@ namespace DSIS.UI.Application.Actions.Impl
     private readonly IApplicationClass myApp;
     private readonly IServiceProvider myProvider;
 
-    public CreateNewSystemActionHandler(IApplicationClass app, IServiceProvider provider) : base("File.Create")
+    public CreateNewSystemActionHandler(IApplicationClass app, IServiceProvider provider) : base("File.Create", "System.Create")
     {
       myApp = app;
       myProvider = provider;

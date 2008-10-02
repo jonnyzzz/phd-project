@@ -4,7 +4,7 @@ namespace DSIS.UI.Application.Actions
 {
   public interface IActionHandler
   {
-    string ActionId { get;  }
+    string[] ActionId { get;  }
 
     bool Enabled(Context ctx);
 

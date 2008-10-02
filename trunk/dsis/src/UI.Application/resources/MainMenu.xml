@@ -1,8 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MainMenu>
   <Action Id="File" Title="File">
-    <Action Id="File.Create" Title="New System"/>
+    <Action Id="File.Create" Title="New System..."/>
+    <Separator/>
+    <Action Id="File.Open" Title="Open..."/>
+    <Action Id="File.Save" Title="Save..."/>
+    <Separator/>
+    <Action Id="File.Close" Title="Close" />
     <Separator/>
     <Action Id="File.Exit" Title="Exit"/>
+  </Action>
+  <Action Id="System" Title="System">
+    <Action Id="System.Create" Title="New System..."/>
+    <Separator/>
+    <Action Id="System.Show" Title="Show system" />
+  </Action>
+  <Action Id="Help" Title="Help">
+    <Action Id="Help.About" Title="About..."/>
   </Action>
 </MainMenu>
