@@ -58,16 +58,9 @@ namespace DSIS.SimpleRunner
       var dump = builder["dumpGraph"];
       var draw = builder["drawGraph"];
 
-//      var sys = new {system = SystemInfoFactory.VanDerPolRunge(), repeat = 10};
-//      var sys = new {system = SystemInfoFactory.LorentzRunge(), repeat = 3};
-//      var sys = new {system = SystemInfoFactory.FoodChainDanny(), repeat = 8};
-//      var sys = new {system = SystemInfoFactory.Ikeda(), repeat = 8};
-//      var sys = new {system = SystemInfoFactory.Henon1_4(), repeat = 8};
-
       var id = new SetIterationSteps(new IterationSteps(sys.repeat));
       bld.Start.Edge(sys.system).Edge(init).Edge(image);
       bld.Start.Edge(sys.system).Edge(workingFolder).With(x => x.Back(id));
-
 
       var rootAction = RepeatSI(
         bld.Start,
