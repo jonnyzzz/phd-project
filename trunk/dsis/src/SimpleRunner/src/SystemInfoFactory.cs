@@ -70,10 +70,10 @@ namespace DSIS.SimpleRunner
       return new SystemInfoAction(new LogisticSystemInfo(a), log_sp1);
     }
 
-    public static IAction Torsten()
+    public static IAction FoodChainDanny()
     {
-      var sp3 = new DefaultSystemSpace(3, new double[] { 0, 0, 0 }, new double[] { 200, 200, 200 }, new long[] { 2, 2, 2 });
-      return new SystemInfoAction(new FoodChainSystemInfo(), sp3);
+      var sp3 = new DefaultSystemSpace(3, 0.01.Fill(3), 35d.Fill(3), 2L.Fill(3));
+      return new SystemInfoAction(new FoodChainSystemInfo(3.4001, 1, 4), sp3);
     }
 
     public static IAction DuffingRunge()

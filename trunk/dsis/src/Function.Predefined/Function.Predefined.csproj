@@ -59,6 +59,7 @@
     <Compile Include="src\Delayed\DelayedFunction.cs" />
     <Compile Include="src\Delayed\DelayedFunctionSystemInfo.cs" />
     <Compile Include="src\Delayed\DelayedOptions.cs" />
+    <Compile Include="src\DoubleParametersSystemInfoFactoryBase!1.cs" />
     <Compile Include="src\DoubleParametersSystemInfoFactoryBase.cs" />
     <Compile Include="src\DoubleSystemInfoBase.cs" />
     <Compile Include="src\Duffing\DuffingFactory.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="src\Duffing\DuffingOptions.cs" />
     <Compile Include="src\Duffing\DuffingSystemInfo.cs" />
     <Compile Include="src\FoodChain\FoodChainFunction.cs" />
+    <Compile Include="src\FoodChain\FoodChainOptions.cs" />
     <Compile Include="src\FoodChain\FoodChainSystemFactory.cs" />
     <Compile Include="src\FoodChain\FoodChainSystemInfo.cs" />
     <Compile Include="src\FunctionBase.cs" />

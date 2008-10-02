@@ -10,6 +10,11 @@ namespace DSIS.Utils
       GC.WaitForPendingFinalizers();
       GC.Collect();
       GC.WaitForPendingFinalizers();
+
+      GC.GetTotalMemory(false);
+      GC.GetTotalMemory(true);
+      GC.GetTotalMemory(false);
+      GC.GetTotalMemory(true);
     }    
   }
 }

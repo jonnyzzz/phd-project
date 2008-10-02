@@ -3,6 +3,7 @@
   <Graph Id="imageBuilder">
     <Nodes>
       <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings"/>
+<!--      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultAdaptiveMethodSettings"/>-->
 <!--      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultPointMethodSettings"/>-->
     </Nodes>
     <Links>
@@ -16,8 +17,11 @@
   <!--______________________________________________________________-->
   <Graph Id="workingFolder">
     <Nodes>
-      <Node Id="wf" Class="DSIS.Scheme.Impl.Actions.Files.WorkingFolderAction"/>
+      <Node Id="wf" Class="DSIS.Scheme.Impl.Actions.Files.FlatWorkingFolder"/>
       <Node Id="swf" Class="DSIS.Scheme.Impl.Actions.Files.SystemWorkingFolderAction"/>
+      <Node Id="si_wf" Class="DSIS.Scheme.Impl.Actions.Files.SIMethodPrefixWorkingFolderAction"/>
+      <Node Id="dwf" Class="DSIS.Scheme.Impl.Actions.Files.DateWorkingFolderAction"/>
+      <Node Id="st_wf" Class="DSIS.Scheme.Impl.Actions.Files.IterationStepsPrefixWorkingFolderAction"/>
     </Nodes>
     <Links>
       <Link>
@@ -26,8 +30,19 @@
       </Link>
       <Link>
         <Nodes node-ref="#input"/>
+        <Nodes node-ref="si_wf"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="st_wf"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
         <Nodes node-ref="wf"/>
+        <Nodes node-ref="si_wf"/>
         <Nodes node-ref="swf"/>
+        <Nodes node-ref="st_wf"/>
+        <Nodes node-ref="dwf"/>
         <Nodes node-ref="#output"/>
       </Link>
     </Links>
@@ -35,6 +50,7 @@
   <!--______________________________________________________________-->
   <Graph Id="init">
     <Nodes>
+<!--      <Node Id="cs" Class="DSIS.Scheme.Impl.Actions.CreateRealCoordinateSystemAction" />      -->
       <Node Id="cs" Class="DSIS.Scheme.Impl.Actions.CreateCoordinateSystemAction" />      
       <Node Id="subdivision" Class="DSIS.Scheme.Impl.Actions.CreateInitialCellsAction"/>
     </Nodes>

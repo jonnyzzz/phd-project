@@ -493,7 +493,7 @@ namespace DSIS.SimpleRunner
       protected override ISystemInfo CreateSystemInfo()
       {
         ISystemSpace sp = new DefaultSystemSpace(3, new double[] {0.01, 0.01, 0.01}, new double[] {50, 50, 50}, new long[] {1, 1, 1 });
-        return new FoodChainSystemInfo();
+        return new FoodChainSystemInfo(4.522, 4, 1);
       }      
     }
 

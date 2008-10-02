@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.System;
-using DSIS.Function.Solvers.SimpleSolver;
 
 namespace DSIS.Function.Solvers
 {

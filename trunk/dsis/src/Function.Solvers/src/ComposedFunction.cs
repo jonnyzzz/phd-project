@@ -1,6 +1,6 @@
 using DSIS.Core.System;
 
-namespace DSIS.Function.Solvers.SimpleSolver
+namespace DSIS.Function.Solvers
 {
   public class ComposedFunction : IFunction<double>
   {

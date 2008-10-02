@@ -86,6 +86,7 @@
     <Compile Include="src\Actions\CreateCoordinateSystemActionBase.cs" />
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
     <Compile Include="src\Actions\CreateRealCoordinateSystemAction.cs" />
+    <Compile Include="src\Actions\DefaultAdaptiveMethodSettings.cs" />
     <Compile Include="src\Actions\DefaultBoxMethodSettings.cs" />
     <Compile Include="src\Actions\DefaultPointMethodSettings.cs" />
     <Compile Include="src\Actions\Entropy\BiggestMeasureInfo.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="src\Actions\Entropy\StrangeEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\WriteSequenceSlotAction.cs" />
     <Compile Include="src\Actions\Files\CustomPrefixWorkingFolderAction.cs" />
+    <Compile Include="src\Actions\Files\DateWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\DrawChainRecurrentAction.cs" />
     <Compile Include="src\Actions\Files\DrawEntropy2dActionBase.cs" />
     <Compile Include="src\Actions\Files\DrawEntropy3dActionBase.cs" />
@@ -123,13 +125,17 @@
     <Compile Include="src\Actions\Files\DrawLineAction.cs" />
     <Compile Include="src\Actions\Files\DumpEntropyLogAction.cs" />
     <Compile Include="src\Actions\Files\FileKeys.cs" />
+    <Compile Include="src\Actions\Files\FlatWorkingFolder.cs" />
     <Compile Include="src\Actions\Files\GraphEntropyLogAction.cs" />
+    <Compile Include="src\Actions\Files\IterationStepsPrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\Logger.cs" />
     <Compile Include="src\Actions\Files\LoggerAction.cs" />
     <Compile Include="src\Actions\Files\LoopStepWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\PrefixWorkingFolderAction.cs" />
+    <Compile Include="src\Actions\Files\SIMethodPrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\SystemWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\WorkingFolderAction.cs" />
+    <Compile Include="src\Actions\Files\WorkingFolderActionBase.cs" />
     <Compile Include="src\Actions\Files\WorkingFolderInfo.cs" />
     <Compile Include="src\Actions\Files\Xml\XmlLogger.cs" />
     <Compile Include="src\Actions\ForeachStrongComponentAction.cs" />
@@ -145,8 +151,10 @@
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase3.cs" />
+    <Compile Include="src\IterationSteps.cs" />
     <Compile Include="src\Keys.cs" />
     <Compile Include="src\Actions\MergeComponetsAction.cs" />
+    <Compile Include="src\SetIterationSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.System\Core.System.csproj">

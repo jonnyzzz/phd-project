@@ -32,7 +32,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       myFunction = context.Function.GetFunction<double>(mySystem.CellSize);
       mySettings = (AdaptiveMethodSettings) context.Settings;
       myEps = new double[myDim];
-      double[] eps2 = new double[myDim];
+      var eps2 = new double[myDim];
       for(int i =0; i<myDim; i++)
       {
         double d = mySystem.CellSize[i]*mySettings.Eps;
@@ -48,7 +48,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
       int count = 0;
 
       mySystem.TopLeftPoint(coord, myD);
-      PointGraph graph = new PointGraph(myFunction, myEps);
+      var graph = new PointGraph(myFunction, myEps);
       IEnumerable<PointGraphEdge> edges = myGraphBuilder.BuildGraph(graph, myD);
       myQueue.Clear();
       myPoints.Clear();

@@ -4,7 +4,9 @@ using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
+using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
+using DSIS.Scheme.Impl.Actions.Performance;
 using DSIS.Scheme.Xml;
 using DSIS.Utils;
 
@@ -14,13 +16,40 @@ namespace DSIS.SimpleRunner
   {
     public static void Action()
     {
-      var aa = new AgregateAction(x => BuildGraph(new ActionBuilder2Adaptor(x)));
-      aa.Apply(new Context());
+      BuildContiniousSystems();
     }
 
-    private static void BuildGraph(IActionGraphBuilder2 bld)
+    private static void BuildContiniousSystems()
     {
-      var graphs = new XsdGraphXmlLoader().Load(typeof(SIBuild).Assembly, "DSIS.SimpleRunner.resources.si.xml");
+      for (int rep = 3; rep < 10; rep++)
+      {
+        var data = new[]
+                     {
+                       new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.FoodChainDanny(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.VanDerPolRunge(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.LorentzRunge(), repeat = rep},
+                     };
+        foreach (var computationData in data)
+        {
+          var sys = computationData;
+          var aa = new AgregateAction(x => BuildGraph(new ActionBuilder2Adaptor(x), sys));
+          aa.Apply(new Context());
+          Console.Out.WriteLine("---------------------------------------------------------");
+          GCHelper.Collect();
+        }
+      }
+    }
+
+    private struct ComputationData
+    {
+      public IAction system { get; set; }
+      public int repeat { get; set; }
+    }
+
+    private static void BuildGraph(IActionGraphBuilder2 bld, ComputationData sys)
+    {
+      var graphs = new XsdGraphXmlLoader().Load(typeof (SIBuild).Assembly, "DSIS.SimpleRunner.resources.si.xml");
       var builder = new XsdGraphBuilder().BuildActions(graphs);
 
       var image = builder["imageBuilder"];
@@ -30,30 +59,35 @@ namespace DSIS.SimpleRunner
       var draw = builder["drawGraph"];
 
 //      var sys = new {system = SystemInfoFactory.VanDerPolRunge(), repeat = 10};
-//      var sys = new {system = SystemInfoFactory.LorentzRunge(), repeat = 8};
-      var sys = new {system = SystemInfoFactory.DuffingRunge(), repeat = 10};
+//      var sys = new {system = SystemInfoFactory.LorentzRunge(), repeat = 3};
+//      var sys = new {system = SystemInfoFactory.FoodChainDanny(), repeat = 8};
+//      var sys = new {system = SystemInfoFactory.Ikeda(), repeat = 8};
+//      var sys = new {system = SystemInfoFactory.Henon1_4(), repeat = 8};
 
+      var id = new SetIterationSteps(new IterationSteps(sys.repeat));
       bld.Start.Edge(sys.system).Edge(init).Edge(image);
-      bld.Start.Edge(sys.system).Edge(workingFolder);
+      bld.Start.Edge(sys.system).Edge(workingFolder).With(x => x.Back(id));
+
 
       var rootAction = RepeatSI(
-        bld.Start, 
-        sys.repeat, 
-        builder["build"], 
-        new[]{sys.system, image, init}, 
-        new[]{sys.system,image});
+        bld.Start,
+        sys.repeat,
+        builder["build"],
+        new[] {sys.system, image, init},
+        new[] {sys.system, image});
 
       rootAction
-        .With(x=>x.Edge(dump).
-          With(xx=>xx.Back(image)).
-          With(xx=>xx.Back(workingFolder)))
+        .With(x => x.Edge(dump).
+                     With(xx => xx.Back(image)).
+                     With(xx => xx.Back(workingFolder).Back(image)))
         .Edge(draw).
-          With(x=>x.Back(workingFolder))
-        .Edge(bld.Finish)
-        ;
+        With(x => x.Back(workingFolder))
+        .Edge(bld.Finish).Back(new DumpSlotTimesAction("BuildSI"));
+      ;
     }
 
-    private static IActionEdgesBuilder RepeatSI(IActionEdgesBuilder holder, int count, IAction buildSI, IEnumerable<IAction> firstContext, IEnumerable<IAction> innerContext)
+    private static IActionEdgesBuilder RepeatSI(IActionEdgesBuilder holder, int count, IAction buildSI,
+                                                IEnumerable<IAction> firstContext, IEnumerable<IAction> innerContext)
     {
       if (count < 2)
         throw new ArgumentException("Count should be >= 2", "count");
@@ -64,8 +98,8 @@ namespace DSIS.SimpleRunner
         var tmp = next;
         next = next
           .Edge(buildSI.Clone())
-            .With(x => innerContext.Each(y => x.Back(y)))
-            .With(x=>x.Back(new MergeComponetsAction()).Back(tmp));
+          .With(x => innerContext.Each(y => x.Back(y)))
+          .With(x => x.Back(new MergeComponetsAction()).Back(tmp));
       }
 
       return next;

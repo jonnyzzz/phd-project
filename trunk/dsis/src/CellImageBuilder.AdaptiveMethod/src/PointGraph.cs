@@ -63,7 +63,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
     public PointGraphNode CreateNodeNoCopy(params double[] d)
     {
-      PointGraphNode node = new PointGraphNode(d);
+      var node = new PointGraphNode(d);
       myNodes.Add(node);
       return node;      
     }
@@ -75,7 +75,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
     public Pair<PointGraphNode, List<PointGraphEdge>> Subdivide(PointGraphNode n1, PointGraphNode n2)
     {
-      List<PointGraphEdge> result = new List<PointGraphEdge>();
+      var result = new List<PointGraphEdge>();
       n1.Edges.Remove(n2);
       n2.Edges.Remove(n1);
 

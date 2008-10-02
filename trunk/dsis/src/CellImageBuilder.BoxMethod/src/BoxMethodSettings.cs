@@ -25,9 +25,8 @@ namespace DSIS.CellImageBuilder.BoxMethod
 
     public string PresentableName
     {
-      get { return "Box Method"; }
+      get { return string.Format("Box Method[eps={0}]", myEps); }
     }
-
 
     public ICellImageBuilder<TCell> Create<TCell>()
       where TCell : IIntegerCoordinate

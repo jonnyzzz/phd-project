@@ -47,5 +47,7 @@ namespace DSIS.Scheme.Impl
     public static readonly Key<IGraphEntropy> GraphEntropyKey = new Key<IGraphEntropy>("measure");
 
     public static readonly Key<ILine> LineKey = new Key<ILine>("Line");
+
+    public static readonly Key<IterationSteps> Iterations = new Key<IterationSteps>("Iter");
   }
 }
