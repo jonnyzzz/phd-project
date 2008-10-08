@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using DSIS.Spring;
+using DSIS.UI.Application.Doc;
 using DSIS.UI.UI;
 
 namespace DSIS.UI.Application
@@ -9,12 +10,15 @@ namespace DSIS.UI.Application
   public class ApplicationClass : IApplicationEntryPoint, IApplicationClass
   {
     private readonly IMainForm myMainForm;
+    private IApplicationDocument myDocument;
 
-    public event EventHandler<DocumentChangedEventArgs> DocumentChanging;
+    public event EventHandler<DocumentChangedEventArgs> DocumentChanged;
     
     public ApplicationClass(IMainForm mainForm)
     {
       myMainForm = mainForm;
+
+      myMainForm.GetFrom().Controls.Add(new CurrentDocumentControl(this){Dock = DockStyle.Fill});
     }
 
     public int Main(string[] args)
@@ -36,17 +40,23 @@ namespace DSIS.UI.Application
       action(MainForm());
     }
 
-    public void SetDocument(IApplicationDocument value)
+    public IApplicationDocument Document
     {
-      if (GetDocument() != value && DocumentChanging != null)
+      get { return myDocument; }
+      set { if (myDocument != value)
       {
-//        DocumentChanging(this, ShowDialog());
-        
-      }
+        var old = myDocument;
+        myDocument = value;
+        FireDocumentChanged(old, myDocument);
+      }}
     }
-    public IApplicationDocument GetDocument()
+
+    private void FireDocumentChanged(IApplicationDocument oldDocument, IApplicationDocument newDocument)
     {
-      return null;
+      if (DocumentChanged != null)
+      {
+        DocumentChanged(this, new DocumentChangedEventArgs(oldDocument, newDocument));
+      }
     }
 
     public void OnMenuExit()

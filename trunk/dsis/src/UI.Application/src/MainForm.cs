@@ -11,7 +11,7 @@ namespace DSIS.UI.Application
 
     private MainForm()
     {
-      InitializeComponent();      
+      InitializeComponent();           
     }
 
     public MainForm(IActionPresentationManager actionManager, IMainMenuFactory menuFactoy) : this()

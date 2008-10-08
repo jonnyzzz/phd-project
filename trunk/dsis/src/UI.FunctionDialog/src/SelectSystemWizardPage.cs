@@ -27,7 +27,7 @@ namespace DSIS.UI.FunctionDialog
                                                   ),
                                                 ListInfo.Create<IWizardPageWithState>(
                                                   "User defined",
-                                                  "Alows user to create new system and use it throuh the system",
+                                                  "Alows to create new system and use it throuh the system",
                                                   false,
                                                   null
                                                   )

@@ -1,17 +1,12 @@
-using System.Windows.Forms;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring.Service;
-using DSIS.UI.UI;
 using DSIS.UI.Wizard;
 
 namespace DSIS.UI.FunctionDialog
 {
   public class SystemFunctionSelectionWizard : StateWizard, ISystemFunctionSelectionWizardInt
   {
-    private IApplicationDocument myDocument;
-    private readonly IApplicationDocumentFactory myFactory;
-
     public ISystemInfoFactory SystemFactory { get; set; }
     public IContiniousFunctionSolverFactory ContiniousFactory { get; set; }
     public IContiniousSolverParameters ContiniousParameters { get; set; }
@@ -46,14 +41,7 @@ namespace DSIS.UI.FunctionDialog
     public SystemFunctionSelectionWizard(IServiceProvider prov)
     {
       Title = "Define system function";
-      myFactory = new ApplicationDocumentFactory();
       FirstPage = new SelectSystemWizardPage(prov, this);
-    }
-
-    public override void OnFinish()
-    {
-      base.OnFinish();
-      MessageBox.Show("Finished!");
     }
   }
 }

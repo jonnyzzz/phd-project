@@ -74,7 +74,8 @@ namespace DSIS.Spring
         }
       }
 
-      myChildContext = new XmlApplicationContext(ApplicationContext, configurationLocations);
+      var context = new XmlApplicationContext(ApplicationContext, configurationLocations);
+      myChildContext = context;
     }
 
     public void Dispose()

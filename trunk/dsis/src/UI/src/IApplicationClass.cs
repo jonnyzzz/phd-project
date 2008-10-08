@@ -26,8 +26,7 @@ namespace DSIS.UI.UI
     T ShowDialog<T>(WithForm<T> action);
     void ShowDialog(WithForm action);
 
-    void SetDocument(IApplicationDocument value);
-    IApplicationDocument GetDocument();
-    event EventHandler<DocumentChangedEventArgs> DocumentChanging;
+    IApplicationDocument Document { get; set; }
+    event EventHandler<DocumentChangedEventArgs> DocumentChanged;
   }
 }

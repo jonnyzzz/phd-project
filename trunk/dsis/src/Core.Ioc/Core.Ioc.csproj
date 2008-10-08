@@ -54,7 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\AssemblyScanerImpl.cs" />
     <Compile Include="src\ComponentContainer.cs" />
+    <Compile Include="src\ComponentContainerImplemetationAttribute.cs" />
+    <Compile Include="src\ComponentContainerInterfaceAttribute.cs" />
+    <Compile Include="src\IAssemblyScaner.cs" />
+    <Compile Include="src\IComponentContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj">

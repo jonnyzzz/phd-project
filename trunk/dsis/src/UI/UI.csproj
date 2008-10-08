@@ -64,13 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\ApplicationDocument.cs" />
-    <Compile Include="src\ApplicationDocumentFactory.cs" />
     <Compile Include="src\BoolErrorProviderHelper.cs" />
     <Compile Include="src\ControlUtils.cs" />
     <Compile Include="src\ErrorProviderHelper.cs" />
     <Compile Include="src\IApplicationClass.cs" />
     <Compile Include="src\IApplicationDocument.cs" />
-    <Compile Include="src\IApplicationDocumentFactory.cs" />
     <Compile Include="src\IErrorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

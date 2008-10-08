@@ -91,6 +91,9 @@
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />
     <Compile Include="src\DocumentChangedEventArgs.cs" />
+    <Compile Include="src\Doc\CurrentDocumentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\IMainForm.cs" />
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
@@ -128,6 +131,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scheme\Scheme.csproj">
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
       <Name>Scheme</Name>
@@ -135,6 +142,10 @@
     <ProjectReference Include="..\Spring\Spring.csproj">
       <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
       <Name>Spring</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI.Controls\UI.Controls.csproj">
+      <Project>{3305A57B-0432-4E75-8E13-8AB265B8ECB6}</Project>
+      <Name>UI.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\UI.FunctionDialog\UI.FunctionDialog.csproj">
       <Project>{C8FBFBAF-B2DF-49FA-B428-6BC429658BB5}</Project>

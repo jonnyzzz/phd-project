@@ -1,3 +1,4 @@
+using System.Windows.Forms;
 using DSIS.Scheme.Ctx;
 using DSIS.Spring.Attributes;
 using DSIS.Spring.Service;
@@ -21,7 +22,14 @@ namespace DSIS.UI.Application.Actions.Impl
 
     public override bool Do(Context ctx)
     {
-      myApp.ShowDialog(form => new WizardForm(new SystemFunctionSelectionWizard(myProvider)).ShowDialog(form));
+      var model = new SystemFunctionSelectionWizard(myProvider);
+      var wizardForm = new WizardForm(model);
+      DialogResult result = myApp.ShowDialog(form => wizardForm.ShowDialog(form));
+
+      if (result == DialogResult.OK)
+      {
+        myApp.Document = new ApplicationDocument(model.Title, model.CreateInfo(), model.CreateSpace());
+      }
 
       return true;
     }
