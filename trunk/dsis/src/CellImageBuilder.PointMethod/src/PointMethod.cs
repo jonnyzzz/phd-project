@@ -81,6 +81,7 @@ namespace DSIS.CellImageBuilder.PointMethod
 
     public string PresentableName
     {
+      //TODO! Describe!
       get { return "PointMethod"; }
     }
   }

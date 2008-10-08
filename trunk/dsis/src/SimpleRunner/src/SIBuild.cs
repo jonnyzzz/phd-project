@@ -21,21 +21,30 @@ namespace DSIS.SimpleRunner
 
     private static void BuildContiniousSystems()
     {
-      for (int rep = 3; rep < 10; rep++)
+      for (int rep = 9; rep < 12; rep++)
       {
-        var data = new[]
+        var data = new List<ComputationData>
                      {
                        new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.FoodChainDanny(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.VanDerPolRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.LorentzRunge(), repeat = rep},
                      };
-        foreach (var computationData in data)
+        foreach (var computationData in new List<ComputationData>(data))
         {
-          var sys = computationData;
-          var aa = new AgregateAction(x => BuildGraph(new ActionBuilder2Adaptor(x), sys));
-          aa.Apply(new Context());
-          Console.Out.WriteLine("---------------------------------------------------------");
+          try
+          {
+            var sys = computationData;
+            var aa = new AgregateAction(x => BuildGraph(new ActionBuilder2Adaptor(x), sys));
+            aa.Apply(new Context());
+            Console.Out.WriteLine("---------------------------------------------------------");
+          } catch (OutOfMemoryException e)
+          {
+            Console.Out.WriteLine("-----------------------------OOE-------------------------");
+            Console.Out.WriteLine(e); 
+            Console.Out.WriteLine("-----------------------------OOE-------------------------");
+            data.Remove(computationData);
+          }
           GCHelper.Collect();
         }
       }

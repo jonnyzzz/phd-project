@@ -2,9 +2,9 @@
 <Graphs xmlns="urn:shemas-dsis-org:computation-graph-scheme-xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
   <Graph Id="imageBuilder">
     <Nodes>
-      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings"/>
+<!--      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings"/>-->
 <!--      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultAdaptiveMethodSettings"/>-->
-<!--      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultPointMethodSettings"/>-->
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultPointMethodSettings"/>
     </Nodes>
     <Links>
       <Link>

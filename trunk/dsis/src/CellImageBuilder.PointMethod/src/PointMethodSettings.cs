@@ -1,6 +1,7 @@
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates;
+using DSIS.Utils;
 
 namespace DSIS.CellImageBuilder.PointMethod
 {
@@ -26,7 +27,7 @@ namespace DSIS.CellImageBuilder.PointMethod
 
     public string PresentableName
     {
-      get { return "Point Method"; }
+      get { return string.Format("Point Method[{0}{1}]", Points.JoinString(","), (UseOverlapping ? ",overlap=" + Overlap : "")); }
     }
 
     public ICellImageBuilder<TCell> Create<TCell>()       
