@@ -51,7 +51,7 @@ namespace DSIS.SimpleRunner
         foreach (var _computationData in new List<ComputationData>(data))
         {
           var computationData = _computationData;
-          using (var th = new MemoryMonitorThread(2 * 1024 * 1024))
+          using (var th = new MemoryMonitorThread(2 * 1024 * 1024 * 1024L))
           {
             var computation 
               = new Thread(
@@ -70,6 +70,12 @@ namespace DSIS.SimpleRunner
                     Console.Out.WriteLine(e);
                     Console.Out.WriteLine("-----------------------------OOE-------------------------");
                     data.Remove(computationData);
+                  } catch (Exception e)
+                  {
+                    Console.Out.WriteLine("-----GENERAL ERROR------------------------OOE-------------------------");
+                    Console.Out.WriteLine(e);
+                    Console.Out.WriteLine("-----------------------------OOE-------------------------");
+                    data.Remove(computationData);
                   }
                   GCHelper.Collect();                  
               });
@@ -81,6 +87,7 @@ namespace DSIS.SimpleRunner
                                 };
             computation.Start();
             th.Run();
+            computation.Join();
           }
         }
       }
