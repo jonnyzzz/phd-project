@@ -72,6 +72,7 @@
     <Compile Include="src\Xml\SchemeGraphTest.cs" />
     <Compile Include="src\Xml\CurrentAppDomainFactoryTest.cs" />
     <Compile Include="src\Xml\NIs.cs" />
+    <Compile Include="src\Xml\ServiceProviderRegistrar.cs" />
     <Compile Include="src\Xml\SpringBaseTest.cs" />
     <Compile Include="src\Xml\TestSchemeGraphLoader.cs" />
     <Compile Include="src\Xml\XsdUtil.cs" />

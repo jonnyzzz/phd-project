@@ -22,7 +22,7 @@ namespace DSIS.UI.Application.Test
       mock = myMocks.CreateMock<IActionPresentationManager>();
       myMocks.Record();
 
-      IServiceProvider prov = myMocks.CreateMock<IServiceProvider>();
+      var prov = myMocks.CreateMock<IServiceProvider>();
       Expect.Call(prov.GetServices<IActionDescriptorParser>()).IgnoreArguments().Return(
         new IActionDescriptorParser[]
           {

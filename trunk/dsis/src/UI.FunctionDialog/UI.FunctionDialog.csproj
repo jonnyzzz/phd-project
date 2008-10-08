@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\FixedDimensionSpaceModel.cs" />
+    <Compile Include="src\ISystemFunctionSelectionWizardInt.cs" />
     <Compile Include="src\IWizardPageWithStateFactory.cs" />
     <Compile Include="src\NamespaceHolder.cs" />
     <Compile Include="src\SelectPredefinedContiniousMethodWizardPage.cs" />

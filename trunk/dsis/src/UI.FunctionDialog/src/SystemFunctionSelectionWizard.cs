@@ -7,18 +7,6 @@ using DSIS.UI.Wizard;
 
 namespace DSIS.UI.FunctionDialog
 {
-  public interface ISystemFunctionSelectionWizardInt
-  {
-    ISystemInfoFactory SystemFactory{ get; set; }
-    IContiniousFunctionSolverFactory ContiniousFactory { get; set; }
-    IContiniousSolverParameters ContiniousParameters { get; set; }
-    ISystemInfoParameters SystemParameters { get; set; }
-    SpaceModel Space { get; set; }
-
-    ISystemInfo CreateInfo();
-    ISystemSpace CreateSpace();
-  }
-
   public class SystemFunctionSelectionWizard : StateWizard, ISystemFunctionSelectionWizardInt
   {
     private IApplicationDocument myDocument;
