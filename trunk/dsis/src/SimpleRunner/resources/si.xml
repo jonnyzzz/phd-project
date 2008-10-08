@@ -1,10 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Graphs xmlns="urn:shemas-dsis-org:computation-graph-scheme-xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
-  <Graph Id="imageBuilder">
+  <Graph Id="imageBuilderPoint">
     <Nodes>
-<!--      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings"/>-->
-<!--      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultAdaptiveMethodSettings"/>-->
       <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultPointMethodSettings"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->
+  <Graph Id="imageBuilderAdaptive">
+    <Nodes>
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultAdaptiveMethodSettings"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->
+  <Graph Id="imageBuilderBox">
+    <Nodes>
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings"/>
     </Nodes>
     <Links>
       <Link>

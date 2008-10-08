@@ -98,6 +98,10 @@
     <Compile Include="src\XmlAbstractImageBuilderListener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
+      <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
+      <Name>Scheme.Objects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scheme.Xml\Scheme.Xml.csproj">
       <Project>{90ED6605-1FD5-4C7E-A5A2-914DD9FB9820}</Project>
       <Name>Scheme.Xml</Name>

@@ -1,5 +1,7 @@
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
+using DSIS.Function.Predefined.Brusselator;
+using DSIS.Function.Predefined.Chua;
 using DSIS.Function.Predefined.Duffing;
 using DSIS.Function.Predefined.FoodChain;
 using DSIS.Function.Predefined.Henon;
@@ -8,6 +10,7 @@ using DSIS.Function.Predefined.HomoSquare;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Function.Predefined.Logistics;
 using DSIS.Function.Predefined.Lorentz;
+using DSIS.Function.Predefined.Rossel;
 using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
 using DSIS.Scheme;
@@ -100,6 +103,24 @@ namespace DSIS.SimpleRunner
     {
       var info = new LorentzSystemInfo(8.0/3.0, 20, 10);
       return new SystemInfoAction(new RungeKuttSolver(info, 100, 0.001), Space(3, 40));
+    }
+
+    public static IAction RosslerRunge()
+    {
+      var info = new RosslerSystemInfo(0.2, 0.2, 5.7);
+      return new SystemInfoAction(new RungeKuttSolver(info, 100, 0.01), Space(3, 30));
+    }
+
+    public static IAction BrusselatorRunge()
+    {
+      var info = new BrusselatorSystemInfo(new BrusselatorOptions{P1 = 0.5, P2 = 0});
+      return new SystemInfoAction(new RungeKuttSolver(info, 50, 0.001), Space(2, 10));
+    }
+
+    public static IAction ChuaRunge()
+    {
+      var info = new ChuaSystemInfo(new ChuaOptions{P1 = 9.85, P2 = 14.3, P3=-0.14, P4=0.28});
+      return new SystemInfoAction(new RungeKuttSolver(info, 50, 0.001), Space(3, 30));
     }
 
     /*

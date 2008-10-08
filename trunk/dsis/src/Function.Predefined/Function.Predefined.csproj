@@ -55,6 +55,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Brusselator\BrusselatorFactory.cs" />
+    <Compile Include="src\Brusselator\BrusselatorFunction.cs" />
+    <Compile Include="src\Brusselator\BrusselatorOptions.cs" />
+    <Compile Include="src\Brusselator\BrusselatorSystemInfo.cs" />
+    <Compile Include="src\Chua\ChuaFactory.cs" />
+    <Compile Include="src\Chua\ChuaFunction.cs" />
+    <Compile Include="src\Chua\ChuaOptions.cs" />
+    <Compile Include="src\Chua\ChuaSystemInfo.cs" />
     <Compile Include="src\Delayed\DelayedFactory.cs" />
     <Compile Include="src\Delayed\DelayedFunction.cs" />
     <Compile Include="src\Delayed\DelayedFunctionSystemInfo.cs" />

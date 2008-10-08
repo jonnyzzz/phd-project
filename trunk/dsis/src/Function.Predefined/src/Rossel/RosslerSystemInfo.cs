@@ -26,10 +26,5 @@ namespace DSIS.Function.Predefined.Rossel
     {
       return new RosslerSystemFunction(myA, myB, myC);
     }
-
-    protected override IFunction<double> GetFunctionDerivateInternal()
-    {
-      throw new NotImplementedException();
-    }
   }
 }
