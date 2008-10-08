@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
@@ -36,34 +37,99 @@ namespace DSIS.SimpleRunner
 
     private static void BuildContiniousSystems()
     {
-      for (int rep = 3; rep < 5; rep++)
+      for (int rep = 3; rep < 15; rep++)
       {
         var data = ForBuildser(new List<ComputationData>
                      {
                        new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.FoodChainDanny(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.VanDerPolRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.LorentzRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.RosslerRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.BrusselatorRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},
                      }, Builder.Point, Builder.Box);
-        foreach (var computationData in new List<ComputationData>(data))
+        foreach (var _computationData in new List<ComputationData>(data))
         {
-          try
+          var computationData = _computationData;
+          using (var th = new MemoryMonitorThread(2 * 1024 * 1024))
           {
-            var sys = computationData;
-            var aa = new AgregateAction(x => BuildGraph(new ActionBuilder2Adaptor(x), sys));
-            aa.Apply(new Context());
-            Console.Out.WriteLine("---------------------------------------------------------");
-          } catch (OutOfMemoryException e)
-          {
-            Console.Out.WriteLine("-----------------------------OOE-------------------------");
-            Console.Out.WriteLine(e); 
-            Console.Out.WriteLine("-----------------------------OOE-------------------------");
-            data.Remove(computationData);
+            var computation 
+              = new Thread(
+                delegate()
+                {
+                  try
+                  {
+                    var sys = computationData;
+                    var aa = new AgregateAction(x => BuildGraph(new ActionBuilder2Adaptor(x), sys));
+                    aa.Apply(new Context());
+                    Console.Out.WriteLine("---------------------------------------------------------");
+                  }
+                  catch (OutOfMemoryException e)
+                  {
+                    Console.Out.WriteLine("-----------------------------OOE-------------------------");
+                    Console.Out.WriteLine(e);
+                    Console.Out.WriteLine("-----------------------------OOE-------------------------");
+                    data.Remove(computationData);
+                  }
+                  GCHelper.Collect();                  
+              });
+
+            th.MemoryLimit += delegate
+                                {
+                                  computation.Interrupt();
+                                  computation.Abort();
+                                };
+            computation.Start();
+            th.Run();
           }
-          GCHelper.Collect();
+        }
+      }
+    }
+
+    private class MemoryMonitorThread : IDisposable
+    {
+      private readonly long myLimit;
+      private Thread myThread;
+
+      public event VoidDelegate MemoryLimit;
+
+      public MemoryMonitorThread(long limit)
+      {
+        myLimit = limit;
+      }
+
+      public void Run()
+      {
+        myThread = new Thread(delegate()
+                                     {
+                                       try
+                                       {
+                                         while (true)
+                                         {
+                                           Thread.Sleep(500);
+                                           if (GC.GetTotalMemory(false) > myLimit)
+                                           {
+                                             MemoryLimit();
+                                             return;
+                                           }
+                                         }
+                                       } catch
+                                       {
+                                         ;//NOP
+                                       }
+                                     });
+        myThread.Name = "Memory Detecter";
+        myThread.IsBackground = true;
+        myThread.Start();
+      }
+
+      public void Dispose()
+      {
+        if (myThread != null && myThread.IsAlive)
+        {
+          myThread.Interrupt();
+          myThread.Abort();
+          myThread.Join();
         }
       }
     }
