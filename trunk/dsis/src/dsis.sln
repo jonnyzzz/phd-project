@@ -129,6 +129,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheme.Xml", "Scheme.Xml\Sc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ioc", "Core.Ioc\Core.Ioc.csproj", "{CD7A1861-F565-470E-82BC-7FCE1ACDE896}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ioc.Tests", "Core.Ioc.Tests\Core.Ioc.Tests.csproj", "{288AD169-5743-4C7D-889D-C77B8A69DDD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -611,6 +613,12 @@ Global
 		{CD7A1861-F565-470E-82BC-7FCE1ACDE896}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD7A1861-F565-470E-82BC-7FCE1ACDE896}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CD7A1861-F565-470E-82BC-7FCE1ACDE896}.Release|x64.ActiveCfg = Release|Any CPU
+		{288AD169-5743-4C7D-889D-C77B8A69DDD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{288AD169-5743-4C7D-889D-C77B8A69DDD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{288AD169-5743-4C7D-889D-C77B8A69DDD9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{288AD169-5743-4C7D-889D-C77B8A69DDD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{288AD169-5743-4C7D-889D-C77B8A69DDD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{288AD169-5743-4C7D-889D-C77B8A69DDD9}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

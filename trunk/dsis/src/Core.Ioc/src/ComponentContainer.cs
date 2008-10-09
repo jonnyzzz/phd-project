@@ -34,6 +34,9 @@ namespace DSIS.Core.Ioc
       {
         foreach (var p in myScanner.LoadTypes<ComponentContainerImplemetationAttribute>(assembly)  )
         {
+          if (myKernel.HasComponent(p.Second.InterfaceType))
+            throw new ComponentContainerException(string.Format("Service with interface type {0} has allready been registered.", p.Second.InterfaceType.FullName));
+         
           myKernel.AddComponent(p.First.AssemblyQualifiedName, p.Second.InterfaceType, p.First, LifestyleType.Singleton);
         }
       }
