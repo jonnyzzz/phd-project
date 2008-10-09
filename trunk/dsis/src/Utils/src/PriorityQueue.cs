@@ -78,7 +78,7 @@ namespace DSIS.Utils
       if (myMin == null || myMin.Sibling == myMin)
         return;
 
-      Node[] A = new Node[Log2Helper.Nearest(mySize) + 2];
+      var A = new Node[Log2Helper.Nearest(mySize) + 2];
 
       for (Node cur = myMin; cur != null;)
       {
@@ -143,31 +143,32 @@ namespace DSIS.Utils
 
     protected class Node : IComparable<Node>
     {
-      public readonly Q Value;
-      public readonly T Data;
+      private readonly Q myValue;
+      private readonly T myData;
+
       public Node Child;
       public Node Sibling;
       public uint Degree;
 
       public Node(Q value, T data)
       {
-        Value = value;
-        Data = data;
+        myValue = value;
+        myData = data;
       }
 
       public Pair<T, Q> Pair
       {
-        get { return new Pair<T, Q>(Data, Value); }
+        get { return new Pair<T, Q>(myData, myValue); }
       }
 
       public int CompareTo(Node other)
       {
-        return Value.CompareTo(other.Value);
+        return myValue.CompareTo(other.myValue);
       }
 
       public override string ToString()
       {
-        return string.Format("{0}({1}) ", Value, Data);
+        return string.Format("{0}({1}) ", myValue, myData);
       }
 
       public void AddChild(Node child)

@@ -162,7 +162,7 @@ namespace DSIS.Utils
       if (myMin == null)
         return null;
 
-      Node[] A = new Node[Log2Helper.Nearest(Count)];
+      var A = new Node[Log2Helper.Nearest(Count)];
 
       myMin.PrevSibling.Sibling = null;
       Node next;

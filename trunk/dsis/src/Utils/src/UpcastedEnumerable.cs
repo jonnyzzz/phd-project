@@ -13,8 +13,6 @@ namespace DSIS.Utils
       myEnumerable = enumerable;
     }
 
-    #region IEnumerable<TC> Members
-
     IEnumerator IEnumerable.GetEnumerator()
     {
       return myEnumerable.GetEnumerator();
@@ -24,7 +22,5 @@ namespace DSIS.Utils
     {
       return new UpcastedEnumerator<IEnumerator<T>, T, TC>(myEnumerable.GetEnumerator());
     }
-
-    #endregion
   }
 }

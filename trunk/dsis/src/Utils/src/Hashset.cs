@@ -117,7 +117,7 @@ namespace DSIS.Utils
 
     public override string ToString()
     {
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       sb.AppendFormat("{{Hashset: Count = {0} \r\n", Count);
       foreach (T t in Values)
       {
@@ -128,7 +128,7 @@ namespace DSIS.Utils
 
     public T[] ToArray()
     {
-      T[] result = new T[Count];
+      var result = new T[Count];
       int index = 0;
       foreach (T t in this)
       {

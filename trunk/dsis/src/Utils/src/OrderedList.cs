@@ -5,7 +5,7 @@ namespace DSIS.Utils
 {
   public class OrderedList<T> where T : IComparable<T>
   {
-    private List<T> myList = new List<T>();
+    private readonly List<T> myList = new List<T>();
 
     public bool Contains(T t)
     {

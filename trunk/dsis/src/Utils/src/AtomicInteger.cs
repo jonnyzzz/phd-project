@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace DSIS.Utils
 {
   public class AtomicInteger

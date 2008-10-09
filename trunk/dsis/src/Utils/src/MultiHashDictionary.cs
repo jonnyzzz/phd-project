@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DSIS.Utils;
 
 namespace DSIS.Utils
 {
@@ -34,8 +33,7 @@ namespace DSIS.Utils
       }
       else
       {
-        l = new Hashset<TV>();
-        l.Add(v);
+        l = new Hashset<TV> {v};
         this[k] = l;
       }
     }

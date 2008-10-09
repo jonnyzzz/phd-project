@@ -12,8 +12,6 @@ namespace DSIS.Utils
       myEnumerable = enumerable;
     }
 
-    #region IEnumerator<TC> Members
-
     public object Current
     {
       get { return myEnumerable.Current; }
@@ -38,7 +36,5 @@ namespace DSIS.Utils
     {
       myEnumerable.Reset();
     }
-
-    #endregion
   }
 }
