@@ -1,6 +1,7 @@
 ﻿using System;
 using Castle.MicroKernel;
 using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Core.Ioc.Tests
 {
@@ -70,13 +71,39 @@ namespace DSIS.Core.Ioc.Tests
 
       Console.Out.WriteLine(k.GetService<CA>().GetType());
       Console.Out.WriteLine(k.GetService<IA>().GetType());
+    } 
+    
+    [Test]
+    public void Test_SetterInjection()
+    {
+      k.AddComponent("ImplQ", typeof(IA), typeof(ImplA));
+      k.AddComponent("ImplA", typeof(CA), typeof(ImplB));
+      k.AddComponent("Impl", typeof(SetterInjectionC));
+      
+      k.GetService<CA>();
+      k.GetService<IA>();
+
+      Console.Out.WriteLine(k.GetService<CA>().GetType());
+      Console.Out.WriteLine(k.GetService<IA>().GetType());
+
+      var v = k.GetService<SetterInjectionC>();
+
+      Assert.That(v, Is.Not.Null);
+      Assert.That(v.A, Is.Not.Null);
     }
 
-    private interface IA {}
+    public interface IA {}
     private abstract class CA{}
 
     private class ImplA : IA {}
     private class ImplB : CA {}
     private class ImplC : CA, IA {}
+
+    public class SetterInjectionC
+    {
+      public IA A{ get; set;}
+
+      public object Settter { get; set; }
+    }
   }
 }

@@ -69,7 +69,6 @@ namespace DSIS.Core.Ioc
       var container = new ComponentContainer<TInterface1, TImplementation1>();
       myKernel.AddChildKernel(container.myKernel);
       container.Subscribe();
-      //TODO: Check container dispose removes child container
       return container;
     }
 
