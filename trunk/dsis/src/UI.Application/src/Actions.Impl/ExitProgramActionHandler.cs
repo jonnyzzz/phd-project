@@ -1,14 +1,16 @@
 ﻿using DSIS.Scheme.Ctx;
 using DSIS.Spring.Attributes;
+using DSIS.Spring.Service;
+using DSIS.UI.UI;
 
 namespace DSIS.UI.Application.Actions.Impl
 {
-  [SpringBean]
+  [SpringBean, ActionHandler]
   public class ExitProgramActionHandler : ActionHandlerBase
   {
-    private readonly ApplicationClass myApp;
-
-    public ExitProgramActionHandler(ApplicationClass app)
+    private readonly IServiceProvider myApp;
+    
+    public ExitProgramActionHandler(IServiceProvider app)
       : base("File.Exit")
     {
       myApp = app;
@@ -16,7 +18,7 @@ namespace DSIS.UI.Application.Actions.Impl
 
     public override bool Do(Context ctx)
     {
-      myApp.OnMenuExit();
+      myApp.GetService<IApplicationClass>().OnMenuExit();
       return true;
     }
   }

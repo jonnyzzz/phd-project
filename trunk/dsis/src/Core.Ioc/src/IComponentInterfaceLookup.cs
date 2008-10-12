@@ -6,6 +6,6 @@ namespace DSIS.Core.Ioc
   public interface IComponentInterfaceLookup
   {
     IEnumerable<Type> FindInterfaces<T>(Type type)
-      where T : ComponentInterfaceAttributeBase;
+      where T : Attribute;
   }
 }

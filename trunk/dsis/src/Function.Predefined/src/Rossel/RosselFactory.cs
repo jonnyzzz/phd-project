@@ -1,10 +1,11 @@
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Rossel
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentCollection]
   public class RosselFactory : DoubleParametersSystemInfoFactoryBase<RosslerParameters>
   {
     //todo: Provide continious system converter

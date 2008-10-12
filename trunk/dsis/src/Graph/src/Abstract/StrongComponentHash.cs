@@ -39,7 +39,7 @@ namespace DSIS.Graph.Abstract
       if (!myInfos.ContainsKey(info.Generation))
         myGenerations.Add(info.Generation);
 
-      myInfos.Add(info.Generation, info);
+      myInfos.AddValue(info.Generation, info);
     }
 
     private bool UpdateComponents(IEnumerable<int> gens, ProcessComponent onUpdate, ProcessComponents onNoUpdate)
@@ -61,7 +61,7 @@ namespace DSIS.Graph.Abstract
               if (ex.Generation == g)
                 set.Add(ex);
               else
-                myInfos.Add(ex.Generation, ex);
+                myInfos.AddValue(ex.Generation, ex);
             }
             if (set.Count > 0)
             {

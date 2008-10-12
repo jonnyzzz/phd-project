@@ -1,10 +1,11 @@
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Logistics
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentCollection]
   public class LogisticsFactory : DoubleParametersSystemInfoFactoryBase<LogisticsParameters>
   {
     public LogisticsFactory(DoubleArrayParser parser, SystemInfoFactory factory)

@@ -2,5 +2,8 @@ using System;
 
 namespace DSIS.Core.Ioc
 {
-  public abstract class ComponentInterfaceAttributeBase : Attribute {}
+  [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+  public abstract class ComponentInterfaceAttributeBase : Attribute
+  {
+  }
 }

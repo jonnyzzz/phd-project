@@ -1,10 +1,11 @@
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Linear
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentCollection]
   public class Linear2DFactory : DoubleParametersSystemInfoFactoryBase<Linear2dParameters>
   {
     public Linear2DFactory(DoubleArrayParser parser, SystemInfoFactory factory)

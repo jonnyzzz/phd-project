@@ -1,10 +1,11 @@
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Lorentz
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentCollection]
   public class LorentzSystemInfoFactory : DoubleParametersSystemInfoFactoryBase<LorentzParameters>
   {
     public LorentzSystemInfoFactory(DoubleArrayParser parser, SystemInfoFactory factory)

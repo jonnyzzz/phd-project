@@ -1,7 +1,9 @@
+using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.UI.Application.Actions
 {
+  [ComponentCollection]
   public interface IActionHandler
   {
     string[] ActionId { get;  }

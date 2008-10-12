@@ -1,5 +1,6 @@
 using System;
 using System.Xml;
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Spring.Assemblies;
 using DSIS.Utils.Bean;
@@ -35,6 +36,7 @@ namespace DSIS.Scheme.Objects.Systemx
   {
   }
 
+  [ComponentCollection]
   public interface ISystemInfoFactory : IOptionsHolder
   {
     string FactoryName { get; }
@@ -61,6 +63,7 @@ namespace DSIS.Scheme.Objects.Systemx
     Descrete
   }
 
+  [ComponentCollection]
   public interface IContiniousFunctionSolverFactory : IOptionsHolder
   {
     string MethodName { get; }

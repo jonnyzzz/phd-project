@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
 using DSIS.Spring;
 
 namespace DSIS.UI.Application.Actions
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentImplementation]
   public class ToolStripMenuItemPresentationManager : BuildingActionPresentationManager<ToolStripItem>, IMainMenuFactory
   {
     public ToolStripMenuItemPresentationManager(IActionPresentationManager presentation) : base(presentation)

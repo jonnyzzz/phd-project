@@ -7,26 +7,34 @@ using DSIS.Utils;
 
 namespace DSIS.Core.Ioc
 {
-  public class ComponentContainer<TInterface, TImplementation> : IComponentContainer
+  public class ComponentContainer<TInterface, TCollectionInterface, TImplementation> : IComponentContainer
     where TImplementation : ComponentImplemetationAttributeBase
+    where TCollectionInterface : ComponentCollectionAttributeBase
     where TInterface : ComponentInterfaceAttributeBase
   {
     private readonly IKernel myKernel;
     private readonly IAssemblyScaner myScanner;
     private readonly IComponentInterfaceLookup myLookup;
-    private readonly Hashset<Assembly> mySubscription = new Hashset<Assembly>();
+    private readonly HashSet<Assembly> mySubscription = new HashSet<Assembly>();
+    private readonly ITypesFilter myFilter;
 
-    public ComponentContainer(IAssemblyScaner scanner, IComponentInterfaceLookup lookup)
+    public ComponentContainer(ITypesFilter filter, IAssemblyScaner scanner, IComponentInterfaceLookup lookup)
     {
       myKernel = new DefaultKernel();
+      myFilter = filter;
 
       myScanner = scanner;
       myLookup = lookup;
+      myKernel.AddFacility("Startable", new StartableFacility<TImplementation>());
 
-      myKernel.AddComponentInstance<IComponentContainer>(this);
+      //This component does not depends on attributes!
+      myKernel.AddComponentInstance("##container", typeof(IComponentContainer), this);
+      myKernel.AddComponentInstance("##containerServices", typeof(IComponentContainerServices), new ComponentContainerServices<TCollectionInterface>(myKernel, myLookup));
+
+      ScanAssemblies(new[]{GetType().Assembly});
     }
 
-    private ComponentContainer(ITypesFilter filer) : this(new AssemblyScanerImpl(filer), new ComponentInterfaceLookupImpl(filer))
+    private ComponentContainer(ITypesFilter filter) : this(filter, new AssemblyScanerImpl(filter), new ComponentInterfaceLookupImpl(filter))
     {
     }
 
@@ -34,19 +42,18 @@ namespace DSIS.Core.Ioc
     {
     }
 
-    public void RegisterComponentInstance<TI>(object component)
-    {
-      var implementationType = component.GetType();
-      var interfaceType = typeof(TI);
-      CheckValidComponent(interfaceType, implementationType);
-      myKernel.AddComponentInstance<TI>(component);
-    }
-
     private void CheckValidComponent(Type interfaceType, Type implementationType)
     {
       CheckInterfaceMarked(interfaceType);
       CheckImplemetsService(interfaceType, implementationType);
       CheckServiceNotAdded(interfaceType);
+    }
+
+    private void CheckValidServiceComponent(Type interfaceType, Type implementationType)
+    {
+      CheckServiceInterfaceMarked(interfaceType);
+      CheckImplemetsService(interfaceType, implementationType);
+      CheckServiceNotAdded(implementationType);
     }
 
     private static void CheckImplemetsService(Type interfaceType, Type implementationType)
@@ -63,14 +70,25 @@ namespace DSIS.Core.Ioc
       myKernel.Dispose();
     }
 
-    public IComponentContainer SubContainer<TInterface1, TImplementation1>()
-      where TInterface1 : ComponentInterfaceAttributeBase 
-      where TImplementation1 : ComponentImplemetationAttributeBase
+    public IComponentContainer SubContainer<TInterface1, TCollectionInterface1, TImplementation1>() where TInterface1 : ComponentInterfaceAttributeBase where TCollectionInterface1 : ComponentCollectionAttributeBase where TImplementation1 : ComponentImplemetationAttributeBase
     {
-      var container = new ComponentContainer<TInterface1, TImplementation1>(myScanner, myLookup);
+      var container = new ComponentContainer<TInterface1, TCollectionInterface1, TImplementation1>(myFilter, myScanner, myLookup);
       myKernel.AddChildKernel(container.myKernel);
       container.ScanAssemblies(mySubscription);
       return container;
+    }
+
+    public ITypesFilter Filter
+    {
+      get { return myFilter; }
+    }
+
+    public void RegisterComponent(object instance)
+    {
+      foreach (var type in myLookup.FindInterfaces<TInterface>(instance.GetType()))
+      {
+        myKernel.AddComponentInstance(Key(type, instance.GetType()), type, instance);
+      }
     }
 
     public T GetComponent<T>()
@@ -80,28 +98,50 @@ namespace DSIS.Core.Ioc
 
     public void ScanAssemblies(IEnumerable<Assembly> assemblies)
     {
-      var toScan = assemblies.Filter(x=>!mySubscription.Contains(x)).ToArray();
-      mySubscription.AddRange(toScan);
+      var toScan = new HashSet<Assembly>(new HashSet<Assembly>(assemblies).Filter(x=>!mySubscription.Contains(x)).ToArray());
+      mySubscription.UnionWith(toScan);
 
       foreach (var assembly in toScan)
       {
         foreach (var p in myScanner.LoadTypes<TImplementation>(assembly))
         {
-          var implementationType = p.First;
-          foreach (var foundInterface in myLookup.FindInterfaces<TInterface>(p.First))
+          var implType = p.First;
+          foreach (var t in myLookup.FindInterfaces<TInterface>(implType))
           {
-            CheckValidComponent(foundInterface, implementationType);
+            CheckValidComponent(t, implType);
 
-            myKernel.AddComponent(implementationType.AssemblyQualifiedName, foundInterface, implementationType, LifestyleType.Singleton);            
+            myKernel.AddComponent(Key(t, implType), t, implType, LifestyleType.Singleton);            
+          }
+
+          bool providesServiceComponents = false;
+          foreach (var type in myLookup.FindInterfaces<TCollectionInterface>(implType))
+          {
+            providesServiceComponents = true;
+            CheckValidServiceComponent(type, implType);
+          }
+          if (providesServiceComponents)
+          {
+            myKernel.AddComponent(Key(implType, implType), implType, LifestyleType.Singleton);            
           }
         }
       }
+    }
+
+    private static string Key(Type foundInterface, Type implementationType)
+    {
+      return implementationType.AssemblyQualifiedName + "@" + foundInterface.AssemblyQualifiedName;
     }
 
     private static void CheckInterfaceMarked(Type interfaceType)
     {
       if (!interfaceType.IsDefined(typeof(TInterface), true))
         throw new ComponentContainerException(string.Format("Interface {0} shold be marked with {1} attribute", interfaceType, typeof (TInterface)));
+    }
+ 
+    private static void CheckServiceInterfaceMarked(Type interfaceType)
+    {
+      if (!interfaceType.IsDefined(typeof(TCollectionInterface), true))
+        throw new ComponentContainerException(string.Format("Interface {0}  shold be marked with {1} attribute", interfaceType, typeof (TInterface)));
     }
 
     private void CheckServiceNotAdded(Type interfaceType)

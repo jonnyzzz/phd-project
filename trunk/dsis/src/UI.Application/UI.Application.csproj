@@ -76,9 +76,11 @@
     <Compile Include="src\Actions\ActionDescriptorParserBase.cs" />
     <Compile Include="src\Actions\ActionDescriptorParserManager.cs" />
     <Compile Include="src\Actions\ActionDescriptorXmlAttributre.cs" />
+    <Compile Include="src\Actions\ActionHandlerAttribute.cs" />
     <Compile Include="src\Actions\ActionHandlerBeanProcessor.cs" />
     <Compile Include="src\Actions\ActionPresentationManager.cs" />
     <Compile Include="src\Actions\BuildingActionPresentationManager.cs" />
+    <Compile Include="src\Actions\FakeServiceProvider.cs" />
     <Compile Include="src\Actions\IActionDescriptor.cs" />
     <Compile Include="src\Actions\IActionDescriptorParser.cs" />
     <Compile Include="src\Actions\IActionHandler.cs" />

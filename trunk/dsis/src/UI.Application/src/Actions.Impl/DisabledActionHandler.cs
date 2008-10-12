@@ -3,7 +3,7 @@ using DSIS.Spring.Attributes;
 
 namespace DSIS.UI.Application.Actions.Impl
 {
-  [SpringBean]
+  [SpringBean, ActionHandler]
   public class DisabledActionHandler : ActionHandlerBase
   {
     public DisabledActionHandler()

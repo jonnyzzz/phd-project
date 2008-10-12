@@ -13,14 +13,14 @@ namespace DSIS.Core.Ioc
       myFiler = filer;
     }
 
-    public IEnumerable<Type> FindInterfaces<T>(Type type) where T : ComponentInterfaceAttributeBase
+    public IEnumerable<Type> FindInterfaces<T>(Type type) where T : Attribute
     {
-      var set = new Hashset<Type>();
+      var set = new HashSet<Type>();
       CollectAllTypes(type, set);
       return set.Filter(x => x.IsDefined(typeof(T), false));
     }
 
-    private void CollectAllTypes(Type type, Hashset<Type> bases)
+    private void CollectAllTypes(Type type, HashSet<Type> bases)
     {
       if (type == null || !myFiler.Accept(type) || bases.Contains(type))
         return;

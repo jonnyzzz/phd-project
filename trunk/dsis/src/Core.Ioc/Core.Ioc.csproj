@@ -60,9 +60,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\AppDomainSubscription.cs" />
     <Compile Include="src\AssemblyScanerImpl.cs" />
+    <Compile Include="src\ComponentCollectionAttribute.cs" />
+    <Compile Include="src\ComponentCollectionAttributeBase.cs" />
     <Compile Include="src\ComponentContainer.cs" />
     <Compile Include="src\ComponentContainerException.cs" />
-    <Compile Include="src\ComponentImplemetationAttribute.cs" />
+    <Compile Include="src\ComponentContainerServices.cs" />
+    <Compile Include="src\ComponentImplementationAttribute.cs" />
     <Compile Include="src\ComponentImplemetationAttributeBase.cs" />
     <Compile Include="src\ComponentInterfaceAttribute.cs" />
     <Compile Include="src\ComponentInterfaceAttributeBase.cs" />
@@ -73,10 +76,13 @@
     <Compile Include="src\IAssemblyScaner.cs" />
     <Compile Include="src\Ex\ICommandLine.cs" />
     <Compile Include="src\IComponentContainer.cs" />
+    <Compile Include="src\IComponentContainerServices.cs" />
     <Compile Include="src\IComponentInterfaceLookup.cs" />
+    <Compile Include="src\IStartableComponent.cs" />
     <Compile Include="src\ITypesFilter.cs" />
     <Compile Include="src\ScanAllLoadedAssemblies.cs" />
     <Compile Include="src\ScanCurrentFolder.cs" />
+    <Compile Include="src\StartableFacility.cs" />
     <Compile Include="src\TypesFilerImpl.cs" />
   </ItemGroup>
   <ItemGroup>

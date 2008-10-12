@@ -1,10 +1,11 @@
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring.Attributes;
 
 namespace DSIS.Function.Predefined.Chua
 {
-  [SpringBean]
+  [SpringBean, ComponentCollection]
   public class ChuaFactory : DoubleParametersSystemInfoFactoryBase<ChuaOptions>
   {
     public ChuaFactory(DoubleArrayParser parser, SystemInfoFactory factory)

@@ -1,11 +1,12 @@
 using System;
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Henon
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentCollection]
   public class HenonFactory : DoubleParametersSystemInfoFactoryBase<HenonOptions>
   {
     public HenonFactory(DoubleArrayParser parser, SystemInfoFactory factory)

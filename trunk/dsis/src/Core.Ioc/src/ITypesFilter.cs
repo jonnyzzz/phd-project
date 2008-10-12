@@ -7,5 +7,6 @@ namespace DSIS.Core.Ioc
   {
     bool Accept(Type type);
     bool Accept(Assembly a);
+    bool Accept(string assemblyPath);
   }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DSIS.Core.Ioc;
 
 namespace DSIS.UI.UI
 {
@@ -21,6 +22,7 @@ namespace DSIS.UI.UI
     }
   }
 
+  [ComponentInterface]
   public interface IApplicationClass
   {
     T ShowDialog<T>(WithForm<T> action);
@@ -28,5 +30,6 @@ namespace DSIS.UI.UI
 
     IApplicationDocument Document { get; set; }
     event EventHandler<DocumentChangedEventArgs> DocumentChanged;
+    void OnMenuExit();
   }
 }

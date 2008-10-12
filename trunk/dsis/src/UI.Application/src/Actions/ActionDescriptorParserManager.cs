@@ -1,10 +1,11 @@
 using System.Xml;
+using DSIS.Core.Ioc;
 using DSIS.Spring.Attributes;
 using DSIS.Spring.Service;
 
 namespace DSIS.UI.Application.Actions
 {
-  [SpringBean]
+  [SpringBean, ComponentInterface, ComponentImplementation]
   public class ActionDescriptorParserManager
   {
     private readonly IServiceProvider myProvider;

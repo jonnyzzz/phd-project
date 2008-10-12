@@ -13,6 +13,15 @@ namespace DSIS.Utils
       return enu ?? EmptyArray<Q>.Instance;
     }
 
+    public static bool Empty<T>(this IEnumerable<T> enu)
+    {
+      foreach (var t in enu)
+      {
+        return false;
+      }
+      return true;
+    }
+
     public static void Each<Q>(this IEnumerable<Q> enu, Action<Q> action)
     {
       foreach (Q q in enu)

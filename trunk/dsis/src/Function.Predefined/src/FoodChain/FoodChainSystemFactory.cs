@@ -1,10 +1,11 @@
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.FoodChain
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentCollection]
   public class FoodChainSystemFactory : DoubleParametersSystemInfoFactoryBase<FoodChainOptions>
   {
     public FoodChainSystemFactory(DoubleArrayParser parser, SystemInfoFactory factory)

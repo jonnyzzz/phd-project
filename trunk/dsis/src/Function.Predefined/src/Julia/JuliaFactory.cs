@@ -1,9 +1,10 @@
+using DSIS.Core.Ioc;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Julia
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentCollection]
   public class JuliaFactory : NoParameterSystemInfoFactoryBase
   {
     public JuliaFactory(SystemInfoFactory factory)

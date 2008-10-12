@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
 using DSIS.Spring;
 using DSIS.Utils;
 
 namespace DSIS.UI.Application.Actions
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentImplementation]
   public class ActionPresentationManager : IActionPresentationManager
   {
     private readonly ActionDescriptor myRootAction = new ActionDescriptor("root", null, "", "", "RootAction");

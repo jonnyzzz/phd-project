@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DSIS.Utils
 {
+  [Obsolete("Use Hashset")]
   public class Hashset<T> : IEnumerable<T>
   {
     private readonly Dictionary<T, T> mySet;
@@ -138,6 +140,7 @@ namespace DSIS.Utils
     }
   }
 
+  [Obsolete("Use Hashset")]
   public class Hashset<T, TC> : Hashset<T> where T : TC
   {
     public IEnumerable<TC> ValuesUpcasted

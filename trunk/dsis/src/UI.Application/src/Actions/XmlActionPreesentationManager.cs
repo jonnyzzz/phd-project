@@ -2,10 +2,12 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Xml;
+using DSIS.Core.Ioc;
 using DSIS.Utils;
 
 namespace DSIS.UI.Application.Actions
 {
+  [ComponentInterface,ComponentImplementation]
   public class XmlActionPreesentationManager
   {
     private readonly IActionPresentationManager myManager;

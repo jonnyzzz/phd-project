@@ -1,10 +1,11 @@
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring.Attributes;
 
 namespace DSIS.Function.Predefined.Brusselator
 {
-  [SpringBean]
+  [SpringBean, ComponentCollection]
   public class BrusselatorFactory : DoubleParametersSystemInfoFactoryBase<BrusselatorOptions>
   {
     public BrusselatorFactory(DoubleArrayParser parser, SystemInfoFactory factory)

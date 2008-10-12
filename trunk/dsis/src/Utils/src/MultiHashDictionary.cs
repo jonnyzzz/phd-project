@@ -24,7 +24,7 @@ namespace DSIS.Utils
       }
     }
 
-    public void Add(TK k, TV v)
+    public void AddValue(TK k, TV v)
     {
       Hashset<TV> l;
       if (TryGetValue(k, out l))
@@ -36,6 +36,15 @@ namespace DSIS.Utils
         l = new Hashset<TV> {v};
         this[k] = l;
       }
+    }
+
+    public void RemoveValue(TK k, TV v)
+    {
+      Hashset<TV> l;
+      if (TryGetValue(k, out l))
+      {
+        l.Remove(v);
+      }      
     }
 
     public bool ContainsPair(TK key, TV value)

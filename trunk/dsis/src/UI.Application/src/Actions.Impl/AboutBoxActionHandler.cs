@@ -4,7 +4,7 @@ using DSIS.Spring.Attributes;
 
 namespace DSIS.UI.Application.Actions.Impl
 {
-  [SpringBean]
+  [SpringBean, ActionHandler]
   public class AboutBoxActionHandler : ActionHandlerBase
   {
     public AboutBoxActionHandler()

@@ -1,6 +1,4 @@
 using DSIS.Core.System;
-using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Logistics
 {
@@ -14,36 +12,6 @@ namespace DSIS.Function.Predefined.Logistics
     {
       Output[0] = Input[1]*Input[0]*(1 - Input[0]);
       Output[1] = Input[1];
-    }
-  }
-
-  public class Logistic2dSystemInfo : DoubleSystemInfoBase
-  {
-    public Logistic2dSystemInfo()
-      : base(2)
-    {
-    }
-
-    public override string PresentableName
-    {
-      get { return string.Format("Logistic 2d"); }
-    }
-
-    protected override IFunction<double> GetFunctionInternal()
-    {
-      return new LogisticFunction2d();
-    }
-  }
-
-  [UsedBySpring]
-  public class Logistics2dFactory : NoParameterSystemInfoFactoryBase
-  {
-    public Logistics2dFactory(SystemInfoFactory systemFactory)
-      : base(2,SystemType.Descrete,
-        systemFactory,
-        "Logistics2d",
-             () => new Logistic2dSystemInfo())
-    {
     }
   }
 }

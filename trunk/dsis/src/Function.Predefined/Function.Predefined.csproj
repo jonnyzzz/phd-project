@@ -99,8 +99,10 @@
     <Compile Include="src\Linear\Linear1DSystemInfo.cs" />
     <Compile Include="src\Linear\Linear2DFactory.cs" />
     <Compile Include="src\Linear\Linear2dParameters.cs" />
+    <Compile Include="src\Logistics\Logistic2dSystemInfo.cs" />
     <Compile Include="src\Logistics\LogisticFunction.cs" />
     <Compile Include="src\Logistics\LogisticFunction2d.cs" />
+    <Compile Include="src\Logistics\Logistics2dFactory.cs" />
     <Compile Include="src\Logistics\LogisticsFactory.cs" />
     <Compile Include="src\Logistics\LogisticsParameters.cs" />
     <Compile Include="src\Logistics\LogisticSystemInfo.cs" />
@@ -121,6 +123,10 @@
     <Compile Include="src\VanDerPol\VanDerPolSystemInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
       <Name>Scheme.Objects</Name>

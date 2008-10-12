@@ -12,10 +12,15 @@ namespace DSIS.Core.Ioc
 
     public ScanCurrentFolder(IComponentContainer container)
     {
-      var list = new List<Assembly>();
+      var list = new HashSet<Assembly>();
       string home = Path.GetDirectoryName(new Uri(GetType().Assembly.CodeBase).LocalPath);
-      foreach (var file in Directory.GetFiles(home, "*,dll"))
+      foreach (var file in Directory.GetFiles(home, "*.dll"))
       {
+        if (!container.Filter.Accept(file))
+        {
+          LOG.InfoFormat("File {0} is skipped.", file);
+          continue;
+        }
         try
         {
           list.Add(Assembly.LoadFile(file));
