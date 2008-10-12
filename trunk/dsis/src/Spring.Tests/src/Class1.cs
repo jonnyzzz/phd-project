@@ -3,14 +3,24 @@ using NUnit.Framework;
 
 namespace DSIS.Spring.Tests
 {
+  public class NeverCreate
+  {
+    private NeverCreate()
+    {
+    }
+  }
+
   [SpringBean]
   public class App : IApplicationEntryPoint
   {
+    public NeverCreate Setter{ get; set; }
+
     public int Main(string[] args)
     {
       return 1;
     }
   } 
+
   [TestFixture]
   public class SpringTest
   {

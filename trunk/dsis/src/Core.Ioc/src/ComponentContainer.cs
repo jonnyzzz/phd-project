@@ -13,13 +13,25 @@ namespace DSIS.Core.Ioc
   {
     private readonly IKernel myKernel;
     private readonly IAssemblyScaner myScanner;
+    private readonly IComponentInterfaceLookup myLookup;
+    private readonly Hashset<Assembly> mySubscription = new Hashset<Assembly>();
 
-    public ComponentContainer()
+    public ComponentContainer(IAssemblyScaner scanner, IComponentInterfaceLookup lookup)
     {
       myKernel = new DefaultKernel();
-      myKernel.AddComponentInstance<IComponentContainer>(this);
 
-      myScanner = new AssemblyScanerImpl();
+      myScanner = scanner;
+      myLookup = lookup;
+
+      myKernel.AddComponentInstance<IComponentContainer>(this);
+    }
+
+    private ComponentContainer(ITypesFilter filer) : this(new AssemblyScanerImpl(filer), new ComponentInterfaceLookupImpl(filer))
+    {
+    }
+
+    public ComponentContainer() : this(new TypesFilerImpl())
+    {
     }
 
     public void RegisterComponentInstance<TI>(object component)
@@ -43,20 +55,8 @@ namespace DSIS.Core.Ioc
         throw new ComponentContainerException(string.Format("Component {0} should implement service {1}", implementationType, interfaceType));
     }
 
-    public void Subscribe()
-    {
-      AppDomain.CurrentDomain.AssemblyLoad += OnAssemblyLoadEvent;
-      ScanAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-    }
-
-    private void OnAssemblyLoadEvent(object x, AssemblyLoadEventArgs e)
-    {
-      ScanAssemblies(e.LoadedAssembly.En());
-    }
-
     public void Dispose()
     {
-      AppDomain.CurrentDomain.AssemblyLoad -= OnAssemblyLoadEvent;
       if (myKernel.Parent != null)
         myKernel.Parent.RemoveChildKernel(myKernel);
 
@@ -64,11 +64,12 @@ namespace DSIS.Core.Ioc
     }
 
     public IComponentContainer SubContainer<TInterface1, TImplementation1>()
-      where TInterface1 : ComponentInterfaceAttributeBase where TImplementation1 : ComponentImplemetationAttributeBase
+      where TInterface1 : ComponentInterfaceAttributeBase 
+      where TImplementation1 : ComponentImplemetationAttributeBase
     {
-      var container = new ComponentContainer<TInterface1, TImplementation1>();
+      var container = new ComponentContainer<TInterface1, TImplementation1>(myScanner, myLookup);
       myKernel.AddChildKernel(container.myKernel);
-      container.Subscribe();
+      container.ScanAssemblies(mySubscription);
       return container;
     }
 
@@ -79,24 +80,28 @@ namespace DSIS.Core.Ioc
 
     public void ScanAssemblies(IEnumerable<Assembly> assemblies)
     {
-      foreach (var assembly in assemblies)
+      var toScan = assemblies.Filter(x=>!mySubscription.Contains(x)).ToArray();
+      mySubscription.AddRange(toScan);
+
+      foreach (var assembly in toScan)
       {
         foreach (var p in myScanner.LoadTypes<TImplementation>(assembly))
         {
-          var interfaceType = p.Second.InterfaceType;
           var implementationType = p.First;
+          foreach (var foundInterface in myLookup.FindInterfaces<TInterface>(p.First))
+          {
+            CheckValidComponent(foundInterface, implementationType);
 
-          CheckValidComponent(interfaceType, implementationType);
-
-          myKernel.AddComponent(implementationType.AssemblyQualifiedName, interfaceType, implementationType, LifestyleType.Singleton);
+            myKernel.AddComponent(implementationType.AssemblyQualifiedName, foundInterface, implementationType, LifestyleType.Singleton);            
+          }
         }
       }
     }
 
     private static void CheckInterfaceMarked(Type interfaceType)
     {
-      if (!interfaceType.IsDefined(interfaceType, true))
-        throw new ComponentContainerException(string.Format("Interface {0} shold be marked with {1} attribute", typeof (TInterface), typeof (TInterface)));
+      if (!interfaceType.IsDefined(typeof(TInterface), true))
+        throw new ComponentContainerException(string.Format("Interface {0} shold be marked with {1} attribute", interfaceType, typeof (TInterface)));
     }
 
     private void CheckServiceNotAdded(Type interfaceType)

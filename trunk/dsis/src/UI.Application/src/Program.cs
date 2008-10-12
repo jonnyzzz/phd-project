@@ -1,5 +1,5 @@
 using System;
-using DSIS.Spring;
+using DSIS.Core.Ioc.Ex;
 
 namespace DSIS.UI.Application
 {
@@ -11,7 +11,8 @@ namespace DSIS.UI.Application
     [STAThread]
     private static int Main(string[] args)
     {
-      return SpringIoCSetup.AsMain<ApplicationClass>(args);      
+      return ApplicationEntryPoint.DoMain(args);
+//      return SpringIoCSetup.AsMain<ApplicationClass>(args);      
     }
   }
 }

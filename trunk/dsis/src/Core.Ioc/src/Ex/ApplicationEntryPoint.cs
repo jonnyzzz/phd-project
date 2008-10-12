@@ -5,11 +5,12 @@
     public static int DoMain(string[] args)
     {
       using (var rootContainer = new ComponentContainer<ComponentInterfaceAttribute, ComponentImplemetationAttribute>())
-      {
+      {        
+        new ScanCurrentFolder(rootContainer);
+        new AppDomainSubscription(rootContainer);
+
         rootContainer.RegisterComponentInstance<ICommandLine>(new CommandLineImpl(args));
-        rootContainer.Subscribe();
-
-
+        
         var app = rootContainer.GetComponent<IApplication>();
         return app.Main();
       }

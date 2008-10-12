@@ -16,6 +16,7 @@ namespace DSIS.Spring
       string rootResource = "assembly://" + typeof (SpringIoCSetup).Assembly.GetName().Name + "/" +
                             typeof (NamespaceHolder).Namespace + "/resources.spring.xml";
       myContext = new XmlApplicationContext(rootResource);
+      myContext.Refresh();
 
       myServiceProvider = (IServiceProvider) myContext.GetObject(myContext.GetObjectNamesForType(typeof (IServiceProvider))[0]);
     

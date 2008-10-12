@@ -39,6 +39,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\castle\Castle.MicroKernel.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -54,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\AppDomainSubscription.cs" />
     <Compile Include="src\AssemblyScanerImpl.cs" />
     <Compile Include="src\ComponentContainer.cs" />
     <Compile Include="src\ComponentContainerException.cs" />
@@ -61,12 +66,18 @@
     <Compile Include="src\ComponentImplemetationAttributeBase.cs" />
     <Compile Include="src\ComponentInterfaceAttribute.cs" />
     <Compile Include="src\ComponentInterfaceAttributeBase.cs" />
+    <Compile Include="src\ComponentInterfaceLookupImpl.cs" />
     <Compile Include="src\Ex\ApplicationEntryPoint.cs" />
     <Compile Include="src\Ex\CommandLineImpl.cs" />
     <Compile Include="src\Ex\IApplication.cs" />
     <Compile Include="src\IAssemblyScaner.cs" />
     <Compile Include="src\Ex\ICommandLine.cs" />
     <Compile Include="src\IComponentContainer.cs" />
+    <Compile Include="src\IComponentInterfaceLookup.cs" />
+    <Compile Include="src\ITypesFilter.cs" />
+    <Compile Include="src\ScanAllLoadedAssemblies.cs" />
+    <Compile Include="src\ScanCurrentFolder.cs" />
+    <Compile Include="src\TypesFilerImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj">

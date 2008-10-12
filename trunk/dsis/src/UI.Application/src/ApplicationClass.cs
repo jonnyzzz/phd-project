@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using DSIS.Core.Ioc.Ex;
 using DSIS.Spring;
 using DSIS.UI.Application.Doc;
 using DSIS.UI.UI;
@@ -7,7 +8,7 @@ using DSIS.UI.UI;
 namespace DSIS.UI.Application
 {
   [UsedBySpring]
-  public class ApplicationClass : IApplicationEntryPoint, IApplicationClass
+  public class ApplicationClass : IApplicationEntryPoint, IApplicationClass, IApplication
   {
     private readonly IMainForm myMainForm;
     private IApplicationDocument myDocument;
@@ -19,6 +20,11 @@ namespace DSIS.UI.Application
       myMainForm = mainForm;
 
       myMainForm.GetFrom().Controls.Add(new CurrentDocumentControl(this){Dock = DockStyle.Fill});
+    }
+
+    public int Main()
+    {
+      return Main(new[0]);
     }
 
     public int Main(string[] args)
@@ -43,12 +49,14 @@ namespace DSIS.UI.Application
     public IApplicationDocument Document
     {
       get { return myDocument; }
-      set { if (myDocument != value)
-      {
-        var old = myDocument;
-        myDocument = value;
-        FireDocumentChanged(old, myDocument);
-      }}
+      set { 
+        if (myDocument != value)
+        {
+          var old = myDocument;
+          myDocument = value;
+          FireDocumentChanged(old, myDocument);
+        }
+      }
     }
 
     private void FireDocumentChanged(IApplicationDocument oldDocument, IApplicationDocument newDocument)

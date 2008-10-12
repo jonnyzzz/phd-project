@@ -1,16 +1,9 @@
 using System;
-using DSIS.Utils;
 
 namespace DSIS.Core.Ioc
 {
+  [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
   public abstract class ComponentImplemetationAttributeBase : Attribute
   {
-    [Used]
-    public readonly Type InterfaceType;
-
-    protected ComponentImplemetationAttributeBase(Type interfaceType)
-    {
-      InterfaceType = interfaceType;
-    }
   }
 }
