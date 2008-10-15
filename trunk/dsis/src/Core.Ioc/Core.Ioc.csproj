@@ -80,6 +80,16 @@
     <Compile Include="src\IComponentInterfaceLookup.cs" />
     <Compile Include="src\IStartableComponent.cs" />
     <Compile Include="src\ITypesFilter.cs" />
+    <Compile Include="src\JC\BaseTypeLookupImpl.cs" />
+    <Compile Include="src\JC\IBaseTypesLookup.cs" />
+    <Compile Include="src\JC\IImplementationsHolder.cs" />
+    <Compile Include="src\JC\IImplLoopup.cs" />
+    <Compile Include="src\JC\IJContainer.cs" />
+    <Compile Include="src\JC\ImplementationHolderImpl.cs" />
+    <Compile Include="src\JC\ImplLookupImpl.cs" />
+    <Compile Include="src\JC\JContainer.cs" />
+    <Compile Include="src\JC\JContainerException.cs" />
+    <Compile Include="src\JC\RecursionBlocker.cs" />
     <Compile Include="src\ScanAllLoadedAssemblies.cs" />
     <Compile Include="src\ScanCurrentFolder.cs" />
     <Compile Include="src\StartableFacility.cs" />

@@ -14,6 +14,8 @@ namespace DSIS.Core.Ioc.Ex
         new AppDomainSubscription(rootContainer);
 
         rootContainer.RegisterComponent(new CommandLineImpl(args));
+
+        rootContainer.Start();
         
         var app = rootContainer.GetComponent<IApplication>();
         return app.Main();

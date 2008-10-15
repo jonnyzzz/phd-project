@@ -7,7 +7,7 @@ using DSIS.Utils;
 
 namespace DSIS.UI.Application.Actions
 {
-  [ComponentInterface,ComponentImplementation]
+  [ComponentInterface,ComponentImplementation(Startable = true)]
   public class XmlActionPreesentationManager
   {
     private readonly IActionPresentationManager myManager;

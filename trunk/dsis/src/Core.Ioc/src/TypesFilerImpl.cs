@@ -8,7 +8,7 @@ namespace DSIS.Core.Ioc
   {
     public bool Accept(Type type)
     {      
-      return Accept(type.Assembly) && type.AssemblyQualifiedName.Contains("DSIS");
+      return Accept(type.Assembly) && type.AssemblyQualifiedName.Contains("DSIS") || typeof(IDisposable).IsAssignableFrom(type);
     }
 
     public bool Accept(Assembly a)

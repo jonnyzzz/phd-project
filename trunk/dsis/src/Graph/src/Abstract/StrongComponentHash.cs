@@ -51,12 +51,12 @@ namespace DSIS.Graph.Abstract
         {
           using (cookie)
           {
-            Hashset<StrongComponentInfo2> set = new Hashset<StrongComponentInfo2>();
-            Hashset<StrongComponentInfo2> list = myInfos[g];
+            var set = new HashSet<StrongComponentInfo2>();
+            HashSet<StrongComponentInfo2> list = myInfos[g];
             bool found = false;
             foreach (StrongComponentInfo2 info2 in list)
             {
-              StrongComponentInfo2 ex = (StrongComponentInfo2) info2.Reference;
+              var ex = (StrongComponentInfo2) info2.Reference;
               found |= onUpdate(g, ex);
               if (ex.Generation == g)
                 set.Add(ex);
@@ -66,7 +66,7 @@ namespace DSIS.Graph.Abstract
             if (set.Count > 0)
             {
               list.Clear();
-              list.AddRange(set);
+              list.UnionWith(set);
             }
             else
             {
@@ -87,13 +87,13 @@ namespace DSIS.Graph.Abstract
       return false;
     }
 
-    private static IEnumerable<StrongComponentInfo2> Intersect(Hashset<StrongComponentInfo2> i1,
-                                                               Hashset<StrongComponentInfo2> i2)
+    private static IEnumerable<StrongComponentInfo2> Intersect(HashSet<StrongComponentInfo2> i1,
+                                                               HashSet<StrongComponentInfo2> i2)
     {
-      List<StrongComponentInfo2> result = new List<StrongComponentInfo2>();
+      var result = new List<StrongComponentInfo2>();
       if (i1.Count > i2.Count)
       {
-        Hashset<StrongComponentInfo2> t = i1;
+        HashSet<StrongComponentInfo2> t = i1;
         i1 = i2;
         i2 = t;
       }
@@ -106,7 +106,7 @@ namespace DSIS.Graph.Abstract
       return result;
     }
 
-    public static Hashset<StrongComponentInfo2> Intersect(StrongComponentHash h1, StrongComponentHash h2)
+    public static HashSet<StrongComponentInfo2> Intersect(StrongComponentHash h1, StrongComponentHash h2)
     {
       h1.UpdateComponents(h1.myGenerations.Elements, delegate { return false; }, delegate { return false; });
       h2.UpdateComponents(h2.myGenerations.Elements, delegate { return false; }, delegate { return false; });
@@ -116,7 +116,7 @@ namespace DSIS.Graph.Abstract
       bool hasElements = s1.MoveNext();
       hasElements &= s2.MoveNext();
 
-      Hashset<StrongComponentInfo2> set = new Hashset<StrongComponentInfo2>();
+      var set = new HashSet<StrongComponentInfo2>();
 
       if (!hasElements)
         return set;
@@ -124,10 +124,10 @@ namespace DSIS.Graph.Abstract
       while (true)
       {
         if (s1.Current < s2.Current && !s1.MoveNext()) break;
-        else if (s1.Current > s2.Current && !s2.MoveNext()) break;
+        if (s1.Current > s2.Current && !s2.MoveNext()) break;
 
         IEnumerable<StrongComponentInfo2> @int = Intersect(h1.myInfos[s1.Current], h2.myInfos[s2.Current]);
-        set.AddRange(@int);
+        set.UnionWith(@int);
 
         if (!(s1.MoveNext() && s2.MoveNext()))
           break;
@@ -144,8 +144,8 @@ namespace DSIS.Graph.Abstract
       IEnumerable<int> gens = myGenerations.Find(info.Generation);
 
       return UpdateComponents(gens,
-                              delegate(int generation, StrongComponentInfo2 comp) { return comp == info; },
-                              delegate(int generation, Hashset<StrongComponentInfo2> comp)
+                              (generation, comp) => comp == info,
+                              delegate(int generation, HashSet<StrongComponentInfo2> comp)
                                 {
                                   if (generation != info.Generation)
                                     return false;
@@ -157,7 +157,7 @@ namespace DSIS.Graph.Abstract
     {
       get
       {
-        foreach (KeyValuePair<int, Hashset<StrongComponentInfo2>> info in myInfos)
+        foreach (KeyValuePair<int, HashSet<StrongComponentInfo2>> info in myInfos)
         {
           foreach (StrongComponentInfo2 info2 in info.Value)
           {
@@ -169,13 +169,13 @@ namespace DSIS.Graph.Abstract
 
     private delegate bool ProcessComponent(int generation, StrongComponentInfo2 comp);
 
-    private delegate bool ProcessComponents(int generation, Hashset<StrongComponentInfo2> comp);
+    private delegate bool ProcessComponents(int generation, HashSet<StrongComponentInfo2> comp);
 
     private class UpdateCookie : IDisposable
     {
-      private StrongComponentHash myHash;
-      private long myChangeId;
-      private int myGeneration;
+      private readonly StrongComponentHash myHash;
+      private readonly long myChangeId;
+      private readonly int myGeneration;
 
       public UpdateCookie(StrongComponentHash hash, int generation, long changeId)
       {
@@ -184,14 +184,10 @@ namespace DSIS.Graph.Abstract
         myGeneration = generation;
       }
 
-      #region IDisposable Members
-
       public void Dispose()
       {
         myHash.myProcessedEvents[myGeneration] = myChangeId;
       }
-
-      #endregion
     }
   }
 }

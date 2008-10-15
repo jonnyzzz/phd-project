@@ -1,5 +1,7 @@
+using System;
 using DSIS.Core.Ioc;
 using DSIS.Spring.Attributes;
+using IServiceProvider=DSIS.Spring.Service.IServiceProvider;
 
 namespace DSIS.UI.Application.Actions
 {
@@ -13,11 +15,13 @@ namespace DSIS.UI.Application.Actions
     {
       myContainer = container;
       myMan = man;
+      container.GetComponent<IServiceProvider>();
     }
 
     public void Start()
     {
       var c = myContainer.SubContainer<ComponentInterfaceAttribute, ComponentCollectionAttribute, ActionHandlerAttribute>();
+      c.Start();
       var s = c.GetComponent<IComponentContainerServices>();
 
       foreach (var handler in s.GetServices<IActionHandler>())

@@ -64,6 +64,8 @@
     <Compile Include="src\CastleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\ComponentContainerTest.cs" />
+    <Compile Include="src\JContainerTests.cs" />
+    <Compile Include="src\TypesCacheTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">

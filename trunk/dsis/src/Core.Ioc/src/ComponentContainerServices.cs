@@ -27,7 +27,7 @@ namespace DSIS.Core.Ioc
     {
       foreach (var type in myLookup.FindInterfaces<TComponentCollection>(model.Implementation))
       {
-        Hashset<Action<object>> handler;
+        HashSet<Action<object>> handler;
         if (myActions.TryGetValue(type, out handler))
         {
           foreach (var action in handler)

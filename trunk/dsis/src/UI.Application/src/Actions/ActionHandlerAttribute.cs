@@ -6,7 +6,6 @@ namespace DSIS.UI.Application.Actions
   {
     public ActionHandlerAttribute()
     {
-      Startable = true;
     }
   }
 }

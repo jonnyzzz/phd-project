@@ -45,6 +45,7 @@ namespace DSIS.Core.Ioc.Tests
     {
       myContainer =  new ComponentContainer<TI, TC, TO>();
       myContainer.ScanAssemblies(new[]{GetType().Assembly});
+      myContainer.Start();
     }
 
     public class TI : ComponentInterfaceAttribute {};
@@ -152,6 +153,7 @@ namespace DSIS.Core.Ioc.Tests
     {
       DoTest<TI,TO1>();
       var c = myContainer.SubContainer<TI, TC1, TO6>();
+      c.Start();
       AssertContainsObject<DependsOnT1I>(c);
     }
 

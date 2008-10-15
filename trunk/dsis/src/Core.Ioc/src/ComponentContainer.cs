@@ -25,7 +25,7 @@ namespace DSIS.Core.Ioc
 
       myScanner = scanner;
       myLookup = lookup;
-      myKernel.AddFacility("Startable", new StartableFacility<TImplementation>());
+//      myKernel.AddFacility("Startable", new StartableFacility<TImplementation>());
 
       //This component does not depends on attributes!
       myKernel.AddComponentInstance("##container", typeof(IComponentContainer), this);
@@ -40,6 +40,15 @@ namespace DSIS.Core.Ioc
 
     public ComponentContainer() : this(new TypesFilerImpl())
     {
+    }
+
+    public void Start()
+    {
+      var init = GetComponent<IComponentContainerServices>().GetServices<IStartableComponent>();
+      foreach (var cmp in init)
+      {
+        cmp.Start();
+      }
     }
 
     private void CheckValidComponent(Type interfaceType, Type implementationType)
@@ -94,6 +103,11 @@ namespace DSIS.Core.Ioc
     public T GetComponent<T>()
     {
       return myKernel.GetService<T>();
+    }
+
+    public IEnumerable<T> GetComponents<T>()
+    {
+      return GetComponent<IComponentContainerServices>().GetServices<T>();
     }
 
     public void ScanAssemblies(IEnumerable<Assembly> assemblies)

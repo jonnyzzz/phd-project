@@ -6,7 +6,7 @@ namespace DSIS.Graph.Abstract
 {
   public class StrongComponentInfoManager2 : StrongComponentInfoManagerBase<StrongComponentInfo2>
   {
-    private long myChangeId = 0;
+    private long myChangeId;
     private readonly Dictionary<int, long> myEvents = new Dictionary<int, long>();
 
     protected override void AddEdgeInternal(StrongComponentInfo2 from, StrongComponentInfo2 to)
@@ -17,7 +17,7 @@ namespace DSIS.Graph.Abstract
 
     protected override void MakeOneComponent(StrongComponentInfo2 info, IEnumerable<StrongComponentInfo2> set)
     {
-      Hashset<int> changes = new Hashset<int>();
+      var changes = new HashSet<int>();
       foreach (StrongComponentInfo2 info2 in set)
       {
         myComponents.Remove(info2);
@@ -58,7 +58,7 @@ namespace DSIS.Graph.Abstract
     protected override Pair<IEnumerable<StrongComponentInfo2>, Predicate<StrongComponentInfo2>> IntersectInOutAndThis(
       StrongComponentInfo2 fromIns, StrongComponentInfo2 toOuts)
     {
-      Hashset<StrongComponentInfo2> hashset = StrongComponentHash.Intersect(fromIns.InsInternal, toOuts.OutsInternal);
+      HashSet<StrongComponentInfo2> hashset = StrongComponentHash.Intersect(fromIns.InsInternal, toOuts.OutsInternal);
       hashset.Add(fromIns);
       hashset.Add(toOuts);
       return new Pair<IEnumerable<StrongComponentInfo2>, Predicate<StrongComponentInfo2>>(hashset, hashset.Contains);
