@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.UI.Controls
 {
@@ -15,7 +16,7 @@ namespace DSIS.UI.Controls
 
   public class LayoutManager
   {
-    private static Panel AddPanel(Queue<IControlWithLayout> controls, Control root)
+    private static Panel AddPanel(Queue<IControlWithLayout> controls, Panel root)
     {
       var control = controls.Dequeue();
       var value = control.Control;
@@ -30,34 +31,37 @@ namespace DSIS.UI.Controls
                        Padding = new Padding(5),
                        Text = value.GetType().ToString()
                      };
-      var content = new Panel
-                      {
-                        Padding = new Padding(5),
-                        Dock = DockStyle.Fill, 
-                        BackColor = Color.Yellow, 
-                        Text = "Container: " + value.GetType()
-                      };
 
       layout.Size = value.Size + layout.Padding.Size + layout.Padding.Size;
       layout.MinimumSize = value.MinimumSize + layout.Padding.Size + layout.Padding.Size;
 
       value.Dock = DockStyle.Fill;
       layout.Controls.Add(value);
-
-      root.Controls.Add(content);
+      
       root.Controls.Add(layout);
+      root.VerticalScroll.Visible = true;
 
       if (controls.Count == 0)
       {
+        var content = new Panel
+        {
+          Padding = new Padding(5),
+          Dock = DockStyle.Fill,
+          BackColor = Color.Yellow,
+          Text = "Container: " + value.GetType()
+        };
+        root.Controls.Add(content);
+        root.Controls.SetChildIndex(content, 0);
+
         root.Size = layout.Size + borderSize;
         root.MinimumSize = layout.MinimumSize + borderSize;
         return content;
       }
 
-      var result = AddPanel(controls, content);
+      var result = AddPanel(controls, root);
       var f = ComputeSize(expectedLayout);
-      root.Size = f(layout.Size, content.Size) + borderSize;
-      root.MinimumSize = f(layout.MinimumSize, content.MinimumSize) + borderSize;
+      root.Size = root.Controls.OfType<Control>().FoldLeft(borderSize, (x,s)=>f(x.Size, s));
+      root.MinimumSize = root.Controls.OfType<Control>().FoldLeft(borderSize, (x, s) => f(x.MinimumSize, s));
       return result;
     }
 
@@ -86,7 +90,7 @@ namespace DSIS.UI.Controls
     public Control LayoutControls(IEnumerable<IControlWithLayout> _controls)
     {
       var controls = new List<IControlWithLayout>(_controls);
-      controls.Sort((a,b)=>a.Ancor.CompareTo(b.Ancor));
+      controls.Sort((a,b)=>-a.Ancor.CompareTo(b.Ancor));
 
       var result = new Panel {AutoSize = true};
       var deeper = AddPanel(new Queue<IControlWithLayout>(controls.Filter(x=>x.Float != Layout.CENTER)), result);
