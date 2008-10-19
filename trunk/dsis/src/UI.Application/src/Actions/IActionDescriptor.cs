@@ -1,5 +1,3 @@
-using DSIS.Core.Ioc;
-
 namespace DSIS.UI.Application.Actions
 {
   public interface IActionDescriptor

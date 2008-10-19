@@ -87,9 +87,18 @@
     <Compile Include="src\Actions\IActionManager.cs" />
     <Compile Include="src\Actions\IActionPresentationManager.cs" />
     <Compile Include="src\Actions\IMainMenuFactory.cs" />
+    <Compile Include="src\Actions\IMenuItem.cs" />
+    <Compile Include="src\Actions\IUpdateble.cs" />
     <Compile Include="src\Actions\SeparatorActionParser.cs" />
     <Compile Include="src\Actions\SeparatorDescriptor.cs" />
-    <Compile Include="src\Actions\ToolStripMenuItemPresentationManager.cs" />
+    <Compile Include="src\Actions\ToolStripMenuItemAction.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="src\Actions\ToolStripMenuItemPresentationManager.cs">
+    </Compile>
+    <Compile Include="src\Actions\ToolStripMenuItemSerparator.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />
     <Compile Include="src\DocumentChangedEventArgs.cs" />

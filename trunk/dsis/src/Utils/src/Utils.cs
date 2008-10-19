@@ -7,6 +7,11 @@ namespace DSIS.Utils
 {
   public static class Util
   {
+    public static void With<X>(this X x, Action<X> a)
+    {
+      a(x);
+    }
+
     public static Q Safe<T,Q>(T t, Q def, Converter<T,Q> conv)
       where T : class
     {

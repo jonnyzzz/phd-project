@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Scheme.Ctx;
 using DSIS.Utils;
 
 namespace DSIS.UI.Application.Actions
@@ -13,14 +14,14 @@ namespace DSIS.UI.Application.Actions
       myPresentation = presentation;
     }
 
-    protected abstract T CreateItem(IActionDescriptor descriptor, IActionHandler handler);
+    protected abstract IMenuItem<T> CreateItem(IActionDescriptor descriptor, IActionHandler handler, Lazy<Context> context);
 
-    protected abstract void SetChildren(T node, IEnumerable<T> children);
+    protected abstract void SetChildren(IMenuItem<T> node, IEnumerable<IMenuItem<T>> children);
     
-    public T BuildMenu(IActionDescriptor action)
+    public IMenuItem<T> BuildMenu(IActionDescriptor action, Lazy<Context> context)
     {
-      var item = CreateItem(action, myPresentation.Handler(action));
-      var notNull = new List<T>(myPresentation.Children(action).MapNotNull(x => BuildMenu(x)));
+      var item = CreateItem(action, myPresentation.Handler(action), context);
+      var notNull = new List<IMenuItem<T>>(myPresentation.Children(action).MapNotNull(x => BuildMenu(x, context)));
       if (notNull.Count > 0)
       {
         SetChildren( item, notNull);

@@ -107,7 +107,6 @@
       newToolStripMenuItem.Name = "newToolStripMenuItem";
       newToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
       newToolStripMenuItem.Text = "New";
-      newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
       // 
       // MainForm
       // 
