@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.UI.Controls;
 using DSIS.UI.Controls.Web;
@@ -9,30 +8,6 @@ using DSIS.UI.UI;
 
 namespace DSIS.UI.Application.Doc
 {
-  [ComponentImplementation]
-  public class CenterControl : UserControl, IDocumentControl
-  {
-    public CenterControl()
-    {
-      BackColor = Color.Red;
-    }
-
-    public Layout Float
-    {
-      get { return DSIS.UI.Controls.Layout.CENTER; }
-    }
-
-    public string Ancor
-    {
-      get { return "!"; }
-    }
-
-    public Control Control
-    {
-      get { return this; }
-    }
-  }
-
   [DocumentComponent]
   public class CurrentDocumentControl : HtmlControl, IDocumentControl
   {
@@ -51,6 +26,7 @@ namespace DSIS.UI.Application.Doc
              </dl>
            </body>
          </html>");
+      Size = MinimumSize = new Size(200,250);
     }
 
     private static string PresentSystemSpace(ISystemSpace space)
@@ -71,14 +47,14 @@ namespace DSIS.UI.Application.Doc
       return node.InnerXml;
     }
 
-    public Layout Float
+    public Layout[] Float
     {
-      get { return DSIS.UI.Controls.Layout.WEST; }
+      get { return new[]{DSIS.UI.Controls.Layout.LEFT,DSIS.UI.Controls.Layout.TOP };} 
     }
 
     public string Ancor
     {
-      get { return "Z"; }
+      get { return "001"; }
     }
 
     public Control Control

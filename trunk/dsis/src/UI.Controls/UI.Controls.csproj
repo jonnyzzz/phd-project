@@ -51,6 +51,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -66,7 +67,9 @@
     <Compile Include="src\ControlWithLayout.cs" />
     <Compile Include="src\IControlWithLayout.cs" />
     <Compile Include="src\Layout.cs" />
+    <Compile Include="src\LayoutException.cs" />
     <Compile Include="src\LayoutManager.cs" />
+    <Compile Include="src\SmartLayoutManager.cs" />
     <Compile Include="src\Web\HtmlControl.cs">
       <SubType>Component</SubType>
     </Compile>

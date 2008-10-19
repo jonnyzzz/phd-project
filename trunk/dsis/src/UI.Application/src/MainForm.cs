@@ -26,10 +26,14 @@ namespace DSIS.UI.Application
     {
       set
       {
+        SuspendLayout();
+        
         myToolStrip.ContentPanel.Controls.Clear();
         var control = value;
         control.Dock = DockStyle.Fill;
         myToolStrip.ContentPanel.Controls.Add(control);
+
+        ResumeLayout(true);
       }
     }
   }

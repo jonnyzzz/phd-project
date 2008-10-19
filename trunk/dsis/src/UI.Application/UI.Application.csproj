@@ -105,8 +105,14 @@
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />
     <Compile Include="src\DocumentChangedEventArgs.cs" />
+    <Compile Include="src\Doc\CenterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="src\Doc\ControlWithTitle.cs" />
     <Compile Include="src\Doc\CurrentDocumentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="src\Doc\CurrentStepControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\Doc\DocUIManager.cs" />
