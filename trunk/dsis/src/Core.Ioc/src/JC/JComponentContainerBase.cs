@@ -11,6 +11,7 @@ namespace DSIS.Core.Ioc.JC
     private readonly JContainer myContainer;
     private readonly ITypesFilter myFilter;
     private readonly HashSet<IStartableComponent> myInitializedStartable = new HashSet<IStartableComponent>();
+    private bool myIsDisposed;
 
     protected JComponentContainerBase(JContainer container, ITypesFilter filter)
     {
@@ -41,8 +42,12 @@ namespace DSIS.Core.Ioc.JC
 
     public void Dispose()
     {
-      var cmps = myContainer.GetComponents<IDisposable>();
-      foreach (var cmp in cmps)
+      if (myIsDisposed)
+        return;
+      myIsDisposed = true;
+
+      var cmps = myContainer.GetCreatedComponentFromThatContainer<IDisposable>();
+      foreach (IDisposable cmp in cmps)
       {
         if (cmp != this)
           cmp.Dispose();

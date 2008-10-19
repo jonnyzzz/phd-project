@@ -105,6 +105,11 @@
     <Compile Include="src\Doc\CurrentDocumentControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="src\Doc\DocUIManager.cs" />
+    <Compile Include="src\Doc\DocumentComponent.cs" />
+    <Compile Include="src\Doc\DocumentControl.cs" />
+    <Compile Include="src\Doc\IDocumentMainControl.cs" />
+    <Compile Include="src\IControlWithTitle.cs" />
     <Compile Include="src\IMainForm.cs" />
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>

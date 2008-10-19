@@ -28,18 +28,17 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.ToolStripContainer myToolStrip;
       System.Windows.Forms.ToolStripStatusLabel myStatusBarLabel;
       System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+      this.myToolStrip = new System.Windows.Forms.ToolStripContainer();
       this.myStatusBar = new System.Windows.Forms.StatusStrip();
       this.myMainMenu = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      myToolStrip = new System.Windows.Forms.ToolStripContainer();
       myStatusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
       newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      myToolStrip.BottomToolStripPanel.SuspendLayout();
-      myToolStrip.TopToolStripPanel.SuspendLayout();
-      myToolStrip.SuspendLayout();
+      this.myToolStrip.BottomToolStripPanel.SuspendLayout();
+      this.myToolStrip.TopToolStripPanel.SuspendLayout();
+      this.myToolStrip.SuspendLayout();
       this.myStatusBar.SuspendLayout();
       this.myMainMenu.SuspendLayout();
       this.SuspendLayout();
@@ -49,21 +48,21 @@
       // 
       // myToolStrip.BottomToolStripPanel
       // 
-      myToolStrip.BottomToolStripPanel.Controls.Add(this.myStatusBar);
+      this.myToolStrip.BottomToolStripPanel.Controls.Add(this.myStatusBar);
       // 
       // myToolStrip.ContentPanel
       // 
-      myToolStrip.ContentPanel.Size = new System.Drawing.Size(834, 502);
-      myToolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
-      myToolStrip.Location = new System.Drawing.Point(0, 0);
-      myToolStrip.Name = "myToolStrip";
-      myToolStrip.Size = new System.Drawing.Size(834, 548);
-      myToolStrip.TabIndex = 1;
-      myToolStrip.Text = "toolStripContainer1";
+      this.myToolStrip.ContentPanel.Size = new System.Drawing.Size(834, 502);
+      this.myToolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.myToolStrip.Location = new System.Drawing.Point(0, 0);
+      this.myToolStrip.Name = "myToolStrip";
+      this.myToolStrip.Size = new System.Drawing.Size(834, 548);
+      this.myToolStrip.TabIndex = 1;
+      this.myToolStrip.Text = "toolStripContainer1";
       // 
       // myToolStrip.TopToolStripPanel
       // 
-      myToolStrip.TopToolStripPanel.Controls.Add(this.myMainMenu);
+      this.myToolStrip.TopToolStripPanel.Controls.Add(this.myMainMenu);
       // 
       // myStatusBar
       // 
@@ -113,17 +112,17 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(834, 548);
-      this.Controls.Add(myToolStrip);
+      this.Controls.Add(this.myToolStrip);
       this.MainMenuStrip = this.myMainMenu;
       this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "DSIS";
-      myToolStrip.BottomToolStripPanel.ResumeLayout(false);
-      myToolStrip.BottomToolStripPanel.PerformLayout();
-      myToolStrip.TopToolStripPanel.ResumeLayout(false);
-      myToolStrip.TopToolStripPanel.PerformLayout();
-      myToolStrip.ResumeLayout(false);
-      myToolStrip.PerformLayout();
+      this.myToolStrip.BottomToolStripPanel.ResumeLayout(false);
+      this.myToolStrip.BottomToolStripPanel.PerformLayout();
+      this.myToolStrip.TopToolStripPanel.ResumeLayout(false);
+      this.myToolStrip.TopToolStripPanel.PerformLayout();
+      this.myToolStrip.ResumeLayout(false);
+      this.myToolStrip.PerformLayout();
       this.myStatusBar.ResumeLayout(false);
       this.myStatusBar.PerformLayout();
       this.myMainMenu.ResumeLayout(false);
@@ -137,5 +136,6 @@
     private System.Windows.Forms.MenuStrip myMainMenu;
     private System.Windows.Forms.StatusStrip myStatusBar;
     private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+    private System.Windows.Forms.ToolStripContainer myToolStrip;
   }
 }

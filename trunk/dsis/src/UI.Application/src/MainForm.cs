@@ -1,7 +1,6 @@
 using System.Windows.Forms;
 using DSIS.Scheme.Ctx;
 using DSIS.UI.Application.Actions;
-using System.Linq;
 
 namespace DSIS.UI.Application
 {
@@ -21,6 +20,17 @@ namespace DSIS.UI.Application
       myMenuFactoy = menuFactoy;
 
       myMenuFactoy.SetMenu(myActionManager.RootAction, myMainMenu, ()=>new Context());
+    }
+
+    public Control MainContent
+    {
+      set
+      {
+        myToolStrip.ContentPanel.Controls.Clear();
+        var control = value;
+        control.Dock = DockStyle.Fill;
+        myToolStrip.ContentPanel.Controls.Add(control);
+      }
     }
   }
 }

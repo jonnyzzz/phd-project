@@ -7,5 +7,6 @@ namespace DSIS.UI.Application
   public interface IMainForm
   {
     Form GetFrom();
+    void SetContent(IControlWithTitle control);
   }
 }

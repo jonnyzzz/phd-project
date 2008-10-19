@@ -3,13 +3,12 @@ using System.Windows.Forms;
 using DSIS.Core.Ioc;
 using DSIS.Core.Ioc.Ex;
 using DSIS.Spring;
-using DSIS.UI.Application.Doc;
 using DSIS.UI.UI;
 
 namespace DSIS.UI.Application
 {
   [UsedBySpring, ComponentImplementation]
-  public class ApplicationClass : IApplicationEntryPoint, IApplicationClass, IApplication
+  public class ApplicationClass : IApplicationClass, IApplication
   {
     private readonly IMainForm myMainForm;
     private IApplicationDocument myDocument;
@@ -23,16 +22,8 @@ namespace DSIS.UI.Application
 
     public int Main()
     {
-      return Main(new string[0]);
-    }
-
-    public int Main(string[] args)
-    {
       System.Windows.Forms.Application.EnableVisualStyles();
       System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-
-      myMainForm.GetFrom().Controls.Add(new CurrentDocumentControl(this) { Dock = DockStyle.Fill });
-
       System.Windows.Forms.Application.Run(myMainForm.GetFrom());
 
       return 0;

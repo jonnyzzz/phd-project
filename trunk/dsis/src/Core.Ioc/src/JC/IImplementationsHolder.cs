@@ -8,5 +8,7 @@ namespace DSIS.Core.Ioc.JC
     void AddInstance(object o);
 
     IList<object> GetInstancesFor(Type y);
+
+    IList<object> GetCreatedInstancesFor(Type y);
   }
 }

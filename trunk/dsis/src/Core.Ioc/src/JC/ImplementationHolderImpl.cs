@@ -29,6 +29,20 @@ namespace DSIS.Core.Ioc.JC
       return myLookup.GetImplementations(y).Map(x=>CreateComponentImplementation(x)).ToList();
     }
 
+    public IList<object> GetCreatedInstancesFor(Type y)
+    {
+      var result = new List<object>();
+      foreach (var type in myLookup.GetImplementations(y))
+      {
+        object o;
+        if (myImplementations.TryGetValue(type, out o))
+        {
+          result.Add(o);
+        }
+      }
+      return result;
+    }
+
     private object CreateComponentImplementation(Type impl)
     {
       object oImpl;

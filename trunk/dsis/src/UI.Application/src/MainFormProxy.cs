@@ -12,7 +12,7 @@ namespace DSIS.UI.Application
     private readonly IMainMenuFactory myMenuFactoy;
     private readonly XmlActionPreesentationManager myPresentation;
 
-    private Form myForm = null;
+    private MainForm myForm = null;
 
     public MainFormProxy(IActionPresentationManager actionManager, IMainMenuFactory menuFactoy, XmlActionPreesentationManager presentation)
     {
@@ -29,6 +29,12 @@ namespace DSIS.UI.Application
         myForm = new MainForm(myActionManager, myMenuFactoy);
       }
       return myForm;
+    }
+
+    public void SetContent(IControlWithTitle control)
+    {
+      myForm.MainContent = control.Control;
+      myForm.Text = control.Title;
     }
   }
 }

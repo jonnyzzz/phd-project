@@ -1,26 +1,25 @@
-﻿using DSIS.UI.Controls.Web;
+﻿using System.Windows.Forms;
+using DSIS.UI.Controls.Web;
 using DSIS.UI.UI;
 
 namespace DSIS.UI.Application.Doc
 {
-  public class CurrentDocumentControl : HtmlControl
+  [DocumentComponent]
+  public class CurrentDocumentControl : HtmlControl, IControlWithTitle
   {
-    public CurrentDocumentControl(IApplicationClass app)
+    public CurrentDocumentControl(IApplicationDocument doc)
     {
-      app.DocumentChanged += DocumentChanged;
-      DocumentChanged(this, new DocumentChangedEventArgs(null, app.Document));
+      SetHTML("<html><body><h1>" + doc.Title + "</h1></body></html>");
     }
 
-    private void DocumentChanged(object sender, DocumentChangedEventArgs e)
+    public Control Control
     {
-      var doc = e.NewDocument;
-      if (doc != null)
-      {
-        SetHTML("<html><body><h1>" + doc.Title + "</h1></body></html>");
-      } else
-      {
-        SetHTML("<html><body><h1>No document selected</h1></body></html>");
-      }
+      get { return this; }
+    }
+
+    public string Title
+    {
+      get { return "Document opened"; }
     }
   }
 }
