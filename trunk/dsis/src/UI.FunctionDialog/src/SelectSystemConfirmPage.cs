@@ -14,7 +14,6 @@ namespace DSIS.UI.FunctionDialog
     {
       myWizard = wizard;
       ControlInternal = new HtmlControl();
-      ControlInternal.SetHTML("<html><head><title>aaa</title><body><h1>TestControl</h1></body></html>");
     }
 
     public override void ControlShown()

@@ -44,8 +44,9 @@ namespace DSIS.Core.Ioc
       var list = new HashSet<Type>();
       var queue = new Queue<Type>(a.GetTypes());
 
-      for (Type type = queue.Dequeue(); queue.Count > 0; type = queue.Dequeue())
+      while(queue.Count > 0)
       {
+        Type type = queue.Dequeue();
         if (!list.Contains(type) && myFiler.Accept(type))
         {
           list.Add(type);

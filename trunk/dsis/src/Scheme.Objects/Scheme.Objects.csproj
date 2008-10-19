@@ -84,12 +84,18 @@
     </Compile>
     <Compile Include="src\NamespaceHolder.cs" />
     <Compile Include="src\Systemx\DoubleArrayParser.cs" />
+    <Compile Include="src\Systemx\IContiniousFunctionSolverFactory.cs" />
+    <Compile Include="src\Systemx\IContiniousSolverParameters.cs" />
+    <Compile Include="src\Systemx\IOptionsHolder.cs" />
     <Compile Include="src\Systemx\ISystemInfoFactory.cs" />
+    <Compile Include="src\Systemx\ISystemInfoParameters.cs" />
     <Compile Include="src\Systemx\LongArrayParser.cs" />
     <Compile Include="src\Systemx\SchemaBasedParser.cs" />
+    <Compile Include="src\Systemx\SystemInfoComponentAttribute.cs" />
     <Compile Include="src\Systemx\SystemInfoFactory.cs" />
     <Compile Include="src\Systemx\SystemInfoParser.cs" />
     <Compile Include="src\Systemx\SystemSpaceParser.cs" />
+    <Compile Include="src\Systemx\SystemType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">

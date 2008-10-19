@@ -4,9 +4,9 @@ using DSIS.Scheme.Objects.Systemx;
 namespace DSIS.Function.Predefined.Ikeda
 {
   [SystemInfoComponent]
-  public class IkeadFactory : DoubleParametersSystemInfoFactoryBase<IkedaParameters>
+  public class IkedaFactory : DoubleParametersSystemInfoFactoryBase<IkedaParameters>
   {
-    public IkeadFactory()
+    public IkedaFactory()
       : base(2,SystemType.Descrete, "Ikeda")
     {
     }

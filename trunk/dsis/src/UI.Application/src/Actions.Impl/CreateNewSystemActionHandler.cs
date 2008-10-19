@@ -1,6 +1,5 @@
 using System.Windows.Forms;
 using DSIS.Scheme.Ctx;
-using DSIS.Spring.Attributes;
 using DSIS.Spring.Service;
 using DSIS.UI.FunctionDialog;
 using DSIS.UI.UI;
@@ -8,15 +7,17 @@ using DSIS.UI.Wizard;
 
 namespace DSIS.UI.Application.Actions.Impl
 {
-  [SpringBean, ActionHandler]
+  [ActionHandler]
   public class CreateNewSystemActionHandler : ActionHandlerBase
   {
     private readonly IApplicationClass myApp;
     private readonly IServiceProvider myProvider;
+    private readonly IApplicationDocumentFactory myFactory;
 
-    public CreateNewSystemActionHandler(IApplicationClass app, IServiceProvider provider) : base("File.Create", "System.Create")
+    public CreateNewSystemActionHandler(IApplicationClass app, IServiceProvider provider, IApplicationDocumentFactory factory) : base("File.Create", "System.Create")
     {
       myApp = app;
+      myFactory = factory;
       myProvider = provider;
     }
 
@@ -28,7 +29,7 @@ namespace DSIS.UI.Application.Actions.Impl
 
       if (result == DialogResult.OK)
       {
-        myApp.Document = new ApplicationDocument(model.Title, model.CreateInfo(), model.CreateSpace());
+        myApp.Document = myFactory.CreateNewDocument(model.Title, model.CreateInfo(), model.CreateSpace());
       }
 
       return true;

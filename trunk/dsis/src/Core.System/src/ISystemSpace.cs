@@ -19,6 +19,6 @@ namespace DSIS.Core.System
     /// <returns></returns>
     bool Contains(double[] point);
 
-    bool ContainsRect(double[] left, double[] right);
+    bool ContainsRect(double[] left, double[] right);    
   }
 }

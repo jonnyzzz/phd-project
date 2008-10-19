@@ -3,6 +3,10 @@
   <Action Id="File" Title="File">
     <Action Id="File.Create" Title="New System..."/>
     <Separator/>
+    <Action Id="File.PredefinedSystems" Title="Predefined Systems">
+      <!-- Actions is defiled here dynamically-->
+    </Action>
+    <Separator/>
     <Action Id="File.Open" Title="Open..."/>
     <Action Id="File.Save" Title="Save..."/>
     <Separator/>

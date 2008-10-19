@@ -68,9 +68,12 @@
   <ItemGroup>
     <Compile Include="src\Actions.Impl\AboutBoxActionHandler.cs" />
     <Compile Include="src\Actions.Impl\ActionHandlerBase.cs" />
+    <Compile Include="src\Actions.Impl\AddDefaultSystemActions.cs" />
+    <Compile Include="src\Actions.Impl\ApplicationDocumentFactory.cs" />
     <Compile Include="src\Actions.Impl\CreateNewSystemActionHandler.cs" />
     <Compile Include="src\Actions.Impl\DisabledActionHandler.cs" />
     <Compile Include="src\Actions.Impl\ExitProgramActionHandler.cs" />
+    <Compile Include="src\Actions.Impl\IApplicationDocumentFactory.cs" />
     <Compile Include="src\Actions\ActionDescriptorParser.cs" />
     <Compile Include="src\Actions\ActionDescriptor.cs" />
     <Compile Include="src\Actions\ActionDescriptorParserBase.cs" />
@@ -102,12 +105,14 @@
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />
     <Compile Include="src\DocumentChangedEventArgs.cs" />
+    <Compile Include="src\Doc\ControlWithTitle.cs" />
     <Compile Include="src\Doc\CurrentDocumentControl.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\Doc\DocUIManager.cs" />
     <Compile Include="src\Doc\DocumentComponent.cs" />
     <Compile Include="src\Doc\DocumentControl.cs" />
+    <Compile Include="src\Doc\IDocumentControl.cs" />
     <Compile Include="src\Doc\IDocumentMainControl.cs" />
     <Compile Include="src\IControlWithTitle.cs" />
     <Compile Include="src\IMainForm.cs" />
@@ -154,6 +159,10 @@
     <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
+      <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
+      <Name>Scheme.Objects</Name>
     </ProjectReference>
     <ProjectReference Include="..\Scheme\Scheme.csproj">
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>

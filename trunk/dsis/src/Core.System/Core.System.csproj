@@ -64,6 +64,8 @@
     <Compile Include="src\IFunctionParser.cs" />
     <Compile Include="src\Impl\DefaultSystemSpace.cs" />
     <Compile Include="src\Impl\DefaultSystemSpacePersistance.cs" />
+    <Compile Include="src\Impl\ISystemSpaceFactory.cs" />
+    <Compile Include="src\Impl\SystemSpaceFactory.cs" />
     <Compile Include="src\ISystemInfo.cs" />
     <Compile Include="src\ISystemSpace.cs" />
     <Compile Include="src\ParserErrorException.cs" />
@@ -75,6 +77,10 @@
     <Compile Include="src\WrongDimensionException.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Persistance\Persistance.csproj">
       <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
       <Name>Persistance</Name>

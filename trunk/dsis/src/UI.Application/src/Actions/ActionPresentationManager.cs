@@ -29,12 +29,22 @@ namespace DSIS.UI.Application.Actions
       }
     }
 
+    public IActionDescriptor GetDescriptor(string actionId)
+    {
+      return myIdToAction[actionId];
+    } 
+
     public void RegisterHandler(IActionHandler handler)
     {
       foreach (var id in handler.ActionId)
       {
         myIdToHandler.AddValue(id, handler);
       }
+    }
+
+    public void AddActionDescriptor(string actionId, string parentActionId, string title, string description, string ancor)
+    {
+      RegisterAction(new ActionDescriptor(actionId, parentActionId, ancor, description, title));
     }
 
     public ActionDescriptor RootAction

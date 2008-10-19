@@ -17,9 +17,21 @@ namespace DSIS.UI.Application.Test
     {
       using(var c = new JComponentContainer<ComponentImplementationAttribute>())
       {
-        c.ScanAssemblies(typeof(IkeadFactory).Assembly.En());
+        c.ScanAssemblies(typeof(IkedaFactory).Assembly.En());
 
         var l = new List<ISystemInfoFactory>(c.GetComponents<ISystemInfoFactory>());
+        Assert.That(l.Count, Is.GreaterThan(0));
+      }
+    }
+    
+    [Test]
+    public void Test_DetectsIkedaFactory()
+    {
+      using(var c = new JComponentContainer<ComponentImplementationAttribute>())
+      {
+        c.ScanAssemblies(typeof(IkedaFactory).Assembly.En());
+
+        var l = new List<IkedaFactory>(c.GetComponents<IkedaFactory>());
         Assert.That(l.Count, Is.GreaterThan(0));
       }
     }

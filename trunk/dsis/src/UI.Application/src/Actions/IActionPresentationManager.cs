@@ -11,5 +11,7 @@ namespace DSIS.UI.Application.Actions
     IEnumerable<IActionDescriptor> Children(IActionDescriptor action);
     IActionHandler Handler(IActionDescriptor action);
     void RegisterHandler(IActionHandler handler);
+
+    void AddActionDescriptor(string actionId, string parentActionId, string title, string description, string ancor);
   }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DSIS.Utils;
 
@@ -86,31 +87,46 @@ namespace DSIS.Core.Ioc.JC
 
     private object CreateInstance(Type t)
     {
-      using(myCreateInstance.Call(t))
+      try
       {
-        if (!t.IsClass || t.IsAbstract)
-          throw new JContainerException("Failed to create class " + t);
-
-        var constructors = t.GetConstructors();
-        if (constructors.Length != 1)
-          throw new JContainerException("Failed to create class " + t + ". There are more than one public constructor");
-
-        var constr = constructors[0];
-
-        var argz = new List<object>();
-        foreach (var info in constr.GetParameters())
+        using (myCreateInstance.Call(t))
         {
-          var type = info.ParameterType;
-          if (type.IsArray)
-          {
-            argz.Add(GetComponents(type.GetElementType()));
-          } else
-          {
-            argz.Add(GetComponent(type));
-          }
-        }
+          if (!t.IsClass || t.IsAbstract)
+            throw new JContainerException("Failed to create class " + t);
 
-        return Activator.CreateInstance(t, argz.ToArray());
+          var constructors = t.GetConstructors();
+          if (constructors.Length != 1)
+            throw new JContainerException("Failed to create class " + t + ". There are more than one public constructor");
+
+          var constr = constructors[0];
+
+          var argz = new List<object>();
+          foreach (var info in constr.GetParameters())
+          {
+            var type = info.ParameterType;
+            if (type.IsArray)
+            {
+              var arg = new ArrayList();
+              foreach (var o in GetComponents(type.GetElementType()))
+              {
+                arg.Add(o);
+              }
+              argz.Add(arg.ToArray(type.GetElementType()));
+            }
+            else
+            {
+              argz.Add(GetComponent(type));
+            }
+          }
+
+          return Activator.CreateInstance(t, argz.ToArray());
+        }
+      } catch (ComponentContainerException e)
+      {
+        throw new ComponentContainerException(e.Message + "\r\n" + "Creation of " + t, e);
+      } catch (Exception e)
+      {
+        throw new ComponentContainerException(e.Message + "\r\nCreation of " + t, e);
       }
     }
   }
