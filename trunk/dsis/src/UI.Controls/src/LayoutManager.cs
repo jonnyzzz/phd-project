@@ -16,7 +16,7 @@ namespace DSIS.UI.Controls
 
   public class LayoutManager
   {
-    private static Panel AddPanel(Queue<IControlWithLayout> controls, Panel root)
+    private static Panel AddPanel(Queue<IControlWithLayout> controls, Control root)
     {
       var control = controls.Dequeue();
       var value = control.Control;
@@ -39,7 +39,6 @@ namespace DSIS.UI.Controls
       layout.Controls.Add(value);
       
       root.Controls.Add(layout);
-      root.VerticalScroll.Visible = true;
 
       if (controls.Count == 0)
       {

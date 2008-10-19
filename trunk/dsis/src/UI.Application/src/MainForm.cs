@@ -27,11 +27,13 @@ namespace DSIS.UI.Application
       set
       {
         SuspendLayout();
-        
-        myToolStrip.ContentPanel.Controls.Clear();
+
+        ToolStripContentPanel host = myToolStrip.ContentPanel;
+        host.AutoScroll = true;
+        host.Controls.Clear();
         var control = value;
         control.Dock = DockStyle.Fill;
-        myToolStrip.ContentPanel.Controls.Add(control);
+        host.Controls.Add(control);
 
         ResumeLayout(true);
       }
