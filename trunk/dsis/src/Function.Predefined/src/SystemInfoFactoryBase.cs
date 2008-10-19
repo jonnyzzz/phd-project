@@ -2,18 +2,16 @@ using System;
 using System.Xml;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring.Util;
 
 namespace DSIS.Function.Predefined
 {
-  public abstract class SystemInfoFactoryBase : Registrar<ISystemInfoFactory, SystemInfoFactory>, ISystemInfoFactory
+  public abstract class SystemInfoFactoryBase : ISystemInfoFactory
   {
     private readonly string myFactoryName;
     private readonly int myDimension;
     private readonly SystemType myType;
 
-    protected SystemInfoFactoryBase(int dimension, SystemType type, string factoryName, SystemInfoFactory factory)
-      : base(factory)
+    protected SystemInfoFactoryBase(int dimension, SystemType type, string factoryName)
     {
       myFactoryName = factoryName;
       myDimension = dimension;
@@ -40,7 +38,11 @@ namespace DSIS.Function.Predefined
        get { return null; }
     }
 
-    public abstract ISystemInfo Parse(XmlElement element);
+    public ISystemInfo Parse(XmlElement element)
+    {
+      throw new NotImplementedException();
+    }
+
     public abstract ISystemInfo Create(ISystemInfoParameters parameters);
   }
 }

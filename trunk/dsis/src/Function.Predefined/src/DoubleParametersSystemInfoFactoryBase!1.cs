@@ -4,10 +4,10 @@ using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Predefined
 {
-  public abstract class DoubleParametersSystemInfoFactoryBase<T> : DoubleParametersSystemInfoFactoryBase
+  public abstract class DoubleParametersSystemInfoFactoryBase<T> : SystemInfoFactoryBase
     where T : ISystemInfoParameters
   {
-    protected DoubleParametersSystemInfoFactoryBase(int dim, SystemType type, string factoryName, int paramsCount, CreateDelegate factory, DoubleArrayParser parser, SystemInfoFactory systemFactory) : base(dim, type, factoryName, paramsCount, factory, parser, systemFactory)
+    protected DoubleParametersSystemInfoFactoryBase(int dim, SystemType type, string factoryName) : base(dim, type, factoryName)
     {
     }
 

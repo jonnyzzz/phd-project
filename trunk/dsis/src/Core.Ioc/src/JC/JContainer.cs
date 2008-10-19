@@ -4,26 +4,26 @@ using DSIS.Core.Ioc;
 using DSIS.Core.Ioc.JC;
 using DSIS.Utils;
 
-public class JContainer
+public class JContainer : IJContainer
 {
   private readonly ITypesFilter myFilter;
   private readonly IBaseTypesLookup myBasesLookup;
   private readonly IImplLoopup myImplLoopup;
   private readonly IImplementationsHolder myHolder;
   private readonly RecursionBlocker<Type> myCreateInstance = new RecursionBlocker<Type>();
-  private readonly JContainer myParent;
+  private readonly List<JContainer> myParents = new List<JContainer>();
 
-  public JContainer(ITypesFilter filter) : this(filter, null)
+  public JContainer(ITypesFilter filter)
   {
-  }
-
-  public JContainer(ITypesFilter filter, JContainer parent)
-  {
-    myParent = parent;
     myFilter = filter;
     myBasesLookup = new BaseTypeLookupImpl(myFilter);
     myImplLoopup = new ImplLookupImpl(myBasesLookup);
     myHolder = new ImplementationHolderImpl(CreateInstance, myImplLoopup);
+  }
+
+  public JContainer(ITypesFilter filter, JContainer parent) : this(filter)
+  {
+    myParents.Add(parent);
   }
 
   public void RegisterInstance(object instance)
@@ -57,11 +57,18 @@ public class JContainer
     return impls[0];
   }
 
-  private IList<object> GetComponents(Type y)
+  public IList<object> GetComponents(Type y)
   {
     var components = new List<object>();
-    if (myParent != null)
-      components.AddRange(myParent.GetComponents(y));
+    Predicate<Type> check = x => !x.IsDefined(typeof (NoInheritContainerAttribute), true);
+
+    if (check(y))
+    {
+      foreach (var parent in myParents)
+      {
+        components.AddRange(parent.GetComponents(y).Filter(x=>check(x.GetType())));
+      }
+    }
     components.AddRange(myHolder.GetInstancesFor(y));
 
     return components;

@@ -5,9 +5,11 @@ using System.Reflection;
 namespace DSIS.Core.Ioc
 {
   [ComponentInterface]
-  public interface IComponentContainer : IDisposable, IStartableComponent
+  public interface IComponentContainer : IDisposable
   {
     T GetComponent<T>();
+
+    void Start();
 
     IEnumerable<T> GetComponents<T>();
 

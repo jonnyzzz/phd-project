@@ -68,7 +68,6 @@
     <Compile Include="src\Delayed\DelayedFunctionSystemInfo.cs" />
     <Compile Include="src\Delayed\DelayedOptions.cs" />
     <Compile Include="src\DoubleParametersSystemInfoFactoryBase!1.cs" />
-    <Compile Include="src\DoubleParametersSystemInfoFactoryBase.cs" />
     <Compile Include="src\DoubleSystemInfoBase.cs" />
     <Compile Include="src\Duffing\DuffingFactory.cs" />
     <Compile Include="src\Duffing\DuffingFunction.cs" />
@@ -93,12 +92,14 @@
     <Compile Include="src\Julia\JuliaFactory.cs" />
     <Compile Include="src\Julia\JuliaFuctionSystemInfoDecorator.cs" />
     <Compile Include="src\Julia\JuliaFunction.cs" />
+    <Compile Include="src\Julia\JuliaParameters.cs" />
     <Compile Include="src\Linear\Linear.cs" />
     <Compile Include="src\Linear\Linear1DFactory.cs" />
     <Compile Include="src\Linear\Linear1dParameters.cs" />
     <Compile Include="src\Linear\Linear1DSystemInfo.cs" />
     <Compile Include="src\Linear\Linear2DFactory.cs" />
     <Compile Include="src\Linear\Linear2dParameters.cs" />
+    <Compile Include="src\Logistics\Logistic2dParameters.cs" />
     <Compile Include="src\Logistics\Logistic2dSystemInfo.cs" />
     <Compile Include="src\Logistics\LogisticFunction.cs" />
     <Compile Include="src\Logistics\LogisticFunction2d.cs" />
@@ -110,7 +111,6 @@
     <Compile Include="src\Lorentz\LorentzParameters.cs" />
     <Compile Include="src\Lorentz\LorentzSystemInfo.cs" />
     <Compile Include="src\Lorentz\LorentzSystemInfoFactory.cs" />
-    <Compile Include="src\NoParameterSystemInfoFactoryBase.cs" />
     <Compile Include="src\Rossel\RosselFactory.cs" />
     <Compile Include="src\Rossel\RosslerParameters.cs" />
     <Compile Include="src\Rossel\RosslerSystemFunction.cs" />

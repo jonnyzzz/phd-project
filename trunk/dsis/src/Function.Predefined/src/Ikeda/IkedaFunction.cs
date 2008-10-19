@@ -1,5 +1,6 @@
 using System;
 using DSIS.Core.System;
+using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Predefined.Ikeda
 {
@@ -40,4 +41,7 @@ namespace DSIS.Function.Predefined.Ikeda
       throw new NotImplementedException();
     }
   }
+  
+  [Serializable]
+  public class IkedaParameters : ISystemInfoParameters {}
 }

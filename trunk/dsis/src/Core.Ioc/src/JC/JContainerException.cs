@@ -2,7 +2,7 @@ using System;
 
 namespace DSIS.Core.Ioc.JC
 {
-  public class JContainerException : Exception
+  public class JContainerException : ComponentContainerException
   {
     public JContainerException(string message) : base(message)
     {

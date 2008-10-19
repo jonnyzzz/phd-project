@@ -64,6 +64,8 @@
     <Compile Include="src\CastleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\ComponentContainerTest.cs" />
+    <Compile Include="src\ComponentContainerTestBase.cs" />
+    <Compile Include="src\JComponentContainerTest.cs" />
     <Compile Include="src\JContainerTests.cs" />
     <Compile Include="src\TypesCacheTest.cs" />
   </ItemGroup>

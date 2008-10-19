@@ -1,15 +1,13 @@
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Linear
 {
-  [UsedBySpring, ComponentCollection]
+  [SystemInfoComponent]
   public class Linear1DFactory : DoubleParametersSystemInfoFactoryBase<Linear1dParameters>
   {
-    public Linear1DFactory(DoubleArrayParser parser, SystemInfoFactory factory)
-      : base(1,SystemType.Descrete, "Linear1D", 2, paramz => new Linear1DSystemInfo(paramz[0], paramz[1]), parser, factory)
+    public Linear1DFactory()
+      : base(1,SystemType.Descrete, "Linear1D")
     {
     }
 

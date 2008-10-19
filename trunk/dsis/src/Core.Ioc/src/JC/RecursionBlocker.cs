@@ -6,7 +6,8 @@ namespace DSIS.Core.Ioc.JC
 {
   public class RecursionBlocker<T>
   {
-    private readonly Queue<T> myStack = new Queue<T>();
+    private readonly HashSet<T> myStack = new HashSet<T>();
+    private int myDepth = 0;
 
     public IDisposable Call(T o)
     {
@@ -20,18 +21,22 @@ namespace DSIS.Core.Ioc.JC
     private class CallD : IDisposable {
       private readonly T myObj;
       private readonly RecursionBlocker<T> myHolder;
+      private readonly int myDepth;
 
       public CallD(T obj, RecursionBlocker<T> holder)
       {
         myObj = obj;
         myHolder = holder;
+        myDepth = myHolder.myDepth++;
+        myHolder.myStack.Add(obj);
       }
 
       public void Dispose()
       {
-        if (myHolder.myStack.Peek().Equals(myObj))
+        if (!myHolder.myStack.Contains(myObj) || myDepth != myHolder.myDepth - 1)
           throw new JContainerException("Unexpected end of component " + myObj);
-        myHolder.myStack.Dequeue();
+        myHolder.myStack.Remove(myObj);
+        myHolder.myDepth--;
       }
     }
   }

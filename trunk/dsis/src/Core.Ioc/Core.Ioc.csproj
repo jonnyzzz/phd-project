@@ -87,9 +87,14 @@
     <Compile Include="src\JC\IJContainer.cs" />
     <Compile Include="src\JC\ImplementationHolderImpl.cs" />
     <Compile Include="src\JC\ImplLookupImpl.cs" />
+    <Compile Include="src\JC\JComponentContainer.cs" />
+    <Compile Include="src\JC\JComponentContainerBase.cs" />
+    <Compile Include="src\JC\JComponentServices.cs" />
     <Compile Include="src\JC\JContainer.cs" />
     <Compile Include="src\JC\JContainerException.cs" />
+    <Compile Include="src\JC\JContainerPredefinedComponentAttribute.cs" />
     <Compile Include="src\JC\RecursionBlocker.cs" />
+    <Compile Include="src\NoInheritContainerAttribute.cs" />
     <Compile Include="src\ScanAllLoadedAssemblies.cs" />
     <Compile Include="src\ScanCurrentFolder.cs" />
     <Compile Include="src\StartableFacility.cs" />

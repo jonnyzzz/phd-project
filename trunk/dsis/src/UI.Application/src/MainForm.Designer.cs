@@ -31,8 +31,8 @@
       System.Windows.Forms.ToolStripContainer myToolStrip;
       System.Windows.Forms.ToolStripStatusLabel myStatusBarLabel;
       System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-      this.myMainMenu = new System.Windows.Forms.MenuStrip();
       this.myStatusBar = new System.Windows.Forms.StatusStrip();
+      this.myMainMenu = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       myToolStrip = new System.Windows.Forms.ToolStripContainer();
       myStatusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -40,8 +40,8 @@
       myToolStrip.BottomToolStripPanel.SuspendLayout();
       myToolStrip.TopToolStripPanel.SuspendLayout();
       myToolStrip.SuspendLayout();
-      this.myMainMenu.SuspendLayout();
       this.myStatusBar.SuspendLayout();
+      this.myMainMenu.SuspendLayout();
       this.SuspendLayout();
       // 
       // myToolStrip
@@ -65,6 +65,23 @@
       // 
       myToolStrip.TopToolStripPanel.Controls.Add(this.myMainMenu);
       // 
+      // myStatusBar
+      // 
+      this.myStatusBar.Dock = System.Windows.Forms.DockStyle.None;
+      this.myStatusBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+      this.myStatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            myStatusBarLabel});
+      this.myStatusBar.Location = new System.Drawing.Point(0, 0);
+      this.myStatusBar.Name = "myStatusBar";
+      this.myStatusBar.Size = new System.Drawing.Size(834, 22);
+      this.myStatusBar.TabIndex = 0;
+      // 
+      // myStatusBarLabel
+      // 
+      myStatusBarLabel.Name = "myStatusBarLabel";
+      myStatusBarLabel.Size = new System.Drawing.Size(109, 17);
+      myStatusBarLabel.Text = "toolStripStatusLabel1";
+      // 
       // myMainMenu
       // 
       this.myMainMenu.Dock = System.Windows.Forms.DockStyle.None;
@@ -77,17 +94,6 @@
       this.myMainMenu.TabIndex = 0;
       this.myMainMenu.Text = "MainMenu";
       // 
-      // myStatusBar
-      // 
-      this.myStatusBar.Dock = System.Windows.Forms.DockStyle.None;
-      this.myStatusBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-      this.myStatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            myStatusBarLabel});
-      this.myStatusBar.Location = new System.Drawing.Point(0, 0);
-      this.myStatusBar.Name = "myStatusBar";
-      this.myStatusBar.Size = new System.Drawing.Size(834, 22);
-      this.myStatusBar.TabIndex = 0;
-      // 
       // fileToolStripMenuItem
       // 
       this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -96,16 +102,10 @@
       this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
       this.fileToolStripMenuItem.Text = "File";
       // 
-      // myStatusBarLabel
-      // 
-      myStatusBarLabel.Name = "myStatusBarLabel";
-      myStatusBarLabel.Size = new System.Drawing.Size(109, 17);
-      myStatusBarLabel.Text = "toolStripStatusLabel1";
-      // 
       // newToolStripMenuItem
       // 
       newToolStripMenuItem.Name = "newToolStripMenuItem";
-      newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      newToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
       newToolStripMenuItem.Text = "New";
       newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
       // 
@@ -117,6 +117,7 @@
       this.Controls.Add(myToolStrip);
       this.MainMenuStrip = this.myMainMenu;
       this.Name = "MainForm";
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "DSIS";
       myToolStrip.BottomToolStripPanel.ResumeLayout(false);
       myToolStrip.BottomToolStripPanel.PerformLayout();
@@ -124,10 +125,10 @@
       myToolStrip.TopToolStripPanel.PerformLayout();
       myToolStrip.ResumeLayout(false);
       myToolStrip.PerformLayout();
-      this.myMainMenu.ResumeLayout(false);
-      this.myMainMenu.PerformLayout();
       this.myStatusBar.ResumeLayout(false);
       this.myStatusBar.PerformLayout();
+      this.myMainMenu.ResumeLayout(false);
+      this.myMainMenu.PerformLayout();
       this.ResumeLayout(false);
 
     }

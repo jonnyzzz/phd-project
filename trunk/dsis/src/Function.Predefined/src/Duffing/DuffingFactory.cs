@@ -1,15 +1,13 @@
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Duffing
 {
-  [UsedBySpring, ComponentCollection]
+  [SystemInfoComponent]
   public class DuffingFactory : DoubleParametersSystemInfoFactoryBase<DuffingOptions>
   {
-    public DuffingFactory(DoubleArrayParser parser, SystemInfoFactory factory)
-      : base(2, SystemType.Descrete, "Duffing", 3, paramz => new DuffingSystemInfo(paramz[0], paramz[1], paramz[2]), parser, factory)
+    public DuffingFactory()
+      : base(2, SystemType.Descrete, "Duffing")
     {
     }
 

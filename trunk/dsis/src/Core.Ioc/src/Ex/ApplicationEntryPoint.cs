@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using DSIS.Core.Ioc.JC;
 
 namespace DSIS.Core.Ioc.Ex
 {
@@ -6,7 +7,8 @@ namespace DSIS.Core.Ioc.Ex
   {
     public static int DoMain(string[] args)
     {
-      using (var rootContainer = new ComponentContainer<ComponentInterfaceAttribute, ComponentCollectionAttribute, ComponentImplementationAttribute>())
+      //ComponentInterfaceAttribute, ComponentCollectionAttribute, 
+      using (var rootContainer = new JComponentContainer<ComponentImplementationAttribute>())
       { 
         rootContainer.ScanAssemblies(new[] { Assembly.GetCallingAssembly(), Assembly.GetEntryAssembly(), Assembly.GetExecutingAssembly()});
 

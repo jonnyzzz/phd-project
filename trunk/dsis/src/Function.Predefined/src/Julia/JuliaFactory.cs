@@ -1,15 +1,19 @@
-using DSIS.Core.Ioc;
+using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Julia
 {
-  [UsedBySpring, ComponentCollection]
-  public class JuliaFactory : NoParameterSystemInfoFactoryBase
+  [SystemInfoComponent]
+  public class JuliaFactory : DoubleParametersSystemInfoFactoryBase<JuliaParameters>
   {
-    public JuliaFactory(SystemInfoFactory factory)
-      : base(2, SystemType.Descrete, factory, "Julia", () => new JuliaFuctionSystemInfoDecorator())
+    public JuliaFactory()
+      : base(2, SystemType.Descrete, "Julia")
     {
+    }
+
+    protected override ISystemInfo CreateInfo(JuliaParameters paramz)
+    {
+      return new JuliaFuctionSystemInfoDecorator();
     }
   }
 }

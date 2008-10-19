@@ -1,6 +1,6 @@
 namespace DSIS.Core.Ioc
 {
-  [ComponentCollection]
+  [ComponentCollection, NoInheritContainer]
   public interface IStartableComponent
   {
     void Start();

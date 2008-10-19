@@ -69,15 +69,21 @@ namespace DSIS.Utils
       return q;
     }
 
+    public static List<T> ToList<T>(this IEnumerable<T> enu)
+    {
+      if (enu is List<T>)
+        return (List<T>) enu;
+
+      return new List<T>(enu);
+    }
+
     public static T[] ToArray<T>(this IEnumerable<T> enu)
     {
       if (enu is List<T>)
       {
         return ((List<T>) enu).ToArray();
-      } else
-      {
-        return new List<T>(enu).ToArray();
       }
+      return new List<T>(enu).ToArray();
     }
 
     public static bool ContainsKeyRange<T,Q>(this Dictionary<T,Q> dic, IEnumerable<T> enu)

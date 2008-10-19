@@ -1,15 +1,19 @@
-using DSIS.Core.Ioc;
+using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring;
 
 namespace DSIS.Function.Predefined.Ikeda
 {
-  [UsedBySpring, ComponentCollection]
-  public class IkeadFactory : NoParameterSystemInfoFactoryBase
+  [SystemInfoComponent]
+  public class IkeadFactory : DoubleParametersSystemInfoFactoryBase<IkedaParameters>
   {
-    public IkeadFactory(SystemInfoFactory factory)
-      : base(2,SystemType.Descrete, factory, "Ikeda", () => new IkedaFunctionSystemInfoDecorator())
+    public IkeadFactory()
+      : base(2,SystemType.Descrete, "Ikeda")
     {
+    }
+
+    protected override ISystemInfo CreateInfo(IkedaParameters paramz)
+    {
+      return new IkedaFunctionSystemInfoDecorator();
     }
   }
 }

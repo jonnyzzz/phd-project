@@ -1,4 +1,3 @@
-using System;
 using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Julia
@@ -18,11 +17,6 @@ namespace DSIS.Function.Predefined.Julia
     protected override IFunction<double> GetFunctionInternal()
     {
       return new JuliaFunction();
-    }
-
-    protected override IFunction<double> GetFunctionDerivateInternal()
-    {
-      throw new NotImplementedException();
     }
   }
 }
