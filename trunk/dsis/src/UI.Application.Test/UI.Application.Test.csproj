@@ -66,9 +66,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ApplicationIocBaseTest.cs" />
+    <Compile Include="src\FunctionFactoryTest.cs" />
     <Compile Include="src\XmlActionPresentationManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Function.Predefined\Function.Predefined.csproj">
+      <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
+      <Name>Function.Predefined</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
+      <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
+      <Name>Scheme.Objects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Spring\Spring.csproj">
       <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
       <Name>Spring</Name>

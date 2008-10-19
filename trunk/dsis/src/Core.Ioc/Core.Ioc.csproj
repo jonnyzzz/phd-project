@@ -66,7 +66,7 @@
     <Compile Include="src\ComponentContainerException.cs" />
     <Compile Include="src\ComponentContainerServices.cs" />
     <Compile Include="src\ComponentImplementationAttribute.cs" />
-    <Compile Include="src\ComponentImplemetationAttributeBase.cs" />
+    <Compile Include="src\ComponentImplementationAttributeBase.cs" />
     <Compile Include="src\ComponentInterfaceAttribute.cs" />
     <Compile Include="src\ComponentInterfaceAttributeBase.cs" />
     <Compile Include="src\ComponentInterfaceLookupImpl.cs" />

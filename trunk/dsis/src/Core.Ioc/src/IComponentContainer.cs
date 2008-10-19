@@ -16,7 +16,7 @@ namespace DSIS.Core.Ioc
     void ScanAssemblies(IEnumerable<Assembly> assemblies);
 
     IComponentContainer SubContainer<TInterface, TCollectionInterface, TImplementation>()
-      where TImplementation : ComponentImplemetationAttributeBase
+      where TImplementation : ComponentImplementationAttributeBase
       where TCollectionInterface : ComponentCollectionAttributeBase
       where TInterface : ComponentInterfaceAttributeBase;
 

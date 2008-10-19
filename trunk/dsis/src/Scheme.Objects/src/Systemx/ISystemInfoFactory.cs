@@ -37,7 +37,7 @@ namespace DSIS.Scheme.Objects.Systemx
   {
   }
 
-  public class SystemInfoComponent : ComponentImplemetationAttributeBase
+  public class SystemInfoComponent : ComponentImplementationAttribute
   {
   }
 

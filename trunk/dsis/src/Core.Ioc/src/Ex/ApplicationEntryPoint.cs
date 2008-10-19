@@ -1,9 +1,15 @@
 ﻿using System.Reflection;
 using DSIS.Core.Ioc.JC;
+using DSIS.Utils;
 
 namespace DSIS.Core.Ioc.Ex
 {
-  public static class ApplicationEntryPoint
+  [Used]
+  public class ApplicationEntryPoint : ApplicationEntryPoint<IApplication>
+  {
+  } 
+  
+  public class ApplicationEntryPoint<T> where T : IApplication
   {
     public static int DoMain(string[] args)
     {
@@ -19,7 +25,7 @@ namespace DSIS.Core.Ioc.Ex
 
         rootContainer.Start();
         
-        var app = rootContainer.GetComponent<IApplication>();
+        var app = rootContainer.GetComponent<T>();
         return app.Main();
       }
     }

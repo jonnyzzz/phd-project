@@ -9,7 +9,7 @@ using Castle.MicroKernel.ModelBuilder;
 namespace DSIS.Core.Ioc
 {
   public class StartableFacility<TComponentImpl> : IFacility
-    where TComponentImpl : ComponentImplemetationAttributeBase
+    where TComponentImpl : ComponentImplementationAttributeBase
   {
     private IKernel myKernel;
     private readonly List<IHandler> myWaitList = new List<IHandler>();

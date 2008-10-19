@@ -74,12 +74,12 @@ namespace DSIS.Core.Ioc.JC
 
     protected abstract void LookupAssembly(Assembly assembly);
 
-    protected abstract JComponentContainerBase CreateContainer<TImpl2>() where TImpl2 : ComponentImplemetationAttributeBase;
+    protected abstract JComponentContainerBase CreateContainer<TImpl2>() where TImpl2 : ComponentImplementationAttributeBase;
 
     public IComponentContainer SubContainer<TInterface, TCollectionInterface, TImplementation>() 
       where TInterface : ComponentInterfaceAttributeBase 
       where TCollectionInterface : ComponentCollectionAttributeBase 
-      where TImplementation : ComponentImplemetationAttributeBase
+      where TImplementation : ComponentImplementationAttributeBase
     {
       var child = CreateContainer<TImplementation>();
       foreach (var assembly in myAssemblies)

@@ -8,7 +8,7 @@ using DSIS.Utils;
 namespace DSIS.Core.Ioc
 {
   public class ComponentContainer<TInterface, TCollectionInterface, TImplementation> : IComponentContainer
-    where TImplementation : ComponentImplemetationAttributeBase
+    where TImplementation : ComponentImplementationAttributeBase
     where TCollectionInterface : ComponentCollectionAttributeBase
     where TInterface : ComponentInterfaceAttributeBase
   {
@@ -79,7 +79,7 @@ namespace DSIS.Core.Ioc
       myKernel.Dispose();
     }
 
-    public IComponentContainer SubContainer<TInterface1, TCollectionInterface1, TImplementation1>() where TInterface1 : ComponentInterfaceAttributeBase where TCollectionInterface1 : ComponentCollectionAttributeBase where TImplementation1 : ComponentImplemetationAttributeBase
+    public IComponentContainer SubContainer<TInterface1, TCollectionInterface1, TImplementation1>() where TInterface1 : ComponentInterfaceAttributeBase where TCollectionInterface1 : ComponentCollectionAttributeBase where TImplementation1 : ComponentImplementationAttributeBase
     {
       var container = new ComponentContainer<TInterface1, TCollectionInterface1, TImplementation1>(myFilter, myScanner, myLookup);
       myKernel.AddChildKernel(container.myKernel);

@@ -5,7 +5,7 @@ using System.Reflection;
 namespace DSIS.Core.Ioc.JC
 {
   public class JComponentContainer<TImpl> : JComponentContainerBase
-    where TImpl : ComponentImplemetationAttributeBase
+    where TImpl : ComponentImplementationAttributeBase
   {
     private readonly IAssemblyScaner myScanner;
     private readonly HashSet<Type> myStartable = new HashSet<Type>();
@@ -43,7 +43,7 @@ namespace DSIS.Core.Ioc.JC
     }
 
     private void LookupAttributes<TImpl2>(Assembly assembly) 
-      where TImpl2 : ComponentImplemetationAttributeBase
+      where TImpl2 : ComponentImplementationAttributeBase
     {
       foreach (var loadType in myScanner.LoadTypes<TImpl2>(assembly))
       {

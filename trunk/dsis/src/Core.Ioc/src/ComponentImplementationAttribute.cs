@@ -1,6 +1,6 @@
 namespace DSIS.Core.Ioc
 {
-  public class ComponentImplementationAttribute : ComponentImplemetationAttributeBase 
+  public class ComponentImplementationAttribute : ComponentImplementationAttributeBase 
   {    
   }
 }

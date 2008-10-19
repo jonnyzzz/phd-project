@@ -32,14 +32,14 @@ namespace DSIS.Core.Ioc.Tests
 
     protected void DoTest<TI,TO>()
       where TI : ComponentInterfaceAttributeBase
-      where TO : ComponentImplemetationAttributeBase 
+      where TO : ComponentImplementationAttributeBase 
     {
       DoTest<TI,TC1,TO>();
     }
 
     protected void DoTest<TI,TC,TO>()
       where TI : ComponentInterfaceAttributeBase
-      where TO : ComponentImplemetationAttributeBase 
+      where TO : ComponentImplementationAttributeBase 
       where TC : ComponentCollectionAttributeBase
     {
       myContainer =  CreateContainer<TI, TC, TO>();
@@ -49,7 +49,7 @@ namespace DSIS.Core.Ioc.Tests
 
     protected abstract IComponentContainer CreateContainer<TI, TC, TO>()
       where TI : ComponentInterfaceAttributeBase
-      where TO : ComponentImplemetationAttributeBase
+      where TO : ComponentImplementationAttributeBase
       where TC : ComponentCollectionAttributeBase;
 
     public class TI : ComponentInterfaceAttribute {};
@@ -60,26 +60,26 @@ namespace DSIS.Core.Ioc.Tests
 
     public class TC2 : ComponentCollectionAttributeBase {};
 
-    public class TO0 : ComponentImplemetationAttributeBase {};
+    public class TO0 : ComponentImplementationAttributeBase {};
 
-    public class TO1 : ComponentImplemetationAttributeBase {};
+    public class TO1 : ComponentImplementationAttributeBase {};
 
-    public class TO2 : ComponentImplemetationAttributeBase {};
+    public class TO2 : ComponentImplementationAttributeBase {};
 
-    public class TO3 : ComponentImplemetationAttributeBase {};
+    public class TO3 : ComponentImplementationAttributeBase {};
 
-    public class TO4 : ComponentImplemetationAttributeBase {};
+    public class TO4 : ComponentImplementationAttributeBase {};
 
-    public class TO5 : ComponentImplemetationAttributeBase {};
+    public class TO5 : ComponentImplementationAttributeBase {};
 
-    public class TO6 : ComponentImplemetationAttributeBase {};
+    public class TO6 : ComponentImplementationAttributeBase {};
 
-    public class TO7 : ComponentImplemetationAttributeBase {};
+    public class TO7 : ComponentImplementationAttributeBase {};
 
-    public class TO8 : ComponentImplemetationAttributeBase {};
+    public class TO8 : ComponentImplementationAttributeBase {};
 
-    public class TO9 : ComponentImplemetationAttributeBase {};
-    public class TOB : ComponentImplemetationAttributeBase {};
+    public class TO9 : ComponentImplementationAttributeBase {};
+    public class TOB : ComponentImplementationAttributeBase {};
     public class TOI : TOB {};
 
     [TI,TC2]
