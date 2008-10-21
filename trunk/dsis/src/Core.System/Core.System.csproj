@@ -62,6 +62,7 @@
     <Compile Include="src\IFunction.cs" />
     <Compile Include="src\IFunctionIO.cs" />
     <Compile Include="src\IFunctionParser.cs" />
+    <Compile Include="src\Impl\ComplicatedSystemSpace.cs" />
     <Compile Include="src\Impl\DefaultSystemSpace.cs" />
     <Compile Include="src\Impl\DefaultSystemSpacePersistance.cs" />
     <Compile Include="src\Impl\ISystemSpaceFactory.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="src\ISystemSpace.cs" />
     <Compile Include="src\ParserErrorException.cs" />
     <Compile Include="src\RenameSystem.cs" />
+    <Compile Include="src\RenameSystemFormat.cs" />
     <Compile Include="src\Tree\IFunctionNode.cs" />
     <Compile Include="src\Tree\IFunctionTreeVisitor.cs" />
     <Compile Include="src\UnsupportedDevivateException.cs" />

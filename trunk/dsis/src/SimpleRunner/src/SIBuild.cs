@@ -41,13 +41,22 @@ namespace DSIS.SimpleRunner
       {
         var data = ForBuildser(new List<ComputationData>
                      {
-                       new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Duffing2x2Runge(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Duffing1_5x1_5Runge(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Duffing1_4x1_4Runge(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Duffing1_3x1_3Runge(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Duffing1_2x1_2Runge(), repeat = rep},
+                       /*new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.VanDerPolRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.LorentzRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.RosslerRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.BrusselatorRunge(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},
-                     }, Builder.Point, Builder.Box);
+                       new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},*/
+                     }, 
+                     new []{                         
+                       Builder.Point, 
+                       Builder.Box
+                     });
         foreach (var _computationData in new List<ComputationData>(data))
         {
           var computationData = _computationData;

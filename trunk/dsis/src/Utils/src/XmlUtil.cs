@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Xml;
 
 namespace DSIS.Utils
@@ -28,9 +29,26 @@ namespace DSIS.Utils
       return (XmlElement) node.AppendChild(node.CreateElement(name));
     }
 
-    public static XmlNode CreateText(this XmlNode node, string text)
+    public static XmlNode CreateText(this XmlNode node, params string[] text)
     {
-      node.AppendChild(node.OwnerDocument.CreateTextNode(text));
+      return CreateText(node, (IEnumerable<string>) text);
+    }
+    public static XmlNode CreateText(this XmlNode node, IEnumerable<string> text)
+    {
+      bool isFirst = true;
+      var nodes = new List<XmlNode>();
+      foreach (var xmlNode in text)
+      {
+        if (!isFirst)
+        {
+          nodes.Add(node.OwnerDocument.CreateElement("br"));
+        } else
+        {
+          isFirst = false;
+        }
+        nodes.Add(node.OwnerDocument.CreateTextNode(xmlNode));
+      }
+      nodes.Each(x=>node.AppendChild(x));
       return node;
     }
     

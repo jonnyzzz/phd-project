@@ -41,7 +41,7 @@ namespace DSIS.Core.System.Impl
       get { return myAreaRightPoint; }
     }
 
-    public bool Contains(double[] point)
+    public virtual bool Contains(double[] point)
     {
       for (int i = 0; i < Dimension; i++)
       {
@@ -53,7 +53,7 @@ namespace DSIS.Core.System.Impl
       return true;
     }
 
-    public bool ContainsRect(double[] left, double[] right)
+    public virtual bool ContainsRect(double[] left, double[] right)
     {
       for (int i = 0; i < Dimension; i++)
       {
@@ -61,6 +61,17 @@ namespace DSIS.Core.System.Impl
             (((left[i] <= myAreaLeftPoint[i]) && (myAreaLeftPoint[i] <= right[i])) ||
              ((left[i] <= myAreaRightPoint[i]) && (myAreaRightPoint[i] <= right[i])) ||
              ((myAreaLeftPoint[i] <= left[i]) && (right[i] <= myAreaRightPoint[i])))
+          ) return false;
+      }
+      return true;
+    }
+
+    public bool ContainedRect(double[] left, double[] right)
+    {
+      for (int i = 0; i < Dimension; i++)
+      {
+        if (!
+             ((myAreaLeftPoint[i] <= left[i]) && (right[i] <= myAreaRightPoint[i]))
           ) return false;
       }
       return true;

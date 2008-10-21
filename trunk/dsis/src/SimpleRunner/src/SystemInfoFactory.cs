@@ -84,6 +84,31 @@ namespace DSIS.SimpleRunner
       return new SystemInfoAction(new RungeKuttSolver(new DuffingSystemInfo(1, 1, 0.01), 100, 0.001), Space(2,5));
     }
 
+    public static IAction Duffing2x2Runge()
+    {
+      return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-2,2)"), 100, 0.001), Space(2,2));
+    }
+
+    public static IAction Duffing1_5x1_5Runge()
+    {
+      return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-1.5,1.5)"), 100, 0.001), Space(2,1.5));
+    }
+
+    public static IAction Duffing1_4x1_4Runge()
+    {
+      return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-1.4,1.4)"), 100, 0.001), Space(2,1.4));
+    }
+
+    public static IAction Duffing1_3x1_3Runge()
+    {
+      return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-1.3,1.3)"), 100, 0.001), Space(2,1.3));
+    }
+
+    public static IAction Duffing1_2x1_2Runge()
+    {
+      return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-1.2,1.2)"), 100, 0.001), Space(2,1.2));
+    }
+
     public static IAction VanDerPolRunge()
     {
       return new SystemInfoAction(new RungeKuttSolver(new VanDerPolSystemInfo(1.5), 100, 0.001), Space(2, 5));
