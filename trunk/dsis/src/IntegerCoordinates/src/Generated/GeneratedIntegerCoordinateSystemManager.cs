@@ -4,12 +4,13 @@ using System.Reflection;
 using Antlr.StringTemplate;
 using DSIS.BoxIterators.Generator;
 using DSIS.CodeCompiler;
+using DSIS.Core.Ioc;
 using DSIS.Spring;
 using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentImplementation]
   public class GeneratedIntegerCoordinateSystemManager
   {
     private static GeneratedIntegerCoordinateSystemManager myInstance;

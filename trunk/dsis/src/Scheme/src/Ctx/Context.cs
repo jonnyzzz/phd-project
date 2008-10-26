@@ -4,7 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Ctx
 {
-  public class Context
+  public class Context : IWriteOnlyContext, IReadOnlyContext
   {
     private readonly Dictionary<KeyWrapper, object> myContext;
 

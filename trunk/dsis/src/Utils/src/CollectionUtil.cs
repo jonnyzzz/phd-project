@@ -396,5 +396,14 @@ namespace DSIS.Utils
         yield return t;
       }
     }
+
+    public static IEnumerable<Q> UpCast<Q,T>(this IEnumerable<T> enu)
+      where T : Q
+    {
+      foreach (T t in enu)
+      {
+        yield return t;
+      }
+    }
   }
 }

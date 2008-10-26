@@ -16,7 +16,8 @@ namespace DSIS.UI.Controls
 
   public class LayoutManager
   {
-    private static Panel AddPanel(Queue<IControlWithLayout> controls, Control root)
+    private static Panel AddPanel<Q>(Queue<Q> controls, Control root)
+      where Q : IControlWithLayout
     {
       var control = controls.Dequeue();
       var value = control.Control;
@@ -86,13 +87,14 @@ namespace DSIS.UI.Controls
       }
     }
 
-    public Control LayoutControls(IEnumerable<IControlWithLayout> _controls)
+    public Control LayoutControls<Q>(IEnumerable<Q> _controls)
+      where Q : IControlWithLayout
     {
-      var controls = new List<IControlWithLayout>(_controls);
+      var controls = new List<Q>(_controls);
       controls.Sort((a,b)=>-a.Ancor.CompareTo(b.Ancor));
 
       var result = new Panel {AutoSize = true};
-      var deeper = AddPanel(new Queue<IControlWithLayout>(controls.Filter(x=>x.Float != Layout.CENTER)), result);
+      var deeper = AddPanel(new Queue<Q>(controls.Filter(x=>x.Float != Layout.CENTER)), result);
 
       foreach (var control in controls.Filter(x=>x.Float == Layout.CENTER))
       {

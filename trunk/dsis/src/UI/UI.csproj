@@ -104,6 +104,10 @@
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Scheme.Impl\Scheme.Impl.csproj">
+      <Project>{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}</Project>
+      <Name>Scheme.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
       <Name>Scheme.Objects</Name>

@@ -9,9 +9,10 @@ namespace DSIS.UI.Controls
   {
     private readonly LayoutManager myManager = new LayoutManager();
 
-    public Control LayoutControls(IEnumerable<IControlWithLayout2> _controls)
+    public Control LayoutControls<C>(IEnumerable<C> _controls)
+      where C : IControlWithLayout2
     {
-      var controls = new List<IControlWithLayout2>(_controls);
+      var controls = new List<C>(_controls);
 
       var myLayouts = new MultiDictionary<Layout, IControlWithLayout2>(EqualityComparerFactory<Layout>.GetComparer());
 
@@ -39,12 +40,10 @@ namespace DSIS.UI.Controls
         }
         else if (CheckSingleLayoutMulti(pair.Value))
         {
-//          var data = new List<IControlWithLayout>();
           foreach (var child in pair.Value)
           {
             simpleLayouts.Add(new ControlWithLayout(child.Control, child.Ancor, pair.Key));
           }
-//          simpleLayouts.Add(new SimpleLayout(pair.Key, ancor, myManager.LayoutControls(data)));
         }         
         else
         {

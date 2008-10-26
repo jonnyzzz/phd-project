@@ -3,11 +3,12 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using DSIS.Core.Ioc;
 using log4net;
 
 namespace DSIS.CodeCompiler
 {
-  //todo: Cleanup generated assemblies/sources
+  [ComponentImplementation]
   public class CodeCompilerImpl : ICodeCompiler, IDisposable
   {
     private static readonly ILog LOG = LogManager.GetLogger(typeof (CodeCompilerImpl));

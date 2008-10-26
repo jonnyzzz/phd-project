@@ -148,6 +148,7 @@
     <Compile Include="src\Actions\SetMethod.cs" />
     <Compile Include="src\Actions\SetMethod2.cs" />
     <Compile Include="src\Actions\SystemInfoAction.cs" />
+    <Compile Include="src\CellCoordinateSystemUtil.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase3.cs" />

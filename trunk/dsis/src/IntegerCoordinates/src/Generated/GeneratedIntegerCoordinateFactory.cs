@@ -1,10 +1,11 @@
 using System;
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Spring;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
-  [UsedBySpring]
+  [UsedBySpring, ComponentImplementation]
   public class GeneratedIntegerCoordinateFactory : IIntegerCoordinateFactory
   {
     private readonly GeneratedIntegerCoordinateSystemManager myManager;

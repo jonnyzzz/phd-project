@@ -11,7 +11,7 @@ namespace DSIS.Scheme
 
     string ShortName { get; }
 
-    void Copy(Context from, Context to);
+    void Copy(IReadOnlyContext from, IWriteOnlyContext to);
     bool EqualsWithoutName(IKey key);
 
     IEqualityComparer Comparer { get; }
@@ -70,12 +70,12 @@ namespace DSIS.Scheme
       return myName.GetHashCode();
     }
 
-    public TValue Get(Context ctx)
+    public TValue Get(IReadOnlyContext ctx)
     {
       return ctx.Get(this);
     }
 
-    public void Set(Context ctx, TValue value)
+    public void Set(IWriteOnlyContext ctx, TValue value)
     {
       ctx.Set(this, value);
     }
@@ -85,7 +85,7 @@ namespace DSIS.Scheme
       ctx.Remove(this);
     }
 
-    public void Copy(Context input, Context output)
+    public void Copy(IReadOnlyContext input, IWriteOnlyContext output)
     {
       Set(output, Get(input));
     }
