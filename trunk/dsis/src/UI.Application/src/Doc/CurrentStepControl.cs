@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Windows.Forms;
 using DSIS.UI.Controls;
 using DSIS.UI.Controls.Web;

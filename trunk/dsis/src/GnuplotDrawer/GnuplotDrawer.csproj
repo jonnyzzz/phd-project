@@ -78,6 +78,10 @@
     <Compile Include="src\PngWriterBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>

@@ -5,18 +5,20 @@ namespace DSIS.Utils
 {
   public static class XmlUtil
   {
-    public static void CreateAttribute(this XmlNode node, string attribute, string value)
+    public static XmlNode CreateAttribute(this XmlNode node, string attribute, string value)
     {
       var attr = node.OwnerDocument.CreateAttribute(attribute);
       attr.Value = value;
       node.Attributes.Append(attr);
+      return node;
     }
 
-    public static void CreateAttribute(this XmlNode node, string attribute, string xsi, string value)
+    public static XmlNode CreateAttribute(this XmlNode node, string attribute, string xsi, string value)
     {
       var attr = node.OwnerDocument.CreateAttribute(attribute, xsi);
       attr.Value = value;
       node.Attributes.Append(attr);
+      return node;
     }
 
     public static XmlElement CreateChildElement(this XmlNode node, string name)

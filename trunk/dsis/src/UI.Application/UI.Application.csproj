@@ -111,6 +111,9 @@
     <Compile Include="src\Doc\CenterControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="src\Doc\ComputeNextStepAction.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="src\Doc\ControlWithTitle.cs" />
     <Compile Include="src\Doc\CurrentDocumentControl.cs">
       <SubType>Component</SubType>
@@ -123,6 +126,9 @@
     <Compile Include="src\Doc\DocumentControl.cs" />
     <Compile Include="src\Doc\IDocumentControl.cs" />
     <Compile Include="src\Doc\IDocumentMainControl.cs" />
+    <Compile Include="src\Doc\ShowCurrentSimbolicImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="src\IControlWithTitle.cs" />
     <Compile Include="src\IMainForm.cs" />
     <Compile Include="src\MainForm.cs">
@@ -159,8 +165,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="src\WorkingFolderInfoImpl.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CellImageBuilder.BoxMethod\CellImageBuilder.BoxMethod.csproj">
+      <Project>{FA6D5947-51E7-4D99-9D18-D4946901FE80}</Project>
+      <Name>CellImageBuilder.BoxMethod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CellImageBuilder.Shared\CellImageBuilder.Shared.csproj">
+      <Project>{C75D0837-A992-41A2-8A46-A1B0F292048C}</Project>
+      <Name>CellImageBuilder.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
       <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
       <Name>Core.Ioc</Name>

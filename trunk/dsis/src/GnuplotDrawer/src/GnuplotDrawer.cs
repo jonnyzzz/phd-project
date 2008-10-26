@@ -1,9 +1,11 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using DSIS.Core.Ioc;
 
 namespace DSIS.GnuplotDrawer
 {
+  [ComponentImplementation]
   public class GnuplotDrawer
   {
     private readonly string myGnuplotFolder;
@@ -26,12 +28,12 @@ namespace DSIS.GnuplotDrawer
     {
     }
 
-    public GnuplotDrawer(string gnuplotFolder)
+    private GnuplotDrawer(string gnuplotFolder)
     {
       myGnuplotFolder = gnuplotFolder;
     }
 
-    public void DrawImage(IGnuplotScript script)
+    public Process DrawImage(IGnuplotScript script)
     {
 
       var pi = new ProcessStartInfo
@@ -45,7 +47,7 @@ namespace DSIS.GnuplotDrawer
       if (!File.Exists(pi.FileName))
         throw new ArgumentException("Unable to locate pgnuplot.exe");
 
-      Process.Start(pi);
+      return Process.Start(pi);
     }
   }
 }

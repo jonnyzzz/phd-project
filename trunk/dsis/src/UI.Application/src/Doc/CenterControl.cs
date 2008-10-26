@@ -4,8 +4,7 @@ using DSIS.Core.Ioc;
 using DSIS.UI.Controls;
 
 namespace DSIS.UI.Application.Doc
-{
-  [ComponentImplementation]
+{  
   public class CenterControl : UserControl, IDocumentControl
   {
     public CenterControl()

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using DSIS.Core.System;
 using DSIS.Scheme.Ctx;
 
@@ -11,5 +10,11 @@ namespace DSIS.UI.UI
     ISystemSpace Space { get; }
 
     Context Content { get;}
+
+    /// <summary>
+    /// Replaces the document with new docuent based on newContext
+    /// </summary>
+    /// <param name="newContext"></param>
+    void ChangeDocument(Context newContext);
   }
 }

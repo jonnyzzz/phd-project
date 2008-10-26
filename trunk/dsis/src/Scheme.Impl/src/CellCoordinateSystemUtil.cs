@@ -8,24 +8,55 @@ namespace DSIS.Scheme.Impl
     public static long CellEnumeratorCount(this IReadOnlyContext context)
     {
       var cs = Keys.IntegerCoordinateSystemInfo.Get(context);
-      var action = new Action(context);
+      var action = new ActionCount(context);
       cs.DoGeneric(action);
       return action.Count;
     }
 
-    private class Action : ICellCoordinateWith
+    public static bool ContainsCellCollection(this IReadOnlyContext context)
+    {
+      if (!context.ContainsKey(Keys.IntegerCoordinateSystemInfo))
+        return false;
+
+      var cs = Keys.IntegerCoordinateSystemInfo.Get(context);
+      var action = new ActionContains(context);
+      cs.DoGeneric(action);
+      return action.Contains;
+    }
+
+    private class ActionCount : ICellCoordinateWith
     {
       private readonly IReadOnlyContext myContext;
+      public long Count { get; private set; }
 
-      public Action(IReadOnlyContext context)
+      public ActionCount(IReadOnlyContext context)
       {
         myContext = context;
       }
 
-      public long Count { get; set; }
+      
       public void With<Q>(ICellCoordinateSystem<Q> system) where Q : ICellCoordinate
       {
-        Count = Keys.CellsEnumerationKey<Q>().Get(myContext).Count;
+        var key = Keys.CellsEnumerationKey<Q>();
+        if (myContext.ContainsKey(key))
+          Count = key.Get(myContext).Count;
+
+        Count = 0;
+      }
+    }
+    private class ActionContains: ICellCoordinateWith
+    {
+      private readonly IReadOnlyContext myContext;
+      public bool Contains { get; private set; }
+
+      public ActionContains(IReadOnlyContext context)
+      {
+        myContext = context;
+      }
+      
+      public void With<Q>(ICellCoordinateSystem<Q> system) where Q : ICellCoordinate
+      {
+        Contains = myContext.ContainsKey(Keys.CellsEnumerationKey<Q>());
       }
     }
   }

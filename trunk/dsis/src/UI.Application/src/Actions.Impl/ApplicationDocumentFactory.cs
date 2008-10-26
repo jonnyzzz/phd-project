@@ -11,10 +11,12 @@ namespace DSIS.UI.Application.Actions.Impl
   public class ApplicationDocumentFactory : IApplicationDocumentFactory
   {
     private readonly IDocumentContextFill[] myFill;
+    private readonly IApplicationClass myApp;
 
-    public ApplicationDocumentFactory(IDocumentContextFill[] fill)
+    public ApplicationDocumentFactory(IDocumentContextFill[] fill, IApplicationClass app)
     {
       myFill = fill;
+      myApp = app;
     }
 
     public IApplicationDocument CreateNewDocument(string title, ISystemInfo info, ISystemSpace space)
@@ -29,7 +31,7 @@ namespace DSIS.UI.Application.Actions.Impl
         fill.FillContext(ctx, ctx);
       }
       
-      return new ApplicationDocument(title, ctx);
+      return new ApplicationDocument(title, ctx, myApp);
     }
   }
 }
