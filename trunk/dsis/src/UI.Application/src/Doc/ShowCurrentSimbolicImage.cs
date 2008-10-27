@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Windows.Forms;
 using DSIS.Scheme.Impl.Actions.Files;
@@ -11,39 +12,86 @@ namespace DSIS.UI.Application.Doc
   [DocumentComponent]
   public class ShowCurrentSimbolicImage : CenterControl
   {
-    public ShowCurrentSimbolicImage(IApplicationDocument doc, IocDrawChangeAction action, IActionExecution exec)
+    private readonly HtmlControl myHtml;
+    private readonly IActionExecution myExec;
+    private readonly IocDrawChangeAction myAction;
+    private readonly IApplicationDocument myDoc;
+    private readonly IInvocator myInvocator;
+
+    private IDisposable myDrawCookie;
+
+    public ShowCurrentSimbolicImage(IApplicationDocument doc, IocDrawChangeAction action, IActionExecution exec,
+                                    IInvocator invocator)
     {
       var html = new HtmlControl {Dock = DockStyle.Fill};
-      var ctx = doc.Content;
 
       Controls.Add(html);
+      myHtml = html;
+      myExec = exec;
+      myInvocator = invocator;
+      myAction = action;
+      myDoc = doc;
 
-      exec.ExecuteAsync(
+      myHtml.SetContext(x => x.CreateChildElement("p").CreateText("Loading"));
+
+    }
+
+    private void ScheduleUpdate()
+    {
+      if (myDrawCookie != null)
+      {
+        myDrawCookie.Dispose();
+        myDrawCookie = null;
+      }
+
+      myDrawCookie = myInvocator.ExecuteWithTimeout(
         "Draw SI",
-        delegate
-          {
-            if (action.Compatible(ctx).Empty())
+        TimeSpan.FromSeconds(.5),
+        ()
+        =>
+        myExec.ExecuteAsync(
+          "Draw SI",
+          delegate
             {
-              var result = action.Apply(ctx);
-              if (result.ContainsKey(FileKeys.ImageKey))
-              {
-                var file = FileKeys.ImageKey.Get(result);
+              var ctx = myDoc.Content;
 
-                if (File.Exists(file.Path))
+              if (myAction.Compatible(ctx).Empty())
+              {
+                var result = myAction.Apply(ctx);
+                if (result.ContainsKey(FileKeys.ImageKey))
                 {
-                  html.SetContext(x => x.CreateChildElement("img")
-                                         .CreateAttribute("src", file.Path)
-                                         .CreateAttribute("alt", "Simbolic image")
-                                         .CreateAttribute("width", "99%")
-                                         .CreateAttribute("height", "99%")
-                    );
-                  return;
+                  var file = FileKeys.ImageKey.Get(result);
+
+                  if (File.Exists(file.Path))
+                  {
+                    myHtml.SetContext(x => x.CreateChildElement("img")
+                                             .CreateAttribute("src",file.Path)
+                                             .CreateAttribute("alt","Simbolic image")
+                                             .CreateAttribute("width", "99%")
+                                             .CreateAttribute("height", "99%")
+                      );
+                    return;
+                  }
                 }
               }
-            }
-            
-            html.SetContext(x => x.CreateChildElement("p").CreateText("No image is supported."));
-          });
+
+              myHtml.SetContext(
+                x =>
+                x.CreateChildElement("p").CreateText(
+                  "No image is supported."));
+            }));
+    }
+
+    protected override void OnInvalidated(InvalidateEventArgs e)
+    {
+      base.OnInvalidated(e);
+      ScheduleUpdate();
+    }
+
+    protected override void OnResize(EventArgs e)
+    {
+      base.OnResize(e);
+      ScheduleUpdate();
     }
   }
 }

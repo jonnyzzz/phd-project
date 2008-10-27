@@ -5,6 +5,7 @@ using DSIS.Core.Util;
 using DSIS.UI.Application.Doc;
 using DSIS.UI.Controls;
 using log4net;
+using DSIS.Utils;
 
 namespace DSIS.UI.Application.Progress
 {
@@ -48,6 +49,9 @@ namespace DSIS.UI.Application.Progress
                                   } catch(Exception e)
                                   {
                                     LOG.Error("Action " + name + " failed. " + e.Message, e);
+                                  } finally
+                                  {
+                                    myControl.InvokeAction(()=>myControl.ProgressModel = null);
                                   }
                                 });
       thread.Name = "Action " + name;

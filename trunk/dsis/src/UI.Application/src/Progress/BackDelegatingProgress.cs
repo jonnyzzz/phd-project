@@ -16,6 +16,7 @@ namespace DSIS.UI.Application.Progress
                              };
       Interrupted += delegate { info.IsInterrupted = IsInterrupted; };
       info.TextChanged += delegate { Text = info.Text; };
+      Text = info.Text;
     }
   }
 }
