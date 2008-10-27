@@ -1,7 +1,7 @@
 using System;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using System.Xml;
+using DSIS.Utils;
 
 namespace DSIS.UI.Controls.Web
 {
@@ -21,13 +21,17 @@ namespace DSIS.UI.Controls.Web
       myBrowser.DocumentText = code;
     }
 
+    /// <summary>
+    /// thread safe method
+    /// </summary>
     public void SetContext(Action<XmlElement> root)
     {
       var doc = new XmlDocument();
       doc.LoadXml("<html><head><title></title></head><body/></html>");
       root((XmlElement) doc.SelectSingleNode("html/body"));
 
-      SetHTML(doc.OuterXml);
+      var code = doc.OuterXml;
+      this.InvokeAction(() => SetHTML(code));
     }
   }
 }

@@ -1,22 +1,23 @@
-using DSIS.Core.Ioc.Ex;
 using DSIS.Core.System;
-using DSIS.IntegerCoordinates.Impl;
 using DSIS.Scheme;
 using DSIS.Scheme.Ctx;
-using Keys=DSIS.Scheme.Impl.Keys;
+using DSIS.Scheme.Impl;
+using DSIS.UI.UI;
 
-namespace DSIS.UI.UI
+namespace DSIS.UI.Application
 {
   public class ApplicationDocument : IApplicationDocument
   {
     private readonly IApplicationClass myApplication;
+    private readonly IInvocator myInvocator;
     private readonly string myTitle;
     private readonly Context myContext;
 
-    public ApplicationDocument(string title, Context context, IApplicationClass application)
+    public ApplicationDocument(string title, Context context, IApplicationClass application, IInvocator invocator)
     {
       myTitle = title;
       myApplication = application;
+      myInvocator = invocator;
       myContext = context;
     }
 
@@ -32,23 +33,29 @@ namespace DSIS.UI.UI
 
     public Context Content
     {
-      get { 
-        var ctx = new Context(); 
+      get
+      {
+        var ctx = new Context();
         ctx.AddAll(myContext);
-        return ctx; 
+        return ctx;
       }
     }
 
     public void ChangeDocument(Context newContext)
     {
-      var ctx = new Context();
-      ctx.AddAll(newContext);
+      myInvocator.InvokeOrQueue(
+        "Create new document",
+        delegate
+          {
+            var ctx = new Context();
+            ctx.AddAll(newContext);
 
-      AddIfNoteDefined(ctx, newContext, Keys.SystemSpaceKey);
-      AddIfNoteDefined(ctx, newContext, Keys.SystemInfoKey);
+            AddIfNoteDefined(ctx, newContext, Keys.SystemSpaceKey);
+            AddIfNoteDefined(ctx, newContext, Keys.SystemInfoKey);
 
-      var doc = new ApplicationDocument(myTitle, ctx, myApplication);
-      myApplication.Document = doc;
+            var doc = new ApplicationDocument(myTitle, ctx, myApplication, myInvocator);
+            myApplication.Document = doc;
+          });
     }
 
     private void AddIfNoteDefined<T>(IWriteOnlyContext ctx, IReadOnlyContext newContext, Key<T> key)

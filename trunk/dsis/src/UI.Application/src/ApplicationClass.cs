@@ -4,9 +4,20 @@ using DSIS.Core.Ioc;
 using DSIS.Core.Ioc.Ex;
 using DSIS.Spring;
 using DSIS.UI.UI;
+using DSIS.Utils;
 
 namespace DSIS.UI.Application
 {
+  [ComponentImplementation]
+  public class ConfigureWindowsForms
+  {
+    public ConfigureWindowsForms()
+    {
+      System.Windows.Forms.Application.EnableVisualStyles();
+      System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+    }
+  }
+
   [UsedBySpring, ComponentImplementation]
   public class ApplicationClass : IApplicationClass, IApplication
   {
@@ -15,17 +26,17 @@ namespace DSIS.UI.Application
 
     public event EventHandler<DocumentChangedEventArgs> DocumentChanged;
     
-    public ApplicationClass(IMainForm mainForm)
+    public ApplicationClass(IMainForm mainForm, ConfigureWindowsForms _, IInvocator invocator)
     {
+      Invocator = invocator;
       myMainForm = mainForm;
     }
 
+    private IInvocator Invocator { get; set;}
+
     public int Main()
     {
-      System.Windows.Forms.Application.EnableVisualStyles();
-      System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
       System.Windows.Forms.Application.Run(myMainForm.GetFrom());
-
       return 0;
     }
 
@@ -47,17 +58,15 @@ namespace DSIS.UI.Application
         {
           var old = myDocument;
           myDocument = value;
-          FireDocumentChanged(old, myDocument);
+
+          Invocator.InvokeOrQueue("Document changeg", () => FireDocumentChanged(old, myDocument));
         }
       }
     }
 
     private void FireDocumentChanged(IApplicationDocument oldDocument, IApplicationDocument newDocument)
     {
-      if (DocumentChanged != null)
-      {
-        DocumentChanged(this, new DocumentChangedEventArgs(oldDocument, newDocument));
-      }
+      DocumentChanged.Fire(this, new DocumentChangedEventArgs(oldDocument, newDocument));
     }
 
     public void OnMenuExit()

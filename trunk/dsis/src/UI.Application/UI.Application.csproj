@@ -107,7 +107,7 @@
     </Compile>
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />
-    <Compile Include="src\DocumentChangedEventArgs.cs" />
+    <Compile Include="src\ApplicationDocument.cs" />
     <Compile Include="src\Doc\CenterControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,8 +129,8 @@
     <Compile Include="src\Doc\ShowCurrentSimbolicImage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="src\IControlWithTitle.cs" />
     <Compile Include="src\IMainForm.cs" />
+    <Compile Include="src\Invocator.cs" />
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +165,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="src\Progress\ActionProgressControl.cs" />
+    <Compile Include="src\Progress\BackDelegatingProgress.cs" />
+    <Compile Include="src\Progress\DelegatingProgress.cs" />
+    <Compile Include="src\Progress\IActionExecution.cs" />
+    <Compile Include="src\Progress\ProgressBarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Progress\ProgressBarControl.Designer.cs">
+      <DependentUpon>ProgressBarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Progress\ProgressImpl.cs" />
     <Compile Include="src\WorkingFolderInfoImpl.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +245,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="resources\Spring.xml" />
+    <EmbeddedResource Include="src\Progress\ProgressBarControl.resx">
+      <DependentUpon>ProgressBarControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

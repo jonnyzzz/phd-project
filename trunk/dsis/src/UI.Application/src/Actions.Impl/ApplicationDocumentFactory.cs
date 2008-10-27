@@ -12,10 +12,12 @@ namespace DSIS.UI.Application.Actions.Impl
   {
     private readonly IDocumentContextFill[] myFill;
     private readonly IApplicationClass myApp;
+    private readonly IInvocator myInvocator;
 
-    public ApplicationDocumentFactory(IDocumentContextFill[] fill, IApplicationClass app)
+    public ApplicationDocumentFactory(IDocumentContextFill[] fill, IApplicationClass app, IInvocator invocator)
     {
       myFill = fill;
+      myInvocator = invocator;
       myApp = app;
     }
 
@@ -31,7 +33,7 @@ namespace DSIS.UI.Application.Actions.Impl
         fill.FillContext(ctx, ctx);
       }
       
-      return new ApplicationDocument(title, ctx, myApp);
+      return new ApplicationDocument(title, ctx, myApp, myInvocator);
     }
   }
 }

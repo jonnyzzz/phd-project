@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using DSIS.UI.UI;
 
 namespace DSIS.UI.Application.Doc
 {

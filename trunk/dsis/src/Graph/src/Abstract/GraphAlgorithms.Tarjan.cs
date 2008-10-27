@@ -73,7 +73,6 @@ namespace DSIS.Graph.Abstract
       where TNode : Node<TNode, TCell>
       where TCell : ICellCoordinate
     {
-      info.Minimum = 0;
       info.Maximum = graph.EdgesCount;
 
       using (IGraphDataHoler<TarjanNodeData<TCell, TNode>, TNode> holder = graph.CreateDataHolder(x => new TarjanNodeData<TCell,TNode>(x)))

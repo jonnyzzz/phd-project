@@ -18,7 +18,6 @@ namespace DSIS.Core.Processor
 
     public void Execute(IProgressInfo info)
     {
-      info.Minimum = 0;
       info.Maximum = myContext.Cells.Count;
       var builder = myContext.CellImageBuilder;
       var converter = myContext.Converter;

@@ -91,7 +91,6 @@ namespace DSIS.SimpleRunner
     public virtual void ComputeAllMethods(IProgressInfo progress)
     {
       ICollection<Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings>> methods = GetMethods();
-      progress.Minimum = 0;
       progress.Maximum = methods.Count;
       foreach (Pair<ICellImageBuilder<Q>, ICellImageBuilderSettings> pair in methods)
       {
@@ -101,7 +100,7 @@ namespace DSIS.SimpleRunner
 
     public void AddListener(IAbstractImageBuilderListener<T, Q> listener)
     {
-      IProvideExtendedListener ext = listener as IProvideExtendedListener;
+      var ext = listener as IProvideExtendedListener;
       if (ext != null)
       {
         foreach (IAbstractImageBuilderListener<T, Q> builderListener in myListeners)
@@ -119,7 +118,7 @@ namespace DSIS.SimpleRunner
 
     public void RemoveListener(IAbstractImageBuilderListener<T, Q> listener)
     {
-      IProvideExtendedListener ext = listener as IProvideExtendedListener;
+      var ext = listener as IProvideExtendedListener;
       if (ext != null)
       {
         foreach (IAbstractImageBuilderListener<T, Q> builderListener in myListeners)
@@ -138,8 +137,8 @@ namespace DSIS.SimpleRunner
     protected delegate VoidDelegate WithListener(IAbstractImageBuilderListener<T, Q> listener);
     protected void Fire(WithListener listener)
     {
-      List<VoidDelegate> post =new List<VoidDelegate>();
-      foreach (IAbstractImageBuilderListener<T, Q> builderListener in myListeners)
+      var post = new List<VoidDelegate>();
+      foreach (var builderListener in myListeners)
       {
         VoidDelegate p = listener(builderListener);
         if (p != null)

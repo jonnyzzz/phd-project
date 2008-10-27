@@ -5,26 +5,22 @@
 
 namespace DSIS.Core.Util
 {
-  /// <summary>
-  /// Asynchroniuse interface for progress callback.
-  /// </summary>
-  public interface IProgressInfo
+  public interface IProgressInfoLight
   {
-    double Minimum { get; set; }
     double Maximum { get; set; }
-    double Value { get; set; }
 
     void Tick(double step);
 
-    /// <summary>
-    /// Indicates wether progress is supported by the method.
-    /// By default the value if false.
-    /// true if Stepping is supported.
-    /// </summary>
-    bool SupportsSteppingProgres { get; }
-
     bool IsInterrupted { get; }
 
+    string Text { get; set; }    
+  }
+
+  /// <summary>
+  /// Asynchroniuse interface for progress callback.
+  /// </summary>
+  public interface IProgressInfo : IProgressInfoLight
+  {
     IProgressInfo SubProgress(double value);
   }
 }

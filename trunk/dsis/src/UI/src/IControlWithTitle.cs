@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace DSIS.UI.Application
+namespace DSIS.UI.UI
 {
   public interface IControlWithTitle
   {

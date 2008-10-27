@@ -1,13 +1,14 @@
+using System.Drawing;
 using System.Windows.Forms;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl.Actions;
+using DSIS.UI.Application.Progress;
 using DSIS.UI.Controls;
 using DSIS.UI.UI;
 using DSIS.Utils;
-using Keys=DSIS.Scheme.Impl.Keys;
 using DSIS.Scheme.Impl;
 
 namespace DSIS.UI.Application.Doc
@@ -15,7 +16,7 @@ namespace DSIS.UI.Application.Doc
   [DocumentComponent]
   public class ComputeNextStepAction : UserControl, IDocumentControl
   {
-    public ComputeNextStepAction(IApplicationDocument doc)
+    public ComputeNextStepAction(IApplicationDocument doc, IActionExecution exec)
     {
       var ag = new AgregateAction(
         b =>
@@ -41,10 +42,12 @@ namespace DSIS.UI.Application.Doc
       }
 
       var bt = new Button{Text = "Build with BoxMethod"};
-      bt.Click += delegate { BuildNext(doc, ag); };
+      bt.Click += delegate { exec.ExecuteAsync("Next SI", pi=>BuildNext(doc, ag)); };
       bt.Enabled = ag.Compatible(doc.Content).Empty();
 
       Controls.Add(bt);
+      Size = new Size(100, 32);
+      BackColor = Color.Brown;
     }
 
     private static void BuildNext(IApplicationDocument doc, IAction action)

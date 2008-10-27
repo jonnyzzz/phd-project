@@ -94,6 +94,7 @@
     <Compile Include="src\JC\JContainerException.cs" />
     <Compile Include="src\JC\JContainerPredefinedComponentAttribute.cs" />
     <Compile Include="src\JC\RecursionBlocker.cs" />
+    <Compile Include="src\Logger\Log4Net.cs" />
     <Compile Include="src\NoInheritContainerAttribute.cs" />
     <Compile Include="src\ScanAllLoadedAssemblies.cs" />
     <Compile Include="src\ScanCurrentFolder.cs" />
@@ -105,6 +106,9 @@
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\log4net.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
