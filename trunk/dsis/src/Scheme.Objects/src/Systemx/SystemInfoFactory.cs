@@ -9,7 +9,7 @@ namespace DSIS.Scheme.Objects.Systemx
   {
     public ISystemInfo Parse(string name, XmlElement element)
     {
-      return ForEach<ISystemInfo>(delegate(ISystemInfoFactory instance)
+      return ForEach(delegate(ISystemInfoFactory instance)
                                     {
                                       if (
                                         !String.Equals(instance.FactoryName, name,

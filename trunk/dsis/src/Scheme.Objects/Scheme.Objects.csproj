@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="src\NamespaceHolder.cs" />
     <Compile Include="src\Systemx\DoubleArrayParser.cs" />
+    <Compile Include="src\Systemx\ICellImageBuilderFactory.cs" />
     <Compile Include="src\Systemx\IContiniousFunctionSolverFactory.cs" />
     <Compile Include="src\Systemx\IContiniousSolverParameters.cs" />
     <Compile Include="src\Systemx\IOptionsHolder.cs" />
@@ -101,6 +102,10 @@
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
       <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
       <Name>Core.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
+      <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Scheme2\Scheme2.csproj">
       <Project>{69A72457-55CD-463A-840B-73F62BDCA0E5}</Project>
