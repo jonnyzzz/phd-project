@@ -129,6 +129,7 @@
     <Compile Include="src\Actions\Files\FlatWorkingFolder.cs" />
     <Compile Include="src\Actions\Files\GraphEntropyLogAction.cs" />
     <Compile Include="src\Actions\Files\ImageResult.cs" />
+    <Compile Include="src\Actions\Files\IocDrawChangeAction.cs" />
     <Compile Include="src\Actions\Files\IterationStepsPrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\Logger.cs" />
     <Compile Include="src\Actions\Files\LoggerAction.cs" />

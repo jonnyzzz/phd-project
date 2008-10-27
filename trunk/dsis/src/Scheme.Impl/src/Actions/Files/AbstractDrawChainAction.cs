@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DSIS.Core.Ioc;
 using DSIS.Core.Visualization;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph;
@@ -9,29 +8,6 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  [ComponentImplementation]
-  public class IocDrawChangeAction : AbstractDrawChainAction
-  {
-    private readonly GnuplotDrawer.GnuplotDrawer myDrawer;
-    private readonly WorkingFolderInfo myInfo;
-
-    public IocDrawChangeAction(GnuplotDrawer.GnuplotDrawer drawer, WorkingFolderInfo info)
-    {
-      myDrawer = drawer;
-      myInfo = info;
-    }
-
-    protected override WorkingFolderInfo GetWorkingFolderInfo(IReadOnlyContext input)
-    {
-      return myInfo;
-    }
-
-    protected override void DrawFromScript(IGnuplotPhaseScriptGen gen)
-    {
-      myDrawer.DrawImage(gen).WaitForExit();
-    }
-  }
-
   public abstract class AbstractDrawChainAction : IntegerCoordinateSystemActionBase3
   {
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
@@ -94,7 +70,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       IGnuplotPhaseScriptGen gen = GnuplotSriptGen.ScriptGen(
         Dimension,
         folderInfo.CreateFileName("chain-recurrent-picture-script.gnuplot"),
-        new GnuplotScriptParameters(outputFile, ""));
+        CreateOutputParameters(outputFile));
 
       var values = (IEnumerable<GnuplotPointsFileWriter>)files.Values;
       if (otherFilesWriter != null)
@@ -112,6 +88,11 @@ namespace DSIS.Scheme.Impl.Actions.Files
       DrawFromScript(gen);
 
       FileKeys.ImageKey.Set(output, result);
+    }
+
+    protected virtual GnuplotScriptParameters CreateOutputParameters(string outputFile)
+    {
+      return new GnuplotScriptParameters(outputFile, "");
     }
 
     protected abstract void DrawFromScript(IGnuplotPhaseScriptGen gen);

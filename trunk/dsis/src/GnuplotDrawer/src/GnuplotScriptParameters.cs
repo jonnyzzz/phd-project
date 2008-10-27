@@ -3,8 +3,8 @@ namespace DSIS.GnuplotDrawer
   public class GnuplotScriptParameters
   {
     public readonly string OutputFile;
-    public readonly int Width = 1000;
-    public readonly int Height = 1000;
+    public int Width { get; set;}
+    public int Height { get; set;}
     public readonly string Title;
     
     public bool ShowKeyHistory{ get; set;}
@@ -12,6 +12,7 @@ namespace DSIS.GnuplotDrawer
 
     public GnuplotScriptParameters(string outputFile, string title)
     {
+      Height = Width = 1000;
       OutputFile = outputFile;
       Title = title;
       ForcePoints = false;      

@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using DSIS.Scheme.Impl.Actions.Files;
@@ -49,37 +50,42 @@ namespace DSIS.UI.Application.Doc
         TimeSpan.FromSeconds(.5),
         ()
         =>
-        myExec.ExecuteAsync(
-          "Draw SI",
-          delegate
-            {
-              var ctx = myDoc.Content;
-
-              if (myAction.Compatible(ctx).Empty())
-              {
-                var result = myAction.Apply(ctx);
-                if (result.ContainsKey(FileKeys.ImageKey))
+          {
+            Size sz = ClientSize - new Size(40,40) - new Size(Padding.Left + Padding.Right, Padding.Top+Padding.Bottom);
+            myExec.ExecuteAsync(
+              "Draw SI",
+              delegate
                 {
-                  var file = FileKeys.ImageKey.Get(result);
+                  myAction.Height = sz.Height;
+                  myAction.Width = sz.Width;
+                  var ctx = myDoc.Content;
 
-                  if (File.Exists(file.Path))
+                  if (myAction.Compatible(ctx).Empty())
                   {
-                    myHtml.SetContext(x => x.CreateChildElement("img")
-                                             .CreateAttribute("src",file.Path)
-                                             .CreateAttribute("alt","Simbolic image")
-                                             .CreateAttribute("width", "99%")
-                                             .CreateAttribute("height", "99%")
-                      );
-                    return;
-                  }
-                }
-              }
+                    var result = myAction.Apply(ctx);
+                    if (result.ContainsKey(FileKeys.ImageKey))
+                    {
+                      var file = FileKeys.ImageKey.Get(result);
 
-              myHtml.SetContext(
-                x =>
-                x.CreateChildElement("p").CreateText(
-                  "No image is supported."));
-            }));
+                      if (File.Exists(file.Path))
+                      {
+                        myHtml.SetContext(x => x.CreateChildElement("img")
+                                                 .CreateAttribute("src", file.Path)
+                                                 .CreateAttribute("alt", "Simbolic image")
+                                                 .CreateAttribute("width", sz.Width + "px")
+                                                 .CreateAttribute("height", sz.Height + "px")
+                          );
+                        return;
+                      }
+                    }
+                  }
+
+                  myHtml.SetContext(
+                    x =>
+                    x.CreateChildElement("p").CreateText(
+                      "No image is supported."));
+                });
+          });
     }
 
     protected override void OnInvalidated(InvalidateEventArgs e)

@@ -21,10 +21,14 @@ namespace DSIS.UI.Application.Progress
       set
       {
         if (myProgress == value) return;
+        myStartInfiniteTimer.Enabled = false;
         Unsubscribe(myProgress);
-        var pi = new BackDelegatingProgress(value) {Maximum = 1000};
-        Subscribe(pi);
-        myProgress = pi;
+        if (value != null)
+        {
+          var pi = new BackDelegatingProgress(value) {Maximum = 1000};
+          Subscribe(pi);
+          myProgress = pi;
+        }
       }
     }
 
