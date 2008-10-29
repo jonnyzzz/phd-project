@@ -1,5 +1,3 @@
-using DSIS.UI.FunctionDialog.UI;
-
 namespace DSIS.UI.FunctionDialog.UI
 {
   public static class ListInfo

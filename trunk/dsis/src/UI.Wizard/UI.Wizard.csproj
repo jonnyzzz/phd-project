@@ -82,10 +82,17 @@
     </Compile>
     <Compile Include="src\EmptyWizard.cs" />
     <Compile Include="src\EmptyWizardPage.cs" />
+    <Compile Include="src\FormsGenerator\BooleanFieldInfo.cs" />
+    <Compile Include="src\FormsGenerator\DoubleFieldInfo.cs" />
+    <Compile Include="src\FormsGenerator\FieldInfoBase.cs" />
+    <Compile Include="src\FormsGenerator\FieldInfoFactory.cs" />
     <Compile Include="src\FormsGenerator\FormGenerator.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\FormsGenerator\FormGeneratorWizardPage.cs" />
+    <Compile Include="src\FormsGenerator\NonEditableFieldInfo.cs" />
+    <Compile Include="src\FormsGenerator\StringFieldInfo.cs" />
+    <Compile Include="src\FormsGenerator\TextFieldInfo.cs" />
     <Compile Include="src\HeaderControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

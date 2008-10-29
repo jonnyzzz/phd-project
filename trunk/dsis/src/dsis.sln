@@ -135,6 +135,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvariantSetMethod", "Invar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvariantSetMethod.Tests", "InvariantSetMethod.Tests\InvariantSetMethod.Tests.csproj", "{73B131B6-5E74-4F6C-B008-9A6134EC6516}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.ComputationDialogs", "UI.ComputationDialogs\UI.ComputationDialogs.csproj", "{4BB65475-EC86-4C56-943D-7B8E4D8D152D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -635,6 +637,12 @@ Global
 		{73B131B6-5E74-4F6C-B008-9A6134EC6516}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73B131B6-5E74-4F6C-B008-9A6134EC6516}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73B131B6-5E74-4F6C-B008-9A6134EC6516}.Release|x64.ActiveCfg = Release|Any CPU
+		{4BB65475-EC86-4C56-943D-7B8E4D8D152D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BB65475-EC86-4C56-943D-7B8E4D8D152D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BB65475-EC86-4C56-943D-7B8E4D8D152D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4BB65475-EC86-4C56-943D-7B8E4D8D152D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BB65475-EC86-4C56-943D-7B8E4D8D152D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BB65475-EC86-4C56-943D-7B8E4D8D152D}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -667,5 +675,6 @@ Global
 		{F08FC04F-28A4-4A97-80CB-7F3867C8244B} = {19D282F3-A7D7-4873-9AD0-B51938EDA439}
 		{74DCA687-4C27-4891-90A7-067B9F4F5B7A} = {19D282F3-A7D7-4873-9AD0-B51938EDA439}
 		{3305A57B-0432-4E75-8E13-8AB265B8ECB6} = {19D282F3-A7D7-4873-9AD0-B51938EDA439}
+		{4BB65475-EC86-4C56-943D-7B8E4D8D152D} = {19D282F3-A7D7-4873-9AD0-B51938EDA439}
 	EndGlobalSection
 EndGlobal

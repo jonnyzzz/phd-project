@@ -73,10 +73,15 @@
       <DependentUpon>PointMethodSettings.xsd</DependentUpon>
     </Compile>
     <Compile Include="src\PointMethod.cs" />
+    <Compile Include="src\PointMethodFactory.cs" />
     <Compile Include="src\PointMethodSettings.cs" />
     <Compile Include="src\PointMethodSettingsFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
       <Name>Scheme.Objects</Name>

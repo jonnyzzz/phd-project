@@ -6,8 +6,10 @@ using DSIS.Scheme.Actions;
 using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.UI.Application.Progress;
+using DSIS.UI.ComputationDialogs;
 using DSIS.UI.Controls;
 using DSIS.UI.UI;
+using DSIS.UI.Wizard;
 using DSIS.Utils;
 using DSIS.Scheme.Impl;
 
@@ -16,7 +18,7 @@ namespace DSIS.UI.Application.Doc
   [DocumentComponent]
   public class ComputeNextStepAction : UserControl, IDocumentControl
   {
-    public ComputeNextStepAction(IApplicationDocument doc, IActionExecution exec)
+    public ComputeNextStepAction(IApplicationDocument doc, IActionExecution exec, SIConstructionWizard w)
     {
       var ag = new AgregateAction(
         b =>
@@ -44,8 +46,19 @@ namespace DSIS.UI.Application.Doc
       var bt = new Button{Text = "Build with BoxMethod"};
       bt.Click += delegate { exec.ExecuteAsync("Next SI", pi=>BuildNext(doc, ag)); };
       bt.Enabled = ag.Compatible(doc.Content).Empty();
-
       Controls.Add(bt);
+
+
+      var bt2 = new Button {Text = "Wizard", Left = bt.Left + bt.Width + 5};
+      bt2.Click += delegate
+                     {
+                       using (var f = new WizardForm(w))
+                       {
+                         f.ShowDialog();
+                       }
+                     };
+      Controls.Add(bt2);
+      
       Size = new Size(100, 32);
       BackColor = Color.Brown;
     }

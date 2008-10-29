@@ -1,8 +1,10 @@
 using System;
+using System.ComponentModel;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
+using DSIS.Utils.Bean;
 
 namespace DSIS.CellImageBuilder.BoxMethod
 {
@@ -14,6 +16,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
     [Used]
     public BoxMethodSettings()
     {
+      Eps = 0.1;
     }
 
     public BoxMethodSettings(double eps)
@@ -25,6 +28,11 @@ namespace DSIS.CellImageBuilder.BoxMethod
     /// Relative epsilone to be added as border to the build rectangle.
     /// Eps = 1 means 1 cell size on the corresponding coordinate
     /// </summary>
+    [IncludeGenerate(
+      Title = "Epsilon", 
+      Description = @"Relative epsilone to be added as border to the build rectangle. Eps = 1 means 1 cell size on the corresponding coordinate"),
+      DefaultValue(0.1)
+    ]
     public double Eps { get; set;}
 
     public string PresentableName

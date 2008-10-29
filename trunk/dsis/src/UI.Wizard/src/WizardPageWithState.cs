@@ -2,13 +2,26 @@ using System.Windows.Forms;
 
 namespace DSIS.UI.Wizard
 {
-  public abstract class WizardPageWithState : IWizardPageWithState
+  public abstract class WizardPageWithState : WizardPageWithState<IWizardPage>
   {
-    private readonly IWizardPage myPage;
+    protected WizardPageWithState(IWizardPage page) : base(page)
+    {
+    }
+  }
 
-    protected WizardPageWithState(IWizardPage page)
+  public abstract class WizardPageWithState<P> : IWizardPageWithState
+    where P : IWizardPage
+  {
+    private readonly P myPage;
+
+    protected WizardPageWithState(P page)
     {
       myPage = page;
+    }
+
+    protected P Page
+    {
+      get { return myPage; }
     }
 
     public string Title

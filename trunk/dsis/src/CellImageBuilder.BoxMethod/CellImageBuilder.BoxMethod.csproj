@@ -79,7 +79,7 @@
     <Compile Include="src\BoxMethod.cs" />
     <Compile Include="src\BoxMethodSettingsFactory.cs" />
     <Compile Include="src\BoxMethodSettings.cs" />
-    <Compile Include="src\BoxMethodSettingsFactory2.cs" />
+    <Compile Include="src\BoxMethodFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">

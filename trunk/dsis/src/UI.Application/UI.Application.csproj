@@ -219,6 +219,10 @@
       <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
       <Name>Spring</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UI.ComputationDialogs\UI.ComputationDialogs.csproj">
+      <Project>{4BB65475-EC86-4C56-943D-7B8E4D8D152D}</Project>
+      <Name>UI.ComputationDialogs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UI.Controls\UI.Controls.csproj">
       <Project>{3305A57B-0432-4E75-8E13-8AB265B8ECB6}</Project>
       <Name>UI.Controls</Name>

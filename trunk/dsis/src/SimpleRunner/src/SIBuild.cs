@@ -37,15 +37,16 @@ namespace DSIS.SimpleRunner
 
     private static void BuildContiniousSystems()
     {
-      for (int rep = 3; rep < 15; rep++)
+      for (int rep = 3; rep < 13; rep++)
       {
         var data = ForBuildser(new List<ComputationData>
                      {
-                       new ComputationData {system = SystemInfoFactory.Duffing2x2Runge(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.Duffing1_5x1_5Runge(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.Duffing1_4x1_4Runge(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.Duffing1_3x1_3Runge(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.Duffing1_2x1_2Runge(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing2x2Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_5x1_5Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_4x1_4Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_3x1_3Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_2x1_2Runge(), repeat = rep},
                        /*new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.VanDerPolRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.LorentzRunge(), repeat = rep},

@@ -6,7 +6,7 @@ namespace DSIS.UI.Wizard
 
     public IWizardPage FirstPage { get; protected set; }
 
-    public bool IsLastPage(IWizardPage page)
+    public virtual bool IsLastPage(IWizardPage page)
     {
       return ((IWizardPageWithState)page).IsLastPage;
     }

@@ -5,19 +5,18 @@ using System.Windows.Forms;
 using DSIS.UI.UI;
 using DSIS.Utils;
 using DSIS.Utils.Bean;
-using log4net;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {
   public class FormGenerator : UserControl, IErrorProvider<bool>
   {
-    private static readonly ILog LOG = LogManager.GetLogger(typeof (FormGenerator));
+    private readonly FieldInfoFactory myFactory = new FieldInfoFactory();
 
     private readonly Type myType;
     private readonly object myObject;
     private readonly ErrorProvider myErrorProvider;
 
-    private readonly List<FieldInfo> myPendingErrors = new List<FieldInfo>();
+    private readonly HashSet<FieldInfoBase> myPendingErrors = new HashSet<FieldInfoBase>();
 
     public FormGenerator(object obj)
     {
@@ -33,7 +32,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
         var attr = info.OneInstance<IncludeGenerateAttribute>();
         if (attr != null)
         {
-          AddAttribute(controls, new FieldInfo(attr.Title, attr.Description, info, myObject));
+          AddAttribute(controls, CreateFieldInfo(info, attr));
         }
       }
 
@@ -44,18 +43,36 @@ namespace DSIS.UI.Wizard.FormsGenerator
       }
     }
 
+    private FieldInfoBase CreateFieldInfo(PropertyInfo info, IncludeGenerateAttribute attr)
+    {
+      var inf = myFactory.CreateFieldInfo(myObject, info, attr);
+
+      inf.Error += (control, message) =>
+                      {
+                        myErrorProvider.SetError(control, message);
+                        if (message != null)
+                        {
+                          myPendingErrors.Add(inf);
+                        } else
+                        {
+                          myPendingErrors.Remove(inf);
+                        }
+                      };
+      return inf;
+    }
+
     bool IErrorProvider<bool>.Validate()
     {
       return myPendingErrors.Count == 0;
     }
 
-    private void AddAttribute(ICollection<Control> host, FieldInfo info)
+    private static void AddAttribute(ICollection<Control> host, FieldInfoBase info)
     {
       var panel = new Panel
                     {
                       Dock = DockStyle.Top, 
                       Width = 150,
-                      Padding = new Padding(0,0,5,0),
+                      Padding = new Padding(0,0,5,5),
                       Height = 25
                     };
       var caption = new Label
@@ -64,31 +81,12 @@ namespace DSIS.UI.Wizard.FormsGenerator
                         Width = 70, 
                         Dock = DockStyle.Left, 
                       };
-      var field = new TextBox
-                    {
-                      Text = info.ValueString, 
-                      Width = 150, 
-                      Dock = DockStyle.Left
-                    };
-      field.TextChanged += delegate
-      {
-        try
-        {
-          info.TrySetValue(field.Text);
-          myErrorProvider.SetError(field, null);
-          myPendingErrors.Remove(info);
-        }
-        catch (Exception e)
-        {
-          LOG.Error("Parsing text input", e);
-          myErrorProvider.SetError(field, "Failed to set value. " + e.Message);
-          myPendingErrors.Add(info);
-        }
-      };
+      var field = info.EditorControl();
+      field.Width = 150;
+      field.Dock = DockStyle.Left;
 
       panel.Controls.Add(field); 
       panel.Controls.Add(caption); 
-      
 
       host.Add(panel);
       
@@ -102,37 +100,6 @@ namespace DSIS.UI.Wizard.FormsGenerator
                       };
 
         host.Add(label);
-      }
-    }
-
-    private class FieldInfo
-    {
-      private readonly PropertyInfo myProperty;
-      private readonly object myInstance;
-
-      public readonly string Caption;
-      public readonly string Description;
-
-      public FieldInfo(string caption, string description, PropertyInfo property, object instance)
-      {
-        Caption = caption;
-        myInstance = instance;
-        myProperty = property;
-        Description = description;
-      }
-
-      public void TrySetValue(string value)
-      {
-        //todo: Use TypeConverter here
-        if (myProperty.PropertyType == typeof(double))
-        {
-          myProperty.SetValue(myInstance, double.Parse(value), null);
-        }
-      }
-
-      public string ValueString
-      {
-        get { return (myProperty.GetValue(myInstance, null) ?? string.Empty).ToString(); }
       }
     }
   }
