@@ -11,13 +11,13 @@ namespace DSIS.CellImageBuilder.Tests
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate
   {
-    private readonly PointMethodSettings stategy = new PointMethodSettings(new int[] { 2, 2 });
-    private readonly PointMethodSettings stategy2 = new PointMethodSettings(new int[] { 2, 2 }, 0.3);
+    private readonly PointMethodSettings stategy = new PointMethodSettings{Points=2};
+    private readonly PointMethodSettings stategy2 = new PointMethodSettings{Points=2, UseOverlapping = true, Overlap = 0.3};
 
     [Test]
     public void Test_01()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
       DoTwoDimTest(ics, ics.Create(5, 5),
@@ -25,7 +25,7 @@ namespace DSIS.CellImageBuilder.Tests
                      {
                        outs[0] = ins[0];
                        outs[1] = ins[1] / 7;
-                     }, new PointMethodSettings(new int[] { 2, 2 }),
+                     }, new PointMethodSettings{Points=2},
                    @"-------------------
 ..........
 ..........
@@ -45,7 +45,7 @@ x.........
     [Test]
     public void Test_02()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
       DoTwoDimTest(ics, ics.Create(5, 5),
@@ -72,7 +72,7 @@ x.........
     [Test]
     public void Test_03()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -100,7 +100,7 @@ x.........
     [Test]
     public void Test_04()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -128,7 +128,7 @@ x.........
     [Test]
     public void Test_05()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -156,7 +156,7 @@ x.........
     [Test]
     public void Test_06()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -184,7 +184,7 @@ x.........
     [Test]
     public void Test_07()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -211,7 +211,7 @@ x.........
     [Test]
     public void Test_08()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
       DoTwoDimTest(ics, ics.Create(5, 5),
@@ -238,7 +238,7 @@ x.........
     [Test]
     public void Test_09()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -266,7 +266,7 @@ x.........
     [Test]
     public void Test_10()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -294,7 +294,7 @@ x.........
     [Test]
     public void Test_11()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -322,7 +322,7 @@ x.........
     [Test]
     public void Test_12()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -350,7 +350,7 @@ x.........
     [Test]
     public void Test_13()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -378,7 +378,7 @@ x.........
     [Test]
     public void Test_14()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
       DoTwoDimTest(ics, ics.Create(2, 2),
@@ -386,7 +386,7 @@ x.........
                      {
                        outs[0] = ins[0];
                        outs[1] = ins[1] * 3;
-                     }, new PointMethodSettings(new int[] { 2, 2 }),
+                     }, new PointMethodSettings{Points=2},
                    @"-------------------
 ..........
 ..........
@@ -405,7 +405,7 @@ x.........
     [Test]
     public void Test_15()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
       DoTwoDimTest(ics, ics.Create(2, 2),
@@ -413,7 +413,7 @@ x.........
                      {
                        outs[0] = ins[0];
                        outs[1] = ins[1] * 3;
-                     }, new PointMethodSettings(new int[] { 2, 2 }, 0.3),
+                     }, new PointMethodSettings{Points=3, UseOverlapping = true, Overlap = 0.3},
                    @"-------------------
 ..........
 ..........

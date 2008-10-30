@@ -11,7 +11,7 @@ namespace DSIS.CellImageBuilder.PointMethod
   public class PointMethodSettings : ICellImageBuilderIntegerCoordinatesSettings
   {
     [IncludeGenerate(Title = "Number of point on each axis")]
-    public int[] Points { get; set;}
+    public int Points { get; set;}
     [IncludeGenerate(Title = "Use overlapping")]
     public bool UseOverlapping { get; set;}
     [IncludeGenerate(Title = "Relative overlap value", Description = "1.0 means full cell size. By degault 0.2")]
@@ -20,25 +20,14 @@ namespace DSIS.CellImageBuilder.PointMethod
     [Used]
     public PointMethodSettings()
     {
-    }
-
-    public PointMethodSettings(int[] points)
-    {
-      Points = points;
+      Points = 3;
       UseOverlapping = false;
-      Overlap = 0;
-    }
-
-    public PointMethodSettings(int[] points, double overlap)
-    {
-      Points = points;
-      Overlap = overlap;
-      UseOverlapping = false;
+      Overlap = 0.2;
     }
 
     public string PresentableName
     {
-      get { return string.Format("Point Method[{0}{1}]", Points.JoinString(","), (UseOverlapping ? ",overlap=" + Overlap : "")); }
+      get { return string.Format("Point Method[{0}{1}]", Points, (UseOverlapping ? ",overlap=" + Overlap : "")); }
     }
 
     public ICellImageBuilder<TCell> Create<TCell>()       

@@ -133,7 +133,7 @@ namespace DSIS.SimpleRunner
                                     
                                     var xxx= new ReplaceContextAction(
                                        new SetMethod(
-                                         new PointMethodSettings(2.Fill(dim), 0.1), 1L.Fill(dim)));
+                                         new PointMethodSettings{Points=3, UseOverlapping = true, Overlap = .1}, 1L.Fill(dim)));
                                     IAction xa2 = buildIS;
                                     IAction xa3 = EntropyAction(x, steps);
 

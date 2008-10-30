@@ -1,3 +1,4 @@
+using System;
 using DSIS.CellImageBuilder.PointMethod;
 using DSIS.CellImageBuilders.PointMethod;
 using DSIS.Scheme.Objects.Systemx;
@@ -19,6 +20,8 @@ namespace DSIS.CellImageBuilder.PointMethod
 
     protected override PointMethodSettings Parse(XsdPointMethodSettings obj)
     {
+      throw new NotImplementedException();
+/*
       if (obj.Overlaped)
       {
         return new PointMethodSettings(obj.Points);
@@ -26,6 +29,7 @@ namespace DSIS.CellImageBuilder.PointMethod
       {
         return new PointMethodSettings(obj.Points, obj.Overlap);
       }
+*/
     }
   }
 }

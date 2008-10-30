@@ -25,7 +25,7 @@ namespace DSIS.Tests.BlackBox
     public override void SetUp()
     {
       base.SetUp();
-      Method = new PointMethodSettings(new int[] {3, 3});
+      Method = new PointMethodSettings{Points=3};
     }
   }
 }
