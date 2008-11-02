@@ -40,14 +40,14 @@ namespace DSIS.UI.Application
       return 0;
     }
 
-    public T ShowDialog<T>(WithForm<T> action)
+    public T ShowDialog<T>(Func<Form, T> action)
     {
-      return action(MainForm());
+      return action(MainForm);
     }
 
-    public void ShowDialog(WithForm action)
+    public void ShowDialog(Action<Form> action)
     {
-      action(MainForm());
+      action(MainForm);
     }
 
     public IApplicationDocument Document
@@ -71,12 +71,12 @@ namespace DSIS.UI.Application
 
     public void OnMenuExit()
     {
-      MainForm().Close();
+      MainForm.Close();
     }
 
-    private Form MainForm()
+    private Form  MainForm
     {
-      return myMainForm.GetFrom();
+      get { return myMainForm.GetFrom(); }
     }
   }
 }

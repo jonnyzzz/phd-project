@@ -90,6 +90,8 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\FormsGenerator\FormGeneratorWizardPage.cs" />
+    <Compile Include="src\FormsGenerator\IntFieldInfo.cs" />
+    <Compile Include="src\FormsGenerator\LongFieldInfo.cs" />
     <Compile Include="src\FormsGenerator\NonEditableFieldInfo.cs" />
     <Compile Include="src\FormsGenerator\StringFieldInfo.cs" />
     <Compile Include="src\FormsGenerator\TextFieldInfo.cs" />

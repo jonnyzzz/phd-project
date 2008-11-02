@@ -11,7 +11,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
 
     protected override Control CreateControl()
     {
-      return new Label {Text = "There is no editor for type " + PropertyType};
+      return new Label {Text = "There is no editor for type " + PropertyType.FullName};
     }
   }
 }

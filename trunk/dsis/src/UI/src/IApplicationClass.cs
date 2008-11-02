@@ -5,10 +5,6 @@ using DSIS.Core.Ioc;
 
 namespace DSIS.UI.UI
 {
-  public delegate T WithForm<T>(Form form);
-
-  public delegate void WithForm(Form form);
-
   public class DocumentChangedEventArgs : CancelEventArgs
   {
     public readonly IApplicationDocument OldDocument;
@@ -25,8 +21,8 @@ namespace DSIS.UI.UI
   [ComponentInterface]
   public interface IApplicationClass
   {
-    T ShowDialog<T>(WithForm<T> action);
-    void ShowDialog(WithForm action);
+    T ShowDialog<T>(Func<Form, T> action);
+    void ShowDialog(Action<Form> action);
 
     IApplicationDocument Document { get; set; }
     event EventHandler<DocumentChangedEventArgs> DocumentChanged;

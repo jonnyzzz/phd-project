@@ -15,6 +15,14 @@ namespace DSIS.UI.Wizard.FormsGenerator
       {
         return new DoubleFieldInfo(attr.Title, attr.Description, info, instance);
       }
+      if (info.PropertyType == typeof(long))
+      {
+        return new LongFieldInfo(attr.Title, attr.Description, info, instance);
+      }
+      if (info.PropertyType == typeof(int))
+      {
+        return new IntFieldInfo(attr.Title, attr.Description, info, instance);
+      }
       if (info.PropertyType == typeof(bool))
       {
         return new BooleanFieldInfo(attr.Title, attr.Description, info, instance);

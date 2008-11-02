@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DSIS.CellImageBuilder.BoxMethod;
+using DSIS.CellImageBuilder.Shared;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Exec;
@@ -18,18 +19,9 @@ namespace DSIS.UI.Application.Doc
   [DocumentComponent]
   public class ComputeNextStepAction : UserControl, IDocumentControl
   {
-    public ComputeNextStepAction(IApplicationDocument doc, IActionExecution exec, SIConstructionWizard w)
+    public ComputeNextStepAction(IApplicationDocument doc, IActionExecution exec, ISIConstructionWizard w)
     {
-      var ag = new AgregateAction(
-        b =>
-          {
-            var bl = new ActionBuilder2Adaptor(b);
-
-            bl.Start
-              .Edge(new BuildSymbolicImageAction2(2L.Fill(doc.System.Dimension), BoxMethodSettings.Default)).With(x=>x.Edge(bl.Finish))
-              .Edge(new ChainRecurrenctSimbolicImageAction())
-              .Edge(bl.Finish);
-          });
+      var ag = CreateActionGraph(doc, BoxMethodSettings.Default);
 
       if (!doc.Content.ContainsCellCollection())
       {
@@ -52,15 +44,26 @@ namespace DSIS.UI.Application.Doc
       var bt2 = new Button {Text = "Wizard", Left = bt.Left + bt.Width + 5};
       bt2.Click += delegate
                      {
-                       using (var f = new WizardForm(w))
-                       {
-                         f.ShowDialog();
-                       }
+                       w.ShowWizard();
                      };
       Controls.Add(bt2);
       
       Size = new Size(100, 32);
       BackColor = Color.Brown;
+    }
+
+    private static AgregateAction CreateActionGraph(IApplicationDocument doc, ICellImageBuilderIntegerCoordinatesSettings settings)
+    {
+      return new AgregateAction(
+        b =>
+          {
+            var bl = new ActionBuilder2Adaptor(b);
+
+            bl.Start
+              .Edge(new BuildSymbolicImageAction2(2L.Fill(doc.System.Dimension), settings)).With(x=>x.Edge(bl.Finish))
+              .Edge(new ChainRecurrenctSimbolicImageAction())
+              .Edge(bl.Finish);
+          });
     }
 
     private static void BuildNext(IApplicationDocument doc, IAction action)

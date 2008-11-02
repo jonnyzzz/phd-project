@@ -51,7 +51,7 @@ namespace DSIS.UI.Wizard
 
     public abstract IWizardPageWithState NextPage { get; }
 
-    public bool IsLastPage
+    public virtual bool IsLastPage
     {
       get { return false; }
     }

@@ -47,8 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ISIConstructionWizard.cs" />
     <Compile Include="src\SIConstructionComponent.cs" />
+    <Compile Include="src\SIConstructionMethodSettingsWizardState.cs" />
+    <Compile Include="src\SIConstructionMethodWizardPage.cs" />
+    <Compile Include="src\SIConstructionMethodWizardState.cs" />
     <Compile Include="src\SIConstructionWizard.cs" />
+    <Compile Include="src\SIConstructionWizardImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
