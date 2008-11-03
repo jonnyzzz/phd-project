@@ -10,7 +10,6 @@ using DSIS.UI.Application.Progress;
 using DSIS.UI.ComputationDialogs;
 using DSIS.UI.Controls;
 using DSIS.UI.UI;
-using DSIS.UI.Wizard;
 using DSIS.Utils;
 using DSIS.Scheme.Impl;
 
@@ -44,7 +43,8 @@ namespace DSIS.UI.Application.Doc
       var bt2 = new Button {Text = "Wizard", Left = bt.Left + bt.Width + 5};
       bt2.Click += delegate
                      {
-                       w.ShowWizard();
+                       var settings = w.ShowWizard();
+                       exec.ExecuteAsync("Next SI", pi=>BuildNext(doc, CreateActionGraph(doc, (ICellImageBuilderIntegerCoordinatesSettings) settings)));
                      };
       Controls.Add(bt2);
       

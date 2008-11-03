@@ -34,7 +34,13 @@ namespace DSIS.UI.Application.Doc
       myDoc = doc;
 
       myHtml.SetContext(x => x.CreateChildElement("p").CreateText("Loading"));
+    }
 
+    protected override void Dispose(bool disposing)
+    {
+      myDrawCookie.SafeDispose();
+
+      base.Dispose(disposing);
     }
 
     private void ScheduleUpdate()
@@ -51,6 +57,11 @@ namespace DSIS.UI.Application.Doc
         ()
         =>
           {
+            if (!IsHandleCreated)
+            {
+              ScheduleUpdate();
+              return;
+            }
             Size sz = ClientSize - new Size(40,40) - new Size(Padding.Left + Padding.Right, Padding.Top+Padding.Bottom);
             myExec.ExecuteAsync(
               "Draw SI",

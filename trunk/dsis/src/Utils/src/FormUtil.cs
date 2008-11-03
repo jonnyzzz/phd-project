@@ -22,7 +22,6 @@ namespace DSIS.Utils
                                 LOG.Error(e.Message, e);
                               }
                             };
-
       control.BeginInvoke(safeAction);
     }
   }

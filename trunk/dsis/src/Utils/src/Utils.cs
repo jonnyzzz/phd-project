@@ -28,6 +28,12 @@ namespace DSIS.Utils
       return coll ?? EmptyArray<object>.Instance;
     }
 
+    public static void SafeDispose(this IDisposable d)
+    {
+      if (d != null)
+        d.Dispose();
+    }
+
     public static string JoinString<T>(this IEnumerable<T> enu, string separator)
     {
       var sb = new StringBuilder();
