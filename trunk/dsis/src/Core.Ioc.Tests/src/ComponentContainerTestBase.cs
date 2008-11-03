@@ -212,7 +212,7 @@ namespace DSIS.Core.Ioc.Tests
     public void Test_06_Subcotainer()
     {
       DoTest<TI,TO1>();
-      var c = myContainer.SubContainer<TI, TC1, TO6>();
+      var c = myContainer.SubContainer<TO6>();
       c.Start();
       AssertContainsObject<DependsOnT1I>(c);
     }

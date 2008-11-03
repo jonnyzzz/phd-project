@@ -17,7 +17,7 @@ namespace DSIS.UI.Application.Actions
 
     public void Start()
     {
-      var c = myContainer.SubContainer<ComponentInterfaceAttribute, ComponentCollectionAttribute, ActionHandlerAttribute>();
+      var c = myContainer.SubContainer<ActionHandlerAttribute>();
       c.Start();
       foreach (var handler in c.GetComponents<IActionHandler>())
       {

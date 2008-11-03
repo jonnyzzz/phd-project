@@ -31,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\castle\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.MicroKernel, Version=1.0.3.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\castle\Castle.MicroKernel.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
@@ -62,14 +54,11 @@
     <Compile Include="src\AssemblyScanerImpl.cs" />
     <Compile Include="src\ComponentCollectionAttribute.cs" />
     <Compile Include="src\ComponentCollectionAttributeBase.cs" />
-    <Compile Include="src\ComponentContainer.cs" />
     <Compile Include="src\ComponentContainerException.cs" />
-    <Compile Include="src\ComponentContainerServices.cs" />
     <Compile Include="src\ComponentImplementationAttribute.cs" />
     <Compile Include="src\ComponentImplementationAttributeBase.cs" />
     <Compile Include="src\ComponentInterfaceAttribute.cs" />
     <Compile Include="src\ComponentInterfaceAttributeBase.cs" />
-    <Compile Include="src\ComponentInterfaceLookupImpl.cs" />
     <Compile Include="src\Ex\ApplicationEntryPoint.cs" />
     <Compile Include="src\Ex\CommandLineImpl.cs" />
     <Compile Include="src\Ex\IApplication.cs" />
@@ -98,7 +87,6 @@
     <Compile Include="src\NoInheritContainerAttribute.cs" />
     <Compile Include="src\ScanAllLoadedAssemblies.cs" />
     <Compile Include="src\ScanCurrentFolder.cs" />
-    <Compile Include="src\StartableFacility.cs" />
     <Compile Include="src\TypesFilerImpl.cs" />
   </ItemGroup>
   <ItemGroup>

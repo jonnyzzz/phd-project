@@ -23,8 +23,7 @@ namespace DSIS.UI.ComputationDialogs
       return myApp.ShowDialog(
         f =>
           {
-            using ( var c = myContainer.SubContainer <ComponentInterfaceAttribute, ComponentCollectionAttribute,
-              SIConstructionComponent>())
+            using ( var c = myContainer.SubContainer<SIConstructionComponent>())
             {
               var wizard = c.GetComponent<SIConstructionWizard>();
               using (var dlg = new WizardForm(wizard))

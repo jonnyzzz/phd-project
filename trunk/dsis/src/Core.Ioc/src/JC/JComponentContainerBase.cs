@@ -81,9 +81,7 @@ namespace DSIS.Core.Ioc.JC
 
     protected abstract JComponentContainerBase CreateContainer<TImpl2>() where TImpl2 : ComponentImplementationAttributeBase;
 
-    public IComponentContainer SubContainer<TInterface, TCollectionInterface, TImplementation>() 
-      where TInterface : ComponentInterfaceAttributeBase 
-      where TCollectionInterface : ComponentCollectionAttributeBase 
+    public IComponentContainer SubContainer<TImplementation>() 
       where TImplementation : ComponentImplementationAttributeBase
     {
       var child = CreateContainer<TImplementation>();

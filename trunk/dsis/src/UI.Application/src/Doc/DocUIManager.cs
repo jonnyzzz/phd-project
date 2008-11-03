@@ -36,7 +36,7 @@ namespace DSIS.UI.Application.Doc
     private IComponentContainer CreateContainer(IApplicationDocument document)
     {
       var c  =
-        myRootContainer.SubContainer<ComponentInterfaceAttribute, ComponentCollectionAttribute, DocumentComponent>();
+        myRootContainer.SubContainer<DocumentComponent>();
       
       //Predefined container-wide object
       c.RegisterComponent(document);
