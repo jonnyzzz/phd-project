@@ -19,6 +19,11 @@ namespace DSIS.Core.Ioc.JC
       myFilter = filter;
     }
 
+    public IEnumerable<Assembly> Assemblies
+    {
+      get { return myAssemblies; }
+    }
+
     protected JContainer Container
     {
       get { return myContainer; }
@@ -26,7 +31,7 @@ namespace DSIS.Core.Ioc.JC
 
     public virtual void Start()
     {
-      LookupAssembly(GetType().Assembly);
+      ScanAssemblies(new []{GetType().Assembly});
       myContainer.RegisterInstance(this);
 
       var cmps = myContainer.GetComponents<IStartableComponent>();
@@ -59,6 +64,13 @@ namespace DSIS.Core.Ioc.JC
       return myContainer.GetComponent<T>();
     }
 
+    public T GetComponent<T>(Type t)
+    {
+      if (!typeof(T).IsAssignableFrom(t))
+        throw new ArgumentException("Type " + t + " should cast to " + typeof (T));
+      return (T) myContainer.GetComponent(t);
+    }
+
     public IEnumerable<T> GetComponents<T>()
     {
       return myContainer.GetComponents<T>();
@@ -85,10 +97,7 @@ namespace DSIS.Core.Ioc.JC
       where TImplementation : ComponentImplementationAttributeBase
     {
       var child = CreateContainer<TImplementation>();
-      foreach (var assembly in myAssemblies)
-      {
-        child.LookupAssembly(assembly);
-      }
+      child.ScanAssemblies(myAssemblies);
 
       return child;
     }
@@ -101,6 +110,11 @@ namespace DSIS.Core.Ioc.JC
     public void RegisterComponent(object instance)
     {
       myContainer.RegisterInstance(instance);
+    }
+
+    public void RegisterComponentType(Type t)
+    {
+      myContainer.RegisterComponent(t);
     }
   }
 }

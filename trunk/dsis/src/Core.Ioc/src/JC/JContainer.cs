@@ -47,7 +47,7 @@ namespace DSIS.Core.Ioc.JC
       myImplLoopup.RegisterImplementation(t);
     }
 
-    private object GetComponent(Type y)
+    public object GetComponent(Type y)
     {
       IList<object> impls = GetComponents(y);
       if (impls.Count == 0)

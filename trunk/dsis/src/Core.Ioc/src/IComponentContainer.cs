@@ -8,6 +8,7 @@ namespace DSIS.Core.Ioc
   public interface IComponentContainer : IDisposable
   {
     T GetComponent<T>();
+    T GetComponent<T>(Type t);
 
     void Start();
 
@@ -21,5 +22,7 @@ namespace DSIS.Core.Ioc
     ITypesFilter Filter { get; }
 
     void RegisterComponent(object instance);
+
+    void RegisterComponentType(Type t);
   }
 }

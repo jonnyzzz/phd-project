@@ -15,7 +15,7 @@ using DSIS.Scheme.Impl;
 
 namespace DSIS.UI.Application.Doc
 {
-  [DocumentComponent]
+//  [DocumentComponent]
   public class ComputeNextStepAction : UserControl, IDocumentControl
   {
     public ComputeNextStepAction(IApplicationDocument doc, IActionExecution exec, ISIConstructionWizard w)

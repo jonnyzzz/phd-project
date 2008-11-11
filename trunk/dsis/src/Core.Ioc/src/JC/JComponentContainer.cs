@@ -30,6 +30,7 @@ namespace DSIS.Core.Ioc.JC
 
     public override void Start()
     {
+      Container.RegisterInstance(myScanner);
       base.Start();
 
       foreach (var type in myStartable)

@@ -64,11 +64,13 @@
     <Compile Include="src\Ex\IApplication.cs" />
     <Compile Include="src\IAssemblyScaner.cs" />
     <Compile Include="src\Ex\ICommandLine.cs" />
+    <Compile Include="src\IAttributeScanner.cs" />
     <Compile Include="src\IComponentContainer.cs" />
     <Compile Include="src\IComponentContainerServices.cs" />
     <Compile Include="src\IComponentInterfaceLookup.cs" />
     <Compile Include="src\IStartableComponent.cs" />
     <Compile Include="src\ITypesFilter.cs" />
+    <Compile Include="src\JC\AttributeScannerImpl.cs" />
     <Compile Include="src\JC\BaseTypeLookupImpl.cs" />
     <Compile Include="src\JC\IBaseTypesLookup.cs" />
     <Compile Include="src\JC\IImplementationsHolder.cs" />
