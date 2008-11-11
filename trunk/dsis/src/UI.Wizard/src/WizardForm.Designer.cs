@@ -113,6 +113,7 @@
       this.Controls.Add(myHeaderPanel);
       this.MinimumSize = new System.Drawing.Size(510, 450);
       this.Name = "WizardForm";
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
       this.Text = "WizardForm";
       myHeaderPanel.ResumeLayout(false);
       myButtonsPanel.ResumeLayout(false);

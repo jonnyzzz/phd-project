@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using log4net;
 
@@ -26,6 +27,7 @@ namespace DSIS.UI.Application.Doc.Actions
         Button btn = CreateButton(action);
         panel.Controls.Add(btn, 0, row++);
       }
+      panel.Size = new Size(100, 50);
       return panel;
     }
 
