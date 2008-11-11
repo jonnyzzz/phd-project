@@ -20,7 +20,42 @@ namespace DSIS.UI.Application.Doc
   {
     public ComputeNextStepAction(IApplicationDocument doc, IActionExecution exec, ISIConstructionWizard w)
     {
-      var ag = CreateActionGraph(doc, BoxMethodSettings.Default);
+      AgregateAction ag = CreateCompleteAction(doc, BoxMethodSettings.Default);
+
+      var bt = new Button{Text = "Build with BoxMethod"};
+      bt.Click += delegate { exec.ExecuteAsync("Next SI", pi=>BuildNext(doc, ag)); };
+      bt.Enabled = ag.Compatible(doc.Content).Empty();
+      Controls.Add(bt);
+
+
+      var bt2 = new Button {Text = "Wizard", Left = bt.Left + bt.Width + 5};
+      bt2.Click += delegate
+                     {
+                       var settings = w.ShowWizard();
+                       if (settings != null)
+                        exec.ExecuteAsync(
+                          "Next SI", 
+                          pi=>BuildNext(doc, CreateCompleteAction(doc, (ICellImageBuilderIntegerCoordinatesSettings) settings))
+                          );
+                     };
+      Controls.Add(bt2);
+      
+      Size = new Size(100, 32);
+      BackColor = Color.Brown;
+    }
+
+    private static AgregateAction CreateCompleteAction(IApplicationDocument doc, ICellImageBuilderIntegerCoordinatesSettings settings)
+    {
+      var ag = new AgregateAction(
+        b1 =>
+          {
+            var bl1 = new ActionBuilder2Adaptor(b1);
+
+            bl1.Start
+              .Edge(new BuildSymbolicImageAction2(2L.Fill(doc.System.Dimension), settings)).With(x1=>x1.Edge(bl1.Finish))
+              .Edge(new ChainRecurrenctSimbolicImageAction())
+              .Edge(bl1.Finish);
+          });
 
       if (!doc.Content.ContainsCellCollection())
       {
@@ -33,37 +68,7 @@ namespace DSIS.UI.Application.Doc
                                       With(x => x.Back(bl.Start)).Edge(bl.Finish);
                                   });
       }
-
-      var bt = new Button{Text = "Build with BoxMethod"};
-      bt.Click += delegate { exec.ExecuteAsync("Next SI", pi=>BuildNext(doc, ag)); };
-      bt.Enabled = ag.Compatible(doc.Content).Empty();
-      Controls.Add(bt);
-
-
-      var bt2 = new Button {Text = "Wizard", Left = bt.Left + bt.Width + 5};
-      bt2.Click += delegate
-                     {
-                       var settings = w.ShowWizard();
-                       exec.ExecuteAsync("Next SI", pi=>BuildNext(doc, CreateActionGraph(doc, (ICellImageBuilderIntegerCoordinatesSettings) settings)));
-                     };
-      Controls.Add(bt2);
-      
-      Size = new Size(100, 32);
-      BackColor = Color.Brown;
-    }
-
-    private static AgregateAction CreateActionGraph(IApplicationDocument doc, ICellImageBuilderIntegerCoordinatesSettings settings)
-    {
-      return new AgregateAction(
-        b =>
-          {
-            var bl = new ActionBuilder2Adaptor(b);
-
-            bl.Start
-              .Edge(new BuildSymbolicImageAction2(2L.Fill(doc.System.Dimension), settings)).With(x=>x.Edge(bl.Finish))
-              .Edge(new ChainRecurrenctSimbolicImageAction())
-              .Edge(bl.Finish);
-          });
+      return ag;
     }
 
     private static void BuildNext(IApplicationDocument doc, IAction action)

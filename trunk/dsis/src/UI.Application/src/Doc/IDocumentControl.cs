@@ -3,6 +3,11 @@ using DSIS.UI.Controls;
 
 namespace DSIS.UI.Application.Doc
 {
+  public interface IDocumentComponent
+  {
+    void BeforeDocumentContainerDisposed();
+  }
+
   public interface IDocumentControl : IControlWithLayout2
   {
     

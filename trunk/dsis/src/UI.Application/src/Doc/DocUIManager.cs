@@ -1,6 +1,7 @@
 using System;
 using DSIS.Core.Ioc;
 using DSIS.UI.UI;
+using DSIS.Utils;
 
 namespace DSIS.UI.Application.Doc
 {
@@ -11,7 +12,7 @@ namespace DSIS.UI.Application.Doc
     private readonly IMainForm myMainForm;
     private readonly IComponentContainer myRootContainer;
     
-    private IDisposable myDocumentContainer;
+    private IComponentContainer myDocumentContainer;
 
     public DocUIManager(IApplicationClass app, IMainForm mainForm, IComponentContainer rootContainer)
     {
@@ -55,6 +56,7 @@ namespace DSIS.UI.Application.Doc
     {
       if (myDocumentContainer != null)
       {
+        myDocumentContainer.GetComponents<IDocumentComponent>().Each(x => x.BeforeDocumentContainerDisposed());
         myDocumentContainer.Dispose();
         myDocumentContainer = null;
       }

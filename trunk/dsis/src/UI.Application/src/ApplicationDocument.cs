@@ -3,11 +3,14 @@ using DSIS.Scheme;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
 using DSIS.UI.UI;
+using log4net;
 
 namespace DSIS.UI.Application
 {
   public class ApplicationDocument : IApplicationDocument
   {
+    private static readonly ILog LOG = LogManager.GetLogger(typeof(ApplicationDocument));
+
     private readonly IApplicationClass myApplication;
     private readonly IInvocator myInvocator;
     private readonly string myTitle;
@@ -19,6 +22,11 @@ namespace DSIS.UI.Application
       myApplication = application;
       myInvocator = invocator;
       myContext = context;
+
+      if (LOG.IsDebugEnabled)
+      {
+        LOG.Debug("New document: " + context);
+      }
     }
 
     public ISystemInfo System
