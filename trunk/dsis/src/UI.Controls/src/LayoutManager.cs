@@ -7,13 +7,6 @@ using System.Linq;
 
 namespace DSIS.UI.Controls
 {
-  public interface IControlWithLayout2
-  {
-    string Ancor { get; }
-    Layout[] Float { get; }
-    Control Control { get; }
-  }
-
   public class LayoutManager
   {
     private static Panel AddPanel<Q>(Queue<Q> controls, Control root)

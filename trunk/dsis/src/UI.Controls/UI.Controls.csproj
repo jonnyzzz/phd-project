@@ -65,16 +65,23 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\ControlWithLayout.cs" />
+    <Compile Include="src\ControlWithLayout2.cs" />
     <Compile Include="src\IControlWithLayout.cs" />
+    <Compile Include="src\IControlWithLayout2.cs" />
     <Compile Include="src\Layout.cs" />
     <Compile Include="src\LayoutException.cs" />
     <Compile Include="src\LayoutManager.cs" />
     <Compile Include="src\SmartLayoutManager.cs" />
+    <Compile Include="src\TabbedLayout.cs" />
     <Compile Include="src\Web\HtmlControl.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UI\UI.csproj">
+      <Project>{5410F9D5-9D98-44CF-9518-CE5374CE4B22}</Project>
+      <Name>UI %28UI\UI%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>

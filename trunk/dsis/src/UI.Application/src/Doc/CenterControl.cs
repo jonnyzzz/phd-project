@@ -1,30 +1,23 @@
 using System.Drawing;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
-using DSIS.UI.Controls;
 
 namespace DSIS.UI.Application.Doc
 {  
-  public class CenterControl : UserControl, IDocumentControl
+  public class CenterControl : UserControl, IDocumentCenterControl
   {
-    public CenterControl()
+    protected CenterControl()
     {
       BackColor = Color.Red;
-    }
-
-    public Layout[] Float
-    {
-      get { return new [] {DSIS.UI.Controls.Layout.CENTER}; }
-    }
-
-    public string Ancor
-    {
-      get { return "!"; }
     }
 
     public Control Control
     {
       get { return this; }
+    }
+
+    public string Title
+    {
+      get { return "Symbolic Image"; }
     }
   }
 }

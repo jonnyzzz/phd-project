@@ -10,30 +10,32 @@ namespace DSIS.UI.Application.Doc
   public class DocumentControl : IDocumentMainControl, IStartableComponent
   {
     private readonly List<IDocumentControl> myControls = new List<IDocumentControl>();
+    private readonly List<IDocumentCenterControl> myCenterControls = new List<IDocumentCenterControl>();
     private readonly IApplicationDocument myDocument;
 
     [Used]
-    public DocumentControl(IApplicationDocument doc, IDocumentControl[] controls, IDocumentControlFactory[] factories)
+    public DocumentControl(IApplicationDocument doc,
+                           IDocumentControl[] controls,
+                           IDocumentControlFactory[] factories,
+                           IDocumentCenterControl[] centerControls,
+                           IDocumentCenterControlFactory[] centerFactories)
     {
       myDocument = doc;
       myControls.AddRange(controls);
-      foreach (var f in factories)
-      {
-        myControls.AddRange(f.CreateDocumentControls());
-      }
+      myControls.AddRange(factories.Maps(x => x.CreateDocumentControls()));
+      myCenterControls.AddRange(centerControls);
+      myCenterControls.AddRange(centerFactories.Maps(x => x.CreateDocumentCenterControls()));
     }
 
-    public IControlWithTitle Control { get; private set;}
-
-    public void AddControl(IDocumentControl control)
-    {
-      myControls.Add(control);
-    }
+    public IControlWithTitle Control { get; private set; }
 
     public void Start()
     {
       var m = new SmartLayoutManager();
-      Control = new ControlWithTitle(m.LayoutControls(myControls), "DSIS :: " + myDocument.Title);
+      var ex = new TabbedLayout().Layout(myCenterControls);
+      var controls = myControls.Cast<IControlWithLayout2>().Join(new ControlWithLayout2(ex, "center", Layout.CENTER));
+      Control = new ControlWithTitle(
+        m.LayoutControls(controls), "DSIS :: " + myDocument.Title);
     }
   }
 }
