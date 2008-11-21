@@ -103,6 +103,7 @@
     </Compile>
     <Compile Include="src\IWizardPack.cs" />
     <Compile Include="src\IWizardPage.cs" />
+    <Compile Include="src\JoinedWizardPack.cs" />
     <Compile Include="src\SimpleWizard.cs" />
     <Compile Include="src\StateWizard.cs" />
     <Compile Include="src\WizardForm.cs">

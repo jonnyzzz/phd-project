@@ -15,15 +15,11 @@ namespace DSIS.UI.Application.Doc
 
     [Used]
     public DocumentControl(IApplicationDocument doc,
-                           IDocumentControl[] controls,
-                           IDocumentControlFactory[] factories,
-                           IDocumentCenterControl[] centerControls,
-                           IDocumentCenterControlFactory[] centerFactories)
+                           IEnumerable<IDocumentControlFactory> factories,
+                           IEnumerable<IDocumentCenterControlFactory> centerFactories)
     {
       myDocument = doc;
-      myControls.AddRange(controls);
       myControls.AddRange(factories.Maps(x => x.CreateDocumentControls()));
-      myCenterControls.AddRange(centerControls);
       myCenterControls.AddRange(centerFactories.Maps(x => x.CreateDocumentCenterControls()));
     }
 

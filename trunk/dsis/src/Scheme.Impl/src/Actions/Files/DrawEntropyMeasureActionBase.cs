@@ -14,7 +14,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
     protected abstract GnuplotScriptParameters CreateProperties<Q>(IGraphMeasure<Q> measure, string outputFile)
       where Q : ICellCoordinate;
 
-    protected abstract override int SystemDimension { get; }
+    public abstract override int SystemDimension { get; }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
@@ -27,6 +27,13 @@ namespace DSIS.Scheme.Impl.Actions.Files
       string outputFile = info.CreateFileName("measure_base.png");
 
       var ps = CreateProperties(measure, outputFile);
+
+      if (input.ContainsKey(ImageDimension.KEY))
+      {
+        var d = ImageDimension.KEY.Get(input);
+        ps.Width = d.Width;
+        ps.Height = d.Height;
+      }
 
       IGnuplotEntropyScriptGen gen = CreateScriptGen(info.CreateFileName("measure_base.gnuplot"), ps);
 
@@ -45,7 +52,9 @@ namespace DSIS.Scheme.Impl.Actions.Files
       gen.Finish();
 
       var drw = new GnuplotDrawer.GnuplotDrawer();
-      drw.DrawImage(gen);
+      drw.DrawImage(gen).WaitForExit();
+
+      FileKeys.ImageKey.Set(output, new ImageResult(outputFile));
     }
 
     protected abstract IGnuplotEntropyScriptGen CreateScriptGen(string file, GnuplotScriptParameters ps);    

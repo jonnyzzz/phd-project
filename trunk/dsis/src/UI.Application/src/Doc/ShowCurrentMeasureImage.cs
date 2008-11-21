@@ -8,14 +8,16 @@ using DSIS.Utils;
 namespace DSIS.UI.Application.Doc
 {
   [DocumentComponent]
-  public class ShowCurrentSimbolicImage : ImageDrawingControl, IDocumentCenterControl
+  public class ShowCurrentMeasureImage : ImageDrawingControl, IDocumentCenterControl
   {
-    private readonly IocDrawChangeAction myAction;
+    private readonly IoCDrawEntropyMeasureWithBaseAction myAction;
     private readonly IApplicationDocument myDoc;
 
-    public ShowCurrentSimbolicImage(IApplicationDocument doc, IocDrawChangeAction action, IActionExecution exec,
-                                    IInvocator invocator)
-      :base(exec, invocator)
+    public ShowCurrentMeasureImage(
+      IApplicationDocument doc,
+      IoCDrawEntropyMeasureWithBaseAction action,
+      IActionExecution exec,
+      IInvocator invocator) : base(exec, invocator)
     {
       myAction = action;
       myDoc = doc;
@@ -46,7 +48,7 @@ namespace DSIS.UI.Application.Doc
 
     string IControlWithTitle.Title
     {
-      get { return "Symbolic Image"; }
+      get { return "Invariant Measure"; }
     }
   }
 }

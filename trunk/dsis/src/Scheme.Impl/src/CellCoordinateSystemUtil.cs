@@ -35,6 +35,17 @@ namespace DSIS.Scheme.Impl
       return action.Contains;
     }
 
+    public static bool ContainsGraphMeasure(this IReadOnlyContext context)
+    {
+      if (!context.ContainsKey(Keys.IntegerCoordinateSystemInfo))
+        return false;
+
+      var cs = Keys.IntegerCoordinateSystemInfo.Get(context);
+      var action = new GraphMeasureContains(context);
+      cs.DoGeneric(action);
+      return action.Contains;
+    }
+
     private class ActionCount : ICellCoordinateWith
     {
       private readonly IReadOnlyContext myContext;
@@ -70,6 +81,7 @@ namespace DSIS.Scheme.Impl
         Contains = myContext.ContainsKey(Keys.CellsEnumerationKey<Q>());
       }
     }
+
     private class GraphContains: ICellCoordinateWith
     {
       private readonly IReadOnlyContext myContext;
@@ -83,6 +95,21 @@ namespace DSIS.Scheme.Impl
       public void With<Q>(ICellCoordinateSystem<Q> system) where Q : ICellCoordinate
       {
         Contains = myContext.ContainsKey(Keys.Graph<Q>());
+      }
+    }
+    private class GraphMeasureContains: ICellCoordinateWith
+    {
+      private readonly IReadOnlyContext myContext;
+      public bool Contains { get; private set; }
+
+      public GraphMeasureContains(IReadOnlyContext context)
+      {
+        myContext = context;
+      }
+      
+      public void With<Q>(ICellCoordinateSystem<Q> system) where Q : ICellCoordinate
+      {
+        Contains = myContext.ContainsKey(Keys.GraphMeasure<Q>());
       }
     }
   }

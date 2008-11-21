@@ -37,5 +37,10 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       new GnuplotDrawer.GnuplotDrawer().DrawImage(gen);
     }
+
+    public override int SystemDimension
+    {
+      get { return 2; }
+    }
   }
 }

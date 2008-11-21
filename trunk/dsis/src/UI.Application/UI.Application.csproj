@@ -110,6 +110,7 @@
     <Compile Include="src\ApplicationDocument.cs" />
     <Compile Include="src\Doc\Actions\ActionsContainer.cs">
     </Compile>
+    <Compile Include="src\Doc\Actions\ComputeInvariantMeasureAction.cs" />
     <Compile Include="src\Doc\Actions\ComputeNextSymbolicImageDocumentAction.cs" />
     <Compile Include="src\Doc\Actions\DocumentActionAttribute.cs" />
     <Compile Include="src\Doc\Actions\DocumentActionExLookup.cs" />
@@ -118,9 +119,6 @@
     <Compile Include="src\Doc\Actions\IDocumentActionEx.cs" />
     <Compile Include="src\Doc\Actions\IDocumentActionManager.cs" />
     <Compile Include="src\Doc\Actions\IDocumentActionPresentation.cs" />
-    <Compile Include="src\Doc\CenterControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="src\Doc\ComputeNextStepAction.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,11 +129,23 @@
     <Compile Include="src\Doc\CurrentStepControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="src\Doc\DefaultDocumentCenterControls.cs" />
+    <Compile Include="src\Doc\DefaultDocumentControls.cs" />
     <Compile Include="src\Doc\DocUIManager.cs" />
     <Compile Include="src\Doc\DocumentComponent.cs" />
     <Compile Include="src\Doc\DocumentControl.cs" />
+    <Compile Include="src\Doc\IDocumentCenterControl.cs" />
+    <Compile Include="src\Doc\IDocumentCenterControlFactory.cs" />
+    <Compile Include="src\Doc\IDocumentComponent.cs" />
     <Compile Include="src\Doc\IDocumentControl.cs" />
+    <Compile Include="src\Doc\IDocumentControlFactory.cs" />
     <Compile Include="src\Doc\IDocumentMainControl.cs" />
+    <Compile Include="src\Doc\ImageDrawingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Doc\ShowCurrentMeasureImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="src\Doc\ShowCurrentSimbolicImage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -208,6 +218,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Graph.Entropy\Graph.Entropy.csproj">
+      <Project>{43283F9D-A669-47B2-80FD-FFA447A4BD7F}</Project>
+      <Name>Graph.Entropy</Name>
     </ProjectReference>
     <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>

@@ -21,11 +21,8 @@ namespace DSIS.Scheme.Impl.Actions.Files
                        ));
     }
 
-    protected virtual int SystemDimension
-    {
-      get { return 2; }
-    }
-
+    public abstract int SystemDimension { get; }
+    
     protected GnuplotPointsFileWriter WriteMeasureFile<Q>(string measureFile, IGraphMeasure<Q> measure)
       where Q : IIntegerCoordinate
     {

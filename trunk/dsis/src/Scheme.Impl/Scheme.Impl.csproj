@@ -123,13 +123,16 @@
     <Compile Include="src\Actions\Files\DrawEntropyMeasureActionBaseBase.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasureColorMapAction.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasureWithBaseAction.cs" />
+    <Compile Include="src\Actions\Files\DrawEntropyMeasureWithBaseActionBase.cs" />
     <Compile Include="src\Actions\Files\DrawLineAction.cs" />
     <Compile Include="src\Actions\Files\DumpEntropyLogAction.cs" />
     <Compile Include="src\Actions\Files\FileKeys.cs" />
     <Compile Include="src\Actions\Files\FlatWorkingFolder.cs" />
     <Compile Include="src\Actions\Files\GraphEntropyLogAction.cs" />
+    <Compile Include="src\Actions\Files\ImageDimension.cs" />
     <Compile Include="src\Actions\Files\ImageResult.cs" />
     <Compile Include="src\Actions\Files\IocDrawChangeAction.cs" />
+    <Compile Include="src\Actions\Files\IoCDrawEntropyMeasureWithBaseAction.cs" />
     <Compile Include="src\Actions\Files\IterationStepsPrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\Logger.cs" />
     <Compile Include="src\Actions\Files\LoggerAction.cs" />

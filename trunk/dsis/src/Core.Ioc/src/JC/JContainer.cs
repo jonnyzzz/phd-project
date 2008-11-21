@@ -106,12 +106,15 @@ namespace DSIS.Core.Ioc.JC
             var type = info.ParameterType;
             if (type.IsArray)
             {
-              var arg = new ArrayList();
-              foreach (var o in GetComponents(type.GetElementType()))
-              {
-                arg.Add(o);
-              }
-              argz.Add(arg.ToArray(type.GetElementType()));
+              argz.Add(FillCollectionOf(type.GetElementType()));
+            }
+            else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+            {
+              argz.Add(FillCollectionOf(type.GetGenericArguments()[0]));              
+            }
+            else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>))
+            {
+              argz.Add(FillCollectionOf(type.GetGenericArguments()[0]));              
             }
             else
             {
@@ -128,6 +131,16 @@ namespace DSIS.Core.Ioc.JC
       {
         throw new ComponentContainerException(e.Message + "\r\nCreation of " + t, e);
       }
+    }
+
+    private Array FillCollectionOf(Type type)
+    {
+      var arg = new ArrayList();  
+      foreach (var o in GetComponents(type))
+      {
+        arg.Add(o);
+      }
+      return arg.ToArray(type);
     }
   }
 }
