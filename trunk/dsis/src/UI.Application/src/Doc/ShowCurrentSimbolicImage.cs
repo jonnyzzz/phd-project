@@ -48,5 +48,10 @@ namespace DSIS.UI.Application.Doc
     {
       get { return "Symbolic Image"; }
     }
+
+    public string SortOrder
+    {
+      get { return "000a"; }
+    }
   }
 }

@@ -10,6 +10,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
     private readonly GnuplotDrawer.GnuplotDrawer myDrawer;
     private readonly WorkingFolderInfo myInfo;
 
+    //TODO: Move to context level
     public int Height { get; set; }
     public int Width { get; set; }
 

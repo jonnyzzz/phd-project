@@ -21,6 +21,8 @@ namespace DSIS.UI.Application.Doc
       myDocument = doc;
       myControls.AddRange(factories.Maps(x => x.CreateDocumentControls()));
       myCenterControls.AddRange(centerFactories.Maps(x => x.CreateDocumentCenterControls()));
+
+      myCenterControls.Sort((x, y) => x.SortOrder.CompareTo(y.SortOrder));
     }
 
     public IControlWithTitle Control { get; private set; }

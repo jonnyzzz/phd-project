@@ -13,6 +13,13 @@ namespace DSIS.Utils
       return enu ?? EmptyArray<Q>.Instance;
     }
 
+    public static List<T> Sort<T>(this IEnumerable<T> enu, IComparer<T> cmp)
+    {
+      var l = new List<T>(enu);
+      l.Sort(cmp);
+      return l;
+    }
+
     public static bool Empty<T>(this IEnumerable<T> enu)
     {
       foreach (var t in enu)

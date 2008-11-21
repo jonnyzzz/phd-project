@@ -9,6 +9,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
   {
     private readonly WorkingFolderInfo myWorkingFolder;
 
+    //TODO: Move to context level
     public int Width { get; set; } 
     public int Height { get; set; } 
 

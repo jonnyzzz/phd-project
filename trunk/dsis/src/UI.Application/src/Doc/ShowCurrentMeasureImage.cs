@@ -50,5 +50,10 @@ namespace DSIS.UI.Application.Doc
     {
       get { return "Invariant Measure"; }
     }
+
+    public string SortOrder
+    {
+      get { return "000h"; }
+    }
   }
 }
