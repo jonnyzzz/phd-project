@@ -19,6 +19,13 @@ namespace DSIS.Utils
       l.Sort(cmp);
       return l;
     }
+    
+    public static List<T> Sort<T>(this IEnumerable<T> enu, Comparison<T> cmp)
+    {
+      var l = new List<T>(enu);
+      l.Sort(cmp);
+      return l;
+    }
 
     public static bool Empty<T>(this IEnumerable<T> enu)
     {

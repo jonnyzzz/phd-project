@@ -87,9 +87,11 @@
     <Compile Include="src\Henon\HenonOptions.cs" />
     <Compile Include="src\HomoLinear\HomoLinearSystemInfo.cs" />
     <Compile Include="src\HomoSquare\HomoSquareSystemInfo.cs" />
+    <Compile Include="src\Ikeda\HenonPredefined.cs" />
     <Compile Include="src\Ikeda\IkedaFactory.cs" />
     <Compile Include="src\Ikeda\IkedaFunction.cs" />
     <Compile Include="src\Ikeda\IkedaPredefined.cs" />
+    <Compile Include="src\Ikeda\PredefinedSystemFactory.cs" />
     <Compile Include="src\Julia\JuliaFactory.cs" />
     <Compile Include="src\Julia\JuliaFuctionSystemInfoDecorator.cs" />
     <Compile Include="src\Julia\JuliaFunction.cs" />

@@ -32,7 +32,8 @@ namespace DSIS.UI.Application.Actions.Impl
 
     public void Start()
     {
-      foreach (var sys in myPredefinedSystems)
+      var list = myPredefinedSystems.Sort((x, y) => x.Name.CompareTo(y.Name));
+      foreach (var sys in list)
       {
         sys.With(x =>
                    {

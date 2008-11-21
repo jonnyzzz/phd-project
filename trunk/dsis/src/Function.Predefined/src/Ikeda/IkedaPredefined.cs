@@ -1,34 +1,18 @@
-using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Predefined.Ikeda
 {
   [SystemInfoComponent]
-  public class IkedaPredefined : ISystemInfoPredefinedFactory
+  public class IkedaPredefined : PredefinedSystemFactory<IkedaFactory>
   {
-    private readonly IkedaFactory myFactory;
-    private readonly ISystemSpaceFactory myInfoFactory;
-
-    public IkedaPredefined(IkedaFactory factory, ISystemSpaceFactory infoFactory)
+    public IkedaPredefined(IkedaFactory factory, ISystemSpaceFactory infoFactory) : base(factory, infoFactory)
     {
-      myFactory = factory;
-      myInfoFactory = infoFactory;
     }
 
-    public string Name
+    protected override ISystemInfoParameters Parameters
     {
-      get { return myFactory.FactoryName; }
-    }
-
-    public ISystemSpace Space
-    {
-      get { return myInfoFactory.CreateSymmetricalSpace(2, 10, 2); }
-    }
-
-    public ISystemInfo Function
-    {
-      get { return myFactory.Create(new IkedaParameters()); }
+      get { return new IkedaParameters(); }
     }
   }
 }
