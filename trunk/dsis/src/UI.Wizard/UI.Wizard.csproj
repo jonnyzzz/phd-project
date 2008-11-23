@@ -82,25 +82,25 @@
     </Compile>
     <Compile Include="src\EmptyWizard.cs" />
     <Compile Include="src\EmptyWizardPage.cs" />
-    <Compile Include="src\FormsGenerator\BooleanFieldInfo.cs" />
-    <Compile Include="src\FormsGenerator\DoubleFieldInfo.cs" />
-    <Compile Include="src\FormsGenerator\FieldInfoBase.cs" />
-    <Compile Include="src\FormsGenerator\FieldInfoManager.cs" />
-    <Compile Include="src\FormsGenerator\FieldInfoFactoryBase.cs" />
+    <Compile Include="src\FieldInfos\BooleanFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\DoubleFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoBase.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoManager.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoFactoryBase.cs" />
     <Compile Include="src\FormsGenerator\FormGenerator.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\FormsGenerator\FormGeneratorWizardPage.cs" />
     <Compile Include="src\FormsGenerator\FormGeneratorWizardPageFactoryImpl.cs" />
-    <Compile Include="src\FormsGenerator\IFieldInfo.cs" />
-    <Compile Include="src\FormsGenerator\IFieldInfoFactory.cs" />
-    <Compile Include="src\FormsGenerator\IFieldInfoManager.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfoFactory.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfoManager.cs" />
     <Compile Include="src\FormsGenerator\IFormGeneratorWizardPageFactory.cs" />
-    <Compile Include="src\FormsGenerator\IntFieldInfo.cs" />
-    <Compile Include="src\FormsGenerator\LongFieldInfo.cs" />
-    <Compile Include="src\FormsGenerator\NonEditableFieldInfo.cs" />
-    <Compile Include="src\FormsGenerator\StringFieldInfo.cs" />
-    <Compile Include="src\FormsGenerator\TextFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\IntFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\LongFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\NonEditableFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\StringFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\TextFieldInfo.cs" />
     <Compile Include="src\HeaderControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -110,6 +110,15 @@
     <Compile Include="src\IWizardPack.cs" />
     <Compile Include="src\IWizardPage.cs" />
     <Compile Include="src\JoinedWizardPack.cs" />
+    <Compile Include="src\ListSelector\IListInfo.cs" />
+    <Compile Include="src\ListSelector\ListInfo.cs" />
+    <Compile Include="src\ListSelector\ListSelector!2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\ListSelector\ListSelector.cs" />
+    <Compile Include="src\ListSelector\ListSelectorBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="src\SimpleWizard.cs" />
     <Compile Include="src\StateWizard.cs" />
     <Compile Include="src\WizardForm.cs">

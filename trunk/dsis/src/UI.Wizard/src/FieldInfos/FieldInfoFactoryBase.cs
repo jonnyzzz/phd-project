@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace DSIS.UI.Wizard.FormsGenerator
+namespace DSIS.UI.Wizard.FieldInfos
 {
   public abstract class FieldInfoFactoryBase<T> : IFieldInfoFactory
   {

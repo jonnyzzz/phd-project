@@ -1,9 +1,11 @@
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using DSIS.UI.Wizard.FieldInfos;
+using DSIS.UI.Wizard.FormsGenerator;
 using log4net;
 
-namespace DSIS.UI.Wizard.FormsGenerator
+namespace DSIS.UI.Wizard.FieldInfos
 {
   public class StringFieldInfo : FieldInfoBase
   {

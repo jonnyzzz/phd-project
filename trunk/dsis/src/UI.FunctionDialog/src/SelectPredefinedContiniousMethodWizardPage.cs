@@ -1,8 +1,8 @@
 using System;
 using DSIS.Scheme.Objects.Systemx;
-using DSIS.UI.FunctionDialog.UI;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.FormsGenerator;
+using DSIS.UI.Wizard.ListSelector;
 using DSIS.Utils;
 using IServiceProvider=DSIS.Spring.Service.IServiceProvider;
 

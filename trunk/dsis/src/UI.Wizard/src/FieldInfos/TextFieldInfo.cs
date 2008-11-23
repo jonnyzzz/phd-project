@@ -2,23 +2,22 @@ using System;
 using System.Reflection;
 using DSIS.Core.Ioc;
 
-namespace DSIS.UI.Wizard.FormsGenerator
+namespace DSIS.UI.Wizard.FieldInfos
 {
   [ComponentImplementation]
-  public class LongFieldInfoFactory : FieldInfoFactoryBase<long>
+  public class TextFieldInfoFactory : FieldInfoFactoryBase<string>
   {
     protected override IFieldInfo CreateField(PropertyInfo info, object instance)
     {
-      return new LongFieldInfo(info, instance);
+      return new TextFieldInfo(info, instance);
     }
   }
 
-
-  public class LongFieldInfo : StringFieldInfo
+  public class TextFieldInfo : StringFieldInfo
   {
-    public LongFieldInfo(PropertyInfo property, object instance) : base(property, instance)
+    public TextFieldInfo(PropertyInfo property, object instance) : base(property, instance)
     {
-      if (PropertyType != typeof(long))
+      if (PropertyType != typeof(string))
       {
         throw new ArgumentException("Property of type double is expected but was " + property.PropertyType + " " +
                                     property);
@@ -27,7 +26,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
 
     protected override void TrySetValue(string value)
     {
-      Value = long.Parse(value);
+      Value = value;
     }
   }
 }

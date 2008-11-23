@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using DSIS.Core.Ioc;
 
-namespace DSIS.UI.Wizard.FormsGenerator
+namespace DSIS.UI.Wizard.FieldInfos
 {
   [ComponentImplementation]
   public class FieldInfoManager : IFieldInfoManager

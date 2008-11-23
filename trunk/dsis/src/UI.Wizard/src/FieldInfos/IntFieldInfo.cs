@@ -2,22 +2,22 @@ using System;
 using System.Reflection;
 using DSIS.Core.Ioc;
 
-namespace DSIS.UI.Wizard.FormsGenerator
+namespace DSIS.UI.Wizard.FieldInfos
 {
   [ComponentImplementation]
-  public class TextFieldInfoFactory : FieldInfoFactoryBase<string>
+  public class IntFieldInfoFactory : FieldInfoFactoryBase<int>
   {
     protected override IFieldInfo CreateField(PropertyInfo info, object instance)
     {
-      return new TextFieldInfo(info, instance);
+      return new IntFieldInfo(info, instance);
     }
   }
 
-  public class TextFieldInfo : StringFieldInfo
+  public class IntFieldInfo : StringFieldInfo
   {
-    public TextFieldInfo(PropertyInfo property, object instance) : base(property, instance)
+    public IntFieldInfo(PropertyInfo property, object instance) : base(property, instance)
     {
-      if (PropertyType != typeof(string))
+      if (PropertyType != typeof(int))
       {
         throw new ArgumentException("Property of type double is expected but was " + property.PropertyType + " " +
                                     property);
@@ -26,7 +26,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
 
     protected override void TrySetValue(string value)
     {
-      Value = value;
+      Value = int.Parse(value);
     }
   }
 }

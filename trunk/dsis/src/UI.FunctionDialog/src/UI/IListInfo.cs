@@ -1,4 +1,4 @@
-namespace DSIS.UI.FunctionDialog.UI
+namespace DSIS.UI.Wizard.ListSelector
 {
   public interface IListInfo<Q>
   {

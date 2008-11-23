@@ -1,6 +1,6 @@
 using DSIS.Spring.Service;
-using DSIS.UI.FunctionDialog.UI;
 using DSIS.UI.Wizard;
+using DSIS.UI.Wizard.ListSelector;
 
 namespace DSIS.UI.FunctionDialog
 {

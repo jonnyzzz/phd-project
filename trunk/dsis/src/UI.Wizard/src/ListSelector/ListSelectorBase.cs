@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using DSIS.UI.UI;
 using DSIS.Utils;
 
-namespace DSIS.UI.FunctionDialog.UI
+namespace DSIS.UI.Wizard.ListSelector
 {
   public abstract class ListSelectorBase<T> : UserControl, IErrorProvider<bool>
     where T : class

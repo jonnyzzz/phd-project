@@ -82,14 +82,6 @@
     <Compile Include="src\SpaceModel.cs" />
     <Compile Include="src\SpaceParametersRowModel.cs" />
     <Compile Include="src\SystemFunctionSelectionWizard.cs" />
-    <Compile Include="src\UI\IListInfo.cs" />
-    <Compile Include="src\UI\ListInfo.cs" />
-    <Compile Include="src\UI\ListSelector.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="src\UI\ListSelectorBase.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="src\UI\SpaceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

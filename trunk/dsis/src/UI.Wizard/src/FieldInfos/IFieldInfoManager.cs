@@ -1,7 +1,6 @@
 using System.Reflection;
-using DSIS.Utils.Bean;
 
-namespace DSIS.UI.Wizard.FormsGenerator
+namespace DSIS.UI.Wizard.FieldInfos
 {
   public interface IFieldInfoManager
   {

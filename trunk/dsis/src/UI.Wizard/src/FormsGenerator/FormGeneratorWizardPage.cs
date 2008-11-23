@@ -1,4 +1,5 @@
 using DSIS.UI.UI;
+using DSIS.UI.Wizard.FieldInfos;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {

@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace DSIS.UI.Wizard.FormsGenerator
+namespace DSIS.UI.Wizard.FieldInfos
 {
   public delegate void FieldValueChanged(IFieldInfo info, Control control, string message);
 

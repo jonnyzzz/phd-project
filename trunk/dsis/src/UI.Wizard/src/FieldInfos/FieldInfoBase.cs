@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace DSIS.UI.Wizard.FormsGenerator
+namespace DSIS.UI.Wizard.FieldInfos
 {
   public abstract class FieldInfoBase : IFieldInfo
   {
@@ -39,7 +39,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
     protected object Value
     {
       get { return myProperty.GetValue(myInstance, null); }
-      set { myProperty.SetValue(myInstance, value, null);}
+      set { myProperty.SetValue(myInstance, value, null); }
     }
 
     protected Type PropertyType

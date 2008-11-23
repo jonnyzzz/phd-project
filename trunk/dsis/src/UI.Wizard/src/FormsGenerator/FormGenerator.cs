@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
 using DSIS.UI.UI;
+using DSIS.UI.Wizard.FieldInfos;
 using DSIS.Utils;
 using DSIS.Utils.Bean;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {
+
+
   public class FormGenerator : UserControl, IErrorProvider<bool>
   {
     private readonly Type myType;

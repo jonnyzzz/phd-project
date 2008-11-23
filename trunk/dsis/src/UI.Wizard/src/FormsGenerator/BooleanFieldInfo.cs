@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
 
-namespace DSIS.UI.Wizard.FormsGenerator
+namespace DSIS.UI.Wizard.FieldInfos
 {
   [ComponentImplementation]
   public class BooleanFieldInfoFactory : FieldInfoFactoryBase<bool>
