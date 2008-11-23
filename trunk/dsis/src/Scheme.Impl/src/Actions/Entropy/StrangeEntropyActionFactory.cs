@@ -16,5 +16,10 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     {
       return new ParametrizedStrangeEntropyAction((StrangeEntropyEvaluatorParams) options);
     }
+
+    public string FactoryName
+    {
+      get { return "Loop-based entropy"; }
+    }
   }
 }

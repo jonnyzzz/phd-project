@@ -83,6 +83,7 @@
     <Compile Include="src\EmptyWizard.cs" />
     <Compile Include="src\EmptyWizardPage.cs" />
     <Compile Include="src\FieldInfos\BooleanFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\BooleanFieldInfo.cs" />
     <Compile Include="src\FieldInfos\DoubleFieldInfo.cs" />
     <Compile Include="src\FieldInfos\FieldInfoBase.cs" />
     <Compile Include="src\FieldInfos\FieldInfoManager.cs" />

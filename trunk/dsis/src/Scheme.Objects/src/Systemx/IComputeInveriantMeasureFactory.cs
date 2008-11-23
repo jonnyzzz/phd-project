@@ -6,7 +6,7 @@ namespace DSIS.Scheme.Objects.Systemx
   {
   }
 
-  public interface IComputeInveriantMeasureFactory : IOptionsHolder
+  public interface IComputeInveriantMeasureFactory : IOptionsBasedFactory
   {
     IAction CreateComputeAction(object options);
   }

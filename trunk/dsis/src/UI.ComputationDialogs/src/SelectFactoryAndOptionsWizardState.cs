@@ -5,9 +5,9 @@ using DSIS.UI.Wizard.FormsGenerator;
 
 namespace DSIS.UI.ComputationDialogs
 {
-  public abstract class SelectFactoryAndOptionsWizardState<T,Q, O> : WizardPageWithState<T>
+  public class SelectFactoryAndOptionsWizardState<T,Q, O> : WizardPageWithState<T>
     where T : ListSelectorWizardPage<Q>
-    where Q : class, IOptionsHolder
+    where Q : class, IOptionsBasedFactory
   {
     private readonly IFormGeneratorWizardPageFactory myFactory;
 
@@ -17,7 +17,7 @@ namespace DSIS.UI.ComputationDialogs
       myFactory = factory;
     }
 
-    private Q Factory
+    public Q Factory
     {
       get { return Page.SelectedItem; }
     }
@@ -49,13 +49,11 @@ namespace DSIS.UI.ComputationDialogs
 
         return new SIConstructionMethodSettingsWizardState(
           myFactory.CreatePage(
-            "Settings for " + GetFactoryName(Factory),
+            "Settings for " + Factory.FactoryName,
             obj
             ));
       }
     }
-
-    protected abstract string GetFactoryName(Q factory);
 
     public override bool IsLastPage
     {

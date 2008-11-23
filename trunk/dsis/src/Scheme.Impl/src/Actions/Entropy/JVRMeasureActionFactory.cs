@@ -16,5 +16,10 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     {
       return new JVRMeasureAction((JVRMeasureOptions) options);
     }
+
+    public string FactoryName
+    {
+      get { return "JVR Measure"; }
+    }
   }
 }

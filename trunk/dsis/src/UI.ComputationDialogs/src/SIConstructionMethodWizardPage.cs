@@ -5,10 +5,10 @@ using DSIS.UI.Wizard.ListSelector;
 namespace DSIS.UI.ComputationDialogs
 {
   [SIConstructionComponent]
-  public class SIConstructionMethodWizardPage : ListSelectorWizardPage<ICellImageBuilderFactory>
+  public class SIConstructionMethodWizardPage : ListSelectorOptionsFactoryWizardPage<ICellImageBuilderFactory>
   {
     public SIConstructionMethodWizardPage(IListSelectorFactory factory, IEnumerable<ICellImageBuilderFactory> factories)
-      : base(factory, factories, x=>x.FactoryName)
+      : base(factory, factories)
     {
       Title = "Select Cell Image building method";
     }

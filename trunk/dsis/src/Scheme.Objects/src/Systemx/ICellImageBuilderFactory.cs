@@ -8,10 +8,8 @@ namespace DSIS.Scheme.Objects.Systemx
   {    
   }
 
-  public interface ICellImageBuilderFactory : IOptionsHolder
+  public interface ICellImageBuilderFactory : IOptionsBasedFactory
   {
-    string FactoryName { get; }
-
     ICellImageBuilder<Q> CreateSystem<Q>(ICellImageBuilderSettings settings) 
       where Q : ICellCoordinate;
   }
