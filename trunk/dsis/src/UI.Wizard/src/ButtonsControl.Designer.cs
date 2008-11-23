@@ -40,7 +40,7 @@
       this.ButtonFinish.Name = "ButtonFinish";
       this.ButtonFinish.Size = new System.Drawing.Size(75, 23);
       this.ButtonFinish.TabIndex = 5;
-      this.ButtonFinish.Text = "Finish";
+      this.ButtonFinish.Text = "&Finish";
       this.ButtonFinish.UseVisualStyleBackColor = true;
       // 
       // ButtonNext
@@ -49,7 +49,7 @@
       this.ButtonNext.Name = "ButtonNext";
       this.ButtonNext.Size = new System.Drawing.Size(75, 23);
       this.ButtonNext.TabIndex = 4;
-      this.ButtonNext.Text = "Next";
+      this.ButtonNext.Text = "&Next";
       this.ButtonNext.UseVisualStyleBackColor = true;
       // 
       // ButtonBack
@@ -58,7 +58,7 @@
       this.ButtonBack.Name = "ButtonBack";
       this.ButtonBack.Size = new System.Drawing.Size(75, 23);
       this.ButtonBack.TabIndex = 3;
-      this.ButtonBack.Text = "Back";
+      this.ButtonBack.Text = "&Back";
       this.ButtonBack.UseVisualStyleBackColor = true;
       // 
       // ButtonCancel
@@ -67,7 +67,7 @@
       this.ButtonCancel.Name = "ButtonCancel";
       this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
       this.ButtonCancel.TabIndex = 6;
-      this.ButtonCancel.Text = "Cancel";
+      this.ButtonCancel.Text = "&Cancel";
       this.ButtonCancel.UseVisualStyleBackColor = true;
       // 
       // ButtonsControl
