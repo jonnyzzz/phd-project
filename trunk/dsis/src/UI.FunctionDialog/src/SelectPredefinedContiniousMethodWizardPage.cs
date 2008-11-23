@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.FormsGenerator;
@@ -17,7 +18,10 @@ namespace DSIS.UI.FunctionDialog
     {
       myWizard = wizard;
       var services = prov.GetServices<IContiniousFunctionSolverFactory>();
-      ControlInternal = ListSelector.Create(services.Map(x => ListInfo.Create(x.MethodName, "", true, x)));
+      var map = services.Map(x => ListInfo.Create(x.MethodName, "", true, x));
+      ControlInternal = prov
+        .GetService<IListSelectorFactory>()
+        .Create<ListInfo<IContiniousFunctionSolverFactory>, IContiniousFunctionSolverFactory>(map);
       myNext = next;
     }
 

@@ -13,7 +13,9 @@ namespace DSIS.UI.FunctionDialog
     {
       myWizard = wizard;
       Title = "Select the way to define system";
-      ControlInternal = ListSelector.Create(new[]
+      ControlInternal = prov
+        .GetService<IListSelectorFactory>()
+        .Create < ListInfo<IWizardPageWithState>, IWizardPageWithState>(new[]
                                               {
                                                 ListInfo.Create<IWizardPageWithState>(
                                                   "Predefined",

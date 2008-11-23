@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.ListSelector;
@@ -9,9 +10,9 @@ namespace DSIS.UI.ComputationDialogs
   public class SIConstructionMethodWizardPage :
     WizardPageBase<ListSelector<ListInfo<ICellImageBuilderFactory>, ICellImageBuilderFactory>>
   {
-    public SIConstructionMethodWizardPage(ICellImageBuilderFactory[] factories)
+    public SIConstructionMethodWizardPage(IListSelectorFactory factory, IEnumerable<ICellImageBuilderFactory> factories)
     {
-      ControlInternal = ListSelector.Create(
+      ControlInternal = factory.Create<ListInfo<ICellImageBuilderFactory>, ICellImageBuilderFactory>(
         factories.Map(
           x => ListInfo.Create(
                  x.FactoryName,

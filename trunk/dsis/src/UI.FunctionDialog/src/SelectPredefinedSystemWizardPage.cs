@@ -31,13 +31,15 @@ namespace DSIS.UI.FunctionDialog
                         return x.FactoryName.CompareTo(y.FactoryName);
                       });
 
-      ControlInternal = ListSelector.Create(
-        services.Map(
-          x => ListInfo.Create(
-            x.FactoryName, 
-            string.Format("Dimension: {0}, Type: {1}", x.Dimension, x.Type), 
-            true, 
-            x)));
+      ControlInternal = myProvider
+        .GetService<IListSelectorFactory>()
+        .Create<ListInfo<ISystemInfoFactory>, ISystemInfoFactory>(
+          services.Map(
+            x => ListInfo.Create(
+              x.FactoryName, 
+              string.Format("Dimension: {0}, Type: {1}", x.Dimension, x.Type), 
+              true, 
+              x)));
     }
 
     public override void ControlShown()

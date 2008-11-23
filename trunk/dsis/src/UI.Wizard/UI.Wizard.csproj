@@ -111,14 +111,15 @@
     <Compile Include="src\IWizardPage.cs" />
     <Compile Include="src\JoinedWizardPack.cs" />
     <Compile Include="src\ListSelector\IListInfo.cs" />
+    <Compile Include="src\ListSelector\IListSelectorFactory.cs" />
     <Compile Include="src\ListSelector\ListInfo.cs" />
     <Compile Include="src\ListSelector\ListSelector!2.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="src\ListSelector\ListSelector.cs" />
     <Compile Include="src\ListSelector\ListSelectorBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="src\ListSelector\ListSelectorFactoryImpl.cs" />
     <Compile Include="src\SimpleWizard.cs" />
     <Compile Include="src\StateWizard.cs" />
     <Compile Include="src\WizardForm.cs">
