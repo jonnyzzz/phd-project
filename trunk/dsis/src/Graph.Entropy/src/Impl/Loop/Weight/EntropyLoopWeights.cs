@@ -1,6 +1,6 @@
 namespace DSIS.Graph.Entropy.Impl.Loop.Weight
 {
-  public class EntropyLoopWeights
+  public static class EntropyLoopWeights
   {
     public static readonly IEntropyLoopWeightCallback MINUS_TWO = new EntropyLoopMunisTwoEntropyWeight();
     public static readonly IEntropyLoopWeightCallback MINUS_ONE = new EntropyLoopMunisOneEntropyWeight();    

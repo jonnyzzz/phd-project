@@ -8,6 +8,8 @@ using DSIS.Scheme.Impl;
 
 namespace DSIS.UI.Application.Doc.Actions
 {
+  
+
   [DocumentAction(Caption = "Compute Invariant measure", Description = "")]
   public class ComputeInvariantMeasureAction : IDocumentAction
   {

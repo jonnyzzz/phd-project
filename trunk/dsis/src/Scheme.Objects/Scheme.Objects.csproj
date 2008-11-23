@@ -85,8 +85,10 @@
     <Compile Include="src\NamespaceHolder.cs" />
     <Compile Include="src\Systemx\DoubleArrayParser.cs" />
     <Compile Include="src\Systemx\ICellImageBuilderFactory.cs" />
+    <Compile Include="src\Systemx\IComputeInveriantMeasureFactory.cs" />
     <Compile Include="src\Systemx\IContiniousFunctionSolverFactory.cs" />
     <Compile Include="src\Systemx\IContiniousSolverParameters.cs" />
+    <Compile Include="src\Systemx\INamedFactory.cs" />
     <Compile Include="src\Systemx\IOptionsHolder.cs" />
     <Compile Include="src\Systemx\ISystemInfoFactory.cs" />
     <Compile Include="src\Systemx\ISystemInfoParameters.cs" />
@@ -114,6 +116,10 @@
     <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scheme\Scheme.csproj">
+      <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
+      <Name>Scheme</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
