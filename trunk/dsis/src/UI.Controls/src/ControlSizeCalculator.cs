@@ -26,6 +26,7 @@ namespace DSIS.UI.Controls
           return (a, b) => { throw new ArgumentException("layout " + expectedLayout + " not supported"); };
       }
     }
+
     public static Func<Size, Size, Size> ComputeSize(DockStyle expectedLayout)
     {
       switch (expectedLayout)

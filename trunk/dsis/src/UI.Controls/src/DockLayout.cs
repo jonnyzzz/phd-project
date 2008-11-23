@@ -7,7 +7,7 @@ using DSIS.Core.Ioc;
 namespace DSIS.UI.Controls
 {
   [ComponentImplementation]
-  public class DockLayout
+  public class DockLayout : IDockLayout
   {
     public Control Layout(DockStyle dock, IEnumerable<Control> controls)
     {

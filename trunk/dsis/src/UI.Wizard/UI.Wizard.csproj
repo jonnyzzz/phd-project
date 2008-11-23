@@ -101,6 +101,8 @@
     <Compile Include="src\FieldInfos\NonEditableFieldInfo.cs" />
     <Compile Include="src\FieldInfos\StringFieldInfo.cs" />
     <Compile Include="src\FieldInfos\TextFieldInfo.cs" />
+    <Compile Include="src\FormsGenerator\IOptionPageControl.cs" />
+    <Compile Include="src\FormsGenerator\OptionPageLayout.cs" />
     <Compile Include="src\HeaderControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +157,10 @@
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
       <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
       <Name>Core.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI.Controls\UI.Controls.csproj">
+      <Project>{3305A57B-0432-4E75-8E13-8AB265B8ECB6}</Project>
+      <Name>UI.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\UI\UI.csproj">
       <Project>{5410F9D5-9D98-44CF-9518-CE5374CE4B22}</Project>

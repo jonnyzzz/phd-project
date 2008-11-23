@@ -71,6 +71,7 @@
     <Compile Include="src\DockLayout.cs" />
     <Compile Include="src\IControlWithLayout.cs" />
     <Compile Include="src\IControlWithLayout2.cs" />
+    <Compile Include="src\IDockLayout.cs" />
     <Compile Include="src\ISimpleLayoutManager.cs" />
     <Compile Include="src\Layout.cs" />
     <Compile Include="src\LayoutException.cs" />

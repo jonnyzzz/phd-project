@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.UI.Controls;
 
 namespace DSIS.UI.Wizard.ListSelector
 {
@@ -7,7 +8,7 @@ namespace DSIS.UI.Wizard.ListSelector
     where Q : class
   {
     private readonly Dictionary<Q, T> myValueToObj = new Dictionary<Q, T>();
-    public ListSelector(IEnumerable<T> factories) : base(factories)
+    public ListSelector(IEnumerable<T> factories, IDockLayout layout) : base(factories, layout)
     {
       foreach (var q in factories)
       {

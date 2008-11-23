@@ -9,8 +9,6 @@ using DSIS.Utils.Bean;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {
-
-
   public class FormGenerator : UserControl, IErrorProvider<bool>
   {
     private readonly Type myType;
@@ -19,29 +17,29 @@ namespace DSIS.UI.Wizard.FormsGenerator
 
     private readonly HashSet<IFieldInfo> myPendingErrors = new HashSet<IFieldInfo>();
 
-    public FormGenerator(IFieldInfoManager manager, object obj)
+    public FormGenerator(IFieldInfoManager manager, object obj, IOptionPageLayout layout)
     {
       myObject = obj;
       myType = myObject.GetType();
       myErrorProvider = new ErrorProvider(this);
 
       Padding = new Padding(5,5,5,5);
-      var controls = new List<Control>();
+      var controls = new List<IOptionPageControl>();
 
       foreach (var info in myType.GetProperties())
       {
         var attr = info.OneInstance<IncludeGenerateAttribute>();
         if (attr != null)
         {
-          AddAttribute(attr.Title, attr.Description, CreateFieldInfo(manager, info), controls);
+          var fieldInfo = CreateFieldInfo(manager, info);
+          controls.Add(new OptionPageControl(attr.Title, attr.Description, fieldInfo.EditorControl()));
         }
       }
 
-      controls.Reverse();
-      foreach (var control in controls)
-      {
-        Controls.Add(control);
-      }
+      var control = layout.Layout(controls);
+      control.Dock = DockStyle.Fill;
+      Size = control.Size;
+      Controls.Add(control);
     }
 
     private IFieldInfo CreateFieldInfo(IFieldInfoManager manager, PropertyInfo info)
@@ -67,40 +65,32 @@ namespace DSIS.UI.Wizard.FormsGenerator
       return myPendingErrors.Count == 0;
     }
 
-    private static void AddAttribute(string title, string description, IFieldInfo info, ICollection<Control> result)
+    private class OptionPageControl : IOptionPageControl
     {
-      var panel = new Panel
-                    {
-                      Dock = DockStyle.Top, 
-                      Width = 150,
-                      Padding = new Padding(0,0,5,5),
-                      Height = 25
-                    };
-      var caption = new Label
-                      {
-                        Text = title, 
-                        Width = 70, 
-                        Dock = DockStyle.Left, 
-                      };
-      var field = info.EditorControl();
-      field.Width = 150;
-      field.Dock = DockStyle.Left;
+      private readonly string myTitle;
+      private readonly string myDescr;
+      private readonly Control myControl;
 
-      panel.Controls.Add(field); 
-      panel.Controls.Add(caption); 
-
-      result.Add(panel);
-      
-      if (description != null)
+      public OptionPageControl(string title, string descr, Control control)
       {
-        var label = new Label
-                      {
-                        Padding = new Padding(10, 0, 0, 0),
-                        Dock = DockStyle.Top,
-                        Text = description
-                      };
+        myTitle = title;
+        myDescr = descr;
+        myControl = control;
+      }
 
-        result.Add(label);
+      public string Title
+      {
+        get { return myTitle; }
+      }
+
+      public string Description
+      {
+        get { return myDescr; }
+      }
+
+      public Control Control
+      {
+        get { return myControl; }
       }
     }
   }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
+using DSIS.UI.Controls;
 using DSIS.UI.UI;
 using DSIS.Utils;
 
@@ -10,13 +11,13 @@ namespace DSIS.UI.Wizard.ListSelector
   {
     private readonly Dictionary<RadioButton, T> myFactories = new Dictionary<RadioButton, T>();
 
-    protected ListSelectorBase(IEnumerable<T> factories)
+    protected ListSelectorBase(IEnumerable<T> factories, IDockLayout layout)
     {
-      RegisterRadio(this, factories);
+      RegisterRadio(factories, layout);
       myFactories.Keys.GetFirst().Checked = true;
     }
 
-    private void RegisterRadio(Control control, IEnumerable<T> factories)
+    private void RegisterRadio(IEnumerable<T> factories, IDockLayout layout)
     {
       var controls = new List<Control>();
       foreach (var factory in factories)
@@ -47,11 +48,10 @@ namespace DSIS.UI.Wizard.ListSelector
         myFactories.Add(bt, factory);
       }
 
-      controls.Reverse();
-      foreach (var cnt in controls)
-      {
-        control.Controls.Add(cnt);
-      }
+      var cnt = layout.Layout(DockStyle.Top, controls);
+      cnt.Dock = DockStyle.Fill;
+      Size = cnt.Size;
+      Controls.Add(cnt);
     }
 
     protected virtual bool IsFactoryEnabled(T factory)
