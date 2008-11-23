@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using DSIS.Core.Ioc;
 using DSIS.Utils;
 using System.Linq;
 
 namespace DSIS.UI.Controls
 {
-  public class LayoutManager
+  [ComponentImplementation]
+  public class SimpleLayoutManager : ISimpleLayoutManager
   {
     private static Panel AddPanel<Q>(Queue<Q> controls, Control root)
       where Q : IControlWithLayout
@@ -52,32 +54,10 @@ namespace DSIS.UI.Controls
       }
 
       var result = AddPanel(controls, root);
-      var f = ComputeSize(expectedLayout);
+      var f = ControlSizeCalculator.ComputeSize(expectedLayout);
       root.Size = root.Controls.OfType<Control>().FoldLeft(borderSize, (x,s)=>f(x.Size, s));
       root.MinimumSize = root.Controls.OfType<Control>().FoldLeft(borderSize, (x, s) => f(x.MinimumSize, s));
       return result;
-    }
-
-    private static Func<Size, Size, Size> ComputeSize(Layout expectedLayout)
-    {
-      
-      switch (expectedLayout)
-      {
-        case Layout.BOTTON:
-        case Layout.TOP:
-          return (a,b) => new Size(
-                         Math.Max(a.Width, b.Width),
-                         a.Height + b.Height
-                         );
-        case Layout.LEFT:
-        case Layout.RIGHT:
-          return (a,b) => new Size(
-                         a.Width + b.Width,
-                         Math.Max(a.Height, b.Height)
-                         );
-        default:
-          return (a, b) => { throw new ArgumentException("layout " + expectedLayout + " not supported"); };
-      }
     }
 
     public Control LayoutControls<Q>(IEnumerable<Q> _controls)

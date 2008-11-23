@@ -1,13 +1,20 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using DSIS.Core.Ioc;
 using DSIS.Utils;
 
 namespace DSIS.UI.Controls
 {
+  [ComponentImplementation]
   public class SmartLayoutManager
   {
-    private readonly LayoutManager myManager = new LayoutManager();
+    private readonly ISimpleLayoutManager myManager;
+
+    public SmartLayoutManager(ISimpleLayoutManager manager)
+    {
+      myManager = manager;
+    }
 
     public Control LayoutControls<C>(IEnumerable<C> _controls)
       where C : IControlWithLayout2
@@ -103,7 +110,6 @@ namespace DSIS.UI.Controls
 
       public Control Control { get; private set;}
     }
-
 
     private class Proxy : IControlWithLayout2
     {

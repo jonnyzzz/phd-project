@@ -12,13 +12,16 @@ namespace DSIS.UI.Application.Doc
     private readonly List<IDocumentControl> myControls = new List<IDocumentControl>();
     private readonly List<IDocumentCenterControl> myCenterControls = new List<IDocumentCenterControl>();
     private readonly IApplicationDocument myDocument;
+    private readonly SmartLayoutManager mySmartLayout;
 
     [Used]
     public DocumentControl(IApplicationDocument doc,
                            IEnumerable<IDocumentControlFactory> factories,
-                           IEnumerable<IDocumentCenterControlFactory> centerFactories)
+                           IEnumerable<IDocumentCenterControlFactory> centerFactories,
+                           SmartLayoutManager smartLayout)
     {
       myDocument = doc;
+      mySmartLayout = smartLayout;
       myControls.AddRange(factories.Maps(x => x.CreateDocumentControls()));
       myCenterControls.AddRange(centerFactories.Maps(x => x.CreateDocumentCenterControls()));
 
@@ -29,11 +32,10 @@ namespace DSIS.UI.Application.Doc
 
     public void Start()
     {
-      var m = new SmartLayoutManager();
       var ex = new TabbedLayout().Layout(myCenterControls);
       var controls = myControls.Cast<IControlWithLayout2>().Join(new ControlWithLayout2(ex, "center", Layout.CENTER));
       Control = new ControlWithTitle(
-        m.LayoutControls(controls), "DSIS :: " + myDocument.Title);
+        mySmartLayout.LayoutControls(controls), "DSIS :: " + myDocument.Title);
     }
   }
 }
