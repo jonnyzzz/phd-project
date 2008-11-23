@@ -10,6 +10,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public JVRMeasureOptions()
     {
       InitialWeight = EntropyLoopWeights.CONST;
+      IncludeSelfEdge = false;
     }
   }
 }

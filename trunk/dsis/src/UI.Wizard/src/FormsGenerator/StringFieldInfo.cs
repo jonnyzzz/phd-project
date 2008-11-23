@@ -9,7 +9,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
   {
     private static readonly ILog LOG = LogManager.GetLogger(typeof(FormGenerator));
 
-    protected StringFieldInfo(string caption, string description, PropertyInfo property, object instance) : base(caption, description, property, instance)
+    protected StringFieldInfo(PropertyInfo property, object instance) : base(property, instance)
     {
     }
 

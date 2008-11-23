@@ -5,7 +5,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
 {
   public class NonEditableFieldInfo : FieldInfoBase
   {
-    public NonEditableFieldInfo(string caption, string description, PropertyInfo property, object instance) : base(caption, description, property, instance)
+    public NonEditableFieldInfo(PropertyInfo property, object instance) : base(property, instance)
     {
     }
 

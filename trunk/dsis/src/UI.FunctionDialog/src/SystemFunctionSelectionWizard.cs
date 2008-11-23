@@ -2,6 +2,7 @@ using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Spring.Service;
 using DSIS.UI.Wizard;
+using DSIS.UI.Wizard.FormsGenerator;
 
 namespace DSIS.UI.FunctionDialog
 {
@@ -12,6 +13,8 @@ namespace DSIS.UI.FunctionDialog
     public IContiniousSolverParameters ContiniousParameters { get; set; }
     public ISystemInfoParameters SystemParameters { get; set; }
     public SpaceModel Space { get; set; }
+
+    public IFormGeneratorWizardPageFactory FormGeneratorWizardPageFactory { get; private set; }
 
     public ISystemInfo CreateInfo()
     {
@@ -42,6 +45,7 @@ namespace DSIS.UI.FunctionDialog
     {
       Title = "Define system function";
       FirstPage = new SelectSystemWizardPage(prov, this);
+      FormGeneratorWizardPageFactory = prov.GetService<IFormGeneratorWizardPageFactory>();
     }
   }
 }

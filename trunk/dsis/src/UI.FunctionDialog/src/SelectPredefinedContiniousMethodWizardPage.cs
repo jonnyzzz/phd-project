@@ -37,8 +37,7 @@ namespace DSIS.UI.FunctionDialog
 
           return
             new WizardPageWithStateD(
-              new FormGeneratorWizardPage("Continiois system evaluation parameters",
-                                          paramz),
+              myWizard.FormGeneratorWizardPageFactory.CreatePage("Continiois system evaluation parameters",paramz),
               myNext);
         }
         return myNext();

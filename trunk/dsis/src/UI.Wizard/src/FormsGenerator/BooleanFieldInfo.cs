@@ -1,12 +1,22 @@
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using DSIS.Core.Ioc;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {
+  [ComponentImplementation]
+  public class BooleanFieldInfoFactory : FieldInfoFactoryBase<bool>
+  {
+    protected override IFieldInfo CreateField(PropertyInfo info, object instance)
+    {
+      return new BooleanFieldInfo(info, instance);
+    }
+  }
+
   public class BooleanFieldInfo : FieldInfoBase
   {
-    public BooleanFieldInfo(string caption, string description, PropertyInfo property, object instance) : base(caption, description, property, instance)
+    public BooleanFieldInfo(PropertyInfo property, object instance) : base(property, instance)
     {
       if (PropertyType != typeof(bool))
         throw new ArgumentException("Boolean type expected but was " + PropertyType + " for " + property);

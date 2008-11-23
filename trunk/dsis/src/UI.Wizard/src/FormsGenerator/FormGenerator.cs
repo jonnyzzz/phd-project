@@ -10,15 +10,13 @@ namespace DSIS.UI.Wizard.FormsGenerator
 {
   public class FormGenerator : UserControl, IErrorProvider<bool>
   {
-    private readonly FieldInfoFactory myFactory = new FieldInfoFactory();
-
     private readonly Type myType;
     private readonly object myObject;
     private readonly ErrorProvider myErrorProvider;
 
-    private readonly HashSet<FieldInfoBase> myPendingErrors = new HashSet<FieldInfoBase>();
+    private readonly HashSet<IFieldInfo> myPendingErrors = new HashSet<IFieldInfo>();
 
-    public FormGenerator(object obj)
+    public FormGenerator(IFieldInfoManager manager, object obj)
     {
       myObject = obj;
       myType = myObject.GetType();
@@ -32,7 +30,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
         var attr = info.OneInstance<IncludeGenerateAttribute>();
         if (attr != null)
         {
-          AddAttribute(controls, CreateFieldInfo(info, attr));
+          AddAttribute(attr.Title, attr.Description, CreateFieldInfo(manager, info), controls);
         }
       }
 
@@ -43,11 +41,11 @@ namespace DSIS.UI.Wizard.FormsGenerator
       }
     }
 
-    private FieldInfoBase CreateFieldInfo(PropertyInfo info, IncludeGenerateAttribute attr)
+    private IFieldInfo CreateFieldInfo(IFieldInfoManager manager, PropertyInfo info)
     {
-      var inf = myFactory.CreateFieldInfo(myObject, info, attr);
+      var inf = manager.CreateFieldInfo(myObject, info);
 
-      inf.Error += (control, message) =>
+      inf.ValueChanged += (_, control, message) =>
                       {
                         myErrorProvider.SetError(control, message);
                         if (message != null)
@@ -66,7 +64,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
       return myPendingErrors.Count == 0;
     }
 
-    private static void AddAttribute(ICollection<Control> host, FieldInfoBase info)
+    private static void AddAttribute(string title, string description, IFieldInfo info, ICollection<Control> result)
     {
       var panel = new Panel
                     {
@@ -77,7 +75,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
                     };
       var caption = new Label
                       {
-                        Text = info.Caption, 
+                        Text = title, 
                         Width = 70, 
                         Dock = DockStyle.Left, 
                       };
@@ -88,18 +86,18 @@ namespace DSIS.UI.Wizard.FormsGenerator
       panel.Controls.Add(field); 
       panel.Controls.Add(caption); 
 
-      host.Add(panel);
+      result.Add(panel);
       
-      if (info.Description != null)
+      if (description != null)
       {
         var label = new Label
                       {
                         Padding = new Padding(10, 0, 0, 0),
                         Dock = DockStyle.Top,
-                        Text = info.Description
+                        Text = description
                       };
 
-        host.Add(label);
+        result.Add(label);
       }
     }
   }

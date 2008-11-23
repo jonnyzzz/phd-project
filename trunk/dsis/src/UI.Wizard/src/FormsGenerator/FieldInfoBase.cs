@@ -4,34 +4,27 @@ using System.Windows.Forms;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {
-  public abstract class FieldInfoBase
+  public abstract class FieldInfoBase : IFieldInfo
   {
     private readonly PropertyInfo myProperty;
     private readonly object myInstance;
 
-    public readonly string Caption;
-    public readonly string Description;
-    
     private Control myControl;
 
-    protected FieldInfoBase(string caption, string description, PropertyInfo property, object instance)
+    protected FieldInfoBase(PropertyInfo property, object instance)
     {
-      Caption = caption;
       myInstance = instance;
       myProperty = property;
-      Description = description;        
     }
 
-    public delegate void OnError(Control control, string message);
-
-    public event OnError Error;
+    public event FieldValueChanged ValueChanged;
 
     protected abstract Control CreateControl();
 
     protected void FireError(Control control, string message)
     {
-      if (Error != null)
-        Error(control, message);
+      if (ValueChanged != null)
+        ValueChanged(this, control, message);
     }
 
     public Control EditorControl()

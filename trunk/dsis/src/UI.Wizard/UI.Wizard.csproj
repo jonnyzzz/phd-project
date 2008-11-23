@@ -85,11 +85,17 @@
     <Compile Include="src\FormsGenerator\BooleanFieldInfo.cs" />
     <Compile Include="src\FormsGenerator\DoubleFieldInfo.cs" />
     <Compile Include="src\FormsGenerator\FieldInfoBase.cs" />
-    <Compile Include="src\FormsGenerator\FieldInfoFactory.cs" />
+    <Compile Include="src\FormsGenerator\FieldInfoManager.cs" />
+    <Compile Include="src\FormsGenerator\FieldInfoFactoryBase.cs" />
     <Compile Include="src\FormsGenerator\FormGenerator.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\FormsGenerator\FormGeneratorWizardPage.cs" />
+    <Compile Include="src\FormsGenerator\FormGeneratorWizardPageFactoryImpl.cs" />
+    <Compile Include="src\FormsGenerator\IFieldInfo.cs" />
+    <Compile Include="src\FormsGenerator\IFieldInfoFactory.cs" />
+    <Compile Include="src\FormsGenerator\IFieldInfoManager.cs" />
+    <Compile Include="src\FormsGenerator\IFormGeneratorWizardPageFactory.cs" />
     <Compile Include="src\FormsGenerator\IntFieldInfo.cs" />
     <Compile Include="src\FormsGenerator\LongFieldInfo.cs" />
     <Compile Include="src\FormsGenerator\NonEditableFieldInfo.cs" />
@@ -136,6 +142,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UI\UI.csproj">
       <Project>{5410F9D5-9D98-44CF-9518-CE5374CE4B22}</Project>
       <Name>UI %28UI\UI%29</Name>

@@ -9,9 +9,12 @@ namespace DSIS.UI.ComputationDialogs
   [SIConstructionComponent]
   public class SIConstructionMethodWizardState : WizardPageWithState<SIConstructionMethodWizardPage>
   {
-    public SIConstructionMethodWizardState(SIConstructionMethodWizardPage page)
+    private readonly IFormGeneratorWizardPageFactory myFactory;
+
+    public SIConstructionMethodWizardState(SIConstructionMethodWizardPage page, IFormGeneratorWizardPageFactory factory )
       : base(page)
     {
+      myFactory = factory;
     }
 
     private ICellImageBuilderFactory Factory
@@ -45,7 +48,7 @@ namespace DSIS.UI.ComputationDialogs
         Settings = obj;
 
         return new SIConstructionMethodSettingsWizardState(
-          new FormGeneratorWizardPage(
+          myFactory.CreatePage(
             "Settings for " + Factory.FactoryName,
             obj
             ));

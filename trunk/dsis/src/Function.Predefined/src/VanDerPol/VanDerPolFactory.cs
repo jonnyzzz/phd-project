@@ -6,7 +6,6 @@ namespace DSIS.Function.Predefined.VanDerPol
   [SystemInfoComponent]
   public class VanDerPolFactory : DoubleParametersSystemInfoFactoryBase<VanDerPolParameters>
   {
-    //todo: Provide continious system converter
     public VanDerPolFactory()
       : base(2, SystemType.Continious, "Van-der-Pol")
     {

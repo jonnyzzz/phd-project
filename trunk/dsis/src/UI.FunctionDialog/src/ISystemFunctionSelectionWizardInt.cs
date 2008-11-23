@@ -1,5 +1,6 @@
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
+using DSIS.UI.Wizard.FormsGenerator;
 
 namespace DSIS.UI.FunctionDialog
 {
@@ -10,6 +11,8 @@ namespace DSIS.UI.FunctionDialog
     IContiniousSolverParameters ContiniousParameters { get; set; }
     ISystemInfoParameters SystemParameters { get; set; }
     SpaceModel Space { get; set; }
+
+    IFormGeneratorWizardPageFactory FormGeneratorWizardPageFactory { get; }
 
     ISystemInfo CreateInfo();
     ISystemSpace CreateSpace();

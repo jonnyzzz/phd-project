@@ -1,11 +1,22 @@
 using System;
 using System.Reflection;
+using DSIS.Core.Ioc;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {
+  [ComponentImplementation]
+  public class LongFieldInfoFactory : FieldInfoFactoryBase<long>
+  {
+    protected override IFieldInfo CreateField(PropertyInfo info, object instance)
+    {
+      return new LongFieldInfo(info, instance);
+    }
+  }
+
+
   public class LongFieldInfo : StringFieldInfo
   {
-    public LongFieldInfo(string caption, string description, PropertyInfo property, object instance) : base(caption, description, property, instance)
+    public LongFieldInfo(PropertyInfo property, object instance) : base(property, instance)
     {
       if (PropertyType != typeof(long))
       {

@@ -6,10 +6,10 @@ namespace DSIS.UI.Wizard.FormsGenerator
   {
     private readonly IErrorProvider<bool> myErrors;
     
-    public FormGeneratorWizardPage(string title, object model)
+    public FormGeneratorWizardPage(string title, object model, IFieldInfoManager manager)
     {
       myErrors = model as IErrorProvider<bool>;
-      ControlInternal = new FormGenerator(model);
+      ControlInternal = new FormGenerator(manager, model);
       
       Title = title;
     }

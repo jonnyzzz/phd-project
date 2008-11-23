@@ -7,7 +7,7 @@ namespace DSIS.Function.Predefined.Duffing
   public class DuffingFactory : DoubleParametersSystemInfoFactoryBase<DuffingOptions>
   {
     public DuffingFactory()
-      : base(2, SystemType.Descrete, "Duffing")
+      : base(2, SystemType.Continious, "Duffing")
     {
     }
 

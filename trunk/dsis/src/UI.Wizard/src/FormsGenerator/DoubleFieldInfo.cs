@@ -1,11 +1,22 @@
 using System;
 using System.Reflection;
+using DSIS.Core.Ioc;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {
+  [ComponentImplementation]
+  public class DoubleFieldInfoFactory : FieldInfoFactoryBase<double>
+  {
+    protected override IFieldInfo CreateField(PropertyInfo info, object instance)
+    {
+      return new DoubleFieldInfo(info, instance);
+    }
+  }
+
+
   public class DoubleFieldInfo : StringFieldInfo
   {
-    public DoubleFieldInfo(string caption, string description, PropertyInfo property, object instance) : base(caption, description, property, instance)
+    public DoubleFieldInfo(PropertyInfo property, object instance) : base(property, instance)
     {
       if (PropertyType != typeof(double))
       {

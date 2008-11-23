@@ -101,7 +101,8 @@ namespace DSIS.UI.FunctionDialog
       return factory.OptionsObjectType == null
                ? next
                : new WizardPageWithStateD(
-                   new FormGeneratorWizardPage(
+                 myProvider.GetService<IFormGeneratorWizardPageFactory>()
+                 .CreatePage(
                      "Options",
                      instance),
                    () => next);

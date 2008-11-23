@@ -1,11 +1,21 @@
 using System;
 using System.Reflection;
+using DSIS.Core.Ioc;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {
+  [ComponentImplementation]
+  public class TextFieldInfoFactory : FieldInfoFactoryBase<string>
+  {
+    protected override IFieldInfo CreateField(PropertyInfo info, object instance)
+    {
+      return new TextFieldInfo(info, instance);
+    }
+  }
+
   public class TextFieldInfo : StringFieldInfo
   {
-    public TextFieldInfo(string caption, string description, PropertyInfo property, object instance) : base(caption, description, property, instance)
+    public TextFieldInfo(PropertyInfo property, object instance) : base(property, instance)
     {
       if (PropertyType != typeof(string))
       {
