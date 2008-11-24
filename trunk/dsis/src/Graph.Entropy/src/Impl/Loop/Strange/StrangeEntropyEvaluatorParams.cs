@@ -9,9 +9,16 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
   public class StrangeEntropyEvaluatorParams
   {
-    public readonly StrangeEvaluatorType EntropyType;
-    public readonly StrangeEvaluatorStrategy Strategy;
-    public readonly IEntropyLoopWeightCallback LoopWeight;
+    public StrangeEvaluatorType EntropyType { get; set; }
+    public StrangeEvaluatorStrategy Strategy { get; set; }
+    public IEntropyLoopWeightCallback LoopWeight { get; set; }
+
+    public StrangeEntropyEvaluatorParams()
+    {
+      EntropyType = StrangeEvaluatorType.WeightSearch_1;
+      Strategy = StrangeEvaluatorStrategy.FIRST;
+      LoopWeight = EntropyLoopWeights.CONST;
+    }
 
     public StrangeEntropyEvaluatorParams(StrangeEvaluatorType entropyType, StrangeEvaluatorStrategy strategy, IEntropyLoopWeightCallback loopWeight)
     {

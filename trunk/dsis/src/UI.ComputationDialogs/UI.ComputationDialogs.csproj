@@ -51,6 +51,8 @@
     <Compile Include="src\ListSelectorOptionsFactoryWizardPage.cs" />
     <Compile Include="src\ListSelectorWizardPage.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureUIComponent.cs" />
+    <Compile Include="src\Measure\ComputeInvariantMeasureWizard.cs" />
+    <Compile Include="src\Measure\ComputeInvariantMeasureWizardImpl.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureWizardPage.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureWizardState.cs" />
     <Compile Include="src\Measure\IComputeInvariantMeasureWizard.cs" />
