@@ -76,6 +76,7 @@
     <Compile Include="src\Actions\ReplaceContextAction.cs" />
     <Compile Include="src\Actions\SelectiveCopyAction.cs" />
     <Compile Include="src\Actions\TransparentAction.cs" />
+    <Compile Include="src\Ctx\ContextException.cs" />
     <Compile Include="src\Ctx\IReadOnlyContext.cs" />
     <Compile Include="src\Ctx\IWriteOnlyContext.cs" />
     <Compile Include="src\Ctx\SlotStore.cs" />

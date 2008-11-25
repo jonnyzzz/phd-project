@@ -37,7 +37,10 @@ namespace DSIS.Scheme.Ctx
 
     public Y Get<Y>(Key<Y> key)
     {
-      return (Y) myContext[KeyWrapper.FromKey(key)];
+      object val;
+      if (!myContext.TryGetValue(KeyWrapper.FromKey(key), out val))
+        throw new ContextException("Key " + key + " was not found in context");
+      return (Y) val;
     }
 
     public void Set<Y>(Key<Y> key, Y value)

@@ -36,10 +36,22 @@ namespace DSIS.UI.Wizard.FormsGenerator
         }
       }
 
-      var control = layout.Layout(controls);
-      control.Dock = DockStyle.Fill;
-      Size = control.Size;
-      Controls.Add(control);
+      if (controls.Count > 0)
+      {
+
+        var control = layout.Layout(controls);
+        control.Dock = DockStyle.Fill;
+        Size = control.Size;
+        Controls.Add(control);
+      } else
+      {
+        Controls.Add(new Label
+                       {
+                         Text = "This object does not provide any options",
+                         Dock = DockStyle.Fill
+                       });
+      }
+
     }
 
     private IFieldInfo CreateFieldInfo(IFieldInfoManager manager, PropertyInfo info)
