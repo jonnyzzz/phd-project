@@ -7,12 +7,12 @@ using DSIS.UI.Wizard;
 namespace DSIS.UI.ComputationDialogs.Measure
 {
   [ComponentImplementation]
-  public class ComputeInvariantMeasureWizardImpl : IComputeInvariantMeasureWizard
+  public class ComputeInvariantMeasureMethodSelectorImpl : IComputeInvariantMeasureMethodSelector
   {
     private readonly IComponentContainer myContainer;
     private readonly IApplicationClass myApp;
 
-    public ComputeInvariantMeasureWizardImpl(IComponentContainer container, IApplicationClass app)
+    public ComputeInvariantMeasureMethodSelectorImpl(IComponentContainer container, IApplicationClass app)
     {
       myContainer = container;
       myApp = app;

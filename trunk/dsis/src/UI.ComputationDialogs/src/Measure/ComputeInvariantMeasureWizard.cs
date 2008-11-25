@@ -3,7 +3,7 @@ using DSIS.UI.Wizard;
 
 namespace DSIS.UI.ComputationDialogs.Measure
 {
-  [SIConstructionComponent]
+  [ComputeInvariantMeasureUIComponent]
   public class ComputeInvariantMeasureWizard : StateWizard
   {
     private readonly ComputeInvariantMeasureWizardState myState;

@@ -2,7 +2,7 @@ using DSIS.Scheme;
 
 namespace DSIS.UI.ComputationDialogs.Measure
 {
-  public interface IComputeInvariantMeasureWizard
+  public interface IComputeInvariantMeasureMethodSelector
   {
     IAction ShowWizard();
   }

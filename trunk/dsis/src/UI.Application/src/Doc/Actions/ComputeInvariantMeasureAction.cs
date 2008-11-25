@@ -1,6 +1,4 @@
-using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Scheme.Ctx;
-using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.UI.Application.Progress;
 using DSIS.UI.ComputationDialogs.Measure;
 using DSIS.UI.UI;
@@ -16,13 +14,13 @@ namespace DSIS.UI.Application.Doc.Actions
 
     private readonly IApplicationDocument myDocument;
     private readonly IActionExecution myExec;
-    private readonly IComputeInvariantMeasureWizard myWizard;
+    private readonly IComputeInvariantMeasureMethodSelector myMethodSelector;
 
-    public ComputeInvariantMeasureAction(IApplicationDocument document, IActionExecution exec, IComputeInvariantMeasureWizard wizard)
+    public ComputeInvariantMeasureAction(IApplicationDocument document, IActionExecution exec, IComputeInvariantMeasureMethodSelector methodSelector)
     {
       myDocument = document;
       myExec = exec;
-      myWizard = wizard;
+      myMethodSelector = methodSelector;
     }
 
     public bool Compatible
@@ -41,7 +39,7 @@ namespace DSIS.UI.Application.Doc.Actions
 
     public void Apply()
     {
-      var action = myWizard.ShowWizard();
+      var action = myMethodSelector.ShowWizard();
 
       myExec.ExecuteAsync("Compute Invariant Measure",
         pi =>

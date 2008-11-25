@@ -52,10 +52,10 @@
     <Compile Include="src\ListSelectorWizardPage.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureUIComponent.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureWizard.cs" />
-    <Compile Include="src\Measure\ComputeInvariantMeasureWizardImpl.cs" />
+    <Compile Include="src\Measure\ComputeInvariantMeasureMethodSelectorImpl.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureWizardPage.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureWizardState.cs" />
-    <Compile Include="src\Measure\IComputeInvariantMeasureWizard.cs" />
+    <Compile Include="src\Measure\IComputeInvariantMeasureMethodSelector.cs" />
     <Compile Include="src\SelectFactoryAndOptionsWizardState.cs" />
     <Compile Include="src\SIConstructionComponent.cs" />
     <Compile Include="src\SIConstructionMethodSettingsWizardState.cs" />

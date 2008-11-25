@@ -79,6 +79,7 @@ namespace DSIS.IntegerCoordinates.Generated
         dimAndNext.Add(new Pair<int, int?>(i, i + 1 < dim ? i + 1 : (int?) null));
       }
 
+
       var g = new StringTemplateGroup("foo",
                                       new EmbeddedResourceTemplateLoader(GetType().Assembly,
                                                                          "DSIS.IntegerCoordinates.src.Generated.Template"));
