@@ -1,20 +1,40 @@
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DSIS.UI.Controls;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using log4net;
 
 namespace DSIS.UI.Wizard.ListSelector
 {
   public abstract class ListSelectorBase<T> : UserControl, IErrorProvider<bool>
     where T : class
   {
+    private static readonly ILog LOG = LogManager.GetLogger(typeof (ListSelectorBase<T>));
+
     private readonly Dictionary<RadioButton, T> myFactories = new Dictionary<RadioButton, T>();
+
+    public event EventHandler SelectionChanged;
 
     protected ListSelectorBase(IEnumerable<T> factories, IDockLayout layout)
     {
       RegisterRadio(factories, layout);
       myFactories.Keys.GetFirst().Checked = true;
+    }
+
+    protected virtual void FireSelectionChanged()
+    {
+      if (SelectionChanged != null)
+      {
+        try
+        {
+          SelectionChanged(this, EventArgs.Empty);
+        } catch(Exception e)
+        {
+          LOG.Error(e);
+        }
+      }
     }
 
     private void RegisterRadio(IEnumerable<T> factories, IDockLayout layout)
@@ -27,10 +47,9 @@ namespace DSIS.UI.Wizard.ListSelector
                      Text = FactoryName(factory),
                      Dock = DockStyle.Top,
                      Padding = new Padding(5, 0, 0, 0),
-                     AutoSize = true,
-                     Enabled = IsFactoryEnabled(factory),
-                     
-                   };
+                     Enabled = IsFactoryEnabled(factory),                     
+                   };        
+        bt.CheckedChanged += delegate { if (bt.Checked) FireSelectionChanged(); };
         controls.Add(bt);
         var descr = FactoryDescription(factory);
         if (!string.IsNullOrEmpty(descr))
@@ -39,7 +58,6 @@ namespace DSIS.UI.Wizard.ListSelector
                       {
                         Text = descr,
                         Padding = new Padding(15, 0, 0, 0),
-                        AutoSize = true,
                         Dock = DockStyle.Top,
                         Enabled = IsFactoryEnabled(factory)
                       };
@@ -48,10 +66,7 @@ namespace DSIS.UI.Wizard.ListSelector
         myFactories.Add(bt, factory);
       }
 
-      var cnt = layout.Layout(DockStyle.Top, controls);
-      cnt.Dock = DockStyle.Fill;
-      Size = cnt.Size;
-      Controls.Add(cnt);
+      layout.Layout(this, DockStyle.Top, controls);
     }
 
     protected virtual bool IsFactoryEnabled(T factory)

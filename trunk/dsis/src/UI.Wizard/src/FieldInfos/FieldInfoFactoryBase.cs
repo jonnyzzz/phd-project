@@ -5,9 +5,9 @@ namespace DSIS.UI.Wizard.FieldInfos
 {
   public abstract class FieldInfoFactoryBase<T> : IFieldInfoFactory
   {
-    public virtual bool Matches(Type t)
+    public bool Matches(Type t, PropertyInfo info)
     {
-      return typeof (T) == t;
+      return typeof(T) == t;
     }
 
     public IFieldInfo CreateField(object instance, PropertyInfo info)

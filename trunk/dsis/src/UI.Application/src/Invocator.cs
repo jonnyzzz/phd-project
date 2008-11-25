@@ -8,11 +8,12 @@ using DSIS.Utils;
 namespace DSIS.UI.Application
 {
   [ComponentImplementation]
-  public class Invocator : IInvocator
+  public class Invocator : IInvocator, IDisposable
   {
     private readonly Form myPumpForm;
     private readonly Timer myActionsTimer;
     private readonly List<MyQueuedAction> myActions = new List<MyQueuedAction>();
+    private readonly ReenterableSafe myReenterableSafe = new ReenterableSafe();
 
     public Invocator()
     {
@@ -25,31 +26,35 @@ namespace DSIS.UI.Application
                        Visible = false,
                        Text = "DSIS Invocator Form",
                        ShowInTaskbar = false,
-                       StartPosition = FormStartPosition.Manual};
+                       StartPosition = FormStartPosition.Manual
+                     };
       myPumpForm.Show();
       myPumpForm.Visible = false;
-      myActionsTimer = new Timer {Enabled = false, Interval = 100};
+      myActionsTimer = new Timer {Enabled = false, Interval = 300};
       myActionsTimer.Tick += myActionsTimer_Tick;
+      myActionsTimer.Enabled = true;
     }
+
 
     private void myActionsTimer_Tick(object sender, EventArgs e)
     {
-      myActionsTimer.Enabled = false;
+      myReenterableSafe.Action(
+        delegate
+          {
+            HashSet<MyQueuedAction> actions;
+            lock (myActions)
+            {
+              actions = new HashSet<MyQueuedAction>(myActions);
+            }
 
-      HashSet<MyQueuedAction> actions;
-      lock (myActions)
-      {
-        actions = new HashSet<MyQueuedAction>(myActions);
-      }
+            var now = DateTime.Now;
+            actions.RemoveWhere(x => !x.Execute(now, InvokeOrQueue));
 
-      var now = DateTime.Now;
-      actions.RemoveWhere(x => !x.Execute(now, InvokeOrQueue));
-
-      lock(myActions)
-      {
-        myActions.RemoveAll(actions.Contains);
-        myActionsTimer.Enabled = myActions.Count > 0;
-      }
+            lock (myActions)
+            {
+              myActions.RemoveAll(actions.Contains);
+            }
+          });
     }
 
     public void InvokeOrQueue(string name, Action action)
@@ -61,7 +66,7 @@ namespace DSIS.UI.Application
     {
       lock (myActions)
       {
-        var ac= new MyQueuedAction(DateTime.Now + interval, name, action);
+        var ac = new MyQueuedAction(DateTime.Now + interval, name, action);
         myActions.Add(ac);
         myActionsTimer.Enabled = true;
         return ac;
@@ -82,7 +87,7 @@ namespace DSIS.UI.Application
         myAction = action;
       }
 
-      public bool Execute(DateTime time, Action<string,Action> execute)
+      public bool Execute(DateTime time, Action<string, Action> execute)
       {
         if (myIsDisposed)
           return true;
@@ -101,6 +106,12 @@ namespace DSIS.UI.Application
         myIsDisposed = true;
       }
     }
-     
+
+    public void Dispose()
+    {
+      myActionsTimer.Enabled = false;
+      myActionsTimer.Dispose();
+      myPumpForm.Dispose();
+    }
   }
 }

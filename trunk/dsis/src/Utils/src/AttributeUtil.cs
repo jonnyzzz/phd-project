@@ -5,6 +5,12 @@ namespace DSIS.Utils
 {
   public static class AttributeUtil
   {
+    public static bool IsDefined<Q>(this ICustomAttributeProvider obj) 
+      where Q : Attribute
+    {
+      return obj.IsDefined(typeof (Q), true);
+    }
+
     public static Q OneInstance<Q>(this ICustomAttributeProvider obj)
       where Q : Attribute
     {

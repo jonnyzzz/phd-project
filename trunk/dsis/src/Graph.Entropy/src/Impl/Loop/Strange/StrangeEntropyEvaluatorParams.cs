@@ -4,13 +4,17 @@ using DSIS.Graph.Entropy.Impl.Loop.Combinatorics;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
+using DSIS.Utils.Bean;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
   public class StrangeEntropyEvaluatorParams
   {
+    [IncludeGenerate(Title = "Method type")]
     public StrangeEvaluatorType EntropyType { get; set; }
+    [IncludeGenerate(Title = "Strategy")]
     public StrangeEvaluatorStrategy Strategy { get; set; }
+    [IncludeGenerate(Title = "Loop weight"), IncludeValuesProvider(typeof(EntropyLoopWeights))]
     public IEntropyLoopWeightCallback LoopWeight { get; set; }
 
     public StrangeEntropyEvaluatorParams()

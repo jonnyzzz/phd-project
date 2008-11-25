@@ -1,11 +1,18 @@
+using DSIS.Utils.Bean;
+
 namespace DSIS.Graph.Entropy.Impl.Loop.Weight
 {
   public static class EntropyLoopWeights
   {
+    [IncludeValue(Title = "1/x^2")]
     public static readonly IEntropyLoopWeightCallback MINUS_TWO = new EntropyLoopMunisTwoEntropyWeight();
-    public static readonly IEntropyLoopWeightCallback MINUS_ONE = new EntropyLoopMunisOneEntropyWeight();    
+    [IncludeValue(Title = "1/x")]
+    public static readonly IEntropyLoopWeightCallback MINUS_ONE = new EntropyLoopMunisOneEntropyWeight();
+    [IncludeValue(Title = "1")]
     public static readonly IEntropyLoopWeightCallback CONST = new EntropyLoopConstantWeight(1);
+    [IncludeValue(Title = "x")]
     public static readonly IEntropyLoopWeightCallback ONE = new EntropyLoopLinearEntropyWeight();
+    [IncludeValue(Title = "x^2")]
     public static readonly IEntropyLoopWeightCallback TWO = new EntropyLoopSquareEntropyWeight();
 
     private class EntropyLoopMunisOneEntropyWeight : IEntropyLoopWeightCallback

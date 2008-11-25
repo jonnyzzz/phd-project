@@ -38,11 +38,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
 
       if (controls.Count > 0)
       {
-
-        var control = layout.Layout(controls);
-        control.Dock = DockStyle.Fill;
-        Size = control.Size;
-        Controls.Add(control);
+        layout.Layout(this, controls);
       } else
       {
         Controls.Add(new Label

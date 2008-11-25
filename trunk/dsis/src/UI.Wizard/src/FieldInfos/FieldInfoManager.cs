@@ -18,7 +18,7 @@ namespace DSIS.UI.Wizard.FieldInfos
     {
       foreach (var fi in myFieldInfos)
       {
-        if (fi.Matches(info.PropertyType))
+        if (fi.Matches(info.PropertyType, info))
         {
           return fi.CreateField(instance, info);
         }

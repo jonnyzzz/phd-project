@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
@@ -5,12 +6,6 @@ using DSIS.UI.Controls;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {
-  public interface IOptionPageLayout
-  {
-    Control Layout<Q>(IEnumerable<Q> controls)
-      where Q : IOptionPageControl;
-  }
-
   [ComponentImplementation]
   public class OptionPageLayout : IOptionPageLayout
   {
@@ -24,24 +19,32 @@ namespace DSIS.UI.Wizard.FormsGenerator
     public Control Layout<Q>(IEnumerable<Q> controls)
       where Q : IOptionPageControl
     {
+      return myLayout.Layout(DockStyle.Top, CollectControls(controls));
+    }
+
+    private List<Control> CollectControls<Q>(IEnumerable<Q> controls)
+      where Q : IOptionPageControl
+    {
       var result = new List<Control>();
 
       foreach (Q q in controls)
       {
         AddAttribute(q.Title, q.Description, q.Control, result);
       }
+      return result;
+    }
 
-      return myLayout.Layout(DockStyle.Top, result);
+    public void Layout<Q>(Control host, IEnumerable<Q> controls) where Q : IOptionPageControl
+    {
+      myLayout.Layout(host, DockStyle.Top, CollectControls(controls));
     }
 
     private static void AddAttribute(string title, string description, Control field, ICollection<Control> result)
     {
       var panel = new Panel
-                    {
-                      Dock = DockStyle.Top,
+                    {                      
                       Width = 150,
                       Padding = new Padding(0, 0, 5, 5),
-                      Height = 25
                     };
       var caption = new Label
                       {
@@ -50,11 +53,20 @@ namespace DSIS.UI.Wizard.FormsGenerator
                         Dock = DockStyle.Left,
                       };
       field.Width = 150;
+      var sz = Math.Max(field.Height, caption.Height);
+
+      panel.Dock = DockStyle.Top;
       field.Dock = DockStyle.Left;
 
       panel.Controls.Add(field);
       panel.Controls.Add(caption);
+      
+      panel.Height = sz;
 
+      /*if(field.Height > caption.Height)
+      {
+        caption.Padding = new Padding(0, (field.Height - caption.Height)/2, 0, 0);
+      }*/
       result.Add(panel);
 
       if (description != null)
@@ -69,6 +81,5 @@ namespace DSIS.UI.Wizard.FormsGenerator
         result.Add(label);
       }
     }
-
   }
 }

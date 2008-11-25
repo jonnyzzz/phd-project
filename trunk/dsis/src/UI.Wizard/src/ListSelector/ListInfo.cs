@@ -6,6 +6,11 @@ namespace DSIS.UI.Wizard.ListSelector
     {
       return new ListInfo<Q>(description, title, value, enabled);
     }
+
+    public static ListInfo<Q> Enabled<Q>(string title, string description, Q value)
+    {
+      return new ListInfo<Q>(description, title, value, true);
+    }
   }
 
   public class ListInfo<Q> : IListInfo<Q>

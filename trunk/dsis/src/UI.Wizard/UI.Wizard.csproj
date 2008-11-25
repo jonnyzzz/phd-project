@@ -84,9 +84,12 @@
     <Compile Include="src\EmptyWizardPage.cs" />
     <Compile Include="src\FieldInfos\BooleanFieldInfo.cs" />
     <Compile Include="src\FieldInfos\DoubleFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\EnumFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\EnumFieldInfoBase.cs" />
     <Compile Include="src\FieldInfos\FieldInfoBase.cs" />
     <Compile Include="src\FieldInfos\FieldInfoManager.cs" />
     <Compile Include="src\FieldInfos\FieldInfoFactoryBase.cs" />
+    <Compile Include="src\FieldInfos\IncludeValueEnumFieldInfoFactory.cs" />
     <Compile Include="src\FormsGenerator\FormGenerator.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -102,6 +105,7 @@
     <Compile Include="src\FieldInfos\StringFieldInfo.cs" />
     <Compile Include="src\FieldInfos\TextFieldInfo.cs" />
     <Compile Include="src\FormsGenerator\IOptionPageControl.cs" />
+    <Compile Include="src\FormsGenerator\IOptionPageLayout.cs" />
     <Compile Include="src\FormsGenerator\OptionPageLayout.cs" />
     <Compile Include="src\HeaderControl.cs">
       <SubType>UserControl</SubType>
