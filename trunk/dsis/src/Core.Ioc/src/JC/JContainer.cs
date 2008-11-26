@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DSIS.Utils;
 
 namespace DSIS.Core.Ioc.JC
-{
+{  
   public class JContainer : IJContainer
   {
     private readonly ITypesFilter myFilter;
@@ -13,6 +13,7 @@ namespace DSIS.Core.Ioc.JC
     private readonly IImplementationsHolder myHolder;
     private readonly RecursionBlocker<Type> myCreateInstance = new RecursionBlocker<Type>();
     private readonly List<JContainer> myParents = new List<JContainer>();
+    private readonly IAutowireLookupImpl myAutowires;
 
     public JContainer(ITypesFilter filter)
     {
@@ -20,6 +21,7 @@ namespace DSIS.Core.Ioc.JC
       myBasesLookup = new BaseTypeLookupImpl(myFilter);
       myImplLoopup = new ImplLookupImpl(myBasesLookup);
       myHolder = new ImplementationHolderImpl(CreateInstance, myImplLoopup);
+      myAutowires = new AutowireLookupImpl(myBasesLookup);
     }
 
     public JContainer(ITypesFilter filter, JContainer parent) : this(filter)
@@ -75,11 +77,6 @@ namespace DSIS.Core.Ioc.JC
       return components;
     }
 
-    public IList<JContainer> Parents
-    {
-      get { return myParents; }
-    }
-
     public IEnumerable<T> GetCreatedComponentFromThatContainer<T>()
     {
       return myHolder.GetCreatedInstancesFor(typeof(T)).Cast<T>();
@@ -103,34 +100,46 @@ namespace DSIS.Core.Ioc.JC
           var argz = new List<object>();
           foreach (var info in constr.GetParameters())
           {
-            var type = info.ParameterType;
-            if (type.IsArray)
-            {
-              argz.Add(FillCollectionOf(type.GetElementType()));
-            }
-            else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-            {
-              argz.Add(FillCollectionOf(type.GetGenericArguments()[0]));              
-            }
-            else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>))
-            {
-              argz.Add(FillCollectionOf(type.GetGenericArguments()[0]));              
-            }
-            else
-            {
-              argz.Add(GetComponent(type));
-            }
+            argz.Add(FindAutowiringInstance(info.ParameterType));
           }
 
-          return Activator.CreateInstance(t, argz.ToArray());
+          object obj = Activator.CreateInstance(t, argz.ToArray());
+
+          var autowings = myAutowires.GetAutowings(obj);
+          foreach (var auto in autowings)
+          {
+            auto.SetValue(FindAutowiringInstance(auto.Type));
+          }
+
+          return obj;
         }
       } catch (ComponentContainerException e)
       {
-        throw new ComponentContainerException(e.Message + "\r\n" + "Creation of " + t, e);
+        throw new ComponentContainerException(e.Message + "\r\nCreation of " + t, e);
       } catch (Exception e)
       {
         throw new ComponentContainerException(e.Message + "\r\nCreation of " + t, e);
       }
+    }
+
+    private object FindAutowiringInstance(Type type)
+    {      
+      if (type.IsArray)
+      {
+        return FillCollectionOf(type.GetElementType());
+      }
+      else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+      {
+        return FillCollectionOf(type.GetGenericArguments()[0]);
+      }
+      else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>))
+      {
+        return FillCollectionOf(type.GetGenericArguments()[0]);
+      }
+      else
+      {
+        return GetComponent(type);
+      }      
     }
 
     private Array FillCollectionOf(Type type)

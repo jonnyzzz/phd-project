@@ -7,7 +7,8 @@ namespace DSIS.Core.Ioc.JC
   public class BaseTypeLookupImpl : IBaseTypesLookup
   {
     private readonly ITypesFilter myFilter;
-    private readonly MultiHashDictionary<Type, Type> myTypeToBasesCache = new MultiHashDictionary<Type, Type>();
+    private readonly MultiHashDictionary<Type, Type> myTypeToBasesTypesCache = new MultiHashDictionary<Type, Type>();
+    private readonly MultiHashDictionary<Type, Type> myTypeToBasesClassesCache = new MultiHashDictionary<Type, Type>();
 
     public BaseTypeLookupImpl(ITypesFilter filter)
     {
@@ -16,11 +17,21 @@ namespace DSIS.Core.Ioc.JC
 
     public IEnumerable<Type> GetBaseTypes(Type y)
     {
+      return GetBases(myTypeToBasesTypesCache, y, true);
+    }
+
+    public IEnumerable<Type> GetBaseClasses(Type y)
+    {
+      return GetBases(myTypeToBasesClassesCache, y, false);
+    }
+
+    private IEnumerable<Type> GetBases(MultiHashDictionary<Type, Type> cache, Type y, bool includeInterfaces)
+    {
       if (!myFilter.Accept(y))
         return EmptyArray<Type>.Instance;
 
-      if (myTypeToBasesCache.ContainsKey(y))
-        return myTypeToBasesCache.GetValues(y);
+      if (cache.ContainsKey(y))
+        return cache.GetValues(y);
 
       var result = new HashSet<Type> {y};
       var baseType = y.BaseType;
@@ -28,12 +39,15 @@ namespace DSIS.Core.Ioc.JC
       {
         result.UnionWith(GetBaseTypes(baseType));
       }
-      foreach (var type in y.GetInterfaces())
+      if (includeInterfaces)
       {
-        result.UnionWith(GetBaseTypes(type));
+        foreach (var type in y.GetInterfaces())
+        {
+          result.UnionWith(GetBaseTypes(type));
+        }
       }
-      
-      myTypeToBasesCache.AddValues(y, result);
+
+      cache.AddValues(y, result);
 
       return result;
     }

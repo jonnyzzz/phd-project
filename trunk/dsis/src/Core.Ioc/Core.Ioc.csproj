@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\AppDomainSubscription.cs" />
     <Compile Include="src\AssemblyScanerImpl.cs" />
+    <Compile Include="src\AutowireAttribute.cs" />
     <Compile Include="src\ComponentCollectionAttribute.cs" />
     <Compile Include="src\ComponentCollectionAttributeBase.cs" />
     <Compile Include="src\ComponentContainerException.cs" />
@@ -71,7 +72,10 @@
     <Compile Include="src\IStartableComponent.cs" />
     <Compile Include="src\ITypesFilter.cs" />
     <Compile Include="src\JC\AttributeScannerImpl.cs" />
+    <Compile Include="src\JC\AutowireLookupImpl.cs" />
+    <Compile Include="src\JC\Autowiring.cs" />
     <Compile Include="src\JC\BaseTypeLookupImpl.cs" />
+    <Compile Include="src\JC\IAutowireLookupImpl.cs" />
     <Compile Include="src\JC\IBaseTypesLookup.cs" />
     <Compile Include="src\JC\IImplementationsHolder.cs" />
     <Compile Include="src\JC\IImplLoopup.cs" />
@@ -84,6 +88,7 @@
     <Compile Include="src\JC\JContainer.cs" />
     <Compile Include="src\JC\JContainerException.cs" />
     <Compile Include="src\JC\JContainerPredefinedComponentAttribute.cs" />
+    <Compile Include="src\JC\PropertyAutowiring.cs" />
     <Compile Include="src\JC\RecursionBlocker.cs" />
     <Compile Include="src\Logger\Log4Net.cs" />
     <Compile Include="src\NoInheritContainerAttribute.cs" />

@@ -39,7 +39,7 @@ namespace DSIS.Core.Ioc.Tests
 
       var c1 = myContainer.GetComponent<JCI>();
       Assert.That(c1, Is.InstanceOfType(typeof (JCI)));
-      Assert.That(c1.myJj.Count(), Is.EqualTo(1));
+      Assert.That(Enumerable.Count(c1.myJj), Is.EqualTo(1));
     }
     
     [Test]
@@ -51,9 +51,50 @@ namespace DSIS.Core.Ioc.Tests
       Assert.That(c1, Is.InstanceOfType(typeof (JCI2)));
       Assert.That(c1.myJj.Count(), Is.EqualTo(  1));
     }
+    
+    [Test]
+    public void Test_PropertyAutowire()
+    {
+      DoTest<TI, Tx2>();
+
+      var c1 = myContainer.GetComponent<JCI3>();
+      Assert.That(c1, Is.InstanceOfType(typeof (JCI3)));
+      Assert.That(c1.Obj, Is.InstanceOfType(typeof(JI3)));
+    }
+    
+    [Test]
+    public void Test_PropertyAutowire2()
+    {
+      DoTest<TI, Tx3>();
+
+      var c1 = myContainer.GetComponent<JCI4>();
+      Assert.That(c1, Is.InstanceOfType(typeof (JCI4)));
+      
+      Assert.That(c1.Obj.First(), Is.InstanceOfType(typeof(JI4)));
+      Assert.That(c1.Obj2.First(), Is.InstanceOfType(typeof(JI4)));
+      Assert.That(c1.Obj3.First(), Is.InstanceOfType(typeof(JI4)));
+      Assert.That(c1.Obj4, Is.InstanceOfType(typeof(JI4)));
+      
+      Assert.That(c1.Obj.Count(), Is.EqualTo(1));
+      Assert.That(c1.Obj2.Count(), Is.EqualTo(1));
+      Assert.That(c1.Obj3.Count(), Is.EqualTo(1));
+    }
+
+    [Test]
+    public void Test_PropertyAutowire_Private()
+    {
+      DoTest<TI, Tx4>();
+
+      var c1 = myContainer.GetComponent<JCI5>();
+      Assert.That(c1, Is.InstanceOfType(typeof(JCI5)));
+      Assert.That(c1.Open, Is.InstanceOfType(typeof(JI5)));
+    }
 
     public class Tx0 : ComponentImplementationAttributeBase{}
     public class Tx1 : ComponentImplementationAttributeBase{}
+    public class Tx2 : ComponentImplementationAttributeBase{}
+    public class Tx3 : ComponentImplementationAttributeBase{}
+    public class Tx4 : ComponentImplementationAttributeBase{}
 
     [Tx0]
     public class JI{}
@@ -81,5 +122,41 @@ namespace DSIS.Core.Ioc.Tests
         myJj = jj;
       }
     }
+    [Tx2]
+    public class JI3 {}
+
+    [Tx2]
+    public class JCI3
+    {
+      [Autowire]
+      public JI3 Obj { get; set; }
+    } 
+    [Tx3]
+    public class JI4 {}
+
+    [Tx3]
+    public class JCI4
+    {
+      [Autowire]
+      public IEnumerable<JI4> Obj { get; set; }
+      [Autowire]
+      public ICollection<JI4> Obj2 { get; set; }
+      [Autowire]
+      public JI4[] Obj3 { get; set; }
+      [Autowire]
+      public JI4 Obj4 { get; set; }
+    }
+
+    [Tx4]
+    public class JI5 { }
+
+    [Tx4]
+    public class JCI5 : JCI5B {}
+    public class JCI5B
+    {
+      public JI5 Open { get { return Obj; } }
+      [Autowire]
+      private JI5 Obj { get; set; }
+    } 
   }
 }
