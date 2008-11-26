@@ -31,9 +31,8 @@ namespace DSIS.UI.Application.Doc.Actions
 
         if (ctx.ContainsGraphMeasure())
           return false;
-
-        //TODO: Add factory call here
-        return true;
+        
+        return myMethodSelector.IsApplicable(ctx);
       }
     }
 

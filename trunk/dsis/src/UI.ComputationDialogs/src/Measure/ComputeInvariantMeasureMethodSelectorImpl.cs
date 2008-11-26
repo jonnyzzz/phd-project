@@ -1,6 +1,9 @@
+using System;
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
 using DSIS.Scheme;
+using DSIS.Scheme.Ctx;
+using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.UI;
 using DSIS.UI.Wizard;
 
@@ -16,6 +19,19 @@ namespace DSIS.UI.ComputationDialogs.Measure
     {
       myContainer = container;
       myApp = app;
+    }
+
+    [Autowire]
+    private IComputeInveriantMeasureFactory[] Factories { get; set; }
+
+    public bool IsApplicable(Context ctx)
+    {
+      foreach (var factory in Factories)
+      {
+        if (factory.Compatible(ctx))
+          return true;
+      }
+      return false;
     }
 
     public IAction ShowWizard()
