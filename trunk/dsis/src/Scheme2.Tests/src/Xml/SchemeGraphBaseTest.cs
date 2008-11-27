@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using DSIS.Scheme2.Graph;
@@ -20,7 +21,8 @@ namespace DSIS.Scheme2.Tests.Xml
     {
       base.SetUp();
       TestGraphRegistry.Clear();
-      myFactory = myServiceProvider.GetService<SchemeGraphFactory>();
+      throw new NotImplementedException();
+//      myFactory = myServiceProvider.GetService<SchemeGraphFactory>();
     }    
   }
 }

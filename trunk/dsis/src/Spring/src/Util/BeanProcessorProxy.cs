@@ -1,11 +1,9 @@
 using DSIS.Spring.Attributes;
-using Spring.Objects.Factory;
-using Spring.Objects.Factory.Config;
 
 namespace DSIS.Spring.Util
 {
   [SpringBean]
-  public class BeanProcessorProxy : IObjectPostProcessor, IInitializingObject
+  public class BeanProcessorProxy
   {
     private readonly BeanProcessor myProc;
 

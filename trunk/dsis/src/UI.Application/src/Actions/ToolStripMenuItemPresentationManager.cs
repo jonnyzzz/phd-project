@@ -2,12 +2,11 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
-using DSIS.Spring;
 using DSIS.Utils;
 
 namespace DSIS.UI.Application.Actions
 {
-  [UsedBySpring, ComponentImplementation]
+  [ComponentImplementation]
   public class ToolStripMenuItemPresentationManager : BuildingActionPresentationManager<ToolStripItem>, IMainMenuFactory
   {
     public ToolStripMenuItemPresentationManager(IActionPresentationManager presentation) : base(presentation)

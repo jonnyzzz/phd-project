@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using Spring.Objects.Factory;
-using Spring.Objects.Factory.Config;
 
 namespace DSIS.Spring.Util
 {
   [UsedBySpring]
-  public class BeanProcessor : IObjectPostProcessor, IBeanManager, IInitializingObject
+  public class BeanProcessor : IBeanManager
   {
     private readonly List<object> myLoadedObjects = new List<object>();
     private readonly List<IKey> myHandlers = new List<IKey>();

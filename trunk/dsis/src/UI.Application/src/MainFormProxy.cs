@@ -1,12 +1,11 @@
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
-using DSIS.Spring;
 using DSIS.UI.Application.Actions;
 using DSIS.UI.UI;
 
 namespace DSIS.UI.Application
 {
-  [UsedBySpring, ComponentImplementation]
+  [ComponentImplementation]
   public class MainFormProxy : IMainForm
   {
     private readonly IActionPresentationManager myActionManager;

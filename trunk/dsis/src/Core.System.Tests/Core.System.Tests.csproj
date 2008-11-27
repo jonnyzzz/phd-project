@@ -70,10 +70,6 @@
       <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
       <Name>Persistance</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Spring\Spring.csproj">
-      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
-      <Name>Spring</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>

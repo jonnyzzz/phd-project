@@ -174,10 +174,6 @@
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
       <Name>Scheme</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Spring\Spring.csproj">
-      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
-      <Name>Spring</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="src\xslt\default.xslt" />

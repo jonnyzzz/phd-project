@@ -1,24 +1,23 @@
 using System;
 using System.Reflection;
-using DSIS.Spring;
-using DSIS.Spring.Util;
+using DSIS.Core.Ioc;
 using DSIS.Utils;
 
 namespace DSIS.Scheme2.ConnectionPoints.Object
 {
   [UsedBySpring]
   public class SetterInputObjectConnectionPointFactoryImpl :
-    Registrar<IInputObjectConnectionPointFactoryExtension, InputObjectConnectionPointFactory>,
+    //Registrar<IInputObjectConnectionPointFactoryExtension, InputObjectConnectionPointFactory>,
     IInputObjectConnectionPointFactoryExtension
   {
     public SetterInputObjectConnectionPointFactoryImpl(InputObjectConnectionPointFactory factory)
-      : base(factory)
+      //: base(factory)
     {
     }
 
     public IInputConnectionPoint Input(string name, object instance, MemberInfo _property)
     {
-      MethodInfo method = _property as MethodInfo;
+      var method = _property as MethodInfo;
       if (method != null && method.GetParameters().Length == 1)
       {
         return

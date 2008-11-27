@@ -1,15 +1,14 @@
+using DSIS.Core.Ioc;
 using DSIS.Scheme2.Graph;
 using DSIS.Scheme2.XmlModel;
-using DSIS.Spring;
-using DSIS.Spring.Util;
 
 namespace DSIS.Scheme2.ConnectionPoints.Xml.Output
 {
   [UsedBySpring]
-  public class FromPointOutputConnectionFactory :
-    Registrar<IOutputConnectionPointExtension, OutputConnectionPointFactory>, IOutputConnectionPointExtension
+  public class FromPointOutputConnectionFactory //:
+    //Registrar<IOutputConnectionPointExtension, OutputConnectionPointFactory>, IOutputConnectionPointExtension
   {
-    public FromPointOutputConnectionFactory(OutputConnectionPointFactory factory) : base(factory)
+    public FromPointOutputConnectionFactory(OutputConnectionPointFactory factory) //: base(factory)
     {
     }
 
@@ -17,7 +16,7 @@ namespace DSIS.Scheme2.ConnectionPoints.Xml.Output
     {
       if (arc.Item is XsdEdgePoint)
       {
-        XsdEdgePoint from = (XsdEdgePoint) arc.Item;
+        var from = (XsdEdgePoint) arc.Item;
 
         return ctx.GetAction(from.Id).GetOutput(from.Point);
       }

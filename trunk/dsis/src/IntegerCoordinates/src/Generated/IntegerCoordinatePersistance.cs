@@ -1,7 +1,7 @@
 using System;
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Persistance;
-using DSIS.Spring.Attributes;
 
 namespace DSIS.IntegerCoordinates.Generated
 {

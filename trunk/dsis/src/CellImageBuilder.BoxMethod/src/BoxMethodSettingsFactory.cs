@@ -1,10 +1,6 @@
-using DSIS.CellImageBuilder.BoxMethod;
+using DSIS.Core.Ioc;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Scheme2.ObjectParsers;
-using DSIS.Spring;
-using DSIS.Spring.Config;
-
-[assembly: SpringConfigXml("resources.spring.xml", Type = typeof(BoxMethodSettingsFactory))]
 
 namespace DSIS.CellImageBuilder.BoxMethod
 {

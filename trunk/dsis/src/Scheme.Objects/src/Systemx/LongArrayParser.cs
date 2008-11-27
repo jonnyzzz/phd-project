@@ -1,5 +1,5 @@
+using DSIS.Core.Ioc;
 using DSIS.Scheme2.ObjectParsers;
-using DSIS.Spring;
 
 namespace DSIS.Scheme.Objects.Systemx
 {

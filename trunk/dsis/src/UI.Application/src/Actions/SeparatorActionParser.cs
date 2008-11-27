@@ -1,11 +1,10 @@
 using System;
 using System.Xml;
 using DSIS.Core.Ioc;
-using DSIS.Spring.Attributes;
 
 namespace DSIS.UI.Application.Actions
 {
-  [SpringBean, ComponentImplementation]
+  [ComponentImplementation]
   public class SeparatorActionParser : ActionDescriptorParserBase
   {
     protected override string ElementName { 

@@ -1,6 +1,6 @@
+using System;
 using System.Xml;
-using DSIS.Spring;
-using DSIS.Spring.Util;
+using DSIS.Core.Ioc;
 
 namespace DSIS.Scheme2.ObjectParsers
 {
@@ -10,11 +10,12 @@ namespace DSIS.Scheme2.ObjectParsers
   }
 
   [UsedBySpring]
-  public class ObjectParserFactory : AbstractRegistry<IObjectParser>, IObjectParser
+  public class ObjectParserFactory //: AbstractRegistry<IObjectParser>, IObjectParser
   {
     public object Parse(XmlElement element)
     {
-      return ForEach<object>(delegate(IObjectParser instance) { return instance.Parse(element); });
+      throw new NotImplementedException();
+//      return ForEach<object>(delegate(IObjectParser instance) { return instance.Parse(element); });
     }
   }
 }

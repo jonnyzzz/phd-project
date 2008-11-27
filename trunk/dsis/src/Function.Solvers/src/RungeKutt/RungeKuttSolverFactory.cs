@@ -2,11 +2,10 @@ using System;
 using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring.Attributes;
 
 namespace DSIS.Function.Solvers.RungeKutt
 {
-  [SpringBean, ComponentCollection]
+  [ComponentCollection]
   public class RungeKuttSolverFactory : ContiniousFunctionSolverBase
   {
     public RungeKuttSolverFactory() : base("Runge-Kutt solver")

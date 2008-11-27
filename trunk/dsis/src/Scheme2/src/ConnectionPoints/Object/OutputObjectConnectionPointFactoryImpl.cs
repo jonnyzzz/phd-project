@@ -1,18 +1,16 @@
 using System;
 using System.Reflection;
-using DSIS.Spring;
-using DSIS.Spring.Util;
+using DSIS.Core.Ioc;
 using DSIS.Utils;
 
 namespace DSIS.Scheme2.ConnectionPoints.Object
 {
   [UsedBySpring]
   public class OutputObjectConnectionPointFactoryImpl :
-    Registrar<IOutputObjectConnectionPointFactoryExtension, OutputObjectConnectionPointFactory>,
+//    Registrar<IOutputObjectConnectionPointFactoryExtension, OutputObjectConnectionPointFactory>,
     IOutputObjectConnectionPointFactoryExtension
   {
     public OutputObjectConnectionPointFactoryImpl(OutputObjectConnectionPointFactory factory)
-      : base(factory)
     {
     }
 
@@ -31,7 +29,7 @@ namespace DSIS.Scheme2.ConnectionPoints.Object
 
       return
         (IOutputConnectionPoint)
-        GenericHelper.CreateGenericInstance(typeof(OutputConnectionPoint<>), new Type[] { type }, new object[] { name, instance, evt });
+        GenericHelper.CreateGenericInstance(typeof(OutputConnectionPoint<>), new[] { type }, new[] { name, instance, evt });
     }
   }
 }

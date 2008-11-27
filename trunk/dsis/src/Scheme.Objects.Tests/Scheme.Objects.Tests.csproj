@@ -90,10 +90,6 @@
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Spring\Spring.csproj">
-      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
-      <Name>Spring</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="resources\SystemSpace_01.xml" />

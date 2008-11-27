@@ -1,15 +1,14 @@
+using DSIS.Core.Ioc;
 using DSIS.Scheme2.Graph;
 using DSIS.Scheme2.XmlModel;
-using DSIS.Spring;
-using DSIS.Spring.Util;
 
 namespace DSIS.Scheme2.ConnectionPoints.Xml.Input
 {
   [UsedBySpring]
-  public class InputConnectionPointExtension : Registrar<IInputConnectionPointExtension, InputConnectionPointFactory>,
+  public class InputConnectionPointExtension : // Registrar<IInputConnectionPointExtension, InputConnectionPointFactory>,
                                                IInputConnectionPointExtension
   {
-    public InputConnectionPointExtension(InputConnectionPointFactory factory) : base(factory)
+    public InputConnectionPointExtension(InputConnectionPointFactory factory) //: base(factory)
     {
     }
 

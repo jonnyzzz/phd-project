@@ -2,22 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Xml;
+using DSIS.Core.Ioc;
 using DSIS.Scheme2.ConnectionPoints.Object;
 using DSIS.Scheme2.Graph;
 using DSIS.Scheme2.ObjectParsers;
 using DSIS.Scheme2.XmlModel;
-using DSIS.Spring;
-using DSIS.Spring.Util;
 
 namespace DSIS.Scheme2.ConnectionPoints.Xml.Output
 {
   [UsedBySpring]
-  public class ObjectParserOutputConnectionFactory :
-    Registrar<IOutputConnectionPointExtension, OutputConnectionPointFactory>, IOutputConnectionPointExtension
+  public class ObjectParserOutputConnectionFactory //:
+    //Registrar<IOutputConnectionPointExtension, OutputConnectionPointFactory>, IOutputConnectionPointExtension
   {
     private readonly ObjectParserFactory myParsers;
 
-    public ObjectParserOutputConnectionFactory(OutputConnectionPointFactory factory, ObjectParserFactory parsers) : base(factory)
+    public ObjectParserOutputConnectionFactory(OutputConnectionPointFactory factory, ObjectParserFactory parsers)// : base(factory)
     {
       myParsers = parsers;
     }

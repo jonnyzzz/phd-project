@@ -1,9 +1,8 @@
 using DSIS.Core.Ioc;
-using DSIS.Spring.Attributes;
 
 namespace DSIS.UI.Application.Actions
 {
-  [SpringBean, ComponentImplementation(Startable = true), ComponentInterface]
+  [ComponentImplementation(Startable = true), ComponentInterface]
   public class ActionHandlerBeanProcessor : IStartableComponent
   {
     private readonly IComponentContainer myContainer;

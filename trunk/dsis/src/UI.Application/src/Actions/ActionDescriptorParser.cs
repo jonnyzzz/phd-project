@@ -1,11 +1,10 @@
 using System.Xml;
 using DSIS.Core.Ioc;
-using DSIS.Spring.Attributes;
 using DSIS.Utils;
 
 namespace DSIS.UI.Application.Actions
 {
-  [SpringBean, ComponentImplementation]
+  [ComponentImplementation]
   public class ActionDescriptorParser : ActionDescriptorParserBase
   {
     protected override string ElementName { get {return "Action";} }

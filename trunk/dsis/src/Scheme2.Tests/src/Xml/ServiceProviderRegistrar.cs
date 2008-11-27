@@ -1,5 +1,6 @@
-using DSIS.Spring.Attributes;
-using DSIS.Spring.Service;
+
+using System;
+using DSIS.Core.Ioc;
 
 namespace DSIS.Scheme2.Tests.Xml
 {
@@ -8,7 +9,7 @@ namespace DSIS.Scheme2.Tests.Xml
   {
     public ServiceProviderRegistrar(IServiceProvider prov)
     {
-      SpringBaseTest.myServiceProvider = prov;
+      throw new NotImplementedException();
     }
   }
 }

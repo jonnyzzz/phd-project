@@ -1,10 +1,5 @@
 using System.Xml;
 using DSIS.Core.System;
-using DSIS.Spring.Assemblies;
-
-[assembly: IncludeAssembly("DSIS.Function.Predefined")]
-[assembly: IncludeAssembly("DSIS.Function.Solvers")]
-
 namespace DSIS.Scheme.Objects.Systemx
 {
   /// <summary>

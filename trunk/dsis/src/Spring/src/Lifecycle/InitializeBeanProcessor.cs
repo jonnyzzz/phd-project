@@ -4,12 +4,11 @@ using System.Reflection;
 using DSIS.Spring.Attributes;
 using DSIS.Spring.Util;
 using DSIS.Utils;
-using Spring.Objects.Factory;
 
 namespace DSIS.Spring.Lifecycle
 {
   [SpringBean]
-  public class InitializeBeanProcessor : IInitializingObject, ILifecycle
+  public class InitializeBeanProcessor : ILifecycle
   {
     private readonly List<VoidDelegate> myInits = new List<VoidDelegate>();
 

@@ -1,6 +1,5 @@
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
-using DSIS.Spring.Attributes;
 
 namespace DSIS.Function.Predefined.Brusselator
 {

@@ -1,23 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using DSIS.Core.Ioc;
 using DSIS.Scheme2.Attributed;
 using DSIS.Scheme2.Nodes;
 using DSIS.Scheme2.XmlModel;
-using DSIS.Spring;
-using DSIS.Spring.Util;
 
 namespace DSIS.Scheme2.ConnectionPoints.Object
 {
   [UsedBySpring]
-  public class ObjectNodeFactory : Registrar<ISchemeNodeFactoryExtension, SchemeNodeFactory>,
+  public class ObjectNodeFactory :// Registrar<ISchemeNodeFactoryExtension, SchemeNodeFactory>,
                                    ISchemeNodeFactoryExtension
   {
     private readonly InputObjectConnectionPointFactory myObjectConnectionPointInputFactory;
     private readonly OutputObjectConnectionPointFactory myObjectConnectionPointOutputFactory;
 
-    public ObjectNodeFactory(SchemeNodeFactory factory, InputObjectConnectionPointFactory objectConnectionPointInputFactory, OutputObjectConnectionPointFactory objectConnectionPointOutputFactory)
-      : base(factory)
+    public ObjectNodeFactory(SchemeNodeFactory factory, InputObjectConnectionPointFactory objectConnectionPointInputFactory, OutputObjectConnectionPointFactory objectConnectionPointOutputFactory)      
     {
       myObjectConnectionPointInputFactory = objectConnectionPointInputFactory;
       myObjectConnectionPointOutputFactory = objectConnectionPointOutputFactory;
@@ -25,7 +23,7 @@ namespace DSIS.Scheme2.ConnectionPoints.Object
 
     public INode Create(XsdAction _action)
     {
-      XsdComputationSchemeCode action = _action as XsdComputationSchemeCode;
+      var action = _action as XsdComputationSchemeCode;
       if (action == null)
         return null;
 
@@ -39,8 +37,8 @@ namespace DSIS.Scheme2.ConnectionPoints.Object
 
       object instance = Activator.CreateInstance(tAction);
 
-      List<IInputConnectionPoint> inputPoints = new List<IInputConnectionPoint>();
-      List<IOutputConnectionPoint> outputPoints = new List<IOutputConnectionPoint>();
+      var inputPoints = new List<IInputConnectionPoint>();
+      var outputPoints = new List<IOutputConnectionPoint>();
 
       foreach (MemberInfo info in tAction.GetMembers())
       {

@@ -1,6 +1,6 @@
 using DSIS.Core.Coordinates;
+using DSIS.Core.Ioc;
 using DSIS.Persistance;
-using DSIS.Spring.Attributes;
 
 namespace DSIS.IntegerCoordinates.Generated
 {

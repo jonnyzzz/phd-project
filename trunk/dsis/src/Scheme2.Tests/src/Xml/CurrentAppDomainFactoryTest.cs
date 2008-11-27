@@ -1,3 +1,4 @@
+using System;
 using DSIS.Scheme2.Attributed;
 using DSIS.Scheme2.ConnectionPoints;
 using DSIS.Scheme2.ConnectionPoints.Object;
@@ -24,8 +25,9 @@ namespace DSIS.Scheme2.Tests.Xml
       myOutputObjectConnectionPoint = myMocks.CreateMock<IOutputObjectConnectionPointFactoryExtension>();
       var ifactory = new InputObjectConnectionPointFactory();
       var ofactory = new OutputObjectConnectionPointFactory();
-      ifactory.Register(myInputObjectConnectionPoint);
-      ofactory.Register(myOutputObjectConnectionPoint);
+      throw new NotImplementedException("Code was commented out!");
+//      ifactory.Register(myInputObjectConnectionPoint);
+//      ofactory.Register(myOutputObjectConnectionPoint);
       myFactory = new ObjectNodeFactory(myMocks.DynamicMock<SchemeNodeFactory>(), ifactory, ofactory);
     }
 

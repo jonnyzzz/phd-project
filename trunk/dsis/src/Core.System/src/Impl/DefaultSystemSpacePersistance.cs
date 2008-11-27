@@ -1,6 +1,6 @@
 using System;
+using DSIS.Core.Ioc;
 using DSIS.Persistance;
-using DSIS.Spring.Attributes;
 
 namespace DSIS.Core.System.Impl
 {

@@ -1,17 +1,16 @@
+using DSIS.Core.Ioc;
 using DSIS.Scheme2.Graph;
 using DSIS.Scheme2.Nodes;
 using DSIS.Scheme2.XmlModel;
-using DSIS.Spring;
-using DSIS.Spring.Util;
 
 namespace DSIS.Scheme2.ConnectionPoints.Xml.Output
 {
   [UsedBySpring]
-  public class ActionInstanceOutputConnectionPointFactory :
-    Registrar<IOutputConnectionPointExtension, OutputConnectionPointFactory>, IOutputConnectionPointExtension
+  public class ActionInstanceOutputConnectionPointFactory
+    //Registrar<IOutputConnectionPointExtension, OutputConnectionPointFactory>, IOutputConnectionPointExtension
   {
     public ActionInstanceOutputConnectionPointFactory(OutputConnectionPointFactory factory)
-      : base(factory)
+      //: base(factory)
     {
     }
 
@@ -19,10 +18,10 @@ namespace DSIS.Scheme2.ConnectionPoints.Xml.Output
     {
       if (arc.Item is XsdFromActionInstance)
       {
-        XsdFromActionInstance from = (XsdFromActionInstance) arc.Item;
+        var from = (XsdFromActionInstance) arc.Item;
         INode node = ctx.GetAction(from.Id);
 
-        INodeAsOutputAction action = (INodeAsOutputAction) node;
+        var action = (INodeAsOutputAction) node;
         return action.AsOutputConnectionPoint();
       }
       return null;

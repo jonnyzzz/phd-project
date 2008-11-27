@@ -99,10 +99,8 @@
     <Compile Include="src\ConnectionPoints\Object\OutputConnectionPoint.cs" />
     <Compile Include="src\ConnectionPoints\Xml\Output\OutputConnectionPointBase.cs" />
     <Compile Include="src\ObjectParsers\IObjectParser.cs" />
-    <Compile Include="src\SpringAttribute.cs" />
     <Compile Include="src\UsedByScheme.cs" />
     <Compile Include="src\ConnectionPoints\Object\ObjectNode.cs" />
-    <Compile Include="src\ConnectionPoints\Object\ObjectConnectionPointFactory.cs" />
     <Compile Include="src\XmlModel\computation-graph-scheme.cs">
       <DependentUpon>computation-graph-scheme.xsd</DependentUpon>
     </Compile>
@@ -143,13 +141,13 @@
     <EmbeddedResource Include="resources\spring.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Spring\Spring.csproj">
-      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
-      <Name>Spring</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

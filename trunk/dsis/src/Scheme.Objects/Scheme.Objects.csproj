@@ -82,7 +82,6 @@
     <Compile Include="resources\SystemSpace.cs">
       <DependentUpon>SystemSpace.xsd</DependentUpon>
     </Compile>
-    <Compile Include="src\NamespaceHolder.cs" />
     <Compile Include="src\Systemx\DoubleArrayParser.cs" />
     <Compile Include="src\Systemx\ICellImageBuilderFactory.cs" />
     <Compile Include="src\Systemx\IComputeInveriantMeasureFactory.cs" />
@@ -125,10 +124,6 @@
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Spring\Spring.csproj">
-      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
-      <Name>Spring</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -2,23 +2,12 @@ using System;
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
 using DSIS.Core.Ioc.Ex;
-using DSIS.Spring;
 using DSIS.UI.UI;
 using DSIS.Utils;
 
 namespace DSIS.UI.Application
 {
   [ComponentImplementation]
-  public class ConfigureWindowsForms
-  {
-    public ConfigureWindowsForms()
-    {
-      System.Windows.Forms.Application.EnableVisualStyles();
-      System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-    }
-  }
-
-  [UsedBySpring, ComponentImplementation]
   public class ApplicationClass : IApplicationClass, IApplication
   {
     private readonly IMainForm myMainForm;

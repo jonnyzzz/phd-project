@@ -1,8 +1,8 @@
+using DSIS.Core.Ioc;
 using DSIS.Scheme2.ConnectionPoints.Xml.Input;
 using DSIS.Scheme2.ConnectionPoints.Xml.Output;
 using DSIS.Scheme2.Nodes;
 using DSIS.Scheme2.XmlModel;
-using DSIS.Spring;
 
 namespace DSIS.Scheme2.Graph
 {
