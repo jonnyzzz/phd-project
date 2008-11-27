@@ -1,0 +1,82 @@
+Graph: Nodes 131, Edges 1080
+Components: 1
+Component's Nodes: 32, 
+Method: Box Method
+Graph: Nodes 131, Edges 1080
+Components: 1
+Component's Nodes: 106, 
+Method: Box Method
+Graph: Nodes 457, Edges 3887
+Components: 1
+Component's Nodes: 343, 
+Method: Box Method
+Graph: Nodes 1569, Edges 12875
+Components: 1
+Component's Nodes: 868, 
+Method: Box Method
+Graph: Nodes 4319, Edges 33254
+Components: 1
+Component's Nodes: 1630, 
+Method: Box Method
+Graph: Nodes 8718, Edges 63068
+Components: 1
+Component's Nodes: 2832, 
+Method: Box Method
+Graph: Nodes 15311, Edges 111481
+Components: 2
+Component's Nodes: 3490, 145, 
+Method: Box Method
+Graph: Nodes 21338, Edges 140845
+Components: 2
+Component's Nodes: 1069, 1092, 
+Method: Box Method
+Graph: Nodes 14063, Edges 85802
+Components: 2
+Component's Nodes: 763, 1576, 
+Method: Box Method
+Graph: Nodes 15576, Edges 97384
+Components: 2
+Component's Nodes: 700, 2474, 
+Method: Box Method
+Graph: Nodes 20909, Edges 134198
+Components: 2
+Component's Nodes: 199, 3765, 
+Method: Box Method
+Graph: Nodes 26271, Edges 170948
+Components: 2
+Component's Nodes: 5691, 206, 
+Method: Box Method
+Graph: Nodes 39169, Edges 253892
+Components: 2
+Component's Nodes: 8856, 191, 
+Method: Box Method
+Graph: Nodes 59606, Edges 389690
+Components: 2
+Component's Nodes: 13317, 195, 
+Method: Box Method
+Graph: Nodes 89714, Edges 582018
+Components: 2
+Component's Nodes: 20619, 198, 
+Method: Box Method
+Graph: Nodes 137616, Edges 897045
+Components: 2
+Component's Nodes: 31353, 185, 
+Method: Box Method
+Graph: Nodes 208094, Edges 1361215
+Components: 2
+Component's Nodes: 47601, 199, 
+Method: Box Method
+Graph: Nodes 315571, Edges 2061681
+Components: 2
+Component's Nodes: 73365, 201, 
+Method: PointMethod
+Graph: Nodes 405350, Edges 1094355
+Components: 2
+Component's Nodes: 32164, 41, 
+Compute entropy of type WeightSearch_1:FIRST:Const
+Entropy: 0,260026911597247
+Graph: Nodes 405350, Edges 1094355
+Components: 2
+Component's Nodes: 32164, 41, 
+Compute entropy of type WeightSearch_1:SMART:Const
+Entropy: 0,426995108524382

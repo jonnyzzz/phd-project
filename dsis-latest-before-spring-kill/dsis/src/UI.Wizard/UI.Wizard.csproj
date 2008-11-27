@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F08FC04F-28A4-4A97-80CB-7F3867C8244B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.UI.Wizard</RootNamespace>
+    <AssemblyName>DSIS.UI.Wizard</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ButtonsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\ButtonsControl.Designer.cs">
+      <DependentUpon>ButtonsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\CenterLayoutControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\CenterLayoutControl.Designer.cs">
+      <DependentUpon>CenterLayoutControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\EmptyWizard.cs" />
+    <Compile Include="src\EmptyWizardPage.cs" />
+    <Compile Include="src\FieldInfos\BooleanFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\DoubleFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\EnumFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\EnumFieldInfoBase.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoBase.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoManager.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoFactoryBase.cs" />
+    <Compile Include="src\FieldInfos\IncludeValueEnumFieldInfoFactory.cs" />
+    <Compile Include="src\FormsGenerator\FormGenerator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\FormsGenerator\FormGeneratorWizardPage.cs" />
+    <Compile Include="src\FormsGenerator\FormGeneratorWizardPageFactoryImpl.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfoFactory.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfoManager.cs" />
+    <Compile Include="src\FormsGenerator\IFormGeneratorWizardPageFactory.cs" />
+    <Compile Include="src\FieldInfos\IntFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\LongFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\NonEditableFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\StringFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\TextFieldInfo.cs" />
+    <Compile Include="src\FormsGenerator\IOptionPageControl.cs" />
+    <Compile Include="src\FormsGenerator\IOptionPageLayout.cs" />
+    <Compile Include="src\FormsGenerator\OptionPageLayout.cs" />
+    <Compile Include="src\HeaderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\HeaderControl.Designer.cs">
+      <DependentUpon>HeaderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\IWizardPack.cs" />
+    <Compile Include="src\IWizardPage.cs" />
+    <Compile Include="src\JoinedWizardPack.cs" />
+    <Compile Include="src\ListSelector\IListInfo.cs" />
+    <Compile Include="src\ListSelector\IListSelectorFactory.cs" />
+    <Compile Include="src\ListSelector\ListInfo.cs" />
+    <Compile Include="src\ListSelector\ListSelector!2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\ListSelector\ListSelectorBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\ListSelector\ListSelectorFactoryImpl.cs" />
+    <Compile Include="src\SimpleWizard.cs" />
+    <Compile Include="src\StateWizard.cs" />
+    <Compile Include="src\WizardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\WizardForm.Designer.cs">
+      <DependentUpon>WizardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\WizardPageBase.cs" />
+    <Compile Include="src\WizardPageWithState.cs" />
+    <Compile Include="src\WizardPageWithStateD.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\ButtonsControl.resx">
+      <DependentUpon>ButtonsControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\CenterLayoutControl.resx">
+      <DependentUpon>CenterLayoutControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\HeaderControl.resx">
+      <DependentUpon>HeaderControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\WizardForm.resx">
+      <DependentUpon>WizardForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI.Controls\UI.Controls.csproj">
+      <Project>{3305A57B-0432-4E75-8E13-8AB265B8ECB6}</Project>
+      <Name>UI.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI\UI.csproj">
+      <Project>{5410F9D5-9D98-44CF-9518-CE5374CE4B22}</Project>
+      <Name>UI %28UI\UI%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,196 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.Scheme.Objects</RootNamespace>
+    <AssemblyName>DSIS.Scheme.Objects</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>http://localhost/DSIS.Scheme.Objects/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="resources\DoubleArray.cs">
+      <DependentUpon>DoubleArray.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="resources\IntArray.cs">
+      <DependentUpon>IntArray.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="resources\SystemInfo.cs">
+      <DependentUpon>SystemInfo.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="resources\SystemSpace.cs">
+      <DependentUpon>SystemSpace.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="src\NamespaceHolder.cs" />
+    <Compile Include="src\Systemx\DoubleArrayParser.cs" />
+    <Compile Include="src\Systemx\ICellImageBuilderFactory.cs" />
+    <Compile Include="src\Systemx\IComputeInveriantMeasureFactory.cs" />
+    <Compile Include="src\Systemx\IContiniousFunctionSolverFactory.cs" />
+    <Compile Include="src\Systemx\IContiniousSolverParameters.cs" />
+    <Compile Include="src\Systemx\INamedFactory.cs" />
+    <Compile Include="src\Systemx\IOptionsBasedFactory.cs" />
+    <Compile Include="src\Systemx\IOptionsHolder.cs" />
+    <Compile Include="src\Systemx\ISystemInfoFactory.cs" />
+    <Compile Include="src\Systemx\ISystemInfoParameters.cs" />
+    <Compile Include="src\Systemx\LongArrayParser.cs" />
+    <Compile Include="src\Systemx\SchemaBasedParser.cs" />
+    <Compile Include="src\Systemx\SystemInfoComponentAttribute.cs" />
+    <Compile Include="src\Systemx\SystemInfoFactory.cs" />
+    <Compile Include="src\Systemx\SystemInfoParser.cs" />
+    <Compile Include="src\Systemx\SystemSpaceParser.cs" />
+    <Compile Include="src\Systemx\SystemType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scheme2\Scheme2.csproj">
+      <Project>{69A72457-55CD-463A-840B-73F62BDCA0E5}</Project>
+      <Name>Scheme2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scheme\Scheme.csproj">
+      <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
+      <Name>Scheme</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Spring\Spring.csproj">
+      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
+      <Name>Spring</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\SystemSpace.xsd">
+      <SubType>
+      </SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\SystemInfo.xsd">
+      <SubType>
+      </SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\DoubleArray.xsd">
+      <SubType>
+      </SubType>
+    </EmbeddedResource>
+    <None Include="resources\DoubleArray.xsx">
+      <DependentUpon>DoubleArray.xsd</DependentUpon>
+    </None>
+    <EmbeddedResource Include="resources\IntArray.xsd">
+      <SubType>
+      </SubType>
+    </EmbeddedResource>
+    <None Include="resources\SystemInfo.xsx">
+      <DependentUpon>SystemInfo.xsd</DependentUpon>
+    </None>
+    <None Include="resources\SystemSpace.xsx">
+      <DependentUpon>SystemSpace.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\spring.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="../Build.Targets" />
+  <Target Name="BeforeBuild">
+    <XsdCs InputFile="resources\SystemSpace.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
+    <XsdCs InputFile="resources\SystemInfo.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
+    <XsdCs InputFile="resources\DoubleArray.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
+    <XsdCs InputFile="resources\IntArray.xsd" OutDir="$(MSBuildProjectDirectory)\resources" Namespace="DSIS.Scheme.Objects.Systemx" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

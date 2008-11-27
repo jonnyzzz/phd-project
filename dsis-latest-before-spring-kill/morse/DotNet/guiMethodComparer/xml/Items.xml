@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<items>        
+    <item name="DoubleLogistics" xml="Eugene.Petrenko.Gui2.MethodComparer.xml.DoubleLogistics.xml"/>
+    <item name="Henon" xml="Eugene.Petrenko.Gui2.MethodComparer.xml.Henon.xml"/>
+    <item name="Hirdini" xml="Eugene.Petrenko.Gui2.MethodComparer.xml.Hardini.xml"/>    
+    <item name="Homotop" xml="Eugene.Petrenko.Gui2.MethodComparer.xml.Homotop.xml"/>
+    <item name="Ikeda" xml="Eugene.Petrenko.Gui2.MethodComparer.xml.Ikeda.xml"/>    
+    <item name="Julia" xml="Eugene.Petrenko.Gui2.MethodComparer.xml.Julia.xml"/>
+    <item name="Torsten" xml="Eugene.Petrenko.Gui2.MethodComparer.xml.Torsten.xml"/>    
+</items>

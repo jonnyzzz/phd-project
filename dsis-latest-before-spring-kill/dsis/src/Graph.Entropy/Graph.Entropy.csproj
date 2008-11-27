@@ -1,0 +1,153 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{43283F9D-A669-47B2-80FD-FFA447A4BD7F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.Graph.Entropy</RootNamespace>
+    <AssemblyName>DSIS.Graph.Entropy</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\IEntropyEvaluator.cs" />
+    <Compile Include="src\Impl\Entropy\GraphMeasurePersistance.cs" />
+    <Compile Include="src\Impl\Loop\Combinatorics\CombinatoricsLoopSearch.cs" />
+    <Compile Include="src\Impl\Eigen\EigenEntropyMeasure.cs" />
+    <Compile Include="src\Impl\Entropy\EntropyProcessorAdapter.cs" />
+    <Compile Include="src\Impl\Entropy\GraphEntropy.cs" />
+    <Compile Include="src\Impl\Entropy\GraphMeasure.cs" />
+    <Compile Include="src\Impl\Entropy\IGraphMeasure.cs" />
+    <Compile Include="src\Impl\JVR\IHashholderController.cs" />
+    <Compile Include="src\Impl\JVR\ItemRebuildCookie.cs" />
+    <Compile Include="src\Impl\JVR\ItemUpdateCookie.cs" />
+    <Compile Include="src\Impl\JVR\JVREvaluator.cs" />
+    <Compile Include="src\Impl\JVR\JVRMeasureOptions.cs" />
+    <Compile Include="src\Impl\Loop\AllEngesOnALoopGraphSearch.cs" />
+    <Compile Include="src\Impl\Loop\AllNodesOnALoopGraphSearch.cs" />
+    <Compile Include="src\Impl\Eigen\EigenEntropyEvaluatorImpl.cs" />
+    <Compile Include="src\Impl\Loop\EntropyBackStepGraphWeightCallback.cs" />
+    <Compile Include="src\Impl\EntropyEvaluatorBase.cs" />
+    <Compile Include="src\Impl\EntropyEvaluatorImpl.cs" />
+    <Compile Include="src\Impl\Loop\EntropyEvaluatorLoopBase.cs" />
+    <Compile Include="src\Impl\Loop\EntropyGraphWeightCallback.cs" />
+    <Compile Include="src\Impl\Loop\ILoopIteratorCallback.cs" />
+    <Compile Include="src\Impl\Loop\Iterators\ContextBase.cs" />
+    <Compile Include="src\Impl\Loop\Iterators\ILoopIterator.cs" />
+    <Compile Include="src\Impl\Loop\Iterators\LoopIterator.cs" />
+    <Compile Include="src\Impl\Loop\Iterators\LoopIteratorBase.cs" />
+    <Compile Include="src\Impl\Loop\Iterators\LoopIteratorFirst.cs" />
+    <Compile Include="src\Impl\Loop\Iterators\LoopIteratorSmart.cs" />
+    <Compile Include="src\Impl\Loop\Iterators\NonDuplicatedLoopIteratorCallback.cs" />
+    <Compile Include="src\Impl\Loop\Search\GraphWeightSearch.cs" />
+    <Compile Include="src\Impl\Loop\Search\GraphWeightSearch2.cs" />
+    <Compile Include="src\Impl\Loop\Search\GraphWeightSearchBase.cs" />
+    <Compile Include="src\Impl\Loop\Search\GraphWeightSearchFiltering.cs" />
+    <Compile Include="src\Impl\Loop\Search\GraphWeightSearchLimited.cs" />
+    <Compile Include="src\Impl\Loop\Search\IGraphWeightSearch.cs" />
+    <Compile Include="src\Impl\Loop\Search\IVisitedCollection.cs" />
+    <Compile Include="src\Impl\Loop\Search\Limited\LimitedLoopSearch.cs" />
+    <Compile Include="src\Impl\Loop\Search\SearchTreeNode.cs" />
+    <Compile Include="src\Impl\Loop\Search\VisitedCollectionBase.cs" />
+    <Compile Include="src\Impl\Loop\SmartPath\INodeState.cs" />
+    <Compile Include="src\Impl\Loop\SmartPath\IteratorState.cs" />
+    <Compile Include="src\Impl\Loop\SmartPath\SearchState.cs" />
+    <Compile Include="src\Impl\Loop\SmartPath\SmartPathBuilder.cs" />
+    <Compile Include="src\Impl\Loop\SmartPath\ThisNodeState.cs" />
+    <Compile Include="src\Impl\Loop\Strange\StrangeEntropyEvaluatorParams.cs" />
+    <Compile Include="src\Impl\Loop\Strange\StrangeEntropyAllEdgesLoopsEvaluatorImpl.cs" />
+    <Compile Include="src\Impl\Loop\Strange\StrangeEntropyAllNodesLoopsEvaluatorImpl.cs" />
+    <Compile Include="src\Impl\Loop\Strange\StrangeEntropyEvaluator.cs" />
+    <Compile Include="src\Impl\Loop\Strange\StrangeEvaluatorStrategy.cs" />
+    <Compile Include="src\Impl\Loop\Strange\StrangeEvaluatorType.cs" />
+    <Compile Include="src\Impl\Loop\Weight\EntropyLoopWeights.cs" />
+    <Compile Include="src\Impl\Loop\Weight\IEntropyLoopWeightCallback.cs" />
+    <Compile Include="src\Impl\Entropy\IEntropyProcessor.cs" />
+    <Compile Include="src\Impl\JVR\ArcDirection.cs" />
+    <Compile Include="src\Impl\JVR\HashHolder.cs" />
+    <Compile Include="src\Impl\JVR\InverseArcDirection.cs" />
+    <Compile Include="src\Impl\JVR\JVRMeasure.cs" />
+    <Compile Include="src\Impl\JVR\JVRPair.cs" />
+    <Compile Include="src\Impl\JVR\SortedNodeSet.cs" />
+    <Compile Include="src\Impl\JVR\StraitArcDirection.cs" />
+    <Compile Include="src\Impl\Loop\Path\PathBuilder.cs" />
+    <Compile Include="src\Impl\Util\NodePair.cs" />
+    <Compile Include="src\Impl\Util\PairBase.cs" />
+    <Compile Include="src\Impl\Util\Vector.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Graph\Graph.csproj">
+      <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
+      <Name>Graph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistance\Persistance.csproj">
+      <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
+      <Name>Persistance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

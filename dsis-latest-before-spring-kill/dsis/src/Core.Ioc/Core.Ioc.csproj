@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.Core.Ioc</RootNamespace>
+    <AssemblyName>DSIS.Core.Ioc</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\AppDomainSubscription.cs" />
+    <Compile Include="src\AssemblyScanerImpl.cs" />
+    <Compile Include="src\AutowireAttribute.cs" />
+    <Compile Include="src\ComponentCollectionAttribute.cs" />
+    <Compile Include="src\ComponentCollectionAttributeBase.cs" />
+    <Compile Include="src\ComponentContainerException.cs" />
+    <Compile Include="src\ComponentImplementationAttribute.cs" />
+    <Compile Include="src\ComponentImplementationAttributeBase.cs" />
+    <Compile Include="src\ComponentInterfaceAttribute.cs" />
+    <Compile Include="src\ComponentInterfaceAttributeBase.cs" />
+    <Compile Include="src\Ex\ApplicationEntryPoint.cs" />
+    <Compile Include="src\Ex\CommandLineImpl.cs" />
+    <Compile Include="src\Ex\IApplication.cs" />
+    <Compile Include="src\IAssemblyScaner.cs" />
+    <Compile Include="src\Ex\ICommandLine.cs" />
+    <Compile Include="src\IAttributeScanner.cs" />
+    <Compile Include="src\IComponentContainer.cs" />
+    <Compile Include="src\IComponentContainerServices.cs" />
+    <Compile Include="src\IComponentInterfaceLookup.cs" />
+    <Compile Include="src\IStartableComponent.cs" />
+    <Compile Include="src\ITypesFilter.cs" />
+    <Compile Include="src\JC\AttributeScannerImpl.cs" />
+    <Compile Include="src\JC\AutowireLookupImpl.cs" />
+    <Compile Include="src\JC\Autowiring.cs" />
+    <Compile Include="src\JC\BaseTypeLookupImpl.cs" />
+    <Compile Include="src\JC\IAutowireLookupImpl.cs" />
+    <Compile Include="src\JC\IBaseTypesLookup.cs" />
+    <Compile Include="src\JC\IImplementationsHolder.cs" />
+    <Compile Include="src\JC\IImplLoopup.cs" />
+    <Compile Include="src\JC\IJContainer.cs" />
+    <Compile Include="src\JC\ImplementationHolderImpl.cs" />
+    <Compile Include="src\JC\ImplLookupImpl.cs" />
+    <Compile Include="src\JC\JComponentContainer.cs" />
+    <Compile Include="src\JC\JComponentContainerBase.cs" />
+    <Compile Include="src\JC\JComponentServices.cs" />
+    <Compile Include="src\JC\JContainer.cs" />
+    <Compile Include="src\JC\JContainerException.cs" />
+    <Compile Include="src\JC\JContainerPredefinedComponentAttribute.cs" />
+    <Compile Include="src\JC\PropertyAutowiring.cs" />
+    <Compile Include="src\JC\RecursionBlocker.cs" />
+    <Compile Include="src\Logger\Log4Net.cs" />
+    <Compile Include="src\NoInheritContainerAttribute.cs" />
+    <Compile Include="src\ScanAllLoadedAssemblies.cs" />
+    <Compile Include="src\ScanCurrentFolder.cs" />
+    <Compile Include="src\TypesFilerImpl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\log4net.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
