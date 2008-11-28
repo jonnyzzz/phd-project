@@ -167,10 +167,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <Import Project="../Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-   -->
+  <Import Project="../After.Build.Targets" />
   <Import Project="../Build.Targets" />
   <Target Name="BeforeBuild">
     <XsdCs InputFile="src\XmlModel\computation-graph-scheme.xsd" OutDir="$(MSBuildProjectDirectory)\src\XmlModel" Namespace="DSIS.Scheme2.XmlModel" />

@@ -97,7 +97,9 @@
       <Name>IntegerCoordinates</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="../Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="../After.Build.Targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
