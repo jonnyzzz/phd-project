@@ -28,6 +28,7 @@ namespace DSIS.UI.Application
         myPresentation.LoadAssembly(GetType().Assembly);
         myForm = new MainForm(myActionManager, myMenuFactoy);
       }
+      myForm.Shown += delegate { myForm.Activate(); };
       return myForm;
     }
 

@@ -115,8 +115,8 @@
       this.Controls.Add(this.myToolStrip);
       this.MainMenuStrip = this.myMainMenu;
       this.Name = "MainForm";
-      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-      this.Text = "DSIS";
+      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+      this.Text = "DSIS";      
       this.myToolStrip.BottomToolStripPanel.ResumeLayout(false);
       this.myToolStrip.BottomToolStripPanel.PerformLayout();
       this.myToolStrip.TopToolStripPanel.ResumeLayout(false);

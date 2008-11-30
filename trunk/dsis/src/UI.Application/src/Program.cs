@@ -12,7 +12,6 @@ namespace DSIS.UI.Application
     private static int Main(string[] args)
     {
       return ApplicationEntryPoint.DoMain(args);
-//      return SpringIoCSetup.AsMain<ApplicationClass>(args);      
     }
   }
 }

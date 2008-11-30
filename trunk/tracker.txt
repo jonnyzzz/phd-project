@@ -11,7 +11,6 @@
   -  Use drawer program from Nikita
   -  CI aka TeamCity
   -  Use IProgressIndicator everywhere
-  -  Activate form on start
   -  Submit exception form
   -  Submit exception service online
   -  No document banner
@@ -31,13 +30,15 @@
   -  Show percentage on progress bar control
   -  Mnemonics manager	
   -  Rework executor model to show several running tasks' progress
-  -  Support adaptive method
   -  Disable actions while action is being completed
   -  Document write cookie to protect from starting several actions at a time
-  -  JVR action options control title broken.
+
 
 
 Completed:
+  -  Activate form on start
+  -  Support adaptive method
+  -  JVR action options control title broken.
   -  Progress bar may be started without any task inside
   -  Progress bar should use meaningful description for actions
   -  Bug fix progress bar
