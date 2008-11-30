@@ -28,7 +28,7 @@ namespace DSIS.UI.Application
       {
         SuspendLayout();
 
-        ToolStripContentPanel host = myToolStrip.ContentPanel;
+        var host = myToolStrip.ContentPanel;
         host.AutoScroll = true;
         host.Controls.Clear();
         var control = value;

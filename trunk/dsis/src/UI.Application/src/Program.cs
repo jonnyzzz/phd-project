@@ -11,6 +11,9 @@ namespace DSIS.UI.Application
     [STAThread]
     private static int Main(string[] args)
     {
+      System.Windows.Forms.Application.EnableVisualStyles();
+      System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+
       return ApplicationEntryPoint.DoMain(args);
     }
   }

@@ -70,6 +70,7 @@
     <Compile Include="src\Actions.Impl\ActionHandlerBase.cs" />
     <Compile Include="src\Actions.Impl\AddDefaultSystemActions.cs" />
     <Compile Include="src\Actions.Impl\ApplicationDocumentFactory.cs" />
+    <Compile Include="src\Actions.Impl\CloseDocumentActionHandler.cs" />
     <Compile Include="src\Actions.Impl\CoordinateSystemFactory.cs" />
     <Compile Include="src\Actions.Impl\CreateInitialDivision.cs" />
     <Compile Include="src\Actions.Impl\CreateNewSystemActionHandler.cs" />
@@ -108,7 +109,6 @@
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />
     <Compile Include="src\ApplicationDocument.cs" />
-    <Compile Include="src\ConfigureWindowsForms.cs" />
     <Compile Include="src\Doc\Actions\ActionsContainer.cs">
     </Compile>
     <Compile Include="src\Doc\Actions\ComputeInvariantMeasureAction.cs" />
@@ -163,6 +163,9 @@
     </Compile>
     <Compile Include="src\MainFormProxy.cs" />
     <Compile Include="src\NamespaceHolder.cs" />
+    <Compile Include="src\NoDocumentControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

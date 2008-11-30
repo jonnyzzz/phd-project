@@ -1,9 +1,8 @@
 using DSIS.Scheme.Ctx;
-using DSIS.Spring.Attributes;
 
 namespace DSIS.UI.Application.Actions.Impl
 {
-  [SpringBean, ActionHandler]
+  [ActionHandler]
   public class DisabledActionHandler : ActionHandlerBase
   {
     public DisabledActionHandler()

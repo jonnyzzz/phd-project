@@ -15,7 +15,7 @@ namespace DSIS.UI.Application
 
     public event EventHandler<DocumentChangedEventArgs> DocumentChanged;
     
-    public ApplicationClass(IMainForm mainForm, ConfigureWindowsForms _, IInvocator invocator)
+    public ApplicationClass(IMainForm mainForm, IInvocator invocator)
     {
       Invocator = invocator;
       myMainForm = mainForm;
@@ -25,7 +25,7 @@ namespace DSIS.UI.Application
 
     public int Main()
     {
-      System.Windows.Forms.Application.Run(myMainForm.GetFrom());
+      System.Windows.Forms.Application.Run(myMainForm.GetForm());
       return 0;
     }
 
@@ -65,7 +65,7 @@ namespace DSIS.UI.Application
 
     private Form  MainForm
     {
-      get { return myMainForm.GetFrom(); }
+      get { return myMainForm.GetForm(); }
     }
   }
 }

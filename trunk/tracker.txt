@@ -13,7 +13,6 @@
   -  Use IProgressIndicator everywhere
   -  Submit exception form
   -  Submit exception service online
-  -  No document banner
   -  Entropy changes log
   -  allow to move 3d pictures
   -  allow to zoom pictures
@@ -36,6 +35,7 @@
 
 
 Completed:
+  -  No document banner
   -  Activate form on start
   -  Support adaptive method
   -  JVR action options control title broken.
