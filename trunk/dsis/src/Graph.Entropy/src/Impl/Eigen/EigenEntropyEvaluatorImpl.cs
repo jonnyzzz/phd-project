@@ -43,7 +43,7 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
     private double DoCompute()
     {
       var steps = myMaxSteps;
-      double? maxEntropy = 0;
+      double maxEntropy = 0;
 
       double eigen = -1;
       double t = 0;
@@ -60,9 +60,9 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
         t = mul.First;
         div = mul.First;
 
-        maxEntropy = maxEntropy == null ? t : Math.Max(t, maxEntropy.Value);
+        maxEntropy = Math.Max(t, maxEntropy);
       }
-      return Math.Log(steps == 0 ? maxEntropy.Value : t, 2)/2;      
+      return Math.Log(steps == 0 ? maxEntropy : t, 2)/2;      
     }
 
     /// <summary>
