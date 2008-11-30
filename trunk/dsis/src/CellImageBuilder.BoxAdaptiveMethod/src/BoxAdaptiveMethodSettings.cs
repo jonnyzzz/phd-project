@@ -1,30 +1,49 @@
+using System;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates;
+using DSIS.Utils.Bean;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {
+  [Serializable]
   public class BoxAdaptiveMethodSettings : ICellImageBuilderIntegerCoordinatesSettings
   {
     public static readonly BoxAdaptiveMethodSettings Default = new BoxAdaptiveMethodSettings();
 
-    private readonly int myTaskLimit = 200;
-    private readonly double myOverlaping = 0.2;
-    private readonly double myCellSizePercent = 0.7;
-    private readonly double myAddRadiusFactor = 0.7;
+    [IncludeGenerate(Title = "Subdivision limit")]
+    public int myTaskLimit { get; set;}
+    [IncludeGenerate(Title = "Overlap")]
+    public double myOverlaping { get; set; }
+    [IncludeGenerate(Title = "Cell size percentage")]
+    public double myCellSizePercent { get; set; }
+    [IncludeGenerate(Title = "Add radius factory")]
+    public double myAddRadiusFactor { get; set; }
 
-    public BoxAdaptiveMethodSettings(int taskLimit, double overlaping)
+    public BoxAdaptiveMethodSettings(int taskLimit, double overlaping) : this()
     {
+      myAddRadiusFactor = 0.7;
+      myCellSizePercent = 0.7;
+      myOverlaping = 0.2;
+      myTaskLimit = 200;
       myTaskLimit = taskLimit;
       myOverlaping = overlaping;
     }
 
     public BoxAdaptiveMethodSettings()
     {
+      myAddRadiusFactor = 0.7;
+      myCellSizePercent = 0.7;
+      myOverlaping = 0.2;
+      myTaskLimit = 200;
     }
 
-    public BoxAdaptiveMethodSettings(int taskLimit, double overlaping, double cellSizePercent)
+    public BoxAdaptiveMethodSettings(int taskLimit, double overlaping, double cellSizePercent) : this()
     {
+      myAddRadiusFactor = 0.7;
+      myCellSizePercent = 0.7;
+      myOverlaping = 0.2;
+      myTaskLimit = 200;
       myTaskLimit = taskLimit;
       myOverlaping = overlaping;
       myCellSizePercent = cellSizePercent;
@@ -32,6 +51,10 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     public BoxAdaptiveMethodSettings(int taskLimit, double overlaping, double cellSizePercent, double addRadiusFactor)
     {
+      myAddRadiusFactor = 0.7;
+      myCellSizePercent = 0.7;
+      myOverlaping = 0.2;
+      myTaskLimit = 200;
       myTaskLimit = taskLimit;
       myOverlaping = overlaping;
       myCellSizePercent = cellSizePercent;
