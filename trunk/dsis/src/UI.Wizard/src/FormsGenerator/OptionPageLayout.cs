@@ -53,6 +53,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
                         Dock = DockStyle.Left,
                       };
       field.Width = 150;
+      field.Padding = new Padding(0,0,35,0);
       var sz = Math.Max(field.Height, caption.Height);
 
       panel.Dock = DockStyle.Top;

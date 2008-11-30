@@ -90,6 +90,7 @@
     <Compile Include="src\Systemx\INamedFactory.cs" />
     <Compile Include="src\Systemx\IOptionsBasedFactory.cs" />
     <Compile Include="src\Systemx\IOptionsHolder.cs" />
+    <Compile Include="src\Systemx\IOptionsValueChecker.cs" />
     <Compile Include="src\Systemx\ISystemInfoFactory.cs" />
     <Compile Include="src\Systemx\ISystemInfoParameters.cs" />
     <Compile Include="src\Systemx\LongArrayParser.cs" />

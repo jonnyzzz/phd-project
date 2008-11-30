@@ -137,6 +137,10 @@
       <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
       <Name>Persistance</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
+      <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
+      <Name>Scheme.Objects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>

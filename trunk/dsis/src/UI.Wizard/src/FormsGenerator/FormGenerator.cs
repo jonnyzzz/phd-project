@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
+using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.UI;
 using DSIS.UI.Wizard.FieldInfos;
 using DSIS.Utils;
@@ -16,6 +17,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
     private readonly ErrorProvider myErrorProvider;
 
     private readonly HashSet<IFieldInfo> myPendingErrors = new HashSet<IFieldInfo>();
+    private readonly Dictionary<string, IFieldInfo> myPropertyToControl = new Dictionary<string, IFieldInfo>();
 
     public FormGenerator(IFieldInfoManager manager, object obj, IOptionPageLayout layout)
     {
@@ -32,6 +34,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
         if (attr != null)
         {
           var fieldInfo = CreateFieldInfo(manager, info);
+          myPropertyToControl.Add(info.Name, fieldInfo);
           controls.Add(new OptionPageControl(attr.Title, attr.Description, fieldInfo.EditorControl()));
         }
       }
@@ -47,7 +50,6 @@ namespace DSIS.UI.Wizard.FormsGenerator
                          Dock = DockStyle.Fill
                        });
       }
-
     }
 
     private IFieldInfo CreateFieldInfo(IFieldInfoManager manager, PropertyInfo info)
@@ -57,6 +59,8 @@ namespace DSIS.UI.Wizard.FormsGenerator
       inf.ValueChanged += (_, control, message) =>
                       {
                         myErrorProvider.SetError(control, message);
+                        myErrorProvider.SetIconAlignment(control, ErrorIconAlignment.MiddleRight);
+                        myErrorProvider.SetIconPadding(control, -10);
                         if (message != null)
                         {
                           myPendingErrors.Add(inf);
@@ -70,6 +74,13 @@ namespace DSIS.UI.Wizard.FormsGenerator
 
     bool IErrorProvider<bool>.Validate()
     {
+      if (myObject is IOptionsValueChecker)
+      {
+        foreach (var value in myPropertyToControl.Values)
+        {
+          value.CheckFieldValue();
+        }
+      }
       return myPendingErrors.Count == 0;
     }
 

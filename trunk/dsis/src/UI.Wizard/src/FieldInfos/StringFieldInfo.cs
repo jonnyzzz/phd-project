@@ -23,12 +23,12 @@ namespace DSIS.UI.Wizard.FieldInfos
                                  try
                                  {
                                    TrySetValue(control.Text);
-                                   FireError(control, null);
+                                   FireError(null);
                                  }
                                  catch (Exception e)
                                  {
                                    LOG.Error("Parsing text input", e);
-                                   FireError(control, "Failed to set value. " + e.Message);
+                                   FireError("Failed to set value. " + e.Message);
                                  }
                                };
       return control;

@@ -8,5 +8,6 @@ namespace DSIS.UI.Wizard.FieldInfos
   {
     event FieldValueChanged ValueChanged;
     Control EditorControl();
+    void CheckFieldValue();
   }
 }

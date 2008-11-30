@@ -152,10 +152,10 @@ namespace DSIS.Graph.Entropy.Tests.StrangeComparison
 
     private static IAction Strange(StrangeEvaluatorStrategy strategy)
     {
-      StrangeEntropyEvaluatorParams ps = new StrangeEntropyEvaluatorParams(StrangeEvaluatorType.WeightSearch_1, strategy, EntropyLoopWeights.ONE);
+      var ps = new StrangeEntropyEvaluatorParams(StrangeEvaluatorType.WeightSearch_1, strategy, EntropyLoopWeights.ONE);
       return new AgregateAction(delegate(IActionGraphPartBuilder bld)
                                                {
-                                                 SetStrangeEntropyParamsAction set = new SetStrangeEntropyParamsAction(ps);
+                                                 var set = new SetStrangeEntropyParamsAction(ps);
                                                  bld.AddEdge(bld.Start, set);
                                                  IAction main = new StrangeEntropyAction();
                                                  IAction mainProxy = new ProxyAction();

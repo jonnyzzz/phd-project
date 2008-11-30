@@ -1,4 +1,3 @@
-  -  Do not show Combinatorics
   -  Show Entropy on left pane
   -  Cancelable progressbar
   -  Memory usage bound
@@ -25,7 +24,6 @@
   -  align progress bar to buttom
   -  not responding after focus lost
   -  embedded IE used to flickr
-  -  Trop 'toolStripStatusLabel1' text
   -  Show percentage on progress bar control
   -  Mnemonics manager	
   -  Rework executor model to show several running tasks' progress
@@ -35,6 +33,8 @@
 
 
 Completed:
+  -  Trop 'toolStripStatusLabel1' text
+  -  Do not show Combinatorics
   -  No document banner
   -  Activate form on start
   -  Support adaptive method

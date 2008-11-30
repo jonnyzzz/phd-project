@@ -28,13 +28,11 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.ToolStripStatusLabel myStatusBarLabel;
       System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
       this.myToolStrip = new System.Windows.Forms.ToolStripContainer();
       this.myStatusBar = new System.Windows.Forms.StatusStrip();
       this.myMainMenu = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      myStatusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
       newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.myToolStrip.BottomToolStripPanel.SuspendLayout();
       this.myToolStrip.TopToolStripPanel.SuspendLayout();
@@ -68,18 +66,10 @@
       // 
       this.myStatusBar.Dock = System.Windows.Forms.DockStyle.None;
       this.myStatusBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-      this.myStatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            myStatusBarLabel});
       this.myStatusBar.Location = new System.Drawing.Point(0, 0);
       this.myStatusBar.Name = "myStatusBar";
       this.myStatusBar.Size = new System.Drawing.Size(834, 22);
       this.myStatusBar.TabIndex = 0;
-      // 
-      // myStatusBarLabel
-      // 
-      myStatusBarLabel.Name = "myStatusBarLabel";
-      myStatusBarLabel.Size = new System.Drawing.Size(109, 17);
-      myStatusBarLabel.Text = "toolStripStatusLabel1";
       // 
       // myMainMenu
       // 

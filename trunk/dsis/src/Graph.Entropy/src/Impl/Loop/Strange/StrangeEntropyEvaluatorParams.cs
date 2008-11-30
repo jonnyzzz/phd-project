@@ -1,14 +1,16 @@
 using System;
+using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Loop.Combinatorics;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
+using DSIS.Scheme.Objects.Systemx;
 using DSIS.Utils.Bean;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
-  public class StrangeEntropyEvaluatorParams
+  public class StrangeEntropyEvaluatorParams : IOptionsValueChecker
   {
     [IncludeGenerate(Title = "Method type")]
     public StrangeEvaluatorType EntropyType { get; set; }
@@ -69,6 +71,17 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
           return new CombinatoricsLoopSearch<Q>(callback, comps.AsGraph(new[]{info}), int.MaxValue);
         default:
           throw new ArgumentException("Unexpected state " + Strategy);
+      }
+    }
+
+    public void HasErrors(string fieldName, Action<string> setError)
+    {
+      if (fieldName == "EntropyType" || fieldName == "Strategy")
+      {
+        if (EntropyType == StrangeEvaluatorType.Combinatorics ^ Strategy == StrangeEvaluatorStrategy.COMBINATORICS)
+        {
+          setError("Combinatorics is only compatible with combinatorics");
+        }
       }
     }
   }  
