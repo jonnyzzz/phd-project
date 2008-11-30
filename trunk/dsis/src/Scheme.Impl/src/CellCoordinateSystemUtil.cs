@@ -57,23 +57,26 @@ namespace DSIS.Scheme.Impl
         myContext = context;
       }
 
-      
-      public void With<Q>(ICellCoordinateSystem<Q> system) where Q : ICellCoordinate
+      private long GetCount<Q>()
+        where Q : ICellCoordinate
       {
         var key = Keys.CellsEnumerationKey<Q>();
         if (myContext.ContainsKey(key))
         {
-          Count = key.Get(myContext).Count;
-          return;
+          return key.Get(myContext).Count;
         }
         var key2 = Keys.GraphComponents<Q>();
         if (myContext.ContainsKey(key2))
         {
           var components = key2.Get(myContext);
-          Count = components.Components.FoldLeft(0, (x, v) => v + x.NodesCount);
-          return;
+          return components.Components.FoldLeft(0, (x, v) => v + x.NodesCount);
         }
-        Count = 0;
+        return 0;
+      }
+      
+      public void With<Q>(ICellCoordinateSystem<Q> system) where Q : ICellCoordinate
+      {
+        Count = GetCount<Q>();
       }
     }
     private class ActionContains: ICellCoordinateWith

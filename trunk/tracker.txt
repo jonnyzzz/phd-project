@@ -1,0 +1,12 @@
+  -  Do not show Combinatorics
+  -  Show Entropy on left pane
+  -  Cancelable progressbar
+  -  Memory usage bound
+  -  Modal progress bar
+  -  Remember history of actions
+  -  Macros support
+  -  System Functions parser
+  -  Embed drawer program from Nikita
+  -  Use drawer program from Nikita
+  -  CI aka TeamCity
+  -  Bug fix progress bar
