@@ -31,7 +31,6 @@
       this.components = new System.ComponentModel.Container();
       this.myProgressBar = new System.Windows.Forms.ProgressBar();
       this.myMainLabel = new System.Windows.Forms.Label();
-      this.myStartInfiniteTimer = new System.Windows.Forms.Timer(this.components);
       this.SuspendLayout();
       // 
       // myProgressBar
@@ -52,11 +51,6 @@
       this.myMainLabel.Text = "Progress bar text";
       this.myMainLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
       // 
-      // myStartInfiniteTimer
-      // 
-      this.myStartInfiniteTimer.Interval = 400;
-      this.myStartInfiniteTimer.Tick += new System.EventHandler(this.myStartInfiniteTimer_Tick);
-      // 
       // ProgressBarControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -66,13 +60,11 @@
       this.Name = "ProgressBarControl";
       this.Size = new System.Drawing.Size(517, 81);
       this.ResumeLayout(false);
-
     }
 
     #endregion
 
     private System.Windows.Forms.ProgressBar myProgressBar;
     private System.Windows.Forms.Label myMainLabel;
-    private System.Windows.Forms.Timer myStartInfiniteTimer;
   }
 }

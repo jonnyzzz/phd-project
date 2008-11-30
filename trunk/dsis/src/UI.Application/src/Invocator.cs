@@ -4,15 +4,18 @@ using System.Windows.Forms;
 using DSIS.Core.Ioc;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using log4net;
 
 namespace DSIS.UI.Application
 {
   [ComponentImplementation]
   public class Invocator : IInvocator, IDisposable
   {
+    private static readonly ILog LOG = LogManager.GetLogger(typeof(Invocator));
+
     private readonly Form myPumpForm;
     private readonly Timer myActionsTimer;
-    private readonly List<MyQueuedAction> myActions = new List<MyQueuedAction>();
+    private readonly List<IQueuedAction> myActions = new List<IQueuedAction>();
     private readonly ReenterableSafe myReenterableSafe = new ReenterableSafe();
 
     public Invocator()
@@ -35,75 +38,72 @@ namespace DSIS.UI.Application
       myActionsTimer.Enabled = true;
     }
 
-
     private void myActionsTimer_Tick(object sender, EventArgs e)
     {
       myReenterableSafe.Action(
         delegate
           {
-            HashSet<MyQueuedAction> actions;
+            HashSet<IQueuedAction> actions;
             lock (myActions)
             {
-              actions = new HashSet<MyQueuedAction>(myActions);
+              actions = new HashSet<IQueuedAction>(myActions);
             }
 
-            var now = DateTime.Now;
-            actions.RemoveWhere(x => !x.Execute(now, InvokeOrQueue));
+            actions.RemoveWhere(x => x.Execute());
 
             lock (myActions)
             {
-              myActions.RemoveAll(actions.Contains);
+              myActions.RemoveAll(x=>!actions.Contains(x));
             }
           });
     }
 
     public void InvokeOrQueue(string name, Action action)
     {
-      myPumpForm.InvokeAction(action);
+      ExecuteWithTimeout(name, TimeSpan.Zero, action);      
+    }
+
+    private void DoExecute(string name, Action action)
+    {
+      myPumpForm.InvokeAction(
+        delegate
+        {
+          try
+          {
+            action();
+          }
+          catch (Exception e)
+          {
+            LOG.Error("Action " + name + " has failed: " + e.Message, e);
+          }
+        });
+    }
+
+    private void RemoveFromQueue(IQueuedAction action)
+    {
+      lock(myActions)
+      {
+        myActions.Remove(action);
+      }
     }
 
     public IDisposable ExecuteWithTimeout(string name, TimeSpan interval, Action action)
     {
       lock (myActions)
       {
-        var ac = new MyQueuedAction(DateTime.Now + interval, name, action);
+        var ac = new QueuedAction(name, action, DoExecute, RemoveFromQueue, DateTime.Now + interval);
         myActions.Add(ac);
-        myActionsTimer.Enabled = true;
         return ac;
       }
     }
 
-    private class MyQueuedAction : IDisposable
+    public IDisposable ExecuteRepeating(string name, TimeSpan interval, Action action)
     {
-      private bool myIsDisposed;
-      private readonly DateTime myDue;
-      private readonly string myName;
-      private readonly Action myAction;
-
-      public MyQueuedAction(DateTime due, string name, Action action)
+      lock (myActions)
       {
-        myDue = due;
-        myName = name;
-        myAction = action;
-      }
-
-      public bool Execute(DateTime time, Action<string, Action> execute)
-      {
-        if (myIsDisposed)
-          return true;
-
-        if (myDue < time)
-        {
-          execute(myName, myAction);
-          return true;
-        }
-
-        return false;
-      }
-
-      public void Dispose()
-      {
-        myIsDisposed = true;
+        var ac = new RepeatingAction(name, action, DoExecute, RemoveFromQueue, interval);
+        myActions.Add(ac);
+        return ac;
       }
     }
 

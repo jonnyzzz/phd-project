@@ -5,21 +5,24 @@ using System.Windows.Forms;
 using DSIS.Core.Util;
 using DSIS.UI.Application.Doc;
 using DSIS.UI.Controls;
+using DSIS.UI.UI;
 using log4net;
-using DSIS.Utils;
 
 namespace DSIS.UI.Application.Progress
 {
   [DocumentComponent]
   public class ActionProgressControl : IDocumentControl, IActionExecution, IDocumentComponent
   {
-    private static readonly ILog LOG = LogManager.GetLogger(typeof (ActionProgressControl));
+    private static readonly ILog LOG = LogManager.GetLogger(typeof(ActionProgressControl));
+
+    private readonly IInvocator myInvocator;
     private readonly ProgressBarControl myControl;
     private readonly List<Thread> myWorkerThreads = new List<Thread>();
-
-    public ActionProgressControl()
+    
+    public ActionProgressControl(IInvocator invocator)
     {
-      myControl = new ProgressBarControl();
+      myInvocator = invocator;
+      myControl = new ProgressBarControl(myInvocator);
     }
 
     public string Ancor
@@ -39,9 +42,12 @@ namespace DSIS.UI.Application.Progress
 
     public void ExecuteAsync(string name, Action<IProgressInfo> action)
     {
+      myControl.CreateControl();
+
       var impl = new ProgressImpl {Maximum = 1, Text = name};
-      if (myControl.IsHandleCreated)
-        myControl.ProgressModel = impl;
+      
+      if (!myControl.HasModel && myControl.IsHandleCreated)
+        myControl.SetProgressModel(impl);
 
       var thread = new Thread(delegate()
                                 {
@@ -53,7 +59,8 @@ namespace DSIS.UI.Application.Progress
                                     LOG.Error("Action " + name + " failed. " + e.Message, e);
                                   } finally
                                   {
-                                    myControl.InvokeAction(()=>myControl.ProgressModel = null);
+                                    myInvocator.InvokeOrQueue("Worker thread finished", ()=>myControl.ClearProgressIfSame(impl));
+                                    lock (myWorkerThreads) myWorkerThreads.Add(Thread.CurrentThread);
                                   }
                                 });
       thread.Name = "Action " + name;

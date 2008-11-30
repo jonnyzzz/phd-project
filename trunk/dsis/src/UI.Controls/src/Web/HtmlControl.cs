@@ -33,5 +33,12 @@ namespace DSIS.UI.Controls.Web
       var code = doc.OuterXml;
       this.InvokeAction(() => SetHTML(code));
     }
+
+    public XmlNode Pair(XmlNode node, string key, string value)
+    {
+      return node.CreateChildElement("dt").CreateText(key).ParentNode.
+                  CreateChildElement("dd").CreateText(value).ParentNode;
+
+    }
   }
 }

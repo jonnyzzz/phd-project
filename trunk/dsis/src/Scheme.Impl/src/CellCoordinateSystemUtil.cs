@@ -79,6 +79,7 @@ namespace DSIS.Scheme.Impl
         Count = GetCount<Q>();
       }
     }
+
     private class ActionContains: ICellCoordinateWith
     {
       private readonly IReadOnlyContext myContext;

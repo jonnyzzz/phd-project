@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Xml;
 using DSIS.UI.Controls;
 using DSIS.UI.Controls.Web;
 using DSIS.UI.UI;
@@ -11,21 +14,24 @@ namespace DSIS.UI.Application.Doc
   [DocumentComponent]
   public class CurrentStepControl : UserControl, IDocumentControl
   {
-    public CurrentStepControl(IApplicationDocument document)
+    public CurrentStepControl(IApplicationDocument document, IEnumerable<ICurrentStepCustomParameter> _custom)
     {
       var html = new HtmlControl {Dock = DockStyle.Fill};
       var ctx = document.Content;
+      var custom = new List<ICurrentStepCustomParameter>(_custom.Filter(x=>x.IsAvailable(ctx)));
+      custom.Sort((o1, o2) => o1.Name.CompareTo(o2.Name));
 
       if (ctx.ContainsKey(Keys.IntegerCoordinateSystemInfo))
       {
+        var pair = (Func<XmlNode, string, string, XmlNode>) html.Pair;
+
         var cs = Keys.IntegerCoordinateSystemInfo.Get(ctx);
         html.SetContext(x=> x.CreateChildElement("dl").
-                              CreateChildElement("dt").CreateText("Subdivision").ParentNode.
-                              CreateChildElement("dd").CreateText(cs.Subdivision.JoinString("x")).ParentNode.
-                              CreateChildElement("dt").CreateText("CellSize").ParentNode.
-                              CreateChildElement("dd").CreateText(cs.CellSize.JoinString(", ")).ParentNode.
-                              CreateChildElement("dt").CreateText("Number of cells").ParentNode.
-                              CreateChildElement("dd").CreateText(ctx.CellEnumeratorCount().ToString()));
+                              With(xx=>pair(xx, "Subdivision", cs.Subdivision.JoinString("x"))).
+                              With(xx=>pair(xx, "CellSize", cs.CellSize.JoinString(d=>d.ToString("E"),", "))).
+                              With(xx=>pair(xx, "Number of cells", ctx.CellEnumeratorCount().ToString())).
+                              With(xx=>custom.ForEach(c=>pair(xx, c.Name,c.GetValue(ctx))))
+                              );
       } else
       {
         html.SetContext(x=>x.CreateChildElement("p").CreateText("No coordinate system defined"));

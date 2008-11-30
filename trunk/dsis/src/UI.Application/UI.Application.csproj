@@ -135,6 +135,8 @@
     <Compile Include="src\Doc\DocUIManager.cs" />
     <Compile Include="src\Doc\DocumentComponent.cs" />
     <Compile Include="src\Doc\DocumentControl.cs" />
+    <Compile Include="src\Doc\EntropyCurrentStepCustomParameter.cs" />
+    <Compile Include="src\Doc\ICurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\IDocumentCenterControl.cs" />
     <Compile Include="src\Doc\IDocumentCenterControlFactory.cs" />
     <Compile Include="src\Doc\IDocumentComponent.cs" />
@@ -152,6 +154,7 @@
     </Compile>
     <Compile Include="src\IMainForm.cs" />
     <Compile Include="src\Invocator.cs" />
+    <Compile Include="src\IQueuedAction.cs" />
     <Compile Include="src\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +200,9 @@
       <DependentUpon>ProgressBarControl.cs</DependentUpon>
     </Compile>
     <Compile Include="src\Progress\ProgressImpl.cs" />
+    <Compile Include="src\QueuedAction.cs" />
+    <Compile Include="src\QueuedActionBase.cs" />
+    <Compile Include="src\RepeatingAction.cs" />
     <Compile Include="src\WorkingFolderInfoImpl.cs" />
   </ItemGroup>
   <ItemGroup>

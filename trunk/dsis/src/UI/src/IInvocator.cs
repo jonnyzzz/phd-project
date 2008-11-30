@@ -7,5 +7,6 @@ namespace DSIS.UI.UI
     void InvokeOrQueue(string name, Action action);
 
     IDisposable ExecuteWithTimeout(string name, TimeSpan interval, Action action);
+    IDisposable ExecuteRepeating(string name, TimeSpan interval, Action action);
   }
 }

@@ -9,6 +9,7 @@ namespace DSIS.Utils
     private static readonly ILog LOG = LogManager.GetLogger(typeof (FormUtil));
 
     //TODO: Add exception handler
+    [Obsolete("Use IInvocator")]
     public static void InvokeAction(this Control control, Action action)
     {
       Action safeAction = delegate
