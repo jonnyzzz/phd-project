@@ -7,6 +7,8 @@ using DSIS.Utils;
 
 namespace DSIS.BoxIterators.Generator
 {
+  //TODO: Convert to non-static
+  //TODO: Register in IoC
   public static class BoxIteratorGenerator<T>
   {
     private static readonly Dictionary<int, IBoxIterator<T>> myCaches

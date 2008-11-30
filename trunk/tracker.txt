@@ -9,7 +9,6 @@
   -  Embed drawer program from Nikita
   -  Use drawer program from Nikita
   -  CI aka TeamCity
-  -  Bug fix progress bar
   -  Use IProgressIndicator everywhere
   -  Cleanup generated assemblies on app start
   -  Activate form on start
@@ -27,9 +26,7 @@
   -  segment iterator?
   -  align progress bar to buttom
   -  not responding after focus lost
-  -  Progress bar should use meaningful description for actions
   -  embedded IE used to flickr
-  -  Progress bar may be started without any task inside
   -  Trop 'toolStripStatusLabel1' text
   -  Show percentage on progress bar control
   -  Mnemonics manager	
@@ -38,3 +35,10 @@
   -  Disable actions while action is being completed
   -  Document write cookie to protect from starting several actions at a time
   -  JVR action options control title broken.
+
+
+Completed:
+  -  Progress bar may be started without any task inside
+  -  Progress bar should use meaningful description for actions
+  -  Bug fix progress bar
+

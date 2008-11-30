@@ -17,6 +17,13 @@ namespace DSIS.CodeCompiler
     private readonly TypesToAssemblyCache myCache = new TypesToAssemblyCache();
     private readonly List<String> myFilesToRemove = new List<String>();
 
+    private readonly CodeCompilerFilenameGenerator myGenerator;
+
+    public CodeCompilerImpl(CodeCompilerFilenameGenerator generator)
+    {
+      myGenerator = generator;
+    }
+
     public Assembly CompileCSharpCode(string code, params Type[] referedTypes)
     {
       lock (LOCK)
@@ -28,9 +35,8 @@ namespace DSIS.CodeCompiler
         ps.GenerateInMemory = false;
         ps.GenerateExecutable = false;
         ps.IncludeDebugInformation = true;
-        var basePath = Path.GetDirectoryName(new Uri(GetType().Assembly.CodeBase).LocalPath);
-        ps.OutputAssembly = Path.Combine(basePath, "DSIS.Generated.Assembly." + Guid.NewGuid() + ".dll");
-        var codeFile = Path.Combine(basePath, ps.OutputAssembly + ".cs");
+        ps.OutputAssembly = myGenerator.GenerateName();
+        var codeFile = ps.OutputAssembly + ".cs";
         using (TextWriter tw = File.CreateText(codeFile))
         {
           tw.WriteLine(code);
