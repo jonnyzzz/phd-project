@@ -23,7 +23,7 @@ namespace DSIS.UI.Controls
       var layout = new Panel
                      {
                        Dock = FromLayout(expectedLayout), 
-                       BackColor = Color.Orange, 
+//                       BackColor = Color.Orange, 
                        Padding = new Padding(5),
                        Text = value.GetType().ToString()
                      };
@@ -42,7 +42,7 @@ namespace DSIS.UI.Controls
         {
           Padding = new Padding(5),
           Dock = DockStyle.Fill,
-          BackColor = Color.Yellow,
+//          BackColor = Color.Yellow,
           Text = "Container: " + value.GetType()
         };
         root.Controls.Add(content);

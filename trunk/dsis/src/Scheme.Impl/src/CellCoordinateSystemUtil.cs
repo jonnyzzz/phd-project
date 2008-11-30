@@ -1,5 +1,6 @@
 using DSIS.Core.Coordinates;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl
 {
@@ -61,8 +62,17 @@ namespace DSIS.Scheme.Impl
       {
         var key = Keys.CellsEnumerationKey<Q>();
         if (myContext.ContainsKey(key))
+        {
           Count = key.Get(myContext).Count;
-
+          return;
+        }
+        var key2 = Keys.GraphComponents<Q>();
+        if (myContext.ContainsKey(key2))
+        {
+          var components = key2.Get(myContext);
+          Count = components.Components.FoldLeft(0, (x, v) => v + x.NodesCount);
+          return;
+        }
         Count = 0;
       }
     }
