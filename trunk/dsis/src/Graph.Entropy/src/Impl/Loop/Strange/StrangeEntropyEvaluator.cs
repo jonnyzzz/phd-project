@@ -1,7 +1,5 @@
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
-using DSIS.Graph.Entropy.Impl.Loop.Iterators;
-using DSIS.Graph.Entropy.Impl.Loop.Strange;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
@@ -15,8 +13,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
       var cb = new EntropyGraphWeightCallback<T>(@params.LoopWeight, graph.CoordinateSystem);
       foreach (IStrongComponentInfo info in comps.Components)
       {
-        ILoopIterator it = @params.CreateIterator(cb, comps, info);
-        it.WidthSearch();
+        @params.CreateIterator(cb, comps, info).WidthSearch();
       }
 
       return cb.Entropy();
