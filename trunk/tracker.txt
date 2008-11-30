@@ -2,6 +2,7 @@
   -  Show Entropy on left pane
   -  Cancelable progressbar
   -  Memory usage bound
+  -  Memory usage indicator
   -  Modal progress bar
   -  Remember history of actions
   -  Macros support
@@ -10,7 +11,6 @@
   -  Use drawer program from Nikita
   -  CI aka TeamCity
   -  Use IProgressIndicator everywhere
-  -  Cleanup generated assemblies on app start
   -  Activate form on start
   -  Submit exception form
   -  Submit exception service online
@@ -41,4 +41,5 @@ Completed:
   -  Progress bar may be started without any task inside
   -  Progress bar should use meaningful description for actions
   -  Bug fix progress bar
+  -  Cleanup generated assemblies on app start
 
