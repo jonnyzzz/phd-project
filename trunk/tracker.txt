@@ -6,8 +6,8 @@
   -  Remember history of actions
   -  Macros support
   -  System Functions parser
-  -  Embed drawer program from Nikita
-  -  Use drawer program from Nikita
+  -  Embed drawer program from Nikita?
+  -  Use drawer program from Nikita?
   -  CI aka TeamCity
   -  Use IProgressIndicator everywhere
   -  Submit exception form
@@ -29,7 +29,12 @@
   -  Rework executor model to show several running tasks' progress
   -  Disable actions while action is being completed
   -  Document write cookie to protect from starting several actions at a time
-
+  -  include eigen entropy
+  -  create eigen options
+  -  compute on every component
+  -  compunents chooser
+  -  components legend
+  -  document action cookie to prevent more than one action running on one document
 
 
 Completed:
