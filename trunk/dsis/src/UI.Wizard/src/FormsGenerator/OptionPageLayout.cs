@@ -49,24 +49,20 @@ namespace DSIS.UI.Wizard.FormsGenerator
       var caption = new Label
                       {
                         Text = title,
-                        Width = 70,
+                        Width = 120,
                         Dock = DockStyle.Left,
                       };
       field.Width = 150;
       var sz = Math.Max(field.Height, caption.Height);
 
       panel.Dock = DockStyle.Top;
-      field.Dock = DockStyle.Left;
+      field.Dock = DockStyle.Top;
 
       panel.Controls.Add(field);
       panel.Controls.Add(caption);
       
       panel.Height = sz;
 
-      /*if(field.Height > caption.Height)
-      {
-        caption.Padding = new Padding(0, (field.Height - caption.Height)/2, 0, 0);
-      }*/
       result.Add(panel);
 
       if (description != null)
