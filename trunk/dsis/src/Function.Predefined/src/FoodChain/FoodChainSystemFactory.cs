@@ -7,7 +7,7 @@ namespace DSIS.Function.Predefined.FoodChain
   public class FoodChainSystemFactory : DoubleParametersSystemInfoFactoryBase<FoodChainOptions>
   {
     public FoodChainSystemFactory()
-      : base(3, SystemType.Descrete, "FoodChain")
+      : base(3, SystemType.Discrete, "FoodChain")
     {
     }
 

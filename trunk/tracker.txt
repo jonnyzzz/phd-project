@@ -1,4 +1,3 @@
-  -  Show Entropy on left pane
   -  Cancelable progressbar
   -  Memory usage bound
   -  Memory usage indicator
@@ -35,7 +34,25 @@
   -  compunents chooser
   -  components legend
   -  document action cookie to prevent more than one action running on one document
-
+  -  support ConstraintAttribute hierarchy
+  -  support DefaultValueAttribute
+  -  system function dialog: use IoC
+  -  system function dialog: system parameters => solver => solver parameters
+  -  joined wizards
+  -  system function default parameters
+  -  system function default system space
+  -  support double with . or ,
+  -  symmetric space mode
+  -  format cells with spaces
+  -  entropy is zero for loop searcher
+  -  strange entropy modes manual description
+  -  combinatorics method -> separate
+  -  remember selected construction method
+  -  unsimmentric construction support
+  -  subdivision selector
+  -  repeat construction mode
+  -  several invariant measures for one document
+  -  use box method by default
 
 Completed:
   -  Trop 'toolStripStatusLabel1' text
@@ -48,4 +65,4 @@ Completed:
   -  Progress bar should use meaningful description for actions
   -  Bug fix progress bar
   -  Cleanup generated assemblies on app start
-
+  -  Show Entropy on left pane

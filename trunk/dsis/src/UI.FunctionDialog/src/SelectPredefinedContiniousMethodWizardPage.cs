@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.Wizard;
-using DSIS.UI.Wizard.FormsGenerator;
 using DSIS.UI.Wizard.ListSelector;
 using DSIS.Utils;
 using IServiceProvider=DSIS.Spring.Service.IServiceProvider;
@@ -23,6 +21,8 @@ namespace DSIS.UI.FunctionDialog
         .GetService<IListSelectorFactory>()
         .Create<ListInfo<IContiniousFunctionSolverFactory>, IContiniousFunctionSolverFactory>(map);
       myNext = next;
+
+      Title = "Select continious system solver";
     }
 
     public IWizardPageWithState NextPage
@@ -41,7 +41,7 @@ namespace DSIS.UI.FunctionDialog
 
           return
             new WizardPageWithStateD(
-              myWizard.FormGeneratorWizardPageFactory.CreatePage("Continiois system evaluation parameters",paramz),
+              myWizard.FormGeneratorWizardPageFactory.CreatePage("Continiois system solver parameters",paramz),
               myNext);
         }
         return myNext();

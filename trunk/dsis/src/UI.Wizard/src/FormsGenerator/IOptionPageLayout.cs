@@ -5,10 +5,10 @@ namespace DSIS.UI.Wizard.FormsGenerator
 {
   public interface IOptionPageLayout
   {
-    Control Layout<Q>(IEnumerable<Q> controls)
+    Panel Layout<Q>(IEnumerable<Q> controls)
       where Q : IOptionPageControl;
 
-    void Layout<Q>(Control host, IEnumerable<Q> controls)
+    void Layout<Q>(ScrollableControl host, IEnumerable<Q> controls)
       where Q : IOptionPageControl;
   }
 }

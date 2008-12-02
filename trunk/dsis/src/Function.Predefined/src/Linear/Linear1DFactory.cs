@@ -7,7 +7,7 @@ namespace DSIS.Function.Predefined.Linear
   public class Linear1DFactory : DoubleParametersSystemInfoFactoryBase<Linear1dParameters>
   {
     public Linear1DFactory()
-      : base(1,SystemType.Descrete, "Linear1D")
+      : base(1,SystemType.Discrete, "Linear1D")
     {
     }
 

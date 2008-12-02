@@ -228,7 +228,7 @@ namespace DSIS.SimpleRunner
       protected override ISystemInfo CreateSystemInfo()
       {
         var space = new DefaultSystemSpace(3, new double[] { -100, -100, -100 }, new double[] { 100, 100, 100}, new long[] { 10, 10, 10 });
-        return new RungeKuttSolver(new LorentzSystemInfo(8.0/3.0, 28, 10), 15, 0.1);
+        return new RungeKuttSolver(new LorenzSystemInfo(8.0/3.0, 28, 10), 15, 0.1);
       }
 
       protected override long[] Subdivide

@@ -3,13 +3,13 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Lorentz
 {
-  public class LorentzSystemInfo : DoubleSystemInfoBase
+  public class LorenzSystemInfo : DoubleSystemInfoBase
   {
     private readonly double mySigma;
     private readonly double myRho;
     private readonly double myBeta;
 
-    public LorentzSystemInfo(double beta, double rho, double sigma)
+    public LorenzSystemInfo(double beta, double rho, double sigma)
       : base(3)
     {
       myBeta = beta;
@@ -19,12 +19,12 @@ namespace DSIS.Function.Predefined.Lorentz
 
     public override string PresentableName
     {
-      get { return string.Format("Lorentz[Beta={0},Sigma={1},Rho={2}]", myBeta, mySigma, myRho); }
+      get { return string.Format("Lorenz[Beta={0},Sigma={1},Rho={2}]", myBeta, mySigma, myRho); }
     }
 
     protected override IFunction<double> GetFunctionInternal()
     {
-      return new LorentzFunction(myBeta, myRho, mySigma);
+      return new LorenzFunction(myBeta, myRho, mySigma);
     }
 
     protected override IFunction<double> GetFunctionDerivateInternal()

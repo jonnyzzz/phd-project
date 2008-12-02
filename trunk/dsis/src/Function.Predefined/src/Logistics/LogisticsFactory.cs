@@ -7,7 +7,7 @@ namespace DSIS.Function.Predefined.Logistics
   public class LogisticsFactory : DoubleParametersSystemInfoFactoryBase<LogisticsParameters>
   {
     public LogisticsFactory()
-      : base(1,SystemType.Descrete, "Logistics")
+      : base(1,SystemType.Discrete, "Logistics")
     {
     }
 

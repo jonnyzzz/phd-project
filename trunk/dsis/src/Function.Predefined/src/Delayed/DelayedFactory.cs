@@ -8,7 +8,7 @@ namespace DSIS.Function.Predefined.Delayed
   {
     public DelayedFactory()
       : base(2,
-      SystemType.Descrete, 
+      SystemType.Discrete, 
       "Delayed")
     {
 

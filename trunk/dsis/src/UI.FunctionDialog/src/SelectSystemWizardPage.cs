@@ -1,5 +1,6 @@
 using DSIS.Spring.Service;
 using DSIS.UI.Wizard;
+using DSIS.UI.Wizard.FormsGenerator;
 using DSIS.UI.Wizard.ListSelector;
 
 namespace DSIS.UI.FunctionDialog
@@ -13,27 +14,30 @@ namespace DSIS.UI.FunctionDialog
     {
       myWizard = wizard;
       Title = "Select the way to define system";
-      ControlInternal = prov
+      var selector = prov
         .GetService<IListSelectorFactory>()
-        .Create < ListInfo<IWizardPageWithState>, IWizardPageWithState>(new[]
-                                              {
-                                                ListInfo.Create<IWizardPageWithState>(
-                                                  "Predefined",
-                                                  "Use one of the systems from the list",
-                                                  true,
-                                                  new SelectPredefinedSystemWizardPage
-                                                    (
-                                                    prov,
-                                                    myWizard
-                                                    )
-                                                  ),
-                                                ListInfo.Create<IWizardPageWithState>(
-                                                  "User defined",
-                                                  "Alows to create new system and use it throuh the system",
-                                                  false,
-                                                  null
-                                                  )
-                                              });
+        .Create<ListInfo<IWizardPageWithState>, IWizardPageWithState>(
+        new[]
+          {
+            ListInfo.Create<IWizardPageWithState>(
+              "Predefined",
+              "Use one of the systems from the list",
+              true,
+              new SelectPredefinedSystemWizardPage
+                (
+                prov,
+                myWizard
+                )
+              ),
+            ListInfo.Create<IWizardPageWithState>(
+              "User defined",
+              "Alows to create new system and use it throuh the system",
+              false,
+              null
+              )
+          });
+      prov.GetService<IScrollableLayout>().MakeScrollableOnY(selector);
+      ControlInternal = selector;
     }
 
     public IWizardPageWithState NextPage

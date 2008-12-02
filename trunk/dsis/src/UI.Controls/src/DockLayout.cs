@@ -9,7 +9,7 @@ namespace DSIS.UI.Controls
   [ComponentImplementation]
   public class DockLayout : IDockLayout
   {
-    public Control Layout(DockStyle dock, IEnumerable<Control> controls)
+    public Panel Layout(DockStyle dock, IEnumerable<Control> controls)
     {
       var pn = new Panel();
       Layout(pn, dock, controls);

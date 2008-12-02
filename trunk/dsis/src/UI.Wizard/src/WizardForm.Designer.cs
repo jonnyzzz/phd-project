@@ -31,10 +31,10 @@
       this.components = new System.ComponentModel.Container();
       System.Windows.Forms.Panel myHeaderPanel;
       System.Windows.Forms.Panel myButtonsPanel;
-      this.myHeader = new DSIS.UI.Wizard.HeaderControl();
-      this.myButtons = new DSIS.UI.Wizard.ButtonsControl();
       this.myMiddleContainer = new System.Windows.Forms.Panel();
       this.myButtonsTimer = new System.Windows.Forms.Timer(this.components);
+      this.myButtons = new DSIS.UI.Wizard.ButtonsControl();
+      this.myHeader = new DSIS.UI.Wizard.HeaderControl();
       myHeaderPanel = new System.Windows.Forms.Panel();
       myButtonsPanel = new System.Windows.Forms.Panel();
       myHeaderPanel.SuspendLayout();
@@ -52,17 +52,6 @@
       myHeaderPanel.Size = new System.Drawing.Size(502, 72);
       myHeaderPanel.TabIndex = 0;
       // 
-      // myHeader
-      // 
-      this.myHeader.BackColor = System.Drawing.SystemColors.ControlLightLight;
-      this.myHeader.Dock = System.Windows.Forms.DockStyle.Top;
-      this.myHeader.Location = new System.Drawing.Point(0, 0);
-      this.myHeader.MainTitle = "Header Main Title";
-      this.myHeader.Name = "myHeader";
-      this.myHeader.SecondaryTitle = "Secondary Title";
-      this.myHeader.Size = new System.Drawing.Size(500, 71);
-      this.myHeader.TabIndex = 0;
-      // 
       // myButtonsPanel
       // 
       myButtonsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -72,20 +61,6 @@
       myButtonsPanel.Name = "myButtonsPanel";
       myButtonsPanel.Size = new System.Drawing.Size(502, 64);
       myButtonsPanel.TabIndex = 2;
-      // 
-      // myButtons
-      // 
-      this.myButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.myButtons.AutoSize = true;
-      this.myButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-      this.myButtons.BackEnabled = true;
-      this.myButtons.CancelEnabled = true;
-      this.myButtons.FinishEnabled = true;
-      this.myButtons.Location = new System.Drawing.Point(93, 22);
-      this.myButtons.Name = "myButtons";
-      this.myButtons.NextEnabled = true;
-      this.myButtons.Size = new System.Drawing.Size(324, 29);
-      this.myButtons.TabIndex = 0;
       // 
       // myMiddleContainer
       // 
@@ -101,12 +76,36 @@
       // 
       this.myButtonsTimer.Tick += new System.EventHandler(this.myButtonsTimer_Tick);
       // 
+      // myButtons
+      // 
+      this.myButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.myButtons.AutoSize = true;
+      this.myButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+      this.myButtons.BackEnabled = true;
+      this.myButtons.CancelEnabled = true;
+      this.myButtons.FinishEnabled = true;
+      this.myButtons.Location = new System.Drawing.Point(93, 22);
+      this.myButtons.Name = "myButtons";
+      this.myButtons.NextEnabled = true;
+      this.myButtons.Size = new System.Drawing.Size(324, 29);
+      this.myButtons.TabIndex = 0;
+      // 
+      // myHeader
+      // 
+      this.myHeader.BackColor = System.Drawing.SystemColors.ControlLightLight;
+      this.myHeader.Dock = System.Windows.Forms.DockStyle.Top;
+      this.myHeader.Location = new System.Drawing.Point(0, 0);
+      this.myHeader.MainTitle = "Header Main Title";
+      this.myHeader.Name = "myHeader";
+      this.myHeader.SecondaryTitle = "Secondary Title";
+      this.myHeader.Size = new System.Drawing.Size(500, 71);
+      this.myHeader.TabIndex = 0;
+      // 
       // WizardForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.AutoScroll = true;
-      this.AutoScrollMinSize = new System.Drawing.Size(380, 450);
       this.ClientSize = new System.Drawing.Size(502, 554);
       this.Controls.Add(this.myMiddleContainer);
       this.Controls.Add(myButtonsPanel);

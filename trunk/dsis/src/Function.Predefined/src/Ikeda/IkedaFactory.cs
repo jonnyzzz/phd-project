@@ -7,7 +7,7 @@ namespace DSIS.Function.Predefined.Ikeda
   public class IkedaFactory : DoubleParametersSystemInfoFactoryBase<IkedaParameters>
   {
     public IkedaFactory()
-      : base(2,SystemType.Descrete, "Ikeda")
+      : base(2,SystemType.Discrete, "Ikeda")
     {
     }
 

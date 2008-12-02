@@ -5,7 +5,7 @@ using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Solvers.RungeKutt
 {
-  [ComponentCollection]
+  [ComponentImplementation]
   public class RungeKuttSolverFactory : ContiniousFunctionSolverBase
   {
     public RungeKuttSolverFactory() : base("Runge-Kutt solver")

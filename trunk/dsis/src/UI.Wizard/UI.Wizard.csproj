@@ -106,7 +106,9 @@
     <Compile Include="src\FieldInfos\TextFieldInfo.cs" />
     <Compile Include="src\FormsGenerator\IOptionPageControl.cs" />
     <Compile Include="src\FormsGenerator\IOptionPageLayout.cs" />
+    <Compile Include="src\FormsGenerator\IScrollableLayout.cs" />
     <Compile Include="src\FormsGenerator\OptionPageLayout.cs" />
+    <Compile Include="src\FormsGenerator\ScrollableLayoutImpl.cs" />
     <Compile Include="src\HeaderControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

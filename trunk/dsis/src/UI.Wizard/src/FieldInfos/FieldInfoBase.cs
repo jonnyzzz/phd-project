@@ -45,7 +45,7 @@ namespace DSIS.UI.Wizard.FieldInfos
     private void OnValueChanged()
     {
       var hasFired = false;
-      var v = (IOptionsValueChecker) myInstance;
+      var v = myInstance as IOptionsValueChecker;
       if (v != null)
       {
         v.HasErrors(myProperty.Name, x =>

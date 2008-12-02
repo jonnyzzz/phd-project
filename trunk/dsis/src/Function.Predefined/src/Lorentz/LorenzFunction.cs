@@ -2,13 +2,13 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Lorentz
 {
-  public class LorentzFunction : Function<double>, IFunction<double>
+  public class LorenzFunction : Function<double>, IFunction<double>
   {
     private readonly double mySigma;
     private readonly double myRho;
     private readonly double myBeta;
 
-    public LorentzFunction(double beta, double rho, double sigma)
+    public LorenzFunction(double beta, double rho, double sigma)
       : base(3)
     {
       myBeta = beta;
@@ -18,9 +18,12 @@ namespace DSIS.Function.Predefined.Lorentz
 
     public void Evaluate()
     {
-      Output[0] = mySigma * (Input[1] - Input[0]);
-      Output[1] = Input[0]*(myRho - Input[2]) - Input[1];
-      Output[2] = Input[0]*Input[1] - myBeta*Input[2];
+      var z = Input[2];
+      var y = Input[1];
+      var x = Input[0];
+      Output[0] = mySigma * (y - x);
+      Output[1] = x*(myRho - z) - y;
+      Output[2] = x*y - myBeta*z;
     }
   }
 }

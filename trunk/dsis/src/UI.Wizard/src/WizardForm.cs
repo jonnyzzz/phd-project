@@ -106,6 +106,7 @@ namespace DSIS.UI.Wizard
         {
           panel = new Panel { Dock = DockStyle.Fill };
           var pageContent = page.Control;
+          myMiddleContainer.AutoScrollMinSize = pageContent.Size;
           pageContent.Dock = DockStyle.Fill;
           panel.Controls.Add(pageContent);
 

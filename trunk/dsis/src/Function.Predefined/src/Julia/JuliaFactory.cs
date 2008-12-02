@@ -7,7 +7,7 @@ namespace DSIS.Function.Predefined.Julia
   public class JuliaFactory : DoubleParametersSystemInfoFactoryBase<JuliaParameters>
   {
     public JuliaFactory()
-      : base(2, SystemType.Descrete, "Julia")
+      : base(2, SystemType.Discrete, "Julia")
     {
     }
 

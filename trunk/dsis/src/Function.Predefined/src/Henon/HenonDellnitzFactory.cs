@@ -7,7 +7,7 @@ namespace DSIS.Function.Predefined.Henon
   public class HenonDellnitzFactory : DoubleParametersSystemInfoFactoryBase<HenonDellnitzOptions>
   {
     public HenonDellnitzFactory()
-      : base(2,SystemType.Descrete, "HenonDellnitz")
+      : base(2,SystemType.Discrete, "HenonDellnitz")
     {
     }
 

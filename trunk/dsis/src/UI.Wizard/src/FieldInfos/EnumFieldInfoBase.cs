@@ -29,7 +29,11 @@ namespace DSIS.UI.Wizard.FieldInfos
           val = info.Value;
         }
       }
+
       var cnt = myListSelectorFactory.Create<ListInfo<Wrapper>, Wrapper>(infos);
+      if (val != null)
+        cnt.SelectedValue = val;
+
       cnt.SelectionChanged += delegate
                                 {
                                   var value = cnt.SelectedValue;
@@ -38,9 +42,6 @@ namespace DSIS.UI.Wizard.FieldInfos
                                     Value = value.Value;
                                   }
                                 };
-      if (val != null)
-        cnt.SelectedValue = val;
-
       return cnt;
     }
 

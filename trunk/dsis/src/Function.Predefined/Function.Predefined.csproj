@@ -110,10 +110,10 @@
     <Compile Include="src\Logistics\LogisticsFactory.cs" />
     <Compile Include="src\Logistics\LogisticsParameters.cs" />
     <Compile Include="src\Logistics\LogisticSystemInfo.cs" />
-    <Compile Include="src\Lorentz\LorentzFunction.cs" />
-    <Compile Include="src\Lorentz\LorentzParameters.cs" />
-    <Compile Include="src\Lorentz\LorentzSystemInfo.cs" />
-    <Compile Include="src\Lorentz\LorentzSystemInfoFactory.cs" />
+    <Compile Include="src\Lorentz\LorenzFunction.cs" />
+    <Compile Include="src\Lorentz\LorenzParameters.cs" />
+    <Compile Include="src\Lorentz\LorenzSystemInfo.cs" />
+    <Compile Include="src\Lorentz\LorenzSystemInfoFactory.cs" />
     <Compile Include="src\Rossel\RosselFactory.cs" />
     <Compile Include="src\Rossel\RosslerParameters.cs" />
     <Compile Include="src\Rossel\RosslerSystemFunction.cs" />

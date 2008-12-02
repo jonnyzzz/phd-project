@@ -10,19 +10,23 @@ namespace DSIS.UI.Wizard.FormsGenerator
   public class OptionPageLayout : IOptionPageLayout
   {
     private readonly IDockLayout myLayout;
+    private readonly IScrollableLayout myScroll;
 
-    public OptionPageLayout(IDockLayout layout)
+    public OptionPageLayout(IDockLayout layout, IScrollableLayout scroll)
     {
       myLayout = layout;
+      myScroll = scroll;
     }
 
-    public Control Layout<Q>(IEnumerable<Q> controls)
+    public Panel Layout<Q>(IEnumerable<Q> controls)
       where Q : IOptionPageControl
     {
-      return myLayout.Layout(DockStyle.Top, CollectControls(controls));
+      var pn = myLayout.Layout(DockStyle.Top, CollectControls(controls));
+      myScroll.MakeScrollableOnY(pn);
+      return pn;
     }
 
-    private List<Control> CollectControls<Q>(IEnumerable<Q> controls)
+    private static List<Control> CollectControls<Q>(IEnumerable<Q> controls)
       where Q : IOptionPageControl
     {
       var result = new List<Control>();
@@ -34,9 +38,10 @@ namespace DSIS.UI.Wizard.FormsGenerator
       return result;
     }
 
-    public void Layout<Q>(Control host, IEnumerable<Q> controls) where Q : IOptionPageControl
+    public void Layout<Q>(ScrollableControl host, IEnumerable<Q> controls) where Q : IOptionPageControl
     {
       myLayout.Layout(host, DockStyle.Top, CollectControls(controls));
+      myScroll.MakeScrollableOnY(host);
     }
 
     private static void AddAttribute(string title, string description, Control field, ICollection<Control> result)

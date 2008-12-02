@@ -75,7 +75,7 @@ namespace DSIS.UI.FunctionDialog
         {
           case SystemType.Continious:
             return CreateContinious(systemSelector);
-          case SystemType.Descrete:
+          case SystemType.Discrete:
             return systemSelector;
         }
         return null;
