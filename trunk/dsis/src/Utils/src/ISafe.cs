@@ -8,6 +8,6 @@ namespace DSIS.Utils
     void Safe<T>(T obj, DAction<T> action);
     void SafeIgnore<T>(T obj, DAction<T> action);
 
-    T Safe<T>(TDelegate<T> del);
+    T Safe<T>(TDelegate<T> del, T def);
   }
 }

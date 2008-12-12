@@ -2,6 +2,7 @@ using System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.FormsGenerator;
+using DSIS.UI.Wizard.ListSelector;
 
 namespace DSIS.UI.ComputationDialogs
 {

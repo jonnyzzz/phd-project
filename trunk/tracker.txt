@@ -14,7 +14,6 @@
   -  Entropy changes log
   -  allow to move 3d pictures
   -  allow to zoom pictures
-  -  recompute invcariant measure
   -  steps counter
   -  show points with squares
   -  do not show entropy on invariant measure
@@ -55,6 +54,10 @@
   -  use box method by default
 
 Completed:
+  x Wizard Form presenter
+  x Wizard and Result interface  
+  x  recompute invcariant measure
+  x  compute measure depends on context-available
   -  Trop 'toolStripStatusLabel1' text
   -  Do not show Combinatorics
   -  No document banner

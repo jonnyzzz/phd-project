@@ -5,7 +5,7 @@ namespace DSIS.UI.Wizard
     /// <summary>
     /// Global title to be shown for user
     /// </summary>
-    string Title { get;  }
+    string Title { get; }
 
     /// <summary>
     /// First page to be shown
@@ -37,5 +37,12 @@ namespace DSIS.UI.Wizard
     /// Called if user cancel the dialod.
     /// </summary>
     void OnCancel();
+
+    /// <summary>
+    /// Called before page is shown. 
+    /// This may be next page or prev page
+    /// </summary>
+    /// <param name="page"></param>
+    void PageShown(IWizardPage page);
   }
 }

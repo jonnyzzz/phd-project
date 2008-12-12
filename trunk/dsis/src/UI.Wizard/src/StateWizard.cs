@@ -23,5 +23,9 @@ namespace DSIS.UI.Wizard
     public virtual void OnCancel()
     {
     }
+
+    public void PageShown(IWizardPage page)
+    {      
+    }
   }
 }

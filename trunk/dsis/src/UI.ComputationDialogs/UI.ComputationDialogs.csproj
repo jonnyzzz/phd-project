@@ -48,8 +48,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\ISIConstructionWizard.cs" />
-    <Compile Include="src\ListSelectorOptionsFactoryWizardPage.cs" />
-    <Compile Include="src\ListSelectorWizardPage.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureUIComponent.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureWizard.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureMethodSelectorImpl.cs" />

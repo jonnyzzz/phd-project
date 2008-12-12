@@ -31,5 +31,9 @@ namespace DSIS.UI.Wizard
     public void OnCancel()
     {
     }
+
+    public void PageShown(IWizardPage page)
+    {      
+    }
   }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Utils;
 
 namespace DSIS.UI.Wizard
 {
@@ -12,14 +13,11 @@ namespace DSIS.UI.Wizard
       myWizards = wizards;
     }
 
-    public string Title
-    {
-      get { throw new System.NotImplementedException(); }
-    }
+    public string Title { get; set;}
 
     public IWizardPage FirstPage
     {
-      get { return myWizards[0].FirstPage; }
+      get { return myWizards.GetFirst().FirstPage; }
     }
 
     public bool IsLastPage(IWizardPage page)

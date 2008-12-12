@@ -50,6 +50,10 @@ namespace DSIS.UI.Wizard
     {
     }
 
+    public void PageShown(IWizardPage page)
+    {      
+    }
+
 
     private class SimplePage : IWizardPage
     {

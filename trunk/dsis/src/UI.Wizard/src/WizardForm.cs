@@ -121,6 +121,7 @@ namespace DSIS.UI.Wizard
 
         UpdateButtonState(page);
       }
+      ErrorHandler.Safe(() => myPack.PageShown(page));
       ErrorHandler.Safe(page.ControlShown);
 
       myButtonsTimer.Enabled = true;
@@ -128,7 +129,7 @@ namespace DSIS.UI.Wizard
 
     private void UpdateButtonState(IWizardPage page)
     {
-      var status = ErrorHandler.Safe<bool>(page.Validate);
+      var status = ErrorHandler.Safe(page.Validate, false);
 
       myHeader.SecondaryTitle = page.Title;
       bool isLastPage = myPack.IsLastPage(page);

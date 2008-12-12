@@ -115,6 +115,8 @@
     <Compile Include="src\HeaderControl.Designer.cs">
       <DependentUpon>HeaderControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\IWizardFormPresenter.cs" />
+    <Compile Include="src\IWizardPack!1.cs" />
     <Compile Include="src\IWizardPack.cs" />
     <Compile Include="src\IWizardPage.cs" />
     <Compile Include="src\JoinedWizardPack.cs" />
@@ -128,6 +130,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\ListSelector\ListSelectorFactoryImpl.cs" />
+    <Compile Include="src\ListSelector\ListSelectorOptionsFactoryWizardPage.cs" />
+    <Compile Include="src\ListSelector\ListSelectorWizardPage.cs" />
+    <Compile Include="src\OptionsWizard\OptionsBasedWizard.cs" />
     <Compile Include="src\SimpleWizard.cs" />
     <Compile Include="src\StateWizard.cs" />
     <Compile Include="src\WizardForm.cs">
@@ -136,6 +141,8 @@
     <Compile Include="src\WizardForm.Designer.cs">
       <DependentUpon>WizardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\WizardFormPresenter.cs" />
+    <Compile Include="src\WizardPackException.cs" />
     <Compile Include="src\WizardPageBase.cs" />
     <Compile Include="src\WizardPageWithState.cs" />
     <Compile Include="src\WizardPageWithStateD.cs" />

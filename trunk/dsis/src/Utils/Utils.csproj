@@ -87,6 +87,7 @@
     <Compile Include="src\LinkedList.cs" />
     <Compile Include="src\MultiDictionary.cs" />
     <Compile Include="src\MultiHashDictionary.cs" />
+    <Compile Include="src\Ref.cs" />
     <Compile Include="src\ReenterableSafe.cs" />
     <Compile Include="src\ReferenceEqualityComparer.cs" />
     <Compile Include="src\Safe.cs" />
