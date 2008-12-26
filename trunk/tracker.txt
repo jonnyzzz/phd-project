@@ -20,9 +20,6 @@
   -  entropy computation actions (matrix)
   -  segment iterator?
   -  drop ICodeCompiler singleton
-
-  -  align progress bar to buttom
-
   -  not responding after focus lost
   -  embedded IE used to flickr
   -  Show percentage on progress bar control
@@ -57,6 +54,7 @@
   -  use box method by default
 
 Completed:
+  x  align progress bar to buttom
   x  Wizard Form presenter
   x  Wizard and Result interface  
   x  recompute invcariant measure

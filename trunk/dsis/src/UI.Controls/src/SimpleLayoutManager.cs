@@ -64,10 +64,25 @@ namespace DSIS.UI.Controls
       where Q : IControlWithLayout
     {
       var controls = new List<Q>(_controls);
-      controls.Sort((a,b)=>-a.Ancor.CompareTo(b.Ancor));
 
-      var result = new Panel {AutoSize = true};
-      var deeper = AddPanel(new Queue<Q>(controls.Filter(x=>x.Float != Layout.CENTER)), result);
+      var layouts = new[]
+                      {
+                        new {layout = Layout.LEFT, cmp = (Comparison<string>) ((x, y) => -x.CompareTo(y))},
+                        new {layout = Layout.RIGHT, cmp = (Comparison<string>) ((x, y) => -x.CompareTo(y))},
+                        new {layout = Layout.TOP, cmp = (Comparison<string>) ((x, y) => -x.CompareTo(y))},
+                        new {layout = Layout.BOTTON, cmp = (Comparison<string>) ((x, y) => x.CompareTo(y))},
+                      };
+
+      var sorted = new List<Q>();
+      foreach (var _layout in layouts)
+      {
+        sorted.AddRange(
+          controls.Where(x => x.Float == _layout.layout)
+          .OrderBy(x => x.Ancor, _layout.cmp.AsIComparer()));
+      }
+
+      var result = new Panel { AutoSize = true };
+      var deeper = AddPanel(new Queue<Q>(sorted), result);
 
       foreach (var control in controls.Filter(x=>x.Float == Layout.CENTER))
       {
