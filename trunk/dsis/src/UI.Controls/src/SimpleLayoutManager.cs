@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace DSIS.UI.Controls
 {
+  //TODO: Remove extra panels usage!
   [ComponentImplementation]
   public class SimpleLayoutManager : ISimpleLayoutManager
   {
@@ -76,8 +77,9 @@ namespace DSIS.UI.Controls
       var sorted = new List<Q>();
       foreach (var _layout in layouts)
       {
+        var layout = _layout;
         sorted.AddRange(
-          controls.Where(x => x.Float == _layout.layout)
+          controls.Where(x => x.Float == layout.layout)
           .OrderBy(x => x.Ancor, _layout.cmp.AsIComparer()));
       }
 

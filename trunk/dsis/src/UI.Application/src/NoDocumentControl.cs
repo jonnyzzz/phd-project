@@ -1,34 +1,30 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
+using DSIS.Core.Ioc.Ex;
 using DSIS.UI.UI;
 
 namespace DSIS.UI.Application
 {
-  [ComponentImplementation]
-  public class NoDocumentControl : UserControl, IStartableComponent, IControlWithTitle
+  [ComponentImplementation(Startable = true)]
+  public class NoDocumentControl : UserControl, IControlWithTitle
   {
-    [Autowire]
-    private IMainForm MainForm { get; set; }
+    private readonly IMainForm myMainForm;
 
-    [Autowire]
-    private IApplicationClass App { get; set; }
-
-    public NoDocumentControl()
+    public NoDocumentControl(IMainForm mainForm, IApplicationClass app)
     {
+      myMainForm = mainForm;
+
       Controls.Add(new Label
                      {
                        Text = "No document is opened.",
                        Dock = DockStyle.Fill,
                        TextAlign = ContentAlignment.MiddleCenter
                      });
-    }
 
-    public void Start()
-    {
-      SetNoContent();
+      myMainForm.AfterFormCreated += delegate { SetNoContent(); };
 
-      App.DocumentChanged +=
+      app.DocumentChanged +=
         delegate(object sender, DocumentChangedEventArgs e)
           {
             if (e.NewDocument == null)
@@ -40,7 +36,7 @@ namespace DSIS.UI.Application
 
     private void SetNoContent()
     {
-      MainForm.SetContent(this);
+      myMainForm.SetContent(this);
     }
 
     public Control Control

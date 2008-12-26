@@ -1,3 +1,4 @@
+using System;
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
 using DSIS.UI.Application.Actions;
@@ -13,6 +14,7 @@ namespace DSIS.UI.Application
     private readonly XmlActionPreesentationManager myPresentation;
 
     private MainForm myForm;
+    private bool myIsUnderCreateForm;
 
     public MainFormProxy(IActionPresentationManager actionManager, IMainMenuFactory menuFactoy, XmlActionPreesentationManager presentation)
     {
@@ -20,6 +22,9 @@ namespace DSIS.UI.Application
       myMenuFactoy = menuFactoy;
       myPresentation = presentation;
     }
+
+    public event EventHandler BeforeFormCreated;
+    public event EventHandler AfterFormCreated;
 
     public Form GetForm()
     {
@@ -30,11 +35,44 @@ namespace DSIS.UI.Application
     {
       if (myForm == null)
       {
-        myPresentation.LoadAssembly(GetType().Assembly);
-        myForm = new MainForm(myActionManager, myMenuFactoy);
-        myForm.Shown += delegate { myForm.Activate(); };
+        if (myIsUnderCreateForm)
+        {
+          throw new ArgumentException(
+            "Infinite recursion. It is not allowed to use IMainForm methods from BeforeFormCreated event handler");
+        }
+        myIsUnderCreateForm = true;
+        try
+        {
+          FireBeforeFormCreated();
+
+          DoCreateForm();
+
+          FireAfterFormCreated();
+        } finally
+        {
+          myIsUnderCreateForm = false;
+        }
       }
       return myForm;
+    }
+
+    private void DoCreateForm()
+    {
+      myPresentation.LoadAssembly(GetType().Assembly);
+      myForm = new MainForm(myActionManager, myMenuFactoy);
+      myForm.Shown += delegate { myForm.Activate(); };
+    }
+
+    private void FireAfterFormCreated()
+    {
+      if (AfterFormCreated != null)
+        AfterFormCreated(this, EventArgs.Empty);
+    }
+
+    private void FireBeforeFormCreated()
+    {
+      if (BeforeFormCreated != null)
+        BeforeFormCreated(this, EventArgs.Empty);
     }
 
     public void SetContent(IControlWithTitle control)

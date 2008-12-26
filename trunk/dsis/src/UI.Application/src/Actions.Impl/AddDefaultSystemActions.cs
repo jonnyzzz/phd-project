@@ -8,7 +8,7 @@ using DSIS.Utils;
 namespace DSIS.UI.Application.Actions.Impl
 {
   [ActionHandler(Startable = true)]
-  public class AddDefaultSystemActions : IStartableComponent
+  public class AddDefaultSystemActions //: IStartableComponent
   {
     private const string ACTION_PARENT = "File.PredefinedSystems";
 
@@ -22,15 +22,18 @@ namespace DSIS.UI.Application.Actions.Impl
       ISystemInfoPredefinedFactory[] predefinedSystems, 
       IApplicationDocumentFactory factory,
       IApplicationClass app,
-      ActionHandlerBeanProcessor _)
+      ActionHandlerBeanProcessor _,
+      IMainForm mainForm)
     {
       myPresentation = presentation;
       myApp = app;
       myFactory = factory;
       myPredefinedSystems = predefinedSystems;
+
+      mainForm.BeforeFormCreated += delegate { Start(); };
     }
 
-    public void Start()
+    private void Start()
     {
       var list = myPredefinedSystems.Sort((x, y) => x.Name.CompareTo(y.Name));
       foreach (var sys in list)

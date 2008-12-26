@@ -52,9 +52,10 @@
   -  repeat construction mode
   -  several invariant measures for one document
   -  use box method by default
-  -  no more predefined systems
+
 
 Completed:
+  x  no more predefined systems
   x  align progress bar to buttom
   x  Wizard Form presenter
   x  Wizard and Result interface  
