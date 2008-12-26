@@ -84,7 +84,7 @@ namespace DSIS.UI.Controls
       var result = new Panel { AutoSize = true };
       var deeper = AddPanel(new Queue<Q>(sorted), result);
 
-      foreach (var control in controls.Filter(x=>x.Float == Layout.CENTER))
+      foreach (var control in controls.Where(x=>x.Float == Layout.CENTER))
       {
         var value = control.Control;
         value.Dock = DockStyle.Fill;

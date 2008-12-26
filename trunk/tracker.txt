@@ -52,6 +52,7 @@
   -  repeat construction mode
   -  several invariant measures for one document
   -  use box method by default
+  -  no more predefined systems
 
 Completed:
   x  align progress bar to buttom
