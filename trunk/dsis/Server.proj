@@ -23,7 +23,7 @@
 
     <NUnit Assemblies="%(Tests.FullPath)" NUnitVersion="NUnit-2.5.0" ContinueOnError="True" />
 
-    <TeamCityProgressMessage Status="SUCCESS" Text="Done. {build.status.text}" />
+    <TeamCityProgressMessage Text="Done. {build.status.text}" />
   </Target>
 
 </Project>
