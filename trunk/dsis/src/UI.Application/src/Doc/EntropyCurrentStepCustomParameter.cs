@@ -1,5 +1,6 @@
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
+using DSIS.UI.UI;
 
 namespace DSIS.UI.Application.Doc
 {

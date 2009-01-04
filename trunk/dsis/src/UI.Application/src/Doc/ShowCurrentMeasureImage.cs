@@ -25,9 +25,8 @@ namespace DSIS.UI.Application.Doc
 
     protected override string DrawImage(Size sz)
     {
-      myAction.Height = sz.Height;
-      myAction.Width = sz.Width;
       var ctx = myDoc.Content;
+      ImageDimension.KEY.Set(ctx, new ImageDimension { Width = Width, Height = Height });
 
       string file = null;
       if (myAction.Compatible(ctx).Empty())

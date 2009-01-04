@@ -130,7 +130,6 @@
     <Compile Include="src\Doc\DefaultDocumentCenterControls.cs" />
     <Compile Include="src\Doc\DefaultDocumentControls.cs" />
     <Compile Include="src\Doc\DocUIManager.cs" />
-    <Compile Include="src\Doc\DocumentComponent.cs" />
     <Compile Include="src\Doc\DocumentControl.cs" />
     <Compile Include="src\Doc\EntropyCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\ICurrentStepCustomParameter.cs" />

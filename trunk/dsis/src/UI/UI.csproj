@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="src\BoolErrorProviderHelper.cs" />
     <Compile Include="src\ControlUtils.cs" />
+    <Compile Include="src\DocumentComponent.cs" />
     <Compile Include="src\ErrorProviderHelper.cs" />
     <Compile Include="src\IApplicationClass.cs" />
     <Compile Include="src\IApplicationDocument.cs" />

@@ -5,7 +5,7 @@ namespace DSIS.GnuplotDrawer
     public readonly string OutputFile;
     public int Width { get; set;}
     public int Height { get; set;}
-    public readonly string Title;
+    public string Title { get; set;}
     
     public bool ShowKeyHistory{ get; set;}
     public bool ForcePoints{ get; set;}

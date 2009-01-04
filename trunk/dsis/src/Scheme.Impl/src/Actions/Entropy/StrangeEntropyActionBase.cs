@@ -17,11 +17,11 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
-      IGraph<Q> graph = Keys.Graph<Q>().Get(input);
-      IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
-      StrangeEntropyEvaluatorParams ps = GetParams(input);
+      var graph = Keys.Graph<Q>().Get(input);
+      var comps = Keys.GraphComponents<Q>().Get(input);
+      var ps = GetParams(input);
 
-      IGraphMeasure<Q> measure = new StrangeEntropyEvaluator<Q>().Measure(graph, comps, ps);
+      var measure = new StrangeEntropyEvaluator<Q>().Measure(graph, comps, ps);
 
       Keys.GraphMeasure<Q>().Set(output, measure);      
       Keys.GraphEntropyKey.Set(output, measure);      

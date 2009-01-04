@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Visualization;
@@ -14,19 +15,23 @@ namespace DSIS.Scheme.Impl.Actions.Files
     protected abstract GnuplotScriptParameters CreateProperties<Q>(IGraphMeasure<Q> measure, string outputFile)
       where Q : ICellCoordinate;
 
+    public event Action<GnuplotScriptParameters> UpdateParameters;
+
     public abstract override int SystemDimension { get; }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
-      WorkingFolderInfo info = FileKeys.WorkingFolderKey.Get(input);
-      IGraphMeasure<Q> measure = Keys.GraphMeasure<Q>().Get(input);
-      IGraphStrongComponents<Q> components = Keys.GraphComponents<Q>().Get(input);
+      var info = FileKeys.WorkingFolderKey.Get(input);
+      var measure = Keys.GraphMeasure<Q>().Get(input);
+      var components = Keys.GraphComponents<Q>().Get(input);
+      var wr = WriteMeasureFile(info.CreateFileName("measure_base_value.data"), measure);
 
-      GnuplotPointsFileWriter wr = WriteMeasureFile(info.CreateFileName("measure_base_value.data"), measure);
-
-      string outputFile = info.CreateFileName("measure_base.png");
+      var outputFile = info.CreateFileName("measure_base.png");
 
       var ps = CreateProperties(measure, outputFile);
+
+      if (UpdateParameters != null)
+        UpdateParameters(ps);
 
       if (input.ContainsKey(ImageDimension.KEY))
       {
@@ -35,7 +40,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
         ps.Height = d.Height;
       }
 
-      IGnuplotEntropyScriptGen gen = CreateScriptGen(info.CreateFileName("measure_base.gnuplot"), ps);
+      var gen = CreateScriptGen(info.CreateFileName("measure_base.gnuplot"), ps);
 
       GnuplotPointsFileWriter bs;
       using (bs = new GnuplotPointsFileWriter(info.CreateFileName("measure_base_vbase.data"), SystemDimension))

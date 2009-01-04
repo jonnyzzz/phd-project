@@ -54,7 +54,7 @@ namespace DSIS.UI.Application.Doc.Actions
                               LOG.Info(apply);
                               var c = new Context();
                               c.AddAll(apply);
-                              c.AddAll(ctx);
+                              c.AddAllNew(ctx);
                               DocumentManager.ChangeDocument(c);
                             });
     }

@@ -8,8 +8,11 @@ namespace DSIS.GnuplotDrawer
     {
       myParams = @params;
 
-      myWriter.WriteLine("set title \"{0}\"; ", myParams.Title);
+      if (myParams.Title != null)
+        myWriter.WriteLine("set title \"{0}\"; ", myParams.Title);
+
       myWriter.WriteLine("set terminal png size {0},{1}; ", myParams.Width, myParams.Height);
+      
       myWriter.WriteLine("set output '{0}';", myParams.OutputFile);
 
       if (myParams.ShowKeyHistory)

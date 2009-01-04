@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
@@ -9,14 +10,11 @@ namespace DSIS.Scheme.Impl.Actions.Files
   {
     private readonly WorkingFolderInfo myWorkingFolder;
 
-    //TODO: Move to context level
-    public int Width { get; set; } 
-    public int Height { get; set; } 
-
     public IoCDrawEntropyMeasureWithBaseAction(WorkingFolderInfo workingFolder, IEnumerable<DrawEntropyMeasureActionBase> actions)
       : base(actions)
     {
       myWorkingFolder = workingFolder;
+      actions.Each(x=>x.UpdateParameters += ps=>{ ps.Title = null;});
     }
 
     protected override void Apply<T, Q>(Context input, Context output)
@@ -29,7 +27,6 @@ namespace DSIS.Scheme.Impl.Actions.Files
       var ctx = new Context();
       ctx.AddAll(input);
       FileKeys.WorkingFolderKey.Set(ctx, myWorkingFolder);
-      ImageDimension.KEY.Set(ctx, new ImageDimension{Width = Width, Height = Height});
       return ctx;
     }
 

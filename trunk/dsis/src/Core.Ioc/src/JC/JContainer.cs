@@ -123,23 +123,17 @@ namespace DSIS.Core.Ioc.JC
     }
 
     private object FindAutowiringInstance(Type type)
-    {      
+    {
       if (type.IsArray)
-      {
         return FillCollectionOf(type.GetElementType());
-      }
-      else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-      {
+      
+      if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (IEnumerable<>))
         return FillCollectionOf(type.GetGenericArguments()[0]);
-      }
-      else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>))
-      {
+      
+      if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (ICollection<>))
         return FillCollectionOf(type.GetGenericArguments()[0]);
-      }
-      else
-      {
-        return GetComponent(type);
-      }      
+      
+      return GetComponent(type);
     }
 
     private Array FillCollectionOf(Type type)

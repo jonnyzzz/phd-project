@@ -1,4 +1,3 @@
-using System;
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
 using DSIS.Scheme;
@@ -9,20 +8,20 @@ using DSIS.UI.Wizard;
 
 namespace DSIS.UI.ComputationDialogs.Measure
 {
-  [ComponentImplementation]
+  [DocumentComponent]
   public class ComputeInvariantMeasureMethodSelectorImpl : IComputeInvariantMeasureMethodSelector
   {
     private readonly IComponentContainer myContainer;
     private readonly IApplicationClass myApp;
+
+    [Autowire]
+    private IComputeInveriantMeasureFactory[] Factories { get; set; }
 
     public ComputeInvariantMeasureMethodSelectorImpl(IComponentContainer container, IApplicationClass app)
     {
       myContainer = container;
       myApp = app;
     }
-
-    [Autowire]
-    private IComputeInveriantMeasureFactory[] Factories { get; set; }
 
     public bool IsApplicable(Context ctx)
     {

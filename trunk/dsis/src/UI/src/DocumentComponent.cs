@@ -1,6 +1,6 @@
 using DSIS.Core.Ioc;
 
-namespace DSIS.UI.Application.Doc
+namespace DSIS.UI.UI
 {
   public class DocumentComponent : ComponentImplementationAttributeBase {}
 }
