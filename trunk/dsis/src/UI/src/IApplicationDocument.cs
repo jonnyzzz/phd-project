@@ -10,11 +10,5 @@ namespace DSIS.UI.UI
     ISystemSpace Space { get; }
 
     Context Content { get;}
-
-    /// <summary>
-    /// Replaces the document with new docuent based on newContext
-    /// </summary>
-    /// <param name="newContext"></param>
-    void ChangeDocument(Context newContext);
   }
 }

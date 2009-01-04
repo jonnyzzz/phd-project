@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
 using DSIS.UI.Application.Progress;
@@ -13,29 +14,29 @@ namespace DSIS.UI.Application.Doc.Actions
   {
     private static readonly ILog LOG = LogManager.GetLogger(typeof (ComputeInvariantMeasureAction));
 
-    private readonly IApplicationDocument myDocument;
-    private readonly IActionExecution myExec;
-    private readonly IComputeInvariantMeasureMethodSelector myMethodSelector;
+    [Autowire]
+    private IApplicationDocument Document { get; set; }
 
-    public ComputeInvariantMeasureAction(IApplicationDocument document, IActionExecution exec,
-                                         IComputeInvariantMeasureMethodSelector methodSelector)
-    {
-      myDocument = document;
-      myExec = exec;
-      myMethodSelector = methodSelector;
-    }
+    [Autowire]
+    private IActionExecution Exec { get; set; }
+
+    [Autowire]
+    private IComputeInvariantMeasureMethodSelector MethodSelector { get; set; }
+
+    [Autowire]
+    private IDocumentManager DocumentManager { get; set; }
 
     public bool Compatible
     {
       get
       {
-        return myMethodSelector.IsApplicable(myDocument.Content);
+        return MethodSelector.IsApplicable(Document.Content);
       }
     }
 
     public void Apply()
     {
-      var ctx = myDocument.Content;
+      var ctx = Document.Content;
       if (ctx.ContainsGraphMeasure())
       {
         var result = MessageBox.Show("There is invariant measure computation result. Do you want to re-compute it?",
@@ -44,9 +45,9 @@ namespace DSIS.UI.Application.Doc.Actions
           return;
       }
 
-      var action = myMethodSelector.ShowWizard();
+      var action = MethodSelector.ShowWizard();
 
-      myExec.ExecuteAsync("Compute Invariant Measure",
+      Exec.ExecuteAsync("Compute Invariant Measure",
                           pi =>
                             {
                               var apply = action.Apply(ctx);
@@ -54,7 +55,7 @@ namespace DSIS.UI.Application.Doc.Actions
                               var c = new Context();
                               c.AddAll(apply);
                               c.AddAll(ctx);
-                              myDocument.ChangeDocument(c);
+                              DocumentManager.ChangeDocument(c);
                             });
     }
   }

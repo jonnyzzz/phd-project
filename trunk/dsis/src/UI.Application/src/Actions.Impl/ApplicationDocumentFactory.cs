@@ -33,7 +33,7 @@ namespace DSIS.UI.Application.Actions.Impl
         fill.FillContext(ctx, ctx);
       }
       
-      return new ApplicationDocument(title, ctx, myApp, myInvocator);
+      return new ApplicationDocument(title, ctx);
     }
   }
 }

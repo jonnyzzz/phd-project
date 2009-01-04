@@ -1,4 +1,5 @@
 using DSIS.CellImageBuilder.Shared;
+using DSIS.Core.Ioc;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Exec;
@@ -14,16 +15,14 @@ namespace DSIS.UI.Application.Doc.Actions
   [DocumentAction(Caption = "Build Next Symbolic Image", Description = "")]
   public class ComputeNextSymbolicImageDocumentAction : IDocumentAction
   {
-    private readonly IApplicationDocument myDocument;
-    private readonly ISIConstructionWizard myWizard;
-    private readonly IActionExecution myExec;
-
-    public ComputeNextSymbolicImageDocumentAction(IApplicationDocument document, ISIConstructionWizard wizard, IActionExecution exec)
-    {
-      myDocument = document;
-      myWizard = wizard;
-      myExec = exec;
-    }
+    [Autowire]
+    private IApplicationDocument myDocument{ get; set;}
+    [Autowire]
+    private ISIConstructionWizard myWizard { get; set; }
+    [Autowire]
+    private IActionExecution myExec { get; set; }
+    [Autowire]
+    private IDocumentManager DocumentManager { get; set; }
 
     public bool Compatible
     {
@@ -70,10 +69,10 @@ namespace DSIS.UI.Application.Doc.Actions
       return ag;
     }
 
-    private static void BuildNext(IApplicationDocument doc, IAction action)
+    private void BuildNext(IApplicationDocument doc, IAction action)
     {
       var ctx = action.Apply(doc.Content);
-      doc.ChangeDocument(ctx);
+      DocumentManager.ChangeDocument(ctx);
     }
   }
 }
