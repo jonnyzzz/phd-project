@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
@@ -11,7 +12,7 @@ namespace DSIS.Graph.Abstract
 
     public static IFilter CreateFilter(IEnumerable<IStrongComponentInfo> componentIds, int allComponents)
     {
-      var infos = new HashSet<TarjanComponentInfo>(componentIds.Cast<TarjanComponentInfo>());
+      var infos = new HashSet<TarjanComponentInfo>(CollectionUtil.Cast<TarjanComponentInfo>(componentIds));
       var count = infos.Count;
       if (count == 0)
       {
@@ -27,7 +28,7 @@ namespace DSIS.Graph.Abstract
       }
       if (count <= 10)
       {
-        return new ArrayFilter(infos.Map(x => x.ComponentId).ToArray());
+        return new ArrayFilter(CollectionUtil.ToArray(infos.Map(x => x.ComponentId)));
       }
       return new HashSetFilter(new HashSet<uint>(infos.Map(x=>x.ComponentId)));
     }
@@ -109,7 +110,7 @@ namespace DSIS.Graph.Abstract
     public static IEnumerable<INode<TCell>> FilterUpper<TCell>(this IFilter filter, IEnumerable<INode<TCell>> nodes)
       where TCell : ICellCoordinate      
     {      
-      return nodes.Filter(x => filter.Accept(x.ComponentId));
+      return Enumerable.Where(nodes, x => filter.Accept(x.ComponentId));
     }
   }
 }

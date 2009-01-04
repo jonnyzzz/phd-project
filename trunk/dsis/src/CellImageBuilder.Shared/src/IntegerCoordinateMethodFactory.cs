@@ -29,6 +29,11 @@ namespace DSIS.CellImageBuilder.Shared
       return (ICellImageBuilder<Q>) method.Invoke(null, new object[]{settings});
     }
 
+    public virtual bool IsDefault
+    {
+      get { return false; }
+    }
+
     [Used("Reflection")]
     private static ICellImageBuilder<Q> CreateSystem2<Q>(ICellImageBuilderSettings settings) 
       where Q : IIntegerCoordinate

@@ -44,7 +44,7 @@ Misc:
   -  Submit exception service online
 
 Entropy:
-  -  entropy computation actions (matrix)
+  -  entropy computation actions (matrix) ???
   -  include eigen entropy
   -  create eigen options
   -  compute entropy on every component (depends on per-components feature)
@@ -70,10 +70,10 @@ Internal:
   -  support DefaultValueAttribute
   -  strange entropy modes manual description
   -  remember selected construction method
-  -  use box method by default
   -  drop ICodeCompiler singleton
 
 Completed:
+  -  use box method by default
   -  joined wizards
   -  entropy is zero for loop searcher
   -  do not show entropy on invariant measure picture

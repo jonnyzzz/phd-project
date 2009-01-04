@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using DSIS.Utils;
 
@@ -19,7 +20,7 @@ namespace DSIS.Core.Ioc.JC
       var set = new HashSet<PropertyInfo>();
       foreach (var clazz in myLookup.GetBaseClasses(type))
       {
-        set.UnionWith(clazz.GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance).Filter(x=>x.IsDefined<AutowireAttribute>()));
+        set.UnionWith(clazz.GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance).Where(x=>x.IsDefined<AutowireAttribute>()));
       }
       return set;
     }

@@ -12,7 +12,6 @@ namespace DSIS.UI.Wizard.ListSelector
     public ListSelectorWizardPage(IListSelectorFactory factory, IEnumerable<Q> factories, Func<Q, string> names) :
       this(factory, factories, names, x=>true)
     {
-      
     }
 
     public ListSelectorWizardPage(IListSelectorFactory factory, IEnumerable<Q> factories, Func<Q, string> names, Func<Q, bool> enabled)
@@ -30,6 +29,7 @@ namespace DSIS.UI.Wizard.ListSelector
     public Q SelectedItem
     {
       get { return ControlInternal.SelectedValue; }
+      set { ControlInternal.SelectedValue = value; }
     }
 
     public override bool Validate()

@@ -12,5 +12,7 @@ namespace DSIS.Scheme.Objects.Systemx
   {
     ICellImageBuilder<Q> CreateSystem<Q>(ICellImageBuilderSettings settings) 
       where Q : ICellCoordinate;
+
+    bool IsDefault { get; }
   }
 }

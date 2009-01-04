@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Ioc;
 using DSIS.UI.Controls;
 
@@ -18,7 +19,7 @@ namespace DSIS.UI.Wizard.ListSelector
       where T : class, IListInfo<Q>
       where Q : class 
     {
-      return new ListSelector<T, Q>(elements, myLayout);
+      return new ListSelector<T, Q>(elements.ToArray(), myLayout);
     }
   }
 }

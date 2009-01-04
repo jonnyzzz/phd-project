@@ -56,6 +56,7 @@ namespace DSIS.Utils
       return new List<T>(enu);
     }
 
+    [Obsolete("Use Linq.Where")]
     public static IEnumerable<Q> Filter<Q>(this IEnumerable<Q> enu, Predicate<Q> pred)
     {
       foreach (var q in enu)
@@ -91,6 +92,7 @@ namespace DSIS.Utils
       return new List<T>(enu);
     }
 
+    [Obsolete("use Linq")]
     public static T[] ToArray<T>(this IEnumerable<T> enu)
     {
       if (enu is List<T>)
@@ -124,6 +126,7 @@ namespace DSIS.Utils
       }
     }
 
+    [Obsolete("Use Linq Single")]
     public static T Singleton<T>(this IEnumerable<T> enu)
     {
       T t = default(T);
@@ -140,6 +143,7 @@ namespace DSIS.Utils
       return t;
     }
 
+    [Obsolete("Use Linq GetFirstOrDefault")]
     public static T GetFirst<T>(this IEnumerable<T> enu)
     {
       foreach (T t in enu)
@@ -157,16 +161,6 @@ namespace DSIS.Utils
         if (i++ < count)
           yield return t;
       }
-    }
-
-    public static T GetLast<T>(this IEnumerable<T> enu)
-    {
-      T v = default(T);
-      foreach (T t in enu)
-      {
-        v = t;
-      }
-      return v;
     }
 
     public static T Find<T>(this IEnumerable<T> enu, T def, Predicate<T> pred)
@@ -404,15 +398,6 @@ namespace DSIS.Utils
     }
 
     public static IEnumerable<T> Cast<T>(this IEnumerable enu)
-    {
-      foreach (T t in enu)
-      {
-        yield return t;
-      }
-    }
-
-    public static IEnumerable<Q> UpCast<Q,T>(this IEnumerable<T> enu)
-      where T : Q
     {
       foreach (T t in enu)
       {

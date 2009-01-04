@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Exec;
 using DSIS.Utils;
@@ -34,10 +35,10 @@ namespace DSIS.Scheme.Xml
               else if (baseGraph.IncludeAssemblies != null)
               {
                 g.IncludeAssemblies.Assembly =
-                  baseGraph.IncludeAssemblies.Assembly.Safe().Join(g.IncludeAssemblies.Assembly).ToArray();
+                  CollectionUtil.ToArray(baseGraph.IncludeAssemblies.Assembly.Safe().Join(g.IncludeAssemblies.Assembly));
               }
-              g.Nodes.Node = baseGraph.Nodes.Node.Join(g.Nodes.Node).ToArray();
-              g.Links.Link = baseGraph.Links.Link.Join(g.Links.Link).ToArray();
+              g.Nodes.Node = CollectionUtil.ToArray(baseGraph.Nodes.Node.Join(g.Nodes.Node));
+              g.Links.Link = CollectionUtil.ToArray(baseGraph.Links.Link.Join(g.Links.Link));
               g.Base = null;
               done = true;
             }
@@ -45,7 +46,7 @@ namespace DSIS.Scheme.Xml
         }
       }
 
-      if (!graph.Graph.Filter(x => x.Base != null).IsEmpty())
+      if (!Enumerable.Where(graph.Graph, x => x.Base != null).IsEmpty())
         throw new ArgumentException("Failed to resolve Base graphs");
 
       using (var fnd = new TypeFinder())
@@ -82,7 +83,7 @@ namespace DSIS.Scheme.Xml
       foreach (var link in links.Link)
       {
         var x = link.Nodes.GetFirst();
-        foreach (var y in link.Nodes.Skip(1))
+        foreach (var y in CollectionUtil.Skip(link.Nodes, 1))
         {
           ag.AddEdge(nodes[x.noderef], nodes[y.noderef]);
           x = y;
@@ -112,7 +113,7 @@ namespace DSIS.Scheme.Xml
       {
         var n = factory(node, sageGet);
 
-        if (n.NodePrerequisites.Count() == 0)
+        if (CollectionUtil.Count(n.NodePrerequisites) == 0)
         {
           data[n.Id] = n.Create();
         }
@@ -136,9 +137,9 @@ namespace DSIS.Scheme.Xml
         }
       }
 
-      if (map.Keys.Count() > 0)
+      if (CollectionUtil.Count(map.Keys) > 0)
       {
-        throw new Exception("Recursive dependiencies. Failed to create " + string.Join(", ", map.Keys.ToArray()));
+        throw new Exception("Recursive dependiencies. Failed to create " + string.Join(", ", CollectionUtil.ToArray(map.Keys)));
       }
 
       return data;
@@ -241,7 +242,7 @@ namespace DSIS.Scheme.Xml
         node.Id,
         () =>
           {
-            object[] args = argz.Map(x => x()).ToArray();
+            object[] args = CollectionUtil.ToArray(argz.Map(x => x()));
             var action = (IAction) Activator.CreateInstance(type, args);
             if (node.RegisterKey != null)
               bag.Add(node.RegisterKey, action);

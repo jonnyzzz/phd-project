@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DSIS.Utils;
 
@@ -20,7 +21,7 @@ namespace DSIS.Scheme.Ctx
     /// <returns>All stored keys without regard to name</returns>
     public IEnumerable<Key<Y>> AllKeys<Y>()
     {
-      return myContext.Keys.Filter(x => x.IsKey<Y>()).Convert(x=>x.Cast<Y>());
+      return myContext.Keys.Where(x => x.IsKey<Y>()).Convert(x=>x.Cast<Y>());
     }
 
     public Context Clone()

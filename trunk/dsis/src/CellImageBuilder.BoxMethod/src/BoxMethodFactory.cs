@@ -10,5 +10,10 @@ namespace DSIS.CellImageBuilder.BoxMethod
     {
       FactoryName = "Box Method";
     }
+
+    public override bool IsDefault
+    {
+      get { return true; }
+    }
   }
 }

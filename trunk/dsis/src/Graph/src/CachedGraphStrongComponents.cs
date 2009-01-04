@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
 using DSIS.Utils;
@@ -45,7 +46,7 @@ namespace DSIS.Graph
 
       var set = new HashSet<IStrongComponentInfo>(componentIds);
 
-      foreach (var info in myCache.Keys.Filter(set.Contains).Join(set.Filter(x => !myCache.ContainsKey(x))))
+      foreach (var info in myCache.Keys.Where(set.Contains).Join(set.Where(x => !myCache.ContainsKey(x))))
       {
         var g = Cache(info);
         var n = g.Find(node.Coordinate);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Utils;
 
 namespace DSIS.Core.Ioc.JC
@@ -41,7 +42,7 @@ namespace DSIS.Core.Ioc.JC
 
     public IEnumerable<T> GetComponents<T>()
     {
-      return GetComponents(typeof(T)).Cast<T>();
+      return CollectionUtil.Cast<T>(GetComponents(typeof(T)));
     }
 
     public void RegisterComponent(Type t)
@@ -69,7 +70,7 @@ namespace DSIS.Core.Ioc.JC
       {
         foreach (var parent in myParents)
         {
-          components.AddRange(parent.GetComponents(y).Filter(x=>check(x.GetType())));
+          components.AddRange(Enumerable.Where(parent.GetComponents(y), x=>check(x.GetType())));
         }
       }
       components.AddRange(myHolder.GetInstancesFor(y));
@@ -79,7 +80,7 @@ namespace DSIS.Core.Ioc.JC
 
     public IEnumerable<T> GetCreatedComponentFromThatContainer<T>()
     {
-      return myHolder.GetCreatedInstancesFor(typeof(T)).Cast<T>();
+      return CollectionUtil.Cast<T>(myHolder.GetCreatedInstancesFor(typeof(T)));
     }
 
     private object CreateInstance(Type t)
