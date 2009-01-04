@@ -54,7 +54,6 @@ Feature:
   -  segment iterator?
   -  components chooser
   -  components legend
-  -  joined wizards
   -  Mnemonics manager	
   -  unsimmentric construction support
   -  subdivision selector
@@ -62,11 +61,9 @@ Feature:
   -  several invariant measures for one document
 
 Bugs:
-  -  do not show entropy on invariant measure picture
   -  not responding after focus lost
   -  embedded IE used to flickr
   -  format cells with spaces
-  -  entropy is zero for loop searcher
 
 Internal:
   -  support ConstraintAttribute hierarchy
@@ -77,6 +74,9 @@ Internal:
   -  drop ICodeCompiler singleton
 
 Completed:
+  -  joined wizards
+  -  entropy is zero for loop searcher
+  -  do not show entropy on invariant measure picture
   x  no more predefined systems
   x  align progress bar to buttom
   x  Wizard Form presenter

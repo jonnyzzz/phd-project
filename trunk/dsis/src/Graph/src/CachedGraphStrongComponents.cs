@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
-using DSIS.Core.Util;
-using DSIS.Graph.Abstract;
 using DSIS.Utils;
 
 namespace DSIS.Graph
@@ -46,22 +44,14 @@ namespace DSIS.Graph
       //todo: Take into account edges between components!
 
       var set = new HashSet<IStrongComponentInfo>(componentIds);
-      var filter = ComponentsFilter.CreateFilter(set, ComponentCount);
-      foreach (var pair in myCache.Copy())
-      {
-        var n = pair.Value.Find(node.Coordinate);
-        if (n != null)
-          return filter.FilterUpper(pair.Value.GetEdges(n));
-        set.Remove(pair.Key);
-      }
 
-      foreach (var info in set)
+      foreach (var info in myCache.Keys.Filter(set.Contains).Join(set.Filter(x => !myCache.ContainsKey(x))))
       {
         var g = Cache(info);
         var n = g.Find(node.Coordinate);
         if (n != null)
           //only one strong component may contain node
-          return filter.FilterUpper(g.GetEdges(n));
+          return g.GetEdges(n);
       }
       return EmptyArray<INode<T>>.Instance;
     }
