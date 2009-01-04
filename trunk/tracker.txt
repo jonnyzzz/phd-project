@@ -1,58 +1,79 @@
+Progress bar:
   -  Cancelable progressbar
   -  Memory usage bound
   -  Memory usage indicator
   -  Modal progress bar
-  -  Remember history of actions
-  -  Macros support
-  -  System Functions parser
-  -  Embed drawer program from Nikita?
-  -  Use drawer program from Nikita?
-  -  CI aka TeamCity
-  -  Use IProgressIndicator everywhere
-  -  Submit exception form
-  -  Submit exception service online
-  -  Entropy changes log
-  -  allow to move 3d pictures
-  -  allow to zoom pictures
-  -  steps counter
-  -  show points with squares
-  -  do not show entropy on invariant measure
-  -  entropy computation actions (matrix)
-  -  segment iterator?
-  -  drop ICodeCompiler singleton
-  -  not responding after focus lost
-  -  embedded IE used to flickr
-  -  Show percentage on progress bar control
-  -  Mnemonics manager	
   -  Rework executor model to show several running tasks' progress
   -  Disable actions while action is being completed
   -  Document write cookie to protect from starting several actions at a time
-  -  include eigen entropy
-  -  create eigen options
-  -  compute on every component
-  -  compunents chooser
-  -  components legend
   -  document action cookie to prevent more than one action running on one document
-  -  support ConstraintAttribute hierarchy
-  -  support DefaultValueAttribute
+  -  Use IProgressIndicator everywhere
+  -  Show percentage on progress bar control
+
+
+History:
+  -  Remember history of actions
+  -  Entropy changes log
+  -  steps counter
+
+
+Macros:
+  -  Macros support
+
+
+System function dialog:
+  -  System Functions parser
   -  system function dialog: use IoC
   -  system function dialog: system parameters => solver => solver parameters
-  -  joined wizards
   -  system function default parameters
   -  system function default system space
+  -  system function dialog: symmetric space mode
   -  support double with . or ,
-  -  symmetric space mode
-  -  format cells with spaces
-  -  entropy is zero for loop searcher
-  -  strange entropy modes manual description
+
+Drawer:
+  -  Embed drawer program from Nikita?
+  -  Use drawer program from Nikita?
+  -  allow to move 3d pictures
+  -  allow to zoom pictures
+  -  show points with squares
+
+Misc:
+  -  TeamCity
+  -  Submit exception form
+  -  Submit exception service online
+
+Entropy:
+  -  entropy computation actions (matrix)
+  -  include eigen entropy
+  -  create eigen options
+  -  compute entropy on every component (depends on per-components feature)
   -  combinatorics method -> separate
-  -  remember selected construction method
+
+Feature:
+  -  segment iterator?
+  -  components chooser
+  -  components legend
+  -  joined wizards
+  -  Mnemonics manager	
   -  unsimmentric construction support
   -  subdivision selector
   -  repeat construction mode
   -  several invariant measures for one document
-  -  use box method by default
 
+Bugs:
+  -  do not show entropy on invariant measure picture
+  -  not responding after focus lost
+  -  embedded IE used to flickr
+  -  format cells with spaces
+  -  entropy is zero for loop searcher
+
+Internal:
+  -  support ConstraintAttribute hierarchy
+  -  support DefaultValueAttribute
+  -  strange entropy modes manual description
+  -  remember selected construction method
+  -  use box method by default
+  -  drop ICodeCompiler singleton
 
 Completed:
   x  no more predefined systems

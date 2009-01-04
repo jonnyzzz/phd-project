@@ -7,6 +7,23 @@ namespace DSIS.Utils
 {
   public static class Util
   {
+    public static void OfType<T>(this object o, Action<T> act)
+    {
+      if (o is T)
+      {
+        act((T) o);
+      }
+    }
+    
+    public static Q OfType<T,Q>(this object o, Q def, Func<T,Q> act)
+    {
+      if (o is T)
+      {
+        return act((T) o);
+      }
+      return def;
+    }
+
     public static X With<X>(this X x, Action<X> a)
     {
       a(x);
