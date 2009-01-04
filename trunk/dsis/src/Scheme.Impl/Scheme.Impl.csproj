@@ -59,6 +59,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -133,10 +134,14 @@
     <Compile Include="src\Actions\Files\FileKeys.cs" />
     <Compile Include="src\Actions\Files\FlatWorkingFolder.cs" />
     <Compile Include="src\Actions\Files\GraphEntropyLogAction.cs" />
+    <Compile Include="src\Actions\Files\IIocDrawHelper.cs" />
     <Compile Include="src\Actions\Files\ImageDimension.cs" />
     <Compile Include="src\Actions\Files\ImageResult.cs" />
-    <Compile Include="src\Actions\Files\IocDrawChangeAction.cs" />
+    <Compile Include="src\Actions\Files\IoCDrawSimbolicImage.cs" />
+    <Compile Include="src\Actions\Files\IocDrawSimbolicImageAction.cs" />
+    <Compile Include="src\Actions\Files\IoCDrawEntropyMeasure.cs" />
     <Compile Include="src\Actions\Files\IoCDrawEntropyMeasureWithBaseAction.cs" />
+    <Compile Include="src\Actions\Files\IoCDrawHelper.cs" />
     <Compile Include="src\Actions\Files\IterationStepsPrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\Logger.cs" />
     <Compile Include="src\Actions\Files\LoggerAction.cs" />

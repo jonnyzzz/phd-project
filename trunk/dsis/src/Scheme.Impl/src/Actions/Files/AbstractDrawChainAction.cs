@@ -70,7 +70,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       IGnuplotPhaseScriptGen gen = GnuplotSriptGen.ScriptGen(
         Dimension,
         folderInfo.CreateFileName("chain-recurrent-picture-script.gnuplot"),
-        CreateOutputParameters(outputFile));
+        CreateOutputParameters(input, outputFile));
 
       var values = (IEnumerable<GnuplotPointsFileWriter>)files.Values;
       if (otherFilesWriter != null)
@@ -90,9 +90,16 @@ namespace DSIS.Scheme.Impl.Actions.Files
       FileKeys.ImageKey.Set(output, result);
     }
 
-    protected virtual GnuplotScriptParameters CreateOutputParameters(string outputFile)
+    protected virtual GnuplotScriptParameters CreateOutputParameters(IReadOnlyContext context, string outputFile)
     {
-      return new GnuplotScriptParameters(outputFile, "");
+      var ps = new GnuplotScriptParameters(outputFile, "");
+      if (context.ContainsKey(ImageDimension.KEY))
+      {
+        var d = ImageDimension.KEY.Get(context);
+        ps.Width = d.Width;
+        ps.Height = d.Height;
+      }
+      return ps;
     }
 
     protected abstract void DrawFromScript(IGnuplotPhaseScriptGen gen);

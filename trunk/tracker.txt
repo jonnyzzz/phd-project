@@ -36,6 +36,7 @@ Drawer:
   -  allow to move 3d pictures
   -  allow to zoom pictures
   -  show points with squares
+  -  export points files: , or . or matcad or maple etc
 
 Misc:
   -  TeamCity

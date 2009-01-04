@@ -3,46 +3,26 @@ using System.Windows.Forms;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.UI.Application.Progress;
 using DSIS.UI.UI;
-using DSIS.Utils;
 
 namespace DSIS.UI.Application.Doc
 {
   [DocumentComponent]
-  public class ShowCurrentMeasureImage : ImageDrawingControl, IDocumentCenterControl
+  public class ShowCurrentMeasureImage : IDocumentCenterControl
   {
-    private readonly IoCDrawEntropyMeasureWithBaseAction myAction;
-    private readonly IApplicationDocument myDoc;
+    private readonly ImageDrawWithIoCHelper myHelper;
 
     public ShowCurrentMeasureImage(
       IApplicationDocument doc,
-      IoCDrawEntropyMeasureWithBaseAction action,
+      IoCDrawEntropyMeasure action,
       IActionExecution exec,
-      IInvocator invocator) : base(exec, invocator)
+      IInvocator invocator)
     {
-      myAction = action;
-      myDoc = doc;
-    }
-
-    protected override string DrawImage(Size sz)
-    {
-      var ctx = myDoc.Content;
-      ImageDimension.KEY.Set(ctx, new ImageDimension { Width = Width, Height = Height });
-
-      string file = null;
-      if (myAction.Compatible(ctx).Empty())
-      {
-        var result = myAction.Apply(ctx);
-        if (result.ContainsKey(FileKeys.ImageKey))
-        {
-          file = FileKeys.ImageKey.Get(result).Path;
-        }
-      }
-      return file;
+      myHelper = new ImageDrawWithIoCHelper(exec, invocator, action, doc);
     }
 
     Control IControlWithTitle.Control
     {
-      get { return this; }
+      get { return myHelper; }
     }
 
     string IControlWithTitle.Title

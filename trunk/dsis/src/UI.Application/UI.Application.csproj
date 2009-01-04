@@ -142,11 +142,12 @@
     <Compile Include="src\Doc\ImageDrawingControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="src\Doc\ShowCurrentMeasureImage.cs">
+    <Compile Include="src\Doc\ImageDrawWithIoCHelper.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="src\Doc\ShowCurrentMeasureImage.cs">
+    </Compile>
     <Compile Include="src\Doc\ShowCurrentSimbolicImage.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\IDocumentManager.cs" />
     <Compile Include="src\IMainForm.cs" />

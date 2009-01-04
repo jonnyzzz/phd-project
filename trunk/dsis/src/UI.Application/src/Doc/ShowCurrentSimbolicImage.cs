@@ -3,45 +3,26 @@ using System.Windows.Forms;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.UI.Application.Progress;
 using DSIS.UI.UI;
-using DSIS.Utils;
 
 namespace DSIS.UI.Application.Doc
 {
   [DocumentComponent]
-  public class ShowCurrentSimbolicImage : ImageDrawingControl, IDocumentCenterControl
+  public class ShowCurrentSimbolicImage : IDocumentCenterControl
   {
-    private readonly IocDrawChangeAction myAction;
-    private readonly IApplicationDocument myDoc;
+    private readonly ImageDrawWithIoCHelper myHelper;
 
-    public ShowCurrentSimbolicImage(IApplicationDocument doc, IocDrawChangeAction action, IActionExecution exec,
-                                    IInvocator invocator)
-      :base(exec, invocator)
+    public ShowCurrentSimbolicImage(
+      IApplicationDocument doc, 
+      IoCDrawSimbolicImage action, 
+      IActionExecution exec,
+      IInvocator invocator)      
     {
-      myAction = action;
-      myDoc = doc;
-    }
-
-    protected override string DrawImage(Size sz)
-    {
-      myAction.Height = sz.Height;
-      myAction.Width = sz.Width;
-      var ctx = myDoc.Content;
-
-      string file = null;
-      if (myAction.Compatible(ctx).Empty())
-      {
-        var result = myAction.Apply(ctx);
-        if (result.ContainsKey(FileKeys.ImageKey))
-        {
-          file = FileKeys.ImageKey.Get(result).Path;
-        }
-      }
-      return file;
+      myHelper = new ImageDrawWithIoCHelper(exec, invocator, action, doc);
     }
 
     Control IControlWithTitle.Control
     {
-      get { return this; }
+      get { return myHelper; }
     }
 
     string IControlWithTitle.Title
