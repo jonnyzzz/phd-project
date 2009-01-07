@@ -10,16 +10,13 @@ Progress bar:
   -  Use IProgressIndicator everywhere
   -  Show percentage on progress bar control
 
-
 History:
   -  Remember history of actions
   -  Entropy changes log
   -  steps counter
 
-
 Macros:
   -  Macros support
-
 
 System function dialog:
   -  System Functions parser
@@ -42,13 +39,10 @@ Misc:
   -  TeamCity
   -  Submit exception form
   -  Submit exception service online
+  ->  Key should provide extra keys
 
 Entropy:
-  -  entropy computation actions (matrix) ???
-  -  include eigen entropy
-  -  create eigen options
   -  compute entropy on every component (depends on per-components feature)
-  -  combinatorics method -> separate
 
 Feature:
   -  segment iterator?
@@ -73,6 +67,11 @@ Internal:
   -  drop ICodeCompiler singleton
 
 Completed:
+  -  project entropy
+  -  entropy computation actions (matrix) ???
+  -  include eigen entropy
+  -  create eigen options
+  -  combinatorics method -> separate
   -  use box method by default
   -  joined wizards
   -  entropy is zero for loop searcher

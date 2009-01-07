@@ -22,7 +22,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       IGraphMeasure<Q> measure = path.Entropy();
 
       Keys.GraphMeasure<Q>().Set(output, measure);      
-      Keys.GraphEntropyKey.Set(output, measure);      
+//      Keys.GraphEntropyKey.Set(output, measure);      
     }    
   }
 }

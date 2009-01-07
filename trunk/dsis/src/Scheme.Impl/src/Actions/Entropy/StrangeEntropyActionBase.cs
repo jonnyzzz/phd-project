@@ -24,7 +24,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       var measure = new StrangeEntropyEvaluator<Q>().Measure(graph, comps, ps);
 
       Keys.GraphMeasure<Q>().Set(output, measure);      
-      Keys.GraphEntropyKey.Set(output, measure);      
+//      Keys.GraphEntropyKey.Set(output, measure);      
     }
 
     protected abstract StrangeEntropyEvaluatorParams GetParams(Context input);

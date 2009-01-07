@@ -13,13 +13,11 @@ namespace DSIS.Utils
       return enu ?? EmptyArray<Q>.Instance;
     }
 
-    public static List<T> Sort<T>(this IEnumerable<T> enu, IComparer<T> cmp)
+    public static IEnumerable<T> Enum<T>(this T t)
     {
-      var l = new List<T>(enu);
-      l.Sort(cmp);
-      return l;
+      return new[] {t};
     }
-    
+
     public static List<T> Sort<T>(this IEnumerable<T> enu, Comparison<T> cmp)
     {
       var l = new List<T>(enu);
@@ -49,11 +47,6 @@ namespace DSIS.Utils
       foreach (var q in enu)
         return false;
       return true;
-    }
-
-    public static IEnumerable<T> Copy<T>(this IEnumerable<T> enu)
-    {
-      return new List<T>(enu);
     }
 
     [Obsolete("Use Linq.Where")]

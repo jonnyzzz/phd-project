@@ -21,14 +21,15 @@ namespace DSIS.UI.Application.Doc.Actions
     public Control CreateDocumentActionsControl()
     {
       var panel = new TableLayoutPanel {ColumnCount = 1};
-
+      int height = 0;
       int row = 0;
       foreach (var action in myActionManager.GetActions())
       {
         Button btn = CreateButton(action);
+        height += btn.Height;
         panel.Controls.Add(btn, 0, row++);
       }
-      panel.Size = new Size(100, 50);
+      panel.Size = new Size(100, height + 5);
       return panel;
     }
 

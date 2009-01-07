@@ -27,7 +27,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       var measure = evaluator.Measure(graph, comps);
       
       Keys.GraphMeasure<Q>().Set(output, measure);
-      Keys.GraphEntropyKey.Set(output, measure);
+//      Keys.GraphEntropyKey.Set(output, measure);
     }
   }
 }

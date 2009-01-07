@@ -2,14 +2,19 @@ using System.Collections.Generic;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
   public class ProjectEntopryAction : IntegerCoordinateSystemActionBase3
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
+    protected override ICollection<ContextMissmatchCheck> CheckEx<T, Q>(T system, Context ctx)
     {
-      return ColBase(base.Check<T, Q>(ctx), Create(Keys.GraphMeasure<Q>()));
+      if (system.Subdivision.Aggregate(true, (v,x)=>v && x>=2)) {
+        return ColBase(base.CheckEx<T, Q>(system, ctx), Create(Keys.GraphMeasure<Q>()));
+      }
+      return ColBase(base.CheckEx<T, Q>(system, ctx), Create(Keys.GraphMeasure<Q>()),
+                     Create(Keys.IntegerCoordinateSystemInfo, "Too small subdivision. Nothing to project"));
     }
 
     protected override void Apply<T, Q>(Context input, Context output)

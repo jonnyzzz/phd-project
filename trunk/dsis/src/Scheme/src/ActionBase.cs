@@ -53,6 +53,11 @@ namespace DSIS.Scheme
       return new ContextMissmatchCheckImpl<Y>(this, key, typeof(Y).Name + "@" + key.Name);
     }
 
+    protected ContextMissmatchCheck Create<Y>(Key<Y> key, string message)
+    {
+      return new ContextMissmatchCheckImpl<Y>(this, key, string.Format("{0}@{1}: {2}", typeof(Y).Name, key.Name, message));
+    }
+
     protected static ICollection<T> Col<T>(params T[] data)
     {
       return data;

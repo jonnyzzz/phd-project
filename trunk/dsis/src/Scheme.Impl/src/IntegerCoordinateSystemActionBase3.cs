@@ -24,12 +24,22 @@ namespace DSIS.Scheme.Impl
       return EmptyArray<ContextMissmatchCheck>.Instance;
     }
 
+    protected virtual ICollection<ContextMissmatchCheck> CheckEx<T, Q>(T system, Context ctx)
+      where T : IIntegerCoordinateSystem<Q>
+      where Q : IIntegerCoordinate
+    {
+      return EmptyArray<ContextMissmatchCheck>.Instance;
+    }
+
     protected sealed override ICollection<ContextMissmatchCheck> Check<T, Q>(T system, Context ctx)
     {
       myDimension = system.Dimension;
       try
       {
-        return ColBase(base.Check<T, Q>(system, ctx), Check<T, Q>(ctx).ToArray());       
+        var list = new List<ContextMissmatchCheck>();
+        list.AddRange(Check<T, Q>(ctx));
+        list.AddRange(CheckEx<T,Q>(system, ctx));
+        return ColBase(base.Check<T, Q>(system, ctx), list.ToArray());       
       } finally
       {
         myDimension = null;

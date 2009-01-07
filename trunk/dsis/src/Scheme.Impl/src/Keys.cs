@@ -41,7 +41,7 @@ namespace DSIS.Scheme.Impl
     
     public static Key<IGraphMeasure<T>> GraphMeasure<T>() where T : ICellCoordinate
     {
-      return new Key<IGraphMeasure<T>>("measure");
+      return new Key<IGraphMeasure<T>>("measure", GraphEntropyKey);
     }
 
     public static readonly Key<IGraphEntropy> GraphEntropyKey = new Key<IGraphEntropy>("measure");

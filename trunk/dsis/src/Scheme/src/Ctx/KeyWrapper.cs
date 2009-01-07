@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Ctx
 {
@@ -38,6 +40,11 @@ namespace DSIS.Scheme.Ctx
     public abstract IKey Key { get; }
 
     public abstract Key<Y> Cast<Y>();
+
+    public IEnumerable<KeyWrapper> OfType<Y>()
+    {
+      return Key.OfType<Y>().Convert(x => FromKey(x));
+    }
 
     public abstract bool EqualsKey(IKey key);
 

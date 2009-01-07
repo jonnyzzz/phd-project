@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Windows.Forms;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.UI.Application.Progress;

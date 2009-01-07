@@ -33,7 +33,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
           value = ent;
       }
 
-      Keys.GraphEntropyKey.Set(output, new GraphEntropy(value ?? double.NaN));
+      Keys.GraphEntropyKey.Set(output, new GraphEntropy("Eigen entropy", value ?? double.NaN));
     }
   }
 }

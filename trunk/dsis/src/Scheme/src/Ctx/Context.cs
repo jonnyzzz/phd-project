@@ -33,15 +33,29 @@ namespace DSIS.Scheme.Ctx
 
     public bool ContainsKey<Y>(Key<Y> key)
     {
-      return myContext.ContainsKey(KeyWrapper.FromKey(key));
+      return !SearchKeys(key).Where(myContext.ContainsKey).Empty();
     }
 
     public Y Get<Y>(Key<Y> key)
     {
-      object val;
-      if (!myContext.TryGetValue(KeyWrapper.FromKey(key), out val))
-        throw new ContextException("Key " + key + " was not found in context");
-      return (Y) val;
+      foreach (var keyWrapper in SearchKeys(key))
+      {
+        object val;
+        if (myContext.TryGetValue(keyWrapper, out val))
+          return (Y)val;        
+      }
+      throw new ContextException("Key " + key + " was not found in context");
+    }
+
+    private IEnumerable<KeyWrapper> SearchKeys<Y>(Key<Y> key)
+    {
+      yield return KeyWrapper.FromKey(key);
+
+      foreach (var k in myContext.Keys)
+      {
+        if (!k.OfType<Y>().Empty())
+          yield return k;
+      }      
     }
 
     public void Set<Y>(Key<Y> key, Y value)
@@ -64,9 +78,9 @@ namespace DSIS.Scheme.Ctx
 
     public void AddAllBut(Context ctx, ICollection<IKey> toSkip)
     {
-      foreach (KeyValuePair<KeyWrapper, object> pair in ctx.myContext)
+      foreach (var pair in ctx.myContext)
       {
-        foreach (IKey key in toSkip)
+        foreach (var key in toSkip)
         {
           if (pair.Key.EqualsKey(key))
             continue;          
@@ -78,7 +92,7 @@ namespace DSIS.Scheme.Ctx
     
     public void AddAllNew(Context ctx)
     {
-      foreach (KeyValuePair<KeyWrapper, object> pair in ctx.myContext)
+      foreach (var pair in ctx.myContext)
       {
         if (!myContext.ContainsKey(pair.Key))
           myContext[pair.Key] = pair.Value;

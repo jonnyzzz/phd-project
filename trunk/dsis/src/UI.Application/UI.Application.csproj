@@ -112,6 +112,7 @@
     <Compile Include="src\Doc\Actions\ActionsContainer.cs">
     </Compile>
     <Compile Include="src\Doc\Actions\ComputeInvariantMeasureAction.cs" />
+    <Compile Include="src\Doc\Actions\ComputeInvariantMeasureProjectionAction.cs" />
     <Compile Include="src\Doc\Actions\ComputeNextSymbolicImageDocumentAction.cs" />
     <Compile Include="src\Doc\Actions\DocumentActionAttribute.cs" />
     <Compile Include="src\Doc\Actions\DocumentActionExLookup.cs" />

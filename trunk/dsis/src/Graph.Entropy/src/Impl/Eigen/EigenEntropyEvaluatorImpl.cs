@@ -37,7 +37,7 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
       if (myEntropy == null)
         myEntropy = DoCompute();
 
-      return new GraphEntropy(myEntropy.Value);
+      return new GraphEntropy("Eigen entropy", myEntropy.Value);
     }
 
     private double DoCompute()

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Scheme
 {
@@ -15,14 +17,21 @@ namespace DSIS.Scheme
     bool EqualsWithoutName(IKey key);
 
     IEqualityComparer Comparer { get; }
+    IEnumerable<Key<Q>> OfType<Q>();
   }
 
   public class Key<TValue> : IKey, IEquatable<Key<TValue>>
   {
     private readonly string myName;
+    private readonly IKey[] myKeys;
 
-    public Key(string name)
+    public Key(string name) : this(name, EmptyArray<IKey>.Instance)
     {
+    }
+
+    public Key(string name, params IKey[] keys)
+    {
+      myKeys = keys;
       myName = name;
     }
 
@@ -63,8 +72,7 @@ namespace DSIS.Scheme
     {
       get { return EqualityComparerFactory<TValue>.GetOldComparer(); }
     }
-
-
+    
     public override int GetHashCode()
     {
       return myName.GetHashCode();
@@ -88,6 +96,11 @@ namespace DSIS.Scheme
     public void Copy(IReadOnlyContext input, IWriteOnlyContext output)
     {
       Set(output, Get(input));
+    }  
+  
+    public IEnumerable<Key<Q>> OfType<Q>()
+    {
+      return myKeys.OfType<Key<Q>>();
     }
   }
 }

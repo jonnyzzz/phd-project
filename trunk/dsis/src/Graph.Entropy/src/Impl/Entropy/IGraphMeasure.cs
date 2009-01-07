@@ -7,13 +7,12 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 {
   public interface IGraphEntropy
   {
+    string Method { get; }
     double GetEntropy();    
   }
 
   public interface IGraphMeasure
   {
-    string Method { get; }
-
     void DoCallback(IGraphMeasureWith measure);
   }
 

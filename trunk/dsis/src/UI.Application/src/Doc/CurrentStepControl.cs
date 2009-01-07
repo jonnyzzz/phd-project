@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using DSIS.UI.Controls;
@@ -18,7 +19,7 @@ namespace DSIS.UI.Application.Doc
     {
       var html = new HtmlControl {Dock = DockStyle.Fill};
       var ctx = document.Content;
-      var custom = new List<ICurrentStepCustomParameter>(_custom.Filter(x=>x.IsAvailable(ctx)));
+      var custom = new List<ICurrentStepCustomParameter>(_custom.Where(x=>x.IsAvailable(ctx)));
       custom.Sort((o1, o2) => o1.Name.CompareTo(o2.Name));
 
       if (ctx.ContainsKey(Keys.IntegerCoordinateSystemInfo))
@@ -37,6 +38,7 @@ namespace DSIS.UI.Application.Doc
         html.SetContext(x=>x.CreateChildElement("p").CreateText("No coordinate system defined"));
       }
       Controls.Add(html);
+      Height = html.Height + 5;
     }
 
     public Layout[] Float

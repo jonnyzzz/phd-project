@@ -30,7 +30,6 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       var evaluator = new EigenEntropyEvaluatorImpl<Q>(myOptions.Eps, graph.AsGraph(graph.Components));
 
       IGraphMeasure<Q> entropy = new EigenEntropyMeasure<Q>(evaluator);
-      Keys.GraphEntropyKey.Set(output, entropy);
       Keys.GraphMeasure<Q>().Set(output, entropy);
     }
   }
