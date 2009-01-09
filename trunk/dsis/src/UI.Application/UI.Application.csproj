@@ -121,19 +121,18 @@
     <Compile Include="src\Doc\Actions\IDocumentActionEx.cs" />
     <Compile Include="src\Doc\Actions\IDocumentActionManager.cs" />
     <Compile Include="src\Doc\Actions\IDocumentActionPresentation.cs" />
+    <Compile Include="src\Doc\CurrentStep\CellSizeCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\ControlWithTitle.cs" />
     <Compile Include="src\Doc\CurrentDocumentControl.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="src\Doc\CurrentStepControl.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\Doc\DefaultDocumentCenterControls.cs" />
     <Compile Include="src\Doc\DefaultDocumentControls.cs" />
     <Compile Include="src\Doc\DocUIManager.cs" />
     <Compile Include="src\Doc\DocumentControl.cs" />
-    <Compile Include="src\Doc\EntropyCurrentStepCustomParameter.cs" />
-    <Compile Include="src\Doc\ICurrentStepCustomParameter.cs" />
+    <Compile Include="src\Doc\CurrentStep\EntropyCurrentStepCustomParameter.cs" />
+    <Compile Include="src\Doc\CurrentStep\ICurrentStepCustomParameter.cs" />
+    <Compile Include="src\Doc\CurrentStep\FunctionCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\IDocumentCenterControl.cs" />
     <Compile Include="src\Doc\IDocumentCenterControlFactory.cs" />
     <Compile Include="src\Doc\IDocumentComponent.cs" />
@@ -146,10 +145,14 @@
     <Compile Include="src\Doc\ImageDrawWithIoCHelper.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="src\Doc\CurrentStep\NumberOfCellsCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\ShowCurrentMeasureImage.cs">
     </Compile>
     <Compile Include="src\Doc\ShowCurrentSimbolicImage.cs">
     </Compile>
+    <Compile Include="src\Doc\CurrentStep\StepOrders.cs" />
+    <Compile Include="src\Doc\CurrentStep\SubdivisionCurrentStepCustomParameter.cs" />
+    <Compile Include="src\Doc\CurrentStep\SpaceCurrentStepCustomParameter.cs" />
     <Compile Include="src\IDocumentManager.cs" />
     <Compile Include="src\IMainForm.cs" />
     <Compile Include="src\Invocator.cs" />

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Xml;
 using DSIS.Utils;
@@ -35,6 +36,13 @@ namespace DSIS.UI.Controls.Web
     }
 
     public XmlNode Pair(XmlNode node, string key, string value)
+    {
+      return node.CreateChildElement("dt").CreateText(key).ParentNode.
+                  CreateChildElement("dd").CreateText(value).ParentNode;
+
+    }
+
+    public XmlNode Pair(XmlNode node, string key, IEnumerable<string> value)
     {
       return node.CreateChildElement("dt").CreateText(key).ParentNode.
                   CreateChildElement("dd").CreateText(value).ParentNode;
