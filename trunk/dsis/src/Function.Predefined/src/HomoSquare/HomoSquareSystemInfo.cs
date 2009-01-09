@@ -2,7 +2,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.HomoSquare
 {
-  public class HomoSquareSystemInfo : DoubleSystemInfoBase
+  public class HomoSquareSystemInfo : DoubleContiniousSystemInfoBase
   {
      private readonly double myA;
 

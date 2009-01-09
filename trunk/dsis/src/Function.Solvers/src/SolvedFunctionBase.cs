@@ -65,6 +65,11 @@ namespace DSIS.Function.Solvers
       throw new NotImplementedException();
     }
 
+    public SystemType Type
+    {
+      get { return SystemType.Discrete; }
+    }
+
     public Type[] SupportedFunctionTypes
     {
       get { return new[] {typeof (double)}; }

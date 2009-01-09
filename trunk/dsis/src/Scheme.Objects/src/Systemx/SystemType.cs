@@ -1,6 +1,6 @@
 namespace DSIS.Scheme.Objects.Systemx
 {
-  public enum SystemType
+  public enum _SystemType
   {
     Continious,
     Discrete

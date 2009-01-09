@@ -68,19 +68,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ContiniousFunctionSolverWrapper.cs" />
+    <Compile Include="src\ContiniousSystemComponentAttribute.cs" />
+    <Compile Include="src\ContiniousSystemParametersWizard.cs" />
+    <Compile Include="src\ContiniousSystemParametersWizardFactory.cs" />
     <Compile Include="src\FixedDimensionSpaceModel.cs" />
     <Compile Include="src\ISystemFunctionSelectionWizardInt.cs" />
+    <Compile Include="src\ISystemInfoFactoryProvider.cs" />
     <Compile Include="src\IWizardPageWithStateFactory.cs" />
     <Compile Include="src\NamespaceHolder.cs" />
+    <Compile Include="src\PredefinedSystemInfoFactory.cs" />
     <Compile Include="src\SelectPredefinedContiniousMethodWizardPage.cs" />
     <Compile Include="src\SelectPredefinedSystemWizardPage.cs">
     </Compile>
     <Compile Include="src\SelectSystemConfirmPage.cs" />
+    <Compile Include="src\SelectSystemInfoProviderWizard.cs" />
+    <Compile Include="src\SelectSystemInfoWizard.cs" />
     <Compile Include="src\SelectSystemWizardPage.cs">
     </Compile>
     <Compile Include="src\SpaceControlWizardPage.cs" />
     <Compile Include="src\SpaceModel.cs" />
     <Compile Include="src\SpaceParametersRowModel.cs" />
+    <Compile Include="src\SystemFunctionComponent.cs" />
     <Compile Include="src\SystemFunctionSelectionWizard.cs" />
     <Compile Include="src\UI\SpaceControl.cs">
       <SubType>UserControl</SubType>
@@ -94,6 +103,7 @@
     <Compile Include="src\UI\SpaceParametersRow.Designer.cs">
       <DependentUpon>SpaceParametersRow.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\UserDefinedSystemInfoFactory.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +117,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
@@ -142,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\Document\" />
+    <Folder Include="src\Wizards\" />
   </ItemGroup>
   <Import Project="../Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

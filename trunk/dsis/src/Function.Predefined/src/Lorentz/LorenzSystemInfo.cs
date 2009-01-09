@@ -3,7 +3,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Lorentz
 {
-  public class LorenzSystemInfo : DoubleSystemInfoBase
+  public class LorenzSystemInfo : DoubleContiniousSystemInfoBase
   {
     private readonly double mySigma;
     private readonly double myRho;

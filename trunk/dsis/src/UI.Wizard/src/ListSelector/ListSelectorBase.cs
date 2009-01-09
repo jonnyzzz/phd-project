@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using DSIS.UI.Controls;
 using DSIS.UI.UI;
-using DSIS.Utils;
 using log4net;
+using System.Linq;
 
 namespace DSIS.UI.Wizard.ListSelector
 {
@@ -20,7 +20,7 @@ namespace DSIS.UI.Wizard.ListSelector
     protected ListSelectorBase(IEnumerable<T> factories, IDockLayout layout)
     {
       RegisterRadio(factories, layout);
-      myFactories.Keys.GetFirst().Checked = true;
+      myFactories.Keys.First().Checked = true;
     }
 
     protected virtual void FireSelectionChanged()
@@ -57,9 +57,10 @@ namespace DSIS.UI.Wizard.ListSelector
           var lab = new Label
                       {
                         Text = descr,
-                        Padding = new Padding(15, 0, 0, 0),
+                        Padding = new Padding(30, 0, 0, 0),
                         Dock = DockStyle.Top,
-                        Enabled = IsFactoryEnabled(factory)
+                        Enabled = IsFactoryEnabled(factory),
+                        AutoSize = true
                       };
           controls.Add(lab);
         }

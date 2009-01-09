@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using DSIS.Core.Ioc;
 using DSIS.UI.Wizard.ListSelector;
@@ -44,18 +45,18 @@ namespace DSIS.UI.Wizard.FieldInfos
 
       return new EnumFieldInfo<object>(
         info, instance, myFactory,
-        f => fields.Filter(x => x.IsDefined<IncludeValueAttribute>()).Map(
+        f => fields.Where(x => x.IsDefined<IncludeValueAttribute>()).Map(
                x =>
                  {
                    var gen = x.OneInstance<IncludeValueAttribute>();
                    var obj = x.GetValue(null);
-                   return ListInfo.Enabled(gen.Title, gen.Description, f(obj));
+                   return ListInfo.Create(gen.Title, gen.Description, true, f(obj));
                  }).Join(
-                 props.Filter(x=>x.IsDefined<IncludeValueAttribute>()).Map(
+                 props.Where(x=>x.IsDefined<IncludeValueAttribute>()).Map(
                    x=>{
                    var gen = x.OneInstance<IncludeValueAttribute>();
                    var obj = x.GetValue(null, null);
-                   return ListInfo.Enabled(gen.Title, gen.Description, f(obj));
+                   return ListInfo.Create(gen.Title, gen.Description, true, f(obj));
                    })));
     }
   }

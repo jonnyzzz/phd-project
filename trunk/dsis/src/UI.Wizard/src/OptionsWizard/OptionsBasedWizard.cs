@@ -8,32 +8,51 @@ using DSIS.Utils;
 
 namespace DSIS.UI.Wizard.OptionsWizard
 {
-  public class OptionsBasedWizard<T,R> : IWizardPack<R>, IWizardPack
+  /// <summary>
+  /// Inherit from that class in order to create your own OptionsBased wizard.
+  /// This class can only be instantiated from JContainer
+  /// </summary>
+  /// <typeparam name="T"></typeparam>
+  /// <typeparam name="R"></typeparam>
+  /// <typeparam name="F"></typeparam>
+  public abstract class OptionsBasedWizard<T,R,F> : IWizardPack<R>, IWizardPack
+    where F : class, IOptionsBasedFactory<T,R>
   {
-    private readonly string myTitle;
-    private readonly List<IOptionsBasedFactory<T, R>> myFactory;
-    private readonly ListSelectorWizardPage<IOptionsBasedFactory<T, R>> myFactorySelector;
-    private readonly Dictionary<IOptionsBasedFactory<T, R>, Pair<IWizardPage, T>> myOptionsCache 
-      = new Dictionary<IOptionsBasedFactory<T, R>, Pair<IWizardPage, T>>();
+    private readonly string myTitle;   
+    private readonly List<F> myFactories;
+    private readonly IListSelectorWizardPage<F> myFactorySelector;
+    private readonly Dictionary<F, Pair<IWizardPage, T>> myOptionsCache = new Dictionary<F, Pair<IWizardPage, T>>();
     private T myOptions;
     private bool myIsFinished;
     private bool myIsCanceled;
 
-    public OptionsBasedWizard(string title, IListSelectorFactory listFactory, IEnumerable<IOptionsBasedFactory<T, R>> factories, Func<IOptionsBasedFactory<T, R>, bool> enabled)
+    protected OptionsBasedWizard(string title, IListSelectorWizardPageFactory listFactory, IEnumerable<F> factories, Func<F, bool> enabled)
     {
       myTitle = title;
-      myFactory = new List<IOptionsBasedFactory<T, R>>(factories);
-      myFactory.Sort((x,y)=>x.FactoryTitle.CompareTo(y.FactoryTitle));
+      myFactories = new List<F>(factories);
+      myFactories.Sort(Comparer);
 
-      myFactorySelector = new ListSelectorWizardPage<IOptionsBasedFactory<T, R>>(
-        listFactory, 
-        factories,
-        x => x.FactoryTitle, 
-        enabled);
+      myFactorySelector = listFactory.Create(myFactories, x=>GetFactoryName(x), enabled);
+    }
+
+    /// <summary>
+    /// NOTE: Is called from constructor
+    /// </summary>
+    protected virtual ItemDescr GetFactoryName(F factory)
+    {
+      return new ItemDescr(factory.FactoryName);
+    }
+
+    /// <summary>
+    /// NOTE: Is called from Constructor!
+    /// </summary>
+    protected virtual Comparison<F> Comparer
+    {
+      get { return (x, y) => GetFactoryName(x).Title.CompareTo(GetFactoryName(y).Title); }
     }
 
     [Autowire]
-    private IFormGeneratorWizardPageFactory FormGeneratorFactory { get; set; }
+    private IFormGeneratorWizardPageFactory myFormGeneratorFactory { get; set; }
 
     public IWizardPack Controller
     {
@@ -48,7 +67,7 @@ namespace DSIS.UI.Wizard.OptionsWizard
       if (myIsCanceled)
         throw new Exception("Failed to get result for canceled wizard");
 
-      return myFactorySelector.SelectedItem.CreateFactory(myOptions);
+      return myFactorySelector.SelectedItem.Create(myOptions);
     }
 
     public string Title 
@@ -63,12 +82,12 @@ namespace DSIS.UI.Wizard.OptionsWizard
 
     public bool IsLastPage(IWizardPage page)
     {
-      return page != myFactory;
+      return page != FirstPage;
     }
 
     public IWizardPage Next(IWizardPage page)
     {
-      if (page != myFactorySelector)
+      if (page != FirstPage)
         return null;
       
       var optz = CreateOptions();
@@ -85,7 +104,12 @@ namespace DSIS.UI.Wizard.OptionsWizard
         return iu;
 
       var obj = factory.CreateOptions();
-      return new Pair<IWizardPage, T>(FormGeneratorFactory.CreatePage(factory.OptionsTitle, obj), obj);
+      return new Pair<IWizardPage, T>(myFormGeneratorFactory.CreatePage(GetOptionsTitle(factory), obj), obj);
+    }
+
+    protected virtual string GetOptionsTitle(F opts)
+    {
+      return opts.FactoryName + " options";
     }
 
     public void OnFinish()

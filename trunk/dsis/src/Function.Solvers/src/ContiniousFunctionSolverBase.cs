@@ -18,6 +18,11 @@ namespace DSIS.Function.Solvers
       get { return myTitle; }
     }
 
+    public IContiniousSolverParameters CreateOptions()
+    {
+      return (IContiniousSolverParameters) Activator.CreateInstance(OptionsObjectType, new object[0]);
+    }
+
     public abstract ISystemInfo Create(ISystemInfo system, IContiniousSolverParameters parameters);
 
     public abstract Type OptionsObjectType { get; }

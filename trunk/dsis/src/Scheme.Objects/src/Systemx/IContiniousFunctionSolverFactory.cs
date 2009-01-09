@@ -1,12 +1,12 @@
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 
 namespace DSIS.Scheme.Objects.Systemx
 {
-  [ComponentCollection]
   public interface IContiniousFunctionSolverFactory : IOptionsHolder
   {
     string MethodName { get; }
+
+    IContiniousSolverParameters CreateOptions();
 
     /// <summary>
     /// Creates instance of ISystemInfo using parameters specified 

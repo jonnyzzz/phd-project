@@ -2,7 +2,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Logistics
 {
-  public class Logistic2dSystemInfo : DoubleSystemInfoBase
+  public class Logistic2dSystemInfo : DoubleDescreteSystemInfoBase
   {
     public Logistic2dSystemInfo()
       : base(2)

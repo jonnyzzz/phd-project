@@ -36,17 +36,19 @@ namespace DSIS.Function.Predefined
     public IFunction<T> GetFunction<T>(T precision)
     {
       var ts = new T[myDimension];
-      for(int i=0; i< myDimension; i++)
+      for (int i = 0; i < myDimension; i++)
       {
         ts[i] = precision;
       }
       return GetFunction<T>(ts);
     }
 
+    public abstract SystemType Type { get; }
+
     public Type[] SupportedFunctionTypes
     {
       get { return new[] {typeof (double)}; }
-    }    
+    }
 
     public abstract string PresentableName { get; }
 

@@ -1,3 +1,10 @@
+  -  ask for create system name
+  -  save created system without data
+  -  save create image
+  -  open standalone gnuplot
+  -  list selector with groupby sections
+  -  component container: Create one object with extra parameters.
+
 Progress bar:
   -  Cancelable progressbar
   -  Memory usage bound

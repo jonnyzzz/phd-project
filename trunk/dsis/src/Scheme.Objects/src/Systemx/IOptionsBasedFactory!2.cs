@@ -1,12 +1,18 @@
 namespace DSIS.Scheme.Objects.Systemx
 {
-  public interface IOptionsBasedFactory<T,R>
+  public interface IOptionsBasedFactory<TOpts,R>
   {
-    string FactoryTitle { get; }
-    string OptionsTitle { get; }
+    string FactoryName { get; }
 
-    T CreateOptions();
+    TOpts CreateOptions();
 
-    R CreateFactory(T options);
+    /// <summary>
+    /// Creates instance of <typeparamref name="R"/> using parameters specified 
+    /// in object of type <typeparamref name="TOpts"/>
+    /// </summary>
+    /// <param name="options">parameters to the system.     
+    /// <returns>new instance of <typeparamref name="R"/> according to parameters</returns>
+
+    R Create(TOpts options);
   }
 }

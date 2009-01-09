@@ -1,28 +1,43 @@
 namespace DSIS.UI.Wizard.ListSelector
 {
+  public class ItemDescr
+  {
+    public readonly string Title;
+    public readonly string Description;
+
+    public ItemDescr(string title, string description)
+    {
+      Title = title;
+      Description = description;
+    }
+
+    public ItemDescr(string title)
+      : this(title, "")
+    {
+    }
+  }
+
   public static class ListInfo
   {
     public static ListInfo<Q> Create<Q>(string title, string description, bool enabled, Q value)
     {
-      return new ListInfo<Q>(description, title, value, enabled);
+      return new ListInfo<Q>(new ItemDescr(title, description), value, enabled);
     }
 
-    public static ListInfo<Q> Enabled<Q>(string title, string description, Q value)
+    public static ListInfo<Q> Create<Q>(ItemDescr title, bool enabled, Q value)
     {
-      return new ListInfo<Q>(description, title, value, true);
+      return new ListInfo<Q>(title, value, enabled);
     }
   }
 
   public class ListInfo<Q> : IListInfo<Q>
   {
     private readonly bool myEnabled;
-    private readonly string myDescription;
-    private readonly string myTitle;
+    private readonly ItemDescr myTitle;
     private readonly Q myValue;
 
-    public ListInfo(string description, string title, Q value, bool enabled)
+    public ListInfo(ItemDescr title, Q value, bool enabled)
     {
-      myDescription = description;
       myEnabled = enabled;
       myTitle = title;
       myValue = value;
@@ -35,12 +50,12 @@ namespace DSIS.UI.Wizard.ListSelector
 
     public string Description
     {
-      get { return myDescription; }
+      get { return myTitle.Description; }
     }
 
     public string Title
     {
-      get { return myTitle; }
+      get { return myTitle.Title; }
     }
 
     public Q Value

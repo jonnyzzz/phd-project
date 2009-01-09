@@ -47,6 +47,11 @@ namespace DSIS.Function.Mock
       throw new NotImplementedException();
     }
 
+    public SystemType Type
+    {
+      get { return SystemType.Discrete; }
+    }
+
     public Type[] SupportedFunctionTypes
     {
       get { return new Type[] {typeof (TType)}; }

@@ -3,7 +3,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Rossel
 {
-  public class RosslerSystemInfo : DoubleSystemInfoBase
+  public class RosslerSystemInfo : DoubleContiniousSystemInfoBase
   {
     private readonly double myC;
     private readonly double myB;

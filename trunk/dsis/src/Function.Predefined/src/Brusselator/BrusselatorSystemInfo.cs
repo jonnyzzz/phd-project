@@ -2,7 +2,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Brusselator
 {
-  public class BrusselatorSystemInfo : DoubleSystemInfoBase
+  public class BrusselatorSystemInfo : DoubleContiniousSystemInfoBase
   {
     private readonly BrusselatorOptions myOptions;
 

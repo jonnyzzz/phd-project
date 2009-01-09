@@ -3,7 +3,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Henon
 {
-  public class HenonDellnitzFunctionSystemInfoDecorator : DoubleSystemInfoBase
+  public class HenonDellnitzFunctionSystemInfoDecorator : DoubleDescreteSystemInfoBase
   {
     private readonly double myA;
     private readonly double myB;

@@ -35,6 +35,11 @@ namespace DSIS.Core.System
       return mySystemInfo.GetDerivateFunction(precision, unsimmetricDerivate);
     }
 
+    public SystemType Type
+    {
+      get { return mySystemInfo.Type; }
+    }
+
     public Type[] SupportedFunctionTypes
     {
       get { return mySystemInfo.SupportedFunctionTypes; }

@@ -49,6 +49,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -67,6 +71,8 @@
     <Compile Include="src\Delayed\DelayedFunction.cs" />
     <Compile Include="src\Delayed\DelayedFunctionSystemInfo.cs" />
     <Compile Include="src\Delayed\DelayedOptions.cs" />
+    <Compile Include="src\DoubleContiniousSystemInfoBase.cs" />
+    <Compile Include="src\DoubleDescreteSystemInfoBase.cs" />
     <Compile Include="src\DoubleParametersSystemInfoFactoryBase!1.cs" />
     <Compile Include="src\DoubleSystemInfoBase.cs" />
     <Compile Include="src\Duffing\DuffingFactory.cs" />
@@ -85,11 +91,16 @@
     <Compile Include="src\Henon\HenonFactory.cs" />
     <Compile Include="src\Henon\HenonFunctionSystemInfoDecorator.cs" />
     <Compile Include="src\Henon\HenonOptions.cs" />
+    <Compile Include="src\HomoLinear\HomoLinearOptions.cs" />
     <Compile Include="src\HomoLinear\HomoLinearSystemInfo.cs" />
+    <Compile Include="src\HomoLinear\HomoLinearSystemInfoFactory.cs" />
+    <Compile Include="src\HomoSquare\HomoSquareFactory.cs" />
+    <Compile Include="src\HomoSquare\HomoSquareOptions.cs" />
     <Compile Include="src\HomoSquare\HomoSquareSystemInfo.cs" />
     <Compile Include="src\Ikeda\HenonPredefined.cs" />
     <Compile Include="src\Ikeda\IkedaFactory.cs" />
     <Compile Include="src\Ikeda\IkedaFunction.cs" />
+    <Compile Include="src\Ikeda\IkedaFunctionSystemInfoDecorator.cs" />
     <Compile Include="src\Ikeda\IkedaPredefined.cs" />
     <Compile Include="src\Ikeda\PredefinedSystemFactory.cs" />
     <Compile Include="src\Julia\JuliaFactory.cs" />

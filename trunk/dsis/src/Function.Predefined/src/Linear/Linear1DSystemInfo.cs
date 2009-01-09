@@ -2,7 +2,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Linear
 {
-  public class Linear1DSystemInfo : DoubleSystemInfoBase
+  public class Linear1DSystemInfo : DoubleDescreteSystemInfoBase
   {
     private readonly double myA;
     private readonly double myB;

@@ -3,7 +3,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Logistics
 {
-  public class LogisticSystemInfo : DoubleSystemInfoBase
+  public class LogisticSystemInfo : DoubleDescreteSystemInfoBase
   {
     private readonly double myA;
 

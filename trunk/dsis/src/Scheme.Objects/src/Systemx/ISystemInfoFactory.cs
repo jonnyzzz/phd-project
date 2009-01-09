@@ -1,4 +1,3 @@
-using System.Xml;
 using DSIS.Core.System;
 namespace DSIS.Scheme.Objects.Systemx
 {
@@ -12,23 +11,10 @@ namespace DSIS.Scheme.Objects.Systemx
     ISystemInfo Function { get; }
   }
 
-  public interface ISystemInfoFactory : IOptionsHolder
+  public interface ISystemInfoFactory : IOptionsHolder, IOptionsBasedFactory<ISystemInfoParameters, ISystemInfo>
   {
-    string FactoryName { get; }
-
     int Dimension { get; }
 
     SystemType Type { get; }
-
-    ISystemInfo Parse(XmlElement element);
-
-    /// <summary>
-    /// Creates instance of ISystemInfo using parameters specified 
-    /// in object of type <see cref="IOptionsHolder.OptionsObjectType"/>
-    /// </summary>
-    /// <param name="parameters">parameters to the system. 
-    /// Must be an instance of <see cref="IOptionsHolder.OptionsObjectType"/></param>
-    /// <returns>new system info</returns>
-    ISystemInfo Create(ISystemInfoParameters parameters);
   }
 }

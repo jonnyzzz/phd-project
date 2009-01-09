@@ -5,7 +5,7 @@ using DSIS.Utils;
 namespace DSIS.UI.Wizard.ListSelector
 {
   public class ListSelectorWizardPage<Q> : 
-    WizardPageBase<ListSelector<ListInfo<Q>, Q>>
+    WizardPageBase<ListSelector<ListInfo<Q>, Q>>, IListSelectorWizardPage<Q>
     where Q : class
   {
 
@@ -14,13 +14,16 @@ namespace DSIS.UI.Wizard.ListSelector
     {
     }
 
-    public ListSelectorWizardPage(IListSelectorFactory factory, IEnumerable<Q> factories, Func<Q, string> names, Func<Q, bool> enabled)
+    public ListSelectorWizardPage(IListSelectorFactory factory, IEnumerable<Q> factories, Func<Q, string> names, Func<Q, bool> enabled) : this(factory, factories, x=>new ItemDescr(names(x)), enabled)
+    {
+    }
+
+    public ListSelectorWizardPage(IListSelectorFactory factory, IEnumerable<Q> factories, Func<Q, ItemDescr> names, Func<Q, bool> enabled)
     {
       ControlInternal = factory.Create<ListInfo<Q>, Q>(
         factories.Map(
           x => ListInfo.Create(
                  names(x),
-                 "",
                  enabled(x),
                  x)));
       Title = "Select Cell Image building method";

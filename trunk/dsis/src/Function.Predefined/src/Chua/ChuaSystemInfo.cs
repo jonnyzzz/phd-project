@@ -2,7 +2,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Chua
 {
-  public class ChuaSystemInfo : DoubleSystemInfoBase
+  public class ChuaSystemInfo : DoubleContiniousSystemInfoBase
   {
     private readonly ChuaOptions myOptions;
 

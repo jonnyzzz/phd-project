@@ -3,7 +3,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Duffing
 {
-  public class DuffingSystemInfo : DoubleSystemInfoBase
+  public class DuffingSystemInfo : DoubleContiniousSystemInfoBase
   {
     private readonly double myAlpha;
     private readonly double myBeta;

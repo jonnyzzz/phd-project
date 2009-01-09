@@ -8,8 +8,17 @@ using DSIS.Core.System.Tree;
 
 namespace DSIS.Core.System
 {
+  public enum SystemType
+  {
+    Continious,
+    Discrete
+  }
+
+
   public interface ISystemInfoBase
   {
+    SystemType Type { get; }
+
     Type[] SupportedFunctionTypes { get; }    
     
     string PresentableName { get; }

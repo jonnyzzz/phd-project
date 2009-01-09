@@ -3,7 +3,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.VanDerPol
 {
-  public class VanDerPolSystemInfo : DoubleSystemInfoBase
+  public class VanDerPolSystemInfo : DoubleContiniousSystemInfoBase
   {
     private readonly double myA;
 

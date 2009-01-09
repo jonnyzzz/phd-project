@@ -1,5 +1,4 @@
 using System;
-using System.Xml;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 
@@ -33,14 +32,14 @@ namespace DSIS.Function.Predefined
       get { return myType; }
     }
 
-    public virtual Type OptionsObjectType
-    {
-       get { return null; }
-    }
+    public abstract Type OptionsObjectType { get;}
 
-    public ISystemInfo Parse(XmlElement element)
+    public ISystemInfoParameters CreateOptions()
     {
-      throw new NotImplementedException();
+      var name = OptionsObjectType;
+      if (name == null)
+        return null;
+      return (ISystemInfoParameters) Activator.CreateInstance(name, new object[0]);
     }
 
     public abstract ISystemInfo Create(ISystemInfoParameters parameters);

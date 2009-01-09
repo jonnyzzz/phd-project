@@ -3,7 +3,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.FoodChain
 {
-  public class FoodChainSystemInfo : DoubleSystemInfoBase
+  public class FoodChainSystemInfo : DoubleDescreteSystemInfoBase
   {
     private readonly double myMu0;
     private readonly double myMu1;

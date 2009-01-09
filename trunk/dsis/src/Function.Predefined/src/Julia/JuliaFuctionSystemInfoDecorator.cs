@@ -2,7 +2,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Julia
 {
-  public class JuliaFuctionSystemInfoDecorator : DoubleSystemInfoBase
+  public class JuliaFuctionSystemInfoDecorator : DoubleDescreteSystemInfoBase
   {
     public JuliaFuctionSystemInfoDecorator()
       : base(2)

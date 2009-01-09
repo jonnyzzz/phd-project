@@ -2,7 +2,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.HomoLinear
 {
-  public class HomoLinearSystemInfo : DoubleSystemInfoBase
+  public class HomoLinearSystemInfo : DoubleContiniousSystemInfoBase
   {
     private readonly double myA;
 
