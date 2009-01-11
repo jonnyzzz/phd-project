@@ -64,13 +64,6 @@ namespace DSIS.Core.Ioc.JC
       return myContainer.GetComponent<T>();
     }
 
-    public T GetComponent<T>(Type t)
-    {
-      if (!typeof(T).IsAssignableFrom(t))
-        throw new ArgumentException("Type " + t + " should cast to " + typeof (T));
-      return (T) myContainer.GetComponent(t);
-    }
-
     public IEnumerable<T> GetComponents<T>()
     {
       return myContainer.GetComponents<T>();
