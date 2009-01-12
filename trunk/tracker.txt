@@ -4,6 +4,7 @@
   -  open standalone gnuplot
   -  list selector with groupby sections
   -  component container: Create one object with extra parameters.
+  -  projected SI no measure image
 
 Progress bar:
   -  Cancelable progressbar

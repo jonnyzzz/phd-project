@@ -34,6 +34,11 @@ namespace DSIS.UI.Application.Actions.Impl
     [Autowire]
     private SelectDocumentTitleWizardFactory TitleFactory { get; set; }
 
+    public CreateNewSystemActionHandler()
+      : base("System.Create", "File.Create")
+    {
+    }
+
     public override bool Do(Context ctx)
     {
       LOG.InfoFormat("Show create system dialod");
