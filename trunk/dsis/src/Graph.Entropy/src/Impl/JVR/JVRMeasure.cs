@@ -69,7 +69,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public void Iterate(double precision)
     {
-      double normEps = precision*1e-4;
+      double normEps = precision;
       const double maxValue = 3;
 
       bool notIncludeSelfLoop = myOptions.IncludeSelfEdge;
@@ -90,13 +90,16 @@ namespace DSIS.Graph.Entropy.Impl.JVR
           outgoing -= weight;
         }
 
-        needNorm |= (incoming >= maxValue || outgoing >= maxValue || incoming <= normEps || outgoing <= normEps);
+        needNorm |= (incoming >= maxValue || outgoing >= maxValue);
 
         if (Math.Abs(incoming - outgoing) <= precision)
           break;
 
-        double a = Math.Sqrt(outgoing)/Math.Sqrt(incoming);
-        double b = Math.Sqrt(incoming)/Math.Sqrt(outgoing);
+        var sout = Math.Sqrt(outgoing);
+        var sin = Math.Sqrt(incoming);
+        
+        double a = sout/sin;
+        double b = sin/sout;
 
         if (IsInvalid(a) || IsInvalid(b))
         {
@@ -106,7 +109,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
         needNorm |= (incoming*a <= normEps || outgoing*b <= normEps);
 
-        using (ItemUpdateCookie<T> cookie = myHashHolder.UpdateCookie(myStraitEdges, myBackEdges))
+        using (var cookie = myHashHolder.UpdateCookie(myStraitEdges, myBackEdges))
         {
           myBackEdges.MultiplyWeight(cookie, node, a);
           myStraitEdges.MultiplyWeight(cookie, node, b);

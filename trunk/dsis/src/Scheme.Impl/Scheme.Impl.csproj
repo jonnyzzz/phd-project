@@ -161,6 +161,8 @@
     <Compile Include="src\Actions\Line\LineInitialAction.cs" />
     <Compile Include="src\Actions\Performance\DumpSlotTimesAction.cs" />
     <Compile Include="src\Actions\Performance\PerformanceSlot.cs" />
+    <Compile Include="src\Actions\Performance\RecordTimeAction.cs" />
+    <Compile Include="src\Actions\Performance\RecordTimeActionBase.cs" />
     <Compile Include="src\Actions\Performance\RecordTimeSlotAction.cs" />
     <Compile Include="src\Actions\SetMethod.cs" />
     <Compile Include="src\Actions\SetMethod2.cs" />

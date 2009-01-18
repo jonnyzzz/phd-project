@@ -1,42 +1,26 @@
 using System;
-using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
-using JetBrains.dotTrace.Api;
 
 namespace DSIS.Scheme.Impl.Actions.Performance
 {
-  public class RecordTimeSlotAction : IAction
+  public class RecordTimeSlotAction : RecordTimeActionBase
   {
-    private readonly IAction myAction;
     private readonly string mySlot;
 
-    public RecordTimeSlotAction(IAction action, string slot)
+    public RecordTimeSlotAction(IAction action, string slot) : base(action)
     {
-      myAction = action;
       mySlot = slot;
     }
 
-    public Context Apply(Context ctx)
+    protected override void ActionFinished(Context ctx, Context output, TimeSpan span)
     {
       PerformanceSlot ps = PerformanceSlot.Get(mySlot, SlotStore.Get(ctx));
-      DateTime start = DateTime.Now;
-      
-      CPUProfiler.Start();
-      var res = myAction.Apply(ctx);
-      CPUProfiler.Stop();
-
-      ps.AddTimeSlot(DateTime.Now - start);
-      return res;
+      ps.AddTimeSlot(span);
     }
 
-    public IAction Clone()
+    protected override IAction CloneInternal(IAction action)
     {
-      return new RecordTimeSlotAction(myAction.Clone(), mySlot);
-    }
-
-    public ICollection<ContextMissmatch> Compatible(Context ctx)
-    {
-      return myAction.Compatible(ctx);        
+      return new RecordTimeSlotAction(action, mySlot);
     }
   }
 }

@@ -86,6 +86,7 @@
     <Compile Include="src\InfiniteEnumerable.cs" />
     <Compile Include="src\ISafe.cs" />
     <Compile Include="src\LinkedList.cs" />
+    <Compile Include="src\MemoryMonitorThread.cs" />
     <Compile Include="src\MultiDictionary.cs" />
     <Compile Include="src\MultiHashDictionary.cs" />
     <Compile Include="src\Ref.cs" />

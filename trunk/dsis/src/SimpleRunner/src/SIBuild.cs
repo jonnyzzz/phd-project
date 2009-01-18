@@ -13,9 +13,9 @@ using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
-  public static class SIBuild
+  public class SIBuild
   {
-    public static void Action()
+    public void Action()
     {
       BuildContiniousSystems();
     }
@@ -35,27 +35,29 @@ namespace DSIS.SimpleRunner
       return d;
     }
 
-    private static void BuildContiniousSystems()
+    private void BuildContiniousSystems()
     {
       for (int rep = 3; rep < 13; rep++)
       {
         var data = ForBuildser(new List<ComputationData>
                      {
                        new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Delayed(2.21), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing2x2Runge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing1_5x1_5Runge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing1_4x1_4Runge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing1_3x1_3Runge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing1_2x1_2Runge(), repeat = rep},
-                       /*new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.VanDerPolRunge(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.LorentzRunge(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.RosslerRunge(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.BrusselatorRunge(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},*/
+//                       new ComputationData {system = SystemInfoFactory.LorentzRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.RosslerRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.BrusselatorRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},
                      }, 
                      new []{                         
-                       Builder.Point, 
+//                       Builder.Point, 
                        Builder.Box
                      });
         foreach (var _computationData in new List<ComputationData>(data))
@@ -103,53 +105,6 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    private class MemoryMonitorThread : IDisposable
-    {
-      private readonly long myLimit;
-      private Thread myThread;
-
-      public event VoidDelegate MemoryLimit;
-
-      public MemoryMonitorThread(long limit)
-      {
-        myLimit = limit;
-      }
-
-      public void Run()
-      {
-        myThread = new Thread(delegate()
-                                     {
-                                       try
-                                       {
-                                         while (true)
-                                         {
-                                           Thread.Sleep(500);
-                                           if (GC.GetTotalMemory(false) > myLimit)
-                                           {
-                                             MemoryLimit();
-                                             return;
-                                           }
-                                         }
-                                       } catch
-                                       {
-                                         ;//NOP
-                                       }
-                                     });
-        myThread.Name = "Memory Detecter";
-        myThread.IsBackground = true;
-        myThread.Start();
-      }
-
-      public void Dispose()
-      {
-        if (myThread != null && myThread.IsAlive)
-        {
-          myThread.Interrupt();
-          myThread.Abort();
-          myThread.Join();
-        }
-      }
-    }
 
     private enum Builder
     {
@@ -206,7 +161,7 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    private static void BuildGraph(IActionGraphBuilder2 bld, ComputationData sys)
+    private void BuildGraph(IActionGraphBuilder2 bld, ComputationData sys)
     {
       var graphs = new XsdGraphXmlLoader().Load(typeof (SIBuild).Assembly, "DSIS.SimpleRunner.resources.si.xml");
       var builder = new XsdGraphBuilder().BuildActions(graphs);
@@ -225,8 +180,9 @@ namespace DSIS.SimpleRunner
         bld.Start,
         sys.repeat,
         builder["build"],
-        new[] {sys.system, image, init},
-        new[] {sys.system, image});
+        new[] {image, init},
+        new[] {image},
+        sys.system);
 
       rootAction
         .With(x => x.Edge(dump).
@@ -238,23 +194,32 @@ namespace DSIS.SimpleRunner
       ;
     }
 
-    private static IActionEdgesBuilder RepeatSI(IActionEdgesBuilder holder, int count, IAction buildSI,
-                                                IEnumerable<IAction> firstContext, IEnumerable<IAction> innerContext)
+    private IActionEdgesBuilder RepeatSI(IActionEdgesBuilder holder, int count, IAction buildSI,
+                                         IEnumerable<IAction> firstContext, IEnumerable<IAction> innerContext, 
+                                         IAction system)
     {
       if (count < 2)
         throw new ArgumentException("Count should be >= 2", "count");
 
-      var next = holder.Edge(buildSI.Clone()).With(x => firstContext.Each(y => x.Back(y)));
+      var next = holder.Edge(buildSI.Clone()).With(x => firstContext.Join(system).Each(y => x.Back(y)));
       for (int i = 1; i < count; i++)
       {
         var tmp = next;
-        next = next
+        next = CreateActionsAfterSI(
+          next
           .Edge(buildSI.Clone())
-          .With(x => innerContext.Each(y => x.Back(y)))
-          .With(x => x.Back(new MergeComponetsAction()).Back(tmp));
+          .With(x => innerContext.Join(system).Each(y => x.Back(y)))
+          .With(x => x.Back(new MergeComponetsAction()).Back(tmp)),
+          system,
+          i + 1 == count);
       }
 
       return next;
+    }
+
+    protected virtual IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, bool isLast)
+    {
+      return siConstructionAction;
     }
   }
 }

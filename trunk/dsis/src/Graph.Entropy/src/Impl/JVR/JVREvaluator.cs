@@ -6,8 +6,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   public class JVREvaluator<T>
     where T : ICellCoordinate
   {
-    private const double EPS = 1e-3;
-
     private readonly JVRMeasureOptions myOpts;
 
 
@@ -20,7 +18,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
       var j = new JVRMeasure<T>(graph, comps, myOpts);
       j.FillGraph();      
-      j.Iterate(EPS);
+      j.Iterate(myOpts.EPS);
 
       return j.CreateEvaluator();
     }

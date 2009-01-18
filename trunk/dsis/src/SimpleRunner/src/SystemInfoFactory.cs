@@ -2,6 +2,7 @@ using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Brusselator;
 using DSIS.Function.Predefined.Chua;
+using DSIS.Function.Predefined.Delayed;
 using DSIS.Function.Predefined.Duffing;
 using DSIS.Function.Predefined.FoodChain;
 using DSIS.Function.Predefined.Henon;
@@ -34,6 +35,11 @@ namespace DSIS.SimpleRunner
     private static ISystemSpace Space(int dim, double v)
     {
       return new DefaultSystemSpace(dim, (-v).Fill(dim), v.Fill(dim), 3L.Fill(dim));
+    }
+
+    private static ISystemSpace PSpace(int dim, double v)
+    {
+      return new DefaultSystemSpace(dim, (.0).Fill(dim), v.Fill(dim), 3L.Fill(dim));
     }
 
     private static ISystemSpace IkedaCutSpace()
@@ -77,6 +83,11 @@ namespace DSIS.SimpleRunner
     {
       var sp3 = new DefaultSystemSpace(3, 0.01.Fill(3), 35d.Fill(3), 2L.Fill(3));
       return new SystemInfoAction(new FoodChainSystemInfo(3.4001, 1, 4), sp3);
+    }
+
+    public static IAction Delayed(double a)
+    {
+      return new SystemInfoAction((new DelayedFunctionSystemInfo(a)), PSpace(2, 5));
     }
 
     public static IAction DuffingRunge()

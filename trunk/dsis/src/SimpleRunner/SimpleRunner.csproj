@@ -70,6 +70,7 @@
     <Compile Include="src\DrawEntropyWithSpace3d.cs" />
     <Compile Include="src\DrawEntropyWithSpace3dSegments.cs" />
     <Compile Include="src\DrawEntropyWithSpaceBase.cs" />
+    <Compile Include="src\JVRBuild.cs" />
     <Compile Include="src\OldProgram.cs" />
     <Compile Include="src\parallel\SimpleParallel.cs" />
     <Compile Include="src\ProgramCurve.cs" />

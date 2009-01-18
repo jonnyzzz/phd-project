@@ -5,6 +5,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 {
   public class JVRMeasureOptions
   {
+    [IncludeGenerate(Title = "Precision")]
+    public double EPS { get; set;}
+
     [IncludeGenerate(Title = "Include 1-node loops")]
     public bool IncludeSelfEdge { get; set; }
 
@@ -15,6 +18,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
       InitialWeight = EntropyLoopWeights.CONST;
       IncludeSelfEdge = false;
+      EPS = 1e-3;
     }
   }
 }

@@ -31,12 +31,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       {
         throw new Exception("Failed to find edges for " + node);
       }
-      else
+      foreach (JVRPair<T> edge in values)
       {
-        foreach (JVRPair<T> edge in values)
-        {
-          w += myHash.GetItem(edge);
-        }
+        w += myHash.GetItem(edge);
       }
       return w;
     }

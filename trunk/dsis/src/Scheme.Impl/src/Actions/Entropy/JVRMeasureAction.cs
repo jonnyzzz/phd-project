@@ -8,6 +8,10 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
   {
     private readonly JVRMeasureOptions myOpts;
 
+    public JVRMeasureAction() : this(new JVRMeasureOptions())
+    {
+    }
+
     public JVRMeasureAction(JVRMeasureOptions opts)
     {
       myOpts = opts;

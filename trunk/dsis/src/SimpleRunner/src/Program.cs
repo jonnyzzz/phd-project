@@ -33,7 +33,7 @@ namespace DSIS.SimpleRunner
   {
     public static void Main(string[] args)
     {
-      SIBuild.Action();
+      new JVRBuild().Action();
       return;
       var wfBase = new WorkingFolderAction();
 
