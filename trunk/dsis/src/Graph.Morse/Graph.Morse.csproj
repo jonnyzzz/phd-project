@@ -61,10 +61,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\ComputationResult.cs" />
     <Compile Include="src\ContourNode.cs" />
+    <Compile Include="src\DefDiffMorseEvaluator.cs" />
     <Compile Include="src\MorseEvaluator.cs" />
     <Compile Include="src\NodeType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
+      <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
+      <Name>IntegerCoordinates</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>

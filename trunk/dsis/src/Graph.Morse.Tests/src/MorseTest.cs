@@ -3,7 +3,7 @@ using NUnit.Framework;
 namespace DSIS.Graph.Morse.Tests
 {
   [TestFixture]
-  public class MorseTest : MorseBaseTest
+  public class  MorseTest : MorseBaseTest
   {
     [Test]
     public void Test_001()

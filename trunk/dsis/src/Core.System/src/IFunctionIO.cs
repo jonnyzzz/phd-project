@@ -10,7 +10,7 @@ namespace DSIS.Core.System
   /// changed by the object implicitly
   /// </summary>
   /// <typeparam name="T"></typeparam>
-  public interface IFunctionIO<T>
+  public interface IFunctionIO<T> : IFunctionBase
   {
     /// <summary>
     /// Input parameters reference

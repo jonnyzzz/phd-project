@@ -1,23 +1,11 @@
 using System.Collections.Generic;
 using DSIS.CellImageBuilder.PointMethod;
-using DSIS.Core.System;
-using DSIS.Core.System.Impl;
-using DSIS.Function.Predefined.Duffing;
-using DSIS.Function.Predefined.FoodChain;
-using DSIS.Function.Predefined.Henon;
-using DSIS.Function.Predefined.HomoLinear;
-using DSIS.Function.Predefined.HomoSquare;
-using DSIS.Function.Predefined.Ikeda;
-using DSIS.Function.Predefined.Logistics;
-using DSIS.Function.Predefined.VanDerPol;
-using DSIS.Function.Solvers.RungeKutt;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Exec;
-using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
@@ -33,7 +21,8 @@ namespace DSIS.SimpleRunner
   {
     public static void Main(string[] args)
     {
-      new JVRBuild().Action();
+      new JVRDetMorseBuild().Action();
+//      new JVRBuild().Action();
       return;
       var wfBase = new WorkingFolderAction();
 

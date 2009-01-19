@@ -4,21 +4,34 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Morse
 {
+  public class MorseEvaluatorOptions
+  {
+    public double Eps { get; set; }
+
+    public MorseEvaluatorOptions()
+    {
+      Eps = 1e-8;
+    }
+  }
+
   public abstract class MorseEvaluator<T> where T : ICellCoordinate
   {
-    private const double EPS = 1e-8;
+    private readonly double EPS;
 
     private readonly IStrongComponentInfo[] myComponentInfos;
     private readonly IGraphStrongComponents<T> myComponents;
+    //TODO: Use graph data holder
     private readonly Dictionary<INode<T>, ContourNode<T>> myNodes;
     private double myFactor;
 
-    public MorseEvaluator(IGraphStrongComponents<T> components, IStrongComponentInfo comp)
+    protected MorseEvaluator(MorseEvaluatorOptions opts, IGraphStrongComponents<T> components, IStrongComponentInfo comp)
     {
-      myComponentInfos = new IStrongComponentInfo[] {comp};
+      myComponentInfos = new[] {comp};
       myComponents = components;
       myNodes = new Dictionary<INode<T>, ContourNode<T>>(EqualityComparerFactory<INode<T>>.GetComparer());
       myFactor = 0;
+
+      EPS = opts.Eps;
     }
 
     protected abstract double Cost(INode<T> node);
@@ -42,6 +55,7 @@ namespace DSIS.Graph.Morse
     {
       ContourNode<T> n = node.Next;
 
+      list.Add(n.Node);
       while (n != node)
       {
         list.Add(n.Node);
@@ -97,10 +111,10 @@ namespace DSIS.Graph.Morse
         m.RemoveAt(0);
         node.Type2 = NodeType.M0;
 
-        foreach (INode<T> toNode in myComponents.GetEdgesWithFilteredEdges(node.Node, myComponentInfos))
+        foreach (var toNode in myComponents.GetEdgesWithFilteredEdges(node.Node, myComponentInfos))
         {
-          ContourNode<T> to = myNodes[toNode];
-          double w = node.Value + to.NodeCost - z;
+          var to = myNodes[toNode];
+          var w = node.Value + to.NodeCost - z;
 
           if (to.Type2 == NodeType.M2)
           {
@@ -143,7 +157,7 @@ namespace DSIS.Graph.Morse
 
     private void ResetType()
     {
-      foreach (ContourNode<T> node in myNodes.Values)
+      foreach (var node in myNodes.Values)
       {
         node.Type2 = NodeType.M2;
       }
@@ -172,9 +186,9 @@ namespace DSIS.Graph.Morse
     {
       foreach (INode<T> node in myComponents.GetNodes(myComponentInfos))
       {
-        ContourNode<T> gnode = CreateNode(node);
+        var gnode = CreateNode(node);
         ContourNode<T> minEdge = null;
-        foreach (INode<T> edgeTo in myComponents.GetEdgesWithFilteredEdges(node, myComponentInfos))
+        foreach (var edgeTo in myComponents.GetEdgesWithFilteredEdges(node, myComponentInfos))
         {
           ContourNode<T> gedge = CreateNode(edgeTo);
           if (minEdge == null || minEdge.NodeCost > gedge.NodeCost)
@@ -186,7 +200,7 @@ namespace DSIS.Graph.Morse
         minEdge.Incoming++;
       }
 
-      foreach (ContourNode<T> _node in myNodes.Values)
+      foreach (var _node in myNodes.Values)
       {
         ContourNode<T> node = _node;
         while (node.Incoming == 0)
@@ -199,7 +213,7 @@ namespace DSIS.Graph.Morse
 
       ContourNode<T> root = null;
       double rootZ = 0;
-      foreach (ContourNode<T> nde in myNodes.Values)
+      foreach (var nde in myNodes.Values)
       {
         if (nde.Incoming > 0)
         {          
@@ -231,8 +245,8 @@ namespace DSIS.Graph.Morse
 
     private static void CreateTreeInit(ContourNode<T> root)
     {
-      ContourNode<T> p = root;
-      ContourNode<T> q = root.Next;
+      var p = root;
+      var q = root.Next;
       while (q != root)
       {
         ContourNode<T> t = q.Next;
@@ -254,7 +268,7 @@ namespace DSIS.Graph.Morse
 
       var list = new List<INode<T>>();      
       ToList(extrema, list);
-      return new ComputationResult<T>(myFactor * answerValue, list.AsReadOnly());
+      return new ComputationResult<T>(myFactor * answerValue, list.AsReadOnly(), maximum);
     }
   }
 }

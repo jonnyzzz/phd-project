@@ -27,7 +27,7 @@ namespace DSIS.Function.Predefined.Henon
       return new HenonFunctionDerivate(myA);
     }
 
-    private class HenonFunction : Function<double>, IFunction<double>
+    private class HenonFunction : Function<double>, IFunction<double>, IDetDiffFunction<double>
     {
       protected readonly double myA;
 
@@ -39,8 +39,24 @@ namespace DSIS.Function.Predefined.Henon
 
       public void Evaluate()
       {
-        Output[0] = 1 - myA * Input[0] * Input[0] + 0.3 * Input[1];
-        Output[1] = Input[0];
+        var x = Input[0];
+        var y = Input[1];
+        Output[0] = 1 - myA * x * x + 0.3 * y;
+        Output[1] = x;
+      }
+
+      public double Evaluate(double[] data)
+      {
+        /*
+        double x = data[0];
+        double y = data[1];
+
+        var fxx = -myA*2*x;
+        var fxy = 0.3;
+        var fyx = 1;
+        var fyy = 0;
+        */
+        return -0.3;
       }
     }
 
@@ -49,7 +65,7 @@ namespace DSIS.Function.Predefined.Henon
       private readonly double myA;
 
       public HenonFunctionDerivate(double a)
-        : base(2, new FunctionIO<double>(), new FunctionIO<double>())
+        : base(2, new FunctionIO<double>(2), new FunctionIO<double>(2))
       {
         myA = a;
       }

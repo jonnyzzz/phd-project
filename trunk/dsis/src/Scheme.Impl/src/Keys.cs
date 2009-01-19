@@ -4,8 +4,10 @@ using DSIS.Core.System;
 using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
+using DSIS.Graph.Morse;
 using DSIS.IntegerCoordinates;
 using DSIS.LineIterator;
+using DSIS.Scheme.Impl.Actions.Entropy;
 
 namespace DSIS.Scheme.Impl
 {
@@ -49,5 +51,10 @@ namespace DSIS.Scheme.Impl
     public static readonly Key<ILine> LineKey = new Key<ILine>("Line");
 
     public static readonly Key<IterationSteps> Iterations = new Key<IterationSteps>("Iter");
+
+    public static Key<JVRMorseResult<Q>> Morse<Q>() where Q : ICellCoordinate
+    {
+      return new Key<JVRMorseResult<Q>>("");
+    }
   }
 }

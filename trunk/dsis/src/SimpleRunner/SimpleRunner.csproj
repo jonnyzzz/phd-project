@@ -14,6 +14,7 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +51,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -71,6 +75,7 @@
     <Compile Include="src\DrawEntropyWithSpace3dSegments.cs" />
     <Compile Include="src\DrawEntropyWithSpaceBase.cs" />
     <Compile Include="src\JVRBuild.cs" />
+    <Compile Include="src\JVRDetMorseBuild.cs" />
     <Compile Include="src\OldProgram.cs" />
     <Compile Include="src\parallel\SimpleParallel.cs" />
     <Compile Include="src\ProgramCurve.cs" />
@@ -99,6 +104,10 @@
     <Compile Include="src\XmlAbstractImageBuilderListener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Graph.Morse\Graph.Morse.csproj">
+      <Project>{CB0FD4CC-E606-4A2A-967D-A086E1AE2B9D}</Project>
+      <Name>Graph.Morse</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
       <Name>Scheme.Objects</Name>

@@ -4,15 +4,17 @@ namespace DSIS.Function.Predefined
 {
   public class FunctionIO<T> : IFunctionIO<T>
   {
+    private readonly int myDimention;
     private readonly IFunctionIO<T>[] myDerivates = null;
     private T[] myInput = null;
     private T[] myOutput = null;
 
-    public FunctionIO()
+    public FunctionIO(int dimention)
     {
+      myDimention = dimention;
     }
 
-    public FunctionIO(params IFunctionIO<T>[] derivates)
+    public FunctionIO(int dimention, params IFunctionIO<T>[] derivates) : this(dimention)
     {
       myDerivates = derivates;
     }
@@ -33,5 +35,7 @@ namespace DSIS.Function.Predefined
       get { return myOutput; }
       set { myOutput = value; }
     }
+
+    public int Dimension { get { return myDimention; } }
   }
 }

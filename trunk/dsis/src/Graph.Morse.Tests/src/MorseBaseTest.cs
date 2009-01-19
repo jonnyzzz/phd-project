@@ -123,7 +123,7 @@ namespace DSIS.Graph.Morse.Tests
       private readonly Dictionary<INode<IntegerCoordinate>, double> myCosts;
 
       public ME(IGraphStrongComponents<IntegerCoordinate> components, IStrongComponentInfo comp,
-                Dictionary<INode<IntegerCoordinate>, double> costs) : base(components, comp)
+                Dictionary<INode<IntegerCoordinate>, double> costs) : base(new MorseEvaluatorOptions(), components, comp)
       {
         myCosts = costs;
       }

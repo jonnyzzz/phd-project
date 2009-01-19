@@ -5,7 +5,7 @@
 
 namespace DSIS.Core.System
 {
-  public interface IFunctionBase<T> : IFunctionIO<T>
+  public interface IFunctionBase
   {
     /// <summary>
     /// Retrive the dimension of the IFunction object
@@ -19,7 +19,7 @@ namespace DSIS.Core.System
   /// the system function.  
   /// </summary>
   /// <typeparam name="T"></typeparam>
-  public interface IFunction<T> : IFunctionBase<T>
+  public interface IFunction<T> : IFunctionIO<T>
   {
     /// <summary>
     /// Evaluates function on <b>Input"</b> and stores 
@@ -35,7 +35,7 @@ namespace DSIS.Core.System
   /// dx/dt = F(x,t), where x is vector of IFunctionBase<T>.Dimension size
   /// </summary>
   /// <typeparam name="T"></typeparam>
-  public interface IFunctionWithTime<T> : IFunctionBase<T>
+  public interface IFunctionWithTime<T> : IFunctionIO<T>
   {
     /// <summary>
     /// Evaluates function on <b>Input"</b> and stores 
@@ -44,5 +44,10 @@ namespace DSIS.Core.System
     /// changed.
     /// </summary>
     void Evaluate(T time);
+  }
+
+  public interface IDetDiffFunction<T> : IFunctionBase
+  {
+    T Evaluate(T[] data);
   }
 }

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
