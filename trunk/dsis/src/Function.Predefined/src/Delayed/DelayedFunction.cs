@@ -7,7 +7,7 @@ using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Delayed
 {
-  public class DelayedFunction : Function<double>, IFunction<double>
+  public class DelayedFunction : Function<double>, IFunction<double>, IDetDiffFunction<double>
   {
     private readonly double myA;
 
@@ -18,8 +18,24 @@ namespace DSIS.Function.Predefined.Delayed
 
     public void Evaluate()
     {
-      Output[0] = Input[1];
-      Output[1] = myA*Input[1]*(1 - Input[0]);
+      var x = Input[0];
+      var y = Input[1];
+
+      Output[0] = y;
+      Output[1] = myA*y*(1 - x);
+    }
+
+    public double Evaluate(double[] data)
+    {
+//      double x = data[0];
+      double y = data[1];
+
+      /*var fxx = 0;
+      var fxy = 1;
+      var fyx = -myA*y;
+      var fyy = myA*(1 - x);
+*/
+      return myA*y;
     }
   }
 }

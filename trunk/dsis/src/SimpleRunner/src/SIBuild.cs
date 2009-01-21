@@ -42,8 +42,8 @@ namespace DSIS.SimpleRunner
         var data = ForBuildser(new List<ComputationData>
                      {
 //                       new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.Delayed(2.21), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Delayed(2.27), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing2x2Runge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing1_5x1_5Runge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing1_4x1_4Runge(), repeat = rep},

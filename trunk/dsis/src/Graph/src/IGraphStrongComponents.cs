@@ -9,6 +9,8 @@ namespace DSIS.Graph
     int ComponentCount { get; }    
   }
 
+  //TODO: Add graph data holder here.
+  //TODO: Create IGraphStrongComponents<TCell, TNode> ...
   public interface IGraphStrongComponents<TCoordinate> : IGraphStrongComponents
     where TCoordinate : ICellCoordinate
   {

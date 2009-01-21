@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
@@ -63,7 +66,7 @@ namespace DSIS.Graph.Morse
       }
     }
 
-    private static bool IsSub(ContourNode<T> root, ContourNode<T> i1, ContourNode<T> i2)
+    private static bool Preceeds(ContourNode<T> root, ContourNode<T> i1, ContourNode<T> i2)
     {
       int cnt = 0;
       ContourNode<T> t = i2;
@@ -76,10 +79,26 @@ namespace DSIS.Graph.Morse
       return t == i1;
     }
 
-    private static bool Preceeds(ContourNode<T> root, ContourNode<T> i1, ContourNode<T> i2)
+    private void DebugDump(TextWriter tw)
     {
-      return IsSub(root, i1, i2);
-    }
+      int i = 0;
+      var nodes = new Dictionary<INode<T>, int>();
+      foreach (var node in myNodes)
+      {
+        nodes[node.Key] = i;
+        tw.WriteLine("ctx.AddCost({0},{1});", i, node.Value.NodeCost.ToString(CultureInfo.GetCultureInfo("en-US")));
+        i++;
+      }
+
+      tw.WriteLine();
+      foreach (var node in nodes.Keys)
+      {
+        foreach (var to in myComponents.GetEdgesWithFilteredEdges(node, myComponentInfos))
+        {
+          tw.WriteLine("ctx.AddEdge({0}, {1});", nodes[node], nodes[to]);
+        }
+      }
+    } 
 
     private bool Tree(ContourNode<T> rnode)
     {
@@ -103,7 +122,7 @@ namespace DSIS.Graph.Morse
         p = n;
         n = n.Next;
       }
-      //p->Next = NULL;
+//      p.Next = null;
 
       while (m.Count > 0)
       {
@@ -126,7 +145,7 @@ namespace DSIS.Graph.Morse
           }
           else
           {
-            if ((w + EPS) < to.Value)
+            if ((w - EPS) < to.Value)
             {
               if (Preceeds(rnode, to, node))
               {
@@ -145,10 +164,6 @@ namespace DSIS.Graph.Morse
                 }
               }
             }
-            else
-            {
-              //to->Type = M0;
-            }
           }
         }
       }
@@ -165,9 +180,17 @@ namespace DSIS.Graph.Morse
 
     private ContourNode<T> DoCompute(ContourNode<T> node)
     {
+      var file = string.Format(@"e:\data{0}.txt", DateTime.Now.ToFileTime());
+      using(TextWriter tw = File.CreateText(file))
+      {
+        DebugDump(tw);
+      }
+
       while (!Tree(node))
       {
       }
+
+      File.Delete(file);
       return node;
     }
 

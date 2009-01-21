@@ -87,7 +87,7 @@ namespace DSIS.SimpleRunner
 
     public static IAction Delayed(double a)
     {
-      return new SystemInfoAction((new DelayedFunctionSystemInfo(a)), PSpace(2, 5));
+      return new SystemInfoAction((new DelayedFunctionSystemInfo(a)), PSpace(2, 3));
     }
 
     public static IAction DuffingRunge()
