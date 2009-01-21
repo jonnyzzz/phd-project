@@ -8,6 +8,7 @@ using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using DSIS.Utils;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DSIS.Graph.Morse.Tests
 {
@@ -20,17 +21,12 @@ namespace DSIS.Graph.Morse.Tests
       Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-us");
     }
 
-    protected static T GetFirst<T>(IEnumerable<T> ts)
+    protected static void DoTest(double value, BuildGraph bg)
     {
-      foreach (T t in ts)
-      {
-        return t;
-      }
-      return default(T);
+      DoTest(1e-8, value, bg);
     }
 
-
-    protected void DoTest(double value, BuildGraph bg)
+    protected static void DoTest(double eps, double value, BuildGraph bg)
     {
       var mss = new MockSystemSpace(1, 0, 1, 1000);
       IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(mss);
@@ -47,7 +43,7 @@ namespace DSIS.Graph.Morse.Tests
       Assert.IsTrue(components.ComponentCount > 0, "No components");
       Assert.IsTrue(components.ComponentCount == 1, "Only one component possible");
 
-      MorseEvaluator<IntegerCoordinate> me = new ME(components, GetFirst(components.Components), costs);
+      MorseEvaluator<IntegerCoordinate> me = new ME(eps, components, components.Components.Single(), costs);
       ComputationResult<IntegerCoordinate> compute = me.Compute(true);
 
       Assert.AreEqual(value, compute.Value, 1e-5);
@@ -122,8 +118,8 @@ namespace DSIS.Graph.Morse.Tests
     {
       private readonly Dictionary<INode<IntegerCoordinate>, double> myCosts;
 
-      public ME(IGraphStrongComponents<IntegerCoordinate> components, IStrongComponentInfo comp,
-                Dictionary<INode<IntegerCoordinate>, double> costs) : base(new MorseEvaluatorOptions(), components, comp)
+      public ME(double eps, IGraphStrongComponents<IntegerCoordinate> components, IStrongComponentInfo comp,
+                Dictionary<INode<IntegerCoordinate>, double> costs) : base(new MorseEvaluatorOptions{Eps = eps}, components, comp)
       {
         myCosts = costs;
       }

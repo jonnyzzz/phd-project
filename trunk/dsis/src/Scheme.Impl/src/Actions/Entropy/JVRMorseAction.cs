@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
+using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Graph.Morse;
 using DSIS.Scheme.Ctx;
+using DSIS.Graph.Abstract;
+using System.Linq;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
@@ -32,7 +35,11 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       var dic = new Dictionary<IStrongComponentInfo, JVRMorseMinMax<Q>>();
       foreach (var comp in comps.Components)
       {
-        var evaluator = new DefDiffMorseEvaluator<Q>(myOptions, diffFunction, comps, comp);
+        var graph = comps.AsGraph(new[]{comp});
+        var c2 = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
+        
+        //TODO: Not efficient!
+        var evaluator = new DefDiffMorseEvaluator<Q>(myOptions, diffFunction, c2, c2.Components.Single());
         var max = evaluator.Compute(true);
         var min = evaluator.Compute(false);
 

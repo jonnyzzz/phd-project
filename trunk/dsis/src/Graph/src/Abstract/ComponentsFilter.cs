@@ -110,6 +110,7 @@ namespace DSIS.Graph.Abstract
     public static IEnumerable<INode<TCell>> FilterUpper<TCell>(this IFilter filter, IEnumerable<INode<TCell>> nodes)
       where TCell : ICellCoordinate      
     {      
+      //TODO: Return enumerable as is iff filter is AllFilter
       return Enumerable.Where(nodes, x => filter.Accept(x.ComponentId));
     }
   }
