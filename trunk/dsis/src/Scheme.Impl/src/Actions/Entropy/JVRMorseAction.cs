@@ -35,11 +35,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       var dic = new Dictionary<IStrongComponentInfo, JVRMorseMinMax<Q>>();
       foreach (var comp in comps.Components)
       {
-        var graph = comps.AsGraph(new[]{comp});
-        var c2 = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
-        
-        //TODO: Not efficient!
-        var evaluator = new DefDiffMorseEvaluator<Q>(myOptions, diffFunction, c2, c2.Components.Single());
+        var evaluator = new DetDiffMorseEvaluator<Q>(myOptions, diffFunction, comps, comp);
         var max = evaluator.Compute(true);
         var min = evaluator.Compute(false);
 

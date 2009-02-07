@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
@@ -45,6 +46,7 @@ namespace DSIS.Graph.Morse.Tests
 
       MorseEvaluator<IntegerCoordinate> me = new ME(eps, components, components.Components.Single(), costs);
       ComputationResult<IntegerCoordinate> compute = me.Compute(true);
+      me.Compute(false);
 
       Assert.AreEqual(value, compute.Value, 1e-5);
     }
@@ -99,6 +101,13 @@ namespace DSIS.Graph.Morse.Tests
         myCosts[AddNode(i)] = v;
       }
 
+      public void AddCost(int i, double v, string bytes)
+      {
+        var vb = BitConverter.ToDouble(Convert.FromBase64String(bytes), 0);
+        Assert.AreEqual(vb, v);
+        AddCost(i, vb);
+      }
+
 
       public override INode<IntegerCoordinate> AddNode(int i)
       {
@@ -119,7 +128,9 @@ namespace DSIS.Graph.Morse.Tests
       private readonly Dictionary<INode<IntegerCoordinate>, double> myCosts;
 
       public ME(double eps, IGraphStrongComponents<IntegerCoordinate> components, IStrongComponentInfo comp,
-                Dictionary<INode<IntegerCoordinate>, double> costs) : base(new MorseEvaluatorOptions{Eps = eps}, components, comp)
+                Dictionary<INode<IntegerCoordinate>, double> costs) 
+        : base(new MorseEvaluatorOptions{Eps = eps}, 
+        new MorseStrongComponentGraph<IntegerCoordinate>(components, comp))
       {
         myCosts = costs;
       }

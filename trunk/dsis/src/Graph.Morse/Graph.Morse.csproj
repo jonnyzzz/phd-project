@@ -61,9 +61,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\ComputationResult.cs" />
     <Compile Include="src\ContourNode.cs" />
-    <Compile Include="src\DefDiffMorseEvaluator.cs" />
+    <Compile Include="src\DetDiffMorseEvaluator.cs" />
+    <Compile Include="src\IMorseEvaluatorGraph.cs" />
     <Compile Include="src\MorseEvaluator.cs" />
     <Compile Include="src\MorseEvaluatorOptions.cs" />
+    <Compile Include="src\MorseStrongComponentGraph.cs" />
     <Compile Include="src\NodeType.cs" />
   </ItemGroup>
   <ItemGroup>
