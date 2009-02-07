@@ -79,7 +79,6 @@
     <Compile Include="src\Actions.Impl\IApplicationDocumentFactory.cs" />
     <Compile Include="src\Actions.Impl\IDocumentContextFill.cs" />
     <Compile Include="src\Actions.Impl\SelectDocumentTitle.cs" />
-    <Compile Include="src\Actions.Impl\SelectDocumentTitleComponent.cs" />
     <Compile Include="src\Actions.Impl\SelectDocumentTitleWizardFactory.cs" />
     <Compile Include="src\Actions\ActionDescriptorParser.cs" />
     <Compile Include="src\Actions\ActionDescriptor.cs" />

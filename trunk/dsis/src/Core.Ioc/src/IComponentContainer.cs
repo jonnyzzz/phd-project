@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using DSIS.Core.Ioc.JC;
-using DSIS.Utils;
 
 namespace DSIS.Core.Ioc
 {
@@ -30,25 +28,28 @@ namespace DSIS.Core.Ioc
       where TImplementation : ComponentImplementationAttributeBase;
   }
 
+  /// <summary>
+  /// Marker attribute for types that can be instanciated using
+  /// <see cref="ITypeInstantiator"/> intefrace
+  /// </summary>
+  [AttributeUsage(AttributeTargets.Class)]
+  public class TypeInstanciableAttribute : Attribute
+  {
+  }
+
   [NoInheritContainer]
   public interface ITypeInstantiator
   {
+    /// <summary>
+    /// Create instance of type T using specified parameters and 
+    /// current component container. 
+    /// All autowirings are done.
+    /// 
+    /// Type T must be marked with <see cref="TypeInstanciableAttribute"/>
+    /// </summary>
+    /// <typeparam name="T">instance to create</typeparam>
+    /// <param name="instances">additional components</param>
+    /// <returns>create instace</returns>
     T Instanciate<T>(params object[] instances);
-  }
-
-  [JContainerPredefinedComponent, NoInheritContainer]
-  public class TypeInstantiatorImpl : ITypeInstantiator
-  {
-    [Autowire]
-    public IComponentContainer Container { get; set; }
-
-    public T Instanciate<T>(params object[] instances)
-    {
-      var c = Container.SubContainer<FakeComponent>();
-      instances.Each(c.RegisterComponent);
-      return c.GetComponent<T>();
-    }
-
-    private class FakeComponent : ComponentCollectionAttributeBase {}
   }
 }

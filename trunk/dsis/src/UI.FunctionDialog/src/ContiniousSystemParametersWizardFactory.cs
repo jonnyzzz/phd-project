@@ -11,7 +11,7 @@ namespace DSIS.UI.FunctionDialog
   public class ContiniousSystemParametersWizardFactory
   {
     [Autowire]
-    private IComponentContainer Container { get; set; }
+    private ISubContainerFactory Container { get; set; }
 
     [Autowire]
     private IEnumerable<IContiniousFunctionSolverFactory> Solvers { get; set; }

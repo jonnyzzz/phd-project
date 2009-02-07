@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="src\SelectSystemConfirmPage.cs" />
     <Compile Include="src\SelectSystemInfoProviderWizard.cs" />
+    <Compile Include="src\SelectSystemInfoProviderWizardFactory.cs" />
     <Compile Include="src\SelectSystemInfoWizard.cs" />
     <Compile Include="src\SelectSystemWizardPage.cs">
     </Compile>

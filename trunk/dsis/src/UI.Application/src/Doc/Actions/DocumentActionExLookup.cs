@@ -11,7 +11,7 @@ namespace DSIS.UI.Application.Doc.Actions
   {
     private readonly IComponentContainer myChildContainer;
 
-    public DocumentActionExLookup(IComponentContainer container)
+    public DocumentActionExLookup(ISubContainerFactory container)
     {
       myChildContainer = container.SubContainer<DocumentActionAttribute>();
       myChildContainer.Start();

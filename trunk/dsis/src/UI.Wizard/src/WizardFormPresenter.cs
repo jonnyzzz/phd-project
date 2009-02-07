@@ -29,5 +29,13 @@ namespace DSIS.UI.Wizard
                                 });        
       }
     }
+
+    public Pair<Ref<T>, bool> ShowWizard<T>(IWizardPackFactory<T> wizard)
+    {
+      using(var wz = wizard.CreateWizard())
+      {
+        return ShowWizard(wz);
+      }
+    }
   }
 }

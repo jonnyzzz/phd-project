@@ -92,9 +92,11 @@
     <Compile Include="src\JC\RecursionBlocker.cs" />
     <Compile Include="src\Logger\Log4Net.cs" />
     <Compile Include="src\NoInheritContainerAttribute.cs" />
+    <Compile Include="src\NoneTypesFilerImpl.cs" />
     <Compile Include="src\ScanAllLoadedAssemblies.cs" />
     <Compile Include="src\ScanCurrentFolder.cs" />
-    <Compile Include="src\TypesFilerImpl.cs" />
+    <Compile Include="src\DSISTypesFilerImpl.cs" />
+    <Compile Include="src\TypeInstantiatorImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj">

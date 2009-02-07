@@ -20,7 +20,7 @@ namespace DSIS.UI.Application.Actions.Impl
     private IApplicationClass myApp { get; set; }
 
     [Autowire]
-    private SelectSystemInfoProviderWizard Wizard { get; set; }
+    private SelectSystemInfoProviderWizardFactory Wizard { get; set; }
 
     [Autowire]
     private IWizardFormPresenter Presenter { get; set; }

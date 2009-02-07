@@ -47,7 +47,7 @@ namespace DSIS.Core.Ioc.JC
     {
       object oImpl;
       if (myImplementations.TryGetValue(impl, out oImpl))
-        return myImplementations[impl];
+        return oImpl;
 
       var o = myCreateInstance(impl);
       if (o == null)

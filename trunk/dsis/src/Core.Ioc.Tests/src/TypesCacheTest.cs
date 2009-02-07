@@ -14,7 +14,7 @@ namespace DSIS.Core.Ioc.Tests
     [SetUp]
     public void SetUp()
     {
-      myImpl = new ImplLookupImpl(new BaseTypeLookupImpl(new TypesFilerImpl()));
+      myImpl = new ImplLookupImpl(new BaseTypeLookupImpl(new NoneTypesFilerImpl()));
     }
 
     [TearDown]

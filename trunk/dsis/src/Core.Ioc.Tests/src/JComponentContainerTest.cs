@@ -39,7 +39,7 @@ namespace DSIS.Core.Ioc.Tests
 
       var c1 = myContainer.GetComponent<JCI>();
       Assert.That(c1, Is.InstanceOfType(typeof (JCI)));
-      Assert.That(Enumerable.Count(c1.myJj), Is.EqualTo(1));
+      Assert.That(c1.myJj.Count(), Is.EqualTo(1));
     }
     
     [Test]
@@ -100,7 +100,27 @@ namespace DSIS.Core.Ioc.Tests
       Assert.That(c1.Getter, Is.InstanceOfType(typeof(JI6)));
     }
 
+    [Test]
+    public void Test_TypeInstantiator()
+    {
+      DoTest<TI, Tx6>();
 
+      var c1 = myContainer.GetComponent<JI7Host>();
+      Assert.That(c1, Is.InstanceOfType(typeof(JI7Host)));
+      Assert.That(c1.Foo, Is.InstanceOfType(typeof(JI7x)));
+      Assert.That(c1.Foo.Bar, Is.EqualTo("ZZZZ"));
+      Assert.That(c1.Foo.Prop, Is.InstanceOfType(typeof(JI7)));
+    }
+
+    [Test]
+    public void Test_RegisterComponent()
+    {
+      DoTest<TI, Tx7>();
+
+      myContainer.RegisterComponent("ZZZZ");
+      var c = myContainer.GetComponent<string>();
+      Assert.That(c, Is.EqualTo("ZZZZ"));
+    }
 
     public class Tx0 : ComponentImplementationAttributeBase{}
     public class Tx1 : ComponentImplementationAttributeBase{}
@@ -108,6 +128,8 @@ namespace DSIS.Core.Ioc.Tests
     public class Tx3 : ComponentImplementationAttributeBase{}
     public class Tx4 : ComponentImplementationAttributeBase{}
     public class Tx5 : ComponentImplementationAttributeBase{}
+    public class Tx6 : ComponentImplementationAttributeBase{}
+    public class Tx7 : ComponentImplementationAttributeBase{}
 
     [Tx0]
     public class JI{}
@@ -177,5 +199,22 @@ namespace DSIS.Core.Ioc.Tests
     public class JCB6Base { [Autowire]protected JI6 Setter { get; private set; } public JI6 Getter { get { return Setter; } } }
     [Tx5]
     public class JCB6 : JCB6Base { }
+
+    [Tx6]
+    public class JI7 {}
+    public class JI7x { [Autowire] public JI7 Prop{ get; set;} public string Bar { get; private set;}
+
+      public JI7x(string bar)
+      {
+        Bar = bar;
+      }
+    }
+    [Tx6]
+    public class JI7Host { 
+      public JI7x Foo { get; private set;}
+
+      public JI7Host(ITypeInstantiator i) {
+        Foo = i.Instanciate<JI7x>("ZZZZ");
+    }}
   }
 }

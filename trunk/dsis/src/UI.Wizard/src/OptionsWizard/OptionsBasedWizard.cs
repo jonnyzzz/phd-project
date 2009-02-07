@@ -127,5 +127,10 @@ namespace DSIS.UI.Wizard.OptionsWizard
       if (page == FirstPage)
         myOptions = default(T);
     }
+
+    public void Dispose()
+    {
+      //TODO:
+    }
   }
 }

@@ -5,10 +5,10 @@ namespace DSIS.UI.Application.Actions
   [ComponentImplementation(Startable = true), ComponentInterface]
   public class ActionHandlerBeanProcessor : IStartableComponent
   {
-    private readonly IComponentContainer myContainer;
+    private readonly ISubContainerFactory myContainer;
     private readonly IActionPresentationManager myMan;
 
-    public ActionHandlerBeanProcessor(IComponentContainer container, IActionPresentationManager man)
+    public ActionHandlerBeanProcessor(ISubContainerFactory container, IActionPresentationManager man)
     {
       myContainer = container;
       myMan = man;

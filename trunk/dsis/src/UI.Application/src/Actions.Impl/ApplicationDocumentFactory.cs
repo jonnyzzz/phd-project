@@ -11,14 +11,10 @@ namespace DSIS.UI.Application.Actions.Impl
   public class ApplicationDocumentFactory : IApplicationDocumentFactory
   {
     private readonly IDocumentContextFill[] myFill;
-    private readonly IApplicationClass myApp;
-    private readonly IInvocator myInvocator;
 
-    public ApplicationDocumentFactory(IDocumentContextFill[] fill, IApplicationClass app, IInvocator invocator)
+    public ApplicationDocumentFactory(IDocumentContextFill[] fill)
     {
       myFill = fill;
-      myInvocator = invocator;
-      myApp = app;
     }
 
     public IApplicationDocument CreateNewDocument(string title, ISystemInfo info, ISystemSpace space)

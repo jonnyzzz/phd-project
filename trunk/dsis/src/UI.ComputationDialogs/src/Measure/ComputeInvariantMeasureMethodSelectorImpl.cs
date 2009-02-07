@@ -11,13 +11,13 @@ namespace DSIS.UI.ComputationDialogs.Measure
   [DocumentComponent]
   public class ComputeInvariantMeasureMethodSelectorImpl : IComputeInvariantMeasureMethodSelector
   {
-    private readonly IComponentContainer myContainer;
+    private readonly ISubContainerFactory myContainer;
     private readonly IApplicationClass myApp;
 
     [Autowire]
     private IComputeInveriantMeasureFactory[] Factories { get; set; }
 
-    public ComputeInvariantMeasureMethodSelectorImpl(IComponentContainer container, IApplicationClass app)
+    public ComputeInvariantMeasureMethodSelectorImpl(ISubContainerFactory container, IApplicationClass app)
     {
       myContainer = container;
       myApp = app;

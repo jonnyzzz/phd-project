@@ -1,10 +1,7 @@
-  - fail on new function
-  -  ask for create system name
   -  save created system without data
   -  save create image
   -  open standalone gnuplot
   -  list selector with groupby sections
-  -  component container: Create one object with extra parameters.
   -  projected SI no measure image
 
 Progress bar:
@@ -76,6 +73,9 @@ Internal:
   -  drop ICodeCompiler singleton
 
 Completed:
+  -  component container: Create one object with extra parameters.
+  -  ask for create system name
+  -  fail on new function
   -  project entropy
   -  entropy computation actions (matrix) ???
   -  include eigen entropy

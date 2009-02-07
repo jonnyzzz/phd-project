@@ -19,7 +19,7 @@ namespace DSIS.Core.Ioc.JC
     {
     }
 
-    public JComponentContainer() : this(new TypesFilerImpl())
+    public JComponentContainer() : this(new NoneTypesFilerImpl())
     {
     }
 

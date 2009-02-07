@@ -10,11 +10,11 @@ namespace DSIS.UI.Application.Doc
   {
     private readonly IApplicationClass myApp;
     private readonly IMainForm myMainForm;
-    private readonly IComponentContainer myRootContainer;
+    private readonly ISubContainerFactory myRootContainer;
     
     private IComponentContainer myDocumentContainer;
 
-    public DocUIManager(IApplicationClass app, IMainForm mainForm, IComponentContainer rootContainer)
+    public DocUIManager(IApplicationClass app, IMainForm mainForm, ISubContainerFactory rootContainer)
     {
       myApp = app;
       myRootContainer = rootContainer;

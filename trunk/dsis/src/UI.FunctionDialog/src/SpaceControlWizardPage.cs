@@ -31,6 +31,11 @@ namespace DSIS.UI.FunctionDialog
     {
       return mySpace.Create();
     }
+
+    public void Dispose()
+    {
+      //TODO:
+    }
   }
 
   public class SpaceControlWizardPage : WizardPageBase<SpaceControl>

@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace DSIS.Core.Ioc
 {
-  public class TypesFilerImpl : ITypesFilter
+  public class DSISTypesFilerImpl : ITypesFilter
   {
     public bool Accept(Type type)
     {

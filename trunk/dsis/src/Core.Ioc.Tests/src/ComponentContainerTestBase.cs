@@ -106,7 +106,7 @@ namespace DSIS.Core.Ioc.Tests
     [TI, TO7]
     public class DependsOnCC
     {
-      public DependsOnCC(IComponentContainer o)
+      public DependsOnCC(ISubContainerFactory o)
       {
         Assert.That(o, Is.Not.Null);
       }

@@ -1,11 +1,12 @@
 using System;
+using DSIS.Core.Ioc;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.FormsGenerator;
 using DSIS.Utils.Bean;
 
 namespace DSIS.UI.Application.Actions.Impl
 {
-  [SelectDocumentTitleComponent]
+  [TypeInstanciable]
   public class SelectDocumentTitle : SimpleWizard, IWizardPack<string>
   {
     private readonly DocumentTitle myTitle;
@@ -31,6 +32,11 @@ namespace DSIS.UI.Application.Actions.Impl
     public string GetResult()
     {
       return myTitle.Title;
+    }
+
+    public void Dispose()
+    {
+      //TODO:
     }
   }
 }

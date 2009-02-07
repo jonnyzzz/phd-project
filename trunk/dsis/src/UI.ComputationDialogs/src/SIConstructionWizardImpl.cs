@@ -9,10 +9,10 @@ namespace DSIS.UI.ComputationDialogs
   [ComponentImplementation]
   public class SIConstructionWizardImpl : ISIConstructionWizard
   {
-    private readonly IComponentContainer myContainer;
+    private readonly ISubContainerFactory myContainer;
     private readonly IApplicationClass myApp;
 
-    public SIConstructionWizardImpl(IComponentContainer container, IApplicationClass app)
+    public SIConstructionWizardImpl(ISubContainerFactory container, IApplicationClass app)
     {
       myContainer = container;
       myApp = app;
