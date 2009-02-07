@@ -20,7 +20,8 @@ namespace DSIS.Core.Ioc.JC
       var set = new HashSet<PropertyInfo>();
       foreach (var clazz in myLookup.GetBaseClasses(type))
       {
-        set.UnionWith(clazz.GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance).Where(x=>x.IsDefined<AutowireAttribute>()));
+        var info = clazz.GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance);
+        set.UnionWith(info.Where(x=>x.IsDefined<AutowireAttribute>() && x.GetSetMethod(true) != null));
       }
       return set;
     }

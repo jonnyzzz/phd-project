@@ -90,11 +90,24 @@ namespace DSIS.Core.Ioc.Tests
       Assert.That(c1.Open, Is.InstanceOfType(typeof(JI5)));
     }
 
+    [Test]
+    public void Test_PropertyAutowire_Private2()
+    {
+      DoTest<TI, Tx5>();
+
+      var c1 = myContainer.GetComponent<JCB6>();
+      Assert.That(c1, Is.InstanceOfType(typeof(JCB6)));
+      Assert.That(c1.Getter, Is.InstanceOfType(typeof(JI6)));
+    }
+
+
+
     public class Tx0 : ComponentImplementationAttributeBase{}
     public class Tx1 : ComponentImplementationAttributeBase{}
     public class Tx2 : ComponentImplementationAttributeBase{}
     public class Tx3 : ComponentImplementationAttributeBase{}
     public class Tx4 : ComponentImplementationAttributeBase{}
+    public class Tx5 : ComponentImplementationAttributeBase{}
 
     [Tx0]
     public class JI{}
@@ -158,5 +171,11 @@ namespace DSIS.Core.Ioc.Tests
       [Autowire]
       private JI5 Obj { get; set; }
     } 
+
+    [Tx5]
+    public class JI6 {}
+    public class JCB6Base { [Autowire]protected JI6 Setter { get; private set; } public JI6 Getter { get { return Setter; } } }
+    [Tx5]
+    public class JCB6 : JCB6Base { }
   }
 }

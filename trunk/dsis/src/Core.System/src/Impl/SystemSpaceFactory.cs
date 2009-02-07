@@ -13,5 +13,15 @@ namespace DSIS.Core.System.Impl
       var right = size.Fill(dim);
       return new DefaultSystemSpace(dim, left, right, grids);
     }
+
+    public ISystemSpace CreateSameSpace(int dim, double left, double right, long grid)
+    {
+      return new DefaultSystemSpace(dim, left.Fill(dim), right.Fill(dim), grid.Fill(dim));
+    }
+
+    public ISystemSpace CreateSpace(int dim, double[] left, double[] right, long[] grid)
+    {
+      return new DefaultSystemSpace(dim, left, right, grid);
+    }
   }
 }

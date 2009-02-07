@@ -1,5 +1,6 @@
 using System;
 using DSIS.Core.System;
+using DSIS.Function.Predefined.Ikeda;
 using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Predefined.OsipenkoBio
@@ -31,6 +32,20 @@ namespace DSIS.Function.Predefined.OsipenkoBio
   [Serializable]
   public class OsipenkoBio2 : ISystemInfoParameters
   {
+  }
+
+  [SystemInfoComponent]
+  public class OsipenkoBio2Predefined : PredefinedSystemFactory<OsipenkoBio2Factory>
+  {
+    public override ISystemSpace Space
+    {
+      get { return InfoFactory.CreateSpace(2, new[] {.05, 0}, new[] {2.0, 2}, new[] {3L, 3}); }
+    }
+
+    protected override ISystemInfoParameters Parameters
+    {
+      get { return new OsipenkoBio2(); }
+    }
   }
 
   [SystemInfoComponent]

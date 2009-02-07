@@ -1,3 +1,4 @@
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Scheme.Objects.Systemx;
@@ -7,28 +8,22 @@ namespace DSIS.Function.Predefined.Ikeda
   public abstract class PredefinedSystemFactory<TF> : ISystemInfoPredefinedFactory
     where TF : ISystemInfoFactory
   {
-    private readonly TF myFactory;
-    private readonly ISystemSpaceFactory myInfoFactory;
+    [Autowire]
+    protected TF Factory { get; set; }
 
-    protected PredefinedSystemFactory(TF factory, ISystemSpaceFactory infoFactory)
-    {
-      myFactory = factory;
-      myInfoFactory = infoFactory;
-    }
+    [Autowire]
+    protected ISystemSpaceFactory InfoFactory { get; private set; }
 
     public string Name
     {
-      get { return myFactory.FactoryName; }
+      get { return Factory.FactoryName; }
     }
 
-    public ISystemSpace Space
-    {
-      get { return myInfoFactory.CreateSymmetricalSpace(2, 10, 2); }
-    }
+    public abstract ISystemSpace Space { get; }
 
     public ISystemInfo Function
     {
-      get { return myFactory.Create(Parameters); }
+      get { return Factory.Create(Parameters); }
     }
 
     protected abstract ISystemInfoParameters Parameters

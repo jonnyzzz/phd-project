@@ -109,7 +109,15 @@ namespace DSIS.Core.Ioc.JC
           var autowings = myAutowires.GetAutowings(obj);
           foreach (var auto in autowings)
           {
-            auto.SetValue(FindAutowiringInstance(auto.Type));
+            var value = FindAutowiringInstance(auto.Type);
+            try
+            {
+              auto.SetValue(value);
+            } catch(Exception e)
+            {
+              throw new ComponentContainerException(
+                string.Format("Failed to autowire setter of type {0}.{1}. {2}", t, auto.Name, e.Message), e);
+            }
           }
 
           return obj;
