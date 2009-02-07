@@ -1,3 +1,4 @@
+  - fail on new function
   -  ask for create system name
   -  save created system without data
   -  save create image

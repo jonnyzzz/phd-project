@@ -67,6 +67,7 @@
     <Compile Include="src\Chua\ChuaFunction.cs" />
     <Compile Include="src\Chua\ChuaOptions.cs" />
     <Compile Include="src\Chua\ChuaSystemInfo.cs" />
+    <Compile Include="src\Delayed2\Delayed2Function.cs" />
     <Compile Include="src\Delayed\DelayedFactory.cs" />
     <Compile Include="src\Delayed\DelayedFunction.cs" />
     <Compile Include="src\Delayed\DelayedFunctionSystemInfo.cs" />
@@ -125,6 +126,8 @@
     <Compile Include="src\Lorentz\LorenzParameters.cs" />
     <Compile Include="src\Lorentz\LorenzSystemInfo.cs" />
     <Compile Include="src\Lorentz\LorenzSystemInfoFactory.cs" />
+    <Compile Include="src\OsipenkoBio\Bio.cs" />
+    <Compile Include="src\OsipenkoBio\Bio2.cs" />
     <Compile Include="src\Rossel\RosselFactory.cs" />
     <Compile Include="src\Rossel\RosslerParameters.cs" />
     <Compile Include="src\Rossel\RosslerSystemFunction.cs" />

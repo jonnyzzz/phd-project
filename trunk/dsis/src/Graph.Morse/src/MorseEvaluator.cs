@@ -63,6 +63,7 @@ namespace DSIS.Graph.Morse
       }
     }
 
+    //TODO: Check!
     private static bool Preceeds(ContourNode<T> root, ContourNode<T> i1, ContourNode<T> i2)
     {
       int cnt = 0;
@@ -125,6 +126,7 @@ namespace DSIS.Graph.Morse
         n = n.Next;
       }
       //Eliminate one arc
+      //TODO: This breaks Precedes method.
       p.Next = null;
 //      p.Next = null;
 

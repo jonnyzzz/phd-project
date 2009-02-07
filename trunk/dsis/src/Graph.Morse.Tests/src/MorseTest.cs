@@ -74,7 +74,7 @@ namespace DSIS.Graph.Morse.Tests
     [Test, Ignore]
     public void Test_Hung_105()
     {
-      DoTest(1e-3, 1.95280889074647d, delegate(CostContext ctx)
+      DoTest(0, 1.95280889074647d, delegate(CostContext ctx)
                     {
                       ctx.AddCost(0, 1.95280889074647); //[Node: [  0 , 0  ]]
                       ctx.AddCost(1, 0.85419660207836012); //[Node: [  0 , 1  ]]
