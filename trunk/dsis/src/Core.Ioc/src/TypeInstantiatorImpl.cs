@@ -8,7 +8,7 @@ namespace DSIS.Core.Ioc
   public class TypeInstantiatorImpl : ITypeInstantiator
   {
     [Autowire]
-    public IComponentContainer Container { get; set; }
+    public ISubContainerFactory Container { get; set; }
 
     public T Instanciate<T>(params object[] instances)
     {
