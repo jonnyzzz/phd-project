@@ -60,8 +60,19 @@ namespace DSIS.Utils
     public static string JoinString<T>(this IEnumerable<T> enu, Func<T,string> toString, string separator)
     {
       var sb = new StringBuilder();
+      sb.JoinString(enu, toString, separator);
+      return sb.ToString();
+    }
+
+    public static StringBuilder JoinString<T>(this StringBuilder sb, IEnumerable<T> enu, Func<T,string> toString, string separator)
+    {
+      return JoinString(sb, enu, (sb2, t) => sb2.Append(toString(t)), separator);
+    }
+
+    public static StringBuilder JoinString<T>(this StringBuilder sb, IEnumerable<T> enu, Action<StringBuilder, T> append, string separator)
+    {
       bool isFirst = true;
-      foreach (var t in enu.Map(x=>toString(x)))
+      foreach (var t in enu)
       {
         if (!isFirst)
         {
@@ -70,9 +81,9 @@ namespace DSIS.Utils
         {
           isFirst = false;
         }
-        sb.Append(t);
+        append(sb, t);
       }
-      return sb.ToString();
+      return sb;
     }
   }  
 }

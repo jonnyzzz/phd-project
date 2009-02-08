@@ -5,6 +5,7 @@ using System.IO;
 using System.Reflection;
 using DSIS.Core.Ioc;
 using log4net;
+using Microsoft.CSharp;
 
 namespace DSIS.CodeCompiler
 {
@@ -43,7 +44,8 @@ namespace DSIS.CodeCompiler
         }
         try
         {
-          using (var provider = CodeDomProvider.CreateProvider("CSharp"))
+          var providerOptions = new Dictionary<string, string> {{"CompilerVersion", "v3.5"}};
+          using (var provider = new CSharpCodeProvider(providerOptions))
           {
             var results = provider.CompileAssemblyFromFile(ps, codeFile);
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace DSIS.CodeCompiler
 {
@@ -27,10 +28,8 @@ namespace DSIS.CodeCompiler
       {
         string name = GenerateTypeName(t.GetGenericTypeDefinition());
         return GenerateGenericArguments(name, args);        
-      } else
-      {
-        return GenerateFQTypeName(t);
       }
+      return GenerateFQTypeName(t);
     }
 
     private static string GenerateGenericArguments(string name, IEnumerable<Type> arguments)
@@ -55,5 +54,24 @@ namespace DSIS.CodeCompiler
 
       return t.Namespace + "." + name;
     }
+
+    public static string ParameterType(ParameterInfo info)
+    {
+      //TODO: Check me
+      var name = GenerateFQTypeName(info.ParameterType);
+
+      if (info.IsIn && info.IsOut)
+      {
+        return "ref " + name;
+      }
+
+      if (info.IsOut)
+      {
+        return "out " + name;
+      }
+
+      return name;
+    }
+
   }
 }
