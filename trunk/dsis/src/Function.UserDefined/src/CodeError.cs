@@ -1,3 +1,5 @@
+using System;
+
 namespace DSIS.Function.UserDefined
 {
   public class CodeError
@@ -11,6 +13,11 @@ namespace DSIS.Function.UserDefined
       Col = col;
       Row = row;
       Message = message;
+    }
+
+    public override string ToString()
+    {
+      return string.Format("Error. Line {0}, Row {1}. {2}", Row, Col, Message) + Environment.NewLine;
     }
   }
 }

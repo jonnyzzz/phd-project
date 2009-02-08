@@ -8,18 +8,20 @@ namespace DSIS.CodeCompiler
   public class CodeCompilerException : Exception
   {
     public readonly CompilerResults Results;
+    public readonly string Code;
 
-    public CodeCompilerException(CompilerResults results, string code, string[] assemblies) : base(CreateMessage(results, code, assemblies))
+    public CodeCompilerException(CompilerResults results, string code, IEnumerable<string> assemblies) : base(CreateMessage(results, code, assemblies))
     {
       Results = results;
-      }
+      Code = code;
+    }
 
-    private static string CreateMessage(CompilerResults results, string code, string[] assemblies)
+    private static string CreateMessage(CompilerResults results, string code, IEnumerable<string> assemblies)
     {
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       sb.AppendFormat("Compilation failed with code ").Append(results.NativeCompilerReturnValue);      
       sb.AppendLine();
-      Dictionary<int, int> errorLines = new Dictionary<int, int>();
+      var errorLines = new Dictionary<int, int>();
       foreach (CompilerError error in results.Errors)
       {
         sb.AppendLine(error.ToString());

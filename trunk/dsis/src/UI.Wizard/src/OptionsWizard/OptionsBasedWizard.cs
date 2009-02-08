@@ -96,7 +96,22 @@ namespace DSIS.UI.Wizard.OptionsWizard
 
     public Ref<string> ValidateLazy(IWizardPage page)
     {
-      //TODO!
+      if (page == FirstPage)
+      {
+        return ValidateSelector();
+      } else
+      {
+        return ValidateOptions(myOptions);
+      }
+    }
+
+    protected virtual Ref<string> ValidateSelector()
+    {
+      return Ref.Null<string>();
+    } 
+
+    protected virtual Ref<string> ValidateOptions(T options)
+    {
       return Ref.Null<string>();
     }
 

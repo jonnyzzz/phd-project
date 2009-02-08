@@ -1,4 +1,5 @@
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Reflection;
 using DSIS.CodeCompiler;
@@ -6,6 +7,7 @@ using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Function.Predefined;
 using DSIS.Utils;
+using ICodeCompiler=DSIS.CodeCompiler.ICodeCompiler;
 
 namespace DSIS.Function.UserDefined
 {
@@ -47,12 +49,23 @@ namespace DSIS.Function.UserDefined
       try
       {
         Create(ps);
-      } catch(UserDefinedFactoryException e)
+      }
+      catch (UserDefinedFactoryException e)
       {
         return e.Errors;
-      } catch(Exception e)
+      }
+      catch (CodeCompilerException e)
       {
-        return new[] {new CodeError(0, 0, e.Message)};
+        var list = new List<CodeError>();
+        foreach (CompilerError error in e.Results.Errors)
+        {
+          list.Add(new CodeError(error.Column, error.Line, error.ErrorText));
+        }
+        return list;
+      }
+      catch (Exception e)
+      {
+        return new[] { new CodeError(0, 0, e.Message) };
       }
       return EmptyArray<CodeError>.Instance;
     }

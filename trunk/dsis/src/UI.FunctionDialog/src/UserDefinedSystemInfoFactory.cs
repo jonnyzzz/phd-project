@@ -7,6 +7,7 @@ using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.FormsGenerator;
 using DSIS.UI.Wizard.ListSelector;
 using DSIS.UI.Wizard.OptionsWizard;
+using DSIS.Utils;
 
 namespace DSIS.UI.FunctionDialog
 {
@@ -42,8 +43,22 @@ namespace DSIS.UI.FunctionDialog
     [TypeInstanciable]
     private class OptionBa : OptionsBasedWizard<UserFunctionParameters, ISystemInfo, IUserDefinedFunctionFactory>
     {
-      public OptionBa(IListSelectorWizardPageFactory listFactory, IEnumerable<IUserDefinedFunctionFactory> factories) : base("TBD", listFactory, factories, x=>true)
+      private readonly IUserDefinedFunctionFactory myFactory;
+
+      public OptionBa(IListSelectorWizardPageFactory listFactory, IUserDefinedFunctionFactory factory) 
+        : base("TBD", listFactory, factory.Enum(), x=>true)
       {
+        myFactory = factory;
+      }
+
+      protected override Ref<string> ValidateOptions(UserFunctionParameters paramz)
+      {
+        var result = myFactory.CheckCode(paramz);
+        if (result.Count >0)
+        {
+          return (result.FoldLeft("", (err, x) => x + " " + err)).ToRef();
+        }
+        return base.ValidateOptions(paramz);
       }
     }
   }  
