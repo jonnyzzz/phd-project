@@ -95,7 +95,7 @@ namespace DSIS.Function.UserDefined.Tests
       }
 
       var err = Factory.CheckCode(ps);
-      Assert.That(err.Count, Is.GreaterThan(0));
+      Assert.IsTrue(err.Second.Count > 0 || err.First != null);
     }
   }
 }

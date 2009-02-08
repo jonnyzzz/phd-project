@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Function.UserDefined;
+using DSIS.UI.FunctionDialog.UI;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.FormsGenerator;
 using DSIS.UI.Wizard.ListSelector;
@@ -51,14 +53,21 @@ namespace DSIS.UI.FunctionDialog
         myFactory = factory;
       }
 
-      protected override Ref<string> ValidateOptions(UserFunctionParameters paramz)
+      protected override ValidationResult ValidateOptions(IWizardPage page, UserFunctionParameters paramz)
       {
         var result = myFactory.CheckCode(paramz);
-        if (result.Count >0)
+        if (result.Second.Count > 0)
         {
-          return (result.FoldLeft("", (err, x) => x + " " + err)).ToRef();
+          using(var form = new CompilerErrorForm(result))
+          {
+            var dr= form.ShowDialog(page.Control.FindForm());
+            if (dr == DialogResult.Retry)
+              return ValidationResult.Retry;
+            return ValidationResult.Cancel;
+          }
         }
-        return base.ValidateOptions(paramz);
+          
+        return base.ValidateOptions(page, paramz);
       }
     }
   }  

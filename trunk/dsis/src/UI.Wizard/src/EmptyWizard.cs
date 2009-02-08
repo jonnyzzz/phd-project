@@ -26,9 +26,9 @@ namespace DSIS.UI.Wizard
       return null;
     }
 
-    public Ref<string> ValidateLazy(IWizardPage page)
+    public ValidationResult ValidateLazy(IWizardPage page)
     {
-      return Ref.Null<string>();
+      return ValidationResult.Ok;
     }
 
     public void OnFinish()

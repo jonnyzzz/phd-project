@@ -7,6 +7,14 @@ namespace DSIS.Utils
 {
   public static class Util
   {
+    public static void ForEach<T>(this IEnumerable<T> enu, Action<T> act)
+    {
+      foreach (var t in enu)
+      {
+        act(t);
+      }
+    }
+
     public static void OfType<T>(this object o, Action<T> act)
     {
       if (o is T)

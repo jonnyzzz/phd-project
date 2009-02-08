@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using DSIS.Utils.Bean;
@@ -19,7 +20,11 @@ namespace DSIS.UI.Wizard.FieldInfos
       box.AcceptsReturn = true;
       box.AcceptsTab = true;
       box.ScrollBars = ScrollBars.Both;
+      if (myPref.Font != null)
+        box.Font = (Font) myPref.Font.Clone();
       box.Height = (int)(box.Font.GetHeight() * myPref.EnsureLines) + 15;
+      box.WordWrap = false;
+
       return base.UpdateTextBox(box);
     }
   }

@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
+using DSIS.Utils;
 
 namespace DSIS.Function.UserDefined
 {
   public interface IUserDefinedFunctionFactory : IOptionsBasedFactory<UserFunctionParameters, ISystemInfo>
   {
-    ICollection<CodeError> CheckCode(UserFunctionParameters ps);
+    Pair<string, ICollection<CodeError>> CheckCode(UserFunctionParameters ps);
   }
 }

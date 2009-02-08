@@ -92,6 +92,12 @@
     <Compile Include="src\SpaceParametersRowModel.cs" />
     <Compile Include="src\SystemFunctionComponent.cs" />
     <Compile Include="src\SystemFunctionSelectionWizard.cs" />
+    <Compile Include="src\UI\CompilerErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\UI\CompilerErrorForm.Designer.cs">
+      <DependentUpon>CompilerErrorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\UI\SpaceControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -108,6 +114,10 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="src\UI\CompilerErrorForm.resx">
+      <DependentUpon>CompilerErrorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\UI\SpaceControl.resx">
       <DependentUpon>SpaceControl.cs</DependentUpon>
       <SubType>Designer</SubType>

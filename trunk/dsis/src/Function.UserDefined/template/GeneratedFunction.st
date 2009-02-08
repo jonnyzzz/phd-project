@@ -2,7 +2,8 @@
 using DSIS.Core.Ioc;
 using DSIS.Function.Predefined;
 using DSIS.Function.UserDefined;
-
+using System;
+using System.IO;
 
 namespace DSIS.Function.UserDefined.Generated 
 {
@@ -22,12 +23,16 @@ namespace DSIS.Function.UserDefined.Generated
         double f$it.N$;
       }$
 
+      {
       //User code
       //_________________________________________
+      //$startCodeMarker$
       $userCode$
+      //$endCodeMarker$
       //_________________________________________ 
       //End of User code
-
+      }
+      
       $DimensionIt:{
         Output[$it.P$] = f$it.N$;
       }$

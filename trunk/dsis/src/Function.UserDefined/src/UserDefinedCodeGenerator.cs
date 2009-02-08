@@ -73,6 +73,9 @@ namespace DSIS.Function.UserDefined
       }
     }
 
+    private static readonly string START_CODE_MARKER = "User code range START.5C18387E-F066-45D4-94CA-86B3C59D3B22";
+    private static readonly string END_CODE_MARKER = "User code range END.5C18387E-F066-45D4-94CA-86B3C59D3B22";
+
     public string GenerateCode(UserFunctionParameters paramz)
     {
       var dim = paramz.Dimension;
@@ -91,7 +94,7 @@ namespace DSIS.Function.UserDefined
         new EmbeddedResourceTemplateLoader(
           GetType().Assembly,
           "DSIS.Function.UserDefined.template")
-          );
+        );
 
       var template = g.GetInstanceOf("GeneratedFunction");
       template.SetAttribute("Dimension", dim);
@@ -100,8 +103,25 @@ namespace DSIS.Function.UserDefined
       template.SetAttribute("predefines", GenerateMathRedefinitions());
       template.SetAttribute("SystemType", GeneratorTypeUtil.EnumValue(paramz.SystemType));
       template.SetAttribute("PresentableName", GeneratorTypeUtil.SafeString(paramz.FunctionName));
+      template.SetAttribute("startCodeMarker", START_CODE_MARKER);
+      template.SetAttribute("endCodeMarker", END_CODE_MARKER);
       
       return template.ToString();
+    }
+
+    public Predicate<int> UserCodeRangeFilter(string code)
+    {
+      var noLines = new List<Pair<int, string>>();
+      int id = 1;
+      foreach (var line in code.Split('\n'))
+      {
+        noLines.Add(Pair.Create(id++, line));
+      }
+
+      int startLine = noLines.Where(x => x.Second.Contains(START_CODE_MARKER)).Map(x => x.First).First();
+      int endLine =   noLines.Where(x => x.Second.Contains(END_CODE_MARKER)).Map(x => x.First).First();
+
+      return x => x > startLine && x < endLine;
     }
   }
 }

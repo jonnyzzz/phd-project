@@ -2,6 +2,13 @@ using DSIS.Utils;
 
 namespace DSIS.UI.Wizard
 {
+  public enum ValidationResult
+  {
+    Retry,
+    Cancel, 
+    Ok
+  }
+
   public interface IWizardPack
   {
     /// <summary>
@@ -37,7 +44,7 @@ namespace DSIS.UI.Wizard
     /// </summary>
     /// <param name="page"></param>
     /// <returns>error message or Ref.Null</returns>
-    Ref<string> ValidateLazy(IWizardPage page);
+    ValidationResult ValidateLazy(IWizardPage page);
 
     /// <summary>
     /// Called when user pressed 'Finish' button on some page where <see cref="IsLastPage"/> returned true

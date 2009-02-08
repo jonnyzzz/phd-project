@@ -1,5 +1,4 @@
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Reflection;
 using DSIS.CodeCompiler;
@@ -7,6 +6,7 @@ using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Function.Predefined;
 using DSIS.Utils;
+using log4net;
 using ICodeCompiler=DSIS.CodeCompiler.ICodeCompiler;
 
 namespace DSIS.Function.UserDefined
@@ -14,6 +14,8 @@ namespace DSIS.Function.UserDefined
   [ComponentImplementation]
   public class UserDefinedFunctionFactoryImpl : IUserDefinedFunctionFactory
   {
+    private static readonly ILog LOG = LogManager.GetLogger(typeof (UserDefinedFunctionFactoryImpl));
+
     [Autowire]
     public IUserDefinedCodeGenerator CodeGen { get; set; }
 
@@ -44,7 +46,7 @@ namespace DSIS.Function.UserDefined
       return c.GetComponent<ISystemInfoMarker>();
     }
 
-    public ICollection<CodeError> CheckCode(UserFunctionParameters ps)
+    public Pair<string,ICollection<CodeError>> CheckCode(UserFunctionParameters ps)
     {
       try
       {
@@ -52,22 +54,26 @@ namespace DSIS.Function.UserDefined
       }
       catch (UserDefinedFactoryException e)
       {
-        return e.Errors;
+        LOG.Error(e);
+        return Pair.Create(e.Message, e.Errors);
       }
       catch (CodeCompilerException e)
       {
+        LOG.Error(e);
         var list = new List<CodeError>();
-        foreach (CompilerError error in e.Results.Errors)
+        foreach (var error in e.Errors)
         {
           list.Add(new CodeError(error.Column, error.Line, error.ErrorText));
         }
-        return list;
+
+        return Pair.Create(e.GetErrorsAndCode(CodeGen.UserCodeRangeFilter(e.Code)), (ICollection<CodeError>)list);
       }
       catch (Exception e)
       {
-        return new[] { new CodeError(0, 0, e.Message) };
+        LOG.Error(e);
+        return Pair.Create<string, ICollection<CodeError>>(e.Message, EmptyArray<CodeError>.Instance);
       }
-      return EmptyArray<CodeError>.Instance;
+      return Pair.Create<string, ICollection<CodeError>>(null, EmptyArray<CodeError>.Instance);
     }
   }
 }

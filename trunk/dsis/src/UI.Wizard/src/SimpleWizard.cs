@@ -43,9 +43,9 @@ namespace DSIS.UI.Wizard
       return ((SimplePage)page).Next;
     }
 
-    public Ref<string> ValidateLazy(IWizardPage page)
+    public ValidationResult ValidateLazy(IWizardPage page)
     {
-      return Ref.Null<string>();
+      return ValidationResult.Ok;
     }
 
     public virtual void OnFinish()

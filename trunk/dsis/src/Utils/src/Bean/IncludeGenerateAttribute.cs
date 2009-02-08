@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 namespace DSIS.Utils.Bean
 {
@@ -17,9 +18,11 @@ namespace DSIS.Utils.Bean
   {
     public int EnsureLines { get; set; }
 
+    public Font Font { get; set; }
+
     public TextAreaEditorPreference()
     {
-      EnsureLines = 10;
+      EnsureLines = 20;
     }
   }
 

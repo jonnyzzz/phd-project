@@ -94,25 +94,25 @@ namespace DSIS.UI.Wizard.OptionsWizard
       return optz.First;
     }
 
-    public Ref<string> ValidateLazy(IWizardPage page)
+    public ValidationResult ValidateLazy(IWizardPage page)
     {
       if (page == FirstPage)
       {
-        return ValidateSelector();
+        return ValidateSelector(page);
       } else
       {
-        return ValidateOptions(myOptions);
+        return ValidateOptions(page, myOptions);
       }
     }
 
-    protected virtual Ref<string> ValidateSelector()
+    protected virtual ValidationResult ValidateSelector(IWizardPage page)
     {
-      return Ref.Null<string>();
-    } 
+      return ValidationResult.Ok;
+    }
 
-    protected virtual Ref<string> ValidateOptions(T options)
+    protected virtual ValidationResult ValidateOptions(IWizardPage page, T options)
     {
-      return Ref.Null<string>();
+      return ValidationResult.Ok;
     }
 
     private Pair<IWizardPage, T> CreateOptions()

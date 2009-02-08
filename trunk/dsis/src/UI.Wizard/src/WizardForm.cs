@@ -65,18 +65,7 @@ namespace DSIS.UI.Wizard
 
     private bool ValidatePage(IWizardPage currentPage)
     {
-      Action<string> showError = msg =>
-                                   {
-                                     var result = MessageBox.Show(this, msg, "Error", MessageBoxButtons.RetryCancel,
-                                                                  MessageBoxIcon.Error);
-                                     if (result == DialogResult.Cancel)
-                                     {
-                                       DialogResult = DialogResult.Cancel;
-                                     }
-                                   };
-
-
-    var lazy = currentPage as ILazyValidate;
+      var lazy = currentPage as ILazyValidate;
       if (lazy != null && !lazy.ValidateLazy())
       {
         //TODO:ShowError
@@ -84,12 +73,19 @@ namespace DSIS.UI.Wizard
       }
 
       var validate = myPack.ValidateLazy(currentPage);
-      if (validate.HasValue)
+      switch(validate)
       {
-        showError(validate.Value);
-        return false;
+        case ValidationResult.Ok:
+          return true;
+        case ValidationResult.Cancel:
+          DialogResult = DialogResult.Cancel;
+          return false;
+        case ValidationResult.Retry:
+          return false;
+        default:
+          throw new ArgumentException(string.Format("Unknown value for {0} of type {1}", validate,
+                                                    typeof (ValidationResult)));
       }
-      return true;
     }
 
     private void ButtonNextClick(object sender, EventArgs args)
