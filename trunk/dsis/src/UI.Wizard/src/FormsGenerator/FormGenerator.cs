@@ -58,6 +58,11 @@ namespace DSIS.UI.Wizard.FormsGenerator
 
       inf.ValueChanged += (_, control, message) =>
                       {
+                        if (message != null)
+                        {                          
+                          myErrorProvider.SetError(control, null);
+                        }
+
                         myErrorProvider.SetError(control, message);
                         myErrorProvider.SetIconAlignment(control, ErrorIconAlignment.MiddleRight);
                         myErrorProvider.SetIconPadding(control, -10);

@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using System.Windows.Forms;
-using DSIS.UI.Wizard.FieldInfos;
 using DSIS.UI.Wizard.FormsGenerator;
 using log4net;
 
@@ -17,7 +16,7 @@ namespace DSIS.UI.Wizard.FieldInfos
 
     protected sealed override Control CreateControl()
     {
-      Control control = new TextBox {Text = GetValueString()};
+      var control = new TextBox {Text = GetValueString()};
       control.TextChanged += delegate
                                {
                                  try
@@ -31,7 +30,13 @@ namespace DSIS.UI.Wizard.FieldInfos
                                    FireError("Failed to set value. " + e.Message);
                                  }
                                };
-      return control;
+      
+      return UpdateTextBox(control);
+    }
+
+    protected virtual Control UpdateTextBox(TextBox box)
+    {
+      return box;
     }
 
     protected virtual void TrySetValue(string value)

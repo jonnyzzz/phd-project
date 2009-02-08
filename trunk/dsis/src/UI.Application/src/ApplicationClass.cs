@@ -8,7 +8,7 @@ using DSIS.Utils;
 namespace DSIS.UI.Application
 {
   [ComponentImplementation]
-  public class ApplicationClass : IApplicationClass, IApplication
+  public sealed class ApplicationClass : IApplicationClass, IApplication
   {
     private readonly IMainForm myMainForm;
     private IApplicationDocument myDocument;

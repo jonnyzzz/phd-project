@@ -1,30 +1,60 @@
 ﻿using DSIS.Core.System;
+using DSIS.Core.Ioc;
 using DSIS.Function.Predefined;
+using DSIS.Function.UserDefined;
 
-public class AFunction : Function<double>, IFunction<double>
+
+namespace DSIS.Function.UserDefined.Generated 
 {
-  public AFunction(double a)
-    : base( $Dimension$ )
+  public class AFunction : Function<double>, IFunction<double>
   {
-  } 
+    public AFunction( )
+      : base( $Dimension$ )
+    {
+    } 
 
-  $predefines$
+    $predefines$
 
-  public void Evaluate()
-  {
-    $DimensionIt:{
-      var x$it.N$ = Input[$it.P$];
-      double f$it.N$;
-    }$
+    public void Evaluate()
+    {
+      $DimensionIt:{
+        var x$it.N$ = Input[$it.P$];
+        double f$it.N$;
+      }$
 
-    //User code
-    //_________________________________________
-    $userCode$
-    //_________________________________________ 
-    //End of User code
+      //User code
+      //_________________________________________
+      $userCode$
+      //_________________________________________ 
+      //End of User code
 
-    $DimensionIt:{
-      Output[$it.P$] = f$it.N$;
-    }$
+      $DimensionIt:{
+        Output[$it.P$] = f$it.N$;
+      }$
+    }
+  }
+
+  [GeneratedImplementationArrtubute]
+  [NoInheritContainerAttribute]
+  public class AFunctionInfo : DoubleSystemInfoBase, ISystemInfoMarker
+  {    
+    public AFunctionInfo() : base($Dimension$)
+    {
+    }
+
+    public override string PresentableName
+    {
+      get { return $PresentableName$; }
+    }
+
+    protected override IFunction<double> GetFunctionInternal()
+    {
+      return new AFunction();
+    }
+
+    public override SystemType Type
+    {
+      get { return $SystemType$; }
+    }
   }
 }

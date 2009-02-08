@@ -14,7 +14,7 @@ namespace DSIS.UI.Application
       System.Windows.Forms.Application.EnableVisualStyles();
       System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
-      return ApplicationEntryPoint.DoMain(args);
+      return ApplicationEntryPoint<ApplicationClass>.DoMain(args);
     }
   }
 }

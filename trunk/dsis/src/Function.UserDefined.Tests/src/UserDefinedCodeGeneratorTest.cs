@@ -1,16 +1,10 @@
 using System;
-using DSIS.CodeCompiler;
 using DSIS.Core.System;
 using DSIS.Function.Predefined;
 using NUnit.Framework;
 
 namespace DSIS.Function.UserDefined.Tests
 {
-  public class CodeCompilerBasedTest
-  {
-    protected ICodeCompiler Compiler { get { return new CodeCompilerImpl(new CodeCompilerFilenameGenerator()); } }
-  }
-
   [TestFixture]
   public class UserDefinedCodeGeneratorTest : CodeCompilerBasedTest
   {
@@ -37,9 +31,8 @@ namespace DSIS.Function.UserDefined.Tests
 
       var code = gen.GenerateCode(pz);
 
-      Compiler.CompileCSharpCode(code, typeof (Function<>), typeof(FunctionIO<>));
+      Compiler.CompileCSharpCode(code, typeof(Function<>), typeof(FunctionIO<>), typeof(DoubleSystemInfoBase), typeof(GeneratedImplementationArrtubute));
     }
-
 
     [Test]
     public void TestGenerateFullClass_2()
@@ -54,7 +47,7 @@ namespace DSIS.Function.UserDefined.Tests
 
       var code = gen.GenerateCode(pz);
 
-      Compiler.CompileCSharpCode(code, typeof (Function<>), typeof(FunctionIO<>));
+      Compiler.CompileCSharpCode(code, typeof(Function<>), typeof(FunctionIO<>), typeof(DoubleSystemInfoBase), typeof(GeneratedImplementationArrtubute));
     }
   }
 }

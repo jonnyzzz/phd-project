@@ -1,6 +1,5 @@
 using System.Reflection;
 using System.Windows.Forms;
-using DSIS.UI.Wizard.FieldInfos;
 
 namespace DSIS.UI.Wizard.FieldInfos
 {

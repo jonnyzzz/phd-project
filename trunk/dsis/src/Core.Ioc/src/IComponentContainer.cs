@@ -26,6 +26,9 @@ namespace DSIS.Core.Ioc
   {
     IComponentContainer SubContainer<TImplementation>()
       where TImplementation : ComponentImplementationAttributeBase;
+
+    IComponentContainer SubContainerNoScan<TImplementation>()
+      where TImplementation : ComponentImplementationAttributeBase;
   }
 
   /// <summary>

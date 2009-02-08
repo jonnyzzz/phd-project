@@ -37,13 +37,13 @@ namespace DSIS.Core.Ioc.JC
       var baseType = y.BaseType;
       if (baseType != null)
       {
-        result.UnionWith(GetBaseTypes(baseType));
+        result.UnionWith(GetBases(cache, baseType, includeInterfaces));
       }
       if (includeInterfaces)
       {
         foreach (var type in y.GetInterfaces())
         {
-          result.UnionWith(GetBaseTypes(type));
+          result.UnionWith(GetBases(cache, type, true));
         }
       }
 

@@ -2,6 +2,11 @@
 
 namespace DSIS.UI.Wizard
 {
+  public interface ILazyValidate
+  {
+    bool ValidateLazy();
+  }
+
   /// <summary>
   /// Represents page from Wizard.
   /// This interface is used as a key to dictionary. 

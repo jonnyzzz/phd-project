@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using DSIS.Core.Ioc.JC;
 using DSIS.Utils;
 
@@ -15,8 +16,9 @@ namespace DSIS.Core.Ioc.Ex
     {
       //ComponentInterfaceAttribute, ComponentCollectionAttribute, 
       using (var rootContainer = new JComponentContainer<ComponentImplementationAttribute>())
-      { 
-        rootContainer.ScanAssemblies(new[] { Assembly.GetCallingAssembly(), Assembly.GetEntryAssembly(), Assembly.GetExecutingAssembly()});
+      {
+        var assemblies = new[] { Assembly.GetCallingAssembly(), Assembly.GetEntryAssembly(), Assembly.GetExecutingAssembly()};
+        rootContainer.ScanAssemblies(assemblies);
 
         new ScanCurrentFolder(rootContainer);
         new AppDomainSubscription(rootContainer);

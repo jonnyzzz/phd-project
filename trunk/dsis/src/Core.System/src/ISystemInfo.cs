@@ -5,12 +5,15 @@
 
 using System;
 using DSIS.Core.System.Tree;
+using DSIS.Utils.Bean;
 
 namespace DSIS.Core.System
 {
   public enum SystemType
   {
+    [IncludeValueAttribute(Title = "Continious")]
     Continious,
+    [IncludeValueAttribute(Title = "Descrete")]
     Discrete
   }
 

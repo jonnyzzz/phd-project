@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using DSIS.UI.Wizard.ListSelector;
+using System.Linq;
+using DSIS.Utils.Bean;
 
 namespace DSIS.UI.Wizard.FieldInfos
 {
@@ -20,7 +23,14 @@ namespace DSIS.UI.Wizard.FieldInfos
 
     protected override IEnumerable<ListInfo<Wrapper>> CreateListInfos()
     {
-      return myFactory(Wrap);
+      var infos = myFactory(Wrap).ToList();
+      if (infos.Count == 0)
+      {
+        throw new Exception(
+          string.Format("Failed to create selector with 0 elements. Make sure you marked enum members with {0}",
+                        typeof (IncludeValueAttribute)));
+      }
+      return infos;
     }
   }
 }

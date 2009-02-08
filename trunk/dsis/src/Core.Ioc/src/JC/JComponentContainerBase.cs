@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace DSIS.Core.Ioc.JC
@@ -71,7 +72,7 @@ namespace DSIS.Core.Ioc.JC
 
     public void ScanAssemblies(IEnumerable<Assembly> assemblies)
     {
-      var toLoad = new HashSet<Assembly>(assemblies);
+      var toLoad = new HashSet<Assembly>(assemblies.Where(x=>x!=null));
       toLoad.RemoveWhere(x => myAssemblies.Contains(x));
 
       myAssemblies.UnionWith(toLoad);
@@ -89,10 +90,14 @@ namespace DSIS.Core.Ioc.JC
     public IComponentContainer SubContainer<TImplementation>() 
       where TImplementation : ComponentImplementationAttributeBase
     {
-      var child = CreateContainer<TImplementation>();
+      var child = SubContainerNoScan<TImplementation>();
       child.ScanAssemblies(myAssemblies);
-
       return child;
+    }
+
+    public IComponentContainer SubContainerNoScan<TImplementation>() where TImplementation : ComponentImplementationAttributeBase
+    {
+      return CreateContainer<TImplementation>();
     }
 
     public ITypesFilter Filter

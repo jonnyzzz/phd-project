@@ -50,12 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\CodeCompilerBasedTest.cs" />
     <Compile Include="src\UserDefinedCodeGeneratorTest.cs" />
+    <Compile Include="src\UserDefinedFunctionFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
@@ -68,6 +74,10 @@
     <ProjectReference Include="..\Function.UserDefined\Function.UserDefined.csproj">
       <Project>{3904EC2C-B187-4999-ABB7-059DF4AA2371}</Project>
       <Name>Function.UserDefined</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
+      <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
+      <Name>Scheme.Objects</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="../Before.Build.Targets" />

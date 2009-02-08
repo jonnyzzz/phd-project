@@ -86,7 +86,6 @@ namespace DSIS.Function.UserDefined
         dims.Add(new NP(i+1));
       }
 
-
       var g = new StringTemplateGroup(
         "foo", 
         new EmbeddedResourceTemplateLoader(
@@ -99,7 +98,9 @@ namespace DSIS.Function.UserDefined
       template.SetAttribute("DimensionIt", dims);
       template.SetAttribute("userCode", paramz.Code);
       template.SetAttribute("predefines", GenerateMathRedefinitions());
-
+      template.SetAttribute("SystemType", GeneratorTypeUtil.EnumValue(paramz.SystemType));
+      template.SetAttribute("PresentableName", GeneratorTypeUtil.SafeString(paramz.FunctionName));
+      
       return template.ToString();
     }
   }

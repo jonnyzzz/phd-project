@@ -63,6 +63,12 @@ namespace DSIS.UI.Wizard
     private void ButtonNextClick(object sender, EventArgs args)
     {
       var currentPage = myPages.Peek();
+      var lazy = currentPage as ILazyValidate;
+      if (lazy != null && !lazy.ValidateLazy())
+      {
+        //TODO: Show error somehow.
+        return;
+      }
       var nextPage = myPack.Next(currentPage);
       if (nextPage == null)
       {

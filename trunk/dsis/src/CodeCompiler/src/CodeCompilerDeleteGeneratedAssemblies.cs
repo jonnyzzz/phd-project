@@ -21,9 +21,15 @@ namespace DSIS.CodeCompiler
       {
         if (File.Exists(file))
         {
-          File.SetAttributes(file, FileAttributes.Normal);
-          File.Delete(file);
-          LOG.DebugFormat("Delete generated file '{0}'", file);
+          try
+          {
+            File.SetAttributes(file, FileAttributes.Normal);
+            File.Delete(file);
+            LOG.DebugFormat("Delete generated file '{0}'", file);
+          } catch
+          {
+            //Skipped.NOP;
+          }
         }
       }
     }

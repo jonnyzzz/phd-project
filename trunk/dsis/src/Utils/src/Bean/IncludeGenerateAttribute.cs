@@ -8,6 +8,22 @@ namespace DSIS.Utils.Bean
     public string Description { get; set; }
   }
 
+  [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+  public abstract class EditorPreferenceAttribute : Attribute
+  {
+  }
+
+  public class TextAreaEditorPreference : EditorPreferenceAttribute
+  {
+    public int EnsureLines { get; set; }
+
+    public TextAreaEditorPreference()
+    {
+      EnsureLines = 10;
+    }
+  }
+
+
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
   public class IncludeValueAttribute : IncludeGenerateAttribute
   {

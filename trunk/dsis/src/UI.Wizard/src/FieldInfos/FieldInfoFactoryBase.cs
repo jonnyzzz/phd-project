@@ -5,7 +5,7 @@ namespace DSIS.UI.Wizard.FieldInfos
 {
   public abstract class FieldInfoFactoryBase<T> : IFieldInfoFactory
   {
-    public bool Matches(Type t, PropertyInfo info)
+    public virtual bool Matches(Type t, PropertyInfo info)
     {
       return typeof(T) == t;
     }

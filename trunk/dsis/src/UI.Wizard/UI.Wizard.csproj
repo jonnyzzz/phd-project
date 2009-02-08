@@ -90,6 +90,8 @@
     <Compile Include="src\FieldInfos\FieldInfoManager.cs" />
     <Compile Include="src\FieldInfos\FieldInfoFactoryBase.cs" />
     <Compile Include="src\FieldInfos\IncludeValueEnumFieldInfoFactory.cs" />
+    <Compile Include="src\FieldInfos\TextAreaFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\TextFieldInfoFactory.cs" />
     <Compile Include="src\FormsGenerator\FormGenerator.cs">
       <SubType>UserControl</SubType>
     </Compile>

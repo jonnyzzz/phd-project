@@ -5,8 +5,11 @@ using DSIS.Utils.Bean;
 namespace DSIS.Function.UserDefined
 {
   [Serializable]
-  public class UserFunctionParameters
+  public class UserFunctionParameters 
   {
+    [IncludeGenerate(Title="Name")]
+    public string FunctionName { get; set; }
+
     [IncludeGenerate(Title="Dimension", Description = "Enter system function dimension")]
     public int Dimension { get; set; }
 
@@ -14,6 +17,7 @@ namespace DSIS.Function.UserDefined
     public SystemType SystemType { get; set; }
 
     [IncludeGenerate(Title = "Enter function code", Description = "TODO")]
+    [TextAreaEditorPreference]
     public string Code { get; set; }
 
     public UserFunctionParameters()

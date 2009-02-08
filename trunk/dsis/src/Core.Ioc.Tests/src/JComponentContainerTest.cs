@@ -202,7 +202,7 @@ namespace DSIS.Core.Ioc.Tests
 
     [Tx6]
     public class JI7 {}
-    public class JI7x { [Autowire] public JI7 Prop{ get; set;} public string Bar { get; private set;}
+    [TypeInstanciable]public class JI7x { [Autowire] public JI7 Prop{ get; set;} public string Bar { get; private set;}
 
       public JI7x(string bar)
       {

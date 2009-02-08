@@ -73,5 +73,19 @@ namespace DSIS.CodeCompiler
       return name;
     }
 
+    public static string EnumValue(object t)
+    {
+      var type = t.GetType();
+      return GenerateFQTypeName(type) + "." + Enum.GetName(type, t);
+    }
+
+    public static string SafeString(string s)
+    {
+      if (s == null)
+      {
+        return "\"<NA>\"";
+      }
+      return "@\"" + s.Replace("\"", "\"\"") + "\"";
+    }
   }
 }

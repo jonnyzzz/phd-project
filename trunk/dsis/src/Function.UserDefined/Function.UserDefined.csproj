@@ -52,6 +52,8 @@
     <Compile Include="src\CodeError.cs" />
     <EmbeddedResource Include="template\GeneratedFunction.st" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\GeneratedImplementationArrtubute.cs" />
+    <Compile Include="src\ISystemInfoMarker.cs" />
     <Compile Include="src\UserDefinedCodeGenerator.cs" />
     <Compile Include="src\IUserDefinedCodeGenerator.cs" />
     <Compile Include="src\IUserDefinedFunctionFactory.cs" />
