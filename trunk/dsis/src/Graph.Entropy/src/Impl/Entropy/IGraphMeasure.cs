@@ -14,6 +14,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
   public interface IGraphMeasure
   {
     void DoCallback(IGraphMeasureWith measure);
+    double[] CellSize { get; }
   }
 
   public interface IGraphMeasureWith

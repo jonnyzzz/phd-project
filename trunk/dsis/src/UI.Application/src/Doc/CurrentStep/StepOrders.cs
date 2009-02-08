@@ -7,7 +7,7 @@ namespace DSIS.UI.Application.Doc.CurrentStep
     Subdivision,
     CellSize,
     NumberOfCells,
-    
+    ComponentsInfo,
     EntropyOrder = 1000,
   }
 }

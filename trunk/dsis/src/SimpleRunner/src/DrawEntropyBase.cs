@@ -12,8 +12,7 @@ namespace DSIS.SimpleRunner
 
     private GnuplotScriptParameters CreateGnuplotParams(string image)
     {
-      GnuplotScriptParameters ps = new GnuplotScriptParameters(image, "Entropy for " + Title);
-      ps.ShowKeyHistory = true;
+      var ps = new GnuplotScriptParameters(image, "Entropy for " + Title) {ShowKeyHistory = true};
       return ps;
     }    
     
@@ -21,7 +20,7 @@ namespace DSIS.SimpleRunner
     {
       string image = CreateFileName(suffix + ".png");
 
-      LinesScriptGen gen = new LinesScriptGen(CreateFileName(".pnuplot"), CreateGnuplotParams(image));
+      var gen = new LinesScriptGen(CreateFileName(".pnuplot"), CreateGnuplotParams(image));
 
       foreach (LineData data in CreateSeria(mySeries))
       {
@@ -29,7 +28,7 @@ namespace DSIS.SimpleRunner
       }
       gen.Finish();
 
-      GnuplotDrawer.GnuplotDrawer dw = new GnuplotDrawer.GnuplotDrawer();
+      var dw = new GnuplotDrawer.GnuplotDrawer();
       dw.DrawImage(gen);
 
       return image;

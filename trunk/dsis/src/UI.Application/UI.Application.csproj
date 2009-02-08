@@ -128,7 +128,9 @@
     <Compile Include="src\Doc\CurrentDocumentControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="src\Doc\CurrentStep\ComponentsInfoStepCustomParameter.cs" />
     <Compile Include="src\Doc\CurrentStep\EntropyCurrentStepCustomParameter.cs" />
+    <Compile Include="src\Doc\CurrentStep\IntegerCoordinateStepCustomParameterBase.cs" />
     <Compile Include="src\Doc\DefaultDocumentCenterControls.cs" />
     <Compile Include="src\Doc\DefaultDocumentControls.cs" />
     <Compile Include="src\Doc\DocUIManager.cs" />
@@ -236,6 +238,10 @@
     <ProjectReference Include="..\Graph.Entropy\Graph.Entropy.csproj">
       <Project>{43283F9D-A669-47B2-80FD-FFA447A4BD7F}</Project>
       <Name>Graph.Entropy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Graph\Graph.csproj">
+      <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
+      <Name>Graph</Name>
     </ProjectReference>
     <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Util;
+using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Entropy
@@ -159,6 +160,11 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     public void DoCallback(IGraphMeasureWith measure)
     {
       measure.WithGraphMeasure(this);
+    }
+
+    public double[] CellSize
+    {
+      get { return ((IIntegerCoordinateSystem) myCoorsinateSystem).CellSize; }
     }
   }
 }
