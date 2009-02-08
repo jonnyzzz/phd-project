@@ -55,20 +55,49 @@ namespace DSIS.UI.Wizard
         return;
       }
 
+      if (!ValidatePage(myPages.Peek()))
+        return;
+
       ErrorHandler.Safe(myPack.OnFinish);
 
       DialogResult = DialogResult.OK;
     }
 
+    private bool ValidatePage(IWizardPage currentPage)
+    {
+      Action<string> showError = msg =>
+                                   {
+                                     var result = MessageBox.Show(this, msg, "Error", MessageBoxButtons.RetryCancel,
+                                                                  MessageBoxIcon.Error);
+                                     if (result == DialogResult.Cancel)
+                                     {
+                                       DialogResult = DialogResult.Cancel;
+                                     }
+                                   };
+
+
+    var lazy = currentPage as ILazyValidate;
+      if (lazy != null && !lazy.ValidateLazy())
+      {
+        //TODO:ShowError
+        return false;
+      }
+
+      var validate = myPack.ValidateLazy(currentPage);
+      if (validate.HasValue)
+      {
+        showError(validate.Value);
+        return false;
+      }
+      return true;
+    }
+
     private void ButtonNextClick(object sender, EventArgs args)
     {
       var currentPage = myPages.Peek();
-      var lazy = currentPage as ILazyValidate;
-      if (lazy != null && !lazy.ValidateLazy())
-      {
-        //TODO: Show error somehow.
+      if (!ValidatePage(currentPage))
         return;
-      }
+      
       var nextPage = myPack.Next(currentPage);
       if (nextPage == null)
       {

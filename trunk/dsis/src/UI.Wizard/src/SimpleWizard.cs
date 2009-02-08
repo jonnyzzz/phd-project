@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using DSIS.Utils;
 
 namespace DSIS.UI.Wizard
 {
@@ -40,6 +41,11 @@ namespace DSIS.UI.Wizard
     public IWizardPage Next(IWizardPage page)
     {
       return ((SimplePage)page).Next;
+    }
+
+    public Ref<string> ValidateLazy(IWizardPage page)
+    {
+      return Ref.Null<string>();
     }
 
     public virtual void OnFinish()

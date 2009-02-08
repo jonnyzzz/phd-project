@@ -47,6 +47,11 @@ namespace DSIS.UI.Wizard
       return myCurrentWizardNode.NextPage();
     }
 
+    public Ref<string> ValidateLazy(IWizardPage page)
+    {
+      throw new NotImplementedException();
+    }
+
     public void OnFinish()
     {
       myCurrentWizardNode.Each(x => Try(x, "OnCancel", () => x.OnFinish()));

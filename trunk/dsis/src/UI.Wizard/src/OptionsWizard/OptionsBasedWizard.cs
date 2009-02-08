@@ -21,7 +21,6 @@ namespace DSIS.UI.Wizard.OptionsWizard
     private readonly string myTitle;   
     private readonly List<F> myFactories;
     private readonly IListSelectorWizardPage<F> myFactorySelector;
-    private readonly Dictionary<F, Pair<IWizardPage, T>> myOptionsCache = new Dictionary<F, Pair<IWizardPage, T>>();
     private T myOptions;
     private bool myIsFinished;
     private bool myIsCanceled;
@@ -95,14 +94,15 @@ namespace DSIS.UI.Wizard.OptionsWizard
       return optz.First;
     }
 
+    public Ref<string> ValidateLazy(IWizardPage page)
+    {
+      //TODO!
+      return Ref.Null<string>();
+    }
+
     private Pair<IWizardPage, T> CreateOptions()
     {
       var factory = myFactorySelector.SelectedItem;
-
-      Pair<IWizardPage, T> iu;
-      if (myOptionsCache.TryGetValue(factory, out iu))
-        return iu;
-
       var obj = factory.CreateOptions();
       return new Pair<IWizardPage, T>(myFormGeneratorFactory.CreatePage(GetOptionsTitle(factory), obj), obj);
     }

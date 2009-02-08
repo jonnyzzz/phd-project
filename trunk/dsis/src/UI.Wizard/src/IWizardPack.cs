@@ -1,3 +1,5 @@
+using DSIS.Utils;
+
 namespace DSIS.UI.Wizard
 {
   public interface IWizardPack
@@ -27,6 +29,15 @@ namespace DSIS.UI.Wizard
     /// <param name="page">Page to compute next page</param>
     /// <returns>Next page or null</returns>
     IWizardPage Next(IWizardPage page);
+
+    /// <summary>
+    /// Called before page is confirmed. 
+    /// Called strictly before Next and OnFinish to allow wizard
+    /// to validate it's state. 
+    /// </summary>
+    /// <param name="page"></param>
+    /// <returns>error message or Ref.Null</returns>
+    Ref<string> ValidateLazy(IWizardPage page);
 
     /// <summary>
     /// Called when user pressed 'Finish' button on some page where <see cref="IsLastPage"/> returned true

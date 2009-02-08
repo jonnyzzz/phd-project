@@ -1,3 +1,5 @@
+using DSIS.Utils;
+
 namespace DSIS.UI.Wizard
 {
   public class EmptyWizard : IWizardPack
@@ -22,6 +24,11 @@ namespace DSIS.UI.Wizard
     public IWizardPage Next(IWizardPage page)
     {
       return null;
+    }
+
+    public Ref<string> ValidateLazy(IWizardPage page)
+    {
+      return Ref.Null<string>();
     }
 
     public void OnFinish()

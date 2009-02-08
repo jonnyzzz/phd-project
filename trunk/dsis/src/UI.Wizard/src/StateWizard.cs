@@ -1,3 +1,5 @@
+using DSIS.Utils;
+
 namespace DSIS.UI.Wizard
 {
   public abstract class StateWizard : IWizardPack
@@ -14,6 +16,11 @@ namespace DSIS.UI.Wizard
     public IWizardPage Next(IWizardPage page)
     {
       return ((IWizardPageWithState) page).NextPage;
+    }
+
+    public Ref<string> ValidateLazy(IWizardPage page)
+    {
+      return Ref.Null<string>();
     }
 
     public virtual void OnFinish()
