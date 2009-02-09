@@ -1,12 +1,10 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
-using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Graph.Morse;
 using DSIS.Scheme.Ctx;
-using DSIS.Graph.Abstract;
-using System.Linq;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
@@ -33,9 +31,13 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 
       var diffFunction = (IDetDiffFunction<double>) function;
       var dic = new Dictionary<IStrongComponentInfo, JVRMorseMinMax<Q>>();
+
+      int i = 1;
       foreach (var comp in comps.Components)
       {
+        Func<string> tmpFile = () => string.Format(@"e:\morse-{0}-c{1}.txt", DateTime.Now.ToFileTime(),i++); 
         var evaluator = new DetDiffMorseEvaluator<Q>(myOptions, diffFunction, comps, comp);
+        evaluator.AddPersist(new JVRFormatPersist<Q>(tmpFile));
         var max = evaluator.Compute(true);
         var min = evaluator.Compute(false);
 

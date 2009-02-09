@@ -12,6 +12,7 @@ namespace DSIS.Graph.Morse
     private readonly double myEps;
 
     private readonly IMorseEvaluatorGraph<T> myGraphComponent;
+    private readonly List<IMorseEvaluatorPersist<T>> myPersist = new List<IMorseEvaluatorPersist<T>>();
 
     //TODO: Use graph data holder
     private readonly Dictionary<INode<T>, ContourNode<T>> myNodes;
@@ -25,6 +26,11 @@ namespace DSIS.Graph.Morse
 
       myEps = opts.Eps;
       myGraphComponent = graphComponent;
+    }
+
+    public void AddPersist(IMorseEvaluatorPersist<T> persist)
+    {
+      myPersist.Add(persist);
     }
 
     protected abstract double Cost(INode<T> node);
@@ -75,33 +81,6 @@ namespace DSIS.Graph.Morse
       }
 
       return t == i1;
-    }
-
-    private void DebugDump(TextWriter tw)
-    {
-      int i = 0;
-      //NOTE: Preserve order
-      var nodes = new Dictionary<INode<T>, int>();
-      foreach (var _node in myGraphComponent.GetNodes())
-      {
-        var node = myNodes[_node];
-        nodes[node.Node] = i;
-        var nodeCost = node.NodeCost;
-        var cost = nodeCost.ToString("R", CultureInfo.GetCultureInfo("en-US"));
-        var sCost = Convert.ToBase64String(BitConverter.GetBytes(nodeCost));
-        tw.WriteLine("ctx.AddCost({0},{1}, \"{3}\"); //{2}", i, cost, node.Node, sCost);
-        i++;  
-      }
-
-      tw.WriteLine();
-      //NOTE: Preserve order!
-      foreach (var node in myGraphComponent.GetNodes())
-      {
-        foreach (var to in myGraphComponent.GetNodes(node))
-        {
-          tw.WriteLine("ctx.AddEdge({0}, {1});", nodes[node], nodes[to]);
-        }
-      }
     }
 
     private bool Tree(ContourNode<T> rnode)
@@ -186,17 +165,18 @@ namespace DSIS.Graph.Morse
 
     private ContourNode<T> DoCompute(ContourNode<T> node)
     {
-      var file = string.Format(@"e:\data{0}.txt", DateTime.Now.ToFileTime());
-      using(TextWriter tw = File.CreateText(file))
-      {
-        DebugDump(tw);
+      foreach (var persist in myPersist)
+      {        
+        persist.SaveGraph(myGraphComponent, x=>myNodes[x].NodeCost);
       }
+
+      node.Next = node;
+      return node;
 
       while (!Tree(node))
       {
       }
-
-      File.Delete(file);
+      
       return node;
     }
 

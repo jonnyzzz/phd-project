@@ -63,10 +63,13 @@
     <Compile Include="src\ContourNode.cs" />
     <Compile Include="src\DetDiffMorseEvaluator.cs" />
     <Compile Include="src\IMorseEvaluatorGraph.cs" />
+    <Compile Include="src\IMorseEvaluatorPersist.cs" />
+    <Compile Include="src\JVRFormatPersist.cs" />
     <Compile Include="src\MorseEvaluator.cs" />
     <Compile Include="src\MorseEvaluatorOptions.cs" />
     <Compile Include="src\MorseStrongComponentGraph.cs" />
     <Compile Include="src\NodeType.cs" />
+    <Compile Include="src\TestCaseMorsePersist.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.System\Core.System.csproj">

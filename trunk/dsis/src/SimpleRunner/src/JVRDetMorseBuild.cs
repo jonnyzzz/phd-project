@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,19 +14,52 @@ using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Actions.Performance;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
   public class JVRDetMorseBuild : SIBuild
   {
+    protected override List<ComputationData> GetSystemsToRun()
+    {
+      var data = new List<ComputationData>();
+      foreach (int rep in 13.Each())
+      {
+        data.AddRange(ForBuildser(new List<ComputationData>
+                                    {
+//                       new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
+//                                      new ComputationData {system = SystemInfoFactory.OsipenkoBio2(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Delayed(2.27), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing2x2Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_5x1_5Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_4x1_4Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_3x1_3Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_2x1_2Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.VanDerPolRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.LorentzRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.RosslerRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.BrusselatorRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},
+                                    },
+                                  new[]
+                                    {
+//                                      Builder.Adaptive,
+                                      Builder.Box
+                                    }));
+      }
+      return data;
+    }
+
     protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, bool isLast)
     {
       if (isLast)
       {
         BuildJVRCall(siConstructionAction, system, 1e-3);
-        BuildJVRCall(siConstructionAction, system, 1e-4);
-        BuildJVRCall(siConstructionAction, system, 1e-5);
-        BuildJVRCall(siConstructionAction, system, 1e-8);
+//        BuildJVRCall(siConstructionAction, system, 1e-4);
+//        BuildJVRCall(siConstructionAction, system, 1e-5);
+//        BuildJVRCall(siConstructionAction, system, 1e-8);
       }
       return base.CreateActionsAfterSI(siConstructionAction, system, isLast);
     }
@@ -94,7 +128,7 @@ namespace DSIS.SimpleRunner
         where Q : ICellCoordinate
       {
         return cms.GetNodes(new[] {info}).Aggregate(0,
-                                                    (v, x) => v + cms.GetEdgesWithFilteredEdges(x, new[] {info}).Count());
+                                                    (v, x) => v + Enumerable.Count(cms.GetEdgesWithFilteredEdges(x, new[] {info})));
       }
     }
   }

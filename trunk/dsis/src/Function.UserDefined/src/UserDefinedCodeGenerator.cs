@@ -50,16 +50,21 @@ namespace DSIS.Function.UserDefined
       
       foreach (var methodInfo in typeof(Math).GetMethods(BindingFlags.Static|BindingFlags.Public).Where(x=>IMPORTS.Contains(x.Name)))
       {
-        string name = methodInfo.Name;
-        
-        sb.AppendFormat("private {0} {1}(", methodInfo.ReturnType, name);
-        sb.JoinString(methodInfo.GetParameters(), (x, i) => x.AppendFormat("{0} {1}", GeneratorTypeUtil.ParameterType(i), i.Name), ", ");
-        sb.AppendFormat(") {{ return {1}.{0}(", name, GeneratorTypeUtil.GenerateFQTypeName(typeof(Math)));
-        sb.JoinString(methodInfo.GetParameters(), (x, i) => x.Append(i.Name ), ", ");
-        sb.AppendLine("); }");
+        GenerateMethod(sb, methodInfo, methodInfo.Name);
+        GenerateMethod(sb, methodInfo, methodInfo.Name.ToLower());
+        GenerateMethod(sb, methodInfo, methodInfo.Name.ToUpper());
       }
       sb.AppendLine("#endregion").AppendLine();
       return sb.ToString();      
+    }
+
+    private static void GenerateMethod(StringBuilder sb, MethodInfo methodInfo, string name)
+    {
+      sb.AppendFormat("private {0} {1}(", methodInfo.ReturnType, name);
+      sb.JoinString(methodInfo.GetParameters(), (x, i) => x.AppendFormat("{0} {1}", GeneratorTypeUtil.ParameterType(i), i.Name), ", ");
+      sb.AppendFormat(") {{ return {1}.{0}(", methodInfo.Name, GeneratorTypeUtil.GenerateFQTypeName(typeof(Math)));
+      sb.JoinString(methodInfo.GetParameters(), (x, i) => x.Append(i.Name ), ", ");
+      sb.AppendLine("); }");
     }
 
     private class NP
