@@ -24,9 +24,9 @@ namespace DSIS.GnuplotDrawer
       string lines = file.Filename + ".lines";
       string white = file.Filename + ".zero";
 
-      using(GnuplotPointsFileWriter linesWriter = new GnuplotPointsFileWriter(lines, 3))
+      using(var linesWriter = new GnuplotPointsFileWriter(lines, 3))
       {        
-        using(GnuplotPointsFileWriter zeroPlane = new GnuplotPointsFileWriter(white, 3))
+        using(var zeroPlane = new GnuplotPointsFileWriter(white, 3))
         {
           foreach (ImagePoint point in new GnuplotPointsFileReader(file.Filename).Read())
           {

@@ -11,6 +11,7 @@ using DSIS.Function.Predefined.HomoSquare;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Function.Predefined.Logistics;
 using DSIS.Function.Predefined.Lorentz;
+using DSIS.Function.Predefined.OsipenkoBio;
 using DSIS.Function.Predefined.Rossel;
 using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
@@ -83,6 +84,12 @@ namespace DSIS.SimpleRunner
     {
       var sp3 = new DefaultSystemSpace(3, 0.01.Fill(3), 35d.Fill(3), 2L.Fill(3));
       return new SystemInfoAction(new FoodChainSystemInfo(3.4001, 1, 4), sp3);
+    }
+
+    public static IAction OsipenkoBio2()
+    {
+      var sp = new DefaultSystemSpace(2, new[] {0.01, 0}, 2.0.Fill(2), 3L.Fill(2));
+      return new SystemInfoAction(new OsipenkoBio2FunctionSystemInfo(), sp);
     }
 
     public static IAction Delayed(double a)

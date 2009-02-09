@@ -17,7 +17,7 @@ namespace DSIS.GnuplotDrawer
     public string AddSeria(string name, IEnumerable<double> values)
     {
       string file = CreateCriteriaFileName(name);
-      using (GnuplotFileWriterBase w = new GnuplotFileWriterBase(file))
+      using (var w = new GnuplotFileWriterBase(file))
       {
         file = w.Filename;
         int count = 0;

@@ -21,8 +21,7 @@ namespace DSIS.GnuplotDrawer
     public void Finish()
     {
       myFiles.Sort(
-        delegate(GnuplotPointsFileWriter w1, GnuplotPointsFileWriter w2) {
-                                                                           return - w1.PointsCount.CompareTo(w2.PointsCount); });
+        (w1, w2) => - w1.PointsCount.CompareTo(w2.PointsCount));
 
       for (int i = 0; i < Math.Min(100, myFiles.Count); i++ )
         myGen.AddPointsFile(myFiles[i]);

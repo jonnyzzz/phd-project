@@ -20,7 +20,7 @@ namespace DSIS.SimpleRunner
       BuildContiniousSystems();
     }
 
-    private static List<ComputationData> ForBuildser(IEnumerable<ComputationData> data, params Builder[] bld)
+    protected static List<ComputationData> ForBuildser(IEnumerable<ComputationData> data, params Builder[] bld)
     {
       var d = new List<ComputationData>();
       foreach (var computationData in data)
@@ -37,37 +37,19 @@ namespace DSIS.SimpleRunner
 
     private void BuildContiniousSystems()
     {
-      for (int rep = 3; rep < 13; rep++)
+      List<ComputationData> data = GetSystemsToRun();
+      var queue = new List<ComputationData>(data);
+      
+      while(queue.Count > 0)
       {
-        var data = ForBuildser(new List<ComputationData>
-                     {
-//                       new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.Delayed(2.27), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.Duffing2x2Runge(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.Duffing1_5x1_5Runge(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.Duffing1_4x1_4Runge(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.Duffing1_3x1_3Runge(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.Duffing1_2x1_2Runge(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.VanDerPolRunge(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.LorentzRunge(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.RosslerRunge(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.BrusselatorRunge(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},
-                     }, 
-                     new []{                         
-//                       Builder.Point, 
-                       Builder.Box
-                     });
-        foreach (var _computationData in new List<ComputationData>(data))
+        var computationData = queue[0];
+        queue.RemoveAt(0);
+        
+        using (var th = new MemoryMonitorThread(2*1024*1024*1024L))
         {
-          var computationData = _computationData;
-          using (var th = new MemoryMonitorThread(2 * 1024 * 1024 * 1024L))
-          {
-            var computation 
-              = new Thread(
-                delegate()
+          var computation
+            = new Thread(
+              delegate()
                 {
                   try
                   {
@@ -81,39 +63,71 @@ namespace DSIS.SimpleRunner
                     Console.Out.WriteLine("-----------------------------OOE-------------------------");
                     Console.Out.WriteLine(e);
                     Console.Out.WriteLine("-----------------------------OOE-------------------------");
-                    data.RemoveAll(x=>x.Equals(computationData));
-                  } catch (Exception e)
+                    queue.RemoveAll(x => x.Equals(computationData));
+                  }
+                  catch (Exception e)
                   {
                     Console.Out.WriteLine("-----GENERAL ERROR------------------------OOE-------------------------");
                     Console.Out.WriteLine(e);
                     Console.Out.WriteLine("-----------------------------OOE-------------------------");
-                    data.RemoveAll(x=>x.Equals(computationData));
+                    queue.RemoveAll(x => x.Equals(computationData));
                   }
-                  GCHelper.Collect();                  
-              });
+                  GCHelper.Collect();
+                });
 
-            th.MemoryLimit += delegate
-                                {
-                                  computation.Interrupt();
-                                  computation.Abort();
-                                };
-            computation.Start();
-            th.Run();
-            computation.Join();
-          }
+          th.MemoryLimit += delegate
+                              {
+                                computation.Interrupt();
+                                computation.Abort();
+                              };
+          computation.Start();
+          th.Run();
+          computation.Join();
         }
       }
     }
 
+    protected virtual List<ComputationData> GetSystemsToRun()
+    {
+      var data = new List<ComputationData>();
+      foreach (int rep in new[] {8, 10})
+      {
+        data.AddRange(ForBuildser(new List<ComputationData>
+                                    {
+//                       new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
+                                      new ComputationData {system = SystemInfoFactory.OsipenkoBio2(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Delayed(2.27), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing2x2Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_5x1_5Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_4x1_4Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_3x1_3Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.Duffing1_2x1_2Runge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.DuffingRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.VanDerPolRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.LorentzRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.RosslerRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.BrusselatorRunge(), repeat = rep},
+//                       new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},
+                                    },
+                                  new[]
+                                    {
+                                      Builder.Adaptive,
+                                      Builder.Box
+                                    }));
+      }
+      return data;
+    }
 
-    private enum Builder
+
+    protected enum Builder
     {
       Box,
       Adaptive,
       Point
     }
 
-    private struct ComputationData : IEquatable<ComputationData>
+    protected struct ComputationData : IEquatable<ComputationData>
     {
       public IAction system { get; set; }
       public int repeat { get; set; }
@@ -195,7 +209,7 @@ namespace DSIS.SimpleRunner
     }
 
     private IActionEdgesBuilder RepeatSI(IActionEdgesBuilder holder, int count, IAction buildSI,
-                                         IEnumerable<IAction> firstContext, IEnumerable<IAction> innerContext, 
+                                         IEnumerable<IAction> firstContext, IEnumerable<IAction> innerContext,
                                          IAction system)
     {
       if (count < 2)
@@ -207,9 +221,9 @@ namespace DSIS.SimpleRunner
         var tmp = next;
         next = CreateActionsAfterSI(
           next
-          .Edge(buildSI.Clone())
-          .With(x => innerContext.Join(system).Each(y => x.Back(y)))
-          .With(x => x.Back(new MergeComponetsAction()).Back(tmp)),
+            .Edge(buildSI.Clone())
+            .With(x => innerContext.Join(system).Each(y => x.Back(y)))
+            .With(x => x.Back(new MergeComponetsAction()).Back(tmp)),
           system,
           i + 1 == count);
       }
@@ -217,7 +231,8 @@ namespace DSIS.SimpleRunner
       return next;
     }
 
-    protected virtual IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, bool isLast)
+    protected virtual IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system,
+                                                               bool isLast)
     {
       return siConstructionAction;
     }

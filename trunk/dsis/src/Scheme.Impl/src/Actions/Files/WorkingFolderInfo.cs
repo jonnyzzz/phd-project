@@ -18,7 +18,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     private static string ToSafePath(string s)
     {      
-      return s.Replace("`", "_").Replace(",", ".").Replace(" ", "_").Replace("=", "_").Replace(":","_");
+      return s.Replace("`", "_").Replace(",", ".").Replace(" ", "_").Replace("=", "_").Replace(":","_").Replace("'", "_");
     }
 
     private string MakeFileName(string ext)
