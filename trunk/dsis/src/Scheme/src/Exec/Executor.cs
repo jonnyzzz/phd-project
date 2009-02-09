@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;
@@ -203,7 +204,7 @@ namespace DSIS.Scheme.Exec
 
     public IEnumerable<T> NodesOfType<T>() where T : IAction
     {
-      return myActions.Map(x=>x.Action).Filter(x => x is T).Cast<T>();
+      return myActions.Map(x=>x.Action).Where(x => x is T).Cast<T>();
     }
 
     public override string ToString()

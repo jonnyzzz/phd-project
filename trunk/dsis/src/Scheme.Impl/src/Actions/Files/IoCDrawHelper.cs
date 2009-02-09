@@ -20,7 +20,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       ImageDimension.KEY.Set(ctx, new ImageDimension { Width = sz.Width, Height = sz.Height });
 
       string file = null;
-      if (myAction.Compatible(ctx).Empty())
+      if (myAction.Compatible(ctx).IsEmpty())
       {
         var result = myAction.Apply(ctx);
         if (result.ContainsKey(FileKeys.ImageKey))

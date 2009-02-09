@@ -14,7 +14,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       : base(actions)
     {
       myWorkingFolder = workingFolder;
-      actions.Each(x=>x.UpdateParameters += ps=>{ ps.Title = null;});
+      actions.ForEach(x=>x.UpdateParameters += ps=>{ ps.Title = null;});
     }
 
     protected override void Apply<T, Q>(Context input, Context output)

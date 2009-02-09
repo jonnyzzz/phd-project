@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Graph.Abstract;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
@@ -146,7 +147,7 @@ namespace DSIS.Graph.Tests
       var flags = new List<uint>
         (
         list.Cast<FlagsNodeHolder<TarjanGraph<IntegerCoordinate>, TarjanNode<IntegerCoordinate>, IntegerCoordinate>>().
-          Convert(x => x.Flag.Flag));
+          Map(x => x.Flag.Flag));
       flags.Sort();
       uint? v = null;
       foreach (var flag in flags)

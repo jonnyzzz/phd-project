@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.UI.Controls
 {
@@ -31,7 +32,7 @@ namespace DSIS.UI.Controls
       var simpleLayouts = new List<IControlWithLayout>();
       foreach (var pair in myLayouts)
       {
-        string ancor = pair.Value.GetFirst().Ancor;
+        string ancor = pair.Value.First().Ancor;
         if (CheckSubLayout(pair.Value))
         {
           var recur = new List<IControlWithLayout2>();
@@ -43,7 +44,7 @@ namespace DSIS.UI.Controls
         }
         else if (CheckSingleLayout(pair.Value))
         {
-          simpleLayouts.Add(new SimpleLayout(pair.Key, ancor, pair.Value.GetFirst().Control));
+          simpleLayouts.Add(new SimpleLayout(pair.Key, ancor, pair.Value.First().Control));
         }
         else if (CheckSingleLayoutMulti(pair.Value))
         {
@@ -83,7 +84,7 @@ namespace DSIS.UI.Controls
 
     private static bool CheckSingleLayout(ICollection<IControlWithLayout2> controls)
     {
-      return controls.Count == 1 && controls.GetFirst().Float.Length == 1;
+      return controls.Count == 1 && controls.First().Float.Length == 1;
     }
 
     private static string Dump(IEnumerable<IControlWithLayout2> controls)

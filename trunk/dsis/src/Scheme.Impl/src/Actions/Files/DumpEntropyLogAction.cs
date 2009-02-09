@@ -5,6 +5,7 @@ using System.IO;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {

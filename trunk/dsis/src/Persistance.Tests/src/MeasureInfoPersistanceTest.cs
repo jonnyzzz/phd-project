@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.System.Impl;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.IntegerCoordinates.Generated;

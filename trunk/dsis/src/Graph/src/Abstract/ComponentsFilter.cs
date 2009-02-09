@@ -12,7 +12,7 @@ namespace DSIS.Graph.Abstract
 
     public static IFilter CreateFilter(IEnumerable<IStrongComponentInfo> componentIds, int allComponents)
     {
-      var infos = new HashSet<TarjanComponentInfo>(CollectionUtil.Cast<TarjanComponentInfo>(componentIds));
+      var infos = new HashSet<TarjanComponentInfo>(componentIds.Cast<TarjanComponentInfo>());
       var count = infos.Count;
       if (count == 0)
       {
@@ -24,11 +24,11 @@ namespace DSIS.Graph.Abstract
       }
       if (count == 1)
       {
-        return new ExactFilter(infos.GetFirst().ComponentId);
+        return new ExactFilter(infos.First().ComponentId);
       }
       if (count <= 10)
       {
-        return new ArrayFilter(CollectionUtil.ToArray(infos.Map(x => x.ComponentId)));
+        return new ArrayFilter(infos.Map(x => x.ComponentId).ToArray());
       }
       return new HashSetFilter(new HashSet<uint>(infos.Map(x=>x.ComponentId)));
     }

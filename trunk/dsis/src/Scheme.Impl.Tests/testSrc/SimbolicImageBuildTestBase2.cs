@@ -1,7 +1,7 @@
 using DSIS.Core.System;
 using NUnit.Framework;
 
-namespace DSIS.Scheme.Impl
+namespace DSIS.Scheme.Impl.Tests
 {
   public abstract class SimbolicImageBuildTestBase2 : SimbolicImageBuildTestBase
   {

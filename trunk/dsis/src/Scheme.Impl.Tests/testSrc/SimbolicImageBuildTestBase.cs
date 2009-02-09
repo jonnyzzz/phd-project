@@ -1,19 +1,18 @@
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.System;
 using DSIS.Graph;
-using DSIS.Graph.Abstract;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
-using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.Scheme.Impl
+namespace DSIS.Scheme.Impl.Tests
 {
   public abstract class SimbolicImageBuildTestBase
   {
@@ -61,24 +60,24 @@ namespace DSIS.Scheme.Impl
       gr.AddEdge(a5, new DumpGraphComponentsInfoAction());
       
       IAction buildIS = new LoopAction("", steps, x => new AgregateAction(
-        delegate(IActionGraphPartBuilder bld)
-          {
-            var build = new SymbolicImageConstructionStep();
-            bld.AddEdge(bld.Start, build);
-            bld.AddEdge(build, bld.End);
-            var b = new ProxyAction();
-            var b2 = new ParallelAction(new DumpGraphInfoAction(),
-                                                  new DumpGraphComponentsInfoAction(),
-                                                  new DumpMethodAction()
-              );
-            var p = new ProxyAction();
-            bld.AddEdge(build, b);
-            bld.AddEdge(bld.Start, p);
-            bld.AddEdge(p, b);
-            bld.AddEdge(b, b2);
+                                                         delegate(IActionGraphPartBuilder bld)
+                                                           {
+                                                             var build = new SymbolicImageConstructionStep();
+                                                             bld.AddEdge(bld.Start, build);
+                                                             bld.AddEdge(build, bld.End);
+                                                             var b = new ProxyAction();
+                                                             var b2 = new ParallelAction(new DumpGraphInfoAction(),
+                                                                                         new DumpGraphComponentsInfoAction(),
+                                                                                         new DumpMethodAction()
+                                                               );
+                                                             var p = new ProxyAction();
+                                                             bld.AddEdge(build, b);
+                                                             bld.AddEdge(bld.Start, p);
+                                                             bld.AddEdge(p, b);
+                                                             bld.AddEdge(b, b2);
 
-            loop(x, new ActionBuilderAdapter(bld), b);
-          }));
+                                                             loop(x, new ActionBuilderAdapter(bld), b);
+                                                           }));
 
       gr.AddEdge(a5, buildIS);
       gr.AddEdge(system, buildIS);

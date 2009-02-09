@@ -1,13 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace DSIS.Utils
 {
   public static class CollectionUtil
   {
-    public delegate Q Fold<T, Q>(T t, Q q);
-
     public static IEnumerable<Q> Safe<Q>(this IEnumerable<Q> enu)
     {
       return enu ?? EmptyArray<Q>.Instance;
@@ -25,23 +22,6 @@ namespace DSIS.Utils
       return l;
     }
 
-    public static bool Empty<T>(this IEnumerable<T> enu)
-    {
-      foreach (var t in enu)
-      {
-        return false;
-      }
-      return true;
-    }
-
-    public static void Each<Q>(this IEnumerable<Q> enu, Action<Q> action)
-    {
-      foreach (Q q in enu)
-      {
-        action(q);
-      }
-    }
-
     public static bool IsEmpty<Q>(this IEnumerable<Q> enu)
     {
       foreach (var q in enu)
@@ -49,24 +29,7 @@ namespace DSIS.Utils
       return true;
     }
 
-    [Obsolete("Use Linq.Where")]
-    public static IEnumerable<Q> Filter<Q>(this IEnumerable<Q> enu, Predicate<Q> pred)
-    {
-      foreach (var q in enu)
-      {
-        if (pred(q))
-          yield return q;
-      }
-    }
-
-    public static IEnumerable<P> Convert<Q,P>(this IEnumerable<Q> enu, Converter<Q,P> conv)
-    {
-      foreach (var q in enu)
-      {
-        yield return conv(q);
-      }
-    }
-
+    public delegate Q Fold<T, Q>(T t, Q q);
     public static Q FoldLeft<T,Q>(this IEnumerable<T> enu, Q start, Fold<T,Q> fold)
     {
       Q q = start;
@@ -75,24 +38,6 @@ namespace DSIS.Utils
         q = fold(t, q);
       }
       return q;
-    }
-
-    public static List<T> ToList<T>(this IEnumerable<T> enu)
-    {
-      if (enu is List<T>)
-        return (List<T>) enu;
-
-      return new List<T>(enu);
-    }
-
-    [Obsolete("use Linq")]
-    public static T[] ToArray<T>(this IEnumerable<T> enu)
-    {
-      if (enu is List<T>)
-      {
-        return ((List<T>) enu).ToArray();
-      }
-      return new List<T>(enu).ToArray();
     }
 
     public static bool ContainsKeyRange<T,Q>(this Dictionary<T,Q> dic, IEnumerable<T> enu)
@@ -104,60 +49,9 @@ namespace DSIS.Utils
       }
       return true;
     }
-
-    public static IEnumerable<T> Skip<T>(this IEnumerable<T> enu, int t)
-    {
-      foreach (var o in enu)
-      {
-        if (t == 0)
-        {
-          yield return o;
-        } else
-        {
-          t--;
-        }
-      }
-    }
-
-    [Obsolete("Use Linq Single")]
-    public static T Singleton<T>(this IEnumerable<T> enu)
-    {
-      T t = default(T);
-      bool reached = false;
-      foreach (T q in enu)
-      {
-        t = q;
-        if (reached)
-          throw new ArgumentException("Collection is expected to be singleton, too much elements");
-        reached = true;
-      }
-      if (!reached)
-        throw new ArgumentException("Collection is expected to be singleton, but not empty");
-      return t;
-    }
-
-    [Obsolete("Use Linq GetFirstOrDefault")]
-    public static T GetFirst<T>(this IEnumerable<T> enu)
-    {
-      foreach (T t in enu)
-      {
-        return t;
-      }
-      return default(T);
-    }
     
-    public static IEnumerable<T> First<T>(this IEnumerable<T> enu, int count)
-    {
-      int i = 0;
-      foreach (T t in enu)
-      {
-        if (i++ < count)
-          yield return t;
-      }
-    }
-
     public static T Find<T>(this IEnumerable<T> enu, T def, Predicate<T> pred)
-    {
+    {    
       foreach (var t in enu)
       {
         if (pred(t))
@@ -243,16 +137,6 @@ namespace DSIS.Utils
         }
       }
       return false;
-    }
-
-    public static int Count<T>(this IEnumerable<T> collection)
-    {
-      int count = 0;
-      foreach (T t in collection)
-      {
-        count++;
-      }
-      return count;
     }
 
     public static T[] Fill<T>(this T data, int count)
@@ -388,14 +272,6 @@ namespace DSIS.Utils
     public static IEnumerable<Q> En<Q>(this Q q)
     {
       yield return q;
-    }
-
-    public static IEnumerable<T> Cast<T>(this IEnumerable enu)
-    {
-      foreach (T t in enu)
-      {
-        yield return t;
-      }
     }
   }
 }

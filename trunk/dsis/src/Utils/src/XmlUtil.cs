@@ -50,7 +50,7 @@ namespace DSIS.Utils
         }
         nodes.Add(node.OwnerDocument.CreateTextNode(xmlNode));
       }
-      nodes.Each(x=>node.AppendChild(x));
+      nodes.ForEach(x=>node.AppendChild(x));
       return node;
     }
     

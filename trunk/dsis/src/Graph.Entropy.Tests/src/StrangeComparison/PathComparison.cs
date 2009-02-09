@@ -9,6 +9,7 @@ using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions.Entropy;
+using DSIS.Scheme.Impl.Tests;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy.Tests.StrangeComparison

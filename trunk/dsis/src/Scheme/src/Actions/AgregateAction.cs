@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Scheme.Actions
 {
@@ -21,8 +22,8 @@ namespace DSIS.Scheme.Actions
     private AgregateAction(AgregateAction source)
     {
       myGraph = source.myGraph.Clone();
-      myStart = myGraph.NodesOfType<StartAction>().Singleton();
-      myEnd = myGraph.NodesOfType<EndAction>().Singleton();
+      myStart = myGraph.NodesOfType<StartAction>().Single();
+      myEnd = myGraph.NodesOfType<EndAction>().Single();
     }
 
     public AgregateAction(ConstructGraph construct)

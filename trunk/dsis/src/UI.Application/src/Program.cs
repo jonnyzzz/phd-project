@@ -1,8 +1,12 @@
 using System;
+using System.Reflection;
+using System.Windows.Forms;
 using DSIS.Core.Ioc.Ex;
+using DSIS.Utils;
 
 namespace DSIS.UI.Application
 {
+  [Used]
   internal static class Program
   {
     /// <summary>
@@ -13,6 +17,18 @@ namespace DSIS.UI.Application
     {
       System.Windows.Forms.Application.EnableVisualStyles();
       System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+
+      try
+      {
+        if (Assembly.Load("System.Core") == null)
+          throw new Exception("Null");
+      } catch
+      {
+        MessageBox.Show("Failed to find Microsoft .NET Framework 3.5. Please install it from http://download.microsoft.com",
+                        "DSIS Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return -1;
+      }
+
 
       return ApplicationEntryPoint<ApplicationClass>.DoMain(args);
     }

@@ -7,7 +7,5 @@ namespace DSIS.IntegerCoordinates
   {    
     [Obsolete("Really slow method!")]
     long GetCoordinate(int index);
-    [Obsolete("Kill me")]
-    int Dimension { get; }    
   }  
 }

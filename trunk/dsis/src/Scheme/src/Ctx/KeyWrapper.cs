@@ -43,7 +43,7 @@ namespace DSIS.Scheme.Ctx
 
     public IEnumerable<KeyWrapper> OfType<Y>()
     {
-      return Key.OfType<Y>().Convert(x => FromKey(x));
+      return Key.OfType<Y>().Map(x => FromKey(x));
     }
 
     public abstract bool EqualsKey(IKey key);

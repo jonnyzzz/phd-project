@@ -76,7 +76,7 @@ namespace DSIS.Graph
       if (set.Count != 1)
         throw new NotImplementedException("Cached components does not support extracting more than one component");
 
-      return Cache(set.GetFirst());
+      return Cache(set.First());
     }
 
     public IEnumerable<IStrongComponentInfo> Components

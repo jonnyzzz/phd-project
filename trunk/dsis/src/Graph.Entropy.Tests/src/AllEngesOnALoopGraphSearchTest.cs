@@ -1,8 +1,7 @@
+using System.Linq;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
-using DSIS.Graph.Entropy.Tests;
 using DSIS.IntegerCoordinates.Impl;
-using DSIS.Utils;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy.Tests
@@ -13,7 +12,7 @@ namespace DSIS.Graph.Entropy.Tests
     protected override ILoopIterator Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,
                                                   IGraphStrongComponents<T> components)
     {
-      return new AllEngesOnALoopGraphSearch<T>(mcb, components, CollectionUtil.GetFirst(components.Components));
+      return new AllEngesOnALoopGraphSearch<T>(mcb, components, components.Components.First());
     }
 
     [Test]
@@ -21,7 +20,7 @@ namespace DSIS.Graph.Entropy.Tests
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem) graph.CoordinateSystem;
+                 var system = (IntegerCoordinateSystem) graph.CoordinateSystem;
                  INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
                  INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
                  INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));

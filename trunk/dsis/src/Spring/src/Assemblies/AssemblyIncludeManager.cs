@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using DSIS.Spring.Util;
-using DSIS.Utils;
 using log4net;
+using System.Linq;
 
 namespace DSIS.Spring.Assemblies
 {
@@ -12,7 +12,7 @@ namespace DSIS.Spring.Assemblies
   {
     private static readonly ILog LOG = LogManager.GetLogger(typeof(AssemblyIncludeManager));
     
-    private readonly Hashset<Assembly> myAssemblies = new Hashset<Assembly>();
+    private readonly HashSet<Assembly> myAssemblies = new HashSet<Assembly>();
 
     public AssemblyIncludeManager()
     {
@@ -57,12 +57,12 @@ namespace DSIS.Spring.Assemblies
 
     private void ClosureAssemblies(IEnumerable<Assembly> extra)
     {
-      var visit = new Hashset<Assembly>();
+      var visit = new HashSet<Assembly>();
       
-      visit.AddRange(extra);
+      visit.UnionWith(extra);
       while (visit.Count > 0)
       {        
-        Assembly assembly = visit.GetFirst();
+        Assembly assembly = visit.First();
         visit.Remove(assembly);
 
         LOG.DebugFormat("Scan assembly: {0}", assembly.FullName);

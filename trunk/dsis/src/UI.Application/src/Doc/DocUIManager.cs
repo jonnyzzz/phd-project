@@ -56,7 +56,7 @@ namespace DSIS.UI.Application.Doc
     {
       if (myDocumentContainer != null)
       {
-        myDocumentContainer.GetComponents<IDocumentComponent>().Each(x => x.BeforeDocumentContainerDisposed());
+        myDocumentContainer.GetComponents<IDocumentComponent>().ForEach(x => x.BeforeDocumentContainerDisposed());
         myDocumentContainer.Dispose();
         myDocumentContainer = null;
       }

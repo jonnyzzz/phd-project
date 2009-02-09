@@ -7,6 +7,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Search;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DSIS.Graph.Entropy.Tests
 {
@@ -19,7 +20,7 @@ namespace DSIS.Graph.Entropy.Tests
       DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
                                var callback = new MockLoopIteratorCallback<IntegerCoordinate>();
-                               IStrongComponentInfo component = comps.Components.GetFirst();
+                               IStrongComponentInfo component = comps.Components.First();
 
                                return new AllEngesOnALoopGraphSearch<IntegerCoordinate>(callback, comps, component);
                              }, new TimeSpan(0,0,20));
@@ -31,7 +32,7 @@ namespace DSIS.Graph.Entropy.Tests
       DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
                                var callback = new MockLoopIteratorCallback<IntegerCoordinate>();
-                               IStrongComponentInfo component = comps.Components.GetFirst();
+                               IStrongComponentInfo component = comps.Components.First();
 
                                return new AllNodesOnALoopGraphSearch<IntegerCoordinate>(callback, comps, component);
                              }, new TimeSpan(0,0,9));
@@ -43,7 +44,7 @@ namespace DSIS.Graph.Entropy.Tests
       DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
                                var callback = new MockLoopIteratorCallback<IntegerCoordinate>();
-                               IStrongComponentInfo component = comps.Components.GetFirst();
+                               IStrongComponentInfo component = comps.Components.First();
 
                                return new LoopIteratorFirst<IntegerCoordinate>(callback, comps, component, new GraphWeightSearch<IntegerCoordinate>(comps, component));
                              }, new TimeSpan(0,0,9));

@@ -7,6 +7,7 @@ using DSIS.IntegerCoordinates;
 using DSIS.Scheme;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
+using DSIS.Scheme.Impl.Tests;
 using DSIS.TrajectoryBuilder;
 using NUnit.Framework;
 

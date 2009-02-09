@@ -1,4 +1,4 @@
-namespace DSIS.Scheme.Impl
+namespace DSIS.Scheme.Impl.Tests
 {
   public class SimpleComputationResult
   {

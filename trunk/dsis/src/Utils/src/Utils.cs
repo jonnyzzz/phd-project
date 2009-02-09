@@ -14,14 +14,6 @@ namespace DSIS.Utils
         act(t);
       }
     }
-
-    public static void OfType<T>(this object o, Action<T> act)
-    {
-      if (o is T)
-      {
-        act((T) o);
-      }
-    }
     
     public static Q OfType<T,Q>(this object o, Q def, Func<T,Q> act)
     {

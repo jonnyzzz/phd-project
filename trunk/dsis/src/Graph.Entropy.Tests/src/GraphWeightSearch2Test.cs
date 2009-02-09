@@ -2,10 +2,9 @@ using System;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
-using DSIS.Graph.Entropy.Tests;
 using DSIS.IntegerCoordinates.Impl;
-using DSIS.Utils;
 using NUnit.Framework;
+using System.Linq;
 
 namespace DSIS.Graph.Entropy.Tests
 {
@@ -14,7 +13,7 @@ namespace DSIS.Graph.Entropy.Tests
   {
     protected override ILoopIterator Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components)
     {
-      IStrongComponentInfo first = components.Components.GetFirst();
+      IStrongComponentInfo first = components.Components.First();
       return new LoopIteratorFirst<T>(mcb, components, first, new GraphWeightSearch2<T>(components, first));
     }
 

@@ -2,6 +2,7 @@ using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Path
 {
@@ -24,7 +25,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
         var graph = myComps.AsGraph(new[] {info});
         using (var holder = graph.CreateDataHolder(x => new InfiniteEnumerator<INode<T>>(graph.GetEdges(x).GetEnumerator())))
         {
-          BuildPath(graph, holder, graph.Nodes.GetFirst());
+          BuildPath(graph, holder, graph.Nodes.First());
         }
       }
     }

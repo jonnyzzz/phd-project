@@ -21,7 +21,7 @@ namespace DSIS.Scheme.Ctx
     /// <returns>All stored keys without regard to name</returns>
     public IEnumerable<Key<Y>> AllKeys<Y>()
     {
-      return myContext.Keys.Where(x => x.IsKey<Y>()).Convert(x=>x.Cast<Y>());
+      return myContext.Keys.Where(x => x.IsKey<Y>()).Map(x=>x.Cast<Y>());
     }
 
     public Context Clone()
@@ -33,7 +33,7 @@ namespace DSIS.Scheme.Ctx
 
     public bool ContainsKey<Y>(Key<Y> key)
     {
-      return !SearchKeys(key).Where(myContext.ContainsKey).Empty();
+      return !SearchKeys(key).Where(myContext.ContainsKey).IsEmpty();
     }
 
     public Y Get<Y>(Key<Y> key)
@@ -53,7 +53,7 @@ namespace DSIS.Scheme.Ctx
 
       foreach (var k in myContext.Keys)
       {
-        if (!k.OfType<Y>().Empty())
+        if (!k.OfType<Y>().IsEmpty())
           yield return k;
       }      
     }

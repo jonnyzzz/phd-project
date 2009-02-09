@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
-using DSIS.Graph.Entropy.Tests;
 using DSIS.IntegerCoordinates.Impl;
-using DSIS.Utils;
 using NUnit.Framework;
 
 namespace DSIS.Graph.Entropy.Tests
@@ -23,7 +22,7 @@ namespace DSIS.Graph.Entropy.Tests
 
     protected void DoTest(BuildGraph bg, bool filter, params string[] golds)
     {
-      DoTest(bg, filter, delegate { return golds; });
+      DoTest(bg, filter, () => golds);
     }
 
     protected void DoTest(BuildGraph bg, bool filter, LazyArray lazyGolds)
@@ -34,8 +33,8 @@ namespace DSIS.Graph.Entropy.Tests
 
       Assert.IsTrue(components.ComponentCount > 0, "There is no components");
 
-      MockCallback mcb = new MockCallback();
-      IStrongComponentInfo firstComponent = CollectionUtil.GetFirst(components.Components);
+      var mcb = new MockCallback();
+      IStrongComponentInfo firstComponent = components.Components.First();
       if (!filter)
       {
         ILoopIterator gws = CreateLoopIterator(graph, components, mcb, firstComponent);
@@ -44,14 +43,13 @@ namespace DSIS.Graph.Entropy.Tests
       }
       else
       {
-        NonDuplicatedLoopIteratorCallback<IntegerCoordinate, MockCallback> callback =
-          new NonDuplicatedLoopIteratorCallback<IntegerCoordinate, MockCallback>(mcb);
+        var callback = new NonDuplicatedLoopIteratorCallback<IntegerCoordinate, MockCallback>(mcb);
         ILoopIterator gws = CreateLoopIterator(graph, components, callback, firstComponent);
 
         gws.WidthSearch();
       }
 
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       foreach (List<string> loop in mcb.Loops)
       {
         loop.Reverse();
@@ -69,7 +67,7 @@ namespace DSIS.Graph.Entropy.Tests
         for (int index = 0; index < mcb.Loops.Count; index++)
         {
           List<string> loop = mcb.Loops[index];
-          StringBuilder sbb = new StringBuilder();
+          var sbb = new StringBuilder();
           foreach (string s in loop)
           {
             sbb.Append(s);

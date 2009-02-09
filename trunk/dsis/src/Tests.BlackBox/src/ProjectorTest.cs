@@ -5,6 +5,7 @@ using DSIS.Graph;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
+using DSIS.Scheme.Impl.Tests;
 using NUnit.Framework;
 
 namespace DSIS.Tests.BlackBox

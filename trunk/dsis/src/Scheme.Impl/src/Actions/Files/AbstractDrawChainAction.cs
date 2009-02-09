@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Visualization;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph;
@@ -34,7 +35,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       componentIds.Sort((c1, c2) => -c1.NodesCount.CompareTo(c2.NodesCount));
 
       const int COMPONENTS_TO_SHOW = 15;
-      var bigerComps = new HashSet<IStrongComponentInfo>(componentIds.First(COMPONENTS_TO_SHOW));
+      var bigerComps = new HashSet<IStrongComponentInfo>(componentIds.Take(COMPONENTS_TO_SHOW));
 
       foreach (INode<Q> node in comps.GetNodes(componentIds))
       {

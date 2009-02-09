@@ -1,3 +1,4 @@
+using System.Linq;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
@@ -14,7 +15,7 @@ namespace DSIS.Graph.Entropy.Tests
     protected override ILoopIterator Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb,
                                                   IGraphStrongComponents<T> components)
     {
-      IStrongComponentInfo first = CollectionUtil.GetFirst(components.Components);
+      IStrongComponentInfo first = components.Components.First();
       return new LoopIteratorFirst<T>(mcb, components, first, new GraphWeightSearch<T>(components, first));
     }
 
@@ -23,7 +24,7 @@ namespace DSIS.Graph.Entropy.Tests
     {
       DoTest(delegate(IGraph<IntegerCoordinate> graph)
                {
-                 IntegerCoordinateSystem system = (IntegerCoordinateSystem) graph.CoordinateSystem;
+                 var system = (IntegerCoordinateSystem) graph.CoordinateSystem;
                  INode<IntegerCoordinate> n1 = graph.AddNode(system.Create(1));
                  INode<IntegerCoordinate> n2 = graph.AddNode(system.Create(2));
                  INode<IntegerCoordinate> n3 = graph.AddNode(system.Create(3));

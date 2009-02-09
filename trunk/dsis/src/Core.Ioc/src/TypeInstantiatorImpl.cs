@@ -19,7 +19,7 @@ namespace DSIS.Core.Ioc
       }
       var c = Container.SubContainer<FakeComponent>();
       c.RegisterComponentType(typeof(T));
-      instances.Each(c.RegisterComponent);
+      instances.ForEach(c.RegisterComponent);
       return c.GetComponent<T>();
     }
 

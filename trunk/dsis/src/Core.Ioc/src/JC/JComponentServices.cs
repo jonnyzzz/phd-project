@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace DSIS.Core.Ioc.JC
@@ -16,11 +15,6 @@ namespace DSIS.Core.Ioc.JC
     public IEnumerable<T> GetServices<T>()
     {
       return myContainer.GetComponents<T>();
-    }
-
-    public void RegisterServiceAdded<T>(Action<T> action)
-    {
-      throw new System.NotImplementedException();
     }
   }
 }

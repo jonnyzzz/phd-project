@@ -21,7 +21,7 @@ namespace DSIS.UI.FunctionDialog
       //TODO: possible leak on dispose
       var c = Container.SubContainer<ContiniousSystemComponentAttribute>();
 
-      Solvers.Convert(x => new ContiniousFunctionSolverWrapper(continious, x)).Each(c.RegisterComponent);
+      Solvers.Map(x => new ContiniousFunctionSolverWrapper(continious, x)).ForEach(c.RegisterComponent);
 
       c.Start();
 

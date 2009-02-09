@@ -215,14 +215,14 @@ namespace DSIS.SimpleRunner
       if (count < 2)
         throw new ArgumentException("Count should be >= 2", "count");
 
-      var next = holder.Edge(buildSI.Clone()).With(x => firstContext.Join(system).Each(y => x.Back(y)));
+      var next = holder.Edge(buildSI.Clone()).With(x => firstContext.Join(system).ForEach(y => x.Back(y)));
       for (int i = 1; i < count; i++)
       {
         var tmp = next;
         next = CreateActionsAfterSI(
           next
             .Edge(buildSI.Clone())
-            .With(x => innerContext.Join(system).Each(y => x.Back(y)))
+            .With(x => innerContext.Join(system).ForEach(y => x.Back(y)))
             .With(x => x.Back(new MergeComponetsAction()).Back(tmp)),
           system,
           i + 1 == count);

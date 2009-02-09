@@ -1,7 +1,6 @@
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
-using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
@@ -21,7 +20,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
       if (myComponent == null)
         return;
 
-      INode<T> first = myComponents.GetNodes(new[] {myComponent}).GetFirst();
+      INode<T> first = myComponents.GetNodes(new[] {myComponent}).First();
       if (first == null)
         return;
 

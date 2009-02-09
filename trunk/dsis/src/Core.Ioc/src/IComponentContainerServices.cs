@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DSIS.Core.Ioc
 {
-  [Obsolete("User IComponentContainer")]
+  [Obsolete("Use IComponentContainer")]
   [NoInheritContainer]
   public interface IComponentContainerServices
   {

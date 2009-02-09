@@ -42,7 +42,7 @@ namespace DSIS.Core.Ioc.JC
 
     public IEnumerable<T> GetComponents<T>()
     {
-      return CollectionUtil.Cast<T>(GetComponents(typeof(T)));
+      return GetComponents(typeof(T)).Cast<T>();
     }
 
     public void RegisterComponent(Type t)
@@ -80,7 +80,7 @@ namespace DSIS.Core.Ioc.JC
 
     public IEnumerable<T> GetCreatedComponentFromThatContainer<T>()
     {
-      return CollectionUtil.Cast<T>(myHolder.GetCreatedInstancesFor(typeof(T)));
+      return myHolder.GetCreatedInstancesFor(typeof(T)).Cast<T>();
     }
 
     private object CreateInstance(Type t)
