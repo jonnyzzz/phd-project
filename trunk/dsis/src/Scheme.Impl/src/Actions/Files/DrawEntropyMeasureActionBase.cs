@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Visualization;
 using DSIS.GnuplotDrawer;
-using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
@@ -23,7 +21,6 @@ namespace DSIS.Scheme.Impl.Actions.Files
     {
       var info = FileKeys.WorkingFolderKey.Get(input);
       var measure = Keys.GraphMeasure<Q>().Get(input);
-      var components = Keys.GraphComponents<Q>().Get(input);
       var wr = WriteMeasureFile(info.CreateFileName("measure_base_value.data"), measure);
 
       var outputFile = info.CreateFileName("measure_base.png");
@@ -46,11 +43,18 @@ namespace DSIS.Scheme.Impl.Actions.Files
       using (bs = new GnuplotPointsFileWriter(info.CreateFileName("measure_base_vbase.data"), SystemDimension))
       {
         var data = new double[SystemDimension];
+        foreach (var q in measure.GetMeasureNodes())
+        {
+          ((IIntegerCoordinateSystem<Q>)measure.CoordinateSystem).CenterPoint(q.Key, data);
+          bs.WritePoint(new ImagePoint(data));
+        }        
+/*
         foreach (Q q in components.GetCoordinates(new List<IStrongComponentInfo>(components.Components)))
         {
           ((IIntegerCoordinateSystem<Q>)components.CoordinateSystem).CenterPoint(q, data);
           bs.WritePoint(new ImagePoint(data));
         }
+*/
       }
 
       gen.AddPointsFile(wr, bs);

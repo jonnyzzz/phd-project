@@ -38,7 +38,7 @@ namespace DSIS.UI.Application.Doc.CurrentStep
     {
       for (int i = 0; i < space.Dimension; i++)
       {
-        yield return string.Format("[{0}, {1}]", space.AreaLeftPoint[i], space.AreaRightPoint[i]);
+        yield return string.Format("[{0}; {1}]", space.AreaLeftPoint[i], space.AreaRightPoint[i]);
       }
     }
 

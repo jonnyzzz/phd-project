@@ -6,14 +6,6 @@ namespace DSIS.Scheme.Impl
 {
   public static class CellCoordinateSystemUtil
   {
-    public static long CellEnumeratorCount(this IReadOnlyContext context)
-    {
-      var cs = Keys.IntegerCoordinateSystemInfo.Get(context);
-      var action = new ActionCount(context);
-      cs.DoGeneric(action);
-      return action.Count;
-    }
-
     public static bool ContainsCellCollection(this IReadOnlyContext context)
     {
       if (!context.ContainsKey(Keys.IntegerCoordinateSystemInfo))

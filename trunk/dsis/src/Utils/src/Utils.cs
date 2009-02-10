@@ -14,8 +14,8 @@ namespace DSIS.Utils
         act(t);
       }
     }
-    
-    public static Q OfType<T,Q>(this object o, Q def, Func<T,Q> act)
+
+    public static Q OfType<T, Q>(this object o, Q def, Func<T, Q> act)
     {
       if (o is T)
       {
@@ -30,7 +30,7 @@ namespace DSIS.Utils
       return x;
     }
 
-    public static Q Safe<T,Q>(T t, Q def, Converter<T,Q> conv)
+    public static Q Safe<T, Q>(T t, Q def, Converter<T, Q> conv)
       where T : class
     {
       return t == null ? def : conv(t);
@@ -52,24 +52,50 @@ namespace DSIS.Utils
         d.Dispose();
     }
 
+    public static string JoinSomeOf<T>(this IEnumerable<T> enu,
+                                       double percent,
+                                       Func<T, double> weight,
+                                       Func<T, string> toString)
+    {
+      double sum = percent*enu.FoldLeft(0.0, (x, q) => q + weight(x));
+      var data = new List<string>();
+      double cn = 0;
+      bool overflow = false;
+      foreach (var e in enu.Sort((x, y) => -weight(x).CompareTo(weight(y))))
+      {
+        if (overflow)
+        {
+          data.Add("\u2026");
+          break;
+        }
+        data.Add(toString(e));
+
+        cn += weight(e);
+        overflow = cn >= sum;
+      }
+      return data.JoinString(", ");
+    }
+
     public static string JoinString<T>(this IEnumerable<T> enu, string separator)
     {
       return enu.JoinString(x => x.ToString(), separator);
     }
 
-    public static string JoinString<T>(this IEnumerable<T> enu, Func<T,string> toString, string separator)
+    public static string JoinString<T>(this IEnumerable<T> enu, Func<T, string> toString, string separator)
     {
       var sb = new StringBuilder();
       sb.JoinString(enu, toString, separator);
       return sb.ToString();
     }
 
-    public static StringBuilder JoinString<T>(this StringBuilder sb, IEnumerable<T> enu, Func<T,string> toString, string separator)
+    public static StringBuilder JoinString<T>(this StringBuilder sb, IEnumerable<T> enu, Func<T, string> toString,
+                                              string separator)
     {
       return JoinString(sb, enu, (sb2, t) => sb2.Append(toString(t)), separator);
     }
 
-    public static StringBuilder JoinString<T>(this StringBuilder sb, IEnumerable<T> enu, Action<StringBuilder, T> append, string separator)
+    public static StringBuilder JoinString<T>(this StringBuilder sb, IEnumerable<T> enu, Action<StringBuilder, T> append,
+                                              string separator)
     {
       bool isFirst = true;
       foreach (var t in enu)
@@ -77,7 +103,8 @@ namespace DSIS.Utils
         if (!isFirst)
         {
           sb.Append(separator);
-        } else
+        }
+        else
         {
           isFirst = false;
         }
@@ -85,5 +112,5 @@ namespace DSIS.Utils
       }
       return sb;
     }
-  }  
+  }
 }

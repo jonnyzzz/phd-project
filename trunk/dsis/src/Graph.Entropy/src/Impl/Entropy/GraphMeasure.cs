@@ -43,6 +43,16 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
       get { return myNorm; }
     }
 
+    public int EdgesCount
+    {
+      get { return myM.Count; }
+    }
+
+    public int NodesCount
+    {
+      get { return myNodesM.Count; }
+    }
+
     public ICellCoordinateSystem<T> CoordinateSystem
     {
       get { return myCoorsinateSystem; }

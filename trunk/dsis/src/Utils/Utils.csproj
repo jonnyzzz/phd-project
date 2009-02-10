@@ -91,6 +91,7 @@
     <Compile Include="src\MemoryMonitorThread.cs" />
     <Compile Include="src\MultiDictionary.cs" />
     <Compile Include="src\MultiHashDictionary.cs" />
+    <Compile Include="src\ParseUtil.cs" />
     <Compile Include="src\Ref.cs" />
     <Compile Include="src\ReenterableSafe.cs" />
     <Compile Include="src\ReferenceEqualityComparer.cs" />

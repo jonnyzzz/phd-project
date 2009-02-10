@@ -1,5 +1,4 @@
 using System;
-using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.UI;
@@ -36,19 +35,17 @@ namespace DSIS.UI.Application.Actions.Impl
     private void Start()
     {
       var list = myPredefinedSystems.Sort((x, y) => x.Name.CompareTo(y.Name));
-      foreach (var sys in list)
+      foreach (var _sys in list)
       {
-        sys.With(x =>
-                   {
-                     var id = "File.PredefinedSystem." + x.Name + Guid.NewGuid();
-                     myPresentation.AddActionDescriptor(id, ACTION_PARENT, x.Name, "", x.Name);
-                     myPresentation.RegisterHandler(
-                       new PredefinedActionHandler(
-                         () =>
-                         myApp.Document =
-                         myFactory.CreateNewDocument(x.Name, x.Function, x.Space),
-                         id));
-                   });
+        var sys = _sys;
+        var id = "File.PredefinedSystem." + sys.Name + Guid.NewGuid();
+        myPresentation.AddActionDescriptor(id, ACTION_PARENT, sys.Name, "", sys.Name);
+        myPresentation.RegisterHandler(
+          new PredefinedActionHandler(
+            () =>
+            myApp.Document =
+            myFactory.CreateNewDocument(sys.Name, sys.Function, sys.Space),
+            id));
       }
     }
 

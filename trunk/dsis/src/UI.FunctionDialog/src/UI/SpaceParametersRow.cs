@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DSIS.UI.UI;
+using DSIS.Utils;
 
 namespace DSIS.UI.FunctionDialog.UI
 {
@@ -41,16 +42,13 @@ namespace DSIS.UI.FunctionDialog.UI
 
     private static bool Parse(string text, out double d, out string error)
     {
-      if (!double.TryParse(text, out d))
+      if (!ParseUtil.TryParse(text, out d))
       {
         error = "Failed to parse double value";
         return false;
       }
-      else
-      {
-        error = string.Empty;
-        return true;
-      }
+      error = string.Empty;
+      return true;
     }
     
     private static bool Parse(string text, out long d, out string error)
@@ -60,11 +58,8 @@ namespace DSIS.UI.FunctionDialog.UI
         error = "Failed to parse integer value";
         return false;
       }
-      else
-      {
-        error = string.Empty;
-        return true;
-      }
+      error = string.Empty;
+      return true;
     }
 
     private delegate void SetValue<T>(T d);

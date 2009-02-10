@@ -9,14 +9,14 @@ namespace DSIS.Scheme.Impl
   {
     private int? myDimension;
 
-    public int Dimension
+    protected int Dimension
     {
       get
       {
         return myDimension.Value;
       }
     }
-
+    
     protected virtual ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
       where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate

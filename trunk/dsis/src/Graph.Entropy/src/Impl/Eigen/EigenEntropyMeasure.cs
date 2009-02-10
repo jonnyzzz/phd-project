@@ -22,6 +22,16 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
       get { return "Eigen"; }
     }
 
+    public int EdgesCount
+    {
+      get { return myImpl.Graph.EdgesCount; }
+    }
+
+    public int NodesCount
+    {
+      get { return myImpl.Graph.NodesCount; }
+    }
+
     public ICellCoordinateSystem<T> CoordinateSystem
     {
       get { return myImpl.Graph.CoordinateSystem; }

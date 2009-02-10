@@ -1,6 +1,8 @@
 using System;
+using System.Globalization;
 using System.Reflection;
 using DSIS.Core.Ioc;
+using DSIS.Utils;
 
 namespace DSIS.UI.Wizard.FieldInfos
 {
@@ -26,6 +28,14 @@ namespace DSIS.UI.Wizard.FieldInfos
 
     protected override void TrySetValue(string value)
     {
+      double result;
+      if (ParseUtil.TryParse(value, out result))
+      {
+        Value = result;
+        return;
+      }
+
+      //Let's throw an exception if it's failed to parse double  
       Value = double.Parse(value);
     }
   }

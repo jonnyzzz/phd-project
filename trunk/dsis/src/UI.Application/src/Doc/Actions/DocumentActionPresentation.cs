@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using DSIS.UI.UI;
 using log4net;
+using DSIS.Utils;
 
 namespace DSIS.UI.Application.Doc.Actions
 {
@@ -23,7 +24,7 @@ namespace DSIS.UI.Application.Doc.Actions
       var panel = new TableLayoutPanel {ColumnCount = 1};
       int height = 0;
       int row = 0;
-      foreach (var action in myActionManager.GetActions())
+      foreach (var action in myActionManager.GetActions().Sort((x,y)=>x.Caption.CompareTo(y.Caption)))
       {
         Button btn = CreateButton(action);
         height += btn.Height;
@@ -40,7 +41,8 @@ namespace DSIS.UI.Application.Doc.Actions
                     Text = action.Caption + "\u2026",
                     Enabled = action.Compatible,
                     AutoSize = true,
-                    AutoEllipsis = true,
+                    AutoEllipsis = true,                    
+                    Dock = DockStyle.Top
                   };
       btn.Click += delegate
                      {

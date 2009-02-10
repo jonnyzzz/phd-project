@@ -1,6 +1,5 @@
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
-using DSIS.UI.Application.Doc.CurrentStep;
 using DSIS.UI.UI;
 using DSIS.Utils;
 
@@ -26,7 +25,7 @@ namespace DSIS.UI.Application.Doc.CurrentStep
 
     public string GetValue(Context ctx)
     {
-      return ctx.Get(Keys.IntegerCoordinateSystemInfo).Subdivision.JoinString("x");
+      return ctx.Get(Keys.IntegerCoordinateSystemInfo).Subdivision.JoinString(l=>l.ToString("N0"), "x");
     }
   }
 }

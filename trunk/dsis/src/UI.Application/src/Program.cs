@@ -17,10 +17,9 @@ namespace DSIS.UI.Application
     {
       System.Windows.Forms.Application.EnableVisualStyles();
       System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-
       try
       {
-        if (Assembly.Load("System.Core") == null)
+        if (Assembly.Load(new AssemblyName("System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")) == null)
           throw new Exception("Null");
       } catch
       {
@@ -28,7 +27,6 @@ namespace DSIS.UI.Application
                         "DSIS Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         return -1;
       }
-
 
       return ApplicationEntryPoint<ApplicationClass>.DoMain(args);
     }

@@ -4,7 +4,6 @@ using DSIS.Core.System;
 using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
-using DSIS.Graph.Morse;
 using DSIS.IntegerCoordinates;
 using DSIS.LineIterator;
 using DSIS.Scheme.Impl.Actions.Entropy;
