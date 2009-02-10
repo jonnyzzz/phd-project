@@ -16,6 +16,7 @@ namespace DSIS.UI.FunctionDialog
     public SelectSystemInfoProviderWizard(IListSelectorWizardPageFactory factory, IEnumerable<ISystemInfoFactoryProvider> provs) 
       : this(factory.Create(provs, x=>new ItemDescr(x.Name, x.Description), x=>x.Enabled))
     {
+      Title = "Select Type of the System";      
       myPage.SelectedItem = provs.Where(x => x.Enabled).FirstOrDefault();
     }
 

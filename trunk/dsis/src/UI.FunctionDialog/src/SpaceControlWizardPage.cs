@@ -19,6 +19,7 @@ namespace DSIS.UI.FunctionDialog
 
     public SelectSystemSpaceWizard(SpaceModel space) : base(new[] {new SpaceControlWizardPage(space)})
     {
+      Title = "Select System Space";
       mySpace = space;
     }
 

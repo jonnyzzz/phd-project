@@ -14,7 +14,7 @@ namespace DSIS.UI.Application.Actions.Impl
     public SelectDocumentTitle(IFormGeneratorWizardPageFactory factory, DocumentTitle title) : base(new[] {factory.CreatePage("", title)})
     {
       myTitle = title;
-      Title = "Select document title";
+      Title = "Select Document Title";
     }
 
     [Serializable]

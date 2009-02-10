@@ -12,7 +12,7 @@ namespace DSIS.UI.Application.Doc.CurrentStep
   {
     public override string Name
     {
-      get { return "Number of Cells(Edges)"; }
+      get { return "Number of Cells (Edges)"; }
     }
 
     public override int Order

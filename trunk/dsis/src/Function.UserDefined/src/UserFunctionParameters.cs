@@ -18,7 +18,7 @@ namespace DSIS.Function.UserDefined
     [IncludeGenerate(Title = "System type")]
     public SystemType SystemType { get; set; }
 
-    [IncludeGenerate(Title = "Enter function code", Description = "TODO")]
+    [IncludeGenerate(Title = "Enter function code")]
     [TextAreaPreferenceEx]
     public string Code { get; set; }
 

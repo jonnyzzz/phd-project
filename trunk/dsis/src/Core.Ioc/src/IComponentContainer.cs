@@ -39,7 +39,7 @@ namespace DSIS.Core.Ioc
   public class TypeInstanciableAttribute : Attribute
   {
   }
-
+  
   [NoInheritContainer]
   public interface ITypeInstantiator
   {

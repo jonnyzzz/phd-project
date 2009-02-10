@@ -9,19 +9,14 @@ namespace DSIS.UI.Application
   [ComponentImplementation]
   public class MainFormProxy : IMainForm
   {
-    private readonly IActionPresentationManager myActionManager;
-    private readonly IMainMenuFactory myMenuFactoy;
-    private readonly XmlActionPreesentationManager myPresentation;
+    [Autowire]
+    private XmlActionPreesentationManager myPresentation { get; set; }
+
+    [Autowire]
+    private ITypeInstantiator Instanciator { get; set; }
 
     private MainForm myForm;
     private bool myIsUnderCreateForm;
-
-    public MainFormProxy(IActionPresentationManager actionManager, IMainMenuFactory menuFactoy, XmlActionPreesentationManager presentation)
-    {
-      myActionManager = actionManager;
-      myMenuFactoy = menuFactoy;
-      myPresentation = presentation;
-    }
 
     public event EventHandler BeforeFormCreated;
     public event EventHandler AfterFormCreated;
@@ -59,7 +54,7 @@ namespace DSIS.UI.Application
     private void DoCreateForm()
     {
       myPresentation.LoadAssembly(GetType().Assembly);
-      myForm = new MainForm(myActionManager, myMenuFactoy);
+      myForm = Instanciator.Instanciate<MainForm>();
       myForm.Shown += delegate { myForm.Activate(); };
     }
 

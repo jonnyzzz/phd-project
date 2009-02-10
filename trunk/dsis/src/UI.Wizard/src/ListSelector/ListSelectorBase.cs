@@ -20,7 +20,7 @@ namespace DSIS.UI.Wizard.ListSelector
     protected ListSelectorBase(IEnumerable<T> factories, IDockLayout layout)
     {
       RegisterRadio(factories, layout);
-      myFactories.Keys.First().Checked = true;
+      myFactories.Keys.First().Checked = true;      
     }
 
     protected virtual void FireSelectionChanged()

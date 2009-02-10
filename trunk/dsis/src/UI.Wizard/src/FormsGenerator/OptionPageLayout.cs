@@ -22,7 +22,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
       where Q : IOptionPageControl
     {
       var pn = myLayout.Layout(DockStyle.Top, CollectControls(controls));
-      myScroll.MakeScrollableOnY(pn);
+//      myScroll.MakeScrollableOnY(pn);
       return pn;
     }
 
@@ -41,7 +41,7 @@ namespace DSIS.UI.Wizard.FormsGenerator
     public void Layout<Q>(ScrollableControl host, IEnumerable<Q> controls) where Q : IOptionPageControl
     {
       myLayout.Layout(host, DockStyle.Top, CollectControls(controls));
-      myScroll.MakeScrollableOnY(host);
+//      myScroll.MakeScrollableOnY(host);
     }
 
     private static void AddAttribute(string title, string description, Control field, ICollection<Control> result)

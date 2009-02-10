@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Ioc;
 using DSIS.UI.Controls;
-using DSIS.Utils;
 
 namespace DSIS.UI.Wizard.ListSelector
 {

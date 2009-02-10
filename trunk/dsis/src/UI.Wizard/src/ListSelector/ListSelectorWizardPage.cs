@@ -25,8 +25,7 @@ namespace DSIS.UI.Wizard.ListSelector
           x => ListInfo.Create(
                  names(x),
                  enabled(x),
-                 x)));
-      Title = "Select Cell Image building method";
+                 x)));      
     }
 
     public Q SelectedItem

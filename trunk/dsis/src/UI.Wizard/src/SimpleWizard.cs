@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DSIS.Utils;
 
 namespace DSIS.UI.Wizard
 {

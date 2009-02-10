@@ -1,10 +1,12 @@
-using DSIS.Spring.Service;
+using System;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.FormsGenerator;
 using DSIS.UI.Wizard.ListSelector;
+using IServiceProvider=DSIS.Spring.Service.IServiceProvider;
 
 namespace DSIS.UI.FunctionDialog
 {
+  [Obsolete]
   public class SelectSystemWizardPage :
     WizardPageBase<ListSelector<ListInfo<IWizardPageWithState>, IWizardPageWithState>>, IWizardPageWithState
   {

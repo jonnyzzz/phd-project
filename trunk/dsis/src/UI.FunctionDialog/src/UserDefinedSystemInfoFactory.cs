@@ -48,7 +48,7 @@ namespace DSIS.UI.FunctionDialog
       private readonly IUserDefinedFunctionFactory myFactory;
 
       public OptionBa(IListSelectorWizardPageFactory listFactory, IUserDefinedFunctionFactory factory) 
-        : base("TBD", listFactory, factory.Enum(), x=>true)
+        : base("Select Type of User-defined System Function", listFactory, factory.Enum(), x=>true)
       {
         myFactory = factory;
       }

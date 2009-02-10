@@ -137,13 +137,18 @@ namespace DSIS.UI.Wizard
         {
           panel = new Panel { Dock = DockStyle.Fill };
           var pageContent = page.Control;
+          var scrollable = pageContent as ScrollableControl;
+          if (scrollable != null) 
+            scrollable.AutoScroll = false;
+
           myMiddleContainer.AutoScrollMinSize = pageContent.Size;
           pageContent.Dock = DockStyle.Fill;
           panel.Controls.Add(pageContent);
 
           myCachedViwes[page] = panel;
-
+          SuspendLayout();
           myMiddleContainer.Controls.Add(panel);
+          ResumeLayout(true);
         }
         else
         {

@@ -1,9 +1,12 @@
 using System.Windows.Forms;
+using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
 using DSIS.UI.Application.Actions;
+using DSIS.Utils;
 
 namespace DSIS.UI.Application
 {
+  [TypeInstanciable]
   public partial class MainForm : Form
   {
     private readonly IActionPresentationManager myActionManager;
@@ -14,6 +17,7 @@ namespace DSIS.UI.Application
       InitializeComponent();           
     }
 
+    [Used]
     public MainForm(IActionPresentationManager actionManager, IMainMenuFactory menuFactoy) : this()
     {
       myActionManager = actionManager;

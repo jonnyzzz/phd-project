@@ -1,4 +1,3 @@
-using System.Windows.Forms;
 using DSIS.Core.Ioc;
 using DSIS.Scheme;
 using DSIS.Scheme.Ctx;
@@ -11,17 +10,14 @@ namespace DSIS.UI.ComputationDialogs.Measure
   [DocumentComponent]
   public class ComputeInvariantMeasureMethodSelectorImpl : IComputeInvariantMeasureMethodSelector
   {
-    private readonly ISubContainerFactory myContainer;
-    private readonly IApplicationClass myApp;
+    [Autowire]
+    private ISubContainerFactory myContainer{ get; set;}
 
     [Autowire]
     private IComputeInveriantMeasureFactory[] Factories { get; set; }
 
-    public ComputeInvariantMeasureMethodSelectorImpl(ISubContainerFactory container, IApplicationClass app)
-    {
-      myContainer = container;
-      myApp = app;
-    }
+    [Autowire]
+    private IWizardFormPresenter Presented { get; set; }
 
     public bool IsApplicable(Context ctx)
     {
@@ -34,19 +30,20 @@ namespace DSIS.UI.ComputationDialogs.Measure
     }
 
     public IAction ShowWizard()
-    {
-      return myApp.ShowDialog(
-        f =>
-          {
-            using (var c = myContainer.SubContainer<ComputeInvariantMeasureUIComponent>())
-            {
-              var wizard = c.GetComponent<ComputeInvariantMeasureWizard>();
-              using (var dlg = new WizardForm(wizard))
-              {
-                return dlg.ShowDialog(f) == DialogResult.OK ? wizard.CreateAction() : null;
-              }
-            }
-          });
+    {       
+      using (var c = myContainer.SubContainer<ComputeInvariantMeasureUIComponent>())
+      {
+        var wizard = c.GetComponent<ComputeInvariantMeasureWizard>();
+        var pair = Presented.ShowWizard(wizard);
+
+        if (!pair.Second)
+          return null;
+        
+        if (!pair.First.HasValue)
+          return null;
+
+        return pair.First.Value;
+      }
     }
   }
 }
