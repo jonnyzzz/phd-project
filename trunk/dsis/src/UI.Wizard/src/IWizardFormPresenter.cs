@@ -13,5 +13,7 @@ namespace DSIS.UI.Wizard
     Pair<Ref<T>, bool> ShowWizard<T>(IWizardPack<T> wizard);
 
     Pair<Ref<T>, bool> ShowWizard<T>(IWizardPackFactory<T> wizard);
+
+    T ShowWizardOrNull<T>(IWizardPack<T> wizard) where T : class;
   }
 }

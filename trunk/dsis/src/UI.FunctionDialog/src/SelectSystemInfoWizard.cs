@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.Wizard.ListSelector;
@@ -7,7 +8,7 @@ using DSIS.UI.Wizard.OptionsWizard;
 
 namespace DSIS.UI.FunctionDialog
 {
-  [SystemFunctionComponent]
+  [TypeInstanciable]
   public class SelectSystemInfoWizard : OptionsBasedWizard<ISystemInfoParameters, ISystemInfo, ISystemInfoFactory>
   {
     public SelectSystemInfoWizard(

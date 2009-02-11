@@ -23,11 +23,11 @@ namespace DSIS.UI.FunctionDialog
     }
 
     [Autowire]
-    private SelectSystemInfoWizard Factory { get; set; }
+    private ITypeInstantiator Factory { get; set; }
 
     public IWizardPack<ISystemInfo> CreateWizard()
     {
-      return Factory;
+      return Factory.Instanciate<SelectSystemInfoWizard>();
     }
   }
 }

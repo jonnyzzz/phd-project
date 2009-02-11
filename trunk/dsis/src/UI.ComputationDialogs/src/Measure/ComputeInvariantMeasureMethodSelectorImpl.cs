@@ -34,15 +34,7 @@ namespace DSIS.UI.ComputationDialogs.Measure
       using (var c = myContainer.SubContainer<ComputeInvariantMeasureUIComponent>())
       {
         var wizard = c.GetComponent<ComputeInvariantMeasureWizard>();
-        var pair = Presented.ShowWizard(wizard);
-
-        if (!pair.Second)
-          return null;
-        
-        if (!pair.First.HasValue)
-          return null;
-
-        return pair.First.Value;
+        return Presented.ShowWizardOrNull(wizard);        
       }
     }
   }

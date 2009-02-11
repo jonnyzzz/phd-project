@@ -15,11 +15,6 @@ namespace DSIS.UI.ComputationDialogs.Measure
       FirstPage = state;
     }
 
-    public IAction CreateAction()
-    {
-      return myState.Factory.CreateComputeAction(myState.Settings);
-    }
-
     public void Dispose()
     {     
     }
@@ -31,7 +26,7 @@ namespace DSIS.UI.ComputationDialogs.Measure
 
     public IAction GetResult()
     {
-      return CreateAction();
+      return myState.Factory.CreateComputeAction(myState.Settings);
     }
   }
 }

@@ -4,7 +4,7 @@ using DSIS.UI.Wizard;
 namespace DSIS.UI.ComputationDialogs
 {
   [SIConstructionComponent]
-  public class SIConstructionWizard : StateWizard
+  public class SIConstructionWizard : StateWizard, IWizardPack<ICellImageBuilderSettings>
   {
     private readonly SIConstructionMethodWizardState myState;
 
@@ -15,9 +15,18 @@ namespace DSIS.UI.ComputationDialogs
       FirstPage = state;
     }
 
-    public ICellImageBuilderSettings Settings
+    public void Dispose()
+    {      
+    }
+
+    public IWizardPack Controller
     {
-      get { return myState.Settings; }
+      get { return this; }
+    }
+
+    public ICellImageBuilderSettings GetResult()
+    {
+      return myState.Settings;
     }
   }
 }

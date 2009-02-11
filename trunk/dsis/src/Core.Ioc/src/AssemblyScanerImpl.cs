@@ -24,7 +24,7 @@ namespace DSIS.Core.Ioc
       {
         var attrs = type.GetCustomAttributes(typeof(T), true);
         if (attrs.Length > 0)
-          result.Add(Pair.Create(type, (T)attrs[0]));
+          result.Add(Pair.Of(type, (T)attrs[0]));
       }
       return result;  
     }

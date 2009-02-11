@@ -46,5 +46,16 @@ namespace DSIS.UI.Wizard
         return ShowWizard(wz);
       }
     }
+
+    public T ShowWizardOrNull<T>(IWizardPack<T> wizard) where T : class
+    {
+      var result = ShowWizard(wizard);
+
+      if (!result.Second)
+        return null;
+      if (!result.First.HasValue)
+        return null;
+      return result.First.Value;
+    }
   }
 }
