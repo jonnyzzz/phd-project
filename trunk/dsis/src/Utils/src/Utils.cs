@@ -61,7 +61,7 @@ namespace DSIS.Utils
       var data = new List<string>();
       double cn = 0;
       bool overflow = false;
-      foreach (var e in enu.Sort((x, y) => -weight(x).CompareTo(weight(y))))
+      foreach (var e in enu.Sort((x, y) => -(weight(x).CompareTo(weight(y)))))
       {
         if (overflow)
         {
@@ -71,7 +71,7 @@ namespace DSIS.Utils
         data.Add(toString(e));
 
         cn += weight(e);
-        overflow = cn >= sum;
+        overflow = cn > sum;
       }
       return data.JoinString(", ");
     }
