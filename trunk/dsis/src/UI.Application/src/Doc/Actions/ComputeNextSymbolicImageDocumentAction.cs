@@ -9,6 +9,7 @@ using DSIS.Scheme.Impl.Actions;
 using DSIS.UI.Application.Progress;
 using DSIS.UI.ComputationDialogs;
 using DSIS.UI.UI;
+using DSIS.Utils;
 using log4net;
 
 namespace DSIS.UI.Application.Doc.Actions
@@ -50,9 +51,10 @@ namespace DSIS.UI.Application.Doc.Actions
               var ctx = myDocument.Content;
               for (var set = settings; set != null; set = set.Next(ctx))
               {
-                var r = ((IAction) CreateCompleteAction(ctx, settings)).Apply(ctx);
+                var r = ((IAction) CreateCompleteAction(ctx, set)).Apply(ctx);
                 ctx = DocumentManager.UpdateContext(ctx, r);
                 LOG.Info(r);
+                GCHelper.Collect();
               }
               DocumentManager.ChangeDocument(ctx);
             }

@@ -56,14 +56,15 @@ namespace DSIS.UI.ComputationDialogs
 
     public SubdivisionResult GetResult()
     {
+      var constraints = (from c in myConstrains where c.Enabled select c.CreateConstraint()).ToList();
       return new SubdivisionResult(Subdivision, myUseUnsimmetricCheckbox.Checked, 
-        myRepeatCheckbox.Checked 
-        ? from c in myConstrains where c.Enabled select c.CreateConstraint()
+        myRepeatCheckbox.Checked || constraints.Count == 0
+        ? (IEnumerable<ISIComputationConstraint>) constraints
         : new[]{new OneStepConstraint()}
         );
     }
 
-    public long[] Subdivision
+    private long[] Subdivision
     {
       get
       {

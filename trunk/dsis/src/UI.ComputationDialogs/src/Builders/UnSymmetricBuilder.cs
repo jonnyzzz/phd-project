@@ -27,9 +27,11 @@ namespace DSIS.UI.ComputationDialogs.Builders
     {
       if (myIndex + 1 < mySymmetric.Subdivision.Length)
         return new UnSymmetricBuilder(mySymmetric, myIndex + 1);
+
       var next = mySymmetric.Next(ctx);
       if (next == null)
         return null;
+
       return new UnSymmetricBuilder(next, 0);
     }
 

@@ -48,7 +48,11 @@ namespace DSIS.UI.Application
           var old = myDocument;
           myDocument = value;
 
-          Invocator.InvokeOrQueue("Document changeg", () => FireDocumentChanged(old, myDocument));
+          Invocator.InvokeOrQueue("Document changeg", () =>
+                                                        {
+                                                          FireDocumentChanged(old, myDocument);
+                                                          GCHelper.Collect();
+                                                        });
         }
       }
     }
