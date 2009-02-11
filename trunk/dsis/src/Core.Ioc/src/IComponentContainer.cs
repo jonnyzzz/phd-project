@@ -24,10 +24,10 @@ namespace DSIS.Core.Ioc
 
   public interface ISubContainerFactory
   {
-    IComponentContainer SubContainer<TImplementation>()
+    IComponentContainer SubContainer<TImplementation>(params object[] instances)
       where TImplementation : ComponentImplementationAttributeBase;
 
-    IComponentContainer SubContainerNoScan<TImplementation>()
+    IComponentContainer SubContainerNoScan<TImplementation>(params object[] instances)
       where TImplementation : ComponentImplementationAttributeBase;
   }
 

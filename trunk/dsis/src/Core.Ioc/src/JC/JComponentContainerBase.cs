@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using DSIS.Utils;
 
 namespace DSIS.Core.Ioc.JC
 {
@@ -87,17 +88,20 @@ namespace DSIS.Core.Ioc.JC
 
     protected abstract JComponentContainerBase CreateContainer<TImpl2>() where TImpl2 : ComponentImplementationAttributeBase;
 
-    public IComponentContainer SubContainer<TImplementation>() 
+    public IComponentContainer SubContainer<TImplementation>(params object[] instances) 
       where TImplementation : ComponentImplementationAttributeBase
     {
-      var child = SubContainerNoScan<TImplementation>();
+      var child = SubContainerNoScan<TImplementation>(instances);
       child.ScanAssemblies(myAssemblies);
       return child;
     }
 
-    public IComponentContainer SubContainerNoScan<TImplementation>() where TImplementation : ComponentImplementationAttributeBase
+    public IComponentContainer SubContainerNoScan<TImplementation>(params object[] instances) 
+      where TImplementation : ComponentImplementationAttributeBase
     {
-      return CreateContainer<TImplementation>();
+      var @base = CreateContainer<TImplementation>();
+      instances.ForEach(@base.RegisterComponent);
+      return @base;
     }
 
     public ITypesFilter Filter

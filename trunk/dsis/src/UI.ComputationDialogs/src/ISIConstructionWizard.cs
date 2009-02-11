@@ -1,4 +1,5 @@
 using DSIS.Core.Builders;
+using DSIS.Core.Coordinates;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.UI.ComputationDialogs
@@ -18,6 +19,6 @@ namespace DSIS.UI.ComputationDialogs
 
   public interface ISIConstructionWizard
   {
-    ICellImageBuilderWizardResult ShowWizard(int dimension);
+    ICellImageBuilderWizardResult ShowWizard(ICellCoordinateSystem system);
   }
 }

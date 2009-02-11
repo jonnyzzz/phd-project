@@ -4,11 +4,11 @@ using DSIS.UI.Wizard;
 namespace DSIS.UI.ComputationDialogs
 {
   [SIConstructionComponent]
-  public class SIConstructionWizard : StateWizard, IWizardPack<ICellImageBuilderSettings>
+  public class SIConstructionWizardPack : StateWizard, IWizardPack<ICellImageBuilderSettings>
   {
     private readonly SIConstructionMethodWizardState myState;
 
-    public SIConstructionWizard(SIConstructionMethodWizardState state)
+    public SIConstructionWizardPack(SIConstructionMethodWizardState state)
     {
       myState = state;
       Title = "Select Symbolic Image construction method";

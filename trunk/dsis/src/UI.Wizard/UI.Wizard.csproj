@@ -126,6 +126,8 @@
     <Compile Include="src\ListSelector\IListSelectorFactory.cs" />
     <Compile Include="src\ListSelector\IListSelectorWizardPage.cs" />
     <Compile Include="src\ListSelector\IListSelectorWizardPageFactory.cs" />
+    <Compile Include="src\ListSelector\ItemDescr.cs" />
+    <Compile Include="src\ListSelector\ListInfo!1.cs" />
     <Compile Include="src\ListSelector\ListInfo.cs" />
     <Compile Include="src\ListSelector\ListSelector!2.cs">
       <SubType>UserControl</SubType>

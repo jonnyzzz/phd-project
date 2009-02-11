@@ -1,5 +1,3 @@
-using DSIS.Utils;
-
 namespace DSIS.UI.Wizard
 {
   public abstract class StateWizard : IWizardPack

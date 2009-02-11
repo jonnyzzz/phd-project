@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using DSIS.Core.Builders;
+using DSIS.Core.Coordinates;
 using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
 using DSIS.UI.Wizard;
@@ -15,13 +17,21 @@ namespace DSIS.UI.ComputationDialogs
     [Autowire]
     private IWizardFormPresenter Presenter { get; set; }
 
-    public ICellImageBuilderWizardResult ShowWizard(int dimension)
+    public ICellImageBuilderWizardResult ShowWizard(ICellCoordinateSystem system)
     {
       using (var c = myContainer.SubContainer<SIConstructionComponent>())
       {
-        var wizard = c.GetComponent<SIConstructionWizard>();
+        c.RegisterComponent(system);
+
+        var wizard = c.GetComponent<SIConstructionWizardPack>();
         var settings = Presenter.ShowWizardOrNull(wizard);
-        return settings == null ? null : new Proxy(settings, dimension);
+        if (settings == null)
+          return null;
+
+        var wizard2 = c.GetComponent<SubdivisionWizardPack>();
+        Presenter.ShowWizard(wizard2);
+
+        return new Proxy(settings, system.Dimension);
       }
     }
 

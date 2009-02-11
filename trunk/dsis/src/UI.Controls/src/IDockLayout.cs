@@ -5,8 +5,8 @@ namespace DSIS.UI.Controls
 {
   public interface IDockLayout
   {
-    Panel Layout(DockStyle dock, IEnumerable<Control> controls);
+    Panel Layout<C>(DockStyle dock, IEnumerable<C> controls) where C : Control;
 
-    void Layout(Control host, DockStyle dock, IEnumerable<Control> controls);
+    void Layout<C>(Control host, DockStyle dock, IEnumerable<C> controls) where C : Control;
   }
 }

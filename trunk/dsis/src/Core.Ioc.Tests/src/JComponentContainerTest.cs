@@ -121,7 +121,32 @@ namespace DSIS.Core.Ioc.Tests
       var c = myContainer.GetComponent<string>();
       Assert.That(c, Is.EqualTo("ZZZZ"));
     }
+    
+    [Test]
+    public void Test_RegisterComponent_Subcontainer()
+    {
+      DoTest<TI, Tx8>();
 
+      using(var cc = myContainer.SubContainer<Tx8x>("ZZZZ"))
+      {
+        var c = cc.GetComponent<JI8x>();
+        Assert.That(c, Is.Not.Null);
+      }      
+    }
+
+    [Test]
+    public void Test_RegisterComponent_SubcontainerNoScan()
+    {
+      DoTest<TI, Tx8>();
+
+      using(var cc = myContainer.SubContainerNoScan<Tx8x>("ZZZZ"))
+      {
+        cc.RegisterComponentType(typeof(JI8x));
+        var c = cc.GetComponent<JI8x>();
+        Assert.That(c, Is.Not.Null);
+      }      
+    }
+    
     public class Tx0 : ComponentImplementationAttributeBase{}
     public class Tx1 : ComponentImplementationAttributeBase{}
     public class Tx2 : ComponentImplementationAttributeBase{}
@@ -130,6 +155,8 @@ namespace DSIS.Core.Ioc.Tests
     public class Tx5 : ComponentImplementationAttributeBase{}
     public class Tx6 : ComponentImplementationAttributeBase{}
     public class Tx7 : ComponentImplementationAttributeBase{}
+    public class Tx8 : ComponentImplementationAttributeBase{}
+    public class Tx8x : ComponentImplementationAttributeBase{}
 
     [Tx0]
     public class JI{}
@@ -216,5 +243,11 @@ namespace DSIS.Core.Ioc.Tests
       public JI7Host(ITypeInstantiator i) {
         Foo = i.Instanciate<JI7x>("ZZZZ");
     }}
+
+    [Tx8x]
+    public class JI8x { [Autowire] public string Foo { get; set; } public JI8x(string bar)
+    {
+    }
+    }
   }
 }

@@ -9,19 +9,19 @@ namespace DSIS.UI.Controls
   [ComponentImplementation]
   public class DockLayout : IDockLayout
   {
-    public Panel Layout(DockStyle dock, IEnumerable<Control> controls)
+    public Panel Layout<C>(DockStyle dock, IEnumerable<C> controls) where C : Control
     {
       var pn = new Panel();
       Layout(pn, dock, controls);
       return pn;
     }
 
-    public void Layout(Control host, DockStyle dock, IEnumerable<Control> controls)
+    public void Layout<C>(Control host, DockStyle dock, IEnumerable<C> controls) where C : Control
     {
       if (host.Controls.Count != 0)
         throw new ArgumentException("Control should not contain any child controls", "host");
 
-      var list = new List<Control>(controls);
+      var list = new List<C>(controls);
       if (dock == DockStyle.Top || dock == DockStyle.Left)
         list.Reverse();
 

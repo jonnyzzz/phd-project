@@ -29,12 +29,16 @@ namespace DSIS.UI.Application.Doc.Actions
 
     public bool Compatible
     {
-      get { return myDocument.Content.ContainsCellCollection() || myDocument.Content.ContainsGraph(); }
+      get
+      {
+        var ctx = myDocument.Content;
+        return ctx.ContainsKey(Keys.IntegerCoordinateSystemInfo) && (ctx.ContainsCellCollection() || ctx.ContainsGraph());
+      }
     }
 
     public void Apply()
     {
-      var settings = myWizard.ShowWizard(myDocument.System.Dimension);
+      var settings = myWizard.ShowWizard(myDocument.Content.Get(Keys.IntegerCoordinateSystemInfo));
       if (settings != null)
         myExec.ExecuteAsync(
           "Next SI",
