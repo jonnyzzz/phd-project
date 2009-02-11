@@ -20,22 +20,28 @@ namespace DSIS.UI.Application
         "Create new document",
         delegate
           {
-            var ctx = new Context();
-            ctx.AddAll(newContext);
-
-            AddIfNoteDefined(ctx, newContext, Keys.SystemSpaceKey);
-            AddIfNoteDefined(ctx, newContext, Keys.SystemInfoKey);
+            var ctx = UpdateContext(myApplication.Document.Content, newContext);
 
             var doc = new ApplicationDocument(myApplication.Document.Title, ctx);
             myApplication.Document = doc;
           });
     }
 
-    private void AddIfNoteDefined<T>(IWriteOnlyContext ctx, IReadOnlyContext newContext, Key<T> key)
+    public Context UpdateContext(IReadOnlyContext currentContext, Context newContext)
+    {
+      var ctx = new Context();
+      ctx.AddAll(newContext);
+
+      AddIfNoteDefined(currentContext, ctx, newContext, Keys.SystemSpaceKey);
+      AddIfNoteDefined(currentContext, ctx, newContext, Keys.SystemInfoKey);
+      return ctx;
+    }
+
+    private static void AddIfNoteDefined<T>(IReadOnlyContext document, IWriteOnlyContext ctx, IReadOnlyContext newContext, Key<T> key)
     {
       if (!newContext.ContainsKey(key))
       {
-        key.Copy(myApplication.Document.Content, ctx);
+        key.Copy(document, ctx);
       }
     }
   }

@@ -48,9 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Constraints\OneStepConstraint.cs" />
     <Compile Include="src\HeaderSubdivisionFieldControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="src\ISIComputationConstraintUI.cs" />
     <Compile Include="src\ISIConstructionWizard.cs">
     </Compile>
     <Compile Include="src\Measure\ComputeInvariantMeasureUIComponent.cs" />
@@ -59,6 +61,14 @@
     <Compile Include="src\Measure\ComputeInvariantMeasureWizardPage.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureWizardState.cs" />
     <Compile Include="src\Measure\IComputeInvariantMeasureMethodSelector.cs" />
+    <Compile Include="src\Constraints\RepeatCountTool.cs" />
+    <Compile Include="src\Constraints\RepeatCountToolConstraint.cs" />
+    <Compile Include="src\Constraints\RepeatCountToolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Constraints\RepeatCountToolControl.Designer.cs">
+      <DependentUpon>RepeatCountToolControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\SelectFactoryAndOptionsWizardState.cs" />
     <Compile Include="src\SIConstructionComponent.cs" />
     <Compile Include="src\SIConstructionMethodSettingsWizardState.cs" />
@@ -84,9 +94,11 @@
     <Compile Include="src\SubdivisionResult.cs" />
     <Compile Include="src\SubdivisionWizardPack.cs" />
     <Compile Include="src\SubdivisionWizardPage.cs" />
+    <Compile Include="src\Builders\SymmetricBuilder.cs" />
     <Compile Include="src\TotalSubdivisionFieldControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="src\Builders\UnSymmetricBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
@@ -127,6 +139,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="src\Constraints\RepeatCountToolControl.resx">
+      <DependentUpon>RepeatCountToolControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\SubdivisionEditorControl.resx">
       <DependentUpon>SubdivisionEditorControl.cs</DependentUpon>
       <SubType>Designer</SubType>

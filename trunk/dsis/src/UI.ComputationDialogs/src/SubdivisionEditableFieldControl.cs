@@ -1,10 +1,11 @@
 using System;
 using System.Globalization;
 using System.Windows.Forms;
+using DSIS.UI.UI;
 
 namespace DSIS.UI.ComputationDialogs
 {
-  public class SubdivisionEditableFieldControl : SubdivisionFieldControl
+  public class SubdivisionEditableFieldControl : SubdivisionFieldControl, IErrorProvider<bool>
   {
     private long? mySubdivisionValue;
     private long myActualValue;
@@ -29,7 +30,7 @@ namespace DSIS.UI.ComputationDialogs
 
       UpdateFields();
 
-      mySubdivisionText.TextChanged += mySubdivision_TextChanged;
+      mySubdivisionText.TextChanged += SubdivisionTextChanged;
     }
 
     public long ActualValue
@@ -70,6 +71,11 @@ namespace DSIS.UI.ComputationDialogs
       return v.ToString("N0");
     }
 
+    bool IErrorProvider<bool>.Validate()
+    {
+      return !HasError;
+    }
+
     private void SetError(string message)
     {
       HasError = message != null;
@@ -77,7 +83,7 @@ namespace DSIS.UI.ComputationDialogs
         Error(mySubdivisionText, message);
     }
 
-    private void mySubdivision_TextChanged(object sender, EventArgs e)
+    private void SubdivisionTextChanged(object sender, EventArgs e)
     {
       if (!myUpdating)
       {

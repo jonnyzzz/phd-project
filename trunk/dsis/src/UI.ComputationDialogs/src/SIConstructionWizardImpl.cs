@@ -1,10 +1,7 @@
-using System.Collections.Generic;
-using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Ioc;
-using DSIS.Scheme.Ctx;
+using DSIS.UI.ComputationDialogs.Builders;
 using DSIS.UI.Wizard;
-using DSIS.Utils;
 
 namespace DSIS.UI.ComputationDialogs
 {
@@ -23,42 +20,16 @@ namespace DSIS.UI.ComputationDialogs
       {
         c.RegisterComponent(system);
 
-        var wizard = c.GetComponent<SIConstructionWizardPack>();
-        var settings = Presenter.ShowWizardOrNull(wizard);
+        var settings = Presenter.ShowWizardOrNull(c.GetComponent<SIConstructionWizardPack>());
         if (settings == null)
           return null;
 
-        var wizard2 = c.GetComponent<SubdivisionWizardPack>();
-        Presenter.ShowWizard(wizard2);
+        var result2 = Presenter.ShowWizardOrNull(c.GetComponent<SubdivisionWizardPack>());
+        if (result2 == null)
+          return null;
 
-        return new Proxy(settings, system.Dimension);
-      }
-    }
-
-    private class Proxy : ICellImageBuilderWizardResult
-    {
-      private readonly ICellImageBuilderSettings mySettings;
-      private readonly int myDimension;
-
-      public Proxy(ICellImageBuilderSettings settings, int dimension)
-      {
-        mySettings = settings;
-        myDimension = dimension;
-      }
-
-      public ICellImageBuilderSettings Setting
-      {
-        get { return mySettings; }
-      }
-
-      public long[] Subdivision
-      {
-        get { return 2L.Fill(myDimension); }
-      }
-
-      public ICellImageBuilderWizardResult Next(Context ctx)
-      {
-        return null;
+        var sym = new SymmetricBuilder(settings, result2.Subdivision, result2.Constraints);
+        return result2.UseUnsimmetric ? (ICellImageBuilderWizardResult) new UnSymmetricBuilder(sym) : sym;
       }
     }
   }

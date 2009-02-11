@@ -5,8 +5,11 @@ namespace DSIS.UI.ComputationDialogs
   [SIConstructionComponent]
   public class SubdivisionWizardPack : SimpleWizard, IWizardPack<SubdivisionResult>
   {
+    private readonly SubdivisionWizardPage myPage;
+
     public SubdivisionWizardPack(SubdivisionWizardPage page) : base(new[] {page})
     {
+      myPage = page;
       Title = "Select Subdivision and Steps";
     }
 
@@ -21,7 +24,7 @@ namespace DSIS.UI.ComputationDialogs
 
     public SubdivisionResult GetResult()
     {
-      return null;
+      return myPage.ControlInternal.GetResult();
     }
   }
 }
