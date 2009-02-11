@@ -3,7 +3,7 @@ using DSIS.UI.Wizard;
 namespace DSIS.UI.ComputationDialogs
 {
   [SIConstructionComponent]
-  public class SubdivisionWizardPack : SimpleWizard, IWizardPack<int>
+  public class SubdivisionWizardPack : SimpleWizard, IWizardPack<SubdivisionResult>
   {
     public SubdivisionWizardPack(SubdivisionWizardPage page) : base(new[] {page})
     {
@@ -19,9 +19,9 @@ namespace DSIS.UI.ComputationDialogs
       get { return this; }
     }
 
-    public int GetResult()
+    public SubdivisionResult GetResult()
     {
-      return 0;
+      return null;
     }
   }
 }

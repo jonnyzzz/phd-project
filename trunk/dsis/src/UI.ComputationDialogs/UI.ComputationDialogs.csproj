@@ -81,6 +81,7 @@
     <Compile Include="src\SubdivisionFieldControl.Designer.cs">
       <DependentUpon>SubdivisionFieldControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\SubdivisionResult.cs" />
     <Compile Include="src\SubdivisionWizardPack.cs" />
     <Compile Include="src\SubdivisionWizardPage.cs" />
     <Compile Include="src\TotalSubdivisionFieldControl.cs">

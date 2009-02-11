@@ -66,5 +66,10 @@ namespace DSIS.UI.ComputationDialogs
     {
       get { return !myControls.FoldLeft(true, (x, v) => !x.HasError && v); }
     }
+
+    private void myRepeatCheckbox_CheckedChanged(object sender, EventArgs e)
+    {
+      myRepeatPluginsHost.Enabled = myRepeatCheckbox.Checked;
+    }
   }
 }
