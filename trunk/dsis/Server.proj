@@ -13,7 +13,7 @@
 
   <Target Name="Tests">
     <ItemGroup>
-      <Tests Include="bin\DSIS*Test*dll" 
+      <Tests Include="bin*\DSIS*Test*dll" 
              Exclude="**\*Generated*"
       />
     </ItemGroup>
