@@ -1,27 +1,19 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Windows.Forms;
 using DSIS.UI.UI;
 
-namespace DSIS.UI.ComputationDialogs.Constraints
+namespace DSIS.UI.Controls
 {
-  public partial class RepeatCountToolControl : UserControl, IErrorProvider<bool>
+  public class LongValueTextBox : TextBox, IErrorProvider<bool>
   {
+    public event Action<Control, string> Error;
     private bool myUpdating;
 
-    public RepeatCountToolControl()
+    public bool Validate()
     {
-      InitializeComponent();
+      return !HasError;
     }
-
-    public event Action<Control, string> Error;
-
-    public bool ControlEnabled
-    {
-      get { return myEnabled.Checked; }
-    }
-
-    public long? Times { get; private set;}
 
     public bool HasError { get; private set; }
 
@@ -29,24 +21,22 @@ namespace DSIS.UI.ComputationDialogs.Constraints
     {
       HasError = message != null;
       if (Error != null)
-        Error(myTimes, message);
+        Error(this, message);
     }
 
-    bool IErrorProvider<bool>.Validate()
-    {
-      return !Enabled || !HasError;
-    }
+    public long? Value { get; private set; }
 
-    private void myTimes_TextChanged(object sender, EventArgs e)
+    protected override void OnTextChanged(EventArgs e)
     {
-      myEnabled.Checked = true;
+      base.OnTextChanged(e);
+    
       if (!myUpdating)
       {
         myUpdating = true;
         try
         {
           long v;
-          var s = myTimes.Text;
+          var s = Text;
           if ((long.TryParse(s, out v)
                || long.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out v)
                || long.TryParse(s, NumberStyles.Any, CultureInfo.CurrentCulture, out v)
@@ -54,11 +44,11 @@ namespace DSIS.UI.ComputationDialogs.Constraints
           {
             SetError(null);
 
-            Times = v;            
+            Value = v;
           }
           else
           {
-            Times = null;
+            Value = null;
             SetError("Failed to parse positive integer value");
           }
         }
@@ -67,11 +57,6 @@ namespace DSIS.UI.ComputationDialogs.Constraints
           myUpdating = false;
         }
       }
-    }
-
-    private void myEnabled_CheckedChanged(object sender, EventArgs e)
-    {
-      myTimes.Enabled = ControlEnabled;
     }
   }
 }

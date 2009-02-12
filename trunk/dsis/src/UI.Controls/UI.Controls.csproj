@@ -75,6 +75,9 @@
     <Compile Include="src\ISimpleLayoutManager.cs" />
     <Compile Include="src\Layout.cs" />
     <Compile Include="src\LayoutException.cs" />
+    <Compile Include="src\LongValueTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\SimpleLayoutManager.cs" />
     <Compile Include="src\SmartLayoutManager.cs" />
     <Compile Include="src\TabbedLayout.cs" />

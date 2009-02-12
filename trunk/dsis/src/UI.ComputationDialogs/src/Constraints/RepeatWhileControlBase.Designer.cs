@@ -1,6 +1,9 @@
-﻿namespace DSIS.UI.ComputationDialogs.Constraints
+﻿using System.Windows.Forms;
+using DSIS.UI.Controls;
+
+namespace DSIS.UI.ComputationDialogs.Constraints
 {
-  partial class RepeatCountToolControl
+  partial class RepeatWhileControlBase
   {
     /// <summary> 
     /// Required designer variable.
@@ -28,49 +31,46 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.Label label;
       this.myEnabled = new System.Windows.Forms.CheckBox();
-      this.myTimes = new System.Windows.Forms.TextBox();
-      label = new System.Windows.Forms.Label();
+      this.myValue = new LongValueTextBox();
+      myLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
-      // 
-      // label
-      // 
-      label.AutoSize = true;
-      label.Location = new System.Drawing.Point(132, 6);
-      label.Name = "label";
-      label.Size = new System.Drawing.Size(34, 13);
-      label.TabIndex = 2;
-      label.Text = "times.";
       // 
       // myEnabled
       // 
       this.myEnabled.AutoSize = true;
-      this.myEnabled.Location = new System.Drawing.Point(3, 5);
+      this.myEnabled.Location = new System.Drawing.Point(3, 3);
       this.myEnabled.Name = "myEnabled";
-      this.myEnabled.Size = new System.Drawing.Size(61, 17);
+      this.myEnabled.Size = new System.Drawing.Size(142, 17);
       this.myEnabled.TabIndex = 0;
-      this.myEnabled.Text = "Repeat";
+      this.myEnabled.Text = "Repeat while there are <";
       this.myEnabled.UseVisualStyleBackColor = true;
-      this.myEnabled.CheckedChanged += new System.EventHandler(this.myEnabled_CheckedChanged);
       // 
-      // myTimes
+      // myValue
       // 
-      this.myTimes.Location = new System.Drawing.Point(70, 3);
-      this.myTimes.Name = "myTimes";
-      this.myTimes.Size = new System.Drawing.Size(56, 20);
-      this.myTimes.TabIndex = 1;
-      this.myTimes.TextChanged += new System.EventHandler(this.myTimes_TextChanged);
+      this.myValue.Location = new System.Drawing.Point(151, 0);
+      this.myValue.Name = "myValue";
+      this.myValue.Size = new System.Drawing.Size(44, 20);
+      this.myValue.TabIndex = 1;
       // 
-      // RepeatCountToolControl
+      // label
+      // 
+      myLabel.AutoSize = true;
+      myLabel.Location = new System.Drawing.Point(201, 4);
+      myLabel.Name = "label";
+      myLabel.Size = new System.Drawing.Size(65, 13);
+      myLabel.TabIndex = 2;
+      myLabel.Text = "components";
+      // 
+      // RepeatWhileControlBase
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(label);
-      this.Controls.Add(this.myTimes);
+      this.Controls.Add(myLabel);
+      this.Controls.Add(this.myValue);
       this.Controls.Add(this.myEnabled);
-      this.Name = "RepeatCountToolControl";
-      this.Size = new System.Drawing.Size(182, 27);
+      this.Name = "RepeatWhileControlBase";
+      this.Size = new System.Drawing.Size(279, 23);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -79,6 +79,7 @@
     #endregion
 
     private System.Windows.Forms.CheckBox myEnabled;
-    private System.Windows.Forms.TextBox myTimes;
+    private LongValueTextBox myValue;
+    private Label myLabel;
   }
 }

@@ -57,7 +57,20 @@
     <Compile Include="src\Components\ComponentsSelectorWizardPackFactory.cs" />
     <Compile Include="src\Components\ComponentsWizardPage.cs" />
     <Compile Include="src\Components\IComponentsSelectorWizardPackFactory.cs" />
+    <Compile Include="src\Constraints\IntegerCoordinateComponentConstraint.cs" />
     <Compile Include="src\Constraints\OneStepConstraint.cs" />
+    <Compile Include="src\Constraints\RepeatNodesCountTool.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Constraints\RepeatWhileComponentsCount.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Constraints\RepeatWhileControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Constraints\RepeatWhileControlBase.Designer.cs">
+      <DependentUpon>RepeatWhileControlBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\HeaderSubdivisionFieldControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -70,14 +83,10 @@
     <Compile Include="src\Measure\ComputeInvariantMeasureWizardPage.cs" />
     <Compile Include="src\Measure\ComputeInvariantMeasureWizardState.cs" />
     <Compile Include="src\Measure\IComputeInvariantMeasureMethodSelector.cs" />
-    <Compile Include="src\Constraints\RepeatCountTool.cs" />
-    <Compile Include="src\Constraints\RepeatCountToolConstraint.cs" />
-    <Compile Include="src\Constraints\RepeatCountToolControl.cs">
+    <Compile Include="src\Constraints\RepeatCountTool.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="src\Constraints\RepeatCountToolControl.Designer.cs">
-      <DependentUpon>RepeatCountToolControl.cs</DependentUpon>
-    </Compile>
+    <Compile Include="src\Constraints\RepeatCountToolConstraint.cs" />
     <Compile Include="src\SelectFactoryAndOptionsWizardState.cs" />
     <Compile Include="src\SIConstructionComponent.cs" />
     <Compile Include="src\SIConstructionMethodSettingsWizardState.cs" />
@@ -122,6 +131,14 @@
       <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
       <Name>Graph</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
+      <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
+      <Name>IntegerCoordinates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scheme.Impl\Scheme.Impl.csproj">
+      <Project>{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}</Project>
+      <Name>Scheme.Impl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
       <Name>Scheme.Objects</Name>
@@ -152,8 +169,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\Constraints\RepeatCountToolControl.resx">
-      <DependentUpon>RepeatCountToolControl.cs</DependentUpon>
+    <EmbeddedResource Include="src\Constraints\RepeatWhileControlBase.resx">
+      <DependentUpon>RepeatWhileControlBase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\SubdivisionEditorControl.resx">

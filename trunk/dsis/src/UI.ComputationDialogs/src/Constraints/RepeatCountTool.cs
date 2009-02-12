@@ -1,42 +1,20 @@
-using System;
-using System.Windows.Forms;
-
 namespace DSIS.UI.ComputationDialogs.Constraints
 {
   [SIConstructionComponent]
-  public class RepeatCountTool : ISIComputationConstraintUI
+  public class RepeatCountTool : RepeatWhileControlBase
   {
-    private readonly RepeatCountToolControl myControl;
-
-    public RepeatCountTool()
+    public RepeatCountTool() : base("Repeat", "times")
     {
-      myControl = new RepeatCountToolControl();
     }
 
-    public bool Enabled
-    {
-      get { return myControl.Enabled; }
-    }
-
-    public string SortName
+    public override string SortName
     {
       get { return "1000"; }
     }
 
-    public ISIComputationConstraint CreateConstraint()
+    protected override ISIComputationConstraint CreateConstraint(long count)
     {
-      return Enabled ? new RepeatCountToolConstraint(myControl.Times.Value) : null;
-    }
-
-    public Control Control
-    {
-      get { return myControl; }
-    }
-
-    public event Action<Control, string> Error
-    {
-      add { myControl.Error += value; }
-      remove { myControl.Error -= value; }
+      return new RepeatCountToolConstraint(count);
     }
   }
 }
