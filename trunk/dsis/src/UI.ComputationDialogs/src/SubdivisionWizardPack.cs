@@ -24,7 +24,7 @@ namespace DSIS.UI.ComputationDialogs
 
     public SubdivisionResult GetResult()
     {
-      return myPage.ControlInternal.GetResult();
+      return myPage.GetResult();
     }
   }
 }

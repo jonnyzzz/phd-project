@@ -5,6 +5,28 @@ namespace DSIS.Utils
 {
   public static class CollectionUtil
   {
+    public static bool ContainsAny<Q,T>(this HashSet<Q> set, IEnumerable<T> enu)
+      where T : Q
+    {
+      foreach (var t in enu)
+      {
+        if (set.Contains(t))
+          return true;
+      }
+      return false;
+    }
+
+    public static bool ContainsAll<Q,T>(this HashSet<Q> set, IEnumerable<T> enu)
+      where T : Q
+    {
+      foreach (var t in enu)
+      {
+        if (!set.Contains(t))
+          return false;
+      }
+      return true;
+    }
+
     public static IEnumerable<Q> Safe<Q>(this IEnumerable<Q> enu)
     {
       return enu ?? EmptyArray<Q>.Instance;

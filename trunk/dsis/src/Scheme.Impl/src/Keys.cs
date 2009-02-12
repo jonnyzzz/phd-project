@@ -33,9 +33,17 @@ namespace DSIS.Scheme.Impl
       return new Key<IGraph<Q>>("graph");
     }
 
-    public static Key<IGraphStrongComponents<Q>> GraphComponents<Q>() where Q : ICellCoordinate
+    public static Key<IGraphStrongComponents> GraphComponents
     {
-      return new Key<IGraphStrongComponents<Q>>("comps");
+      get
+      {
+        return new Key<IGraphStrongComponents>("comps");
+      }
+    }
+
+    public static Key<IGraphStrongComponents<Q>> GetGraphComponents<Q>() where Q : ICellCoordinate
+    {
+      return new Key<IGraphStrongComponents<Q>>("comps", GraphComponents);
     }
 
     public static readonly Key<StrangeEntropyEvaluatorParams> StrangeEntropyEvaluatorParams = new Key<StrangeEntropyEvaluatorParams>("");

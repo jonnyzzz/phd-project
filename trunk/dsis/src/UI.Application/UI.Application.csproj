@@ -123,6 +123,7 @@
     <Compile Include="src\Doc\Actions\IDocumentActionEx.cs" />
     <Compile Include="src\Doc\Actions\IDocumentActionManager.cs" />
     <Compile Include="src\Doc\Actions\IDocumentActionPresentation.cs" />
+    <Compile Include="src\Doc\Actions\SelectStrongComponentsAction.cs" />
     <Compile Include="src\Doc\CurrentStep\CellSizeCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\ControlWithTitle.cs" />
     <Compile Include="src\Doc\CurrentDocumentControl.cs">

@@ -12,13 +12,13 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     {
       return ColBase(base.Check<T, Q>(ctx),
                      Create(Keys.Graph<Q>()),
-                     Create(Keys.GraphComponents<Q>()));
+                     Create(Keys.GetGraphComponents<Q>()));
     }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
       var graph = Keys.Graph<Q>().Get(input);
-      var comps = Keys.GraphComponents<Q>().Get(input);
+      var comps = Keys.GetGraphComponents<Q>().Get(input);
       var ps = GetParams(input);
 
       var measure = new StrangeEntropyEvaluator<Q>().Measure(graph, comps, ps);

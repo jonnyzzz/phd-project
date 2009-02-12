@@ -16,7 +16,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       return ColBase(
         base.Check<T, Q>(ctx), 
         Create(FileKeys.WorkingFolderKey), 
-        Create(Keys.GraphComponents<Q>())
+        Create(Keys.GetGraphComponents<Q>())
         );
     }
 
@@ -26,7 +26,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       string file = Path.Combine(dir, "graph-entropy.log");
 
       //todo:!Not optimal!
-      IGraphStrongComponents<Q> components = Keys.GraphComponents<Q>().Get(input);
+      IGraphStrongComponents<Q> components = Keys.GetGraphComponents<Q>().Get(input);
       IGraph<Q> graph = components.AsGraph(components.Components);
       
       DumpEntropy(graph, file, false);

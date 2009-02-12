@@ -12,13 +12,13 @@ namespace DSIS.Scheme.Impl.Actions.Console
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
       return ColBase(base.Check<T, Q>(ctx),
-                     Create(Keys.GraphComponents<Q>()),
+                     Create(Keys.GetGraphComponents<Q>()),
                      Create(FileKeys.WorkingFolderKey));
     }
 
     protected sealed override void Apply<T, Q>(Context input, Context output)
     {
-      var measure = Keys.GraphComponents<Q>().Get(input);
+      var measure = Keys.GetGraphComponents<Q>().Get(input);
       var folder = FileKeys.WorkingFolderKey.Get(input);
 
       var name = folder.CreateFileNameFromTemplate("maple-graph-matrix-{0}");

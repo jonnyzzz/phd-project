@@ -8,6 +8,10 @@ namespace DSIS.UI.Wizard
   {
     private readonly SimplePage myFirst;
 
+    public SimpleWizard(params IWizardPage[] pages) : this((IEnumerable<IWizardPage>)pages)
+    {      
+    }
+
     public SimpleWizard(IEnumerable<IWizardPage> myPages)
     {
       Title = string.Empty;

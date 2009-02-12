@@ -124,12 +124,12 @@ namespace DSIS.Tests.BlackBox
         LoopIndex index = myLoop.Key.Get(input);
         if (index.Index == myIndex)
         {
-          IGraphStrongComponents<Q> components = Keys.GraphComponents<Q>().Get(input);
+          IGraphStrongComponents<Q> components = Keys.GetGraphComponents<Q>().Get(input);
           myGraph = components.AsGraph(components.Components);
         }
         else if (index.Count - 1 == index.Index)
         {
-          IGraphStrongComponents<Q> components = Keys.GraphComponents<Q>().Get(input);
+          IGraphStrongComponents<Q> components = Keys.GetGraphComponents<Q>().Get(input);
           IGraph<Q> other = components.AsGraph(components.Components);
           var prev = (IGraph<Q>) myGraph;
 

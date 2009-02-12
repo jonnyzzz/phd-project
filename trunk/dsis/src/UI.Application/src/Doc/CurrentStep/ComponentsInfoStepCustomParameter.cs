@@ -20,12 +20,12 @@ namespace DSIS.UI.Application.Doc.CurrentStep
 
     protected override bool IsAvailable<T, Q>(T cs, Context ctx)
     {
-      return ctx.ContainsKey(Keys.GraphComponents<Q>());
+      return ctx.ContainsKey(Keys.GetGraphComponents<Q>());
     }
 
     protected override string GetValue<T, Q>(T cs, Context ctx)
     {
-      var cmp = Keys.GraphComponents<Q>().Get(ctx);
+      var cmp = Keys.GetGraphComponents<Q>().Get(ctx);
       return string.Format("{0} ({1})", cmp.ComponentCount,
                            cmp.Components.JoinSomeOf(.8, x => x.NodesCount, x => x.NodesCount.ToString("N0")));
     }

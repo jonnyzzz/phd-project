@@ -20,14 +20,14 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
       return ColBase(base.Check<T,Q>(ctx), Create(Keys.IntegerCoordinateSystemInfo),
-        Create(Keys.SystemInfoKey), Create(Keys.GraphComponents<Q>()));
+        Create(Keys.SystemInfoKey), Create(Keys.GetGraphComponents<Q>()));
     }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
       var system = Keys.IntegerCoordinateSystemInfo.Get(input);
       var function = Keys.SystemInfoKey.Get(input).GetFunction<double>(system.CellSizeHalf);
-      var comps = Keys.GraphComponents<Q>().Get(input);
+      var comps = Keys.GetGraphComponents<Q>().Get(input);
 
       var diffFunction = (IDetDiffFunction<double>) function;
       var dic = new Dictionary<IStrongComponentInfo, JVRMorseMinMax<Q>>();

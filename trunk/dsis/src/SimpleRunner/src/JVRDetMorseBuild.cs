@@ -88,7 +88,7 @@ namespace DSIS.SimpleRunner
       protected override void Apply<T, Q>(Context input, Context output)
       {
         var graph = Keys.Graph<Q>().Get(input);
-        var comps = Keys.GraphComponents<Q>().Get(input);
+        var comps = Keys.GetGraphComponents<Q>().Get(input);
         var system = Keys.SystemInfoKey.Get(input);
 
         Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");

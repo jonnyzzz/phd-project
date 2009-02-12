@@ -1,9 +1,10 @@
 using System;
-using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using DSIS.Core.Ioc;
+using DSIS.UI.Controls;
 using DSIS.UI.UI;
 using log4net;
-using DSIS.Utils;
 
 namespace DSIS.UI.Application.Doc.Actions
 {
@@ -19,19 +20,13 @@ namespace DSIS.UI.Application.Doc.Actions
       myActionManager = actionManager;
     }
 
+    [Autowire]
+    private IDockLayout DockLayout { get; set; }
+
     public Control CreateDocumentActionsControl()
     {
-      var panel = new TableLayoutPanel {ColumnCount = 1};
-      int height = 0;
-      int row = 0;
-      foreach (var action in myActionManager.GetActions().Sort((x,y)=>x.Caption.CompareTo(y.Caption)))
-      {
-        Button btn = CreateButton(action);
-        height += btn.Height;
-        panel.Controls.Add(btn, 0, row++);
-      }
-      panel.Size = new Size(100, height + 5);
-      return panel;
+      var actions = from a in myActionManager.GetActions() orderby a.Caption select CreateButton(a);
+      return DockLayout.Layout(DockStyle.Top, actions);
     }
 
     private static Button CreateButton(IDocumentActionEx action)

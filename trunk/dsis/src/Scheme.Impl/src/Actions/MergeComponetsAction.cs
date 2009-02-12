@@ -8,12 +8,12 @@ namespace DSIS.Scheme.Impl.Actions
   {
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(ctx), Create(Keys.GraphComponents<Q>()));
+      return ColBase(base.Check<T, Q>(ctx), Create(Keys.GetGraphComponents<Q>()));
     }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
-      IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
+      IGraphStrongComponents<Q> comps = Keys.GetGraphComponents<Q>().Get(input);
       var data = comps.GetCoordinates(comps.Components);
 
       Keys.CellsEnumerationKey<Q>().Set(output, data);

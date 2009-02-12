@@ -32,12 +32,12 @@ namespace DSIS.Scheme.Impl.Actions
 
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(EmptyArray<ContextMissmatchCheck>.Instance, Create(Keys.GraphComponents<Q>()));
+      return ColBase(EmptyArray<ContextMissmatchCheck>.Instance, Create(Keys.GetGraphComponents<Q>()));
     }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
-      var comps = Keys.GraphComponents<Q>().Get(input);
+      var comps = Keys.GetGraphComponents<Q>().Get(input);
       var index = 0;
       foreach (var _info in comps.Components)
       {
@@ -53,7 +53,7 @@ namespace DSIS.Scheme.Impl.Actions
               ctx.AddAll(input);
               
               Keys.Graph<Q>().Set(ctx, graph);
-              Keys.GraphComponents<Q>().Set(ctx, graph.ComputeStrongComponents(NullProgressInfo.INSTANCE));
+              Keys.GetGraphComponents<Q>().Set(ctx, graph.ComputeStrongComponents(NullProgressInfo.INSTANCE));
               Key.Set(ctx, new LoopIndex(dIndex, comps.ComponentCount));
             });
 

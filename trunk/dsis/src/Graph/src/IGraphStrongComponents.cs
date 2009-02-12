@@ -5,25 +5,33 @@ namespace DSIS.Graph
 {
   public interface IGraphStrongComponents
   {
+    ICellCoordinateSystem CoordinateSystem { get; }
     IEnumerable<IStrongComponentInfo> Components { get; }
-    int ComponentCount { get; }    
+    int ComponentCount { get; }
+
+    void DoGeneric(IGraphStrongComponentsWith with);
+  }
+
+  public interface IGraphStrongComponentsWith
+  {
+    void With<Q>(IGraphStrongComponents<Q> components) where Q : ICellCoordinate;
   }
 
   //TODO: Add graph data holder here.
   //TODO: Create IGraphStrongComponents<TCell, TNode> ...
-  public interface IGraphStrongComponents<TCoordinate> : IGraphStrongComponents
-    where TCoordinate : ICellCoordinate
+  public interface IGraphStrongComponents<Q> : IGraphStrongComponents
+    where Q : ICellCoordinate
   {
-    ICellCoordinateSystem<TCoordinate> CoordinateSystem { get; }
+    new ICellCoordinateSystem<Q> CoordinateSystem { get; }
         
-    IEnumerable<INode<TCoordinate>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds);
+    IEnumerable<INode<Q>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds);
         
-    IEnumerable<INode<TCoordinate>> GetEdgesWithFilteredEdges(INode<TCoordinate> node, IEnumerable<IStrongComponentInfo> componentIds);
+    IEnumerable<INode<Q>> GetEdgesWithFilteredEdges(INode<Q> node, IEnumerable<IStrongComponentInfo> componentIds);
 
-    ICellCoordinateCollection<TCoordinate> GetCoordinates(IEnumerable<IStrongComponentInfo> components);
+    ICellCoordinateCollection<Q> GetCoordinates(IEnumerable<IStrongComponentInfo> components);
 
-    IStrongComponentInfo GetNodeComponent(INode<TCoordinate> node);
+    IStrongComponentInfo GetNodeComponent(INode<Q> node);
 
-    IGraph<TCoordinate> AsGraph(IEnumerable<IStrongComponentInfo> components);
+    IGraph<Q> AsGraph(IEnumerable<IStrongComponentInfo> components);
   }
 }

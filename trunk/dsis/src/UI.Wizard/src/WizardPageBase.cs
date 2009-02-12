@@ -20,10 +20,10 @@ namespace DSIS.UI.Wizard
       get { return ControlInternal; }
     }
 
-    public T ControlInternal
+    protected T ControlInternal
     {
       get { return myControl; }
-      protected set
+      set
       {
         if (myControl != value && myHelper != null)
         {

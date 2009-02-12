@@ -5,7 +5,6 @@ using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
 using DSIS.Core.Util;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
@@ -26,6 +25,16 @@ namespace DSIS.Graph.Abstract
     public int ComponentCount
     {
       get { return myComponents.Count; }
+    }
+
+    public void DoGeneric(IGraphStrongComponentsWith with)
+    {
+      with.With(this);
+    }
+
+    ICellCoordinateSystem IGraphStrongComponents.CoordinateSystem
+    {
+      get { return CoordinateSystem; }
     }
 
     public IEnumerable<IStrongComponentInfo> Components
@@ -126,14 +135,14 @@ namespace DSIS.Graph.Abstract
       return info;
     }
 
-    internal static IEnumerable<IStrongComponentInfoEx> Optimize(IEnumerable<IStrongComponentInfo> infos)
-    {
-      var result = new Hashset<IStrongComponentInfoEx>();
+    private static IEnumerable<IStrongComponentInfoEx> Optimize(IEnumerable<IStrongComponentInfo> infos)
+    {      
+      var result = new HashSet<IStrongComponentInfoEx>();
       foreach (IStrongComponentInfoEx info in infos)
       {
         result.Add(info.Reference);
       }
-      return result.Values;
+      return result;
     }
 
     private void DumpComponentsGraph(TextWriter tw)

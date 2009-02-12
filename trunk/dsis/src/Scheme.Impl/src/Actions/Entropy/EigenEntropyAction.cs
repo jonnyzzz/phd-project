@@ -21,12 +21,12 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
       return ColBase(base.Check<T, Q>(ctx),
-                     Create(Keys.GraphComponents<Q>()));
+                     Create(Keys.GetGraphComponents<Q>()));
     }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
-      var graph = Keys.GraphComponents<Q>().Get(input);
+      var graph = Keys.GetGraphComponents<Q>().Get(input);
       var evaluator = new EigenEntropyEvaluatorImpl<Q>(myOptions.Eps, graph.AsGraph(graph.Components));
 
       IGraphMeasure<Q> entropy = new EigenEntropyMeasure<Q>(evaluator);

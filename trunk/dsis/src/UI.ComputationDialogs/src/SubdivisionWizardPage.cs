@@ -13,5 +13,10 @@ namespace DSIS.UI.ComputationDialogs
       Title = "Select Subdivision";
       ControlInternal = new SubdivisionEditorControl(system, layout, ui);
     }
+
+    public SubdivisionResult GetResult()
+    {
+      return ControlInternal.GetResult();
+    }
   }
 }

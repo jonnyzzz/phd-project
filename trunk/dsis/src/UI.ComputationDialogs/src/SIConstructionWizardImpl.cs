@@ -1,3 +1,4 @@
+using System;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Ioc;
 using DSIS.UI.ComputationDialogs.Builders;
@@ -27,6 +28,9 @@ namespace DSIS.UI.ComputationDialogs
         var result2 = Presenter.ShowWizardOrNull(c.GetComponent<SubdivisionWizardPack>());
         if (result2 == null)
           return null;
+
+        if (result2.Constraints.Count == 0)
+          throw new ArgumentException("There should be at least one constraint");
 
         var sym = new SymmetricBuilder(settings, result2.Subdivision, result2.Constraints);
         return result2.UseUnsimmetric ? (ICellImageBuilderWizardResult) new UnSymmetricBuilder(sym) : sym;

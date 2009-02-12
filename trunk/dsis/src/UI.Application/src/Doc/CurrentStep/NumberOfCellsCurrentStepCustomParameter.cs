@@ -49,7 +49,7 @@ namespace DSIS.UI.Application.Doc.CurrentStep
         return Pair.Of<int?, int?>(key3.Get(myContext).Count, null);
       }
 
-      var key4 = Keys.GraphComponents<Q>();
+      var key4 = Keys.GetGraphComponents<Q>();
       if (myContext.ContainsKey(key4))
       {
         var components = key4.Get(myContext);

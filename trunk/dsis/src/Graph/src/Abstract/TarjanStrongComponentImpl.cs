@@ -23,6 +23,16 @@ namespace DSIS.Graph.Abstract
       get { return myManager.Count; }
     }
 
+    public void DoGeneric(IGraphStrongComponentsWith with)
+    {
+      with.With(this);
+    }
+
+    ICellCoordinateSystem IGraphStrongComponents.CoordinateSystem
+    {
+      get { return CoordinateSystem; }
+    }
+
     public IEnumerable<IStrongComponentInfo> Components
     {
       get { return myManager.Infos; }

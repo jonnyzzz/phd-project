@@ -10,12 +10,12 @@ namespace DSIS.Scheme.Impl.Actions.Console
   {
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return new[] {Create(Keys.GraphComponents<Q>())};
+      return new[] {Create(Keys.GetGraphComponents<Q>())};
     }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
-      IGraphStrongComponents<Q> gr = Keys.GraphComponents<Q>().Get(input);
+      IGraphStrongComponents<Q> gr = Keys.GetGraphComponents<Q>().Get(input);
 
       var sb = new StringBuilder();
       sb.AppendFormat("Components: {0}", gr.ComponentCount).AppendLine();

@@ -99,13 +99,13 @@ namespace DSIS.Scheme.Impl.Tests
 
       protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
       {
-        return ColBase(base.Check<T, Q>(ctx), Create(Keys.Graph<Q>()), Create(Keys.GraphComponents<Q>()));
+        return ColBase(base.Check<T, Q>(ctx), Create(Keys.Graph<Q>()), Create(Keys.GetGraphComponents<Q>()));
       }
 
       protected override void Apply<T, Q>(Context input, Context output)
       {
         IGraph<Q> graph = Keys.Graph<Q>().Get(input);
-        IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
+        IGraphStrongComponents<Q> comps = Keys.GetGraphComponents<Q>().Get(input);
         int nodesInComponents = comps.GetNodes(comps.Components).Count();
 
         Apply(GraphNodesConstraint, graph.NodesCount);

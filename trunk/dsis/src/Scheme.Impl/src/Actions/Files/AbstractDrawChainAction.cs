@@ -14,13 +14,13 @@ namespace DSIS.Scheme.Impl.Actions.Files
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
       return ColBase(base.Check<T, Q>(ctx),
-                     Create(Keys.GraphComponents<Q>()));
+                     Create(Keys.GetGraphComponents<Q>()));
     }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
       WorkingFolderInfo folderInfo = GetWorkingFolderInfo(input);
-      IGraphStrongComponents<Q> comps = Keys.GraphComponents<Q>().Get(input);
+      IGraphStrongComponents<Q> comps = Keys.GetGraphComponents<Q>().Get(input);
 
       string outputFile = folderInfo.CreateFileName("chain-recurrent-picture.png");
       var result = new ImageResult(outputFile);

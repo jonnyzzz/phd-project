@@ -21,13 +21,13 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(ctx), Create(Keys.Graph<Q>()), Create(Keys.GraphComponents<Q>()));
+      return ColBase(base.Check<T, Q>(ctx), Create(Keys.Graph<Q>()), Create(Keys.GetGraphComponents<Q>()));
     }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
       var graph = Keys.Graph<Q>().Get(input);
-      var comps = Keys.GraphComponents<Q>().Get(input);
+      var comps = Keys.GetGraphComponents<Q>().Get(input);
 
       var evaluator = new JVREvaluator<Q>(myOpts);
       var measure = evaluator.Measure(graph, comps);

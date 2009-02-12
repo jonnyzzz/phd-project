@@ -45,7 +45,7 @@ namespace DSIS.Tests.BlackBox
 
       protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
       {
-        return ColBase(base.Check<T, Q>(ctx), Create(Keys.GraphComponents<Q>()), Create(Keys.Graph<Q>()));
+        return ColBase(base.Check<T, Q>(ctx), Create(Keys.GetGraphComponents<Q>()), Create(Keys.Graph<Q>()));
       }
 
       protected override void Apply<T, Q>(Context input, Context output)

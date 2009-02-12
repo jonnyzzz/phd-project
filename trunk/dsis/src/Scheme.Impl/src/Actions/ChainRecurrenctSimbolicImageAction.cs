@@ -19,7 +19,7 @@ namespace DSIS.Scheme.Impl.Actions
       IGraph<Q> graph = Keys.Graph<Q>().Get(input);
       IGraphStrongComponents<Q> comps = graph.ComputeStrongComponents(info);
 
-      Keys.GraphComponents<Q>().Set(output, comps);
+      Keys.GetGraphComponents<Q>().Set(output, comps);
     }    
   }
 }

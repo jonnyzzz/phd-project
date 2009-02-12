@@ -57,7 +57,7 @@ namespace DSIS.Scheme.Impl
         {
           return key.Get(myContext).Count;
         }
-        var key2 = Keys.GraphComponents<Q>();
+        var key2 = Keys.GetGraphComponents<Q>();
         if (myContext.ContainsKey(key2))
         {
           var components = key2.Get(myContext);

@@ -29,6 +29,16 @@ namespace DSIS.Graph
       return graph;
     }
 
+    ICellCoordinateSystem IGraphStrongComponents.CoordinateSystem
+    {
+      get { return CoordinateSystem; }
+    }
+
+    public void DoGeneric(IGraphStrongComponentsWith with)
+    {
+      with.With(this);
+    }
+
     public ICellCoordinateSystem<T> CoordinateSystem
     {
       get { return myOriginal.CoordinateSystem; }

@@ -53,7 +53,7 @@ namespace DSIS.UI.Application.Doc.CurrentStep
 
       public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate
       {
-        Result = myCtx.ContainsKey(Keys.GraphComponents<Q>()) && myBase.IsAvailable<T,Q>(system, myCtx);
+        Result = myCtx.ContainsKey(Keys.GetGraphComponents<Q>()) && myBase.IsAvailable<T,Q>(system, myCtx);
       }
     }
 
