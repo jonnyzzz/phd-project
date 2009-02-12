@@ -33,7 +33,7 @@ namespace DSIS.UI.Application.Doc
       base.Dispose(disposing);
     }
 
-    private void ScheduleUpdate()
+    protected void ScheduleUpdate()
     {
       if (myDrawCookie != null)
       {

@@ -13,8 +13,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
   {
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(ctx),
-                     Create(Keys.GetGraphComponents<Q>()));
+      return ColBase(base.Check<T, Q>(ctx), Create(Keys.GetGraphComponents<Q>()));
     }
 
     protected override void Apply<T, Q>(Context input, Context output)

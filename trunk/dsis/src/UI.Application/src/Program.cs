@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using DSIS.CodeCompiler;
 using DSIS.Core.Ioc.Ex;
 using DSIS.Utils;
 
@@ -15,6 +16,8 @@ namespace DSIS.UI.Application
     [STAThread]
     private static int Main(string[] args)
     {
+      CodeCompilerFilenameGenerator.DeleteAllGeneratedFiles();
+
       System.Windows.Forms.Application.EnableVisualStyles();
       System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
       try

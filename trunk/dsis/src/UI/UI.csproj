@@ -92,6 +92,8 @@
     <Compile Include="src\IControlWithTitle.cs" />
     <Compile Include="src\IErrorProvider.cs" />
     <Compile Include="src\IInvocator.cs" />
+    <Compile Include="src\ISymbolicImageDrawControl.cs" />
+    <Compile Include="src\ISymbolicImageDrawControlFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
@@ -105,6 +107,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Graph\Graph.csproj">
+      <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
+      <Name>Graph</Name>
     </ProjectReference>
     <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>

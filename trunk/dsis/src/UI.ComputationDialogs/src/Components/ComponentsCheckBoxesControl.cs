@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,6 +14,8 @@ namespace DSIS.UI.ComputationDialogs.Components
   public class ComponentsCheckBoxesControl : UserControl, IErrorProvider<bool>
   {
     private readonly HashSet<IStrongComponentInfo> mySelection = new HashSet<IStrongComponentInfo>();
+
+    public event EventHandler SelectionChanged;
 
     public ComponentsCheckBoxesControl(IGraphStrongComponents components, IDockLayout layout, IScrollableLayout scroller)
     {
@@ -60,6 +63,11 @@ namespace DSIS.UI.ComputationDialogs.Components
                                else
                                {
                                  mySelection.Remove(info);
+                               }
+
+                               if (SelectionChanged != null)
+                               {
+                                 SelectionChanged(this, EventArgs.Empty);
                                }
                              };
       return cb;

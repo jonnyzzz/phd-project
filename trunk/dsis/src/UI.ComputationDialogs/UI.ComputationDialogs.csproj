@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Components\ComponentsAndPreview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="src\Components\ComponentsCheckBoxesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -55,7 +58,8 @@
     <Compile Include="src\Components\ComponentsSelectorWizardPack.cs">
     </Compile>
     <Compile Include="src\Components\ComponentsSelectorWizardPackFactory.cs" />
-    <Compile Include="src\Components\ComponentsWizardPage.cs" />
+    <Compile Include="src\Components\ComponentsWizardPage.cs">
+    </Compile>
     <Compile Include="src\Components\IComponentsSelectorWizardPackFactory.cs" />
     <Compile Include="src\Constraints\IntegerCoordinateComponentConstraint.cs" />
     <Compile Include="src\Constraints\OneStepConstraint.cs" />

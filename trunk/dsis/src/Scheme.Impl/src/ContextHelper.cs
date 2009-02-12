@@ -1,5 +1,6 @@
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
+using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl
@@ -11,7 +12,7 @@ namespace DSIS.Scheme.Impl
       comps.DoGeneric(new ReplaceTypedComponents(ctx));
     }
 
-    private class ReplaceTypedComponents : IGraphStrongComponentsWith
+    private class ReplaceTypedComponents : IGraphStrongComponentsWith, IIntegerCoordinateSystemWith
     {
       private readonly Context myContext;
 
@@ -27,6 +28,17 @@ namespace DSIS.Scheme.Impl
 
         myContext.Set(Keys.GetGraphComponents<Q>(), components);
       }
+
+      public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate
+      {
+        myContext.Remove(Keys.IntegerCoordinateSystemInfo);
+        myContext.Set(Keys.IntegerCoordinateSystemInfo, system);
+      }
+    }
+
+    public static void ReplaceTypedIntegerCoordinateSystem(this Context ctx, IIntegerCoordinateSystem system)
+    {
+      system.DoGeneric(new ReplaceTypedComponents(ctx));
     }
   }
 }
