@@ -22,7 +22,7 @@ namespace DSIS.Scheme
 
     public string Message
     {
-      get { return string.Format("Action: {0}\r\nContext: {1}", myAction.GetType().Name, myMessage); }
+      get { return string.Format("Action: {0} Context: {1}", myAction.GetType().Name, myMessage); }
     }
   }
 

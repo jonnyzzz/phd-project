@@ -5,6 +5,7 @@ using DSIS.Core.Processor;
 using DSIS.Core.System;
 using DSIS.Core.Util;
 using DSIS.Persistance;
+using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
@@ -216,10 +217,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public double[] FillArray(double cellSizeFactor)
     {
-      var eps = new double[myDimension];
-      for (int i = 0; i < myDimension; i++)
-        eps[i] = cellSizeFactor;
-      return eps;
+      return cellSizeFactor.Fill(myDimension);
     }
 
     public bool IsNull(Q coord)

@@ -20,24 +20,30 @@ namespace DSIS.Scheme.Exec
 
     private static string Msg(IEnumerable<ContextMissmatch> eee, IAction action, Context ctx)
     {
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       sb.AppendFormat("Failed to perform {0} due to context missmatch ", action.GetType().Name);
 
-      IActionDebug debug = action as IActionDebug;
+      var debug = action as IActionDebug;
       if (debug != null)
       {
-        sb.AppendLine().Append("at ").Append(debug.Creation.ToString()).AppendLine();
+        sb
+          .AppendLine()
+          .AppendLine()
+          .AppendLine("Action was created at ")
+          .Append(debug.Creation.ToString())
+          .AppendLine();
       }
 
-      if (ctx != null)
-      {
-        sb.AppendLine(ctx.ToString());
-      }
-
-      foreach (ContextMissmatch missmatch in eee)
+      sb.AppendLine("Missing context keys are:"); 
+      foreach (var missmatch in eee)
       {
         sb.AppendLine(missmatch.Message);
       }
+
+      sb.AppendLine();
+      sb.AppendLine("Current context keys are: ");
+      sb.Append(ctx != null ? ctx.ToString() : "<null>");
+        
       return sb.ToString();
     }
   }

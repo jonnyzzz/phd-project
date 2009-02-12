@@ -13,10 +13,9 @@ namespace DSIS.IntegerCoordinates.Tests
     private static string Write<Q>(IIntegerCoordinateSystem<Q> ics, IEnumerable<Q> list)
       where Q : IIntegerCoordinate
     {
-      Hashset<Q> hs = new Hashset<Q>();
-      hs.AddRange(list);
+      var hs = new HashSet<Q>(list, EqualityComparerFactory<Q>.GetComparer());
 
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       sb.AppendLine("-------------------");
       for (long lx = 0; lx < ics.Subdivision[0]; lx++)
       {
@@ -49,6 +48,8 @@ namespace DSIS.IntegerCoordinates.Tests
       catch
       {
         Console.Out.WriteLine(s);
+        Console.Out.WriteLine("but expected was: ");
+        Console.Out.WriteLine(assert);
         throw;
       }
     }
@@ -59,7 +60,7 @@ namespace DSIS.IntegerCoordinates.Tests
       try
       {
         using (
-          StreamReader sr =
+          var sr =
             new StreamReader(Assembly.GetCallingAssembly().GetManifestResourceStream(resource), Encoding.UTF8))
         {
           NUnit.Framework.Assert.AreEqual(sr.ReadToEnd(), s);

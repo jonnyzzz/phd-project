@@ -88,7 +88,7 @@
     <Compile Include="src\PerfomanceTestBase.cs" />
     <Compile Include="src\SmartPathBuilderTest.cs" />
     <Compile Include="src\SmartPathBuilderTestBase.cs" />
-    <Compile Include="src\StrangeComparison\PathComparison.cs" />
+    <Compile Include="src\StrangeComparison\PathComparisonTest.cs" />
     <Compile Include="src\StrangeComparison\StrangeComparison.cs" />
     <Compile Include="src\StrangeEntropyBlackboxTest.cs" />
     <Compile Include="src\StrangeEntropyBlackboxTestBase.cs" />

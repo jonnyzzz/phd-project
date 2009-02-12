@@ -15,12 +15,12 @@ using NUnit.Framework;
 namespace DSIS.Graph.Entropy.Tests.StrangeComparison
 {
   [TestFixture]
-  public class PathComparison : SimbolicImageBuildTestBase
+  public class PathComparisonTest : SimbolicImageBuildTestBase
   {
     private readonly ISystemSpace mySystemSpace;
     private readonly ISystemInfo mySystemInfo;
 
-    public PathComparison()
+    public PathComparisonTest()
     {
       mySystemSpace = new DefaultSystemSpace(2, new double[] { -10, -10 }, new double[] { 10, 10 }, new long[] { 3, 3 });
       mySystemInfo = new HenonFunctionSystemInfoDecorator(1.4);

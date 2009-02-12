@@ -11,10 +11,10 @@ namespace DSIS.CellImageBuilder.Tests
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate
   {
-    private readonly PointMethodSettings stategy = new PointMethodSettings{Points=2};
-    private readonly PointMethodSettings stategy2 = new PointMethodSettings{Points=2, UseOverlapping = true, Overlap = 0.3};
+    private PointMethodSettings stategy { get { return new PointMethodSettings { Points = 2, UseOverlapping = false, Overlap = 0 }; } }
+    private PointMethodSettings stategy2 { get { return new PointMethodSettings { Points = 2, UseOverlapping = true, Overlap = 0.3 }; } }
 
-    [Test]
+      [Test]
     public void Test_01()
     {
       var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });

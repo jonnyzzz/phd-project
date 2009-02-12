@@ -10,7 +10,7 @@ namespace DSIS.CellImageBuilder.Tests
     where T : IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate
   {
-    private static readonly AdaptiveMethodSettings SETTINGS = new AdaptiveMethodSettings();
+    private static readonly AdaptiveMethodSettings SETTINGS = new AdaptiveMethodSettings{Eps = .5, EdgesPerCell = 1<<20, OveplapFactor = .2};
 
     [Test]
     public void Test_02()
@@ -43,7 +43,7 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_03()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -99,7 +99,7 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_05()
     {
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
+      var ss = new MockSystemSpace(2, new double[] { 0, 0 }, new double[] { 10, 10 }, new long[] { 10, 10 });
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 

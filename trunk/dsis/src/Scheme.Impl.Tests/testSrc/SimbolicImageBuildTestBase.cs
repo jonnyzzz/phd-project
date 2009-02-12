@@ -16,8 +16,8 @@ namespace DSIS.Scheme.Impl.Tests
 {
   public abstract class SimbolicImageBuildTestBase
   {
-    protected abstract ISystemInfo SystemInfo { get;}
-    protected abstract ISystemSpace SystemSpace { get;}
+    protected abstract ISystemInfo SystemInfo { get; }
+    protected abstract ISystemSpace SystemSpace { get; }
 
     protected ICellImageBuilderIntegerCoordinatesSettings Method;
     protected long[] MethodSubdivision;
@@ -26,10 +26,11 @@ namespace DSIS.Scheme.Impl.Tests
     public virtual void SetUp()
     {
       Method = new BoxMethodSettings(0.1);
-      MethodSubdivision = new long[] {2, 2 };
+      MethodSubdivision = new long[] {2, 2};
     }
 
     protected delegate void AddAssertActionsLoop(ILoopAction loop, ActionBuilderAdapter ad, IAction leaf);
+
     protected delegate void AddAssertActions(ActionBuilderAdapter ad, IAction leaf);
 
     protected virtual void DoTest(int steps, AddAssertActions addAssertActions)
@@ -58,26 +59,28 @@ namespace DSIS.Scheme.Impl.Tests
 
       gr.AddEdge(a4, new DumpGraphInfoAction());
       gr.AddEdge(a5, new DumpGraphComponentsInfoAction());
-      
-      IAction buildIS = new LoopAction("", steps, x => new AgregateAction(
-                                                         delegate(IActionGraphPartBuilder bld)
-                                                           {
-                                                             var build = new SymbolicImageConstructionStep();
-                                                             bld.AddEdge(bld.Start, build);
-                                                             bld.AddEdge(build, bld.End);
-                                                             var b = new ProxyAction();
-                                                             var b2 = new ParallelAction(new DumpGraphInfoAction(),
-                                                                                         new DumpGraphComponentsInfoAction(),
-                                                                                         new DumpMethodAction()
-                                                               );
-                                                             var p = new ProxyAction();
-                                                             bld.AddEdge(build, b);
-                                                             bld.AddEdge(bld.Start, p);
-                                                             bld.AddEdge(p, b);
-                                                             bld.AddEdge(b, b2);
 
-                                                             loop(x, new ActionBuilderAdapter(bld), b);
-                                                           }));
+      IAction buildIS = new LoopAction("",
+                                       steps,
+                                       x => new AgregateAction(
+                                              delegate(IActionGraphPartBuilder bld)
+                                                {
+                                                  var build = new SymbolicImageConstructionStep();
+                                                  bld.AddEdge(bld.Start, build);
+                                                  bld.AddEdge(build, bld.End);
+                                                  var b = new ProxyAction();
+                                                  var b2 = new ParallelAction(new DumpGraphInfoAction(),
+                                                                              new DumpGraphComponentsInfoAction(),
+                                                                              new DumpMethodAction()
+                                                    );
+                                                  var p = new ProxyAction();
+                                                  bld.AddEdge(build, b);
+                                                  bld.AddEdge(bld.Start, p);
+                                                  bld.AddEdge(p, b);
+                                                  bld.AddEdge(b, b2);
+
+                                                  loop(x, new ActionBuilderAdapter(bld), b);
+                                                }));
 
       gr.AddEdge(a5, buildIS);
       gr.AddEdge(system, buildIS);
@@ -93,7 +96,7 @@ namespace DSIS.Scheme.Impl.Tests
     {
       public IConstraint GraphNodesConstraint;
       public IConstraint GraphEdgesConstraint;
-      
+
       public IConstraint CompontentsCountConstraint;
       public IConstraint CompontentsNodesCountConstraint;
 
@@ -109,7 +112,7 @@ namespace DSIS.Scheme.Impl.Tests
         int nodesInComponents = comps.GetNodes(comps.Components).Count();
 
         Apply(GraphNodesConstraint, graph.NodesCount);
-        Apply(GraphEdgesConstraint, graph.EdgesCount);        
+        Apply(GraphEdgesConstraint, graph.EdgesCount);
         Apply(CompontentsCountConstraint, comps.ComponentCount);
         Apply(CompontentsNodesCountConstraint, nodesInComponents);
       }

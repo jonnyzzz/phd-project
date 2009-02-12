@@ -29,7 +29,7 @@ namespace DSIS.CellImageBuilder.PointMethod
       for (int i = 0; i < myDLeft.Length; i++)
         myDRight[i] = myDLeft[i] + mySystem.CellSize[i];
 
-      using (IEnumerator<double[]> it = myIterator.EnumerateSteps(myDLeft, myDRight, myDX).GetEnumerator())
+      using (var it = myIterator.EnumerateSteps(myDLeft, myDRight, myDX).GetEnumerator())
       {
         while (it.MoveNext())
         {
@@ -56,14 +56,9 @@ namespace DSIS.CellImageBuilder.PointMethod
 
       var set = (PointMethodSettings) context.Settings;
 
-      if (!set.UseOverlapping)
-      {
-        myPointProcessor = mySystem.ProcessorFactory.CreatePointProcessor();
-      }
-      else
-      {
-        myPointProcessor = mySystem.ProcessorFactory.CreateOverlapedPointProcessor(set.Overlap);
-      }
+      myPointProcessor = set.UseOverlapping 
+        ? mySystem.ProcessorFactory.CreateOverlapedPointProcessor(set.Overlap) 
+        : mySystem.ProcessorFactory.CreatePointProcessor();
 
       var dStep = new double[myDim];
       for (int i = 0; i < myDim; i++)
