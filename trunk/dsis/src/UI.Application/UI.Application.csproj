@@ -203,6 +203,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="src\Progress\ActionExecutorProgressAdapter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Progress\ActionExecutorProgressControl.cs">
+    </Compile>
     <Compile Include="src\Progress\ActionProgressControl.cs" />
     <Compile Include="src\Progress\BackDelegatingProgress.cs" />
     <Compile Include="src\Progress\DelegatingProgress.cs" />

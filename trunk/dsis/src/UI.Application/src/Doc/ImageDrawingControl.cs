@@ -12,14 +12,26 @@ namespace DSIS.UI.Application.Doc
   public abstract class ImageDrawingControl : UserControl
   {
     private readonly HtmlControl myHtml;
-    private readonly IActionExecution myExec;
+    private IActionExecution myExec;
     private readonly IInvocator myInvocator;
     private IDisposable myDrawCookie;
 
-    protected ImageDrawingControl(IActionExecution exec, IInvocator invocator)
+    public IActionExecution Execution { 
+      get { return myExec; }
+      set{ 
+        myExec = value;
+        ScheduleUpdate();
+      }
+    }
+
+    protected ImageDrawingControl(IActionExecution exec, IInvocator invocator) : this(invocator)
+    {
+      Execution = exec;
+    }
+
+    protected ImageDrawingControl(IInvocator invocator)
     {
       myHtml = new HtmlControl { Dock = DockStyle.Fill };
-      myExec = exec;
       myInvocator = invocator;
       Controls.Add(myHtml);
 
@@ -53,28 +65,31 @@ namespace DSIS.UI.Application.Doc
               return;
             }
             Size sz = ClientSize - new Size(40,40) - new Size(Padding.Left + Padding.Right, Padding.Top+Padding.Bottom);
-            myExec.ExecuteAsync(
-              "Draw SI",
-              delegate
-                {
-                  string file = DrawImage(sz);
-                  if (file != null && File.Exists(file))
+            if (myExec != null)
+            {
+              myExec.ExecuteAsync(
+                "Draw SI",
+                delegate
                   {
-                    myHtml.SetContext(x => x.CreateChildElement("img")
-                                             .CreateAttribute("src", file)
-                                             .CreateAttribute("alt", "Simbolic image")
-                                             .CreateAttribute("width", sz.Width + "px")
-                                             .CreateAttribute("height", sz.Height + "px")
-                      );
-                  }
-                  else
-                  {
-                    myHtml.SetContext(
-                      x =>
-                      x.CreateChildElement("p").CreateText(
-                        "No image is supported."));
-                  }
-                });
+                    string file = DrawImage(sz);
+                    if (file != null && File.Exists(file))
+                    {
+                      myHtml.SetContext(x => x.CreateChildElement("img")
+                                               .CreateAttribute("src", file)
+                                               .CreateAttribute("alt", "Simbolic image")
+                                               .CreateAttribute("width", sz.Width + "px")
+                                               .CreateAttribute("height", sz.Height + "px")
+                        );
+                    }
+                    else
+                    {
+                      myHtml.SetContext(
+                        x =>
+                        x.CreateChildElement("p").CreateText(
+                          "No image is supported."));
+                    }
+                  });
+            }
           });
     }
 

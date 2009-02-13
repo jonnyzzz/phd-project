@@ -145,6 +145,15 @@ namespace DSIS.Core.Ioc.Tests
         var c = cc.GetComponent<JI8x>();
         Assert.That(c, Is.Not.Null);
       }      
+    }  
+    
+    [Test]
+    public void Test_TypeInstanciatorUnderTypeInstanciator()
+    {
+      DoTest<TI, Tx9>();
+
+      var cc = myContainer.GetComponent<JI9>();      
+      Assert.That(cc, Is.Not.Null);
     }
     
     public class Tx0 : ComponentImplementationAttributeBase{}
@@ -157,6 +166,7 @@ namespace DSIS.Core.Ioc.Tests
     public class Tx7 : ComponentImplementationAttributeBase{}
     public class Tx8 : ComponentImplementationAttributeBase{}
     public class Tx8x : ComponentImplementationAttributeBase{}
+    public class Tx9 : ComponentImplementationAttributeBase{}
 
     [Tx0]
     public class JI{}
@@ -248,6 +258,21 @@ namespace DSIS.Core.Ioc.Tests
     public class JI8x { [Autowire] public string Foo { get; set; } public JI8x(string bar)
     {
     }
+    }
+
+    [TypeInstanciable]
+    public class JI9Inst
+    {
+      public JI9Inst(ITypeInstantiator ins) {}
+    }
+
+    [Tx9]
+    public class JI9
+    {
+      public JI9(ITypeInstantiator i)
+      {
+        i.Instanciate<JI9Inst>();
+      }
     }
   }
 }

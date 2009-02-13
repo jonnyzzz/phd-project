@@ -14,7 +14,7 @@ namespace DSIS.Utils
     {      
     }
 
-    public int Add(int value)
+    public int Inc(int value)
     {
       lock(LOCK)
       {

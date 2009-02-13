@@ -20,18 +20,26 @@ namespace DSIS.UI.Application.Doc
 
     private readonly HashSet<IStrongComponentInfo> myComponent = new HashSet<IStrongComponentInfo>();
 
+    private readonly ActionExecutorProgressAdapter myWrapper;
+
     [Autowire]
     private IGraphStrongComponentSubsetFactory Factory { get; set; }
 
     //TODO: Fix IInvocator
     //TODO: Fix ActionExecution
-    public StandaloneImageDrawWithIcCHelper(IInvocator invocator, IoCDrawSimbolicImage helper,
-                                            IEnumerable<IStrongComponentInfo> component, IGraphStrongComponents components)
-      : base(new SimpleActionExecution(), invocator)
-    {
+    public StandaloneImageDrawWithIcCHelper(IInvocator invocator, 
+      IoCDrawSimbolicImage helper,
+      ITypeInstantiator instance,
+                                            IEnumerable<IStrongComponentInfo> component, 
+      IGraphStrongComponents components)
+      : base(invocator)
+    {      
       myHelper = helper;
       myComponent.UnionWith(component);
       myComponents = components;
+
+      myWrapper = new ActionExecutorProgressAdapter(this, instance);
+      Execution = myWrapper.Execution;
     }
 
     protected override string DrawImage(Size sz)
@@ -59,7 +67,7 @@ namespace DSIS.UI.Application.Doc
 
     public Control Control
     {
-      get { return this; }
+      get { return myWrapper; }
     }
   }
 }

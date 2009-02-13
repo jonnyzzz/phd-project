@@ -17,9 +17,9 @@ namespace DSIS.Core.Ioc
         throw new Exception(string.Format("Type {0} must be marked with {1} in order to be used for ITypeInstanciator",
                                           typeof (T).FullName, typeof (TypeInstanciableAttribute).FullName));
       }
-      var c = Container.SubContainer<FakeComponent>();
+      var c = Container.SubContainer<FakeComponent>(instances);
       c.RegisterComponentType(typeof(T));
-      instances.ForEach(c.RegisterComponent);
+      c.Start();
       return c.GetComponent<T>();
     }
 
