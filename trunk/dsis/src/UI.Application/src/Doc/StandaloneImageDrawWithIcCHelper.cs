@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -17,25 +18,25 @@ namespace DSIS.UI.Application.Doc
   {
     private readonly IoCDrawSimbolicImage myHelper;
     private readonly IGraphStrongComponents myComponents;
-
-    private readonly HashSet<IStrongComponentInfo> myComponent = new HashSet<IStrongComponentInfo>();
-
+    private readonly HashSet<IStrongComponentInfo> mySelection = new HashSet<IStrongComponentInfo>();
     private readonly ActionExecutorProgressAdapter myWrapper;
+    private readonly Dictionary<ComponentKey, string> myCachedFiles = new Dictionary<ComponentKey, string>();
+    private Size myCurrentSize;
 
     [Autowire]
     private IGraphStrongComponentSubsetFactory Factory { get; set; }
 
     //TODO: Fix IInvocator
     //TODO: Fix ActionExecution
-    public StandaloneImageDrawWithIcCHelper(IInvocator invocator, 
-      IoCDrawSimbolicImage helper,
-      ITypeInstantiator instance,
-                                            IEnumerable<IStrongComponentInfo> component, 
-      IGraphStrongComponents components)
+    public StandaloneImageDrawWithIcCHelper(IInvocator invocator,
+                                            IoCDrawSimbolicImage helper,
+                                            ITypeInstantiator instance,
+                                            IEnumerable<IStrongComponentInfo> component,
+                                            IGraphStrongComponents components)
       : base(invocator)
-    {      
+    {
       myHelper = helper;
-      myComponent.UnionWith(component);
+      mySelection.UnionWith(component);
       myComponents = components;
 
       myWrapper = new ActionExecutorProgressAdapter(this, instance);
@@ -44,22 +45,45 @@ namespace DSIS.UI.Application.Doc
 
     protected override string DrawImage(Size sz)
     {
+      if (myCurrentSize != sz)
+      {
+        myCurrentSize = sz;
+        lock (myCachedFiles)
+        {
+          myCachedFiles.Clear();
+        }
+      }
+
+      string file;
+      var key = new ComponentKey(mySelection);
+      lock (myCachedFiles)
+      {
+        if (myCachedFiles.TryGetValue(key, out file))
+        {
+          return file;
+        }
+      }
+
       var ctx = new Context();
-      ctx.ReplaceTypedGraphComponents(Factory.SubComponents(myComponents, myComponent));
+      ctx.ReplaceTypedGraphComponents(Factory.SubComponents(myComponents, mySelection));
       ctx.ReplaceTypedIntegerCoordinateSystem((IIntegerCoordinateSystem) myComponents.CoordinateSystem);
 
-      return myHelper.DrawImage(ctx, sz);
+      file = myHelper.DrawImage(ctx, sz);
+      lock (myCachedFiles)
+      {
+        return myCachedFiles[key] = file;
+      }
     }
 
     public IEnumerable<IStrongComponentInfo> Components
     {
-      get { return myComponent; }
+      get { return mySelection; }
       set
       {
-        if (!myComponent.SetEquals(value))
+        if (!mySelection.SetEquals(value))
         {
-          myComponent.Clear();
-          myComponent.UnionWith(value);
+          mySelection.Clear();
+          mySelection.UnionWith(value);
           ScheduleUpdate();
         }
       }
@@ -68,6 +92,46 @@ namespace DSIS.UI.Application.Doc
     public Control Control
     {
       get { return myWrapper; }
+    }
+
+    private class ComponentKey : IEquatable<ComponentKey>
+    {
+      private readonly HashSet<IStrongComponentInfo> myComponents;
+
+      public ComponentKey(IEnumerable<IStrongComponentInfo> components)
+      {
+        myComponents = new HashSet<IStrongComponentInfo>(components);
+      }
+
+      public bool Equals(ComponentKey obj)
+      {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.myComponents.SetEquals(myComponents);
+      }
+
+      public override bool Equals(object obj)
+      {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != typeof (ComponentKey)) return false;
+        return Equals((ComponentKey) obj);
+      }
+
+      public override int GetHashCode()
+      {
+        return (myComponents != null ? myComponents.Count : 0);
+      }
+
+      public static bool operator ==(ComponentKey left, ComponentKey right)
+      {
+        return Equals(left, right);
+      }
+
+      public static bool operator !=(ComponentKey left, ComponentKey right)
+      {
+        return !Equals(left, right);
+      }
     }
   }
 }
