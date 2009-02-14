@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using DSIS.Core.System;
-using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.Wizard;
 
 namespace DSIS.UI.FunctionDialog
