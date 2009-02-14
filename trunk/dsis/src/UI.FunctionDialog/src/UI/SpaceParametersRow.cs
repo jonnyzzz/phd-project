@@ -9,7 +9,7 @@ namespace DSIS.UI.FunctionDialog.UI
   public partial class SpaceParametersRow : UserControl, IErrorProvider<bool>
   {
     private SpaceParametersRowModel myModel;
-    private readonly List<Control> myErrors = new List<Control>();
+    private readonly HashSet<Control> myErrors = new HashSet<Control>();
 
     public SpaceParametersRow(SpaceParametersRowModel model)
     {
@@ -53,7 +53,7 @@ namespace DSIS.UI.FunctionDialog.UI
     
     private static bool Parse(string text, out long d, out string error)
     {
-      if (!long.TryParse(text, out d))
+      if (!long.TryParse(text, out d) || d < 1)
       {
         error = "Failed to parse integer value";
         return false;
@@ -81,14 +81,27 @@ namespace DSIS.UI.FunctionDialog.UI
       }
     }
 
+    private void CheckBalance()
+    {
+      if (myModel.Left >= myModel.Right)
+      {
+        myErrors.Add(myRight);
+        myErrorProvider.SetError(myRight, "Right should be < Left");
+      } else
+      {
+        myErrors.Remove(myRight);
+        myErrorProvider.SetError(myRight, null);
+      }
+    }
+
     private void myLeft_TextChanged(object sender, EventArgs e)
     {
-      TrySetValue(myLeft, delegate(double x) { myModel.Left = x; }, Parse);      
+      TrySetValue(myLeft, delegate(double x) { myModel.Left = x; CheckBalance(); }, Parse);      
     }
 
     private void myRight_TextChanged(object sender, EventArgs e)
     {
-      TrySetValue(myRight, delegate(double x) { myModel.Right = x; }, Parse);      
+      TrySetValue(myRight, delegate(double x) { myModel.Right = x; CheckBalance(); }, Parse);      
     }
 
     private void myGrid_TextChanged(object sender, EventArgs e)
