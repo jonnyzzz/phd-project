@@ -30,7 +30,7 @@ namespace DSIS.UI.ComputationDialogs.Components
       var lbl = new Label {Text = "Select components: "};
 
       var checkboxes = ((Control) lbl).Enum().Join(
-        from x in info orderby -x.NodesCount select CreateCheckBox(x)
+        info.OrderBy(x => -x.NodesCount).Take(1000).Select(x => CreateCheckBox(x))
         );
 
       layout.Layout(this, DockStyle.Top, checkboxes);

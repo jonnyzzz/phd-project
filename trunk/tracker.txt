@@ -2,7 +2,7 @@
   -  save create image
   -  open standalone gnuplot
   -  list selector with groupby sections
-  -  projected SI no measure image
+
 
 Progress bar:
   -  Cancelable progressbar
@@ -25,13 +25,6 @@ Macros:
   -  Macros support
 
 System function dialog:
-  -  System Functions parser
-  -  system function dialog: use IoC
-  -  system function dialog: system parameters => solver => solver parameters
-  -  system function default parameters
-  -  system function default system space
-  -  system function dialog: symmetric space mode
-  -  support double with . or ,
 
 Drawer:
   -  Embed drawer program from Nikita?
@@ -40,25 +33,18 @@ Drawer:
   -  allow to zoom pictures
   -  show points with squares
   -  export points files: , or . or matcad or maple etc
+  -  cache point files/images
 
 Misc:
   -  TeamCity
   -  Submit exception form
   -  Submit exception service online
-  ->  Key should provide extra keys
 
 Entropy:
-  -  compute entropy on every component (depends on per-components feature)
 
 Feature:
   -  segment iterator?
-  -  components chooser
-  -  components legend
   -  Mnemonics manager	
-  -  unsimmentric construction support
-  -  subdivision selector
-  -  repeat construction mode
-  -  several invariant measures for one document
 
 Bugs:
   -  not responding after focus lost
@@ -71,8 +57,26 @@ Internal:
   -  strange entropy modes manual description
   -  remember selected construction method
   -  drop ICodeCompiler singleton
+  -  Support decart multiplication action
 
 Completed:
+  -  limit components list to show
+  -  System Functions parser
+  -  system function dialog: use IoC
+  -  system function dialog: system parameters => solver => solver parameters
+  -  system function default parameters
+  -  system function default system space
+  -  system function dialog: symmetric space mode
+  -  support double with . or ,
+  -  Key should provide extra keys
+  -  compute entropy on every component (depends on per-components feature)
+  -  components chooser
+  -  components legend
+  -  unsimmentric construction support
+  -  subdivision selector
+  -  repeat construction mode
+  -  several invariant measures for one document
+  -  projected SI no measure image
   -  component container: Create one object with extra parameters.
   -  ask for create system name
   -  fail on new function
