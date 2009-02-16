@@ -1,3 +1,4 @@
+  -  show error message is no gnuplot found.
   -  save created system without data
   -  save create image
   -  open standalone gnuplot
