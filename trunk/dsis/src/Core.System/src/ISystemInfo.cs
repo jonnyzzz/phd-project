@@ -46,12 +46,13 @@ namespace DSIS.Core.System
     IFunction<T> GetDerivateFunction<T>(T[] precision, int[] unsimmetricDerivate);
   }
 
-  /// <summary>
-  /// Extension to get access to FunctionTree. 
-  /// </summary>
-  [Obsolete("Please contact developers before use")]
-  public interface ISystemInfoCodeTree
+  public interface ISplittableSystemInfo
   {
-    Q ProcessFunctionTree<Q>(IFunctionTreeVisitor<Q> visitor);
+    /// <summary>
+    /// Returns projection of the system to coordinates range.
+    /// That is applicable for projective space system.
+    /// </summary>
+    /// <returns>systen for coordinates [from, to] inclusive</returns>
+    ISystemInfo ForRange(int from, int to);
   }
 }
