@@ -10,6 +10,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   {
     private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
     private readonly Dictionary<T, Node> myValues = new Dictionary<T, Node>(COMPARER);
+    private double myCurrentError = 0;
 
     public SortedNodeSet() : base(new Comparer())
     {
@@ -24,20 +25,29 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         myValues.Remove(node);
       }
 
-      AddNode(output - input, node);      
+      var value = output - input;
+      
+      AddNode(value, node);      
     }
 
 
     protected override void NodeAdded(Node node)
     {
       base.NodeAdded(node);
-      myValues.Add(node.Data, node); 
+      myValues.Add(node.Data, node);
+      myCurrentError += Math.Abs(node.Value);
     }
 
     protected override void NodeRemoved(Node node)
     {
       base.NodeRemoved(node);
+      myCurrentError -= Math.Abs(node.Value);
       myValues.Remove(node.Data);
+    }
+
+    public double SummaryError
+    {
+      get { return myCurrentError; }
     }
 
     public T NextNode()

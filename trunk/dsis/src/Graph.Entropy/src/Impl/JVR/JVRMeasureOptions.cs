@@ -1,10 +1,23 @@
+using System;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Utils.Bean;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
+  public enum JVRExitCondition
+  {
+    [IncludeValue(Title = "When current node error < eps")]
+    MaxNodeError,
+    [IncludeValue(Title = "When total error < eps")]
+    SummError
+  }
+
+  [Serializable]
   public class JVRMeasureOptions
   {
+    [IncludeGenerate(Title = "Exit condition")]
+    public JVRExitCondition ExitCondition { get; set; }
+
     [IncludeGenerate(Title = "Precision")]
     public double EPS { get; set;}
 
@@ -18,6 +31,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
       InitialWeight = EntropyLoopWeights.CONST;
       IncludeSelfEdge = false;
+      ExitCondition = JVRExitCondition.MaxNodeError;
       EPS = 1e-3;
     }
   }

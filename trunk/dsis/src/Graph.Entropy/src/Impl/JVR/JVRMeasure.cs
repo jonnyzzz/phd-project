@@ -92,7 +92,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
         needNorm |= (incoming >= maxValue || outgoing >= maxValue);
 
-        if (Math.Abs(incoming - outgoing) <= precision)
+        if (CheckExitCondition(precision, incoming, outgoing))
           break;
 
         var sout = Math.Sqrt(outgoing);
@@ -117,6 +117,19 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
         if (needNorm)
           Norm();
+      }
+    }
+
+    private bool CheckExitCondition(double precision, double incoming, double outgoing)
+    {
+      switch(myOptions.ExitCondition)
+      {
+        case JVRExitCondition.MaxNodeError:
+          return Math.Abs(incoming - outgoing) <= precision;
+        case JVRExitCondition.SummError:
+          return myHashHolder.SummaryError <= precision;
+        default:
+          throw new Exception("Unexpected exit condition " + myOptions.ExitCondition);
       }
     }
 

@@ -9,9 +9,9 @@ namespace DSIS.Utils
 
     protected Node myMin;
     private int myCount;
-    private bool myConsolidateRequired = false;
+    private bool myConsolidateRequired;
 
-    public BinTreePriorityQueueEx(IComparer<Q> comparer)
+    protected BinTreePriorityQueueEx(IComparer<Q> comparer)
     {
       myComparer = comparer;
     }
@@ -26,7 +26,7 @@ namespace DSIS.Utils
 
     protected void AddNode(Q value, T data)
     {
-      Node node = new Node(data, value);
+      var node = new Node(data, value);
 
       if (myMin == null)
       {

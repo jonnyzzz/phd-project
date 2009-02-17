@@ -103,6 +103,11 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
       return mySet.NextNode();
     }   
+
+    public double SummaryError
+    {
+      get { return mySet.SummaryError; }
+    }
  
 /*    public void Dump(TextWriter tw)
     {
