@@ -8,8 +8,12 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   {
     [IncludeValue(Title = "When current node error < eps")]
     MaxNodeError,
+    [IncludeValue(Title = "When current node error < eps * cell volume")]
+    MaxRelativeNodeError,
     [IncludeValue(Title = "When total error < eps")]
-    SummError
+    SummError,
+    [IncludeValue(Title = "When step weight change < eps")]
+    ChangeError
   }
 
   [Serializable]

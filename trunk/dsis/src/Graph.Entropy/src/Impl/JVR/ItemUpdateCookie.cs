@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
@@ -11,7 +12,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     private readonly ArcDirection<T> myStrait;
     private readonly ArcDirection<T> myBack;
 
-    private readonly Hashset<T> myNodesList = new Hashset<T>();
+    private double? myError;
+
+    private readonly HashSet<T> myNodesList = new HashSet<T>(EqualityComparerFactory<T>.GetComparer());
 
     internal ItemUpdateCookie(IHashholderController<T> instance, ArcDirection<T> strait, ArcDirection<T> back)
     {
@@ -29,9 +32,23 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public void Dispose()
     {
-      foreach (T node in myNodesList)
+      double error = 0;
+      foreach (var node in myNodesList)
       {
-        myInstance.SetItem(node, myStrait.ComputeWeight(node), myBack.ComputeWeight(node));
+        var ch = myInstance.SetItem(node, myStrait.ComputeWeight(node), myBack.ComputeWeight(node));
+        error += Math.Abs(ch);
+      }
+      myError = error;
+    }
+
+    public double Change
+    {
+      get
+      {
+        if (myError == null)
+          throw new Exception("IDisposable.Dispose should be called before");
+
+        return myError.Value;
       }
     }
   }

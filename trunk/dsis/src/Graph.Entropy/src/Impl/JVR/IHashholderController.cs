@@ -5,6 +5,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   internal interface IHashholderController<T> where T : ICellCoordinate
   {
     void SetItem(JVRPair<T> pair, double value);
-    void SetItem(T node, double output, double input);    
+    /// <summary>
+    /// Returns old value in hash holder
+    /// </summary>
+    double SetItem(T node, double output, double input);    
   }
 }

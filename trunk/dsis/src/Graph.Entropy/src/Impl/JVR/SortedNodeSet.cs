@@ -16,18 +16,22 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
     }
 
-    public void SetValue(T node, double output, double input)
+    public double SetValue(T node, double output, double input)
     {
+      double oldValue = 0;
       Node v;
       if (myValues.TryGetValue(node, out v))
       {
+        oldValue = v.Value;
         Remove(v);
         myValues.Remove(node);
       }
 
       var value = output - input;
       
-      AddNode(value, node);      
+      AddNode(value, node);
+
+      return value - oldValue;
     }
 
 
@@ -52,7 +56,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public T NextNode()
     {
-      Pair<T, double> min = ExtractMin();
+      var min = ExtractMin();
       myValues.Remove(min.First);
       return min.First;
     }

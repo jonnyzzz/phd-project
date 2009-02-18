@@ -1,6 +1,8 @@
 using System;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
+using DSIS.IntegerCoordinates;
+using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
@@ -12,6 +14,8 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     protected readonly HashHolder<T> myHashHolder;
     private readonly ArcDirection<T> myStraitEdges;
     private readonly ArcDirection<T> myBackEdges;
+
+    private readonly double myCellVolume;
 
     private readonly IGraph<T> myGraph;
     private readonly IGraphStrongComponents<T> myComponents;
@@ -25,6 +29,8 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
       myGraph = graph;
       myComponents = components;
+
+      myCellVolume = ((IIntegerCoordinateSystem) myGraph.CoordinateSystem).CellSize.FoldLeft(1.0, (x, v) => x*v);
     }
 
     private bool VisitNode(INode<T> node)
@@ -92,9 +98,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
         needNorm |= (incoming >= maxValue || outgoing >= maxValue);
 
-        if (CheckExitCondition(precision, incoming, outgoing))
-          break;
-
         var sout = Math.Sqrt(outgoing);
         var sin = Math.Sqrt(incoming);
         
@@ -107,27 +110,35 @@ namespace DSIS.Graph.Entropy.Impl.JVR
           b = 0;
         }
 
-        needNorm |= (incoming*a <= normEps || outgoing*b <= normEps);
+        if (needNorm)
+          Norm();
 
-        using (var cookie = myHashHolder.UpdateCookie(myStraitEdges, myBackEdges))
+//        needNorm |= (incoming*a <= normEps || outgoing*b <= normEps);
+
+        var cookie = myHashHolder.UpdateCookie(myStraitEdges, myBackEdges);
+        using (cookie)
         {
           myBackEdges.MultiplyWeight(cookie, node, a);
           myStraitEdges.MultiplyWeight(cookie, node, b);
         }
-
-        if (needNorm)
-          Norm();
+        
+        if (CheckExitCondition(precision, incoming, outgoing, cookie.Change))
+          break;
       }
     }
 
-    private bool CheckExitCondition(double precision, double incoming, double outgoing)
+    private bool CheckExitCondition(double precision, double incoming, double outgoing, double change)
     {
       switch(myOptions.ExitCondition)
       {
         case JVRExitCondition.MaxNodeError:
           return Math.Abs(incoming - outgoing) <= precision;
+        case JVRExitCondition.MaxRelativeNodeError:
+          return Math.Abs(incoming - outgoing) <= precision * myCellVolume;
         case JVRExitCondition.SummError:
           return myHashHolder.SummaryError <= precision;
+        case JVRExitCondition.ChangeError:
+          return change <= precision;
         default:
           throw new Exception("Unexpected exit condition " + myOptions.ExitCondition);
       }

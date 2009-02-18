@@ -12,6 +12,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     const double EPS = 1e-8;
     private static readonly IEqualityComparer<JVRPair<T>> COMPARER = EqualityComparerFactory<JVRPair<T>>.GetComparer();
     private readonly ICellCoordinateSystem<T> mySystem;
+    private double? myCachedNorm;
 
     private Dictionary<JVRPair<T>, double> myHash = CreateHash();
     private SortedNodeSet<T> mySet = CreateSet();
@@ -46,17 +47,18 @@ namespace DSIS.Graph.Entropy.Impl.JVR
           JVRPair<T> key = pair.Key;
           cookie.SetItem(key, value);
         }
-      }      
+      }
     }
 
     private double Norm()
     {
-      double v = 0;
-      foreach (double d in myHash.Values)
+      if (myCachedNorm == null)
       {
-        v += d;
+        double v = myHash.Values.FoldLeft(0.0, (x,vv)=>x+vv);
+        myCachedNorm = v;
+        return v;
       }
-      return v;
+      return myCachedNorm.Value;
     }
 
     public void Normalize()
@@ -67,6 +69,8 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         return;
 
       Divide(myNorm);
+
+      myCachedNorm = 1;
     }
 
     public ItemUpdateCookie<T> UpdateCookie(ArcDirection<T> strait, ArcDirection<T> back)
@@ -80,17 +84,19 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     }
     
     void IHashholderController<T>.SetItem(JVRPair<T> pair, double value)
-    {      
+    {
+      myCachedNorm = null;
       myHash[pair] = value;     
     }
 
-    void IHashholderController<T>.SetItem(T node, double output, double input)
+    double IHashholderController<T>.SetItem(T node, double output, double input)
     {
-      mySet.SetValue(node, output, input);
+      myCachedNorm = null;
+      return mySet.SetValue(node, output, input);
     }
 
     public double GetItem(JVRPair<T> pair)
-    {
+    {      
       return myHash[pair];
     }
 
@@ -106,26 +112,10 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public double SummaryError
     {
-      get { return mySet.SummaryError; }
-    }
- 
-/*    public void Dump(TextWriter tw)
-    {
-      foreach (KeyValuePair<JVRPair<T>, double> pair in myHash)
+      get
       {
-        tw.WriteLine(
-          string.Format(CultureInfo.GetCultureInfo("en-us"),
-          "n({0},{1}),", ToString(pair.Key.From), ToString(pair.Key.To)));
+        return mySet.SummaryError / Norm();
       }
     }
-
-    private static string ToString(T node)
-    {
-      IIntegerCoordinate ic = (IIntegerCoordinate) node;
-      if (ic.Dimension == 1)
-        return ic.GetCoordinate(0).ToString();
-      else
-        return node.ToString();
-    }*/
   }      
 }

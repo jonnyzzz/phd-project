@@ -40,7 +40,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public void MultiplyWeight(ItemUpdateCookie<T> cookie, T node, double factor) 
     {
-      foreach (JVRPair<T> edge in myIndex[node])
+      foreach (var edge in myIndex[node])
       {
         cookie.SetItem(edge, myHash.GetItem(edge)*factor);        
       }
