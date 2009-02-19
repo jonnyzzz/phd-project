@@ -14,6 +14,40 @@ using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
+  public static class ComputationDataUtil
+{
+    public static IEnumerable<SIBuild.ComputationData> ForBuilders(this IEnumerable<SIBuild.ComputationData> data, params SIBuild.Builder[] bld)
+    {
+      foreach (var computationData in data)
+      {
+        foreach (var b in bld)
+        {
+          var d = computationData.Clone();
+          d.builder = b;
+          yield return d;
+        }
+      }
+    }
+
+    public static IEnumerable<SIBuild.ComputationData> ForAllBuilders(this IEnumerable<SIBuild.ComputationData> data)
+    {
+      return data.ForBuilders(Enum.GetValues(typeof (SIBuild.Builder)).Cast<SIBuild.Builder>().ToArray());
+    }
+
+    public static IEnumerable<SIBuild.ComputationData> ForSteps(this IEnumerable<SIBuild.ComputationData> data, params int[] steps)
+    {
+      foreach (var computationData in data)
+      {
+        foreach (var b in steps)
+        {
+          var d = computationData.Clone();
+          d.repeat = b;
+          yield return d;
+        }
+      }
+    }
+}
+
   public class SIBuild
   {
     public void Action()
@@ -126,14 +160,14 @@ namespace DSIS.SimpleRunner
     }
 
 
-    protected enum Builder
+    public enum Builder
     {
       Box,
       Adaptive,
       Point
     }
 
-    protected struct ComputationData : IEquatable<ComputationData>
+    public struct ComputationData : IEquatable<ComputationData>
     {
       public IAction system { get; set; }
       public int repeat { get; set; }
