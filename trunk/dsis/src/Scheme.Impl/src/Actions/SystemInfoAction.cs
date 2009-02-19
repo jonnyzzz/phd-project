@@ -26,5 +26,10 @@ namespace DSIS.Scheme.Impl.Actions
     {
       return EmptyArray<ContextMissmatch>.Instance;
     }
+
+    public override string ToString()
+    {
+      return mySystemInfo.PresentableName + " on " + mySystemSpace;
+    }
   }
 }

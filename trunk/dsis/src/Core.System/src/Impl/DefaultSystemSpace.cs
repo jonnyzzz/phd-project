@@ -90,16 +90,11 @@ namespace DSIS.Core.System.Impl
     public override string ToString()
     {
       var sb = new StringBuilder();
-      sb.AppendFormat("Dim={0}, L=(", myDimension);
-      for (int i = 0; i < myDimension; i++)
-        sb.AppendFormat("{0}, ", myAreaLeftPoint[i]);
-      sb.Append("), R=(");
-      for (int i = 0; i < myDimension; i++)
-        sb.AppendFormat("{0}, ", myAreaRightPoint[i]);
-      sb.Append("), Grid=(");
-      for (int i = 0; i < myDimension; i++)
-        sb.AppendFormat("{0}, ", myInitialSubdivision[i]);
-      sb.Append(")");
+      sb.AppendFormat("Dim={0}, L=({1}), R=({2}), Grid=({3})", 
+        myDimension,
+        myAreaLeftPoint.JoinString(", "),
+        myAreaRightPoint.JoinString(", "),
+        myInitialSubdivision.JoinString(", "));      
       return sb.ToString();
     }
 

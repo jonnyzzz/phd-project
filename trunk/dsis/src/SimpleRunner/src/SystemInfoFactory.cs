@@ -1,5 +1,6 @@
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
+using DSIS.Function.Predefined.Ampilova;
 using DSIS.Function.Predefined.Brusselator;
 using DSIS.Function.Predefined.Chua;
 using DSIS.Function.Predefined.Delayed;
@@ -9,6 +10,7 @@ using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.HomoLinear;
 using DSIS.Function.Predefined.HomoSquare;
 using DSIS.Function.Predefined.Ikeda;
+using DSIS.Function.Predefined.Linear;
 using DSIS.Function.Predefined.Logistics;
 using DSIS.Function.Predefined.Lorentz;
 using DSIS.Function.Predefined.OsipenkoBio;
@@ -166,6 +168,18 @@ namespace DSIS.SimpleRunner
       return new SystemInfoAction(new RungeKuttSolver(info, 50, 0.001), Space(3, 30));
     }
 
+    public static IAction AlphaX(double d)
+    {
+      return new SystemInfoAction(new Linear1DSystemInfo(d, 0), Space(1, 1));
+    }
+
+    public static IAction Ref9()
+    {
+      return new SystemInfoAction(new Ref9(),
+                                  new DefaultSystemSpace(3, new[] {-0.38, 0.05, -0.38}, new[] {0.98, 1.45, 0.98},
+                                                         2L.Fill(3)));
+    }
+    
     /*
      * 
      * var duffingSp = new DefaultSystemSpace(2, new[] {-4.3, -3}, new[] {4.3, 3}, new long[] {3, 3});

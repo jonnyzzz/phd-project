@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Ampilova\Ref9.cs" />
     <Compile Include="src\Brusselator\BrusselatorFactory.cs" />
     <Compile Include="src\Brusselator\BrusselatorFunction.cs" />
     <Compile Include="src\Brusselator\BrusselatorOptions.cs" />

@@ -20,7 +20,7 @@ namespace DSIS.SimpleRunner
 {
   public class JVRDetMorseBuild : SIBuild
   {
-    protected override List<ComputationData> GetSystemsToRun()
+    protected override IEnumerable<ComputationData> GetSystemsToRun()
     {
       var data = new List<ComputationData>();
       foreach (int rep in 13.Each())

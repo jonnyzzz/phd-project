@@ -101,6 +101,7 @@
     <Compile Include="src\Actions\RootAction.cs" />
     <Compile Include="src\SIBuild.cs" />
     <Compile Include="src\SystemInfoFactory.cs" />
+    <Compile Include="src\ThesisSIBuild.cs" />
     <Compile Include="src\XmlAbstractImageBuilderListener.cs" />
   </ItemGroup>
   <ItemGroup>

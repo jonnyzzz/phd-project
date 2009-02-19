@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
@@ -37,12 +38,17 @@ namespace DSIS.SimpleRunner
 
     private void BuildContiniousSystems()
     {
-      List<ComputationData> data = GetSystemsToRun();
+      List<ComputationData> data = GetSystemsToRun().ToList();
       var queue = new List<ComputationData>(data);
       
       while(queue.Count > 0)
       {
         var computationData = queue[0];
+        Console.Out.WriteLine("\r\n-------------------------------------------------------\r\n");
+        Console.Out.WriteLine("system = {0}", computationData.system);
+        Console.Out.WriteLine("method = {0}", computationData.builder);
+        Console.Out.WriteLine("repeat = {0}", computationData.repeat);
+        Console.Out.WriteLine();
         queue.RemoveAt(0);
         
         using (var th = new MemoryMonitorThread(2*1024*1024*1024L))
@@ -87,7 +93,7 @@ namespace DSIS.SimpleRunner
       }
     }
 
-    protected virtual List<ComputationData> GetSystemsToRun()
+    protected virtual IEnumerable<ComputationData> GetSystemsToRun()
     {
       var data = new List<ComputationData>();
       foreach (int rep in new[] {8, 10})

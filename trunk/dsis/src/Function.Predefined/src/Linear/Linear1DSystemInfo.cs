@@ -16,7 +16,7 @@ namespace DSIS.Function.Predefined.Linear
 
     public override string PresentableName
     {
-      get { return string.Format("Linear ({0}*x + {1})", myA, myB); }
+      get { return string.Format("Linear ({0}x + {1})", myA, myB); }
     }
 
     protected override IFunction<double> GetFunctionInternal()
@@ -24,7 +24,7 @@ namespace DSIS.Function.Predefined.Linear
       return new LinearFunction1D(myA, myB);
     }
 
-    internal class LinearFunction1D : Function<double>, IFunction<double>
+    private class LinearFunction1D : Function<double>, IFunction<double>
     {
       private readonly double myA;
       private readonly double myB;
