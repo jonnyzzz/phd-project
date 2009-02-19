@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using DSIS.Scheme;
 using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl.Actions.Console;
+using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.Utils;
-using DSIS.SimpleRunner;
 
 namespace DSIS.SimpleRunner
 {
   public class ThesisSIBuild : SIBuild
   {
-    protected IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
+    protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
     {
       /*
             yield return new ComputationData
@@ -36,17 +36,11 @@ namespace DSIS.SimpleRunner
       yield return new ComputationData{system = SystemInfoFactory.Ref9()}.Enum().ForAllBuilders().ForSteps(6,8,10);
       
     }
-    protected override IEnumerable<ComputationData> GetSystemsToRun()
-    {
-      return GetSystemsToRun2().Maps(x=>x);
-    }
 
-    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, bool isLast)
+    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, bool isLast)
     {
-      siConstructionAction.Edge(new DumpGraphInfoAction());
-      siConstructionAction.Edge(new DumpGraphComponentsInfoAction());
 
-      return base.CreateActionsAfterSI(siConstructionAction, system, isLast);
+      return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, isLast);
     }
   }
 }

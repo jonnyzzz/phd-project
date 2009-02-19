@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -16,7 +17,7 @@ namespace DSIS.SimpleRunner
 {
   public class JVRBuild : SIBuild
   {
-    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, bool isLast)
+    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, bool isLast)
     {
       if (isLast)
       {
@@ -24,7 +25,13 @@ namespace DSIS.SimpleRunner
         BuildJVRCall(siConstructionAction, system, 1e-4);
         BuildJVRCall(siConstructionAction, system, 1e-5);
       }
-      return base.CreateActionsAfterSI(siConstructionAction, system, isLast);
+      return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, isLast);
+    }
+
+    protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
+    {
+      //TODO: Return some system to run with
+      throw new System.NotImplementedException();
     }
 
     private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, double eps)

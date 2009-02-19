@@ -82,13 +82,16 @@
     <Compile Include="src\Actions\Console\DumpGraphInfoAction.cs" />
     <Compile Include="src\Actions\Console\DumpInvocationCountAction.cs" />
     <Compile Include="src\Actions\Console\DumpMethodAction.cs" />
+    <Compile Include="src\Actions\Console\DumpSeparatorAction.cs" />
     <Compile Include="src\Actions\Console\DumpWorkingFolderAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemActionBase.cs" />
     <Compile Include="src\Actions\CreateInitialCellsAction.cs" />
     <Compile Include="src\Actions\CreateRealCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\DefaultAdaptiveMethodSettings.cs" />
+    <Compile Include="src\Actions\DefaultBoxAdaptiveMethodSettings.cs" />
     <Compile Include="src\Actions\DefaultBoxMethodSettings.cs" />
+    <Compile Include="src\Actions\DefaultPointExMethodSettings.cs" />
     <Compile Include="src\Actions\DefaultPointMethodSettings.cs" />
     <Compile Include="src\Actions\Entropy\BiggestMeasureInfo.cs" />
     <Compile Include="src\Actions\Entropy\EigenActionFactory.cs" />

@@ -20,7 +20,7 @@ namespace DSIS.SimpleRunner
 {
   public class JVRDetMorseBuild : SIBuild
   {
-    protected override IEnumerable<ComputationData> GetSystemsToRun()
+    protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
     {
       var data = new List<ComputationData>();
       foreach (int rep in 13.Each())
@@ -46,13 +46,13 @@ namespace DSIS.SimpleRunner
                                   new[]
                                     {
 //                                      Builder.Adaptive,
-                                      Builder.Box
+                                      ComputationDataBuilder.Box
                                     }));
       }
-      return data;
+      yield return data;
     }
 
-    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, bool isLast)
+    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, bool isLast)
     {
       if (isLast)
       {
@@ -61,7 +61,7 @@ namespace DSIS.SimpleRunner
 //        BuildJVRCall(siConstructionAction, system, 1e-5);
 //        BuildJVRCall(siConstructionAction, system, 1e-8);
       }
-      return base.CreateActionsAfterSI(siConstructionAction, system, isLast);
+      return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, isLast);
     }
 
     private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, double eps)
@@ -128,7 +128,7 @@ namespace DSIS.SimpleRunner
         where Q : ICellCoordinate
       {
         return cms.GetNodes(new[] {info}).Aggregate(0,
-                                                    (v, x) => v + Enumerable.Count(cms.GetEdgesWithFilteredEdges(x, new[] {info})));
+                                                    (v, x) => v + cms.GetEdgesWithFilteredEdges(x, new[] {info}).Count());
       }
     }
   }

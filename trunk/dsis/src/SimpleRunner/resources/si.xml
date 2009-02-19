@@ -12,6 +12,32 @@
       </Link>
     </Links>
   </Graph>
+  <!--______________________________________________________________-->  
+  <Graph Id="imageBuilderPointEx">
+    <Nodes>
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultPointExMethodSettings"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->  
+  <Graph Id="imageBuilderBoxAdaptive">
+    <Nodes>
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxAdaptiveMethodSettings"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
   <!--______________________________________________________________-->
   <Graph Id="imageBuilderAdaptive">
     <Nodes>
