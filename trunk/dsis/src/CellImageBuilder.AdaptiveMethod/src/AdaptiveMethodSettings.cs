@@ -31,7 +31,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
 
     public string PresentableName
     {
-      get { return "Adaptive Method"; }
+      get { return string.Format("Adaptive Method[eps={0},overlap={1},limit={2}]", Eps, OveplapFactor, EdgesPerCell) ; }
     }
 
     public ICellImageBuilder<TCell> Create<TCell>() 

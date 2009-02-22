@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using DSIS.Core.Util;
 using DSIS.UI.UI;
+using DSIS.Utils;
 
 namespace DSIS.UI.Application.Progress
 {
@@ -13,6 +15,8 @@ namespace DSIS.UI.Application.Progress
 
     private DateTime myLastUpdatedTime = DateTime.MinValue;
 
+    public event EventHandler<EventArgs> Interrupted;
+
     public ProgressBarControl(IInvocator invocator)
     {
       myInvocator = invocator;
@@ -20,6 +24,8 @@ namespace DSIS.UI.Application.Progress
       InitializeComponent();
       SetDisabled();
     }
+
+    public bool IsInterruptable { get; set; }
 
     public bool HasModel
     {
@@ -43,7 +49,9 @@ namespace DSIS.UI.Application.Progress
         var pi = new BackDelegatingProgress(value) {Maximum = 1000};
         Subscribe(pi);
         myProgress = pi;
-      } else {
+      }
+      else
+      {
         myProgress = null;
       }
     }
@@ -54,13 +62,20 @@ namespace DSIS.UI.Application.Progress
 
       UpdateProgressValue(progress);
       UpdateProgressText(progress);
+      EnableCancelLink();
 
       progress.MaximumChanged += delegate { UpdateProgressValue(progress); };
       progress.ValueChanged += delegate { UpdateProgressValue(progress); };
       progress.TextChanged += delegate { UpdateProgressText(progress); };
+      progress.Interrupted += delegate { FireInterrupted(); };
       myProgressBar.Enabled = true;
 
       StartTimer();
+    }
+
+    private void FireInterrupted()
+    {
+      Interrupted.Fire(this, EventArgs.Empty);
     }
 
     private void Unsubscribe(ProgressImpl progress)
@@ -72,13 +87,16 @@ namespace DSIS.UI.Application.Progress
       progress.MaximumChanged -= delegate { UpdateProgressValue(progress); };
       progress.ValueChanged -= delegate { UpdateProgressValue(progress); };
       progress.TextChanged -= delegate { UpdateProgressText(progress); };
+      progress.Interrupted -= delegate { FireInterrupted(); };
+      myCancel.Visible = false;
 
       SetDisabled();
-    }
+    } 
 
     private void SetDisabled()
     {
       StopTimer();
+      myCancel.Visible = false;
       myMainLabel.Text = "Idle";
       myProgressBar.Enabled = false;
       myProgressBar.Style = ProgressBarStyle.Continuous;
@@ -126,6 +144,22 @@ namespace DSIS.UI.Application.Progress
         myLastUpdatedTime + TimeSpan.FromMilliseconds(500) < DateTime.Now
           ? ProgressBarStyle.Marquee
           : ProgressBarStyle.Continuous;
+    }
+
+    private void myCancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+      myProgress.IsInterrupted = true;
+      myCancel.Text = "Canceled";
+      myCancel.ActiveLinkColor = Color.Red;
+      myCancel.Enabled = false;
+    }
+
+    private void EnableCancelLink()
+    {
+      myCancel.Visible = IsInterruptable;
+      myCancel.Enabled = IsInterruptable;
+      myCancel.Text = "Cancel";
+      myCancel.ActiveLinkColor = Color.Blue;
     }
   }
 }

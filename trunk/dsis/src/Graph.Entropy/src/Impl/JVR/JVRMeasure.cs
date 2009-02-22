@@ -1,5 +1,6 @@
 using System;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Util;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
@@ -75,7 +76,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public void Iterate(double precision)
     {
-      double normEps = precision;
       const double maxValue = 3;
 
       bool notIncludeSelfLoop = myOptions.IncludeSelfEdge;
@@ -112,8 +112,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
         if (needNorm)
           Norm();
-
-//        needNorm |= (incoming*a <= normEps || outgoing*b <= normEps);
 
         var cookie = myHashHolder.UpdateCookie(myStraitEdges, myBackEdges);
         using (cookie)

@@ -151,6 +151,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\Doc\CurrentStep\NumberOfCellsCurrentStepCustomParameter.cs" />
+    <Compile Include="src\Doc\ShowCurrentImageBase.cs" />
     <Compile Include="src\Doc\ShowCurrentMeasureImage.cs">
     </Compile>
     <Compile Include="src\Doc\ShowCurrentSimbolicImage.cs">

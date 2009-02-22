@@ -1,5 +1,3 @@
-using DSIS.Core.Util;
-
 namespace DSIS.UI.Application.Progress
 {
   public class DelegatingProgress : ProgressImpl

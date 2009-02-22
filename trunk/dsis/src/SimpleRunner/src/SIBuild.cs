@@ -112,12 +112,11 @@ namespace DSIS.SimpleRunner
       bld.Start.Edge(workingFolder).Edge(logger); 
       bld.Start.Edge(sys.system).Edge(init).Edge(image);
       bld.Start.Edge(sys.system).Edge(workingFolder).With(x => x.Back(id));
-      
 
       var rootAction = RepeatSI(
         bld.Start,
         sys.repeat,
-        builder["build"],
+        new RecordTimeSlotAction(builder["build"], "total"),
         new[] {image, init, logger},
         new[] {image, workingFolder, logger},
         sys.system, workingFolder, logger);
@@ -126,9 +125,10 @@ namespace DSIS.SimpleRunner
         .With(x => x.Edge(dump).
                      With(xx => xx.Back(image)).
                      With(xx => xx.Back(workingFolder).Back(image)))
-        .Edge(draw).
-        With(x => x.Back(workingFolder))
-        .Edge(bld.Finish).Back(new DumpSlotTimesAction("BuildSI")).Back(logger);      
+        .Edge(draw).With(x => x.Back(workingFolder))
+        .Edge(bld.Finish)
+        .With(x=>x.Back(new DumpSlotTimesAction("BuildSI")).Back(logger))
+        .With(x=>x.Back(new DumpSlotTimesAction("total")).Back(logger));      
     }
 
     private IActionEdgesBuilder RepeatSI(IActionEdgesBuilder holder, int count, IAction buildSI,

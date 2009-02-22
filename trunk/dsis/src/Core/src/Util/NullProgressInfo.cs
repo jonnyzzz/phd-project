@@ -1,8 +1,9 @@
+
 namespace DSIS.Core.Util
 {
   public sealed class NullProgressInfo : IProgressInfo
   {
-    public static readonly IProgressInfo INSTANCE = new NullProgressInfo();
+    public static IProgressInfo INSTANCE  {get { return new NullProgressInfo(); }}
 
     private double myValue;
 
@@ -23,6 +24,10 @@ namespace DSIS.Core.Util
     public void Tick(double step)
     {
       myValue += step;
+    }
+
+    public void Dispose()
+    {
     }
   }
 }

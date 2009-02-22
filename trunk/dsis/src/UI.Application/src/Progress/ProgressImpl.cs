@@ -76,5 +76,10 @@ namespace DSIS.UI.Application.Progress
     {
       return new DelegatingProgress(this, value);
     }
+
+    public void Dispose()
+    {
+      Tick(Maximum - Value);
+    }
   }
 }

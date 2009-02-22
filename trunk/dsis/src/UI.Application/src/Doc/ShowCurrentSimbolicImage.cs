@@ -1,4 +1,4 @@
-using System.Windows.Forms;
+using DSIS.Core.Ioc;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.UI.Application.Progress;
 using DSIS.UI.UI;
@@ -6,30 +6,19 @@ using DSIS.UI.UI;
 namespace DSIS.UI.Application.Doc
 {
   [DocumentComponent]
-  public class ShowCurrentSimbolicImage : IDocumentCenterControl
+  public class ShowCurrentSimbolicImage : ShowCurrentImageBase<IoCDrawSimbolicImage>
   {
-    private readonly ImageDrawWithIoCHelper myHelper;
-
-    public ShowCurrentSimbolicImage(
-      IApplicationDocument doc, 
-      IoCDrawSimbolicImage action, 
-      IActionExecution exec,
-      IInvocator invocator)      
+    public ShowCurrentSimbolicImage(IApplicationDocument doc, IoCDrawSimbolicImage action, IActionExecution exec, ITypeInstantiator typeInstantiator, IInvocator invocator) 
+      : base(doc, action, exec, typeInstantiator, invocator)
     {
-      myHelper = new ImageDrawWithIoCHelper(exec, invocator, action, doc);
     }
 
-    Control IControlWithTitle.Control
-    {
-      get { return myHelper; }
-    }
-
-    string IControlWithTitle.Title
+    public override string ControlTitle
     {
       get { return "Symbolic Image"; }
     }
 
-    public string SortOrder
+    public override string SortOrder
     {
       get { return "000a"; }
     }

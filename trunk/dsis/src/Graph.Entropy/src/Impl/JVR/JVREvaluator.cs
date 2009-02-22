@@ -8,7 +8,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
   {
     private readonly JVRMeasureOptions myOpts;
 
-
     public JVREvaluator(JVRMeasureOptions opts)
     {
       myOpts = opts;

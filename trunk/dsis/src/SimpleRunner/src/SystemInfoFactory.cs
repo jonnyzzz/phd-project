@@ -168,6 +168,13 @@ namespace DSIS.SimpleRunner
       return new SystemInfoAction(new RungeKuttSolver(info, 50, 0.001), Space(3, 30));
     }
 
+    public static IAction ChuaRunge2()
+    {
+      var info = new ChuaSystemInfo2(new ChuaOptions2{A = 18, B = 33, M0 = -0.2, M1 = 0.01});
+      var space = new DefaultSystemSpace(3, new[]{-12, -2.5, -20}, new[]{12, 2.5, 20}, 2L.Fill(3));
+      return new SystemInfoAction(new RungeKuttSolver(info, 50, 0.001), space);
+    }
+
     public static IAction AlphaX(double d)
     {
       return new SystemInfoAction(new Linear1DSystemInfo(d, 0), Space(1, 1));

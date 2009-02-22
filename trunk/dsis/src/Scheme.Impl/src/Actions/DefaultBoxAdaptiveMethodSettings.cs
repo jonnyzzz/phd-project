@@ -12,10 +12,10 @@ namespace DSIS.Scheme.Impl.Actions
       Keys.SubdivisionKey.Set(output, 2L.Fill(Dimension));
       Keys.CellImageBuilderKey.Set(output, new BoxAdaptiveMethodSettings
                                              {
-                                               myAddRadiusFactor = 0.7,
-                                               myCellSizePercent = 0.7,
-                                               myOverlaping = 0.2,
-                                               myTaskLimit = 200
+                                               AddRadiusFactor = 0.7,
+                                               CellSizePercent = 0.7,
+                                               Overlaping = 0.2,
+                                               TaskLimit = 200
                                              });
     }
   }

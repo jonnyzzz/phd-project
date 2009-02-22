@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Core.System;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
 
@@ -37,12 +38,23 @@ namespace DSIS.Scheme.Impl.Actions.Files
       IAction action;
       if (!myActions.TryGetValue(Dimension, out action))
       {
-        throw new ContextMissmatchException(
-          new[] {new ContextMissmatch(Keys.SystemInfoKey, "Dimension does not supported", this)}, this,
-          ctx);
+        return new[] { new ContextSystemDimensionMissmatch(Keys.SystemInfoKey, "Dimension does not supported", this) };
       }
       //todo:dangerous cast
       return new List<ContextMissmatch>(action.Compatible(ctx)).ConvertAll(x => (ContextMissmatchCheck) x);
+    }
+
+
+    private class ContextSystemDimensionMissmatch : ContextMissmatchCheck
+    {
+      public ContextSystemDimensionMissmatch(IKey key, string message, IAction action) : base(key, message, action)
+      {
+      }
+
+      public override bool Check(Context ctx)
+      {
+        return false;
+      }
     }
   }
 }

@@ -12,78 +12,33 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     public static readonly BoxAdaptiveMethodSettings Default = new BoxAdaptiveMethodSettings();
 
     [IncludeGenerate(Title = "Subdivision limit")]
-    public int myTaskLimit { get; set;}
+    public int TaskLimit { get; set;}
     [IncludeGenerate(Title = "Overlap")]
-    public double myOverlaping { get; set; }
+    public double Overlaping { get; set; }
     [IncludeGenerate(Title = "Cell size percentage")]
-    public double myCellSizePercent { get; set; }
+    public double CellSizePercent { get; set; }
     [IncludeGenerate(Title = "Add radius factory")]
-    public double myAddRadiusFactor { get; set; }
+    public double AddRadiusFactor { get; set; }
 
     public BoxAdaptiveMethodSettings(int taskLimit, double overlaping) : this()
     {
-      myAddRadiusFactor = 0.7;
-      myCellSizePercent = 0.7;
-      myOverlaping = 0.2;
-      myTaskLimit = 200;
-      myTaskLimit = taskLimit;
-      myOverlaping = overlaping;
+      AddRadiusFactor = 0.7;
+      CellSizePercent = 0.7;
+      TaskLimit = taskLimit;
+      Overlaping = overlaping;
     }
 
     public BoxAdaptiveMethodSettings()
     {
-      myAddRadiusFactor = 0.7;
-      myCellSizePercent = 0.7;
-      myOverlaping = 0.2;
-      myTaskLimit = 200;
-    }
-
-    public BoxAdaptiveMethodSettings(int taskLimit, double overlaping, double cellSizePercent) : this()
-    {
-      myAddRadiusFactor = 0.7;
-      myCellSizePercent = 0.7;
-      myOverlaping = 0.2;
-      myTaskLimit = 200;
-      myTaskLimit = taskLimit;
-      myOverlaping = overlaping;
-      myCellSizePercent = cellSizePercent;
-    }
-
-    public BoxAdaptiveMethodSettings(int taskLimit, double overlaping, double cellSizePercent, double addRadiusFactor)
-    {
-      myAddRadiusFactor = 0.7;
-      myCellSizePercent = 0.7;
-      myOverlaping = 0.2;
-      myTaskLimit = 200;
-      myTaskLimit = taskLimit;
-      myOverlaping = overlaping;
-      myCellSizePercent = cellSizePercent;
-      myAddRadiusFactor = addRadiusFactor;
-    }
-
-    public int TaskLimit
-    {
-      get { return myTaskLimit; }
-    }
-
-    public double AddRadiusFactor
-    {
-      get { return myAddRadiusFactor; }
-    }
-
-    public double Overlaping
-    {
-      get { return myOverlaping; }
-    }
-
-    public double CellSizePercent
-    {
-      get { return myCellSizePercent; }
+      AddRadiusFactor = 0.7;
+      CellSizePercent = 0.7;
+      Overlaping = 0.2;
+      TaskLimit = 200;
     }
 
     public string PresentableName
     {
-      get { return "Box Addaptive Method"; }
+      get { return string.Format("Box Addaptive[overlap={0},radius={1},limit={2},sz={3}]", Overlaping,  AddRadiusFactor, TaskLimit, CellSizePercent); }
     }
 
     public ICellImageBuilder<TCell> Create<TCell>()

@@ -1,3 +1,6 @@
+  -  cache saved points files
+  -  add default system space parameters to system info factory
+  -  predefined system -> new system dialog
   -  show error message is no gnuplot found.
   -  save created system without data
   -  save create image
@@ -6,7 +9,6 @@
 
 
 Progress bar:
-  -  Cancelable progressbar
   -  Memory usage bound
   -  Memory usage indicator
   -  Modal progress bar
@@ -50,7 +52,6 @@ Feature:
 Bugs:
   -  not responding after focus lost
   -  embedded IE used to flickr
-  -  format cells with spaces
 
 Internal:
   -  support ConstraintAttribute hierarchy
@@ -61,6 +62,9 @@ Internal:
   -  Support decart multiplication action
 
 Completed:
+  -  Cancelable progressbar
+  -  format cells with spaces
+  -  cancel progress!!!
   -  limit components list to show
   -  System Functions parser
   -  system function dialog: use IoC

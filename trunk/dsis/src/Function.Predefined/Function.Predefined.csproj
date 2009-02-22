@@ -65,9 +65,13 @@
     <Compile Include="src\Brusselator\BrusselatorOptions.cs" />
     <Compile Include="src\Brusselator\BrusselatorSystemInfo.cs" />
     <Compile Include="src\Chua\ChuaFactory.cs" />
+    <Compile Include="src\Chua\ChuaFactory2.cs" />
     <Compile Include="src\Chua\ChuaFunction.cs" />
+    <Compile Include="src\Chua\ChuaFunction2.cs" />
     <Compile Include="src\Chua\ChuaOptions.cs" />
+    <Compile Include="src\Chua\ChuaOptions2.cs" />
     <Compile Include="src\Chua\ChuaSystemInfo.cs" />
+    <Compile Include="src\Chua\ChuaSystemInfo2.cs" />
     <Compile Include="src\Delayed2\Delayed2Function.cs" />
     <Compile Include="src\Delayed\DelayedFactory.cs" />
     <Compile Include="src\Delayed\DelayedFunction.cs" />

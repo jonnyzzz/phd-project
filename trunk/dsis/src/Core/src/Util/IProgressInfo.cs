@@ -3,9 +3,11 @@
  * Created: 18 но€бр€ 2006 г.
  */
 
+using System;
+
 namespace DSIS.Core.Util
 {
-  public interface IProgressInfoLight
+  public interface IProgressInfoLight : IDisposable
   {
     double Maximum { get; set; }
 

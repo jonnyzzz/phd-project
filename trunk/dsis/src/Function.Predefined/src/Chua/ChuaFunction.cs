@@ -27,7 +27,7 @@ namespace DSIS.Function.Predefined.Chua
 
       Output[0] = myP1 *( y - myP4*x - (myP3-myP4)*(Math.Abs(x+1) - Math.Abs(x-1)));
       Output[1] = x - y  + z;
-      Output[1] = - myP2 * y;
+      Output[2] = - myP2 * y;
     }
   }
 }

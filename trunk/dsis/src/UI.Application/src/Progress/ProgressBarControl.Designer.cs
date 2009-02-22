@@ -30,6 +30,7 @@
     {
       this.myProgressBar = new System.Windows.Forms.ProgressBar();
       this.myMainLabel = new System.Windows.Forms.Label();
+      this.myCancel = new System.Windows.Forms.LinkLabel();
       this.SuspendLayout();
       // 
       // myProgressBar
@@ -43,6 +44,7 @@
       // 
       // myMainLabel
       // 
+      this.myMainLabel.AutoEllipsis = true;
       this.myMainLabel.Location = new System.Drawing.Point(3, 0);
       this.myMainLabel.Name = "myMainLabel";
       this.myMainLabel.Size = new System.Drawing.Size(511, 15);
@@ -50,15 +52,33 @@
       this.myMainLabel.Text = "Progress bar text";
       this.myMainLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
       // 
+      // myCancel
+      // 
+      this.myCancel.ActiveLinkColor = System.Drawing.Color.Blue;
+      this.myCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.myCancel.AutoEllipsis = true;
+      this.myCancel.AutoSize = true;
+      this.myCancel.Location = new System.Drawing.Point(474, 1);
+      this.myCancel.Name = "myCancel";
+      this.myCancel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+      this.myCancel.Size = new System.Drawing.Size(40, 13);
+      this.myCancel.TabIndex = 2;
+      this.myCancel.TabStop = true;
+      this.myCancel.Text = "Cancel";
+      this.myCancel.VisitedLinkColor = System.Drawing.Color.Blue;
+      this.myCancel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.myCancel_LinkClicked);
+      // 
       // ProgressBarControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.Controls.Add(this.myCancel);
       this.Controls.Add(this.myMainLabel);
       this.Controls.Add(this.myProgressBar);
       this.Name = "ProgressBarControl";
       this.Size = new System.Drawing.Size(517, 47);
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
@@ -66,5 +86,6 @@
 
     private System.Windows.Forms.ProgressBar myProgressBar;
     private System.Windows.Forms.Label myMainLabel;
+    private System.Windows.Forms.LinkLabel myCancel;
   }
 }

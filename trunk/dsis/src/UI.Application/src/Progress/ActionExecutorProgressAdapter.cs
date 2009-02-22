@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
+using DSIS.Utils;
 
 namespace DSIS.UI.Application.Progress
 {
@@ -11,7 +12,7 @@ namespace DSIS.UI.Application.Progress
 
     public ActionExecutorProgressAdapter(Control usersControl, ITypeInstantiator instance)
     {
-      myControl = instance.Instanciate<ActionExecutorProgressControl>();
+      myControl = instance.Instanciate<ActionExecutorProgressControl>(new OneTreadExecutor());
 
       var cnt = myControl.Control;
       cnt.Visible = false;

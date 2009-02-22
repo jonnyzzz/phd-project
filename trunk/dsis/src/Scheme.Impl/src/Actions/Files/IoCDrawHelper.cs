@@ -1,12 +1,16 @@
+using System;
 using System.Drawing;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;
+using log4net;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public class IoCDrawHelper<T> : IIocDrawHelper 
+  public class IoCDrawHelper<T> : IIocDrawHelper
     where T : IAction
   {
+    private static readonly ILog LOG = LogManager.GetLogger(typeof (IoCDrawHelper<T>));
+
     private readonly T myAction;
 
     protected IoCDrawHelper(T action)
@@ -17,18 +21,24 @@ namespace DSIS.Scheme.Impl.Actions.Files
     public string DrawImage(Context context, Size sz)
     {
       var ctx = context.Clone();
-      ImageDimension.KEY.Set(ctx, new ImageDimension { Width = sz.Width, Height = sz.Height });
+      ImageDimension.KEY.Set(ctx, new ImageDimension {Width = sz.Width, Height = sz.Height});
 
-      string file = null;
-      if (myAction.Compatible(ctx).IsEmpty())
+      try
       {
-        var result = myAction.Apply(ctx);
-        if (result.ContainsKey(FileKeys.ImageKey))
+        if (myAction.Compatible(ctx).IsEmpty())
         {
-          file = FileKeys.ImageKey.Get(result).Path;
+          var result = myAction.Apply(ctx);
+          if (result.ContainsKey(FileKeys.ImageKey))
+          {
+            return FileKeys.ImageKey.Get(result).Path;
+          }
         }
       }
-      return file;
+      catch (Exception e)
+      {
+        LOG.Error("Failed to draw image. " + e.Message, e);
+      }
+      return null;
     }
   }
 }

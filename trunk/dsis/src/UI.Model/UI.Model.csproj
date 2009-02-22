@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\IAction.cs" />
     <Compile Include="src\Impl\ProgressImpl.cs" />
+    <Compile Include="src\Impl\SubProgressImpl.cs" />
     <Compile Include="src\IProgressCounter.cs" />
     <Compile Include="src\IProgressInfo.cs" />
     <Compile Include="src\IProgressTick.cs" />
