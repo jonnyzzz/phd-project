@@ -17,22 +17,7 @@ namespace DSIS.Core.System
 
     public IFunction<T> GetFunction<T>(T[] precision)
     {
-      return mySystemInfo.GetFunction<T>(precision);
-    }
-
-    public IFunction<T> GetFunction<T>(T precision)
-    {
       return mySystemInfo.GetFunction(precision);
-    }
-
-    public IFunction<T> GetDerivateFunction<T>(T[] precision, int derivatePower)
-    {
-      return mySystemInfo.GetDerivateFunction(precision, derivatePower);
-    }
-
-    public IFunction<T> GetDerivateFunction<T>(T[] precision, int[] unsimmetricDerivate)
-    {
-      return mySystemInfo.GetDerivateFunction(precision, unsimmetricDerivate);
     }
 
     public SystemType Type

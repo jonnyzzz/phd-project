@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.System;
+using DSIS.Utils;
 
 namespace DSIS.Function.Solvers
 {
@@ -33,14 +34,8 @@ namespace DSIS.Function.Solvers
 
     public IFunction<T> GetFunction<T>(T precision)
     {
-      var ts = new T[myDimension];
-      for (int i = 0; i < myDimension; i++)
-      {
-        ts[i] = precision;
-      }
-      return GetFunction<T>(ts);
+      return GetFunction<T>(precision.Fill(myDimension));
     }
-
 
     private IFunction<double> GetDoubleFunction(double[] precision)
     {
@@ -48,7 +43,7 @@ namespace DSIS.Function.Solvers
         return GetDoubleFunctionOne(precision);
 
       var myFuncs = new List<IFunction<double>>();
-      for(int i=0; i<mySteps; i++)
+      foreach(int _ in mySteps.Each())
       {
         myFuncs.Add(GetDoubleFunctionOne(precision));
       }

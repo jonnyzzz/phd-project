@@ -2,6 +2,7 @@ using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates;
 using DSIS.InvatriantSetMethod.src;
+using DSIS.Utils;
 
 namespace DSIS.InvatriantSetMethod
 {
@@ -15,7 +16,7 @@ namespace DSIS.InvatriantSetMethod
     {
       base.Bind(context);
       mySettings = (InvariantBuilderSettings) context.Settings;
-      myIteratingFunction = new IteratingFunction2(()=>context.Function.GetFunction<double>(0));
+      myIteratingFunction = new IteratingFunction2(()=>context.Function.GetFunction<double>((1e-6).Fill(mySystem.Dimension)));
     }
 
     public void BuildImage(Q coord)
@@ -34,11 +35,6 @@ namespace DSIS.InvatriantSetMethod
     public ICellImageBuilder<Q> Clone()
     {
       return new InvariantBuilder<Q>();
-    }
-
-    public string PresentableName
-    {
-      get { return "Invariant set"; }
     }
   }
 }

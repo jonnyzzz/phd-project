@@ -4,7 +4,6 @@
  */
 
 using System;
-using DSIS.Core.System.Tree;
 using DSIS.Utils.Bean;
 
 namespace DSIS.Core.System
@@ -41,9 +40,6 @@ namespace DSIS.Core.System
   public interface ISystemInfo : ISystemInfoBase
   {
     IFunction<T> GetFunction<T>(T[] precision);
-    IFunction<T> GetFunction<T>(T precision);
-    IFunction<T> GetDerivateFunction<T>(T[] precision, int derivatePower);
-    IFunction<T> GetDerivateFunction<T>(T[] precision, int[] unsimmetricDerivate);
   }
 
   public interface ISplittableSystemInfo

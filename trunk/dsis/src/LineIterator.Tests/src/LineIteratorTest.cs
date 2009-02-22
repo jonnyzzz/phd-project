@@ -5,6 +5,7 @@ using System.IO;
 using DSIS.Core.System;
 using DSIS.Function.Mock;
 using DSIS.IntegerCoordinates.Tests;
+using DSIS.Utils;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 
@@ -42,7 +43,7 @@ namespace DSIS.LineIterator.Tests
     {
       myLine.AddPointToEnd(new LinePointImpl(new double[]{2}));
 
-      ISystemInfoAndSpaceProvider info = Create(delegate(double d) { return d; });        
+      ISystemInfoAndSpaceProvider info = Create(d => d);        
       myLine.Iterate(info);
 
       AssertPoints(2, "0", "0.5", "1", "1.5", "2");
@@ -193,7 +194,7 @@ namespace DSIS.LineIterator.Tests
       try
       {
 
-        string[] save = sw.ToString().Split(new char[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
+        string[] save = sw.ToString().Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
 
         Assert.That(save.Length, Is.EqualTo(gld.Length));
         for (int i = 0; i < gld.Length; i++)
@@ -210,7 +211,7 @@ namespace DSIS.LineIterator.Tests
     private class LineEx<T> : Line<T> where T : ILinePoint<T>
     {
       public LineEx(double eps, T initial)
-        : base(eps, initial)
+        : base(eps.Fill(initial.Dimension), initial)
       {
       }
 

@@ -1,37 +1,45 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.System;
+using DSIS.Utils;
 
 namespace DSIS.LineIterator
 {
   public class Line<T> : ILine
     where T : ILinePoint<T>
   {
-    private readonly double myEps;
+    private readonly double[] myEps;
+    private readonly double myDistanceEps;
 
-    private List<LinkedList<LinePoint>> myPoints = new List<LinkedList<LinePoint>>();
+    private List<System.Collections.Generic.LinkedList<LinePoint>> myPoints = new List<System.Collections.Generic.LinkedList<LinePoint>>();
     private LinePoint myLastPoint;
     private readonly int myDimension;
 
-    public Line(double eps, T initial)
+    private Line(double[] eps)
     {
       myEps = eps;
+      myDistanceEps = myEps.FoldLeft(0.0, Math.Max);
+    }
+
+    public Line(double[] eps, T initial) : this(eps)
+    {
       myLastPoint = new LinePoint(initial);
-      myPoints.Add(new LinkedList<LinePoint>());
+      myPoints.Add(new System.Collections.Generic.LinkedList<LinePoint>());
       myPoints[myPoints.Count-1].AddFirst(myLastPoint);
       myDimension = initial.Dimension;
     }
 
-    private Line(double eps, List<LinkedList<LinePoint>> points, LinePoint lastPoint)
+    private Line(double[] eps, List<System.Collections.Generic.LinkedList<LinePoint>> points, LinePoint lastPoint) :
+      this(eps)
     {
-      myEps = eps;
-      myPoints = points;
       myDimension = lastPoint.Point.Dimension;
+      myPoints = points;
     }
 
     public void AddPointToEnd(T point)
     {
-      if (myLastPoint.Distance(point) >= myEps)
+      if (myLastPoint.Distance(point) >= myDistanceEps)
         myPoints[myPoints.Count-1].AddLast(myLastPoint = new LinePoint(point));
     }
 
@@ -50,8 +58,8 @@ namespace DSIS.LineIterator
 
     public void Iterate(ISystemSpace space, ISystemInfo system)
     {
-      var function = system.GetFunction(myEps);
-      var list = new List<LinkedList<LinePoint>>(Iterate(myEps, myPoints, function, space));
+      var function = system.GetFunction<double>(myEps);
+      var list = new List<System.Collections.Generic.LinkedList<LinePoint>>(Iterate(myDistanceEps, myPoints, function, space));
       myPoints = list;
       myLastPoint = list[list.Count-1].Last.Value;
     }
@@ -89,10 +97,10 @@ namespace DSIS.LineIterator
     public ILine Clone()
     {
       //todo: Clone all objects?
-      var list = new List<LinkedList<LinePoint>>();
+      var list = new List<System.Collections.Generic.LinkedList<LinePoint>>();
       foreach (var points in myPoints)
       {
-        list.Add(new LinkedList<LinePoint>(points));
+        list.Add(new System.Collections.Generic.LinkedList<LinePoint>(points));
       }
       return new Line<T>(myEps, list, myLastPoint);
     }
@@ -102,24 +110,24 @@ namespace DSIS.LineIterator
       get { return myDimension; }
     }
 
-    private static IEnumerable<LinkedList<LinePoint>> Iterate(double eps, IEnumerable<LinkedList<LinePoint>> list,
+    private static IEnumerable<System.Collections.Generic.LinkedList<LinePoint>> Iterate(double dispanceEps, IEnumerable<System.Collections.Generic.LinkedList<LinePoint>> list,
                                                               IFunction<double> function, ISystemSpace space)
     {
       foreach (var points in list)
       {
-        foreach (var linePoints in Iterate(eps, points, function, space))
+        foreach (var linePoints in Iterate(dispanceEps, points, function, space))
         {
           yield return linePoints;
         }
       }
     }
       
-    private static IEnumerable<LinkedList<LinePoint>> Iterate(double eps, LinkedList<LinePoint> list,
+    private static IEnumerable<System.Collections.Generic.LinkedList<LinePoint>> Iterate(double distanceEps, System.Collections.Generic.LinkedList<LinePoint> list,
                                                               IFunction<double> function, ISystemSpace space)
     {
       while (list.Count > 0)
       {
-        var result = new LinkedList<LinePoint>();
+        var result = new System.Collections.Generic.LinkedList<LinePoint>();
 
         LinePoint prevBase = list.First.Value;
         list.RemoveFirst();
@@ -137,7 +145,7 @@ namespace DSIS.LineIterator
           if (!nextImage.Point.IsContained(space))
             break;
 
-          if (prevImage.Distance(nextImage) < eps)
+          if (prevImage.Distance(nextImage) < distanceEps)
           {
             result.AddLast(prevImage = nextImage);
             prevBase = nextBase;
