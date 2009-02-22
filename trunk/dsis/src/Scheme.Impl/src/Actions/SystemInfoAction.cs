@@ -16,6 +16,16 @@ namespace DSIS.Scheme.Impl.Actions
       mySystemSpace = systemSpace;
     }
 
+    public ISystemInfo SystemInfo
+    {
+      get { return mySystemInfo; }
+    }
+
+    public ISystemSpace SystemSpace
+    {
+      get { return mySystemSpace; }
+    }
+
     protected override void Apply(Context ctx, Context result)
     {
       Keys.SystemInfoKey.Set(result, mySystemInfo);

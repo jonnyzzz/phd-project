@@ -50,137 +50,137 @@ namespace DSIS.SimpleRunner
       return new DefaultSystemSpace(2, new[] {-1.1, -1.5}, new[] {3.5, 1.8}, new[] {3, 3L});
     }
 
-    public static IAction Henon1_4()
+    public static SystemInfoAction Henon1_4()
     {
       return new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), TenTen());
     }
 
-    public static IAction HenonDelnitz(double a, double b)
+    public static SystemInfoAction HenonDelnitz(double a, double b)
     {
       return new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(a,b), TwoTwo());
     }
 
-    public static IAction Ikeda()
+    public static SystemInfoAction Ikeda()
     {
       return new SystemInfoAction(new IkedaFunctionSystemInfoDecorator(), TenTen());
     }
 
-    public static IAction IkedaCut()
+    public static SystemInfoAction IkedaCut()
     {
       return new SystemInfoAction(new RenameSystem(new IkedaFunctionSystemInfoDecorator(), "Ikeda cut"), IkedaCutSpace());
     }
 
-    public static IAction DoubleLogistic()
+    public static SystemInfoAction DoubleLogistic()
     {
       var log_sp = new DefaultSystemSpace(2, new double[] {0, 0}, new double[] {1, 4}, new long[] {3, 3});
       return new SystemInfoAction(new Logistic2dSystemInfo(), log_sp);
     }
 
-    public static IAction Logistic(double a)
+    public static SystemInfoAction Logistic(double a)
     {
       var log_sp1 = new DefaultSystemSpace(1, new double[] { 0 }, new double[] { 1 }, new long[] { 3 });
       return new SystemInfoAction(new LogisticSystemInfo(a), log_sp1);
     }
 
-    public static IAction FoodChainDanny()
+    public static SystemInfoAction FoodChainDanny()
     {
       var sp3 = new DefaultSystemSpace(3, 0.01.Fill(3), 35d.Fill(3), 2L.Fill(3));
       return new SystemInfoAction(new FoodChainSystemInfo(3.4001, 1, 4), sp3);
     }
 
-    public static IAction OsipenkoBio2()
+    public static SystemInfoAction OsipenkoBio2()
     {
       var sp = new DefaultSystemSpace(2, new[] {0.01, 0}, 2.0.Fill(2), 3L.Fill(2));
       return new SystemInfoAction(new OsipenkoBio2FunctionSystemInfo(), sp);
     }
 
-    public static IAction Delayed(double a)
+    public static SystemInfoAction Delayed(double a)
     {
       return new SystemInfoAction((new DelayedFunctionSystemInfo(a)), PSpace(2, 3));
     }
 
-    public static IAction DuffingRunge()
+    public static SystemInfoAction DuffingRunge()
     {
       return new SystemInfoAction(new RungeKuttSolver(new DuffingSystemInfo(1, 1, 0.01), 100, 0.001), Space(2,5));
     }
 
-    public static IAction Duffing2x2Runge()
+    public static SystemInfoAction Duffing2x2Runge()
     {
       return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-2,2)"), 100, 0.001), Space(2,2));
     }
 
-    public static IAction Duffing1_5x1_5Runge()
+    public static SystemInfoAction Duffing1_5x1_5Runge()
     {
       return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-1.5,1.5)"), 100, 0.001), Space(2,1.5));
     }
 
-    public static IAction Duffing1_4x1_4Runge()
+    public static SystemInfoAction Duffing1_4x1_4Runge()
     {
       return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-1.4,1.4)"), 100, 0.001), Space(2,1.4));
     }
 
-    public static IAction Duffing1_3x1_3Runge()
+    public static SystemInfoAction Duffing1_3x1_3Runge()
     {
       return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-1.3,1.3)"), 100, 0.001), Space(2,1.3));
     }
 
-    public static IAction Duffing1_2x1_2Runge()
+    public static SystemInfoAction Duffing1_2x1_2Runge()
     {
       return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-1.2,1.2)"), 100, 0.001), Space(2,1.2));
     }
 
-    public static IAction VanDerPolRunge()
+    public static SystemInfoAction VanDerPolRunge()
     {
       return new SystemInfoAction(new RungeKuttSolver(new VanDerPolSystemInfo(1.5), 100, 0.001), Space(2, 5));
     }
 
-    public static IAction HomoLinearRunge()
+    public static SystemInfoAction HomoLinearRunge()
     {
       return new SystemInfoAction(new HomoLinearSystemInfo(1.35), TenTen());
     }
-    
-    public static IAction HomoDoubleRunge()
+
+    public static SystemInfoAction HomoDoubleRunge()
     {
       return new SystemInfoAction(new HomoSquareSystemInfo(0.4), TenTen());
     }
 
-    public static IAction LorentzRunge()
+    public static SystemInfoAction LorentzRunge()
     {
       var info = new LorenzSystemInfo(8.0/3.0, 20, 10);
       return new SystemInfoAction(new RungeKuttSolver(info, 100, 0.001), Space(3, 40));
     }
 
-    public static IAction RosslerRunge()
+    public static SystemInfoAction RosslerRunge()
     {
       var info = new RosslerSystemInfo(0.2, 0.2, 5.7);
       return new SystemInfoAction(new RungeKuttSolver(info, 100, 0.01), Space(3, 30));
     }
 
-    public static IAction BrusselatorRunge()
+    public static SystemInfoAction BrusselatorRunge()
     {
       var info = new BrusselatorSystemInfo(new BrusselatorOptions{P1 = 0.5, P2 = 0});
       return new SystemInfoAction(new RungeKuttSolver(info, 50, 0.001), Space(2, 10));
     }
 
-    public static IAction ChuaRunge()
+    public static SystemInfoAction ChuaRunge()
     {
       var info = new ChuaSystemInfo(new ChuaOptions{P1 = 9.85, P2 = 14.3, P3=-0.14, P4=0.28});
       return new SystemInfoAction(new RungeKuttSolver(info, 50, 0.001), Space(3, 30));
     }
 
-    public static IAction ChuaRunge2()
+    public static SystemInfoAction ChuaRunge2()
     {
       var info = new ChuaSystemInfo2(new ChuaOptions2{A = 18, B = 33, M0 = -0.2, M1 = 0.01});
       var space = new DefaultSystemSpace(3, new[]{-12, -2.5, -20}, new[]{12, 2.5, 20}, 2L.Fill(3));
       return new SystemInfoAction(new RungeKuttSolver(info, 50, 0.001), space);
     }
 
-    public static IAction AlphaX(double d)
+    public static SystemInfoAction AlphaX(double d)
     {
       return new SystemInfoAction(new Linear1DSystemInfo(d, 0), Space(1, 1));
     }
 
-    public static IAction Ref9()
+    public static SystemInfoAction Ref9()
     {
       return new SystemInfoAction(new Ref9(),
                                   new DefaultSystemSpace(3, new[] {-0.38, 0.05, -0.38}, new[] {0.98, 1.45, 0.98},

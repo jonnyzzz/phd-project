@@ -25,10 +25,5 @@ namespace DSIS.Function.Predefined.Duffing
     {
       return new DuffingFunction(myAlpha, myBeta, myK);
     }
-
-    protected override IFunction<double> GetFunctionDerivateInternal()
-    {
-      throw new NotImplementedException();
-    }
   }
 }

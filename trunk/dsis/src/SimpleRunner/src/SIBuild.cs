@@ -96,6 +96,29 @@ namespace DSIS.SimpleRunner
       }
     }
 
+    private class DumpComputationDataAction : ActionBase
+    {
+      private readonly ComputationData myData;
+
+      public DumpComputationDataAction(ComputationData data)
+      {
+        myData = data;
+      }
+
+      public override ICollection<ContextMissmatch> Compatible(Context ctx)
+      {
+        return EmptyArray<ContextMissmatch>.Instance;
+      }
+
+      protected override void Apply(Context ctx, Context result)
+      {
+        var log = Logger.Instance(ctx);
+
+        myData.Serialize(log);
+
+      }
+    }
+
     private void BuildGraph(IActionGraphBuilder2 bld, ComputationData sys)
     {
       var graphs = new XsdGraphXmlLoader().Load(typeof (SIBuild).Assembly, "DSIS.SimpleRunner.resources.si.xml");
@@ -109,7 +132,7 @@ namespace DSIS.SimpleRunner
       var logger = new LoggerAction();
 
       var id = new SetIterationSteps(new IterationSteps(sys.repeat));
-      bld.Start.Edge(workingFolder).Edge(logger); 
+      bld.Start.Edge(workingFolder).Edge(logger).Back(new DumpComputationDataAction(sys)); 
       bld.Start.Edge(sys.system).Edge(init).Edge(image);
       bld.Start.Edge(sys.system).Edge(workingFolder).With(x => x.Back(id));
 

@@ -32,11 +32,6 @@ namespace DSIS.Function.Solvers
       throw new ArgumentException("T");
     }
 
-    public IFunction<T> GetFunction<T>(T precision)
-    {
-      return GetFunction<T>(precision.Fill(myDimension));
-    }
-
     private IFunction<double> GetDoubleFunction(double[] precision)
     {
       if (mySteps == 1)
@@ -48,16 +43,6 @@ namespace DSIS.Function.Solvers
         myFuncs.Add(GetDoubleFunctionOne(precision));
       }
       return new ComposedFunction(myFuncs.ToArray());
-    }
-
-    public IFunction<T> GetDerivateFunction<T>(T[] precision, int derivatePower)
-    {    
-      throw new NotImplementedException();
-    }
-
-    public IFunction<T> GetDerivateFunction<T>(T[] precision, int[] unsimmetricDerivate)
-    {
-      throw new NotImplementedException();
     }
 
     public SystemType Type

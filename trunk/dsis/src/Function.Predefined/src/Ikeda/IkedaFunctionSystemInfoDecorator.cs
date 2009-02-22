@@ -18,10 +18,5 @@ namespace DSIS.Function.Predefined.Ikeda
     {
       return new IkedaFunction();
     }
-
-    protected override IFunction<double> GetFunctionDerivateInternal()
-    {
-      throw new NotImplementedException();
-    }
   }
 }

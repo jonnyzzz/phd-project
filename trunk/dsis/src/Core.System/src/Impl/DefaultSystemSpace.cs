@@ -9,6 +9,16 @@ using DSIS.Utils;
 
 namespace DSIS.Core.System.Impl
 {
+  [Serializable]
+  public class SystemSpaceData
+  {
+    public int Dimension { get; set; }
+    public double[] AreaLeftPoint { get; set; }
+    public double[] AreaRightPoint { get; set; }
+    public long[] Subdivision { get; set; }
+  }
+
+  //TODO: [Serializable]
   public class DefaultSystemSpace : ISystemSpace, IEquatable<DefaultSystemSpace>
   {
     private readonly int myDimension;
@@ -29,6 +39,20 @@ namespace DSIS.Core.System.Impl
         throw new ArgumentException("wrong size", "areaRightPoint");
       if (initialSubdivision.Length != myDimension)
         throw new ArgumentException("wrong size", "initialSubdivision");
+    }
+
+    public SystemSpaceData ToSystemSpaceData
+    {
+      get
+      {
+        return new SystemSpaceData
+                 {
+                   Dimension = Dimension,
+                   AreaLeftPoint = AreaLeftPoint,
+                   AreaRightPoint = AreaRightPoint,
+                   Subdivision = InitialSubdivision
+                 };
+      }
     }
 
     public double[] AreaLeftPoint

@@ -22,10 +22,5 @@ namespace DSIS.Function.Predefined.Logistics
     {
       return new LogisticFunction(myA);
     }
-
-    protected override IFunction<double> GetFunctionDerivateInternal()
-    {
-      throw new NotImplementedException();
-    }
   }
 }

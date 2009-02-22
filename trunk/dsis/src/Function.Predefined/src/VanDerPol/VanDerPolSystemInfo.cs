@@ -22,10 +22,5 @@ namespace DSIS.Function.Predefined.VanDerPol
     {
       return new VanDerPolFunction(myA);
     }
-
-    protected override IFunction<double> GetFunctionDerivateInternal()
-    {
-      throw new NotImplementedException();
-    }
   }
 }

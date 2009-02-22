@@ -26,10 +26,5 @@ namespace DSIS.Function.Predefined.Lorentz
     {
       return new LorenzFunction(myBeta, myRho, mySigma);
     }
-
-    protected override IFunction<double> GetFunctionDerivateInternal()
-    {
-      throw new NotImplementedException();
-    }
   }
 }

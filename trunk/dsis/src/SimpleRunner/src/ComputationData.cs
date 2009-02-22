@@ -1,11 +1,16 @@
 using System;
-using DSIS.Scheme;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using DSIS.Core.System.Impl;
+using DSIS.Scheme.Impl.Actions;
+using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.SimpleRunner
 {
   public struct ComputationData : IEquatable<ComputationData>
   {
-    public IAction system { get; set; }
+    public SystemInfoAction system { get; set; }
     public int repeat { get; set; }
     public ComputationDataBuilder builder { get; set; }
 
@@ -48,6 +53,14 @@ namespace DSIS.SimpleRunner
     public static bool operator !=(ComputationData left, ComputationData right)
     {
       return !left.Equals(right);
+    }
+
+    public void Serialize(Logger log)
+    {
+      log.Write("System function: {0}", system.SystemInfo);
+      log.Write("System space: {0}", system.SystemSpace);
+      log.Write("Repeat: {0}", repeat);
+      log.Write("Builder: {0}", builder);
     }
   }
 }

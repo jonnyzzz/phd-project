@@ -25,11 +25,6 @@ namespace DSIS.Function.Predefined.Henon
       return new HenonFunction(myA, myB);
     }
 
-    protected override IFunction<double> GetFunctionDerivateInternal()
-    {
-      throw new NotImplementedException();
-    }
-
     private class HenonFunction : Function<double>, IFunction<double>
     {
       protected readonly double myA;

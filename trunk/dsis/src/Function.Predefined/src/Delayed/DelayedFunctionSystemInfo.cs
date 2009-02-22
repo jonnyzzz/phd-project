@@ -3,7 +3,6 @@
  * Created: 26 ÿםגאנÿ 2007 ד.
  */
 
-using System;
 using DSIS.Core.System;
 
 namespace DSIS.Function.Predefined.Delayed
@@ -25,11 +24,6 @@ namespace DSIS.Function.Predefined.Delayed
     protected override IFunction<double> GetFunctionInternal()
     {
       return new DelayedFunction(myA);
-    }
-
-    protected override IFunction<double> GetFunctionDerivateInternal()
-    {
-      throw new NotImplementedException();
     }
   }
 }
