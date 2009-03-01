@@ -18,7 +18,7 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
     [IncludeGenerate(Title = "Overlap factor")]
     public double OveplapFactor { get; set; }
 
-    public AdaptiveMethodSettings() : this(0.5, 25, 0.2)
+    public AdaptiveMethodSettings() : this(0.5, 500, 0.2)
     {
     }
 

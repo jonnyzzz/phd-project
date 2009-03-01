@@ -64,8 +64,8 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
         PointGraphEdge edge = myQueue.Dequeue();
         if (!graph.CheckDistance(edge.Node1, edge.Node2))
         {
-          Pair<PointGraphNode, List<PointGraphEdge>> sub = graph.Subdivide(edge.Node1, edge.Node2);
-          foreach (PointGraphEdge e in sub.Second)
+          var sub = graph.Subdivide(edge.Node1, edge.Node2);
+          foreach (var e in sub.Second)
           {
             myQueue.Enqueue(e);
           }
@@ -94,11 +94,6 @@ namespace DSIS.CellImageBuilder.AdaptiveMethod
     public ICellImageBuilder<Q> Clone()
     {
       return new AdaptiveMethod<Q>();
-    }
-
-    public string PresentableName
-    {
-      get { return "Adaptive Method"; }
     }
   }
 }

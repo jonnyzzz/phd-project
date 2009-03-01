@@ -34,7 +34,12 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 
     public string PresentableName
     {
-      get { return string.Format("{0}:{1}:{2}", EntropyType, Strategy, LoopWeight.Name); }
+      get { return Present; }
+    }
+
+    public string Present
+    {
+      get { return string.Format("LoopEntropy[type={0},stategy={1},width={2}", EntropyType, Strategy, LoopWeight.Name); }
     }
 
     private IGraphWeightSearch<Q> CreateSearch<Q>(IGraphStrongComponents<Q> comps, IStrongComponentInfo info)

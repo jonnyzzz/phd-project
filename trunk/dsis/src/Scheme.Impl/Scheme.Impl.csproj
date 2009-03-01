@@ -164,6 +164,7 @@
     <Compile Include="src\Actions\Files\WorkingFolderInfo.cs" />
     <Compile Include="src\Actions\Files\Xml\XmlLogger.cs" />
     <Compile Include="src\Actions\ForeachStrongComponentAction.cs" />
+    <Compile Include="src\Actions\GCAction.cs" />
     <Compile Include="src\Actions\Line\LineAction.cs" />
     <Compile Include="src\Actions\Line\LineBaseAction.cs" />
     <Compile Include="src\Actions\Line\LineInitialAction.cs" />

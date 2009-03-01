@@ -52,7 +52,7 @@ namespace DSIS.SimpleRunner
       yield return data;
     }
 
-    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, bool isLast)
+    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, ComputationData sys, bool isLast)
     {
       if (isLast)
       {
@@ -61,7 +61,7 @@ namespace DSIS.SimpleRunner
 //        BuildJVRCall(siConstructionAction, system, 1e-5);
 //        BuildJVRCall(siConstructionAction, system, 1e-8);
       }
-      return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, isLast);
+      return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, sys, isLast);
     }
 
     private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, double eps)

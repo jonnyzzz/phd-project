@@ -77,6 +77,8 @@
     <Compile Include="src\DrawEntropyWithSpace3d.cs" />
     <Compile Include="src\DrawEntropyWithSpace3dSegments.cs" />
     <Compile Include="src\DrawEntropyWithSpaceBase.cs" />
+    <Compile Include="src\EntropyComputationData.cs" />
+    <Compile Include="src\EntropyComputationMode.cs" />
     <Compile Include="src\JVRBuild.cs" />
     <Compile Include="src\JVRDetMorseBuild.cs" />
     <Compile Include="src\OldProgram.cs" />
@@ -102,8 +104,11 @@
     <Compile Include="src\Actions\LeafAction.cs" />
     <Compile Include="src\Actions\OperationStack.cs" />
     <Compile Include="src\Actions\RootAction.cs" />
+    <Compile Include="src\SIBuild!1.cs" />
     <Compile Include="src\SIBuild.cs" />
     <Compile Include="src\SystemInfoFactory.cs" />
+    <Compile Include="src\ThesisEntropyBuild.cs" />
+    <Compile Include="src\ThesisEntropyBuildBase.cs" />
     <Compile Include="src\ThesisSIBuild.cs" />
     <Compile Include="src\XmlAbstractImageBuilderListener.cs" />
   </ItemGroup>

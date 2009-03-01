@@ -20,10 +20,9 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
     [IncludeGenerate(Title = "Add radius factory")]
     public double AddRadiusFactor { get; set; }
 
+    [Obsolete]
     public BoxAdaptiveMethodSettings(int taskLimit, double overlaping) : this()
     {
-      AddRadiusFactor = 0.7;
-      CellSizePercent = 0.7;
       TaskLimit = taskLimit;
       Overlaping = overlaping;
     }
@@ -33,7 +32,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       AddRadiusFactor = 0.7;
       CellSizePercent = 0.7;
       Overlaping = 0.2;
-      TaskLimit = 200;
+      TaskLimit = 500;
     }
 
     public string PresentableName

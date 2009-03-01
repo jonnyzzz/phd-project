@@ -38,5 +38,13 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       ExitCondition = JVRExitCondition.MaxNodeError;
       EPS = 1e-3;
     }
+
+
+    public string Present
+    {
+      get {
+        return string.Format("JVR[Exit={0},Eps={1},self={2},Init={3}", ExitCondition, EPS, IncludeSelfEdge,
+                             InitialWeight.Name); }
+    }
   }
 }

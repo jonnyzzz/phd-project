@@ -15,7 +15,7 @@ namespace DSIS.Scheme.Impl.Actions
                                                AddRadiusFactor = 0.7,
                                                CellSizePercent = 0.7,
                                                Overlaping = 0.2,
-                                               TaskLimit = 200
+                                               TaskLimit = 500
                                              });
     }
   }

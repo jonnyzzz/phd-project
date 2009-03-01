@@ -11,7 +11,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
   [Serializable]
   public class BoxMethodSettings : ICellImageBuilderIntegerCoordinatesSettings
   {
-    public static readonly BoxMethodSettings Default = new BoxMethodSettings(0.1);
+    public static readonly BoxMethodSettings Default = new BoxMethodSettings{Eps = 0.1};
 
     [Used]
     public BoxMethodSettings()
@@ -19,6 +19,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
       Eps = 0.1;
     }
 
+    [Obsolete("Use type initializer")]
     public BoxMethodSettings(double eps)
     {
       Eps = eps;
@@ -30,8 +31,7 @@ namespace DSIS.CellImageBuilder.BoxMethod
     /// </summary>
     [IncludeGenerate(
       Title = "Epsilon", 
-      Description = @"Relative epsilone to be added as border to the build rectangle. Eps = 1 means 1 cell size on the corresponding coordinate"),
-      DefaultValue(0.1)
+      Description = @"Relative epsilone to be added as border to the build rectangle. Eps = 1 means 1 cell size on the corresponding coordinate")
     ]
     public double Eps { get; set;}
 

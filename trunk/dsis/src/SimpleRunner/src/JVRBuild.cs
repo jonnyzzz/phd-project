@@ -17,7 +17,7 @@ namespace DSIS.SimpleRunner
 {
   public class JVRBuild : SIBuild
   {
-    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, bool isLast)
+    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, ComputationData sys, bool isLast)
     {
       if (isLast)
       {
@@ -25,7 +25,7 @@ namespace DSIS.SimpleRunner
         BuildJVRCall(siConstructionAction, system, 1e-4);
         BuildJVRCall(siConstructionAction, system, 1e-5);
       }
-      return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, isLast);
+      return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, sys, isLast);
     }
 
     protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()

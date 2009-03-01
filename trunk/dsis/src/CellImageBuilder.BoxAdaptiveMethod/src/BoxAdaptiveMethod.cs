@@ -47,7 +47,7 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       base.Bind(context);
       myRadiusProcessor = mySystem.ProcessorFactory.CreateRadiusProcessor();
 
-      myFunction = context.Function.GetFunction<double>(mySystem.CellSize);
+      myFunction = context.Function.GetFunction(mySystem.CellSize);
 
       var settings = (BoxAdaptiveMethodSettings) context.Settings;
 
@@ -121,11 +121,6 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       return new BoxAdaptiveMethod<Q>();
     }
 
-    public string PresentableName
-    {
-      get { return "Box Adaptive Method"; }
-    }
-
     private void Evaluate(Point pt, double[] output)
     {
       pt.Evaluate(xleft, xright, x);      
@@ -141,6 +136,8 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 
     private void ProcessPoint(Pair<Point, Point> task)
     {
+      myProcessed++;
+
       Point p1 = task.First;
       Point p2 = task.Second;
 
@@ -151,6 +148,10 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       for (int i = 0; i < myDim; i++)
       {
         double t = Math.Abs(myD1[i] - myD2[i]);
+        
+        if (double.IsNaN(t))
+          return;
+
         myLen[i] = t * myAddRadiusFactor;
         bool b = t <= eps[i];
         result &= b;
@@ -170,8 +171,6 @@ namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
       }
       if (result)
       {
-        myProcessed += 2;
-
         AppendPoint(myD1);
         AppendPoint(myD2);
       }

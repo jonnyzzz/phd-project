@@ -38,7 +38,7 @@ namespace DSIS.Function.Solvers
         return GetDoubleFunctionOne(precision);
 
       var myFuncs = new List<IFunction<double>>();
-      foreach(int _ in mySteps.Each())
+      for(int i = 0; i< mySteps; i++)
       {
         myFuncs.Add(GetDoubleFunctionOne(precision));
       }

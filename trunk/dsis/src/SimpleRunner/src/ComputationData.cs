@@ -1,14 +1,10 @@
 using System;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
-using DSIS.Core.System.Impl;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.SimpleRunner
 {
-  public struct ComputationData : IEquatable<ComputationData>
+  public class ComputationData : IEquatable<ComputationData>
   {
     public SystemInfoAction system { get; set; }
     public int repeat { get; set; }

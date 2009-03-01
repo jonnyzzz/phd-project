@@ -172,7 +172,7 @@ namespace DSIS.SimpleRunner
     {
       var info = new ChuaSystemInfo2(new ChuaOptions2{A = 18, B = 33, M0 = -0.2, M1 = 0.01});
       var space = new DefaultSystemSpace(3, new[]{-12, -2.5, -20}, new[]{12, 2.5, 20}, 2L.Fill(3));
-      return new SystemInfoAction(new RungeKuttSolver(info, 50, 0.001), space);
+      return new SystemInfoAction(new RungeKuttSolver(info, 100, 0.0005), space);
     }
 
     public static SystemInfoAction AlphaX(double d)
