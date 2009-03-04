@@ -4,6 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
+  [Used("si.xml")]
   public class SIMethodPrefixWorkingFolderAction : PrefixWorkingFolderAction
   {
     public override ICollection<ContextMissmatch> Compatible(Context ctx)

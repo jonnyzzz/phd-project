@@ -21,7 +21,8 @@ namespace DSIS.SimpleRunner
   {
     public static void Main(string[] args)
     {
-      new ThesisSIBuild().Action();
+      new ThesisEntropyBuild().Action();
+//      new ThesisSIBuild().Action();
 //      new SIBuild().Action();
 //      new JVRDetMorseBuild().Action();
 //      new JVRBuild().Action();

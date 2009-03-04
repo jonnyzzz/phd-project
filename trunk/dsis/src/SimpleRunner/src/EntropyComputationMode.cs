@@ -4,7 +4,9 @@ namespace DSIS.SimpleRunner
   {
     Eigen,
     JVR,
-    SmartLoops,
-    Loops
+    SmartLoopsConst,
+    LoopsConst,
+    SmartLoopsLinear,
+    SmartLoopsSquare
   }
 }

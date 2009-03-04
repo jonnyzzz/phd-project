@@ -13,8 +13,13 @@ namespace DSIS.Scheme.Impl.Actions.Files
     protected override void Apply(Context ctx, Context result)
     {
       WorkingFolderInfo folder = FileKeys.WorkingFolderKey.Get(ctx);
-      Logger logger = new Logger(folder);
+      
+      //Console or other file logger
+      var baseLogger = Logger.Instance(ctx);
+      
+      Logger logger = new AndLogger(baseLogger, new FileLogger(folder));
       FileKeys.LoggerKey.Set(result, logger);
     }
   }
+  
 }

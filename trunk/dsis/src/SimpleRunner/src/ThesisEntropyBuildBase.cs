@@ -5,10 +5,10 @@ using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Scheme;
+using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl;
-using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.Scheme.Impl.Actions.Performance;
@@ -17,7 +17,7 @@ using DSIS.Utils;
 namespace DSIS.SimpleRunner
 {
   public abstract class ThesisEntropyBuildBase<T> : SIBuild<T>
-    where T : EntropyComputationData
+    where T : EntropyComputationData, IClonable<T>
   {
     protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, T sys, bool isLast)
     {
@@ -26,7 +26,7 @@ namespace DSIS.SimpleRunner
         foreach (var mode in sys.EntropyMode)
         {
           Func<Pair<IAction, string>> func = GetEntropeMode(mode);
-          BuildJVRCall(siConstructionAction, system, func);          
+          BuildJVRCall(siConstructionAction, system, func, workingFolder, logger);          
         }
       }
       return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, sys, isLast);
@@ -44,18 +44,17 @@ namespace DSIS.SimpleRunner
                    };
         case EntropyComputationMode.JVR:
           return () => CreateMeasureAction(1e-5);
-        case EntropyComputationMode.SmartLoops:
-          return () =>
-                   {
-                     var opts = new StrangeEntropyEvaluatorParams
-                                  {
-                                    EntropyType = StrangeEvaluatorType.WeightSearch_1,
-                                    LoopWeight = EntropyLoopWeights.CONST,
-                                    Strategy = StrangeEvaluatorStrategy.SMART
-                                  };
-                     return Pair.Of<IAction, string>(new StrangeEntropyAction(), opts.Present);
-                   };
-        case EntropyComputationMode.Loops:
+
+        case EntropyComputationMode.SmartLoopsConst:
+          return () => CreateStrangeEntropySmart(EntropyLoopWeights.CONST);
+
+        case EntropyComputationMode.SmartLoopsLinear:
+          return () => CreateStrangeEntropySmart(EntropyLoopWeights.ONE);
+
+        case EntropyComputationMode.SmartLoopsSquare:
+          return () => CreateStrangeEntropySmart(EntropyLoopWeights.TWO);
+
+        case EntropyComputationMode.LoopsConst:
           return () =>
                    {
                      var opts = new StrangeEntropyEvaluatorParams
@@ -64,23 +63,47 @@ namespace DSIS.SimpleRunner
                                     LoopWeight = EntropyLoopWeights.CONST,
                                     Strategy = StrangeEvaluatorStrategy.FIRST
                                   };
-                     return Pair.Of<IAction, string>(new StrangeEntropyAction(), opts.Present);
+                     return Pair.Of<IAction, string>(new ParametrizedStrangeEntropyAction(opts), opts.Present);
                    };
         default:
           throw new NotImplementedException("Entropy mode " + mode + " is not supported");
       }
     }
 
-    private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, Func<Pair<IAction,string>> factory)
+    private static Pair<IAction, string> CreateStrangeEntropySmart(IEntropyLoopWeightCallback @const)
+    {
+      var opts = new StrangeEntropyEvaluatorParams
+                   {
+                     EntropyType = StrangeEvaluatorType.WeightSearch_Limited,
+                     LoopWeight = @const,
+                     Strategy = StrangeEvaluatorStrategy.SMART
+                   };
+      return Pair.Of<IAction, string>(new ParametrizedStrangeEntropyAction(opts), opts.Present);
+    }
+
+    private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, Func<Pair<IAction, string>> factory, IAction workingFolder, IAction logger)
     {
       var result = factory();
-      var key = new RecordTimeAction(result.First, "XxX" + result.Second);
-      siConstructionAction
-        .Edge(key)
-        .Edge(new DumpJVR(result.Second, key.Key))
-        .With(x => x.Back(siConstructionAction))
-        .With(x => x.Back(system))
-        .With(x => x.Back(new GCAction()))
+      var bs = siConstructionAction.Edge(new FilterProxyAction(FileKeys.WorkingFolderKey));
+
+      var id = new RecordTimeAction(result.First, "XxX" + result.Second);
+      var key = bs.Edge(id);
+
+      var wf = bs.Back(new SetEntropyMethodWorkingFolderPrefix(result.Second));
+      wf.Back(workingFolder);
+
+      key.Back(system);
+
+      key.Back(new LoggerAction()).Back(wf);
+
+      key.Edge(new DumpJVR(result.Second, id.Key))
+        .Back(new SelectiveCopyAction(Keys.IntegerCoordinateSystemInfo))
+        .Back(siConstructionAction);
+
+      key.Edge(new DrawEntropyMeasureWithBaseAction())
+        .WithBack(wf)
+        .WithBack(system)
+        .Back(new SelectiveCopyAction(Keys.IntegerCoordinateSystemInfo)).Back(siConstructionAction)
         ;
     }
 
@@ -91,11 +114,24 @@ namespace DSIS.SimpleRunner
                      IncludeSelfEdge = false, 
                      InitialWeight = EntropyLoopWeights.CONST, 
                      EPS = eps, 
-                     ExitCondition = JVRExitCondition.SummError
+                     ExitCondition = JVRExitCondition.MaxRelativeNodeError
                    };
-      IAction action = new JVRMeasureAction(opts);
-      var present = opts.Present;
-      return Pair.Of(action, present);
+      return Pair.Of((IAction) new JVRMeasureAction(opts), opts.Present);
+    }
+
+    private class SetEntropyMethodWorkingFolderPrefix : PrefixWorkingFolderAction
+    {
+      private readonly string myEntropyMethodString;
+
+      public SetEntropyMethodWorkingFolderPrefix(string entropyMethodString)
+      {
+        myEntropyMethodString = entropyMethodString;
+      }
+
+      protected override string Prefix(Context ctx)
+      {
+        return myEntropyMethodString;
+      }
     }
 
     private class DumpJVR : IntegerCoordinateSystemActionBase3

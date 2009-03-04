@@ -30,7 +30,7 @@ namespace DSIS.GnuplotDrawer
         {
           foreach (ImagePoint point in new GnuplotPointsFileReader(file.Filename).Read())
           {
-            ImagePoint bs = new ImagePoint(point.Point[0], point.Point[1], 0);
+            var bs = new ImagePoint(point.Point[0], point.Point[1], 0);
             zeroPlane.WritePoint(new ImagePoint(point.Point[0], point.Point[1], 0.00002));
 
             linesWriter.WritePoint(bs);

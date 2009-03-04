@@ -22,7 +22,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     [IncludeGenerate(Title = "Exit condition")]
     public JVRExitCondition ExitCondition { get; set; }
 
-    [IncludeGenerate(Title = "Precision")]
+    [IncludeGenerate(Title = "eps")]
     public double EPS { get; set;}
 
     [IncludeGenerate(Title = "Include 1-node loops")]

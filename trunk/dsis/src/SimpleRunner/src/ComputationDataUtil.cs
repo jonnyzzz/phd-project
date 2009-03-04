@@ -6,7 +6,8 @@ namespace DSIS.SimpleRunner
 {
   public static class ComputationDataUtil
   {
-    public static IEnumerable<ComputationData> ForBuilders(this IEnumerable<ComputationData> data, params ComputationDataBuilder[] bld)
+    public static IEnumerable<T> ForBuilders<T>(this IEnumerable<T> data, params ComputationDataBuilder[] bld)
+      where T : ComputationData, IClonable<T>
     {
       foreach (var computationData in data)
       {
@@ -24,7 +25,8 @@ namespace DSIS.SimpleRunner
       return data.ForBuilders(Enum.GetValues(typeof (ComputationDataBuilder)).Cast<ComputationDataBuilder>().ToArray());
     }
 
-    public static IEnumerable<ComputationData> ForSteps(this IEnumerable<ComputationData> data, params int[] steps)
+    public static IEnumerable<T> ForSteps<T>(this IEnumerable<T> data, params int[] steps)
+      where T : ComputationData, IClonable<T>
     {
       foreach (var computationData in data)
       {

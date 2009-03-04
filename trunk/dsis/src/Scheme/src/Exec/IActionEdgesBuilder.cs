@@ -18,4 +18,25 @@ namespace DSIS.Scheme.Exec
 
     IActionEdgesBuilder With(DAction<IActionEdgesBuilder> closure);    
   }
+
+  public static class ActionEdgesBuilderExt
+  {
+    public static IActionEdgesBuilder WithBack(this IActionEdgesBuilder bld, params IActionEdgesBuilder[] data)
+    {
+      foreach (var b in data)
+      {
+        bld.Back(b);
+      }
+      return bld;
+    }
+
+    public static IActionEdgesBuilder WithBack(this IActionEdgesBuilder bld, params IAction[] data)
+    {
+      foreach (var b in data)
+      {
+        bld.Back(b);
+      }
+      return bld;
+    }
+  }
 }

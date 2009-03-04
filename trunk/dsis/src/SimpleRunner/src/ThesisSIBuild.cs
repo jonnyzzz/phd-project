@@ -17,7 +17,8 @@ namespace DSIS.SimpleRunner
 //      yield return chua2.ForBuilders(ComputationDataBuilder.Point).ForSteps(8, 10, 12, 14, 16, 18);
 //      yield return chua2.ForBuilders(ComputationDataBuilder.Box).ForSteps(12, 14, 16, 18);
 //      yield return chua2.ForBuilders(ComputationDataBuilder.Adaptive).ForSteps(8, 10);
-      yield return new ComputationData{system = SystemInfoFactory.LorentzRunge()}.Enum().ForSteps(6, 8, 10, 12, 14).ForAllBuilders();
+//      yield return new ComputationData{system = SystemInfoFactory.LorentzRunge()}.Enum().ForSteps(6, 8, 10, 12, 14).ForAllBuilders();
+      yield return new ComputationData{system = SystemInfoFactory.LorentzRunge()}.Enum().ForSteps(4).ForBuilders(ComputationDataBuilder.Box);
     }
   }
 }

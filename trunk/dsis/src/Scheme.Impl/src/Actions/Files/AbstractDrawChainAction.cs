@@ -35,6 +35,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       const int COMPONENTS_TO_SHOW = 15;
       var bigerComps = new HashSet<IStrongComponentInfo>(componentIds.Take(COMPONENTS_TO_SHOW));
+      var sys = ((IIntegerCoordinateSystem<Q>)comps.CoordinateSystem);
 
       foreach (INode<Q> node in comps.GetNodes(componentIds))
       {
@@ -62,12 +63,12 @@ namespace DSIS.Scheme.Impl.Actions.Files
           }
           fw = otherFilesWriter;
         }
-
-        ((IIntegerCoordinateSystem<Q>)comps.CoordinateSystem).CenterPoint(node.Coordinate, data);
+        
+        sys.CenterPoint(node.Coordinate, data);
         fw.WritePoint(new ImagePoint(data));
       }
 
-      IGnuplotPhaseScriptGen gen = GnuplotSriptGen.ScriptGen(
+      var gen = GnuplotSriptGen.ScriptGen(
         Dimension,
         folderInfo.CreateFileName("chain-recurrent-picture-script.gnuplot"),
         CreateOutputParameters(input, outputFile));
@@ -77,7 +78,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       {
         values = values.Join(otherFilesWriter);
       }
-      foreach (GnuplotPointsFileWriter file in values)
+      foreach (var file in values)
       {
         file.Dispose();
         gen.AddPointsFile(file);

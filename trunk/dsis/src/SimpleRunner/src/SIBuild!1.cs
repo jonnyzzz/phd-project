@@ -16,17 +16,16 @@ using DSIS.Utils;
 namespace DSIS.SimpleRunner
 {
   public abstract class SIBuild<T> 
-    where T : ComputationData
+    where T : ComputationData, IClonable<T>
   {
     public void Action()
     {
       BuildContiniousSystems();
     }
 
-    protected static List<ComputationData> ForBuildser(IEnumerable<ComputationData> data,
-                                                       params ComputationDataBuilder[] bld)
+    protected static List<T> ForBuildser(IEnumerable<T> data, params ComputationDataBuilder[] bld)
     {
-      var d = new List<ComputationData>();
+      var d = new List<T>();
       foreach (var computationData in data)
       {
         foreach (var b in bld)

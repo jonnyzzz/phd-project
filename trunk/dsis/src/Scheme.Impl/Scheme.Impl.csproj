@@ -126,6 +126,8 @@
     <Compile Include="src\Actions\Entropy\StrangeEntropyActionFactory.cs" />
     <Compile Include="src\Actions\Entropy\WriteSequenceSlotAction.cs" />
     <Compile Include="src\Actions\Files\AbstractDrawChainAction.cs" />
+    <Compile Include="src\Actions\Files\AndLogger.cs" />
+    <Compile Include="src\Actions\Files\ConsoleLogger.cs" />
     <Compile Include="src\Actions\Files\CustomPrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\DateWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\DrawChainRecurrentAction.cs" />
@@ -142,6 +144,7 @@
     <Compile Include="src\Actions\Files\DrawLineAction.cs" />
     <Compile Include="src\Actions\Files\DumpEntropyLogAction.cs" />
     <Compile Include="src\Actions\Files\FileKeys.cs" />
+    <Compile Include="src\Actions\Files\FileLogger.cs" />
     <Compile Include="src\Actions\Files\FlatWorkingFolder.cs" />
     <Compile Include="src\Actions\Files\GraphEntropyLogAction.cs" />
     <Compile Include="src\Actions\Files\IIocDrawHelper.cs" />

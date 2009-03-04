@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace DSIS.GnuplotDrawer
 {
   public class PngWriterBase : GnuplotFileWriterBase
@@ -12,8 +14,8 @@ namespace DSIS.GnuplotDrawer
         myWriter.WriteLine("set title \"{0}\"; ", myParams.Title);
 
       myWriter.WriteLine("set terminal png size {0},{1}; ", myParams.Width, myParams.Height);
-      
-      myWriter.WriteLine("set output '{0}';", myParams.OutputFile);
+
+      SetOutput("");
 
       if (myParams.ShowKeyHistory)
         myWriter.WriteLine("set key below; ");
@@ -21,7 +23,15 @@ namespace DSIS.GnuplotDrawer
         myWriter.WriteLine("set key off;");
     }
 
-    public void Finish()
+    protected void SetOutput(string suffix)
+    {
+      string file = myParams.OutputFile;
+      var name = Path.GetFileNameWithoutExtension(file) + suffix + ".png";
+      var dest = Path.Combine(Path.GetDirectoryName(file), name);
+      myWriter.WriteLine("set output '{0}';", dest);
+    }
+
+    public virtual void Finish()
     {
       Dispose();
     }

@@ -10,10 +10,17 @@ namespace DSIS.SimpleRunner
       yield return new EntropyComputationData
                      {
                        system = SystemInfoFactory.Henon1_4(),
-                       EntropyMode = new[] {EntropyComputationMode.JVR, EntropyComputationMode.SmartLoops},
-                       repeat = 10,
+                       EntropyMode = new[]
+                                       {
+                                         EntropyComputationMode.JVR, 
+                                         EntropyComputationMode.SmartLoopsConst, 
+                                         EntropyComputationMode.SmartLoopsLinear, 
+                                         EntropyComputationMode.SmartLoopsSquare, 
+                                         EntropyComputationMode.Eigen,
+                                       },
+                       repeat = 4,
                        builder = ComputationDataBuilder.Point
-                     }.Enum();
+                     }.Enum().ForSteps(4, 6, 8, 10);
     }
   }
 }

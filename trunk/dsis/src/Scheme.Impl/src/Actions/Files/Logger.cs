@@ -1,34 +1,10 @@
-using System.IO;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public class Logger
+  public abstract class Logger 
   {
-    private readonly string myWriter;
-    private static readonly Logger NULL_LOGGER = new Logger(null);
-
-    public Logger(WorkingFolderInfo info)
-    {
-      if (info != null)
-      {
-        myWriter = info.CreateFileName("log.txt");
-        Write("Logger is set to {0}", myWriter);
-      }
-      else
-      {
-        myWriter = null;
-      }
-    }
-
-    public void Write(string text)
-    {
-      if (myWriter != null)
-      {
-        File.AppendAllText(myWriter, text +"\r\n");
-      }
-      System.Console.Out.WriteLine(text);
-    }
+    public abstract void Write(string text);
 
     public void Write(string fmt, params object[] data)
     {
@@ -41,10 +17,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       {
         return FileKeys.LoggerKey.Get(ctx);
       }
-      else
-      {
-        return NULL_LOGGER;
-      }
+      return new ConsoleLogger();
     }
   }
 }
