@@ -26,8 +26,8 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public override string ToString()
     {
-      StringBuilder sb = new StringBuilder();
-      foreach (long l in myCoordinate)
+      var sb = new StringBuilder();
+      foreach (var l in myCoordinate)
       {
         sb.AppendFormat("{0}, ", l);
       }

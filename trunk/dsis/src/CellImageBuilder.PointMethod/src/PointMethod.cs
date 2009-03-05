@@ -4,6 +4,7 @@ using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.Core.System;
 using DSIS.IntegerCoordinates;
+using DSIS.Utils;
 
 namespace DSIS.CellImageBuilder.PointMethod
 {
@@ -60,14 +61,7 @@ namespace DSIS.CellImageBuilder.PointMethod
         ? mySystem.ProcessorFactory.CreateOverlapedPointProcessor(set.Overlap) 
         : mySystem.ProcessorFactory.CreatePointProcessor();
 
-      var dStep = new double[myDim];
-      for (int i = 0; i < myDim; i++)
-      {
-        //1.0e-5 to make sure right point is <= right part
-        dStep[i] = mySystem.CellSize[i]/(set.Points - 1.0); //last point is right side
-      }
-
-      myIterator = new DoubleLBoxIterator(dStep);
+      myIterator = new DoubleLBoxIterator(mySystem.CellSize, set.Points.Fill(mySystem.Dimension));
     }
 
     public ICellImageBuilder<Q> Clone()

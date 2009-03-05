@@ -6,6 +6,5 @@ namespace DSIS.CellImageBuilder.Tests
   [TestFixture]
   public class PointMethodTest : PointMethodTestBase<IntegerCoordinateSystem, IntegerCoordinate>
   {
-
   }
 }

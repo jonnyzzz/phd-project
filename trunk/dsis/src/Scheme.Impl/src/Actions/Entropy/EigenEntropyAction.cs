@@ -26,6 +26,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
+      //TODO: Max (entropy(component))
       var graph = Keys.GetGraphComponents<Q>().Get(input);
       var evaluator = new EigenEntropyEvaluatorImpl<Q>(myOptions.Eps, graph.AsGraph(graph.Components));
 

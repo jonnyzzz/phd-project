@@ -61,6 +61,7 @@
     <Compile Include="src\Generator\SegmentIteratorGenerator.cs" />
     <Compile Include="src\Generator\ShennonFenoCodec.cs" />
     <Compile Include="src\IBoxIterator.cs" />
+    <Compile Include="src\ISegmentBoxIterator.cs" />
     <Compile Include="src\LongLBoxIterator.cs" />
     <Compile Include="src\SegmentBoxIterator.cs" />
   </ItemGroup>
@@ -74,7 +75,7 @@
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="../Before.Build.Targets"/>
+  <Import Project="../Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="../After.Build.Targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

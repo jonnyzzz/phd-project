@@ -11,8 +11,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
 
     public sealed class VisitedCollection : VisitedCollectionBase<T>
     {
-      private readonly int myLimit = 100;
-      private int myCount = 0;
+      private const int LIMIT = 1000;
+      private int myCount;
 
       public override SearchTreeNode<T> CreateQueuedNodeIfNoLoop(SearchTreeNode<T> parent, INode<T> to)
       {
@@ -21,7 +21,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
 
       public override bool Contains(SearchTreeNode<T> node)
       {
-        return myCount > myLimit || base.Contains(node);
+        return myCount > LIMIT || base.Contains(node);
       }
 
       public override void Visited(SearchTreeNode<T> node)

@@ -94,9 +94,10 @@ namespace DSIS.SimpleRunner
 
       key.Back(system);
 
-      key.Back(new LoggerAction()).Back(wf);
+      var loggerEx = key.Back(new LoggerAction()).WithBack(wf);
 
       key.Edge(new DumpJVR(result.Second, id.Key))
+        .WithBack(loggerEx)
         .Back(new SelectiveCopyAction(Keys.IntegerCoordinateSystemInfo))
         .Back(siConstructionAction);
 

@@ -20,7 +20,7 @@ namespace DSIS.SimpleRunner
                                        },
                        repeat = 4,
                        builder = ComputationDataBuilder.Point
-                     }.Enum().ForSteps(4, 6, 8, 10);
+                     }.Enum().ForSteps(4, 6, 8, 10).ForBuilders(ComputationDataBuilder.Point, ComputationDataBuilder.PointEx, ComputationDataBuilder.Box);
     }
   }
 }
