@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.SimpleRunner
 {
@@ -18,7 +19,25 @@ namespace DSIS.SimpleRunner
 //      yield return chua2.ForBuilders(ComputationDataBuilder.Box).ForSteps(12, 14, 16, 18);
 //      yield return chua2.ForBuilders(ComputationDataBuilder.Adaptive).ForSteps(8, 10);
 //      yield return new ComputationData{system = SystemInfoFactory.LorentzRunge()}.Enum().ForSteps(6, 8, 10, 12, 14).ForAllBuilders();
-      yield return new ComputationData{system = SystemInfoFactory.LorentzRunge()}.Enum().ForSteps(4).ForBuilders(ComputationDataBuilder.Box);
+//      yield return new ComputationData{system = SystemInfoFactory.LorentzRunge()}.Enum().ForSteps(4).ForBuilders(ComputationDataBuilder.Box);
+
+      yield return new /*Entropy*/ComputationData
+      {
+        system = SystemInfoFactory.Henon1_4(),
+/*
+        EntropyMode = new[]
+                                       {
+                                         EntropyComputationMode.JVR, 
+                                         EntropyComputationMode.SmartLoopsConst, 
+                                         EntropyComputationMode.SmartLoopsLinear, 
+                                         EntropyComputationMode.SmartLoopsSquare, 
+                                         EntropyComputationMode.Eigen,
+                                       },
+*/
+        repeat = 4,
+        builder = ComputationDataBuilder.Point
+      }.Enum().ForSteps(8).OfType<ComputationData>();
+
     }
   }
 }

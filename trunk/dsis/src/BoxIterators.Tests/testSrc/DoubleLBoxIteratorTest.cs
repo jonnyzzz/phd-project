@@ -9,9 +9,9 @@ namespace DSIS.BoxIterators
     [Test]
     public void Test_01()
     {
-      DoubleLBoxIterator it = new DoubleLBoxIterator(new double[] {1});
+      var it = new DoubleLBoxIterator(new double[] {1});
       IEnumerable<double[]> itt = it.EnumerateSteps(new double[]{0}, new double[]{1}, new double[1]);
-      List<double> l = new List<double>();
+      var l = new List<double>();
       foreach (double[] doubles in itt)
       {
         l.Add(doubles[0]);
@@ -21,13 +21,30 @@ namespace DSIS.BoxIterators
       Assert.IsTrue(l.Contains(0));
       Assert.IsTrue(l.Contains(1));
     }
+
+    [Test]
+    public void Test_03()
+    {
+/*
+      int n = 3;
+      var it = new DoubleLBoxIterator(new[] {1.0/(n-1)});
+      IEnumerable<double[]> itt = it.EnumerateSteps(new double[]{0}, new double[]{1}, new double[1]);
+      var l = new List<double>();
+      foreach (double[] doubles in itt)
+      {
+        l.Add(doubles[0]);
+      }
+
+      Assert.AreEqual(n, l.Count);
+*/      
+    }
     
     [Test]
     public void Test_02()
     {
-      DoubleLBoxIterator it = new DoubleLBoxIterator(new double[] {1,1});
+      var it = new DoubleLBoxIterator(new double[] {1,1});
       IEnumerable<double[]> itt = it.EnumerateSteps(new double[]{0,5}, new double[]{2,7}, new double[2]);
-      List<double> l = new List<double>();
+      var l = new List<double>();
       foreach (double[] doubles in itt)
       {
         l.Add(doubles[0] + doubles[1]*10);

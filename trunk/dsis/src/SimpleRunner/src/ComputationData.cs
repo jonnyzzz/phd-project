@@ -4,25 +4,26 @@ using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.SimpleRunner
 {
-  public interface IClonable<T>
-  {
-    T Clone();
-  }
-
-  public class ComputationData : IEquatable<ComputationData>, IClonable<ComputationData>
+  public class ComputationData : IEquatable<ComputationData>, ICloneable<ComputationData>
   {
     public SystemInfoAction system { get; set; }
     public int repeat { get; set; }
     public ComputationDataBuilder builder { get; set; }
 
-    ComputationData IClonable<ComputationData>.Clone()
+    public ComputationData()
     {
-      return new ComputationData
-               {
-                 system = system,
-                 repeat = repeat,
-                 builder = builder
-               };
+    }
+
+    protected ComputationData(ComputationData data)
+    {
+      system = data.system;
+      repeat = data.repeat;
+      builder = data.builder;
+    }
+
+    ComputationData ICloneable<ComputationData>.Clone()
+    {
+      return new ComputationData(this);
     }
 
     public bool Equals(ComputationData obj)

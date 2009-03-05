@@ -50,7 +50,7 @@ namespace DSIS.CellImageBuilder.PointMethod
       myDLeft = new double[myDim];
       myDRight = new double[myDim];
 
-      myFunction = context.Function.GetFunction<double>(mySystem.CellSize);
+      myFunction = context.Function.GetFunction(mySystem.CellSize);
       myFunction.Input = myDX;
       myFunction.Output = myDY;
 
@@ -63,6 +63,7 @@ namespace DSIS.CellImageBuilder.PointMethod
       var dStep = new double[myDim];
       for (int i = 0; i < myDim; i++)
       {
+        //1.0e-5 to make sure right point is <= right part
         dStep[i] = mySystem.CellSize[i]/(set.Points - 1.0); //last point is right side
       }
 
@@ -72,12 +73,6 @@ namespace DSIS.CellImageBuilder.PointMethod
     public ICellImageBuilder<Q> Clone()
     {
       return new PointMethod<Q>();
-    }
-
-    public string PresentableName
-    {
-      //TODO! Describe!
-      get { return "PointMethod"; }
     }
   }
 }

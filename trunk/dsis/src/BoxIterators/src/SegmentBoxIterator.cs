@@ -17,25 +17,26 @@ namespace DSIS.BoxIterators
       int dim = left.Length;
       for (int i = 0; i < dim; i++)
         outs[i] = left[i];
+      
+      yield return outs;
 
-      bool isWorking = true;
-      while (isWorking)
+      while (true)
       {
-        yield return outs;
-
         Inc(0, ref outs[0]);
 
         for (int i = 0; i < dim; i++)
         {
-          if (!IsLower(i, outs[i], right[i]))
-          {
-            outs[i] = left[i];
-            if (i + 1 < dim)
-              Inc(i+1, ref outs[i + 1]);
-            else
-              isWorking = false;
-          }          
+          if (IsLower(i, outs[i], right[i]))
+            continue;
+
+          outs[i] = left[i];
+          if (i + 1 < dim)
+            Inc(i + 1, ref outs[i + 1]);
+          else
+            yield break;
         }
+
+        yield return outs;
       }
     }
   }

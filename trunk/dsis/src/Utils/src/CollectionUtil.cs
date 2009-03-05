@@ -243,7 +243,7 @@ namespace DSIS.Utils
       }
     }
 
-    public static IEnumerable<R> Merge<T,Q,R>(IEnumerable<T> ts, IEnumerable<Q> qs, Merge<T,Q,R> zip)
+    public static IEnumerable<R> Merge<T,Q,R>(IEnumerable<T> ts, IEnumerable<Q> qs, Func<T,Q,R> zip)
     {
       var te = ts.GetEnumerator();
       var qe = qs.GetEnumerator();

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using DSIS.IntegerCoordinates.Impl;
@@ -37,19 +38,55 @@ namespace DSIS.IntegerCoordinates.Tests
       return sb.ToString();
     }
 
-    public static void Assert<Q>(IIntegerCoordinateSystem<Q> ics, IList<Q> list, string assert)
+    private static string FixTestGold(string s)
+    {
+      return
+        s.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+          .Select(x => x.Trim())
+          .Where(x => x.Length > 0)
+          .JoinString(Environment.NewLine) + Environment.NewLine;
+    }
+
+    private static IEnumerable<string> SetLineLen(string s, string sep)
+    {
+      var baseSep = "   ";
+
+      var lines = s.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+      var max = lines.FoldLeft(baseSep.Length, (x, v) => Math.Max(x.Length, v));
+      return lines.Select(x => x + new string(' ', max - x.Length) + sep + baseSep);
+    }
+
+    private static string TwoCol(string s1, string s2)
+    {
+      var lines1 = SetLineLen(s1, " | ");
+      var lines2 = SetLineLen(s2, "");
+
+      return CollectionUtil.Merge(lines1, lines2, (x1, x2) => x1 + x2).JoinString(Environment.NewLine);
+    }
+
+    public static void Assert<Q>(IIntegerCoordinateSystem<Q> ics, IList<Q> list, string expected)
       where Q : IIntegerCoordinate
     {
-      string s = Write(ics, list);
+      expected = FixTestGold(expected);
+
+      string actual = Write(ics, list);
       try
       {
-        NUnit.Framework.Assert.AreEqual(assert, s);
+        NUnit.Framework.Assert.AreEqual(expected, actual);
       }
       catch
       {
-        Console.Out.WriteLine(s);
+        Console.Out.WriteLine("TwoCol(s, assert) = {1}{0}",
+                              TwoCol(
+                                "Actual: " + Environment.NewLine + actual,
+                                "Expected: " + Environment.NewLine + expected), 
+                                Environment.NewLine);
+
+        Console.Out.WriteLine("-----");
+        Console.Out.WriteLine(actual);
         Console.Out.WriteLine("but expected was: ");
-        Console.Out.WriteLine(assert);
+        Console.Out.WriteLine(expected);
+
         throw;
       }
     }

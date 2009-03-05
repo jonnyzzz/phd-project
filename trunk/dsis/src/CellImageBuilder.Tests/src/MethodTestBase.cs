@@ -25,13 +25,12 @@ namespace DSIS.CellImageBuilder.Shared
       ComputeFunction<double> compute,
       TP p)
     {
-      MockSystemInfo<double> func = new MockSystemInfo<double>(compute, sys.SystemSpace);
+      var func = new MockSystemInfo<double>(compute, sys.SystemSpace);
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(sys.SystemSpace);
 
-      MockCollectingCellConnectionBuilder<Q> man =
-        new MockCollectingCellConnectionBuilder<Q>();
+      var man = new MockCollectingCellConnectionBuilder<Q>();
 
-      CellImageBuilderContext<Q> ctx =
+      var ctx =
         new CellImageBuilderContext<Q>(
           func,
           p,
@@ -39,7 +38,7 @@ namespace DSIS.CellImageBuilder.Shared
           man
           );
 
-      TM method = new TM();
+      var method = new TM();
       method.Bind(ctx);
 
       method.BuildImage(test);
@@ -52,7 +51,7 @@ namespace DSIS.CellImageBuilder.Shared
       Q test,
       ComputeFunction<double> f, TP settins, string gold)
     {
-      List<Q> data = DoTest(ics, test, f, settins);
+      var data = DoTest(ics, test, f, settins);
       TwoDimCoordinateAssert.Assert(ics, data, gold);
     }
 
@@ -63,7 +62,7 @@ namespace DSIS.CellImageBuilder.Shared
       return DoTest(
         ics,
         ics.FromPoint(
-          new double[] {coord}),
+          new[] {coord}),
         delegate(double[] ins, double[] outs) { outs[0] = func(ins[0]); }, eps);
     }
 
@@ -71,17 +70,15 @@ namespace DSIS.CellImageBuilder.Shared
       double l, double r, long g, double coord, TP eps,
       ComputeOneFunction<double> func, double fl, double fr)
     {
-      MockSystemSpace ss = new MockSystemSpace(1, l, r, g);
+      var ss = new MockSystemSpace(1, l, r, g);
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(ss);
 
-      List<Q> list = DoTestOneDimension(ics, coord, func, eps);
-      List<long> result =
-        list.ConvertAll<long>(
-          delegate(Q input) { return input.GetCoordinate(0); });
+      var list = DoTestOneDimension(ics, coord, func, eps);
+      var result = list.ConvertAll(input => input.GetCoordinate(0));
       result.Sort();
 
-      Q ifl = ics.FromPoint(new double[] {fl});
-      Q ifr = ics.FromPoint(new double[] {fr});
+      Q ifl = ics.FromPoint(new[] {fl});
+      Q ifr = ics.FromPoint(new[] {fr});
 
       Assert.IsNotNull(ifl);
       Assert.IsNotNull(ifr);

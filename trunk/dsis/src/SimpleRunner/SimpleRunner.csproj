@@ -79,6 +79,7 @@
     <Compile Include="src\DrawEntropyWithSpaceBase.cs" />
     <Compile Include="src\EntropyComputationData.cs" />
     <Compile Include="src\EntropyComputationMode.cs" />
+    <Compile Include="src\ICloneable.cs" />
     <Compile Include="src\JVRBuild.cs" />
     <Compile Include="src\JVRDetMorseBuild.cs" />
     <Compile Include="src\OldProgram.cs" />

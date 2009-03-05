@@ -17,7 +17,7 @@ using DSIS.Utils;
 namespace DSIS.SimpleRunner
 {
   public abstract class ThesisEntropyBuildBase<T> : SIBuild<T>
-    where T : EntropyComputationData, IClonable<T>
+    where T : EntropyComputationData, ICloneable<T>
   {
     protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, T sys, bool isLast)
     {

@@ -10,7 +10,7 @@ namespace DSIS.Scheme.Impl.Actions
     protected override void Apply<T, Q>(Context input, Context output)
     {
       Keys.SubdivisionKey.Set(output, 2L.Fill(Dimension));
-      Keys.CellImageBuilderKey.Set(output, new PointMethodSettings{Points=3});
+      Keys.CellImageBuilderKey.Set(output, new PointMethodSettings{Points=5});
     }
   }
 }

@@ -7,7 +7,7 @@ namespace DSIS.SimpleRunner
   public static class ComputationDataUtil
   {
     public static IEnumerable<T> ForBuilders<T>(this IEnumerable<T> data, params ComputationDataBuilder[] bld)
-      where T : ComputationData, IClonable<T>
+      where T : ComputationData, ICloneable<T>
     {
       foreach (var computationData in data)
       {
@@ -26,7 +26,7 @@ namespace DSIS.SimpleRunner
     }
 
     public static IEnumerable<T> ForSteps<T>(this IEnumerable<T> data, params int[] steps)
-      where T : ComputationData, IClonable<T>
+      where T : ComputationData, ICloneable<T>
     {
       foreach (var computationData in data)
       {

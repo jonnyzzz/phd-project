@@ -16,7 +16,7 @@ using DSIS.Utils;
 namespace DSIS.SimpleRunner
 {
   public abstract class SIBuild<T> 
-    where T : ComputationData, IClonable<T>
+    where T : ComputationData, ICloneable<T>
   {
     public void Action()
     {
