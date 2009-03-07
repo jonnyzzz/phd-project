@@ -1,6 +1,4 @@
 using System;
-using System.Globalization;
-using System.Threading;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
@@ -19,17 +17,19 @@ namespace DSIS.SimpleRunner
   public abstract class ThesisEntropyBuildBase<T> : SIBuild<T>
     where T : EntropyComputationData, ICloneable<T>
   {
-    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, T sys, bool isLast)
+    
+
+
+    protected override IActionEdgesBuilder CreateActionsAfterSI(AfterSIParams<T> afterSIParams)
     {
-      if (isLast)
+      if (afterSIParams.IsLast)
       {
-        foreach (var mode in sys.EntropyMode)
+        foreach (var mode in afterSIParams.ComputationData.EntropyMode)
         {
-          Func<Pair<IAction, string>> func = GetEntropeMode(mode);
-          BuildJVRCall(siConstructionAction, system, func, workingFolder, logger);          
+          BuildJVRCall(afterSIParams, GetEntropeMode(mode));          
         }
       }
-      return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, sys, isLast);
+      return base.CreateActionsAfterSI(afterSIParams);
     }
 
     private static Func<Pair<IAction, string>> GetEntropeMode(EntropyComputationMode mode)
@@ -81,30 +81,30 @@ namespace DSIS.SimpleRunner
       return Pair.Of<IAction, string>(new ParametrizedStrangeEntropyAction(opts), opts.Present);
     }
 
-    private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, Func<Pair<IAction, string>> factory, IAction workingFolder, IAction logger)
+    private static void BuildJVRCall(AfterSIParams<T> afterSIParams, Func<Pair<IAction, string>> factory)
     {
       var result = factory();
-      var bs = siConstructionAction.Edge(new FilterProxyAction(FileKeys.WorkingFolderKey));
+      var bs = afterSIParams.SiConstructionAction.Edge(new FilterProxyAction(FileKeys.WorkingFolderKey));
 
       var id = new RecordTimeAction(result.First, "XxX" + result.Second);
       var key = bs.Edge(id);
 
       var wf = bs.Back(new SetEntropyMethodWorkingFolderPrefix(result.Second));
-      wf.Back(workingFolder);
+      wf.Back(afterSIParams.WorkingFolder);
 
-      key.Back(system);
+      key.Back(afterSIParams.System);
 
       var loggerEx = key.Back(new LoggerAction()).WithBack(wf);
 
       key.Edge(new DumpJVR(result.Second, id.Key))
         .WithBack(loggerEx)
         .Back(new SelectiveCopyAction(Keys.IntegerCoordinateSystemInfo))
-        .Back(siConstructionAction);
+        .Back(afterSIParams.SiConstructionAction);
 
       key.Edge(new DrawEntropyMeasureWithBaseAction())
         .WithBack(wf)
-        .WithBack(system)
-        .Back(new SelectiveCopyAction(Keys.IntegerCoordinateSystemInfo)).Back(siConstructionAction)
+        .WithBack(afterSIParams.System)
+        .Back(new SelectiveCopyAction(Keys.IntegerCoordinateSystemInfo)).Back(afterSIParams.SiConstructionAction)
         ;
     }
 
@@ -146,18 +146,15 @@ namespace DSIS.SimpleRunner
         myTime = time;
       }
 
-      protected override void Apply<T, Q>(Context input, Context output)
+      protected override void Apply<_, Q>(Context input, Context output)
       {
         var log = Logger.Instance(input);
         var ctx = Keys.GraphMeasure<Q>().Get(input);
         var time = myTime.Get(input).TotalMilliseconds;
 
-        Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
-        Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
-
-        log.Write("Construct JVR measure using: " + myOpts);
-        log.Write(string.Format("Construct JVR measure time: {0}ms", time));
-        log.Write(string.Format("Construct JVR measure entropy: {0}", ctx.GetEntropy()));
+        log.Write("Construct measure using: " + myOpts);
+        log.Write(string.Format("Construct {1} measure time: {0}ms", time, myOpts));
+        log.Write(string.Format("Construct {1} measure entropy: {0}", ctx.GetEntropy(), myOpts));
       }
     }
   }

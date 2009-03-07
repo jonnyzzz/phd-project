@@ -17,15 +17,15 @@ namespace DSIS.SimpleRunner
 {
   public class JVRBuild : SIBuild
   {
-    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, ComputationData sys, bool isLast)
+    protected override IActionEdgesBuilder CreateActionsAfterSI(AfterSIParams<ComputationData> afterSIParams)
     {
-      if (isLast)
+      if (afterSIParams.IsLast)
       {
-        BuildJVRCall(siConstructionAction, system, 1e-3);
-        BuildJVRCall(siConstructionAction, system, 1e-4);
-        BuildJVRCall(siConstructionAction, system, 1e-5);
+        BuildJVRCall(afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
+        BuildJVRCall(afterSIParams.SiConstructionAction, afterSIParams.System, 1e-4);
+        BuildJVRCall(afterSIParams.SiConstructionAction, afterSIParams.System, 1e-5);
       }
-      return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, sys, isLast);
+      return base.CreateActionsAfterSI(afterSIParams);
     }
 
     protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()

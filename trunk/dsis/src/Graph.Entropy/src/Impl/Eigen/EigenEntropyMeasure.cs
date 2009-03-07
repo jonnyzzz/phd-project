@@ -49,6 +49,11 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
 
     public IGraphMeasure<T> Project(ICellCoordinateSystemProjector<T> projector)
     {
+      return ProjectInternal(projector);
+    }
+
+    public EigenEntropyMeasure<T> ProjectInternal(ICellCoordinateSystemProjector<T> projector)
+    {
       IGraph<T> graph = myImpl.Graph.Project(projector);
       return new EigenEntropyMeasure<T>(new EigenEntropyEvaluatorImpl<T>(myImpl.Eps, graph));      
     }

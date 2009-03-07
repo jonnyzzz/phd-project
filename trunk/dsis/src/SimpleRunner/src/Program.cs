@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using DSIS.CellImageBuilder.PointMethod;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
@@ -21,6 +23,9 @@ namespace DSIS.SimpleRunner
   {
     public static void Main(string[] args)
     {
+      Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+      Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+
       new ThesisEntropyBuild().Action();
 //      new ThesisSIBuild().Action();
 //      new SIBuild().Action();

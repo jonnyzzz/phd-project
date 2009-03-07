@@ -27,7 +27,7 @@ namespace DSIS.CellImageBuilder.PointMethod
     private IEnumerable<Q> BuildImageInternal(Q coord)
     {
       mySystem.TopLeftPoint(coord, myDLeft);
-      for (int i = 0; i < myDLeft.Length; i++)
+      for (int i = 0; i < myDim; i++)
         myDRight[i] = myDLeft[i] + mySystem.CellSize[i];
 
       using (var it = myIterator.EnumerateSteps(myDLeft, myDRight, myDX).GetEnumerator())

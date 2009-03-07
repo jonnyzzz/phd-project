@@ -130,7 +130,7 @@ namespace DSIS.SimpleRunner
       var logger = new LoggerAction();
 
       var id = new SetIterationSteps(new IterationSteps(sys.repeat));
-      bld.Start.Edge(workingFolder).Edge(logger).Back(new DumpComputationDataAction(sys));
+      bld.Start.Edge(workingFolder).Edge(logger).WithBack(new DumpComputationDataAction(sys)).Back(new DumpMethodAction()).Back(image);
       bld.Start.Edge(sys.system).Edge(init).Edge(image);
       bld.Start.Edge(sys.system).Edge(workingFolder).With(x => x.Back(id));
 
@@ -164,14 +164,10 @@ namespace DSIS.SimpleRunner
       {
         var tmp = next;
         next = CreateActionsAfterSI(
-          next
-            .Edge(buildSI.Clone())
-            .With(x => innerContext.Join(system).ForEach(y => x.Back(y)))
-            .With(x => x.Back(new MergeComponetsAction()).Back(tmp)),
-          system,
-          workingFolder,
-          logger, sys,
-          i + 1 == count)
+          new AfterSIParams<T>(next
+                              .Edge(buildSI.Clone())
+                              .With(x => innerContext.Join(system).ForEach(y => x.Back(y)))
+                              .With(x => x.Back(new MergeComponetsAction()).Back(tmp)), system, workingFolder, logger, sys, i + 1 == count))
           .With(x => innerContext.ForEach(y => x.Back(y)))
           .With(x => x.Edge(new DumpGraphInfoAction()).Back(logger))
           .With(x => x.Edge(new DumpGraphComponentsInfoAction()).Back(logger))
@@ -182,14 +178,9 @@ namespace DSIS.SimpleRunner
       return next;
     }
 
-    protected virtual IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction,
-                                                               IAction system,
-                                                               IAction workingFolder,
-                                                               IAction logger,
-                                                               T computationData,
-                                                               bool isLast)
+    protected virtual IActionEdgesBuilder CreateActionsAfterSI(AfterSIParams<T> afterSIParams)
     {
-      return siConstructionAction;
+      return afterSIParams.SiConstructionAction;
     }
 
     protected abstract IEnumerable<IEnumerable<T>> GetSystemsToRun2();

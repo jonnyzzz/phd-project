@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="src\AbstractImageBuilder.cs" />
     <Compile Include="src\AbstractImageBuilderListener.cs" />
+    <Compile Include="src\AfterSIParams.cs" />
     <Compile Include="src\ComputationData.cs" />
     <Compile Include="src\ComputationDataBuilder.cs" />
     <Compile Include="src\ComputationDataUtil.cs" />

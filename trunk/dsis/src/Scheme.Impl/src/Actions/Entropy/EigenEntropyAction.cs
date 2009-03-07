@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Graph.Entropy.Impl.Eigen;
-using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
@@ -20,18 +20,22 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 
     protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(ctx),
-                     Create(Keys.GetGraphComponents<Q>()));
+      return ColBase(base.Check<T, Q>(ctx), Create(Keys.GetGraphComponents<Q>()));
     }
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
-      //TODO: Max (entropy(component))
       var graph = Keys.GetGraphComponents<Q>().Get(input);
-      var evaluator = new EigenEntropyEvaluatorImpl<Q>(myOptions.Eps, graph.AsGraph(graph.Components));
 
-      IGraphMeasure<Q> entropy = new EigenEntropyMeasure<Q>(evaluator);
-      Keys.GraphMeasure<Q>().Set(output, entropy);
+      var result = new List<EigenEntropyMeasure<Q>>();
+      foreach (var comp in graph.Components)
+      {
+        var evaluator = new EigenEntropyEvaluatorImpl<Q>(myOptions.Eps, graph.AsGraph(comp.Enum()));
+
+        result.Add(new EigenEntropyMeasure<Q>(evaluator));
+      }
+
+      Keys.GraphMeasure<Q>().Set(output, new JoinedEugenEntropyMeasure<Q>(result));
     }
   }
 }

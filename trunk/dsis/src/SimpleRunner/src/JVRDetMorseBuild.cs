@@ -52,16 +52,16 @@ namespace DSIS.SimpleRunner
       yield return data;
     }
 
-    protected override IActionEdgesBuilder CreateActionsAfterSI(IActionEdgesBuilder siConstructionAction, IAction system, IAction workingFolder, IAction logger, ComputationData sys, bool isLast)
+    protected override IActionEdgesBuilder CreateActionsAfterSI(AfterSIParams<ComputationData> afterSIParams)
     {
-      if (isLast)
+      if (afterSIParams.IsLast)
       {
-        BuildJVRCall(siConstructionAction, system, 1e-3);
+        BuildJVRCall(afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
 //        BuildJVRCall(siConstructionAction, system, 1e-4);
 //        BuildJVRCall(siConstructionAction, system, 1e-5);
 //        BuildJVRCall(siConstructionAction, system, 1e-8);
       }
-      return base.CreateActionsAfterSI(siConstructionAction, system, workingFolder, logger, sys, isLast);
+      return base.CreateActionsAfterSI(afterSIParams);
     }
 
     private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, double eps)

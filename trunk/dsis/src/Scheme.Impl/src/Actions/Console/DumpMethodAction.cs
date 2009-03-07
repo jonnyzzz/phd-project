@@ -1,22 +1,20 @@
 using System.Collections.Generic;
-using DSIS.CellImageBuilder.Shared;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.Scheme.Impl.Actions.Console
 {
-  public class DumpMethodAction : IntegerCoordinateSystemActionBase3
+  public class DumpMethodAction : ActionBase
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
+    public override ICollection<ContextMissmatch> Compatible(Context ctx)
     {
-      return ColBase(base.Check<T, Q>(ctx), Create(Keys.SubdivisionKey), Create(Keys.CellImageBuilderKey));
+      return CheckContext(ctx, Create(Keys.CellImageBuilderKey));
     }
 
-    protected override void Apply<T, Q>(Context input, Context output)
+    protected override void Apply(Context ctx, Context result)
     {
-      ICellImageBuilderIntegerCoordinatesSettings sets = Keys.CellImageBuilderKey.Get(input);
-
-      Logger.Instance(input).Write("Method: {0}", sets.Create<Q>().PresentableName);
+      var sets = Keys.CellImageBuilderKey.Get(ctx);
+      Logger.Instance(ctx).Write("Method: {0}", sets.PresentableName);
     }
   }
 }
