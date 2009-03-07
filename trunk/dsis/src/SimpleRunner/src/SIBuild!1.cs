@@ -15,7 +15,7 @@ using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
-  public abstract class SIBuild<T> 
+  public abstract class SIBuild<T>
     where T : ComputationData, ICloneable<T>
   {
     public void Action()
@@ -117,6 +117,11 @@ namespace DSIS.SimpleRunner
       }
     }
 
+    protected virtual IAction GetLastStepImage()
+    {
+      return null;
+    }
+
     private void BuildGraph(IActionGraphBuilder2 bld, T sys)
     {
       var graphs = new XsdGraphXmlLoader().Load(typeof (SIBuild).Assembly, "DSIS.SimpleRunner.resources.si.xml");
@@ -130,7 +135,11 @@ namespace DSIS.SimpleRunner
       var logger = new LoggerAction();
 
       var id = new SetIterationSteps(new IterationSteps(sys.repeat));
-      bld.Start.Edge(workingFolder).Edge(logger).WithBack(new DumpComputationDataAction(sys)).Back(new DumpMethodAction()).Back(image);
+      bld.Start
+        .Edge(workingFolder)
+        .Edge(logger)
+        .WithBack(new DumpComputationDataAction(sys))
+        .Back(new DumpMethodAction()).Back(image);
       bld.Start.Edge(sys.system).Edge(init).Edge(image);
       bld.Start.Edge(sys.system).Edge(workingFolder).With(x => x.Back(id));
 
@@ -138,9 +147,9 @@ namespace DSIS.SimpleRunner
         bld.Start,
         sys.repeat,
         new RecordTimeSlotAction(builder["build"], "total"),
-        new[] {image, init, logger},
-        new[] {image, workingFolder, logger},
-        sys.system, workingFolder, logger, sys);
+        new[] {init, logger},
+        new[] {workingFolder, logger},
+        sys.system, workingFolder, logger, sys, (x => x ? GetLastStepImage() ?? image : image));
 
       rootAction
         .With(x => x.Edge(dump).
@@ -154,25 +163,37 @@ namespace DSIS.SimpleRunner
 
     private IActionEdgesBuilder RepeatSI(IActionEdgesBuilder holder, int count, IAction buildSI,
                                          IEnumerable<IAction> firstContext, IEnumerable<IAction> innerContext,
-                                         IAction system, IAction workingFolder, IAction logger, T sys)
+                                         IAction system, IAction workingFolder, IAction logger, T sys,
+                                         Func<bool, IAction> image)
     {
       if (count < 2)
         throw new ArgumentException("Count should be >= 2", "count");
 
-      var next = holder.Edge(buildSI.Clone()).With(x => firstContext.Join(system).ForEach(y => x.Back(y)));
+      var next = holder.Edge(buildSI.Clone());
+      foreach (var action in firstContext)
+        next.Back(action);
+      next.Back(system);
+      next.Back(image(false));
+
       for (int i = 1; i < count; i++)
       {
-        var tmp = next;
-        next = CreateActionsAfterSI(
-          new AfterSIParams<T>(next
-                              .Edge(buildSI.Clone())
-                              .With(x => innerContext.Join(system).ForEach(y => x.Back(y)))
-                              .With(x => x.Back(new MergeComponetsAction()).Back(tmp)), system, workingFolder, logger, sys, i + 1 == count))
-          .With(x => innerContext.ForEach(y => x.Back(y)))
-          .With(x => x.Edge(new DumpGraphInfoAction()).Back(logger))
-          .With(x => x.Edge(new DumpGraphComponentsInfoAction()).Back(logger))
-          .With(x => x.Edge(new DumpSeparatorAction()).Back(logger))
-          ;
+        var isLast = i + 1 == count;
+        var actionImageBuilder = image(isLast).Clone();
+        var buildImage = next.Edge(buildSI.Clone());
+
+        buildImage.Back(new MergeComponetsAction()).Back(next);
+        buildImage.Back(actionImageBuilder).Back(next);
+
+        foreach (var action in innerContext)
+          buildImage.Back(action);
+
+        buildImage.Back(system);
+        next.Edge(new DumpMethodAction()).WithBack(logger).WithBack(actionImageBuilder);
+        next.Edge(new DumpGraphInfoAction()).Back(logger);
+        next.Edge(new DumpGraphComponentsInfoAction()).Back(logger);
+        next.Edge(new DumpSeparatorAction()).Back(logger);
+
+        next = CreateActionsAfterSI(new AfterSIParams<T>(next, system, workingFolder, logger, sys, isLast));
       }
 
       return next;

@@ -19,7 +19,7 @@ namespace DSIS.SimpleRunner
                                          EntropyComputationMode.Eigen,
                                        },
                        repeat = 4,
-                       builder = ComputationDataBuilder.Point
+                       builder = ComputationDataBuilder.Box
                      }.Enum();//.ForSteps(4, 6, 8, 10).ForBuilders(ComputationDataBuilder.Point, ComputationDataBuilder.PointEx, ComputationDataBuilder.Box);
     }
   }

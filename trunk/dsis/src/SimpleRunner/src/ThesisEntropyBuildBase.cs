@@ -1,4 +1,5 @@
 using System;
+using DSIS.CellImageBuilder.PointMethod;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
@@ -7,6 +8,7 @@ using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl;
+using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.Scheme.Impl.Actions.Performance;
@@ -17,8 +19,10 @@ namespace DSIS.SimpleRunner
   public abstract class ThesisEntropyBuildBase<T> : SIBuild<T>
     where T : EntropyComputationData, ICloneable<T>
   {
-    
-
+    protected override IAction GetLastStepImage()
+    {
+      return new EntropyPointMethodSettings();
+    }
 
     protected override IActionEdgesBuilder CreateActionsAfterSI(AfterSIParams<T> afterSIParams)
     {
@@ -153,8 +157,8 @@ namespace DSIS.SimpleRunner
         var time = myTime.Get(input).TotalMilliseconds;
 
         log.Write("Construct measure using: " + myOpts);
-        log.Write(string.Format("Construct {1} measure time: {0}ms", time, myOpts));
-        log.Write(string.Format("Construct {1} measure entropy: {0}", ctx.GetEntropy(), myOpts));
+        log.Write(string.Format("measure time: {0}ms", time));
+        log.Write(string.Format("measure entropy: {0}", ctx.GetEntropy()));
       }
     }
   }

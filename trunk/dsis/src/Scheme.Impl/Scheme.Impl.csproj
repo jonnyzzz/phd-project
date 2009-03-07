@@ -97,6 +97,7 @@
     <Compile Include="src\Actions\DefaultBoxMethodSettings.cs" />
     <Compile Include="src\Actions\DefaultPointExMethodSettings.cs" />
     <Compile Include="src\Actions\DefaultPointMethodSettings.cs" />
+    <Compile Include="src\Actions\EntropyPointMethodSettings.cs" />
     <Compile Include="src\Actions\Entropy\BiggestMeasureInfo.cs" />
     <Compile Include="src\Actions\Entropy\EigenActionFactory.cs" />
     <Compile Include="src\Actions\Entropy\EigenEntropyAction.cs" />

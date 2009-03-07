@@ -17,14 +17,14 @@ namespace DSIS.Graph.Entropy.Tests
       IGraphStrongComponents<IntegerCoordinate> comps
       )
     {
-      StrangeEntropyEvaluator<IntegerCoordinate> ent = new StrangeEntropyEvaluator<IntegerCoordinate>();
-      StrangeEntropyEvaluatorParams @params = new StrangeEntropyEvaluatorParams(StrangeEvaluatorType.WeightSearch_1, StrangeEvaluatorStrategy.FIRST,
+      var ent = new StrangeEntropyEvaluator<IntegerCoordinate>();
+      var @params = new StrangeEntropyEvaluatorParams(StrangeEvaluatorType.WeightSearch_1, StrangeEvaluatorStrategy.FIRST,
                                                                                 EntropyLoopWeights.CONST);
-      GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>> measure = (GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>>) ent.Measure(gr, comps,@params);
+      var measure = (GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>>) ent.Measure(gr, comps,@params);
 
       IGraphMeasure<IntegerCoordinate> m = measure;
       IEdgeInfo b = new EdgeInfoImpl(measure);
-      return Pair.Create(m, b);
+      return Pair.Of(m, b);
     }
 
     private class EdgeInfoImpl : IEdgeInfo
@@ -39,14 +39,10 @@ namespace DSIS.Graph.Entropy.Tests
       public double Edge(IntegerCoordinate from, IntegerCoordinate to)
       {
         double v;
-        NodePair<IntegerCoordinate> key = new NodePair<IntegerCoordinate>(from, to);
+        var key = new NodePair<IntegerCoordinate>(from, to);
         if (myMeasure.M.TryGetValue(key, out v))
-        {
           return v;
-        } else
-        {
-          throw new KeyNotFoundException(string.Format("{0}->{1} not found", from.GetCoordinate(0), to.GetCoordinate(0)));
-        }        
+        throw new KeyNotFoundException(string.Format("{0}->{1} not found", from.GetCoordinate(0), to.GetCoordinate(0)));
       }
     }
   }

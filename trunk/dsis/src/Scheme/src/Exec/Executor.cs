@@ -71,7 +71,17 @@ namespace DSIS.Scheme.Exec
       }
 
       if (myActions.Count != myDoneActions.Count)
-        throw new ActionGraphException("Failed to evaluate graph. Loops of components?");
+      {
+        var aw = new HashSet<ActionWrapper>();
+        aw.UnionWith(myActions);
+        aw.UnionWith(myDoneActions);
+
+        aw.RemoveWhere(x => !(myActions.Contains(x) && myDoneActions.Contains(x)));
+
+        var failed = aw.Sort((a, b) => a.ToString().CompareTo(b.ToString())).JoinString(Environment.NewLine);
+        
+        throw new ActionGraphException("Failed to evaluate graph. Loops of components?. Skipped actions: " + failed);
+      }
     }
 
     public void Clear()

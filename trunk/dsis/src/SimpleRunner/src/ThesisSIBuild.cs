@@ -36,7 +36,7 @@ namespace DSIS.SimpleRunner
 */
         repeat = 4,
         builder = ComputationDataBuilder.Point
-      }.Enum().ForSteps(8).OfType<ComputationData>();
+      }.Enum().ForSteps(4).OfType<ComputationData>();
 
     }
   }

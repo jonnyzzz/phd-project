@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Entropy;
@@ -93,8 +92,7 @@ namespace DSIS.Graph.Entropy.Tests
       IGraphMeasure<IntegerCoordinate> j2 = eval.First;
       IEdgeInfo j = eval.Second;
 
-      Dictionary<IntegerCoordinate, double> mi =
-        new Dictionary<IntegerCoordinate, double>(EqualityComparerFactory<IntegerCoordinate>.GetComparer());
+      var mi = new Dictionary<IntegerCoordinate, double>(EqualityComparerFactory<IntegerCoordinate>.GetComparer());
 
       try
       {
