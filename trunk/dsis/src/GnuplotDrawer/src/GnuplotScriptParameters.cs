@@ -1,6 +1,6 @@
 namespace DSIS.GnuplotDrawer
 {
-  public class GnuplotScriptParameters
+  public class GnuplotScriptParameters : IScanDraw
   {
     public readonly string OutputFile;
     public int Width { get; set;}
@@ -12,10 +12,13 @@ namespace DSIS.GnuplotDrawer
 
     public GnuplotScriptParameters(string outputFile, string title)
     {
+      DrawScans = true;
       Height = Width = 1000;
       OutputFile = outputFile;
       Title = title;
       ForcePoints = false;      
     }
+
+    public bool DrawScans { get; set;}
   }
 }

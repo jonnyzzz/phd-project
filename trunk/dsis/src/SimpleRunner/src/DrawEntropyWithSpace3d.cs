@@ -12,8 +12,8 @@ namespace DSIS.SimpleRunner
   {
     private IEnumerable<GnuplotPointsFileWriter> Render(Pair<ICellCoordinateSystem<T>, IDictionary<T, double>> file)
     {
-      IIntegerCoordinateSystem<T> sys = (IIntegerCoordinateSystem<T>) file.First;
-      double[] data = new double[2] {0, 0};
+      var sys = (IIntegerCoordinateSystem<T>) file.First;
+      var data = new double[2] {0, 0};
       GnuplotPointsFileWriter wr;
       GnuplotPointsFileWriter wrz;
 
@@ -29,7 +29,7 @@ namespace DSIS.SimpleRunner
         }
       }
 
-      return new GnuplotPointsFileWriter[] {wr, wrz};
+      return new[] {wr, wrz};
     }
 
     public override string DrawImage(string suffix)
@@ -40,25 +40,20 @@ namespace DSIS.SimpleRunner
 
       string outputFile = CreateFileName(suffix + "measure3d.png");
 
-      GnuplotScriptParameters3d ps = new GnuplotScriptParameters3d(outputFile,
-                                                                   Title +
-                                                                   string.Format("Entropy = {0}",
-                                                                                 Entropy.Value.ToString("F6")));
+      var ps = new GnuplotScriptParameters3d(outputFile,
+                                             string.Format("Title {1} Entropy = {0}", Entropy.Value.ToString("F6"), Title));
       ps.ForcePoints = true;
       ps.RotX = 75;
       ps.RotZ = 30;
       ps.XYPane = 0;
-      IGnuplotPhaseScriptGen gen =
-        new Gnuplot3dScriptGen(
-          CreateFileName("measure3d.gnuplot"),
-          ps);
+      IGnuplotPhaseScriptGen gen = new Gnuplot3dScriptGen(CreateFileName("measure3d.gnuplot"), ps);
 
-      foreach (GnuplotPointsFileWriter file in Render(Wights.Value))
+      foreach (var file in Render(Wights.Value))
         gen.AddPointsFile(file);
 
       gen.Finish();
 
-      GnuplotDrawer.GnuplotDrawer drw = new GnuplotDrawer.GnuplotDrawer();
+      var drw = new GnuplotDrawer.GnuplotDrawer();
       drw.DrawImage(gen);
 
       return "";

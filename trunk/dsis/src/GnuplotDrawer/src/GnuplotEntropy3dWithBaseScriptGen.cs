@@ -2,7 +2,7 @@ using DSIS.Core.Visualization;
 
 namespace DSIS.GnuplotDrawer
 {
-  public class GnuplotEntropy3dWithBaseScriptGen : PngWriter3dBase, IGnuplotScriptGen, IGnuplotEntropyScriptGen
+  public class GnuplotEntropy3dWithBaseScriptGen : PngWriter3dBase, IGnuplotEntropyScriptGen
   {
     private bool myIsFirstFile = true;
 
@@ -37,9 +37,9 @@ namespace DSIS.GnuplotDrawer
 
       using (var zeroPlane = new GnuplotPointsFileWriter(bases, 3))
       {
-        foreach (ImagePoint point in new GnuplotPointsFileReader(@base.Filename).Read())
+        foreach (var point in new GnuplotPointsFileReader(@base.Filename).Read())
         {
-          ImagePoint bs = new ImagePoint(point.Point[0], point.Point[1], 0.00002);
+          var bs = new ImagePoint(point.Point[0], point.Point[1], 0.00002);
 
           zeroPlane.WritePoint(bs);
         }

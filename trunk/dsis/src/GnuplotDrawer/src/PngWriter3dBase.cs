@@ -2,26 +2,28 @@ namespace DSIS.GnuplotDrawer
 {
   public class PngWriter3dBase : PngWriterBase
   {
-    private new readonly GnuplotScriptParameters3d myParams;
+    private readonly GnuplotScriptParameters3d my3DParams;
 
     protected PngWriter3dBase(string filename, GnuplotScriptParameters @params)
       : base(filename, @params)
     {
-      myParams = @params as GnuplotScriptParameters3d;
+      my3DParams = @params as GnuplotScriptParameters3d;
       var p3d = @params as GnuplotScriptParameters3d;
       if (p3d == null)
         return;
-      ChangeView(0, 0);
+
+      if (my3DParams != null)
+      {
+        ChangeView(my3DParams.RotX, my3DParams.RotZ);
+
+        if (my3DParams.XYPane != null)
+          myWriter.WriteLine("set xyplane at {0};", my3DParams.XYPane);      
+      }      
     }
 
-    private void ChangeView(int rotX, int rotZ)
+    private void ChangeView(float rotX, float rotZ)
     {
-      var bX = myParams != null ? myParams.RotX : 0f;
-      var bZ = myParams != null ? myParams.RotZ : 0f;
-      myWriter.WriteLine("set view {0},{1};", bX + rotX, bZ + rotZ);
-
-      if (myParams != null && myParams.XYPane != null)
-        myWriter.WriteLine("set xyplane at {0};", myParams.XYPane);      
+      myWriter.WriteLine("set view {0},{1};", rotX, rotZ);
     }
 
     private void RotateZ(int rotX, int rotZ)
@@ -32,12 +34,15 @@ namespace DSIS.GnuplotDrawer
     }
 
     public override void Dispose()
-    {      
-      for (int x = 0; x < 180; x += 10)
+    {
+      if ((myParams as IScanDraw).DrawScans)
       {
-        for (int z = 0; z < 360; z += 10)
+        for (int x = 0; x < 180; x += 10)
         {
-          RotateZ(x, z);
+          for (int z = 0; z < 360; z += 10)
+          {
+            RotateZ(x, z);
+          }
         }
       }
 

@@ -25,5 +25,12 @@ namespace DSIS.Scheme.Impl.Actions.Files
     {
       myDrawer.DrawImage(gen).WaitForExit();
     }
+
+    protected override GnuplotScriptParameters CreateOutputParameters(IReadOnlyContext context, string outputFile)
+    {
+      var ps = base.CreateOutputParameters(context, outputFile);
+      ps.DrawScans = false;
+      return ps;
+    }
   }
 }
