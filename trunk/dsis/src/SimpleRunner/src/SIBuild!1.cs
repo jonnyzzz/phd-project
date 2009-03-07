@@ -188,12 +188,14 @@ namespace DSIS.SimpleRunner
           buildImage.Back(action);
 
         buildImage.Back(system);
-        next.Edge(new DumpMethodAction()).WithBack(logger).WithBack(actionImageBuilder);
-        next.Edge(new DumpGraphInfoAction()).Back(logger);
-        next.Edge(new DumpGraphComponentsInfoAction()).Back(logger);
-        next.Edge(new DumpSeparatorAction()).Back(logger);
 
-        next = CreateActionsAfterSI(new AfterSIParams<T>(next, system, workingFolder, logger, sys, isLast));
+        buildImage.Edge(new DumpMethodAction()).WithBack(logger).WithBack(actionImageBuilder);
+        buildImage.Edge(new DumpGraphInfoAction()).Back(logger);
+        buildImage.Edge(new DumpSubdivisionAction()).Back(logger);
+        buildImage.Edge(new DumpGraphComponentsInfoAction()).Back(logger);
+        buildImage.Edge(new DumpSeparatorAction()).Back(logger);
+        
+        next = CreateActionsAfterSI(new AfterSIParams<T>(buildImage, system, workingFolder, logger, sys, isLast));
       }
 
       return next;

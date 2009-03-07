@@ -87,6 +87,7 @@
     <Compile Include="src\Actions\Console\DumpInvocationCountAction.cs" />
     <Compile Include="src\Actions\Console\DumpMethodAction.cs" />
     <Compile Include="src\Actions\Console\DumpSeparatorAction.cs" />
+    <Compile Include="src\Actions\Console\DumpSubdivisionAction.cs" />
     <Compile Include="src\Actions\Console\DumpWorkingFolderAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemAction.cs" />
     <Compile Include="src\Actions\CreateCoordinateSystemActionBase.cs" />

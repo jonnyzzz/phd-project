@@ -7,20 +7,28 @@ namespace DSIS.SimpleRunner
   {
     protected override IEnumerable<IEnumerable<EntropyComputationData>> GetSystemsToRun2()
     {
+      var mode = new[]
+                   {
+                     EntropyComputationMode.JVR, 
+                     EntropyComputationMode.SmartLoopsConst, 
+                     EntropyComputationMode.SmartLoopsLinear, 
+                     EntropyComputationMode.SmartLoopsSquare, 
+                     EntropyComputationMode.Eigen,
+                   };
+
       yield return new EntropyComputationData
                      {
                        system = SystemInfoFactory.Henon1_4(),
-                       EntropyMode = new[]
-                                       {
-                                         EntropyComputationMode.JVR, 
-                                         EntropyComputationMode.SmartLoopsConst, 
-                                         EntropyComputationMode.SmartLoopsLinear, 
-                                         EntropyComputationMode.SmartLoopsSquare, 
-                                         EntropyComputationMode.Eigen,
-                                       },
-                       repeat = 4,
+                       EntropyMode = mode,
                        builder = ComputationDataBuilder.Box
-                     }.Enum();//.ForSteps(4, 6, 8, 10).ForBuilders(ComputationDataBuilder.Point, ComputationDataBuilder.PointEx, ComputationDataBuilder.Box);
+                     }.Enum().ForSteps(4, 6, 8, 10, 12, 14);
+
+      yield return new EntropyComputationData
+                     {
+                       system = SystemInfoFactory.Ikeda(),
+                       EntropyMode = mode,
+                       builder = ComputationDataBuilder.Box
+                     }.Enum().ForSteps(4, 6, 8, 10, 12, 14);
     }
   }
 }
