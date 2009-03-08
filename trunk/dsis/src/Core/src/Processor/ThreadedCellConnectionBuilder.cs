@@ -10,61 +10,59 @@ namespace DSIS.Core.Processor
   public class ThreadedCellConnectionBuilder<TCell> : ICellConnectionBuilder<TCell>, IDisposable 
     where TCell : ICellCoordinate
   {
-    private readonly List<Pair<TCell, List<TCell>>> myCache = new List<Pair<TCell, List<TCell>>>();
-    private readonly Mutex myMutex;
+    private readonly int myCacheSize;
+    private readonly List<Pair<TCell, IEnumerable<TCell>>> myCacheMany = new List<Pair<TCell, IEnumerable<TCell>>>();
+    private readonly List<Pair<TCell, TCell>> myCacheOne = new List<Pair<TCell, TCell>>();
+    private readonly Mutex myWriteLock;
     private readonly ICellConnectionBuilder<TCell> mySynchBulder;
 
-    public ThreadedCellConnectionBuilder(Mutex mutex, ICellConnectionBuilder<TCell> synchBulder)
+    public ThreadedCellConnectionBuilder(Mutex writeLock, ICellConnectionBuilder<TCell> synchBulder, int cacheSize)
     {
-      myMutex = mutex;
+      myCacheSize = cacheSize;
+      myWriteLock = writeLock;
       mySynchBulder = synchBulder;
     }
 
     public void ConnectToOne(TCell cell, TCell v)
     {
-      using(TryMutexCookie tm = new TryMutexCookie(myMutex))
-      {
-        if (tm.IsUnderMutex)
-        {
-          FlushCaches();
-          mySynchBulder.ConnectToOne(cell, v);          
-        } else
-        {
-          List<TCell> list = new List<TCell>();
-          list.Add(v);
-          myCache.Add(new Pair<TCell, List<TCell>>(cell, list));
-        }
-      }      
+      myCacheOne.Add(new Pair<TCell, TCell>(cell, v));    
+      FlushCachesIfNeeded();
     }
 
     public void ConnectToMany(TCell cell, IEnumerable<TCell> v)
     {
-      using (TryMutexCookie tm = new TryMutexCookie(myMutex))
+      myCacheMany.Add(new Pair<TCell, IEnumerable<TCell>>(cell, new List<TCell>(v)));
+      FlushCachesIfNeeded();
+    }
+
+    private void FlushCachesIfNeeded()
+    {
+      if (myCacheMany.Count + myCacheOne.Count <= myCacheSize) 
+        return;
+      
+      using(new MutexCookie(myWriteLock))
       {
-        if (tm.IsUnderMutex)
-        {
-          FlushCaches();
-          mySynchBulder.ConnectToMany(cell, v);
-        }
-        else
-        {
-          myCache.Add(new Pair<TCell, List<TCell>>(cell, new List<TCell>(v)));
-        }
-      }      
+        FlushCaches();
+      }
     }
 
     private void FlushCaches()
     {
-      foreach (Pair<TCell, List<TCell>> pair in myCache)
+      foreach (var pair in myCacheMany)
       {
         mySynchBulder.ConnectToMany(pair.First, pair.Second);
       }          
-      myCache.Clear();
+      foreach (var pair in myCacheOne)
+      {
+        mySynchBulder.ConnectToOne(pair.First, pair.Second);
+      }          
+      myCacheMany.Clear();
+      myCacheOne.Clear();
     }
 
     public void Dispose()
     {
-      using(new MutexCookie(myMutex))
+      using(new MutexCookie(myWriteLock))
       {
         FlushCaches();
       }

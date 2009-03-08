@@ -100,7 +100,6 @@
     <Compile Include="src\Processor\ThreadedCellConnectionBuilder.cs" />
     <Compile Include="src\Processor\ThreadedCountEnumerable.cs" />
     <Compile Include="src\Processor\ThreadedSymbolicImageConstructionProcess.cs" />
-    <Compile Include="src\Processor\UnsymmetricSymbolicImageProcess.cs" />
     <Compile Include="src\Util\CountEnumerable.cs" />
     <Compile Include="src\Util\ICountEnumerable.cs" />
     <Compile Include="src\Util\IProgressInfo.cs" />

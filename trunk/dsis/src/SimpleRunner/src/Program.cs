@@ -26,8 +26,8 @@ namespace DSIS.SimpleRunner
       Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
       Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
 
-//      new ThesisEntropyBuild().Action();
-      new ThesisSIBuild().Action();
+      new ThesisEntropyBuild().Action();
+//      new ThesisSIBuild().Action();
 //      new SIBuild().Action();
 //      new JVRDetMorseBuild().Action();
 //      new JVRBuild().Action();

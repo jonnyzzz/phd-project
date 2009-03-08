@@ -1,17 +1,17 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
+using DSIS.Core.Processor;
 using DSIS.Core.Util;
 using NUnit.Framework;
 
-namespace DSIS.Core.Processor
+namespace DSIS.Core.Tests.Processor
 {
   [TestFixture]
   public class BufferedThreadedCountEnumerableTest
   {
     private static CountEnumerable<int> MakeList(int count)
     {
-      List<int> list = new List<int>();
+      var list = new List<int>();
       for (int i = 0; i < count; i++)
       {
         list.Add(i);
@@ -21,8 +21,7 @@ namespace DSIS.Core.Processor
 
     private static void DoTest(int count, int buffer)
     {
-      BufferedThreadedCountEnumerable<int> be =
-        new BufferedThreadedCountEnumerable<int>(new Mutex(), MakeList(count), buffer);
+      var be = new BufferedThreadedCountEnumerable<int>(new Mutex(), MakeList(count), buffer);
 
       int i = 0;
       foreach (int i1 in be)

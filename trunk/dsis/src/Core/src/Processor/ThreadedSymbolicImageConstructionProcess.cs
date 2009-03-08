@@ -24,12 +24,12 @@ namespace DSIS.Core.Processor
     {
       var workers = new List<Thread>();
 
-      for(int i = 0; i < Environment.ProcessorCount; i++)
+      for (int i = 0; i < Environment.ProcessorCount; i++)
       {
         var worker = new Thread(ThreadRun) {Name = ("SI construction thread " + (i + 1))};
         worker.Start(myContext);
 
-        workers.Add(worker);        
+        workers.Add(worker);
       }
 
       foreach (Thread worker in workers)
@@ -41,13 +41,17 @@ namespace DSIS.Core.Processor
     private void ThreadRun(object o)
     {
       using (var bld =
-        new ThreadedCellConnectionBuilder<TTo>(myWriteMutex, myContext.CellImageBuilderContext.ConnectionBuilder))
+        new ThreadedCellConnectionBuilder<TTo>(myWriteMutex, myContext.CellImageBuilderContext.ConnectionBuilder, 8192))
       {
         ICellProcessorContext<TFrom, TTo> ctx = new CellProcessorContext<TFrom, TTo>(
           new CellCoordinateCollection<TFrom>(
             myContext.Converter.FromSystem,
-        new BufferedThreadedCountEnumerable<TFrom>(myReadMutex, myContext.Cells, Math.Min(myContext.Cells.Count / Environment.ProcessorCount / 4, 8192)))        
-        ,
+            new BufferedThreadedCountEnumerable<TFrom>(
+              myReadMutex,
+              myContext.Cells,
+              Math.Min(myContext.Cells.Count/Environment.ProcessorCount/4, 8192)
+              )
+            ),
           myContext.Converter.Clone(),
           myContext.CellImageBuilder.Clone(),
           new CellImageBuilderContext<TTo>(

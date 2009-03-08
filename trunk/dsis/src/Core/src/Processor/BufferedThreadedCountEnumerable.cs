@@ -14,9 +14,9 @@ namespace DSIS.Core.Processor
     private readonly int myCount;
     private readonly int myBufferSize;
 
-    public BufferedThreadedCountEnumerable(Mutex mutex, ICountEnumerable<T> input, int bufferSize)
+    public BufferedThreadedCountEnumerable(Mutex readLock, ICountEnumerable<T> input, int bufferSize)
     {
-      myMutex = mutex;
+      myMutex = readLock;
       myBufferSize = bufferSize;
       myInput = input;
       myCount = input.Count;
@@ -27,85 +27,34 @@ namespace DSIS.Core.Processor
       get { return myCount; }
     }
 
-    IEnumerator<T> IEnumerable<T>.GetEnumerator()
+    public IEnumerator<T> GetEnumerator()
     {
-      return new ThreadedEnumerator(myMutex, myInput.GetEnumerator(), myBufferSize);
-    }
+      var cache = new List<T>(myBufferSize);
+      var input = myInput.GetEnumerator();
 
-    public IEnumerator GetEnumerator()
-    {
-      return ((IEnumerable<T>)this).GetEnumerator();
-    }
-
-    private class ThreadedEnumerator : IEnumerator<T>
-    {
-      private readonly Mutex myMutex;
-      private readonly IEnumerator<T> myInput;
-      private readonly int myBufferSize;
-      private readonly Queue<T> myCurrents;
-      
-      private bool myCollectionFinished = false;
-
-      public ThreadedEnumerator(Mutex mutex, IEnumerator<T> input, int bufferSize)
-      {
-        myCurrents = new Queue<T>(bufferSize + 1);
-        myMutex = mutex;
-        myBufferSize = bufferSize;
-        myInput = input;
-      }
-
-      T IEnumerator<T>.Current
-      {
-        get { return myCurrents.Peek(); }
-      }
-
-      void IDisposable.Dispose()
-      {
-        myInput.Dispose();
-      }
-
-      public bool MoveNext()
-      {
-        if (myCurrents.Count > 1)
-        {
-          myCurrents.Dequeue();
-          return true;
-        } 
-        else if (!myCollectionFinished) {
-          if (myCurrents.Count > 0)
-          {
-            myCurrents.Dequeue();
-          }
-
-          using (new MutexCookie(myMutex))
-          {
-            bool lastNext = true;
-            while (myCurrents.Count < myBufferSize && (lastNext = myInput.MoveNext()))
-            {
-              myCurrents.Enqueue(myInput.Current);              
-            }
-            myCollectionFinished = !lastNext;            
-            
-            return myCurrents.Count > 0;
-          }
-        }
-        else return false;
-      }
-
-      void IEnumerator.Reset()
+      while (true)
       {
         using (new MutexCookie(myMutex))
         {
-          myCurrents.Clear();
-          myCollectionFinished = false;
-          myInput.Reset();
+          for (int i = 0; i < myBufferSize && input.MoveNext(); i++)
+          {
+            cache.Add(input.Current);
+          }
         }
-      }
 
-      object IEnumerator.Current
-      {
-        get { return myCurrents.Peek(); }
+        if (cache.Count == 0)
+          yield break;
+
+        foreach (var t in cache)
+          yield return t;
+
+        cache.Clear();
       }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return ((IEnumerable<T>)this).GetEnumerator();
     }
   }
 }

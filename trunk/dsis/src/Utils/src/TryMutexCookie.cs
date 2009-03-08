@@ -12,7 +12,7 @@ namespace DSIS.Utils
     {
       myMutex = mutex;
 
-      IsUnderMutex = mutex.WaitOne(0, false);
+      IsUnderMutex = mutex.WaitOne(10, false);
     }
 
     void IDisposable.Dispose()
