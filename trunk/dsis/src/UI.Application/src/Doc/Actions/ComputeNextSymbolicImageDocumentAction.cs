@@ -26,7 +26,7 @@ namespace DSIS.UI.Application.Doc.Actions
     private ISIConstructionWizard myWizard { get; set; }
 
     [Autowire]
-    private IActionExecution myExec { get; set; }
+    private IContextOperationExecution myExec { get; set; }
 
     [Autowire]
     private IDocumentManager DocumentManager { get; set; }
@@ -46,17 +46,17 @@ namespace DSIS.UI.Application.Doc.Actions
       if (settings != null)
         myExec.ExecuteAsync(
           "Next SI",
-          pi =>
+          (hook,pi) =>
             {
               var ctx = myDocument.Content;
               for (var set = settings; set != null; set = set.Next(ctx))
               {
                 var r = ((IAction) CreateCompleteAction(ctx, set)).Apply(ctx);
-                ctx = DocumentManager.UpdateContext(ctx, r);
+                ctx = hook.UpdateContext(ctx, r);
                 LOG.Info(r);
                 GCHelper.Collect();
               }
-              DocumentManager.ChangeDocument(ctx);
+              hook.ChangeDocument(ctx);
             }
           );
     }

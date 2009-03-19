@@ -110,6 +110,7 @@
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />
     <Compile Include="src\ApplicationDocument.cs" />
+    <Compile Include="src\ContextOperationExecution.cs" />
     <Compile Include="src\DocumentManager.cs" />
     <Compile Include="src\Doc\Actions\ActionsContainer.cs">
     </Compile>
@@ -117,7 +118,7 @@
     <Compile Include="src\Doc\Actions\ComputeInvariantMeasureProjectionAction.cs" />
     <Compile Include="src\Doc\Actions\ComputeNextSymbolicImageDocumentAction.cs" />
     <Compile Include="src\Doc\Actions\DocumentActionAttribute.cs" />
-    <Compile Include="src\Doc\Actions\DocumentActionExLookup.cs" />
+    <Compile Include="src\Doc\Actions\DocumentActionManager.cs" />
     <Compile Include="src\Doc\Actions\DocumentActionPresentation.cs" />
     <Compile Include="src\Doc\Actions\IDocumentAction.cs" />
     <Compile Include="src\Doc\Actions\IDocumentActionEx.cs" />
@@ -163,6 +164,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\Doc\SymbolicImageDrawControlFactoryImpl.cs" />
+    <Compile Include="src\IContextOperation.cs" />
     <Compile Include="src\IDocumentManager.cs" />
     <Compile Include="src\IMainForm.cs" />
     <Compile Include="src\Invocator.cs" />
@@ -213,6 +215,7 @@
     <Compile Include="src\Progress\BackDelegatingProgress.cs" />
     <Compile Include="src\Progress\DelegatingProgress.cs" />
     <Compile Include="src\Progress\IActionExecution.cs" />
+    <Compile Include="src\Progress\IContextOperationExecution.cs" />
     <Compile Include="src\Progress\ProgressBarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

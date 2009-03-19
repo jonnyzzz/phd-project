@@ -57,14 +57,15 @@
       this.myCancel.ActiveLinkColor = System.Drawing.Color.Blue;
       this.myCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.myCancel.AutoEllipsis = true;
-      this.myCancel.AutoSize = true;
-      this.myCancel.Location = new System.Drawing.Point(474, 1);
+      this.myCancel.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+      this.myCancel.Location = new System.Drawing.Point(451, 2);
       this.myCancel.Name = "myCancel";
       this.myCancel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-      this.myCancel.Size = new System.Drawing.Size(40, 13);
+      this.myCancel.Size = new System.Drawing.Size(63, 13);
       this.myCancel.TabIndex = 2;
       this.myCancel.TabStop = true;
       this.myCancel.Text = "Cancel";
+      this.myCancel.TextAlign = System.Drawing.ContentAlignment.TopRight;
       this.myCancel.VisitedLinkColor = System.Drawing.Color.Blue;
       this.myCancel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.myCancel_LinkClicked);
       // 
@@ -78,7 +79,6 @@
       this.Name = "ProgressBarControl";
       this.Size = new System.Drawing.Size(517, 47);
       this.ResumeLayout(false);
-      this.PerformLayout();
 
     }
 

@@ -1,17 +1,19 @@
-using DSIS.Scheme.Ctx;
+using System;
 
 namespace DSIS.UI.Application
 {
   public interface IDocumentManager
   {
-    void ChangeDocument(Context newContext);
+    event EventHandler<OperationEventArgs> OperationTaken;
+  }
 
-    /// <summary>
-    /// Same as ChangeDocument, but without.
-    /// </summary>
-    /// <param name="currentContext"></param>
-    /// <param name="newContext"></param>
-    /// <returns></returns>
-    Context UpdateContext(IReadOnlyContext currentContext, Context newContext);
+  public class OperationEventArgs : EventArgs
+  {
+    public readonly bool IsOperationTaken;
+
+    public OperationEventArgs(bool isOperationTaken)
+    {
+      IsOperationTaken = isOperationTaken;
+    }
   }
 }

@@ -15,6 +15,9 @@ namespace DSIS.UI.Application.Doc.Actions
 
     private readonly IDocumentActionManager myActionManager;
 
+    [Autowire]
+    private IInvocator myInvocator { get; set; }
+
     public DocumentActionPresentation(IDocumentActionManager actionManager)
     {
       myActionManager = actionManager;
@@ -29,16 +32,27 @@ namespace DSIS.UI.Application.Doc.Actions
       return DockLayout.Layout(DockStyle.Top, actions);
     }
 
-    private static Button CreateButton(IDocumentActionEx action)
+    private Button CreateButton(IDocumentActionEx action)
     {
       var btn = new Button
                   {
                     Text = action.Caption + "\u2026",
                     Enabled = action.Compatible,
                     AutoSize = true,
-                    AutoEllipsis = true,                    
+                    AutoEllipsis = true,
                     Dock = DockStyle.Top
                   };
+
+      myActionManager.ActionAvailabilityChanged +=
+        delegate
+          {
+            myInvocator.InvokeOrQueue(
+              "Update button state",
+              delegate
+                {
+                  btn.Enabled = action.Compatible;
+                });
+          };
       btn.Click += delegate
                      {
                        try
@@ -47,7 +61,8 @@ namespace DSIS.UI.Application.Doc.Actions
                          {
                            action.Apply();
                          }
-                       } catch(Exception e)
+                       }
+                       catch (Exception e)
                        {
                          LOG.ErrorFormat("Failed to complete action {0}. ", action.Caption);
                          LOG.Error(e);

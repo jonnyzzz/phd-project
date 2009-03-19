@@ -86,14 +86,17 @@
     <Compile Include="src\GCHelper.cs" />
     <Compile Include="src\GenericHelper.cs" />
     <Compile Include="src\IExecutorService.cs" />
+    <Compile Include="src\ILock.cs" />
     <Compile Include="src\InfiniteEnumerable.cs" />
     <Compile Include="src\ISafe.cs" />
     <Compile Include="src\LinkedList.cs" />
+    <Compile Include="src\Lock.cs" />
     <Compile Include="src\MemoryMonitorThread.cs" />
     <Compile Include="src\MultiDictionary.cs" />
     <Compile Include="src\MultiHashDictionary.cs" />
     <Compile Include="src\OneTreadExecutor.cs" />
     <Compile Include="src\ParseUtil.cs" />
+    <Compile Include="src\ReadWriteLock.cs" />
     <Compile Include="src\Ref.cs" />
     <Compile Include="src\ReenterableSafe.cs" />
     <Compile Include="src\ReferenceEqualityComparer.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="src\UpcastedCollection.cs" />
     <Compile Include="src\UpcastedDictionary.cs" />
     <Compile Include="src\UpcastedEnumerable.cs" />
+    <Compile Include="src\Update.cs" />
     <Compile Include="src\UsedAttribute.cs" />
     <Compile Include="src\UsedInTestsAttribute.cs" />
     <Compile Include="src\Utils.cs" />

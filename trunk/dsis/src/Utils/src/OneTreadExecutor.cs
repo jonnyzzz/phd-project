@@ -132,6 +132,17 @@ namespace DSIS.Utils
 
       public void Interrupt()
       {
+        var th = new Thread(InterruptInternal)
+                   {
+                     Name = ("Interrup for " + myName),
+                     Priority = ThreadPriority.AboveNormal,
+                     IsBackground = false
+                   };
+        th.Start();
+      }
+
+      private void InterruptInternal()
+      {
         //Stop waiting for thread to finish
         myExecutionWait.Set();
         

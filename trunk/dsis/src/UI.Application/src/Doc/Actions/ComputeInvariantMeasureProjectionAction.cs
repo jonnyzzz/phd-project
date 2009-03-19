@@ -17,7 +17,7 @@ namespace DSIS.UI.Application.Doc.Actions
     private IDocumentManager DocumentManager { get; set; }
 
     [Autowire]
-    private IActionExecution Exec { get; set; }
+    private IContextOperationExecution Exec { get; set; }
 
     public bool Compatible
     {
@@ -28,10 +28,10 @@ namespace DSIS.UI.Application.Doc.Actions
     {
       Exec.ExecuteAsync(
         "Project entropy",
-        pi =>
+        (hook,pi) =>
           {
             var result = myAction.Apply(Document.Content);
-            DocumentManager.ChangeDocument(result);
+            hook.ChangeDocument(result);
           });
     }
   }

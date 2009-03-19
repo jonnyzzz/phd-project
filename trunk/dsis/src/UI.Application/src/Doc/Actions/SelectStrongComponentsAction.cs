@@ -1,6 +1,7 @@
 using DSIS.Core.Ioc;
 using DSIS.Graph;
 using DSIS.Scheme.Impl;
+using DSIS.UI.Application.Progress;
 using DSIS.UI.ComputationDialogs.Components;
 using DSIS.UI.UI;
 using DSIS.UI.Wizard;
@@ -25,6 +26,9 @@ namespace DSIS.UI.Application.Doc.Actions
     [Autowire]
     private IGraphStrongComponentSubsetFactory Factory { get; set; }
 
+    [Autowire]
+    private IContextOperationExecution Exec { get; set; }
+
     public bool Compatible
     {
       get
@@ -43,11 +47,15 @@ namespace DSIS.UI.Application.Doc.Actions
       if (result == null)
         return;
 
-      components = Factory.SubComponents(components, result);
-      
-      context.ReplaceTypedGraphComponents(components);
-      
-      DocumentManager.ChangeDocument(context);
+      Exec.ExecuteAsync("Select component action",
+                        (hook, pi) =>
+                          {
+                            components = Factory.SubComponents(components, result);
+
+                            context.ReplaceTypedGraphComponents(components);
+
+                            hook.ChangeDocument(context);
+                          });
     }
   }
 }

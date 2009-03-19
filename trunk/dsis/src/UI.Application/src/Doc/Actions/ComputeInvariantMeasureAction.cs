@@ -18,7 +18,7 @@ namespace DSIS.UI.Application.Doc.Actions
     private IApplicationDocument Document { get; set; }
 
     [Autowire]
-    private IActionExecution Exec { get; set; }
+    private IContextOperationExecution Exec { get; set; }
 
     [Autowire]
     private IComputeInvariantMeasureMethodSelector MethodSelector { get; set; }
@@ -48,14 +48,14 @@ namespace DSIS.UI.Application.Doc.Actions
       var action = MethodSelector.ShowWizard();
 
       Exec.ExecuteAsync("Compute Invariant Measure",
-                          pi =>
+                          (hook, pi) =>
                             {
-                              var apply = action.Apply(ctx);
-                              LOG.Info(apply);
-                              var c = new Context();
-                              c.AddAll(apply);
-                              c.AddAllNew(ctx);
-                              DocumentManager.ChangeDocument(c);
+                                var apply = action.Apply(ctx);
+                                LOG.Info(apply);
+                                var c = new Context();
+                                c.AddAll(apply);
+                                c.AddAllNew(ctx);
+                                hook.ChangeDocument(c);
                             });
     }
   }
