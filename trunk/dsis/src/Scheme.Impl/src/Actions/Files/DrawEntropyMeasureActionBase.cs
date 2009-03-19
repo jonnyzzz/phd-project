@@ -17,7 +17,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     public abstract override int SystemDimension { get; }
 
-    protected override void Apply<T, Q>(Context input, Context output)
+    protected override void Apply<T, Q>(T system, Context input, Context output)
     {
       var info = FileKeys.WorkingFolderKey.Get(input);
       var measure = Keys.GraphMeasure<Q>().Get(input);

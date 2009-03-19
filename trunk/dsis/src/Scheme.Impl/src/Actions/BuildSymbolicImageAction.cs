@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Scheme.Ctx;
 
@@ -6,11 +6,11 @@ namespace DSIS.Scheme.Impl.Actions
 {
   public class BuildSymbolicImageAction : BuildSymbolicImageActionBase
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
+    protected override void GetChecks<T, Q>(T system, Action<ContextMissmatchCheck> addCheck)
     {
-      return ColBase(base.Check<T, Q>(ctx),
-                 Create(Keys.CellImageBuilderKey),
-                 Create(Keys.SubdivisionKey));
+      base.GetChecks<T,Q>(system, addCheck);
+      addCheck(Create(Keys.CellImageBuilderKey));
+      addCheck(Create(Keys.SubdivisionKey));
     }
 
     protected override ICellImageBuilderIntegerCoordinatesSettings GetCellImageBuilderSettings(Context input)

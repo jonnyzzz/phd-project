@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
@@ -11,25 +10,22 @@ using DSIS.Graph.Adapter;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl.Actions.Performance;
-using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions
 {
-  public abstract class BuildSymbolicImageActionBase : IntegerCoordinateSystemActionBase3
+  public abstract class BuildSymbolicImageActionBase : IntegerCoordinateSystemActionBase2Ex
   {
     protected abstract ICellImageBuilderIntegerCoordinatesSettings GetCellImageBuilderSettings(Context input);
 
     protected abstract long[] GetSubdivision(Context input);
 
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
+    protected override void GetChecks<T, Q>(T system, Action<ContextMissmatchCheck> addCheck)
     {
-      return ColBase(EmptyArray<ContextMissmatchCheck>.Instance, 
-                     Create(Keys.SystemInfoKey),
-                     Create(Keys.CellsEnumerationKey<Q>())
-        );
+      addCheck(Create(Keys.SystemInfoKey));
+      addCheck(Create(Keys.CellsEnumerationKey<Q>()));
     }
 
-    protected override void Apply<T, Q>(Context input, Context output)
+    protected override void Apply<T, Q>(T system, Context input, Context output)
     {
       var bld = GetCellImageBuilderSettings(input);
       var subdivision = GetSubdivision(input);

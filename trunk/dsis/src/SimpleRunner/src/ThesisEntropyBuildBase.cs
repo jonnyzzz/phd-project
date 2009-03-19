@@ -1,5 +1,4 @@
 using System;
-using DSIS.CellImageBuilder.PointMethod;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;

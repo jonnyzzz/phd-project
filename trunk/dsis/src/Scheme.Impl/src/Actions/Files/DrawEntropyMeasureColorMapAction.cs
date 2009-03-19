@@ -8,7 +8,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 {
   public class DrawEntropyMeasureColorMapAction : DrawEntropyMeasureActionBaseBase
   {
-    protected override void Apply<T, Q>(Context input, Context output)
+    protected override void Apply<T, Q>(T system, Context input, Context output)
     {
       WorkingFolderInfo info = FileKeys.WorkingFolderKey.Get(input);
       IGraphMeasure<Q> measure = Keys.GraphMeasure<Q>().Get(input);

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using DSIS.GnuplotDrawer;
 using DSIS.Scheme.Ctx;
 
@@ -6,10 +6,10 @@ namespace DSIS.Scheme.Impl.Actions.Files
 {
   public class DrawChainRecurrentAction : AbstractDrawChainAction
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
+    protected override void GetChecks<T, Q>(T system, Action<ContextMissmatchCheck> addCheck)
     {
-      return ColBase(base.Check<T, Q>(ctx), 
-        Create(FileKeys.WorkingFolderKey));
+      base.GetChecks<T,Q>(system, addCheck);
+      addCheck(Create(FileKeys.WorkingFolderKey));
     }
 
     protected override WorkingFolderInfo GetWorkingFolderInfo(IReadOnlyContext input)

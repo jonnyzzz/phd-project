@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DSIS.CellImageBuilder.BoxMethod;
@@ -92,7 +93,7 @@ namespace DSIS.Scheme.Impl.Tests
     }
 
 
-    public class AssertGraphAction : IntegerCoordinateSystemActionBase3
+    protected class AssertGraphAction : IntegerCoordinateSystemActionBase2Ex
     {
       public IConstraint GraphNodesConstraint;
       public IConstraint GraphEdgesConstraint;
@@ -100,12 +101,13 @@ namespace DSIS.Scheme.Impl.Tests
       public IConstraint CompontentsCountConstraint;
       public IConstraint CompontentsNodesCountConstraint;
 
-      protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
+      protected override void GetChecks<T, Q>(T system, Action<ContextMissmatchCheck> addCheck)
       {
-        return ColBase(base.Check<T, Q>(ctx), Create(Keys.Graph<Q>()), Create(Keys.GetGraphComponents<Q>()));
+        addCheck(Create(Keys.Graph<Q>()));
+        addCheck(Create(Keys.GetGraphComponents<Q>()));
       }
 
-      protected override void Apply<T, Q>(Context input, Context output)
+      protected override void Apply<T, Q>(T system, Context input, Context output)
       {
         IGraph<Q> graph = Keys.Graph<Q>().Get(input);
         IGraphStrongComponents<Q> comps = Keys.GetGraphComponents<Q>().Get(input);

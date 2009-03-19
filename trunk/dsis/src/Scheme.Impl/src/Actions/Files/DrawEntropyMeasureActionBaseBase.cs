@@ -1,25 +1,22 @@
 using System;
-using System.Collections.Generic;
 using DSIS.Core.Visualization;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.IntegerCoordinates;
-using DSIS.Scheme.Ctx;
 using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public abstract class DrawEntropyMeasureActionBaseBase : IntegerCoordinateSystemActionBase3
+  public abstract class DrawEntropyMeasureActionBaseBase : IntegerCoordinateSystemActionBase2Ex
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
+    protected override void GetChecks<T, Q>(T system, Action<ContextMissmatchCheck> addCheck)
     {
-      if (Dimension != SystemDimension)
+      base.GetChecks<T,Q>(system, addCheck);
+      if (system.Dimension != SystemDimension)
         throw new Exception("Dimension is assumend to be " + SystemDimension);
 
-      return ColBase(base.Check<T, Q>(ctx),
-                     Create(FileKeys.WorkingFolderKey),
-                     Create(Keys.GraphMeasure<Q>()
-                       ));
+      addCheck(Create(FileKeys.WorkingFolderKey));
+      addCheck(Create(Keys.GraphMeasure<Q>()));
     }
 
     public abstract int SystemDimension { get; }

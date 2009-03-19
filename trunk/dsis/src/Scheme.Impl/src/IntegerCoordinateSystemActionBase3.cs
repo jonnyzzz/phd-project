@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
@@ -5,6 +6,7 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl
 {
+  [Obsolete("Use IntegerCoordinateSystemActionBase2")]
   public abstract class IntegerCoordinateSystemActionBase3 : IntegerCoordinateSystemActionBase2
   {
     private int? myDimension;

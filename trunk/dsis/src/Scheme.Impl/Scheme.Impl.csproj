@@ -185,6 +185,7 @@
     <Compile Include="src\ContextHelper.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />
+    <Compile Include="src\IntegerCoordinateSystemActionBase2Ex.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase3.cs" />
     <Compile Include="src\IterationSteps.cs" />
     <Compile Include="src\Keys.cs" />
