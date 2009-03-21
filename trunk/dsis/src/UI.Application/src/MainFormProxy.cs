@@ -76,5 +76,10 @@ namespace DSIS.UI.Application
       form.MainContent = control.Control;
       form.Text = control.Title;
     }
+
+    public void AddStatusBarControl(ToolStripItem control)
+    {
+      myForm.AddStatusBarControl(control);
+    }
   }
 }

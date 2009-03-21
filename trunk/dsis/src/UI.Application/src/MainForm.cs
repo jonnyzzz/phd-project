@@ -14,7 +14,7 @@ namespace DSIS.UI.Application
 
     private MainForm()
     {
-      InitializeComponent();           
+      InitializeComponent();  
     }
 
     [Used]
@@ -24,6 +24,11 @@ namespace DSIS.UI.Application
       myMenuFactoy = menuFactoy;
 
       myMenuFactoy.SetMenu(myActionManager.RootAction, myMainMenu, ()=>new Context());
+    }
+
+    public void AddStatusBarControl(ToolStripItem component)
+    {
+      myStatusBar.Items.Add(component);
     }
 
     public Control MainContent

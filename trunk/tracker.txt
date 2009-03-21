@@ -1,3 +1,4 @@
+  -  extract data actions
   -  cache saved points files
   -  add default system space parameters to system info factory
   -  predefined system -> new system dialog
@@ -7,15 +8,8 @@
   -  open standalone gnuplot
   -  list selector with groupby sections
 
-
 Progress bar:
   -  Memory usage bound
-  -  Memory usage indicator
-  -  Modal progress bar
-  -  Rework executor model to show several running tasks' progress
-  -  Disable actions while action is being completed
-  -  Document write cookie to protect from starting several actions at a time
-  -  document action cookie to prevent more than one action running on one document
   -  Use IProgressIndicator everywhere
   -  Show percentage on progress bar control
 
@@ -30,6 +24,7 @@ Macros:
 System function dialog:
 
 Drawer:
+  -  Clean up unused images/data files
   -  Embed drawer program from Nikita?
   -  Use drawer program from Nikita?
   -  allow to move 3d pictures
@@ -62,6 +57,12 @@ Internal:
   -  Support decart multiplication action
 
 Completed:
+  -  Memory usage indicator
+  -  Modal progress bar
+  -  Rework executor model to show several running tasks' progress
+  -  Disable actions while action is being completed
+  -  Document write cookie to protect from starting several actions at a time
+  -  document action cookie to prevent more than one action running on one document
   -  Cancelable progressbar
   -  format cells with spaces
   -  cancel progress!!!

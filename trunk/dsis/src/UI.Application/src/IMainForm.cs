@@ -13,5 +13,7 @@ namespace DSIS.UI.Application
 
     Form GetForm();
     void SetContent(IControlWithTitle control);
+
+    void AddStatusBarControl(ToolStripItem control);
   }
 }

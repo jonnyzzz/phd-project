@@ -176,6 +176,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="src\MainFormProxy.cs" />
+    <Compile Include="src\MemoryIndicatorStatusBar.cs" />
     <Compile Include="src\NamespaceHolder.cs" />
     <Compile Include="src\NoDocumentControl.cs">
       <SubType>UserControl</SubType>
