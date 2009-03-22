@@ -24,8 +24,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       var result = new ImageResult(outputFile);
 
       var gen = GnuplotSriptGen.ScriptGen(
-        system.Dimension,
-        folderInfo.CreateFileName("chain-recurrent-picture-script.gnuplot"),
+        system.Dimension, folderInfo.ApplyPrefix("chain-recurrent-picture-script.", ""),
         CreateOutputParameters(input, outputFile));
 
       foreach (var file in files)

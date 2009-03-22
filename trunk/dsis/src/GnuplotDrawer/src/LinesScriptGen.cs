@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using DSIS.Core.Visualization;
+using DSIS.Utils;
 
 namespace DSIS.GnuplotDrawer
 {
@@ -9,9 +9,9 @@ namespace DSIS.GnuplotDrawer
   {
     private readonly Dictionary<string, int> myCriteriaToCode = new Dictionary<string, int>();
     private bool myIsFirst = true;
-    private readonly Func<string, string> CreateCriteriaFileName;
+    private readonly Func<string, LinePointsFile> CreateCriteriaFileName;
 
-    public LinesScriptGen(string file, GnuplotScriptParameters ps) : base(file, ps)
+    public LinesScriptGen(ITempFileFactory factory, string suffix, GnuplotScriptParameters ps) : base(factory, ps)
     {
       myWriter.Write("plot ");
       CreateCriteriaFileName =
@@ -22,14 +22,13 @@ namespace DSIS.GnuplotDrawer
             {
               v = myCriteriaToCode[name] = myCriteriaToCode.Count + 1;
             }
-            return Path.GetFullPath(file + v + ".dat");
+            return new LinePointsFile(factory, suffix + v + ".dat", 2, name);
           };
     }
 
-    public string AddSeria(string name, IEnumerable<double> values)
+    public void AddSeria(string name, IEnumerable<double> values)
     {
-      string file = CreateCriteriaFileName(name);
-      var w = new LinePointsFile(file, 2, name);
+      var w = CreateCriteriaFileName(name);
       int count = 0;
       foreach (double v in values)
       {
@@ -45,8 +44,6 @@ namespace DSIS.GnuplotDrawer
         myIsFirst = false;
       }
       AddFile(w.CloseFile());
-
-      return file;
     }
 
     protected override void BeforeFileClosed()

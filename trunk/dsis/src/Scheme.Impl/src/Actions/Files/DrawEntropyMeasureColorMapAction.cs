@@ -14,23 +14,19 @@ namespace DSIS.Scheme.Impl.Actions.Files
       IGraphMeasure<Q> measure = Keys.GraphMeasure<Q>().Get(input);
 
       var data = new double[2];
-      GnuplotPointsFileWriter wr;
-      using (wr = new GnuplotPointsFileWriter(info.CreateFileName("measure-color-map.data"), 3))
+      var wr = new GnuplotPointsFileWriter(info, "measure-color-map.data", 3);
+      foreach (var pair in measure.GetMeasureNodes())
       {
-        foreach (var pair in measure.GetMeasureNodes())
-        {
-          Q key = pair.Key;
-          ((IIntegerCoordinateSystem<Q>)measure.CoordinateSystem).CenterPoint(key, data);
-          wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
-        }
+        Q key = pair.Key;
+        ((IIntegerCoordinateSystem<Q>) measure.CoordinateSystem).CenterPoint(key, data);
+        wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
       }
 
       string outputFile = info.CreateFileName("measure-color-map.png");
 
       var ps = new GnuplotScriptParameters(outputFile,
                                            string.Format("Entropy = {0}", measure.GetEntropy().ToString("F6")));
-      IGnuplotPhaseScriptGen gen = GnuplotSriptGen.Entrorpy2d(
-        info.CreateFileName("measure-color-map.gnuplot"), ps);
+      var gen = GnuplotSriptGen.Entrorpy2d(info, ps);
 
       gen.AddPointsFile(wr.CloseFile());
 

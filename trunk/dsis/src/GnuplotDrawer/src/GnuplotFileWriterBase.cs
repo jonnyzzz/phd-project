@@ -6,7 +6,7 @@ using log4net;
 
 namespace DSIS.GnuplotDrawer
 {
-  public abstract class GnuplotFileWriterBase<T> : IDisposable
+  public abstract class GnuplotFileWriterBase<T>
     where T : IGnuplotFile
   {
     private static readonly ILog LOG = LogManager.GetLogger(typeof (GnuplotFileWriterBase<T>));
@@ -14,10 +14,10 @@ namespace DSIS.GnuplotDrawer
     private readonly string myFilename;
     protected TextWriter myWriter;
 
-    protected GnuplotFileWriterBase(string filename)
+    protected GnuplotFileWriterBase(ITempFileFactory factory, string suffix)
     {
-      myFilename = Path.GetFullPath(filename);
-      myWriter = new StreamWriter(filename, true, Encoding.ASCII);
+      myFilename = factory.NewFile(suffix);
+      myWriter = new StreamWriter(suffix, true, Encoding.ASCII);
     }
 
     protected void AssertDisposed()
@@ -26,12 +26,6 @@ namespace DSIS.GnuplotDrawer
       {
         LOG.ErrorFormat("Access to disposed object at:{0}{1}", Environment.NewLine, Environment.StackTrace);
       }
-    }
-
-    void IDisposable.Dispose()
-    {
-      AssertDisposed();
-      BeforeFileClosed();
     }
 
     protected virtual void BeforeFileClosed()

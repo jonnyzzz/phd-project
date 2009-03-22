@@ -1,10 +1,11 @@
+using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public class WorkingFolderInfo
+  public class WorkingFolderInfo : ITempFileFactory
   {
     private readonly string myPath;
 
@@ -62,6 +63,38 @@ namespace DSIS.Scheme.Impl.Actions.Files
     public string Path
     {
       get { return myPath; }
+    }
+
+    public string NewFile(string prefix)
+    {
+      return CreateFileName(prefix);
+    }
+
+    public ITempFileFactory ApplyPrefix(string before, string after)
+    {
+      return new TempFileFactoryImpl(this, x => before + x + after);
+    }
+
+    private class TempFileFactoryImpl : ITempFileFactory
+    {
+      private readonly WorkingFolderInfo myInfo;
+      private readonly Func<string, string> myFormat;
+
+      public TempFileFactoryImpl(WorkingFolderInfo info, Func<string, string> format)
+      {
+        myInfo = info;
+        myFormat = format;
+      }
+
+      public string NewFile(string prefix)
+      {
+        return myInfo.CreateFileName(myFormat(prefix));
+      }
+
+      public ITempFileFactory ApplyPrefix(string before, string after)
+      {
+        return new TempFileFactoryImpl(myInfo, x => before + x + after);
+      }
     }
   }
 }

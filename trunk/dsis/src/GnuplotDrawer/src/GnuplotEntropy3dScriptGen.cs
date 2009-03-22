@@ -1,15 +1,17 @@
-
 using DSIS.Core.Visualization;
+using DSIS.Utils;
 
 namespace DSIS.GnuplotDrawer
 {
   public class GnuplotEntropy3dScriptGen : PngWriter3dBase, IGnuplotPhaseScriptGen
   {
+    private readonly ITempFileFactory myFactory;
     private bool myIsFirstFile = true;
 
-    public GnuplotEntropy3dScriptGen(string filename, GnuplotScriptParameters @params)
-      : base(filename, @params)
+    public GnuplotEntropy3dScriptGen(ITempFileFactory factory, GnuplotScriptParameters @params)
+      : base(factory, @params)
     {
+      myFactory = factory;
       myWriter.WriteLine("set zrange [0.00001:*];");
       myWriter.Write("splot ");
     }
@@ -27,26 +29,19 @@ namespace DSIS.GnuplotDrawer
       else
         myWriter.WriteLine(", \\");
 
-      string lines = file.FileName + ".lines";
-      string white = file.FileName + ".zero";
+      var linesWriter = new GnuplotPointsFileWriter(myFactory, ".lines", 3);
+      var zeroPlane = new GnuplotPointsFileWriter(myFactory, ".zero", 3);
+      foreach (var point in new GnuplotPointsFileReader(file.FileName).Read())
+      {
+        var bs = new ImagePoint(point.Point[0], point.Point[1], 0);
+        zeroPlane.WritePoint(new ImagePoint(point.Point[0], point.Point[1], 0.00002));
 
-      using(var linesWriter = new GnuplotPointsFileWriter(lines, 3))
-      {        
-        using(var zeroPlane = new GnuplotPointsFileWriter(white, 3))
-        {
-          foreach (ImagePoint point in new GnuplotPointsFileReader(file.FileName).Read())
-          {
-            var bs = new ImagePoint(point.Point[0], point.Point[1], 0);
-            zeroPlane.WritePoint(new ImagePoint(point.Point[0], point.Point[1], 0.00002));
-
-            linesWriter.WritePoint(bs);
-            linesWriter.WritePoint(point);
-            linesWriter.WritePoint(bs);
-          }
-        }
+        linesWriter.WritePoint(bs);
+        linesWriter.WritePoint(point);
+        linesWriter.WritePoint(bs);
       }
 
-      myWriter.Write(" '{1}' with dots, '{0}' with lines ", lines, white);
+      myWriter.Write(" '{1}' with dots, '{0}' with lines ", linesWriter.CloseFile().FileName, zeroPlane.CloseFile().FileName);
     }
   }
 }

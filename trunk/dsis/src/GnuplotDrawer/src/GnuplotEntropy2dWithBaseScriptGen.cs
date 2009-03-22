@@ -1,14 +1,17 @@
 using DSIS.Core.Visualization;
+using DSIS.Utils;
 
 namespace DSIS.GnuplotDrawer
 {
   public class GnuplotEntropy2dWithBaseScriptGen : PngWriterBase, IGnuplotEntropyScriptGen
   {
+    private readonly ITempFileFactory myFactory;
     private bool myIsFirstFile = true;
 
-    public GnuplotEntropy2dWithBaseScriptGen(string filename, GnuplotScriptParameters @params)
-      : base(filename, @params)
+    public GnuplotEntropy2dWithBaseScriptGen(ITempFileFactory factory, GnuplotScriptParameters @params)
+      : base(factory, @params)
     {
+      myFactory = factory;
       myWriter.WriteLine("set yrange [0.00001:*];");
       myWriter.Write("plot ");
     }
@@ -26,32 +29,25 @@ namespace DSIS.GnuplotDrawer
       else
         myWriter.WriteLine(", \\");
 
-      string lines = entropy.FileName + ".lines";
-      string bases = entropy.FileName + ".bases";
-
-      using (var linesWriter = new GnuplotPointsFileWriter(lines, 2))
+      var linesWriter = new GnuplotPointsFileWriter(myFactory, ".lines", 2);
+      foreach (ImagePoint point in new GnuplotPointsFileReader(entropy.FileName).Read())
       {
-        foreach (ImagePoint point in new GnuplotPointsFileReader(entropy.FileName).Read())
-        {
-          var bs = new ImagePoint(point.Point[0], 0);
+        var bs = new ImagePoint(point.Point[0], 0);
 
-          linesWriter.WritePoint(bs);
-          linesWriter.WritePoint(point);
-          linesWriter.WritePoint(bs);
-        }
+        linesWriter.WritePoint(bs);
+        linesWriter.WritePoint(point);
+        linesWriter.WritePoint(bs);
       }
 
-      using (var zeroPlane = new GnuplotPointsFileWriter(bases, 2))
+      var zeroPlane = new GnuplotPointsFileWriter(myFactory, ".bases", 2);
+      foreach (ImagePoint point in new GnuplotPointsFileReader(@base.FileName).Read())
       {
-        foreach (ImagePoint point in new GnuplotPointsFileReader(@base.FileName).Read())
-        {
-          var bs = new ImagePoint(point.Point[0], 0.00002);
+        var bs = new ImagePoint(point.Point[0], 0.00002);
 
-          zeroPlane.WritePoint(bs);
-        }
+        zeroPlane.WritePoint(bs);
       }
 
-      myWriter.Write(" '{1}' with dots, '{0}' with lines ", lines, bases);
+      myWriter.Write(" '{1}' with dots, '{0}' with lines ", linesWriter.CloseFile().FileName, zeroPlane.CloseFile().FileName);
     }
   }
 }

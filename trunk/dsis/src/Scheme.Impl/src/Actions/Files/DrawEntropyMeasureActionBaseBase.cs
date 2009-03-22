@@ -26,20 +26,18 @@ namespace DSIS.Scheme.Impl.Actions.Files
       return measure.CellSize.FoldLeft(1.0, (r,x)=>r*x);
     }
 
-    protected GnuplotPointsFileWriter WriteMeasureFile<Q>(string measureFile, IGraphMeasure<Q> measure)
+    protected GnuplotPointsFileWriter WriteMeasureFile<Q>(ITempFileFactory factory, IGraphMeasure<Q> measure)
       where Q : IIntegerCoordinate
     {
       GnuplotPointsFileWriter wr;
-      var data = new double[SystemDimension+1];
+      var data = new double[SystemDimension + 1];
       var norm = Norm(measure);
-      using (wr = new GnuplotPointsFileWriter(measureFile, SystemDimension + 1))
+      wr = new GnuplotPointsFileWriter(factory, "measure_base_value.data", SystemDimension + 1);
+      foreach (var pair in measure.GetMeasureNodes())
       {
-        foreach (var pair in measure.GetMeasureNodes())
-        {
-          ((IIntegerCoordinateSystem<Q>)measure.CoordinateSystem).CenterPoint(pair.Key, data);
-          data[SystemDimension] = pair.Value / norm;
-          wr.WritePoint(new ImagePoint(data));
-        }
+        ((IIntegerCoordinateSystem<Q>) measure.CoordinateSystem).CenterPoint(pair.Key, data);
+        data[SystemDimension] = pair.Value/norm;
+        wr.WritePoint(new ImagePoint(data));
       }
       return wr;
     }

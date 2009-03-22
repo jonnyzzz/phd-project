@@ -33,7 +33,7 @@ namespace DSIS.GnuplotDrawer
 
   public interface IGnuplotLineScriptGen : IGnuplotScriptGen
   {
-    string AddSeria(string name, IEnumerable<double> values);
+    void AddSeria(string name, IEnumerable<double> values);
     void AddFile(IGnuplotLineFile file);
   }
 }

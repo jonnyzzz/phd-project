@@ -18,9 +18,9 @@ namespace DSIS.SimpleRunner
     
     public override string DrawImage(string suffix)
     {
-      string image = CreateFileName(suffix + ".png");
+      string image = NewFile(suffix + ".png");
 
-      var gen = new LinesScriptGen(CreateFileName(".pnuplot"), CreateGnuplotParams(image));
+      var gen = new LinesScriptGen(this, ".gnuplot", CreateGnuplotParams(image));
 
       foreach (LineData data in CreateSeria(mySeries))
       {

@@ -1,4 +1,5 @@
 using System.IO;
+using DSIS.Utils;
 
 namespace DSIS.GnuplotDrawer
 {
@@ -6,7 +7,7 @@ namespace DSIS.GnuplotDrawer
   {
     protected readonly GnuplotScriptParameters myParams;
 
-    protected PngWriterBase(string filename, GnuplotScriptParameters @params) : base(filename)
+    protected PngWriterBase(ITempFileFactory factory, GnuplotScriptParameters @params) : base(factory, ".gnuplot")
     {
       myParams = @params;
 

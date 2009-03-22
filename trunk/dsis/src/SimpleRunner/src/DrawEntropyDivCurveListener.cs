@@ -31,7 +31,6 @@ namespace DSIS.SimpleRunner
       myTitle = title;
     }
 
-
     public override VoidDelegate ComputationStartedC(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
     {
       myData = new Dictionary<string, List<double>>();
@@ -58,7 +57,10 @@ namespace DSIS.SimpleRunner
     {
       string output = Path.Combine(myPath, "entropy-curve");
       Directory.CreateDirectory(output);
-      myGen = GnuplotSriptGen.CreateLines(Path.Combine(output, "curve"), new GnuplotScriptParameters(Path.Combine(output, "curves.png"), "Entropy on division " + myTitle));      
+      var parameters = new GnuplotScriptParameters(Path.Combine(output, "curves.png"), "Entropy on division " + myTitle);
+
+      //TODO: FixMe
+      myGen = GnuplotSriptGen.CreateLines(null, parameters);      
 
       foreach (KeyValuePair<string, List<double>> pair in myData)
       {

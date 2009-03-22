@@ -4,7 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
-  public abstract class DrawBase
+  public abstract class DrawBase : ITempFileFactory
   {
     private string myTitle;
     private string myPath;
@@ -53,5 +53,15 @@ namespace DSIS.SimpleRunner
     }
 
     public abstract string DrawImage(string suffix);
+    
+    public string NewFile(string prefix)
+    {
+      return CreateFileName(prefix);
+    }
+
+    public ITempFileFactory ApplyPrefix(string before, string after)
+    {
+      return this;
+    }
   }
 }

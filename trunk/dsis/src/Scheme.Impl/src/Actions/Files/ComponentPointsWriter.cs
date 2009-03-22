@@ -45,9 +45,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
         {
           if (!files.TryGetValue(info, out fw))
           {
-            string gnuplotComponent = myFolderInfo.CreateFileName("chain-recurrent-picture-" + ++components);
-
-            fw = new GnuplotPointsFileWriter(gnuplotComponent, system.Dimension);
+            fw = new GnuplotPointsFileWriter(myFolderInfo, "chain-recurrent-picture-" + ++components +".data", system.Dimension);
             files[info] = fw;
           }
         }
@@ -55,8 +53,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
         {
           if (otherFilesWriter == null)
           {
-            string gnuplotComponent = myFolderInfo.CreateFileName("chain-recurrent-picture-other");
-            otherFilesWriter = new GnuplotPointsFileWriter(gnuplotComponent, system.Dimension);
+            otherFilesWriter = new GnuplotPointsFileWriter(myFolderInfo, "chain-recurrent-picture-other", system.Dimension);
           }
           fw = otherFilesWriter;
         }

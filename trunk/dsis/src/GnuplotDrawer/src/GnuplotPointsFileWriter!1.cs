@@ -1,5 +1,6 @@
 using System.Globalization;
 using DSIS.Core.Visualization;
+using DSIS.Utils;
 
 namespace DSIS.GnuplotDrawer
 {
@@ -9,7 +10,7 @@ namespace DSIS.GnuplotDrawer
     private readonly int myDim;
     private int myPointsCount;
 
-    public GnuplotPointsFileWriter(string filename, int dim) : base(filename)
+    protected GnuplotPointsFileWriter(ITempFileFactory factory, string suffix, int dim) : base(factory, suffix)
     {
       myDim = dim;
     }

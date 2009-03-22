@@ -13,20 +13,16 @@ namespace DSIS.SimpleRunner
     private IEnumerable<GnuplotPointsFileWriter> Render(Pair<ICellCoordinateSystem<T>, IDictionary<T, double>> file)
     {
       var sys = (IIntegerCoordinateSystem<T>) file.First;
-      var data = new double[2] {0, 0};
-      GnuplotPointsFileWriter wr;
-      GnuplotPointsFileWriter wrz;
+      var data = new double[] {0, 0};
 
-      using (wr = new GnuplotPointsFileWriter(CreateFileName("measure3d_value.data"), 3))
-      using (wrz = new GnuplotPointsFileWriter(CreateFileName("measure3d_zero.data"), 3))
+      var wr = new GnuplotPointsFileWriter(this, "measure3d_value.data", 3);
+      var wrz = new GnuplotPointsFileWriter(this, "measure3d_zero.data", 3);
+      foreach (var pair in file.Second)
       {
-        foreach (KeyValuePair<T, double> pair in file.Second)
-        {
-          T key = pair.Key;
-          sys.CenterPoint(key, data);
-          wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
-          wrz.WritePoint(new ImagePoint(data[0], data[1], 0));
-        }
+        T key = pair.Key;
+        sys.CenterPoint(key, data);
+        wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
+        wrz.WritePoint(new ImagePoint(data[0], data[1], 0));
       }
 
       return new[] {wr, wrz};
@@ -36,7 +32,6 @@ namespace DSIS.SimpleRunner
     {
       if (Wights == null)
         return null;
-
 
       string outputFile = CreateFileName(suffix + "measure3d.png");
 
@@ -48,7 +43,7 @@ namespace DSIS.SimpleRunner
                    RotZ = 30,
                    XYPane = 0
                  };
-      IGnuplotPhaseScriptGen gen = new Gnuplot3dScriptGen(CreateFileName("measure3d.gnuplot"), ps);
+      IGnuplotPhaseScriptGen gen = new Gnuplot3dScriptGen(this, ps);
 
       foreach (var file in Render(Wights.Value))
         gen.AddPointsFile(file.CloseFile());

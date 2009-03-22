@@ -14,17 +14,15 @@ namespace DSIS.SimpleRunner
     {
       var sys = (IIntegerCoordinateSystem<T>) file.First;
       var data = new double[2];
-      using (var wr = new GnuplotPointsFileWriter(CreateFileName("measure.data"), 3))
+      var wr = new GnuplotPointsFileWriter(this, "measure.data", 3);
+      foreach (var pair in file.Second)
       {
-        foreach (KeyValuePair<T, double> pair in file.Second)
-        {
-          T key = pair.Key;
-          sys.CenterPoint(key, data);
-          wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
-        }
-
-        return wr;
+        var key = pair.Key;
+        sys.CenterPoint(key, data);
+        wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
       }
+
+      return wr;
     }
 
     public override string DrawImage(string suffix)
@@ -38,9 +36,7 @@ namespace DSIS.SimpleRunner
 
       var ps = new GnuplotScriptParameters(outputFile,
                                            Title + string.Format("Entropy = {0}", Entropy.Value.ToString("F6")));
-      IGnuplotPhaseScriptGen gen = GnuplotSriptGen.Entrorpy2d(
-        CreateFileName("measure.gnuplot"),
-        ps);
+      IGnuplotPhaseScriptGen gen = GnuplotSriptGen.Entrorpy2d(this, ps);
 
       gen.AddPointsFile(file);
 

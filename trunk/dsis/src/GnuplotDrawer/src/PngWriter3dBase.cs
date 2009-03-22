@@ -1,11 +1,13 @@
+using DSIS.Utils;
+
 namespace DSIS.GnuplotDrawer
 {
   public class PngWriter3dBase : PngWriterBase
   {
     private readonly GnuplotScriptParameters3d my3DParams;
 
-    protected PngWriter3dBase(string filename, GnuplotScriptParameters @params)
-      : base(filename, @params)
+    protected PngWriter3dBase(ITempFileFactory factory, GnuplotScriptParameters @params)
+      : base(factory, @params)
     {
       my3DParams = @params as GnuplotScriptParameters3d;
       var p3d = @params as GnuplotScriptParameters3d;

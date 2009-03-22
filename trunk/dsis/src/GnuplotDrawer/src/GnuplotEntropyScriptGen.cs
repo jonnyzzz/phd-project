@@ -1,11 +1,13 @@
+using DSIS.Utils;
+
 namespace DSIS.GnuplotDrawer
 {
   public class GnuplotEntropyScriptGen : PngWriterBase, IGnuplotPhaseScriptGen
   {
     private bool myIsFirstFile = true;
 
-    public GnuplotEntropyScriptGen(string filename, GnuplotScriptParameters @params)
-      : base(filename, @params)
+    public GnuplotEntropyScriptGen(ITempFileFactory factory, GnuplotScriptParameters @params)
+      : base(factory, @params)
     {
       myWriter.WriteLine("set view map;");
       myWriter.Write("splot ");

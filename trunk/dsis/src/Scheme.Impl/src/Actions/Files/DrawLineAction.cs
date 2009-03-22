@@ -20,9 +20,9 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       var ps = new GnuplotScriptParameters(info.CreateFileName("line.png"), "Line") {ShowKeyHistory = false};
 
-      var gen = GnuplotSriptGen.CreateLines(info.CreateFileName("line.gnuplot"), ps);
+      var gen = GnuplotSriptGen.CreateLines(info, ps);
 
-      var wr = new LinePointsFile(info.CreateFileName("line.data"), line.Dimension, string.Format("Points {0}", line.Count));
+      var wr = new LinePointsFile(info, "line.data", line.Dimension, string.Format("Points {0}", line.Count));
       {
         line.Visit(l=>wr.WritePoint(new ImagePoint(l)));
         gen.AddFile(wr.CloseFile());

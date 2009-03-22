@@ -1,6 +1,7 @@
 using DSIS.Core.Ioc;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph.Entropy.Impl.Entropy;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
@@ -23,9 +24,9 @@ namespace DSIS.Scheme.Impl.Actions.Files
       get { return 2; }
     }
     
-    protected override IGnuplotEntropyScriptGen CreateScriptGen(string file, GnuplotScriptParameters ps)
+    protected override IGnuplotEntropyScriptGen CreateScriptGen(ITempFileFactory factory, GnuplotScriptParameters ps)
     {
-      return new GnuplotEntropy3dWithBaseScriptGen(file, ps);
+      return new GnuplotEntropy3dWithBaseScriptGen(factory, ps);
     }
   }
 }

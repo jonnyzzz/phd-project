@@ -54,18 +54,17 @@ namespace DSIS.SimpleRunner
         GnuplotPointsFileWriter fw;
         if (!files.TryGetValue(info, out fw))
         {
-          string gnuplotComponent = Path.Combine(path, myTitle + "-" + ++components);
-
-          fw = new GnuplotPointsFileWriter(gnuplotComponent, system.Dimension);
+          //TODO: FixMe
+          fw = new GnuplotPointsFileWriter(null, myTitle + "-" + ++components, system.Dimension);
           files[info] = fw;
         }
         system.CenterPoint(node.Coordinate, data);
         fw.WritePoint(new ImagePoint(data));
       }
       
+      //TODO: FixMe
       var gen = GnuplotSriptGen.ScriptGen(
-        system.Dimension,
-        Path.Combine(path, myTitle + "-script.gnuplot"),
+        system.Dimension, null,
         new GnuplotScriptParameters(outputFile, myTitle));
 
       foreach (GnuplotPointsFileWriter file in files.Values)

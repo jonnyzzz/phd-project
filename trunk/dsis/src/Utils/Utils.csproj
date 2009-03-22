@@ -89,6 +89,7 @@
     <Compile Include="src\ILock.cs" />
     <Compile Include="src\InfiniteEnumerable.cs" />
     <Compile Include="src\ISafe.cs" />
+    <Compile Include="src\ITempFileFactory.cs" />
     <Compile Include="src\LinkedList.cs" />
     <Compile Include="src\Lock.cs" />
     <Compile Include="src\LoggerHolper.cs" />

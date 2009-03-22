@@ -12,19 +12,16 @@ namespace DSIS.SimpleRunner
   {
     private IEnumerable<GnuplotPointsFileWriter> Render(Pair<ICellCoordinateSystem<T>, IDictionary<T, double>> file)
     {
-      var sys = (IIntegerCoordinateSystem<T>)file.First;
-      var data = new double[]{ 0, 0 };
-      GnuplotPointsFileWriter wr;
+      var sys = (IIntegerCoordinateSystem<T>) file.First;
+      var data = new double[] {0, 0};
 
-      using (wr = new GnuplotPointsFileWriter(CreateFileName("measure3d_value.data"), 3))
+      var wr = new GnuplotPointsFileWriter(this, "measure3d_value.data", 3);
+      foreach (var pair in file.Second)
       {
-          foreach (var pair in file.Second)
-          {
-            sys.CenterPoint(pair.Key, data);
-            wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
-          }
+        sys.CenterPoint(pair.Key, data);
+        wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
       }
-      return new[] { wr };
+      return new[] {wr};
     }
 
     public override string DrawImage(string suffix)
@@ -32,17 +29,11 @@ namespace DSIS.SimpleRunner
       if (Wights == null)
         return null;
 
-
       string outputFile = CreateFileName(suffix + "measure3d_segments.png");
 
-      var ps = new GnuplotScriptParameters(outputFile,
-                                                               Title +
-                                                               string.Format("Entropy = {0}",
-                                                                             Entropy.Value.ToString("F6")));
-      ps.ForcePoints = true;
-      IGnuplotPhaseScriptGen gen = new GnuplotEntropy3dScriptGen(
-                                                             CreateFileName("measure3d_segments.gnuplot"),
-                                                             ps);
+      string title = string.Format("{1} Entropy = {0}", Entropy.Value.ToString("F6"), Title);
+      var ps = new GnuplotScriptParameters(outputFile, title) {ForcePoints = true};
+      IGnuplotPhaseScriptGen gen = new GnuplotEntropy3dScriptGen(this, ps);
 
       foreach (var file in Render(Wights.Value))
         gen.AddPointsFile(file.CloseFile());

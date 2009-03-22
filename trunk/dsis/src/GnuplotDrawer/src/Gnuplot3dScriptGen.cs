@@ -1,10 +1,12 @@
+using DSIS.Utils;
+
 namespace DSIS.GnuplotDrawer
 {
   public class Gnuplot3dScriptGen : PngWriter3dBase, IGnuplotPhaseScriptGen
   {
     private bool myIsFirstFile = true;
 
-    public Gnuplot3dScriptGen(string filename, GnuplotScriptParameters @params) : base(filename, @params)
+    public Gnuplot3dScriptGen(ITempFileFactory factory, GnuplotScriptParameters @params) : base(factory, @params)
     {
       myWriter.Write("splot ");
     }

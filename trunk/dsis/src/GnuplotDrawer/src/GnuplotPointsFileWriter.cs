@@ -1,8 +1,10 @@
+using DSIS.Utils;
+
 namespace DSIS.GnuplotDrawer
 {
   public class GnuplotPointsFileWriter : GnuplotPointsFileWriter<IGnuplotPointsFile>
   {
-    public GnuplotPointsFileWriter(string filename, int dim) : base(filename, dim)
+    public GnuplotPointsFileWriter(ITempFileFactory factory, string suffix, int dim) : base(factory, suffix, dim)
     {
     }
 
