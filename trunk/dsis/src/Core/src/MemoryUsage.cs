@@ -43,22 +43,23 @@ namespace DSIS.Core
       {
         foreach (ManagementObject item in searcher.Get())
         {
-          Func<object, long?> parse = x =>
-                                        {
-                                          if (x == null)
-                                          {
-                                            return null;
-                                          }
-
-                                          return long.Parse(x.ToString())*1024;
-                                        };
           return new MemoryInfo(
-            parse(item["TotalPhysicalMemory"]),
-            parse(item["TotalVirtualMemory"]),
+            Parse(item["TotalPhysicalMemory"]),
+            Parse(item["TotalVirtualMemory"]),
             heap);
         }        
         return new MemoryInfo(heap);
       }
+    }
+
+    private static long? Parse(object x)
+    {
+      if (x == null)
+      {
+        return null;
+      }
+
+      return long.Parse(x.ToString()) * 1024;
     }
 
     private static MemoryInfo ReadOperationSystemInfo(long heap)
@@ -69,18 +70,9 @@ namespace DSIS.Core
       {
         foreach (ManagementObject item in searcher.Get())
         {
-          Func<object, long?> parse = x =>
-                                        {
-                                          if (x == null)
-                                          {
-                                            return null;
-                                          }
-
-                                          return long.Parse(x.ToString())*1024;
-                                        };
           return new MemoryInfo(
-            parse(item["MaxProcessMemorySize"]),
-            parse(item["TotalVirtualMemorySize"]),
+            Parse(item["MaxProcessMemorySize"]),
+            Parse(item["TotalVirtualMemorySize"]),
             heap);
         }        
         return new MemoryInfo(heap);

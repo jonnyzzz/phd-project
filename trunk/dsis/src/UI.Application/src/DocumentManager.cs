@@ -61,15 +61,20 @@ namespace DSIS.UI.Application
       public void ChangeDocument(Context newContext)
       {
         AssertDisposed();
-
+        var dispo = WaitDispose();
         myInvocator.InvokeOrQueue(
           "Create new document",
           delegate
             {
-              var ctx = UpdateContext(myApplication.Document.Content, newContext);
+              using (dispo)
+              {
+                AssertDisposed();
 
-              var doc = new ApplicationDocument(myApplication.Document.Title, ctx);
-              myApplication.Document = doc;
+                var ctx = UpdateContext(myApplication.Document.Content, newContext);
+
+                var doc = new ApplicationDocument(myApplication.Document.Title, ctx);
+                myApplication.Document = doc;
+              }
             });
       }
 
