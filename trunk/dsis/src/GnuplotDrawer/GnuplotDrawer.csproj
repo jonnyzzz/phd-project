@@ -14,6 +14,7 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,7 +50,14 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
@@ -59,6 +67,7 @@
     <Compile Include="src\Gnuplot1dScriptGen.cs" />
     <Compile Include="src\Gnuplot2dScriptGen.cs" />
     <Compile Include="src\Gnuplot3dScriptGen.cs" />
+    <Compile Include="src\GnuplotDrawException.cs" />
     <Compile Include="src\GnuplotEntropy2dWithBaseScriptGen.cs" />
     <Compile Include="src\GnuplotEntropy3dScriptGen.cs" />
     <Compile Include="src\GnuplotEntropy3dWithBaseScriptGen.cs" />
@@ -66,6 +75,7 @@
     <Compile Include="src\GnuplotFileWriterBase.cs" />
     <Compile Include="src\GnuplotDrawer.cs" />
     <Compile Include="src\GnuplotPointsFileReader.cs" />
+    <Compile Include="src\GnuplotPointsFileWriter!1.cs" />
     <Compile Include="src\GnuplotPointsFileWriter.cs" />
     <Compile Include="src\GnuplotScriptParameters.cs" />
     <Compile Include="src\GnuplotScriptParameters3d.cs" />
@@ -73,6 +83,7 @@
     <Compile Include="src\IGnuplotEntropyScriptGen.cs" />
     <Compile Include="src\IGnuplotScriptGen.cs" />
     <Compile Include="src\IScanDraw.cs" />
+    <Compile Include="src\LinePointsFile.cs" />
     <Compile Include="src\LinesScriptGen.cs" />
     <Compile Include="src\MergedGnuplotScriptGen.cs" />
     <Compile Include="src\PngWriter3dBase.cs" />
@@ -86,6 +97,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

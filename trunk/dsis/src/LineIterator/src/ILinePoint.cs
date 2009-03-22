@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using DSIS.Core.System;
 
@@ -19,6 +20,8 @@ namespace DSIS.LineIterator
     double EuclidDistance(Impl point);
 
     void Save(TextWriter tw);
+
+    void Visit(Action<double[]> visitor);
 
     int Dimension { get; }
 

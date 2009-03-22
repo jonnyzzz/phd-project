@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Core.Visualization;
 using DSIS.GnuplotDrawer;
 using DSIS.LineIterator;
 using DSIS.Scheme.Ctx;
@@ -15,16 +16,15 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     protected override void Apply(ILine line, Context ctx, Context result)
     {
-      WorkingFolderInfo info = FileKeys.WorkingFolderKey.Get(ctx);
+      var info = FileKeys.WorkingFolderKey.Get(ctx);
 
-      GnuplotScriptParameters ps = new GnuplotScriptParameters(info.CreateFileName("line.png"), "Line");
-      ps.ShowKeyHistory = false;
+      var ps = new GnuplotScriptParameters(info.CreateFileName("line.png"), "Line") {ShowKeyHistory = false};
 
-      IGnuplotLineScriptGen gen = GnuplotSriptGen.CreateLines(info.CreateFileName("line.gnuplot"), ps);
+      var gen = GnuplotSriptGen.CreateLines(info.CreateFileName("line.gnuplot"), ps);
 
-      using(GnuplotPointsFileWriter wr = new GnuplotPointsFileWriter(info.CreateFileName("line.data"), line.Dimension))
+      using(var wr = new GnuplotPointsFileWriter(info.CreateFileName("line.data"), line.Dimension))
       {
-        line.Save(wr.Writer);
+        line.Visit(l=>wr.WritePoint(new ImagePoint(l)));
         gen.AddFile(wr.Filename, "");
       }
       gen.Finish();

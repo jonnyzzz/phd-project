@@ -2,24 +2,38 @@ using System.Collections.Generic;
 
 namespace DSIS.GnuplotDrawer
 {
-  public interface IGnuplotScript
+  public interface IGnuplotScriptGen 
   {
-    string Filename { get; }
+    IGnuplotScript CloseFile();    
   }
 
-  public interface IGnuplotScriptGen : IGnuplotScript
+  public interface IGnuplotFile
   {
-    void Finish();    
+    string FileName { get; }
+  }
+
+  public interface IGnuplotScript : IGnuplotFile
+  {
+  }
+
+  public interface IGnuplotPointsFile : IGnuplotFile
+  {    
+    long PointsCount { get; }
   }
 
   public interface IGnuplotPhaseScriptGen : IGnuplotScriptGen
   {
-    void AddPointsFile(GnuplotPointsFileWriter file);    
+    void AddPointsFile(IGnuplotPointsFile file);
+  }
+
+  public interface IGnuplotLineFile : IGnuplotFile
+  {
+    string Name { get; }
   }
 
   public interface IGnuplotLineScriptGen : IGnuplotScriptGen
   {
     string AddSeria(string name, IEnumerable<double> values);
-    void AddFile(string file, string title);
+    void AddFile(IGnuplotLineFile file);
   }
 }

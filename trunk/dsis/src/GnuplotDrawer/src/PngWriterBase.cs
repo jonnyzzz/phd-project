@@ -2,11 +2,11 @@ using System.IO;
 
 namespace DSIS.GnuplotDrawer
 {
-  public class PngWriterBase : GnuplotFileWriterBase
+  public abstract class PngWriterBase : GnuplotFileWriterBase<IGnuplotScript>, IGnuplotScriptGen
   {
     protected readonly GnuplotScriptParameters myParams;
 
-    public PngWriterBase(string filename, GnuplotScriptParameters @params) : base(filename)
+    protected PngWriterBase(string filename, GnuplotScriptParameters @params) : base(filename)
     {
       myParams = @params;
 
@@ -25,15 +25,22 @@ namespace DSIS.GnuplotDrawer
 
     protected void SetOutput(string suffix)
     {
+      AssertDisposed();
+
       string file = myParams.OutputFile;
       var name = Path.GetFileNameWithoutExtension(file) + suffix + ".png";
       var dest = Path.Combine(Path.GetDirectoryName(file), name);
       myWriter.WriteLine("set output '{0}';", dest);
     }
 
-    public virtual void Finish()
+    protected override IGnuplotScript CreateCloseInfo(string filename)
     {
-      Dispose();
+      return new GnuplotScript { FileName = filename };
+    }
+
+    private class GnuplotScript : IGnuplotScript
+    {
+      public string FileName { get; set; }
     }
   }
 }

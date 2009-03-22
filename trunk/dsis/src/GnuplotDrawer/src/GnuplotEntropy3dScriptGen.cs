@@ -14,21 +14,27 @@ namespace DSIS.GnuplotDrawer
       myWriter.Write("splot ");
     }
 
-    public void AddPointsFile(GnuplotPointsFileWriter file)
+    protected override void BeforeFileClosed()
+    {
+      myWriter.WriteLine(" ;");
+      base.BeforeFileClosed();
+    }
+
+    public void AddPointsFile(IGnuplotPointsFile file)
     {
       if (myIsFirstFile)
         myIsFirstFile = false;
       else
         myWriter.WriteLine(", \\");
 
-      string lines = file.Filename + ".lines";
-      string white = file.Filename + ".zero";
+      string lines = file.FileName + ".lines";
+      string white = file.FileName + ".zero";
 
       using(var linesWriter = new GnuplotPointsFileWriter(lines, 3))
       {        
         using(var zeroPlane = new GnuplotPointsFileWriter(white, 3))
         {
-          foreach (ImagePoint point in new GnuplotPointsFileReader(file.Filename).Read())
+          foreach (ImagePoint point in new GnuplotPointsFileReader(file.FileName).Read())
           {
             var bs = new ImagePoint(point.Point[0], point.Point[1], 0);
             zeroPlane.WritePoint(new ImagePoint(point.Point[0], point.Point[1], 0.00002));
@@ -42,12 +48,5 @@ namespace DSIS.GnuplotDrawer
 
       myWriter.Write(" '{1}' with dots, '{0}' with lines ", lines, white);
     }
-
-    public override void Dispose()
-    {
-      myWriter.WriteLine(" ;");      
-      base.Dispose();
-    }
-
   }
 }

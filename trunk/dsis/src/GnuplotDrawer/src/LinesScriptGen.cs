@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
+using DSIS.Core.Visualization;
 
 namespace DSIS.GnuplotDrawer
 {
@@ -8,58 +9,55 @@ namespace DSIS.GnuplotDrawer
   {
     private readonly Dictionary<string, int> myCriteriaToCode = new Dictionary<string, int>();
     private bool myIsFirst = true;
+    private readonly Func<string, string> CreateCriteriaFileName;
 
     public LinesScriptGen(string file, GnuplotScriptParameters ps) : base(file, ps)
     {
       myWriter.Write("plot ");
+      CreateCriteriaFileName =
+        name =>
+          {
+            int v;
+            if (!myCriteriaToCode.TryGetValue(name, out v))
+            {
+              v = myCriteriaToCode[name] = myCriteriaToCode.Count + 1;
+            }
+            return Path.GetFullPath(file + v + ".dat");
+          };
     }
 
     public string AddSeria(string name, IEnumerable<double> values)
     {
       string file = CreateCriteriaFileName(name);
-      using (var w = new GnuplotFileWriterBase(file))
+      var w = new LinePointsFile(file, 2, name);
+      int count = 0;
+      foreach (double v in values)
       {
-        file = w.Filename;
-        int count = 0;
-        foreach (double v in values)
-        {
-          w.myWriter.Write(count++);
-          w.myWriter.Write(" ");
-          w.myWriter.WriteLine(v.ToString("R", CultureInfo.InvariantCulture));
-        }
+        w.WritePoint(new ImagePoint(count++, v));
       }
 
       if (!myIsFirst)
       {
         myWriter.Write(", ");
-      } else
+      }
+      else
       {
         myIsFirst = false;
       }
+      AddFile(w.CloseFile());
 
-      AddFile(file, name);
       return file;
     }
 
-    public void AddFile(string file, string title)
-    {
-      myWriter.WriteLine("'{0}' with linespoint title \"{1}\" \\", file, title);
-    }
-
-    private string CreateCriteriaFileName(string name)
-    {
-      int v;
-      if (!myCriteriaToCode.TryGetValue(name, out v))
-      {
-        v = myCriteriaToCode[name] = myCriteriaToCode.Count + 1;
-      }
-      return Path.GetFullPath(Filename + v + ".dat");
-    }
-
-    public override void Dispose()
+    protected override void BeforeFileClosed()
     {
       myWriter.WriteLine(" ;");
-      base.Dispose();
+      base.BeforeFileClosed();
+    }
+
+    public void AddFile(IGnuplotLineFile file)
+    {
+      myWriter.WriteLine("'{0}' with linespoint title \"{1}\" \\", file.FileName, file.Name);
     }
   }
 }

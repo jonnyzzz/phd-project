@@ -2,6 +2,6 @@ namespace DSIS.GnuplotDrawer
 {
   public interface IGnuplotEntropyScriptGen : IGnuplotScriptGen
   {
-    void AddPointsFile(GnuplotPointsFileWriter entropy, GnuplotPointsFileWriter @base);
+    void AddPointsFile(IGnuplotPointsFile entropy, IGnuplotPointsFile @base);
   }
 }

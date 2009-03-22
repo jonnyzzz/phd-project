@@ -58,7 +58,7 @@ namespace DSIS.LineIterator
 
     public void Iterate(ISystemSpace space, ISystemInfo system)
     {
-      var function = system.GetFunction<double>(myEps);
+      var function = system.GetFunction(myEps);
       var list = new List<System.Collections.Generic.LinkedList<LinePoint>>(Iterate(myDistanceEps, myPoints, function, space));
       myPoints = list;
       myLastPoint = list[list.Count-1].Last.Value;
@@ -72,6 +72,17 @@ namespace DSIS.LineIterator
         {
           point.Point.Save(tw);
           tw.WriteLine();
+        }
+      }      
+    }
+    
+    public void Visit(Action<double[]> tw)
+    {
+      foreach (var list in myPoints)
+      {
+        foreach (var point in list)
+        {
+          point.Point.Visit(tw);
         }
       }      
     }

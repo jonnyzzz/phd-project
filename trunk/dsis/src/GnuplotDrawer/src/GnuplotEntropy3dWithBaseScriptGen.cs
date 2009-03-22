@@ -13,19 +13,25 @@ namespace DSIS.GnuplotDrawer
       myWriter.Write("splot ");
     }
 
-    public void AddPointsFile(GnuplotPointsFileWriter entropy, GnuplotPointsFileWriter @base)
+    protected override void BeforeFileClosed()
+    {
+      () => myWriter.WriteLine(" ;");
+      base.BeforeFileClosed();
+    }
+
+    public void AddPointsFile(IGnuplotPointsFile entropy, IGnuplotPointsFile @base)
     {
       if (myIsFirstFile)
         myIsFirstFile = false;
       else
         myWriter.WriteLine(", \\");
 
-      string lines = entropy.Filename + ".lines";
-      string bases = entropy.Filename + ".bases";
+      string lines = entropy.FileName + ".lines";
+      string bases = entropy.FileName + ".bases";
 
       using (var linesWriter = new GnuplotPointsFileWriter(lines, 3))
       {
-        foreach (ImagePoint point in new GnuplotPointsFileReader(entropy.Filename).Read())
+        foreach (ImagePoint point in new GnuplotPointsFileReader(entropy.FileName).Read())
         {
           var bs = new ImagePoint(point.Point[0], point.Point[1], 0);
 
@@ -37,7 +43,7 @@ namespace DSIS.GnuplotDrawer
 
       using (var zeroPlane = new GnuplotPointsFileWriter(bases, 3))
       {
-        foreach (var point in new GnuplotPointsFileReader(@base.Filename).Read())
+        foreach (var point in new GnuplotPointsFileReader(@base.FileName).Read())
         {
           var bs = new ImagePoint(point.Point[0], point.Point[1], 0.00002);
 
@@ -46,12 +52,6 @@ namespace DSIS.GnuplotDrawer
       }
 
       myWriter.Write(" '{1}' with dots, '{0}' with lines ", lines, bases);
-    }
-
-    public override void Dispose()
-    {
-      myWriter.WriteLine(" ;");
-      base.Dispose();
     }
   }
 }

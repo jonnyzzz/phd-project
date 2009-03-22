@@ -11,24 +11,24 @@ namespace DSIS.GnuplotDrawer
       myWriter.Write("splot ");
     }
 
-    public void AddPointsFile(GnuplotPointsFileWriter file)
+    protected override void BeforeFileClosed()
+    {
+      myWriter.WriteLine(" ;");
+      base.BeforeFileClosed();
+    }
+
+    public void AddPointsFile(IGnuplotPointsFile file)
     {
       if (myIsFirstFile)
         myIsFirstFile = false;
       else
         myWriter.WriteLine(", \\");
 
-      myWriter.Write(" '{0}' title \"{1}\" with ", file.Filename, string.Format("Count {0}", file.PointsCount));
+      myWriter.Write(" '{0}' title \"{1}\" with ", file.FileName, string.Format("Count {0}", file.PointsCount));
 
       myWriter.Write(" points ");
 
       myWriter.Write(" palette ");
-    }
-
-    public override void Dispose()
-    {
-      myWriter.WriteLine(" ;");
-      base.Dispose();
     }
   }
 }

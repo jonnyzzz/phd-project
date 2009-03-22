@@ -18,7 +18,7 @@ namespace DSIS.GnuplotDrawer
 
         if (my3DParams.XYPane != null)
           myWriter.WriteLine("set xyplane at {0};", my3DParams.XYPane);      
-      }      
+      }
     }
 
     private void ChangeView(float rotX, float rotZ)
@@ -33,7 +33,7 @@ namespace DSIS.GnuplotDrawer
       SetOutput(string.Format("-{0}-{1}", rotX, rotZ));
     }
 
-    public override void Dispose()
+    protected override void BeforeFileClosed()
     {
       if ((myParams as IScanDraw).DrawScans)
       {
@@ -45,8 +45,7 @@ namespace DSIS.GnuplotDrawer
           }
         }
       }
-
-      base.Dispose();
+      base.BeforeFileClosed();
     }
   }
 }

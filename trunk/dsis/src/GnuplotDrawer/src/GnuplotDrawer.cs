@@ -33,21 +33,32 @@ namespace DSIS.GnuplotDrawer
       myGnuplotFolder = gnuplotFolder;
     }
 
+    /// <summary>
+    /// Executes gnuplot command. 
+    /// </summary>
+    /// <param name="script"></param>
+    /// <returns>GnuPlot running process</returns>
+    /// <exception cref="GnuplotDrawException">if gnuplot process was not found or failed to start</exception>
     public Process DrawImage(IGnuplotScript script)
     {
+      try
+      {
+        var pi = new ProcessStartInfo
+                   {
+                     FileName = Path.Combine(myGnuplotFolder, @"bin\wgnuplot.exe"),
+                     Arguments = script.FileName,
+                     ErrorDialog = true,
+                     UseShellExecute = true,
+                   };
 
-      var pi = new ProcessStartInfo
-                              {
-                                FileName = Path.Combine(myGnuplotFolder, @"bin\wgnuplot.exe"),
-                                Arguments = script.Filename,
-                                ErrorDialog = true,
-                                UseShellExecute = true,                                
-                              };
+        if (!File.Exists(pi.FileName))
+          throw new GnuplotDrawException("Unable to locate pgnuplot.exe");
 
-      if (!File.Exists(pi.FileName))
-        throw new ArgumentException("Unable to locate pgnuplot.exe");
-
-      return Process.Start(pi);
+        return Process.Start(pi);
+      } catch (Exception e)
+      {
+        throw new GnuplotDrawException("Gnuplot process failed to start. " + e.Message, e);
+      }
     }
   }
 }

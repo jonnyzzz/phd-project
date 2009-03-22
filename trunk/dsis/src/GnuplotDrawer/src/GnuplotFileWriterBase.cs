@@ -1,21 +1,50 @@
 using System;
 using System.IO;
 using System.Text;
+using DSIS.Utils;
+using log4net;
 
 namespace DSIS.GnuplotDrawer
 {
-  public class GnuplotFileWriterBase : IDisposable
+  public abstract class GnuplotFileWriterBase<T> : IDisposable
+    where T : IGnuplotFile
   {
-    private readonly string myFilename;
-    internal TextWriter myWriter;
+    private static readonly ILog LOG = LogManager.GetLogger(typeof (GnuplotFileWriterBase<T>));
 
-    public GnuplotFileWriterBase(string filename)
+    private readonly string myFilename;
+    protected TextWriter myWriter;
+
+    protected GnuplotFileWriterBase(string filename)
     {
       myFilename = Path.GetFullPath(filename);
       myWriter = new StreamWriter(filename, true, Encoding.ASCII);
     }
 
-    public virtual void Dispose()
+    protected void AssertDisposed()
+    {
+      if (myWriter == null)
+      {
+        LOG.ErrorFormat("Access to disposed object at:{0}{1}", Environment.NewLine, Environment.StackTrace);
+      }
+    }
+
+    void IDisposable.Dispose()
+    {
+      AssertDisposed();
+      BeforeFileClosed();
+    }
+
+    protected virtual void BeforeFileClosed()
+    {      
+    }
+
+    private void BeforeFileClosedInternal()
+    {
+      AssertDisposed();
+      LOG.Catch("BeforeFileClosed M", BeforeFileClosed);
+    }
+
+    private void CloseFileImpl()
     {
       if (myWriter != null)
       {
@@ -24,14 +53,14 @@ namespace DSIS.GnuplotDrawer
       }
     }
 
-    public string Filename
+    public T CloseFile()
     {
-      get { return myFilename; }
+      AssertDisposed();
+      BeforeFileClosedInternal();
+      CloseFileImpl();
+      return CreateCloseInfo(myFilename);
     }
 
-    public TextWriter Writer
-    {
-      get { return myWriter; }
-    }
+    protected abstract T CreateCloseInfo(string filename);
   }
 }

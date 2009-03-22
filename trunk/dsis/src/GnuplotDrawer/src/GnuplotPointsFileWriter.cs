@@ -1,39 +1,20 @@
-using System.Globalization;
-using DSIS.Core.Visualization;
-
 namespace DSIS.GnuplotDrawer
 {
-  public class GnuplotPointsFileWriter : GnuplotFileWriterBase
+  public class GnuplotPointsFileWriter : GnuplotPointsFileWriter<IGnuplotPointsFile>
   {
-    private readonly int myDim;
-    private int myPointsCount;
-
-    public GnuplotPointsFileWriter(string filename, int dim) : base(filename)
+    public GnuplotPointsFileWriter(string filename, int dim) : base(filename, dim)
     {
-      myDim = dim;
     }
 
-    public void WritePoint(ImagePoint pt)
+    protected override IGnuplotPointsFile CreateCloseInfo(string filename)
     {
-      for (int i = 0; i < myDim; i++)
-      {
-        myWriter.Write(DoubleToString(pt.Point[i]));
-        myWriter.Write(' ');
-      }
-      myWriter.WriteLine();
-      myPointsCount++;
+      return new GnuplotPointFile { FileName = filename, PointsCount = PointsCount };
     }
-
-    public static string DoubleToString(double d)
+    private class GnuplotPointFile : IGnuplotPointsFile
     {
-      return d.ToString("R", CultureInfo.InvariantCulture);
+      public string FileName { get; set; }
+      public long PointsCount { get; set; }
     }
-
-    public int PointsCount
-    {
-      get { return myPointsCount; }
-    }
-
-
+    
   }
 }

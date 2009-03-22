@@ -9,14 +9,14 @@ namespace DSIS.GnuplotDrawer
       myWriter.Write("plot ");
     }
 
-    public void AddPointsFile(GnuplotPointsFileWriter file)
+    public override void AddPointsFile(IGnuplotPointsFile file)
     {
       if (myIsFirstFile)
         myIsFirstFile = false;
       else
         myWriter.WriteLine(", \\");
 
-      myWriter.Write(" '{0}' title \"{1}\" with ", file.Filename, string.Format("Count {0}", file.PointsCount));
+      myWriter.Write(" '{0}' title \"{1}\" with ", file.FileName, string.Format("Count {0}", file.PointsCount));
 
       if (myParams.ForcePoints || file.PointsCount >= 300)
         myWriter.Write(" dots ");
@@ -24,10 +24,10 @@ namespace DSIS.GnuplotDrawer
         myWriter.Write(" points ");
     }
 
-    public override void Dispose()
+    public override void BeforeFileClosed()
     {
       myWriter.WriteLine(" ;");
-      base.Dispose();
+      base.BeforeFileClosed();
     }
   }
 }

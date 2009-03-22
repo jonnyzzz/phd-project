@@ -69,6 +69,11 @@ namespace DSIS.LineIterator
       }
     }
 
+    public void Visit(Action<double[]> visitor)
+    {
+      visitor(myPoint);
+    }
+
     public int Dimension
     {
       get { return myPoint.Length; }
@@ -81,7 +86,7 @@ namespace DSIS.LineIterator
 
     public override string ToString()
     {
-      StringWriter st = new StringWriter();
+      var st = new StringWriter();
       st.Write("[");
       Save(st);
       st.Write("]");
