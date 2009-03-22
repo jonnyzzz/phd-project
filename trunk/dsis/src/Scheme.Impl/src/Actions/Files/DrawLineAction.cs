@@ -22,14 +22,13 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       var gen = GnuplotSriptGen.CreateLines(info.CreateFileName("line.gnuplot"), ps);
 
-      using(var wr = new GnuplotPointsFileWriter(info.CreateFileName("line.data"), line.Dimension))
+      var wr = new LinePointsFile(info.CreateFileName("line.data"), line.Dimension, string.Format("Points {0}", line.Count));
       {
         line.Visit(l=>wr.WritePoint(new ImagePoint(l)));
-        gen.AddFile(wr.Filename, "");
+        gen.AddFile(wr.CloseFile());
       }
-      gen.Finish();
 
-      new GnuplotDrawer.GnuplotDrawer().DrawImage(gen);      
+      new GnuplotDrawer.GnuplotDrawer().DrawImage(gen.CloseFile());      
     }
   }
 }

@@ -32,10 +32,9 @@ namespace DSIS.Scheme.Impl.Actions.Files
       IGnuplotPhaseScriptGen gen = GnuplotSriptGen.Entrorpy2d(
         info.CreateFileName("measure-color-map.gnuplot"), ps);
 
-      gen.AddPointsFile(wr);
-      gen.Finish();
+      gen.AddPointsFile(wr.CloseFile());
 
-      new GnuplotDrawer.GnuplotDrawer().DrawImage(gen);
+      new GnuplotDrawer.GnuplotDrawer().DrawImage(gen.CloseFile());
     }
 
     public override int SystemDimension

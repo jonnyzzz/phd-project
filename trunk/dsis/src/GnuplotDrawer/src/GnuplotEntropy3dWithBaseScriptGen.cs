@@ -15,7 +15,7 @@ namespace DSIS.GnuplotDrawer
 
     protected override void BeforeFileClosed()
     {
-      () => myWriter.WriteLine(" ;");
+      myWriter.WriteLine(" ;");
       base.BeforeFileClosed();
     }
 

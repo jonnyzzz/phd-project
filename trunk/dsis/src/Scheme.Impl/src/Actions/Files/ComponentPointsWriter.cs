@@ -18,7 +18,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       myFolderInfo = folderInfo;
     }
 
-    public IEnumerable<GnuplotPointsFileWriter> WriteComponents<T, Q>(T system, IGraphStrongComponents<Q> comps)
+    public IEnumerable<IGnuplotPointsFile> WriteComponents<T, Q>(T system, IGraphStrongComponents<Q> comps)
       where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate
     {
@@ -70,7 +70,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       {
         result = otherFilesWriter.Enum().Join(result);
       }
-      return result;
+      return result.Select(x=>x.CloseFile());
     }
   }
 }

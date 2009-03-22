@@ -24,11 +24,6 @@ namespace DSIS.GnuplotDrawer
       return new GnuplotEntropyScriptGen(filename, param);
     }
 
-    public static IGnuplotScriptGen CutGen(int dim, string filename, GnuplotScriptParameters ps)
-    {
-      return new MergedGnuplotScriptGen(ScriptGen(dim, filename, ps));
-    }
-
     public static IGnuplotLineScriptGen CreateLines(string filename, GnuplotScriptParameters ps)
     {
       return new LinesScriptGen(filename, ps);

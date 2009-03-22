@@ -12,9 +12,9 @@ namespace DSIS.SimpleRunner
   {
     private GnuplotPointsFileWriter Render(Pair<ICellCoordinateSystem<T>, IDictionary<T, double>> file)
     {
-      IIntegerCoordinateSystem<T> sys = (IIntegerCoordinateSystem<T>) file.First;
-      double[] data = new double[2];
-      using (GnuplotPointsFileWriter wr = new GnuplotPointsFileWriter(CreateFileName("measure.data"), 3))
+      var sys = (IIntegerCoordinateSystem<T>) file.First;
+      var data = new double[2];
+      using (var wr = new GnuplotPointsFileWriter(CreateFileName("measure.data"), 3))
       {
         foreach (KeyValuePair<T, double> pair in file.Second)
         {
@@ -32,22 +32,20 @@ namespace DSIS.SimpleRunner
       if (Wights == null)
         return null;
 
-      GnuplotPointsFileWriter file = Render(Wights.Value);
-      {
-        string outputFile = CreateFileName(suffix + "measure.png");
+      var file = Render(Wights.Value).CloseFile();
+      
+      string outputFile = CreateFileName(suffix + "measure.png");
 
-        GnuplotScriptParameters ps = new GnuplotScriptParameters(outputFile, Title + string.Format("Entropy = {0}", Entropy.Value.ToString("F6")));
-        IGnuplotPhaseScriptGen gen = GnuplotSriptGen.Entrorpy2d(
-          CreateFileName("measure.gnuplot"),
-          ps);
+      var ps = new GnuplotScriptParameters(outputFile,
+                                           Title + string.Format("Entropy = {0}", Entropy.Value.ToString("F6")));
+      IGnuplotPhaseScriptGen gen = GnuplotSriptGen.Entrorpy2d(
+        CreateFileName("measure.gnuplot"),
+        ps);
 
-        gen.AddPointsFile(file);
+      gen.AddPointsFile(file);
 
-        gen.Finish();
-
-        GnuplotDrawer.GnuplotDrawer drw = new GnuplotDrawer.GnuplotDrawer();
-        drw.DrawImage(gen);
-      }
+      var drw = new GnuplotDrawer.GnuplotDrawer();
+      drw.DrawImage(gen.CloseFile());
 
       return "";
     }

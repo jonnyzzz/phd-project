@@ -45,12 +45,10 @@ namespace DSIS.SimpleRunner
                                                              ps);
 
       foreach (var file in Render(Wights.Value))
-        gen.AddPointsFile(file);
-
-      gen.Finish();
+        gen.AddPointsFile(file.CloseFile());
 
       var drw = new GnuplotDrawer.GnuplotDrawer();
-      drw.DrawImage(gen);
+      drw.DrawImage(gen.CloseFile());
 
       return outputFile;
     }

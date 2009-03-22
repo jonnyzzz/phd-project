@@ -26,10 +26,9 @@ namespace DSIS.SimpleRunner
       {
         gen.AddSeria(data.Name, data.Data);
       }
-      gen.Finish();
 
       var dw = new GnuplotDrawer.GnuplotDrawer();
-      dw.DrawImage(gen);
+      dw.DrawImage(gen.CloseFile());
 
       return image;
     }

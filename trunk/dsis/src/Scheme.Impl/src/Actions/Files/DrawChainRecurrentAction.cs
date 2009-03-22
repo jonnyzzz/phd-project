@@ -17,7 +17,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       return FileKeys.WorkingFolderKey.Get(input);
     }
 
-    protected override void DrawFromScript(IGnuplotPhaseScriptGen gen)
+    protected override void DrawFromScript(IGnuplotScript gen)
     {
       var drw = new GnuplotDrawer.GnuplotDrawer();
       drw.DrawImage(gen);

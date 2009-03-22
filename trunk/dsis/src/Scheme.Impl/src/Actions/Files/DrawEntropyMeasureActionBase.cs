@@ -57,11 +57,10 @@ namespace DSIS.Scheme.Impl.Actions.Files
 */
       }
 
-      gen.AddPointsFile(wr, bs);
-      gen.Finish();
+      gen.AddPointsFile(wr.CloseFile(), bs.CloseFile());
 
       var drw = new GnuplotDrawer.GnuplotDrawer();
-      drw.DrawImage(gen).WaitForExit();
+      drw.DrawImage(gen.CloseFile()).WaitForExit();
 
       FileKeys.ImageKey.Set(output, new ImageResult(outputFile));
     }

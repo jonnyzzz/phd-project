@@ -63,9 +63,8 @@ namespace DSIS.SimpleRunner
       foreach (KeyValuePair<string, List<double>> pair in myData)
       {
         myGen.AddSeria(pair.Key, pair.Value);
-      }
-      myGen.Finish();
-      new GnuplotDrawer.GnuplotDrawer().DrawImage(myGen);
+      }      
+      new GnuplotDrawer.GnuplotDrawer().DrawImage(myGen.CloseFile());
       return base.ComputationFinishedC(comps, graph, system, cx);
     }
 

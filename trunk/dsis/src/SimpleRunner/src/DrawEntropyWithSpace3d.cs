@@ -40,21 +40,21 @@ namespace DSIS.SimpleRunner
 
       string outputFile = CreateFileName(suffix + "measure3d.png");
 
-      var ps = new GnuplotScriptParameters3d(outputFile,
-                                             string.Format("Title {1} Entropy = {0}", Entropy.Value.ToString("F6"), Title));
-      ps.ForcePoints = true;
-      ps.RotX = 75;
-      ps.RotZ = 30;
-      ps.XYPane = 0;
+      string title = string.Format("Title {1} Entropy = {0}", Entropy.Value.ToString("F6"), Title);
+      var ps = new GnuplotScriptParameters3d(outputFile, title)
+                 {
+                   ForcePoints = true,
+                   RotX = 75,
+                   RotZ = 30,
+                   XYPane = 0
+                 };
       IGnuplotPhaseScriptGen gen = new Gnuplot3dScriptGen(CreateFileName("measure3d.gnuplot"), ps);
 
       foreach (var file in Render(Wights.Value))
-        gen.AddPointsFile(file);
-
-      gen.Finish();
+        gen.AddPointsFile(file.CloseFile());
 
       var drw = new GnuplotDrawer.GnuplotDrawer();
-      drw.DrawImage(gen);
+      drw.DrawImage(gen.CloseFile());
 
       return "";
     }

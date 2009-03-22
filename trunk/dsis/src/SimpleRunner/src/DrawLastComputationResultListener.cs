@@ -43,9 +43,9 @@ namespace DSIS.SimpleRunner
 
       var files = new Dictionary<IStrongComponentInfo, GnuplotPointsFileWriter>();
       int components = 0;
-      double[] data = new double[system.Dimension];
+      var data = new double[system.Dimension];
 
-      foreach (INode<Q> node in comps.GetNodes(comps.Components))
+      foreach (var node in comps.GetNodes(comps.Components))
       {
         IStrongComponentInfo info = comps.GetNodeComponent(node);
         if (info == null)
@@ -63,23 +63,20 @@ namespace DSIS.SimpleRunner
         fw.WritePoint(new ImagePoint(data));
       }
       
-      IGnuplotPhaseScriptGen gen = GnuplotSriptGen.ScriptGen(
+      var gen = GnuplotSriptGen.ScriptGen(
         system.Dimension,
         Path.Combine(path, myTitle + "-script.gnuplot"),
         new GnuplotScriptParameters(outputFile, myTitle));
 
       foreach (GnuplotPointsFileWriter file in files.Values)
       {
-        file.Dispose();
-        gen.AddPointsFile(file);
+        gen.AddPointsFile(file.CloseFile());
       }
 
-      gen.Finish();
+      var drw = new GnuplotDrawer.GnuplotDrawer();
+      drw.DrawImage(gen.CloseFile());
 
-      GnuplotDrawer.GnuplotDrawer drw = new GnuplotDrawer.GnuplotDrawer();
-      drw.DrawImage(gen);
-
-      FireListeners(delegate(IDrawLastComputationResultEvents lis) { lis.ImageFile(outputFile);});
+      FireListeners(lis => lis.ImageFile(outputFile));
     }
   }
 }

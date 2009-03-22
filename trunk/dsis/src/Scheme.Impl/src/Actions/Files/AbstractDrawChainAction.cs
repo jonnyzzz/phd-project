@@ -29,14 +29,11 @@ namespace DSIS.Scheme.Impl.Actions.Files
         CreateOutputParameters(input, outputFile));
 
       foreach (var file in files)
-      {
-        file.Dispose();
+      {        
         gen.AddPointsFile(file);
       }
 
-      gen.Finish();
-
-      DrawFromScript(gen);
+      DrawFromScript(gen.CloseFile());
 
       FileKeys.ImageKey.Set(output, result);
     }
@@ -53,7 +50,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       return ps;
     }
 
-    protected abstract void DrawFromScript(IGnuplotPhaseScriptGen gen);
+    protected abstract void DrawFromScript(IGnuplotScript gen);
 
     protected abstract WorkingFolderInfo GetWorkingFolderInfo(IReadOnlyContext input);    
   }

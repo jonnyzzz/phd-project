@@ -21,7 +21,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       return myInfo;
     }
 
-    protected override void DrawFromScript(IGnuplotPhaseScriptGen gen)
+    protected override void DrawFromScript(IGnuplotScript gen)
     {
       myDrawer.DrawImage(gen).WaitForExit();
     }

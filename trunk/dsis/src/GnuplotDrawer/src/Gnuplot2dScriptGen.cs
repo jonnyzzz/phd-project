@@ -9,7 +9,7 @@ namespace DSIS.GnuplotDrawer
       myWriter.Write("plot ");
     }
 
-    public override void AddPointsFile(IGnuplotPointsFile file)
+    public void AddPointsFile(IGnuplotPointsFile file)
     {
       if (myIsFirstFile)
         myIsFirstFile = false;
@@ -24,7 +24,7 @@ namespace DSIS.GnuplotDrawer
         myWriter.Write(" points ");
     }
 
-    public override void BeforeFileClosed()
+    protected override void BeforeFileClosed()
     {
       myWriter.WriteLine(" ;");
       base.BeforeFileClosed();
