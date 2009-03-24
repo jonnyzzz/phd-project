@@ -59,6 +59,7 @@ namespace DSIS.Scheme.Actions
           });
 
       myGraph.Clear();
+      myEnd.Clear();
       return result;
     }
 
