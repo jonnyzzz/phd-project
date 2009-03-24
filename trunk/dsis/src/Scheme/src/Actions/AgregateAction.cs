@@ -13,8 +13,6 @@ namespace DSIS.Scheme.Actions
     private readonly ActionGraph myGraph = new ActionGraph();
     private readonly StartAction myStart = new StartAction();
 
-    public delegate void ConstructGraph(IActionGraphPartBuilder bld);
-
     protected AgregateAction()
     {
     }
@@ -26,9 +24,14 @@ namespace DSIS.Scheme.Actions
       myEnd = myGraph.NodesOfType<EndAction>().Single();
     }
 
-    public AgregateAction(ConstructGraph construct)
+    public AgregateAction(Action<IActionGraphPartBuilder> construct)
     {
       construct(Builder);
+    }
+    
+    public AgregateAction(Action<IActionGraphBuilder2> construct)
+    {
+      construct(new ActionBuilder2Adaptor(Builder));
     }
 
     public ICollection<ContextMissmatch> Compatible(Context ctx)
@@ -38,6 +41,8 @@ namespace DSIS.Scheme.Actions
 
     public Context Apply(Context ctx)
     {
+      myEnd.Clear();
+
       myStart.SetContext(ctx);
       myGraph.Execute();
       var list = myEnd.Result;
@@ -99,6 +104,11 @@ namespace DSIS.Scheme.Actions
         get { return myResult; }
       }
 
+      public void Clear()
+      {
+        myResult.Clear();
+      }
+
       #region IAction Members
 
       public ICollection<ContextMissmatch> Compatible(Context ctx)
@@ -114,6 +124,7 @@ namespace DSIS.Scheme.Actions
 
       public IAction Clone()
       {
+        //TODO: Should I?
         return new EndAction();
       }
 

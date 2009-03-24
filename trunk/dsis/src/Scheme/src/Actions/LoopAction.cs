@@ -32,8 +32,11 @@ namespace DSIS.Scheme.Actions
       return myAction.Compatible(cz);
     }
 
-    public Context Apply(Context ctx)
+    public Context Apply(Context _ctx)
     {
+      var ctx = new Context();
+      ctx.AddAll(_ctx);
+
       for(int i = 0; i<myCount; i++)
       {        
         Key.Set(ctx, new LoopIndex(i, myCount));

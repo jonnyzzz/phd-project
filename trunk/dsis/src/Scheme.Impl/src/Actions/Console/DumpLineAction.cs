@@ -9,7 +9,7 @@ namespace DSIS.Scheme.Impl.Actions.Console
   {
     protected override void Apply(ILine line, Context ctx, Context result)
     {
-      Logger.Instance(ctx).Write("{0}; {1:R}", line.Count, line.Length);
+      Logger.Instance(ctx).Write("Points: {0} Length:{1:R}", line.Count, line.Length);
     }
   }  
 }

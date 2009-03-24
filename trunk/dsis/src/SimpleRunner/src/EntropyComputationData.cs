@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.SimpleRunner
 {
@@ -10,14 +11,20 @@ namespace DSIS.SimpleRunner
     {
     }
 
-    protected EntropyComputationData(EntropyComputationData data) : base(data)
+    private EntropyComputationData(EntropyComputationData data) : base(data)
     {
       EntropyMode = new List<EntropyComputationMode>(data.EntropyMode).ToArray();
     }
 
-    public EntropyComputationData Clone()
+    EntropyComputationData ICloneable<EntropyComputationData>.Clone()
     {
       return new EntropyComputationData(this);
+    }
+
+    public override void Serialize(Logger log)
+    {
+      base.Serialize(log);
+      log.Write("Entropy: " + EntropyMode);
     }
   }
 }

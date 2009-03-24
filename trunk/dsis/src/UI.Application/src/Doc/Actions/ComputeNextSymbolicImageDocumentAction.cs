@@ -64,10 +64,9 @@ namespace DSIS.UI.Application.Doc.Actions
     private static AgregateAction CreateCompleteAction(IReadOnlyContext ctx, ICellImageBuilderWizardResult settings)
     {
       var ag = new AgregateAction(
-        b1 =>
+        bl1 =>
           {
-            var bl1 = new ActionBuilder2Adaptor(b1);
-
+            ;
             bl1.Start
               .Edge(new BuildSymbolicImageAction2(settings.Subdivision,
                                                   (ICellImageBuilderIntegerCoordinatesSettings) settings.Setting)).With(
@@ -79,9 +78,9 @@ namespace DSIS.UI.Application.Doc.Actions
       if (!ctx.ContainsCellCollection())
       {
         var ago = ag;
-        ag = new AgregateAction(b =>
+        ag = new AgregateAction(bl =>
                                   {
-                                    var bl = new ActionBuilder2Adaptor(b);
+                                    ;
 
                                     bl.Start.Edge(new MergeComponetsAction()).Edge(ago).
                                       With(x => x.Back(bl.Start)).Edge(bl.Finish);

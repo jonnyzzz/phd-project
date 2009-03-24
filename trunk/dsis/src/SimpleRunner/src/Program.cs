@@ -26,7 +26,8 @@ namespace DSIS.SimpleRunner
       Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
       Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
 
-      new ThesisEntropyBuild().Action();
+      new ThesisCurveBuild().Action();
+//      new ThesisEntropyBuild().Action();
 //      new ThesisSIBuild().Action();
 //      new SIBuild().Action();
 //      new JVRDetMorseBuild().Action();
@@ -289,9 +290,8 @@ namespace DSIS.SimpleRunner
     private static IAction DrawEntropyAction(string entropyMethod, ILoopAction loop, int steps, IAction entropy)
     {
       return new DumpContextProxy("DrawEntropyAction", new AgregateAction(
-        delegate(IActionGraphPartBuilder bld)
+        delegate(IActionGraphBuilder2 bld2)
           {
-            IActionGraphBuilder2 bld2 = new ActionBuilder2Adaptor(bld);
 //            bld2.Start.Edge(new DumpContextAction("DrawEntropyAction-" + entropyMethod));
             bld2.Start.Edge(new DumpGraphInfoAction());
             bld2.Start.Edge(new DumpGraphComponentsInfoAction());
@@ -310,10 +310,9 @@ namespace DSIS.SimpleRunner
         "proj",
         steps, projStep =>
                new AgregateAction(
-                 delegate(IActionGraphPartBuilder bl)
-                   {
-                     IActionGraphBuilder2 bl2 = new ActionBuilder2Adaptor(bl);
-
+                 bl2=>
+                 {
+                   ;
                      bl2.Start
                        .With(x => x
                                     .Edge(new DumpContextProxy("After Entropy" + method,

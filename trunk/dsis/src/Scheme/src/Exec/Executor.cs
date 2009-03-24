@@ -87,7 +87,7 @@ namespace DSIS.Scheme.Exec
     public void Clear()
     {
       myDoneActions.Clear();
-      myPendingContexts.Clear();
+      myPendingContexts.Clear();      
     }
 
     public ActionGraph Clone()

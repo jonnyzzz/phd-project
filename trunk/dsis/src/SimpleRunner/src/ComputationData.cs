@@ -1,23 +1,18 @@
 using System;
-using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.SimpleRunner
 {
-  public class ComputationData : IEquatable<ComputationData>, ICloneable<ComputationData>
+  public class ComputationData : BuilderData, IEquatable<ComputationData>, ICloneable<ComputationData>
   {
-    public SystemInfoAction system { get; set; }
-    public int repeat { get; set; }
     public ComputationDataBuilder builder { get; set; }
 
     public ComputationData()
     {
     }
 
-    protected ComputationData(ComputationData data)
+    protected ComputationData(ComputationData data) : base(data)
     {
-      system = data.system;
-      repeat = data.repeat;
       builder = data.builder;
     }
 
@@ -28,40 +23,12 @@ namespace DSIS.SimpleRunner
 
     public bool Equals(ComputationData obj)
     {
-      return Equals(obj.system, system) && Equals(obj.builder, builder);
+      return Equals((BuilderData)obj);
     }
 
-    public override bool Equals(object obj)
+    public override void Serialize(Logger log)
     {
-      if (obj.GetType() != typeof (ComputationData)) return false;
-      return Equals((ComputationData) obj);
-    }
-
-    public override int GetHashCode()
-    {
-      unchecked
-      {
-        int result = (system != null ? system.GetHashCode() : 0);
-        result = (result*397) ^ builder.GetHashCode();
-        return result;
-      }
-    }
-
-    public static bool operator ==(ComputationData left, ComputationData right)
-    {
-      return left.Equals(right);
-    }
-
-    public static bool operator !=(ComputationData left, ComputationData right)
-    {
-      return !left.Equals(right);
-    }
-
-    public void Serialize(Logger log)
-    {
-      log.Write("System function: {0}", system.SystemInfo);
-      log.Write("System space: {0}", system.SystemSpace);
-      log.Write("Repeat: {0}", repeat);
+      base.Serialize(log);
       log.Write("Builder: {0}", builder);
     }
   }

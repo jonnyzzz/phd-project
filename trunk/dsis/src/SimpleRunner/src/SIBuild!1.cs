@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using DSIS.Scheme;
-using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl;
@@ -15,14 +13,9 @@ using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
-  public abstract class SIBuild<T>
+  public abstract class SIBuild<T> : BuilderBase<T>
     where T : ComputationData, ICloneable<T>
   {
-    public void Action()
-    {
-      BuildContiniousSystems();
-    }
-
     protected static List<T> ForBuildser(IEnumerable<T> data, params ComputationDataBuilder[] bld)
     {
       var d = new List<T>();
@@ -36,63 +29,6 @@ namespace DSIS.SimpleRunner
         }
       }
       return d;
-    }
-
-    private void BuildContiniousSystems()
-    {
-      var queue = new List<T>(GetSystemsToRun());
-      queue.Sort((x, y) => x.repeat.CompareTo(y.repeat));
-
-      while (queue.Count > 0)
-      {
-        var computationData = queue[0];
-        Console.Out.WriteLine("\r\n-------------------------------------------------------\r\n");
-        Console.Out.WriteLine("system = {0}", computationData.system);
-        Console.Out.WriteLine("method = {0}", computationData.builder);
-        Console.Out.WriteLine("repeat = {0}", computationData.repeat);
-        Console.Out.WriteLine();
-        queue.RemoveAt(0);
-
-        using (var th = new MemoryMonitorThread(2*1024*1024*1024L))
-        {
-          var computation
-            = new Thread(
-              delegate()
-                {
-                  try
-                  {
-                    var sys = computationData;
-                    var aa = new AgregateAction(x => BuildGraph(new ActionBuilder2Adaptor(x), sys));
-                    aa.Apply(new Context());
-                    Console.Out.WriteLine("---------------------------------------------------------");
-                  }
-                  catch (OutOfMemoryException e)
-                  {
-                    Console.Out.WriteLine("-----------------------------OOE-------------------------");
-                    Console.Out.WriteLine(e);
-                    Console.Out.WriteLine("-----------------------------OOE-------------------------");
-                    queue.RemoveAll(x => x.Equals(computationData));
-                  }
-                  catch (Exception e)
-                  {
-                    Console.Out.WriteLine("-----GENERAL ERROR------------------------OOE-------------------------");
-                    Console.Out.WriteLine(e);
-                    Console.Out.WriteLine("-----------------------------OOE-------------------------");
-                    queue.RemoveAll(x => x.Equals(computationData));
-                  }
-                  GCHelper.Collect();
-                });
-
-          th.MemoryLimit += delegate
-                              {
-                                computation.Interrupt();
-                                computation.Abort();
-                              };
-          computation.Start();
-          th.Run();
-          computation.Join();
-        }
-      }
     }
 
     private class DumpComputationDataAction : ActionBase
@@ -122,7 +58,7 @@ namespace DSIS.SimpleRunner
       return null;
     }
 
-    private void BuildGraph(IActionGraphBuilder2 bld, T sys)
+    protected override void BuildGraph(IActionGraphBuilder2 bld, T sys)
     {
       var graphs = new XsdGraphXmlLoader().Load(typeof (SIBuild).Assembly, "DSIS.SimpleRunner.resources.si.xml");
       var builder = new XsdGraphBuilder().BuildActions(graphs);
@@ -204,13 +140,6 @@ namespace DSIS.SimpleRunner
     protected virtual IActionEdgesBuilder CreateActionsAfterSI(AfterSIParams<T> afterSIParams)
     {
       return afterSIParams.SiConstructionAction;
-    }
-
-    protected abstract IEnumerable<IEnumerable<T>> GetSystemsToRun2();
-
-    protected virtual IEnumerable<T> GetSystemsToRun()
-    {
-      return GetSystemsToRun2().Maps(x => x);
     }
   }
 }

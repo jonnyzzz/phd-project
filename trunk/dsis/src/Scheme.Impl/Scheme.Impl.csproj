@@ -99,7 +99,11 @@
     <Compile Include="src\Actions\DefaultPointExMethodSettings.cs" />
     <Compile Include="src\Actions\DefaultPointMethodSettings.cs" />
     <Compile Include="src\Actions\EntropyPointMethodSettings.cs" />
+    <Compile Include="src\Actions\Entropy\AddLineLengthSlotAction.cs" />
     <Compile Include="src\Actions\Entropy\BiggestMeasureInfo.cs" />
+    <Compile Include="src\Actions\Entropy\CurveLengthSlot.cs" />
+    <Compile Include="src\Actions\Entropy\CurveLengthSlotHelper.cs" />
+    <Compile Include="src\Actions\Entropy\DumpLineEntropySlotAction.cs" />
     <Compile Include="src\Actions\Entropy\EigenActionFactory.cs" />
     <Compile Include="src\Actions\Entropy\EigenEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\EigenEntropyOptions.cs" />
@@ -123,6 +127,7 @@
     <Compile Include="src\Actions\Entropy\PathEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\ProjectEntopryAction.cs" />
     <Compile Include="src\Actions\Entropy\SetStrangeEntropyParamsAction.cs" />
+    <Compile Include="src\Actions\Entropy\SlotHelper.cs" />
     <Compile Include="src\Actions\Entropy\StrangeEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\StrangeEntropyActionBase.cs" />
     <Compile Include="src\Actions\Entropy\StrangeEntropyActionFactory.cs" />

@@ -61,6 +61,8 @@
     <Compile Include="src\AbstractImageBuilder.cs" />
     <Compile Include="src\AbstractImageBuilderListener.cs" />
     <Compile Include="src\AfterSIParams.cs" />
+    <Compile Include="src\BuilderBase.cs" />
+    <Compile Include="src\BuilderData.cs" />
     <Compile Include="src\ComputationData.cs" />
     <Compile Include="src\ComputationDataBuilder.cs" />
     <Compile Include="src\ComputationDataUtil.cs" />
@@ -70,6 +72,8 @@
     <Compile Include="src\ComputeJVREntropyListener.cs" />
     <Compile Include="src\ComputeStrangeEntropyListener.cs" />
     <Compile Include="src\ConsoleListener.cs" />
+    <Compile Include="src\CurveBuild.cs" />
+    <Compile Include="src\CurveBuilderData.cs" />
     <Compile Include="src\DrawBase.cs" />
     <Compile Include="src\DrawEntropyBase.cs" />
     <Compile Include="src\DrawEntropyDivCurveListener.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="src\SIBuild!1.cs" />
     <Compile Include="src\SIBuild.cs" />
     <Compile Include="src\SystemInfoFactory.cs" />
+    <Compile Include="src\ThesisCurveBuild.cs" />
     <Compile Include="src\ThesisEntropyBuild.cs" />
     <Compile Include="src\ThesisEntropyBuildBase.cs" />
     <Compile Include="src\ThesisSIBuild.cs" />

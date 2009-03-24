@@ -17,7 +17,7 @@ namespace DSIS.GnuplotDrawer
     protected GnuplotFileWriterBase(ITempFileFactory factory, string suffix)
     {
       myFilename = factory.NewFile(suffix);
-      myWriter = new StreamWriter(suffix, true, Encoding.ASCII);
+      myWriter = new StreamWriter(myFilename, true, Encoding.ASCII);
     }
 
     protected void AssertDisposed()

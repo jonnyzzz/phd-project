@@ -45,7 +45,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
         {
           if (!files.TryGetValue(info, out fw))
           {
-            fw = new GnuplotPointsFileWriter(myFolderInfo, "chain-recurrent-picture-" + ++components +".data", system.Dimension);
+            fw = new GnuplotPointsFileWriter(myFolderInfo, "chain-recurrent-picture-" + ++components + ".data", system.Dimension);
             files[info] = fw;
           }
         }
