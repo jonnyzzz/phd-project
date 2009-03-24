@@ -63,6 +63,6 @@ namespace DSIS.Scheme.Impl.Actions.Files
       FileKeys.ImageKey.Set(output, new ImageResult(outputFile));
     }
 
-    protected abstract IGnuplotEntropyScriptGen CreateScriptGen(ITempFileFactory factory, GnuplotScriptParameters ps);    
+    protected abstract IGnuplotMeasureDensityScriptGen2 CreateScriptGen(ITempFileFactory factory, GnuplotScriptParameters ps);    
   }
 }

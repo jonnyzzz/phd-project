@@ -74,6 +74,7 @@
     <Compile Include="src\GnuplotEntropyScriptGen.cs" />
     <Compile Include="src\GnuplotFileWriterBase.cs" />
     <Compile Include="src\GnuplotDrawer.cs" />
+    <Compile Include="src\GnuplotMeasureDensityFileWriter.cs" />
     <Compile Include="src\GnuplotPointsFileReader.cs" />
     <Compile Include="src\GnuplotPointsFileWriter!1.cs" />
     <Compile Include="src\GnuplotPointsFileWriter.cs" />

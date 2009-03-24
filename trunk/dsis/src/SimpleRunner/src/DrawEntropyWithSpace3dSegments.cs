@@ -10,18 +10,18 @@ namespace DSIS.SimpleRunner
   public class DrawEntropyWithSpace3dSegments<T> : DrawEntropyWithSpaceBase<T>
     where T : IIntegerCoordinate
   {
-    private IEnumerable<GnuplotPointsFileWriter> Render(Pair<ICellCoordinateSystem<T>, IDictionary<T, double>> file)
+    private IEnumerable<IGnuplotMeasureDensityFile> Render(Pair<ICellCoordinateSystem<T>, IDictionary<T, double>> file)
     {
       var sys = (IIntegerCoordinateSystem<T>) file.First;
       var data = new double[] {0, 0};
 
-      var wr = new GnuplotPointsFileWriter(this, "measure3d_value.data", 3);
+      var wr = new GnuplotMeasureDensityFileWriter(this, "measure3d_value.data", 3);
       foreach (var pair in file.Second)
       {
         sys.CenterPoint(pair.Key, data);
         wr.WritePoint(new ImagePoint(data[0], data[1], pair.Value));
       }
-      return new[] {wr};
+      yield return wr.CloseFile();
     }
 
     public override string DrawImage(string suffix)
@@ -33,10 +33,10 @@ namespace DSIS.SimpleRunner
 
       string title = string.Format("{1} Entropy = {0}", Entropy.Value.ToString("F6"), Title);
       var ps = new GnuplotScriptParameters(outputFile, title) {ForcePoints = true};
-      IGnuplotPhaseScriptGen gen = new GnuplotEntropy3dScriptGen(this, ps);
+      var gen = new GnuplotEntropy3dScriptGen(this, ps);
 
       foreach (var file in Render(Wights.Value))
-        gen.AddPointsFile(file.CloseFile());
+        gen.AddPointsFile(file);
 
       var drw = new GnuplotDrawer.GnuplotDrawer();
       drw.DrawImage(gen.CloseFile());

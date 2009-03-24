@@ -1,6 +1,7 @@
 using System;
 using DSIS.GnuplotDrawer;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
@@ -12,7 +13,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       addCheck(Create(FileKeys.WorkingFolderKey));
     }
 
-    protected override WorkingFolderInfo GetWorkingFolderInfo(IReadOnlyContext input)
+    protected override ITempFileFactory GetWorkingFolderInfo(IReadOnlyContext input)
     {
       return FileKeys.WorkingFolderKey.Get(input);
     }

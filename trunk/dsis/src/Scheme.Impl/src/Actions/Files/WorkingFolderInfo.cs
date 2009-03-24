@@ -5,7 +5,12 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public class WorkingFolderInfo : ITempFileFactory
+  public interface IWorkingFolderInfo : ITempFileFactory
+  {
+    
+  }
+
+  public class WorkingFolderInfo : IWorkingFolderInfo
   {
     private readonly string myPath;
 

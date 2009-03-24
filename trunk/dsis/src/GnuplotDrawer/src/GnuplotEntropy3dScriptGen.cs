@@ -3,7 +3,7 @@ using DSIS.Utils;
 
 namespace DSIS.GnuplotDrawer
 {
-  public class GnuplotEntropy3dScriptGen : PngWriter3dBase, IGnuplotPhaseScriptGen
+  public class GnuplotEntropy3dScriptGen : PngWriter3dBase, IGnuplotMeasureDensityScriptGen
   {
     private readonly ITempFileFactory myFactory;
     private bool myIsFirstFile = true;
@@ -22,7 +22,7 @@ namespace DSIS.GnuplotDrawer
       base.BeforeFileClosed();
     }
 
-    public void AddPointsFile(IGnuplotPointsFile file)
+    public void AddPointsFile(IGnuplotMeasureDensityFile file)
     {
       if (myIsFirstFile)
         myIsFirstFile = false;

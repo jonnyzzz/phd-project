@@ -8,12 +8,12 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public class ComponentPointsWriter
+  public class ComponentPointsWriter : IComponentPointsWriter
   {
-    private readonly WorkingFolderInfo myFolderInfo;
+    private readonly ITempFileFactory myFolderInfo;
     private const int COMPONENTS_TO_SHOW = 15;
 
-    public ComponentPointsWriter(WorkingFolderInfo folderInfo)
+    public ComponentPointsWriter(ITempFileFactory folderInfo)
     {
       myFolderInfo = folderInfo;
     }

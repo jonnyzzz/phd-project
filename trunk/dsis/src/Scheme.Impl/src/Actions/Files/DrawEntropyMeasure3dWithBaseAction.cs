@@ -24,7 +24,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       get { return 2; }
     }
     
-    protected override IGnuplotEntropyScriptGen CreateScriptGen(ITempFileFactory factory, GnuplotScriptParameters ps)
+    protected override IGnuplotMeasureDensityScriptGen2 CreateScriptGen(ITempFileFactory factory, GnuplotScriptParameters ps)
     {
       return new GnuplotEntropy3dWithBaseScriptGen(factory, ps);
     }

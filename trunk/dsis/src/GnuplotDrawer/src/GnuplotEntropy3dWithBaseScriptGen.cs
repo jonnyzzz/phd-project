@@ -3,7 +3,7 @@ using DSIS.Utils;
 
 namespace DSIS.GnuplotDrawer
 {
-  public class GnuplotEntropy3dWithBaseScriptGen : PngWriter3dBase, IGnuplotEntropyScriptGen
+  public class GnuplotEntropy3dWithBaseScriptGen : PngWriter3dBase, IGnuplotMeasureDensityScriptGen2
   {
     private readonly ITempFileFactory myFactory;
     private bool myIsFirstFile = true;

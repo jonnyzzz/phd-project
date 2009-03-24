@@ -21,11 +21,25 @@ namespace DSIS.GnuplotDrawer
     long PointsCount { get; }
   }
 
+  public interface IGnuplotMeasureDensityFile : IGnuplotFile
+  {
+  }
+
   public interface IGnuplotPhaseScriptGen : IGnuplotScriptGen
   {
     void AddPointsFile(IGnuplotPointsFile file);
   }
 
+  public interface IGnuplotMeasureDensityScriptGen : IGnuplotScriptGen
+  {
+    void AddPointsFile(IGnuplotMeasureDensityFile file);
+  }
+
+  public interface IGnuplotMeasureDensityScriptGen2 : IGnuplotScriptGen
+  {
+    void AddPointsFile(IGnuplotPointsFile entropy, IGnuplotPointsFile @base);
+  }
+  
   public interface IGnuplotLineFile : IGnuplotFile
   {
     string Name { get; }

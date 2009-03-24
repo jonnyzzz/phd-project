@@ -1,6 +1,8 @@
+using System;
 using DSIS.Core.Ioc;
 using DSIS.GnuplotDrawer;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
@@ -8,15 +10,20 @@ namespace DSIS.Scheme.Impl.Actions.Files
   public class IocDrawSimbolicImageAction : AbstractDrawChainAction
   {
     private readonly GnuplotDrawer.GnuplotDrawer myDrawer;
-    private readonly WorkingFolderInfo myInfo;
+    private readonly ITempFileFactory myInfo;
 
-    public IocDrawSimbolicImageAction(GnuplotDrawer.GnuplotDrawer drawer, WorkingFolderInfo info)
+    public IocDrawSimbolicImageAction(GnuplotDrawer.GnuplotDrawer drawer, ITempFileFactory info)
     {
       myDrawer = drawer;
       myInfo = info;
     }
 
-    protected override WorkingFolderInfo GetWorkingFolderInfo(IReadOnlyContext input)
+    protected override IComponentPointsWriter CreateComponentWriter(ITempFileFactory folderInfo)
+    {
+      return new CachedComponetPointsWriter(base.CreateComponentWriter(folderInfo));
+    }
+
+    protected override ITempFileFactory GetWorkingFolderInfo(IReadOnlyContext input)
     {
       return myInfo;
     }

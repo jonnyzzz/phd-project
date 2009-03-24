@@ -2,6 +2,7 @@ using System;
 using DSIS.GnuplotDrawer;
 using DSIS.Graph;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
@@ -14,13 +15,13 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
-      WorkingFolderInfo folderInfo = GetWorkingFolderInfo(input);
+      var folderInfo = GetWorkingFolderInfo(input);
       IGraphStrongComponents<Q> comps = Keys.GetGraphComponents<Q>().Get(input);
 
-      var pw = new ComponentPointsWriter(folderInfo);
+      var pw = CreateComponentWriter(folderInfo);
       var files = pw.WriteComponents(system, comps);
 
-      string outputFile = folderInfo.CreateFileName("chain-recurrent-picture.png");
+      string outputFile = folderInfo.NewFile("chain-recurrent-picture.png");
       var result = new ImageResult(outputFile);
 
       var gen = GnuplotSriptGen.ScriptGen(
@@ -37,6 +38,11 @@ namespace DSIS.Scheme.Impl.Actions.Files
       FileKeys.ImageKey.Set(output, result);
     }
 
+    protected virtual IComponentPointsWriter CreateComponentWriter(ITempFileFactory folderInfo)
+    {
+      return new ComponentPointsWriter(folderInfo);
+    }
+
     protected virtual GnuplotScriptParameters CreateOutputParameters(IReadOnlyContext context, string outputFile)
     {
       var ps = new GnuplotScriptParameters(outputFile, "");
@@ -51,6 +57,6 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     protected abstract void DrawFromScript(IGnuplotScript gen);
 
-    protected abstract WorkingFolderInfo GetWorkingFolderInfo(IReadOnlyContext input);    
+    protected abstract ITempFileFactory GetWorkingFolderInfo(IReadOnlyContext input);    
   }
 }
