@@ -26,7 +26,7 @@ namespace DSIS.SimpleRunner
     }
 
     public static IEnumerable<T> ForSteps<T>(this IEnumerable<T> data, params int[] steps)
-      where T : ComputationData, ICloneable<T>
+      where T : BuilderData, ICloneable<T>
     {
       foreach (var computationData in data)
       {

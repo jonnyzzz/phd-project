@@ -6,10 +6,6 @@ namespace DSIS.SimpleRunner
 {
   public class CurveBuilderData : BuilderData, ICloneable<CurveBuilderData>, IEquatable<CurveBuilderData>
   {
-    protected CurveBuilderData(BuilderData data) : base(data)
-    {
-    }
-
     public double eps { get; set; }
     public double[] Point1 { get; set; }
     public double[] Point2 { get; set; }
