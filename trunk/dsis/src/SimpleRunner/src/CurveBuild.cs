@@ -11,6 +11,8 @@ namespace DSIS.SimpleRunner
 {
   public abstract class CurveBuild : BuilderBase<CurveBuilderData>
   {
+    private static int RND = 0;
+
     protected override void BuildGraph(IActionGraphBuilder2 bld, CurveBuilderData sys)
     {
       var init = new LineInitialAction(
@@ -36,10 +38,13 @@ namespace DSIS.SimpleRunner
       BuildCurveLength(steps, init, wf, system, bld.Finish);
     }
 
+   
     private static void BuildCurveLength(int steps, IAction initA, IActionEdgesBuilder wfBase, IAction function, IActionEdgesBuilder END)
     {
-      const string curveAction = "curve";
-      const string curvePref = "perf";
+      string curveAction = "curve" + RND++;
+      string curvePref = "perf" + RND++;
+
+      wfBase.Back(new ClearCurveSlotAction(curveAction));
 
       IAction loopA = new LoopAction(
         "Curve",

@@ -101,6 +101,7 @@
     <Compile Include="src\Actions\EntropyPointMethodSettings.cs" />
     <Compile Include="src\Actions\Entropy\AddLineLengthSlotAction.cs" />
     <Compile Include="src\Actions\Entropy\BiggestMeasureInfo.cs" />
+    <Compile Include="src\Actions\Entropy\ClearCurveSlotAction.cs" />
     <Compile Include="src\Actions\Entropy\CurveLengthSlot.cs" />
     <Compile Include="src\Actions\Entropy\CurveLengthSlotHelper.cs" />
     <Compile Include="src\Actions\Entropy\DumpLineEntropySlotAction.cs" />

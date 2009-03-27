@@ -176,6 +176,14 @@ namespace DSIS.Utils
       for (int i = 0; i < n; i++) yield return i;
     }
 
+    /// <summary>
+    /// Enumerates integer range [from, to)
+    /// </summary>
+    public static IEnumerable<int> To(this int from, int to)
+    {
+      for (int i = from; i < to; i++) yield return i;
+    }
+
     public static List<T> AsList<T>(params T[] ts)
     {
       return new List<T>(ts);

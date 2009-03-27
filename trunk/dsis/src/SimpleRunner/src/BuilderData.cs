@@ -21,7 +21,7 @@ namespace DSIS.SimpleRunner
 
     public bool Equals(BuilderData other)
     {
-      return other.system == system && other.repeat == repeat;
+      return other.system == system;
     }
 
     public override bool Equals(object obj)
@@ -31,7 +31,7 @@ namespace DSIS.SimpleRunner
 
     public override int GetHashCode()
     {
-      return repeat*133 + system.GetHashCode();
+      return system.GetHashCode();
     }
 
     BuilderData ICloneable<BuilderData>.Clone()

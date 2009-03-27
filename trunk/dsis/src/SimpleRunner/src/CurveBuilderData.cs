@@ -58,7 +58,7 @@ namespace DSIS.SimpleRunner
 
     public CurveBuilderData Clone()
     {
-      throw new System.NotImplementedException();
+      return new CurveBuilderData(this);
     }
   }
 }

@@ -55,6 +55,11 @@ namespace DSIS.SimpleRunner
       return new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), TenTen());
     }
 
+    public static SystemInfoAction Henon1_4_InfSpace()
+    {
+      return new SystemInfoAction(new HenonFunctionSystemInfoDecorator(1.4), Space(2, 10000));
+    }
+
     public static SystemInfoAction HenonDelnitz(double a, double b)
     {
       return new SystemInfoAction(new HenonDellnitzFunctionSystemInfoDecorator(a,b), TwoTwo());
@@ -180,11 +185,9 @@ namespace DSIS.SimpleRunner
       return new SystemInfoAction(new Linear1DSystemInfo(d, 0), Space(1, 1));
     }
 
-    public static SystemInfoAction Ref9()
+    public static SystemInfoAction Ref9_Inf(double mu) //.5
     {
-      return new SystemInfoAction(new Ref9(),
-                                  new DefaultSystemSpace(3, new[] {-0.38, 0.05, -0.38}, new[] {0.98, 1.45, 0.98},
-                                                         2L.Fill(3)));
+      return new SystemInfoAction(new Ref9(mu), Space(3, 10000));
     }
     
     /*

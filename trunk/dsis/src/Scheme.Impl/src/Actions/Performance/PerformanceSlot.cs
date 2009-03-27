@@ -22,12 +22,9 @@ namespace DSIS.Scheme.Impl.Actions.Performance
       {
         return ctx.Get(Key(key));
       }
-      else
-      {
-        var ms = new PerformanceSlot();
-        ctx.Set(Key(key), ms);
-        return ms;
-      }
+      var ms = new PerformanceSlot();
+      ctx.Set(Key(key), ms);
+      return ms;
     }
 
     public TimeSpan Time

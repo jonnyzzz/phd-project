@@ -21,6 +21,11 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       }
     }
 
+    public void Clear()
+    {
+      myData.Clear();
+    }
+
     private  class Data
     {
       public readonly double Length;

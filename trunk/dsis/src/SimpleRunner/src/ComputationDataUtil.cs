@@ -25,8 +25,8 @@ namespace DSIS.SimpleRunner
       return data.ForBuilders(Enum.GetValues(typeof (ComputationDataBuilder)).Cast<ComputationDataBuilder>().ToArray());
     }
 
-    public static IEnumerable<T> ForSteps<T>(this IEnumerable<T> data, params int[] steps)
-      where T : BuilderData, ICloneable<T>
+    public static IEnumerable<T> ForSteps<T>(this IEnumerable<T> data, IEnumerable<int> steps)
+            where T : BuilderData, ICloneable<T>
     {
       foreach (var computationData in data)
       {
@@ -37,6 +37,12 @@ namespace DSIS.SimpleRunner
           yield return d;
         }
       }
+    }
+
+    public static IEnumerable<T> ForSteps<T>(this IEnumerable<T> data, params int[] steps)
+      where T : BuilderData, ICloneable<T>
+    {
+      return ForSteps(data, (IEnumerable<int>) steps);
     }
   }
 }

@@ -3,35 +3,48 @@ using DSIS.Core.System;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Utils;
+using DSIS.Utils.Bean;
 
 namespace DSIS.Function.Predefined.Ampilova
 {
   [Serializable]
   public class Ref9Parameters : ISystemInfoParameters
   {
+    [IncludeGenerate(Title = "mu")]
+    public double mu { get; set; }
+
+    public Ref9Parameters()
+    {
+      mu = 0.5;
+    }
   }
 
   public class Ref9 : DoubleDescreteSystemInfoBase
   {
-    public Ref9() : base(3)
+    private readonly double myMu;
+    public Ref9(double mu) : base(3)
     {
+      myMu = mu;
     }
 
     public override string PresentableName
     {
-      get { return "Ampi Ref9"; }
+      get { return string.Format("Ampi Ref9[mu={0}]", myMu); }
     }
 
     protected override IFunction<double> GetFunctionInternal()
     {
-      return new Ref9Function();
+      return new Ref9Function(myMu);
     }
   }
 
   public class Ref9Function : Function<double>, IFunction<double>
   {
-    public Ref9Function() : base(3)
+    private readonly double myMu;
+
+    public Ref9Function(double mu) : base(3)
     {
+      myMu = mu;
     }
 
     public void Evaluate()
@@ -40,11 +53,10 @@ namespace DSIS.Function.Predefined.Ampilova
       var x2 = Input[1];
       var x3 = Input[2];
 
-      const double mu = 0.5;
       const double gamma = 0.1;
       const double lambda = 2.35;
 
-      Output[0] = x2 - mu*x1;
+      Output[0] = x2 - myMu*x1;
       Output[1] = lambda*x2*(1 - x1);
       Output[2] = x1 - gamma*x3;
     }
@@ -59,7 +71,7 @@ namespace DSIS.Function.Predefined.Ampilova
 
     protected override ISystemInfo CreateInfo(Ref9Parameters paramz)
     {
-      return new Ref9();
+      return new Ref9(paramz.mu);
     }
   }
 
