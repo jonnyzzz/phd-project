@@ -14,7 +14,7 @@ namespace DSIS.GnuplotDrawer
       if (myParams.Title != null)
         myWriter.WriteLine("set title \"{0}\"; ", myParams.Title);
 
-      myWriter.WriteLine("set terminal png size {0},{1}; ", myParams.Width, myParams.Height);
+      myWriter.WriteLine("set terminal png giant size {0},{1}; ", myParams.Width, myParams.Height);
 
       SetOutput("");
 
