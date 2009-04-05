@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace DSIS.Graph.Test
+namespace DSIS.Graph.Tests
 {
   [TestFixture]
   public class GenericsTest

@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
@@ -38,16 +36,16 @@ namespace DSIS.Graph.Morse
     private double ContourCost(ContourNode<T> node)
     {
       int kV = 1;
-      double r = node.NodeCost;
-      ContourNode<T> n = node.Next;
+      double r = node.Cost;
+      ContourNode<T> n = node.Parent;
 
       var cutOff = myNodes.Count + 5;
       
       while (n != node)
       {
         kV++;
-        r += n.NodeCost;
-        n = n.Next;
+        r += n.Cost;
+        n = n.Parent;
 
         if (kV > cutOff)
         {
@@ -59,13 +57,13 @@ namespace DSIS.Graph.Morse
 
     private static void ToList(ContourNode<T> node, ICollection<INode<T>> list)
     {
-      ContourNode<T> n = node.Next;
+      ContourNode<T> n = node.Parent;
 
       list.Add(n.Node);
       while (n != node)
       {
         list.Add(n.Node);
-        n = n.Next;
+        n = n.Parent;
       }
     }
 
@@ -77,13 +75,13 @@ namespace DSIS.Graph.Morse
       while ((t != i1) && (cnt < 2))
       {
         if (t == root) cnt++;
-        t = t.Next;
+        t = t.Parent;
       }
 
       return t == i1;
     }
 
-    private bool Tree(ContourNode<T> rnode)
+    private ContourNode<T> Tree(ContourNode<T> rnode)
     {
       ResetType();
 
@@ -94,21 +92,20 @@ namespace DSIS.Graph.Morse
       rnode.Type2 = NodeType.M1;
       m.Insert(0, rnode);
 
-      ContourNode<T> n = rnode.Next;
+      ContourNode<T> n = rnode.Parent;
       ContourNode<T> p = rnode;
 
       while (n != rnode)
       {
         m.Insert(0, n);
         n.Type2 = NodeType.M1;
-        n.Value = p.Value - p.NodeCost + z;
+        n.Value = p.Value - p.Cost + z;
         p = n;
-        n = n.Next;
+        n = n.Parent;
       }
-      //Eliminate one arc
-      //TODO: This breaks Precedes method.
-//      p.Next = null;
-//      p.Next = null;
+      //Note: Here we do not assign p.Parent = null in order to check 
+      //Note: Node preceed 
+      //p.Parent = null;
 
       while (m.Count > 0)
       {
@@ -116,9 +113,10 @@ namespace DSIS.Graph.Morse
         m.RemoveAt(0);
         node.Type2 = NodeType.M0;
 
-        foreach (var toNode in myGraphComponent.GetNodes(node.Node)) {
+        foreach (var toNode in myGraphComponent.GetNodes(node.Node)) 
+        {
           var to = myNodes[toNode];
-          var w = node.Value + to.NodeCost - z;
+          var w = node.Value + to.Cost - z;
 
           if (to.Type2 == NodeType.M2)
           {
@@ -126,7 +124,7 @@ namespace DSIS.Graph.Morse
 
             to.Type2 = NodeType.M1;
             to.Value = w;
-            to.Next = node;
+            to.Parent = node;
           }
           else
           {
@@ -134,14 +132,13 @@ namespace DSIS.Graph.Morse
             {
               if (Preceeds(rnode, to, node))
               {
-                to.Next = node;
-                return false;
+                to.Parent = node;
+                return to;
               }
-
-              if (Preceeds(rnode, node, to))
+              else
               {
                 to.Value = w;
-                to.Next = node;
+                to.Parent = node;
                 if (to.Type2 == NodeType.M0)
                 {
                   to.Type2 = NodeType.M1;
@@ -152,10 +149,10 @@ namespace DSIS.Graph.Morse
           }
         }
       }
-      return true; //contour is minimal.
+      return null; //contour is minimal.
     }
 
-    private void  ResetType()
+    private void ResetType()
     {
       foreach (var node in myNodes.Values)
       {
@@ -167,17 +164,17 @@ namespace DSIS.Graph.Morse
     {
       foreach (var persist in myPersist)
       {        
-        persist.SaveGraph(myGraphComponent, x=>myNodes[x].NodeCost);
+        persist.SaveGraph(myGraphComponent, x=>myNodes[x].Cost);
       }
 
-      node.Next = node;
-      return node;
-
-      while (!Tree(node))
+      var pNode = node;
+      while(node != null)
       {
+        pNode = node;
+        node = Tree(node);
       }
-      
-      return node;
+
+      return pNode;
     }
 
     private ContourNode<T> CreateNode(INode<T> node)
@@ -200,12 +197,12 @@ namespace DSIS.Graph.Morse
         foreach (var edgeTo in myGraphComponent.GetNodes(node))
         {
           ContourNode<T> gedge = CreateNode(edgeTo);
-          if (minEdge == null || minEdge.NodeCost > gedge.NodeCost)
+          if (minEdge == null || minEdge.Cost > gedge.Cost)
           {
             minEdge = gedge;
           }
         }
-        gnode.Next = minEdge;
+        gnode.Parent = minEdge;
         minEdge.Incoming++;
       }
 
@@ -215,7 +212,7 @@ namespace DSIS.Graph.Morse
         while (node.Incoming == 0)
         {
           node.Incoming = -1; //mark as trash
-          node = node.Next;
+          node = node.Parent;
           node.Incoming--;
         }
       }
@@ -226,15 +223,15 @@ namespace DSIS.Graph.Morse
       {
         if (nde.Incoming > 0)
         {          
-          double cst = nde.NodeCost;
+          double cst = nde.Cost;
           int kV = 1;
-          ContourNode<T> t = nde.Next;
+          ContourNode<T> t = nde.Parent;
           while (t != nde)
           {
-            cst += t.NodeCost;
+            cst += t.Cost;
             kV++;
             t.Incoming = 0;
-            t = t.Next;
+            t = t.Parent;
           }
 
           cst /= kV;
@@ -256,15 +253,15 @@ namespace DSIS.Graph.Morse
     private static void CreateTreeInit(ContourNode<T> root)
     {
       var p = root;
-      var q = root.Next;
+      var q = root.Parent;
       while (q != root)
       {
-        ContourNode<T> t = q.Next;
-        q.Next = p;
+        ContourNode<T> t = q.Parent;
+        q.Parent = p;
         p = q;
         q = t;
       }
-      q.Next = p;
+      q.Parent = p;
     }
 
     public ComputationResult<T> Compute(bool maximum)

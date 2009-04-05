@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Graph.Morse.Tests
 {
@@ -76,11 +77,13 @@ namespace DSIS.Graph.Morse.Tests
       var ctx = new CostContext();
       act(ctx);
       var me = new ME(new MorseEvaluatorOptions(), ctx);
-      var eMin = me.Compute(true);
-      var eMax = me.Compute(false);
+      var eMin = me.Compute(false);
+      var eMax = me.Compute(true);
       
-      Assert.AreEqual(min, eMin, "min");
-      Assert.AreEqual(max, eMax, "max");
+      
+      Assert.AreEqual(min, eMin.Value, "min");
+      Assert.AreEqual(max, eMax.Value, "max");
+      Assert.That(min, Is.LessThanOrEqualTo(max));
     }
 
     private class ME : MorseEvaluator<IntegerCoordinate>

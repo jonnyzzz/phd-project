@@ -7,9 +7,9 @@ namespace DSIS.Graph.Morse
     private int myValue = 0;
 
     public readonly INode<T> Node;
-    public readonly double NodeCost;
+    public readonly double Cost;
 
-    public ContourNode<T> Next; //tree-like     
+    public ContourNode<T> Parent; //tree-like     
     
     public double Value;
     
@@ -17,7 +17,7 @@ namespace DSIS.Graph.Morse
     {
       myValue = 0;
       Node = node;
-      NodeCost = node_cost;
+      Cost = node_cost;
     }
 
     public NodeType Type2
@@ -34,7 +34,7 @@ namespace DSIS.Graph.Morse
 
     public override string ToString()
     {
-      return string.Format("{0} {1:F}", Node, NodeCost);
+      return string.Format("{0} {1:F}", Node, Cost);
     }
   }
 }
