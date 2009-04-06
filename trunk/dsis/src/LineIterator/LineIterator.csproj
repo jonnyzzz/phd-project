@@ -60,11 +60,13 @@
   <ItemGroup>
     <Compile Include="src\ILine.cs" />
     <Compile Include="src\ILinePoint.cs" />
+    <Compile Include="src\IPointList.cs" />
     <Compile Include="src\Line.cs" />
     <Compile Include="src\LineFactory.cs" />
     <Compile Include="src\LineIterator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\LinePointImpl.cs" />
+    <Compile Include="src\PointList.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeCompiler\CodeCompiler.csproj">

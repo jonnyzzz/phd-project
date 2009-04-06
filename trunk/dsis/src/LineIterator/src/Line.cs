@@ -12,7 +12,7 @@ namespace DSIS.LineIterator
     private readonly double[] myEps;
     private readonly double myDistanceEps;
 
-    private List<System.Collections.Generic.LinkedList<LinePoint>> myPoints = new List<System.Collections.Generic.LinkedList<LinePoint>>();
+    private List<IPointList<LinePoint>> myPoints = new List<IPointList<LinePoint>>();
     private LinePoint myLastPoint;
     private readonly int myDimension;
 
@@ -25,12 +25,13 @@ namespace DSIS.LineIterator
     public Line(double[] eps, T initial) : this(eps)
     {
       myLastPoint = new LinePoint(initial);
-      myPoints.Add(new System.Collections.Generic.LinkedList<LinePoint>());
-      myPoints[myPoints.Count-1].AddFirst(myLastPoint);
+      var list = CreatePointList<LinePoint>();
+      list.AddLast(myLastPoint);
+      myPoints.Add(list);
       myDimension = initial.Dimension;
     }
 
-    private Line(double[] eps, List<System.Collections.Generic.LinkedList<LinePoint>> points, LinePoint lastPoint) :
+    private Line(double[] eps, List<IPointList<LinePoint>> points, LinePoint lastPoint) :
       this(eps)
     {
       myDimension = lastPoint.Point.Dimension;
@@ -40,7 +41,7 @@ namespace DSIS.LineIterator
     public void AddPointToEnd(T point)
     {
       if (myLastPoint.Distance(point) >= myDistanceEps)
-        myPoints[myPoints.Count-1].AddLast(myLastPoint = new LinePoint(point));
+        myPoints[myPoints.Count - 1].AddLast(myLastPoint = new LinePoint(point));
     }
 
     public int Count
@@ -51,7 +52,7 @@ namespace DSIS.LineIterator
         foreach (var list in myPoints)
         {
           cnt += list.Count;
-        }        
+        }
         return cnt;
       }
     }
@@ -59,32 +60,32 @@ namespace DSIS.LineIterator
     public void Iterate(ISystemSpace space, ISystemInfo system)
     {
       var function = system.GetFunction(myEps);
-      var list = new List<System.Collections.Generic.LinkedList<LinePoint>>(Iterate(myDistanceEps, myPoints, function, space));
+      var list = new List<IPointList<LinePoint>>(Iterate(myDistanceEps, myPoints, function, space));
       myPoints = list;
-      myLastPoint = list[list.Count-1].Last.Value;
+      myLastPoint = list.Count > 0 ? list[list.Count - 1].Last : null;
     }
 
     public void Save(TextWriter tw)
     {
       foreach (var list in myPoints)
       {
-        foreach (var point in list)
+        foreach (var point in list.Values)
         {
           point.Point.Save(tw);
           tw.WriteLine();
         }
-      }      
+      }
     }
-    
+
     public void Visit(Action<double[]> tw)
     {
       foreach (var list in myPoints)
       {
-        foreach (var point in list)
+        foreach (var point in list.Values)
         {
           point.Point.Visit(tw);
         }
-      }      
+      }
     }
 
     public double Length
@@ -94,13 +95,13 @@ namespace DSIS.LineIterator
         double length = 0;
         foreach (var list in myPoints)
         {
-          var pt = list.First.Value;
-          foreach (var point in list)
+          var pt = list.First;
+          foreach (var point in list.Values)
           {
             length += pt.EuclidDistance(point);
             pt = point;
-          }  
-        }        
+          }
+        }
         return length;
       }
     }
@@ -108,12 +109,19 @@ namespace DSIS.LineIterator
     public ILine Clone()
     {
       //todo: Clone all objects?
-      var list = new List<System.Collections.Generic.LinkedList<LinePoint>>();
+      var list = new List<IPointList<LinePoint>>();
       foreach (var points in myPoints)
       {
-        list.Add(new System.Collections.Generic.LinkedList<LinePoint>(points));
+        var item = CreatePointList<LinePoint>();
+        item.AddAll(points);
+        list.Add(item);
       }
       return new Line<T>(myEps, list, myLastPoint);
+    }
+
+    protected IPointList<TT> CreatePointList<TT>()
+    {
+      return new PointList<TT>();
     }
 
     public int Dimension
@@ -121,37 +129,41 @@ namespace DSIS.LineIterator
       get { return myDimension; }
     }
 
-    private static IEnumerable<System.Collections.Generic.LinkedList<LinePoint>> Iterate(double dispanceEps, IEnumerable<System.Collections.Generic.LinkedList<LinePoint>> list,
-                                                              IFunction<double> function, ISystemSpace space)
+    private IEnumerable<IPointList<LinePoint>> Iterate(double dispanceEps,
+                                                       IEnumerable<IPointList<LinePoint>> list,
+                                                       IFunction<double> function,
+                                                       ISystemSpace space)
     {
       foreach (var points in list)
       {
-        foreach (var linePoints in Iterate(dispanceEps, points, function, space))
+        foreach (var linePoints in Iterate(dispanceEps, points.StackEnumerator(), function, space))
         {
           yield return linePoints;
         }
       }
     }
-      
-    private static IEnumerable<System.Collections.Generic.LinkedList<LinePoint>> Iterate(double distanceEps, System.Collections.Generic.LinkedList<LinePoint> list,
-                                                              IFunction<double> function, ISystemSpace space)
-    {
-      while (list.Count > 0)
-      {
-        var result = new System.Collections.Generic.LinkedList<LinePoint>();
 
-        LinePoint prevBase = list.First.Value;
-        list.RemoveFirst();
-        LinePoint prevImage = prevBase.Compute(function);
+    private IEnumerable<IPointList<LinePoint>> Iterate(double distanceEps,
+                                                       IStackEnumerator<LinePoint> list,
+                                                       IFunction<double> function,
+                                                       ISystemSpace space)
+    {
+      while (!list.IsEmpty)
+      {
+        var result = CreatePointList<LinePoint>();
+
+        var prevBase = list.Peek();
+        list.Pop();
+        var prevImage = prevBase.Compute(function);
         if (!prevImage.Point.IsContained(space))
           continue;
 
-        result.AddFirst(prevImage);
+        result.AddLast(prevImage);
 
-        while (list.Count > 0)
+        while (!list.IsEmpty)
         {
-          LinePoint nextBase = list.First.Value;
-          LinePoint nextImage = nextBase.Compute(function);
+          var nextBase = list.Peek();
+          var nextImage = nextBase.Compute(function);
 
           if (!nextImage.Point.IsContained(space))
             break;
@@ -160,11 +172,11 @@ namespace DSIS.LineIterator
           {
             result.AddLast(prevImage = nextImage);
             prevBase = nextBase;
-            list.RemoveFirst();
+            list.Pop();
           }
           else
           {
-            list.AddFirst(prevBase.Middle(nextBase));
+            list.Push(prevBase.Middle(nextBase));
           }
         }
 
@@ -211,7 +223,6 @@ namespace DSIS.LineIterator
         }
         return myImage;
       }
-
 
       public override string ToString()
       {
