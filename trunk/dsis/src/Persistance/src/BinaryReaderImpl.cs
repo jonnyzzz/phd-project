@@ -1,9 +1,8 @@
-using System;
 using System.IO;
 
 namespace DSIS.Persistance
 {
-  public class BinaryReaderImpl : IBinaryReader, IDisposable
+  public class BinaryReaderImpl : IBinaryReader
   {
     private readonly BinaryReader myReader;
 
@@ -15,26 +14,6 @@ namespace DSIS.Persistance
     public int ReadInt()
     {
       return myReader.ReadInt32();
-    }
-
-    public void Read(out int v)
-    {
-      v = ReadInt();
-    }
-
-    public void Read(out long v)
-    {
-      v = ReadLong();
-    }
-
-    public void Read(out string s)
-    {
-      s = ReadString();
-    }
-
-    public void Read(out double v)
-    {
-      v = ReadDouble();
     }
 
     public long ReadLong()

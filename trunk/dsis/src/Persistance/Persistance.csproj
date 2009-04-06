@@ -14,6 +14,7 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +51,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -57,22 +61,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\BinaryReaderImpl.cs" />
     <Compile Include="src\BinaryWriterImpl.cs" />
-    <Compile Include="src\DataType.cs" />
-    <Compile Include="src\DataTypeBase.cs" />
-    <Compile Include="src\DataTypeFactory.cs" />
     <Compile Include="src\DiskCache.cs" />
     <Compile Include="src\FactoryMethod.cs" />
     <Compile Include="src\IBinaryReader.cs" />
     <Compile Include="src\IBinaryWriter.cs" />
-    <Compile Include="src\IBlock.cs" />
-    <Compile Include="src\IgnoreField.cs" />
     <Compile Include="src\IPersistance.cs" />
     <Compile Include="src\IPersistanceFactory.cs" />
     <Compile Include="src\IPersistanceManager.cs" />
-    <Compile Include="src\ObjectSerializer.cs" />
     <Compile Include="src\PersistanceFactory.cs" />
     <Compile Include="src\PersitanceManagerImpl.cs" />
-    <Compile Include="src\RefDataType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">

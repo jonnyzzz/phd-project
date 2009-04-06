@@ -1,9 +1,8 @@
-using System;
 using System.IO;
 
 namespace DSIS.Persistance
 {
-  public class BinaryWriterImpl : IBinaryWriter, IDisposable
+  public class BinaryWriterImpl : IBinaryWriter
   {
     private readonly BinaryWriter myWriter;
 
