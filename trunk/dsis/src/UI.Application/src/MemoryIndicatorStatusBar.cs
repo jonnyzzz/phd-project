@@ -10,7 +10,6 @@ namespace DSIS.UI.Application
   public class MemoryIndicatorStatusBar
   {
     private const long K = 1024;
-    private const long M = 1024*K;
 
     private readonly IMemoryUsage myMem;
 
@@ -37,10 +36,7 @@ namespace DSIS.UI.Application
     private string PresentMemoryUsage()
     {
       var info = myMem.GetMemoryUsage();
-
-      return info.TotalVirtualMemory != null 
-        ? string.Format("Memory usage {0} mb of {1} mb", info.HeapMemory/M, info.TotalVirtualMemory/M) 
-        : string.Format("Memory usage {0} mb", info.HeapMemory);
+      return string.Format("Memory usage {0} mb", info.HeapMemory);
     }
   }
 }
