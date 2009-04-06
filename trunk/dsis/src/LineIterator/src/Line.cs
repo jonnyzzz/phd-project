@@ -136,9 +136,12 @@ namespace DSIS.LineIterator
     {
       foreach (var points in list)
       {
-        foreach (var linePoints in Iterate(dispanceEps, points.StackEnumerator(), function, space))
+        using (var enumerator = points.StackEnumerator())
         {
-          yield return linePoints;
+          foreach (var linePoints in Iterate(dispanceEps, enumerator, function, space))
+          {
+            yield return linePoints;
+          }
         }
       }
     }

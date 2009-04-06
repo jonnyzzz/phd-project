@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace DSIS.LineIterator
 {
-  public class PointList<T> : IPointList<T>, IStackEnumerator<T>
+  public class PointList<T> : IPointList<T>, IStackEnumerator<T>, IDisposable
   {
     private readonly LinkedList<T> myList;
 
@@ -67,6 +68,10 @@ namespace DSIS.LineIterator
     public void Push(T value)
     {
       myList.AddFirst(value);
+    }
+
+    public void Dispose()
+    {      
     }
   }
 }

@@ -1,7 +1,9 @@
 using System.IO;
+using DSIS.Core.Ioc;
 
 namespace DSIS.Persistance
 {
+  [ComponentImplementation]
   public class PersistanceFactory : IPersistanceFactory
   {
     public IBinaryWriter CreateWriter(string file)

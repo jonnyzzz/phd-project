@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace DSIS.LineIterator
@@ -23,7 +24,7 @@ namespace DSIS.LineIterator
     void AddAll(IPointList<T> points);
   }
 
-  public interface IStackEnumerator<T>
+  public interface IStackEnumerator<T> : IDisposable
   {
     bool IsEmpty { get; }
 
