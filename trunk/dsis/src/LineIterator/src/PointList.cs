@@ -1,20 +1,14 @@
-using System;
 using System.Collections.Generic;
 
 namespace DSIS.LineIterator
 {
-  public class PointList<T> : IPointList<T>, IStackEnumerator<T>, IDisposable
+  public class PointList<T> : IPointList<T>, IStackEnumerator<T>, IPointListWriter<T>
   {
     private readonly LinkedList<T> myList;
 
     public PointList()
     {
       myList = new LinkedList<T>();
-    }
-
-    public void AddLast(T pt)
-    {
-      myList.AddLast(pt);
     }
 
     public T First
@@ -30,6 +24,11 @@ namespace DSIS.LineIterator
     public int Count
     {
       get { return myList.Count; }
+    }
+
+    public IPointListWriter<T> PointWriter()
+    {
+      return this;
     }
 
     public void AddAll(IPointList<T> points)
@@ -68,6 +67,11 @@ namespace DSIS.LineIterator
     public void Push(T value)
     {
       myList.AddFirst(value);
+    }
+
+    public void AddPoint(T pt)
+    {
+      myList.AddLast(pt);
     }
 
     public void Dispose()

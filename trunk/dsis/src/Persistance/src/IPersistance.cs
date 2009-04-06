@@ -4,5 +4,5 @@ namespace DSIS.Persistance
   {
     void Save(T t, IBinaryWriter wr);
     T Load(IBinaryReader reader);
-  }
+  }  
 }

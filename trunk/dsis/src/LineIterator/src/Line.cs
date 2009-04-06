@@ -26,7 +26,10 @@ namespace DSIS.LineIterator
     {
       myLastPoint = new LinePoint(initial);
       var list = CreatePointList<LinePoint>();
-      list.AddLast(myLastPoint);
+      using(var wr = list.PointWriter())
+      {
+        wr.AddPoint(myLastPoint);
+      }
       myPoints.Add(list);
       myDimension = initial.Dimension;
     }
@@ -37,11 +40,12 @@ namespace DSIS.LineIterator
       myDimension = lastPoint.Point.Dimension;
       myPoints = points;
     }
-
+    
     public void AddPointToEnd(T point)
     {
       if (myLastPoint.Distance(point) >= myDistanceEps)
-        myPoints[myPoints.Count - 1].AddLast(myLastPoint = new LinePoint(point));
+        using (var wr = myPoints[myPoints.Count - 1].PointWriter())
+         wr.AddPoint(myLastPoint = new LinePoint(point));
     }
 
     public int Count
@@ -155,36 +159,39 @@ namespace DSIS.LineIterator
       {
         var result = CreatePointList<LinePoint>();
 
-        var prevBase = list.Peek();
-        list.Pop();
-        var prevImage = prevBase.Compute(function);
-        if (!prevImage.Point.IsContained(space))
-          continue;
-
-        result.AddLast(prevImage);
-
-        while (!list.IsEmpty)
+        using (var wr = result.PointWriter())
         {
-          var nextBase = list.Peek();
-          var nextImage = nextBase.Compute(function);
+          var prevBase = list.Peek();
+          list.Pop();
+          var prevImage = prevBase.Compute(function);
+          if (!prevImage.Point.IsContained(space))
+            continue;
 
-          if (!nextImage.Point.IsContained(space))
-            break;
+          wr.AddPoint(prevImage);
 
-          if (prevImage.Distance(nextImage) < distanceEps)
+          while (!list.IsEmpty)
           {
-            result.AddLast(prevImage = nextImage);
-            prevBase = nextBase;
-            list.Pop();
-          }
-          else
-          {
-            list.Push(prevBase.Middle(nextBase));
+            var nextBase = list.Peek();
+            var nextImage = nextBase.Compute(function);
+
+            if (!nextImage.Point.IsContained(space))
+              break;
+
+            if (prevImage.Distance(nextImage) < distanceEps)
+            {
+              wr.AddPoint(prevImage = nextImage);
+              prevBase = nextBase;
+              list.Pop();
+            }
+            else
+            {
+              list.Push(prevBase.Middle(nextBase));
+            }
           }
         }
 
         if (result.Count >= 2)
-          yield return result;
+            yield return result;        
       }
     }
 

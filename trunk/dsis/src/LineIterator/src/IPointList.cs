@@ -5,8 +5,6 @@ namespace DSIS.LineIterator
 {
   public interface IPointList<T>
   {
-    void AddLast(T pt);
-    
     T First { get; }
     
     T Last { get; }
@@ -21,7 +19,14 @@ namespace DSIS.LineIterator
     /// <returns></returns>
     IStackEnumerator<T> StackEnumerator();
 
+    IPointListWriter<T> PointWriter();
+
     void AddAll(IPointList<T> points);
+  }
+
+  public interface IPointListWriter<T> : IDisposable
+  {
+    void AddPoint(T pt);
   }
 
   public interface IStackEnumerator<T> : IDisposable
