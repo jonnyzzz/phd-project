@@ -12,8 +12,14 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     MaxRelativeNodeError,
     [IncludeValue(Title = "When total error < eps")]
     SummError,
-    [IncludeValue(Title = "When step weight change < eps")]
-    ChangeError
+    [IncludeValue(Title = "When step nodes weight change < eps")]
+    NodeChangeError,
+    [IncludeValue(Title = "When step nodes weight change < eps * cell volume")]
+    NodeRelativeChangeError,
+    [IncludeValue(Title = "When step edges weight change < eps")]
+    EdgesChangeError,
+    [IncludeValue(Title = "When step edges weight change < eps * cell volume")]
+    EdgesRelativeChangeError,
   }
 
   [Serializable]
@@ -38,7 +44,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       ExitCondition = JVRExitCondition.MaxNodeError;
       EPS = 1e-3;
     }
-
 
     public string Present
     {

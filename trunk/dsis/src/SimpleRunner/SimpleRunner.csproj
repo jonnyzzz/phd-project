@@ -82,6 +82,7 @@
     <Compile Include="src\DrawEntropyWithSpace3d.cs" />
     <Compile Include="src\DrawEntropyWithSpace3dSegments.cs" />
     <Compile Include="src\DrawEntropyWithSpaceBase.cs" />
+    <Compile Include="src\EntropyComputationData!1.cs" />
     <Compile Include="src\EntropyComputationData.cs" />
     <Compile Include="src\EntropyComputationMode.cs" />
     <Compile Include="src\ICloneable.cs" />
@@ -115,7 +116,10 @@
     <Compile Include="src\SystemInfoFactory.cs" />
     <Compile Include="src\ThesisCurveBuild.cs" />
     <Compile Include="src\ThesisEntropyBuild.cs" />
+    <Compile Include="src\ThesisEntropyBuildBase!2.cs" />
     <Compile Include="src\ThesisEntropyBuildBase.cs" />
+    <Compile Include="src\ThesisJVREntropyBuild.cs" />
+    <Compile Include="src\ThesisJVREntropyBuildBase.cs" />
     <Compile Include="src\ThesisSIBuild.cs" />
     <Compile Include="src\XmlAbstractImageBuilderListener.cs" />
   </ItemGroup>

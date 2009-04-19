@@ -12,8 +12,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     private readonly ArcDirection<T> myStrait;
     private readonly ArcDirection<T> myBack;
 
-    private double? myError;
-
+    private double? myNodeChange;
+    private double myEdgeChange;
+    
     private readonly HashSet<T> myNodesList = new HashSet<T>(EqualityComparerFactory<T>.GetComparer());
 
     internal ItemUpdateCookie(IHashholderController<T> instance, ArcDirection<T> strait, ArcDirection<T> back)
@@ -38,17 +39,17 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         var ch = myInstance.SetItem(node, myStrait.ComputeWeight(node), myBack.ComputeWeight(node));
         error += Math.Abs(ch);
       }
-      myError = error;
+      myNodeChange = error;
     }
 
     public double Change
     {
       get
       {
-        if (myError == null)
+        if (myNodeChange == null)
           throw new Exception("IDisposable.Dispose should be called before");
 
-        return myError.Value;
+        return myNodeChange.Value;
       }
     }
   }

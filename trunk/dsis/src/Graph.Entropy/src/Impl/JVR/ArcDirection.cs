@@ -38,12 +38,18 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return w;
     }
 
-    public void MultiplyWeight(ItemUpdateCookie<T> cookie, T node, double factor) 
+    public double MultiplyWeight(ItemUpdateCookie<T> cookie, T node, double factor) 
     {
+      double change = 0;
       foreach (var edge in myIndex[node])
       {
-        cookie.SetItem(edge, myHash.GetItem(edge)*factor);        
+        var oldValue = myHash.GetItem(edge);
+        var newValue = oldValue*factor;
+        cookie.SetItem(edge, newValue);
+        
+        change += Math.Abs(newValue - oldValue);
       }
+      return change;
     }
   }
 }

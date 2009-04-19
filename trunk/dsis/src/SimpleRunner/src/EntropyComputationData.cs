@@ -1,30 +1,18 @@
-using System.Collections.Generic;
-using DSIS.Scheme.Impl.Actions.Files;
-
 namespace DSIS.SimpleRunner
 {
-  public class EntropyComputationData : ComputationData, ICloneable<EntropyComputationData>
+  public class EntropyComputationData : EntropyComputationData<EntropyComputationMode>, ICloneable<EntropyComputationData>
   {
-    public IEnumerable<EntropyComputationMode> EntropyMode { get; set; }
-
     public EntropyComputationData()
     {
     }
 
-    private EntropyComputationData(EntropyComputationData data) : base(data)
+    protected EntropyComputationData(EntropyComputationData<EntropyComputationMode> data) : base(data)
     {
-      EntropyMode = new List<EntropyComputationMode>(data.EntropyMode).ToArray();
     }
 
-    EntropyComputationData ICloneable<EntropyComputationData>.Clone()
+    public EntropyComputationData Clone()
     {
       return new EntropyComputationData(this);
-    }
-
-    public override void Serialize(Logger log)
-    {
-      base.Serialize(log);
-      log.Write("Entropy: " + EntropyMode);
     }
   }
 }

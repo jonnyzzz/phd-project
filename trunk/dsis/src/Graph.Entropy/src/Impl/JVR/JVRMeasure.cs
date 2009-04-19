@@ -113,29 +113,45 @@ namespace DSIS.Graph.Entropy.Impl.JVR
           Norm();
 
         var cookie = myHashHolder.UpdateCookie(myStraitEdges, myBackEdges);
+        var edgesChange = 0.0;
         using (cookie)
         {
-          myBackEdges.MultiplyWeight(cookie, node, a);
-          myStraitEdges.MultiplyWeight(cookie, node, b);
+          edgesChange += myBackEdges.MultiplyWeight(cookie, node, a);
+          edgesChange += myStraitEdges.MultiplyWeight(cookie, node, b);
         }
-        
-        if (CheckExitCondition(precision, incoming, outgoing, cookie.Change))
+
+        double qValue = Math.Abs(incoming - outgoing);
+        if (CheckExitCondition(precision, myHashHolder.SummaryError, qValue, cookie.Change, edgesChange))
           break;
       }
     }
 
-    private bool CheckExitCondition(double precision, double incoming, double outgoing, double change)
+    protected virtual bool CheckExitCondition(double precision, double totalError, double qValue, double nodesChange, double edgesChange)
     {
+      //TODO: Replace with delegate
       switch(myOptions.ExitCondition)
       {
         case JVRExitCondition.MaxNodeError:
-          return Math.Abs(incoming - outgoing) <= precision;
+          return qValue <= precision;
+
         case JVRExitCondition.MaxRelativeNodeError:
-          return Math.Abs(incoming - outgoing) <= precision * myCellVolume;
+          return qValue <= precision * myCellVolume;
+        
         case JVRExitCondition.SummError:
-          return myHashHolder.SummaryError <= precision;
-        case JVRExitCondition.ChangeError:
-          return change <= precision;
+          return totalError <= precision;
+        
+        case JVRExitCondition.NodeChangeError:
+          return nodesChange <= precision;
+        
+        case JVRExitCondition.NodeRelativeChangeError:
+          return nodesChange <= precision * myCellVolume;
+        
+        case JVRExitCondition.EdgesChangeError:
+          return edgesChange <= precision;
+        
+        case JVRExitCondition.EdgesRelativeChangeError:
+          return edgesChange <= precision * myCellVolume;
+        
         default:
           throw new Exception("Unexpected exit condition " + myOptions.ExitCondition);
       }
