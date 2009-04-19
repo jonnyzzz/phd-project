@@ -129,7 +129,7 @@ namespace DSIS.Graph.Entropy.Tests
       DEBUG = true;
       for(int i=10; i<200; i++)
       {
-        List<Node> ns = new List<Node>();
+        var ns = new List<Node>();
         for(int j=0; j<i; j++)
         {
           ns.Add(n(j, (j+1)%i));          

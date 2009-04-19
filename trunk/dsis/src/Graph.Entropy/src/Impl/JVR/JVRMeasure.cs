@@ -1,6 +1,5 @@
 using System;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;

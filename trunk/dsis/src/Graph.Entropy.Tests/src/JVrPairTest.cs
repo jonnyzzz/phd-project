@@ -4,7 +4,7 @@ using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Entropy
+namespace DSIS.Graph.Entropy.Tests
 {
   [TestFixture]
   public class JVrPairTest
@@ -12,15 +12,15 @@ namespace DSIS.Graph.Entropy
     [Test]
     public void Test_01()
     {
-      JVRPair<IntegerCoordinate> p1 = new JVRPair<IntegerCoordinate>(
+      var p1 = new JVRPair<IntegerCoordinate>(
         new IntegerCoordinate(1),
         new IntegerCoordinate(2)
         );
 
       IEqualityComparer<IntegerCoordinate> c = EqualityComparerFactory<IntegerCoordinate>.GetComparer();
 
-      IntegerCoordinate i1 = new IntegerCoordinate(1);
-      IntegerCoordinate i2 = new IntegerCoordinate(2);
+      var i1 = new IntegerCoordinate(1);
+      var i2 = new IntegerCoordinate(2);
 
       Assert.IsTrue(c.Equals(p1.From, i1));
       Assert.IsTrue(c.Equals(p1.To, i2));
