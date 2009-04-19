@@ -150,7 +150,10 @@ bool inline CRom::tree(CRom::ContourNode*& rnode) {
 						rnode = to; //root <- to
 
 						return false; //<=> start again
-					} else if (preceed(rnode, node, to)){
+					} else 
+                                               /// FIXED to new algorithm statement in my PHD thesis. 
+                                               /// if (preceed(rnode, node, to))
+                                        {
 						to->v = w;
 						to->next = node;
 						if (to->type == M0) {
