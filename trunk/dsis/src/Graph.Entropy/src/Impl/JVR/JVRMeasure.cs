@@ -68,6 +68,11 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       }
     }
 
+    protected int QueueSize
+    {
+      get { return myHashHolder.PriorityQueueNodes; }
+    }
+
     protected void Norm()
     {
       myHashHolder.Normalize();

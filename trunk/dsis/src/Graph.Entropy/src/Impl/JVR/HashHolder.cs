@@ -33,6 +33,11 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return new SortedNodeSet<T>();
     }
 
+    public int PriorityQueueNodes
+    {
+      get { return mySet.Count; }
+    }
+
     private void Divide(double div)
     {
       Dictionary<JVRPair<T>, double> current = myHash;

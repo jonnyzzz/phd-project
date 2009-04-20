@@ -9,49 +9,49 @@ namespace DSIS.Graph.Entropy.Tests
     [Test]
     public void Test_F_One()
     {
-      DoTest("f", n(1, 1, 1));
+      DoTest("fv", n(1, 1, 1));
     }
 
     [Test]
     public void Test_F_Two()
     {
-      DoTest("f", n(1, 1, 1), n(2, 2, 1));
+      DoTest("fv", n(1, 1, 1), n(2, 2, 1));
     }
 
     [Test]
     public void Test_F_Two2()
     {
-      DoTest("f", n(1, 2, 1), n(2, 1, 1));
+      DoTest("fv", n(1, 2, 1), n(2, 1, 1));
     }
 
     [Test]
     public void Test_FI_One()
     {
-      DoTest("fni", n(1, 1, 1));
+      DoTest("fvnvi", n(1, 1, 1));
     }
 
     [Test]
     public void Test_FI_Two()
     {
-      DoTest("fni", n(1, 1, 1/2.0), n(2, 2, 1/2.0));
+      DoTest("fvnviv", n(1, 1, 1/2.0), n(2, 2, 1/2.0));
     }
 
     [Test]
     public void Test_FI_Two2()
     {
-      DoTest("fni", n(1, 2, 1/2.0), n(2, 1, 1/2.0));
+      DoTest("fvnviv", n(1, 2, 1/2.0), n(2, 1, 1/2.0));
     }
 
     [Test]
     public void Test_FI_Three()
     {
-      DoTest("fni", n(1, 2, 1/3.0), n(2, 1, 1/3.0), n(1, 1, 1/3.0));
+      DoTest("fvnviv", n(1, 2, 1/3.0), n(2, 1, 1/3.0), n(1, 1, 1/3.0));
     }
 
     [Test]
     public void Test_Ampi()
     {                                           
-      DoTest("fni", 0.2215, n(1, 2), n(2, 3), n(3, 5), n(5, 1), n(3, 8),
+      DoTest("fvnviv", 0.2215, n(1, 2), n(2, 3), n(3, 5), n(5, 1), n(3, 8),
              n(8, 7), n(7, 6), n(6, 2));                                                                                        
     }
 

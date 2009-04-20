@@ -24,7 +24,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       {
         oldValue = v.Value;
         Remove(v);
-        myValues.Remove(node);
       }
 
       var value = output - input;
@@ -56,9 +55,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public T NextNode()
     {
-      var min = ExtractMin();
-      myValues.Remove(min.First);
-      return min.First;
+      return ExtractMin().First;
     }
 
     private class Comparer : IComparer<double>

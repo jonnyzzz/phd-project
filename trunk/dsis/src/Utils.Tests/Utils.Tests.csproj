@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueExEventsTest.cs" />
+    <Compile Include="testSrc\BinTreePriorityQueueExRandomDataTest.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueExTestAllCases.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueExTestBase.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueExTestBase`2.cs" />

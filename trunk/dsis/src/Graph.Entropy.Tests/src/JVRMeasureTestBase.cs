@@ -23,10 +23,12 @@ namespace DSIS.Graph.Entropy.Tests
     protected class JVR : JVRMeasure<IntegerCoordinate>, IEdgeInfo
     {
       private readonly double myEps;
+      private readonly IGraph<IntegerCoordinate> myGraph;
 
       public JVR(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components, double eps)
         : base(graph, components, new JVRMeasureOptions{IncludeSelfEdge = false})
       {
+        myGraph = graph;
         myEps = eps;
       }
 
@@ -50,6 +52,9 @@ namespace DSIS.Graph.Entropy.Tests
               return;
             case 'n':
               Norm();
+              break;
+            case 'v':
+              Assert.AreEqual(myGraph.NodesCount, QueueSize);
               break;
             default:
               Assert.Fail(string.Format("Unexpected action: {0} in {1}", c, s));
