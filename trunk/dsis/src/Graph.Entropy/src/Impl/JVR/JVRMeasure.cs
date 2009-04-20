@@ -76,8 +76,10 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public void Iterate(double precision)
     {
       const double maxValue = 3;
+      const int maxSteps = 20;
 
       bool notIncludeSelfLoop = myOptions.IncludeSelfEdge;
+      int stepCount = 0;
 
       while (true)
       {
@@ -97,6 +99,8 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
         needNorm |= (incoming >= maxValue || outgoing >= maxValue);
 
+        needNorm |= stepCount > maxSteps;
+
         var sout = Math.Sqrt(outgoing);
         var sin = Math.Sqrt(incoming);
 
@@ -110,7 +114,10 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         }
 
         if (needNorm)
+        {
           Norm();
+          stepCount = 0;
+        }
 
         var cookie = myHashHolder.UpdateCookie(myStraitEdges, myBackEdges);
         var edgesChange = 0.0;

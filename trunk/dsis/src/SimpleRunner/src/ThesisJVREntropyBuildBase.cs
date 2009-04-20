@@ -73,6 +73,7 @@ namespace DSIS.SimpleRunner
       private readonly Logger myLog;
       private int stepCount;
       private readonly List<JVRExitCondition> myConditions = Enum.GetValues(typeof(JVRExitCondition)).Cast<JVRExitCondition>().ToList();
+      private const int STEPS_LIMIT = 10000;
 
       public LoggingEvaluator(IGraph<Q> graph, IGraphStrongComponents<Q> components, JVRMeasureOptions opts, Logger log)
         : base(graph, components, opts)
@@ -96,7 +97,13 @@ namespace DSIS.SimpleRunner
           }
         }
 
-        return base.CheckExitCondition(condition, precision, totalError, qValue, nodesChange, edgesChange);
+        if (stepCount > STEPS_LIMIT)
+        {
+          myLog.Write("Steps limit of {0} acieved", STEPS_LIMIT);
+          return true;
+        }
+
+        return myConditions.Count == 0;
       }
     }
   }

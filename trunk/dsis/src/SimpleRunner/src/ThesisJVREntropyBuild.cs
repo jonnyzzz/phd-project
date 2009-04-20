@@ -7,7 +7,7 @@ namespace DSIS.SimpleRunner
   {
     protected override IEnumerable<IEnumerable<EntropyComputationData<object>>> GetSystemsToRun2()
     {
-      var steps = new[] {4,};//6, 8, 10, 12, 14};
+      var steps = new[] {4, 6, 8, 10, 12, 14};
 
       yield return new EntropyComputationData<object>
       {
