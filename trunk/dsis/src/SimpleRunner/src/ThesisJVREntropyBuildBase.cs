@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.JVR;
@@ -13,27 +14,27 @@ using DSIS.Utils;
 namespace DSIS.SimpleRunner
 {
   public abstract class ThesisJVREntropyBuildBase :
-    ThesisEntropyBuildBase<EntropyComputationData<JVRExitCondition>, JVRExitCondition>
+    ThesisEntropyBuildBase<EntropyComputationData<object>, object>
   {
-    protected override IEnumerable<JVRExitCondition> GetEntropComputationMode(
-      AfterSIParams<EntropyComputationData<JVRExitCondition>> afterSIParams)
+    protected override IEnumerable<object> GetEntropComputationMode(
+      AfterSIParams<EntropyComputationData<object>> afterSIParams)
     {
-      return afterSIParams.ComputationData.EntropyMode;
+      yield return new object();
     }
 
-    protected override Func<Pair<IAction, string>> GetEntropyAction(JVRExitCondition mode)
+    protected override Func<Pair<IAction, string>> GetEntropyAction(object mode)
     {
-      return () => CreateJVRMeasureAction(1e-05, mode);
+      return () => CreateJVRMeasureAction(1e-05);
     }
 
-    private static Pair<IAction, string> CreateJVRMeasureAction(double eps, JVRExitCondition mode)
+    private static Pair<IAction, string> CreateJVRMeasureAction(double eps)
     {
       var opts = new JVRMeasureOptions
                    {
                      IncludeSelfEdge = false,
                      InitialWeight = EntropyLoopWeights.CONST,
                      EPS = eps,
-                     ExitCondition = mode
+                     ExitCondition = JVRExitCondition.EdgesChangeError //FAKE!
                    };
       return Pair.Of((IAction) new LoggingJVRMeasureAction(opts), opts.Present);
     }
@@ -71,6 +72,7 @@ namespace DSIS.SimpleRunner
     {
       private readonly Logger myLog;
       private int stepCount;
+      private readonly List<JVRExitCondition> myConditions = Enum.GetValues(typeof(JVRExitCondition)).Cast<JVRExitCondition>().ToList();
 
       public LoggingEvaluator(IGraph<Q> graph, IGraphStrongComponents<Q> components, JVRMeasureOptions opts, Logger log)
         : base(graph, components, opts)
@@ -78,12 +80,23 @@ namespace DSIS.SimpleRunner
         myLog = log;
       }
 
-      protected override bool CheckExitCondition(double precision, double totalError, double qValue, double nodesChange,
+      protected override bool CheckExitCondition(JVRExitCondition condition, double precision, double totalError, double qValue, double nodesChange,
                                                  double edgesChange)
       {
         myLog.Write("-->{5} precision:{0}, totalError:{1}, q:{2}, nodesChange:{3}, edgesChange:{4}",
                     precision, totalError, qValue, nodesChange, edgesChange, ++stepCount);
-        return base.CheckExitCondition(precision, totalError, qValue, nodesChange, edgesChange);
+
+        
+        foreach (JVRExitCondition exitCondition in myConditions.ToArray())
+        {
+          if (base.CheckExitCondition(exitCondition, precision, totalError, qValue, nodesChange, edgesChange))
+          {
+            myLog.Write("----> {0} completed", exitCondition);
+            myConditions.Remove(exitCondition);
+          }
+        }
+
+        return base.CheckExitCondition(condition, precision, totalError, qValue, nodesChange, edgesChange);
       }
     }
   }

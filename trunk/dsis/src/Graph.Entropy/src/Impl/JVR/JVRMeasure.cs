@@ -51,14 +51,14 @@ namespace DSIS.Graph.Entropy.Impl.JVR
             continue;
 
           var factory = JVRPair<T>.Factory(node.Coordinate);
-          
+
           foreach (var edge in myGraph.GetEdges(node))
           {
             if (!VisitNode(edge))
               continue;
 
             var key = factory.Create(edge.Coordinate);
-            
+
             myStraitEdges.Add(key);
             myBackEdges.Add(key);
 
@@ -99,7 +99,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
         var sout = Math.Sqrt(outgoing);
         var sin = Math.Sqrt(incoming);
-        
+
         double a = sout/sin;
         double b = sin/sout;
 
@@ -121,37 +121,43 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         }
 
         double qValue = Math.Abs(incoming - outgoing);
-        if (CheckExitCondition(precision, myHashHolder.SummaryError, qValue, cookie.Change, edgesChange))
+        if (CheckExitCondition(myOptions.ExitCondition, precision, myHashHolder.SummaryError, qValue, cookie.Change,
+                               edgesChange))
           break;
       }
     }
 
-    protected virtual bool CheckExitCondition(double precision, double totalError, double qValue, double nodesChange, double edgesChange)
+    protected virtual bool CheckExitCondition(JVRExitCondition condition,
+                                              double precision,
+                                              double totalError,
+                                              double qValue,
+                                              double nodesChange,
+                                              double edgesChange)
     {
       //TODO: Replace with delegate
-      switch(myOptions.ExitCondition)
+      switch (condition)
       {
         case JVRExitCondition.MaxNodeError:
           return qValue <= precision;
 
         case JVRExitCondition.MaxRelativeNodeError:
-          return qValue <= precision * myCellVolume;
-        
+          return qValue <= precision*myCellVolume;
+
         case JVRExitCondition.SummError:
           return totalError <= precision;
-        
+
         case JVRExitCondition.NodeChangeError:
           return nodesChange <= precision;
-        
+
         case JVRExitCondition.NodeRelativeChangeError:
-          return nodesChange <= precision * myCellVolume;
-        
+          return nodesChange <= precision*myCellVolume;
+
         case JVRExitCondition.EdgesChangeError:
           return edgesChange <= precision;
-        
+
         case JVRExitCondition.EdgesRelativeChangeError:
-          return edgesChange <= precision * myCellVolume;
-        
+          return edgesChange <= precision*myCellVolume;
+
         default:
           throw new Exception("Unexpected exit condition " + myOptions.ExitCondition);
       }

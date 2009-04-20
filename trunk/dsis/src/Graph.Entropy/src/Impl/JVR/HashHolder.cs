@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
@@ -54,7 +55,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
       if (myCachedNorm == null)
       {
-        double v = myHash.Values.FoldLeft(0.0, (x,vv)=>x+vv);
+        double v = myHash.Values.Sum();
         myCachedNorm = v;
         return v;
       }

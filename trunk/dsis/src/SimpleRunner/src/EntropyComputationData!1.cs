@@ -13,7 +13,7 @@ namespace DSIS.SimpleRunner
 
     protected EntropyComputationData(EntropyComputationData<T> data) : base(data)
     {
-      EntropyMode = new List<T>(data.EntropyMode).ToArray();
+      EntropyMode = data.EntropyMode != null ? new List<T>(data.EntropyMode).ToArray() : null;
     }
 
     EntropyComputationData<T> ICloneable<EntropyComputationData<T>>.Clone()
