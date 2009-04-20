@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace DSIS.Utils.testSrc
+namespace DSIS.Utils.Tests
 {
   [TestFixture]
   public class BinTreePriorityQueueExTestAllCases : BinTreePriorityQueueExTestBase
@@ -52,51 +52,56 @@ namespace DSIS.Utils.testSrc
       MegaTest(3);
     }
 
-
+    [Test]
     public void Test_Permute_1()
     {
-      List<int[]> list = new List<int[]>(Permute(new int[] {1}));
+      var list = new List<int[]>(Permute(new[] {1}));
       Assert.IsTrue(list.Count == 1);
-      Assert.AreEqual(list[0], new int[] {1});
+      Assert.AreEqual(list[0], new[] {1});
     }
 
+    [Test]
     public void Test_Permute_2()
     {
-      List<int[]> list = new List<int[]>(Permute(new int[] {1, 2}));
+      var list = new List<int[]>(Permute(new[] {1, 2}));
       Assert.IsTrue(list.Count == 2);
 
-      Assert.AreEqual(list[0], new int[] {2, 1});
-      Assert.AreEqual(list[1], new int[] {1, 2});
+      Assert.AreEqual(list[0], new[] {2, 1});
+      Assert.AreEqual(list[1], new[] {1, 2});
     }
 
+    [Test]
     public void Test_Permute_3()
     {
-      List<int[]> list = new List<int[]>(Permute(new int[] {1, 2, 3}));
+      var list = new List<int[]>(Permute(new[] {1, 2, 3}));
       Assert.IsTrue(list.Count == 6);
 
-      Assert.AreEqual(list[0], new int[] {3, 2, 1,});
-      Assert.AreEqual(list[1], new int[] {2, 3, 1,});
-      Assert.AreEqual(list[2], new int[] {3, 1, 2,});
-      Assert.AreEqual(list[3], new int[] {1, 3, 2,});
-      Assert.AreEqual(list[4], new int[] {2, 1, 3,});
-      Assert.AreEqual(list[5], new int[] {1, 2, 3,});
+      Assert.AreEqual(list[0], new[] {3, 2, 1,});
+      Assert.AreEqual(list[1], new [] {2, 3, 1,});
+      Assert.AreEqual(list[2], new [] {3, 1, 2,});
+      Assert.AreEqual(list[3], new [] {1, 3, 2,});
+      Assert.AreEqual(list[4], new [] {2, 1, 3,});
+      Assert.AreEqual(list[5], new [] {1, 2, 3,});
     }
 
+    [Test]
     public void Test_NonZero_1()
     {
       int[] bits = new List<int>(NonZeroBits(4)).ToArray();
-      Assert.AreEqual(bits, new int[] {2});
+      Assert.AreEqual(bits, new [] {2});
     }
 
+    [Test]
     public void Test_NonZero_2()
     {
       int[] bits = new List<int>(NonZeroBits(3)).ToArray();
-      Assert.AreEqual(bits, new int[] {0, 1});
+      Assert.AreEqual(bits, new [] {0, 1});
     }
 
+    [Test]
     public void Test_NonZerp_3()
     {
-      List<int[]> list = new List<int[]>();
+      var list = new List<int[]>();
       foreach (IEnumerable<int> enumerable in NVector(2))
       {
         list.Add(new List<int>(enumerable).ToArray());
@@ -104,9 +109,9 @@ namespace DSIS.Utils.testSrc
 
       Assert.AreEqual(list.Count, 4);
       Assert.AreEqual(list[0], new int[] {});
-      Assert.AreEqual(list[1], new int[] {0});
-      Assert.AreEqual(list[2], new int[] {1});
-      Assert.AreEqual(list[3], new int[] {0, 1});
+      Assert.AreEqual(list[1], new [] {0});
+      Assert.AreEqual(list[2], new [] {1});
+      Assert.AreEqual(list[3], new [] {0, 1});
     }
 
 
@@ -118,7 +123,7 @@ namespace DSIS.Utils.testSrc
 
         foreach (IEnumerable<int> enumerable in NVector(v))
         {
-          Dictionary<int, object> data = new Dictionary<int, object>();
+          var data = new Dictionary<int, object>();
 
           foreach (int i in ints)
           {
@@ -130,7 +135,7 @@ namespace DSIS.Utils.testSrc
             data.Remove(ints[i]);
           }
 
-          List<int> l = new List<int>(data.Keys);
+          var l = new List<int>(data.Keys);
           l.Sort();
           foreach (int i in l)
           {
@@ -217,7 +222,7 @@ namespace DSIS.Utils.testSrc
 
     private static IEnumerable<int[]> Permute(int[] data)
     {
-      int[] ids = new int[data.Length + 1];
+      var ids = new int[data.Length + 1];
       while (ids[data.Length] == 0)
       {
         Hashset<int> check = new Hashset<int>();
@@ -233,7 +238,7 @@ namespace DSIS.Utils.testSrc
         }
         if (!fail)
         {
-          int[] set = new int[data.Length];
+          var set = new int[data.Length];
           for (int i = 0; i < data.Length; i++)
           {
             set[i] = data[ids[i]];

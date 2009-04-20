@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 
-namespace DSIS.Utils.testSrc
+namespace DSIS.Utils.Tests
 {
   [TestFixture]
   public class BinTreePriorityQueueExTestScenario : BinTreePriorityQueueExTestBase<string, double, BinTreePriorityQueueExTestScenario.Queue2> {
-    private static readonly string TEST_DATA = "testData/binTreeEx";
+    private const string TEST_DATA = "testData/binTreeEx";
 
     protected override Queue2 Create()
     {

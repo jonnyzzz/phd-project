@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
 
-namespace DSIS.Utils.testSrc
+namespace DSIS.Utils.Tests
 {
   public abstract class BinTreePriorityQueueExTestBase<T, Q, TQueue>
     where TQueue : BinTreePriorityQueueExTestBase<T, Q, TQueue>.Queue
@@ -26,7 +26,7 @@ namespace DSIS.Utils.testSrc
 
     public class Queue : BinTreePriorityQueueEx<T, Q>
     {
-      public Queue(IComparer<Q> comparer) : base(comparer)
+      protected Queue(IComparer<Q> comparer) : base(comparer)
       {
       }
 
@@ -44,7 +44,7 @@ namespace DSIS.Utils.testSrc
         return myAdded;
       }
 
-      public void Consolidate()
+      private void Consolidate()
       {
         DoConsolidate();
       }
@@ -81,7 +81,7 @@ namespace DSIS.Utils.testSrc
           Assert.AreEqual("[null]", String.Join("", data));
         else
         {
-          StringBuilder sb = new StringBuilder();
+          var sb = new StringBuilder();
           foreach (Node node in nodes)
           {
             if (node == null)
@@ -105,7 +105,7 @@ namespace DSIS.Utils.testSrc
       {
         try
         {
-          List<String> actual = new List<String>();
+          var actual = new List<String>();
           act = Regex.Replace(act.Trim(), @" d=\d+", "");
           foreach (string trim in act.Split('\n'))
           {
@@ -144,7 +144,7 @@ namespace DSIS.Utils.testSrc
 
       internal string Dump()
       {
-        StringBuilder sb = new StringBuilder();
+        var sb = new StringBuilder();
 
         if (myMin == null)
           sb.AppendLine("<null>");
@@ -191,8 +191,8 @@ namespace DSIS.Utils.testSrc
 
       public void ScriptTest(string script, Converter<string, Action> parse)
       {
-        Dictionary<T, object> cache = new Dictionary<T, object>();
-        Dictionary<T, Q> cache2 = new Dictionary<T, Q>();
+        var cache = new Dictionary<T, object>();
+        var cache2 = new Dictionary<T, Q>();
         string[] data = script.Split('\n');
 
         Comparison<T> comparison = delegate(T t1, T t2)
@@ -230,7 +230,7 @@ namespace DSIS.Utils.testSrc
                 break;
               case ActionType.Max:
                 Pair<T, Q> pair = ExtractMin();
-                List<T> list = new List<T>(cache.Keys);
+                var list = new List<T>(cache.Keys);
                 list.Sort(comparison);
                 T exp = list[0];
                 Q v = cache2[exp];
@@ -268,9 +268,9 @@ namespace DSIS.Utils.testSrc
           }
         }
 
-        List<T> l = new List<T>(cache.Keys);
+        var l = new List<T>(cache.Keys);
         l.Sort(comparison);
-        Queue<T> q = new Queue<T>(l);
+        var q = new Queue<T>(l);
 
         while (q.Count > 0)
         {

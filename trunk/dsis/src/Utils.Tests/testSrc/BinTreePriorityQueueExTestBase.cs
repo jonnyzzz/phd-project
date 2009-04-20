@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace DSIS.Utils.testSrc
+namespace DSIS.Utils.Tests
 {
   public class BinTreePriorityQueueExTestBase : BinTreePriorityQueueExTestBase<string, int, BinTreePriorityQueueExTestBase.Queue> 
   {  
@@ -13,8 +13,8 @@ namespace DSIS.Utils.testSrc
 
     protected static int[] Random(int size)
     {
-      List<int> list = new List<int>();
-      Random r = new Random((int) DateTime.Now.Ticks);
+      var list = new List<int>();
+      var r = new Random((int) DateTime.Now.Ticks);
       while (size-- > 0)
       {
         list.Add(r.Next());
@@ -25,7 +25,7 @@ namespace DSIS.Utils.testSrc
     protected static int[] Random2(int size)
     {
       Hashset<int> list = new Hashset<int>();
-      Random r = new Random((int) DateTime.Now.Ticks);
+      var r = new Random((int) DateTime.Now.Ticks);
       while (list.Count < size)
       {
         list.Add(r.Next());
@@ -39,7 +39,7 @@ namespace DSIS.Utils.testSrc
       {
         try
         {
-          Dictionary<int, object> listData = new Dictionary<int, object>();
+          var listData = new Dictionary<int, object>();
           for (int i = 0; i < data.Length; i++)
           {
             int v = data[i];
@@ -84,7 +84,7 @@ namespace DSIS.Utils.testSrc
     protected void DoSetTest2(params int[] data)
     {
       int? min = null;
-      List<int> dta = new List<int>();
+      var dta = new List<int>();
       foreach (int i in data)
       {
         if (min == null || min.Value > i)
@@ -109,7 +109,7 @@ namespace DSIS.Utils.testSrc
     {
       for (int i = 1; i < data.Length; i++)
       {
-        List<int> dta = new List<int>();
+        var dta = new List<int>();
         string sta = String.Empty;
         for (int j = 0; j < i; j++)
         {

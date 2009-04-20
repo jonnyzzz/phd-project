@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace DSIS.Utils.testSrc
+namespace DSIS.Utils.Tests
 {
   [TestFixture]
   public class BinTreePriorityQueueExTestSmart : BinTreePriorityQueueExTestBase 
@@ -46,17 +46,17 @@ namespace DSIS.Utils.testSrc
 
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("b", -2));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("b", -2));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("a", 1));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("a", 1));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("c", 3));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("c", 3));
     }
 
     [Test]
@@ -82,27 +82,27 @@ namespace DSIS.Utils.testSrc
 
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("a", 1));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("a", 1));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("b", 2));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("b", 2));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("c", 3));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("c", 3));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("d", 4));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("d", 4));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("e", 56));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("e", 56));
     }
 
     [Test]
@@ -117,32 +117,32 @@ namespace DSIS.Utils.testSrc
 
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("a", 1));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("a", 1));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("b", 2));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("b", 2));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("c", 3));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("c", 3));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("d", 4));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("d", 4));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("f", 7));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("f", 7));
 
       Console.Out.WriteLine("---------");
       Console.Out.WriteLine(queue.Dump());
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("e", 56));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("e", 56));
     }
 
     [Test]
@@ -238,11 +238,11 @@ namespace DSIS.Utils.testSrc
       queue.AddNode(3, "c");
       object n = queue.AddNode(4, "d");
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("a", 1));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("a", 1));
       queue.Remove(n);
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("b", 2));
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("c", 3));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("b", 2));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("c", 3));
     }
 
     [Test]
@@ -253,11 +253,11 @@ namespace DSIS.Utils.testSrc
       queue.AddNode(3, "c");
       object n = queue.AddNode(4, "d");
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("a", 1));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("a", 1));
       queue.Remove(n);
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("b", 2));
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("c", 3));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("b", 2));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("c", 3));
     }
 
     [Test]
@@ -268,11 +268,11 @@ namespace DSIS.Utils.testSrc
       queue.AddNode(3, "c");
       object n2 = queue.AddNode(4, "d");
 
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("a", 1));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("a", 1));
 
       queue.Remove(n1);
       queue.Remove(n2);
-      Assert.AreEqual(queue.ExtractMin(), Pair.Create("c", 3));
+      Assert.AreEqual(queue.ExtractMin(), Pair.Of("c", 3));
     }
 
     [Test]
@@ -286,7 +286,7 @@ namespace DSIS.Utils.testSrc
     {
       int[] data = { 1, 2, 3, 4, 5 };
 
-      Dictionary<int, object> listData = new Dictionary<int, object>();
+      var listData = new Dictionary<int, object>();
       for (int i = 0; i < data.Length; i++)
       {
         int v = data[i];
@@ -302,7 +302,7 @@ namespace DSIS.Utils.testSrc
         queue.Debug();
       }
 
-      List<int> keys = new List<int>(listData.Keys);
+      var keys = new List<int>(listData.Keys);
       keys.Sort();
 
       foreach (int key in keys)
@@ -327,7 +327,7 @@ namespace DSIS.Utils.testSrc
     {
       int[] data = { 1, 2, 3, 4, 5 };
 
-      Dictionary<int, object> listData = new Dictionary<int, object>();
+      var listData = new Dictionary<int, object>();
       for (int i = 0; i < data.Length; i++)
       {
         int v = data[i];
@@ -346,7 +346,7 @@ namespace DSIS.Utils.testSrc
         }
       }
 
-      List<int> keys = new List<int>(listData.Keys);
+      var keys = new List<int>(listData.Keys);
       keys.Sort();
 
       foreach (int key in keys)

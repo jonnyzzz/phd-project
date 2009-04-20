@@ -123,7 +123,6 @@
     <Compile Include="src\HashedQueue.cs" />
     <Compile Include="src\Log2Helper.cs" />
     <Compile Include="src\MutexCookie.cs" />
-    <Compile Include="src\PriorityQueue.cs" />
     <Compile Include="src\Hashset.cs" />
     <Compile Include="src\IntEqualityComparer.cs" />
     <Compile Include="src\LongEqualityComparer.cs" />

@@ -103,10 +103,11 @@ namespace DSIS.Utils
 
         myMin = mEnd;
       }
+      myCount--;
 
       Consolidate();
-
-      myCount--;
+      NodeRemoved(node);
+      
       return new Pair<T, Q>(node.Data, node.Value);
     }
 

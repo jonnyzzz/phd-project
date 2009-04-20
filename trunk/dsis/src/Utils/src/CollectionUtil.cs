@@ -46,7 +46,7 @@ namespace DSIS.Utils
 
     public static bool IsEmpty<Q>(this IEnumerable<Q> enu)
     {
-      foreach (var q in enu)
+      foreach (var _ in enu)
         return false;
       return true;
     }
@@ -117,26 +117,6 @@ namespace DSIS.Utils
       return list.AsReadOnly();
     }
 
-    public static IEnumerable<T> And<T,Q1,Q2>(IEnumerable<Q1> enu1, IEnumerable<Q2> enu2)
-      where Q1 : T
-      where Q2 : T
-    {
-      foreach (Q1 q1 in enu1)
-      {
-        yield return q1;
-      }
-
-      foreach (Q2 q2 in enu2)
-      {
-        yield return q2;
-      }
-    }
-
-    public static IEnumerable<T> And<T>(params IEnumerable<T>[] enums)
-    {
-      return And((IEnumerable<IEnumerable<T>>)enums);
-    }
-
     public static IEnumerable<T> And<T>(IEnumerable<IEnumerable<T>> enums)
     {
       foreach (IEnumerable<T> enumerable in enums)
@@ -146,19 +126,6 @@ namespace DSIS.Utils
           yield return t;
         }
       }
-    }
-
-    public static bool Contains<T>(IEnumerable<T> collection, T check)
-    {
-      IEqualityComparer<T> comparer = EqualityComparerFactory<T>.GetComparer();
-      foreach (T item in collection)
-      {
-        if (comparer.Equals(item, check))
-        {
-          return true;
-        }
-      }
-      return false;
     }
 
     public static T[] Fill<T>(this T data, int count)
@@ -184,27 +151,12 @@ namespace DSIS.Utils
       for (int i = from; i < to; i++) yield return i;
     }
 
-    public static List<T> AsList<T>(params T[] ts)
-    {
-      return new List<T>(ts);
-    }
-
     public static IEnumerable<T> Map<T, Q>(this IEnumerable<Q> en, Converter<Q, T> conv)
     {
       foreach (var q in en)
       {
         yield return conv(q);
       }
-    }
-
-    public static Dictionary<T,P> MapValues<T,P,Q>(this Dictionary<T,Q> dic, Converter<Q,P> conv)
-    {
-      var result = new Dictionary<T, P>(dic.Comparer);
-      foreach (var pair in dic)
-      {
-        result.Add(pair.Key, conv(pair.Value));
-      }
-      return result;
     }
 
     public static IEnumerable<T> Maps<T,Q>(this IEnumerable<Q> en, Converter<Q, IEnumerable<T>> conv)
@@ -271,13 +223,6 @@ namespace DSIS.Utils
       {
         yield return zip(te.Current, qe.Current);
       }
-    }
-
-    public static IEnumerable<TU> Upcast<TEnu, TU,TC>(this TEnu enu) 
-      where TC : TU
-      where TEnu : IEnumerable<TC>
-    {
-      return new UpcastedEnumerable<TEnu, TC, TU>(enu);
     }
 
     public static IEnumerable<Q> Join<Q,T>(this IEnumerable<Q> enu, params T[] ex)
