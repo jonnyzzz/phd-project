@@ -18,6 +18,8 @@
     <TeamCityPublishArtifacts SourceFiles="@(Files-> '%(FullPath)' )" Condition=" '$(TEAMCITY_VERSION)' != '' "/>
 
     <Message Text="--> @( Files -> '%(FullPath)')" />
+
+    <Exec Command="cmd /c set" />
   </Target>
 
   <Target Name="Tests">
