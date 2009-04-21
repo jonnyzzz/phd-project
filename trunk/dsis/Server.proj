@@ -13,10 +13,11 @@
 
   <Target Name="PublishArtifacts">
     <ItemGroup>
-      <Files Include="bin\**\*" />
+      <Files Include="$(MSBuildProjectDirecotry)bin\**\*" />
     </ItemGroup>
     <TeamCityPublishArtifacts SourceFiles="@(Files-> '%(FullPath)' )" Condition=" '$(TEAMCITY_VERSION)' != '' "/>
-    <Message Text="--> @( Files -> '%(FullPath)')" Condition=" '$(TEAMCITY_VERSION)' == '' "/>
+
+    <Message Text="--> @( Files -> '%(FullPath)')" />
   </Target>
 
   <Target Name="Tests">
