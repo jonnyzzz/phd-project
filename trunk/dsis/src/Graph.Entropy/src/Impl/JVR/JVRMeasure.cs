@@ -3,6 +3,7 @@ using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Graph.Entropy.Impl.JVR
 {
@@ -16,6 +17,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     private readonly ArcDirection<T> myBackEdges;
 
     private readonly double myCellVolume;
+    private readonly int myNodesCount;
 
     private readonly IGraph<T> myGraph;
     private readonly IGraphStrongComponents<T> myComponents;
@@ -29,6 +31,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
       myGraph = graph;
       myComponents = components;
+      myNodesCount = components.Components.Sum(x => x.NodesCount);
 
       myCellVolume = ((IIntegerCoordinateSystem) myGraph.CoordinateSystem).CellSize.FoldLeft(1.0, (x, v) => x*v);
     }
@@ -153,22 +156,25 @@ namespace DSIS.Graph.Entropy.Impl.JVR
           return qValue <= precision;
 
         case JVRExitCondition.MaxRelativeNodeError:
-          return qValue <= precision*myCellVolume;
+          return qValue <= precision * myCellVolume;
 
         case JVRExitCondition.SummError:
           return totalError <= precision;
+
+        case JVRExitCondition.RelativeSummError:
+          return totalError <= precision * myNodesCount;
 
         case JVRExitCondition.NodeChangeError:
           return nodesChange <= precision;
 
         case JVRExitCondition.NodeRelativeChangeError:
-          return nodesChange <= precision*myCellVolume;
+          return nodesChange <= precision * myCellVolume;
 
         case JVRExitCondition.EdgesChangeError:
           return edgesChange <= precision;
 
         case JVRExitCondition.EdgesRelativeChangeError:
-          return edgesChange <= precision*myCellVolume;
+          return edgesChange <= precision * myCellVolume;
 
         default:
           throw new Exception("Unexpected exit condition " + myOptions.ExitCondition);

@@ -189,6 +189,11 @@ namespace DSIS.SimpleRunner
     {
       return new SystemInfoAction(new Ref9(mu), Space(3, 10000));
     }
+
+    public static SystemInfoAction Ref9(double mu) //.5
+    {
+      return new SystemInfoAction(new Ref9(mu), Space(3, 3));
+    }
     
     /*
      * 
