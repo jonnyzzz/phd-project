@@ -13,8 +13,9 @@
 
   <Target Name="PublishArtifacts">
     <ItemGroup>
-      <Files Include="$(MSBuildProjectDirecotry)bin\**\*" />
+      <Files Include="$(MSBuildProjectDirecotry)bin*\**\*" />
     </ItemGroup>
+
     <TeamCityPublishArtifacts SourceFiles="@(Files-> '%(FullPath)' )" Condition=" '$(TEAMCITY_VERSION)' != '' "/>
 
     <Message Text="--> @( Files -> '%(FullPath)')" />
@@ -24,13 +25,10 @@
 
   <Target Name="Tests">
     <ItemGroup>
-      <Tests Include="bin*\DSIS*Test*dll" 
+      <Tests Include="$(MSBuildProjectDirecotry)bin*\DSIS*Test*dll" 
              Exclude="**\*Generated*"
       />
     </ItemGroup>
-
-
-    <Message Text="##teamcity[Test assembly: %(Tests.FileName)%(Tests.Extension)" />
 
     <NUnit Assemblies="%(Tests.FullPath)" NUnitVersion="NUnit-2.5.0" ContinueOnError="True" />
 
