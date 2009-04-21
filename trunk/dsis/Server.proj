@@ -11,11 +11,12 @@
     <MSBuild Projects="src\DSIS.sln" Properties="Configuration=Release" Targets="Clean;Rebuild"/>
   </Target>
 
-  <Target Name="PublishArtifacts" Condition=" '$(TEAMCITY_VERSION)' != '' ">
+  <Target Name="PublishArtifacts">
     <ItemGroup>
       <Files Include="bin\**\*" />
     </ItemGroup>
-    <TeamCityPublishArtifacts SourceFiles="@(Files)" />
+    <TeamCityPublishArtifacts SourceFiles="@(Files-> '%(FullPath)' )" Condition=" '$(TEAMCITY_VERSION)' != '' "/>
+    <Message Text="--> @( Files -> '%(FullPath)')" Condition=" '$(TEAMCITY_VERSION)' == '' "/>
   </Target>
 
   <Target Name="Tests">
