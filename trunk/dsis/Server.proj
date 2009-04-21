@@ -1,4 +1,4 @@
-<Project DefaultTargets="Clean;Build;Tests" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+<Project DefaultTargets="Clean;Build;PublishArtifacts;Tests" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
 
   <Target Name="Clean">
     <ItemGroup>
@@ -9,6 +9,13 @@
   
   <Target Name="Build">
     <MSBuild Projects="src\DSIS.sln" Properties="Configuration=Release" Targets="Clean;Rebuild"/>
+  </Target>
+
+  <Target Name="PublishArtifacts" Condition=" '$(TEAMCITY_VERSION)' != '' ">
+    <ItemGroup>
+      <Files Include="bin\**\*" />
+    </ItemGroup>
+    <TeamCityPublishArtifacts SourceFiles="@(Files)" />
   </Target>
 
   <Target Name="Tests">
