@@ -6,6 +6,7 @@ using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Scheme;
 using DSIS.Scheme.Impl.Actions.Entropy;
 using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.SimpleRunner
 {
@@ -16,6 +17,15 @@ namespace DSIS.SimpleRunner
     protected override IEnumerable<EntropyComputationMode> GetEntropComputationMode(AfterSIParams<T> afterSIParams)
     {
       return afterSIParams.ComputationData.EntropyMode;
+    }
+
+    protected override void RemoveActionFrom(List<T> actions, T computationData, EntropyComputationMode mode)
+    {
+      computationData.EntropyMode = computationData.EntropyMode.Where(x => x != mode).ToArray();
+      if (computationData.EntropyMode.Count() == 0)
+      {
+        actions.RemoveAll(x => ReferenceEquals(x, computationData));
+      }
     }
 
     protected override Func<Pair<IAction, string>> GetEntropyAction(EntropyComputationMode mode)
@@ -80,7 +90,7 @@ namespace DSIS.SimpleRunner
                      IncludeSelfEdge = false, 
                      InitialWeight = EntropyLoopWeights.CONST, 
                      EPS = eps, 
-                     ExitCondition = JVRExitCondition.MaxRelativeNodeError
+                     ExitCondition = JVRExitCondition.AvgSummError
                    };
       return Pair.Of((IAction) new JVRMeasureAction(opts), opts.Present);
     }

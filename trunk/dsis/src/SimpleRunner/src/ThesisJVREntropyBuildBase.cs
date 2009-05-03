@@ -22,6 +22,11 @@ namespace DSIS.SimpleRunner
       yield return new object();
     }
 
+    protected override void RemoveActionFrom(List<EntropyComputationData<object>> actions, EntropyComputationData<object> computationData, object mode)
+    {
+      //NOP.
+    }
+
     protected override Func<Pair<IAction, string>> GetEntropyAction(object mode)
     {
       return () => CreateJVRMeasureAction(1e-05);

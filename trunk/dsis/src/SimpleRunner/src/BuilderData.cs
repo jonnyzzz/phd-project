@@ -10,16 +10,20 @@ namespace DSIS.SimpleRunner
     public int repeat { get; set; }
 
     public TimeSpan ExecutionTimeout { get; set; }
+    public long MemoryLimit { get; set; }
 
     public BuilderData()
     {
       ExecutionTimeout = TimeSpan.MaxValue;
+      MemoryLimit = 2*1024L*1024 * 1024;
     }
 
     protected BuilderData(BuilderData data)
     {
       system = data.system;
       repeat = data.repeat;
+      ExecutionTimeout = data.ExecutionTimeout;
+      MemoryLimit = data.MemoryLimit;
     }
 
     public bool Equals(BuilderData other)
@@ -47,6 +51,7 @@ namespace DSIS.SimpleRunner
       log.Write("System function: {0}", system.SystemInfo);
       log.Write("System space: {0}", system.SystemSpace);
       log.Write("Repeat: {0}", repeat);
+      log.Write("Timeout: {0}", ExecutionTimeout);
     }
   }
 }

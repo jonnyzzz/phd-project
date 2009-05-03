@@ -31,17 +31,18 @@ namespace DSIS.SimpleRunner
     private void BuildContiniousSystems()
     {
       var queue = new List<T>(GetSystemsToRun());
-      queue.Sort((x, y) => x.repeat.CompareTo(y.repeat));
 
       while (queue.Count > 0)
       {
+        queue.Sort((x, y) => x.repeat.CompareTo(y.repeat));
+
         var computationData = queue[0];
         Console.Out.WriteLine("\r\n-------------------------------------------------------\r\n");
         computationData.Serialize(new ConsoleLogger());
         Console.Out.WriteLine();
         queue.RemoveAt(0);
 
-        var executor = new GuardedExecutor(2 * 1024 * 1024 * 1024L, computationData.ExecutionTimeout);
+        var executor = new GuardedExecutor(computationData.MemoryLimit, computationData.ExecutionTimeout);
         executor.Error += e =>
                             {
                               if (e is OutOfMemoryException)
@@ -75,6 +76,10 @@ namespace DSIS.SimpleRunner
                              var aa = new AgregateAction(x => BuildGraph(x, sys));
                              aa.Apply(new Context());
                            });
+        
+        GC.Collect();
+        GC.GetTotalMemory(true);
+
         Console.Out.WriteLine("---------------------------------------------------------");
       }
     }

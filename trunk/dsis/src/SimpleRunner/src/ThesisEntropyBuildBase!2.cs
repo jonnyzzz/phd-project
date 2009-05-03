@@ -17,6 +17,7 @@ namespace DSIS.SimpleRunner
   {
     protected abstract IEnumerable<Q> GetEntropComputationMode(AfterSIParams<T> afterSIParams);
     protected abstract Func<Pair<IAction, string>> GetEntropyAction(Q mode);
+    protected abstract void RemoveActionFrom(List<T> actions, T computationData, Q mode);
 
     protected sealed override IAction GetLastStepImage()
     {
@@ -29,18 +30,44 @@ namespace DSIS.SimpleRunner
       {
         foreach (var mode in GetEntropComputationMode(afterSIParams))
         {
-          BuildJVRCall(afterSIParams, GetEntropyAction(mode));
+          BuildJVRCall(afterSIParams, GetEntropyAction(mode), mode);
         }
       }
       return base.CreateActionsAfterSI(afterSIParams);
     }
 
-    private static void BuildJVRCall(AfterSIParams<T> afterSIParams, Func<Pair<IAction, string>> factory)
+    private readonly MultiDictionary<T, Q> myPendingActions = new MultiDictionary<T, Q>(EqualityComparerFactory<T>.GetComparer());
+    private readonly MultiDictionary<T, Q> myFinishedActions = new MultiDictionary<T, Q>(EqualityComparerFactory<T>.GetComparer());
+
+    private void ActionStarted(T computationData, Q mode)
+    {
+      myPendingActions.AddValue(computationData, mode);
+    }
+
+    private void ActionFinished(T computationData, Q mode)
+    {
+      myPendingActions.RemoveWhere(computationData, x=>Equals(x, mode));
+      myFinishedActions.AddValue(computationData, mode);
+    }
+
+    protected override void OnComputationInterrupt(List<T> actions, T action)
+    {
+      var set = new HashSet<Q>();
+      set.UnionWith(myPendingActions.GetValues(action));
+      set.IntersectWith(myFinishedActions.GetValues(action));
+
+      foreach (var q in set)
+      {
+        RemoveActionFrom(actions, action, q);
+      }
+    }
+
+    private void BuildJVRCall(AfterSIParams<T> afterSIParams, Func<Pair<IAction, string>> factory, Q mode)
     {
       var result = factory();
       var bs = afterSIParams.SiConstructionAction.Edge(new FilterProxyAction(FileKeys.WorkingFolderKey));
 
-      var id = new RecordTimeAction(result.First, "XxX" + result.Second);
+      var id = new RecordTimeAction(new ReportAction(result.First, this, afterSIParams.ComputationData, mode), "XxX" + result.Second);
       var key = bs.Edge(id);
 
       var wf = bs.Back(new SetEntropyMethodWorkingFolderPrefix(result.Second));
@@ -60,6 +87,44 @@ namespace DSIS.SimpleRunner
         .WithBack(afterSIParams.System)
         .Back(new SelectiveCopyAction(Keys.IntegerCoordinateSystemInfo)).Back(afterSIParams.SiConstructionAction)
         ;
+    }
+
+    private class ReportAction : IAction 
+    {
+      private readonly T myComputationData;
+      private readonly Q myMode;
+      private readonly IAction myHost;
+      private readonly ThesisEntropyBuildBase<T, Q> myHolder;
+
+      public ReportAction(IAction host, ThesisEntropyBuildBase<T, Q> holder, T computationData, Q mode)
+      {
+        myHost = host;
+        myMode = mode;
+        myComputationData = computationData;
+        myHolder = holder;
+      }
+
+      public ICollection<ContextMissmatch> Compatible(Context ctx)
+      {
+        return myHost.Compatible(ctx);
+      }
+
+      public Context Apply(Context ctx)
+      {
+        myHolder.ActionStarted(myComputationData, myMode);
+        try
+        {
+          return myHost.Apply(ctx);
+        } finally
+        {
+          myHolder.ActionFinished(myComputationData, myMode);
+        }
+      }
+
+      public IAction Clone()
+      {
+        return new ReportAction(myHost.Clone(), myHolder, myComputationData, myMode);
+      }
     }
 
     private class SetEntropyMethodWorkingFolderPrefix : PrefixWorkingFolderAction
