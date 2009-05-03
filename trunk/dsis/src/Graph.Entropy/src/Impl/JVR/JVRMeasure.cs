@@ -161,6 +161,9 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         case JVRExitCondition.SummError:
           return totalError <= precision;
 
+        case JVRExitCondition.AvgSummError:
+          return totalError <= precision * myNodesCount;
+
         case JVRExitCondition.RelativeSummError:
           return totalError <= precision * myNodesCount;
 

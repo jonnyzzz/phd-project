@@ -9,8 +9,11 @@ namespace DSIS.SimpleRunner
     public SystemInfoAction system { get; set; }
     public int repeat { get; set; }
 
+    public TimeSpan ExecutionTimeout { get; set; }
+
     public BuilderData()
     {
+      ExecutionTimeout = TimeSpan.MaxValue;
     }
 
     protected BuilderData(BuilderData data)

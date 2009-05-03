@@ -12,6 +12,8 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     MaxRelativeNodeError,
     [IncludeValue(Title = "When total error < eps")]
     SummError,
+    [IncludeValue(Title = "When average error < eps")]
+    AvgSummError,
     [IncludeValue(Title = "When total error < eps * number of cells")]
     RelativeSummError,
     [IncludeValue(Title = "When step nodes weight change < eps")]

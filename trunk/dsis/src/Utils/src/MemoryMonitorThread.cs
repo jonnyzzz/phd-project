@@ -24,7 +24,7 @@ namespace DSIS.Utils
                                   while (true)
                                   {
                                     Thread.Sleep(500);
-                                    if (GC.GetTotalMemory(false) > myLimit)
+                                    if (MemoryLimit != null && GC.GetTotalMemory(false) > myLimit)
                                     {
                                       MemoryLimit();
                                       return;

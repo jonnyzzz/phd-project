@@ -105,6 +105,7 @@
     <Compile Include="src\Safe.cs" />
     <Compile Include="src\SimpleConcurentQueue.cs" />
     <Compile Include="src\SynchList.cs" />
+    <Compile Include="src\TimeoutThread.cs" />
     <Compile Include="src\TryMutexCookie.cs" />
     <Compile Include="src\UpcastedCollection.cs" />
     <Compile Include="src\UpcastedDictionary.cs" />

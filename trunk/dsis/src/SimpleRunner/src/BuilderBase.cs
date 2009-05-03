@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
@@ -24,6 +23,11 @@ namespace DSIS.SimpleRunner
       return GetSystemsToRun2().Maps(x => x);
     }
 
+    protected virtual void OnComputationInterrupt(List<T> actions, T action)
+    {
+      actions.RemoveAll(x => x.Equals(action));
+    }
+
     private void BuildContiniousSystems()
     {
       var queue = new List<T>(GetSystemsToRun());
@@ -37,45 +41,41 @@ namespace DSIS.SimpleRunner
         Console.Out.WriteLine();
         queue.RemoveAt(0);
 
-        using (var th = new MemoryMonitorThread(2 * 1024 * 1024 * 1024L))
-        {
-          var computation
-            = new Thread(
-              delegate()
-                {
-                  try
-                  {
-                    var sys = computationData;
-                    var aa = new AgregateAction(x => BuildGraph(x, sys));
-                    aa.Apply(new Context());
-                    Console.Out.WriteLine("---------------------------------------------------------");
-                  }
-                  catch (OutOfMemoryException e)
-                  {
-                    Console.Out.WriteLine("-----------------------------OOE-------------------------");
-                    Console.Out.WriteLine(e);
-                    Console.Out.WriteLine("-----------------------------OOE-------------------------");
-                    queue.RemoveAll(x => x.Equals(computationData));
-                  }
-                  catch (Exception e)
-                  {
-                    Console.Out.WriteLine("-----GENERAL ERROR------------------------OOE-------------------------");
-                    Console.Out.WriteLine(e);
-                    Console.Out.WriteLine("-----------------------------OOE-------------------------");
-                    queue.RemoveAll(x => x.Equals(computationData));
-                  }
-                  GCHelper.Collect();
-                });
-
-          th.MemoryLimit += delegate
+        var executor = new GuardedExecutor(2 * 1024 * 1024 * 1024L, computationData.ExecutionTimeout);
+        executor.Error += e =>
+                            {
+                              if (e is OutOfMemoryException)
                               {
-                                computation.Interrupt();
-                                computation.Abort();
+                                Console.Out.WriteLine("-----------------------------OOME-------------------------");
+                                Console.Out.WriteLine(e);
+                                Console.Out.WriteLine("-----------------------------OOME-------------------------");
+                                OnComputationInterrupt(queue, computationData);                                
+                              } else
+                              {
+                                Console.Out.WriteLine("-----GENERAL ERROR------------------------OOE-------------------------");
+                                Console.Out.WriteLine(e);
+                                Console.Out.WriteLine("-----------------------------OOE-------------------------");
+                                OnComputationInterrupt(queue, computationData);
+                              }
+                            };
+        executor.TimeOut += () =>
+                              {
+                                Console.Out.WriteLine("-----TIMEOUT-------------------------------------------------");
+                                OnComputationInterrupt(queue, computationData);
                               };
-          computation.Start();
-          th.Run();
-          computation.Join();
-        }
+        executor.OutOfMemory += () =>
+                                  {
+                                    Console.Out.WriteLine("-----------------------------OOME-------------------------");
+                                    OnComputationInterrupt(queue, computationData);
+                                  };
+
+        executor.Execute("Simulation", ()=>
+                           {
+                             var sys = computationData;
+                             var aa = new AgregateAction(x => BuildGraph(x, sys));
+                             aa.Apply(new Context());
+                           });
+        Console.Out.WriteLine("---------------------------------------------------------");
       }
     }
 
