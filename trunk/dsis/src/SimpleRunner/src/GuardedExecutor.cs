@@ -22,13 +22,13 @@ namespace DSIS.SimpleRunner
 
     public event Action TimeOut;
 
-    public event Action OutOfMemory;    
+    public event Action OutOfMemory;
 
     public void Execute(string name, Action a)
     {
-      using(var mem = new MemoryMonitorThread(myMemoryLimit))
+      using (var mem = new MemoryMonitorThread(myMemoryLimit))
       {
-        using(var timeout = new TimeoutThread(myTimeout))
+        using (var timeout = new TimeoutThread(myTimeout))
         {
           bool SkipError = false;
           var thread = new Thread(() =>
@@ -40,9 +40,15 @@ namespace DSIS.SimpleRunner
                                       catch (Exception e)
                                       {
                                         LOG.Error(e);
-                                        if (!SkipError && Error != null)
+                                        try
                                         {
-                                          Error(e);
+                                          if (!SkipError && Error != null)
+                                          {
+                                            Error(e);
+                                          }
+                                        } catch (Exception ee)
+                                        {
+                                          LOG.Error(ee);
                                         }
                                       }
                                     });
@@ -56,12 +62,13 @@ namespace DSIS.SimpleRunner
                                  thread.Abort();
                                  LOG.Error("Timeout " + myTimeout + " for action " + name);
                                };
-          mem.MemoryLimit += () => {
-                                     SkipError = true;
-                                     thread.Interrupt();
-                                     thread.Abort();
-                                     LOG.Error("Memory limit" + myTimeout + " for action " + name);
-          };
+          mem.MemoryLimit += () =>
+                               {
+                                 SkipError = true;
+                                 thread.Interrupt();
+                                 thread.Abort();
+                                 LOG.Error("Memory limit" + myTimeout + " for action " + name);
+                               };
           mem.Run();
           timeout.Run();
 

@@ -62,7 +62,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
         fw.WritePoint(new ImagePoint(data));
       }
 
-      var result = componentIds.Select(x => files[x]);
+      var result = componentIds.Where(files.ContainsKey).Select(x => files[x]);
       if (otherFilesWriter != null)
       {
         result = otherFilesWriter.Enum().Join(result);

@@ -1,10 +1,13 @@
 using System;
 using System.Threading;
+using log4net;
 
 namespace DSIS.Utils
 {
   public class TimeoutThread : IDisposable
   {
+    private static readonly ILog LOG = LogManager.GetLogger(typeof (TimeoutThread));
+
     private readonly TimeSpan mySpan;
     private Thread myThread;
 
@@ -19,9 +22,21 @@ namespace DSIS.Utils
     {
       myThread = new Thread(()=>
                               {
-                                Thread.Sleep(mySpan);
-                                if (Timeout != null)
-                                  Timeout();
+                                try
+                                {
+                                  Thread.Sleep(mySpan);
+                                } catch
+                                {
+                                  //NOP
+                                }
+                                try
+                                {
+                                  if (Timeout != null && myThread != null)
+                                    Timeout();
+                                } catch (Exception e)
+                                {
+                                  LOG.Error(e);
+                                }
                               });
       myThread.IsBackground = false;
       myThread.Name = "Timeout " + mySpan;
@@ -30,10 +45,12 @@ namespace DSIS.Utils
 
     public void Dispose()
     {
-      if (myThread != null && myThread.IsAlive)
+      var thread = myThread;
+      myThread = null;
+      if (thread != null && thread.IsAlive)
       {
-        myThread.Interrupt();
-        myThread = null;
+        thread.Interrupt();
+        thread.Join();
       }
     }
   }

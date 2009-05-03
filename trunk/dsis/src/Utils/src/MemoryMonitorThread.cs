@@ -1,10 +1,12 @@
 using System;
 using System.Threading;
+using log4net;
 
 namespace DSIS.Utils
 {
   public class MemoryMonitorThread : IDisposable
   {
+    private static readonly ILog LOG = LogManager.GetLogger(typeof (MemoryMonitorThread));
     private readonly long myLimit;
     private Thread myThread;
 
@@ -21,19 +23,20 @@ namespace DSIS.Utils
                               {
                                 try
                                 {
-                                  while (true)
+                                  while (myThread != null)
                                   {
                                     Thread.Sleep(500);
                                     if (MemoryLimit != null && GC.GetTotalMemory(false) > myLimit)
                                     {
+                                      LOG.Info("Memory usage limit acheived.");
                                       MemoryLimit();
                                       return;
                                     }
                                   }
                                 }
-                                catch
+                                catch(Exception e)
                                 {
-                                  ;//NOP
+                                  LOG.Error(e);
                                 }
                               });
       myThread.Name = "Memory Detecter";
@@ -43,11 +46,12 @@ namespace DSIS.Utils
 
     public void Dispose()
     {
-      if (myThread != null && myThread.IsAlive)
+      var thread = myThread;
+      myThread = null;
+      if (thread != null && thread.IsAlive)
       {
-        myThread.Interrupt();
-        myThread.Abort();
-        myThread.Join();
+        thread.Interrupt();
+        thread.Join();
       }
     }
   }
