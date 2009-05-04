@@ -39,9 +39,9 @@ namespace DSIS.GnuplotDrawer
     {
       if ((myParams as IScanDraw).DrawScans)
       {
-        for (int x = 0; x < 180; x += 10)
+        for (int x = 0; x < 80; x += 15)
         {
-          for (int z = 0; z < 360; z += 10)
+          for (int z = 0; z < 360; z += 15)
           {
             RotateZ(x, z);
           }
