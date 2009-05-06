@@ -1,3 +1,7 @@
+  - format doubles without E-05
+  - find default parameters from predefined systems
+
+
   -  extract data actions
   -  cache saved points files
   -  add default system space parameters to system info factory
