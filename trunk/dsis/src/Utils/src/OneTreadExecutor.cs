@@ -143,38 +143,44 @@ namespace DSIS.Utils
 
       private void InterruptInternal()
       {
-        //Stop waiting for thread to finish
-        myExecutionWait.Set();
-        
-        myWaitFinishEvent.Reset();
-        Cancel();
-
-        //If thread is finished
-        if (myActionFinishEvent.WaitOne(10, true))
+        try
         {
-          myWaitFinishEvent.Set();
-          return;
-        }
+          //Stop waiting for thread to finish
+          myExecutionWait.Set();
 
-        //Thread is finished
-        if (myWorker.Join(10))
+          myWaitFinishEvent.Reset();
+          Cancel();
+
+          //If thread is finished
+          if (myActionFinishEvent.WaitOne(10, true))
+          {
+            myWaitFinishEvent.Set();
+            return;
+          }
+
+          //Thread is finished
+          if (myWorker.Join(10))
+          {
+            myWaitFinishEvent.Set();
+            return;
+          }
+
+          Func<bool> alive = () => !myWorker.Join(100) && !myActionFinishEvent.WaitOne(100, true);
+
+          myWorker.Interrupt();
+          if (!alive())
+          {
+            myWaitFinishEvent.Set();
+            return;
+          }
+
+          while (alive())
+          {
+            myWorker.Abort();
+          }
+        } finally
         {
-          myWaitFinishEvent.Set();
-          return;
-        }
-
-        Func<bool> alive = () => !myWorker.Join(100) && !myActionFinishEvent.WaitOne(100, true);
-
-        myWorker.Interrupt();
-        if (!alive())
-        {
-          myWaitFinishEvent.Set();
-          return;
-        }
-
-        while (alive())
-        {
-          myWorker.Abort();
+          GCHelper.Collect();
         }
       }
 

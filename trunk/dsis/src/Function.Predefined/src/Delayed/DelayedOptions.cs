@@ -9,5 +9,10 @@ namespace DSIS.Function.Predefined.Delayed
   {
     [IncludeGenerate(Title = "A")]
     public double A { get; set; }
+
+    public DelayedOptions()
+    {
+      A = 2.27;
+    }
   }
 }

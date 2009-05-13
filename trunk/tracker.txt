@@ -1,3 +1,4 @@
+  - show asynchronious cell image build option  
   - format doubles without E-05
   - find default parameters from predefined systems
 

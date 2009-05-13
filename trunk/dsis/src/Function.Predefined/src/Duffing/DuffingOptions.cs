@@ -13,5 +13,11 @@ namespace DSIS.Function.Predefined.Duffing
     public double K { get; set; }
     [IncludeGenerate(Title = "Beta")]
     public double Beta { get; set; }
+
+    public DuffingOptions() {
+      Alpha = 1;
+      Beta = 1;
+      K = 0.1;
+    }
   }
 }
