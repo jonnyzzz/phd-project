@@ -12,6 +12,7 @@ namespace DSIS.IntegerCoordinates.Generated
   [ComponentImplementation]
   public class GeneratedIntegerCoordinateSystemManager
   {
+    private static int ourGeneragedInstanceCount;
     private static GeneratedIntegerCoordinateSystemManager myInstance;
     private readonly Dictionary<int, Type> myCachedIcs = new Dictionary<int, Type>();
     private readonly ICodeCompiler myCompiler;
@@ -50,7 +51,8 @@ namespace DSIS.IntegerCoordinates.Generated
 
     private Type CreateType(int dim)
     {
-      Assembly assembly = myCompiler.CompileCSharpCode(GenerateCoordinate(dim), typeof (IIntegerCoordinate),
+      string key;
+      Assembly assembly = myCompiler.CompileCSharpCode(GenerateCoordinate(dim, out key), typeof (IIntegerCoordinate),
                                                      typeof (EqualityComparerAttribute),
                                                      typeof (IIntegerCoordinateFactoryEx),
                                                      typeof (IIntegerCoordinateCallback));
@@ -60,10 +62,10 @@ namespace DSIS.IntegerCoordinates.Generated
         throw new Exception("Failed to compile code. ");
       }
 
-      return assembly.GetType("DSIS.Generated.IntegerCoordinateSystemFactory");
+      return assembly.GetType("DSIS.Generated.IntegerCoordinateSystemFactory" + key);
     }
 
-    private string GenerateCoordinate(int dim)
+    private string GenerateCoordinate(int dim, out string key)
     {
       if (dim <= 0)
         throw new ArgumentOutOfRangeException("dim");
@@ -88,6 +90,7 @@ namespace DSIS.IntegerCoordinates.Generated
       template.SetAttribute("DimensionItPair", dimAndPrime);
       template.SetAttribute("DimensionItNext", dimAndNext);
       template.SetAttribute("BoxIt", new ShennonFenoCodec(dim));
+      template.SetAttribute("Key", key = "_d" + dim + "_" + ++ourGeneragedInstanceCount);
 
       return template.ToString();
     }

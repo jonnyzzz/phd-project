@@ -9,10 +9,10 @@ using DSIS.IntegerCoordinates.Generated;
 
 namespace DSIS.Generated	
 {
-  public class IntegerCoordinateSystem : 
-    IntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>, 
-    IProcessorFactory<IntegerCoordinate>, 
-    IEXIntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>
+  public sealed class IntegerCoordinateSystem$Key$ : 
+    IntegerCoordinateSystemBase<IntegerCoordinateSystem$Key$, IntegerCoordinate$Key$>, 
+    IProcessorFactory<IntegerCoordinate$Key$>, 
+    IEXIntegerCoordinateSystemBase<IntegerCoordinateSystem$Key$, IntegerCoordinate$Key$>
   {
   
     $DimensionIt:{
@@ -22,7 +22,7 @@ namespace DSIS.Generated
       internal readonly long mySubdivisionL$it$;
     }$
 
-    public IntegerCoordinateSystem(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
+    public IntegerCoordinateSystem$Key$(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
       $DimensionIt:{
 		myCellSizeL$it$ = myCellSize[$it$];
@@ -32,7 +32,7 @@ namespace DSIS.Generated
       }$      
     }
 
-    public IntegerCoordinateSystem(ISystemSpace systemSpace) : this(systemSpace, systemSpace.InitialSubdivision)
+    public IntegerCoordinateSystem$Key$(ISystemSpace systemSpace) : this(systemSpace, systemSpace.InitialSubdivision)
     {
     }
 
@@ -45,7 +45,7 @@ namespace DSIS.Generated
           return ToInternalL$it$(point);
       }$
         default:
-          throw new OutOfMemoryException();
+          throw new ArgumentException();
       }      
     }
 
@@ -69,18 +69,18 @@ namespace DSIS.Generated
           return ToExternalL$it$(pt);
         }$        
         default:
-          throw new OutOfMemoryException();
+          throw new ArgumentException();
       }
     }
     
-    public void TopLeftPoint(IntegerCoordinate point, double[] output)
+    public void TopLeftPoint(IntegerCoordinate$Key$ point, double[] output)
     {
       $DimensionIt:{
 		output[$it$] = ToExternalL$it$(point.l$it$);
       }$
     }
 
-    public void CenterPoint(IntegerCoordinate point, double[] output)
+    public void CenterPoint(IntegerCoordinate$Key$ point, double[] output)
     {
 	  $DimensionIt:{
 		output[$it$] = ToExternalL$it$(point.l$it$) + myCellSizeHalfL$it$;
@@ -107,22 +107,22 @@ namespace DSIS.Generated
       }
     }
 
-    public IntegerCoordinate Create(params long[] param)
+    public IntegerCoordinate$Key$ Create(params long[] param)
     {
-      return new IntegerCoordinate($DimensionIt:{ param[$it$] }; separator=","$);
+      return new IntegerCoordinate$Key$($DimensionIt:{ param[$it$] }; separator=","$);
     }
 
-    public IntegerCoordinate Create($DimensionIt:{ long l$it$ }; separator=","$)
+    public IntegerCoordinate$Key$ Create($DimensionIt:{ long l$it$ }; separator=","$)
     {
-      return new IntegerCoordinate($DimensionIt:{ l$it$ }; separator=","$);        
+      return new IntegerCoordinate$Key$($DimensionIt:{ l$it$ }; separator=","$);        
     }
 
-    public IProcessorFactory<IntegerCoordinate> ProcessorFactory
+    public IProcessorFactory<IntegerCoordinate$Key$> ProcessorFactory
     {
       get { return this; }
     }
 
-    public IntegerCoordinate FromPoint(double[] point)
+    public IntegerCoordinate$Key$ FromPoint(double[] point)
     {
       if (!SystemSpace.Contains(point))
         return null;
@@ -134,20 +134,20 @@ namespace DSIS.Generated
       return Create($DimensionIt:{ l$it$ }; separator=","$	);
     }
 
-    public IntegerCoordinateSystem SubdividedCoordinateSystem(long[] division)
+    public IntegerCoordinateSystem$Key$ SubdividedCoordinateSystem(long[] division)
     {
-      return new IntegerCoordinateSystem(SystemSpace, GetSubdividedFactor(division));
+      return new IntegerCoordinateSystem$Key$(SystemSpace, GetSubdividedFactor(division));
     }
     
-    public IntegerCoordinateSystem ProjectedCoordinateSystem(long[] division)
+    public IntegerCoordinateSystem$Key$ ProjectedCoordinateSystem(long[] division)
     {
       long[] factor = GetProjectedFactor(division);
-      return factor != null ? new IntegerCoordinateSystem(SystemSpace, factor) : null;
+      return factor != null ? new IntegerCoordinateSystem$Key$(SystemSpace, factor) : null;
     }       
     
     public void DoGeneric(IIntegerCoordinateSystemWith with)
     {
-      with.Do<IntegerCoordinateSystem, IntegerCoordinate>(this);
+      with.Do<IntegerCoordinateSystem$Key$, IntegerCoordinate$Key$>(this);
     } 
     
     public int Dimension
@@ -155,44 +155,44 @@ namespace DSIS.Generated
       get { return $Dimension$; }
     }
     
-    public override IRadiusProcessor<IntegerCoordinate> CreateRadiusProcessor()
+    public override IRadiusProcessor<IntegerCoordinate$Key$> CreateRadiusProcessor()
     {
-      return new RadiusProcessor(this);
+      return new RadiusProcessor$Key$(this);
     }
 
-    public override IRectProcessor<IntegerCoordinate> CreateRectProcessor(double[] eps)
+    public override IRectProcessor<IntegerCoordinate$Key$> CreateRectProcessor(double[] eps)
     {
-      return new RectProcessor(this, eps);
+      return new RectProcessor$Key$(this, eps);
     }        
     
-    public override IPointProcessor<IntegerCoordinate> CreateOverlapedPointProcessor(double[] cellSizePercent)
+    public override IPointProcessor<IntegerCoordinate$Key$> CreateOverlapedPointProcessor(double[] cellSizePercent)
     {
-      return new OverlappingProcessor(this, cellSizePercent);
+      return new OverlappingProcessor$Key$(this, cellSizePercent);
     }
     
-    protected override ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> CreateSubdivideConverter(IntegerCoordinateSystem from, IntegerCoordinateSystem to, long[] division)
+    protected override ICellCoordinateSystemConverter<IntegerCoordinate$Key$, IntegerCoordinate$Key$> CreateSubdivideConverter(IntegerCoordinateSystem$Key$ from, IntegerCoordinateSystem$Key$ to, long[] division)
     {
-      return new IntegerCoordinateCellConverter(from, to, division);
+      return new IntegerCoordinateCellConverter$Key$(from, to, division);
     }
   }
 
-  [EqualityComparer(typeof(IntegerCoordinateEqualityComparer))]
-  public class IntegerCoordinate : IIntegerCoordinate
+  [EqualityComparer(typeof(IntegerCoordinateEqualityComparer$Key$))]
+  public sealed class IntegerCoordinate$Key$ : IIntegerCoordinate
   {
     $DimensionIt:{
     public readonly long l$it$;
     }$
 
-    public IntegerCoordinate($DimensionIt:{long l$it$}; separator=","$)
+    public IntegerCoordinate$Key$($DimensionIt:{long l$it$}; separator=","$)
     {
       $DimensionIt:{
         this.l$it$ = l$it$;
       }$      
     }
 
-    public IEqualityComparer<IntegerCoordinate> Comparer
+    public IEqualityComparer<IntegerCoordinate$Key$> Comparer
     {
-      get { return IntegerCoordinateEqualityComparer.INSTANCE; }
+      get { return IntegerCoordinateEqualityComparer$Key$.INSTANCE; }
     }
 
     public long GetCoordinate(int index)
@@ -220,51 +220,51 @@ namespace DSIS.Generated
     }
   }
 
-  public class IntegerCoordinateEqualityComparer : IEqualityComparer<IntegerCoordinate>
+  public sealed class IntegerCoordinateEqualityComparer$Key$ : IEqualityComparer<IntegerCoordinate$Key$>
   {
-    public static readonly IntegerCoordinateEqualityComparer INSTANCE = new IntegerCoordinateEqualityComparer();
+    public static readonly IntegerCoordinateEqualityComparer$Key$ INSTANCE = new IntegerCoordinateEqualityComparer$Key$();
 
-    public bool Equals(IntegerCoordinate x, IntegerCoordinate y)
+    public bool Equals(IntegerCoordinate$Key$ x, IntegerCoordinate$Key$ y)
     {
       return $DimensionIt:{x.l$it$ == y.l$it$};separator="&&"$;      
     }
 
-    public int GetHashCode(IntegerCoordinate obj)
+    public int GetHashCode(IntegerCoordinate$Key$ obj)
     {
       return (int) ( $DimensionItPair:{ obj.l$it.First$ * $it.Second$ }; separator=" + "$ ) & 0x7fffff;
     }
   }
     
-  public class IntegerCoordinateSystemFactory : IIntegerCoordinateFactoryEx
+  public sealed class IntegerCoordinateSystemFactory$Key$ : IIntegerCoordinateFactoryEx
   {    
     public void WithIntegerCoordinateSystem(IIntegerCoordinateCallback cb)
     {
-      cb.Do<IntegerCoordinateSystem, IntegerCoordinate>(
-        delegate(ISystemSpace ss, long[] subd) { return new IntegerCoordinateSystem(ss,subd);
+      cb.Do<IntegerCoordinateSystem$Key$, IntegerCoordinate$Key$>(
+        delegate(ISystemSpace ss, long[] subd) { return new IntegerCoordinateSystem$Key$(ss,subd);
         });
     }
 
     public Type System
     {
-      get { return typeof(IntegerCoordinateSystem); }
+      get { return typeof(IntegerCoordinateSystem$Key$); }
     }
 
     public Type Coordinate
     {
-      get { return typeof (IntegerCoordinate); }
+      get { return typeof (IntegerCoordinate$Key$); }
     }
     
     public IIntegerCoordinateSystem Create(ISystemSpace space, long[] subd)
     {
-      return new IntegerCoordinateSystem(space, subd);
+      return new IntegerCoordinateSystem$Key$(space, subd);
     }
   }
   
   
-  internal class IntegerCoordinateCellConverter : ICellCoordinateSystemMultiplyConverter<IntegerCoordinate> 
+  internal sealed class IntegerCoordinateCellConverter$Key$ : ICellCoordinateSystemMultiplyConverter<IntegerCoordinate$Key$> 
   {
-    private readonly IntegerCoordinateSystem myFromSystem;
-    private readonly IntegerCoordinateSystem myToSystem;
+    private readonly IntegerCoordinateSystem$Key$ myFromSystem;
+    private readonly IntegerCoordinateSystem$Key$ myToSystem;
     
     private readonly long[] myDivision; 
     
@@ -272,9 +272,9 @@ namespace DSIS.Generated
       private readonly long myDivision$it$;
     }$
     
-    public IntegerCoordinateCellConverter(IntegerCoordinateSystem fromSystem,
-                                          IntegerCoordinateSystem toSystem, 
-                                          long[] division)
+    public IntegerCoordinateCellConverter$Key$(IntegerCoordinateSystem$Key$ fromSystem,
+                                               IntegerCoordinateSystem$Key$ toSystem, 
+                                               long[] division)
     {
       myFromSystem = fromSystem;
       myToSystem = toSystem;
@@ -290,12 +290,12 @@ namespace DSIS.Generated
       get { return myDivision; }
     }
 
-    public ICellCoordinateSystem<IntegerCoordinate> FromSystem
+    public ICellCoordinateSystem<IntegerCoordinate$Key$> FromSystem
     {
       get { return myFromSystem; }
     }
 
-    public IEnumerable<IntegerCoordinate> Subdivide(IntegerCoordinate coordinate)
+    public IEnumerable<IntegerCoordinate$Key$> Subdivide(IntegerCoordinate$Key$ coordinate)
     {
       $DimensionIt:{
         long min$it$ = coordinate.l$it$ * myDivision$it$;
@@ -310,34 +310,34 @@ namespace DSIS.Generated
       }      
     }
 
-    public ICellCoordinateSystemConverter<IntegerCoordinate, IntegerCoordinate> Clone()
+    public ICellCoordinateSystemConverter<IntegerCoordinate$Key$, IntegerCoordinate$Key$> Clone()
     {
-      return new IntegerCoordinateCellConverter(myFromSystem, myToSystem, myDivision);
+      return new IntegerCoordinateCellConverter$Key$(myFromSystem, myToSystem, myDivision);
     }
 
-    public ICellCoordinateSystem<IntegerCoordinate> ToSystem
+    public ICellCoordinateSystem<IntegerCoordinate$Key$> ToSystem
     {
       get { return myToSystem; }
     }
   }
   
-  public class RectProcessorBase
+  public class RectProcessorBase$Key$
   {
     $DimensionIt:{
     protected long myLeft$it$;
     protected long myRight$it$;
     }$
         
-    protected readonly IntegerCoordinateSystem myCoordinateSystem;
+    protected readonly IntegerCoordinateSystem$Key$ myCoordinateSystem;
     protected readonly ISystemSpace mySystemSpace;
 
-    public RectProcessorBase(IntegerCoordinateSystem coordinateSystem)
+    public RectProcessorBase$Key$(IntegerCoordinateSystem$Key$ coordinateSystem)
     {
       myCoordinateSystem = coordinateSystem;
       mySystemSpace = myCoordinateSystem.SystemSpace;            
     }
 
-    protected IEnumerable<IntegerCoordinate> Enumerate()
+    protected IEnumerable<IntegerCoordinate$Key$> Enumerate()
     {             
 	  $DimensionIt:{
 		for(long myPoint$it$=myLeft$it$; myPoint$it$ <= myRight$it$; myPoint$it$++)
@@ -346,23 +346,23 @@ namespace DSIS.Generated
     }
   }
   
-  internal sealed class RectProcessor : RectProcessorBase, IRectProcessor<IntegerCoordinate>    
+  internal sealed class RectProcessor$Key$ : RectProcessorBase$Key$, IRectProcessor<IntegerCoordinate$Key$>    
   {
     $DimensionIt:{
     private readonly double myEps$it$;
     }$
 
-    public RectProcessor(IntegerCoordinateSystem coordinateSystem, double[] eps) : base(coordinateSystem)
+    public RectProcessor$Key$(IntegerCoordinateSystem$Key$ coordinateSystem, double[] eps) : base(coordinateSystem)
     {
       $DimensionIt:{
       myEps$it$ = eps[$it$];
       }$
     }
 
-    public IEnumerable<IntegerCoordinate> ConnectCellToRect(double[] left, double[] right)
+    public IEnumerable<IntegerCoordinate$Key$> ConnectCellToRect(double[] left, double[] right)
     {
       if (!mySystemSpace.ContainsRect(left, right))
-        return EmptyArray<IntegerCoordinate>.Instance;
+        return EmptyArray<IntegerCoordinate$Key$>.Instance;
 
       $DimensionIt:{      
         myLeft$it$ = myCoordinateSystem.ToInternalL$it$(left[$it$] - myEps$it$);
@@ -378,16 +378,16 @@ namespace DSIS.Generated
     }
   }
   
-  internal sealed class RadiusProcessor : RectProcessorBase, IRadiusProcessor<IntegerCoordinate>
+  internal sealed class RadiusProcessor$Key$ : RectProcessorBase$Key$, IRadiusProcessor<IntegerCoordinate$Key$>
   {
-    public RadiusProcessor(IntegerCoordinateSystem coordinateSystem) : base(coordinateSystem)
+    public RadiusProcessor$Key$(IntegerCoordinateSystem$Key$ coordinateSystem) : base(coordinateSystem)
     {
     }
 
-    public IEnumerable<IntegerCoordinate> ConnectCellToRadius(double[] point, double[] radius)
+    public IEnumerable<IntegerCoordinate$Key$> ConnectCellToRadius(double[] point, double[] radius)
     {
       if (!mySystemSpace.Contains(point))
-        return EmptyArray<IntegerCoordinate>.Instance;
+        return EmptyArray<IntegerCoordinate$Key$>.Instance;
 
       $DimensionIt:{
         myLeft$it$ = myCoordinateSystem.ToInternalL$it$(point[$it$] - radius[$it$]);
@@ -404,9 +404,9 @@ namespace DSIS.Generated
   }
   
   
-  internal sealed class OverlappingProcessor : IPointProcessor<IntegerCoordinate>
+  internal sealed class OverlappingProcessor$Key$ : IPointProcessor<IntegerCoordinate$Key$>
   {
-    private readonly IntegerCoordinateSystem myCoordinateSystem;
+    private readonly IntegerCoordinateSystem$Key$ myCoordinateSystem;
     $DimensionIt:{
     private long myPoint_$it$;
     private long myPoint2_$it$;    
@@ -416,7 +416,7 @@ namespace DSIS.Generated
     private double myORight$it$;
     }$
 
-    public OverlappingProcessor(IntegerCoordinateSystem coordinateSystem, double[] percent)
+    public OverlappingProcessor$Key$(IntegerCoordinateSystem$Key$ coordinateSystem, double[] percent)
     {
       myCoordinateSystem = coordinateSystem;
 
@@ -428,7 +428,7 @@ namespace DSIS.Generated
       }$
     }
 
-    public IEnumerable<IntegerCoordinate> AddPoint(double[] value)
+    public IEnumerable<IntegerCoordinate$Key$> AddPoint(double[] value)
     {
       bool iter = false;
       bool intersects = true;

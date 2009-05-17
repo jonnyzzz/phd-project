@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using DSIS.CodeCompiler;
 using DSIS.IntegerCoordinates.Generated;
@@ -17,14 +18,17 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
     [SetUp]
     public void SetUp()
     {
-      myManager = new GeneratedIntegerCoordinateSystemManager(CodeCompiler.CodeCompiler.CreateCompiler());
+      myManager = new GeneratedIntegerCoordinateSystemManager(new CodeCompilerImpl(new CodeCompilerFilenameGenerator()));
     }
 
     [Test]
     public void Test_CanCompile()
     {
       for (int i = 1; i < 10; i++)
-        myManager.CreateSystem(i);
+      {
+        var v = myManager.CreateSystem(i);
+        Console.Out.WriteLine("v.GetType() = {0}", v.GetType());
+      }
     }
 
     [Test]
