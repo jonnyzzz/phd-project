@@ -39,6 +39,15 @@ namespace DSIS.CodeCompiler
       string s = GeneratorTypeUtil.GenerateFQTypeName<GeneratorTypeUtilTest_03<double, GeneratorTypeUtilTest>>();
       Assert.AreEqual("DSIS.CodeCompiler.GeneratorTypeUtilTest_03<System.Double, DSIS.CodeCompiler.GeneratorTypeUtilTest> ", s);
     }    
+
+    public class Inner {}
+
+    [Test]
+    public void Test_Inner()
+    {
+      string s = GeneratorTypeUtil.GenerateFQTypeName<Inner>();
+      Assert.AreEqual("DSIS.CodeCompiler.GeneratorTypeUtilTest.Inner", s);
+    }
   }
 
 

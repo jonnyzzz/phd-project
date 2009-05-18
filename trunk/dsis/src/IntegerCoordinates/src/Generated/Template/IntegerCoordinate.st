@@ -240,7 +240,7 @@ namespace DSIS.Generated
     }
   }
     
-  public sealed class IntegerCoordinateSystemFactory$Key$ : IIntegerCoordinateFactoryEx
+  public sealed class IntegerCoordinateSystemFactory$Key$ : IIntegerCoordinateFactoryEx, IIntegerCoordinateFactory<IntegerCoordinateSystem$Key$, IntegerCoordinate$Key$>
   {    
     public void WithIntegerCoordinateSystem(IIntegerCoordinateCallback cb)
     {
@@ -260,6 +260,11 @@ namespace DSIS.Generated
     }
     
     public IIntegerCoordinateSystem Create(ISystemSpace space, long[] subd)
+    {
+      return CreateEx(space, subd);
+    }
+
+    public IntegerCoordinateSystem$Key$ CreateEx(ISystemSpace space, long[] subd)
     {
       return new IntegerCoordinateSystem$Key$(space, subd);
     }

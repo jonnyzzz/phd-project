@@ -2,7 +2,6 @@ using System;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates;
-using DSIS.Utils;
 
 namespace DSIS.CellImageBuilder.Descartes
 {
@@ -17,7 +16,7 @@ namespace DSIS.CellImageBuilder.Descartes
 
     public ICellImageBuilder<TCell> Create<TCell>() where TCell : IIntegerCoordinate
     {
-      return new DescartesCellImageBuilder<TCell>();
+      throw new NotImplementedException();
     }
   }
 

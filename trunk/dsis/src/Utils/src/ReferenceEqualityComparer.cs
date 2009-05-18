@@ -11,8 +11,7 @@ namespace DSIS.Utils
 
     public int GetHashCode(T obj)
     {
-      //todo: Create somethig more efficient here.
-      return obj.GetHashCode();
+      return 0;
     }
   }
 }

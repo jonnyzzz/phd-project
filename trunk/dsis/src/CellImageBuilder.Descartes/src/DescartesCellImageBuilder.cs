@@ -1,57 +1,180 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using DSIS.CellImageBuilder.Shared;
+using Antlr.StringTemplate;
+using DSIS.CodeCompiler;
 using DSIS.Core.Builders;
+using DSIS.Core.Ioc;
 using DSIS.Core.System;
+using DSIS.Core.System.Impl;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.Utils;
 
 namespace DSIS.CellImageBuilder.Descartes
 {
-  public class DescartesCellImageBuilder<Q> : IntegerCoordinateMethodBase<Q, DescartesSettings>, ICellImageBuilder<Q>
-    where Q : IIntegerCoordinate
+  [ComponentImplementation]
+  public class DescartesCellImageBuilderFactory
   {
-    private Pair<int, int> myRange;
-    private ICellImageBuilderIntegerCoordinatesSettings mySettings;
+    private int myKeyCount;
 
-    private readonly GeneratedIntegerCoordinateFactory myIcsFactory;
+    [Autowire]
+    private ICodeCompiler CodeCompiler { get; set; }
 
-    protected override void Bind(DescartesSettings settings, CellImageBuilderContext<Q> context)
+    [Autowire]
+    private GeneratedIntegerCoordinateFactory myIcsFactory { get; set; }
+
+    [Autowire]
+    private GeneratedIntegerCoordinateSystemManager IcsGenerator { get; set; }
+
+    [Autowire]
+    private ISystemSpaceFactory SystemSpaceFactory { get; set; }
+
+    [Autowire]
+    private ISubContainerFactory SubContainer { get; set; }
+
+    private IEnumerable<Pair<IIntegerCoordinateFactoryEx, Descriptor>> AllocateSystems(ISystemSpace space,
+                                                                                       IEnumerable<int> slices)
     {
-      var systemInfo = context.Function as ISplittableSystemInfo;
-
-      if (systemInfo == null)
+      int from = 0;
+      int id = 0;
+      foreach (var slice in slices)
       {
-        throw new Exception("Failed to create Decartes method for non-splittable system function");
+        int to = from + slice;
+        yield return CreateSystemSlice(id++, from, to);
+        from += to;
       }
     }
 
-    private void InitializePointMethod(int from, int to, ICellImageBuilderSettings settings, CellImageBuilderContext<Q> ctx, ISplittableSystemInfo splitSystem)
+    private Pair<IIntegerCoordinateFactoryEx, Descriptor> CreateSystemSlice(int id, int from, int to)
     {
-      var info = splitSystem.ForRange(from, to);
-      var sp = new RangeSystemSpace(ctx.System.SystemSpace, from, to);
-      var ics = myIcsFactory.Create(sp, sp.Slice(ctx.System.Subdivision));
+      var len = to - from;
 
-      var builder = new CellConnectionBuilder<Q>();
-/*
-      var localContext = new CellImageBuilderContext<Q>(
-        info,
-        settings,
-        ics,
-        builder
-        );
-*/
-    }
-  
-    public override void BuildImage(Q coord)
-    {
-      throw new System.NotImplementedException();
+      var slice = IcsGenerator.CreateSystem(len);
+
+      return Pair.Of(slice, BuildDescriptors(id, slice, from, to));
     }
 
-    public override ICellImageBuilder<Q> Clone()
+    private static Descriptor BuildDescriptors(int idx, IIntegerCoordinateFactoryEx sys, int from, int to)
     {
-      return new DescartesCellImageBuilder<Q>();
+      var keys = new List<Coord>();
+      for (int i = from; i < to; i++)
+      {
+        keys.Add(new Coord {Index = i});
+      }
+
+      var descr = new Descriptor
+                    {
+                      Index = idx,
+                      Coords = keys.ToArray(),
+                      Type = GeneratorTypeUtil.GenerateFQTypeName(sys.System),
+                      CellType = GeneratorTypeUtil.GenerateFQTypeName(sys.Coordinate),
+                      BuilderType =
+                        GeneratorTypeUtil.GenerateFQTypeInstance(typeof (ICellImageBuilder<>), sys.Coordinate),
+                      FactoryType = GeneratorTypeUtil.GenerateFQTypeName(sys.GetType())
+                    };
+
+      return descr;
+    }
+
+    public ICellImageBuilder<Q> GenerateImageBuilder<T, Q>(T system, IEnumerable<int> slices)
+      where T : IIntegerCoordinateSystem<Q>
+      where Q : IIntegerCoordinate
+    {
+      if (!system.IsGenerated)
+      {
+        throw new ArgumentException("Generated coordinate systems only", "system");
+      }
+
+      var spaces = AllocateSystems(system.SystemSpace, slices).ToArray();
+
+      var g = new StringTemplateGroup("foo", new EmbeddedResourceTemplateLoader(GetType().Assembly,
+                                                                                "DSIS.CellImageBuilder.Descartes.Template"));
+      StringTemplate template = g.GetInstanceOf("Descartes");
+
+      template.SetAttribute("Key", "gen_" + myKeyCount++ + "_" + slices.JoinString(x => "d" + x, "_"));
+      template.SetAttribute("CellType", GeneratorTypeUtil.GenerateFQTypeName<Q>());
+      template.SetAttribute("ICS", spaces.Select(x => x.Second).ToArray());
+      template.SetAttribute("AttributeMarker", GeneratorTypeUtil.GenerateFQTypeName<TypeImpl>());
+
+      var typeRefs = new List<Type>
+                       {
+                         typeof (Q),
+                         typeof (T),
+                         GetType(),
+                         typeof (ICellImageBuilder<>)
+                       };
+      typeRefs.AddRange(spaces.Select(x => x.First.System));
+
+      var assmbly = CodeCompiler.CompileCSharpCode(template.ToString(), typeRefs.ToArray());
+
+        var scan = SubContainer.SubContainerNoScan<TypeImpl>(/*TODO*/);
+      scan.ScanAssemblies(assmbly.Enum());
+      return scan.GetComponent<ICellImageBuilder<Q>>();
+    }
+
+    [Used]
+    public class Descriptor
+    {
+      [Used]
+      public string Name
+      {
+        get { return "system_" + Index; }
+      }
+
+      [Used]
+      public string FactoryType { get; set; }
+
+      [Used]
+      public string FactoryName
+      {
+        get { return "factory_" + Index; }
+      }
+
+      [Used]
+      public string Type { get; set; }
+
+      [Used]
+      public string CellType { get; set; }
+
+      [Used]
+      public string BuilderType { get; set; }
+
+      [Used]
+      public string BuilderName
+      {
+        get { return "builder_" + Index; }
+      }
+
+      [Used]
+      public int Index { get; set; }
+
+      [Used]
+      public Coord[] Coords { get; set; }
+
+      [Used]
+      public int Dimension
+      {
+        get { return Coords.Length; }
+      }
+    }
+
+    [Used]
+    public class Coord
+    {
+      [Used]
+      public int Index { get; set; }
+
+      [Used]
+      public string BaseName
+      {
+        get { return "l" + Index; }
+      }
+    }
+
+    [AttributeUsage(AttributeTargets.Class)]
+    public class TypeImpl : ComponentImplementationAttributeBase
+    {
     }
   }
 }

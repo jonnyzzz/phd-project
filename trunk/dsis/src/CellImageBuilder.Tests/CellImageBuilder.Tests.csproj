@@ -14,6 +14,7 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +55,9 @@
       <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -69,6 +73,8 @@
     <Compile Include="src\BoxMethodBaseTest.cs" />
     <Compile Include="src\BoxMethodIntegerCoordinate2dTest.cs" />
     <Compile Include="src\BoxMethodTest.cs" />
+    <Compile Include="src\Descartes\ComponentContainingTestBase.cs" />
+    <Compile Include="src\Descartes\DescartesTest.cs" />
     <Compile Include="src\DictionaryTest.cs" />
     <Compile Include="src\GraphBuilderTest.cs" />
     <Compile Include="src\MethodTestBase.cs" />
@@ -89,9 +95,17 @@
     <EmbeddedResource Include="resources\gold\test_06.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CellImageBuilder.Descartes\CellImageBuilder.Descartes.csproj">
+      <Project>{9FDA36D3-9AC4-44D2-BBF8-F0D496783896}</Project>
+      <Name>CellImageBuilder.Descartes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core.System.Tests\Core.System.Tests.csproj">
       <Project>{66A2C35A-E042-4F0C-B8E7-D61401133359}</Project>

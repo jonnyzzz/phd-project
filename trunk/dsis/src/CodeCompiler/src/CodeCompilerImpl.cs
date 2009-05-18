@@ -76,17 +76,6 @@ namespace DSIS.CodeCompiler
 
     public void Dispose()
     {
-      foreach (string file in myFilesToRemove)
-      {
-        try
-        {
-          File.SetAttributes(file, FileAttributes.Normal);
-          File.Delete(file);
-        } catch(Exception e)
-        {
-          LOG.Warn(e.Message, e);
-        }
-      }
     }
   }
 }

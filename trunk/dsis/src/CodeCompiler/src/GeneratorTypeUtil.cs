@@ -19,7 +19,7 @@ namespace DSIS.CodeCompiler
         string name = GenerateTypeName(t.GetGenericTypeDefinition());
         return GenerateGenericArguments(name, t.GetGenericArguments());
       }
-      return t.FullName;
+      return t.FullName.Replace("+", ".");
     }
 
     public static string GenerateFQTypeInstance(Type t, params Type[] args)

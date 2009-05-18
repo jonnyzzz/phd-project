@@ -69,6 +69,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="StringTemplate, Version=3.0.1.21733, Culture=neutral, PublicKeyToken=beee492b52c41e85, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\StringTemplate\net-2.0\StringTemplate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -83,6 +87,10 @@
     <Compile Include="src\RangeSystemSpace.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CodeCompiler\CodeCompiler.csproj">
+      <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
+      <Name>CodeCompiler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
       <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
       <Name>Core.Ioc</Name>
@@ -136,6 +144,9 @@
       <ProductName>.NET Framework 3.5</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Template\Descartes.st" />
   </ItemGroup>
   <Import Project="../Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
