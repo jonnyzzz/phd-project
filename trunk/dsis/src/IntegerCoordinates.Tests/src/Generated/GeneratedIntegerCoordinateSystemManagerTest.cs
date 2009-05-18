@@ -7,6 +7,7 @@ using DSIS.Utils;
 using DSIS.Utils.Test;
 using NUnit.Core;
 using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.IntegerCoordinates.Tests.Generated
 {
@@ -27,7 +28,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
       for (int i = 1; i < 10; i++)
       {
         var v = myManager.CreateSystem(i);
-        Console.Out.WriteLine("v.GetType() = {0}", v.GetType());
+        Console.Out.WriteLine("v.GetType() = {0}", v.GetType());        
       }
     }
 
@@ -39,6 +40,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
         IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i);
         IIntegerCoordinateSystem info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000L,i)), Fill(100000L, i));
 
+        Assert.That(info.IsGenerated, Is.True);
         info.DoGeneric(new DoWithCoordunates_Identity());
       }
     }

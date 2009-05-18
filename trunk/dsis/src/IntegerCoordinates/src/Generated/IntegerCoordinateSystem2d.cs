@@ -143,6 +143,11 @@ namespace DSIS.IntegerCoordinates.Generated
       get { return 2; }
     }
 
+    public bool IsGenerated
+    {
+      get { return false; }
+    }
+
     public IntegerCoordinateSystem2d SubdividedCoordinateSystem(long[] division)
     {
       return new IntegerCoordinateSystem2d(SystemSpace, GetSubdividedFactor(division));

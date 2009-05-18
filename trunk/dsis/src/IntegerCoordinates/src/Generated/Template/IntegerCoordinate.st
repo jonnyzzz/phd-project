@@ -36,6 +36,11 @@ namespace DSIS.Generated
     {
     }
 
+    public bool IsGenerated 
+    { 
+      get { return true; }
+    }
+
     public new long ToInternal(double point, int i)
     {
       switch(i)

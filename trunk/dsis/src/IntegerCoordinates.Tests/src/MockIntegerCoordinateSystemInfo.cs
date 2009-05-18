@@ -50,6 +50,11 @@ namespace DSIS.IntegerCoordinates.Tests
       throw new System.NotImplementedException();
     }
 
+    public bool IsGenerated
+    {
+      get { return false; }
+    }
+
     public void DoGeneric(IIntegerCoordinateSystemWith with)
     {
       throw new System.NotImplementedException();

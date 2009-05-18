@@ -18,6 +18,8 @@ namespace DSIS.Core.Coordinates
     int Dimension { get;}
 
     void DoGeneric(ICellCoordinateWith with);
+
+    bool IsGenerated { get; }
   }
 
   public interface ICellCoordinateWith
