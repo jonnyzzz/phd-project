@@ -2,6 +2,7 @@ using System;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates;
+using DSIS.Utils;
 
 namespace DSIS.CellImageBuilder.Descartes
 {
@@ -22,8 +23,18 @@ namespace DSIS.CellImageBuilder.Descartes
 
   public class CellImageBuilderAndRange
   {
-    public int From { get; set; }
-    public int To { get; set; }
-    public ICellImageBuilderIntegerCoordinatesSettings Settings { get; set; }
+    [Used]
+    public int From { get; private set; }
+    [Used]
+    public int To { get; private set; }
+    [Used]
+    public ICellImageBuilderIntegerCoordinatesSettings Settings { get; private set; }
+
+    public CellImageBuilderAndRange(int from, int to, ICellImageBuilderIntegerCoordinatesSettings settings)
+    {
+      From = from;
+      To = to;
+      Settings = settings;
+    }
   }
 }

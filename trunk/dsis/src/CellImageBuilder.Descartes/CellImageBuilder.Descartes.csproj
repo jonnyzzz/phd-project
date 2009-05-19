@@ -82,8 +82,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\CellConnectionBuilder.cs" />
+    <Compile Include="src\DescartesCellImageBuilderFactory.cs" />
     <Compile Include="src\DescartesSettings.cs" />
-    <Compile Include="src\DescartesCellImageBuilder.cs" />
+    <Compile Include="src\ListCellConnectionBuilder.cs" />
     <Compile Include="src\RangeSystemSpace.cs" />
   </ItemGroup>
   <ItemGroup>

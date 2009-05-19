@@ -60,18 +60,16 @@ namespace DSIS.CellImageBuilder.Descartes
       var keys = new List<Coord>();
       for (int i = from; i < to; i++)
       {
-        keys.Add(new Coord {Index = i});
+        keys.Add(new Coord {Index = i, SelfIndex = i - from});
       }
 
       var descr = new Descriptor
                     {
                       Index = idx,
                       Coords = keys.ToArray(),
-                      Type = GeneratorTypeUtil.GenerateFQTypeName(sys.System),
-                      CellType = GeneratorTypeUtil.GenerateFQTypeName(sys.Coordinate),
-                      BuilderType =
-                        GeneratorTypeUtil.GenerateFQTypeInstance(typeof (ICellImageBuilder<>), sys.Coordinate),
-                      FactoryType = GeneratorTypeUtil.GenerateFQTypeName(sys.GetType())
+                      TType = sys.System,
+                      TCellType = sys.Coordinate,
+                      TFactoryType = sys.GetType()
                     };
 
       return descr;
@@ -94,6 +92,8 @@ namespace DSIS.CellImageBuilder.Descartes
 
       template.SetAttribute("Key", "gen_" + myKeyCount++ + "_" + slices.JoinString(x => "d" + x, "_"));
       template.SetAttribute("CellType", GeneratorTypeUtil.GenerateFQTypeName<Q>());
+      template.SetAttribute("SystemType", GeneratorTypeUtil.GenerateFQTypeName<T>());
+      template.SetAttribute("BuilderType", GeneratorTypeUtil.GenerateFQTypeName<ICellConnectionBuilder<Q  >>());
       template.SetAttribute("ICS", spaces.Select(x => x.Second).ToArray());
       template.SetAttribute("AttributeMarker", GeneratorTypeUtil.GenerateFQTypeName<TypeImpl>());
 
@@ -108,7 +108,7 @@ namespace DSIS.CellImageBuilder.Descartes
 
       var assmbly = CodeCompiler.CompileCSharpCode(template.ToString(), typeRefs.ToArray());
 
-        var scan = SubContainer.SubContainerNoScan<TypeImpl>(/*TODO*/);
+      var scan = SubContainer.SubContainerNoScan<TypeImpl>(/*TODO*/);
       scan.ScanAssemblies(assmbly.Enum());
       return scan.GetComponent<ICellImageBuilder<Q>>();
     }
@@ -123,23 +123,10 @@ namespace DSIS.CellImageBuilder.Descartes
       }
 
       [Used]
-      public string FactoryType { get; set; }
-
-      [Used]
       public string FactoryName
       {
         get { return "factory_" + Index; }
       }
-
-      [Used]
-      public string Type { get; set; }
-
-      [Used]
-      public string CellType { get; set; }
-
-      [Used]
-      public string BuilderType { get; set; }
-
       [Used]
       public string BuilderName
       {
@@ -147,7 +134,58 @@ namespace DSIS.CellImageBuilder.Descartes
       }
 
       [Used]
+      public string Comp
+      {
+        get { return "c_" + Index; }
+      }
+      [Used]
+      public string Comp2
+      {
+        get { return "c2_" + Index; }
+      }
+
+      [Used]
+      public string ConnectionName { get { return "connection_" + Index; } }
+
+      public Type TType { get; set; }
+      public Type TCellType { get; set; }
+      public Type TFactoryType { get; set; }
+
+      [Used]
+      public string Type { get { return GeneratorTypeUtil.GenerateFQTypeName(TType); } }
+
+      [Used]
+      public string CellType { get { return GeneratorTypeUtil.GenerateFQTypeName(TCellType); } }
+
+      [Used]
+      public string BuilderType { get { return GeneratorTypeUtil.GenerateFQTypeInstance(typeof(ICellImageBuilder<>), TCellType); } }
+
+      [Used]
+      public string FactoryType { get { return GeneratorTypeUtil.GenerateFQTypeName(TFactoryType); } }
+
+      [Used]
+      public string ContextType { get { return GeneratorTypeUtil.GenerateFQTypeInstance(typeof (CellImageBuilderContext<>), TCellType); } }
+      
+      [Used]
+      public string ConnectionType
+      {
+        get { return GeneratorTypeUtil.GenerateFQTypeInstance(typeof (ListCellConnectionBuilder<>), TCellType); }
+      }
+
+      [Used]
       public int Index { get; set; }
+
+      [Used]
+      public int IndexFrom
+      {
+        get { return Coords.First().Index; }
+      }
+
+      [Used]
+      public int IndexTo
+      {
+        get { return Coords.Last().Index; }
+      }
 
       [Used]
       public Coord[] Coords { get; set; }
@@ -170,6 +208,11 @@ namespace DSIS.CellImageBuilder.Descartes
       {
         get { return "l" + Index; }
       }
+
+      public int SelfIndex { get; set; }
+
+      [Used]
+      public string SelfComponent { get { return "l" + SelfIndex; } }
     }
 
     [AttributeUsage(AttributeTargets.Class)]

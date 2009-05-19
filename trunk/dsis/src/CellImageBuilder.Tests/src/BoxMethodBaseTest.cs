@@ -14,9 +14,9 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_02()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
+      var stategy = new BoxMethodSettings(0.1);
 
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
+      var ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(ss);
 
       DoTwoDimTest(ics, ics.Create(5, 5),
@@ -43,9 +43,9 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_03()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
+      var stategy = new BoxMethodSettings(0.1);
 
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
+      var ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(ss);
 
 
@@ -73,9 +73,9 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_04()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
+      var stategy = new BoxMethodSettings(0.1);
 
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
+      var ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -103,9 +103,9 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_05()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
+      var stategy = new BoxMethodSettings(0.1);
 
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
+      var ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -133,9 +133,9 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_06()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
+      var stategy = new BoxMethodSettings(0.1);
 
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
+      var ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 
@@ -163,9 +163,9 @@ namespace DSIS.CellImageBuilder.Tests
     [Test]
     public void Test_07()
     {
-      BoxMethodSettings stategy = new BoxMethodSettings(0.1);
+      var stategy = new BoxMethodSettings(0.1);
 
-      MockSystemSpace ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
+      var ss = new MockSystemSpace(2, new double[] {0, 0}, new double[] {10, 10}, new long[] {10, 10});
       T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(ss);
 
 

@@ -1,4 +1,3 @@
-using DSIS.CellImageBuilder.Tests;
 using DSIS.IntegerCoordinates.Generated;
 using NUnit.Framework;
 

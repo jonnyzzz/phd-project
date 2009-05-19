@@ -21,7 +21,10 @@ public class DescartesCellImageBuilder$Key$ : IntegerCoordinateMethodBase<$CellT
     $ICS:{ private $it.Type$ $it.Name$; }$
     $ICS:{ private readonly $it.FactoryType$ $it.FactoryName$; }$
     $ICS:{ private $it.BuilderType$ $it.BuilderName$; }$
+    $ICS:{ private $it.ConnectionType$ $it.ConnectionName$; }$
     private DescartesSettings mySettings;
+    private new $SystemType$ mySystem;
+    private new $BuilderType$ myBuilder;
     
     public DescartesCellImageBuilder$Key$(ISystemSpaceFactory factory, GeneratedIntegerCoordinateSystemManager manager ) {
        try {
@@ -35,7 +38,9 @@ public class DescartesCellImageBuilder$Key$ : IntegerCoordinateMethodBase<$CellT
   
     protected override void Bind(DescartesSettings settings, CellImageBuilderContext<$CellType$> context)
     {
+      mySettings = settings;
       var systemInfo = context.Function as ISplittableSystemInfo;
+      mySystem = ($SystemType$)base.mySystem;
 
       if (systemInfo == null)
       {
@@ -43,7 +48,23 @@ public class DescartesCellImageBuilder$Key$ : IntegerCoordinateMethodBase<$CellT
       }
       $ICS:{ $it.Name$ = CreateSystem$it.Index$(mySystem);  }$
       $ICS:{ $it.BuilderName$ = settings.Builders[$it.Index$].Settings.Create<$it.CellType$>(); }$
+      $ICS:{ $it.ConnectionName$ = new $it.ConnectionType$(); }$
+      $ICS:{ InitCellImageBuilder$it.Index$(systemInfo); }$
+      
+      myBuilder = ($BuilderType$)context.ConnectionBuilder;
     }
+    
+    $ICS:{
+    private void InitCellImageBuilder$it.Index$(ISplittableSystemInfo system) {
+      ISystemInfo sys = system.ForRange($it.IndexFrom$, $it.IndexTo$);
+      ICellImageBuilderSettings settings = mySettings.Builders[$it.Index$].Settings	;
+      $it.Type$ ics = $it.Name$;
+      $it.ConnectionType$ connection = $it.ConnectionName$;
+      
+      $it.BuilderName$.Bind(new $it.ContextType$(sys, settings, ics, connection));
+    }	
+    
+    }$
     
     $ICS:{
     
@@ -60,15 +81,49 @@ public class DescartesCellImageBuilder$Key$ : IntegerCoordinateMethodBase<$CellT
 
     public override void BuildImage($CellType$ coord)
     {
+    
       $ICS:{
        {
-         $it.CellType$ p = $it.Name$.Create( $it.Coords:{ coord.$it.BaseName$ };separator=","$);         
+         $it.ConnectionName$.Clear();
+         $it.CellType$ p = $it.Name$.Create( $it.Coords:{ coord.$it.BaseName$ };separator=","$);
+         $it.BuilderName$.BuildImage(p);   
+         
+         //One component is empty => nothing to build
+         if ($it.ConnectionName$.IsEmpty) return;      
        }
       }$
+      
+      $ICS:{
+        foreach(var $it.Comp$ in $it.ConnectionName$.Values)
+      }$
+      { 
+        $CellType$ from = mySystem.Create(
+          $ICS:{ 
+             $it.Coords:{ c | $it.Comp$.Key.$c.SelfComponent$ };separator=", "$ 
+          };separator=", "$
+        );
+        
+        List<$CellType$> list = new List<$CellType$>();
+        
+        $ICS:{
+         foreach(var $it.Comp2$ in $it.Comp$.Value)
+        }$
+        
+        {
+          $CellType$ to = mySystem.Create(
+            $ICS:{	 
+               $it.Coords:{ c | $it.Comp2$.$c.SelfComponent$ };separator=", "$ 
+            };separator=", "$
+          );
+          list.Add(to);
+        }
+        
+        myBuilder.ConnectToMany(from, list);
+      }			
     }
 
     public override ICellImageBuilder<$CellType$> Clone()
     {
-      return new DescartesCellImageBuilder$Key$(mySpaceFactory, myManager	);	
+      return new DescartesCellImageBuilder$Key$(mySpaceFactory, myManager);	
     }
   }

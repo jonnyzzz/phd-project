@@ -1,4 +1,5 @@
 using System;
+using DSIS.CodeCompiler;
 using DSIS.Core.Ioc;
 using DSIS.Core.Ioc.JC;
 using DSIS.Utils;
@@ -15,9 +16,11 @@ namespace DSIS.CellImageBuilder.Tests.Descartes
       get { return myContainer; }
     }
 
-    [SetUp]
+    [TestFixtureSetUp]
     public void SetUp()
     {
+      CodeCompilerFilenameGenerator.DeleteAllGeneratedFiles();
+
       myContainer = new JComponentContainer<ComponentImplementationAttribute>();
       new ScanCurrentFolder(myContainer);
       myContainer.ScanAssemblies(AppDomain.CurrentDomain.GetAssemblies());
@@ -35,7 +38,7 @@ namespace DSIS.CellImageBuilder.Tests.Descartes
       }
     }
 
-    [TearDown]
+    [TestFixtureTearDown]
     public void TearDown()
     {
       myContainer.Dispose();      
