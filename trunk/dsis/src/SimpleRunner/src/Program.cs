@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using DSIS.CellImageBuilder.PointMethod;
+using DSIS.Core.Ioc;
+using DSIS.Core.Ioc.Ex;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
@@ -19,20 +21,29 @@ using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
-  public class Program
+  [ComponentImplementation]
+  public class Program : IApplication
   {
+    public int Main()
+    {
+      new ThesisJVREntropyBuild().Action();
+      //      new ThesisCurveBuild().Action();
+      //      new ThesisEntropyBuild().Action();
+      //      new ThesisSIBuild().Action();
+      //      new SIBuild().Action();
+      //      new JVRDetMorseBuild().Action();
+      //      new JVRBuild().Action();
+
+      return 0;
+    }
+
     public static void Main(string[] args)
     {
+      ApplicationEntryPoint<Program>.DoMain(args);
+
       Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
       Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
-
-//      new ThesisJVREntropyBuild().Action();
-//      new ThesisCurveBuild().Action();
-      new ThesisEntropyBuild().Action();
-//      new ThesisSIBuild().Action();
-//      new SIBuild().Action();
-//      new JVRDetMorseBuild().Action();
-//      new JVRBuild().Action();
+      
       return;
       var wfBase = new WorkingFolderAction();
 

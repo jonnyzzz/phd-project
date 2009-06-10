@@ -15,7 +15,9 @@ namespace DSIS.SimpleRunner
     public BuilderData()
     {
       ExecutionTimeout = TimeSpan.MaxValue;
-      MemoryLimit = 2*1024L*1024 * 1024;
+      var K = 1024;
+      var M = K*1024L;
+      MemoryLimit = 1700 * M;
     }
 
     protected BuilderData(BuilderData data)

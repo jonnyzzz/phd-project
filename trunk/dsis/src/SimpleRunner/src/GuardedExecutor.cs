@@ -57,22 +57,23 @@ namespace DSIS.SimpleRunner
 
           timeout.Timeout += () =>
                                {
+                                 LOG.Error("Timeout " + myTimeout + " for action " + name);
                                  SkipError = true;
                                  thread.Interrupt();
                                  thread.Abort();
-                                 LOG.Error("Timeout " + myTimeout + " for action " + name);
                                };
           mem.MemoryLimit += () =>
                                {
+                                 LOG.Error("Memory limit" + myMemoryLimit + " for action " + name);
+
                                  SkipError = true;
                                  thread.Interrupt();
-                                 thread.Abort();
-                                 LOG.Error("Memory limit" + myTimeout + " for action " + name);
+                                 thread.Abort();                                 
                                };
+          thread.Start(); 
+          
           mem.Run();
           timeout.Run();
-
-          thread.Start();
 
           thread.Join();
         }

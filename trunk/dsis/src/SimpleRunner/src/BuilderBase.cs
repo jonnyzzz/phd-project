@@ -30,6 +30,8 @@ namespace DSIS.SimpleRunner
 
     private void BuildContiniousSystems()
     {
+      SlotStore.Clear();
+
       var queue = new List<T>(GetSystemsToRun());
 
       while (queue.Count > 0)

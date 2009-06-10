@@ -2,7 +2,7 @@ namespace DSIS.Scheme.Ctx
 {
   public class SlotStore : Context
   {
-    private readonly static SlotStore ourStore = new SlotStore();
+    private static SlotStore ourStore = new SlotStore();
 
     public static readonly Key<SlotStore> KEY = new Key<SlotStore>("SlotStore");
 
@@ -10,5 +10,10 @@ namespace DSIS.Scheme.Ctx
     {
       return ourStore;
     }    
+
+    public static void Clear()
+    {
+      ourStore = new SlotStore();
+    }
   }
 }

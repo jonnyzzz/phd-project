@@ -25,8 +25,8 @@ namespace DSIS.Utils
                                 {
                                   while (myThread != null)
                                   {
-                                    Thread.Sleep(500);
-                                    if (MemoryLimit != null && GC.GetTotalMemory(false) > myLimit)
+                                    Thread.Sleep(1500);
+                                    if (MemoryLimit != null && GC.GetTotalMemory(false) > myLimit && GC.GetTotalMemory(true) > myLimit)
                                     {
                                       LOG.Info("Memory usage limit acheived.");
                                       MemoryLimit();
@@ -34,6 +34,8 @@ namespace DSIS.Utils
                                     }
                                   }
                                 }
+                                catch(ThreadInterruptedException) {}
+                                catch(ThreadAbortException) {}
                                 catch(Exception e)
                                 {
                                   LOG.Error(e);

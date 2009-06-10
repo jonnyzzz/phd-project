@@ -20,6 +20,9 @@ namespace DSIS.Utils
 
     public void Run()
     {
+      if (mySpan == TimeSpan.MaxValue)
+        return;
+
       myThread = new Thread(()=>
                               {
                                 try

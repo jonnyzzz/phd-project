@@ -129,6 +129,10 @@
     <Compile Include="src\XmlAbstractImageBuilderListener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Graph.Morse\Graph.Morse.csproj">
       <Project>{CB0FD4CC-E606-4A2A-967D-A086E1AE2B9D}</Project>
       <Name>Graph.Morse</Name>

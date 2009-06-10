@@ -20,6 +20,12 @@ namespace DSIS.SimpleRunner
         system = SystemInfoFactory.Ikeda(),
         builder = ComputationDataBuilder.Box
       }.Enum().ForSteps(steps);
+
+      yield return new EntropyComputationData<object>
+      {
+        system = SystemInfoFactory.Duffing1_2x1_2Runge(),
+        builder = ComputationDataBuilder.Box
+      }.Enum().ForSteps(steps);
     }
   }
 }
