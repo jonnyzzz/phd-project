@@ -27,7 +27,7 @@ namespace DSIS.Graph.Abstract
       myCoordinateSystem = coordinateSystem;
       myNodesCount = 0;
       myEdgesCount = 0;
-      myNodes = new GraphNodeHashList<TNode, TCell>(Primes.Nearest(65536));
+      myNodes = new GraphNodeHashList<TNode, TCell>(Primes.Nearest(500 * 1000));
       myIsLoop = CreateNodeFlagsHolder("IS_LOOP");
     }
 

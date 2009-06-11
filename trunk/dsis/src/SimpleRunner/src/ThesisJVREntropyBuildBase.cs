@@ -75,28 +75,36 @@ namespace DSIS.SimpleRunner
     private class LoggingEvaluator<Q> : JVRMeasure<Q>
       where Q : ICellCoordinate
     {
+      private readonly IGraphStrongComponents<Q> myComponents;
       private readonly Logger myLog;
       private int stepCount;
       private readonly Dictionary<JVRExitCondition, string> myCovergace = new Dictionary<JVRExitCondition, string>();
       private readonly List<JVRExitCondition> myConditions = Enum.GetValues(typeof(JVRExitCondition)).Cast<JVRExitCondition>().ToList();
       private readonly List<JVRExitCondition> myConditionsTmp = new List<JVRExitCondition>();
-      private const int STEPS_LIMIT = 10000;
+      private const int STEPS_LIMIT = 100 * 1000;
       private readonly DateTime myStartTime;
 
       public LoggingEvaluator(IGraph<Q> graph, IGraphStrongComponents<Q> components, JVRMeasureOptions opts, Logger log)
         : base(graph, components, opts)
       {
+        myComponents = components;
         myLog = log;
         myStartTime = DateTime.Now;
       }
 
       private string TotalTime()
       {
-        return (DateTime.Now - myStartTime).TotalMilliseconds + "ms";
+        return (long)((DateTime.Now - myStartTime).TotalMilliseconds) + "ms";
       }
 
       private void DumpConvergance()
       {
+        //TODO: Performance LAG!
+        var graph = myComponents.AsGraph(myComponents.Components);
+        var nodes = graph.NodesCount;
+        var edges = graph.EdgesCount;
+
+        myLog.Write("Graph nodes {0}, edges {1}", nodes, edges);
         foreach (var pair in myCovergace)
         {
           myLog.Write("{0} => {1}", pair.Key, pair.Value);
