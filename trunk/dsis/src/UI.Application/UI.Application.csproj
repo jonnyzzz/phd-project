@@ -124,6 +124,10 @@
     <Compile Include="src\Doc\Actions\IDocumentActionEx.cs" />
     <Compile Include="src\Doc\Actions\IDocumentActionManager.cs" />
     <Compile Include="src\Doc\Actions\IDocumentActionPresentation.cs" />
+    <Compile Include="src\Doc\Actions\Segments\CreateLineAction.cs" />
+    <Compile Include="src\Doc\Actions\Segments\IterateLineAction.cs" />
+    <Compile Include="src\Doc\Actions\Segments\IterateLineOptions.cs" />
+    <Compile Include="src\Doc\Actions\Segments\WizardPack.cs" />
     <Compile Include="src\Doc\Actions\SelectStrongComponentsAction.cs" />
     <Compile Include="src\Doc\CurrentStep\CellSizeCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\ControlWithTitle.cs" />
@@ -133,6 +137,7 @@
     <Compile Include="src\Doc\CurrentStep\ComponentsInfoStepCustomParameter.cs" />
     <Compile Include="src\Doc\CurrentStep\EntropyCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\CurrentStep\IntegerCoordinateStepCustomParameterBase.cs" />
+    <Compile Include="src\Doc\CurrentStep\LineCustomParameter.cs" />
     <Compile Include="src\Doc\DefaultDocumentCenterControls.cs" />
     <Compile Include="src\Doc\DefaultDocumentControls.cs" />
     <Compile Include="src\Doc\DocUIManager.cs" />
@@ -153,6 +158,7 @@
     </Compile>
     <Compile Include="src\Doc\CurrentStep\NumberOfCellsCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\ShowCurrentImageBase.cs" />
+    <Compile Include="src\Doc\ShowCurrentLineImage.cs" />
     <Compile Include="src\Doc\ShowCurrentMeasureImage.cs">
     </Compile>
     <Compile Include="src\Doc\ShowCurrentSimbolicImage.cs">
@@ -266,6 +272,10 @@
     <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
       <Name>IntegerCoordinates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LineIterator\LineIterator.csproj">
+      <Project>{4B165C39-5882-49C7-A69B-20E93855C702}</Project>
+      <Name>LineIterator</Name>
     </ProjectReference>
     <ProjectReference Include="..\Scheme.Impl\Scheme.Impl.csproj">
       <Project>{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}</Project>

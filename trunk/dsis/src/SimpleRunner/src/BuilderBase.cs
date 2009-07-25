@@ -74,6 +74,7 @@ namespace DSIS.SimpleRunner
 
         executor.Execute("Simulation", ()=>
                            {
+                             SlotStore.Clear();
                              var sys = computationData;
                              var aa = new AgregateAction(x => BuildGraph(x, sys));
                              aa.Apply(new Context());

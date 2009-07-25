@@ -152,6 +152,7 @@
     <Compile Include="src\Actions\Files\DrawEntropyMeasureWithBaseAction.cs" />
     <Compile Include="src\Actions\Files\DrawEntropyMeasureWithBaseActionBase.cs" />
     <Compile Include="src\Actions\Files\DrawLineAction.cs" />
+    <Compile Include="src\Actions\Files\DrawLineActionBase.cs" />
     <Compile Include="src\Actions\Files\DumpEntropyLogAction.cs" />
     <Compile Include="src\Actions\Files\FileKeys.cs" />
     <Compile Include="src\Actions\Files\FileLogger.cs" />
@@ -161,6 +162,8 @@
     <Compile Include="src\Actions\Files\IIocDrawHelper.cs" />
     <Compile Include="src\Actions\Files\ImageDimension.cs" />
     <Compile Include="src\Actions\Files\ImageResult.cs" />
+    <Compile Include="src\Actions\Files\IoCDrawLineAction.cs" />
+    <Compile Include="src\Actions\Files\IoCDrawLineImage.cs" />
     <Compile Include="src\Actions\Files\IoCDrawSimbolicImage.cs" />
     <Compile Include="src\Actions\Files\IocDrawSimbolicImageAction.cs" />
     <Compile Include="src\Actions\Files\IoCDrawEntropyMeasure.cs" />

@@ -4,8 +4,6 @@ using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Line
 {
-
-
   public class LineInitialAction : ActionBase
   {
     private readonly double myEps;

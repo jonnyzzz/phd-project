@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.System;
 
@@ -8,9 +9,9 @@ namespace DSIS.LineIterator
   {
     void Iterate(ISystemSpace space, ISystemInfo system);
     
-    void Save(TextWriter tw);
+    void Save(TextWriter tw);    
 
-    void Visit(Action<double[]> point);
+    IEnumerable<ILineVisitor> Points { get; }
 
     int Count{ get;}
 
@@ -19,5 +20,10 @@ namespace DSIS.LineIterator
     ILine Clone();
 
     int Dimension { get; }
+  }
+
+  public interface ILineVisitor
+  {
+    void Visit(Action<double[]> point);
   }
 }

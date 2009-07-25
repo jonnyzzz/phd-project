@@ -9,7 +9,7 @@ using log4net;
 
 namespace DSIS.UI.Application.Doc.Actions
 {
-  [DocumentAction(Caption = "Compute Invariant measure", Description = "")]
+  [DocumentAction(Caption = "Compute &Invariant measure", Description = "")]
   public class ComputeInvariantMeasureAction : IDocumentAction
   {
     private static readonly ILog LOG = LogManager.GetLogger(typeof (ComputeInvariantMeasureAction));

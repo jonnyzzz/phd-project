@@ -39,7 +39,7 @@
       this.ButtonFinish.Location = new System.Drawing.Point(246, 3);
       this.ButtonFinish.Name = "ButtonFinish";
       this.ButtonFinish.Size = new System.Drawing.Size(75, 23);
-      this.ButtonFinish.TabIndex = 5;
+      this.ButtonFinish.TabIndex = 2;
       this.ButtonFinish.Text = "&Finish";
       this.ButtonFinish.UseVisualStyleBackColor = true;
       // 
@@ -48,7 +48,7 @@
       this.ButtonNext.Location = new System.Drawing.Point(165, 3);
       this.ButtonNext.Name = "ButtonNext";
       this.ButtonNext.Size = new System.Drawing.Size(75, 23);
-      this.ButtonNext.TabIndex = 4;
+      this.ButtonNext.TabIndex = 1;
       this.ButtonNext.Text = "&Next";
       this.ButtonNext.UseVisualStyleBackColor = true;
       // 
@@ -57,7 +57,7 @@
       this.ButtonBack.Location = new System.Drawing.Point(84, 3);
       this.ButtonBack.Name = "ButtonBack";
       this.ButtonBack.Size = new System.Drawing.Size(75, 23);
-      this.ButtonBack.TabIndex = 3;
+      this.ButtonBack.TabIndex = 4;
       this.ButtonBack.Text = "&Back";
       this.ButtonBack.UseVisualStyleBackColor = true;
       // 
@@ -66,7 +66,7 @@
       this.ButtonCancel.Location = new System.Drawing.Point(3, 3);
       this.ButtonCancel.Name = "ButtonCancel";
       this.ButtonCancel.Size = new System.Drawing.Size(75, 23);
-      this.ButtonCancel.TabIndex = 6;
+      this.ButtonCancel.TabIndex = 3;
       this.ButtonCancel.Text = "&Cancel";
       this.ButtonCancel.UseVisualStyleBackColor = true;
       // 

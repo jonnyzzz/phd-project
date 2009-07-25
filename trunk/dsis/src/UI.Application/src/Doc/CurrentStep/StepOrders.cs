@@ -8,6 +8,7 @@ namespace DSIS.UI.Application.Doc.CurrentStep
     CellSize,
     NumberOfCells,
     ComponentsInfo,
+    Segment,
     EntropyOrder = 1000,
   }
 }

@@ -41,6 +41,5 @@ namespace DSIS.UI.Application.Doc.CurrentStep
         yield return string.Format("[{0}; {1}]", space.AreaLeftPoint[i], space.AreaRightPoint[i]);
       }
     }
-
   }
 }

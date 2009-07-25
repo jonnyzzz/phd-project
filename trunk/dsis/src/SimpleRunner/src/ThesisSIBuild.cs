@@ -8,36 +8,27 @@ namespace DSIS.SimpleRunner
   {
     protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
     {
-//      yield return new ComputationData{system = SystemInfoFactory.AlphaX(0.45)}.Enum().ForAllBuilders();
-//      yield return new ComputationData{system = SystemInfoFactory.Ref9()}.Enum().ForSteps(6,8,10,12,14).ForAllBuilders();
-//      yield return new ComputationData{system = SystemInfoFactory.ChuaRunge2()}.Enum().ForSteps(6, 8, 10, 12, 14).ForAllBuilders();
-//      yield return new ComputationData{system = SystemInfoFactory.Delayed(2.27)}.Enum().ForSteps(8, 10, 12).ForAllBuilders();
-//      yield return new ComputationData{system = SystemInfoFactory.VanDerPolRunge()}.Enum().ForSteps(8, 10, 12, 14).ForAllBuilders();
-//      yield return new ComputationData{system = SystemInfoFactory.Henon1_4()}.Enum().ForSteps(8, 10, 12).ForAllBuilders();
-//      yield return new ComputationData{system = SystemInfoFactory.Ikeda()}.Enum().ForSteps(8, 10, 12).ForAllBuilders();
-//      yield return chua2.ForBuilders(ComputationDataBuilder.Point).ForSteps(8, 10, 12, 14, 16, 18);
-//      yield return chua2.ForBuilders(ComputationDataBuilder.Box).ForSteps(12, 14, 16, 18);
-//      yield return chua2.ForBuilders(ComputationDataBuilder.Adaptive).ForSteps(8, 10);
-//      yield return new ComputationData{system = SystemInfoFactory.LorentzRunge()}.Enum().ForSteps(6, 8, 10, 12, 14).ForAllBuilders();
-//      yield return new ComputationData{system = SystemInfoFactory.LorentzRunge()}.Enum().ForSteps(4).ForBuilders(ComputationDataBuilder.Box);
-
-      yield return new /*Entropy*/ComputationData
-      {
-        system = SystemInfoFactory.Henon1_4(),
-/*
-        EntropyMode = new[]
-                                       {
-                                         EntropyComputationMode.JVR, 
-                                         EntropyComputationMode.SmartLoopsConst, 
-                                         EntropyComputationMode.SmartLoopsLinear, 
-                                         EntropyComputationMode.SmartLoopsSquare, 
-                                         EntropyComputationMode.Eigen,
-                                       },
-*/
-        repeat = 4,
-        builder = ComputationDataBuilder.Box
-      }.Enum().ForSteps(4).OfType<ComputationData>();
-
+      yield return
+        new ComputationData { system = SystemInfoFactory.Ref9(.5) }.Enum().ForBuilders(ComputationDataBuilder.Point, ComputationDataBuilder.Adaptive).ForSteps(10);
     }
+
+    /*protected override; IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
+    {
+      yield return GetSystemsToRun3().ForAllBuilders().ForSteps(2,2,2, 4, 6, 8, 10, 12, 14, 16).ForAllCoordinateSystems();
+    }
+
+    private static IEnumerable<ComputationData> GetSystemsToRun3()
+    {
+      yield return new ComputationData {system = SystemInfoFactory.AlphaX(0.45)};
+      yield return new ComputationData {system = SystemInfoFactory.Ref9(0.5)};
+      yield return new ComputationData {system = SystemInfoFactory.ChuaRunge2()};
+      yield return new ComputationData {system = SystemInfoFactory.Delayed(2.27)};
+      yield return new ComputationData {system = SystemInfoFactory.Delayed(2.21)};
+      yield return new ComputationData {system = SystemInfoFactory.VanDerPolRunge()};      
+      yield return new ComputationData {system = SystemInfoFactory.Duffing1_3x1_3Runge()};
+      yield return new ComputationData {system = SystemInfoFactory.FoodChainDanny()};
+      yield return new ComputationData {system = SystemInfoFactory.Henon1_4()};
+      yield return new ComputationData {system = SystemInfoFactory.Ikeda()};
+    }*/
   }
 }

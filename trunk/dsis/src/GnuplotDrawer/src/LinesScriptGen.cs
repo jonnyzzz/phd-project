@@ -54,7 +54,7 @@ namespace DSIS.GnuplotDrawer
 
     public void AddFile(IGnuplotLineFile file)
     {
-      myWriter.WriteLine("'{0}' with linespoint title \"{1}\" \\", file.FileName, file.Name);
+      myWriter.WriteLine("'{0}' with lines title \"{1}\" \\", file.FileName, file.Name);
     }
   }
 }

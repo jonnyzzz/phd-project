@@ -76,6 +76,7 @@
     <Compile Include="src\ComputeJVREntropyListener.cs" />
     <Compile Include="src\ComputeStrangeEntropyListener.cs" />
     <Compile Include="src\ConsoleListener.cs" />
+    <Compile Include="src\CoordinateSystemType.cs" />
     <Compile Include="src\CurveBuild.cs" />
     <Compile Include="src\CurveBuilderData.cs" />
     <Compile Include="src\DrawBase.cs" />

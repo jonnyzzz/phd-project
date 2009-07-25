@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\AbstractWizardFormPresenter.cs" />
     <Compile Include="src\ButtonsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

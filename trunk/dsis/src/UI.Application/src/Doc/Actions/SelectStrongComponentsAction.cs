@@ -8,7 +8,7 @@ using DSIS.UI.Wizard;
 
 namespace DSIS.UI.Application.Doc.Actions
 {
-  [DocumentAction(Caption = "Select Symbolic Image components", Description = "")]
+  [DocumentAction(Caption = "Select Symbolic Image &components", Description = "")]
   public class SelectStrongComponentsAction : IDocumentAction
   {
     [Autowire]

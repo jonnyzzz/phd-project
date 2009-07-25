@@ -139,7 +139,7 @@ namespace DSIS.UI.Wizard
           var pageContent = page.Control;
           var scrollable = pageContent as ScrollableControl;
           if (scrollable != null) 
-            scrollable.AutoScroll = false;
+            scrollable.AutoScroll = false;          
 
           myMiddleContainer.AutoScrollMinSize = pageContent.Size;
           pageContent.Dock = DockStyle.Fill;
@@ -173,7 +173,9 @@ namespace DSIS.UI.Wizard
 
       myButtons.FinishEnabled = status && isLastPage;
       myButtons.NextEnabled = status && !isLastPage;
-      myButtons.BackEnabled = myPages.Count > 1;            
+      myButtons.BackEnabled = myPages.Count > 1;
+
+      AcceptButton = myButtons.NextEnabled ? myButtons.ButtonNext : myButtons.ButtonFinish;
     }
 
     private void myButtonsTimer_Tick(object sender, EventArgs e)

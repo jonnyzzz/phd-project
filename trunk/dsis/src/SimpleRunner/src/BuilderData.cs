@@ -12,12 +12,15 @@ namespace DSIS.SimpleRunner
     public TimeSpan ExecutionTimeout { get; set; }
     public long MemoryLimit { get; set; }
 
+    public CoordinateSystemType CoordinateSystemType { get; set; }
+
     public BuilderData()
     {
       ExecutionTimeout = TimeSpan.MaxValue;
       var K = 1024;
       var M = K*1024L;
-      MemoryLimit = 1700 * M;
+      MemoryLimit = 2 * 1024 * M;
+      CoordinateSystemType = CoordinateSystemType.Generated;
     }
 
     protected BuilderData(BuilderData data)
@@ -54,6 +57,7 @@ namespace DSIS.SimpleRunner
       log.Write("System space: {0}", system.SystemSpace);
       log.Write("Repeat: {0}", repeat);
       log.Write("Timeout: {0}", ExecutionTimeout);
+      log.Write("Coodinate System: {0}", CoordinateSystemType);
     }
   }
 }

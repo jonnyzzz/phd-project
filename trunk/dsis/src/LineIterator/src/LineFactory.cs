@@ -1,8 +1,10 @@
 using System;
+using DSIS.Core.Ioc;
 using DSIS.Utils;
 
 namespace DSIS.LineIterator
 {
+  [ComponentImplementation]
   public static class LineFactory
   {
     public static ILine CreateInitialLine(double eps, double[] pt1, double[] pt2)

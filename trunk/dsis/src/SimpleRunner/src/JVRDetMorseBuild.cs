@@ -25,7 +25,7 @@ namespace DSIS.SimpleRunner
       var data = new List<ComputationData>();
       foreach (int rep in 13.Each())
       {
-        data.AddRange(ForBuildser(new List<ComputationData>
+        data.AddRange(new List<ComputationData>
                                     {
 //                       new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
@@ -42,7 +42,7 @@ namespace DSIS.SimpleRunner
 //                       new ComputationData {system = SystemInfoFactory.RosslerRunge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.BrusselatorRunge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},
-                                    },
+                                    }.ForBuilders(
                                   new[]
                                     {
 //                                      Builder.Adaptive,

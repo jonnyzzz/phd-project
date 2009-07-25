@@ -5,7 +5,7 @@ using DSIS.UI.UI;
 
 namespace DSIS.UI.Application.Doc.Actions
 {
-  [DocumentAction(Caption = "Project Invariant measure", Description = "")]
+  [DocumentAction(Caption = "&Project Invariant measure", Description = "")]
   public class ComputeInvariantMeasureProjectionAction : IDocumentAction
   {
     private readonly ProjectEntopryAction myAction = new ProjectEntopryAction();

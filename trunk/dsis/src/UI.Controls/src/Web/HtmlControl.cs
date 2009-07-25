@@ -14,6 +14,7 @@ namespace DSIS.UI.Controls.Web
     {
       myBrowser = new WebBrowser { Dock = DockStyle.Fill };
       Controls.Add(myBrowser);
+      TabStop = false;
     }
 
     [Obsolete("Use SetContext")]

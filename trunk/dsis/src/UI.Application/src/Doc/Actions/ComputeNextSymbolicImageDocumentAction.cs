@@ -3,7 +3,6 @@ using DSIS.Core.Ioc;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
-using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.UI.Application.Progress;
@@ -14,7 +13,7 @@ using log4net;
 
 namespace DSIS.UI.Application.Doc.Actions
 {
-  [DocumentAction(Caption = "Build Next Symbolic Image", Description = "")]
+  [DocumentAction(Caption = "Build &Next Symbolic Image", Description = "")]
   public class ComputeNextSymbolicImageDocumentAction : IDocumentAction
   {
     private static readonly ILog LOG = LogManager.GetLogger(typeof (ComputeNextSymbolicImageDocumentAction));
@@ -43,22 +42,23 @@ namespace DSIS.UI.Application.Doc.Actions
     public void Apply()
     {
       var settings = myWizard.ShowWizard(myDocument.Content.Get(Keys.IntegerCoordinateSystemInfo));
-      if (settings != null)
-        myExec.ExecuteAsync(
-          "Next SI",
-          (hook,pi) =>
+      if (settings == null) return;
+      
+      myExec.ExecuteAsync(
+        "Next SI",
+        (hook,pi) =>
+          {
+            var ctx = myDocument.Content;
+            for (var set = settings; set != null; set = set.Next(ctx))
             {
-              var ctx = myDocument.Content;
-              for (var set = settings; set != null; set = set.Next(ctx))
-              {
-                var r = ((IAction) CreateCompleteAction(ctx, set)).Apply(ctx);
-                ctx = hook.UpdateContext(ctx, r);
-                LOG.Info(r);
-                GCHelper.Collect();
-              }
-              hook.ChangeDocument(ctx);
+              var r = ((IAction) CreateCompleteAction(ctx, set)).Apply(ctx);
+              ctx = hook.UpdateContext(ctx, r);
+              LOG.Info(r);
+              GCHelper.Collect();
             }
-          );
+            hook.ChangeDocument(ctx);
+          }
+        );
     }
 
     private static AgregateAction CreateCompleteAction(IReadOnlyContext ctx, ICellImageBuilderWizardResult settings)
@@ -66,8 +66,7 @@ namespace DSIS.UI.Application.Doc.Actions
       var ag = new AgregateAction(
         bl1 =>
           {
-            ;
-            bl1.Start
+            ;bl1.Start
               .Edge(new BuildSymbolicImageAction2(settings.Subdivision,
                                                   (ICellImageBuilderIntegerCoordinatesSettings) settings.Setting)).With(
               x1 => x1.Edge(bl1.Finish))

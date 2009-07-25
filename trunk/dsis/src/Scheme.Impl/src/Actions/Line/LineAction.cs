@@ -17,8 +17,11 @@ namespace DSIS.Scheme.Impl.Actions.Line
       ISystemInfo system = Keys.SystemInfoKey.Get(ctx);
       ISystemSpace space = Keys.SystemSpaceKey.Get(ctx);
 
-      (line = line.Clone()).Iterate(space, system);
-      
+      if (line.Count > 0)
+      {
+        (line = line.Clone()).Iterate(space, system);
+      }
+
       Keys.LineKey.Set(result, line);
       Keys.SystemInfoKey.Set(result, system);
     }

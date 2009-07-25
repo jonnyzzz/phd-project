@@ -17,7 +17,7 @@ namespace DSIS.Scheme.Impl.Actions.Console
     {
       IGraph<Q> gr = Keys.Graph<Q>().Get(input);
 
-      Logger.Instance(input).Write("Graph: Nodes {0}, Edges {1}", gr.NodesCount, gr.EdgesCount);
+      Logger.Instance(input).Write("Full graph: Nodes {0}, Edges {1}", gr.NodesCount, gr.EdgesCount);
     }
   }
 }

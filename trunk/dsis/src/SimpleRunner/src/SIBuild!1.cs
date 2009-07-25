@@ -16,21 +16,6 @@ namespace DSIS.SimpleRunner
   public abstract class SIBuild<T> : BuilderBase<T>
     where T : ComputationData, ICloneable<T>
   {
-    protected static List<T> ForBuildser(IEnumerable<T> data, params ComputationDataBuilder[] bld)
-    {
-      var d = new List<T>();
-      foreach (var computationData in data)
-      {
-        foreach (var b in bld)
-        {
-          var dd = computationData.Clone();
-          dd.builder = b;
-          d.Add(dd);
-        }
-      }
-      return d;
-    }
-
     private class DumpComputationDataAction : ActionBase
     {
       private readonly ComputationData myData;
@@ -58,13 +43,26 @@ namespace DSIS.SimpleRunner
       return null;
     }
 
+    private static string GetCoordinateSystemType(CoordinateSystemType type)
+    {
+      switch(type)
+      {
+        case CoordinateSystemType.Generated:
+          return "init_generated";
+        case CoordinateSystemType.Implemented:
+          return "init_implemented";
+        default:
+          throw new NotImplementedException("Type " + type + " is not suppoerted");
+      }
+    }
+
     protected override void BuildGraph(IActionGraphBuilder2 bld, T sys)
     {
       var graphs = new XsdGraphXmlLoader().Load(typeof (SIBuild).Assembly, "DSIS.SimpleRunner.resources.si.xml");
       var builder = new XsdGraphBuilder().BuildActions(graphs);
 
       var image = builder["imageBuilder" + sys.builder];
-      var init = builder["init"];
+      var init = builder[GetCoordinateSystemType(sys.CoordinateSystemType)];
       var workingFolder = builder["workingFolder"];
       var dump = builder["dumpGraph"];
       var draw = builder["drawGraph"];
@@ -94,7 +92,8 @@ namespace DSIS.SimpleRunner
         .Edge(draw).With(x => x.Back(workingFolder))
         .Edge(bld.Finish)
         .With(x => x.Back(new DumpSlotTimesAction("BuildSI")).Back(logger))
-        .With(x => x.Back(new DumpSlotTimesAction("total")).Back(logger));
+        .With(x => x.Back(new DumpSlotTimesAction("total")).Back(logger))
+        .With(x => x.Back(new DumpComputationDataAction(sys)).Back(logger));
     }
 
     private IActionEdgesBuilder RepeatSI(IActionEdgesBuilder holder, int count, IAction buildSI,

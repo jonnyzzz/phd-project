@@ -22,6 +22,7 @@ namespace DSIS.UI.Application.Progress
       myInvocator = invocator;
 
       InitializeComponent();
+      TabStop = false;
       SetDisabled();
     }
 
@@ -123,7 +124,7 @@ namespace DSIS.UI.Application.Progress
                                 delegate
                                   {
                                     myProgressBar.Maximum = (int) progress.Maximum;
-                                    myProgressBar.Value = (int) progress.Value;
+                                    myProgressBar.Value = (int)Math.Min(progress.Value, progress.Maximum);
                                     myLastUpdatedTime = DateTime.Now;
                                   });
     }

@@ -75,7 +75,7 @@
       this.myHost.Name = "myHost";
       this.myHost.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
       this.myHost.Size = new System.Drawing.Size(419, 20);
-      this.myHost.TabIndex = 3;
+      this.myHost.TabIndex = 1;
       // 
       // myErrorProvider
       // 
@@ -87,7 +87,7 @@
       this.myUseUnsimmetricCheckbox.Location = new System.Drawing.Point(63, 13);
       this.myUseUnsimmetricCheckbox.Name = "myUseUnsimmetricCheckbox";
       this.myUseUnsimmetricCheckbox.Size = new System.Drawing.Size(226, 17);
-      this.myUseUnsimmetricCheckbox.TabIndex = 5;
+      this.myUseUnsimmetricCheckbox.TabIndex = 3;
       this.myUseUnsimmetricCheckbox.Text = "Construct with minimal possible subdivision";
       this.myUseUnsimmetricCheckbox.UseVisualStyleBackColor = true;
       // 
@@ -98,7 +98,8 @@
       this.myRepeatPluginsHost.Name = "myRepeatPluginsHost";
       this.myRepeatPluginsHost.Padding = new System.Windows.Forms.Padding(70, 0, 0, 0);
       this.myRepeatPluginsHost.Size = new System.Drawing.Size(419, 30);
-      this.myRepeatPluginsHost.TabIndex = 6;
+      this.myRepeatPluginsHost.TabIndex = 5;
+      this.myRepeatPluginsHost.TabStop = true;
       // 
       // myRepeatCheckbox
       // 
@@ -106,7 +107,7 @@
       this.myRepeatCheckbox.Location = new System.Drawing.Point(63, 36);
       this.myRepeatCheckbox.Name = "myRepeatCheckbox";
       this.myRepeatCheckbox.Size = new System.Drawing.Size(165, 17);
-      this.myRepeatCheckbox.TabIndex = 7;
+      this.myRepeatCheckbox.TabIndex = 4;
       this.myRepeatCheckbox.Text = "Repeat construction process:";
       this.myRepeatCheckbox.UseVisualStyleBackColor = true;
       this.myRepeatCheckbox.CheckedChanged += new System.EventHandler(this.RepeatCheckedChanged);
@@ -129,7 +130,8 @@
       this.myTotal.Name = "myTotal";
       this.myTotal.Size = new System.Drawing.Size(414, 27);
       this.myTotal.SubdivisionValue = ((long)(99));
-      this.myTotal.TabIndex = 4;
+      this.myTotal.TabIndex = 2;
+      this.myTotal.TabStop = false;
       // 
       // headerSubdivisionFieldControl1
       // 
@@ -138,6 +140,7 @@
       headerSubdivisionFieldControl1.Name = "headerSubdivisionFieldControl1";
       headerSubdivisionFieldControl1.Size = new System.Drawing.Size(414, 27);
       headerSubdivisionFieldControl1.TabIndex = 0;
+      headerSubdivisionFieldControl1.TabStop = false;
       // 
       // SubdivisionEditorControl
       // 

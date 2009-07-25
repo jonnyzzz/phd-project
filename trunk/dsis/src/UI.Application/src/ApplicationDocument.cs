@@ -31,7 +31,7 @@ namespace DSIS.UI.Application
 
     public ISystemSpace Space
     {
-      get { return Keys.IntegerCoordinateSystemInfo.Get(myContext).SystemSpace; }
+      get { return Keys.SystemSpaceKey.Get(myContext); }
     }
 
     public Context Content

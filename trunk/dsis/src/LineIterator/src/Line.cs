@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DSIS.Core.System;
 using DSIS.Utils;
 
@@ -81,13 +82,25 @@ namespace DSIS.LineIterator
       }
     }
 
-    public void Visit(Action<double[]> tw)
+    public IEnumerable<ILineVisitor> Points
     {
-      foreach (var list in myPoints)
+      get { return myPoints.Select(x => (ILineVisitor)new LineVisitor(x)); }
+    }
+
+    private class LineVisitor : ILineVisitor
+    {
+      private readonly IPointList<LinePoint> myPointList;
+
+      public LineVisitor(IPointList<LinePoint> pointList)
       {
-        foreach (var point in list.Values)
+        myPointList = pointList;
+      }
+
+      public void Visit(Action<double[]> v)
+      {
+        foreach (var point in myPointList.Values)
         {
-          point.Point.Visit(tw);
+          point.Point.Visit(v);
         }
       }
     }
@@ -164,24 +177,27 @@ namespace DSIS.LineIterator
           var prevBase = list.Peek();
           list.Pop();
           var prevImage = prevBase.Compute(function);
-          if (!prevImage.Point.IsContained(space))
-            continue;
-
-          wr.AddPoint(prevImage);
+          if (prevImage.Point.IsContained(space))
+          {
+            wr.AddPoint(prevImage);
+          }
 
           while (!list.IsEmpty)
           {
             var nextBase = list.Peek();
             var nextImage = nextBase.Compute(function);
 
-            if (!nextImage.Point.IsContained(space))
-              break;
-
             if (prevImage.Distance(nextImage) < distanceEps)
             {
               wr.AddPoint(prevImage = nextImage);
               prevBase = nextBase;
               list.Pop();
+
+              if (!nextImage.Point.IsContained(space))
+              {
+                //Search for bound
+                break;
+              }
             }
             else
             {

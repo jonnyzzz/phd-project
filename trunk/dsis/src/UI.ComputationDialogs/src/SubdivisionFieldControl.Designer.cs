@@ -73,6 +73,7 @@
       this.myActualValueText.ReadOnly = true;
       this.myActualValueText.Size = new System.Drawing.Size(100, 20);
       this.myActualValueText.TabIndex = 1;
+      this.myActualValueText.TabStop = false;
       // 
       // myEstimateText
       // 
@@ -80,14 +81,15 @@
       this.myEstimateText.Name = "myEstimateText";
       this.myEstimateText.ReadOnly = true;
       this.myEstimateText.Size = new System.Drawing.Size(100, 20);
-      this.myEstimateText.TabIndex = 2;
+      this.myEstimateText.TabIndex = 3;
+      this.myEstimateText.TabStop = false;
       // 
       // mySubdivisionText
       // 
       this.mySubdivisionText.Location = new System.Drawing.Point(183, 3);
       this.mySubdivisionText.Name = "mySubdivisionText";
       this.mySubdivisionText.Size = new System.Drawing.Size(100, 20);
-      this.mySubdivisionText.TabIndex = 3;
+      this.mySubdivisionText.TabIndex = 2;
       // 
       // SubdivisionFieldControl
       // 

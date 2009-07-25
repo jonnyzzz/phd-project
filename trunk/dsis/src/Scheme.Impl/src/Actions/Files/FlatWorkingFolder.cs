@@ -6,7 +6,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
   {
     protected override string CreateWorkPath(string resultsPath)
     {
-      return Path.Combine(resultsPath, "@Flat");
+      return Path.Combine(resultsPath, "@Flat.3");
     }
   }
 }
