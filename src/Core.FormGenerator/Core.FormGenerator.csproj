@@ -90,6 +90,18 @@
     <Compile Include="src\Layout\LayoutException.cs" />
     <Compile Include="src\Layout\Impl\OptionPageLayout.cs" />
     <Compile Include="src\Layout\Impl\ScrollableLayoutImpl.cs" />
+    <Compile Include="src\ListEditor\EditListModel.cs" />
+    <Compile Include="src\ListEditor\EditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\ListEditor\EditorControl.Designer.cs">
+      <DependentUpon>EditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\ListEditor\IEditorControlModel.cs" />
+    <Compile Include="src\ListEditor\IListEditorFactroy.cs" />
+    <Compile Include="src\ListEditor\IListEditorUI.cs" />
+    <Compile Include="src\ListEditor\ListEditorFactory.cs" />
+    <Compile Include="src\ListEditor\ListModel.cs" />
     <Compile Include="src\ListSelector\IListInfo.cs" />
     <Compile Include="src\ListSelector\IListSelectorFactory.cs" />
     <Compile Include="src\ListSelector\ItemDescr.cs" />
@@ -116,6 +128,12 @@
       <Project>{E8560312-841D-49FA-9258-B74411B92F2B}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\ListEditor\EditorControl.resx">
+      <DependentUpon>EditorControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
