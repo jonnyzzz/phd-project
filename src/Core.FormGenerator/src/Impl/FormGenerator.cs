@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
+using EugenePetrenko.Core.FormGenerator.Api;
 using EugenePetrenko.Core.FormGenerator.ErrorProvider;
 using EugenePetrenko.Core.FormGenerator.FieldInfos;
 using EugenePetrenko.Core.FormGenerator.Layout;

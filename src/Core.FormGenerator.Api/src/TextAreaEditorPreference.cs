@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace EugenePetrenko.Core.FormGenerator
+namespace EugenePetrenko.Core.FormGenerator.Api
 {
   public class TextAreaEditorPreference : EditorPreferenceAttribute
   {

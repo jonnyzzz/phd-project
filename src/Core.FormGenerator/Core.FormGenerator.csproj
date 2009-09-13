@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\ControlUtils.cs" />
-    <Compile Include="src\EditorPreferenceAttribute.cs" />
     <Compile Include="src\ErrorProvider\ErrorProviderHelper.cs" />
     <Compile Include="src\ErrorProvider\IErrorProvider.cs" />
     <Compile Include="src\FieldInfos\BooleanFieldInfo.cs" />
@@ -78,10 +77,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\Impl\FormGeneratorFactoryImpl.cs" />
-    <Compile Include="src\IFormGeneratorFactory.cs" />
-    <Compile Include="src\IncludeGenerateAttribute.cs" />
-    <Compile Include="src\IncludeValueAttribute.cs" />
-    <Compile Include="src\IncludeValuesProviderAttribute.cs" />
     <Compile Include="src\Layout\Impl\ControlSizeCalculator.cs" />
     <Compile Include="src\Layout\Impl\DockLayout.cs" />
     <Compile Include="src\Layout\IDockLayout.cs" />
@@ -104,9 +99,12 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\ListSelector\ListSelectorFactoryImpl.cs" />
-    <Compile Include="src\TextAreaEditorPreference.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.FormGenerator.Api\Core.FormGenerator.Api.csproj">
+      <Project>{AA540C0D-D39F-441F-B8CB-E025BFBBDA46}</Project>
+      <Name>Core.FormGenerator.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Ioc.Api\Core.Ioc.Api.csproj">
       <Project>{CB62BEE0-B76E-4BDC-AEC5-24F47CB84504}</Project>
       <Name>Core.Ioc.Api</Name>

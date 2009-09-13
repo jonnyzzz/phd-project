@@ -1,6 +1,6 @@
 using System.Windows.Forms;
+using EugenePetrenko.Core.FormGenerator.Api;
 using EugenePetrenko.Core.FormGenerator.FieldInfos;
-using EugenePetrenko.Core.FormGenerator.Impl;
 using EugenePetrenko.Core.FormGenerator.Layout;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 

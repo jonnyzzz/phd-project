@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
+using EugenePetrenko.Core.FormGenerator.Api;
 using EugenePetrenko.Core.FormGenerator.ListSelector;
 
 namespace EugenePetrenko.Core.FormGenerator.FieldInfos

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using EugenePetrenko.Core.FormGenerator.FieldInfos;
+using EugenePetrenko.Core.FormGenerator.Api;
 using EugenePetrenko.Core.FormGenerator.ListSelector;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 using EugenePetrenko.Shared.Utils;

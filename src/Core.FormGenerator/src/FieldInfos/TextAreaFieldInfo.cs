@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using EugenePetrenko.Core.FormGenerator.Api;
 
 namespace EugenePetrenko.Core.FormGenerator.FieldInfos
 {
