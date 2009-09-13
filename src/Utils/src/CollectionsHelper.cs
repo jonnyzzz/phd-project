@@ -15,6 +15,23 @@ namespace EugenePetrenko.Shared.Utils
       }
       return true;
     }
+
+    public static IEnumerable<T> Enum<T>(this T t)
+    {
+      return new[] {t};
+    }
+
+    public static IEnumerable<T> Merge<T>(this IEnumerable<T> collection, IEnumerable<T> other)
+    {
+      foreach (var t in collection)
+      {
+        yield return t;
+      }
+      foreach (var t in other)
+      {
+        yield return t;
+      }
+    }
     
     public static IList<T> Sort<T>(this IEnumerable<T> collection, IComparer<T> cmp)
     {

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2C4DB0D4-AD8C-45A0-BA9A-944F8B97A150}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EugenePetrenko.Core.FormGenerator</RootNamespace>
+    <AssemblyName>EugenePetrenko.Core.FormGenerator</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ControlUtils.cs" />
+    <Compile Include="src\EditorPreferenceAttribute.cs" />
+    <Compile Include="src\ErrorProvider\ErrorProviderHelper.cs" />
+    <Compile Include="src\ErrorProvider\IErrorProvider.cs" />
+    <Compile Include="src\FieldInfos\BooleanFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\DoubleFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\EnumFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\EnumFieldInfoBase.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoBase.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoFactoryBase.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoManager.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfoFactory.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfoManager.cs" />
+    <Compile Include="src\FieldInfos\IncludeValueEnumFieldInfoFactory.cs" />
+    <Compile Include="src\FieldInfos\IntFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\LongFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\NonEditableFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\StringFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\TextAreaFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\TextFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\TextFieldInfoFactory.cs" />
+    <Compile Include="src\Impl\FormGenerator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Impl\FormGeneratorFactoryImpl.cs" />
+    <Compile Include="src\IFormGeneratorFactory.cs" />
+    <Compile Include="src\IncludeGenerateAttribute.cs" />
+    <Compile Include="src\IncludeValueAttribute.cs" />
+    <Compile Include="src\IncludeValuesProviderAttribute.cs" />
+    <Compile Include="src\Layout\Impl\ControlSizeCalculator.cs" />
+    <Compile Include="src\Layout\Impl\DockLayout.cs" />
+    <Compile Include="src\Layout\IDockLayout.cs" />
+    <Compile Include="src\Layout\IOptionPageControl.cs" />
+    <Compile Include="src\Layout\IOptionPageLayout.cs" />
+    <Compile Include="src\Layout\IScrollableLayout.cs" />
+    <Compile Include="src\Layout\Layout.cs" />
+    <Compile Include="src\Layout\LayoutException.cs" />
+    <Compile Include="src\Layout\Impl\OptionPageLayout.cs" />
+    <Compile Include="src\Layout\Impl\ScrollableLayoutImpl.cs" />
+    <Compile Include="src\ListSelector\IListInfo.cs" />
+    <Compile Include="src\ListSelector\IListSelectorFactory.cs" />
+    <Compile Include="src\ListSelector\ItemDescr.cs" />
+    <Compile Include="src\ListSelector\ListInfo!1.cs" />
+    <Compile Include="src\ListSelector\ListInfo.cs" />
+    <Compile Include="src\ListSelector\ListSelector!2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\ListSelector\ListSelectorBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\ListSelector\ListSelectorFactoryImpl.cs" />
+    <Compile Include="src\TextAreaEditorPreference.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc.Api\Core.Ioc.Api.csproj">
+      <Project>{CB62BEE0-B76E-4BDC-AEC5-24F47CB84504}</Project>
+      <Name>Core.Ioc.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{E8560312-841D-49FA-9258-B74411B92F2B}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

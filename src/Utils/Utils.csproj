@@ -50,10 +50,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\CollectionsHelper.cs" />
+    <Compile Include="src\DisposableWrapper.cs" />
     <Compile Include="src\EmptyArray.cs" />
     <Compile Include="src\MultiDictionary.cs" />
     <Compile Include="src\MultiHashDictionary.cs" />
     <Compile Include="src\Pair.cs" />
+    <Compile Include="src\ParseUtil.cs" />
     <Compile Include="src\ReSharperAnnotations.cs" />
     <Compile Include="src\UsedAttribute.cs" />
     <Compile Include="src\UsedInTestsAttribute.cs" />
