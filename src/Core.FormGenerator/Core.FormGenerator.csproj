@@ -56,6 +56,9 @@
     <Compile Include="src\ErrorProvider\ErrorProviderHelper.cs" />
     <Compile Include="src\ErrorProvider\IErrorProvider.cs" />
     <Compile Include="src\FieldInfos\BooleanFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\CalendarFieldInfo.cs">
+    </Compile>
+    <Compile Include="src\FieldInfos\CalendarFieldInfoFactory.cs" />
     <Compile Include="src\FieldInfos\DoubleFieldInfo.cs" />
     <Compile Include="src\FieldInfos\EnumFieldInfo.cs" />
     <Compile Include="src\FieldInfos\EnumFieldInfoBase.cs" />

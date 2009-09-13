@@ -6,8 +6,15 @@ namespace EugenePetrenko.Core.FormGenerator.FieldInfos
 
   public interface IFieldInfo
   {
+    /// <summary>
+    /// Fires this event on internal value change
+    /// </summary>
     event FieldValueChanged ValueChanged;
+
+    /// <summary>
+    /// Editor control to be used for UI
+    /// </summary>
+    /// <returns>Editor control</returns>
     Control EditorControl();
-    void CheckFieldValue();
   }
 }

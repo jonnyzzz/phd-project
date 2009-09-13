@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using System.Windows.Forms;
-using EugenePetrenko.Core.FormGenerator.FieldInfos;
 using log4net;
 
 namespace EugenePetrenko.Core.FormGenerator.FieldInfos

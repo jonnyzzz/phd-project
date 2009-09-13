@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using EugenePetrenko.Core.FormGenerator.FieldInfos;
 
 namespace EugenePetrenko.Core.FormGenerator.FieldInfos
 {

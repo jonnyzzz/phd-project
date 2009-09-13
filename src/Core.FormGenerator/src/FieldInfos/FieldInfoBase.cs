@@ -19,6 +19,14 @@ namespace EugenePetrenko.Core.FormGenerator.FieldInfos
 
     public event FieldValueChanged ValueChanged;
 
+    /// <summary>
+    /// Create control that is subscribed to value change.
+    /// On change set changed value to Value property or
+    /// throw an error using <code>FireError</code>.
+    /// 
+    /// Setting value may throw a error too.
+    /// </summary>
+    /// <returns>control</returns>
     protected abstract Control CreateControl();
 
     protected void FireError(string message)
@@ -36,23 +44,12 @@ namespace EugenePetrenko.Core.FormGenerator.FieldInfos
       return myControl;
     }
 
-    public void CheckFieldValue()
-    {
-      OnValueChanged();
-    }
-
-    private void OnValueChanged()
-    {
-      //
-    }
-
     protected object Value
     {
       get { return myProperty.GetValue(myInstance, null); }
       set
       {
         myProperty.SetValue(myInstance, value, null);
-        OnValueChanged();
       }
     }
 
