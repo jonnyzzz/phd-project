@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using EugenePetrenko.Shared.Core.Ioc.Api;
@@ -160,6 +161,45 @@ namespace EugenePetrenko.Shared.Core.Ioc.Tests
       var cc = myContainer.GetComponent<JI9>();      
       Assert.That(cc, Is.Not.Null);
     }
+
+    [Test]
+    public void Test_FuncAutowire()
+    {
+      DoTest<TxA>();
+
+      myContainer.GetComponent<FC9A>();
+      var a = myContainer.GetComponent<JC9aS>();
+      Assert.That(a, Is.Not.Null);
+
+      Assert.That(a.myLazy(), Is.Not.Null);
+    }
+
+    [Test]
+    public void Test_FuncAutowire_no_component_initialized()
+    {
+      DoTest<TxA>();
+
+      var a = myContainer.GetComponent<JC9aS>();
+      Assert.That(a, Is.Not.Null);
+
+      Assert.That(a.myLazy(), Is.Not.Null);
+    }
+
+    [Test]
+    public void Test_DoNotStartTwice()
+    {
+      DoTest<Tx0>();
+      try
+      {
+        myContainer.Start();
+        myContainer.Start();
+        myContainer.Start();
+      } catch(ComponentContainerException)
+      {
+        return;
+      }
+      Assert.Fail("Exception expected");
+    }
     
     public class Tx0 : ComponentImplementationAttributeBase{}
     public class Tx1 : ComponentImplementationAttributeBase{}
@@ -172,6 +212,7 @@ namespace EugenePetrenko.Shared.Core.Ioc.Tests
     public class Tx8 : ComponentImplementationAttributeBase{}
     public class Tx8x : ComponentImplementationAttributeBase{}
     public class Tx9 : ComponentImplementationAttributeBase{}
+    public class TxA : ComponentImplementationAttributeBase{}
 
     [Tx0]
     public class JI{}
@@ -277,6 +318,25 @@ namespace EugenePetrenko.Shared.Core.Ioc.Tests
       public JI9(ITypeInstantiator i)
       {
         i.Instanciate<JI9Inst>();
+      }
+    }
+
+    [TxA]
+    public class JC9aS
+    {
+      public readonly Func<FC9A> myLazy;
+
+      public JC9aS(Func<FC9A> lazy)
+      {
+        myLazy = lazy;
+      }
+    }
+
+    [TxA]
+    public class FC9A
+    {
+      public FC9A(JC9aS aaa)
+      {
       }
     }
   }

@@ -50,9 +50,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\EditorPreferenceAttribute.cs" />
     <Compile Include="src\IFormGeneratorFactory.cs" />
+    <Compile Include="src\IListEditorUI.cs" />
     <Compile Include="src\IncludeGenerateAttribute.cs" />
     <Compile Include="src\IncludeValueAttribute.cs" />
     <Compile Include="src\IncludeValuesProviderAttribute.cs" />
+    <Compile Include="src\ListEditorUIAttribute.cs" />
     <Compile Include="src\TextAreaEditorPreference.cs" />
   </ItemGroup>
   <ItemGroup>

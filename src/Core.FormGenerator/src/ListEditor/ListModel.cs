@@ -27,13 +27,13 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
     public Control CreateControl()
     {
       var lb = new ListBox();
-      UpdateItems(lb);
       myControl = lb;
+      UpdateItems();
       lb.SelectedIndexChanged += delegate { FireChanged(); };
       return lb;
     }
 
-    private void UpdateItems(ListBox lb)
+    protected void UpdateItems()
     {
       var data = new List<Item>();
       int idx = 0;
@@ -42,8 +42,8 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
       {
         data.Add(new Item(idx++, x, myPresentor(x)));
       }
-
-      lb.Items.AddRange(data.ToArray());
+      myControl.Items.Clear();
+      myControl.Items.AddRange(data.ToArray());
     }
 
     public virtual bool AddEnabled
@@ -84,8 +84,9 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
       {
         myData.RemoveAt(it.Index);
       }
-      UpdateItems(myControl);
+
       FireChanged();
+      UpdateItems();      
     }
 
     protected void FireChanged()

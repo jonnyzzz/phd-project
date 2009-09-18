@@ -3,9 +3,11 @@ using EugenePetrenko.Shared.Core.Ioc.Api;
 using EugenePetrenko.Shared.Core.Ioc.JC;
 using EugenePetrenko.Shared.Utils;
 
+[assembly:AssemblyWithComponents]
+
 namespace EugenePetrenko.Shared.Core.Ioc
 {
-  [JContainerPredefinedComponent, NoInheritContainer]
+  [JContainerPredefinedComponent]
   public class TypeInstantiatorImpl : ITypeInstantiator
   {
     [Autowire]

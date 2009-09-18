@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using EugenePetrenko.Shared.Core.Ioc.Api;
+using EugenePetrenko.Shared.Utils;
 
 namespace EugenePetrenko.Shared.Core.Ioc.JC
 {
@@ -145,7 +146,36 @@ namespace EugenePetrenko.Shared.Core.Ioc.JC
       if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (ICollection<>))
         return FillCollectionOf(type.GetGenericArguments()[0]);
 
+      if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Func<>))
+      {
+        var genericArgument = type.GetGenericArguments()[0];
+        return CreateFuncOf(genericArgument);
+      }
+
       return GetComponent(type);
+    }
+
+    private object CreateFuncOf(Type t)
+    {
+      var c = new FuncOfFactory(this);
+      TypeGenerifier.CallbackType(t, c);
+      return c.Func;
+    }
+
+    private class FuncOfFactory : TypeGenerifier.Callback
+    {
+      private readonly JContainer myContainer;
+
+      public FuncOfFactory(JContainer container)
+      {
+        myContainer = container;
+      }
+
+      public object Func { get; private set; }
+      public void Callback<T>()
+      {
+        Func = (Func<T>)( () => myContainer.GetComponent<T>());
+      }
     }
 
     private Array FillCollectionOf(Type type)

@@ -1,3 +1,5 @@
+using EugenePetrenko.Core.FormGenerator.Api;
+
 namespace EugenePetrenko.Core.FormGenerator.ListEditor
 {
   public class EditListModel<T> : ListModel<T>
@@ -25,17 +27,18 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
       if (myModel.OpenEditor(t, Control))
       {
         myModel.Data.Add(t);
-        FireChanged();
       }
+      FireChanged();
+      UpdateItems();
     }
 
     public override void EditAction()
     {
       var t = SelectedItem.Data;
-      if (myModel.OpenEditor(t, Control))
-      {
-        FireChanged();
-      }
+      myModel.OpenEditor(t, Control);
+      
+      FireChanged();
+      UpdateItems();
     }
   }
 }

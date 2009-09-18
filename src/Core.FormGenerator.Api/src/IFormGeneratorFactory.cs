@@ -9,4 +9,11 @@ namespace EugenePetrenko.Core.FormGenerator.Api
   {
     Control CreateForm(object data);
   }
+
+  public interface IFormDialogGeneratorFactory
+  {
+    Form CreateDialog(object data);
+  }
+
+  
 }

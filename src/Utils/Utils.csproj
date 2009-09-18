@@ -57,6 +57,7 @@
     <Compile Include="src\Pair.cs" />
     <Compile Include="src\ParseUtil.cs" />
     <Compile Include="src\ReSharperAnnotations.cs" />
+    <Compile Include="src\TypeGenerifier.cs" />
     <Compile Include="src\UsedAttribute.cs" />
     <Compile Include="src\UsedInTestsAttribute.cs" />
     <Compile Include="src\Utils.cs" />

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using EugenePetrenko.Core.FormGenerator.Api;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace EugenePetrenko.Core.FormGenerator.ListEditor
@@ -11,6 +12,12 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
     public Control CreateListEditorControl<T>(IList<T> data, Func<T, string> presentor)
     {
       return new EditorControl(new ListModel<T>(data, presentor));
+    }
+
+    public Control CreateDefaultEditorControl<T>(IFormDialogGeneratorFactory dialogGen, IList<T> data)
+      where T : new()
+    {
+      return new EditorControl(new EditListModel<T>(new DefaultListEditorUI<T>(data, dialogGen)));
     }
   }
 }

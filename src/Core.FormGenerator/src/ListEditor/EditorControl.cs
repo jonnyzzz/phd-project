@@ -25,16 +25,16 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
                              myEdit.Enabled = myController.EditEnabled;
                              myRemove.Enabled = myController.DeleteEnabled;
                            };
-
+      
+      var control = controller.CreateControl();
       controller.RefereshRequired += delegate
                                        {
                                          statusUpdate();
                                        };
-      statusUpdate();
-
-      var control = controller.CreateControl();
       control.Dock = DockStyle.Fill;
       myContent.Controls.Add(control);
+
+      statusUpdate();
     }    
   }
 }

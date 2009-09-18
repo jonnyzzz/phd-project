@@ -10,6 +10,7 @@ namespace EugenePetrenko.Shared.Core.Ioc.JC
   {
     private readonly IAssemblyScaner myScanner;
     private readonly HashSet<Type> myStartable = new HashSet<Type>();
+    private bool myIsStarted = false;
 
     public JComponentContainer(IAssemblyScaner scanner, JContainer container, ITypesFilter filter)
       : base(container, filter)
@@ -33,6 +34,9 @@ namespace EugenePetrenko.Shared.Core.Ioc.JC
 
     public override IComponentService Start()
     {
+      if (myIsStarted) throw new ComponentContainerException("Component container was allready started");
+      myIsStarted = true;
+
       Container.RegisterInstance(myScanner);
       base.Start();
 

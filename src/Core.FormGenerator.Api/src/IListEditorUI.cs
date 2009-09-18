@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace EugenePetrenko.Core.FormGenerator.ListEditor
+namespace EugenePetrenko.Core.FormGenerator.Api
 {
   public interface IListEditorUI<T>
   {
-    List<T> Data { get;}
+    IList<T> Data { get;}
 
     T CreateNewItem();
 
