@@ -6,7 +6,22 @@ namespace EugenePetrenko.Core.FormGenerator.Layout.Impl
   [ComponentImplementation]
   public class ScrollableLayoutImpl : IScrollableLayout
   {
-    public void MakeScrollableOnY(ScrollableControl control)
+    public Control MakeScrollableOnY(Control pn)
+    {
+      if (pn is ScrollableControl)
+      {
+        MakeScrollableOnY((ScrollableControl)pn);
+        return pn;
+      }
+
+      var p = new Panel {MinimumSize = pn.MinimumSize, Size = pn.Size};
+      pn.Dock = DockStyle.Fill;
+      p.Controls.Add(pn);
+      MakeScrollableOnY((ScrollableControl)p);
+      return p;
+    }
+
+    private static void MakeScrollableOnY(ScrollableControl control)
     {
       control.ClientSize = control.Size;
       control.AutoScrollMargin = control.Size;

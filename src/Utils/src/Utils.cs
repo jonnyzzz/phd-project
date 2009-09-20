@@ -2,9 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DSIS.Utils;
 
 namespace EugenePetrenko.Shared.Utils
 {
+  public static class TryFinally
+  {
+    public static IDisposable Action(Action open, Action close)
+    {
+      open();
+      return new DisposableWrapper(close);
+    }
+  }
+
+
   public static class StringUtils
   {
     public static string JoinSomeOf<T>(this IEnumerable<T> enu,

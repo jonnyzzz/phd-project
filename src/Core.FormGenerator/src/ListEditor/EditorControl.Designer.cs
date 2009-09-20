@@ -37,7 +37,7 @@
       // myAdd
       // 
       this.myAdd.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-      this.myAdd.Location = new System.Drawing.Point(3, 170);
+      this.myAdd.Location = new System.Drawing.Point(4, 74);
       this.myAdd.Name = "myAdd";
       this.myAdd.Size = new System.Drawing.Size(75, 23);
       this.myAdd.TabIndex = 0;
@@ -47,7 +47,7 @@
       // myRemove
       // 
       this.myRemove.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-      this.myRemove.Location = new System.Drawing.Point(191, 170);
+      this.myRemove.Location = new System.Drawing.Point(192, 74);
       this.myRemove.Name = "myRemove";
       this.myRemove.Size = new System.Drawing.Size(75, 23);
       this.myRemove.TabIndex = 1;
@@ -57,7 +57,7 @@
       // myEdit
       // 
       this.myEdit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-      this.myEdit.Location = new System.Drawing.Point(84, 170);
+      this.myEdit.Location = new System.Drawing.Point(85, 74);
       this.myEdit.Name = "myEdit";
       this.myEdit.Size = new System.Drawing.Size(101, 23);
       this.myEdit.TabIndex = 2;
@@ -67,11 +67,11 @@
       // myContent
       // 
       this.myContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                                                                     | System.Windows.Forms.AnchorStyles.Left)
-                                                                    | System.Windows.Forms.AnchorStyles.Right)));
+                  | System.Windows.Forms.AnchorStyles.Left)
+                  | System.Windows.Forms.AnchorStyles.Right)));
       this.myContent.Location = new System.Drawing.Point(3, 3);
       this.myContent.Name = "myContent";
-      this.myContent.Size = new System.Drawing.Size(266, 161);
+      this.myContent.Size = new System.Drawing.Size(267, 65);
       this.myContent.TabIndex = 3;
       // 
       // EditorControl
@@ -82,8 +82,9 @@
       this.Controls.Add(this.myEdit);
       this.Controls.Add(this.myRemove);
       this.Controls.Add(this.myAdd);
+      this.MinimumSize = new System.Drawing.Size(270, 100);
       this.Name = "EditorControl";
-      this.Size = new System.Drawing.Size(269, 196);
+      this.Size = new System.Drawing.Size(270, 100);
       this.ResumeLayout(false);
 
     }

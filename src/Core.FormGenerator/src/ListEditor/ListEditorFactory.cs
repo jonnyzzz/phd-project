@@ -15,7 +15,6 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
     }
 
     public Control CreateDefaultEditorControl<T>(IFormDialogGeneratorFactory dialogGen, IList<T> data)
-      where T : new()
     {
       return new EditorControl(new EditListModel<T>(new DefaultListEditorUI<T>(data, dialogGen)));
     }

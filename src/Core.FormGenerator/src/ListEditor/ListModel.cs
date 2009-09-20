@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
+using EugenePetrenko.Shared.Utils;
 
 namespace EugenePetrenko.Core.FormGenerator.ListEditor
 {
@@ -35,15 +37,31 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
 
     protected void UpdateItems()
     {
-      var data = new List<Item>();
-      int idx = 0;
-      
-      foreach (var x in myData)
+      using(TryFinally.Action(myControl.BeginUpdate, myControl.EndUpdate))
       {
-        data.Add(new Item(idx++, x, myPresentor(x)));
+        var data = new List<Item>();
+        int idx = 0;
+
+        var selectedItem = SelectedItem;
+        var prevSelected = selectedItem == null ? default(T) : selectedItem.Data;
+
+        foreach (var x in myData)
+        {
+          data.Add(new Item(idx++, x, myPresentor(x)));
+        }
+        myControl.Items.Clear();
+        myControl.Items.AddRange(data.ToArray());
+
+        foreach (Item item in myControl.Items.OfType<Item>())
+        {
+          if (Equals(item.Data, prevSelected))
+          {
+            myControl.SelectedItem = item;
+            break;
+          }
+        }        
       }
-      myControl.Items.Clear();
-      myControl.Items.AddRange(data.ToArray());
+      FireChanged();
     }
 
     public virtual bool AddEnabled
@@ -84,9 +102,8 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
       {
         myData.RemoveAt(it.Index);
       }
-
-      FireChanged();
-      UpdateItems();      
+      
+      UpdateItems();
     }
 
     protected void FireChanged()

@@ -8,7 +8,7 @@ using EugenePetrenko.Shared.Utils;
 
 namespace EugenePetrenko.Core.FormGenerator.FieldInfos
 {
-  public class ListEditorFieldInfo : FieldInfoBase
+  public class ListEditorFieldInfo : FieldInfoBase, TypeGenerifier.Fun<object, Control>
   {
     private readonly IListEditorFactroy myFactory;
     private readonly Func<IFormDialogGeneratorFactory> myDialog;
@@ -25,15 +25,12 @@ namespace EugenePetrenko.Core.FormGenerator.FieldInfos
         throw new Exception("Type should be IList<?>");
 
       var type = PropertyType.GetGenericArguments()[0];
-      var method = GetType().GetMethod("CreateControl");
-      return (Control) method.MakeGenericMethod(type).Invoke(this, new[]{Value});
+      return TypeGenerifier.CallbackFun(type, this, Value);
     }
 
-    [Used]
-    public Control CreateControl<T>(IList<T> data)
-      where T : class, new()
+    Control TypeGenerifier.Fun<object, Control>.Callback<T>(object p)
     {
-      return myFactory.CreateDefaultEditorControl(myDialog(), data);
+      return myFactory.CreateDefaultEditorControl(myDialog(), (IList<T>)p);
     }
   }
 }

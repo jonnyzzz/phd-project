@@ -4,6 +4,6 @@ namespace EugenePetrenko.Core.FormGenerator.Layout
 {
   public interface IScrollableLayout
   {
-    void MakeScrollableOnY(ScrollableControl pn);
+    Control MakeScrollableOnY(Control pn);
   }
 }

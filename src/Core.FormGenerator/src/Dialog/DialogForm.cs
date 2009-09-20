@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using EugenePetrenko.Core.FormGenerator.Layout;
 
 namespace EugenePetrenko.Core.FormGenerator.Dialog
 {
@@ -11,11 +12,12 @@ namespace EugenePetrenko.Core.FormGenerator.Dialog
       InitializeComponent();
     }
 
-    public DialogForm(IDialogModel model) : this()
+    public DialogForm(IDialogModel model, IScrollableLayout scroll) : this()
     {
       myModel = model;
       var value = myModel.Control;
       value.Dock = DockStyle.Fill;
+      value = scroll.MakeScrollableOnY(value);
       myContent.Controls.Add(value);
     }
 

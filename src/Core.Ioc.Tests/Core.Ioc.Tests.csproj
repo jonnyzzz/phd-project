@@ -53,7 +53,7 @@
     <Compile Include="src\ComponentContainerTestBase.cs" />
     <Compile Include="src\JComponentContainerTest.cs" />
     <Compile Include="src\JContainerTests.cs" />
-    <Compile Include="src\TypeDenerifierTest.cs" />
+    <Compile Include="src\TypeGenerifierTest.cs" />
     <Compile Include="src\TypesCacheTest.cs" />
   </ItemGroup>
   <ItemGroup>

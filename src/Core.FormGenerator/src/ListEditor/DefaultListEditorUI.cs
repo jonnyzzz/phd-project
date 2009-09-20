@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EugenePetrenko.Core.FormGenerator.Api;
@@ -5,7 +6,6 @@ using EugenePetrenko.Core.FormGenerator.Api;
 namespace EugenePetrenko.Core.FormGenerator.ListEditor
 {
   public class DefaultListEditorUI<T> : IListEditorUI<T>
-    where T : new()
   {
     private readonly IList<T> myData;
     private readonly IFormDialogGeneratorFactory myDialog;
@@ -21,9 +21,11 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
       get { return myData; }
     }
 
-    public T CreateNewItem()
+    public virtual T CreateNewItem()
     {
-      return new T();
+      //This will throw an exception of T not new()
+      //Probably it is worth using TypeInstantiator here
+      return (T) Activator.CreateInstance(typeof (T));
     }
 
     public bool OpenEditor(T data, Control parent)
@@ -31,7 +33,7 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
       return myDialog.CreateDialog(data).ShowDialog(parent) == DialogResult.OK;
     }
 
-    public string Present(T data)
+    public virtual string Present(T data)
     {
       return data.ToString();
     }

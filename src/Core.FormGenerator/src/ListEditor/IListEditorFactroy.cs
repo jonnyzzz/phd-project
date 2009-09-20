@@ -9,7 +9,6 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
   {
     Control CreateListEditorControl<T>(IList<T> data, Func<T, string> presentor);
 
-    Control CreateDefaultEditorControl<T>(IFormDialogGeneratorFactory dialogGen, IList<T> data)
-      where T : new();
+    Control CreateDefaultEditorControl<T>(IFormDialogGeneratorFactory dialogGen, IList<T> data);
   }
 }

@@ -27,8 +27,7 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
       if (myModel.OpenEditor(t, Control))
       {
         myModel.Data.Add(t);
-      }
-      FireChanged();
+      }      
       UpdateItems();
     }
 
@@ -36,8 +35,7 @@ namespace EugenePetrenko.Core.FormGenerator.ListEditor
     {
       var t = SelectedItem.Data;
       myModel.OpenEditor(t, Control);
-      
-      FireChanged();
+            
       UpdateItems();
     }
   }
