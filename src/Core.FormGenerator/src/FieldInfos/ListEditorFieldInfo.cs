@@ -12,11 +12,14 @@ namespace EugenePetrenko.Core.FormGenerator.FieldInfos
   {
     private readonly IListEditorFactroy myFactory;
     private readonly Func<IFormDialogGeneratorFactory> myDialog;
+    private readonly ListEditorUIAttribute myCustomAttribute;
 
     public ListEditorFieldInfo(IListEditorFactroy factory, PropertyInfo property, object instance, Func<IFormDialogGeneratorFactory> dialog) : base(property, instance)
     {
       myFactory = factory;
       myDialog = dialog;
+
+      myCustomAttribute = property.GetCustomAttribute<ListEditorUIAttribute>();
     }
 
     protected override Control CreateControl()

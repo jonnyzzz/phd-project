@@ -17,8 +17,15 @@ namespace EugenePetrenko.Core.FormGenerator.Dialog
       myModel = model;
       var value = myModel.Control;
       value.Dock = DockStyle.Fill;
-      value = scroll.MakeScrollableOnY(value);
-      myContent.Controls.Add(value);
+
+      var sz = Size - myContent.Size + value.Size;
+      using(this.UpdateCookie())
+      {
+        value = scroll.MakeScrollableOnY(value);
+        myContent.Controls.Add(value);
+
+        Size += sz;
+      }
     }
 
     private void myOk_Click(object sender, System.EventArgs e)

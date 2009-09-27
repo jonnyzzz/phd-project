@@ -36,7 +36,7 @@ namespace EugenePetrenko.Core.FormGenerator.Impl
         var attr = info.GetCustomAttribute<IncludeGenerateAttribute>();
         if (attr != null)
         {
-          var fieldInfo = CreateFieldInfo(manager, info);
+          var fieldInfo = CreateFieldInfo(myObject, manager, info);
           myPropertyToControl.Add(info.Name, fieldInfo);
           controls.Add(new OptionPageControl(attr.Title, attr.Description, fieldInfo.EditorControl()));
         }
@@ -55,9 +55,9 @@ namespace EugenePetrenko.Core.FormGenerator.Impl
       }
     }
 
-    private IFieldInfo CreateFieldInfo(IFieldInfoManager manager, PropertyInfo info)
+    private IFieldInfo CreateFieldInfo(object @object, IFieldInfoManager manager, PropertyInfo info)
     {
-      var inf = manager.CreateFieldInfo(myObject, info);
+      var inf = manager.CreateFieldInfo(@object, info);
 
       inf.ValueChanged += (_, control, message) =>
                             {
