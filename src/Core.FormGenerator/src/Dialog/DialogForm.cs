@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 using EugenePetrenko.Core.FormGenerator.Layout;
 
 namespace EugenePetrenko.Core.FormGenerator.Dialog
@@ -15,20 +17,22 @@ namespace EugenePetrenko.Core.FormGenerator.Dialog
     public DialogForm(IDialogModel model, IScrollableLayout scroll) : this()
     {
       myModel = model;
-      var value = myModel.Control;
-      value.Dock = DockStyle.Fill;
+      myContent.MinimumSize = new Size(0,0);
+      Width = 400;
 
-      var sz = Size - myContent.Size + value.Size;
       using(this.UpdateCookie())
       {
-        value = scroll.MakeScrollableOnY(value);
-        myContent.Controls.Add(value);
+        var control = scroll.MakeScrollableOnY(myModel.Control);
+        myContent.Width += Math.Max(0, control.Width - myContent.Width);
 
-        Size += sz;
+        control.Dock = DockStyle.Fill;
+        myContent.Controls.Add(control);
       }
+
+      Update();
     }
 
-    private void myOk_Click(object sender, System.EventArgs e)
+    private void myOk_Click(object sender, EventArgs e)
     {
       if (myModel.Ok())
       {
@@ -36,7 +40,7 @@ namespace EugenePetrenko.Core.FormGenerator.Dialog
       }
     }
 
-    private void myCancel_Click(object sender, System.EventArgs e)
+    private void myCancel_Click(object sender, EventArgs e)
     {
       if (myModel.Cancel())
       {

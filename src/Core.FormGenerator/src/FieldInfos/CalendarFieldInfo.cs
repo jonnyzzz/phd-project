@@ -15,7 +15,7 @@ namespace EugenePetrenko.Core.FormGenerator.FieldInfos
 
     protected override Control CreateControl()
     {
-      var control = new MonthCalendar();
+      var control = new MonthCalendar {Margin = new Padding(5)};
       control.DateSelected += delegate
                                 {
                                   try

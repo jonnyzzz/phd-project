@@ -40,6 +40,8 @@ namespace EugenePetrenko.Core.FormGenerator.Dialog
       this.myContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                   | System.Windows.Forms.AnchorStyles.Left)
                   | System.Windows.Forms.AnchorStyles.Right)));
+      this.myContent.AutoScroll = true;
+      this.myContent.AutoScrollMargin = new System.Drawing.Size(5, 5);
       this.myContent.Location = new System.Drawing.Point(12, 12);
       this.myContent.Name = "myContent";
       this.myContent.Size = new System.Drawing.Size(368, 243);

@@ -15,7 +15,7 @@ namespace EugenePetrenko.Core.FormGenerator.FieldInfos
 
     protected sealed override Control CreateControl()
     {
-      var control = new TextBox {Text = GetValueString()};
+      var control = new TextBox {Text = GetValueString(), Padding = new Padding(5)};
       control.TextChanged += delegate
                                {
                                  try

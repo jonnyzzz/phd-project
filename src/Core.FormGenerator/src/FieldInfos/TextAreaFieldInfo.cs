@@ -22,7 +22,7 @@ namespace EugenePetrenko.Core.FormGenerator.FieldInfos
       box.ScrollBars = ScrollBars.Both;
       if (myPref.Font != null)
         box.Font = (Font) myPref.Font.Clone();
-      box.Height = (int)(box.Font.GetHeight() * myPref.EnsureLines) + 15;
+      box.Height = (int)(box.Font.GetHeight() * myPref.EnsureLines) + 25;
       box.WordWrap = false;
 
       return base.UpdateTextBox(box);

@@ -17,18 +17,17 @@ namespace EugenePetrenko.Core.FormGenerator.Layout.Impl
       var p = new Panel {MinimumSize = pn.MinimumSize, Size = pn.Size};
       pn.Dock = DockStyle.Fill;
       p.Controls.Add(pn);
-      MakeScrollableOnY((ScrollableControl)p);
+      MakeScrollableOnY(p);
       return p;
     }
 
     private static void MakeScrollableOnY(ScrollableControl control)
     {
+      control.AutoScrollMargin = new System.Drawing.Size(5, 13);
       control.ClientSize = control.Size;
-      control.AutoScrollMargin = control.Size;
-      control.MinimumSize = control.Size;
 
       control.VerticalScroll.Visible = true;
-      control.VerticalScroll.Enabled = true;     
+      control.VerticalScroll.Enabled = true;   
       control.AutoScroll = true;
     }
   }

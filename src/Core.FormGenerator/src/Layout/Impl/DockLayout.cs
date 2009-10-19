@@ -31,7 +31,7 @@ namespace EugenePetrenko.Core.FormGenerator.Layout.Impl
       var sz = new Size(0, 0);
       foreach (var control in list)
       {
-        sz = fn(sz, control.Bounds.Size);
+        sz = fn(sz, control.Size);
         control.Dock = dock;
         host.Controls.Add(control);
         

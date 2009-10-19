@@ -9,19 +9,16 @@ namespace EugenePetrenko.Core.FormGenerator.Layout.Impl
   public class OptionPageLayout : IOptionPageLayout
   {
     private readonly IDockLayout myLayout;
-    private readonly IScrollableLayout myScroll;
 
-    public OptionPageLayout(IDockLayout layout, IScrollableLayout scroll)
+    public OptionPageLayout(IDockLayout layout)
     {
       myLayout = layout;
-      myScroll = scroll;
     }
 
     public Panel Layout<Q>(IEnumerable<Q> controls)
       where Q : IOptionPageControl
     {
       var pn = myLayout.Layout(DockStyle.Top, CollectControls(controls));
-//      myScroll.MakeScrollableOnY(pn);
       return pn;
     }
 
@@ -40,7 +37,6 @@ namespace EugenePetrenko.Core.FormGenerator.Layout.Impl
     public void Layout<Q>(ScrollableControl host, IEnumerable<Q> controls) where Q : IOptionPageControl
     {
       myLayout.Layout(host, DockStyle.Top, CollectControls(controls));
-//      myScroll.MakeScrollableOnY(host);
     }
 
     private static void AddAttribute(string title, string description, Control field, ICollection<Control> result)
@@ -57,7 +53,7 @@ namespace EugenePetrenko.Core.FormGenerator.Layout.Impl
                         Dock = DockStyle.Left,
                       };
       field.Width = 150;
-      field.Padding = new Padding(0,0,35,0);
+      field.Padding = new Padding(0, 0, 35, 0);
       var sz = Math.Max(field.Height, caption.Height);
 
       panel.Dock = DockStyle.Top;
@@ -65,8 +61,10 @@ namespace EugenePetrenko.Core.FormGenerator.Layout.Impl
 
       panel.Controls.Add(field);
       panel.Controls.Add(caption);
-      
-      panel.Height = sz;
+
+      Func<Padding, int> pSz = x => x.Top + x.Bottom;
+
+      panel.Height = sz + pSz(panel.Margin) + pSz(panel.Padding);
 
       result.Add(panel);
 
@@ -74,7 +72,7 @@ namespace EugenePetrenko.Core.FormGenerator.Layout.Impl
       {
         var label = new Label
                       {
-                        Padding = new Padding(10, 0, 0, 0),
+                        Margin = new Padding(10, 0, 0, 0),
                         Dock = DockStyle.Top,
                         Text = description
                       };
