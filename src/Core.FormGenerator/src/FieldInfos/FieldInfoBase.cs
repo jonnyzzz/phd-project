@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Windows.Forms;
+using EugenePetrenko.Shared.Utils;
 
 namespace EugenePetrenko.Core.FormGenerator.FieldInfos
 {
@@ -56,6 +57,11 @@ namespace EugenePetrenko.Core.FormGenerator.FieldInfos
     protected Type PropertyType
     {
       get { return myProperty.PropertyType; }
+    }
+
+    public T GetCustomAttribute<T>() where T : Attribute
+    {
+      return myProperty.GetCustomAttribute<T>();
     }
   }
 }

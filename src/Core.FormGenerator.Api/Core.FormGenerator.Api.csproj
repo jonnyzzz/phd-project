@@ -55,6 +55,7 @@
     <Compile Include="src\IncludeValueAttribute.cs" />
     <Compile Include="src\IncludeValuesProviderAttribute.cs" />
     <Compile Include="src\ListEditorUIAttribute.cs" />
+    <Compile Include="src\NonEmptyStringConstraint.cs" />
     <Compile Include="src\TextAreaEditorPreference.cs" />
   </ItemGroup>
   <ItemGroup>
