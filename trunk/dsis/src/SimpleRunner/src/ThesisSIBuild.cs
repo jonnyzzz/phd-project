@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DSIS.Utils;
-using System.Linq;
 
 namespace DSIS.SimpleRunner
 {
@@ -8,8 +7,13 @@ namespace DSIS.SimpleRunner
   {
     protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
     {
+      yield return new ComputationData { system = SystemInfoFactory.DuffingRunge(1.5, 100, 0.013)}.Enum().ForBuilders(ComputationDataBuilder.Box).ForSteps(10);
+
+//      yield return new ComputationData { system = SystemInfoFactory.DuffingRunge(1.4, 1300, 0.001)}.Enum().ForBuilders(ComputationDataBuilder.Box).ForSteps(10);
+/*
       yield return
         new ComputationData { system = SystemInfoFactory.Ref9(.5) }.Enum().ForBuilders(ComputationDataBuilder.Point, ComputationDataBuilder.Adaptive).ForSteps(10);
+*/
     }
 
     /*protected override; IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()

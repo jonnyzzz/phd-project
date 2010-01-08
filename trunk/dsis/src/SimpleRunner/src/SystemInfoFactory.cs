@@ -134,6 +134,11 @@ namespace DSIS.SimpleRunner
       return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-1.2,1.2)"), 100, 0.001), Space(2,1.2));
     }
 
+    public static SystemInfoAction DuffingRunge(double space, int steps, double dt)
+    {
+      return new SystemInfoAction(new RungeKuttSolver(new RenameSystemFormat(new DuffingSystemInfo(1, 1, 0.01),"{0}(-" + space + "," + space + ")"), steps, dt), Space(2,space));
+    }
+
     public static SystemInfoAction VanDerPolRunge()
     {
       return new SystemInfoAction(new RungeKuttSolver(new VanDerPolSystemInfo(1.5), 100, 0.001), Space(2, 5));
