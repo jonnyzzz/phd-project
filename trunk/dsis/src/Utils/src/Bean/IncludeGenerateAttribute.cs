@@ -1,14 +1,17 @@
 using System;
 using System.Drawing;
+using JetBrains.Annotations;
 
 namespace DSIS.Utils.Bean
 {
+  [MeansImplicitUse]
   [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
   public class IncludeGenerateAttribute : Attribute{
     public string Title { get; set; }
     public string Description { get; set; }
   }
 
+  [MeansImplicitUse]
   [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
   public abstract class EditorPreferenceAttribute : Attribute
   {
@@ -26,12 +29,13 @@ namespace DSIS.Utils.Bean
     }
   }
 
-
+  [MeansImplicitUse]
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
   public class IncludeValueAttribute : IncludeGenerateAttribute
   {
   }
 
+  [MeansImplicitUse]
   [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
   public class IncludeValuesProviderAttribute : Attribute
   {

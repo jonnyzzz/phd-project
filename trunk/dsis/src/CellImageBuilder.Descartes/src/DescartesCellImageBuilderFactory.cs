@@ -202,12 +202,14 @@ namespace DSIS.CellImageBuilder.Descartes
         get { return "l" + Index; }
       }
 
+      [Used]
       public int SelfIndex { get; set; }
 
       [Used]
       public string SelfComponent { get { return "l" + SelfIndex; } }
     }
 
+    [Used]
     [AttributeUsage(AttributeTargets.Class)]
     public class TypeImpl : ComponentImplementationAttributeBase
     {

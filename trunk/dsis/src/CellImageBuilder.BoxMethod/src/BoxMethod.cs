@@ -95,10 +95,5 @@ namespace DSIS.CellImageBuilder.BoxMethod
     {
       return new BoxMethod<Q>();
     }
-
-    public string PresentableName
-    {
-      get { return "Box Method"; }
-    }
   }
 }

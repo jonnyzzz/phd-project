@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.IntegerCoordinates;
