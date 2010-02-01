@@ -16,7 +16,7 @@ namespace DSIS.IntegerCoordinates.Tests
 
     private static T[] FillArray<T>(int count, T value)
     {
-      T[] t = new T[count];
+      var t = new T[count];
       for (int i = 0; i < count; i++)
       {
         t[i] = value;

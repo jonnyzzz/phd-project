@@ -4,14 +4,12 @@ namespace DSIS.Core.Processor
 {
   public class InThreadProcessExecutor : IProcess
   {
-    private IConcurentProcess myProcess;
+    private readonly IConcurentProcess myProcess;
 
     public InThreadProcessExecutor(IConcurentProcess process)
     {
       myProcess = process;
     }
-
-    #region IProcess Members
 
     public void Execute(IProgressInfo info)
     {
@@ -20,7 +18,5 @@ namespace DSIS.Core.Processor
         process.Execute(info);
       }
     }
-
-    #endregion
   }
 }

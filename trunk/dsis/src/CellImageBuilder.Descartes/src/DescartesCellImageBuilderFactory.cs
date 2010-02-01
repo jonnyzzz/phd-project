@@ -6,7 +6,6 @@ using DSIS.CodeCompiler;
 using DSIS.Core.Builders;
 using DSIS.Core.Ioc;
 using DSIS.Core.System;
-using DSIS.Core.System.Impl;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.Utils;
@@ -22,13 +21,7 @@ namespace DSIS.CellImageBuilder.Descartes
     private ICodeCompiler CodeCompiler { get; set; }
 
     [Autowire]
-    private GeneratedIntegerCoordinateFactory myIcsFactory { get; set; }
-
-    [Autowire]
     private GeneratedIntegerCoordinateSystemManager IcsGenerator { get; set; }
-
-    [Autowire]
-    private ISystemSpaceFactory SystemSpaceFactory { get; set; }
 
     [Autowire]
     private ISubContainerFactory SubContainer { get; set; }

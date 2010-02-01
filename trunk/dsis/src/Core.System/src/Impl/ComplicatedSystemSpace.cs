@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DSIS.Core.System.Impl
 {
@@ -6,7 +7,12 @@ namespace DSIS.Core.System.Impl
   {
     private readonly List<ISystemSpace> myMinuses = new List<ISystemSpace>();
 
-    public ComplicatedSystemSpace(int dimension, double[] areaLeftPoint, double[] areaRightPoint, long[] initialSubdivision) : base(dimension, areaLeftPoint, areaRightPoint, initialSubdivision)
+    public ComplicatedSystemSpace(IEnumerable<ISystemSpace> spaces)
+      : base(
+      spaces.Sum(x=>x.Dimension), 
+      spaces.SelectMany(x=>x.AreaLeftPoint).ToArray(),
+      spaces.SelectMany(x => x.AreaRightPoint).ToArray(),
+      spaces.SelectMany(x => x.InitialSubdivision).ToArray())
     {
     }
 
@@ -15,24 +21,14 @@ namespace DSIS.Core.System.Impl
       if (!base.Contains(point))
         return false;
 
-      foreach (var space in myMinuses)
-      {
-        if (space.Contains(point))
-          return false;
-      }
-      return true;
+      return myMinuses.All(space => !space.Contains(point));
     }
 
     public override bool ContainsRect(double[] left, double[] right)
     {
       if (!base.ContainsRect(left, right))
         return false;
-      foreach (var space in myMinuses)
-      {
-        if (space.ContainedRect(left, right))
-          return false;
-      }
-      return true;
+      return myMinuses.All(space => !space.ContainedRect(left, right));
     }
   }
 }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using DSIS.Core.System;
 using DSIS.Core.Util;
 using DSIS.Persistance;
+using JetBrains.Annotations;
 
 namespace DSIS.Core.Coordinates
 {
@@ -41,7 +42,7 @@ namespace DSIS.Core.Coordinates
     /// </summary>
     /// <param name="point">array with length of <code>SystemSpace.Dimension</code></param>
     /// <returns>ICellCoordinate or null</returns>
-    [Nullable]
+    [CanBeNull]
     T FromPoint(double[] point);
 
     /// <summary>

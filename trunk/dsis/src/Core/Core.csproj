@@ -79,13 +79,6 @@
     <Compile Include="src\Coordinates\ICellCoordinateSystemConverter.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemMultiplyConverter.cs" />
     <Compile Include="src\Coordinates\ICellCoordinateSystemProjector.cs" />
-    <Compile Include="src\Data\IContinuableDataCollectionAnalisys.cs" />
-    <Compile Include="src\Data\IDataCollection.cs" />
-    <Compile Include="src\Data\IDataCollectionAnalisys.cs" />
-    <Compile Include="src\Data\IDataProcessProcessor.cs" />
-    <Compile Include="src\Data\IDataProcessScheme.cs" />
-    <Compile Include="src\IData.cs" />
-    <Compile Include="src\IDR.cs" />
     <Compile Include="src\IMemoryUsage.cs" />
     <Compile Include="src\MemoryInfo.cs" />
     <Compile Include="src\MemoryUsage.cs" />
@@ -107,8 +100,6 @@
     <Compile Include="src\Util\CountEnumerable.cs" />
     <Compile Include="src\Util\ICountEnumerable.cs" />
     <Compile Include="src\Util\IProgressInfo.cs" />
-    <Compile Include="src\Util\NotNullAttribute.cs" />
-    <Compile Include="src\Util\NullableAttribute.cs" />
     <Compile Include="src\Util\NullProgressInfo.cs" />
     <Compile Include="src\Util\ObjectMarker.cs" />
     <Compile Include="src\Util\ProcessInterruptedException.cs" />
@@ -134,6 +125,9 @@
       <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>
       <Name>Persistance</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Data\" />
   </ItemGroup>
   <Import Project="../Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

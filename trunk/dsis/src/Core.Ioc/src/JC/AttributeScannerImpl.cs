@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Utils;
 
 namespace DSIS.Core.Ioc.JC
@@ -18,13 +19,7 @@ namespace DSIS.Core.Ioc.JC
 
     public IEnumerable<Pair<Type, T>> LoadTypes<T>() where T : Attribute
     {
-      foreach (var assembly in myContainer.Assemblies)
-      {
-        foreach (var pair in myScanner.LoadTypes<T>(assembly))
-        {
-          yield return pair;
-        }
-      }
+      return myContainer.Assemblies.SelectMany(assembly => myScanner.LoadTypes<T>(assembly));
     }
   }
 }

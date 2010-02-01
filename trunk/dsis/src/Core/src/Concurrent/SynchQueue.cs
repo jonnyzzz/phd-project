@@ -1,21 +1,23 @@
+using System;
 using System.Threading;
 
 namespace DSIS.Core.Concurrent
 {
+  [Obsolete("Deadlock inside")]
   public class SynchQueue<T>
   {
     private readonly object ROOT_LOCK = new object();
     private readonly object TAIL_LOCK = new object();
 
-    private QueueItem myRoot = null;
-    private QueueItem myTail = null;
+    private QueueItem myRoot;
+    private QueueItem myTail;
 
-    private ManualResetEvent myDataAppend = new ManualResetEvent(false);
+    private readonly ManualResetEvent myDataAppend = new ManualResetEvent(false);
 
     private sealed class QueueItem
     {
       public readonly T Value;
-      public QueueItem Next = null;
+      public QueueItem Next;
 
       public QueueItem(T value)
       {
@@ -29,6 +31,7 @@ namespace DSIS.Core.Concurrent
       {
         if (myTail == null)
         {
+          //TODO: DEADLOCK!
           lock(ROOT_LOCK)
           {
             myRoot = myTail = new QueueItem(t);
@@ -49,21 +52,21 @@ namespace DSIS.Core.Concurrent
         if (myRoot == null)
         {
           return default(T);
-        } else
-        {
-          T result = myRoot.Value;
-          myRoot = myRoot.Next;
-          if (myRoot == null)
-          {
-            //myTail != null here! So no deadlock!
-            lock(TAIL_LOCK)
-            {
-              myTail = null;
-              myDataAppend.Reset();
-            }
-          }
-          return result;
         }
+
+        var result = myRoot.Value;
+        myRoot = myRoot.Next;
+        if (myRoot == null)
+        {
+          //TODO: DEADLOCK!
+          //myTail != null here! So no deadlock!
+          lock(TAIL_LOCK)
+          {
+            myTail = null;
+            myDataAppend.Reset();
+          }
+        }
+        return result;
       }      
     }
 

@@ -19,7 +19,7 @@ namespace DSIS.TrajectoryBuilder
       myPoint = new double[myDimension];
       myOutput = new double[myDimension];
 
-      double[] precision = new double[myDimension];
+      var precision = new double[myDimension];
       for(int i=0; i< myDimension; i++)
       {
         precision[i] = (space.AreaRightPoint[i] - space.AreaLeftPoint[i])/precisionFactor;

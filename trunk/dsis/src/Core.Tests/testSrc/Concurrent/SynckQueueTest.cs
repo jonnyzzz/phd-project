@@ -9,6 +9,7 @@ using NUnit.Framework;
 namespace DSIS.Core.Concurrent
 {
   [TestFixture]
+  //TODO: Fix deadlock
   public class SynckQueueTest
   {
     private SynchQueue<int> myQueue;
