@@ -53,7 +53,7 @@ public:
     C* Allocate() {
         return new(Allocate_void(sizeof(C))) C;
         //return (C*)Allocate_void(sizeof(C));
-    }
+	    }
 
     template <class C>
     C* AllocateArray(int length) {

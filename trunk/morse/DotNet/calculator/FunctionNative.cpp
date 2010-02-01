@@ -113,6 +113,12 @@ void FunctionNative::compile() {
    *code++ = 0xc3;   
 
    procedure_end = code;
+
+   DWORD dummy;
+   DWORD ret = VirtualProtect(procedure, 1<<18, PAGE_EXECUTE_READWRITE, &dummy);
+   if (ret == 0) {
+	   cout<<"Failed to protect memory\n";
+   }
 }
 
 
