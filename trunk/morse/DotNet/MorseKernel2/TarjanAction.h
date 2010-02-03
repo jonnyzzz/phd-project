@@ -35,7 +35,7 @@ __interface ITarjanParameters : IParameters
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.TarjanAction"),
 	progid("MorseKernel2.TarjanAction.1"),
 	version(1.0),

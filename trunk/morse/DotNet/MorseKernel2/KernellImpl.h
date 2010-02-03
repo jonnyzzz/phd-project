@@ -20,7 +20,7 @@ __interface IKernellImpl : IWritableKernell {
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.KernellImpl"),
 	progid("MorseKernel2.KernellImpl.1"),
 	version(1.1),

@@ -24,7 +24,7 @@ __interface ILoopsLocalizationAction : IAction
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.LoopsLocalizationAction"),
 	progid("MorseKernel2.LoopsLocalizationAction.1"),
 	version(1.0),

@@ -102,6 +102,5 @@ STDMETHODIMP CMSSegmentRom::Do(IResultSet* in, IResultSet** out) {
     ATLASSERT(out != NULL);
 
     delete func;
-    return S_OK;}
-
-
+    return S_OK;
+}

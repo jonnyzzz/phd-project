@@ -38,7 +38,7 @@ __interface IMS2DProcessParameters : IComputationParameters
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MS2DProcessAction"),
 	progid("MorseKernel2.MS2DProcessAction.1"),
 	version(1.0),

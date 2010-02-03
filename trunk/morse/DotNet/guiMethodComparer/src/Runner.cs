@@ -10,10 +10,10 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 {
   public class Runner : IAttachableSimpleWriter
   {
-    private ArrayList writers = new ArrayList();
-    private TextWriter logWriter;
-    private TextWriter batWriter;
-    private TextWriter localBatWriter;
+    private readonly ArrayList writers = new ArrayList();
+    private readonly TextWriter logWriter;
+    private readonly TextWriter batWriter;
+    private readonly TextWriter localBatWriter;
 
     public Runner(string path, IRunMode mode)
     {
@@ -42,8 +42,8 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 
         using (localBatWriter = File.CreateText(Path.Combine(pathAd, "build.bat")))
         {
-          ActionPerformer pf = new ActionPerformer(this, task);
-          IteratedMethodsFactory fac = new IteratedMethodsFactory(load, pathAd);
+          var pf = new ActionPerformer(this, task);
+          var fac = new IteratedMethodsFactory(load, pathAd);
           pf.Perform(fac.Task(), pathAd);
         }
         localBatWriter = null;
@@ -59,7 +59,7 @@ namespace Eugene.Petrenko.Gui2.MethodComparer
 
     public static void Main(string[] args)
     {
-      CommandLineParser cmd = new CommandLineParser(args);
+      var cmd = new CommandLineParser(args);
 
       if (cmd.HasKey("file"))
       {

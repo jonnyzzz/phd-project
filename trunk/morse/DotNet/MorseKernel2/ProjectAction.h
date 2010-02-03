@@ -39,7 +39,7 @@ __interface IProjectActionParameters : IParameters
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.ProjectAction"),
 	progid("MorseKernel2.ProjectAction.1"),
 	version(1.0),

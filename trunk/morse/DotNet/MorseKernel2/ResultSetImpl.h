@@ -25,7 +25,7 @@ __interface IResultSetImpl : IDispatch {
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.ResultSetImpl"),
 	progid("MorseKernel2.ResultSetImpl.1"),
 	version(1.0),

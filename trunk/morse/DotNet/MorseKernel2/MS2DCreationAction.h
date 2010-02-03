@@ -33,7 +33,7 @@ __interface IMS2DCreationParameters : IParameters {
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MS2DCreationAction"),
 	progid("MorseKernel2.MS2DCreationAction.1"),
 	version(1.0),

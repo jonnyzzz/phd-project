@@ -9,9 +9,8 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
   /// </summary>
   public class KernelDocument
   {
-    private Function function;
-    private IKernell kernell;
-    private string defaultTitle;
+    private readonly Function function;
+    private readonly IKernell kernell;
 
     public KernelDocument(Function function)
     {
@@ -19,8 +18,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
 
       this.function = function;
 
-      CKernellImplClass kernellClass = new CKernellImplClass();
-
+      var kernellClass = new CKernellImplClass();
       IWritableKernell wKernell = kernellClass;
 
       wKernell.SetFunction(this.function.IFunction);
@@ -28,11 +26,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
       kernell = (IKernell) wKernell;
     }
 
-    public string Title
-    {
-      get { return defaultTitle; }
-      set { defaultTitle = value; }
-    }
+    public string Title { get; set; }
 
     public Function Function
     {

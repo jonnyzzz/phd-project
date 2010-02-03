@@ -16,7 +16,7 @@ class FunctionNode;
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.FunctionImpl"),
 	progid("MorseKernel2.FunctionImpl.1"),
 	version(1.1),

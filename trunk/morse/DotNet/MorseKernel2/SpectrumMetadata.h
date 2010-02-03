@@ -21,7 +21,7 @@ __interface ISpectrumMetadata : IResultMetadata
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.SpectrumMetadata"),
 	progid("MorseKernel2.SpectrumMetadata.1"),
 	version(1.0),

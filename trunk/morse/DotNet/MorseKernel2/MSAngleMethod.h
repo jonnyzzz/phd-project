@@ -24,7 +24,7 @@ __interface IMSAngleMethod : IAdaptiveMethodAction
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MSAngleMethod"),
 	progid("MorseKernel2.MSAngleMethod.1"),
 	version(1.0),

@@ -11,7 +11,7 @@ namespace EugenePetrenko.Gui2.ExternalResource.ProcessRunner
 
   public class SmartProcess
   {
-    private Process process;
+    private readonly Process process;
 
     public SmartProcess(Process process)
     {
@@ -20,8 +20,7 @@ namespace EugenePetrenko.Gui2.ExternalResource.ProcessRunner
 
     public void Start()
     {
-      Thread thread = new Thread(new ThreadStart(ProcessCheckRunner));
-      thread.Priority = ThreadPriority.Lowest;
+      var thread = new Thread(ProcessCheckRunner) {Priority = ThreadPriority.Lowest};
       thread.Start();
     }
 

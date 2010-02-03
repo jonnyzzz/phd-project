@@ -35,7 +35,7 @@ __interface ISIRomAction : IAction
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.SIRomAction"),
 	progid("MorseKernel2.SIRomAction.1"),
 	version(1.0),

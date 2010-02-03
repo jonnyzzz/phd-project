@@ -34,7 +34,7 @@ __interface IMinimalLoopLocalizationParameters : IParameters {
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MinimalLoopLocalizationAct"),
 	progid("MorseKernel2.MinimalLoopLocalizationA.1"),
 	version(1.0),

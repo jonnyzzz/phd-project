@@ -40,7 +40,7 @@ __interface IAdaptiveMethodParameters : IComputationParameters {
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.AdaptiveMethodAction"),
 	progid("MorseKernel2.AdaptiveMethodAction.1"),
 	version(1.0),

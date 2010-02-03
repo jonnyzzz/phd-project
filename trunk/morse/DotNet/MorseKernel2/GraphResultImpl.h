@@ -26,7 +26,7 @@ class Graph;
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.GraphResultImpl"),
 	progid("MorseKernel2.GraphResultImpl.1"),
 	version(1.0),

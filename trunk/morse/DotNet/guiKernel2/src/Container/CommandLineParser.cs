@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using EugenePetrenko.Gui2.Application.Runner;
 
 namespace EugenePetrenko.Gui2.Kernell2.Container
@@ -9,7 +10,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
   /// </summary>
   public class CommandLineParser
   {
-    private Hashtable parameters = new Hashtable();
+    private readonly Hashtable parameters = new Hashtable();
 
     public CommandLineParser(string[] commandLine)
     {
@@ -43,7 +44,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Container
       return parameters[key] as string;
     }
 
-    public string[] GetValues(string key)
+    public IEnumerable<string> GetValues(string key)
     {
       string tmp = GetValue(key);
       return tmp != null ? tmp.Split(',') : null;

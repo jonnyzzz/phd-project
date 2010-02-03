@@ -23,7 +23,7 @@ __interface IMS2DRomAction : IAction
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MS2DRomAction"),
 	progid("MorseKernel2.MS2DRomAction.1"),
 	version(1.0),

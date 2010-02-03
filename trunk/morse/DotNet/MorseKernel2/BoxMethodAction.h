@@ -37,7 +37,7 @@ __interface IBoxMethodParameters : IComputationParameters {
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.BoxMethodAction"),
 	progid("MorseKernel2.BoxMethodAction.1"),
 	version(1.0),

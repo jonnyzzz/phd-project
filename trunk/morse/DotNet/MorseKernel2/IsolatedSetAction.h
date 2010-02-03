@@ -33,7 +33,7 @@ __interface IIsolatedSetParameters : IParameters {
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.IsolatedSetAction"),
 	progid("MorseKernel2.IsolatedSetAction.1"),
 	version(1.0),

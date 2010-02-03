@@ -16,13 +16,11 @@ __interface ISymbolicImageMetadata : IResultMetadata
 {
 };
 
-
-
 // CSymbolicImageMetadata
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.SymbolicImageMetadata"),
 	progid("MorseKernel2.SymbolicImageMetadata.1"),
 	version(1.0),
@@ -46,9 +44,6 @@ public:
 public:
     CComPtr<IUnknown> m_pUnkMarshaler;
     DECLARE_GET_CONTROLLING_UNKNOWN()
-
-
-
 
 };
 

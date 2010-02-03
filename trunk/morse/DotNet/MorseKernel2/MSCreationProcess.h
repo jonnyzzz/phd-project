@@ -40,7 +40,7 @@ __interface IMSCreationParameters : IParameters {
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MSCreationProcess"),
 	progid("MorseKernel2.MSCreationProcess.1"),
 	version(1.0),

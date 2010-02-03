@@ -24,7 +24,7 @@ __interface IGraphInfoImpl : IDispatch {
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.GraphInfoImpl"),
 	progid("MorseKernel2.GraphInfoImpl.1"),
 	version(1.0),

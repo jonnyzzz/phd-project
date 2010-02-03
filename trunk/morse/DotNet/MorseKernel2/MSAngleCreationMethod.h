@@ -24,7 +24,7 @@ __interface IMSAngleCreationMethod : IMSCreationProcess
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MSAngleCreationMethod"),
 	progid("MorseKernel2.MSAngleCreationMethod.1"),
 	version(1.0),

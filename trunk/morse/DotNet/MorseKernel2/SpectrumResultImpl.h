@@ -10,7 +10,7 @@
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.SpectrumResultImpl"),
 	progid("MorseKernel2.SpectrumResultImpl.1"),
 	version(1.0),

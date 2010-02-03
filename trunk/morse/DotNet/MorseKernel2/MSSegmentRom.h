@@ -25,7 +25,7 @@ __interface IMSSegmentRom : IAction
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MSSegmentRom"),
 	progid("MorseKernel2.MSSegmentRom.1"),
 	version(1.0),

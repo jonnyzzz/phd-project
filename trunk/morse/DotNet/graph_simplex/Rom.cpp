@@ -36,9 +36,9 @@ graph(graph)
 
 CRom::~CRom(void)
 {
-	cout<<" WWW "<<endl;
+	//cout<<" WWW "<<endl;
 	delete[] nodes;
-	cout<<" WWW2 "<<endl;
+	//cout<<" WWW2 "<<endl;
 }
 
 
@@ -80,13 +80,13 @@ bool inline CRom::preceed(CRom::ContourNode* root, CRom::ContourNode* i1, CRom::
 }
 		
 bool inline CRom::tree(CRom::ContourNode*& rnode) {
-	cout<<"Trre:\n";
+	//cout<<"Trre:\n";
 
 	for (EGraphIterator it = egraph.begin(); it != egraph.end(); it++) {
 		it->second->type = M2;
 	}
 	
-	DUMPN(rnode);
+	//DUMPN(rnode);
 
 	typedef list<ContourNode*> List;
 	typedef List::iterator ListIterator;
@@ -95,7 +95,7 @@ bool inline CRom::tree(CRom::ContourNode*& rnode) {
 		
 	double z = contour_cost(rnode);
 
-	cout<<"z = "<<z<<"\n";
+	//cout<<"z = "<<z<<"\n";
 
 	rnode->v = 0;
 	rnode->type = M1;
@@ -121,7 +121,7 @@ bool inline CRom::tree(CRom::ContourNode*& rnode) {
 		m.pop_front();
 		node->type = M0;
 
-        GraphEdgeEnumerator ee(graph, node->node); // = graph->getEdgeRoot(node->node);
+    GraphEdgeEnumerator ee(graph, node->node); // = graph->getEdgeRoot(node->node);
 		Edge* e;
 		while (e = graph->getEdge(ee)) {
 
@@ -140,7 +140,7 @@ bool inline CRom::tree(CRom::ContourNode*& rnode) {
 				
 				if ( (w + 1e-8) < to->v ) {
 					if (preceed(rnode, to, node)) {
-						cout<<"Restart:\n";
+						//cout<<"Restart:\n";
 
 						DUMPN(rnode);
 						DUMPN(node);
@@ -151,9 +151,9 @@ bool inline CRom::tree(CRom::ContourNode*& rnode) {
 
 						return false; //<=> start again
 					} else 
-                                               /// FIXED to new algorithm statement in my PHD thesis. 
-                                               /// if (preceed(rnode, node, to))
-                                        {
+         /// FIXED to new algorithm statement in my PHD thesis. 
+         /// if (preceed(rnode, node, to))
+          {
 						to->v = w;
 						to->next = node;
 						if (to->type == M0) {
@@ -192,11 +192,11 @@ void CRom::bigDump(CRom::ContourNode* to) {
 	
 CRom::ContourNode* CRom::minimize(CRom::ContourNode* node) {
 	while (!tree(node)) {
-		cout<<"next\n\n";
+		//cout<<"next\n\n";
 		//dump();
-		cout<<"\n\n";
+		//cout<<"\n\n";
 	}
-	cout<<"Finish\n";
+	//cout<<"Finish\n";
 
 	return node;
 }
@@ -233,7 +233,7 @@ CRom::ContourNode* CRom::createNodeTo(Edge* edge) {
 
 CRom::ContourNode* CRom::init() {
 
-	cout<<"Start...\n";
+	//cout<<"Start...\n";
     //dump();
 
 	NodeEnumerator* ne = graph->getNodeRoot();
@@ -259,7 +259,7 @@ CRom::ContourNode* CRom::init() {
 	}
 	graph->freeNodeEnumerator(ne);
 
-	cout<<"1\n";
+	//cout<<"1\n";
 
 	//dump();
 
@@ -272,7 +272,7 @@ CRom::ContourNode* CRom::init() {
 		}
 	}
 
-	cout<<"2\n";
+	//cout<<"2\n";
     
 	//dump();
 
@@ -301,7 +301,7 @@ CRom::ContourNode* CRom::init() {
 			if (root == NULL || rootZ > cst) {				
 				root = tmp;
 				rootZ = cst;
-				cout<<"!.!";
+				//cout<<"!.!";
 			}
 		}
 		tmp->type = M2;
@@ -365,7 +365,7 @@ void CRom::cleanUP() {
 	egraph.clear();
 	
 
-	dump();
+	//dump();
 }
 
 
@@ -375,7 +375,7 @@ void CRom::minimize() {
 	cout<<"Enter\n";
 	extrema = init();
 	cout<<"Init\n";
-//*
+/*
 #ifdef _DEBUG
 	dumpGraph();
 #endif

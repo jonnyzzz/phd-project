@@ -25,7 +25,7 @@ __interface IMSAngleRomProcess : IAction
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MSAngleRomProcess"),
 	progid("MorseKernel2.MSAngleRomProcess.1"),
 	version(1.0),

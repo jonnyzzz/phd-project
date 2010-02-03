@@ -32,7 +32,7 @@ __interface IMS2Metadata : IMSMetadata
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MS2Metadata"),
 	progid("MorseKernel2.MS2Metadata.1"),
 	version(1.0),

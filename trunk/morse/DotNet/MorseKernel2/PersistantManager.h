@@ -39,7 +39,7 @@ __interface IMetadataPersistantManager : IDispatch
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.PersistantManager"),
 	progid("MorseKernel2.PersistantManager.1"),
 	version(1.0),

@@ -46,7 +46,7 @@ __interface IAdaptiveBoxParameters : IComputationParameters
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.AdaptiveBoxMethod"),
 	progid("MorseKernel2.AdaptiveBoxMethod.1"),
 	version(1.0),

@@ -41,7 +41,7 @@ __interface IPointMethodParameters : IComputationParameters {
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.PointMethodAction"),
 	progid("MorseKernel2.PointMethodAction.1"),
 	version(1.0),

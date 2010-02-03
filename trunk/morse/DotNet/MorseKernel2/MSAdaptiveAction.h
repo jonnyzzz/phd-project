@@ -25,7 +25,7 @@ __interface IMSAdaptiveMethod : IAdaptiveMethodAction
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MSAdaptiveAction"),
 	progid("MorseKernel2.MSAdaptiveAction.1"),
 	version(1.0),

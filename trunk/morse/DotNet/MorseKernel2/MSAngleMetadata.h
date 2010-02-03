@@ -26,7 +26,7 @@ __interface IMSAngleMetadata : IMSMetadata
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.MSAngleMetadata"),
 	progid("MorseKernel2.MSAngleMetadata.1"),
 	version(1.0),

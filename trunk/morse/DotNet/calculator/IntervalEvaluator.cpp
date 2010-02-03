@@ -125,7 +125,7 @@ void IntervalEvaluator::VisitDiv(FunctionNodeDiv* node) {
 void IntervalEvaluator::VisitConstant(FunctionNodeConstant* node){
 	this->ret_value = Interval( node->getValue() );
 }
-void IntervalEvaluator::VisitFunction(FunctionNodeFunction* node) {	
-	ASSERT(false);
+void IntervalEvaluator::VisitFunction(FunctionNodeFunction* node) {
+  this->ret_value = Interval::whole();	
 }
 

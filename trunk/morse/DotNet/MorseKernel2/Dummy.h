@@ -31,7 +31,7 @@ __interface IDummy : IDispatch
 
 [
 	coclass,
-	threading("both"),
+	threading(apartment),
 	vi_progid("MorseKernel2.Dummy"),
 	progid("MorseKernel2.Dummy.1"),
 	version(1.0),
