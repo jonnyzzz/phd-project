@@ -5,11 +5,11 @@ namespace EugenePetrenko.Gui2.Application.Document
   /// <summary>
   /// Summary description for XmlUtil.
   /// </summary>
-  public class XmlUtil
+  public static class XmlUtil
   {
     public static XmlDocument CreateEmptyDocument()
     {
-      XmlDocument document = new XmlDocument();
+      var document = new XmlDocument();
       document.CreateXmlDeclaration("1.0", "UTF-8", string.Empty);
       return document;
     }

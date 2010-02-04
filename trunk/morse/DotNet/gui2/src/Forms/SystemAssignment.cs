@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -17,8 +18,8 @@ namespace EugenePetrenko.Gui2.Application.Forms
   public class SystemAssignment : Form
   {
     private const string DIMENSION = "_dimension";
-    private bool isReadOnly;
-    private PredefinedFunctions predefinedFunctions = new PredefinedFunctions();
+    private readonly bool isReadOnly;
+    private readonly PredefinedFunctions predefinedFunctions = new PredefinedFunctions();
 
 
     private GroupBox groupBox1;
@@ -59,7 +60,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
       dimensionUpDown_ValueChanged(this, EventArgs.Empty);
       isReadOnly = false;
 
-      redesignGrid();
+      RedesignGrid();
 
       if (showOpen)
       {
@@ -69,11 +70,11 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
     public SystemAssignment(Function function) : this()
     {
-      setSource(function.Equation);
+      SetSource(function.Equations);
       isReadOnly = true;
     }
 
-    private void redesignGrid()
+    private void RedesignGrid()
     {
       DataGridTableStyle style;
       if (formulas.TableStyles.Count == 0)
@@ -89,14 +90,14 @@ namespace EugenePetrenko.Gui2.Application.Forms
       if (!(formulas.DataSource is DataTable)) 
         return;
 
-      DataTable table = formulas.DataSource as DataTable;
+      var table = formulas.DataSource as DataTable;
 
-      int w = (int) (formulas.ClientSize.Width*0.90);
+      var w = (int) (formulas.ClientSize.Width*0.90);
 
       for (int i = 0; i < table.Columns.Count - 2; i++)
       {
         w -= style.GridColumnStyles[i].Width;
-        style.GridColumnStyles[i].WidthChanged += new EventHandler(SystemAssignment_WidthChanged);
+        style.GridColumnStyles[i].WidthChanged += SystemAssignment_WidthChanged;
       }
       style.RowHeaderWidth = 10;
       style.AllowSorting = false;
@@ -323,21 +324,22 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
     #endregion
 
-    private DataTable createDataTable()
+    private static DataTable CreateDataTable()
     {
-      DataTable table = new DataTable();
-      DataColumn cln = new DataColumn("variable");
-      cln.ReadOnly = false;
-      cln.DataType = typeof (string);
-      table.Columns.Add(cln);
-      cln.DefaultValue = "";
+      var table = new DataTable();
+      table.Columns.Add(new DataColumn("variable")
+                          {
+                            ReadOnly = false, 
+                            DataType = typeof (string),
+                            DefaultValue = ""
+                          });
 
-      cln = new DataColumn("expression");
-      cln.ReadOnly = false;
-      cln.DataType = typeof (string);
-      cln.DefaultValue = "0";
-
-      table.Columns.Add(cln);
+      table.Columns.Add(new DataColumn("expression")
+                          {
+                            ReadOnly = false, 
+                            DataType = typeof (string), 
+                            DefaultValue = "0"
+                          });
 
       return table;
     }
@@ -346,7 +348,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
     {
       #region "table initalization"
 
-      DataTable table = createDataTable();
+      DataTable table = CreateDataTable();
 
 
       for (int i = 0; i < dimensionUpDown.Value; i++)
@@ -389,7 +391,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
       #endregion
 
       formulas.DataSource = table;
-      redesignGrid();
+      RedesignGrid();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
@@ -397,40 +399,39 @@ namespace EugenePetrenko.Gui2.Application.Forms
       DialogResult = DialogResult.Cancel;
     }
 
-    private string[] createFunctionSource()
+    private string[] CreateFunctionSource()
     {
       formulas.Refresh();
       formulas.Update();
       formulas.Focus();
-      DataTable table = (DataTable) formulas.DataSource;
+      var table = (DataTable) formulas.DataSource;
 
       table.AcceptChanges();
       table.BeginLoadData();
 
-      ArrayList strings = new ArrayList();
-
+      var strings = new List<string>();
       for (IEnumerator en = table.Rows.GetEnumerator(); en.MoveNext();)
       {
-        DataRow row = ((DataRow) en.Current);
+        var row = ((DataRow) en.Current);
         strings.Add(row[0] + "=" + row[1]);
       }
 
       strings.Add(DIMENSION + "=" + dimensionUpDown.Value);
 
       table.EndLoadData();
-      return (string[]) strings.ToArray(typeof (string));
+      return strings.ToArray();
     }
 
-    private DataTable createFunctionTable(string source)
+    private DataTable CreateFunctionTable(IEnumerable<string> source)
     {
-      DataTable table = createDataTable();
-      string[] ss = source.Split(';');
+      var table = CreateDataTable();
 
-      for (int i = 0; i < ss.Length; i++)
+      foreach (var ss in source)
       {
-        string[] st = ss[i].Split('=');
+        var st = ss.Split(new[]{'='},StringSplitOptions.RemoveEmptyEntries);
 
         if (st.Length != 2) continue;
+
         st[0] = st[0].Trim();
         st[1] = st[1].Trim();
 
@@ -453,7 +454,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
     {
       try
       {
-        return new Function(createFunctionSource());
+        return new Function(CreateFunctionSource());
       }
       catch (FunctionExceptions ee)
       {
@@ -489,10 +490,9 @@ namespace EugenePetrenko.Gui2.Application.Forms
       get { return function; }
     }
 
-
-    private void setSource(string result)
+    private void SetSource(IEnumerable<string> result)
     {
-      formulas.DataSource = createFunctionTable(result);
+      formulas.DataSource = CreateFunctionTable(result);
     }
 
     private void menuLoad_Click(object sender, EventArgs e)
@@ -500,14 +500,14 @@ namespace EugenePetrenko.Gui2.Application.Forms
       if (openFileDialog.ShowDialog(this) == DialogResult.OK)
       {
         string fileName = openFileDialog.FileName;
-        XmlDocument document = new XmlDocument();
+        var document = new XmlDocument();
         document.Load(fileName);
 
         try
         {
           LoadFunctionFromXml(document);
         }
-        catch (FunctionExceptions ee)
+        catch (Exception ee)
         {
           MessageBox.Show(this, ee.Message, "Failed to load function", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -516,8 +516,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
     private void LoadFunctionFromXml(XmlNode document)
     {
-      Function function = FunctionSerializer.LoadFunction(document);
-      setSource(function.Equation);
+      SetSource(FunctionSerializer.LoadFunction(document).Equations);
     }
 
     private void menuSave_Click(object sender, EventArgs e)
@@ -527,10 +526,10 @@ namespace EugenePetrenko.Gui2.Application.Forms
         string fileName = saveFileDialog.FileName;
         XmlDocument document = XmlUtil.CreateEmptyDocument();
 
-        Function function = CreateFunction();
-        if (function != null)
+        Function fun = CreateFunction();
+        if (fun != null)
         {
-          XmlNode newNode = FunctionSerializer.SaveFunction(function);
+          XmlNode newNode = FunctionSerializer.SaveFunction(fun);
           XmlUtil.SetRootNode(document, newNode);
 
           using (TextWriter writer = File.CreateText(fileName))
@@ -543,17 +542,17 @@ namespace EugenePetrenko.Gui2.Application.Forms
 
     private void SystemAssignment_WidthChanged(object sender, EventArgs e)
     {
-      redesignGrid();
+      RedesignGrid();
     }
 
     private void menuItemGetSource_Click(object sender, EventArgs e)
     {
-      Clipboard.SetDataObject(createFunctionSource(), true);
+      Clipboard.SetDataObject(CreateFunctionSource(), true);
     }
 
     private MenuItem[] BuildMenuItems(string[] names)
     {
-      ArrayList items = new ArrayList(names.Length);
+      var items = new ArrayList(names.Length);
       foreach (string name in names)
       {
         items.Add(new MyMenuItem(this, name));
@@ -561,7 +560,7 @@ namespace EugenePetrenko.Gui2.Application.Forms
       return (MenuItem[]) items.ToArray(typeof (MenuItem));
     }
 
-    public void PerformPredefinedSelected(string name)
+    private void PerformPredefinedSelected(string name)
     {
       XmlNode node = predefinedFunctions.GetFunction(name);
       LoadFunctionFromXml(node);

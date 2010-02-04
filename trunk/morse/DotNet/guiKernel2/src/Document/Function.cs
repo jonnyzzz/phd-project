@@ -7,6 +7,10 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
   [Serializable]
   public class Function
   {
+    private readonly string[] equations;
+    private readonly IFunction function;
+    private readonly string equation;
+    
     public Function(string[] equations)
     {
       this.equations = equations;
@@ -22,13 +26,12 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
         equation += eqe + "\n";
       }
 
-      function =
-        createFunction(equation);
+      function = CreateFunction(equation);
     }
 
-    private IFunction createFunction(string equations)
+    private static IFunction CreateFunction(string equations)
     {
-      CFunctionImplClass functionClass = new CFunctionImplClass();
+      var functionClass = new CFunctionImplClass();
       IWritableFunction writableFunction = functionClass;
       try
       {
@@ -41,10 +44,6 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
 
       return functionClass;
     }
-
-    private string[] equations;
-    private IFunction function;
-    private string equation;
 
     public string[] Equations
     {
@@ -63,12 +62,12 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
 
     public override string ToString()
     {
-      StringBuilder builder = new StringBuilder();
+      var builder = new StringBuilder();
       builder.Append("Function Object\n[");
-      foreach (string equation in equations)
+      foreach (string eq in equations)
       {
         builder.Append("\t");
-        builder.Append(equation);
+        builder.Append(eq);
         builder.Append("\n");
       }
       builder.Append("]\n");
@@ -83,7 +82,7 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
 
     public static Function CreateTestFunction()
     {
-      return new Function(new string[]
+      return new Function(new[]
                             {
                               "_dimension=1;",
                               "y1 = x1;",

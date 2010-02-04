@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Xml;
 using EugenePetrenko.Gui2.Kernell2.Document;
+using System.Linq;
 
 namespace EugenePetrenko.Gui2.Kernel2.Document
 {
@@ -9,20 +9,29 @@ namespace EugenePetrenko.Gui2.Kernel2.Document
   /// </summary>
   public class FunctionSerializer
   {
-    public static Function LoadFunction(XmlNode aNode)
+    private static string[] LoadFunctionContent(XmlNode aNode)
     {
-      ArrayList equations = new ArrayList();
-      foreach (XmlNode node in aNode.SelectNodes("function/equation/text()"))
+      if (aNode == null)
       {
-        equations.Add(node.Value);
+        throw new FunctionExceptions("Failed to load function. Wrong xml format");
+      }
+      XmlNodeList nodes = aNode.SelectNodes("function/equation/text()");
+      if (nodes == null)
+      {
+        return new string[0];
       }
 
-      return new Function((string[]) equations.ToArray(typeof (string)));
+      return nodes.OfType<XmlNode>().Select(x => x.Value).Where(x => x != null).Select(x => x.Trim()).ToArray();
+    }
+
+    public static Function LoadFunction(XmlNode aNode)
+    {
+      return new Function(LoadFunctionContent(aNode));
     }
 
     public static XmlNode SaveFunction(Function function)
     {
-      XmlDocument doc = new XmlDocument();
+      var doc = new XmlDocument();
       XmlNode newNode = doc.CreateElement("function");
 
       foreach (string equation in function.Equations)
