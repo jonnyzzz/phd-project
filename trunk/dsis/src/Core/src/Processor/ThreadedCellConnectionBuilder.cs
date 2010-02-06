@@ -7,14 +7,14 @@ using DSIS.Utils;
 
 namespace DSIS.Core.Processor
 {
-  public class ThreadedCellConnectionBuilder<TCell> : ICellConnectionBuilder<TCell>, IDisposable 
+  public class ThreadedCellConnectionBuilder<TCell> : ICellConnectionBuilder<TCell>, IDisposable
     where TCell : ICellCoordinate
   {
-    private readonly int myCacheSize;
     private readonly List<Pair<TCell, IEnumerable<TCell>>> myCacheMany = new List<Pair<TCell, IEnumerable<TCell>>>();
     private readonly List<Pair<TCell, TCell>> myCacheOne = new List<Pair<TCell, TCell>>();
-    private readonly Mutex myWriteLock;
+    private readonly int myCacheSize;
     private readonly ICellConnectionBuilder<TCell> mySynchBulder;
+    private readonly Mutex myWriteLock;
 
     public ThreadedCellConnectionBuilder(Mutex writeLock, ICellConnectionBuilder<TCell> synchBulder, int cacheSize)
     {
@@ -25,7 +25,7 @@ namespace DSIS.Core.Processor
 
     public void ConnectToOne(TCell cell, TCell v)
     {
-      myCacheOne.Add(new Pair<TCell, TCell>(cell, v));    
+      myCacheOne.Add(new Pair<TCell, TCell>(cell, v));
       FlushCachesIfNeeded();
     }
 
@@ -35,36 +35,33 @@ namespace DSIS.Core.Processor
       FlushCachesIfNeeded();
     }
 
+    public void Dispose()
+    {
+      FlushCaches();
+    }
+
     private void FlushCachesIfNeeded()
     {
-      if (myCacheMany.Count + myCacheOne.Count <= myCacheSize) 
+      if (myCacheMany.Count + myCacheOne.Count <= myCacheSize)
         return;
-      
-      using(new MutexCookie(myWriteLock))
-      {
-        FlushCaches();
-      }
+
+      FlushCaches();
     }
 
     private void FlushCaches()
     {
-      foreach (var pair in myCacheMany)
+      using (myWriteLock.Lock())
       {
-        mySynchBulder.ConnectToMany(pair.First, pair.Second);
-      }          
-      foreach (var pair in myCacheOne)
-      {
-        mySynchBulder.ConnectToOne(pair.First, pair.Second);
-      }          
-      myCacheMany.Clear();
-      myCacheOne.Clear();
-    }
-
-    public void Dispose()
-    {
-      using(new MutexCookie(myWriteLock))
-      {
-        FlushCaches();
+        foreach (var pair in myCacheMany)
+        {
+          mySynchBulder.ConnectToMany(pair.First, pair.Second);
+        }
+        foreach (var pair in myCacheOne)
+        {
+          mySynchBulder.ConnectToOne(pair.First, pair.Second);
+        }
+        myCacheMany.Clear();
+        myCacheOne.Clear();
       }
     }
   }

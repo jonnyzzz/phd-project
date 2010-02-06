@@ -155,7 +155,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public override bool Equals(object obj)
     {
-      if (obj is TInh)
+      if (obj is IntegerCoordinateSystemBase<TInh, Q>)
       {
         var inh = (IntegerCoordinateSystemBase<TInh, Q>) obj;
         if (inh.myDimension != myDimension)
@@ -217,12 +217,6 @@ namespace DSIS.IntegerCoordinates.Impl
     public double[] FillArray(double cellSizeFactor)
     {
       return cellSizeFactor.Fill(myDimension);
-    }
-
-    public bool IsNull(Q coord)
-    {
-      //todo: Implement for each concrete Q
-      return ReferenceEquals(coord, null);
     }
 
     public virtual IRadiusProcessor<Q> CreateRadiusProcessor()

@@ -23,33 +23,36 @@ namespace DSIS.Core.Processor
     public void Execute(IProgressInfo info)
     {
       var workers = new List<Thread>();
+      var cells = myContext.Cells.GetEnumerator();
 
-      for (int i = 0; i < Environment.ProcessorCount; i++)
+      for (int i = 0; i < Math.Max(1,Environment.ProcessorCount); i++)
       {
-        var worker = new Thread(ThreadRun) {Name = ("SI construction thread " + (i + 1))};
-        worker.Start(myContext);
-
+        var worker = new Thread(()=>ThreadRun(cells)) {Name = ("SI construction thread " + (i + 1))};
+        
         workers.Add(worker);
+        worker.Start();
       }
 
-      foreach (Thread worker in workers)
+      foreach (var worker in workers)
       {
         worker.Join();
       }
     }
 
-    private void ThreadRun(object o)
+    private void ThreadRun(IEnumerator<TFrom> cells)
     {
+      const int cacheSize = 8192;
+
       using (var bld =
-        new ThreadedCellConnectionBuilder<TTo>(myWriteMutex, myContext.CellImageBuilderContext.ConnectionBuilder, 8192))
+        new ThreadedCellConnectionBuilder<TTo>(myWriteMutex, myContext.CellImageBuilderContext.ConnectionBuilder, cacheSize))
       {
         ICellProcessorContext<TFrom, TTo> ctx = new CellProcessorContext<TFrom, TTo>(
           new CellCoordinateCollection<TFrom>(
             myContext.Converter.FromSystem,
             new BufferedThreadedCountEnumerable<TFrom>(
               myReadMutex,
-              myContext.Cells,
-              Math.Min(myContext.Cells.Count/Environment.ProcessorCount/4, 8192)
+              cells,
+              Math.Max(1000, Math.Min(myContext.Cells.Count/Environment.ProcessorCount/4, cacheSize))
               )
             ),
           myContext.Converter.Clone(),

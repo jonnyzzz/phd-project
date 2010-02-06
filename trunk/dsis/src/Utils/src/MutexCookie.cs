@@ -18,4 +18,12 @@ namespace DSIS.Utils
       myMutex.ReleaseMutex();
     }
   }
+
+  public static class MutexCookieUtil
+  {
+    public static IDisposable Lock(this Mutex cookie)
+    {
+      return new MutexCookie(cookie);
+    }
+  }
 }

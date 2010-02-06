@@ -9,31 +9,37 @@ namespace DSIS.Core.Processor
   public class BufferedThreadedCountEnumerable<T> : ICountEnumerable<T>
   {
     private readonly Mutex myMutex;
-    private readonly ICountEnumerable<T> myInput;
-    private readonly int myCount;
+    private readonly IEnumerator<T> myInput;
     private readonly int myBufferSize;
-
-    public BufferedThreadedCountEnumerable(Mutex readLock, ICountEnumerable<T> input, int bufferSize)
+    private readonly IEnumerator<T> myResult;
+    
+    public BufferedThreadedCountEnumerable(Mutex readLock, IEnumerator<T> input, int bufferSize)
     {
       myMutex = readLock;
       myBufferSize = bufferSize;
       myInput = input;
-      myCount = input.Count;
+
+      myResult = GetEnumeratorInternal();
     }
 
     public int Count
     {
-      get { return myCount; }
+      get { return 1; }
     }
 
     public IEnumerator<T> GetEnumerator()
     {
+      return myResult;
+    } 
+
+    private IEnumerator<T> GetEnumeratorInternal()
+    {
       var cache = new List<T>(myBufferSize);
-      var input = myInput.GetEnumerator();
+      var input = myInput;
 
       while (true)
       {
-        using (new MutexCookie(myMutex))
+        using (myMutex.Lock())
         {
           for (int i = 0; i < myBufferSize && input.MoveNext(); i++)
           {

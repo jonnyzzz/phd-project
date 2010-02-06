@@ -66,12 +66,12 @@ namespace DSIS.UI.Application.Doc.Actions
       var ag = new AgregateAction(
         bl1 =>
           {
-            ;bl1.Start
-              .Edge(new BuildSymbolicImageAction2(settings.Subdivision,
-                                                  (ICellImageBuilderIntegerCoordinatesSettings) settings.Setting)).With(
-              x1 => x1.Edge(bl1.Finish))
-              .Edge(new ChainRecurrenctSimbolicImageAction())
-              .Edge(bl1.Finish);
+            ; bl1.Start
+               .Edge(new BuildSymbolicImageAction2(settings.Subdivision,
+                                                   (ICellImageBuilderIntegerCoordinatesSettings)settings.Setting)).With(
+               x1 => x1.Edge(bl1.Finish))
+               .Edge(new ChainRecurrenctSimbolicImageAction())
+               .Edge(bl1.Finish);
           });
 
       if (!ctx.ContainsCellCollection())

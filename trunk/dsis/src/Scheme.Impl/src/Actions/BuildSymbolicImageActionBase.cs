@@ -48,7 +48,8 @@ namespace DSIS.Scheme.Impl.Actions
         cellSettings
         );
 
-      var proc = new SymbolicImageConstructionProcess<Q, Q>();
+//      var proc = new SymbolicImageConstructionProcess<Q, Q>();
+      var proc = new ThreadedSymbolicImageConstructionProcess<Q,Q>();
       proc.Bind(ctx);
 
       PerformanceSlot ps = PerformanceSlot.Get("BuildSI", SlotStore.Get(input));

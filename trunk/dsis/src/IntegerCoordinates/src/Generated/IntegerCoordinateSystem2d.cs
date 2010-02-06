@@ -22,6 +22,8 @@ namespace DSIS.IntegerCoordinates.Generated
     private readonly long mySubdivisionL1;
     private readonly long mySubdivisionL2;
 
+    private readonly IntegerCoordinate2d NULL = new IntegerCoordinate2d(-1,-1);
+
     public IntegerCoordinateSystem2d(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
       myCellSizeL1 = myCellSize[0];
@@ -50,7 +52,7 @@ namespace DSIS.IntegerCoordinates.Generated
         case 1:
           return ToInternalL2(point);
         default:
-          throw new OutOfMemoryException();
+          throw new ArgumentOutOfRangeException("i");
       }      
     }
 
@@ -73,7 +75,7 @@ namespace DSIS.IntegerCoordinates.Generated
         case 1:
           return ToExternalL2(pt);
         default:
-          throw new OutOfMemoryException();
+          throw new ArgumentOutOfRangeException("i");
       }
     }
 
@@ -130,7 +132,7 @@ namespace DSIS.IntegerCoordinates.Generated
     public IntegerCoordinate2d FromPoint(double[] point)
     {
       if (!SystemSpace.Contains(point))
-        return null;
+        return NULL;
 
       long l1 = ToInternalL1(point[0]);
       long l2 = ToInternalL2(point[1]);
@@ -146,6 +148,11 @@ namespace DSIS.IntegerCoordinates.Generated
     public bool IsGenerated
     {
       get { return false; }
+    }
+
+    public bool IsNull(IntegerCoordinate2d coord)
+    {
+      return coord.l1 < 0;
     }
 
     public IntegerCoordinateSystem2d SubdividedCoordinateSystem(long[] division)

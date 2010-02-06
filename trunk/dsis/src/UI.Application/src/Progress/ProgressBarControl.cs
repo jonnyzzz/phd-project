@@ -12,7 +12,7 @@ namespace DSIS.UI.Application.Progress
     private readonly IInvocator myInvocator;
     private BackDelegatingProgress myProgress;
     private IDisposable myProgressTimer;
-
+    private int myValue = -1;
     private DateTime myLastUpdatedTime = DateTime.MinValue;
 
     public event EventHandler<EventArgs> Interrupted;
@@ -120,13 +120,20 @@ namespace DSIS.UI.Application.Progress
 
     private void UpdateProgressValue(ProgressImpl progress)
     {
-      myInvocator.InvokeOrQueue("Progress::UpdateProgressValue",
-                                delegate
-                                  {
-                                    myProgressBar.Maximum = (int) progress.Maximum;
-                                    myProgressBar.Value = (int)Math.Min(progress.Value, progress.Maximum);
-                                    myLastUpdatedTime = DateTime.Now;
-                                  });
+      var maximum = (int)progress.Maximum;
+      var value = (int)Math.Min(progress.Value, progress.Maximum);
+
+      if (myValue != value)
+      {
+        myValue = value;
+        myInvocator.InvokeOrQueue("Progress::UpdateProgressValue",
+                                  delegate
+                                    {
+                                      myProgressBar.Maximum = maximum;
+                                      myProgressBar.Value = value;
+                                      myLastUpdatedTime = DateTime.Now;
+                                    });
+      }
     }
 
     private void UpdateProgressText(IProgressInfoLight progress)

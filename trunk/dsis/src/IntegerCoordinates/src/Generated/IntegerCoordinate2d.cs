@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
   [EqualityComparer(typeof(IntegerCoordinate2dEqualityComparer))]
-  public class IntegerCoordinate2d : IIntegerCoordinate
+  public struct IntegerCoordinate2d : IIntegerCoordinate
   {
     public readonly long l1;
     public readonly long l2;
@@ -34,7 +33,6 @@ namespace DSIS.IntegerCoordinates.Generated
     {
       get { return 2; }
     }
-
 
     public override string ToString()
     {

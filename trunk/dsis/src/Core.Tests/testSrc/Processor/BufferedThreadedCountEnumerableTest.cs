@@ -9,7 +9,7 @@ namespace DSIS.Core.Tests.Processor
   [TestFixture]
   public class BufferedThreadedCountEnumerableTest
   {
-    private static CountEnumerable<int> MakeList(int count)
+    private static IEnumerable<int> MakeList(int count)
     {
       var list = new List<int>();
       for (int i = 0; i < count; i++)
@@ -21,7 +21,8 @@ namespace DSIS.Core.Tests.Processor
 
     private static void DoTest(int count, int buffer)
     {
-      var be = new BufferedThreadedCountEnumerable<int>(new Mutex(), MakeList(count), buffer);
+      IEnumerable<int> countEnumerable = MakeList(count);
+      var be = new BufferedThreadedCountEnumerable<int>(new Mutex(), countEnumerable.GetEnumerator(), buffer);
 
       int i = 0;
       foreach (int i1 in be)

@@ -1,9 +1,15 @@
+using System;
 using DSIS.Core.System;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
-  public class IntegerCoordinateSystem : IntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>, IProcessorFactory<IntegerCoordinate>, IEXIntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>
+  public class IntegerCoordinateSystem : 
+    IntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>, 
+    IProcessorFactory<IntegerCoordinate>, 
+    IEXIntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>
   {
+    private readonly IntegerCoordinate NULL = new IntegerCoordinate(-1);
+
     public IntegerCoordinateSystem(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
     }
@@ -20,10 +26,15 @@ namespace DSIS.IntegerCoordinates.Impl
       }
     }
 
+    public bool IsNull(IntegerCoordinate coord)
+    {
+      return coord.myCoordinate[0] < 0;
+    }
+
     public IntegerCoordinate FromPoint(double[] point)
     {
-      if (!SystemSpace.Contains(point))
-        return null;
+      if (!SystemSpace.Contains(point))        
+        return NULL;
 
       var coordinate = new long[myDimension];
       for (int i = 0; i< myDimension; i++)

@@ -21,6 +21,8 @@ namespace DSIS.Generated
       internal readonly double myAreaLeftPointL$it$;    
       internal readonly long mySubdivisionL$it$;
     }$
+    
+    private readonly IntegerCoordinate$Key$ NULL = new IntegerCoordinate$Key$($DimensionIt:{-1}; separator=", "$);
 
     public IntegerCoordinateSystem$Key$(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
@@ -50,7 +52,7 @@ namespace DSIS.Generated
           return ToInternalL$it$(point);
       }$
         default:
-          throw new ArgumentException();
+          throw new ArgumentOutOfRangeException("i");
       }      
     }
 
@@ -74,21 +76,21 @@ namespace DSIS.Generated
           return ToExternalL$it$(pt);
         }$        
         default:
-          throw new ArgumentException();
+          throw new ArgumentOutOfRangeException("i");
       }
     }
     
     public void TopLeftPoint(IntegerCoordinate$Key$ point, double[] output)
     {
       $DimensionIt:{
-		output[$it$] = ToExternalL$it$(point.l$it$);
+         output[$it$] = ToExternalL$it$(point.l$it$);
       }$
     }
 
     public void CenterPoint(IntegerCoordinate$Key$ point, double[] output)
     {
-	  $DimensionIt:{
-		output[$it$] = ToExternalL$it$(point.l$it$) + myCellSizeHalfL$it$;
+      $DimensionIt:{
+        output[$it$] = ToExternalL$it$(point.l$it$) + myCellSizeHalfL$it$;
       }$
     }
 
@@ -127,14 +129,19 @@ namespace DSIS.Generated
       get { return this; }
     }
 
+    public bool IsNull(IntegerCoordinate$Key$ coord)
+    {
+      return coord.l0 < 0;
+    }
+
     public IntegerCoordinate$Key$ FromPoint(double[] point)
     {
       if (!SystemSpace.Contains(point))
-        return null;
-
-	  $DimensionIt:{
-		long l$it$ = ToInternalL$it$(point[$it$]);
-	  }$
+        return NULL;
+      
+      $DimensionIt:{
+        long l$it$ = ToInternalL$it$(point[$it$]);
+      }$
       
       return Create($DimensionIt:{ l$it$ }; separator=","$	);
     }
@@ -182,7 +189,7 @@ namespace DSIS.Generated
   }
 
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer$Key$))]
-  public sealed class IntegerCoordinate$Key$ : IIntegerCoordinate
+  public struct IntegerCoordinate$Key$ : IIntegerCoordinate
   {
     $DimensionIt:{
     public readonly long l$it$;
@@ -218,7 +225,6 @@ namespace DSIS.Generated
       get { return $Dimension$; }
     }
 
-
     public override string ToString()
     {
       return string.Format("[ $DimensionIt:{ {$it$} }; separator=","$ ]", $DimensionIt:{l$it$}; separator=","$);
@@ -231,7 +237,7 @@ namespace DSIS.Generated
 
     public bool Equals(IntegerCoordinate$Key$ x, IntegerCoordinate$Key$ y)
     {
-      return $DimensionIt:{x.l$it$ == y.l$it$};separator="&&"$;      
+      return $DimensionIt:{x.l$it$ == y.l$it$};separator=" && "$;      
     }
 
     public int GetHashCode(IntegerCoordinate$Key$ obj)
@@ -449,9 +455,9 @@ namespace DSIS.Generated
         intersects &= myCoordinateSystem.IntersectsL$it$(myPoint_$it$);
         
         if (!intersects && (myPoint_$it$ < -1 || myPoint_$it$ > myCoordinateSystem.mySubdivisionL$it$ + 1))
-			yield break;
+          yield break;
 		
-		double tmp = v - myCoordinateSystem.ToExternalL$it$(myPoint_$it$);
+		    double tmp = v - myCoordinateSystem.ToExternalL$it$(myPoint_$it$);
         if (tmp < myOLeft$it$)
         {
           myPoint2_$it$ = -1;
@@ -467,7 +473,7 @@ namespace DSIS.Generated
       } }$
             
       if (intersects)
-		yield return myCoordinateSystem.Create($DimensionIt:{myPoint_$it$};separator=", "$);
+        yield return myCoordinateSystem.Create($DimensionIt:{myPoint_$it$};separator=", "$);
       
       if (iter) {
         $BoxIt:{ {
