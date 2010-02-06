@@ -42,6 +42,14 @@ namespace DSIS.Core.System
     IFunction<T> GetFunction<T>(T[] precision);
   }
 
+  /// <summary>
+  /// Marker interface for ISystemInfo to provide preferred system space to be shown
+  /// </summary>
+  public interface ISystemInfoPreferences : ISystemInfo
+  {
+    ISystemSpace PreferredSystemSpace { get; }
+  }
+
   public interface ISplittableSystemInfo
   {
     /// <summary>

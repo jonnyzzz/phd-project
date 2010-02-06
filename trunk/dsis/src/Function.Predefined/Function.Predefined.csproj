@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -96,6 +96,7 @@
     <Compile Include="src\Lorentz\LorenzSystemInfoFactory.cs" />
     <Compile Include="src\OsipenkoBio\Bio.cs" />
     <Compile Include="src\OsipenkoBio\Bio2.cs" />
+    <Compile Include="src\OsipenkoBio\Bio3.cs" />
     <Compile Include="src\Rossel\RosselFactory.cs" />
     <Compile Include="src\Rossel\RosslerParameters.cs" />
     <Compile Include="src\Rossel\RosslerSystemFunction.cs" />

@@ -17,9 +17,9 @@ namespace DSIS.Function.Predefined.OsipenkoBio
       double x = Input[0];
       double y = Input[1];
 
-      var a = 3.5;
-      var b = 1.75;
-      var d = 0.1;
+      const double a = 3.5;
+      const double b = 1.75;
+      const double d = 0.1;
 
       var t = y*(a - b*(x + y))/(1 + d*(x + y));
 

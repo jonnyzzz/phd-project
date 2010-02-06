@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using JetBrains.Annotations;
 
 namespace DSIS.Core.Ioc
 {
@@ -35,7 +36,7 @@ namespace DSIS.Core.Ioc
   /// Marker attribute for types that can be instanciated using
   /// <see cref="ITypeInstantiator"/> intefrace
   /// </summary>
-  [AttributeUsage(AttributeTargets.Class)]
+  [AttributeUsage(AttributeTargets.Class), MeansImplicitUse]
   public class TypeInstanciableAttribute : Attribute
   {
   }

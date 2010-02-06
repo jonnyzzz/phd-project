@@ -93,10 +93,10 @@ namespace DSIS.SimpleRunner
       return new SystemInfoAction(new FoodChainSystemInfo(3.4001, 1, 4), sp3);
     }
 
-    public static SystemInfoAction OsipenkoBio2()
+    public static SystemInfoAction OsipenkoBio3()
     {
-      var sp = new DefaultSystemSpace(2, new[] {0.01, 0}, 2.0.Fill(2), 3L.Fill(2));
-      return new SystemInfoAction(new OsipenkoBio2FunctionSystemInfo(), sp);
+      var sp = new DefaultSystemSpace(2, 0.15.Fill(2), 1.2.Fill(2), 3L.Fill(2));
+      return new SystemInfoAction(new OsipenkoBio3FunctionSystemInfo(sp), sp);
     }
 
     public static SystemInfoAction Delayed(double a)

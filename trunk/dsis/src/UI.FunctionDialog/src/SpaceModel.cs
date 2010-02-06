@@ -12,12 +12,12 @@ namespace DSIS.UI.FunctionDialog
 
     public event EventHandler<EventArgs> OnModelChanged;
     
-    public ICollection<SpaceParametersRowModel> Spaces
+    public IList<SpaceParametersRowModel> Spaces
     {
       get { return mySpaces.AsReadOnly(); }
     }
 
-    public SpaceModel() :this(1)
+    public SpaceModel() : this(1)
     {
     }
 

@@ -20,7 +20,7 @@ namespace DSIS.UI.Application.Actions.Impl
     private IApplicationClass myApp { get; set; }
 
     [Autowire]
-    private SelectSystemInfoProviderWizardFactory Wizard { get; set; }
+    private SelectSystemInfoProviderWizardFactory SystemInfoProviderWizardFactory { get; set; }
 
     [Autowire]
     private IWizardFormPresenter Presenter { get; set; }
@@ -43,7 +43,7 @@ namespace DSIS.UI.Application.Actions.Impl
     {
       LOG.InfoFormat("Show create system dialod");
 
-      var factory = Presenter.ShowWizard(Wizard);
+      var factory = Presenter.ShowWizard(SystemInfoProviderWizardFactory);
       if (!factory.Second)
         return true;
 
@@ -85,8 +85,8 @@ namespace DSIS.UI.Application.Actions.Impl
       if (!title.Second)
         return true;
       
-      myApp.Document = myFactory.CreateNewDocument(title.First.Value, systemInfo, systemSpace);
-      
+
+      myApp.Document = myFactory.CreateNewDocument(title.First.Value, systemInfo, systemSpace);      
       return true;
     }
   }

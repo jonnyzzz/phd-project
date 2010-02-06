@@ -20,7 +20,7 @@
 
     <Message Text="--> @( Files -> '%(FullPath)')" />
 
-    <Exec Command="cmd /c set" />
+    <!--<Exec Command="cmd.exe /c set" /> -->
   </Target>
 
   <Target Name="Tests">
@@ -30,7 +30,7 @@
       />
     </ItemGroup>
 
-    <NUnit Assemblies="%(Tests.FullPath)" NUnitVersion="NUnit-2.5.0" ContinueOnError="True" />
+    <NUnit Assemblies="%(Tests.FullPath)" NUnitVersion="NUnit-2.5.2" ContinueOnError="True" />
 
     <TeamCityProgressMessage Text="Done. {build.status.text}" />
   </Target>
