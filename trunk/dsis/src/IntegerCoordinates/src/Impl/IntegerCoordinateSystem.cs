@@ -1,4 +1,3 @@
-using System;
 using DSIS.Core.System;
 
 namespace DSIS.IntegerCoordinates.Impl
@@ -8,8 +7,6 @@ namespace DSIS.IntegerCoordinates.Impl
     IProcessorFactory<IntegerCoordinate>, 
     IEXIntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>
   {
-    private readonly IntegerCoordinate NULL = new IntegerCoordinate(-1);
-
     public IntegerCoordinateSystem(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
     }
@@ -28,13 +25,13 @@ namespace DSIS.IntegerCoordinates.Impl
 
     public bool IsNull(IntegerCoordinate coord)
     {
-      return coord.myCoordinate[0] < 0;
+      return coord == null;      
     }
 
     public IntegerCoordinate FromPoint(double[] point)
     {
       if (!SystemSpace.Contains(point))        
-        return NULL;
+        return null;
 
       var coordinate = new long[myDimension];
       for (int i = 0; i< myDimension; i++)
@@ -42,6 +39,19 @@ namespace DSIS.IntegerCoordinates.Impl
         coordinate[i] = ToInternal(point[i], i);
       }
       return Create(coordinate);
+    }
+
+    public long ToInternal(double point, int i)
+    {
+      if (point < myAreaLeftPoint[i]) return -1;
+      if (point > myAreaRightPoint[i]) return mySubdivision[i];
+
+      return Ceil((point - myAreaLeftPoint[i]) / myCellSize[i]);
+    }
+
+    public double ToExternal(long pt, int i)
+    {
+      return myAreaLeftPoint[i] + myCellSize[i] * pt;
     }
 
     public int Dimension

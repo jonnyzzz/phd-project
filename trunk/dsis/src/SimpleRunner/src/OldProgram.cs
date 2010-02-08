@@ -118,36 +118,6 @@ namespace DSIS.SimpleRunner
     }
 
 
-    public class LogisticFullBuilder : GeneratedAbstactImageBuilderRunner
-    {
-      private readonly string myPath;
-      private readonly int mySteps;
-      private readonly List<string> myXslt;
-
-      public LogisticFullBuilder(string path, int steps, List<string> xslt)
-      {
-        myPath = path;
-        mySteps = steps;
-        myXslt = xslt;
-      }
-
-      public override AbstractImageBuilder<T, Q> CreateBuilder<T, Q>()
-      {
-        return new LogisticFullBuilder<T, Q>(myPath, mySteps);
-      }
-
-      protected override void ComputationFinished<T, Q>(AbstractImageBuilder<T, Q> builder)
-      {
-        base.ComputationFinished(builder);
-        FullImageBuilderWithLog<T, Q> bld = (FullImageBuilderWithLog<T, Q>)builder;
-        bld.ApplyXSL(myXslt);
-      }
-
-      public void Run()
-      {
-        Run(1);
-      }
-    }
 
     public class LogisticFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
@@ -236,37 +206,6 @@ namespace DSIS.SimpleRunner
         get { return new long[] {2, 2, 2}; }
       }
     }
-
-    public class LorentzRunner : GeneratedAbstactImageBuilderRunner
-    {
-      private readonly string myPath;
-      private readonly int mySteps;
-      private readonly List<string> myXslt;
-
-      public LorentzRunner(string path, int steps, List<string> xslt)
-      {
-        myPath = path;
-        mySteps = steps;
-        myXslt = xslt;
-      }
-
-      public override AbstractImageBuilder<T, Q> CreateBuilder<T, Q>()
-      {
-        return new LorentzFullBuilder<T, Q>(myPath, mySteps);
-      }
-
-      protected override void ComputationFinished<T, Q>(AbstractImageBuilder<T, Q> builder)
-      {
-        base.ComputationFinished(builder);
-        FullImageBuilderWithLog<T, Q> bld = (FullImageBuilderWithLog<T, Q>) builder;
-        bld.ApplyXSL(myXslt);
-      }
-
-      public void Run()
-      {
-        Run(3);
-      }
-    }
     
     public class RosslerFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
@@ -300,39 +239,6 @@ namespace DSIS.SimpleRunner
         get { return new long[] {2, 2, 2}; }
       }
     }
-
-    public class RosselRunner : GeneratedAbstactImageBuilderRunner
-    {
-      private readonly string myPath;
-      private readonly int mySteps;
-      private readonly List<string> myXslt;
-
-      public RosselRunner(string path, int steps, List<string> xslt)
-      {
-        myPath = path;
-        mySteps = steps;
-        myXslt = xslt;
-      }
-
-      public override AbstractImageBuilder<T, Q> CreateBuilder<T, Q>()
-      {
-        return new RosslerFullBuilder<T, Q>(myPath, mySteps);
-      }
-
-      protected override void ComputationFinished<T, Q>(AbstractImageBuilder<T, Q> builder)
-      {
-        base.ComputationFinished(builder);
-        FullImageBuilderWithLog<T, Q> bld = (FullImageBuilderWithLog<T, Q>) builder;
-        bld.ApplyXSL(myXslt);
-      }
-
-      public void Run()
-      {
-        Run(3);
-      }
-    }
-     
-
     
     public class VanDerPolFullBuilder<T, Q> : FullImageBuilderWithLog<T, Q>
       where T : IIntegerCoordinateSystem<Q>
@@ -497,36 +403,6 @@ namespace DSIS.SimpleRunner
       }      
     }
 
-    public class FoodChainRunner : GeneratedAbstactImageBuilderRunner
-    {
-      private readonly string myPath;
-      private readonly int mySteps;
-      private readonly List<string> myXslt;
-
-      public FoodChainRunner(string path, int steps, List<string> xslt)
-      {
-        myPath = path;
-        mySteps = steps;
-        myXslt = xslt;
-      }
-
-      public override AbstractImageBuilder<T, Q> CreateBuilder<T, Q>()
-      {
-        return new FoodChainFullBuilder<T, Q>(myPath, mySteps);
-      }
-
-      protected override void ComputationFinished<T, Q>(AbstractImageBuilder<T, Q> builder)
-      {
-        base.ComputationFinished(builder);
-        FullImageBuilderWithLog<T, Q> bld = (FullImageBuilderWithLog<T, Q>)builder;
-        bld.ApplyXSL(myXslt);
-      }
-
-      public void Run()
-      {
-        Run(3);
-      }
-    }
 
   }
 }

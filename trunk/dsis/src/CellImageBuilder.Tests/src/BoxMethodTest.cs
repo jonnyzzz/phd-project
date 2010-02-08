@@ -1,5 +1,4 @@
 using DSIS.CellImageBuilder.BoxMethod;
-using DSIS.CellImageBuilder.Tests;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 

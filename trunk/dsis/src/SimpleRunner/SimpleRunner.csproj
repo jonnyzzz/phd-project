@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C6473776-929F-4328-B786-C51BB93E8994}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -64,8 +64,6 @@
     <Compile Include="src\DrawLastComputationResultListener.cs" />
     <Compile Include="src\FullImageBuilder.cs" />
     <Compile Include="src\FullImageBuilderWithLog.cs" />
-    <Compile Include="src\GeneratedAbstactImageBuilderRunner.cs" />
-    <Compile Include="src\GeneratedImageBuilderRunner.cs" />
     <Compile Include="src\IAbstractImageBuilderListener.cs" />
     <Compile Include="src\IComputationPathListener.cs" />
     <Compile Include="src\IComputeEntropyListener.cs" />

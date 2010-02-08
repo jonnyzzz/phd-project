@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Tests
@@ -49,7 +46,7 @@ namespace DSIS.IntegerCoordinates.Tests
 
     private static IEnumerable<string> SetLineLen(string s, string sep)
     {
-      var baseSep = "   ";
+      const string baseSep = "   ";
 
       var lines = s.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
       var max = lines.FoldLeft(baseSep.Length, (x, v) => Math.Max(x.Length, v));
@@ -64,7 +61,7 @@ namespace DSIS.IntegerCoordinates.Tests
       return CollectionUtil.Merge(lines1, lines2, (x1, x2) => x1 + x2).JoinString(Environment.NewLine);
     }
 
-    public static void Assert<Q>(IIntegerCoordinateSystem<Q> ics, IList<Q> list, string expected)
+    public static void Assert<Q>(IIntegerCoordinateSystem<Q> ics, IEnumerable<Q> list, string expected)
       where Q : IIntegerCoordinate
     {
       expected = FixTestGold(expected);
@@ -78,9 +75,9 @@ namespace DSIS.IntegerCoordinates.Tests
       {
         Console.Out.WriteLine("TwoCol(s, assert) = {1}{0}",
                               TwoCol(
-                                "Actual: " + Environment.NewLine + actual,
-                                "Expected: " + Environment.NewLine + expected), 
-                                Environment.NewLine);
+                                      "Actual: " + Environment.NewLine + actual,
+                                      "Expected: " + Environment.NewLine + expected),
+                              Environment.NewLine);
 
         Console.Out.WriteLine("-----");
         Console.Out.WriteLine(actual);
@@ -88,24 +85,6 @@ namespace DSIS.IntegerCoordinates.Tests
         Console.Out.WriteLine(expected);
 
         throw;
-      }
-    }
-
-    public static void AssertResource(IntegerCoordinateSystem ics, IList<IntegerCoordinate> list, string resource)
-    {
-      string s = Write(ics, list);
-      try
-      {
-        using (
-          var sr =
-            new StreamReader(Assembly.GetCallingAssembly().GetManifestResourceStream(resource), Encoding.UTF8))
-        {
-          NUnit.Framework.Assert.AreEqual(sr.ReadToEnd(), s);
-        }
-      }
-      catch
-      {
-        Console.Out.WriteLine(s);
       }
     }
   }

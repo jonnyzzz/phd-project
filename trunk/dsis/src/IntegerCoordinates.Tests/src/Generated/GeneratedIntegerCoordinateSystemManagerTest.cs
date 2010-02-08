@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using DSIS.CodeCompiler;
 using DSIS.IntegerCoordinates.Generated;
@@ -27,18 +28,50 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
     {
       for (int i = 1; i < 10; i++)
       {
-        var v = myManager.CreateSystem(i);
+        var v = myManager.CreateSystem(i, "short");
+        Console.Out.WriteLine("v.GetType() = {0}", v.GetType());        
+
+        v = myManager.CreateSystem(i, "int");
+        Console.Out.WriteLine("v.GetType() = {0}", v.GetType());        
+
+        v = myManager.CreateSystem(i, "long");
         Console.Out.WriteLine("v.GetType() = {0}", v.GetType());        
       }
     }
 
     [Test]
-    public void Test_Identity()
+    public void Test_Identity_long()
     {
       for(int i = 1; i<10; i++)
       {
-        IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i);
+        IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i, "long");
+        IIntegerCoordinateSystem info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000L,i)), Fill(10000000L, i));
+
+        Assert.That(info.IsGenerated, Is.True);
+        info.DoGeneric(new DoWithCoordunates_Identity());
+      }
+    }
+
+    [Test]
+    public void Test_Identity_int()
+    {
+      for(int i = 1; i<10; i++)
+      {
+        IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i, "int");
         IIntegerCoordinateSystem info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000L,i)), Fill(100000L, i));
+
+        Assert.That(info.IsGenerated, Is.True);
+        info.DoGeneric(new DoWithCoordunates_Identity());
+      }
+    }
+
+    [Test]
+    public void Test_Identity_short()
+    {
+      for(int i = 1; i<10; i++)
+      {
+        IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i, "short");
+        IIntegerCoordinateSystem info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000L,i)), Fill(1000L, i));
 
         Assert.That(info.IsGenerated, Is.True);
         info.DoGeneric(new DoWithCoordunates_Identity());
@@ -60,11 +93,35 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
     }
 
     [Test]
-    public void Test_Subdivision()
+    public void Test_Subdivision_short()
     {
       for (int i = 1; i < 10; i++)
       {
-        IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i);
+        IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i, "short");
+        IIntegerCoordinateSystem info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000L, i)), Fill(1000L, i));
+
+        info.DoGeneric(new DoWithCoordunates_Subdivision());
+      }
+    }
+
+    [Test]
+    public void Test_Subdivision_int()
+    {
+      for (int i = 1; i < 10; i++)
+      {
+        IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i, "int");
+        IIntegerCoordinateSystem info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000L, i)), Fill(100000L, i));
+
+        info.DoGeneric(new DoWithCoordunates_Subdivision());
+      }
+    }
+
+    [Test]
+    public void Test_Subdivision_long()
+    {
+      for (int i = 1; i < 10; i++)
+      {
+        IIntegerCoordinateFactoryEx system = myManager.CreateSystem(i, "long");
         IIntegerCoordinateSystem info = system.Create(new MockSystemSpace(i, Fill(0.0, i), Fill(1.0, i), Fill(1000L, i)), Fill(100000L, i));
 
         info.DoGeneric(new DoWithCoordunates_Subdivision());
@@ -80,8 +137,8 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
         Assert.IsTrue(!div.GetType().IsGenericType);
 
         var x = system.Create(100L.Fill(system.Dimension));
-        var set = new Hashset<Q>(EqualityComparerFactory<Q>.GetComparer());
-        set.AddRange(div.Subdivide(x));
+        var set = new HashSet<Q>(EqualityComparerFactory<Q>.GetComparer());
+        set.UnionWith(div.Subdivide(x));
 
         Assert.IsTrue(set.Contains(((T)div.ToSystem).Create(200L.Fill(system.Dimension))));
         Assert.IsTrue(set.Contains(((T)div.ToSystem).Create(201L.Fill(system.Dimension))));
@@ -99,10 +156,14 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
     }
 
 
-    [Test]
-    public void Test_Dimension1()
+    [Test] public void Test_Dimension1_long() { Do_Dimension1("long");}
+    [Test] public void Test_Dimension1_int() { Do_Dimension1("int");}
+    [Test] public void Test_Dimension1_short() { Do_Dimension1("short");}
+
+      
+    private void Do_Dimension1(string type)
     {
-      IIntegerCoordinateFactoryEx system = myManager.CreateSystem(1);
+      IIntegerCoordinateFactoryEx system = myManager.CreateSystem(1, type);
 
       ICodeCompiler compiler = CodeCompiler.CodeCompiler.CreateCompiler();
       Assembly ass = compiler.CompileCSharpCode(string.Format(
@@ -133,10 +194,13 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
       NUnitFixtureHelper.RunTests(ass);
     }
 
-    [Test]
-    public void Test_Dimension2()
+    [Test] public void Test_Dimension2_long() { Do_Dimension2("long");}
+    [Test] public void Test_Dimension2_int() { Do_Dimension2("int");}
+    [Test] public void Test_Dimension2_short() { Do_Dimension2("short");}
+
+    private void Do_Dimension2(string type)
     {
-      IIntegerCoordinateFactoryEx system = myManager.CreateSystem(2);
+      IIntegerCoordinateFactoryEx system = myManager.CreateSystem(2, type);
 
       ICodeCompiler compiler = CodeCompiler.CodeCompiler.CreateCompiler();
       Assembly ass = compiler.CompileCSharpCode(string.Format(

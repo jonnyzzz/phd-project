@@ -28,8 +28,6 @@ namespace DSIS.CellImageBuilder.BoxMethod
     private IBoxIterator<double> myIterator;
     private IRectProcessor<Q> myProcessor;
 
-    
-
     private double[] myCellSize;
     private double[] myCellSizeHalf;
 

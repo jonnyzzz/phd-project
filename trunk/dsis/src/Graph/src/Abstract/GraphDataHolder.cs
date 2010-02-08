@@ -1,6 +1,5 @@
 using System;
 using DSIS.Core.Coordinates;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
@@ -52,13 +51,11 @@ namespace DSIS.Graph.Abstract
       {
         node.UserData = null;
       }      
-      GCHelper.Collect();
     }
 
     public void Dispose()
     {
       CleanAll();
-      GCHelper.Collect();
       myGraph.DisposeDataHolder(this);
     }
 

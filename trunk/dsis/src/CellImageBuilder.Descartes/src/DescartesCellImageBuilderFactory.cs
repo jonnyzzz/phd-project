@@ -43,7 +43,8 @@ namespace DSIS.CellImageBuilder.Descartes
     {
       var len = to - from;
 
-      var slice = IcsGenerator.CreateSystem(len);
+      //TODO:!
+      var slice = IcsGenerator.CreateSystem(len, "long");
 
       return Pair.Of(slice, BuildDescriptors(id, slice, from, to));
     }

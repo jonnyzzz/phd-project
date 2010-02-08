@@ -18,24 +18,26 @@ namespace DSIS.Generated
     $DimensionIt:{
       internal readonly double myCellSizeHalfL$it$;
       internal readonly double myCellSizeL$it$;    
-      internal readonly double myAreaLeftPointL$it$;    
-      internal readonly long mySubdivisionL$it$;
+      internal readonly double myAreaLeftPointL$it$;
+      internal readonly double myAreaRightPointL$it$;
+      internal readonly $JInt$ mySubdivisionL$it$;
+      internal readonly $JInt$ mySubdivisionMinusOneL$it$;
     }$
     
-    private readonly IntegerCoordinate$Key$ NULL = new IntegerCoordinate$Key$($DimensionIt:{-1}; separator=", "$);
-
     public IntegerCoordinateSystem$Key$(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
-      $DimensionIt:{
-		myCellSizeL$it$ = myCellSize[$it$];
+      $DimensionIt:{        
+        myCellSizeL$it$ = myCellSize[$it$];
         myCellSizeHalfL$it$ = myCellSizeHalf[$it$];        
         myAreaLeftPointL$it$ = myAreaLeftPoint[$it$];      
-        mySubdivisionL$it$ = mySubdivision[$it$];
+        myAreaRightPointL$it$ = systemSpace.AreaRightPoint[$it$];      
+        mySubdivisionL$it$ = ($JInt$)mySubdivision[$it$];
+        mySubdivisionMinusOneL$it$ = ($JInt$)(mySubdivision[$it$] - 1);
       }$      
     }
 
     public IntegerCoordinateSystem$Key$(ISystemSpace systemSpace) : this(systemSpace, systemSpace.InitialSubdivision)
-    {
+    { 
     }
 
     public bool IsGenerated 
@@ -43,7 +45,7 @@ namespace DSIS.Generated
       get { return true; }
     }
 
-    public new long ToInternal(double point, int i)
+    public long ToInternal(double point, int i)
     {
       switch(i)
       {
@@ -57,11 +59,19 @@ namespace DSIS.Generated
     }
 
 	$DimensionIt:{
-    internal long ToInternalL$it$(double point)
+    internal $JInt$ ToInternalL$it$(double point)
     {
-      return Ceil((point - myAreaLeftPointL$it$)/ myCellSizeL$it$);
+      if (point < myAreaLeftPointL$it$) {
+        return -1;
+      }
+      if (point > myAreaRightPointL$it$) {
+        return mySubdivisionL$it$;
+      }  
+        
+      return ($JInt$)((point - myAreaLeftPointL$it$)/ myCellSizeL$it$);
     }
-    internal double ToExternalL$it$(long pt)
+    
+    internal double ToExternalL$it$($JInt$ pt)
     {
       return myAreaLeftPointL$it$ + myCellSizeL$it$ * pt;
     }
@@ -73,7 +83,7 @@ namespace DSIS.Generated
       {
         $DimensionIt:{
         case $it$:
-          return ToExternalL$it$(pt);
+          return ToExternalL$it$(($JInt$)pt);
         }$        
         default:
           throw new ArgumentOutOfRangeException("i");
@@ -95,7 +105,7 @@ namespace DSIS.Generated
     }
 
 	$DimensionIt:{
-    internal bool IntersectsL$it$(long l)
+    internal bool IntersectsL$it$($JInt$ l)
     {      
       return l >= 0 && l < mySubdivisionL$it$;     
     }
@@ -107,7 +117,7 @@ namespace DSIS.Generated
       {
         $DimensionIt:{
         case $it$:
-          return IntersectsL$it$(l);
+          return IntersectsL$it$(($JInt$)l);
         }$
         default:
           return false;
@@ -116,10 +126,10 @@ namespace DSIS.Generated
 
     public IntegerCoordinate$Key$ Create(params long[] param)
     {
-      return new IntegerCoordinate$Key$($DimensionIt:{ param[$it$] }; separator=","$);
+      return new IntegerCoordinate$Key$($DimensionIt:{ ($JInt$)param[$it$] }; separator=","$);
     }
 
-    public IntegerCoordinate$Key$ Create($DimensionIt:{ long l$it$ }; separator=","$)
+    public IntegerCoordinate$Key$ Create($DimensionIt:{ $JInt$ l$it$ }; separator=","$)
     {
       return new IntegerCoordinate$Key$($DimensionIt:{ l$it$ }; separator=","$);        
     }
@@ -131,16 +141,16 @@ namespace DSIS.Generated
 
     public bool IsNull(IntegerCoordinate$Key$ coord)
     {
-      return coord.l0 < 0;
+      return coord == null;
     }
 
     public IntegerCoordinate$Key$ FromPoint(double[] point)
     {
       if (!SystemSpace.Contains(point))
-        return NULL;
+        return null;
       
       $DimensionIt:{
-        long l$it$ = ToInternalL$it$(point[$it$]);
+        $JInt$ l$it$ = ToInternalL$it$(point[$it$]);
       }$
       
       return Create($DimensionIt:{ l$it$ }; separator=","$	);
@@ -189,13 +199,13 @@ namespace DSIS.Generated
   }
 
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer$Key$))]
-  public struct IntegerCoordinate$Key$ : IIntegerCoordinate
+  public class IntegerCoordinate$Key$ : IIntegerCoordinate
   {
     $DimensionIt:{
-    public readonly long l$it$;
+    public readonly $JInt$ l$it$;
     }$
 
-    public IntegerCoordinate$Key$($DimensionIt:{long l$it$}; separator=","$)
+    public IntegerCoordinate$Key$($DimensionIt:{$JInt$ l$it$}; separator=","$)
     {
       $DimensionIt:{
         this.l$it$ = l$it$;
@@ -248,13 +258,6 @@ namespace DSIS.Generated
     
   public sealed class IntegerCoordinateSystemFactory$Key$ : IIntegerCoordinateFactoryEx, IIntegerCoordinateFactory<IntegerCoordinateSystem$Key$, IntegerCoordinate$Key$>
   {    
-    public void WithIntegerCoordinateSystem(IIntegerCoordinateCallback cb)
-    {
-      cb.Do<IntegerCoordinateSystem$Key$, IntegerCoordinate$Key$>(
-        delegate(ISystemSpace ss, long[] subd) { return new IntegerCoordinateSystem$Key$(ss,subd);
-        });
-    }
-
     public Type System
     {
       get { return typeof(IntegerCoordinateSystem$Key$); }
@@ -338,27 +341,29 @@ namespace DSIS.Generated
   }
   
   public class RectProcessorBase$Key$
-  {
-    $DimensionIt:{
-    protected long myLeft$it$;
-    protected long myRight$it$;
-    }$
-        
+  {        
     protected readonly IntegerCoordinateSystem$Key$ myCoordinateSystem;
     protected readonly ISystemSpace mySystemSpace;
+    
+    $DimensionIt:{
+      protected readonly $JInt$ mySubdivisionMinusOneL$it$;
+    }$
 
     public RectProcessorBase$Key$(IntegerCoordinateSystem$Key$ coordinateSystem)
     {
       myCoordinateSystem = coordinateSystem;
-      mySystemSpace = myCoordinateSystem.SystemSpace;            
+      mySystemSpace = myCoordinateSystem.SystemSpace;     
+      $DimensionIt:{
+        mySubdivisionMinusOneL$it$ = myCoordinateSystem.mySubdivisionMinusOneL$it$;
+      }$      
     }
 
-    protected IEnumerable<IntegerCoordinate$Key$> Enumerate()
+    protected IEnumerable<IntegerCoordinate$Key$> Enumerate($DimensionIt:{$JInt$ myLeft$it$, $JInt$ myRight$it$}; separator=", "$) 
     {             
-	  $DimensionIt:{
-		for(long myPoint$it$=myLeft$it$; myPoint$it$ <= myRight$it$; myPoint$it$++)
+	    $DimensionIt:{
+        for($JInt$ myPoint$it$=myLeft$it$; myPoint$it$ <= myRight$it$; myPoint$it$++)
       }$
-		yield return myCoordinateSystem.Create($DimensionIt:{myPoint$it$};separator=", "$);        
+          yield return myCoordinateSystem.Create($DimensionIt:{myPoint$it$};separator=", "$);        
     }
   }
   
@@ -381,16 +386,16 @@ namespace DSIS.Generated
         return EmptyArray<IntegerCoordinate$Key$>.Instance;
 
       $DimensionIt:{      
-        myLeft$it$ = myCoordinateSystem.ToInternalL$it$(left[$it$] - myEps$it$);
+        $JInt$ myLeft$it$ = myCoordinateSystem.ToInternalL$it$(left[$it$] - myEps$it$);
         if (myLeft$it$ < 0)
           myLeft$it$ = 0;
 
-        myRight$it$ = myCoordinateSystem.ToInternalL$it$(right[$it$] + myEps$it$);
-        if (myRight$it$ > myCoordinateSystem.mySubdivisionL$it$)
-          myRight$it$ = myCoordinateSystem.mySubdivisionL$it$ - 1;
+        $JInt$ myRight$it$ = myCoordinateSystem.ToInternalL$it$(right[$it$] + myEps$it$);
+        if (myRight$it$ > mySubdivisionMinusOneL$it$)
+          myRight$it$ = mySubdivisionMinusOneL$it$;
       }$
 
-      return Enumerate();
+      return Enumerate($DimensionIt:{myLeft$it$, myRight$it$}; separator=", "$);
     }
   }
   
@@ -406,16 +411,16 @@ namespace DSIS.Generated
         return EmptyArray<IntegerCoordinate$Key$>.Instance;
 
       $DimensionIt:{
-        myLeft$it$ = myCoordinateSystem.ToInternalL$it$(point[$it$] - radius[$it$]);
+        $JInt$ myLeft$it$ = myCoordinateSystem.ToInternalL$it$(point[$it$] - radius[$it$]);
         if (myLeft$it$ < 0)
           myLeft$it$ = 0;
 
-        myRight$it$ = myCoordinateSystem.ToInternalL$it$(point[$it$] + radius[$it$]);
-        if (myRight$it$ > myCoordinateSystem.mySubdivisionL$it$)
-          myRight$it$ = myCoordinateSystem.mySubdivisionL$it$ - 1;
+        $JInt$ myRight$it$ = myCoordinateSystem.ToInternalL$it$(point[$it$] + radius[$it$]);
+        if (myRight$it$ > mySubdivisionMinusOneL$it$)
+          myRight$it$ = mySubdivisionMinusOneL$it$;
       }$
 
-      return Enumerate();
+      return Enumerate($DimensionIt:{myLeft$it$, myRight$it$}; separator=", "$);
     }
   }
   
@@ -424,10 +429,10 @@ namespace DSIS.Generated
   {
     private readonly IntegerCoordinateSystem$Key$ myCoordinateSystem;
     $DimensionIt:{
-    private long myPoint_$it$;
-    private long myPoint2_$it$;    
-    private long myZeros$it$;
-    private long myOnes$it$;
+    private $JInt$ myPoint_$it$;
+    private $JInt$ myPoint2_$it$;    
+    private $JInt$ myZeros$it$;
+    private $JInt$ myOnes$it$;
     private double myOLeft$it$;
     private double myORight$it$;
     }$

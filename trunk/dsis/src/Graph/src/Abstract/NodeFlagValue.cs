@@ -28,8 +28,7 @@ namespace DSIS.Graph.Abstract
 
     public void SetComponentId(uint componentId)
     {
-      myFlags = (componentId & NodeFlags._MASK.Flag) +
-                (myFlags & ~NodeFlags._MASK.Flag);
+      myFlags = (componentId & NodeFlags._MASK.Flag) | (myFlags & ~NodeFlags._MASK.Flag);
     }
   }
 }

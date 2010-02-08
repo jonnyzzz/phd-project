@@ -3,9 +3,8 @@ using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
-  //todo: Why class? struct is cheaper for memory
   [EqualityComparer(typeof (IntegerCoordinateEqualityComparer))]
-  public struct IntegerCoordinate : IIntegerCoordinate
+  public class IntegerCoordinate : IIntegerCoordinate
   {
     public readonly long[] myCoordinate;
 

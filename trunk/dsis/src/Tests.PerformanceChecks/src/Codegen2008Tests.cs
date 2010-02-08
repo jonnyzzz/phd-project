@@ -33,15 +33,15 @@ namespace DSIS.PerformanceChecks
     public void Test_LongVsDouble()
     {
       Console.Out.WriteLine("long:{0}\r\ndouble:{1}",
-                            Marshal.SizeOf(typeof (long)),
-                            Marshal.SizeOf(typeof (double)));      
+                            Marshal.SizeOf(typeof(long)),
+                            Marshal.SizeOf(typeof(double)));
     }
 
     private static ISystemSpace create2d()
     {
       return new DefaultSystemSpace(2, 0.0.Fill(2), 1.0.Fill(2), 1000L.Fill(2));
     }
-    
+
     private static ISystemSpace create3d()
     {
       return new DefaultSystemSpace(3, 0.0.Fill(3), 1.0.Fill(3), 50L.Fill(3));
@@ -72,8 +72,8 @@ namespace DSIS.PerformanceChecks
       }
     }
 
-    private void DoTest<T,Q>(string name, T system, DAction<T,Q> action) 
-      where T : IIntegerCoordinateSystem<Q> 
+    private void DoTest<T, Q>(string name, T system, DAction<T, Q> action)
+      where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate
     {
       var points = new List<double[]>();
@@ -102,8 +102,8 @@ namespace DSIS.PerformanceChecks
         totalMem += GC.GetTotalMemory(true) - mem;
         Console.Out.WriteLine("x = {0}", xx.ToString().Substring(0, 1));
       }
-      
-      WriteList("{0}- Time={1}ms", name, totalTime.TotalMilliseconds/TIMES);
+
+      WriteList("{0}- Time={1}ms", name, totalTime.TotalMilliseconds / TIMES);
       WriteList("{0}- Memory={1}mb", name, totalMem / 1024.0 / 1024.0 / TIMES);
     }
 
@@ -118,19 +118,21 @@ namespace DSIS.PerformanceChecks
         myName = name;
       }
 
-      public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate
+      public void Do<T, Q>(T system)
+        where T : IIntegerCoordinateSystem<Q>
+        where Q : IIntegerCoordinate
       {
         Console.Out.WriteLine("---------------------------");
-        myInstance.DoTest<T,Q>("point(1)" + myName, system, (x, cs) => RunPointProcessor(x, x.ProcessorFactory.CreatePointProcessor(), cs));
+        myInstance.DoTest<T, Q>("point(1)" + myName, system, (x, cs) => RunPointProcessor(x, x.ProcessorFactory.CreatePointProcessor(), cs));
         Console.Out.WriteLine("---------------------------");
-        myInstance.DoTest<T,Q>("point(2)" + myName, system, (x, cs) => RunPointProcessor2(x, x.ProcessorFactory.CreatePointProcessor(), cs));
+        myInstance.DoTest<T, Q>("point(2)" + myName, system, (x, cs) => RunPointProcessor2(x, x.ProcessorFactory.CreatePointProcessor(), cs));
         Console.Out.WriteLine("---------------------------"); Console.Out.WriteLine("---------------------------");
-        myInstance.DoTest<T,Q>("overlap(1)" + myName, system, (x, cs) => RunPointProcessor(x, x.ProcessorFactory.CreateOverlapedPointProcessor(0.2), cs));
+        myInstance.DoTest<T, Q>("overlap(1)" + myName, system, (x, cs) => RunPointProcessor(x, x.ProcessorFactory.CreateOverlapedPointProcessor(0.2), cs));
         Console.Out.WriteLine("---------------------------");
         myInstance.DoTest<T, Q>("overlap(2)" + myName, system, (x, cs) => RunPointProcessor2(x, x.ProcessorFactory.CreateOverlapedPointProcessor(0.2), cs));
         Console.Out.WriteLine("---------------------------");
       }
-      
+
       private static object RunPointProcessor<T, Q>(T system, IPointProcessor<Q> proc, IEnumerable<double[]> cells)
         where T : IIntegerCoordinateSystem<Q>
         where Q : IIntegerCoordinate
@@ -162,12 +164,14 @@ namespace DSIS.PerformanceChecks
         myName = name;
       }
 
-      public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate
+      public void Do<T, Q>(T system)
+        where T : IIntegerCoordinateSystem<Q>
+        where Q : IIntegerCoordinate
       {
         Console.Out.WriteLine("---------------------------");
-        myInstance.DoTest<T,Q>("radius(1)" + myName, system, (x, cs) => RunPointProcessor(x, x.ProcessorFactory.CreateRadiusProcessor(), cs));        
+        myInstance.DoTest<T, Q>("radius(1)" + myName, system, (x, cs) => RunPointProcessor(x, x.ProcessorFactory.CreateRadiusProcessor(), cs));
       }
-      
+
       private static object RunPointProcessor<T, Q>(T system, IRadiusProcessor<Q> proc, IEnumerable<double[]> cells)
         where T : IIntegerCoordinateSystem<Q>
         where Q : IIntegerCoordinate
@@ -194,12 +198,14 @@ namespace DSIS.PerformanceChecks
         myName = name;
       }
 
-      public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate
+      public void Do<T, Q>(T system)
+        where T : IIntegerCoordinateSystem<Q>
+        where Q : IIntegerCoordinate
       {
         Console.Out.WriteLine("---------------------------");
-        myInstance.DoTest<T,Q>("rect(1)" + myName, system, (x, cs) => RunPointProcessor(x, x.ProcessorFactory.CreateRectProcessor(0.2), cs));        
+        myInstance.DoTest<T, Q>("rect(1)" + myName, system, (x, cs) => RunPointProcessor(x, x.ProcessorFactory.CreateRectProcessor(0.2), cs));
       }
-      
+
       private static object RunPointProcessor<T, Q>(T system, IRectProcessor<Q> proc, IEnumerable<double[]> cells)
         where T : IIntegerCoordinateSystem<Q>
         where Q : IIntegerCoordinate
@@ -212,55 +218,74 @@ namespace DSIS.PerformanceChecks
         {
           var right = new double[cell.Length];
           for (int i = 0; i < cell.Length; i++)
-            right[i] = cell[i] + 1.345*radius[i];
+            right[i] = cell[i] + 1.345 * radius[i];
 
-            list.AddRange(proc.ConnectCellToRect(cell, right));
+          list.AddRange(proc.ConnectCellToRect(cell, right));
         }
         return list;
       }
     }
 
     [Test]
-    public void Test_PointBuilder_2()
+    public void Test_PointBuilder_2_long() { doTest2("long"); }
+    [Test]
+    public void Test_PointBuilder_2_int() { doTest2("int"); }
+    [Test]
+    public void Test_PointBuilder_2_short() { doTest2("short"); }
+
+    private void doTest2(string type)
     {
       var sys = new IntegerCoordinateSystem(create2d());
-      var gSys = myGManager.CreateSystem(2).Create(create2d(), create2d().InitialSubdivision);
+      var gSys = myGManager.CreateSystem(2, type).Create(create2d(), create2d().InitialSubdivision);
 
-//      sys.DoGeneric(new WithICS(this, "Array-2"));
-//      sys.DoGeneric(new WithICS2(this, "Array-2"));
+      //      sys.DoGeneric(new WithICS(this, "Array-2"));
+      //      sys.DoGeneric(new WithICS2(this, "Array-2"));
       sys.DoGeneric(new WithICS3(this, "Array-2"));
-//      gSys.DoGeneric(new WithICS(this, "Gen-2"));
-//      gSys.DoGeneric(new WithICS2(this, "Gen-2"));
+      //      gSys.DoGeneric(new WithICS(this, "Gen-2"));
+      //      gSys.DoGeneric(new WithICS2(this, "Gen-2"));
       gSys.DoGeneric(new WithICS3(this, "Gen-2"));
     }
 
     [Test]
-    public void Test_PointBuilder_3()
+    public void Test_PointBuilder_3_long() { doTest3("long"); }
+    [Test]
+    public void Test_PointBuilder_3_int() { doTest3("int"); }
+    [Test]
+    public void Test_PointBuilder_3_short() { doTest3("short"); }
+
+    private void doTest3(string type)
     {
       var sys = new IntegerCoordinateSystem(create3d());
-      var gSys = myGManager.CreateSystem(3).Create(create3d(), create3d().InitialSubdivision);
+      var gSys = myGManager.CreateSystem(3, type).Create(create3d(), create3d().InitialSubdivision);
 
-//      sys.DoGeneric(new WithICS(this, "Array-3"));
-//      sys.DoGeneric(new WithICS2(this, "Array-3"));
+      //      sys.DoGeneric(new WithICS(this, "Array-3"));
+      //      sys.DoGeneric(new WithICS2(this, "Array-3"));
       sys.DoGeneric(new WithICS3(this, "Array-3"));
-//      gSys.DoGeneric(new WithICS(this, "Gen-3"));
-//      gSys.DoGeneric(new WithICS2(this, "Gen-3"));
+      //      gSys.DoGeneric(new WithICS(this, "Gen-3"));
+      //      gSys.DoGeneric(new WithICS2(this, "Gen-3"));
       gSys.DoGeneric(new WithICS3(this, "Gen-3"));
     }
-    
-    [Test]
-    public void Test_PointBuilder_4()
-    {
-      var sys = new IntegerCoordinateSystem(create4d());
-      var gSys = myGManager.CreateSystem(4).Create(create4d(), create4d().InitialSubdivision);
 
-      sys.DoGeneric(new WithICS(this, "Array-4"));
-      sys.DoGeneric(new WithICS2(this, "Array-4"));
-      sys.DoGeneric(new WithICS3(this, "Array-4"));
-      gSys.DoGeneric(new WithICS(this, "Gen-4"));
-      gSys.DoGeneric(new WithICS2(this, "Gen-4"));
-      gSys.DoGeneric(new WithICS3(this, "Gen-4"));
+    [Test]
+    public void Test_PointBuilder_4_long() { doTest4("long"); }
+    [Test]
+    public void Test_PointBuilder_4_int() { doTest4("int"); }
+    [Test]
+    public void Test_PointBuilder_4_short() { doTest4("short"); }
+
+    private void doTest4(string type)
+    {
+      {
+        var sys = new IntegerCoordinateSystem(create4d());
+        var gSys = myGManager.CreateSystem(4, type).Create(create4d(), create4d().InitialSubdivision);
+
+        sys.DoGeneric(new WithICS(this, "Array-4"));
+        sys.DoGeneric(new WithICS2(this, "Array-4"));
+        sys.DoGeneric(new WithICS3(this, "Array-4"));
+        gSys.DoGeneric(new WithICS(this, "Gen-4"));
+        gSys.DoGeneric(new WithICS2(this, "Gen-4"));
+        gSys.DoGeneric(new WithICS3(this, "Gen-4"));
+      }
     }
-    
   }
 }

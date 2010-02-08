@@ -1,4 +1,3 @@
-using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.IntegerCoordinates;
@@ -17,13 +16,13 @@ namespace DSIS.Persistance.Tests
     [SetUp]
     public void SetUp()
     {
+      var codeCompiler = CodeCompiler.CodeCompiler.CreateCompiler();
+
       myManager =
         new IntegerCoordinatePersistance(
           new DefaultSystemSpacePersistance(),
-          myFactory = new GeneratedIntegerCoordinateSystemManager(
-            CodeCompiler.CodeCompiler.CreateCompiler())
-          );
-        new GeneratedIntegerCoordinateSystemManager(CodeCompiler.CodeCompiler.CreateCompiler());
+          new GeneratedIntegerCoordinateFactory(myFactory = new GeneratedIntegerCoordinateSystemManager(codeCompiler)))
+      ;
     }
 
     [TearDown]
@@ -52,7 +51,17 @@ namespace DSIS.Persistance.Tests
 
     private void DoTest(ISystemSpace space)
     {
-      var o = myFactory.CreateSystem(space.Dimension).Create(space, space.InitialSubdivision);
+      var o = myFactory.CreateSystem(space.Dimension, "int").Create(space, space.InitialSubdivision);
+      DoTest(o, (w, x) => myManager.Save(x, w),
+             r => myManager.Load(r),
+             Assert.AreEqual);
+
+      o = myFactory.CreateSystem(space.Dimension, "short").Create(space, space.InitialSubdivision);
+      DoTest(o, (w, x) => myManager.Save(x, w),
+             r => myManager.Load(r),
+             Assert.AreEqual);
+
+      o = myFactory.CreateSystem(space.Dimension, "long").Create(space, space.InitialSubdivision);
       DoTest(o, (w, x) => myManager.Save(x, w),
              r => myManager.Load(r),
              Assert.AreEqual);

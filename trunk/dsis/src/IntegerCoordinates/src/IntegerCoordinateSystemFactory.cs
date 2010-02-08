@@ -5,6 +5,14 @@ using DSIS.IntegerCoordinates.Impl;
 
 namespace DSIS.IntegerCoordinates
 {
+  public class IntegerCoordinateSystemFactoryImpl : IIntegerCoordinateFactory
+  {
+    public IIntegerCoordinateSystem Create(ISystemSpace space, long[] subd)
+    {
+      return new IntegerCoordinateSystem(space, subd);
+    }
+  }
+
   public static class IntegerCoordinateSystemFactory
   {
     public static IIntegerCoordinateSystem<IntegerCoordinate> Create(ISystemSpace systemSpace, long[] subdivision)
@@ -16,7 +24,6 @@ namespace DSIS.IntegerCoordinates
     {
       return new IntegerCoordinateSystem(systemSpace);
     }
-
 
     public static T CreateCoordinateSystem<T, Q>(ISystemSpace ss)
       where T : IIntegerCoordinateSystem<Q>

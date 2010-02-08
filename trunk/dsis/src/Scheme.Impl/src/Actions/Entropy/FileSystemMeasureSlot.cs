@@ -24,7 +24,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
           new IntegerCoordinatePersistanceProxy(
             new IntegerCoordinatePersistance(
               new DefaultSystemSpacePersistance(),
-              GeneratedIntegerCoordinateSystemManager.Instance))
+              new GeneratedIntegerCoordinateFactory(GeneratedIntegerCoordinateSystemManager.Instance)))
           )
         );
       var myPresistanceFactory = new PersistanceFactory();

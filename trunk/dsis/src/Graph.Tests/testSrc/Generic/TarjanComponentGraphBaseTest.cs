@@ -92,8 +92,8 @@ namespace DSIS.Graph.Tests.Generic
                  ((IGraph<Q>)myGraph).AddEdgeToNode(n1, n2);
                  ((IGraph<Q>)myGraph).AddEdgeToNode(n2, n1);
                  ComputeComponents();
-                 Assert.AreEqual(1, myComponents.ComponentCount);
-                 Assert.AreEqual(2, OneComponent[0].NodesCount);
+                 Assert.AreEqual(1, myComponents.ComponentCount, "Component count was wrong");
+                 Assert.AreEqual(2, OneComponent[0].NodesCount, "Nodes in component was wrong");
                });
     }
 

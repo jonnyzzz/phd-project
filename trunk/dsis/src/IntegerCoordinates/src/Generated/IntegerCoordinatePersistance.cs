@@ -9,9 +9,9 @@ namespace DSIS.IntegerCoordinates.Generated
   public class IntegerCoordinatePersistance : IPersistance<IIntegerCoordinateSystem>
   {
     private readonly IPersistance<ISystemSpace> mySpacePersistance;
-    private readonly GeneratedIntegerCoordinateSystemManager myManager;
+    private readonly GeneratedIntegerCoordinateFactory myManager;
 
-    public IntegerCoordinatePersistance(IPersistance<ISystemSpace> spacePersistance, GeneratedIntegerCoordinateSystemManager manager)
+    public IntegerCoordinatePersistance(IPersistance<ISystemSpace> spacePersistance, GeneratedIntegerCoordinateFactory manager)
     {
       mySpacePersistance = spacePersistance;
       myManager = manager;
@@ -27,12 +27,11 @@ namespace DSIS.IntegerCoordinates.Generated
       if (SerializeKey() != reader.ReadString())
         throw new ArgumentException("Failed to load. String token was not found");
 
-      int dim = reader.ReadInt();
-
-      IIntegerCoordinateFactoryEx factory = myManager.CreateSystem(dim);
+      //This is for compatibility
+      reader.ReadInt();
 
       var space = mySpacePersistance.Load(reader);
-      return factory.Create(space, space.InitialSubdivision);
+      return myManager.Create(space, space.InitialSubdivision);
     }
 
     public void Save(IIntegerCoordinateSystem info, IBinaryWriter writer)

@@ -8,7 +8,7 @@ namespace DSIS.Scheme.Impl.Actions
   {
     protected override IIntegerCoordinateSystem CreateSystem(ISystemSpace info)
     {
-      IIntegerCoordinateFactoryEx factoryEx = GeneratedIntegerCoordinateSystemManager.Instance.CreateSystem(info.Dimension);
+      var factoryEx = new GeneratedIntegerCoordinateFactory(GeneratedIntegerCoordinateSystemManager.Instance);
       return factoryEx.Create(info, info.InitialSubdivision);
     }
   }

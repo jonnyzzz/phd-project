@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -59,8 +59,6 @@
     <Compile Include="src\Exec\Executor.cs" />
     <Compile Include="src\Exec\IActionGraphBuilder.cs" />
     <Compile Include="src\Exec\IActionMatch.cs" />
-    <Compile Include="src\Exec\SimpleActionMatch.cs" />
-    <Compile Include="src\Exec\XmlActionGraphParser.cs" />
     <Compile Include="src\IAction.cs" />
     <Compile Include="src\Key.cs" />
     <Compile Include="src\CopyContextAction.cs" />

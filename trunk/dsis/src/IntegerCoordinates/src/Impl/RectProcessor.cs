@@ -28,7 +28,7 @@ namespace DSIS.IntegerCoordinates.Impl
           myLeft[i] = 0;
 
         myRight[i] = myCoordinateSystem.ToInternal(right[i] + e, i);
-        if (myRight[i] > myCoordinateSystem.Subdivision[i])
+        if (myRight[i] >= myCoordinateSystem.Subdivision[i])
           myRight[i] = myCoordinateSystem.Subdivision[i] - 1;
 
         myPoint[i] = myLeft[i];

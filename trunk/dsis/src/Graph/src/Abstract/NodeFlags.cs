@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
@@ -53,13 +52,10 @@ namespace DSIS.Graph.Abstract
         throw new ArgumentException("Flag object was not created by that instance of NodeFlags");
       }
 
-      foreach (var pair in new List<KeyValuePair<uint, string>>(myFlags))
+      if (myFlags.Any(pair => flag.Flag == pair.Key))
       {
-        if (flag.Flag == pair.Key)
-        {
-          myFlags[flag.Flag] = null;
-          return;
-        }
+        myFlags[flag.Flag] = null;
+        return;
       }
       throw new ArgumentException("Failed to remove unknown flag");
     }

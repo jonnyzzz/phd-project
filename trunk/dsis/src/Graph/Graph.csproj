@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -25,6 +25,7 @@
     <Compile Include="src\Abstract\DataHolder.cs" />
     <Compile Include="src\Abstract\EmptyNodeSetState.cs" />
     <Compile Include="src\Abstract\FlagsNodeHolder.cs" />
+    <Compile Include="src\Abstract\GraphAlgorithms.AsList.cs" />
     <Compile Include="src\Abstract\GraphAlgorithms.cs" />
     <Compile Include="src\Abstract\GraphAlgorithms.Tarjan.cs" />
     <Compile Include="src\Abstract\GraphDataHolder.cs" />

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Core.Builders;
 using DSIS.Core.Mock;
-using DSIS.IntegerCoordinates.Tests;
 
 namespace DSIS.IntegerCoordinates.Tests.Generic
 {
@@ -14,8 +13,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generic
 
     protected static List<Q> DoTest(T ics, DoBuild bld)
     {
-      MockCollectingCellConnectionBuilder<Q> mcm =
-        new MockCollectingCellConnectionBuilder<Q>();
+      var mcm = new MockCollectingCellConnectionBuilder<Q>();
 
       bld(mcm);
 

@@ -3,90 +3,98 @@
  * Created: 28 ÿםגאנÿ 2007 ד.
  */
 
+
 using System.Collections.Generic;
+using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.Core.Mock;
+using DSIS.Core.System;
 using DSIS.Function.Mock;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;
 
-namespace DSIS.CellImageBuilder.Shared
+namespace DSIS.CellImageBuilder.Tests
 {
-  public abstract class MethodTestBase<T,Q, TM, TP>
-    where TM : ICellImageBuilder<Q>, new()
-    where TP : ICellImageBuilderSettings
-    where T : IIntegerCoordinateSystem<Q>
-    where Q : IIntegerCoordinate
+  public abstract class MethodTestBase
   {
-    public static List<Q> DoTest(
-      T sys,
-      Q test,
-      ComputeFunction<double> compute,
-      TP p)
+    protected abstract IIntegerCoordinateFactory IntegerCoordinateFactory { get; }
+
+    protected void DoTestMethod(ISystemSpace space,
+                                long[] testCoordinate,
+                                ComputeFunction<double> compute,
+                                ICellImageBuilderIntegerCoordinatesSettings settings,
+                                string gold)
     {
-      var func = new MockSystemInfo<double>(compute, sys.SystemSpace);
-      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T, Q>(sys.SystemSpace);
-
-      var man = new MockCollectingCellConnectionBuilder<Q>();
-
-      var ctx =
-        new CellImageBuilderContext<Q>(
-          func,
-          p,
-          ics,
-          man
-          );
-
-      var method = new TM();
-      method.Bind(ctx);
-
-      method.BuildImage(test);
-
-      return man.Result;
+      var ics = IntegerCoordinateFactory.Create(space, space.InitialSubdivision);
+      ics.DoGeneric(new ICSWith2D(testCoordinate, compute, settings, gold));
     }
 
-    public static void DoTwoDimTest(
-      T ics,
-      Q test,
-      ComputeFunction<double> f, TP settins, string gold)
+    private class ICSWith2D : IIntegerCoordinateSystemWith
     {
-      var data = DoTest(ics, test, f, settins);
-      TwoDimCoordinateAssert.Assert(ics, data, gold);
-    }
+      private readonly long[] myTestCoordinate;
+      private readonly ComputeFunction<double> myCompute;
+      private readonly ICellImageBuilderIntegerCoordinatesSettings mySettings;
+      private readonly string myGold;
 
-    public static List<Q> DoTestOneDimension(
-      T ics,
-      double coord, ComputeOneFunction<double> func, TP eps)
-    {
-      return DoTest(
-        ics,
-        ics.FromPoint(
-          new[] {coord}),
-        delegate(double[] ins, double[] outs) { outs[0] = func(ins[0]); }, eps);
-    }
+      public ICSWith2D(long[] testCoordinate,
+                       ComputeFunction<double> compute,
+                       ICellImageBuilderIntegerCoordinatesSettings settings,
+                       string gold)
+      {
+        myTestCoordinate = testCoordinate;
+        myCompute = compute;
+        mySettings = settings;
+        myGold = gold;
+      }
 
-    public static void DoTestOneDimensionAndAssert(
-      double l, double r, long g, double coord, TP eps,
-      ComputeOneFunction<double> func, double fl, double fr)
-    {
-      var ss = new MockSystemSpace(1, l, r, g);
-      T ics = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(ss);
+      public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate
+      {
+        var q = system.Create(myTestCoordinate);
+        Assert.IsNotNull(q);
+        Assert.IsFalse(system.IsNull(q));
 
-      var list = DoTestOneDimension(ics, coord, func, eps);
-      var result = list.ConvertAll(input => input.GetCoordinate(0));
-      result.Sort();
+        var data = DoTest(system, q, myCompute, mySettings);
+        switch(system.Dimension)
+        {
+          case 1: 
+            OneDimCoordinateAssert.Assert(system, data, myGold);
+            break;
+          case 2:
+            TwoDimCoordinateAssert.Assert(system, data, myGold);
+            break;
+          default:
+            Assert.Fail("Dimension should be 2 or 1");
+            break;
+        }
+      }
 
-      Q ifl = ics.FromPoint(new[] {fl});
-      Q ifr = ics.FromPoint(new[] {fr});
+      private static List<Q> DoTest<T, Q>(T sys,
+                                          Q test,
+                                          ComputeFunction<double> compute,
+                                          ICellImageBuilderIntegerCoordinatesSettings p)
+        where T : IIntegerCoordinateSystem<Q>
+        where Q : IIntegerCoordinate
+      {
+        var func = new MockSystemInfo<double>(compute, sys.SystemSpace);
 
-      Assert.IsNotNull(ifl);
-      Assert.IsNotNull(ifr);
+        var man = new MockCollectingCellConnectionBuilder<Q>();
 
-      Assert.IsTrue(result.Count > 0, "No result!");
+        var ctx =
+          new CellImageBuilderContext<Q>(
+            func,
+            p,
+            sys,
+            man
+            );
 
-      Assert.AreEqual(ifl.GetCoordinate(0), result[0], "Left side");
-      Assert.AreEqual(ifr.GetCoordinate(0), result[result.Count - 1], "Right side");
+        var method = p.Create<Q>();
+        method.Bind(ctx);
+
+        method.BuildImage(test);
+
+        return man.Result;
+      }
     }
   }
 }

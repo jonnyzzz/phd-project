@@ -5,6 +5,7 @@ using DSIS.Persistance;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
+  [Obsolete]
   public class IntegerCoordinateSystem2d : 
     IntegerCoordinateSystemBase<IntegerCoordinateSystem2d, IntegerCoordinate2d>, 
     IProcessorFactory<IntegerCoordinate2d>, 
@@ -18,6 +19,9 @@ namespace DSIS.IntegerCoordinates.Generated
 
     private readonly double myAreaLeftPointL1;
     private readonly double myAreaLeftPointL2;
+
+    private readonly double myAreaRightPointL1;
+    private readonly double myAreaRightPointL2;
 
     private readonly long mySubdivisionL1;
     private readonly long mySubdivisionL2;
@@ -34,6 +38,9 @@ namespace DSIS.IntegerCoordinates.Generated
 
       myAreaLeftPointL1 = myAreaLeftPoint[0];
       myAreaLeftPointL2 = myAreaLeftPoint[1];
+
+      myAreaRightPointL1 = systemSpace.AreaRightPoint[0];
+      myAreaRightPointL2 = systemSpace.AreaRightPoint[1];
 
       mySubdivisionL1 = mySubdivision[0];
       mySubdivisionL2 = mySubdivision[1];
@@ -58,11 +65,17 @@ namespace DSIS.IntegerCoordinates.Generated
 
     private long ToInternalL1(double point)
     {
+      if (point < myAreaLeftPointL1) return -1;
+      if (point > myAreaRightPointL1) return mySubdivisionL1;
+
       return Ceil((point - myAreaLeftPointL1)/ myCellSizeL1);
     }
 
     private long ToInternalL2(double point)
     {
+      if (point < myAreaLeftPointL2) return -1;
+      if (point > myAreaRightPointL2) return mySubdivisionL2;
+
       return Ceil((point - myAreaLeftPointL2) / myCellSizeL2);
     }
 

@@ -76,7 +76,7 @@ namespace DSIS.Scheme.Ctx
       }
     }
 
-    public void AddAllBut(Context ctx, ICollection<IKey> toSkip)
+    public void AddAllBut(Context ctx, IEnumerable<IKey> toSkip)
     {
       foreach (var pair in ctx.myContext)
       {
@@ -123,7 +123,8 @@ namespace DSIS.Scheme.Ctx
 
     public override string ToString()
     {
-      var sb = new StringBuilder();
+      var sb = new StringBuilder("Context: ");
+      sb.AppendLine();
       foreach (var pair in myContext)
       {
         sb.AppendFormat("Key: " + pair.Key).AppendLine();

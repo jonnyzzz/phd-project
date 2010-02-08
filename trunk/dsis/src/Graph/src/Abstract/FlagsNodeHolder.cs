@@ -47,7 +47,7 @@ namespace DSIS.Graph.Abstract
     {
       foreach (var tNode in myGraph.NodesInternal)
       {
-        tNode.SetFlag(myFlag, false);
+        tNode.FlagValues.SetFlag(myFlag, false);
       }
     }
   }

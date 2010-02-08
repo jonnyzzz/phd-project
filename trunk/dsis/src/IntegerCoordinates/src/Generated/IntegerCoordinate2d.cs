@@ -4,6 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
+  [Obsolete]
   [EqualityComparer(typeof(IntegerCoordinate2dEqualityComparer))]
   public struct IntegerCoordinate2d : IIntegerCoordinate
   {
@@ -40,6 +41,7 @@ namespace DSIS.IntegerCoordinates.Generated
     }
   }
 
+  [Obsolete]
   public class IntegerCoordinate2dEqualityComparer : IEqualityComparer<IntegerCoordinate2d>
   {
     public static readonly IntegerCoordinate2dEqualityComparer INSTANCE = new IntegerCoordinate2dEqualityComparer();

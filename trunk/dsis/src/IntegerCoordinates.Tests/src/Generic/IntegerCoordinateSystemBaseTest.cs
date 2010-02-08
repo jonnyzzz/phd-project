@@ -5,8 +5,8 @@ using DSIS.Utils;
 using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.IntegerCoordinates.Tests.Generic
-{
-  public class IntegerCoordinateSystemBaseTest<T, Q> 
+{  
+  public abstract class IntegerCoordinateSystemBaseTest<T, Q> 
     where T :IIntegerCoordinateSystem<Q>
     where Q : IIntegerCoordinate
   {
@@ -54,19 +54,19 @@ namespace DSIS.IntegerCoordinates.Tests.Generic
     [Test]
     public void Test_03()
     {
-      List<Q> cnt = new List<Q>(myCS.InitialSubdivision);
+      var cnt = new List<Q>(myCS.InitialSubdivision);
       Assert.AreEqual(25, cnt.Count);
     }
 
     [Test]
     public void Test_04()
     {
-      List<Q> c = new List<Q>(myCS.InitialSubdivision);
+      var c = new List<Q>(myCS.InitialSubdivision);
 
       if (myCS.Dimension != 2)
         Assert.Ignore("Dimension != 2");
 
-      bool[][] bs = new bool[myCS.Subdivision[0]][];
+      var bs = new bool[myCS.Subdivision[0]][];
       for (int i = 0; i < myCS.Subdivision[0]; i++)
       {
         bs[i] = new bool[myCS.Subdivision[1]];
@@ -97,8 +97,9 @@ namespace DSIS.IntegerCoordinates.Tests.Generic
 
       Q c = myCS.FromPoint(new double[] {0, 0});
       Assert.IsNotNull(c);
-      Assert.AreEqual(0, c.GetCoordinate(0));
-      Assert.AreEqual(0, c.GetCoordinate(1));
+      Assert.IsFalse(myCS.IsNull(c));
+      Assert.AreEqual(0, c.GetCoordinate(0), "coord 0");
+      Assert.AreEqual(0, c.GetCoordinate(1), "coord 1");
     }
 
     [Test]
@@ -110,8 +111,9 @@ namespace DSIS.IntegerCoordinates.Tests.Generic
 
       Q c = myCS.FromPoint(new double[] {0.1, 0.1});
       Assert.IsNotNull(c);
-      Assert.AreEqual(0, c.GetCoordinate(0));
-      Assert.AreEqual(0, c.GetCoordinate(1));
+      Assert.IsFalse(myCS.IsNull(c));
+      Assert.AreEqual(0, c.GetCoordinate(0), "coord 0");
+      Assert.AreEqual(0, c.GetCoordinate(1), "coord 1");
     }
 
     [Test]

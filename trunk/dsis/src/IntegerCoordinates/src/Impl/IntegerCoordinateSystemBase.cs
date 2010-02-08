@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
 using DSIS.Core.System;
@@ -29,6 +30,7 @@ namespace DSIS.IntegerCoordinates.Impl
 
     //from ISystemSpace. Optimization
     protected readonly double[] myAreaLeftPoint;
+    protected readonly double[] myAreaRightPoint;
 
     private readonly TInh myInh;
 
@@ -53,6 +55,7 @@ namespace DSIS.IntegerCoordinates.Impl
       }
 
       myAreaLeftPoint = mySystemSpace.AreaLeftPoint;
+      myAreaRightPoint = mySystemSpace.AreaRightPoint;
     }
 
     protected IntegerCoordinateSystemBase(ISystemSpace systemSpace)
@@ -133,24 +136,9 @@ namespace DSIS.IntegerCoordinates.Impl
       return (long)(v);
     }
 
-    protected long GetInitialCellsCount()
+    private long GetInitialCellsCount()
     {
-      long cnt = 1;
-      foreach (long l in mySubdivision)
-      {
-        cnt *= l;
-      }
-      return cnt;
-    }
-
-    public long ToInternal(double point, int i)
-    {
-      return Ceil((point - myAreaLeftPoint[i]) / myCellSize[i]);
-    }
-
-    public double ToExternal(long pt, int i)
-    {
-      return myAreaLeftPoint[i] + myCellSize[i] * pt;
+      return mySubdivision.Aggregate<long, long>(1, (current, l) => current*l);
     }
 
     public override bool Equals(object obj)
@@ -206,7 +194,7 @@ namespace DSIS.IntegerCoordinates.Impl
       return div;
     }
 
-    public double[] FillArrayFromCell(double cellSizeFactor)
+    private double[] FillArrayFromCell(double cellSizeFactor)
     {
       var eps = new double[myDimension];
       for (int i = 0; i < myDimension; i++)
@@ -214,7 +202,7 @@ namespace DSIS.IntegerCoordinates.Impl
       return eps;
     }
 
-    public double[] FillArray(double cellSizeFactor)
+    private double[] FillArray(double cellSizeFactor)
     {
       return cellSizeFactor.Fill(myDimension);
     }

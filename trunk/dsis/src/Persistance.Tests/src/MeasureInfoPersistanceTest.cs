@@ -21,8 +21,8 @@ namespace DSIS.Persistance.Tests
         new IntegerCoordinatePersistanceProxy(
           new IntegerCoordinatePersistance(
             new DefaultSystemSpacePersistance(),
-            new GeneratedIntegerCoordinateSystemManager(
-              CodeCompiler.CodeCompiler.CreateCompiler())
+            new GeneratedIntegerCoordinateFactory(new GeneratedIntegerCoordinateSystemManager(
+                                                    CodeCompiler.CodeCompiler.CreateCompiler()))
             ));
 
       myPersistance = new MeasureInfoPersistance(new GraphMeasurePersistance(ps));

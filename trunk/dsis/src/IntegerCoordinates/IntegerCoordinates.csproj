@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -17,6 +17,9 @@
       <HintPath>..\..\lib\StringTemplate\net-2.0\StringTemplate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -28,7 +31,6 @@
     <Compile Include="src\Generated\IIntegerCoordinateCallback.cs" />
     <Compile Include="src\Generated\IntegerCoordinatePersistance.cs" />
     <Compile Include="src\Generated\IntegerCoordinatePersistanceProxy.cs" />
-    <Compile Include="src\Generated\IntegerCoordinateSystem2dFactory.cs" />
     <Compile Include="src\IIntegerCoordinateFactory.cs" />
     <Compile Include="src\IIntegerCoordinateFactoryEx.cs" />
     <Compile Include="src\Generated\IntegerCoordinate2d.cs" />

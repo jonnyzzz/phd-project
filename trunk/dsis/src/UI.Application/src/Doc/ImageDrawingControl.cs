@@ -71,8 +71,10 @@ namespace DSIS.UI.Application.Doc
                 "Draw SI",
                 delegate
                   {
+                    if (myHtml.IsDisposed) return;
+
                     string file = DrawImage(sz);
-                    if (file != null && File.Exists(file))
+                    if (file != null && File.Exists(file) && new FileInfo(file).Length > 10)
                     {
                       myHtml.SetContext(x => x.CreateChildElement("img")
                                                .CreateAttribute("src", file)

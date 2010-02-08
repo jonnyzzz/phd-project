@@ -18,7 +18,7 @@ namespace DSIS.Graph.Tests
     private T mySystem;
     private int myNodeId;
 
-    public void ComputeComponents()
+    protected void ComputeComponents()
     {
       var instance = NullProgressInfo.INSTANCE;
       myComponents = ComputeStrongComponents(myGraph, instance);
@@ -97,8 +97,7 @@ namespace DSIS.Graph.Tests
       INode<Q> n2 = null;
       for (int i = 0; i < length; i++)
       {
-        INode<Q> n1;
-        n1 = n2;
+        INode<Q> n1 = n2;
         n2 = myGraph.AddNode(CreateCoordinate(offset + (i + 1)*factor, mySystem));
         if (n == null)
           n = n2;

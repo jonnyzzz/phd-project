@@ -83,16 +83,6 @@ namespace DSIS.Graph.Abstract
       return string.Format("[Node: {0}]", Coordinate);
     }
 
-    public void SetFlag(NodeFlag mask, bool value)
-    {
-      FlagValues.SetFlag(mask, value);
-    }
-
-    public bool GetFlag(NodeFlag mask)
-    {
-      return FlagValues.GetFlag(mask);
-    }
-
     public void SetComponentId(uint componentId)
     {
       FlagValues.SetComponentId(componentId);
