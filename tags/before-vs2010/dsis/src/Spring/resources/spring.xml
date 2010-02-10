@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.net http://www.springframework.net/xsd/spring-objects.xsd"
+         default-autowire="constructor"
+         default-dependency-check="all"
+         default-lazy-init="false">
+
+  <object id="AntlrFix" type="DSIS.LibraryVersionFixer.VersionFixer, DSIS.LibraryVersionFixer">
+    <constructor-arg>
+      <list>
+        <value>antlr.runtime.2.7.6.2.dll</value>
+        <value>antlr.runtime.2.7.7.1.dll</value>
+      </list>
+    </constructor-arg>
+  </object>
+
+  <object id="ServiceProviderExImpl" type="DSIS.Spring.Service.ServiceProviderExImpl"/>
+
+  <object id="SpringXmlConfigWriter2" type="DSIS.Spring.Attributes.SpringXmlConfigWriter" />
+  <object id="SpringConfigXmlProvider2" type="DSIS.Spring.Attributes.SpringConfigXmlProvider" />
+  <object id="StringConfigurator" type="DSIS.Spring.Attributes.StringConfigurator" />
+  <object id="AttributedSpringContextLoader" type="DSIS.Spring.Assemblies.AttributedSpringContextLoader" />
+  <object id="AssemblyIncludeManagerRegistrar" type="DSIS.Spring.Assemblies.AssemblyIncludeManagerRegistrar" />
+
+  <object id="AssemblyIncludeManager" type="DSIS.Spring.Assemblies.AssemblyIncludeManager"/>
+
+  <object id="SpringConfigRegistry" type="DSIS.Spring.Config.SpringConfigRegistry"/>
+  <object id="SpringConfigXmlProvider" type="DSIS.Spring.Config.SpringConfigXmlProvider"/>
+  <object id="ServiceProviderImpl" type="DSIS.Spring.Service.ServiceProviderImpl"/>
+
+  <object id="SpringIoC" type="DSIS.Spring.SpringIoC"/>
+
+  <object id="TempFileManager" type="DSIS.Spring.Util.TempFileManager"/>
+
+  <object id="BeanProcessor" type="DSIS.Spring.Util.BeanProcessor"/>
+  
+</objects>

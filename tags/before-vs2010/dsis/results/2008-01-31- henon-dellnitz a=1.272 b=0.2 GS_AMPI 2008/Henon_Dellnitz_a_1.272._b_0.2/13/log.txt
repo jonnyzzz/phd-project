@@ -1,0 +1,62 @@
+Graph: Nodes 24, Edges 170
+Components: 1
+Component's Nodes: 6, 
+Method: Box Method
+Graph: Nodes 24, Edges 170
+Components: 1
+Component's Nodes: 19, 
+Method: Box Method
+Graph: Nodes 76, Edges 592
+Components: 1
+Component's Nodes: 43, 
+Method: Box Method
+Graph: Nodes 184, Edges 1590
+Components: 1
+Component's Nodes: 98, 
+Method: Box Method
+Graph: Nodes 422, Edges 3639
+Components: 2
+Component's Nodes: 154, 8, 
+Method: Box Method
+Graph: Nodes 689, Edges 5712
+Components: 2
+Component's Nodes: 8, 321, 
+Method: Box Method
+Graph: Nodes 1357, Edges 11664
+Components: 3
+Component's Nodes: 3, 5, 644, 
+Method: Box Method
+Graph: Nodes 2645, Edges 22791
+Components: 3
+Component's Nodes: 3, 3, 1360, 
+Method: Box Method
+Graph: Nodes 5501, Edges 47487
+Components: 3
+Component's Nodes: 3, 3, 2902, 
+Method: Box Method
+Graph: Nodes 11669, Edges 103041
+Components: 3
+Component's Nodes: 3, 3, 6333, 
+Method: Box Method
+Graph: Nodes 25393, Edges 228291
+Components: 3
+Component's Nodes: 3, 3, 13710, 
+Method: Box Method
+Graph: Nodes 54901, Edges 494583
+Components: 3
+Component's Nodes: 3, 3, 30688, 
+Method: Box Method
+Graph: Nodes 122816, Edges 1097745
+Components: 3
+Component's Nodes: 70420, 3, 3, 
+Method: PointMethod
+Graph: Nodes 281712, Edges 676337
+Components: 1
+Component's Nodes: 43197, 
+Compute entropy of type WeightSearch_1:FIRST:Const
+Entropy: 0,163792465324511
+Graph: Nodes 281712, Edges 676337
+Components: 1
+Component's Nodes: 43197, 
+Compute entropy of type WeightSearch_1:SMART:Const
+Entropy: 0,454076901173254

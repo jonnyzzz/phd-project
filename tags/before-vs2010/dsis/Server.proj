@@ -1,0 +1,38 @@
+<Project DefaultTargets="Clean;Build;PublishArtifacts;Tests" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+
+  <Target Name="Clean">
+    <ItemGroup>
+      <BinaryToDelete Include="bin\**\*"/>
+    </ItemGroup>
+    <Delete Files="@(BinaryToDelete)" />
+  </Target>  
+  
+  <Target Name="Build">
+    <MSBuild Projects="src\DSIS.sln" Properties="Configuration=Release" Targets="Clean;Rebuild"/>
+  </Target>
+
+  <Target Name="PublishArtifacts">
+    <ItemGroup>
+      <Files Include="$(MSBuildProjectDirecotry)bin*\**\*" Exclude="**\*Generated*"/>
+    </ItemGroup>
+
+    <TeamCityPublishArtifacts SourceFiles="@(Files-> '%(FullPath)' )" Condition=" '$(TEAMCITY_VERSION)' != '' "/>
+
+    <Message Text="--> @( Files -> '%(FullPath)')" />
+
+    <!--<Exec Command="cmd.exe /c set" /> -->
+  </Target>
+
+  <Target Name="Tests">
+    <ItemGroup>
+      <Tests Include="$(MSBuildProjectDirecotry)bin*\DSIS*Test*dll" 
+             Exclude="**\*Generated*"
+      />
+    </ItemGroup>
+
+    <NUnit Assemblies="%(Tests.FullPath)" NUnitVersion="NUnit-2.5.2" ContinueOnError="True" />
+
+    <TeamCityProgressMessage Text="Done. {build.status.text}" />
+  </Target>
+
+</Project>

@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+  targetNamespace="urn:shemas-dsis-org:computation-graph-scheme-xml" 
+  elementFormDefault="qualified" 
+  xmlns="urn:shemas-dsis-org:computation-graph-scheme-xml" 
+  xmlns:mstns="urn:shemas-dsis-org:computation-graph-scheme-xml" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="NodeId">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="GraphId">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="NodeConstructorArgument" abstract="true" />
+
+  <xs:complexType name="NodeConstructorArgumentCode">
+    <xs:complexContent>
+      <xs:extension base="NodeConstructorArgument">
+        <xs:sequence>
+          <xs:element type="xs:string" name="Code"/>
+        </xs:sequence>
+      </xs:extension>      
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="NodeConstructorArgumentReference">
+    <xs:complexContent>
+      <xs:extension base="NodeConstructorArgument">
+        <xs:attribute name="ref-id" type="NodeId" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="NodeConstructorArgumentGraphReference">
+    <xs:complexContent>
+      <xs:extension base="NodeConstructorArgument">
+        <xs:attribute name="ref-id" type="GraphId" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="NodeConstructorArgumentObject">
+    <xs:complexContent>
+      <xs:extension base="NodeConstructorArgument">
+        <xs:attribute name="key" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="Node">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Args" type="NodeConstructorArgument"/>
+    </xs:sequence>
+    <xs:attribute name="Class" type="xs:string" use="required"/>
+    <xs:attribute name="Id" type="NodeId" use="required"/>
+    <xs:attribute name="RegisterKey" use="optional"/>
+  </xs:complexType>
+  
+  <xs:complexType name="NodeRef">
+    <xs:attribute name="node-ref" type="NodeId"/>
+  </xs:complexType>
+  
+  <xs:complexType name="Link">
+    <xs:sequence minOccurs="2" maxOccurs="unbounded">
+      <xs:element name="Nodes" type="NodeRef"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Graph">
+    <xs:sequence>
+      <xs:element name="Nodes" minOccurs="1" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="Node" type="Node" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Links" minOccurs="1" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="Link" type="Link"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="IncludeAssemblies" type="IncludeAssemblies" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="Id" type="GraphId" use="required"/>
+    <xs:attribute name="Base" type="GraphId" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="IncludeAssemblies">
+    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="Assembly" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="Graphs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Graph" type="Graph" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:element name="IncludeAssemblies" type="IncludeAssemblies" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

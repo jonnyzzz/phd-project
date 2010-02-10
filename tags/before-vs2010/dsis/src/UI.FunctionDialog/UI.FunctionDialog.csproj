@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C8FBFBAF-B2DF-49FA-B428-6BC429658BB5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DSIS.UI.FunctionDialog</RootNamespace>
+    <AssemblyName>DSIS.UI.FunctionDialog</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ContiniousFunctionSolverWrapper.cs" />
+    <Compile Include="src\ContiniousSystemComponentAttribute.cs" />
+    <Compile Include="src\ContiniousSystemParametersWizard.cs" />
+    <Compile Include="src\ContiniousSystemParametersWizardFactory.cs" />
+    <Compile Include="src\FixedDimensionSpaceModel.cs" />
+    <Compile Include="src\ISystemFunctionSelectionWizardInt.cs" />
+    <Compile Include="src\ISystemInfoFactoryProvider.cs" />
+    <Compile Include="src\IWizardPageWithStateFactory.cs" />
+    <Compile Include="src\PredefinedSystemInfoFactory.cs" />
+    <Compile Include="src\SelectPredefinedContiniousMethodWizardPage.cs" />
+    <Compile Include="src\SelectPredefinedSystemWizardPage.cs">
+    </Compile>
+    <Compile Include="src\SelectSystemConfirmPage.cs" />
+    <Compile Include="src\SelectSystemInfoProviderWizard.cs" />
+    <Compile Include="src\SelectSystemInfoProviderWizardFactory.cs" />
+    <Compile Include="src\SelectSystemInfoWizard.cs" />
+    <Compile Include="src\SelectSystemSpaceWizard.cs" />
+    <Compile Include="src\SelectSystemSpaceWizardFactory.cs" />
+    <Compile Include="src\SelectSystemWizardPage.cs">
+    </Compile>
+    <Compile Include="src\SpaceControlWizardPage.cs" />
+    <Compile Include="src\SpaceModel.cs" />
+    <Compile Include="src\SpaceParametersRowModel.cs" />
+    <Compile Include="src\SystemFunctionComponent.cs" />
+    <Compile Include="src\SystemFunctionSelectionWizard.cs" />
+    <Compile Include="src\UI\CompilerErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\UI\CompilerErrorForm.Designer.cs">
+      <DependentUpon>CompilerErrorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\UI\SpaceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UI\SpaceControl.Designer.cs">
+      <DependentUpon>SpaceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\UI\SpaceParametersRow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\UI\SpaceParametersRow.Designer.cs">
+      <DependentUpon>SpaceParametersRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\UserDefinedSystemInfoFactory.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\UI\CompilerErrorForm.resx">
+      <DependentUpon>CompilerErrorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\UI\SpaceControl.resx">
+      <DependentUpon>SpaceControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\UI\SpaceParametersRow.resx">
+      <DependentUpon>SpaceParametersRow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.System\Core.System.csproj">
+      <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
+      <Name>Core.System</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Function.UserDefined\Function.UserDefined.csproj">
+      <Project>{3904EC2C-B187-4999-ABB7-059DF4AA2371}</Project>
+      <Name>Function.UserDefined</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
+      <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
+      <Name>Scheme.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Spring\Spring.csproj">
+      <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
+      <Name>Spring</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI.Controls\UI.Controls.csproj">
+      <Project>{3305A57B-0432-4E75-8E13-8AB265B8ECB6}</Project>
+      <Name>UI.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI.Wizard\UI.Wizard.csproj">
+      <Project>{F08FC04F-28A4-4A97-80CB-7F3867C8244B}</Project>
+      <Name>UI.Wizard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI\UI.csproj">
+      <Project>{5410F9D5-9D98-44CF-9518-CE5374CE4B22}</Project>
+      <Name>UI %28UI\UI%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\Document\" />
+    <Folder Include="src\Wizards\" />
+  </ItemGroup>
+  <Import Project="../Before.Build.Targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="../After.Build.Targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

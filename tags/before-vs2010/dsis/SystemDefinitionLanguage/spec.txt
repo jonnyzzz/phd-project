@@ -1,0 +1,109 @@
+0. // and /*...*/ are comments. 
+
+  // - single line comment
+  /* ... */ multiline comment. Non-recursive.
+  
+1. Definition type, dimension, input and output
+
+  import <myassembly.dll>   //imports some function from .NET assebly. 
+                             //Funcnction(s) containing object should by marked with
+                             // .NET attribute. Every static function to imported to 
+                             //parser should be marked too.
+                             //Constants could be imported too.
+  
+
+  define dimension = 3;    //defines dimenstion for the system
+  define input = { i1, i2, i3 }; // defines input variables for the system. 
+  define output = { v1, v2, v3(i3) }; // defines output. The value can be function or variable.
+
+  define space = [ { a1, a2, a3}, {b1, b2, b3} ]; // defines the part of space for investigation
+
+  define type = descrete;  //defines type of function. Possible values are 'descrete', 'continious'
+                           //continious declaration will have several parameters like 'dt' and 
+                           //method name. This SHOULD by represented as a class with several
+                           //parameters to be inputed. Ex: (there is class marked Merson.
+  define type = continious[Merson]{ /*constructor params here */ };
+
+
+  begin(variables)
+    //variable declarations here
+    i4 = 5;
+    z = i4 * i3;
+  end
+
+  begin(functions) 
+
+   //function declarations here. Recursive functions are not supported.
+   f(a,b,c) = a + b + c
+  end
+
+
+2. Attributes
+
+
+- Numerical magic on function:
+
+   [AttibuteUsage(AttributeTargets.Class, AllowMultiple=false)]
+   public class FunctionEvaluationMethodAttribute : Attribute {
+     /* Name of method to be used from script.
+      * Parameters for the method are constructor parameters  
+      * for the class of that attribute
+     */
+     public FunctionEvaluationMethod(string name) {...}
+     //todo: Think about derivate providers     
+   }
+
+- Custom functions:
+
+   [AttibuteUsage(AttributeTargets.Class, AllowMultiple=false)]
+   public class FunctionMethodClassAttribute : Attribute {
+     /* 
+        Marks class as function or constant exporting method of name 'name'.
+        class SHOULD implement interface IMethodExporter<T> for supported T.
+        This T is taken from IFunction<T>.  
+     */
+     public FunctionEvaluationMethod(string name) {...}
+   }
+
+   public interface IMethodExporter<T> {
+     int Dimension {get; }
+     T Evaluate(T[] params);
+   
+     //This method could return null to indicate no derivate
+     //of that type supported
+     IMethodExporter<T> Derivate(int variable);
+   }
+
+- Custom constants:
+
+   [AttibuteUsage(AttributeTargets.Class, AllowMultiple=false)]
+   public class FunctionConstantClassAttribute : Attribute {
+     /* 
+        Marks class as function or constant exporting constants
+        with prefix of 'name'.        
+     */
+     public FunctionEvaluationMethod(string name) {...}
+   }
+
+   [AttibuteUsage(AttributeTargets.Field, AllowMultiple=false)]
+   public class FunctionConstantClassAttribute : Attribute {
+     /* 
+        Marks static field of type double to be exported
+        with name of 'name' under a prefix of 'prefix' taken
+        from class attribute FunctionConstantClassAttribute        
+     */
+     public FunctionEvaluationMethod(string name) {...}
+   }
+
+
+3. All common functions like Sin, Cos, Tg, Ctg, etc. should be 
+   implemented using extensions. 
+   All common constanst should be defined the same way.
+   There should be default extension library.   
+
+4. As the result of processing those code, assembly should be 
+   generated and loaded to the application. This approach 
+   should provide best performance because of using JIT and
+   compiler optimizations.
+ 
+  

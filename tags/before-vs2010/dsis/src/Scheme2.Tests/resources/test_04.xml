@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Computation-Graph xmlns="urn:shemas-dsis-org:computation-graph-xml" Id="AAA">
+  <Actions>
+    <Code Id="B" Assembly="DSIS.Scheme2.Tests" Class="DSIS.Scheme2.Tests.testData.Test_01_B_B"/>
+    <Code Id="C" Assembly="DSIS.Scheme2.Tests" Class="DSIS.Scheme2.Tests.testData.Test_01_C"/>
+  </Actions>
+  <Connections>
+    <Arc>
+      <From>
+        <Action-Instance Id="B"/>
+      </From>
+      <To><Action Id="C" Point="Z"/></To>
+    </Arc>
+  </Connections>
+</Computation-Graph>

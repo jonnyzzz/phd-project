@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'MorseKernelVisualizationATL'
+		'MorseKernelVisualizationATL.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}
