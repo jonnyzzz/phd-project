@@ -25,11 +25,6 @@ namespace DSIS.Graph.Abstract
       get { return new TNode[] {myNode}; }
     }
 
-    public IEnumerable<INode<TCell>> ValuesUpcasted
-    {
-      get { return new INode<TCell>[] {myNode}; }
-    }
-
     public INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded)
     {
       if (COMPARER.Equals(myNode.Coordinate, t.Coordinate))

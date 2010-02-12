@@ -8,6 +8,5 @@ namespace DSIS.Graph.Abstract
     where TNode : Node<TNode, TCell>
   {
     IEnumerable<TNode> Values { get;}
-    IEnumerable<INode<TCell>> ValuesUpcasted { get;}
   }
 }

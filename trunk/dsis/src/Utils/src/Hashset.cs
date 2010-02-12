@@ -38,10 +38,8 @@ namespace DSIS.Utils
     public bool ContainsRange<Q>(IEnumerable<Q> enu) where Q:T
     {
       foreach (Q q in enu)
-      {
         if (!Contains(q))
           return false;
-      }
       return true;
     }
 
@@ -140,12 +138,8 @@ namespace DSIS.Utils
     }
   }
 
-  [Obsolete("Use Hashset")]
+  [Obsolete("Use HashSet")]
   public class Hashset<T, TC> : Hashset<T> where T : TC
   {
-    public IEnumerable<TC> ValuesUpcasted
-    {
-      get { return new UpcastedEnumerable<IEnumerable<T>, T, TC>(Values); }
-    }
   }
 }

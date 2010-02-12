@@ -90,11 +90,6 @@ namespace DSIS.Graph.Abstract
       get { return new NodeEnumerableTNode(myItems); }
     }
 
-    public IEnumerable<INode<TCell>> ValuesUpcasted
-    {
-      get { return new NodeEnumerableINode(myItems); }
-    }
-
     private sealed class Item
     {
       public readonly TNode Value;
@@ -136,28 +131,6 @@ namespace DSIS.Graph.Abstract
       private NodeEnumeratorTNode Create()
       {
         return new NodeEnumeratorTNode(myData);
-      }
-    }
-
-    private class NodeEnumerableINode : NodeEnumerable, IEnumerable<INode<TCell>>
-    {
-      public NodeEnumerableINode(Item[] data) : base(data)
-      {
-      }
-
-      IEnumerator IEnumerable.GetEnumerator()
-      {
-        return Create();
-      }
-
-      private NodeEnumeratorINode Create()
-      {
-        return new NodeEnumeratorINode(myData);
-      }
-
-      IEnumerator<INode<TCell>> IEnumerable<INode<TCell>>.GetEnumerator()
-      {
-        return Create();
       }
     }
 
@@ -228,18 +201,6 @@ namespace DSIS.Graph.Abstract
       }
 
       TNode IEnumerator<TNode>.Current
-      {
-        get { return Current; }
-      }
-    }
-
-    private class NodeEnumeratorINode : NodeEnumerator, IEnumerator<INode<TCell>>
-    {
-      public NodeEnumeratorINode(Item[] data) : base(data)
-      {
-      }
-
-      INode<TCell> IEnumerator<INode<TCell>>.Current
       {
         get { return Current; }
       }

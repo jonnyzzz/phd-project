@@ -52,11 +52,6 @@ namespace DSIS.Graph.Abstract
     {
       get { return this; }
     }
-
-    public IEnumerable<INode<TCell>> ValuesUpcasted
-    {
-      get { return new UpcastedEnumerable<IEnumerable<TNode>, TNode, INode<TCell>>(Values); }
-    }  
       
     private class NodesEmunerator : IEnumerator<TNode>
     {

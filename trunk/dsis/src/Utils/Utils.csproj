@@ -71,9 +71,6 @@
     <Compile Include="src\SynchList.cs" />
     <Compile Include="src\TimeoutThread.cs" />
     <Compile Include="src\TryMutexCookie.cs" />
-    <Compile Include="src\UpcastedCollection.cs" />
-    <Compile Include="src\UpcastedDictionary.cs" />
-    <Compile Include="src\UpcastedEnumerable.cs" />
     <Compile Include="src\Update.cs" />
     <Compile Include="src\UsedAttribute.cs" />
     <Compile Include="src\UsedInTestsAttribute.cs" />
@@ -95,7 +92,6 @@
     <Compile Include="src\OrderedList.cs" />
     <Compile Include="src\Pair.cs" />
     <Compile Include="src\Primes.cs" />
-    <Compile Include="src\UpcastedEnumerator.cs" />
   </ItemGroup>
   <Import Project="../Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

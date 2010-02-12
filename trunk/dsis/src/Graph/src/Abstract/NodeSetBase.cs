@@ -9,10 +9,5 @@ namespace DSIS.Graph.Abstract
     where TNode : Node<TNode, TCell>
   {
     public abstract IEnumerable<TNode> Values { get;}
-
-    public IEnumerable<INode<TCell>> ValuesUpcasted
-    {
-      get { return new UpcastedEnumerable<IEnumerable<TNode>, TNode, INode<TCell>>(Values); }
-    }
   }
 }

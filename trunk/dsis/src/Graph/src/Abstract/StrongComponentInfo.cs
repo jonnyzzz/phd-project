@@ -89,12 +89,12 @@ namespace DSIS.Graph.Abstract
 
     public IEnumerable<IStrongComponentInfo> In
     {
-      get { return myIns.ValuesUpcasted; }
+      get { return myIns.Values; }
     }
 
     public IEnumerable<IStrongComponentInfo> Out
     {
-      get { return myOuts.ValuesUpcasted; }
+      get { return myOuts.Values; }
     }
 
     #endregion

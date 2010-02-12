@@ -22,11 +22,6 @@ namespace DSIS.Graph.Abstract
       get { return EmptyArray<TNode>.Instance; }
     }
 
-    public IEnumerable<INode<TCell>> ValuesUpcasted
-    {
-      get { return EmptyArray<INode<TCell>>.Instance; }
-    }
-
     public INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded)
     {
       wasAdded = true;

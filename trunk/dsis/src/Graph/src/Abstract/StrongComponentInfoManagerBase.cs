@@ -19,7 +19,7 @@ namespace DSIS.Graph.Abstract
 
     public IEnumerable<IStrongComponentInfo> Components
     {
-      get { return myComponents.ValuesUpcasted; }
+      get { return myComponents.Values; }
     }
 
     public int Count
