@@ -9,7 +9,7 @@ namespace DSIS.Utils
 
     public static readonly ISafe Instance = new NoSafe();
 
-    public void Safe(VoidDelegate action)
+    public void Safe(Action action)
     {
       try
       {
@@ -20,7 +20,7 @@ namespace DSIS.Utils
       }
     }
 
-    public void SafeIgnore(VoidDelegate action)
+    public void SafeIgnore(Action action)
     {
       try
       {
@@ -31,7 +31,7 @@ namespace DSIS.Utils
       }
     }
 
-    public void Safe<T>(T obj, DAction<T> action)
+    public void Safe<T>(T obj, Action<T> action)
     {
       try
       {
@@ -42,7 +42,7 @@ namespace DSIS.Utils
       }
     }
 
-    public void SafeIgnore<T>(T obj, DAction<T> action)
+    public void SafeIgnore<T>(T obj, Action<T> action)
     {
       try
       {
@@ -53,7 +53,7 @@ namespace DSIS.Utils
       }
     }
 
-    public T Safe<T>(TDelegate<T> del, T def)
+    public T Safe<T>(Func<T> del, T def)
     {
       try
       {

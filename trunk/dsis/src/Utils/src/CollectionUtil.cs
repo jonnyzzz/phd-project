@@ -181,12 +181,12 @@ namespace DSIS.Utils
       }
     }
 
-    public static void Zip<T,Q>(IEnumerable<T> ts, IEnumerable<Q> qs, Zip<T,Q> zip)
+    public static void Zip<T,Q>(IEnumerable<T> ts, IEnumerable<Q> qs, Action<T,Q> zip)
     {
       var te = ts.GetEnumerator();
       var qe = qs.GetEnumerator();
 
-      TDelegate<bool> hasMore = delegate
+      Func<bool> hasMore = delegate
                                         {
                                           var tb = te.MoveNext();
                                           var qb = qe.MoveNext();
@@ -208,7 +208,7 @@ namespace DSIS.Utils
       var te = ts.GetEnumerator();
       var qe = qs.GetEnumerator();
 
-      TDelegate<bool> hasMore = delegate
+      Func<bool> hasMore = delegate
                                         {
                                           var tb = te.MoveNext();
                                           var qb = qe.MoveNext();

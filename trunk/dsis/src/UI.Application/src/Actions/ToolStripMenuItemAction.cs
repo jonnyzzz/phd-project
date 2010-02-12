@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DSIS.Scheme.Ctx;
-using DSIS.Utils;
 
 namespace DSIS.UI.Application.Actions
 {
@@ -10,9 +10,9 @@ namespace DSIS.UI.Application.Actions
   {
     private readonly ActionDescriptor myDescriptor;
     private readonly IActionHandler myHander;
-    private readonly Lazy<Context> myContext;
+    private readonly Func<Context> myContext;
 
-    public ToolStripMenuItemAction(ActionDescriptor descriptor, IActionHandler hander, Lazy<Context> context)
+    public ToolStripMenuItemAction(ActionDescriptor descriptor, IActionHandler hander, Func<Context> context)
     {
       myDescriptor = descriptor;
       myHander = hander;

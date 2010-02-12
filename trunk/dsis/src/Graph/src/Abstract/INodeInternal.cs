@@ -3,7 +3,7 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  internal interface INodeInternal<TCell> 
+  internal interface INodeInternal<out TCell> 
     where TCell : ICellCoordinate
   {
     IEnumerable<INode<TCell>> Edges{ get; }

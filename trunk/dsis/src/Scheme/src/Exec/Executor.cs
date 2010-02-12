@@ -170,7 +170,7 @@ namespace DSIS.Scheme.Exec
       return cx;
     }
 
-    public void AddAllNewAndCheck(Context dest, Context source, Lazy<string> errorMessage)
+    public void AddAllNewAndCheck(Context dest, Context source, Func<string> errorMessage)
     {
       dest.AddAllNew(
         source,

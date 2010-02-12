@@ -10,9 +10,9 @@ namespace DSIS.UI.FunctionDialog
   public class SelectPredefinedContiniousMethodWizardPage : WizardPageBase<ListSelector<ListInfo<IContiniousFunctionSolverFactory>, IContiniousFunctionSolverFactory>>, IWizardPageWithState
   {
     private readonly ISystemFunctionSelectionWizardInt myWizard;
-    private readonly Lazy<IWizardPageWithState> myNext;
+    private readonly Func<IWizardPageWithState> myNext;
 
-    public SelectPredefinedContiniousMethodWizardPage(ISystemFunctionSelectionWizardInt wizard, IServiceProvider prov, Lazy<IWizardPageWithState> next)
+    public SelectPredefinedContiniousMethodWizardPage(ISystemFunctionSelectionWizardInt wizard, IServiceProvider prov, Func<IWizardPageWithState> next)
     {
       myWizard = wizard;
       var services = prov.GetServices<IContiniousFunctionSolverFactory>();

@@ -1,3 +1,4 @@
+using System;
 using DSIS.Utils;
 
 namespace DSIS.Scheme.Exec
@@ -39,7 +40,7 @@ namespace DSIS.Scheme.Exec
       return back;
     }
 
-    public IActionEdgesBuilder With(DAction<IActionEdgesBuilder> closure)
+    public IActionEdgesBuilder With(Action<IActionEdgesBuilder> closure)
     {
       closure(this);
       return this;

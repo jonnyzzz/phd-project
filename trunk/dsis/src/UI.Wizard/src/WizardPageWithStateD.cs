@@ -1,12 +1,12 @@
-using DSIS.Utils;
+using System;
 
 namespace DSIS.UI.Wizard
 {
   public class WizardPageWithStateD : WizardPageWithState
   {
-    private readonly Lazy<IWizardPageWithState> myNextPage;
+    private readonly Func<IWizardPageWithState> myNextPage;
 
-    public WizardPageWithStateD(IWizardPage page, Lazy<IWizardPageWithState> nextPage) : base(page)
+    public WizardPageWithStateD(IWizardPage page, Func<IWizardPageWithState> nextPage) : base(page)
     {
       myNextPage = nextPage;
     }

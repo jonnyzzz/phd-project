@@ -44,7 +44,7 @@ namespace DSIS.CodeCompiler
         }
         try
         {
-          var providerOptions = new Dictionary<string, string> {{"CompilerVersion", "v3.5"}};
+          var providerOptions = new Dictionary<string, string> {{"CompilerVersion", "v4.0"}};
           using (var provider = new CSharpCodeProvider(providerOptions))
           {
             var results = provider.CompileAssemblyFromFile(ps, codeFile);

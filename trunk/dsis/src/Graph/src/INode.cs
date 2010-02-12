@@ -4,7 +4,7 @@ using DSIS.Utils;
 namespace DSIS.Graph
 {
   [EqualityComparer(typeof(NodeEqualityComparer<>))]
-  public interface INode<TCoordinate>
+  public interface INode<out TCoordinate>
     where TCoordinate : ICellCoordinate
   {
     TCoordinate Coordinate { get; }

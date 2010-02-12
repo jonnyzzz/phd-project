@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 
   <PropertyGroup>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion> 
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion> 
       <BasePath>..\</BasePath>
       <BaseOutputPath>$(BasePath)..\</BaseOutputPath>
       <IntermediateOutputPath>$(BaseOutputPath)Obj\$(MSBuildProjectName)\$(Configuration)\</IntermediateOutputPath>
@@ -33,5 +33,14 @@
 
   <ItemGroup>
     <Compile Include="$(BasePath)\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core"/>
+    <Reference Include="System.Xml.Linq"/>
+    <Reference Include="System.Data.DataSetExtensions"/>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
 </Project>

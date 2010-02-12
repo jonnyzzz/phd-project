@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
@@ -67,9 +68,9 @@ namespace DSIS.UI.Application.Actions
     private class ActionHandlerProxy : IActionHandler
     {
       private readonly string myId;
-      private readonly Lazy<IEnumerable<IActionHandler>> myChain;
+      private readonly Func<IEnumerable<IActionHandler>> myChain;
 
-      public ActionHandlerProxy(string id, Lazy<IEnumerable<IActionHandler>> chain)
+      public ActionHandlerProxy(string id, Func<IEnumerable<IActionHandler>> chain)
       {
         myChain = chain;
         myId = id;

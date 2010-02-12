@@ -1,3 +1,4 @@
+using System;
 using DSIS.Utils;
 
 namespace DSIS.Scheme.Exec
@@ -16,7 +17,7 @@ namespace DSIS.Scheme.Exec
     /// <returns>IActionBuilder for id</returns>
     IActionEdgesBuilder Back(IAction id);
 
-    IActionEdgesBuilder With(DAction<IActionEdgesBuilder> closure);    
+    IActionEdgesBuilder With(Action<IActionEdgesBuilder> closure);    
   }
 
   public static class ActionEdgesBuilderExt

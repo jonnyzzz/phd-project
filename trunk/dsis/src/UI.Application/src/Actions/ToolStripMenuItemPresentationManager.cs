@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DSIS.Core.Ioc;
@@ -13,7 +14,7 @@ namespace DSIS.UI.Application.Actions
     {
     }
 
-    protected override IMenuItem<ToolStripItem> CreateItem(IActionDescriptor descriptor, IActionHandler handler, Lazy<Context> context)
+    protected override IMenuItem<ToolStripItem> CreateItem(IActionDescriptor descriptor, IActionHandler handler, Func<Context> context)
     {
       if (descriptor is ActionDescriptor)
         return new ToolStripMenuItemAction((ActionDescriptor) descriptor, handler, context);
@@ -30,7 +31,7 @@ namespace DSIS.UI.Application.Actions
       ((ToolStripDropDownItem)node).DropDownItems.AddRange(map.ToArray());
     }
 
-    public void SetMenu(IActionDescriptor descr, MenuStrip strip, Lazy<Context> ctx)
+    public void SetMenu(IActionDescriptor descr, MenuStrip strip, Func<Context> ctx)
     {
       var menuHandler = BuildMenu(descr, ctx);
       strip.Items.Clear();

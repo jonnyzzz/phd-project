@@ -150,10 +150,10 @@ namespace DSIS.Scheme.Xml
     {
       public readonly Hashset<string> NodePrerequisites;
       public readonly string Id;
-      private readonly Lazy<T> myFactory;
+      private readonly Func<T> myFactory;
       private T myCachedAction;
 
-      public NodeFactory(Hashset<string> nodeReq, string id, Lazy<T> factory)
+      public NodeFactory(Hashset<string> nodeReq, string id, Func<T> factory)
       {
         NodePrerequisites = nodeReq;
         Id = id;
@@ -181,7 +181,7 @@ namespace DSIS.Scheme.Xml
         throw new ArgumentException("Failed to select constructor. Ambiguous.");
       var constructor = type.GetConstructors()[0];
 
-      var argz = new List<Lazy<Object>>();
+      var argz = new List<Func<Object>>();
       var reqNodes = new Hashset<string>();
       var reqGraphs = new Hashset<string>();
       foreach (var p in CollectionUtil.Merge(constructor.GetParameters(), Safe(node.Args), (x, y) => Pair.Create(x, y)))
