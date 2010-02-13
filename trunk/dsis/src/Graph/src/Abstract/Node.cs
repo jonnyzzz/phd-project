@@ -18,7 +18,7 @@ namespace DSIS.Graph.Abstract
 
     internal Object UserData;
     internal readonly int HashCodeInternal;    
-    internal readonly NodeFlagValue FlagValues = new NodeFlagValue();
+    internal NodeFlagValue FlagValues = new NodeFlagValue();
 
     protected Node(TCell coordinate)
     {

@@ -1,6 +1,6 @@
 namespace DSIS.Graph.Abstract
 {
-  public class NodeFlagValue
+  public struct NodeFlagValue
   {
     private uint myFlags;
 
