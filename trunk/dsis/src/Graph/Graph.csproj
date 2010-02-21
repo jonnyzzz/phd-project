@@ -28,6 +28,7 @@
     <Compile Include="src\Abstract\FlagsNodeHolder.cs" />
     <Compile Include="src\Abstract\GraphAlgorithms.AsList.cs" />
     <Compile Include="src\Abstract\GraphAlgorithms.cs" />
+    <Compile Include="src\Abstract\GraphAlgorithms.Dump.cs" />
     <Compile Include="src\Abstract\GraphAlgorithms.Tarjan.cs" />
     <Compile Include="src\Abstract\GraphDataHolder.cs" />
     <Compile Include="src\Abstract\GraphDataHolderProxy.cs" />

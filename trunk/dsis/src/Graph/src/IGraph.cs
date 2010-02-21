@@ -5,7 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
 
@@ -16,13 +15,11 @@ namespace DSIS.Graph
     int NodesCount { get; }
     int EdgesCount { get; }
 
-    void Dump(TextWriter tw);
-    string Dump();
-
     void DoGeneric(IGraphWith with);    
   }
 
-  public interface IGraph<TCoordinate> : IGraph where TCoordinate : ICellCoordinate
+  public interface IGraph<TCoordinate> : IGraph 
+    where TCoordinate : ICellCoordinate
   {
     ICellCoordinateSystem<TCoordinate> CoordinateSystem { get; }
     IEnumerable<INode<TCoordinate>> Nodes { get; }

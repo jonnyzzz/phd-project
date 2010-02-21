@@ -91,14 +91,6 @@ namespace DSIS.Graph.Abstract
       throw new NotImplementedException();
     }
 
-    public override void Dump(TextWriter tw)
-    {
-      base.Dump(tw);
-      tw.WriteLine();
-      DumpComponentsGraph(tw);
-      tw.WriteLine("-----------------------------------------");
-    }
-
     StrongComponentNode<TCell> IGraphNodeFactory<StrongComponentNode<TCell>, TCell>.CreateNode(TCell coordinate)
     {
       return new StrongComponentNode<TCell>(coordinate);

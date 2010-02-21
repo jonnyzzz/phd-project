@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DSIS.Core.Builders;
 using DSIS.Core.Mock;
 using DSIS.Function.Mock;
@@ -8,6 +9,7 @@ using NUnit.Framework;
 
 namespace DSIS.CellImageBuilder.Shared
 {
+  [Obsolete("Use TestMethodBase`0")]
   public abstract class MethodTestBase<T,Q, TM, TP>
     where TM : ICellImageBuilder<Q>, new()
     where TP : ICellImageBuilderSettings

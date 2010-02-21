@@ -49,6 +49,7 @@
     <Compile Include="testSrc\Impl\StrongComponentStrongComponentManagerTest.cs" />
     <Compile Include="testSrc\Impl\TarjanComponentGraphTest.cs" />
     <Compile Include="testSrc\OrderedListTest.cs" />
+    <Compile Include="testSrc\PerformanceTests.cs" />
     <Compile Include="testSrc\TarjanGraphTest.cs" />
   </ItemGroup>
   <ItemGroup>

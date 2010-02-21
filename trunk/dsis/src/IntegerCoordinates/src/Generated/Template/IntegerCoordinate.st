@@ -23,6 +23,8 @@ namespace DSIS.Generated
       internal readonly $JInt$ mySubdivisionL$it$;
       internal readonly $JInt$ mySubdivisionMinusOneL$it$;
     }$
+
+    internal readonly IntegerCoordinate$Key$ NULL = new IntegerCoordinate$Key$($DimensionIt:{-1}; separator=","$);
     
     public IntegerCoordinateSystem$Key$(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
@@ -77,7 +79,7 @@ namespace DSIS.Generated
     }
     }$
 
-    public new double ToExternal(long pt, int i)
+    public double ToExternal(long pt, int i)
     {
       switch(i)
       {
@@ -141,13 +143,13 @@ namespace DSIS.Generated
 
     public bool IsNull(IntegerCoordinate$Key$ coord)
     {
-      return coord == null;
+      return coord.l0 < 0;
     }
 
     public IntegerCoordinate$Key$ FromPoint(double[] point)
     {
       if (!SystemSpace.Contains(point))
-        return null;
+        return NULL;
       
       $DimensionIt:{
         $JInt$ l$it$ = ToInternalL$it$(point[$it$]);
@@ -199,7 +201,7 @@ namespace DSIS.Generated
   }
 
   [EqualityComparer(typeof(IntegerCoordinateEqualityComparer$Key$))]
-  public class IntegerCoordinate$Key$ : IIntegerCoordinate
+  public struct IntegerCoordinate$Key$ : IIntegerCoordinate
   {
     $DimensionIt:{
     public readonly $JInt$ l$it$;

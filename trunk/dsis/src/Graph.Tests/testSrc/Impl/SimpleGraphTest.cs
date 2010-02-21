@@ -3,6 +3,7 @@
  * Created: 3 декабря 2006 г.
  */
 
+using DSIS.Graph.Abstract;
 using DSIS.Graph.Tests.Generic;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;

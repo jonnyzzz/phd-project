@@ -3,13 +3,14 @@
  * Created: 2 декабря 2006 г.
  */
 
+
 using System.Collections.Generic;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
 
-namespace DSIS.Graph
+namespace DSIS.Graph.Tests
 {
   [TestFixture]
   public class HashSetTest

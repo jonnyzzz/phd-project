@@ -119,46 +119,6 @@ namespace DSIS.Graph.Abstract
       get { return myCoordinateSystem; }
     }
 
-    public virtual void Dump(TextWriter tw)
-    {
-      tw.WriteLine(this);
-      var ids = new Dictionary<TNode, int>();
-      int lastId = 0;
-      foreach (TNode node in myNodes.Values)
-      {
-        int id;
-        if (!ids.TryGetValue(node, out id))
-        {
-          id = ++lastId;
-          ids[node] = id;
-        }
-
-        tw.Write("  {0} -> {{ ", id);
-
-        foreach (TNode pair in node.Edges)
-        {
-          int id2;
-          if (!ids.TryGetValue(pair, out id2))
-          {
-            id2 = ++lastId;
-            ids[pair] = id2;
-          }
-
-          tw.Write("{0}, ", id2);
-        }
-
-        tw.WriteLine(" }}");
-      }
-      tw.WriteLine("Finished!\r\n");
-    }
-
-    public string Dump()
-    {
-      var sw = new StringWriter();
-      Dump(sw);
-      return sw.ToString();
-    }
-
     public void DoGeneric(IGraphWith with)
     {
       with.With(this);

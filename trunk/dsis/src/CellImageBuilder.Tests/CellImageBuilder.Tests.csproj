@@ -27,7 +27,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\AdaptiveMethodTest.cs" />
-    <Compile Include="src\AdaptiveMethodTest2d.cs" />
     <Compile Include="src\AdaptiveMethodTestBase.cs" />
     <Compile Include="src\BoxAdaptiveMethodBaseTest.cs" />
     <Compile Include="src\BoxAdaptiveMethodIntegerCoordinate2dTest.cs" />
