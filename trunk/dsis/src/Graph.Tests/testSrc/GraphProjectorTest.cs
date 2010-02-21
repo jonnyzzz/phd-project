@@ -1,5 +1,6 @@
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;

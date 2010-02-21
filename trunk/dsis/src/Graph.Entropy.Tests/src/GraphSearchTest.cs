@@ -4,8 +4,10 @@ using System.Text;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 

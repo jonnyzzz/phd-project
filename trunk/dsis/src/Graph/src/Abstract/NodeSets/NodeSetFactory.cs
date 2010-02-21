@@ -1,6 +1,6 @@
 using DSIS.Core.Coordinates;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract.NodeSets
 {
   public class NodeSetFactory<TNode, TCell>
     where TCell : ICellCoordinate

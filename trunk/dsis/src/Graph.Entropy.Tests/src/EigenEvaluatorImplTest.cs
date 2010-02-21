@@ -4,6 +4,7 @@ using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Eigen;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Tests;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 

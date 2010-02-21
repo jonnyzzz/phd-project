@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Abstract.NodeSets;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract 
@@ -54,7 +55,7 @@ namespace DSIS.Graph.Abstract
     internal bool AddEdgeTo(TInh node)
     {
       bool wasAdded;
-      myEdges = myEdges.AddIfNotReplace(ref node, out wasAdded);
+      myEdges = myEdges.AddIfNotReplace(node, out wasAdded);
       return wasAdded;
     }
 

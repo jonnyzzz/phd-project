@@ -1,8 +1,9 @@
 using System;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
+using DSIS.Graph.Tarjan;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract.Algorithms
 {
   public static partial class GraphAlgorithms
   {
@@ -27,7 +28,7 @@ namespace DSIS.Graph.Abstract
     }
 
     private class NodeAndData<TNode,TCell> : IEquatable<NodeAndData<TNode, TCell>> where TNode : Node<TNode,TCell>
-      where TCell : ICellCoordinate
+                                                                                   where TCell : ICellCoordinate
     {
       public readonly TNode Node;
       public readonly TarjanNodeData<TCell, TNode> Data;
@@ -75,7 +76,7 @@ namespace DSIS.Graph.Abstract
     {
       info.Maximum = graph.EdgesCount;
 
-      using (IGraphDataHoler<TarjanNodeData<TCell, TNode>, TNode> holder = graph.CreateDataHolder(x => new TarjanNodeData<TCell,TNode>(x)))
+      using (var holder = graph.CreateDataHolder(x => new TarjanNodeData<TCell,TNode>(x)))
       using(var stack = new TarjanNodeStack<TCell, TNode>(graph.CreateNodeFlagsHolder("STACK")))
       using(var route = new TarjanNodeStack<TCell, TNode>(graph.CreateNodeFlagsHolder("ROUTE")))
       {

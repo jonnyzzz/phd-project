@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
+using DSIS.Graph.Abstract;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Tarjan
 {
   internal class TarjanStrongComponentImpl<TCell, TNode> : IGraphStrongComponents<TCell>
     where TCell : ICellCoordinate

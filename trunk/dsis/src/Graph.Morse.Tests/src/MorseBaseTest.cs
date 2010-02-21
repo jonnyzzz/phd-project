@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Threading;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Abstract.Algorithms;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;

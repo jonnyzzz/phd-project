@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Abstract;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Tarjan
 {
   public class TarjanNodeStack<TCell, TNode> : IDisposable
     where TCell : ICellCoordinate

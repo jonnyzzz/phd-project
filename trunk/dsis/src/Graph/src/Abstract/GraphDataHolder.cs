@@ -22,7 +22,6 @@ namespace DSIS.Graph.Abstract
       myCreationStacktrace = Environment.StackTrace;
     }
 
-
     public TData GetData(TNode node)
     {
       var data = node.UserData;

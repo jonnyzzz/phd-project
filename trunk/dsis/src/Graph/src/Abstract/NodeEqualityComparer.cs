@@ -9,11 +9,10 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate
   {
     private static readonly IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();
-    public static NodeEqualityComparer<TNode, TCell> INSTANCE = new NodeEqualityComparer<TNode, TCell>();
 
     public bool Equals(TNode x, TNode y)
     {
-      return CellComparer.Equals(x.Coordinate, y.Coordinate);
+      return x.HashCodeInternal == y.HashCodeInternal && CellComparer.Equals(x.Coordinate, y.Coordinate);
     }
 
     public int GetHashCode(TNode obj)

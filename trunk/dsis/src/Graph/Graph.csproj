@@ -69,7 +69,6 @@
     <Compile Include="src\Abstract\NodeSets\GraphNodeHashListSetState.cs" />
     <Compile Include="src\Abstract\NodeSets\INodeSet.cs" />
     <Compile Include="src\Abstract\NodeSets\INodeSetState.cs" />
-    <Compile Include="src\Abstract\NodeSets\NodeSetBase.cs" />
     <Compile Include="src\Abstract\NodeSets\NodeSetFactory.cs" />
     <Compile Include="src\Abstract\NodeSets\OneNodeSetState.cs" />
     <Compile Include="src\Adapter\GraphCellImageBuilder.cs" />
@@ -83,7 +82,6 @@
     <Compile Include="src\NodeEqualityComparer.cs" />
     <Compile Include="src\INode.cs" />
     <Compile Include="src\IStrongComponentInfo.cs" />
-    <Compile Include="src\IStrongComponentInfoConnectivity.cs" />
     <Compile Include="src\IGraphStrongComponents.cs" />
     <Compile Include="src\IGraph.cs" />
     <Compile Include="src\Simple\SimpleGraph.cs" />

@@ -3,6 +3,7 @@ using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.SmartPath;
 using DSIS.Graph.Entropy.Impl.Util;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 

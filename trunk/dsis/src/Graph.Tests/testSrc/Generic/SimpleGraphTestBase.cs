@@ -1,4 +1,6 @@
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Abstract.Algorithms;
+using DSIS.Graph.Simple;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;

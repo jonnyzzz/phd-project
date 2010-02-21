@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract.NodeSets
 {
   //todo: Implement IList to have indexer and to be able to replace it with List<T>
   public class GraphNodeHashList<TNode, TCell> : INodeSet<TNode, TCell>
@@ -59,6 +59,11 @@ namespace DSIS.Graph.Abstract
     {
       return FindItem(node) != null;
     }
+
+    public bool Contains(TNode node)
+    {
+      return FindItem(node) != null;
+    }
     
     public TNode Find(TCell node)
     {
@@ -66,23 +71,31 @@ namespace DSIS.Graph.Abstract
       return find != null ? find.Value : null;
     }
 
-    //todo: Create FindItem(TNode) no use cached hashcodes
-    private Item FindItem(TCell node)
+    private Item FindItem(TCell cell)
     {
-      var hashCode = Node<TNode, TCell>.NodeHashCode(node);
+      return FindCellInternal(cell, Node<TNode, TCell>.NodeHashCode(cell));
+    }
+
+    private Item FindCellInternal(TCell cell, int hashCode)
+    {
       var index = hashCode % myHashMax;
 
       Item it = myItems[index];
       while (it != null)
       {
         var value = it.Value;
-        if (value.HashCodeInternal == hashCode && COMPARER.Equals(value.Coordinate, node))
+        if (value.HashCodeInternal == hashCode && COMPARER.Equals(value.Coordinate, cell))
         {
           return it;
         }
         it = it.NextItem;
       }
       return null;
+    }
+
+    private Item FindItem(TNode node)
+    {
+      return FindCellInternal(node.Coordinate, node.HashCodeInternal);      
     }
 
     public IEnumerable<TNode> Values

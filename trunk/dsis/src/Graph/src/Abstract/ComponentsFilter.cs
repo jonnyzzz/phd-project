@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Tarjan;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
@@ -52,15 +53,7 @@ namespace DSIS.Graph.Abstract
 
       public bool Accept(uint value)
       {
-        if (value <= 0)
-          return false;
-
-        for (int i = 0; i < myData.Length; i++)
-        {
-          if (value == myData[i])
-            return true;
-        }
-        return false;
+        return value > 0 && myData.Any(t => value == t);
       }
     }
 
@@ -111,7 +104,7 @@ namespace DSIS.Graph.Abstract
       where TCell : ICellCoordinate      
     {      
       //TODO: Return enumerable as is iff filter is AllFilter
-      return Enumerable.Where(nodes, x => filter.Accept(x.ComponentId));
+      return nodes.Where(x => filter.Accept(x.ComponentId));
     }
   }
 }

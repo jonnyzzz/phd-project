@@ -7,6 +7,7 @@ using DSIS.Core.Processor;
 using DSIS.Core.System;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 

@@ -4,6 +4,7 @@ using System.Threading;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Util;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;

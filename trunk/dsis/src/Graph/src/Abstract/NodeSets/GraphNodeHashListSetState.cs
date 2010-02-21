@@ -1,6 +1,6 @@
 using DSIS.Core.Coordinates;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract.NodeSets
 {
   public class GraphNodeHashListSetState<TNode, TCell> : GraphNodeHashList<TNode, TCell>, INodeSetState<TNode, TCell>
     where TCell : ICellCoordinate
@@ -10,17 +10,12 @@ namespace DSIS.Graph.Abstract
     {
     }
 
-    public INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded)
+    public INodeSetState<TNode, TCell> AddIfNotReplace(TNode t, out bool wasAdded)
     {
-      var found = Find(t.Coordinate);
-      
-      wasAdded = (found == null);
+      wasAdded = !Contains(t);      
       if (wasAdded)
       {
         AddNodeNoCheck(t);
-      } else
-      {
-        t = found;
       }
       return this;
     }

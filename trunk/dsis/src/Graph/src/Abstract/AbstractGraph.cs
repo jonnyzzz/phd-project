@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Abstract.Algorithms;
+using DSIS.Graph.Abstract.NodeSets;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
@@ -78,7 +79,7 @@ namespace DSIS.Graph.Abstract
     public bool Contains(TNode coordinate)
     {
       //todo:
-      return myNodes.Contains(coordinate.Coordinate);
+      return myNodes.Contains(coordinate);
     }
 
     protected abstract TInh CreateGraph(ICellCoordinateSystem<TCell> system);

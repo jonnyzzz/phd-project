@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract.Algorithms
 {
   public static partial class GraphAlgorithms
   {
@@ -34,7 +33,7 @@ namespace DSIS.Graph.Abstract
         Dump(graph, myWriter);
       }
 
-      private void Dump<TNode, TCell>(IGraph<TCell, TNode> graph, TextWriter tw)
+      private static void Dump<TNode, TCell>(IGraph<TCell, TNode> graph, TextWriter tw)
         where TCell : ICellCoordinate
         where TNode : Node<TNode, TCell>
       {

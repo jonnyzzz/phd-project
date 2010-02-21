@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Abstract.Algorithms;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
 using NUnit.Framework;

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.JVR;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;

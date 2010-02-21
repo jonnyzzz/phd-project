@@ -7,6 +7,7 @@ using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Graph.Entropy.Tests;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;

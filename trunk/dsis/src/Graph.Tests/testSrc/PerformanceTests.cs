@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 

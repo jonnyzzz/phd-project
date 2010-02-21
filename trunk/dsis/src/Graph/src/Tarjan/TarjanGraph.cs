@@ -1,6 +1,7 @@
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Abstract;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Tarjan
 {
   public class TarjanGraph<TCell> :
     AbstractGraph<TarjanGraph<TCell>, TCell, TarjanNode<TCell>>,

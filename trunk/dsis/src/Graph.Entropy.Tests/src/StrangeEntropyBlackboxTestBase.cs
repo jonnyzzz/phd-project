@@ -4,6 +4,7 @@ using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Graph.Entropy.Impl.Util;
+using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 

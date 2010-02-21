@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract.NodeSets
 {
   public class OneNodeSetState<TNode, TCell> : INodeSetState<TNode, TCell>
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
   {
-    private static readonly IEqualityComparer<TCell> COMPARER = EqualityComparerFactory<TCell>.GetComparer();
+    private static readonly IEqualityComparer<TNode> COMPARER = EqualityComparerFactory<TNode>.GetComparer();
     private readonly TNode myNode;
     private readonly NextDelegate myNext;
 
@@ -22,14 +22,13 @@ namespace DSIS.Graph.Abstract
 
     public IEnumerable<TNode> Values
     {
-      get { return new TNode[] {myNode}; }
+      get { return new[] {myNode}; }
     }
 
-    public INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded)
+    public INodeSetState<TNode, TCell> AddIfNotReplace(TNode t, out bool wasAdded)
     {
-      if (COMPARER.Equals(myNode.Coordinate, t.Coordinate))
+      if (COMPARER.Equals(myNode, t))
       {
-        t = myNode;
         wasAdded = false;
         return this;
       }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract.NodeSets
 {
   public class EmptyNodeSetState<TNode, TCell> : INodeSetState<TNode, TCell>
     where TCell : ICellCoordinate
@@ -22,7 +22,7 @@ namespace DSIS.Graph.Abstract
       get { return EmptyArray<TNode>.Instance; }
     }
 
-    public INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded)
+    public INodeSetState<TNode, TCell> AddIfNotReplace(TNode t, out bool wasAdded)
     {
       wasAdded = true;
       return myNext(t);

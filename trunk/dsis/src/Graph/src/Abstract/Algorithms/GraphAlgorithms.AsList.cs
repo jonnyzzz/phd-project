@@ -2,7 +2,7 @@
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract.Algorithms
 {
   public static partial class GraphAlgorithms
   {

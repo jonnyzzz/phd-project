@@ -1,7 +1,8 @@
 using System.Linq;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Abstract;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Simple
 {
   public class SimpleGraph<TCellCoordinate> :
     AbstractGraph<SimpleGraph<TCellCoordinate>, TCellCoordinate, SimpleNode<TCellCoordinate>>,

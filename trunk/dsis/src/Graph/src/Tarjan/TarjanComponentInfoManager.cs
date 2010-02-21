@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Tarjan
 {
   public class TarjanComponentInfoManager
   {

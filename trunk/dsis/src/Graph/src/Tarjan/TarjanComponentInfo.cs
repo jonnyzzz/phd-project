@@ -1,7 +1,8 @@
 using System;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Abstract;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Tarjan
 {
   public class TarjanComponentInfo : IStrongComponentInfo, IEquatable<TarjanComponentInfo>
   {

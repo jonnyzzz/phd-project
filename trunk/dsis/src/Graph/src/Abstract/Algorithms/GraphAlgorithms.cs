@@ -1,6 +1,6 @@
 using DSIS.Core.Coordinates;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract.Algorithms
 {
   public static partial class GraphAlgorithms
   {

@@ -1,6 +1,6 @@
 using DSIS.Core.Coordinates;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Abstract.NodeSets
 {
   public interface INodeSet<TNode, TCell> : INodeCollection<TNode, TCell>
     where TCell : ICellCoordinate 
@@ -9,6 +9,7 @@ namespace DSIS.Graph.Abstract
     TNode AddIfNotReplace(TCell cell, IGraphNodeFactory<TNode, TCell> ext, out bool wasAdded);
 
     bool Contains(TCell node);
+    bool Contains(TNode node);
 
     TNode Find(TCell node);
   }

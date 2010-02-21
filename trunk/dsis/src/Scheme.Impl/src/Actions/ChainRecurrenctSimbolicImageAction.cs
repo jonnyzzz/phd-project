@@ -2,6 +2,7 @@ using System;
 using DSIS.Core.Util;
 using DSIS.Graph;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions

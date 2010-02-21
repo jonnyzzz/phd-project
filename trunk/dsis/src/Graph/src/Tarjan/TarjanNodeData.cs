@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Abstract;
 
-namespace DSIS.Graph.Abstract
+namespace DSIS.Graph.Tarjan
 {
   internal class TarjanNodeData<TCell, TNode> 
     where TCell : ICellCoordinate
