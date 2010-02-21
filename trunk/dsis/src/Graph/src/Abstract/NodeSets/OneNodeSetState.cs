@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract.NodeSets
 {
@@ -8,7 +7,7 @@ namespace DSIS.Graph.Abstract.NodeSets
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
   {
-    private static readonly IEqualityComparer<TNode> COMPARER = EqualityComparerFactory<TNode>.GetComparer();
+    private static readonly IEqualityComparer<TNode> COMPARER = new NodeEqualityComparer<TNode, TCell>();
     private readonly TNode myNode;
     private readonly NextDelegate myNext;
 

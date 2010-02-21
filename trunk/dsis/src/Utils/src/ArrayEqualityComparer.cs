@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace DSIS.Utils
 {
   public class ArrayEqualityComparer<T> : IEqualityComparer<T[]>
   {
+    [UsedImplicitly]
     public static readonly ArrayEqualityComparer<T> INSTANCE = new ArrayEqualityComparer<T>();
+
     private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
 
     public bool Equals(T[] x, T[] y)
