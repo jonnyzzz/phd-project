@@ -39,18 +39,12 @@
     <Compile Include="src\Abstract\INodeInternal.cs" />
     <Compile Include="src\Abstract\INodeSet.cs" />
     <Compile Include="src\Abstract\INodeSetState.cs" />
-    <Compile Include="src\Abstract\IStrongComponentInfoEx.cs" />
-    <Compile Include="src\Abstract\IStrongComponentInfoManager.cs" />
     <Compile Include="src\Abstract\NodeEqualityComparer.cs" />
     <Compile Include="src\Abstract\NodeFlag.cs" />
     <Compile Include="src\Abstract\NodeFlagValue.cs" />
     <Compile Include="src\Abstract\NodeSetBase.cs" />
     <Compile Include="src\Abstract\NodeSetFactory.cs" />
     <Compile Include="src\Abstract\OneNodeSetState.cs" />
-    <Compile Include="src\Abstract\StrongComponentHash.cs" />
-    <Compile Include="src\Abstract\StrongComponentInfo2.cs" />
-    <Compile Include="src\Abstract\StrongComponentInfoManager2.cs" />
-    <Compile Include="src\Abstract\StrongComponentInfoManagerBase.cs" />
     <Compile Include="src\Abstract\TarjanComponentInfo.cs" />
     <Compile Include="src\Abstract\TarjanNode.cs" />
     <Compile Include="src\Abstract\TarjanComponentInfoManager.cs" />
@@ -70,16 +64,11 @@
     <Compile Include="src\INode.cs" />
     <Compile Include="src\IStrongComponentInfo.cs" />
     <Compile Include="src\IStrongComponentInfoConnectivity.cs" />
-    <Compile Include="src\Abstract\StrongComponentInfoManager.cs" />
     <Compile Include="src\Abstract\TarjanGraph.cs" />
     <Compile Include="src\IGraphStrongComponents.cs" />
     <Compile Include="src\Abstract\SimpleGraph.cs" />
     <Compile Include="src\Abstract\Node.cs" />
-    <Compile Include="src\Abstract\StrongComponentGraph.cs" />
-    <Compile Include="src\Abstract\StrongComponentInfo.cs" />
-    <Compile Include="src\Abstract\StrongComponentNode.cs" />
     <Compile Include="src\IGraph.cs" />
-    <Compile Include="src\OneComponentsGraphAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
@@ -100,6 +89,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="src\Tarjan\" />
     <Folder Include="src\Util\" />
   </ItemGroup>
   <Import Project="../Before.Build.Targets" />

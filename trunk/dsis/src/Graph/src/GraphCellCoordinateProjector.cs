@@ -20,6 +20,7 @@ namespace DSIS.Graph
    
     public T Project(T coordinate)
     {
+      //TODO: Check IsNull
       T project = myProjector.Project(coordinate);
       return project != null && myGraph.Contains(project) ? project : default(T);
     }

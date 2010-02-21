@@ -28,15 +28,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="testSrc\ComponentGraphTestBase.cs" />
     <Compile Include="testSrc\Generated\SimpleGraph2dTest.cs" />
-    <Compile Include="testSrc\Generated\StrongComponentStrongComponentManager22dTest.cs" />
-    <Compile Include="testSrc\Generated\StrongComponentStrongComponentManager2dTest.cs" />
     <Compile Include="testSrc\Generated\TarjanComponentGraph2dTest.cs" />
     <Compile Include="testSrc\GenericsTest.cs" />
     <Compile Include="testSrc\Generic\NodeFalgsTest.cs" />
     <Compile Include="testSrc\Generic\SimpleGraphTestBase.cs" />
-    <Compile Include="testSrc\Generic\StrongComponentGraphBaseTest.cs" />
-    <Compile Include="testSrc\Generic\StrongComponentStrongComponentManager2BaseTest.cs" />
-    <Compile Include="testSrc\Generic\StrongComponentStrongComponentManagerBaseTest.cs" />
     <Compile Include="testSrc\Generic\TarjanComponentGraphBaseTest.cs" />
     <Compile Include="testSrc\GraphNodeHashListTest.cs" />
     <Compile Include="testSrc\GraphPerformanceTest.cs" />
@@ -45,8 +40,6 @@
     <Compile Include="testSrc\HashedQueueTest.cs" />
     <Compile Include="testSrc\HashSetTest.cs" />
     <Compile Include="testSrc\Impl\SimpleGraphTest.cs" />
-    <Compile Include="testSrc\Impl\StrongComponentStrongComponentManager2Test.cs" />
-    <Compile Include="testSrc\Impl\StrongComponentStrongComponentManagerTest.cs" />
     <Compile Include="testSrc\Impl\TarjanComponentGraphTest.cs" />
     <Compile Include="testSrc\OrderedListTest.cs" />
     <Compile Include="testSrc\PerformanceTests.cs" />
