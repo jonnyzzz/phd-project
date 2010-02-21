@@ -149,9 +149,9 @@ namespace DSIS.Graph.Abstract
       get { return myNodes.Values; }
     }
 
-    public IEnumerable<TNode> GetEdgesInternal(INode<TCell> forNode)
+    public IEnumerable<TNode> GetEdgesInternal(TNode forNode)
     {
-      return ((TNode) forNode).EdgesInternal;
+      return forNode.EdgesInternal;
     }
 
     public override string ToString()
@@ -191,7 +191,7 @@ namespace DSIS.Graph.Abstract
 
     IGraphDataHoler<TData, INode<TCell>> IGraph<TCell>.CreateDataHolder<TData>(Converter<INode<TCell>, TData> def)
     {
-      return new GraphDataHolderProxy<TData, TCell, TNode>(CreateDataHolder(x=>def(x)));
+      return new GraphDataHolderProxy<TData, TCell, TNode>(CreateDataHolder(def));
     }
   }
 }

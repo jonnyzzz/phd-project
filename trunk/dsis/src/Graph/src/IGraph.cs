@@ -60,7 +60,7 @@ namespace DSIS.Graph
     where TCell : ICellCoordinate
   {
     IEnumerable<TNode> NodesInternal { get; }
-    IEnumerable<TNode> GetEdgesInternal(INode<TCell> forNode);
+    IEnumerable<TNode> GetEdgesInternal(TNode forNode);
 
     new TNode AddNode(TCell coordinate);
 

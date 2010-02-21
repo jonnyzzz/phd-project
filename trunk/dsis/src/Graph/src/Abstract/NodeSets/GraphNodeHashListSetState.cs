@@ -6,10 +6,6 @@ namespace DSIS.Graph.Abstract
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
   {
-    public GraphNodeHashListSetState(int capacity) : base(capacity)
-    {
-    }
-
     public GraphNodeHashListSetState(int capacity, TNode node, params TNode[] nodes) : base(capacity, node, nodes)
     {
     }
@@ -17,8 +13,9 @@ namespace DSIS.Graph.Abstract
     public INodeSetState<TNode, TCell> AddIfNotReplace(ref TNode t, out bool wasAdded)
     {
       var found = Find(t.Coordinate);
-
-      if (wasAdded = (found == null))
+      
+      wasAdded = (found == null);
+      if (wasAdded)
       {
         AddNodeNoCheck(t);
       } else
