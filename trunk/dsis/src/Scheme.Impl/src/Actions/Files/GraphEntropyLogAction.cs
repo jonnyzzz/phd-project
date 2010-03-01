@@ -27,7 +27,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
       //todo:!Not optimal!
       IGraphStrongComponents<Q> components = Keys.GetGraphComponents<Q>().Get(input);
-      IGraph<Q> graph = components.AsGraph(components.Components);
+      IReadonlyGraph<Q> graph = components.AsGraph(components.Components);
       
       DumpEntropy(graph, file, false);
 
@@ -39,7 +39,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       }
     }
 
-    private static void DumpEntropy(IGraph graph, string file, bool isProject)
+    private static void DumpEntropy(IReadonlyGraph graph, string file, bool isProject)
     {
       int nodes = graph.NodesCount;
       int edges = graph.EdgesCount;

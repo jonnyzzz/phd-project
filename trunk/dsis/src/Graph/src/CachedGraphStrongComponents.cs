@@ -61,7 +61,7 @@ namespace DSIS.Graph
         var g = Cache(info);
         var n = g.Find(node.Coordinate);
         if (n != null)
-          //only one strong component may contain node
+          //only one strong component may contain a node
           return g.GetEdges(n);
       }
       return EmptyArray<INode<T>>.Instance;

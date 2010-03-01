@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Utils;
@@ -13,16 +14,16 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
 
     private readonly double myEps;
     
-    private readonly IGraph<T> myGraph;
+    private readonly IReadonlyGraph<T> myGraph;
     private double? myEntropy;
 
-    public EigenEntropyEvaluatorImpl(double eps, IGraph<T> graph)
+    public EigenEntropyEvaluatorImpl(double eps, IReadonlyGraph<T> graph)
     {
       myEps = eps;
       myGraph = graph;
     }
 
-    public IGraph<T> Graph
+    public IReadonlyGraph<T> Graph
     {
       get { return myGraph; }
     }
@@ -73,31 +74,25 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
     /// <param name="graph"></param>
     /// <param name="v"></param>
     /// <returns></returns>
-    private static Pair<double, Dictionary<INode<T>, double>> Multiply(double div, IGraph<T> graph,
-                                                                       IDictionary<INode<T>, double> v)
+    private static Pair<double, Dictionary<INode<T>, double>> Multiply(double div, IReadonlyGraph<T> graph, IDictionary<INode<T>, double> v)
     {
       var v2 = Create(graph);
       double norm = 0;
       foreach (var node in graph.Nodes)
       {
-        double t = 0;
-        foreach (var edge in graph.GetEdges(node))
-        {
-          t += v[edge]; //* 1
-        }
-        t /= div;
+        double t = graph.GetEdges(node).Sum(edge => v[edge]) / div;
         v2.Add(node, t);
         norm += t*t; //All numbers > 0 thus Abs is not necessary
       }
       return new Pair<double, Dictionary<INode<T>, double>>(norm, v2);
     }
 
-    private static Dictionary<INode<T>, double> Create(IGraph graph)
+    private static Dictionary<INode<T>, double> Create(IReadonlyGraph graph)
     {
       return new Dictionary<INode<T>, double>(graph.NodesCount, EqualityComparerFactory<INode<T>>.GetComparer());
     }
 
-    private static Dictionary<INode<T>, double> Create(IGraph<T> graph, double v)
+    private static Dictionary<INode<T>, double> Create(IReadonlyGraph<T> graph, double v)
     {
       var vs = Create(graph);
       foreach (var node in graph.Nodes)

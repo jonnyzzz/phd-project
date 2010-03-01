@@ -11,7 +11,7 @@ namespace DSIS.Graph
   }
 
   public interface IGraphWith<TCell>
-  where TCell : ICellCoordinate
+    where TCell : ICellCoordinate
   {
     void With<TNode>(IGraph<TCell, TNode> graph)
       where TNode : Node<TNode, TCell>;

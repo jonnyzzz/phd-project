@@ -73,12 +73,17 @@
     <Compile Include="src\Abstract\NodeSets\OneNodeSetState.cs" />
     <Compile Include="src\Adapter\GraphCellImageBuilder.cs" />
     <Compile Include="src\CachedGraphStrongComponents.cs" />
+    <Compile Include="src\FS\BTree.cs" />
+    <Compile Include="src\FS\FSBlocker.cs" />
     <Compile Include="src\GraphCellCoordinateProjector.cs" />
     <Compile Include="src\GraphStrongComponentsSubset.cs" />
     <Compile Include="src\GraphStrongComponentSubsetFactoryImpl.cs" />
+    <Compile Include="src\IGraphBuilder.cs" />
     <Compile Include="src\IGraphDataHoler.cs" />
     <Compile Include="src\IGraphStrongComponentSubsetFactory.cs" />
     <Compile Include="src\IGraphWith.cs" />
+    <Compile Include="src\IReadonlyGraph.cs" />
+    <Compile Include="src\IReadonlyGraphWith.cs" />
     <Compile Include="src\NodeEqualityComparer.cs" />
     <Compile Include="src\INode.cs" />
     <Compile Include="src\IStrongComponentInfo.cs" />

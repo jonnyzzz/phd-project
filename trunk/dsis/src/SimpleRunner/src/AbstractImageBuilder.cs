@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
 using DSIS.Core.System;
 using DSIS.Core.Util;
 using DSIS.Graph;
-using DSIS.Graph.Abstract;
 using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Adapter;
 using DSIS.Graph.Tarjan;
@@ -224,17 +224,9 @@ namespace DSIS.SimpleRunner
 
     protected virtual void OnComputationStarted(T system, AbstractImageBuilderContext<Q> cx)
     {
-      List<VoidDelegate> post = new List<VoidDelegate>();
-      foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
-      {
-        VoidDelegate d = listener.ComputationStartedC(system, cx, myUseUnsimmetric);
-        if (d != null)
-        {
-          post.Add(d);
-        }
-      }
+      var post = myListeners.Select(listener => listener.ComputationStartedC(system, cx, myUseUnsimmetric)).Where(d => d != null).ToList();
 
-      foreach (VoidDelegate voidDelegate in post)
+      foreach (var voidDelegate in post)
       {
         voidDelegate();
       }
@@ -242,45 +234,30 @@ namespace DSIS.SimpleRunner
 
     protected virtual void OnStepStarted(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide)
     {
-      Fire(delegate(IAbstractImageBuilderListener<T, Q> listener)
-             {
-               return listener.OnStepStartedC(system, cx, (long[]) subdivide.Clone());
-             });
+      Fire(listener => listener.OnStepStartedC(system, cx, (long[]) subdivide.Clone()));
     }
 
     protected virtual void OnGraphConstructed(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx)
     {
-      Fire(delegate(IAbstractImageBuilderListener<T, Q> listener)
-             {
-               return listener.GraphConstructedC(graph, system, cx);
-             });
+      Fire(listener => listener.GraphConstructedC(graph, system, cx));
     }
 
     protected virtual void OnGraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                                         AbstractImageBuilderContext<Q> cx)
     {
-      Fire(delegate(IAbstractImageBuilderListener<T, Q> listener)
-             {
-               return listener.GraphComponentsConstructedC(comps, graph, system, cx);
-             });
+      Fire(listener => listener.GraphComponentsConstructedC(comps, graph, system, cx));
     }
 
     protected virtual void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                           AbstractImageBuilderContext<Q> cx)
     {
-      Fire(delegate(IAbstractImageBuilderListener<T, Q> listener)
-             {
-               return listener.OnStepFinishedC(comps, graph, system, cx);
-             });
+      Fire(listener => listener.OnStepFinishedC(comps, graph, system, cx));
     }
 
     protected virtual void OnComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                                  AbstractImageBuilderContext<Q> cx)
     {
-      Fire(delegate(IAbstractImageBuilderListener<T, Q> listener)
-      {
-        return listener.ComputationFinishedC(comps, graph, system, cx);
-      });
+      Fire(listener => listener.ComputationFinishedC(comps, graph, system, cx));
     }
   }
 }

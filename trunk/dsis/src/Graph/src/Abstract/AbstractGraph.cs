@@ -4,6 +4,7 @@ using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Abstract.NodeSets;
 using DSIS.Utils;
+using JetBrains.Annotations;
 
 namespace DSIS.Graph.Abstract
 {
@@ -58,6 +59,7 @@ namespace DSIS.Graph.Abstract
       return AddNode(coordinate);
     }
 
+    [NotNull]
     public TNode AddNode(TCell coordinate)
     {
       bool wasAdded;
@@ -84,14 +86,14 @@ namespace DSIS.Graph.Abstract
 
     protected abstract TInh CreateGraph(ICellCoordinateSystem<TCell> system);
 
-    IGraph<TCell> IGraph<TCell>.Project(ICellCoordinateSystemProjector<TCell> projector)
-    {
-      return Project(projector);
-    }
-
-    public IGraph<TCell, TNode> Project(ICellCoordinateSystemProjector<TCell> projector)
+    public IReadonlyGraph<TCell> Project(ICellCoordinateSystemProjector<TCell> projector)
     {
       return this.Project(projector, CreateGraph);
+    }
+
+    public void DoGeneric(IGraphWith with)
+    {
+      with.With(this);
     }
 
     public void DoGeneric(IGraphWith<TCell> with)
@@ -99,7 +101,22 @@ namespace DSIS.Graph.Abstract
       with.With(this);
     }
 
-    public INode<TCell> Find(TCell node)
+    public void DoGeneric(IReadonlyGraphWith with)
+    {
+      with.With(this);
+    }
+
+    public void DoGeneric(IReadonlyGraphWith<TCell> with)
+    {
+      with.With(this);
+    }
+
+    INode<TCell> IReadonlyGraphDeprecated<TCell>.Find(TCell node)
+    {
+      return myNodes.Find(node);
+    }
+
+    public TNode Find(TCell node)
     {
       return myNodes.Find(node);
     }
@@ -118,11 +135,6 @@ namespace DSIS.Graph.Abstract
     public ICellCoordinateSystem<TCell> CoordinateSystem
     {
       get { return myCoordinateSystem; }
-    }
-
-    public void DoGeneric(IGraphWith with)
-    {
-      with.With(this);
     }
 
     public int EdgesCount
@@ -190,7 +202,7 @@ namespace DSIS.Graph.Abstract
       myGraphDataHolder = null;
     }
 
-    IGraphDataHoler<TData, INode<TCell>> IGraph<TCell>.CreateDataHolder<TData>(Converter<INode<TCell>, TData> def)
+    IGraphDataHoler<TData, INode<TCell>> IReadonlyGraphDeprecated<TCell>.CreateDataHolder<TData>(Converter<INode<TCell>, TData> def)
     {
       return new GraphDataHolderProxy<TData, TCell, TNode>(CreateDataHolder(def));
     }
