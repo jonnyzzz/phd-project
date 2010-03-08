@@ -4,8 +4,8 @@
  */
 
 using System.Collections.Generic;
+using System.IO;
 using DSIS.Core.System;
-using DSIS.Core.Util;
 using DSIS.Persistance;
 using JetBrains.Annotations;
 
@@ -36,6 +36,8 @@ namespace DSIS.Core.Coordinates
   public interface ICellCoordinateSystem<T> : ICellCoordinateSystem
     where T : ICellCoordinate
   {
+    IEqualityComparer<T> Comparer { get; }
+
     /// <summary>
     /// Return ICellCoordinate for point.
     /// If point is outside of space <code>null</code> is returned
@@ -81,5 +83,12 @@ namespace DSIS.Core.Coordinates
     /// Loads saved set of coords. 
     /// </summary>
     IEnumerable<T> Load(IBinaryReader reader);
+  }
+
+  public interface ICellCoordinateSystemPersist<TCell> 
+    where TCell : ICellCoordinate
+  {
+    void Save(Stream stream, TCell cell);
+    TCell Load(Stream stream);
   }
 }

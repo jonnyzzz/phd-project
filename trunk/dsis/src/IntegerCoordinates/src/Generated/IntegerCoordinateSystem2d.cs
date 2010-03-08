@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DSIS.Core.System;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Persistance;
@@ -48,6 +49,11 @@ namespace DSIS.IntegerCoordinates.Generated
 
     public IntegerCoordinateSystem2d(ISystemSpace systemSpace) : this(systemSpace, systemSpace.InitialSubdivision)
     {
+    }
+
+    public IEqualityComparer<IntegerCoordinate2d> Comparer
+    {
+      get { return new IntegerCoordinate2dEqualityComparer(); }
     }
 
     public new long ToInternal(double point, int i)

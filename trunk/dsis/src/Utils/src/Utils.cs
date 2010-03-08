@@ -30,7 +30,7 @@ namespace DSIS.Utils
       return x;
     }
 
-    public static Q Safe<T, Q>(T t, Q def, Converter<T, Q> conv)
+    public static Q Safe<T, Q>(this T t, Q def, Converter<T, Q> conv)
       where T : class
     {
       return t == null ? def : conv(t);

@@ -78,12 +78,6 @@ namespace DSIS.Graph.Abstract
       return myNodes.Contains(coordinate);
     }
 
-    public bool Contains(TNode coordinate)
-    {
-      //todo:
-      return myNodes.Contains(coordinate);
-    }
-
     protected abstract TInh CreateGraph(ICellCoordinateSystem<TCell> system);
 
     public IReadonlyGraph<TCell> Project(ICellCoordinateSystemProjector<TCell> projector)

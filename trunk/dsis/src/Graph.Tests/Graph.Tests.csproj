@@ -27,6 +27,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="testSrc\ComponentGraphTestBase.cs" />
+    <Compile Include="testSrc\FS\FSGraphBuilderTest.cs" />
+    <Compile Include="testSrc\FS\IndexStreamTest.cs" />
     <Compile Include="testSrc\Generated\SimpleGraph2dTest.cs" />
     <Compile Include="testSrc\Generated\TarjanComponentGraph2dTest.cs" />
     <Compile Include="testSrc\GenericsTest.cs" />

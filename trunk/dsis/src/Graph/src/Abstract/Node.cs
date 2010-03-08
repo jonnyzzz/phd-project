@@ -13,8 +13,9 @@ namespace DSIS.Graph.Abstract
   {
     private static readonly IEqualityComparer<TCell> CellComparer = EqualityComparerFactory<TCell>.GetComparer();
     private static readonly NodeSetFactory<TInh, TCell> NodeFactory = new NodeSetFactory<TInh, TCell>();
-    private INodeSetState<TInh, TCell> myEdges;
 
+    
+    private INodeSetState<TInh, TCell> myEdges;
     public readonly TCell Coordinate;
 
     internal Object UserData;

@@ -57,6 +57,7 @@
     <Compile Include="src\LinkedList.cs" />
     <Compile Include="src\Lock.cs" />
     <Compile Include="src\LoggerHolper.cs" />
+    <Compile Include="src\LongConverter.cs" />
     <Compile Include="src\MemoryMonitorThread.cs" />
     <Compile Include="src\MultiDictionary.cs" />
     <Compile Include="src\MultiHashDictionary.cs" />

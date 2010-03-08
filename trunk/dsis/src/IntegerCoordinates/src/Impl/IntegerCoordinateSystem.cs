@@ -1,11 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using DSIS.Core.Coordinates;
 using DSIS.Core.System;
+using DSIS.Utils;
 
 namespace DSIS.IntegerCoordinates.Impl
 {
   public class IntegerCoordinateSystem : 
     IntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>, 
     IProcessorFactory<IntegerCoordinate>, 
-    IEXIntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>
+    IEXIntegerCoordinateSystemBase<IntegerCoordinateSystem, IntegerCoordinate>,
+    ICellCoordinateSystemPersist<IntegerCoordinate>
   {
     public IntegerCoordinateSystem(ISystemSpace systemSpace, long[] subdivision) : base(systemSpace, subdivision)
     {
@@ -26,6 +32,11 @@ namespace DSIS.IntegerCoordinates.Impl
     public bool IsNull(IntegerCoordinate coord)
     {
       return coord == null;      
+    }
+
+    public IEqualityComparer<IntegerCoordinate> Comparer
+    {
+      get { return new IntegerCoordinateEqualityComparer(); }
     }
 
     public IntegerCoordinate FromPoint(double[] point)
@@ -119,6 +130,28 @@ namespace DSIS.IntegerCoordinates.Impl
     public void DoGeneric(IIntegerCoordinateSystemWith with)
     {
       with.Do<IntegerCoordinateSystem, IntegerCoordinate>(this);
+    }
+
+    public void Save(Stream stream, IntegerCoordinate cell)
+    {
+      //TODO: Save all bytes at once
+      for(var i = 0; i < Dimension; i++)
+      {
+        stream.Write(LongConverter.ToBytes(cell.myCoordinate[i]), 0, LongConverter.Size);
+      }
+    }
+
+    public IntegerCoordinate Load(Stream stream)
+    {
+      //TODO: Read all bytes at once
+      var arr = new long[Dimension];
+      var buff = new byte[LongConverter.Size];
+      for(var i = 0; i < Dimension; i++)
+      {
+        stream.Read(buff, 0, buff.Length);
+        arr[i] = LongConverter.FromBytes(buff);
+      }
+      return Create(arr);
     }
   }
 }

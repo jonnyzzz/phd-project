@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Abstract;
 using JetBrains.Annotations;
 
 namespace DSIS.Graph
@@ -30,7 +29,7 @@ namespace DSIS.Graph
   }
 
   public interface IReadonlyGraph<TCell, TNode> : IReadonlyGraph<TCell>
-    where TNode : Node<TNode, TCell>
+    where TNode : INode<TCell>
     where TCell : ICellCoordinate
   {
     [CanBeNull]
@@ -42,7 +41,6 @@ namespace DSIS.Graph
     IGraphDataHoler<TData, TNode> CreateDataHolder<TData>(Converter<TNode, TData> def);
     IGraphDataHoler<bool, TNode> CreateNodeFlagsHolder(string key);
 
-    bool Contains(TNode coordinate);
     bool IsSelfLoop(TNode node);
   }
 
