@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using DSIS.Utils;
 
 namespace DSIS.Graph.FS

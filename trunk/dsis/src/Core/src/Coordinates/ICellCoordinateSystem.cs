@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.System;
 using DSIS.Persistance;
+using DSIS.Persistance.Streams;
 using JetBrains.Annotations;
 
 namespace DSIS.Core.Coordinates
@@ -88,7 +89,7 @@ namespace DSIS.Core.Coordinates
   public interface ICellCoordinateSystemPersist<TCell> 
     where TCell : ICellCoordinate
   {
-    void Save(Stream stream, TCell cell);
-    TCell Load(Stream stream);
+    void Save(IOutputStream stream, TCell cell);
+    TCell Load(IInputStream stream);
   }
 }

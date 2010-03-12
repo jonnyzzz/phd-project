@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using DSIS.Core.Coordinates;
-using DSIS.Utils;
+using DSIS.Persistance.Streams;
 
 namespace DSIS.Graph.FS
 {
   public class FSGraphBuilder<TCell> : IGraphBuilder<TCell>
     where TCell : ICellCoordinate
   {
-    private readonly IEqualityComparer<TCell> Comparer = EqualityComparerFactory<TCell>.GetComparer();
+    private readonly IEqualityComparer<TCell> myComparer;
 
     private readonly ICellCoordinateSystemPersist<TCell> myPersist;
-    private readonly Stream myOutputFile;
+    private readonly IOutputStream myOutputFile;
     private readonly IndexOutputStream myIndexFile;
     private readonly ICellCoordinateSystem<TCell> mySystem;
+    private readonly Stream myStream;
 
     private bool myIsDisposed;
     private int myEdgesCount;
@@ -24,8 +25,10 @@ namespace DSIS.Graph.FS
     {
       myPersist = persist;
       mySystem = system;
-      myOutputFile = outputFile;
+      myOutputFile = outputFile.asOutputStream(outputFile.Dispose);
       myIndexFile = index;
+      myComparer = system.Comparer;
+      myStream = outputFile;
     }
 
     public void Dispose()
@@ -34,7 +37,6 @@ namespace DSIS.Graph.FS
       {
         myIsDisposed = true;
         myIndexFile.Dispose();
-        myOutputFile.Flush();
       }
     }
 
@@ -44,7 +46,7 @@ namespace DSIS.Graph.FS
       var e = new IndexEntry {Begin = myOutputFile.Position};
       WriteNodeCoord(from);
 
-      var set = new HashSet<TCell>(Comparer);
+      var set = new HashSet<TCell>(myComparer);
       set.UnionWith(tos);
       var isLoop = set.Contains(from);
       
@@ -55,7 +57,7 @@ namespace DSIS.Graph.FS
 
       e.Data = myOutputFile.Position;
       if (isLoop)
-        myOutputFile.WriteByte(1);
+        myOutputFile.Write(new byte[]{1}, 0, 1);
 
       myIndexFile.WriteBlockStartLocation(e);
     }
@@ -70,7 +72,7 @@ namespace DSIS.Graph.FS
       if (!myIsDisposed)
         throw new ArgumentException("Call Dispose first");
       
-      return new FSReadonlyGraph<TCell>(new SimpleNodeReader<TCell>(myIndexFile.Reader(), myOutputFile, myPersist), mySystem, myNodesCount, myEdgesCount);
+      return new FSReadonlyGraph<TCell>(new SimpleNodeReader<TCell>(myIndexFile.Reader(), myStream, myPersist), mySystem, myNodesCount, myEdgesCount);
     }
   }
 }

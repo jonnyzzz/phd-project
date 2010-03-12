@@ -26,11 +26,18 @@
     <Compile Include="src\FactoryMethod.cs" />
     <Compile Include="src\IBinaryReader.cs" />
     <Compile Include="src\IBinaryWriter.cs" />
+    <Compile Include="src\Streams\IInputStream.cs" />
     <Compile Include="src\IPersistance.cs" />
     <Compile Include="src\IPersistanceFactory.cs" />
     <Compile Include="src\IPersistanceManager.cs" />
     <Compile Include="src\PersistanceFactory.cs" />
     <Compile Include="src\PersitanceManagerImpl.cs" />
+    <Compile Include="src\Streams\InputStreamImpl.cs" />
+    <Compile Include="src\Streams\IOutputStream.cs" />
+    <Compile Include="src\Streams\IStream.cs" />
+    <Compile Include="src\Streams\OutputStreamImpl.cs" />
+    <Compile Include="src\Streams\StreamImpl.cs" />
+    <Compile Include="src\Streams\StreamUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">

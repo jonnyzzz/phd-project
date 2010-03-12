@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using DSIS.Graph.FS;
 using DSIS.IntegerCoordinates.Impl;
