@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using DSIS.Persistance.Streams;
 using DSIS.Utils;
 
 namespace DSIS.Graph.FS
@@ -8,12 +8,12 @@ namespace DSIS.Graph.FS
   public class IndexInputStream : IDisposable
   {
     private readonly long myCount;
-    private readonly Stream myInputStream;
+    private readonly IInputStream myInputStream;
 
-    public IndexInputStream(Stream inputStream)
+    public IndexInputStream(IInputStream inputStream)
     {
       myInputStream = inputStream;
-      myInputStream.Seek(-8, SeekOrigin.End);
+      myInputStream.Position = myInputStream.Length - LongConverter.Size;
       myCount = ReadLong();
     }
 
@@ -28,8 +28,8 @@ namespace DSIS.Graph.FS
 
     private long ReadLong()
     {
-      var buff = new byte[8];
-      myInputStream.Read(buff, 0, 8);
+      var buff = new byte[LongConverter.Size];
+      myInputStream.Read(buff, 0, buff.Length);
       return LongConverter.FromBytes(buff);
     }
 
@@ -45,7 +45,7 @@ namespace DSIS.Graph.FS
 
     public IEnumerable<IndexEntry> ReadData()
     {
-      myInputStream.Seek(0, SeekOrigin.Begin);
+      myInputStream.Position = 0;
       for (var i = 0; i < myCount; i++)
       {
         yield return ReadIndex();
@@ -55,7 +55,7 @@ namespace DSIS.Graph.FS
     public IndexEntry GetAt(long index)
     {
       //TODO: No checks are done here!
-      myInputStream.Seek(16*index, SeekOrigin.Begin);
+      myInputStream.Position = LongConverter.Size*index;
       return ReadIndex();
     }
   }
