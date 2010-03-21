@@ -36,36 +36,69 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       myCellVolume = ((IIntegerCoordinateSystem) myGraph.CoordinateSystem).CellSize.FoldLeft(1.0, (x, v) => x*v);
     }
 
-    private bool VisitNode(INode<T> node)
-    {
-      return myComponents.GetNodeComponent(node) != null;
-    }
-
     public void FillGraph()
     {
-      using (var cookie = myHashHolder.RebuildCookie())
+      myGraph.DoGeneric(new FillGraphProxy(this));
+    }
+
+    private class FillGraphProxy : IReadonlyGraphWith<T>
+    {
+      private readonly JVRMeasure<T> myHost;
+
+      public FillGraphProxy(JVRMeasure<T> host)
       {
-        int index = 0;
-        var weight = myOptions.InitialWeight;
+        myHost = host;
+      }
 
-        foreach (var node in myGraph.Nodes)
+      public void With<TNode>(IReadonlyGraph<T, TNode> graph) where TNode : class, INode<T>
+      {
+        new FillGraphImpl<TNode>(graph, myHost).FillGraph();
+      }
+    }
+
+    private class FillGraphImpl<TNode> where TNode : class, INode<T>
+    {
+      private readonly IReadonlyGraph<T, TNode> myGraph;
+      private readonly JVRMeasure<T> myHost;
+
+      public FillGraphImpl(IReadonlyGraph<T, TNode> graph, JVRMeasure<T> host)
+      {
+        myGraph = graph;
+        myHost = host;
+      }
+
+      private bool VisitNode(TNode node)
+      {
+        //TODO: Use Components<TNode,TCell>
+        return myHost.myComponents.GetNodeComponent(node) != null;
+      }
+
+      public void FillGraph()
+      {
+        using (var cookie = myHost.myHashHolder.RebuildCookie())
         {
-          if (!VisitNode(node))
-            continue;
+          int index = 0;
+          var weight = myHost.myOptions.InitialWeight;
 
-          var factory = JVRPair<T>.Factory(node.Coordinate);
-
-          foreach (var edge in myGraph.GetEdges(node))
+          foreach (var node in myGraph.NodesInternal)
           {
-            if (!VisitNode(edge))
+            if (!VisitNode(node))
               continue;
 
-            var key = factory.Create(edge.Coordinate);
+            var factory = JVRPair<T>.Factory(node.Coordinate);
 
-            myStraitEdges.Add(key);
-            myBackEdges.Add(key);
+            foreach (var edge in myGraph.GetEdgesInternal(node))
+            {
+              if (!VisitNode(edge))
+                continue;
 
-            cookie.SetItem(key, weight.Weight(++index));
+              var key = factory.Create(edge.Coordinate);
+
+              myHost.myStraitEdges.Add(key);
+              myHost.myBackEdges.Add(key);
+
+              cookie.SetItem(key, weight.Weight(++index));
+            }
           }
         }
       }

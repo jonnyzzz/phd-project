@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Abstract;
@@ -15,6 +16,11 @@ namespace DSIS.Graph.Simple
 
     public void EdgeAdded(SimpleNode<TCellCoordinate> from, SimpleNode<TCellCoordinate> to)
     {
+    }
+
+    public override IEqualityComparer<SimpleNode<TCellCoordinate>> Comparer
+    {
+      get { return new NodeEqualityComparer<SimpleNode<TCellCoordinate>, TCellCoordinate>(); }
     }
 
     public bool HasArcToItself(SimpleNode<TCellCoordinate> node)

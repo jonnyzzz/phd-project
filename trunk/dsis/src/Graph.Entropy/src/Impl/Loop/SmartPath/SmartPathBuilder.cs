@@ -31,7 +31,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
     {
       foreach (IStrongComponentInfo info in myComps.Components)
       {
-        IGraph<T> graph = myComps.AsGraph(new[] {info});
+        var graph = (IReadonlyGraphEx<T>) myComps.AsGraph(new[] {info});
 
         using (var holder = graph.CreateDataHolder(x => ourInitialState))
         {
@@ -53,7 +53,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
       GCHelper.Collect();
     }
 
-    private void BuildPath(IGraph<T> graph, INode<T> startNode, IGraphDataHoler<INodeState<T>, INode<T>> holder)
+    private void BuildPath(IReadonlyGraph<T> graph, INode<T> startNode, IGraphDataHoler<INodeState<T>, INode<T>> holder)
     {      
       var start = startNode;
       do
@@ -67,10 +67,10 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
       } while (!ReferenceEquals(start, startNode));
     }
 
-    internal static INode<T> GetNextNode(IGraph<T> graph, INode<T> startNode, INode<T> from, IGraphDataHoler<INodeState<T>, INode<T>> holder)
+    private static INode<T> GetNextNode(IReadonlyGraph<T> graph, INode<T> startNode, INode<T> from, IGraphDataHoler<INodeState<T>, INode<T>> holder)
     {
       INode<T> result;
-      holder.SetData(from,GetNodeState(from, holder).GetNextNode(graph, startNode, from, out result, holder));
+      holder.SetData(from,GetNodeState(from, holder).GetNextNode((IGraph<T>) graph, startNode, from, out result, holder));
       
       return result;
     }

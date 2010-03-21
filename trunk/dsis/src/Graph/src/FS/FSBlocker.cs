@@ -26,9 +26,9 @@ namespace DSIS.Graph.FS
 
     public int EdgesCount { get; private set;}
 
-    INode<TCell> IReadonlyGraphDeprecated<TCell>.Find(TCell node)
+    public IEqualityComparer<FSReadonlyNode<TCell>> Comparer
     {
-      return Find(node);
+      get { throw new NotImplementedException(); }
     }
 
     public void DoGeneric(IReadonlyGraphWith with)

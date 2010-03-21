@@ -100,7 +100,8 @@ namespace DSIS.Graph.Abstract
       bool Accept(uint value);
     }
 
-    public static IEnumerable<INode<TCell>> FilterUpper<TCell>(this IFilter filter, IEnumerable<INode<TCell>> nodes)
+    public static IEnumerable<TNode> FilterUpper<TCell, TNode>(this IFilter filter, IEnumerable<TNode> nodes)
+      where TNode : INode<TCell>
       where TCell : ICellCoordinate      
     {      
       //TODO: Return enumerable as is iff filter is AllFilter

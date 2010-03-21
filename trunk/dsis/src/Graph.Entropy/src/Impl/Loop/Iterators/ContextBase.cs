@@ -13,7 +13,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
     {
       myComponents = components;
       myComponent = component;
-      myComponentInfos = new IStrongComponentInfo[] { myComponent };
+      myComponentInfos = new[] { myComponent };
     }
   }
 }

@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 
 namespace DSIS.Graph.Abstract
 {
-  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell, TNode>
+  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell, TNode>, IReadonlyGraphDeprecated<TCell>
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
     where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>
@@ -32,6 +32,8 @@ namespace DSIS.Graph.Abstract
       myNodes = new GraphNodeHashList<TNode, TCell>(Primes.Nearest(500 * 1000));
       myIsLoop = CreateNodeFlagsHolder("IS_LOOP");
     }
+
+    public abstract IEqualityComparer<TNode> Comparer { get; }
 
     void IGraph<TCell>.AddEdgeToNode(INode<TCell> fromNode, INode<TCell> toNode)
     {

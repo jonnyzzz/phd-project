@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.Function.Mock;
@@ -24,20 +25,14 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
       TarjanGraph<IntegerCoordinate> gr,
       IGraphStrongComponents<IntegerCoordinate> comps)
     {
-      Measure ms = new Measure(myType, gr);
+      var ms = new Measure(myType, gr);
       GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>> start = ms.Start();
 
-      return Pair.Create<IGraphMeasure<IntegerCoordinate>, IEdgeInfo>(
-        start, new GraphMeasureEdgeInfo<NodePair<IntegerCoordinate>>(start,
-                                                                     delegate(IntegerCoordinate from,
-                                                                              IntegerCoordinate to)
-                                                                       {
-                                                                         return new NodePair<IntegerCoordinate>(
-                                                                           from, to);
-                                                                       })
+      return Pair.Of<IGraphMeasure<IntegerCoordinate>, IEdgeInfo>(
+        start, new GraphMeasureEdgeInfo<NodePair<IntegerCoordinate>>(
+          start, (from, to) => new NodePair<IntegerCoordinate>(from, to))
         );
     }
-
 
     protected enum ConnectionType
     {
@@ -151,11 +146,7 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
       public void BuildImage(IntegerCoordinate coord)
       {
         INode<IntegerCoordinate> nodes = myGraph.AddNode(coord);
-        List<IntegerCoordinate> lst = new List<IntegerCoordinate>();
-        foreach (INode<IntegerCoordinate> edge in myGraph.GetEdges(nodes))
-        {
-          lst.Add(edge.Coordinate);
-        }
+        var lst = ((IReadonlyGraphEx<IntegerCoordinate>) myGraph).GetEdges(nodes).Select(edge => edge.Coordinate).ToList();
         AddConnections(coord, myContext.ConnectionBuilder, lst);
       }
 
@@ -166,7 +157,6 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
         get { return "Graph based builder"; }
       }
     }
-
 
     private class Measure : IntegerCoordinateIntersectionMeasure<IntegerCoordinate>
     {

@@ -17,10 +17,10 @@ namespace DSIS.Graph.Entropy.Tests
                                                                                          IGraphStrongComponents
                                                                                            <IntegerCoordinate> comps)
     {      
-      PathBuilder bld = new PathBuilder(comps);
+      var bld = new PathBuilder(comps);
       bld.BuildPath();
 
-      return Pair.Create(bld.Entropy(), (IEdgeInfo)bld);
+      return Pair.Of(bld.Entropy(), (IEdgeInfo)bld);
     }
 
     private class PathBuilder : PathBuilder<IntegerCoordinate>, IEdgeInfo
@@ -32,15 +32,10 @@ namespace DSIS.Graph.Entropy.Tests
       public double Edge(IntegerCoordinate from, IntegerCoordinate to)
       {
         double v;
-        NodePair<IntegerCoordinate> key = new NodePair<IntegerCoordinate>(from, to);
+        var key = new NodePair<IntegerCoordinate>(from, to);
         if (myValues.Dictionary.TryGetValue(key, out v))
-        {
           return v;
-        }
-        else
-        {
-          throw new KeyNotFoundException(string.Format("{0}->{1} not found", from.GetCoordinate(0), to.GetCoordinate(0)));
-        }                
+        throw new KeyNotFoundException(string.Format("{0}->{1} not found", from.GetCoordinate(0), to.GetCoordinate(0)));
       }
     }
   }

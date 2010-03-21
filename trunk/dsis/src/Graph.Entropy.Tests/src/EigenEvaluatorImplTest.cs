@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Eigen;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Tests;
@@ -17,7 +16,7 @@ namespace DSIS.Graph.Entropy
 
     public void DoTest_Full_n(int n)
     {
-      DoTest(Math.Log(n)/Math.Log(2), delegate(IGraph<IntegerCoordinate> graph)
+      DoTest(Math.Log(n)/Math.Log(2), graph =>
                                         {
                                           for (int i = 0; i < n; i++)
                                             for (int j = 0; j < n; j++)
@@ -119,7 +118,7 @@ namespace DSIS.Graph.Entropy
                        });
     }
 
-    private static void DumpMatrix(IGraph<IntegerCoordinate> graph)
+    private static void DumpMatrix(IReadonlyGraphEx<IntegerCoordinate> graph)
     {
       long? min = null;
       long? max = null;
@@ -154,7 +153,7 @@ namespace DSIS.Graph.Entropy
         }
       }
 
-      StringBuilder sb = new StringBuilder();
+      var sb = new StringBuilder();
       sb.Append("[");
       bool f1 = true;
       foreach (long[] longs in m)

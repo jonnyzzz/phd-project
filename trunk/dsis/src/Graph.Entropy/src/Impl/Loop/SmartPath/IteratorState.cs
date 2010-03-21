@@ -24,7 +24,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
         }
       }
 
-      INodeState<T> state = new SearchState<T>(new InfiniteEnumerable<INode<T>>(thisGraph.GetEdges(thisNode)));
+      INodeState<T> state = new SearchState<T>(new InfiniteEnumerable<INode<T>>(((IReadonlyGraphDeprecated<T>)thisGraph).GetEdges(thisNode)));
       return state.GetNextNode(thisGraph, startNode, thisNode, out result, holder);      
     }
   }

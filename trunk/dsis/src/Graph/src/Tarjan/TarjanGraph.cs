@@ -14,6 +14,11 @@ namespace DSIS.Graph.Tarjan
     {
     }
 
+    public override IEqualityComparer<TarjanNode<TCell>> Comparer
+    {
+      get { return new NodeEqualityComparer<TarjanNode<TCell>, TCell>(); }
+    }
+
     protected override TarjanGraph<TCell> CreateGraph(ICellCoordinateSystem<TCell> system)
     {
       return new TarjanGraph<TCell>(system);

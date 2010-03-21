@@ -27,7 +27,7 @@ namespace DSIS.Graph.Entropy.Intersection
     public IGraphMeasure<Q> Start()    
     {
       ICellImageBuilder<Q> cellImageBuilder = CreateBuilder(mySettings);            
-      CellConnectionBuilderImpl builder = new CellConnectionBuilderImpl(myGraph);
+      var builder = new CellConnectionBuilderImpl(myGraph);
       cellImageBuilder.Bind(new CellImageBuilderContext<Q>(
                               myFunction, 
                               mySettings, myGraph.CoordinateSystem, builder
@@ -38,7 +38,7 @@ namespace DSIS.Graph.Entropy.Intersection
         cellImageBuilder.BuildImage(node.Coordinate);
       }
 
-      double norm = builder.Norm(myGraph);
+      double norm = builder.Norm();
 
       return new GraphMeasure<Q, NodePair<Q>>(
         "Intersection", 
@@ -53,11 +53,11 @@ namespace DSIS.Graph.Entropy.Intersection
     {
       private readonly Vector<NodePair<Q>> myVector = new Vector<NodePair<Q>>();
       private readonly Vector<Q> myNodePoints = new Vector<Q>();
-      private readonly IGraph<Q> myGraph;
+      private readonly IReadonlyGraphEx<Q> myGraph;
 
       public CellConnectionBuilderImpl(IGraph<Q> graph)
       {       
-        myGraph = graph;
+        myGraph = (IReadonlyGraphEx<Q>) graph;
       }
 
       void ICellConnectionBuilder<Q>.ConnectToOne(Q cell, Q v)
@@ -89,15 +89,15 @@ namespace DSIS.Graph.Entropy.Intersection
         get { return myVector; }
       }
 
-      public double Norm(IGraph<Q> graph)
+      public double Norm()
       {
         double sum = 0;
-        foreach (INode<Q> node in graph.Nodes)
+        foreach (INode<Q> node in myGraph.Nodes)
         {
           Q cell = node.Coordinate;
           int cellHash = NodePair<Q>.HashValue(cell);
           double count = myNodePoints[cell];
-          foreach (INode<Q> edge in graph.GetEdges(node))
+          foreach (INode<Q> edge in myGraph.GetEdges(node))
           {
             sum += myVector.Div(new NodePair<Q>(cell, cellHash, edge.Coordinate), count);
           }

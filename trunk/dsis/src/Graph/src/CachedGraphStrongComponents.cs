@@ -58,7 +58,7 @@ namespace DSIS.Graph
 
       foreach (var info in myCache.Keys.Where(set.Contains).Join(set.Where(x => !myCache.ContainsKey(x))))
       {
-        var g = Cache(info);
+        var g = (IReadonlyGraphEx<T>)Cache(info);
         var n = g.Find(node.Coordinate);
         if (n != null)
           //only one strong component may contain a node

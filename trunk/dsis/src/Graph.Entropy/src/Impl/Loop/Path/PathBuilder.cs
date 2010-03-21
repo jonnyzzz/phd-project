@@ -22,7 +22,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
     {
       foreach (IStrongComponentInfo info in myComps.Components)
       {
-        var graph = myComps.AsGraph(new[] {info});
+        var graph = (IReadonlyGraphEx<T>)myComps.AsGraph(new[] {info});
         using (var holder = graph.CreateDataHolder(x => new InfiniteEnumerator<INode<T>>(graph.GetEdges(x).GetEnumerator())))
         {
           BuildPath(graph, holder, graph.Nodes.First());
@@ -30,7 +30,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
       }
     }
 
-    private void BuildPath(IGraph graph, IGraphDataHoler<InfiniteEnumerator<INode<T>>, INode<T>> holder,
+    private void BuildPath(IReadonlyGraph graph, IGraphDataHoler<InfiniteEnumerator<INode<T>>, INode<T>> holder,
                            INode<T> startNode)
     {
       var start = startNode;

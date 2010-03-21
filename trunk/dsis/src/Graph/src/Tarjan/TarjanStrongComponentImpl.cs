@@ -52,7 +52,8 @@ namespace DSIS.Graph.Tarjan
     public IEnumerable<INode<TCell>> GetEdgesWithFilteredEdges(INode<TCell> node, IEnumerable<IStrongComponentInfo> componentIds)
     {
       var ids = ComponentsFilter.CreateFilter(componentIds, ComponentCount);
-      return ids.FilterUpper(myGraph.GetEdges(node));
+      var edges = ids.FilterUpper<TCell, TNode>(myGraph.GetEdgesInternal((TNode) node));
+      return edges;
     }
 
     public IStrongComponentInfo GetNodeComponent(INode<TCell> node)
@@ -91,7 +92,7 @@ namespace DSIS.Graph.Tarjan
     public IEnumerable<INode<TCell>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
     {
       var ids = ComponentsFilter.CreateFilter(componentIds, ComponentCount);
-      return ids.FilterUpper(myGraph.Nodes);
+      return ids.FilterUpper<TCell, TNode>(myGraph.NodesInternal);
     }
   }
 }

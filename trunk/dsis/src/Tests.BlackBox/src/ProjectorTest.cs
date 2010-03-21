@@ -172,7 +172,7 @@ namespace DSIS.Tests.BlackBox
           bool hasNodeProj = graph.CoordinateSystem.IsNull(proj.Project(node.Coordinate));
           if (hasNodeProj)
             nodes++;
-          foreach (INode<Q> edge in graph.GetEdges(node))
+          foreach (INode<Q> edge in ((IReadonlyGraphEx<Q>)graph).GetEdges(node))
           {
             bool hasEdge = graph.CoordinateSystem.IsNull(proj.Project(edge.Coordinate));
             if (hasEdge && hasNodeProj)

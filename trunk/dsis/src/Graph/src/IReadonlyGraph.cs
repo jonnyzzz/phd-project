@@ -13,7 +13,7 @@ namespace DSIS.Graph
     void DoGeneric(IReadonlyGraphWith with);
   }
 
-  public interface IReadonlyGraph<TCell> : IReadonlyGraph, IReadonlyGraphDeprecated<TCell>
+  public interface IReadonlyGraph<TCell> : IReadonlyGraph
     where TCell : ICellCoordinate
   {
     void DoGeneric(IReadonlyGraphWith<TCell> with);
@@ -29,7 +29,7 @@ namespace DSIS.Graph
   }
 
   public interface IReadonlyGraph<TCell, TNode> : IReadonlyGraph<TCell>
-    where TNode : INode<TCell>
+    where TNode : class, INode<TCell>
     where TCell : ICellCoordinate
   {
     [CanBeNull]
@@ -42,6 +42,8 @@ namespace DSIS.Graph
     IGraphDataHoler<bool, TNode> CreateNodeFlagsHolder(string key);
 
     bool IsSelfLoop(TNode node);
+
+    IEqualityComparer<TNode> Comparer { get; }
   }
 
 
@@ -56,5 +58,12 @@ namespace DSIS.Graph
 
     [Obsolete("Use DoGeneric to get IReadonlyGraph<TNode, TCell>")]
     IGraphDataHoler<TData, INode<TCell>> CreateDataHolder<TData>(Converter<INode<TCell>, TData> def);
+  }
+
+  [Obsolete("Use IReadonyGraph`2")]
+  public interface IReadonlyGraphEx<TCell> : IReadonlyGraph<TCell>, IReadonlyGraphDeprecated<TCell>
+    where TCell : ICellCoordinate
+  {
+
   }
 }

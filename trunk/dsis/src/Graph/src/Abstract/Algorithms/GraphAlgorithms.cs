@@ -15,7 +15,7 @@ namespace DSIS.Graph.Abstract.Algorithms
       var toSystem = projector.ToSystem;
       var graph = create(toSystem);
 
-      foreach (var node in baseGraph.Nodes)
+      foreach (var node in baseGraph.NodesInternal)
       {
         var proj = projector.Project(node.Coordinate);
         if (toSystem.IsNull(proj)) 
@@ -25,7 +25,7 @@ namespace DSIS.Graph.Abstract.Algorithms
         if (gNode == null) 
           continue;
 
-        foreach (var edge in baseGraph.GetEdges(node))
+        foreach (var edge in baseGraph.GetEdgesInternal(node))
         {
           var eProj = projector.Project(edge.Coordinate);
           if (toSystem.IsNull(eProj)) 
