@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
 using DSIS.Scheme.Actions;
@@ -160,35 +161,42 @@ namespace DSIS.Tests.BlackBox
         Console.Out.WriteLine("projFEdges = {0}", projFEdges);
       }
 
-      public void ComputeProjectedGraphParams<Q>(IGraph<Q> graph, ICellCoordinateSystemProjector<Q> proj, out int nodes,
+      public void ComputeProjectedGraphParams<Q>(IReadonlyGraph<Q> graph, ICellCoordinateSystemProjector<Q> proj, out int nodes,
                                                  out int edges)
         where Q : ICellCoordinate
       {
-        nodes = 0;
-        edges = 0;
+        var counter = new Counter<Q>{Projector = proj};
+        graph.DoGeneric(counter);
 
-        foreach (INode<Q> node in graph.Nodes)
+        nodes = counter.Nodes;
+        edges = counter.Edges;
+      }
+
+      private class Counter<Q> : IReadonlyGraphWith<Q> where Q : ICellCoordinate
+      {
+        public int Nodes { get; private set; }
+        public int Edges { get; private set; }
+        public ICellCoordinateSystemProjector<Q> Projector { get; set; }
+        public void With<TNode>(IReadonlyGraph<Q, TNode> graph) where TNode : class, INode<Q>
         {
-          bool hasNodeProj = graph.CoordinateSystem.IsNull(proj.Project(node.Coordinate));
-          if (hasNodeProj)
-            nodes++;
-          foreach (INode<Q> edge in ((IReadonlyGraphEx<Q>)graph).GetEdges(node))
+          Nodes = 0;
+          Edges = 0;
+
+          foreach (var node in graph.NodesInternal)
           {
-            bool hasEdge = graph.CoordinateSystem.IsNull(proj.Project(edge.Coordinate));
-            if (hasEdge && hasNodeProj)
-              edges++;
+            bool hasNodeProj = !graph.CoordinateSystem.IsNull(Projector.Project(node.Coordinate));
+            if (hasNodeProj)
+              Nodes++;
+            Edges += graph.GetEdgesInternal(node)
+              .Select(edge => !graph.CoordinateSystem.IsNull(Projector.Project(edge.Coordinate)))
+              .Count(hasEdge => hasEdge && hasNodeProj);
           }
         }
       }
 
       private static long[] Factor(ICellCoordinateSystem from, ICellCoordinateSystem to)
       {
-        var list = new List<long>();
-        for (int i = 0; i < from.Subdivision.Length; i++)
-        {
-          list.Add(from.Subdivision[i]/to.Subdivision[i]);
-        }
-        return list.ToArray();
+        return from.Subdivision.Select((t, i) => t/to.Subdivision[i]).ToArray();
       }
     }
   }

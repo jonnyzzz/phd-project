@@ -2,8 +2,8 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
 {
-  public interface INodeState<T> where T : ICellCoordinate
+  public interface INodeState<T, TNode> where T : ICellCoordinate where TNode : class, INode<T>
   {
-    INodeState<T> GetNextNode(IGraph<T> thisGraph, INode<T> startNode, INode<T> thisNode, out INode<T> result, IGraphDataHoler<INodeState<T>, INode<T>> holder);
+    INodeState<T, TNode> GetNextNode(IReadonlyGraph<T,TNode> thisGraph, TNode startNode, TNode thisNode, out TNode result, IGraphDataHoler<INodeState<T,TNode>, TNode> holder);
   }
 }

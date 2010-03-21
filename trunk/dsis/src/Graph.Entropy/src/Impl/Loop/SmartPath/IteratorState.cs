@@ -4,17 +4,18 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
 {
-  public class IteratorState<T> : INodeState<T> 
+  public class IteratorState<T, TNode> : INodeState<T, TNode> 
     where T : ICellCoordinate
+    where TNode : class, INode<T>
   {
-    private readonly IEnumerator<INode<T>> myNodes;
+    private readonly IEnumerator<TNode> myNodes;
 
-    public IteratorState(IEnumerator<INode<T>> nodes)
+    public IteratorState(IEnumerator<TNode> nodes)
     {
       myNodes = nodes;
     }
 
-    public INodeState<T> GetNextNode(IGraph<T> thisGraph, INode<T> startNode, INode<T> thisNode, out INode<T> result, IGraphDataHoler<INodeState<T>, INode<T>> holder)
+    public INodeState<T, TNode> GetNextNode(IReadonlyGraph<T,TNode> thisGraph, TNode startNode, TNode thisNode, out TNode result, IGraphDataHoler<INodeState<T,TNode>, TNode> holder)
     {      
       while (myNodes.MoveNext())
       {
@@ -24,7 +25,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
         }
       }
 
-      INodeState<T> state = new SearchState<T>(new InfiniteEnumerable<INode<T>>(((IReadonlyGraphDeprecated<T>)thisGraph).GetEdges(thisNode)));
+      var edgesInternal = thisGraph.GetEdgesInternal(thisNode);
+      INodeState<T,TNode> state = new SearchState<T,TNode>(new InfiniteEnumerable<TNode>(edgesInternal));
       return state.GetNextNode(thisGraph, startNode, thisNode, out result, holder);      
     }
   }

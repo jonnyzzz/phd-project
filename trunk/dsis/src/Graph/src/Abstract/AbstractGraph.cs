@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 
 namespace DSIS.Graph.Abstract
 {
-  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell, TNode>, IReadonlyGraphDeprecated<TCell>
+  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell, TNode>
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
     where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>
@@ -107,11 +107,6 @@ namespace DSIS.Graph.Abstract
       with.With(this);
     }
 
-    INode<TCell> IReadonlyGraphDeprecated<TCell>.Find(TCell node)
-    {
-      return myNodes.Find(node);
-    }
-
     public TNode Find(TCell node)
     {
       return myNodes.Find(node);
@@ -196,11 +191,6 @@ namespace DSIS.Graph.Abstract
         throw new ArgumentException("Wrong data holder object to dispose");
       }
       myGraphDataHolder = null;
-    }
-
-    IGraphDataHoler<TData, INode<TCell>> IReadonlyGraphDeprecated<TCell>.CreateDataHolder<TData>(Converter<INode<TCell>, TData> def)
-    {
-      return new GraphDataHolderProxy<TData, TCell, TNode>(CreateDataHolder(def));
     }
   }
 }

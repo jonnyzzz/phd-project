@@ -8,7 +8,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Strange
   {    
     public IGraphMeasure<T> Measure(IGraph<T> graph, IGraphStrongComponents<T> comps, StrangeEntropyEvaluatorParams @params)
     {
-      comps = new CachedGraphStrongComponents<T>(comps);
+      //TODO: Refactor to use components.AsGraph
+//      comps = new CachedGraphStrongComponents<T>(comps);
       
       var cb = new EntropyGraphWeightCallback<T>(@params.LoopWeight, graph.CoordinateSystem);
       foreach (IStrongComponentInfo info in comps.Components)

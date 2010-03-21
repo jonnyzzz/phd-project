@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.IntegerCoordinates;
@@ -7,22 +8,24 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Entropy
 {
-  public class GraphMeasure<T, TPair> : IGraphMeasure<T> 
-    where TPair : PairBase<T> 
+  public class GraphMeasure<T, TPair> : IGraphMeasure<T>
+    where TPair : PairBase<T>
     where T : ICellCoordinate
   {
     private const double EPS = 1e-10;
 
     private readonly IEqualityComparer<T> myComparer;
+    private readonly ICellCoordinateSystem<T> myCoorsinateSystem;
     private readonly IDictionary<TPair, double> myM;
+    private readonly string myMethodName;
 
     private readonly double myNorm;
     private double? myEntropy;
     private Dictionary<T, double> myNodesM;
-    private readonly string myMethodName;
-    private readonly ICellCoordinateSystem<T> myCoorsinateSystem;
 
-    public GraphMeasure(string name, IDictionary<TPair, double> m, IEqualityComparer<T> comparer, double norm, ICellCoordinateSystem<T> coorsinateSystem)
+    public GraphMeasure(string name, IDictionary<TPair, double> m,
+                        IEqualityComparer<T> comparer, double norm,
+                        ICellCoordinateSystem<T> coorsinateSystem)
     {
       myMethodName = name;
       myCoorsinateSystem = coorsinateSystem;
@@ -31,16 +34,21 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
       myNorm = norm;
     }
 
+    public double Norm
+    {
+      get { return myNorm; }
+    }
+
+    public IDictionary<TPair, double> M
+    {
+      get { return myM; }
+    }
+
     #region IGraphMeasure<T> Members
 
     public string Method
     {
       get { return myMethodName; }
-    }
-
-    public double Norm
-    {
-      get { return myNorm; }
     }
 
     public int EdgesCount
@@ -61,12 +69,8 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     public IEnumerable<Pair<PairBase<T>, double>> Measure
     {
       //todo: yield
-      get
-      {
-        foreach (var pair in myM)
-        {
-          yield return Pair.Create((PairBase<T>) pair.Key, pair.Value/myNorm);
-        }
+      get {
+        return myM.Select(pair => Pair.Of((PairBase<T>) pair.Key, pair.Value/myNorm));
       }
     }
 
@@ -91,9 +95,19 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     {
       return new
         GraphMeasure<T, NodePair<T>>(Method,
-        Project(myM, projector),
-        EqualityComparerFactory<T>.GetComparer(),
-        myNorm, projector.ToSystem);
+                                     Project(myM, projector),
+                                     EqualityComparerFactory<T>.GetComparer(),
+                                     myNorm, projector.ToSystem);
+    }
+
+    public void DoCallback(IGraphMeasureWith measure)
+    {
+      measure.WithGraphMeasure(this);
+    }
+
+    public double[] CellSize
+    {
+      get { return ((IIntegerCoordinateSystem) myCoorsinateSystem).CellSize; }
     }
 
     #endregion
@@ -102,12 +116,12 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
                                                            ICellCoordinateSystemProjector<T> projector)
     {
       var ret = new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer());
-      var toSystem = projector.ToSystem;
+      ICellCoordinateSystem<T> toSystem = projector.ToSystem;
 
       foreach (var pair in m)
       {
-        var pFrom = projector.Project(pair.Key.From);
-        var pTo = projector.Project(pair.Key.To);
+        T pFrom = projector.Project(pair.Key.From);
+        T pTo = projector.Project(pair.Key.To);
 
         if (toSystem.IsNull(pTo))
           continue;
@@ -131,12 +145,9 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
         v -= Entropy(val);
       }
 
-      foreach (double value in values.Values)
-      {
-        v += Entropy(value);
-      }
+      v += values.Values.Sum(value => Entropy(value));
 
-      myEntropy = v ;
+      myEntropy = v;
       myNodesM = values;
     }
 
@@ -151,7 +162,7 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
     private static double Log(double d)
     {
-      return Math.Log(d,2 );
+      return Math.Log(d, 2);
     }
 
     private static double Entropy(double d)
@@ -160,21 +171,6 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
         return 0;
 
       return d*Log(d);
-    }
-
-    public IDictionary<TPair, double> M
-    {
-      get { return myM; }
-    }
-
-    public void DoCallback(IGraphMeasureWith measure)
-    {
-      measure.WithGraphMeasure(this);
-    }
-
-    public double[] CellSize
-    {
-      get { return ((IIntegerCoordinateSystem) myCoorsinateSystem).CellSize; }
     }
   }
 }

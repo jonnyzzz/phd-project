@@ -4,7 +4,6 @@ using System.Linq;
 using DSIS.CellImageBuilder.Shared;
 using DSIS.Core.Builders;
 using DSIS.Function.Mock;
-using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Graph.Entropy.Intersection;
@@ -86,9 +85,9 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
       }
     }
 
-    private class GraphCellConnectionAddOneBuilder : GraphCellImageBuilder
+    private class GraphCellConnectionAddOneBuilder<TNode> : GraphCellImageBuilder<TNode> where TNode : class, INode<IntegerCoordinate>
     {
-      public GraphCellConnectionAddOneBuilder(IGraph<IntegerCoordinate> graph) : base(graph)
+      public GraphCellConnectionAddOneBuilder(IReadonlyGraph<IntegerCoordinate, TNode> graph) : base(graph)
       {
       }
 
@@ -103,13 +102,13 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
 
       public override ICellImageBuilder<IntegerCoordinate> Clone()
       {
-        return new GraphCellConnectionAddOneBuilder(myGraph);
+        return new GraphCellConnectionAddOneBuilder<TNode>(myGraph);
       }
     }
 
-    private class GraphCellConnectionAddManyBuilder : GraphCellImageBuilder
+    private class GraphCellConnectionAddManyBuilder<TNode> : GraphCellImageBuilder<TNode> where TNode : class, INode<IntegerCoordinate>
     {
-      public GraphCellConnectionAddManyBuilder(IGraph<IntegerCoordinate> graph) : base(graph)
+      public GraphCellConnectionAddManyBuilder(IReadonlyGraph<IntegerCoordinate, TNode> graph) : base(graph)
       {
       }
 
@@ -121,16 +120,16 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
 
       public override ICellImageBuilder<IntegerCoordinate> Clone()
       {
-        return new GraphCellConnectionAddManyBuilder(myGraph);
+        return new GraphCellConnectionAddManyBuilder<TNode>(myGraph);
       }
     }
 
-    private abstract class GraphCellImageBuilder : ICellImageBuilder<IntegerCoordinate>
+    private abstract class GraphCellImageBuilder<TNode> : ICellImageBuilder<IntegerCoordinate> where TNode : class, INode<IntegerCoordinate>
     {
-      protected readonly IGraph<IntegerCoordinate> myGraph;
+      protected readonly IReadonlyGraph<IntegerCoordinate, TNode> myGraph;
       private CellImageBuilderContext<IntegerCoordinate> myContext;
 
-      public GraphCellImageBuilder(IGraph<IntegerCoordinate> graph)
+      protected GraphCellImageBuilder(IReadonlyGraph<IntegerCoordinate, TNode> graph)
       {
         myGraph = graph;
       }
@@ -145,8 +144,8 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
 
       public void BuildImage(IntegerCoordinate coord)
       {
-        INode<IntegerCoordinate> nodes = myGraph.AddNode(coord);
-        var lst = ((IReadonlyGraphEx<IntegerCoordinate>) myGraph).GetEdges(nodes).Select(edge => edge.Coordinate).ToList();
+        var nodes = myGraph.Find(coord);
+        var lst = myGraph.GetEdgesInternal(nodes).Select(edge => edge.Coordinate).ToList();
         AddConnections(coord, myContext.ConnectionBuilder, lst);
       }
 
@@ -158,6 +157,8 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
       }
     }
 
+    
+
     private class Measure : IntegerCoordinateIntersectionMeasure<IntegerCoordinate>
     {
       public Measure(ConnectionType type, IGraph<IntegerCoordinate> graph) :
@@ -168,16 +169,37 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
              new CellImageBuilderSettings(
                delegate
                  {
-                   switch (type)
-                   {
-                     case ConnectionType.Many:
-                       return new GraphCellConnectionAddManyBuilder(graph);
-                     case ConnectionType.One:
-                       return new GraphCellConnectionAddOneBuilder(graph);
-                   }
-                   throw new NotImplementedException();
+                   var cv = new CreateBuilderForGraph(type);
+                   graph.DoGeneric(cv);
+                   return cv.Builder;
                  }))
       {
+      }
+
+      private class CreateBuilderForGraph : IReadonlyGraphWith<IntegerCoordinate>
+      {
+        public ICellImageBuilder<IntegerCoordinate> Builder { get; private set; }
+        private readonly ConnectionType type;
+
+        public CreateBuilderForGraph(ConnectionType type)
+        {
+          this.type = type;
+        }
+
+        public void With<TNode>(IReadonlyGraph<IntegerCoordinate, TNode> graph) where TNode : class, INode<IntegerCoordinate>
+        {
+          switch (type)
+          {
+            case ConnectionType.Many:
+              Builder = new GraphCellConnectionAddManyBuilder<TNode>(graph);
+              return;
+            case ConnectionType.One:
+              Builder = new GraphCellConnectionAddOneBuilder<TNode>(graph);
+              return;
+            default:
+              throw new NotImplementedException();
+          }
+        }
       }
 
       private static void Proxy<T>(T[] ins, T[] outs)

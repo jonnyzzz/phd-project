@@ -2,12 +2,11 @@ using System;
 using System.Text;
 using DSIS.Graph.Entropy.Impl.Eigen;
 using DSIS.Graph.Entropy.Impl.Entropy;
-using DSIS.Graph.Entropy.Tests;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
 
-namespace DSIS.Graph.Entropy
+namespace DSIS.Graph.Entropy.Tests
 {
   [TestFixture]
   public class EigenEvaluatorImplTest : GraphBaseTest
@@ -118,7 +117,7 @@ namespace DSIS.Graph.Entropy
                        });
     }
 
-    private static void DumpMatrix(IReadonlyGraphEx<IntegerCoordinate> graph)
+    private static void DumpMatrix(TarjanGraph<IntegerCoordinate> graph)
     {
       long? min = null;
       long? max = null;
@@ -133,7 +132,7 @@ namespace DSIS.Graph.Entropy
       }
 
       long sz = (long)max - (long)min + 1;
-      long[][] m = new long[sz][];
+      var m = new long[sz][];
       for(int i=0; i<sz; i++)
       {
         m[i] = new long[sz];
@@ -143,10 +142,10 @@ namespace DSIS.Graph.Entropy
         }
       }
 
-      foreach (INode<IntegerCoordinate> node in graph.Nodes)
+      foreach (var node in graph.NodesInternal)
       {
         long index0 = node.Coordinate.GetCoordinate(0) - min.Value;
-        foreach (INode<IntegerCoordinate> edge in graph.GetEdges(node))
+        foreach (var edge in graph.GetEdgesInternal(node))
         {
           long index1 = edge.Coordinate.GetCoordinate(0) - min.Value;
           m[index0][index1] = 1;

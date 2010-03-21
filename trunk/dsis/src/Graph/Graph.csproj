@@ -36,9 +36,6 @@
     <Compile Include="src\Abstract\GraphDataHolder.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="src\Abstract\GraphDataHolderProxy.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="src\Abstract\IGraphExtension.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -72,7 +69,6 @@
     <Compile Include="src\Abstract\NodeSets\NodeSetFactory.cs" />
     <Compile Include="src\Abstract\NodeSets\OneNodeSetState.cs" />
     <Compile Include="src\Adapter\GraphCellImageBuilder.cs" />
-    <Compile Include="src\CachedGraphStrongComponents.cs" />
     <Compile Include="src\FS\BTree.cs" />
     <Compile Include="src\FS\FSBlocker.cs" />
     <Compile Include="src\FS\FSGraphBuilder.cs" />

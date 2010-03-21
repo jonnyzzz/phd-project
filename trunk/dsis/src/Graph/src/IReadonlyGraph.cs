@@ -45,25 +45,4 @@ namespace DSIS.Graph
 
     IEqualityComparer<TNode> Comparer { get; }
   }
-
-
-  public interface IReadonlyGraphDeprecated<TCell>
-    where TCell : ICellCoordinate
-  {
-    [Obsolete("Use DoGeneric to get IReadonlyGraph<TNode, TCell>")]
-    IEnumerable<INode<TCell>> GetEdges([NotNull] INode<TCell> forNode);
-
-    [Obsolete("Use DoGeneric to get IReadonlyGraph<TNode, TCell>")]
-    INode<TCell> Find(TCell node);
-
-    [Obsolete("Use DoGeneric to get IReadonlyGraph<TNode, TCell>")]
-    IGraphDataHoler<TData, INode<TCell>> CreateDataHolder<TData>(Converter<INode<TCell>, TData> def);
-  }
-
-  [Obsolete("Use IReadonyGraph`2")]
-  public interface IReadonlyGraphEx<TCell> : IReadonlyGraph<TCell>, IReadonlyGraphDeprecated<TCell>
-    where TCell : ICellCoordinate
-  {
-
-  }
 }

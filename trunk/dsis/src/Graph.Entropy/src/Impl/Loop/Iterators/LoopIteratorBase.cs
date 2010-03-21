@@ -1,6 +1,5 @@
 using System;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {

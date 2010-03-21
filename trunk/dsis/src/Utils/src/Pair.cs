@@ -12,13 +12,13 @@ namespace DSIS.Utils
   {
     public static Pair<A,B> Of<A,B>(A a, B b)
     {
-      return Create(a, b);
+      return new Pair<A, B>(a, b);
     }
 
     [Obsolete("Use Pair.Of")]
     public static Pair<A,B> Create<A,B>(A a, B b)
     {
-      return new Pair<A, B>(a,b);
+      return Of(a, b);
     }
   }
 

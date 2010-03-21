@@ -3,20 +3,21 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
 {
-  public class SearchState<T> : INodeState<T>
+  public class SearchState<T,TNode> : INodeState<T, TNode>
     where T : ICellCoordinate
+    where TNode : class, INode<T>
   {
-    private readonly IEnumerator<INode<T>> myNodes;
+    private readonly IEnumerator<TNode> myNodes;
 
-    public SearchState(IEnumerable<INode<T>> nodes)
+    public SearchState(IEnumerable<TNode> nodes)
     {
       myNodes = nodes.GetEnumerator();
     }
 
-    public INodeState<T> GetNextNode(IGraph<T> thisGraph, INode<T> startNode, INode<T> thisNode, out INode<T> result, IGraphDataHoler<INodeState<T>, INode<T>> holder)
+    public INodeState<T,TNode> GetNextNode(IReadonlyGraph<T,TNode> thisGraph, TNode startNode, TNode thisNode, out TNode result, IGraphDataHoler<INodeState<T,TNode>, TNode> holder)
     {
       myNodes.MoveNext();
-      INode<T> next = myNodes.Current;
+      var next = myNodes.Current;
 
       //todo: I cannt remember what is done here!
       //result = ReferenceEquals(startNode, next) ? next : SmartPathBuilder<T>.GetNextNode(thisGraph, startNode, next, holder);
