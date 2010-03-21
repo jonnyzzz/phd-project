@@ -21,6 +21,8 @@ namespace DSIS.Graph
 
     bool Contains(TCell coordinate);
     bool IsSelfLoop(TCell node);
+
+    IEnumerable<TCell> NodesCoordinates { get; }
   }
 
   public interface IReadonlyGraph<TCell> : IReadonlyGraphCommon<TCell>

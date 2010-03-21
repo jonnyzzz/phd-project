@@ -5,7 +5,6 @@ using DSIS.Core.Coordinates;
 using DSIS.Core.Processor;
 using DSIS.Core.System;
 using DSIS.Core.Util;
-using DSIS.Graph.Abstract;
 using DSIS.Graph.Adapter;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;

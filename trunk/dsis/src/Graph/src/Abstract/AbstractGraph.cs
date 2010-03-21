@@ -5,6 +5,7 @@ using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Abstract.NodeSets;
 using DSIS.Utils;
 using JetBrains.Annotations;
+using System.Linq;
 
 namespace DSIS.Graph.Abstract
 {
@@ -41,6 +42,11 @@ namespace DSIS.Graph.Abstract
       var to = (TNode) toNode;
 
       AddEdgeToNode(from, to);
+    }
+
+    public IEnumerable<TCell> NodesCoordinates
+    {
+      get { return Nodes.Select(x => x.Coordinate); }
     }
 
     public void AddEdgeToNode(TNode from, TNode to)

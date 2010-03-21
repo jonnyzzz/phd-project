@@ -70,6 +70,14 @@ namespace DSIS.Graph.FS
       return Find(node).Safe(false, IsSelfLoop);
     }
 
+    public IEnumerable<TCell> NodesCoordinates
+    {
+      get
+      {
+        throw new NotImplementedException();
+      }
+    }
+
     public FSReadonlyNode<TCell> Find(TCell node)
     {
       var entry = myNodeIndex.FindNode(node);
