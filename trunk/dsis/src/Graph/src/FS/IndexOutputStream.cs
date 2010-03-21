@@ -1,11 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using DSIS.Utils;
 using DSIS.Persistance.Streams;
 
 namespace DSIS.Graph.FS
 {
-  public class IndexOutputStream : IDisposable
+  public class IndexOutputStream : IIndexOutputStream
   {
     private readonly Stream myOutputStream;
     private long myItemsCount;
@@ -34,7 +33,7 @@ namespace DSIS.Graph.FS
       myOutputStream.Write(buffer, 0, buffer.Length);
     }
 
-    public IndexInputStream Reader()
+    public IIndexInputStream CloseAndRead()
     {
       myOutputStream.Flush();
       return new IndexInputStream(myOutputStream.asInputStream(myOutputStream.Dispose));

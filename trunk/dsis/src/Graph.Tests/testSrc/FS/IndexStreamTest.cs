@@ -13,7 +13,7 @@ namespace DSIS.Graph.Tests.FS
     {
       var os = new IndexOutputStream(new MemoryStream());
       os.Dispose();
-      IndexInputStream r = os.Reader();
+      IIndexInputStream r = os.CloseAndRead();
 
       Assert.AreEqual(0, r.ReadData().Count());
     }
@@ -24,7 +24,7 @@ namespace DSIS.Graph.Tests.FS
       var os = new IndexOutputStream(new MemoryStream());
       os.WriteBlockStartLocation(new IndexEntry {Begin = 1, Data = 10});
       os.Dispose();
-      IndexInputStream r = os.Reader();
+      IIndexInputStream r = os.CloseAndRead();
 
       Assert.AreEqual(1, r.ReadData().Count());
       IndexEntry first = r.ReadData().First();
@@ -42,7 +42,7 @@ namespace DSIS.Graph.Tests.FS
         var os = new IndexOutputStream(new MemoryStream());
         os.WriteBlockStartLocation(new IndexEntry {Begin = 1 << b, Data = 123 + 1 << b});
         os.Dispose();
-        IndexInputStream r = os.Reader();
+        IIndexInputStream r = os.CloseAndRead();
 
         Assert.AreEqual(1, r.ReadData().Count());
         IndexEntry first = r.ReadData().First();

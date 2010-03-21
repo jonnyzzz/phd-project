@@ -13,7 +13,7 @@ namespace DSIS.Graph.FS
 
     private readonly ICellCoordinateSystemPersist<TCell> myPersist;
     private readonly IOutputStream myOutputFile;
-    private readonly IndexOutputStream myIndexFile;
+    private readonly IIndexOutputStream myIndexFile;
     private readonly ICellCoordinateSystem<TCell> mySystem;
     private readonly Stream myStream;
 
@@ -21,7 +21,7 @@ namespace DSIS.Graph.FS
     private int myEdgesCount;
     private int myNodesCount;
 
-    public FSGraphBuilder(ICellCoordinateSystemPersist<TCell> persist, Stream outputFile, IndexOutputStream index, ICellCoordinateSystem<TCell> system)
+    public FSGraphBuilder(ICellCoordinateSystemPersist<TCell> persist, Stream outputFile, IIndexOutputStream index, ICellCoordinateSystem<TCell> system)
     {
       myPersist = persist;
       mySystem = system;
@@ -71,8 +71,10 @@ namespace DSIS.Graph.FS
     {
       if (!myIsDisposed)
         throw new ArgumentException("Call Dispose first");
-      
-      return new FSReadonlyGraph<TCell>(new SimpleNodeReader<TCell>(myIndexFile.Reader(), myStream, myPersist), mySystem, myNodesCount, myEdgesCount);
+
+      var reader = new SimpleNodeReader<TCell>(myIndexFile.CloseAndRead(), myStream, myPersist);
+      var indexImpl = new FSNodeInMemoryIndexImpl<TCell>(myPersist, mySystem.Comparer);
+      return new FSReadonlyGraph<TCell>(reader, mySystem, myNodesCount, myEdgesCount, indexImpl);
     }
   }
 }

@@ -9,12 +9,14 @@ namespace DSIS.Graph.FS
   public class FSReadonlyGraph<TCell> : IReadonlyGraph<TCell, FSReadonlyNode<TCell>>
     where TCell : ICellCoordinate
   {
+    private readonly IFSNodeIndex<TCell> myNodeIndex;
     private readonly SimpleNodeReader<TCell> myReader;
     private readonly ICellCoordinateSystem<TCell> mySystem;
 
-    public FSReadonlyGraph(SimpleNodeReader<TCell> reader, ICellCoordinateSystem<TCell> system, int nodesCount, int edgesCount)
+    public FSReadonlyGraph(SimpleNodeReader<TCell> reader, ICellCoordinateSystem<TCell> system, int nodesCount, int edgesCount, IFSNodeIndex<TCell> nodeIndex)
     {
       myReader = reader;
+      myNodeIndex = nodeIndex;
       mySystem = system;
       NodesCount = nodesCount;
       EdgesCount = edgesCount;
@@ -80,8 +82,8 @@ namespace DSIS.Graph.FS
 
     public FSReadonlyNode<TCell> Find(TCell node)
     {
-      //TODO: Implement index based search
-      throw new NotImplementedException();
+      var entry = myNodeIndex.FindNode(node);
+      return entry == null ? null : myReader.ReadNode(entry.Value);
     }
 
     public IEnumerable<FSReadonlyNode<TCell>> NodesInternal

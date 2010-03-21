@@ -8,21 +8,22 @@ namespace DSIS.Graph.FS
 {
   public class SimpleNodeReader<TCell> where TCell : ICellCoordinate
   {
-    private readonly IndexInputStream myIndex;
+    private readonly IIndexInputStream myIndex;
     private readonly IInputStream myInputStream;
     private readonly ICellCoordinateSystemPersist<TCell> myPersist;
     
-    public SimpleNodeReader(IndexInputStream index, Stream inputStream, ICellCoordinateSystemPersist<TCell> persist)
+    public SimpleNodeReader(IIndexInputStream index, Stream inputStream, ICellCoordinateSystemPersist<TCell> persist)
     {
       myIndex = index;
       myInputStream = inputStream.asInputStream(inputStream.Dispose);
       myPersist = persist;
     }
 
+
+
     public FSReadonlyNode<TCell> ReadNode(IndexEntry entry)
     {
-      myInputStream.Position = entry.Begin;
-      TCell id = myPersist.Load(myInputStream);
+      TCell id = ReadCell(entry);
 
       myInputStream.Position = entry.Data;
       var d = new byte[1];
@@ -34,6 +35,12 @@ namespace DSIS.Graph.FS
                  Entry = entry,
                  IsSelfLoop = d[0] == 42
                };
+    }
+
+    public TCell ReadCell(IndexEntry entry)
+    {
+      myInputStream.Position = entry.Begin;
+      return myPersist.Load(myInputStream);
     }
 
     public IEnumerable<TCell> ReadEdges(IndexEntry entry)

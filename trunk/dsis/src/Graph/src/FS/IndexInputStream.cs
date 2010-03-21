@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DSIS.Persistance.Streams;
 using DSIS.Utils;
 
 namespace DSIS.Graph.FS
 {
-  public class IndexInputStream : IDisposable
+  public class IndexInputStream : IIndexInputStream
   {
     private readonly long myCount;
     private readonly IInputStream myInputStream;
@@ -50,6 +49,11 @@ namespace DSIS.Graph.FS
       {
         yield return ReadIndex();
       }
+    }
+
+    public long Count
+    {
+      get { return myCount; }
     }
 
     public IndexEntry GetAt(long index)

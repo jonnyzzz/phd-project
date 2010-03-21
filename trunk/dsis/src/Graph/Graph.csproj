@@ -76,7 +76,11 @@
     <Compile Include="src\FS\BTree.cs" />
     <Compile Include="src\FS\FSBlocker.cs" />
     <Compile Include="src\FS\FSGraphBuilder.cs" />
+    <Compile Include="src\FS\FSNodeInMemoryIndexImpl.cs" />
     <Compile Include="src\FS\FSReadonlyNode.cs" />
+    <Compile Include="src\FS\IFSNodeIndex.cs" />
+    <Compile Include="src\FS\IIndexInputStream.cs" />
+    <Compile Include="src\FS\IIndexOutputStream.cs" />
     <Compile Include="src\FS\IndexEntry.cs" />
     <Compile Include="src\FS\IndexInputStream.cs" />
     <Compile Include="src\FS\IndexOutputStream.cs" />
