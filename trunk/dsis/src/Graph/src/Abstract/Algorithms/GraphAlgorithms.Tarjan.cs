@@ -7,7 +7,7 @@ namespace DSIS.Graph.Abstract.Algorithms
 {
   public static partial class GraphAlgorithms
   {
-    public static IGraphStrongComponents<TCell> ComputeStrongComponents<TCell>(this IGraph<TCell> graph, IProgressInfo info) 
+    public static IGraphStrongComponents<TCell> ComputeStrongComponents<TCell>(this IReadonlyGraph<TCell> graph, IProgressInfo info) 
       where TCell : ICellCoordinate
     {
       var wg = new WithGraph<TCell> {Info = info};
@@ -15,19 +15,19 @@ namespace DSIS.Graph.Abstract.Algorithms
       return wg.Componentes;      
     }
 
-    private class WithGraph<TCell> : IGraphWith<TCell> 
+    private class WithGraph<TCell> : IReadonlyGraphWith<TCell> 
       where TCell : ICellCoordinate
     {
       public IGraphStrongComponents<TCell> Componentes { get; private set; }
       public IProgressInfo Info { get; set; }
 
-      public void With<TNode>(IGraph<TCell, TNode> graph) where TNode : Node<TNode, TCell>
+      public void With<TNode>(IReadonlyGraph<TCell, TNode> graph) where TNode : class, INode<TCell>
       {
         Componentes = graph.ComputeStrongComponents(Info);
       }
     }
 
-    private class NodeAndData<TNode,TCell> : IEquatable<NodeAndData<TNode, TCell>> where TNode : Node<TNode,TCell>
+    private class NodeAndData<TNode,TCell> : IEquatable<NodeAndData<TNode, TCell>> where TNode : class, INode<TCell>
                                                                                    where TCell : ICellCoordinate
     {
       public readonly TNode Node;
@@ -70,13 +70,13 @@ namespace DSIS.Graph.Abstract.Algorithms
       }
     }
 
-    public static IGraphStrongComponents<TCell> ComputeStrongComponents<TCell, TNode>(this IGraph<TCell, TNode> graph, IProgressInfo info)
-      where TNode : Node<TNode, TCell>
+    public static IGraphStrongComponents<TCell> ComputeStrongComponents<TCell, TNode>(this IReadonlyGraph<TCell, TNode> graph, IProgressInfo info)
+      where TNode : class, INode<TCell>
       where TCell : ICellCoordinate
     {
       info.Maximum = graph.EdgesCount;
 
-      using (var holder = graph.CreateDataHolder(x => new TarjanNodeData<TCell,TNode>(x)))
+      using (var holder = graph.CreateDataHolder(x => new TarjanNodeData<TCell,TNode>(graph.GetEdgesInternal(x))))
       using(var stack = new TarjanNodeStack<TCell, TNode>(graph.CreateNodeFlagsHolder("STACK")))
       using(var route = new TarjanNodeStack<TCell, TNode>(graph.CreateNodeFlagsHolder("ROUTE")))
       {

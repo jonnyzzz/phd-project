@@ -8,12 +8,12 @@ namespace DSIS.Graph.Tarjan
 {
   internal class TarjanStrongComponentImpl<TCell, TNode> : IGraphStrongComponents<TCell>
     where TCell : ICellCoordinate
-    where TNode : Node<TNode, TCell>
+    where TNode : class, INode<TCell>
   {
-    private readonly IGraph<TCell,TNode> myGraph;
+    private readonly IReadonlyGraph<TCell,TNode> myGraph;
     private readonly TarjanComponentInfoManager myManager;
 
-    internal TarjanStrongComponentImpl(IGraph<TCell, TNode> graph, TarjanComponentInfoManager manager)
+    internal TarjanStrongComponentImpl(IReadonlyGraph<TCell, TNode> graph, TarjanComponentInfoManager manager)
     {
       myGraph = graph;
       myManager = manager;
@@ -73,7 +73,7 @@ namespace DSIS.Graph.Tarjan
           continue;
         
         var newFrom = graph.AddNode(node.Coordinate);
-        foreach (var tarjanNode in node.EdgesInternal)
+        foreach (var tarjanNode in myGraph.GetEdgesInternal(node))
         {
           if (filter.Accept(tarjanNode.ComponentId))
           {

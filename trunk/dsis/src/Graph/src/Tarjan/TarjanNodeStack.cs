@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph.Tarjan
 {
   public class TarjanNodeStack<TCell, TNode> : IDisposable
     where TCell : ICellCoordinate
-    where TNode : Node<TNode, TCell>
+    where TNode : class, INode<TCell>
   {
     private readonly Stack<TNode> myStack = new Stack<TNode>();
     private readonly IGraphDataHoler<bool, TNode> myMask;

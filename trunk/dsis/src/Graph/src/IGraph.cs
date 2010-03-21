@@ -8,7 +8,13 @@ namespace DSIS.Graph
     void DoGeneric(IGraphWith with);
   }
 
-  public interface IGraph<TCoordinate> : IGraph, IReadonlyGraph<TCoordinate>
+  public interface IGraphCommon<TCoordinate> : IGraph, IReadonlyGraphCommon<TCoordinate>
+    where TCoordinate : ICellCoordinate
+  {
+    
+  }
+
+  public interface IGraph<TCoordinate> : IGraphCommon<TCoordinate>, IReadonlyGraph<TCoordinate>
     where TCoordinate : ICellCoordinate
   {
     /// <summary>
@@ -29,8 +35,7 @@ namespace DSIS.Graph
     void DoGeneric(IGraphWith<TCoordinate> with);
   }
 
-
-  public interface IGraph<TCell, TNode> : IGraph<TCell>, IReadonlyGraph<TCell, TNode>
+  public interface IGraph<TCell, TNode> : IGraphCommon<TCell>, IReadonlyGraph<TCell, TNode>
     where TNode : Node<TNode, TCell>
     where TCell : ICellCoordinate
   {
@@ -42,6 +47,5 @@ namespace DSIS.Graph
     /// <param name="fromNode"></param>
     /// <param name="toNode"></param>
     void AddEdgeToNode(TNode fromNode, TNode toNode);
-
   }  
 }

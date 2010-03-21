@@ -1,30 +1,23 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph.Tarjan
 {
   internal class TarjanNodeData<TCell, TNode> 
     where TCell : ICellCoordinate
-    where TNode : Node<TNode, TCell>
+    where TNode : class, INode<TCell>
   {
-    public long Label = 0;
-    public long Number = 0;
-    private IEnumerator<TNode> myNodes = null;
-    private readonly TNode myNode;
+    public long Label;
+    public long Number;
+    private readonly IEnumerator<TNode> myNodes;
 
-    public TarjanNodeData(TNode node)
+    public TarjanNodeData(IEnumerable<TNode> edges)
     {
-      myNode = node;      
+      myNodes = edges.GetEnumerator();
     }
 
     public bool MoveNext()
     {
-      if (myNodes == null)
-      {
-        myNodes = myNode.EdgesInternal.GetEnumerator();
-      }
-
       return myNodes.MoveNext();
     }
 

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Core.Util;
 using DSIS.Graph.Abstract;
+using DSIS.Graph.Abstract.Algorithms;
 
 namespace DSIS.Graph.Tarjan
 {
@@ -50,6 +52,11 @@ namespace DSIS.Graph.Tarjan
       }
     }
 
+    public IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
+    {
+      return ((IReadonlyGraph<TCell, TarjanNode<TCell>>) this).ComputeStrongComponents(info);
+    }
+    
     public IReadonlyGraph<TCell> BuildFinished()
     {
       return this;

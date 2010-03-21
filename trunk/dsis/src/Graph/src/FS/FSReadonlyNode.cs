@@ -1,4 +1,5 @@
-﻿using DSIS.Core.Coordinates;
+﻿using System;
+using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.FS
 {
@@ -20,6 +21,10 @@ namespace DSIS.Graph.FS
     }
 
     public uint ComponentId { get; set;}
+    public void SetComponentId(uint id)
+    {
+      throw new NotImplementedException();
+    }
 
     public bool IsSelfLoop { get; set; }
   }

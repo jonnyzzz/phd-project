@@ -1,6 +1,5 @@
 using System;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Abstract;
 
 namespace DSIS.Graph.Tarjan
 {
@@ -27,7 +26,7 @@ namespace DSIS.Graph.Tarjan
 
     internal void SetNodeComponent<TCell, TNode>(TNode node)
       where TCell : ICellCoordinate
-      where TNode : Node<TNode, TCell>
+      where TNode : class, INode<TCell>
     {
       node.SetComponentId(myComponentId);
       myNodesCount++;

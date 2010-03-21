@@ -4,13 +4,14 @@ namespace DSIS.Graph.Abstract.Algorithms
 {
   public static partial class GraphAlgorithms
   {
+/*
     public delegate IGraph<TCell, TNode> Create<TCell, TNode>(ICellCoordinateSystem<TCell> cs)
       where TCell : ICellCoordinate
-      where TNode : Node<TNode, TCell>;
+      where TNode : class, INode<TCell>;
 
-    public static IGraph<TCell, TNode> Project<TCell, TNode>(this IGraph<TCell, TNode> baseGraph, ICellCoordinateSystemProjector<TCell> projector, Create<TCell, TNode> create)
+    public static IReadonlyGraph<TCell, TNode> Project<TCell, TNode>(this IReadonlyGraph<TCell, TNode> baseGraph, ICellCoordinateSystemProjector<TCell> projector, Create<TCell, TNode> create)
       where TCell : ICellCoordinate
-      where TNode : Node<TNode, TCell>
+      where TNode : class, INode<TCell>
     {
       var toSystem = projector.ToSystem;
       var graph = create(toSystem);
@@ -40,5 +41,6 @@ namespace DSIS.Graph.Abstract.Algorithms
       }
       return graph;
     }
+*/
   }
 }

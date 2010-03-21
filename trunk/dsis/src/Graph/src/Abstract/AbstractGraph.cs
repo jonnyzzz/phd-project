@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 
 namespace DSIS.Graph.Abstract
 {
-  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell, TNode>
+  public abstract class AbstractGraph<TInh, TCell, TNode> : IGraph<TCell, TNode>, IGraph<TCell>
     where TCell : ICellCoordinate
     where TNode : Node<TNode, TCell>
     where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>
@@ -84,7 +84,29 @@ namespace DSIS.Graph.Abstract
 
     public IReadonlyGraph<TCell> Project(ICellCoordinateSystemProjector<TCell> projector)
     {
-      return this.Project(projector, CreateGraph);
+      var toSystem = projector.ToSystem;
+      var graph = CreateGraph(toSystem);
+
+      foreach (var node in this.NodesInternal)
+      {
+        var proj = projector.Project(node.Coordinate);
+        if (toSystem.IsNull(proj))
+          continue;
+
+        var gNode = graph.AddNode(proj);
+        
+        foreach (var edge in this.GetEdgesInternal(node))
+        {
+          var eProj = projector.Project(edge.Coordinate);
+          if (toSystem.IsNull(eProj))
+            continue;
+
+          var gToNode = graph.AddNode(eProj);
+
+          graph.AddEdgeToNode(gNode, gToNode);
+        }
+      }
+      return graph;
     }
 
     public void DoGeneric(IGraphWith with)

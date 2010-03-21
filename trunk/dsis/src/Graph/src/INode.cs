@@ -10,5 +10,8 @@ namespace DSIS.Graph
     TCoordinate Coordinate { get; }
 
     uint ComponentId { get; }
+
+    //TODO: Move it somewhere!
+    void SetComponentId(uint id);
   }
 }

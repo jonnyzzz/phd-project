@@ -69,6 +69,11 @@ namespace DSIS.Graph.Morse.Tests
         {
           get { return ComponentId; }
         }
+
+        public void SetComponentId(uint id)
+        {
+          throw new NotImplementedException();
+        }
       }
     }
 

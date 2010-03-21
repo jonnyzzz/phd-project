@@ -6,7 +6,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.FS
 {
-  public class FSReadonlyGraph<TCell> : IReadonlyGraph<TCell, FSReadonlyNode<TCell>>
+  public class FSReadonlyGraph<TCell> : IReadonlyGraph<TCell, FSReadonlyNode<TCell>>, IReadonlyGraph<TCell>
     where TCell : ICellCoordinate
   {
     private readonly IFSNodeIndex<TCell> myNodeIndex;
@@ -39,16 +39,6 @@ namespace DSIS.Graph.FS
     public void DoGeneric(IReadonlyGraphWith<TCell> with)
     {
       with.With(this);
-    }
-
-    public IEnumerable<INode<TCell>> GetEdges(INode<TCell> forNode)
-    {
-      return GetEdgesInternal((FSReadonlyNode<TCell>) forNode);
-    }
-
-    public IGraphDataHoler<TData, INode<TCell>> CreateDataHolder<TData>(Converter<INode<TCell>, TData> def)
-    {
-      throw new NotImplementedException();
     }
 
     public ICellCoordinateSystem<TCell> CoordinateSystem

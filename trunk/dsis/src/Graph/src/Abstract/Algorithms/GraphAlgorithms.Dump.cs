@@ -33,14 +33,14 @@ namespace DSIS.Graph.Abstract.Algorithms
         Dump(graph, myWriter);
       }
 
-      private static void Dump<TNode, TCell>(IGraph<TCell, TNode> graph, TextWriter tw)
+      private static void Dump<TNode, TCell>(IReadonlyGraph<TCell, TNode> graph, TextWriter tw)
         where TCell : ICellCoordinate
         where TNode : Node<TNode, TCell>
       {
         tw.WriteLine(graph);
         var ids = new Dictionary<TNode, int>();
         int lastId = 0;
-        foreach (TNode node in graph.Nodes)
+        foreach (TNode node in graph.NodesInternal)
         {
           int id;
           if (!ids.TryGetValue(node, out id))
