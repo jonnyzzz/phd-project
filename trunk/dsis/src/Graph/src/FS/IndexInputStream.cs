@@ -29,7 +29,7 @@ namespace DSIS.Graph.FS
     {
       var buff = new byte[LongConverter.Size];
       myInputStream.Read(buff, 0, buff.Length);
-      return LongConverter.FromBytes(buff);
+      return LongConverter.FromBytes(buff, 0);
     }
 
     private IndexEntry ReadIndex()

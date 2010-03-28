@@ -7,6 +7,35 @@ namespace DSIS.Utils
 {
   public static class Util
   {
+    public static IEnumerable<IEnumerable<T>> ToChunks<T>(this IEnumerable<T> enu, int chunkSize)
+    {
+      var list = new List<T>();
+      foreach (var e in enu)
+      {
+        list.Add(e);
+
+        if (list.Count >= chunkSize)
+        {
+          yield return list;
+          list = new List<T>();
+        }
+      }
+      if (list.Count > 0)
+        yield return list;      
+    }
+
+    private static List<T> FetchN<T>(IEnumerator<T> enu, int count)
+    {
+      var list = new List<T>();
+      while(--count >= 0 && enu.MoveNext())
+      {
+        list.Add(enu.Current);
+      }
+      return list;
+    }
+
+
+
     public static void ForEach<T>(this IEnumerable<T> enu, Action<T> act)
     {
       foreach (var t in enu)

@@ -1,8 +1,10 @@
 ﻿using System;
 using DSIS.Core.Coordinates;
+using DSIS.Utils;
 
 namespace DSIS.Graph.FS
 {
+  [EqualityComparer(typeof(FSReadonlyNodeComparer<>))]
   public class FSReadonlyNode<TCell> : INode<TCell>
     where TCell : ICellCoordinate
   {

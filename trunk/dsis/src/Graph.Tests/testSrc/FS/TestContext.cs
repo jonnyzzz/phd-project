@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Tests.FS
 {
-  public interface ITestContext
-  {
-    void CheckGraphNodesAndEdges(IEnumerable<Pair<int, IEnumerable<int>>> edges);
-  }
-
   public abstract class TestContext<TCell> : ITestContext
     where TCell : ICellCoordinate
   {
@@ -27,36 +23,46 @@ namespace DSIS.Graph.Tests.FS
 
     public void CheckGraphNodesAndEdges(IEnumerable<Pair<int, IEnumerable<int>>> edges)
     {
-      CheckBuiltGraph(edges, BuildGraph(edges));
+      var readonlyGraph = BuildGraph(edges);
+      DumpGraph(readonlyGraph);
+      CheckBuiltGraph(edges, readonlyGraph);
     }
 
-
-    public IReadonlyGraph<TCell> BuildGraph(IEnumerable<Pair<int, IEnumerable<int>>> edges)
+    private void DumpGraph(IReadonlyGraph<TCell> graph)
     {
-      var builder = myHost.CreateBuilder<TCell>(CoordinateSystem, CoordinateSystemPersist);
+      WithGraph(graph).DumpGraph();      
+    }
+
+    private IReadonlyGraph<TCell> BuildGraph(IEnumerable<Pair<int, IEnumerable<int>>> edges)
+    {
+      var builder = myHost.CreateBuilder(CoordinateSystem, CoordinateSystemPersist);
       using (var writer = builder.GetWriter())
       {
-        foreach (var edge in ConvertEdges(edges))
+        foreach (var edge in ConvertEdges(edges).ToArray())
         {
-          writer.AddEdges(edge.First, edge.Second);
+          var cells = edge.Second.ToArray();
+          Console.Out.WriteLine("adding = {0} --> {1}", Convert(edge.First), cells.JoinString(x=>Convert(x).ToString(), ", "));
+
+          writer.AddEdges(edge.First, cells);
         }
       }
 
       return builder.BuildFinished();
     }
 
-    public IEnumerable<Pair<TCell, IEnumerable<TCell>>> ConvertEdges(IEnumerable<Pair<int, IEnumerable<int>>> edges)
+    private IEnumerable<Pair<TCell, IEnumerable<TCell>>> ConvertEdges(IEnumerable<Pair<int, IEnumerable<int>>> edges)
     {
-      return edges.Select(x => Pair.Of(Convert(x.First), x.Second.Select(Convert).Where(IsNotNull)))
+      return edges.Select(
+        x => Pair.Of(Convert(x.First), x.Second.Select(Convert).Where(IsNotNull)))
         .Where(x => IsNotNull(x.First));
     }
 
-    public void CheckBuiltGraph(IEnumerable<Pair<int, IEnumerable<int>>> edges, IReadonlyGraph<TCell> graph)
+    private void CheckBuiltGraph(IEnumerable<Pair<int, IEnumerable<int>>> edges, IReadonlyGraph<TCell> graph)
     {
       WithGraph(graph).CheckBuiltGraphEdges(edges);
     }
 
-    protected ITestContextWithGraph<TCell> WithGraph(IReadonlyGraph<TCell> graph)
+    private ITestContextWithGraph<TCell> WithGraph(IReadonlyGraph<TCell> graph)
     {
       var with = new TestContextWithGraphFactory<TCell>(this);
       graph.DoGeneric(with);

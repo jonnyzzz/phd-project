@@ -58,6 +58,7 @@
     <Compile Include="testSrc\InfiniteEnumerableTest.cs" />
     <Compile Include="testSrc\LinedListTest.cs" />
     <Compile Include="testSrc\Log2HelperTest.cs" />
+    <Compile Include="testSrc\LongConverterTest.cs" />
     <Compile Include="testSrc\NUnitFixtureHelper.cs" />
     <Compile Include="testSrc\TimeoutTest.cs" />
   </ItemGroup>

@@ -32,6 +32,7 @@
     <Compile Include="testSrc\FS\FSGraphTestBase.cs" />
     <Compile Include="testSrc\FS\GenericGraphTestBase.cs" />
     <Compile Include="testSrc\FS\IndexStreamTest.cs" />
+    <Compile Include="testSrc\FS\ITestContext.cs" />
     <Compile Include="testSrc\FS\ITestContextWithGraph.cs" />
     <Compile Include="testSrc\FS\TestContext.cs" />
     <Compile Include="testSrc\FS\TestContextWithGraph.cs" />

@@ -75,6 +75,7 @@
     <Compile Include="src\FS\FSGraphObjectManagerImpl.cs" />
     <Compile Include="src\FS\FSNodeInMemoryIndexImpl.cs" />
     <Compile Include="src\FS\FSReadonlyNode.cs" />
+    <Compile Include="src\FS\FSReadonlyNodeComparer.cs" />
     <Compile Include="src\FS\IFSGraphObjectManager.cs" />
     <Compile Include="src\FS\IFSGraphResourceManager.cs" />
     <Compile Include="src\FS\IFSNodeIndex.cs" />

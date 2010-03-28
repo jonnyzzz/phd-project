@@ -28,7 +28,7 @@ namespace DSIS.Graph.FS
 
     public IEqualityComparer<FSReadonlyNode<TCell>> Comparer
     {
-      get { throw new NotImplementedException(); }
+      get { return new FSReadonlyNodeComparer<TCell>(); }
     }
 
     public void DoGeneric(IReadonlyGraphWith with)
@@ -72,10 +72,7 @@ namespace DSIS.Graph.FS
 
     public IEnumerable<TCell> NodesCoordinates
     {
-      get
-      {
-        throw new NotImplementedException();
-      }
+      get { return myNodeIndex.Entries.Select(myReader.ReadCell); }
     }
 
     public FSReadonlyNode<TCell> Find(TCell node)
@@ -86,13 +83,12 @@ namespace DSIS.Graph.FS
 
     public IEnumerable<FSReadonlyNode<TCell>> NodesInternal
     {
-      get { return myReader.ReadAllNodes(myNodeIndex.Entries); }
+      get { return myNodeIndex.Entries.Select(x=>myReader.ReadNode(x)); }
     }
 
     public IEnumerable<FSReadonlyNode<TCell>> GetEdgesInternal(FSReadonlyNode<TCell> forNode)
-    {
-      //TODO: Consider lazy node or something but Find 
-      return myReader.ReadEdges(forNode.Entry).Select(Find);
+    {      
+      return myReader.ReadEdges(forNode.Entry).Select(Find).Where(x=>x != null);
     }
 
     public IGraphDataHoler<TData, FSReadonlyNode<TCell>> CreateDataHolder<TData>(Converter<FSReadonlyNode<TCell>, TData> def)

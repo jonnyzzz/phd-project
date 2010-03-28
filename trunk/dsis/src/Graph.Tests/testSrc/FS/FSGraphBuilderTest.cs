@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using DSIS.Graph.FS;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
@@ -17,7 +16,7 @@ namespace DSIS.Graph.Tests.FS
       var g = new FSGraphBuilder<IntegerCoordinate>(
         system,
         system,
-        new FSGraphObjectManagerImpl(new SimpleFSGraphResourceManagerImpl(null))
+        new FSGraphObjectManagerImpl(new MemoryFSGraphResourceManagerImpl())
         );
 
       g.Dispose();

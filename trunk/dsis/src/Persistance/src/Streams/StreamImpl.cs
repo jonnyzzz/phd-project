@@ -21,8 +21,15 @@ namespace DSIS.Persistance.Streams
 
     public long Position
     {
-      get { return myStream.Position; }
-      set { myStream.Position = value; }
+      get
+      {
+        myStream.Flush();
+        return myStream.Position;
+      }
+      set
+      {
+        myStream.Position = value;
+      }
     }
 
     public long Length

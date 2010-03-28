@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Persistance.Streams;
+using DSIS.Utils;
 
 namespace DSIS.Graph.FS
 {
@@ -47,7 +48,8 @@ namespace DSIS.Graph.FS
     public void AddEdges(TCell from, IEnumerable<TCell> tos)
     {
       myNodesCount++;
-      var e = new IndexEntry {Begin = myOutputFile.Position};
+      long beginPos = myOutputFile.Position;
+      
       WriteNodeCoord(from);
 
       var set = new HashSet<TCell>(myComparer);
@@ -59,11 +61,13 @@ namespace DSIS.Graph.FS
       foreach (var w in set)
         WriteNodeCoord(w);
 
-      e.Data = myOutputFile.Position;
-      if (isLoop)
-        myOutputFile.Write(new byte[]{1}, 0, 1);
+      long dataPos = myOutputFile.Position;
+      myOutputFile.Write(new[]{isLoop ? (byte)42 : (byte)77}, 0, 1);
 
-      myIndexFile.WriteBlockStartLocation(e);
+
+      var indexEntry = new IndexEntry { Begin = beginPos, Data = dataPos };
+      Console.Out.WriteLine("gadd @ {2} : {0} --> {1}", (from), set.JoinString(x => x.ToString(), ", "), indexEntry);
+      myIndexFile.WriteBlockStartLocation(indexEntry);
     }
 
     private void WriteNodeCoord(TCell node)

@@ -35,13 +35,15 @@ namespace DSIS.Graph.Tests.FS
       var dict = edges.ToDictionary(x => x.First, x=>new HashSet<int>(x.Second));
       
       //Check iterators first
-      foreach (var node in myGraph.NodesInternal)
+      foreach (var node in myGraph.NodesInternal.ToArray())
       {
         var nodeId = Convert(node);
         //Exception if there was no such node in dict
         var outgoing = new HashSet<int>(dict[nodeId]);
-        foreach (var dest in myGraph.GetEdgesInternal(node))
+        foreach (var dest in myGraph.GetEdgesInternal(node).ToArray())
         {
+          Assert.IsNotNull(dest, "Siblings of {0} is null", nodeId);
+
           Assert.IsTrue(outgoing.Remove(Convert(dest)), "Edges {0}->{1} sould not be contained in graph", nodeId, Convert(dest));
         }
         Assert.IsTrue(outgoing.IsEmpty(), "Graph should contain: {0}", outgoing.Sort((a,b)=>a<b ?-1 :a>b? 1 : 0).JoinString(to=>string.Format("{0}->{1}", nodeId, to), ", "));
@@ -51,6 +53,18 @@ namespace DSIS.Graph.Tests.FS
       }
 
       Assert.IsTrue(dict.IsEmpty(), "Graph should contain nodes: ", dict.Keys.JoinString(", "));
+    }
+
+    public void DumpGraph()
+    {
+      foreach (var node in myGraph.NodesInternal)
+      {
+        Console.Out.WriteLine("node = {0}", node.Coordinate);
+        foreach (var to in myGraph.GetEdgesInternal(node))
+        {
+          Console.Out.WriteLine(" -> {0}", to.Coordinate);
+        }
+      }
     }
   }
 }

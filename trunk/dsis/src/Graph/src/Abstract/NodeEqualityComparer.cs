@@ -4,6 +4,7 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Abstract
 {
+  //TODO: Introduce long nodeId and compare nodes by id, not by TCell
   public class NodeEqualityComparer<TNode, TCell> : IEqualityComparer<TNode>
     where TNode : Node<TNode, TCell>
     where TCell : ICellCoordinate

@@ -16,5 +16,11 @@ namespace DSIS.Graph.Tests.FS
     {
       TestGraphEdgesBuilt(e(p(1,1,2), p(2,2,1)));
     }    
+
+    [Test]
+    public void TestTenNodesGraph()
+    {
+      TestGraphEdgesBuilt(e(p(1,2), p(2,3), p(3,4), p(4,5), p(5,6), p(6,7), p(7,8), p(8,9), p(9,10), p(10, 1)));
+    }    
   }
 }

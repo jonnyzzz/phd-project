@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Persistance.Streams;
 
@@ -44,14 +43,14 @@ namespace DSIS.Graph.FS
       //Skip self
       myPersist.Load(myInputStream);
       while(myInputStream.Position < entry.Data)
-      {
-        yield return myPersist.Load(myInputStream);
-      }
-    }
+      {        
+        var read = myPersist.Load(myInputStream);
 
-    public IEnumerable<FSReadonlyNode<TCell>> ReadAllNodes(IEnumerable<IndexEntry> entries)
-    {
-      return entries.Select(ReadNode);
+        long pos = myInputStream.Position;
+        //Position may change here!
+        yield return read;
+        myInputStream.Position = pos;
+      }
     }
   }
 }

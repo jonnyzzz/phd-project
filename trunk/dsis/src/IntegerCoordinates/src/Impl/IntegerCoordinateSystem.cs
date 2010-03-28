@@ -150,7 +150,7 @@ namespace DSIS.IntegerCoordinates.Impl
       for(var i = 0; i < Dimension; i++)
       {
         stream.Read(buff, 0, buff.Length);
-        arr[i] = LongConverter.FromBytes(buff);
+        arr[i] = LongConverter.FromBytes(buff, 0);
       }
       return Create(arr);
     }

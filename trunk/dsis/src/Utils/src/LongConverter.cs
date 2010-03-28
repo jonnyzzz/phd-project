@@ -2,16 +2,16 @@
 {
   public static class LongConverter
   {
-    public static long FromBytes(byte[] buff)
+    public static long FromBytes(byte[] buff, int offset)
     {
-      return buff[0]
-             + ((long)buff[1] << 8)
-             + ((long)buff[2] << 16)
-             + ((long)buff[3] << 24)
-             + ((long)buff[4] << 32)
-             + ((long)buff[5] << 40)
-             + ((long)buff[6] << 48)
-             + ((long)buff[7] << 56);
+      return buff[0 + offset]
+             + (((long)buff[1 + offset]) << 8)
+             + (((long)buff[2 + offset]) << 16)
+             + (((long)buff[3 + offset]) << 24)
+             + (((long)buff[4 + offset]) << 32)
+             + (((long)buff[5 + offset]) << 40)
+             + (((long)buff[6 + offset]) << 48)
+             + (((long)buff[7 + offset]) << 56);
     }
 
     public static int Size
