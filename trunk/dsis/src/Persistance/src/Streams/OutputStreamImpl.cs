@@ -3,9 +3,10 @@ using System.IO;
 
 namespace DSIS.Persistance.Streams
 {
-  public class OutputStreamImpl : StreamImpl, IOutputStream
+  public class OutputStreamImpl<S> : StreamImpl<S>, IOutputStream
+    where S : Stream
   {
-    public OutputStreamImpl(Stream stream, Action dispose) : base(stream, dispose)
+    public OutputStreamImpl(S stream, Action<S> dispose) : base(stream, dispose)
     {
     }
 

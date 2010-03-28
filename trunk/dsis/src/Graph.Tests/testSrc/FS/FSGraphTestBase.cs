@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using DSIS.Core.Coordinates;
+﻿using DSIS.Core.Coordinates;
 using DSIS.Graph.FS;
 
 namespace DSIS.Graph.Tests.FS
@@ -9,9 +7,9 @@ namespace DSIS.Graph.Tests.FS
   {
     public override IGraphBuilder<TCell> CreateBuilder<TCell>(ICellCoordinateSystem<TCell> system, ICellCoordinateSystemPersist<TCell> persist)
     {
-      var stream = new MemoryStream();
-      var index = new IndexOutputStream(new MemoryStream());
-      return new FSGraphBuilder<TCell>(persist, stream, index, system);
+      var res = new MemoryFSGraphResourceManagerImpl();
+      var obj = new FSGraphObjectManagerImpl(res);
+      return new FSGraphBuilder<TCell>(persist, system, obj);
     }
   }
 }

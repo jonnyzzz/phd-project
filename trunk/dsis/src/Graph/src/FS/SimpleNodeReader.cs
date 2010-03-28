@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Persistance.Streams;
@@ -8,18 +7,14 @@ namespace DSIS.Graph.FS
 {
   public class SimpleNodeReader<TCell> where TCell : ICellCoordinate
   {
-    private readonly IIndexInputStream myIndex;
     private readonly IInputStream myInputStream;
     private readonly ICellCoordinateSystemPersist<TCell> myPersist;
     
-    public SimpleNodeReader(IIndexInputStream index, Stream inputStream, ICellCoordinateSystemPersist<TCell> persist)
+    public SimpleNodeReader(IInputStream inputStream, ICellCoordinateSystemPersist<TCell> persist)
     {
-      myIndex = index;
-      myInputStream = inputStream.asInputStream(inputStream.Dispose);
+      myInputStream = inputStream;
       myPersist = persist;
     }
-
-
 
     public FSReadonlyNode<TCell> ReadNode(IndexEntry entry)
     {
@@ -54,9 +49,9 @@ namespace DSIS.Graph.FS
       }
     }
 
-    public IEnumerable<FSReadonlyNode<TCell>> ReadAllNodes()
+    public IEnumerable<FSReadonlyNode<TCell>> ReadAllNodes(IEnumerable<IndexEntry> entries)
     {
-      return myIndex.ReadData().Select(ReadNode);
+      return entries.Select(ReadNode);
     }
   }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.FS
@@ -7,5 +8,7 @@ namespace DSIS.Graph.FS
     where TCell : ICellCoordinate
   {
     IndexEntry? FindNode(TCell node);
+
+    IEnumerable<IndexEntry> Entries { get; }
   }
 }

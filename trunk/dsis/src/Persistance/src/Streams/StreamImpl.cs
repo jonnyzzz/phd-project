@@ -3,12 +3,12 @@ using System.IO;
 
 namespace DSIS.Persistance.Streams
 {
-  public class StreamImpl : IStream
+  public class StreamImpl<S> : IStream where S : Stream
   {
-    protected readonly Stream myStream;
-    private readonly Action myDispose;
+    protected readonly S myStream;
+    private readonly Action<S> myDispose;
 
-    protected StreamImpl(Stream stream, Action dispose)
+    protected StreamImpl(S stream, Action<S> dispose)
     {
       myStream = stream;
       myDispose = dispose;
@@ -16,7 +16,7 @@ namespace DSIS.Persistance.Streams
 
     public void Dispose()
     {
-      myDispose();
+      myDispose(myStream);
     }
 
     public long Position

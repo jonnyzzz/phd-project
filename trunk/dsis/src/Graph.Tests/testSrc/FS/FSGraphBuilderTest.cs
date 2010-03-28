@@ -16,7 +16,9 @@ namespace DSIS.Graph.Tests.FS
       var system = new IntegerCoordinateSystem(new MockSystemSpace(1, 0, 1, 1000));
       var g = new FSGraphBuilder<IntegerCoordinate>(
         system,
-        new MemoryStream(), new IndexOutputStream(new MemoryStream()), system);
+        system,
+        new FSGraphObjectManagerImpl(new SimpleFSGraphResourceManagerImpl(null))
+        );
 
       g.Dispose();
 

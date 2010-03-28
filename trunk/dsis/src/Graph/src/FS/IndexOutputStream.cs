@@ -6,18 +6,23 @@ namespace DSIS.Graph.FS
 {
   public class IndexOutputStream : IIndexOutputStream
   {
-    private readonly Stream myOutputStream;
+    private readonly IOutputStream myOutputStream;
     private long myItemsCount;
 
-    public IndexOutputStream(Stream outputStream)
+    public IndexOutputStream(IOutputStream outputStream)
     {
       myOutputStream = outputStream;
+    }
+
+    public IOutputStream OutputStream
+    {
+      get { return myOutputStream; }
     }
 
     public void Dispose()
     {
       WriteLong(myItemsCount);
-      myOutputStream.Flush();
+      myOutputStream.Dispose();
     }
 
     public void WriteBlockStartLocation(IndexEntry position)
@@ -31,12 +36,6 @@ namespace DSIS.Graph.FS
     {
       var buffer = LongConverter.ToBytes(position);
       myOutputStream.Write(buffer, 0, buffer.Length);
-    }
-
-    public IIndexInputStream CloseAndRead()
-    {
-      myOutputStream.Flush();
-      return new IndexInputStream(myOutputStream.asInputStream(myOutputStream.Dispose));
     }
   }
 }

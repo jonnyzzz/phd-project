@@ -86,7 +86,7 @@ namespace DSIS.Graph.FS
 
     public IEnumerable<FSReadonlyNode<TCell>> NodesInternal
     {
-      get { return myReader.ReadAllNodes(); }
+      get { return myReader.ReadAllNodes(myNodeIndex.Entries); }
     }
 
     public IEnumerable<FSReadonlyNode<TCell>> GetEdgesInternal(FSReadonlyNode<TCell> forNode)

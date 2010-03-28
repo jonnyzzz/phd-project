@@ -6,20 +6,22 @@ namespace DSIS.Persistance.Streams
 {
   public static class StreamUtilities
   {
-    public static IInputStream asInputStream([NotNull] this Stream stream, [CanBeNull] Action dispose)
+    public static IInputStream AsInputStream<S>([NotNull] this S stream, [CanBeNull] Action<S> dispose)
+      where S : Stream
     {
       if (stream == null) throw new ArgumentNullException("stream");
       if (!stream.CanRead) throw new ArgumentException("Stream should be writable", "stream");
 
-      return new InputStreamImpl(stream, dispose);
+      return new InputStreamImpl<S>(stream, dispose);
     }
 
-    public static IOutputStream asOutputStream([NotNull] this Stream stream, [CanBeNull] Action dispose)
+    public static IOutputStream AsOutputStream<S>([NotNull] this S stream, [CanBeNull] Action<S> dispose)
+      where S : Stream
     {
       if (stream == null) throw new ArgumentNullException("stream");
       if (!stream.CanWrite) throw new ArgumentException("Stream should be writable", "stream");
 
-      return new OutputStreamImpl(stream, dispose);
+      return new OutputStreamImpl<S>(stream, dispose);
     }
   }
 }
