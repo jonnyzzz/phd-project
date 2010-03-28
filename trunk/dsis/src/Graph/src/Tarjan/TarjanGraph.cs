@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -9,7 +10,8 @@ namespace DSIS.Graph.Tarjan
   public class TarjanGraph<TCell> :
     AbstractGraph<TarjanGraph<TCell>, TCell, TarjanNode<TCell>>,
     IGraphExtension<TarjanNode<TCell>, TCell>,
-    IGraphBuilder<TCell>
+    IGraphBuilder<TCell>,
+    IGraghNodeWriter<TCell>
     where TCell : ICellCoordinate
   {
     public TarjanGraph(ICellCoordinateSystem<TCell> coordinateSystem) : base(coordinateSystem)
@@ -39,11 +41,16 @@ namespace DSIS.Graph.Tarjan
     {     
     }
 
-    public void Dispose()
+    public IGraghNodeWriter<TCell> GetWriter()
+    {
+      return this;
+    }
+
+    void IDisposable.Dispose()
     {      
     }
 
-    public void AddEdges(TCell from, IEnumerable<TCell> tos)
+    void IGraghNodeWriter<TCell>.AddEdges(TCell from, IEnumerable<TCell> tos)
     {
       TarjanNode<TCell> fromNode = AddNode(from);
       foreach (var to in tos)

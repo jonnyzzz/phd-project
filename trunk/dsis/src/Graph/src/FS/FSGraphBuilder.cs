@@ -6,7 +6,7 @@ using DSIS.Persistance.Streams;
 
 namespace DSIS.Graph.FS
 {
-  public class FSGraphBuilder<TCell> : IGraphBuilder<TCell>
+  public class FSGraphBuilder<TCell> : IGraphBuilder<TCell>, IGraghNodeWriter<TCell>
     where TCell : ICellCoordinate
   {
     private readonly IEqualityComparer<TCell> myComparer;
@@ -38,6 +38,11 @@ namespace DSIS.Graph.FS
         myIsDisposed = true;
         myIndexFile.Dispose();
       }
+    }
+
+    public IGraghNodeWriter<TCell> GetWriter()
+    {
+      return this;
     }
 
     public void AddEdges(TCell from, IEnumerable<TCell> tos)
