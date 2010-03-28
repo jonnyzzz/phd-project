@@ -88,7 +88,14 @@ namespace DSIS.Graph.FS
 
     public IEnumerable<FSReadonlyNode<TCell>> GetEdgesInternal(FSReadonlyNode<TCell> forNode)
     {      
+      //TODO: Create node from coordinate only. Make this node load lazyly
+      //NOTE: Node without outgoing edges is not included in the graph
       return myReader.ReadEdges(forNode.Entry).Select(Find).Where(x=>x != null);
+    }
+
+    public IGraphDataHoler<uint, FSReadonlyNode<TCell>> GetComponentIdHolder()
+    {
+      throw new NotImplementedException();
     }
 
     public IGraphDataHoler<TData, FSReadonlyNode<TCell>> CreateDataHolder<TData>(Converter<FSReadonlyNode<TCell>, TData> def)

@@ -24,11 +24,11 @@ namespace DSIS.Graph.Tarjan
       get { return myComponentId; }
     }
 
-    internal void SetNodeComponent<TCell, TNode>(TNode node)
+    internal void SetNodeComponent<TCell, TNode>(IGraphDataHoler<uint, TNode> componentIdHolder, TNode node)
       where TCell : ICellCoordinate
       where TNode : class, INode<TCell>
     {
-      node.SetComponentId(myComponentId);
+      componentIdHolder.SetData(node, myComponentId);
       myNodesCount++;
     }
 

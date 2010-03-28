@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Abstract.NodeSets;
 using DSIS.Utils;
 using JetBrains.Annotations;
@@ -210,6 +209,11 @@ namespace DSIS.Graph.Abstract
         holder.CleanAll();
 
       return holder;
+    }
+
+    public IGraphDataHoler<uint, TNode> GetComponentIdHolder()
+    {
+      return new AbstractGraphComponentIdHolder<TNode, TCell>();
     }
 
     public void DisposeDataHolder<TData>(IGraphDataHoler<TData, TNode> holder)

@@ -85,7 +85,8 @@ namespace DSIS.Graph.Abstract.Algorithms
 
         NodeAndData<TNode,TCell> w = null;
         var comps = new TarjanComponentInfoManager();
-        
+        var componentIdHolder = graph.GetComponentIdHolder();
+
         foreach (TNode node in graph.NodesInternal)
         {
           var v = new NodeAndData<TNode, TCell>(node, holder);
@@ -144,7 +145,7 @@ namespace DSIS.Graph.Abstract.Algorithms
                 {
                   stack.Pop();
                   if (graph.IsSelfLoop(v.Node))
-                    comps.NextComponent().SetNodeComponent<TCell, TNode>(v.Node);
+                    comps.NextComponent().SetNodeComponent<TCell, TNode>(componentIdHolder, v.Node);
                 }
                 else
                 {
@@ -153,7 +154,7 @@ namespace DSIS.Graph.Abstract.Algorithms
                   do
                   {                      
                     ww = stack.Pop();
-                    ic.SetNodeComponent<TCell, TNode>(ww);
+                    ic.SetNodeComponent<TCell, TNode>(componentIdHolder, ww);
                   } while (ww != v.Node);
                   w = new NodeAndData<TNode, TCell>(ww, holder);
                 }

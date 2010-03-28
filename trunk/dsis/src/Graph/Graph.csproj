@@ -23,6 +23,7 @@
     <Compile Include="src\Abstract\AbstractGraph.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\Abstract\AbstractGraphComponentIdHolder.cs" />
     <Compile Include="src\Abstract\Algorithms\GraphAlgorithms.AsList.cs" />
     <Compile Include="src\Abstract\Algorithms\GraphAlgorithms.cs" />
     <Compile Include="src\Abstract\Algorithms\GraphAlgorithms.Dump.cs" />

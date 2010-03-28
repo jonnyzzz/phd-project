@@ -64,9 +64,8 @@ namespace DSIS.Graph.FS
       long dataPos = myOutputFile.Position;
       myOutputFile.Write(new[]{isLoop ? (byte)42 : (byte)77}, 0, 1);
 
-
       var indexEntry = new IndexEntry { Begin = beginPos, Data = dataPos };
-      Console.Out.WriteLine("gadd @ {2} : {0} --> {1}", (from), set.JoinString(x => x.ToString(), ", "), indexEntry);
+//      Console.Out.WriteLine("gadd @ {2} : {0} --> {1}", (from), set.JoinString(x => x.ToString(), ", "), indexEntry);
       myIndexFile.WriteBlockStartLocation(indexEntry);
     }
 

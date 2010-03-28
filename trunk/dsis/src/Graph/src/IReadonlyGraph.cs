@@ -38,13 +38,14 @@ namespace DSIS.Graph
     where TCell : ICellCoordinate
   {
     [CanBeNull]
-    new TNode Find(TCell node);
+    TNode Find(TCell node);
     
     IEnumerable<TNode> NodesInternal { get; }
     IEnumerable<TNode> GetEdgesInternal(TNode forNode);
 
     IGraphDataHoler<TData, TNode> CreateDataHolder<TData>(Converter<TNode, TData> def);
     IGraphDataHoler<bool, TNode> CreateNodeFlagsHolder(string key);
+    IGraphDataHoler<uint, TNode> GetComponentIdHolder();
 
     bool IsSelfLoop(TNode node);
 
