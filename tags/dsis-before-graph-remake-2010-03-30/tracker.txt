@@ -1,0 +1,119 @@
+  - show asynchronious cell image build option  
+  - format doubles without E-05
+  - find default parameters from predefined systems
+
+
+  -  extract data actions
+  -  cache saved points files
+  -  add default system space parameters to system info factory
+  -  predefined system -> new system dialog
+  -  show error message is no gnuplot found.
+  -  save created system without data
+  -  save create image
+  -  open standalone gnuplot
+  -  list selector with groupby sections
+
+Progress bar:
+  -  Memory usage bound
+  -  Use IProgressIndicator everywhere
+  -  Show percentage on progress bar control
+
+History:
+  -  Remember history of actions
+  -  Entropy changes log
+  -  steps counter
+
+Macros:
+  -  Macros support
+
+System function dialog:
+
+Drawer:
+  -  Clean up unused images/data files
+  -  Embed drawer program from Nikita?
+  -  Use drawer program from Nikita?
+  -  allow to move 3d pictures
+  -  allow to zoom pictures
+  -  show points with squares
+  -  export points files: , or . or matcad or maple etc
+  -  cache point files/images
+
+Misc:
+  -  TeamCity
+  -  Submit exception form
+  -  Submit exception service online
+
+Entropy:
+
+Feature:
+  -  segment iterator?
+  -  Mnemonics manager	
+
+Bugs:
+  -  not responding after focus lost
+  -  embedded IE used to flickr
+
+Internal:
+  -  support ConstraintAttribute hierarchy
+  -  support DefaultValueAttribute
+  -  strange entropy modes manual description
+  -  remember selected construction method
+  -  drop ICodeCompiler singleton
+  -  Support decart multiplication action
+
+Completed:
+  -  Memory usage indicator
+  -  Modal progress bar
+  -  Rework executor model to show several running tasks' progress
+  -  Disable actions while action is being completed
+  -  Document write cookie to protect from starting several actions at a time
+  -  document action cookie to prevent more than one action running on one document
+  -  Cancelable progressbar
+  -  format cells with spaces
+  -  cancel progress!!!
+  -  limit components list to show
+  -  System Functions parser
+  -  system function dialog: use IoC
+  -  system function dialog: system parameters => solver => solver parameters
+  -  system function default parameters
+  -  system function default system space
+  -  system function dialog: symmetric space mode
+  -  support double with . or ,
+  -  Key should provide extra keys
+  -  compute entropy on every component (depends on per-components feature)
+  -  components chooser
+  -  components legend
+  -  unsimmentric construction support
+  -  subdivision selector
+  -  repeat construction mode
+  -  several invariant measures for one document
+  -  projected SI no measure image
+  -  component container: Create one object with extra parameters.
+  -  ask for create system name
+  -  fail on new function
+  -  project entropy
+  -  entropy computation actions (matrix) ???
+  -  include eigen entropy
+  -  create eigen options
+  -  combinatorics method -> separate
+  -  use box method by default
+  -  joined wizards
+  -  entropy is zero for loop searcher
+  -  do not show entropy on invariant measure picture
+  x  no more predefined systems
+  x  align progress bar to buttom
+  x  Wizard Form presenter
+  x  Wizard and Result interface  
+  x  recompute invcariant measure
+  x  compute measure depends on context-available
+  -  Trop 'toolStripStatusLabel1' text
+  -  Do not show Combinatorics
+  -  No document banner
+  -  Activate form on start
+  -  Support adaptive method
+  -  JVR action options control title broken.
+  -  Progress bar may be started without any task inside
+  -  Progress bar should use meaningful description for actions
+  -  Bug fix progress bar
+  -  Cleanup generated assemblies on app start
+  -  Show Entropy on left pane

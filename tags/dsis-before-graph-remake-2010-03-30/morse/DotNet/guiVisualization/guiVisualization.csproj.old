@@ -1,0 +1,296 @@
+<VisualStudioProject>
+    <CSHARP
+        ProjectType = "Local"
+        ProductVersion = "7.10.3077"
+        SchemaVersion = "2.0"
+        ProjectGuid = "{59CC2327-8B59-485A-8E76-3F34BE358B5B}"
+    >
+        <Build>
+            <Settings
+                ApplicationIcon = ""
+                AssemblyKeyContainerName = ""
+                AssemblyName = "EugenePetrenko.Gui2.Visualization"
+                AssemblyOriginatorKeyFile = ""
+                DefaultClientScript = "JScript"
+                DefaultHTMLPageLayout = "Grid"
+                DefaultTargetSchema = "IE50"
+                DelaySign = "false"
+                OutputType = "Library"
+                PreBuildEvent = ""
+                PostBuildEvent = ""
+                RootNamespace = "EugenePetrenko.Gui2.Visualization"
+                RunPostBuildEvent = "OnBuildSuccess"
+                StartupObject = ""
+            >
+                <Config
+                    Name = "Debug"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "DEBUG;TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "true"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "false"
+                    OutputPath = "bin\Debug\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+                <Config
+                    Name = "Release"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "false"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "true"
+                    OutputPath = "bin\Release\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                />
+                <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                />
+                <Reference
+                    Name = "guiKernel2"
+                    Project = "{458807AE-F7FB-4653-A338-A7A9BBBF3A2B}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "guiActions"
+                    Project = "{197A3492-2764-42C8-B23B-BF040623EF7D}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "System.Windows.Forms"
+                    AssemblyName = "System.Windows.Forms"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Windows.Forms.dll"
+                />
+                <Reference
+                    Name = "guiControls"
+                    Project = "{9E2C7BF8-7B0B-42FD-9490-CA28694CC18C}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "guiExternalResource"
+                    Project = "{9705EB3C-990B-485C-8B9F-64477FB0A933}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Logger"
+                    Project = "{EF19A8DD-C20D-44FA-9A00-2A08B3CE2FC9}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                />
+                <Reference
+                    Name = "EugenePetrenko.Gui2.MorseKernel2.Interop"
+                    AssemblyName = "EugenePetrenko.Gui2.MorseKernel2.Interop"
+                    HintPath = "..\MorseKernel2.Interop\EugenePetrenko.Gui2.MorseKernel2.Interop.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\CommandLineFileExporter.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\GnuPlotAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\GnuPlotConstraint.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\GnuPlotParameters.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\GnuPlotParameters.resx"
+                    DependentUpon = "GnuPlotParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\CVS\Conflicts"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\CVS\Entries"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\CVS\Repository"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot\CVS\Root"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\AdditionalSettingsControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\AdditionalSettingsControl.resx"
+                    DependentUpon = "AdditionalSettingsControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\GnuPlotAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\GnuPlotParameters.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\GnuPlotParameters.resx"
+                    DependentUpon = "GnuPlotParameters.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\GnuPlotParametersImpl.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\ReduceImageSizeControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\ReduceImageSizeControl.resx"
+                    DependentUpon = "ReduceImageSizeControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\SaveImageControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\SaveImageControl.resx"
+                    DependentUpon = "SaveImageControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\ShowImageControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\ShowImageControl.resx"
+                    DependentUpon = "ShowImageControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\ShowStyleControl.cs"
+                    SubType = "UserControl"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\actionImpl\GnuPlot2\ShowStyleControl.resx"
+                    DependentUpon = "ShowStyleControl.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "src\KernelAction\EmptyResultSet.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot\GnuPlotScriptGen.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot\GnuPlotTemplate.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot\GnuPlotVisualizationKernelAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot\IGnuPlotScriptGenParameters.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot\IGnuPlotVisualizationKernelParameters.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot2\GnuPlotAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlot2\IGnuPlotParameters.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlotGen\GnuPlotGenAction.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "src\KernelAction\GnuPlotGen\IGnuPlotGenActionParameters.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+            </Include>
+        </Files>
+    </CSHARP>
+</VisualStudioProject>
+

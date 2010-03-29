@@ -1,0 +1,3 @@
+Started at 10.03.2007 0:09:17
+Finished at 10.03.2007 0:09:48
+Time spent 30984,375 ms

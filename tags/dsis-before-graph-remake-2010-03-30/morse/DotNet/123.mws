@@ -1,0 +1,31 @@
+{VERSION 5 0 "IBM INTEL NT" "5.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 
+2 2 1 1 1 1 }1 1 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Maple Output" -1 
+11 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }3 3 0 
+0 0 0 1 0 1 0 2 2 0 1 }}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 31 "f := (a,b) -> arcsin
+(b*sin(a));" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"fGf*6$%\"aG%\"bG6\"
+6$%)operatorG%&arrowGF)-%'arcsinG6#*&9%\"\"\"-%$sinG6#9$F2F)F)F)" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 29 "R3 := codegen['optimize'](f)
+;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#R3Gf*6$%\"aG%\"bG6#%#t1G6$%)op
+eratorG%&arrowG6\"C$>8$-%$sinG6#9$-%'arcsinG6#*&9%\"\"\"F1F;F.F.F." }}
+}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 14 "evalf(f(0,0));" }}{PARA 11 
+"" 1 "" {XPPMATH 20 "6#$\"\"!F$" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 
+1 0 7 "f(x,y);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#-%'arcsinG6#*&%\"yG
+\"\"\"-%$sinG6#%\"xGF(" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "a
+rcsin(y*sin(x));" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 21 "taylor(
+ f(a,b), a=0);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#++%\"aG%\"bG\"\"\",&
+*$)F%\"\"$F&#F&\"\"'*&#F&F,F&F%F&!\"\"F*,(*&F%F&,&*$)F%\"\"#F&#F/F,*&#
+F*\"\")F&)F%\"\"%F&F&F&#F&\"\"&*&#F&\"$?\"F&F%F&F&*&#F&\"#?F&F(F&F/F=-
+%\"OG6#F&F," }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "1 - (cos(2*x
+))^2;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#,&\"\"\"F$*$)-%$cosG6#,$%\"xG
+\"\"#F,F$!\"\"" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "1-cos(2*x
+)^2;" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "1-cos(2*x)^2;" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "1-cos(x)^2;" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 14 "sin(Pi/2 - x);" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#-%$cosG6#%\"xG" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 
+0 0 "" }}}}{MARK "11 0 0" 0 }{VIEWOPTS 1 1 0 1 1 1803 1 1 1 1 }
+{PAGENUMBERS 0 1 2 33 1 1 }

@@ -1,0 +1,14 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+
+<PropertyGroup>
+  <VS>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\9.0\@InstallDir)\devenv</VS>
+  <Sln>Morse.sln</Sln>
+</PropertyGroup>
+
+<Target Name="Build">
+  <Message Text="Building..." />
+  <Exec Command='"$(VS)" "$(Sln)" /Build "Release2|Mixed Platforms"'/>
+</Target>
+
+
+</Project>
