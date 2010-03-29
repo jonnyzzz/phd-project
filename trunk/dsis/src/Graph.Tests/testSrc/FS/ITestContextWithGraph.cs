@@ -8,5 +8,6 @@ namespace DSIS.Graph.Tests.FS
   {
     void CheckBuiltGraphEdges(IEnumerable<Pair<int, IEnumerable<int>>> edges);
     void DumpGraph();
+    void CheckDataHolder<T>(IEnumerable<Pair<int, T>> data);
   }
 }

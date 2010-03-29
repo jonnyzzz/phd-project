@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using DSIS.Utils;
+using NUnit.Framework;
 
 namespace DSIS.Graph.Tests.FS
 {
@@ -28,5 +29,17 @@ namespace DSIS.Graph.Tests.FS
     {
       TestGraphEdgesBuilt(e(p(1,2), p(2,3), p(3,4), p(4,5), p(5,6), p(6,7), p(7,8), p(8,9), p(9,10), p(10, 1)));
     }    
+
+    [Test]
+    public void TestGraphDataHolder_Long()
+    {
+      TestGraphDataHolder(e(p(1), p(2)), e(Pair.Of(1, 5L), Pair.Of(2, 7L)));
+    }
+    
+    [Test]
+    public void TestGraphDataHolder_Uint()
+    {
+      TestGraphDataHolder(e(p(1), p(2)), e(Pair.Of(1, (uint)5), Pair.Of(2, (uint)7)));
+    }
   }
 }

@@ -19,6 +19,10 @@ namespace DSIS.Graph.Tests.FS
       myHost = host;
       myGraph = graph;
     }
+    private TCell Convert(int i)
+    {
+      return myHost.Convert(i);
+    }
 
     private int Convert(TCell node)
     {
@@ -63,6 +67,31 @@ namespace DSIS.Graph.Tests.FS
         foreach (var to in myGraph.GetEdgesInternal(node))
         {
           Console.Out.WriteLine(" -> {0}", to.Coordinate);
+        }
+      }
+    }
+
+    public void CheckDataHolder<T>(IEnumerable<Pair<int, T>> data)
+    {
+      using(var holder = myGraph.CreateDataHolder(x=>default(T)))
+      {
+        foreach (var pair in data)
+        {
+          var node = myGraph.Find(Convert(pair.First));
+          Assert.IsNotNull(node);
+
+          Assert.IsFalse(holder.HasData(node));
+          holder.SetData(node, pair.Second);
+        }
+
+        foreach (var pair in data)
+        {
+          var node = myGraph.Find(Convert(pair.First));
+          Assert.IsNotNull(node);
+
+          Assert.IsTrue(holder.HasData(node));
+          var d = holder.GetData(node);
+          Assert.AreEqual(pair.Second, d);
         }
       }
     }

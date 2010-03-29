@@ -15,7 +15,12 @@ namespace DSIS.Graph.Tests.FS
       CreateContext().CheckGraphNodesAndEdges(edges);
     }
 
-    protected IEnumerable<Pair<int, IEnumerable<int>>> e(params Pair<int, IEnumerable<int>>[] pars)
+    public void TestGraphDataHolder<TData>(IEnumerable<Pair<int, IEnumerable<int>>> edges, IEnumerable<Pair<int, TData>> data)
+    {
+      CreateContext().CheckDataHolder(edges, data);
+    }
+
+    protected IEnumerable<T> e<T>(params T[] pars)
     {
       return pars;
     }
@@ -48,7 +53,7 @@ namespace DSIS.Graph.Tests.FS
         get { return myIcs; }
       }
 
-      protected override IntegerCoordinate Convert(int i)
+      public override IntegerCoordinate Convert(int i)
       {
         return myIcs.Create(i);
       }

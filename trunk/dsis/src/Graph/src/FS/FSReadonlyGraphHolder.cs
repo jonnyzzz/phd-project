@@ -1,6 +1,7 @@
 ﻿using System;
 using DSIS.Core.Coordinates;
 using DSIS.Persistance.Streams;
+using DSIS.Utils;
 
 namespace DSIS.Graph.FS
 {
@@ -8,7 +9,7 @@ namespace DSIS.Graph.FS
     where TNode : FSReadonlyNode<TCell>
     where TCell : ICellCoordinate
   {
-    private readonly byte[] OBJECT_MARKER = new[] {(byte) 42};
+    private readonly BitSet myUsedMap = new BitSet();
     private readonly IInputOutputStream myStream;
     private readonly IFSObjectPersister<TData> myPersister;
     private readonly bool myCanDispose;
@@ -39,7 +40,6 @@ namespace DSIS.Graph.FS
     public void SetData(TNode node, TData data)
     {
       Pos(node);
-      myStream.Write(OBJECT_MARKER, 0, OBJECT_MARKER.Length);
       myPersister.SaveObject(myStream, data);
     }
 
@@ -50,17 +50,7 @@ namespace DSIS.Graph.FS
 
     public bool HasData(TNode node)
     {
-      //Use bitset in-memory
-      Pos(node);
-
-      var b = new byte[OBJECT_MARKER.Length];
-      myStream.Read(b, 0, b.Length);
-      
-      for (int i = 0; i < b.Length; i++)
-      {
-        if (b[i] != OBJECT_MARKER[i]) return false;
-      }
-      return true;
+      return myUsedMap.IsSet(node.Entry.EntryId);
     }
   }
 }

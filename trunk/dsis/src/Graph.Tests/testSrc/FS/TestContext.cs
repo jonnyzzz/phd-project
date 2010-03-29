@@ -10,7 +10,7 @@ namespace DSIS.Graph.Tests.FS
     where TCell : ICellCoordinate
   {
     private readonly GenericGraphTestBase myHost;
-    protected abstract TCell Convert(int i);
+    public abstract TCell Convert(int i);
     public abstract int Convert(TCell cell);
     protected abstract bool IsNotNull(TCell cell);
     protected abstract ICellCoordinateSystem<TCell> CoordinateSystem { get; }
@@ -26,6 +26,13 @@ namespace DSIS.Graph.Tests.FS
       var readonlyGraph = BuildGraph(edges);
       DumpGraph(readonlyGraph);
       CheckBuiltGraph(edges, readonlyGraph);
+    }
+
+    public void CheckDataHolder<TData>(IEnumerable<Pair<int, IEnumerable<int>>> edges, IEnumerable<Pair<int, TData>> values)
+    {
+      var readonlyGraph = BuildGraph(edges);
+      DumpGraph(readonlyGraph);
+
     }
 
     private void DumpGraph(IReadonlyGraph<TCell> graph)
@@ -60,6 +67,11 @@ namespace DSIS.Graph.Tests.FS
     private void CheckBuiltGraph(IEnumerable<Pair<int, IEnumerable<int>>> edges, IReadonlyGraph<TCell> graph)
     {
       WithGraph(graph).CheckBuiltGraphEdges(edges);
+    }
+
+    private void CheckDataHolder<TData>(IReadonlyGraph<TCell> graph, IEnumerable<Pair<int, TData>> data)
+    {
+      WithGraph(graph).CheckDataHolder<TData>(data);
     }
 
     private ITestContextWithGraph<TCell> WithGraph(IReadonlyGraph<TCell> graph)
