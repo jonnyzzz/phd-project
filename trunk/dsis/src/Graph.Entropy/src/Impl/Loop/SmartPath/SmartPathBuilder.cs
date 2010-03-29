@@ -93,7 +93,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
         }
       }
 
-      private void BuildPath(TNode startNode, IGraphDataHoler<INodeState<T,TNode>, TNode> holder)
+      private void BuildPath(TNode startNode, IGraphDataHolder<INodeState<T,TNode>, TNode> holder)
       {
         var start = startNode;
         do
@@ -108,7 +108,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
       }
 
 
-      private TNode GetNextNode(TNode startNode, TNode from, IGraphDataHoler<INodeState<T,TNode>, TNode> holder)
+      private TNode GetNextNode(TNode startNode, TNode from, IGraphDataHolder<INodeState<T,TNode>, TNode> holder)
       {
         TNode result;
         holder.SetData(from, holder.GetData(from).GetNextNode(graph, startNode, from, out result, holder));
@@ -117,7 +117,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
       }
     }
 
-    internal static bool IsNodeOpened<TNode>(TNode from, IGraphDataHoler<INodeState<T, TNode>, TNode> holder)
+    internal static bool IsNodeOpened<TNode>(TNode from, IGraphDataHolder<INodeState<T, TNode>, TNode> holder)
       where TNode : class, INode<T>
     {
       return holder.GetData(from) is ThisNodeState<T,TNode>;

@@ -2,7 +2,7 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public class FlagsNodeHolder<TInh, TNode, TCell> : IGraphDataHoler<bool, TNode>
+  public class FlagsNodeHolder<TInh, TNode, TCell> : IGraphDataHolder<bool, TNode>
     where TNode : Node<TNode, TCell>
     where TCell : ICellCoordinate
     where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>

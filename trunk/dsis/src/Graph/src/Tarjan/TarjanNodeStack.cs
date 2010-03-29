@@ -9,9 +9,9 @@ namespace DSIS.Graph.Tarjan
     where TNode : class, INode<TCell>
   {
     private readonly Stack<TNode> myStack = new Stack<TNode>();
-    private readonly IGraphDataHoler<bool, TNode> myMask;
+    private readonly IGraphDataHolder<bool, TNode> myMask;
 
-    public TarjanNodeStack(IGraphDataHoler<bool,TNode> mask)
+    public TarjanNodeStack(IGraphDataHolder<bool,TNode> mask)
     {
       myMask = mask;
     }

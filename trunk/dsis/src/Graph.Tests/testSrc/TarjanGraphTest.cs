@@ -129,7 +129,7 @@ namespace DSIS.Graph.Tests
     [Test]
     public void Test_MoreFlags()
     {
-      var list = new List<IGraphDataHoler<bool, TarjanNode<IntegerCoordinate>>>();
+      var list = new List<IGraphDataHolder<bool, TarjanNode<IntegerCoordinate>>>();
 
       try
       {

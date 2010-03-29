@@ -33,7 +33,7 @@ namespace DSIS.Graph.Abstract.Algorithms
       public readonly TNode Node;
       public readonly TarjanNodeData<TCell, TNode> Data;
 
-      public NodeAndData(TNode node, IGraphDataHoler<TarjanNodeData<TCell, TNode>, TNode> holder)
+      public NodeAndData(TNode node, IGraphDataHolder<TarjanNodeData<TCell, TNode>, TNode> holder)
       {
         Node = node;
         Data = holder.GetData(node);

@@ -2,7 +2,7 @@
 
 namespace DSIS.Graph.Abstract
 {
-  public class AbstractGraphComponentIdHolder<TNode, TCell> : IGraphDataHoler<uint, TNode> where TNode : Node<TNode, TCell> where TCell : ICellCoordinate
+  public class AbstractGraphComponentIdHolder<TNode, TCell> : IGraphDataHolder<uint, TNode> where TNode : Node<TNode, TCell> where TCell : ICellCoordinate
   {
     public void Dispose()
     {

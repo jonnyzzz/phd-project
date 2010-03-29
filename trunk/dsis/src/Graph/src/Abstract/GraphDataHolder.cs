@@ -3,7 +3,7 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public class GraphDataHolder<TData, TNode, TCell, TInh> : IGraphDataHoler<TData, TNode>
+  public class GraphDataHolder<TData, TNode, TCell, TInh> : IGraphDataHolder<TData, TNode>
     where TNode : Node<TNode, TCell>
     where TCell : ICellCoordinate 
     where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>

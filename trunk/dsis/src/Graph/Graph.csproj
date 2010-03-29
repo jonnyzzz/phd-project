@@ -93,7 +93,7 @@
     <Compile Include="src\GraphStrongComponentsSubset.cs" />
     <Compile Include="src\GraphStrongComponentSubsetFactoryImpl.cs" />
     <Compile Include="src\IGraphBuilder.cs" />
-    <Compile Include="src\IGraphDataHoler.cs" />
+    <Compile Include="src\IGraphDataHolder.cs" />
     <Compile Include="src\IGraphStrongComponentSubsetFactory.cs" />
     <Compile Include="src\IGraphWith.cs" />
     <Compile Include="src\IReadonlyGraph.cs" />

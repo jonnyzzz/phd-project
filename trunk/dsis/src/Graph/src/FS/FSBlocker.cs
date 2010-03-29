@@ -93,17 +93,17 @@ namespace DSIS.Graph.FS
       return myReader.ReadEdges(forNode.Entry).Select(Find).Where(x=>x != null);
     }
 
-    public IGraphDataHoler<uint, FSReadonlyNode<TCell>> GetComponentIdHolder()
+    public IGraphDataHolder<uint, FSReadonlyNode<TCell>> GetComponentIdHolder()
     {
       throw new NotImplementedException();
     }
 
-    public IGraphDataHoler<TData, FSReadonlyNode<TCell>> CreateDataHolder<TData>(Converter<FSReadonlyNode<TCell>, TData> def)
+    public IGraphDataHolder<TData, FSReadonlyNode<TCell>> CreateDataHolder<TData>(Converter<FSReadonlyNode<TCell>, TData> def)
     {
       throw new NotImplementedException();
     }
 
-    public IGraphDataHoler<bool, FSReadonlyNode<TCell>> CreateNodeFlagsHolder(string key)
+    public IGraphDataHolder<bool, FSReadonlyNode<TCell>> CreateNodeFlagsHolder(string key)
     {
       throw new NotImplementedException();
     }

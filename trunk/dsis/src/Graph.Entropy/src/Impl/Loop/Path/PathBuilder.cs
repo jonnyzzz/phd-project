@@ -69,7 +69,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
 
       }
 
-      private void BuildPath(IGraphDataHoler<InfiniteEnumerator<TNode>, TNode> holder, TNode startNode)
+      private void BuildPath(IGraphDataHolder<InfiniteEnumerator<TNode>, TNode> holder, TNode startNode)
       {
         var start = startNode;
         int initialValues = myHost.myValues.Count;
@@ -85,7 +85,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
         }
       }
 
-      private static TNode GetNextNode(IGraphDataHoler<InfiniteEnumerator<TNode>, TNode> holder, TNode from)
+      private static TNode GetNextNode(IGraphDataHolder<InfiniteEnumerator<TNode>, TNode> holder, TNode from)
       {
         var outs = holder.GetData(from);
         outs.MoveNext();

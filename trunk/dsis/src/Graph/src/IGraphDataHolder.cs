@@ -2,7 +2,7 @@ using System;
 
 namespace DSIS.Graph
 {
-  public interface IGraphDataHoler<TData, in TNode> : IDisposable
+  public interface IGraphDataHolder<TData, in TNode> : IDisposable
   {
     TData GetData(TNode node);
 

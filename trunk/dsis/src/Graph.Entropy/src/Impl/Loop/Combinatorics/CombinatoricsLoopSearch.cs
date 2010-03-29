@@ -132,7 +132,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Combinatorics
       myCallback.OnLoopFound(nodes, nodes.Count);
     }
 
-    private void BuildNextNodes(SearchNode node, IGraphDataHoler<int, N> holder)
+    private void BuildNextNodes(SearchNode node, IGraphDataHolder<int, N> holder)
     {
       var first = node.First;
       var last = node.Last.FinishNode;
@@ -153,7 +153,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Combinatorics
       }
     }
 
-    private void Init(IGraphDataHoler<int,N> holder)
+    private void Init(IGraphDataHolder<int,N> holder)
     {
       int i = 0;
       foreach (var node in myGraph.NodesInternal)
@@ -163,7 +163,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Combinatorics
       }
     }
 
-    private void Loop(IGraphDataHoler<int, N> holder)
+    private void Loop(IGraphDataHolder<int, N> holder)
     {
       while(myNodes.Count > 0)
       {

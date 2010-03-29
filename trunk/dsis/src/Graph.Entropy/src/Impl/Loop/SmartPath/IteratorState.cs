@@ -15,7 +15,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
       myNodes = nodes;
     }
 
-    public INodeState<T, TNode> GetNextNode(IReadonlyGraph<T,TNode> thisGraph, TNode startNode, TNode thisNode, out TNode result, IGraphDataHoler<INodeState<T,TNode>, TNode> holder)
+    public INodeState<T, TNode> GetNextNode(IReadonlyGraph<T,TNode> thisGraph, TNode startNode, TNode thisNode, out TNode result, IGraphDataHolder<INodeState<T,TNode>, TNode> holder)
     {      
       while (myNodes.MoveNext())
       {

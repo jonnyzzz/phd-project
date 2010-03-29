@@ -24,7 +24,7 @@ namespace DSIS.Graph.Tarjan
       get { return myComponentId; }
     }
 
-    internal void SetNodeComponent<TCell, TNode>(IGraphDataHoler<uint, TNode> componentIdHolder, TNode node)
+    internal void SetNodeComponent<TCell, TNode>(IGraphDataHolder<uint, TNode> componentIdHolder, TNode node)
       where TCell : ICellCoordinate
       where TNode : class, INode<TCell>
     {
