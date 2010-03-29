@@ -16,14 +16,10 @@ namespace DSIS.Graph.FS
       myCount = ReadLong();
     }
 
-    #region IDisposable Members
-
     public void Dispose()
     {
       myInputStream.Dispose();
     }
-
-    #endregion
 
     private long ReadLong()
     {
@@ -32,10 +28,11 @@ namespace DSIS.Graph.FS
       return LongConverter.FromBytes(buff, 0);
     }
 
-    private IndexEntry ReadIndex()
+    private IndexEntry ReadIndex(long id)
     {
       return new IndexEntry
                {
+                 EntryId = id,
                  Begin = ReadLong(),
                  Data = ReadLong()
                };
@@ -47,7 +44,7 @@ namespace DSIS.Graph.FS
       myInputStream.Position = 0;
       for (var i = 0; i < myCount; i++)
       {
-        yield return ReadIndex();
+        yield return ReadIndex(i);
       }
     }
 
@@ -58,9 +55,9 @@ namespace DSIS.Graph.FS
 
     public IndexEntry GetAt(long index)
     {
-      //TODO: No checks are done here!
       myInputStream.Position = LongConverter.Size*index;
-      return ReadIndex();
+      var indexEntry = ReadIndex(index);
+      return indexEntry;
     }
   }
 }

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using DSIS.Utils;
+﻿using DSIS.Utils;
 using DSIS.Persistance.Streams;
 
 namespace DSIS.Graph.FS
@@ -8,6 +7,7 @@ namespace DSIS.Graph.FS
   {
     private readonly IOutputStream myOutputStream;
     private long myItemsCount;
+    private bool myIsDisposed;
 
     public IndexOutputStream(IOutputStream outputStream)
     {
@@ -21,8 +21,12 @@ namespace DSIS.Graph.FS
 
     public void Dispose()
     {
-      WriteLong(myItemsCount);
-      myOutputStream.Dispose();
+      if (!myIsDisposed)
+      {
+        myIsDisposed = true;
+        WriteLong(myItemsCount);
+        myOutputStream.Dispose();
+      }
     }
 
     public void WriteBlockStartLocation(IndexEntry position)
