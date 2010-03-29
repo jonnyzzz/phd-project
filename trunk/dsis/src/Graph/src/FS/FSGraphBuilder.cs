@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Persistance.Streams;
-using DSIS.Utils;
 
 namespace DSIS.Graph.FS
 {
@@ -62,7 +61,8 @@ namespace DSIS.Graph.FS
         WriteNodeCoord(w);
 
       long dataPos = myOutputFile.Position;
-      myOutputFile.Write(new[]{isLoop ? (byte)42 : (byte)77}, 0, 1);
+      var data = new FSData{IsSelfLoop = isLoop};
+      data.Save(myOutputFile);
 
       var indexEntry = new IndexEntry { Begin = beginPos, Data = dataPos };
 //      Console.Out.WriteLine("gadd @ {2} : {0} --> {1}", (from), set.JoinString(x => x.ToString(), ", "), indexEntry);

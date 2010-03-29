@@ -72,6 +72,7 @@
     <Compile Include="src\Adapter\GraphCellImageBuilder.cs" />
     <Compile Include="src\FS\BTree.cs" />
     <Compile Include="src\FS\FSBlocker.cs" />
+    <Compile Include="src\FS\FSData.cs" />
     <Compile Include="src\FS\FSGraphBuilder.cs" />
     <Compile Include="src\FS\FSGraphObjectManagerImpl.cs" />
     <Compile Include="src\FS\FSNodeInMemoryIndexImpl.cs" />

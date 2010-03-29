@@ -20,14 +20,14 @@ namespace DSIS.Graph.FS
       TCell id = ReadCell(entry);
 
       myInputStream.Position = entry.Data;
-      var d = new byte[1];
-      myInputStream.Read(d, 0, 1);
+      var data = new FSData();
+      data.Load(myInputStream);
 
       return new FSReadonlyNode<TCell>(id)
                {
                  ComponentId = 0,
                  Entry = entry,
-                 IsSelfLoop = d[0] == 42
+                 IsSelfLoop = data.IsSelfLoop
                };
     }
 

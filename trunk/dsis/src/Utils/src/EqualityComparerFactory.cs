@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace DSIS.Utils
 {
@@ -37,7 +36,7 @@ namespace DSIS.Utils
       {
         Type array = typeof (T).GetElementType();
         Type converter = typeof (ArrayEqualityComparer<>).MakeGenericType(array);
-        myComparer = (IEqualityComparer<T>) converter.GetField("INSTANCE", BindingFlags.Public | BindingFlags.Static).GetValue(null);        
+        myComparer = (IEqualityComparer<T>) Activator.CreateInstance(converter);
       }
       else
       {

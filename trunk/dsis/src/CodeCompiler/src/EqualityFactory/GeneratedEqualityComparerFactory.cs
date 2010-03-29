@@ -1,5 +1,4 @@
 using System;
-using DSIS.CodeCompiler.EqualityFactory;
 using DSIS.Utils;
 
 namespace DSIS.CodeCompiler.EqualityFactory
@@ -28,7 +27,7 @@ namespace DSIS.CodeCompiler.EqualityFactory
       }
       else
       {
-        GeneratorEqualityComparerAttribute at = GetAttributeInstance<GeneratorEqualityComparerAttribute>();
+        var at = GetAttributeInstance<GeneratorEqualityComparerAttribute>();
         if (at != null)
         {
           Type comparer;
