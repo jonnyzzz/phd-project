@@ -26,12 +26,14 @@
     <Compile Include="src\FactoryMethod.cs" />
     <Compile Include="src\IBinaryReader.cs" />
     <Compile Include="src\IBinaryWriter.cs" />
+    <Compile Include="src\Streams\IInputOutputStream.cs" />
     <Compile Include="src\Streams\IInputStream.cs" />
     <Compile Include="src\IPersistance.cs" />
     <Compile Include="src\IPersistanceFactory.cs" />
     <Compile Include="src\IPersistanceManager.cs" />
     <Compile Include="src\PersistanceFactory.cs" />
     <Compile Include="src\PersitanceManagerImpl.cs" />
+    <Compile Include="src\Streams\InputOutputStreamImpl.cs" />
     <Compile Include="src\Streams\InputStreamImpl.cs" />
     <Compile Include="src\Streams\IOutputStream.cs" />
     <Compile Include="src\Streams\IStream.cs" />

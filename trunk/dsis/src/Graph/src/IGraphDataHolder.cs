@@ -8,7 +8,15 @@ namespace DSIS.Graph
 
     void SetData(TNode node, TData data);
     bool HasData(TNode node);
+  }
 
-    void CleanAll();
+  public static class GraphDataHolderUtilities
+  {
+    public static void Holding<TData, TNode>(this IGraphDataHolder<TData, TNode> holder, TNode node, Action<TData> action)
+    {
+      var data = holder.GetData(node);
+      action(data);
+      holder.SetData(node, data);
+    }
   }
 }

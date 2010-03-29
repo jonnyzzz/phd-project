@@ -10,5 +10,8 @@ namespace DSIS.Graph.FS
 
     [NotNull]
     IInputStream CreateReadStream([NotNull] IOutputStream stream);
+
+    [NotNull]
+    IInputOutputStream CreateIOStream(string name);
   }
 }

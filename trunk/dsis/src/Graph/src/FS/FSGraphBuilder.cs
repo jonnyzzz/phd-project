@@ -82,7 +82,7 @@ namespace DSIS.Graph.FS
       var reader = myResources.CreateNodeReader(myOutputFile, myPersist, myComparer);
 
       var indexImpl = myResources.CreateNodeIndex(myIndexFile, reader, myPersist, myComparer);
-      return new FSReadonlyGraph<TCell>(reader, mySystem, myNodesCount, myEdgesCount, indexImpl);
+      return new FSReadonlyGraph<TCell>(myResources, reader, mySystem, myNodesCount, myEdgesCount, indexImpl);
     }
   }
 }

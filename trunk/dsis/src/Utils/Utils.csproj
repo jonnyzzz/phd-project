@@ -39,6 +39,7 @@
     <Compile Include="src\BiDictionary.cs" />
     <Compile Include="src\BinTreePriorityQueueEx.cs" />
     <Compile Include="src\BinTreePriorityQueueExDebug.cs" />
+    <Compile Include="src\BitSet.cs" />
     <Compile Include="src\CaseInsensitiveEqualityComparer.cs" />
     <Compile Include="src\CollectionUtil.cs" />
     <Compile Include="src\CollectionWriter.cs" />

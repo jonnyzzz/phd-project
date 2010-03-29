@@ -23,5 +23,15 @@ namespace DSIS.Persistance.Streams
 
       return new OutputStreamImpl<S>(stream, dispose);
     }
+
+    public static IInputOutputStream AsInputOutputStream<S>([NotNull] this S stream, [CanBeNull] Action<S> dispose)
+      where S : Stream
+    {
+      if (stream == null) throw new ArgumentNullException("stream");
+      if (!stream.CanRead) throw new ArgumentException("Stream should be writable", "stream");
+      if (!stream.CanWrite) throw new ArgumentException("Stream should be writable", "stream");
+
+      return new InputOutputStreamImpl<S>(stream, dispose);
+    }
   }
 }

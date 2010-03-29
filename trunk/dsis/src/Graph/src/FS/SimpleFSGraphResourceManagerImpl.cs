@@ -48,5 +48,11 @@ namespace DSIS.Graph.FS
       var fileStream = File.OpenRead(file);
       return fileStream.AsInputStream(x=>x.Close());
     }
+
+    public IInputOutputStream CreateIOStream(string name)
+    {
+      var file = AllocFilename(name);
+      return File.Open(file, FileMode.Create, FileAccess.ReadWrite).AsInputOutputStream(x => x.Close());
+    }
   }
 }

@@ -20,6 +20,8 @@ namespace DSIS.Graph
     IReadonlyGraph<TCell> Project(ICellCoordinateSystemProjector<TCell> projector);
 
     bool Contains(TCell coordinate);
+    
+    [Obsolete("Use TNode version")]
     bool IsSelfLoop(TCell node);
 
     IEnumerable<TCell> NodesCoordinates { get; }

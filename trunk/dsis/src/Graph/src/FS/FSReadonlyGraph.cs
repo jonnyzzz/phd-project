@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using DSIS.Core.Coordinates;
@@ -10,16 +10,23 @@ namespace DSIS.Graph.FS
     where TCell : ICellCoordinate
   {
     private readonly IFSNodeIndex<TCell> myNodeIndex;
+    private readonly IFSGraphObjectManager myResources;
     private readonly SimpleNodeReader<TCell> myReader;
     private readonly ICellCoordinateSystem<TCell> mySystem;
-
-    public FSReadonlyGraph(SimpleNodeReader<TCell> reader, ICellCoordinateSystem<TCell> system, int nodesCount, int edgesCount, IFSNodeIndex<TCell> nodeIndex)
+    private readonly FSPersisterFactory myPersisters = new FSPersisterFactory();
+    private readonly IGraphDataHolder<uint, FSReadonlyNode<TCell>> myComponentsHolder;
+ 
+    public FSReadonlyGraph(IFSGraphObjectManager resources,SimpleNodeReader<TCell> reader, ICellCoordinateSystem<TCell> system, int nodesCount, int edgesCount, IFSNodeIndex<TCell> nodeIndex)
     {
+      myResources = resources;
       myReader = reader;
       myNodeIndex = nodeIndex;
       mySystem = system;
       NodesCount = nodesCount;
       EdgesCount = edgesCount;
+      var componentsStream = myResources.CreateDataHolderStream("components");
+      var persister = myPersisters.CreatePersister<uint>();
+      myComponentsHolder = new FSReadonlyGraphHolder<FSReadonlyNode<TCell>, uint, TCell>(componentsStream, persister, false, n=>0);
     }
 
     public int NodesCount { get; private set;}
@@ -75,15 +82,22 @@ namespace DSIS.Graph.FS
       get { return myNodeIndex.Entries.Select(myReader.ReadCell); }
     }
 
+    private FSReadonlyNode<TCell> ReadNode(IndexEntry entry)
+    {
+      var node = myReader.ReadNode(entry);
+      node.ComponentId = myComponentsHolder.GetData(node);
+      return node;
+    }
+
     public FSReadonlyNode<TCell> Find(TCell node)
     {
       var entry = myNodeIndex.FindNode(node);
-      return entry == null ? null : myReader.ReadNode(entry.Value);
+      return entry == null ? null : ReadNode(entry.Value);
     }
 
     public IEnumerable<FSReadonlyNode<TCell>> NodesInternal
     {
-      get { return myNodeIndex.Entries.Select(x=>myReader.ReadNode(x)); }
+      get { return myNodeIndex.Entries.Select(ReadNode); }
     }
 
     public IEnumerable<FSReadonlyNode<TCell>> GetEdgesInternal(FSReadonlyNode<TCell> forNode)
@@ -95,16 +109,19 @@ namespace DSIS.Graph.FS
 
     public IGraphDataHolder<uint, FSReadonlyNode<TCell>> GetComponentIdHolder()
     {
-      throw new NotImplementedException();
+      return myComponentsHolder;
     }
 
     public IGraphDataHolder<TData, FSReadonlyNode<TCell>> CreateDataHolder<TData>(Converter<FSReadonlyNode<TCell>, TData> def)
     {
-      throw new NotImplementedException();
+      var stream = myResources.CreateDataHolderStream("holder");
+      var persist = myPersisters.CreatePersister<TData>();
+      return new FSReadonlyGraphHolder<FSReadonlyNode<TCell>, TData, TCell>(stream, persist, true, def);
     }
 
     public IGraphDataHolder<bool, FSReadonlyNode<TCell>> CreateNodeFlagsHolder(string key)
     {
+      //TODO: Use bitset here.
       throw new NotImplementedException();
     }
 

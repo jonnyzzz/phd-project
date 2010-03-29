@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using DSIS.Core.Coordinates;
 using DSIS.Core.System;
 using DSIS.Persistance.Streams;
@@ -133,7 +131,7 @@ namespace DSIS.IntegerCoordinates.Impl
       with.Do<IntegerCoordinateSystem, IntegerCoordinate>(this);
     }
 
-    public void Save(IOutputStream stream, IntegerCoordinate cell)
+    public void Save(IOutputStreamData stream, IntegerCoordinate cell)
     {
       //TODO: Save all bytes at once
       for(var i = 0; i < Dimension; i++)
@@ -142,7 +140,7 @@ namespace DSIS.IntegerCoordinates.Impl
       }
     }
 
-    public IntegerCoordinate Load(IInputStream stream)
+    public IntegerCoordinate Load(IInputStreamData stream)
     {
       //TODO: Read all bytes at once
       var arr = new long[Dimension];

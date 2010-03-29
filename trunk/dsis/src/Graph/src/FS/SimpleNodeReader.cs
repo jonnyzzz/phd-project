@@ -25,7 +25,6 @@ namespace DSIS.Graph.FS
 
       return new FSReadonlyNode<TCell>(id)
                {
-                 ComponentId = 0,
                  Entry = entry,
                  IsSelfLoop = data.IsSelfLoop
                };

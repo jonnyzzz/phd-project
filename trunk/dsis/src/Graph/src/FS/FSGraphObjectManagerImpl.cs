@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Persistance.Streams;
 
@@ -45,6 +46,11 @@ namespace DSIS.Graph.FS
         idx.LoadIndex(i, reader);
       }
       return idx;
+    }
+
+    public IInputOutputStream CreateDataHolderStream(string name)
+    {
+      return myResources.CreateIOStream(name);
     }
   }
 }

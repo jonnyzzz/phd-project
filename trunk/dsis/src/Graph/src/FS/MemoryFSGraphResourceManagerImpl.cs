@@ -29,5 +29,10 @@ namespace DSIS.Graph.FS
       myStreams.Remove(stream);
       return s.First.AsInputStream(x => x.Dispose());
     }
+
+    public IInputOutputStream CreateIOStream(string name)
+    {
+      return new MemoryStream().AsInputOutputStream(x => x.Close());
+    }
   }
 }

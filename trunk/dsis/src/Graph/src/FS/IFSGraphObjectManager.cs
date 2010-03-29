@@ -19,5 +19,7 @@ namespace DSIS.Graph.FS
                                                ICellCoordinateSystemPersist<TCell> persist,
                                                IEqualityComparer<TCell> comparer)
       where TCell : ICellCoordinate;
+
+    IInputOutputStream CreateDataHolderStream(string name);
   }
 }

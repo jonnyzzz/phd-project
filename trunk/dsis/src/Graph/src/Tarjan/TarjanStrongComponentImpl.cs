@@ -66,6 +66,7 @@ namespace DSIS.Graph.Tarjan
     {
       var filter = ComponentsFilter.CreateFilter(components, ComponentCount);
 
+      //TODO: Use factory
       var graph = new TarjanGraph<TCell>(myGraph.CoordinateSystem);
 
       foreach (var node in myGraph.NodesInternal)

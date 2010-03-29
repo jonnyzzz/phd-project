@@ -89,7 +89,7 @@ namespace DSIS.Core.Coordinates
   public interface ICellCoordinateSystemPersist<TCell> 
     where TCell : ICellCoordinate
   {
-    void Save(IOutputStream stream, TCell cell);
-    TCell Load(IInputStream stream);
+    void Save(IOutputStreamData stream, TCell cell);
+    TCell Load(IInputStreamData stream);
   }
 }

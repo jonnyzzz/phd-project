@@ -9,10 +9,5 @@ namespace DSIS.Persistance.Streams
     public OutputStreamImpl(S stream, Action<S> dispose) : base(stream, dispose)
     {
     }
-
-    public void Write(byte[] buffer, int offset, int count)
-    {
-      myStream.Write(buffer, offset, count);
-    }
   }
 }

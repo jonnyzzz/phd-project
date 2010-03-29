@@ -7,12 +7,12 @@ namespace DSIS.Graph.FS
   {
     public bool Equals(FSReadonlyNode<TCell> x, FSReadonlyNode<TCell> y)
     {
-      return x.Entry.Begin == y.Entry.Begin;
+      return x.Entry.EntryId == y.Entry.EntryId;
     }
 
     public int GetHashCode(FSReadonlyNode<TCell> obj)
     {
-      var code = obj.Entry.Begin;
+      var code = obj.Entry.EntryId;
       return (int) (code + (code >> 32));
     }
   }

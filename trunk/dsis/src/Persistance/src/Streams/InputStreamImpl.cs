@@ -9,10 +9,5 @@ namespace DSIS.Persistance.Streams
     public InputStreamImpl(S stream, Action<S> dispose) : base(stream, dispose)
     {
     }
-
-    public int Read(byte[] buffer, int offset, int count)
-    {
-      return myStream.Read(buffer, offset, count);
-    }
   }
 }
