@@ -77,6 +77,7 @@
     <Compile Include="src\FS\FSLongPersister.cs" />
     <Compile Include="src\FS\FSNodeInMemoryIndexImpl.cs" />
     <Compile Include="src\FS\FSPersisterFactory.cs" />
+    <Compile Include="src\FS\FSReadonlyBitSetHolder.cs" />
     <Compile Include="src\FS\FSReadonlyGraph.cs" />
     <Compile Include="src\FS\FSReadonlyGraphHolder.cs" />
     <Compile Include="src\FS\FSReadonlyNode.cs" />

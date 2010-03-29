@@ -49,6 +49,7 @@ namespace DSIS.Graph
     IGraphDataHolder<bool, TNode> CreateNodeFlagsHolder(string key);
     IGraphDataHolder<uint, TNode> GetComponentIdHolder();
 
+    //TODO: Move to INode
     bool IsSelfLoop(TNode node);
 
     IEqualityComparer<TNode> Comparer { get; }

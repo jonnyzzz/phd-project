@@ -121,8 +121,7 @@ namespace DSIS.Graph.FS
 
     public IGraphDataHolder<bool, FSReadonlyNode<TCell>> CreateNodeFlagsHolder(string key)
     {
-      //TODO: Use bitset here.
-      throw new NotImplementedException();
+      return new FSReadonlyBitSetHolder<FSReadonlyNode<TCell>, TCell>();
     }
 
     public bool IsSelfLoop(FSReadonlyNode<TCell> node)
