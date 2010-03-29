@@ -54,6 +54,7 @@
     <Compile Include="testSrc\BinTreePriorityQueueExTestEasy.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueExTestScenario.cs" />
     <Compile Include="testSrc\BinTreePriorityQueueExTestSmart.cs" />
+    <Compile Include="testSrc\BitSetTest.cs" />
     <Compile Include="testSrc\EqualityComparerFactoryTest.cs" />
     <Compile Include="testSrc\InfiniteEnumerableTest.cs" />
     <Compile Include="testSrc\LinedListTest.cs" />
