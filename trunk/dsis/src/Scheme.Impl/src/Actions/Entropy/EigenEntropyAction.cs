@@ -30,7 +30,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       var result = new List<EigenEntropyMeasure<Q>>();
       foreach (var comp in graph.Components)
       {
-        var evaluator = new EigenEntropyEvaluatorImpl<Q>(myOptions.Eps, graph.AsGraph(comp.Enum()));
+        var evaluator = new EigenEntropyEvaluatorImpl<Q>(myOptions.Eps, graph.Accessor(comp.Enum()).AsGraph());
 
         result.Add(new EigenEntropyMeasure<Q>(evaluator));
       }

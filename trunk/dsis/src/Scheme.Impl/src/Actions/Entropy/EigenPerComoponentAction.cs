@@ -3,6 +3,7 @@ using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Eigen;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
@@ -18,12 +19,12 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
-      IGraphStrongComponents<Q> comps = Keys.GetGraphComponents<Q>().Get(input);
+      var comps = Keys.GetGraphComponents<Q>().Get(input);
 
       double? value = null;
       foreach (IStrongComponentInfo info in comps.Components)
       {
-        IGraph<Q> graph = comps.AsGraph(new[] {info});
+        var graph = comps.Accessor(info.Enum()).AsGraph();
 
         var evaluator = new EigenEntropyEvaluatorImpl<Q>(EPS, graph);
         IGraphEntropy entropy = evaluator.ComputeEntropy();

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Util;
-using DSIS.Graph.Abstract;
-using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Graph.Tarjan;
@@ -70,7 +68,7 @@ namespace DSIS.Graph.Entropy.Tests
       Assert.That(evaluator.GetEntropy(), AssertEntropy(entropy));
     }
 
-    protected abstract Pair<IGraphMeasure<IntegerCoordinate>, IEdgeInfo> CreateEvaluator(string script, TarjanGraph<IntegerCoordinate> gr, IGraphStrongComponents<IntegerCoordinate> comps);
+    protected abstract Pair<IGraphMeasure<IntegerCoordinate>, IEdgeInfo> CreateEvaluator(string script, TarjanGraph<IntegerCoordinate> gr, IReadonlyGraphStrongComponents<IntegerCoordinate> comps);
 
     protected IGraphEntropy DoTest(string script, params Node[] nodes)
     {
@@ -88,7 +86,7 @@ namespace DSIS.Graph.Entropy.Tests
         Console.Out.WriteLine("g.EdgesCount = {0}", g.EdgesCount);
       }
 
-      IGraphStrongComponents<IntegerCoordinate> c = g.ComputeStrongComponents(NullProgressInfo.INSTANCE);
+      var c = g.ComputeStrongComponents(NullProgressInfo.INSTANCE);
 
       Pair<IGraphMeasure<IntegerCoordinate>, IEdgeInfo> eval = CreateEvaluator(script, g, c);
       IGraphMeasure<IntegerCoordinate> j2 = eval.First;

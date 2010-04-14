@@ -1,30 +1,41 @@
+using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
-  public class GraphWeightSearchLimited<T> : GraphWeightSearchBase<T, GraphWeightSearchLimited<T>.VisitedCollection>
+  public class GraphWeightSearchLimited<T,N> : GraphWeightSearchBase<T, N, GraphWeightSearchLimited<T, N>.VisitedCollection>
     where T : ICellCoordinate
+    where N : class, INode<T>
   {
-    public GraphWeightSearchLimited(IGraphStrongComponents<T> components, IStrongComponentInfo component) : base(components, component)
+    public GraphWeightSearchLimited(IReadonlyGraphStrongComponents<T,N> components, IStrongComponentInfo component) : base(components, component)
     {
     }
 
-    public sealed class VisitedCollection : VisitedCollectionBase<T>
+    protected override VisitedCollection CreateCollection()
+    {
+      return new VisitedCollection(NCOMPARER);
+    }
+
+    public sealed class VisitedCollection : VisitedCollectionBase<N>
     {
       private const int LIMIT = 1000;
       private int myCount;
 
-      public override SearchTreeNode<T> CreateQueuedNodeIfNoLoop(SearchTreeNode<T> parent, INode<T> to)
+      public VisitedCollection(IEqualityComparer<N> cmp) : base(cmp)
       {
-        return new SearchTreeNode<T>(null, to);
       }
 
-      public override bool Contains(SearchTreeNode<T> node)
+      public override SearchTreeNode<N> CreateQueuedNodeIfNoLoop(SearchTreeNode<N> parent, N to)
+      {
+        return new SearchTreeNode<N>(null, to, myCmp);
+      }
+
+      public override bool Contains(SearchTreeNode<N> node)
       {
         return myCount > LIMIT || base.Contains(node);
       }
 
-      public override void Visited(SearchTreeNode<T> node)
+      public override void Visited(SearchTreeNode<N> node)
       {
         myCount++;
         base.Visited(node);

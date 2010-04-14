@@ -1,11 +1,12 @@
 using System;
-using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Morse
 {
-  public interface IMorseEvaluatorPersist<T> where T : ICellCoordinate
+  public interface IMorseEvaluatorPersist<N> 
+    where N : class
   {
-    void SaveGraph(IMorseEvaluatorGraph<T> graph, Func<INode<T>, double> weight);
+    void SaveGraph(IMorseEvaluatorGraph<N> graph, Func<N, double> weight);
+
     string Name { get; }
   }
 }

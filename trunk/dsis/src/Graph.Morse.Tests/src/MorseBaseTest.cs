@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using DSIS.Core.Util;
-using DSIS.Graph.Abstract;
-using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Impl;
@@ -41,7 +39,7 @@ namespace DSIS.Graph.Morse.Tests
 
       bg(ctx);
 
-      IGraphStrongComponents<IntegerCoordinate> components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
+      var components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
 
       Assert.IsTrue(components.ComponentCount > 0, "No components");
       Assert.IsTrue(components.ComponentCount == 1, "Only one component possible");
@@ -129,7 +127,7 @@ namespace DSIS.Graph.Morse.Tests
     {
       private readonly Dictionary<INode<IntegerCoordinate>, double> myCosts;
 
-      public ME(double eps, IGraphStrongComponents<IntegerCoordinate> components, IStrongComponentInfo comp,
+      public ME(double eps, IReadonlyGraphStrongComponents<IntegerCoordinate> components, IStrongComponentInfo comp,
                 Dictionary<INode<IntegerCoordinate>, double> costs) 
         : base(new MorseEvaluatorOptions{Eps = eps}, 
         new MorseStrongComponentGraph<IntegerCoordinate>(components, comp))

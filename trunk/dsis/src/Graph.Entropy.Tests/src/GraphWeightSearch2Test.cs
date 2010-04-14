@@ -11,10 +11,10 @@ namespace DSIS.Graph.Entropy.Tests
   [TestFixture]
   public class GraphWeightSearch2Test : GraphSearchTest
   {
-    protected override ILoopIterator Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components)
+    protected override ILoopIterator Create<T,N>(IReadonlyGraph<T,N> graph, ILoopIteratorCallback<T,N> mcb, IReadonlyGraphStrongComponents<T,N> components)
     {
       IStrongComponentInfo first = components.Components.First();
-      return new LoopIteratorFirst<T>(mcb, components, first, new GraphWeightSearch2<T>(components, first));
+      return new LoopIteratorFirst<T,N>(mcb, components, first, new GraphWeightSearch2<T,N>(components, first));
     }
 
     [Test]  [ExpectedException(typeof(ArgumentException))]

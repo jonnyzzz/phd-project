@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Util;
-using DSIS.Graph.Abstract;
 using DSIS.Graph.Abstract.Algorithms;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Tests;
@@ -15,7 +15,7 @@ namespace DSIS.Graph.Tests
     where G : IGraph<Q>
   {
     protected G myGraph;
-    protected IGraphStrongComponents<Q> myComponents = null;
+    protected IReadonlyGraphStrongComponents<Q> myComponents = null;
     private T mySystem;
     private int myNodeId;
 
@@ -25,13 +25,31 @@ namespace DSIS.Graph.Tests
       myComponents = ComputeStrongComponents(myGraph, instance);
     }
 
-    protected virtual IGraphStrongComponents<Q> ComputeStrongComponents(G graph, IProgressInfo instance)
+    protected IEnumerable<INode<Q>> GetNodes(IEnumerable<IStrongComponentInfo> comps)
+    {
+      var gn = new GetNodesImpl { Components = comps.ToArray() };
+      myComponents.DoGeneric(gn);
+      return gn.Nodes;
+    }
+
+    private class GetNodesImpl : IReadonlyGraphStrongComponentsWith<Q>
+    {
+      public IEnumerable<IStrongComponentInfo> Components { set; private get; }
+      public IEnumerable<INode<Q>> Nodes { get; private set; }
+
+      public void With<TNode>(IReadonlyGraphStrongComponents<Q, TNode> components) where TNode : class, INode<Q>
+      {
+        Nodes = components.Accessor(Components).GetNodes();
+      }
+    }
+
+    protected IReadonlyGraphStrongComponents<Q> ComputeStrongComponents(G graph, IProgressInfo instance)
     {
       return graph.ComputeStrongComponents(instance);
     }
 
     [SetUp]
-    public virtual void SetUp()
+    public void SetUp()
     {
       mySystem = IntegerCoordinateSystemFactory.CreateCoordinateSystem<T,Q>(new MockSystemSpace(Dimension, 0, 1, 1000));
       myGraph = CreateGraph(mySystem);
@@ -98,7 +116,7 @@ namespace DSIS.Graph.Tests
       INode<Q> n2 = null;
       for (int i = 0; i < length; i++)
       {
-        INode<Q> n1 = n2;
+        var n1 = n2;
         n2 = myGraph.AddNode(CreateCoordinate(offset + (i + 1)*factor, mySystem));
         if (n == null)
           n = n2;

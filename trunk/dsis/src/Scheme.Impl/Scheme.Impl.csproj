@@ -163,6 +163,8 @@
     <Compile Include="src\Actions\SystemInfoAction.cs" />
     <Compile Include="src\CellCoordinateSystemUtil.cs" />
     <Compile Include="src\ContextHelper.cs" />
+    <Compile Include="src\IntegerCoordinateComponentsActionBase.cs" />
+    <Compile Include="src\IntegerCoordinateComponentsActionBaseEx.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase.cs" />
     <Compile Include="src\IntegerCoordinateSystemActionBase2Ex.cs" />

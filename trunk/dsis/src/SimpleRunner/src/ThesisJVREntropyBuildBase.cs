@@ -66,7 +66,7 @@ namespace DSIS.SimpleRunner
         myLogger = logger;
       }
 
-      protected override JVRMeasure<Q> CreateMeasure(IGraph<Q> graph, IGraphStrongComponents<Q> comps)
+      protected override JVRMeasure<Q> CreateMeasure(IReadonlyGraph<Q> graph, IReadonlyGraphStrongComponents<Q> comps)
       {
         return new LoggingEvaluator<Q>(graph, comps, myOpts, myLogger);
       }
@@ -75,7 +75,7 @@ namespace DSIS.SimpleRunner
     private class LoggingEvaluator<Q> : JVRMeasure<Q>
       where Q : ICellCoordinate
     {
-      private readonly IGraphStrongComponents<Q> myComponents;
+      private readonly IReadonlyGraphStrongComponents<Q> myComponents;
       private readonly Logger myLog;
       private int stepCount;
       private readonly Dictionary<JVRExitCondition, string> myCovergace = new Dictionary<JVRExitCondition, string>();
@@ -84,7 +84,7 @@ namespace DSIS.SimpleRunner
       private const int STEPS_LIMIT = 100 * 1000;
       private readonly DateTime myStartTime;
 
-      public LoggingEvaluator(IGraph<Q> graph, IGraphStrongComponents<Q> components, JVRMeasureOptions opts, Logger log)
+      public LoggingEvaluator(IReadonlyGraph<Q> graph, IReadonlyGraphStrongComponents<Q> components, JVRMeasureOptions opts, Logger log)
         : base(graph, components, opts)
       {
         myComponents = components;
@@ -100,7 +100,7 @@ namespace DSIS.SimpleRunner
       private void DumpConvergance()
       {
         //TODO: Performance LAG!
-        var graph = myComponents.AsGraph(myComponents.Components);
+        var graph = myComponents.Accessor(myComponents.Components).AsGraph();
         var nodes = graph.NodesCount;
         var edges = graph.EdgesCount;
 

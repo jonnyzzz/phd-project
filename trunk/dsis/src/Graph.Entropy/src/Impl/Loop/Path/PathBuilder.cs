@@ -8,12 +8,12 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
 {
   public class PathBuilder<T> where T : ICellCoordinate
   {
-    private readonly IGraphStrongComponents<T> myComps;
+    private readonly IReadonlyGraphStrongComponents<T> myComps;
 
     protected readonly Vector<NodePair<T>> myValues = new Vector<NodePair<T>>();
     private int myNorm;
 
-    public PathBuilder(IGraphStrongComponents<T> comps)
+    public PathBuilder(IReadonlyGraphStrongComponents<T> comps)
     {
       myComps = comps;
     }
@@ -22,7 +22,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Path
     {
       foreach (IStrongComponentInfo info in myComps.Components)
       {
-        var graph = myComps.AsGraph(new[] {info});
+        var graph = myComps.Accessor(info.Enum()).AsGraph();
         graph.DoGeneric(new Proxy(this));
       }
     }

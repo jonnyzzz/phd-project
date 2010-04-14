@@ -1,19 +1,19 @@
-using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Morse
 {
-  public class ContourNode<T> where T : ICellCoordinate
+  public class ContourNode<N> 
+    where N : class
   {
     private int myValue = 0;
 
-    public readonly INode<T> Node;
+    public readonly N Node;
     public readonly double Cost;
 
-    public ContourNode<T> Parent; //tree-like     
+    public ContourNode<N> Parent; //tree-like     
     
     public double Value;
     
-    public ContourNode(INode<T> node, double node_cost)
+    public ContourNode(N node, double node_cost)
     {
       myValue = 0;
       Node = node;

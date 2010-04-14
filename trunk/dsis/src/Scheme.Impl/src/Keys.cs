@@ -28,9 +28,9 @@ namespace DSIS.Scheme.Impl
       return new Key<ICellCoordinateCollection<Q>>("Cells");
     }
 
-    public static Key<IGraph<Q>> Graph<Q>() where Q : ICellCoordinate
+    public static Key<IReadonlyGraph<Q>> Graph<Q>() where Q : ICellCoordinate
     {
-      return new Key<IGraph<Q>>("graph");
+      return new Key<IReadonlyGraph<Q>>("graph");
     }
 
     public static Key<IGraphStrongComponents> GraphComponents
@@ -41,9 +41,9 @@ namespace DSIS.Scheme.Impl
       }
     }
 
-    public static Key<IGraphStrongComponents<Q>> GetGraphComponents<Q>() where Q : ICellCoordinate
+    public static Key<IReadonlyGraphStrongComponents<Q>> GetGraphComponents<Q>() where Q : ICellCoordinate
     {
-      return new Key<IGraphStrongComponents<Q>>("comps", GraphComponents);
+      return new Key<IReadonlyGraphStrongComponents<Q>>("comps", GraphComponents);
     }
 
     public static readonly Key<StrangeEntropyEvaluatorParams> StrangeEntropyEvaluatorParams = new Key<StrangeEntropyEvaluatorParams>("");

@@ -26,8 +26,8 @@ namespace DSIS.Scheme.Impl.Actions.Files
       string file = Path.Combine(dir, "graph-entropy.log");
 
       //todo:!Not optimal!
-      IGraphStrongComponents<Q> components = Keys.GetGraphComponents<Q>().Get(input);
-      IReadonlyGraph<Q> graph = components.AsGraph(components.Components);
+      IReadonlyGraphStrongComponents<Q> components = Keys.GetGraphComponents<Q>().Get(input);
+      IReadonlyGraph<Q> graph = components.Accessor(components.Components).AsGraph();
       
       DumpEntropy(graph, file, false);
 

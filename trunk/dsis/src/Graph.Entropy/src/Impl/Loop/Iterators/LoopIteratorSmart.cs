@@ -1,26 +1,26 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
-  public class LoopIteratorSmart<T> : LoopIteratorBase<T>, ILoopIteratorCallback<T> 
+  public class LoopIteratorSmart<T,N> : LoopIteratorBase<T,N>, ILoopIteratorCallback<T,N> 
     where T : ICellCoordinate
+    where N : class, INode<T>
   {
-    private readonly IGraphWeightSearch<T> mySearch;
-    private readonly Hashset<INode<T>> myNodes = new Hashset<INode<T>>(EqualityComparerFactory<INode<T>>.GetComparer());
+    private readonly IGraphWeightSearch<T,N> mySearch;
+    private readonly HashSet<N> myNodes;
 
-    public LoopIteratorSmart(ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components, IStrongComponentInfo component, IGraphWeightSearch<T> search) : 
+    public LoopIteratorSmart(ILoopIteratorCallback<T,N> callback, IReadonlyGraphStrongComponents<T,N> components, IStrongComponentInfo component, IGraphWeightSearch<T,N> search) : 
       base(callback, components, component)
     {
+      myNodes = new HashSet<N>(COMPARER);
       mySearch = search;
     }
 
     public override void WidthSearch()
     {      
-      foreach (INode<T> node in myComponents.GetNodes(myComponentInfos))
+      foreach (N node in myAccessor.GetNodes())
       {
         if (myNodes.Contains(node))
           continue;
@@ -29,9 +29,9 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
       }
     }
 
-    public void OnLoopFound(IEnumerable<INode<T>> loop, int length)
+    public void OnLoopFound(IEnumerable<N> loop, int length)
     {
-      myNodes.AddRange(loop);
+      myNodes.UnionWith(loop);
       myCallback.OnLoopFound(loop, length);
     }
   }

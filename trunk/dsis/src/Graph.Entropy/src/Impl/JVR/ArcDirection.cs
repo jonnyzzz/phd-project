@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
@@ -24,18 +25,12 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     
     public double ComputeWeight(T node)
     {
-      double w = 0;
       var values = myIndex.GetValues(node);
 
       if (values.Count == 0)
-      {
         throw new Exception("Failed to find edges for " + node);
-      }
-      foreach (JVRPair<T> edge in values)
-      {
-        w += myHash.GetItem(edge);
-      }
-      return w;
+
+      return values.Sum(edge => myHash.GetItem(edge));
     }
 
     public double MultiplyWeight(ItemUpdateCookie<T> cookie, T node, double factor) 

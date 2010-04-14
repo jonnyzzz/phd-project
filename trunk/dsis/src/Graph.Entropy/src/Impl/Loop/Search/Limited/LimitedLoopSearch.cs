@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Search.Limited
 {
-  public class LimitedLoopSearch<T> : LoopIteratorBase<T> where T : ICellCoordinate
+  public class LimitedLoopSearch<T,N> : LoopIteratorBase<T,N> 
+    where T : ICellCoordinate
+    where N : class, INode<T>
   {
-    private static readonly IEqualityComparer<INode<T>> COMPARER = EqualityComparerFactory<INode<T>>.GetComparer();
     private readonly int myDeep;    
 
-    public LimitedLoopSearch(int deep, ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components,
+    public LimitedLoopSearch(int deep, ILoopIteratorCallback<T,N> callback, IReadonlyGraphStrongComponents<T,N> components,
                              IStrongComponentInfo component) : base(callback, components, component)
     {
       myDeep = deep;
@@ -18,8 +18,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search.Limited
 
     public override void WidthSearch()
     {
-      var skips = new Hashset<INode<T>>(COMPARER);
-      foreach (INode<T> node in myComponents.GetNodes(myComponentInfos))
+      var skips = new HashSet<N>(COMPARER);
+      foreach (N node in myAccessor.GetNodes())
       {
         if (skips.Contains(node))
           continue;
@@ -28,27 +28,27 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search.Limited
       }
     }
 
-    private void LoopSearch(INode<T> node, Hashset<INode<T>> skips)
+    private void LoopSearch(N node, HashSet<N> skips)
     {
-      var queue = new Queue<INode<T>>(myDeep);
-      var skips2 = new Hashset<INode<T>>(COMPARER); 
+      var queue = new Queue<N>(myDeep);
+      var skips2 = new HashSet<N>(COMPARER); 
 
       queue.Enqueue(node);
       skips2.Add(node);
               
-      foreach (INode<T> edge in myComponents.GetEdgesWithFilteredEdges(node, myComponentInfos))
+      foreach (N edge in myAccessor.GetEdges(node))
       { 
         DoSearch(myDeep, edge, node, queue, skips, skips2);
       }
     }
 
-    private void DoSearch(int deep, INode<T> current, INode<T> loop, Queue<INode<T>> path, Hashset<INode<T>> skips, Hashset<INode<T>> skips2)
+    private void DoSearch(int deep, N current, N loop, Queue<N> path, HashSet<N> skips, HashSet<N> skips2)
     {    
       if (COMPARER.Equals(current, loop))
       {
-        var found = new List<INode<T>>(path);
+        var found = new List<N>(path);
         found.Reverse();
-        skips.AddRange(found);
+        skips.UnionWith(found);
         myCallback.OnLoopFound(found, found.Count);
         return;
       }
@@ -62,7 +62,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search.Limited
       skips2.Add(current);
       path.Enqueue(current);
         
-      foreach (INode<T> edge in myComponents.GetEdgesWithFilteredEdges(current, myComponentInfos))
+      foreach (N edge in myAccessor.GetEdges(current))
       {
         DoSearch(deep - 1, edge, loop, path, skips, skips2);
       }

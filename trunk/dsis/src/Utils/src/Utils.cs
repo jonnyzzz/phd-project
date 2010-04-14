@@ -7,6 +7,12 @@ namespace DSIS.Utils
 {
   public static class Util
   {
+    public static R Apply<R,T>(this T obj, Action<T> apply, Func<T,R> result)
+    {
+      apply(obj);
+      return result(obj);
+    }
+
     public static IEnumerable<IEnumerable<T>> ToChunks<T>(this IEnumerable<T> enu, int chunkSize)
     {
       var list = new List<T>();

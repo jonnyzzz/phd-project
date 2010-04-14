@@ -6,8 +6,9 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Morse
 {
-  public class JVRFormatPersist<T> : IMorseEvaluatorPersist<T> 
+  public class JVRFormatPersist<T,N> : IMorseEvaluatorPersist<N> 
     where T : ICellCoordinate
+    where N : class, INode<T>
   {
     private readonly Func<string> GetTempFile;
 
@@ -16,7 +17,7 @@ namespace DSIS.Graph.Morse
       GetTempFile = getTempFile;
     }
 
-    public void SaveGraph(IMorseEvaluatorGraph<T> graph, Func<INode<T>, double> weight)
+    public void SaveGraph(IMorseEvaluatorGraph<N> graph, Func<N, double> weight)
     {
       var i = 0;
       var nodes = new Dictionary<INode<T>, int>();

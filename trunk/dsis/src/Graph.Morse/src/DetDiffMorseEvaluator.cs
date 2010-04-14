@@ -13,7 +13,7 @@ namespace DSIS.Graph.Morse
     public DetDiffMorseEvaluator(
       MorseEvaluatorOptions opts,
       IDetDiffFunction<double> function,
-      IGraphStrongComponents<T> components,
+      IReadonlyGraphStrongComponents<T> components,
       IStrongComponentInfo comp) : base(opts, new MorseStrongComponentGraph<T>(components, comp))
     {
       myFunction = function;

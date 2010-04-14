@@ -1,37 +1,37 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Entropy.Impl.Loop.Search;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
-  public abstract class GraphWeightSearchBase<T, TCollection> : IGraphWeightSearch<T> 
+  public abstract class GraphWeightSearchBase<T, N, TCollection> : IGraphWeightSearch<T,N> 
     where T : ICellCoordinate
-    where TCollection : IVisitedCollection<T>, new()
+    where N : class, INode<T>
+    where TCollection : IVisitedCollection<N>
   {
-    private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
+    protected readonly IEqualityComparer<N> NCOMPARER;
+    private readonly IReadonlyGraphStrongComponentsAccessor<T, N> myAccessor;
 
-    private readonly IGraphStrongComponents<T> myComponents;
-    private readonly IStrongComponentInfo myComponent;
-    private readonly IStrongComponentInfo[] myComponentInfos;
+    private readonly TCollection myCollection;
 
-    private readonly TCollection myCollection = new TCollection();
-
-    protected GraphWeightSearchBase(IGraphStrongComponents<T> components,
+    protected GraphWeightSearchBase(IReadonlyGraphStrongComponents<T,N> components,
                                  IStrongComponentInfo component)
     {
-      myComponents = components;
-      myComponent = component;
-      myComponentInfos = new[]{myComponent};
+      NCOMPARER = components.UnderlyingGraph.Comparer;
+      myAccessor = components.Accessor(component.Enum());
+
+      myCollection = CreateCollection();
     }
 
-    private static bool IsUpperInTree(SearchTreeNode<T> root, INode<T> node, List<INode<T>> result)
+    protected abstract TCollection CreateCollection();
+
+    private bool IsUpperInTree(SearchTreeNode<N> root, N node, List<N> result)
     {
-      long hash = COMPARER.GetHashCode(node.Coordinate);
+      long hash = NCOMPARER.GetHashCode(node);
       while (root != null)
       {
         result.Insert(0, root.Node);
-        if (hash == root.Hash && root.IsNode(node))
+        if (hash == root.Hash && root.IsNode(node, NCOMPARER))
         {
           return true;
         }
@@ -45,24 +45,24 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
       return myCollection;
     }
     
-    public virtual void WidthSearch(ILoopIteratorCallback<T> callback, INode<T> anode)
+    public virtual void WidthSearch(ILoopIteratorCallback<T,N> callback, N anode)
     {
       myCollection.Clear();
 
-      var queue = new Queue<SearchTreeNode<T>>();
-      var loop = new List<INode<T>>();
+      var queue = new Queue<SearchTreeNode<N>>();
+      var loop = new List<N>();
 
-      queue.Enqueue(new SearchTreeNode<T>(null, anode));
+      queue.Enqueue(new SearchTreeNode<N>(null, anode, NCOMPARER));
       while (queue.Count > 0)
       {
-        SearchTreeNode<T> node = queue.Dequeue();
+        SearchTreeNode<N> node = queue.Dequeue();
 
         if (myCollection.Contains(node))
           continue;
 
         myCollection.Visited(node);
 
-        foreach (INode<T> edge in myComponents.GetEdgesWithFilteredEdges(node.Node, myComponentInfos))
+        foreach (N edge in myAccessor.GetEdges(node.Node))
         {          
           if (myCollection.IsInTree(node, edge))
           {
@@ -78,7 +78,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
           }
           else
           {
-            queue.Enqueue(node.Child(edge));
+            queue.Enqueue(node.Child(edge, NCOMPARER));
           }
         }
       }

@@ -8,5 +8,6 @@ namespace DSIS.Graph.Tests.FS
     void CheckGraphNodesAndEdges(IEnumerable<Pair<int, IEnumerable<int>>> edges);
 
     void CheckDataHolder<TData>(IEnumerable<Pair<int, IEnumerable<int>>> edges, IEnumerable<Pair<int, TData>> values);
+    void CheckStrongComponents(IEnumerable<Pair<int, IEnumerable<int>>> edges, IEnumerable<IEnumerable<int>> comps);
   }
 }

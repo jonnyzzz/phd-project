@@ -1,32 +1,28 @@
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
-  public sealed class SearchTreeNode<T> where T : ICellCoordinate
+  public sealed class SearchTreeNode<N> 
   {
-    private static readonly IEqualityComparer<T> COMPARER = EqualityComparerFactory<T>.GetComparer();
-
-    public readonly SearchTreeNode<T> Parent = null;
-    public readonly INode<T> Node;
+    public readonly SearchTreeNode<N> Parent = null;
+    public readonly N Node;
     public readonly int Hash;
 
-    public SearchTreeNode(SearchTreeNode<T> parent, INode<T> node, int hash)
+    public SearchTreeNode(SearchTreeNode<N> parent, N node, int hash)
     {
       Node = node;
       Parent = parent;
       Hash = hash;
     }
 
-    public SearchTreeNode(SearchTreeNode<T> parent, INode<T> node)
-      : this(parent, node, COMPARER.GetHashCode(node.Coordinate))
+    public SearchTreeNode(SearchTreeNode<N> parent, N node, IEqualityComparer<N> comparer)
+      : this(parent, node, comparer.GetHashCode(node))
     {
     }
 
-    public bool IsNode(INode<T> node)
+    public bool IsNode(N node, IEqualityComparer<N> comparer)
     {
-      return COMPARER.Equals(Node.Coordinate, node.Coordinate);
+      return comparer.Equals(Node, node);
     }
 
     public override string ToString()
@@ -34,9 +30,9 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Search
       return Node.ToString();
     }
 
-    public SearchTreeNode<T> Child(INode<T> node)
+    public SearchTreeNode<N> Child(N node, IEqualityComparer<N> comparer)
     {
-      return new SearchTreeNode<T>(this, node);
+      return new SearchTreeNode<N>(this, node, comparer);
     }
   }
 }

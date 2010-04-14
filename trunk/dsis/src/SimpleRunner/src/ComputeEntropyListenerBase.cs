@@ -22,27 +22,27 @@ namespace DSIS.SimpleRunner
       OnEveryStep
     }
 
-    public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void ComputationFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                              AbstractImageBuilderContext<Q> cx)
     {
       if (ComputeEvent == ComputeEventType.OnFinish)
         DoEvaluate(graph, comps);
     }
 
-    public override void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void OnStepFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                         AbstractImageBuilderContext<Q> cx)
     {
       if (ComputeEvent == ComputeEventType.OnEveryStep)
         DoEvaluate(graph, comps);
     }
 
-    private void DoEvaluate(IGraph<Q> graph, IGraphStrongComponents<Q> comps)
+    private void DoEvaluate(IGraph<Q> graph, IReadonlyGraphStrongComponents<Q> comps)
     {
       OnComputeEntropyStarted();
 
       Controller controller = new NoProjectController(graph, comps, this);
 
-      IEntropyEvaluator<Q> evaluator = GetLoopEntropyEvaluator();
+      var evaluator = GetLoopEntropyEvaluator();
       evaluator.ComputeEntropy(controller, NullProgressInfo.INSTANCE);
 
       OnComputeEntropyFinished(controller.Results);
@@ -52,30 +52,24 @@ namespace DSIS.SimpleRunner
 
     private void OnComputeEntropyFinished(double[] entropy)
     {
-      FireListeners(delegate(IComputeEntropyListener<Q> listener)
-                      {
-                        listener.OnComputeEntropyFinished(Suffix, entropy);
-                      });
+      FireListeners(listener => listener.OnComputeEntropyFinished(Suffix, entropy));
 
     }
 
     private void OnComputeEntropyStarted()
     {
-      FireListeners(delegate(IComputeEntropyListener<Q> listener)
-                      {
-                        listener.OnComputeEntropyStarted();
-                      });
+      FireListeners(listener => listener.OnComputeEntropyStarted());
     }
 
     private class Controller : IEntropyEvaluatorController<Q>
     {
       private readonly ComputeEntropyListenerBase<T, Q> myHost;
       private readonly IGraph<Q> myGraph;
-      private readonly IGraphStrongComponents<Q> myComponents;
+      private readonly IReadonlyGraphStrongComponents<Q> myComponents;
       private readonly List<double> myResults = new List<double>();
       private ICellCoordinateSystem<Q> mySystem;
 
-      public Controller(IGraph<Q> graph, IGraphStrongComponents<Q> components, ComputeEntropyListenerBase<T, Q> host)
+      public Controller(IGraph<Q> graph, IReadonlyGraphStrongComponents<Q> components, ComputeEntropyListenerBase<T, Q> host)
       {
         myGraph = graph;
         myHost = host;
@@ -92,7 +86,7 @@ namespace DSIS.SimpleRunner
         get { return myGraph; }
       }
 
-      public IGraphStrongComponents<Q> Components
+      public IReadonlyGraphStrongComponents<Q> Components
       {
         get { return myComponents; }
       }
@@ -110,10 +104,7 @@ namespace DSIS.SimpleRunner
       public virtual void OnResult<P>(double result, IDictionary<Q, double> measure, IDictionary<P, double> edges) where P : PairBase<Q>
       {        
         myResults.Add(result);
-        myHost.FireListeners(delegate(IComputeEntropyListener<Q> obj)
-                               {
-                                 obj.OnComputeEntropyStep(result, measure, edges, mySystem);
-                               });
+        myHost.FireListeners(obj => obj.OnComputeEntropyStep(result, measure, edges, mySystem));
       }
     }
   
@@ -121,7 +112,7 @@ namespace DSIS.SimpleRunner
     {
       private bool myHasResult;
 
-      public NoProjectController(IGraph<Q> graph, IGraphStrongComponents<Q> components, ComputeEntropyListenerBase<T, Q> host) : base(graph, components, host)
+      public NoProjectController(IGraph<Q> graph, IReadonlyGraphStrongComponents<Q> components, ComputeEntropyListenerBase<T, Q> host) : base(graph, components, host)
       {
       }
 

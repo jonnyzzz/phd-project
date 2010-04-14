@@ -30,8 +30,8 @@ namespace DSIS.Graph.Entropy
   public interface IEntropyEvaluatorInput<T>
     where T : ICellCoordinate
   {
-    IGraph<T> Graph { get;}
-    IGraphStrongComponents<T> Components { get; }    
+    IReadonlyGraph<T> Graph { get;}
+    IReadonlyGraphStrongComponents<T> Components { get; }    
   }
 
   public interface IEntropyEvaluatorController<T> : IEntropyListener<T>, IEntropyEvaluatorInput<T>
@@ -39,11 +39,5 @@ namespace DSIS.Graph.Entropy
   {
     bool SubdivideNext(ICellCoordinateSystem<T> system);
     void SetCoordinateSystem(ICellCoordinateSystem<T> system);
-  }
-
-
-  public interface IEntropyEvaluator2<T> where T : ICellCoordinate
-  {
-    IGraphMeasure<T> ComputeEntropy();
   }
 }

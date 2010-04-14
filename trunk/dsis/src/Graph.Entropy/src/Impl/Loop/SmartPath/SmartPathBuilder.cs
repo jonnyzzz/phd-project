@@ -8,11 +8,11 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
   public class SmartPathBuilder<T>
     where T : ICellCoordinate
   {
-    private readonly IGraphStrongComponents<T> myComps;
+    private readonly IReadonlyGraphStrongComponents<T> myComps;
     protected readonly Vector<NodePair<T>> myValues = new Vector<NodePair<T>>();
     private int myNorm = 0;
 
-    public SmartPathBuilder(IGraphStrongComponents<T> comps)
+    public SmartPathBuilder(IReadonlyGraphStrongComponents<T> comps)
     {
       myComps = comps;
     }
@@ -29,10 +29,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
     {
       foreach (IStrongComponentInfo info in myComps.Components)
       {
-        var graph = myComps.AsGraph(new[] { info });
-
+        var graph = myComps.Accessor(info.Enum()).AsGraph();
         graph.DoGeneric(new Proxy(this));
-
         GCHelper.Collect();
       }
     }
@@ -59,7 +57,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.SmartPath
       private readonly IReadonlyGraph<T, TNode> graph;
       private static readonly INodeState<T, TNode> ourInitialState = new ThisNodeState<T, TNode>();
 
-      protected readonly Vector<NodePair<T>> myValues;
+      private readonly Vector<NodePair<T>> myValues;
       private int myNorm;
 
       public GraphProcessor(IReadonlyGraph<T, TNode> graph, Vector<NodePair<T>> values, int norm)

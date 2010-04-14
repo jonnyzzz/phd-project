@@ -14,7 +14,7 @@ namespace DSIS.Graph.Entropy.Tests
     protected override Pair<IGraphMeasure<IntegerCoordinate>, IEdgeInfo> CreateEvaluator(string script,
                                                                                          TarjanGraph<IntegerCoordinate>
                                                                                            gr,
-                                                                                         IGraphStrongComponents
+                                                                                         IReadonlyGraphStrongComponents
                                                                                            <IntegerCoordinate> comps)
     {      
       var bld = new PathBuilder(comps);
@@ -25,7 +25,7 @@ namespace DSIS.Graph.Entropy.Tests
 
     private class PathBuilder : PathBuilder<IntegerCoordinate>, IEdgeInfo
     {
-      public PathBuilder(IGraphStrongComponents<IntegerCoordinate> comps) : base(comps)
+      public PathBuilder(IReadonlyGraphStrongComponents<IntegerCoordinate> comps) : base(comps)
       {
       }
 

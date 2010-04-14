@@ -1,21 +1,32 @@
+using System;
+using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Graph.Entropy.Impl.Loop.Search;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Search
 {
-  public class GraphWeightSearch<T> : GraphWeightSearchBase<T, GraphWeightSearch<T>.VisitedCollection> 
+  public class GraphWeightSearch<T,N> : GraphWeightSearchBase<T, N, GraphWeightSearch<T,N>.VisitedCollection> 
     where T : ICellCoordinate
+    where N : class, INode<T>
   {
-    public GraphWeightSearch(IGraphStrongComponents<T> components,
+    public GraphWeightSearch(IReadonlyGraphStrongComponents<T,N> components,
                              IStrongComponentInfo component) : base(components, component)
     {
     }
 
-    public sealed class VisitedCollection : VisitedCollectionBase<T>
+    protected override VisitedCollection CreateCollection()
     {
-      public override SearchTreeNode<T> CreateQueuedNodeIfNoLoop(SearchTreeNode<T> parent, INode<T> to)
+      return new VisitedCollection(NCOMPARER);
+    }
+
+    public sealed class VisitedCollection : VisitedCollectionBase<N>
+    {
+      public VisitedCollection(IEqualityComparer<N> cmp) : base(cmp)
       {
-        return new SearchTreeNode<T>(null, to);
+      }
+
+      public override SearchTreeNode<N> CreateQueuedNodeIfNoLoop(SearchTreeNode<N> parent, N to)
+      {
+        return new SearchTreeNode<N>(null, to, myCmp);
       }
     }
   }     

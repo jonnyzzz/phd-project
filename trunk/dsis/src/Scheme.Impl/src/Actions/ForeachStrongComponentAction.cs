@@ -49,7 +49,7 @@ namespace DSIS.Scheme.Impl.Actions
         var ac = new UpdateContextAction(
           delegate(Context _, Context ctx)
             {
-              IGraph<Q> graph = comps.AsGraph(new[] {info});
+              IReadonlyGraph<Q> graph = comps.Accessor(info.Enum()).AsGraph();
 
               ctx.AddAll(input);
               

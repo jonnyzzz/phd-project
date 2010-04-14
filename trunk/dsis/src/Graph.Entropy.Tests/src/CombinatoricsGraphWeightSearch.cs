@@ -11,11 +11,11 @@ namespace DSIS.Graph.Entropy.Tests
   [TestFixture]
   public class CombinatoricsGraphWeightSearch : GraphSearchTest
   {
-    protected override ILoopIterator Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components)
+    protected override ILoopIterator Create<T,N>(IReadonlyGraph<T,N> graph, ILoopIteratorCallback<T,N> mcb, IReadonlyGraphStrongComponents<T,N> components)
     {
       Assert.That(mcb, Is.Not.Null);
       Assert.That(graph, Is.Not.Null);
-      return new CombinatoricsLoopSearch<T>(mcb, graph , int.MaxValue);
+      return new CombinatoricsLoopSearch<T,N>(mcb, graph , int.MaxValue);
     }
 
     [Test]

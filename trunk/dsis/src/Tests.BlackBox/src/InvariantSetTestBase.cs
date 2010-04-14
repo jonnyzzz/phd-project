@@ -50,7 +50,7 @@ namespace DSIS.Tests.BlackBox
 
       protected override void Apply<T, Q>(Context input, Context output)
       {
-        IGraph<Q> graph = Keys.Graph<Q>().Get(input);
+        var graph = Keys.Graph<Q>().Get(input);
 
         var system = (IIntegerCoordinateSystem<Q>)graph.CoordinateSystem;
 

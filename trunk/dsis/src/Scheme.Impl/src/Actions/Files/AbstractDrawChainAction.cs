@@ -1,6 +1,5 @@
 using System;
 using DSIS.GnuplotDrawer;
-using DSIS.Graph;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;
 
@@ -16,7 +15,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
       var folderInfo = GetWorkingFolderInfo(input);
-      IGraphStrongComponents<Q> comps = Keys.GetGraphComponents<Q>().Get(input);
+      var comps = Keys.GetGraphComponents<Q>().Get(input);
 
       var pw = CreateComponentWriter(folderInfo);
       var files = pw.WriteComponents(system, comps);

@@ -1,27 +1,25 @@
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Graph;
-using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Scheme.Ctx;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
-  public abstract class StrangeEntropyActionBase : IntegerCoordinateSystemActionBase3
+  public abstract class StrangeEntropyActionBase : IntegerCoordinateComponentsActionBase
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
+    protected override IEnumerable<ContextMissmatchCheck> Check<T, Q, TNode>(T system, Context ctx, IReadonlyGraphStrongComponents<Q, TNode> comps)
     {
-      return ColBase(base.Check<T, Q>(ctx),
+      return ColBase(base.Check(system, ctx, comps).ToArray(),
                      Create(Keys.Graph<Q>()),
                      Create(Keys.GetGraphComponents<Q>()));
     }
 
-    protected override void Apply<T, Q>(Context input, Context output)
+    protected override void Apply<T, Q, TNode>(T system, Context input, Context output, IReadonlyGraphStrongComponents<Q, TNode> components)
     {
-      var graph = Keys.Graph<Q>().Get(input);
-      var comps = Keys.GetGraphComponents<Q>().Get(input);
       var ps = GetParams(input);
 
-      var measure = new StrangeEntropyEvaluator<Q>().Measure(graph, comps, ps);
+      var measure = new StrangeEntropyEvaluator<Q, TNode>().Measure(components.UnderlyingGraph, components, ps);
 
       Keys.GraphMeasure<Q>().Set(output, measure);      
 //      Keys.GraphEntropyKey.Set(output, measure);      

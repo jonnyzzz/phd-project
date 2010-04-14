@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DSIS.Graph;
@@ -8,29 +7,22 @@ using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Console
 {
-  public class DumpGraphComponentsInfoAction : IntegerCoordinateSystemActionBase3
+  public class DumpGraphComponentsInfoAction : IntegerCoordinateComponentsActionBase
   {
-    protected override ICollection<ContextMissmatchCheck> Check<T, Q>(Context ctx)
+    protected override void Apply<T, Q, TNode>(T system, Context input, Context output, IReadonlyGraphStrongComponents<Q, TNode> gr)
     {
-      return new[] {Create(Keys.GetGraphComponents<Q>())};
-    }
-
-    protected override void Apply<T, Q>(Context input, Context output)
-    {
-      IGraphStrongComponents<Q> gr = Keys.GetGraphComponents<Q>().Get(input);
-
       var sb = new StringBuilder();
       sb.AppendFormat("Components: {0}", gr.ComponentCount).AppendLine();
       sb.Append("Component's Nodes-Edges: ");
       long totalEdges = 0, totalNodes = 0;
-      foreach (var info in gr.Components.Select(x=>x.Enum()))
+      foreach (var info in gr.Components.Select(x=>gr.Accessor(x.Enum())))
       {
         long nodes = 0;
         long edges = 0;
-        foreach (var node in gr.GetNodes(info))
+        foreach (var node in info.GetNodes())
         {
           nodes++;
-          edges += gr.GetEdgesWithFilteredEdges(node, info).Count();          
+          edges += info.GetEdges(node).Count();          
         }
         totalEdges += edges;
         totalNodes += nodes;
@@ -40,5 +32,6 @@ namespace DSIS.Scheme.Impl.Actions.Console
       sb.AppendFormat("Components total: Nodes: {0}, Edges: {1}", totalNodes, totalEdges);
       Logger.Instance(input).Write(sb.ToString());
     }
+   
   }
 }

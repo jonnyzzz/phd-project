@@ -24,7 +24,7 @@ namespace DSIS.Scheme.Impl.Actions.Console
 
       var name = folder.CreateFileNameFromTemplate("maple-graph-matrix-{0}");
 
-      var graph = measure.AsGraph(measure.Components);
+      var graph = measure.Accessor(measure.Components).AsGraph();
       graph.DoGeneric(new Impl<Q>(name));
     }
 

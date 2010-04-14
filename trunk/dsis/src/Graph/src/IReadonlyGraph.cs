@@ -45,7 +45,7 @@ namespace DSIS.Graph
     IEnumerable<TNode> NodesInternal { get; }
     IEnumerable<TNode> GetEdgesInternal(TNode forNode);
 
-    IGraphDataHolder<TData, TNode> CreateDataHolder<TData>(Converter<TNode, TData> def);
+    IGraphDataHolder<TData, TNode> CreateDataHolder<TData>(Func<TNode, TData> def);
     IGraphDataHolder<bool, TNode> CreateNodeFlagsHolder(string key);
     IGraphDataHolder<uint, TNode> GetComponentIdHolder();
 

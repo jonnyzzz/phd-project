@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
 namespace DSIS.Graph
 {
-  public class GraphStrongComponentsSubset<Q> : IGraphStrongComponents<Q>
+  public class GraphStrongComponentsSubset<Q, T> : IReadonlyGraphStrongComponents<Q, T>, IReadonlyGraphStrongComponents<Q>, IReadonlyGraphStrongComponents
     where Q : ICellCoordinate
+    where T : class, INode<Q>
   {
-    private readonly IGraphStrongComponents<Q> myComponents;
+    private readonly IReadonlyGraphStrongComponents<Q,T> myComponents;
     private readonly HashSet<IStrongComponentInfo> mySubset;
 
-    public GraphStrongComponentsSubset(IGraphStrongComponents<Q> components, IEnumerable<IStrongComponentInfo> subset)
+    public GraphStrongComponentsSubset(IReadonlyGraphStrongComponents<Q,T> components, IEnumerable<IStrongComponentInfo> subset)
     {
       myComponents = components;
       mySubset = new HashSet<IStrongComponentInfo>(subset);
@@ -22,9 +24,41 @@ namespace DSIS.Graph
       }
     }
 
-    ICellCoordinateSystem IGraphStrongComponents.CoordinateSystem
+    IReadonlyGraphStrongComponentsAccessor<Q> IReadonlyGraphStrongComponents<Q>.Accessor(IEnumerable<IStrongComponentInfo> components)
     {
-      get { return CoordinateSystem; }
+      return Accessor(components);
+    }
+
+    public void DoGeneric(IReadonlyGraphStrongComponentsWith<Q> with)
+    {
+      with.With(this);
+    }
+
+    IReadonlyGraphStrongComponents IReadonlyGraphStrongComponents<Q>.Upcast
+    {
+      get { return this; }
+    }
+
+    public IReadonlyGraphStrongComponents<Q> Upcast
+    {
+      get { return this; }
+    }
+
+    public IStrongComponentInfo Find(T node)
+    {
+      var c = myComponents.Find(node);
+      if (c == null || !mySubset.Contains(c)) return null;
+      return c;
+    }
+
+    public IReadonlyGraph<Q, T> UnderlyingGraph
+    {
+      get { return myComponents.UnderlyingGraph; }
+    }
+
+    public IReadonlyGraphStrongComponentsAccessor<Q, T> Accessor(IEnumerable<IStrongComponentInfo> components)
+    {
+      return myComponents.Accessor(components.Where(mySubset.Contains).ToArray());
     }
 
     public IEnumerable<IStrongComponentInfo> Components
@@ -37,55 +71,19 @@ namespace DSIS.Graph
       get { return mySubset.Count; }
     }
 
-    public void DoGeneric(IGraphStrongComponentsWith with)
+    public ICellCoordinateSystem<Q> CoordinateSystem
+    {
+      get { return myComponents.Upcast.CoordinateSystem; }
+    }
+
+    public void DoGeneric(IReadonlyGraphStrongComponentsWith with)
     {
       with.With(this);
     }
 
-    public ICellCoordinateSystem<Q> CoordinateSystem
+    ICellCoordinateSystem IReadonlyGraphStrongComponents.CoordinateSystem
     {
-      get { return myComponents.CoordinateSystem; }
-    }
-
-    private void AssertComponent(IStrongComponentInfo info)
-    {
-      if (!mySubset.Contains(info))
-        throw new ArgumentException(string.Format("Component {0} is not contained in StrongComponentsSubset", info));
-    }
-
-    private void AssertComponent(IEnumerable<IStrongComponentInfo> info)
-    {
-      info.ForEach(AssertComponent);
-    }
-
-    public IEnumerable<INode<Q>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
-    {
-      AssertComponent(componentIds);
-      return myComponents.GetNodes(componentIds);
-    }
-
-    public IEnumerable<INode<Q>> GetEdgesWithFilteredEdges(INode<Q> node, IEnumerable<IStrongComponentInfo> componentIds)
-    {
-      AssertComponent(componentIds);
-      return myComponents.GetEdgesWithFilteredEdges(node, componentIds);
-    }
-
-    public ICellCoordinateCollection<Q> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
-    {
-      AssertComponent(components);
-      return myComponents.GetCoordinates(components);
-    }
-
-    public IStrongComponentInfo GetNodeComponent(INode<Q> node)
-    {
-      return myComponents.GetNodeComponent(node);
-    }
-
-    public IGraph<Q> AsGraph(IEnumerable<IStrongComponentInfo> components)
-    {
-      if (mySubset.ContainsAny(components)) 
-        return myComponents.AsGraph(components);
-      return null;
+      get { return CoordinateSystem; }
     }
   }
 }

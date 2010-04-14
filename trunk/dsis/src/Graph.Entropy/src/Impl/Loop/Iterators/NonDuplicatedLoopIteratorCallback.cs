@@ -4,25 +4,26 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
-  public class NonDuplicatedLoopIteratorCallback<T,C> : ILoopIteratorCallback<T> 
+  public class NonDuplicatedLoopIteratorCallback<T,N,C> : ILoopIteratorCallback<T, N> 
     where T : ICellCoordinate
-    where C : ILoopIteratorCallback<T>
+    where C : ILoopIteratorCallback<T,N>
+    where N : class, INode<T>
   {
     private static readonly IEqualityComparer<INode<T>> COMPARER =
       EqualityComparerFactory<INode<T>>.GetReferenceComparer();
 
     private readonly C myCallback;
-    private readonly Hashset<LoopData> myFoundLoops = new Hashset<LoopData>(LoopDataComparer.INSTANCE);
+    private readonly HashSet<LoopData> myFoundLoops = new HashSet<LoopData>(LoopDataComparer.INSTANCE);
 
     public NonDuplicatedLoopIteratorCallback(C callback)
     {
       myCallback = callback;
     }
 
-    public void OnLoopFound(IEnumerable<INode<T>> loop, int length)
+    public void OnLoopFound(IEnumerable<N> loop, int length)
     {
       var data = new LoopData(loop);
-      if (myFoundLoops.AddIfNotReplace(ref data))
+      if (myFoundLoops.Add(data))
       {
         myCallback.OnLoopFound(loop, length);
       }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Path;
 using DSIS.Scheme.Ctx;
@@ -15,7 +14,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
-      IGraphStrongComponents<Q> comps = Keys.GetGraphComponents<Q>().Get(input);
+      var comps = Keys.GetGraphComponents<Q>().Get(input);
 
       var path = new PathBuilder<Q>(comps);
       path.BuildPath();

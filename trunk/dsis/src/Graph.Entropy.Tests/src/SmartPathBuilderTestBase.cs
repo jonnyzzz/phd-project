@@ -12,11 +12,10 @@ namespace DSIS.Graph.Entropy.Tests
   public class SmartPathBuilderTestBase : EntropyBlackboxTest
   {
     protected override Pair<IGraphMeasure<IntegerCoordinate>, IEdgeInfo> CreateEvaluator(string script,
-                                                                                         TarjanGraph<IntegerCoordinate>
-                                                                                           gr,
-                                                                                         IGraphStrongComponents
-                                                                                           <IntegerCoordinate> comps)
-    {
+                                                                                         TarjanGraph<IntegerCoordinate> gr,
+                                                                                         IReadonlyGraphStrongComponents<IntegerCoordinate> comps
+      )
+  {
       var bld = new PathBuilder(comps);
       bld.BuildPath();
 
@@ -25,7 +24,7 @@ namespace DSIS.Graph.Entropy.Tests
 
     private class PathBuilder : SmartPathBuilder<IntegerCoordinate>, IEdgeInfo
     {
-      public PathBuilder(IGraphStrongComponents<IntegerCoordinate> comps)
+      public PathBuilder(IReadonlyGraphStrongComponents<IntegerCoordinate> comps)
         : base(comps)
       {
       }

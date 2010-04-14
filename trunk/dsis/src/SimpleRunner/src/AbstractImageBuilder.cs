@@ -36,7 +36,7 @@ namespace DSIS.SimpleRunner
     protected abstract bool PerformStep(ICellProcessorContext<Q, Q> ctx, AbstractImageBuilderContext<Q> cx,
                                         long stepCount);
 
-    protected virtual IEnumerable<IStrongComponentInfo> FilterStrongComponents(IGraphStrongComponents<Q> info,
+    protected virtual IEnumerable<IStrongComponentInfo> FilterStrongComponents(IReadonlyGraphStrongComponents<Q> info,
                                                                                IGraph<Q> graph, T system,
                                                                                AbstractImageBuilderContext<Q> cx)
     {
@@ -183,7 +183,7 @@ namespace DSIS.SimpleRunner
 
       ICellProcessor<Q, Q> proc = CreateCellConstructionProcess();
 
-      IGraphStrongComponents<Q> comps = null;
+      IReadonlyGraphStrongComponents<Q> comps = null;
 
       IGraph<Q> prevGraph = graph;
       while (PerformStep(ctx, cx, stepCount))
@@ -210,7 +210,7 @@ namespace DSIS.SimpleRunner
         graph = new TarjanGraph<Q>(ctx.Converter.ToSystem);
         conv = ctx.Converter.ToSystem.Subdivide(subdivide = GetSubdivide(stepCount));
 
-        ctx = ctx.CreateNextContext(comps.GetCoordinates(new List<IStrongComponentInfo>(componentsId)), conv, new GraphCellImageBuilder<Q>(graph));
+        ctx = ctx.CreateNextContext(comps.Accessor(componentsId.ToArray()).GetCoordinates(), conv, new GraphCellImageBuilder<Q>(graph));
       }
 
       OnComputationFinished(comps, prevGraph, (T)prevGraph.CoordinateSystem, cx);
@@ -242,19 +242,19 @@ namespace DSIS.SimpleRunner
       Fire(listener => listener.GraphConstructedC(graph, system, cx));
     }
 
-    protected virtual void OnGraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    protected virtual void OnGraphComponentsConstructed(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                                         AbstractImageBuilderContext<Q> cx)
     {
       Fire(listener => listener.GraphComponentsConstructedC(comps, graph, system, cx));
     }
 
-    protected virtual void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    protected virtual void OnStepFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                           AbstractImageBuilderContext<Q> cx)
     {
       Fire(listener => listener.OnStepFinishedC(comps, graph, system, cx));
     }
 
-    protected virtual void OnComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    protected virtual void OnComputationFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                                  AbstractImageBuilderContext<Q> cx)
     {
       Fire(listener => listener.ComputationFinishedC(comps, graph, system, cx));

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
@@ -15,13 +14,15 @@ namespace DSIS.Graph.Entropy.Tests
     protected override Pair<IGraphMeasure<IntegerCoordinate>, IEdgeInfo> CreateEvaluator(
       string script,
       TarjanGraph<IntegerCoordinate> gr,
-      IGraphStrongComponents<IntegerCoordinate> comps
+      IReadonlyGraphStrongComponents<IntegerCoordinate> comps
       )
     {
       var ent = new StrangeEntropyEvaluator<IntegerCoordinate>();
-      var @params = new StrangeEntropyEvaluatorParams(StrangeEvaluatorType.WeightSearch_1, StrangeEvaluatorStrategy.FIRST,
-                                                                                EntropyLoopWeights.CONST);
-      var measure = (GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>>) ent.Measure(gr, comps,@params);
+      var @params = new StrangeEntropyEvaluatorParams(StrangeEvaluatorType.WeightSearch_1,
+                                                      StrangeEvaluatorStrategy.FIRST,
+                                                      EntropyLoopWeights.CONST);
+
+      var measure = (GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>>) ent.Measure(gr, comps, @params);
 
       IGraphMeasure<IntegerCoordinate> m = measure;
       IEdgeInfo b = new EdgeInfoImpl(measure);

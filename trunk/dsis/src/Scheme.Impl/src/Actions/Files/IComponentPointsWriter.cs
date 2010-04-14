@@ -7,7 +7,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 {
   public interface IComponentPointsWriter
   {
-    IEnumerable<IGnuplotPointsFile> WriteComponents<T, Q>(T system, IGraphStrongComponents<Q> comps)
+    IEnumerable<IGnuplotPointsFile> WriteComponents<T, Q>(T system, IReadonlyGraphStrongComponents<Q> comps)
       where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate;
   }

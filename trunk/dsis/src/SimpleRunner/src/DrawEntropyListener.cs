@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Util;
@@ -15,7 +16,7 @@ namespace DSIS.SimpleRunner
   {
     private int myStepNumber;
     private readonly Dictionary<string, DrawBase> myDrawers = new Dictionary<string, DrawBase>();
-    private readonly Hashset<string> myWorking = new Hashset<string>();
+    private readonly HashSet<string> myWorking = new HashSet<string>();
 
     private readonly string mySuffix;
     private int myEntropyStep;
@@ -27,13 +28,7 @@ namespace DSIS.SimpleRunner
 
     public IEnumerable<Pair<string, Action<string>>> FormatPath
     {
-      get
-      {
-        foreach (KeyValuePair<string, DrawBase> pair in myDrawers)
-        {
-          yield return pair.Value.FormatPath;
-        }
-      }
+      get {return myDrawers.Select(pair => pair.Value.FormatPath); }
     }
 
     public void ComputationTitle(string title)
@@ -61,7 +56,7 @@ namespace DSIS.SimpleRunner
 
       if (AreAllEqual(system.Subdivision))
       {
-        myWorking.AddRange(myDrawers.Keys);
+        myWorking.UnionWith(myDrawers.Keys);
       }
       else
       {
@@ -88,7 +83,7 @@ namespace DSIS.SimpleRunner
       return true;
     }
 
-    public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void ComputationFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                              AbstractImageBuilderContext<Q> cx)
     {
       foreach (KeyValuePair<string, DrawBase> pair in myDrawers)
@@ -97,7 +92,7 @@ namespace DSIS.SimpleRunner
         string image = pair.Value.DrawImage(key);
         
         if (image != null)
-          FireListeners(delegate(IDrawEntropyImageListener obj) { obj.EntropyImageAdded(key, image); });
+          FireListeners(obj => obj.EntropyImageAdded(key, image));
       }
     }
 
@@ -123,7 +118,7 @@ namespace DSIS.SimpleRunner
         {
           if (myWorking.Contains(pair.Key))
           {
-            DrawEntropyWithSpaceBase<Q> sp = pair.Value as DrawEntropyWithSpaceBase<Q>;
+            var sp = pair.Value as DrawEntropyWithSpaceBase<Q>;
             if (sp != null)
               sp.SetMeasure(system, measure, value);
           }

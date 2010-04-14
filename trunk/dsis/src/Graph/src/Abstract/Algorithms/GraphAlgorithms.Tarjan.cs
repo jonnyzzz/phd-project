@@ -7,7 +7,7 @@ namespace DSIS.Graph.Abstract.Algorithms
 {
   public static partial class GraphAlgorithms
   {
-    public static IGraphStrongComponents<TCell> ComputeStrongComponents<TCell>(this IReadonlyGraph<TCell> graph, IProgressInfo info) 
+    public static IReadonlyGraphStrongComponents<TCell> ComputeStrongComponents<TCell>(this IReadonlyGraph<TCell> graph, IProgressInfo info) 
       where TCell : ICellCoordinate
     {
       var wg = new WithGraph<TCell> {Info = info};
@@ -18,59 +18,23 @@ namespace DSIS.Graph.Abstract.Algorithms
     private class WithGraph<TCell> : IReadonlyGraphWith<TCell> 
       where TCell : ICellCoordinate
     {
-      public IGraphStrongComponents<TCell> Componentes { get; private set; }
-      public IProgressInfo Info { get; set; }
+      public IReadonlyGraphStrongComponents<TCell> Componentes { get; private set; }
+      public IProgressInfo Info { private get; set; }
 
       public void With<TNode>(IReadonlyGraph<TCell, TNode> graph) where TNode : class, INode<TCell>
       {
-        Componentes = graph.ComputeStrongComponents(Info);
+        Componentes = ComputeStrongComponentsImpl(graph, Info);
       }
     }
 
-    private class NodeAndData<TNode,TCell> : IEquatable<NodeAndData<TNode, TCell>> where TNode : class, INode<TCell>
-                                                                                   where TCell : ICellCoordinate
+    public static IReadonlyGraphStrongComponents<TCell, TNode> ComputeStrongComponents<TCell, TNode>(this IReadonlyGraph<TCell, TNode> graph, IProgressInfo info)
+      where TNode : class, INode<TCell>
+      where TCell : ICellCoordinate
     {
-      public readonly TNode Node;
-      public readonly TarjanNodeData<TCell, TNode> Data;
-
-      public NodeAndData(TNode node, IGraphDataHolder<TarjanNodeData<TCell, TNode>, TNode> holder)
-      {
-        Node = node;
-        Data = holder.GetData(node);
-      }
-
-      public bool Equals(NodeAndData<TNode, TCell> obj)
-      {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        return obj.Node == Node;
-      }
-
-      public override bool Equals(object obj)
-      {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != typeof (NodeAndData<TNode, TCell>)) return false;
-        return Equals((NodeAndData<TNode, TCell>) obj);
-      }
-
-      public override int GetHashCode()
-      {
-        return (Node != null ? Node.GetHashCode() : 0);
-      }
-
-      public static bool operator ==(NodeAndData<TNode, TCell> left, NodeAndData<TNode, TCell> right)
-      {
-        return Equals(left, right);
-      }
-
-      public static bool operator !=(NodeAndData<TNode, TCell> left, NodeAndData<TNode, TCell> right)
-      {
-        return !Equals(left, right);
-      }
+      return ComputeStrongComponentsImpl(graph, info);
     }
 
-    public static IGraphStrongComponents<TCell> ComputeStrongComponents<TCell, TNode>(this IReadonlyGraph<TCell, TNode> graph, IProgressInfo info)
+    private static TarjanStrongComponentImpl<TCell, TNode> ComputeStrongComponentsImpl<TCell, TNode>(IReadonlyGraph<TCell, TNode> graph, IProgressInfo info)
       where TNode : class, INode<TCell>
       where TCell : ICellCoordinate
     {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Xsl;
 using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Loop.Strange;
@@ -56,7 +57,7 @@ namespace DSIS.SimpleRunner
 
     private void AddListener(ComputeEntropyListenerBase<T, Q> listener, string suffix)
     {
-      DrawEntropyListener<T,Q> l = new DrawEntropyListener<T, Q>(suffix);
+      var l = new DrawEntropyListener<T, Q>(suffix);
       listener.AddListener(l);
       myFake.AddListener(l);
       /*
@@ -71,7 +72,7 @@ namespace DSIS.SimpleRunner
     {
       foreach (string file in xslFiles)
       {
-        XslCompiledTransform transform = new XslCompiledTransform(false);
+        var transform = new XslCompiledTransform(false);
         transform.Load(file);
         transform.Transform(myXmlFile, myXmlFile + Path.GetFileNameWithoutExtension(file) + ".html");
       }
@@ -83,16 +84,7 @@ namespace DSIS.SimpleRunner
       
       IEnumerable<Pair<string, Action<string>>> IComputationPathListener.FormatPath
       {
-        get
-        {
-          foreach (IComputationPathListener listener in myListeners)
-          {
-            foreach (Pair<string, Action<string>> pair in listener.FormatPath)
-            {
-              yield return pair;
-            }
-          }
-        }
+        get { return myListeners.Cast<IComputationPathListener>().SelectMany(listener => listener.FormatPath); }
       }
 
       void IComputationPathListener.ComputationTitle(string title)
@@ -111,8 +103,7 @@ namespace DSIS.SimpleRunner
 
       public override VoidDelegate ComputationStartedC(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric)
       {
-        List<VoidDelegate> ds = new List<VoidDelegate>();
-        ds.Add(base.ComputationStartedC(system, cx, isUnsimmetric));
+        var ds = new List<VoidDelegate> {base.ComputationStartedC(system, cx, isUnsimmetric)};
         foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
         {
           ds.Add(listener.ComputationStartedC(system, cx, isUnsimmetric));
@@ -131,11 +122,10 @@ namespace DSIS.SimpleRunner
                  };
       }
 
-      public override VoidDelegate ComputationFinishedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+      public override VoidDelegate ComputationFinishedC(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                                         AbstractImageBuilderContext<Q> cx)
       {
-        List<VoidDelegate> ds = new List<VoidDelegate>();
-        ds.Add(base.ComputationFinishedC(comps, graph, system, cx));
+        var ds = new List<VoidDelegate> {base.ComputationFinishedC(comps, graph, system, cx)};
         foreach (IAbstractImageBuilderListener<T, Q> listener in myListeners)
         {
           ds.Add(listener.ComputationFinishedC(comps, graph, system, cx));

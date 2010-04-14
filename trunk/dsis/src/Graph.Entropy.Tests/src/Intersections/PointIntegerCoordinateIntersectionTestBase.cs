@@ -22,7 +22,7 @@ namespace DSIS.Graph.Entropy.Tests.Intersections
     protected override Pair<IGraphMeasure<IntegerCoordinate>, IEdgeInfo> CreateEvaluator(
       string script,
       TarjanGraph<IntegerCoordinate> gr,
-      IGraphStrongComponents<IntegerCoordinate> comps)
+      IReadonlyGraphStrongComponents<IntegerCoordinate> comps)
     {
       var ms = new Measure(myType, gr);
       GraphMeasure<IntegerCoordinate, NodePair<IntegerCoordinate>> start = ms.Start();
