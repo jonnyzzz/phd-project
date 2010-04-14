@@ -1,0 +1,1 @@
+﻿* Allow to reference graph as node in another graph

@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Graphs xmlns="urn:shemas-dsis-org:computation-graph-scheme-xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <Graph Id="imageBuilderPoint">
+    <Nodes>
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultPointMethodSettings"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->  
+  <Graph Id="imageBuilderPointEx">
+    <Nodes>
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultPointExMethodSettings"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->  
+  <Graph Id="imageBuilderBoxAdaptive">
+    <Nodes>
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxAdaptiveMethodSettings"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->
+  <Graph Id="imageBuilderAdaptive">
+    <Nodes>
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultAdaptiveMethodSettings"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->
+  <Graph Id="imageBuilderBox">
+    <Nodes>
+      <Node Id="method" Class="DSIS.Scheme.Impl.Actions.DefaultBoxMethodSettings"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="method"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->
+  <Graph Id="workingFolder">
+    <Nodes>
+      <Node Id="wf" Class="DSIS.Scheme.Impl.Actions.Files.FlatWorkingFolder"/>
+      <Node Id="wf_dwf" Class="DSIS.Scheme.Impl.Actions.Files.DateWorkingFolderAction"/>
+      <Node Id="swf" Class="DSIS.Scheme.Impl.Actions.Files.SystemWorkingFolderAction"/>
+      <Node Id="si_wf" Class="DSIS.Scheme.Impl.Actions.Files.SIMethodPrefixWorkingFolderAction"/>
+      <Node Id="dwf" Class="DSIS.Scheme.Impl.Actions.Files.DateWorkingFolderAction"/>
+      <Node Id="st_wf" Class="DSIS.Scheme.Impl.Actions.Files.IterationStepsPrefixWorkingFolderAction"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="swf"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="si_wf"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="st_wf"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="wf"/>        
+        <Nodes node-ref="si_wf"/>
+        <Nodes node-ref="swf"/>
+        <Nodes node-ref="st_wf"/>
+        <Nodes node-ref="dwf"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--______________________________________________________________-->
+  <Graph Id="init_generated">
+    <Nodes>
+      <Node Id="cs" Class="DSIS.Scheme.Impl.Actions.CreateCoordinateSystemAction" />      
+      <Node Id="subdivision" Class="DSIS.Scheme.Impl.Actions.CreateInitialCellsAction"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="cs"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="cs"/>
+        <Nodes node-ref="subdivision"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <Graph Id="init_implemented">
+    <Nodes>
+      <Node Id="cs" Class="DSIS.Scheme.Impl.Actions.CreateRealCoordinateSystemAction" />            
+      <Node Id="subdivision" Class="DSIS.Scheme.Impl.Actions.CreateInitialCellsAction"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="cs"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="cs"/>
+        <Nodes node-ref="subdivision"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--_________________________________________________________-->
+  <Graph Id="build">
+    <Nodes>
+      <Node Id="Build" Class="DSIS.Scheme.Impl.Actions.BuildSymbolicImageAction"/>
+      <Node Id="Tarjan" Class="DSIS.Scheme.Impl.Actions.ChainRecurrenctSimbolicImageAction"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="Build"/>
+        <Nodes node-ref="Tarjan"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+      <Link>
+        <Nodes node-ref="Build"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <!--_________________________________________________________-->
+  <Graph Id="dumpGraph">
+    <Nodes>
+      <Node Id="dumpGraphInfo" Class="DSIS.Scheme.Impl.Actions.Console.DumpGraphInfoAction" />
+      <Node Id="dumpComponentsInfo" Class="DSIS.Scheme.Impl.Actions.Console.DumpGraphComponentsInfoAction" />
+      <Node Id="dumpMethodInfo" Class="DSIS.Scheme.Impl.Actions.Console.DumpMethodAction" />
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="dumpGraphInfo"/>
+        <Nodes node-ref="#output"/>
+      </Link>      
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="dumpComponentsInfo"/>
+        <Nodes node-ref="#output"/>
+      </Link>      
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="dumpMethodInfo"/>
+        <Nodes node-ref="#output"/>
+      </Link>      
+    </Links>
+  </Graph>
+  <!--__________________________________________________________-->
+  <Graph Id="drawGraph">
+    <Nodes>
+      <Node Id="draw" Class="DSIS.Scheme.Impl.Actions.Files.DrawChainRecurrentAction"/>
+    </Nodes>
+    <Links>
+      <Link>
+        <Nodes node-ref="#input"/>
+        <Nodes node-ref="draw"/>
+        <Nodes node-ref="#output"/>
+      </Link>
+    </Links>
+  </Graph>
+  <IncludeAssemblies>
+    <Assembly>DSIS.Scheme.Impl</Assembly>
+  </IncludeAssemblies>
+</Graphs>

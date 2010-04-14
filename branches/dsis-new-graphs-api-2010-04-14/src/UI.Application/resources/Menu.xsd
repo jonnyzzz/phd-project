@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Menu"
+    targetNamespace="http://tempuri.org/Menu.xsd"
+    elementFormDefault="qualified"
+    xmlns="urn:shemas-dsis-org:ui-menu"
+    xmlns:mstns="urn:shemas-dsis-org:ui-menu"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:complexType name="MainMenu">
+    
+  </xs:complexType>
+
+  <xs:complexType name="MainMenuAction">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Action" type="MainMenuAction"/>
+        <xs:element name="Separator" type="MainMenuSeparator"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
