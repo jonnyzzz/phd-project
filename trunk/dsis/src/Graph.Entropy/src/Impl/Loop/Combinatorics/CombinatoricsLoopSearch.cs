@@ -1,24 +1,65 @@
 ﻿using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
+using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Combinatorics
 {
   //todo: can be easyly parallelized
-  public class CombinatoricsLoopSearch<T,N> : ILoopIterator
+  public class CombinatoricsLoopSearch<T> : ILoopIterator
     where T : ICellCoordinate
-    where N : class, INode<T>
   {
-    private readonly IEqualityComparer<N> COMPARER;
+    private readonly int myQueueLength;
+    private readonly ILoopIteratorCallback<T> myCallback;
+    private readonly IGraph<T> myGraph;
+
+    public CombinatoricsLoopSearch(ILoopIteratorCallback<T> callback, IGraph<T> graph, int queueLength)
+    {
+      myCallback = callback;
+      myGraph = graph;
+      myQueueLength = queueLength;
+
+    }
+
+    public void WidthSearch()
+    {
+      myGraph.DoGeneric(new With2(myQueueLength, myCallback));      
+    }
+
+    private class With2 : IGraphWith<T>
+    {
+      private readonly int myQueueLength;
+      private readonly ILoopIteratorCallback<T> myCallback;
+
+      public With2(int queueLength, ILoopIteratorCallback<T> callback)
+      {
+        myQueueLength = queueLength;
+        myCallback = callback;
+      }
+
+      public void With<TNode>(IGraph<T, TNode> graph) 
+        where TNode : Node<TNode, T>
+      {
+        new CombinatoricsLoopSearch<T, TNode>(myCallback, graph, myQueueLength).WidthSearch();
+      }
+    }
+  }
+
+
+  public class CombinatoricsLoopSearch<T, N> : ILoopIterator
+    where T : ICellCoordinate
+    where N : Node<N, T>
+  {
+    private static readonly IEqualityComparer<INode<T>> COMPARER = EqualityComparerFactory<INode<T>>.GetReferenceComparer();
     
-    private readonly ILoopIteratorCallback<T,N> myCallback;
-    private readonly IReadonlyGraph<T, N> myGraph;
+    private readonly ILoopIteratorCallback<T> myCallback;
+    private readonly IGraph<T, N> myGraph;
     private readonly Queue<SearchNode> myNodes;
     private int myQueueLength;
     
-    public CombinatoricsLoopSearch(ILoopIteratorCallback<T,N> callback, IReadonlyGraph<T,N> graph, int queueLength)
+    public CombinatoricsLoopSearch(ILoopIteratorCallback<T> callback, IGraph<T,N> graph, int queueLength)
     {
-      COMPARER = graph.Comparer;
       myCallback = callback;
       myQueueLength = queueLength;
       myGraph = graph;
@@ -68,11 +109,11 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Combinatorics
       }
 
       //todo: To slow!
-      public bool Contains(N node, IEqualityComparer<N> cmp)
+      public bool Contains(N node)
       {
         for(var it = Last;it != null; it = it.Parent)
         {
-          if (cmp.Equals(node, it.FinishNode))
+          if (COMPARER.Equals(node, it.FinishNode))
             return true;
         }
         return false;
@@ -81,7 +122,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Combinatorics
 
     private void OnLoopFound(SearchItem item)
     {
-      var nodes = new List<N>();
+      var nodes = new List<INode<T>>();
       for(; item != null; item = item.Parent)
       {
         nodes.Add(item.FinishNode);
@@ -104,7 +145,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop.Combinatorics
           OnLoopFound(node.Last);
         } else
         {
-          if (myQueueLength-- > 0 && !node.Contains(edge, COMPARER) && lastValue < holder.GetData(edge))
+          if (myQueueLength-- > 0 && !node.Contains(edge) && lastValue < holder.GetData(edge))
           {
             myNodes.Enqueue(node.Next(edge));
           }

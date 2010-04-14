@@ -1,24 +1,26 @@
-using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Loop.Search;
+using System.Linq;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
-  public class LoopIteratorFirst<T,N> : LoopIteratorBase<T,N>
+  public class LoopIteratorFirst<T> : LoopIteratorBase<T>
     where T : ICellCoordinate
-    where N : class, INode<T>
   {
-    private readonly IGraphWeightSearch<T,N> mySearcher;
+    private readonly IGraphWeightSearch<T> mySearcher;
 
-    public LoopIteratorFirst(ILoopIteratorCallback<T,N> callback, IReadonlyGraphStrongComponents<T,N> components,
-                             IStrongComponentInfo component, IGraphWeightSearch<T,N> searcher) : base(callback, components, component)
+    public LoopIteratorFirst(ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components,
+                             IStrongComponentInfo component, IGraphWeightSearch<T> searcher) : base(callback, components, component)
     {
       mySearcher = searcher;
     }
 
     public override sealed void WidthSearch()
     {
-      N first = myAccessor.GetNodes().First();
+      if (myComponent == null)
+        return;
+
+      INode<T> first = myComponents.GetNodes(new[] {myComponent}).First();
       if (first == null)
         return;
 

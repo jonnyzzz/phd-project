@@ -6,21 +6,19 @@ using DSIS.Graph.Entropy.Impl.Loop.Weight;
 namespace DSIS.Graph.Entropy.Impl.Loop.Strange
 {
   [Obsolete]
-  internal class StrangeEntropyAllEdgesLoopsEvaluatorImpl<T, N> : EntropyEvaluatorLoopBase<T, N>
+  internal class StrangeEntropyAllEdgesLoopsEvaluatorImpl<T> : EntropyEvaluatorLoopBase<T>
     where T : ICellCoordinate
-    where N : class, INode<T>
   {
     public StrangeEntropyAllEdgesLoopsEvaluatorImpl(IEntropyLoopWeightCallback loopCallback) : base(loopCallback)
     {
     }
 
 
-    protected override ILoopIterator CreateIterator(ILoopIteratorCallback<T,N> callback,
-                                                       IReadonlyGraphStrongComponents<T,N> comps, 
-      IReadonlyGraph<T,N> graph,
+    protected override ILoopIterator CreateIterator(ILoopIteratorCallback<T> callback,
+                                                       IGraphStrongComponents<T> comps, IGraph<T> graph,
                                                        IStrongComponentInfo info)
     {
-      return new AllEngesOnALoopGraphSearch<T,N>(callback, comps, info);
+      return new AllEngesOnALoopGraphSearch<T>(callback, comps, info);
     }
   }
 }

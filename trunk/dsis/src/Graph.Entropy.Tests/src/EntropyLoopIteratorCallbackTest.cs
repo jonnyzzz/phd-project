@@ -171,20 +171,20 @@ namespace DSIS.Graph.Entropy
     private class Controller : Listener, IEntropyEvaluatorController<IntegerCoordinate>
     {
       private readonly IGraph<IntegerCoordinate> myGraph;
-      private readonly IReadonlyGraphStrongComponents<IntegerCoordinate> myComponents;
+      private readonly IGraphStrongComponents<IntegerCoordinate> myComponents;
 
-      public Controller(IGraph<IntegerCoordinate> graph, IReadonlyGraphStrongComponents<IntegerCoordinate> components)
+      public Controller(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components)
       {
         myGraph = graph;
         myComponents = components;
       }
 
-      public IReadonlyGraph<IntegerCoordinate> Graph
+      public IGraph<IntegerCoordinate> Graph
       {
         get { return myGraph; }
       }
 
-      public IReadonlyGraphStrongComponents<IntegerCoordinate> Components
+      public IGraphStrongComponents<IntegerCoordinate> Components
       {
         get { return myComponents; }
       }
@@ -202,13 +202,13 @@ namespace DSIS.Graph.Entropy
     
     protected static void DoTest2(IEnumerable<List<int>> loops, params Pair<double, List<AssertData>>[] expected)
     {
-      var cb = DoTest(loops);
+      EntropyBackStepGraphWeightCallback<IntegerCoordinate> cb = DoTest(loops);
       double norm = -1;
       for (int i = 0; i < expected.Length; i++)
       {
         Pair<double, List<AssertData>> pair = expected[i];
         
-        var entropy = cb.Entropy();        
+        IGraphMeasure<IntegerCoordinate> entropy = cb.Entropy();        
         double ent = entropy.GetEntropy();
 
         if (i == 0)
@@ -289,7 +289,7 @@ namespace DSIS.Graph.Entropy
 
     protected static void AssertResult(EntropyGraphWeightCallback<IntegerCoordinate> cb, List<AssertData> expected)
     {
-      var weights = new List<AssertData>();
+      List<AssertData> weights = new List<AssertData>();
       foreach (KeyValuePair<NodePair<IntegerCoordinate>, double> pair in cb.M)
       {
         weights.Add(d(pair.Key.From.GetCoordinate(0), pair.Key.To.GetCoordinate(0), pair.Value));
@@ -319,7 +319,7 @@ namespace DSIS.Graph.Entropy
 
     protected static double ComputeEntropy(IEnumerable<AssertData> data, double div)
     {
-      var nodeW = new Dictionary<long, double>();
+      Dictionary<long, double> nodeW = new Dictionary<long, double>();
 
       double e1 = 0;
       foreach (AssertData assertData in data)

@@ -28,7 +28,6 @@
     <Compile Include="src\Abstract\Algorithms\GraphAlgorithms.cs" />
     <Compile Include="src\Abstract\Algorithms\GraphAlgorithms.Dump.cs" />
     <Compile Include="src\Abstract\Algorithms\GraphAlgorithms.Tarjan.cs" />
-    <Compile Include="src\Abstract\Algorithms\NodeAndData.cs" />
     <Compile Include="src\Abstract\ComponentsFilter.cs">
       <SubType>Code</SubType>
     </Compile>

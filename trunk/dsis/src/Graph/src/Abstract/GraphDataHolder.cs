@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
@@ -11,11 +9,11 @@ namespace DSIS.Graph.Abstract
     where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>
   {
     private readonly AbstractGraph<TInh, TCell, TNode> myGraph;
-    private readonly Func<TNode, TData> myDefaultFactory;
+    private readonly Converter<TNode, TData> myDefaultFactory;
 
     private readonly string myCreationStacktrace;
 
-    public GraphDataHolder(AbstractGraph<TInh, TCell, TNode> graph, Func<TNode, TData> defaultFactory)
+    public GraphDataHolder(AbstractGraph<TInh, TCell, TNode> graph, Converter<TNode, TData> defaultFactory)
     {
       myGraph = graph;
       myDefaultFactory = defaultFactory;
@@ -46,12 +44,7 @@ namespace DSIS.Graph.Abstract
       return node.UserData is TData;
     }
 
-    public IEnumerable<TData> Values
-    {
-      get { return myGraph.NodesInternal.Where(HasData).Select(GetData); }
-    }
-
-    private void CleanAll()
+    public void CleanAll()
     {
       foreach (var node in myGraph.NodesInternal)
       {

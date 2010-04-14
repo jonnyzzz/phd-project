@@ -44,6 +44,7 @@
     <Compile Include="src\CurveBuilderData.cs" />
     <Compile Include="src\DrawBase.cs" />
     <Compile Include="src\DrawEntropyBase.cs" />
+    <Compile Include="src\DrawEntropyDivCurveListener.cs" />
     <Compile Include="src\DrawEntropyListener.cs" />
     <Compile Include="src\DrawEntropyWithSpace.cs" />
     <Compile Include="src\DrawEntropyWithSpace3d.cs" />

@@ -2,7 +2,6 @@ using System;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
 using DSIS.Graph.Entropy.Impl.Entropy;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl
 {
@@ -28,11 +27,21 @@ namespace DSIS.Graph.Entropy.Impl
         controller.SetCoordinateSystem(system);
         measure.ComputeEntropy(controller);        
       
-        project = system.Project(2L.Fill(dim));
+        project = system.Project(FillArray(2, dim));
         if (project == null)
           return;
         system = project.ToSystem;        
       }
+    }
+
+    protected static long[] FillArray(long l, long dim)
+    {
+      long[] result = new long[dim];
+      for (int i = 0; i < dim; i++)
+      {
+        result[i] = l;
+      }
+      return result;
     }
   }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DSIS.Core.Util;
+using DSIS.Graph.Abstract;
+using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Tarjan;
@@ -29,7 +31,7 @@ namespace DSIS.Graph.Entropy.Tests
     {
       TarjanGraph<IntegerCoordinate> graph = DoBuildGraph(bg);
 
-      var components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
+      IGraphStrongComponents<IntegerCoordinate> components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
 
       Assert.IsTrue(components.ComponentCount > 0, "There is no components");
 
@@ -87,7 +89,7 @@ namespace DSIS.Graph.Entropy.Tests
 
 
     protected abstract ILoopIterator CreateLoopIterator(TarjanGraph<IntegerCoordinate> graph,
-                                                                           IReadonlyGraphStrongComponents<IntegerCoordinate>
+                                                                           IGraphStrongComponents<IntegerCoordinate>
                                                                              components,
                                                                            ILoopIteratorCallback<IntegerCoordinate> mcb,
                                                                            IStrongComponentInfo firstComponent);

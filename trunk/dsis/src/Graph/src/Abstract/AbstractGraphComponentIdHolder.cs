@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using DSIS.Core.Coordinates;
+﻿using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Abstract
 {
-  public class AbstractGraphComponentIdHolder<TInh, TNode, TCell> : IGraphDataHolder<uint, TNode> 
-    where TNode : Node<TNode, TCell> 
-    where TCell : ICellCoordinate
-    where TInh : AbstractGraph<TInh, TCell, TNode>, IGraphExtension<TNode, TCell>
+  public class AbstractGraphComponentIdHolder<TNode, TCell> : IGraphDataHolder<uint, TNode> where TNode : Node<TNode, TCell> where TCell : ICellCoordinate
   {
-    private readonly AbstractGraph<TInh, TCell, TNode> myGraph;
-
-    public AbstractGraphComponentIdHolder(AbstractGraph<TInh, TCell, TNode> graph)
-    {
-      myGraph = graph;
-    }
-
     public void Dispose()
     {
       //NOP
@@ -35,11 +22,6 @@ namespace DSIS.Graph.Abstract
     public bool HasData(TNode node)
     {
       return true;
-    }
-
-    public IEnumerable<uint> Values
-    {
-      get { return myGraph.NodesInternal.Select(GetData); }
     }
 
     public void CleanAll()

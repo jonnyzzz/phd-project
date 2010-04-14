@@ -1,19 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
 namespace DSIS.Graph
 {
-  public class GraphStrongComponentsSubset<Q, T> : IReadonlyGraphStrongComponents<Q, T>, IReadonlyGraphStrongComponents<Q>, IReadonlyGraphStrongComponents
+  public class GraphStrongComponentsSubset<Q> : IGraphStrongComponents<Q>
     where Q : ICellCoordinate
-    where T : class, INode<Q>
   {
-    private readonly IReadonlyGraphStrongComponents<Q,T> myComponents;
+    private readonly IGraphStrongComponents<Q> myComponents;
     private readonly HashSet<IStrongComponentInfo> mySubset;
 
-    public GraphStrongComponentsSubset(IReadonlyGraphStrongComponents<Q,T> components, IEnumerable<IStrongComponentInfo> subset)
+    public GraphStrongComponentsSubset(IGraphStrongComponents<Q> components, IEnumerable<IStrongComponentInfo> subset)
     {
       myComponents = components;
       mySubset = new HashSet<IStrongComponentInfo>(subset);
@@ -24,41 +22,9 @@ namespace DSIS.Graph
       }
     }
 
-    IReadonlyGraphStrongComponentsAccessor<Q> IReadonlyGraphStrongComponents<Q>.Accessor(IEnumerable<IStrongComponentInfo> components)
+    ICellCoordinateSystem IGraphStrongComponents.CoordinateSystem
     {
-      return Accessor(components);
-    }
-
-    public void DoGeneric(IReadonlyGraphStrongComponentsWith<Q> with)
-    {
-      with.With(this);
-    }
-
-    IReadonlyGraphStrongComponents IReadonlyGraphStrongComponents<Q>.Upcast
-    {
-      get { return this; }
-    }
-
-    public IReadonlyGraphStrongComponents<Q> Upcast
-    {
-      get { return this; }
-    }
-
-    public IStrongComponentInfo Find(T node)
-    {
-      var c = myComponents.Find(node);
-      if (c == null || !mySubset.Contains(c)) return null;
-      return c;
-    }
-
-    public IReadonlyGraph<Q, T> UnderlyingGraph
-    {
-      get { return myComponents.UnderlyingGraph; }
-    }
-
-    public IReadonlyGraphStrongComponentsAccessor<Q, T> Accessor(IEnumerable<IStrongComponentInfo> components)
-    {
-      return myComponents.Accessor(components.Where(mySubset.Contains).ToArray());
+      get { return CoordinateSystem; }
     }
 
     public IEnumerable<IStrongComponentInfo> Components
@@ -71,19 +37,55 @@ namespace DSIS.Graph
       get { return mySubset.Count; }
     }
 
-    public ICellCoordinateSystem<Q> CoordinateSystem
-    {
-      get { return myComponents.Upcast.CoordinateSystem; }
-    }
-
-    public void DoGeneric(IReadonlyGraphStrongComponentsWith with)
+    public void DoGeneric(IGraphStrongComponentsWith with)
     {
       with.With(this);
     }
 
-    ICellCoordinateSystem IReadonlyGraphStrongComponents.CoordinateSystem
+    public ICellCoordinateSystem<Q> CoordinateSystem
     {
-      get { return CoordinateSystem; }
+      get { return myComponents.CoordinateSystem; }
+    }
+
+    private void AssertComponent(IStrongComponentInfo info)
+    {
+      if (!mySubset.Contains(info))
+        throw new ArgumentException(string.Format("Component {0} is not contained in StrongComponentsSubset", info));
+    }
+
+    private void AssertComponent(IEnumerable<IStrongComponentInfo> info)
+    {
+      info.ForEach(AssertComponent);
+    }
+
+    public IEnumerable<INode<Q>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
+    {
+      AssertComponent(componentIds);
+      return myComponents.GetNodes(componentIds);
+    }
+
+    public IEnumerable<INode<Q>> GetEdgesWithFilteredEdges(INode<Q> node, IEnumerable<IStrongComponentInfo> componentIds)
+    {
+      AssertComponent(componentIds);
+      return myComponents.GetEdgesWithFilteredEdges(node, componentIds);
+    }
+
+    public ICellCoordinateCollection<Q> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
+    {
+      AssertComponent(components);
+      return myComponents.GetCoordinates(components);
+    }
+
+    public IStrongComponentInfo GetNodeComponent(INode<Q> node)
+    {
+      return myComponents.GetNodeComponent(node);
+    }
+
+    public IGraph<Q> AsGraph(IEnumerable<IStrongComponentInfo> components)
+    {
+      if (mySubset.ContainsAny(components)) 
+        return myComponents.AsGraph(components);
+      return null;
     }
   }
 }

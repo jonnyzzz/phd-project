@@ -1,5 +1,7 @@
 using System;
 using DSIS.Core.Util;
+using DSIS.Graph;
+using DSIS.Graph.Abstract;
 using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Scheme.Ctx;
 
@@ -15,8 +17,8 @@ namespace DSIS.Scheme.Impl.Actions
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
       IProgressInfo info = NullProgressInfo.INSTANCE;
-      var graph = Keys.Graph<Q>().Get(input);
-      var comps = graph.ComputeStrongComponents(info);
+      IGraph<Q> graph = Keys.Graph<Q>().Get(input);
+      IGraphStrongComponents<Q> comps = graph.ComputeStrongComponents(info);
 
       Keys.GetGraphComponents<Q>().Set(output, comps);
     }    

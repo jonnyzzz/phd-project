@@ -13,7 +13,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       myOpts = opts;
     }
 
-    public IGraphMeasure<T> Measure(IReadonlyGraph<T> graph, IReadonlyGraphStrongComponents<T> comps)
+    public IGraphMeasure<T> Measure(IGraph<T> graph, IGraphStrongComponents<T> comps)
     {
       var j = CreateMeasure(graph, comps);
       j.FillGraph();      
@@ -22,7 +22,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
       return j.CreateEvaluator();
     }
 
-    protected virtual JVRMeasure<T> CreateMeasure(IReadonlyGraph<T> graph, IReadonlyGraphStrongComponents<T> comps)
+    protected virtual JVRMeasure<T> CreateMeasure(IGraph<T> graph, IGraphStrongComponents<T> comps)
     {
       return new JVRMeasure<T>(graph, comps, myOpts);
     }

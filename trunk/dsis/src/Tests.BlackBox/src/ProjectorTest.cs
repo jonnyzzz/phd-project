@@ -109,7 +109,7 @@ namespace DSIS.Tests.BlackBox
     private class RememberGraphAction : IntegerCoordinateSystemActionBase3
     {
       private readonly int myIndex;
-      private IReadonlyGraph myGraph;
+      private IGraph myGraph;
       private readonly AssertProjectedGraphs myAssert;
       private readonly ILoopAction myLoop;
 
@@ -125,13 +125,13 @@ namespace DSIS.Tests.BlackBox
         LoopIndex index = myLoop.Key.Get(input);
         if (index.Index == myIndex)
         {
-          var components = Keys.GetGraphComponents<Q>().Get(input);
-          myGraph = components.Accessor(components.Components).AsGraph();
+          IGraphStrongComponents<Q> components = Keys.GetGraphComponents<Q>().Get(input);
+          myGraph = components.AsGraph(components.Components);
         }
         else if (index.Count - 1 == index.Index)
         {
-          var components = Keys.GetGraphComponents<Q>().Get(input);
-          var other = components.Accessor(components.Components).AsGraph();
+          IGraphStrongComponents<Q> components = Keys.GetGraphComponents<Q>().Get(input);
+          IGraph<Q> other = components.AsGraph(components.Components);
           var prev = (IGraph<Q>) myGraph;
 
           ICellCoordinateSystemProjector<Q> project =

@@ -93,7 +93,7 @@ namespace DSIS.Scheme.Impl.Tests
     }
 
 
-    protected class AssertGraphAction : IntegerCoordinateComponentsActionBaseEx
+    protected class AssertGraphAction : IntegerCoordinateSystemActionBase2Ex
     {
       public IConstraint GraphNodesConstraint;
       public IConstraint GraphEdgesConstraint;
@@ -101,16 +101,17 @@ namespace DSIS.Scheme.Impl.Tests
       public IConstraint CompontentsCountConstraint;
       public IConstraint CompontentsNodesCountConstraint;
 
-      protected override void GetChecks<T, Q, N>(T system, IReadonlyGraphStrongComponents<Q,N> comps, Action<ContextMissmatchCheck> addCheck)
+      protected override void GetChecks<T, Q>(T system, Action<ContextMissmatchCheck> addCheck)
       {
         addCheck(Create(Keys.Graph<Q>()));
         addCheck(Create(Keys.GetGraphComponents<Q>()));
       }
 
-      protected override void Apply<T, Q, N>(T system, Context input, Context output, IReadonlyGraphStrongComponents<Q,N> comps)
+      protected override void Apply<T, Q>(T system, Context input, Context output)
       {
-        var graph = Keys.Graph<Q>().Get(input);
-        int nodesInComponents = comps.Accessor(comps.Components).GetNodes().Count();
+        IGraph<Q> graph = Keys.Graph<Q>().Get(input);
+        IGraphStrongComponents<Q> comps = Keys.GetGraphComponents<Q>().Get(input);
+        int nodesInComponents = comps.GetNodes(comps.Components).Count();
 
         Apply(GraphNodesConstraint, graph.NodesCount);
         Apply(GraphEdgesConstraint, graph.EdgesCount);

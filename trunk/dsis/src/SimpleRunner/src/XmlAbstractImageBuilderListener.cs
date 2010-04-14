@@ -87,7 +87,7 @@ namespace DSIS.SimpleRunner
 
     private static string Subdivide(IEnumerable<long> ls)
     {
-      var sb = new StringBuilder();
+      StringBuilder sb = new StringBuilder();
       foreach (long l in ls)
       {
         sb.AppendFormat("{0}, ", l);
@@ -113,7 +113,7 @@ namespace DSIS.SimpleRunner
       Serialize();
     }
 
-    public override void GraphComponentsConstructed(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void GraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                            AbstractImageBuilderContext<Q> cx)
     {
       XmlElement components = AppendElement(myGraphElement, "components");
@@ -133,14 +133,14 @@ namespace DSIS.SimpleRunner
       Serialize();
     }
 
-    public override void OnStepFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                AbstractImageBuilderContext<Q> cx)
     {
       AppendAttribute(myStep, "time", (DateTime.Now - myComputationStepStartedTime).TotalMilliseconds);      
       Serialize();
     }
    
-    public override void ComputationFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                     AbstractImageBuilderContext<Q> cx)
     {
       

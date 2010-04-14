@@ -4,8 +4,10 @@
  */
 
 using System.Collections.Generic;
+using DSIS.Graph.Abstract;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
+using DSIS.Graph.Entropy.Tests;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
@@ -15,9 +17,9 @@ namespace DSIS.Graph.Entropy.Tests
   [TestFixture]
   public class LoopIteratorTest : LoopIteratorTestBase
   {
-    protected override ILoopIterator CreateLoopIterator(TarjanGraph<IntegerCoordinate> graph, IReadonlyGraphStrongComponents<IntegerCoordinate> components, ILoopIteratorCallback<IntegerCoordinate> mcb, IStrongComponentInfo firstComponent)
+    protected override ILoopIterator CreateLoopIterator(TarjanGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components, ILoopIteratorCallback<IntegerCoordinate> mcb, IStrongComponentInfo firstComponent)
     {
-      return new LoopIteratorFirst<IntegerCoordinate>(mcb, components, firstComponent, new LoopIterator<IntegerCoordinate>(components, firstComponent));
+      return new LoopIteratorFirst<IntegerCoordinate>(mcb, components, firstComponent, new LoopIterator<IntegerCoordinate>(graph, components, firstComponent));
     }
 
     [Test]

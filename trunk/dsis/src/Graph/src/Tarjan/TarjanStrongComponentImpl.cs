@@ -7,7 +7,7 @@ using DSIS.Utils;
 namespace DSIS.Graph.Tarjan
 {
   //TODO: Provide factory for creating IGraph from a subset of components.
-  internal class TarjanStrongComponentImpl<TCell, TNode> : IGraphStrongComponents<TCell>, IReadonlyGraphStrongComponents<TCell>, IReadonlyGraphStrongComponents<TCell, TNode>
+  internal class TarjanStrongComponentImpl<TCell, TNode> : IGraphStrongComponents<TCell>
     where TCell : ICellCoordinate
     where TNode : class, INode<TCell>
   {

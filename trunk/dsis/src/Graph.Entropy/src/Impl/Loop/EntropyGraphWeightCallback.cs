@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
@@ -8,9 +7,8 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
-  public class EntropyGraphWeightCallback<T,N> : ILoopIteratorCallback<T,N> 
+  public class EntropyGraphWeightCallback<T> : ILoopIteratorCallback<T> 
     where T : ICellCoordinate
-    where N : class, INode<T>
   {
     private readonly Dictionary<NodePair<T>, double> myM =
       new Dictionary<NodePair<T>, double>(EqualityComparerFactory<NodePair<T>>.GetComparer());
@@ -25,7 +23,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
       mySystem = system;
     }
 
-    public void OnLoopFound(IEnumerable<N> loop, int length)
+    public void OnLoopFound(IEnumerable<INode<T>> loop, int length)
     {
       double weight = myWeight.Weight(length);
       myNorm += weight;
@@ -50,8 +48,12 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 
     protected IEnumerable<Pair<NodePair<T>, double>> Weights
     {
-      get {
-        return myM.Select(pair => new Pair<NodePair<T>, double>(pair.Key, pair.Value));
+      get
+      {
+        foreach (KeyValuePair<NodePair<T>, double> pair in myM)
+        {
+          yield return new Pair<NodePair<T>, double>(pair.Key, pair.Value);
+        }
       }
     }
 

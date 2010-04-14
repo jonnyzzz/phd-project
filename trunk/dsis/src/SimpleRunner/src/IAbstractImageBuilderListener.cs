@@ -13,9 +13,9 @@ namespace DSIS.SimpleRunner
     VoidDelegate ComputationStartedC(T system, AbstractImageBuilderContext<Q> cx, bool isUnsimmetric);
     VoidDelegate OnStepStartedC(T system, AbstractImageBuilderContext<Q> cx, long[] subdivide);
     VoidDelegate GraphConstructedC(IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
-    VoidDelegate GraphComponentsConstructedC(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
-    VoidDelegate OnStepFinishedC(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
-    VoidDelegate ComputationFinishedC(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
+    VoidDelegate GraphComponentsConstructedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
+    VoidDelegate OnStepFinishedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
+    VoidDelegate ComputationFinishedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system, AbstractImageBuilderContext<Q> cx);
   }
 
   public struct AbstractImageBuilderContext<Q> where Q : IIntegerCoordinate

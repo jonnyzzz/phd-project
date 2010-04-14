@@ -3,11 +3,9 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
-  //TODO: Drop T
-  public interface ILoopIteratorCallback<in T, N> 
-    where T : ICellCoordinate
-    where N : class, INode<T>
+  public interface ILoopIteratorCallback<in T> 
+    where T:ICellCoordinate
   {
-    void OnLoopFound(IEnumerable<N> loop, int length);
+    void OnLoopFound(IEnumerable<INode<T>> loop, int length);
   }
 }

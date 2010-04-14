@@ -13,8 +13,8 @@ namespace DSIS.Scheme.Impl.Actions
 
     protected override void Apply<T, Q>(Context input, Context output)
     {
-      var comps = Keys.GetGraphComponents<Q>().Get(input);
-      var data = comps.Accessor(comps.Components).GetCoordinates();
+      IGraphStrongComponents<Q> comps = Keys.GetGraphComponents<Q>().Get(input);
+      var data = comps.GetCoordinates(comps.Components);
 
       Keys.CellsEnumerationKey<Q>().Set(output, data);
     }    

@@ -26,7 +26,7 @@ namespace DSIS.Graph.FS
       EdgesCount = edgesCount;
       var componentsStream = myResources.CreateDataHolderStream("components");
       var persister = myPersisters.CreatePersister<uint>();
-      myComponentsHolder = new FSReadonlyGraphHolder<uint, TCell>(componentsStream, persister, false, n=>0, this);
+      myComponentsHolder = new FSReadonlyGraphHolder<FSReadonlyNode<TCell>, uint, TCell>(componentsStream, persister, false, n=>0);
     }
 
     public int NodesCount { get; private set;}
@@ -116,7 +116,7 @@ namespace DSIS.Graph.FS
     {
       var stream = myResources.CreateDataHolderStream("holder");
       var persist = myPersisters.CreatePersister<TData>();
-      return new FSReadonlyGraphHolder<TData, TCell>(stream, persist, true, def, this);
+      return new FSReadonlyGraphHolder<FSReadonlyNode<TCell>, TData, TCell>(stream, persist, true, def);
     }
 
     public IGraphDataHolder<bool, FSReadonlyNode<TCell>> CreateNodeFlagsHolder(string key)

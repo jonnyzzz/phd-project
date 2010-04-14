@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Util;
 using DSIS.Utils;
-using DSIS.Graph.Abstract.Algorithms;
 
 namespace DSIS.Graph.Tests.FS
 {
@@ -34,22 +32,8 @@ namespace DSIS.Graph.Tests.FS
     {
       var readonlyGraph = BuildGraph(edges);
       DumpGraph(readonlyGraph);
-      CheckDataHolder(readonlyGraph, values);
+
     }
-
-    public void CheckStrongComponents(IEnumerable<Pair<int, IEnumerable<int>>> edges, IEnumerable<IEnumerable<int>> comps)
-    {
-      var hashComps = new HashSet<int[]>(ArrayEqualityComparer<int>.INSTANCE);
-      comps.ForEach(x=>hashComps.Add(x.ToArray()));
-
-      var readonlyGraph = BuildGraph(edges);
-      DumpGraph(readonlyGraph);
-
-      var c = readonlyGraph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
-      
-    }
-
-    private 
 
     private void DumpGraph(IReadonlyGraph<TCell> graph)
     {

@@ -33,21 +33,21 @@ namespace DSIS.SimpleRunner
       return Void;
     }
 
-    public virtual VoidDelegate GraphComponentsConstructedC(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public virtual VoidDelegate GraphComponentsConstructedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                                     AbstractImageBuilderContext<Q> cx)
     {
       GraphComponentsConstructed(comps, graph, system, cx);
       return Void;
     }
 
-    public virtual VoidDelegate OnStepFinishedC(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public virtual VoidDelegate OnStepFinishedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                         AbstractImageBuilderContext<Q> cx)
     {
       OnStepFinished(comps, graph, system, cx);
       return Void;
     }
 
-    public virtual VoidDelegate ComputationFinishedC(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public virtual VoidDelegate ComputationFinishedC(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                              AbstractImageBuilderContext<Q> cx)
     {
       ComputationFinished(comps, graph, system, cx);
@@ -66,17 +66,17 @@ namespace DSIS.SimpleRunner
     {
     }
 
-    public virtual void GraphComponentsConstructed(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public virtual void GraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                                    AbstractImageBuilderContext<Q> cx)
     {
     }
 
-    public virtual void OnStepFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public virtual void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                        AbstractImageBuilderContext<Q> cx)
     {
     }
 
-    public virtual void ComputationFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public virtual void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                             AbstractImageBuilderContext<Q> cx)
     {
     }

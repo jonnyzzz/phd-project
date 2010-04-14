@@ -7,9 +7,8 @@ using DSIS.Utils;
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
   [Obsolete]
-  public class EntropyBackStepGraphWeightCallback<Q, N> : EntropyGraphWeightCallback<Q, N>
+  public class EntropyBackStepGraphWeightCallback<Q> : EntropyGraphWeightCallback<Q>
     where Q : ICellCoordinate
-    where N : class, INode<Q>
   {
     private readonly ICellCoordinateSystem<Q> mySystem;
 
@@ -18,26 +17,24 @@ namespace DSIS.Graph.Entropy.Impl.Loop
       mySystem = system;
     }
 
-    public EntropyBackStepGraphWeightCallback<Q,N> BackStep(long[] power)
+    public EntropyBackStepGraphWeightCallback<Q> BackStep(long[] power)
     {
       ICellCoordinateSystemProjector<Q> projector = mySystem.Project(power);
 
       if (projector == null)
         return null;
       
-      var instance = new EntropyBackStepGraphWeightCallback<Q,N>(projector.ToSystem, myWeight);
+      EntropyBackStepGraphWeightCallback<Q> instance = new EntropyBackStepGraphWeightCallback<Q>(projector.ToSystem, myWeight);
 
       foreach (Pair<NodePair<Q>, double> pair in Weights)
       {
         Q pFrom = projector.Project(pair.First.From);
         Q pTo = projector.Project(pair.First.To);
 
-        if (projector.ToSystem.IsNull(pFrom))
-          continue;
-        if (projector.ToSystem.IsNull(pTo))
-          continue;
-
-        instance.Add(pFrom, pTo, pair.Second);
+        if (pFrom != null && pTo != null)
+        {
+          instance.Add(pFrom, pTo, pair.Second);
+        }
       }
       instance.Norm = Norm;
       return instance;

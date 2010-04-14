@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
+using DSIS.Graph.Abstract;
+using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Entropy.Impl.Loop;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Tarjan;
@@ -17,7 +19,7 @@ namespace DSIS.Graph.Entropy.Tests
     {
       TarjanGraph<IntegerCoordinate> graph = DoBuildGraph(bg);
 
-      var components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
+      IGraphStrongComponents<IntegerCoordinate> components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
       
       var mcb = new MockCallback();
       ILoopIterator gws = Create(graph, mcb, components);
@@ -57,9 +59,7 @@ namespace DSIS.Graph.Entropy.Tests
       }
     }
 
-    protected abstract ILoopIterator Create<T, N>(IReadonlyGraph<T,N> graph, ILoopIteratorCallback<T, N> mcb,
-                                                  IReadonlyGraphStrongComponents<T,N> components)
-      where T : ICellCoordinate
-      where N : class, INode<T>;
+    protected abstract ILoopIterator Create<T>(IGraph<T> graph, ILoopIteratorCallback<T> mcb, IGraphStrongComponents<T> components) 
+      where T : ICellCoordinate;
   }
 }

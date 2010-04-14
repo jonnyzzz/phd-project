@@ -12,7 +12,7 @@ namespace DSIS.Graph.Entropy.Tests
   public abstract class JVRMeasureTestBase : EntropyBlackboxTest
   {
     protected override Pair<IGraphMeasure<IntegerCoordinate>,IEdgeInfo> CreateEvaluator(string script, TarjanGraph<IntegerCoordinate> gr,
-                                                               IReadonlyGraphStrongComponents<IntegerCoordinate> comps)
+                                                               IGraphStrongComponents<IntegerCoordinate> comps)
     {
       JVR jvr = new JVR(gr, comps, EPS/1000);
       jvr.Script(script);
@@ -26,7 +26,7 @@ namespace DSIS.Graph.Entropy.Tests
       private readonly double myEps;
       private readonly IGraph<IntegerCoordinate> myGraph;
 
-      public JVR(IGraph<IntegerCoordinate> graph, IReadonlyGraphStrongComponents<IntegerCoordinate> components, double eps)
+      public JVR(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> components, double eps)
         : base(graph, components, new JVRMeasureOptions{IncludeSelfEdge = false})
       {
         myGraph = graph;

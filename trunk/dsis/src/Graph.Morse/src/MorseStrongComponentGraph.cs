@@ -1,50 +1,27 @@
-using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Morse
 {
-  public class MorseStrongComponentGraph<T, TNode> : IMorseEvaluatorGraph<TNode> 
-    where T : ICellCoordinate
-    where TNode : class, INode<T>
+  public class MorseStrongComponentGraph<T> : IMorseEvaluatorGraph<T> where T : ICellCoordinate
   {
-    private readonly IReadonlyGraphStrongComponents<T, TNode> myComponents;
-    private readonly IReadonlyGraphStrongComponentsAccessor<T, TNode> myAccessor;
-    private readonly long myCount;
-    private readonly IEqualityComparer<TNode> myEqualityComparer;
+    private readonly IStrongComponentInfo[] myComponentInfos;
+    private readonly IGraphStrongComponents<T> myComponents;
 
-    public MorseStrongComponentGraph(IReadonlyGraphStrongComponents<T, TNode> components, IStrongComponentInfo componentInfos)
+    public MorseStrongComponentGraph(IGraphStrongComponents<T> components, IStrongComponentInfo componentInfos)
     {
+      myComponentInfos = new[] {componentInfos};
       myComponents = components;
-      myAccessor = components.Accessor(componentInfos.Enum());
-      myCount = componentInfos.NodesCount;
-      myEqualityComparer = components.UnderlyingGraph.Comparer;
     }
 
-    public IEnumerable<TNode> GetNodes(TNode node)
+    public IEnumerable<INode<T>> GetNodes(INode<T> node)
     {
-      return myAccessor.GetEdges( node);
+      return myComponents.GetEdgesWithFilteredEdges(node, myComponentInfos);
     }
 
-    public IEnumerable<TNode> GetNodes()
+    public IEnumerable<INode<T>> GetNodes()
     {
-      return myAccessor.GetNodes();
-    }
-
-    public long Count
-    {
-      get { return myCount; }
-    }
-
-    public IEqualityComparer<TNode> Comparer
-    {
-      get { return myEqualityComparer; }
-    }
-
-    public IGraphDataHolder<T1, TNode> AllocDataHolder<T1>(Func<TNode, T1> def)
-    {
-      return myComponents.UnderlyingGraph.CreateDataHolder(def);
+      return myComponents.GetNodes(myComponentInfos);
     }
   }
 }

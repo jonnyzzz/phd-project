@@ -7,19 +7,19 @@ namespace DSIS.Graph
   [ComponentImplementation]
   public class GraphStrongComponentSubsetFactoryImpl : IGraphStrongComponentSubsetFactory
   {
-    public IReadonlyGraphStrongComponents SubComponents(IReadonlyGraphStrongComponents components, IEnumerable<IStrongComponentInfo> subSet)
+    public IGraphStrongComponents SubComponents(IGraphStrongComponents components, IEnumerable<IStrongComponentInfo> subSet)
     {
       var w = new DoWith(this, subSet);
       components.DoGeneric(w);
       return w.Components;
     }
 
-    private class DoWith : IReadonlyGraphStrongComponentsWith
+    private class DoWith : IGraphStrongComponentsWith
     {
       private readonly IGraphStrongComponentSubsetFactory myFactory;
       private readonly IEnumerable<IStrongComponentInfo> myEnum;
 
-      public IReadonlyGraphStrongComponents Components { get; private set; }
+      public IGraphStrongComponents Components { get; private set; }
 
       public DoWith(IGraphStrongComponentSubsetFactory factory, IEnumerable<IStrongComponentInfo> @enum)
       {
@@ -27,46 +27,15 @@ namespace DSIS.Graph
         myEnum = @enum;
       }
 
-      public void With<TCell, TNode>(IReadonlyGraphStrongComponents<TCell, TNode> components) where TCell : ICellCoordinate where TNode : class, INode<TCell>
+      public void With<Q>(IGraphStrongComponents<Q> components) where Q : ICellCoordinate
       {
-        Components = myFactory.SubComponents(components, myEnum).Upcast.Upcast;
+        Components = myFactory.SubComponents(components, myEnum);
       }
     }
 
-    private class DoWith<TCell> : IReadonlyGraphStrongComponentsWith<TCell>
-      where TCell : ICellCoordinate
+    public IGraphStrongComponents<Q> SubComponents<Q>(IGraphStrongComponents<Q> components, IEnumerable<IStrongComponentInfo> subSet) where Q : ICellCoordinate
     {
-      private readonly IGraphStrongComponentSubsetFactory myFactory;
-      private readonly IEnumerable<IStrongComponentInfo> myEnum;
-
-      public IReadonlyGraphStrongComponents<TCell> Components { get; private set; }
-
-      public DoWith(IGraphStrongComponentSubsetFactory factory, IEnumerable<IStrongComponentInfo> @enum)
-      {
-        myFactory = factory;
-        myEnum = @enum;
-      }
-
-      public void With<TNode>(IReadonlyGraphStrongComponents<TCell, TNode> components) 
-        where TNode : class, INode<TCell>
-      {
-        Components = myFactory.SubComponents(components, myEnum).Upcast;
-      }
-    }
-
-    public IReadonlyGraphStrongComponents<Q> SubComponents<Q>(IReadonlyGraphStrongComponents<Q> components, IEnumerable<IStrongComponentInfo> subSet) 
-      where Q : ICellCoordinate
-    {
-      var w = new DoWith<Q>(this, subSet);
-      components.DoGeneric(w);
-      return w.Components;
-    }
-
-    public IReadonlyGraphStrongComponents<Q,T> SubComponents<Q,T>(IReadonlyGraphStrongComponents<Q,T> components, IEnumerable<IStrongComponentInfo> subSet) 
-      where Q : ICellCoordinate
-      where T : class, INode<Q>
-    {
-      return new GraphStrongComponentsSubset<Q,T>(components, subSet);      
+      return new GraphStrongComponentsSubset<Q>(components, subSet);      
     }
   }
 }

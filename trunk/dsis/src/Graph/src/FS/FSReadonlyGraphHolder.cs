@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Persistance.Streams;
 using DSIS.Utils;
-using System.Linq;
 
 namespace DSIS.Graph.FS
 {
-  public class FSReadonlyGraphHolder<TData, TCell> : IGraphDataHolder<TData, FSReadonlyNode<TCell>>
+  public class FSReadonlyGraphHolder<TNode, TData, TCell> : IGraphDataHolder<TData, TNode>
+    where TNode : FSReadonlyNode<TCell>
     where TCell : ICellCoordinate
   {
     private readonly BitSet myUsedMap = new BitSet();
     private readonly IInputOutputStream myStream;
     private readonly IFSObjectPersister<TData> myPersister;
     private readonly bool myCanDispose;
-    private readonly Converter<FSReadonlyNode<TCell>, TData> myDef;
-    private readonly FSReadonlyGraph<TCell> myReader;
+    private readonly Converter<TNode, TData> myDef;
 
-    public FSReadonlyGraphHolder(IInputOutputStream stream, IFSObjectPersister<TData> persister, bool canDispose, Converter<FSReadonlyNode<TCell>, TData> def, FSReadonlyGraph<TCell> reader)
+    public FSReadonlyGraphHolder(IInputOutputStream stream, IFSObjectPersister<TData> persister, bool canDispose, Converter<TNode, TData> def)
     {
       myStream = stream;
       myDef = def;
-      myReader = reader;
       myPersister = persister;
       myCanDispose = canDispose;
     }
@@ -32,7 +29,7 @@ namespace DSIS.Graph.FS
         myStream.Dispose();
     }
 
-    public TData GetData(FSReadonlyNode<TCell> node)
+    public TData GetData(TNode node)
     {
       //Move pointer to right location
       if (!HasData(node))
@@ -40,28 +37,20 @@ namespace DSIS.Graph.FS
       return myPersister.LoadObject(myStream);
     }
 
-    public void SetData(FSReadonlyNode<TCell> node, TData data)
+    public void SetData(TNode node, TData data)
     {
       Pos(node);
       myPersister.SaveObject(myStream, data);
     }
 
-    private void Pos(FSReadonlyNode<TCell> node)
+    private void Pos(TNode node)
     {
       myStream.Position = node.Entry.EntryId*myPersister.Size;
     }
 
-    public bool HasData(FSReadonlyNode<TCell> node)
+    public bool HasData(TNode node)
     {
       return myUsedMap.IsSet(node.Entry.EntryId);
-    }
-
-    public IEnumerable<TData> Values
-    {
-      get
-      {
-        return myReader.NodesInternal.Where(HasData).Select(GetData);        
-      }
     }
   }
 }

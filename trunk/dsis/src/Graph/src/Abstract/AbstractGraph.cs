@@ -190,7 +190,7 @@ namespace DSIS.Graph.Abstract
       return string.Format("Graph [Nodes: {0}, Edges: {1}]", NodesCount, EdgesCount);
     }
 
-    public IGraphDataHolder<TData, TNode> CreateDataHolder<TData>(Func<TNode,TData> def)
+    public IGraphDataHolder<TData, TNode> CreateDataHolder<TData>(Converter<TNode,TData> def)
     {
       if (myGraphDataHolder != null)
       {
@@ -213,7 +213,7 @@ namespace DSIS.Graph.Abstract
 
     public IGraphDataHolder<uint, TNode> GetComponentIdHolder()
     {
-      return new AbstractGraphComponentIdHolder<TInh, TNode, TCell>(this);
+      return new AbstractGraphComponentIdHolder<TNode, TCell>();
     }
 
     public void DisposeDataHolder<TData>(IGraphDataHolder<TData, TNode> holder)

@@ -2,24 +2,30 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
+using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
   [Obsolete("Have to be tested")]
-  public class AllEngesOnALoopGraphSearch<T, N> : LoopIteratorBase<T, N> 
-    where T : ICellCoordinate 
-    where N : class, INode<T>
+  public class AllEngesOnALoopGraphSearch<T> : LoopIteratorBase<T> 
+    where T : ICellCoordinate
   {
-    public AllEngesOnALoopGraphSearch(ILoopIteratorCallback<T, N> callback, IReadonlyGraphStrongComponents<T,N> components, IStrongComponentInfo component) 
-      : base(callback, components, component)
+    private static readonly IEqualityComparer<INode<T>> COMPARER = EqualityComparerFactory<INode<T>>.GetReferenceComparer();
+
+    private readonly IStrongComponentInfo[] myComp;
+        
+    public AllEngesOnALoopGraphSearch(ILoopIteratorCallback<T> callback, IGraphStrongComponents<T> components, IStrongComponentInfo component) : base(callback, components, component)
     {
+      if (myComponent == null)
+        throw new ArgumentNullException("component");
+      myComp = new[] { component };
     }
 
     public override void WidthSearch()
     {      
-      var visited = new HashSet<N>(COMPARER);
+      var visited = new Hashset<INode<T>>();
 
-      foreach (N node in myAccessor.GetNodes())
+      foreach (INode<T> node in myComponents.GetNodes(myComp))
       {
         if (visited.Contains(node))
           continue;
@@ -29,25 +35,25 @@ namespace DSIS.Graph.Entropy.Impl.Loop
           if (visited.Contains(to))
             continue;
 
-          var loop = new List<N> {node};
+          var loop = new List<INode<T>> {node};
 
           for(var path = FindShortestLoop(node, to); path != null; path = path.Parent)
           {
             loop.Add(path.Node);
           }
-          visited.UnionWith(loop);
+          visited.AddRange(loop);
           
           myCallback.OnLoopFound(loop, loop.Count);
         }
       }
     }
 
-    private IEnumerable<N> GetNodes(N node)
+    private IEnumerable<INode<T>> GetNodes(INode<T> node)
     {
-      return myAccessor.GetEdges(node);
+      return myComponents.GetEdgesWithFilteredEdges(node, myComp);
     }
 
-    private SearchNode FindShortestLoop(N toNode, N fromNode)
+    private SearchNode FindShortestLoop(INode<T> toNode, INode<T> fromNode)
     {      
       var queue = new Queue<SearchNode>();
       queue.Enqueue(new SearchNode(fromNode));
@@ -55,7 +61,7 @@ namespace DSIS.Graph.Entropy.Impl.Loop
       while (queue.Count > 0)
       {
         SearchNode node = queue.Dequeue();
-        foreach (N to in GetNodes(node.Node))
+        foreach (INode<T> to in GetNodes(node.Node))
         {
           if (COMPARER.Equals(to, toNode))
             return node;
@@ -69,15 +75,15 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 
     private class SearchNode
     {
-      public readonly N Node;
+      public readonly INode<T> Node;
       public readonly SearchNode Parent;
 
-      public SearchNode(N node)
+      public SearchNode(INode<T> node)
       {
         Node = node;
       }
 
-      public SearchNode(N node, SearchNode parent)
+      public SearchNode(INode<T> node, SearchNode parent)
       {
         Node = node;
         Parent = parent;

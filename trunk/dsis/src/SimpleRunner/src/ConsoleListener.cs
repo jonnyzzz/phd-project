@@ -40,7 +40,7 @@ namespace DSIS.SimpleRunner
       Console.Out.WriteLine("Graph constructed.Nodes = {0}", graph.NodesCount);      
     }
 
-    public override void GraphComponentsConstructed(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void GraphComponentsConstructed(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                            AbstractImageBuilderContext<Q> cx)
     {
       Console.Out.WriteLine("Graph components done. {0} components", comps.ComponentCount);
@@ -52,13 +52,13 @@ namespace DSIS.SimpleRunner
       Console.Out.Write("Components: ");      
     }
 
-    public override void OnStepFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void OnStepFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                AbstractImageBuilderContext<Q> cx)
     {
       Console.Out.WriteLine("Step {0} finished", stepCount);      
     }
 
-    public override void ComputationFinished(IReadonlyGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
+    public override void ComputationFinished(IGraphStrongComponents<Q> comps, IGraph<Q> graph, T system,
                                     AbstractImageBuilderContext<Q> cx)
     {
       Console.Out.WriteLine("Computation finished");      

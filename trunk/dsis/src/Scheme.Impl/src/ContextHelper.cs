@@ -1,4 +1,3 @@
-using System;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
 using DSIS.IntegerCoordinates;
@@ -13,7 +12,7 @@ namespace DSIS.Scheme.Impl
       comps.DoGeneric(new ReplaceTypedComponents(ctx));
     }
 
-    private class ReplaceTypedComponents : IReadonlyGraphStrongComponentsWith, IIntegerCoordinateSystemWith
+    private class ReplaceTypedComponents : IGraphStrongComponentsWith, IIntegerCoordinateSystemWith
     {
       private readonly Context myContext;
 
@@ -22,12 +21,12 @@ namespace DSIS.Scheme.Impl
         myContext = context;
       }
 
-      public void With<TCell, TNode>(IReadonlyGraphStrongComponents<TCell, TNode> components) where TCell : ICellCoordinate where TNode : class, INode<TCell>
+      public void With<Q>(IGraphStrongComponents<Q> components) where Q : ICellCoordinate
       {
-        myContext.Remove(Keys.GetGraphComponents<TCell>());
+        myContext.Remove(Keys.GetGraphComponents<Q>());
         myContext.Remove(Keys.GraphComponents);
 
-        myContext.Set(Keys.GetGraphComponents<TCell>(), components.Upcast);
+        myContext.Set(Keys.GetGraphComponents<Q>(), components);
       }
 
       public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate

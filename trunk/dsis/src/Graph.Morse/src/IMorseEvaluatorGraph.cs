@@ -1,19 +1,11 @@
-using System;
 using System.Collections.Generic;
+using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Morse
 {
-  public interface IMorseEvaluatorGraph<N> 
-    where N : class
+  public interface IMorseEvaluatorGraph<T> where T : ICellCoordinate
   {
-    IEnumerable<N> GetNodes(N node);
-    IEnumerable<N> GetNodes();
-
-    long Count { get;}
-
-    IEqualityComparer<N> Comparer { get; }
-
-
-    IGraphDataHolder<T, N> AllocDataHolder<T>(Func<N,T> def);
+    IEnumerable<INode<T>> GetNodes(INode<T> node);
+    IEnumerable<INode<T>> GetNodes();
   }
 }

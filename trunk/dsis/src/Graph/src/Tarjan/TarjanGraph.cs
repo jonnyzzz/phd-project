@@ -59,9 +59,9 @@ namespace DSIS.Graph.Tarjan
       }
     }
 
-    public IReadonlyGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
+    public IGraphStrongComponents<TCell> ComputeStrongComponents(IProgressInfo info)
     {
-      return ((IReadonlyGraph<TCell>) this).ComputeStrongComponents(info);
+      return ((IReadonlyGraph<TCell, TarjanNode<TCell>>) this).ComputeStrongComponents(info);
     }
     
     public IReadonlyGraph<TCell> BuildFinished()

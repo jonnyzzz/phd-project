@@ -1,30 +1,19 @@
-using System;
-using System.Collections.Generic;
 using DSIS.Core.Coordinates;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Entropy.Impl.Loop.Iterators
 {
-  public abstract class ContextBase<T,N> 
+  public abstract class ContextBase<T> 
     where T : ICellCoordinate
-    where N : class, INode<T>
   {
-    protected readonly IReadonlyGraphStrongComponents<T, N> myComponents;
-    [Obsolete]
+    protected readonly IGraphStrongComponents<T> myComponents;
     protected readonly IStrongComponentInfo myComponent;
+    protected readonly IStrongComponentInfo[] myComponentInfos;
 
-    protected readonly IReadonlyGraphStrongComponentsAccessor<T, N> myAccessor;
-    protected readonly IEqualityComparer<N> COMPARER;
-
-    protected ContextBase(IReadonlyGraphStrongComponents<T, N> components, IStrongComponentInfo component)
+    protected ContextBase(IGraphStrongComponents<T> components, IStrongComponentInfo component)
     {
-      if (component == null)
-        throw new ArgumentNullException("component");
-
       myComponents = components;
-
-      myAccessor = components.Accessor(component.Enum());
-      COMPARER = components.UnderlyingGraph.Comparer;
+      myComponent = component;
+      myComponentInfos = new[] { myComponent };
     }
   }
 }

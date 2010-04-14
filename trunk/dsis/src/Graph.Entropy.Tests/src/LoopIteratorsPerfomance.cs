@@ -16,7 +16,7 @@ namespace DSIS.Graph.Entropy.Tests
     [Test]
     public void Test_AllEdges_100()
     {
-      DoWithFullGraph(100, delegate(IReadonlyGraph<IntegerCoordinate> graph, IReadonlyGraphStrongComponents<IntegerCoordinate> comps)
+      DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
                                var callback = new MockLoopIteratorCallback<IntegerCoordinate>();
                                IStrongComponentInfo component = comps.Components.First();
@@ -28,7 +28,7 @@ namespace DSIS.Graph.Entropy.Tests
     [Test]
     public void Test_AllNodes_100()
     {
-      DoWithFullGraph(100, delegate(IReadonlyGraph<IntegerCoordinate> graph, IReadonlyGraphStrongComponents<IntegerCoordinate> comps)
+      DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
                                var callback = new MockLoopIteratorCallback<IntegerCoordinate>();
                                IStrongComponentInfo component = comps.Components.First();
@@ -40,7 +40,7 @@ namespace DSIS.Graph.Entropy.Tests
     [Test]
     public void Test_Weight_100()
     {
-      DoWithFullGraph(100, delegate(IReadonlyGraph<IntegerCoordinate> graph, IReadonlyGraphStrongComponents<IntegerCoordinate> comps)
+      DoWithFullGraph(100, delegate(IGraph<IntegerCoordinate> graph, IGraphStrongComponents<IntegerCoordinate> comps)
                              {
                                var callback = new MockLoopIteratorCallback<IntegerCoordinate>();
                                IStrongComponentInfo component = comps.Components.First();

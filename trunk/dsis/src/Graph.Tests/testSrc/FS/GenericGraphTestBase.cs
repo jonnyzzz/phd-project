@@ -20,11 +20,6 @@ namespace DSIS.Graph.Tests.FS
       CreateContext().CheckDataHolder(edges, data);
     }
 
-    public void TestGraphStrongComponents(IEnumerable<Pair<int, IEnumerable<int>>> edges, IEnumerable<IEnumerable<int>> comps)
-    {
-      CreateContext().CheckStrongComponents(edges, comps);
-    }
-
     protected IEnumerable<T> e<T>(params T[] pars)
     {
       return pars;

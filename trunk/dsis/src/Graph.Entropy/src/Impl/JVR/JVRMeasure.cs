@@ -19,10 +19,10 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     private readonly double myCellVolume;
     private readonly int myNodesCount;
 
-    private readonly IReadonlyGraph<T> myGraph;
-    private readonly IReadonlyGraphStrongComponents<T> myComponents;
+    private readonly IGraph<T> myGraph;
+    private readonly IGraphStrongComponents<T> myComponents;
 
-    public JVRMeasure(IReadonlyGraph<T> graph, IReadonlyGraphStrongComponents<T> components, JVRMeasureOptions opts)
+    public JVRMeasure(IGraph<T> graph, IGraphStrongComponents<T> components, JVRMeasureOptions opts)
     {
       myOptions = opts;
       myHashHolder = new HashHolder<T>(graph.CoordinateSystem);
@@ -38,10 +38,10 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
     public void FillGraph()
     {
-      myComponents.DoGeneric(new FillGraphProxy(this));
+      myGraph.DoGeneric(new FillGraphProxy(this));
     }
 
-    private class FillGraphProxy : IReadonlyGraphStrongComponentsWith<T>
+    private class FillGraphProxy : IReadonlyGraphWith<T>
     {
       private readonly JVRMeasure<T> myHost;
 
@@ -50,26 +50,27 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         myHost = host;
       }
 
-      public void With<TNode>(IReadonlyGraphStrongComponents<T, TNode> graph) where TNode : class, INode<T>
+      public void With<TNode>(IReadonlyGraph<T, TNode> graph) where TNode : class, INode<T>
       {
-        new FillGraphImpl<TNode>(graph.Accessor(graph.Components), myHost).FillGraph();
+        new FillGraphImpl<TNode>(graph, myHost).FillGraph();
       }
     }
 
     private class FillGraphImpl<TNode> where TNode : class, INode<T>
     {
-      private readonly IReadonlyGraphStrongComponentsAccessor<T, TNode> myAccessor;
+      private readonly IReadonlyGraph<T, TNode> myGraph;
       private readonly JVRMeasure<T> myHost;
 
-      public FillGraphImpl(IReadonlyGraphStrongComponentsAccessor<T,TNode> accessor, JVRMeasure<T> host)
+      public FillGraphImpl(IReadonlyGraph<T, TNode> graph, JVRMeasure<T> host)
       {
-        myAccessor = accessor;
+        myGraph = graph;
         myHost = host;
       }
 
       private bool VisitNode(TNode node)
       {
-        return true;
+        //TODO: Use Components<TNode,TCell>
+        return myHost.myComponents.GetNodeComponent(node) != null;
       }
 
       public void FillGraph()
@@ -79,14 +80,14 @@ namespace DSIS.Graph.Entropy.Impl.JVR
           int index = 0;
           var weight = myHost.myOptions.InitialWeight;
 
-          foreach (var node in myAccessor.GetNodes())
+          foreach (var node in myGraph.NodesInternal)
           {
             if (!VisitNode(node))
               continue;
 
             var factory = JVRPair<T>.Factory(node.Coordinate);
 
-            foreach (var edge in myAccessor.GetEdges(node))
+            foreach (var edge in myGraph.GetEdgesInternal(node))
             {
               if (!VisitNode(edge))
                 continue;

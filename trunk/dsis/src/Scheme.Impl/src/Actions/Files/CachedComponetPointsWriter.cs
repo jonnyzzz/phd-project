@@ -20,9 +20,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       myHost = host;
     }
 
-    public IEnumerable<IGnuplotPointsFile> WriteComponents<T, Q>(T system, IReadonlyGraphStrongComponents<Q> comps) 
-      where T : IIntegerCoordinateSystem<Q> 
-      where Q : IIntegerCoordinate
+    public IEnumerable<IGnuplotPointsFile> WriteComponents<T, Q>(T system, IGraphStrongComponents<Q> comps) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate
     {
       if (CacheMatch(system, comps))
       {
@@ -45,7 +43,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       myValue = null;
     }
 
-    private void SetCacheMatch<T,Q>(T system, IReadonlyGraphStrongComponents<Q> comps, IEnumerable<IGnuplotPointsFile> files)
+    private void SetCacheMatch<T,Q>(T system, IGraphStrongComponents<Q> comps, IEnumerable<IGnuplotPointsFile> files)
       where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate
     {
@@ -56,7 +54,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
       myValue = new List<IGnuplotPointsFile>(files);
     }
 
-    private bool CacheMatch<T,Q>(T system, IReadonlyGraphStrongComponents<Q> comps)
+    private bool CacheMatch<T,Q>(T system, IGraphStrongComponents<Q> comps)
       where T : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate
     {

@@ -124,25 +124,11 @@ namespace DSIS.SimpleRunner
         File.AppendAllText(@"e:\jvr_morse.log", sb.ToString());
       }
 
-      private static int EdgesCount<Q>(IStrongComponentInfo info, IReadonlyGraphStrongComponents<Q> cms) 
+      private static int EdgesCount<Q>(IStrongComponentInfo info, IGraphStrongComponents<Q> cms) 
         where Q : ICellCoordinate
       {
-        var ec = new EdgesCounter<Q> {Info = info};
-        cms.DoGeneric(ec);
-        return ec.Count;
-      }
-
-      private class EdgesCounter<TCell> : IReadonlyGraphStrongComponentsWith<TCell>
-        where TCell : ICellCoordinate
-      {
-        public int Count { get; set; }
-        public IStrongComponentInfo Info { private get; set; }
-
-        public void With<TNode>(IReadonlyGraphStrongComponents<TCell, TNode> components) where TNode : class, INode<TCell>
-        {
-          var acc = components.Accessor(Info.Enum());
-          Count = acc.GetNodes().Aggregate(0,(v, x) => v + acc.GetEdges(x).Count());
-        }
+        return cms.GetNodes(new[] {info}).Aggregate(0,
+                                                    (v, x) => v + cms.GetEdgesWithFilteredEdges(x, new[] {info}).Count());
       }
     }
   }

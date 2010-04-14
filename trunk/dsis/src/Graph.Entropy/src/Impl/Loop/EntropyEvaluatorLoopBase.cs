@@ -7,9 +7,8 @@ using DSIS.Graph.Entropy.Impl.Loop.Weight;
 namespace DSIS.Graph.Entropy.Impl.Loop
 {
   [Obsolete]
-  public abstract class EntropyEvaluatorLoopBase<T,N> : EntropyEvaluatorBase<T>
+  public abstract class EntropyEvaluatorLoopBase<T> : EntropyEvaluatorBase<T>
     where T : ICellCoordinate
-    where N : class, INode<T>
   {
     private readonly IEntropyLoopWeightCallback myLoopCallback;
 
@@ -21,10 +20,9 @@ namespace DSIS.Graph.Entropy.Impl.Loop
 
     protected sealed override IEntropyProcessor<T> Measure(IEntropyEvaluatorInput<T> data)
     {
-      var cb = new EntropyGraphWeightCallback<T,N>(myLoopCallback, data.Graph.CoordinateSystem);
+      EntropyGraphWeightCallback<T> cb = new EntropyGraphWeightCallback<T>(myLoopCallback, data.Graph.CoordinateSystem);
       foreach (IStrongComponentInfo info in data.Components.Components)
       {
-        //TODO: Implement with
         ILoopIterator it = CreateIterator(cb, data.Components, data.Graph, info);
         it.WidthSearch();
       }
@@ -32,9 +30,8 @@ namespace DSIS.Graph.Entropy.Impl.Loop
       return new EntropyProcessorAdapter<T>(cb.Entropy());
     }
 
-    protected abstract ILoopIterator CreateIterator(ILoopIteratorCallback<T,N> callback,
-                                                    IReadonlyGraphStrongComponents<T,N> comps,
-                                                    IReadonlyGraph<T,N> graph,
-                                                    IStrongComponentInfo info);
+    protected abstract ILoopIterator CreateIterator(ILoopIteratorCallback<T> callback,
+                                                       IGraphStrongComponents<T> comps, IGraph<T> graph,
+                                                       IStrongComponentInfo info);
   }
 }

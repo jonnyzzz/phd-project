@@ -2,6 +2,8 @@ using System;
 using System.Threading;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
+using DSIS.Graph.Abstract;
+using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
@@ -12,7 +14,7 @@ namespace DSIS.Graph.Entropy.Tests
 {
   public class PerfomanceTestBase : GraphBaseTest
   {
-    protected delegate ILoopIterator Factory<T>(IReadonlyGraph<T> graph, IReadonlyGraphStrongComponents<T> comps)
+    protected delegate ILoopIterator Factory<T>(IGraph<T> graph, IGraphStrongComponents<T> comps)
       where T : ICellCoordinate;
 
     public void DoWithTimeout(VoidDelegate action, TimeSpan time)
@@ -49,7 +51,9 @@ namespace DSIS.Graph.Entropy.Tests
                                                              }
                                                            }
                                                          });
-      var components  = gr.ComputeStrongComponents(NullProgressInfo.INSTANCE);
+      IGraphStrongComponents<IntegerCoordinate> components 
+        = gr.ComputeStrongComponents(NullProgressInfo.INSTANCE);
+
       ILoopIterator iter = test(gr, components );
       
       DoWithTimeout(iter.WidthSearch, timeout);      

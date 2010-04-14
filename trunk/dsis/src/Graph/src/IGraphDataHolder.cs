@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace DSIS.Graph
 {
@@ -9,8 +8,6 @@ namespace DSIS.Graph
 
     void SetData(TNode node, TData data);
     bool HasData(TNode node);
-
-    IEnumerable<TData> Values { get; }
   }
 
   public static class GraphDataHolderUtilities

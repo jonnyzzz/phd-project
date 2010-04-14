@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DSIS.Graph.Abstract;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
 using NUnit.Framework;
@@ -37,7 +38,7 @@ namespace DSIS.Graph.Tests.Generic
     {
       ComputeComponents();
 
-      var l = new List<INode<Q>>(GetNodes(new List<IStrongComponentInfo>()));
+      var l = new List<INode<Q>>(myComponents.GetNodes(new List<IStrongComponentInfo>()));
       Assert.AreEqual(0, l.Count);
     }
 
@@ -113,7 +114,7 @@ namespace DSIS.Graph.Tests.Generic
                  {
                    var infos = new List<IStrongComponentInfo> {info};
                    Console.Out.WriteLine("info = {0}", info);
-                   int count = new List<INode<Q>>(GetNodes(infos)).Count;
+                   int count = new List<INode<Q>>(myComponents.GetNodes(infos)).Count;
                    Assert.AreEqual(100, count);
                  }
                });
@@ -134,7 +135,7 @@ namespace DSIS.Graph.Tests.Generic
                  {
                    var infos = new List<IStrongComponentInfo> {info};
                    Console.Out.WriteLine(info);
-                   Assert.AreEqual(183, new List<INode<Q>>(GetNodes(infos)).Count);
+                   Assert.AreEqual(183, new List<INode<Q>>(myComponents.GetNodes(infos)).Count);
                  }
                });
     }
@@ -186,5 +187,6 @@ namespace DSIS.Graph.Tests.Generic
     {
       DoCircleTest(918);
     }
+
   }
 }
