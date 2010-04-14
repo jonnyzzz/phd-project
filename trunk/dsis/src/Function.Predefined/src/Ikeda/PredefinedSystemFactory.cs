@@ -1,6 +1,7 @@
 using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
+using DSIS.Function.Solvers.RungeKutt;
 using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Predefined.Ikeda
@@ -14,6 +15,17 @@ namespace DSIS.Function.Predefined.Ikeda
     [Autowire]
     protected ISystemSpaceFactory InfoFactory { get; private set; }
 
+    [Autowire]
+    protected RungeKuttSolverFactory RungeKuttFactory { get; private set; }
+
+    protected virtual RungeKuttOptions RungeKuttOptions
+    {
+      get
+      {
+        return new RungeKuttOptions { dTime = 0.01, Steps = 100 };
+      }
+    }
+
     public string Name
     {
       get { return Factory.FactoryName; }
@@ -23,12 +35,16 @@ namespace DSIS.Function.Predefined.Ikeda
 
     public ISystemInfo Function
     {
-      get { return Factory.Create(Parameters); }
+      get
+      {
+        var systemInfo = Factory.Create(Parameters);
+        if (systemInfo.Type == SystemType.Continious)
+          return RungeKuttFactory.Create(systemInfo, RungeKuttOptions);
+
+        return systemInfo;
+      }
     }
 
-    protected abstract ISystemInfoParameters Parameters
-    { 
-      get;
-    }
+    protected abstract ISystemInfoParameters Parameters { get; }
   }
 }

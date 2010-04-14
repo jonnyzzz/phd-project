@@ -42,7 +42,7 @@ namespace DSIS.Generated
     { 
     }
 
-    public IEqualityComparer<IntegerCoordinate2d> Comparer
+    public IEqualityComparer<IntegerCoordinate$Key$> Comparer
     {
       get { return new IntegerCoordinateEqualityComparer$Key$(); }
     }
