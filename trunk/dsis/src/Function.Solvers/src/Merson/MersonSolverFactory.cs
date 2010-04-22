@@ -20,7 +20,7 @@ namespace DSIS.Function.Solvers.Merson
     public override ISystemInfo Create(ISystemInfo system, IContiniousSolverParameters parameters)
     {
       var opts = (MersonOptions) parameters;
-      return new MersonSolver(system, opts.Steps, opts.dTime);
+      return new MersonSolver(system, opts.dTime);
     }
   }
 }

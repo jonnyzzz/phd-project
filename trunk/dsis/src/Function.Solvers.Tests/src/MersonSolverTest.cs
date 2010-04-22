@@ -9,7 +9,7 @@ namespace Function.Solvers.Tests
   {
     protected override ISystemInfo Solve(ISystemInfo fun)
     {
-      return new MersonSolver(fun, 10, dT/10);
+      return new MersonSolver(fun, dT/10);
     }
   }
 }

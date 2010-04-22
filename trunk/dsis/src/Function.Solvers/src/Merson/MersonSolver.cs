@@ -4,7 +4,7 @@ namespace DSIS.Function.Solvers.Merson
 {
   public class MersonSolver : SolvedFunctionBase<MersonSolver.Context>
   {
-    public MersonSolver(ISystemInfo function, int steps, double dt) : base(function, 1, dt / steps)
+    public MersonSolver(ISystemInfo function, double dt) : base(function, 1, dt)
     {
     }
 
