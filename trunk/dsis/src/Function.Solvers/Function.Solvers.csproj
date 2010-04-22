@@ -23,10 +23,14 @@
     <Compile Include="src\ComposedFunction.cs" />
     <Compile Include="src\FunctionBase.cs" />
     <Compile Include="src\ContiniousFunctionSolverBase.cs" />
+    <Compile Include="src\Merson\MersonOptions.cs" />
+    <Compile Include="src\Merson\MersonSolver.cs" />
+    <Compile Include="src\Merson\MersonSolverFactory.cs" />
     <Compile Include="src\RungeKutt\RungeKuttOptions.cs" />
     <Compile Include="src\RungeKutt\RungeKuttSolver.cs" />
     <Compile Include="src\RungeKutt\RungeKuttSolverFactory.cs" />
     <Compile Include="src\SimpleSolver\SimpleSolvedFunction.cs" />
+    <Compile Include="src\SolvedFunctionBase!1.cs" />
     <Compile Include="src\SolvedFunctionBase.cs" />
   </ItemGroup>
   <ItemGroup>

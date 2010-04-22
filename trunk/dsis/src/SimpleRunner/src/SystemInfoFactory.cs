@@ -10,6 +10,7 @@ using DSIS.Function.Predefined.Henon;
 using DSIS.Function.Predefined.HomoLinear;
 using DSIS.Function.Predefined.HomoSquare;
 using DSIS.Function.Predefined.Ikeda;
+using DSIS.Function.Predefined.LeonovP50;
 using DSIS.Function.Predefined.Linear;
 using DSIS.Function.Predefined.Logistics;
 using DSIS.Function.Predefined.Lorentz;
@@ -17,7 +18,6 @@ using DSIS.Function.Predefined.OsipenkoBio;
 using DSIS.Function.Predefined.Rossel;
 using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
-using DSIS.Scheme;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.Utils;
 
@@ -199,7 +199,12 @@ namespace DSIS.SimpleRunner
     {
       return new SystemInfoAction(new Ref9(mu), Space(3, 3));
     }
-    
+
+    public static SystemInfoAction LeonovSystem(double step, int times)
+    {
+      return new SystemInfoAction(new RungeKuttSolver(new LeonovP50System(), times, step), Space(2, 0.2));
+    }
+
     /*
      * 
      * var duffingSp = new DefaultSystemSpace(2, new[] {-4.3, -3}, new[] {4.3, 3}, new long[] {3, 3});

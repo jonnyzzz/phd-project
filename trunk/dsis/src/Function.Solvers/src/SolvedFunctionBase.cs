@@ -1,68 +1,23 @@
-using System;
-using System.Collections.Generic;
 using DSIS.Core.System;
-using DSIS.Utils;
 
 namespace DSIS.Function.Solvers
 {
-  public abstract class SolvedFunctionBase : ISystemInfo
+  public abstract class SolvedFunctionBase : SolvedFunctionBase<object>
   {
-    private readonly int myDimension;
-    protected readonly int mySteps;
-    protected readonly double myDt;
-    protected readonly ISystemInfo myFunction;    
-
-    protected abstract IFunction<double> GetDoubleFunctionOne(double[] precision);    
-    protected abstract string PresentableMethodName { get; }
-    
-    protected SolvedFunctionBase(ISystemInfo function, int steps, double dt)
+    protected SolvedFunctionBase(ISystemInfo function, int steps, double dt) : base(function, steps, dt)
     {
-      myFunction = function;
-      mySteps = steps;
-      myDt = dt;
-      myDimension = function.Dimension;
-    }    
-
-    public IFunction<T> GetFunction<T>(T[] precision)
-    {
-      if (typeof(T) == typeof(double))
-      {
-        return (IFunction<T>) GetDoubleFunction((double[])(object)precision);
-      }
-      throw new ArgumentException("T");
     }
 
-    private IFunction<double> GetDoubleFunction(double[] precision)
+    protected override object CreateContext(double[] precision)
     {
-      if (mySteps == 1)
-        return GetDoubleFunctionOne(precision);
-
-      var myFuncs = new List<IFunction<double>>();
-      for(int i = 0; i< mySteps; i++)
-      {
-        myFuncs.Add(GetDoubleFunctionOne(precision));
-      }
-      return new ComposedFunction(myFuncs.ToArray());
+      return new object(); 
     }
 
-    public SystemType Type
+    protected override IFunction<double> GetDoubleFunctionOne(object ctx, double[] precision)
     {
-      get { return SystemType.Discrete; }
+      return GetDoubleFunctionOne(precision);
     }
 
-    public Type[] SupportedFunctionTypes
-    {
-      get { return new[] {typeof (double)}; }
-    }
-
-    public string PresentableName
-    {
-      get { return string.Format("{1}@{0}", PresentableMethodName, myFunction.PresentableName); }
-    }
-
-    public int Dimension
-    {
-      get { return myDimension; }
-    }
+    protected abstract IFunction<double> GetDoubleFunctionOne(double[] precision);
   }
 }

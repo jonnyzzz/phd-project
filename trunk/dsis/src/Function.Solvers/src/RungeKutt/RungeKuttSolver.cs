@@ -22,9 +22,8 @@ namespace DSIS.Function.Solvers.RungeKutt
       return new Function(this, precision);
     }
 
-    private class Function : IFunction<double>
-    {
-      private readonly int myDimension;
+    private class Function : FunctionBase, IFunction<double>
+    {      
       private readonly IFunction<double> myF1;
       private readonly IFunction<double> myF2;
       private readonly IFunction<double> myF3;
@@ -38,24 +37,20 @@ namespace DSIS.Function.Solvers.RungeKutt
       private readonly double[] myF3Output;
       private readonly double[] myF4Output;
 
-      private readonly RungeKuttSolver myFunctionInfo;
       private readonly double myDt;
       private readonly double myDt2;
       private readonly double myDt6;
       private double[] myOutput;
       
 
-      public Function(RungeKuttSolver function, double[] precision)
+      public Function(RungeKuttSolver function, double[] precision) : base(function.Dimension, function.myFunction)
       {
-        myFunctionInfo = function;
-        myDimension = myFunctionInfo.Dimension;
-
         myF1 = Create(precision, out myF1Input, out myF1Output);
         myF2 = Create(precision, out myF2Input, out myF2Output);
         myF3 = Create(precision, out myF3Input, out myF3Output);
         myF4 = Create(precision, out myF4Input, out myF4Output);
 
-        myDt = myFunctionInfo.myDt;
+        myDt = function.myDt;
         myDt2 = myDt/2.0;
         myDt6 = myDt/6.0;
       }
@@ -85,11 +80,6 @@ namespace DSIS.Function.Solvers.RungeKutt
         }        
       }
 
-      public int Dimension
-      {
-        get { return myDimension; }
-      }
-
       public double[] Output
       {
         get { return myOutput; }
@@ -100,19 +90,6 @@ namespace DSIS.Function.Solvers.RungeKutt
       {
         get { return myF1.Input; }
         set { myF1Input = myF1.Input = value; }
-      }
-
-      public IFunctionIO<double>[] Derivates
-      {
-        get { return null; }
-      }
-
-      private IFunction<double> Create(double[] size, out double[] input, out double[] output)
-      {
-        IFunction<double> func = myFunctionInfo.myFunction.GetFunction<double>(size);
-        input = func.Input = new double[myDimension];
-        output = func.Output = new double[myDimension];
-        return func;
       }
     }
   }
