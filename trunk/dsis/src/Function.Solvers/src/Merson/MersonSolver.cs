@@ -4,13 +4,13 @@ namespace DSIS.Function.Solvers.Merson
 {
   public class MersonSolver : SolvedFunctionBase<MersonSolver.Context>
   {
-    public MersonSolver(ISystemInfo function, int steps, double dt) : base(function, 1, dt * steps)
+    public MersonSolver(ISystemInfo function, int steps, double dt) : base(function, 1, dt / steps)
     {
     }
 
     protected override string PresentableMethodName
     {
-      get { return string.Format("Runge-Kutt(Step:{0},dt:{1})@{2}", mySteps, myDt, myFunction.PresentableName); }
+      get { return string.Format("Merson(dt:{0})@{1}", myDt, myFunction.PresentableName); }
     }
 
     public class Context

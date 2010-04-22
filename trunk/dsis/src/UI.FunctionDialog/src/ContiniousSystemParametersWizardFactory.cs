@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
@@ -21,8 +22,9 @@ namespace DSIS.UI.FunctionDialog
       //TODO: possible leak on dispose
       var c = Container.SubContainer<ContiniousSystemComponentAttribute>();
 
-      Solvers.Map(x => new ContiniousFunctionSolverWrapper(continious, x)).ForEach(c.RegisterComponent);
-
+      var list = Solvers.Select(x => new ContiniousFunctionSolverWrapper(continious, x));
+      var s = new ContiniousFunctionSolverWrappers(list.ToArray());
+      c.RegisterComponent(s);
       c.Start();
 
       return c.GetComponent<ContiniousSystemParametersWizard>();
