@@ -1,11 +1,10 @@
-using System;
 using DSIS.Core.System;
 
 namespace DSIS.Function.Solvers.Merson
 {
   public class MersonSolver : SolvedFunctionBase<MersonSolver.Context>
   {
-    public MersonSolver(ISystemInfo function, int steps, double dt) : base(function, steps, dt)
+    public MersonSolver(ISystemInfo function, int steps, double dt) : base(function, 1, dt * steps)
     {
     }
 
@@ -26,7 +25,7 @@ namespace DSIS.Function.Solvers.Merson
 
     protected override Context CreateContext(double[] precision)
     {
-      return new Context();
+      return new Context {H = myDt};
     }
 
     protected override IFunction<double> GetDoubleFunctionOne(Context ctx, double[] precision)
@@ -44,10 +43,14 @@ namespace DSIS.Function.Solvers.Merson
       private readonly double[][] myFOutput = new double[5][];
       private readonly double[][] myK = new double[5][];
       
+      private double[] myInput;
       private double[] myOutput;
+
+      private readonly double myDt;
 
       public Function(MersonSolver solver, Context ctx, double[] precision) : base(solver.Dimension, solver.myFunction)
       {
+        myDt = solver.myDt;
         myCtx = ctx;
         myPrecision = precision;
         for (int i = 0; i < 5; i++)
@@ -56,12 +59,13 @@ namespace DSIS.Function.Solvers.Merson
           myK[i] = new double[Dimension];
         }
         myOutput = new double[Dimension];
+        myInput = new double[Dimension];
       }
 
       public double[] Input
       {
-        get { return myF[0].Input; }
-        set { myF[0].Input = value; }
+        get { return myInput; }
+        set { myInput = value; }
       }
 
       public double[] Output
@@ -72,8 +76,27 @@ namespace DSIS.Function.Solvers.Merson
 
       public void Evaluate()
       {
+        double d = myDt;
+        d -= Evaluate(myInput, myOutput);        
+        while(d > 0)
+        {          
+          for(int i=0; i < Dimension; i++)
+          {
+            myInput[i] = myOutput[i];
+          }
+          d -= Evaluate(myInput, myOutput);
+        }
+      }
+
+      private double Evaluate(double[] input, double[] output)
+      {
         double h = myCtx.H;
         double h3 = h/3;
+
+        for (int i = 0; i < Dimension; i++)
+        {
+          myFInput[0][i] = input[i];
+        } 
 
         //k1:
         myF[0].Evaluate();
@@ -126,23 +149,22 @@ namespace DSIS.Function.Solvers.Merson
           myK[4][i] = h3*myFOutput[4][i];
         }
 
-
         //r:
         for(int i = 0; i < Dimension; i++)
         {
-          double ri = (2*myK[3][i] - 3*myK[2][i] - myK[4][i])/10;
+          double ri = (2*myK[3][i] - 3*myK[2][i] - myK[4][i])/3;
           if (ri > myPrecision[i])
           {
             myCtx.IncreasePrecision();
-            Evaluate();
-            return;
+            return Evaluate(myInput, myOutput);
           }
         }
 
         for(int i =0; i < Dimension; i++)
         {
-          myOutput[i] = myFInput[0][i] + (myK[3][i] + myK[4][i])/2;
+          output[i] = myFInput[0][i] + (myK[3][i] + myK[4][i])/2;
         }
+        return h;
       }
     }
   }
