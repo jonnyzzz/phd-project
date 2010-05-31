@@ -3,41 +3,21 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5D502DD5-115F-4679-9307-92369C935667}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Function.Solvers.Tests</RootNamespace>
     <AssemblyName>Function.Solvers.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework.extensions, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.framework.extensions.dll</HintPath>
+      <HintPath>..\..\..\lib\nunit\bin\nunit.framework.extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,15 +33,15 @@
     <Compile Include="src\RungeKuttSolverTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Mock\Core.Mock.csproj">
+    <ProjectReference Include="..\..\Core.Mock\Core.Mock.csproj">
       <Project>{2B4BA54B-9B5E-4D07-B859-FAB1D15203F0}</Project>
       <Name>Core.Mock</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.System.Tests\Core.System.Tests.csproj">
+    <ProjectReference Include="..\..\Core.System.Tests\Core.System.Tests.csproj">
       <Project>{66A2C35A-E042-4F0C-B8E7-D61401133359}</Project>
       <Name>Core.System.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
@@ -77,7 +57,7 @@
       <Project>{4340017C-0FB4-4A43-8D5A-28ACB55045F0}</Project>
       <Name>Function.Solvers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinates.Tests\IntegerCoordinates.Tests.csproj">
+    <ProjectReference Include="..\..\IntegerCoordinates.Tests\IntegerCoordinates.Tests.csproj">
       <Project>{FE0FA82B-A965-4AA8-958B-150ED7200F12}</Project>
       <Name>IntegerCoordinates.Tests</Name>
     </ProjectReference>

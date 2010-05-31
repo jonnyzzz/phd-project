@@ -29,11 +29,11 @@
     <Compile Include="src\SegmentBoxIterator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodeCompiler\CodeCompiler.csproj">
+    <ProjectReference Include="..\..\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utils\Utils.csproj">
+    <ProjectReference Include="..\..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>

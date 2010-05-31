@@ -31,7 +31,7 @@
     <Compile Include="src\XsdGraphXmlLoader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BoxIterators\BoxIterators.csproj">
+    <ProjectReference Include="..\CellImageBuilders\BoxIterators\BoxIterators.csproj">
       <Project>{B5F40029-7A5F-440D-8A5A-215E032CF89C}</Project>
       <Name>BoxIterators</Name>
     </ProjectReference>

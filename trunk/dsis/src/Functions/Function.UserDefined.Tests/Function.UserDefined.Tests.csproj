@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AF1AFA0D-8B4A-442E-978E-7571E7A83CDE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -21,7 +19,7 @@
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -31,15 +29,15 @@
     <Compile Include="src\UserDefinedFunctionFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodeCompiler\CodeCompiler.csproj">
+    <ProjectReference Include="..\..\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+    <ProjectReference Include="..\..\Core.Ioc\Core.Ioc.csproj">
       <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
       <Name>Core.Ioc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
@@ -51,11 +49,11 @@
       <Project>{3904EC2C-B187-4999-ABB7-059DF4AA2371}</Project>
       <Name>Function.UserDefined</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
+    <ProjectReference Include="..\..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
       <Name>Scheme.Objects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utils\Utils.csproj">
+    <ProjectReference Include="..\..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>

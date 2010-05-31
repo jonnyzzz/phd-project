@@ -9,31 +9,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functions", "Functions", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{19D282F3-A7D7-4873-9AD0-B51938EDA439}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.BoxMethod", "CellImageBuilder.BoxMethod\CellImageBuilder.BoxMethod.csproj", "{FA6D5947-51E7-4D99-9D18-D4946901FE80}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.BoxMethod", "CellImageBuilders\CellImageBuilder.BoxMethod\CellImageBuilder.BoxMethod.csproj", "{FA6D5947-51E7-4D99-9D18-D4946901FE80}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegerCoordinates", "IntegerCoordinates\IntegerCoordinates.csproj", "{D083C004-D65D-484B-8E8F-77B37D17C9F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.Predefined", "Function.Predefined\Function.Predefined.csproj", "{A2418F07-FA53-4E1E-A9D2-1170875F6042}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.Predefined", "Functions\Function.Predefined\Function.Predefined.csproj", "{A2418F07-FA53-4E1E-A9D2-1170875F6042}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "Graph\Graph.csproj", "{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "Graphs\Graph\Graph.csproj", "{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxIterators", "BoxIterators\BoxIterators.csproj", "{B5F40029-7A5F-440D-8A5A-215E032CF89C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxIterators", "CellImageBuilders\BoxIterators\BoxIterators.csproj", "{B5F40029-7A5F-440D-8A5A-215E032CF89C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.BoxAdaptiveMethod", "CellImageBuilder.BoxAdaptiveMethod\CellImageBuilder.BoxAdaptiveMethod.csproj", "{5E26950D-C4A4-4DDE-BBAB-E7317E0C864F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.BoxAdaptiveMethod", "CellImageBuilders\CellImageBuilder.BoxAdaptiveMethod\CellImageBuilder.BoxAdaptiveMethod.csproj", "{5E26950D-C4A4-4DDE-BBAB-E7317E0C864F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.PointMethod", "CellImageBuilder.PointMethod\CellImageBuilder.PointMethod.csproj", "{E240B619-3EF8-46C0-BE73-1A9D22D50446}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.PointMethod", "CellImageBuilders\CellImageBuilder.PointMethod\CellImageBuilder.PointMethod.csproj", "{E240B619-3EF8-46C0-BE73-1A9D22D50446}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.Shared", "CellImageBuilder.Shared\CellImageBuilder.Shared.csproj", "{C75D0837-A992-41A2-8A46-A1B0F292048C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.Shared", "CellImageBuilders\CellImageBuilder.Shared\CellImageBuilder.Shared.csproj", "{C75D0837-A992-41A2-8A46-A1B0F292048C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Mock", "Core.Mock\Core.Mock.csproj", "{2B4BA54B-9B5E-4D07-B859-FAB1D15203F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.Mock", "Function.Mock\Function.Mock.csproj", "{02AFA84E-DA1B-4010-BA76-8E077E4D6175}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.Mock", "Functions\Function.Mock\Function.Mock.csproj", "{02AFA84E-DA1B-4010-BA76-8E077E4D6175}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GnuplotDrawer", "GnuplotDrawer\GnuplotDrawer.csproj", "{CA14A441-039B-49F2-B678-9491146C56A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Entropy", "Graph.Entropy\Graph.Entropy.csproj", "{43283F9D-A669-47B2-80FD-FFA447A4BD7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Entropy", "Graphs\Graph.Entropy\Graph.Entropy.csproj", "{43283F9D-A669-47B2-80FD-FFA447A4BD7F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.PerformanceChecks", "Tests.PerformanceChecks\Tests.PerformanceChecks.csproj", "{5B18F64F-452B-4155-94A7-B47CFF2FEDF4}"
 EndProject
@@ -45,23 +45,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.System", "Core.System\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.AdaptiveMethod", "CellImageBuilder.AdaptiveMethod\CellImageBuilder.AdaptiveMethod.csproj", "{096D6D4E-B782-4B87-95FE-8B59D80510BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.AdaptiveMethod", "CellImageBuilders\CellImageBuilder.AdaptiveMethod\CellImageBuilder.AdaptiveMethod.csproj", "{096D6D4E-B782-4B87-95FE-8B59D80510BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.Solvers", "Function.Solvers\Function.Solvers.csproj", "{4340017C-0FB4-4A43-8D5A-28ACB55045F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.Solvers", "Functions\Function.Solvers\Function.Solvers.csproj", "{4340017C-0FB4-4A43-8D5A-28ACB55045F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistance", "Persistance\Persistance.csproj", "{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheme", "Scheme\Scheme.csproj", "{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Morse", "Graph.Morse\Graph.Morse.csproj", "{CB0FD4CC-E606-4A2A-967D-A086E1AE2B9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Morse", "Graphs\Graph.Morse\Graph.Morse.csproj", "{CB0FD4CC-E606-4A2A-967D-A086E1AE2B9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Morse.Tests", "Graph.Morse.Tests\Graph.Morse.Tests.csproj", "{504B29F2-8B62-4F5C-9FF8-89175002C3A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Morse.Tests", "Graphs\Graph.Morse.Tests\Graph.Morse.Tests.csproj", "{504B29F2-8B62-4F5C-9FF8-89175002C3A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheme.Impl", "Scheme.Impl\Scheme.Impl.csproj", "{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Entropy.Tests", "Graph.Entropy.Tests\Graph.Entropy.Tests.csproj", "{E23B0AB1-6374-4E97-9303-CEE8FD167FDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Entropy.Tests", "Graphs\Graph.Entropy.Tests\Graph.Entropy.Tests.csproj", "{E23B0AB1-6374-4E97-9303-CEE8FD167FDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Tests", "Graph.Tests\Graph.Tests.csproj", "{55507A34-E276-49CB-93DF-8E31E27703FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Tests", "Graphs\Graph.Tests\Graph.Tests.csproj", "{55507A34-E276-49CB-93DF-8E31E27703FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.BlackBox", "Tests.BlackBox\Tests.BlackBox.csproj", "{D12DDA21-8956-4FD4-99C7-809290767E33}"
 EndProject
@@ -73,9 +73,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineIterator", "LineIterato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LineIterator.Tests", "LineIterator.Tests\LineIterator.Tests.csproj", "{6ED2E705-43EE-4871-91D2-F0783F736CB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{5410F9D5-9D98-44CF-9518-CE5374CE4B22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UIs\UI\UI.csproj", "{5410F9D5-9D98-44CF-9518-CE5374CE4B22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Model", "UI.Model\UI.Model.csproj", "{2A35D3B0-4D7B-4D6F-BB9E-1697A280BBC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Model", "UIs\UI.Model\UI.Model.csproj", "{2A35D3B0-4D7B-4D6F-BB9E-1697A280BBC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheme2", "Scheme2\Scheme2.csproj", "{69A72457-55CD-463A-840B-73F62BDCA0E5}"
 EndProject
@@ -87,25 +87,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheme.Objects", "Scheme.Ob
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheme.Objects.Tests", "Scheme.Objects.Tests\Scheme.Objects.Tests.csproj", "{9905ABD5-5EB7-4DD1-9ED4-BC69FDE8096C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.Tests", "CellImageBuilder.Tests\CellImageBuilder.Tests.csproj", "{5889B68D-709C-4CC2-8492-B421D6D8BCE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.Tests", "CellImageBuilders\CellImageBuilder.Tests\CellImageBuilder.Tests.csproj", "{5889B68D-709C-4CC2-8492-B421D6D8BCE9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegerCoordinates.Tests", "IntegerCoordinates.Tests\IntegerCoordinates.Tests.csproj", "{FE0FA82B-A965-4AA8-958B-150ED7200F12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Entropy.Intersection", "Graph.Entropy.Intersection\Graph.Entropy.Intersection.csproj", "{655665D8-F6E8-45A2-85CB-AE10B2215C26}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Entropy.Intersection", "Graphs\Graph.Entropy.Intersection\Graph.Entropy.Intersection.csproj", "{655665D8-F6E8-45A2-85CB-AE10B2215C26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Application", "UI.Application\UI.Application.csproj", "{0A091EAB-F110-4CEC-9DEF-0A8E966641C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Application", "UIs\UI.Application\UI.Application.csproj", "{0A091EAB-F110-4CEC-9DEF-0A8E966641C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.FunctionDialog", "UI.FunctionDialog\UI.FunctionDialog.csproj", "{C8FBFBAF-B2DF-49FA-B428-6BC429658BB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.FunctionDialog", "UIs\UI.FunctionDialog\UI.FunctionDialog.csproj", "{C8FBFBAF-B2DF-49FA-B428-6BC429658BB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Wizard", "UI.Wizard\UI.Wizard.csproj", "{F08FC04F-28A4-4A97-80CB-7F3867C8244B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Wizard", "UIs\UI.Wizard\UI.Wizard.csproj", "{F08FC04F-28A4-4A97-80CB-7F3867C8244B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Application.Test", "UI.Application.Test\UI.Application.Test.csproj", "{74DCA687-4C27-4891-90A7-067B9F4F5B7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Application.Test", "UIs\UI.Application.Test\UI.Application.Test.csproj", "{74DCA687-4C27-4891-90A7-067B9F4F5B7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Controls", "UI.Controls\UI.Controls.csproj", "{3305A57B-0432-4E75-8E13-8AB265B8ECB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Controls", "UIs\UI.Controls\UI.Controls.csproj", "{3305A57B-0432-4E75-8E13-8AB265B8ECB6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistance.Tests", "Persistance.Tests\Persistance.Tests.csproj", "{83ED607D-158F-4B0A-84F9-0DA6FFC88BDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxIterators.Tests", "BoxIterators.Tests\BoxIterators.Tests.csproj", "{F99E3E8C-A19A-4681-8C9F-3245E63B39B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxIterators.Tests", "CellImageBuilders\BoxIterators.Tests\BoxIterators.Tests.csproj", "{F99E3E8C-A19A-4681-8C9F-3245E63B39B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils.Tests", "Utils.Tests\Utils.Tests.csproj", "{62D6EB84-48A7-4FCF-A0E0-02CDFC8FD586}"
 EndProject
@@ -125,21 +125,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ioc", "Core.Ioc\Core.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ioc.Tests", "Core.Ioc.Tests\Core.Ioc.Tests.csproj", "{288AD169-5743-4C7D-889D-C77B8A69DDD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvariantSetMethod", "InvariantSetMethod\InvariantSetMethod.csproj", "{CD2F335F-9E68-449E-B0F4-B377C44C294F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvariantSetMethod", "CellImageBuilders\InvariantSetMethod\InvariantSetMethod.csproj", "{CD2F335F-9E68-449E-B0F4-B377C44C294F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvariantSetMethod.Tests", "InvariantSetMethod.Tests\InvariantSetMethod.Tests.csproj", "{73B131B6-5E74-4F6C-B008-9A6134EC6516}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvariantSetMethod.Tests", "CellImageBuilders\InvariantSetMethod.Tests\InvariantSetMethod.Tests.csproj", "{73B131B6-5E74-4F6C-B008-9A6134EC6516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.ComputationDialogs", "UI.ComputationDialogs\UI.ComputationDialogs.csproj", "{4BB65475-EC86-4C56-943D-7B8E4D8D152D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.ComputationDialogs", "UIs\UI.ComputationDialogs\UI.ComputationDialogs.csproj", "{4BB65475-EC86-4C56-943D-7B8E4D8D152D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.UserDefined", "Function.UserDefined\Function.UserDefined.csproj", "{3904EC2C-B187-4999-ABB7-059DF4AA2371}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.UserDefined", "Functions\Function.UserDefined\Function.UserDefined.csproj", "{3904EC2C-B187-4999-ABB7-059DF4AA2371}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.UserDefined.Tests", "Function.UserDefined.Tests\Function.UserDefined.Tests.csproj", "{AF1AFA0D-8B4A-442E-978E-7571E7A83CDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.UserDefined.Tests", "Functions\Function.UserDefined.Tests\Function.UserDefined.Tests.csproj", "{AF1AFA0D-8B4A-442E-978E-7571E7A83CDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.Descartes", "CellImageBuilder.Descartes\CellImageBuilder.Descartes.csproj", "{9FDA36D3-9AC4-44D2-BBF8-F0D496783896}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.Descartes", "CellImageBuilders\CellImageBuilder.Descartes\CellImageBuilder.Descartes.csproj", "{9FDA36D3-9AC4-44D2-BBF8-F0D496783896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.BoxMethod.Angle.2D", "CellImageBuilder.BoxMethod.Angle.2D\CellImageBuilder.BoxMethod.Angle.2D.csproj", "{2A94C2AE-28E7-43E2-A297-6EF543B42416}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellImageBuilder.BoxMethod.Angle.2D", "CellImageBuilders\CellImageBuilder.BoxMethod.Angle.2D\CellImageBuilder.BoxMethod.Angle.2D.csproj", "{2A94C2AE-28E7-43E2-A297-6EF543B42416}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.Solvers.Tests", "Function.Solvers.Tests\Function.Solvers.Tests.csproj", "{5D502DD5-115F-4679-9307-92369C935667}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function.Solvers.Tests", "Functions\Function.Solvers.Tests\Function.Solvers.Tests.csproj", "{5D502DD5-115F-4679-9307-92369C935667}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -931,16 +931,16 @@ Global
 		{2A94C2AE-28E7-43E2-A297-6EF543B42416}.Release|Mixed Platforms.Build.0 = Release|x64
 		{2A94C2AE-28E7-43E2-A297-6EF543B42416}.Release|x64.ActiveCfg = Release|x64
 		{2A94C2AE-28E7-43E2-A297-6EF543B42416}.Release|x64.Build.0 = Release|x64
-		{5D502DD5-115F-4679-9307-92369C935667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D502DD5-115F-4679-9307-92369C935667}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D502DD5-115F-4679-9307-92369C935667}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5D502DD5-115F-4679-9307-92369C935667}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5D502DD5-115F-4679-9307-92369C935667}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{5D502DD5-115F-4679-9307-92369C935667}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D502DD5-115F-4679-9307-92369C935667}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5D502DD5-115F-4679-9307-92369C935667}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5D502DD5-115F-4679-9307-92369C935667}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5D502DD5-115F-4679-9307-92369C935667}.Release|x64.ActiveCfg = Release|Any CPU
+		{5D502DD5-115F-4679-9307-92369C935667}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{5D502DD5-115F-4679-9307-92369C935667}.Debug|Mixed Platforms.ActiveCfg = Debug|x64
+		{5D502DD5-115F-4679-9307-92369C935667}.Debug|Mixed Platforms.Build.0 = Debug|x64
+		{5D502DD5-115F-4679-9307-92369C935667}.Debug|x64.ActiveCfg = Debug|x64
+		{5D502DD5-115F-4679-9307-92369C935667}.Debug|x64.Build.0 = Debug|x64
+		{5D502DD5-115F-4679-9307-92369C935667}.Release|Any CPU.ActiveCfg = Release|x64
+		{5D502DD5-115F-4679-9307-92369C935667}.Release|Mixed Platforms.ActiveCfg = Release|x64
+		{5D502DD5-115F-4679-9307-92369C935667}.Release|Mixed Platforms.Build.0 = Release|x64
+		{5D502DD5-115F-4679-9307-92369C935667}.Release|x64.ActiveCfg = Release|x64
+		{5D502DD5-115F-4679-9307-92369C935667}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

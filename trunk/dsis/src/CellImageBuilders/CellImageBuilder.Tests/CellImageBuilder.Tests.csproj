@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5889B68D-709C-4CC2-8492-B421D6D8BCE9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -21,7 +19,7 @@
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
+      <HintPath>..\..\..\lib\nunit\bin\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -63,23 +61,23 @@
       <Project>{9FDA36D3-9AC4-44D2-BBF8-F0D496783896}</Project>
       <Name>CellImageBuilder.Descartes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CodeCompiler\CodeCompiler.csproj">
+    <ProjectReference Include="..\..\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+    <ProjectReference Include="..\..\Core.Ioc\Core.Ioc.csproj">
       <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
       <Name>Core.Ioc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.System.Tests\Core.System.Tests.csproj">
+    <ProjectReference Include="..\..\Core.System.Tests\Core.System.Tests.csproj">
       <Project>{66A2C35A-E042-4F0C-B8E7-D61401133359}</Project>
       <Name>Core.System.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utils\Utils.csproj">
+    <ProjectReference Include="..\..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>
@@ -107,27 +105,27 @@
       <Project>{C75D0837-A992-41A2-8A46-A1B0F292048C}</Project>
       <Name>CellImageBuilder.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.Mock\Core.Mock.csproj">
+    <ProjectReference Include="..\..\Core.Mock\Core.Mock.csproj">
       <Project>{2B4BA54B-9B5E-4D07-B859-FAB1D15203F0}</Project>
       <Name>Core.Mock</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Function.Mock\Function.Mock.csproj">
+    <ProjectReference Include="..\..\Functions\Function.Mock\Function.Mock.csproj">
       <Project>{02AFA84E-DA1B-4010-BA76-8E077E4D6175}</Project>
       <Name>Function.Mock</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Function.Predefined\Function.Predefined.csproj">
+    <ProjectReference Include="..\..\Functions\Function.Predefined\Function.Predefined.csproj">
       <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
       <Name>Function.Predefined</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinates.Tests\IntegerCoordinates.Tests.csproj">
+    <ProjectReference Include="..\..\IntegerCoordinates.Tests\IntegerCoordinates.Tests.csproj">
       <Project>{FE0FA82B-A965-4AA8-958B-150ED7200F12}</Project>
       <Name>IntegerCoordinates.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
+    <ProjectReference Include="..\..\IntegerCoordinates\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
       <Name>IntegerCoordinates</Name>
     </ProjectReference>

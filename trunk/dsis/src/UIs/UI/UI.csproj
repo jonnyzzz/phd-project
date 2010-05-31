@@ -3,8 +3,6 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5410F9D5-9D98-44CF-9518-CE5374CE4B22}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -56,43 +54,43 @@
     <Compile Include="src\ISymbolicImageDrawControlFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
+    <ProjectReference Include="..\..\Core.Ioc\Core.Ioc.csproj">
       <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
       <Name>Core.Ioc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.System\Core.System.csproj">
+    <ProjectReference Include="..\..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>
       <Name>Core.System</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Graph\Graph.csproj">
+    <ProjectReference Include="..\..\Graphs\Graph\Graph.csproj">
       <Project>{75AA9BC5-C937-4EFB-AF4A-5F9AAA9EC483}</Project>
       <Name>Graph</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IntegerCoordinates\IntegerCoordinates.csproj">
+    <ProjectReference Include="..\..\IntegerCoordinates\IntegerCoordinates.csproj">
       <Project>{D083C004-D65D-484B-8E8F-77B37D17C9F4}</Project>
       <Name>IntegerCoordinates</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Scheme.Impl\Scheme.Impl.csproj">
+    <ProjectReference Include="..\..\Scheme.Impl\Scheme.Impl.csproj">
       <Project>{F7471EF8-60F1-4F4E-AB4F-1E188421FA52}</Project>
       <Name>Scheme.Impl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
+    <ProjectReference Include="..\..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>
       <Name>Scheme.Objects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Scheme\Scheme.csproj">
+    <ProjectReference Include="..\..\Scheme\Scheme.csproj">
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
       <Name>Scheme</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Spring\Spring.csproj">
+    <ProjectReference Include="..\..\Spring\Spring.csproj">
       <Project>{0DED83D3-1D84-463C-8343-DDD85F5CECAA}</Project>
       <Name>Spring</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utils\Utils.csproj">
+    <ProjectReference Include="..\..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>

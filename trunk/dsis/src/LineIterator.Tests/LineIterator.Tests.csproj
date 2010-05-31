@@ -49,15 +49,15 @@
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Function.Mock\Function.Mock.csproj">
+    <ProjectReference Include="..\Functions\Function.Mock\Function.Mock.csproj">
       <Project>{02AFA84E-DA1B-4010-BA76-8E077E4D6175}</Project>
       <Name>Function.Mock</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Function.Predefined\Function.Predefined.csproj">
+    <ProjectReference Include="..\Functions\Function.Predefined\Function.Predefined.csproj">
       <Project>{A2418F07-FA53-4E1E-A9D2-1170875F6042}</Project>
       <Name>Function.Predefined</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Function.Solvers\Function.Solvers.csproj">
+    <ProjectReference Include="..\Functions\Function.Solvers\Function.Solvers.csproj">
       <Project>{4340017C-0FB4-4A43-8D5A-28ACB55045F0}</Project>
       <Name>Function.Solvers</Name>
     </ProjectReference>

@@ -97,7 +97,7 @@
       <Project>{BDB193D8-A800-4799-BD34-3FCEB2AEE4FE}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Function.Mock\Function.Mock.csproj">
+    <ProjectReference Include="..\Functions\Function.Mock\Function.Mock.csproj">
       <Project>{02AFA84E-DA1B-4010-BA76-8E077E4D6175}</Project>
       <Name>Function.Mock</Name>
     </ProjectReference>
