@@ -11,12 +11,6 @@ namespace JetBrains.Build.Tools
   /// </summary>
   public class XsdCs : ToolTask
   {
-    #region Data
-
-    #endregion
-
-    #region Attributes
-
     /// <summary>
     /// Gets or sets the input XSD file.
     /// </summary>
@@ -34,17 +28,13 @@ namespace JetBrains.Build.Tools
     /// </summary>
     [Required]
     public ITaskItem OutDir { get; set; }
-   
-    public bool RemoveDebuggerAttribute { get; set; }
 
-    #endregion
+    public bool RemoveDebuggerAttribute { get; set; }
 
     public XsdCs()
     {
       RemoveDebuggerAttribute = true;
     }
-
-    #region Overrides
 
     public override bool Execute()
     {
@@ -149,20 +139,28 @@ namespace JetBrains.Build.Tools
                                           , () => ToolLocationHelper.GetPathToSystemFile(ToolName),
                                           () =>
                                           ToolLocationHelper.GetPathToDotNetFrameworkFile(ToolName,
-                                                                                          TargetDotNetFrameworkVersion
-                                                                                            .Version20),
+                                                                                          TargetDotNetFrameworkVersion.
+                                                                                            Version40),
+                                          () =>
+                                          ToolLocationHelper.GetPathToDotNetFrameworkSdkFile(ToolName,
+                                                                                             TargetDotNetFrameworkVersion
+                                                                                               .Version40),
+                                          () =>
+                                          ToolLocationHelper.GetPathToDotNetFrameworkFile(ToolName,
+                                                                                          TargetDotNetFrameworkVersion.
+                                                                                            Version35),
+                                          () =>
+                                          ToolLocationHelper.GetPathToDotNetFrameworkSdkFile(ToolName,
+                                                                                             TargetDotNetFrameworkVersion
+                                                                                               .Version35),
+                                          () =>
+                                          ToolLocationHelper.GetPathToDotNetFrameworkFile(ToolName,
+                                                                                          TargetDotNetFrameworkVersion.
+                                                                                            Version20),
                                           () =>
                                           ToolLocationHelper.GetPathToDotNetFrameworkSdkFile(ToolName,
                                                                                              TargetDotNetFrameworkVersion
                                                                                                .Version20),
-                                          () =>
-                                          ToolLocationHelper.GetPathToDotNetFrameworkFile(ToolName,
-                                                                                          TargetDotNetFrameworkVersion
-                                                                                            .Version11),
-                                          () =>
-                                          ToolLocationHelper.GetPathToDotNetFrameworkSdkFile(ToolName,
-                                                                                             TargetDotNetFrameworkVersion
-                                                                                               .Version11),
                                         })
       {
         try
@@ -189,13 +187,5 @@ namespace JetBrains.Build.Tools
     {
       get { return "Xsd.exe"; }
     }
-
-    #endregion
-
-    #region Func Type
-
-    public delegate T Func<T>();
-
-    #endregion
   }
 }

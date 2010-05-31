@@ -10,55 +10,25 @@
     <AssemblyName>DSIS.Graph</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Abstract\AbstractGraph.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="src\Abstract\AbstractGraph.cs"/>
     <Compile Include="src\Abstract\AbstractGraphComponentIdHolder.cs" />
     <Compile Include="src\Abstract\Algorithms\GraphAlgorithms.AsList.cs" />
     <Compile Include="src\Abstract\Algorithms\GraphAlgorithms.cs" />
     <Compile Include="src\Abstract\Algorithms\GraphAlgorithms.Dump.cs" />
     <Compile Include="src\Abstract\Algorithms\GraphAlgorithms.Tarjan.cs" />
-    <Compile Include="src\Abstract\ComponentsFilter.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\Abstract\FlagsNodeHolder.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\Abstract\GraphDataHolder.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\Abstract\IGraphExtension.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\Abstract\INodeCollection.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\Abstract\INodeInternal.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\Abstract\Node.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\Abstract\NodeEqualityComparer.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\Abstract\NodeFlag.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\Abstract\NodeFlags.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="src\Abstract\NodeFlagValue.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="src\Abstract\ComponentsFilter.cs"/>
+    <Compile Include="src\Abstract\FlagsNodeHolder.cs"/>
+    <Compile Include="src\Abstract\GraphDataHolder.cs"/>
+    <Compile Include="src\Abstract\IGraphExtension.cs"/>
+    <Compile Include="src\Abstract\INodeCollection.cs"/>
+    <Compile Include="src\Abstract\INodeInternal.cs"/>
+    <Compile Include="src\Abstract\Node.cs"/>
+    <Compile Include="src\Abstract\NodeEqualityComparer.cs"/>
+    <Compile Include="src\Abstract\NodeFlag.cs"/>
+    <Compile Include="src\Abstract\NodeFlags.cs"/>
+    <Compile Include="src\Abstract\NodeFlagValue.cs"/>
     <Compile Include="src\Abstract\NodeSets\ArrayNodeSet.cs" />
     <Compile Include="src\Abstract\NodeSets\EmptyNodeSetState.cs" />
     <Compile Include="src\Abstract\NodeSets\GraphNodeHashList.cs" />
