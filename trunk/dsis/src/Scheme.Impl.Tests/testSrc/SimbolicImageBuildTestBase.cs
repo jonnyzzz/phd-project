@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using DSIS.CellImageBuilder.BoxMethod;
 using DSIS.CellImageBuilder.Shared;
@@ -12,6 +11,7 @@ using DSIS.Scheme.Impl.Actions;
 using DSIS.Scheme.Impl.Actions.Agregated;
 using DSIS.Scheme.Impl.Actions.Console;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace DSIS.Scheme.Impl.Tests
 {
@@ -95,11 +95,10 @@ namespace DSIS.Scheme.Impl.Tests
 
     protected class AssertGraphAction : IntegerCoordinateSystemActionBase2Ex
     {
-      public IConstraint GraphNodesConstraint;
-      public IConstraint GraphEdgesConstraint;
-
-      public IConstraint CompontentsCountConstraint;
-      public IConstraint CompontentsNodesCountConstraint;
+      public Constraint GraphNodesConstraint;
+      public Constraint GraphEdgesConstraint;
+      public Constraint CompontentsCountConstraint;
+      public Constraint CompontentsNodesCountConstraint;
 
       protected override void GetChecks<T, Q>(T system, Action<ContextMissmatchCheck> addCheck)
       {
@@ -119,7 +118,7 @@ namespace DSIS.Scheme.Impl.Tests
         Apply(CompontentsNodesCountConstraint, nodesInComponents);
       }
 
-      private static void Apply<T>(IConstraint constraint, T t)
+      private static void Apply<T>(Constraint constraint, T t)
       {
         if (constraint != null)
           Assert.That(t, constraint);

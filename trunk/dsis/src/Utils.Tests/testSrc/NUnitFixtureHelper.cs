@@ -1,5 +1,4 @@
 using System.Reflection;
-using NUnit.ConsoleRunner;
 using NUnit.Framework;
 
 namespace DSIS.Utils.Test
@@ -8,7 +7,8 @@ namespace DSIS.Utils.Test
   {
     public static void RunTests(Assembly ass)
     {
-      Assert.AreEqual(0, ConsoleUi.Main(new string[] { ass.Location, "/nodots", "/nologo", "/labels" }));
+      Assert.Fail("Not implemented");
+//      Assert.AreEqual(0, ConsoleUi.Main(new string[] { ass.Location, "/nodots", "/nologo", "/labels" }));
     }
   }
 }

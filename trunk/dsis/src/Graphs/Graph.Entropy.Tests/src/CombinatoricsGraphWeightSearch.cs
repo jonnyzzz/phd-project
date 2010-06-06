@@ -4,7 +4,6 @@ using DSIS.Graph.Entropy.Impl.Loop.Combinatorics;
 using DSIS.Graph.Entropy.Impl.Loop.Iterators;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Graph.Entropy.Tests
 {

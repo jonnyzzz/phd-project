@@ -11,7 +11,6 @@ using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using DSIS.Utils;
 
 namespace DSIS.CellImageBuilder.Tests.Descartes
@@ -31,9 +30,9 @@ namespace DSIS.CellImageBuilder.Tests.Descartes
     [Test]
     public void TestAutowiring()
     {
-      Assert.That(Factory, SyntaxHelper.Not.Null);
-      Assert.That(Ics, SyntaxHelper.Not.Null);
-      Assert.That(SystemSpaceFactory, SyntaxHelper.Not.Null);
+      Assert.That(Factory, Is.Not.Null);
+      Assert.That(Ics, Is.Not.Null);
+      Assert.That(SystemSpaceFactory, Is.Not.Null);
     }
 
     [Test]

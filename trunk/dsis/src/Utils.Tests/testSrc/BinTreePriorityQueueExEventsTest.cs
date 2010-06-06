@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using System.Linq;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Utils.Tests
 {

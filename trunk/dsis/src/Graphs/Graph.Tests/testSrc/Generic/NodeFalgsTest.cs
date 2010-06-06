@@ -1,6 +1,5 @@
 using DSIS.Graph.Abstract;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Graph.Tests.Generic
 {

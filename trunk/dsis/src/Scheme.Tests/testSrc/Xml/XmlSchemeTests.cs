@@ -5,9 +5,8 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using DSIS.Scheme.Xml;
-using DSIS.Scheme2.Tests.src.Xml; 
+using DSIS.Scheme2.Tests.Xml;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Scheme.Tests.Xml
 {

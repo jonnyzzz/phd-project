@@ -5,7 +5,6 @@ using DSIS.Utils;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 using EugenePetrenko.Shared.Core.Ioc.JC;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.UI.Application.Test
 {

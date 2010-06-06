@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Util;
-using DSIS.Graph.Abstract;
-using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Util;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
+using NUnit.Framework.Constraints;
 
 namespace DSIS.Graph.Entropy.Tests
 {
@@ -18,7 +16,7 @@ namespace DSIS.Graph.Entropy.Tests
     protected virtual double EPS { get { return 1e-3;}}
     protected static bool DEBUG = false;
 
-    protected virtual IConstraint AssertEntropy(double expected)
+    protected virtual Constraint AssertEntropy(double expected)
     {
       return Is.EqualTo(expected).Within(EPS);
     }

@@ -1,9 +1,7 @@
-﻿using System.CodeDom;
-using DSIS.Core.System;
+﻿using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Persistance.Tests
 {

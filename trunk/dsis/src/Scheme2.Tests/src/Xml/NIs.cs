@@ -1,6 +1,6 @@
-using NUnit.Framework.SyntaxHelpers;
+using NUnit.Framework;
 
-namespace DSIS.Scheme2.Tests.src.Xml
+namespace DSIS.Scheme2.Tests.Xml
 {
   public class NIs : Is
   {    

@@ -6,9 +6,7 @@ using DSIS.IntegerCoordinates.Generated;
 using DSIS.IntegerCoordinates.Tests.Generic;
 using DSIS.Utils;
 using DSIS.Utils.Test;
-using NUnit.Core;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.IntegerCoordinates.Tests.Generated
 {
@@ -147,7 +145,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
 
     private static T[] Fill<T>(T v, int length)
     {
-      T[] arr = new T[length];
+      var arr = new T[length];
       for(int i=0; i<length;i++)
       {
         arr[i] = v;
@@ -181,7 +179,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
 ",
  GeneratorTypeUtil.GenerateFQTypeName(system.System),
  GeneratorTypeUtil.GenerateFQTypeInstance(typeof(CellConnectionAdapterOneDimBaseTest<,>), system.System, system.Coordinate)),
-                                                typeof (TestFixture),
+                                                typeof (TestFixtureAttribute),
                                                 GetType(),
                                                 typeof (GeneratedIntegerCoordinateSystemManager),
                                                 system.GetType(),
@@ -229,7 +227,7 @@ namespace DSIS.IntegerCoordinates.Tests.Generated
                                                   GeneratorTypeUtil.GenerateFQTypeName(system.Coordinate),
                                                   GeneratorTypeUtil.GenerateFQTypeInstance(typeof(CellConnectionAdapterTwoDimBaseTest<,>),system.System, system.Coordinate),
                                                   GeneratorTypeUtil.GenerateFQTypeInstance(typeof(IntegerCoordinateSystemBaseTest<,>),system.System, system.Coordinate)),
-                                                typeof (TestFixture),
+                                                typeof (TestFixtureAttribute),
                                                 GetType(),
                                                 typeof (GeneratedIntegerCoordinateSystemManager),
                                                 system.GetType(),

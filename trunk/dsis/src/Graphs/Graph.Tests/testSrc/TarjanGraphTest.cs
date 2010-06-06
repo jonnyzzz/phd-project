@@ -5,7 +5,6 @@ using DSIS.Graph.Abstract;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates.Impl;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using DSIS.Utils;
 
 namespace DSIS.Graph.Tests

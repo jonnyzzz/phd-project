@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Graph.Morse.Tests
 {

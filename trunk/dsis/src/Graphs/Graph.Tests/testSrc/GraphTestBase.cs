@@ -3,7 +3,6 @@ using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using DSIS.Utils;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Graph.Tests
 {

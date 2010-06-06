@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using NUnit.Framework;
 using DSIS.Utils;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.IntegerCoordinates.Tests.Generic
 {  

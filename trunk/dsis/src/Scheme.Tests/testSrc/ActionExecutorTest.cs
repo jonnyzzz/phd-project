@@ -1,6 +1,5 @@
 using DSIS.Scheme.Exec;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 
 namespace DSIS.Scheme.Tests
 {
