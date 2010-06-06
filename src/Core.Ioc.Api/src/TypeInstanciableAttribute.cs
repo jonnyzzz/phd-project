@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 
 namespace EugenePetrenko.Shared.Core.Ioc.Api
 {
@@ -7,6 +8,7 @@ namespace EugenePetrenko.Shared.Core.Ioc.Api
   /// <see cref="ITypeInstantiator"/> intefrace
   /// </summary>
   [AttributeUsage(AttributeTargets.Class)]
+  [MeansImplicitUse]
   public class TypeInstanciableAttribute : Attribute
   {
   }
