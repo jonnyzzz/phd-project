@@ -1,11 +1,11 @@
 using System;
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Persistance;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
-  [SpringBean]
+  [ComponentImplementation]
   public class IntegerCoordinatePersistance : IPersistance<IIntegerCoordinateSystem>
   {
     private readonly IPersistance<ISystemSpace> mySpacePersistance;

@@ -1,4 +1,4 @@
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {

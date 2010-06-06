@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.Wizard;
-using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.FunctionDialog
 {
@@ -25,9 +24,8 @@ namespace DSIS.UI.FunctionDialog
       var list = Solvers.Select(x => new ContiniousFunctionSolverWrapper(continious, x));
       var s = new ContiniousFunctionSolverWrappers(list.ToArray());
       c.RegisterComponent(s);
-      c.Start();
 
-      return c.GetComponent<ContiniousSystemParametersWizard>();
+      return c.Start().GetComponent<ContiniousSystemParametersWizard>();
     }
   }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
 
 namespace DSIS.UI.UI
 {
@@ -17,8 +16,7 @@ namespace DSIS.UI.UI
       Cancel = false;
     }
   }
-
-  [ComponentInterface]
+  
   public interface IApplicationClass
   {
     T ShowDialog<T>(Func<Form, T> action);

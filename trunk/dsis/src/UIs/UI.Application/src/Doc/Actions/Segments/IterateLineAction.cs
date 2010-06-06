@@ -1,10 +1,10 @@
-using DSIS.Core.Ioc;
 using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions.Line;
 using DSIS.UI.Application.Progress;
 using DSIS.UI.UI;
 using DSIS.UI.Wizard;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 
 namespace DSIS.UI.Application.Doc.Actions.Segments

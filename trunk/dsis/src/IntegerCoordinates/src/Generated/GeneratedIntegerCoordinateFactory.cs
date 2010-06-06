@@ -1,7 +1,8 @@
 using System;
 using System.Linq;
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
+using EugenePetrenko.Shared.Core.Ioc.Api;
+
 namespace DSIS.IntegerCoordinates.Generated
 {
   [ComponentImplementation]

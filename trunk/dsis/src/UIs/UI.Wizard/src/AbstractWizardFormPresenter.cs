@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 
 namespace DSIS.UI.Wizard

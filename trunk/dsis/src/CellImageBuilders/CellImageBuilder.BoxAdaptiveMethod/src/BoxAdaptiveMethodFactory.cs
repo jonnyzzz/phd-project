@@ -1,5 +1,5 @@
 using DSIS.CellImageBuilder.Shared;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.CellImageBuilder.BoxAdaptiveMethod
 {

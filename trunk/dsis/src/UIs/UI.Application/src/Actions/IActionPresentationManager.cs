@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using DSIS.Core.Ioc;
 
 namespace DSIS.UI.Application.Actions
 {
-  [ComponentInterface]
   public interface IActionPresentationManager
   {
     void RegisterAction(IActionDescriptor desc);

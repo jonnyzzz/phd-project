@@ -50,9 +50,9 @@
     <Compile Include="src\IRectProcessors.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
-      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
-      <Name>Core.Ioc</Name>
+    <ProjectReference Include="..\..\shared\src\Core.Ioc.Api\Core.Ioc.Api.csproj">
+      <Project>{CB62BEE0-B76E-4BDC-AEC5-24F47CB84504}</Project>
+      <Name>Core.Ioc.Api</Name>
     </ProjectReference>
     <ProjectReference Include="..\Scheme.Objects\Scheme.Objects.csproj">
       <Project>{DD07B1E8-C264-41B6-847D-CE5C11C920F8}</Project>

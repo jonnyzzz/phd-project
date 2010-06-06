@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Ctx;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Doc.CurrentStep
 {

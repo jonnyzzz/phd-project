@@ -1,7 +1,7 @@
 using System;
-using DSIS.Core.Ioc;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Doc
 {
@@ -12,7 +12,7 @@ namespace DSIS.UI.Application.Doc
     private readonly IMainForm myMainForm;
     private readonly ISubContainerFactory myRootContainer;
     
-    private IComponentContainer myDocumentContainer;
+    private IComponentService myDocumentContainer;
 
     public DocUIManager(IApplicationClass app, IMainForm mainForm, ISubContainerFactory rootContainer)
     {
@@ -34,7 +34,7 @@ namespace DSIS.UI.Application.Doc
       myMainForm.SetContent(f.Control);
     }
 
-    private IComponentContainer CreateContainer(IApplicationDocument document)
+    private IComponentService CreateContainer(IApplicationDocument document)
     {
       var c  =
         myRootContainer.SubContainer<DocumentComponent>();
@@ -42,9 +42,7 @@ namespace DSIS.UI.Application.Doc
       //Predefined container-wide object
       c.RegisterComponent(document);
 
-      c.Start();
-      myDocumentContainer = c;
-      return c;
+      return myDocumentContainer = c.Start();
     }
 
     public void Dispose()

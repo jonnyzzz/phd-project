@@ -4,8 +4,8 @@ using System.Reflection;
 using Antlr.StringTemplate;
 using DSIS.BoxIterators.Generator;
 using DSIS.CodeCompiler;
-using DSIS.Core.Ioc;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.IntegerCoordinates.Generated
 {

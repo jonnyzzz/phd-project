@@ -1,7 +1,7 @@
 using System;
-using DSIS.Core.Ioc;
-using DSIS.Core.Ioc.Ex;
 using DSIS.Core.System;
+using EugenePetrenko.Core.Ioc.EntryPoint;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 

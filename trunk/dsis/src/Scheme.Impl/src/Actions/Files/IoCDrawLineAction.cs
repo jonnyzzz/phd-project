@@ -1,7 +1,7 @@
-using DSIS.Core.Ioc;
 using DSIS.GnuplotDrawer;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {

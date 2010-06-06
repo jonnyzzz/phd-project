@@ -1,5 +1,4 @@
 using System;
-using DSIS.Core.Ioc.Ex;
 
 namespace DSIS.UI.Application.Test
 {

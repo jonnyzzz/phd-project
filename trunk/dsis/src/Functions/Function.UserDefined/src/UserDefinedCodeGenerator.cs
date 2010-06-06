@@ -1,13 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using Antlr.StringTemplate;
 using DSIS.CodeCompiler;
-using DSIS.Core.Ioc;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.Function.UserDefined
 {

@@ -1,6 +1,6 @@
 using System;
 using System.Management;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 
 namespace DSIS.Core

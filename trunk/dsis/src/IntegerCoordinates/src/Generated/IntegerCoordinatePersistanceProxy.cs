@@ -1,10 +1,10 @@
 using DSIS.Core.Coordinates;
-using DSIS.Core.Ioc;
 using DSIS.Persistance;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.IntegerCoordinates.Generated
 {
-  [SpringBean]
+  [ComponentImplementation]
   public class IntegerCoordinatePersistanceProxy : IPersistance<ICellCoordinateSystem>
   {
     private readonly IntegerCoordinatePersistance myPersistance;

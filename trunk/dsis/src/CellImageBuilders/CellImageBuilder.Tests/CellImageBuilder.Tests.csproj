@@ -51,6 +51,14 @@
     <EmbeddedResource Include="resources\gold\test_06.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\shared\src\Core.Ioc.Api\Core.Ioc.Api.csproj">
+      <Project>{CB62BEE0-B76E-4BDC-AEC5-24F47CB84504}</Project>
+      <Name>Core.Ioc.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\shared\src\Core.Ioc\Core.Ioc.csproj">
+      <Project>{0935692E-009E-425E-A549-7E10D216AAB4}</Project>
+      <Name>Core.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CellImageBuilder.Descartes\CellImageBuilder.Descartes.csproj">
       <Project>{9FDA36D3-9AC4-44D2-BBF8-F0D496783896}</Project>
       <Name>CellImageBuilder.Descartes</Name>
@@ -58,10 +66,6 @@
     <ProjectReference Include="..\..\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core.Ioc\Core.Ioc.csproj">
-      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
-      <Name>Core.Ioc</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core.System.Tests\Core.System.Tests.csproj">
       <Project>{66A2C35A-E042-4F0C-B8E7-D61401133359}</Project>

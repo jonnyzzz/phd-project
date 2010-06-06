@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Threading;
-using DSIS.Core.Ioc;
-using DSIS.Core.Ioc.Ex;
+using EugenePetrenko.Core.Ioc.EntryPoint;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.SimpleRunner
 {

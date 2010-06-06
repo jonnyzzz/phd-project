@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.Persistance
 {
-  [SpringBean]
+  [ComponentImplementation]
   public class PersitanceManagerImpl : IPersistanceManager
   {
     private readonly Dictionary<Type, object> myPersistances = new Dictionary<Type, object>();

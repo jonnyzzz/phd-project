@@ -2,12 +2,12 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Xml;
-using DSIS.Core.Ioc;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Actions
 {
-  [ComponentInterface,ComponentImplementation(Startable = true)]
+  [ComponentImplementation(Startable = true)]
   public class XmlActionPreesentationManager
   {
     private readonly IActionPresentationManager myManager;

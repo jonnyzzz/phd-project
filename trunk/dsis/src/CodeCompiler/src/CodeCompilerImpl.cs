@@ -3,7 +3,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 using Microsoft.CSharp;
 

@@ -1,8 +1,8 @@
 using System;
-using DSIS.Core.Ioc;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.FormsGenerator;
 using DSIS.Utils.Bean;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Actions.Impl
 {

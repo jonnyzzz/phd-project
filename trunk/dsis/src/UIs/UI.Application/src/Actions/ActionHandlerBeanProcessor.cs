@@ -1,8 +1,8 @@
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Actions
 {
-  [ComponentImplementation(Startable = true), ComponentInterface]
+  [ComponentImplementation(Startable = true)]
   public class ActionHandlerBeanProcessor : IStartableComponent
   {
     private readonly ISubContainerFactory myContainer;
@@ -17,8 +17,7 @@ namespace DSIS.UI.Application.Actions
     public void Start()
     {
       var c = myContainer.SubContainer<ActionHandlerAttribute>();
-      c.Start();
-      foreach (var handler in c.GetComponents<IActionHandler>())
+      foreach (var handler in c.Start().GetComponents<IActionHandler>())
       {
         myMan.RegisterHandler(handler);
       }

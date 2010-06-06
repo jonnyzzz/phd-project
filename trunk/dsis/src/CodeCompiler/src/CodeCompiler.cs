@@ -1,5 +1,5 @@
 using System;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.CodeCompiler
 {

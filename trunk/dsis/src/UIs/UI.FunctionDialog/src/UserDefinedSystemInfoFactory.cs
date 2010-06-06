@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Function.UserDefined;
 using DSIS.UI.FunctionDialog.UI;
@@ -10,6 +7,7 @@ using DSIS.UI.Wizard.FormsGenerator;
 using DSIS.UI.Wizard.ListSelector;
 using DSIS.UI.Wizard.OptionsWizard;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.FunctionDialog
 {

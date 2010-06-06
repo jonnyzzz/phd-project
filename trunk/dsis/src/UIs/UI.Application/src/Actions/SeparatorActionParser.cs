@@ -1,6 +1,6 @@
 using System;
 using System.Xml;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Actions
 {

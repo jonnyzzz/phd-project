@@ -1,6 +1,6 @@
-using DSIS.Core.Ioc;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.FormsGenerator;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Doc.Actions.Segments
 {

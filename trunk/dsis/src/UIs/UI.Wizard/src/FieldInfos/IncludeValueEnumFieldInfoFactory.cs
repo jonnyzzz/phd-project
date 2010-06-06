@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using DSIS.Core.Ioc;
 using DSIS.UI.Wizard.ListSelector;
 using DSIS.Utils;
 using DSIS.Utils.Bean;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Wizard.FieldInfos
 {

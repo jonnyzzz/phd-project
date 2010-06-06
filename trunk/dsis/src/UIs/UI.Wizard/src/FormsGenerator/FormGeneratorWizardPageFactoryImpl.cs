@@ -1,5 +1,5 @@
-using DSIS.Core.Ioc;
 using DSIS.UI.Wizard.FieldInfos;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Wizard.FormsGenerator
 {

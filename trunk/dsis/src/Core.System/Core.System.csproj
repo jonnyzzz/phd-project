@@ -33,9 +33,9 @@
     <Compile Include="src\WrongDimensionException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
-      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
-      <Name>Core.Ioc</Name>
+    <ProjectReference Include="..\..\shared\src\Core.Ioc.Api\Core.Ioc.Api.csproj">
+      <Project>{CB62BEE0-B76E-4BDC-AEC5-24F47CB84504}</Project>
+      <Name>Core.Ioc.Api</Name>
     </ProjectReference>
     <ProjectReference Include="..\Persistance\Persistance.csproj">
       <Project>{5595A10C-CF2D-4B8D-BE05-AAEE819B0939}</Project>

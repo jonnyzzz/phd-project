@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using DSIS.Core.Ioc;
 using DSIS.UI.Wizard;
 using DSIS.UI.Wizard.ListSelector;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.FunctionDialog
 {

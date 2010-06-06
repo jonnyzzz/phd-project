@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using DSIS.CodeCompiler;
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Function.Predefined;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 using ICodeCompiler=DSIS.CodeCompiler.ICodeCompiler;
 
@@ -43,7 +43,7 @@ namespace DSIS.Function.UserDefined
       var c = Container.SubContainerNoScan<GeneratedImplementationArrtubute>();
       c.ScanAssemblies(result.Enum());
 
-      return c.GetComponent<ISystemInfoMarker>();
+      return c.Start().GetComponent<ISystemInfoMarker>();
     }
 
     public Pair<string,ICollection<CodeError>> CheckCode(UserFunctionParameters ps)
@@ -55,7 +55,7 @@ namespace DSIS.Function.UserDefined
       catch (UserDefinedFactoryException e)
       {
         LOG.Error(e);
-        return Pair.Create(e.Message, e.Errors);
+        return Pair.Of(e.Message, e.Errors);
       }
       catch (CodeCompilerException e)
       {
@@ -66,14 +66,14 @@ namespace DSIS.Function.UserDefined
           list.Add(new CodeError(error.Column, error.Line, error.ErrorText));
         }
 
-        return Pair.Create(e.GetErrorsAndCode(CodeGen.UserCodeRangeFilter(e.Code)), (ICollection<CodeError>)list);
+        return Pair.Of(e.GetErrorsAndCode(CodeGen.UserCodeRangeFilter(e.Code)), (ICollection<CodeError>)list);
       }
       catch (Exception e)
       {
         LOG.Error(e);
-        return Pair.Create<string, ICollection<CodeError>>(e.Message, EmptyArray<CodeError>.Instance);
+        return Pair.Of<string, ICollection<CodeError>>(e.Message, EmptyArray<CodeError>.Instance);
       }
-      return Pair.Create<string, ICollection<CodeError>>(null, EmptyArray<CodeError>.Instance);
+      return Pair.Of<string, ICollection<CodeError>>(null, EmptyArray<CodeError>.Instance);
     }
   }
 }

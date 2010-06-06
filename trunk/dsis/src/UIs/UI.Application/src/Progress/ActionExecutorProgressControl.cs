@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
-using DSIS.Core.Ioc;
 using DSIS.Core.Util;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 
 namespace DSIS.UI.Application.Progress

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
 using DSIS.Utils;
 using System.Linq;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Controls
 {

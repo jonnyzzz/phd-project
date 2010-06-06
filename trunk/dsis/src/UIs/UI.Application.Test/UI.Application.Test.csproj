@@ -27,8 +27,12 @@
     <Compile Include="src\XmlActionPresentationManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core.Ioc\Core.Ioc.csproj">
-      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
+    <ProjectReference Include="..\..\..\shared\src\Core.Ioc.Api\Core.Ioc.Api.csproj">
+      <Project>{CB62BEE0-B76E-4BDC-AEC5-24F47CB84504}</Project>
+      <Name>Core.Ioc.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\shared\src\Core.Ioc\Core.Ioc.csproj">
+      <Project>{0935692E-009E-425E-A549-7E10D216AAB4}</Project>
       <Name>Core.Ioc</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Functions\Function.Predefined\Function.Predefined.csproj">

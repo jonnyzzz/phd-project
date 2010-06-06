@@ -1,8 +1,9 @@
 using System;
 using DSIS.CodeCompiler;
-using DSIS.Core.Ioc;
-using DSIS.Core.Ioc.JC;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
+using EugenePetrenko.Shared.Core.Ioc.JC;
 using NUnit.Framework;
 
 namespace DSIS.CellImageBuilder.Tests.Descartes

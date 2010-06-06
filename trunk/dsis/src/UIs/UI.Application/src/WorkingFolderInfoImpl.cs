@@ -1,6 +1,6 @@
 using System.IO;
-using DSIS.Core.Ioc;
 using DSIS.Scheme.Impl.Actions.Files;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application
 {

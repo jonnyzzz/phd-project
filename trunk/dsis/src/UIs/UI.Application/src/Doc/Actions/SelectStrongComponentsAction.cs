@@ -1,10 +1,10 @@
-using DSIS.Core.Ioc;
 using DSIS.Graph;
 using DSIS.Scheme.Impl;
 using DSIS.UI.Application.Progress;
 using DSIS.UI.ComputationDialogs.Components;
 using DSIS.UI.UI;
 using DSIS.UI.Wizard;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Doc.Actions
 {

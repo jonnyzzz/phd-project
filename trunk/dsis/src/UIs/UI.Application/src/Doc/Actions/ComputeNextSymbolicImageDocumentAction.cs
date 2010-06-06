@@ -1,5 +1,4 @@
 using DSIS.CellImageBuilder.Shared;
-using DSIS.Core.Ioc;
 using DSIS.Scheme;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
@@ -9,6 +8,7 @@ using DSIS.UI.Application.Progress;
 using DSIS.UI.ComputationDialogs;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 
 namespace DSIS.UI.Application.Doc.Actions

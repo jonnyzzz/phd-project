@@ -1,8 +1,7 @@
 using System.Drawing;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
-using DSIS.Core.Ioc.Ex;
 using DSIS.UI.UI;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application
 {

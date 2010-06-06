@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
 
 namespace DSIS.UI.Controls
 {
-  
   public class TableLayoutSimpleLayoutManager : ISimpleLayoutManager
   {
     public Control LayoutControls<Q>(IEnumerable<Q> _controls) where Q : IControlWithLayout

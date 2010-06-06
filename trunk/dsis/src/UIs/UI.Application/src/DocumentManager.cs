@@ -1,10 +1,10 @@
 using System;
-using DSIS.Core.Ioc;
 using DSIS.Scheme;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 
 namespace DSIS.UI.Application

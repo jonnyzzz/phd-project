@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Ioc;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Doc.Actions
 {  
@@ -10,14 +10,14 @@ namespace DSIS.UI.Application.Doc.Actions
   public class DocumentActionManager : IDocumentActionManager, IDisposable 
   {
     private readonly IDocumentManager myManager;
-    private readonly IComponentContainer myChildContainer;
+    private readonly IComponentService myChildContainer;
     private readonly Update myLock = new Update();
     
     public DocumentActionManager(IInvocator invocator, ISubContainerFactory container, IDocumentManager manager)
     {
       myManager = manager;
-      myChildContainer = container.SubContainer<DocumentActionAttribute>();
-      myChildContainer.Start();
+      var factory = container.SubContainer<DocumentActionAttribute>();
+      myChildContainer = factory.Start();
 
       myLock.LockTaken += LockChanged;
       myLock.LockReturned += LockChanged;

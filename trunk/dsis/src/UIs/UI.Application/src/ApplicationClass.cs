@@ -1,9 +1,9 @@
 using System;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
-using DSIS.Core.Ioc.Ex;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using EugenePetrenko.Core.Ioc.EntryPoint;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application
 {

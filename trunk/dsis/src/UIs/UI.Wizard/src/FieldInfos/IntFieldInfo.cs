@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Wizard.FieldInfos
 {

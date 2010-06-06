@@ -1,9 +1,9 @@
-using DSIS.Core.Ioc;
 using DSIS.Scheme;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.UI;
 using DSIS.UI.Wizard;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.ComputationDialogs.Measure
 {
@@ -33,7 +33,7 @@ namespace DSIS.UI.ComputationDialogs.Measure
     {       
       using (var c = myContainer.SubContainer<ComputeInvariantMeasureUIComponent>())
       {
-        var wizard = c.GetComponent<ComputeInvariantMeasureWizard>();
+        var wizard = c.Start().GetComponent<ComputeInvariantMeasureWizard>();
         return Presented.ShowWizardOrNull(wizard);        
       }
     }

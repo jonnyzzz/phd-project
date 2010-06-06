@@ -1,5 +1,5 @@
 using System.IO;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 
 namespace DSIS.CodeCompiler

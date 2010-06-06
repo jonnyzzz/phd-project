@@ -1,10 +1,10 @@
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
 using DSIS.UI.Application.Progress;
 using DSIS.UI.ComputationDialogs.Measure;
 using DSIS.UI.UI;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 
 namespace DSIS.UI.Application.Doc.Actions

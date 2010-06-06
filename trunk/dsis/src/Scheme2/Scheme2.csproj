@@ -24,12 +24,7 @@
     <Compile Include="src\ConnectionPoints\IInputConnectionPoint.cs" />
     <Compile Include="src\ConnectionPoints\IOutputConnectionPoint.cs" />
     <Compile Include="src\ConnectionPoints\Object\InputConnectionBase.cs" />
-    <Compile Include="src\ConnectionPoints\Object\OutputObjectConnectionPointFactory.cs" />
-    <Compile Include="src\ConnectionPoints\Object\OutputObjectConnectionPointFactoryImpl.cs" />
-    <Compile Include="src\ConnectionPoints\Object\PropertyInputObjectConnectionPointFactoryImpl.cs" />
     <Compile Include="src\ConnectionPoints\Object\SetterInputConnectionPoint.cs" />
-    <Compile Include="src\ConnectionPoints\Object\SetterInputObjectConnectionPointFactoryImpl.cs" />
-    <Compile Include="src\ConnectionPoints\Xml\Input\InputConnectionPointExtension.cs" />
     <Compile Include="src\Nodes\INode.cs" />
     <Compile Include="src\ConnectionPoints\Object\ObjectOutputConnectionPoint.cs" />
     <Compile Include="src\ConnectionPoints\Bind.cs" />
@@ -38,35 +33,24 @@
     <Compile Include="src\ConnectionPoints\Object\PropertyInputConnectionPoint.cs" />
     <Compile Include="src\ConnectionPoints\Object\OutputConnectionPoint.cs" />
     <Compile Include="src\ConnectionPoints\Xml\Output\OutputConnectionPointBase.cs" />
-    <Compile Include="src\ObjectParsers\IObjectParser.cs" />
     <Compile Include="src\UsedByScheme.cs" />
     <Compile Include="src\ConnectionPoints\Object\ObjectNode.cs" />
     <Compile Include="src\XmlModel\computation-graph-scheme.cs">
       <DependentUpon>computation-graph-scheme.xsd</DependentUpon>
     </Compile>
-    <Compile Include="src\ConnectionPoints\Object\ConnectionPointFactory.cs" />
     <Compile Include="src\ConnectionPoints\Object\ConnectionPointFactoryException.cs" />
-    <Compile Include="src\ConnectionPoints\Object\ObjectNodeFactory.cs" />
     <Compile Include="src\ConnectionPoints\Object\ObjectNodeFactoryException.cs" />
     <Compile Include="src\IInitializeAware.cs" />
     <Compile Include="src\ConnectionPoints\Xml\Input\IInputConnectionPointExtension.cs" />
-    <Compile Include="src\ConnectionPoints\Xml\Input\InputConnectionPointFactory.cs" />
     <Compile Include="src\ConnectionPoints\Xml\Output\IOutputConnectionPointExtension.cs" />
     <Compile Include="src\Graph\ISchemeGraphBuildContext.cs" />
     <Compile Include="src\Nodes\NodeBase.cs" />
-    <Compile Include="src\ConnectionPoints\Xml\Output\OutputConnectionPointFactory.cs" />
-    <Compile Include="src\ConnectionPoints\Xml\Output\ActionInstanceOutputConnectionPointFactory.cs" />
-    <Compile Include="src\ConnectionPoints\Xml\Output\FromPointOutputConnectionFactory.cs" />
-    <Compile Include="src\ConnectionPoints\Xml\Output\ObjectParserOutputConnectionFactory.cs" />
     <Compile Include="src\Graph\SchemeGraphException.cs" />
     <Compile Include="src\Graph\SchemeGraphLoader.cs" />
     <Compile Include="src\ConnectionPoints\IConnectionPoint.cs" />
     <Compile Include="src\ConnectionPoints\Object\IObjectConnectionPointFactoryExtension.cs" />
     <Compile Include="src\Nodes\ISchemeNodeFactoryExtension.cs" />
-    <Compile Include="src\Graph\SchemeGraph.cs" />
-    <Compile Include="src\Graph\SchemeGraphFactory.cs" />
     <Compile Include="src\Nodes\SchemeNodeFactory.cs" />
-    <Compile Include="src\Graph\XmlSchemeActionFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="src\XmlModel\computation-graph-scheme.xsd">
@@ -78,14 +62,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.Ioc\Core.Ioc.csproj">
-      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
-      <Name>Core.Ioc</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{1621FA23-0B6C-4B2A-98B2-982DC0F26FE9}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\ObjectParsers\" />
   </ItemGroup>
   <Import Project="../Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -23,13 +23,17 @@
     <Compile Include="src\UserDefinedFunctionFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\shared\src\Core.Ioc.Api\Core.Ioc.Api.csproj">
+      <Project>{CB62BEE0-B76E-4BDC-AEC5-24F47CB84504}</Project>
+      <Name>Core.Ioc.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\shared\src\Core.Ioc.EntryPoint\Core.Ioc.EntryPoint.csproj">
+      <Project>{98C15236-F700-4FFE-BC7B-17577405BB1C}</Project>
+      <Name>Core.Ioc.EntryPoint</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\CodeCompiler\CodeCompiler.csproj">
       <Project>{7B9FAC81-1546-41C6-B3E3-6BC693DF0D7E}</Project>
       <Name>CodeCompiler</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core.Ioc\Core.Ioc.csproj">
-      <Project>{CD7A1861-F565-470E-82BC-7FCE1ACDE896}</Project>
-      <Name>Core.Ioc</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Core.System\Core.System.csproj">
       <Project>{B1E6F5DC-B318-4986-B1F8-AC560BFD71BE}</Project>

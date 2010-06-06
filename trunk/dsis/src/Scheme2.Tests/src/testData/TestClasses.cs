@@ -1,7 +1,6 @@
 using System.Xml;
 using DSIS.Scheme2.Attributed;
 using DSIS.Scheme2.ConnectionPoints;
-using DSIS.Scheme2.ObjectParsers;
 using DSIS.Scheme2.Tests.src.Xml;
 using NUnit.Framework;
 
@@ -76,7 +75,7 @@ namespace DSIS.Scheme2.Tests.testData
   }
 
   [UsedByScheme]
-  public class StringObjectParser : IObjectParser
+  public class StringObjectParser
   {
     public object Parse(XmlElement element)
     {

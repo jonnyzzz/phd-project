@@ -4,11 +4,11 @@ using System.Linq;
 using Antlr.StringTemplate;
 using DSIS.CodeCompiler;
 using DSIS.Core.Builders;
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.CellImageBuilder.Descartes
 {
@@ -104,7 +104,7 @@ namespace DSIS.CellImageBuilder.Descartes
 
       var scan = SubContainer.SubContainerNoScan<TypeImpl>(/*TODO*/);
       scan.ScanAssemblies(assmbly.Enum());
-      return scan.GetComponent<ICellImageBuilder<Q>>();
+      return scan.Start().GetComponent<ICellImageBuilder<Q>>();
     }
 
     [Used]

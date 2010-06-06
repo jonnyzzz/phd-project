@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using DSIS.Core.Ioc;
-using DSIS.Core.Ioc.JC;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
+using EugenePetrenko.Shared.Core.Ioc.JC;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 

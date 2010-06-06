@@ -1,7 +1,7 @@
 using DSIS.Core.Coordinates;
-using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Actions.Impl
 {

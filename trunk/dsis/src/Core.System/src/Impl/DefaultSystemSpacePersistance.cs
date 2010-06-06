@@ -1,10 +1,10 @@
 using System;
-using DSIS.Core.Ioc;
 using DSIS.Persistance;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.Core.System.Impl
 {
-  [SpringBean]
+  [ComponentImplementation]
   public class DefaultSystemSpacePersistance : IPersistance<ISystemSpace>
   {
     public ISystemSpace Load(IBinaryReader reader)

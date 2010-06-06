@@ -1,6 +1,6 @@
 using DSIS.Core.Builders;
 using DSIS.Core.Coordinates;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.Scheme.Objects.Systemx
 {

@@ -1,8 +1,7 @@
-using System.Drawing;
-using DSIS.Core.Ioc;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.UI.Application.Progress;
 using DSIS.UI.UI;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Doc
 {

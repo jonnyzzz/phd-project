@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using DSIS.UI.Controls;
 
 namespace DSIS.UI.Wizard.FormsGenerator

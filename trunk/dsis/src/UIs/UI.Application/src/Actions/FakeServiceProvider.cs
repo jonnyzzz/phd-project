@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using IServiceProvider=DSIS.Spring.Service.IServiceProvider;
 
 namespace DSIS.UI.Application.Actions
@@ -8,12 +9,10 @@ namespace DSIS.UI.Application.Actions
   public class FakeServiceProvider : IServiceProvider
   {
     private readonly IComponentContainer myContainer;
-    private readonly IComponentContainerServices myContainerService;
 
-    public FakeServiceProvider(IComponentContainer container, IComponentContainerServices containerService)
+    public FakeServiceProvider(IComponentContainer container)
     {
       myContainer = container;
-      myContainerService = containerService;
     }
 
     public T GetService<T>()
@@ -23,7 +22,7 @@ namespace DSIS.UI.Application.Actions
 
     public IEnumerable<T> GetServices<T>()
     {
-      return myContainerService.GetServices<T>();
+      return myContainer.GetComponents<T>();
     }
   }
 }

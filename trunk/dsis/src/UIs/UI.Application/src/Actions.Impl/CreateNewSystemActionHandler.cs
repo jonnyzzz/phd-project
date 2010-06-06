@@ -1,9 +1,9 @@
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Scheme.Ctx;
 using DSIS.UI.FunctionDialog;
 using DSIS.UI.UI;
 using DSIS.UI.Wizard;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using log4net;
 
 namespace DSIS.UI.Application.Actions.Impl

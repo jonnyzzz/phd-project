@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DSIS.Core.Ioc;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.UI.Wizard.FormsGenerator;
 using DSIS.UI.Wizard.ListSelector;

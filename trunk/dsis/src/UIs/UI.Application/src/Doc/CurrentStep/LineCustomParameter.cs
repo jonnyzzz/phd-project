@@ -1,7 +1,7 @@
-using DSIS.Core.Ioc;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Impl;
 using DSIS.UI.UI;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Doc.CurrentStep
 {

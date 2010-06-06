@@ -1,9 +1,9 @@
 ﻿using System;
-using DSIS.Core.Ioc;
 using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Scheme.Objects.Systemx;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.Function.Predefined.OsipenkoBio
 {

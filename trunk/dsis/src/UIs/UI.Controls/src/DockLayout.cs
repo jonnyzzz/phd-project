@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
 using System.Linq;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Controls
 {
   [ComponentImplementation]
+  [Obsolete("Use Shared")]
   public class DockLayout : IDockLayout
   {
     public Panel Layout<C>(DockStyle dock, IEnumerable<C> controls) where C : Control

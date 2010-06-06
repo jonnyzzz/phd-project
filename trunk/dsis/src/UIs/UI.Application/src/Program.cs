@@ -2,8 +2,8 @@ using System;
 using System.Reflection;
 using System.Windows.Forms;
 using DSIS.CodeCompiler;
-using DSIS.Core.Ioc.Ex;
 using DSIS.Utils;
+using EugenePetrenko.Core.Ioc.EntryPoint;
 
 namespace DSIS.UI.Application
 {

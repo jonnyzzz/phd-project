@@ -1,11 +1,11 @@
 using System;
 using System.Windows.Forms;
-using DSIS.Core.Ioc;
 using DSIS.Core.Util;
 using DSIS.UI.Application.Doc;
 using DSIS.UI.Controls;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.UI.Application.Progress
 {
