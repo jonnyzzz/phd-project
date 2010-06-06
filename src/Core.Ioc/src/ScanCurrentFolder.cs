@@ -23,7 +23,9 @@ namespace EugenePetrenko.Shared.Core.Ioc
         }
         try
         {
-          list.Add(Assembly.LoadFile(file));
+          AssemblyName name = AssemblyName.GetAssemblyName(file);
+          Assembly assembly = Assembly.Load(name);
+          list.Add(assembly);
         }
         catch (Exception e)
         {

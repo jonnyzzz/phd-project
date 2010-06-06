@@ -40,7 +40,7 @@ namespace EugenePetrenko.Shared.Core.Ioc.JC
       var cmps = myContainer.GetComponents<IStartableComponent>();
       foreach (var cmp in cmps)
       {
-        if (!myInitializedStartable.Contains(cmp) && cmp != this)
+        if (!myInitializedStartable.Contains(cmp) && !ReferenceEquals(cmp, this))
         {
           myInitializedStartable.Add(cmp);
           cmp.Start();
