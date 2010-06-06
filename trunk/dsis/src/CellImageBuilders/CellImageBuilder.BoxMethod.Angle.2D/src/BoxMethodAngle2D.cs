@@ -4,6 +4,9 @@ using DSIS.Core.Builders;
 using DSIS.Core.System;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
+
+[assembly: AssemblyWithComponents]
 
 namespace DSIS.CellImageBuilder.BoxMethod.Angle2D
 {
