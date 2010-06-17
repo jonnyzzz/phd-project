@@ -25,8 +25,7 @@ namespace DSIS.Core.Processor
       foreach (TFrom cell in myContext.Cells)
       {
         info.Tick(1.0);
-        if (info.IsInterrupted)
-          throw new ProcessInterruptedException();
+        info.CheckInterrupted();
         
         foreach (TTo small in converter.Subdivide(cell))
         {

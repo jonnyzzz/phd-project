@@ -11,8 +11,7 @@ namespace DSIS.Utils
     private readonly SimpleConcurentQueue<ActionHolder> myQueue = new SimpleConcurentQueue<ActionHolder>();
     private readonly Thread myWorkerThread;
     private readonly AutoResetEvent myEvent = new AutoResetEvent(false);
-    private ActionHolder myCurrentAction = null;
-
+    private ActionHolder myCurrentAction;
 
     public OneTreadExecutor()
     {
@@ -31,17 +30,29 @@ namespace DSIS.Utils
           for (var a = myQueue.DequeueOrDefault(); a != null; a = myQueue.DequeueOrDefault())
           {
             myCurrentAction = a;
-            a.ExecuteAction();
-            myCurrentAction = null;
+            try
+            {
+              a.ExecuteAction();
+            } catch
+            {
+              ;// NOP to keep pump running
+            }
+            finally
+            {
+              myCurrentAction = null;
+            }
           }
         }
-      } catch(ThreadInterruptedException)
+      }
+      catch (ThreadInterruptedException)
       {
         //
-      } catch(ThreadAbortException)
+      }
+      catch (ThreadAbortException)
       {
         //
-      } catch(Exception e)
+      }
+      catch (Exception e)
       {
         LOG.Error(e);
       }
@@ -67,121 +78,30 @@ namespace DSIS.Utils
 
     public void Dispose()
     {
+      myQueue.ForEach(x => x.Cancel());
       myQueue.Clear();
-
-      for(var action = myCurrentAction; action != null; action = myCurrentAction)
-      {
-        action = myCurrentAction;
-        if (action != null)
-        {
-          action.Interrupt();
-          Thread.Sleep(100);
-        }
-      }
+      var z = myCurrentAction;
+      if (z != null)
+        z.Cancel();
 
       myWorkerThread.Interrupt();
-      if (!myWorkerThread.Join(TimeSpan.FromSeconds(.1)))
+      while (!myWorkerThread.Join(TimeSpan.FromSeconds(.1)))
       {
         myWorkerThread.Abort();
+        Thread.Sleep(500);
       }
     }
 
     private class ActionHolder : IExecutingAction
     {
-      private static readonly ILog LOG = LogManager.GetLogger(typeof (ActionHolder));
-
       private readonly string myName;
       private readonly Action<IExecutingAction> myAction;
       private volatile bool myIsCanceled;
-      private readonly Thread myWorker;
-
-      private readonly ManualResetEvent myWaitFinishEvent = new ManualResetEvent(false);
-      private readonly ManualResetEvent myActionFinishEvent = new ManualResetEvent(false);
-      private readonly ManualResetEvent myExecutionWait = new ManualResetEvent(false);
 
       public ActionHolder(string name, Action<IExecutingAction> action)
       {
         myName = name;
         myAction = action;
-        myWorker = new Thread(ThreadExecute) {Name = ("Worker for action " + myName), IsBackground = true};
-        myWaitFinishEvent.Set();
-      }
-
-      private void ThreadExecute()
-      {
-        try
-        {
-          if (!myIsCanceled)
-          {
-            try
-            {
-              myAction(this);
-            }
-            catch (Exception e)
-            {
-              LOG.Error(e.Message, e);
-            }
-          }
-          myActionFinishEvent.Set();
-          myWaitFinishEvent.WaitOne();
-        } finally
-        {
-          myExecutionWait.Set();
-        }
-      }
-
-      public void Interrupt()
-      {
-        var th = new Thread(InterruptInternal)
-                   {
-                     Name = ("Interrup for " + myName),
-                     Priority = ThreadPriority.AboveNormal,
-                     IsBackground = false
-                   };
-        th.Start();
-      }
-
-      private void InterruptInternal()
-      {
-        try
-        {
-          //Stop waiting for thread to finish
-          myExecutionWait.Set();
-
-          myWaitFinishEvent.Reset();
-          Cancel();
-
-          //If thread is finished
-          if (myActionFinishEvent.WaitOne(10, true))
-          {
-            myWaitFinishEvent.Set();
-            return;
-          }
-
-          //Thread is finished
-          if (myWorker.Join(10))
-          {
-            myWaitFinishEvent.Set();
-            return;
-          }
-
-          Func<bool> alive = () => !myWorker.Join(100) && !myActionFinishEvent.WaitOne(100, true);
-
-          myWorker.Interrupt();
-          if (!alive())
-          {
-            myWaitFinishEvent.Set();
-            return;
-          }
-
-          while (alive())
-          {
-            myWorker.Abort();
-          }
-        } finally
-        {
-          GCHelper.Collect();
-        }
       }
 
       public void Cancel()
@@ -191,10 +111,18 @@ namespace DSIS.Utils
 
       public void ExecuteAction()
       {
-        if (!myIsCanceled)
+        if (myIsCanceled) return;
+        try
         {
-          myWorker.Start();
-          myExecutionWait.WaitOne();
+          myAction(this);
+        }
+        catch (ProcessInterruptedException e)
+        {
+          LOG.Info("Action " + myName + " was interrupted. ", e);
+        }
+        catch (Exception e)
+        {
+          LOG.Warn("Failed to execute action " + myName, e);
         }
       }
     }

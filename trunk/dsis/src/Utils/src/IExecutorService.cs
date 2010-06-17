@@ -18,11 +18,6 @@ namespace DSIS.Utils
   public interface IExecutingAction
   {
     /// <summary>
-    /// Terminates action or removes it
-    /// </summary>
-    void Interrupt();
-
-    /// <summary>
     /// Removes action from Queue
     /// </summary>
     void Cancel();

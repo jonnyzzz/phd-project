@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace DSIS.Utils
@@ -42,6 +43,19 @@ namespace DSIS.Utils
       lock(myQueue)
       {
         myQueue.Clear();
+      }
+    }
+
+    public void ForEach(Action<T> action)
+    {
+      T[] array;
+      lock(myQueue)
+      {
+        array = myQueue.ToArray();
+      }
+      foreach (var q in array)
+      {
+        action(q);
       }
     }
   }

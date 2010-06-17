@@ -178,6 +178,7 @@
     <Compile Include="src\Progress\DelegatingProgress.cs" />
     <Compile Include="src\Progress\IActionExecution.cs" />
     <Compile Include="src\Progress\IContextOperationExecution.cs" />
+    <Compile Include="src\Progress\IProgressBarControlModel.cs" />
     <Compile Include="src\Progress\ProgressBarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -186,6 +187,7 @@
     </Compile>
     <Compile Include="src\Progress\ProgressImpl.cs" />
     <Compile Include="src\Progress\SimpleActionExecution.cs" />
+    <Compile Include="src\Progress\StackedProgressBarControlModel.cs" />
     <Compile Include="src\QueuedAction.cs" />
     <Compile Include="src\QueuedActionBase.cs" />
     <Compile Include="src\RepeatingAction.cs" />

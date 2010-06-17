@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 
-namespace DSIS.Core.Util
+namespace DSIS.Utils
 {
   public class ProcessInterruptedException : Exception
   {

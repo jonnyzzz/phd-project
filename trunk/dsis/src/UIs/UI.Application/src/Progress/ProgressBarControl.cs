@@ -1,102 +1,55 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using DSIS.Core.Util;
 using DSIS.UI.UI;
 using DSIS.Utils;
+using JetBrains.Annotations;
 
 namespace DSIS.UI.Application.Progress
 {
   public partial class ProgressBarControl : UserControl
   {
     private readonly IInvocator myInvocator;
-    private BackDelegatingProgress myProgress;
-    private IDisposable myProgressTimer;
-    private int myValue = -1;
-    private DateTime myLastUpdatedTime = DateTime.MinValue;
+    private readonly IProgressBarControlModel myModel;
+    private readonly Disposables myDisposer = new Disposables();
 
-    public event EventHandler<EventArgs> Interrupted;
+    private bool myIsDisabled = true;
+    private int myValue;
+    private int myMaximum;
+    private string myText;
 
-    public ProgressBarControl(IInvocator invocator)
+    public ProgressBarControl([NotNull] IProgressBarControlModel model, [NotNull] IInvocator invocator)
     {
+      myModel = model;
       myInvocator = invocator;
 
       InitializeComponent();
-      TabStop = false;
+      TabStop = false;     
       SetDisabled();
+      myDisposer.Subscribe(this);
+
+      myDisposer.Add(
+        myInvocator.ExecuteRepeating(
+          "Update progress bar",
+          TimeSpan.FromSeconds(1),
+          () =>
+            {
+              if (UpdateDisabled()) return;
+              
+                var m = false
+                        || !UpdateProgressText()
+                        || !UpdateProgressValue();
+
+                myProgressBar.Style = m 
+                  ? ProgressBarStyle.Marquee 
+                  : ProgressBarStyle.Continuous;
+            }
+          )
+        );
     }
-
-    public bool IsInterruptable { get; set; }
-
-    public bool HasModel
-    {
-      get { return myProgress != null; }
-    }
-
-    public void ClearProgressIfSame(ProgressImpl progress)
-    {
-      if (myProgress != null && progress == myProgress.BaseProgressInfo)
-      {
-        SetProgressModel(null);
-      }
-    }
-
-    public void SetProgressModel(ProgressImpl value)
-    {
-      if (myProgress == value) return;
-      Unsubscribe(myProgress);
-      if (value != null)
-      {
-        var pi = new BackDelegatingProgress(value) {Maximum = 1000};
-        Subscribe(pi);
-        myProgress = pi;
-      }
-      else
-      {
-        myProgress = null;
-      }
-    }
-
-    private void Subscribe(ProgressImpl progress)
-    {
-      myProgressBar.Minimum = 0;
-
-      UpdateProgressValue(progress);
-      UpdateProgressText(progress);
-      EnableCancelLink();
-
-      progress.MaximumChanged += delegate { UpdateProgressValue(progress); };
-      progress.ValueChanged += delegate { UpdateProgressValue(progress); };
-      progress.TextChanged += delegate { UpdateProgressText(progress); };
-      progress.Interrupted += delegate { FireInterrupted(); };
-      myProgressBar.Enabled = true;
-
-      StartTimer();
-    }
-
-    private void FireInterrupted()
-    {
-      Interrupted.Fire(this, EventArgs.Empty);
-    }
-
-    private void Unsubscribe(ProgressImpl progress)
-    {
-      SetDisabled();
-      if (progress == null)
-        return;
-
-      progress.MaximumChanged -= delegate { UpdateProgressValue(progress); };
-      progress.ValueChanged -= delegate { UpdateProgressValue(progress); };
-      progress.TextChanged -= delegate { UpdateProgressText(progress); };
-      progress.Interrupted -= delegate { FireInterrupted(); };
-      myCancel.Visible = false;
-
-      SetDisabled();
-    } 
 
     private void SetDisabled()
     {
-      StopTimer();
       myCancel.Visible = false;
       myMainLabel.Text = "Idle";
       myProgressBar.Enabled = false;
@@ -104,70 +57,66 @@ namespace DSIS.UI.Application.Progress
       myProgressBar.Value = 0;
     }
 
-    private void StartTimer()
+    private bool UpdateDisabled()
     {
-      myProgressTimer = myInvocator.ExecuteRepeating("Set marque", TimeSpan.FromSeconds(.5), StartMarque);
-    }
-
-    private void StopTimer()
-    {
-      if (myProgressTimer != null)
+      bool disabled = myModel.Disabled;
+      if (myIsDisabled != disabled)
       {
-        myProgressTimer.Dispose();
-        myProgressTimer = null;
+        myIsDisabled = disabled;
+        if (disabled)
+        {
+          SetDisabled();
+        } else
+        {
+          myCancel.Visible = true;
+          myCancel.Enabled = true;
+          myCancel.Text = "Cancel";
+          myCancel.ActiveLinkColor = Color.Blue;
+          myProgressBar.Enabled = true;
+        }
       }
+
+      return disabled;
     }
 
-    private void UpdateProgressValue(ProgressImpl progress)
+    private bool UpdateProgressValue()
     {
-      var maximum = (int)progress.Maximum;
-      var value = (int)Math.Min(progress.Value, progress.Maximum);
+      var maximum = myModel.Maximum;
+      var value = myModel.Value;
 
-      if (myValue != value)
+      if (myValue != value || myMaximum != maximum)
       {
         myValue = value;
-        myInvocator.InvokeOrQueue("Progress::UpdateProgressValue",
-                                  delegate
-                                    {
-                                      myProgressBar.Maximum = maximum;
-                                      myProgressBar.Value = value;
-                                      myLastUpdatedTime = DateTime.Now;
-                                    });
+        myMaximum = maximum;
+        myProgressBar.Maximum = maximum;
+        myProgressBar.Value = value;
+
+        return true;
       }
+      return false;
     }
-
-    private void UpdateProgressText(IProgressInfoLight progress)
+    
+    private bool UpdateProgressText()
     {
-      myInvocator.InvokeOrQueue("Progress::UpdateProgressText",
-                                delegate
-                                  {
-                                    myMainLabel.Text = progress.Text;
-                                    myLastUpdatedTime = DateTime.Now;
-                                  });
-    }
-
-    private void StartMarque()
-    {
-      myProgressBar.Style =
-        myLastUpdatedTime + TimeSpan.FromMilliseconds(500) < DateTime.Now
-          ? ProgressBarStyle.Marquee
-          : ProgressBarStyle.Continuous;
+      var text = myModel.Text.Trim();
+      if (text != myText)
+      {
+        myText = text;
+        myMainLabel.Text = text;
+        
+        return true;
+      }
+      return false;
     }
 
     private void myCancel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
-      myProgress.IsInterrupted = true;
+      myModel.Interrupt();      
       myCancel.Text = "Canceled";
       myCancel.ActiveLinkColor = Color.Red;
       myCancel.Enabled = false;
-    }
 
-    private void EnableCancelLink()
-    {
-      myCancel.Visible = IsInterruptable;
-      myCancel.Enabled = IsInterruptable;
-      myCancel.Text = "Cancel";
-      myCancel.ActiveLinkColor = Color.Blue;
+      myProgressBar.Style = ProgressBarStyle.Marquee;
     }
   }
 }

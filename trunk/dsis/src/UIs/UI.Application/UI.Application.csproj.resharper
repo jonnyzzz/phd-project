@@ -2,4 +2,5 @@
   <NamespaceFolders>
     <SkipFolder>0A091EAB-F110-4CEC-9DEF-0A8E966641C8/d:src</SkipFolder>
   </NamespaceFolders>
+  <Localizable>No</Localizable>
 </Configuration>

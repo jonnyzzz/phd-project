@@ -35,7 +35,6 @@ namespace DSIS.UI.Application.Progress
 
     public void BeforeDocumentContainerDisposed()
     {
-      myControl.BeforeDocumentContainerDisposed();
     }
 
     public void ExecuteAsync(string name, Action<IProgressInfo> action)

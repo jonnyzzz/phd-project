@@ -56,6 +56,7 @@
     <Compile Include="src\MultiHashDictionary.cs" />
     <Compile Include="src\OneTreadExecutor.cs" />
     <Compile Include="src\ParseUtil.cs" />
+    <Compile Include="src\ProcessInterruptedException.cs" />
     <Compile Include="src\ReadWriteLock.cs" />
     <Compile Include="src\Ref.cs" />
     <Compile Include="src\ReenterableSafe.cs" />
@@ -86,6 +87,12 @@
     <Compile Include="src\OrderedList.cs" />
     <Compile Include="src\Pair.cs" />
     <Compile Include="src\Primes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\shared\src\Utils\Utils.csproj">
+      <Project>{E8560312-841D-49FA-9258-B74411B92F2B}</Project>
+      <Name>Utils %28Shared\Utils%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="../Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -4,6 +4,7 @@
  */
 
 using System;
+using DSIS.Utils;
 
 namespace DSIS.Core.Util
 {
@@ -24,5 +25,16 @@ namespace DSIS.Core.Util
   public interface IProgressInfo : IProgressInfoLight
   {
     IProgressInfo SubProgress(double value);
+  }
+
+  public static class ProgressInfoHelpers
+  {
+    public static void CheckInterrupted(this IProgressInfoLight pi)
+    {
+      if (pi.IsInterrupted)
+      {
+        throw new ProcessInterruptedException();
+      }
+    }
   }
 }

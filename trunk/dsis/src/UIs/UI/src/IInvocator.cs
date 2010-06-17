@@ -8,5 +8,8 @@ namespace DSIS.UI.UI
 
     IDisposable ExecuteWithTimeout(string name, TimeSpan interval, Action action);
     IDisposable ExecuteRepeating(string name, TimeSpan interval, Action action);
+
+
+    void AssertUIThread();
   }
 }

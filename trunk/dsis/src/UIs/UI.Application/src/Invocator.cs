@@ -107,6 +107,14 @@ namespace DSIS.UI.Application
       }
     }
 
+    public void AssertUIThread()
+    {
+      if (myPumpForm.InvokeRequired)
+      {
+        throw new InvalidOperationException("This method should be called from UI thread");
+      }
+    }
+
     public void Dispose()
     {
       myActionsTimer.Enabled = false;

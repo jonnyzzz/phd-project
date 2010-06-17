@@ -59,7 +59,8 @@
     <Compile Include="src\Util\IProgressInfo.cs" />
     <Compile Include="src\Util\NullProgressInfo.cs" />
     <Compile Include="src\Util\ObjectMarker.cs" />
-    <Compile Include="src\Util\ProcessInterruptedException.cs" />
+    <Compile Include="src\Util\SimpleProgressImpl.cs" />
+    <Compile Include="src\Util\SimpleSubProgressImpl.cs" />
     <Compile Include="src\Visualization\ICellToPointConverter.cs" />
     <Compile Include="src\Visualization\IImageBuilder.cs" />
     <Compile Include="src\Visualization\IImageDrawer.cs" />
