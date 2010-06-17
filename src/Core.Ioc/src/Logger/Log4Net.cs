@@ -26,7 +26,7 @@ namespace EugenePetrenko.Shared.Core.Ioc.Logger
       }
       else
       {
-        using (Stream str = GetType().Assembly.GetManifestResourceStream("DSIS.Core.Ioc.resources.log4net.xml"))
+        using (Stream str = GetType().Assembly.GetManifestResourceStream("EugenePetrenko.Shared.Core.Ioc.resources.log4net.xml"))
         {
           XmlConfigurator.Configure(str);
         }
