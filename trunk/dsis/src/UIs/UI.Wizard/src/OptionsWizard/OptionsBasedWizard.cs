@@ -84,6 +84,11 @@ namespace DSIS.UI.Wizard.OptionsWizard
       return page != FirstPage;
     }
 
+    public bool IsBackAllowed(IWizardPage page)
+    {
+      return true;
+    }
+
     public IWizardPage Next(IWizardPage page)
     {
       if (page != FirstPage)

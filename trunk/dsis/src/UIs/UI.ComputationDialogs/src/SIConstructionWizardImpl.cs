@@ -22,7 +22,7 @@ namespace DSIS.UI.ComputationDialogs
         x.RegisterComponent(system);
 
         using (var c = x.Start())
-        {
+        { 
           var settings = Presenter.ShowWizardOrNull(c.GetComponent<SIConstructionWizardPack>());
           if (settings == null)
             return null;

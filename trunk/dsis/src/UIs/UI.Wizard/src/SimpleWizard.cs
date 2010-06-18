@@ -41,6 +41,11 @@ namespace DSIS.UI.Wizard
       return ((SimplePage)page).Next == null;
     }
 
+    public bool IsBackAllowed(IWizardPage page)
+    {
+      return true;
+    }
+
     public IWizardPage Next(IWizardPage page)
     {
       return ((SimplePage)page).Next;

@@ -2,7 +2,7 @@ using System;
 
 namespace DSIS.UI.Wizard
 {
-  public interface IWizardPack<T> : IDisposable
+  public interface IWizardPack<out T> : IDisposable
   {
     IWizardPack Controller { get; }
     T GetResult();

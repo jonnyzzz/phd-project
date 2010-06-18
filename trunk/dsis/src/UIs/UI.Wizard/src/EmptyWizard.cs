@@ -1,3 +1,4 @@
+using System;
 using DSIS.Utils;
 
 namespace DSIS.UI.Wizard
@@ -17,6 +18,11 @@ namespace DSIS.UI.Wizard
     }
 
     public bool IsLastPage(IWizardPage page)
+    {
+      return true;
+    }
+
+    public bool IsBackAllowed(IWizardPage page)
     {
       return true;
     }

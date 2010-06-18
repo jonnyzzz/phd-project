@@ -1,5 +1,3 @@
-using DSIS.Utils;
-
 namespace DSIS.UI.Wizard
 {
   public enum ValidationResult
@@ -28,6 +26,13 @@ namespace DSIS.UI.Wizard
     /// <param name="page">The page to check</param>
     /// <returns>true iff that is exit page for dialog</returns>
     bool IsLastPage(IWizardPage page);
+
+    /// <summary>
+    /// Called to check if Back button allowed 
+    /// </summary>
+    /// <param name="page">shown page</param>
+    /// <returns>true iff it's allowed to stick back to the page</returns>
+    bool IsBackAllowed(IWizardPage page);
 
     /// <summary>
     /// Returns the next page if there is some.
@@ -61,6 +66,7 @@ namespace DSIS.UI.Wizard
     /// This may be next page or prev page
     /// </summary>
     /// <param name="page"></param>
+    /// TODO: Move it to IWizardPage
     void PageShown(IWizardPage page);
   }
 }

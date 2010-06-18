@@ -11,7 +11,7 @@ namespace DSIS.UI.Wizard
     private readonly IWizardPack myPack;
     private readonly Dictionary<IWizardPage, Panel> myCachedViwes = new Dictionary<IWizardPage, Panel>();
     private readonly Stack<IWizardPage> myPages = new Stack<IWizardPage>();
-    private bool myIsUnderTimer = false;
+    private bool myIsUnderTimer;
 
     public WizardForm() : this(new EmptyWizard())
     {
@@ -38,7 +38,7 @@ namespace DSIS.UI.Wizard
 
     private void ButtonCancelClick(object sender, EventArgs e)
     {
-      ErrorHandler.Safe(myPack.OnCancel);
+      ErrorHandler.Safe(() => myPack.OnCancel());
       DialogResult = DialogResult.Cancel;
     }
 
@@ -49,18 +49,23 @@ namespace DSIS.UI.Wizard
         MessageBox.Show(this, "Unable to finish wizard. No active page shown", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
-      if (!myPack.IsLastPage(myPages.Peek()))
+      if (!myPack.IsLastPage(GetCurrentPage()))
       {
         MessageBox.Show(this, "Unable to finish wizard. This is not the last page", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
       }
 
-      if (!ValidatePage(myPages.Peek()))
+      if (!ValidatePage(GetCurrentPage()))
         return;
 
-      ErrorHandler.Safe(myPack.OnFinish);
+      ErrorHandler.Safe(() => myPack.OnFinish());
 
       DialogResult = DialogResult.OK;
+    }
+
+    private IWizardPage GetCurrentPage()
+    {
+      return myPages.Peek();
     }
 
     private bool ValidatePage(IWizardPage currentPage)
@@ -90,7 +95,7 @@ namespace DSIS.UI.Wizard
 
     private void ButtonNextClick(object sender, EventArgs args)
     {
-      var currentPage = myPages.Peek();
+      var currentPage = GetCurrentPage();
       if (!ValidatePage(currentPage))
         return;
       
@@ -105,11 +110,17 @@ namespace DSIS.UI.Wizard
     }
     
     private void ButtonBackClick(object sender, EventArgs args)
-    {
+    {      
       if (myPages.Count <= 1)
       {
         MessageBox.Show(this, "No next page defined for wizard", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         return;
+      }
+
+      if (!myPack.IsBackAllowed(myPages.Peek()))
+      {
+        MessageBox.Show(this, "Back is not allowed", Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        return;        
       }
       var curentPage = myPages.Pop();
       var nextPage = myPages.Peek();
@@ -123,7 +134,7 @@ namespace DSIS.UI.Wizard
       myButtonsTimer.Enabled = false;
 
       if (prevPage != null)
-        ErrorHandler.Safe(prevPage.ControlHidden);
+        ErrorHandler.Safe(() => prevPage.ControlHidden());
 
       using (myMiddleContainer.UpdateCookie())
       {
@@ -158,14 +169,14 @@ namespace DSIS.UI.Wizard
         UpdateButtonState(page);
       }
       ErrorHandler.Safe(() => myPack.PageShown(page));
-      ErrorHandler.Safe(page.ControlShown);
+      ErrorHandler.Safe(() => page.ControlShown());
 
       myButtonsTimer.Enabled = true;
     }
 
     private void UpdateButtonState(IWizardPage page)
     {
-      var status = ErrorHandler.Safe(page.Validate, false);
+      var status = ErrorHandler.Safe(() => page.Validate(), false);
 
       myHeader.SecondaryTitle = page.Title;
       bool isLastPage = myPack.IsLastPage(page);
@@ -173,7 +184,7 @@ namespace DSIS.UI.Wizard
 
       myButtons.FinishEnabled = status && isLastPage;
       myButtons.NextEnabled = status && !isLastPage;
-      myButtons.BackEnabled = myPages.Count > 1;
+      myButtons.BackEnabled = myPages.Count > 1 && myPack.IsBackAllowed(myPages.Peek());
 
       AcceptButton = myButtons.NextEnabled ? myButtons.ButtonNext : myButtons.ButtonFinish;
     }
@@ -186,7 +197,7 @@ namespace DSIS.UI.Wizard
       try
       {
         myIsUnderTimer = true;
-        UpdateButtonState(myPages.Peek());
+        UpdateButtonState(GetCurrentPage());
       }
       finally
       {

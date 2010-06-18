@@ -1,3 +1,5 @@
+using System;
+
 namespace DSIS.UI.Wizard
 {
   public abstract class StateWizard : IWizardPack
@@ -9,6 +11,11 @@ namespace DSIS.UI.Wizard
     public virtual bool IsLastPage(IWizardPage page)
     {
       return ((IWizardPageWithState)page).IsLastPage;
+    }
+
+    public bool IsBackAllowed(IWizardPage page)
+    {
+      return true;
     }
 
     public IWizardPage Next(IWizardPage page)

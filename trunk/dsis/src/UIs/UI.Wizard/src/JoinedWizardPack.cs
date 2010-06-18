@@ -32,6 +32,11 @@ namespace DSIS.UI.Wizard
       return myCurrentWizardNode.Last.IsLastPage(page);
     }
 
+    public bool IsBackAllowed(IWizardPage page)
+    {
+      return true;
+    }
+
     public IWizardPage Next(IWizardPage page)
     {
       if (myCurrentWizardNode.IsLastPage(page))

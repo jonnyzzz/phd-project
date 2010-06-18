@@ -17,4 +17,11 @@ namespace DSIS.UI.Wizard
 
     T ShowWizardOrNull<T>(IWizardPack<T> wizard) where T : class;
   }
+
+  public interface IWizardFormPresenterBuilder<T>
+  {
+    IWizardFormPresenterBuilder<Q> DoNext<Q>(Func<Ref<T>, bool, IWizardPack<Q>> next);
+
+    Pair<Ref<T>, bool> Run();
+  }
 }

@@ -34,7 +34,7 @@ namespace DSIS.UI.Application.Doc.Actions
     {
       get
       {
-        var ctx = myDocument.Content;
+        var ctx = myDocument.Content; 
         return ctx.ContainsKey(Keys.IntegerCoordinateSystemInfo) && (ctx.ContainsCellCollection() || ctx.ContainsGraph());
       }
     }
