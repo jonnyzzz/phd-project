@@ -3,25 +3,30 @@ using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Morse
 {
-  public class MorseStrongComponentGraph<T> : IMorseEvaluatorGraph<T> where T : ICellCoordinate
+  public class MorseStrongComponentGraph<N,Q> : IMorseEvaluatorGraph<N> 
+    where Q : ICellCoordinate 
+    where N : class, INode<Q>
   {
-    private readonly IStrongComponentInfo[] myComponentInfos;
-    private readonly IGraphStrongComponents<T> myComponents;
+    private readonly IReadonlyGraph<Q, N> myGraph;
 
-    public MorseStrongComponentGraph(IGraphStrongComponents<T> components, IStrongComponentInfo componentInfos)
+    public MorseStrongComponentGraph(IReadonlyGraph<Q,N> graph)
     {
-      myComponentInfos = new[] {componentInfos};
-      myComponents = components;
+      myGraph = graph;
     }
 
-    public IEnumerable<INode<T>> GetNodes(INode<T> node)
+    public IEnumerable<N> GetNodes(N node)
     {
-      return myComponents.GetEdgesWithFilteredEdges(node, myComponentInfos);
+      return myGraph.GetEdgesInternal(node);
     }
 
-    public IEnumerable<INode<T>> GetNodes()
+    public IEnumerable<N> GetNodes()
     {
-      return myComponents.GetNodes(myComponentInfos);
+      return myGraph.NodesInternal;
+    }
+
+    public IEqualityComparer<N> Comparer
+    {
+      get { return myGraph.Comparer; }
     }
   }
 }

@@ -37,6 +37,7 @@
     <Compile Include="src\CollectionWriter.cs" />
     <Compile Include="src\ConvertEnumerator.cs" />
     <Compile Include="src\DelegateComparer.cs" />
+    <Compile Include="src\Disposables.cs" />
     <Compile Include="src\DisposableWrapper.cs" />
     <Compile Include="src\EventHandlerUtils.cs" />
     <Compile Include="src\FormUtil.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="src\UsedAttribute.cs" />
     <Compile Include="src\UsedInTestsAttribute.cs" />
     <Compile Include="src\Utils.cs" />
+    <Compile Include="src\WaitDisposeBase.cs" />
     <Compile Include="src\WeakDictionary.cs" />
     <Compile Include="src\XmlUtil.cs" />
     <Compile Include="src\Delegates.cs" />

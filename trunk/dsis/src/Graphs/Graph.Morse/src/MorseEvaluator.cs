@@ -1,27 +1,24 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
-using DSIS.Utils;
+using System.Linq;
 
 namespace DSIS.Graph.Morse
 {
-  public abstract class MorseEvaluator<T>  where T : ICellCoordinate
+  public class MorseEvaluator<T>
   {
     private readonly double myEps;
 
     private readonly IMorseEvaluatorGraph<T> myGraphComponent;
+    private readonly IMorseEvaluatorCost<T> myCost;
     private readonly List<IMorseEvaluatorPersist<T>> myPersist = new List<IMorseEvaluatorPersist<T>>();
 
     //TODO: Use graph data holder
-    private readonly Dictionary<INode<T>, ContourNode<T>> myNodes;
-    private double myFactor;
+    private readonly Dictionary<T, ContourNode<T>> myNodes;
 
-    protected MorseEvaluator(MorseEvaluatorOptions opts, IMorseEvaluatorGraph<T> graphComponent)
+    public MorseEvaluator(MorseEvaluatorOptions opts, IMorseEvaluatorGraph<T> graphComponent, IMorseEvaluatorCost<T> cost)
     {
-      var comparer = EqualityComparerFactory<INode<T>>.GetComparer();
-      myNodes = new Dictionary<INode<T>, ContourNode<T>>(comparer);
-      myFactor = 0;
-
+      myCost = cost;
+      myNodes = new Dictionary<T, ContourNode<T>>(graphComponent.Comparer);
       myEps = opts.Eps;
       myGraphComponent = graphComponent;
     }
@@ -30,8 +27,6 @@ namespace DSIS.Graph.Morse
     {
       myPersist.Add(persist);
     }
-
-    protected abstract double Cost(INode<T> node);
 
     private double ContourCost(ContourNode<T> node)
     {
@@ -55,7 +50,7 @@ namespace DSIS.Graph.Morse
       return r/kV;
     }
 
-    private static void ToList(ContourNode<T> node, ICollection<INode<T>> list)
+    private static void ToList(ContourNode<T> node, ICollection<T> list)
     {
       ContourNode<T> n = node.Parent;
 
@@ -135,15 +130,13 @@ namespace DSIS.Graph.Morse
                 to.Parent = node;
                 return to;
               }
-              else
+              
+              to.Value = w;
+              to.Parent = node;
+              if (to.Type2 == NodeType.M0)
               {
-                to.Value = w;
-                to.Parent = node;
-                if (to.Type2 == NodeType.M0)
-                {
-                  to.Type2 = NodeType.M1;
-                  m.Insert(0, to);
-                }
+                to.Type2 = NodeType.M1;
+                m.Insert(0, to);
               }
             }
           }
@@ -177,12 +170,12 @@ namespace DSIS.Graph.Morse
       return pNode;
     }
 
-    private ContourNode<T> CreateNode(INode<T> node)
+    private ContourNode<T> CreateNode(T node)
     {
       ContourNode<T> gnode;
       if (!myNodes.TryGetValue(node, out gnode))
       {
-        gnode = new ContourNode<T>(node, myFactor*Cost(node));
+        gnode = new ContourNode<T>(node, myCost.Cost(node));
         myNodes.Add(node, gnode);
       }
       return gnode;
@@ -190,20 +183,20 @@ namespace DSIS.Graph.Morse
 
     private ContourNode<T> Init()
     {
-      foreach (INode<T> node in myGraphComponent.GetNodes())
+      foreach (T node in myGraphComponent.GetNodes())
       {
         var gnode = CreateNode(node);
         ContourNode<T> minEdge = null;
-        foreach (var edgeTo in myGraphComponent.GetNodes(node))
+        foreach (var gedge in myGraphComponent.GetNodes(node).Select(CreateNode))
         {
-          ContourNode<T> gedge = CreateNode(edgeTo);
           if (minEdge == null || minEdge.Cost > gedge.Cost)
-          {
             minEdge = gedge;
-          }
         }
+
         gnode.Parent = minEdge;
-        minEdge.Incoming++;
+        
+        if (minEdge != null)
+          minEdge.Incoming++;
       }
 
       foreach (var _node in myNodes.Values)
@@ -264,18 +257,17 @@ namespace DSIS.Graph.Morse
       q.Parent = p;
     }
 
-    public ComputationResult<T> Compute(bool maximum)
+    public ComputationResult<T> Minimize()
     {
       myNodes.Clear();
-      myFactor = maximum ? -1 : 1;
 
       ContourNode<T> extrema = Init();
       extrema = DoCompute(extrema);
       double answerValue = ContourCost(extrema);
 
-      var list = new List<INode<T>>();      
+      var list = new List<T>();      
       ToList(extrema, list);
-      return new ComputationResult<T>(myFactor * answerValue, list.AsReadOnly(), maximum);
+      return new ComputationResult<T>(answerValue, list.AsReadOnly());
     }
   }
 }

@@ -4,24 +4,22 @@ using DSIS.IntegerCoordinates;
 
 namespace DSIS.Graph.Morse
 {
-  public class DetDiffMorseEvaluator<T> : MorseEvaluator<T> where T : IIntegerCoordinate
+  public class DetDiffMorseEvaluator<T,Q> : IMorseEvaluatorCost<T> 
+    where T : INode<Q> 
+    where Q : IIntegerCoordinate
   {
     private readonly IDetDiffFunction<double> myFunction;
     private readonly double[] myCoords;
-    private readonly IIntegerCoordinateSystem<T> mySystem;
+    private readonly IIntegerCoordinateSystem<Q> mySystem;
 
-    public DetDiffMorseEvaluator(
-      MorseEvaluatorOptions opts,
-      IDetDiffFunction<double> function,
-      IGraphStrongComponents<T> components,
-      IStrongComponentInfo comp) : base(opts, new MorseStrongComponentGraph<T>(components, comp))
+    public DetDiffMorseEvaluator(IDetDiffFunction<double> function, IIntegerCoordinateSystem<Q> system) 
     {
       myFunction = function;
       myCoords = new double[myFunction.Dimension];
-      mySystem = (IIntegerCoordinateSystem<T>) components.CoordinateSystem;
+      mySystem = system;
     }
 
-    protected override double Cost(INode<T> node)
+    public double Cost(T node)
     {
       mySystem.CenterPoint(node.Coordinate, myCoords);
       return Math.Log(Math.Abs(myFunction.Evaluate(myCoords)));

@@ -106,6 +106,7 @@
     <Compile Include="src\WizardFormPresenter.cs" />
     <Compile Include="src\WizardPackException.cs" />
     <Compile Include="src\WizardPageBase.cs" />
+    <Compile Include="src\WizardPageProxy.cs" />
     <Compile Include="src\WizardPageWithState.cs" />
     <Compile Include="src\WizardPageWithStateD.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />

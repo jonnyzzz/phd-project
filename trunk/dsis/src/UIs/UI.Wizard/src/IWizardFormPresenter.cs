@@ -1,4 +1,3 @@
-using System;
 using DSIS.Utils;
 
 namespace DSIS.UI.Wizard
@@ -16,12 +15,5 @@ namespace DSIS.UI.Wizard
     Pair<Ref<T>, bool> ShowWizard<T>(IWizardPackFactory<T> wizard);
 
     T ShowWizardOrNull<T>(IWizardPack<T> wizard) where T : class;
-  }
-
-  public interface IWizardFormPresenterBuilder<T>
-  {
-    IWizardFormPresenterBuilder<Q> DoNext<Q>(Func<Ref<T>, bool, IWizardPack<Q>> next);
-
-    Pair<Ref<T>, bool> Run();
   }
 }

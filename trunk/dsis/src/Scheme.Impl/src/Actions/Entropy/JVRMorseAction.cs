@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
+using System.Linq;
 using DSIS.Core.System;
 using DSIS.Graph;
 using DSIS.Graph.Morse;
+using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
@@ -33,46 +35,57 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       var dic = new Dictionary<IStrongComponentInfo, JVRMorseMinMax<Q>>();
 
       int i = 1;
+      Func<string> tmpFile = () => string.Format(@"e:\morse-{0}-c{1}.txt", DateTime.Now.ToFileTime(), i++);
+
       foreach (var comp in comps.Components)
       {
-        Func<string> tmpFile = () => string.Format(@"e:\morse-{0}-c{1}.txt", DateTime.Now.ToFileTime(),i++); 
-        var evaluator = new DetDiffMorseEvaluator<Q>(myOptions, diffFunction, comps, comp);
-        evaluator.AddPersist(new JVRFormatPersist<Q>(tmpFile));
-        var max = evaluator.Compute(true);
-        var min = evaluator.Compute(false);
-
-        dic.Add(comp, new JVRMorseMinMax<Q>(max, min));
+        var asGraph = comps.AsGraph(comp.Enum());
+        var ev = new GraphWith<Q>(diffFunction, myOptions, tmpFile);
+        asGraph.DoGeneric(ev);
+        dic.Add(comp, ev.Result);
       }
+
       Keys.Morse<Q>().Set(output, new JVRMorseResult<Q>(dic));
     }
-  }
 
-  public class JVRMorseMinMax<Q> where Q : ICellCoordinate
-  {    
-    public readonly ComputationResult<Q> Max;
-    public readonly ComputationResult<Q> Min;
-
-    public JVRMorseMinMax(ComputationResult<Q> max, ComputationResult<Q> min)
+    private class GraphWith<Q> : IReadonlyGraphWith<Q>
+      where Q : IIntegerCoordinate
     {
-      Max = max;
-      Min = min;
-    }
-  }
+      private readonly IDetDiffFunction<double> myFunction;
+      private readonly MorseEvaluatorOptions myOpts;
+      private readonly Func<string> myTempFiles;
 
-  public class JVRMorseResult<Q> where Q : ICellCoordinate
-  {
-    private readonly Dictionary<IStrongComponentInfo, JVRMorseMinMax<Q>> myResults;
+      public JVRMorseMinMax<Q> Result { get; private set; }
 
-    public JVRMorseResult(Dictionary<IStrongComponentInfo, JVRMorseMinMax<Q>> results)
-    {
-      myResults = results;
-    }
+      public GraphWith(IDetDiffFunction<double> function, MorseEvaluatorOptions opts, Func<string> tempFiles)
+      {
+        myFunction = function;
+        myOpts = opts;
+        myTempFiles = tempFiles;
+      }
 
-    public IEnumerable<IStrongComponentInfo> Components { get { return myResults.Keys; } }
+      public void With<TNode>(IReadonlyGraph<Q, TNode> graph) where TNode : class, INode<Q>
+      {
+        var evaluator = new DetDiffMorseEvaluator<TNode, Q>(myFunction, (IIntegerCoordinateSystem<Q>) graph.CoordinateSystem);        
+        var min = Minimize(graph, evaluator);
 
-    public JVRMorseMinMax<Q> Get(IStrongComponentInfo comp)
-    {
-      return myResults[comp];
+        var max = Minimize(graph, new NegativeCost<TNode>(evaluator)).Negative();
+
+        Result = new JVRMorseMinMax<Q>(Convert(max), Convert(min));
+      }
+
+      private ComputationResult<TNode> Minimize<TNode>(IReadonlyGraph<Q, TNode> graph, IMorseEvaluatorCost<TNode> evaluator)
+        where TNode : class, INode<Q>
+      {
+        var eval = new MorseEvaluator<TNode>(myOpts, new MorseStrongComponentGraph<TNode,Q>(graph), evaluator);
+        eval.AddPersist(new JVRFormatPersist<TNode>(myTempFiles));
+        return eval.Minimize();
+      }
+
+      private static ComputationResult<Q> Convert<TNode>(ComputationResult<TNode> result) where TNode : INode<Q>
+      {
+        return new ComputationResult<Q>(result.Value, result.Contour.Select(x=>x.Coordinate).ToArray());
+      }
     }
   }
 }

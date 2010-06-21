@@ -71,6 +71,8 @@ namespace EugenePetrenko.Gui2.Kernell2.Document
         builder.Append("\n");
       }
       builder.Append("]\n");
+
+
       return builder.ToString();
     }
 

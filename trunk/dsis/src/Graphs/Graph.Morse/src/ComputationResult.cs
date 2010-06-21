@@ -1,19 +1,31 @@
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Morse
 {
-  public class ComputationResult<T> where T : ICellCoordinate
+  public class ComputationResult
   {
-    public readonly bool IsMaximum;
-    public readonly ICollection<INode<T>> Contour;
     public readonly double Value;
+    public readonly double Count;
 
-    public ComputationResult(double value, ICollection<INode<T>> contour, bool isMaximum)
+    public ComputationResult(double value, double count)
     {
       Value = value;
-      IsMaximum = isMaximum;
+      Count = count;
+    }
+  }
+
+  public class ComputationResult<T> : ComputationResult
+  {
+    public readonly ICollection<T> Contour;
+
+    public ComputationResult(double value, ICollection<T> contour) : base(value, contour.Count)
+    {
       Contour = contour;
+    }
+
+    public ComputationResult<T> Negative()
+    {
+      return new ComputationResult<T>(-Value, Contour);
     }
   }
 }

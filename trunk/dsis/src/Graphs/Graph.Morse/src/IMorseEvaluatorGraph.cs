@@ -1,11 +1,13 @@
 using System.Collections.Generic;
-using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Morse
 {
-  public interface IMorseEvaluatorGraph<T> where T : ICellCoordinate
+  public interface IMorseEvaluatorGraph<T>
   {
-    IEnumerable<INode<T>> GetNodes(INode<T> node);
-    IEnumerable<INode<T>> GetNodes();
+    //TODO: Rename to GetEdges
+    IEnumerable<T> GetNodes(T node);
+    IEnumerable<T> GetNodes();
+
+    IEqualityComparer<T> Comparer { get; }
   }
 }

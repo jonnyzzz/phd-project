@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using DSIS.Core.Coordinates;
 
 namespace DSIS.Graph.Morse
 {
   public class JVRFormatPersist<T> : IMorseEvaluatorPersist<T> 
-    where T : ICellCoordinate
   {
     private readonly Func<string> GetTempFile;
 
@@ -16,10 +14,10 @@ namespace DSIS.Graph.Morse
       GetTempFile = getTempFile;
     }
 
-    public void SaveGraph(IMorseEvaluatorGraph<T> graph, Func<INode<T>, double> weight)
+    public void SaveGraph(IMorseEvaluatorGraph<T> graph, Func<T, double> weight)
     {
       var i = 0;
-      var nodes = new Dictionary<INode<T>, int>();
+      var nodes = new Dictionary<T, int>(graph.Comparer);
       foreach (var node in graph.GetNodes())
       {
         nodes[node] = i++;
@@ -40,11 +38,6 @@ namespace DSIS.Graph.Morse
         }
       }
 
-    }
-
-    public string Name
-    {
-      get { return "JVR"; }
     }
   }
 }

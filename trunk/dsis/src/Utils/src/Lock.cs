@@ -7,7 +7,7 @@ namespace DSIS.Utils
   {
     private readonly object myLock = new object();
     private readonly AutoResetEvent myLockLeft = new AutoResetEvent(false);
-    private bool myIsTaken;
+    private volatile bool myIsTaken;
 
     public event EventHandler<EventArgs> LockTaken;
     public event EventHandler<EventArgs> LockReturned;

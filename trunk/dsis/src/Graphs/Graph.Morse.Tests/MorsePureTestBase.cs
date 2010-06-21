@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DSIS.Core.Coordinates;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;
@@ -8,7 +9,7 @@ namespace DSIS.Graph.Morse.Tests
 {
   public class MorsePureTestBase
   {
-    protected class CostContext : IMorseEvaluatorGraph<IntegerCoordinate>
+    protected class CostContext : IMorseEvaluatorGraph<INode<IntegerCoordinate>>, IMorseEvaluatorCost<INode<IntegerCoordinate>>
     {
       private readonly Dictionary<int, INode<IntegerCoordinate>> myCache = new Dictionary<int, INode<IntegerCoordinate>>();
       private readonly List<INode<IntegerCoordinate>> myCoordinates = new List<INode<IntegerCoordinate>>();
@@ -45,7 +46,12 @@ namespace DSIS.Graph.Morse.Tests
         return myCoordinates;
       }
 
-      public double GetWeight(INode<IntegerCoordinate> node)
+      public IEqualityComparer<INode<IntegerCoordinate>> Comparer
+      {
+        get { return new ReferenceEqualityComparer<INode<IntegerCoordinate>>(); }
+      }
+
+      public double Cost(INode<IntegerCoordinate> node)
       {
         return myWeights[node.Coordinate];
       }
@@ -66,12 +72,7 @@ namespace DSIS.Graph.Morse.Tests
 
         public uint ComponentId
         {
-          get { return ComponentId; }
-        }
-
-        public void SetComponentId(uint id)
-        {
-          throw new NotImplementedException();
+          get { throw new NotImplementedException(); }
         }
       }
     }
@@ -90,18 +91,29 @@ namespace DSIS.Graph.Morse.Tests
       Assert.That(min, Is.LessThanOrEqualTo(max));
     }
 
-    private class ME : MorseEvaluator<IntegerCoordinate>
+    private class ME
     {
+      private readonly MorseEvaluatorOptions myOpts;
       private readonly CostContext myContext;
 
-      public ME(MorseEvaluatorOptions opts, CostContext context) : base(opts, context)
+      public ME(MorseEvaluatorOptions opts, CostContext context)
       {
+        myOpts = opts;
         myContext = context;
       }
 
-      protected override double Cost(INode<IntegerCoordinate> node)
+      public ComputationResult Compute(bool isMin)
       {
-        return myContext.GetWeight(node);
+        var e = new MorseEvaluator<INode<IntegerCoordinate>>(
+          myOpts, 
+          myContext, 
+          !isMin 
+            ? (IMorseEvaluatorCost<INode<IntegerCoordinate>>) myContext 
+            : new NegativeCost<INode<IntegerCoordinate>>(myContext)
+            );
+        var computationResult = e.Minimize();
+
+        return !isMin ? computationResult : computationResult.Negative();
       }
     }
   }

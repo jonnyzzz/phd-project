@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using DSIS.Core.Util;
-using DSIS.Graph.Abstract;
-using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.IntegerCoordinates.Tests;
 using DSIS.Utils;
 using NUnit.Framework;
-using System.Linq;
 
 namespace DSIS.Graph.Morse.Tests
 {
@@ -34,8 +31,7 @@ namespace DSIS.Graph.Morse.Tests
       var mss = new MockSystemSpace(1, 0, 1, 1000);
       IIntegerCoordinateSystem<IntegerCoordinate> ics = IntegerCoordinateSystemFactory.Create(mss);
       var graph = new TarjanGraph<IntegerCoordinate>(ics);
-      var costs =
-        new Dictionary<INode<IntegerCoordinate>, double>(EqualityComparerFactory<INode<IntegerCoordinate>>.GetComparer());
+      var costs = new Dictionary<INode<IntegerCoordinate>, double>(EqualityComparerFactory<INode<IntegerCoordinate>>.GetComparer());
 
       var ctx = new CostContext(graph, costs);
 
@@ -46,20 +42,15 @@ namespace DSIS.Graph.Morse.Tests
       Assert.IsTrue(components.ComponentCount > 0, "No components");
       Assert.IsTrue(components.ComponentCount == 1, "Only one component possible");
 
-      MorseEvaluator<IntegerCoordinate> me = new ME(eps, components, components.Components.Single(), costs);
-      ComputationResult<IntegerCoordinate> compute = me.Compute(true);
-      me.Compute(false);
-
+      var eval = new MorseEvaluator<TarjanNode<IntegerCoordinate>>(
+        new MorseEvaluatorOptions {Eps = eps},
+        new MorseStrongComponentGraph<TarjanNode<IntegerCoordinate>, IntegerCoordinate>(graph), new NegativeCost<INode<IntegerCoordinate>>(ctx));
+      
+      var compute = eval.Minimize().Negative();
       Assert.AreEqual(value, compute.Value, 1e-5);
     }
 
-    #region Nested type: BuildGraph
-
     protected delegate void BuildGraph(CostContext ctx);
-
-    #endregion
-
-    #region Nested type: Context
 
     protected class Context
     {
@@ -83,11 +74,7 @@ namespace DSIS.Graph.Morse.Tests
       }
     }
 
-    #endregion
-
-    #region Nested type: CostContext
-
-    protected class CostContext : Context
+    protected class CostContext : Context, IMorseEvaluatorCost<INode<IntegerCoordinate>>
     {
       private readonly Dictionary<INode<IntegerCoordinate>, double> myCosts;
       public double DefaultCost;
@@ -119,30 +106,11 @@ namespace DSIS.Graph.Morse.Tests
 
         return node;
       }
-    }
 
-    #endregion
-
-    #region Nested type: ME
-
-    private class ME : MorseEvaluator<IntegerCoordinate>
-    {
-      private readonly Dictionary<INode<IntegerCoordinate>, double> myCosts;
-
-      public ME(double eps, IGraphStrongComponents<IntegerCoordinate> components, IStrongComponentInfo comp,
-                Dictionary<INode<IntegerCoordinate>, double> costs) 
-        : base(new MorseEvaluatorOptions{Eps = eps}, 
-        new MorseStrongComponentGraph<IntegerCoordinate>(components, comp))
+      public double Cost(INode<IntegerCoordinate> t)
       {
-        myCosts = costs;
-      }
-
-      protected override double Cost(INode<IntegerCoordinate> node)
-      {
-        return myCosts[node];
+        return myCosts[t];
       }
     }
-
-    #endregion
   }
 }
