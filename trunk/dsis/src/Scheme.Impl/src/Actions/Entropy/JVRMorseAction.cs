@@ -86,6 +86,28 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       {
         return new ComputationResult<Q>(result.Value, result.Contour.Select(x=>x.Coordinate).ToArray());
       }
+
+      public class DetDiffMorseEvaluator<T, Q> : IMorseEvaluatorCost<T>
+        where T : INode<Q>
+        where Q : IIntegerCoordinate
+      {
+        private readonly IDetDiffFunction<double> myFunction;
+        private readonly double[] myCoords;
+        private readonly IIntegerCoordinateSystem<Q> mySystem;
+
+        public DetDiffMorseEvaluator(IDetDiffFunction<double> function, IIntegerCoordinateSystem<Q> system)
+        {
+          myFunction = function;
+          myCoords = new double[myFunction.Dimension];
+          mySystem = system;
+        }
+
+        public double Cost(T node)
+        {
+          mySystem.CenterPoint(node.Coordinate, myCoords);
+          return Math.Log(Math.Abs(myFunction.Evaluate(myCoords)));
+        }
+      }
     }
   }
 }

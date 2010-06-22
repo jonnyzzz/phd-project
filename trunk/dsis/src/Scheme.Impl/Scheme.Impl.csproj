@@ -242,6 +242,10 @@
       <Project>{CCED6A95-9573-4BAD-9BC5-648FFF5093DD}</Project>
       <Name>Scheme</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Graphs\Graph.Morse.Adapter\Graph.Morse.Adapter.csproj">
+      <Project>{4FE07642-22C2-498E-A1FE-C799754C5287}</Project>
+      <Name>Graph.Morse.Adapter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="../Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
