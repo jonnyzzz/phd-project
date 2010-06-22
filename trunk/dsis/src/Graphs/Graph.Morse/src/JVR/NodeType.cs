@@ -1,6 +1,6 @@
 using System;
 
-namespace DSIS.Graph.Morse
+namespace DSIS.Graph.Morse.JVR
 {
   public class NodeType
   {
@@ -10,7 +10,7 @@ namespace DSIS.Graph.Morse
 
     public readonly int Value;
 
-    public NodeType(int value)
+    private NodeType(int value)
     {
       Value = value;
     }

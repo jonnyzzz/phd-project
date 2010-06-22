@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
+using DSIS.Graph.Morse.JVR;
 using DSIS.IntegerCoordinates.Impl;
 using DSIS.Utils;
 using NUnit.Framework;

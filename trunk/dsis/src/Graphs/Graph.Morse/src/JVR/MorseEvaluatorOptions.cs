@@ -1,6 +1,6 @@
 using System;
 
-namespace DSIS.Graph.Morse
+namespace DSIS.Graph.Morse.JVR
 {
   [Serializable]
   public class MorseEvaluatorOptions

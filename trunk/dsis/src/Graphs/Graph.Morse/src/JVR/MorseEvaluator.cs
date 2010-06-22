@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DSIS.Graph.Morse
+namespace DSIS.Graph.Morse.JVR
 {
   public class MorseEvaluator<T>
   {

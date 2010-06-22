@@ -4,6 +4,7 @@ using System.Linq;
 using DSIS.Core.System;
 using DSIS.Graph;
 using DSIS.Graph.Morse;
+using DSIS.Graph.Morse.JVR;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;

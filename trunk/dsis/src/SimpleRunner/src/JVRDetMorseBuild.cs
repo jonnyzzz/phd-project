@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
-using DSIS.Graph.Morse;
+using DSIS.Graph.Morse.JVR;
 using DSIS.Scheme;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;

@@ -1,4 +1,4 @@
-namespace DSIS.Graph.Morse
+namespace DSIS.Graph.Morse.JVR
 {
   public class ContourNode<T>
   {
