@@ -1,6 +1,8 @@
 using System;
+using System.Reflection;
 using DSIS.Core.System;
 using DSIS.Function.Predefined;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 using NUnit.Framework;
 
 namespace DSIS.Function.UserDefined.Tests
@@ -31,7 +33,8 @@ namespace DSIS.Function.UserDefined.Tests
 
       var code = gen.GenerateCode(pz);
 
-      Compiler.CompileCSharpCode(code, typeof(Function<>), typeof(FunctionIO<>), typeof(DoubleSystemInfoBase), typeof(GeneratedImplementationArrtubute));
+      var a = Compiler.CompileCSharpCode(code, typeof(Function<>), typeof(FunctionIO<>), typeof(DoubleSystemInfoBase), typeof(GeneratedImplementationArrtubute));
+      AssertAssembly(a);
     }
 
     [Test]
@@ -47,7 +50,20 @@ namespace DSIS.Function.UserDefined.Tests
 
       var code = gen.GenerateCode(pz);
 
-      Compiler.CompileCSharpCode(code, typeof(Function<>), typeof(FunctionIO<>), typeof(DoubleSystemInfoBase), typeof(GeneratedImplementationArrtubute));
+      var a = Compiler.CompileCSharpCode(code, typeof(Function<>), typeof(FunctionIO<>), typeof(DoubleSystemInfoBase), typeof(GeneratedImplementationArrtubute));
+      AssertAssembly(a);
+    }
+
+    private static void AssertAssembly(Assembly a)
+    {
+      //TODO: Create test to check component container based approach works
+      Assert.That(a.IsDefined(typeof(AssemblyWithComponentsAttribute), true), Is.True);
+    }
+
+    [Test, Ignore("Not Implemented")]
+    public void Test_UserDefinedFunctionFactoryImpl()
+    {
+      Assert.Inconclusive("Not Implemented");
     }
   }
 }

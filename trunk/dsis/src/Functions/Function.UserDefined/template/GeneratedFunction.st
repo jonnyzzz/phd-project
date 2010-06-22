@@ -1,9 +1,11 @@
 ﻿using DSIS.Core.System;
-using DSIS.Core.Ioc;
 using DSIS.Function.Predefined;
 using DSIS.Function.UserDefined;
 using System;
 using System.IO;
+using EugenePetrenko.Shared.Core.Ioc.Api;
+
+[assembly : AssemblyWithComponentsAttribute]
 
 namespace DSIS.Function.UserDefined.Generated 
 {

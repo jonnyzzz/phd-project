@@ -59,7 +59,7 @@ namespace DSIS.Function.UserDefined
 
     private static void GenerateMethod(StringBuilder sb, MethodInfo methodInfo, string name)
     {
-      sb.AppendFormat("private {0} {1}(", methodInfo.ReturnType, name);
+      sb.AppendFormat("private static {0} {1}(", methodInfo.ReturnType, name);
       sb.JoinString(methodInfo.GetParameters(), (x, i) => x.AppendFormat("{0} {1}", GeneratorTypeUtil.ParameterType(i), i.Name), ", ");
       sb.AppendFormat(") {{ return {1}.{0}(", methodInfo.Name, GeneratorTypeUtil.GenerateFQTypeName(typeof(Math)));
       sb.JoinString(methodInfo.GetParameters(), (x, i) => x.Append(i.Name ), ", ");
