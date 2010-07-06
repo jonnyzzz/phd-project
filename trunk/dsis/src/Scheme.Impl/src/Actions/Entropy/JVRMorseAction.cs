@@ -13,9 +13,9 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
 {
   public class JVRMorseAction : IntegerCoordinateSystemActionBase3
   {
-    private readonly MorseEvaluatorOptions myOptions;
+    private readonly JVREvaluatorOptions myOptions;
 
-    public JVRMorseAction(MorseEvaluatorOptions options)
+    public JVRMorseAction(JVREvaluatorOptions options)
     {
       myOptions = options;
     }
@@ -53,12 +53,12 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       where Q : IIntegerCoordinate
     {
       private readonly IDetDiffFunction<double> myFunction;
-      private readonly MorseEvaluatorOptions myOpts;
+      private readonly JVREvaluatorOptions myOpts;
       private readonly Func<string> myTempFiles;
 
       public JVRMorseMinMax<Q> Result { get; private set; }
 
-      public GraphWith(IDetDiffFunction<double> function, MorseEvaluatorOptions opts, Func<string> tempFiles)
+      public GraphWith(IDetDiffFunction<double> function, JVREvaluatorOptions opts, Func<string> tempFiles)
       {
         myFunction = function;
         myOpts = opts;
@@ -78,7 +78,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       private ComputationResult<TNode> Minimize<TNode>(IReadonlyGraph<Q, TNode> graph, IMorseEvaluatorCost<TNode> evaluator)
         where TNode : class, INode<Q>
       {
-        var eval = new MorseEvaluator<TNode>(myOpts, new MorseStrongComponentGraph<TNode,Q>(graph), evaluator);
+        var eval = new JVREvaluator<TNode>(myOpts, new MorseStrongComponentGraph<TNode,Q>(graph), evaluator);
         eval.AddPersist(new JVRFormatPersist<TNode>(myTempFiles));
         return eval.Minimize();
       }

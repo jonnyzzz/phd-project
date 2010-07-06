@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace DSIS.Utils
 {
-  [Obsolete("Consider using explicit comparers")]
   public class EqualityComparerFactory<T> : AttributeUtil<T>
   {
     private static IEqualityComparer<T> myComparer = null;

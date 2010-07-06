@@ -66,7 +66,7 @@ namespace DSIS.SimpleRunner
 
     private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, double eps)
     {
-      var opts = new MorseEvaluatorOptions {Eps = eps};
+      var opts = new JVREvaluatorOptions {Eps = eps};
       var key = new RecordTimeAction(new JVRMorseAction(opts), "XxX" + eps);
       siConstructionAction
         .Edge(key).With(x=>x.Back(system))
@@ -76,10 +76,10 @@ namespace DSIS.SimpleRunner
 
     private class DumpJVR : IntegerCoordinateSystemActionBase3
     {
-      private readonly MorseEvaluatorOptions myOpts;
+      private readonly JVREvaluatorOptions myOpts;
       private readonly Key<TimeSpan> myTime;
 
-      public DumpJVR(MorseEvaluatorOptions opts, Key<TimeSpan> time)
+      public DumpJVR(JVREvaluatorOptions opts, Key<TimeSpan> time)
       {
         myOpts = opts;
         myTime = time;

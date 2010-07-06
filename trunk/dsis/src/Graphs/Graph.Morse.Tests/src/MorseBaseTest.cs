@@ -43,8 +43,8 @@ namespace DSIS.Graph.Morse.Tests
       Assert.IsTrue(components.ComponentCount > 0, "No components");
       Assert.IsTrue(components.ComponentCount == 1, "Only one component possible");
 
-      var eval = new MorseEvaluator<TarjanNode<IntegerCoordinate>>(
-        new MorseEvaluatorOptions {Eps = eps},
+      var eval = new JVREvaluator<TarjanNode<IntegerCoordinate>>(
+        new JVREvaluatorOptions {Eps = eps},
         new MorseStrongComponentGraph<TarjanNode<IntegerCoordinate>, IntegerCoordinate>(graph), new NegativeCost<INode<IntegerCoordinate>>(ctx));
       
       var compute = eval.Minimize().Negative();

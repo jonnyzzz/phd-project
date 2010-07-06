@@ -82,7 +82,7 @@ namespace DSIS.Graph.Morse.Tests
     {
       var ctx = new CostContext();
       act(ctx);
-      var me = new ME(new MorseEvaluatorOptions(), ctx);
+      var me = new ME(new JVREvaluatorOptions(), ctx);
       var eMin = me.Compute(false);
       var eMax = me.Compute(true);
       
@@ -94,10 +94,10 @@ namespace DSIS.Graph.Morse.Tests
 
     private class ME
     {
-      private readonly MorseEvaluatorOptions myOpts;
+      private readonly JVREvaluatorOptions myOpts;
       private readonly CostContext myContext;
 
-      public ME(MorseEvaluatorOptions opts, CostContext context)
+      public ME(JVREvaluatorOptions opts, CostContext context)
       {
         myOpts = opts;
         myContext = context;
@@ -105,7 +105,7 @@ namespace DSIS.Graph.Morse.Tests
 
       public ComputationResult Compute(bool isMin)
       {
-        var e = new MorseEvaluator<INode<IntegerCoordinate>>(
+        var e = new JVREvaluator<INode<IntegerCoordinate>>(
           myOpts, 
           myContext, 
           !isMin 

@@ -12,10 +12,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\EvaluatorTestCase.cs" />
+    <Compile Include="src\HowardMethodTest.cs" />
+    <Compile Include="src\JVRMethodTest.cs" />
     <Compile Include="src\MorseBaseTest.cs" />
     <Compile Include="src\MorseHung2009Test.cs" />
     <Compile Include="MorsePureTestBase.cs" />
     <Compile Include="src\MorseTest.cs" />
+    <Compile Include="src\MorseTestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core.System.Tests\Core.System.Tests.csproj">

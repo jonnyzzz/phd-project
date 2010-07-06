@@ -15,13 +15,14 @@
     <Compile Include="src\ComputationResult.cs" />
     <Compile Include="src\Howard\HowardEvaluator.cs" />
     <Compile Include="src\Howard\HowardEvaluatorOptions.cs" />
+    <Compile Include="src\IMorseEvaluator.cs" />
     <Compile Include="src\IMorseEvaluatorCost.cs" />
     <Compile Include="src\IMorseEvaluatorGraph.cs" />
     <Compile Include="src\IMorseEvaluatorPersist.cs" />
     <Compile Include="src\JVRFormatPersist.cs" />
     <Compile Include="src\JVR\ContourNode.cs" />
-    <Compile Include="src\JVR\MorseEvaluator.cs" />
-    <Compile Include="src\JVR\MorseEvaluatorOptions.cs" />
+    <Compile Include="src\JVR\JVREvaluator.cs" />
+    <Compile Include="src\JVR\JVREvaluatorOptions.cs" />
     <Compile Include="src\JVR\NodeType.cs" />
     <Compile Include="src\NegativeCost.cs" />
   </ItemGroup>

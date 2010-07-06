@@ -3,11 +3,11 @@ using System;
 namespace DSIS.Graph.Morse.JVR
 {
   [Serializable]
-  public class MorseEvaluatorOptions
+  public class JVREvaluatorOptions
   {
     public double Eps { get; set; }
 
-    public MorseEvaluatorOptions()
+    public JVREvaluatorOptions()
     {
       Eps = 1e-8;
     }

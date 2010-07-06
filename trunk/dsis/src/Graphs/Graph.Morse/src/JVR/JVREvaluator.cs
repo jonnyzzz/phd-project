@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DSIS.Graph.Morse.JVR
 {
-  public class MorseEvaluator<T>
+  public class JVREvaluator<T> : IMorseEvaluator<T>
   {
     private readonly double myEps;
 
@@ -15,7 +15,7 @@ namespace DSIS.Graph.Morse.JVR
     //TODO: Use graph data holder
     private readonly Dictionary<T, ContourNode<T>> myNodes;
 
-    public MorseEvaluator(MorseEvaluatorOptions opts, IMorseEvaluatorGraph<T> graphComponent, IMorseEvaluatorCost<T> cost)
+    public JVREvaluator(JVREvaluatorOptions opts, IMorseEvaluatorGraph<T> graphComponent, IMorseEvaluatorCost<T> cost)
     {
       myCost = cost;
       myNodes = new Dictionary<T, ContourNode<T>>(graphComponent.Comparer);
@@ -50,16 +50,17 @@ namespace DSIS.Graph.Morse.JVR
       return r/kV;
     }
 
-    private static void ToList(ContourNode<T> node, ICollection<T> list)
+    private static List<T> ToList(ContourNode<T> node)
     {
       ContourNode<T> n = node.Parent;
-
-      list.Add(n.Node);
+      var list = new List<T> {node.Node};
       while (n != node)
       {
         list.Add(n.Node);
         n = n.Parent;
       }
+      list.Reverse();
+      return list;
     }
 
     //TODO: Check!
@@ -265,9 +266,8 @@ namespace DSIS.Graph.Morse.JVR
       extrema = DoCompute(extrema);
       double answerValue = ContourCost(extrema);
 
-      var list = new List<T>();      
-      ToList(extrema, list);
-      return new ComputationResult<T>(answerValue, list.AsReadOnly());
+      var list = ToList(extrema);
+      return new ComputationResult<T>(answerValue, list.ToArray());
     }
   }
 }

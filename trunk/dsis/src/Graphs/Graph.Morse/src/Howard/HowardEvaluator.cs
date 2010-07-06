@@ -5,13 +5,12 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Morse.Howard
 {
-  public class HowardEvaluator<T>
+  public class HowardEvaluator<T> : IMorseEvaluator<T>
   {
     private readonly double myEps;
 
     private readonly IMorseEvaluatorGraph<T> myGraphComponent;
     private readonly IMorseEvaluatorCost<T> myCost;
-    private readonly List<IMorseEvaluatorPersist<T>> myPersist = new List<IMorseEvaluatorPersist<T>>();
 
     //TODO: Use graph data holder
     private readonly Dictionary<T, ContourNode> myNodes;
