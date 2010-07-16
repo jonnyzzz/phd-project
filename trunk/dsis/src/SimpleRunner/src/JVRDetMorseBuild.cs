@@ -15,6 +15,7 @@ using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl;
 using DSIS.Scheme.Impl.Actions.Entropy;
+using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.Scheme.Impl.Actions.Performance;
 using DSIS.Utils;
 
@@ -25,7 +26,7 @@ namespace DSIS.SimpleRunner
     protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
     {
       var data = new List<ComputationData>();
-      foreach (int rep in 13.Each())
+      for(int rep = 5; rep < 13; rep++)
       {
         data.AddRange(new List<ComputationData>
                                     {
@@ -106,6 +107,7 @@ namespace DSIS.SimpleRunner
         var graph = Keys.Graph<Q>().Get(input);
         var comps = Keys.GetGraphComponents<Q>().Get(input);
         var system = Keys.SystemInfoKey.Get(input);
+        var logger = Logger.Instance(input);
 
         Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
         Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
@@ -138,6 +140,8 @@ namespace DSIS.SimpleRunner
         }
         sb.AppendLine();
         
+        logger.Write(sb.ToString());
+
         File.AppendAllText(@"e:\jvr_morse.log", sb.ToString());
       }
 

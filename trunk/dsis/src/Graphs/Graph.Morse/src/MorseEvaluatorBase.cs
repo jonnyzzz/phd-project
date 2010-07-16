@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DSIS.Graph.Morse
 {
@@ -20,16 +21,31 @@ namespace DSIS.Graph.Morse
       myNodes = new Dictionary<T, ANode>(graphComponent.Comparer);
     }
 
+    public ComputationResult<T> Minimize()
+    {
+      foreach (var node in myGraphComponent.GetNodes())
+      {
+        CreateNode(node);
+      }
+      
+      SaveGraph();
+      
+      return MinimizeInternal();
+    }
+
+    protected abstract ComputationResult<T> MinimizeInternal();
+    
     public void AddPersist(IMorseEvaluatorPersist<T> persist)
     {
       myPersist.Add(persist);
     }
 
-    protected void SaveGraph(Func<T,double> cost)
+    private void SaveGraph()
     {
       foreach (var persist in myPersist)
       {
-        persist.SaveGraph(myGraphComponent, cost);
+        //NOTE: this may not be optimal way. This leads to cost recomputation
+        persist.SaveGraph(myGraphComponent, x=>myCost.Cost(x));
       }
     }
 
@@ -47,5 +63,10 @@ namespace DSIS.Graph.Morse
     protected long NodesCount { get { return myNodes.Count; } }
 
     protected IEnumerable<ANode> Nodes { get { return myNodes.Values; } }
+
+    protected IEnumerable<ANode> NodesFrom(T node)
+    {
+      return myGraphComponent.GetNodes(node).Select(CreateNode);
+    }
   }
 }

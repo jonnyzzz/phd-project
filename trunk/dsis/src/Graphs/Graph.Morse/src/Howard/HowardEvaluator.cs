@@ -8,27 +8,21 @@ namespace DSIS.Graph.Morse.Howard
   public class HowardEvaluator<T> : MorseEvaluatorBase<T, HowardEvaluator<T>.ContourNode>, IMorseEvaluator<T>
   {
     private readonly double myEps;
-
-    private readonly IMorseEvaluatorGraph<T> myGraphComponent;
-    
     public HowardEvaluator(HowardEvaluatorOptions opts, IMorseEvaluatorGraph<T> graphComponent, IMorseEvaluatorCost<T> cost)
       : base(graphComponent, cost, (t,v) => new ContourNode(t, v))
     {
       myEps = opts.Eps;
-      myGraphComponent = graphComponent;
     }
 
-    public ComputationResult<T> Minimize()
+    protected override ComputationResult<T> MinimizeInternal()
     { 
-      SaveGraph(x=>CreateNode(x).Cost);
-
-      foreach (var from in myGraphComponent.GetNodes().Select(CreateNode))
+      foreach (var from in Nodes)
       {
         //Out implementation detail - all edges revieve same weight, computed from 'from' node
         //Implementation of this is simplified because of that
         var w_from_to = from.Cost;
         from.D = w_from_to;
-        from.π = CreateNode(myGraphComponent.GetNodes(from.Node).First());
+        from.π = NodesFrom(from.Node).First();
       }
 
       //Main loop
@@ -69,9 +63,9 @@ namespace DSIS.Graph.Morse.Howard
     private bool Improve(double λ)
     {
       bool improved = false;
-      foreach (var from in myGraphComponent.GetNodes().Select(CreateNode))
+      foreach (var from in Nodes)
       {
-        foreach (var to in myGraphComponent.GetNodes(from.Node).Select(CreateNode))
+        foreach (var to in NodesFrom(from.Node))
         {
           var p = to.D + from.Cost - λ;
 
@@ -195,6 +189,5 @@ namespace DSIS.Graph.Morse.Howard
         return string.Format("{0} {1:F}", Node, Cost);
       }
     }
-
   }
 }

@@ -1,19 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DSIS.Graph.Morse.JVR
 {
   public class JVREvaluator<T> : MorseEvaluatorBase<T, ContourNode<T>>, IMorseEvaluator<T>
   {
     private readonly double myEps;
-    private readonly IMorseEvaluatorGraph<T> myGraphComponent;
 
     public JVREvaluator(JVREvaluatorOptions opts, IMorseEvaluatorGraph<T> graphComponent, IMorseEvaluatorCost<T> cost) 
       : base(graphComponent, cost, (t, v)=>new ContourNode<T>(t, v))
     {
       myEps = opts.Eps;
-      myGraphComponent = graphComponent;
     }
 
     private double ContourCost(ContourNode<T> node)
@@ -97,7 +94,7 @@ namespace DSIS.Graph.Morse.JVR
         m.RemoveAt(0);
         node.Type2 = NodeType.M0;
 
-        foreach (var to in myGraphComponent.GetNodes(node.Node).Select(CreateNode)) 
+        foreach (var to in NodesFrom(node.Node)) 
         {          
           var w = node.Value + to.Cost - z;
 
@@ -143,8 +140,6 @@ namespace DSIS.Graph.Morse.JVR
 
     private ContourNode<T> DoCompute(ContourNode<T> node)
     {
-      SaveGraph(x=>CreateNode(x).Cost);
-
       var pNode = node;
       while(node != null)
       {
@@ -157,11 +152,10 @@ namespace DSIS.Graph.Morse.JVR
 
     private ContourNode<T> Init()
     {
-      foreach (T node in myGraphComponent.GetNodes())
-      {
-        var gnode = CreateNode(node);
+      foreach (var gnode in Nodes)
+      {        
         ContourNode<T> minEdge = null;
-        foreach (var gedge in myGraphComponent.GetNodes(node).Select(CreateNode))
+        foreach (var gedge in NodesFrom(gnode.Node))
         {
           if (minEdge == null || minEdge.Cost > gedge.Cost)
             minEdge = gedge;
@@ -231,7 +225,7 @@ namespace DSIS.Graph.Morse.JVR
       q.Parent = p;
     }
 
-    public ComputationResult<T> Minimize()
+    protected override ComputationResult<T> MinimizeInternal()
     {
       ContourNode<T> extrema = Init();
       extrema = DoCompute(extrema);
