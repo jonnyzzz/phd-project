@@ -59,8 +59,8 @@ namespace DSIS.SimpleRunner
     {
       if (afterSIParams.IsLast)
       {
-        BuildJVRCall(afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
-        BuildHowardCall(afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
+        BuildJVRCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
+        BuildHowardCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
 //        BuildJVRCall(siConstructionAction, system, 1e-4);
 //        BuildJVRCall(siConstructionAction, system, 1e-5);
 //        BuildJVRCall(siConstructionAction, system, 1e-8);
@@ -68,26 +68,30 @@ namespace DSIS.SimpleRunner
       return base.CreateActionsAfterSI(afterSIParams);
     }
 
-    private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, double eps)
+    private static void BuildJVRCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system, double eps)
     {
       var opts = new JVREvaluatorOptions {Eps = eps};
       var jvrMorseAction = new JVRMorseAction(opts);
-      BuildJVRCall(siConstructionAction, system, jvrMorseAction);
+      BuildJVRCall(logger, siConstructionAction, system, jvrMorseAction);
     }
 
-    private static void BuildHowardCall(IActionEdgesBuilder siConstructionAction, IAction system, double eps)
+    private static void BuildHowardCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system, double eps)
     {
       var opts = new HowardEvaluatorOptions {Eps = eps};
       var jvrMorseAction = new HowardMorseAction(opts);
-      BuildJVRCall(siConstructionAction, system, jvrMorseAction);
+      BuildJVRCall(logger, siConstructionAction, system, jvrMorseAction);
     }
 
-    private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, IMorseAction morse) {
+    private static void BuildJVRCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system, IMorseAction morse)
+    {
 
     var key = new RecordTimeAction(morse, "XxX" + morse.Options.MethodName + " " + morse.Options.Eps);
       siConstructionAction
         .Edge(key).With(x=>x.Back(system))
-        .Edge(new DumpJVR(morse.Options, key.Key)).With(x => x.Back(siConstructionAction)).With(x => x.Back(system))
+        .Edge(new DumpJVR(morse.Options, key.Key))
+          .With(x => x.Back(siConstructionAction))
+          .With(x => x.Back(system))
+          .With(x=>x.Back(logger))
         ;
     }
 
@@ -130,12 +134,12 @@ namespace DSIS.SimpleRunner
         foreach (var comp in comps.Components)
         {
           sb.Append("  ");
-          sb.AppendFormat("nodes:{0}, edges{1} ", comp.NodesCount, EdgesCount(comp, comps));
+          sb.AppendFormat("nodes:{0}, edges:{1} ", comp.NodesCount, EdgesCount(comp, comps));
 
           var val = result.Get(comp);
 
-          sb.AppendFormat("min: v={0},length={1} ", val.Min.Value, val.Min.Contour.Count);
-          sb.AppendFormat("max: v={0},length={1} ", val.Max.Value, val.Max.Contour.Count);
+          sb.AppendFormat("min: v={0}, length={1} ", val.Min.Value, val.Min.Contour.Count);
+          sb.AppendFormat("max: v={0}, length={1} ", val.Max.Value, val.Max.Contour.Count);
           sb.AppendLine();
         }
         sb.AppendLine();
