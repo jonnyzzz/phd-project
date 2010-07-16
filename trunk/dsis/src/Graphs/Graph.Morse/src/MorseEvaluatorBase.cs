@@ -4,13 +4,13 @@ using System.Linq;
 
 namespace DSIS.Graph.Morse
 {
-  public abstract class MorseEvaluatorBase<T, ANode> : IMorseEvaluatorSaveSupport<T>
+  public abstract class MorseEvaluatorBase<T, ANode> : IMorseEvaluatorSaveSupport<T>, IDisposable
   {
     private readonly List<IMorseEvaluatorPersist<T>> myPersist = new List<IMorseEvaluatorPersist<T>>();
     private readonly IMorseEvaluatorGraph<T> myGraphComponent;
     private readonly IMorseEvaluatorCost<T> myCost;
 
-    private readonly Dictionary<T, ANode> myNodes;
+    private readonly IMorseEvaluatorNodesMap<T, ANode> myNodes;
     private readonly Func<T, double, ANode> myCreateNode;
 
     protected MorseEvaluatorBase(IMorseEvaluatorGraph<T> graphComponent, IMorseEvaluatorCost<T> cost, Func<T, double, ANode> createNode)
@@ -18,14 +18,24 @@ namespace DSIS.Graph.Morse
       myGraphComponent = graphComponent;
       myCreateNode = createNode;
       myCost = cost;
-      myNodes = new Dictionary<T, ANode>(graphComponent.Comparer);
+
+      if (graphComponent is IMorseEvaluatorNodeMapProvider<T>)
+        myNodes = ((IMorseEvaluatorNodeMapProvider<T>) graphComponent).CreateMap<ANode>();
+      else
+        myNodes = new DictionaryBasedNodesMap<T, ANode>(graphComponent.Comparer);
+    }
+
+    public void Dispose()
+    {
+      myNodes.Dispose();
     }
 
     public ComputationResult<T> Minimize()
     {
       foreach (var node in myGraphComponent.GetNodes())
       {
-        CreateNode(node);
+        var gnode = myCreateNode(node, myCost.Cost(node));
+        myNodes.Put(node, gnode);
       }
       
       SaveGraph();
@@ -49,20 +59,14 @@ namespace DSIS.Graph.Morse
       }
     }
 
-    protected ANode CreateNode(T node)
+    private ANode CreateNode(T node)
     {
-      ANode gnode;
-      if (!myNodes.TryGetValue(node, out gnode))
-      {
-        gnode = myCreateNode(node, myCost.Cost(node));
-        myNodes.Add(node, gnode);
-      }
-      return gnode;
+      return myNodes.Find(node);
     }
 
     protected long NodesCount { get { return myNodes.Count; } }
 
-    protected IEnumerable<ANode> Nodes { get { return myNodes.Values; } }
+    protected IEnumerable<ANode> Nodes { get { return myNodes.Nodes; } }
 
     protected IEnumerable<ANode> NodesFrom(T node)
     {

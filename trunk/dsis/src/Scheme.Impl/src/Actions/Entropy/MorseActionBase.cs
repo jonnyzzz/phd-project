@@ -4,6 +4,7 @@ using System.Linq;
 using DSIS.Core.System;
 using DSIS.Graph;
 using DSIS.Graph.Morse;
+using DSIS.Graph.Morse.Adapter;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Ctx;
 using DSIS.Utils;
@@ -82,18 +83,22 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
         Result = new JVRMorseMinMax<Q>(Convert(max), Convert(min));
       }
 
-      private ComputationResult<TNode> Minimize<TNode>(IReadonlyGraph<Q, TNode> graph, IMorseEvaluatorCost<TNode> evaluator)
+      private ComputationResult<TNode> Minimize<TNode>(IReadonlyGraph<Q, TNode> graph,
+                                                       IMorseEvaluatorCost<TNode> evaluator)
         where TNode : class, INode<Q>
       {
-        var comp = new MorseStrongComponentGraph<TNode,Q>(graph);
-        var eval = myBaseAction.CreateEvaluator(comp, evaluator);
+        var comp = new MorseStrongComponentGraph<TNode, Q>(graph);
 
-        var saveSupport = eval as IMorseEvaluatorSaveSupport<TNode>;       
-        if (saveSupport != null) {
-          saveSupport.AddPersist(new JVRFormatPersist<TNode>(myTempFiles));
+        using (var eval = myBaseAction.CreateEvaluator(comp, evaluator))
+        {
+          var saveSupport = eval as IMorseEvaluatorSaveSupport<TNode>;
+          if (saveSupport != null)
+          {
+            saveSupport.AddPersist(new JVRFormatPersist<TNode>(myTempFiles));
+          }
+
+          return eval.Minimize();
         }
-
-        return eval.Minimize();
       }
 
       private static ComputationResult<Q> Convert<TNode>(ComputationResult<TNode> result) where TNode : INode<Q>

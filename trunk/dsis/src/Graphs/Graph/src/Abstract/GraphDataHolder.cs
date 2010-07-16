@@ -25,10 +25,9 @@ namespace DSIS.Graph.Abstract
     public TData GetData(TNode node)
     {
       var data = node.UserData;
-      if (data is TData)
-      {
-        return (TData)data;
-      }
+      if (data != null)
+        return (TData) data;
+
       var d = myDefaultFactory(node);
       node.UserData = d;
       return d;      

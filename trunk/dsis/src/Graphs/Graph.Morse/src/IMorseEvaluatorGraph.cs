@@ -10,4 +10,9 @@ namespace DSIS.Graph.Morse
 
     IEqualityComparer<T> Comparer { get; }
   }
+
+  public interface IMorseEvaluatorNodeMapProvider<in T>
+  {
+    IMorseEvaluatorNodesMap<T, ANode> CreateMap<ANode>();
+  }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using DSIS.Core.Util;
+using DSIS.Graph.Morse.Adapter;
 using DSIS.Graph.Morse.JVR;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;

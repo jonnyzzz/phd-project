@@ -1,7 +1,7 @@
 namespace DSIS.Graph.Morse.JVR
 {
   public class ContourNode<T>
-  {
+  {    
     private int myValue;
 
     public readonly T Node;
@@ -20,8 +20,8 @@ namespace DSIS.Graph.Morse.JVR
 
     public NodeType Type2
     {
-      get { return NodeType.FromValue(myValue); }
-      set { myValue = value.Value; }
+      get { return (NodeType) myValue; }
+      set { myValue = (int)value; }
     }
 
     public int Incoming

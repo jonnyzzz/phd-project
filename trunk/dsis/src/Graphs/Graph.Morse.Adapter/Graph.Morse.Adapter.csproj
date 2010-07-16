@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\GraphBasedNodesMap.cs" />
     <Compile Include="src\MorseStrongComponentGraph.cs" />
   </ItemGroup>
   <ItemGroup>

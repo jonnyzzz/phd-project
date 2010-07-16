@@ -13,11 +13,13 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\ComputationResult.cs" />
+    <Compile Include="src\DictionaryBasedNodesMap.cs" />
     <Compile Include="src\Howard\HowardEvaluator.cs" />
     <Compile Include="src\Howard\HowardEvaluatorOptions.cs" />
     <Compile Include="src\IMorseEvaluator.cs" />
     <Compile Include="src\IMorseEvaluatorCost.cs" />
     <Compile Include="src\IMorseEvaluatorGraph.cs" />
+    <Compile Include="src\IMorseEvaluatorNodesMap.cs" />
     <Compile Include="src\IMorseEvaluatorPersist.cs" />
     <Compile Include="src\IMorseOptions.cs" />
     <Compile Include="src\JVRFormatPersist.cs" />

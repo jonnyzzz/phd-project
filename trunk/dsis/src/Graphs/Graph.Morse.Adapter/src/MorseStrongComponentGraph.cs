@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 
-namespace DSIS.Graph.Morse
+namespace DSIS.Graph.Morse.Adapter
 {
-  public class MorseStrongComponentGraph<N,Q> : IMorseEvaluatorGraph<N> 
+  public class MorseStrongComponentGraph<N, Q> : IMorseEvaluatorGraph<N>, IMorseEvaluatorNodeMapProvider<N>
     where Q : ICellCoordinate 
     where N : class, INode<Q>
   {
@@ -28,5 +28,10 @@ namespace DSIS.Graph.Morse
     {
       get { return myGraph.Comparer; }
     }
+
+    public IMorseEvaluatorNodesMap<N, ANode> CreateMap<ANode>()
+    {
+      return new GraphBasedNodesMap<Q, N, ANode>(myGraph);
+    }    
   }
 }

@@ -124,6 +124,7 @@ namespace DSIS.Graph.Morse.Howard
     private IEnumerable<IEnumerable<ContourNode>> πLoops()
     {
       //Referemce comparer is OK here.
+      //TODO: this is tooo slow!
       var notVisited = new HashSet<ContourNode>(Nodes);
       while(notVisited.Count > 0)
       {

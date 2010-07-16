@@ -1,6 +1,8 @@
-﻿namespace DSIS.Graph.Morse
+﻿using System;
+
+namespace DSIS.Graph.Morse
 {
-  public interface IMorseEvaluator<T>
+  public interface IMorseEvaluator<T> : IDisposable
   {
     ComputationResult<T> Minimize();
   }
