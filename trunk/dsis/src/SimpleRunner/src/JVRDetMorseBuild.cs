@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
+using DSIS.Graph.Morse;
+using DSIS.Graph.Morse.Howard;
 using DSIS.Graph.Morse.JVR;
 using DSIS.Scheme;
 using DSIS.Scheme.Ctx;
@@ -57,6 +59,7 @@ namespace DSIS.SimpleRunner
       if (afterSIParams.IsLast)
       {
         BuildJVRCall(afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
+        BuildHowardCall(afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
 //        BuildJVRCall(siConstructionAction, system, 1e-4);
 //        BuildJVRCall(siConstructionAction, system, 1e-5);
 //        BuildJVRCall(siConstructionAction, system, 1e-8);
@@ -67,21 +70,34 @@ namespace DSIS.SimpleRunner
     private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, double eps)
     {
       var opts = new JVREvaluatorOptions {Eps = eps};
-      var key = new RecordTimeAction(new JVRMorseAction(opts), "XxX" + eps);
+      var jvrMorseAction = new JVRMorseAction(opts);
+      BuildJVRCall(siConstructionAction, system, jvrMorseAction);
+    }
+
+    private static void BuildHowardCall(IActionEdgesBuilder siConstructionAction, IAction system, double eps)
+    {
+      var opts = new HowardEvaluatorOptions {Eps = eps};
+      var jvrMorseAction = new HowardMorseAction(opts);
+      BuildJVRCall(siConstructionAction, system, jvrMorseAction);
+    }
+
+    private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, IMorseAction morse) {
+
+    var key = new RecordTimeAction(morse, "XxX" + morse.Options.MethodName + " " + morse.Options.Eps);
       siConstructionAction
         .Edge(key).With(x=>x.Back(system))
-        .Edge(new DumpJVR(opts, key.Key)).With(x => x.Back(siConstructionAction)).With(x => x.Back(system))
+        .Edge(new DumpJVR(morse.Options, key.Key)).With(x => x.Back(siConstructionAction)).With(x => x.Back(system))
         ;
     }
 
     private class DumpJVR : IntegerCoordinateSystemActionBase3
     {
-      private readonly JVREvaluatorOptions myOpts;
+      private readonly IMorseOptions myOpt;
       private readonly Key<TimeSpan> myTime;
 
-      public DumpJVR(JVREvaluatorOptions opts, Key<TimeSpan> time)
+      public DumpJVR(IMorseOptions opt, Key<TimeSpan> time)
       {
-        myOpts = opts;
+        myOpt = opt;
         myTime = time;
       }
 
@@ -97,13 +113,14 @@ namespace DSIS.SimpleRunner
         var sb = new StringBuilder();
         var time = myTime.Get(input).TotalMilliseconds;
         sb.AppendFormat(
-          @"{0}, nodes:{1}, edges:{2}, components:{3}, time:{4}, eps:{5}", 
+          @"{6}: {0}, nodes:{1}, edges:{2}, components:{3}, time:{4}, eps:{5}", 
           system.PresentableName,
           graph.NodesCount, 
           graph.EdgesCount, 
           comps.ComponentCount,
           time, 
-          myOpts.Eps
+          myOpt.Eps,
+          myOpt.MethodName
           ).AppendLine();
 
         var result = Keys.Morse<Q>().Get(input);
@@ -127,8 +144,7 @@ namespace DSIS.SimpleRunner
       private static int EdgesCount<Q>(IStrongComponentInfo info, IGraphStrongComponents<Q> cms) 
         where Q : ICellCoordinate
       {
-        return cms.GetNodes(new[] {info}).Aggregate(0,
-                                                    (v, x) => v + cms.GetEdgesWithFilteredEdges(x, new[] {info}).Count());
+        return cms.GetNodes(new[] {info}).Sum(x=>cms.GetEdgesWithFilteredEdges(x, new[]{info}).Count());          
       }
     }
   }

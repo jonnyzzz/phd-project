@@ -4,4 +4,9 @@
   {
     ComputationResult<T> Minimize();
   }
+
+  public interface IMorseEvaluatorSaveSupport<T>
+  {
+    void AddPersist(IMorseEvaluatorPersist<T> persist);
+  }
 }

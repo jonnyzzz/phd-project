@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 namespace DSIS.Graph.Morse.Tests
 {
+  [TestFixture]
   public abstract class EvaluatorTestCase
   {
     protected abstract IMorseEvaluator<T> CreateEvaluator<T>(IMorseEvaluatorCost<T> cost, IMorseEvaluatorGraph<T> graph);

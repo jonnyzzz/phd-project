@@ -4,28 +4,16 @@ using System.Linq;
 
 namespace DSIS.Graph.Morse.JVR
 {
-  public class JVREvaluator<T> : IMorseEvaluator<T>
+  public class JVREvaluator<T> : MorseEvaluatorBase<T, ContourNode<T>>, IMorseEvaluator<T>
   {
     private readonly double myEps;
-
     private readonly IMorseEvaluatorGraph<T> myGraphComponent;
-    private readonly IMorseEvaluatorCost<T> myCost;
-    private readonly List<IMorseEvaluatorPersist<T>> myPersist = new List<IMorseEvaluatorPersist<T>>();
 
-    //TODO: Use graph data holder
-    private readonly Dictionary<T, ContourNode<T>> myNodes;
-
-    public JVREvaluator(JVREvaluatorOptions opts, IMorseEvaluatorGraph<T> graphComponent, IMorseEvaluatorCost<T> cost)
+    public JVREvaluator(JVREvaluatorOptions opts, IMorseEvaluatorGraph<T> graphComponent, IMorseEvaluatorCost<T> cost) 
+      : base(graphComponent, cost, (t, v)=>new ContourNode<T>(t, v))
     {
-      myCost = cost;
-      myNodes = new Dictionary<T, ContourNode<T>>(graphComponent.Comparer);
       myEps = opts.Eps;
       myGraphComponent = graphComponent;
-    }
-
-    public void AddPersist(IMorseEvaluatorPersist<T> persist)
-    {
-      myPersist.Add(persist);
     }
 
     private double ContourCost(ContourNode<T> node)
@@ -34,7 +22,7 @@ namespace DSIS.Graph.Morse.JVR
       double r = node.Cost;
       ContourNode<T> n = node.Parent;
 
-      var cutOff = myNodes.Count + 5;
+      var cutOff = NodesCount + 5;
       
       while (n != node)
       {
@@ -109,9 +97,8 @@ namespace DSIS.Graph.Morse.JVR
         m.RemoveAt(0);
         node.Type2 = NodeType.M0;
 
-        foreach (var toNode in myGraphComponent.GetNodes(node.Node)) 
-        {
-          var to = myNodes[toNode];
+        foreach (var to in myGraphComponent.GetNodes(node.Node).Select(CreateNode)) 
+        {          
           var w = node.Value + to.Cost - z;
 
           if (to.Type2 == NodeType.M2)
@@ -148,7 +135,7 @@ namespace DSIS.Graph.Morse.JVR
 
     private void ResetType()
     {
-      foreach (var node in myNodes.Values)
+      foreach (var node in Nodes)
       {
         node.Type2 = NodeType.M2;
       }
@@ -156,10 +143,7 @@ namespace DSIS.Graph.Morse.JVR
 
     private ContourNode<T> DoCompute(ContourNode<T> node)
     {
-      foreach (var persist in myPersist)
-      {        
-        persist.SaveGraph(myGraphComponent, x=>myNodes[x].Cost);
-      }
+      SaveGraph(x=>CreateNode(x).Cost);
 
       var pNode = node;
       while(node != null)
@@ -169,17 +153,6 @@ namespace DSIS.Graph.Morse.JVR
       }
 
       return pNode;
-    }
-
-    private ContourNode<T> CreateNode(T node)
-    {
-      ContourNode<T> gnode;
-      if (!myNodes.TryGetValue(node, out gnode))
-      {
-        gnode = new ContourNode<T>(node, myCost.Cost(node));
-        myNodes.Add(node, gnode);
-      }
-      return gnode;
     }
 
     private ContourNode<T> Init()
@@ -200,7 +173,7 @@ namespace DSIS.Graph.Morse.JVR
           minEdge.Incoming++;
       }
 
-      foreach (var _node in myNodes.Values)
+      foreach (var _node in Nodes)
       {
         ContourNode<T> node = _node;
         while (node.Incoming == 0)
@@ -213,7 +186,7 @@ namespace DSIS.Graph.Morse.JVR
 
       ContourNode<T> root = null;
       double rootZ = 0;
-      foreach (var nde in myNodes.Values)
+      foreach (var nde in Nodes)
       {
         if (nde.Incoming > 0)
         {          
@@ -260,8 +233,6 @@ namespace DSIS.Graph.Morse.JVR
 
     public ComputationResult<T> Minimize()
     {
-      myNodes.Clear();
-
       ContourNode<T> extrema = Init();
       extrema = DoCompute(extrema);
       double answerValue = ContourCost(extrema);

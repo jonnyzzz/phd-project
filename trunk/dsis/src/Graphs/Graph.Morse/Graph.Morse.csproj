@@ -19,10 +19,12 @@
     <Compile Include="src\IMorseEvaluatorCost.cs" />
     <Compile Include="src\IMorseEvaluatorGraph.cs" />
     <Compile Include="src\IMorseEvaluatorPersist.cs" />
+    <Compile Include="src\IMorseOptions.cs" />
     <Compile Include="src\JVRFormatPersist.cs" />
     <Compile Include="src\JVR\ContourNode.cs" />
     <Compile Include="src\JVR\JVREvaluator.cs" />
     <Compile Include="src\JVR\JVREvaluatorOptions.cs" />
+    <Compile Include="src\MorseEvaluatorBase.cs" />
     <Compile Include="src\JVR\NodeType.cs" />
     <Compile Include="src\NegativeCost.cs" />
   </ItemGroup>

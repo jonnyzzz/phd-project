@@ -4,6 +4,7 @@ using Enumerable = System.Linq.Enumerable;
 
 namespace DSIS.Graph.Morse.Tests
 {
+  [TestFixture]
   public abstract class MorseTestData : EvaluatorTestCase
   {
     [Test]

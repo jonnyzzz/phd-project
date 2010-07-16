@@ -65,9 +65,11 @@
     <Compile Include="src\Actions\Entropy\EigenEntropyOptions.cs" />
     <Compile Include="src\Actions\Entropy\EigenPerComoponentAction.cs" />
     <Compile Include="src\Actions\Entropy\FileSystemMeasureSlot.cs" />
+    <Compile Include="src\Actions\Entropy\HowardMorseAction.cs" />
     <Compile Include="src\Actions\Entropy\IMeasureInfo.cs" />
     <Compile Include="src\Actions\Entropy\IMeasureInfo`1.cs" />
     <Compile Include="src\Actions\Entropy\IMeasureSlot.cs" />
+    <Compile Include="src\Actions\Entropy\IMorseAction.cs" />
     <Compile Include="src\Actions\Entropy\InsertMeasureToSlotAction.cs" />
     <Compile Include="src\Actions\Entropy\JVRMeasureAction.cs" />
     <Compile Include="src\Actions\Entropy\JVRMeasureActionFactory.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="src\Actions\Entropy\MeasureSlot.cs" />
     <Compile Include="src\Actions\Entropy\MeasureSlotBase.cs" />
     <Compile Include="src\Actions\Entropy\MeasureSlotHelper.cs" />
+    <Compile Include="src\Actions\Entropy\MorseActionBase.cs" />
     <Compile Include="src\Actions\Entropy\ParametrizedStrangeEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\PathEntropyAction.cs" />
     <Compile Include="src\Actions\Entropy\ProjectEntopryAction.cs" />

@@ -5,42 +5,28 @@ using DSIS.Utils;
 
 namespace DSIS.Graph.Morse.Howard
 {
-  public class HowardEvaluator<T> : IMorseEvaluator<T>
+  public class HowardEvaluator<T> : MorseEvaluatorBase<T, HowardEvaluator<T>.ContourNode>, IMorseEvaluator<T>
   {
     private readonly double myEps;
 
     private readonly IMorseEvaluatorGraph<T> myGraphComponent;
-    private readonly IMorseEvaluatorCost<T> myCost;
-
-    //TODO: Use graph data holder
-    private readonly Dictionary<T, ContourNode> myNodes;
     
     public HowardEvaluator(HowardEvaluatorOptions opts, IMorseEvaluatorGraph<T> graphComponent, IMorseEvaluatorCost<T> cost)
+      : base(graphComponent, cost, (t,v) => new ContourNode(t, v))
     {
-      myCost = cost;
-      myNodes = new Dictionary<T, ContourNode>(graphComponent.Comparer);
       myEps = opts.Eps;
       myGraphComponent = graphComponent;
     }
 
-    private ContourNode CreateNode(T node)
-    {
-      ContourNode gnode;
-      if (!myNodes.TryGetValue(node, out gnode))
-      {
-        gnode = new ContourNode(node, myCost.Cost(node));
-        myNodes.Add(node, gnode);
-      }
-      return gnode;
-    }
-
     public ComputationResult<T> Minimize()
-    {      
+    { 
+      SaveGraph(x=>CreateNode(x).Cost);
+
       foreach (var from in myGraphComponent.GetNodes().Select(CreateNode))
       {
         //Out implementation detail - all edges revieve same weight, computed from 'from' node
         //Implementation of this is simplified because of that
-        var w_from_to = myCost.Cost(from.Node);
+        var w_from_to = from.Cost;
         from.D = w_from_to;
         from.π = CreateNode(myGraphComponent.GetNodes(from.Node).First());
       }
@@ -109,7 +95,7 @@ namespace DSIS.Graph.Morse.Howard
       foreach (var πLoop in πLoops())
       {
         var nodes = πLoop;
-        var λ = Cost(nodes);
+        var λ = ComputeCost(nodes);
         if (λ_opt == null || λ < λ_opt)
         {
           λ_opt = λ;
@@ -120,7 +106,7 @@ namespace DSIS.Graph.Morse.Howard
       return Pair.Of(λ_opt.Value, contour.ToArray());
     }
 
-    private static double Cost(IEnumerable<ContourNode> contour)
+    private static double ComputeCost(IEnumerable<ContourNode> contour)
     {
       double c = 0;
       double v = 0;
@@ -144,7 +130,7 @@ namespace DSIS.Graph.Morse.Howard
     private IEnumerable<IEnumerable<ContourNode>> πLoops()
     {
       //Referemce comparer is OK here.
-      var notVisited = new HashSet<ContourNode>(myNodes.Values);
+      var notVisited = new HashSet<ContourNode>(Nodes);
       while(notVisited.Count > 0)
       {
         var root = notVisited.First();
