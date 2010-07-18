@@ -86,16 +86,16 @@ namespace DSIS.Graph.Morse.Howard
       double? λ_opt = null;
       IEnumerable<ContourNode> contour = EmptyArray<ContourNode>.Instance;
 
-      foreach (var πLoop in πLoops())
-      {
-        var nodes = πLoop;
-        var λ = ComputeCost(nodes);
-        if (λ_opt == null || λ < λ_opt)
-        {
-          λ_opt = λ;
-          contour = nodes;
-        }
-      }
+      πLoops(πLoop =>
+               {
+                 var nodes = πLoop;
+                 var λ = ComputeCost(nodes);
+                 if (λ_opt == null || λ < λ_opt)
+                 {
+                   λ_opt = λ;
+                   contour = nodes;
+                 }
+               });
 
       return Pair.Of(λ_opt.Value, contour.ToArray());
     }
@@ -114,21 +114,21 @@ namespace DSIS.Graph.Morse.Howard
 
     private static IEnumerable<ContourNode> πCycle(ContourNode root)
     {
-      yield return root;
+      var list = new List<ContourNode>{root};      
       for(var node = root.π; node != root; node = node.π)
       {
-        yield return node;
+        list.Add(node);
       }
+      return list.ToArray();
     }
 
-    private IEnumerable<IEnumerable<ContourNode>> πLoops()
+    private void πLoops(Action<IEnumerable<ContourNode>> loopCallback)
     {
-      //Referemce comparer is OK here.
-      //TODO: this is tooo slow!
-      var notVisited = new HashSet<ContourNode>(Nodes);
-      while(notVisited.Count > 0)
+      //Referemce comparer is OK here.      
+      var visited = new HashSet<ContourNode>();
+      foreach (var root in Nodes)
       {
-        var root = notVisited.First();
+        if (visited.Contains(root)) continue;
 
         //Referemce comparer is OK here.
         var path = new HashSet<ContourNode>();
@@ -137,16 +137,17 @@ namespace DSIS.Graph.Morse.Howard
         {
           if (path.Contains(node))
           {
-            yield return πCycle(node);
+            //Node contained in path => node contained in visited
+            loopCallback(πCycle(node));
             break;
           }
 
           //node is processed allready, thus it's ok to skip it
-          if (!notVisited.Contains(node))
+          if (visited.Contains(node))
             break;
 
           path.Add(node);
-          notVisited.Remove(node);
+          visited.Add(node);
         }
       }
     }
@@ -175,6 +176,7 @@ namespace DSIS.Graph.Morse.Howard
         {
           if (my_π != null)
             my_π.myIncomingNodes.Remove(this);
+
           my_π = value;
           my_π.myIncomingNodes.Add(this);
         }

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Graph.Abstract;
 using DSIS.Graph.Abstract.NodeSets;
 using DSIS.IntegerCoordinates.Impl;
@@ -32,7 +34,50 @@ namespace DSIS.Graph.Tests
     {
       doTest(1000, 1);
     }
-        
+    
+    private void DoPerformanceTest(int size)
+    {
+      var list = new GraphList(size/6);
+      for(int i = 0; i <size; i++)
+      {
+        var node = new FakeNode(i);
+        bool _;
+        list.AddIfNotReplace(node.Coordinate, new FakeNodeFactory(), out _);
+      }
+
+      var s = MeasureTime("IEnumerable: ", ()=>
+                                             {
+                                              var z = new List<FakeNode>();
+                                               long i = 0;
+                                               foreach (var n in list.Values)
+                                               {
+                                                 i += n.Coordinate.GetCoordinate(0);
+                                                 z.Add(n);
+                                               }
+                                               return z;
+                                             });
+      Console.Out.WriteLine("s = {0}", s.Count);
+    }
+
+    [Test]
+    public void DoPerformanceTest_100k()
+    {
+      DoPerformanceTest(100000);
+    }
+
+    private static T MeasureTime<T>(string name, Func<T> a)
+    {
+      DateTime time = DateTime.Now;
+      try
+      {
+        return a();
+      } finally
+      {
+        var s = DateTime.Now - time;
+        Console.Out.WriteLine("Action {1} took {0}ms", s.TotalMilliseconds, name);
+      }
+    }
+
     private static void doTest(int hash, int N)
     {
       var list = new GraphList(hash);      
