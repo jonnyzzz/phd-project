@@ -5,9 +5,9 @@ namespace DSIS.Graph.Morse
   public class ComputationResult
   {
     public readonly double Value;
-    public readonly double Count;
+    public readonly int Count;
 
-    public ComputationResult(double value, double count)
+    public ComputationResult(double value, int count)
     {
       Value = value;
       Count = count;

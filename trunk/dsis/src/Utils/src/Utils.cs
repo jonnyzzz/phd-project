@@ -1,12 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DSIS.Utils
 {
   public static class Util
   {
+    public static T[] Attach<T>(this T[] data, T obj)
+    {
+      if (data == null) return new[] {obj};
+
+      return data.Join(obj.Enum()).ToArray();
+    }
+
     public static IEnumerable<IEnumerable<T>> ToChunks<T>(this IEnumerable<T> enu, int chunkSize)
     {
       var list = new List<T>();

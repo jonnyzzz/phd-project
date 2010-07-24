@@ -94,7 +94,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
           var saveSupport = eval as IMorseEvaluatorSaveSupport<TNode>;
           if (saveSupport != null)
           {
-            saveSupport.AddPersist(new JVRFormatPersist<TNode>(myTempFiles));
+         //   saveSupport.AddPersist(new JVRFormatPersist<TNode>(myTempFiles));
           }
 
           return eval.Minimize();

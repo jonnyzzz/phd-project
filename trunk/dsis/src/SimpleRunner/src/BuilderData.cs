@@ -19,7 +19,7 @@ namespace DSIS.SimpleRunner
       ExecutionTimeout = TimeSpan.MaxValue;
       var K = 1024;
       var M = K*1024L;
-      MemoryLimit = 6 * 1024 * M;
+      MemoryLimit = 5 * 1024 * M / 2;
       CoordinateSystemType = CoordinateSystemType.Generated;
     }
 

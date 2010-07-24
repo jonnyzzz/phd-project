@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Xml;
+using System.Xml.Serialization;
 using DSIS.Core.Coordinates;
 using DSIS.Graph;
 using DSIS.Graph.Morse;
@@ -26,14 +28,14 @@ namespace DSIS.SimpleRunner
     protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
     {
       var data = new List<ComputationData>();
-      for(int rep = 5; rep < 13; rep++)
+      for(int rep = 3; rep < 13; rep++)
       {
-        data.AddRange(new List<ComputationData>
-                                    {
-//                       new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
-//                       new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
-//                                      new ComputationData {system = SystemInfoFactory.OsipenkoBio2(), repeat = rep},
+        data.AddRange(new []        {
+                       new ComputationData {system = SystemInfoFactory.DoubleLogistic(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
                        new ComputationData {system = SystemInfoFactory.Delayed(2.27), repeat = rep},
+                       new ComputationData {system = SystemInfoFactory.Logistic(3.569), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing2x2Runge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing1_5x1_5Runge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing1_4x1_4Runge(), repeat = rep},
@@ -119,12 +121,12 @@ namespace DSIS.SimpleRunner
         var sb = new StringBuilder();
         var time = myTime.Get(input).TotalMilliseconds;
         sb.AppendFormat(
-          @"{6}: {0}, nodes:{1}, edges:{2}, components:{3}, time:{4}, eps:{5}", 
+          @"{6}: system:{0}, nodes:{1}, edges:{2}, components:{3}, time:{4}, eps:{5}",
           system.PresentableName,
-          graph.NodesCount, 
-          graph.EdgesCount, 
+          graph.NodesCount,
+          graph.EdgesCount,
           comps.ComponentCount,
-          time, 
+          time,
           myOpt.Eps,
           myOpt.MethodName
           ).AppendLine();
@@ -143,10 +145,73 @@ namespace DSIS.SimpleRunner
           sb.AppendLine();
         }
         sb.AppendLine();
-        
+
         logger.Write(sb.ToString());
 
         File.AppendAllText(@"e:\jvr_morse.log", sb.ToString());
+
+        UpdateXmlLog(
+          @"e:\xml-log.xml",
+          new System
+            {
+              Name = system.PresentableName,
+              Methods = new []
+                          {
+                            new Method
+                              {
+                                Name = myOpt.MethodName,
+                                Graphs = new []
+                                           {
+                                             new Graph
+                                               {
+                                                 Date = DateTime.Now.ToString(),
+                                                 Nodes = graph.NodesCount,
+                                                 Edges = graph.EdgesCount,
+                                                 Time = time,
+                                                 Components = comps.Components.Select(
+                                                   comp =>
+                                                     {
+                                                       var val = result.Get(comp);
+                                                       return new Component
+                                                                {
+                                                                  Nodes = comp.NodesCount,
+                                                                  Edges = EdgesCount(comp, comps),
+                                                                  Maximum = val.Max.Value,
+                                                                  Minimum = val.Min.Value,
+                                                                  MaximumLength = val.Max.Count,
+                                                                  MinimumLength = val.Min.Count
+                                                                };
+                                                     }).ToArray()
+                                               }
+                                           }
+                              }
+                          }
+            });
+      }
+
+      private void UpdateXmlLog(string file, System result)
+      {
+        try
+        {
+          var f = new XmlSerializerFactory();
+          var fileResults = new Results();
+          if (File.Exists(file))
+          {
+            using (TextReader tr = File.OpenText(file))
+            {
+              fileResults = (Results) f.CreateSerializer(typeof (Results)).Deserialize(tr);
+            }
+          }
+          fileResults.Attach(result);
+
+          using (var tr = File.CreateText(file))
+          {
+            f.CreateSerializer(typeof (Results)).Serialize(tr, fileResults);
+          }
+        } catch(Exception e)
+        {
+          Console.Out.WriteLine(e);
+        }
       }
 
       private static int EdgesCount<Q>(IStrongComponentInfo info, IGraphStrongComponents<Q> cms) 
@@ -154,6 +219,88 @@ namespace DSIS.SimpleRunner
       {
         return cms.GetNodes(new[] {info}).Sum(x=>cms.GetEdgesWithFilteredEdges(x, new[]{info}).Count());          
       }
+    }
+
+    [Serializable]
+    public class Results
+    {
+      public System[] Systems { get; set; }
+
+      public void Attach(System system)
+      {
+        foreach (var sys in Systems??EmptyArray<System>.Instance)
+        {
+          if (sys.Name == system.Name)
+          {
+            sys.Merge(system);
+            return;
+          }
+        }
+        Systems = Systems.Attach(system);
+      }
+    }
+
+    [Serializable]
+    public class System
+    {
+      [XmlAttribute]
+      public string Name { get; set; }
+      public Method[] Methods { get; set; }
+
+      public void Merge(System system)
+      {
+        foreach (var method in system.Methods)
+        {
+          bool merged = false;
+          foreach (var meth in Methods ?? EmptyArray<Method>.Instance)
+          {
+            if (method.Name == meth.Name)
+            {
+              meth.Merge(method);
+              merged = true;
+              break;
+            } 
+          }
+          if (!merged)
+          {
+            Methods = Methods.Attach(method);
+          }
+        }
+      }
+    }
+
+    [Serializable]
+    public class Method
+    {
+      [XmlAttribute]
+      public String Name { get; set; }
+      public Graph[] Graphs { get; set; }
+
+      public void Merge(Method method)
+      {
+        Graphs = Graphs.Join(method.Graphs).ToArray();
+      }
+    }
+
+    [Serializable]
+    public class Graph
+    {
+      [XmlAttribute] public double Time { get; set; }
+      [XmlAttribute] public string Date { get; set; }
+      [XmlAttribute] public int Nodes { get; set; }
+      [XmlAttribute] public int Edges { get; set; }
+      public Component[] Components { get; set; }   
+    }
+
+    [Serializable]
+    public class Component
+    {
+      [XmlAttribute] public int Nodes { get; set; }
+      [XmlAttribute] public int Edges { get; set; }
+      [XmlAttribute] public double Minimum { get; set; }
+      [XmlAttribute] public int MinimumLength { get; set; }
+      [XmlAttribute] public double Maximum { get; set; }
+      [XmlAttribute] public int MaximumLength { get; set; }
     }
   }
 }

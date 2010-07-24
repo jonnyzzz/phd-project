@@ -24,7 +24,7 @@ namespace DSIS.Function.Predefined.Henon
 
     private class HenonFunction : Function<double>, IFunction<double>, IDetDiffFunction<double>
     {
-      protected readonly double myA;
+      private readonly double myA;
 
       public HenonFunction(double a)
         : base(2)
