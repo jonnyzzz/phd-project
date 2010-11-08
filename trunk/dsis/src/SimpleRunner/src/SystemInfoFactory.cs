@@ -202,7 +202,20 @@ namespace DSIS.SimpleRunner
 
     public static SystemInfoAction LeonovSystem(double step, int times)
     {
-      return new SystemInfoAction(new RungeKuttSolver(new LeonovP50System(), times, step), Space(2, 0.2));
+      return new SystemInfoAction(new RungeKuttSolver(new LeonovP50_1System(), times, step), Space(2, 0.1));
+    }
+
+    public static SystemInfoAction LeonovSystem(double step, int times, double size)
+    {
+      return new SystemInfoAction(new RungeKuttSolver(new LeonovP50_1System(), times, step).RenameSystemInfoTemplate("{0}-" + size), Space(2, size));
+    }
+
+    public static SystemInfoAction LeonovSystemEx(double step, int times)
+    {
+      return new SystemInfoAction(
+        new RungeKuttSolver(new LeonovP50_1System(), times, step).RenameSystemInfoTemplate("{0}-[-0.15,0.15]x[-0.2, 0.15]"), 
+        new DefaultSystemSpace(2, new[]{-0.15, -0.2}, new[]{0.15, 0.15}, 3L.Fill(2))
+        );
     }
 
     /*

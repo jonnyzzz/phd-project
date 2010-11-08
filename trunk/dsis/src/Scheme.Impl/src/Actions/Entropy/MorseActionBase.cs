@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using DSIS.Core.System;
 using DSIS.Graph;
@@ -21,6 +22,8 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       get { return myOptions; }
     }
 
+    public bool PersitGraph { get; set; }
+
     protected MorseActionBase(TOpt options)
     {
       myOptions = options;
@@ -35,19 +38,26 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     protected override void Apply<T, Q>(Context input, Context output)
     {
       var system = Keys.IntegerCoordinateSystemInfo.Get(input);
-      var function = Keys.SystemInfoKey.Get(input).GetFunction<double>(system.CellSizeHalf);
+      var info = Keys.SystemInfoKey.Get(input);
+      var function = info.GetFunction<double>(system.CellSizeHalf);
       var comps = Keys.GetGraphComponents<Q>().Get(input);
 
       var diffFunction = (IDetDiffFunction<double>) function;
       var dic = new Dictionary<IStrongComponentInfo, JVRMorseMinMax<Q>>();
 
       int i = 1;
-      Func<string> tmpFile = () => string.Format(@"e:\morse-{0}-c{1}.txt", DateTime.Now.ToFileTime(), i++);
+      Func<string> tmpFile = () =>
+                               {
+                                 var file = string.Format(@"e:\dsis\{2}\morse-{0}-c{1}.txt", DateTime.Now.ToFileTime(), i++, info.PresentableName);
+                                 var dir = Path.GetDirectoryName(file);
+                                 if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                                 return file;
+                               };
 
       foreach (var comp in comps.Components)
       {
         var asGraph = comps.AsGraph(comp.Enum());
-        var ev = new GraphWith<Q>(diffFunction, this, tmpFile);
+        var ev = new GraphWith<Q>(diffFunction, this, tmpFile) {PersistGraph = PersitGraph};
         asGraph.DoGeneric(ev);
         dic.Add(comp, ev.Result);
       }
@@ -65,6 +75,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
       private readonly Func<string> myTempFiles;
 
       public JVRMorseMinMax<Q> Result { get; private set; }
+      public bool PersistGraph { get; set; }
 
       public GraphWith(IDetDiffFunction<double> function, MorseActionBase<TOpt> opts, Func<string> tempFiles)
       {
@@ -92,9 +103,9 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
         using (var eval = myBaseAction.CreateEvaluator(comp, evaluator))
         {
           var saveSupport = eval as IMorseEvaluatorSaveSupport<TNode>;
-          if (saveSupport != null)
+          if (saveSupport != null && PersistGraph)
           {
-         //   saveSupport.AddPersist(new JVRFormatPersist<TNode>(myTempFiles));
+            saveSupport.AddPersist(new JVRFormatPersist<TNode>(myTempFiles));
           }
 
           return eval.Minimize();

@@ -71,6 +71,7 @@
     <Compile Include="src\Actions\Entropy\IMeasureSlot.cs" />
     <Compile Include="src\Actions\Entropy\IMorseAction.cs" />
     <Compile Include="src\Actions\Entropy\InsertMeasureToSlotAction.cs" />
+    <Compile Include="src\Actions\Entropy\JustDumpMorseAction.cs" />
     <Compile Include="src\Actions\Entropy\JVRMeasureAction.cs" />
     <Compile Include="src\Actions\Entropy\JVRMeasureActionFactory.cs" />
     <Compile Include="src\Actions\Entropy\JVRMorseAction.cs" />

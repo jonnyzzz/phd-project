@@ -28,7 +28,7 @@ namespace DSIS.SimpleRunner
     protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
     {
       var data = new List<ComputationData>();
-      for(int rep = 3; rep < 13; rep++)
+      for(int rep = 3; rep < 16; rep++)
       {
         data.AddRange(new []        {
                        new ComputationData {system = SystemInfoFactory.DoubleLogistic(), repeat = rep},
@@ -47,9 +47,7 @@ namespace DSIS.SimpleRunner
 //                       new ComputationData {system = SystemInfoFactory.RosslerRunge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.BrusselatorRunge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},
-                                    }.ForBuilders(
-                                  new[]
-                                    {
+                                    }.ForBuilders( new[] {
 //                                      Builder.Adaptive,
                                       ComputationDataBuilder.Box
                                     }));
@@ -61,13 +59,23 @@ namespace DSIS.SimpleRunner
     {
       if (afterSIParams.IsLast)
       {
-        BuildJVRCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
-        BuildHowardCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
-//        BuildJVRCall(siConstructionAction, system, 1e-4);
-//        BuildJVRCall(siConstructionAction, system, 1e-5);
-//        BuildJVRCall(siConstructionAction, system, 1e-8);
+        //BuildJVRCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
+        //BuildHowardCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
+
+        BuildJustDumpCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System);
+        
+        //BuildJVRCall(siConstructionAction, system, 1e-4);
+        //BuildJVRCall(siConstructionAction, system, 1e-5);
+        //BuildJVRCall(siConstructionAction, system, 1e-8);
       }
       return base.CreateActionsAfterSI(afterSIParams);
+    }
+
+    private static void BuildJustDumpCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system)
+    {
+      var opts = new JustDumpMorseAction.JustDumpMorseOptions();
+      var jvrMorseAction = new JustDumpMorseAction(opts) {PersitGraph = true};
+      BuildJVRCall(logger, siConstructionAction, system, jvrMorseAction);
     }
 
     private static void BuildJVRCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system, double eps)

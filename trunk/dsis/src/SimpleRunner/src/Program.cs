@@ -13,9 +13,9 @@ namespace DSIS.SimpleRunner
 //      new ThesisJVREntropyBuild().Action();
       //      new ThesisCurveBuild().Action();
       //      new ThesisEntropyBuild().Action();
-//            new ThesisSIBuild().Action();
-      //      new SIBuild().Action();
-            new JVRDetMorseBuild().Action();
+            new ThesisSIBuild().Action();
+//            new SIBuild().Action();
+//            new JVRDetMorseBuild().Action();
       //      new JVRBuild().Action();
 
       return 0;

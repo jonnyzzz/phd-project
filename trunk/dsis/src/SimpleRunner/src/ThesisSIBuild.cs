@@ -10,18 +10,18 @@ namespace DSIS.SimpleRunner
     {
       yield return
         (
-          from step in new[] {0.1, 0.05, 0.025, 0.01, 0.005, 0.0025, 0.001, 0.0005, 0.00025, 0.0001, 0.00005}
-          from times in new[] {5, 10, 15, 20, 25}
+          from step in new[] {/*0.1, 0.05, 0.025, */0.005/*, 0.005, 0.0025, 0.001, 0.0005, 0.00025, 0.0001, 0.00005*/}
+          from times in new[] {/*5, 10, 15, */20/*, 25*/}
           select new ComputationData
                    {
-                     system = SystemInfoFactory.LeonovSystem(step, times), 
+                     system = SystemInfoFactory.LeonovSystemEx(step, times), 
                      ExecutionTimeout = TimeSpan.FromMinutes(30),
-                     MemoryLimit = 3 * 1024 * 1024 * 1024L,
+                     MemoryLimit = (long)(2 * 1024 * 1024 * 1024L),
                      CoordinateSystemType = CoordinateSystemType.Generated
                    }
         ).ToArray()
         .ForBuilders(ComputationDataBuilder.Box)
-        .ForSteps(5, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25);
+        .ForSteps(5, 10, 11/*, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25*/);
         
 //      yield return new ComputationData { system = SystemInfoFactory.OsipenkoBio3()}
 //        .Enum()

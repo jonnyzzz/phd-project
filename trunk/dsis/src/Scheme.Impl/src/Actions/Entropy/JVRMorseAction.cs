@@ -1,8 +1,10 @@
+using System;
 using DSIS.Graph.Morse;
 using DSIS.Graph.Morse.JVR;
 
 namespace DSIS.Scheme.Impl.Actions.Entropy
 {
+
 
   public class JVRMorseAction : MorseActionBase<JVREvaluatorOptions>
   {

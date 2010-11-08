@@ -73,6 +73,7 @@
     <Compile Include="src\Julia\JuliaFunction.cs" />
     <Compile Include="src\Julia\JuliaParameters.cs" />
     <Compile Include="src\LeonovP50\LeonovP50.cs" />
+    <Compile Include="src\LeonovP50\LeonovP50_1.cs" />
     <Compile Include="src\Linear\Linear.cs" />
     <Compile Include="src\Linear\Linear1DFactory.cs" />
     <Compile Include="src\Linear\Linear1dParameters.cs" />

@@ -67,8 +67,11 @@ namespace DSIS.SimpleRunner
                                  LOG.Error("Memory limit" + myMemoryLimit + " for action " + name);
 
                                  SkipError = true;
-                                 thread.Interrupt();
-                                 thread.Abort();                                 
+                                 while(thread.IsAlive)
+                                 {
+                                   thread.Interrupt();
+                                   thread.Abort();
+                                 }
                                };
           thread.Start(); 
           
