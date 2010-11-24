@@ -27,6 +27,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PlatformTarget>MSIL</PlatformTarget>
+  </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Platform)' == 'x64' ">
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
