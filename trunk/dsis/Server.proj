@@ -16,7 +16,7 @@
       <Files Include="$(MSBuildProjectDirecotry)bin*\**\*" Exclude="**\*Generated*"/>
     </ItemGroup>
 
-    <TeamCityPublishArtifacts SourceFiles="@(Files-> '%(FullPath)' )=>Binaries.zip" Condition=" '$(TEAMCITY_VERSION)' != '' "/>
+    <TeamCityPublishArtifacts SourceFiles="@(Files-> '%(FullPath)' )" Condition=" '$(TEAMCITY_VERSION)' != '' "/>
 
     <Message Text="--> @( Files -> '%(FullPath)')" />
 
