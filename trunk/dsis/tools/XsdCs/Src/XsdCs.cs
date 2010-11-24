@@ -93,7 +93,7 @@ namespace JetBrains.Build.Tools
       // Outdir
       if (OutDir == null)
         throw new InvalidOperationException(string.Format("The output folder must be specified."));
-      cmd.AppendSwitch("/out:" + OutDir);
+      cmd.AppendSwitch("\"/out:" + OutDir.ItemSpec.TrimEnd('\\') + "\"");
 
       return cmd.ToString();
     }
