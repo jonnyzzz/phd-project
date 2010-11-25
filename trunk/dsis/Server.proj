@@ -3,6 +3,8 @@
   <Target Name="Clean">
     <ItemGroup>
       <BinaryToDelete Include="bin\**\*"/>
+      <BinaryToDelete Include="binRelese\**\*"/>
+      <BinaryToDelete Include="obj\**\*"/>
     </ItemGroup>
     <Delete Files="@(BinaryToDelete)" />
   </Target>  
