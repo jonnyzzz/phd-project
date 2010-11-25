@@ -29,6 +29,7 @@
 
   <PropertyGroup>
     <PlatformTarget>anycpu</PlatformTarget>
+    <Platform>Any CPU</Platform>
   </PropertyGroup>
 <!--
   <PropertyGroup Condition=" '$(Platform)' == 'x64' ">
