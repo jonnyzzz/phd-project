@@ -51,7 +51,11 @@ namespace DSIS.Core.System
       {
         get { return mySystemInfo.Dimension; }
       }
-    }
 
+      public override string ToString()
+      {
+        return PresentableName;
+      }
+    }
   }
 }

@@ -218,6 +218,14 @@ namespace DSIS.SimpleRunner
         );
     }
 
+    public static SystemInfoAction LeonovSystemEx(double step, int times, LeonovP50_2Parameters d)
+    {
+      return new SystemInfoAction(
+        new RungeKuttSolver(new LeonovP50_2System(d), times, step).RenameSystemInfoTemplate("{0}[-0.15][-0.2,0.15]"), 
+        new DefaultSystemSpace(2, new[]{-0.15, -0.2}, new[]{0.15, 0.15}, 3L.Fill(2))
+        );
+    }
+
     /*
      * 
      * var duffingSp = new DefaultSystemSpace(2, new[] {-4.3, -3}, new[] {4.3, 3}, new long[] {3, 3});

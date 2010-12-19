@@ -53,7 +53,7 @@ namespace DSIS.SimpleRunner
 
     public virtual void Serialize(Logger log)
     {
-      log.Write("System function: {0}", system.SystemInfo);
+      log.Write("System function: {0}", system.SystemInfo.PresentableName);
       log.Write("System space: {0}", system.SystemSpace);
       log.Write("Repeat: {0}", repeat);
       log.Write("Timeout: {0}", ExecutionTimeout);
