@@ -31,11 +31,13 @@ namespace csproj.patcher
           "System.Xml"};
         foreach (XmlAttribute attr in doc.SelectNodes("m:Project/m:ItemGroup/m:Reference/@Include", ns))
         {
-          assemblies.Remove(attr.Value);
-          XmlNode p = attr.OwnerElement;
-          for (; p != null && !(p is XmlElement); p = p.ParentNode) ;
-          if (p != null)
-            addParent = (XmlElement) p;
+          if (assemblies.Remove(attr.Value))
+          {
+            XmlNode p = attr.OwnerElement;
+            for (; p != null && !((p is XmlElement) && p.LocalName == "ItemGroup"); p = p.ParentNode) ;
+            if (p != null)
+              addParent = (XmlElement) p;
+          }
         }
 
         if (addParent == null)
