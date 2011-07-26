@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
-using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Util;
 
 namespace DSIS.Graph.Entropy
@@ -39,11 +38,5 @@ namespace DSIS.Graph.Entropy
   {
     bool SubdivideNext(ICellCoordinateSystem<T> system);
     void SetCoordinateSystem(ICellCoordinateSystem<T> system);
-  }
-
-
-  public interface IEntropyEvaluator2<T> where T : ICellCoordinate
-  {
-    IGraphMeasure<T> ComputeEntropy();
   }
 }
