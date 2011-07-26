@@ -52,14 +52,10 @@
     <Compile Include="src\Actions\IUpdateble.cs" />
     <Compile Include="src\Actions\SeparatorActionParser.cs" />
     <Compile Include="src\Actions\SeparatorDescriptor.cs" />
-    <Compile Include="src\Actions\ToolStripMenuItemAction.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="src\Actions\ToolStripMenuItemAction.cs" />
     <Compile Include="src\Actions\ToolStripMenuItemPresentationManager.cs">
     </Compile>
-    <Compile Include="src\Actions\ToolStripMenuItemSerparator.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="src\Actions\ToolStripMenuItemSerparator.cs" />
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />
     <Compile Include="src\ApplicationDocument.cs" />
@@ -84,9 +80,7 @@
     <Compile Include="src\Doc\Actions\SelectStrongComponentsAction.cs" />
     <Compile Include="src\Doc\CurrentStep\CellSizeCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\ControlWithTitle.cs" />
-    <Compile Include="src\Doc\CurrentDocumentControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="src\Doc\CurrentDocumentControl.cs" />
     <Compile Include="src\Doc\CurrentStep\ComponentsInfoStepCustomParameter.cs" />
     <Compile Include="src\Doc\CurrentStep\EntropyCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\CurrentStep\IntegerCoordinateStepCustomParameterBase.cs" />
