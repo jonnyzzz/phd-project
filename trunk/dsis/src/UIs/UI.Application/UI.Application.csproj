@@ -9,6 +9,45 @@
     <RootNamespace>DSIS.UI.Application</RootNamespace>
     <AssemblyName>DSIS.UI.Application</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <BasePath>$(MSBuildProjectDirectory)\..\</BasePath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
@@ -52,10 +91,14 @@
     <Compile Include="src\Actions\IUpdateble.cs" />
     <Compile Include="src\Actions\SeparatorActionParser.cs" />
     <Compile Include="src\Actions\SeparatorDescriptor.cs" />
-    <Compile Include="src\Actions\ToolStripMenuItemAction.cs" />
+    <Compile Include="src\Actions\ToolStripMenuItemAction.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\Actions\ToolStripMenuItemPresentationManager.cs">
     </Compile>
-    <Compile Include="src\Actions\ToolStripMenuItemSerparator.cs" />
+    <Compile Include="src\Actions\ToolStripMenuItemSerparator.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\Actions\XmlActionPreesentationManager.cs" />
     <Compile Include="src\ApplicationClass.cs" />
     <Compile Include="src\ApplicationDocument.cs" />
@@ -80,7 +123,9 @@
     <Compile Include="src\Doc\Actions\SelectStrongComponentsAction.cs" />
     <Compile Include="src\Doc\CurrentStep\CellSizeCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\ControlWithTitle.cs" />
-    <Compile Include="src\Doc\CurrentDocumentControl.cs" />
+    <Compile Include="src\Doc\CurrentDocumentControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\Doc\CurrentStep\ComponentsInfoStepCustomParameter.cs" />
     <Compile Include="src\Doc\CurrentStep\EntropyCurrentStepCustomParameter.cs" />
     <Compile Include="src\Doc\CurrentStep\IntegerCoordinateStepCustomParameterBase.cs" />
@@ -286,9 +331,17 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <Import Project="../Before.Build.Targets" />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <Import Project="$(BasePath)\Before.Build.Targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="../After.Build.Targets" />
+  <Import Project="$(BasePath)\After.Build.Targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

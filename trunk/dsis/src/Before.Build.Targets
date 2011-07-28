@@ -2,12 +2,10 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 
   <PropertyGroup>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion> 
-      <BasePath>$(BasePath)..\</BasePath>
-      <BaseOutputPath>$(BasePath)..\</BaseOutputPath>
-      <IntermediateOutputPath>$(BaseOutputPath)Obj\$(BaseOutputPathSuffix)$(MSBuildProjectName)\$(Configuration)\</IntermediateOutputPath>
-      <OutputPath>$(BaseOutputPath)Bin\</OutputPath>
-      <OutputPath Condition="'$(Configuration)'=='Release'">$(BaseOutputPath)BinRelease\</OutputPath>
+      <BaseOutputPath>$(BasePath)\..\</BaseOutputPath>
+      <IntermediateOutputPath>$(BaseOutputPath)\Obj\$(BaseOutputPathSuffix)$(MSBuildProjectName)\$(Configuration)\</IntermediateOutputPath>
+      <OutputPath>$(BaseOutputPath)\Bin\</OutputPath>
+      <OutputPath Condition="'$(Configuration)'=='Release'">$(BaseOutputPath)\BinRelease\</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -31,21 +29,8 @@
     <PlatformTarget>anycpu</PlatformTarget>
     <Platform>Any CPU</Platform>
   </PropertyGroup>
-<!--
-  <PropertyGroup Condition=" '$(Platform)' == 'x64' ">
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
--->
-  <ItemGroup>
-    <Compile Include="$(BasePath)\AssemblyInfo.cs" />
-  </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Compile Include="$(BasePath)\AssemblyInfo.cs" />
   </ItemGroup>
 </Project>
