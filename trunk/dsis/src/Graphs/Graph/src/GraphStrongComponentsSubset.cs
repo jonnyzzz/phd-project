@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Utils;
 
@@ -14,12 +15,12 @@ namespace DSIS.Graph
     public GraphStrongComponentsSubset(IGraphStrongComponents<Q> components, IEnumerable<IStrongComponentInfo> subset)
     {
       myComponents = components;
-      mySubset = new HashSet<IStrongComponentInfo>(subset);
+      var set = subset.ToList();
+      mySubset = new HashSet<IStrongComponentInfo>(set);
 
-      if (!new HashSet<IStrongComponentInfo>(components.Components).ContainsAll(subset))
-      {
+      var infos = new HashSet<IStrongComponentInfo>(components.Components);
+      if (!set.All(infos.Contains))
         throw new ArgumentException("Failed to create SubComponent for alien component");
-      }
     }
 
     ICellCoordinateSystem IGraphStrongComponents.CoordinateSystem
@@ -60,20 +61,23 @@ namespace DSIS.Graph
 
     public IEnumerable<INode<Q>> GetNodes(IEnumerable<IStrongComponentInfo> componentIds)
     {
-      AssertComponent(componentIds);
-      return myComponents.GetNodes(componentIds);
+      var ids = componentIds.ToList();
+      AssertComponent(ids);
+      return myComponents.GetNodes(ids);
     }
 
     public IEnumerable<INode<Q>> GetEdgesWithFilteredEdges(INode<Q> node, IEnumerable<IStrongComponentInfo> componentIds)
     {
-      AssertComponent(componentIds);
-      return myComponents.GetEdgesWithFilteredEdges(node, componentIds);
+      var ids = componentIds.ToList();
+      AssertComponent(ids);
+      return myComponents.GetEdgesWithFilteredEdges(node, ids);
     }
 
     public ICellCoordinateCollection<Q> GetCoordinates(IEnumerable<IStrongComponentInfo> components)
     {
-      AssertComponent(components);
-      return myComponents.GetCoordinates(components);
+      var infos = components.ToList();
+      AssertComponent(infos);
+      return myComponents.GetCoordinates(infos);
     }
 
     public IStrongComponentInfo GetNodeComponent(INode<Q> node)
@@ -83,8 +87,9 @@ namespace DSIS.Graph
 
     public IGraph<Q> AsGraph(IEnumerable<IStrongComponentInfo> components)
     {
-      if (mySubset.ContainsAny(components)) 
-        return myComponents.AsGraph(components);
+      var infos = components.ToList();
+      if (infos.Any(t => mySubset.Contains(t))) 
+        return myComponents.AsGraph(infos);
       return null;
     }
   }

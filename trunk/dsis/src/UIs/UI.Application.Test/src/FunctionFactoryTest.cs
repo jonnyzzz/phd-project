@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Scheme.Objects.Systemx;
 using DSIS.Utils;
@@ -16,7 +17,7 @@ namespace DSIS.UI.Application.Test
     {
       using(var c = new JComponentContainer<ComponentImplementationAttribute>())
       {
-        c.ScanAssemblies(typeof(IkedaFactory).Assembly.En());
+        c.ScanAssemblies(CollectionUtil.Enum(typeof(IkedaFactory).Assembly));
 
         var l = new List<ISystemInfoFactory>(c.GetComponents<ISystemInfoFactory>());
         Assert.That(l.Count, Is.GreaterThan(0));
@@ -28,7 +29,7 @@ namespace DSIS.UI.Application.Test
     {
       using(var c = new JComponentContainer<ComponentImplementationAttribute>())
       {
-        c.ScanAssemblies(typeof(IkedaFactory).Assembly.En());
+        c.ScanAssemblies(CollectionUtil.Enum(typeof(IkedaFactory).Assembly));
 
         var l = new List<IkedaFactory>(c.GetComponents<IkedaFactory>());
         Assert.That(l.Count, Is.GreaterThan(0));

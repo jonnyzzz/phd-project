@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Utils;
 
 namespace DSIS.Spring.Service
@@ -29,7 +30,7 @@ namespace DSIS.Spring.Service
 
     public IEnumerable<T> GetServices<T>()
     {
-      return CollectionUtil.Merge(myProviders.ConvertAll(x => x.GetServices<T>()));
+      return myProviders.ConvertAll(x => x.GetServices<T>()).SelectMany(c => c);
     }
 
     public void RegisterProvider(IServiceProviderEx prov)

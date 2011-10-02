@@ -30,25 +30,13 @@ namespace DSIS.Utils
       foreach (var d in data)
       {
         double x = cmp(d);
-        if (w == null || w < x)
+        if (w == null || w > x)
         {
           r = d;
           w = x;
         }
       }
       return r;
-    }
-
-    public static bool ContainsAny<Q,T>(this HashSet<Q> set, IEnumerable<T> enu)
-      where T : Q
-    {
-      return enu.Any(t => set.Contains(t));
-    }
-
-    public static bool ContainsAll<Q,T>(this HashSet<Q> set, IEnumerable<T> enu)
-      where T : Q
-    {
-      return enu.All(t => set.Contains(t));
     }
 
     public static IEnumerable<Q> Safe<Q>(this IEnumerable<Q> enu)
@@ -91,17 +79,6 @@ namespace DSIS.Utils
       return def;
     }
 
-    public static IEnumerable<T> Merge<T>(IEnumerable<IEnumerable<T>> cs)
-    {
-      return Merge<T, T>(cs);
-    }
-
-    public static IEnumerable<TZ> Merge<TZ,T>(IEnumerable<IEnumerable<T>> cs) 
-      where T : TZ
-    {
-      return cs.SelectMany(c => c).Select(t => (TZ) t);
-    }
-
     public static ICollection<TZ> Merge<T1, T2, TZ>(IEnumerable<T1> c1, IEnumerable<T2> c2)
       where T1 : TZ
       where T2 : TZ
@@ -116,11 +93,6 @@ namespace DSIS.Utils
         list.Add(t2);
       }
       return list.AsReadOnly();
-    }
-
-    public static IEnumerable<T> And<T>(IEnumerable<IEnumerable<T>> enums)
-    {
-      return enums.SelectMany(enumerable => enumerable);
     }
 
     public static T[] Fill<T>(this T data, int count)
@@ -224,11 +196,6 @@ namespace DSIS.Utils
       {
         yield return t;
       }
-    }
-
-    public static IEnumerable<Q> En<Q>(this Q q)
-    {
-      yield return q;
     }
   }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.Util;
@@ -31,18 +32,16 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     public double Dist(IMeasureInfo _info)
     {
       return Rho(
-        (CollectionUtil.And(Measures2().Map(x=>x.Measure))), 
-        (CollectionUtil.And(((IMeasureInfo<Q>) _info).Measures2().Map(x=>x.Measure)))
+        Measures2().Map(x=>x.Measure).SelectMany(enumerable => enumerable), 
+        ((IMeasureInfo<Q>) _info).Measures2().Map(x=>x.Measure).SelectMany(enumerable => enumerable)
         );
     }
     
     public void Join<T>(IGraphMeasure<T> mes) where T : ICellCoordinate
     {
-      foreach (var measure in Measures2())
-      {
-        if (!measure.CoordinateSystem.Equals(mes.CoordinateSystem))
-          throw new ArgumentException("Measure object was created against different coordinate system");
-      }
+      if (Measures2().Any(measure => !measure.CoordinateSystem.Equals(mes.CoordinateSystem)))
+        throw new ArgumentException("Measure object was created against different coordinate system");
+
       JoinInternal((IGraphMeasure<Q>) mes);
     }
 
@@ -71,6 +70,7 @@ namespace DSIS.Scheme.Impl.Actions.Entropy
     private static void AddNormed<P>(double factor, IEnumerable<Pair<P, double>> m1, Vector<NodePair<Q>> vect)
       where P : PairBase<Q>
     {
+      m1 = m1.ToList();
       double m1Norm = m1.FoldLeft(0.0, (x, vv) => x.Second + vv);
       foreach (var m in m1)
       {
