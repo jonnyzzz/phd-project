@@ -8,15 +8,20 @@ namespace DSIS.SimpleRunner
   [ComponentImplementation]
   public class Program : IApplication
   {
+    [Autowire]
+    private ImageEntropyBuilder myEntropyBuilder { get; set; }
+
     public int Main()
     {
 //      new ThesisJVREntropyBuild().Action();
       //      new ThesisCurveBuild().Action();
       //      new ThesisEntropyBuild().Action();
-            new ThesisSIBuild().Action();
+    //        new ThesisSIBuild().Action();
 //            new SIBuild().Action();
 //            new JVRDetMorseBuild().Action();
       //      new JVRBuild().Action();
+
+      myEntropyBuilder.Action();
 
       return 0;
     }

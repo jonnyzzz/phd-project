@@ -7,7 +7,7 @@ using DSIS.Utils;
 namespace DSIS.SimpleRunner
 {
   public abstract class ComputationBuilderBase<T>
-    where T : BuilderData, ICloneable<T> 
+    where T : BuilderDataBase, ICloneable<T> 
   {
     public void Action()
     {
@@ -34,7 +34,7 @@ namespace DSIS.SimpleRunner
 
       while (queue.Count > 0)
       {
-        queue.Sort((x, y) => x.repeat.CompareTo(y.repeat));
+        SortTasks(queue);
 
         var computationData = queue[0];
         Console.Out.WriteLine("\r\n-------------------------------------------------------\r\n");
@@ -82,6 +82,10 @@ namespace DSIS.SimpleRunner
 
         Console.Out.WriteLine("---------------------------------------------------------");
       }
+    }
+
+    protected virtual void SortTasks(List<T> queue)
+    {      
     }
 
     protected abstract void ComputeAll(T computationData);

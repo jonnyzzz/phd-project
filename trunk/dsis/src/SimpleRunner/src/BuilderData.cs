@@ -4,22 +4,53 @@ using DSIS.Scheme.Impl.Actions.Files;
 
 namespace DSIS.SimpleRunner
 {
-  public class BuilderData : IEquatable<BuilderData>, ICloneable<BuilderData>
+  public class BuilderDataBase : IEquatable<BuilderDataBase>, ICloneable<BuilderDataBase>
+  {
+    public TimeSpan ExecutionTimeout { get; set; }
+    public long MemoryLimit { get; set; }
+
+    public BuilderDataBase()
+    {
+      ExecutionTimeout = TimeSpan.MaxValue;
+      var K = 1024;
+      var M = K*1024L;
+      MemoryLimit = 5 * 1024 * M / 2;      
+    }
+
+    protected virtual void CopyState(BuilderDataBase data)
+    {
+      ExecutionTimeout = data.ExecutionTimeout;
+      MemoryLimit = data.MemoryLimit;
+    }
+
+    public virtual void Serialize(Logger log)
+    {
+      log.Write("Timeout: {0}", ExecutionTimeout);
+    }
+
+    public bool Equals(BuilderDataBase other)
+    {
+      return other.GetType() == GetType();
+    }
+
+    BuilderDataBase ICloneable<BuilderDataBase>.Clone()
+    {
+      var builderDataBase = new BuilderDataBase();
+      CopyState(this);
+      return builderDataBase;
+    }
+  }
+
+  public class BuilderData : BuilderDataBase, IEquatable<BuilderData>, ICloneable<BuilderData>
   {
     public SystemInfoAction system { get; set; }
     public int repeat { get; set; }
 
-    public TimeSpan ExecutionTimeout { get; set; }
-    public long MemoryLimit { get; set; }
 
     public CoordinateSystemType CoordinateSystemType { get; set; }
 
     public BuilderData()
     {
-      ExecutionTimeout = TimeSpan.MaxValue;
-      var K = 1024;
-      var M = K*1024L;
-      MemoryLimit = 5 * 1024 * M / 2;
       CoordinateSystemType = CoordinateSystemType.Generated;
     }
 
@@ -30,10 +61,9 @@ namespace DSIS.SimpleRunner
 
     protected void CopyState(BuilderData data)
     {
+      base.CopyState(data);
       system = data.system;
       repeat = data.repeat;
-      ExecutionTimeout = data.ExecutionTimeout;
-      MemoryLimit = data.MemoryLimit;
     }
 
     public bool Equals(BuilderData other)
@@ -43,7 +73,7 @@ namespace DSIS.SimpleRunner
 
     public override bool Equals(object obj)
     {
-      return obj is BuilderData ? Equals((BuilderData)obj) : false;
+      return obj is BuilderData && Equals((BuilderData)obj);
     }
 
     public override int GetHashCode()
@@ -56,12 +86,12 @@ namespace DSIS.SimpleRunner
       return new BuilderData(this);
     }
 
-    public virtual void Serialize(Logger log)
+    public override void Serialize(Logger log)
     {
       log.Write("System function: {0}", system.SystemInfo.PresentableName);
       log.Write("System space: {0}", system.SystemSpace);
       log.Write("Repeat: {0}", repeat);
-      log.Write("Timeout: {0}", ExecutionTimeout);
+      base.Serialize(log);
       log.Write("Coodinate System: {0}", CoordinateSystemType);
     }
   }

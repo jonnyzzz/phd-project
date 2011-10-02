@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DSIS.Scheme.Actions;
 using DSIS.Scheme.Ctx;
 using DSIS.Scheme.Exec;
@@ -8,6 +9,13 @@ namespace DSIS.SimpleRunner
     where T : BuilderData, ICloneable<T> 
 
   {
+
+    protected override void SortTasks(List<T> queue)
+    {
+      queue.Sort((x, y) => x.repeat.CompareTo(y.repeat));
+    }
+
+
     protected sealed override void ComputeAll(T computationData)
     {
       var sys = computationData;

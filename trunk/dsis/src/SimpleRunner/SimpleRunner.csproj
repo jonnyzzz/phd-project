@@ -71,6 +71,8 @@
     <Compile Include="src\GuardedExecutor.cs" />
     <Compile Include="src\ICloneable.cs" />
     <Compile Include="src\ImageEntropyBuilder.cs" />
+    <Compile Include="src\ImageEntropyBuilderBase.cs" />
+    <Compile Include="src\ImageEntropyData.cs" />
     <Compile Include="src\JVRBuild.cs" />
     <Compile Include="src\JVRDetMorseBuild.cs" />
     <Compile Include="src\LoggingJVREvaluator.cs" />
