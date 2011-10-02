@@ -231,7 +231,7 @@ namespace DSIS.SimpleRunner
     {
       return new SystemInfoAction(
         new Osipenko2011_1_FunctionSystemInfo(new Osipenko2011_1_Parameters()),
-        new Osipenko2011_1_Predefined().Space
+        new DefaultSystemSpace(3, new[] { -3.5, -3.5, -2.5}, new[] { 3.5, 3.5, 2.5}, new[] { 3L, 3, 3 })
         );
     }
 
