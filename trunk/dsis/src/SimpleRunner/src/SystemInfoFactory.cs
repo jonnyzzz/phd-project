@@ -14,6 +14,7 @@ using DSIS.Function.Predefined.LeonovP50;
 using DSIS.Function.Predefined.Linear;
 using DSIS.Function.Predefined.Logistics;
 using DSIS.Function.Predefined.Lorentz;
+using DSIS.Function.Predefined.Osipenko2011;
 using DSIS.Function.Predefined.OsipenkoBio;
 using DSIS.Function.Predefined.Rossel;
 using DSIS.Function.Predefined.VanDerPol;
@@ -223,6 +224,14 @@ namespace DSIS.SimpleRunner
       return new SystemInfoAction(
         new RungeKuttSolver(new LeonovP50_2System(d), times, step).RenameSystemInfoTemplate("{0}[-0.15][-0.2,0.15]"), 
         new DefaultSystemSpace(2, new[]{-0.15, -0.2}, new[]{0.15, 0.15}, 3L.Fill(2))
+        );
+    }
+
+    public static SystemInfoAction Osipenko_2011_1()
+    {
+      return new SystemInfoAction(
+        new Osipenko2011_1_FunctionSystemInfo(new Osipenko2011_1_Parameters()),
+        new Osipenko2011_1_Predefined().Space
         );
     }
 
