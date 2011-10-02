@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DSIS.Function.Predefined.LeonovP50;
-using DSIS.Utils;
 
 namespace DSIS.SimpleRunner
 {
@@ -10,18 +8,20 @@ namespace DSIS.SimpleRunner
   {
     protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
     {
-      yield return (new ComputationData
-                             {
-                               system = SystemInfoFactory.Osipenko_2011_1(),
-                               ExecutionTimeout = TimeSpan.FromMinutes(30),
-                               MemoryLimit = (long) (5*1024*1024*1024L),
-                               CoordinateSystemType = CoordinateSystemType.Generated
+      yield return
+        new[] {0.02, 0.04, 0.06, 0.08}
+          .Select(d =>
+                  new ComputationData
+                    {
+                      system = SystemInfoFactory.Osipenko_2011_1(d),
+                      ExecutionTimeout = TimeSpan.FromMinutes(30),
+                      MemoryLimit = 5*1024*1024*1024L,
+                      CoordinateSystemType = CoordinateSystemType.Generated
+                    })
 
-                             })
-                             .Enum()
-                             .ForBuildser(ComputationDataBuilder.Box)
-                             .ForSteps(8, 10)
-                             .ToArray();
+          .ForBuildser(ComputationDataBuilder.Box)
+          .ForSteps(6)
+          .ToArray();
 //      yield return
 //        (
 //          from step in new[] {/*0.1, 0.05, 0.025, */0.01 /*, 0.005, 0.0025, 0.001, 0.0005, 0.00025, 0.0001, 0.00005*/}

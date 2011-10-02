@@ -1,4 +1,4 @@
-using DSIS.Core.System;
+﻿using DSIS.Core.System;
 using DSIS.Core.System.Impl;
 using DSIS.Function.Predefined.Ampilova;
 using DSIS.Function.Predefined.Brusselator;
@@ -227,10 +227,10 @@ namespace DSIS.SimpleRunner
         );
     }
 
-    public static SystemInfoAction Osipenko_2011_1()
+    public static SystemInfoAction Osipenko_2011_1(double Δd = 0.1)
     {
       return new SystemInfoAction(
-        new Osipenko2011_1_FunctionSystemInfo(new Osipenko2011_1_Parameters()),
+        new Osipenko2011_1_FunctionSystemInfo(new Osipenko2011_1_Parameters(Δd)),
         new DefaultSystemSpace(3, new[] { -3.5, -3.5, -2.5}, new[] { 3.5, 3.5, 2.5}, new[] { 3L, 3, 3 })
         );
     }

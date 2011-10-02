@@ -16,6 +16,21 @@ namespace DSIS.SimpleRunner
   public abstract class SIBuild<T> : BuilderBase<T>
     where T : ComputationData, ICloneable<T>
   {
+    private class DumpMemoryUsageAction: ActionBase
+    {
+      public override ICollection<ContextMissmatch> Compatible(Context ctx)
+      {
+        return EmptyArray<ContextMissmatch>.Instance;
+      }
+
+      protected override void Apply(Context ctx, Context result)
+      {
+        var log = Logger.Instance(ctx);
+        GCHelper.Collect();
+        log.Write("Memory usage: {0} mb", GC.GetTotalMemory(true) / 1024 / 1024);        
+      }
+    }
+
     private class DumpComputationDataAction : ActionBase
     {
       private readonly ComputationData myData;
@@ -128,6 +143,7 @@ namespace DSIS.SimpleRunner
         buildImage.Edge(new DumpGraphInfoAction()).Back(logger);
         buildImage.Edge(new DumpSubdivisionAction()).Back(logger);
         buildImage.Edge(new DumpGraphComponentsInfoAction()).Back(logger);
+        buildImage.Edge(new DumpMemoryUsageAction()).Back(logger);
         buildImage.Edge(new DumpSeparatorAction()).Back(logger);
         
         next = CreateActionsAfterSI(new AfterSIParams<T>(buildImage, system, workingFolder, logger, sys, isLast));

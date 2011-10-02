@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using DSIS.Core.System;
 using DSIS.Function.Predefined.Ikeda;
 using DSIS.Scheme.Objects.Systemx;
@@ -43,12 +43,12 @@ namespace DSIS.Function.Predefined.Osipenko2011
     public double C { get; set; }
     public double D { get; set; }
 
-    public Osipenko2011_1_Parameters()
+    public Osipenko2011_1_Parameters(double Δd = 0.1)
     {
       A = 0.00001;
       B = 0.37;
       C = 0.85;
-      D = 0.21; // 0.2<d<0.3
+      D = 0.20 + Δd; // 0.2<d<0.3
     }
   }
 
@@ -96,7 +96,7 @@ namespace DSIS.Function.Predefined.Osipenko2011
 
     public override string PresentableName
     {
-      get { return string.Format("Osipenko's 2011 1"); }
+      get { return string.Format("Osipenko's 2011 1(d={0})", myParameters.D); }
     }
 
     protected override IFunction<double> GetFunctionInternal()

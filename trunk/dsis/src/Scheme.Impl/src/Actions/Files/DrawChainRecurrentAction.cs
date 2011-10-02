@@ -21,7 +21,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
     protected override void DrawFromScript(IGnuplotScript gen)
     {
       var drw = new GnuplotDrawer.GnuplotDrawer();
-      drw.DrawImage(gen).WaitForExit();
+      drw.DrawImage(gen);//.WaitForExit();
     }
   }
 }

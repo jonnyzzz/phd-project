@@ -10,17 +10,12 @@ namespace DSIS.GnuplotDrawer
       : base(factory, @params)
     {
       my3DParams = @params as GnuplotScriptParameters3d;
-      var p3d = @params as GnuplotScriptParameters3d;
-      if (p3d == null)
-        return;
+      if (my3DParams == null) return;
 
-      if (my3DParams != null)
-      {
-        ChangeView(my3DParams.RotX, my3DParams.RotZ);
+      ChangeView(my3DParams.RotX, my3DParams.RotZ);
 
-        if (my3DParams.XYPane != null)
-          myWriter.WriteLine("set xyplane at {0};", my3DParams.XYPane);      
-      }
+      if (my3DParams.XYPane != null)
+        myWriter.WriteLine("set xyplane at {0};", my3DParams.XYPane);
     }
 
     private void ChangeView(float rotX, float rotZ)
@@ -29,10 +24,10 @@ namespace DSIS.GnuplotDrawer
     }
 
     private void RotateZ(int rotX, int rotZ)
-    {
-      ChangeView(rotX, rotZ);
-      myWriter.WriteLine("replot;");
+    {      
       SetOutput(string.Format("-{0}-{1}", rotX, rotZ));
+      ChangeView(rotX, rotZ);
+      myWriter.WriteLine("replot;");      
     }
 
     protected override void BeforeFileClosed()
