@@ -1,30 +1,54 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DSIS.Utils
 {
   public static class CollectionUtil
   {
+
+    public static T Minimize<T>(this IEnumerable<T> data, Func<T, double> cmp)
+    {
+      T r = default(T);
+      double? w = null;
+      foreach (var d in data)
+      {
+        double x = cmp(d);
+        if (w == null || w > x)
+        {
+          r = d;
+          w = x;
+        }
+      }
+      return r;
+    }
+
+    public static T Maximize<T>(this IEnumerable<T> data, Func<T, double> cmp)
+    {
+      T r = default(T);
+      double? w = null;
+      foreach (var d in data)
+      {
+        double x = cmp(d);
+        if (w == null || w < x)
+        {
+          r = d;
+          w = x;
+        }
+      }
+      return r;
+    }
+
     public static bool ContainsAny<Q,T>(this HashSet<Q> set, IEnumerable<T> enu)
       where T : Q
     {
-      foreach (var t in enu)
-      {
-        if (set.Contains(t))
-          return true;
-      }
-      return false;
+      return enu.Any(t => set.Contains(t));
     }
 
     public static bool ContainsAll<Q,T>(this HashSet<Q> set, IEnumerable<T> enu)
       where T : Q
     {
-      foreach (var t in enu)
-      {
-        if (!set.Contains(t))
-          return false;
-      }
-      return true;
+      return enu.All(t => set.Contains(t));
     }
 
     public static IEnumerable<Q> Safe<Q>(this IEnumerable<Q> enu)
@@ -46,41 +70,24 @@ namespace DSIS.Utils
 
     public static bool IsEmpty<Q>(this IEnumerable<Q> enu)
     {
-      foreach (var _ in enu)
-        return false;
-      return true;
+      return !enu.Any();
     }
 
     public delegate Q Fold<T, Q>(T t, Q q);
     public static Q FoldLeft<T,Q>(this IEnumerable<T> enu, Q start, Fold<T,Q> fold)
     {
-      Q q = start;
-      foreach (var t in enu)
-      {
-        q = fold(t, q);
-      }
-      return q;
+      return enu.Aggregate(start, (current, t) => fold(t, current));
     }
 
     public static bool ContainsKeyRange<T,Q>(this Dictionary<T,Q> dic, IEnumerable<T> enu)
     {
-      foreach (var t in enu)
-      {
-        if (!dic.ContainsKey(t))
-          return false;
-      }
-      return true;
+      return enu.All(dic.ContainsKey);
     }
-    
+
     public static T Find<T>(this IEnumerable<T> enu, T def, Predicate<T> pred)
-    {    
-      foreach (var t in enu)
-      {
-        if (pred(t))
-        {
-          return t;
-        }
-      }
+    {
+      foreach (var t in enu.Where(t => pred(t)))
+        return t;
       return def;
     }
 
@@ -92,13 +99,7 @@ namespace DSIS.Utils
     public static IEnumerable<TZ> Merge<TZ,T>(IEnumerable<IEnumerable<T>> cs) 
       where T : TZ
     {
-      foreach (IEnumerable<T> c in cs)
-      {
-        foreach (T t in c)
-        {
-          yield return t;
-        }
-      }
+      return cs.SelectMany(c => c).Select(t => (TZ) t);
     }
 
     public static ICollection<TZ> Merge<T1, T2, TZ>(IEnumerable<T1> c1, IEnumerable<T2> c2)
@@ -119,13 +120,7 @@ namespace DSIS.Utils
 
     public static IEnumerable<T> And<T>(IEnumerable<IEnumerable<T>> enums)
     {
-      foreach (IEnumerable<T> enumerable in enums)
-      {
-        foreach (T t in enumerable)
-        {
-          yield return t;
-        }
-      }
+      return enums.SelectMany(enumerable => enumerable);
     }
 
     public static T[] Fill<T>(this T data, int count)
@@ -153,32 +148,18 @@ namespace DSIS.Utils
 
     public static IEnumerable<T> Map<T, Q>(this IEnumerable<Q> en, Converter<Q, T> conv)
     {
-      foreach (var q in en)
-      {
-        yield return conv(q);
-      }
+      return en.Select(q => conv(q));
     }
 
     public static IEnumerable<T> Maps<T,Q>(this IEnumerable<Q> en, Converter<Q, IEnumerable<T>> conv)
     {
-      foreach (var q in en)
-      {
-        foreach (var t in conv(q))
-        {
-          yield return t;
-        }
-      }
+      return en.SelectMany(q => conv(q));
     }
 
     public static IEnumerable<T> MapNotNull<T, Q>(this IEnumerable<Q> en, Converter<Q, T> conv)
       where T : class
     {
-      foreach (var q in en)
-      {
-        var notNull = conv(q);
-        if (notNull != null)
-          yield return notNull;
-      }
+      return en.Select(q => conv(q)).Where(notNull => notNull != null);
     }
 
     public static void Zip<T,Q>(IEnumerable<T> ts, IEnumerable<Q> qs, Action<T,Q> zip)
@@ -186,16 +167,17 @@ namespace DSIS.Utils
       var te = ts.GetEnumerator();
       var qe = qs.GetEnumerator();
 
-      Func<bool> hasMore = delegate
-                                        {
-                                          var tb = te.MoveNext();
-                                          var qb = qe.MoveNext();
+      Func<bool> hasMore =
+        delegate
+          {
+            var tb = te.MoveNext();
+            var qb = qe.MoveNext();
 
-                                          if (tb != qb)
-                                            throw new ArgumentException("collections should be the same length");
+            if (tb != qb)
+              throw new ArgumentException("collections should be the same length");
 
-                                          return tb & qb;
-                                        };
+            return tb & qb;
+          };
 
       while (hasMore())
       {
@@ -209,15 +191,15 @@ namespace DSIS.Utils
       var qe = qs.GetEnumerator();
 
       Func<bool> hasMore = delegate
-                                        {
-                                          var tb = te.MoveNext();
-                                          var qb = qe.MoveNext();
+                             {
+                               var tb = te.MoveNext();
+                               var qb = qe.MoveNext();
 
-                                          if (tb != qb)
-                                            throw new ArgumentException("collections should be the same length");
+                               if (tb != qb)
+                                 throw new ArgumentException("collections should be the same length");
 
-                                          return tb & qb;
-                                        };
+                               return tb & qb;
+                             };
 
       while (hasMore())
       {

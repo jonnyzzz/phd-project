@@ -25,6 +25,11 @@ namespace DSIS.SimpleRunner
 
     protected BuilderData(BuilderData data)
     {
+      CopyState(data);
+    }
+
+    protected void CopyState(BuilderData data)
+    {
       system = data.system;
       repeat = data.repeat;
       ExecutionTimeout = data.ExecutionTimeout;

@@ -35,7 +35,7 @@ namespace DSIS.Graph
     IEnumerable<INode<TCell>> Nodes { get; }
   }
 
-  public interface IReadonlyGraph<TCell, TNode> : IReadonlyGraphCommon<TCell>
+  public interface IReadonlyGraph<TCell, TNode> : IReadonlyGraph<TCell>
     where TNode : class, INode<TCell>
     where TCell : ICellCoordinate
   {

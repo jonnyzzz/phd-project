@@ -7,6 +7,13 @@ namespace DSIS.Graph.Abstract.Algorithms
 {
   public static partial class GraphAlgorithms
   {
+    public static IGraphStrongComponents ComputeStrongComponents(this IReadonlyGraph graph, IProgressInfo info)
+    {
+      var wg = new WithGraph { Info = info };
+      graph.DoGeneric(wg);
+      return wg.Componentes;      
+    }
+
     public static IGraphStrongComponents<TCell> ComputeStrongComponents<TCell>(this IReadonlyGraph<TCell> graph, IProgressInfo info) 
       where TCell : ICellCoordinate
     {
@@ -15,13 +22,24 @@ namespace DSIS.Graph.Abstract.Algorithms
       return wg.Componentes;      
     }
 
-    private class WithGraph<TCell> : IReadonlyGraphWith<TCell> 
+    private class WithGraph<TCell> : IReadonlyGraphWith<TCell>
       where TCell : ICellCoordinate
     {
       public IGraphStrongComponents<TCell> Componentes { get; private set; }
       public IProgressInfo Info { get; set; }
 
       public void With<TNode>(IReadonlyGraph<TCell, TNode> graph) where TNode : class, INode<TCell>
+      {
+        Componentes = graph.ComputeStrongComponents(Info);
+      }
+    }
+
+    private class WithGraph : IReadonlyGraphWith
+    {
+      public IGraphStrongComponents Componentes { get; private set; }
+      public IProgressInfo Info { get; set; }
+
+      public void With<TCell, TNode>(IReadonlyGraph<TCell, TNode> graph) where TCell : ICellCoordinate where TNode : class, INode<TCell>
       {
         Componentes = graph.ComputeStrongComponents(Info);
       }

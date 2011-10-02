@@ -44,6 +44,7 @@
     <Compile Include="src\AfterSIParams.cs" />
     <Compile Include="src\BuilderBase.cs" />
     <Compile Include="src\BuilderData.cs" />
+    <Compile Include="src\ComputationBuilderBase.cs" />
     <Compile Include="src\ComputationData.cs" />
     <Compile Include="src\ComputationDataBuilder.cs" />
     <Compile Include="src\ComputationDataUtil.cs" />
@@ -69,8 +70,11 @@
     <Compile Include="src\EntropyComputationMode.cs" />
     <Compile Include="src\GuardedExecutor.cs" />
     <Compile Include="src\ICloneable.cs" />
+    <Compile Include="src\ImageEntropyBuilder.cs" />
     <Compile Include="src\JVRBuild.cs" />
     <Compile Include="src\JVRDetMorseBuild.cs" />
+    <Compile Include="src\LoggingJVREvaluator.cs" />
+    <Compile Include="src\LoggingJVREvaluatorImpl.cs" />
     <Compile Include="src\OldProgram.cs" />
     <Compile Include="src\parallel\SimpleParallel.cs" />
     <Compile Include="src\ProgramCurve.cs" />
@@ -112,6 +116,10 @@
     <ProjectReference Include="..\..\shared\src\Core.Ioc.EntryPoint\Core.Ioc.EntryPoint.csproj">
       <Project>{98C15236-F700-4FFE-BC7B-17577405BB1C}</Project>
       <Name>Core.Ioc.EntryPoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Graphs\Graph.Image\Graph.Image.csproj">
+      <Project>{917711B5-BD6C-414E-AC1B-68F4CA915EF7}</Project>
+      <Name>Graph.Image</Name>
     </ProjectReference>
     <ProjectReference Include="..\Graphs\Graph.Morse\Graph.Morse.csproj">
       <Project>{CB0FD4CC-E606-4A2A-967D-A086E1AE2B9D}</Project>
@@ -218,6 +226,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />

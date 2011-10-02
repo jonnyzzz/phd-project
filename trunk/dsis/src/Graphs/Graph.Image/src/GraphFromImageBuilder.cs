@@ -1,44 +1,52 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using DSIS.Core.System.Impl;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 using EugenePetrenko.Shared.Core.Ioc.Api;
+using System.Linq;
 
 namespace DSIS.Graph.Images
 {
+  public class GraphFromImageBuilderParameters
+  {
+    public Func<Color, double> Hash { get; set; }
+    public int NumberOfEdgesPerPixel { get; set; }
+    public int NumberOfNeighboursPerAxis { get; set; }
+    public double Threasold { get; set; }    
+  }
+
+  [ComponentImplementation]
   public class GraphFromImageBuilder
   {
     [Autowire]
     private IIntegerCoordinateFactory myFactory { get; set; }
       
-    public IReadonlyGraph BuildGraphFromImage<T>(Bitmap image, Func<Color, double> color, Func<Color, T> hash)
-      where T : IEquatable<T>
+    public IReadonlyGraph BuildGraphFromImage(Bitmap image, GraphFromImageBuilderParameters parameters)
     {
       var space = new DefaultSystemSpace(2, new[] {0.0, 0.0}, new double[] {image.Width, image.Height}, new long[] {1, 1});
       var system = myFactory.Create(space, new long[] {image.Width, image.Height});
 
-      system.DoGeneric(new WithCoordinateSystem<T>(image, color, hash));
+      var with = new WithCoordinateSystem(image, parameters);
+      system.DoGeneric(with);
 
-
-        return null;
+      return with.Graph;
     }
 
-    private class WithCoordinateSystem<T> : IIntegerCoordinateSystemWith
+    private class WithCoordinateSystem: IIntegerCoordinateSystemWith
     {
       private readonly Bitmap myImage;
-      private readonly Func<Color, double> myColor;
-      private readonly Func<Color, T> myHash;
+      private readonly GraphFromImageBuilderParameters myParameters;
 
-      public WithCoordinateSystem(Bitmap image, 
-                                  Func<Color, double> color, 
-                                  Func<Color, T> hash)
+      public WithCoordinateSystem(Bitmap image, GraphFromImageBuilderParameters parameters)
       {
         myImage = image;
-        myColor = color;
-        myHash = hash;
+        myParameters = parameters;
       }
+
+      public IReadonlyGraph Graph { get; private set; }
 
       public void Do<R, Q>(R system) 
         where R : IIntegerCoordinateSystem<Q> 
@@ -46,28 +54,99 @@ namespace DSIS.Graph.Images
       {
         var graph = new TarjanGraph<Q>(system);
 
-        var colorMap = new MultiDictionary<T, TarjanNode<Q>>(EqualityComparerFactory<T>.GetComparer());
-
-        //create nodes
-        for (int i = 0; i < myImage.Width; i++)
+        foreach (var p in AllPoints())
         {
-          for (int j = 0; j < myImage.Height; j++)
+          ProcessNode(p, system, graph);
+        }
+        Graph = graph;
+      }
+
+      private double Hash(Coord p)
+      {
+        return myParameters.Hash(myImage.GetPixel(p.X, p.Y));
+      }
+
+      private void ProcessNode<R, Q>(Coord p, R system, TarjanGraph<Q> graph)
+        where R : IIntegerCoordinateSystem<Q>
+        where Q : IIntegerCoordinate
+      {
+        var node = graph.AddNode(system.Create(p.X, p.Y));
+        var hash = Hash(p);
+        var arcs = Neighbours(p).ToArray();
+
+        for (int i = 0; i < myParameters.NumberOfEdgesPerPixel; i++)
+        {
+          var arc = arcs.Minimize(_ => Math.Abs(hash - Hash(_)));
+          if (Math.Abs(hash - Hash(arc)) > myParameters.Threasold) break;
+
+          arcs = arcs.Where(_ => _ != arc).ToArray();
+
+          graph.AddEdgeToNode(node, graph.AddNode(system.Create(arc.X, arc.Y)));
+        }
+      }
+
+      private IEnumerable<Coord> Neighbours(Coord c)
+      {
+        var neighbous = myParameters.NumberOfNeighboursPerAxis;
+        for (int xx = c.X - neighbous; xx < c.X + neighbous; xx++)
+        {
+          if (xx < 0 || xx == c.X || xx >= myImage.Width) continue;
+          for (int yy = c.Y - neighbous; yy < c.Y + neighbous; yy++)
+          {           
+            if (yy < 0 || yy == c.Y || yy >= myImage.Height) continue;
+
+            yield return new Coord(xx, yy);
+          }          
+        }
+      }
+
+      private IEnumerable<Coord> AllPoints()
+      {
+        for (int x = 0; x < myImage.Width; x++)
+        {
+          for (int y = 0; y < myImage.Height; y++)
           {
-            var node = graph.AddNode(system.Create(i, j));
-            colorMap.AddValue(myHash(myImage.GetPixel(i, j)), node);
+            yield return new Coord(x, y);
           }
         }
+      }
 
-        //connect all nodes with same T
-        foreach (var e in colorMap)
+      private struct Coord : IEquatable<Coord>
+      {
+        public readonly int X;
+        public readonly int Y;
+
+        public Coord(int x, int y)
         {
-          foreach (var a in e.Value)
-          {
-            foreach (var b in e.Value)
-            {
-              graph.AddEdgeToNode(a, b);
-            }
-          }
+          X = x;
+          Y = y;
+        }
+
+        public bool Equals(Coord other)
+        {
+          return other.X == X && other.Y == Y;
+        }
+
+        public override bool Equals(object obj)
+        {
+          if (ReferenceEquals(null, obj)) return false;
+          if (obj.GetType() != typeof (Coord)) return false;
+          return Equals((Coord) obj);
+        }
+
+        public override int GetHashCode()
+        {
+          unchecked { return (X*397) ^ Y; }
+        }
+
+        public static bool operator ==(Coord left, Coord right)
+        {
+          return left.Equals(right);
+        }
+
+        public static bool operator !=(Coord left, Coord right)
+        {
+          return !left.Equals(right);
         }
       }
     }

@@ -19,10 +19,10 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     private readonly double myCellVolume;
     private readonly int myNodesCount;
 
-    private readonly IGraph<T> myGraph;
+    private readonly IReadonlyGraph<T> myGraph;
     private readonly IGraphStrongComponents<T> myComponents;
 
-    public JVRMeasure(IGraph<T> graph, IGraphStrongComponents<T> components, JVRMeasureOptions opts)
+    public JVRMeasure(IReadonlyGraph<T> graph, IGraphStrongComponents<T> components, JVRMeasureOptions opts)
     {
       myOptions = opts;
       myHashHolder = new HashHolder<T>(graph.CoordinateSystem);
