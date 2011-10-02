@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using DSIS.Core.System.Impl;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 using EugenePetrenko.Shared.Core.Ioc.Api;
-using System.Linq;
 
 namespace DSIS.Graph.Images
 {
@@ -15,7 +13,7 @@ namespace DSIS.Graph.Images
     [Autowire]
     private IIntegerCoordinateFactory myFactory { get; set; }
       
-    public IReadonlyGraph BuildGraphFromImage<T>(Image image, Func<Color, double> color, Func<Color, T> hash)
+    public IReadonlyGraph BuildGraphFromImage<T>(Bitmap image, Func<Color, double> color, Func<Color, T> hash)
       where T : IEquatable<T>
     {
       var space = new DefaultSystemSpace(2, new[] {0.0, 0.0}, new double[] {image.Width, image.Height}, new long[] {1, 1});
