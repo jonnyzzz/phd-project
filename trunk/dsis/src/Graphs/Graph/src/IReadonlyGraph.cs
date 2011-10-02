@@ -13,26 +13,21 @@ namespace DSIS.Graph
     void DoGeneric(IReadonlyGraphWith with);
   }
 
-  public interface IReadonlyGraphCommon<TCell> : IReadonlyGraph
+  public interface IReadonlyGraph<TCell> : IReadonlyGraph
     where TCell : ICellCoordinate
   {
     ICellCoordinateSystem<TCell> CoordinateSystem { get; }
     IReadonlyGraph<TCell> Project(ICellCoordinateSystemProjector<TCell> projector);
 
     bool Contains(TCell coordinate);
-    
+
     [Obsolete("Use TNode version")]
     bool IsSelfLoop(TCell node);
 
     IEnumerable<TCell> NodesCoordinates { get; }
-  }
-
-  public interface IReadonlyGraph<TCell> : IReadonlyGraphCommon<TCell>
-    where TCell : ICellCoordinate
-  {
-    void DoGeneric(IReadonlyGraphWith<TCell> with);
-
     IEnumerable<INode<TCell>> Nodes { get; }
+
+    void DoGeneric(IReadonlyGraphWith<TCell> with);
   }
 
   public interface IReadonlyGraph<TCell, TNode> : IReadonlyGraph<TCell>
