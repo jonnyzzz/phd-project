@@ -45,7 +45,7 @@ namespace DSIS.GnuplotDrawer
       {
         var pi = new ProcessStartInfo
                    {
-                     FileName = Path.Combine(myGnuplotFolder, @"bin\wgnuplot.exe"),
+                     FileName = GetWGnuplotPath(),
                      Arguments = script.FileName,
                      ErrorDialog = true,
                      UseShellExecute = true,
@@ -59,6 +59,18 @@ namespace DSIS.GnuplotDrawer
       {
         throw new GnuplotDrawException("Gnuplot process failed to start. " + e.Message, e);
       }
+    }
+
+    private string GetWGnuplotPath()
+    {
+      foreach (var path in new[]{"bin\\wgnuplot.exe", "binary\\gnuplot.exe"})
+      {
+        var exe = Path.Combine(myGnuplotFolder, path);
+        if (File.Exists(exe))
+          return exe;
+      }
+
+      throw new GnuplotDrawException("Failed to find bin/wgnuplot.exe or binary/gnuplot.exe under gnuplot home: " + myGnuplotFolder);
     }
   }
 }
