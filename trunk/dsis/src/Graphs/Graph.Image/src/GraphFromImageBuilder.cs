@@ -88,27 +88,20 @@ namespace DSIS.Graph.Images
       private IEnumerable<Coord> Neighbours(Coord c)
       {
         var neighbous = myParameters.NumberOfNeighboursPerAxis;
-        for (int xx = c.X - neighbous; xx < c.X + neighbous; xx++)
-        {
-          if (xx < 0 || xx == c.X || xx >= myImage.Width) continue;
-          for (int yy = c.Y - neighbous; yy < c.Y + neighbous; yy++)
-          {           
-            if (yy < 0 || yy == c.Y || yy >= myImage.Height) continue;
+        return from x in (c.X - neighbous).To(c.X + neighbous)
+               where x >= 0 && x < myImage.Width && x != c.X
 
-            yield return new Coord(xx, yy);
-          }          
-        }
+               from y in (c.Y - neighbous).To(c.Y + neighbous)               
+               where y >= 0 && y < myImage.Height && y != c.Y
+
+               select new Coord(x, y);
       }
 
       private IEnumerable<Coord> AllPoints()
       {
-        for (int x = 0; x < myImage.Width; x++)
-        {
-          for (int y = 0; y < myImage.Height; y++)
-          {
-            yield return new Coord(x, y);
-          }
-        }
+        return from x in 0.To(myImage.Width)
+               from y in 0.To(myImage.Height)
+               select new Coord(x, y);        
       }
 
       private struct Coord : IEquatable<Coord>

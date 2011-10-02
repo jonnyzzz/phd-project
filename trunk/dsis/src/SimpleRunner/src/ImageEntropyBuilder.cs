@@ -18,9 +18,11 @@ namespace DSIS.SimpleRunner
                      Image = bmp,
                      GraphParameters = new GraphFromImageBuilderParameters
                                          {
+                                           NumberOfNeighboursPerAxis = 1,
+                                           NumberOfEdgesPerPixel = 1,
                                            Hash = c => c.GetBrightness(),
                                            Threasold = 0.01
-                                         }
+                                         }  
                    };
 
       yield return data.Enum();
