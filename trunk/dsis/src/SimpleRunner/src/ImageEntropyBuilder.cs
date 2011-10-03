@@ -19,9 +19,9 @@ namespace DSIS.SimpleRunner
                      GraphParameters = new GraphFromImageBuilderParameters
                                          {
                                            NumberOfNeighboursPerAxis = 2,
-                                           NumberOfEdgesPerPixel = 1,
-                                           Hash = c => c.GetBrightness(),
-                                           Threasold = 0.31
+                                           NumberOfEdgesPerPixel = 2,
+                                           Hash = c => c.R / 32,
+                                           Threasold = 120/32
                                          }  
                    };
 

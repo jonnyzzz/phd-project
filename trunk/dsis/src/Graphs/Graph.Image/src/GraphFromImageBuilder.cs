@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq.Expressions;
 using DSIS.Core.System.Impl;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
@@ -12,7 +13,7 @@ namespace DSIS.Graph.Images
 {
   public class GraphFromImageBuilderParameters
   {
-    public Func<Color, double> Hash { get; set; }
+    public Expression<Func<Color, double>> Hash { get; set; }
     public int NumberOfEdgesPerPixel { get; set; }
     public int NumberOfNeighboursPerAxis { get; set; }
     public double Threasold { get; set; }    
@@ -39,11 +40,13 @@ namespace DSIS.Graph.Images
     {
       private readonly Bitmap myImage;
       private readonly GraphFromImageBuilderParameters myParameters;
+      private readonly Func<Color, double> myHash;
 
       public WithCoordinateSystem(Bitmap image, GraphFromImageBuilderParameters parameters)
       {
         myImage = image;
         myParameters = parameters;
+        myHash = myParameters.Hash.Compile();
       }
 
       public IReadonlyGraph Graph { get; private set; }
@@ -63,7 +66,7 @@ namespace DSIS.Graph.Images
 
       private double Hash(Coord p)
       {
-        return myParameters.Hash(myImage.GetPixel(p.X, p.Y));
+        return myHash(myImage.GetPixel(p.X, p.Y));
       }
 
       private void ProcessNode<R, Q>(Coord p, R system, TarjanGraph<Q> graph)
