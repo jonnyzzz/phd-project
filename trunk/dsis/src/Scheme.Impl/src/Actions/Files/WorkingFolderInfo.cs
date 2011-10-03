@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Text.RegularExpressions;
 using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
@@ -26,10 +25,8 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     private static string ToSafePath(string s)
     {
-      var chars = @"'`!$%&*,:"" =+";
+      const string chars = @"'`!$%&*,:"" =+";
       return chars.ToCharArray().FoldLeft(s, (c, ss) => ss.Replace(c.ToString(), "_"));
-        return Regex.Replace(s, "^[a-zA-Z0-9_\\-\\[\\]\\(\\)]", "_");
-//      return s.Replace("`", "_").Replace(",", ".").Replace(" ", "_").Replace("=", "_").Replace(":","_").Replace("'", "_");
     }
 
     private string MakeFileName(string ext)

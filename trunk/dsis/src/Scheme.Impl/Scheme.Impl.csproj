@@ -137,6 +137,7 @@
     <Compile Include="src\Actions\Files\DrawLineAction.cs" />
     <Compile Include="src\Actions\Files\DrawLineActionBase.cs" />
     <Compile Include="src\Actions\Files\DumpEntropyLogAction.cs" />
+    <Compile Include="src\Actions\Files\EntropyDrawColorMapHelper.cs" />
     <Compile Include="src\Actions\Files\FileKeys.cs" />
     <Compile Include="src\Actions\Files\FileLogger.cs" />
     <Compile Include="src\Actions\Files\FlatWorkingFolder.cs" />

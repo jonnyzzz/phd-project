@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using DSIS.Core.Coordinates;
 using DSIS.Core.Util;
@@ -6,6 +8,7 @@ using DSIS.Graph;
 using DSIS.Graph.Abstract.Algorithms;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Images;
+using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Impl.Actions.Files;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
@@ -27,7 +30,9 @@ namespace DSIS.SimpleRunner
 
     private class WithGraph : IReadonlyGraphWith
     {
-      public void With<TCell, TNode>(IReadonlyGraph<TCell, TNode> graph) where TCell : ICellCoordinate where TNode : class, INode<TCell>
+      public void With<TCell, TNode>(IReadonlyGraph<TCell, TNode> graph) 
+        where TCell : ICellCoordinate 
+        where TNode : class, INode<TCell>
       {
         Console.Out.WriteLine("Building string components...");
         var components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
@@ -35,14 +40,29 @@ namespace DSIS.SimpleRunner
 
 
         Console.Out.WriteLine("Computing measure...");
+
+        //TODO: foreach component 
         var mes = new LoggingJVREvaluator<TCell>(new JVRMeasureOptions(), new ConsoleLogger());
         var graphMeasure = mes.Measure(graph, components);
 
         Console.Out.WriteLine("Measure computed: {0}", graphMeasure.GetEntropy());
-        foreach (var m in graphMeasure.Measure)
-        {
-          Console.Out.WriteLine("Component: {0}", m.Second);
-        }
+
+        var home = @"e:\\temp\\image-entropy\\" + DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss");
+        Directory.CreateDirectory(home);
+
+        var conv = new Converter<TCell>();
+        ((IIntegerCoordinateSystem)graphMeasure.CoordinateSystem).DoGeneric(conv);
+
+        EntropyDrawColorMapHelper.RenderMeasure(new WorkingFolderInfo(home), graphMeasure, conv.Convert);
+      }
+    }
+
+    private class Converter<QQ> : IIntegerCoordinateSystemWith
+    {
+      public Action<QQ, double[]> Convert { get; private set; }
+      public void Do<T, Q>(T system) where T : IIntegerCoordinateSystem<Q> where Q : IIntegerCoordinate
+      {
+        Convert = (q, p) => system.CenterPoint((Q)(object) q, p);
       }
     }
   }

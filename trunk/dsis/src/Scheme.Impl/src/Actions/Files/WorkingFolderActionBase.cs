@@ -7,7 +7,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
 {
   public abstract class WorkingFolderActionBase : ActionBase
   {
-    protected string myPath;
+    private readonly string myPath;
     protected abstract string CreateWorkPath(string resultsPath);
 
     protected WorkingFolderActionBase()

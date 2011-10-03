@@ -11,17 +11,17 @@ namespace DSIS.SimpleRunner
   {
     protected override IEnumerable<IEnumerable<ImageEntropyData>> GetSystemsToRun2()
     {
-      var bmp = new Bitmap(100, 100);
+      var bmp = new Bitmap(Image.FromFile(@"E:\work\dsis\dsis\img\pic_52_down.png"));
 
       var data = new ImageEntropyData
                    {
                      Image = bmp,
                      GraphParameters = new GraphFromImageBuilderParameters
                                          {
-                                           NumberOfNeighboursPerAxis = 1,
+                                           NumberOfNeighboursPerAxis = 2,
                                            NumberOfEdgesPerPixel = 1,
                                            Hash = c => c.GetBrightness(),
-                                           Threasold = 0.01
+                                           Threasold = 0.31
                                          }  
                    };
 
