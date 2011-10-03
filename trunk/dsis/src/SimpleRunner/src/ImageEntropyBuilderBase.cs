@@ -55,7 +55,7 @@ namespace DSIS.SimpleRunner
       {
         myLogger.Write("Building string components...");
         var components = graph.ComputeStrongComponents(NullProgressInfo.INSTANCE);
-        myLogger.Write("Constructed {0} strong components: {1}", components.ComponentCount, String.Join(", ", components.Components.Select(x => x.NodesCount)));
+        myLogger.Write("Constructed {0} strong components: {1}", components.ComponentCount, String.Join(", ", components.Components.Select(x => x.NodesCount).OrderBy(x=>x).Take(5)) + "...");
 
 
         myLogger.Write("Computing measure...");
