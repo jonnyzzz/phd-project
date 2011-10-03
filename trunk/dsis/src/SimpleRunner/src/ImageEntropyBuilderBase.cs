@@ -19,12 +19,17 @@ namespace DSIS.SimpleRunner
     [Autowire]
     private GraphFromImageBuilder myBuilder { get; set; }
 
+    
+
     protected override void ComputeAll(ImageEntropyData sys)
     {
-      var home = @"e:\\temp\\image-entropy\\" + DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss");
+      string home = @"e:\\temp\\image-entropy\\" + DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss") + "\\" + sys.Name;
+
       Directory.CreateDirectory(home);
       var wf = new WorkingFolderInfo(home);
       var logger = new AndLogger(new ConsoleLogger(), new FileLogger(wf));
+
+      sys.Serialize(logger);
 
       logger.Write("Constructing graph...");
       var graph = myBuilder.BuildGraphFromImage(sys.Image, sys.GraphParameters);
