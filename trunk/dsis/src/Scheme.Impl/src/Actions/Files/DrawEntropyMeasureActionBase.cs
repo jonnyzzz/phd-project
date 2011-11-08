@@ -20,6 +20,8 @@ namespace DSIS.Scheme.Impl.Actions.Files
 
     protected override void Apply<T, Q>(T system, Context input, Context output)
     {
+      //TODO: use EntropyDraw3dHelper instead
+
       var info = FileKeys.WorkingFolderKey.Get(input);
       var measure = Keys.GraphMeasure<Q>().Get(input);
       var wr = WriteMeasureFile(info.ApplyPrefix("measure_base_value.data", ""), measure);

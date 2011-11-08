@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DSIS.Core.Coordinates;
@@ -18,8 +17,6 @@ namespace DSIS.SimpleRunner
   {
     [Autowire]
     private GraphFromImageBuilder myBuilder { get; set; }
-
-    
 
     protected override void ComputeAll(ImageEntropyData sys)
     {
@@ -69,7 +66,8 @@ namespace DSIS.SimpleRunner
         var conv = new Converter<TCell>();
         ((IIntegerCoordinateSystem)graphMeasure.CoordinateSystem).DoGeneric(conv);
 
-        EntropyDrawColorMapHelper.RenderMeasure(myWorkingFolder, graphMeasure, conv.Convert);
+//        EntropyDrawColorMapHelper.RenderMeasure(myWorkingFolder, graphMeasure, conv.Convert);
+        EntropyDraw3dHelper.RenderMeasure(myWorkingFolder, graphMeasure, conv.Convert);
       }
     }
 

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using DSIS.Graph.Images;
-using DSIS.Utils;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.SimpleRunner
