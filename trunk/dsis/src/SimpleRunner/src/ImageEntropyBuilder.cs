@@ -19,8 +19,8 @@ namespace DSIS.SimpleRunner
                             Image = new Bitmap(Image.FromFile(file)),
                             GraphParameters = new GraphFromImageBuilderParameters
                                                 {
-                                                  NumberOfNeighboursPerAxis = 2,
-                                                  NumberOfEdgesPerPixel = 2,
+                                                  NumberOfNeighboursPerAxis = 4,
+                                                  NumberOfEdgesPerPixel = 8,
                                                   Hash = c => c.R/32,
                                                   Threasold = 120/32
                                                 }
