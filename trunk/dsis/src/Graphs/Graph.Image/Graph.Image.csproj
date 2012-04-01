@@ -35,7 +35,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ComplexBuilder.cs" />
+    <Compile Include="src\Coord.cs" />
+    <Compile Include="src\FullBuilder.cs" />
     <Compile Include="src\GraphFromImageBuilder.cs" />
+    <Compile Include="src\GraphFromImageBuilderParameters.cs" />
+    <Compile Include="src\GraphFromPictureBuilderBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\shared\src\Core.Ioc.Api\Core.Ioc.Api.csproj">

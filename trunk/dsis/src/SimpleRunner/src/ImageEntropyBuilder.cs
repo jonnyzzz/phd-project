@@ -17,7 +17,20 @@ namespace DSIS.SimpleRunner
                           {
                             Name = Path.GetFileNameWithoutExtension(file),
                             Image = new Bitmap(Image.FromFile(file)),
-                            GraphParameters = new GraphFromImageBuilderParameters
+                            GraphParameters = new FullGraphFromImageBuilderParameters
+                                                {
+                                                  NumberOfNeighboursPerAxis = 4,
+                                                  Hash = c => c.R/32,
+                                                }
+                          })
+        .ToArray();
+/*
+      yield return Directory.GetFiles(@"E:\work\dsis\dsis\img", "*.png")
+        .Select(file => new ImageEntropyData
+                          {
+                            Name = Path.GetFileNameWithoutExtension(file),
+                            Image = new Bitmap(Image.FromFile(file)),
+                            GraphParameters = new ComplexGraphFromImageBuilderParameters()
                                                 {
                                                   NumberOfNeighboursPerAxis = 4,
                                                   NumberOfEdgesPerPixel = 8,
@@ -26,6 +39,7 @@ namespace DSIS.SimpleRunner
                                                 }
                           })
         .ToArray();
+*/
 
 /*
       yield return new[]

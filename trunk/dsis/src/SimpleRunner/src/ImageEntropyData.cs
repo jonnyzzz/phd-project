@@ -21,11 +21,15 @@ namespace DSIS.SimpleRunner
     public override void Serialize(Logger log)
     {
       log.Write("Name:  {0}", Name);
-      base.Serialize(log);      
+      base.Serialize(log);            
       log.Write("Parameters.Hash: {0}", GraphParameters.Hash);
-      log.Write("Parameters.Threahold: {0}", GraphParameters.Threasold);
-      log.Write("Parameters.NumberOfEdgesPerPixel: {0}", GraphParameters.NumberOfEdgesPerPixel);
       log.Write("Parameters.NumberOfNeighboursPerAxis: {0}", GraphParameters.NumberOfNeighboursPerAxis);
+      var cp = GraphParameters as ComplexGraphFromImageBuilderParameters;
+      if (cp != null)
+      {
+        log.Write("Parameters.Threahold: {0}", cp.Threasold);
+        log.Write("Parameters.NumberOfEdgesPerPixel: {0}", cp.NumberOfEdgesPerPixel);
+      }      
     }
   }
 }
