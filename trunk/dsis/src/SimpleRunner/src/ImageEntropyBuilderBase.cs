@@ -150,10 +150,13 @@ namespace DSIS.SimpleRunner
                                   };
 
         var j = new JVRMeasure<TCell>(graph, components, jvrMeasureOptions);
+        myLogger.Write("Computing measure: contruction initial graph...");
         j.FillGraph();
         RenderMeasure(j.CreateEvaluator(), OnInitialMeasurePixels);
 
+        myLogger.Write("Computing measure: Iterating over graph to compute measure...");
         j.Iterate(jvrMeasureOptions.EPS);
+        myLogger.Write("Computing measure: Iterating over graph to compute measure: DOME...");
         var graphMeasure = j.CreateEvaluator();
         myLogger.Write("Measure computed: {0}", graphMeasure.GetEntropy());
 
