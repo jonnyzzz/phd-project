@@ -113,6 +113,7 @@ namespace DSIS.Utils
     /// <summary>
     /// Enumerates integer range [from, to)
     /// </summary>
+    [Obsolete("may generate hard-to-debuggable code because unclear semantics")]
     public static IEnumerable<int> To(this int from, int to)
     {
       for (int i = from; i < to; i++) yield return i;

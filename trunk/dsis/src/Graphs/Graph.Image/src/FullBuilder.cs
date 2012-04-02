@@ -14,11 +14,12 @@ namespace DSIS.Graph.Images
     protected override void ProcessNode<R, Q>(Coord p, R system, TarjanGraph<Q> graph)
     {
       var node = graph.AddNode(system.Create(p.X, p.Y));
-      var arcs = Neighbours(p).ToArray();
 
-      foreach (var arc in arcs)
+      var neighbours = Neighbours(p).ToArray();
+      foreach (var arc in neighbours)
       {
-        graph.AddEdgeToNode(node, graph.AddNode(system.Create(arc.X, arc.Y)));
+        var toNode = graph.AddNode(system.Create(arc.X, arc.Y));
+        graph.AddEdgeToNode(node, toNode);
       }
     }
   }

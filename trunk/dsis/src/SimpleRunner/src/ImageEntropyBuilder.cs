@@ -19,7 +19,7 @@ namespace DSIS.SimpleRunner
                             Image = new Bitmap(Image.FromFile(file)),
                             GraphParameters = new FullGraphFromImageBuilderParameters
                                                 {
-                                                  NumberOfNeighboursPerAxis = 4,
+                                                  NumberOfNeighboursPerAxis = 1,
                                                   Hash = c => c.R/32,
                                                 }
                           })

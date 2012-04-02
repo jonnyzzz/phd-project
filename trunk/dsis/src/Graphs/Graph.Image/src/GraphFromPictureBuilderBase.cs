@@ -55,32 +55,25 @@ namespace DSIS.Graph.Images
     protected IEnumerable<Coord> Neighbours(Coord c)
     {
       var neighbous = myParameters.NumberOfNeighboursPerAxis;
-      return from x in NeighbourCoords(c.X, neighbous)
-             where x >= 0 && x < myImage.Width
 
-             from y in NeighbourCoords(c.Y, neighbous)
-             where y >= 0 && y < myImage.Height
+      for (int x = c.X - neighbous; x <= c.X + neighbous; x++)
+      {
+        for (int y = c.Y - neighbous; y <= c.Y + neighbous; y++)
+        {
+          if (x == c.X && y == c.Y) continue;
+          if (x < 0 || x >= myImage.Width) continue;
+          if (y < 0 || y >= myImage.Height) continue;
 
-             select new Coord(x, y);
-    }
-
-    private IEnumerable<int> NeighbourCoords(int c, int o)
-    {
-      int from = c - o;
-      int to = c + o;
-
-      while (from < c)
-        yield return from++;
-      from = c + 1;
-      while (from <= to)
-        yield return from++;
+          yield return new Coord(x, y);
+        }
+      }
     }
 
     private IEnumerable<Coord> AllPoints()
     {
-      return from x in 0.To(myImage.Width)
-             from y in 0.To(myImage.Height)
-             select new Coord(x, y);
+      for (int x = 0; x < myImage.Width; x++)
+        for (int y = 0; y < myImage.Height; y++ )
+          yield return new Coord(x, y);
     }
   }
 }
