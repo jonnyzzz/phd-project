@@ -124,7 +124,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
 
         double incoming = myBackEdges.ComputeWeight(node);
         double outgoing = myStraitEdges.ComputeWeight(node);
-        bool needNorm = false;
+
 
         //this is a fix for JVR method refered to JVR2
         if (notIncludeSelfLoop && myGraph.IsSelfLoop(node))
@@ -134,9 +134,12 @@ namespace DSIS.Graph.Entropy.Impl.JVR
           outgoing -= weight;
         }
 
-        needNorm |= (incoming >= maxValue || outgoing >= maxValue);
-
-        needNorm |= stepCount > maxSteps;
+        if (incoming >= maxValue || outgoing >= maxValue || stepCount > maxSteps)
+        {
+          Norm();
+          stepCount = 0;
+          continue;
+        }
 
         var sout = Math.Sqrt(outgoing);
         var sin = Math.Sqrt(incoming);
@@ -148,12 +151,6 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         {
           a = 0;
           b = 0;
-        }
-
-        if (needNorm)
-        {
-          Norm();
-          stepCount = 0;
         }
 
         var cookie = myHashHolder.UpdateCookie(myStraitEdges, myBackEdges);
