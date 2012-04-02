@@ -85,6 +85,7 @@
     <Compile Include="src\Impl\Loop\Strange\StrangeEntropyEvaluator.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEvaluatorStrategy.cs" />
     <Compile Include="src\Impl\Loop\Strange\StrangeEvaluatorType.cs" />
+    <Compile Include="src\Impl\Loop\Weight\EntropyEdgeWeights.cs" />
     <Compile Include="src\Impl\Loop\Weight\EntropyLoopWeights.cs" />
     <Compile Include="src\Impl\Loop\Weight\IEntropyLoopWeightCallback.cs" />
     <Compile Include="src\Impl\Entropy\IEntropyProcessor.cs" />

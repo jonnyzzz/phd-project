@@ -1,6 +1,7 @@
 using System;
 using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.Entropy;
+using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.IntegerCoordinates;
 using DSIS.Utils;
 using System.Linq;
@@ -79,25 +80,20 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         {
           int index = 0;
           var weight = myHost.myOptions.InitialWeight;
+          var cs = myGraph.CoordinateSystem;
 
-          foreach (var node in myGraph.NodesInternal)
+          foreach (var node in myGraph.NodesInternal.Where(VisitNode))
           {
-            if (!VisitNode(node))
-              continue;
-
             var factory = JVRPair<T>.Factory(node.Coordinate);
 
-            foreach (var edge in myGraph.GetEdgesInternal(node))
+            foreach (var edge in myGraph.GetEdgesInternal(node).Where(VisitNode))
             {
-              if (!VisitNode(edge))
-                continue;
-
               var key = factory.Create(edge.Coordinate);
 
               myHost.myStraitEdges.Add(key);
               myHost.myBackEdges.Add(key);
 
-              cookie.SetItem(key, weight.Weight(++index));
+              cookie.SetItem(key, weight.EdgeWeight(cs, key, ++index));
             }
           }
         }

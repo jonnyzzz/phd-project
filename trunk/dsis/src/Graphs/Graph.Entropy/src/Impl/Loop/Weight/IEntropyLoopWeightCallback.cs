@@ -1,8 +1,22 @@
+using DSIS.Core.Coordinates;
+using DSIS.Graph.Entropy.Impl.JVR;
+
 namespace DSIS.Graph.Entropy.Impl.Loop.Weight
 {
-  public interface IEntropyLoopWeightCallback
+  public interface IEntropyWeightCallback
+  {
+    string Name { get; }
+  }
+
+  public interface IEntropyLoopWeightCallback : IEntropyWeightCallback
   {
     double Weight(int length);
-    string Name { get;}
+  }
+   
+  public interface IEntropyEdgeWeightCallback : IEntropyWeightCallback
+  {    
+    double EdgeWeight<T, Q>(Q system, JVRPair<T> edge, int index)
+      where Q : ICellCoordinateSystem<T>
+      where T : ICellCoordinate;
   }
 }

@@ -34,7 +34,7 @@ namespace DSIS.SimpleRunner
       var opts = new JVRMeasureOptions
                    {
                      IncludeSelfEdge = false,
-                     InitialWeight = EntropyLoopWeights.CONST,
+                     InitialWeight = EntropyEdgeWeights.CONST,
                      EPS = eps,
                      ExitCondition = JVRExitCondition.EdgesChangeError //FAKE!
                    };

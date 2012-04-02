@@ -36,7 +36,7 @@ namespace DSIS.SimpleRunner
 
     private static void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, double eps)
     {
-      var opts = new JVRMeasureOptions {IncludeSelfEdge = false, InitialWeight = EntropyLoopWeights.CONST, EPS = eps};
+      var opts = new JVRMeasureOptions {IncludeSelfEdge = false, InitialWeight = EntropyEdgeWeights.CONST, EPS = eps};
       var key = new RecordTimeAction(new JVRMeasureAction(opts), "XxX" + eps);
       siConstructionAction
         .Edge(key)

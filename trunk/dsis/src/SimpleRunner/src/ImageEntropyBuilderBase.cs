@@ -14,7 +14,6 @@ using DSIS.Graph.Entropy.Impl.Loop.Weight;
 using DSIS.Graph.Images;
 using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Impl.Actions.Files;
-using DSIS.Utils;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.SimpleRunner
@@ -49,24 +48,12 @@ namespace DSIS.SimpleRunner
       var pixels = ImageToPixels(sys.Image, sys.GraphParameters).ToArray();
       saver("loaded")(pixels);
 
-      /*var data = pixels.ToDictionary(x=>x, x=>x.Color);
-      EntropyDrawColorMapHelper.RenderMeasure(
-        wf,
-        data,
-        (x, q) =>
-          {
-            q[0] = x.X;
-            q[1] = x.Y;
-          }, 
-          sys.Name + ".remake.png", 
-          "original image in selected color scale");
-      */
-      var wg = new WithGraph(wf, logger, sys.Name);
+      var wg = new WithGraph(sys, logger);
       wg.OnGraphPixels = saver("graph");
-      wg.OnMeasurePixels = saver("jvr");
+      wg.OnInitialMeasurePixels = saver("jvr-init");
+      wg.OnFinalMeasurePixels = saver("jvr-finish");
       graph.DoGeneric(wg);
     }
-
 
     private Image RenderProcessedImage(ImageEntropyData data, IEnumerable<ImageColor> pixels)
     {
@@ -127,18 +114,17 @@ namespace DSIS.SimpleRunner
 
     private class WithGraph : IReadonlyGraphWith
     {
-      private readonly string myName;
-      private readonly WorkingFolderInfo myWorkingFolder;
+      private readonly ImageEntropyData myParameters;
       private readonly Logger myLogger;
 
-      public Action<IEnumerable<ImageColor>> OnMeasurePixels { get; set; }
+      public Action<IEnumerable<ImageColor>> OnFinalMeasurePixels { get; set; }
+      public Action<IEnumerable<ImageColor>> OnInitialMeasurePixels { get; set; }
       public Action<IEnumerable<ImageColor>> OnGraphPixels { get; set; } 
 
-      public WithGraph(WorkingFolderInfo workingFolder, Logger logger, string name)
+      public WithGraph(ImageEntropyData parameters, Logger logger)
       {
-        myWorkingFolder = workingFolder;
+        myParameters = parameters;
         myLogger = logger;
-        myName = name;        
       }
 
       public void With<TCell, TNode>(IReadonlyGraph<TCell, TNode> graph) 
@@ -155,31 +141,75 @@ namespace DSIS.SimpleRunner
         myLogger.Write("Computing measure...");
 
         //TODO: foreach component 
-        var mes = new JVREvaluator<TCell>(new JVRMeasureOptions
-                                            {
-                                              ExitCondition = JVRExitCondition.MaxNodeError,
-                                              IncludeSelfEdge = false,
-                                              EPS = 1e-4,
-                                              InitialWeight = EntropyLoopWeights.ONE,
-                                            });
-//        var mes = new LoggingJVREvaluator<TCell>(new JVRMeasureOptions(), myLogger);
-        var graphMeasure = mes.Measure(graph, components);
+        var jvrMeasureOptions = new JVRMeasureOptions
+                                  {
+                                    ExitCondition = JVRExitCondition.MaxNodeError, 
+                                    IncludeSelfEdge = false, 
+                                    EPS = 1e-4, 
+                                    InitialWeight = new InitialMeasureOnGraph(myParameters)
+                                  };
 
+        var j = new JVRMeasure<TCell>(graph, components, jvrMeasureOptions);
+        j.FillGraph();
+        RenderMeasure(j.CreateEvaluator(), OnInitialMeasurePixels);
+
+        j.Iterate(jvrMeasureOptions.EPS);
+        var graphMeasure = j.CreateEvaluator();
         myLogger.Write("Measure computed: {0}", graphMeasure.GetEntropy());
 
-        RenderMeasure(graphMeasure);
-
-        //EntropyDrawColorMapHelper.RenderMeasure(myWorkingFolder, graphMeasure, conv.Convert, myName + ".dsis.png");
-//        EntropyDraw3dHelper.RenderMeasure(myWorkingFolder, graphMeasure, conv.Convert);
+        RenderMeasure(graphMeasure, OnFinalMeasurePixels);
       }
 
-      private void RenderMeasure<TCell>(IGraphMeasure<TCell> graphMeasure) 
+      private class InitialMeasureOnGraph : IEntropyEdgeWeightCallback
+      {
+        private readonly ImageEntropyData myData;
+        private readonly Func<Color, double> myFunc;
+
+        public InitialMeasureOnGraph(ImageEntropyData data)
+        {
+          myData = data;
+          myFunc = data.GraphParameters.Hash.Compile();
+        }
+
+        public string Name
+        {
+          get { return "From image"; }
+        }
+
+        public double EdgeWeight<T, Q>(Q system, JVRPair<T> edge, int index) 
+          where T : ICellCoordinate 
+          where Q : ICellCoordinateSystem<T>
+        {
+          var isys = (IIntegerCoordinateSystem) system;
+          var c = new Cast {Point = edge.From};
+          isys.DoGeneric(c);
+          var px = myData.Image.GetPixel(c.Vector[0], c.Vector[1]);
+          return myFunc(px);
+        }
+
+        private class Cast : IIntegerCoordinateSystemWith
+        {
+          public ICellCoordinate Point { get; set; }
+          public int[] Vector { get; private set; }
+          
+          public void Do<T, Q>(T system)
+            where T : IIntegerCoordinateSystem<Q>
+            where Q : IIntegerCoordinate
+          {
+            var pt = (Q) Point;
+            var t = new double[system.Dimension];
+            system.TopLeftPoint(pt, t);
+            Vector = t.Select(x => (int) x).ToArray();
+          }
+        }
+      }
+
+      private void RenderMeasure<TCell>(IGraphMeasure<TCell> graphMeasure, Action<IEnumerable<ImageColor>> action) 
         where TCell : ICellCoordinate
       {
         myLogger.Write("Rendering Measure image...");
         var conv = CreateCoordinatesConverter(graphMeasure);
-        OnMeasurePixels(graphMeasure.GetMeasureNodes()
-                          //    .Where(x => x.Value > 0)
+        action(graphMeasure.GetMeasureNodes()
                           .Select(
                             x =>
                               {

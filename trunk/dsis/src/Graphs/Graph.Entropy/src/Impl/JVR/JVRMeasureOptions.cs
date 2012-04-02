@@ -49,12 +49,12 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     [IncludeGenerate(Title = "Include 1-node loops")]
     public bool IncludeSelfEdge { get; set; }
 
-    [IncludeGenerate(Title = "Initial weights"), IncludeValuesProvider(typeof(EntropyLoopWeights))]
-    public IEntropyLoopWeightCallback InitialWeight { get; set; }
+    [IncludeGenerate(Title = "Initial weights"), IncludeValuesProvider(typeof(EntropyEdgeWeights))]
+    public IEntropyEdgeWeightCallback InitialWeight { get; set; }
 
     public JVRMeasureOptions()
     {
-      InitialWeight = EntropyLoopWeights.CONST;
+      InitialWeight = EntropyEdgeWeights.CONST;
       IncludeSelfEdge = false;
       ExitCondition = JVRExitCondition.MaxNodeError;
       EPS = 1e-3;
