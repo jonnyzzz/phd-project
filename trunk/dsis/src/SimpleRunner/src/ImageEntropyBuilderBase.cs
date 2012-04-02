@@ -157,6 +157,7 @@ namespace DSIS.SimpleRunner
         myLogger.Write("Computing measure: Iterating over graph to compute measure...");
         j.Iterate(jvrMeasureOptions.EPS);
         myLogger.Write("Computing measure: Iterating over graph to compute measure: DOME...");
+        
         var graphMeasure = j.CreateEvaluator();
         myLogger.Write("Measure computed: {0}", graphMeasure.GetEntropy());
 
