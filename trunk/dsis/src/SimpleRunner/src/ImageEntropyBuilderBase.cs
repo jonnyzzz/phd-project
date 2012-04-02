@@ -149,7 +149,7 @@ namespace DSIS.SimpleRunner
                                     InitialWeight = new InitialMeasureOnGraph(myParameters)
                                   };
 
-        var j = new JVRMeasure<TCell>(graph, components, jvrMeasureOptions);
+        var j = new LoggingJVRMeasure<TCell>(graph, components, jvrMeasureOptions, myLogger);
         myLogger.Write("Computing measure: contruction initial graph...");
         j.FillGraph();
         RenderMeasure(j.CreateEvaluator(), OnInitialMeasurePixels);
@@ -162,6 +162,33 @@ namespace DSIS.SimpleRunner
         myLogger.Write("Measure computed: {0}", graphMeasure.GetEntropy());
 
         RenderMeasure(graphMeasure, OnFinalMeasurePixels);
+      }
+
+      private class LoggingJVRMeasure<TCell> : JVRMeasure<TCell> 
+        where TCell : ICellCoordinate
+      {
+        private readonly Logger myLogger;
+        private const int MAX_STEPS = 1300;
+        private int myStep;
+        public LoggingJVRMeasure(IReadonlyGraph<TCell> graph, IGraphStrongComponents<TCell> components, JVRMeasureOptions opts, Logger logger) : base(graph, components, opts)
+        {
+          myLogger = logger;
+        }
+
+        protected override bool CheckExitCondition(JVRExitCondition condition, double precision, double totalError, double qValue, double nodesChange, double edgesChange)
+        {
+          if (myStep++ > MAX_STEPS)
+          {
+            myLogger.Write("Limit of {0} iterations exceeded", MAX_STEPS);
+            return true;
+          }
+          if (myStep % 10 == 0)
+          {
+            myLogger.Write(string.Format("  {5} -> precision:{0}, totalError:{1}, q:{2}, nodesChange:{3}, edgesChange:{4}",
+            precision, totalError, qValue, nodesChange, edgesChange, myStep));
+          }
+          return base.CheckExitCondition(condition, precision, totalError, qValue, nodesChange, edgesChange);
+        }
       }
 
       private class InitialMeasureOnGraph : IEntropyEdgeWeightCallback
