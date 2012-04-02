@@ -140,6 +140,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
           stepCount = 0;
           continue;
         }
+        stepCount++;
 
         var sout = Math.Sqrt(outgoing);
         var sin = Math.Sqrt(incoming);
@@ -164,7 +165,16 @@ namespace DSIS.Graph.Entropy.Impl.JVR
         double qValue = Math.Abs(incoming - outgoing);
         if (CheckExitCondition(myOptions.ExitCondition, precision, myHashHolder.SummaryError, qValue, cookie.Change,
                                edgesChange))
+        {
+          //make sure results are right
+          if (stepCount != 1)
+          {
+            stepCount = 0;
+            Norm();
+            continue;
+          }
           break;
+        }
       }
     }
 

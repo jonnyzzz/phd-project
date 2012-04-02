@@ -143,7 +143,7 @@ namespace DSIS.SimpleRunner
         //TODO: foreach component 
         var jvrMeasureOptions = new JVRMeasureOptions
                                   {
-                                    ExitCondition = JVRExitCondition.MaxNodeError, 
+                                    ExitCondition = JVRExitCondition.SummError, 
                                     IncludeSelfEdge = false, 
                                     EPS = 1e-4, 
                                     InitialWeight = new InitialMeasureOnGraph(myParameters)
