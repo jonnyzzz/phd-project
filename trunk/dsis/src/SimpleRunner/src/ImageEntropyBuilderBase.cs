@@ -145,7 +145,7 @@ namespace DSIS.SimpleRunner
                                   {
                                     ExitCondition = JVRExitCondition.SummError, 
                                     IncludeSelfEdge = false, 
-                                    EPS = 1e-4, 
+                                    EPS = 1e-8, 
                                     InitialWeight = new InitialMeasureOnGraph(myParameters)
                                   };
 
@@ -168,7 +168,7 @@ namespace DSIS.SimpleRunner
         where TCell : ICellCoordinate
       {
         private readonly Logger myLogger;
-        private const int MAX_STEPS = 1300;
+        private const int MAX_STEPS = 30 * 1000;
         private int myStep;
         public LoggingJVRMeasure(IReadonlyGraph<TCell> graph, IGraphStrongComponents<TCell> components, JVRMeasureOptions opts, Logger logger) : base(graph, components, opts)
         {
@@ -182,7 +182,7 @@ namespace DSIS.SimpleRunner
             myLogger.Write("Limit of {0} iterations exceeded", MAX_STEPS);
             return true;
           }
-          if (myStep % 10 == 0)
+          if (myStep % 25 == 0)
           {
             myLogger.Write(string.Format("  {5} -> precision:{0}, totalError:{1}, q:{2}, nodesChange:{3}, edgesChange:{4}",
             precision, totalError, qValue, nodesChange, edgesChange, myStep));

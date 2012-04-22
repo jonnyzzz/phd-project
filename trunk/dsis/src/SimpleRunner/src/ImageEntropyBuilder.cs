@@ -10,9 +10,19 @@ namespace DSIS.SimpleRunner
   [ComponentImplementation]
   public class ImageEntropyBuilder : ImageEntropyBuilderBase
   {
+    private IEnumerable<string> ListImages()
+    {
+      yield return @"E:\work\dsis\dsis\img\pic_36_crop.png";
+/*
+      foreach (var file in Directory.GetFiles(@"E:\work\dsis\dsis\img", "*.png"))
+      {
+        yield return file;
+      }
+*/
+    } 
     protected override IEnumerable<IEnumerable<ImageEntropyData>> GetSystemsToRun2()
     {
-      yield return Directory.GetFiles(@"E:\work\dsis\dsis\img", "*.png")
+      yield return ListImages()
         .Select(file => new ImageEntropyData
                           {
                             Name = Path.GetFileNameWithoutExtension(file),
