@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using DSIS.Graph.Images;
 using DSIS.Scheme.Impl.Actions.Files;
@@ -8,6 +9,10 @@ namespace DSIS.SimpleRunner
   {
     public string Name { get; set; }
     public Bitmap Image { get; set; }
+
+    public TimeSpan? MeasureTimeout { get; set; }
+    public int? MeasureIterations { get; set; }
+    public double? MeasurePrecision { get; set; }
 
     public GraphFromImageBuilderParameters GraphParameters { get; set; }
 
@@ -24,6 +29,9 @@ namespace DSIS.SimpleRunner
       base.Serialize(log);            
       log.Write("Parameters.Hash: {0}", GraphParameters.Hash);
       log.Write("Parameters.NumberOfNeighboursPerAxis: {0}", GraphParameters.NumberOfNeighboursPerAxis);
+      log.Write("Measure.Timeout: {0}", (object)MeasureTimeout ?? "Null");
+      log.Write("Measure.Iterations: {0}", (object)MeasureIterations ?? "Null");
+      log.Write("Measure.Precision: {0}", (object)MeasurePrecision ?? "Null");
       var cp = GraphParameters as ComplexGraphFromImageBuilderParameters;
       if (cp != null)
       {

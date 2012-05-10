@@ -73,6 +73,8 @@
     <Compile Include="src\ImageEntropyData.cs" />
     <Compile Include="src\imageEntropy\ImageEntropyBuilder.cs" />
     <Compile Include="src\imageEntropy\ImageEntropyBuilderBase.cs" />
+    <Compile Include="src\imageEntropy\ImageHelpers.cs" />
+    <Compile Include="src\imageEntropy\LoggingJVRMeasure.cs" />
     <Compile Include="src\JVRBuild.cs" />
     <Compile Include="src\JVRDetMorseBuild.cs" />
     <Compile Include="src\LoggingJVREvaluator.cs" />

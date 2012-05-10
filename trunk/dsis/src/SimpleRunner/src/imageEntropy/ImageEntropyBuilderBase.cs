@@ -41,76 +41,21 @@ namespace DSIS.SimpleRunner.imageEntropy
       Func<string, Action<IEnumerable<ImageColor>>> saver =
         name => pxls =>
                   {
-                    var img = RenderProcessedImage(sys, pxls);
+                    var img = ImageHelpers.RenderProcessedImage(sys, pxls);
                     img.Save(Path.Combine(home, sys.Name + "." + name + ".png"), ImageFormat.Png);
                   };
                    
-      var pixels = ImageToPixels(sys.Image, sys.GraphParameters).ToArray();
+      var pixels = ImageHelpers.ImageToPixels(sys.Image, sys.GraphParameters).ToArray();
       saver("loaded")(pixels);
 
-      var wg = new WithGraph(sys, logger);
-      wg.OnGraphPixels = saver("graph");
-      wg.OnInitialMeasurePixels = saver("jvr-init");
-      wg.OnFinalMeasurePixels = saver("jvr-finish");
+      var wg = new WithGraph(sys, logger)
+                 {
+                   OnGraphPixels = saver("graph"),
+                   OnInitialMeasurePixels = saver("jvr-init"),
+                   OnFinalMeasurePixels = saver("jvr-finish")
+                 };
       graph.DoGeneric(wg);
     }
-
-    private Image RenderProcessedImage(ImageEntropyData data, IEnumerable<ImageColor> pixels)
-    {
-      pixels = pixels.ToArray();
-
-      var img = new Bitmap(data.Image.Width, data.Image.Height);
-      double minValue = pixels.Min(x => x.Color);
-      double maxValue = pixels.Max(x => x.Color);
-
-      Color minColor = Color.Black;
-      Color maxColor = Color.Red;
-
-      Func<Color, double> R = c => c.R;
-      Func<Color, double> G = c => c.G;
-      Func<Color, double> B = c => c.B;
-      Func<double, Func<Color, double>, int> y = 
-        (x, F) => (int)((x - minValue)/(maxValue - minValue)*(F(maxColor) - F(minColor)) + F(minColor));
-
-      var color =
-        Math.Abs(minValue - maxValue) > 1e-8
-          ? (Func<double, Color>) (d => Color.FromArgb(y(d, R), y(d, G), y(d, B)))
-          : d => Color.Black;
-
-      using (var g = Graphics.FromImage(img))
-      {
-        g.Clear(Color.White);
-      }
-
-      foreach (var p in pixels)
-      {
-        img.SetPixel(p.X, p.Y, color(p.Color));
-      }
-
-      return img;
-    }
-
-
-
-    private struct ImageColor
-    {
-      public int X;
-      public int Y;
-      public double Color;
-    }
-
-    private IEnumerable<ImageColor> ImageToPixels(Bitmap img, GraphFromImageBuilderParameters ps)
-    {
-      var expression = ps.Hash.Compile();
-      for(int x = 0; x < img.Width; x++)
-      {
-        for(int y = 0; y < img.Height; y++)
-        {
-          yield return new ImageColor {X = x, Y = y, Color = expression(img.GetPixel(x, y))};
-        }
-      }
-    }
-
 
     private class WithGraph : IReadonlyGraphWith
     {
@@ -145,11 +90,11 @@ namespace DSIS.SimpleRunner.imageEntropy
                                   {
                                     ExitCondition = JVRExitCondition.SummError, 
                                     IncludeSelfEdge = false, 
-                                    EPS = 1e-8, 
+                                    EPS = myParameters.MeasurePrecision ?? 1e-8, 
                                     InitialWeight = new InitialMeasureOnGraph(myParameters)
                                   };
 
-        var j = new LoggingJVRMeasure<TCell>(graph, components, jvrMeasureOptions, myLogger);
+        var j = new LoggingJVRMeasure<TCell>(myParameters, graph, components, jvrMeasureOptions, myLogger);
         myLogger.Write("Computing measure: contruction initial graph...");
         j.FillGraph();
         RenderMeasure(j.CreateEvaluator(), OnInitialMeasurePixels);
@@ -162,33 +107,6 @@ namespace DSIS.SimpleRunner.imageEntropy
         myLogger.Write("Measure computed: {0}", graphMeasure.GetEntropy());
 
         RenderMeasure(graphMeasure, OnFinalMeasurePixels);
-      }
-
-      private class LoggingJVRMeasure<TCell> : JVRMeasure<TCell> 
-        where TCell : ICellCoordinate
-      {
-        private readonly Logger myLogger;
-        private const int MAX_STEPS = 30 * 1000;
-        private int myStep;
-        public LoggingJVRMeasure(IReadonlyGraph<TCell> graph, IGraphStrongComponents<TCell> components, JVRMeasureOptions opts, Logger logger) : base(graph, components, opts)
-        {
-          myLogger = logger;
-        }
-
-        protected override bool CheckExitCondition(JVRExitCondition condition, double precision, double totalError, double qValue, double nodesChange, double edgesChange)
-        {
-          if (myStep++ > MAX_STEPS)
-          {
-            myLogger.Write("Limit of {0} iterations exceeded", MAX_STEPS);
-            return true;
-          }
-          if (myStep % 25 == 0)
-          {
-            myLogger.Write(string.Format("  {5} -> precision:{0}, totalError:{1}, q:{2}, nodesChange:{3}, edgesChange:{4}",
-            precision, totalError, qValue, nodesChange, edgesChange, myStep));
-          }
-          return base.CheckExitCondition(condition, precision, totalError, qValue, nodesChange, edgesChange);
-        }
       }
 
       private class InitialMeasureOnGraph : IEntropyEdgeWeightCallback
@@ -214,7 +132,11 @@ namespace DSIS.SimpleRunner.imageEntropy
           var isys = (IIntegerCoordinateSystem) system;
           var c = new Cast {Point = edge.From};
           isys.DoGeneric(c);
-          var px = myData.Image.GetPixel(c.Vector[0], c.Vector[1]);
+          
+          int x = c.Vector[0];
+          int y = c.Vector[1];
+          var px = myData.Image.GetPixel(x, y);
+          
           return myFunc(px);
         }
 

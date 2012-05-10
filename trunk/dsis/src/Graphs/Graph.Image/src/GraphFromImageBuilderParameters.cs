@@ -7,7 +7,7 @@ namespace DSIS.Graph.Images
   public class GraphFromImageBuilderParameters
   {
     public Expression<Func<Color, double>> Hash { get; set; }
-    public int NumberOfNeighboursPerAxis { get; set; }    
+    public int NumberOfNeighboursPerAxis { get; set; }
   }
 
 

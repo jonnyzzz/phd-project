@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -12,25 +13,28 @@ namespace DSIS.SimpleRunner.imageEntropy
   {
     private IEnumerable<string> ListImages()
     {
-      yield return @"E:\work\dsis\dsis\img\pic_36_crop.png";
-/*
+//      yield return @"E:\work\dsis\dsis\img\pic_36_crop.png";
       foreach (var file in Directory.GetFiles(@"E:\work\dsis\dsis\img", "*.png"))
       {
         yield return file;
       }
-*/
     } 
+
     protected override IEnumerable<IEnumerable<ImageEntropyData>> GetSystemsToRun2()
     {
       yield return ListImages()
         .Select(file => new ImageEntropyData
                           {
+                            ExecutionTimeout = TimeSpan.FromMinutes(30),
                             Name = Path.GetFileNameWithoutExtension(file),
                             Image = new Bitmap(Image.FromFile(file)),
+                            MeasureIterations = 50 * 1000,
+                            MeasureTimeout = TimeSpan.FromMinutes(10),
+                            MeasurePrecision = 1e-8,
                             GraphParameters = new FullGraphFromImageBuilderParameters
                                                 {
                                                   NumberOfNeighboursPerAxis = 1,
-                                                  Hash = c => c.R/32,
+                                                  Hash = c => c.R / 16,
                                                 }
                           })
         .ToArray();
