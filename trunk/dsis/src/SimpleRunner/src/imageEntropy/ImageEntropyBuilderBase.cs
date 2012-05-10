@@ -16,7 +16,7 @@ using DSIS.IntegerCoordinates;
 using DSIS.Scheme.Impl.Actions.Files;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
-namespace DSIS.SimpleRunner
+namespace DSIS.SimpleRunner.imageEntropy
 {
   public abstract class ImageEntropyBuilderBase : ComputationBuilderBase<ImageEntropyData>
   {
