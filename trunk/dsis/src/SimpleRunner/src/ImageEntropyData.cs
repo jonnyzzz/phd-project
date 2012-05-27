@@ -9,6 +9,8 @@ namespace DSIS.SimpleRunner
   {
     public string Name { get; set; }
     public Bitmap Image { get; set; }
+    public Color RenderMinColor { get; set; }
+    public Color RenderMaxColor { get; set; }
 
     public TimeSpan? MeasureTimeout { get; set; }
     public int? MeasureIterations { get; set; }
@@ -16,9 +18,27 @@ namespace DSIS.SimpleRunner
 
     public GraphFromImageBuilderParameters GraphParameters { get; set; }
 
+    public ImageEntropyData()
+    {
+      RenderMinColor = Color.White;
+      RenderMaxColor = Color.MediumSeaGreen;
+    }
+
     ImageEntropyData ICloneable<ImageEntropyData>.Clone()
     {
-      var imageEntropyData = new ImageEntropyData{ Image = Image, GraphParameters = GraphParameters};
+      var imageEntropyData = new ImageEntropyData
+                               {
+                                 Name = Name,
+                                 Image = Image, 
+                                 RenderMinColor = RenderMinColor,
+                                 RenderMaxColor = RenderMaxColor,
+
+                                 MeasureTimeout = MeasureTimeout,
+                                 MeasureIterations = MeasureIterations,
+                                 MeasurePrecision =  MeasurePrecision,
+
+                                 GraphParameters = GraphParameters,
+                               };
       imageEntropyData.CopyState(this);
       return imageEntropyData;
     }

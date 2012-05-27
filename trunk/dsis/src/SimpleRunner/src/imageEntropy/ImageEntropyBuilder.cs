@@ -22,6 +22,34 @@ namespace DSIS.SimpleRunner.imageEntropy
 
     protected override IEnumerable<IEnumerable<ImageEntropyData>> GetSystemsToRun2()
     {
+      yield return (
+                     new[]
+                       {
+                         new {Name = "Cross-20x20x2", Image = WellknownTestImages.Cross(20, 2)}, 
+                         new {Name = "HLines-20x20x2", Image = WellknownTestImages.HLines2(20, 20, 2)},
+                         new {Name = "HVLines-20x20x2", Image = WellknownTestImages.HVLines2(20, 20, 2)}, 
+                       }
+                   )
+        .Select(file => new ImageEntropyData
+                          {
+                            ExecutionTimeout = TimeSpan.FromMinutes(30),
+                            Name = file.Name,
+                            Image = file.Image,
+                            MeasureIterations = 50*1000,
+                            MeasureTimeout = TimeSpan.FromMinutes(10),
+                            MeasurePrecision = 1e-18,
+
+                            RenderMinColor = Color.Black,
+                            RenderMaxColor = Color.White,
+
+                            GraphParameters = new FullGraphFromImageBuilderParameters
+                                                {
+                                                  NumberOfNeighboursPerAxis = 1,
+                                                  Hash = c => c.R,
+                                                }
+                          }).ToArray();
+
+/*
       yield return ListImages()
         .Select(file => new ImageEntropyData
                           {
@@ -38,6 +66,7 @@ namespace DSIS.SimpleRunner.imageEntropy
                                                 }
                           })
         .ToArray();
+*/
 /*
       yield return Directory.GetFiles(@"E:\work\dsis\dsis\img", "*.png")
         .Select(file => new ImageEntropyData

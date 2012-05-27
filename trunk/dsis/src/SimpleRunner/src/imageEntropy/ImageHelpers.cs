@@ -16,8 +16,8 @@ namespace DSIS.SimpleRunner.imageEntropy
       double minValue = pixels.Min(x => x.Color);
       double maxValue = pixels.Max(x => x.Color);
 
-      Color minColor = Color.White;
-      Color maxColor = Color.MediumSeaGreen;
+      Color minColor = data.RenderMinColor;
+      Color maxColor = data.RenderMaxColor;
 
       Func<Color, double> R = c => c.R;
       Func<Color, double> G = c => c.G;
@@ -41,6 +41,37 @@ namespace DSIS.SimpleRunner.imageEntropy
       }
 
       return img;
+      //return EnlargeImageIfNecessary(1000, 1000, img);
+    }
+
+    public static Image ZoomImageIfNeeded(int height, int width, Image image)
+    {
+      var i = new Bitmap(image);
+
+      var ih = i.Height;
+      var iw = i.Width;
+      var mh = 1;
+      var mw = 1;
+
+      while (height > ih) { ih <<= 1; mh<<=1; }
+      while (width > iw) { iw <<= 1; mw<<=1; }
+
+      var bm = new Bitmap(iw, ih);
+      for (int x = 0; x < i.Width; x++)
+      {
+        for (int y = 0; y < i.Height; y++)
+        {
+          var c = i.GetPixel(x, y);
+          for(int nx = 0; nx < mw; nx++)
+          {
+            for(int ny = 0; ny < mh; ny++)
+            {
+              bm.SetPixel(x*mw+nx, y*mh+ny, c);
+            }
+          }
+        }
+      }
+      return bm;
     }
 
     public static IEnumerable<ImageColor> ImageToPixels(Bitmap img, GraphFromImageBuilderParameters ps)

@@ -43,6 +43,8 @@ namespace DSIS.SimpleRunner.imageEntropy
                   {
                     var img = ImageHelpers.RenderProcessedImage(sys, pxls);
                     img.Save(Path.Combine(home, sys.Name + "." + name + ".png"), ImageFormat.Png);
+                    var zimg = ImageHelpers.ZoomImageIfNeeded(1000, 1000, img);
+                    zimg.Save(Path.Combine(home, sys.Name + "." + name + "-zoom.png"), ImageFormat.Png);
                   };
                    
       var pixels = ImageHelpers.ImageToPixels(sys.Image, sys.GraphParameters).ToArray();
