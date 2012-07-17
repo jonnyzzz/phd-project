@@ -2,17 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using DSIS.Graph.Images;
 using DSIS.Scheme.Impl.Actions.Files;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
-namespace DSIS.SimpleRunner.imageEntropy
+namespace DSIS.SimpleRunner.imageEntropy 
 {
   public abstract class ImageEntropyBuilderBase : ComputationBuilderBase<ImageEntropyData>
   {
     [Autowire]
-    private GraphFromImageBuilder myBuilder { get; set; }
+    private ImageEntropyBuilderPolicy Policy { get; set; }
 
     protected override void ComputeAll(ImageEntropyData sys)
     {
@@ -33,28 +31,9 @@ namespace DSIS.SimpleRunner.imageEntropy
                     zimg.Save(Path.Combine(home, sys.Name + "." + name + "-zoom.png"), ImageFormat.Png);
                   };
 
-      ComputeMeasure(sys, saver, logger);
+      Policy.ComputeMeasure(sys, saver, logger);
     }
 
 
-    private void ComputeMeasure(ImageEntropyData sys, 
-                                Func<string, Action<IEnumerable<ImageColor>>> saver, 
-                                Logger logger)
-    {
-      logger.Write("Constructing graph...");
-      var graph = myBuilder.BuildGraphFromImage(sys.Image, sys.GraphParameters);
-      logger.Write("Constructed graph of {0}, edges {1}", graph.NodesCount, graph.EdgesCount);
-
-
-      var pixels = ImageHelpers.ImageToPixels(sys.Image, sys.GraphParameters).ToArray();
-      saver("loaded")(pixels);
-
-      new ComputeImageMeasureAction(sys, logger)
-        {
-          OnGraphPixels = saver("graph"),
-          OnInitialMeasurePixels = saver("jvr-init"),
-          OnFinalMeasurePixels = saver("jvr-finish")
-        }.Apply(graph);
-    }
   }
 }

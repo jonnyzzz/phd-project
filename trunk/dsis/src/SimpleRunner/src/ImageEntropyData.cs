@@ -18,10 +18,17 @@ namespace DSIS.SimpleRunner
 
     public GraphFromImageBuilderParameters GraphParameters { get; set; }
 
+    public int? ForkJoinImageSize { get; set; }
+
     public ImageEntropyData()
     {
       RenderMinColor = Color.White;
       RenderMaxColor = Color.MediumSeaGreen;
+    }
+
+    public ImageEntropyData CloneData()
+    {
+      return ((ICloneable<ImageEntropyData>) this).Clone();
     }
 
     ImageEntropyData ICloneable<ImageEntropyData>.Clone()
@@ -32,6 +39,8 @@ namespace DSIS.SimpleRunner
                                  Image = Image, 
                                  RenderMinColor = RenderMinColor,
                                  RenderMaxColor = RenderMaxColor,
+
+                                 ForkJoinImageSize = ForkJoinImageSize,
 
                                  MeasureTimeout = MeasureTimeout,
                                  MeasureIterations = MeasureIterations,

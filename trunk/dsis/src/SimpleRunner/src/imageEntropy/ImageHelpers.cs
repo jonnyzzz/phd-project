@@ -76,11 +76,16 @@ namespace DSIS.SimpleRunner.imageEntropy
     public static IEnumerable<ImageColor> ImageToPixels(Bitmap img, GraphFromImageBuilderParameters ps)
     {
       var expression = ps.Hash.Compile();
+      return img.ImageToPixels().Select(x => new ImageColor(x.X, x.Y, expression(img.GetPixel(x.X, x.Y))));
+    }
+
+    public static IEnumerable<ImagePixel> ImageToPixels(this Bitmap img)
+    {
       for (int x = 0; x < img.Width; x++)
       {
         for (int y = 0; y < img.Height; y++)
         {
-          yield return new ImageColor(x, y, expression(img.GetPixel(x, y)));
+          yield return new ImagePixel(x, y);
         }
       }
     }
