@@ -24,11 +24,6 @@ namespace DSIS.SimpleRunner.imageEntropy
 
       sys.Image.Save(Path.Combine(home, sys.Name + ".original.png"), ImageFormat.Png);
       sys.Serialize(logger);
-
-      logger.Write("Constructing graph...");
-      var graph = myBuilder.BuildGraphFromImage(sys.Image, sys.GraphParameters);
-      logger.Write("Constructed graph of {0}, edges {1}", graph.NodesCount, graph.EdgesCount);
-
       Func<string, Action<IEnumerable<ImageColor>>> saver =
         name => pxls =>
                   {
@@ -37,7 +32,20 @@ namespace DSIS.SimpleRunner.imageEntropy
                     var zimg = ImageHelpers.ZoomImageIfNeeded(1000, 1000, img);
                     zimg.Save(Path.Combine(home, sys.Name + "." + name + "-zoom.png"), ImageFormat.Png);
                   };
-                   
+
+      ComputeMeasure(sys, saver, logger);
+    }
+
+
+    private void ComputeMeasure(ImageEntropyData sys, 
+                                Func<string, Action<IEnumerable<ImageColor>>> saver, 
+                                Logger logger)
+    {
+      logger.Write("Constructing graph...");
+      var graph = myBuilder.BuildGraphFromImage(sys.Image, sys.GraphParameters);
+      logger.Write("Constructed graph of {0}, edges {1}", graph.NodesCount, graph.EdgesCount);
+
+
       var pixels = ImageHelpers.ImageToPixels(sys.Image, sys.GraphParameters).ToArray();
       saver("loaded")(pixels);
 
