@@ -41,7 +41,6 @@ namespace DSIS.SimpleRunner.imageEntropy
       }
 
       return img;
-      //return EnlargeImageIfNecessary(1000, 1000, img);
     }
 
     public static Image ZoomImageIfNeeded(int height, int width, Image image)
@@ -81,17 +80,9 @@ namespace DSIS.SimpleRunner.imageEntropy
       {
         for (int y = 0; y < img.Height; y++)
         {
-          yield return new ImageColor {X = x, Y = y, Color = expression(img.GetPixel(x, y))};
+          yield return new ImageColor(x, y, expression(img.GetPixel(x, y)));
         }
       }
     }
   }
-
-  public struct ImageColor
-  {
-    public int X;
-    public int Y;
-    public double Color;
-  }
-
 }
