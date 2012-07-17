@@ -158,6 +158,7 @@
     <Compile Include="src\Actions\Files\Logger.cs" />
     <Compile Include="src\Actions\Files\LoggerAction.cs" />
     <Compile Include="src\Actions\Files\LoopStepWorkingFolderAction.cs" />
+    <Compile Include="src\Actions\Files\PrefixLogger.cs" />
     <Compile Include="src\Actions\Files\PrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\SIMethodPrefixWorkingFolderAction.cs" />
     <Compile Include="src\Actions\Files\SystemWorkingFolderAction.cs" />
