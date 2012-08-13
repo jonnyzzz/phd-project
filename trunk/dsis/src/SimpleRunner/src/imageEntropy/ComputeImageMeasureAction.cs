@@ -60,16 +60,18 @@ namespace DSIS.SimpleRunner.imageEntropy
       var j = new LoggingJVRMeasure<TCell>(myParameters, graph, components, jvrMeasureOptions, myLogger);
       myLogger.Write("Computing measure: contruction initial graph...");
       j.FillGraph();
-      RenderMeasure(j.CreateEvaluator(), OnInitialMeasurePixels);
+      var initialMeasure = j.CreateEvaluatorCopy();
+      RenderMeasure(initialMeasure, OnInitialMeasurePixels);
 
       myLogger.Write("Computing measure: Iterating over graph to compute measure...");
       j.Iterate(jvrMeasureOptions.EPS);
       myLogger.Write("Computing measure: Iterating over graph to compute measure: DOME...");
 
-      var graphMeasure = j.CreateEvaluator();
-      myLogger.Write("Measure computed: {0}", graphMeasure.GetEntropy());
+      var finalMeasure = j.CreateEvaluatorCopy();
+      myLogger.Write("Measure computed (Osipenko): {0}", finalMeasure.GetEntropy());
+      myLogger.Write("Measure computed (Relative): {0}", finalMeasure.ComputeRelativeEntropy(initialMeasure));
 
-      RenderMeasure(graphMeasure, pixels =>
+      RenderMeasure(finalMeasure, pixels =>
                                     {
                                       myFinalResult = pixels.ToArray();
                                       OnFinalMeasurePixels(myFinalResult);

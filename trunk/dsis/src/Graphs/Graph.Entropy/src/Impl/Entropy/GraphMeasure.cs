@@ -172,5 +172,37 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
 
       return d*Log(d);
     }
+
+    private static double Entropy(double i, double d)
+    {
+      if (d < EPS)
+        return 0;
+
+      return d*Log(i / d);
+    }
+
+    private double GetEdgeValue(TPair p)
+    {
+      double d;
+      return myM.TryGetValue(p, out d) ? d : 0;
+    }
+
+    public double ComputeRelativeEntropy(IGraphMeasure<T> initialMeasure)
+    {
+      if (!Equals(initialMeasure.CoordinateSystem, CoordinateSystem))
+        throw new Exception("Different coordinate systems");
+
+      double v = 0;
+      foreach (var p in initialMeasure.Measure)
+      {
+        var arc = (TPair) p.First;
+        var oldValue = p.Second;
+        var newValue = GetEdgeValue(arc);
+
+        v += Entropy(oldValue, newValue);
+      }
+
+      return -v;
+    }
   }
 }

@@ -30,7 +30,9 @@ namespace DSIS.Graph.Entropy.Impl.Entropy
     ICellCoordinateSystem<T> CoordinateSystem { get;}
 
     IEnumerable<Pair<PairBase<T>, double>> Measure { get; }
-    
+
+    double ComputeRelativeEntropy(IGraphMeasure<T> initialMeasure);
+
     IDictionary<T, double> GetMeasureNodes();
     IGraphMeasure<T> Project(ICellCoordinateSystemProjector<T> projector);
   }

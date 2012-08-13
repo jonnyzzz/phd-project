@@ -39,6 +39,7 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public void FillGraph()
     {
       myGraph.DoGeneric(new FillGraphProxy(this));
+      Norm();
     }
 
     private class FillGraphProxy : IReadonlyGraphWith<T>
@@ -227,6 +228,11 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     public IGraphMeasure<T> CreateEvaluator()
     {
       return myHashHolder.CreateEvaluator();
+    }
+
+    public IGraphMeasure<T> CreateEvaluatorCopy()
+    {
+      return myHashHolder.CreateEvaluatorCopy();
     }
   }
 }

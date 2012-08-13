@@ -110,6 +110,11 @@ namespace DSIS.Graph.Entropy.Impl.JVR
     {
       return new GraphMeasure<T, JVRPair<T>>("JVR", myHash, EqualityComparerFactory<T>.GetComparer(), Norm(), mySystem);
     }
+
+    public IGraphMeasure<T> CreateEvaluatorCopy()
+    {
+      return new GraphMeasure<T, JVRPair<T>>("JVR", new Dictionary<JVRPair<T>, double>(myHash), EqualityComparerFactory<T>.GetComparer(), Norm(), mySystem);
+    }
     
     public T NextNode()
     {

@@ -62,6 +62,11 @@ namespace DSIS.Graph.Entropy.Impl.Eigen
       get { yield break; }
     }
 
+    public double ComputeRelativeEntropy(IGraphMeasure<T> initialMeasure)
+    {
+      throw new System.NotImplementedException();
+    }
+
     public IDictionary<T, double> GetMeasureNodes()
     {
       return new Dictionary<T, double>();
