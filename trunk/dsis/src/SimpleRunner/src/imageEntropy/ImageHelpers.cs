@@ -52,8 +52,7 @@ namespace DSIS.SimpleRunner.imageEntropy
       var mh = 1;
       var mw = 1;
 
-      while (height > ih) { ih <<= 1; mh<<=1; }
-      while (width > iw) { iw <<= 1; mw<<=1; }
+      while (height > ih || width > iw) { ih <<= 1; mh <<= 1; iw <<= 1; mw <<= 1; }
 
       var bm = new Bitmap(iw, ih);
       for (int x = 0; x < i.Width; x++)
