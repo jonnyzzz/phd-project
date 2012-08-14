@@ -8,27 +8,6 @@ namespace DSIS.SimpleRunner.imageEntropy
 {
   public static class ImageHelpers
   {
-    public static Image RenderDiffImage(ImageEntropyData data, IEnumerable<ImageColor> startColor, IEnumerable<ImageColor> endColor)
-    {
-      IDictionary<ImagePixel, double> myData = new Dictionary<ImagePixel, double>(ImagePixel.XYComparer);
-
-      foreach (var color in startColor)
-      {
-        double v;
-        if (!myData.TryGetValue(color.Pixel, out v)) v = 0;
-        myData[color.Pixel] = v + color.Color;
-      }
-
-      foreach (var color in endColor)
-      {
-        double v;
-        if (!myData.TryGetValue(color.Pixel, out v)) v = 0;
-        myData[color.Pixel] = v - color.Color;
-      }
-
-      return RenderProcessedImage(data, myData.Select(p => new ImageColor(p.Key, p.Value)));
-    }
-
     public static Image RenderProcessedImage(ImageEntropyData data, IEnumerable<ImageColor> pixels)
     {
       pixels = pixels.ToArray();

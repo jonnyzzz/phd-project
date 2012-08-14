@@ -20,8 +20,6 @@ namespace DSIS.SimpleRunner.imageEntropy
     public Action<IEnumerable<ImageColor>> OnInitialMeasurePixels { get; set; }
     public Action<IEnumerable<ImageColor>> OnGraphPixels { get; set; }
 
-    private IEnumerable<ImageColor> myFinalResult { get; set; }
-
     public ComputeImageMeasureAction(ImageEntropyData parameters, Logger logger)
     {
       myParameters = parameters;
@@ -71,11 +69,7 @@ namespace DSIS.SimpleRunner.imageEntropy
       myLogger.Write("Measure computed (Osipenko): {0}", finalMeasure.GetEntropy());
       myLogger.Write("Measure computed (Relative): {0}", finalMeasure.ComputeRelativeEntropy(initialMeasure));
 
-      RenderMeasure(finalMeasure, pixels =>
-                                    {
-                                      myFinalResult = pixels.ToArray();
-                                      OnFinalMeasurePixels(myFinalResult);
-                                    });
+      RenderMeasure(finalMeasure, OnFinalMeasurePixels);
     }
 
     private void RenderMeasure<TCell>(IGraphMeasure<TCell> graphMeasure, Action<IEnumerable<ImageColor>> action)
@@ -90,9 +84,9 @@ namespace DSIS.SimpleRunner.imageEntropy
       where TCell : ICellCoordinate
     {
       var gconv = CoordinateConverter<TCell>.CreateCoordinatesConverter(components);
-      OnGraphPixels(components
-                      .GetCoordinates(components.Components)
-                      .Select(x => gconv.Convert3(x, 0)));
+      var pixels = components.GetCoordinates(components.Components).Select(x => gconv.Convert3(x, 0)).ToArray();
+      var norm = pixels.Sum(x => x.Color);
+      OnGraphPixels(pixels.Select(x=>x.Norm(norm)));
     }
   }
 }

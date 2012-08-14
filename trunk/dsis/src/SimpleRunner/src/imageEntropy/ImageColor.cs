@@ -88,6 +88,11 @@ namespace DSIS.SimpleRunner.imageEntropy
       Color = color;
     }
 
+    public ImageColor Norm(double x)
+    {
+      return new ImageColor(X, Y, Color/x);
+    }
+
     public ImagePixel Pixel
     {
       get { return new ImagePixel(X, Y); }

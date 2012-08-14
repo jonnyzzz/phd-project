@@ -13,23 +13,19 @@ namespace DSIS.SimpleRunner.imageEntropy
   {
     private IEnumerable<string> ListImages()
     {
-//      yield return @"E:\work\dsis\dsis\img\pic_36_crop.png";
-      foreach (var file in Directory.GetFiles(@"E:\work\dsis\dsis\img", "*.png"))
-      {
-        yield return file;
-      }
-    } 
+      return Directory.GetFiles(@"E:\DSIS\dsis\img\", "*.png");
+    }
 
     protected override IEnumerable<IEnumerable<ImageEntropyData>> GetSystemsToRun2()
     {
+/*
       yield return (
                      new[]
                        {
                          new {Name = "Cross-20x20x2", Image = WellknownTestImages.Cross(20, 2)}, 
                          new {Name = "HLines-20x20x2", Image = WellknownTestImages.HLines2(20, 20, 2)},
                          new {Name = "HVLines-20x20x2", Image = WellknownTestImages.HVLines2(20, 20, 2)}, 
-                       }
-                   )
+                       })                   
         .Select(file => new ImageEntropyData
                           {
                             ExecutionTimeout = TimeSpan.FromMinutes(30),
@@ -48,25 +44,28 @@ namespace DSIS.SimpleRunner.imageEntropy
                                                   Hash = c => c.R,
                                                 }
                           }).ToArray();
+*/
 
-/*
       yield return ListImages()
         .Select(file => new ImageEntropyData
                           {
                             ExecutionTimeout = TimeSpan.FromMinutes(30),
                             Name = Path.GetFileNameWithoutExtension(file),
                             Image = new Bitmap(Image.FromFile(file)),
-                            MeasureIterations = 50 * 1000,
+                            MeasureIterations = 1500,
                             MeasureTimeout = TimeSpan.FromMinutes(10),
-                            MeasurePrecision = 1e-8,
+                            MeasurePrecision = 1e-3,
+
+                            RenderMinColor = Color.Black,
+                            RenderMaxColor = Color.White,
+
                             GraphParameters = new FullGraphFromImageBuilderParameters
-                                                {
-                                                  NumberOfNeighboursPerAxis = 1,
-                                                  Hash = c => c.R / 16,
-                                                }
+                            {
+                              NumberOfNeighboursPerAxis = 1,
+                              Hash = c => c.R,
+                            }
                           })
         .ToArray();
-*/
 /*
       yield return Directory.GetFiles(@"E:\work\dsis\dsis\img", "*.png")
         .Select(file => new ImageEntropyData
