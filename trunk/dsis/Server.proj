@@ -10,7 +10,7 @@
   </Target>  
   
   <Target Name="Build">
-    <MSBuild Projects="src\DSIS.sln" Properties="Configuration=Debug;Platform=Any CPU" Targets="Clean;Rebuild"/>
+    <MSBuild Projects="src\DSIS.sln" Properties="Configuration=Debug;Platform=Mixed Platforms" Targets="Clean;Rebuild"/>
   </Target>
 
   <Target Name="PublishArtifacts">
