@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
 using DSIS.Scheme.Impl.Actions.Files;
+using DSIS.SimpleRunner.Computation;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.SimpleRunner.ImageEntropy 

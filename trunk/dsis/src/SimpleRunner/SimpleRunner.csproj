@@ -39,87 +39,141 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\AbstractImageBuilder.cs" />
-    <Compile Include="src\AbstractImageBuilderListener.cs" />
-    <Compile Include="src\AfterSIParams.cs" />
-    <Compile Include="src\BuilderBase.cs" />
-    <Compile Include="src\BuilderData.cs" />
-    <Compile Include="src\ComputationBuilderBase.cs" />
-    <Compile Include="src\ComputationData.cs" />
-    <Compile Include="src\ComputationDataBuilder.cs" />
-    <Compile Include="src\ComputationDataUtil.cs" />
-    <Compile Include="src\ComputationPathListener.cs" />
-    <Compile Include="src\ComputeEigenEntropyListener.cs" />
-    <Compile Include="src\ComputeEntropyListenerBase.cs" />
-    <Compile Include="src\ComputeJVREntropyListener.cs" />
-    <Compile Include="src\ComputeStrangeEntropyListener.cs" />
-    <Compile Include="src\ConsoleListener.cs" />
-    <Compile Include="src\CoordinateSystemType.cs" />
-    <Compile Include="src\CurveBuild.cs" />
-    <Compile Include="src\CurveBuilderData.cs" />
-    <Compile Include="src\DrawBase.cs" />
-    <Compile Include="src\DrawEntropyBase.cs" />
-    <Compile Include="src\DrawEntropyDivCurveListener.cs" />
-    <Compile Include="src\DrawEntropyListener.cs" />
-    <Compile Include="src\DrawEntropyWithSpace.cs" />
-    <Compile Include="src\DrawEntropyWithSpace3d.cs" />
-    <Compile Include="src\DrawEntropyWithSpace3dSegments.cs" />
-    <Compile Include="src\DrawEntropyWithSpaceBase.cs" />
-    <Compile Include="src\EntropyComputationData!1.cs" />
-    <Compile Include="src\EntropyComputationData.cs" />
-    <Compile Include="src\EntropyComputationMode.cs" />
-    <Compile Include="src\GuardedExecutor.cs" />
-    <Compile Include="src\ICloneable.cs" />
-    <Compile Include="src\ImageEntropy\ComputeImageMeasureAction.cs" />
-    <Compile Include="src\ImageEntropy\CoordinateConverter.cs" />
-    <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinImageEntropyBuilderPolicy.cs" />
-    <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinImageEntropyParameters.cs" />
-    <Compile Include="src\ImageEntropy\IImageEntropyBuilderPolicy.cs" />
-    <Compile Include="src\ImageEntropy\ImageColor.cs" />
-    <Compile Include="src\ImageEntropy\ImageEntropyBuilder.cs" />
-    <Compile Include="src\ImageEntropy\ImageEntropyBuilderBase.cs" />
-    <Compile Include="src\ImageEntropy\ImageEntropyBuilderPolicy.cs" />
-    <Compile Include="src\ImageEntropy\ImageEntropyData.cs" />
-    <Compile Include="src\ImageEntropy\ImageHelpers.cs" />
-    <Compile Include="src\ImageEntropy\InitialMeasureOnGraph.cs" />
-    <Compile Include="src\ImageEntropy\LoggingJVRMeasure.cs" />
-    <Compile Include="src\ImageEntropy\WellknownTestImages.cs" />
-    <Compile Include="src\JVRBuild.cs" />
-    <Compile Include="src\JVRDetMorseBuild.cs" />
-    <Compile Include="src\LoggingJVREvaluator.cs" />
-    <Compile Include="src\LoggingJVREvaluatorImpl.cs" />
-    <Compile Include="src\OldProgram.cs" />
-    <Compile Include="src\parallel\SimpleParallel.cs" />
-    <Compile Include="src\ProgramCurve.cs" />
-    <Compile Include="src\ProjectTheSameMeasureEntropyDraw.cs" />
-    <Compile Include="src\ProjectToTheSameEntropyDraw.cs" />
-    <Compile Include="src\DrawLastComputationResultListener.cs" />
-    <Compile Include="src\FullImageBuilder.cs" />
-    <Compile Include="src\FullImageBuilderWithLog.cs" />
-    <Compile Include="src\IAbstractImageBuilderListener.cs" />
-    <Compile Include="src\IComputationPathListener.cs" />
-    <Compile Include="src\IComputeEntropyListener.cs" />
-    <Compile Include="src\IDrawEntropyImageListener.cs" />
-    <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\ProvideExternalListenerBase.cs" />
-    <Compile Include="src\Actions\ActionBase.cs" />
-    <Compile Include="src\Actions\ActionBuilder.cs" />
-    <Compile Include="src\Actions\DelegateLeafAction.cs" />
-    <Compile Include="src\Actions\LeafAction.cs" />
-    <Compile Include="src\Actions\OperationStack.cs" />
-    <Compile Include="src\Actions\RootAction.cs" />
-    <Compile Include="src\SIBuild!1.cs" />
-    <Compile Include="src\SIBuild.cs" />
-    <Compile Include="src\SystemInfoFactory.cs" />
-    <Compile Include="src\ThesisCurveBuild.cs" />
-    <Compile Include="src\ThesisEntropyBuild.cs" />
-    <Compile Include="src\ThesisEntropyBuildBase!2.cs" />
-    <Compile Include="src\ThesisEntropyBuildBase.cs" />
-    <Compile Include="src\ThesisJVREntropyBuild.cs" />
-    <Compile Include="src\ThesisJVREntropyBuildBase.cs" />
-    <Compile Include="src\ThesisSIBuild.cs" />
-    <Compile Include="src\XmlAbstractImageBuilderListener.cs" />
+    <Compile Include="src\Actions\ActionBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Actions\ActionBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Actions\DelegateLeafAction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Actions\LeafAction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Actions\OperationData.cs" />
+    <Compile Include="src\Actions\OperationStack.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Actions\RootAction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Builder\AbstractImageBuilder.cs" />
+    <Compile Include="src\Builder\AbstractImageBuilderListener.cs" />
+    <Compile Include="src\Builder\AfterSIParams.cs" />
+    <Compile Include="src\Builder\FullImageBuilder.cs" />
+    <Compile Include="src\Builder\FullImageBuilderWithLog.cs" />
+    <Compile Include="src\Builder\IAbstractImageBuilderListener.cs" />
+    <Compile Include="src\Builder\SIBuild!1.cs" />
+    <Compile Include="src\Builder\SIBuild.cs" />
+    <Compile Include="src\Builder\ThesisSIBuild.cs" />
+    <Compile Include="src\Computation\ComputationBuilderBase.cs" />
+    <Compile Include="src\Computation\ComputationData.cs" />
+    <Compile Include="src\Computation\ComputationDataUtil.cs" />
+    <Compile Include="src\Computation\ComputationPathListener.cs" />
+    <Compile Include="src\Computation\ConsoleListener.cs" />
+    <Compile Include="src\Computation\GuardedExecutor.cs" />
+    <Compile Include="src\Computation\IComputationPathListener.cs" />
+    <Compile Include="src\Computation\XmlAbstractImageBuilderListener.cs" />
+    <Compile Include="src\Curve\CurveBuild.cs" />
+    <Compile Include="src\Curve\CurveBuilderData.cs" />
+    <Compile Include="src\Curve\ProgramCurve.cs" />
+    <Compile Include="src\Curve\ThesisCurveBuild.cs" />
+    <Compile Include="src\Data\BuilderBase.cs" />
+    <Compile Include="src\Data\BuilderData.cs" />
+    <Compile Include="src\Data\ComputationDataBuilder.cs" />
+    <Compile Include="src\Data\CoordinateSystemType.cs" />
+    <Compile Include="src\Data\ICloneable.cs" />
+    <Compile Include="src\DrawBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Entropy\ComputeEigenEntropyListener.cs" />
+    <Compile Include="src\Entropy\ComputeEntropyListenerBase.cs" />
+    <Compile Include="src\Entropy\ComputeJVREntropyListener.cs" />
+    <Compile Include="src\Entropy\ComputeStrangeEntropyListener.cs" />
+    <Compile Include="src\Entropy\Draw\DrawEntropyBase.cs" />
+    <Compile Include="src\Entropy\Draw\DrawEntropyDivCurveListener.cs" />
+    <Compile Include="src\Entropy\Draw\DrawEntropyListener.cs" />
+    <Compile Include="src\Entropy\Draw\DrawEntropyWithSpace.cs" />
+    <Compile Include="src\Entropy\Draw\DrawEntropyWithSpace3d.cs" />
+    <Compile Include="src\Entropy\Draw\DrawEntropyWithSpace3dSegments.cs" />
+    <Compile Include="src\Entropy\Draw\DrawEntropyWithSpaceBase.cs" />
+    <Compile Include="src\Entropy\Draw\DrawLastComputationResultListener.cs" />
+    <Compile Include="src\Entropy\Draw\IDrawEntropyImageListener.cs" />
+    <Compile Include="src\Entropy\EntropyComputationData!1.cs" />
+    <Compile Include="src\Entropy\EntropyComputationData.cs" />
+    <Compile Include="src\Entropy\EntropyComputationMode.cs" />
+    <Compile Include="src\Entropy\IComputeEntropyListener.cs" />
+    <Compile Include="src\Entropy\JVRBuild.cs" />
+    <Compile Include="src\Entropy\JVRDetMorseBuild.cs" />
+    <Compile Include="src\Entropy\LoggingJVREvaluator.cs" />
+    <Compile Include="src\Entropy\LoggingJVREvaluatorImpl.cs" />
+    <Compile Include="src\Entropy\Projection\ProjectTheSameMeasureEntropyDraw.cs" />
+    <Compile Include="src\Entropy\Projection\ProjectToTheSameEntropyDraw.cs" />
+    <Compile Include="src\Entropy\ThesisEntropyBuild.cs" />
+    <Compile Include="src\Entropy\ThesisEntropyBuildBase!2.cs" />
+    <Compile Include="src\Entropy\ThesisEntropyBuildBase.cs" />
+    <Compile Include="src\Entropy\ThesisJVREntropyBuild.cs" />
+    <Compile Include="src\Entropy\ThesisJVREntropyBuildBase.cs" />
+    <Compile Include="src\ImageEntropy\ComputeImageMeasureAction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\CoordinateConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinImageEntropyBuilderPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinImageEntropyParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\IImageEntropyBuilderPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\ImageColor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\ImageEntropyBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\ImageEntropyBuilderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\ImageEntropyBuilderPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\ImageEntropyData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\ImageHelpers.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\ImagePixel.cs" />
+    <Compile Include="src\ImageEntropy\InitialMeasureOnGraph.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\LoggingJVRMeasure.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ImageEntropy\WellknownTestImages.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\OldProgram.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\parallel\SimpleParallel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Program.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\ProvideExternalListenerBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\SystemInfoFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\shared\src\Core.Ioc.Api\Core.Ioc.Api.csproj">
@@ -216,19 +270,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\xslt\default.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="src\xslt\last-entropy.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="src\xslt\entropyTable.xslt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="src\xslt\entropyWcompare.xslt" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="resources\build-si.xml" />
+    <EmbeddedResource Include="src\xslt\default.xslt" />
+    <EmbeddedResource Include="src\xslt\entropyTable.xslt" />
+    <EmbeddedResource Include="src\xslt\entropyWcompare.xslt" />
+    <EmbeddedResource Include="src\xslt\last-entropy.xslt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="resources\si.xml" />

@@ -6,7 +6,7 @@ namespace DSIS.SimpleRunner.Actions
   {
     private readonly string myName;
     
-    public LeafAction(XmlElement element, string name) : base()
+    public LeafAction(XmlElement element, string name)
     {
       myName = name;
     }

@@ -22,6 +22,7 @@ using DSIS.Function.Predefined.VanDerPol;
 using DSIS.Function.Solvers.RungeKutt;
 using DSIS.IntegerCoordinates;
 using DSIS.IntegerCoordinates.Generated;
+using DSIS.SimpleRunner.Builder;
 using DSIS.Utils;
 
 namespace DSIS.SimpleRunner

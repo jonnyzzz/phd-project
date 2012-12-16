@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using DSIS.Core.Util;
 
 namespace DSIS.SimpleRunner.Actions
 {

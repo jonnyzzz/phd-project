@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using DSIS.Graph.Images;
 using DSIS.Scheme.Impl.Actions.Files;
+using DSIS.SimpleRunner.Data;
 
 namespace DSIS.SimpleRunner.ImageEntropy
 {

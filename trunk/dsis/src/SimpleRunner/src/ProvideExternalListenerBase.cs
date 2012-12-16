@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DSIS.IntegerCoordinates;
+using DSIS.SimpleRunner.Builder;
 
 namespace DSIS.SimpleRunner
 {
