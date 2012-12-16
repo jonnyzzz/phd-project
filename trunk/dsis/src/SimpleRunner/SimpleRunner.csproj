@@ -122,12 +122,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\ImageEntropy\EntropyBuildParameters.cs" />
+    <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinDataSlice.cs" />
     <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinImageEntropyBuilderPolicy.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinImageEntropyParameters.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinSlicer.cs" />
     <Compile Include="src\ImageEntropy\IImageEntropyBuilderPolicy.cs">
       <SubType>Code</SubType>
     </Compile>

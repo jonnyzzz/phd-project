@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using DSIS.Graph.Images;
 using DSIS.Scheme.Impl.Actions.Files;
@@ -13,6 +12,9 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
   {
     [Autowire]
     private GraphFromImageBuilder myBuilder { get; set; }
+
+    [Autowire]
+    private ForkJoinSlicer mySlicer { get; set; }
 
     public bool Accept(EntropyBuildParameters data)
     {
@@ -28,7 +30,7 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
       logger.Write("Start Parallel computations with " + parameters);
 
       var matrix = new DoubleMatrix();
-      var slices = SplitImage(parameters, sys).ToArray();
+      var slices = mySlicer.SplitImage(parameters, sys).ToArray();
       logger.Write("Total slices to process: {0}", slices.Count());
 
       slices
@@ -52,47 +54,6 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
       saver("merged")(matrix.Result);
     }
 
-    private IEnumerable<EntropyDataSlice> SplitImage(ForkJoinImageEntropyParameters parameters, ImageEntropyData data)
-    {
-      var image = data.Image;
-      var list = new List<EntropyDataSlice>();
-
-      var sliceX = parameters.SliceX;
-      var sliceY = parameters.SliceY;
-      
-      for(int sX = 0; sX < image.Width; sX += sliceX)
-      for(int sY = 0; sY < image.Height; sY += sliceY)
-      {
-        var bm = new Bitmap(sliceX, sliceY);
-        for (int x = sX; x <= sX + sliceX; x++)
-        {
-          for (int y = sY; y <= sY + sliceY; y++)
-          {
-            bm.SetPixel(x - sX, y - sY, image.GetPixel(x, y));
-          }
-        }
-
-        var p = data.CloneData();
-        p.Image = bm;
-        list.Add(new EntropyDataSlice(new ImagePixel(sX, sY), p));
-      }
-
-      return list;
-    }
-
-    private struct EntropyDataSlice
-    {
-      public readonly ImagePixel Coord;
-      public readonly ImageEntropyData Data;
-      public readonly string SliceName;
-
-      public EntropyDataSlice(ImagePixel c, ImageEntropyData data)
-      {
-        Coord = c;
-        Data = data;
-        SliceName = Coord.ToString();
-      }
-    }
 
     private class DoubleMatrix
     {

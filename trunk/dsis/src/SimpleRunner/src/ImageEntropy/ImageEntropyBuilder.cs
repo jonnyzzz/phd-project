@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using DSIS.Graph.Images;
+using DSIS.SimpleRunner.ImageEntropy.ForkJoin;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.SimpleRunner.ImageEntropy
@@ -13,7 +14,7 @@ namespace DSIS.SimpleRunner.ImageEntropy
   {
     private IEnumerable<string> ListImages()
     {
-      return Directory.GetFiles(@"E:\DSIS\dsis\img\", "*.png");
+      return Directory.GetFiles(@"E:\work\DSIS\dsis\img\", "*.png");
     }
 
     protected override IEnumerable<IEnumerable<ImageEntropyData>> GetSystemsToRun2()
@@ -47,6 +48,27 @@ namespace DSIS.SimpleRunner.ImageEntropy
                           }).ToArray();
 */
 
+      yield return ListImages().Take(1)
+        .Select(file => new ImageEntropyData
+                          {
+                            ExecutionTimeout = TimeSpan.FromMinutes(30),
+                            Name = Path.GetFileNameWithoutExtension(file),
+                            Image = new Bitmap(Image.FromFile(file)),
+                            MeasureIterations = 1500,
+                            MeasureTimeout = TimeSpan.FromMinutes(10),
+                            MeasurePrecision = 1e-3,
+
+                            RenderMinColor = Color.Black,
+                            RenderMaxColor = Color.White,
+                            EntropyBuildParameters = new ForkJoinImageEntropyParameters(),
+                            GraphParameters = new FullGraphFromImageBuilderParameters
+                            {
+                              NumberOfNeighboursPerAxis = 1,
+                              Hash = c => c.R,
+                            }
+                          })
+        .ToArray();
+   /*
       yield return ListImages()
         .Select(file => new ImageEntropyData
                           {
@@ -59,7 +81,7 @@ namespace DSIS.SimpleRunner.ImageEntropy
 
                             RenderMinColor = Color.Black,
                             RenderMaxColor = Color.White,
-
+                            EntropyBuildParameters = new SimpleEntropyBuildParameters(),
                             GraphParameters = new FullGraphFromImageBuilderParameters
                             {
                               NumberOfNeighboursPerAxis = 1,
