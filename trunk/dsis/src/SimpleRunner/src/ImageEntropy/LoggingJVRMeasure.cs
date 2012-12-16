@@ -4,7 +4,7 @@ using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Scheme.Impl.Actions.Files;
 
-namespace DSIS.SimpleRunner.imageEntropy
+namespace DSIS.SimpleRunner.ImageEntropy
 {
   internal class LoggingJVRMeasure<TCell> : JVRMeasure<TCell> 
     where TCell : ICellCoordinate

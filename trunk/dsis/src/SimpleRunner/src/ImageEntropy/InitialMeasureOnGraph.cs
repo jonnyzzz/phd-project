@@ -4,7 +4,7 @@ using DSIS.Core.Coordinates;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Graph.Entropy.Impl.Loop.Weight;
 
-namespace DSIS.SimpleRunner.imageEntropy
+namespace DSIS.SimpleRunner.ImageEntropy
 {
   internal class InitialMeasureOnGraph : IEntropyEdgeWeightCallback
   {

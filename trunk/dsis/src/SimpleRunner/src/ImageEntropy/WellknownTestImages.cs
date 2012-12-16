@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace DSIS.SimpleRunner.imageEntropy
+namespace DSIS.SimpleRunner.ImageEntropy
 {
   public static class WellknownTestImages
   {

@@ -4,7 +4,7 @@ using DSIS.Graph;
 using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.IntegerCoordinates;
 
-namespace DSIS.SimpleRunner.imageEntropy
+namespace DSIS.SimpleRunner.ImageEntropy
 {
   internal class CoordinateConverter<QQ> : IIntegerCoordinateSystemWith
   {

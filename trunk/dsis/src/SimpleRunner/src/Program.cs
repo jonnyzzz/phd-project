@@ -1,6 +1,6 @@
 using System.Globalization;
 using System.Threading;
-using DSIS.SimpleRunner.imageEntropy;
+using DSIS.SimpleRunner.ImageEntropy;
 using EugenePetrenko.Core.Ioc.EntryPoint;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 

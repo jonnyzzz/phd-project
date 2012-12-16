@@ -1,4 +1,4 @@
-namespace DSIS.SimpleRunner.imageEntropy.ForkJoin
+namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
 {
   public class ForkJoinImageEntropyParameters
   {

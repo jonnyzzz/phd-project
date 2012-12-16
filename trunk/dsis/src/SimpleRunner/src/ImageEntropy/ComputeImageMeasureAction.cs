@@ -9,7 +9,7 @@ using DSIS.Graph.Entropy.Impl.Entropy;
 using DSIS.Graph.Entropy.Impl.JVR;
 using DSIS.Scheme.Impl.Actions.Files;
 
-namespace DSIS.SimpleRunner.imageEntropy
+namespace DSIS.SimpleRunner.ImageEntropy
 {
   internal class ComputeImageMeasureAction : IReadonlyGraphWith
   {

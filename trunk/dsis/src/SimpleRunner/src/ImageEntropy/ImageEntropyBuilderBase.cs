@@ -5,7 +5,7 @@ using System.IO;
 using DSIS.Scheme.Impl.Actions.Files;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
-namespace DSIS.SimpleRunner.imageEntropy 
+namespace DSIS.SimpleRunner.ImageEntropy 
 {
   public abstract class ImageEntropyBuilderBase : ComputationBuilderBase<ImageEntropyData>
   {

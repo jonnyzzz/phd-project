@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DSIS.SimpleRunner.imageEntropy
+namespace DSIS.SimpleRunner.ImageEntropy
 {
   public struct ImagePixel : IEquatable<ImagePixel>
   {

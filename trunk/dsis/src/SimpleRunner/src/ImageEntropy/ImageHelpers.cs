@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using DSIS.Graph.Images;
 
-namespace DSIS.SimpleRunner.imageEntropy
+namespace DSIS.SimpleRunner.ImageEntropy
 {
   public static class ImageHelpers
   {

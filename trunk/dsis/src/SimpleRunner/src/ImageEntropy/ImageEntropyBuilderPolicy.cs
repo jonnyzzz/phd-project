@@ -5,7 +5,7 @@ using DSIS.Graph.Images;
 using DSIS.Scheme.Impl.Actions.Files;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
-namespace DSIS.SimpleRunner.imageEntropy
+namespace DSIS.SimpleRunner.ImageEntropy
 {
   [ComponentImplementation]
   public class ImageEntropyBuilderPolicy : IImageEntropyBuilderPolicy

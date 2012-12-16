@@ -6,7 +6,7 @@ using System.Linq;
 using DSIS.Graph.Images;
 using EugenePetrenko.Shared.Core.Ioc.Api;
 
-namespace DSIS.SimpleRunner.imageEntropy
+namespace DSIS.SimpleRunner.ImageEntropy
 {
   [ComponentImplementation]
   public class ImageEntropyBuilder : ImageEntropyBuilderBase
