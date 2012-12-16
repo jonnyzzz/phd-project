@@ -56,7 +56,7 @@ namespace DSIS.SimpleRunner.ImageEntropy
                             Image = new Bitmap(Image.FromFile(file)),
                             MeasureIterations = 1500,
                             MeasureTimeout = TimeSpan.FromMinutes(10),
-                            MeasurePrecision = 1e-3,
+                            MeasurePrecision = 1e-6,
 
                             RenderMinColor = Color.Black,
                             RenderMaxColor = Color.White,
@@ -65,6 +65,26 @@ namespace DSIS.SimpleRunner.ImageEntropy
                                 SliceX = 20,
                                 SliceY = 20,
                               },
+                            GraphParameters = new FullGraphFromImageBuilderParameters
+                            {
+                              NumberOfNeighboursPerAxis = 1,
+                              Hash = c => c.R,
+                            }
+                          })
+        .ToArray();
+      yield return ListImages().Take(1)
+        .Select(file => new ImageEntropyData
+                          {
+                            ExecutionTimeout = TimeSpan.FromMinutes(30),
+                            Name = Path.GetFileNameWithoutExtension(file),
+                            Image = new Bitmap(Image.FromFile(file)),
+                            MeasureIterations = 1500,
+                            MeasureTimeout = TimeSpan.FromMinutes(10),
+                            MeasurePrecision = 1e-3,
+
+                            RenderMinColor = Color.Black,
+                            RenderMaxColor = Color.White,
+                            EntropyBuildParameters = new SimpleEntropyBuildParameters(),
                             GraphParameters = new FullGraphFromImageBuilderParameters
                             {
                               NumberOfNeighboursPerAxis = 1,

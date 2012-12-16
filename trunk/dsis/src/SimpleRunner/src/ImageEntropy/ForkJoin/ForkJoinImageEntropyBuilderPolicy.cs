@@ -61,14 +61,17 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
 
       public void AddRange(ImagePixel offset, IEnumerable<ImageColor> data)
       {
-        foreach (var c in data)
+        lock (this)
         {
-          double v;
-          var key = new ImagePixel(c.X, c.Y) + offset;
+          foreach (var c in data)
+          {
+            double v;
+            var key = new ImagePixel(c.X, c.Y) + offset;
 
-          myData.TryGetValue(key, out v);
-          v += c.Color;
-          myData[key] = v;          
+            myData.TryGetValue(key, out v);
+            v += c.Color;
+            myData[key] = v;
+          }
         }
       }
 
