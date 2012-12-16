@@ -65,8 +65,10 @@
     <Compile Include="src\FormUtil.cs" />
     <Compile Include="src\GCHelper.cs" />
     <Compile Include="src\GenericHelper.cs" />
+    <Compile Include="src\ICloneable.cs" />
     <Compile Include="src\IExecutorService.cs" />
     <Compile Include="src\ILock.cs" />
+    <Compile Include="src\ILogger.cs" />
     <Compile Include="src\InfiniteEnumerable.cs" />
     <Compile Include="src\ISafe.cs" />
     <Compile Include="src\ITempFileFactory.cs" />

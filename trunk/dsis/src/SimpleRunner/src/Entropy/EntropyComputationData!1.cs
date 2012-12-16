@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.SimpleRunner.Computation;
 using DSIS.SimpleRunner.Data;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner.Entropy
 {

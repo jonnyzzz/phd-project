@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.SimpleRunner.Computation;
 using EugenePetrenko.Shared.Core.Ioc.Api;
@@ -11,7 +12,7 @@ namespace DSIS.SimpleRunner.ImageEntropy
   public abstract class ImageEntropyBuilderBase : ComputationBuilderBase<ImageEntropyData>
   {
     [Autowire]
-    private ImageEntropyBuilderPolicy Policy { get; set; }
+    private IImageEntropyBuilderPolicy[] Policies { get; set; }
 
     protected override void ComputeAll(ImageEntropyData sys)
     {
@@ -32,9 +33,8 @@ namespace DSIS.SimpleRunner.ImageEntropy
                     zimg.Save(Path.Combine(home, sys.Name + "." + name + "-zoom.png"), ImageFormat.Png);
                   };
 
-      Policy.ComputeMeasure(sys, saver, logger);
+      Policies.First(p => p.Accept(sys.EntropyBuildParameters)).ComputeMeasure(sys, saver, logger);
     }
-
 
   }
 }

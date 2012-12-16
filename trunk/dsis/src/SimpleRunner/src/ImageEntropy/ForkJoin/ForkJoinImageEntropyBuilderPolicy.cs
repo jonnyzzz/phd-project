@@ -8,14 +8,23 @@ using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
 {
+  [ComponentImplementation]
   public class ForkJoinImageEntropyBuilderPolicy : IImageEntropyBuilderPolicy
   {
     [Autowire]
     private GraphFromImageBuilder myBuilder { get; set; }
 
+    public bool Accept(EntropyBuildParameters data)
+    {
+      return data is ForkJoinImageEntropyParameters;
+    }
+
     public void ComputeMeasure(ImageEntropyData sys, Func<string, Action<IEnumerable<ImageColor>>> saver, Logger logger)
     {
-      var parameters = new ForkJoinImageEntropyParameters();
+      var pixels = ImageHelpers.ImageToPixels(sys.Image, sys.GraphParameters).ToArray();
+      saver("loaded")(pixels);
+
+      var parameters = (ForkJoinImageEntropyParameters)sys.EntropyBuildParameters;
       logger.Write("Start Parallel computations with " + parameters);
 
       var matrix = new DoubleMatrix();
@@ -40,8 +49,7 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
 
       logger.Write("Parallel computations completed. ");
 
-      var pixels = ImageHelpers.ImageToPixels(sys.Image, sys.GraphParameters).ToArray();
-      saver("loaded")(pixels);
+      saver("merged")(matrix.Result);
     }
 
     private IEnumerable<EntropyDataSlice> SplitImage(ForkJoinImageEntropyParameters parameters, ImageEntropyData data)
@@ -66,7 +74,7 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
 
         var p = data.CloneData();
         p.Image = bm;
-        list.Add(new EntropyDataSlice(new C(sX, sY), p));
+        list.Add(new EntropyDataSlice(new ImagePixel(sX, sY), p));
       }
 
       return list;
@@ -74,11 +82,11 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
 
     private struct EntropyDataSlice
     {
-      public readonly C Coord;
+      public readonly ImagePixel Coord;
       public readonly ImageEntropyData Data;
       public readonly string SliceName;
 
-      public EntropyDataSlice(C c, ImageEntropyData data)
+      public EntropyDataSlice(ImagePixel c, ImageEntropyData data)
       {
         Coord = c;
         Data = data;
@@ -88,14 +96,14 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
 
     private class DoubleMatrix
     {
-      private readonly Dictionary<C, double> myData = new Dictionary<C, double>();
+      private readonly Dictionary<ImagePixel, double> myData = new Dictionary<ImagePixel, double>(ImagePixel.XYComparer);
 
-      public void AddRange(C offset, IEnumerable<ImageColor> data)
+      public void AddRange(ImagePixel offset, IEnumerable<ImageColor> data)
       {
         foreach (var c in data)
         {
           double v;
-          var key = new C(c.X, c.Y) + offset;
+          var key = new ImagePixel(c.X, c.Y) + offset;
 
           myData.TryGetValue(key, out v);
           v += c.Color;
@@ -107,55 +115,6 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
       {
         get { return myData.Select(k => new ImageColor(k.Key.X, k.Key.Y, k.Value)); }
       }
-    }
-
-
-    private struct C : IEquatable<C>
-    {
-      public readonly int X;
-      public readonly int Y;
-
-      public C(int x, int y)
-      {
-        X = x;
-        Y = y;
-      }
-
-      public bool Equals(C other)
-      {
-        return other.X == X && other.Y == Y;
-      }
-
-      public override bool Equals(object obj)
-      {
-        if (ReferenceEquals(null, obj)) return false;
-        if (obj.GetType() != typeof (C)) return false;
-        return Equals((C) obj);
-      }
-
-      public override int GetHashCode()
-      {
-        unchecked
-        {
-          return (X*397) ^ Y;
-        }
-      }
-
-      public static bool operator ==(C left, C right)
-      {
-        return left.Equals(right);
-      }
-
-      public static bool operator !=(C left, C right)
-      {
-        return !left.Equals(right);
-      }
-
-      public static C operator +(C left, C right)
-      {
-        return new C(left.X + right.X, left.Y + right.Y);
-      }
-
     }
   }
 }

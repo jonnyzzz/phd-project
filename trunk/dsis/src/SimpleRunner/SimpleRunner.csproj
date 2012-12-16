@@ -84,7 +84,6 @@
     <Compile Include="src\Data\BuilderData.cs" />
     <Compile Include="src\Data\ComputationDataBuilder.cs" />
     <Compile Include="src\Data\CoordinateSystemType.cs" />
-    <Compile Include="src\Data\ICloneable.cs" />
     <Compile Include="src\DrawBase.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -122,6 +121,7 @@
     <Compile Include="src\ImageEntropy\CoordinateConverter.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\ImageEntropy\EntropyBuildParameters.cs" />
     <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinImageEntropyBuilderPolicy.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -156,6 +156,7 @@
     <Compile Include="src\ImageEntropy\LoggingJVRMeasure.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\ImageEntropy\SimpleEntropyBuildParameters.cs" />
     <Compile Include="src\ImageEntropy\WellknownTestImages.cs">
       <SubType>Code</SubType>
     </Compile>

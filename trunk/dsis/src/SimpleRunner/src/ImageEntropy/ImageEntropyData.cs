@@ -3,6 +3,7 @@ using System.Drawing;
 using DSIS.Graph.Images;
 using DSIS.Scheme.Impl.Actions.Files;
 using DSIS.SimpleRunner.Data;
+using DSIS.Utils;
 
 namespace DSIS.SimpleRunner.ImageEntropy
 {
@@ -19,7 +20,7 @@ namespace DSIS.SimpleRunner.ImageEntropy
 
     public GraphFromImageBuilderParameters GraphParameters { get; set; }
 
-    public int? ForkJoinImageSize { get; set; }
+    public EntropyBuildParameters EntropyBuildParameters { get; set; }
 
     public ImageEntropyData()
     {
@@ -41,13 +42,12 @@ namespace DSIS.SimpleRunner.ImageEntropy
                                  RenderMinColor = RenderMinColor,
                                  RenderMaxColor = RenderMaxColor,
 
-                                 ForkJoinImageSize = ForkJoinImageSize,
-
                                  MeasureTimeout = MeasureTimeout,
                                  MeasureIterations = MeasureIterations,
                                  MeasurePrecision =  MeasurePrecision,
 
-                                 GraphParameters = GraphParameters,
+                                 GraphParameters = GraphParameters.Clone(),
+                                 EntropyBuildParameters = EntropyBuildParameters.Clone(),
                                };
       imageEntropyData.CopyState(this);
       return imageEntropyData;
@@ -57,17 +57,14 @@ namespace DSIS.SimpleRunner.ImageEntropy
     {
       log.Write("Name:  {0}", Name);
       base.Serialize(log);            
-      log.Write("Parameters.Hash: {0}", GraphParameters.Hash);
-      log.Write("Parameters.NumberOfNeighboursPerAxis: {0}", GraphParameters.NumberOfNeighboursPerAxis);
+
+      GraphParameters.Log(new PrefixLogger(log, "GraphParameters."));
+      EntropyBuildParameters.Log(new PrefixLogger(log, "Entropy."));
+      
       log.Write("Measure.Timeout: {0}", (object)MeasureTimeout ?? "Null");
       log.Write("Measure.Iterations: {0}", (object)MeasureIterations ?? "Null");
       log.Write("Measure.Precision: {0}", (object)MeasurePrecision ?? "Null");
-      var cp = GraphParameters as ComplexGraphFromImageBuilderParameters;
-      if (cp != null)
-      {
-        log.Write("Parameters.Threahold: {0}", cp.Threasold);
-        log.Write("Parameters.NumberOfEdgesPerPixel: {0}", cp.NumberOfEdgesPerPixel);
-      }      
+
     }
   }
 }

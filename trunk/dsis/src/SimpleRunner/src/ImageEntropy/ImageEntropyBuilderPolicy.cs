@@ -10,6 +10,11 @@ namespace DSIS.SimpleRunner.ImageEntropy
   [ComponentImplementation]
   public class ImageEntropyBuilderPolicy : IImageEntropyBuilderPolicy
   {
+    public bool Accept(EntropyBuildParameters data)
+    {
+      return data is SimpleEntropyBuildParameters;
+    }
+
     [Autowire]
     private GraphFromImageBuilder myBuilder { get; set; }
 

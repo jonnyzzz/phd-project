@@ -14,6 +14,11 @@ namespace DSIS.SimpleRunner.ImageEntropy
       Y = y;
     }
 
+    public static ImagePixel operator +(ImagePixel p1, ImagePixel p2)
+    {
+      return new ImagePixel(p1.X + p2.X, p1.Y + p2.Y);
+    }
+
     #region Equality members
 
     public bool Equals(ImagePixel other)

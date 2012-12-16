@@ -1,8 +1,9 @@
 using DSIS.Scheme.Ctx;
+using DSIS.Utils;
 
 namespace DSIS.Scheme.Impl.Actions.Files
 {
-  public abstract class Logger 
+  public abstract class Logger : ILogger
   {
     public abstract void Write(string text);
 
