@@ -7,7 +7,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
   {
     public abstract void Write(string text);
 
-    public void Write(string fmt, params object[] data)
+    public virtual void Write(string fmt, params object[] data)
     {
       Write(string.Format(fmt, data));
     }

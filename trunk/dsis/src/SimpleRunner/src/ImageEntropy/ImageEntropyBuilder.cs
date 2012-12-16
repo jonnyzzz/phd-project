@@ -60,7 +60,11 @@ namespace DSIS.SimpleRunner.ImageEntropy
 
                             RenderMinColor = Color.Black,
                             RenderMaxColor = Color.White,
-                            EntropyBuildParameters = new ForkJoinImageEntropyParameters(),
+                            EntropyBuildParameters = new ForkJoinImageEntropyParameters
+                              {
+                                SliceX = 20,
+                                SliceY = 20,
+                              },
                             GraphParameters = new FullGraphFromImageBuilderParameters
                             {
                               NumberOfNeighboursPerAxis = 1,

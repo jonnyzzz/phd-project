@@ -88,5 +88,40 @@ namespace DSIS.SimpleRunner.ImageEntropy
         }
       }
     }
+
+    public static Bitmap Crop(this Bitmap img, int fromX, int toX, int fromY, int toY)
+    {
+      var copy = new Bitmap(img, toX - fromX + 1, toY - fromY + 1);
+      for (int x = fromX; x <= toX; x++)
+      {
+        for (int y = fromY; y <= toY; y++)
+        {
+          copy.SetPixel(x - fromX, y - fromY, img.GetPixel(x, y));
+        }
+      }
+      return copy;
+    }
+
+
+    /// <summary>
+    /// Connr
+    /// </summary>
+    /// <param name="img"></param>
+    /// <param name="fromX"></param>
+    /// <param name="toX"></param>
+    /// <param name="fromY"></param>
+    /// <param name="toY"></param>
+    /// <returns></returns>
+    public static IEnumerable<ImagePixel> ImageToPixels(this Bitmap img, int fromX, int toX, int fromY, int toY)
+    {
+      for (int x = fromX; x < toX; x++)
+      {
+        for (int y = fromY; y < toY; y++)
+        {
+          yield return new ImagePixel(x, y);
+        }
+      }
+    }
+
   }
 }

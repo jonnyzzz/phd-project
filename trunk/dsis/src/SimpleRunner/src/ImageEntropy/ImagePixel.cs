@@ -14,6 +14,11 @@ namespace DSIS.SimpleRunner.ImageEntropy
       Y = y;
     }
 
+    public override string ToString()
+    {
+      return string.Format("{{{0}, {1}}}", X, Y);
+    }
+
     public static ImagePixel operator +(ImagePixel p1, ImagePixel p2)
     {
       return new ImagePixel(p1.X + p2.X, p1.Y + p2.Y);

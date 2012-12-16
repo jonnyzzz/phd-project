@@ -41,7 +41,7 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
 
             var graph = myBuilder.BuildGraphFromImage(data.Data.Image, data.Data.GraphParameters);
             logger.Write("Constructed graph for {2} of {0}, edges {1}", graph.NodesCount, graph.EdgesCount, data.SliceName);
-            new ComputeImageMeasureAction(data.Data, logger)
+            new ComputeImageMeasureAction(data.Data, new NullLogger())
               {
                 OnFinalMeasurePixels = result => matrix.AddRange(data.Coord, result)
               }.Apply(graph);

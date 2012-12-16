@@ -23,7 +23,10 @@ namespace DSIS.Scheme.Impl.Actions.Files
     {
       if (myWriter != null)
       {
-        File.AppendAllText(myWriter, text +"\r\n");
+        lock (this)
+        {
+          File.AppendAllText(myWriter, text + "\r\n");
+        }
       }
     }
   }
