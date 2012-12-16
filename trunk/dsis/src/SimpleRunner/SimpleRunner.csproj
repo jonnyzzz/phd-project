@@ -73,7 +73,8 @@
     <Compile Include="src\ImageEntropyData.cs" />
     <Compile Include="src\imageEntropy\ComputeImageMeasureAction.cs" />
     <Compile Include="src\imageEntropy\CoordinateConverter.cs" />
-    <Compile Include="src\imageEntropy\ForkJoinImageEntropyBuilderPolicy.cs" />
+    <Compile Include="src\imageEntropy\ForkJoin\ForkJoinImageEntropyBuilderPolicy.cs" />
+    <Compile Include="src\imageEntropy\ForkJoin\ForkJoinImageEntropyParameters.cs" />
     <Compile Include="src\imageEntropy\IImageEntropyBuilderPolicy.cs" />
     <Compile Include="src\imageEntropy\ImageColor.cs" />
     <Compile Include="src\imageEntropy\ImageEntropyBuilder.cs" />

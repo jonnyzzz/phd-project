@@ -24,6 +24,10 @@ namespace DSIS.SimpleRunner.imageEntropy
     {
       myParameters = parameters;
       myLogger = logger;
+
+      OnFinalMeasurePixels = _ => { };
+      OnInitialMeasurePixels = _ => { };
+      OnGraphPixels = _ => { };
     }
 
     public void Apply(IReadonlyGraph graph)

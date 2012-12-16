@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using DSIS.Graph.Tarjan;
 using DSIS.IntegerCoordinates;
-using DSIS.Utils;
 
 namespace DSIS.Graph.Images
 {
@@ -47,8 +45,7 @@ namespace DSIS.Graph.Images
       Graph = graph;
     }
 
-    protected abstract void ProcessNode<R,Q>
-      (Coord coord, R system, TarjanGraph<Q> graph)
+    protected abstract void ProcessNode<R,Q>(Coord coord, R system, TarjanGraph<Q> graph)
       where R : IIntegerCoordinateSystem<Q>
       where Q : IIntegerCoordinate;
 

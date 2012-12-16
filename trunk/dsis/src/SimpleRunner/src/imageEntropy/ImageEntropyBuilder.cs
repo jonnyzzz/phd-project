@@ -22,9 +22,10 @@ namespace DSIS.SimpleRunner.imageEntropy
       yield return (
                      new[]
                        {
-                         new {Name = "Cross-20x20x2", Image = WellknownTestImages.Cross(20, 2)}, 
-                         new {Name = "HLines-20x20x2", Image = WellknownTestImages.HLines2(20, 20, 2)},
-                         new {Name = "HVLines-20x20x2", Image = WellknownTestImages.HVLines2(20, 20, 2)}, 
+//                         new {Name = "Cross-20x20x2", Image = WellknownTestImages.Cross(20, 2)}, 
+//                         new {Name = "HLines-20x20x2", Image = WellknownTestImages.HLines2(20, 20, 2)},
+//                         new {Name = "HVLines-20x20x2", Image = WellknownTestImages.HVLines2(20, 20, 2)}, 
+                         new {Name = "Serpinsky-3", Image = new Bitmap(Image.FromFile(@"E:\work\dsis\dsis\img\pic_serpinsky_3.png"))}
                        })                   
         .Select(file => new ImageEntropyData
                           {
