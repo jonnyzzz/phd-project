@@ -118,10 +118,12 @@
     <Compile Include="src\ImageEntropy\ComputeImageMeasureAction.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\ImageEntropy\ComputeImageMeasureActionBase.cs" />
     <Compile Include="src\ImageEntropy\CoordinateConverter.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\ImageEntropy\EntropyBuildParameters.cs" />
+    <Compile Include="src\ImageEntropy\EntropyDataBuilder.cs" />
     <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinDataSlice.cs" />
     <Compile Include="src\ImageEntropy\ForkJoin\ForkJoinImageEntropyBuilderPolicy.cs">
       <SubType>Code</SubType>

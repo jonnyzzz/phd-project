@@ -10,32 +10,29 @@ namespace DSIS.SimpleRunner.ImageEntropy
     where TCell : ICellCoordinate
   {
     private readonly Logger myLogger;
-    
-    private readonly int? myMaxSteps;
-    private readonly TimeSpan? myExecutionSpan;
-    private readonly DateTime myStartTime;
 
+    public int? MaxSteps { get; set; }
+    public TimeSpan? ExecutionSpan { get; set; }
+    private readonly DateTime myStartTime;
     private int myStep;
-    public LoggingJVRMeasure(ImageEntropyData parameters, IReadonlyGraph<TCell> graph, IGraphStrongComponents<TCell> components, JVRMeasureOptions opts, Logger logger) : base(graph, components, opts)
+
+    public LoggingJVRMeasure(IReadonlyGraph<TCell> graph, IGraphStrongComponents<TCell> components, JVRMeasureOptions opts, Logger logger) : base(graph, components, opts)
     {
       myLogger = logger;
-
-      myMaxSteps = parameters.MeasureIterations;
-      myExecutionSpan = parameters.MeasureTimeout;
       myStartTime = DateTime.Now;
     }
 
     protected override bool CheckExitCondition(JVRExitCondition condition, double precision, double totalError, double qValue, double nodesChange, double edgesChange)
     {
-      if (myMaxSteps != null && myStep++ > myMaxSteps)
+      if (MaxSteps != null && myStep++ > MaxSteps)
       {
-        myLogger.Write("Limit of {0} iterations exceeded", myMaxSteps);
+        myLogger.Write("Limit of {0} iterations exceeded", MaxSteps);
         return true;
       }
 
-      if (myExecutionSpan != null && (DateTime.Now - myStartTime) > myExecutionSpan)
+      if (ExecutionSpan != null && (DateTime.Now - myStartTime) > ExecutionSpan)
       {
-        myLogger.Write("Timeout of {0} iterations exceeded", myExecutionSpan);
+        myLogger.Write("Timeout of {0} iterations exceeded", ExecutionSpan);
         return true;
       }
 
@@ -45,7 +42,10 @@ namespace DSIS.SimpleRunner.ImageEntropy
                                      precision, totalError, qValue, nodesChange, edgesChange, myStep));
       }
 
-      return base.CheckExitCondition(condition, precision, totalError, qValue, nodesChange, edgesChange);
+      var result = base.CheckExitCondition(condition, precision, totalError, qValue, nodesChange, edgesChange);
+      if (result)
+        myLogger.Write("Iterations completed in {0}ms", (DateTime.Now - myStartTime).TotalMilliseconds);
+      return result;
     }
   }
 }

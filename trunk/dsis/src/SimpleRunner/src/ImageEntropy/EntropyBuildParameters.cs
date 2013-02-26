@@ -1,4 +1,3 @@
-using DSIS.SimpleRunner.Data;
 using DSIS.Utils;
 
 namespace DSIS.SimpleRunner.ImageEntropy

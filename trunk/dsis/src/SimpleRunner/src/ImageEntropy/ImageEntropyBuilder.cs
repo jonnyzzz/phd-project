@@ -14,7 +14,15 @@ namespace DSIS.SimpleRunner.ImageEntropy
   {
     private IEnumerable<string> ListImages()
     {
-      return Directory.GetFiles(@"E:\work\DSIS\dsis\img\", "*.png");
+      return Directory
+        .GetFiles(@"E:\work\DSIS\dsis\img\", "*.png")
+        .Where(x=> new[]
+          {
+            "28",
+            "38_up", "38_do", 
+            "40_up", 
+            "43_up"
+          }.Any(x.Contains));
     }
 
     protected override IEnumerable<IEnumerable<ImageEntropyData>> GetSystemsToRun2()
@@ -47,11 +55,29 @@ namespace DSIS.SimpleRunner.ImageEntropy
                                                 }
                           }).ToArray();
 */
-
-      yield return ListImages().Take(1)
+      yield return ListImages()
         .Select(file => new ImageEntropyData
                           {
-                            ExecutionTimeout = TimeSpan.FromMinutes(30),
+                            ExecutionTimeout = TimeSpan.FromMinutes(10),
+                            Name = Path.GetFileNameWithoutExtension(file),
+                            Image = new Bitmap(Image.FromFile(file)),
+                            MeasureIterations = 1500,
+                            MeasureTimeout = TimeSpan.FromMinutes(10),
+                            MeasurePrecision = 1e-6,
+
+                            RenderMinColor = Color.Black,
+                            RenderMaxColor = Color.White,
+                            EntropyBuildParameters = new SimpleEntropyBuildParameters(),
+                            GraphParameters = new FullGraphFromImageBuilderParameters
+                                                {
+                                                  NumberOfNeighboursPerAxis = 1,
+                                                  Hash = c => c.R,
+                                                }
+                          }).ToArray();
+      yield return ListImages()
+        .Select(file => new ImageEntropyData
+                          {
+                            ExecutionTimeout = TimeSpan.FromMinutes(10),
                             Name = Path.GetFileNameWithoutExtension(file),
                             Image = new Bitmap(Image.FromFile(file)),
                             MeasureIterations = 1500,
