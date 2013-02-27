@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using DSIS.Utils;
 using EugenePetrenko.Shared.Core.Ioc.Api;
@@ -13,8 +11,8 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
     public IEnumerable<ForkJoinDataSlice> SplitImage(ForkJoinImageEntropyParameters parameters, ImageEntropyData data)
     {
       var slices =
-        from x in SliceRow(0, data.Image.Width - 1, parameters.SliceX)
-        from y in SliceRow(0, data.Image.Height - 1, parameters.SliceY)
+        from x in SliceRow(0, data.Image.Width - 1, parameters.SliceX, 1)
+        from y in SliceRow(0, data.Image.Height - 1, parameters.SliceY, 1)
         select new {SliceX = x, SliceY = y};
 
       return slices.Select(
@@ -29,12 +27,15 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
         ).ToArray();
     }
 
-    private IEnumerable<Pair<int, int>> SliceRow(int from, int to, int sliceSize)
+    public IEnumerable<Pair<int, int>> SliceRow(int from, int to, int sliceSize, int overlap)
     {
       if (to <= from) return EmptyArray<Pair<int, int>>.Instance;
 
       if (to - from >= 2*sliceSize)
-        return Pair.Of(from, from + sliceSize).Enum().Union(SliceRow(from + sliceSize, to, sliceSize));
+      {
+        var slice = @from + sliceSize - 1 + overlap;
+        return Pair.Of(@from, slice).Enum().Union(SliceRow(slice + 1 - overlap, to, sliceSize, overlap));
+      }
 
       return Pair.Of(from, to).Enum();
     }

@@ -155,6 +155,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Morse.Adapter", "Grap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph.Image", "Graphs\Graph.Image\Graph.Image.csproj", "{917711B5-BD6C-414E-AC1B-68F4CA915EF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleRunner.Test", "SimpleRunner.Test\SimpleRunner.Test.csproj", "{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -965,6 +967,16 @@ Global
 		{917711B5-BD6C-414E-AC1B-68F4CA915EF7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{917711B5-BD6C-414E-AC1B-68F4CA915EF7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{917711B5-BD6C-414E-AC1B-68F4CA915EF7}.Release|x64.ActiveCfg = Release|Any CPU
+		{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{83D151CF-CA72-4F6B-8FB7-EA8E6FCAD9C3}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

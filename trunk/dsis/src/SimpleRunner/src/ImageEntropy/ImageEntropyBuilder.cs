@@ -55,50 +55,55 @@ namespace DSIS.SimpleRunner.ImageEntropy
                                                 }
                           }).ToArray();
 */
-      yield return ListImages()
-        .Select(file => new ImageEntropyData
-                          {
-                            ExecutionTimeout = TimeSpan.FromMinutes(10),
-                            Name = Path.GetFileNameWithoutExtension(file),
-                            Image = new Bitmap(Image.FromFile(file)),
-                            MeasureIterations = 1500,
-                            MeasureTimeout = TimeSpan.FromMinutes(10),
-                            MeasurePrecision = 1e-6,
+      Func<string, EntropyBuildParameters, ImageEntropyData> basicData
+        = (file, entropy) => new ImageEntropyData
+                               {
+                                 ExecutionTimeout = TimeSpan.FromMinutes(10),
+                                 Name = Path.GetFileNameWithoutExtension(file),
+                                 Image = new Bitmap(Image.FromFile(file)),
 
-                            RenderMinColor = Color.Black,
-                            RenderMaxColor = Color.White,
-                            EntropyBuildParameters = new SimpleEntropyBuildParameters(),
-                            GraphParameters = new FullGraphFromImageBuilderParameters
-                                                {
-                                                  NumberOfNeighboursPerAxis = 1,
-                                                  Hash = c => c.R,
-                                                }
-                          }).ToArray();
-      yield return ListImages()
-        .Select(file => new ImageEntropyData
-                          {
-                            ExecutionTimeout = TimeSpan.FromMinutes(10),
-                            Name = Path.GetFileNameWithoutExtension(file),
-                            Image = new Bitmap(Image.FromFile(file)),
-                            MeasureIterations = 1500,
-                            MeasureTimeout = TimeSpan.FromMinutes(10),
-                            MeasurePrecision = 1e-6,
+                                 MeasureIterations = 1500,
+                                 MeasureTimeout = TimeSpan.FromMinutes(10),
+                                 MeasurePrecision = 1e-6,
 
-                            RenderMinColor = Color.Black,
-                            RenderMaxColor = Color.White,
-                            EntropyBuildParameters = new ForkJoinImageEntropyParameters
-                              {
-                                SliceX = 20,
-                                SliceY = 20,
-                              },
-                            GraphParameters = new FullGraphFromImageBuilderParameters
-                            {
-                              NumberOfNeighboursPerAxis = 1,
-                              Hash = c => c.R,
-                            }
-                          })
-        .ToArray();
-   /*
+                                 RenderMinColor = Color.Black,
+                                 RenderMaxColor = Color.White,
+
+                                 EntropyBuildParameters = entropy,
+                                 GraphParameters = new FullGraphFromImageBuilderParameters
+                                                     {
+                                                       NumberOfNeighboursPerAxis = 1,
+                                                       Hash = c => c.R,
+                                                     }
+                               };
+
+      yield return ListImages()
+        .Select(file => basicData(file, new SimpleEntropyBuildParameters())).ToArray();
+
+      yield return ListImages()
+        .Select(file => basicData(file, new ForkJoinImageEntropyParameters
+                                          {
+                                            SliceX = 20,
+                                            SliceY = 20,
+                                            Overlap = 1
+                                          })).ToArray();
+
+      yield return ListImages()
+        .Select(file => basicData(file, new ForkJoinImageEntropyParameters
+                                          {
+                                            SliceX = 20,
+                                            SliceY = 20,
+                                            Overlap = 5
+                                          })).ToArray();
+
+      yield return ListImages()
+        .Select(file => basicData(file, new ForkJoinImageEntropyParameters
+                                          {
+                                            SliceX = 20,
+                                            SliceY = 20,
+                                            Overlap = 0
+                                          })).ToArray();
+      /*
       yield return ListImages()
         .Select(file => new ImageEntropyData
                           {
