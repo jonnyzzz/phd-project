@@ -14,8 +14,9 @@ namespace DSIS.SimpleRunner.ImageEntropy
   {
     private IEnumerable<string> ListImages()
     {
-      return Directory
-        .GetFiles(@"E:\work\DSIS\dsis\img\", "*.png")
+      return new[]{@"E:\DSIS\DSIS\img", @"E:\work\DSIS\dsis\img\"}
+        .Where(Directory.Exists)
+        .SelectMany(d => Directory.GetFiles(d, "*.png"))
         .Where(x=> new[]
           {
             "28",
@@ -77,8 +78,10 @@ namespace DSIS.SimpleRunner.ImageEntropy
                                                      }
                                };
 
+/*
       yield return ListImages()
         .Select(file => basicData(file, new SimpleEntropyBuildParameters())).ToArray();
+*/
 
       yield return ListImages()
         .Select(file => basicData(file, new ForkJoinImageEntropyParameters

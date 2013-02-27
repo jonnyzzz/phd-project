@@ -40,7 +40,6 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
         .ForAll(data =>
           {
             var subGraph = myBuilder.BuildGraphFromImage(data.Data.Image, data.Data.GraphParameters);
-            logger.Write("Constructed graph for {2} of {0}, edges {1}", subGraph.NodesCount, subGraph.EdgesCount, data.SliceName);
             new ComputeImageMeasureAction(data.Data, new NullLogger())
               {
                 OnInitialMeasurePixels = result => startMatrix.AddRange(data.Coord, result),
@@ -55,6 +54,7 @@ namespace DSIS.SimpleRunner.ImageEntropy.ForkJoin
       logger.LogComputedMeasures(fullGraph, new PixelsWeightCallback("initial", startMatrix.Weight), new PixelsWeightCallback("final", finishMatrix.Weight));
 
       saver("merged")(finishMatrix.Result);
+      saver("initial")(startMatrix.Result);
     }
 
 

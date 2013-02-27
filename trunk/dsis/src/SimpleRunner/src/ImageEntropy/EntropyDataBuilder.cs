@@ -60,7 +60,7 @@ namespace DSIS.SimpleRunner.ImageEntropy
         var initialMeasure = (IGraphMeasure<TCell>) bld1.Entropy;
 
         var bld2 = new EntropyDataBuildHelper(myInternalLogger, myFinishMeasure);
-        bld1.With(graph);
+        bld2.With(graph);
         var finalMeasure = (IGraphMeasure<TCell>) bld2.Entropy;
 
         myLogger.Write("Measure computed (Osipenko): {0}", finalMeasure.GetEntropy());
