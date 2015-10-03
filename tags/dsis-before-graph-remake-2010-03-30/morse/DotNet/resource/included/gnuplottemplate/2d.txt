@@ -1,1 +1,0 @@
-plot '$file$' using ($1+$x_offset$):($2+$y_offset$):($x_size$):($y_size$) with boxxy fill solid 1;

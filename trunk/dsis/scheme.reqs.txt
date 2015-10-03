@@ -1,7 +1,0 @@
-- xml-based declarations
-- easy to reuse. Actually embed or extend basic functionality
-  => the way to intercept any arc.
-  => may be event based model
-- should mapps to one computation graph
-- api for building the graph
-- 

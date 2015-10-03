@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
-
-<mappings>		
-	<assemblies>		
-		<mappingsRef assembly="EugenePetrenko.Gui2.Actions" resource="EugenePetrenko.Gui2.Actions.xml.ActionMapping.xml"/>
-	</assemblies>
-</mappings>
-
