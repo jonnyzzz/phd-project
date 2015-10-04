@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2C4DB0D4-AD8C-45A0-BA9A-944F8B97A150}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EugenePetrenko.Core.FormGenerator</RootNamespace>
+    <AssemblyName>EugenePetrenko.Core.FormGenerator</AssemblyName>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <BasePath>$(MSBuildProjectDirectory)\..\</BasePath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\ControlUtils.cs" />
+    <Compile Include="src\Dialog\DialogFactoryImpl.cs" />
+    <Compile Include="src\Dialog\DialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\Dialog\DialogForm.Designer.cs">
+      <DependentUpon>DialogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Dialog\IDialogFactory.cs" />
+    <Compile Include="src\Dialog\IDialogModel.cs" />
+    <Compile Include="src\ErrorProvider\ErrorProviderHelper.cs" />
+    <Compile Include="src\ErrorProvider\IErrorProvider.cs" />
+    <Compile Include="src\FieldInfos\BooleanFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\CalendarFieldInfo.cs">
+    </Compile>
+    <Compile Include="src\FieldInfos\CalendarFieldInfoFactory.cs" />
+    <Compile Include="src\FieldInfos\DoubleFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\EnumFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\EnumFieldInfoBase.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoBase.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoFactoryBase.cs" />
+    <Compile Include="src\FieldInfos\FieldInfoManager.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfoFactory.cs" />
+    <Compile Include="src\FieldInfos\IFieldInfoManager.cs" />
+    <Compile Include="src\FieldInfos\IncludeValueEnumFieldInfoFactory.cs" />
+    <Compile Include="src\FieldInfos\IntFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\ListEditorFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\ListEditorFieldInfoFactory.cs" />
+    <Compile Include="src\FieldInfos\LongFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\NonEditableFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\StringFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\TextAreaFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\TextFieldInfo.cs" />
+    <Compile Include="src\FieldInfos\TextFieldInfoFactory.cs" />
+    <Compile Include="src\Impl\FormDialogGeneratorFactoryImpl.cs" />
+    <Compile Include="src\Impl\FormGenerator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Impl\FormGeneratorFactoryImpl.cs" />
+    <Compile Include="src\Layout\Impl\ControlSizeCalculator.cs" />
+    <Compile Include="src\Layout\Impl\DockLayout.cs" />
+    <Compile Include="src\Layout\IDockLayout.cs" />
+    <Compile Include="src\Layout\IOptionPageControl.cs" />
+    <Compile Include="src\Layout\IOptionPageLayout.cs" />
+    <Compile Include="src\Layout\IScrollableLayout.cs" />
+    <Compile Include="src\Layout\Layout.cs" />
+    <Compile Include="src\Layout\LayoutException.cs" />
+    <Compile Include="src\Layout\Impl\OptionPageLayout.cs" />
+    <Compile Include="src\Layout\Impl\ScrollableLayoutImpl.cs" />
+    <Compile Include="src\ListEditor\DefaultListEditorUI.cs" />
+    <Compile Include="src\ListEditor\EditListModel.cs" />
+    <Compile Include="src\ListEditor\EditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\ListEditor\EditorControl.Designer.cs">
+      <DependentUpon>EditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\ListEditor\IEditorControlModel.cs" />
+    <Compile Include="src\ListEditor\IListEditorFactroy.cs" />
+    <Compile Include="src\ListEditor\ListEditorFactory.cs" />
+    <Compile Include="src\ListEditor\ListModel.cs" />
+    <Compile Include="src\ListSelector\IListInfo.cs" />
+    <Compile Include="src\ListSelector\IListSelectorFactory.cs" />
+    <Compile Include="src\ListSelector\ItemDescr.cs" />
+    <Compile Include="src\ListSelector\ListInfo!1.cs" />
+    <Compile Include="src\ListSelector\ListInfo.cs" />
+    <Compile Include="src\ListSelector\ListSelector!2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\ListSelector\ListSelectorBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\ListSelector\ListSelectorFactoryImpl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.FormGenerator.Api\Core.FormGenerator.Api.csproj">
+      <Project>{AA540C0D-D39F-441F-B8CB-E025BFBBDA46}</Project>
+      <Name>Core.FormGenerator.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Ioc.Api\Core.Ioc.Api.csproj">
+      <Project>{CB62BEE0-B76E-4BDC-AEC5-24F47CB84504}</Project>
+      <Name>Core.Ioc.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{E8560312-841D-49FA-9258-B74411B92F2B}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\Dialog\DialogForm.resx">
+      <DependentUpon>DialogForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\ListEditor\EditorControl.resx">
+      <DependentUpon>EditorControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <Import Project="$(BasePath)\Before.Build.Targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(BasePath)\After.Build.Targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
