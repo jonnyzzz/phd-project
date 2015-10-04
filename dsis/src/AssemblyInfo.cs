@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyCompany("Eugene Petrenko (eugene.petrenko@gmail.com")]
 [assembly: AssemblyProduct("DSIS")]
-[assembly: AssemblyCopyright("Copyright (C) Eugene Petrenko 2007-2010. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright (C) Eugene Petrenko 2007-2015. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
