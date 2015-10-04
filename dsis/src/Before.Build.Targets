@@ -2,11 +2,19 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 
   <PropertyGroup>
-      <BaseOutputPath>$(BasePath)\..\</BaseOutputPath>
-      <BaseIntermediateOutputPath>$(BaseOutputPath)\Obj\$(BaseOutputPathSuffix)$(MSBuildProjectName)\$(Configuration)\</BaseIntermediateOutputPath>
-      <OutputPath Condition="'$(Configuration)'!='Release'">$(BaseOutputPath)\Bin\</OutputPath>
-      <OutputPath Condition="'$(Configuration)'=='Release'">$(BaseOutputPath)\BinRelease\</OutputPath>
+      <BaseOutputPath>$([System.IO.Path]::GetFullPath('$(BasePath)\..\'))</BaseOutputPath>
+      <BaseIntermediateOutputPath>$([System.IO.Path]::GetFullPath('$(BaseOutputPath)\Obj\$(BaseOutputPathSuffix)$(MSBuildProjectName)\$(Configuration)\'))</BaseIntermediateOutputPath>
+      <IntermediateOutputPath>$([System.IO.Path]::GetFullPath('$(BaseOutputPath)\Obj\$(BaseOutputPathSuffix)$(MSBuildProjectName)\i-$(Configuration)\'))</IntermediateOutputPath>
+      <OutputPath Condition="'$(Configuration)'!='Release'">$([System.IO.Path]::GetFullPath('$(BaseOutputPath)\Bin\'))</OutputPath>
+      <OutputPath Condition="'$(Configuration)'=='Release'">$([System.IO.Path]::GetFullPath('$(BaseOutputPath)\BinRelease\'))</OutputPath>
   </PropertyGroup>
+
+  <Target Name="TestPaths">
+    <Message Text="Base Output Path            : $(BaseOutputPath)" />
+    <Message Text="Intermediate Output Path    : $(IntermediateOutputPath)" />
+    <Message Text="BaseIntermediate Output Path: $(BaseIntermediateOutputPath)" />
+    <Message Text="Output Path                 : $(OutputPath)" />
+  </Target>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
