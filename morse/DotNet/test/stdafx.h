@@ -55,6 +55,7 @@
 #include "objects.h"
 
 
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
 #define _USE_MATH_DEFINES
 #include <Math.h>
 #include <map>

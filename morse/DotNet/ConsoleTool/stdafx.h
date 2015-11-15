@@ -6,6 +6,9 @@
 
 #ifdef WIN32
 
+
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
+
 	#ifndef VC_EXTRALEAN
 	#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
 	#endif

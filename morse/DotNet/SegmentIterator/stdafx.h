@@ -3,6 +3,8 @@
 // are changed infrequently
 //
 #ifdef WIN32
+
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
 	#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 	#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS	// some CString constructors will be explicit
 

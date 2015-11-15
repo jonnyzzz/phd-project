@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FA02656D-A267-4B1F-A956-79236784E5CA}</ProjectGuid>
+    <RootNamespace>MorseKernel2</RootNamespace>
+    <Keyword>AtlProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.23107.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)MorseKernel2.tlb</TypeLibraryName>
+      <HeaderFileName>MorseKernel2.h</HeaderFileName>
+      <DllDataFileName />
+      <InterfaceIdentifierFileName>MorseKernel2_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>MorseKernel2_p.c</ProxyFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\calculator\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;_ATL_ATTRIBUTES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0419</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>comsvcs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)MorseKernel2.dll</OutputFile>
+      <MergedIDLBaseFileName>_MorseKernel2.idl</MergedIDLBaseFileName>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>$(OutDir)MorseKernel2.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Performing registration</Message>
+      <Command>regsvr32 /s /c "$(TargetPath)"
+"$(FrameworkSDKDir)Bin/tlbImp" $(TargetPath) /out:"$(ProjectDir)/../MorseKernel2.Interop/EugenePetrenko.Gui2.$(TargetName).Interop.dll" /namespace:EugenePetrenko.Gui2.MorseKernel2
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <GenerateStublessProxies>true</GenerateStublessProxies>
+      <TypeLibraryName>$(IntDir)MorseKernel2.tlb</TypeLibraryName>
+      <HeaderFileName>MorseKernel2.h</HeaderFileName>
+      <DllDataFileName />
+      <InterfaceIdentifierFileName>MorseKernel2_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>MorseKernel2_p.c</ProxyFileName>
+    </Midl>
+    <ClCompile>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\calculator\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;_ATL_ATTRIBUTES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0419</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>comsvcs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)MorseKernel2.dll</OutputFile>
+      <MergedIDLBaseFileName>_MorseKernel2.idl</MergedIDLBaseFileName>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <ImportLibrary>$(OutDir)MorseKernel2.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Message>Performing registration</Message>
+      <Command>regsvr32 /s /c "$(TargetPath)"
+"$(FrameworkSDKDir)Bin/tlbImp" $(TargetPath) /out:"$(ProjectDir)/../MorseKernel2.Interop/EugenePetrenko.Gui2.$(TargetName).Interop.dll" /namespace:EugenePetrenko.Gui2.MorseKernel2
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\adaptiveCellImageBuilder\adaptiveCellImageBuilder.vcxproj">
+      <Project>{1a4d2782-04fa-4f8b-82c4-d5588681dcbc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\calculator\calculator.vcxproj">
+      <Project>{a42ef8bc-57cf-4d5a-a423-9b03c034210a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\cellImageBuilders\cellImageBuilders.vcxproj">
+      <Project>{80c14a35-bd13-463c-b296-af3f5a254439}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\graph\graph.vcxproj">
+      <Project>{213a979a-506a-4295-9350-b86f82c0dbcb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\graph_simplex\graph_simplex.vcxproj">
+      <Project>{b81aa2e2-d0a9-4ecf-9f96-ed3eded63d7a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Homotop\Homotop.vcxproj">
+      <Project>{fac2ec89-da1b-4e88-a304-b80bb2be0a51}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemFunction\SystemFunction.vcxproj">
+      <Project>{8d190db8-56c4-4c76-a7f1-5560d53344cc}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionBase.cpp" />
+    <ClCompile Include="AdaptiveBoxMethod.cpp" />
+    <ClCompile Include="AdaptiveMethodAction.cpp" />
+    <ClCompile Include="BoxMethodAction.cpp" />
+    <ClCompile Include="compreg.cpp" />
+    <ClCompile Include="ComputationParameters.cpp" />
+    <ClCompile Include="Dummy.cpp" />
+    <ClCompile Include="Dummy1.cpp" />
+    <ClCompile Include="Dummy2.cpp" />
+    <ClCompile Include="Dummy3.cpp" />
+    <ClCompile Include="Dummy4.cpp" />
+    <ClCompile Include="Function.cpp" />
+    <ClCompile Include="FunctionImpl.cpp" />
+    <ClCompile Include="GraphInfo.cpp" />
+    <ClCompile Include="GraphInfoImpl.cpp" />
+    <ClCompile Include="GraphResult.cpp" />
+    <ClCompile Include="GraphResultImpl.cpp" />
+    <ClCompile Include="GraphResultUtil.cpp" />
+    <ClCompile Include="GraphResultWrapper.cpp" />
+    <ClCompile Include="IsolatedSetAction.cpp" />
+    <ClCompile Include="Kernell.cpp" />
+    <ClCompile Include="KernellException.cpp" />
+    <ClCompile Include="KernellImpl.cpp" />
+    <ClCompile Include="LoopsLocalizationAction.cpp" />
+    <ClCompile Include="MinimalLoopLocalizationAction.cpp" />
+    <ClCompile Include="MorseKernel2.cpp" />
+    <ClCompile Include="MS2DCreationAction.cpp" />
+    <ClCompile Include="MS2DProcessAction.cpp" />
+    <ClCompile Include="MS2DRomAction.cpp" />
+    <ClCompile Include="MS2Metadata.cpp" />
+    <ClCompile Include="MSAdaptiveAction.cpp" />
+    <ClCompile Include="MSAngleCreationMethod.cpp" />
+    <ClCompile Include="MSAngleMetadata.cpp" />
+    <ClCompile Include="MSAngleMethod.cpp" />
+    <ClCompile Include="MSAngleRomProcess.cpp" />
+    <ClCompile Include="MSCreationProcess.cpp" />
+    <ClCompile Include="MSMetadata.cpp" />
+    <ClCompile Include="MSMethodAction.cpp" />
+    <ClCompile Include="MSSegmentMetadata.cpp" />
+    <ClCompile Include="MSSegmentRom.cpp" />
+    <ClCompile Include="Parameters.cpp" />
+    <ClCompile Include="PersistantManager.cpp" />
+    <ClCompile Include="PointMethodAction.cpp" />
+    <ClCompile Include="ProgressBarInfo.cpp" />
+    <ClCompile Include="ProgressBarNotificationAdapter.cpp" />
+    <ClCompile Include="ProjectAction.cpp" />
+    <ClCompile Include="Result.cpp" />
+    <ClCompile Include="ResultBase.cpp" />
+    <ClCompile Include="ResultInfo.cpp" />
+    <ClCompile Include="ResultMetadata.cpp" />
+    <ClCompile Include="ResultSet.cpp" />
+    <ClCompile Include="ResultSetImpl.cpp" />
+    <ClCompile Include="ResultSetIterator.cpp" />
+    <ClCompile Include="ResultSetList.cpp" />
+    <ClCompile Include="SIRomAction.cpp" />
+    <ClCompile Include="SmartInterface.cpp" />
+    <ClCompile Include="SpectrumMetadata.cpp" />
+    <ClCompile Include="SpectrumResult.cpp" />
+    <ClCompile Include="SpectrumResultImpl.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SymbolicImageMetadata.cpp" />
+    <ClCompile Include="TarjanAction.cpp" />
+    <ClCompile Include="WritableFunction.cpp" />
+    <ClCompile Include="WritableGraphInfo.cpp" />
+    <ClCompile Include="WritableGraphResult.cpp" />
+    <ClCompile Include="WritableKernell.cpp" />
+    <ClCompile Include="WritableResultSet.cpp" />
+    <ClCompile Include="WritableSpectrum.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionBase.h" />
+    <ClInclude Include="ActionBaseImpl.h" />
+    <ClInclude Include="AdaptiveBoxMethod.h" />
+    <ClInclude Include="AdaptiveMethodAction.h" />
+    <ClInclude Include="BoxMethodAction.h" />
+    <ClInclude Include="compreg.h" />
+    <ClInclude Include="ComputationParameters.h" />
+    <ClInclude Include="Dummy.h" />
+    <ClInclude Include="Dummy1.h" />
+    <ClInclude Include="Dummy2.h" />
+    <ClInclude Include="Dummy3.h" />
+    <ClInclude Include="Dummy4.h" />
+    <ClInclude Include="Function.h" />
+    <ClInclude Include="FunctionImpl.h" />
+    <ClInclude Include="GraphInfo.h" />
+    <ClInclude Include="GraphInfoImpl.h" />
+    <ClInclude Include="GraphResult.h" />
+    <ClInclude Include="GraphResultImpl.h" />
+    <ClInclude Include="GraphResultUtil.h" />
+    <ClInclude Include="GraphResultWrapper.h" />
+    <ClInclude Include="IsolatedSetAction.h" />
+    <ClInclude Include="Kernell.h" />
+    <ClInclude Include="KernellException.h" />
+    <ClInclude Include="KernellImpl.h" />
+    <ClInclude Include="LoopsLocalizationAction.h" />
+    <ClInclude Include="MinimalLoopLocalizationAction.h" />
+    <ClInclude Include="MS2DCreationAction.h" />
+    <ClInclude Include="MS2DProcessAction.h" />
+    <ClInclude Include="MS2DRomAction.h" />
+    <ClInclude Include="MS2Metadata.h" />
+    <ClInclude Include="MSAdaptiveAction.h" />
+    <ClInclude Include="MSAngleCreationMethod.h" />
+    <ClInclude Include="MSAngleMetadata.h" />
+    <ClInclude Include="MSAngleMethod.h" />
+    <ClInclude Include="MSAngleRomProcess.h" />
+    <ClInclude Include="MSCreationProcess.h" />
+    <ClInclude Include="MSMetadata.h" />
+    <ClInclude Include="MSMethodAction.h" />
+    <ClInclude Include="MSSegmentMetadata.h" />
+    <ClInclude Include="MSSegmentRom.h" />
+    <ClInclude Include="Parameters.h" />
+    <ClInclude Include="PersistantManager.h" />
+    <ClInclude Include="PointMethodAction.h" />
+    <ClInclude Include="ProgressBarInfo.h" />
+    <ClInclude Include="ProgressBarNotificationAdapter.h" />
+    <ClInclude Include="ProjectAction.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Result.h" />
+    <ClInclude Include="ResultBase.h" />
+    <ClInclude Include="ResultInfo.h" />
+    <ClInclude Include="ResultMetadata.h" />
+    <ClInclude Include="ResultMetadataBase.h" />
+    <ClInclude Include="ResultSet.h" />
+    <ClInclude Include="ResultSetImpl.h" />
+    <ClInclude Include="ResultSetIterator.h" />
+    <ClInclude Include="ResultSetList.h" />
+    <ClInclude Include="SIRomAction.h" />
+    <ClInclude Include="SmartInterface.h" />
+    <ClInclude Include="SpectrumMetadata.h" />
+    <ClInclude Include="SpectrumResult.h" />
+    <ClInclude Include="SpectrumResultImpl.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SymbolicImageMetadata.h" />
+    <ClInclude Include="TarjanAction.h" />
+    <ClInclude Include="WritableFunction.h" />
+    <ClInclude Include="WritableGraphInfo.h" />
+    <ClInclude Include="WritableGraphResult.h" />
+    <ClInclude Include="WritableKernell.h" />
+    <ClInclude Include="WritableResultSet.h" />
+    <ClInclude Include="WritableSpectrum.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MorseKernel2.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MorseKernel2.rgs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

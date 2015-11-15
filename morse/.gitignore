@@ -1,0 +1,7 @@
+*ipch*
+*.user
+**\obj
+**\bin
+**\debug
+*.sdf
+.vs

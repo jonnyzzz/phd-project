@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Test|Win32">
+      <Configuration>Test</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A42EF8BC-57CF-4D5A-A423-9B03C034210A}</ProjectGuid>
+    <RootNamespace>calculator</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Test|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.23107.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">
+    <OutDir>$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\calculator\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)calculator.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\calculator\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)calculator.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\calculator\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)calculator.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="FunctionContext.cpp" />
+    <ClCompile Include="FunctionDictionary.cpp" />
+    <ClCompile Include="FunctionFactory.cpp" />
+    <ClCompile Include="FunctionFactoryParseException.cpp" />
+    <ClCompile Include="FunctionNative.cpp" />
+    <ClCompile Include="FunctionNode.cpp" />
+    <ClCompile Include="FunctionNodeConstant.cpp" />
+    <ClCompile Include="FunctionNodeDiv.cpp" />
+    <ClCompile Include="FunctionNodeEquation.cpp" />
+    <ClCompile Include="FunctionNodeFunction.cpp" />
+    <ClCompile Include="FunctionNodeIfLZ.cpp" />
+    <ClCompile Include="FunctionNodeMax.cpp" />
+    <ClCompile Include="FunctionNodeMin.cpp" />
+    <ClCompile Include="FunctionNodeMul.cpp" />
+    <ClCompile Include="FunctionNodePower.cpp" />
+    <ClCompile Include="FunctionNodeSub.cpp" />
+    <ClCompile Include="FunctionNodeSum.cpp" />
+    <ClCompile Include="FunctionNodeUMinus.cpp" />
+    <ClCompile Include="FunctionNodeUnary.cpp" />
+    <ClCompile Include="FunctionNodeUnaryATan.cpp" />
+    <ClCompile Include="FunctionNodeUnaryCos.cpp" />
+    <ClCompile Include="FunctionNodeUnaryExp.cpp" />
+    <ClCompile Include="FunctionNodeUnaryLn.cpp" />
+    <ClCompile Include="FunctionNodeUnaryTg.cpp" />
+    <ClCompile Include="FunctionNodeUnatySin.cpp" />
+    <ClCompile Include="FunctionNodeUserFunction.cpp" />
+    <ClCompile Include="FunctionNodeVariable.cpp" />
+    <ClCompile Include="FunctionNodeVisitor.cpp" />
+    <ClCompile Include="FunctionTest.cpp" />
+    <ClCompile Include="IntervalEvaluator.cpp" />
+    <ClCompile Include="IntervalValue.cpp" />
+    <ClCompile Include="LipsitzFinder.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SystemNative.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FunctionContext.h" />
+    <ClInclude Include="FunctionDictionary.h" />
+    <ClInclude Include="FunctionFactory.h" />
+    <ClInclude Include="FunctionFactoryParseException.h" />
+    <ClInclude Include="FunctionNative.h" />
+    <ClInclude Include="FunctionNode.h" />
+    <ClInclude Include="FunctionNodeConstant.h" />
+    <ClInclude Include="FunctionNodeDiv.h" />
+    <ClInclude Include="FunctionNodeEquation.h" />
+    <ClInclude Include="FunctionNodeFunction.h" />
+    <ClInclude Include="FunctionNodeIfLZ.h" />
+    <ClInclude Include="FunctionNodeMax.h" />
+    <ClInclude Include="FunctionNodeMin.h" />
+    <ClInclude Include="FunctionNodeMul.h" />
+    <ClInclude Include="FunctionNodePower.h" />
+    <ClInclude Include="FunctionNodeSub.h" />
+    <ClInclude Include="FunctionNodeSum.h" />
+    <ClInclude Include="FunctionNodeUMinus.h" />
+    <ClInclude Include="FunctionNodeUnary.h" />
+    <ClInclude Include="FunctionNodeUnaryATan.h" />
+    <ClInclude Include="FunctionNodeUnaryCos.h" />
+    <ClInclude Include="FunctionNodeUnaryExp.h" />
+    <ClInclude Include="FunctionNodeUnaryLn.h" />
+    <ClInclude Include="FunctionNodeUnaryTg.h" />
+    <ClInclude Include="FunctionNodeUnatySin.h" />
+    <ClInclude Include="FunctionNodeUserFunction.h" />
+    <ClInclude Include="FunctionNodeVariable.h" />
+    <ClInclude Include="FunctionNodeVisitor.h" />
+    <ClInclude Include="FunctionTest.h" />
+    <ClInclude Include="IntervalEvaluator.h" />
+    <ClInclude Include="Intervals.h" />
+    <ClInclude Include="IntervalValue.h" />
+    <ClInclude Include="LipsitzFinder.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SystemNative.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
