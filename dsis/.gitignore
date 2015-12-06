@@ -4,6 +4,8 @@ Obj/
 *.suo
 *.user
 
+results/
+
 #generated files
 src/Scheme.Xml/resources/computation-graph-scheme-xml.cs
 src/Scheme2/src/XmlModel/computation-graph-scheme.cs
