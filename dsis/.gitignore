@@ -2,6 +2,7 @@ Bin/
 BinRelease/
 Obj/
 *.suo
+*.user
 
 #generated files
 src/Scheme.Xml/resources/computation-graph-scheme-xml.cs
