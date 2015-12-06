@@ -110,6 +110,7 @@
     <Compile Include="src\Entropy\JVRDetMorseBuild.cs" />
     <Compile Include="src\Entropy\LoggingJVREvaluator.cs" />
     <Compile Include="src\Entropy\LoggingJVREvaluatorImpl.cs" />
+    <Compile Include="src\Entropy\Osipenko2015Build.cs" />
     <Compile Include="src\Entropy\Projection\ProjectTheSameMeasureEntropyDraw.cs" />
     <Compile Include="src\Entropy\Projection\ProjectToTheSameEntropyDraw.cs" />
     <Compile Include="src\Entropy\ThesisEntropyBuild.cs" />
@@ -284,7 +285,9 @@
     <EmbeddedResource Include="src\xslt\last-entropy.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="resources\si.xml" />
+    <EmbeddedResource Include="resources\si.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

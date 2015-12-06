@@ -119,7 +119,7 @@ namespace DSIS.SimpleRunner.Builder
                                          Func<bool, IAction> image)
     {
       if (count < 2)
-        throw new ArgumentException("Count should be >= 2", "count");
+        throw new ArgumentException("Count should be >= 2", nameof(count));
 
       var next = holder.Edge(buildSI.Clone());
       foreach (var action in firstContext)
