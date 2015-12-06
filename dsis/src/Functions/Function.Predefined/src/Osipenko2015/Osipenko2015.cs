@@ -31,7 +31,7 @@ namespace DSIS.Function.Predefined.Osipenko2015
       Output[0] = xx;
     }
 
-    public double Evaluate(double[] data)
+    public double Evaluate(double[] Input)
     {
       double x = Input[0];
       //double y = Input[1];

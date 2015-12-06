@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DSIS.Function.Predefined.Osipenko2015;
+using DSIS.Scheme.Exec;
 using DSIS.Scheme.Impl.Actions;
 using DSIS.SimpleRunner.Builder;
 using DSIS.SimpleRunner.Computation;
@@ -12,6 +13,7 @@ namespace DSIS.SimpleRunner.Entropy
   public class Osipenko2015Build : SIBuild<ComputationData>
   {
     [Autowire] public Osipenko2015Predefined SystemFactory { get; set; }
+    [Autowire] public DetMorse DetMorse { get; set; }
 
     protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
     {
@@ -25,6 +27,13 @@ namespace DSIS.SimpleRunner.Entropy
           system = new SystemInfoAction(SystemFactory.Function, SystemFactory.Space)
         }
       };
+    }
+
+    protected override IActionEdgesBuilder CreateActionsAfterSI(AfterSIParams<ComputationData> afterSIParams)
+    {
+      DetMorse.BuildJVRCall(afterSIParams, 1e-5);
+
+      return base.CreateActionsAfterSI(afterSIParams);
     }
   }
 }

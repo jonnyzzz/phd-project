@@ -22,6 +22,7 @@ using DSIS.SimpleRunner.Builder;
 using DSIS.SimpleRunner.Computation;
 using DSIS.SimpleRunner.Data;
 using DSIS.Utils;
+using EugenePetrenko.Shared.Core.Ioc.Api;
 
 namespace DSIS.SimpleRunner.Entropy
 {
@@ -30,14 +31,15 @@ namespace DSIS.SimpleRunner.Entropy
     protected override IEnumerable<IEnumerable<ComputationData>> GetSystemsToRun2()
     {
       var data = new List<ComputationData>();
-      for(int rep = 3; rep < 16; rep++)
+      for (int rep = 3; rep < 16; rep++)
       {
-        data.AddRange(new []        {
-                       new ComputationData {system = SystemInfoFactory.DoubleLogistic(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.Delayed(2.27), repeat = rep},
-                       new ComputationData {system = SystemInfoFactory.Logistic(3.569), repeat = rep},
+        data.AddRange(new[]
+        {
+          new ComputationData {system = SystemInfoFactory.DoubleLogistic(), repeat = rep},
+          new ComputationData {system = SystemInfoFactory.Henon1_4(), repeat = rep},
+          new ComputationData {system = SystemInfoFactory.Ikeda(), repeat = rep},
+          new ComputationData {system = SystemInfoFactory.Delayed(2.27), repeat = rep},
+          new ComputationData {system = SystemInfoFactory.Logistic(3.569), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing2x2Runge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing1_5x1_5Runge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.Duffing1_4x1_4Runge(), repeat = rep},
@@ -49,10 +51,11 @@ namespace DSIS.SimpleRunner.Entropy
 //                       new ComputationData {system = SystemInfoFactory.RosslerRunge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.BrusselatorRunge(), repeat = rep},
 //                       new ComputationData {system = SystemInfoFactory.ChuaRunge(), repeat = rep},
-                                    }.ForBuilders( new[] {
+        }.ForBuilders(new[]
+        {
 //                                      Builder.Adaptive,
-                                      ComputationDataBuilder.Box
-                                    }));
+          ComputationDataBuilder.Box
+        }));
       }
       yield return data;
     }
@@ -64,47 +67,68 @@ namespace DSIS.SimpleRunner.Entropy
         //BuildJVRCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
         //BuildHowardCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System, 1e-3);
 
-        BuildJustDumpCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System);
-        
+        new DetMorse().BuildJustDumpCall(afterSIParams.Logger, afterSIParams.SiConstructionAction, afterSIParams.System);
+
         //BuildJVRCall(siConstructionAction, system, 1e-4);
         //BuildJVRCall(siConstructionAction, system, 1e-5);
         //BuildJVRCall(siConstructionAction, system, 1e-8);
       }
       return base.CreateActionsAfterSI(afterSIParams);
     }
+  }
 
-    private static void BuildJustDumpCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system)
+  [ComponentImplementation]
+  public class DetMorse
+  { 
+
+    public void BuildJustDumpCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system)
     {
       var opts = new JustDumpMorseAction.JustDumpMorseOptions();
       var jvrMorseAction = new JustDumpMorseAction(opts) {PersitGraph = true};
-      BuildJVRCall(logger, siConstructionAction, system, jvrMorseAction);
+      BuildJVRCall(siConstructionAction, system, jvrMorseAction, logger);
     }
 
-    private static void BuildJVRCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system, double eps)
+    public void BuildJVRCall<T>(AfterSIParams<T> afterSIParams, double eps) where T : ComputationData, ICloneable<T>
+    {
+      var opts = new JVREvaluatorOptions { Eps = eps };
+      var jvrMorseAction = new JVRMorseAction(opts);
+      BuildJVRCall(afterSIParams, jvrMorseAction);
+    }
+   
+    public void BuildJVRCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system, double eps)
     {
       var opts = new JVREvaluatorOptions {Eps = eps};
       var jvrMorseAction = new JVRMorseAction(opts);
-      BuildJVRCall(logger, siConstructionAction, system, jvrMorseAction);
+      BuildJVRCall(siConstructionAction, system, jvrMorseAction, logger);
     }
 
-    private static void BuildHowardCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system, double eps)
+    public void BuildHowardCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system, double eps)
     {
       var opts = new HowardEvaluatorOptions {Eps = eps};
       var jvrMorseAction = new HowardMorseAction(opts);
-      BuildJVRCall(logger, siConstructionAction, system, jvrMorseAction);
+      BuildJVRCall(siConstructionAction, system, jvrMorseAction, logger);
     }
 
-    private static void BuildJVRCall(IAction logger, IActionEdgesBuilder siConstructionAction, IAction system, IMorseAction morse)
+    public void BuildJVRCall(IActionEdgesBuilder siConstructionAction, IAction system, IMorseAction morse, params IAction[] extras)
     {
-
-    var key = new RecordTimeAction(morse, "XxX" + morse.Options.MethodName + " " + morse.Options.Eps);
+      var key = new RecordTimeAction(morse, "XxX" + morse.Options.MethodName + " " + morse.Options.Eps);
       siConstructionAction
-        .Edge(key).With(x=>x.Back(system))
+        .Edge(key).With(x => x.Back(system))
         .Edge(new DumpJVR(morse.Options, key.Key))
           .With(x => x.Back(siConstructionAction))
           .With(x => x.Back(system))
-          .With(x=>x.Back(logger))
+          .With(x => extras.ForEach(e => x.Back(e)))
         ;
+    }
+
+    public void BuildJVRCall<T>(AfterSIParams<T> afterSIParams, IMorseAction morse, params IAction[] extras) where T : ComputationData, ICloneable<T>
+    {
+      BuildJVRCall(afterSIParams.SiConstructionAction,
+        afterSIParams.System,
+        morse,
+        extras.Join(
+          afterSIParams.Logger,
+          afterSIParams.WorkingFolder).ToArray());
     }
 
     private class DumpJVR : IntegerCoordinateSystemActionBase3
@@ -124,9 +148,6 @@ namespace DSIS.SimpleRunner.Entropy
         var comps = Keys.GetGraphComponents<Q>().Get(input);
         var system = Keys.SystemInfoKey.Get(input);
         var logger = Logger.Instance(input);
-
-        Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
-        Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
 
         var sb = new StringBuilder();
         var time = myTime.Get(input).TotalMilliseconds;
@@ -158,10 +179,11 @@ namespace DSIS.SimpleRunner.Entropy
 
         logger.Write(sb.ToString());
 
-        File.AppendAllText(@"e:\jvr_morse.log", sb.ToString());
+        var workingFolder = FileKeys.WorkingFolderKey.Get(input);
+        File.AppendAllText(Path.Combine(workingFolder.Path, @"jvr_morse.log"), sb.ToString());
 
         UpdateXmlLog(
-          @"e:\xml-log.xml",
+          Path.Combine(workingFolder.Path, @"jvr_morse.xml"),
           new System
             {
               Name = system.PresentableName,
