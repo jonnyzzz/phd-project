@@ -6,7 +6,7 @@ namespace DSIS.Scheme.Impl.Actions.Files
   {
     protected override string CreateWorkPath(string resultsPath)
     {
-      return Path.Combine(resultsPath, "@Flat.LeonovP20_0.x");
+      return Path.Combine(resultsPath, "__EXPERIMENT");
     }
   }
 }
