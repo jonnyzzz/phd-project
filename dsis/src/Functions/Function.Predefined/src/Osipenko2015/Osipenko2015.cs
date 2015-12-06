@@ -5,20 +5,22 @@ using DSIS.Scheme.Objects.Systemx;
 
 namespace DSIS.Function.Predefined.Osipenko2015
 {
-  public class Osipenko2015Function : Function<double>, IFunction<double>
+  public class Osipenko2015Function : Function<double>, IFunction<double>, IDetDiffFunction<double>
   {
     public Osipenko2015Function()
       : base(2)
     {
     }
 
+
+    private const double a = 1.511717565;
+    private const double b = 0.93;
+
     public void Evaluate()
     {
       double x = Input[0];
       double y = Input[1];
 
-      const double a = 1.511717565;
-      const double b = 0.93;
 
       double t = y + a*x*(1 - x);
 
@@ -27,6 +29,24 @@ namespace DSIS.Function.Predefined.Osipenko2015
 
       Output[1] = yy;
       Output[0] = xx;
+    }
+
+    public double Evaluate(double[] data)
+    {
+      double x = Input[0];
+      //double y = Input[1];
+
+      /*
+      double xx = b * x + y + a * x * (1 - x); 
+      double yy = y + a * x * (1 - x);
+
+      double x_dx = b + a - 2*a*x;
+      double x_dy = 1;
+      double y_dx = a - 2*a*x;
+      double y_dy = 1;
+      */
+
+      return (b + a - 2*a*x) * (a - 2*a*x) - 1;
     }
   }
 
