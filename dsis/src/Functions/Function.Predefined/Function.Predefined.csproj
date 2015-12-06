@@ -119,6 +119,7 @@
     <Compile Include="src\Lorentz\LorenzSystemInfoFactory.cs" />
     <Compile Include="src\Osipenko2011\Osipenko2011_1.cs" />
     <Compile Include="src\Osipenko2011\Osipenko2011_2.cs" />
+    <Compile Include="src\Osipenko2015\Osipenko2015.cs" />
     <Compile Include="src\OsipenkoBio\Bio.cs" />
     <Compile Include="src\OsipenkoBio\Bio2.cs" />
     <Compile Include="src\OsipenkoBio\Bio3.cs" />
